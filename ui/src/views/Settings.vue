@@ -1,5 +1,5 @@
 <template>
   <v-container>
-    Dashboard
+    Settings
   </v-container>
 </template>
