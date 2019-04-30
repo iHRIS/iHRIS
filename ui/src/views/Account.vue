@@ -1,5 +1,5 @@
 <template>
   <v-container>
-    Documentation
+    Account
   </v-container>
 </template>

@@ -1,5 +1,5 @@
 <template>
   <v-container>
-    Documentation
+    Terms and Conditions
   </v-container>
 </template>

@@ -13,16 +13,40 @@ export default new Router({
       component: () => import(/* webpackChunkName: "home" */ "./views/Home.vue")
     },
     {
-      path: "/settings",
-      name: "settings",
+      path: "/account",
+      name: "account",
       component: () =>
-        import(/* webpackChunkName: "about" */ "./views/Settings.vue")
+        import(/* webpackChunkName: "account" */ "./views/Account.vue")
     },
     {
       path: "/documentation",
       name: "documentation",
       component: () =>
         import(/* webpackChunkName: "documentation" */ "./views/Documentation.vue")
+    },
+    {
+      path: "/feedback",
+      name: "feedback",
+      component: () =>
+        import(/* webpackChunkName: "feedback" */ "./views/Feedback.vue")
+    },
+    {
+      path: "/settings",
+      name: "settings",
+      component: () =>
+        import(/* webpackChunkName: "about" */ "./views/Settings.vue")
+    },
+    {
+      path: "/terms-and-conditions",
+      name: "terms-and-conditions",
+      component: () =>
+        import(/* webpackChunkName: "termsAndConditions" */ "./views/TermsAndConditions.vue")
+    },
+    {
+      path: "/user-manual",
+      name: "user-manual",
+      component: () =>
+        import(/* webpackChunkName: "userManual" */ "./views/UserManual.vue")
     }
   ]
 });

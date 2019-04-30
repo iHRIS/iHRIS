@@ -1,5 +1,5 @@
 <template>
   <v-container>
-    Documentation
+    User Manual
   </v-container>
 </template>
