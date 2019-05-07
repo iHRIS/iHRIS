@@ -34,12 +34,12 @@ module.exports = {
         allowNull: false
       },
       createdAt: {
-        type: Sequelize.DATEONLY,
+        type: Sequelize.DATE,
         primaryKey: false,
         allowNull: false
       },
       updatedAt: {
-        type: Sequelize.DATEONLY,
+        type: Sequelize.DATE,
         primaryKey: false,
         allowNull: false
       }
