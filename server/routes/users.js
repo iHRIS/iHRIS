@@ -10,15 +10,15 @@ router.get('/', function(req, res, next) {
 router.post('/add', function(req, res, next) {
   let data = req.body;
 
-  models.User.build(data).validate().then( () => {
-    models.User.upsert(data).then( (patient) => {
-      res.status(201).json({ok:1})
+  models.User.build(data).validate().then(() => {
+    models.User.create(data).then((patient) => {
+      res.status(201).json(patient);
     }).catch(err => {
-      console.log("ERROR")
-      console.log(err)
+      res.status(400).json(err);
     })
-  }).catch(err => { console.log(err); res.status(400).json({ ok: 0, error: err }); })
-  res.send('success');
+  }).catch(err => {
+    res.status(400).json(err);
+  });
 });
 
 module.exports = router;

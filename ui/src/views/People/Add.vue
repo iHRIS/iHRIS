@@ -10,17 +10,27 @@
         person or an HR Manager can add a new person to the system.
       </p>
 
-      {{ results }}
+      <v-alert v-model="alert" dismissable type="error">
+        {{ error }}
+      </v-alert>
 
       <v-form ref="form">
         <v-text-field
           v-model="firstName"
           label="First name"
           outline
+          required
+          :rules="rules"
         ></v-text-field>
-        <v-text-field v-model="surname" label="Surname" outline></v-text-field>
         <v-text-field
-          v-model="otherName"
+          v-model="surname"
+          label="Surname"
+          outline
+          required
+          :rules="rules"
+        ></v-text-field>
+        <v-text-field
+          v-model="otherNames"
           label="Other name(s)"
           outline
         ></v-text-field>
@@ -28,11 +38,15 @@
           v-model="nationality"
           label="Nationality"
           outline
+          required
+          :rules="rules"
         ></v-text-field>
         <v-text-field
           v-model="residence"
           label="Residence"
           outline
+          required
+          :rules="rules"
         ></v-text-field>
 
         <v-layout align-center justify-end fill-height>
@@ -50,12 +64,20 @@ import axios from "axios";
 export default {
   data() {
     return {
+      alert: false,
+      error: "",
       firstName: "",
-      inputs: ["firstName", "surname", "otherName", "nationality", "residence"],
-      otherName: "",
+      inputs: [
+        "firstName",
+        "surname",
+        "otherNames",
+        "nationality",
+        "residence"
+      ],
+      otherNames: "",
       nationality: "",
       residence: "",
-      results: "",
+      rules: [v => !!v || "Required field"],
       surname: ""
     };
   },
@@ -73,20 +95,32 @@ export default {
       return inputs;
     },
     submit() {
-      const input = this.getInputs();
+      if (this.$refs.form.validate()) {
+        const input = this.getInputs();
 
-      axios
-        .post("/users/add", input)
-        .then(response => {
-          console.log(response);
-
-          if (response.data.ok == "1") {
-            this.results = "Data saved.";
-          }
-        })
-        .catch(error => {
-          this.results = "Data not saved." + error;
-        });
+        axios
+          .post("/users/add", input)
+          .then(response => {
+            if (response.status === 201) {
+              this.$router.push({
+                name: "people-view",
+                params: {
+                  id: response.data.id
+                }
+              });
+            } else {
+              this.error = "There was an error saving this data.";
+              this.alert = true;
+            }
+          })
+          .catch(error => {
+            this.error = "Data not saved." + error;
+            this.alert = true;
+          });
+      } else {
+        this.error = "Invalid input, please correct all errors.";
+        this.alert = true;
+      }
     }
   }
 };
