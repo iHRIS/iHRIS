@@ -12,43 +12,59 @@
       </v-btn>
     </v-toolbar>
 
-    <v-layout row wrap fill-height>
-      <v-navigation-drawer
-        v-model="drawer"
-        app
-        class="primary darken-1 white--text"
-        clipped
-      >
-        <v-container centered class="px-1 text-uppercase font-weight-bold">
-          <v-list class="primary darken-1 white--text font-weight-bold">
-            <v-list-tile active-class="primary darken-2" href="/">
-              <v-list-tile-avatar>
-                <v-icon class="white--text">dashboard</v-icon>
-              </v-list-tile-avatar>
-              <v-list-tile-content>
-                <v-list-tile-title>
-                  <strong>Dashboard</strong>
-                </v-list-tile-title>
-              </v-list-tile-content>
-            </v-list-tile>
-            <v-list-tile active-class="primary darken-2" href="/settings">
-              <v-list-tile-avatar>
-                <v-icon class="white--text">settings</v-icon>
-              </v-list-tile-avatar>
-              <v-list-tile-content>
-                <v-list-tile-title>
-                  <strong>Configuration</strong>
-                </v-list-tile-title>
-              </v-list-tile-content>
-            </v-list-tile>
-          </v-list>
-        </v-container>
-      </v-navigation-drawer>
+    <template>
+      <v-layout row wrap fill-height>
+        <v-navigation-drawer
+          v-model="drawer"
+          app
+          class="primary darken-1 white--text"
+          clipped
+        >
+          <v-container centered class="px-1">
+            <v-list class="primary darken-1 white--text">
+              <v-list-group
+                v-for="item in menu"
+                :key="item.title"
+                v-model="item.active"
+                :prepend-icon="item.avatar"
+                no-action
+              >
+                <template v-slot:activator>
+                  <v-list-tile active-class="primary darken-2" :to="item.link">
+                    <v-list-tile-content>
+                      <v-list-tile-title
+                        class="text-uppercase font-weight-bold"
+                      >
+                        {{ item.title }}
+                      </v-list-tile-title>
+                    </v-list-tile-content>
+                  </v-list-tile>
+                </template>
 
-      <v-content>
-        <router-view />
-      </v-content>
-    </v-layout>
+                <v-list-tile
+                  v-for="subItem in item.submenu"
+                  :key="subItem.title"
+                  @click.stop=""
+                  :to="subItem.link"
+                >
+                  <v-list-tile-content>
+                    <v-list-tile-title>{{ subItem.title }}</v-list-tile-title>
+                  </v-list-tile-content>
+
+                  <v-list-tile-action>
+                    <v-icon>{{ subItem.action }}</v-icon>
+                  </v-list-tile-action>
+                </v-list-tile>
+              </v-list-group>
+            </v-list>
+          </v-container>
+        </v-navigation-drawer>
+
+        <v-content>
+          <router-view />
+        </v-content>
+      </v-layout>
+    </template>
 
     <Footer />
   </v-app>
@@ -56,8 +72,6 @@
 
 <script>
 import Footer from "./components/Layout/Footer";
-import Header from "./components/Layout/Header";
-import SideNavigation from "./components/Layout/SideNavigation";
 
 export default {
   components: {
@@ -66,7 +80,42 @@ export default {
   data() {
     return {
       drawer: true,
-      ihrisIcon: require("@/assets/logos/ihris.png")
+      ihrisIcon: require("@/assets/logos/ihris.png"),
+      menu: [
+        {
+          action: "home",
+          avatar: "dashboard",
+          link: "/",
+          submenu: [],
+          title: "Dashboard"
+        },
+        {
+          action: "people",
+          avatar: "people",
+          submenu: [
+            {
+              link: "/people",
+              title: "Search people"
+            },
+            {
+              link: "/people/add",
+              title: "Add people"
+            },
+            {
+              link: "/people/review-applications",
+              title: "Review applications"
+            }
+          ],
+          title: "People"
+        },
+        {
+          action: "settings",
+          avatar: "settings",
+          link: "/settings",
+          submenu: [],
+          title: "Settings"
+        }
+      ]
     };
   },
   name: "App"

@@ -31,6 +31,24 @@ export default new Router({
         import(/* webpackChunkName: "feedback" */ "./views/Feedback.vue")
     },
     {
+      path: "/people",
+      name: "search-people",
+      component: () =>
+        import(/* webpackChunkName: "People" */ "./views/People/Search.vue")
+    },
+    {
+      path: "/people/add",
+      name: "add-people",
+      component: () =>
+        import(/* webpackChunkName: "AddPeople" */ "./views/People/Add.vue")
+    },
+    {
+      path: "/people/review-applications",
+      name: "review-application",
+      component: () =>
+        import(/* webpackChunkName: "ReviewApplication" */ "./views/People/ReviewApplication.vue")
+    },
+    {
       path: "/settings",
       name: "settings",
       component: () =>
