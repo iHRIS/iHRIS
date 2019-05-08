@@ -99,7 +99,7 @@ export default {
         const input = this.getInputs();
 
         axios
-          .post("/users/add", input)
+          .post("/practitioner/add", input)
           .then(response => {
             if (response.status === 201) {
               this.$router.push({

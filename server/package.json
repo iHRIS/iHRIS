@@ -3,7 +3,8 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "node ./bin/www"
+    "start": "node ./bin/www",
+    "test": "jest"
   },
   "dependencies": {
     "cookie-parser": "~1.4.3",
@@ -18,6 +19,7 @@
     "pg-hstore": "^2.3.2",
     "sequelize": "^5.7.4",
     "sequelize-cli": "^5.4.0",
-    "sqlite": "^3.0.3"
+    "sqlite": "^3.0.3",
+    "supertest": "^4.0.2"
   }
 }
