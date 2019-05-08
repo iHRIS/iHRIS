@@ -1,9 +1,9 @@
 import { shallowMount } from "@vue/test-utils";
-import Account from "@/views/People/ReviewApplication.vue";
+import ReviewApplication from "@/views/People/ReviewApplication.vue";
 
 describe("ReviewApplication.vue", () => {
   it("Says review application", () => {
-    const wrapper = shallowMount(Account, {
+    const wrapper = shallowMount(ReviewApplication, {
       stubs: ["v-container"]
     });
 

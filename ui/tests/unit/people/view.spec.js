@@ -1,9 +1,9 @@
 import { shallowMount } from "@vue/test-utils";
-import Account from "@/views/People/View.vue";
+import View from "@/views/People/View.vue";
 
 describe("View.vue", () => {
   it("Says view person", () => {
-    const wrapper = shallowMount(Account, {
+    const wrapper = shallowMount(View, {
       stubs: ["v-container"]
     });
 

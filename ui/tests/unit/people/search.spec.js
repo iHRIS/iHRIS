@@ -1,9 +1,9 @@
 import { shallowMount } from "@vue/test-utils";
-import Account from "@/views/People/Search.vue";
+import Search from "@/views/People/Search.vue";
 
 describe("Search.vue", () => {
   it("Says search people", () => {
-    const wrapper = shallowMount(Account, {
+    const wrapper = shallowMount(Search, {
       stubs: ["v-container"]
     });
 
