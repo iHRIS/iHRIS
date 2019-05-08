@@ -1,7 +1,7 @@
 "use strict";
 
 module.exports = (sequelize, DataTypes) => {
-  var User = sequelize.define("User", {
+  var Practitioner = sequelize.define("Practitioner", {
     id: {
       type: DataTypes.INTEGER,
       autoIncrement: true,
@@ -34,5 +34,5 @@ module.exports = (sequelize, DataTypes) => {
     }
   });
 
-  return User;
+  return Practitioner;
 };
