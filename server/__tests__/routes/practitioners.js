@@ -39,4 +39,30 @@ describe("Test adding practitioners", () => {
       expect(response.statusCode).toBe(201);
     });
   });
+
+  test("Getting existing record", () => {
+    let testData = {
+      firstName: "Stephen",
+      surname: "Strange",
+      otherNames: "Doctor Strange",
+      nationality: "American",
+      residence: "Sanctum Santorum"
+    };
+
+    return models.Practitioner.create(testData).then(practitioner => {
+      return request(app).get("/practitioner/" + practitioner.id).send().then(response => {
+        expect(response.statusCode).toBe(201);
+
+        // because of encoding datetime stuff, I have to convert / revert the database record
+        // so that it matches up with the response object
+        expect(JSON.parse(response.text)).toEqual(JSON.parse(JSON.stringify(practitioner)));
+      });
+    });
+  });
+
+  test("Getting record that does not exist", () => {
+    return request(app).get("/practitioner/does-not-exist").send().then(response => {
+      expect(response.statusCode).toBe(400);
+    });
+  });
 });
