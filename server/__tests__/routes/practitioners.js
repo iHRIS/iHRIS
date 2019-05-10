@@ -50,7 +50,7 @@ describe("Test adding practitioners", () => {
     };
 
     return models.Practitioner.create(testData).then(practitioner => {
-      return request(app).get("/practitioner/" + practitioner.id).send().then(response => {
+      return request(app).get("/practitioner/view/" + practitioner.id).send().then(response => {
         expect(response.statusCode).toBe(201);
 
         // because of encoding datetime stuff, I have to convert / revert the database record
@@ -61,7 +61,7 @@ describe("Test adding practitioners", () => {
   });
 
   test("Getting record that does not exist", () => {
-    return request(app).get("/practitioner/does-not-exist").send().then(response => {
+    return request(app).get("/practitioner/view/does-not-exist").send().then(response => {
       expect(response.statusCode).toBe(400);
     });
   });
