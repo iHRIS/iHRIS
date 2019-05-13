@@ -46,6 +46,7 @@
               :key="item.title"
               prepend-icon="add"
               no-action
+              class="pb-3"
             >
               <template v-slot:activator>
                 <v-list-tile active-class="primary darken-2">
@@ -55,6 +56,9 @@
                     >
                       {{ item.title }}
                     </v-list-tile-title>
+                    <v-list-tile-sub-title class="white--text">
+                      {{ item.subtitle }}
+                    </v-list-tile-sub-title>
                   </v-list-tile-content>
                 </v-list-tile>
               </template>
@@ -81,34 +85,44 @@ export default {
     return {
       menu: [
         {
-          title: "Contact Information"
+          title: "Contact Information",
+          subtitle: "Work contact, Personal contract, Emergency contract, Other contact"
         },
         {
-          title: "Next of Kin"
+          title: "Next of Kin",
+          subtitle: "Relationship, Contact information"
         },
         {
-          title: "Position"
+          title: "Position",
+          subtitle: "Position, Salary, Facility"
         },
         {
-          title: "Confirmation"
+          title: "Confirmation",
+          subtitle: "Confirmation details"
         },
         {
-          title: "Qualifications"
+          title: "Qualifications",
+          subtitle: "Registration, Language proficiency, Competency"
         },
         {
-          title: "Training Courses"
+          title: "Training Courses",
+          subtitle: "Training course details"
         },
         {
-          title: "Disciplinary Actions"
+          title: "Disciplinary Actions",
+          subtitle: "Disciplinary actions, History"
+        },
+        {
+          title: "Application",
+          subtitle: "Applications, Interview details, Hiring decision",
         },
         {
           title: "Employment History",
+          subtitle: "Employment"
         },
         {
-          title: "Education History",
-        },
-        {
-          title: "Notes"
+          title: "Notes",
+          subtitle: "Notes"
         }
       ],
       practitioner: {}
