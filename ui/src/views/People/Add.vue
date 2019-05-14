@@ -16,6 +16,7 @@
 
       <IndividualInformationForm
         :practitioner="practitioner"
+        :showSubforms="false"
         v-on:cancel="cancel"
         v-on:successfulSubmit="submit"
         v-on:failedSubmit="showFailedSubmit"

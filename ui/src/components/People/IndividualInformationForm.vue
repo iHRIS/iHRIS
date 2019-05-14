@@ -34,6 +34,16 @@
       :rules="rules"
     ></v-text-field>
 
+    <v-flex v-show="showSubforms">
+      <v-divider class="pb-3" />
+
+      <p class="pl-3 font-weight-bold text-uppercase primary--text">Add a resume</p>
+      <p class="pl-3 font-weight-bold text-uppercase primary--text">Add identification</p>
+      <p class="pl-3 font-weight-bold text-uppercase primary--text">Add demographic information</p>
+
+      <v-divider class="pb-3" />
+    </v-flex>
+
     <v-layout align-center justify-end fill-height>
       <v-btn @click="cancel">cancel</v-btn>
       <v-btn @click="submit" class="primary">submit</v-btn>
@@ -104,6 +114,14 @@ export default {
       this.surname = practitioner.surname;
     },
   },
-  props: ["practitioner"]
+  props: {
+    practitioner: {
+      type: Object
+    },
+    showSubforms: {
+      default: true,
+      type: Boolean
+    }
+  },
 };
 </script>
