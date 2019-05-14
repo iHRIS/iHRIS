@@ -14,59 +14,29 @@
         {{ error }}
       </v-alert>
 
-      <v-form ref="form">
-        <v-text-field
-          v-model="firstName"
-          label="First name"
-          outline
-          required
-          :rules="rules"
-        ></v-text-field>
-        <v-text-field
-          v-model="surname"
-          label="Surname"
-          outline
-          required
-          :rules="rules"
-        ></v-text-field>
-        <v-text-field
-          v-model="otherNames"
-          label="Other name(s)"
-          outline
-        ></v-text-field>
-        <v-text-field
-          v-model="nationality"
-          label="Nationality"
-          outline
-          required
-          :rules="rules"
-        ></v-text-field>
-        <v-text-field
-          v-model="residence"
-          label="Residence"
-          outline
-          required
-          :rules="rules"
-        ></v-text-field>
-
-        <v-layout align-center justify-end fill-height>
-          <v-btn @click="cancel">cancel</v-btn>
-          <v-btn @click="submit" class="primary">submit</v-btn>
-        </v-layout>
-      </v-form>
+      <IndividualInformationForm
+        :practitioner="practitioner"
+        v-on:cancel="cancel"
+        v-on:successfulSubmit="submit"
+        v-on:failedSubmit="showFailedSubmit"
+        ref="individualInformationForm"
+      />
     </v-flex>
   </v-container>
 </template>
 
 <script>
 import axios from "axios";
+import IndividualInformationForm from "@/components/People/IndividualInformationForm.vue";
 
 export default {
+  components: {
+    IndividualInformationForm
+  },
   data() {
     return {
       alert: false,
       error: "",
-      firstName: "",
       inputs: [
         "firstName",
         "surname",
@@ -74,53 +44,39 @@ export default {
         "nationality",
         "residence"
       ],
-      otherNames: "",
-      nationality: "",
-      residence: "",
+      practitioner: {},
       rules: [v => !!v || "Required field"],
       surname: ""
     };
   },
   methods: {
     cancel() {
-      this.$refs.form.reset();
+      this.$refs.individualInformationForm.reset();
     },
-    getInputs() {
-      let inputs = {};
-
-      for (let i of this.inputs) {
-        inputs[i] = this[i];
-      }
-
-      return inputs;
+    showFailedSubmit() {
+      this.error = "Invalid input, please correct all errors.";
+      this.alert = true;
     },
-    submit() {
-      if (this.$refs.form.validate()) {
-        const input = this.getInputs();
-
-        axios
-          .post("/practitioner/add", input)
-          .then(response => {
-            if (response.status === 201) {
-              this.$router.push({
-                name: "people-view",
-                params: {
-                  id: response.data.id
-                }
-              });
-            } else {
-              this.error = "There was an error saving this data.";
-              this.alert = true;
-            }
-          })
-          .catch(error => {
-            this.error = "Data not saved." + error;
+    submit(input) {
+      axios
+        .post("/practitioner/add", input)
+        .then(response => {
+          if (response.status === 201) {
+            this.$router.push({
+              name: "people-view",
+              params: {
+                id: response.data.id
+              }
+            });
+          } else {
+            this.error = "There was an error saving this data.";
             this.alert = true;
-          });
-      } else {
-        this.error = "Invalid input, please correct all errors.";
-        this.alert = true;
-      }
+          }
+        })
+        .catch(error => {
+          this.error = "Data not saved." + error;
+          this.alert = true;
+        });
     }
   }
 };
