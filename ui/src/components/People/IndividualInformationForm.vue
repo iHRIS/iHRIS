@@ -76,7 +76,6 @@ export default {
       nationality: "",
       residence: "",
       rules: [v => !!v || "Required field"],
-      subforms: true,
       surname: ""
     };
   },
