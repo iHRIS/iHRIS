@@ -65,4 +65,36 @@ describe("Test adding practitioners", () => {
       expect(response.statusCode).toBe(400);
     });
   });
+
+  test("Updating a record", () => {
+    let testData = {
+      firstName: "Stephan",
+      surname: "Strange",
+      otherNames: "Doctor Strang",
+      nationality: "American",
+      residence: "Sanctum Santorum"
+    };
+
+    return models.Practitioner.create(testData).then(practitioner => {
+      let editData = {
+        id: practitioner.id,
+        firstName: "Stephano",
+        surname: "Strangeo",
+        otherNames: "Doctor Strango",
+        nationality: "Americano",
+        residence: "Sanctum Santorumo"
+      };
+
+      return request(app).post("/practitioner/edit").send(editData).then(response => {
+        let data = JSON.parse(response.text);
+
+        expect(response.statusCode).toBe(201);
+        expect(data.firstName).toEqual(editData.firstName);
+        expect(data.surname).toEqual(editData.surname);
+        expect(data.residence).toEqual(editData.residence);
+        expect(data.otherNames).toEqual(editData.otherNames);
+        expect(data.nationality).toEqual(editData.nationality);
+      });
+    });
+  });
 });

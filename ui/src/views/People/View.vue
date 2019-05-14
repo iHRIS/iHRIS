@@ -31,6 +31,7 @@
               v-show="editing"
               :practitioner="practitioner"
               v-on:cancel="cancelIndividualInformationForm"
+              v-on:successfulSubmit="submitIndividualInformationForm"
               ref="individualInformationForm"
             />
           </v-card-text>
@@ -137,6 +138,19 @@ export default {
   methods: {
     cancelIndividualInformationForm() {
       this.editing = false;
+    },
+    submitIndividualInformationForm() {
+      let input = this.$refs.individualInformationForm.getInputs();
+      input["id"] = this.$route.params.id;
+
+      axios.post("/practitioner/edit", input).then(response => {
+        if (response.status === 201) {
+          this.practitioner = response.data;
+          this.$refs.individualInformationForm.updateData(response.data);
+        } else {
+          this.$refs.individualInformationForm.showErrors("There was an error saving this data.");
+        }
+      });
     }
   },
   name: "AddSections"

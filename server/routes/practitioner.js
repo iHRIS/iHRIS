@@ -38,4 +38,29 @@ router.post("/add", function(req, res, next) {
   });
 });
 
+/**
+ * Edit an existing practitioner
+ */
+router.post("/edit", function(req, res, next) {
+  let data = req.body;
+
+  models.Practitioner.findOne({
+    where: {
+      id: data.id
+    }
+  }).then(practitioner => {
+    if (practitioner === null) {
+      res.status(400).json("No practitioner found.");
+    } else {
+      practitioner.update(data).then(() => {
+        res.status(201).json(practitioner);
+      }).catch(err => {
+        res.status(400).json(err);
+      });
+    }
+  }).catch(err => {
+    res.status(400).json(err);
+  });
+});
+
 module.exports = router;
