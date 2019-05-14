@@ -85,6 +85,10 @@ export default {
     reset() {
       this.$refs.form.reset();
     },
+    showErrors(error) {
+      this.error = error;
+      this.alertError = true;
+    },
     submit() {
       if (this.$refs.form.validate()) {
         this.$emit("successfulSubmit", this.getInputs());
