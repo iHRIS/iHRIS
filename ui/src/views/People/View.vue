@@ -148,7 +148,9 @@ export default {
           this.practitioner = response.data;
           this.$refs.individualInformationForm.updateData(response.data);
         } else {
-          this.$refs.individualInformationForm.showErrors("There was an error saving this data.");
+          this.$refs.individualInformationForm.showErrors(
+            "There was an error saving this data."
+          );
         }
       });
     }

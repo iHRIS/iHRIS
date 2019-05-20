@@ -1,16 +1,6 @@
 <template>
   <v-app>
-    <v-toolbar color="white" app clipped-left>
-      <v-toolbar-side-icon @click.stop="drawer = !drawer"></v-toolbar-side-icon>
-      <v-img :src="ihrisIcon" contain max-height="40" max-width="40" />
-      <v-toolbar-title class="headline primary--text">
-        <span>iHRIS Manage</span>
-      </v-toolbar-title>
-      <v-spacer></v-spacer>
-      <v-btn to="account" flat>
-        Account
-      </v-btn>
-    </v-toolbar>
+    <Header />
 
     <template>
       <v-layout row wrap fill-height>
@@ -72,9 +62,11 @@
 
 <script>
 import Footer from "./components/Layout/Footer";
+import Header from "./components/Layout/Header";
 
 export default {
   components: {
+    Header,
     Footer
   },
   data() {

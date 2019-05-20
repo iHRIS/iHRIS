@@ -19,6 +19,12 @@ export default new Router({
         import(/* webpackChunkName: "account" */ "./views/Account.vue")
     },
     {
+      path: "/change-password",
+      name: "change-password",
+      component: () =>
+        import(/* webpackChunkName: "ChangePassword" */ "./views/ChangePassword.vue")
+    },
+    {
       path: "/documentation",
       name: "documentation",
       component: () =>
@@ -29,6 +35,18 @@ export default new Router({
       name: "feedback",
       component: () =>
         import(/* webpackChunkName: "feedback" */ "./views/Feedback.vue")
+    },
+    {
+      path: "/login",
+      name: "login",
+      component: () =>
+        import(/* webpackChunkName: "Login" */ "./views/Login.vue")
+    },
+    {
+      path: "/logout",
+      name: "logout",
+      component: () =>
+        import(/* webpackChunkName: "Logout" */ "./views/Logout.vue")
     },
     {
       path: "/people",
