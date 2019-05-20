@@ -37,9 +37,15 @@
     <v-flex v-show="showSubforms">
       <v-divider class="pb-3" />
 
-      <p class="pl-3 font-weight-bold text-uppercase primary--text">Add a resume</p>
-      <p class="pl-3 font-weight-bold text-uppercase primary--text">Add identification</p>
-      <p class="pl-3 font-weight-bold text-uppercase primary--text">Add demographic information</p>
+      <p class="pl-3 font-weight-bold text-uppercase primary--text">
+        Add a resume
+      </p>
+      <p class="pl-3 font-weight-bold text-uppercase primary--text">
+        Add identification
+      </p>
+      <p class="pl-3 font-weight-bold text-uppercase primary--text">
+        Add demographic information
+      </p>
 
       <v-divider class="pb-3" />
     </v-flex>
@@ -112,7 +118,7 @@ export default {
       this.otherNames = practitioner.otherNames;
       this.residence = practitioner.residence;
       this.surname = practitioner.surname;
-    },
+    }
   },
   props: {
     practitioner: {
@@ -122,6 +128,6 @@ export default {
       default: true,
       type: Boolean
     }
-  },
+  }
 };
 </script>
