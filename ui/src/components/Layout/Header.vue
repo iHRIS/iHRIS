@@ -33,8 +33,6 @@ import { serverBus } from "../../main";
 export default {
   created() {
     const config = require("../../../config/config.json");
-    console.log(config.logo);
-    //this.icon = require("@/assets/logos/ihris.png");
     this.icon = require(config.logo);
     this.site = config.site;
   },

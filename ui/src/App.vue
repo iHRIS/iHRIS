@@ -1,6 +1,6 @@
 <template>
   <v-app>
-    <Header :site="site" />
+    <Header />
 
     <template>
       <v-layout row wrap fill-height>
@@ -107,8 +107,7 @@ export default {
           submenu: [],
           title: "Settings"
         }
-      ],
-      site: "Demonstration Site"
+      ]
     };
   },
   name: "App"
