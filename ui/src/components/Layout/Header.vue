@@ -33,7 +33,7 @@ import { serverBus } from "../../main";
 export default {
   created() {
     const config = require("../../../config/config.json");
-    this.icon = require(config.logo);
+    this.icon = ""; //require(config.logo);
     this.site = config.site;
   },
   data() {

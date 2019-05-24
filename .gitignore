@@ -62,3 +62,6 @@ typings/
 
 # VIM swp files
 *.swp
+
+# config files
+server/config/config.json

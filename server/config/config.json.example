@@ -1,0 +1,41 @@
+{
+  "development": {
+    "database": {
+      "username": null,
+      "password": null,
+      "database": "database_dev",
+      "dialect": "sqlite"
+    },
+    "fhir": {
+      "server": "localhost",
+      "username": "username",
+      "password": "password"
+    }
+  },
+  "test": {
+    "database": {
+      "username": null,
+      "password": null,
+      "database": "database_test",
+      "dialect": "sqlite"
+    },
+    "fhir": {
+      "server": "localhost",
+      "username": "username",
+      "password": "password"
+    }
+  },
+  "production": {
+    "database": {
+      "username": null,
+      "password": null,
+      "database": "database_production",
+      "dialect": "sqlite"
+    },
+    "fhir": {
+      "server": "localhost",
+      "username": "username",
+      "password": "password"
+    }
+  }
+}
