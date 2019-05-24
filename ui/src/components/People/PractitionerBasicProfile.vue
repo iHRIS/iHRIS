@@ -31,7 +31,15 @@
 </template>
 
 <script>
+import axios from "axios";
+
 export default {
+  created() {
+    console.log("Created");
+    axios.get("http://scratchpad.ihris.org/hapi/fhir/StructureDefinition/Practitioner").then(response => {
+      console.log(response);
+    });
+  },
   props: ["practitioner"]
 };
 </script>

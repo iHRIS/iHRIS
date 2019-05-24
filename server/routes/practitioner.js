@@ -1,6 +1,25 @@
 var express = require("express");
 const models = require("../models");
 var router = express.Router();
+var axios = require("axios");
+const env = process.env.NODE_ENV || 'development';
+const config = require(__dirname + '/../config/config.json')[env]["fhir"];
+
+router.get("/describe", function(req, res, next) {
+  axios.get(config.server + "/fhir/StructureDefinition/Practitioner", {
+    params: {},
+    withCredentials: true,
+    auth: {
+      username: config.username,
+      password: config.password
+    }
+  }).then(response => {
+    res.status(201).json(response.data.snapshot.element);
+  }).catch(err => {
+    console.log(err);
+    res.status(400).json(err);
+  });
+});
 
 /**
  * Get a specific practitioner

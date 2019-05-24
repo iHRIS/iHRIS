@@ -31,6 +31,13 @@ import axios from "axios";
 import IndividualInformationForm from "@/components/People/IndividualInformationForm.vue";
 
 export default {
+  created() {
+    console.log("Created");
+
+    axios.get("/practitioner/describe").then(response => {
+      console.log(response);
+    });
+  },
   components: {
     IndividualInformationForm
   },
