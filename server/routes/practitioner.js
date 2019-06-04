@@ -14,7 +14,7 @@ router.get("/describe", function(req, res, next) {
       password: config.password
     }
   }).then(response => {
-    res.status(201).json(response.data.snapshot.element);
+    res.status(201).json(response.data);
   }).catch(err => {
     console.log(err);
     res.status(400).json(err);

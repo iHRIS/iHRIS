@@ -5,7 +5,7 @@
         {{ practitioner.firstName }} {{ practitioner.surname }}
       </v-flex>
       <v-flex xs6 class="pr-3">
-        <v-card>
+        <v-card class="mb-5">
           <v-card-title class="display-1">
             Individual Information
             <v-spacer />
@@ -36,9 +36,21 @@
             />
           </v-card-text>
         </v-card>
+
+        <v-card v-show="details">
+          <v-card-text>
+            <DetailsForm
+              v-show="details"
+              :fields="detailFields"
+              v-on:cancel="cancelDetailsForm"
+              v-on:successfulSubmit="submitDetailsForm"
+              ref="detailsForm"
+            />
+          </v-card-text>
+        </v-card>
       </v-flex>
       <v-flex xs6 class="pl-3">
-        <AddSectionsMenu />
+        <AddSectionsMenu v-on:toggleForm="toggleForm" />
       </v-flex>
     </v-layout>
   </v-container>
@@ -46,13 +58,16 @@
 
 <script>
 import axios from "axios";
+
 import AddSectionsMenu from "@/components/People/AddSectionsMenu.vue";
+import DetailsForm from "@/components/People/DetailsForm.vue";
 import IndividualInformationForm from "@/components/People/IndividualInformationForm.vue";
 import PractitionerBasicProfile from "@/components/People/PractitionerBasicProfile.vue";
 
 export default {
   components: {
     AddSectionsMenu,
+    DetailsForm,
     IndividualInformationForm,
     PractitionerBasicProfile
   },
@@ -66,13 +81,19 @@ export default {
   },
   data() {
     return {
+      details: false,
+      detailFields: {},
       editing: false,
       practitioner: {}
     };
   },
   methods: {
+    cancelDetailsForm() {
+    },
     cancelIndividualInformationForm() {
       this.editing = false;
+    },
+    submitDetailsForm() {
     },
     submitIndividualInformationForm() {
       let input = this.$refs.individualInformationForm.getInputs();
@@ -88,6 +109,12 @@ export default {
           );
         }
       });
+    },
+    toggleForm(fields, title) {
+      this.details = true;
+      this.detailFields = fields;
+
+      this.$refs.detailsForm.changeFields(fields, title);
     }
   },
   name: "AddSections"
