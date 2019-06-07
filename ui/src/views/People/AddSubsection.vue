@@ -28,16 +28,12 @@
 
 <script>
 import axios from "axios";
-import DetailsForm from "@/components/People/DetailsForm.vue";
 
 export default {
   created() {
     axios.get("/practitioner/describe").then(response => {
       console.log(response);
     });
-  },
-  components: {
-    DetailsForm
   },
   data() {
     return {

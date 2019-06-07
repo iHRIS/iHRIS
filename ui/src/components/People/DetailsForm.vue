@@ -4,7 +4,7 @@
       {{ title }}
     </v-card-title>
 
-    <div v-for="field in schema">
+    <div v-for="field in schema" v-bind:key="field.label">
       <v-text-field
         :v-model="field.label"
         :label="field.label"
@@ -14,7 +14,7 @@
     </div>
 
     <v-flex v-show="showSubsections">
-      <div v-for="subsection in subsections">
+      <div v-for="subsection in subsections" v-bind:key="subsection.label">
         <v-divider class="pb-3" />
 
         <p class="pl-3 font-weight-bold text-uppercase primary--text">
@@ -24,7 +24,6 @@
 
       <v-divider class="pb-3" />
     </v-flex>
-
   </v-form>
 </template>
 
@@ -36,12 +35,31 @@ export default {
       schema: [],
       showSubsections: false,
       subsections: [],
-      title: "",
+      title: ""
     };
   },
   methods: {
     changeFields(fields, title) {
-      const primitiveTypes = ["base64Binary", "boolean", "canonical", "code", "date", "dateTime", "decimal", "id", "instant", "markdown", "oid", "positiveInt", "string", "time", "unsignedInt", "uri", "url", "uuid"];
+      const primitiveTypes = [
+        "base64Binary",
+        "boolean",
+        "canonical",
+        "code",
+        "date",
+        "dateTime",
+        "decimal",
+        "id",
+        "instant",
+        "markdown",
+        "oid",
+        "positiveInt",
+        "string",
+        "time",
+        "unsignedInt",
+        "uri",
+        "url",
+        "uuid"
+      ];
 
       let schema = [];
       let showSubsections = false;

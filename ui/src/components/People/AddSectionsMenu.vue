@@ -10,7 +10,10 @@
         class="pb-3"
       >
         <template v-slot:activator>
-          <v-list-tile active-class="primary darken-2" @click.stop="showForm(item.index)">
+          <v-list-tile
+            active-class="primary darken-2"
+            @click.stop="showForm(item.index)"
+          >
             <v-list-tile-content>
               <v-list-tile-title class="text-uppercase font-weight-bold">
                 {{ item.title }}
@@ -28,15 +31,13 @@
 
 <script>
 import axios from "axios";
-import fhir from "fhir";
 
 export default {
   created() {
     axios.get("/practitioner/describe").then(response => {
       if (response.status === 201) {
-        const ParseConformance = require('fhir').ParseConformance;
+        const ParseConformance = require("fhir").ParseConformance;
         const parser = new ParseConformance();
-        const primitiveTypes = ["base64Binary", "boolean", "canonical", "code", "date", "dateTime", "decimal", "id", "instant", "markdown", "oid", "positiveInt", "string", "time", "unsignedInt", "uri", "url", "uuid"];
 
         let fields = parser.parseStructureDefinition(response.data);
         let menu = [];
@@ -73,7 +74,11 @@ export default {
   },
   methods: {
     showForm(index) {
-      this.$emit("toggleForm", this.fields[index]._properties, this.fields[index]._name);
+      this.$emit(
+        "toggleForm",
+        this.fields[index]._properties,
+        this.fields[index]._name
+      );
     }
   }
 };
