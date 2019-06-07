@@ -9,7 +9,12 @@
         <v-btn to="feedback" flat class="text-capitalize">
           Feedback
         </v-btn>
-        <v-btn href="https://www.ihris.org" target="_blank" flat class="text-none">
+        <v-btn
+          href="https://www.ihris.org"
+          target="_blank"
+          flat
+          class="text-none"
+        >
           iHRIS Website
         </v-btn>
         <v-btn to="terms-and-conditions" flat class="text-capitalize">
