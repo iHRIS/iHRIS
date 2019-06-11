@@ -6,6 +6,9 @@
       "database": "database_dev",
       "dialect": "sqlite"
     },
+    "definitions": {
+      "practitionerPage": "Basic/iHRISPagePractitioner"
+    },
     "fhir": {
       "server": "localhost",
       "username": "username",
@@ -19,6 +22,9 @@
       "database": "database_test",
       "dialect": "sqlite"
     },
+    "definitions": {
+      "practitionerPage": "Basic/iHRISPagePractitioner"
+    },
     "fhir": {
       "server": "localhost",
       "username": "username",
@@ -31,6 +37,9 @@
       "password": null,
       "database": "database_production",
       "dialect": "sqlite"
+    },
+    "definitions": {
+      "practitionerPage": "Basic/iHRISPagePractitioner"
     },
     "fhir": {
       "server": "localhost",
