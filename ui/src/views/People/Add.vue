@@ -20,6 +20,7 @@
         v-on:cancel="cancel"
         v-on:successfulSubmit="submit"
         v-on:failedSubmit="showFailedSubmit"
+        v-show="individualInformationForm"
         ref="individualInformationForm"
       />
     </v-flex>
@@ -32,10 +33,17 @@ import IndividualInformationForm from "@/components/People/IndividualInformation
 
 export default {
   created() {
-    console.log("Created");
+    axios.get("/practitioner/describe/page").then(response => {
+      const fields = response.data.extension[0].extension;
+      const resource = response.data.subject.reference;
 
-    axios.get("/practitioner/describe").then(response => {
-      console.log(response);
+      axios.get("/practitioner/describe/definition/" + resource.replace(/StructureDefinition\//, "")).then(response => {
+        console.log(response);
+      });
+    }).catch(error => {
+      this.error = error.response.data;
+      this.alert = true;
+      this.individualInformationForm = false;
     });
   },
   components: {
@@ -45,6 +53,7 @@ export default {
     return {
       alert: false,
       error: "",
+      individualInformationForm: true,
       inputs: [
         "firstName",
         "surname",
