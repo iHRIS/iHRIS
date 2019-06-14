@@ -85,6 +85,12 @@ export default new Router({
         import(/* webpackChunkName: "about" */ "./views/Settings.vue")
     },
     {
+      path: "/relationship",
+      name: "relationship",
+      component: () =>
+        import(/* webpackChunkName: "about" */ "./views/Relationship/Relationship.vue")
+    },
+    {
       path: "/terms-and-conditions",
       name: "terms-and-conditions",
       component: () =>

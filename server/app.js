@@ -5,6 +5,7 @@ var logger = require('morgan');
 
 var indexRouter = require('./routes/index');
 var practitionerRouter = require('./routes/practitioner');
+var relationshipRouter = require('./routes/relationship');
 
 var app = express();
 
@@ -22,5 +23,6 @@ app.use( function( req, res, next ) {
 
 app.use('/', indexRouter);
 app.use('/practitioner', practitionerRouter);
+app.use('/relationship', relationshipRouter);
 
 module.exports = app;

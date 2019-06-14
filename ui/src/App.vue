@@ -104,7 +104,12 @@ export default {
           action: "settings",
           avatar: "settings",
           link: "/settings",
-          submenu: [],
+          submenu: [
+            {
+              link: "/relationship",
+              title: "Relationship"
+            }
+          ],
           title: "Settings"
         }
       ]
