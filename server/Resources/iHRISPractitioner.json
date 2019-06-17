@@ -39,6 +39,16 @@
         "id": "Practitioner.gender",
         "path": "Practitioner.gender",
         "min": 1
+      },
+      {
+        "id": "Practitioner.location",
+        "path": "Practitioner.location",
+        "type": [{
+          "code": "Reference",
+          "targetProfile": [
+            "http://hl7.org/fhir/StructureDefinition/Location"
+          ]
+        }]
       }
     ]
   }

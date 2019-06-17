@@ -35,6 +35,10 @@
       {
         "url": "limit",
         "valueString": "period.end != null"
+      },
+      {
+        "url": "name",
+        "valueString": "practitioner_role"
       }
     ]
   },{
