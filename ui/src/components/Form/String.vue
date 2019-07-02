@@ -1,6 +1,5 @@
 <template>
   <v-text-field
-    v-model="string"
     :label="label"
     outline
     :required="required"
