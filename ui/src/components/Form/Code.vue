@@ -1,7 +1,7 @@
 <template>
   <v-select
     :items="codes"
-    label="Outline style"
+    :label="label"
     outline
     :required="required"
     :value="value"

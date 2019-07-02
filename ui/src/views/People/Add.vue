@@ -14,9 +14,8 @@
         {{ error }}
       </v-alert>
 
-      <IndividualInformationForm
-        :practitioner="practitioner"
-        :showSubforms="false"
+      <DynamicForm
+        :fields="fields"
         v-on:cancel="cancel"
         v-on:successfulSubmit="submit"
         v-on:failedSubmit="showFailedSubmit"
@@ -29,7 +28,7 @@
 
 <script>
 import axios from "axios";
-import IndividualInformationForm from "@/components/People/IndividualInformationForm.vue";
+import DynamicForm from "@/components/Form/DynamicForm.vue";
 
 export default {
   created() {
@@ -136,7 +135,7 @@ export default {
     });
   },
   components: {
-    IndividualInformationForm
+    DynamicForm
   },
   data() {
     return {
