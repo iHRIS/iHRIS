@@ -105,7 +105,7 @@ export default {
           avatar: "people",
           submenu: [
             {
-              link: "/people",
+              link: "/people/search",
               title: "Search people"
             },
             {

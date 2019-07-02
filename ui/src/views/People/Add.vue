@@ -33,12 +33,101 @@ import IndividualInformationForm from "@/components/People/IndividualInformation
 
 export default {
   created() {
-    axios.get("/practitioner/describe/page").then(response => {
-      const fields = response.data.extension[0].extension;
-      const resource = response.data.subject.reference;
+    axios.get("/practitioner/describe/page").then(pageResponse => {
+      let fields = [];
 
-      axios.get("/practitioner/describe/definition/" + resource.replace(/StructureDefinition\//, "")).then(response => {
-        console.log(response);
+      const resource = pageResponse.data.subject.reference;
+
+      const primitiveTypes = [
+        "base64Binary",
+        "boolean",
+        "canonical",
+        "code",
+        "date",
+        "dateTime",
+        "decimal",
+        "id",
+        "instant",
+        "markdown",
+        "oid",
+        "positiveInt",
+        "string",
+        "time",
+        "unsignedInt",
+        "uri",
+        "url",
+        "uuid"
+      ];
+
+      pageResponse.data.extension[0].extension.forEach(field => {
+        if (field.valueString) {
+          let name = field.valueString.indexOf(".") > 0 ? field.valueString.slice(field.valueString.indexOf(".") + 1) : field.valueString;
+          fields.push({id: field.valueString, required: false, name: name});
+        }
+      });
+
+      axios.get("/practitioner/describe/definition/" + resource.replace(/StructureDefinition\//, "")).then(definitionResponse => {
+        // this page sets the required properties
+        definitionResponse.data.differential.element.forEach(field => {
+          let cleanFieldId = field.id.replace(/Practitioner\./, "");
+
+          let matchingField = fields.find((value, index) => {
+            let cleanMatchValue = (value.id.indexOf(".") > 0 ? value.id.slice(0, value.id.indexOf(".")) : value.id);
+
+            if (cleanFieldId === cleanMatchValue) {
+              value.required = field.min != 0;
+            }
+          });
+        });
+
+        // need to get the base definition
+        axios.get("/practitioner/describe/definition/" + definitionResponse.data.name).then(structureDefinitionResponse => {
+          let promises = [];
+
+          // get the fields from the definition
+          fields.forEach(field => {
+            if (field.id.indexOf(".") >= 0) {
+              let baseField = field.id.slice(0, field.id.indexOf("."));
+              let matchingField = structureDefinitionResponse.data.snapshot.element.find(structureDefinition => structureDefinition.id == definitionResponse.data.name + "." + baseField);
+
+              if (!promises[baseField]) {
+                promises[baseField] = axios.get("/practitioner/describe/definition/" + matchingField.type[0].code).then(subdefinitionResponse => {
+                  // get all fields matching this subdefinition
+                  let matches = fields.filter(match => match.id.indexOf(baseField) >= 0);
+
+                  matches.forEach(subfield => {
+                    let name = subfield.id.slice(baseField.length + 1);
+                    let submatchingField = subdefinitionResponse.data.snapshot.element.find(structureDefinition => structureDefinition.id == matchingField.type[0].code + "." + name);
+
+                    subfield.description = submatchingField.definition;
+                    subfield.type = submatchingField.type[0].code;
+
+                    if (submatchingField.short.indexOf("|") >= 0) {
+                      subfield.options = submatchingField.short.split("|");
+                    }
+                  });
+                });
+              }
+            } else {
+              let matchingField = structureDefinitionResponse.data.snapshot.element.find(structureDefinition => structureDefinition.id == definitionResponse.data.name + "." + field.id);
+
+              field.description = matchingField.definition;
+              field.type = matchingField.type[0].code;
+
+              if (matchingField.short.indexOf("|") >= 0) {
+                field.options = matchingField.split("|");
+              }
+            }
+          });
+
+          if (promises) {
+            Promise.all(promises).then(result => {
+              this.fields = fields;
+            });
+          } else {
+            this.fields = fields;
+          }
+        });
       });
     }).catch(error => {
       this.error = error.response.data;
@@ -53,6 +142,7 @@ export default {
     return {
       alert: false,
       error: "",
+      fields: [],
       individualInformationForm: true,
       inputs: [
         "firstName",
