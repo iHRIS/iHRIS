@@ -1,6 +1,6 @@
 <template>
   <v-form>
-    <div v-for="field in fields" v-bind:key="field.label">
+    <div v-for="field in fields" v-bind:key="field.id">
       <Base64Binary v-if="field.type == 'base64binary'" :label="field.name" :required="field.required" />
       <Boolean v-if="field.type == 'boolean'" :label="field.name" />
       <Canonical v-if="field.type == 'canonical'" :label="field.name" :required="field.required" />
