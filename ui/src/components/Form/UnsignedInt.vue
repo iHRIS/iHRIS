@@ -33,8 +33,14 @@ export default {
             (this.required && value) || !this.required || "Field is required"
           );
         }
-      }
+      },
+      unsignedInt: null
     };
+  },
+  methods: {
+    getInput() {
+      return this["unsignedInt"];
+    }
   },
   props: ["label", "required", "value"]
 };

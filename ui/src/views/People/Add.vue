@@ -20,8 +20,8 @@
         v-on:cancel="cancel"
         v-on:successfulSubmit="submit"
         v-on:failedSubmit="showFailedSubmit"
-        v-show="individualInformationForm"
-        ref="individualInformationForm"
+        v-show="addPractitionerForm"
+        ref="addPractitionerForm"
       />
     </v-flex>
   </v-container>
@@ -138,7 +138,7 @@ export default {
     }).catch(error => {
       this.error = error.response.data;
       this.alert = true;
-      this.individualInformationForm = false;
+      this.addPractitionerForm = false;
     });
   },
   components: {
@@ -146,11 +146,11 @@ export default {
   },
   data() {
     return {
+      addPractitionerForm: true,
       alert: false,
       dynamicFormKey: 0,
       error: "",
       fields: [],
-      individualInformationForm: true,
       inputs: [
         "firstName",
         "surname",
@@ -165,13 +165,15 @@ export default {
   },
   methods: {
     cancel() {
-      this.$refs.individualInformationForm.reset();
+      this.$refs.addPractitionerForm.reset();
     },
     showFailedSubmit() {
       this.error = "Invalid input, please correct all errors.";
       this.alert = true;
     },
     submit(input) {
+      console.log(input); return;
+
       axios
         .post("/practitioner/add", input)
         .then(response => {

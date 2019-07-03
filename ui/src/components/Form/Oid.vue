@@ -13,6 +13,7 @@
 export default {
   data() {
     return {
+      oid: null,
       rules: {
         oid: value => {
           const pattern = /urn:oid:[0-2](\.(0|[1-9][0-9]*))+/;
@@ -25,6 +26,11 @@ export default {
         }
       }
     };
+  },
+  methods: {
+    getInput() {
+      return this["oid"];
+    }
   },
   props: ["label", "required", "value"]
 };

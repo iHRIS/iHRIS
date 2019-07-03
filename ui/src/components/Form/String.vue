@@ -5,6 +5,7 @@
     :required="required"
     :rules="[rules.required]"
     :value="value"
+    v-model="string"
   ></v-text-field>
 </template>
 
@@ -14,12 +15,20 @@ export default {
     return {
       rules: {
         required: value => {
-          return (
-            (this.required && value) || !this.required || "Field is required"
-          );
+          if (!this.required || value) {
+            return true;
+          }
+
+          return "Field is required";
         }
-      }
+      },
+      string: null
     };
+  },
+  methods: {
+    getInput() {
+      return this["string"];
+    }
   },
   props: ["label", "required", "value"]
 };

@@ -13,6 +13,7 @@
 export default {
   data() {
     return {
+      markdown: null,
       rules: {
         format: value => {
           const pattern = /\s*(\S|\s)*/;
@@ -25,6 +26,11 @@ export default {
         }
       }
     };
+  },
+  methods: {
+    getInput() {
+      return this["markdown"];
+    }
   },
   props: ["label", "required", "value"]
 };

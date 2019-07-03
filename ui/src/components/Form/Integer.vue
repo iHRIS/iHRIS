@@ -13,6 +13,7 @@
 export default {
   data() {
     return {
+      integer: null,
       rules: {
         integer: value => {
           return Number.isInteger(value) || "Value must be an integer";
@@ -24,6 +25,11 @@ export default {
         }
       }
     };
+  },
+  methods: {
+    getInput() {
+      return this["integer"];
+    }
   },
   props: ["label", "required", "value"]
 };
