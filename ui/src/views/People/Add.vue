@@ -16,6 +16,7 @@
 
       <DynamicForm
         :fields="fields"
+        :key="dynamicFormKey"
         v-on:cancel="cancel"
         v-on:successfulSubmit="submit"
         v-on:failedSubmit="showFailedSubmit"
@@ -105,6 +106,10 @@ export default {
                       subfield.options = submatchingField.short.split("|");
                     }
                   });
+
+                  this.fields = fields;
+                  this.dynamicFormKey++;
+                  return Promise.resolve();
                 });
               }
             } else {
@@ -122,9 +127,11 @@ export default {
           if (promises) {
             Promise.all(promises).then(result => {
               this.fields = fields;
+              this.dynamicFormKey++;
             });
           } else {
             this.fields = fields;
+            this.dynamicFormKey++;
           }
         });
       });
@@ -140,6 +147,7 @@ export default {
   data() {
     return {
       alert: false,
+      dynamicFormKey: 0,
       error: "",
       fields: [],
       individualInformationForm: true,
