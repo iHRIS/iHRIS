@@ -13,6 +13,7 @@
 export default {
   data() {
     return {
+      decimal: null,
       rules: {
         decimal: value => {
           if (value === "") {
@@ -36,6 +37,11 @@ export default {
         }
       }
     };
+  },
+  methods: {
+    getInput() {
+      return this["decimal"];
+    }
   },
   props: ["label", "required", "value"]
 };

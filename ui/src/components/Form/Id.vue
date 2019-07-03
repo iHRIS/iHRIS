@@ -13,6 +13,7 @@
 export default {
   data() {
     return {
+      id: null,
       rules: {
         format: value => {
           const pattern = /[A-Za-z0-9\-\.]/;
@@ -32,6 +33,11 @@ export default {
         }
       }
     };
+  },
+  methods: {
+    getInput() {
+      return this["id"];
+    }
   },
   props: ["label", "required", "value"]
 };

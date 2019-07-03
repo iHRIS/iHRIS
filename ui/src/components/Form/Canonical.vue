@@ -13,6 +13,7 @@
 export default {
   data() {
     return {
+      canonical: null,
       rules: {
         required: value => {
           return (
@@ -21,6 +22,11 @@ export default {
         }
       }
     };
+  },
+  methods: {
+    getInput() {
+      return this["canonical"];
+    }
   },
   props: ["label", "required", "value"]
 };

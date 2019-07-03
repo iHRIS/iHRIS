@@ -13,6 +13,7 @@
 export default {
   data() {
     return {
+      base64binary: null,
       rules: {
         base64Binary: value => {
           const pattern = /(\s*([0-9a-zA-Z+=]){4}\s*)+/;
@@ -25,6 +26,11 @@ export default {
         }
       }
     };
+  },
+  methods: {
+    getInput() {
+      return this["base64binary"];
+    }
   },
   props: ["label", "required", "value"]
 };

@@ -6,6 +6,7 @@
     :required="required"
     :value="value"
     :rules="[rules.required, rules.whitespace]"
+    v-model="code"
   ></v-select>
 </template>
 
@@ -13,11 +14,14 @@
 export default {
   data() {
     return {
+      code: null,
       rules: {
         required: value => {
-          return (
-            (this.required && value) || !this.required || "Field is required"
-          );
+          if (!this.required || value) {
+            return true;
+          }
+        
+          return "Field is required";
         },
         whitespace: value => {
           const pattern = /[^\s]+(\s[^\s]+)*/;
@@ -25,6 +29,11 @@ export default {
         }
       }
     };
+  },
+  methods: {
+    getInput() {
+      return this["code"];
+    }
   },
   props: ["codes", "label", "required", "value"]
 };

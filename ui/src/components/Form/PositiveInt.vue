@@ -13,6 +13,7 @@
 export default {
   data() {
     return {
+      positiveInt: null,
       rules: {
         inRange: value => {
           if (value < 1) {
@@ -35,6 +36,11 @@ export default {
         }
       }
     };
+  },
+  methods: {
+    getInput() {
+      return this["positiveInt"];
+    }
   },
   props: ["label", "required", "value"]
 };

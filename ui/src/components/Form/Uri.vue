@@ -19,8 +19,14 @@ export default {
             (this.required && value) || !this.required || "Field is required"
           );
         }
-      }
+      },
+      uri: null
     };
+  },
+  methods: {
+    getInput() {
+      return this["uri"];
+    }
   },
   props: ["label", "required", "value"]
 };
