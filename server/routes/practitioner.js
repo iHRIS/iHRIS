@@ -73,13 +73,16 @@ router.get("/view/:id", function(req, res, next) {
  */
 router.post("/add", function(req, res, next) {
   let data = req.body;
+  data["resourceType"] = "Practitioner";
 
-  models.Practitioner.build(data).validate().then(() => {
-    models.Practitioner.create(data).then((practitioner) => {
-      res.status(201).json(practitioner);
-    }).catch(err => {
-      res.status(400).json(err);
-    })
+  axios.post(config.fhir.server + "/fhir/Practitioner", data, {
+    withCredentials: true,
+    auth: {
+      username: config.fhir.username,
+      password: config.fhir.password
+    }
+  }).then(response => {
+    res.status(201).json(response.data);
   }).catch(err => {
     res.status(400).json(err);
   });
