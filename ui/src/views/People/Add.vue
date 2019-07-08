@@ -62,7 +62,9 @@ export default {
       pageResponse.data.extension[0].extension.forEach(field => {
         if (field.valueString) {
           let name = field.valueString.indexOf(".") > 0 ? field.valueString.slice(field.valueString.indexOf(".") + 1) : field.valueString;
-          fields.push({id: field.valueString, required: false, name: name});
+          let parent = field.valueString.indexOf(".") > 0 ? field.valueString.slice(0, field.valueString.indexOf(".")) : null;
+
+          fields.push({id: field.valueString, required: false, name: name, parent});
         }
       });
 
@@ -103,7 +105,7 @@ export default {
                     subfield.type = submatchingField.type[0].code;
 
                     if (submatchingField.short.indexOf("|") >= 0) {
-                      subfield.options = submatchingField.short.split("|");
+                      subfield.options = submatchingField.short.split("|").map(Function.prototype.call, String.prototype.trim);
                     }
                   });
 
@@ -172,11 +174,23 @@ export default {
       this.alert = true;
     },
     submit(input) {
-      console.log(input); return;
+      let data = {};
+
+      this.fields.forEach(field => {
+        if (!field.parent) {
+          data[field.name] = input[field.name];
+        } else if (!data[field.parent]) {
+          data[field.parent] = {};
+          data[field.parent][field.name] = input[field.name];
+        } else {
+          data[field.parent][field.name] = input[field.name];
+        }
+      });
 
       axios
-        .post("/practitioner/add", input)
-        .then(response => {
+        .post("/practitioner/add", data)
+          .then(response => {
+
           if (response.status === 201) {
             this.$router.push({
               name: "people-view",
