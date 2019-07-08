@@ -190,8 +190,6 @@ export default {
       axios
         .post("/practitioner/add", data)
           .then(response => {
-          console.log("submitted");
-          console.log(response.data); return;
 
           if (response.status === 201) {
             this.$router.push({
