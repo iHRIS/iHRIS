@@ -55,15 +55,17 @@ router.get("/describe/definition/:definition", function(req, res, next) {
 router.get("/view/:id", function(req, res, next) {
   let id = req.params.id;
 
-  models.Practitioner.findOne({
-    where: {
-      id: id
+  axios.get(config.fhir.server + "/fhir/Practitioner?_id=" + id, {
+    withCredentials: true,
+    auth: {
+      username: config.fhir.username,
+      password: config.fhir.password
     }
   }).then(practitioner => {
     if (practitioner === null) {
       res.status(400).json("No practitioner found.");
     } else {
-      res.status(201).json(practitioner);
+      res.status(201).json(practitioner.data);
     }
   });
 });
