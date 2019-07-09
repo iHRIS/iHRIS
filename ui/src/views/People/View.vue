@@ -2,7 +2,7 @@
   <v-container>
     <v-layout row wrap>
       <v-flex xs12 class="display-2 text-xs-center pb-5">
-        {{ practitioner.firstName }} {{ practitioner.surname }}
+        {{ practitioner.name[0].prefix[0] }} {{ practitioner.name[0].given[0] }} {{ practitioner.name[0].family }} {{ practitioner.name[0].suffix[0] }}
       </v-flex>
       <v-flex xs6 class="pr-3">
         <v-card class="mb-5">
@@ -74,7 +74,8 @@ export default {
   created() {
     axios.get("/practitioner/view/" + this.$route.params.id).then(response => {
       if (response.status === 201) {
-        this.practitioner = response.data;
+        console.log(response.data.entry[0].resource);
+        this.practitioner = response.data.entry[0].resource;
         this.$refs.individualInformationForm.updateData(response.data);
       }
     });
