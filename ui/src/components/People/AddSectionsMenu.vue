@@ -34,10 +34,31 @@ import axios from "axios";
 
 export default {
   created() {
-    axios.get("/practitioner/describe").then(response => {
+    axios.get("/practitioner/describe/definition/Practitioner").then(response => {
       if (response.status === 201) {
         const ParseConformance = require("fhir").ParseConformance;
         const parser = new ParseConformance();
+
+        const primitiveTypes = [
+          "base64Binary",
+          "boolean",
+          "canonical",
+          "code",
+          "date",
+          "dateTime",
+          "decimal",
+          "id",
+          "instant",
+          "markdown",
+          "oid",
+          "positiveInt",
+          "string",
+          "time",
+          "unsignedInt",
+          "uri",
+          "url",
+          "uuid"
+        ];
 
         let fields = parser.parseStructureDefinition(response.data);
         let menu = [];
@@ -52,7 +73,7 @@ export default {
         });
 
         fields._properties.forEach(function(field, index) {
-          if (field._properties) {
+          if (field._properties || primitiveTypes.indexOf(field._type) < 0) {
             menu.push({
               subtitle: field._short,
               title: field._name,

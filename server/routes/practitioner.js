@@ -35,18 +35,6 @@ router.get("/describe/definition/:definition", function(req, res, next) {
       res.status(201).json(definition);
     }
   })
-  // axios.get(config.fhir.server + "/fhir/StructureDefinition/" + req.params.definition, {
-  //   params: {},
-  //   withCredentials: true,
-  //   auth: {
-  //     username: config.fhir.username,
-  //     password: config.fhir.password
-  //   }
-  // }).then(response => {
-  //   res.status(201).json(response.data);
-  // }).catch(err => {
-  //   res.status(400).json(err);
-  // });
 });
 
 /**
