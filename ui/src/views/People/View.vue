@@ -74,7 +74,6 @@ export default {
   created() {
     axios.get("/practitioner/view/" + this.$route.params.id).then(response => {
       if (response.status === 201) {
-        console.log(response.data.entry[0].resource);
         this.practitioner = response.data.entry[0].resource;
         this.$refs.individualInformationForm.updateData(response.data);
       }
