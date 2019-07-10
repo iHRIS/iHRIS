@@ -12,7 +12,7 @@
         <template v-slot:activator>
           <v-list-tile
             active-class="primary darken-2"
-            @click.stop="showForm(item.index)"
+            @click.stop="showForm(item.title)"
           >
             <v-list-tile-content>
               <v-list-tile-title class="text-uppercase font-weight-bold">
@@ -34,31 +34,12 @@ import axios from "axios";
 
 export default {
   created() {
+    let component = this;
+
     axios.get("/practitioner/describe/definition/Practitioner").then(response => {
       if (response.status === 201) {
         const ParseConformance = require("fhir").ParseConformance;
         const parser = new ParseConformance();
-
-        const primitiveTypes = [
-          "base64Binary",
-          "boolean",
-          "canonical",
-          "code",
-          "date",
-          "dateTime",
-          "decimal",
-          "id",
-          "instant",
-          "markdown",
-          "oid",
-          "positiveInt",
-          "string",
-          "time",
-          "unsignedInt",
-          "uri",
-          "url",
-          "uuid"
-        ];
 
         let fields = parser.parseStructureDefinition(response.data);
         let menu = [];
@@ -73,7 +54,7 @@ export default {
         });
 
         fields._properties.forEach(function(field, index) {
-          if (field._properties || primitiveTypes.indexOf(field._type) < 0) {
+          if (field._properties || component._self.primitiveTypes.indexOf(field._type) < 0) {
             menu.push({
               subtitle: field._short,
               title: field._name,
@@ -82,7 +63,6 @@ export default {
           }
         });
 
-        this.fields = fields._properties;
         this.menu = menu;
       }
     });
@@ -90,16 +70,69 @@ export default {
   data() {
     return {
       fields: [],
-      menu: []
+      menu: [],
+      primitiveTypes: [
+        "base64Binary",
+        "boolean",
+        "canonical",
+        "code",
+        "date",
+        "dateTime",
+        "decimal",
+        "id",
+        "instant",
+        "markdown",
+        "oid",
+        "positiveInt",
+        "string",
+        "time",
+        "unsignedInt",
+        "uri",
+        "url",
+        "uuid"
+      ]
     };
   },
   methods: {
-    showForm(index) {
-      this.$emit(
-        "toggleForm",
-        this.fields[index]._properties,
-        this.fields[index]._name
-      );
+    describe(definition) {
+      let component = this;
+
+      return axios.get("/practitioner/describe/definition/" + definition.charAt(0).toUpperCase() + definition.slice(1)).then(response => {
+        if (response.status != 201) {
+          return [];
+        }
+
+        let fields = [];
+
+        response.data.snapshot.element.forEach(function(field, index) {
+          if (field.id.indexOf(".") >= 0) {
+            let sanitizedField = field.id.slice(field.id.indexOf(".") + 1);
+
+            if (sanitizedField == "id" || field.type[0].code == "Extension") {
+              return;
+            }
+
+            if (component._self.primitiveTypes.indexOf(field.type[0].code) >= 0) {
+              fields.push({
+                subtitle: field.definition,
+                title: field.short,
+                id: sanitizedField
+              });
+            } else {
+              fields[sanitizedField] = component._self.describe(sanitizedField);
+            }
+          }
+        });
+
+        return fields;
+      }).catch(err => {
+        return [];
+      });
+    },
+    showForm(definition) {
+      this._self.describe(definition).then(fields => {
+        this.$emit("toggleForm", fields);
+      });
     }
   }
 };
