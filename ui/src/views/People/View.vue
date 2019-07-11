@@ -100,6 +100,17 @@ export default {
       this.editing = false;
     },
     submitDetailsForm() {
+      let component = this;
+      let input = this.$refs.detailsForm.getInputs();
+
+      let practitioner = this.practitioner;
+
+      practitioner[this.detailTitle] = input;
+
+      axios.put("/practitioner/edit", practitioner).then(response => {
+        console.log(response);
+        //component.cancelDetailsForm();
+      });
     },
     submitIndividualInformationForm() {
       let input = this.$refs.individualInformationForm.getInputs();
@@ -120,6 +131,8 @@ export default {
       this.details = true;
       this.detailFields = fields;
       this.detailTitle = title;
+
+      this.$refs.detailsForm.changeFields(fields);
     }
   },
   name: "AddSections"

@@ -52,6 +52,9 @@ import Uuid from "@/components/Form/Uuid.vue";
 
 export default {
   created() {
+    this.changeFields(this.fields);
+    return;
+
     let inputs = [];
 
     if (this.fields && this.fields.length) {
@@ -95,7 +98,16 @@ export default {
       this.$emit("cancel");
     },
     changeFields(fields) {
+      let inputs = [];
+
+      if (fields && fields.length) {
+        fields.forEach(field => {
+          inputs.push(field.name);
+        });
+      }
+
       this.fields = fields;
+      this.inputs = inputs;
     },
     getInputs() {
       let inputs = {};

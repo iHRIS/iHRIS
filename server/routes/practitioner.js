@@ -85,7 +85,7 @@ router.put("/edit", function(req, res, next) {
   let data = req.body;
   data["resourceType"] = "Practitioner";
 
-  axios.post(config.fhir.server + "/fhir/Practitioner/" + data.id, data, {
+  axios.put(config.fhir.server + "/fhir/Practitioner/" + data.id, data, {
     withCredentials: true,
     auth: {
       username: config.fhir.username,
