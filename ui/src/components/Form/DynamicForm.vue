@@ -53,17 +53,6 @@ import Uuid from "@/components/Form/Uuid.vue";
 export default {
   created() {
     this.changeFields(this.fields);
-    return;
-
-    let inputs = [];
-
-    if (this.fields && this.fields.length) {
-      this.fields.forEach(field => {
-        inputs.push(field.name);
-      });
-    }
-
-    this.inputs = inputs;
   },
   components: {
     Base64Binary,

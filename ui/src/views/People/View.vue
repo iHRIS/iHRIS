@@ -108,8 +108,7 @@ export default {
       practitioner[this.detailTitle] = input;
 
       axios.put("/practitioner/edit", practitioner).then(response => {
-        console.log(response);
-        //component.cancelDetailsForm();
+        component.cancelDetailsForm();
       });
     },
     submitIndividualInformationForm() {
