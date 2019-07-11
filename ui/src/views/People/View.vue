@@ -117,8 +117,6 @@ export default {
       this.details = true;
       this.detailFields = fields;
       this.detailTitle = title;
-
-      //this.$refs.detailsForm.changeFields(fields, title);
     }
   },
   name: "AddSections"
