@@ -81,23 +81,18 @@ router.post("/add", function(req, res, next) {
 /**
  * Edit an existing practitioner
  */
-router.post("/edit", function(req, res, next) {
+router.put("/edit", function(req, res, next) {
   let data = req.body;
+  data["resourceType"] = "Practitioner";
 
-  models.Practitioner.findOne({
-    where: {
-      id: data.id
+  axios.post(config.fhir.server + "/fhir/Practitioner/" + data.id, data, {
+    withCredentials: true,
+    auth: {
+      username: config.fhir.username,
+      password: config.fhir.password
     }
-  }).then(practitioner => {
-    if (practitioner === null) {
-      res.status(400).json("No practitioner found.");
-    } else {
-      practitioner.update(data).then(() => {
-        res.status(201).json(practitioner);
-      }).catch(err => {
-        res.status(400).json(err);
-      });
-    }
+  }).then(response => {
+    res.status(201).json(response.data);
   }).catch(err => {
     res.status(400).json(err);
   });
