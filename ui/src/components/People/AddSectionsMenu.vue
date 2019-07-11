@@ -116,7 +116,10 @@ export default {
               fields.push({
                 subtitle: field.definition,
                 title: field.short,
-                id: sanitizedField
+                id: sanitizedField,
+                name: sanitizedField,
+                type: field.type[0].code,
+                required: field.min > 0
               });
             } else {
               fields[sanitizedField] = component._self.describe(sanitizedField);
@@ -131,7 +134,7 @@ export default {
     },
     showForm(definition) {
       this._self.describe(definition).then(fields => {
-        this.$emit("toggleForm", fields);
+        this.$emit("toggleForm", fields, definition);
       });
     }
   }

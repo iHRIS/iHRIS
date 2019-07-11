@@ -38,8 +38,11 @@
         </v-card>
 
         <v-card v-show="details">
+          <v-card-title class="display-1">
+            {{ detailTitle }}
+          </v-card-title>
           <v-card-text>
-            <DetailsForm
+            <DynamicForm
               v-show="details"
               :fields="detailFields"
               v-on:cancel="cancelDetailsForm"
@@ -60,14 +63,14 @@
 import axios from "axios";
 
 import AddSectionsMenu from "@/components/People/AddSectionsMenu.vue";
-import DetailsForm from "@/components/People/DetailsForm.vue";
+import DynamicForm from "@/components/Form/DynamicForm.vue";
 import IndividualInformationForm from "@/components/People/IndividualInformationForm.vue";
 import PractitionerBasicProfile from "@/components/People/PractitionerBasicProfile.vue";
 
 export default {
   components: {
     AddSectionsMenu,
-    DetailsForm,
+    DynamicForm,
     IndividualInformationForm,
     PractitionerBasicProfile
   },
@@ -75,7 +78,6 @@ export default {
     axios.get("/practitioner/view/" + this.$route.params.id).then(response => {
       if (response.status === 201) {
         this.practitioner = response.data.entry[0].resource;
-        this.$refs.individualInformationForm.updateData(response.data);
       }
     });
   },
@@ -83,6 +85,7 @@ export default {
     return {
       details: false,
       detailFields: {},
+      detailTitle: null,
       editing: false,
       practitioner: {}
     };
@@ -113,8 +116,9 @@ export default {
     toggleForm(fields, title) {
       this.details = true;
       this.detailFields = fields;
+      this.detailTitle = title;
 
-      this.$refs.detailsForm.changeFields(fields, title);
+      //this.$refs.detailsForm.changeFields(fields, title);
     }
   },
   name: "AddSections"

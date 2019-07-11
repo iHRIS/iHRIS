@@ -54,9 +54,11 @@ export default {
   created() {
     let inputs = [];
 
-    this.fields.forEach(field => {
-      inputs.push(field.name);
-    });
+    if (this.fields && this.fields.length) {
+      this.fields.forEach(field => {
+        inputs.push(field.name);
+      });
+    }
 
     this.inputs = inputs;
   },
@@ -91,6 +93,10 @@ export default {
   methods: {
     cancel() {
       this.$emit("cancel");
+    },
+    changeFields(fields) {
+      console.log(fields);
+      this.fields = fields;
     },
     getInputs() {
       let inputs = {};
