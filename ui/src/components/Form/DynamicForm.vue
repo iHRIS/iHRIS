@@ -52,15 +52,7 @@ import Uuid from "@/components/Form/Uuid.vue";
 
 export default {
   created() {
-    let inputs = [];
-
-    if (this.fields && this.fields.length) {
-      this.fields.forEach(field => {
-        inputs.push(field.name);
-      });
-    }
-
-    this.inputs = inputs;
+    this.changeFields(this.fields);
   },
   components: {
     Base64Binary,
@@ -95,7 +87,16 @@ export default {
       this.$emit("cancel");
     },
     changeFields(fields) {
+      let inputs = [];
+
+      if (fields && fields.length) {
+        fields.forEach(field => {
+          inputs.push(field.name);
+        });
+      }
+
       this.fields = fields;
+      this.inputs = inputs;
     },
     getInputs() {
       let inputs = {};
