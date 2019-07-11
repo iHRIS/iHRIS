@@ -95,7 +95,6 @@ export default {
       this.$emit("cancel");
     },
     changeFields(fields) {
-      console.log(fields);
       this.fields = fields;
     },
     getInputs() {
