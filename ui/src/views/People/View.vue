@@ -92,6 +92,9 @@ export default {
   },
   methods: {
     cancelDetailsForm() {
+      this.details = false;
+      this.detailsFields = {};
+      this.detailTitle = null;
     },
     cancelIndividualInformationForm() {
       this.editing = false;
