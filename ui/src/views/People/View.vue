@@ -143,8 +143,7 @@ export default {
       detailFields: {},
       detailTitle: null,
       editing: false,
-      practitioner: {},
-      sanitizedPractitioner: []
+      practitioner: {}
     };
   },
   methods: {
