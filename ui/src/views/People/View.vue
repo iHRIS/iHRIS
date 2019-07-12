@@ -1,9 +1,14 @@
 <template>
   <v-container>
-    <v-layout row wrap>
-      <v-flex xs12 class="display-2 text-xs-center pb-5">
+    <v-layout row wrap class="pb-5">
+      <v-flex xs6 class="display-2 text-xs-left">
         {{ practitioner.name[0].prefix[0] }} {{ practitioner.name[0].given[0] }} {{ practitioner.name[0].family }} {{ practitioner.name[0].suffix[0] }}
       </v-flex>
+      <v-flex xs3 offset-xs3>
+        <Alert ref="alert" />
+      </v-flex>
+    </v-layout>
+    <v-layout>
       <v-flex xs6 class="pr-3">
         <v-card class="mb-5">
           <v-card-title class="display-1">
@@ -63,6 +68,7 @@
 import axios from "axios";
 
 import AddSectionsMenu from "@/components/People/AddSectionsMenu.vue";
+import Alert from "@/components/Layout/Alert.vue";
 import DynamicForm from "@/components/Form/DynamicForm.vue";
 import IndividualInformationForm from "@/components/People/IndividualInformationForm.vue";
 import PractitionerBasicProfile from "@/components/People/PractitionerBasicProfile.vue";
@@ -70,6 +76,7 @@ import PractitionerBasicProfile from "@/components/People/PractitionerBasicProfi
 export default {
   components: {
     AddSectionsMenu,
+    Alert,
     DynamicForm,
     IndividualInformationForm,
     PractitionerBasicProfile
@@ -95,6 +102,8 @@ export default {
       this.details = false;
       this.detailsFields = {};
       this.detailTitle = null;
+
+      this.$refs.alert.reset();
     },
     cancelIndividualInformationForm() {
       this.editing = false;
@@ -104,11 +113,17 @@ export default {
       let input = this.$refs.detailsForm.getInputs();
 
       let practitioner = this.practitioner;
+      let title = this.detailTitle;
 
       practitioner[this.detailTitle] = input;
 
       axios.put("/practitioner/edit", practitioner).then(response => {
-        component.cancelDetailsForm();
+        if (response.status == 201) {
+          component.cancelDetailsForm();
+          component.$refs.alert.changeMessage(title + " added successfully!", "success");
+        } else {
+          component.$refs.alert.changeMessage("There was an error saving this data.", "error");
+        }
       });
     },
     submitIndividualInformationForm() {
@@ -131,6 +146,7 @@ export default {
       this.detailFields = fields;
       this.detailTitle = title;
 
+      this.$refs.alert.reset();
       this.$refs.detailsForm.changeFields(fields);
     }
   },
