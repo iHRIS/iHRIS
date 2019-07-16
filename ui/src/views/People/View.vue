@@ -104,7 +104,6 @@ export default {
       details: false,
       detailFields: {},
       detailTitle: null,
-      editing: {},
       practitioner: {}
     };
   },
