@@ -11,52 +11,12 @@
     <v-layout>
       <v-flex xs6 class="pr-3">
         <div v-for="(element, index) in this.practitioner">
-          <v-card v-if="index != 'id' && index != 'resourceType' && index != 'active'" class="mb-5">
-            <v-card-title class="display-1">
-              {{ index }}
-              <v-spacer />
-              <v-btn
-                fab
-                class="primary"
-                @click.stop="editing = true"
-                v-show="!editing"
-              >
-                <v-icon>edit</v-icon>
-              </v-btn>
-            </v-card-title>
-            <v-card-text v-for="(value, name) in element">
-              <div v-if="Array.isArray(value) || typeof value === 'object'">
-                <div v-if="Number.isInteger(name)">
-                  <div v-for="(data, fieldIndex) in value">
-                    <v-layout row>
-                      <v-flex xs4 class="font-weight-bold">{{ fieldIndex }}</v-flex>
-                      <v-flex xs8>{{ data }}</v-flex>
-                    </v-layout>
-
-                    <v-divider class="pb-3" />
-                  </div>
-                </div>
-                <div v-else>
-                  <v-layout row>
-                    <v-flex xs4 class="font-weight-bold">{{ name }}</v-flex>
-                    <v-flex xs8 v-for="data in value">
-                      {{ data }}
-                    </v-flex>
-                  </v-layout>
-
-                  <v-divider class="pb-3" />
-                </div>
-              </div>
-              <div v-else>
-                <v-layout row>
-                  <v-flex xs4 class="font-weight-bold">{{ name }}</v-flex>
-                  <v-flex xs8>{{ value }}</v-flex>
-                </v-layout>
-
-                <v-divider class="pb-3" />
-              </div>
-            </v-card-text>
-          </v-card>
+          <DetailsCard
+            v-if="index != 'id' && index != 'resourceType' && index != 'active'"
+            :fields="element"
+            :name="index"
+            editButton
+          />
         </div>
 
         <v-card class="mb-5">
@@ -117,6 +77,7 @@
 import axios from "axios";
 
 import AddSectionsMenu from "@/components/People/AddSectionsMenu.vue";
+import DetailsCard from "@/components/People/DetailsCard.vue";
 import Alert from "@/components/Layout/Alert.vue";
 import DynamicForm from "@/components/Form/DynamicForm.vue";
 import IndividualInformationForm from "@/components/People/IndividualInformationForm.vue";
@@ -126,6 +87,7 @@ export default {
   components: {
     AddSectionsMenu,
     Alert,
+    DetailsCard,
     DynamicForm,
     IndividualInformationForm,
     PractitionerBasicProfile
@@ -142,7 +104,7 @@ export default {
       details: false,
       detailFields: {},
       detailTitle: null,
-      editing: false,
+      editing: {},
       practitioner: {}
     };
   },
