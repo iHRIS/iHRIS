@@ -4,6 +4,9 @@
 
 <script>
 export default {
+  created() {
+    this.boolean = this.checked;
+  },
   data() {
     return {
       boolean: false

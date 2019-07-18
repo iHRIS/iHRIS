@@ -13,9 +13,9 @@
         <div v-for="(element, index) in this.practitioner">
           <DetailsCard
             v-if="index != 'id' && index != 'resourceType' && index != 'active'"
-            :fields="element"
+            :data="element"
             :name="index"
-            editButton
+            edit
           />
         </div>
 

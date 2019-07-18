@@ -11,6 +11,9 @@
 
 <script>
 export default {
+  created() {
+    this.markdown = this.value;
+  },
   data() {
     return {
       markdown: null,

@@ -11,6 +11,9 @@
 
 <script>
 export default {
+  created() {
+    this.integer = this.value;
+  },
   data() {
     return {
       integer: null,

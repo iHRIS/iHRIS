@@ -11,6 +11,9 @@
 
 <script>
 export default {
+  created() {
+    this.uri = this.value;
+  },
   data() {
     return {
       rules: {

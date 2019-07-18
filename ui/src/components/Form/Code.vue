@@ -12,6 +12,9 @@
 
 <script>
 export default {
+  created() {
+    this.code = this.value;
+  },
   data() {
     return {
       code: null,

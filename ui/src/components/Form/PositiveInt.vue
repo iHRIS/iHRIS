@@ -11,6 +11,9 @@
 
 <script>
 export default {
+  created() {
+    this.positiveInt = this.value;
+  },
   data() {
     return {
       positiveInt: null,
