@@ -30,11 +30,6 @@
 import axios from "axios";
 
 export default {
-  created() {
-    axios.get("/practitioner/describe").then(response => {
-      console.log(response);
-    });
-  },
   data() {
     return {
       alert: false,

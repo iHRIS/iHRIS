@@ -11,6 +11,9 @@
 
 <script>
 export default {
+  created() {
+    this.oid = this.value;
+  },
   data() {
     return {
       oid: null,

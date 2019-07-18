@@ -11,6 +11,9 @@
 
 <script>
 export default {
+  created() {
+    this.date = this.value;
+  },
   data() {
     return {
       date: null,

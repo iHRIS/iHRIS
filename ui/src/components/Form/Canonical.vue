@@ -11,6 +11,9 @@
 
 <script>
 export default {
+  created() {
+    this.canonical = this.value;
+  },
   data() {
     return {
       canonical: null,

@@ -11,6 +11,9 @@
 
 <script>
 export default {
+  created() {
+    this.instant = this.value;
+  },
   data() {
     return {
       instant: null,

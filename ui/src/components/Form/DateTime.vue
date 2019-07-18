@@ -5,12 +5,14 @@
     outline
     :required="required"
     :rules="[rules.datetime, rules.required]"
-    :value="value"
   ></v-text-field>
 </template>
 
 <script>
 export default {
+  created() {
+    this.datetime = this.value;
+  },
   data() {
     return {
       datetime: null,

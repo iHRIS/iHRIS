@@ -11,6 +11,9 @@
 
 <script>
 export default {
+  created() {
+    this.unsignedInt = this.value;
+  },
   data() {
     return {
       rules: {

@@ -11,6 +11,9 @@
 
 <script>
 export default {
+  created() {
+    this.base64binary = this.value;
+  },
   data() {
     return {
       base64binary: null,

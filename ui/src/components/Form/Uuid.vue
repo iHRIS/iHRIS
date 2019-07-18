@@ -11,6 +11,9 @@
 
 <script>
 export default {
+  created() {
+    this.uuid = this.value;
+  },
   data() {
     return {
       rules: {

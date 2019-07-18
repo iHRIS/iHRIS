@@ -11,6 +11,9 @@
 
 <script>
 export default {
+  created() {
+    this.decimal = this.value;
+  },
   data() {
     return {
       decimal: null,

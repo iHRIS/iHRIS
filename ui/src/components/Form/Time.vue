@@ -11,6 +11,9 @@
 
 <script>
 export default {
+  created() {
+    this.time = this.value;
+  },
   data() {
     return {
       rules: {

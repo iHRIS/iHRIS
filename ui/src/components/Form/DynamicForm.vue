@@ -1,25 +1,25 @@
 <template>
   <v-form ref="form">
     <div v-for="field in fields" v-bind:key="field.id">
-      <Base64Binary v-if="field.type == 'base64binary'" :label="field.name" :required="field.required" :ref="field.name" />
-      <Boolean v-if="field.type == 'boolean'" :label="field.name" ref="active" />
-      <Canonical v-if="field.type == 'canonical'" :label="field.name" :required="field.required" :ref="field.name" />
-      <Code v-if="field.type == 'code'" :label="field.name" :required="field.required" :codes="field.options" :ref="field.name" />
-      <Date v-if="field.type == 'date'" :label="field.name" :required="field.required" :ref="field.name" />
-      <DateTime v-if="field.type == 'datetime'" :label="field.name" :required="field.required" :ref="field.name" />
-      <Decimal v-if="field.type == 'decimal'" :label="field.name" :required="field.required" :ref="field.name" />
-      <Id v-if="field.type == 'id'" :label="field.name" :required="field.required" :ref="field.name" />
-      <Instant v-if="field.type == 'instant'" :label="field.name" :required="field.required" :ref="field.name" />
-      <Integer v-if="field.type == 'integer'" :label="field.name" :required="field.required" :ref="field.name" />
-      <Markdown v-if="field.type == 'markdown'" :label="field.name" :required="field.required" :ref="field.name" />
-      <Oid v-if="field.type == 'oid'" :label="field.name" :required="field.required" :ref="field.name" />
-      <PositiveInt v-if="field.type == 'positiveint'" :label="field.name" :required="field.required" :ref="field.name" />
-      <String v-if="field.type == 'string'" :label="field.name" :required="field.required" :ref="field.name" />
-      <Time v-if="field.type == 'time'" :label="field.name" :required="field.required" :ref="field.name" />
-      <UnsignedInt v-if="field.type == 'unsignedint'" :label="field.name" :required="field.required" :ref="field.name" />
-      <Uri v-if="field.type == 'uri'" :label="field.name" :required="field.required" :ref="field.name" />
-      <Url v-if="field.type == 'url'" :label="field.name" :required="field.required" :ref="field.name" />
-      <Uuid v-if="field.type == 'uuid'" :label="field.name" :required="field.required" :ref="field.name" />
+      <Base64Binary v-if="field.type == 'base64binary'" :label="field.name" :required="field.required" :ref="field.name" :value="field.value" />
+      <Boolean v-if="field.type == 'boolean'" :label="field.name" ref="active" :value="field.value" />
+      <Canonical v-if="field.type == 'canonical'" :label="field.name" :required="field.required" :ref="field.name" :value="field.value" />
+      <Code v-if="field.type == 'code'" :label="field.name" :required="field.required" :codes="field.options" :ref="field.name" :value="field.value" />
+      <Date v-if="field.type == 'date'" :label="field.name" :required="field.required" :ref="field.name" :value="field.value" />
+      <DateTime v-if="field.type == 'datetime'" :label="field.name" :required="field.required" :ref="field.name" :datetime="field.value" />
+      <Decimal v-if="field.type == 'decimal'" :label="field.name" :required="field.required" :ref="field.name" :value="field.value" />
+      <Id v-if="field.type == 'id'" :label="field.name" :required="field.required" :ref="field.name" :value="field.value" />
+      <Instant v-if="field.type == 'instant'" :label="field.name" :required="field.required" :ref="field.name" :value="field.value" />
+      <Integer v-if="field.type == 'integer'" :label="field.name" :required="field.required" :ref="field.name" :value="field.value" />
+      <Markdown v-if="field.type == 'markdown'" :label="field.name" :required="field.required" :ref="field.name" :value="field.value" />
+      <Oid v-if="field.type == 'oid'" :label="field.name" :required="field.required" :ref="field.name" :value="field.value" />
+      <PositiveInt v-if="field.type == 'positiveint'" :label="field.name" :required="field.required" :ref="field.name" :value="field.value" />
+      <String v-if="field.type == 'string'" :label="field.name" :required="field.required" :ref="field.name" :value="field.value" />
+      <Time v-if="field.type == 'time'" :label="field.name" :required="field.required" :ref="field.name" :value="field.value" />
+      <UnsignedInt v-if="field.type == 'unsignedint'" :label="field.name" :required="field.required" :ref="field.name" :value="field.value" />
+      <Uri v-if="field.type == 'uri'" :label="field.name" :required="field.required" :ref="field.name" :value="field.value" />
+      <Url v-if="field.type == 'url'" :label="field.name" :required="field.required" :ref="field.name" :value="field.value" />
+      <Uuid v-if="field.type == 'uuid'" :label="field.name" :required="field.required" :ref="field.name" :value="field.value" />
     </div>
 
     <v-layout align-center justify-end fill-height>
@@ -118,6 +118,6 @@ export default {
       }
     },
   },
-  props: ["fields"]
+  props: ["fields", "name"]
 };
 </script>
