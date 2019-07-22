@@ -12,7 +12,7 @@
         <template v-slot:activator>
           <v-list-tile
             active-class="primary darken-2"
-            @click.stop="showForm(item.title)"
+            @click.stop="showForm(item.title, item.definition)"
           >
             <v-list-tile-content>
               <v-list-tile-title class="text-uppercase font-weight-bold">
@@ -58,7 +58,8 @@ export default {
             menu.push({
               subtitle: field._short,
               title: field._name,
-              index: index
+              index: index,
+              definition: field._type
             });
           }
         });
@@ -132,9 +133,9 @@ export default {
         return [];
       });
     },
-    showForm(definition) {
+    showForm(title, definition) {
       this._self.describe(definition).then(fields => {
-        this.$emit("toggleForm", fields, definition);
+        this.$emit("toggleForm", fields, title);
       });
     }
   }

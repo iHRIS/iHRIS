@@ -21,38 +21,6 @@
           />
         </div>
 
-        <v-card class="mb-5">
-          <v-card-title class="display-1">
-            Individual Information
-            <v-spacer />
-            <v-btn
-              fab
-              class="primary"
-              @click.stop="editing = true"
-              v-show="!editing"
-            >
-              <v-icon>edit</v-icon>
-            </v-btn>
-          </v-card-title>
-          <v-card-text class="primary--text text-uppercase">
-            Basic Profile
-          </v-card-text>
-          <v-card-text>
-            <PractitionerBasicProfile
-              v-show="!editing"
-              :practitioner="practitioner"
-            />
-
-            <IndividualInformationForm
-              v-show="editing"
-              :practitioner="practitioner"
-              v-on:cancel="cancelIndividualInformationForm"
-              v-on:successfulSubmit="submitIndividualInformationForm"
-              ref="individualInformationForm"
-            />
-          </v-card-text>
-        </v-card>
-
         <v-card v-show="details">
           <v-card-title class="display-1">
             {{ detailTitle }}
