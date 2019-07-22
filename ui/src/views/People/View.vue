@@ -15,7 +15,9 @@
             v-if="index != 'id' && index != 'resourceType' && index != 'active'"
             :data="element"
             :name="index"
+            v-on:saveData="saveSubsectionData"
             edit
+            :ref="'subsection-' + index"
           />
         </div>
 
@@ -117,6 +119,20 @@ export default {
     },
     cancelIndividualInformationForm() {
       this.editing = false;
+    },
+    saveSubsectionData(data, field) {
+      let component = this;
+      let practitioner = this.practitioner;
+
+      practitioner[field] = data;
+
+      axios.put("/practitioner/edit", practitioner).then(response => {
+        if (response.status == 201) {
+          component.$refs["subsection-" + field].showAlert("Data changed successfully!", "success");
+        } else {
+          component.$refs["subsection-" + field].showAlert("There was an error saving this data.", "error");
+        }
+      });
     },
     submitDetailsForm() {
       let component = this;

@@ -107,6 +107,9 @@ export default {
 
       return inputs;
     },
+    getName() {
+      return this.name;
+    },
     reset() {
       this.$refs.form.reset();
     },

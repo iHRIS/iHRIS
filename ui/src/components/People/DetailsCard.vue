@@ -46,13 +46,16 @@
     </v-card-text>
 
     <v-card-text v-show="editing">
+      <v-alert v-model="alert.show" dismissable :type="alert.type">
+        {{ alert.message }}
+      </v-alert>
+
       <DynamicForm
         :fields="this.fields"
         :name="this.name"
         v-on:cancel="cancel"
         v-on:successfulSubmit="submit"
         v-on:failedSubmit="showFailedSubmit"
-        v-show="editing"
         ref="dynamicEditingForm"
       />
     </v-card-text>
@@ -114,6 +117,11 @@ export default {
   },
   data() {
     return {
+      alert: {
+        message: null,
+        show: false,
+        type: null
+      },
       editButton: false,
       editing: false,
       fields: []
@@ -124,9 +132,18 @@ export default {
       this.editing = false;
       this.editButton = true;
     },
+    showAlert(message, type) {
+      this.alert.message = message;
+      this.alert.type = type;
+      this.alert.show = true;
+    },
     showFailedSubmit() {
+      this.alert.message = "Invalid input, please correct all errors.";
+      this.alert.type = "error";
+      this.alert.show = true;
     },
     submit() {
+      this.$emit('saveData', this.$refs.dynamicEditingForm.getInputs(), this.$refs.dynamicEditingForm.getName());
     }
   },
   props: {
