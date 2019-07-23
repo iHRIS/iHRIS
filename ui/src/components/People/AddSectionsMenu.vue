@@ -16,7 +16,7 @@
           >
             <v-list-tile-content>
               <v-list-tile-title class="text-uppercase font-weight-bold">
-                {{ item.title }}
+                {{ item.title | sentenceCase }}
               </v-list-tile-title>
               <v-list-tile-sub-title class="white--text">
                 {{ item.subtitle }}
