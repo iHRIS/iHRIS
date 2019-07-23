@@ -2,7 +2,7 @@
   <v-container>
     <v-layout row wrap class="pb-5">
       <v-flex xs6 class="display-2 text-xs-left">
-        {{ practitioner.name[0].prefix[0] }} {{ practitioner.name[0].given[0] }} {{ practitioner.name[0].family }} {{ practitioner.name[0].suffix[0] }}
+        {{ name }}
       </v-flex>
       <v-flex xs3 offset-xs3>
         <Alert ref="alert" />
@@ -10,7 +10,7 @@
     </v-layout>
     <v-layout>
       <v-flex xs6 class="pr-3">
-        <div v-for="(element, index) in this.practitioner">
+        <div v-for="(element, index) in this.practitioner" v-bind:key="index">
           <DetailsCard
             v-if="index != 'id' && index != 'resourceType' && index != 'active'"
             :data="element"
@@ -50,22 +50,19 @@ import AddSectionsMenu from "@/components/People/AddSectionsMenu.vue";
 import DetailsCard from "@/components/People/DetailsCard.vue";
 import Alert from "@/components/Layout/Alert.vue";
 import DynamicForm from "@/components/Form/DynamicForm.vue";
-import IndividualInformationForm from "@/components/People/IndividualInformationForm.vue";
-import PractitionerBasicProfile from "@/components/People/PractitionerBasicProfile.vue";
 
 export default {
   components: {
     AddSectionsMenu,
     Alert,
     DetailsCard,
-    DynamicForm,
-    IndividualInformationForm,
-    PractitionerBasicProfile
+    DynamicForm
   },
   created() {
     axios.get("/practitioner/view/" + this.$route.params.id).then(response => {
       if (response.status === 201) {
         this.practitioner = response.data.entry[0].resource;
+        this.updateName();
       }
     });
   },
@@ -74,6 +71,7 @@ export default {
       details: false,
       detailFields: {},
       detailTitle: null,
+      name: null,
       practitioner: {}
     };
   },
@@ -85,9 +83,6 @@ export default {
 
       this.$refs.alert.reset();
     },
-    cancelIndividualInformationForm() {
-      this.editing = false;
-    },
     saveSubsectionData(data, field) {
       let component = this;
       let practitioner = this.practitioner;
@@ -95,10 +90,19 @@ export default {
       practitioner[field] = data;
 
       axios.put("/practitioner/edit", practitioner).then(response => {
+        component.practitioner = practitioner;
+        component.updateName();
+
         if (response.status == 201) {
-          component.$refs["subsection-" + field].showAlert("Data changed successfully!", "success");
+          component.$refs["subsection-" + field].showAlert(
+            "Data changed successfully!",
+            "success"
+          );
         } else {
-          component.$refs["subsection-" + field].showAlert("There was an error saving this data.", "error");
+          component.$refs["subsection-" + field].showAlert(
+            "There was an error saving this data.",
+            "error"
+          );
         }
       });
     },
@@ -114,23 +118,14 @@ export default {
       axios.put("/practitioner/edit", practitioner).then(response => {
         if (response.status == 201) {
           component.cancelDetailsForm();
-          component.$refs.alert.changeMessage(title + " added successfully!", "success");
+          component.$refs.alert.changeMessage(
+            title + " added successfully!",
+            "success"
+          );
         } else {
-          component.$refs.alert.changeMessage("There was an error saving this data.", "error");
-        }
-      });
-    },
-    submitIndividualInformationForm() {
-      let input = this.$refs.individualInformationForm.getInputs();
-      input["id"] = this.$route.params.id;
-
-      axios.post("/practitioner/edit", input).then(response => {
-        if (response.status === 201) {
-          this.practitioner = response.data;
-          this.$refs.individualInformationForm.updateData(response.data);
-        } else {
-          this.$refs.individualInformationForm.showErrors(
-            "There was an error saving this data."
+          component.$refs.alert.changeMessage(
+            "There was an error saving this data.",
+            "error"
           );
         }
       });
@@ -142,6 +137,30 @@ export default {
 
       this.$refs.alert.reset();
       this.$refs.detailsForm.changeFields(fields);
+    },
+    updateName() {
+      let name = "";
+      let practitioner = this.practitioner;
+
+      if (practitioner.name[0]) {
+        if (practitioner.name[0].prefix[0]) {
+          name += practitioner.name[0].prefix[0] + " ";
+        }
+
+        if (practitioner.name[0].given[0]) {
+          name += practitioner.name[0].given[0] + " ";
+        }
+
+        if (practitioner.name[0].family) {
+          name += practitioner.name[0].family + " ";
+        }
+
+        if (practitioner.name[0].suffix[0]) {
+          name += practitioner.name[0].suffix[0] + " ";
+        }
+      }
+
+      this.name = name.trim();
     }
   },
   name: "AddSections"
