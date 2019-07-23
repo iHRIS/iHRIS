@@ -23,7 +23,7 @@
 
         <v-card v-show="details">
           <v-card-title class="display-1">
-            {{ detailTitle }}
+            {{ detailTitle | sentenceCase }}
           </v-card-title>
           <v-card-text>
             <DynamicForm

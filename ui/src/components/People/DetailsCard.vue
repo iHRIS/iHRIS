@@ -1,7 +1,7 @@
 <template>
   <v-card class="mb-5">
     <v-card-title class="display-1">
-      {{ this.name }}
+      {{ this.name | sentenceCase }}
       <v-spacer />
       <v-btn
         fab
@@ -24,7 +24,7 @@
         <div v-if="Number.isInteger(name)">
           <div v-for="(data, fieldIndex) in value" v-bind:key="fieldIndex">
             <v-layout row>
-              <v-flex xs4 class="font-weight-bold">{{ fieldIndex }}</v-flex>
+              <v-flex xs4 class="font-weight-bold">{{ fieldIndex | sentenceCase }}</v-flex>
               <v-flex xs8>{{ data }}</v-flex>
             </v-layout>
 
@@ -33,7 +33,7 @@
         </div>
         <div v-else>
           <v-layout row>
-            <v-flex xs4 class="font-weight-bold">{{ name }}</v-flex>
+            <v-flex xs4 class="font-weight-bold">{{ name | sentenceCase }}</v-flex>
             <v-flex xs8 v-for="(data, index) in value" v-bind:key="index">
               {{ data }}
             </v-flex>
@@ -44,7 +44,7 @@
       </div>
       <div v-else>
         <v-layout row>
-          <v-flex xs4 class="font-weight-bold">{{ name }}</v-flex>
+          <v-flex xs4 class="font-weight-bold">{{ name | sentenceCase }}</v-flex>
           <v-flex xs8>{{ value }}</v-flex>
         </v-layout>
 
