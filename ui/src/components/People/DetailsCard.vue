@@ -6,16 +6,23 @@
       <v-btn
         fab
         class="primary"
-        @click.stop="editing = true; editButton = false"
+        @click.stop="
+          editing = true;
+          editButton = false;
+        "
         v-show="editButton || edit"
       >
         <v-icon>edit</v-icon>
       </v-btn>
     </v-card-title>
-    <v-card-text v-for="(value, name) in data" v-show="!editing">
+    <v-card-text
+      v-for="(value, name) in data"
+      v-show="!editing"
+      v-bind:key="name"
+    >
       <div v-if="Array.isArray(value) || typeof value === 'object'">
         <div v-if="Number.isInteger(name)">
-          <div v-for="(data, fieldIndex) in value">
+          <div v-for="(data, fieldIndex) in value" v-bind:key="fieldIndex">
             <v-layout row>
               <v-flex xs4 class="font-weight-bold">{{ fieldIndex }}</v-flex>
               <v-flex xs8>{{ data }}</v-flex>
@@ -27,7 +34,7 @@
         <div v-else>
           <v-layout row>
             <v-flex xs4 class="font-weight-bold">{{ name }}</v-flex>
-            <v-flex xs8 v-for="data in value">
+            <v-flex xs8 v-for="(data, index) in value" v-bind:key="index">
               {{ data }}
             </v-flex>
           </v-layout>
@@ -77,42 +84,47 @@ export default {
       let definition = this.name.charAt(0).toUpperCase() + this.name.slice(1);
       let component = this;
 
-      axios.get("/practitioner/describe/definition/" + definition).then(response => {
-        if (response.status === 201) {
-          const ParseConformance = require("fhir").ParseConformance;
-          const parser = new ParseConformance();
+      axios
+        .get("/practitioner/describe/definition/" + definition)
+        .then(response => {
+          if (response.status === 201) {
+            const ParseConformance = require("fhir").ParseConformance;
+            const parser = new ParseConformance();
 
-          let fields = parser.parseStructureDefinition(response.data);
-          let data = [];
+            let fields = parser.parseStructureDefinition(response.data);
+            let data = [];
 
-          // add in descriptions
-          fields._properties.map(field => {
-            response.data.snapshot.element.forEach(function(element) {
-              if (element.id === definition + field._name) {
-                field._short = element.short;
+            // add in descriptions
+            fields._properties.map(field => {
+              response.data.snapshot.element.forEach(function(element) {
+                if (element.id === definition + field._name) {
+                  field._short = element.short;
+                }
+              });
+            });
+
+            fields._properties.forEach(function(field) {
+              for (var key in component.data) {
+                if (key === field._name) {
+                  data.push({
+                    id: field._name,
+                    description: field._short,
+                    name: field._name,
+                    required: field._required,
+                    type: field._type,
+                    value: component.data[key]
+                  });
+                }
               }
             });
-          });
 
-          fields._properties.forEach(function(field, index) {
-            for (var key in component.data) {
-              if (key === field._name) {
-                data.push({
-                  id: field._name,
-                  description: field._short,
-                  name: field._name,
-                  required: field._required,
-                  type: field._type,
-                  value: component.data[key]
-                });
-              }
-            }
-          });
-
-          this.fields = data;
-          this.$refs.dynamicEditingForm.changeFields(data);
-        }
-      });
+            this.fields = data;
+            this.$refs.dynamicEditingForm.changeFields(data);
+          }
+        })
+        .catch(error => {
+          this.showAlert(error, "error");
+        });
     }
   },
   data() {
@@ -143,7 +155,11 @@ export default {
       this.alert.show = true;
     },
     submit() {
-      this.$emit('saveData', this.$refs.dynamicEditingForm.getInputs(), this.$refs.dynamicEditingForm.getName());
+      this.$emit(
+        "saveData",
+        this.$refs.dynamicEditingForm.getInputs(),
+        this.$refs.dynamicEditingForm.getName()
+      );
     }
   },
   props: {

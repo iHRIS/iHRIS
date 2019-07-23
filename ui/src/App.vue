@@ -55,12 +55,9 @@
           persistent
           width="300"
         >
-          <v-card
-            color="primary"
-            dark
-          >
+          <v-card color="primary" dark>
             <v-card-text>
-              {{$store.state.indeterminateProgressTitle}}
+              {{ $store.state.indeterminateProgressTitle }}
               <v-progress-linear
                 indeterminate
                 color="white"
