@@ -81,49 +81,69 @@ export default {
   created() {
     if (this.edit) {
       this.editButton = true;
-      let definition = this.name.charAt(0).toUpperCase() + this.name.slice(1);
       let component = this;
+      const ParseConformance = require("fhir").ParseConformance;
+      const parser = new ParseConformance();
 
       axios
-        .get("/practitioner/describe/definition/" + definition)
-        .then(response => {
-          if (response.status === 201) {
-            const ParseConformance = require("fhir").ParseConformance;
-            const parser = new ParseConformance();
+        .get("/practitioner/describe/definition/Practitioner")
+        .then(practitioner => {
+          let definition = null;
 
-            let fields = parser.parseStructureDefinition(response.data);
-            let data = [];
-
-            // add in descriptions
-            fields._properties.map(field => {
-              response.data.snapshot.element.forEach(function(element) {
-                if (element.id === definition + field._name) {
-                  field._short = element.short;
-                }
-              });
-            });
-
-            fields._properties.forEach(function(field) {
-              for (var key in component.data) {
-                if (key === field._name) {
-                  data.push({
-                    id: field._name,
-                    description: field._short,
-                    name: field._name,
-                    required: field._required,
-                    type: field._type,
-                    value: component.data[key]
-                  });
-                }
-              }
-            });
-
-            this.fields = data;
-            this.$refs.dynamicEditingForm.changeFields(data);
+          for (var field of parser.parseStructureDefinition(practitioner.data)._properties) {
+            if (field._name === component.name) {
+              definition = field._type;
+              break;
+            }
           }
-        })
-        .catch(error => {
-          this.showAlert(error, "error");
+
+          axios
+            .get("/practitioner/describe/definition/" + definition)
+            .then(response => {
+              if (response.status === 201) {
+
+                let componentFields = [];
+
+                if (component.data[0]) {
+                  componentFields = component.data[0];
+                } else {
+                  componentFields = component.data;
+                }
+
+                let fields = parser.parseStructureDefinition(response.data);
+                let data = [];
+
+                // add in descriptions
+                fields._properties.map(field => {
+                  response.data.snapshot.element.forEach(function(element) {
+                    if (element.id === definition + "." + field._name) {
+                      field._short = element.short;
+                    }
+                  });
+                });
+
+                fields._properties.forEach(function(field) {
+                  for (var key in componentFields) {
+                    if (key === field._name) {
+                      data.push({
+                        id: field._name,
+                        description: field._short,
+                        name: field._name,
+                        required: field._required,
+                        type: field._type,
+                        value: componentFields[key]
+                      });
+                    }
+                  }
+                });
+
+                this.fields = data;
+                this.$refs.dynamicEditingForm.changeFields(data);
+              }
+            })
+            .catch(error => {
+              this.showAlert(error, "error");
+            });
         });
     }
   },
