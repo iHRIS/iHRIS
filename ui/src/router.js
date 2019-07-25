@@ -73,6 +73,12 @@ export default new Router({
         import(/* webpackChunkName: "ReviewApplication" */ "./views/People/ReviewApplication.vue")
     },
     {
+      path: "/people/edit/:id",
+      name: "people-edit",
+      component: () =>
+        import(/* webpackChunkName: "ViewPeople" */ "./views/People/Edit.vue")
+    },
+    {
       path: "/people/view/:id",
       name: "people-view",
       component: () =>
