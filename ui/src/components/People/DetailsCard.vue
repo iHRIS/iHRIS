@@ -24,7 +24,9 @@
         <div v-if="Number.isInteger(name)">
           <div v-for="(data, fieldIndex) in value" v-bind:key="fieldIndex">
             <v-layout row>
-              <v-flex xs4 class="font-weight-bold">{{ fieldIndex | sentenceCase }}</v-flex>
+              <v-flex xs4 class="font-weight-bold">
+                {{ fieldIndex | sentenceCase }}
+              </v-flex>
               <v-flex xs8>{{ data }}</v-flex>
             </v-layout>
 
@@ -33,7 +35,9 @@
         </div>
         <div v-else>
           <v-layout row>
-            <v-flex xs4 class="font-weight-bold">{{ name | sentenceCase }}</v-flex>
+            <v-flex xs4 class="font-weight-bold">
+              {{ name | sentenceCase }}
+            </v-flex>
             <v-flex xs8 v-for="(data, index) in value" v-bind:key="index">
               {{ data }}
             </v-flex>
@@ -44,7 +48,9 @@
       </div>
       <div v-else>
         <v-layout row>
-          <v-flex xs4 class="font-weight-bold">{{ name | sentenceCase }}</v-flex>
+          <v-flex xs4 class="font-weight-bold">
+            {{ name | sentenceCase }}
+          </v-flex>
           <v-flex xs8>{{ value }}</v-flex>
         </v-layout>
 
@@ -90,7 +96,8 @@ export default {
         .then(practitioner => {
           let definition = null;
 
-          for (var field of parser.parseStructureDefinition(practitioner.data)._properties) {
+          for (var field of parser.parseStructureDefinition(practitioner.data)
+            ._properties) {
             if (field._name === component.name) {
               definition = field._type;
               break;
@@ -101,7 +108,6 @@ export default {
             .get("/practitioner/describe/definition/" + definition)
             .then(response => {
               if (response.status === 201) {
-
                 let componentFields = [];
 
                 if (component.data[0]) {
