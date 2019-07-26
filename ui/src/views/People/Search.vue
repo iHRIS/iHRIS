@@ -62,15 +62,8 @@ export default {
       ],
       fields: [
         {
-          id: "given",
-          name: "Given",
-          required: false,
-          type: "string",
-          value: null
-        },
-        {
-          id: "surname",
-          name: "Surname",
+          id: "name",
+          name: "Name",
           required: false,
           type: "string",
           value: null

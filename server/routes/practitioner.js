@@ -98,4 +98,21 @@ router.put("/edit", function(req, res, next) {
   });
 });
 
+/**
+ * Search for practitioners
+ */
+router.get("/search", function(req, res, next) {
+  axios.get(config.fhir.server + "/fhir/Practitioner/", req.params, {
+    withCredentials: true,
+    auth: {
+      username: config.fhir.username,
+      password: config.fhir.password
+    }
+  }).then(response => {
+    res.status(201).json(response.data);
+  }).catch(err => {
+    res.status(400).json(err);
+  });
+});
+
 module.exports = router;
