@@ -49,7 +49,7 @@ export default new Router({
         import(/* webpackChunkName: "Logout" */ "./views/Logout.vue")
     },
     {
-      path: "/people",
+      path: "/people/search",
       name: "search-people",
       component: () =>
         import(/* webpackChunkName: "People" */ "./views/People/Search.vue")
