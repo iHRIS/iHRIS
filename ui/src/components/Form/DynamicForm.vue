@@ -155,7 +155,7 @@
     </div>
 
     <v-layout align-center justify-end fill-height>
-      <v-btn @click="cancel">cancel</v-btn>
+      <v-btn @click="cancel">{{ this.cancelLabel }}</v-btn>
       <v-btn @click="submit" class="primary">submit</v-btn>
     </v-layout>
   </v-form>
@@ -254,6 +254,12 @@ export default {
       }
     }
   },
-  props: ["fields", "name"]
+  props: {
+    cancelLabel: {
+      default: "cancel"
+    },
+    fields: {},
+    name: {}
+  }
 };
 </script>
