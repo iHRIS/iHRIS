@@ -5,6 +5,7 @@ var axios = require("axios");
 const mixin = require("../mixin");
 const env = process.env.NODE_ENV || 'development';
 const config = require(__dirname + '/../config/config.json')[env];
+var querystring = require("querystring");
 
 router.get("/describe/page", function(req, res, next) {
   let practitionerPage = config.definitions.practitionerPage;
@@ -102,7 +103,7 @@ router.put("/edit", function(req, res, next) {
  * Search for practitioners
  */
 router.get("/search", function(req, res, next) {
-  axios.get(config.fhir.server + "/fhir/Practitioner/", req.params, {
+  axios.get(config.fhir.server + "/fhir/Practitioner/" + req._parsedUrl.search, {
     withCredentials: true,
     auth: {
       username: config.fhir.username,
