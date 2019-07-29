@@ -5,7 +5,6 @@ var axios = require("axios");
 const mixin = require("../mixin");
 const env = process.env.NODE_ENV || 'development';
 const config = require(__dirname + '/../config/config.json')[env];
-var querystring = require("querystring");
 
 router.get("/describe/page", function(req, res, next) {
   let practitionerPage = config.definitions.practitionerPage;

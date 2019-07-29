@@ -96,27 +96,26 @@ export default {
         params: this.$refs.searchForm.getInputs()
       };
 
-      axios
-        .get("/practitioner/search", params)
-        .then(response => {
-          let practitioners = [];
+      axios.get("/practitioner/search", params).then(response => {
+        let practitioners = [];
 
-          response.data.entry.forEach(practitioner => {
-            practitioners.push({
-              editLink: "/people/edit/" + practitioner.resource.id,
-              surname: practitioner.resource.name[0].family,
-              given: practitioner.resource.name[0].given[0]
-            });
+        response.data.entry.forEach(practitioner => {
+          practitioners.push({
+            editLink: "/people/edit/" + practitioner.resource.id,
+            surname: practitioner.resource.name[0].family,
+            given: practitioner.resource.name[0].given[0]
           });
-
-          console.log(practitioners);
-
-          this.practitioners = practitioners;
         });
+
+        this.practitioners = practitioners;
+      });
     },
     showError() {
-      this.$refs.searchAlert.showMessage("Could not get search results", "error");
+      this.$refs.searchAlert.showMessage(
+        "Could not get search results",
+        "error"
+      );
     }
   }
-}
+};
 </script>
