@@ -6,7 +6,7 @@
     :required="required"
     :value="value"
     :rules="[rules.required, rules.whitespace]"
-    v-model="code"
+    :v-model="code"
   ></v-select>
 </template>
 
