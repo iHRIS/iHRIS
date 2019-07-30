@@ -128,8 +128,6 @@ export default {
                   });
                 });
 
-                console.log(fields._properties);
-
                 fields._properties.forEach(function(field) {
                   for (var key in componentFields) {
                     if (key === field._name) {
