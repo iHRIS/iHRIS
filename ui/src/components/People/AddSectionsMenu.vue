@@ -71,8 +71,6 @@ export default {
             }
           });
 
-          console.log(menu);
-
           this.menu = menu;
         }
       });
