@@ -135,11 +135,9 @@ export default {
                         id: field._name,
                         description: field._short,
                         name: field._name,
-                        options: field._short.split("|")
-                          .map(
-                            Function.prototype.call,
-                            String.prototype.trim
-                          ),
+                        options: field._short
+                          .split("|")
+                          .map(Function.prototype.call, String.prototype.trim),
                         required: field._required,
                         type: field._type,
                         value: componentFields[key]

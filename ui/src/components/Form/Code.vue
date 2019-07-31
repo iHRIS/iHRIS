@@ -23,12 +23,14 @@ export default {
           if (!this.required || value) {
             return true;
           }
-        
           return "Field is required";
         },
         whitespace: value => {
           const pattern = /[^\s]+(\s[^\s]+)*/;
-          return pattern.test(value) || "Must not have leading or trailing whitespace and must not have whitespace other than single spaces in the contents.";
+          return (
+            pattern.test(value) ||
+            "Must not have leading or trailing whitespace and must not have whitespace other than single spaces in the contents."
+          );
         }
       }
     };

@@ -42,6 +42,7 @@ export default {
         if (response.status === 201) {
           const ParseConformance = require("fhir").ParseConformance;
           const parser = new ParseConformance();
+          const config = require("../../../config/config.json");
 
           let fields = parser.parseStructureDefinition(response.data);
           let menu = [];
@@ -57,8 +58,9 @@ export default {
 
           fields._properties.forEach(function(field, index) {
             if (
-              field._properties ||
-              component._self.primitiveTypes.indexOf(field._type) < 0
+              (field._properties ||
+                component._self.primitiveTypes.indexOf(field._type) < 0) &&
+              config.ignoredSubsections.indexOf(field._name.toLowerCase()) < 0
             ) {
               menu.push({
                 subtitle: field._short,
