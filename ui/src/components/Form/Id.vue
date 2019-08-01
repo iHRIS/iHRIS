@@ -55,7 +55,7 @@ export default {
               continue;
             }
 
-            if (value.length < 1 && value.length > 64) {
+            if (value[i].length < 1 && value[i].length > 64) {
               return "Field must be between 1 and 64 characters.";
             }
           }

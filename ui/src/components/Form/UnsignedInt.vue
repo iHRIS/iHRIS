@@ -36,8 +36,8 @@ export default {
           }
 
           for (var i = 0; i < value.length; i++) {
-            if (value[i] < 1) {
-              return "Value must be greater than 1.";
+            if (value[i] < 0) {
+              return "Value must be greater than 0.";
             }
 
             if (value[i] > 2147483647) {
