@@ -1,5 +1,6 @@
 <template>
   <v-text-field
+    v-if="parseInt(max) <= 1"
     :label="label"
     outline
     :required="required"
@@ -7,6 +8,18 @@
     :value="value"
     v-model="string"
   ></v-text-field>
+  <v-combobox
+    v-else
+    v-model="string"
+    hide-selected
+    :label="label"
+    multiple
+    persistent-hint
+    small-chips
+    :rules="[rules.required]"
+    :required="required"
+    outline
+  ></v-combobox>
 </template>
 
 <script>
@@ -33,6 +46,6 @@ export default {
       return this["string"];
     }
   },
-  props: ["label", "required", "value"]
+  props: ["label", "max", "required", "value"]
 };
 </script>

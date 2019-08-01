@@ -2,11 +2,24 @@
   <v-text-field
     v-model="base64binary"
     :label="label"
+    v-if="parseInt(max) <= 1"
     outline
     :required="required"
     :rules="[rules.base64Binary, rules.required]"
     :value="value"
   ></v-text-field>
+  <v-combobox
+    v-else
+    v-model="base64binary"
+    hide-selected
+    :label="label"
+    multiple
+    persistent-hint
+    small-chips
+    :rules="[rules.base64Binary, rules.required]"
+    :required="required"
+    outline
+  ></v-combobox>
 </template>
 
 <script>
@@ -20,7 +33,18 @@ export default {
       rules: {
         base64Binary: value => {
           const pattern = /(\s*([0-9a-zA-Z+=]){4}\s*)+/;
-          return pattern.test(value) || "Must be base 64 binary.";
+
+          if (!Array.isArray(value)) {
+            value = [value];
+          }
+
+          for (var i = 0; i < value.length; i++) {
+            if (!pattern.test(value[i])) {
+              return "Must be base 64 binary.";
+            }
+          }
+
+          return true;
         },
         required: value => {
           return (
@@ -35,6 +59,6 @@ export default {
       return this["base64binary"];
     }
   },
-  props: ["label", "required", "value"]
+  props: ["label", "max", "required", "value"]
 };
 </script>

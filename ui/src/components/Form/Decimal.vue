@@ -1,12 +1,25 @@
 <template>
   <v-text-field
     v-model="decimal"
+    v-if="parseInt(max) <= 1"
     :label="label"
     outline
     :required="required"
     :rules="[rules.decimal, rules.required]"
     :value="value"
   ></v-text-field>
+  <v-combobox
+    v-else
+    v-model="decimal"
+    hide-selected
+    :label="label"
+    multiple
+    persistent-hint
+    small-chips
+    :rules="[rules.decimal, rules.required]"
+    :required="required"
+    outline
+  ></v-combobox>
 </template>
 
 <script>
@@ -19,16 +32,22 @@ export default {
       decimal: null,
       rules: {
         decimal: value => {
-          if (value === "") {
-            return true;
+          if (!Array.isArray(value)) {
+            value = [value];
           }
 
-          if (typeof value !== "number") {
-            return "Value must be a decimal";
-          }
+          for (var i = 0; i < value.length; i++) {
+            if (value[i] === "") {
+              continue;
+            }
 
-          if (value !== Number(value)) {
-            return "Value must be a decimal";
+            if (typeof value[i] !== "number") {
+              return "Value must be a decimal";
+            }
+
+            if (value[i] !== Number(value[i])) {
+              return "Value must be a decimal";
+            }
           }
 
           return true;
@@ -46,6 +65,6 @@ export default {
       return this["decimal"];
     }
   },
-  props: ["label", "required", "value"]
+  props: ["label", "max", "required", "value"]
 };
 </script>

@@ -54,6 +54,7 @@ export default {
 
             fields.push({
               id: field.valueString,
+              max: 1,
               required: false,
               name: name,
               parent
@@ -79,6 +80,10 @@ export default {
 
                 if (cleanFieldId === cleanMatchValue) {
                   value.required = field.min != 0;
+                }
+
+                if (field.max) {
+                  value.max = field.max;
                 }
               });
             });
@@ -124,6 +129,7 @@ export default {
 
                             subfield.description = submatchingField.definition;
                             subfield.type = submatchingField.type[0].code;
+                            subfield.max = submatchingField.max;
 
                             if (submatchingField.short.indexOf("|") >= 0) {
                               subfield.options = submatchingField.short
@@ -149,6 +155,7 @@ export default {
 
                     field.description = matchingField.definition;
                     field.type = matchingField.type[0].code;
+                    field.max = matchingField.max;
 
                     if (matchingField.short.indexOf("|") >= 0) {
                       field.options = matchingField.split("|");

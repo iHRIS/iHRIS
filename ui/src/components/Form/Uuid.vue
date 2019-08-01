@@ -2,11 +2,24 @@
   <v-text-field
     v-model="uuid"
     :label="label"
+    v-if="parseInt(max) <= 1"
     outline
     :required="required"
     :rules="[rules.required]"
     :value="value"
   ></v-text-field>
+  <v-combobox
+    v-else
+    v-model="uuid"
+    hide-selected
+    :label="label"
+    multiple
+    persistent-hint
+    small-chips
+    :rules="[rules.required]"
+    :required="required"
+    outline
+  ></v-combobox>
 </template>
 
 <script>
@@ -31,6 +44,6 @@ export default {
       return this["uuid"];
     }
   },
-  props: ["label", "required", "value"]
+  props: ["label", "max", "required", "value"]
 };
 </script>
