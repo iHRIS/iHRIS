@@ -2,11 +2,24 @@
   <v-text-field
     v-model="positiveInt"
     :label="label"
+    v-if="parseInt(max) <= 1"
     outline
     :required="required"
     :rules="[rules.inRange, rules.integer, rules.required]"
     :value="value"
   ></v-text-field>
+  <v-combobox
+    v-else
+    v-model="positiveInt"
+    hide-selected
+    :label="label"
+    multiple
+    persistent-hint
+    small-chips
+    :rules="[rules.inRange, rules.integer, rules.required]"
+    :required="required"
+    outline
+  ></v-combobox>
 </template>
 
 <script>
@@ -19,18 +32,34 @@ export default {
       positiveInt: null,
       rules: {
         inRange: value => {
-          if (value < 1) {
-            return "Value must be greater than 1.";
+          if (!Array.isArray(value)) {
+            value = [value];
           }
 
-          if (value > 2147483647) {
-            return "Value must be less than 2147483647.";
+          for (var i = 0; i < value.length; i++) {
+            if (value[i] < 1) {
+              return "Value must be greater than 1.";
+            }
+
+            if (value[i] > 2147483647) {
+              return "Value must be less than 2147483647.";
+            }
           }
 
           return true;
         },
         integer: value => {
-          return Number.isInteger(value) || "Value must be an integer";
+          if (!Array.isArray(value)) {
+            value = [value];
+          }
+
+          for (var i = 0; i < value.length; i++) {
+            if (!Number.isInteger(value[i])) {
+              return "Value must be an integer";
+            }
+          }
+
+          return true;
         },
         required: value => {
           return (
@@ -45,6 +74,6 @@ export default {
       return this["positiveInt"];
     }
   },
-  props: ["label", "required", "value"]
+  props: ["label", "max", "required", "value"]
 };
 </script>

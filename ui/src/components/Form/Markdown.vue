@@ -2,11 +2,24 @@
   <v-text-field
     v-model="markdown"
     :label="label"
+    v-if="parseInt(max) <= 1"
     outline
     :required="required"
     :rules="[rules.format, rules.required]"
     :value="value"
   ></v-text-field>
+  <v-combobox
+    v-else
+    v-model="markdown"
+    hide-selected
+    :label="label"
+    multiple
+    persistent-hint
+    small-chips
+    :rules="[rules.format, rules.required]"
+    :required="required"
+    outline
+  ></v-combobox>
 </template>
 
 <script>
@@ -20,7 +33,18 @@ export default {
       rules: {
         format: value => {
           const pattern = /\s*(\S|\s)*/;
-          return pattern.test(value) || "Must use markdown syntax.";
+
+          if (!Array.isArray(value)) {
+            value = [value];
+          }
+
+          for (var i = 0; i < value.length; i++) {
+            if (!pattern.test(value[i])) {
+              return "Must use markdown syntax.";
+            }
+          }
+
+          return true;
         },
         required: value => {
           return (
@@ -35,6 +59,6 @@ export default {
       return this["markdown"];
     }
   },
-  props: ["label", "required", "value"]
+  props: ["label", "max", "required", "value"]
 };
 </script>

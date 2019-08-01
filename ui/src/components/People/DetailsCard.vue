@@ -124,6 +124,7 @@ export default {
                   response.data.snapshot.element.forEach(function(element) {
                     if (element.id === definition + "." + field._name) {
                       field._short = element.short;
+                      field._max = element.max;
                     }
                   });
                 });
@@ -134,6 +135,7 @@ export default {
                       data.push({
                         id: field._name,
                         description: field._short,
+                        max: field._max,
                         name: field._name,
                         options: field._short
                           .split("|")

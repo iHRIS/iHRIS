@@ -2,11 +2,24 @@
   <v-text-field
     v-model="unsignedInt"
     :label="label"
+    v-if="parseInt(max) <= 1"
     outline
     :required="required"
     :rules="[rules.inRange, rules.integer, rules.required]"
     :value="value"
   ></v-text-field>
+  <v-combobox
+    v-else
+    v-model="unsignedInt"
+    hide-selected
+    :label="label"
+    multiple
+    persistent-hint
+    small-chips
+    :rules="[rules.inRange, rules.integer, rules.required]"
+    :required="required"
+    outline
+  ></v-combobox>
 </template>
 
 <script>
@@ -18,18 +31,34 @@ export default {
     return {
       rules: {
         inRange: value => {
-          if (value < 0) {
-            return "Value must be greater than 0.";
+          if (!Array.isArray(value)) {
+            value = [value];
           }
 
-          if (value > 2147483647) {
-            return "Value must be less than 2147483647.";
+          for (var i = 0; i < value.length; i++) {
+            if (value[i] < 0) {
+              return "Value must be greater than 0.";
+            }
+
+            if (value[i] > 2147483647) {
+              return "Value must be less than 2147483647.";
+            }
           }
 
           return true;
         },
         integer: value => {
-          return Number.isInteger(value) || "Value must be an integer";
+          if (!Array.isArray(value)) {
+            value = [value];
+          }
+
+          for (var i = 0; i < value.length; i++) {
+            if (!Number.isInteger(value[i])) {
+              return "Value must be an integer";
+            }
+          }
+
+          return true;
         },
         required: value => {
           return (
@@ -45,6 +74,6 @@ export default {
       return this["unsignedInt"];
     }
   },
-  props: ["label", "required", "value"]
+  props: ["label", "max", "required", "value"]
 };
 </script>

@@ -4,6 +4,7 @@
       <Base64Binary
         v-if="field.type == 'base64binary'"
         :label="field.name"
+        :max="field.max"
         :required="field.required"
         :ref="field.name"
         :value="field.value"
@@ -19,6 +20,7 @@
       <Canonical
         v-if="field.type == 'canonical'"
         :label="field.name"
+        :max="field.max"
         :required="field.required"
         :ref="field.name"
         :value="field.value"
@@ -27,6 +29,7 @@
       <Code
         v-if="field.type == 'code'"
         :label="field.name"
+        :max="field.max"
         :required="field.required"
         :codes="field.options"
         :ref="field.name"
@@ -36,6 +39,7 @@
       <Date
         v-if="field.type == 'date'"
         :label="field.name"
+        :max="field.max"
         :required="field.required"
         :ref="field.name"
         :value="field.value"
@@ -44,6 +48,7 @@
       <DateTime
         v-if="field.type == 'datetime'"
         :label="field.name"
+        :max="field.max"
         :required="field.required"
         :ref="field.name"
         :datetime="field.value"
@@ -52,6 +57,7 @@
       <Decimal
         v-if="field.type == 'decimal'"
         :label="field.name"
+        :max="field.max"
         :required="field.required"
         :ref="field.name"
         :value="field.value"
@@ -60,6 +66,7 @@
       <Id
         v-if="field.type == 'id'"
         :label="field.name"
+        :max="field.max"
         :required="field.required"
         :ref="field.name"
         :value="field.value"
@@ -68,6 +75,7 @@
       <Instant
         v-if="field.type == 'instant'"
         :label="field.name"
+        :max="field.max"
         :required="field.required"
         :ref="field.name"
         :value="field.value"
@@ -76,6 +84,7 @@
       <Integer
         v-if="field.type == 'integer'"
         :label="field.name"
+        :max="field.max"
         :required="field.required"
         :ref="field.name"
         :value="field.value"
@@ -84,6 +93,7 @@
       <Markdown
         v-if="field.type == 'markdown'"
         :label="field.name"
+        :max="field.max"
         :required="field.required"
         :ref="field.name"
         :value="field.value"
@@ -92,6 +102,7 @@
       <Oid
         v-if="field.type == 'oid'"
         :label="field.name"
+        :max="field.max"
         :required="field.required"
         :ref="field.name"
         :value="field.value"
@@ -100,6 +111,7 @@
       <PositiveInt
         v-if="field.type == 'positiveint'"
         :label="field.name"
+        :max="field.max"
         :required="field.required"
         :ref="field.name"
         :value="field.value"
@@ -108,6 +120,7 @@
       <String
         v-if="field.type == 'string'"
         :label="field.name"
+        :max="field.max"
         :required="field.required"
         :ref="field.name"
         :value="field.value"
@@ -116,6 +129,7 @@
       <Time
         v-if="field.type == 'time'"
         :label="field.name"
+        :max="field.max"
         :required="field.required"
         :ref="field.name"
         :value="field.value"
@@ -124,6 +138,7 @@
       <UnsignedInt
         v-if="field.type == 'unsignedint'"
         :label="field.name"
+        :max="field.max"
         :required="field.required"
         :ref="field.name"
         :value="field.value"
@@ -132,6 +147,7 @@
       <Uri
         v-if="field.type == 'uri'"
         :label="field.name"
+        :max="field.max"
         :required="field.required"
         :ref="field.name"
         :value="field.value"
@@ -140,6 +156,7 @@
       <Url
         v-if="field.type == 'url'"
         :label="field.name"
+        :max="field.max"
         :required="field.required"
         :ref="field.name"
         :value="field.value"
@@ -148,6 +165,7 @@
       <Uuid
         v-if="field.type == 'uuid'"
         :label="field.name"
+        :max="field.max"
         :required="field.required"
         :ref="field.name"
         :value="field.value"

@@ -1,12 +1,25 @@
 <template>
   <v-text-field
     v-model="integer"
+    v-if="parseInt(max) <= 1"
     :label="label"
     outline
     :required="required"
     :rules="[rules.integer, rules.required]"
     :value="value"
   ></v-text-field>
+  <v-combobox
+    v-else
+    v-model="integer"
+    hide-selected
+    :label="label"
+    multiple
+    persistent-hint
+    small-chips
+    :rules="[rules.integer, rules.required]"
+    :required="required"
+    outline
+  ></v-combobox>
 </template>
 
 <script>
@@ -19,7 +32,17 @@ export default {
       integer: null,
       rules: {
         integer: value => {
-          return Number.isInteger(value) || "Value must be an integer";
+          if (!Array.isArray(value)) {
+            value = [value];
+          }
+
+          for (var i = 0; i < value.length; i++) {
+            if (!Number.isInteger(value[i])) {
+              return "Value must be an integer";
+            }
+          }
+
+          return true;
         },
         required: value => {
           return (
@@ -34,6 +57,6 @@ export default {
       return this["integer"];
     }
   },
-  props: ["label", "required", "value"]
+  props: ["label", "max", "required", "value"]
 };
 </script>
