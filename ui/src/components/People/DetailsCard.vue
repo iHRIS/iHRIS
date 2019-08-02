@@ -22,6 +22,7 @@
     >
       <div v-if="Array.isArray(value) || typeof value === 'object'">
         <div v-if="Number.isInteger(name)">
+          <p class="primary--text text-uppercase">{{ value[subheader] }}</p>
           <div v-for="(data, fieldIndex) in value" v-bind:key="fieldIndex">
             <v-layout row>
               <v-flex xs4 class="font-weight-bold">
@@ -85,6 +86,44 @@ export default {
     DynamicForm
   },
   created() {
+    switch (this.name) {
+      case "address":
+        this.subheader = "use";
+        break;
+
+      case "communication":
+        this.subheader = "text";
+        break;
+
+      case "contained":
+        this.subheader = "language";
+        break;
+
+      case "identifier":
+        this.subheader = "use";
+        break;
+
+      case "meta":
+        this.subheader = "versionId";
+        break;
+
+      case "name":
+        this.subheader = "use";
+        break;
+
+      case "photo":
+        this.subheader = "title";
+        break;
+
+      case "telecom":
+        this.subheader = "use";
+        break;
+
+      case "text":
+        this.subheader = "status";
+        break;
+    }
+
     if (this.edit) {
       this.editButton = true;
       let component = this;
@@ -167,7 +206,8 @@ export default {
       },
       editButton: false,
       editing: false,
-      fields: []
+      fields: [],
+      subheader: null
     };
   },
   methods: {
