@@ -133,6 +133,9 @@ export default {
                   subtitle: field.definition,
                   title: field.short,
                   id: sanitizedField,
+                  options: field.short
+                    .split("|")
+                    .map(Function.prototype.call, String.prototype.trim),
                   name: sanitizedField,
                   type: field.type[0].code,
                   required: field.min > 0
@@ -153,6 +156,7 @@ export default {
     },
     showForm(title, definition) {
       this._self.describe(definition).then(fields => {
+        console.log(fields);
         this.$emit("toggleForm", fields, title);
       });
     }
