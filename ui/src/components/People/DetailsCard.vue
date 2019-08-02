@@ -11,6 +11,7 @@
           editButton = false;
         "
         v-show="editButton || edit"
+        v-if="!data[0]"
       >
         <v-icon>edit</v-icon>
       </v-btn>
@@ -22,7 +23,24 @@
     >
       <div v-if="Array.isArray(value) || typeof value === 'object'">
         <div v-if="Number.isInteger(name)">
-          <p class="primary--text text-uppercase">{{ value[subheader] }}</p>
+          <v-layout row align-baseline>
+            <v-flex xs4 class="primary--text text-uppercase">
+              {{ value[subheader] }}
+            </v-flex>
+            <v-spacer />
+            <v-btn
+              fab
+              class="primary"
+              @click.stop="
+                editing = true;
+                editButton = false;
+              "
+              v-show="editButton || edit"
+              v-if="data[0]"
+            >
+              <v-icon>edit</v-icon>
+            </v-btn>
+          </v-layout>
           <div v-for="(data, fieldIndex) in value" v-bind:key="fieldIndex">
             <v-layout row>
               <v-flex xs4 class="font-weight-bold">
