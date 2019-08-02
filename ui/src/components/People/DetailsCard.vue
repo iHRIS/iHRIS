@@ -31,12 +31,9 @@
             <v-btn
               fab
               class="primary"
-              @click.stop="
-                editing = true;
-                editButton = false;
-              "
               v-show="editButton || edit"
               v-if="data[0]"
+              v-on:click="toggleForm(name)"
             >
               <v-icon>edit</v-icon>
             </v-btn>
@@ -89,6 +86,7 @@
         v-on:successfulSubmit="submit"
         v-on:failedSubmit="showFailedSubmit"
         ref="dynamicEditingForm"
+        :key="dynamicFormKey"
       />
     </v-card-text>
   </v-card>
@@ -207,6 +205,7 @@ export default {
 
                 this.fields = data;
                 this.$refs.dynamicEditingForm.changeFields(data);
+                this.dynamicFormKey++;
               }
             })
             .catch(error => {
@@ -222,6 +221,8 @@ export default {
         show: false,
         type: null
       },
+      currentIndex: null,
+      dynamicFormKey: 0,
       editButton: false,
       editing: false,
       fields: [],
@@ -247,8 +248,22 @@ export default {
       this.$emit(
         "saveData",
         this.$refs.dynamicEditingForm.getInputs(),
-        this.$refs.dynamicEditingForm.getName()
+        this.$refs.dynamicEditingForm.getName(),
+        this.currentIndex
       );
+    },
+    toggleForm(index) {
+      let fields = this.fields;
+
+      fields.forEach(field => {
+        field.value = this.data[index][field.id];
+      });
+
+      this.$refs.dynamicEditingForm.changeFields(fields);
+      this.dynamicFormKey++;
+      this.editing = true;
+      this.editButton = false;
+      this.currentIndex = index;
     }
   },
   props: {

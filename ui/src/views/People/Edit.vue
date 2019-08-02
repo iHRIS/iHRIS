@@ -83,11 +83,16 @@ export default {
 
       this.$refs.alert.reset();
     },
-    saveSubsectionData(data, field) {
+    saveSubsectionData(data, field, index) {
       let component = this;
       let practitioner = this.practitioner;
 
-      practitioner[field] = data;
+      // this is necessary for subsections that can have multiple entries
+      if (index) {
+        practitioner[field][index] = data;
+      } else {
+        practitioner[field] = data;
+      }
 
       axios.put("/practitioner/edit", practitioner).then(response => {
         component.practitioner = practitioner;
