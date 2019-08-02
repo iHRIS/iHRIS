@@ -156,7 +156,6 @@ export default {
     },
     showForm(title, definition) {
       this._self.describe(definition).then(fields => {
-        console.log(fields);
         this.$emit("toggleForm", fields, title);
       });
     }
