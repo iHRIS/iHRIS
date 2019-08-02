@@ -3,7 +3,7 @@
     <div v-for="field in data" v-bind:key="field.id">
       <Base64Binary
         v-if="field.type == 'base64binary'"
-        :label="field.name"
+        :label="field.label"
         :max="field.max"
         :required="field.required"
         :ref="field.name"
@@ -12,14 +12,14 @@
 
       <Boolean
         v-if="field.type == 'boolean'"
-        :label="field.name"
+        :label="field.label"
         ref="active"
         :value="field.value"
       />
 
       <Canonical
         v-if="field.type == 'canonical'"
-        :label="field.name"
+        :label="field.label"
         :max="field.max"
         :required="field.required"
         :ref="field.name"
@@ -28,7 +28,7 @@
 
       <Code
         v-if="field.type == 'code'"
-        :label="field.name"
+        :label="field.label"
         :max="field.max"
         :required="field.required"
         :codes="field.options"
@@ -38,7 +38,7 @@
 
       <Date
         v-if="field.type == 'date'"
-        :label="field.name"
+        :label="field.label"
         :max="field.max"
         :required="field.required"
         :ref="field.name"
@@ -47,7 +47,7 @@
 
       <DateTime
         v-if="field.type == 'datetime'"
-        :label="field.name"
+        :label="field.label"
         :max="field.max"
         :required="field.required"
         :ref="field.name"
@@ -56,7 +56,7 @@
 
       <Decimal
         v-if="field.type == 'decimal'"
-        :label="field.name"
+        :label="field.label"
         :max="field.max"
         :required="field.required"
         :ref="field.name"
@@ -65,7 +65,7 @@
 
       <Id
         v-if="field.type == 'id'"
-        :label="field.name"
+        :label="field.label"
         :max="field.max"
         :required="field.required"
         :ref="field.name"
@@ -74,7 +74,7 @@
 
       <Instant
         v-if="field.type == 'instant'"
-        :label="field.name"
+        :label="field.label"
         :max="field.max"
         :required="field.required"
         :ref="field.name"
@@ -83,7 +83,7 @@
 
       <Integer
         v-if="field.type == 'integer'"
-        :label="field.name"
+        :label="field.label"
         :max="field.max"
         :required="field.required"
         :ref="field.name"
@@ -92,7 +92,7 @@
 
       <Markdown
         v-if="field.type == 'markdown'"
-        :label="field.name"
+        :label="field.label"
         :max="field.max"
         :required="field.required"
         :ref="field.name"
@@ -101,7 +101,7 @@
 
       <Oid
         v-if="field.type == 'oid'"
-        :label="field.name"
+        :label="field.label"
         :max="field.max"
         :required="field.required"
         :ref="field.name"
@@ -110,7 +110,7 @@
 
       <PositiveInt
         v-if="field.type == 'positiveint'"
-        :label="field.name"
+        :label="field.label"
         :max="field.max"
         :required="field.required"
         :ref="field.name"
@@ -119,7 +119,7 @@
 
       <String
         v-if="field.type == 'string'"
-        :label="field.name"
+        :label="field.label"
         :max="field.max"
         :required="field.required"
         :ref="field.name"
@@ -128,7 +128,7 @@
 
       <Time
         v-if="field.type == 'time'"
-        :label="field.name"
+        :label="field.label"
         :max="field.max"
         :required="field.required"
         :ref="field.name"
@@ -137,7 +137,7 @@
 
       <UnsignedInt
         v-if="field.type == 'unsignedint'"
-        :label="field.name"
+        :label="field.label"
         :max="field.max"
         :required="field.required"
         :ref="field.name"
@@ -146,7 +146,7 @@
 
       <Uri
         v-if="field.type == 'uri'"
-        :label="field.name"
+        :label="field.label"
         :max="field.max"
         :required="field.required"
         :ref="field.name"
@@ -155,7 +155,7 @@
 
       <Url
         v-if="field.type == 'url'"
-        :label="field.name"
+        :label="field.label"
         :max="field.max"
         :required="field.required"
         :ref="field.name"
@@ -164,7 +164,7 @@
 
       <Uuid
         v-if="field.type == 'uuid'"
-        :label="field.name"
+        :label="field.label"
         :max="field.max"
         :required="field.required"
         :ref="field.name"
@@ -243,6 +243,9 @@ export default {
       if (fields && fields.length) {
         fields.forEach(field => {
           inputs.push(field.name);
+
+          let data = field.name.replace(/([A-Z])/g, " $1");
+          field.label = data.charAt(0).toUpperCase() + data.slice(1);
         });
       }
 
