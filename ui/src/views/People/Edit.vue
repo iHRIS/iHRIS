@@ -11,7 +11,6 @@
     <v-layout>
       <v-flex xs6 class="pr-3">
         <div v-for="(element, index) in this.practitioner" v-bind:key="index">
-          <h1>subsection-{{ index }}</h1>
           <DetailsCard
             v-if="index != 'id' && index != 'resourceType' && index != 'active'"
             :data="element"
