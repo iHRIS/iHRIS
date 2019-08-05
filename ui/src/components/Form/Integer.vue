@@ -16,7 +16,7 @@
     multiple
     persistent-hint
     small-chips
-    :rules="[rules.integer, rules.required]"
+    :rules="[rules.integer, rules.max, rules.required]"
     :required="required"
     outline
   ></v-combobox>
@@ -40,6 +40,19 @@ export default {
             if (!Number.isInteger(value[i])) {
               return "Value must be an integer";
             }
+          }
+
+          return true;
+        },
+        max: value => {
+          if (this.max == "*") {
+            return true;
+          }
+
+          let max = parseInt(this.max);
+
+          if (value.length > max) {
+            return "Only " + max + " entries allowed.";
           }
 
           return true;

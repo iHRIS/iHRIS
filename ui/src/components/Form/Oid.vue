@@ -16,7 +16,7 @@
     multiple
     persistent-hint
     small-chips
-    :rules="[rules.oid, rules.required]"
+    :rules="[rules.max, rules.oid, rules.required]"
     :required="required"
     outline
   ></v-combobox>
@@ -31,6 +31,19 @@ export default {
     return {
       oid: null,
       rules: {
+        max: value => {
+          if (this.max == "*") {
+            return true;
+          }
+
+          let max = parseInt(this.max);
+
+          if (value.length > max) {
+            return "Only " + max + " entries allowed.";
+          }
+
+          return true;
+        },
         oid: value => {
           const pattern = /urn:oid:[0-2](\.(0|[1-9][0-9]*))+/;
 

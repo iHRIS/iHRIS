@@ -16,7 +16,7 @@
     multiple
     persistent-hint
     small-chips
-    :rules="[rules.decimal, rules.required]"
+    :rules="[rules.decimal, rules.max, rules.required]"
     :required="required"
     outline
   ></v-combobox>
@@ -48,6 +48,19 @@ export default {
             if (value[i] !== Number(value[i])) {
               return "Value must be a decimal";
             }
+          }
+
+          return true;
+        },
+        max: value => {
+          if (this.max == "*") {
+            return true;
+          }
+
+          let max = parseInt(this.max);
+
+          if (value.length > max) {
+            return "Only " + max + " entries allowed.";
           }
 
           return true;

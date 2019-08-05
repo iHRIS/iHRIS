@@ -16,7 +16,7 @@
     multiple
     persistent-hint
     small-chips
-    :rules="[rules.required]"
+    :rules="[rules.max, rules.required]"
     :required="required"
     outline
   ></v-combobox>
@@ -30,6 +30,19 @@ export default {
   data() {
     return {
       rules: {
+        max: value => {
+          if (this.max == "*") {
+            return true;
+          }
+
+          let max = parseInt(this.max);
+
+          if (value.length > max) {
+            return "Only " + max + " entries allowed.";
+          }
+
+          return true;
+        },
         required: value => {
           return (
             (this.required && value) || !this.required || "Field is required"

@@ -16,7 +16,7 @@
     multiple
     persistent-hint
     small-chips
-    :rules="[rules.date, rules.required]"
+    :rules="[rules.date, rules.max, rules.required]"
     :required="required"
     outline
   ></v-combobox>
@@ -42,6 +42,19 @@ export default {
             if (!pattern.test(value[i])) {
               return "Must be YYYY, YYYY-MM, or YYYY-MM-DD";
             }
+          }
+
+          return true;
+        },
+        max: value => {
+          if (this.max == "*") {
+            return true;
+          }
+
+          let max = parseInt(this.max);
+
+          if (value.length > max) {
+            return "Only " + max + " entries allowed.";
           }
 
           return true;
