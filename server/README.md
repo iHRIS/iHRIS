@@ -1,2 +1,1 @@
-# Update database
-This project uses sequelize migrations to keep databases in sync. To ensure your database is up to date, run `npx sequelize db:migrate` after every pull.
+This project uses a FHIR compliant server as it's data backend. A sample configuration file can be found in config/config.json.example.
