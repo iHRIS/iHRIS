@@ -15,7 +15,7 @@
     multiple
     persistent-hint
     small-chips
-    :rules="[rules.format, rules.length, rules.required]"
+    :rules="[rules.format, rules.length, rules.max, rules.required]"
     :required="required"
     outline
   ></v-combobox>
@@ -58,6 +58,19 @@ export default {
             if (value[i].length < 1 && value[i].length > 64) {
               return "Field must be between 1 and 64 characters.";
             }
+          }
+
+          return true;
+        },
+        max: value => {
+          if (this.max == "*") {
+            return true;
+          }
+
+          let max = parseInt(this.max);
+
+          if (value.length > max) {
+            return "Only " + max + " entries allowed.";
           }
 
           return true;

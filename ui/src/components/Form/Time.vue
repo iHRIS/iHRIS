@@ -5,7 +5,7 @@
     v-if="parseInt(max) <= 1"
     outline
     :required="required"
-    :rules="[rules.time, rules.required]"
+    :rules="[rules.required, rules.time]"
     :value="value"
   ></v-text-field>
   <v-combobox
@@ -16,7 +16,7 @@
     multiple
     persistent-hint
     small-chips
-    :rules="[rules.time, rules.required]"
+    :rules="[rules.max, rules.required, rules.time]"
     :required="required"
     outline
   ></v-combobox>
@@ -30,6 +30,24 @@ export default {
   data() {
     return {
       rules: {
+        max: value => {
+          if (this.max == "*") {
+            return true;
+          }
+
+          let max = parseInt(this.max);
+
+          if (value.length > max) {
+            return "Only " + max + " entries allowed.";
+          }
+
+          return true;
+        },
+        required: value => {
+          return (
+            (this.required && value) || !this.required || "Field is required"
+          );
+        },
         time: value => {
           const pattern = /([01][0-9]|2[0-3]):[0-5][0-9]:([0-5][0-9]|60)(\.[0-9]+)?/;
 
@@ -44,11 +62,6 @@ export default {
           }
 
           return true;
-        },
-        required: value => {
-          return (
-            (this.required && value) || !this.required || "Field is required"
-          );
         }
       },
       time: null

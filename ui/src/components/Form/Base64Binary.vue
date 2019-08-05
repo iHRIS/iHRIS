@@ -16,7 +16,7 @@
     multiple
     persistent-hint
     small-chips
-    :rules="[rules.base64Binary, rules.required]"
+    :rules="[rules.base64Binary, rules.max, rules.required]"
     :required="required"
     outline
   ></v-combobox>
@@ -42,6 +42,19 @@ export default {
             if (!pattern.test(value[i])) {
               return "Must be base 64 binary.";
             }
+          }
+
+          return true;
+        },
+        max: value => {
+          if (this.max == "*") {
+            return true;
+          }
+
+          let max = parseInt(this.max);
+
+          if (value.length > max) {
+            return "Only " + max + " entries allowed.";
           }
 
           return true;
