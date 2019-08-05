@@ -43,7 +43,7 @@
               <v-flex xs4 class="font-weight-bold">
                 {{ fieldIndex | sentenceCase }}
               </v-flex>
-              <v-flex xs8>{{ data }}</v-flex>
+              <v-flex xs8>{{ data | separateByCommas }}</v-flex>
             </v-layout>
 
             <v-divider class="pb-3" />
@@ -55,7 +55,7 @@
               {{ name | sentenceCase }}
             </v-flex>
             <v-flex xs8 v-for="(data, index) in value" v-bind:key="index">
-              {{ data }}
+              {{ data | separateByCommas}}
             </v-flex>
           </v-layout>
 
