@@ -102,15 +102,18 @@ export default {
     };
   },
   methods: {
-    describe(definition) {
+    describe(definition, title, parentDefinition) {
       let component = this;
+      let url = "/practitioner/describe/definition/";
 
-      return axios
-        .get(
-          "/practitioner/describe/definition/" +
-            definition.charAt(0).toUpperCase() +
-            definition.slice(1)
-        )
+      if (definition == "BackboneElement") {
+        url += parentDefinition;
+      } else {
+        url += definition.charAt(0).toUpperCase() +
+          definition.slice(1);
+      }
+
+      return axios.get(url)
         .then(response => {
           if (response.status != 201) {
             return [];
@@ -120,7 +123,17 @@ export default {
 
           response.data.snapshot.element.forEach(function(field) {
             if (field.id.indexOf(".") >= 0) {
-              let sanitizedField = field.id.slice(field.id.indexOf(".") + 1);
+              // skip unneeded backbone fields
+              if (definition == "BackboneElement" &&
+                field.id.indexOf(title.toLowerCase()) < 0
+              ) {
+                return;
+              }
+
+              let sanitizedField = field.id.slice(
+                (definition == "BackboneElement" ? title.toLowerCase() : "") +
+                field.id.indexOf(".") + 1
+              );
 
               if (sanitizedField == "id" || field.type[0].code == "Extension") {
                 return;
@@ -129,6 +142,8 @@ export default {
               if (
                 component._self.primitiveTypes.indexOf(field.type[0].code) >= 0
               ) {
+                console.log("Adding:"); console.log(field);
+
                 fields.push({
                   subtitle: field.definition,
                   title: field.short,
@@ -142,7 +157,8 @@ export default {
                 });
               } else {
                 fields[sanitizedField] = component._self.describe(
-                  sanitizedField
+                  sanitizedField,
+                  title
                 );
               }
             }
@@ -155,7 +171,7 @@ export default {
         });
     },
     showForm(title, definition) {
-      this._self.describe(definition).then(fields => {
+      this._self.describe(definition, title, "Practitioner").then(fields => {
         this.$emit("toggleForm", fields, title);
       });
     }
