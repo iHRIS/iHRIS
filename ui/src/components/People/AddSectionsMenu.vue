@@ -142,8 +142,6 @@ export default {
               if (
                 component._self.primitiveTypes.indexOf(field.type[0].code) >= 0
               ) {
-                console.log("Adding:"); console.log(field);
-
                 fields.push({
                   subtitle: field.definition,
                   title: field.short,
