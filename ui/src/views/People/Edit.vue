@@ -17,7 +17,7 @@
             :name="index"
             v-on:saveData="saveSubsectionData"
             edit
-            :ref="'subsection-' + index"
+            :ref="'subsection' + index"
           />
         </div>
 
@@ -99,12 +99,12 @@ export default {
         component.updateName();
 
         if (response.status == 201) {
-          component.$refs["subsection-" + field].showAlert(
+          component.$refs["subsection" + field][0].showAlert(
             "Data changed successfully!",
             "success"
           );
         } else {
-          component.$refs["subsection-" + field].showAlert(
+          component.$refs["subsection-" + field][0].showAlert(
             "There was an error saving this data.",
             "error"
           );

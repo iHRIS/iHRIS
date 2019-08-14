@@ -109,11 +109,11 @@ export default {
       if (definition == "BackboneElement") {
         url += parentDefinition;
       } else {
-        url += definition.charAt(0).toUpperCase() +
-          definition.slice(1);
+        url += definition.charAt(0).toUpperCase() + definition.slice(1);
       }
 
-      return axios.get(url)
+      return axios
+        .get(url)
         .then(response => {
           if (response.status != 201) {
             return [];
@@ -124,7 +124,8 @@ export default {
           response.data.snapshot.element.forEach(function(field) {
             if (field.id.indexOf(".") >= 0) {
               // skip unneeded backbone fields
-              if (definition == "BackboneElement" &&
+              if (
+                definition == "BackboneElement" &&
                 field.id.indexOf(title.toLowerCase()) < 0
               ) {
                 return;
@@ -132,7 +133,8 @@ export default {
 
               let sanitizedField = field.id.slice(
                 (definition == "BackboneElement" ? title.toLowerCase() : "") +
-                field.id.indexOf(".") + 1
+                  field.id.indexOf(".") +
+                  1
               );
 
               if (sanitizedField == "id" || field.type[0].code == "Extension") {
