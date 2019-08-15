@@ -60,7 +60,9 @@ export default {
             if (
               (field._properties ||
                 component._self.primitiveTypes.indexOf(field._type) < 0) &&
-              config.ignoredSubsections.indexOf(field._name.toLowerCase()) < 0
+              config.ignoredSubsections.indexOf(field._name.toLowerCase()) <
+                0 &&
+              !component.data[field._name]
             ) {
               menu.push({
                 subtitle: field._short,
@@ -175,6 +177,7 @@ export default {
         this.$emit("toggleForm", fields, title);
       });
     }
-  }
+  },
+  props: ["data"]
 };
 </script>

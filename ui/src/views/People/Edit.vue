@@ -37,7 +37,10 @@
         </v-card>
       </v-flex>
       <v-flex xs6 class="pl-3">
-        <AddSectionsMenu v-on:toggleForm="toggleForm" />
+        <AddSectionsMenu
+          v-on:toggleForm="toggleForm"
+          :data="this.practitioner"
+        />
       </v-flex>
     </v-layout>
   </v-container>
