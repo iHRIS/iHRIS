@@ -74,6 +74,18 @@
       </div>
     </v-card-text>
 
+    <v-card-text v-show="allowMultiple && showMultiple">
+      <v-btn
+        class="font-weight-bold primary--text text-uppercase"
+        text
+        flat
+        depressed
+        @click.stop="showAddForm"
+      >
+        Add Another
+      </v-btn>
+    </v-card-text>
+
     <v-card-text v-show="editing">
       <v-alert v-model="alert.show" dismissable :type="alert.type">
         {{ alert.message }}
@@ -90,6 +102,7 @@
       />
     </v-card-text>
   </v-card>
+
 </template>
 
 <script>
@@ -102,6 +115,12 @@ export default {
     DynamicForm
   },
   created() {
+    let numEntries = parseInt(this.data.length);
+
+    if (!isNaN(numEntries)) {
+      this.allowMultiple = true;
+    }
+
     switch (this.name) {
       case "address":
         this.subheader = "use";
@@ -221,11 +240,13 @@ export default {
         show: false,
         type: null
       },
+      allowMultiple: false,
       currentIndex: null,
       dynamicFormKey: 0,
       editButton: false,
       editing: false,
       fields: [],
+      showMultiple: true,
       subheader: null
     };
   },
@@ -233,6 +254,22 @@ export default {
     cancel() {
       this.editing = false;
       this.editButton = true;
+      this.showMultiple = true;
+    },
+    showAddForm() {
+      let fields = this.fields;
+
+      fields.forEach(field => {
+        field.value = null;
+      });
+
+      this.$refs.dynamicEditingForm.changeFields(fields);
+
+      this.currentIndex = -1;
+      this.dynamicFormKey++;
+      this.editing = true;
+      this.editButton = false;
+      this.showMultiple = false;
     },
     showAlert(message, type) {
       this.alert.message = message;
@@ -251,6 +288,8 @@ export default {
         this.$refs.dynamicEditingForm.getName(),
         this.currentIndex
       );
+
+      this.cancel();
     },
     toggleForm(index) {
       let fields = this.fields;
@@ -260,10 +299,12 @@ export default {
       });
 
       this.$refs.dynamicEditingForm.changeFields(fields);
+
+      this.currentIndex = index;
       this.dynamicFormKey++;
       this.editing = true;
       this.editButton = false;
-      this.currentIndex = index;
+      this.showMultiple = false;
     }
   },
   props: {

@@ -91,8 +91,12 @@ export default {
       let practitioner = this.practitioner;
 
       // this is necessary for subsections that can have multiple entries
-      if (index) {
+      if (index && index >= 0) {
         practitioner[field][index] = data;
+      } else if (index == -1) {
+        // this is a special case where a new entry is being
+        // added to a multiple field
+        practitioner[field].push(data);
       } else {
         practitioner[field] = data;
       }
