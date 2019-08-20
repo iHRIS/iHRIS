@@ -1,6 +1,6 @@
 <template>
   <v-toolbar color="white" app clipped-left>
-    <v-img :src="icon" contain max-height="40" max-width="40" />
+    <v-img :src="getLogo(icon)" contain max-height="40" max-width="40" />
     <v-toolbar-title class="headline">
       <span class="primary--text">iHRIS Manage</span>
       <span v-if="site"> | {{ site }}</span>
@@ -33,7 +33,8 @@ import { serverBus } from "../../main";
 export default {
   created() {
     const config = require("../../../config/config.json");
-    this.icon = ""; //require(config.logo);
+
+    this.icon = config.logo;
     this.site = config.site;
   },
   data() {
@@ -61,11 +62,15 @@ export default {
 
     return {
       accountMenu: accountMenu,
+      config: [],
       icon: "",
       site: ""
     };
   },
   methods: {
+    getLogo: function(path) {
+      return path;
+    },
     toggleDrawer: function() {
       serverBus.$emit("drawer", !this.drawer);
     }
