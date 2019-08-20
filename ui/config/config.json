@@ -1,5 +1,0 @@
-{
-  "logo": "@/assets/logos/ihris.png",
-  "site": "Demonstration site",
-  "ignoredSubsections": ["meta", "extension", "modifierextension"]
-}
