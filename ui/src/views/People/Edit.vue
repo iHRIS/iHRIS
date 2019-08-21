@@ -10,7 +10,10 @@
     </v-layout>
     <v-layout>
       <v-flex xs6 class="pr-3">
-        <div v-for="(element, index) in this.practitioner" v-bind:key="index">
+        <div
+          v-for="(element, index) in this.practitioner"
+          v-bind:key="'edit-' + index"
+        >
           <DetailsCard
             v-if="index != 'id' && index != 'resourceType' && index != 'active'"
             :data="element"
@@ -28,6 +31,7 @@
           <v-card-text>
             <DynamicForm
               v-show="details"
+              :name="detailTitle"
               :fields="detailFields"
               v-on:cancel="cancelDetailsForm"
               v-on:successfulSubmit="submitDetailsForm"
