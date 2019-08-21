@@ -133,11 +133,9 @@ export default {
                 return;
               }
 
-              let sanitizedField = field.id.slice(
+              let sanitizedField =
                 (definition == "BackboneElement" ? title.toLowerCase() : "") +
-                  field.id.indexOf(".") +
-                  1
-              );
+                field.id.slice(field.id.indexOf(".") + 1);
 
               if (sanitizedField == "id" || field.type[0].code == "Extension") {
                 return;
