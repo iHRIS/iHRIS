@@ -37,7 +37,7 @@ export default {
 
           let max = parseInt(this.max);
 
-          if (value.length > max) {
+          if (value && value.length > max) {
             return "Only " + max + " entries allowed.";
           }
 

@@ -77,6 +77,7 @@ export default {
       fields: [
         {
           id: "name",
+          max: 1,
           name: "name",
           required: false,
           type: "string",
