@@ -312,8 +312,7 @@ export default {
     name: {
       default: null,
       type: String
-    },
-    structure: {}
+    }
   }
 };
 </script>
