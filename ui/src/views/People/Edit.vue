@@ -66,9 +66,11 @@ export default {
     DynamicForm
   },
   created() {
-    axios.get("/practitioner/view/" + this.$route.params.id).then(response => {
-      if (response.status === 201) {
-        this.practitioner = response.data.entry[0].resource;
+    axios.get("/practitioner/view/" + this.$route.params.id).then(practitioner => {
+      if (practitioner.status === 201) {
+        let component = this;
+
+        this.practitioner = practitioner.data.entry[0].resource;
         this.updateName();
       }
     });
@@ -159,11 +161,11 @@ export default {
       let practitioner = this.practitioner;
 
       if (practitioner.name[0]) {
-        if (practitioner.name[0].prefix[0]) {
+        if (practitioner.name[0].prefix) {
           name += practitioner.name[0].prefix[0] + " ";
         }
 
-        if (practitioner.name[0].given[0]) {
+        if (practitioner.name[0].given) {
           name += practitioner.name[0].given[0] + " ";
         }
 
@@ -171,7 +173,7 @@ export default {
           name += practitioner.name[0].family + " ";
         }
 
-        if (practitioner.name[0].suffix[0]) {
+        if (practitioner.name[0].suffix) {
           name += practitioner.name[0].suffix[0] + " ";
         }
       }
