@@ -5,8 +5,9 @@
     outline
     :required="required"
     :value="value"
-    :rules="[rules.required, rules.whitespace]"
     :v-model="code"
+    :rules="[rules.required, rules.whitespace]"
+    @change="changeValue"
   ></v-select>
 </template>
 
@@ -36,6 +37,9 @@ export default {
     };
   },
   methods: {
+    changeValue(value) {
+      this.code = value;
+    },
     getInput() {
       return this["code"];
     }

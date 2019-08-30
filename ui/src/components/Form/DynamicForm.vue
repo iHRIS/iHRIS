@@ -256,7 +256,9 @@ export default {
       let inputs = {};
 
       for (let i of this.inputs) {
-        inputs[i] = this.$refs[i][0].getInput();
+        if (this.$refs[i]) {
+          inputs[i] = this.$refs[i][0].getInput();
+        }
       }
 
       return inputs;
