@@ -204,18 +204,20 @@ export default {
                 });
 
                 fields._properties.forEach(function(field) {
-                  data.push({
-                    id: field._name,
-                    description: field._short,
-                    max: field._max,
-                    name: field._name,
-                    options: field._short
-                      .split("|")
-                      .map(Function.prototype.call, String.prototype.trim),
-                    required: field._required,
-                    type: field._type,
-                    value: componentFields[field._name] ? componentFields[field._name] : null
-                  });
+                  if (field._name != "id") {
+                    data.push({
+                      id: field._name,
+                      description: field._short,
+                      max: field._max,
+                      name: field._name,
+                      options: field._short
+                        .split("|")
+                        .map(Function.prototype.call, String.prototype.trim),
+                      required: field._required,
+                      type: field._type,
+                      value: componentFields[field._name] ? componentFields[field._name] : null
+                    });
+                  }
                 });
 
                 this.fields = data;
