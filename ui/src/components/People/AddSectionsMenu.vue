@@ -31,151 +31,50 @@
 
 <script>
 import axios from "axios";
+import StructureDefinition from "@/mixins/StructureDefinition.js";
 
 export default {
   created() {
-    let component = this;
+    let fields = this.describe("Practitioner").then(response => {
+      const config = require("../../../config/config.json");
 
-    axios
-      .get("/practitioner/describe/definition/Practitioner")
-      .then(response => {
-        if (response.status === 201) {
-          const ParseConformance = require("fhir").ParseConformance;
-          const parser = new ParseConformance();
-          const config = require("../../../config/config.json");
+      let menu = [];
+      let index = 0;
 
-          let fields = parser.parseStructureDefinition(response.data);
-          let menu = [];
-
-          // add in descriptions
-          fields._properties.map(field => {
-            response.data.snapshot.element.forEach(function(element) {
-              if (element.id === "Practitioner." + field._name) {
-                field._short = element.short;
-              }
+      for (var key in response) {
+        if (response.hasOwnProperty(key) &&
+          response[key].title &&
+          config.ignoredSubsections.indexOf(response[key].title.toLowerCase()) < 0 &&
+          response[key].subtitle
+        ) {
+          if (response[key].object) {
+            menu.push({
+              subtitle: response[key].subtitle,
+              title: response[key].title,
+              index: index++,
+              definition: response[key].type
             });
-          });
-
-          fields._properties.forEach(function(field, index) {
-            if (
-              (field._properties ||
-                component._self.primitiveTypes.indexOf(field._type) < 0) &&
-              config.ignoredSubsections.indexOf(field._name.toLowerCase()) <
-                0 &&
-              !component.data[field._name]
-            ) {
-              menu.push({
-                subtitle: field._short,
-                title: field._name,
-                index: index,
-                definition: field._type
-              });
-            }
-          });
-
-          this.menu = menu;
+          }
         }
-      });
+      }
+
+      this.menu = menu;
+    });
   },
   data() {
     return {
       fields: [],
-      menu: [],
-      primitiveTypes: [
-        "base64Binary",
-        "boolean",
-        "canonical",
-        "code",
-        "date",
-        "dateTime",
-        "decimal",
-        "id",
-        "instant",
-        "markdown",
-        "oid",
-        "positiveInt",
-        "string",
-        "time",
-        "unsignedInt",
-        "uri",
-        "url",
-        "uuid"
-      ]
+      menu: []
     };
   },
   methods: {
-    describe(definition, title, parentDefinition) {
-      let component = this;
-      let url = "/practitioner/describe/definition/";
-
-      if (definition == "BackboneElement") {
-        url += parentDefinition;
-      } else {
-        url += definition.charAt(0).toUpperCase() + definition.slice(1);
-      }
-
-      return axios
-        .get(url)
-        .then(response => {
-          if (response.status != 201) {
-            return [];
-          }
-
-          let fields = [];
-
-          response.data.snapshot.element.forEach(function(field) {
-            if (field.id.indexOf(".") >= 0) {
-              // skip unneeded backbone fields
-              if (
-                definition == "BackboneElement" &&
-                field.id.indexOf(title.toLowerCase()) < 0
-              ) {
-                return;
-              }
-
-              let sanitizedField =
-                (definition == "BackboneElement" ? title.toLowerCase() : "") +
-                field.id.slice(field.id.indexOf(".") + 1);
-
-              if (sanitizedField == "id" || field.type[0].code == "Extension") {
-                return;
-              }
-
-              if (
-                component._self.primitiveTypes.indexOf(field.type[0].code) >= 0
-              ) {
-                fields.push({
-                  subtitle: field.definition,
-                  title: field.short,
-                  id: sanitizedField,
-                  options: field.short
-                    .split("|")
-                    .map(Function.prototype.call, String.prototype.trim),
-                  name: sanitizedField,
-                  type: field.type[0].code,
-                  required: field.min > 0
-                });
-              } else {
-                fields[sanitizedField] = component._self.describe(
-                  sanitizedField,
-                  title
-                );
-              }
-            }
-          });
-
-          return fields;
-        })
-        .catch(err => {
-          return [err];
-        });
-    },
     showForm(title, definition) {
-      this._self.describe(definition, title, "Practitioner").then(fields => {
+      this._self.describe(definition, "Practitioner").then(fields => {
         this.$emit("toggleForm", fields, title);
       });
     }
   },
+  mixins: [StructureDefinition],
   props: ["data"]
 };
 </script>
