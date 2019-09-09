@@ -73,6 +73,7 @@ export default {
           let component = this;
 
           this.practitioner = practitioner.data.entry[0].resource;
+          console.log(practitioner.data.entry[0].resource);
           this.updateName();
         }
       });

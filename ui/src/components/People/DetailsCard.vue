@@ -109,6 +109,7 @@
 import axios from "axios";
 
 import DynamicForm from "@/components/Form/DynamicForm.vue";
+import StructureDefinition from "@/mixins/StructureDefinition.js";
 
 export default {
   components: {
@@ -162,73 +163,48 @@ export default {
     if (this.edit) {
       this.editButton = true;
       let component = this;
-      const ParseConformance = require("fhir").ParseConformance;
-      const parser = new ParseConformance();
 
-      axios
-        .get("/practitioner/describe/definition/Practitioner")
-        .then(practitioner => {
-          let definition = null;
+      this.describe("Practitioner").then(response => {
+        let data = [];
+        let fields = [];
 
-          for (var field of parser.parseStructureDefinition(practitioner.data)
-            ._properties) {
-            if (field._name === component.name) {
-              definition = field._type;
-              break;
-            }
-          }
+        if (component.data[0]) {
+          fields = component.data[0];
+        } else {
+          fields = component.data;
+        }
 
-          axios
-            .get("/practitioner/describe/definition/" + definition)
-            .then(response => {
-              if (response.status === 201) {
-                let componentFields = [];
+        for (var key in response) {
+          if (response.hasOwnProperty(key) && key == component.name) {
+            response[key].fields.then(element => {
+              for (var subkey in element) {
+                if (element.hasOwnProperty(subkey)) {
+                  let options = element[subkey].short ?
+                    element[subkey].short
+                      .split("|")
+                      .map(Function.prototype.call, String.prototype.trim) :
+                    null;
 
-                if (component.data[0]) {
-                  componentFields = component.data[0];
-                } else {
-                  componentFields = component.data;
-                }
-
-                let fields = parser.parseStructureDefinition(response.data);
-                let data = [];
-
-                // add in descriptions
-                fields._properties.map(field => {
-                  response.data.snapshot.element.forEach(function(element) {
-                    if (element.id === definition + "." + field._name) {
-                      field._short = element.short;
-                      field._max = element.max;
-                    }
+                  data.push({
+                    id: element[subkey].name,
+                    description: element[subkey].short,
+                    max: element[subkey].max,
+                    name: element[subkey].name,
+                    options: options,
+                    required: element[subkey].required,
+                    type: element[subkey].type,
+                    value: fields[element[subkey].name] ? fields[element[subkey].name] : null
                   });
-                });
-
-                fields._properties.forEach(function(field) {
-                  if (field._name != "id") {
-                    data.push({
-                      id: field._name,
-                      description: field._short,
-                      max: field._max,
-                      name: field._name,
-                      options: field._short
-                        .split("|")
-                        .map(Function.prototype.call, String.prototype.trim),
-                      required: field._required,
-                      type: field._type,
-                      value: componentFields[field._name] ? componentFields[field._name] : null
-                    });
-                  }
-                });
-
-                this.fields = data;
-                this.$refs.dynamicEditingForm.changeFields(data);
-                this.dynamicFormKey++;
+                }
               }
-            })
-            .catch(error => {
-              this.showAlert(error, "error");
             });
-        });
+          }
+        }
+
+        this.fields = data;
+        this.$refs.dynamicEditingForm.changeFields(data);
+        this.dynamicFormKey++;
+      });
     }
   },
   data() {
@@ -305,6 +281,7 @@ export default {
       this.showMultiple = false;
     }
   },
+  mixins: [StructureDefinition],
   props: {
     data: {},
     edit: {

@@ -92,6 +92,7 @@ export default {
           subtitle: field._definition,
           title: field._name,
           id: field._name,
+          max: field._multiple ? "*" : 1,
           options: field._short
             .split("|")
             .map(Function.prototype.call, String.prototype.trim),
@@ -119,6 +120,7 @@ export default {
           subtitle: field._definition,
           title: field._name,
           id: field._name,
+          max: field._multiple ? "*" : 1,
           options: options,
           name: field._name,
           type: field._type,
