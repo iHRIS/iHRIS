@@ -66,14 +66,16 @@ export default {
     DynamicForm
   },
   created() {
-    axios.get("/practitioner/view/" + this.$route.params.id).then(practitioner => {
-      if (practitioner.status === 201) {
-        let component = this;
+    axios
+      .get("/practitioner/view/" + this.$route.params.id)
+      .then(practitioner => {
+        if (practitioner.status === 201) {
+          let component = this;
 
-        this.practitioner = practitioner.data.entry[0].resource;
-        this.updateName();
-      }
-    });
+          this.practitioner = practitioner.data.entry[0].resource;
+          this.updateName();
+        }
+      });
   },
   data() {
     return {
