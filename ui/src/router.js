@@ -67,12 +67,6 @@ export default new Router({
         import(/* webpackChunkName: "EditPeople" */ "./views/People/AddSubsection.vue")
     },
     {
-      path: "/people/review-applications",
-      name: "review-application",
-      component: () =>
-        import(/* webpackChunkName: "ReviewApplication" */ "./views/People/ReviewApplication.vue")
-    },
-    {
       path: "/people/edit/:id",
       name: "people-edit",
       component: () =>
@@ -83,12 +77,6 @@ export default new Router({
       name: "people-view",
       component: () =>
         import(/* webpackChunkName: "ViewPeople" */ "./views/People/View.vue")
-    },
-    {
-      path: "/settings",
-      name: "settings",
-      component: () =>
-        import(/* webpackChunkName: "about" */ "./views/Settings.vue")
     },
     {
       path: "/relationship",
