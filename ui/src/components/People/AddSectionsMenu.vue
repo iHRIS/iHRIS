@@ -35,7 +35,7 @@ import StructureDefinition from "@/mixins/StructureDefinition.js";
 
 export default {
   created() {
-    let fields = this.describe("Practitioner").then(response => {
+    this.describe("Practitioner").then(response => {
       const config = require("../../../config/config.json");
 
       let menu = [];
