@@ -30,11 +30,12 @@
 </template>
 
 <script>
-import axios from "axios";
 import StructureDefinition from "@/mixins/StructureDefinition.js";
 
 export default {
   created() {
+    let practitioner = this.data;
+
     this.describe("Practitioner").then(response => {
       const config = require("../../../config/config.json");
 
@@ -42,9 +43,12 @@ export default {
       let index = 0;
 
       for (var key in response) {
-        if (response.hasOwnProperty(key) &&
+        if (
+          !practitioner[key] &&
+          response.hasOwnProperty(key) &&
           response[key].title &&
-          config.ignoredSubsections.indexOf(response[key].title.toLowerCase()) < 0 &&
+          config.ignoredSubsections.indexOf(response[key].title.toLowerCase()) <
+            0 &&
           response[key].subtitle
         ) {
           if (response[key].object) {

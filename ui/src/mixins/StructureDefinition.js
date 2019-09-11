@@ -36,13 +36,14 @@ export default {
   },
   methods: {
     describe(structureDefinition, parentDefinition) {
-      let component = this;
       let url = "/practitioner/describe/definition/";
 
       if (structureDefinition == "BackboneElement") {
         url += parentDefinition;
       } else {
-        url += structureDefinition.charAt(0).toUpperCase() + structureDefinition.slice(1);
+        url +=
+          structureDefinition.charAt(0).toUpperCase() +
+          structureDefinition.slice(1);
       }
 
       return axios
@@ -56,7 +57,13 @@ export default {
           let fields = [];
 
           definition._properties.forEach(field => {
-            fields = this.processField(field, fields, structureDefinition, response.data.snapshot.element, parentDefinition);
+            fields = this.processField(
+              field,
+              fields,
+              structureDefinition,
+              response.data.snapshot.element,
+              parentDefinition
+            );
           });
 
           return Promise.resolve(fields);
@@ -79,11 +86,24 @@ export default {
         }
       }
     },
-    processField(field, fields, structureDefinition, rawData, parentDefinition) {
+    processField(
+      field,
+      fields,
+      structureDefinition,
+      rawData,
+      parentDefinition
+    ) {
       // skip fields we're not interested in
-      if (field._type == "id" || field._type == "Extension" || field._type == "xhtml" || field._name == "id") {
+      if (
+        field._type == "id" ||
+        field._type == "Extension" ||
+        field._type == "xhtml" ||
+        field._name == "id"
+      ) {
         return fields;
       }
+
+      let options = [];
 
       if (this._self.primitiveTypes.indexOf(field._type) >= 0) {
         this._self.populate(field._name, structureDefinition, field, rawData);
@@ -104,8 +124,12 @@ export default {
         };
       } else if (field._type == "BackboneElement") {
         this._self.populate(field._name, structureDefinition, field, rawData);
-        var options = field._short ? field._short.split("|")
-            .map(Function.prototype.call, String.prototype.trim) : [];
+
+        options = field._short
+          ? field._short
+              .split("|")
+              .map(Function.prototype.call, String.prototype.trim)
+          : [];
 
         fields[field._name] = {
           subtitle: field._definition,
@@ -121,15 +145,24 @@ export default {
         };
 
         field._properties.forEach(subfield => {
-          fields[field._name].fields = this._self.processField(subfield, fields[field._name], structureDefinition, rawData, parentDefinition);
+          fields[field._name].fields = this._self.processField(
+            subfield,
+            fields[field._name],
+            structureDefinition,
+            rawData,
+            parentDefinition
+          );
         });
       } else if (this.structureDefinitions[field._type]) {
         fields[field._name] = this._self.structureDefinitions[field._type];
       } else {
         this._self.populate(field._name, structureDefinition, field, rawData);
 
-        var options = field._short ? field._short.split("|")
-            .map(Function.prototype.call, String.prototype.trim) : [];
+        options = field._short
+          ? field._short
+              .split("|")
+              .map(Function.prototype.call, String.prototype.trim)
+          : [];
 
         fields[field._name] = {
           subtitle: field._definition,
@@ -141,10 +174,7 @@ export default {
           type: field._type,
           required: field._required,
           object: true,
-          fields: this._self.describe(
-            field._type,
-            structureDefinition
-          )
+          fields: this._self.describe(field._type, structureDefinition)
         };
 
         this.structureDefinitions[field._type] = fields[field._name];
