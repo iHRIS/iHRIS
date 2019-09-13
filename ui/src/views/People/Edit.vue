@@ -19,6 +19,7 @@
             :data="element"
             :name="index"
             v-on:saveData="saveSubsectionData"
+            v-on:deleteData="deleteSubsectionData"
             edit
             :ref="'subsection' + index"
           />
@@ -54,9 +55,10 @@
 import axios from "axios";
 
 import AddSectionsMenu from "@/components/People/AddSectionsMenu.vue";
-import DetailsCard from "@/components/People/DetailsCard.vue";
 import Alert from "@/components/Layout/Alert.vue";
+import DetailsCard from "@/components/People/DetailsCard.vue";
 import DynamicForm from "@/components/Form/DynamicForm.vue";
+import Vue from "vue";
 
 export default {
   components: {
@@ -94,6 +96,33 @@ export default {
 
       this.$refs.alert.reset();
     },
+    deleteSubsectionData(field, index) {
+      let component = this;
+
+      if (typeof index !== "undefined" && this.practitioner[field].length > 1) {
+        this.practitioner[field] = this.practitioner[field].splice(index, 1);
+      } else {
+        Vue.delete(this.practitioner, field);
+      }
+
+      axios.put("/practitioner/edit", this.practitioner).then(response => {
+        component.updateName();
+
+        if (response.status == 201) {
+          if (component.$refs["subsection" + field][0]) {
+            component.$refs["subsection" + field][0].showAlert(
+              "Item deleted successfully!",
+              "success"
+            );
+          }
+        } else {
+          component.$refs["subsection-" + field][0].showAlert(
+            "There was an error deleting this data.",
+            "error"
+          );
+        }
+      });
+    },
     saveSubsectionData(data, field, index) {
       let component = this;
       let practitioner = this.practitioner;
@@ -111,7 +140,6 @@ export default {
 
       axios.put("/practitioner/edit", practitioner).then(response => {
         component.practitioner = practitioner;
-        component.updateName();
 
         if (response.status == 201) {
           component.$refs["subsection" + field][0].showAlert(

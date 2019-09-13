@@ -15,6 +15,15 @@
       >
         <v-icon>edit</v-icon>
       </v-btn>
+      <v-btn
+        fab
+        class="error"
+        v-show="editButton || edit"
+        v-if="!data[0]"
+        v-on:click="deleteItem()"
+      >
+        <v-icon>delete</v-icon>
+      </v-btn>
     </v-card-title>
     <v-card-text
       v-for="(value, name) in data"
@@ -36,6 +45,16 @@
               v-on:click="toggleForm(name)"
             >
               <v-icon>edit</v-icon>
+            </v-btn>
+
+            <v-btn
+              fab
+              class="error"
+              v-show="editButton || edit"
+              v-if="data[0]"
+              v-on:click="deleteItem(name)"
+            >
+              <v-icon>delete</v-icon>
             </v-btn>
           </v-layout>
           <div v-for="(data, fieldIndex) in value" v-bind:key="fieldIndex">
@@ -229,6 +248,13 @@ export default {
       this.editing = false;
       this.editButton = true;
       this.showMultiple = true;
+    },
+    deleteItem(index) {
+      this.$emit(
+        "deleteData",
+        this.name,
+        index
+      );
     },
     showAddForm() {
       let fields = this.fields;
