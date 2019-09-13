@@ -10,6 +10,10 @@ Vue.filter("sentenceCase", value => {
     return null;
   }
 
+  if (typeof value != "string") {
+    return value;
+  }
+
   let data = value.replace(/([A-Z])/g, " $1");
   data = data.charAt(0).toUpperCase() + data.slice(1);
   return data;
