@@ -198,18 +198,12 @@ export default {
             response[key].fields.then(element => {
               for (var subkey in element) {
                 if (element.hasOwnProperty(subkey)) {
-                  let options = element[subkey].short ?
-                    element[subkey].short
-                      .split("|")
-                      .map(Function.prototype.call, String.prototype.trim) :
-                    null;
-
                   data.push({
                     id: element[subkey].name,
                     description: element[subkey].short,
                     max: element[subkey].max,
                     name: element[subkey].name,
-                    options: options,
+                    options: element[subkey].options,
                     required: element[subkey].required,
                     type: element[subkey].type,
                     value: fields[element[subkey].name] ? fields[element[subkey].name] : null
