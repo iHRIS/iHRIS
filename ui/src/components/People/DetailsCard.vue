@@ -58,14 +58,16 @@
             </v-btn>
           </v-layout>
           <div v-for="(data, fieldIndex) in value" v-bind:key="fieldIndex">
-            <v-layout row>
-              <v-flex xs4 class="font-weight-bold">
-                {{ fieldIndex | sentenceCase }}
-              </v-flex>
-              <v-flex xs8>{{ data | separateByCommas }}</v-flex>
-            </v-layout>
+            <div v-if="data">
+              <v-layout row>
+                <v-flex xs4 class="font-weight-bold">
+                  {{ fieldIndex | sentenceCase }}
+                </v-flex>
+                <v-flex xs8>{{ data | separateByCommas }}</v-flex>
+              </v-layout>
 
-            <v-divider class="pb-3" />
+              <v-divider class="pb-3" />
+            </div>
           </div>
         </div>
         <div v-else>
