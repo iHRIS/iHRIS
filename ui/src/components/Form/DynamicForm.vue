@@ -238,24 +238,41 @@ export default {
       this.$emit("cancel");
     },
     changeFields(fields) {
+      let collapsedFields = this.collapseFields(fields);
+
       let inputs = [];
       let sanitized = [];
 
-      if (fields) {
-        for (var key in fields) {
-          if (fields.hasOwnProperty(key)) {
-            inputs.push(fields[key].name);
+      for (var key in collapsedFields) {
+        inputs.push(collapsedFields[key]);
 
-            let data = fields[key].name.replace(/([A-Z])/g, " $1");
-            fields[key].label = data.charAt(0).toUpperCase() + data.slice(1);
+        let data = collapsedFields[key].name.replace(/([A-Z])/g, " $1");
+        collapsedFields[key].label = data.charAt(0).toUpperCase() + data.slice(1);
 
-            sanitized.push(fields[key]);
-          }
-        }
+        sanitized.push(collapsedFields[key]);
       }
 
       this.data = sanitized;
       this.inputs = inputs;
+    },
+    collapseFields(fields, prefix) {
+      let collapsedFields = [];
+
+      for (var key in fields) {
+        if (fields.hasOwnProperty(key)) {
+          if (false && fields[key] && fields[key].fields) {
+            let subfields = this.collapseFields(fields[key].fields, fields[key].name);
+
+            for (var j in subfields) {
+              collapsedFields.push(subfields[j]);
+            }
+          } else {
+            collapsedFields.push(fields[key]);
+          }
+        }
+      }
+
+      return collapsedFields;
     },
     getInputs() {
       let inputs = {};
