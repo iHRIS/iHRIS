@@ -74,7 +74,11 @@ export default {
   methods: {
     showForm(title, definition) {
       this._self.describe(definition, "Practitioner").then(fields => {
-        this.$emit("toggleForm", fields, title);
+        if (definition == "BackboneElement") {
+          this.$emit("toggleForm", fields[title], title);
+        } else {
+          this.$emit("toggleForm", fields, title);
+        }
       });
     }
   },

@@ -108,19 +108,23 @@ export default {
       if (this._self.primitiveTypes.indexOf(field._type) >= 0) {
         this._self.populate(field._name, structureDefinition, field, rawData);
 
+        options = field._short
+          ? field._short
+              .split("|")
+              .map(Function.prototype.call, String.prototype.trim)
+          : [];
+
         fields[field._name] = {
           subtitle: field._definition,
           title: field._name,
           id: field._name,
           max: field._multiple ? "*" : 1,
-          options: field._short
-            .split("|")
-            .map(Function.prototype.call, String.prototype.trim),
+          options: options,
           name: field._name,
           type: field._type,
           required: field._required,
           object: false,
-          fields: []
+          fields: {}
         };
       } else if (field._type == "BackboneElement") {
         this._self.populate(field._name, structureDefinition, field, rawData);
@@ -141,17 +145,23 @@ export default {
           type: field._type,
           required: field._required,
           object: true,
-          fields: []
+          fields: {}
         };
 
         field._properties.forEach(subfield => {
-          fields[field._name].fields = this._self.processField(
+          let result = this._self.processField(
             subfield,
-            fields[field._name],
+            [],
             structureDefinition,
             rawData,
             parentDefinition
           );
+
+          if (result) {
+            Object.keys(result).forEach(key => {
+              fields[field._name].fields[key] = result[key];
+            });
+          }
         });
       } else if (this.structureDefinitions[field._type]) {
         fields[field._name] = this._self.structureDefinitions[field._type];
