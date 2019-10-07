@@ -278,6 +278,8 @@ export default {
       this.alert.show = true;
     },
     submit() {
+      console.log("Calling get inputs");
+
       this.$emit(
         "saveData",
         this.$refs.dynamicEditingForm.getInputs(),

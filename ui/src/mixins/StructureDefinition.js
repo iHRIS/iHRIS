@@ -46,6 +46,12 @@ export default {
           structureDefinition.slice(1);
       }
 
+      console.log("Describing " + structureDefinition);
+
+      if (this.structureDefinitions[structureDefinition]) {
+        return this.structureDefinitions[structureDefinition];
+      }
+
       return axios
         .get(url)
         .then(response => {
@@ -174,6 +180,8 @@ export default {
               .map(Function.prototype.call, String.prototype.trim)
           : [];
 
+        this.structureDefinitions[field._type] = fields[field._name];
+
         fields[field._name] = {
           subtitle: field._definition,
           title: field._name,
@@ -184,10 +192,8 @@ export default {
           type: field._type,
           required: field._required,
           object: true,
-          fields: this._self.describe(field._type, structureDefinition)
+          fields: this._self.describe(field._type, structureDefinition),
         };
-
-        this.structureDefinitions[field._type] = fields[field._name];
       }
 
       return fields;

@@ -155,6 +155,7 @@ export default {
       });
     },
     submitDetailsForm() {
+      console.log("Calling get inputs");
       let component = this;
       let input = this.$refs.detailsForm.getInputs();
 
@@ -182,6 +183,27 @@ export default {
       this.details = true;
       this.detailFields = fields;
       this.detailTitle = title;
+
+      let fake = {
+        fields: {
+          code: {
+            fields: {
+              coding: {
+                name: "security"
+              },
+              text: {
+                name: "text"
+              }
+            }
+          },
+          identifier: {
+          },
+          issuer: {
+          },
+          period: {
+          }
+        }
+      };
 
       this.$refs.alert.reset();
       this.$refs.detailsForm.changeFields(fields);
