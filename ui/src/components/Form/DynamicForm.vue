@@ -230,6 +230,7 @@ export default {
       active: true,
       data: {},
       inputs: [],
+      names: [],
       structure: {},
       use: ""
     };
@@ -248,65 +249,60 @@ export default {
         this.structure = fields;
       }
 
-      this.collapseFields(fields);
+      console.log(this.structure);
+
+      //this.collapseFields(fields);
     },
-    collapseFields(fields, prefix) {
+    async collapseFields(fields, prefix) {
       let collapsedFields = [];
       let components = this;
 
-      if (fields.fields && (Object.keys(fields.fields).length > 0 || fields.fields.length > 0)) {
-        if (fields.fields instanceof Promise) {
-          return fields.fields.then(result => {
-            let subfields = this.collapseFields(result, fields.name);
+      if (fields === null) {
+        return [];
+      }
 
-            for (var j in subfields) {
-              this.inputs.push(subfields[j]);
+      console.log("collapse fields");
+      console.log(fields);
 
-              let data = subfields[j].name.replace(/([A-Z])/g, " $1");
-              subfields[j].label = data.charAt(0).toUpperCase() + data.slice(1);
-              this.data.push(subfields[j]);
-            }
-
-            return Promise.resolve(collapsedFields);
-          });
-        } else {
+      if (fields.fields && (fields.fields instanceof Promise || Object.keys(fields.fields).length > 0 || fields.fields.length > 0)) {
+        console.log("After collapse fields");
+        fields.fields = await fields.fields;
+      
+        if (!this.names.includes(fields.name)) {
           let subfields = this.collapseFields(fields.fields, fields.name);
 
           for (var j in subfields) {
             this.inputs.push(subfields[j]);
-              let data = subfields[j].name.replace(/([A-Z])/g, " $1");
-              subfields[j].label = data.charAt(0).toUpperCase() + data.slice(1);
-              this.data.push(subfields[j]);
+            let data = subfields[j].name.replace(/([A-Z])/g, " $1");
+            subfields[j].label = data.charAt(0).toUpperCase() + data.slice(1);
+            this.names.push(subfields[j].label);
+            this.data.push(subfields[j]);
           }
         }
       } else {
+        console.log("else clause");
         for (var key in fields) {
           if (fields.hasOwnProperty(key)) {
-            if (fields[key].fields instanceof Promise) {
-              return fields[key].fields.then(result => {
-                if (result && (Object.keys(result).length > 0 || result.length > 0)) {
-                  let subfields = this.collapseFields(result, key);
+            let subfieldsList = "";
 
-                  for (var j in subfields) {
-                    this.inputs.push(subfields[j]);
+            if (!fields[key]) {
+              console.log("this is weird");
+              console.log(fields);
+            }
 
-                    let data = subfields[j].name.replace(/([A-Z])/g, " $1");
-                    subfields[j].label = data.charAt(0).toUpperCase() + data.slice(1);
-                    this.data.push(subfields[j]);
-                  }
-                } else {
-                  this.inputs.push(fields[key]);
-
-                  let data = fields[key].name.replace(/([A-Z])/g, " $1");
-                  fields[key].label = data.charAt(0).toUpperCase() + data.slice(1);
-                  this.data.push(fields[key]);
-                }
-
-                return Promise.resolve(collapsedFields);
-              });
+            console.log("checking promise");
+            if (fields[key] && fields[key].fields instanceof Promise) {
+              console.log("is a promise");
+              subfieldsList = await fields[key].fields;
             } else {
-              if (fields[key].fields && (Object.keys(fields[key].fields).length > 0 || fields[key].fields.length > 0)) {
-                let subfields = this.collapseFields(fields[key].fields, key);
+              console.log("is not a promise");
+              console.log(fields);
+              subfieldsList = fields[key].fields;
+            } 
+
+            if (subfieldsList && (Object.keys(subfieldsList).length > 0 || subfieldsList.length > 0)) {
+              if (!this.names.includes(key)) {
+                let subfields = this.collapseFields(subfieldsList, key);
 
                 for (var j in subfields) {
                   this.inputs.push(subfields[j]);
@@ -314,14 +310,15 @@ export default {
                   let data = subfields[j].name.replace(/([A-Z])/g, " $1");
                   subfields[j].label = data.charAt(0).toUpperCase() + data.slice(1);
                   this.data.push(subfields[j]);
+                  this.names.push(key);
                 }
-              } else {
-                this.inputs.push(fields[key]);
-
-                let data = fields[key].name.replace(/([A-Z])/g, " $1");
-                fields[key].label = data.charAt(0).toUpperCase() + data.slice(1);
-                this.data.push(fields[key]);
               }
+            } else {
+              this.inputs.push(fields[key]);
+
+              let data = fields[key].name.replace(/([A-Z])/g, " $1");
+              fields[key].label = data.charAt(0).toUpperCase() + data.slice(1);
+              this.data.push(fields[key]);
             }
           }
         }
@@ -329,126 +326,45 @@ export default {
 
       return Promise.resolve(collapsedFields);
     },
-    getInputs(data) {
-      console.log("Get inputs");
+    async getInputs(data) {
       let fields = {};
       let inputs = {};
 
       if (data) {
-        console.log("This is setting to whatever data is");
         fields = data;
-
-        console.log(typeof fields);
-        console.log(data);
       } else {
-        console.log("Structure");
-        console.log(this.structure);
-
         fields = this.structure;
       }
 
-      return {};
-
-      console.log("Fields");
-      console.log(fields);
-
       if (fields instanceof Object) {
-        //console.log("Length: " + Object.keys(fields).length);
-        //console.log(typeof fields);
-
-        if (Object.keys(fields).length == 0) {
-          //console.log(fields);
-        }
-
         if (fields instanceof Promise) {
-          //console.log("This is a promise");
+          fields = await fields;
         }
 
-        Object.keys(fields).forEach(name => {
-          //console.log(name);
-          //console.log(typeof fields);
-
-          if (fields instanceof Array) {
-            //console.log("This is an array");
-          } else {
-            //console.log("This is not an array");
-          }
-
-          if (fields instanceof Promise) {
-            fields.then(result => {
-              //console.log("Result");
-              //console.log(result);
-
-              if (fields[name].fields) {
-                if (fields[name].fields instanceof Promise) {
-                  fields[name].fields.then(result => {
-                    //console.log("Begin recursion promise");
-                    //console.log(fields[name].fields);
-                    inputs[fields[name].id] = this.getInputs(fields[name].fields);
-                  });
-                } else {
-                  //console.log("Begin recursion");
-                  //console.log(fields[name].fields);
-                  inputs[fields[name].id] = this.getInputs(fields[name].fields);
-                }
-              } else {
-                //console.log("Do not go recursive");
-                inputs[fields[name].id] = this.$refs[fields[name].id][0].getInput();
-              }
-            });
-          } else if (fields[name].fields) {
-            //console.log("Begin recursion");
-            //console.log(fields[name].fields);
-            //console.log(fields[name]);
-
+        await Promise.all(Object.keys(fields).forEach(async name => {
+          if (fields[name].fields) {
             if (fields[name].fields instanceof Promise) {
-              //console.log("Subfields is a promise");
-
-              fields[name].fields.then(result => {
-                inputs[fields[name].id] = this.getInputs(fields[name].fields);
-              });
-            } else {
-              //console.log("Subfields is not a promise");
-
-              inputs[fields[name].id] = this.getInputs(fields[name].fields);
+              fields[name].fields = await fields[name].fields;
             }
+  
+            inputs[fields[name].id] = this.getInputs(fields[name].fields);
           } else {
-            //console.log("Do not go recursive");
             inputs[fields[name].id] = this.$refs[fields[name].id][0].getInput();
           }
-        });
-
-        //console.log("Concluded loop");
+        }));
       } else {
-        //console.log("Im in the array loop");
-
         for (let name in fields) {
           if (fields instanceof Promise) {
-            fields.then(result => {
-              if (fields[name].fields) {
-                //console.log("Begin recursion");
-                //console.log(fields[name].fields);
-                inputs[fields[name].id] = this.getInputs(fields[name].fields);
-              } else {
-                //console.log("Do not go recursive");
-                inputs[fields[name].id] = this.$refs[fields[name].id][0].getInput();
-              }
-            });
+            fields = await fields;
+          }
+
+          if (fields[name].fields) {
+            inputs[fields[name].id] = this.getInputs(fields[name].fields);
           } else {
-            if (fields[name].fields) {
-              //console.log("Begin recursion");
-              //console.log(fields[name].fields);
-              inputs[fields[name].id] = this.getInputs(fields[name].fields);
-            } else {
-              //console.log("Do not go recursive");
-              inputs[fields[name].id] = this.$refs[fields[name].id][0].getInput();
-            }
+            inputs[fields[name].id] = this.$refs[fields[name].id][0].getInput();
           }
         }
       }
-
-      //console.log("Data");
-      //console.log(inputs);
 
       return inputs;
     },

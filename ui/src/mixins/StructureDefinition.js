@@ -20,6 +20,7 @@ export default {
         "decimal",
         "id",
         "instant",
+        "integer",
         "markdown",
         "oid",
         "positiveInt",
@@ -46,10 +47,10 @@ export default {
           structureDefinition.slice(1);
       }
 
-      console.log("Describing " + structureDefinition);
-
       if (this.structureDefinitions[structureDefinition]) {
-        return this.structureDefinitions[structureDefinition];
+        return new Promise((resolve, reject) => {
+          return resolve(this.structureDefinitions[structureDefinition]);
+        });
       }
 
       return axios
@@ -72,7 +73,7 @@ export default {
             );
           });
 
-          return Promise.resolve(fields);
+          return fields;
         })
         .catch(err => {
           return [err];
@@ -85,6 +86,14 @@ export default {
           rawData[i].id.slice(rawData[i].id.indexOf(".") + 1);
 
         if (sanitizedField == name) {
+          if (rawData[i].type[0].targetProfile) {
+            let cleanType = rawData[i].type[0].targetProfile[0].slice(rawData[i].type[0].targetProfile[0].lastIndexOf("/") + 1);
+
+            if (cleanType !== "StructureDefintion") {
+              field._type = cleanType;
+            }
+          }
+
           field._short = rawData[i].short;
           field._definition = rawData[i].definition;
 
@@ -100,60 +109,46 @@ export default {
       parentDefinition
     ) {
       // skip fields we're not interested in
+      // also skip circular referenced fields like organization
       if (
         field._type == "id" ||
         field._type == "Extension" ||
         field._type == "xhtml" ||
-        field._name == "id"
+        field._name == "id" ||
+        (structureDefinition == "Organization" && field._name == "identifier")
       ) {
         return fields;
       }
 
-      let options = [];
+      this._self.populate(field._name, structureDefinition, field, rawData);
+
+      if (this._self.structureDefinitions[field._type]) {
+        fields[field._name] = this._self.structureDefinitions[field._type];
+        return fields;
+      }
+
+      let options = field._short
+          ? field._short
+              .split("|")
+              .map(Function.prototype.call, String.prototype.trim)
+          : [];
+
+      fields[field._name] = {
+        subtitle: field._definition,
+        title: field._name,
+        id: field._name,
+        max: field._multiple ? "*" : 1,
+        options: options,
+        name: field._name,
+        type: field._type,
+        required: field._required,
+        object: true,
+        fields: {}
+      };
 
       if (this._self.primitiveTypes.indexOf(field._type) >= 0) {
-        this._self.populate(field._name, structureDefinition, field, rawData);
-
-        options = field._short
-          ? field._short
-              .split("|")
-              .map(Function.prototype.call, String.prototype.trim)
-          : [];
-
-        fields[field._name] = {
-          subtitle: field._definition,
-          title: field._name,
-          id: field._name,
-          max: field._multiple ? "*" : 1,
-          options: options,
-          name: field._name,
-          type: field._type,
-          required: field._required,
-          object: false,
-          fields: {}
-        };
+        fields[field._name].object = false;
       } else if (field._type == "BackboneElement") {
-        this._self.populate(field._name, structureDefinition, field, rawData);
-
-        options = field._short
-          ? field._short
-              .split("|")
-              .map(Function.prototype.call, String.prototype.trim)
-          : [];
-
-        fields[field._name] = {
-          subtitle: field._definition,
-          title: field._name,
-          id: field._name,
-          max: field._multiple ? "*" : 1,
-          options: options,
-          name: field._name,
-          type: field._type,
-          required: field._required,
-          object: true,
-          fields: {}
-        };
-
         field._properties.forEach(subfield => {
           let result = this._self.processField(
             subfield,
@@ -169,31 +164,9 @@ export default {
             });
           }
         });
-      } else if (this.structureDefinitions[field._type]) {
-        fields[field._name] = this._self.structureDefinitions[field._type];
       } else {
-        this._self.populate(field._name, structureDefinition, field, rawData);
-
-        options = field._short
-          ? field._short
-              .split("|")
-              .map(Function.prototype.call, String.prototype.trim)
-          : [];
-
-        this.structureDefinitions[field._type] = fields[field._name];
-
-        fields[field._name] = {
-          subtitle: field._definition,
-          title: field._name,
-          id: field._name,
-          max: field._multiple ? "*" : 1,
-          options: options,
-          name: field._name,
-          type: field._type,
-          required: field._required,
-          object: true,
-          fields: this._self.describe(field._type, structureDefinition),
-        };
+        fields[field._name].fields = this._self.describe(field._type, structureDefinition),
+        this._self.structureDefinitions[field._type] = fields[field._name];
       }
 
       return fields;
