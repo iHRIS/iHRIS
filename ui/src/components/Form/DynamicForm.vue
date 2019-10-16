@@ -252,19 +252,6 @@ export default {
         }
       }
 
-/*
-      let collapsedFields = this.collapseFields(fields);
-
-      for (var key in collapsedFields) {
-        inputs.push(collapsedFields[key]);
-
-        let data = collapsedFields[key].name.replace(/([A-Z])/g, " $1");
-        collapsedFields[key].label = data.charAt(0).toUpperCase() + data.slice(1);
-
-        sanitized.push(collapsedFields[key]);
-      }
-//*/
-
       this.data = sanitized;
       this.inputs = inputs;
     },
