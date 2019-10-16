@@ -1,6 +1,9 @@
 <template>
   <v-container grid-list-md>
     <v-layout row wrap class="pb-5">
+      <v-flex xs2 v-if="profilePicture">
+        <v-img :src="getProfilePicture(profilePicture)" contain max-height="120" max-width="120" />
+      </v-flex>
       <v-flex xs6 class="display-2 text-xs-left">
         {{ name }}
       </v-flex>
@@ -49,10 +52,14 @@ export default {
   data() {
     return {
       name: null,
-      practitioner: {}
+      practitioner: {},
+      profilePicture: null
     };
   },
   methods: {
+    getProfilePicture(path) {
+      return path;
+    },
     updateName() {
       let name = "";
       let practitioner = this.practitioner;
@@ -73,6 +80,10 @@ export default {
         if (practitioner.name[0].suffix[0]) {
           name += practitioner.name[0].suffix[0] + " ";
         }
+      }
+
+      if (practitioner.photo[0] && practitioner.photo[0].url) {
+        this.profilePicture = practitioner.photo[0].url;
       }
 
       this.name = name.trim();
