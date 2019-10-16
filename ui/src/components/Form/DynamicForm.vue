@@ -238,18 +238,18 @@ export default {
       this.$emit("cancel");
     },
     changeFields(fields) {
-      let collapsedFields = this.collapseFields(fields);
-
       let inputs = [];
       let sanitized = [];
 
-      for (var key in collapsedFields) {
-        inputs.push(collapsedFields[key]);
-
-        let data = collapsedFields[key].name.replace(/([A-Z])/g, " $1");
-        collapsedFields[key].label = data.charAt(0).toUpperCase() + data.slice(1);
-
-        sanitized.push(collapsedFields[key]);
+      if (fields) {
+        for (var key in fields) {
+          if (fields.hasOwnProperty(key)) {    
+            inputs.push(fields[key].name);    
+            let data = fields[key].name.replace(/([A-Z])/g, " $1");
+            fields[key].label = data.charAt(0).toUpperCase() + data.slice(1);
+            sanitized.push(fields[key]);
+          }    
+        }
       }
 
       this.data = sanitized;
