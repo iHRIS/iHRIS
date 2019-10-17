@@ -95,7 +95,7 @@
       </div>
     </v-card-text>
 
-    <v-card-text v-show="allowMultiple && showMultiple">
+    <v-card-text v-show="allowMultiple && showMultiple && edit">
       <v-btn
         class="font-weight-bold primary--text text-uppercase"
         text
