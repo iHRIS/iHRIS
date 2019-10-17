@@ -82,7 +82,7 @@ export default {
         }
       }
 
-      if (practitioner.photo[0] && practitioner.photo[0].url) {
+      if (practitioner.photo && practitioner.photo[0].url) {
         this.profilePicture = practitioner.photo[0].url;
       }
 
