@@ -1,16 +1,10 @@
 <template>
   <v-container>
-    <v-layout row wrap class="pb-5">
-      <v-flex xs2 v-if="profilePicture">
-        <v-img :src="getProfilePicture(profilePicture)" contain max-height="120" max-width="120" />
-      </v-flex>
-      <v-flex xs6 class="display-2 text-xs-left">
-        {{ name }}
-      </v-flex>
-      <v-flex xs3 offset-xs3>
-        <Alert ref="alert" />
-      </v-flex>
-    </v-layout>
+    <ProfileHeader
+      :practitioner="practitioner"
+      ref="profileHeader"
+    />
+
     <v-layout>
       <v-flex xs6 class="pr-3">
         <div
@@ -58,27 +52,24 @@
 import axios from "axios";
 
 import AddSectionsMenu from "@/components/People/AddSectionsMenu.vue";
-import Alert from "@/components/Layout/Alert.vue";
 import DetailsCard from "@/components/People/DetailsCard.vue";
 import DynamicForm from "@/components/Form/DynamicForm.vue";
+import ProfileHeader from "@/components/People/ProfileHeader.vue";
 import Vue from "vue";
 
 export default {
   components: {
     AddSectionsMenu,
-    Alert,
     DetailsCard,
-    DynamicForm
+    DynamicForm,
+    ProfileHeader
   },
   created() {
     axios
       .get("/practitioner/view/" + this.$route.params.id)
       .then(practitioner => {
         if (practitioner.status === 201) {
-          let component = this;
-
           this.practitioner = practitioner.data.entry[0].resource;
-          this.updateName();
         }
       });
   },
@@ -87,9 +78,7 @@ export default {
       details: false,
       detailFields: {},
       detailTitle: null,
-      name: null,
-      practitioner: {},
-      profilePicture: null
+      practitioner: {}
     };
   },
   methods: {
@@ -98,7 +87,7 @@ export default {
       this.detailsFields = {};
       this.detailTitle = null;
 
-      this.$refs.alert.reset();
+      this.$refs.profileHeader.reset();
     },
     deleteSubsectionData(field, index) {
       let component = this;
@@ -110,8 +99,6 @@ export default {
       }
 
       axios.put("/practitioner/edit", this.practitioner).then(response => {
-        component.updateName();
-
         if (response.status == 201) {
           if (component.$refs["subsection" + field][0]) {
             component.$refs["subsection" + field][0].showAlert(
@@ -173,12 +160,12 @@ export default {
       axios.put("/practitioner/edit", practitioner).then(response => {
         if (response.status == 201) {
           component.cancelDetailsForm();
-          component.$refs.alert.changeMessage(
+          component.$refs.profileHeader.changeMessage(
             title + " added successfully!",
             "success"
           );
         } else {
-          component.$refs.alert.changeMessage(
+          component.$refs.profileHeader.changeMessage(
             "There was an error saving this data.",
             "error"
           );
@@ -190,36 +177,8 @@ export default {
       this.detailFields = fields;
       this.detailTitle = title;
 
-      this.$refs.alert.reset();
+      this.$refs.profileHeader.reset();
       this.$refs.detailsForm.changeFields(fields);
-    },
-    updateName() {
-      let name = "";
-      let practitioner = this.practitioner;
-
-      if (practitioner.name[0]) {
-        if (practitioner.name[0].prefix) {
-          name += practitioner.name[0].prefix[0] + " ";
-        }
-
-        if (practitioner.name[0].given) {
-          name += practitioner.name[0].given[0] + " ";
-        }
-
-        if (practitioner.name[0].family) {
-          name += practitioner.name[0].family + " ";
-        }
-
-        if (practitioner.name[0].suffix) {
-          name += practitioner.name[0].suffix[0] + " ";
-        }
-      }
-
-      if (practitioner.photo && practitioner.photo[0].url) {
-        this.profilePicture = practitioner.photo[0].url;
-      }
-
-      this.name = name.trim();
     }
   },
   name: "AddSections"
