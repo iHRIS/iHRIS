@@ -1,13 +1,7 @@
 <template>
   <v-container grid-list-md>
-    <v-layout row wrap class="pb-5">
-      <v-flex xs2 v-if="profilePicture">
-        <v-img :src="getProfilePicture(profilePicture)" contain max-height="120" max-width="120" />
-      </v-flex>
-      <v-flex xs6 class="display-2 text-xs-left">
-        {{ name }}
-      </v-flex>
-    </v-layout>
+    <ProfileHeader :practitioner="practitioner" />
+
     <v-layout wrap>
       <v-flex
         xs6
@@ -28,10 +22,12 @@
 import axios from "axios";
 
 import DetailsCard from "@/components/People/DetailsCard.vue";
+import ProfileHeader from "@/components/People/ProfileHeader.vue";
 
 export default {
   components: {
-    DetailsCard
+    DetailsCard,
+    ProfileHeader
   },
   created() {
     axios.get("/practitioner/view/" + this.$route.params.id).then(response => {
@@ -45,49 +41,13 @@ export default {
         }
 
         this.practitioner = practitioner;
-        this.updateName();
       }
     });
   },
   data() {
     return {
-      name: null,
       practitioner: {},
-      profilePicture: null
     };
-  },
-  methods: {
-    getProfilePicture(path) {
-      return path;
-    },
-    updateName() {
-      let name = "";
-      let practitioner = this.practitioner;
-
-      if (practitioner.name[0]) {
-        if (practitioner.name[0].prefix[0]) {
-          name += practitioner.name[0].prefix[0] + " ";
-        }
-
-        if (practitioner.name[0].given[0]) {
-          name += practitioner.name[0].given[0] + " ";
-        }
-
-        if (practitioner.name[0].family) {
-          name += practitioner.name[0].family + " ";
-        }
-
-        if (practitioner.name[0].suffix[0]) {
-          name += practitioner.name[0].suffix[0] + " ";
-        }
-      }
-
-      if (practitioner.photo && practitioner.photo[0].url) {
-        this.profilePicture = practitioner.photo[0].url;
-      }
-
-      this.name = name.trim();
-    }
   },
   name: "AddSections"
 };
