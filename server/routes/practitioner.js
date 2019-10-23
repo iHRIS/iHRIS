@@ -1,18 +1,20 @@
 var express = require("express");
 var router = express.Router();
 var axios = require("axios");
+const URI = require('urijs');
 const mixin = require("../mixin");
 const env = process.env.NODE_ENV || 'development';
 const config = require(__dirname + '/../config/config.json')[env];
 
-router.get("/describe/page", function(req, res, next) {
+router.get("/describe/page", function (req, res, next) {
   let practitionerPage = config.definitions.practitionerPage;
 
   if (!practitionerPage) {
     return res.status(400).json("No practitioner page definition found.");
   }
 
-  axios.get(config.fhir.server + "/fhir/" + practitionerPage, {
+  let url = URI(config.fhir.server).segment('fhir').segment(practitionerPage).toString()
+  axios.get(url, {
     params: {},
     withCredentials: true,
     auth: {
@@ -26,9 +28,9 @@ router.get("/describe/page", function(req, res, next) {
   });
 });
 
-router.get("/describe/definition/:definition", function(req, res, next) {
+router.get("/describe/definition/:definition", function (req, res, next) {
   mixin.getDefinition("StructureDefinition", req.params.definition, (err, definition) => {
-    if(err) {
+    if (err) {
       res.status(400).json(err);
     } else {
       res.status(201).json(definition);
@@ -39,10 +41,13 @@ router.get("/describe/definition/:definition", function(req, res, next) {
 /**
  * Get a specific practitioner
  */
-router.get("/view/:id", function(req, res, next) {
+router.get("/view/:id", function (req, res, next) {
   let id = req.params.id;
 
-  axios.get(config.fhir.server + "/fhir/Practitioner?_id=" + id, {
+  let url = URI(config.fhir.server).segment('fhir').segment('Practitioner')
+  url.addQuery('_id', id)
+  url = url.toString()
+  axios.get(url, {
     withCredentials: true,
     auth: {
       username: config.fhir.username,
@@ -60,11 +65,12 @@ router.get("/view/:id", function(req, res, next) {
 /**
  * Add a new practitioner
  */
-router.post("/add", function(req, res, next) {
+router.post("/add", function (req, res, next) {
   let data = req.body;
   data["resourceType"] = "Practitioner";
 
-  axios.post(config.fhir.server + "/fhir/Practitioner", data, {
+  let url = URI(config.fhir.server).segment('fhir').segment('Practitioner').toString()
+  axios.post(url, data, {
     withCredentials: true,
     auth: {
       username: config.fhir.username,
@@ -80,11 +86,12 @@ router.post("/add", function(req, res, next) {
 /**
  * Edit an existing practitioner
  */
-router.put("/edit", function(req, res, next) {
+router.put("/edit", function (req, res, next) {
   let data = req.body;
   data["resourceType"] = "Practitioner";
 
-  axios.put(config.fhir.server + "/fhir/Practitioner/" + data.id, data, {
+  let url = URI(config.fhir.server).segment('fhir').segment('Practitioner').segment(data.id).toString()
+  axios.put(url, data, {
     withCredentials: true,
     auth: {
       username: config.fhir.username,
@@ -100,8 +107,9 @@ router.put("/edit", function(req, res, next) {
 /**
  * Search for practitioners
  */
-router.get("/search", function(req, res, next) {
-  axios.get(config.fhir.server + "/fhir/Practitioner/" + req._parsedUrl.search, {
+router.get("/search", function (req, res, next) {
+  let url = URI(config.fhir.server).segment('fhir').segment('Practitioner').segment(req._parsedUrl.search).toString()
+  axios.get(url, {
     withCredentials: true,
     auth: {
       username: config.fhir.username,

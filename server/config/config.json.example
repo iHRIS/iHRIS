@@ -13,6 +13,11 @@
       "server": "localhost",
       "username": "username",
       "password": "password"
+    },
+    "elastic": {
+      "server": "http://localhost:9200",
+      "username": "username",
+      "password": "username"
     }
   },
   "test": {
