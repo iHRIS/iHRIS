@@ -1,30 +1,18 @@
 <template>
-  <v-toolbar color="white" app clipped-left>
+  <v-app-bar color="white" app clipped-left>
     <v-img :src="getLogo(icon)" contain max-height="40" max-width="40" />
+
     <v-toolbar-title class="headline">
       <span class="primary--text">iHRIS Manage</span>
       <span v-if="site"> | {{ site }}</span>
     </v-toolbar-title>
+
     <v-spacer></v-spacer>
-    <v-menu offset-y>
-      <template v-slot:activator="{ on }">
-        <v-btn flat v-on="on">
-          Account
-        </v-btn>
-      </template>
-      <v-list>
-        <v-list-tile
-          v-for="(item, index) in accountMenu"
-          :key="index"
-          @click.stop=""
-          class="tile"
-          :to="item.link"
-        >
-          <v-list-tile-title>{{ item.title }}</v-list-tile-title>
-        </v-list-tile>
-      </v-list>
-    </v-menu>
-  </v-toolbar>
+
+    <v-toolbar-items v-for="(item, index) in accountMenu">
+      <v-btn text :to="item.link">{{ item.title }}</v-btn>
+    </v-toolbar-items>
+  </v-app-bar>
 </template>
 
 <script>
@@ -38,26 +26,26 @@ export default {
     this.site = config.site;
   },
   data() {
-    let accountMenu = [];
+    let accountMenu = [{
+      title: "Account",
+      link: "account"
+    }];
 
     if (this.user) {
-      accountMenu = [
-        {
-          title: "Change password",
-          link: "/change-password"
-        },
-        {
-          title: "Log out",
-          link: "/logout"
-        }
-      ];
+      accountMenu.push({
+        title: "Change password",
+        link: "change-password"
+      });
+
+      accountMenu.push({
+        title: "Log out",
+        link: "logout"
+      });
     } else {
-      accountMenu = [
-        {
-          title: "Log in",
-          link: "/login"
-        }
-      ];
+      accountMenu.push({
+        title: "Log in",
+        link: "login"
+      });
     }
 
     return {

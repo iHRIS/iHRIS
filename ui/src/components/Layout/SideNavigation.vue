@@ -2,33 +2,55 @@
   <v-navigation-drawer
     v-model="drawer"
     app
-    class="primary darken-1 white--text"
     clipped
+    class="primary darken-1 text-uppercase white--text font-weight-bold"
   >
-    <v-container centered class="px-1 text-uppercase font-weight-bold">
-      <v-list class="primary darken-1 white--text font-weight-bold">
-        <v-list-tile active-class="primary darken-2" href="/">
-          <v-list-tile-avatar>
-            <v-icon class="white--text">dashboard</v-icon>
-          </v-list-tile-avatar>
-          <v-list-tile-content>
-            <v-list-tile-title>
-              <strong>Dashboard</strong>
-            </v-list-tile-title>
-          </v-list-tile-content>
-        </v-list-tile>
-        <v-list-tile active-class="primary darken-2" href="/settings">
-          <v-list-tile-avatar>
-            <v-icon class="white--text">settings</v-icon>
-          </v-list-tile-avatar>
-          <v-list-tile-content>
-            <v-list-tile-title>
-              <strong>Configuration</strong>
-            </v-list-tile-title>
-          </v-list-tile-content>
-        </v-list-tile>
-      </v-list>
-    </v-container>
+    <v-list
+      nav
+      v-for="item in menu"
+      :key="item.title"
+    >
+      <v-list-group
+        v-if="item.submenu.length"
+        no-action
+      >
+        <template v-slot:activator>
+          <v-list-item-icon>
+            <v-icon class="white--text">{{ item.icon }}</v-icon>
+          </v-list-item-icon>
+
+          <v-list-item-content>
+            <v-list-item-title class="white--text">{{ item.title }}</v-list-item-title>
+          </v-list-item-content>
+        </template>
+
+        <v-list-item
+          v-for="subitem in item.submenu"
+          :key="subitem.title"
+          :to="subitem.action"
+          class="text-capitalize"
+        >
+          <v-list-item-content>
+            <v-list-item-title class="white--text" v-text="subitem.title"></v-list-item-title>
+          </v-list-item-content>
+        </v-list-item>
+      </v-list-group>
+
+      <v-list-item
+        v-else
+        link
+        :to="item.action"
+        active-class="darken-2"
+      >
+        <v-list-item-icon>
+          <v-icon class="white--text">{{ item.icon }}</v-icon>
+        </v-list-item-icon>
+
+        <v-list-item-content>
+          <v-list-item-title class="white--text">{{ item.title }}</v-list-item-title>
+        </v-list-item-content>
+      </v-list-item>
+    </v-list>
   </v-navigation-drawer>
 </template>
 
@@ -43,7 +65,30 @@ export default {
   },
   data: function() {
     return {
-      drawer: true
+      drawer: true,
+      menu: [
+        {
+          action: {name: "home"},
+          icon: "dashboard",
+          submenu: [],
+          title: "Dashboard"
+        },
+        {
+          action: {name: "people"},
+          icon: "people",
+          submenu: [
+            {
+              action: {name: "search-people"},
+              title: "Search people"
+            },
+            {
+              action: {name: "add-people"},
+              title: "Add people"
+            }
+          ],
+          title: "People"
+        }
+      ]
     };
   }
 };
