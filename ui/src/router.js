@@ -49,12 +49,6 @@ export default new Router({
         import(/* webpackChunkName: "Logout" */ "./views/Logout.vue")
     },
     {
-      path: "/mhero",
-      name: "mhero",
-      component: () =>
-        import(/* webpackChunkName: "MHero" */ "./views/MHero/Workflow.vue")
-    },
-    {
       path: "/people/search",
       name: "search-people",
       component: () =>

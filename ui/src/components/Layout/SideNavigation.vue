@@ -87,12 +87,6 @@ export default {
             }
           ],
           title: "People"
-        },
-        {
-          action: {name: "mhero"},
-          icon: "phone",
-          submenu: [],
-          title: "mHero"
         }
       ]
     };
