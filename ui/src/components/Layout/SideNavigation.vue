@@ -87,6 +87,21 @@ export default {
             }
           ],
           title: "People"
+        },
+        {
+          action: {name: "mhero"},
+          icon: "phone",
+          submenu: [
+            {
+              action: {name: "mhero"},
+              title: "Send Message"
+            },
+            {
+              action: {name: "mhero-reports"},
+              title: "Reports"
+            }
+          ],
+          title: "mHero"
         }
       ]
     };

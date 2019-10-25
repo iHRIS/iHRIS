@@ -22,6 +22,7 @@
   },
   "devDependencies": {
     "@babel/polyfill": "^7.0.0",
+    "@mdi/font": "^4.5.95",
     "@vue/cli-plugin-babel": "^3.10.0",
     "@vue/cli-plugin-eslint": "^3.10.0",
     "@vue/cli-plugin-unit-jest": "^3.10.0",
