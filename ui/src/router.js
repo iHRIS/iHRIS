@@ -63,6 +63,24 @@ let router = new Router({
         import(/* webpackChunkName: "Logout" */ "./views/Logout.vue")
     },
     {
+      path: "/mhero",
+      name: "mhero",
+      component: () =>
+        import(/* webpackChunkName: "MHero" */ "./views/MHero/Workflow.vue")
+    },
+    {
+      path: "/mhero/reports",
+      name: "mhero-reports",
+      component: () =>
+        import(/* webpackChunkName: "Mhero Reports" */ "./views/MHero/Reports.vue")
+    },
+    {
+      path: "/mhero/review",
+      name: "mhero-review",
+      component: () =>
+        import(/* webpackChunkName: "Mhero Review" */ "./views/MHero/Review.vue")
+    },
+    {
       path: "/people/search",
       name: "search-people",
       component: () =>
