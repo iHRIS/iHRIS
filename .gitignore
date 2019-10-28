@@ -65,4 +65,4 @@ typings/
 
 # config files
 server/config/config.json
-ui/config/config.json
+ui/src/config/config.json
