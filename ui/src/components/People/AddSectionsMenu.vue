@@ -37,7 +37,7 @@ export default {
     let practitioner = this.data;
 
     this.describe("Practitioner").then(response => {
-      const config = require("../../../config/config.json");
+      const config = require("@/config/config.json");
 
       let menu = [];
       let index = 0;

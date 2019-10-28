@@ -20,7 +20,7 @@ import { serverBus } from "../../main";
 
 export default {
   created() {
-    const config = require("../../../config/config.json");
+    const config = require("@/config/config.json");
 
     this.icon = config.logo;
     this.site = config.site;
