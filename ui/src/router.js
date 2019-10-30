@@ -19,6 +19,12 @@ export default new Router({
         import(/* webpackChunkName: "account" */ "./views/Account.vue")
     },
     {
+      path: "/admin/add-user",
+      name: "admin-add-user",
+      component: () =>
+        import(/* webpackChunkName: "account" */ "./views/Admin/AddUser.vue")
+    },
+    {
       path: "/change-password",
       name: "change-password",
       component: () =>
