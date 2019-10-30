@@ -1,5 +1,5 @@
 <StructureDefinition xmlns="http://hl7.org/fhir">
-  <url value="http://example.org/fhir/StructureDefinition/User"/>
+  <url value="http://ihris.org/fhir/StructureDefinition/iHRISUser"/>
   <name value="User"/>
   <status value="draft"/>
   <fhirVersion value="4.0.0"/>
