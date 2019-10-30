@@ -28,23 +28,23 @@ export default {
   data() {
     let accountMenu = [{
       title: "Account",
-      link: "account"
+      link: {name: "account"}
     }];
 
     if (this.user) {
       accountMenu.push({
         title: "Change password",
-        link: "change-password"
+        link: {name: "change-password"}
       });
 
       accountMenu.push({
         title: "Log out",
-        link: "logout"
+        link: {name: "logout"}
       });
     } else {
       accountMenu.push({
         title: "Log in",
-        link: "login"
+        link: {name: "login"}
       });
     }
 
