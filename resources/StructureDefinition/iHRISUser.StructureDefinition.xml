@@ -98,7 +98,7 @@
     </element>
     <element id="Extension.url">
       <path value="Extension.url"/>
-      <fixedUri value="http://example.org/fhir/StructureDefinition/User"/>
+      <fixedUri value="http://ihris.org/fhir/StructureDefinition/iHRISUser"/>
     </element>
     <element id="Extension.value[x]">
       <path value="Extension.value[x]"/>
