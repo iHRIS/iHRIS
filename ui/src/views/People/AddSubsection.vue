@@ -60,7 +60,7 @@ export default {
     },
     submit(input) {
       axios
-        .post(this.config.server + "/practitioner/add", input)
+        .post(this.config.backend + "/practitioner/add", input)
         .then(response => {
           if (response.status === 201) {
             this.$router.push({
