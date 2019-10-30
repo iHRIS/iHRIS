@@ -65,6 +65,8 @@ export default {
     ProfileHeader
   },
   created() {
+    this.config = require("@/config/config.json");
+
     axios
       .get("/practitioner/view/" + this.$route.params.id)
       .then(practitioner => {
@@ -75,6 +77,7 @@ export default {
   },
   data() {
     return {
+      config: null,
       details: false,
       detailFields: {},
       detailTitle: null,
@@ -98,7 +101,7 @@ export default {
         Vue.delete(this.practitioner, field);
       }
 
-      axios.put("/practitioner/edit", this.practitioner).then(response => {
+      axios.put(this.config.backend + "/practitioner/edit", this.practitioner).then(response => {
         if (response.status == 201) {
           if (component.$refs["subsection" + field][0]) {
             component.$refs["subsection" + field][0].showAlert(
@@ -129,7 +132,7 @@ export default {
         practitioner[field] = data;
       }
 
-      axios.put("/practitioner/edit", practitioner).then(response => {
+      axios.put(this.config.backend + "/practitioner/edit", practitioner).then(response => {
         component.practitioner = practitioner;
 
         if (response.status == 201) {
@@ -157,7 +160,7 @@ export default {
 
       practitioner[this.detailTitle] = input;
 
-      axios.put("/practitioner/edit", practitioner).then(response => {
+      axios.put(this.config.backend + "/practitioner/edit", practitioner).then(response => {
         if (response.status == 201) {
           component.cancelDetailsForm();
           component.$refs.profileHeader.changeMessage(

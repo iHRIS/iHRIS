@@ -33,8 +33,10 @@ import DynamicForm from "@/components/Form/DynamicForm.vue";
 
 export default {
   created() {
+    this.config = require("@/config/config.json");
+
     axios
-      .get("/practitioner/describe/page")
+      .get(this.config.backend + "/practitioner/describe/page")
       .then(pageResponse => {
         let fields = [];
 
@@ -64,7 +66,7 @@ export default {
 
         axios
           .get(
-            "/practitioner/describe/definition/" +
+            this.config.backend + "/practitioner/describe/definition/" +
               resource.replace(/StructureDefinition\//, "")
           )
           .then(definitionResponse => {
@@ -91,7 +93,7 @@ export default {
             // need to get the base definition
             axios
               .get(
-                "/practitioner/describe/definition/" +
+                this.config.backend + "/practitioner/describe/definition/" +
                   definitionResponse.data.name
               )
               .then(structureDefinitionResponse => {
@@ -110,7 +112,7 @@ export default {
                     if (!promises[baseField]) {
                       promises[baseField] = axios
                         .get(
-                          "/practitioner/describe/definition/" +
+                          this.config.backend + "/practitioner/describe/definition/" +
                             matchingField.type[0].code
                         )
                         .then(subdefinitionResponse => {
@@ -189,6 +191,7 @@ export default {
     return {
       addPractitionerForm: true,
       alert: false,
+      config: null,
       dynamicFormKey: 0,
       error: "",
       fields: [],
@@ -228,7 +231,7 @@ export default {
       });
 
       axios
-        .post("/practitioner/add", data)
+        .post(this.config.backend + "/practitioner/add", data)
         .then(response => {
           if (response.status === 201) {
             this.$router.push({

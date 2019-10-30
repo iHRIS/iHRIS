@@ -132,11 +132,17 @@
     </v-layout>
   </v-container>
 </template>
+
 <script>
-import axios from 'axios'
+import axios from 'axios';
+
 export default {
-  data () {
+  created() {
+    this.config = require("@/config/config.json");
+  },
+  data() {
     return {
+      config: null,
       tree: [],
       alert: false,
       error: "",
@@ -172,7 +178,7 @@ export default {
   },
   methods: {
     getRelationships () {
-      axios.get("/relationship/describe").then(response => {
+      axios.get(this.config.backend + "/relationship/describe").then(response => {
         for(let relationship of response.data.entry) {
           if(relationship.resource.code.text === 'relationship') {
             this.relationships.push(relationship)
@@ -187,7 +193,7 @@ export default {
       this.joinResourceDialog = true
       this.loadingLinkableResources = true
       resource = resource.split("/").pop()
-      axios.get(`/relationship/getLinkableResources?resource=${resource}`).then(response => {
+      axios.get(this.config.backend + `/relationship/getLinkableResources?resource=${resource}`).then(response => {
         this.loadingLinkableResources = false
         this.linkableResources = response.data
       }).catch(error => {

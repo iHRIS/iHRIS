@@ -30,7 +30,9 @@ export default {
     ProfileHeader
   },
   created() {
-    axios.get("/practitioner/view/" + this.$route.params.id).then(response => {
+    this.config = require("@/config/config.json");
+
+    axios.get(this.config.backend + "/practitioner/view/" + this.$route.params.id).then(response => {
       if (response.status === 201) {
         let practitioner = {};
 
@@ -46,6 +48,7 @@ export default {
   },
   data() {
     return {
+      config: null,
       practitioner: {},
     };
   },

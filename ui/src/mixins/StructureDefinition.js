@@ -47,7 +47,7 @@ export default {
       }
 
       return axios
-        .get(url)
+        .get(this.config.backend + url)
         .then(response => {
           if (response.status != 201) {
             return [];
