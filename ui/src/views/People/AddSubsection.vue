@@ -30,9 +30,13 @@
 import axios from "axios";
 
 export default {
+  created() {
+    this.config = require("@/config/config.json");
+  },
   data() {
     return {
       alert: false,
+      config: null,
       error: "",
       inputs: [
         "firstName",
@@ -56,7 +60,7 @@ export default {
     },
     submit(input) {
       axios
-        .post("/practitioner/add", input)
+        .post(this.config.server + "/practitioner/add", input)
         .then(response => {
           if (response.status === 201) {
             this.$router.push({

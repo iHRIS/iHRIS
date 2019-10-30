@@ -127,8 +127,6 @@
 </template>
 
 <script>
-import axios from "axios";
-
 import DynamicForm from "@/components/Form/DynamicForm.vue";
 import StructureDefinition from "@/mixins/StructureDefinition.js";
 

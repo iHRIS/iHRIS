@@ -52,12 +52,16 @@ import Alert from "@/components/Layout/Alert.vue";
 import DynamicForm from "@/components/Form/DynamicForm.vue";
 
 export default {
+  created() {
+    this.config = require("@/config/config.json");
+  },
   components: {
     Alert,
     DynamicForm
   },
   data() {
     return {
+      config: null,
       headers: [
         {
           text: "Edit",
@@ -97,7 +101,7 @@ export default {
         params: this.$refs.searchForm.getInputs()
       };
 
-      axios.get("/practitioner/search", params).then(response => {
+      axios.get(this.config.backend + "/practitioner/search", params).then(response => {
         let practitioners = [];
 
         response.data.entry.forEach(practitioner => {

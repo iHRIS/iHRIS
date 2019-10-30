@@ -1,5 +1,6 @@
 {
   "logo": "@/assets/logos/ihris.png",
   "site": "Demonstration site",
-  "ignoredSubsections": ["meta", "extension", "modifierextension"]
+  "ignoredSubsections": ["meta", "extension", "modifierextension"],
+  "backend": "http://localhost:3000"
 }
