@@ -1,14 +1,21 @@
 <template>
   <v-container>
-    <DynamicForm
-      :fields="this.fields"
-      name="login"
-      v-on:cancel="cancel"
-      v-on:successfulSubmit="submit"
-      v-on:failedSubmit="showFailedSubmit"
-      ref="login"
-      key="login"
-    />
+    <v-card>
+`     <v-card-title>Login</v-card-title>
+      <v-card-text>
+        <DynamicForm
+          :fields="this.fields"
+          name="login"
+          v-on:cancel="cancel"
+          v-on:successfulSubmit="submit"
+          v-on:failedSubmit="showFailedSubmit"
+          ref="login"
+          key="login"
+          hideCancel="true"
+          submitLabel="Login"
+        />
+      </v-card-text>
+    </v-card>
   </v-container>
 </template>
 
@@ -23,7 +30,22 @@ export default {
   },
   data() {
     return {
-      fields: []
+      fields: [
+        {
+          id: "username",
+          max: 1,
+          name: "Username",
+          required: true,
+          type: "string"
+        },
+        {
+          id: "password",
+          max: 1,
+          name: "Password",
+          required: false,
+          type: "password"
+        }
+      ]
     };
   }
 };

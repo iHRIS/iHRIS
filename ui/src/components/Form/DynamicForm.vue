@@ -108,6 +108,15 @@
         :value="field.value"
       />
 
+      <Password
+        v-if="field.type == 'password'"
+        :label="field.label"
+        :max="field.max"
+        :required="field.required"
+        :ref="field.name"
+        :value="field.value"
+      />
+
       <PositiveInt
         v-if="field.type == 'positiveint'"
         :label="field.label"
@@ -173,8 +182,8 @@
     </div>
 
     <v-layout align-center justify-end fill-height>
-      <v-btn @click="cancel">{{ this.cancelLabel }}</v-btn>
-      <v-btn @click="submit" class="primary">submit</v-btn>
+      <v-btn v-if="!hideCancel" @click="cancel">{{ this.cancelLabel }}</v-btn>
+      <v-btn @click="submit" class="primary">{{ this.submitLabel }}</v-btn>
     </v-layout>
   </v-form>
 </template>
@@ -192,6 +201,7 @@ import Instant from "@/components/Form/Instant.vue";
 import Integer from "@/components/Form/Integer.vue";
 import Markdown from "@/components/Form/Markdown.vue";
 import Oid from "@/components/Form/Oid.vue";
+import Password from "@/components/Form/Password.vue";
 import PositiveInt from "@/components/Form/PositiveInt.vue";
 import String from "@/components/Form/String.vue";
 import Time from "@/components/Form/Time.vue";
@@ -217,6 +227,7 @@ export default {
     Integer,
     Markdown,
     Oid,
+    Password,
     PositiveInt,
     String,
     Time,
@@ -304,7 +315,13 @@ export default {
       default: "cancel"
     },
     fields: {},
-    name: {}
+    hideCancel: {
+      default: false
+    },
+    name: {},
+    submitLabel: {
+      default: "Submit"
+    }
   }
 };
 </script>
