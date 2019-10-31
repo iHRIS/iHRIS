@@ -29,7 +29,29 @@ export default {
   },
   data() {
     return {
-      fields: []
+      fields: [
+        {
+          id: "username",
+          max: 1,
+          name: "Username",
+          required: true,
+          type: "string"
+        },
+        {
+          id: "password",
+          max: 1,
+          name: "Password",
+          required: true,
+          type: "password"
+        },
+        {
+          id: "passwordRepeat",
+          max: 1,
+          name: "Password",
+          required: true,
+          type: "password"
+        }
+      ]
     };
   }
 };

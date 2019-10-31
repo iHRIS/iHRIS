@@ -22,9 +22,11 @@ export default {
       password: null,
       rules: {
         required: value => {
-          return (
-            (this.required && value) || !this.required || "Field is required"
-          );
+          if (this.required && !value) {
+            return "Field is required";
+          }
+
+          return true;
         }
       },
       show: false
