@@ -42,7 +42,7 @@ export default {
           id: "password",
           max: 1,
           name: "Password",
-          required: false,
+          required: true,
           type: "password"
         }
       ]
