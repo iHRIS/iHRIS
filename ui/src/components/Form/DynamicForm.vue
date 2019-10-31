@@ -115,6 +115,7 @@
         :required="field.required"
         :ref="field.name"
         :value="field.value"
+        :matching="field.matching"
       />
 
       <PositiveInt

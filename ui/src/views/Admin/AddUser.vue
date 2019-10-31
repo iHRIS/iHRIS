@@ -25,8 +25,6 @@ export default {
   components: {
     DynamicForm
   },
-  created() {
-  },
   data() {
     return {
       fields: [
@@ -42,14 +40,16 @@ export default {
           max: 1,
           name: "Password",
           required: true,
-          type: "password"
+          type: "password",
+          matching: false
         },
         {
           id: "passwordRepeat",
           max: 1,
           name: "Password",
           required: true,
-          type: "password"
+          type: "password",
+          matching: true
         }
       ]
     };
