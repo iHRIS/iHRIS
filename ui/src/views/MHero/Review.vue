@@ -20,6 +20,7 @@
         class="elevation-1"
       ></v-data-table>
       <v-card-actions class="secondary">
+        <v-btn normal :to="{ name: 'mhero' }">Back</v-btn>
         <v-spacer></v-spacer>
         <v-btn normal v-on:click="send">Send Workflow</v-btn>
       </v-card-actions>
