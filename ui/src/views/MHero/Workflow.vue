@@ -7,6 +7,30 @@
           :items="workflows"
         >
         </v-autocomplete>
+
+        How often should this workflow be sent?
+
+        <v-radio-group row v-model="frequency">
+          <v-radio label="Once" value="once"></v-radio>
+          <v-radio label="Recurring" value="recurring"></v-radio>
+        </v-radio-group>
+        <v-row v-if="recurring">
+          <v-col cols="1">
+            <v-subheader>Every</v-subheader>
+          </v-col>
+          <v-col cols="1">
+            <v-text-field
+              label="Frequency"
+            ></v-text-field>
+          </v-col>
+          <v-col cols="1">
+            <v-select
+              label="Period"
+              :items="items"
+            >
+            </v-select>
+          </v-col>
+        </v-row>
       </v-card-text>
     </v-card>
 
@@ -41,10 +65,17 @@
 
 <script>
 export default {
+  computed: {
+    recurring() {
+      return this.frequency === "recurring";
+    }
+  },
   data() {
     return {
       search: null,
       selected: [],
+      frequency: false,
+      items: ["minutes", "hours", "days", "weeks"],
       headers: [
         { text: 'Name', value: 'name'},
         { text: 'Jurisdiction', value: 'jurisdiction' },
