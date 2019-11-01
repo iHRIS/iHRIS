@@ -3,7 +3,7 @@
     v-model="drawer"
     app
     clipped
-    class="primary darken-1 text-uppercase white--text font-weight-bold"
+    class="primary darken-1 white--text font-weight-bold"
   >
     <v-list
       nav
@@ -20,7 +20,7 @@
           </v-list-item-icon>
 
           <v-list-item-content>
-            <v-list-item-title class="white--text">{{ item.title }}</v-list-item-title>
+            <v-list-item-title class="white--text" v-bind:class="{ 'text-uppercase': !item.doNotCapitalize }">{{ item.title }}</v-list-item-title>
           </v-list-item-content>
         </template>
 
@@ -47,7 +47,7 @@
         </v-list-item-icon>
 
         <v-list-item-content>
-          <v-list-item-title class="white--text">{{ item.title }}</v-list-item-title>
+          <v-list-item-title class="white--text" v-bind:class="{ 'text-uppercase': !item.doNotCapitalize }">{{ item.title }}</v-list-item-title>
         </v-list-item-content>
       </v-list-item>
     </v-list>
@@ -101,7 +101,8 @@ export default {
               title: "Reports"
             }
           ],
-          title: "mHero"
+          title: "mHero",
+          doNotCapitalize: true
         }
       ]
     };
