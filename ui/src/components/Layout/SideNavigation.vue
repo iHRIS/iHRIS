@@ -3,9 +3,9 @@
     v-model="drawer"
     app
     clipped
-    class="primary darken-1 text-uppercase white--text font-weight-bold"
     :mini-variant.sync="mini"
     permanent
+    class="primary darken-1 white--text font-weight-bold"
   >
     <v-btn v-if="smallScreenSize" icon @click.stop="mini = !mini"
       ><v-icon class="white--text">{{ chevronIcon }}</v-icon>
@@ -18,9 +18,7 @@
           </v-list-item-icon>
 
           <v-list-item-content>
-            <v-list-item-title class="white--text">{{
-              item.title
-            }}</v-list-item-title>
+            <v-list-item-title class="white--text" v-bind:class="{ 'text-uppercase': !item.doNotCapitalize }">{{ item.title }}</v-list-item-title>
           </v-list-item-content>
         </template>
 
@@ -45,9 +43,7 @@
         </v-list-item-icon>
 
         <v-list-item-content>
-          <v-list-item-title class="white--text">{{
-            item.title
-          }}</v-list-item-title>
+          <v-list-item-title class="white--text" v-bind:class="{ 'text-uppercase': !item.doNotCapitalize }">{{ item.title }}</v-list-item-title>
         </v-list-item-content>
       </v-list-item>
     </v-list>
@@ -124,7 +120,8 @@ export default {
               title: "Reports"
             }
           ],
-          title: "mHero"
+          title: "mHero",
+          doNotCapitalize: true
         }
       ]
     };
