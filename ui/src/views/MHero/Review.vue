@@ -7,30 +7,6 @@
       <v-card-title>
         Workflow: {{ workflow }}
       </v-card-title>
-      <v-card-text>
-        How often should notifications be sent?
-        <v-radio-group row v-model="frequency">
-          <v-radio label="Once" value="once"></v-radio>
-          <v-radio label="Recurring" value="recurring"></v-radio>
-        </v-radio-group>
-        <v-row v-if="recurring">
-          <v-col cols="1">
-            <v-subheader>Every</v-subheader>
-          </v-col>
-          <v-col cols="1">
-            <v-text-field
-              label="Frequency"
-            ></v-text-field>
-          </v-col>
-          <v-col cols="1">
-            <v-select
-              label="Period"
-              :items="items"
-            >
-            </v-select>
-          </v-col>
-        </v-row>
-      </v-card-text>
     </v-card>
 
     <v-card>
@@ -56,7 +32,6 @@ export default {
   data() {
     return {
       alert: false,
-      frequency: null,
       workflow: "Sample Workflow",
       headers: [
         { text: 'Name', value: 'name'},
@@ -66,7 +41,6 @@ export default {
         { text: 'Organization', value: 'organization' },
         { text: 'Contact Group', value: 'contactGroup' },
       ],
-      items: ["minutes", "hours", "days", "weeks"],
       practitioners: [
         {
           name: "Grace Bah",
@@ -105,11 +79,6 @@ export default {
         "Flu Epidemic", "Emergency Closure", "National Emergency", "H1N1 Outbreak", "Viral Epidemic"
       ]
     };
-  },
-  computed: {
-    recurring() {
-      return this.frequency === "recurring";
-    }
   },
   methods: {
     send() {
