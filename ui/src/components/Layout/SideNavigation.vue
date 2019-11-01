@@ -117,7 +117,7 @@ export default {
             },
             {
               action: {name: "mhero-reports"},
-              title: "Reports"
+              title: "Run Reports"
             }
           ],
           title: "mHero",
