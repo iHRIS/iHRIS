@@ -56,9 +56,9 @@
         </v-row>
       </v-card-text>
 
-      <v-card-actions class="primary">
+      <v-card-actions class="secondary">
         <v-spacer></v-spacer>
-        <v-btn text>Run Report</v-btn>
+        <v-btn>Run Report</v-btn>
       </v-card-actions>
     </v-card>
 
@@ -118,9 +118,9 @@
         </v-row>
       </v-card-text>
 
-      <v-card-actions class="primary">
+      <v-card-actions class="secondary">
         <v-spacer></v-spacer>
-        <v-btn text>Run Report</v-btn>
+        <v-btn>Run Report</v-btn>
       </v-card-actions>
     </v-card>
   </v-container>
