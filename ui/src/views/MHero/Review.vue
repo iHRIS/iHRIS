@@ -43,9 +43,9 @@
         item-key="name"
         class="elevation-1"
       ></v-data-table>
-      <v-card-actions class="primary">
+      <v-card-actions class="secondary">
         <v-spacer></v-spacer>
-        <v-btn normal text v-on:click="send">Send Workflow</v-btn>
+        <v-btn normal v-on:click="send">Send Workflow</v-btn>
       </v-card-actions>
     </v-card>
   </v-container>
