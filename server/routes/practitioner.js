@@ -108,7 +108,9 @@ router.put("/edit", function (req, res, next) {
  * Search for practitioners
  */
 router.get("/search", function (req, res, next) {
-  let url = URI(config.fhir.server).segment('fhir').segment('Practitioner').segment(req._parsedUrl.search).toString()
+  let url = URI(config.fhir.server).segment('fhir').segment('Practitioner').toString();
+  url += req._parsedUrl.search;
+
   axios.get(url, {
     withCredentials: true,
     auth: {
