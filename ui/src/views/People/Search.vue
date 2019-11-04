@@ -16,10 +16,8 @@
               :items-per-page="5"
               class="elevation-1"
             >
-              <template slot="items" slot-scope="props">
-                <td><a :href="props.item.editLink">Edit</a></td>
-                <td>{{ props.item.given }}</td>
-                <td>{{ props.item.surname }}</td>
+              <template v-slot:item.editLink="{ item }">
+                <a :href="item.editLink">Edit</a>
               </template>
             </v-data-table>
           </v-card-text>
