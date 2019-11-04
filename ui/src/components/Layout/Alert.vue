@@ -1,5 +1,5 @@
 <template>
-  <v-alert :type="type" v-show="show">
+  <v-alert :type="type" dismissable v-show="show">
     {{ message }}
   </v-alert>
 </template>

@@ -55,6 +55,6 @@ export default {
       serverBus.$emit("updatePassword", this.getInput());
     }
   },
-  props: ["label", "max", "required", "value", "ref", "matching"]
+  props: ["label", "max", "required", "value", "matching"]
 };
 </script>
