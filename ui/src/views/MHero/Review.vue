@@ -7,6 +7,9 @@
       <v-card-title>
         Workflow: {{ workflow }}
       </v-card-title>
+      <v-card-text>
+        Frequency: {{ frequency }}
+      </v-card-text>
     </v-card>
 
     <v-card>
@@ -34,6 +37,7 @@ export default {
     return {
       alert: false,
       workflow: "Sample Workflow",
+      frequency: "Once",
       headers: [
         { text: 'Name', value: 'name'},
         { text: 'Jurisdiction', value: 'jurisdiction' },
