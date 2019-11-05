@@ -5,24 +5,14 @@
         Run Report
       </v-card-title>
       <v-card-text>
-        <v-row>
-          <v-col cols="12" sm="6" md="4">
-            <v-autocomplete
-              label="Category"
-              :items="categories"
-              v-model="category"
-            />
-          </v-col>
-          <v-col cols="12" sm="6" md="4" v-if="category">
-            <v-autocomplete
-              :label="category"
-              :items="options"
-              multiple
-              chips
-            >
-            </v-autocomplete>
-          </v-col>
-        </v-row>
+        <div v-for="item in numOptions" v-bind:key="item">
+          <ReportOptions />
+        </div>
+        <v-btn
+          @click="numOptions++"
+        >
+          Add Options
+        </v-btn>
         <v-row>
           <v-col cols="12" sm="6" md="4">
             <v-menu
@@ -79,50 +69,19 @@
 </template>
 
 <script>
+import ReportOptions from "@/components/MHero/ReportOptions.vue";
+
 export default {
-  computed: {
-    options() {
-      if (this.category == "Cadre") {
-        return [
-          "ART Manager", "Lab Tech", "Midwife", "Nurse", "Officer in Charge", "Pharmacist", "Surveillance Officer"
-        ];
-      }
-
-      if (this.category == "Jurisdiction") {
-        return [
-          "Bo", "Kailahun", "Kenema", "Kono", "Makeni", "Moyamba", "Port Loko"
-        ];
-      }
-
-      if (this.category == "User") {
-        return [
-          "User 1", "User 2", "User 3"
-        ];
-      }
-
-      if (this.category == "Workflow") {
-        return this.workflows;
-      }
-
-      return [];
-    }
+  components: {
+    ReportOptions
   },
   data() {
     return {
-      category: null,
-      categories: [
-        "Cadre", "Jurisdiction", "User", "Workflow"
-      ],
       fromDate: null,
       fromPicker: false,
-      individuals: [
-        "Grace Bah", "Blessing Condeh", "Maria Tucker", "Joseph Simbeye"
-      ],
+      numOptions: 1,
       toDate: null,
-      toPicker: false,
-      workflows: [
-        "Flu Epidemic", "Emergency Closure", "National Emergency", "H1N1 Outbreak", "Viral Epidemic"
-      ]
+      toPicker: false
     };
   }
 }
