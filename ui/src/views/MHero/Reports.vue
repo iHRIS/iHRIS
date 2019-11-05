@@ -17,6 +17,8 @@
             <v-autocomplete
               :label="category"
               :items="options"
+              multiple
+              chips
             >
             </v-autocomplete>
           </v-col>
@@ -101,6 +103,8 @@ export default {
       if (this.category == "Workflow") {
         return this.workflows;
       }
+
+      return [];
     }
   },
   data() {
