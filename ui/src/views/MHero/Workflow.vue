@@ -57,7 +57,7 @@
       ></v-data-table>
       <v-card-actions class="secondary">
         <v-spacer></v-spacer>
-        <v-btn :to="{name: 'mhero-review'}">Review Workflow</v-btn>
+        <v-btn :to="{name: 'mhero-review'}">Review Selection</v-btn>
       </v-card-actions>
     </v-card>
   </v-container>
