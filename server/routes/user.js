@@ -26,11 +26,11 @@ router.post("/add", function (req, res, next) {
     resourceType: "Person",
     id: "user",
     meta: {
-      profile: "http://ihris.org/fhir/StructureDefinition/iHRISUser",
+      profile: config.fhir.server + "/fhir/StructureDefinition/iHRISUser",
     },
     extension: [
       {
-        url: "http://ihris.org/fhir/StructureDefinition/iHRISUserDetails",
+        url: config.fhir.server + "/StructureDefinition/iHRISUserDetails",
         extension: [
           {
             url: "username",
@@ -56,6 +56,25 @@ router.post("/add", function (req, res, next) {
   let url = URI(config.fhir.server).segment("fhir").segment("Person").toString();
 
   axios.post(url, bundle, {
+    withCredentials: true,
+    auth: {
+      username: config.fhir.username,
+      password: config.fhir.password
+    }
+  }).then(response => {
+    res.status(201).json(response.data);
+  }).catch(err => {
+    res.status(400).json(err);
+  });
+});
+
+/**
+ * Check login credentials
+ */
+router.post("/login", function (req, res, next) {
+  let url = URI(config.fhir.server).segment('fhir').segment('Person').segment(req._parsedUrl.search).toString()
+
+  axios.get(url, {
     withCredentials: true,
     auth: {
       username: config.fhir.username,
