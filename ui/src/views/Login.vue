@@ -6,7 +6,6 @@
         <DynamicForm
           :fields="this.fields"
           name="login"
-          v-on:cancel="cancel"
           v-on:successfulSubmit="submit"
           v-on:failedSubmit="showFailedSubmit"
           ref="login"
