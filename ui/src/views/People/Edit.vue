@@ -132,7 +132,7 @@ export default {
       }
 
       axios
-        .put(this.config.backend + "/practitioner/edit", practitioner)
+        .post(this.config.backend + "/practitioner/edit", practitioner)
         .then(response => {
           component.practitioner = practitioner;
 
@@ -162,7 +162,7 @@ export default {
       practitioner[this.detailTitle] = input;
 
       axios
-        .put(this.config.backend + "/practitioner/edit", practitioner)
+        .post(this.config.backend + "/practitioner/edit", practitioner)
         .then(response => {
           if (response.status == 201) {
             component.cancelDetailsForm();

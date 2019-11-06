@@ -2,7 +2,7 @@
   <v-container>
     <Alert ref="addUserAlert" />
     <v-card>
-      ` <v-card-title>Add User</v-card-title>
+      <v-card-title>Add User</v-card-title>
       <v-card-text>
         <DynamicForm
           :fields="this.fields"
