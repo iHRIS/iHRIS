@@ -65,7 +65,7 @@ export default {
     this.config = require("@/config/config.json");
 
     axios
-      .get("/practitioner/view/" + this.$route.params.id)
+      .get(this.config.backend + "/practitioner/view/" + this.$route.params.id)
       .then(practitioner => {
         if (practitioner.status === 201) {
           this.practitioner = practitioner.data.entry[0].resource;
