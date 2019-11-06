@@ -13,6 +13,7 @@
       <v-list-group
         v-if="item.submenu.length"
         no-action
+        class="white--text"
       >
         <template v-slot:activator>
           <v-list-item-icon>
