@@ -5,23 +5,17 @@
     clipped
     class="primary darken-1 text-uppercase white--text font-weight-bold"
   >
-    <v-list
-      nav
-      v-for="item in menu"
-      :key="item.title"
-    >
-      <v-list-group
-        v-if="item.submenu.length"
-        no-action
-        class="white--text"
-      >
+    <v-list nav v-for="item in menu" :key="item.title">
+      <v-list-group v-if="item.submenu.length" no-action class="white--text">
         <template v-slot:activator>
           <v-list-item-icon>
             <v-icon class="white--text">{{ item.icon }}</v-icon>
           </v-list-item-icon>
 
           <v-list-item-content>
-            <v-list-item-title class="white--text">{{ item.title }}</v-list-item-title>
+            <v-list-item-title class="white--text">{{
+              item.title
+            }}</v-list-item-title>
           </v-list-item-content>
         </template>
 
@@ -32,23 +26,23 @@
           class="text-capitalize"
         >
           <v-list-item-content>
-            <v-list-item-title class="white--text" v-text="subitem.title"></v-list-item-title>
+            <v-list-item-title
+              class="white--text"
+              v-text="subitem.title"
+            ></v-list-item-title>
           </v-list-item-content>
         </v-list-item>
       </v-list-group>
 
-      <v-list-item
-        v-else
-        link
-        :to="item.action"
-        active-class="darken-2"
-      >
+      <v-list-item v-else link :to="item.action" active-class="darken-2">
         <v-list-item-icon>
           <v-icon class="white--text">{{ item.icon }}</v-icon>
         </v-list-item-icon>
 
         <v-list-item-content>
-          <v-list-item-title class="white--text">{{ item.title }}</v-list-item-title>
+          <v-list-item-title class="white--text">{{
+            item.title
+          }}</v-list-item-title>
         </v-list-item-content>
       </v-list-item>
     </v-list>
@@ -69,21 +63,21 @@ export default {
       drawer: true,
       menu: [
         {
-          action: {name: "home"},
+          action: { name: "home" },
           icon: "dashboard",
           submenu: [],
           title: "Dashboard"
         },
         {
-          action: {name: "people"},
+          action: { name: "people" },
           icon: "people",
           submenu: [
             {
-              action: {name: "search-people"},
+              action: { name: "search-people" },
               title: "Search people"
             },
             {
-              action: {name: "add-people"},
+              action: { name: "add-people" },
               title: "Add people"
             }
           ],

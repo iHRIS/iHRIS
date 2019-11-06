@@ -255,32 +255,31 @@ export default {
 
       if (fields) {
         for (var key in fields) {
-          if (fields.hasOwnProperty(key)) {    
-            inputs.push(fields[key].name);    
-            let data = fields[key].name.replace(/([A-Z])/g, " $1");
-            fields[key].label = data.charAt(0).toUpperCase() + data.slice(1);
-            sanitized.push(fields[key]);
-          }    
+          inputs.push(fields[key].name);
+          let data = fields[key].name.replace(/([A-Z])/g, " $1");
+          fields[key].label = data.charAt(0).toUpperCase() + data.slice(1);
+          sanitized.push(fields[key]);
         }
       }
 
       this.data = sanitized;
       this.inputs = inputs;
     },
-    collapseFields(fields, prefix) {
+    collapseFields(fields) {
       let collapsedFields = [];
 
       for (var key in fields) {
-        if (fields.hasOwnProperty(key)) {
-          if (false && fields[key] && fields[key].fields) {
-            let subfields = this.collapseFields(fields[key].fields, fields[key].name);
+        if (fields[key] && fields[key].fields) {
+          let subfields = this.collapseFields(
+            fields[key].fields,
+            fields[key].name
+          );
 
-            for (var j in subfields) {
-              collapsedFields.push(subfields[j]);
-            }
-          } else {
-            collapsedFields.push(fields[key]);
+          for (var j in subfields) {
+            collapsedFields.push(subfields[j]);
           }
+        } else {
+          collapsedFields.push(fields[key]);
         }
       }
 

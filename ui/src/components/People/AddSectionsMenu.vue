@@ -16,7 +16,9 @@
             <v-icon class="white--text">mdi-plus</v-icon>
           </v-list-item-icon>
           <v-list-item-content>
-            <v-list-item-title class="white--text text-uppercase font-weight-bold">
+            <v-list-item-title
+              class="white--text text-uppercase font-weight-bold"
+            >
               {{ item.title | sentenceCase }}
             </v-list-item-title>
             <v-list-item-subtitle class="white--text">
@@ -45,7 +47,6 @@ export default {
       for (var key in response) {
         if (
           !practitioner[key] &&
-          response.hasOwnProperty(key) &&
           response[key].title &&
           config.ignoredSubsections.indexOf(response[key].title.toLowerCase()) <
             0 &&

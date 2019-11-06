@@ -24,7 +24,7 @@ export default {
       this.$refs.alert.changeMessage(message, type);
     },
     getName() {
-      let name = '';
+      let name = "";
 
       if (this.practitioner.name[0].prefix) {
         name += this.practitioner.name[0].prefix[0] + " ";

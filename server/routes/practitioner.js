@@ -86,7 +86,7 @@ router.post("/add", function (req, res, next) {
 /**
  * Edit an existing practitioner
  */
-router.put("/edit", function (req, res, next) {
+router.post("/edit", function (req, res, next) {
   let data = req.body;
   data["resourceType"] = "Practitioner";
 

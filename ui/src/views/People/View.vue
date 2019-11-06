@@ -32,24 +32,26 @@ export default {
   created() {
     this.config = require("@/config/config.json");
 
-    axios.get(this.config.backend + "/practitioner/view/" + this.$route.params.id).then(response => {
-      if (response.status === 201) {
-        let practitioner = {};
+    axios
+      .get(this.config.backend + "/practitioner/view/" + this.$route.params.id)
+      .then(response => {
+        if (response.status === 201) {
+          let practitioner = {};
 
-        for (var key in response.data.entry[0].resource) {
-          if (key != "id" && key != "resourceType" && key != "active") {
-            practitioner[key] = response.data.entry[0].resource[key];
+          for (var key in response.data.entry[0].resource) {
+            if (key != "id" && key != "resourceType" && key != "active") {
+              practitioner[key] = response.data.entry[0].resource[key];
+            }
           }
-        }
 
-        this.practitioner = practitioner;
-      }
-    });
+          this.practitioner = practitioner;
+        }
+      });
   },
   data() {
     return {
       config: null,
-      practitioner: {},
+      practitioner: {}
     };
   },
   name: "AddSections"

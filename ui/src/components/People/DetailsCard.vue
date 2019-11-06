@@ -25,18 +25,17 @@
         <v-icon>delete</v-icon>
       </v-btn>
     </v-card-title>
-    <v-card-text
-      v-for="(value, name) in data"
-      v-show="!editing"
-      v-bind:key="name"
-    >
-      <div v-if="Array.isArray(value) || typeof value === 'object'">
+
+    <v-card-text v-if="Array.isArray(data)" v-show="!editing">
+      <div v-for="(value, name) in data" v-bind:key="name">
         <div v-if="Number.isInteger(name)">
           <v-layout row align-baseline>
-            <v-flex xs4 class="primary--text text-uppercase">
+            <v-flex xs4 class="primary--text text-uppercase pl-5">
               {{ value[subheader] }}
             </v-flex>
+
             <v-spacer />
+
             <v-btn
               fab
               class="primary"
@@ -57,18 +56,19 @@
               <v-icon>delete</v-icon>
             </v-btn>
           </v-layout>
-          <div v-for="(data, fieldIndex) in value" v-bind:key="fieldIndex">
-            <div v-if="data">
-              <v-layout row>
-                <v-flex xs4 class="font-weight-bold">
-                  {{ fieldIndex | sentenceCase }}
-                </v-flex>
-                <v-flex xs8>{{ data | separateByCommas }}</v-flex>
-              </v-layout>
 
-              <v-divider class="pb-3" />
-            </div>
-          </div>
+          <v-simple-table>
+            <tbody>
+              <tr v-for="(data, fieldIndex) in value" v-bind:key="fieldIndex">
+                <td :width="headerWidth" class="font-weight-bold">
+                  {{ fieldIndex | sentenceCase }}
+                </td>
+                <td>{{ data | separateByCommas }}</td>
+              </tr>
+            </tbody>
+          </v-simple-table>
+
+          <v-divider class="pb-3" />
         </div>
         <div v-else>
           <v-layout row>
@@ -76,30 +76,34 @@
               {{ name | sentenceCase }}
             </v-flex>
             <v-flex xs8 v-for="(data, index) in value" v-bind:key="index">
-              {{ data | separateByCommas}}
+              {{ data | separateByCommas }}
             </v-flex>
           </v-layout>
 
           <v-divider class="pb-3" />
         </div>
       </div>
-      <div v-else>
-        <v-layout row>
-          <v-flex xs4 class="font-weight-bold">
-            {{ name | sentenceCase }}
-          </v-flex>
-          <v-flex xs8>{{ value }}</v-flex>
-        </v-layout>
+    </v-card-text>
 
-        <v-divider class="pb-3" />
-      </div>
+    <v-card-text v-show="!editing" v-else>
+      <v-simple-table>
+        <tbody>
+          <tr v-for="(value, name) in data" v-bind:key="name">
+            <td :width="headerWidth" class="font-weight-bold">
+              {{ name | sentenceCase }}
+            </td>
+            <td>{{ value }}</td>
+          </tr>
+        </tbody>
+      </v-simple-table>
+
+      <v-divider class="pb-3" />
     </v-card-text>
 
     <v-card-text v-show="allowMultiple && showMultiple && edit">
       <v-btn
         class="font-weight-bold primary--text text-uppercase"
         text
-        flat
         depressed
         @click.stop="showAddForm"
       >
@@ -123,7 +127,6 @@
       />
     </v-card-text>
   </v-card>
-
 </template>
 
 <script>
@@ -194,21 +197,21 @@ export default {
         }
 
         for (var key in response) {
-          if (response.hasOwnProperty(key) && key == component.name) {
+          if (key == component.name) {
             response[key].fields.then(element => {
               for (var subkey in element) {
-                if (element.hasOwnProperty(subkey)) {
-                  data.push({
-                    id: element[subkey].name,
-                    description: element[subkey].short,
-                    max: element[subkey].max,
-                    name: element[subkey].name,
-                    options: element[subkey].options,
-                    required: element[subkey].required,
-                    type: element[subkey].type,
-                    value: fields[element[subkey].name] ? fields[element[subkey].name] : null
-                  });
-                }
+                data.push({
+                  id: element[subkey].name,
+                  description: element[subkey].short,
+                  max: element[subkey].max,
+                  name: element[subkey].name,
+                  options: element[subkey].options,
+                  required: element[subkey].required,
+                  type: element[subkey].type,
+                  value: fields[element[subkey].name]
+                    ? fields[element[subkey].name]
+                    : null
+                });
               }
             });
           }
@@ -233,6 +236,7 @@ export default {
       editButton: false,
       editing: false,
       fields: [],
+      headerWidth: "30%",
       showMultiple: true,
       subheader: null
     };
@@ -244,11 +248,7 @@ export default {
       this.showMultiple = true;
     },
     deleteItem(index) {
-      this.$emit(
-        "deleteData",
-        this.name,
-        index
-      );
+      this.$emit("deleteData", this.name, index);
     },
     showAddForm() {
       let fields = this.fields;

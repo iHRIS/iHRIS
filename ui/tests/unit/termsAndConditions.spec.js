@@ -8,7 +8,9 @@ describe("TermsAndConditions.vue", () => {
     });
 
     expect(wrapper.isVueInstance()).toBeTruthy();
-    expect(wrapper.findAll('v-container-stub')).toHaveLength(1);
-    expect(wrapper.find('v-container-stub').text()).toBe('Terms and Conditions');
+    expect(wrapper.findAll("v-container-stub")).toHaveLength(1);
+    expect(wrapper.find("v-container-stub").text()).toBe(
+      "Terms and Conditions"
+    );
   });
 });
