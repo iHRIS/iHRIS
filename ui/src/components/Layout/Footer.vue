@@ -4,11 +4,12 @@
       <v-btn to="user-manual" text class="text-capitalize">
         User Manual
       </v-btn>
-      <v-btn 
+      <v-btn
         href="https://forms.gle/jQJ7N3nDBSxSNne58"
         text
         target="_blank"
-        class="text-capitalize">
+        class="text-capitalize"
+      >
         Feedback
       </v-btn>
       <v-btn

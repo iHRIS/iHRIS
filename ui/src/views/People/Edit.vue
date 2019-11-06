@@ -1,9 +1,6 @@
 <template>
   <v-container>
-    <ProfileHeader
-      :practitioner="practitioner"
-      ref="profileHeader"
-    />
+    <ProfileHeader :practitioner="practitioner" ref="profileHeader" />
 
     <v-layout>
       <v-flex xs6 class="pr-3">
@@ -101,21 +98,23 @@ export default {
         Vue.delete(this.practitioner, field);
       }
 
-      axios.put(this.config.backend + "/practitioner/edit", this.practitioner).then(response => {
-        if (response.status == 201) {
-          if (component.$refs["subsection" + field][0]) {
-            component.$refs["subsection" + field][0].showAlert(
-              "Item deleted successfully!",
-              "success"
+      axios
+        .post(this.config.backend + "/practitioner/edit", this.practitioner)
+        .then(response => {
+          if (response.status == 201) {
+            if (component.$refs["subsection" + field][0]) {
+              component.$refs["subsection" + field][0].showAlert(
+                "Item deleted successfully!",
+                "success"
+              );
+            }
+          } else {
+            component.$refs["subsection-" + field][0].showAlert(
+              "There was an error deleting this data.",
+              "error"
             );
           }
-        } else {
-          component.$refs["subsection-" + field][0].showAlert(
-            "There was an error deleting this data.",
-            "error"
-          );
-        }
-      });
+        });
     },
     saveSubsectionData(data, field, index) {
       let component = this;
@@ -132,21 +131,23 @@ export default {
         practitioner[field] = data;
       }
 
-      axios.put(this.config.backend + "/practitioner/edit", practitioner).then(response => {
-        component.practitioner = practitioner;
+      axios
+        .put(this.config.backend + "/practitioner/edit", practitioner)
+        .then(response => {
+          component.practitioner = practitioner;
 
-        if (response.status == 201) {
-          component.$refs["subsection" + field][0].showAlert(
-            "Data changed successfully!",
-            "success"
-          );
-        } else {
-          component.$refs["subsection-" + field][0].showAlert(
-            "There was an error saving this data.",
-            "error"
-          );
-        }
-      });
+          if (response.status == 201) {
+            component.$refs["subsection" + field][0].showAlert(
+              "Data changed successfully!",
+              "success"
+            );
+          } else {
+            component.$refs["subsection-" + field][0].showAlert(
+              "There was an error saving this data.",
+              "error"
+            );
+          }
+        });
     },
     getProfilePicture(path) {
       return path;
@@ -160,20 +161,22 @@ export default {
 
       practitioner[this.detailTitle] = input;
 
-      axios.put(this.config.backend + "/practitioner/edit", practitioner).then(response => {
-        if (response.status == 201) {
-          component.cancelDetailsForm();
-          component.$refs.profileHeader.changeMessage(
-            title + " added successfully!",
-            "success"
-          );
-        } else {
-          component.$refs.profileHeader.changeMessage(
-            "There was an error saving this data.",
-            "error"
-          );
-        }
-      });
+      axios
+        .put(this.config.backend + "/practitioner/edit", practitioner)
+        .then(response => {
+          if (response.status == 201) {
+            component.cancelDetailsForm();
+            component.$refs.profileHeader.changeMessage(
+              title + " added successfully!",
+              "success"
+            );
+          } else {
+            component.$refs.profileHeader.changeMessage(
+              "There was an error saving this data.",
+              "error"
+            );
+          }
+        });
     },
     toggleForm(fields, title) {
       this.details = true;

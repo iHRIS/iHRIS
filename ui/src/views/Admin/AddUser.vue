@@ -2,7 +2,7 @@
   <v-container>
     <Alert ref="addUserAlert" />
     <v-card>
-`     <v-card-title>Add User</v-card-title>
+      ` <v-card-title>Add User</v-card-title>
       <v-card-text>
         <DynamicForm
           :fields="this.fields"
@@ -68,10 +68,7 @@ export default {
       this.$refs.addUserForm.reset();
     },
     showFailedSubmit() {
-      this.$refs.addUserAlert.changeMessage(
-        "Could not add new user",
-        "error"
-      );
+      this.$refs.addUserAlert.changeMessage("Could not add new user", "error");
     },
     submit(data) {
       axios

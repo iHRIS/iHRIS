@@ -1,7 +1,7 @@
 <template>
   <v-container>
     <v-card>
-`     <v-card-title>Login</v-card-title>
+      ` <v-card-title>Login</v-card-title>
       <v-card-text>
         <DynamicForm
           :fields="this.fields"
@@ -25,8 +25,7 @@ export default {
   components: {
     DynamicForm
   },
-  created() {
-  },
+  created() {},
   data() {
     return {
       fields: [
