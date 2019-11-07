@@ -1,6 +1,5 @@
 <template>
   <v-container>
-    <Alert ref="addUserAlert" />
     <v-card>
       <v-card-title>Users</v-card-title>
       <v-card-text>
@@ -18,12 +17,7 @@
 <script>
 import axios from "axios";
 
-import Alert from "@/components/Layout/Alert.vue";
-
 export default {
-  components: {
-    Alert
-  },
   created() {
     this.config = require("@/config/config.json");
   },
