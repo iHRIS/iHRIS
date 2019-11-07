@@ -69,6 +69,25 @@ router.post("/add", function (req, res, next) {
 });
 
 /**
+ * Get all users
+ */
+router.get("/list", function (req, res, next) {
+  let url = URI(config.fhir.server).segment('fhir').segment('Person').toString();
+
+  axios.get(url, {
+    withCredentials: true,
+    auth: {
+      username: config.fhir.username,
+      password: config.fhir.password
+    }
+  }).then(response => {
+    res.status(201).json(response.data);
+  }).catch(err => {
+    res.status(400).json(err);
+  });
+});
+
+/**
  * Check login credentials
  */
 router.post("/login", function (req, res, next) {
