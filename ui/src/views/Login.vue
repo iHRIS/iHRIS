@@ -1,5 +1,7 @@
 <template>
   <v-container>
+    <Alert ref="alert" />
+
     <v-card>
       <v-card-title>Login</v-card-title>
       <v-card-text>
@@ -7,8 +9,8 @@
           :fields="this.fields"
           name="login"
           v-on:successfulSubmit="submit"
-          v-on:failedSubmit="showFailedSubmit"
-          ref="login"
+          v-on:showFailedSubmit="failedSubmit"
+          ref="loginForm"
           key="login"
           hideCancel="true"
           submitLabel="Login"
@@ -19,32 +21,56 @@
 </template>
 
 <script>
+import axios from "axios";
+
+import Alert from "@/components/Layout/Alert.vue";
 import DynamicForm from "@/components/Form/DynamicForm.vue";
 
 export default {
   components: {
+    Alert,
     DynamicForm
   },
-  created() {},
+  created() {
+    this.config = require("@/config/config.json");
+  },
   data() {
     return {
+      config: null,
       fields: [
         {
           id: "username",
           max: 1,
-          name: "Username",
+          name: "username",
           required: true,
           type: "string"
         },
         {
           id: "password",
           max: 1,
-          name: "Password",
+          name: "password",
           required: true,
           type: "password"
         }
       ]
     };
+  },
+  methods: {
+    failedSubmit() {
+      this.$refs.alert.changeMessage("Invalid login credentials", "error");
+    },
+    submit() {
+      let params = this.$refs.loginForm.getInputs();
+
+      axios.post(this.config.backend + "/user/login", params).then(response => {
+        this.$router.push({
+          name: "home",
+          params: {"login": true}
+        });
+      }).catch(error => {
+        this.$refs.alert.changeMessage("Invalid login credentials", "error");
+      });
+    }
   }
 };
 </script>

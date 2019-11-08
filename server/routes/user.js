@@ -91,7 +91,9 @@ router.get("/list", function (req, res, next) {
  * Check login credentials
  */
 router.post("/login", function (req, res, next) {
-  let url = URI(config.fhir.server).segment('fhir').segment('Person').segment(req._parsedUrl.search).toString()
+  let url = URI(config.fhir.server).segment('fhir').segment('Person');
+  url.addQuery('username:exact', req.body.username);
+  url = url.toString();
 
   axios.get(url, {
     withCredentials: true,
@@ -100,7 +102,50 @@ router.post("/login", function (req, res, next) {
       password: config.fhir.password
     }
   }).then(response => {
-    res.status(201).json(response.data);
+
+    let numMatches = response.data.total;
+
+    if (numMatches == 0) {
+      return res.status(400).json(response.data);
+    } else {
+      let user = response.data.entry[0].resource;
+      let extensions = user.extension;
+
+      for (var i in extensions) {
+        if (extensions[i].url.includes("iHRISUserDetails")) {
+          let userDetails = extensions[i].extension;
+          let password = null;
+          let salt = null;
+
+          for (var j in userDetails) {
+            if (userDetails[j].url == "password") {
+              password = userDetails[j].valueString;
+            }
+
+            if (userDetails[j].url == "salt") {
+              salt = userDetails[j].valueString;
+            }
+          }
+
+          let hash = crypto.pbkdf2Sync(
+            req.body.password,
+            salt,
+            1000,
+            64,
+            "sha512"
+          ).toString(`hex`);
+
+          // matching password
+          if (hash === password) {
+            return res.status(201).json(response.data);
+          } else {
+            return res.status(400).json({});
+          }
+        }
+      }
+
+      res.status(400).json({});
+    }
   }).catch(err => {
     res.status(400).json(err);
   });
