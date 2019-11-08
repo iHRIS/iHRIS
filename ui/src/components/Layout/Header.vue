@@ -17,8 +17,21 @@
 
 <script>
 import { serverBus } from "../../main";
+import VueCookies from "vue-cookies";
 
 export default {
+  computed: {
+    accountMenu() {
+      if (this.$store.state.authentication.username) {
+        return [
+          { title: "Account", link: { name: "account" } },
+          { title: "Log out", link: { name: "logout" } }
+        ];
+      }
+
+      return [{ title: "Log in", link: { name: "login" } }];
+    }
+  },
   created() {
     const config = require("@/config/config.json");
 
@@ -26,33 +39,7 @@ export default {
     this.site = config.site;
   },
   data() {
-    let accountMenu = [
-      {
-        title: "Account",
-        link: { name: "account" }
-      }
-    ];
-
-    if (this.user) {
-      accountMenu.push({
-        title: "Change password",
-        link: { name: "change-password" }
-      });
-
-      accountMenu.push({
-        title: "Log out",
-        link: { name: "logout" }
-      });
-    } else {
-      accountMenu.push({
-        title: "Log in",
-        link: { name: "login" }
-      });
-    }
-
     return {
-      accountMenu: accountMenu,
-      config: [],
       icon: "",
       site: ""
     };
