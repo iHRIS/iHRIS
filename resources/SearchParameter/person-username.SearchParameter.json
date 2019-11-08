@@ -21,7 +21,7 @@
   "base": [
     "Person"
   ],
-  "type": "reference",
+  "type": "string",
   "expression": "Person.extension('http://ihris.org/fhir/StructureDefinition/iHRISUserDetails').extension('username')",
   "xpath": "f:Person/f:extension[@url='http://ihris.org/fhir/StructureDefinition/iHRISUserDetails']/f:extension[@url='username']",
   "xpathUsage": "normal",
