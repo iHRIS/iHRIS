@@ -5,6 +5,10 @@ Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
+    authentication: {
+      username: null,
+      userId: null
+    },
     indeterminateProgress: false,
     indeterminateProgressTitle: ""
   },
