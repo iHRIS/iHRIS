@@ -133,11 +133,16 @@ router.post("/login", function (req, res, next) {
             1000,
             64,
             "sha512"
-          ).toString(`hex`);
+          ).toString("hex");
+
+          let packet = {
+            userId: user.id,
+            username: req.body.username
+          };
 
           // matching password
           if (hash === password) {
-            return res.status(201).json(response.data);
+            return res.status(201).json(packet);
           } else {
             return res.status(400).json({});
           }
