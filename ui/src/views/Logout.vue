@@ -15,7 +15,7 @@ export default {
     this.$store.state.authentication.username = null;
     this.$store.state.authentication.userId = null;
 
-    this.$router.push({name: "home"});
+    this.$router.push({ name: "home" });
   }
 };
 </script>

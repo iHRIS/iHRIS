@@ -17,7 +17,6 @@
 
 <script>
 import { serverBus } from "../../main";
-import VueCookies from "vue-cookies";
 
 export default {
   computed: {
