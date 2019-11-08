@@ -22,7 +22,7 @@
 
 <script>
 import axios from "axios";
-import VueCookies from 'vue-cookies';
+import VueCookies from "vue-cookies";
 
 import Alert from "@/components/Layout/Alert.vue";
 import DynamicForm from "@/components/Form/DynamicForm.vue";
@@ -63,20 +63,23 @@ export default {
     submit() {
       let params = this.$refs.loginForm.getInputs();
 
-      axios.post(this.config.backend + "/user/login", params).then(response => {
-        this.$store.state.authentication.username = response.data.username;
-        this.$store.state.authentication.userId = response.data.userId;
+      axios
+        .post(this.config.backend + "/user/login", params)
+        .then(response => {
+          this.$store.state.authentication.username = response.data.username;
+          this.$store.state.authentication.userId = response.data.userId;
 
-        VueCookies.set("username", response.data.username);
-        VueCookies.set("userId", response.data.userId);
+          VueCookies.set("username", response.data.username);
+          VueCookies.set("userId", response.data.userId);
 
-        this.$router.push({
-          name: "home",
-          params: {"login": true}
+          this.$router.push({
+            name: "home",
+            params: { login: true }
+          });
+        })
+        .catch(() => {
+          this.$refs.alert.changeMessage("Invalid login credentials", "error");
         });
-      }).catch(error => {
-        this.$refs.alert.changeMessage("Invalid login credentials", "error");
-      });
     }
   }
 };
