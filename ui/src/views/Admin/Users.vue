@@ -12,6 +12,7 @@
 
 <script>
 import axios from "axios";
+import datejs from "datejs";
 
 export default {
   created() {
@@ -26,13 +27,21 @@ export default {
           for (var i in extensions) {
             if (extensions[i].url.includes("iHRISUserDetails")) {
               let userExtensions = extensions[i].extension;
+              let user = {};
 
               for (var j in userExtensions) {
                 if (userExtensions[j].url == "username") {
-                  this.users.push({
-                    username: userExtensions[j].valueString
-                  });
+                  user.username = userExtensions[j].valueString;
                 }
+
+                if (userExtensions[j].url == "created") {
+                  let created = Date.parse(userExtensions[j].valueString);
+                  user.created = created.toString("yyyy-MM-dd HH:mm:ss");
+                }
+              }
+
+              if (user) {
+                this.users.push(user);
               }
             }
           }
@@ -48,6 +57,10 @@ export default {
           text: "Username",
           align: "left",
           value: "username"
+        },
+        {
+          text: "Created",
+          value: "created"
         },
         {
           text: "Roles",
