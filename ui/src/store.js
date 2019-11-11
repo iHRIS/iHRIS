@@ -4,7 +4,7 @@ import VueCookies from "vue-cookies";
 
 Vue.use(Vuex);
 
-export default new Vuex.Store({
+export const store = new Vuex.Store({
   state: {
     authentication: {
       username: VueCookies.get("username") || null,

@@ -17,11 +17,12 @@
 
 <script>
 import { serverBus } from "../../main";
+import {store} from '@/store.js';
 
 export default {
   computed: {
     accountMenu() {
-      if (this.$store.state.authentication.username) {
+      if (store.state.authentication.username) {
         return [
           { title: "Account", link: { name: "account" } },
           { title: "Log out", link: { name: "logout" } }
