@@ -1,9 +1,10 @@
 import Vue from "vue";
 import Router from "vue-router";
+import {store} from './store.js';
 
 Vue.use(Router);
 
-export default new Router({
+let router = new Router({
   mode: "history",
   base: process.env.BASE_URL,
   routes: [
@@ -111,3 +112,19 @@ export default new Router({
     }
   ]
 });
+
+router.beforeEach((to, from, next) => {
+  if (!store.state.authentication.username) {
+    if (to.path == "/" || to.path == "/login" || to.path == "/logout") {
+      next();
+    } else {
+      next({
+        path: "/login"
+      });
+    }
+  } else {
+    next();
+  }
+});
+
+export default router;

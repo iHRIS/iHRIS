@@ -5,6 +5,7 @@
 </template>
 
 <script>
+import {store} from '@/store.js';
 import VueCookies from "vue-cookies";
 
 export default {
@@ -12,8 +13,8 @@ export default {
     VueCookies.remove("username");
     VueCookies.remove("userId");
 
-    this.$store.state.authentication.username = null;
-    this.$store.state.authentication.userId = null;
+    store.state.authentication.username = null;
+    store.state.authentication.userId = null;
 
     this.$router.push({ name: "home" });
   }
