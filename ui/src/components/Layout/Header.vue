@@ -17,7 +17,7 @@
 
 <script>
 import { serverBus } from "../../main";
-import {store} from '@/store.js';
+import { store } from "@/store.js";
 
 export default {
   computed: {
