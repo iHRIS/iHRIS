@@ -12,6 +12,9 @@
 
 <script>
 import axios from "axios";
+
+// this is needed for date parsing but is picked up by the linter because it's technically not used
+// eslint-disable-next-line
 import datejs from "datejs";
 
 export default {

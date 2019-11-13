@@ -156,4 +156,106 @@ router.post("/login", function (req, res, next) {
   });
 });
 
+/**
+ * Update a new user
+ */
+router.post("/update", function (req, res, next) {
+  // first we need to get the user so we can get their salt
+  let data = req.body;
+  let url = URI(config.fhir.server).segment('fhir').segment('Person');
+  url.addQuery('_id', data.id);
+  url = url.toString();
+
+  axios.get(url, {
+    withCredentials: true,
+    auth: {
+      username: config.fhir.username,
+      password: config.fhir.password
+    }
+  }).then(response => {
+    let salt = null;
+    let user = response.data.entry[0].resource;
+    let extensions = user.extension;
+    let extension = null;
+
+    // first, make sure the user sent in the correct password
+    for (var i in extensions) {
+      if (extensions[i].url.includes("iHRISUserDetails")) {
+        extension = extensions[i];
+
+        let userDetails = extensions[i].extension;
+        let password = null;
+
+        for (var j in userDetails) {
+          if (userDetails[j].url == "password") {
+            password = userDetails[j].valueString;
+          }
+
+          if (userDetails[j].url == "salt") {
+            salt = userDetails[j].valueString;
+          }
+        }
+
+        let hash = crypto.pbkdf2Sync(
+          req.body.password,
+          salt,
+          1000,
+          64,
+          "sha512"
+        ).toString("hex");
+
+        // matching password
+        if (hash !== password) {
+          return res.status(400).json({});
+        }
+      }
+    }
+
+    // make sure the salt is set so we can update to the new password
+    if (salt === null) {
+      return res.status(400).json({});
+    }
+
+    let newPassword = crypto.pbkdf2Sync(
+      data.newPassword,
+      salt,
+      1000,
+      64,
+      "sha512").toString("hex");
+
+    let bundle = {
+      id: data.id,
+      resourceType: "Person"
+    };
+
+    // we need to loop through extension again to find the password field
+    for (var i in extension.extension) {
+      let userField = extension.extension[i];
+
+      if (userField.url === "password") {
+        extension.extension[i].valueString = newPassword;
+        break;
+      }
+    }
+
+    bundle.extension = [extension];
+
+    let url = URI(config.fhir.server).segment('fhir').segment('Person').segment(data.id).toString();
+
+    axios.put(url, bundle, {
+      withCredentials: true,
+      auth: {
+        username: config.fhir.username,
+        password: config.fhir.password
+      }
+    }).then(response => {
+      res.status(201).json(response.data);
+    }).catch(err => {
+      res.status(400).json(err);
+    });
+  }).catch(err => {
+    res.status(400).json(err);
+  });
+});
+
 module.exports = router;
