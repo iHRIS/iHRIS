@@ -102,7 +102,6 @@ router.post("/login", function (req, res, next) {
       password: config.fhir.password
     }
   }).then(response => {
-
     let numMatches = response.data.total;
 
     if (numMatches == 0) {

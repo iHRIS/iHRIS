@@ -16,8 +16,17 @@
               :items-per-page="5"
               class="elevation-1"
             >
-              <template v-slot:item.editLink="{ item }">
-                <a :href="item.editLink">Edit</a>
+              <template v-slot:item.action="{ item }">
+                <button :href="item.editLink" text>
+                  <v-icon small class="mr-2">
+                    edit
+                  </v-icon>
+                </button>
+                <button :href="item.viewLink" text>
+                  <v-icon small>
+                    visibility
+                  </v-icon>
+                </button>
               </template>
             </v-data-table>
           </v-card-text>
@@ -62,18 +71,18 @@ export default {
       config: null,
       headers: [
         {
-          text: "Edit",
-          align: "left",
-          sortable: false,
-          value: "editLink"
-        },
-        {
           text: "Surname",
           value: "surname"
         },
         {
           text: "Given name",
           value: "given"
+        },
+        {
+          text: "Actions",
+          align: "left",
+          sortable: false,
+          value: "action"
         }
       ],
       fields: [
@@ -107,6 +116,7 @@ export default {
           response.data.entry.forEach(practitioner => {
             practitioners.push({
               editLink: "/people/edit/" + practitioner.resource.id,
+              viewLink: "/people/view/" + practitioner.resource.id,
               surname: practitioner.resource.name[0].family,
               given: practitioner.resource.name[0].given[0]
             });
