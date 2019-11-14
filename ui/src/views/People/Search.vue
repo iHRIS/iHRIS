@@ -14,7 +14,6 @@
               :headers="headers"
               :items="practitioners"
               :items-per-page="5"
-              class="elevation-1"
             >
               <template v-slot:item.action="{ item }">
                 <button :href="item.editLink" text>
