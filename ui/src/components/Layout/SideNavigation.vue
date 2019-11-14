@@ -73,6 +73,10 @@ export default {
           icon: "people",
           submenu: [
             {
+              action: { path: "/people/view/8755" },
+              title: "Sample Practitioner"
+            },
+            {
               action: { name: "search-people" },
               title: "Search people"
             },

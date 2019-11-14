@@ -16,16 +16,16 @@
               :items-per-page="5"
             >
               <template v-slot:item.action="{ item }">
-                <button :href="item.editLink" text>
+                <v-btn icon :href="item.editLink" text>
                   <v-icon small class="mr-2">
                     edit
                   </v-icon>
-                </button>
-                <button :href="item.viewLink" text>
+                </v-btn>
+                <v-btn icon :href="item.viewLink" text>
                   <v-icon small>
                     visibility
                   </v-icon>
-                </button>
+                </v-btn>
               </template>
             </v-data-table>
           </v-card-text>
