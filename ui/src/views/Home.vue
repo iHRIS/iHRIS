@@ -40,8 +40,6 @@ export default {
         dashboards.push(dashboard);
       }
 
-      console.log(dashboards);
-
       this.dashboards = dashboards;
     });
   },
