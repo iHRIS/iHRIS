@@ -2,8 +2,15 @@
   <v-container>
     <Alert ref="alert" />
 
-    <v-card v-for="dashboard in dashboards" v-bind:key="dashboard.id">
+    <v-card
+      v-for="dashboard in dashboards"
+      v-bind:key="dashboard.id"
+      class="mb-5"
+    >
       <v-card-title>{{ dashboard.attributes.title }}</v-card-title>
+      <v-card-text>
+        <iframe :src="dashboard.iframeLink" height="800" width="100%"></iframe>
+      </v-card-text>
     </v-card>
   </v-container>
 </template>
@@ -24,8 +31,16 @@ export default {
       let dashboards = [];
 
       for (var i in response.data.saved_objects) {
-        dashboards.push(response.data.saved_objects[i]);
+        let dashboard = response.data.saved_objects[i];
+        dashboard.iframeLink =
+          "http://scratchpad.ihris.org/kibana/app/kibana#/dashboard/" +
+          dashboard.id +
+          "?embed=true";
+
+        dashboards.push(dashboard);
       }
+
+      console.log(dashboards);
 
       this.dashboards = dashboards;
     });
