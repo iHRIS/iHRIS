@@ -4,7 +4,7 @@
       <v-img :src="getProfilePicture()" contain />
     </v-flex>
     <v-flex xs6 class="display-2 text-xs-left pl-3" v-if="practitioner.name">
-      {{ getName() }}
+      {{ name }}
     </v-flex>
     <v-flex xs3 offset-xs3>
       <Alert ref="alert" />
@@ -19,11 +19,8 @@ export default {
   components: {
     Alert
   },
-  methods: {
-    changeMessage(message, type) {
-      this.$refs.alert.changeMessage(message, type);
-    },
-    getName() {
+  computed: {
+    name() {
       let name = "";
 
       if (this.practitioner.name[0].prefix) {
@@ -43,6 +40,11 @@ export default {
       }
 
       return name;
+    }
+  },
+  methods: {
+    changeMessage(message, type) {
+      this.$refs.alert.changeMessage(message, type);
     },
     getProfilePicture() {
       return this.practitioner.photo[0].url;
