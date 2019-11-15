@@ -1,35 +1,28 @@
 {
   "development": {
-    "database": {
-      "username": null,
-      "password": null,
-      "database": "database_dev",
-      "dialect": "sqlite"
-    },
     "definitions": {
       "practitionerPage": "Basic/iHRISPagePractitioner"
-    },
-    "fhir": {
-      "server": "localhost",
-      "username": "username",
-      "password": "password"
     },
     "elastic": {
       "server": "http://localhost:9200",
       "username": "username",
       "password": "username"
     },
+    "fhir": {
+      "server": "localhost",
+      "username": "username",
+      "password": "password"
+    },
     "kibana": "https://www.elastic.co/products/kibana"
   },
   "test": {
-    "database": {
-      "username": null,
-      "password": null,
-      "database": "database_test",
-      "dialect": "sqlite"
-    },
     "definitions": {
       "practitionerPage": "Basic/iHRISPagePractitioner"
+    },
+    "elastic": {
+      "server": "http://localhost:9200",
+      "username": "username",
+      "password": "username"
     },
     "fhir": {
       "server": "localhost",
@@ -39,14 +32,13 @@
     "kibana": "https://www.elastic.co/products/kibana"
   },
   "production": {
-    "database": {
-      "username": null,
-      "password": null,
-      "database": "database_production",
-      "dialect": "sqlite"
-    },
     "definitions": {
       "practitionerPage": "Basic/iHRISPagePractitioner"
+    },
+    "elastic": {
+      "server": "http://localhost:9200",
+      "username": "username",
+      "password": "username"
     },
     "fhir": {
       "server": "localhost",
