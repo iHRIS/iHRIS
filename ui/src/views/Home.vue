@@ -41,7 +41,13 @@ export default {
         dashboards.push(dashboard);
       }
 
+      if (dashboards.length === 0) {
+        this.$refs.alert.changeMessage("No dashboards found.", "error");
+      }
+
       this.dashboards = dashboards;
+    }).catch(() => {
+      this.$refs.alert.changeMessage("Could not retrieve dashboards.", "error");
     });
   },
   data() {
