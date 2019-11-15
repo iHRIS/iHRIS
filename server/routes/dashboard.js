@@ -9,7 +9,7 @@ const config = require(__dirname + "/../config/config.json")[env];
  * Get all dashboards
  */
 router.get("/all", function (req, res, next) {
-  let url = "http://scratchpad.ihris.org/kibana/api/saved_objects/_find?type=dashboard";
+  let url = config.kibana + "/api/saved_objects/_find?type=dashboard";
 
   axios.get(url, {
     headers: {

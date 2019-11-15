@@ -33,7 +33,8 @@ export default {
       for (var i in response.data.saved_objects) {
         let dashboard = response.data.saved_objects[i];
         dashboard.iframeLink =
-          "http://scratchpad.ihris.org/kibana/app/kibana#/dashboard/" +
+          this.config.kibana +
+          "/app/kibana#/dashboard/" +
           dashboard.id +
           "?embed=true";
 

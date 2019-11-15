@@ -18,7 +18,8 @@
       "server": "http://localhost:9200",
       "username": "username",
       "password": "username"
-    }
+    },
+    "kibana": "https://www.elastic.co/products/kibana"
   },
   "test": {
     "database": {
@@ -34,7 +35,8 @@
       "server": "localhost",
       "username": "username",
       "password": "password"
-    }
+    },
+    "kibana": "https://www.elastic.co/products/kibana"
   },
   "production": {
     "database": {
@@ -50,6 +52,7 @@
       "server": "localhost",
       "username": "username",
       "password": "password"
-    }
+    },
+    "kibana": "https://www.elastic.co/products/kibana"
   }
 }

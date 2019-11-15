@@ -2,5 +2,6 @@
   "logo": "@/assets/logos/ihris.png",
   "site": "Demonstration site",
   "ignoredSubsections": ["meta", "extension", "modifierextension"],
-  "backend": "http://localhost:3000"
+  "backend": "http://localhost:3000",
+  "kibana": "http://www.mykibana.org"
 }
