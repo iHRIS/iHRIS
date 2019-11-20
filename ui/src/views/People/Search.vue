@@ -13,6 +13,9 @@
             <v-data-table
               :headers="headers"
               :items="practitioners"
+              :sort-by="['surname','Given']"
+              :sort-desc="[false,false]"
+              multi-sort
               :items-per-page="5"
             >
               <template v-slot:item.action="{ item }">
@@ -133,3 +136,8 @@ export default {
   }
 };
 </script>
+<style>
+tbody tr:nth-of-type(odd) {
+  background-color: #b3d4fc;
+}
+</style>
