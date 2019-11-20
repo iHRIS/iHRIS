@@ -1,6 +1,6 @@
 <template>
   <v-card class="mb-5">
-    <v-card-title class="display-1">
+    <v-card-title class="display-1 SectionTitle" @click="toogleSectionDetailDisplay">
       {{ this.name | sentenceCase }}
       <v-spacer />
       <v-btn
@@ -26,7 +26,7 @@
       </v-btn>
     </v-card-title>
 
-    <v-card-text v-if="Array.isArray(data)" v-show="!editing">
+    <v-card-text v-if="Array.isArray(data)" v-show="!editing && showSectionDetail" >
       <div v-for="(value, name) in data" v-bind:key="name">
         <div v-if="Number.isInteger(name)">
           <v-layout row align-baseline>
@@ -85,7 +85,7 @@
       </div>
     </v-card-text>
 
-    <v-card-text v-show="!editing" v-else>
+    <v-card-text v-show="!editing " v-else>
       <v-simple-table>
         <tbody>
           <tr v-for="(value, name) in data" v-bind:key="name">
@@ -100,7 +100,7 @@
       <v-divider class="pb-3" />
     </v-card-text>
 
-    <v-card-text v-show="allowMultiple && showMultiple && edit">
+    <v-card-text v-show="allowMultiple && showMultiple && edit && showSectionDetail">
       <v-btn
         class="font-weight-bold primary--text text-uppercase"
         text
@@ -225,6 +225,7 @@ export default {
   },
   data() {
     return {
+      showSectionDetail:true,
       alert: {
         message: null,
         show: false,
@@ -299,6 +300,10 @@ export default {
       this.editing = true;
       this.editButton = false;
       this.showMultiple = false;
+    },
+    toogleSectionDetailDisplay()
+    {
+      this.showSectionDetail=!this.showSectionDetail;
     }
   },
   mixins: [StructureDefinition],
@@ -315,3 +320,8 @@ export default {
   }
 };
 </script>
+<style scoped>
+  .SectionTitle{
+    cursor: pointer;
+  }
+</style>

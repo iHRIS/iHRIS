@@ -325,3 +325,9 @@ export default {
   }
 };
 </script>
+<style>
+  .primary
+  {
+    margin-left:10px;
+  }
+</style>
