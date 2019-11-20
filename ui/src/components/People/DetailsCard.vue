@@ -324,4 +324,7 @@ export default {
   .SectionTitle{
     cursor: pointer;
   }
+  .error{
+    margin-left:5px;
+  }
 </style>
