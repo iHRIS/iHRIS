@@ -13,7 +13,8 @@
       "username": "username",
       "password": "password"
     },
-    "kibana": "https://www.elastic.co/products/kibana"
+    "kibana": "https://www.elastic.co/products/kibana",
+    "structureDefinition": "http://server.com/fhir"
   },
   "test": {
     "definitions": {
@@ -29,7 +30,8 @@
       "username": "username",
       "password": "password"
     },
-    "kibana": "https://www.elastic.co/products/kibana"
+    "kibana": "https://www.elastic.co/products/kibana",
+    "structureDefinition": "http://server.com/fhir"
   },
   "production": {
     "definitions": {
@@ -45,6 +47,7 @@
       "username": "username",
       "password": "password"
     },
-    "kibana": "https://www.elastic.co/products/kibana"
+    "kibana": "https://www.elastic.co/products/kibana",
+    "structureDefinition": "http://server.com/fhir"
   }
 }
