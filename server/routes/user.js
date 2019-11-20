@@ -25,12 +25,9 @@ router.post("/add", function (req, res, next) {
   let bundle = {
     resourceType: "Person",
     id: "user",
-    meta: {
-      profile: config.fhir.server + "/fhir/StructureDefinition/iHRISUser",
-    },
     extension: [
       {
-        url: config.fhir.server + "/StructureDefinition/iHRISUserDetails",
+        url: config.structureDefinition + "/StructureDefinition/iHRISUserDetails",
         extension: [
           {
             url: "username",
