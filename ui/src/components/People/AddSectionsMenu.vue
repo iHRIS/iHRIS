@@ -9,7 +9,8 @@
       >
         <v-list-item
           active-class="primary darken-2"
-          @click.stop="showForm(item.title, item.definition)"
+          class="pb-0"
+          @click.stop="showForm(item.title, item.type)"
           three-line
         >
           <v-list-item-icon>
@@ -32,44 +33,99 @@
 </template>
 
 <script>
+import axios from "axios";
 import StructureDefinition from "@/mixins/StructureDefinition.js";
 
 export default {
   created() {
-    let practitioner = this.data;
+    axios
+      .get(
+        this.config.backend +
+          "/practitioner/describe/definition/iHRISPractitioner"
+      )
+      .then(response => {
+        axios
+          .get(
+            this.config.backend +
+              "/practitioner/describe/definition/Practitioner"
+          )
+          .then(practitioner => {
+            let fields = response.data.differential.element;
+            let practitionerFields = practitioner.data.differential.element;
 
-    this.describe("Practitioner").then(response => {
-      const config = require("@/config/config.json");
+            console.log("FIELDS");
+            console.log(fields);
+            console.log("PRACTITIONER");
+            console.log(practitioner);
 
-      let menu = [];
-      let index = 0;
+            fields.forEach(field => {
+              let label = null;
 
-      for (var key in response) {
-        if (
-          !practitioner[key] &&
-          response[key].title &&
-          config.ignoredSubsections.indexOf(response[key].title.toLowerCase()) <
-            0 &&
-          response[key].subtitle
-        ) {
-          if (response[key].object) {
-            menu.push({
-              subtitle: response[key].subtitle,
-              title: response[key].title,
-              index: index++,
-              definition: response[key].type
+              // ignore the extension field
+              if (
+                field.id.endsWith(".extension") ||
+                field.id.endsWith(".value[x].system") ||
+                field.id.endsWith(".value[x].code") ||
+                field.id.endsWith(".value[x]")
+              ) {
+                return;
+              }
+
+              // if a label field exists, use that
+              // otherwise, go with the last text before the period
+              if (field.label) {
+                label = field.label;
+              } else {
+                label = field.id.slice(field.id.lastIndexOf(".") + 1);
+              }
+
+              this.$set(this.menu, field.id, {});
+              this.menu[field.id].title = label;
+              this.menu[field.id].index = field.id;
+
+              // get the subtitle. if a description value is set, use that
+              if (field.description) {
+                this.menu[field.id].subtitle = field.description;
+              } else if (field.path == "Practitioner.extension") {
+                // if this is an extension, load the structure definition and get the description from that
+                let type = field.type[0].profile[0];
+                let structureDefinition = type.slice(type.lastIndexOf("/") + 1);
+
+                // if it's an extension, the type is just the structure definition
+                this.menu[field.id].type = structureDefinition;
+
+                axios
+                  .get(
+                    this.config.backend +
+                      "/practitioner/describe/definition/" +
+                      structureDefinition
+                  )
+                  .then(extension => {
+                    // use the description field for the subtitle
+                    if (extension.data.description) {
+                      this.menu[field.id].subtitle = extension.data.description;
+                    }
+                  });
+              } else {
+                // if not an extension, look for a match in the practitioner structure definition and use that
+                for (var i in practitionerFields) {
+                  if (practitionerFields[i].id == field.id) {
+                    this.menu[field.id].subtitle =
+                      practitionerFields[i].definition;
+                    this.menu[field.id].type =
+                      practitionerFields[i].type[0].code;
+                    break;
+                  }
+                }
+              }
             });
-          }
-        }
-      }
-
-      this.menu = menu;
-    });
+          });
+      });
   },
   data() {
     return {
       fields: [],
-      menu: []
+      menu: {}
     };
   },
   methods: {
