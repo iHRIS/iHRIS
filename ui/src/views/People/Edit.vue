@@ -5,7 +5,7 @@
     <v-layout>
       <v-flex xs6 class="pr-3">
         <div
-          v-for="(element, index) in this.practitioner"
+          v-for="(element, index) in display"
           v-bind:key="'edit-' + index"
         >
           <DetailsCard
@@ -52,6 +52,7 @@ import AddSectionsMenu from "@/components/People/AddSectionsMenu.vue";
 import DetailsCard from "@/components/People/DetailsCard.vue";
 import DynamicForm from "@/components/Form/DynamicForm.vue";
 import ProfileHeader from "@/components/People/ProfileHeader.vue";
+import SectionsToDisplay from "@/mixins/SectionsToDisplay.js";
 import Vue from "vue";
 
 export default {
@@ -61,24 +62,12 @@ export default {
     DynamicForm,
     ProfileHeader
   },
-  created() {
-    this.config = require("@/config/config.json");
-
-    axios
-      .get(this.config.backend + "/practitioner/view/" + this.$route.params.id)
-      .then(practitioner => {
-        if (practitioner.status === 201) {
-          this.practitioner = practitioner.data.entry[0].resource;
-        }
-      });
-  },
   data() {
     return {
       config: null,
       details: false,
       detailFields: {},
       detailTitle: null,
-      practitioner: {}
     };
   },
   methods: {
@@ -187,6 +176,7 @@ export default {
       this.$refs.detailsForm.changeFields(fields);
     }
   },
+  mixins: [SectionsToDisplay],
   name: "AddSections"
 };
 </script>
