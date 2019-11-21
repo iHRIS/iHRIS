@@ -25,81 +25,81 @@
         <v-icon>delete</v-icon>
       </v-btn>
     </v-card-title>
+    <transition name="fade">
+      <v-card-text v-if="Array.isArray(data)" v-show="!editing && showSectionDetail" >
+        <div v-for="(value, name) in data" v-bind:key="name">
+          <div v-if="Number.isInteger(name)">
+            <v-layout row align-baseline>
+              <v-flex xs4 class="primary--text text-uppercase pl-5">
+                {{ value[subheader] }}
+              </v-flex>
 
-    <v-card-text v-if="Array.isArray(data)" v-show="!editing && showSectionDetail" >
-      <div v-for="(value, name) in data" v-bind:key="name">
-        <div v-if="Number.isInteger(name)">
-          <v-layout row align-baseline>
-            <v-flex xs4 class="primary--text text-uppercase pl-5">
-              {{ value[subheader] }}
-            </v-flex>
+              <v-spacer />
 
-            <v-spacer />
+              <v-btn
+                fab
+                class="primary"
+                v-show="editButton || edit"
+                v-if="data[0]"
+                v-on:click="toggleForm(name)"
+              >
+                <v-icon>edit</v-icon>
+              </v-btn>
 
-            <v-btn
-              fab
-              class="primary"
-              v-show="editButton || edit"
-              v-if="data[0]"
-              v-on:click="toggleForm(name)"
-            >
-              <v-icon>edit</v-icon>
-            </v-btn>
+              <v-btn
+                fab
+                class="error"
+                v-show="editButton || edit"
+                v-if="data[0]"
+                v-on:click="deleteItem(name)"
+              >
+                <v-icon>delete</v-icon>
+              </v-btn>
+            </v-layout>
 
-            <v-btn
-              fab
-              class="error"
-              v-show="editButton || edit"
-              v-if="data[0]"
-              v-on:click="deleteItem(name)"
-            >
-              <v-icon>delete</v-icon>
-            </v-btn>
-          </v-layout>
+            <v-simple-table>
+              <tbody>
+                <tr v-for="(data, fieldIndex) in value" v-bind:key="fieldIndex">
+                  <td :width="headerWidth" class="font-weight-bold">
+                    {{ fieldIndex | sentenceCase }}
+                  </td>
+                  <td>{{ data | separateByCommas }}</td>
+                </tr>
+              </tbody>
+            </v-simple-table>
 
-          <v-simple-table>
-            <tbody>
-              <tr v-for="(data, fieldIndex) in value" v-bind:key="fieldIndex">
-                <td :width="headerWidth" class="font-weight-bold">
-                  {{ fieldIndex | sentenceCase }}
-                </td>
-                <td>{{ data | separateByCommas }}</td>
-              </tr>
-            </tbody>
-          </v-simple-table>
+            <v-divider class="pb-3" />
+          </div>
+          <div v-else>
+            <v-layout row>
+              <v-flex xs4 class="font-weight-bold">
+                {{ name | sentenceCase }}
+              </v-flex>
+              <v-flex xs8 v-for="(data, index) in value" v-bind:key="index">
+                {{ data | separateByCommas }}
+              </v-flex>
+            </v-layout>
 
-          <v-divider class="pb-3" />
+            <v-divider class="pb-3" />
+          </div>
         </div>
-        <div v-else>
-          <v-layout row>
-            <v-flex xs4 class="font-weight-bold">
-              {{ name | sentenceCase }}
-            </v-flex>
-            <v-flex xs8 v-for="(data, index) in value" v-bind:key="index">
-              {{ data | separateByCommas }}
-            </v-flex>
-          </v-layout>
+      </v-card-text>
 
-          <v-divider class="pb-3" />
-        </div>
-      </div>
-    </v-card-text>
+      <v-card-text v-show="!editing " v-else>
+        <v-simple-table>
+          <tbody>
+            <tr v-for="(value, name) in data" v-bind:key="name">
+              <td :width="headerWidth" class="font-weight-bold">
+                {{ name | sentenceCase }}
+              </td>
+              <td>{{ value }}</td>
+            </tr>
+          </tbody>
+        </v-simple-table>
 
-    <v-card-text v-show="!editing " v-else>
-      <v-simple-table>
-        <tbody>
-          <tr v-for="(value, name) in data" v-bind:key="name">
-            <td :width="headerWidth" class="font-weight-bold">
-              {{ name | sentenceCase }}
-            </td>
-            <td>{{ value }}</td>
-          </tr>
-        </tbody>
-      </v-simple-table>
-
-      <v-divider class="pb-3" />
-    </v-card-text>
-
+        <v-divider class="pb-3" />
+      </v-card-text>
+    </transition>
     <v-card-text v-show="allowMultiple && showMultiple && edit && showSectionDetail">
       <v-btn
         class="font-weight-bold primary--text text-uppercase"
@@ -326,5 +326,19 @@ export default {
   }
   .error{
     margin-left:5px;
+  }
+  .fade-enter{
+    opacity:0;
+  }
+  .fade-enter-active{
+    transition: opacity .3s;
+
+  }
+  .fade-leave{
+
+  }
+  .fade-leave-active{
+    transition: opacity .3s;
+    opacity: 0  ;
   }
 </style>
