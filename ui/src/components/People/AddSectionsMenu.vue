@@ -34,87 +34,72 @@
 
 <script>
 import axios from "axios";
+import Practitioner from "@/mixins/Practitioner.js";
 import StructureDefinition from "@/mixins/StructureDefinition.js";
 
 export default {
   created() {
-    axios
-      .get(
-        this.config.backend +
-          "/practitioner/describe/definition/iHRISPractitioner"
-      )
-      .then(response => {
-        axios
-          .get(
-            this.config.backend +
-              "/practitioner/describe/definition/Practitioner"
-          )
-          .then(practitioner => {
-            let fields = response.data.differential.element;
-            let practitionerFields = practitioner.data.differential.element;
+    this.getSections().then(fields => {
+      axios
+        .get(
+          this.config.backend +
+            "/practitioner/describe/definition/Practitioner"
+        )
+        .then(practitioner => {
+          let practitionerFields = practitioner.data.differential.element;
 
-            fields.forEach(field => {
-              let label = null;
+          fields.forEach(field => {
+            let label = null;
 
-              // ignore the extension field
-              if (
-                field.id.endsWith(".extension") ||
-                field.id.endsWith(".value[x].system") ||
-                field.id.endsWith(".value[x].code") ||
-                field.id.endsWith(".value[x]")
-              ) {
-                return;
-              }
+            // if a label field exists, use that
+            // otherwise, go with the last text before the period
+            if (field.label) {
+              label = field.label;
+            } else {
+              label = field.id.slice(field.id.lastIndexOf(".") + 1);
+            }
 
-              // if a label field exists, use that
-              // otherwise, go with the last text before the period
-              if (field.label) {
-                label = field.label;
-              } else {
-                label = field.id.slice(field.id.lastIndexOf(".") + 1);
-              }
+            this.$set(this.menu, field.id, {});
+            this.menu[field.id].title = label;
+            this.menu[field.id].index = field.id;
 
-              this.$set(this.menu, field.id, {});
-              this.menu[field.id].title = label;
-              this.menu[field.id].index = field.id;
+            // get the subtitle. if a description value is set, use that
+            if (field.description) {
+              this.menu[field.id].subtitle = field.description;
+            } else if (field.path == "Practitioner.extension") {
+              // if this is an extension, load the structure definition and get the description from that
+              let type = field.type[0].profile[0];
+              let structureDefinition = type.slice(type.lastIndexOf("/") + 1);
 
-              // get the subtitle. if a description value is set, use that
-              if (field.description) {
-                this.menu[field.id].subtitle = field.description;
-              } else if (field.path == "Practitioner.extension") {
-                // if this is an extension, load the structure definition and get the description from that
-                let type = field.type[0].profile[0];
-                let structureDefinition = type.slice(type.lastIndexOf("/") + 1);
+              // if it's an extension, the type is just the structure definition
+              this.menu[field.id].type = structureDefinition;
 
-                // if it's an extension, the type is just the structure definition
-                this.menu[field.id].type = structureDefinition;
-
-                axios
-                  .get(
-                    this.config.backend +
-                      "/practitioner/describe/definition/" +
-                      structureDefinition
-                  )
-                  .then(extension => {
-                    // use the description field for the subtitle
-                    if (extension.data.description) {
-                      this.menu[field.id].subtitle = extension.data.description;
-                    }
-                  });
-              } else {
-                // if not an extension, look for a match in the practitioner structure definition and use that
-                for (var i in practitionerFields) {
-                  if (practitionerFields[i].id == field.id) {
-                    this.menu[field.id].subtitle =
-                      practitionerFields[i].definition;
-                    this.menu[field.id].type =
-                      practitionerFields[i].type[0].code;
-                    break;
+              axios
+                .get(
+                  this.config.backend +
+                    "/practitioner/describe/definition/" +
+                    structureDefinition
+                )
+                .then(extension => {
+                  // use the description field for the subtitle
+                  if (extension.data.description) {
+                    this.menu[field.id].subtitle = extension.data.description;
                   }
+                });
+            } else {
+              // if not an extension, look for a match in the practitioner structure definition and use that
+              for (var i in practitionerFields) {
+                if (practitionerFields[i].id == field.id) {
+                  this.menu[field.id].subtitle =
+                    practitionerFields[i].definition;
+                  this.menu[field.id].type =
+                    practitionerFields[i].type[0].code;
+                  break;
                 }
               }
-            });
+            }
           });
+        });
       });
   },
   data() {
@@ -134,7 +119,7 @@ export default {
       });
     }
   },
-  mixins: [StructureDefinition],
+  mixins: [Practitioner, StructureDefinition],
   props: ["data"]
 };
 </script>

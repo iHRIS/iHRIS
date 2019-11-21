@@ -5,7 +5,7 @@
     <v-layout wrap>
       <v-flex
         xs6
-        v-for="(element, index) in this.practitioner"
+        v-for="(element, index) in display"
         v-bind:key="index"
       >
         <DetailsCard
@@ -23,30 +23,12 @@ import axios from "axios";
 
 import DetailsCard from "@/components/People/DetailsCard.vue";
 import ProfileHeader from "@/components/People/ProfileHeader.vue";
+import SectionsToDisplay from "@/mixins/SectionsToDisplay.js";
 
 export default {
   components: {
     DetailsCard,
     ProfileHeader
-  },
-  created() {
-    this.config = require("@/config/config.json");
-
-    axios
-      .get(this.config.backend + "/practitioner/view/" + this.$route.params.id)
-      .then(response => {
-        if (response.status === 201) {
-          let practitioner = {};
-
-          for (var key in response.data.entry[0].resource) {
-            if (key != "id" && key != "resourceType" && key != "active") {
-              practitioner[key] = response.data.entry[0].resource[key];
-            }
-          }
-
-          this.practitioner = practitioner;
-        }
-      });
   },
   data() {
     return {
@@ -54,6 +36,7 @@ export default {
       practitioner: {}
     };
   },
+  mixins: [SectionsToDisplay],
   name: "AddSections"
 };
 </script>
