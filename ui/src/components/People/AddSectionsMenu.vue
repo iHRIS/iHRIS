@@ -53,11 +53,6 @@ export default {
             let fields = response.data.differential.element;
             let practitionerFields = practitioner.data.differential.element;
 
-            console.log("FIELDS");
-            console.log(fields);
-            console.log("PRACTITIONER");
-            console.log(practitioner);
-
             fields.forEach(field => {
               let label = null;
 
