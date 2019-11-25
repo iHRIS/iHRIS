@@ -66,6 +66,8 @@ export default {
             // get the subtitle. if a description value is set, use that
             if (field.description) {
               this.menu[field.id].subtitle = field.description;
+            } else if (field.definition) {
+              this.menu[field.id].subtitle = field.definition;
             } else if (field.path == "Practitioner.extension") {
               // if this is an extension, load the structure definition and get the description from that
               let type = field.type[0].profile[0];
@@ -111,6 +113,7 @@ export default {
   methods: {
     showForm(title, definition) {
       this._self.describe(definition, "Practitioner").then(fields => {
+
         if (definition == "BackboneElement") {
           this.$emit("toggleForm", fields[title], title);
         } else {

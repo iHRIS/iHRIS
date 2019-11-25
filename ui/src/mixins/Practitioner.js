@@ -12,7 +12,9 @@ export default {
   methods: {
     getSections() {
       return axios.get(this.config.backend + "/practitioner/describe/definition/iHRISPractitioner").then(response => {
+        // differential contains the fields we want but snapshot contains more data that we need
         let fields = response.data.differential.element;
+        let snapshot = response.data.snapshot.element;
         let sections = [];
 
         fields.forEach(field => {
@@ -24,6 +26,14 @@ export default {
             field.id.endsWith(".value[x]")
           ) {
             return;
+          }
+
+          // find the matching field in the snapshot
+          for (var i in snapshot) {
+            if (field.id == snapshot[i].id && !field.definition && snapshot[i].definition) {
+              field.definition = snapshot[i].definition;
+              break;
+            }
           }
 
           sections.push(field);
