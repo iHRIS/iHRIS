@@ -7,6 +7,7 @@
         :max="field.max"
         :required="field.required"
         :ref="field.name"
+        :hint="field.short"
         :value="field.value"
       />
 
@@ -14,6 +15,7 @@
         v-if="field.type == 'boolean'"
         :label="field.label"
         ref="active"
+        :hint="field.short"
         :value="field.value"
       />
 
@@ -23,6 +25,7 @@
         :max="field.max"
         :required="field.required"
         :ref="field.name"
+        :hint="field.short"
         :value="field.value"
       />
 
@@ -33,6 +36,7 @@
         :required="field.required"
         :codes="field.options"
         :ref="field.name"
+        :hint="field.short"
         :value="field.value"
       />
 
@@ -42,6 +46,7 @@
         :max="field.max"
         :required="field.required"
         :ref="field.name"
+        :hint="field.short"
         :value="field.value"
       />
 
@@ -51,6 +56,7 @@
         :max="field.max"
         :required="field.required"
         :ref="field.name"
+        :hint="field.short"
         :datetime="field.value"
       />
 
@@ -60,6 +66,7 @@
         :max="field.max"
         :required="field.required"
         :ref="field.name"
+        :hint="field.short"
         :value="field.value"
       />
 
@@ -69,6 +76,7 @@
         :max="field.max"
         :required="field.required"
         :ref="field.name"
+        :hint="field.short"
         :value="field.value"
       />
 
@@ -78,6 +86,7 @@
         :max="field.max"
         :required="field.required"
         :ref="field.name"
+        :hint="field.short"
         :value="field.value"
       />
 
@@ -87,6 +96,7 @@
         :max="field.max"
         :required="field.required"
         :ref="field.name"
+        :hint="field.short"
         :value="field.value"
       />
 
@@ -96,6 +106,7 @@
         :max="field.max"
         :required="field.required"
         :ref="field.name"
+        :hint="field.short"
         :value="field.value"
       />
 
@@ -105,6 +116,7 @@
         :max="field.max"
         :required="field.required"
         :ref="field.name"
+        :hint="field.short"
         :value="field.value"
       />
 
@@ -115,6 +127,7 @@
         :required="field.required"
         :ref="field.name"
         :value="field.value"
+        :hint="field.short"
         :matching="field.matching"
       />
 
@@ -125,6 +138,7 @@
         :required="field.required"
         :ref="field.name"
         :value="field.value"
+        :hint="field.short"
       />
 
       <String
@@ -134,6 +148,7 @@
         :required="field.required"
         :ref="field.name"
         :value="field.value"
+        :hint="field.short"
       />
 
       <Time
@@ -143,6 +158,7 @@
         :required="field.required"
         :ref="field.name"
         :value="field.value"
+        :hint="field.short"
       />
 
       <UnsignedInt
@@ -152,6 +168,7 @@
         :required="field.required"
         :ref="field.name"
         :value="field.value"
+        :hint="field.short"
       />
 
       <Uri
@@ -161,6 +178,7 @@
         :required="field.required"
         :ref="field.name"
         :value="field.value"
+        :hint="field.short"
       />
 
       <Url
@@ -170,6 +188,7 @@
         :required="field.required"
         :ref="field.name"
         :value="field.value"
+        :hint="field.short"
       />
 
       <Uuid
@@ -179,6 +198,7 @@
         :required="field.required"
         :ref="field.name"
         :value="field.value"
+        :hint="field.short"
       />
     </div>
 

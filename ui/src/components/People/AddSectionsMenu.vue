@@ -10,7 +10,7 @@
         <v-list-item
           active-class="primary darken-2"
           class="pb-0"
-          @click.stop="showForm(item.title, item.type)"
+          @click.stop="showForm(item.title, item.type, item.raw)"
           three-line
         >
           <v-list-item-icon>
@@ -40,6 +40,8 @@ import StructureDefinition from "@/mixins/StructureDefinition.js";
 export default {
   created() {
     this.getSections().then(fields => {
+      console.log(fields);
+
       axios
         .get(
           this.config.backend +
@@ -62,6 +64,19 @@ export default {
             this.$set(this.menu, field.id, {});
             this.menu[field.id].title = label;
             this.menu[field.id].index = field.id;
+            this.menu[field.id].raw = field;
+
+            // set the type, used to show the correct fields
+            if (field.type[0].code) {
+              this.menu[field.id].type = field.type[0].code;
+            } else if (field.type[0].profile[0]) {
+              let type = field.type[0].profile[0];
+              this.menu[field.id].type = type.slice(type.lastIndexOf("/") + 1);
+            } else {
+              console.log("I don't know what this type is.");
+              console.log(field);
+            }
+            
 
             // get the subtitle. if a description value is set, use that
             if (field.description) {
@@ -72,9 +87,6 @@ export default {
               // if this is an extension, load the structure definition and get the description from that
               let type = field.type[0].profile[0];
               let structureDefinition = type.slice(type.lastIndexOf("/") + 1);
-
-              // if it's an extension, the type is just the structure definition
-              this.menu[field.id].type = structureDefinition;
 
               axios
                 .get(
@@ -89,6 +101,8 @@ export default {
                   }
                 });
             } else {
+
+              console.log("Maybe I don't need this section");
               // if not an extension, look for a match in the practitioner structure definition and use that
               for (var i in practitionerFields) {
                 if (practitionerFields[i].id == field.id) {
@@ -111,15 +125,24 @@ export default {
     };
   },
   methods: {
-    showForm(title, definition) {
-      this._self.describe(definition, "Practitioner").then(fields => {
+    showForm(title, definition, data) {
+      if (this.primitiveTypes.includes(definition)) {
+        let fields = [];
+        fields.push(this.formatField(data));
 
-        if (definition == "BackboneElement") {
-          this.$emit("toggleForm", fields[title], title);
-        } else {
-          this.$emit("toggleForm", fields, title);
-        }
-      });
+        console.log(fields);
+
+        this.$emit("toggleForm", fields, title);
+      } else {
+        this._self.describe(definition, "Practitioner").then(fields => {
+
+          if (definition == "BackboneElement") {
+            this.$emit("toggleForm", fields[title], title);
+          } else {
+            this.$emit("toggleForm", fields, title);
+          }
+        });
+      }
     }
   },
   mixins: [Practitioner, StructureDefinition],
