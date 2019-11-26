@@ -44,8 +44,7 @@ export default {
 
       axios
         .get(
-          this.config.backend +
-            "/practitioner/describe/definition/Practitioner"
+          this.config.backend + "/practitioner/describe/definition/Practitioner"
         )
         .then(practitioner => {
           let practitionerFields = practitioner.data.differential.element;
@@ -76,7 +75,6 @@ export default {
               console.log("I don't know what this type is.");
               console.log(field);
             }
-            
 
             // get the subtitle. if a description value is set, use that
             if (field.description) {
@@ -101,22 +99,20 @@ export default {
                   }
                 });
             } else {
-
               console.log("Maybe I don't need this section");
               // if not an extension, look for a match in the practitioner structure definition and use that
               for (var i in practitionerFields) {
                 if (practitionerFields[i].id == field.id) {
                   this.menu[field.id].subtitle =
                     practitionerFields[i].definition;
-                  this.menu[field.id].type =
-                    practitionerFields[i].type[0].code;
+                  this.menu[field.id].type = practitionerFields[i].type[0].code;
                   break;
                 }
               }
             }
           });
         });
-      });
+    });
   },
   data() {
     return {
@@ -135,7 +131,6 @@ export default {
         this.$emit("toggleForm", fields, title);
       } else {
         this._self.describe(definition, "Practitioner").then(fields => {
-
           if (definition == "BackboneElement") {
             this.$emit("toggleForm", fields[title], title);
           } else {

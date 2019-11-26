@@ -3,11 +3,7 @@
     <ProfileHeader :practitioner="practitioner" />
 
     <v-layout wrap>
-      <v-flex
-        xs6
-        v-for="(element, index) in display"
-        v-bind:key="index"
-      >
+      <v-flex xs6 v-for="(element, index) in display" v-bind:key="index">
         <DetailsCard
           :data="element"
           :name="index"
@@ -19,8 +15,6 @@
 </template>
 
 <script>
-import axios from "axios";
-
 import DetailsCard from "@/components/People/DetailsCard.vue";
 import ProfileHeader from "@/components/People/ProfileHeader.vue";
 import SectionsToDisplay from "@/mixins/SectionsToDisplay.js";

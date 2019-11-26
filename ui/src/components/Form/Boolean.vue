@@ -1,5 +1,10 @@
 <template>
-  <v-checkbox :label="label" :value="checked" v-model="boolean" :hint="hint"></v-checkbox>
+  <v-checkbox
+    :label="label"
+    :value="checked"
+    v-model="boolean"
+    :hint="hint"
+  ></v-checkbox>
 </template>
 
 <script>

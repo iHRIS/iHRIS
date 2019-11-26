@@ -13,8 +13,8 @@
             <v-data-table
               :headers="headers"
               :items="practitioners"
-              :sort-by="['surname','Given']"
-              :sort-desc="[false,false]"
+              :sort-by="['surname', 'Given']"
+              :sort-desc="[false, false]"
               multi-sort
               :items-per-page="5"
             >

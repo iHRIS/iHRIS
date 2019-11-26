@@ -65,34 +65,32 @@ export default {
               return;
             }
 
-            let sanitized = null;
             let type = field.type[0].code;
 
             // if this is a primitive type, we are done
             if (this.primitiveTypes.indexOf(type) >= 0) {
-                fields[field.id] = this.formatField(field);
-              } else {
-                // this is going to require a recursive load of the properties
-                let recursiveStructureDefinition = type;
-
-                // if the type is a reference then we need to load what it is referencing
-                if (type == "Reference") {
-                  recursiveStructureDefinition = field.type[0].targetProfile[0];
-                }
+              fields[field.id] = this.formatField(field);
+            } else {
+              // this is going to require a recursive load of the properties
+              // if the type is a reference then we need to load what it is referencing
+              if (type == "Reference") {
+                type = field.type[0].targetProfile[0];
               }
-            });
+            }
+          });
 
-            return Promise.resolve(fields);
-          })
+          return Promise.resolve(fields);
+        })
         .catch(err => {
           return [err];
         });
     },
     formatField(field) {
       let name = field.id.slice(field.id.indexOf(".") + 1);
-      let options = field.short ? field.short
-        .split("|")
-        .map(Function.prototype.call, String.prototype.trim)
+      let options = field.short
+        ? field.short
+            .split("|")
+            .map(Function.prototype.call, String.prototype.trim)
         : [];
       let type = field.type[0].code;
 
