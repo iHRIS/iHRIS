@@ -15,8 +15,6 @@ export default {
         let fields = response.data.snapshot.element;
         let sections = [];
 
-        console.log(fields);
-
         fields.forEach(field => {
           if (
             // ignore extension fields
