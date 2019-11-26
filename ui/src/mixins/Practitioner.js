@@ -12,28 +12,32 @@ export default {
   methods: {
     getSections() {
       return axios.get(this.config.backend + "/practitioner/describe/definition/iHRISPractitioner").then(response => {
-        // differential contains the fields we want but snapshot contains more data that we need
-        let fields = response.data.differential.element;
-        let snapshot = response.data.snapshot.element;
+        let fields = response.data.snapshot.element;
         let sections = [];
 
+        console.log(fields);
+
         fields.forEach(field => {
-          // ignore the extension field(s)
           if (
+            // ignore extension fields
             field.id.endsWith(".extension") ||
-            field.id.endsWith(".value[x].system") ||
-            field.id.endsWith(".value[x].code") ||
-            field.id.endsWith(".value[x]")
+
+            // these are all custom extensions but duplicated fields
+            field.id.endsWith(".id") ||
+            field.id.endsWith(".url") ||
+            field.id.includes(".value[x]") ||
+
+            // ignore practitioner and meta fields since they can't be customized
+            field.id == "Practitioner" ||
+            field.id == "Practitioner.meta" ||
+
+            // if someone sets the max to be 0, then don't show it
+            field.max == 0 ||
+
+            // qualification lists additional fields so ignore them
+            (field.id.includes("qualification") && !field.id.endsWith("qualification"))
           ) {
             return;
-          }
-
-          // find the matching field in the snapshot
-          for (var i in snapshot) {
-            if (field.id == snapshot[i].id && !field.definition && snapshot[i].definition) {
-              field.definition = snapshot[i].definition;
-              break;
-            }
           }
 
           sections.push(field);
