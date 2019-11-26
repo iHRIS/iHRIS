@@ -8,6 +8,7 @@
     :v-model="code"
     :rules="[rules.required, rules.whitespace]"
     @change="changeValue"
+    :hint="hint"
   ></v-select>
 </template>
 
@@ -44,6 +45,6 @@ export default {
       return this["code"];
     }
   },
-  props: ["codes", "label", "required", "value"]
+  props: ["codes", "label", "required", "value", "hint"]
 };
 </script>
