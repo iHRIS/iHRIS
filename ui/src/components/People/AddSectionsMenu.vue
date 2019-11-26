@@ -40,78 +40,54 @@ import StructureDefinition from "@/mixins/StructureDefinition.js";
 export default {
   created() {
     this.getSections().then(fields => {
-      console.log(fields);
+      fields.forEach(field => {
+        let label = null;
 
-      axios
-        .get(
-          this.config.backend + "/practitioner/describe/definition/Practitioner"
-        )
-        .then(practitioner => {
-          let practitionerFields = practitioner.data.differential.element;
+        // if a label field exists, use that
+        // otherwise, go with the last text before the period
+        if (field.label) {
+          label = field.label;
+        } else {
+          label = field.id.slice(field.id.lastIndexOf(".") + 1);
+        }
 
-          fields.forEach(field => {
-            let label = null;
+        this.$set(this.menu, field.id, {});
+        this.menu[field.id].title = label;
+        this.menu[field.id].index = field.id;
+        this.menu[field.id].raw = field;
 
-            // if a label field exists, use that
-            // otherwise, go with the last text before the period
-            if (field.label) {
-              label = field.label;
-            } else {
-              label = field.id.slice(field.id.lastIndexOf(".") + 1);
-            }
+        // set the type, used to show the correct fields
+        if (field.type[0].code) {
+          this.menu[field.id].type = field.type[0].code;
+        } else if (field.type[0].profile[0]) {
+          let type = field.type[0].profile[0];
+          this.menu[field.id].type = type.slice(type.lastIndexOf("/") + 1);
+        }
 
-            this.$set(this.menu, field.id, {});
-            this.menu[field.id].title = label;
-            this.menu[field.id].index = field.id;
-            this.menu[field.id].raw = field;
+        // get the subtitle. if a description value is set, use that
+        if (field.description) {
+          this.menu[field.id].subtitle = field.description;
+        } else if (field.definition) {
+          this.menu[field.id].subtitle = field.definition;
+        } else if (field.path == "Practitioner.extension") {
+          // if this is an extension, load the structure definition and get the description from that
+          let type = field.type[0].profile[0];
+          let structureDefinition = type.slice(type.lastIndexOf("/") + 1);
 
-            // set the type, used to show the correct fields
-            if (field.type[0].code) {
-              this.menu[field.id].type = field.type[0].code;
-            } else if (field.type[0].profile[0]) {
-              let type = field.type[0].profile[0];
-              this.menu[field.id].type = type.slice(type.lastIndexOf("/") + 1);
-            } else {
-              console.log("I don't know what this type is.");
-              console.log(field);
-            }
-
-            // get the subtitle. if a description value is set, use that
-            if (field.description) {
-              this.menu[field.id].subtitle = field.description;
-            } else if (field.definition) {
-              this.menu[field.id].subtitle = field.definition;
-            } else if (field.path == "Practitioner.extension") {
-              // if this is an extension, load the structure definition and get the description from that
-              let type = field.type[0].profile[0];
-              let structureDefinition = type.slice(type.lastIndexOf("/") + 1);
-
-              axios
-                .get(
-                  this.config.backend +
-                    "/practitioner/describe/definition/" +
-                    structureDefinition
-                )
-                .then(extension => {
-                  // use the description field for the subtitle
-                  if (extension.data.description) {
-                    this.menu[field.id].subtitle = extension.data.description;
-                  }
-                });
-            } else {
-              console.log("Maybe I don't need this section");
-              // if not an extension, look for a match in the practitioner structure definition and use that
-              for (var i in practitionerFields) {
-                if (practitionerFields[i].id == field.id) {
-                  this.menu[field.id].subtitle =
-                    practitionerFields[i].definition;
-                  this.menu[field.id].type = practitionerFields[i].type[0].code;
-                  break;
-                }
+          axios
+            .get(
+              this.config.backend +
+                "/practitioner/describe/definition/" +
+                structureDefinition
+            )
+            .then(extension => {
+              // use the description field for the subtitle
+              if (extension.data.description) {
+                this.menu[field.id].subtitle = extension.data.description;
               }
-            }
-          });
-        });
+            });
+        }
+      });
     });
   },
   data() {
