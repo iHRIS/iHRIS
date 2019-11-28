@@ -4,10 +4,7 @@
 
     <v-layout>
       <v-flex xs6 class="pr-3">
-        <div
-          v-for="(element, index) in display"
-          v-bind:key="'edit-' + index"
-        >
+        <div v-for="(element, index) in display" v-bind:key="'edit-' + index">
           <DetailsCard
             v-if="index != 'id' && index != 'resourceType' && index != 'active'"
             :data="element"
@@ -67,7 +64,7 @@ export default {
       config: null,
       details: false,
       detailFields: {},
-      detailTitle: null,
+      detailTitle: null
     };
   },
   methods: {

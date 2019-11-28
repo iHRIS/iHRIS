@@ -38,12 +38,14 @@ export default {
     describe(structureDefinition, parentDefinition) {
       let url = "/practitioner/describe/definition/";
 
+      if (!structureDefinition) {
+        return;
+      }
+
       if (structureDefinition == "BackboneElement") {
         url += parentDefinition;
       } else {
-        url +=
-          structureDefinition.charAt(0).toUpperCase() +
-          structureDefinition.slice(1);
+        url += structureDefinition;
       }
 
       return axios
@@ -53,17 +55,28 @@ export default {
             return [];
           }
 
-          let definition = this.parser.parseStructureDefinition(response.data);
-          let fields = [];
+          let definition = response.data.snapshot.element;
 
-          definition._properties.forEach(field => {
-            fields = this.processField(
-              field,
-              fields,
-              structureDefinition,
-              response.data.snapshot.element,
-              parentDefinition
-            );
+          let fields = {};
+
+          definition.forEach(field => {
+            // if it doesn't have a type, ignore it
+            if (!field.type) {
+              return;
+            }
+
+            let type = field.type[0].code;
+
+            // if this is a primitive type, we are done
+            if (this.primitiveTypes.indexOf(type) >= 0) {
+              fields[field.id] = this.formatField(field);
+            } else {
+              // this is going to require a recursive load of the properties
+              // if the type is a reference then we need to load what it is referencing
+              if (type == "Reference") {
+                type = field.type[0].targetProfile[0];
+              }
+            }
           });
 
           return Promise.resolve(fields);
@@ -71,6 +84,31 @@ export default {
         .catch(err => {
           return [err];
         });
+    },
+    formatField(field) {
+      let name = field.id.slice(field.id.indexOf(".") + 1);
+      let options = field.short
+        ? field.short
+            .split("|")
+            .map(Function.prototype.call, String.prototype.trim)
+        : [];
+      let type = field.type[0].code;
+
+      let formatted = {
+        subtitle: field.definition,
+        short: field.short,
+        title: name,
+        id: field.id,
+        max: field.max,
+        options: options,
+        name: name,
+        type: type,
+        required: field.min > 0,
+        object: false,
+        fields: {}
+      };
+
+      return formatted;
     },
     populate(name, structureDefinition, field, rawData) {
       for (var i = 0; i < rawData.length; i++) {

@@ -6,6 +6,7 @@
     outline
     :required="required"
     :rules="[rules.datetime, rules.required]"
+    :hint="hint"
   ></v-text-field>
   <v-combobox
     v-else
@@ -18,6 +19,7 @@
     :rules="[rules.datetime, rules.max, rules.required]"
     :required="required"
     outline
+    :hint="hint"
   ></v-combobox>
 </template>
 
@@ -71,6 +73,6 @@ export default {
       return this["datetime"];
     }
   },
-  props: ["label", "max", "required", "value"]
+  props: ["label", "max", "required", "value", "hint"]
 };
 </script>

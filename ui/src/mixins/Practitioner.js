@@ -11,26 +11,40 @@ export default {
   },
   methods: {
     getSections() {
-      return axios.get(this.config.backend + "/practitioner/describe/definition/iHRISPractitioner").then(response => {
-        let fields = response.data.differential.element;
-        let sections = [];
+      return axios
+        .get(
+          this.config.backend +
+            "/practitioner/describe/definition/iHRISPractitioner"
+        )
+        .then(response => {
+          let fields = response.data.snapshot.element;
+          let sections = [];
 
-        fields.forEach(field => {
-          // ignore the extension field(s)
-          if (
-            field.id.endsWith(".extension") ||
-            field.id.endsWith(".value[x].system") ||
-            field.id.endsWith(".value[x].code") ||
-            field.id.endsWith(".value[x]")
-          ) {
-            return;
-          }
+          fields.forEach(field => {
+            if (
+              // ignore extension fields
+              field.id.endsWith(".extension") ||
+              // these are all custom extensions but duplicated fields
+              field.id.endsWith(".id") ||
+              field.id.endsWith(".url") ||
+              field.id.includes(".value[x]") ||
+              // ignore practitioner and meta fields since they can't be customized
+              field.id == "Practitioner" ||
+              field.id == "Practitioner.meta" ||
+              // if someone sets the max to be 0, then don't show it
+              field.max == 0 ||
+              // qualification lists additional fields so ignore them
+              (field.id.includes("qualification") &&
+                !field.id.endsWith("qualification"))
+            ) {
+              return;
+            }
 
-          sections.push(field);
+            sections.push(field);
+          });
+
+          return Promise.resolve(sections);
         });
-
-        return Promise.resolve(sections);
-      });
     }
   }
 };

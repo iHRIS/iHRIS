@@ -6,6 +6,7 @@
     outline
     :required="required"
     :rules="[rules.format, rules.length, rules.required]"
+    :hint="hint"
   ></v-text-field>
   <v-combobox
     v-else
@@ -18,6 +19,7 @@
     :rules="[rules.format, rules.length, rules.max, rules.required]"
     :required="required"
     outline
+    :hint="hint"
   ></v-combobox>
 </template>
 
@@ -88,6 +90,6 @@ export default {
       return this["id"];
     }
   },
-  props: ["label", "max", "required", "value"]
+  props: ["label", "max", "required", "value", "hint"]
 };
 </script>
