@@ -49,3 +49,25 @@ This is a link to where the [server](https://github.com/iHRIS/iHRIS/tree/master/
 
 ### Kibana
 Kibana is used to render dashboards on the home page. Update the config file to include a link to your kibana installation. You will also need to add this link to the [server](https://github.com/iHRIS/iHRIS/tree/master/server)
+
+
+# Using Docker
+After cloning and customizing the configurations run the following commands
+```
+cd ui
+```
+
+Build the image
+```
+docker image build -t ihris-ui .
+```
+
+Run the image (as a background process)
+```
+docker container run --publish 8001:8080 --detach --name ihris-ui ihris-ui
+```
+
+Access the UI 
+```
+http://localhost:8001
+```

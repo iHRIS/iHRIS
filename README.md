@@ -10,3 +10,9 @@ The server component relies on the presence of a fhir compliant server. The logi
 
 ## Running iHRIS
 iHRIS is divided into two components, the ui frontend and a backend. To start the ui frontend, run `npm run serve`. To start the backend, run `npm run start`.
+
+
+## Running iHRIS in a Docker Container
+You can find instructions how to install docker here [Docker Engine Installation](https://docs.docker.com/install/linux/docker-ce/ubuntu/#install-docker-engine---community-1)
+
+Instructions how to run the `ui` and the `backend` are in the respective directories.
