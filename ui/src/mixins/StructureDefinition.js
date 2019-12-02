@@ -35,7 +35,7 @@ export default {
     };
   },
   methods: {
-    describe(structureDefinition, parentDefinition) {
+    describe(structureDefinition, parentDefinition, id) {
       let url = "/practitioner/describe/definition/";
 
       if (!structureDefinition) {
@@ -65,6 +65,11 @@ export default {
               return;
             }
 
+            // ignore id fields
+            if (field.id.endsWith(".id")) {
+              return;
+            }
+
             let type = field.type[0].code;
 
             // if this is a primitive type, we are done
@@ -74,16 +79,32 @@ export default {
               // this is going to require a recursive load of the properties
               // if the type is a reference then we need to load what it is referencing
               if (type == "Reference") {
-                type = field.type[0].targetProfile[0];
+                // this is a special case, let's come back to it later
+                return;
+              } else {
+                let subfields = this.getFields(field.type[0].code);
+
+                if (subfields) {
+                  fields[field.id] = subfields;
+                }
               }
             }
           });
 
-          return Promise.resolve(fields);
+          return Promise.resolve({
+            id: id,
+            fields: fields
+          });
         })
         .catch(err => {
           return [err];
         });
+    },
+    getFields(structureDefinition) {
+      switch (structureDefinition) {
+        default:
+          return null;
+      }
     },
     formatField(field) {
       let name = field.id.slice(field.id.indexOf(".") + 1);
