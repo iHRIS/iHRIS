@@ -58,7 +58,6 @@ export default {
           let definition = response.data.snapshot.element;
 
           let fields = {};
-          let promises = [];
 
           definition.forEach(field => {
             // if it doesn't have a type, ignore it
@@ -103,56 +102,9 @@ export default {
     },
     getFields(structureDefinition) {
       switch (structureDefinition) {
-        case "Identifier":
-          return this.getIdentifierFields();
+        default:
+          return null;
       }
-
-      return null;
-    },
-    getIdentifierFields() {
-
-    },
-    recursiveDescribe(structureDefinition, id) {
-      let url = "/practitioner/describe/definition/";
-
-      if (!structureDefinition) {
-        return;
-      }
-
-      url += structureDefinition;
-
-      console.log("Recursive " + structureDefinition);
-
-      return axios
-        .get(this.config.backend + url)
-        .then(response => {
-          if (response.status != 201) {
-            return [];
-          }
-
-          let definition = response.data.snapshot.element;
-
-          let fields = {};
-
-          definition.forEach(field => {
-            // if it doesn't have a type, ignore it
-            if (!field.type) {
-              return;
-            }
-
-            let type = field.type[0].code;
-
-            // if this is a primitive type, we are done
-            if (this.primitiveTypes.indexOf(type) >= 0) {
-              fields[field.id] = this.formatField(field);
-            }
-          });
-
-          return Promise.resolve(fields);
-        })
-        .catch(err => {
-          return [err];
-        });
     },
     formatField(field) {
       let name = field.id.slice(field.id.indexOf(".") + 1);
