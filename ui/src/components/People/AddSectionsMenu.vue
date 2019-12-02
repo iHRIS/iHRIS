@@ -101,16 +101,16 @@ export default {
       if (this.primitiveTypes.includes(definition)) {
         let fields = [];
         fields.push(this.formatField(data));
-
-        console.log(fields);
-
         this.$emit("toggleForm", fields, title);
       } else {
         this._self.describe(definition, "Practitioner").then(fields => {
+          console.log("Fields");
+          console.log(fields);
+
           if (definition == "BackboneElement") {
             this.$emit("toggleForm", fields[title], title);
           } else {
-            this.$emit("toggleForm", fields, title);
+            this.$emit("toggleForm", fields.fields, title);
           }
         });
       }

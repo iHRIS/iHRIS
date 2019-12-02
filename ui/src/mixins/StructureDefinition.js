@@ -35,7 +35,7 @@ export default {
     };
   },
   methods: {
-    describe(structureDefinition, parentDefinition) {
+    describe(structureDefinition, parentDefinition, id) {
       let url = "/practitioner/describe/definition/";
 
       if (!structureDefinition) {
@@ -47,6 +47,81 @@ export default {
       } else {
         url += structureDefinition;
       }
+
+      return axios
+        .get(this.config.backend + url)
+        .then(response => {
+          if (response.status != 201) {
+            return [];
+          }
+
+          let definition = response.data.snapshot.element;
+
+          let fields = {};
+          let promises = [];
+
+          definition.forEach(field => {
+            // if it doesn't have a type, ignore it
+            if (!field.type) {
+              return;
+            }
+
+            // ignore id fields
+            if (field.id.endsWith(".id")) {
+              return;
+            }
+
+            let type = field.type[0].code;
+
+            // if this is a primitive type, we are done
+            if (this.primitiveTypes.indexOf(type) >= 0) {
+              fields[field.id] = this.formatField(field);
+            } else {
+              // this is going to require a recursive load of the properties
+              // if the type is a reference then we need to load what it is referencing
+              if (type == "Reference") {
+                // this is a special case, let's come back to it later
+                return;
+              } else {
+                let subfields = this.getFields(field.type[0].code);
+
+                if (subfields) {
+                  fields[field.id] = subfields;
+                }
+              }
+            }
+          });
+
+          return Promise.resolve({
+            id: id,
+            fields: fields
+          });
+        })
+        .catch(err => {
+          return [err];
+        });
+    },
+    getFields(structureDefinition) {
+      switch (structureDefinition) {
+        case "Identifier":
+          return this.getIdentifierFields();
+      }
+
+      return null;
+    },
+    getIdentifierFields() {
+
+    },
+    recursiveDescribe(structureDefinition, id) {
+      let url = "/practitioner/describe/definition/";
+
+      if (!structureDefinition) {
+        return;
+      }
+
+      url += structureDefinition;
+
+      console.log("Recursive " + structureDefinition);
 
       return axios
         .get(this.config.backend + url)
@@ -70,12 +145,6 @@ export default {
             // if this is a primitive type, we are done
             if (this.primitiveTypes.indexOf(type) >= 0) {
               fields[field.id] = this.formatField(field);
-            } else {
-              // this is going to require a recursive load of the properties
-              // if the type is a reference then we need to load what it is referencing
-              if (type == "Reference") {
-                type = field.type[0].targetProfile[0];
-              }
             }
           });
 
