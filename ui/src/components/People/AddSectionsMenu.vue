@@ -40,6 +40,8 @@ import StructureDefinition from "@/mixins/StructureDefinition.js";
 export default {
   created() {
     this.getSections().then(fields => {
+      console.log(fields);
+
       fields.forEach(field => {
         let label = null;
 
@@ -57,9 +59,12 @@ export default {
         this.menu[field.id].raw = field;
 
         // set the type, used to show the correct fields
-        if (field.type[0].code) {
+        if (field.type[0].code && field.type[0].code !== "Extension") {
           this.menu[field.id].type = field.type[0].code;
-        } else if (field.type[0].profile[0]) {
+        } else if (
+          field.type[0].code === "Extension" &&
+          field.type[0].profile[0]
+        ) {
           let type = field.type[0].profile[0];
           this.menu[field.id].type = type.slice(type.lastIndexOf("/") + 1);
         }

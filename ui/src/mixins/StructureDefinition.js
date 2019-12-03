@@ -76,18 +76,20 @@ export default {
             if (this.primitiveTypes.indexOf(type) >= 0) {
               fields[field.id] = this.formatField(field);
             } else {
+              let subfields = [];
+
               // this is going to require a recursive load of the properties
               // if the type is a reference then we need to load what it is referencing
               if (type == "Reference") {
                 // this is a special case, let's come back to it later
                 return;
               } else {
-                let subfields = this.getFields(field.type[0].code);
-
-                if (subfields) {
-                  fields[field.id] = subfields;
-                }
+                subfields = this.getFields(field.type[0].code);
               }
+
+              subfields.forEach(subfield => {
+                fields[subfield.id] = this.formatField(subfield);
+              });
             }
           });
 
@@ -100,10 +102,24 @@ export default {
           return [err];
         });
     },
+    getCodingFields() {
+      return [
+        {
+          definition: null,
+          short: null,
+          id: "Coding.value",
+          max: "*",
+          type: [{ code: "string" }],
+          min: 0
+        }
+      ];
+    },
     getFields(structureDefinition) {
       switch (structureDefinition) {
+        case "Coding":
+          return this.getCodingFields();
         default:
-          return null;
+          return [];
       }
     },
     formatField(field) {
