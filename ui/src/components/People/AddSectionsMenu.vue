@@ -106,12 +106,8 @@ export default {
         fields.push(this.formatField(data));
         this.$emit("toggleForm", fields, title);
       } else {
-        this._self.describe(definition, "Practitioner").then(fields => {
-          if (definition == "BackboneElement") {
-            this.$emit("toggleForm", fields[title], title);
-          } else {
-            this.$emit("toggleForm", fields.fields, title);
-          }
+        this._self.describe(definition, "Practitioner", title).then(fields => {
+          this.$emit("toggleForm", fields.fields, title);
         });
       }
     }

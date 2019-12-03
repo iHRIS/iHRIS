@@ -36,7 +36,7 @@ export default {
     };
   },
   methods: {
-    describe(structureDefinition, parentDefinition, id) {
+    describe(structureDefinition, parentDefinition, title) {
       let url = "/practitioner/describe/definition/";
 
       if (!structureDefinition) {
@@ -47,6 +47,21 @@ export default {
         url += parentDefinition;
       } else {
         url += structureDefinition;
+      }
+
+      // qualification is a special case
+      if (title == "qualification") {
+        let fields = this.getFields(title);
+        let qualification = [];
+
+        fields.forEach(field => {
+          qualification[field.id] = this.formatField(field);
+        });
+
+        return Promise.resolve({
+          id: title,
+          fields: qualification
+        });
       }
 
       return axios
@@ -95,7 +110,7 @@ export default {
           });
 
           return Promise.resolve({
-            id: id,
+            id: title,
             fields: fields
           });
         })
@@ -115,10 +130,60 @@ export default {
         }
       ];
     },
+    getQualificationFields() {
+      return [
+        {
+          definition: null,
+          short: "Registration | License | Other Certification",
+          id: "Qualification.type",
+          max: 1,
+          type: [{ code: "code" }],
+          min: 0
+        },
+        {
+          short: null,
+          definition: "Issuer council or structure",
+          id: "Qualification.issuer",
+          max: 1,
+          type: [{ code: "string" }],
+          min: 0
+        },
+        {
+          short: null,
+          definition: "Qualification number / ID",
+          id: "Qualification.number",
+          max: 1,
+          type: [{ code: "string" }],
+          min: 0
+        },
+        {
+          short: null,
+          definition: "Date received",
+          id: "Qualification.received",
+          max: 1,
+          type: [{ code: "date" }],
+          min: 0
+        },
+        {
+          short: null,
+          definition: "Expiration date",
+          id: "Qualification.expiration",
+          max: 1,
+          type: [{ code: "date" }],
+          min: 0
+        }
+      ];
+    },
     getFields(structureDefinition) {
+      structureDefinition = structureDefinition.toLowerCase();
+
       switch (structureDefinition) {
-        case "Coding":
+        case "coding":
           return this.getCodingFields();
+
+        case "qualification":
+          return this.getQualificationFields();
+
         default:
           return [];
       }
