@@ -20,6 +20,7 @@ export default {
         "decimal",
         "id",
         "instant",
+        "integer",
         "markdown",
         "oid",
         "positiveInt",
@@ -130,6 +131,8 @@ export default {
             .map(Function.prototype.call, String.prototype.trim)
         : [];
       let type = field.type[0].code;
+
+      name = name.replace("[x]", "");
 
       let formatted = {
         subtitle: field.definition,
