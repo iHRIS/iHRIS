@@ -40,8 +40,6 @@ import StructureDefinition from "@/mixins/StructureDefinition.js";
 export default {
   created() {
     this.getSections().then(fields => {
-      console.log(fields);
-
       fields.forEach(field => {
         let label = null;
 
