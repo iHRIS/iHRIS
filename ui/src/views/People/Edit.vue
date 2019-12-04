@@ -195,12 +195,16 @@ export default {
     toggleForm(fields, title, data) {
       this.details = true;
       this.detailFields = fields;
+      this.detailPath = null;
       this.detailTitle = title;
-      this.detailPath = data.path.replace("Practitioner.", "");
       this.detailRaw = data;
       this.extensionProfile = null;
 
-      if (data.type[0].code == "Extension") {
+      if (data && data.path) {
+        this.detailPath = data.path.replace("Practitioner.", "");
+      }
+
+      if (data && data.type[0].code == "Extension") {
         this.extensionProfile = data.type[0].profile[0];
       }
 
