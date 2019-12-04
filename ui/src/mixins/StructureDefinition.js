@@ -36,7 +36,7 @@ export default {
     };
   },
   methods: {
-    describe(structureDefinition, parentDefinition, title) {
+    describe(structureDefinition, parentDefinition, title, path) {
       let url = "/practitioner/describe/definition/";
 
       if (!structureDefinition) {
@@ -60,7 +60,8 @@ export default {
 
         return Promise.resolve({
           id: title,
-          fields: qualification
+          fields: qualification,
+          path: path
         });
       }
 
@@ -72,7 +73,6 @@ export default {
           }
 
           let definition = response.data.snapshot.element;
-
           let fields = {};
 
           definition.forEach(field => {
@@ -111,7 +111,8 @@ export default {
 
           return Promise.resolve({
             id: title,
-            fields: fields
+            fields: fields,
+            path: path
           });
         })
         .catch(err => {
