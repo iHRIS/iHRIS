@@ -66,7 +66,9 @@ export default {
       details: false,
       detailFields: {},
       detailPath: null,
-      detailTitle: null
+      detailRaw: null,
+      detailTitle: null,
+      expansionProfile: null
     };
   },
   methods: {
@@ -147,7 +149,27 @@ export default {
       let practitioner = this.practitioner;
       let title = this.detailTitle;
 
-      if (this.detailPath) {
+      if (this.detailPath && this.detailPath == "extension") {
+        let extension = [];
+        let newExtension = {
+          url: this.extensionProfile
+        };
+        let valueString = null;
+
+        if (practitioner.extension) {
+          extension = practitioner.extension;
+        }
+
+        for (var fieldKey in this.detailFields) {
+          let field = this.detailFields[fieldKey];
+          valueString = "value" + field.parentType;
+        }
+
+        newExtension[valueString] = input;
+        extension.push(newExtension);
+
+        practitioner.extension = extension;
+      } else if (this.detailPath) {
         _.set(practitioner, this.detailPath, input);
       } else {
         practitioner = { ...practitioner, ...input };
@@ -170,11 +192,17 @@ export default {
           }
         });
     },
-    toggleForm(fields, title, path) {
+    toggleForm(fields, title, data) {
       this.details = true;
       this.detailFields = fields;
       this.detailTitle = title;
-      this.detailPath = path.replace("Practitioner.", "");
+      this.detailPath = data.path.replace("Practitioner.", "");
+      this.detailRaw = data;
+      this.extensionProfile = null;
+
+      if (data.type[0].code == "Extension") {
+        this.extensionProfile = data.type[0].profile[0];
+      }
 
       this.$refs.profileHeader.reset();
       this.$refs.detailsForm.changeFields(fields);
