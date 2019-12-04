@@ -103,13 +103,6 @@ export default {
         });
     },
     saveSubsectionData(data, field, index) {
-      console.log("Data");
-      console.log(data);
-      console.log("Field");
-      console.log(field);
-      console.log("Index");
-      console.log(index);
-
       let component = this;
       let practitioner = this.practitioner;
 
@@ -158,8 +151,6 @@ export default {
       } else {
         practitioner[this.detailTitle] = input;
       }
-
-      console.log(practitioner);
 
       axios
         .post(this.config.backend + "/practitioner/edit", practitioner)
