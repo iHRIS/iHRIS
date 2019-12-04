@@ -16,6 +16,7 @@
     "datejs": "^1.0.0-rc3",
     "eslint-plugin-prettier": "^3.1.1",
     "fhir": "4.*",
+    "lodash": "^4.17.15",
     "swagger-ui": "^3.23.4",
     "vue": "2.*",
     "vue-cookies": "^1.5.13",

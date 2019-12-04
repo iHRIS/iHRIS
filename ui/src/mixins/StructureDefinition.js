@@ -72,7 +72,6 @@ export default {
           }
 
           let definition = response.data.snapshot.element;
-
           let fields = {};
 
           definition.forEach(field => {

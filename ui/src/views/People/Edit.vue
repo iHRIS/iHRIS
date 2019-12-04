@@ -44,6 +44,7 @@
 
 <script>
 import axios from "axios";
+import _ from "lodash";
 
 import AddSectionsMenu from "@/components/People/AddSectionsMenu.vue";
 import DetailsCard from "@/components/People/DetailsCard.vue";
@@ -64,6 +65,7 @@ export default {
       config: null,
       details: false,
       detailFields: {},
+      detailPath: null,
       detailTitle: null
     };
   },
@@ -145,11 +147,10 @@ export default {
       let practitioner = this.practitioner;
       let title = this.detailTitle;
 
-      // special case, active is a property
-      if (title == "active") {
-        practitioner[title] = input[title];
+      if (this.detailPath) {
+        _.set(practitioner, this.detailPath, input);
       } else {
-        practitioner[this.detailTitle] = input;
+        practitioner = { ...practitioner, ...input };
       }
 
       axios
@@ -169,10 +170,11 @@ export default {
           }
         });
     },
-    toggleForm(fields, title) {
+    toggleForm(fields, title, path) {
       this.details = true;
       this.detailFields = fields;
       this.detailTitle = title;
+      this.detailPath = path.replace("Practitioner.", "");
 
       this.$refs.profileHeader.reset();
       this.$refs.detailsForm.changeFields(fields);

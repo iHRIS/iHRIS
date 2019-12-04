@@ -107,7 +107,7 @@ export default {
         this.$emit("toggleForm", fields, title);
       } else {
         this._self.describe(definition, "Practitioner", title).then(fields => {
-          this.$emit("toggleForm", fields.fields, title);
+          this.$emit("toggleForm", fields.fields, title, data.path);
         });
       }
     }
