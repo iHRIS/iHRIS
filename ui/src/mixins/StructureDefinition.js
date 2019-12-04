@@ -103,7 +103,10 @@ export default {
               }
 
               subfields.forEach(subfield => {
-                fields[subfield.id] = this.formatField(subfield);
+                fields[subfield.id] = this.formatField(
+                  subfield,
+                  field.type[0].code
+                );
               });
             }
           });
@@ -122,8 +125,8 @@ export default {
         {
           definition: null,
           short: null,
-          id: "Coding.value",
-          max: "*",
+          id: "Coding.code",
+          max: "1",
           type: [{ code: "string" }],
           min: 0
         }
@@ -174,7 +177,9 @@ export default {
       ];
     },
     getFields(structureDefinition) {
-      structureDefinition = structureDefinition.toLowerCase();
+      if (structureDefinition) {
+        structureDefinition = structureDefinition.toLowerCase();
+      }
 
       switch (structureDefinition) {
         case "coding":
@@ -187,7 +192,7 @@ export default {
           return [];
       }
     },
-    formatField(field) {
+    formatField(field, parentType) {
       let name = field.id.slice(field.id.indexOf(".") + 1);
       let options = field.short
         ? field.short
@@ -207,6 +212,7 @@ export default {
         options: options,
         name: name,
         type: type,
+        parentType: parentType,
         required: field.min > 0,
         object: false,
         fields: {}
