@@ -145,7 +145,12 @@ export default {
       let practitioner = this.practitioner;
       let title = this.detailTitle;
 
-      practitioner[this.detailTitle] = input;
+      // special case, active is a property
+      if (title == "active") {
+        practitioner[title] = input[title];
+      } else {
+        practitioner[this.detailTitle] = input;
+      }
 
       axios
         .post(this.config.backend + "/practitioner/edit", practitioner)
