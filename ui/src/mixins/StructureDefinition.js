@@ -36,7 +36,7 @@ export default {
     };
   },
   methods: {
-    describe(structureDefinition, parentDefinition, title, path) {
+    describe(structureDefinition, parentDefinition, title) {
       let url = "/practitioner/describe/definition/";
 
       if (!structureDefinition) {
@@ -60,8 +60,7 @@ export default {
 
         return Promise.resolve({
           id: title,
-          fields: qualification,
-          path: path
+          fields: qualification
         });
       }
 
@@ -111,8 +110,7 @@ export default {
 
           return Promise.resolve({
             id: title,
-            fields: fields,
-            path: path
+            fields: fields
           });
         })
         .catch(err => {
