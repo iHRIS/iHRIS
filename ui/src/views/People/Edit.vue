@@ -103,6 +103,13 @@ export default {
         });
     },
     saveSubsectionData(data, field, index) {
+      console.log("Data");
+      console.log(data);
+      console.log("Field");
+      console.log(field);
+      console.log("Index");
+      console.log(index);
+
       let component = this;
       let practitioner = this.practitioner;
 
@@ -145,7 +152,14 @@ export default {
       let practitioner = this.practitioner;
       let title = this.detailTitle;
 
-      practitioner[this.detailTitle] = input;
+      // special case, active is a property
+      if (title == "active") {
+        practitioner[title] = input[title];
+      } else {
+        practitioner[this.detailTitle] = input;
+      }
+
+      console.log(practitioner);
 
       axios
         .post(this.config.backend + "/practitioner/edit", practitioner)
