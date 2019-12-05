@@ -30,6 +30,33 @@ export default {
 
           if (section.id == "Practitioner." + i) {
             let label = section.label ? section.label : i;
+
+            if (label === "qualification") {
+              for (var k in field) {
+                let qualification = {};
+
+                if (field[k].code) {
+                  qualification.type = field[k].code.text;
+                }
+
+                if (field[k].issuer) {
+                  qualification.issuerCouncilOrStructure = field[k].issuer.name;
+                }
+
+                if (field[k].identifier) {
+                  qualification.qualificationNumberOrId =
+                    field[k].identifier[0].value;
+                }
+
+                if (field[k].period) {
+                  qualification.dateReceived = field[k].period.start;
+                  qualification.expirationDate = field[k].period.end;
+                }
+
+                field[k] = qualification;
+              }
+            }
+
             fields[label] = field;
           }
         }
@@ -47,7 +74,16 @@ export default {
               let profile = section.type[0].profile[0];
 
               if (profile == extension.url) {
-                fields[section.label] = extension;
+                let data = {};
+
+                // customize the output a bit
+                for (k in extension) {
+                  if (k !== "url") {
+                    data = extension[k];
+                  }
+                }
+
+                fields[section.label] = data;
               }
             }
           }
