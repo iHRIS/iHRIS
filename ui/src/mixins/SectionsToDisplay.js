@@ -29,7 +29,8 @@ export default {
           let section = this.sections[j];
 
           if (section.id == "Practitioner." + i) {
-            fields[i] = field;
+            let label = section.label ? section.label : i;
+            fields[label] = field;
           }
         }
       }
