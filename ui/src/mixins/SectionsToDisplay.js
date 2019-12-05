@@ -54,13 +54,6 @@ export default {
         }
       }
 
-      console.log("Sections");
-      console.log(this.sections);
-      console.log("Practitioner");
-      console.log(this.practitioner);
-      console.log("Fields");
-      console.log(fields);
-
       return fields;
     }
   },
