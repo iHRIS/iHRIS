@@ -3,13 +3,26 @@
     <ProfileHeader :practitioner="practitioner" />
 
     <v-layout wrap>
-      <v-flex xs6 v-for="(element, index) in display" v-bind:key="index">
-        <DetailsCard
-          :data="element"
-          :name="index"
-          :ref="'subsection-' + index"
-        />
-      </v-flex>
+      <v-col md="6">
+        <v-flex v-for="(element, index, counter) in display" v-bind:key="index">
+          <DetailsCard
+            :data="element"
+            :name="index"
+            :ref="'subsection-' + index"
+            v-if="counter % 2 == 0"
+          />
+        </v-flex>
+      </v-col>
+      <v-col md="6">
+        <v-flex v-for="(element, index, counter) in display" v-bind:key="index">
+          <DetailsCard
+            :data="element"
+            :name="index"
+            :ref="'subsection-' + index"
+            v-if="counter % 2 == 1"
+          />
+        </v-flex>
+      </v-col>
     </v-layout>
   </v-container>
 </template>
