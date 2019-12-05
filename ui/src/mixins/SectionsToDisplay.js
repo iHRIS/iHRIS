@@ -35,6 +35,25 @@ export default {
         }
       }
 
+      // extensions are handled separately
+      if (this.practitioner.extension) {
+        for (i in this.practitioner.extension) {
+          let extension = this.practitioner.extension[i];
+
+          for (j in this.sections) {
+            let section = this.sections[j];
+
+            if (section.type[0].profile) {
+              let profile = section.type[0].profile[0];
+
+              if (profile == extension.url) {
+                fields[section.label] = extension;
+              }
+            }
+          }
+        }
+      }
+
       return fields;
     }
   },
