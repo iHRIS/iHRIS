@@ -91,6 +91,19 @@
         </div>
       </v-card-text>
 
+      <v-card-text v-show="!editing" v-else-if="typeof data !== 'object'">
+        <v-simple-table>
+          <tbody>
+            <tr>
+              <td :width="headerWidth" class="font-weight-bold">
+                {{ this.name | sentenceCase }}
+              </td>
+              <td>{{ data }}</td>
+            </tr>
+          </tbody>
+        </v-simple-table>
+      </v-card-text>
+
       <v-card-text v-show="!editing" v-else>
         <v-simple-table>
           <tbody>
