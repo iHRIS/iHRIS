@@ -39,7 +39,7 @@ export default {
           }
 
           for (var i = 0; i < value.length; i++) {
-            if (!Number.isInteger(value[i])) {
+            if (parseInt(value[i]) != value[i]) {
               return "Value must be an integer";
             }
           }
@@ -60,9 +60,11 @@ export default {
           return true;
         },
         required: value => {
-          return (
-            (this.required && value) || !this.required || "Field is required"
-          );
+          if (!this.required || value) {
+            return true;
+          }
+
+          return "Field is required";
         }
       }
     };
