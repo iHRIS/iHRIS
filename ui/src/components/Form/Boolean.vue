@@ -1,7 +1,7 @@
 <template>
   <v-checkbox
     :label="label"
-    :value="checked"
+    :value="value"
     v-model="boolean"
     :hint="hint"
   ></v-checkbox>
@@ -10,7 +10,7 @@
 <script>
 export default {
   created() {
-    this.boolean = this.checked;
+    this.boolean = this.value;
   },
   data() {
     return {
@@ -22,6 +22,6 @@ export default {
       return this["boolean"];
     }
   },
-  props: ["checked", "label", "hint"]
+  props: ["value", "label", "hint"]
 };
 </script>

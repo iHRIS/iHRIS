@@ -296,6 +296,7 @@ export default {
     },
     toggleForm(index) {
       let fields = this.fields;
+      //console.log(this.fields);
 
       fields.forEach(field => {
         field.value = this.data[index][field.id];
@@ -308,6 +309,7 @@ export default {
       this.editing = true;
       this.editButton = false;
       this.showMultiple = false;
+
     },
     toogleSectionDetailDisplay() {
       this.showSectionDetail = !this.showSectionDetail;

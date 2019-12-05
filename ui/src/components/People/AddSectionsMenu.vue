@@ -57,12 +57,9 @@ export default {
         this.menu[field.id].raw = field;
 
         // set the type, used to show the correct fields
-        if (field.type[0].code && field.type[0].code !== "Extension") {
+        if (field.type[0].code) {
           this.menu[field.id].type = field.type[0].code;
-        } else if (
-          field.type[0].code === "Extension" &&
-          field.type[0].profile[0]
-        ) {
+        } else if (field.type[0].profile[0]) {
           let type = field.type[0].profile[0];
           this.menu[field.id].type = type.slice(type.lastIndexOf("/") + 1);
         }
@@ -104,10 +101,17 @@ export default {
       if (this.primitiveTypes.includes(definition)) {
         let fields = [];
         fields.push(this.formatField(data));
+
+        console.log(fields);
+
         this.$emit("toggleForm", fields, title);
       } else {
-        this._self.describe(definition, "Practitioner", title).then(fields => {
-          this.$emit("toggleForm", fields.fields, title, data);
+        this._self.describe(definition, "Practitioner").then(fields => {
+          if (definition == "BackboneElement") {
+            this.$emit("toggleForm", fields[title], title);
+          } else {
+            this.$emit("toggleForm", fields, title);
+          }
         });
       }
     }

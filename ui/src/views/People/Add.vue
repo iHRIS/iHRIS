@@ -17,6 +17,8 @@
       <DynamicForm
         :fields="fields"
         :key="dynamicFormKey"
+        :isActivePractitioner="isActivePractitionerDefault"
+        :selectedUseNameCode="selectedUseCodeDefault"
         v-on:cancel="cancel"
         v-on:successfulSubmit="submit"
         v-on:failedSubmit="showFailedSubmit"
@@ -34,7 +36,7 @@ import DynamicForm from "@/components/Form/DynamicForm.vue";
 export default {
   created() {
     this.config = require("@/config/config.json");
-
+     NProgress.start()
     axios
       .get(this.config.backend + "/practitioner/describe/page")
       .then(pageResponse => {
@@ -53,7 +55,6 @@ export default {
               field.valueString.indexOf(".") > 0
                 ? field.valueString.slice(0, field.valueString.indexOf("."))
                 : null;
-
             fields.push({
               id: field.valueString,
               max: 1,
@@ -147,9 +148,12 @@ export default {
                           });
 
                           this.fields = fields;
+                          //console.log("---------------------------------------------------");
+                          //console.log(fields);
                           this.dynamicFormKey++;
                           return Promise.resolve();
                         });
+                        NProgress.done()
                     }
                   } else {
                     let matchingField = structureDefinitionResponse.data.snapshot.element.find(
@@ -185,6 +189,7 @@ export default {
         this.error = error.response.data;
         this.alert = true;
         this.addPractitionerForm = false;
+        NProgress.start()
       });
   },
   components: {
@@ -205,6 +210,8 @@ export default {
         "nationality",
         "residence"
       ],
+      isActivePractitionerDefault:true,
+      selectedUseCodeDefault:"official",
       practitioner: {},
       results: {},
       rules: [v => !!v || "Required field"],
