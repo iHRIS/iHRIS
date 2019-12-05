@@ -24,12 +24,6 @@ export default {
     DetailsCard,
     ProfileHeader
   },
-  data() {
-    return {
-      config: null,
-      practitioner: {}
-    };
-  },
   mixins: [SectionsToDisplay],
   name: "AddSections"
 };
