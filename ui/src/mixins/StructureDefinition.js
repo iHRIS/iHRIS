@@ -139,6 +139,7 @@ export default {
           short: "Registration | License | Other Certification",
           id: "Qualification.type",
           max: 1,
+          path: "qualification.code.text",
           type: [{ code: "code" }],
           min: 0
         },
@@ -147,6 +148,7 @@ export default {
           definition: "Issuer council or structure",
           id: "Qualification.issuer",
           max: 1,
+          path: "qualification.issuer.name",
           type: [{ code: "string" }],
           min: 0
         },
@@ -155,6 +157,7 @@ export default {
           definition: "Qualification number / ID",
           id: "Qualification.number",
           max: 1,
+          path: "qualification.identifier.value",
           type: [{ code: "string" }],
           min: 0
         },
@@ -163,6 +166,7 @@ export default {
           definition: "Date received",
           id: "Qualification.received",
           max: 1,
+          path: "qualification.period.start",
           type: [{ code: "date" }],
           min: 0
         },
@@ -171,6 +175,7 @@ export default {
           definition: "Expiration date",
           id: "Qualification.expiration",
           max: 1,
+          path: "qualification.period.end",
           type: [{ code: "date" }],
           min: 0
         }
@@ -209,6 +214,7 @@ export default {
         title: name,
         id: field.id,
         max: field.max,
+        path: field.path,
         options: options,
         name: name,
         type: type,

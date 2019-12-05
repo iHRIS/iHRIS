@@ -150,7 +150,27 @@ export default {
       let practitioner = this.practitioner;
       let title = this.detailTitle;
 
-      if (this.detailPath && this.detailPath == "extension") {
+      if (title == "qualification") {
+        let qualification = {};
+
+        for (var key in this.detailFields) {
+          let field = this.detailFields[key];
+
+          if (input[field.name]) {
+            _.set(
+              qualification,
+              field.path.replace("qualification.", ""),
+              input[field.name]
+            );
+          }
+        }
+
+        if (!practitioner.qualification) {
+          practitioner.qualification = [];
+        }
+
+        practitioner.qualification.push(qualification);
+      } else if (this.detailPath && this.detailPath == "extension") {
         let extension = [];
         let newExtension = {
           url: this.extensionProfile
