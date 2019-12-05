@@ -51,6 +51,7 @@ import DetailsCard from "@/components/People/DetailsCard.vue";
 import DynamicForm from "@/components/Form/DynamicForm.vue";
 import ProfileHeader from "@/components/People/ProfileHeader.vue";
 import SectionsToDisplay from "@/mixins/SectionsToDisplay.js";
+import StructureDefinition from "@/mixins/StructureDefinition.js";
 import Vue from "vue";
 
 export default {
@@ -162,10 +163,21 @@ export default {
 
         for (var fieldKey in this.detailFields) {
           let field = this.detailFields[fieldKey];
-          valueString = "value" + field.parentType;
+          valueString =
+            "value" +
+            field.parentType.charAt(0).toUpperCase() +
+            field.parentType.slice(1);
+
+          if (this.primitiveTypes.indexOf(field.parentType) >= 0) {
+            for (var inputKey in input) {
+              newExtension[valueString] = input[inputKey];
+              break;
+            }
+          } else {
+            newExtension[valueString] = input;
+          }
         }
 
-        newExtension[valueString] = input;
         extension.push(newExtension);
 
         practitioner.extension = extension;
@@ -212,7 +224,7 @@ export default {
       this.$refs.detailsForm.changeFields(fields);
     }
   },
-  mixins: [SectionsToDisplay],
+  mixins: [SectionsToDisplay, StructureDefinition],
   name: "AddSections"
 };
 </script>

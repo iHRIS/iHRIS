@@ -103,7 +103,7 @@ export default {
     showForm(title, definition, data) {
       if (this.primitiveTypes.includes(definition)) {
         let fields = [];
-        fields.push(this.formatField(data));
+        fields.push(this.formatField(data, definition));
         this.$emit("toggleForm", fields, title);
       } else {
         this._self.describe(definition, "Practitioner", title).then(fields => {

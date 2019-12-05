@@ -89,7 +89,7 @@ export default {
 
             // if this is a primitive type, we are done
             if (this.primitiveTypes.indexOf(type) >= 0) {
-              fields[field.id] = this.formatField(field);
+              fields[field.id] = this.formatField(field, type);
             } else {
               let subfields = [];
 
