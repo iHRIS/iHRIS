@@ -10,3 +10,12 @@ The server component relies on the presence of a fhir compliant server. The logi
 
 ## Running iHRIS
 iHRIS is divided into two components, the ui frontend and a backend. To start the ui frontend, run `npm run serve`. To start the backend, run `npm run start`.
+
+## What do I need?
+In order to run iHRIS, you will need a FHIR compatible server (such as hapi), an elasticsearch instance, kibana, and nginx to run kibana. Please refer those installation documents for guidance. You will also need nodejs and npm to install packages and run the backend server. 
+
+## Structure Definitions
+iHRIS is powered by a FHIR compliant server. This allows the user to tailor their installation by changing the structure definitions to show/hide different components, add custom extensions, and rename sections. We have provided several custom structure defintions insides the resources/StructureDefintion directory. Load those to your FHIR compatible server.
+
+## Authentication
+iHRIS includes basic username / password authentication for all pages other than the dashboard. A sample user can be found under resources/demos/admin.iHRISUser.json. The username and password for this user is admin / admin. It is STRONGLY recommended that the password be changed on installation.
