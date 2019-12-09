@@ -59,6 +59,26 @@ export default {
     });
   },
   data: function() {
+    const config = require("@/config/config.json");
+    let submenu = [];
+
+    if (config.samplePractitioner) {
+      submenu.push({
+        action: { path: "/people/view/" + config.samplePractitioner },
+        title: "Sample Practitioner"
+      });
+    }
+
+    submenu.push({
+      action: { name: "search-people" },
+      title: "Search people"
+    });
+
+    submenu.push({
+      action: { name: "add-people" },
+      title: "Add people"
+    });
+
     return {
       drawer: true,
       menu: [
@@ -71,20 +91,7 @@ export default {
         {
           action: { name: "people" },
           icon: "people",
-          submenu: [
-            {
-              action: { path: "/people/view/8755" },
-              title: "Sample Practitioner"
-            },
-            {
-              action: { name: "search-people" },
-              title: "Search people"
-            },
-            {
-              action: { name: "add-people" },
-              title: "Add people"
-            }
-          ],
+          submenu: submenu,
           title: "People"
         }
       ]
