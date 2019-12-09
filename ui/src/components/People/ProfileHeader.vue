@@ -1,6 +1,6 @@
 <template>
   <v-layout row wrap class="pb-5">
-    <v-flex xs2 v-if="practitioner.photo">
+    <v-flex xs1 v-if="practitioner.photo">
       <v-img :src="getProfilePicture()" contain />
     </v-flex>
     <v-flex xs6 class="display-2 text-xs-left pl-3" v-if="practitioner.name">
