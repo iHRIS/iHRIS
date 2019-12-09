@@ -30,6 +30,11 @@ export default {
 
           if (section.id == "Practitioner." + i) {
             let label = section.label ? section.label : i;
+            label = label.replace(".", "");
+
+            if (label === "photo") {
+              continue;
+            }
 
             if (label === "qualification") {
               for (var k in field) {
