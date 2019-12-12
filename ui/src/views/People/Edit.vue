@@ -1,6 +1,11 @@
 <template>
   <v-container>
-    <ProfileHeader :practitioner="practitioner" ref="profileHeader" />
+    <ProfileHeader
+      :practitioner="practitioner"
+      :edit="true"
+      ref="profileHeader"
+      v-on:changePractitioner="changePractitioner"
+    />
 
     <v-layout>
       <v-flex xs6 class="pr-3">
@@ -80,6 +85,9 @@ export default {
       this.detailTitle = null;
 
       this.$refs.profileHeader.reset();
+    },
+    changePractitioner(practitioner) {
+      this.practitioner = practitioner;
     },
     deleteSubsectionData(field, index) {
       let component = this;

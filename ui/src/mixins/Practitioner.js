@@ -31,6 +31,8 @@ export default {
               // ignore practitioner and meta fields since they can't be customized
               field.id == "Practitioner" ||
               field.id == "Practitioner.meta" ||
+              // hide active, that's handled separately
+              field.id === "Practitioner.active" ||
               // if someone sets the max to be 0, then don't show it
               field.max == 0 ||
               // qualification lists additional fields so ignore them
