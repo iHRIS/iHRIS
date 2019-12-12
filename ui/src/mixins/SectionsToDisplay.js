@@ -32,7 +32,7 @@ export default {
             let label = section.label ? section.label : i;
             label = label.replace(".", "");
 
-            if (label === "photo") {
+            if (label === "photo" || label === "active") {
               continue;
             }
 
