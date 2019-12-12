@@ -117,7 +117,12 @@ router.beforeEach((to, from, next) => {
   if (!store.state.authentication.username) {
     const config = require("@/config/config.json");
 
-    if (to.path == "/" || to.path == "/login" || to.path == "/logout" || config.demo) {
+    if (
+      to.path == "/" ||
+      to.path == "/login" ||
+      to.path == "/logout" ||
+      config.demo
+    ) {
       next();
     } else {
       next({

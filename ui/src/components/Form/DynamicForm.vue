@@ -212,6 +212,7 @@
 <script>
 import Base64Binary from "@/components/Form/Base64Binary.vue";
 import Boolean from "@/components/Form/Boolean.vue";
+import Capitalize from "@/mixins/Capitalize.js";
 import Canonical from "@/components/Form/Canonical.vue";
 import Code from "@/components/Form/Code.vue";
 import Date from "@/components/Form/Date.vue";
@@ -276,8 +277,14 @@ export default {
       if (fields) {
         for (var key in fields) {
           inputs.push(fields[key].name);
-          let data = fields[key].name.replace(/([A-Z])/g, " $1");
-          fields[key].label = data.charAt(0).toUpperCase() + data.slice(1);
+
+          if (fields[key].labelOverride) {
+            fields[key].label = fields[key].labelOverride;
+          } else {
+            let data = fields[key].name.replace(/([A-Z])/g, " $1");
+            fields[key].label = this.capitalize(data);
+          }
+
           sanitized.push(fields[key]);
         }
       }
@@ -342,7 +349,8 @@ export default {
     submitLabel: {
       default: "Submit"
     }
-  }
+  },
+  mixins: [Capitalize]
 };
 </script>
 <style>
