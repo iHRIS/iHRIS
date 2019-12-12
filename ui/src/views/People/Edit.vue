@@ -47,6 +47,7 @@ import axios from "axios";
 import _ from "lodash";
 
 import AddSectionsMenu from "@/components/People/AddSectionsMenu.vue";
+import Capitalize from "@/mixins/Capitalize.js";
 import DetailsCard from "@/components/People/DetailsCard.vue";
 import DynamicForm from "@/components/Form/DynamicForm.vue";
 import ProfileHeader from "@/components/People/ProfileHeader.vue";
@@ -183,10 +184,7 @@ export default {
 
         for (var fieldKey in this.detailFields) {
           let field = this.detailFields[fieldKey];
-          valueString =
-            "value" +
-            field.parentType.charAt(0).toUpperCase() +
-            field.parentType.slice(1);
+          valueString = "value" + this.capitalize(field.parentType);
 
           if (this.primitiveTypes.indexOf(field.parentType) >= 0) {
             for (var inputKey in input) {
@@ -213,7 +211,7 @@ export default {
           if (response.status == 201) {
             component.cancelDetailsForm();
             component.$refs.profileHeader.changeMessage(
-              title + " added successfully!",
+              this.capitalize(title) + " added successfully!",
               "success"
             );
           } else {
@@ -244,7 +242,7 @@ export default {
       this.$refs.detailsForm.changeFields(fields);
     }
   },
-  mixins: [SectionsToDisplay, StructureDefinition],
+  mixins: [Capitalize, SectionsToDisplay, StructureDefinition],
   name: "AddSections"
 };
 </script>
