@@ -12,6 +12,7 @@
   <v-combobox
     v-else
     v-model="base64binary"
+    append-icon=""
     hide-selected
     :label="label"
     multiple

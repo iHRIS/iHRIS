@@ -12,6 +12,7 @@
   <v-combobox
     v-else
     v-model="date"
+    append-icon=""
     hide-selected
     :label="label"
     multiple
