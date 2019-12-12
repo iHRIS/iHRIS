@@ -223,6 +223,12 @@ export default {
         });
     },
     toggleForm(fields, title, data) {
+      if (Object.keys(fields).length === 1) {
+        for (var key in fields) {
+          fields[key].labelOverride = title;
+        }
+      }
+
       this.details = true;
       this.detailFields = fields;
       this.detailPath = null;
