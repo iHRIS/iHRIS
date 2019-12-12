@@ -14,6 +14,7 @@
     v-model="instant"
     hide-selected
     :label="label"
+    append-icon=""
     multiple
     persistent-hint
     small-chips

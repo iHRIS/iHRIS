@@ -12,6 +12,7 @@
   <v-combobox
     v-else
     v-model="url"
+    append-icon=""
     hide-selected
     :label="label"
     multiple

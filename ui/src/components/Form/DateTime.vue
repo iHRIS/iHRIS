@@ -10,6 +10,7 @@
   ></v-text-field>
   <v-combobox
     v-else
+    append-icon=""
     v-model="datetime"
     hide-selected
     :label="label"

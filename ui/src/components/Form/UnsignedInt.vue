@@ -13,6 +13,7 @@
     v-else
     v-model="unsignedInt"
     hide-selected
+    append-icon=""
     :label="label"
     multiple
     persistent-hint

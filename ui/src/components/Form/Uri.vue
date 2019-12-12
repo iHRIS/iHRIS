@@ -13,6 +13,7 @@
     v-else
     v-model="uri"
     hide-selected
+    append-icon=""
     :label="label"
     multiple
     persistent-hint

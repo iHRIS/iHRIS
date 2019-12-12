@@ -17,6 +17,7 @@
     multiple
     persistent-hint
     small-chips
+    append-icon=""
     :rules="[rules.max, rules.required]"
     :required="required"
     outline
