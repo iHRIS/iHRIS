@@ -233,7 +233,9 @@ export default {
     toggleForm(fields, title, data) {
       if (Object.keys(fields).length === 1) {
         for (var key in fields) {
-          fields[key].labelOverride = title;
+          if (fields[key].name === "value") {
+            fields[key].labelOverride = title;
+          }
         }
       }
 
