@@ -15,6 +15,7 @@
     hide-selected
     :label="label"
     multiple
+    append-icon=""
     persistent-hint
     small-chips
     :rules="[rules.max, rules.required]"

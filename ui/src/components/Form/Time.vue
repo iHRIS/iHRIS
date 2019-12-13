@@ -16,6 +16,7 @@
     :label="label"
     multiple
     persistent-hint
+    append-icon=""
     small-chips
     :rules="[rules.max, rules.required, rules.time]"
     :required="required"

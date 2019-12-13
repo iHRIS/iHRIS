@@ -1,6 +1,11 @@
 <template>
   <v-container>
-    <ProfileHeader :practitioner="practitioner" ref="profileHeader" />
+    <ProfileHeader
+      :practitioner="practitioner"
+      :edit="true"
+      ref="profileHeader"
+      v-on:changePractitioner="changePractitioner"
+    />
 
     <v-layout>
       <v-flex xs6 class="pr-3">
@@ -44,12 +49,15 @@
 
 <script>
 import axios from "axios";
+import _ from "lodash";
 
 import AddSectionsMenu from "@/components/People/AddSectionsMenu.vue";
+import Capitalize from "@/mixins/Capitalize.js";
 import DetailsCard from "@/components/People/DetailsCard.vue";
 import DynamicForm from "@/components/Form/DynamicForm.vue";
 import ProfileHeader from "@/components/People/ProfileHeader.vue";
 import SectionsToDisplay from "@/mixins/SectionsToDisplay.js";
+import StructureDefinition from "@/mixins/StructureDefinition.js";
 import Vue from "vue";
 
 export default {
@@ -64,7 +72,10 @@ export default {
       config: null,
       details: false,
       detailFields: {},
-      detailTitle: null
+      detailPath: null,
+      detailRaw: null,
+      detailTitle: null,
+      expansionProfile: null
     };
   },
   methods: {
@@ -74,6 +85,9 @@ export default {
       this.detailTitle = null;
 
       this.$refs.profileHeader.reset();
+    },
+    changePractitioner(practitioner) {
+      this.practitioner = practitioner;
     },
     deleteSubsectionData(field, index) {
       let component = this;
@@ -145,7 +159,59 @@ export default {
       let practitioner = this.practitioner;
       let title = this.detailTitle;
 
-      practitioner[this.detailTitle] = input;
+      if (title == "qualification") {
+        let qualification = {};
+
+        for (var key in this.detailFields) {
+          let field = this.detailFields[key];
+
+          if (input[field.name]) {
+            _.set(
+              qualification,
+              field.path.replace("qualification.", ""),
+              input[field.name]
+            );
+          }
+        }
+
+        if (!practitioner.qualification) {
+          practitioner.qualification = [];
+        }
+
+        practitioner.qualification.push(qualification);
+      } else if (this.detailPath && this.detailPath == "extension") {
+        let extension = [];
+        let newExtension = {
+          url: this.extensionProfile
+        };
+        let valueString = null;
+
+        if (practitioner.extension) {
+          extension = practitioner.extension;
+        }
+
+        for (var fieldKey in this.detailFields) {
+          let field = this.detailFields[fieldKey];
+          valueString = "value" + this.capitalize(field.parentType);
+
+          if (this.primitiveTypes.indexOf(field.parentType) >= 0) {
+            for (var inputKey in input) {
+              newExtension[valueString] = input[inputKey];
+              break;
+            }
+          } else {
+            newExtension[valueString] = input;
+          }
+        }
+
+        extension.push(newExtension);
+
+        practitioner.extension = extension;
+      } else if (this.detailPath) {
+        _.set(practitioner, this.detailPath, input);
+      } else {
+        practitioner = { ...practitioner, ...input };
+      }
 
       axios
         .post(this.config.backend + "/practitioner/edit", practitioner)
@@ -153,7 +219,7 @@ export default {
           if (response.status == 201) {
             component.cancelDetailsForm();
             component.$refs.profileHeader.changeMessage(
-              title + " added successfully!",
+              this.capitalize(title) + " added successfully!",
               "success"
             );
           } else {
@@ -164,16 +230,33 @@ export default {
           }
         });
     },
-    toggleForm(fields, title) {
+    toggleForm(fields, title, data) {
+      if (Object.keys(fields).length === 1) {
+        for (var key in fields) {
+          fields[key].labelOverride = title;
+        }
+      }
+
       this.details = true;
       this.detailFields = fields;
+      this.detailPath = null;
       this.detailTitle = title;
+      this.detailRaw = data;
+      this.extensionProfile = null;
+
+      if (data && data.path) {
+        this.detailPath = data.path.replace("Practitioner.", "");
+      }
+
+      if (data && data.type[0].code == "Extension") {
+        this.extensionProfile = data.type[0].profile[0];
+      }
 
       this.$refs.profileHeader.reset();
       this.$refs.detailsForm.changeFields(fields);
     }
   },
-  mixins: [SectionsToDisplay],
+  mixins: [Capitalize, SectionsToDisplay, StructureDefinition],
   name: "AddSections"
 };
 </script>

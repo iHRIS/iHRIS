@@ -11,6 +11,7 @@
   <v-combobox
     v-else
     v-model="id"
+    append-icon=""
     hide-selected
     :label="label"
     multiple

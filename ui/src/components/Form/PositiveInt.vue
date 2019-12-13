@@ -11,6 +11,7 @@
   ></v-text-field>
   <v-combobox
     v-else
+    append-icon=""
     v-model="positiveInt"
     hide-selected
     :label="label"
