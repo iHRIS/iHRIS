@@ -16,3 +16,30 @@ iHRIS uses a FHIR compliant server to manage it's data. Any FHIR compliant serve
 
 ## Kibana
 Kibana is used to render dashboards on the frontend. The data in your Kibana dashboards will be synced from your FHIR installation to an Elasticsearch installation. To enable dashboards in your application, provide a link to your kibana installation.
+
+
+# Using Docker
+After cloning and customizing the configurations run the following commands
+```
+cd ui
+```
+
+Build the image
+```
+docker image build -t ihris-ui .
+```
+
+Run the image (as a background process)
+```
+docker container run --publish 8000:3000 --detach --name ihris-ui ihris-ui
+```
+
+Open this UI from your browser and you should see a page with title: Express
+```
+http://localhost:8000/
+```
+
+Some URLs to test
+
+http://localhost:8000/dashboard/all
+http://localhost:8000/user/list
