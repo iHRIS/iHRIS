@@ -107,6 +107,13 @@ export default {
         this.$emit("toggleForm", fields, title);
       } else {
         this._self.describe(definition, "Practitioner", title).then(fields => {
+          // sometimes we don't want all the fields so we limit them here
+          if (title === "photo") {
+            let customFields = {};
+            customFields["Attachment.url"] = fields.fields["Attachment.url"];
+            fields.fields = customFields;
+          }
+
           this.$emit("toggleForm", fields.fields, title, data);
         });
       }
