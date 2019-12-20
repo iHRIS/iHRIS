@@ -20,6 +20,7 @@ export default {
         "decimal",
         "id",
         "instant",
+        "integer",
         "markdown",
         "oid",
         "positiveInt",
@@ -35,15 +36,32 @@ export default {
     };
   },
   methods: {
-    describe(structureDefinition, parentDefinition) {
+    describe(structureDefinition, parentDefinition, title) {
       let url = "/practitioner/describe/definition/";
+
+      if (!structureDefinition) {
+        return;
+      }
 
       if (structureDefinition == "BackboneElement") {
         url += parentDefinition;
       } else {
-        url +=
-          structureDefinition.charAt(0).toUpperCase() +
-          structureDefinition.slice(1);
+        url += structureDefinition;
+      }
+
+      // qualification is a special case
+      if (title == "qualification") {
+        let fields = this.getFields(title);
+        let qualification = [];
+
+        fields.forEach(field => {
+          qualification[field.id] = this.formatField(field);
+        });
+
+        return Promise.resolve({
+          id: title,
+          fields: qualification
+        });
       }
 
       return axios
@@ -53,24 +71,160 @@ export default {
             return [];
           }
 
-          let definition = this.parser.parseStructureDefinition(response.data);
-          let fields = [];
+          let definition = response.data.snapshot.element;
+          let fields = {};
 
-          definition._properties.forEach(field => {
-            fields = this.processField(
-              field,
-              fields,
-              structureDefinition,
-              response.data.snapshot.element,
-              parentDefinition
-            );
+          definition.forEach(field => {
+            // if it doesn't have a type, ignore it
+            if (!field.type) {
+              return;
+            }
+
+            // ignore id fields
+            if (field.id.endsWith(".id")) {
+              return;
+            }
+
+            let type = field.type[0].code;
+
+            // if this is a primitive type, we are done
+            if (this.primitiveTypes.indexOf(type) >= 0) {
+              fields[field.id] = this.formatField(field, type);
+            } else {
+              let subfields = [];
+
+              // this is going to require a recursive load of the properties
+              // if the type is a reference then we need to load what it is referencing
+              if (type == "Reference") {
+                // this is a special case, let's come back to it later
+                return;
+              } else {
+                subfields = this.getFields(field.type[0].code);
+              }
+
+              subfields.forEach(subfield => {
+                fields[subfield.id] = this.formatField(
+                  subfield,
+                  field.type[0].code
+                );
+              });
+            }
           });
 
-          return Promise.resolve(fields);
+          return Promise.resolve({
+            id: title,
+            fields: fields
+          });
         })
         .catch(err => {
           return [err];
         });
+    },
+    getCodingFields() {
+      return [
+        {
+          definition: null,
+          short: null,
+          id: "Coding.code",
+          max: "1",
+          type: [{ code: "string" }],
+          min: 0
+        }
+      ];
+    },
+    getQualificationFields() {
+      return [
+        {
+          definition: null,
+          short: "Registration | License | Other Certification",
+          id: "Qualification.type",
+          max: 1,
+          path: "qualification.code.text",
+          type: [{ code: "code" }],
+          min: 0
+        },
+        {
+          short: null,
+          definition: "Issuer council or structure",
+          id: "Qualification.issuer",
+          max: 1,
+          path: "qualification.issuer.name",
+          type: [{ code: "string" }],
+          min: 0
+        },
+        {
+          short: null,
+          definition: "Qualification number / ID",
+          id: "Qualification.number",
+          max: 1,
+          path: "qualification.identifier.value",
+          type: [{ code: "string" }],
+          min: 0
+        },
+        {
+          short: null,
+          definition: "Date received",
+          id: "Qualification.received",
+          max: 1,
+          path: "qualification.period.start",
+          type: [{ code: "date" }],
+          min: 0
+        },
+        {
+          short: null,
+          definition: "Expiration date",
+          id: "Qualification.expiration",
+          max: 1,
+          path: "qualification.period.end",
+          type: [{ code: "date" }],
+          min: 0
+        }
+      ];
+    },
+    getFields(structureDefinition) {
+      if (structureDefinition) {
+        structureDefinition = structureDefinition.toLowerCase();
+      }
+
+      switch (structureDefinition) {
+        case "coding":
+          return this.getCodingFields();
+
+        case "qualification":
+          return this.getQualificationFields();
+
+        default:
+          return [];
+      }
+    },
+    formatField(field, parentType) {
+      let name = field.id.slice(field.id.indexOf(".") + 1);
+      let options = field.short
+        ? field.short
+            .split("|")
+            .map(Function.prototype.call, String.prototype.trim)
+        : [];
+      let type = field.type[0].code;
+
+      name = name.replace("[x]", "");
+
+      let formatted = {
+        subtitle: field.definition,
+        short: field.short,
+        title: name,
+        id: field.id,
+        max: field.max,
+        path: field.path,
+        options: options,
+        name: name,
+        type: type,
+        parentType: parentType,
+        required: field.min > 0,
+        object: false,
+        fields: {}
+      };
+
+      return formatted;
     },
     populate(name, structureDefinition, field, rawData) {
       for (var i = 0; i < rawData.length; i++) {

@@ -4,7 +4,15 @@ import Add from "@/views/People/Add.vue";
 describe("Add.vue", () => {
   it("Says add a person", () => {
     const wrapper = shallowMount(Add, {
-      stubs: ["v-container", "v-btn", "v-layout", "v-text-field", "v-form", "v-alert", "v-flex"]
+      stubs: [
+        "v-container",
+        "v-btn",
+        "v-layout",
+        "v-text-field",
+        "v-form",
+        "v-alert",
+        "v-flex"
+      ]
     });
 
     expect(wrapper.isVueInstance()).toBeTruthy();
@@ -15,7 +23,15 @@ describe("Add.vue", () => {
 
   it("Is a form with fields", () => {
     const wrapper = shallowMount(Add, {
-      stubs: ["v-container", "v-btn", "v-layout", "v-text-field", "v-form", "v-alert", "v-flex"]
+      stubs: [
+        "v-container",
+        "v-btn",
+        "v-layout",
+        "v-text-field",
+        "v-form",
+        "v-alert",
+        "v-flex"
+      ]
     });
 
     expect(wrapper.findAll("v-form-stub")).toHaveLength(1);
@@ -25,7 +41,15 @@ describe("Add.vue", () => {
 
   it("Populates form values", () => {
     const wrapper = shallowMount(Add, {
-      stubs: ["v-container", "v-btn", "v-layout", "v-text-field", "v-form", "v-alert", "v-flex"]
+      stubs: [
+        "v-container",
+        "v-btn",
+        "v-layout",
+        "v-text-field",
+        "v-form",
+        "v-alert",
+        "v-flex"
+      ]
     });
 
     wrapper.vm.firstName = "Stephen";
@@ -45,14 +69,22 @@ describe("Add.vue", () => {
 
   it("Shows alert on an error", () => {
     const wrapper = shallowMount(Add, {
-      stubs: ["v-container", "v-btn", "v-layout", "v-text-field", "v-form", "v-alert", "v-flex"]
+      stubs: [
+        "v-container",
+        "v-btn",
+        "v-layout",
+        "v-text-field",
+        "v-form",
+        "v-alert",
+        "v-flex"
+      ]
     });
 
-    expect(wrapper.findAll('v-alert-stub')).toHaveLength(1);
-    expect(wrapper.find('v-alert-stub').text()).toBe("");
+    expect(wrapper.findAll("v-alert-stub")).toHaveLength(1);
+    expect(wrapper.find("v-alert-stub").text()).toBe("");
 
     wrapper.vm.error = "This is an error.";
 
-    expect(wrapper.find('v-alert-stub').text()).toBe("This is an error.");
+    expect(wrapper.find("v-alert-stub").text()).toBe("This is an error.");
   });
 });

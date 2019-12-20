@@ -7,10 +7,12 @@
     :required="required"
     :rules="[rules.required]"
     :value="value"
+    :hint="hint"
   ></v-text-field>
   <v-combobox
     v-else
     v-model="canonical"
+    append-icon=""
     hide-selected
     :label="label"
     multiple
@@ -19,6 +21,7 @@
     :rules="[rules.max, rules.required]"
     :required="required"
     outline
+    :hint="hint"
   ></v-combobox>
 </template>
 
@@ -57,6 +60,6 @@ export default {
       return this["canonical"];
     }
   },
-  props: ["label", "max", "required", "value"]
+  props: ["label", "max", "required", "value", "hint"]
 };
 </script>

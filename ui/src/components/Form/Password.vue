@@ -10,6 +10,7 @@
     :append-icon="show ? 'visibility' : 'visibility_off'"
     @click:append="show = !show"
     @change="updatePassword"
+    :hint="hint"
   ></v-text-field>
 </template>
 
@@ -55,6 +56,6 @@ export default {
       serverBus.$emit("updatePassword", this.getInput());
     }
   },
-  props: ["label", "max", "required", "value", "ref", "matching"]
+  props: ["label", "max", "required", "value", "matching", "hint"]
 };
 </script>

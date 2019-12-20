@@ -13,13 +13,22 @@
             <v-data-table
               :headers="headers"
               :items="practitioners"
+              :sort-by="['surname', 'Given']"
+              :sort-desc="[false, false]"
+              multi-sort
               :items-per-page="5"
-              class="elevation-1"
             >
-              <template slot="items" slot-scope="props">
-                <td><a :href="props.item.editLink">Edit</a></td>
-                <td>{{ props.item.given }}</td>
-                <td>{{ props.item.surname }}</td>
+              <template v-slot:item.action="{ item }">
+                <v-btn icon :href="item.editLink" text>
+                  <v-icon small class="mr-2">
+                    edit
+                  </v-icon>
+                </v-btn>
+                <v-btn icon :href="item.viewLink" text>
+                  <v-icon small>
+                    visibility
+                  </v-icon>
+                </v-btn>
               </template>
             </v-data-table>
           </v-card-text>
@@ -64,18 +73,18 @@ export default {
       config: null,
       headers: [
         {
-          text: "Edit",
-          align: "left",
-          sortable: false,
-          value: "editLink"
-        },
-        {
           text: "Surname",
           value: "surname"
         },
         {
           text: "Given name",
           value: "given"
+        },
+        {
+          text: "Actions",
+          align: "left",
+          sortable: false,
+          value: "action"
         }
       ],
       fields: [
@@ -101,19 +110,22 @@ export default {
         params: this.$refs.searchForm.getInputs()
       };
 
-      axios.get(this.config.backend + "/practitioner/search", params).then(response => {
-        let practitioners = [];
+      axios
+        .get(this.config.backend + "/practitioner/search", params)
+        .then(response => {
+          let practitioners = [];
 
-        response.data.entry.forEach(practitioner => {
-          practitioners.push({
-            editLink: "/people/edit/" + practitioner.resource.id,
-            surname: practitioner.resource.name[0].family,
-            given: practitioner.resource.name[0].given[0]
+          response.data.entry.forEach(practitioner => {
+            practitioners.push({
+              editLink: "/people/edit/" + practitioner.resource.id,
+              viewLink: "/people/view/" + practitioner.resource.id,
+              surname: practitioner.resource.name[0].family,
+              given: practitioner.resource.name[0].given[0]
+            });
           });
-        });
 
-        this.practitioners = practitioners;
-      });
+          this.practitioners = practitioners;
+        });
     },
     showError() {
       this.$refs.searchAlert.showMessage(
@@ -124,3 +136,8 @@ export default {
   }
 };
 </script>
+<style>
+tbody tr:nth-of-type(odd) {
+  background-color: #b3d4fc;
+}
+</style>
