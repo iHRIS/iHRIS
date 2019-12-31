@@ -6,6 +6,43 @@ const mixin = require("../mixin");
 const env = process.env.NODE_ENV || 'development';
 const config = require(__dirname + '/../config/config.json')[env];
 
+router.get("/all", async function (req, res, next) {
+  let previousUrl = null;
+  let url = URI(config.fhir.server).segment('fhir').segment("Practitioner");
+  let practitioners = [];
+
+  url.addQuery("_count", 100);
+  url = url.toString();
+
+  do {
+    previousUrl = url;
+
+    let response = await axios.get(url, {
+      params: {},
+      withCredentials: true,
+      auth: {
+        username: config.fhir.username,
+        password: config.fhir.password
+      }
+    });
+
+    if (response.data.link) {
+      for (var i in response.data.link) {
+        let link = response.data.link[i];
+
+        if (link.relation === "next") {
+          url = link.url;
+        }
+      }
+    }
+
+    practitioners = practitioners.concat(response.data.entry);
+  } while (url !== previousUrl);
+
+
+  res.status(201).json(practitioners);
+});
+
 router.get("/describe/page", function (req, res, next) {
   let practitionerPage = config.definitions.practitionerPage;
 
