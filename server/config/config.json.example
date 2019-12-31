@@ -14,6 +14,7 @@
       "password": "password"
     },
     "kibana": "https://www.elastic.co/products/kibana",
+    "mhero": "http://mhero.org/fhir/StructureDefinition",
     "structureDefinition": "http://server.com/fhir"
   },
   "test": {
@@ -31,6 +32,7 @@
       "password": "password"
     },
     "kibana": "https://www.elastic.co/products/kibana",
+    "mhero": "http://mhero.org/fhir/StructureDefinition",
     "structureDefinition": "http://server.com/fhir"
   },
   "production": {
@@ -48,6 +50,7 @@
       "password": "password"
     },
     "kibana": "https://www.elastic.co/products/kibana",
+    "mhero": "http://mhero.org/fhir/StructureDefinition",
     "structureDefinition": "http://server.com/fhir"
   }
 }
