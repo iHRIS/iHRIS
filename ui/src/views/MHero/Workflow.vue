@@ -38,6 +38,8 @@
       </v-card-title>
       <v-data-table
         v-model="selected"
+        loading
+        loading-text="Loading....Please wait"
         :headers="headers"
         :items="practitioners"
         :search="search"
@@ -89,6 +91,54 @@ export default {
 
       this.workflows = workflows;
     });
+
+    axios.get(config.backend + "/practitioner/all").then(response => {
+      let practitioners = [];
+
+      response.data.forEach(practitioner => {
+        practitioner = practitioner.resource;
+
+        let name = "";
+
+        if (practitioner.name) {
+          let practitionerName = null;
+
+          // first, try for an official name
+          for (var i in practitioner.name) {
+            if (practitioner.name[i].use === "official") {
+              practitionerName = practitioner.name[i];
+              break;
+            }
+          }
+
+          if (practitionerName === null) {
+            practitionerName = practitioner.name[i];
+          }
+
+          if (practitionerName.text) {
+            name = practitionerName.text;
+          } else {
+            if (practitionerName.given && practitionerName.given[0]) {
+              name += practitionerName.given[0] + " ";
+            }
+
+            if (practitionerName.family) {
+              name += practitionerName.family;
+            }
+
+            name = name.trim();
+          }
+        }
+
+        if (name) {
+          practitioners.push({
+            name: name
+          });
+        }
+      });
+
+      this.practitioners = practitioners;
+    });
   },
   data() {
     return {
@@ -104,96 +154,7 @@ export default {
         { text: "Organization", value: "organization" },
         { text: "Contact Group", value: "contactGroup" }
       ],
-      practitioners: [
-        {
-          name: "Grace Bah",
-          jurisdiction: "Port Loko",
-          facility: "Gbaama MCHP",
-          cadre: "Midwife",
-          organization: "MOHS",
-          contactGroup: "Midwives"
-        },
-        {
-          name: "Blessing Condeh",
-          jurisdiction: "Kono",
-          facility: "Upper Saama MCHP",
-          cadre: "Officer in Charge",
-          organization: "MOHS",
-          contactGroup: "OIC"
-        },
-        {
-          name: "Maria Tucker",
-          jurisdiction: "Bo",
-          facility: "Choithram Hospital",
-          cadre: "Surveillence Officer",
-          organization: "National Public Health Institute",
-          contactGroup: "Outbreaks & Alerts"
-        },
-        {
-          name: "Joseph Simbeye",
-          jurisdiction: "Bo",
-          facility: "Choithram Hospital",
-          cadre: "Officer in Charge",
-          organization: "Best Implementing Partner",
-          contactGroup: "OIC"
-        },
-        {
-          name: "Jonathan Onyishi",
-          jurisdiction: "Kono",
-          facility: "Yakaji Health Center",
-          cadre: "Midwife",
-          organization: "MOHS",
-          contactGroup: "Midwives"
-        },
-        {
-          name: "Ikechukwu Odoi",
-          jurisdiction: "Port Loko",
-          facility: "Port Loko Hospital",
-          cadre: "Pharmacist",
-          organization: "Best Implementing Partner",
-          contactGroup: "Pharmacists"
-        },
-        {
-          name: "Innocent Makor",
-          jurisdiction: "Kailahun",
-          facility: "Baoma Station Health Post",
-          cadre: "Nurse",
-          organization: "MOHS",
-          contactGroup: "Outbreaks & Alerts, Nurses"
-        },
-        {
-          name: "Mohammed Abioye",
-          jurisdiction: "Kenema",
-          facility: "Jembe Community Health Center",
-          cadre: "Midwife",
-          organization: "MOHS",
-          contactGroup: "Midwives"
-        },
-        {
-          name: "Zainab Khan",
-          jurisdiction: "Moyamba",
-          facility: "Moyamba Clinic North",
-          cadre: "Nurse",
-          organization: "FBO Clinic",
-          contactGroup: "Outbreaks & Alerts, Nurses"
-        },
-        {
-          name: "Yasir Danfakha",
-          jurisdiction: "Makeni",
-          facility: "Second National Reference Lab",
-          cadre: "Lab Tech",
-          organization: "National Reference Labs",
-          contactGroup: "Outbreaks & Alerts"
-        },
-        {
-          name: "Abdul Achebe",
-          jurisdiction: "Makeni",
-          facility: "Central Health Center",
-          cadre: "ART Manager",
-          organization: "Best Implementing Partner",
-          contactGroup: null
-        }
-      ],
+      practitioners: [],
       workflows: []
     };
   }
