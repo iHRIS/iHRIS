@@ -194,13 +194,7 @@ export default {
           contactGroup: null
         }
       ],
-      workflows: [
-        "Flu Epidemic",
-        "Emergency Closure",
-        "National Emergency",
-        "H1N1 Outbreak",
-        "Viral Epidemic"
-      ]
+      workflows: []
     };
   }
 };
