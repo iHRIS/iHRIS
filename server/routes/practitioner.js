@@ -39,7 +39,6 @@ router.get("/all", async function (req, res, next) {
     practitioners = practitioners.concat(response.data.entry);
   } while (url !== previousUrl);
 
-
   res.status(201).json(practitioners);
 });
 

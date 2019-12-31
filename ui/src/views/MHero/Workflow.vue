@@ -94,17 +94,11 @@ export default {
 
     axios.get(config.backend + "/practitioner/all").then(response => {
       let practitioners = [];
-      let first = true;
 
       response.data.forEach(practitioner => {
         practitioner = practitioner.resource;
 
         let name = "";
-
-        if (first) {
-          console.log(practitioner);
-          first = false;
-        }
 
         if (practitioner.name) {
           let practitionerName = null;
