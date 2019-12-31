@@ -8,28 +8,7 @@
         Workflow: {{ workflow }}
       </v-card-title>
       <v-card-text>
-        How often should notifications be sent?
-        <v-radio-group row v-model="frequency">
-          <v-radio label="Once" value="once"></v-radio>
-          <v-radio label="Recurring" value="recurring"></v-radio>
-        </v-radio-group>
-        <v-row v-if="recurring">
-          <v-col cols="1">
-            <v-subheader>Every</v-subheader>
-          </v-col>
-          <v-col cols="1">
-            <v-text-field
-              label="Frequency"
-            ></v-text-field>
-          </v-col>
-          <v-col cols="1">
-            <v-select
-              label="Period"
-              :items="items"
-            >
-            </v-select>
-          </v-col>
-        </v-row>
+        Frequency: {{ frequency }}
       </v-card-text>
     </v-card>
 
@@ -43,9 +22,10 @@
         item-key="name"
         class="elevation-1"
       ></v-data-table>
-      <v-card-actions class="primary">
+      <v-card-actions class="secondary">
+        <v-btn normal :to="{ name: 'mhero' }">Back</v-btn>
         <v-spacer></v-spacer>
-        <v-btn normal text v-on:click="send">Send Workflow</v-btn>
+        <v-btn normal v-on:click="send">Send Workflow</v-btn>
       </v-card-actions>
     </v-card>
   </v-container>
@@ -56,8 +36,8 @@ export default {
   data() {
     return {
       alert: false,
-      frequency: null,
       workflow: "Sample Workflow",
+      frequency: "Once",
       headers: [
         { text: 'Name', value: 'name'},
         { text: 'Jurisdiction', value: 'jurisdiction' },
@@ -66,7 +46,6 @@ export default {
         { text: 'Organization', value: 'organization' },
         { text: 'Contact Group', value: 'contactGroup' },
       ],
-      items: ["minutes", "hours", "days", "weeks"],
       practitioners: [
         {
           name: "Grace Bah",
@@ -105,11 +84,6 @@ export default {
         "Flu Epidemic", "Emergency Closure", "National Emergency", "H1N1 Outbreak", "Viral Epidemic"
       ]
     };
-  },
-  computed: {
-    recurring() {
-      return this.frequency === "recurring";
-    }
   },
   methods: {
     send() {

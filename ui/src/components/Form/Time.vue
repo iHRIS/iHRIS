@@ -7,6 +7,7 @@
     :required="required"
     :rules="[rules.required, rules.time]"
     :value="value"
+    :hint="hint"
   ></v-text-field>
   <v-combobox
     v-else
@@ -15,10 +16,12 @@
     :label="label"
     multiple
     persistent-hint
+    append-icon=""
     small-chips
     :rules="[rules.max, rules.required, rules.time]"
     :required="required"
     outline
+    :hint="hint"
   ></v-combobox>
 </template>
 
@@ -72,6 +75,6 @@ export default {
       return this["time"];
     }
   },
-  props: ["label", "max", "required", "value"]
+  props: ["label", "max", "required", "value", "hint"]
 };
 </script>

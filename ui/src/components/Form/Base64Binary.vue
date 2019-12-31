@@ -7,10 +7,12 @@
     :required="required"
     :rules="[rules.base64Binary, rules.required]"
     :value="value"
+    :hint="hint"
   ></v-text-field>
   <v-combobox
     v-else
     v-model="base64binary"
+    append-icon=""
     hide-selected
     :label="label"
     multiple
@@ -19,6 +21,7 @@
     :rules="[rules.base64Binary, rules.max, rules.required]"
     :required="required"
     outline
+    :hint="hint"
   ></v-combobox>
 </template>
 
@@ -72,6 +75,6 @@ export default {
       return this["base64binary"];
     }
   },
-  props: ["label", "max", "required", "value"]
+  props: ["label", "max", "required", "value", "hint"]
 };
 </script>

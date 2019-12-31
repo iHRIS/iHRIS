@@ -7,10 +7,12 @@
     :required="required"
     :rules="[rules.integer, rules.required]"
     :value="value"
+    :hint="hint"
   ></v-text-field>
   <v-combobox
     v-else
     v-model="integer"
+    append-icon=""
     hide-selected
     :label="label"
     multiple
@@ -19,6 +21,7 @@
     :rules="[rules.integer, rules.max, rules.required]"
     :required="required"
     outline
+    :hint="hint"
   ></v-combobox>
 </template>
 
@@ -37,7 +40,7 @@ export default {
           }
 
           for (var i = 0; i < value.length; i++) {
-            if (!Number.isInteger(value[i])) {
+            if (parseInt(value[i]) != value[i]) {
               return "Value must be an integer";
             }
           }
@@ -58,9 +61,11 @@ export default {
           return true;
         },
         required: value => {
-          return (
-            (this.required && value) || !this.required || "Field is required"
-          );
+          if (!this.required || value) {
+            return true;
+          }
+
+          return "Field is required";
         }
       }
     };
@@ -70,6 +75,6 @@ export default {
       return this["integer"];
     }
   },
-  props: ["label", "max", "required", "value"]
+  props: ["label", "max", "required", "value", "hint"]
 };
 </script>

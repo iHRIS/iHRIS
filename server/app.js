@@ -3,9 +3,12 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 
+var dashboardRouter = require('./routes/dashboard');
 var indexRouter = require('./routes/index');
+var mheroRouter = require('./routes/mhero');
 var practitionerRouter = require('./routes/practitioner');
 var relationshipRouter = require('./routes/relationship');
+var userRouter = require('./routes/user');
 
 var app = express();
 
@@ -22,7 +25,10 @@ app.use( function( req, res, next ) {
 })
 
 app.use('/', indexRouter);
+app.use('/dashboard', dashboardRouter);
+app.use('/mhero', mheroRouter);
 app.use('/practitioner', practitionerRouter);
 app.use('/relationship', relationshipRouter);
+app.use('/user', userRouter);
 
 module.exports = app;

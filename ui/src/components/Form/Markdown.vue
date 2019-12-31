@@ -7,11 +7,13 @@
     :required="required"
     :rules="[rules.format, rules.required]"
     :value="value"
+    :hint="hint"
   ></v-text-field>
   <v-combobox
     v-else
     v-model="markdown"
     hide-selected
+    append-icon=""
     :label="label"
     multiple
     persistent-hint
@@ -19,6 +21,7 @@
     :rules="[rules.format, rules.max, rules.required]"
     :required="required"
     outline
+    :hint="hint"
   ></v-combobox>
 </template>
 
@@ -72,6 +75,6 @@ export default {
       return this["markdown"];
     }
   },
-  props: ["label", "max", "required", "value"]
+  props: ["label", "max", "required", "value", "hint"]
 };
 </script>

@@ -3,24 +3,17 @@
     v-model="drawer"
     app
     clipped
-    class="primary darken-1 text-uppercase white--text font-weight-bold"
+    class="primary darken-1 white--text font-weight-bold"
   >
-    <v-list
-      nav
-      v-for="item in menu"
-      :key="item.title"
-    >
-      <v-list-group
-        v-if="item.submenu.length"
-        no-action
-      >
+    <v-list nav v-for="item in menu" :key="item.title">
+      <v-list-group v-if="item.submenu.length" no-action class="white--text">
         <template v-slot:activator>
           <v-list-item-icon>
             <v-icon class="white--text">{{ item.icon }}</v-icon>
           </v-list-item-icon>
 
           <v-list-item-content>
-            <v-list-item-title class="white--text">{{ item.title }}</v-list-item-title>
+            <v-list-item-title class="white--text" v-bind:class="{ 'text-uppercase': !item.doNotCapitalize }">{{ item.title }}</v-list-item-title>
           </v-list-item-content>
         </template>
 
@@ -31,23 +24,21 @@
           class="text-capitalize"
         >
           <v-list-item-content>
-            <v-list-item-title class="white--text" v-text="subitem.title"></v-list-item-title>
+            <v-list-item-title
+              class="white--text"
+              v-text="subitem.title"
+            ></v-list-item-title>
           </v-list-item-content>
         </v-list-item>
       </v-list-group>
 
-      <v-list-item
-        v-else
-        link
-        :to="item.action"
-        active-class="darken-2"
-      >
+      <v-list-item v-else link :to="item.action" active-class="darken-2">
         <v-list-item-icon>
           <v-icon class="white--text">{{ item.icon }}</v-icon>
         </v-list-item-icon>
 
         <v-list-item-content>
-          <v-list-item-title class="white--text">{{ item.title }}</v-list-item-title>
+          <v-list-item-title class="white--text" v-bind:class="{ 'text-uppercase': !item.doNotCapitalize }">{{ item.title }}</v-list-item-title>
         </v-list-item-content>
       </v-list-item>
     </v-list>
@@ -64,28 +55,39 @@ export default {
     });
   },
   data: function() {
+    const config = require("@/config/config.json");
+    let submenu = [];
+
+    if (config.samplePractitioner) {
+      submenu.push({
+        action: { path: "/people/view/" + config.samplePractitioner },
+        title: "Sample Practitioner"
+      });
+    }
+
+    submenu.push({
+      action: { name: "search-people" },
+      title: "Search people"
+    });
+
+    submenu.push({
+      action: { name: "add-people" },
+      title: "Add people"
+    });
+
     return {
       drawer: true,
       menu: [
         {
-          action: {name: "home"},
+          action: { name: "home" },
           icon: "dashboard",
           submenu: [],
           title: "Dashboard"
         },
         {
-          action: {name: "people"},
+          action: { name: "people" },
           icon: "people",
-          submenu: [
-            {
-              action: {name: "search-people"},
-              title: "Search people"
-            },
-            {
-              action: {name: "add-people"},
-              title: "Add people"
-            }
-          ],
+          submenu: submenu,
           title: "People"
         },
         {
@@ -98,10 +100,11 @@ export default {
             },
             {
               action: {name: "mhero-reports"},
-              title: "Reports"
+              title: "Run Reports"
             }
           ],
-          title: "mHero"
+          title: "mHero",
+          doNotCapitalize: true
         }
       ]
     };

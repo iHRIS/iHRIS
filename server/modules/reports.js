@@ -1,286 +1,486 @@
-const env = process.env.NODE_ENV || 'development'
-const config = require(__dirname + '/../config/config.json')[env]
-const request = require('request-promise-native')
+const env = process.env.NODE_ENV || 'development';
+const config = require(__dirname + '/../config/config.json')[env];
+const axios = require('axios');
+const async = require('async');
 const URI = require('urijs');
-const structureDefinition = require('./structureDefinition')
-const Fhir = require('fhir').Fhir
+const _ = require('lodash');
+const structureDefinition = require('./structureDefinition');
+const Fhir = require('fhir').Fhir;
 
-const fhir = new Fhir()
+const fhir = new Fhir();
 
-const flattenComplex = (extension) => {
-  let results = {}
+const flattenComplex = extension => {
+  let results = {};
   for (let ext of extension) {
-    let value = ""
+    let value = '';
     for (let key of Object.keys(ext)) {
-      if (key !== "url") {
-        value = ext[key]
+      if (key !== 'url') {
+        value = ext[key];
       }
     }
     if (results[ext.url]) {
       if (Array.isArray(results[ext.url])) {
-        results[ext.url].push(value)
+        results[ext.url].push(value);
       } else {
-        results[ext.url] = [results[ext.url], value]
+        results[ext.url] = [results[ext.url], value];
       }
     } else {
-      results[ext.url] = value
+      if (Array.isArray(value)) {
+        results[ext.url] = [value];
+      } else {
+        results[ext.url] = value;
+      }
     }
   }
-  return results
-}
+  return results;
+};
 
-const matchQuery = (query, obj) => {
-  if (query === "") return true
-  let queries = query.split('&')
-  var result = true
-  for (let qry of queries) {
-    let match = qry.split('=')
-    if (match.length !== 2) {
-      console.error("INVALID query: " + query)
+/**
+ *
+ * @param {relativeURL} reference //reference must be a relative url i.e Practioner/10
+ */
+const getResourceFromReference = (reference) => {
+  return new Promise((resolve) => {
+    let url = URI(config.fhir.server)
+      .segment('fhir')
+      .segment(reference)
+      .toString()
+    axios.get(url, {
+      withCredentials: true,
+      auth: {
+        username: config.fhir.username,
+        password: config.fhir.password,
+      },
+    }).then(response => {
+      console.log('sending back response');
+      return resolve(response.data)
+    }).catch((err) => {
+      console.log(err);
       return false
-    } else {
-      result = result && obj[match[0]] === match[1]
-    }
-  }
-  return result
-}
-
-const singleDeterminate = (val1, val2, func) => {
-  if (func === "") {
-    return true
-  } else if (func === 'max') {
-    if (val1 >= val2) return true
-  } else if (func === 'min') {
-    if (val1 <= val2) return true
-  }
-  return false
-}
-
-var promises = []
-
-let url = URI(config.fhir.server).segment('fhir').segment('Basic').segment('staff').toString()
-request({
-    uri: url,
-    json: true,
-    auth: {
-      username: config.fhir.username,
-      password: config.fhir.password
-    }
+    })
+  }).catch((err) => {
+    console.log(err);
   })
-  .then((relationship) => {
+}
 
-    let sd = relationship.subject.reference.substring(relationship.subject.reference.lastIndexOf('/'))
+/**
+ *
+ * @param {Array} extension
+ * @param {String} element
+ */
+const getElementValFromExtension = (extension, element) => {
+  return new Promise((resolve) => {
+    let elementValue = ''
+    async.each(extension, (ext, nxtExt) => {
+      let value
+      for (let key of Object.keys(ext)) {
+        if (key !== 'url') {
+          value = ext[key];
+        }
+      }
+      if (ext.url === element) {
+        elementValue = value
+      }
+      (async () => {
+        if (Array.isArray(value)) {
+          let val = await getElementValFromExtension(value, element)
+          if (val) {
+            elementValue = val
+          }
+          return nxtExt()
+        } else {
+          return nxtExt()
+        }
+      })();
+    }, () => {
+      resolve(elementValue)
+    })
+  }).catch((err) => {
+    console.log(err);
+  })
+}
 
+const getImmediateLinks = (orderedResources, links, callback) => {
+  if (orderedResources.length - 1 === links.length) {
+    return callback(orderedResources);
+  }
+  let promises = [];
+  for (let link of links) {
+    promises.push(
+      new Promise((resolve, reject) => {
+        link = flattenComplex(link.extension);
+        let parentOrdered = orderedResources.find(orderedResource => {
+          return orderedResource.name === link.linkTo;
+        });
+        let exists = orderedResources.find(orderedResource => {
+          return JSON.stringify(orderedResource) === JSON.stringify(link);
+        });
+        if (parentOrdered && !exists) {
+          orderedResources.push(link);
+        }
+        resolve();
+      })
+    );
+  }
+  Promise.all(promises).then(() => {
+    if (orderedResources.length - 1 !== links.length) {
+      getImmediateLinks(orderedResources, links, orderedResources => {
+        return callback(orderedResources);
+      });
+    } else {
+      return callback(orderedResources);
+    }
+  });
+};
+
+const getReportRelationship = callback => {
+  let url = URI(config.fhir.server)
+    .segment('fhir')
+    .segment('Basic');
+  url.addQuery('code', 'iHRISRelationship');
+  url = url.toString();
+  axios
+    .get(url, {
+      withCredentials: true,
+      auth: {
+        username: config.fhir.username,
+        password: config.fhir.password,
+      },
+    })
+    .then(relationships => {
+      return callback(false, relationships.data);
+    })
+    .catch(err => {
+      console.error(err);
+      return callback(err, false);
+    });
+};
+
+const createESIndex = (name, IDFields, callback) => {
+  console.info('Checking if index ' + name + ' exists');
+  let url = URI(config.elastic.server)
+    .segment(name)
+    .toString();
+  axios({
+      method: 'head',
+      url,
+      auth: {
+        username: config.elastic.username,
+        password: config.elastic.password,
+      },
+    })
+    .then(response => {
+      if (response.status === 200) {
+        console.info('Index ' + name + ' exist, not creating');
+        return callback(false);
+      } else {
+        return callback(true);
+      }
+    })
+    .catch(err => {
+      if (err.response && err.response.status && err.response.status === 404) {
+        console.info('Index not found, creating index ' + name);
+        let mappings = {
+          mappings: {
+            properties: {},
+          },
+        };
+        for (let IDField of IDFields) {
+          mappings.mappings.properties[IDField] = {};
+          mappings.mappings.properties[IDField].type = 'keyword';
+        }
+        axios({
+            method: 'put',
+            url,
+            data: mappings,
+            auth: {
+              username: config.elastic.username,
+              password: config.elastic.password,
+            },
+          })
+          .then(response => {
+            if (response.status !== 200) {
+              console.error('Something went wrong and index was not created');
+              console.error(response.data);
+              return callback(true);
+            } else {
+              console.info('Index ' + name + ' created successfully');
+              return callback(false);
+            }
+          })
+          .catch(err => {
+            console.error(err);
+            return callback(true);
+          });
+      } else {
+        console.log(err);
+      }
+    });
+};
+
+getReportRelationship((err, relationships) => {
+  if (err) {
+    return;
+  }
+  if (!relationships.entry || !Array.isArray(relationships.entry)) {
+    console.error('invalid resource returned');
+    return;
+  }
+  relationships.entry.forEach(relationship => {
+    console.info('processing relationship ID ' + relationship.resource.id);
+    relationship = relationship.resource;
+    let sd = relationship.subject.reference.substring(
+      relationship.subject.reference.lastIndexOf('/')
+    );
     structureDefinition(sd, (err, subject) => {
       if (err) {
-        console.error(err)
-        return
+        console.error(err);
+        return;
       }
-      //console.log(JSON.stringify(relationship,null,2))
-      let details = relationship.extension.find(ext => ext.url === 'http://ihris.org/fhir/StructureDefinition/iHRISReportDetails')
-      let links = relationship.extension.filter(ext => ext.url === 'http://ihris.org/fhir/StructureDefinition/iHRISReportLink')
-
-      //console.log( details )
-
-      let reportDetails = flattenComplex(details.extension)
-      let url = URI(config.fhir.server).segment('fhir').segment(subject._type)
-      url.addQuery('_count', 10000)
-      url.addQuery('_total', 'accurate')
-      url.addQuery('_profile', subject._url)
-      url.addQuery('_profile', subject._url)
-      url = url.toString()
-      url += '&' + reportDetails.query
-      let uri = url //config.fhir.server + subject._type + '?_count=10000&_total=accurate&_profile=' + subject._url + '&' + reportDetails.query
-      console.log(uri)
-
-      //let elastic = []
-      let reLinks = []
-
-      for (let link of links) {
-        let linkInfo = flattenComplex(link.extension)
-        reLinks.push(linkInfo)
-        //console.log(linkInfo)
-        let url = URI(config.fhir.server).segment('fhir').segment('StructureDefinition').segment(linkInfo.resource).toString()
-        promises.push(request({
-          uri: url,
-          json: true,
-          auth: {
-            username: config.fhir.username,
-            password: config.fhir.password
-          }
-        }))
-      }
-
-      Promise.all(promises).then((results) => {
-        let mainResource = {}
-        let incResource = {}
-        for (let idx in results) {
-          let res = results[idx]
-          let linkInfo = reLinks[idx]
-          //console.log(res.kind)
-          if (res.kind === 'complex-type' && linkInfo.linkTo === undefined) {
-            element = linkInfo.linkElement.substring(subject._type.length + 1)
-            mainResource[element] = linkInfo
-          } else {
-            incResource[linkInfo.name] = linkInfo
+      let details = relationship.extension.find(ext => ext.url === 'http://ihris.org/fhir/StructureDefinition/iHRISReportDetails');
+      let links = relationship.extension.filter(ext => ext.url === 'http://ihris.org/fhir/StructureDefinition/iHRISReportLink');
+      let reportDetails = flattenComplex(details.extension);
+      let orderedResources = [];
+      let IDFields = [];
+      reportDetails.resource = subject._type;
+      orderedResources.push(reportDetails);
+      IDFields.push(reportDetails.name);
+      for (let linkIndex1 in links) {
+        let link1 = links[linkIndex1];
+        let flattenedLink1 = flattenComplex(link1.extension);
+        IDFields.push(flattenedLink1.name);
+        for (let link2 of links) {
+          let flattenedLink2 = flattenComplex(link2.extension);
+          if (flattenedLink2.linkTo === flattenedLink1.name && !flattenedLink2.linkElement.startsWith(flattenedLink2.resource + '.')) {
+            let linkElement = flattenedLink2.linkElement.split('.').pop();
+            links[linkIndex1].extension.push({
+              url: 'http://ihris.org/fhir/StructureDefinition/iHRISReportElement',
+              extension: [{
+                  url: 'label',
+                  valueString: linkElement,
+                },
+                {
+                  url: 'name',
+                  valueString: linkElement,
+                },
+                {
+                  url: 'autoGenerated',
+                  valueBoolean: true
+                }
+              ],
+            });
           }
         }
-        //console.log(mainResource)
-
-        request({
-          uri,
-          json: true,
-          auth: {
-            username: config.fhir.username,
-            password: config.fhir.password
-          }
-        }).then((results) => {
-          const matches = results.entry.filter(entry => entry.search.mode === 'match')
-          const includes = results.entry.filter(entry => entry.search.mode === 'include')
-          for (let entry of matches) {
-            //console.log( entry.resource )
-            let record = {
-              id: entry.resource.id
-            }
-            for (let ele of reportDetails.element) {
-              record[ele] = entry.resource[ele]
-            }
-
-
-            // manual role
-            // Need to convert this to read from resource, but getting something working for now.
-            const refId = entry.resource.resourceType + "/" + entry.resource.id
-            const roleRes = includes.find(inc => inc.resource.resourceType === "PractitionerRole" && inc.resource.practitioner.reference === refId && inc.resource.active === true && inc.resource.period.end === undefined)
-
-            if (roleRes) {
-              let role = {}
-
-              if (!Array.isArray(incResource["role"].element)) {
-                incResource["role"].element = [incResource["role"].element]
-              }
-              for (let sub of incResource["role"].element) {
-                role[sub] = fhir.evaluate(roleRes.resource, sub)
-              }
-              record["role"] = role
-
-              const locId = fhir.evaluate(roleRes.resource, "location.reference").substring(incResource["location"].resource.length + 1)
-              const locRes = includes.find(inc => inc.resource.resourceType === "Location" && inc.resource.id === locId)
-              if (locRes) {
-                let loc = {}
-                if (!Array.isArray(incResource["location"].element)) {
-                  incResource["location"].element = [incResource["location"].element]
-                }
-                for (let sub of incResource["location"].element) {
-                  loc[sub] = fhir.evaluate(locRes.resource, sub)
-                }
-                record["role"]["location"] = loc
-              }
-
-              const posId = fhir.evaluate(roleRes.resource, "extension.where(url='http://ihris.org/fhir/StructureDefinition/iHRISPractitionerRoleDetails').extension.where(url='position').valueReference.reference")[0].substring(incResource["position"].resource.length + 1)
-              const posRes = includes.find(inc => inc.resource.resourceType === "Basic" && inc.resource.id === posId)
-              if (posRes) {
-                let pos = {}
-                if (!Array.isArray(incResource["position"].element)) {
-                  incResource["position"].element = [incResource["position"].element]
-                }
-                for (let sub of incResource["position"].element) {
-                  pos['title'] = fhir.evaluate(posRes.resource, sub)[0]
-                }
-                record["role"]["position"] = pos
-              }
-
-            }
-            // end of need to convert
-
-
-            for (let ele of Object.keys(mainResource)) {
-
-              let matched = []
-              let matchedIdx = 0
-              for (complex of entry.resource[ele]) {
-                if (matchQuery(mainResource[ele].query, complex)) {
-                  let subEle = {}
-                  for (let sub of mainResource[ele].element) {
-                    subEle[sub] = fhir.evaluate(complex, sub)
+      }
+      createESIndex(reportDetails.name, IDFields, err => {
+        if (err) {
+          console.error('Stop creating report due to error in creating index');
+          return;
+        }
+        getImmediateLinks(orderedResources, links, () => {
+          async.eachSeries(orderedResources, (orderedResource, nxtResource) => {
+            let url = URI(config.fhir.server)
+              .segment('fhir')
+              .segment(orderedResource.resource)
+              .segment('_history');
+            // url.addQuery('_count', 500);
+            url = url.toString();
+            let resourceData = [];
+            console.info(`Getting data for resource ${orderedResource.name}`);
+            async.whilst(
+              callback => {
+                return callback(null, url != false);
+              },
+              callback => {
+                axios.get(url, {
+                  withCredentials: true,
+                  auth: {
+                    username: config.fhir.username,
+                    password: config.fhir.password,
+                  },
+                }).then(response => {
+                  url = false;
+                  const next = response.data.link.find(
+                    link => link.relation === 'next'
+                  );
+                  if (next) {
+                    url = next.url;
+                    url = url.replace('http://localhost:8080', 'http://scratchpad.ihris.org')
                   }
-                  if (mainResource[ele].uniqueElement) {
-                    let uniques = mainResource[ele].uniqueElement.split(',')
-                    let idx = ""
-                    for (let unique of uniques) {
-                      idx += complex[unique]
+                  if (response.data.total > 0 && response.data.entry && response.data.entry.length > 0) {
+                    resourceData = resourceData.concat(response.data.entry);
+                  }
+                  // url = false;
+                  return callback(null, url);
+                }).catch(err => {
+                  console.log(err);
+                });
+              }, () => {
+                console.log('Done fetching data for resource ' + orderedResource.resource);
+                console.log('Writting resource data for resource ' + orderedResource.resource + ' into elastic search');
+                let processedRecords = []
+                let count = 1
+                async.eachSeries(resourceData, (data, next) => {
+                  console.log('processing ' + count + '/' + resourceData.length + ' records of resource ' + orderedResource.resource);
+                  count++
+                  let id = data.resource.resourceType + '/' + data.resource.id;
+                  let processed = processedRecords.find((record) => {
+                    return record === id
+                  })
+                  if (processed) {
+                    return next();
+                  } else {
+                    processedRecords.push(id)
+                  }
+                  let queries = [];
+                  // just in case there are multiple queries
+                  if (orderedResource.query) {
+                    queries = orderedResource.query.split('&');
+                  }
+                  for (let query of queries) {
+                    let limits = query.split('=');
+                    let limitParameters = limits[0];
+                    let limitValue = limits[1];
+                    let resourceValue = fhir.evaluate(
+                      data.resource,
+                      limitParameters
+                    );
+                    if (JSON.stringify(resourceValue) != limitValue) {
+                      return next()
                     }
-                    subEle.__idx = idx
-                  } else {
-                    subEle.__idx = matchedIdx++
                   }
-                  matched.push(subEle)
-                }
-              }
-
-              if (mainResource[ele].multiple) {
-                for (let match of matched) {
-                  let idx = match.__idx
-                  delete(match.__idx)
-                  record[ele + idx] = match
-                }
-              } else {
-                let single
-                for (let match of matched) {
-                  if (!single) {
-                    single = match
-                  } else {
-                    if (mainResource[ele].singleDeterminateFunction) {
-                      if (!singleDeterminate(single.__idx, match.__idx, mainResource[ele].singleDeterminateFunction)) {
-                        single = match
+                  let record = {};
+                  (async () => {
+                    for (let element of orderedResource["http://ihris.org/fhir/StructureDefinition/iHRISReportElement"]) {
+                      let fieldLabel
+                      let fieldName
+                      let fieldAutogenerated = false
+                      for (let el of element) {
+                        let value = '';
+                        for (let key of Object.keys(el)) {
+                          if (key !== 'url') {
+                            value = el[key];
+                          }
+                        }
+                        if (el.url === "label") {
+                          let fleldChars = value.split(' ')
+                          //if label has space then format it
+                          if (fleldChars.length > 1) {
+                            fieldLabel = value.toLowerCase().split(' ').map(word => word.replace(word[0], word[0].toUpperCase())).join('');
+                          } else {
+                            fieldLabel = value
+                          }
+                        } else if (el.url === "name") {
+                          fieldName = value
+                        } else if (el.url === "autoGenerated") {
+                          fieldAutogenerated = value
+                        }
                       }
-                    } else {
-                      break
+                      let displayData = fhir.evaluate(data.resource, fieldName);
+                      let value
+                      if (!displayData && data.resource.extension) {
+                        value = await getElementValFromExtension(data.resource.extension, fieldName)
+                      } else if (Array.isArray(displayData)) {
+                        value = displayData.pop();
+                      } else {
+                        value = displayData;
+                      }
+                      if (value) {
+                        if (typeof value == 'object') {
+                          if (value.reference && fieldAutogenerated) {
+                            value = value.reference
+                          } else if (value.reference && !fieldAutogenerated) {
+                            let referencedResource = await getResourceFromReference(value.reference);
+                            if (referencedResource) {
+                              value = referencedResource.name
+                            }
+                          } else {
+                            value = JSON.stringify(value)
+                          }
+                        }
+                        record[fieldLabel] = value
+                      }
                     }
-                  }
-                }
-                delete(single.__idx)
-                record[ele] = single
-                break
+                    record[orderedResource.name] = id
+                    let match = {};
+                    if (orderedResource.hasOwnProperty('linkElement') && orderedResource.linkElement.startsWith(orderedResource.resource + '.')) {
+                      //remove resource name from link element i.e if PractionerRole.practioner then remove PractitionerRole. and remain with practioner
+                      let linkElement = orderedResource.linkElement.replace(orderedResource.resource + '.', '');
+                      let linkTo = fhir.evaluate(data.resource, linkElement + '.reference');
+                      match[orderedResource.linkTo] = linkTo;
+                    } else if (orderedResource.hasOwnProperty('linkElement') && !orderedResource.linkElement.startsWith(orderedResource.resource + '.')) {
+                      let linkElement = orderedResource.linkElement.split('.').pop();
+                      match[linkElement] = data.resource.resourceType + '/' + data.resource.id;
+                    } else {
+                      match[orderedResource.name] = data.resource.resourceType + '/' + data.resource.id;
+                    }
+                    let ctx = '';
+                    for (let field in record) {
+                      ctx += 'ctx._source.' + field + "='" + record[field] + "';";
+                    }
+
+                    let url = URI(config.elastic.server)
+                      .segment(reportDetails.name)
+                      .segment('_update_by_query')
+                      .toString();
+                    let body = {
+                      script: {
+                        lang: 'painless',
+                        source: ctx
+                      },
+                      query: {
+                        match,
+                      },
+                    };
+                    axios({
+                      method: 'post',
+                      url,
+                      data: body,
+                      auth: {
+                        username: config.elastic.username,
+                        password: config.elastic.password,
+                      },
+                    }).then(response => {
+                      // if nothing was updated and its from the primary (top) resource then create as new
+                      if (response.data.updated == 0 && !orderedResource.hasOwnProperty('linkElement')) {
+                        console.info('No record with id ' + data.resource.id + ' found on elastic search, creating new');
+                        let url = URI(config.elastic.server)
+                          .segment(reportDetails.name)
+                          .segment('_doc')
+                          .toString();
+                        axios({
+                            method: 'post',
+                            url,
+                            data: record,
+                            auth: {
+                              username: config.elastic.username,
+                              password: config.elastic.password,
+                            },
+                          })
+                          .then(response => {
+                            return next();
+                          })
+                          .catch(err => {
+                            console.error(err);
+                            return next();
+                          });
+                      } else {
+                        return next();
+                      }
+                    }).catch(err => {
+                      console.log(err.error);
+                      return next();
+                    });
+                  })();
+                }, () => {
+                  console.log('Done Writting resource data for resource ' + orderedResource.name + ' into elastic search');
+                  return nxtResource()
+                });
               }
-
-
-            }
-            let url = URI(config.elastic.server).segment('staff').segment('_doc').segment(record.id).toString()
-            request({
-              uri: url,
-              method: "POST",
-              json: record,
-              auth: {
-                username: config.elastic.username,
-                password: config.elastic.password
-              }
-            }).then((results) => {
-              console.log(" saved " + record.id)
-              console.log(results)
-            }).catch((err) => {
-              console.error(err)
-            })
-            //elastic.push( record )
-          }
-          //console.log( JSON.stringify(elastic,null,2) )
-        }).catch((err) => {
-          console.error(err)
-        })
-
-
-      }).catch((err) => {
-        console.error(err)
-      })
-
-
-
-
-      //console.log(reportDetails)
-      //console.log( JSON.stringify(links,null,2) )
-      //console.log( flattenComplex( links[0].extension ) )
-    })
-
-
-  }).catch((err) => {
-    console.error(err)
-  })
+            );
+          });
+        });
+      });
+    });
+  });
+});

@@ -7,6 +7,7 @@
     :required="required"
     :rules="[rules.required]"
     :value="value"
+    :hint="hint"
   ></v-text-field>
   <v-combobox
     v-else
@@ -14,11 +15,13 @@
     hide-selected
     :label="label"
     multiple
+    append-icon=""
     persistent-hint
     small-chips
     :rules="[rules.max, rules.required]"
     :required="required"
     outline
+    :hint="hint"
   ></v-combobox>
 </template>
 
@@ -57,6 +60,6 @@ export default {
       return this["uuid"];
     }
   },
-  props: ["label", "max", "required", "value"]
+  props: ["label", "max", "required", "value", "hint"]
 };
 </script>

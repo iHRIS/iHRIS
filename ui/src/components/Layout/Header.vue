@@ -9,7 +9,7 @@
 
     <v-spacer></v-spacer>
 
-    <v-toolbar-items v-for="(item, index) in accountMenu">
+    <v-toolbar-items v-for="item in accountMenu" v-bind:key="item.link">
       <v-btn text :to="item.link">{{ item.title }}</v-btn>
     </v-toolbar-items>
   </v-app-bar>
@@ -17,8 +17,21 @@
 
 <script>
 import { serverBus } from "../../main";
+import { store } from "@/store.js";
 
 export default {
+  computed: {
+    accountMenu() {
+      if (store.state.authentication.username) {
+        return [
+          { title: "Account", link: { name: "account" } },
+          { title: "Log out", link: { name: "logout" } }
+        ];
+      }
+
+      return [{ title: "Log in", link: { name: "login" } }];
+    }
+  },
   created() {
     const config = require("@/config/config.json");
 
@@ -26,31 +39,7 @@ export default {
     this.site = config.site;
   },
   data() {
-    let accountMenu = [{
-      title: "Account",
-      link: {name: "account"}
-    }];
-
-    if (this.user) {
-      accountMenu.push({
-        title: "Change password",
-        link: {name: "change-password"}
-      });
-
-      accountMenu.push({
-        title: "Log out",
-        link: {name: "logout"}
-      });
-    } else {
-      accountMenu.push({
-        title: "Log in",
-        link: {name: "login"}
-      });
-    }
-
     return {
-      accountMenu: accountMenu,
-      config: [],
       icon: "",
       site: ""
     };

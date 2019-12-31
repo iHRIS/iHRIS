@@ -66,7 +66,8 @@ export default {
 
         axios
           .get(
-            this.config.backend + "/practitioner/describe/definition/" +
+            this.config.backend +
+              "/practitioner/describe/definition/" +
               resource.replace(/StructureDefinition\//, "")
           )
           .then(definitionResponse => {
@@ -93,7 +94,8 @@ export default {
             // need to get the base definition
             axios
               .get(
-                this.config.backend + "/practitioner/describe/definition/" +
+                this.config.backend +
+                  "/practitioner/describe/definition/" +
                   definitionResponse.data.name
               )
               .then(structureDefinitionResponse => {
@@ -112,7 +114,8 @@ export default {
                     if (!promises[baseField]) {
                       promises[baseField] = axios
                         .get(
-                          this.config.backend + "/practitioner/describe/definition/" +
+                          this.config.backend +
+                            "/practitioner/describe/definition/" +
                             matchingField.type[0].code
                         )
                         .then(subdefinitionResponse => {

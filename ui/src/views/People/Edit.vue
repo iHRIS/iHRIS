@@ -2,15 +2,14 @@
   <v-container>
     <ProfileHeader
       :practitioner="practitioner"
+      :edit="true"
       ref="profileHeader"
+      v-on:changePractitioner="changePractitioner"
     />
 
     <v-layout>
       <v-flex xs6 class="pr-3">
-        <div
-          v-for="(element, index) in this.practitioner"
-          v-bind:key="'edit-' + index"
-        >
+        <div v-for="(element, index) in display" v-bind:key="'edit-' + index">
           <DetailsCard
             v-if="index != 'id' && index != 'resourceType' && index != 'active'"
             :data="element"
@@ -50,11 +49,15 @@
 
 <script>
 import axios from "axios";
+import _ from "lodash";
 
 import AddSectionsMenu from "@/components/People/AddSectionsMenu.vue";
+import Capitalize from "@/mixins/Capitalize.js";
 import DetailsCard from "@/components/People/DetailsCard.vue";
 import DynamicForm from "@/components/Form/DynamicForm.vue";
 import ProfileHeader from "@/components/People/ProfileHeader.vue";
+import SectionsToDisplay from "@/mixins/SectionsToDisplay.js";
+import StructureDefinition from "@/mixins/StructureDefinition.js";
 import Vue from "vue";
 
 export default {
@@ -64,24 +67,15 @@ export default {
     DynamicForm,
     ProfileHeader
   },
-  created() {
-    this.config = require("@/config/config.json");
-
-    axios
-      .get("/practitioner/view/" + this.$route.params.id)
-      .then(practitioner => {
-        if (practitioner.status === 201) {
-          this.practitioner = practitioner.data.entry[0].resource;
-        }
-      });
-  },
   data() {
     return {
       config: null,
       details: false,
       detailFields: {},
+      detailPath: null,
+      detailRaw: null,
       detailTitle: null,
-      practitioner: {}
+      expansionProfile: null
     };
   },
   methods: {
@@ -92,6 +86,9 @@ export default {
 
       this.$refs.profileHeader.reset();
     },
+    changePractitioner(practitioner) {
+      this.practitioner = practitioner;
+    },
     deleteSubsectionData(field, index) {
       let component = this;
 
@@ -101,21 +98,23 @@ export default {
         Vue.delete(this.practitioner, field);
       }
 
-      axios.put(this.config.backend + "/practitioner/edit", this.practitioner).then(response => {
-        if (response.status == 201) {
-          if (component.$refs["subsection" + field][0]) {
-            component.$refs["subsection" + field][0].showAlert(
-              "Item deleted successfully!",
-              "success"
+      axios
+        .post(this.config.backend + "/practitioner/edit", this.practitioner)
+        .then(response => {
+          if (response.status == 201) {
+            if (component.$refs["subsection" + field][0]) {
+              component.$refs["subsection" + field][0].showAlert(
+                "Item deleted successfully!",
+                "success"
+              );
+            }
+          } else {
+            component.$refs["subsection-" + field][0].showAlert(
+              "There was an error deleting this data.",
+              "error"
             );
           }
-        } else {
-          component.$refs["subsection-" + field][0].showAlert(
-            "There was an error deleting this data.",
-            "error"
-          );
-        }
-      });
+        });
     },
     saveSubsectionData(data, field, index) {
       let component = this;
@@ -132,21 +131,23 @@ export default {
         practitioner[field] = data;
       }
 
-      axios.put(this.config.backend + "/practitioner/edit", practitioner).then(response => {
-        component.practitioner = practitioner;
+      axios
+        .post(this.config.backend + "/practitioner/edit", practitioner)
+        .then(response => {
+          component.practitioner = practitioner;
 
-        if (response.status == 201) {
-          component.$refs["subsection" + field][0].showAlert(
-            "Data changed successfully!",
-            "success"
-          );
-        } else {
-          component.$refs["subsection-" + field][0].showAlert(
-            "There was an error saving this data.",
-            "error"
-          );
-        }
-      });
+          if (response.status == 201) {
+            component.$refs["subsection" + field][0].showAlert(
+              "Data changed successfully!",
+              "success"
+            );
+          } else {
+            component.$refs["subsection-" + field][0].showAlert(
+              "There was an error saving this data.",
+              "error"
+            );
+          }
+        });
     },
     getProfilePicture(path) {
       return path;
@@ -158,32 +159,106 @@ export default {
       let practitioner = this.practitioner;
       let title = this.detailTitle;
 
-      practitioner[this.detailTitle] = input;
+      if (title == "qualification") {
+        let qualification = {};
 
-      axios.put(this.config.backend + "/practitioner/edit", practitioner).then(response => {
-        if (response.status == 201) {
-          component.cancelDetailsForm();
-          component.$refs.profileHeader.changeMessage(
-            title + " added successfully!",
-            "success"
-          );
-        } else {
-          component.$refs.profileHeader.changeMessage(
-            "There was an error saving this data.",
-            "error"
-          );
+        for (var key in this.detailFields) {
+          let field = this.detailFields[key];
+
+          if (input[field.name]) {
+            _.set(
+              qualification,
+              field.path.replace("qualification.", ""),
+              input[field.name]
+            );
+          }
         }
-      });
+
+        if (!practitioner.qualification) {
+          practitioner.qualification = [];
+        }
+
+        practitioner.qualification.push(qualification);
+      } else if (this.detailPath && this.detailPath == "extension") {
+        let extension = [];
+        let newExtension = {
+          url: this.extensionProfile
+        };
+        let valueString = null;
+
+        if (practitioner.extension) {
+          extension = practitioner.extension;
+        }
+
+        for (var fieldKey in this.detailFields) {
+          let field = this.detailFields[fieldKey];
+          valueString = "value" + this.capitalize(field.parentType);
+
+          if (this.primitiveTypes.indexOf(field.parentType) >= 0) {
+            for (var inputKey in input) {
+              newExtension[valueString] = input[inputKey];
+              break;
+            }
+          } else {
+            newExtension[valueString] = input;
+          }
+        }
+
+        extension.push(newExtension);
+
+        practitioner.extension = extension;
+      } else if (this.detailPath) {
+        _.set(practitioner, this.detailPath, input);
+      } else {
+        practitioner = { ...practitioner, ...input };
+      }
+
+      axios
+        .post(this.config.backend + "/practitioner/edit", practitioner)
+        .then(response => {
+          if (response.status == 201) {
+            component.cancelDetailsForm();
+            component.$refs.profileHeader.changeMessage(
+              this.capitalize(title) + " added successfully!",
+              "success"
+            );
+          } else {
+            component.$refs.profileHeader.changeMessage(
+              "There was an error saving this data.",
+              "error"
+            );
+          }
+        });
     },
-    toggleForm(fields, title) {
+    toggleForm(fields, title, data) {
+      if (Object.keys(fields).length === 1) {
+        for (var key in fields) {
+          if (fields[key].name === "value") {
+            fields[key].labelOverride = title;
+          }
+        }
+      }
+
       this.details = true;
       this.detailFields = fields;
+      this.detailPath = null;
       this.detailTitle = title;
+      this.detailRaw = data;
+      this.extensionProfile = null;
+
+      if (data && data.path) {
+        this.detailPath = data.path.replace("Practitioner.", "");
+      }
+
+      if (data && data.type[0].code == "Extension") {
+        this.extensionProfile = data.type[0].profile[0];
+      }
 
       this.$refs.profileHeader.reset();
       this.$refs.detailsForm.changeFields(fields);
     }
   },
+  mixins: [Capitalize, SectionsToDisplay, StructureDefinition],
   name: "AddSections"
 };
 </script>

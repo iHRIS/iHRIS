@@ -7,10 +7,12 @@
     :required="required"
     :rules="[rules.decimal, rules.required]"
     :value="value"
+    :hint="hint"
   ></v-text-field>
   <v-combobox
     v-else
     v-model="decimal"
+    append-icon=""
     hide-selected
     :label="label"
     multiple
@@ -19,6 +21,7 @@
     :rules="[rules.decimal, rules.max, rules.required]"
     :required="required"
     outline
+    :hint="hint"
   ></v-combobox>
 </template>
 
@@ -78,6 +81,6 @@ export default {
       return this["decimal"];
     }
   },
-  props: ["label", "max", "required", "value"]
+  props: ["label", "max", "required", "value", "hint"]
 };
 </script>

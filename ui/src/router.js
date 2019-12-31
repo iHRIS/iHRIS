@@ -1,15 +1,17 @@
 import Vue from "vue";
 import Router from "vue-router";
+import { store } from "./store.js";
 
 Vue.use(Router);
 
-export default new Router({
+let router = new Router({
   mode: "history",
   base: process.env.BASE_URL,
   routes: [
     {
       path: "/",
       name: "home",
+      props: true,
       component: () => import(/* webpackChunkName: "home" */ "./views/Home.vue")
     },
     {
@@ -22,7 +24,13 @@ export default new Router({
       path: "/admin/add-user",
       name: "admin-add-user",
       component: () =>
-        import(/* webpackChunkName: "account" */ "./views/Admin/AddUser.vue")
+        import(/* webpackChunkName: "adminAddUser" */ "./views/Admin/AddUser.vue")
+    },
+    {
+      path: "/admin/users",
+      name: "admin-users",
+      component: () =>
+        import(/* webpackChunkName: "adminsUsers" */ "./views/Admin/Users.vue")
     },
     {
       path: "/change-password",
@@ -122,3 +130,26 @@ export default new Router({
     }
   ]
 });
+
+router.beforeEach((to, from, next) => {
+  if (!store.state.authentication.username) {
+    const config = require("@/config/config.json");
+
+    if (
+      to.path == "/" ||
+      to.path == "/login" ||
+      to.path == "/logout" ||
+      config.demo
+    ) {
+      next();
+    } else {
+      next({
+        path: "/login"
+      });
+    }
+  } else {
+    next();
+  }
+});
+
+export default router;

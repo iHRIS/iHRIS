@@ -7,11 +7,13 @@
     :required="required"
     :rules="[rules.required]"
     :value="value"
+    :hint="hint"
   ></v-text-field>
   <v-combobox
     v-else
     v-model="uri"
     hide-selected
+    append-icon=""
     :label="label"
     multiple
     persistent-hint
@@ -19,6 +21,7 @@
     :rules="[rules.max, rules.required]"
     :required="required"
     outline
+    :hint="hint"
   ></v-combobox>
 </template>
 
@@ -57,6 +60,6 @@ export default {
       return this["uri"];
     }
   },
-  props: ["label", "max", "required", "value"]
+  props: ["label", "max", "required", "value", "hint"]
 };
 </script>

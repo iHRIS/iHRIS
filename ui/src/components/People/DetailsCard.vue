@@ -1,6 +1,9 @@
 <template>
   <v-card class="mb-5">
-    <v-card-title class="display-1">
+    <v-card-title
+      class="display-1 SectionTitle"
+      @click="toogleSectionDetailDisplay"
+    >
       {{ this.name | sentenceCase }}
       <v-spacer />
       <v-btn
@@ -25,81 +28,103 @@
         <v-icon>delete</v-icon>
       </v-btn>
     </v-card-title>
-    <v-card-text
-      v-for="(value, name) in data"
-      v-show="!editing"
-      v-bind:key="name"
-    >
-      <div v-if="Array.isArray(value) || typeof value === 'object'">
-        <div v-if="Number.isInteger(name)">
-          <v-layout row align-baseline>
-            <v-flex xs4 class="primary--text text-uppercase">
-              {{ value[subheader] }}
-            </v-flex>
-            <v-spacer />
-            <v-btn
-              fab
-              class="primary"
-              v-show="editButton || edit"
-              v-if="data[0]"
-              v-on:click="toggleForm(name)"
-            >
-              <v-icon>edit</v-icon>
-            </v-btn>
+    <transition name="fade">
+      <v-card-text
+        v-if="Array.isArray(data)"
+        v-show="!editing && showSectionDetail"
+      >
+        <div v-for="(value, name) in data" v-bind:key="name">
+          <div v-if="Number.isInteger(name)">
+            <v-layout row align-baseline>
+              <v-flex xs4 class="primary--text text-uppercase pl-5">
+                {{ value[subheader] }}
+              </v-flex>
 
-            <v-btn
-              fab
-              class="error"
-              v-show="editButton || edit"
-              v-if="data[0]"
-              v-on:click="deleteItem(name)"
-            >
-              <v-icon>delete</v-icon>
-            </v-btn>
-          </v-layout>
-          <div v-for="(data, fieldIndex) in value" v-bind:key="fieldIndex">
-            <div v-if="data">
-              <v-layout row>
-                <v-flex xs4 class="font-weight-bold">
-                  {{ fieldIndex | sentenceCase }}
-                </v-flex>
-                <v-flex xs8>{{ data | separateByCommas }}</v-flex>
-              </v-layout>
+              <v-spacer />
 
-              <v-divider class="pb-3" />
-            </div>
+              <v-btn
+                fab
+                class="primary"
+                v-show="editButton || edit"
+                v-if="data[0]"
+                v-on:click="toggleForm(name)"
+              >
+                <v-icon>edit</v-icon>
+              </v-btn>
+
+              <v-btn
+                fab
+                class="error"
+                v-show="editButton || edit"
+                v-if="data[0]"
+                v-on:click="deleteItem(name)"
+              >
+                <v-icon>delete</v-icon>
+              </v-btn>
+            </v-layout>
+
+            <v-simple-table>
+              <tbody>
+                <tr v-for="(data, fieldIndex) in value" v-bind:key="fieldIndex">
+                  <td :width="headerWidth" class="font-weight-bold">
+                    {{ fieldIndex | sentenceCase }}
+                  </td>
+                  <td>{{ data | separateByCommas }}</td>
+                </tr>
+              </tbody>
+            </v-simple-table>
+
+            <v-divider class="pb-3" />
+          </div>
+          <div v-else>
+            <v-layout row>
+              <v-flex xs4 class="font-weight-bold">
+                {{ name | sentenceCase }}
+              </v-flex>
+              <v-flex xs8 v-for="(data, index) in value" v-bind:key="index">
+                {{ data | separateByCommas }}
+              </v-flex>
+            </v-layout>
+
+            <v-divider class="pb-3" />
           </div>
         </div>
-        <div v-else>
-          <v-layout row>
-            <v-flex xs4 class="font-weight-bold">
-              {{ name | sentenceCase }}
-            </v-flex>
-            <v-flex xs8 v-for="(data, index) in value" v-bind:key="index">
-              {{ data | separateByCommas}}
-            </v-flex>
-          </v-layout>
+      </v-card-text>
 
-          <v-divider class="pb-3" />
-        </div>
-      </div>
-      <div v-else>
-        <v-layout row>
-          <v-flex xs4 class="font-weight-bold">
-            {{ name | sentenceCase }}
-          </v-flex>
-          <v-flex xs8>{{ value }}</v-flex>
-        </v-layout>
+      <v-card-text v-show="!editing" v-else-if="typeof data !== 'object'">
+        <v-simple-table>
+          <tbody>
+            <tr>
+              <td :width="headerWidth" class="font-weight-bold">
+                {{ this.name | sentenceCase }}
+              </td>
+              <td>{{ data }}</td>
+            </tr>
+          </tbody>
+        </v-simple-table>
+      </v-card-text>
+
+      <v-card-text v-show="!editing" v-else>
+        <v-simple-table>
+          <tbody>
+            <tr v-for="(value, name) in data" v-bind:key="name">
+              <td :width="headerWidth" class="font-weight-bold">
+                {{ name | sentenceCase }}
+              </td>
+              <td>{{ value }}</td>
+            </tr>
+          </tbody>
+        </v-simple-table>
 
         <v-divider class="pb-3" />
-      </div>
-    </v-card-text>
-
-    <v-card-text v-show="allowMultiple && showMultiple && edit">
+      </v-card-text>
+    </transition>
+    <v-card-text
+      v-show="allowMultiple && showMultiple && edit && showSectionDetail"
+    >
       <v-btn
         class="font-weight-bold primary--text text-uppercase"
         text
-        flat
         depressed
         @click.stop="showAddForm"
       >
@@ -123,7 +148,6 @@
       />
     </v-card-text>
   </v-card>
-
 </template>
 
 <script>
@@ -194,21 +218,21 @@ export default {
         }
 
         for (var key in response) {
-          if (response.hasOwnProperty(key) && key == component.name) {
+          if (key == component.name) {
             response[key].fields.then(element => {
               for (var subkey in element) {
-                if (element.hasOwnProperty(subkey)) {
-                  data.push({
-                    id: element[subkey].name,
-                    description: element[subkey].short,
-                    max: element[subkey].max,
-                    name: element[subkey].name,
-                    options: element[subkey].options,
-                    required: element[subkey].required,
-                    type: element[subkey].type,
-                    value: fields[element[subkey].name] ? fields[element[subkey].name] : null
-                  });
-                }
+                data.push({
+                  id: element[subkey].name,
+                  description: element[subkey].short,
+                  max: element[subkey].max,
+                  name: element[subkey].name,
+                  options: element[subkey].options,
+                  required: element[subkey].required,
+                  type: element[subkey].type,
+                  value: fields[element[subkey].name]
+                    ? fields[element[subkey].name]
+                    : null
+                });
               }
             });
           }
@@ -222,6 +246,7 @@ export default {
   },
   data() {
     return {
+      showSectionDetail: true,
       alert: {
         message: null,
         show: false,
@@ -233,6 +258,7 @@ export default {
       editButton: false,
       editing: false,
       fields: [],
+      headerWidth: "30%",
       showMultiple: true,
       subheader: null
     };
@@ -244,11 +270,7 @@ export default {
       this.showMultiple = true;
     },
     deleteItem(index) {
-      this.$emit(
-        "deleteData",
-        this.name,
-        index
-      );
+      this.$emit("deleteData", this.name, index);
     },
     showAddForm() {
       let fields = this.fields;
@@ -299,6 +321,9 @@ export default {
       this.editing = true;
       this.editButton = false;
       this.showMultiple = false;
+    },
+    toogleSectionDetailDisplay() {
+      this.showSectionDetail = !this.showSectionDetail;
     }
   },
   mixins: [StructureDefinition],
@@ -315,3 +340,23 @@ export default {
   }
 };
 </script>
+<style scoped>
+.SectionTitle {
+  cursor: pointer;
+}
+.error {
+  margin-left: 5px;
+}
+.fade-enter {
+  opacity: 0;
+}
+.fade-enter-active {
+  transition: opacity 0.3s;
+}
+.fade-leave {
+}
+.fade-leave-active {
+  transition: opacity 0.3s;
+  opacity: 0;
+}
+</style>

@@ -8,7 +8,7 @@ describe("Feedback.vue", () => {
     });
 
     expect(wrapper.isVueInstance()).toBeTruthy();
-    expect(wrapper.findAll('v-container-stub')).toHaveLength(1);
-    expect(wrapper.find('v-container-stub').text()).toBe('Feedback');
+    expect(wrapper.findAll("v-container-stub")).toHaveLength(1);
+    expect(wrapper.find("v-container-stub").text()).toBe("Feedback");
   });
 });
