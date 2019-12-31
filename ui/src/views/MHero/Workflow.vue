@@ -87,8 +87,6 @@ export default {
         });
       });
 
-      console.log(workflows);
-
       this.workflows = workflows;
     });
   },
