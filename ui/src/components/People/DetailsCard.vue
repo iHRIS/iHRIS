@@ -217,7 +217,7 @@ export default {
             section.id.endsWith("." + this.name)
           ) {
             this.showForm(this.name, section.type[0].code).then(fields => {
-              this.$refs.dynamicEditingForm.changeFields(fields);
+              this.fields = fields;
             });
 
             break;
@@ -256,10 +256,6 @@ export default {
     },
     showAddForm() {
       let fields = this.fields;
-
-      fields.forEach(field => {
-        field.value = null;
-      });
 
       this.$refs.dynamicEditingForm.changeFields(fields);
 
