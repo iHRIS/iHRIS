@@ -152,6 +152,7 @@
 
 <script>
 import DynamicForm from "@/components/Form/DynamicForm.vue";
+import Practitioner from "@/mixins/Practitioner.js";
 import StructureDefinition from "@/mixins/StructureDefinition.js";
 
 export default {
@@ -205,42 +206,23 @@ export default {
 
     if (this.edit) {
       this.editButton = true;
-      let component = this;
 
-      this.describe("Practitioner").then(response => {
-        let data = [];
-        let fields = [];
+      this.getSections().then(sections => {
+        // find the matching section, that will be the fields
+        for (var i in sections) {
+          let section = sections[i];
 
-        if (component.data[0]) {
-          fields = component.data[0];
-        } else {
-          fields = component.data;
-        }
-
-        for (var key in response) {
-          if (key == component.name) {
-            response[key].fields.then(element => {
-              for (var subkey in element) {
-                data.push({
-                  id: element[subkey].name,
-                  description: element[subkey].short,
-                  max: element[subkey].max,
-                  name: element[subkey].name,
-                  options: element[subkey].options,
-                  required: element[subkey].required,
-                  type: element[subkey].type,
-                  value: fields[element[subkey].name]
-                    ? fields[element[subkey].name]
-                    : null
-                });
-              }
+          if (
+            section.id === this.name ||
+            section.id.endsWith("." + this.name)
+          ) {
+            this.showForm(this.name, section.type[0].code).then(fields => {
+              this.$refs.dynamicEditingForm.changeFields(fields);
             });
+
+            break;
           }
         }
-
-        this.fields = data;
-        this.$refs.dynamicEditingForm.changeFields(data);
-        this.dynamicFormKey++;
       });
     }
   },
@@ -326,7 +308,7 @@ export default {
       this.showSectionDetail = !this.showSectionDetail;
     }
   },
-  mixins: [StructureDefinition],
+  mixins: [Practitioner, StructureDefinition],
   props: {
     data: {},
     edit: {

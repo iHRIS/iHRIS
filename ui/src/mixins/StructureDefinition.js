@@ -345,6 +345,26 @@ export default {
       }
 
       return fields;
+    },
+    showForm(title, definition, data) {
+      if (this.primitiveTypes.includes(definition)) {
+        let fields = [];
+        fields.push(this.formatField(data, definition));
+        this.$emit("toggleForm", fields, title);
+        return fields;
+      } else {
+        return this.describe(definition, "Practitioner", title).then(fields => {
+          // sometimes we don't want all the fields so we limit them here
+          if (title === "photo") {
+            let customFields = {};
+            customFields["Attachment.url"] = fields.fields["Attachment.url"];
+            fields.fields = customFields;
+          }
+
+          this.$emit("toggleForm", fields.fields, title, data);
+          return fields.fields;
+        });
+      }
     }
   }
 };
