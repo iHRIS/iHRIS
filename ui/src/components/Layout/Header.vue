@@ -9,7 +9,7 @@
 
     <v-spacer></v-spacer>
 
-    <v-toolbar-items v-for="item in accountMenu" v-bind:key="item.link">
+    <v-toolbar-items v-for="item in accountMenu" v-bind:key="item.title">
       <v-btn text :to="item.link">{{ item.title }}</v-btn>
     </v-toolbar-items>
   </v-app-bar>
