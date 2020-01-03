@@ -42,6 +42,29 @@ export default {
     this.getSections().then(fields => {
       fields.forEach(field => {
         let label = null;
+        let id = null;
+
+        // if we have data set for this field, then don't render it
+        if (field.id.includes("extension:")) {
+          id = field.id.slice(field.id.lastIndexOf(":") + 1);
+        } else {
+          id = field.id.slice(field.id.lastIndexOf(".") + 1);
+        }
+
+        // data is set, don't continue with this field
+        if (this.data[id]) {
+          return;
+        } else if (field.type[0].code && field.type[0].code === "Extension") {
+          let profile = field.type[0].profile[0];
+
+          for (var i in this.data.extension) {
+            let extension = this.data.extension[i];
+
+            if (extension.url === profile) {
+              return;
+            }
+          }
+        }
 
         // if a label field exists, use that
         // otherwise, go with the last text before the period
