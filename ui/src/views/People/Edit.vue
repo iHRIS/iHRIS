@@ -134,8 +134,6 @@ export default {
       axios
         .post(this.config.backend + "/practitioner/edit", practitioner)
         .then(response => {
-          component.practitioner = practitioner;
-
           if (response.status == 201) {
             component.$refs["subsection" + field][0].showAlert(
               "Data changed successfully!",
@@ -212,6 +210,8 @@ export default {
       } else {
         practitioner = { ...practitioner, ...input };
       }
+
+      this.practitioner = practitioner;
 
       axios
         .post(this.config.backend + "/practitioner/edit", practitioner)
