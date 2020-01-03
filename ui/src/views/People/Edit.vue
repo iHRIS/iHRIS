@@ -85,8 +85,6 @@ export default {
       this.detailTitle = null;
 
       this.$refs.profileHeader.reset();
-
-      console.log(this.practitioner);
     },
     changePractitioner(practitioner) {
       this.practitioner = practitioner;
