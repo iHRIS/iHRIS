@@ -351,7 +351,7 @@ export default {
         let fields = [];
         fields.push(this.formatField(data, definition));
         this.$emit("toggleForm", fields, title);
-        return fields;
+        return Promise.resolve(fields);
       } else {
         return this.describe(definition, "Practitioner", title).then(fields => {
           // sometimes we don't want all the fields so we limit them here
