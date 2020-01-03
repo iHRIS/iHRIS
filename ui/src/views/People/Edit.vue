@@ -151,7 +151,6 @@ export default {
       return path;
     },
     submitDetailsForm() {
-      let component = this;
       let input = this.$refs.detailsForm.getInputs();
 
       let practitioner = this.practitioner;
@@ -217,13 +216,13 @@ export default {
         .post(this.config.backend + "/practitioner/edit", practitioner)
         .then(response => {
           if (response.status == 201) {
-            component.cancelDetailsForm();
-            component.$refs.profileHeader.changeMessage(
+            this.cancelDetailsForm();
+            this.$refs.profileHeader.changeMessage(
               this.capitalize(title) + " added successfully!",
               "success"
             );
           } else {
-            component.$refs.profileHeader.changeMessage(
+            this.$refs.profileHeader.changeMessage(
               "There was an error saving this data.",
               "error"
             );
