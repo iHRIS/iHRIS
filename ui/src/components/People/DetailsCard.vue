@@ -160,12 +160,6 @@ export default {
     DynamicForm
   },
   created() {
-    let numEntries = parseInt(this.data.length);
-
-    if (!isNaN(numEntries)) {
-      this.allowMultiple = true;
-    }
-
     switch (this.name) {
       case "address":
         this.subheader = "use";
@@ -216,7 +210,11 @@ export default {
             section.id === this.name ||
             section.id.endsWith("." + this.name)
           ) {
-            this.showForm(this.name, section.type[0].code).then(fields => {
+            if (section.max === "*") {
+              this.showMultiple = true;
+            }
+
+            this.showForm(this.name, section.type[0].code, section).then(fields => {
               this.fields = fields;
             });
 

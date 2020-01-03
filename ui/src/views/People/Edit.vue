@@ -74,8 +74,7 @@ export default {
       detailFields: {},
       detailPath: null,
       detailRaw: null,
-      detailTitle: null,
-      expansionProfile: null
+      detailTitle: null
     };
   },
   methods: {
