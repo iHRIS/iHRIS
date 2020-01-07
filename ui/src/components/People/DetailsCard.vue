@@ -211,7 +211,7 @@ export default {
             section.id.endsWith("." + this.name)
           ) {
             if (section.max === "*") {
-              this.showMultiple = true;
+              this.allowMultiple = true;
             }
 
             this.showForm(this.name, section.type[0].code, section).then(fields => {
