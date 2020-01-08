@@ -2,7 +2,7 @@
   <v-form ref="form" v-if="data">
     <div v-for="field in data" v-bind:key="name + '-' + field.id">
       <Base64Binary
-        v-if="field.type == 'base64binary'"
+        v-if="field.type == 'base64Binary'"
         :label="field.label"
         :max="field.max"
         :required="field.required"
