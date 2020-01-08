@@ -268,7 +268,7 @@ export default {
       this.showMultiple = true;
     },
     deleteItem(index) {
-      this.$emit("deleteData", this.name, index);
+      this.$emit("deleteData", this.name, index, this.profile);
     },
     showAddForm() {
       let fields = this.fields;

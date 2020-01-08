@@ -88,11 +88,24 @@ export default {
     changePractitioner(practitioner) {
       this.practitioner = practitioner;
     },
-    deleteSubsectionData(field, index) {
-      let component = this;
-
+    deleteSubsectionData(field, index, profile) {
       if (typeof index !== "undefined" && this.practitioner[field].length > 1) {
-        this.practitioner[field] = this.practitioner[field].splice(index, 1);
+        this.practitioner[field].splice(index, 1);
+      } else if (profile !== null) {
+        for (var key in this.practitioner.extension) {
+          let extension = this.practitioner.extension[key];
+
+          if (extension.url === profile) {
+            for (var i in extension) {
+              if (i !== "url") {
+                this.practitioner.extension.splice(i, 1);
+                break;
+              }
+            }
+
+            break;
+          }
+        }
       } else {
         Vue.delete(this.practitioner, field);
       }
@@ -101,14 +114,14 @@ export default {
         .post(this.config.backend + "/practitioner/edit", this.practitioner)
         .then(response => {
           if (response.status == 201) {
-            if (component.$refs["subsection" + field][0]) {
-              component.$refs["subsection" + field][0].showAlert(
+            if (this.$refs["subsection" + field][0]) {
+              this.$refs["subsection" + field][0].showAlert(
                 "Item deleted successfully!",
                 "success"
               );
             }
           } else {
-            component.$refs["subsection-" + field][0].showAlert(
+            this.$refs["subsection-" + field][0].showAlert(
               "There was an error deleting this data.",
               "error"
             );
