@@ -115,8 +115,7 @@ export default {
           }
         });
     },
-    saveSubsectionData(data, field, index) {
-      let component = this;
+    saveSubsectionData(data, field, index, profile) {
       let practitioner = this.practitioner;
 
       // this is necessary for subsections that can have multiple entries
@@ -126,6 +125,21 @@ export default {
         // this is a special case where a new entry is being
         // added to a multiple field
         practitioner[field].push(data);
+      } else if (profile !== null) {
+        for (var key in practitioner.extension) {
+          let extension = practitioner.extension[key];
+
+          if (extension.url === profile) {
+            for (var i in extension) {
+              if (i !== "url") {
+                practitioner.extension[key][i] = data.value;
+                break;
+              }
+            }
+
+            break;
+          }
+        }
       } else {
         practitioner[field] = data;
       }
@@ -134,12 +148,12 @@ export default {
         .post(this.config.backend + "/practitioner/edit", practitioner)
         .then(response => {
           if (response.status == 201) {
-            component.$refs["subsection" + field][0].showAlert(
+            this.$refs["subsection" + field][0].showAlert(
               "Data changed successfully!",
               "success"
             );
           } else {
-            component.$refs["subsection-" + field][0].showAlert(
+            this.$refs["subsection-" + field][0].showAlert(
               "There was an error saving this data.",
               "error"
             );

@@ -216,7 +216,20 @@ export default {
               this.allowMultiple = true;
             }
 
-            this.showForm(this.name, section.type[0].code, section).then(
+            let structureDefinition = section.type[0].code;
+
+            if (
+              structureDefinition === "Extension" &&
+              section.type[0].profile &&
+              section.type[0].profile[0]
+            ) {
+              let profile = section.type[0].profile[0];
+              this.profile = profile;
+
+              structureDefinition = profile.slice(profile.lastIndexOf("/") + 1);
+            }
+
+            this.showForm(this.name, structureDefinition, section).then(
               fields => {
                 this.fields = fields;
               }
@@ -243,6 +256,7 @@ export default {
       editing: false,
       fields: [],
       headerWidth: "30%",
+      profile: null,
       showMultiple: true,
       subheader: null
     };
@@ -282,7 +296,8 @@ export default {
         "saveData",
         this.$refs.dynamicEditingForm.getInputs(),
         this.$refs.dynamicEditingForm.getName(),
-        this.currentIndex
+        this.currentIndex,
+        this.profile
       );
 
       this.cancel();
