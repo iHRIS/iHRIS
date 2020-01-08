@@ -2,7 +2,7 @@
   <v-card class="mb-5">
     <v-card-title
       class="display-1 SectionTitle"
-      @click="toogleSectionDetailDisplay"
+      @click="toggleSectionDetailDisplay"
     >
       {{ this.name | sentenceCase }}
       <v-spacer />
@@ -15,6 +15,7 @@
         "
         v-show="editButton || edit"
         v-if="!data[0]"
+        v-on:click="toggleForm(name)"
       >
         <v-icon>edit</v-icon>
       </v-btn>
@@ -208,15 +209,18 @@ export default {
 
           if (
             section.id === this.name ||
-            section.id.endsWith("." + this.name)
+            section.id.endsWith("." + this.name) ||
+            section.label === this.name
           ) {
             if (section.max === "*") {
               this.allowMultiple = true;
             }
 
-            this.showForm(this.name, section.type[0].code, section).then(fields => {
-              this.fields = fields;
-            });
+            this.showForm(this.name, section.type[0].code, section).then(
+              fields => {
+                this.fields = fields;
+              }
+            );
 
             break;
           }
@@ -285,10 +289,22 @@ export default {
     },
     toggleForm(index) {
       let fields = this.fields;
+      let key = null;
 
-      fields.forEach(field => {
-        field.value = this.data[index][field.id];
-      });
+      if (Object.keys(fields).length === 1) {
+        for (key in fields) {
+          if (fields[key].name === "value") {
+            fields[key].labelOverride = this.name;
+          }
+
+          fields[key].value = this.data;
+        }
+      } else {
+        for (key in fields) {
+          let field = fields[key];
+          fields[key].value = this.data[index][field.title];
+        }
+      }
 
       this.$refs.dynamicEditingForm.changeFields(fields);
 
@@ -298,7 +314,7 @@ export default {
       this.editButton = false;
       this.showMultiple = false;
     },
-    toogleSectionDetailDisplay() {
+    toggleSectionDetailDisplay() {
       this.showSectionDetail = !this.showSectionDetail;
     }
   },
