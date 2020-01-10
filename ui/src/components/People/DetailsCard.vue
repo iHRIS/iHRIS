@@ -13,7 +13,7 @@
           editing = true;
           editButton = false;
         "
-        v-show="editButton || edit"
+        v-show="editButton && edit"
         v-if="!Array.isArray(data)"
         v-on:click="toggleForm(name)"
       >
@@ -22,7 +22,7 @@
       <v-btn
         fab
         class="error"
-        v-show="editButton || edit"
+        v-show="editButton && edit"
         v-if="!Array.isArray(data)"
         v-on:click="deleteItem()"
       >
@@ -46,7 +46,7 @@
               <v-btn
                 fab
                 class="primary"
-                v-show="editButton || edit"
+                v-show="editButton && edit"
                 v-if="Array.isArray(data)"
                 v-on:click="toggleForm(name)"
               >
@@ -56,7 +56,7 @@
               <v-btn
                 fab
                 class="error"
-                v-show="editButton || edit"
+                v-show="editButton && edit"
                 v-if="Array.isArray(data)"
                 v-on:click="deleteItem(name)"
               >
@@ -200,8 +200,6 @@ export default {
     }
 
     if (this.edit) {
-      this.editButton = true;
-
       this.getSections().then(sections => {
         // find the matching section, that will be the fields
         for (var i in sections) {
@@ -231,6 +229,7 @@ export default {
 
             this.showForm(this.name, structureDefinition, section).then(
               fields => {
+                this.editButton = true;
                 this.fields = fields;
               }
             );
