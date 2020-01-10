@@ -14,7 +14,7 @@
           editButton = false;
         "
         v-show="editButton || edit"
-        v-if="!data[0]"
+        v-if="!Array.isArray(data)"
         v-on:click="toggleForm(name)"
       >
         <v-icon>edit</v-icon>
@@ -23,7 +23,7 @@
         fab
         class="error"
         v-show="editButton || edit"
-        v-if="!data[0]"
+        v-if="!Array.isArray(data)"
         v-on:click="deleteItem()"
       >
         <v-icon>delete</v-icon>
@@ -47,7 +47,7 @@
                 fab
                 class="primary"
                 v-show="editButton || edit"
-                v-if="data[0]"
+                v-if="Array.isArray(data)"
                 v-on:click="toggleForm(name)"
               >
                 <v-icon>edit</v-icon>
@@ -57,7 +57,7 @@
                 fab
                 class="error"
                 v-show="editButton || edit"
-                v-if="data[0]"
+                v-if="Array.isArray(data)"
                 v-on:click="deleteItem(name)"
               >
                 <v-icon>delete</v-icon>
@@ -292,13 +292,14 @@ export default {
       this.alert.show = true;
     },
     submit() {
-      this.$emit(
-        "saveData",
-        this.$refs.dynamicEditingForm.getInputs(),
-        this.$refs.dynamicEditingForm.getName(),
-        this.currentIndex,
-        this.profile
-      );
+      let inputs = this.$refs.dynamicEditingForm.getInputs();
+      let name = this.$refs.dynamicEditingForm.getName();
+
+      if (Object.keys(inputs).length === 1 && inputs[name]) {
+        inputs = inputs[name];
+      }
+
+      this.$emit("saveData", inputs, name, this.currentIndex, this.profile);
 
       this.cancel();
     },
