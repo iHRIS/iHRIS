@@ -157,6 +157,8 @@ export default {
         practitioner[field] = data;
       }
 
+      this.practitioner = practitioner;
+
       axios
         .post(this.config.backend + "/practitioner/edit", practitioner)
         .then(response => {

@@ -38,9 +38,12 @@ import Practitioner from "@/mixins/Practitioner.js";
 import StructureDefinition from "@/mixins/StructureDefinition.js";
 
 export default {
-  created() {
-    this.getSections().then(fields => {
-      fields.forEach(field => {
+  computed: {
+    menu() {
+      let menu = {};
+
+      for (var index in this.sections) {
+        let field = this.sections[index];
         let label = null;
         let id = null;
 
@@ -53,7 +56,7 @@ export default {
 
         // data is set, don't continue with this field
         if (this.data[id]) {
-          return;
+          continue;
         } else if (field.type[0].code && field.type[0].code === "Extension") {
           let profile = field.type[0].profile[0];
 
@@ -74,27 +77,39 @@ export default {
           label = field.id.slice(field.id.lastIndexOf(".") + 1);
         }
 
-        this.$set(this.menu, field.id, {});
-        this.menu[field.id].title = label;
-        this.menu[field.id].index = field.id;
-        this.menu[field.id].raw = field;
+        menu[field.id] = {};
+        menu[field.id].title = label;
+        menu[field.id].index = field.id;
+        menu[field.id].raw = field;
+        menu[field.id].subtitle = field.description;
 
         // set the type, used to show the correct fields
         if (field.type[0].code && field.type[0].code !== "Extension") {
-          this.menu[field.id].type = field.type[0].code;
+          menu[field.id].type = field.type[0].code;
         } else if (
           field.type[0].code === "Extension" &&
           field.type[0].profile[0]
         ) {
           let type = field.type[0].profile[0];
-          this.menu[field.id].type = type.slice(type.lastIndexOf("/") + 1);
+          menu[field.id].type = type.slice(type.lastIndexOf("/") + 1);
         }
+      }
+
+      return menu;
+    }
+  },
+  created() {
+    this.sections = [];
+
+    this.getSections().then(fields => {
+      fields.forEach(field => {
+        this.$set(this.sections, field.id, field);
 
         // get the subtitle. if a description value is set, use that
         if (field.description) {
-          this.menu[field.id].subtitle = field.description;
+          this.sections[field.id].description = field.description;
         } else if (field.definition) {
-          this.menu[field.id].subtitle = field.definition;
+          this.sections[field.id].description = field.definition;
         } else if (field.path == "Practitioner.extension") {
           // if this is an extension, load the structure definition and get the description from that
           let type = field.type[0].profile[0];
@@ -109,7 +124,8 @@ export default {
             .then(extension => {
               // use the description field for the subtitle
               if (extension.data.description) {
-                this.menu[field.id].subtitle = extension.data.description;
+                this.sections[field.id].description =
+                  extension.data.description;
               }
             });
         }
@@ -119,7 +135,7 @@ export default {
   data() {
     return {
       fields: [],
-      menu: {}
+      sections: []
     };
   },
   mixins: [Practitioner, StructureDefinition],
