@@ -31,48 +31,8 @@ export default {
     Alert,
     DynamicForm
   },
-  beforeCreate()
-  {
-     //this.config = require("@/config/config.json");
-     //this.fields=tempFlields;
-     
-  },
-  /*
-  created()
-  {
-    var tempFlields=[];
-    tempFlields.push(
-      {
-        id: "username",
-        max: 1,
-        name: "username",
-        required: true,
-        type: "string"
-      }
-    );
-    tempFlields.push(
-      {
-        id: "password",
-        max: 1,
-        name: "password",
-        required: true,
-        type: "password",
-        matching: false
-      }
-    );
-    tempFlields.push(
-      {
-        id: "passwordRepeat",
-        max: 1,
-        name: "password",
-        required: true,
-        type: "password",
-        matching: true
-      }
-    );
-    this.fields=tempFlields;
-  },*/
   created () {
+    NProgress.start();
     this.config = require("@/config/config.json");
     var tempFlields=[{
               id: "username",
@@ -100,13 +60,9 @@ export default {
     axios
       .get(this.config.backend + "/user/describe/definition/iHRISUserDetails")
       .then(structureDefinitionResponse => {
-        //console.log(structureDefinitionResponse);
         if(structureDefinitionResponse!=null)
         {
-          //console.log("*********************Entered!!!*********************")
-          //console.log(tempFlields);
-
-          //console.log(structureDefinitionResponse);
+          
           this.isLoaded=true;
           var fiedlName=structureDefinitionResponse.data.id.split(":")[1].split(".")[0];
           var _type=structureDefinitionResponse.data.type[0].code;
@@ -124,18 +80,14 @@ export default {
             options:items,
             label:fiedlName
           };
-          //console.log("**************************************");
-          //console.log(oField);
+          
           tempFlields.push(oField);
-          //this.fields.pu
-          //console.log(this.fields);
           this.fields=tempFlields;
-          //console.log(this.fields);
-          //return Promise.resolve();
         }  
-
+        NProgress.done();
       })
       .catch(error => {
+        NProgress.done();
         this.$refs.addUserAlert.changeMessage(
             "Data not saved. " + error,
             "error"

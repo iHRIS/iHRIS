@@ -5,7 +5,7 @@
     <v-card >
       <v-card-title>Users</v-card-title>
       <v-card-text>
-        <v-data-table :headers="headers" :items="users" :items-per-page="10">
+        <v-data-table :headers="headers" :items="users" :items-per-page="10" loading="'false'" loading-text="Loading... Please wait">
           <template v-slot:item.roles="{ item }" >
             <div v-if="item.roles!=null && item.roles=='Admin'">
               <v-chip  label :color="adminColor" small class="ma-0" text-color="white" close @click:close="showDeleteModal(item.username)" >
@@ -234,7 +234,7 @@ export default {
       this.openRemoveRoleDialog=false;
       if(this.editedUserName!=null)
       {
-        //console.log("****************** "+this.editedUserName+" *************************");
+        
         var oUserToProcess=this.getUserDetailsByUserName(this.editedUserName);
         var bundle=this.getCorrespondingFhirResourceWithoutRole(oUserToProcess);
         axios
@@ -405,13 +405,13 @@ export default {
     cancelRemoveRole(){
       this.openRemoveRoleDialog=false;
       this.editedUserName=null;
-      //console.log("****************** "+this.editedUserName+" *************************");
+      
     },
     cancelAddRole(){
       this.openAddRoleDialog=false;
       this.editedUserName=null;
       this.selectedRole=null;
-      //console.log("****************** "+this.editedUserName+" *************************");
+      
     },
     getUserDetailsByUserName(username){
       var selectedUser=null;
@@ -513,7 +513,7 @@ export default {
     },
     diplayValue()
     {
-      //console.log("************ "+this.selectedRole+" *******");
+      
     }
   }
 };

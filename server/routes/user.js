@@ -13,7 +13,6 @@ const crypto = require("crypto");
 router.post("/add", function (req, res, next) {
   let data = req.body;
   let now = new Date();
-  console.log(data);
   data.salt = crypto.randomBytes(16).toString('hex');
   data.password = crypto.pbkdf2Sync(
     data.password,
@@ -96,18 +95,16 @@ router.get("/list", function (req, res, next) {
  * Get the iHRISUserDetails structure definition metadata
  */
 router.get("/describe/definition/:definition", function (req, res, next) {
-  //console.log("Entered!!!!");
+  
   mixin.getDefinition("StructureDefinition", req.params.definition, (err, definition) => {
     if (err) {
       res.status(400).json(err);
     } else {
       response=definition;
       rolesDefinition=null;
-      //console.log(definition);
       response.differential.element.forEach(extension=>{
         if(extension.id=="Extension.extension:roles.value[x]")
         {
-          //console.log(extension);
           rolesDefinition=extension;
           //break;
         }
