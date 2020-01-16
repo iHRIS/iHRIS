@@ -49,7 +49,6 @@
 
 <script>
 import axios from "axios";
-import _ from "lodash";
 
 import AddSectionsMenu from "@/components/People/AddSectionsMenu.vue";
 import Capitalize from "@/mixins/Capitalize.js";
@@ -72,8 +71,10 @@ export default {
       config: null,
       details: false,
       detailFields: {},
+
       detailPath: null,
       detailRaw: null,
+
       detailTitle: null
     };
   },
@@ -184,6 +185,7 @@ export default {
       let practitioner = this.practitioner;
       let title = this.detailTitle;
 
+
       if (title == "qualification") {
         let qualification = {};
 
@@ -238,6 +240,9 @@ export default {
         practitioner = { ...practitioner, ...input };
       }
 
+      practitioner[this.detailTitle] = input;
+
+
       this.practitioner = practitioner;
 
       axios
@@ -257,6 +262,7 @@ export default {
           }
         });
     },
+
     toggleForm(fields, title, data) {
       if (Object.keys(fields).length === 1) {
         for (var key in fields) {
@@ -266,20 +272,11 @@ export default {
         }
       }
 
+    toggleForm(fields, title) {
+
       this.details = true;
       this.detailFields = fields;
-      this.detailPath = null;
       this.detailTitle = title;
-      this.detailRaw = data;
-      this.extensionProfile = null;
-
-      if (data && data.path) {
-        this.detailPath = data.path.replace("Practitioner.", "");
-      }
-
-      if (data && data.type[0].code == "Extension") {
-        this.extensionProfile = data.type[0].profile[0];
-      }
 
       this.$refs.profileHeader.reset();
       this.$refs.detailsForm.changeFields(fields);

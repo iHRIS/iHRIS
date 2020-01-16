@@ -10,15 +10,13 @@
         :hint="field.short"
         :value="field.value"
       />
-
       <Boolean
         v-if="field.type == 'boolean'"
         :label="field.label"
         ref="active"
         :hint="field.short"
-        :value="field.value"
+        :value="isActivePractitioner==true?true:this.value"
       />
-
       <Canonical
         v-if="field.type == 'canonical'"
         :label="field.label"
@@ -37,7 +35,7 @@
         :codes="field.options"
         :ref="field.name"
         :hint="field.short"
-        :value="field.value"
+        :value="selectedUseNameCode!=''? selectedUseNameCode:field.value"
       />
 
       <Date
@@ -235,6 +233,7 @@ import Uuid from "@/components/Form/Uuid.vue";
 export default {
   created() {
     this.changeFields(this.fields);
+    console.log(this.fields);
   },
   components: {
     Base64Binary,
@@ -263,7 +262,8 @@ export default {
       active: true,
       data: {},
       inputs: [],
-      use: ""
+      use: "",
+      isPractitionnerRecord:false
     };
   },
   methods: {
@@ -348,9 +348,16 @@ export default {
     name: {},
     submitLabel: {
       default: "Submit"
+
     }
   },
   mixins: [Capitalize]
+
+    },
+    isActivePractitioner:{},
+    selectedUseNameCode:{}
+  }
+
 };
 </script>
 <style>

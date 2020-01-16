@@ -84,12 +84,18 @@ export default {
         menu[field.id].subtitle = field.description;
 
         // set the type, used to show the correct fields
+
         if (field.type[0].code && field.type[0].code !== "Extension") {
           menu[field.id].type = field.type[0].code;
         } else if (
           field.type[0].code === "Extension" &&
           field.type[0].profile[0]
         ) {
+
+        if (field.type[0].code) {
+          this.menu[field.id].type = field.type[0].code;
+        } else if (field.type[0].profile[0]) {
+
           let type = field.type[0].profile[0];
           menu[field.id].type = type.slice(type.lastIndexOf("/") + 1);
         }
@@ -137,6 +143,25 @@ export default {
       fields: [],
       sections: []
     };
+  },
+
+  methods: {
+    showForm(title, definition, data) {
+      if (this.primitiveTypes.includes(definition)) {
+        let fields = [];
+        fields.push(this.formatField(data));
+
+        this.$emit("toggleForm", fields, title);
+      } else {
+        this._self.describe(definition, "Practitioner").then(fields => {
+          if (definition == "BackboneElement") {
+            this.$emit("toggleForm", fields[title], title);
+          } else {
+            this.$emit("toggleForm", fields, title);
+          }
+        });
+      }
+    }
   },
   mixins: [Practitioner, StructureDefinition],
   props: ["data"]

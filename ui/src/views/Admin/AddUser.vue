@@ -1,10 +1,11 @@
 <template>
-  <v-container>
+  <v-container >
     <Alert ref="addUserAlert" />
-    <v-card>
+    <v-card v-if="isLoaded">
       <v-card-title>Add User</v-card-title>
       <v-card-text>
-        <DynamicForm
+      
+        <DynamicForm 
           :fields="this.fields"
           name="addUser"
           v-on:cancel="cancel"
@@ -24,43 +25,135 @@ import axios from "axios";
 
 import Alert from "@/components/Layout/Alert.vue";
 import DynamicForm from "@/components/Form/DynamicForm.vue";
-
+//var tempFlields=[];
 export default {
   components: {
     Alert,
     DynamicForm
   },
-  created() {
+  beforeCreate()
+  {
+     //this.config = require("@/config/config.json");
+     //this.fields=tempFlields;
+     
+  },
+  /*
+  created()
+  {
+    var tempFlields=[];
+    tempFlields.push(
+      {
+        id: "username",
+        max: 1,
+        name: "username",
+        required: true,
+        type: "string"
+      }
+    );
+    tempFlields.push(
+      {
+        id: "password",
+        max: 1,
+        name: "password",
+        required: true,
+        type: "password",
+        matching: false
+      }
+    );
+    tempFlields.push(
+      {
+        id: "passwordRepeat",
+        max: 1,
+        name: "password",
+        required: true,
+        type: "password",
+        matching: true
+      }
+    );
+    this.fields=tempFlields;
+  },*/
+  created () {
     this.config = require("@/config/config.json");
+    var tempFlields=[{
+              id: "username",
+              max: 1,
+              name: "username",
+              required: true,
+              type: "string"
+            },
+            {
+              id: "password",
+              max: 1,
+              name: "password",
+              required: true,
+              type: "password",
+              matching: false
+            },
+            {
+              id: "passwordRepeat",
+              max: 1,
+              name: "password",
+              required: true,
+              type: "password",
+              matching: true
+            }];
+    axios
+      .get(this.config.backend + "/user/describe/definition/iHRISUserDetails")
+      .then(structureDefinitionResponse => {
+        //console.log(structureDefinitionResponse);
+        if(structureDefinitionResponse!=null)
+        {
+          //console.log("*********************Entered!!!*********************")
+          //console.log(tempFlields);
+
+          //console.log(structureDefinitionResponse);
+          this.isLoaded=true;
+          var fiedlName=structureDefinitionResponse.data.id.split(":")[1].split(".")[0];
+          var _type=structureDefinitionResponse.data.type[0].code;
+          var items=[];
+          structureDefinitionResponse.data.type[0].profile.forEach(profile =>{
+              items.push(profile);
+            }
+          );
+          var oField={
+            id:fiedlName,
+            name:fiedlName,
+            max: 1,
+            required:true,
+            type:_type,
+            options:items,
+            label:fiedlName
+          };
+          //console.log("**************************************");
+          //console.log(oField);
+          tempFlields.push(oField);
+          //this.fields.pu
+          //console.log(this.fields);
+          this.fields=tempFlields;
+          //console.log(this.fields);
+          //return Promise.resolve();
+        }  
+
+      })
+      .catch(error => {
+        this.$refs.addUserAlert.changeMessage(
+            "Data not saved. " + error,
+            "error"
+          );
+      });
+      
   },
   data() {
     return {
       config: null,
-      fields: [
-        {
-          id: "username",
-          max: 1,
-          name: "username",
-          required: true,
-          type: "string"
-        },
-        {
-          id: "password",
-          max: 1,
-          name: "password",
-          required: true,
-          type: "password",
-          matching: false
-        },
-        {
-          id: "passwordRepeat",
-          max: 1,
-          name: "password",
-          required: true,
-          type: "password",
-          matching: true
-        }
-      ]
+      fields: [],
+      inputs: [
+        "username",
+        "password",
+        "passwordRepeat",
+        "roles"
+      ],
+      isLoaded:false
     };
   },
   methods: {

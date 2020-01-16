@@ -304,6 +304,7 @@ export default {
     },
     toggleForm(index) {
       let fields = this.fields;
+
       let key = null;
 
       if (Object.keys(fields).length === 1) {
@@ -328,6 +329,7 @@ export default {
       this.editing = true;
       this.editButton = false;
       this.showMultiple = false;
+
     },
     toggleSectionDetailDisplay() {
       this.showSectionDetail = !this.showSectionDetail;

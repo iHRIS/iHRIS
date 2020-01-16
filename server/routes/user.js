@@ -2,6 +2,7 @@ var express = require("express");
 var router = express.Router();
 var axios = require("axios");
 const URI = require("urijs");
+const mixin = require("../mixin");
 const env = process.env.NODE_ENV || "development";
 const config = require(__dirname + "/../config/config.json")[env];
 const crypto = require("crypto");
@@ -12,7 +13,7 @@ const crypto = require("crypto");
 router.post("/add", function (req, res, next) {
   let data = req.body;
   let now = new Date();
-
+  console.log(data);
   data.salt = crypto.randomBytes(16).toString('hex');
   data.password = crypto.pbkdf2Sync(
     data.password,
@@ -27,7 +28,8 @@ router.post("/add", function (req, res, next) {
     id: "user",
     extension: [
       {
-        url: config.structureDefinition + "/StructureDefinition/iHRISUserDetails",
+        //url: config.structureDefinition + "/StructureDefinition/iHRISUserDetails",
+        url: config.fhir.server + "/StructureDefinition/iHRISUserDetails",
         extension: [
           {
             url: "username",
@@ -44,6 +46,13 @@ router.post("/add", function (req, res, next) {
           {
             url: "created",
             valueString: data.created
+          },
+          {
+            url: "roles",
+            valueCoding: {
+              system: "http://terminology.hl7.org/CodeSystem/v2-0615",
+              code:data.roles
+            }
           }
         ]
       }
@@ -83,7 +92,31 @@ router.get("/list", function (req, res, next) {
     res.status(400).json(err);
   });
 });
-
+/**
+ * Get the iHRISUserDetails structure definition metadata
+ */
+router.get("/describe/definition/:definition", function (req, res, next) {
+  //console.log("Entered!!!!");
+  mixin.getDefinition("StructureDefinition", req.params.definition, (err, definition) => {
+    if (err) {
+      res.status(400).json(err);
+    } else {
+      response=definition;
+      rolesDefinition=null;
+      //console.log(definition);
+      response.differential.element.forEach(extension=>{
+        if(extension.id=="Extension.extension:roles.value[x]")
+        {
+          //console.log(extension);
+          rolesDefinition=extension;
+          //break;
+        }
+      });
+      //res.status(201).json(definition);
+      res.status(201).json(rolesDefinition);
+    }
+  })
+});
 /**
  * Check login credentials
  */
@@ -254,4 +287,26 @@ router.post("/update", function (req, res, next) {
   });
 });
 
+/**
+ * update user role
+ */
+router.post("/updaterole", function (req, res, next) {
+  let data = req.body;
+  let url = URI(config.fhir.server).segment('fhir').segment('Person');
+  url.addQuery('_id', data.id);
+  url = url.toString();
+
+  axios.put(url, data, {
+    withCredentials: true,
+    auth: {
+      username: config.fhir.username,
+      password: config.fhir.password
+    }
+  }).then(response => {
+    res.status(201).json(response.data);
+  }).catch(err => {
+    res.status(400).json(err);
+  });
+
+});
 module.exports = router;
