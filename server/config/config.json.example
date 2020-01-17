@@ -6,7 +6,8 @@
     "elastic": {
       "server": "http://localhost:9200",
       "username": "username",
-      "password": "username"
+      "password": "username",
+      "version": "7.5"
     },
     "fhir": {
       "server": "localhost",
@@ -24,7 +25,8 @@
     "elastic": {
       "server": "http://localhost:9200",
       "username": "username",
-      "password": "username"
+      "password": "username",
+      "version": "7.5"
     },
     "fhir": {
       "server": "localhost",
@@ -42,7 +44,8 @@
     "elastic": {
       "server": "http://localhost:9200",
       "username": "username",
-      "password": "username"
+      "password": "username",
+      "version": "7.5"
     },
     "fhir": {
       "server": "localhost",
