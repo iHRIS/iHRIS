@@ -68,6 +68,8 @@
 <script>
 import axios from "axios";
 
+import Practitioner from "@/mixins/Practitioner.js";
+
 export default {
   computed: {
     recurring() {
@@ -105,44 +107,26 @@ export default {
     axios.get(config.backend + "/practitioner/all").then(response => {
       let practitioners = [];
 
-      response.data.forEach(practitioner => {
-        practitioner = practitioner.resource;
+      response.data.forEach(record => {
+        let practitioner = record._source;
 
+        let id = practitioner.practitioner.slice(practitioner.practitioner.lastIndexOf("/") + 1);
         let name = "";
 
-        if (practitioner.name) {
-          let practitionerName = null;
-
-          // first, try for an official name
-          for (var i in practitioner.name) {
-            if (practitioner.name[i].use === "official") {
-              practitionerName = practitioner.name[i];
-              break;
-            }
-          }
-
-          if (practitionerName === null) {
-            practitionerName = practitioner.name[i];
-          }
-
-          if (practitionerName.text) {
-            name = practitionerName.text;
-          } else {
-            if (practitionerName.given && practitionerName.given[0]) {
-              name += practitionerName.given[0] + " ";
-            }
-
-            if (practitionerName.family) {
-              name += practitionerName.family;
-            }
-
-            name = name.trim();
-          }
+        // get the name of the practitioner
+        if (practitioner.given) {
+          name = practitioner.given;
         }
+
+        if (practitioner.family) {
+          name += " " + practitioner.family;
+        }
+
+        name = name.trim();
 
         if (name) {
           practitioners.push({
-            id: practitioner.id,
+            id: id,
             name: name
           });
         }
@@ -185,6 +169,7 @@ export default {
         this.workflowName
       );
     }
-  }
+  },
+  mixins: [Practitioner]
 };
 </script>
