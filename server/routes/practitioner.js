@@ -1,6 +1,8 @@
 var express = require("express");
 var router = express.Router();
 var axios = require("axios");
+var elasticsearch = require("elasticsearch");
+
 const URI = require('urijs');
 const fs = require('fs')
 const mixin = require("../mixin");
@@ -49,38 +51,33 @@ router.post("/delete/work-history", function (req, res, next) {
   });
 });
 
+var client = new elasticsearch.Client({
+  host: config.elastic.server,
+  log: 'trace',
+  apiVersion: config.elastic.version
+});
+
 router.get("/all", async function (req, res, next) {
-  let previousUrl = null;
-  let url = URI(config.fhir.server).segment('fhir').segment("Practitioner");
   let practitioners = [];
+  let scroll = null;
+  const size = 1000;
 
-  url.addQuery("_count", 100);
-  url = url.toString();
+  let response = await client.search({
+    index: "practitioner",
+    scroll: "1m",
+    size: size
+  });
 
-  do {
-    previousUrl = url;
+  practitioners = response.hits.hits;
 
-    let response = await axios.get(url, {
-      params: {},
-      withCredentials: true,
-      auth: {
-        username: config.fhir.username,
-        password: config.fhir.password
-      }
+  while (response.hits.hits.length === size) {
+    response = await client.scroll({
+      scroll: "1m",
+      scrollId: response._scroll_id
     });
 
-    if (response.data.link) {
-      for (var i in response.data.link) {
-        let link = response.data.link[i];
-
-        if (link.relation === "next") {
-          url = link.url;
-        }
-      }
-    }
-
-    practitioners = practitioners.concat(response.data.entry);
-  } while (url !== previousUrl);
+    practitioners = practitioners.concat(response.hits.hits);
+  }
 
   res.status(201).json(practitioners);
 });

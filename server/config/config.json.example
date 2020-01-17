@@ -9,7 +9,8 @@
       "server": "http://localhost:9200",
       "username": "username",
       "password": "username",
-      "max_compilations_rate": "10000/1m"
+      "max_compilations_rate": "10000/1m",
+      "version": "7.5"
     },
     "fhir": {
       "server": "localhost",
@@ -28,7 +29,8 @@
     "elastic": {
       "server": "http://localhost:9200",
       "username": "username",
-      "password": "username"
+      "password": "username",
+      "version": "7.5"
     },
     "fhir": {
       "server": "localhost",
@@ -47,7 +49,8 @@
     "elastic": {
       "server": "http://localhost:9200",
       "username": "username",
-      "password": "username"
+      "password": "username",
+      "version": "7.5"
     },
     "fhir": {
       "server": "localhost",
