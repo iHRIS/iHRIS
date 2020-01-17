@@ -3,22 +3,21 @@
 /**
  * Module dependencies.
  */
-
 var app = require('../app');
 var debug = require('debug')('server:server');
 var http = require('http');
-const appConfig = require('../config/config');
+
+const env = process.env.NODE_ENV || "development";
+const appConfig = require(__dirname + "/../config/config.json")[env]
 const winston = require('winston');
 
+// Logging setup
+winston.remove(winston.transports.Console)
+winston.add(winston.transports.Console, {level: 'info', timestamp: true, colorize: true})
 
 /**
  * Get port from environment and store in Express.
  */
-
-//var port = normalizePort(process.env.PORT || '3000');
-// Logging setup
-winston.remove(winston.transports.Console)
-winston.add(winston.transports.Console, {level: 'info', timestamp: true, colorize: true})
 var port = normalizePort(process.env.PORT || appConfig.port);
 app.set('port', port);
 
@@ -31,7 +30,6 @@ var server = http.createServer(app);
 /**
  * Listen on provided port, on all network interfaces.
  */
-
 server.listen(port);
 server.on('error', onError);
 server.on('listening', onListening);
@@ -39,7 +37,6 @@ server.on('listening', onListening);
 /**
  * Normalize a port into a number, string, or false.
  */
-
 function normalizePort(val) {
   var port = parseInt(val, 10);
 
@@ -59,7 +56,6 @@ function normalizePort(val) {
 /**
  * Event listener for HTTP server "error" event.
  */
-
 function onError(error) {
   if (error.syscall !== 'listen') {
     throw error;
@@ -87,7 +83,6 @@ function onError(error) {
 /**
  * Event listener for HTTP server "listening" event.
  */
-
 function onListening() {
   var addr = server.address();
   var bind = typeof addr === 'string'

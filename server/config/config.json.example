@@ -14,7 +14,8 @@
       "password": "password"
     },
     "kibana": "https://www.elastic.co/products/kibana",
-    "structureDefinition": "http://server.com/fhir"
+    "structureDefinition": "http://server.com/fhir",
+    "port": 3000
   },
   "test": {
     "definitions": {
@@ -31,7 +32,8 @@
       "password": "password"
     },
     "kibana": "https://www.elastic.co/products/kibana",
-    "structureDefinition": "http://server.com/fhir"
+    "structureDefinition": "http://server.com/fhir",
+    "port": 3000
   },
   "production": {
     "definitions": {
@@ -48,6 +50,7 @@
       "password": "password"
     },
     "kibana": "https://www.elastic.co/products/kibana",
-    "structureDefinition": "http://server.com/fhir"
+    "structureDefinition": "http://server.com/fhir",
+    "port": 3000
   }
 }
