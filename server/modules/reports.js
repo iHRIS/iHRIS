@@ -323,6 +323,9 @@ getReportRelationship((err, relationships) => {
                 async.eachSeries(resourceData, (data, next) => {
                   console.log('processing ' + count + '/' + resourceData.length + ' records of resource ' + orderedResource.resource);
                   count++
+                  if (!data.resource || !data.resource.resourceType) {
+                    return next()
+                  }
                   let id = data.resource.resourceType + '/' + data.resource.id;
                   let processed = processedRecords.find((record) => {
                     return record === id
