@@ -250,6 +250,67 @@ const createESIndex = (name, IDFields, callback) => {
     });
 };
 
+const updateESDocument = (body, record, index, orderedResource, callback) => {
+  let url = URI(config.elastic.server).segment(index).segment('_update_by_query').toString();
+  axios({
+    method: 'post',
+    url,
+    data: body,
+    auth: {
+      username: config.elastic.username,
+      password: config.elastic.password,
+    },
+  }).then(response => {
+    // if nothing was updated and its from the primary (top) resource then create as new
+    if (response.data.updated == 0 && !orderedResource.hasOwnProperty('linkElement')) {
+      console.info('No record with id ' + data.resource.id + ' found on elastic search, creating new');
+      let url = URI(config.elastic.server)
+        .segment(reportDetails.name)
+        .segment('_doc')
+        .toString();
+      axios({
+          method: 'post',
+          url,
+          data: record,
+          auth: {
+            username: config.elastic.username,
+            password: config.elastic.password,
+          },
+        })
+        .then(response => {
+          return callback();
+        })
+        .catch(err => {
+          return callback();
+        });
+    } else {
+      return callback();
+    }
+  }).catch(err => {
+    if (err.response && err.response.statusText === 'Conflict' || err.response.status === 409) {
+      console.log('Conflict occured, rerunning this request');
+      setTimeout(() => {
+        updateESDocument(body, record, index, orderedResource, () => {
+          return callback()
+        })
+      }, 2000)
+    } else {
+      console.log('Error Occured');
+      if (err.response && err.response.data) {
+        console.error(err.response.data);
+      }
+      if (err.error) {
+        console.error(err.error);
+      }
+      if (!err.response) {
+        console.log(err);
+        process.exit()
+      }
+      return callback();
+    }
+  });
+}
+
 getReportRelationship((err, relationships) => {
   if (err) {
     return;
@@ -438,11 +499,13 @@ getReportRelationship((err, relationships) => {
                       }
                       record[orderedResource.name] = id
                       let match = {};
+                      let deleteLinkTo
                       if (orderedResource.hasOwnProperty('linkElement') && orderedResource.linkElement.startsWith(orderedResource.resource + '.')) {
                         //remove resource name from link element i.e if PractionerRole.practioner then remove PractitionerRole. and remain with practioner
                         let linkElement = orderedResource.linkElement.replace(orderedResource.resource + '.', '');
                         let linkTo = fhir.evaluate(data.resource, linkElement + '.reference');
                         match[orderedResource.linkTo] = linkTo;
+                        deleteLinkTo = linkTo
                       } else if (orderedResource.hasOwnProperty('linkElement') && !orderedResource.linkElement.startsWith(orderedResource.resource + '.')) {
                         let linkElement = orderedResource.linkElement.split('.').pop();
                         match[linkElement] = data.resource.resourceType + '/' + data.resource.id;
@@ -453,10 +516,7 @@ getReportRelationship((err, relationships) => {
                       for (let field in record) {
                         ctx += 'ctx._source.' + field + "='" + record[field] + "';";
                       }
-                      let url = URI(config.elastic.server)
-                        .segment(reportDetails.name)
-                        .segment('_update_by_query')
-                        .toString();
+
                       let body = {
                         script: {
                           lang: 'painless',
@@ -466,49 +526,9 @@ getReportRelationship((err, relationships) => {
                           match,
                         },
                       };
-                      axios({
-                        method: 'post',
-                        url,
-                        data: body,
-                        auth: {
-                          username: config.elastic.username,
-                          password: config.elastic.password,
-                        },
-                      }).then(response => {
-                        // if nothing was updated and its from the primary (top) resource then create as new
-                        if (response.data.updated == 0 && orderedResource.hasOwnProperty('linkElement')) {
-                          console.log(body);
-                          process.exit()
-                        }
-                        if (response.data.updated == 0 && !orderedResource.hasOwnProperty('linkElement')) {
-                          console.info('No record with id ' + data.resource.id + ' found on elastic search, creating new');
-                          let url = URI(config.elastic.server)
-                            .segment(reportDetails.name)
-                            .segment('_doc')
-                            .toString();
-                          axios({
-                              method: 'post',
-                              url,
-                              data: record,
-                              auth: {
-                                username: config.elastic.username,
-                                password: config.elastic.password,
-                              },
-                            })
-                            .then(response => {
-                              return next();
-                            })
-                            .catch(err => {
-                              return next();
-                            });
-                        } else {
-                          return next();
-                        }
-                      }).catch(err => {
-                        console.log('Error Occured');
-                        console.log(err.error);
-                        return next();
-                      });
+                      updateESDocument(body, record, reportDetails.name, orderedResource, () => {
+                        return next()
+                      })
                     })();
                   }, () => {
                     console.log('Done Writting resource data for resource ' + orderedResource.name + ' into elastic search');
