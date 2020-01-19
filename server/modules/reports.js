@@ -250,7 +250,7 @@ const createESIndex = (name, IDFields, callback) => {
     });
 };
 
-const updateESDocument = (body, record, index, orderedResource, callback) => {
+const updateESDocument = (body, record, index, orderedResource, resourceId, callback) => {
   let url = URI(config.elastic.server).segment(index).segment('_update_by_query').toString();
   axios({
     method: 'post',
@@ -263,9 +263,9 @@ const updateESDocument = (body, record, index, orderedResource, callback) => {
   }).then(response => {
     // if nothing was updated and its from the primary (top) resource then create as new
     if (response.data.updated == 0 && !orderedResource.hasOwnProperty('linkElement')) {
-      console.info('No record with id ' + data.resource.id + ' found on elastic search, creating new');
+      console.info('No record with id ' + resourceId + ' found on elastic search, creating new');
       let url = URI(config.elastic.server)
-        .segment(reportDetails.name)
+        .segment(index)
         .segment('_doc')
         .toString();
       axios({
@@ -287,10 +287,10 @@ const updateESDocument = (body, record, index, orderedResource, callback) => {
       return callback();
     }
   }).catch(err => {
-    if (err.response && err.response.statusText === 'Conflict' || err.response.status === 409) {
+    if (err.response && (err.response.statusText === 'Conflict' || err.response.status === 409)) {
       console.log('Conflict occured, rerunning this request');
       setTimeout(() => {
-        updateESDocument(body, record, index, orderedResource, () => {
+        updateESDocument(body, record, index, orderedResource, resourceId, () => {
           return callback()
         })
       }, 2000)
@@ -304,7 +304,6 @@ const updateESDocument = (body, record, index, orderedResource, callback) => {
       }
       if (!err.response) {
         console.log(err);
-        process.exit()
       }
       return callback();
     }
@@ -499,7 +498,6 @@ getReportRelationship((err, relationships) => {
                       }
                       record[orderedResource.name] = id
                       let match = {};
-                      let deleteLinkTo
                       if (orderedResource.hasOwnProperty('linkElement') && orderedResource.linkElement.startsWith(orderedResource.resource + '.')) {
                         //remove resource name from link element i.e if PractionerRole.practioner then remove PractitionerRole. and remain with practioner
                         let linkElement = orderedResource.linkElement.replace(orderedResource.resource + '.', '');
@@ -526,7 +524,7 @@ getReportRelationship((err, relationships) => {
                           match,
                         },
                       };
-                      updateESDocument(body, record, reportDetails.name, orderedResource, () => {
+                      updateESDocument(body, record, reportDetails.name, orderedResource, data.resource.id, () => {
                         return next()
                       })
                     })();
