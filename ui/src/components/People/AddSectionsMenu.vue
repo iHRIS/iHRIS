@@ -55,7 +55,7 @@ export default {
         }
 
         // data is set, don't continue with this field
-        if (this.data[id]) {
+        if (this.data && this.data[id]) {
           continue;
         } else if (field.type[0].code && field.type[0].code === "Extension") {
           let profile = field.type[0].profile[0];

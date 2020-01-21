@@ -2,8 +2,6 @@ import axios from "axios";
 
 export default {
   created() {
-    const ParseConformance = require("fhir").ParseConformance;
-    this.parser = new ParseConformance();
     this.config = require("@/config/config.json");
   },
   data() {
