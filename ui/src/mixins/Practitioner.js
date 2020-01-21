@@ -45,6 +45,18 @@ export default {
             sections.push(field);
           });
 
+          // also add practitioner role for work history
+          sections.push({
+            id: "iHRISPractitionerRole.workHistory",
+            path: "iHRISPractitionerRole.workHistory",
+            short: "Roles/organizations the practitioner is associated with",
+            definition:
+              "A specific set of Roles/Locations/specialties/services that a practitioner may perform at an organization for a period of time.",
+            min: 0,
+            max: "*",
+            type: ["iHRISPractitionerRole"]
+          });
+
           return Promise.resolve(sections);
         });
     }
