@@ -110,8 +110,13 @@ export default {
       response.data.forEach(record => {
         let practitioner = record._source;
 
+        let cadre = "";
+        let contactGroup = "";
+        let facility = "";
         let id = practitioner.practitioner.slice(practitioner.practitioner.lastIndexOf("/") + 1);
+        let jurisdiction = "";
         let name = "";
+        let organization = "";
 
         // get the name of the practitioner
         if (practitioner.given) {
@@ -124,10 +129,23 @@ export default {
 
         name = name.trim();
 
+        if (practitioner.FacilityName) {
+          facility = practitioner.FacilityName;
+        }
+
+        if (practitioner.positionTitle) {
+          cadre = practitioner.positionTitle;
+        }
+
         if (name) {
           practitioners.push({
+            cadre: cadre,
+            contactGroup: contactGroup,
+            facility: facility,
             id: id,
-            name: name
+            jurisdiction: jurisdiction,
+            name: name,
+            organization: organization
           });
         }
       });
