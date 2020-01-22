@@ -473,8 +473,10 @@ getReportRelationship((err, relationships) => {
                         }
                         let displayData = fhir.evaluate(data.resource, fieldName);
                         let value
-                        if (!displayData && data.resource.extension) {
+                        if ((!displayData || (Array.isArray(displayData) && displayData.length === 1 && displayData[0] === undefined)) && data.resource.extension) {
                           value = await getElementValFromExtension(data.resource.extension, fieldName)
+                        } else if (Array.isArray(displayData) && displayData.length === 1 && displayData[0] === undefined) {
+                          value = undefined
                         } else if (Array.isArray(displayData)) {
                           value = displayData.pop();
                         } else {
