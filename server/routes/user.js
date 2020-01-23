@@ -27,7 +27,6 @@ router.post("/add", function (req, res, next) {
     id: "user",
     extension: [
       {
-        //url: config.structureDefinition + "/StructureDefinition/iHRISUserDetails",
         url: config.fhir.server + "/StructureDefinition/iHRISUserDetails",
         extension: [
           {
@@ -106,10 +105,8 @@ router.get("/describe/definition/:definition", function (req, res, next) {
         if(extension.id=="Extension.extension:roles.value[x]")
         {
           rolesDefinition=extension;
-          //break;
         }
       });
-      //res.status(201).json(definition);
       res.status(201).json(rolesDefinition);
     }
   })
@@ -287,7 +284,7 @@ router.post("/update", function (req, res, next) {
 /**
  * update user role
  */
-router.post("/updaterole", function (req, res, next) {
+router.post("/update-role", function (req, res, next) {
   let data = req.body;
   let url = URI(config.fhir.server).segment('fhir').segment('Person');
   url.addQuery('_id', data.id);

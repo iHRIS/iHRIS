@@ -154,7 +154,6 @@ export default {
                 {
                   user.action="edit";
                 }
-               //userDetail=user;
                 if (userExtensions[j].url == "password") {
                   userDetail.password = userExtensions[j].valueString;
                 }
@@ -238,7 +237,7 @@ export default {
         var oUserToProcess=this.getUserDetailsByUserName(this.editedUserName);
         var bundle=this.getCorrespondingFhirResourceWithoutRole(oUserToProcess);
         axios
-        .post(this.config.backend + "/user/updaterole", bundle)
+        .post(this.config.backend + "/user/update-role", bundle)
         .then(response => {
           if (response.status === 201) {
             this.$refs.manageUserRoleAlert.changeMessage(
@@ -287,7 +286,6 @@ export default {
                       {
                         user.action="edit";
                       }
-                    //userDetail=user;
                       if (userExtensions[j].url == "password") {
                         userDetail.password = userExtensions[j].valueString;
                       }
@@ -324,7 +322,7 @@ export default {
         var oUserToProcess=this.getUserDetailsByUserName(this.editedUserName);
         var bundle=this.getCorrespondingFhirResourceWithNewRole(oUserToProcess,this.selectedRole);
         axios
-        .post(this.config.backend + "/user/updaterole", bundle)
+        .post(this.config.backend + "/user/update-role", bundle)
         .then(response => {
           if (response.status === 201) {
             this.$refs.manageUserRoleAlert.changeMessage(
@@ -374,7 +372,6 @@ export default {
                       {
                         user.action="edit";
                       }
-                    //userDetail=user;
                       if (userExtensions[j].url == "password") {
                         userDetail.password = userExtensions[j].valueString;
                       }

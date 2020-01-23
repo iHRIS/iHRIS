@@ -25,7 +25,6 @@ import axios from "axios";
 
 import Alert from "@/components/Layout/Alert.vue";
 import DynamicForm from "@/components/Form/DynamicForm.vue";
-//var tempFlields=[];
 export default {
   components: {
     Alert,
@@ -34,7 +33,7 @@ export default {
   created () {
     NProgress.start();
     this.config = require("@/config/config.json");
-    var tempFlields=[{
+    this.tempFlields=[{
               id: "username",
               max: 1,
               name: "username",
@@ -81,8 +80,8 @@ export default {
             label:fiedlName
           };
           
-          tempFlields.push(oField);
-          this.fields=tempFlields;
+          this.tempFlields.push(oField);
+          this.fields=this.tempFlields;
         }  
         NProgress.done();
       })
@@ -99,6 +98,7 @@ export default {
     return {
       config: null,
       fields: [],
+      tempFlields:[],
       inputs: [
         "username",
         "password",
