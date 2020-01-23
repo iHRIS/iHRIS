@@ -18,7 +18,7 @@
                 {{ item.roles }}</v-chip>
             </div>
              <div v-if="item.roles!=null && item.roles=='View'">
-              <v-chip label  small class="ma-0" :color="editView" text-color="white" close @click:close="showDeleteModal(item.username)"  >
+              <v-chip label  small class="ma-0" :color="viewColor" text-color="white" close @click:close="showDeleteModal(item.username)"  >
                 <v-icon left>mdi-account-circle-outline</v-icon>
               {{ item.roles }}</v-chip>
             </div>
@@ -79,7 +79,7 @@
             ></v-select>
           <v-card-text>
            
-          This action will add the selected user role. Click 'Yes' to add and 'Cancel' to cancel the action.
+          This action will add the selected user's role. Click 'Yes' to add and 'Cancel' to cancel the action.
           </v-card-text>
         </v-container>
         <v-card-actions>
@@ -192,7 +192,7 @@ export default {
       config: null,
       adminColor:"blue",
       editColor:"orange",
-      editView:"green",
+      viewColor:"green",
       openRemoveRoleDialog:false,
       openAddRoleDialog:false,
       editedUserName:null,
@@ -507,10 +507,6 @@ export default {
           }
       );
       return bundle;
-    },
-    diplayValue()
-    {
-      
     }
   }
 };

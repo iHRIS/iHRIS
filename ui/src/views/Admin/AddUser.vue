@@ -33,7 +33,7 @@ export default {
   created () {
     NProgress.start();
     this.config = require("@/config/config.json");
-    this.tempFlields=[{
+    this.tempFields=[{
               id: "username",
               max: 1,
               name: "username",
@@ -63,7 +63,7 @@ export default {
         {
           
           this.isLoaded=true;
-          var fiedlName=structureDefinitionResponse.data.id.split(":")[1].split(".")[0];
+          var fieldName=structureDefinitionResponse.data.id.split(":")[1].split(".")[0];
           var _type=structureDefinitionResponse.data.type[0].code;
           var items=[];
           structureDefinitionResponse.data.type[0].profile.forEach(profile =>{
@@ -71,17 +71,17 @@ export default {
             }
           );
           var oField={
-            id:fiedlName,
-            name:fiedlName,
+            id:fieldName,
+            name:fieldName,
             max: 1,
             required:true,
             type:_type,
             options:items,
-            label:fiedlName
+            label:fieldName
           };
           
-          this.tempFlields.push(oField);
-          this.fields=this.tempFlields;
+          this.tempFields.push(oField);
+          this.fields=this.tempFields;
         }  
         NProgress.done();
       })
@@ -98,7 +98,7 @@ export default {
     return {
       config: null,
       fields: [],
-      tempFlields:[],
+      tempFields:[],
       inputs: [
         "username",
         "password",
