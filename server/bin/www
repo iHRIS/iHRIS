@@ -7,18 +7,24 @@
 var app = require('../app');
 var debug = require('debug')('server:server');
 var http = require('http');
+const env = process.env.NODE_ENV || 'development';
+const appConfig = require('../config/config')[env];
+const winston = require('winston');
+
 
 /**
  * Get port from environment and store in Express.
  */
-
-var port = normalizePort(process.env.PORT || '3000');
+// Logging setup
+winston.remove(winston.transports.Console)
+winston.add(winston.transports.Console, {level: 'info', timestamp: true, colorize: true})
+var port = normalizePort(process.env.PORT || appConfig.port);
 app.set('port', port);
 
 /**
  * Create HTTP server.
  */
-
+winston.info("server start on port: "+appConfig.port);
 var server = http.createServer(app);
 
 /**
