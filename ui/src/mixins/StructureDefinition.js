@@ -86,19 +86,10 @@ export default {
             let type = field.type[0].code;
 
             // if this is a primitive type, we are done
-            if (this.primitiveTypes.indexOf(type) >= 0) {
+            if (this.primitiveTypes.indexOf(type) >= 0 || type === "Reference") {
               fields[field.id] = this.formatField(field, type);
             } else {
-              let subfields = [];
-
-              // this is going to require a recursive load of the properties
-              // if the type is a reference then we need to load what it is referencing
-              if (type == "Reference") {
-                // this is a special case, let's come back to it later
-                return;
-              } else {
-                subfields = this.getFields(field.type[0].code);
-              }
+              let subfields = this.getFields(field.type[0].code);
 
               subfields.forEach(subfield => {
                 fields[subfield.id] = this.formatField(
@@ -218,9 +209,14 @@ export default {
         type: type,
         parentType: parentType,
         required: field.min > 0,
+        reference: null,
         object: false,
         fields: {}
       };
+
+      if (type === "Reference") {
+        formatted.reference = field.type[0].targetProfile[0];
+      }
 
       return formatted;
     },
