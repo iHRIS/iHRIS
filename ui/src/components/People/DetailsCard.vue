@@ -2,7 +2,7 @@
   <v-card class="mb-5">
     <v-card-title
       class="display-1 SectionTitle"
-      @click="toogleSectionDetailDisplay"
+      @click="toggleSectionDetailDisplay"
     >
       {{ this.name | sentenceCase }}
       <v-spacer />
@@ -13,16 +13,17 @@
           editing = true;
           editButton = false;
         "
-        v-show="editButton || edit"
-        v-if="!data[0]"
+        v-show="editButton && edit"
+        v-if="!Array.isArray(data)"
+        v-on:click="toggleForm(name)"
       >
         <v-icon>edit</v-icon>
       </v-btn>
       <v-btn
         fab
         class="error"
-        v-show="editButton || edit"
-        v-if="!data[0]"
+        v-show="editButton && edit"
+        v-if="!Array.isArray(data)"
         v-on:click="deleteItem()"
       >
         <v-icon>delete</v-icon>
@@ -45,8 +46,8 @@
               <v-btn
                 fab
                 class="primary"
-                v-show="editButton || edit"
-                v-if="data[0]"
+                v-show="editButton && edit"
+                v-if="Array.isArray(data)"
                 v-on:click="toggleForm(name)"
               >
                 <v-icon>edit</v-icon>
@@ -55,8 +56,8 @@
               <v-btn
                 fab
                 class="error"
-                v-show="editButton || edit"
-                v-if="data[0]"
+                v-show="editButton && edit"
+                v-if="Array.isArray(data)"
                 v-on:click="deleteItem(name)"
               >
                 <v-icon>delete</v-icon>
@@ -152,6 +153,7 @@
 
 <script>
 import DynamicForm from "@/components/Form/DynamicForm.vue";
+import Practitioner from "@/mixins/Practitioner.js";
 import StructureDefinition from "@/mixins/StructureDefinition.js";
 
 export default {
@@ -159,12 +161,6 @@ export default {
     DynamicForm
   },
   created() {
-    let numEntries = parseInt(this.data.length);
-
-    if (!isNaN(numEntries)) {
-      this.allowMultiple = true;
-    }
-
     switch (this.name) {
       case "address":
         this.subheader = "use";
@@ -204,43 +200,43 @@ export default {
     }
 
     if (this.edit) {
-      this.editButton = true;
-      let component = this;
+      this.getSections().then(sections => {
+        // find the matching section, that will be the fields
+        for (var i in sections) {
+          let section = sections[i];
 
-      this.describe("Practitioner").then(response => {
-        let data = [];
-        let fields = [];
+          if (
+            section.id === this.name ||
+            section.id.endsWith("." + this.name) ||
+            section.label === this.name
+          ) {
+            if (section.max === "*") {
+              this.allowMultiple = true;
+            }
 
-        if (component.data[0]) {
-          fields = component.data[0];
-        } else {
-          fields = component.data;
-        }
+            let structureDefinition = section.type[0].code;
 
-        for (var key in response) {
-          if (key == component.name) {
-            response[key].fields.then(element => {
-              for (var subkey in element) {
-                data.push({
-                  id: element[subkey].name,
-                  description: element[subkey].short,
-                  max: element[subkey].max,
-                  name: element[subkey].name,
-                  options: element[subkey].options,
-                  required: element[subkey].required,
-                  type: element[subkey].type,
-                  value: fields[element[subkey].name]
-                    ? fields[element[subkey].name]
-                    : null
-                });
+            if (
+              structureDefinition === "Extension" &&
+              section.type[0].profile &&
+              section.type[0].profile[0]
+            ) {
+              let profile = section.type[0].profile[0];
+              this.profile = profile;
+
+              structureDefinition = profile.slice(profile.lastIndexOf("/") + 1);
+            }
+
+            this.showForm(this.name, structureDefinition, section).then(
+              fields => {
+                this.editButton = true;
+                this.fields = fields;
               }
-            });
+            );
+
+            break;
           }
         }
-
-        this.fields = data;
-        this.$refs.dynamicEditingForm.changeFields(data);
-        this.dynamicFormKey++;
       });
     }
   },
@@ -259,6 +255,7 @@ export default {
       editing: false,
       fields: [],
       headerWidth: "30%",
+      profile: null,
       showMultiple: true,
       subheader: null
     };
@@ -270,14 +267,10 @@ export default {
       this.showMultiple = true;
     },
     deleteItem(index) {
-      this.$emit("deleteData", this.name, index);
+      this.$emit("deleteData", this.name, index, this.profile);
     },
     showAddForm() {
       let fields = this.fields;
-
-      fields.forEach(field => {
-        field.value = null;
-      });
 
       this.$refs.dynamicEditingForm.changeFields(fields);
 
@@ -298,21 +291,35 @@ export default {
       this.alert.show = true;
     },
     submit() {
-      this.$emit(
-        "saveData",
-        this.$refs.dynamicEditingForm.getInputs(),
-        this.$refs.dynamicEditingForm.getName(),
-        this.currentIndex
-      );
+      let inputs = this.$refs.dynamicEditingForm.getInputs();
+      let name = this.$refs.dynamicEditingForm.getName();
+
+      if (Object.keys(inputs).length === 1 && inputs[name]) {
+        inputs = inputs[name];
+      }
+
+      this.$emit("saveData", inputs, name, this.currentIndex, this.profile);
 
       this.cancel();
     },
     toggleForm(index) {
       let fields = this.fields;
+      let key = null;
 
-      fields.forEach(field => {
-        field.value = this.data[index][field.id];
-      });
+      if (Object.keys(fields).length === 1) {
+        for (key in fields) {
+          if (fields[key].name === "value") {
+            fields[key].labelOverride = this.name;
+          }
+
+          fields[key].value = this.data;
+        }
+      } else {
+        for (key in fields) {
+          let field = fields[key];
+          fields[key].value = this.data[index][field.title];
+        }
+      }
 
       this.$refs.dynamicEditingForm.changeFields(fields);
 
@@ -322,11 +329,11 @@ export default {
       this.editButton = false;
       this.showMultiple = false;
     },
-    toogleSectionDetailDisplay() {
+    toggleSectionDetailDisplay() {
       this.showSectionDetail = !this.showSectionDetail;
     }
   },
-  mixins: [StructureDefinition],
+  mixins: [Practitioner, StructureDefinition],
   props: {
     data: {},
     edit: {

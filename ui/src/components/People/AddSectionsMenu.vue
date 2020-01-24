@@ -38,10 +38,36 @@ import Practitioner from "@/mixins/Practitioner.js";
 import StructureDefinition from "@/mixins/StructureDefinition.js";
 
 export default {
-  created() {
-    this.getSections().then(fields => {
-      fields.forEach(field => {
+  computed: {
+    menu() {
+      let menu = {};
+
+      for (var index in this.sections) {
+        let field = this.sections[index];
         let label = null;
+        let id = null;
+
+        // if we have data set for this field, then don't render it
+        if (field.id.includes("extension:")) {
+          id = field.id.slice(field.id.lastIndexOf(":") + 1);
+        } else {
+          id = field.id.slice(field.id.lastIndexOf(".") + 1);
+        }
+
+        // data is set, don't continue with this field
+        if (this.data && this.data[id]) {
+          continue;
+        } else if (field.type[0].code && field.type[0].code === "Extension") {
+          let profile = field.type[0].profile[0];
+
+          for (var i in this.data.extension) {
+            let extension = this.data.extension[i];
+
+            if (extension.url === profile) {
+              return;
+            }
+          }
+        }
 
         // if a label field exists, use that
         // otherwise, go with the last text before the period
@@ -51,27 +77,39 @@ export default {
           label = field.id.slice(field.id.lastIndexOf(".") + 1);
         }
 
-        this.$set(this.menu, field.id, {});
-        this.menu[field.id].title = label;
-        this.menu[field.id].index = field.id;
-        this.menu[field.id].raw = field;
+        menu[field.id] = {};
+        menu[field.id].title = label;
+        menu[field.id].index = field.id;
+        menu[field.id].raw = field;
+        menu[field.id].subtitle = field.description;
 
         // set the type, used to show the correct fields
         if (field.type[0].code && field.type[0].code !== "Extension") {
-          this.menu[field.id].type = field.type[0].code;
+          menu[field.id].type = field.type[0].code;
         } else if (
           field.type[0].code === "Extension" &&
           field.type[0].profile[0]
         ) {
           let type = field.type[0].profile[0];
-          this.menu[field.id].type = type.slice(type.lastIndexOf("/") + 1);
+          menu[field.id].type = type.slice(type.lastIndexOf("/") + 1);
         }
+      }
+
+      return menu;
+    }
+  },
+  created() {
+    this.sections = [];
+
+    this.getSections().then(fields => {
+      fields.forEach(field => {
+        this.$set(this.sections, field.id, field);
 
         // get the subtitle. if a description value is set, use that
         if (field.description) {
-          this.menu[field.id].subtitle = field.description;
+          this.sections[field.id].description = field.description;
         } else if (field.definition) {
-          this.menu[field.id].subtitle = field.definition;
+          this.sections[field.id].description = field.definition;
         } else if (field.path == "Practitioner.extension") {
           // if this is an extension, load the structure definition and get the description from that
           let type = field.type[0].profile[0];
@@ -86,7 +124,8 @@ export default {
             .then(extension => {
               // use the description field for the subtitle
               if (extension.data.description) {
-                this.menu[field.id].subtitle = extension.data.description;
+                this.sections[field.id].description =
+                  extension.data.description;
               }
             });
         }
@@ -96,28 +135,8 @@ export default {
   data() {
     return {
       fields: [],
-      menu: {}
+      sections: []
     };
-  },
-  methods: {
-    showForm(title, definition, data) {
-      if (this.primitiveTypes.includes(definition)) {
-        let fields = [];
-        fields.push(this.formatField(data, definition));
-        this.$emit("toggleForm", fields, title);
-      } else {
-        this._self.describe(definition, "Practitioner", title).then(fields => {
-          // sometimes we don't want all the fields so we limit them here
-          if (title === "photo") {
-            let customFields = {};
-            customFields["Attachment.url"] = fields.fields["Attachment.url"];
-            fields.fields = customFields;
-          }
-
-          this.$emit("toggleForm", fields.fields, title, data);
-        });
-      }
-    }
   },
   mixins: [Practitioner, StructureDefinition],
   props: ["data"]

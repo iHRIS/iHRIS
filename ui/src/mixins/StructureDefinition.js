@@ -2,8 +2,6 @@ import axios from "axios";
 
 export default {
   created() {
-    const ParseConformance = require("fhir").ParseConformance;
-    this.parser = new ParseConformance();
     this.config = require("@/config/config.json");
   },
   data() {
@@ -88,19 +86,10 @@ export default {
             let type = field.type[0].code;
 
             // if this is a primitive type, we are done
-            if (this.primitiveTypes.indexOf(type) >= 0) {
+            if (this.primitiveTypes.indexOf(type) >= 0 || type === "Reference") {
               fields[field.id] = this.formatField(field, type);
             } else {
-              let subfields = [];
-
-              // this is going to require a recursive load of the properties
-              // if the type is a reference then we need to load what it is referencing
-              if (type == "Reference") {
-                // this is a special case, let's come back to it later
-                return;
-              } else {
-                subfields = this.getFields(field.type[0].code);
-              }
+              let subfields = this.getFields(field.type[0].code);
 
               subfields.forEach(subfield => {
                 fields[subfield.id] = this.formatField(
@@ -220,9 +209,14 @@ export default {
         type: type,
         parentType: parentType,
         required: field.min > 0,
+        reference: null,
         object: false,
         fields: {}
       };
+
+      if (type === "Reference") {
+        formatted.reference = field.type[0].targetProfile[0];
+      }
 
       return formatted;
     },
@@ -345,6 +339,26 @@ export default {
       }
 
       return fields;
+    },
+    showForm(title, definition, data) {
+      if (this.primitiveTypes.includes(definition)) {
+        let fields = [];
+        fields.push(this.formatField(data, definition));
+        this.$emit("toggleForm", fields, title);
+        return Promise.resolve(fields);
+      } else {
+        return this.describe(definition, "Practitioner", title).then(fields => {
+          // sometimes we don't want all the fields so we limit them here
+          if (title === "photo") {
+            let customFields = {};
+            customFields["Attachment.url"] = fields.fields["Attachment.url"];
+            fields.fields = customFields;
+          }
+
+          this.$emit("toggleForm", fields.fields, title, data);
+          return fields.fields;
+        });
+      }
     }
   }
 };

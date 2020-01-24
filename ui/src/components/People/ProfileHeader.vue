@@ -18,7 +18,7 @@
         {{ active.text }}
       </v-chip>
     </v-flex>
-    <v-flex xs3 offset-xs3>
+    <v-flex xs4 offset-xs1 class="pr-3">
       <Alert ref="alert" />
     </v-flex>
   </v-layout>

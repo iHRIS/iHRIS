@@ -1,5 +1,7 @@
 {
+  
   "development": {
+    "port":3000,
     "definitions": {
       "practitionerPage": "Basic/iHRISPagePractitioner"
     },
@@ -7,7 +9,8 @@
       "server": "http://localhost:9200",
       "username": "username",
       "password": "username",
-      "version": "7.5"
+      "version": "7.5",
+      "max_compilations_rate": "10000/1m"
     },
     "fhir": {
       "server": "localhost",
@@ -19,6 +22,7 @@
     "structureDefinition": "http://server.com/fhir"
   },
   "test": {
+    "port":3000,
     "definitions": {
       "practitionerPage": "Basic/iHRISPagePractitioner"
     },
@@ -26,7 +30,8 @@
       "server": "http://localhost:9200",
       "username": "username",
       "password": "username",
-      "version": "7.5"
+      "version": "7.5",
+      "max_compilations_rate": "10000/1m"
     },
     "fhir": {
       "server": "localhost",
@@ -38,6 +43,7 @@
     "structureDefinition": "http://server.com/fhir"
   },
   "production": {
+    "port":3000,
     "definitions": {
       "practitionerPage": "Basic/iHRISPagePractitioner"
     },
@@ -45,7 +51,8 @@
       "server": "http://localhost:9200",
       "username": "username",
       "password": "username",
-      "version": "7.5"
+      "version": "7.5",
+      "max_compilations_rate": "10000/1m"
     },
     "fhir": {
       "server": "localhost",

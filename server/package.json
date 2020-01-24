@@ -26,6 +26,7 @@
     "sequelize-cli": "^5.5.0",
     "sqlite": "^3.0.3",
     "supertest": "^4.0.2",
-    "urijs": "^1.19.2"
+    "urijs": "^1.19.2",
+    "winston": "^2.2.0"
   }
 }

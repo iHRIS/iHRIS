@@ -1,7 +1,7 @@
 <template>
   <v-container>
     <Alert ref="addUserAlert" />
-    <v-card>
+    <v-card v-if="isLoaded">
       <v-card-title>Add User</v-card-title>
       <v-card-text>
         <DynamicForm
@@ -24,7 +24,6 @@ import axios from "axios";
 
 import Alert from "@/components/Layout/Alert.vue";
 import DynamicForm from "@/components/Form/DynamicForm.vue";
-
 export default {
   components: {
     Alert,
@@ -32,35 +31,72 @@ export default {
   },
   created() {
     this.config = require("@/config/config.json");
+    this.tempFields = [
+      {
+        id: "username",
+        max: 1,
+        name: "username",
+        required: true,
+        type: "string"
+      },
+      {
+        id: "password",
+        max: 1,
+        name: "password",
+        required: true,
+        type: "password",
+        matching: false
+      },
+      {
+        id: "passwordRepeat",
+        max: 1,
+        name: "password",
+        required: true,
+        type: "password",
+        matching: true
+      }
+    ];
+    axios
+      .get(this.config.backend + "/user/describe/definition/iHRISUserDetails")
+      .then(structureDefinitionResponse => {
+        if (structureDefinitionResponse != null) {
+          this.isLoaded = true;
+          var fieldName = structureDefinitionResponse.data.id
+            .split(":")[1]
+            .split(".")[0];
+          var _type = structureDefinitionResponse.data.type[0].code;
+          var items = [];
+          structureDefinitionResponse.data.type[0].profile.forEach(profile => {
+            items.push(profile);
+          });
+          var oField = {
+            id: fieldName,
+            name: fieldName,
+            max: 1,
+            required: true,
+            type: _type,
+            options: items,
+            label: fieldName
+          };
+
+          this.tempFields.push(oField);
+          this.fields = this.tempFields;
+        }
+      })
+      .catch(error => {
+        this.$refs.addUserAlert.changeMessage(
+          "Data not saved. " + error,
+          "error"
+        );
+      });
   },
   data() {
     return {
       config: null,
-      fields: [
-        {
-          id: "username",
-          max: 1,
-          name: "username",
-          required: true,
-          type: "string"
-        },
-        {
-          id: "password",
-          max: 1,
-          name: "password",
-          required: true,
-          type: "password",
-          matching: false
-        },
-        {
-          id: "passwordRepeat",
-          max: 1,
-          name: "password",
-          required: true,
-          type: "password",
-          matching: true
-        }
-      ]
+      fields: [],
+      tempFields: [],
+      inputs: ["username", "password", "passwordRepeat", "roles"],
+      isLoaded: false
     };
   },
   methods: {

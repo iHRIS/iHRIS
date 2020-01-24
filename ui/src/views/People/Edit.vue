@@ -74,8 +74,7 @@ export default {
       detailFields: {},
       detailPath: null,
       detailRaw: null,
-      detailTitle: null,
-      expansionProfile: null
+      detailTitle: null
     };
   },
   methods: {
@@ -89,11 +88,24 @@ export default {
     changePractitioner(practitioner) {
       this.practitioner = practitioner;
     },
-    deleteSubsectionData(field, index) {
-      let component = this;
-
+    deleteSubsectionData(field, index, profile) {
       if (typeof index !== "undefined" && this.practitioner[field].length > 1) {
-        this.practitioner[field] = this.practitioner[field].splice(index, 1);
+        this.practitioner[field].splice(index, 1);
+      } else if (profile !== null) {
+        for (var key in this.practitioner.extension) {
+          let extension = this.practitioner.extension[key];
+
+          if (extension.url === profile) {
+            for (var i in extension) {
+              if (i !== "url") {
+                this.practitioner.extension.splice(i, 1);
+                break;
+              }
+            }
+
+            break;
+          }
+        }
       } else {
         Vue.delete(this.practitioner, field);
       }
@@ -102,22 +114,21 @@ export default {
         .post(this.config.backend + "/practitioner/edit", this.practitioner)
         .then(response => {
           if (response.status == 201) {
-            if (component.$refs["subsection" + field][0]) {
-              component.$refs["subsection" + field][0].showAlert(
+            if (this.$refs["subsection" + field][0]) {
+              this.$refs["subsection" + field][0].showAlert(
                 "Item deleted successfully!",
                 "success"
               );
             }
           } else {
-            component.$refs["subsection-" + field][0].showAlert(
+            this.$refs["subsection-" + field][0].showAlert(
               "There was an error deleting this data.",
               "error"
             );
           }
         });
     },
-    saveSubsectionData(data, field, index) {
-      let component = this;
+    saveSubsectionData(data, field, index, profile) {
       let practitioner = this.practitioner;
 
       // this is necessary for subsections that can have multiple entries
@@ -127,22 +138,37 @@ export default {
         // this is a special case where a new entry is being
         // added to a multiple field
         practitioner[field].push(data);
+      } else if (profile !== null) {
+        for (var key in practitioner.extension) {
+          let extension = practitioner.extension[key];
+
+          if (extension.url === profile) {
+            for (var i in extension) {
+              if (i !== "url") {
+                practitioner.extension[key][i] = data.value;
+                break;
+              }
+            }
+
+            break;
+          }
+        }
       } else {
         practitioner[field] = data;
       }
 
+      this.practitioner = practitioner;
+
       axios
         .post(this.config.backend + "/practitioner/edit", practitioner)
         .then(response => {
-          component.practitioner = practitioner;
-
           if (response.status == 201) {
-            component.$refs["subsection" + field][0].showAlert(
+            this.$refs["subsection" + field][0].showAlert(
               "Data changed successfully!",
               "success"
             );
           } else {
-            component.$refs["subsection-" + field][0].showAlert(
+            this.$refs["subsection-" + field][0].showAlert(
               "There was an error saving this data.",
               "error"
             );
@@ -153,7 +179,6 @@ export default {
       return path;
     },
     submitDetailsForm() {
-      let component = this;
       let input = this.$refs.detailsForm.getInputs();
 
       let practitioner = this.practitioner;
@@ -213,17 +238,19 @@ export default {
         practitioner = { ...practitioner, ...input };
       }
 
+      this.practitioner = practitioner;
+
       axios
         .post(this.config.backend + "/practitioner/edit", practitioner)
         .then(response => {
           if (response.status == 201) {
-            component.cancelDetailsForm();
-            component.$refs.profileHeader.changeMessage(
+            this.cancelDetailsForm();
+            this.$refs.profileHeader.changeMessage(
               this.capitalize(title) + " added successfully!",
               "success"
             );
           } else {
-            component.$refs.profileHeader.changeMessage(
+            this.$refs.profileHeader.changeMessage(
               "There was an error saving this data.",
               "error"
             );
