@@ -1,11 +1,14 @@
 <template>
   <v-container grid-list-md>
-    <v-layout row wrap class="pb-5">
+  <v-alert v-model="alert" dismissable type="error">
+        {{ error }}
+  </v-alert>
+    <v-layout row wrap class="pb-5" >
       <v-flex xs6 class="display-2 text-xs-left">
         Search People
       </v-flex>
     </v-layout>
-    <v-layout wrap>
+    <v-layout wrap v-if="allowedToAccess">
       <v-flex xs9>
         <v-card>
           <v-card-title class="display-1">Results</v-card-title>
@@ -59,18 +62,29 @@ import axios from "axios";
 
 import Alert from "@/components/Layout/Alert.vue";
 import DynamicForm from "@/components/Form/DynamicForm.vue";
+import { store } from "@/store.js";
 
 export default {
   created() {
     this.config = require("@/config/config.json");
+    if(!store.state.isAllowToAccessTheNextPage)
+    {
+      this.error = "The user does not have the necessary privileges to access this page ";
+      this.alert = true;
+      this.allowedToAccess=false;
+    }
+    // store.state.isAllowToAccessTheNextPage=false;
   },
   components: {
     Alert,
-    DynamicForm
+    'DynamicForm':store.state.isAllowToAccessTheNextPage?DynamicForm:null
   },
   data() {
     return {
       config: null,
+      alert: false,
+      error: "",
+      allowedToAccess:true,
       headers: [
         {
           text: "Surname",

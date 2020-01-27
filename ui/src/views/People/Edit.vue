@@ -1,5 +1,8 @@
 <template>
   <v-container>
+    <v-alert v-model="alert" dismissable type="error">
+        {{ error }}
+    </v-alert>
     <ProfileHeader
       :practitioner="practitioner"
       :edit="true"
@@ -8,7 +11,7 @@
     />
 
     <v-layout>
-      <v-flex xs6 class="pr-3">
+      <v-flex xs6 class="pr-3" v-if="allowedToAccess">
         <div v-for="(element, index) in display" v-bind:key="'edit-' + index">
           <DetailsCard
             v-if="index != 'id' && index != 'resourceType' && index != 'active'"
@@ -59,8 +62,17 @@ import ProfileHeader from "@/components/People/ProfileHeader.vue";
 import SectionsToDisplay from "@/mixins/SectionsToDisplay.js";
 import StructureDefinition from "@/mixins/StructureDefinition.js";
 import Vue from "vue";
+import { store } from "@/store.js";
 
 export default {
+   created() {
+    if(!store.state.isAllowToAccessTheNextPage)
+    {
+      this.error = "The user does not have the necessary privileges to access this page ";
+      this.alert = true;
+      this.allowedToAccess=false;
+    }
+   },
   components: {
     AddSectionsMenu,
     DetailsCard,
@@ -74,7 +86,10 @@ export default {
       detailFields: {},
       detailPath: null,
       detailRaw: null,
-      detailTitle: null
+      detailTitle: null,
+      alert: false,
+      allowedToAccess:true,
+      error: ""
     };
   },
   methods: {

@@ -1,6 +1,9 @@
 <template>
-  <v-container>
-    <v-flex xs6 offset-xs3>
+  <v-container >
+    <v-alert v-model="alert" dismissable type="error">
+        {{ error }}
+    </v-alert>
+    <v-flex xs6 offset-xs3 v-if="allowedToAccess">
       <h1>Add a Person</h1>
       <p>
         To track a person in the database, whether an employee or a job
@@ -9,10 +12,6 @@
         for adding data about the person will become available. An HR Staff
         person or an HR Manager can add a new person to the system.
       </p>
-
-      <v-alert v-model="alert" dismissable type="error">
-        {{ error }}
-      </v-alert>
 
       <DynamicForm
         :fields="fields"
@@ -30,12 +29,16 @@
 <script>
 import axios from "axios";
 import DynamicForm from "@/components/Form/DynamicForm.vue";
+import { store } from "@/store.js";
 
 export default {
+  
   created() {
     this.config = require("@/config/config.json");
-    NProgress.start();
-    axios
+    if(store.state.isAllowToAccessTheNextPage)
+    {
+       NProgress.start();
+      axios
       .get(this.config.backend + "/practitioner/describe/page")
       .then(pageResponse => {
         let fields = [];
@@ -188,12 +191,23 @@ export default {
         this.addPractitionerForm = false;
         NProgress.done()
       });
-  },
+  
+  
+    }//end if isAllowedToAccessNextPage
+    else{
+      this.error = "The user does not have the necessary privileges to access this page ";
+      this.alert = true;
+      this.allowedToAccess=false;
+      //DynamicForm=null;
+    }
+   },
   components: {
+    //'DynamicForm':store.state.isAllowToAccessTheNextPage?DynamicForm:null
     DynamicForm
   },
   data() {
     return {
+      allowedToAccess:true,
       addPractitionerForm: true,
       alert: false,
       config: null,

@@ -1,8 +1,11 @@
 <template>
   <v-container grid-list-md>
+    <v-alert v-model="alert" dismissable type="error">
+        {{ error }}
+    </v-alert>
     <ProfileHeader :practitioner="practitioner" />
 
-    <v-layout wrap>
+    <v-layout wrap v-if="allowedToAccess">
       <v-col md="6">
         <v-flex v-for="(element, index, counter) in display" v-bind:key="index">
           <DetailsCard
@@ -31,8 +34,24 @@
 import DetailsCard from "@/components/People/DetailsCard.vue";
 import ProfileHeader from "@/components/People/ProfileHeader.vue";
 import SectionsToDisplay from "@/mixins/SectionsToDisplay.js";
+import { store } from "@/store.js";
 
 export default {
+  data() {
+    return {
+      alert: false,
+      error: "",
+      allowedToAccess:true
+    }
+  },
+  created(){
+    if(!store.state.isAllowToAccessTheNextPage)
+    {
+      this.error = "The user does not have the necessary privileges to access this page ";
+      this.alert = true;
+      this.allowedToAccess=false;
+    }
+  },
   components: {
     DetailsCard,
     ProfileHeader

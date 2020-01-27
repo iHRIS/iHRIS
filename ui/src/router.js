@@ -12,7 +12,18 @@ let router = new Router({
       path: "/",
       name: "home",
       props: true,
-      component: () => import(/* webpackChunkName: "home" */ "./views/Home.vue")
+      component: () => import(/* webpackChunkName: "home" */ "./views/Home.vue"),
+      beforeEnter (to, from, next) {
+        var roles=store.state.roles;
+        if(roles == "Admin" || roles == "Edit" || roles == "View")
+        {
+          store.state.isAllowToAccessTheNextPage = true;
+          next();
+        }
+        else{
+          next(false);
+        }
+      }
     },
     {
       path: "/account",
@@ -24,13 +35,36 @@ let router = new Router({
       path: "/admin/add-user",
       name: "admin-add-user",
       component: () =>
-        import(/* webpackChunkName: "adminAddUser" */ "./views/Admin/AddUser.vue")
+        import(/* webpackChunkName: "adminAddUser" */ "./views/Admin/AddUser.vue"),
+        beforeEnter (to, from, next) {
+          var roles=store.state.roles;
+          if(roles == "Admin" )
+          {
+            store.state.isAllowToAccessTheNextPage = true;
+          }
+          else{
+            store.state.isAllowToAccessTheNextPage = false;
+          }
+          next();
+        }
+        
     },
     {
       path: "/admin/users",
       name: "admin-users",
       component: () =>
-        import(/* webpackChunkName: "adminsUsers" */ "./views/Admin/Users.vue")
+        import(/* webpackChunkName: "adminsUsers" */ "./views/Admin/Users.vue"),
+        beforeEnter (to, from, next) {
+          var roles=store.state.roles;
+          if(roles == "Admin" )
+          {
+            store.state.isAllowToAccessTheNextPage = true;
+          }
+          else{
+            store.state.isAllowToAccessTheNextPage = false;
+          }
+          next();
+        }
     },
     {
       path: "/change-password",
@@ -66,37 +100,112 @@ let router = new Router({
       path: "/people/search",
       name: "search-people",
       component: () =>
-        import(/* webpackChunkName: "People" */ "./views/People/Search.vue")
+        import(/* webpackChunkName: "People" */ "./views/People/Search.vue"),
+        beforeEnter (to, from, next) {
+        var roles=store.state.roles;
+        if(roles == "Admin" || roles == "Edit" || roles == "View")
+        {
+          store.state.isAllowToAccessTheNextPage = true;
+         
+          next();
+        }
+        else{
+          store.state.isAllowToAccessTheNextPage = false;
+          return;
+        }
+        }
     },
     {
       path: "/people/add",
       name: "add-people",
       component: () =>
-        import(/* webpackChunkName: "AddPeople" */ "./views/People/Add.vue")
+        import(/* webpackChunkName: "AddPeople" */ "./views/People/Add.vue"),
+        beforeEnter (to, from, next) {
+          //console.log("Add people entered...");
+          var roles=store.state.roles;
+          if(roles == "Admin" || roles == "Edit" )
+          {
+            store.state.isAllowToAccessTheNextPage = true;
+            next();
+          }
+          else{
+            store.state.isAllowToAccessTheNextPage = false;
+            next();
+          }
+        }
     },
     {
       path: "/people/add/:section/:id",
       name: "edit-people",
       component: () =>
-        import(/* webpackChunkName: "EditPeople" */ "./views/People/AddSubsection.vue")
+        import(/* webpackChunkName: "EditPeople" */ "./views/People/AddSubsection.vue"),
+        beforeEnter (to, from, next) {
+          var roles=store.state.roles;
+          if(roles == "Admin" || roles == "Edit" )
+          {
+            store.state.isAllowToAccessTheNextPage = true;
+            next();
+          }
+          else{
+            store.state.isAllowToAccessTheNextPage = false;
+            return;
+          }
+        }
     },
     {
       path: "/people/edit/:id",
       name: "people-edit",
       component: () =>
-        import(/* webpackChunkName: "ViewPeople" */ "./views/People/Edit.vue")
+        import(/* webpackChunkName: "ViewPeople" */ "./views/People/Edit.vue"),
+        beforeEnter (to, from, next) {
+          var roles=store.state.roles;
+          if(roles == "Admin" || roles == "Edit" )
+          {
+            store.state.isAllowToAccessTheNextPage = true;
+            next();
+          }
+          else{
+            store.state.isAllowToAccessTheNextPage = false;
+            return;
+          }
+        }
     },
     {
       path: "/people/view/:id",
       name: "people-view",
       component: () =>
-        import(/* webpackChunkName: "ViewPeople" */ "./views/People/View.vue")
+        import(/* webpackChunkName: "ViewPeople" */ "./views/People/View.vue"),
+        beforeEnter (to, from, next) {
+          var roles=store.state.roles;
+          if(roles == "Admin" || roles == "Edit" || roles == "View")
+          //if(roles == "Admin" || roles == "Edit" )
+          {
+            store.state.isAllowToAccessTheNextPage = true;
+            next();
+          }
+          else{
+            store.state.isAllowToAccessTheNextPage = false;
+            return;
+          }
+        }
     },
     {
       path: "/relationship",
       name: "relationship",
       component: () =>
-        import(/* webpackChunkName: "about" */ "./views/Relationship/Relationship.vue")
+        import(/* webpackChunkName: "about" */ "./views/Relationship/Relationship.vue"),
+        beforeEnter (to, from, next) {
+          var roles=store.state.roles;
+          if(roles == "Admin")
+          {
+            store.state.isAllowToAccessTheNextPage = true;
+            next();
+          }
+          else{
+            store.state.isAllowToAccessTheNextPage = false;
+            return;
+          }
+        }
     },
     {
       path: "/terms-and-conditions",
