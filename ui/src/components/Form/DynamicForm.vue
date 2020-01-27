@@ -141,6 +141,17 @@
         :hint="field.short"
       />
 
+      <Reference
+        v-if="field.type === 'Reference'"
+        :label="field.label"
+        :max="field.max"
+        :required="field.required"
+        :ref="field.name"
+        :value="field.value"
+        :hint="field.short"
+        :structureDefinition="field.reference"
+      />
+
       <String
         v-if="field.type == 'string'"
         :label="field.label"
@@ -225,6 +236,7 @@ import Markdown from "@/components/Form/Markdown.vue";
 import Oid from "@/components/Form/Oid.vue";
 import Password from "@/components/Form/Password.vue";
 import PositiveInt from "@/components/Form/PositiveInt.vue";
+import Reference from "@/components/Form/Reference.vue";
 import String from "@/components/Form/String.vue";
 import Time from "@/components/Form/Time.vue";
 import UnsignedInt from "@/components/Form/UnsignedInt.vue";
@@ -251,6 +263,7 @@ export default {
     Oid,
     Password,
     PositiveInt,
+    Reference,
     String,
     Time,
     UnsignedInt,

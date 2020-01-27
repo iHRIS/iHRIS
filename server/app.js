@@ -7,6 +7,7 @@ var dashboardRouter = require('./routes/dashboard');
 var indexRouter = require('./routes/index');
 var practitionerRouter = require('./routes/practitioner');
 var relationshipRouter = require('./routes/relationship');
+var structureDefinitionRouter = require('./routes/structureDefinition');
 var userRouter = require('./routes/user');
 
 var app = express();
@@ -27,6 +28,7 @@ app.use('/', indexRouter);
 app.use('/dashboard', dashboardRouter);
 app.use('/practitioner', practitionerRouter);
 app.use('/relationship', relationshipRouter);
+app.use('/structure-definition', structureDefinitionRouter);
 app.use('/user', userRouter);
 
 module.exports = app;
