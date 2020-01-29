@@ -11,7 +11,6 @@ const config = require(__dirname + "/../config/config.json")[env];
 router.post("/send-message", function (req, res, next) {
   let url = URI(config.fhir.server).segment('fhir').segment('CommunicationRequest');
   let data = req.body;
-  data["resourceType"] = "CommunicationRequest";
 
   let recipients = [];
 
@@ -43,7 +42,6 @@ router.post("/send-message", function (req, res, next) {
   }).then(response => {
     res.status(201).json(response.data);
   }).catch(err => {
-    console.log(err);
     res.status(400).json(err);
   });
 });

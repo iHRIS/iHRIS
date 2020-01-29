@@ -4,6 +4,6 @@
   "backend": "http://localhost:3000",
   "kibana": "http://www.mykibana.org",
   "mHero": {
-    "emNutt": "http://emnutt.ihris.org:3000"
+    "emNutt": "http://www.myemnutt.com"
   }
 }
