@@ -62,6 +62,7 @@ export default {
   },
   created() {
     this.config = require("@/config/config.json");
+
     let structureDefinition = this.structureDefinition.slice(
       this.structureDefinition.lastIndexOf("/") + 1
     );

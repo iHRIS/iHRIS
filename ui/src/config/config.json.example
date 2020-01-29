@@ -2,5 +2,8 @@
   "logo": "https://www.ihris.org/sites/ihris/files/ihrislogo2019a.png",
   "site": "Demonstration site",
   "backend": "http://localhost:3000",
-  "kibana": "http://www.mykibana.org"
+  "kibana": "http://www.mykibana.org",
+  "mHero": {
+    "emNutt": "http://emnutt.ihris.org:3000"
+  }
 }
