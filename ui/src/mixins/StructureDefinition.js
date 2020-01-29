@@ -86,7 +86,10 @@ export default {
             let type = field.type[0].code;
 
             // if this is a primitive type, we are done
-            if (this.primitiveTypes.indexOf(type) >= 0 || type === "Reference") {
+            if (
+              this.primitiveTypes.indexOf(type) >= 0 ||
+              type === "Reference"
+            ) {
               fields[field.id] = this.formatField(field, type);
             } else {
               let subfields = this.getFields(field.type[0].code);

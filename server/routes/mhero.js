@@ -6,7 +6,48 @@ const env = process.env.NODE_ENV || "development";
 const config = require(__dirname + "/../config/config.json")[env];
 
 /**
- * Get all dashboards
+ * Send message
+ */
+router.post("/send-message", function (req, res, next) {
+  let url = URI(config.fhir.server).segment('fhir').segment('CommunicationRequest');
+  let data = req.body;
+
+  let recipients = [];
+
+  data.practitioners.forEach(practitioner => {
+    recipients.push({
+      reference: "Practitioner/" + practitioner
+    });
+  });
+
+  let payload = {
+    payload: [
+      {
+        contentAttachment: {
+          url: data.workflow
+        }
+      }
+    ],
+    recipient: recipients,
+    resourceType: "CommunicationRequest",
+    workflow: data.workflow
+  };
+
+  axios.post(url.toString(), payload, {
+    withCredentials: true,
+    auth: {
+      username: config.fhir.username,
+      password: config.fhir.password
+    }
+  }).then(response => {
+    res.status(201).json(response.data);
+  }).catch(err => {
+    res.status(400).json(err);
+  });
+});
+
+/**
+ * Get all workflows
  */
 router.get("/workflows", function (req, res, next) {
   let url = URI(config.fhir.server).segment('fhir').segment('Basic');

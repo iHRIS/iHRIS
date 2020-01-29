@@ -13,7 +13,11 @@
           </v-list-item-icon>
 
           <v-list-item-content>
-            <v-list-item-title class="white--text" v-bind:class="{ 'text-uppercase': !item.doNotCapitalize }">{{ item.title }}</v-list-item-title>
+            <v-list-item-title
+              class="white--text"
+              v-bind:class="{ 'text-uppercase': !item.doNotCapitalize }"
+              >{{ item.title }}</v-list-item-title
+            >
           </v-list-item-content>
         </template>
 
@@ -38,7 +42,11 @@
         </v-list-item-icon>
 
         <v-list-item-content>
-          <v-list-item-title class="white--text" v-bind:class="{ 'text-uppercase': !item.doNotCapitalize }">{{ item.title }}</v-list-item-title>
+          <v-list-item-title
+            class="white--text"
+            v-bind:class="{ 'text-uppercase': !item.doNotCapitalize }"
+            >{{ item.title }}</v-list-item-title
+          >
         </v-list-item-content>
       </v-list-item>
     </v-list>
@@ -91,15 +99,15 @@ export default {
           title: "People"
         },
         {
-          action: {name: "mhero"},
+          action: { name: "mhero" },
           icon: "phone",
           submenu: [
             {
-              action: {name: "mhero"},
+              action: { name: "mhero" },
               title: "Send Message"
             },
             {
-              action: {name: "mhero-reports"},
+              action: { name: "mhero-reports" },
               title: "Run Reports"
             }
           ],
