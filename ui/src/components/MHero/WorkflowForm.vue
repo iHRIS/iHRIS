@@ -113,7 +113,9 @@ export default {
         let cadre = "";
         let contactGroup = "";
         let facility = "";
-        let id = practitioner.practitioner.slice(practitioner.practitioner.lastIndexOf("/") + 1);
+        let id = practitioner.practitioner.slice(
+          practitioner.practitioner.lastIndexOf("/") + 1
+        );
         let jurisdiction = "";
         let name = "";
         let organization = "";

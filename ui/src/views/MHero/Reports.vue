@@ -8,9 +8,7 @@
         <div v-for="item in numOptions" v-bind:key="item">
           <ReportOptions />
         </div>
-        <v-btn
-          @click="numOptions++"
-        >
+        <v-btn @click="numOptions++">
           Add Options
         </v-btn>
         <v-row>
@@ -32,7 +30,10 @@
                   v-on="on"
                 ></v-text-field>
               </template>
-              <v-date-picker v-model="fromDate" @input="fromPicker = false"></v-date-picker>
+              <v-date-picker
+                v-model="fromDate"
+                @input="fromPicker = false"
+              ></v-date-picker>
             </v-menu>
           </v-col>
           <v-col cols="12" sm="6" md="4">
@@ -53,7 +54,10 @@
                   v-on="on"
                 ></v-text-field>
               </template>
-              <v-date-picker v-model="toDate" @input="toPicker = false"></v-date-picker>
+              <v-date-picker
+                v-model="toDate"
+                @input="toPicker = false"
+              ></v-date-picker>
             </v-menu>
           </v-col>
         </v-row>
@@ -64,7 +68,6 @@
         <v-btn>Run Report</v-btn>
       </v-card-actions>
     </v-card>
-
   </v-container>
 </template>
 
@@ -84,5 +87,5 @@ export default {
       toPicker: false
     };
   }
-}
+};
 </script>

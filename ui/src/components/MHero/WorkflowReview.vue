@@ -34,6 +34,8 @@
 </template>
 
 <script>
+import axios from "axios";
+
 export default {
   data() {
     return {
@@ -53,7 +55,21 @@ export default {
       this.$emit("editWorkflow");
     },
     send() {
-      this.alert = true;
+      let config = require("@/config/config.json");
+      let practitioners = [];
+
+      this.practitioners.forEach(practitioner => {
+        practitioners.push(practitioner.id);
+      });
+
+      let data = {
+        practitioners: practitioners,
+        workflow: this.workflow
+      };
+
+      axios.post(config.backend + "/mhero/send-message", data).then(() => {
+        this.alert = true;
+      });
     }
   },
   props: [

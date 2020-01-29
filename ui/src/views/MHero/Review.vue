@@ -4,12 +4,8 @@
       Messages sent!
     </v-alert>
     <v-card class="mb-5">
-      <v-card-title>
-        Workflow: {{ workflow }}
-      </v-card-title>
-      <v-card-text>
-        Frequency: {{ frequency }}
-      </v-card-text>
+      <v-card-title> Workflow: {{ workflow }} </v-card-title>
+      <v-card-text> Frequency: {{ frequency }} </v-card-text>
     </v-card>
 
     <v-card>
@@ -39,12 +35,12 @@ export default {
       workflow: "Sample Workflow",
       frequency: "Once",
       headers: [
-        { text: 'Name', value: 'name'},
-        { text: 'Jurisdiction', value: 'jurisdiction' },
-        { text: 'Facility', value: 'facility' },
-        { text: 'Cadre', value: 'cadre' },
-        { text: 'Organization', value: 'organization' },
-        { text: 'Contact Group', value: 'contactGroup' },
+        { text: "Name", value: "name" },
+        { text: "Jurisdiction", value: "jurisdiction" },
+        { text: "Facility", value: "facility" },
+        { text: "Cadre", value: "cadre" },
+        { text: "Organization", value: "organization" },
+        { text: "Contact Group", value: "contactGroup" }
       ],
       practitioners: [
         {
@@ -81,7 +77,11 @@ export default {
         }
       ],
       workflows: [
-        "Flu Epidemic", "Emergency Closure", "National Emergency", "H1N1 Outbreak", "Viral Epidemic"
+        "Flu Epidemic",
+        "Emergency Closure",
+        "National Emergency",
+        "H1N1 Outbreak",
+        "Viral Epidemic"
       ]
     };
   },
@@ -90,5 +90,5 @@ export default {
       this.alert = true;
     }
   }
-}
+};
 </script>

@@ -1,19 +1,10 @@
 <template>
   <v-row>
     <v-col cols="12" sm="6" md="4">
-      <v-autocomplete
-        label="Category"
-        :items="categories"
-        v-model="category"
-      />
+      <v-autocomplete label="Category" :items="categories" v-model="category" />
     </v-col>
     <v-col cols="12" sm="6" md="4" v-if="category">
-      <v-autocomplete
-        :label="category"
-        :items="options"
-        multiple
-        chips
-      >
+      <v-autocomplete :label="category" :items="options" multiple chips>
       </v-autocomplete>
     </v-col>
   </v-row>
@@ -25,20 +16,30 @@ export default {
     options() {
       if (this.category == "Cadre") {
         return [
-          "ART Manager", "Lab Tech", "Midwife", "Nurse", "Officer in Charge", "Pharmacist", "Surveillance Officer"
+          "ART Manager",
+          "Lab Tech",
+          "Midwife",
+          "Nurse",
+          "Officer in Charge",
+          "Pharmacist",
+          "Surveillance Officer"
         ];
       }
 
       if (this.category == "Jurisdiction") {
         return [
-          "Bo", "Kailahun", "Kenema", "Kono", "Makeni", "Moyamba", "Port Loko"
+          "Bo",
+          "Kailahun",
+          "Kenema",
+          "Kono",
+          "Makeni",
+          "Moyamba",
+          "Port Loko"
         ];
       }
 
       if (this.category == "User") {
-        return [
-          "User 1", "User 2", "User 3"
-        ];
+        return ["User 1", "User 2", "User 3"];
       }
 
       if (this.category == "Workflow") {
@@ -51,14 +52,19 @@ export default {
   data() {
     return {
       category: null,
-      categories: [
-        "Cadre", "Jurisdiction", "User", "Workflow"
-      ],
+      categories: ["Cadre", "Jurisdiction", "User", "Workflow"],
       individuals: [
-        "Grace Bah", "Blessing Condeh", "Maria Tucker", "Joseph Simbeye"
+        "Grace Bah",
+        "Blessing Condeh",
+        "Maria Tucker",
+        "Joseph Simbeye"
       ],
       workflows: [
-        "Flu Epidemic", "Emergency Closure", "National Emergency", "H1N1 Outbreak", "Viral Epidemic"
+        "Flu Epidemic",
+        "Emergency Closure",
+        "National Emergency",
+        "H1N1 Outbreak",
+        "Viral Epidemic"
       ]
     };
   }
