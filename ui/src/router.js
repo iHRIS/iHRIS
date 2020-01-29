@@ -83,14 +83,6 @@ let router = new Router({
         )
     },
     {
-      path: "/mhero/review",
-      name: "mhero-review",
-      component: () =>
-        import(
-          /* webpackChunkName: "Mhero Review" */ "./views/MHero/Review.vue"
-        )
-    },
-    {
       path: "/people/search",
       name: "search-people",
       component: () =>
