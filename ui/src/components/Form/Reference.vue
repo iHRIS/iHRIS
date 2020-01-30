@@ -61,8 +61,9 @@ export default {
           });
         });
 
+        // this is an empty option to allow for the creation of new reference items
         options.push({
-          text: '<a href="http://www.google.com>Add Another</a>',
+          text: null,
           value: null
         });
 
