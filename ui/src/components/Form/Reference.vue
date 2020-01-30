@@ -1,5 +1,5 @@
 <template>
-  <v-select
+  <v-autocomplete
     :items="codes"
     :label="label"
     outline
@@ -9,7 +9,23 @@
     :rules="[rules.required]"
     @change="changeValue"
     :hint="hint"
-  ></v-select>
+  >
+    <template v-slot:item="data">
+      <template v-if="data.item.value">
+        <v-list-item-content v-text="data.item.text"></v-list-item-content>
+      </template>
+      <template v-else>
+        <v-btn
+          class="font-weight-bold primary--text text-uppercase"
+          text
+          depressed
+          @click.stop="showAddForm"
+        >
+          Add Another
+        </v-btn>
+      </template>
+    </template>
+  </v-autocomplete>
 </template>
 
 <script>
@@ -18,32 +34,42 @@ import axios from "axios";
 export default {
   created() {
     let config = require("@/config/config.json");
-    let structureDefinition = this.structureDefinition.slice(this.structureDefinition.lastIndexOf("/") + 1);
+    let structureDefinition = this.structureDefinition.slice(
+      this.structureDefinition.lastIndexOf("/") + 1
+    );
 
-    axios.get(config.backend + "/structure-definition/all/" + structureDefinition).then(response => {
-      let options = [];
+    axios
+      .get(config.backend + "/structure-definition/all/" + structureDefinition)
+      .then(response => {
+        let options = [];
 
-      response.data.forEach(data => {
-        // figure out what field we want to use, usually name or text
-        let description = null;
+        response.data.forEach(data => {
+          // figure out what field we want to use, usually name or text
+          let description = null;
 
-        if (data.resource.name) {
-          description = data.resource.name;
-        } else if (data.resource.text) {
-          description = data.resource.text;
-        } else {
-          description = data.resource.id;
-        }
+          if (data.resource.name) {
+            description = data.resource.name;
+          } else if (data.resource.text) {
+            description = data.resource.text;
+          } else {
+            description = data.resource.id;
+          }
 
-        options.push({
-          text: description,
-          value: data.resource.id
+          options.push({
+            text: description,
+            value: data.resource.id
+          });
         });
-      });
 
-      this.codes = options;
-      this.reference = this.value;
-    });
+        // this is an empty option to allow for the creation of new reference items
+        options.push({
+          text: null,
+          value: null
+        });
+
+        this.codes = options;
+        this.reference = this.value;
+      });
   },
   data() {
     return {
