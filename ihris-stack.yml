@@ -1,0 +1,11 @@
+version: '3.7'
+
+services:
+  ihris-ui:
+    image: ihris-ui:1.0-BETA
+    ports:
+      - "8080:8080"
+  ihris-server:
+    image: ihris-server:1.0-BETA
+    ports:
+      - "3000:3000"
