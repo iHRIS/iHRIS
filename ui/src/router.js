@@ -83,6 +83,14 @@ let router = new Router({
         )
     },
     {
+      path: "/mhero/user-manual",
+      name: "mhero-user-manual",
+      component: () =>
+        import(
+          /* webpackChunkName: "Mhero User Manual" */ "./views/MHero/UserManual.vue"
+        )
+    },
+    {
       path: "/people/search",
       name: "search-people",
       component: () =>
