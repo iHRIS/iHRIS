@@ -100,7 +100,7 @@ export default {
         },
         {
           action: { name: "mhero" },
-          icon: "phone",
+          icon: "mdi-cellphone-basic",
           submenu: [
             {
               action: { name: "mhero" },
