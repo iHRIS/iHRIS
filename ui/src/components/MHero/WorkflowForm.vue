@@ -209,7 +209,7 @@ export default {
         { text: "Jurisdiction", value: "jurisdiction" },
         { text: "Facility", value: "facility" },
         { text: "Cadre", value: "cadre" },
-        { text: "Organization", value: "organization" },
+        { text: "Organizational Affiliation", value: "organization" },
         { text: "Contact Group", value: "contactGroup" }
       ],
       items: ["minutes", "hours", "days", "weeks"],
