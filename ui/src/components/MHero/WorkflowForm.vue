@@ -5,7 +5,7 @@
         <v-autocomplete
           :search-input.sync="workflowName"
           v-model="workflow"
-          label="Workflow"
+          label="Select flow from RapidPro"
           :items="workflows"
         >
         </v-autocomplete>
