@@ -56,7 +56,7 @@
       </v-card-title>
       <v-data-table
         v-model="selected"
-        loading
+        :loading="loading"
         loading-text="Loading....Please wait"
         :headers="headers"
         :items="practitioners"
@@ -196,6 +196,7 @@ export default {
       });
 
       this.practitioners = practitioners;
+      this.loading = false;
     });
   },
   data() {
@@ -212,6 +213,7 @@ export default {
         { text: "Contact Group", value: "contactGroup" }
       ],
       items: ["minutes", "hours", "days", "weeks"],
+      loading: true,
       period: null,
       practitioners: [],
       search: null,
