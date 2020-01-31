@@ -1,75 +1,78 @@
 <template>
   <v-container>
-    <v-card class="mb-5">
-      <v-card-text>
-        <v-autocomplete
-          :search-input.sync="workflowName"
-          v-model="workflow"
-          label="Select flow from RapidPro"
-          :items="workflows"
-        >
-        </v-autocomplete>
+    <v-form ref="form">
+      <v-card class="mb-5">
+        <v-card-text>
+          <v-autocomplete
+            :search-input.sync="workflowName"
+            v-model="workflow"
+            label="Select flow from RapidPro"
+            :items="workflows"
+            :rules="[rules.required]"
+          >
+          </v-autocomplete>
 
-        How often should this workflow be sent?
+          How often should this workflow be sent?
 
-        <v-radio-group row v-model="frequency">
-          <v-radio label="Once" value="once"></v-radio>
-          <v-radio label="Recurring" value="recurring"></v-radio>
-        </v-radio-group>
-        <v-row v-if="recurring">
-          <v-col cols="1">
-            <v-select v-model="period" label="Period" :items="items" />
-          </v-col>
-          <v-col cols="3">
-            <v-text-field
-              v-model="frequencyAmount"
-              prefix="Recur every"
-              :suffix="frequencySuffix"
-            ></v-text-field>
-          </v-col>
-        </v-row>
-        <v-row v-if="recurring" v-model="showRecurringOptions">
-          <v-col cols="1" />
-          <v-checkbox
-            v-for="item in recurringOptions"
-            :key="item"
-            class="mx-2"
-            :label="item"
-            :value="item"
-            v-model="frequencySpecifics"
-          />
-        </v-row>
-      </v-card-text>
-    </v-card>
+          <v-radio-group row v-model="frequency" :rules="[rules.required]">
+            <v-radio label="Once" value="once"></v-radio>
+            <v-radio label="Recurring" value="recurring"></v-radio>
+          </v-radio-group>
+          <v-row v-if="recurring">
+            <v-col cols="1">
+              <v-select v-model="period" label="Period" :items="items" />
+            </v-col>
+            <v-col cols="3">
+              <v-text-field
+                v-model="frequencyAmount"
+                prefix="Recur every"
+                :suffix="frequencySuffix"
+              ></v-text-field>
+            </v-col>
+          </v-row>
+          <v-row v-if="recurring" v-model="showRecurringOptions">
+            <v-col cols="1" />
+            <v-checkbox
+              v-for="item in recurringOptions"
+              :key="item"
+              class="mx-2"
+              :label="item"
+              :value="item"
+              v-model="frequencySpecifics"
+            />
+          </v-row>
+        </v-card-text>
+      </v-card>
 
-    <v-card>
-      <v-card-title>
-        Practitioners
-        <v-spacer></v-spacer>
-        <v-text-field
-          v-model="search"
-          append-icon="search"
-          label="Search"
-          single-line
-          hide-details
-        ></v-text-field>
-      </v-card-title>
-      <v-data-table
-        v-model="selected"
-        :loading="loading"
-        loading-text="Loading....Please wait"
-        :headers="headers"
-        :items="practitioners"
-        :search="search"
-        item-key="id"
-        show-select
-        class="elevation-1"
-      ></v-data-table>
-      <v-card-actions class="secondary">
-        <v-spacer></v-spacer>
-        <v-btn @click="nextStep">Review Selection</v-btn>
-      </v-card-actions>
-    </v-card>
+      <v-card>
+        <v-card-title>
+          Practitioners
+          <v-spacer></v-spacer>
+          <v-text-field
+            v-model="search"
+            append-icon="search"
+            label="Search"
+            single-line
+            hide-details
+          ></v-text-field>
+        </v-card-title>
+        <v-data-table
+          v-model="selected"
+          :loading="loading"
+          loading-text="Loading....Please wait"
+          :headers="headers"
+          :items="practitioners"
+          :search="search"
+          item-key="id"
+          show-select
+          class="elevation-1"
+        ></v-data-table>
+        <v-card-actions class="secondary">
+          <v-spacer></v-spacer>
+          <v-btn @click="nextStep">Review Selection</v-btn>
+        </v-card-actions>
+      </v-card>
+    </v-form>
   </v-container>
 </template>
 
@@ -216,6 +219,15 @@ export default {
       loading: true,
       period: null,
       practitioners: [],
+      rules: {
+        required: value => {
+          if (value) {
+            return true;
+          }
+
+          return "Field is required";
+        }
+      },
       search: null,
       selected: [],
       workflow: null,
@@ -225,16 +237,18 @@ export default {
   },
   methods: {
     nextStep() {
-      this.$emit(
-        "nextStep",
-        this.selected,
-        this.frequency,
-        this.frequencyAmount,
-        this.period,
-        this.workflow,
-        this.workflowName,
-        this.frequencySpecifics
-      );
+      if (this.$refs.form.validate()) {
+        this.$emit(
+          "nextStep",
+          this.selected,
+          this.frequency,
+          this.frequencyAmount,
+          this.period,
+          this.workflow,
+          this.workflowName,
+          this.frequencySpecifics
+        );
+      }
     }
   },
   mixins: [Practitioner]
