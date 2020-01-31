@@ -1,7 +1,7 @@
 <template>
   <v-row>
     <v-col cols="12" sm="6" md="4">
-      <v-autocomplete label="Category" :items="categories" v-model="category" />
+      <v-autocomplete label="Category" :items="categories" v-model="category" chips />
     </v-col>
     <v-col cols="12" sm="6" md="4" v-if="category">
       <v-autocomplete :label="category" :items="options" multiple chips>
