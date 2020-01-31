@@ -10,6 +10,7 @@
           :frequency="frequency"
           :period="period"
           :practitioners="selected"
+          :specifics="frequencySpecifics"
           :workflow="workflow"
           :workflowName="workflowName"
           v-on:editWorkflow="changeWorkflow"
@@ -32,6 +33,7 @@ export default {
     return {
       frequency: false,
       frequencyAmount: null,
+      frequencySpecifics: null,
       period: null,
       selected: [],
       stepper: 0,
@@ -49,10 +51,12 @@ export default {
       frequencyAmount,
       period,
       workflow,
-      workflowName
+      workflowName,
+      frequencySpecifics
     ) {
       this.frequency = frequency;
       this.frequencyAmount = frequencyAmount;
+      this.frequencySpecifics = frequencySpecifics;
       this.period = period;
       this.selected = selected;
       this.workflow = workflow;

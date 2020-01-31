@@ -18,18 +18,26 @@
         </v-radio-group>
         <v-row v-if="recurring">
           <v-col cols="1">
-            <v-subheader>Every</v-subheader>
+            <v-select v-model="period" label="Period" :items="items" />
           </v-col>
-          <v-col cols="2">
+          <v-col cols="3">
             <v-text-field
               v-model="frequencyAmount"
-              label="Frequency"
+              prefix="Recur every"
+              :suffix="frequencySuffix"
             ></v-text-field>
           </v-col>
-          <v-col cols="2">
-            <v-select v-model="period" label="Period" :items="items">
-            </v-select>
-          </v-col>
+        </v-row>
+        <v-row v-if="recurring" v-model="showRecurringOptions">
+          <v-col cols="1" />
+          <v-checkbox
+            v-for="item in recurringOptions"
+            :key="item"
+            class="mx-2"
+            :label="item"
+            :value="item"
+            v-model="frequencySpecifics"
+          />
         </v-row>
       </v-card-text>
     </v-card>
@@ -72,8 +80,43 @@ import Practitioner from "@/mixins/Practitioner.js";
 
 export default {
   computed: {
+    frequencySuffix() {
+      if (this.period) {
+        let suffix = this.period + "(s)";
+
+        if (this.period === "weeks") {
+          suffix += " on ";
+        }
+
+        return suffix;
+      }
+
+      return null;
+    },
     recurring() {
       return this.frequency === "recurring";
+    },
+    recurringOptions() {
+      if (this.frequency !== "recurring") {
+        return [];
+      }
+
+      if (this.period === "weeks") {
+        return [
+          "Sunday",
+          "Monday",
+          "Tuesday",
+          "Wednesday",
+          "Thursday",
+          "Friday",
+          "Saturday"
+        ];
+      }
+
+      return [];
+    },
+    showRecurringOptions() {
+      return this.frequency === "recurring" && this.period === "weeks";
     }
   },
   created() {
@@ -159,6 +202,7 @@ export default {
     return {
       frequency: false,
       frequencyAmount: null,
+      frequencySpecifics: [],
       headers: [
         { text: "Name", value: "name" },
         { text: "Jurisdiction", value: "jurisdiction" },
@@ -186,7 +230,8 @@ export default {
         this.frequencyAmount,
         this.period,
         this.workflow,
-        this.workflowName
+        this.workflowName,
+        this.frequencySpecifics
       );
     }
   },
