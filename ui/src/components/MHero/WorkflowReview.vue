@@ -9,7 +9,7 @@
         Frequency: {{ frequency }}
 
         <div v-if="frequency === 'recurring'">
-          Every {{ amount }} {{ period }}
+          Every {{ amount }} {{ period }} <span>{{ sanitizedSpecifics }}</span>
         </div>
       </v-card-text>
     </v-card>
@@ -37,6 +37,15 @@
 import axios from "axios";
 
 export default {
+  computed: {
+    sanitizedSpecifics() {
+      if (this.specifics && this.period === "weeks") {
+        return "on " + this.specifics.join(", ");
+      }
+
+      return null;
+    }
+  },
   data() {
     return {
       alert: false,
@@ -77,6 +86,7 @@ export default {
     "frequency",
     "period",
     "practitioners",
+    "specifics",
     "workflow",
     "workflowName"
   ]
