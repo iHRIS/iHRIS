@@ -29,10 +29,11 @@
       </template>
     </v-autocomplete>
 
-    <v-dialog v-model="dialog">
+    <v-dialog v-model="dialog" width="500" max-width="500">
       <v-card>
         <v-card-title>{{ name }}</v-card-title>
         <v-card-text>
+          <Alert ref="referenceModalAlert" />
           <DynamicForm
             :fields="fields"
             :name="name"
@@ -58,7 +59,7 @@ export default {
     DynamicForm: () => import("./DynamicForm.vue")
   },
   created() {
-    let config = require("@/config/config.json");
+    this.config = require("@/config/config.json");
     let structureDefinition = this.structureDefinition.slice(
       this.structureDefinition.lastIndexOf("/") + 1
     );
@@ -66,7 +67,9 @@ export default {
     this.name = structureDefinition;
 
     axios
-      .get(config.backend + "/structure-definition/all/" + structureDefinition)
+      .get(
+        this.config.backend + "/structure-definition/all/" + structureDefinition
+      )
       .then(response => {
         let options = [];
 
@@ -105,8 +108,10 @@ export default {
   data() {
     return {
       codes: [],
+      config: null,
       dialog: false,
       fields: [],
+      modalAlert: false,
       name: null,
       reference: null,
       rules: {
@@ -120,7 +125,11 @@ export default {
     };
   },
   methods: {
-    cancel() {},
+    cancel() {
+      this.dialog = false;
+      this.modalAlert = false;
+      this.$refs.referenceModalForm.reset();
+    },
     changeValue(value) {
       this.reference = value;
     },
@@ -130,8 +139,26 @@ export default {
     showAddAnotherForm() {
       this.dialog = true;
     },
-    showFailedSubmit() {},
-    submit() {}
+    showFailedSubmit() {
+      this.$refs.referenceModalAlert.changeMessage("Data not saved. ", "error");
+
+      this.modalAlert = true;
+    },
+    submit() {
+      let input = this.$refs.referenceModalForm.getInputs();
+      input.resourceType = this.name;
+
+      axios
+        .post(this.config.backend + "/structure-definition/add", input)
+        .then(response => {
+          if (response.status == 201) {
+            this.modalAlert = false;
+            this.dialog = false;
+          } else {
+            this.showFailedSubmit();
+          }
+        });
+    }
   },
   mixins: [StructureDefinition],
   props: ["label", "required", "value", "hint", "max", "structureDefinition"]
