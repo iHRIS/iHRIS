@@ -1,0 +1,58 @@
+{
+  
+  "development": {
+    "port":3000,
+    "definitions": {
+      "practitionerPage": "Basic/iHRISPagePractitioner"
+    },
+    "elastic": {
+      "server": "http://localhost:9200",
+      "username": "username",
+      "password": "username",
+      "max_compilations_rate": "10000/1m"
+    },
+    "fhir": {
+      "server": "localhost",
+      "username": "username",
+      "password": "password"
+    },
+    "kibana": "https://www.elastic.co/products/kibana",
+    "structureDefinition": "http://server.com/fhir"
+  },
+  "test": {
+    "port":3000,
+    "definitions": {
+      "practitionerPage": "Basic/iHRISPagePractitioner"
+    },
+    "elastic": {
+      "server": "http://localhost:9200",
+      "username": "username",
+      "password": "username"
+    },
+    "fhir": {
+      "server": "localhost",
+      "username": "username",
+      "password": "password"
+    },
+    "kibana": "https://www.elastic.co/products/kibana",
+    "structureDefinition": "http://server.com/fhir"
+  },
+  "production": {
+    "port":3000,
+    "definitions": {
+      "practitionerPage": "Basic/iHRISPagePractitioner"
+    },
+    "elastic": {
+      "server": "http://localhost:9200",
+      "username": "username",
+      "password": "username"
+    },
+    "fhir": {
+      "server": "localhost",
+      "username": "username",
+      "password": "password"
+    },
+    "kibana": "https://www.elastic.co/products/kibana",
+    "structureDefinition": "http://server.com/fhir"
+  }
+}
