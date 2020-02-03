@@ -5,8 +5,7 @@
       :label="label"
       outline
       :required="required"
-      :value="value"
-      :v-model="reference"
+      v-model="reference"
       :rules="[rules.required]"
       @change="changeValue"
       :hint="hint"
@@ -52,10 +51,12 @@
 <script>
 import axios from "axios";
 
+import Alert from "@/components/Layout/Alert.vue";
 import StructureDefinition from "@/mixins/StructureDefinition.js";
 
 export default {
   components: {
+    Alert,
     DynamicForm: () => import("./DynamicForm.vue")
   },
   created() {
@@ -74,21 +75,18 @@ export default {
         let options = [];
 
         response.data.forEach(data => {
-          // figure out what field we want to use, usually name or text
-          let description = null;
+          if (data) {
+            // figure out what field we want to use, usually name or text
+            let description = this.getText(data.resource);
+            let value = {
+              reference: structureDefinition + "/" + data.resource.id
+            };
 
-          if (data.resource.name) {
-            description = data.resource.name;
-          } else if (data.resource.text) {
-            description = data.resource.text;
-          } else {
-            description = data.resource.id;
+            options.push({
+              text: description,
+              value: value
+            });
           }
-
-          options.push({
-            text: description,
-            value: data.resource.id
-          });
         });
 
         // this is an empty option to allow for the creation of new reference items
@@ -136,12 +134,20 @@ export default {
     getInput() {
       return this["reference"];
     },
+    getText(data) {
+      if (data.name) {
+        return data.name;
+      } else if (data.text) {
+        return data.text;
+      }
+
+      return data.id;
+    },
     showAddAnotherForm() {
       this.dialog = true;
     },
     showFailedSubmit() {
       this.$refs.referenceModalAlert.changeMessage("Data not saved. ", "error");
-
       this.modalAlert = true;
     },
     submit() {
@@ -154,6 +160,17 @@ export default {
           if (response.status == 201) {
             this.modalAlert = false;
             this.dialog = false;
+            let value = {
+              reference: this.name + "/" + response.data.id
+            };
+
+            let option = {
+              text: this.getText(response.data),
+              value: value
+            };
+
+            this.codes.splice(this.codes.length - 1, 0, option);
+            this.reference = value;
           } else {
             this.showFailedSubmit();
           }
