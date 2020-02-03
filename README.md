@@ -29,6 +29,8 @@ iHRIS includes basic username / password authentication for all pages other than
 ## Running iHRIS as a Docker Swarm.
 The backend and frontend are separate, iHRIS is built with the option to run as a docker swarm.
 
+Clone the repo and set the configs `./config/ui_config.json` and `./config/server_config.json` from the corresponding `./config/*.example`s.
+
 To build the images run the script below (make sure there are no active containers using the images)
 
 ``sh docker-build.sh``
