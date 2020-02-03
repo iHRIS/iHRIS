@@ -34,7 +34,6 @@ import DynamicForm from "@/components/Form/DynamicForm.vue";
 export default {
   created() {
     this.config = require("@/config/config.json");
-    NProgress.start();
     axios
       .get(this.config.backend + "/practitioner/describe/page")
       .then(pageResponse => {
@@ -150,7 +149,6 @@ export default {
                           this.dynamicFormKey++;
                           return Promise.resolve();
                         });
-                        NProgress.done()
                     }
                   } else {
                     let matchingField = structureDefinitionResponse.data.snapshot.element.find(
@@ -186,7 +184,6 @@ export default {
         this.error = error.response.data;
         this.alert = true;
         this.addPractitionerForm = false;
-        NProgress.done()
       });
   },
   components: {

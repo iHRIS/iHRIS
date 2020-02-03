@@ -1,6 +1,6 @@
-const appConfig = require('./src/config/config');
+const appConfig = require("./src/config/config");
 module.exports = {
   devServer: {
-    proxy:appConfig.backend
+    proxy: appConfig.backend
   }
 };
