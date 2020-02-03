@@ -1,4 +1,4 @@
-#!/usb/bin/sh
+#!/bin/bash
 
 for c in server ui; do
     docker rmi -f ihris-$c:1.0-BETA
