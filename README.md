@@ -29,7 +29,11 @@ iHRIS includes basic username / password authentication for all pages other than
 ## Running iHRIS as a Docker Swarm.
 The backend and frontend are separate, iHRIS is built with the option to run as a docker swarm.
 
-After cloning, run the command below which should start a swarm `ihris`.
+To build the images run the script below (make sure there are no active containers using the images)
+
+``sh docker-build.sh``
+
+Then run the command below which should start ihris as a docker swarm.
 
 ``docker stack deploy -c ihris-stack.yml ihris``
 
