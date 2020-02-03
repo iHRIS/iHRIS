@@ -1,9 +1,13 @@
-const env = process.env.NODE_ENV || 'development'
-const config = require(__dirname + '/../config/config.json')[env]
 const request = require('request-promise-native')
 const URI = require('urijs');
+const fs = require('fs')
 const ParseConformance = require('./parseConformance').ParseConformance
+const env = process.env.NODE_ENV || 'development'
 
+var config = require(__dirname + '/../config/config.json')[env];
+if(env === "production") {
+  config = JSON.parse(fs.readFileSync(`/run/secrets/server_config`, 'utf8'))[env];
+}
 const parser = new ParseConformance(true)
 
 var structureDefinition = (main, callback) => {

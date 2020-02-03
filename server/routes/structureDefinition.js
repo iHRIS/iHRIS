@@ -1,10 +1,14 @@
 var express = require("express");
 var router = express.Router();
 var axios = require("axios");
-
+const fs = require('fs')
 const URI = require('urijs');
 const env = process.env.NODE_ENV || 'development';
-const config = require(__dirname + '/../config/config.json')[env];
+
+var config = require(__dirname + '/../config/config.json')[env];
+if(env === "production") {
+  config = JSON.parse(fs.readFileSync(`/run/secrets/server_config`, 'utf8'))[env];
+}
 
 router.get("/all/:definition", async function (req, res, next) {
   let previousUrl = null;
