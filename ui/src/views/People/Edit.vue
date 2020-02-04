@@ -78,6 +78,17 @@ export default {
     };
   },
   methods: {
+    addPractitionerRole(data) {
+      data.practitioner = {
+        reference: "Practitioner/" + this.practitioner.id
+      };
+
+      axios
+        .post(this.config.backend + "/practitioner/add/work-history", data)
+        .then(response => {
+          console.log(response);
+        });
+    },
     cancelDetailsForm() {
       this.details = false;
       this.detailsFields = {};
@@ -180,6 +191,10 @@ export default {
     },
     submitDetailsForm() {
       let input = this.$refs.detailsForm.getInputs();
+
+      if (this.detailTitle === "workHistory") {
+        return this.addPractitionerRole(input);
+      }
 
       let practitioner = this.practitioner;
       let title = this.detailTitle;

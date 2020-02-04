@@ -6,6 +6,24 @@ const mixin = require("../mixin");
 const env = process.env.NODE_ENV || 'development';
 const config = require(__dirname + '/../config/config.json')[env];
 
+router.post("/add/work-history", function (req, res, next) {
+  let data = req.body;
+  data["resourceType"] = "PractitionerRole";
+
+  let url = URI(config.fhir.server).segment('fhir').segment('PractitionerRole').toString()
+  axios.post(url, data, {
+    withCredentials: true,
+    auth: {
+      username: config.fhir.username,
+      password: config.fhir.password
+    }
+  }).then(response => {
+    res.status(201).json(response.data);
+  }).catch(err => {
+    res.status(400).json(err);
+  });
+});
+
 router.get("/describe/page", function (req, res, next) {
   let practitionerPage = config.definitions.practitionerPage;
 
