@@ -358,6 +358,11 @@ export default {
             fields.fields = customFields;
           }
 
+          // we don't want to show the practitioner field, we'll fill that in ourselves
+          if (definition === "iHRISPractitionerRole") {
+            delete fields.fields["PractitionerRole.practitioner"];
+          }
+
           this.$emit("toggleForm", fields.fields, title, data);
           return fields.fields;
         });
