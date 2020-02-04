@@ -62,20 +62,39 @@ router.get("/describe/definition/:definition", function (req, res, next) {
 router.get("/view/:id", function (req, res, next) {
   let id = req.params.id;
 
-  let url = URI(config.fhir.server).segment('fhir').segment('Practitioner')
-  url.addQuery('_id', id)
-  url = url.toString()
-  axios.get(url, {
+  let url = URI(config.fhir.server).segment('fhir').segment('Practitioner');
+  url.addQuery('_id', id);
+  url = url.toString();
+
+  let credentials = {
     withCredentials: true,
     auth: {
       username: config.fhir.username,
       password: config.fhir.password
     }
-  }).then(practitioner => {
-    if (practitioner === null) {
+  };
+
+  axios.get(url, credentials).then(data => {
+    if (data === null) {
       res.status(400).json("No practitioner found.");
     } else {
-      res.status(201).json(practitioner.data);
+      // get the practitioner roles (ie, work history)
+      let url = URI(config.fhir.server).segment('fhir').segment('PractitionerRole');
+      url.addQuery('practitioner', id);
+      url = url.toString();
+
+      axios.get(url, credentials).then(response => {
+        let practitioner = data.data;
+        let workHistory = [];
+
+        response.data.entry.forEach(job => {
+          workHistory.push(job.resource);
+        });
+
+        practitioner.entry[0].resource.workHistory = workHistory;
+
+        res.status(201).json(practitioner);
+      });
     }
   });
 });
