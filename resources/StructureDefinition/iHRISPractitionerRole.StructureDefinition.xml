@@ -13,8 +13,9 @@
   <snapshot>
     <element id="PractitionerRole">
       <path value="PractitionerRole" />
-      <short value="Roles/organizations the practitioner is associated with" />
-      <definition value="A specific set of Roles/Locations/specialties/services that a practitioner may perform at an organization for a period of time." />
+      <label value="Roles and positions"/>
+      <short value="Current and previous roles and positions held by the practitioner" />
+      <definition value="The current and previous roles and positions held by the practitioner" />
       <min value="0" />
       <max value="*" />
       <base>
@@ -147,7 +148,7 @@
       <definition value="A reference to a set of rules that were followed when the resource was constructed, and which must be understood when processing the content. Often, this is a reference to an implementation guide that defines the special rules along with other profiles etc." />
       <comment value="Asserting this rule set restricts the content to be only understood by a limited set of trading partners. This inherently limits the usefulness of the data in the long term. However, the existing health eco-system is highly fractured, and not yet ready to define, collect, and exchange data in a generally computable sense. Wherever possible, implementers and/or specification writers should avoid using this element. Often, when used, the URL is a reference to an implementation guide that defines these special rules as part of it's narrative along with other profiles, value sets, etc." />
       <min value="0" />
-      <max value="1" />
+      <max value="0" />
       <base>
         <path value="Resource.implicitRules" />
         <min value="0" />
@@ -178,7 +179,7 @@
       <definition value="The base language in which the resource is written." />
       <comment value="Language is provided to support indexing and accessibility (typically, services such as text to speech use the language tag). The html language tag in the narrative applies  to the narrative. The language tag on the resource may be used to specify the language of other presentations generated from the data in the resource. Not all the content has to be in the base language. The Resource.language should not be assumed to apply to the narrative automatically. If a language is specified, it should it also be specified on the div element in the html (see rules in HTML5 for information about the relationship between xml:lang and the html lang attribute)." />
       <min value="0" />
-      <max value="1" />
+      <max value="0" />
       <base>
         <path value="Resource.language" />
         <min value="0" />
@@ -422,7 +423,7 @@
       <definition value="Business Identifiers that are specific to a role/location." />
       <requirements value="Often, specific identities are assigned for the agent." />
       <min value="0" />
-      <max value="*" />
+      <max value="0" />
       <base>
         <path value="PractitionerRole.identifier" />
         <min value="0" />
@@ -479,7 +480,7 @@
       <definition value="Whether this practitioner role record is in active use." />
       <comment value="If this value is false, you may refer to the period to see when the role was in active use. If there is no period specified, no inference can be made about when it was active." />
       <requirements value="Need to be able to mark a practitioner role record as not to be used because it was created in error, or otherwise no longer in active use." />
-      <min value="0" />
+      <min value="1" />
       <max value="1" />
       <base>
         <path value="PractitionerRole.active" />
@@ -518,8 +519,9 @@
     </element>
     <element id="PractitionerRole.period">
       <path value="PractitionerRole.period" />
-      <short value="The period during which the practitioner is authorized to perform in these role(s)" />
-      <definition value="The period during which the person is authorized to act as a practitioner in these role(s) for the organization." />
+      <label value="Time period" />
+      <short value="The start and end dates during which the practitioner held this position" />
+      <definition value="The start and end dates during which the practitioner held this position." />
       <comment value="A Period specifies a range of time; the context of use will specify whether the entire range applies (e.g. &quot;the patient was an inpatient of the hospital for this time range&quot;) or one value from the range applies (e.g. &quot;give to the patient between these two times&quot;).&#xA;&#xA;Period is not used for a duration (a measure of elapsed time). See [Duration](datatypes.html#Duration)." />
       <requirements value="Even after the agencies is revoked, the fact that it existed must still be recorded." />
       <min value="0" />
@@ -624,8 +626,9 @@
     </element>
     <element id="PractitionerRole.organization">
       <path value="PractitionerRole.organization" />
-      <short value="Organization where the roles are available" />
-      <definition value="The organization where the Practitioner performs the roles associated." />
+      <label value="Organizational affiliation" />
+      <short value="The structure that manages and/or oversees the position of the practitioner" />
+      <definition value="The structure (organization,department, unit, etc.) that formally manages and/or oversees the position of the practitioner." />
       <comment value="References SHALL be a reference to an actual FHIR resource, and SHALL be resolveable (allowing for access control, temporary unavailability, etc.). Resolution can be either by retrieval from the URL, or, where applicable by resource type, by treating an absolute reference as a canonical URL and looking it up in a local registry/repository." />
       <min value="0" />
       <max value="1" />
@@ -669,9 +672,10 @@
     </element>
     <element id="PractitionerRole.code">
       <path value="PractitionerRole.code" />
-      <short value="Roles which this practitioner may perform" />
-      <definition value="Roles which this practitioner is authorized to perform for the organization." />
-      <comment value="A person may have more than one role." />
+      <label value="Position or Job Title" />
+      <short value="The specific role of the practitioner" />
+      <definition value="The specific role which the practitioner has been assigned to perform." />
+      <comment value="A person may not have more than one role." />
       <requirements value="Need to know what authority the practitioner has - what can they do?" />
       <min value="0" />
       <max value="*" />
@@ -728,8 +732,9 @@
     </element>
     <element id="PractitionerRole.specialty">
       <path value="PractitionerRole.specialty" />
-      <short value="Specific specialty of the practitioner" />
-      <definition value="Specific specialty of the practitioner." />
+      <label value="Domain of work" />
+      <short value="The general focus or type of work of the practitioner" />
+      <definition value="The general focus or type of work of the practitioner." />
       <comment value="Not all terminology uses fit this general pattern. In some cases, models should not use CodeableConcept and use Coding directly and provide their own structure for managing text, codings, translations and the relationship between elements and pre- and post-coordination." />
       <min value="0" />
       <max value="*" />
@@ -786,8 +791,9 @@
     </element>
     <element id="PractitionerRole.location">
       <path value="PractitionerRole.location" />
-      <short value="The location(s) at which this practitioner provides care" />
-      <definition value="The location(s) at which this practitioner provides care." />
+      <label value="Worksite location" />
+      <short value="The primary place at which the practitioner works" />
+      <definition value="The name of the primary place at which the practitioner works." />
       <comment value="References SHALL be a reference to an actual FHIR resource, and SHALL be resolveable (allowing for access control, temporary unavailability, etc.). Resolution can be either by retrieval from the URL, or, where applicable by resource type, by treating an absolute reference as a canonical URL and looking it up in a local registry/repository." />
       <min value="1" />
       <max value="1" />
@@ -843,7 +849,7 @@
       <definition value="The list of healthcare services that this worker provides for this role's Organization/Location(s)." />
       <comment value="References SHALL be a reference to an actual FHIR resource, and SHALL be resolveable (allowing for access control, temporary unavailability, etc.). Resolution can be either by retrieval from the URL, or, where applicable by resource type, by treating an absolute reference as a canonical URL and looking it up in a local registry/repository." />
       <min value="0" />
-      <max value="*" />
+      <max value="0" />
       <base>
         <path value="PractitionerRole.healthcareService" />
         <min value="0" />
@@ -891,7 +897,7 @@
       <definition value="Contact details that are specific to the role/location/service." />
       <requirements value="Often practitioners have a dedicated line for each location (or service) that they work at, and need to be able to define separate contact details for each of these." />
       <min value="0" />
-      <max value="*" />
+      <max value="0" />
       <base>
         <path value="PractitionerRole.telecom" />
         <min value="0" />
@@ -943,7 +949,7 @@
       <definition value="A collection of times the practitioner is available or performing this role at the location and/or healthcareservice." />
       <comment value="More detailed availability information may be provided in associated Schedule/Slot resources." />
       <min value="0" />
-      <max value="*" />
+      <max value="0" />
       <base>
         <path value="PractitionerRole.availableTime" />
         <min value="0" />
@@ -975,7 +981,7 @@
       <short value="Unique id for inter-element referencing" />
       <definition value="Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces." />
       <min value="0" />
-      <max value="1" />
+      <max value="0" />
       <base>
         <path value="Element.id" />
         <min value="0" />
@@ -1015,7 +1021,7 @@
       <alias value="extensions" />
       <alias value="user content" />
       <min value="0" />
-      <max value="*" />
+      <max value="0" />
       <base>
         <path value="Element.extension" />
         <min value="0" />
@@ -1058,7 +1064,7 @@
       <alias value="user content" />
       <alias value="modifiers" />
       <min value="0" />
-      <max value="*" />
+      <max value="0" />
       <base>
         <path value="BackboneElement.modifierExtension" />
         <min value="0" />
@@ -1100,7 +1106,7 @@
       <definition value="Indicates which days of the week are available between the start and end Times." />
       <comment value="Note that FHIR strings SHALL NOT exceed 1MB in size" />
       <min value="0" />
-      <max value="*" />
+      <max value="0" />
       <base>
         <path value="PractitionerRole.availableTime.daysOfWeek" />
         <min value="0" />
@@ -1136,7 +1142,7 @@
       <short value="Always available? e.g. 24 hour service" />
       <definition value="Is this always available? (hence times are irrelevant) e.g. 24 hour service." />
       <min value="0" />
-      <max value="1" />
+      <max value="0" />
       <base>
         <path value="PractitionerRole.availableTime.allDay" />
         <min value="0" />
@@ -1168,7 +1174,7 @@
       <definition value="The opening time of day. Note: If the AllDay flag is set, then this time is ignored." />
       <comment value="The timezone is expected to be for where this HealthcareService is provided at." />
       <min value="0" />
-      <max value="1" />
+      <max value="0" />
       <base>
         <path value="PractitionerRole.availableTime.availableStartTime" />
         <min value="0" />
@@ -1200,7 +1206,7 @@
       <definition value="The closing time of day. Note: If the AllDay flag is set, then this time is ignored." />
       <comment value="The timezone is expected to be for where this HealthcareService is provided at." />
       <min value="0" />
-      <max value="1" />
+      <max value="0" />
       <base>
         <path value="PractitionerRole.availableTime.availableEndTime" />
         <min value="0" />
@@ -1231,7 +1237,7 @@
       <short value="Not available during this time due to provided reason" />
       <definition value="The practitioner is not available or performing this role during this period of time due to the provided reason." />
       <min value="0" />
-      <max value="*" />
+      <max value="0" />
       <base>
         <path value="PractitionerRole.notAvailable" />
         <min value="0" />
@@ -1263,7 +1269,7 @@
       <short value="Unique id for inter-element referencing" />
       <definition value="Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces." />
       <min value="0" />
-      <max value="1" />
+      <max value="0" />
       <base>
         <path value="Element.id" />
         <min value="0" />
@@ -1303,7 +1309,7 @@
       <alias value="extensions" />
       <alias value="user content" />
       <min value="0" />
-      <max value="*" />
+      <max value="0" />
       <base>
         <path value="Element.extension" />
         <min value="0" />
@@ -1346,7 +1352,7 @@
       <alias value="user content" />
       <alias value="modifiers" />
       <min value="0" />
-      <max value="*" />
+      <max value="0" />
       <base>
         <path value="BackboneElement.modifierExtension" />
         <min value="0" />
@@ -1387,8 +1393,8 @@
       <short value="Reason presented to the user explaining why time not available" />
       <definition value="The reason that can be presented to the user as to why this time is not available." />
       <comment value="Note that FHIR strings SHALL NOT exceed 1MB in size" />
-      <min value="1" />
-      <max value="1" />
+      <min value="0" />
+      <max value="0" />
       <base>
         <path value="PractitionerRole.notAvailable.description" />
         <min value="0" />
@@ -1416,7 +1422,7 @@
       <definition value="Service is not available (seasonally or for a public holiday) from this date." />
       <comment value="A Period specifies a range of time; the context of use will specify whether the entire range applies (e.g. &quot;the patient was an inpatient of the hospital for this time range&quot;) or one value from the range applies (e.g. &quot;give to the patient between these two times&quot;).&#xA;&#xA;Period is not used for a duration (a measure of elapsed time). See [Duration](datatypes.html#Duration)." />
       <min value="0" />
-      <max value="1" />
+      <max value="0" />
       <base>
         <path value="PractitionerRole.notAvailable.during" />
         <min value="0" />
@@ -1463,7 +1469,7 @@
       <definition value="A description of site availability exceptions, e.g. public holiday availability. Succinctly describing all possible exceptions to normal site availability as details in the available Times and not available Times." />
       <comment value="Note that FHIR strings SHALL NOT exceed 1MB in size" />
       <min value="0" />
-      <max value="1" />
+      <max value="0" />
       <base>
         <path value="PractitionerRole.availabilityExceptions" />
         <min value="0" />
@@ -1496,7 +1502,7 @@
       <comment value="References SHALL be a reference to an actual FHIR resource, and SHALL be resolveable (allowing for access control, temporary unavailability, etc.). Resolution can be either by retrieval from the URL, or, where applicable by resource type, by treating an absolute reference as a canonical URL and looking it up in a local registry/repository." />
       <requirements value="Organizations have multiple systems that provide various services and ,ay also be different for practitioners too.&#xD;&#xD;So the endpoint satisfies the need to be able to define the technical connection details for how to connect to them, and for what purpose." />
       <min value="0" />
-      <max value="*" />
+      <max value="0" />
       <base>
         <path value="PractitionerRole.endpoint" />
         <min value="0" />
@@ -1532,6 +1538,14 @@
     </element>
   </snapshot>
   <differential>
+    <element id="PractitionerRole.implicitRules">
+      <path value="PractitionerRole.implicitRules" />
+      <max value="0" />
+    </element>
+    <element id="PractitionerRole.language">
+      <path value="PractitionerRole.language" />
+      <max value="0" />
+    </element>
     <element id="PractitionerRole.extension">
       <path value="PractitionerRole.extension" />
       <slicing>
@@ -1552,14 +1566,123 @@
         <profile value="http://ihris.org/fhir/StructureDefinition/iHRISPractitionerRoleDetails" />
       </type>
     </element>
+    <element id="PractitionerRole.identifier">
+      <path value="PractitionerRole.identifier" />
+      <max value="0" />
+    </element>
+    <element id="PractitionerRole.active">
+      <path value="PractitionerRole.active" />
+      <min value="1" />
+    </element>
+    <element id="PractitionerRole.period">
+      <path value="PractitionerRole.period" />
+      <label value="Time period" />
+      <short value="The start and end dates during which the practitioner held this position" />
+      <definition value="The start and end dates during which the practitioner held this position." />
+    </element>
     <element id="PractitionerRole.practitioner">
       <path value="PractitionerRole.practitioner" />
       <min value="1" />
     </element>
+    <element id="PractitionerRole.organization">
+      <path value="PractitionerRole.organization" />
+      <label value="Organizational affiliation" />
+      <short value="The structure that manages and/or oversees the position of the practitioner" />
+      <definition value="The structure (organization,department, unit, etc.) that formally manages and/or oversees the position of the practitioner." />
+    </element>
+    <element id="PractitionerRole.code">
+      <path value="PractitionerRole.code" />
+      <label value="Position or Job Title" />
+      <short value="The specific role of the practitioner" />
+      <definition value="The specific role which the practitioner has been assigned to perform." />
+      <comment value="A person may not have more than one role." />
+    </element>
+    <element id="PractitionerRole.specialty">
+      <path value="PractitionerRole.specialty" />
+      <label value="Domain of work" />
+      <short value="The general focus or type of work of the practitioner" />
+      <definition value="The general focus or type of work of the practitioner." />
+    </element>
     <element id="PractitionerRole.location">
       <path value="PractitionerRole.location" />
+      <label value="Worksite location" />
+      <short value="The primary place at which the practitioner works" />
+      <definition value="The name of the primary place at which the practitioner works." />
       <min value="1" />
       <max value="1" />
+    </element>
+    <element id="PractitionerRole.healthcareService">
+      <path value="PractitionerRole.healthcareService" />
+      <max value="0" />
+    </element>
+    <element id="PractitionerRole.telecom">
+      <path value="PractitionerRole.telecom" />
+      <max value="0" />
+    </element>
+    <element id="PractitionerRole.availableTime">
+      <path value="PractitionerRole.availableTime" />
+      <max value="0" />
+    </element>
+    <element id="PractitionerRole.availableTime.id">
+      <path value="PractitionerRole.availableTime.id" />
+      <max value="0" />
+    </element>
+    <element id="PractitionerRole.availableTime.extension">
+      <path value="PractitionerRole.availableTime.extension" />
+      <max value="0" />
+    </element>
+    <element id="PractitionerRole.availableTime.modifierExtension">
+      <path value="PractitionerRole.availableTime.modifierExtension" />
+      <max value="0" />
+    </element>
+    <element id="PractitionerRole.availableTime.daysOfWeek">
+      <path value="PractitionerRole.availableTime.daysOfWeek" />
+      <max value="0" />
+    </element>
+    <element id="PractitionerRole.availableTime.allDay">
+      <path value="PractitionerRole.availableTime.allDay" />
+      <max value="0" />
+    </element>
+    <element id="PractitionerRole.availableTime.availableStartTime">
+      <path value="PractitionerRole.availableTime.availableStartTime" />
+      <max value="0" />
+    </element>
+    <element id="PractitionerRole.availableTime.availableEndTime">
+      <path value="PractitionerRole.availableTime.availableEndTime" />
+      <max value="0" />
+    </element>
+    <element id="PractitionerRole.notAvailable">
+      <path value="PractitionerRole.notAvailable" />
+      <max value="0" />
+    </element>
+    <element id="PractitionerRole.notAvailable.id">
+      <path value="PractitionerRole.notAvailable.id" />
+      <max value="0" />
+    </element>
+    <element id="PractitionerRole.notAvailable.extension">
+      <path value="PractitionerRole.notAvailable.extension" />
+      <max value="0" />
+    </element>
+    <element id="PractitionerRole.notAvailable.modifierExtension">
+      <path value="PractitionerRole.notAvailable.modifierExtension" />
+      <max value="0" />
+    </element>
+    <element id="PractitionerRole.notAvailable.description">
+      <path value="PractitionerRole.notAvailable.description" />
+      <min value="0" />
+      <max value="0" />
+    </element>
+    <element id="PractitionerRole.notAvailable.during">
+      <path value="PractitionerRole.notAvailable.during" />
+      <max value="0" />
+    </element>
+    <element id="PractitionerRole.availabilityExceptions">
+      <path value="PractitionerRole.availabilityExceptions" />
+      <max value="0" />
+    </element>
+    <element id="PractitionerRole.endpoint">
+      <path value="PractitionerRole.endpoint" />
+      <max value="0" />
     </element>
   </differential>
 </StructureDefinition>
