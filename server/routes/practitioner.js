@@ -24,6 +24,26 @@ router.post("/add/work-history", function (req, res, next) {
   });
 });
 
+/**
+ * Delete a work history element
+ */
+router.post("/delete/work-history", function (req, res, next) {
+  let data = req.body;
+
+  let url = URI(config.fhir.server).segment('fhir').segment('PractitionerRole').segment(data.id).toString()
+  axios.delete(url, {
+    withCredentials: true,
+    auth: {
+      username: config.fhir.username,
+      password: config.fhir.password
+    }
+  }).then(response => {
+    res.status(201).json(response.data);
+  }).catch(err => {
+    res.status(400).json(err);
+  });
+});
+
 router.get("/describe/page", function (req, res, next) {
   let practitionerPage = config.definitions.practitionerPage;
 
