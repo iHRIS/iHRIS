@@ -90,13 +90,16 @@ router.get("/view/:id", function (req, res, next) {
 
       axios.get(url, credentials).then(response => {
         let practitioner = data.data;
-        let workHistory = [];
 
-        response.data.entry.forEach(job => {
-          workHistory.push(job.resource);
-        });
+        if (response.data.entry) {
+          let workHistory = [];
 
-        practitioner.entry[0].resource.workHistory = workHistory;
+          response.data.entry.forEach(job => {
+            workHistory.push(job.resource);
+          });
+
+          practitioner.entry[0].resource.workHistory = workHistory;
+        }
 
         res.status(201).json(practitioner);
       });
@@ -133,6 +136,28 @@ router.post("/edit", function (req, res, next) {
   data["resourceType"] = "Practitioner";
 
   let url = URI(config.fhir.server).segment('fhir').segment('Practitioner').segment(data.id).toString()
+  axios.put(url, data, {
+    withCredentials: true,
+    auth: {
+      username: config.fhir.username,
+      password: config.fhir.password
+    }
+  }).then(response => {
+    res.status(201).json(response.data);
+  }).catch(err => {
+    res.status(400).json(err);
+  });
+});
+
+/**
+ * Edit a practitioner's work history
+ */
+router.post("/edit/work-history", function (req, res, next) {
+  let data = req.body;
+  data["resourceType"] = "PractitionerRole";
+
+  let url = URI(config.fhir.server).segment('fhir').segment('PractitionerRole').segment(data.id).toString();
+
   axios.put(url, data, {
     withCredentials: true,
     auth: {
