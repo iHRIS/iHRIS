@@ -86,7 +86,11 @@ export default {
       axios
         .post(this.config.backend + "/practitioner/add/work-history", data)
         .then(response => {
-          this.practitioner.workHistory = [response.data];
+          if (!this.practitioner.workHistory) {
+            this.practitioner.workHistory = [];
+          }
+
+          this.practitioner.workHistory.push(response.data);
         });
     },
     cancelDetailsForm() {
@@ -140,6 +144,11 @@ export default {
         });
     },
     editWorkHistory(data, index) {
+      // this happens when adding another work history element
+      if (!this.practitioner.workHistory[index]) {
+        return this.addPractitionerRole(data);
+      }
+
       let id = this.practitioner.workHistory[index].id;
       data.id = id;
 

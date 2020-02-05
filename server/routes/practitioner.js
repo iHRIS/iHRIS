@@ -93,7 +93,6 @@ router.get("/view/:id", function (req, res, next) {
 
         if (response.data.entry) {
           let workHistory = [];
-
           response.data.entry.forEach(job => {
             workHistory.push(job.resource);
           });
