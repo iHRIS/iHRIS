@@ -3,9 +3,11 @@
     <v-alert v-model="alert" dismissable type="error">
         {{ error }}
     </v-alert>
-    <v-flex xs6 offset-xs3 v-if="allowedToAccess">
-      <h1>Add a Person</h1>
-      <p>
+    <!--<v-flex xs6 offset-xs3 v-if="allowedToAccess">-->
+      <v-flex :class="gridLayout" v-if="allowedToAccess">
+      <div :style="[{'font-size':fontSizeH1},{'font-weight': 'bold'}]" >Add a Person</div>
+      <!--<h1>Add a Person</h1>-->
+      <p :style="{'font-size':fontSize}" >
         To track a person in the database, whether an employee or a job
         applicant, add a record for that person. Certain information is required
         to start a new record. Once the record is generated, additional options
@@ -32,7 +34,40 @@ import DynamicForm from "@/components/Form/DynamicForm.vue";
 import { store } from "@/store.js";
 
 export default {
-  
+
+  mounted(){
+    console.log(this.$vuetify.breakpoint);
+    
+  },
+  computed:{
+    fontSizeParagraph(){
+      switch (this.$vuetify.breakpoint.name) {
+        case 'xs': return '10px'
+        case 'sm': return '10px'
+        case 'md': return '14px'
+        case 'lg': return '16px'
+        case 'xl': return '16px'
+      }
+    },
+    fontSizeH1(){
+      switch (this.$vuetify.breakpoint.name) {
+        case 'xs': return '26px'
+        case 'sm': return '26px'
+        case 'md': return '32px'
+        case 'lg': return '32px'
+        case 'xl': return '32px'
+      }
+    },
+    gridLayout(){
+      switch (this.$vuetify.breakpoint.name) {
+        case 'xs': return 'xs8 offset-xs2'
+        case 'sm': return 'xs8 offset-xs2'
+        case 'md': return 'xs6 offset-xs3'
+        case 'lg': return 'xs6 offset-xs3'
+        case 'xl': return 'xs6 offset-xs3'
+      }
+    }
+  },
   created() {
     this.config = require("@/config/config.json");
     if(store.state.isAllowToAccessTheNextPage)
@@ -272,3 +307,4 @@ export default {
   }
 };
 </script>
+
