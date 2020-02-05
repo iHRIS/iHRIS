@@ -69,13 +69,6 @@ export default {
             return [];
           }
 
-          let clean = [];
-          response.data.snapshot.element.forEach(element => {
-            if (element.max != 0) {
-              clean.push(element);
-            }
-          });
-
           let definition = response.data.snapshot.element;
           let fields = {};
 
@@ -152,7 +145,7 @@ export default {
           labelOverride: "Start",
           max: field.max,
           min: field.min,
-          type: [{ code: "dateTime" }],
+          type: [{ code: "dateTime" }]
         },
         {
           definition: field.definition,
@@ -161,7 +154,7 @@ export default {
           labelOverride: "End",
           max: field.max,
           min: field.min,
-          type: [{ code: "dateTime" }],
+          type: [{ code: "dateTime" }]
         }
       ];
     },
@@ -236,7 +229,7 @@ export default {
           return [];
       }
     },
-    formatField(field, parentType, parentField) {
+    formatField(field, parentType) {
       let name = field.id.slice(field.id.indexOf(".") + 1);
       let options = field.short
         ? field.short
