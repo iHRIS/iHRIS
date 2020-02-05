@@ -104,6 +104,11 @@ export default {
       this.practitioner = practitioner;
     },
     deleteSubsectionData(field, index, profile) {
+      // work history is stored separately
+      if (field === "workHistory") {
+        return this.deleteWorkHistory(index);
+      }
+
       if (typeof index !== "undefined" && this.practitioner[field].length > 1) {
         this.practitioner[field].splice(index, 1);
       } else if (profile !== null) {
@@ -137,6 +142,35 @@ export default {
             }
           } else {
             this.$refs["subsection-" + field][0].showAlert(
+              "There was an error deleting this data.",
+              "error"
+            );
+          }
+        });
+    },
+    deleteWorkHistory(index) {
+      let data = {
+        id: this.practitioner.workHistory[index].id
+      };
+
+      axios
+        .post(this.config.backend + "/practitioner/delete/work-history", data)
+        .then(response => {
+          if (response.status == 201) {
+            if (this.$refs["subsectionworkHistory"][0]) {
+              Vue.delete(this.practitioner.workHistory[index]);
+
+              if (this.practitioner.workHistory.length === 0) {
+                Vue.delete(this.practitioner.workHistory);
+              }
+
+              this.$refs["subsectionworkHistory"][0].showAlert(
+                "Item deleted successfully!",
+                "success"
+              );
+            }
+          } else {
+            this.$refs["subsectionworkHistory"][0].showAlert(
               "There was an error deleting this data.",
               "error"
             );
