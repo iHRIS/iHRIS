@@ -95,7 +95,10 @@ export default {
         }
       }
 
-      if (this.practitioner.workHistory) {
+      if (
+        this.practitioner.workHistory &&
+        this.practitioner.workHistory.length
+      ) {
         fields["workHistory"] = this.practitioner.workHistory;
       }
 
