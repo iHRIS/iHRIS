@@ -1,6 +1,6 @@
 <template>
   <v-form ref="form" v-if="data">
-    <div v-for="field in data" v-bind:key="name + '-' + field.id">
+    <div v-for="field in data" v-bind:key="name + '-' + field.id" v-if="field.max != 0">
       <Base64Binary
         v-if="field.type == 'base64Binary'"
         :label="field.label"
@@ -51,7 +51,7 @@
       />
 
       <DateTime
-        v-if="field.type == 'datetime'"
+        v-if="field.type.toLowerCase() == 'datetime'"
         :label="field.label"
         :max="field.max"
         :required="field.required"
