@@ -13,7 +13,6 @@
   <snapshot>
     <element id="PractitionerRole">
       <path value="PractitionerRole" />
-      <label value="Roles and positions"/>
       <short value="Current and previous roles and positions held by the practitioner" />
       <definition value="The current and previous roles and positions held by the practitioner" />
       <min value="0" />
@@ -1538,6 +1537,11 @@
     </element>
   </snapshot>
   <differential>
+    <element id="PractitionerRole">
+      <path value="PractitionerRole" />
+      <short value="Current and previous roles and positions held by the practitioner" />
+      <definition value="The current and previous roles and positions held by the practitioner" />
+    </element>
     <element id="PractitionerRole.implicitRules">
       <path value="PractitionerRole.implicitRules" />
       <max value="0" />
