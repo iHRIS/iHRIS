@@ -40,7 +40,7 @@
           <v-card-text>
             <Alert ref="searchAlert" />
             <DynamicForm
-              :fields="this.fields"
+              :fields="fields"
               cancelLabel="clear"
               ref="searchForm"
               v-on:cancel="clearResults"
@@ -61,9 +61,6 @@ import Alert from "@/components/Layout/Alert.vue";
 import DynamicForm from "@/components/Form/DynamicForm.vue";
 
 export default {
-  created() {
-    this.config = require("@/config/config.json");
-  },
   components: {
     Alert,
     DynamicForm
@@ -87,23 +84,82 @@ export default {
           value: "action"
         }
       ],
-      fields: [
-        {
-          id: "name",
-          max: 1,
-          name: "name",
-          required: false,
-          type: "string",
-          value: null
-        }
-      ],
+      // fields: [
+      //   {
+      //     id: "expression",
+      //     max: 1,
+      //     name: "expression",
+      //     required: false,
+      //     type: "string",
+      //     value: null
+      //   }
+      // ],
+      fields: [],
+      name: { default: "Mkulima"},
       practitioners: []
     };
+  },
+  created() {
+    this.config = require("@/config/config.json");
+    this.getSearchFilters().then(filters => {
+        this.fields = filters;
+    })
   },
   methods: {
     clearResults() {
       this.practitioners = [];
       this.$refs.searchAlert.reset();
+    },
+    getAllSearchFields() {
+      return axios
+        .get(
+          this.config.backend +
+            "/practitioner/describe/definition/SearchParameter"
+        )
+        .then(response => {
+          let all_fields = response.data.snapshot.element;
+          let search_fields = [];
+          all_fields.forEach(field => {
+            if (
+              // ignore extension fields
+              field.id.endsWith(".extension") ||
+              // these are all custom extensions but duplicated fields
+              field.id.endsWith(".id") ||
+              field.id.endsWith(".url") ||
+              field.id.includes(".value[x]") ||
+              // ignore practitioner and meta fields since they can't be customized
+              field.id == "SearchParameter" ||
+              field.id == "SearchParameter.meta" ||
+              // hide active, that's handled separately
+              field.id === "SearchParameter.active" ||
+              // if someone sets the max to be 0, then don't show it
+              field.max == 0
+            ) {
+              return;
+            }
+
+            search_fields.push(field);
+          });
+          return Promise.resolve(search_fields);
+        });
+    },
+    getSearchFilters() {
+      let allFields = [];
+      this.getAllSearchFields().then(fields => {
+        fields.forEach(field => {
+          if (field.id.indexOf("SearchParameter.component") >= 0 && field.type[0].code === "string") {
+            allFields.push({
+              id: field.id.substring(field.id.lastIndexOf(".") + 1),
+              max: parseInt(field.max),
+              name: field.id.substring(field.id.lastIndexOf(".") + 1),
+              required: false,
+              type: field.type[0].code,
+              value: null
+            });
+          }
+        });
+      });
+      return Promise.resolve(allFields);
     },
     search() {
       let params = {
