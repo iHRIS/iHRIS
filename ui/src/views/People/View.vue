@@ -45,7 +45,7 @@ export default {
     }
   },
   created(){
-    if(!store.state.isAllowToAccessTheNextPage)
+    if(!store.state.allowToAccessTheNextPage)
     {
       this.error = "The user does not have the necessary privileges to access this page ";
       this.alert = true;

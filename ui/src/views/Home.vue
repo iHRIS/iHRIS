@@ -27,7 +27,7 @@ export default {
   },
   created() {
     this.config = require("@/config/config.json");
-    if(store.state.isAllowToAccessTheNextPage)
+    if(store.state.allowToAccessTheNextPage)
     {
         axios.get(this.config.backend + "/dashboard/all")
         .then(response => {

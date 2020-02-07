@@ -11,7 +11,7 @@ export const store = new Vuex.Store({
       userId: VueCookies.get("userId") || null
     },
     roles: VueCookies.get("roles") || null,
-    isAllowToAccessTheNextPage:false,
+    allowToAccessTheNextPage:false,
     indeterminateProgress: false,
     indeterminateProgressTitle: ""
   },

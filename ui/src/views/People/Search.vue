@@ -67,13 +67,12 @@ import { store } from "@/store.js";
 export default {
   created() {
     this.config = require("@/config/config.json");
-    if(!store.state.isAllowToAccessTheNextPage)
+    if(!store.state.allowToAccessTheNextPage)
     {
       this.error = "The user does not have the necessary privileges to access this page ";
       this.alert = true;
       this.allowedToAccess=false;
     }
-    // store.state.isAllowToAccessTheNextPage=false;
   },
   components: {
     Alert,

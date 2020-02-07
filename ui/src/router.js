@@ -3,7 +3,11 @@ import Router from "vue-router";
 import { store } from "./store.js";
 
 Vue.use(Router);
-
+var searchPeopleAllowedRoles=["Admin","Edit","View"];
+var editPeopleAllowedRoles=["Admin","Edit"];
+var viewPeopleAllowedRoles=["Admin","Edit","View"];
+var relationshipsAllowedRoles=["Admin"];
+var manageUserAllowedRoles=["Admin"];
 let router = new Router({
   mode: "history",
   base: process.env.BASE_URL,
@@ -17,7 +21,7 @@ let router = new Router({
         var roles=store.state.roles;
         if(roles == "Admin" || roles == "Edit" || roles == "View")
         {
-          store.state.isAllowToAccessTheNextPage = true;
+          store.state.allowToAccessTheNextPage = true;
           next();
         }
         else{
@@ -37,14 +41,9 @@ let router = new Router({
       component: () =>
         import(/* webpackChunkName: "adminAddUser" */ "./views/Admin/AddUser.vue"),
         beforeEnter (to, from, next) {
+          var routeName=to.name;
           var roles=store.state.roles;
-          if(roles == "Admin" )
-          {
-            store.state.isAllowToAccessTheNextPage = true;
-          }
-          else{
-            store.state.isAllowToAccessTheNextPage = false;
-          }
+          checkPageRole(roles,routeName);
           next();
         }
         
@@ -55,14 +54,9 @@ let router = new Router({
       component: () =>
         import(/* webpackChunkName: "adminsUsers" */ "./views/Admin/Users.vue"),
         beforeEnter (to, from, next) {
+          var routeName=to.name;
           var roles=store.state.roles;
-          if(roles == "Admin" )
-          {
-            store.state.isAllowToAccessTheNextPage = true;
-          }
-          else{
-            store.state.isAllowToAccessTheNextPage = false;
-          }
+          checkPageRole(roles,routeName);
           next();
         }
     },
@@ -102,17 +96,11 @@ let router = new Router({
       component: () =>
         import(/* webpackChunkName: "People" */ "./views/People/Search.vue"),
         beforeEnter (to, from, next) {
+        
+        var routeName=to.name;
         var roles=store.state.roles;
-        if(roles == "Admin" || roles == "Edit" || roles == "View")
-        {
-          store.state.isAllowToAccessTheNextPage = true;
-         
-          next();
-        }
-        else{
-          store.state.isAllowToAccessTheNextPage = false;
-          return;
-        }
+        checkPageRole(roles,routeName);
+        next();
         }
     },
     {
@@ -121,17 +109,10 @@ let router = new Router({
       component: () =>
         import(/* webpackChunkName: "AddPeople" */ "./views/People/Add.vue"),
         beforeEnter (to, from, next) {
-          //console.log("Add people entered...");
+          var routeName=to.name;
           var roles=store.state.roles;
-          if(roles == "Admin" || roles == "Edit" )
-          {
-            store.state.isAllowToAccessTheNextPage = true;
-            next();
-          }
-          else{
-            store.state.isAllowToAccessTheNextPage = false;
-            next();
-          }
+          checkPageRole(roles,routeName);
+          next();
         }
     },
     {
@@ -140,16 +121,10 @@ let router = new Router({
       component: () =>
         import(/* webpackChunkName: "EditPeople" */ "./views/People/AddSubsection.vue"),
         beforeEnter (to, from, next) {
+          var routeName=to.name;
           var roles=store.state.roles;
-          if(roles == "Admin" || roles == "Edit" )
-          {
-            store.state.isAllowToAccessTheNextPage = true;
-            next();
-          }
-          else{
-            store.state.isAllowToAccessTheNextPage = false;
-            return;
-          }
+          checkPageRole(roles,routeName);
+          next();
         }
     },
     {
@@ -158,16 +133,10 @@ let router = new Router({
       component: () =>
         import(/* webpackChunkName: "ViewPeople" */ "./views/People/Edit.vue"),
         beforeEnter (to, from, next) {
+          var routeName=to.name;
           var roles=store.state.roles;
-          if(roles == "Admin" || roles == "Edit" )
-          {
-            store.state.isAllowToAccessTheNextPage = true;
-            next();
-          }
-          else{
-            store.state.isAllowToAccessTheNextPage = false;
-            return;
-          }
+          checkPageRole(roles,routeName);
+          next();
         }
     },
     {
@@ -176,17 +145,10 @@ let router = new Router({
       component: () =>
         import(/* webpackChunkName: "ViewPeople" */ "./views/People/View.vue"),
         beforeEnter (to, from, next) {
+          var routeName=to.name;
           var roles=store.state.roles;
-          if(roles == "Admin" || roles == "Edit" || roles == "View")
-          //if(roles == "Admin" || roles == "Edit" )
-          {
-            store.state.isAllowToAccessTheNextPage = true;
-            next();
-          }
-          else{
-            store.state.isAllowToAccessTheNextPage = false;
-            return;
-          }
+          checkPageRole(roles,routeName);
+          next();
         }
     },
     {
@@ -195,16 +157,10 @@ let router = new Router({
       component: () =>
         import(/* webpackChunkName: "about" */ "./views/Relationship/Relationship.vue"),
         beforeEnter (to, from, next) {
+          var routeName=to.name;
           var roles=store.state.roles;
-          if(roles == "Admin")
-          {
-            store.state.isAllowToAccessTheNextPage = true;
-            next();
-          }
-          else{
-            store.state.isAllowToAccessTheNextPage = false;
-            return;
-          }
+          checkPageRole(roles,routeName);
+          next();
         }
     },
     {
@@ -243,4 +199,74 @@ router.beforeEach((to, from, next) => {
   }
 });
 
+function checkPageRole(roleName,routeName)
+{
+  var resCheck=false;
+  switch(routeName)
+  {
+    case "search-people":
+      if(searchPeopleAllowedRoles.includes(roleName))
+      {
+        store.state.allowToAccessTheNextPage = true;
+      }
+      else{
+        store.state.allowToAccessTheNextPage = false;
+      }
+      break;
+    case "add-people":
+      if(editPeopleAllowedRoles.includes(roleName))
+      {
+        store.state.allowToAccessTheNextPage = true;
+      }
+      else{
+        store.state.allowToAccessTheNextPage = false;
+      }
+      break;
+    case "edit-people":
+      if(editPeopleAllowedRoles.includes(roleName))
+      {
+        store.state.allowToAccessTheNextPage = true;
+      }
+      else{
+        store.state.allowToAccessTheNextPage = false;
+      }
+      break;
+      case "people-view":
+        if(viewPeopleAllowedRoles.includes(roleName))
+        {
+          store.state.allowToAccessTheNextPage = true;
+        }
+        else{
+          store.state.allowToAccessTheNextPage = false;
+        }
+        break;
+        case "relationship":
+          if(relationshipsAllowedRoles.includes(roleName))
+          {
+            store.state.allowToAccessTheNextPage = true;
+          }
+          else{
+            store.state.allowToAccessTheNextPage = false;
+          }
+          break;
+        case "admin-add-user":
+          if(manageUserAllowedRoles.includes(roleName))
+          {
+            store.state.allowToAccessTheNextPage = true;
+          }
+          else{
+            store.state.allowToAccessTheNextPage = false;
+          }
+          break;
+          case "admin-users":
+            if(manageUserAllowedRoles.includes(roleName))
+            {
+              store.state.allowToAccessTheNextPage = true;
+            }
+            else{
+              store.state.allowToAccessTheNextPage = false;
+            }
+            break;
+  }
+};
 export default router;

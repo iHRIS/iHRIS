@@ -70,7 +70,7 @@ export default {
   },
   created() {
     this.config = require("@/config/config.json");
-    if(store.state.isAllowToAccessTheNextPage)
+    if(store.state.allowToAccessTheNextPage)
     {
        NProgress.start();
       axios
@@ -233,11 +233,9 @@ export default {
       this.error = "The user does not have the necessary privileges to access this page ";
       this.alert = true;
       this.allowedToAccess=false;
-      //DynamicForm=null;
     }
    },
   components: {
-    //'DynamicForm':store.state.isAllowToAccessTheNextPage?DynamicForm:null
     DynamicForm
   },
   data() {

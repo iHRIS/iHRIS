@@ -35,7 +35,7 @@ export default {
   },
   created () {
     this.config = require("@/config/config.json");
-    if(store.state.isAllowToAccessTheNextPage)
+    if(store.state.allowToAccessTheNextPage)
     {
       NProgress.start();
       this.tempFields=[{
@@ -99,73 +99,12 @@ export default {
         });
     }
     else {
-      /* this.$refs.addUserAlert.changeMessage(
-              "Data not saved. " + error,
-              "error" ); */
+      
       this.error = "The user does not have the necessary privileges to access this page. ";
       this.alert = true;
       this.allowedToAccess=false;
     }
-    NProgress.start();
-    this.tempFields=[{
-              id: "username",
-              max: 1,
-              name: "username",
-              required: true,
-              type: "string"
-            },
-            {
-              id: "password",
-              max: 1,
-              name: "password",
-              required: true,
-              type: "password",
-              matching: false
-            },
-            {
-              id: "passwordRepeat",
-              max: 1,
-              name: "password",
-              required: true,
-              type: "password",
-              matching: true
-            }];
-    axios
-      .get(this.config.backend + "/user/describe/definition/iHRISUserDetails")
-      .then(structureDefinitionResponse => {
-        if(structureDefinitionResponse!=null)
-        {
-          
-          this.isLoaded=true;
-          var fieldName=structureDefinitionResponse.data.id.split(":")[1].split(".")[0];
-          var _type=structureDefinitionResponse.data.type[0].code;
-          var items=[];
-          structureDefinitionResponse.data.type[0].profile.forEach(profile =>{
-              items.push(profile);
-            }
-          );
-          var oField={
-            id:fieldName,
-            name:fieldName,
-            max: 1,
-            required:true,
-            type:_type,
-            options:items,
-            label:fieldName
-          };
-          
-          this.tempFields.push(oField);
-          this.fields=this.tempFields;
-        }  
-        NProgress.done();
-      })
-      .catch(error => {
-        NProgress.done();
-        this.$refs.addUserAlert.changeMessage(
-            "Data not saved. " + error,
-            "error"
-          );
-      });
+    
       
   },
   data() {

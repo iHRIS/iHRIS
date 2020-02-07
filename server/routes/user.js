@@ -28,7 +28,7 @@ router.post("/add", function (req, res, next) {
     extension: [
       {
         //use this domain which is the only valid for the search parameters
-        url: "http://ihris.org/fhir" + "/StructureDefinition/iHRISUserDetails",
+        url:config.profileUrlDomain + "/StructureDefinition/iHRISUserDetails",
         extension: [
           {
             url: "username",
@@ -86,7 +86,6 @@ router.get("/list", function (req, res, next) {
       password: config.fhir.password
     }
   }).then(response => {
-    //console.log(response.data);
     //check if the user
     var userEntry=[];
     for (var i in response.data.entry)
@@ -138,7 +137,6 @@ router.get("/list", function (req, res, next) {
     {
       oBundle.entry=userEntry;
     }
-    //res.status(201).json(response.data);
     res.status(201).json(oBundle);
   }).catch(err => {
     res.status(400).json(err);
