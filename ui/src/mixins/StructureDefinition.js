@@ -86,10 +86,13 @@ export default {
             let type = field.type[0].code;
 
             // if this is a primitive type, we are done
-            if (this.primitiveTypes.indexOf(type) >= 0 || type === "Reference") {
+            if (
+              this.primitiveTypes.indexOf(type) >= 0 ||
+              type === "Reference"
+            ) {
               fields[field.id] = this.formatField(field, type);
             } else {
-              let subfields = this.getFields(field.type[0].code);
+              let subfields = this.getFields(field.type[0].code, field);
 
               subfields.forEach(subfield => {
                 fields[subfield.id] = this.formatField(
@@ -109,6 +112,18 @@ export default {
           return [err];
         });
     },
+    getCodeableConceptFields(field) {
+      return [
+        {
+          definition: field.definition,
+          short: field.short,
+          id: field.id,
+          max: field.max,
+          type: [{ code: "string" }],
+          min: field.min
+        }
+      ];
+    },
     getCodingFields() {
       return [
         {
@@ -118,6 +133,28 @@ export default {
           max: "1",
           type: [{ code: "string" }],
           min: 0
+        }
+      ];
+    },
+    getPeriodFields(field) {
+      return [
+        {
+          definition: field.definition,
+          short: field.short,
+          id: field.id + ".Period.start",
+          labelOverride: "Start",
+          max: field.max,
+          min: field.min,
+          type: [{ code: "dateTime" }]
+        },
+        {
+          definition: field.definition,
+          short: field.short,
+          id: field.id + ".Period.end",
+          labelOverride: "End",
+          max: field.max,
+          min: field.min,
+          type: [{ code: "dateTime" }]
         }
       ];
     },
@@ -170,14 +207,20 @@ export default {
         }
       ];
     },
-    getFields(structureDefinition) {
+    getFields(structureDefinition, field) {
       if (structureDefinition) {
         structureDefinition = structureDefinition.toLowerCase();
       }
 
       switch (structureDefinition) {
+        case "codeableconcept":
+          return this.getCodeableConceptFields(field);
+
         case "coding":
           return this.getCodingFields();
+
+        case "period":
+          return this.getPeriodFields(field);
 
         case "qualification":
           return this.getQualificationFields();
@@ -198,6 +241,7 @@ export default {
       name = name.replace("[x]", "");
 
       let formatted = {
+        labelOverride: field.labelOverride,
         subtitle: field.definition,
         short: field.short,
         title: name,
@@ -220,126 +264,6 @@ export default {
 
       return formatted;
     },
-    populate(name, structureDefinition, field, rawData) {
-      for (var i = 0; i < rawData.length; i++) {
-        let sanitizedField =
-          (structureDefinition == "BackboneElement" ? name.toLowerCase() : "") +
-          rawData[i].id.slice(rawData[i].id.indexOf(".") + 1);
-
-        if (sanitizedField == name) {
-          field._short = rawData[i].short;
-          field._definition = rawData[i].definition;
-
-          break;
-        }
-      }
-    },
-    processField(
-      field,
-      fields,
-      structureDefinition,
-      rawData,
-      parentDefinition
-    ) {
-      // skip fields we're not interested in
-      if (
-        field._type == "id" ||
-        field._type == "Extension" ||
-        field._type == "xhtml" ||
-        field._name == "id"
-      ) {
-        return fields;
-      }
-
-      let options = [];
-
-      if (this._self.primitiveTypes.indexOf(field._type) >= 0) {
-        this._self.populate(field._name, structureDefinition, field, rawData);
-
-        options = field._short
-          ? field._short
-              .split("|")
-              .map(Function.prototype.call, String.prototype.trim)
-          : [];
-
-        fields[field._name] = {
-          subtitle: field._definition,
-          title: field._name,
-          id: field._name,
-          max: field._multiple ? "*" : 1,
-          options: options,
-          name: field._name,
-          type: field._type,
-          required: field._required,
-          object: false,
-          fields: {}
-        };
-      } else if (field._type == "BackboneElement") {
-        this._self.populate(field._name, structureDefinition, field, rawData);
-
-        options = field._short
-          ? field._short
-              .split("|")
-              .map(Function.prototype.call, String.prototype.trim)
-          : [];
-
-        fields[field._name] = {
-          subtitle: field._definition,
-          title: field._name,
-          id: field._name,
-          max: field._multiple ? "*" : 1,
-          options: options,
-          name: field._name,
-          type: field._type,
-          required: field._required,
-          object: true,
-          fields: {}
-        };
-
-        field._properties.forEach(subfield => {
-          let result = this._self.processField(
-            subfield,
-            [],
-            structureDefinition,
-            rawData,
-            parentDefinition
-          );
-
-          if (result) {
-            Object.keys(result).forEach(key => {
-              fields[field._name].fields[key] = result[key];
-            });
-          }
-        });
-      } else if (this.structureDefinitions[field._type]) {
-        fields[field._name] = this._self.structureDefinitions[field._type];
-      } else {
-        this._self.populate(field._name, structureDefinition, field, rawData);
-
-        options = field._short
-          ? field._short
-              .split("|")
-              .map(Function.prototype.call, String.prototype.trim)
-          : [];
-
-        fields[field._name] = {
-          subtitle: field._definition,
-          title: field._name,
-          id: field._name,
-          max: field._multiple ? "*" : 1,
-          options: options,
-          name: field._name,
-          type: field._type,
-          required: field._required,
-          object: true,
-          fields: this._self.describe(field._type, structureDefinition)
-        };
-
-        this.structureDefinitions[field._type] = fields[field._name];
-      }
-
-      return fields;
-    },
     showForm(title, definition, data) {
       if (this.primitiveTypes.includes(definition)) {
         let fields = [];
@@ -353,6 +277,11 @@ export default {
             let customFields = {};
             customFields["Attachment.url"] = fields.fields["Attachment.url"];
             fields.fields = customFields;
+          }
+
+          // we don't want to show the practitioner field, we'll fill that in ourselves
+          if (definition === "iHRISPractitionerRole") {
+            delete fields.fields["PractitionerRole.practitioner"];
           }
 
           this.$emit("toggleForm", fields.fields, title, data);

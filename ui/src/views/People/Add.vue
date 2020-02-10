@@ -3,10 +3,8 @@
     <v-alert v-model="alert" dismissable type="error">
         {{ error }}
     </v-alert>
-    <!--<v-flex xs6 offset-xs3 v-if="allowedToAccess">-->
       <v-flex :class="gridLayout" >
       <div :style="[{'font-size':fontSizeH1},{'font-weight': 'bold'}]" >Add a Person</div>
-      <!--<h1>Add a Person</h1>-->
       <p :style="{'font-size':fontSize}" >
         To track a person in the database, whether an employee or a job
         applicant, add a record for that person. Certain information is required

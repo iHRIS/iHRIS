@@ -1,7 +1,12 @@
 var axios = require("axios");
 const URI = require('urijs');
+const fs = require('fs')
 const env = process.env.NODE_ENV || 'development';
-const config = require('./config/config.json')[env];
+
+var config = require(__dirname + '/config/config.json')[env];
+if(env === "production") {
+  config = JSON.parse(fs.readFileSync(`/run/secrets/server_config`, 'utf8'))[env];
+}
 
 module.exports = {
   getDefinition: (resourceType, resourceId, callback) => {
