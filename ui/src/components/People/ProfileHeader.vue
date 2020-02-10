@@ -3,20 +3,28 @@
     <v-flex xs1 v-if="practitioner.photo">
       <v-img :src="getProfilePicture()" contain />
     </v-flex>
-    <v-flex xs6 class="display-2 text-xs-left pl-3" v-if="practitioner.name">
-      {{ name }}<br />
-      <v-chip
-        class="ma-2"
-        :color="active.color"
-        text-color="white"
-        @click="changeActive"
-      >
-        <v-avatar left>
-          <v-icon>{{ active.icon }}</v-icon>
-        </v-avatar>
+    <v-flex xs6 class="text-xs-left pl-3" v-if="practitioner.name">
+      <v-row class="display-2">{{ name }}</v-row>
+      <v-row class="display-1">
+        {{ position }}
+      </v-row>
+      <v-row class>
+        {{ 
+      </v-row>
+      <v-row>
+        <v-chip
+          class="ma-2"
+          :color="active.color"
+          text-color="white"
+          @click="changeActive"
+        >
+          <v-avatar left>
+            <v-icon>{{ active.icon }}</v-icon>
+          </v-avatar>
 
-        {{ active.text }}
-      </v-chip>
+          {{ active.text }}
+        </v-chip>
+      </v-row>
     </v-flex>
     <v-flex xs4 offset-xs1 class="pr-3">
       <Alert ref="alert" />
