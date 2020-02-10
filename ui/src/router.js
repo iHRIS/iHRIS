@@ -1,13 +1,26 @@
 import Vue from "vue";
 import Router from "vue-router";
 import { store } from "./store.js";
+import {serverBus} from "./main.js";
 
 Vue.use(Router);
-var searchPeopleAllowedRoles=["Admin","Edit","View"];
-var editPeopleAllowedRoles=["Admin","Edit"];
-var viewPeopleAllowedRoles=["Admin","Edit","View"];
-var relationshipsAllowedRoles=["Admin"];
-var manageUserAllowedRoles=["Admin"];
+
+//var error="";
+
+var vueInstance=new Vue(
+{
+  props:{
+    error:String
+  },
+  methods:{
+    displayError(msg){
+      this.$nextTick(() => { 
+        this.error=msg;
+        serverBus.$emit("errorGenerated",this.error);
+      });
+    }
+  }
+});
 let router = new Router({
   mode: "history",
   base: process.env.BASE_URL,
@@ -18,15 +31,19 @@ let router = new Router({
       props: true,
       component: () => import(/* webpackChunkName: "home" */ "./views/Home.vue"),
       beforeEnter (to, from, next) {
-        var roles=store.state.roles;
-        if(roles == "Admin" || roles == "Edit" || roles == "View")
-        {
-          store.state.allowToAccessTheNextPage = true;
-          next();
-        }
-        else{
-          next(false);
-        }
+          var routeName=to.name;
+          var roles=store.state.roles;
+          var allowed=checkPageRole(roles,routeName);
+          if(allowed){
+            next();
+          }
+          else{
+            var error = "The user does not have the necessary privileges to access the page : "+routeName;
+            next({
+              path: "/noaccess",
+            });
+            vueInstance.displayError(error);
+          }
       }
     },
     {
@@ -43,8 +60,17 @@ let router = new Router({
         beforeEnter (to, from, next) {
           var routeName=to.name;
           var roles=store.state.roles;
-          checkPageRole(roles,routeName);
-          next();
+          var allowed=checkPageRole(roles,routeName);
+          if(allowed){
+            next();
+          }
+          else{
+            var error = "The user does not have the necessary privileges to access the page : "+routeName;
+            next({
+              path: "/noaccess",
+            });
+            vueInstance.displayError(error);
+          }
         }
         
     },
@@ -56,8 +82,17 @@ let router = new Router({
         beforeEnter (to, from, next) {
           var routeName=to.name;
           var roles=store.state.roles;
-          checkPageRole(roles,routeName);
-          next();
+          var allowed=checkPageRole(roles,routeName);
+          if(allowed){
+            next();
+          }
+          else{
+            var error = "The user does not have the necessary privileges to access the page : "+routeName;
+            next({
+              path: "/noaccess",
+            });
+            vueInstance.displayError(error);
+          }
         }
     },
     {
@@ -99,8 +134,17 @@ let router = new Router({
         
         var routeName=to.name;
         var roles=store.state.roles;
-        checkPageRole(roles,routeName);
-        next();
+        var allowed=checkPageRole(roles,routeName);
+        if(allowed){
+          next();
+        }
+        else{
+          var error = "The user does not have the necessary privileges to access the page : "+routeName;
+            next({
+              path: "/noaccess",
+            });
+            vueInstance.displayError(error);
+        }
         }
     },
     {
@@ -111,8 +155,18 @@ let router = new Router({
         beforeEnter (to, from, next) {
           var routeName=to.name;
           var roles=store.state.roles;
-          checkPageRole(roles,routeName);
-          next();
+          var allowed=checkPageRole(roles,routeName);
+          if(allowed){
+            next();
+          }
+          else{
+            var error = "The user does not have the necessary privileges to access the page : "+routeName;
+            next({
+              path: "/noaccess",
+            });
+            vueInstance.displayError(error);
+          }
+          
         }
     },
     {
@@ -123,8 +177,17 @@ let router = new Router({
         beforeEnter (to, from, next) {
           var routeName=to.name;
           var roles=store.state.roles;
-          checkPageRole(roles,routeName);
-          next();
+          var allowed=checkPageRole(roles,routeName);
+          if(allowed){
+            next();
+          }
+          else{
+            var error = "The user does not have the necessary privileges to access the page : "+routeName;
+            next({
+              path: "/noaccess",
+            });
+            vueInstance.displayError(error);
+          }
         }
     },
     {
@@ -135,8 +198,17 @@ let router = new Router({
         beforeEnter (to, from, next) {
           var routeName=to.name;
           var roles=store.state.roles;
-          checkPageRole(roles,routeName);
-          next();
+          var allowed=checkPageRole(roles,routeName);
+          if(allowed){
+            next();
+          }
+          else{
+            var error = "The user does not have the necessary privileges to access the page : "+routeName;
+            next({
+              path: "/noaccess",
+            });
+            vueInstance.displayError(error);
+          }
         }
     },
     {
@@ -147,8 +219,17 @@ let router = new Router({
         beforeEnter (to, from, next) {
           var routeName=to.name;
           var roles=store.state.roles;
-          checkPageRole(roles,routeName);
-          next();
+          var allowed=checkPageRole(roles,routeName);
+          if(allowed){
+            next();
+          }
+          else{
+            var error = "The user does not have the necessary privileges to access the page : "+routeName;
+            next({
+              path: "/noaccess",
+            });
+            vueInstance.displayError(error);
+          }
         }
     },
     {
@@ -159,8 +240,17 @@ let router = new Router({
         beforeEnter (to, from, next) {
           var routeName=to.name;
           var roles=store.state.roles;
-          checkPageRole(roles,routeName);
-          next();
+          var allowed=checkPageRole(roles,routeName);
+          if(allowed){
+            next();
+          }
+          else{
+            var error = "The user does not have the necessary privileges to access the page : "+routeName;
+            next({
+              path: "/noaccess",
+            });
+            vueInstance.displayError(error);
+          }
         }
     },
     {
@@ -174,6 +264,13 @@ let router = new Router({
       name: "user-manual",
       component: () =>
         import(/* webpackChunkName: "userManual" */ "./views/UserManual.vue")
+    }
+    ,
+    {
+      path: "/noaccess",
+      name: "noaccess",
+      component: () =>
+        import(/* webpackChunkName: "NotAllowed" */ "./views/noaccess.vue")
     }
   ]
 });
@@ -201,72 +298,34 @@ router.beforeEach((to, from, next) => {
 
 function checkPageRole(roleName,routeName)
 {
-  var resCheck=false;
+  let roles = [];
   switch(routeName)
   {
     case "search-people":
-      if(searchPeopleAllowedRoles.includes(roleName))
-      {
-        store.state.allowToAccessTheNextPage = true;
-      }
-      else{
-        store.state.allowToAccessTheNextPage = false;
-      }
+      roles = ["Admin", "Edit", "View"];
       break;
     case "add-people":
-      if(editPeopleAllowedRoles.includes(roleName))
-      {
-        store.state.allowToAccessTheNextPage = true;
-      }
-      else{
-        store.state.allowToAccessTheNextPage = false;
-      }
+      roles = ["Admin", "Edit"];
       break;
     case "edit-people":
-      if(editPeopleAllowedRoles.includes(roleName))
-      {
-        store.state.allowToAccessTheNextPage = true;
-      }
-      else{
-        store.state.allowToAccessTheNextPage = false;
-      }
+      roles = ["Admin", "Edit"];
       break;
-      case "people-view":
-        if(viewPeopleAllowedRoles.includes(roleName))
-        {
-          store.state.allowToAccessTheNextPage = true;
-        }
-        else{
-          store.state.allowToAccessTheNextPage = false;
-        }
-        break;
-        case "relationship":
-          if(relationshipsAllowedRoles.includes(roleName))
-          {
-            store.state.allowToAccessTheNextPage = true;
-          }
-          else{
-            store.state.allowToAccessTheNextPage = false;
-          }
-          break;
-        case "admin-add-user":
-          if(manageUserAllowedRoles.includes(roleName))
-          {
-            store.state.allowToAccessTheNextPage = true;
-          }
-          else{
-            store.state.allowToAccessTheNextPage = false;
-          }
-          break;
-          case "admin-users":
-            if(manageUserAllowedRoles.includes(roleName))
-            {
-              store.state.allowToAccessTheNextPage = true;
-            }
-            else{
-              store.state.allowToAccessTheNextPage = false;
-            }
-            break;
+    case "people-view":
+      roles = ["Admin","Edit","View"];
+      break;
+    case "home":
+      roles = ["Admin","Edit","View"];
+      break;
+    case "relationship":
+      roles = ["Admin"];
+      break;
+    case "admin-add-user":
+      roles = ["Admin"];
+      break;
+    case "admin-users":
+      roles = ["Admin"];
+      break;
   }
+  return roles.includes(roleName) && roles.length;
 };
 export default router;

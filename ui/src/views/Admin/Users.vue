@@ -5,7 +5,7 @@
     <v-alert v-model="alert" dismissable type="error">
         {{ error }}
     </v-alert>
-    <v-card v-if="allowedToAccess">
+    <v-card >
       <v-card-title>Users</v-card-title>
       <v-card-text>
         <v-data-table :headers="headers" :items="users" :items-per-page="10" loading="'false'" loading-text="Loading... Please wait">
@@ -113,7 +113,6 @@
 <script>
 import axios from "axios";
 import Alert from "@/components/Layout/Alert.vue";
-import { store } from "@/store.js";
 // this is needed for date parsing but is picked up by the linter because it's technically not used
 // eslint-disable-next-line
 import datejs from "datejs";
@@ -124,8 +123,7 @@ export default {
   },
   created() {
     this.config = require("@/config/config.json");
-    if(store.state.allowToAccessTheNextPage)
-    {
+    
         axios.get(this.config.backend + "/user/list").then(response => {
         if (response.data.entry) {
           response.data.entry.forEach(person => {
@@ -189,17 +187,7 @@ export default {
         });//end axios.get 
       });
       //End of axios.get /user/list
-    }
-    else {
-      /* this.$refs.manageUserRoleAlert.changeMessage(
-              "The user does not have the necessary privileges to access this page.",
-              "error"
-            ); */
-      this.error = "The user does not have the necessary privileges to access this page. ";
-      this.alert = true;
-      this.allowedToAccess=false;
-      //this.allowedToAccess=false;
-    }
+    
     
 
   },
@@ -214,7 +202,6 @@ export default {
       editedUserName:null,
       rolesProfiles: [],
       selectedRole:null,
-      allowedToAccess:true,
       alert:false,
       error:"",
       headers: [

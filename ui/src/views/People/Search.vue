@@ -8,7 +8,7 @@
         Search People
       </v-flex>
     </v-layout>
-    <v-layout wrap v-if="allowedToAccess">
+    <v-layout wrap >
       <v-flex xs9>
         <v-card>
           <v-card-title class="display-1">Results</v-card-title>
@@ -67,12 +67,6 @@ import { store } from "@/store.js";
 export default {
   created() {
     this.config = require("@/config/config.json");
-    if(!store.state.allowToAccessTheNextPage)
-    {
-      this.error = "The user does not have the necessary privileges to access this page ";
-      this.alert = true;
-      this.allowedToAccess=false;
-    }
   },
   components: {
     Alert,
@@ -83,7 +77,6 @@ export default {
       config: null,
       alert: false,
       error: "",
-      allowedToAccess:true,
       headers: [
         {
           text: "Surname",

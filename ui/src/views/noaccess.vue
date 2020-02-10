@@ -1,0 +1,27 @@
+<template>
+  <v-container >
+    <v-alert v-model="alert" dismissable type="error">
+        Erreur :{{ error }}
+    </v-alert>
+    
+  </v-container>
+</template>
+<script>
+import {serverBus} from "../main.js";
+export default{
+    props:{
+        error:String
+    },
+    created()
+    {
+        serverBus.$on("errorGenerated",(error)=>{
+            this.error=error;
+        });
+    },
+    data() {
+    return {
+         alert: true,
+        }
+    }
+}
+</script>

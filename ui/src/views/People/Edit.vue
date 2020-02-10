@@ -11,7 +11,7 @@
     />
 
     <v-layout>
-      <v-flex xs6 class="pr-3" v-if="allowedToAccess">
+      <v-flex xs6 class="pr-3" >
         <div v-for="(element, index) in display" v-bind:key="'edit-' + index">
           <DetailsCard
             v-if="index != 'id' && index != 'resourceType' && index != 'active'"
@@ -65,14 +65,7 @@ import Vue from "vue";
 import { store } from "@/store.js";
 
 export default {
-   created() {
-    if(!store.state.allowToAccessTheNextPage)
-    {
-      this.error = "The user does not have the necessary privileges to access this page ";
-      this.alert = true;
-      this.allowedToAccess=false;
-    }
-   },
+   
   components: {
     AddSectionsMenu,
     DetailsCard,
@@ -88,7 +81,6 @@ export default {
       detailRaw: null,
       detailTitle: null,
       alert: false,
-      allowedToAccess:true,
       error: ""
     };
   },

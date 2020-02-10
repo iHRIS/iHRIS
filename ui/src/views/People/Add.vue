@@ -4,7 +4,7 @@
         {{ error }}
     </v-alert>
     <!--<v-flex xs6 offset-xs3 v-if="allowedToAccess">-->
-      <v-flex :class="gridLayout" v-if="allowedToAccess">
+      <v-flex :class="gridLayout" >
       <div :style="[{'font-size':fontSizeH1},{'font-weight': 'bold'}]" >Add a Person</div>
       <!--<h1>Add a Person</h1>-->
       <p :style="{'font-size':fontSize}" >
@@ -35,10 +35,6 @@ import { store } from "@/store.js";
 
 export default {
 
-  mounted(){
-    console.log(this.$vuetify.breakpoint);
-    
-  },
   computed:{
     fontSizeParagraph(){
       switch (this.$vuetify.breakpoint.name) {
@@ -70,9 +66,8 @@ export default {
   },
   created() {
     this.config = require("@/config/config.json");
-    if(store.state.allowToAccessTheNextPage)
-    {
-       NProgress.start();
+    
+      NProgress.start();
       axios
       .get(this.config.backend + "/practitioner/describe/page")
       .then(pageResponse => {
@@ -226,21 +221,12 @@ export default {
         this.addPractitionerForm = false;
         NProgress.done()
       });
-  
-  
-    }//end if isAllowedToAccessNextPage
-    else{
-      this.error = "The user does not have the necessary privileges to access this page ";
-      this.alert = true;
-      this.allowedToAccess=false;
-    }
    },
   components: {
     DynamicForm
   },
   data() {
     return {
-      allowedToAccess:true,
       addPractitionerForm: true,
       alert: false,
       config: null,

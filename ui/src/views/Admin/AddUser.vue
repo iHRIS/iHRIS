@@ -4,7 +4,7 @@
     <v-alert v-model="alert" dismissable type="error">
         {{ error }}
     </v-alert>
-    <v-card v-if="isLoaded && allowedToAccess">
+    <v-card v-if="isLoaded ">
       <v-card-title>Add User</v-card-title>
       <v-card-text>
       
@@ -35,8 +35,7 @@ export default {
   },
   created () {
     this.config = require("@/config/config.json");
-    if(store.state.allowToAccessTheNextPage)
-    {
+    
       NProgress.start();
       this.tempFields=[{
                 id: "username",
@@ -97,13 +96,6 @@ export default {
               "error"
             );
         });
-    }
-    else {
-      
-      this.error = "The user does not have the necessary privileges to access this page. ";
-      this.alert = true;
-      this.allowedToAccess=false;
-    }
     
       
   },
@@ -114,7 +106,6 @@ export default {
       tempFields:[],
       error: "",
       alert: false,
-      allowedToAccess: true,
       inputs: [
         "username",
         "password",

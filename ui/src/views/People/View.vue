@@ -5,7 +5,7 @@
     </v-alert>
     <ProfileHeader :practitioner="practitioner" />
 
-    <v-layout wrap v-if="allowedToAccess">
+    <v-layout wrap >
       <v-col md="6">
         <v-flex v-for="(element, index, counter) in display" v-bind:key="index">
           <DetailsCard
@@ -40,16 +40,7 @@ export default {
   data() {
     return {
       alert: false,
-      error: "",
-      allowedToAccess:true
-    }
-  },
-  created(){
-    if(!store.state.allowToAccessTheNextPage)
-    {
-      this.error = "The user does not have the necessary privileges to access this page ";
-      this.alert = true;
-      this.allowedToAccess=false;
+      error: ""
     }
   },
   components: {
