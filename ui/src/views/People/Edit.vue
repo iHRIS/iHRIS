@@ -1,14 +1,44 @@
 <template>
-  <v-container>
-    <ProfileHeader
-      :practitioner="practitioner"
-      :edit="true"
-      ref="profileHeader"
-      v-on:changePractitioner="changePractitioner"
-    />
 
+  <v-container>
+      <ProfileHeader
+        :practitioner="practitioner"
+        :edit="true"
+        :screenSize="screenSize"
+        ref="profileHeader"
+        v-on:changePractitioner="changePractitioner"
+      />
+    
+        <!--
+        <v-toolbar dark color="primary">
+          <v-menu offset-y>
+              <template v-slot:activator="{ on }">
+                <v-btn icon  v-on="on">
+                  <v-icon>list</v-icon>
+                </v-btn>
+                <v-toolbar-title class="white--text">Title</v-toolbar-title>
+              </template>
+              <v-card>
+                <v-list dense>
+                    <v-list-tile>
+                      <v-list-item-title class="my-1 mx-1"> 
+                        Item1
+                      </v-list-item-title>
+                      <v-list-item-title>
+                        Item2
+                       </v-list-item-title>
+                    </v-list-tile>
+                </v-list>
+              </v-card>
+          </v-menu>
+        </v-toolbar>   
+        -->
+    <AddSectionsMenu v-if="smallScreenCompute"
+          v-on:toggleForm="toggleForm"
+          :data="this.practitioner"
+        />
     <v-layout>
-      <v-flex xs6 class="pr-3">
+      <v-flex :class="gridLayout">
         <div v-for="(element, index) in display" v-bind:key="'edit-' + index">
           <DetailsCard
             v-if="index != 'id' && index != 'resourceType' && index != 'active'"
@@ -37,12 +67,21 @@
           </v-card-text>
         </v-card>
       </v-flex>
-      <v-flex xs6 class="pl-3">
+      <!--
+      <v-flex xs6 v-if="!smallScreen" >
         <AddSectionsMenu
           v-on:toggleForm="toggleForm"
           :data="this.practitioner"
+          :screenSize="screenSize"
+
         />
+         
       </v-flex>
+      -->
+      <AddSectionsMenu v-if="!smallScreenCompute"
+          v-on:toggleForm="toggleForm"
+          :data="this.practitioner"
+        />
     </v-layout>
   </v-container>
 </template>
@@ -61,6 +100,69 @@ import StructureDefinition from "@/mixins/StructureDefinition.js";
 import Vue from "vue";
 
 export default {
+  created(){
+    this.screenSize = this.$vuetify.breakpoint.name;
+  },
+  computed:{
+    fontSizeParagraph(){
+      var fontSize='16px';
+      switch (this.screenSize) {
+        case 'xs': fontSize = '10px'
+          break;
+        case 'sm': fontSize =  '10px'
+          break;
+        case 'md': fontSize =  '14px'
+          break;
+        case 'lg': fontSize =  '16px'
+          break;
+        case 'xl': fontSize =  '16px'
+          break;
+      }
+      return fontSize;
+    },
+    fontSizeH1(){
+      var fontSize = '32px';
+      switch (this.$vuetify.breakpoint.name) {
+        case 'xs': fontSize = '26px';
+          break;
+        case 'sm': fontSize = '26px'
+          break;
+        case 'md': fontSize = '32px'
+          break;
+        case 'lg': fontSize = '32px'
+          break;
+        case 'xl': fontSize = '32px'
+          break;
+      }
+      return fontSize;
+    },
+    gridLayout(){
+      var layout = "";
+      switch (this.screenSize) {
+        case 'xs': layout = 'xs10 pr-3';
+          break;
+        case 'sm': layout = 'xs8 pr-3';
+          break;
+        case 'md': layout = 'xs6 pr-3';
+          break;
+        case 'lg': layout = 'xs6 pr-3';
+          break;
+        case 'xl': layout = 'xs6 pr-3'
+      }
+      return layout;
+    },
+    smallScreenCompute(){
+      var smallScreen=false;
+      if(this.$vuetify.breakpoint.name == "xs")
+      {
+        smallScreen = true;
+      }
+      else{
+        smallScreen = false;
+      }
+      return smallScreen;
+    },
+  },
   components: {
     AddSectionsMenu,
     DetailsCard,
@@ -74,7 +176,8 @@ export default {
       detailFields: {},
       detailPath: null,
       detailRaw: null,
-      detailTitle: null
+      detailTitle: null,
+      screenSize: ""
     };
   },
   methods: {

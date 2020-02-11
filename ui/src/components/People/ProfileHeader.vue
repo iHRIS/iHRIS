@@ -3,7 +3,8 @@
     <v-flex xs1 v-if="practitioner.photo">
       <v-img :src="getProfilePicture()" contain />
     </v-flex>
-    <v-flex xs6 class="display-2 text-xs-left pl-3" v-if="practitioner.name">
+    <!--<v-flex xs6 class="display-2 text-xs-left pl-3" v-if="practitioner.name">-->
+    <v-flex :class="gridLayoutTitle" v-if="practitioner.name">
       {{ name }}<br />
       <v-chip
         class="ma-2"
@@ -34,6 +35,27 @@ export default {
     Alert
   },
   computed: {
+    gridLayoutTitle(){
+      var layout = "";
+      switch (this.screenSize) {
+         case 'xs': 
+            layout = "xs6 title font-weight-bold text-xs-left pl-3";
+          break;
+        case 'sm': 
+            layout = "xs6 title font-weight-bold text-xs-left pl-3";
+          break; 
+        case 'md': 
+            layout = "xs6 display-1 font-weight-bold text-xs-left pl-3";
+          break; 
+        case 'lg': 
+            layout = "xs6 display-1 font-weight-bold text-xs-left pl-3";
+          break; 
+        case 'xl': 
+            layout = "xs6 display-1 font-weight-bold text-xs-left pl-3";
+          break; 
+      }
+      return layout;
+    },
     active() {
       // active is defined as active unless it is explicitly set to false per the structure definition
       if (this.practitioner.active === false) {
@@ -105,6 +127,6 @@ export default {
       this.$refs.alert.reset();
     }
   },
-  props: ["edit", "practitioner"]
+  props: ["edit", "practitioner","screenSize"]
 };
 </script>

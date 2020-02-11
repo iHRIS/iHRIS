@@ -1,8 +1,8 @@
 <template>
   <v-container>
-    <v-flex xs6 offset-xs3>
-      <h1>Add a Person</h1>
-      <p>
+    <v-flex :class="gridLayout" >
+      <div :class="titleStyle">Add a Person</div>
+      <p :style="{'font-size':fontSizeParagraph}">
         To track a person in the database, whether an employee or a job
         applicant, add a record for that person. Certain information is required
         to start a new record. Once the record is generated, additional options
@@ -32,7 +32,73 @@ import axios from "axios";
 import DynamicForm from "@/components/Form/DynamicForm.vue";
 
 export default {
+computed:{
+    fontSizeParagraph(){
+      var fontSize='';
+      switch (this.$vuetify.breakpoint.name) {
+        case 'xs': fontSize = '12px'
+          break;
+        case 'sm': fontSize =  '12px'
+          break;
+        case 'md': fontSize =  '14px'
+          break;
+        case 'lg': fontSize =  '16px'
+          break;
+        case 'xl': fontSize =  '16px'
+          break;
+      }
+      return fontSize;
+    },
+    fontSizeH1(){
+      var fontSize = '32px';
+      switch (this.$vuetify.breakpoint.name) {
+        case 'xs': fontSize = '26px';
+          break;
+        case 'sm': fontSize = '26px'
+          break;
+        case 'md': fontSize = '32px'
+          break;
+        case 'lg': fontSize = '32px'
+          break;
+        case 'xl': fontSize = '32px'
+          break;
+      }
+      return fontSize;
+    },
+    gridLayout(){
+      var layout = "";
+      switch (this.screenSize) {
+        case 'xs': layout = 'xs8 offset-xs2';
+          break;
+        case 'sm': layout = 'xs8 offset-xs2';
+          break;
+        case 'md': layout = 'xs6 offset-xs3';
+          break;
+        case 'lg': layout = 'xs6 offset-xs3';
+          break;
+        case 'xl': layout = 'xs6 offset-xs3'
+      }
+      return layout;
+    },
+    titleStyle(){
+      var style="";
+      switch (this.screenSize) {
+        case 'xs': style='title font-weight-bold';
+          break;
+        case 'sm': style='title font-weight-bold';
+          break;
+        case 'md': style='display-1 font-weight-bold';
+          break;
+        case 'lg': style='display-1 font-weight-bold';
+          break;
+        case 'xl': style='display-1 font-weight-bold';
+          break;
+      }
+      return style;
+    }
+  },
   created() {
+    this.screenSize=this.$vuetify.breakpoint.name;
     this.config = require("@/config/config.json");
     axios
       .get(this.config.backend + "/practitioner/describe/page")
@@ -207,7 +273,8 @@ export default {
       practitioner: {},
       results: {},
       rules: [v => !!v || "Required field"],
-      surname: ""
+      surname: "",
+      screenSize:""
     };
   },
   methods: {
