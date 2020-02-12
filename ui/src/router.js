@@ -310,6 +310,9 @@ function checkPageRole(roleName,routeName)
     case "edit-people":
       roles = ["Admin", "Edit"];
       break;
+    case "people-edit":
+      roles = ["Admin", "Edit"];
+      break;
     case "people-view":
       roles = ["Admin","Edit","View"];
       break;
