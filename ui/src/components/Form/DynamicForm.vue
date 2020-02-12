@@ -39,7 +39,7 @@
         :hint="field.short"
         :value="field.value"
       />
-
+      <!--
       <Date
         v-if="field.type == 'date'"
         :label="field.label"
@@ -49,7 +49,18 @@
         :hint="field.short"
         :value="field.value"
       />
-
+      -->
+      <DatePicker
+        v-if="field.type == 'date' || field.type.toLowerCase() == 'datetime'"
+        :label="field.label"
+        :max="field.max"
+        :required="field.required"
+        :ref="field.name"
+        :hint="field.short"
+        :value="field.value"
+        :language="language"
+      />
+      <!--
       <DateTime
         v-if="field.type.toLowerCase() == 'datetime'"
         :label="field.label"
@@ -59,7 +70,7 @@
         :hint="field.short"
         :datetime="field.value"
       />
-
+      -->
       <Decimal
         v-if="field.type == 'decimal'"
         :label="field.label"
@@ -226,8 +237,9 @@ import Boolean from "@/components/Form/Boolean.vue";
 import Capitalize from "@/mixins/Capitalize.js";
 import Canonical from "@/components/Form/Canonical.vue";
 import Code from "@/components/Form/Code.vue";
-import Date from "@/components/Form/Date.vue";
-import DateTime from "@/components/Form/DateTime.vue";
+//import Date from "@/components/Form/Date.vue";
+import DatePicker from "@/components/Form/DatePicker.vue";
+//import DateTime from "@/components/Form/DateTime.vue";
 import Decimal from "@/components/Form/Decimal.vue";
 import Id from "@/components/Form/Id.vue";
 import Instant from "@/components/Form/Instant.vue";
@@ -250,8 +262,9 @@ export default {
     Boolean,
     Canonical,
     Code,
-    Date,
-    DateTime,
+    //Date,
+    //DateTime,
+    DatePicker,
     Decimal,
     Id,
     Instant,
@@ -289,7 +302,8 @@ export default {
       active: true,
       data: {},
       inputs: [],
-      use: ""
+      use: "",
+      language: "en"
     };
   },
   methods: {
@@ -340,9 +354,9 @@ export default {
     },
     getInputs() {
       let inputs = {};
-
       for (let i of this.inputs) {
         if (this.$refs[i]) {
+          
           inputs[i] = this.$refs[i][0].getInput();
         }
       }
