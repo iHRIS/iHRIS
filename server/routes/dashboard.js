@@ -2,8 +2,13 @@ var express = require("express");
 var router = express.Router();
 var axios = require("axios");
 const URI = require("urijs");
+const fs = require('fs')
 const env = process.env.NODE_ENV || "development";
-const config = require(__dirname + "/../config/config.json")[env];
+
+var config = require(__dirname + '/../config/config.json')[env];
+if(env === "production") {
+  config = JSON.parse(fs.readFileSync(`/run/secrets/server_config`, 'utf8'))[env];
+}
 
 /**
  * Get all dashboards

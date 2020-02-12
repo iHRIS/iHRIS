@@ -4,8 +4,13 @@ var axios = require("axios");
 const URI = require("urijs");
 const mixin = require("../mixin");
 const env = process.env.NODE_ENV || "development";
-const config = require(__dirname + "/../config/config.json")[env];
+const fs = require('fs')
 const crypto = require("crypto");
+
+var config = require(__dirname + '/../config/config.json')[env];
+if(env === "production") {
+  config = JSON.parse(fs.readFileSync(`/run/secrets/server_config`, 'utf8'))[env];
+}
 
 /**
  * Add a new user

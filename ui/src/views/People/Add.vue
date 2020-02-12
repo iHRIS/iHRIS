@@ -3,9 +3,15 @@
     <v-alert v-model="alert" dismissable type="error">
         {{ error }}
     </v-alert>
+<<<<<<< HEAD
       <v-flex xs6 offset-xs3 >
       <h1>Add a Person</h1>
       <p>
+=======
+      <v-flex :class="gridLayout" >
+      <div :style="[{'font-size':fontSizeH1},{'font-weight': 'bold'}]" >Add a Person</div>
+      <p :style="{'font-size':fontSize}" >
+>>>>>>> b09efd3a75f635fd6640e60debb2decef10a7df1
         To track a person in the database, whether an employee or a job
         applicant, add a record for that person. Certain information is required
         to start a new record. Once the record is generated, additional options

@@ -1,6 +1,6 @@
 <template>
   <v-form ref="form" v-if="data">
-    <div v-for="field in data" v-bind:key="name + '-' + field.id">
+    <div v-for="field in sanitizedFields" v-bind:key="name + '-' + field.id">
       <Base64Binary
         v-if="field.type == 'base64Binary'"
         :label="field.label"
@@ -51,7 +51,7 @@
       />
 
       <DateTime
-        v-if="field.type == 'datetime'"
+        v-if="field.type.toLowerCase() == 'datetime'"
         :label="field.label"
         :max="field.max"
         :required="field.required"
@@ -245,9 +245,6 @@ import Url from "@/components/Form/Url.vue";
 import Uuid from "@/components/Form/Uuid.vue";
 
 export default {
-  created() {
-    this.changeFields(this.fields);
-  },
   components: {
     Base64Binary,
     Boolean,
@@ -270,6 +267,22 @@ export default {
     Uri,
     Url,
     Uuid
+  },
+  computed: {
+    sanitizedFields() {
+      let data = [];
+
+      this.data.forEach(element => {
+        if (element.max != 0) {
+          data.push(element);
+        }
+      });
+
+      return data;
+    }
+  },
+  created() {
+    this.changeFields(this.fields);
   },
   data() {
     return {

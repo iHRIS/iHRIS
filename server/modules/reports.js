@@ -1,11 +1,16 @@
 const env = process.env.NODE_ENV || 'development';
-const config = require(__dirname + '/../config/config.json')[env];
+const fs = require('fs')
 const axios = require('axios');
 const async = require('async');
 const URI = require('urijs');
 const _ = require('lodash');
 const structureDefinition = require('./structureDefinition');
 const Fhir = require('fhir').Fhir;
+
+var config = require(__dirname + '/../config/config.json')[env];
+if(env === "production") {
+  config = JSON.parse(fs.readFileSync(`/run/secrets/server_config`, 'utf8'))[env];
+}
 
 const fhir = new Fhir();
 
