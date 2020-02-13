@@ -32,7 +32,8 @@ router.post("/add", function (req, res, next) {
     id: "user",
     extension: [
       {
-        url: config.fhir.server + "/StructureDefinition/iHRISUserDetails",
+        //use this domain which is the only valid for the search parameters
+        url:config.profileUrlDomain + "/StructureDefinition/iHRISUserDetails",
         extension: [
           {
             url: "username",
@@ -90,7 +91,58 @@ router.get("/list", function (req, res, next) {
       password: config.fhir.password
     }
   }).then(response => {
-    res.status(201).json(response.data);
+    //check if the user
+    var userEntry=[];
+    for (var i in response.data.entry)
+    {
+      var fullUrl= response.data.entry[i].fullUrl;
+      var oPerson = response.data.entry[i].resource;
+      var isUser=false;
+      let extensions = oPerson.extension;
+      for (var j in extensions) {
+        if (extensions[j].url.includes("iHRISUserDetails")){
+          let userDetails = extensions[j].extension;
+          for (var k in userDetails) {
+            if (userDetails[k].url == "username") {
+              isUser=true;
+              break;
+            }
+          }//end for userDetails
+          if(isUser)
+          {
+            break;
+          }
+          else{
+            continue;
+          }
+        }
+      }//end for extensions
+      if(isUser)
+      {
+        userEntry.push({
+          fullUrl:fullUrl,
+          resource: oPerson
+        });
+      }
+      else {
+        continue;
+      }
+      
+    }//end for response.data.entry
+    var oBundle={
+      resourceType:"Bundle",
+      id:"bundleid",
+      link:[{
+        relation: "self",
+        url: "http://scratchpad.ihris.org/hapi/fhir/Person?_format=json"
+      }],
+      entry:[]
+    };
+    if(userEntry.length>0)
+    {
+      oBundle.entry=userEntry;
+    }
+    res.status(201).json(oBundle);
   }).catch(err => {
     res.status(400).json(err);
   });
@@ -144,6 +196,7 @@ router.post("/login", function (req, res, next) {
           let userDetails = extensions[i].extension;
           let password = null;
           let salt = null;
+          let roles = null;
 
           for (var j in userDetails) {
             if (userDetails[j].url == "password") {
@@ -153,6 +206,10 @@ router.post("/login", function (req, res, next) {
             if (userDetails[j].url == "salt") {
               salt = userDetails[j].valueString;
             }
+            if (userDetails[j].url == "roles") {
+              roles = userDetails[j].valueCoding.code;
+            }
+
           }
 
           let hash = crypto.pbkdf2Sync(
@@ -165,7 +222,8 @@ router.post("/login", function (req, res, next) {
 
           let packet = {
             userId: user.id,
-            username: req.body.username
+            username: req.body.username,
+            roles: roles
           };
 
           // matching password
