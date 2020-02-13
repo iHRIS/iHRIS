@@ -1,5 +1,6 @@
 <template >
-    <v-menu
+<div :id="formName+'_'+label">
+    <v-menu 
         ref="menu"
         v-model="menu"
         :close-on-content-click="false"
@@ -9,8 +10,8 @@
         max-width="290px"
         min-width="290px"
       >
-      <template v-slot:activator="{ on }">
-        <v-text-field
+      <template v-slot:activator="{ on }"  >
+        <v-text-field 
             v-model="date"
             :label="label"
             prepend-icon="event"
@@ -31,11 +32,15 @@
         <v-btn text color="primary" @click="$refs.menu.save(date)">OK</v-btn>
       </v-date-picker>
       </v-menu>
+  </div>
 </template>
 
 <script>
+
 export default {
+ 
   created() {
+
     this.config = require("@/config/config.json");
     this.locale = this.config.locale;
     if(this.value!=null)
@@ -48,6 +53,7 @@ export default {
       date: null,
       menu: false,
       locale: "en-US",
+      visibility: true,
       rules: {
         required: value => {
           return (
@@ -63,24 +69,7 @@ export default {
       return this["date"];
     }
   },
-  props: ["label", "max", "required", "value", "hint"]
+  props: ["label", "max", "required", "value", "hint","formName"]
 };
 </script>
-<style scoped>
-.dateBox {
-    border-color: currentColor;
-    border-bottom: 1px solid ;
-    font-family: "Roboto",sans-serif;
-    font-weight: 400;
-    margin: 15px 0px;
-    padding: 10px 0px;
-    font-size: 18px;
-}
-.dateBox input {
-    font-size: 18px;
-    letter-spacing: normal;
-    text-align: left;
-    margin: 8px 0px;
-    color: #000;
-}
-</style>
+

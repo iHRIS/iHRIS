@@ -17,6 +17,7 @@
         ref="active"
         :hint="field.short"
         :value="field.value"
+        :formName = "name"
       />
 
       <Canonical
@@ -58,6 +59,7 @@
         :ref="field.name"
         :hint="field.short"
         :value="field.value"
+        :formName = "name"
       />
       <!--
       <DateTime
@@ -295,14 +297,14 @@ export default {
   },
   created() {
     this.changeFields(this.fields);
+    
   },
   data() {
     return {
       active: true,
       data: {},
       inputs: [],
-      use: "",
-      language: "en"
+      use: ""
     };
   },
   methods: {
