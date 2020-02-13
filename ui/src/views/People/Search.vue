@@ -61,10 +61,6 @@ import Alert from "@/components/Layout/Alert.vue";
 import DynamicForm from "@/components/Form/DynamicForm.vue";
 
 export default {
-  components: {
-    Alert,
-    DynamicForm
-  },
   data() {
     return {
       config: null,
@@ -103,7 +99,9 @@ export default {
     this.config = require("@/config/config.json");
     this.getSearchFilters().then(filters => {
         this.fields = filters;
-    })
+        this.$refs.searchForm.data = this.fields;
+        // this.$refs.searchForm.changeFields(filters);
+    });
   },
   methods: {
     clearResults() {
@@ -114,7 +112,7 @@ export default {
       return axios
         .get(
           this.config.backend +
-            "/practitioner/describe/definition/SearchParameter"
+            "/practitioner/describe/definition/SearchPeople"
         )
         .then(response => {
           let all_fields = response.data.snapshot.element;
@@ -128,10 +126,10 @@ export default {
               field.id.endsWith(".url") ||
               field.id.includes(".value[x]") ||
               // ignore practitioner and meta fields since they can't be customized
-              field.id == "SearchParameter" ||
-              field.id == "SearchParameter.meta" ||
+              field.id == "SearchPeople" ||
+              field.id == "SearchPeople.meta" ||
               // hide active, that's handled separately
-              field.id === "SearchParameter.active" ||
+              field.id === "SearchPeople.active" ||
               // if someone sets the max to be 0, then don't show it
               field.max == 0
             ) {
@@ -147,16 +145,17 @@ export default {
       let allFields = [];
       this.getAllSearchFields().then(fields => {
         fields.forEach(field => {
-          if (field.id.indexOf("SearchParameter.component") >= 0 && field.type[0].code === "string") {
-            allFields.push({
-              id: field.id.substring(field.id.lastIndexOf(".") + 1),
-              max: parseInt(field.max),
-              name: field.id.substring(field.id.lastIndexOf(".") + 1),
-              required: false,
-              type: field.type[0].code,
-              value: null
-            });
-          }
+          // if (field.id.indexOf("SearchParameter.component") >= 0 && field.type[0].code === "string") {
+          allFields.push({
+            id: field.id.substring(field.id.lastIndexOf(".") + 1),
+            max: parseInt(field.max),
+            name: field.id.substring(field.id.lastIndexOf(".") + 1),
+            required: false,
+            type: field.type[0].code,
+            value: null,
+            label: field.short
+          });
+          // }
         });
       });
       return Promise.resolve(allFields);
@@ -189,6 +188,10 @@ export default {
         "error"
       );
     }
+  },
+  components: {
+    Alert,
+    DynamicForm
   }
 };
 </script>
