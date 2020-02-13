@@ -58,7 +58,6 @@
         :ref="field.name"
         :hint="field.short"
         :value="field.value"
-        :language="language"
       />
       <!--
       <DateTime

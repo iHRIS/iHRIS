@@ -1,10 +1,4 @@
 <template >
-    <!--
-    <v-date-picker 
-      v-model="date" 
-      header-color="primary"
-    ></v-date-picker>
-    -->
     <v-menu
         ref="menu"
         v-model="menu"
@@ -22,11 +16,15 @@
             prepend-icon="event"
             readonly
             v-on="on"
+            required="required"
+            :rules="[rules.required]"
+            :hint="hint"
           ></v-text-field>
       </template>
       <v-date-picker 
         v-model="date" 
         header-color="primary"
+        :locale = "locale"
       >
         <v-spacer></v-spacer>
         <v-btn text color="primary" @click="menu = false">Cancel</v-btn>
@@ -38,6 +36,8 @@
 <script>
 export default {
   created() {
+    this.config = require("@/config/config.json");
+    this.locale = this.config.locale;
     if(this.value!=null)
     {
         this.date =  this.value;
@@ -46,7 +46,15 @@ export default {
   data() {
     return {
       date: null,
-      menu: false
+      menu: false,
+      locale: "en-US",
+      rules: {
+        required: value => {
+          return (
+            (this.required && value) || !this.required || "Field is required"
+          );
+        }
+      }
 
     };
   },
@@ -55,7 +63,7 @@ export default {
       return this["date"];
     }
   },
-  props: ["label", "max", "required", "value", "hint","language"]
+  props: ["label", "max", "required", "value", "hint"]
 };
 </script>
 <style scoped>
