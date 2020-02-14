@@ -73,7 +73,6 @@ router.post("/add", function (req, res, next) {
 router.get("/get/:definition/:id", function (req, res, next) {
   let url = URI(config.fhir.server).segment('fhir').segment(req.params.definition).segment(req.params.id).toString();
 
-
   axios.get(url, {
     params: {},
     withCredentials: true,
