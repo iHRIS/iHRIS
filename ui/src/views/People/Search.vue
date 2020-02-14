@@ -132,7 +132,6 @@ export default {
               value: field.sliceName
             });
         });
-        console.log(datatable_fields);
         return Promise.resolve(datatable_fields)
       });
     },
