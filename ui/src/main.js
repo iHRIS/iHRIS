@@ -1,8 +1,11 @@
 import Vue from "vue";
 import vuetify from "./plugins/vuetify";
+import AsyncComputed from "vue-async-computed";
 import App from "./App.vue";
 import router from "./router";
 import store from "./store";
+
+Vue.use(AsyncComputed);
 
 Vue.config.productionTip = false;
 Vue.filter("sentenceCase", value => {
