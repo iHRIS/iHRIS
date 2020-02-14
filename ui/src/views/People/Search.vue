@@ -64,49 +64,77 @@ export default {
   data() {
     return {
       config: null,
-      headers: [
-        {
-          text: "Surname",
-          value: "surname"
-        },
-        {
-          text: "Given name",
-          value: "given"
-        },
-        {
-          text: "Actions",
-          align: "left",
-          sortable: false,
-          value: "action"
-        }
-      ],
-      // fields: [
+      // headers: [
       //   {
-      //     id: "expression",
-      //     max: 1,
-      //     name: "expression",
-      //     required: false,
-      //     type: "string",
-      //     value: null
+      //     text: "Surname",
+      //     value: "surname"
+      //   },
+      //   {
+      //     text: "Given name",
+      //     value: "given"
+      //   },
+      //   {
+      //     text: "Actions",
+      //     align: "left",
+      //     sortable: false,
+      //     value: "action"
       //   }
       // ],
+      headers: [],
       fields: [],
-      name: { default: "Mkulima"},
       practitioners: []
     };
   },
   created() {
     this.config = require("@/config/config.json");
+    this.getDataTableFields().then(fields => {
+      this.headers = fields
+    });
     this.getSearchFilters().then(filters => {
         this.fields = filters;
-        this.$refs.searchForm.data = this.fields;
-        // this.$refs.searchForm.changeFields(filters);
+        this.$refs.searchForm.changeFields(this.fields);
     });
   },
   methods: {
     clearResults() {
       this.practitioners = [];
       this.$refs.searchAlert.reset();
+    },
+    getDataTableFields() {
+      return axios
+        .get(
+          this.config.backend +
+          "/practitioner/describe/definition/SearchPeopleFields"
+        )
+        .then(response => {
+          let fields = response.data.snapshot.element;
+          let datatable_fields = [];
+          fields.forEach(field => {
+            if (
+              // ignore extension fields
+              field.id.endsWith(".extension") ||
+              // these are all custom extensions but duplicated fields
+              field.id.endsWith(".id") ||
+              field.id.endsWith(".url") ||
+              field.id.includes(".value[x]") ||
+              // ignore practitioner and meta fields since they can't be customized
+              field.id == "SearchPeopleFields" ||
+              field.id == "SearchPeopleFields.meta" ||
+              // hide active, that's handled separately
+              field.id === "SearchPeopleFields.active" ||
+              // if someone sets the max to be 0, then don't show it
+              field.max == 0
+            ) {
+              return;
+            }
+            datatable_fields.push({
+              text: field.label,
+              value: field.sliceName
+            });
+        });
+        console.log(datatable_fields);
+        return Promise.resolve(datatable_fields)
+      });
     },
     getAllSearchFields() {
       return axios

@@ -52,11 +52,11 @@
        names with spaces such as &quot;Smith Jones&quot; are broken into multiple parts."/>
       <alias value="surname"/>
       <min value="0"/>
-      <max value="*"/>
+      <max value="1"/>
       <base>
         <path value="SearchPeople.family" />
         <min value="0" />
-        <max value="*" />
+        <max value="1" />
       </base>
       <type>
         <code value="string"/>
@@ -83,11 +83,11 @@
        names with spaces such as &quot;Smith Jones&quot; are broken into multiple parts."/>
       <alias value="status"/>
       <min value="0"/>
-      <max value="*"/>
+      <max value="1"/>
       <base>
         <path value="SearchPeople.employee_status" />
         <min value="0" />
-        <max value="*" />
+        <max value="1" />
       </base>
       <type>
         <code value="string"/>
@@ -148,7 +148,7 @@
       <base>
         <path value="SearchPeople.code" />
         <min value="0" />
-        <max value="*" />
+        <max value="1" />
       </base>
       <type>
         <code value="CodeableConcept" />
