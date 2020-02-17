@@ -26,3 +26,7 @@ export default {
   name: "App"
 };
 </script>
+
+<style media="print">
+@import "./assets/css/printer-friendly.css";
+</style>
