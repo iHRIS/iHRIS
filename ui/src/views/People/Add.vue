@@ -32,6 +32,7 @@ import DynamicForm from "@/components/Form/DynamicForm.vue";
 import { store } from "@/store.js";
 
 export default {
+  
   created() {
     this.config = require("@/config/config.json");
     
@@ -195,6 +196,7 @@ export default {
   },
   data() {
     return {
+      allowedToAccess:true,
       addPractitionerForm: true,
       alert: false,
       config: null,
