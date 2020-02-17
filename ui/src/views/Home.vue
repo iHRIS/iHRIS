@@ -27,44 +27,35 @@ export default {
   },
   created() {
     this.config = require("@/config/config.json");
-    if(store.state.allowToAccessTheNextPage)
-    {
-        axios.get(this.config.backend + "/dashboard/all")
-        .then(response => {
-          let dashboards = [];
+    axios.get(this.config.backend + "/dashboard/all")
+    .then(response => {
+      let dashboards = [];
 
-          for (var i in response.data.saved_objects) {
-            let dashboard = response.data.saved_objects[i];
-            dashboard.iframeLink =
-              this.config.kibana +
-              "/app/kibana#/dashboard/" +
-              dashboard.id +
-              "?embed=true";
+      for (var i in response.data.saved_objects) {
+        let dashboard = response.data.saved_objects[i];
+        dashboard.iframeLink =
+          this.config.kibana +
+          "/app/kibana#/dashboard/" +
+          dashboard.id +
+          "?embed=true";
 
-            dashboards.push(dashboard);
-          }
+        dashboards.push(dashboard);
+      }
 
-          if (dashboards.length === 0) {
-            this.$refs.alert.changeMessage("No dashboards found.", "error");
-          }
+      if (dashboards.length === 0) {
+        this.$refs.alert.changeMessage("No dashboards found.", "error");
+      }
 
-          this.dashboards = dashboards;
-        })
-        .catch(() => {
-          this.$refs.alert.changeMessage(
-            "Could not retrieve dashboards.",
-            "error"
-          );
-        });
-  
-    }
-    else
-    {
+      this.dashboards = dashboards;
+    })
+    .catch(() => {
       this.$refs.alert.changeMessage(
-          "The user does not have the necessary privileges to access this page.",
-          "error"
-        );
-    }
+        "Could not retrieve dashboards.",
+        "error"
+      );
+    });
+  
+    
   },
   data() {
     return {

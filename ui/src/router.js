@@ -5,8 +5,6 @@ import {serverBus} from "./main.js";
 
 Vue.use(Router);
 
-//var error="";
-
 var vueInstance=new Vue(
 {
   props:{
@@ -29,22 +27,7 @@ let router = new Router({
       path: "/",
       name: "home",
       props: true,
-      component: () => import(/* webpackChunkName: "home" */ "./views/Home.vue"),
-      beforeEnter (to, from, next) {
-          var routeName=to.name;
-          var roles=store.state.roles;
-          var allowed=checkPageRole(roles,routeName);
-          if(allowed){
-            next();
-          }
-          else{
-            var error = "The user does not have the necessary privileges to access the page : "+routeName;
-            next({
-              path: "/noaccess",
-            });
-            vueInstance.displayError(error);
-          }
-      }
+      component: () => import(/* webpackChunkName: "home" */ "./views/Home.vue")
     },
     {
       path: "/account",
@@ -56,44 +39,14 @@ let router = new Router({
       path: "/admin/add-user",
       name: "admin-add-user",
       component: () =>
-        import(/* webpackChunkName: "adminAddUser" */ "./views/Admin/AddUser.vue"),
-        beforeEnter (to, from, next) {
-          var routeName=to.name;
-          var roles=store.state.roles;
-          var allowed=checkPageRole(roles,routeName);
-          if(allowed){
-            next();
-          }
-          else{
-            var error = "The user does not have the necessary privileges to access the page : "+routeName;
-            next({
-              path: "/noaccess",
-            });
-            vueInstance.displayError(error);
-          }
-        }
+        import(/* webpackChunkName: "adminAddUser" */ "./views/Admin/AddUser.vue")
         
     },
     {
       path: "/admin/users",
       name: "admin-users",
       component: () =>
-        import(/* webpackChunkName: "adminsUsers" */ "./views/Admin/Users.vue"),
-        beforeEnter (to, from, next) {
-          var routeName=to.name;
-          var roles=store.state.roles;
-          var allowed=checkPageRole(roles,routeName);
-          if(allowed){
-            next();
-          }
-          else{
-            var error = "The user does not have the necessary privileges to access the page : "+routeName;
-            next({
-              path: "/noaccess",
-            });
-            vueInstance.displayError(error);
-          }
-        }
+        import(/* webpackChunkName: "adminsUsers" */ "./views/Admin/Users.vue")
     },
     {
       path: "/change-password",
@@ -129,129 +82,37 @@ let router = new Router({
       path: "/people/search",
       name: "search-people",
       component: () =>
-        import(/* webpackChunkName: "People" */ "./views/People/Search.vue"),
-        beforeEnter (to, from, next) {
-        
-        var routeName=to.name;
-        var roles=store.state.roles;
-        var allowed=checkPageRole(roles,routeName);
-        if(allowed){
-          next();
-        }
-        else{
-          var error = "The user does not have the necessary privileges to access the page : "+routeName;
-            next({
-              path: "/noaccess",
-            });
-            vueInstance.displayError(error);
-        }
-        }
+        import(/* webpackChunkName: "People" */ "./views/People/Search.vue")
     },
     {
       path: "/people/add",
       name: "add-people",
       component: () =>
-        import(/* webpackChunkName: "AddPeople" */ "./views/People/Add.vue"),
-        beforeEnter (to, from, next) {
-          var routeName=to.name;
-          var roles=store.state.roles;
-          var allowed=checkPageRole(roles,routeName);
-          if(allowed){
-            next();
-          }
-          else{
-            var error = "The user does not have the necessary privileges to access the page : "+routeName;
-            next({
-              path: "/noaccess",
-            });
-            vueInstance.displayError(error);
-          }
-          
-        }
+        import(/* webpackChunkName: "AddPeople" */ "./views/People/Add.vue")
     },
     {
       path: "/people/add/:section/:id",
       name: "edit-people",
       component: () =>
-        import(/* webpackChunkName: "EditPeople" */ "./views/People/AddSubsection.vue"),
-        beforeEnter (to, from, next) {
-          var routeName=to.name;
-          var roles=store.state.roles;
-          var allowed=checkPageRole(roles,routeName);
-          if(allowed){
-            next();
-          }
-          else{
-            var error = "The user does not have the necessary privileges to access the page : "+routeName;
-            next({
-              path: "/noaccess",
-            });
-            vueInstance.displayError(error);
-          }
-        }
+        import(/* webpackChunkName: "EditPeople" */ "./views/People/AddSubsection.vue")
     },
     {
       path: "/people/edit/:id",
       name: "people-edit",
       component: () =>
-        import(/* webpackChunkName: "ViewPeople" */ "./views/People/Edit.vue"),
-        beforeEnter (to, from, next) {
-          var routeName=to.name;
-          var roles=store.state.roles;
-          var allowed=checkPageRole(roles,routeName);
-          if(allowed){
-            next();
-          }
-          else{
-            var error = "The user does not have the necessary privileges to access the page : "+routeName;
-            next({
-              path: "/noaccess",
-            });
-            vueInstance.displayError(error);
-          }
-        }
+        import(/* webpackChunkName: "ViewPeople" */ "./views/People/Edit.vue")
     },
     {
       path: "/people/view/:id",
       name: "people-view",
       component: () =>
-        import(/* webpackChunkName: "ViewPeople" */ "./views/People/View.vue"),
-        beforeEnter (to, from, next) {
-          var routeName=to.name;
-          var roles=store.state.roles;
-          var allowed=checkPageRole(roles,routeName);
-          if(allowed){
-            next();
-          }
-          else{
-            var error = "The user does not have the necessary privileges to access the page : "+routeName;
-            next({
-              path: "/noaccess",
-            });
-            vueInstance.displayError(error);
-          }
-        }
+        import(/* webpackChunkName: "ViewPeople" */ "./views/People/View.vue")
     },
     {
       path: "/relationship",
       name: "relationship",
       component: () =>
-        import(/* webpackChunkName: "about" */ "./views/Relationship/Relationship.vue"),
-        beforeEnter (to, from, next) {
-          var routeName=to.name;
-          var roles=store.state.roles;
-          var allowed=checkPageRole(roles,routeName);
-          if(allowed){
-            next();
-          }
-          else{
-            var error = "The user does not have the necessary privileges to access the page : "+routeName;
-            next({
-              path: "/noaccess",
-            });
-            vueInstance.displayError(error);
-          }
-        }
+        import(/* webpackChunkName: "about" */ "./views/Relationship/Relationship.vue")
     },
     {
       path: "/terms-and-conditions",
@@ -280,19 +141,52 @@ router.beforeEach((to, from, next) => {
     const config = require("@/config/config.json");
 
     if (
-      to.path == "/" ||
+      
       to.path == "/login" ||
       to.path == "/logout" ||
       config.demo
     ) {
       next();
-    } else {
+    } 
+    else {
       next({
         path: "/login"
       });
     }
   } else {
-    next();
+    if(
+      to.path == "/" || 
+      to.path == "/admin/add-user" ||
+      to.path == "/admin/users" ||
+      to.path == "/people/search" ||
+      to.path == "/people/add"  ||
+      to.path == "/people/add/:section/:id" ||
+      to.path == "/people/edit/:id" ||
+      to.path == "/people/view/:id" ||
+      to.path == "/relationship" 
+      )
+    {
+      var routeName=to.name;
+      var roles=store.state.roles;
+      var allowed=checkPageRole(roles,routeName);
+      if(allowed){
+        next();
+      }
+      else
+      {
+        var error = "The user does not have the necessary privileges to access the page : "+routeName;
+        next({
+              path: "/noaccess",
+            });
+        
+        vueInstance.displayError(error);
+      }
+
+    }
+    else
+    {
+      next();
+    }
   }
 });
 

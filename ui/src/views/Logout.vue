@@ -17,7 +17,6 @@ export default {
     store.state.authentication.username = null;
     store.state.authentication.userId = null;
     store.state.roles = null;
-    store.state.allowToAccessTheNextPage=false;
 
     this.$router.push({ name: "home" });
   }

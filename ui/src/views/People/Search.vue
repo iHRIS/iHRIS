@@ -62,7 +62,6 @@ import axios from "axios";
 
 import Alert from "@/components/Layout/Alert.vue";
 import DynamicForm from "@/components/Form/DynamicForm.vue";
-import { store } from "@/store.js";
 
 export default {
   created() {
@@ -70,7 +69,7 @@ export default {
   },
   components: {
     Alert,
-    'DynamicForm':store.state.isAllowToAccessTheNextPage?DynamicForm:null
+    DynamicForm
   },
   data() {
     return {
