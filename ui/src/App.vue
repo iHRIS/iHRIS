@@ -27,6 +27,6 @@ export default {
 };
 </script>
 
-<style media="print">
+<style>
 @import "./assets/css/printer-friendly.css";
 </style>
