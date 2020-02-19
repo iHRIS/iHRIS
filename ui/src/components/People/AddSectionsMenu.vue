@@ -64,7 +64,7 @@ export default {
             let extension = this.data.extension[i];
 
             if (extension.url === profile) {
-              return;
+              continue;
             }
           }
         }

@@ -1,5 +1,6 @@
 import Vue from "vue";
 import vuetify from "./plugins/vuetify";
+import AsyncComputed from "vue-async-computed";
 import App from "./App.vue";
 import router from "./router";
 import store from "./store";
@@ -7,6 +8,8 @@ import DatetimePicker from 'vuetify2-datetime-picker';
 import 'vuetify2-datetime-picker/src/stylus/main.styl';
 
 Vue.use(DatetimePicker);
+Vue.use(AsyncComputed);
+
 Vue.config.productionTip = false;
 Vue.filter("sentenceCase", value => {
   if (!value) {
