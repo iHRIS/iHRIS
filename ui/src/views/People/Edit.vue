@@ -78,7 +78,7 @@ export default {
       detailRaw: null,
       detailTitle: null,
       uiValidationRules:[
-        {
+        /*{
           formName:"workHistory",
           sourceFieldName:"active",
           condition: "eq",
@@ -93,7 +93,7 @@ export default {
           value: null,
           behavior: "disable",
           targetFieldName: "specialty"
-        }
+        }*/
       ]
     };
   },
