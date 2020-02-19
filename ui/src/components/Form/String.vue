@@ -1,5 +1,6 @@
 <template>
   <v-text-field
+    :id="generateFieldId"
     v-if="parseInt(max) <= 1"
     :label="label"
     outline
@@ -10,6 +11,7 @@
     :hint="hint"
   ></v-text-field>
   <v-combobox
+    :id="generateFieldId"
     v-else
     v-model="string"
     hide-selected
@@ -27,6 +29,13 @@
 
 <script>
 export default {
+  computed:{
+    generateFieldId()
+    {
+      var sanitizedFieldName=this.fieldName.split(".").length>0 ? this.fieldName.replace(/\./g,"_") : this.fieldName;
+      return (this.formName+"_"+sanitizedFieldName).toLowerCase();
+    }
+  },
   created() {
     this.string = this.value;
   },
@@ -62,6 +71,6 @@ export default {
       return this["string"];
     }
   },
-  props: ["label", "max", "required", "value", "hint"]
+  props: ["label", "max", "required", "value", "hint","formName","fieldName"]
 };
 </script>

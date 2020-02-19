@@ -1,16 +1,25 @@
 <template>
-  <v-checkbox
-    :label="label"
-    :value="checked"
-    v-model="boolean"
-    :hint="hint"
-    @change="hideEndDate" 
-  ></v-checkbox>
+    <v-checkbox
+      :id="generateFieldId"
+      :label="label"
+      :value="checked"
+      v-model="boolean"
+      :hint="hint"
+      @change="runUIValidation" 
+    ></v-checkbox>
 </template>
 
 <script>
 
 export default {
+  computed:{
+    generateFieldId()
+    {
+      var sanitizedFieldName=this.fieldName.split(".").length>0 ? this.fieldName.replace(/\./g,"_") : this.fieldName;
+      return (this.formName+"_"+sanitizedFieldName).toLowerCase();
+    }
+
+  },
   created() {
     this.boolean = this.checked;
   },
@@ -23,24 +32,17 @@ export default {
     getInput() {
       return this["boolean"];
     },
-    hideEndDate()
+    runUIValidation()
     {
-      if(this.formName.toLowerCase()=="workhistory")
-      {
-        if(this.boolean)
-        {
-          document.getElementById(this.formName+"_End").style.visibility = "hidden";
-        }
-        else
-        {
-          document.getElementById(this.formName+"_End").style.visibility = "visible";
-        }
-        //serverBus.$emit("activeWorkHistory",this.boolean);
-        
-      }
-      //if()
+      var validationParams={
+        formName: this.formName,
+        fiedlName: this.fieldName,
+        value: this.boolean
+      };
+       this.$emit("validationTriggered",validationParams)
     }
   },
-  props: ["checked", "label", "hint","formName"]
+  props: ["checked", "label", "hint","formName","fieldName"],
+ 
 };
 </script>

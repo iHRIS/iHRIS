@@ -1,54 +1,59 @@
 <template>
-  <v-text-field
-    v-model="date"
-    v-if="parseInt(max) <= 1"
-    :label="label"
-    outline
-    :required="required"
-    :rules="[rules.date, rules.required]"
-    :value="value"
-    :hint="hint"
-  ></v-text-field>
-  <v-combobox
-    v-else
-    v-model="date"
-    append-icon=""
-    hide-selected
-    :label="label"
-    multiple
-    persistent-hint
-    small-chips
-    :rules="[rules.date, rules.max, rules.required]"
-    :required="required"
-    outline
-    :hint="hint"
-  ></v-combobox>
+  <div :id="formName+'_'+label">
+    <v-menu 
+        ref="menu"
+        v-model="menu"
+        :close-on-content-click="false"
+        :return-value.sync="date"
+        transition="scale-transition"
+        offset-y
+        max-width="290px"
+        min-width="290px"
+      >
+      <template v-slot:activator="{ on }"  >
+        <v-text-field 
+            v-model="date"
+            :label="label"
+            v-if="parseInt(max) <= 1"
+            prepend-icon="event"
+            readonly
+            v-on="on"
+            required="required"
+            :rules="[rules.required]"
+            :hint="hint"
+            outline
+          ></v-text-field>
+      </template>
+      <v-date-picker 
+        v-model="date" 
+        header-color="primary"
+        :locale = "locale"
+      >
+        <v-spacer></v-spacer>
+        <v-btn text color="primary" @click="menu = false">Cancel</v-btn>
+        <v-btn text color="primary" @click="$refs.menu.save(date)">OK</v-btn>
+      </v-date-picker>
+      </v-menu>
+  </div>
 </template>
 
 <script>
 export default {
   created() {
-    this.date = this.value;
+    this.config = require("@/config/config.json");
+    this.locale = this.config.locale;
+    if(this.value!=null)
+    {
+        this.date =  this.value;
+    }
   },
   data() {
     return {
       date: null,
+      menu: false,
+      locale: "en-US",
+      visibility: true,
       rules: {
-        date: value => {
-          const pattern = /([0-9]([0-9]([0-9][1-9]|[1-9]0)|[1-9]00)|[1-9]000)(-(0[1-9]|1[0-2])(-(0[1-9]|[1-2][0-9]|3[0-1]))?)?/;
-
-          if (!Array.isArray(value)) {
-            value = [value];
-          }
-
-          for (var i = 0; i < value.length; i++) {
-            if (!pattern.test(value[i])) {
-              return "Must be YYYY, YYYY-MM, or YYYY-MM-DD";
-            }
-          }
-
-          return true;
-        },
         max: value => {
           if (this.max == "*") {
             return true;
@@ -75,6 +80,6 @@ export default {
       return this["date"];
     }
   },
-  props: ["label", "max", "required", "value", "hint"]
+  props: ["label", "max", "required", "value", "hint","formName","fieldName"]
 };
 </script>

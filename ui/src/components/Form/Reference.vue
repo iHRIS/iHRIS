@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div  :id="generateFieldId">
     <v-autocomplete
       :items="codes"
       :label="label"
@@ -8,6 +8,7 @@
       v-model="reference"
       :rules="[rules.required]"
       @change="changeValue"
+      @blur="runUIValidation"
       :hint="hint"
       :multiple="parseInt(max) > 1"
     >
@@ -58,6 +59,13 @@ export default {
   components: {
     Alert,
     DynamicForm: () => import("./DynamicForm.vue")
+  },
+  computed:{
+    generateFieldId()
+    {
+      var sanitizedFieldName=this.fieldName.split(".").length>0 ? this.fieldName.replace(/\./g,"_") : this.fieldName;
+      return (this.formName+"_"+sanitizedFieldName).toLowerCase();
+    }
   },
   created() {
     this.config = require("@/config/config.json");
@@ -175,9 +183,18 @@ export default {
             this.showFailedSubmit();
           }
         });
+    },
+    runUIValidation()
+    {
+      var validationParams={
+        formName: this.formName,
+        fiedlName: this.fieldName,
+        value: this.reference
+      };
+      this.$emit("validationTriggered",validationParams)
     }
   },
   mixins: [StructureDefinition],
-  props: ["label", "required", "value", "hint", "max", "structureDefinition"]
+  props: ["label", "required", "value", "hint", "max", "structureDefinition","formName","fieldName"]
 };
 </script>

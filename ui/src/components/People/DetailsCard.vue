@@ -146,6 +146,7 @@
         v-on:failedSubmit="showFailedSubmit"
         ref="dynamicEditingForm"
         :key="dynamicFormKey"
+        :validationRules="validationRules"
       />
     </v-card-text>
   </v-card>
@@ -161,6 +162,7 @@ export default {
     DynamicForm
   },
   created() {
+    
     switch (this.name) {
       case "address":
         this.subheader = "use";
@@ -317,10 +319,16 @@ export default {
       } else {
         for (key in fields) {
           let field = fields[key];
-          fields[key].value = this.data[index][field.title];
+          if(fields[key].type == "dateTime" && this.data[index][field.title.split(".")[0]]!=null)
+          {
+            fields[key].value = this.data[index][field.title.split(".")[0]][field.title.split(".")[2].toLowerCase()];
+          }
+          else{
+            fields[key].value = this.data[index][field.title];
+          } 
+          
         }
       }
-
       this.$refs.dynamicEditingForm.changeFields(fields);
 
       this.currentIndex = index;
@@ -331,7 +339,9 @@ export default {
     },
     toggleSectionDetailDisplay() {
       this.showSectionDetail = !this.showSectionDetail;
-    }
+    },
+
+
   },
   mixins: [Practitioner, StructureDefinition],
   props: {
@@ -343,7 +353,8 @@ export default {
     name: {
       default: null,
       type: String
-    }
+    },
+    validationRules:{},
   }
 };
 </script>
