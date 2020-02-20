@@ -12,6 +12,8 @@ Vue.use(AsyncComputed);
 
 Vue.use(AsyncComputed);
 
+Vue.use(AsyncComputed);
+
 Vue.config.productionTip = false;
 Vue.filter("sentenceCase", value => {
   if (!value) {
