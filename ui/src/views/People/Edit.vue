@@ -83,6 +83,14 @@ export default {
         reference: "Practitioner/" + this.practitioner.id
       };
 
+      for (var i in data) {
+        if (i.indexOf(".") > -1) {
+          _.set(data, i.split("."), data[i]);
+
+          delete data[i];
+        }
+      }
+
       axios
         .post(this.config.backend + "/practitioner/add/work-history", data)
         .then(response => {
