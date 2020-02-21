@@ -66,3 +66,5 @@ typings/
 # config files
 server/config/config.json
 ui/src/config/config.json
+config/ui_config.json
+config/server_config.json

@@ -25,3 +25,20 @@ iHRIS is powered by a FHIR compliant server. This allows the user to tailor thei
 
 ## Authentication
 iHRIS includes basic username / password authentication for all pages other than the dashboard. A sample user can be found under resources/demos/admin.iHRISUser.json. The username and password for this user is admin / admin. It is STRONGLY recommended that the password be changed on installation.
+
+## Running iHRIS as a Docker Swarm.
+The backend and frontend are separate, iHRIS is built with the option to run as a docker swarm.
+
+Clone the repo and set the configs `./config/ui_config.json` and `./config/server_config.json` from the corresponding `./config/*.example`s.
+
+To build the images run the script below (make sure there are no active containers using the images)
+
+``sh docker-build.sh``
+
+Then run the command below which should start ihris as a docker swarm.
+
+``docker stack deploy -c ihris-stack.yml ihris``
+
+This assumes you have swarm mode initialized, if not initialize with
+
+``docker swarm init``

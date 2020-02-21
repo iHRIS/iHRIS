@@ -31,10 +31,10 @@
     </v-card-title>
     <transition name="fade">
       <v-card-text
-        v-if="Array.isArray(data)"
+        v-if="Array.isArray(sanitized)"
         v-show="!editing && showSectionDetail"
       >
-        <div v-for="(value, name) in data" v-bind:key="name">
+        <div v-for="(value, name) in sanitized" v-bind:key="name">
           <div v-if="Number.isInteger(name)">
             <v-layout row align-baseline>
               <v-flex xs4 class="primary--text text-uppercase pl-5">
@@ -47,7 +47,7 @@
                 fab
                 class="primary"
                 v-show="editButton && edit"
-                v-if="Array.isArray(data)"
+                v-if="Array.isArray(sanitized)"
                 v-on:click="toggleForm(name)"
               >
                 <v-icon>edit</v-icon>
@@ -57,7 +57,7 @@
                 fab
                 class="error"
                 v-show="editButton && edit"
-                v-if="Array.isArray(data)"
+                v-if="Array.isArray(sanitized)"
                 v-on:click="deleteItem(name)"
               >
                 <v-icon>delete</v-icon>
@@ -66,11 +66,14 @@
 
             <v-simple-table>
               <tbody>
-                <tr v-for="(data, fieldIndex) in value" v-bind:key="fieldIndex">
+                <tr
+                  v-for="(sanitized, fieldIndex) in value"
+                  v-bind:key="fieldIndex"
+                >
                   <td :width="headerWidth" class="font-weight-bold">
                     {{ fieldIndex | sentenceCase }}
                   </td>
-                  <td>{{ data | separateByCommas }}</td>
+                  <td>{{ sanitized | separateByCommas }}</td>
                 </tr>
               </tbody>
             </v-simple-table>
@@ -82,8 +85,12 @@
               <v-flex xs4 class="font-weight-bold">
                 {{ name | sentenceCase }}
               </v-flex>
-              <v-flex xs8 v-for="(data, index) in value" v-bind:key="index">
-                {{ data | separateByCommas }}
+              <v-flex
+                xs8
+                v-for="(sanitized, index) in value"
+                v-bind:key="index"
+              >
+                {{ sanitized | separateByCommas }}
               </v-flex>
             </v-layout>
 
@@ -92,14 +99,14 @@
         </div>
       </v-card-text>
 
-      <v-card-text v-show="!editing" v-else-if="typeof data !== 'object'">
+      <v-card-text v-show="!editing" v-else-if="typeof sanitized !== 'object'">
         <v-simple-table>
           <tbody>
             <tr>
               <td :width="headerWidth" class="font-weight-bold">
                 {{ this.name | sentenceCase }}
               </td>
-              <td>{{ data }}</td>
+              <td>{{ sanitized }}</td>
             </tr>
           </tbody>
         </v-simple-table>
@@ -108,7 +115,7 @@
       <v-card-text v-show="!editing" v-else>
         <v-simple-table>
           <tbody>
-            <tr v-for="(value, name) in data" v-bind:key="name">
+            <tr v-for="(value, name) in sanitized" v-bind:key="name">
               <td :width="headerWidth" class="font-weight-bold">
                 {{ name | sentenceCase }}
               </td>
@@ -152,15 +159,60 @@
 </template>
 
 <script>
+import axios from "axios";
+
 import DynamicForm from "@/components/Form/DynamicForm.vue";
 import Practitioner from "@/mixins/Practitioner.js";
 import StructureDefinition from "@/mixins/StructureDefinition.js";
 
 export default {
+  asyncComputed: {
+    async sanitized() {
+      let sanitized = [];
+
+      for (var i in this.data) {
+        let element = this.data[i];
+
+        for (var j in element) {
+          let field = element[j];
+
+          if (field.reference) {
+            let reference = field.reference.split("/");
+
+            let result = await axios.get(
+              this.config.backend +
+                "/structure-definition/get/" +
+                reference[0] +
+                "/" +
+                reference[1]
+            );
+            let text = "";
+
+            // look for a name, title, or text field
+            if (result.data.name) {
+              text = result.data.name;
+            } else if (result.data.title) {
+              text = result.data.title;
+            } else {
+              text = result.data.text;
+            }
+
+            element[j] = text;
+          }
+        }
+
+        sanitized.push(element);
+      }
+
+      return sanitized;
+    }
+  },
   components: {
     DynamicForm
   },
   created() {
+    this.config = require("@/config/config.json");
+
     switch (this.name) {
       case "address":
         this.subheader = "use";
@@ -242,13 +294,13 @@ export default {
   },
   data() {
     return {
-      showSectionDetail: true,
       alert: {
         message: null,
         show: false,
         type: null
       },
       allowMultiple: false,
+      config: null,
       currentIndex: null,
       dynamicFormKey: 0,
       editButton: false,
@@ -257,6 +309,7 @@ export default {
       headerWidth: "30%",
       profile: null,
       showMultiple: true,
+      showSectionDetail: true,
       subheader: null
     };
   },

@@ -78,6 +78,21 @@ export default {
     };
   },
   methods: {
+    addPractitionerRole(data) {
+      data.practitioner = {
+        reference: "Practitioner/" + this.practitioner.id
+      };
+
+      axios
+        .post(this.config.backend + "/practitioner/add/work-history", data)
+        .then(response => {
+          if (!this.practitioner.workHistory) {
+            this.practitioner.workHistory = [];
+          }
+
+          this.practitioner.workHistory.push(response.data);
+        });
+    },
     cancelDetailsForm() {
       this.details = false;
       this.detailsFields = {};
@@ -89,6 +104,11 @@ export default {
       this.practitioner = practitioner;
     },
     deleteSubsectionData(field, index, profile) {
+      // work history is stored separately
+      if (field === "workHistory") {
+        return this.deleteWorkHistory(index);
+      }
+
       if (typeof index !== "undefined" && this.practitioner[field].length > 1) {
         this.practitioner[field].splice(index, 1);
       } else if (profile !== null) {
@@ -128,7 +148,67 @@ export default {
           }
         });
     },
+    deleteWorkHistory(index) {
+      let data = {
+        id: this.practitioner.workHistory[index].id
+      };
+
+      axios
+        .post(this.config.backend + "/practitioner/delete/work-history", data)
+        .then(response => {
+          if (response.status == 201) {
+            if (this.$refs["subsectionworkHistory"][0]) {
+              Vue.delete(this.practitioner.workHistory[index]);
+
+              if (this.practitioner.workHistory.length === 0) {
+                Vue.delete(this.practitioner.workHistory);
+              }
+
+              this.$refs["subsectionworkHistory"][0].showAlert(
+                "Item deleted successfully!",
+                "success"
+              );
+            }
+          } else {
+            this.$refs["subsectionworkHistory"][0].showAlert(
+              "There was an error deleting this data.",
+              "error"
+            );
+          }
+        });
+    },
+    editWorkHistory(data, index) {
+      // this happens when adding another work history element
+      if (!this.practitioner.workHistory[index]) {
+        return this.addPractitionerRole(data);
+      }
+
+      let id = this.practitioner.workHistory[index].id;
+      data.id = id;
+
+      axios
+        .post(this.config.backend + "/practitioner/edit/work-history", data)
+        .then(response => {
+          if (response.status == 201) {
+            this.$refs["subsection-workHistory"][0].showAlert(
+              "Data changed successfully!",
+              "success"
+            );
+
+            this.practitioner.workHistory[index] = data;
+          } else {
+            this.$refs["subsection-workHistory"][0].showAlert(
+              "There was an error saving this data.",
+              "error"
+            );
+          }
+        });
+    },
     saveSubsectionData(data, field, index, profile) {
+      if (field === "workHistory") {
+        return this.editWorkHistory(data, index);
+      }
+
       let practitioner = this.practitioner;
 
       // this is necessary for subsections that can have multiple entries
@@ -180,6 +260,10 @@ export default {
     },
     submitDetailsForm() {
       let input = this.$refs.detailsForm.getInputs();
+
+      if (this.detailTitle === "workHistory") {
+        return this.addPractitionerRole(input);
+      }
 
       let practitioner = this.practitioner;
       let title = this.detailTitle;

@@ -19,6 +19,7 @@
     "lodash": "^4.17.15",
     "swagger-ui": "^3.23.4",
     "vue": "2.*",
+    "vue-async-computed": "^3.8.2",
     "vue-cookies": "^1.5.13",
     "vue-router": "^3.0.7",
     "vuetify": "^2.1.6",

@@ -54,7 +54,7 @@ export default {
               "A specific set of Roles/Locations/specialties/services that a practitioner may perform at an organization for a period of time.",
             min: 0,
             max: "*",
-            type: ["iHRISPractitionerRole"]
+            type: [{ code: "iHRISPractitionerRole" }]
           });
 
           return Promise.resolve(sections);
