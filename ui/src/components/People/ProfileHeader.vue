@@ -139,14 +139,13 @@ export default {
   methods: {
     changeActive() {
       if (this.edit) {
-        let practitioner = this.practitioner;
-        practitioner.active = this.practitioner.active === false ? true : false;
+        this.practitioner.active = !this.practitioner.active;
 
         axios
-          .post(this.config.backend + "/practitioner/edit", practitioner)
+          .post(this.config.backend + "/practitioner/edit", this.practitioner)
           .then(response => {
             if (response.status == 201) {
-              this.$emit("changePractitioner", practitioner);
+              this.$emit("changePractitioner", this.practitioner);
             }
           });
       }
