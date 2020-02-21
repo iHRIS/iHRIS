@@ -11,20 +11,21 @@
       :hint="hint"
       :multiple="parseInt(max) > 1"
     >
-      <template v-slot:item="data">
-        <template v-if="data.item.value">
-          <v-list-item-content v-text="data.item.text"></v-list-item-content>
-        </template>
-        <template v-else>
-          <v-btn
-            class="font-weight-bold primary--text text-uppercase"
-            text
-            depressed
-            @click.stop="showAddAnotherForm"
-          >
-            Add Another
-          </v-btn>
-        </template>
+      <template v-slot:no-data>
+        <v-list-item>
+          <v-list-item-title>
+            <p>No matches found.</p>
+
+            <v-btn
+              class="font-weight-bold primary--text text-uppercase"
+              text
+              depressed
+              @click.stop="showAddAnotherForm"
+            >
+              Add Another
+            </v-btn>
+          </v-list-item-title>
+        </v-list-item>
       </template>
     </v-autocomplete>
 
@@ -87,12 +88,6 @@ export default {
               value: value
             });
           }
-        });
-
-        // this is an empty option to allow for the creation of new reference items
-        options.push({
-          text: null,
-          value: null
         });
 
         this.codes = options;
