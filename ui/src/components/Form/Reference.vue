@@ -9,7 +9,6 @@
       :rules="[rules.required]"
       @change="changeValue"
       :hint="hint"
-      no-data-text="<v-btn class='font-weight-bold primary--text text-uppercase' text depressed @click.stop='showAddAnotherForm'>Add Another</v-btn>"
       :multiple="parseInt(max) > 1"
     >
       <template v-slot:no-data>
