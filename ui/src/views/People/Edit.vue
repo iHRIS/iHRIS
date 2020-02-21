@@ -91,6 +91,12 @@ export default {
           }
 
           this.practitioner.workHistory.push(response.data);
+
+          this.cancelDetailsForm();
+          this.$refs.profileHeader.changeMessage(
+            "Work history added successfully!",
+            "success"
+          );
         });
     },
     cancelDetailsForm() {
