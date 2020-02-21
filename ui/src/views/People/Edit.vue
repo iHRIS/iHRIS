@@ -172,7 +172,7 @@ export default {
         .then(response => {
           if (response.status == 201) {
             if (this.$refs["subsectionworkHistory"][0]) {
-              Vue.delete(this.practitioner.workHistory[index]);
+              this.practitioner.workHistory.splice(index, 1);
 
               if (this.practitioner.workHistory.length === 0) {
                 Vue.delete(this.practitioner.workHistory);
