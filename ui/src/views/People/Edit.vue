@@ -95,7 +95,7 @@ export default {
         .post(this.config.backend + "/practitioner/add/work-history", data)
         .then(response => {
           if (!this.practitioner.workHistory) {
-            this.practitioner.workHistory = [];
+            Vue.set(this.practitioner, "workHistory", []);
           }
 
           this.practitioner.workHistory.push(response.data);
