@@ -331,7 +331,11 @@ export default {
 
         practitioner.extension = extension;
       } else if (this.detailPath) {
-        _.set(practitioner, this.detailPath, input);
+        if (!practitioner[this.detailPath]) {
+          Vue.set(this.practitioner, this.detailPath, [input]);
+        }
+
+        _.set(practitioner, this.detailPath, [input]);
       } else {
         practitioner = { ...practitioner, ...input };
       }
