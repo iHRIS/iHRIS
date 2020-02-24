@@ -95,14 +95,28 @@ export default {
         reference: "Practitioner/" + this.practitioner.id
       };
 
+      for (var i in data) {
+        if (i.indexOf(".") > -1) {
+          _.set(data, i.split("."), data[i]);
+
+          delete data[i];
+        }
+      }
+
       axios
         .post(this.config.backend + "/practitioner/add/work-history", data)
         .then(response => {
           if (!this.practitioner.workHistory) {
-            this.practitioner.workHistory = [];
+            Vue.set(this.practitioner, "workHistory", []);
           }
 
           this.practitioner.workHistory.push(response.data);
+
+          this.cancelDetailsForm();
+          this.$refs.profileHeader.changeMessage(
+            "Work history added successfully!",
+            "success"
+          );
         });
     },
     cancelDetailsForm() {
@@ -170,7 +184,7 @@ export default {
         .then(response => {
           if (response.status == 201) {
             if (this.$refs["subsectionworkHistory"][0]) {
-              Vue.delete(this.practitioner.workHistory[index]);
+              this.practitioner.workHistory.splice(index, 1);
 
               if (this.practitioner.workHistory.length === 0) {
                 Vue.delete(this.practitioner.workHistory);

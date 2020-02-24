@@ -170,6 +170,7 @@ export default {
   asyncComputed: {
     async sanitized() {
       let sanitized = [];
+
       for (var i in this.data) {
         let element = this.data[i];
 
@@ -203,6 +204,7 @@ export default {
 
         sanitized.push(element);
       }
+
       return sanitized;
     }
   },
