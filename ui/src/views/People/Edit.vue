@@ -335,6 +335,16 @@ export default {
           Vue.set(this.practitioner, this.detailPath, [input]);
         }
 
+        // if a field name has a . in it, we need to store that in a subfield
+        for (var i in input) {
+          if (i.indexOf(".") >= 0) {
+            let swap = input[i];
+            delete input[i];
+
+            _.set(input, i.slice("."), swap);
+          }
+        }
+
         _.set(practitioner, this.detailPath, [input]);
       } else {
         practitioner = { ...practitioner, ...input };
