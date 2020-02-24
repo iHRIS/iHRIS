@@ -102,8 +102,6 @@ export default {
         fields["workHistory"] = this.practitioner.workHistory;
       }
 
-      console.log(fields);
-
       return fields;
     }
   },
