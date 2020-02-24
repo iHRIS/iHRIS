@@ -241,7 +241,7 @@ export default {
         this.subheader = "language";
         break;
 
-      case "identifier":
+      case "Personal identifier":
         this.subheader = "use";
         break;
 
@@ -277,6 +277,8 @@ export default {
             section.id.endsWith("." + this.name) ||
             section.label === this.name
           ) {
+            this.key = section.id.substring(section.id.lastIndexOf(".") + 1);
+
             if (section.max === "*") {
               this.allowMultiple = true;
             }
@@ -322,6 +324,7 @@ export default {
       editing: false,
       fields: [],
       headerWidth: "30%",
+      key: null,
       profile: null,
       showMultiple: true,
       showSectionDetail: true,
@@ -366,7 +369,7 @@ export default {
         inputs = inputs[name];
       }
 
-      this.$emit("saveData", inputs, name, this.currentIndex, this.profile);
+      this.$emit("saveData", inputs, this.key, this.currentIndex, this.profile);
 
       this.cancel();
     },
