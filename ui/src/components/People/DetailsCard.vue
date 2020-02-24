@@ -174,6 +174,21 @@ export default {
         let element = this.data[i];
 
         for (var j in element) {
+          // never render id or resourceType fields
+          if (j === "id" || j === "resourceType") {
+            delete element[j];
+            continue;
+          }
+
+          // ignore practitioner and meta fields for work history card
+          if (
+            this.name === "workHistory" &&
+            (j === "practitioner" || j === "meta")
+          ) {
+            delete element[j];
+            continue;
+          }
+
           let field = element[j];
 
           if (field.reference) {
