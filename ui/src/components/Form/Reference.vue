@@ -1,5 +1,5 @@
 <template>
-  <div  :id="generateFieldId">
+  <div  :id="setFieldId">
     <v-autocomplete
       :items="codes"
       :label="label"
@@ -54,6 +54,7 @@ import axios from "axios";
 
 import Alert from "@/components/Layout/Alert.vue";
 import StructureDefinition from "@/mixins/StructureDefinition.js";
+import GenerateFieldID from "@/mixins/GenerateFieldID.js";
 
 export default {
   components: {
@@ -61,10 +62,10 @@ export default {
     DynamicForm: () => import("./DynamicForm.vue")
   },
   computed:{
-    generateFieldId()
+    setFieldId()
     {
-      var sanitizedFieldName=this.fieldName.split(".").length>0 ? this.fieldName.replace(/\./g,"_") : this.fieldName;
-      return (this.formName+"_"+sanitizedFieldName).toLowerCase();
+      
+      return this.generateFieldId(this.formName,this.fieldName);
     }
   },
   created() {
@@ -194,7 +195,7 @@ export default {
       this.$emit("validationTriggered",validationParams)
     }
   },
-  mixins: [StructureDefinition],
+  mixins: [StructureDefinition,GenerateFieldID],
   props: ["label", "required", "value", "hint", "max", "structureDefinition","formName","fieldName"]
 };
 </script>

@@ -1,5 +1,5 @@
 <template>
-  <div :id="formName+'_'+label">
+  <div :id="setFieldId">
     <v-menu 
         ref="menu"
         v-model="menu"
@@ -38,7 +38,18 @@
 </template>
 
 <script>
+import GenerateFieldID from "@/mixins/GenerateFieldID.js";
+
 export default {
+  mixins: [GenerateFieldID],
+  computed:{
+    setFieldId()
+    {
+      
+      return this.generateFieldId(this.formName,this.fieldName);
+    }
+
+  },
   created() {
     this.config = require("@/config/config.json");
     this.locale = this.config.locale;

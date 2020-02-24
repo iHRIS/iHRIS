@@ -86,15 +86,6 @@ export default {
           behavior: "hide",
           targetFieldName: "period.Period.end"
         }
-        /*,
-        {
-          formName:"workHistory",
-          sourceFieldName:"organization",
-          condition: "ne",
-          value: null,
-          behavior: "disable",
-          targetFieldName: "specialty"
-        }*/
       ]
     };
   },
