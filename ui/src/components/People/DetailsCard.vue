@@ -339,7 +339,12 @@ export default {
       this.showMultiple = true;
     },
     deleteItem(index) {
-      this.$emit("deleteData", this.name, index, this.profile);
+      let names = {
+        key: this.key,
+        name: this.name
+      };
+
+      this.$emit("deleteData", names, index, this.profile);
     },
     showAddForm() {
       let fields = this.fields;
@@ -369,7 +374,6 @@ export default {
         key: this.key,
         name: name
       };
-
 
       if (Object.keys(inputs).length === 1 && inputs[name]) {
         inputs = inputs[name];
