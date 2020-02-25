@@ -3,8 +3,7 @@
     <v-flex xs1 v-if="practitioner.photo">
       <v-img :src="getProfilePicture()" contain />
     </v-flex>
-    <!--<v-flex xs6 class="display-2 text-xs-left pl-3" v-if="practitioner.name">-->
-    <v-flex :class="gridLayoutTitle" v-if="practitioner.name">
+    <v-flex :class="setGridLayoutTitle" v-if="practitioner.name">
       {{ name }}<br />
       <v-chip
         class="ma-2"
@@ -29,32 +28,16 @@
 import axios from "axios";
 
 import Alert from "@/components/Layout/Alert.vue";
+import MobileLayout from "@/mixins/MobileLayout.js";
 
 export default {
+  mixins: [MobileLayout],
   components: {
     Alert
   },
   computed: {
-    gridLayoutTitle(){
-      var layout = "";
-      switch (this.screenSize) {
-         case 'xs': 
-            layout = "xs6 title font-weight-bold text-xs-left pl-3";
-          break;
-        case 'sm': 
-            layout = "xs6 title font-weight-bold text-xs-left pl-3";
-          break; 
-        case 'md': 
-            layout = "xs6 display-1 font-weight-bold text-xs-left pl-3";
-          break; 
-        case 'lg': 
-            layout = "xs6 display-1 font-weight-bold text-xs-left pl-3";
-          break; 
-        case 'xl': 
-            layout = "xs6 display-1 font-weight-bold text-xs-left pl-3";
-          break; 
-      }
-      return layout;
+    setGridLayoutTitle(){
+      return this.gridLayoutTitle(this.screenSize);
     },
     active() {
       // active is defined as active unless it is explicitly set to false per the structure definition
