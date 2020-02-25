@@ -372,7 +372,8 @@ export default {
       } else {
         for (key in fields) {
           let field = fields[key];
-          //Datetime value comes as data[index]['period']['nameofthefield'], data[index][field.title] returns undefined 
+          //Datetime value comes as data[index]['period']['nameofthefield'], 
+          //data[index][field.title] returns undefined since field.title does not correspont the the array key
           
           if(fields[key].type == "dateTime" && this.data[index][field.title.split(".")[0]]!=null)
           {
