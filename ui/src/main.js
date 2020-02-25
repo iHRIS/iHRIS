@@ -10,8 +10,6 @@ import 'vuetify2-datetime-picker/src/stylus/main.styl';
 Vue.use(DatetimePicker);
 Vue.use(AsyncComputed);
 
-Vue.use(AsyncComputed);
-
 Vue.config.productionTip = false;
 Vue.filter("sentenceCase", value => {
   if (!value) {
