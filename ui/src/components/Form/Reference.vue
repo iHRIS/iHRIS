@@ -74,7 +74,6 @@ export default {
       )
       .then(response => {
         let options = [];
-        let match = null;
 
         response.data.forEach(data => {
           if (data) {
@@ -88,15 +87,11 @@ export default {
               text: description,
               value: value
             });
-
-            if (description === this.value) {
-              match = value;
-            }
           }
         });
 
         this.codes = options;
-        this.reference = match;
+        this.reference = this.value;
       });
 
     this.describe(structureDefinition).then(response => {

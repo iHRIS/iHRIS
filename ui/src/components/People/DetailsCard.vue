@@ -170,9 +170,10 @@ export default {
   asyncComputed: {
     async sanitized() {
       let sanitized = [];
+      let data = JSON.parse(JSON.stringify(this.data));
 
-      for (var i in this.data) {
-        let element = this.data[i];
+      for (var i in data) {
+        let element = data[i];
 
         for (var j in element) {
           // never render id or resourceType fields
@@ -214,6 +215,18 @@ export default {
             }
 
             element[j] = text;
+          } else if (typeof field === "object" && field !== null) {
+            if (field.start) {
+              element[j] = field.start + " - ";
+
+              if (field.end) {
+                element[j] += field.end;
+              } else {
+                element[j] += "present";
+              }
+            } else if (field.text) {
+              element[j] = field.text;
+            }
           }
         }
 
