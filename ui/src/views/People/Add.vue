@@ -198,11 +198,9 @@ export default {
       this.error = "The user does not have the necessary privileges to access this page ";
       this.alert = true;
       this.allowedToAccess=false;
-      //DynamicForm=null;
     }
    },
   components: {
-    //'DynamicForm':store.state.isAllowToAccessTheNextPage?DynamicForm:null
     DynamicForm
   },
   data() {
