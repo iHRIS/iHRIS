@@ -160,6 +160,7 @@
 
 <script>
 import axios from "axios";
+import _ from "lodash";
 
 import DynamicForm from "@/components/Form/DynamicForm.vue";
 import Practitioner from "@/mixins/Practitioner.js";
@@ -387,8 +388,17 @@ export default {
         }
       } else {
         for (key in fields) {
+          // if there is more than one period, then we need to flatten the data
           let field = fields[key];
-          fields[key].value = this.data[index][field.title];
+          let value = null;
+
+          if (key.indexOf(".") > 1) {
+            value = _.get(this.data[index], field.title.slice("."));
+          } else {
+            value = this.data[index][field.title];
+          }
+
+          fields[key].value = value;
         }
       }
 
