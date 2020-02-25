@@ -117,7 +117,9 @@ export default {
     changePractitioner(practitioner) {
       this.practitioner = practitioner;
     },
-    deleteSubsectionData(field, index, profile) {
+    deleteSubsectionData(names, index, profile) {
+      let field = names.key;
+
       // work history is stored separately
       if (field === "workHistory") {
         return this.deleteWorkHistory(index);
@@ -147,15 +149,17 @@ export default {
       axios
         .post(this.config.backend + "/practitioner/edit", this.practitioner)
         .then(response => {
+          let name = names.name;
+
           if (response.status == 201) {
-            if (this.$refs["subsection" + field][0]) {
-              this.$refs["subsection" + field][0].showAlert(
+            if (this.$refs["subsection" + name][0]) {
+              this.$refs["subsection" + name][0].showAlert(
                 "Item deleted successfully!",
                 "success"
               );
             }
           } else {
-            this.$refs["subsection-" + field][0].showAlert(
+            this.$refs["subsection-" + name][0].showAlert(
               "There was an error deleting this data.",
               "error"
             );
