@@ -57,7 +57,7 @@
         :required="field.required"
         :ref="field.name"
         :hint="field.short"
-        :datetime="field.value"
+        :value="field.value"
       />
 
       <Decimal
