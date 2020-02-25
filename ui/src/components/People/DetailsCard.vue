@@ -365,12 +365,17 @@ export default {
     submit() {
       let inputs = this.$refs.dynamicEditingForm.getInputs();
       let name = this.$refs.dynamicEditingForm.getName();
+      let names = {
+        key: this.key,
+        name: name
+      };
+
 
       if (Object.keys(inputs).length === 1 && inputs[name]) {
         inputs = inputs[name];
       }
 
-      this.$emit("saveData", inputs, this.key, this.currentIndex, this.profile);
+      this.$emit("saveData", inputs, names, this.currentIndex, this.profile);
 
       this.cancel();
     },

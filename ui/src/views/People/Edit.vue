@@ -218,7 +218,22 @@ export default {
           }
         });
     },
-    saveSubsectionData(data, field, index, profile) {
+    flatten(data) {
+      // if a field name has a . in it, we need to store that in a subfield
+      for (var i in data) {
+        if (i.indexOf(".") >= 0) {
+          let swap = data[i];
+          delete data[i];
+
+          _.set(data, i.slice("."), swap);
+        }
+      }
+
+      return data;
+    },
+    saveSubsectionData(data, names, index, profile) {
+      let field = names.key;
+
       if (field === "workHistory") {
         return this.editWorkHistory(data, index);
       }
@@ -226,12 +241,12 @@ export default {
       let practitioner = this.practitioner;
 
       // this is necessary for subsections that can have multiple entries
-      if (index && index >= 0) {
-        practitioner[field][index] = data;
+      if (index >= 0) {
+        practitioner[field][index] = this.flatten(data);
       } else if (index == -1) {
         // this is a special case where a new entry is being
         // added to a multiple field
-        practitioner[field].push(data);
+        practitioner[field].push(this.flatten(data));
       } else if (profile !== null) {
         for (var key in practitioner.extension) {
           let extension = practitioner.extension[key];
@@ -248,7 +263,7 @@ export default {
           }
         }
       } else {
-        practitioner[field] = data;
+        practitioner[field] = this.flatten(data);
       }
 
       this.practitioner = practitioner;
@@ -257,12 +272,12 @@ export default {
         .post(this.config.backend + "/practitioner/edit", practitioner)
         .then(response => {
           if (response.status == 201) {
-            this.$refs["subsection" + field][0].showAlert(
+            this.$refs["subsection" + names.name][0].showAlert(
               "Data changed successfully!",
               "success"
             );
           } else {
-            this.$refs["subsection-" + field][0].showAlert(
+            this.$refs["subsection-" + names.name][0].showAlert(
               "There was an error saving this data.",
               "error"
             );
@@ -334,6 +349,8 @@ export default {
         if (!practitioner[this.detailPath]) {
           Vue.set(this.practitioner, this.detailPath, [input]);
         }
+
+        input = this.flatten(input);
 
         // if a field name has a . in it, we need to store that in a subfield
         for (var i in input) {
