@@ -58,14 +58,20 @@ export default {
         if (this.data && this.data[id]) {
           continue;
         } else if (field.type[0].code && field.type[0].code === "Extension") {
+          let match = false;
           let profile = field.type[0].profile[0];
 
           for (var i in this.data.extension) {
             let extension = this.data.extension[i];
 
             if (extension.url === profile) {
-              continue;
+              match = true;
+              break;
             }
+          }
+
+          if (match) {
+            continue;
           }
         }
 
