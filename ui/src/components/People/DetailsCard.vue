@@ -351,6 +351,13 @@ export default {
       this.editing = false;
       this.editButton = true;
       this.showMultiple = true;
+      this.$refs.dynamicEditingForm.reset();
+
+      let fields = this.fields;
+
+      for (var i in fields) {
+        fields[i].value = null;
+      }
     },
     deleteItem(index) {
       let names = {
@@ -361,7 +368,12 @@ export default {
       this.$emit("deleteData", names, index, this.profile);
     },
     showAddForm() {
+      this.$refs.dynamicEditingForm.reset();
       let fields = this.fields;
+
+      for (var i in fields) {
+        fields[i].value = null;
+      }
 
       this.$refs.dynamicEditingForm.changeFields(fields);
 
@@ -424,8 +436,6 @@ export default {
           fields[key].value = value;
         }
       }
-
-      this.$refs.dynamicEditingForm.changeFields(fields);
 
       this.currentIndex = index;
       this.dynamicFormKey++;
