@@ -172,6 +172,10 @@ export default {
       let sanitized = [];
       let data = JSON.parse(JSON.stringify(this.data));
 
+      if (!Array.isArray(data)) {
+        return data;
+      }
+
       for (var i in data) {
         let element = data[i];
 
