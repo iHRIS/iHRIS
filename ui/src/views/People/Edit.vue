@@ -258,7 +258,12 @@ export default {
           if (extension.url === profile) {
             for (var i in extension) {
               if (i !== "url") {
-                practitioner.extension[key][i] = data.value;
+                if (data.value) {
+                  practitioner.extension[key][i] = data.value;
+                } else {
+                  practitioner.extension[key][i] = data;
+                }
+
                 break;
               }
             }

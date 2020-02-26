@@ -423,7 +423,12 @@ export default {
             fields[key].labelOverride = this.name;
           }
 
-          fields[key].value = this.data;
+          if (this.data[key]) {
+            fields[key].value = this.data[key];
+          } else {
+            let cleanKey = key.substring(key.lastIndexOf(".") + 1);
+            fields[key].value = this.data[cleanKey];
+          }
         }
       } else {
         for (key in fields) {
