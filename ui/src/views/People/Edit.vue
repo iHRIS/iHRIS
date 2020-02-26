@@ -246,7 +246,7 @@ export default {
 
       // this is necessary for subsections that can have multiple entries
       if (index >= 0) {
-        practitioner[field][index] = this.flatten(data);
+        Vue.set(practitioner[field], index, this.flatten(data));
       } else if (index == -1) {
         // this is a special case where a new entry is being
         // added to a multiple field
