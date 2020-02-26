@@ -353,7 +353,7 @@ export default {
 
         extension.push(newExtension);
 
-        practitioner.extension = extension;
+        Vue.set(practitioner, "extension", extension);
       } else if (this.detailPath) {
         if (!practitioner[this.detailPath]) {
           Vue.set(this.practitioner, this.detailPath, [input]);
