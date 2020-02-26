@@ -271,8 +271,9 @@ export default {
         this.subheader = "title";
         break;
 
+      case "Personal telephone number":
       case "telecom":
-        this.subheader = "use";
+        this.subheader = "system";
         break;
 
       case "text":
