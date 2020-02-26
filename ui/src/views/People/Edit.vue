@@ -134,7 +134,7 @@ export default {
           if (extension.url === profile) {
             for (var i in extension) {
               if (i !== "url") {
-                this.practitioner.extension.splice(i, 1);
+                this.practitioner.extension.splice(key, 1);
                 break;
               }
             }
