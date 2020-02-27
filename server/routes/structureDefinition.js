@@ -67,4 +67,24 @@ router.post("/add", function (req, res, next) {
   });
 });
 
+/**
+ * Get a reference definition
+ */
+router.get("/get/:definition/:id", function (req, res, next) {
+  let url = URI(config.fhir.server).segment('fhir').segment(req.params.definition).segment(req.params.id).toString();
+
+  axios.get(url, {
+    params: {},
+    withCredentials: true,
+    auth: {
+      username: config.fhir.username,
+      password: config.fhir.password
+    }
+  }).then(response => {
+    res.status(201).json(response.data);
+  }).catch(err => {
+    res.status(400).json(err);
+  });
+});
+
 module.exports = router;

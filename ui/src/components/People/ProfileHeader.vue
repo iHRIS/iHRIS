@@ -3,20 +3,29 @@
     <v-flex xs1 v-if="practitioner.photo">
       <v-img :src="getProfilePicture()" contain />
     </v-flex>
-    <v-flex :class="setGridLayoutTitle" v-if="practitioner.name">
-      {{ name }}<br />
-      <v-chip
-        class="ma-2"
-        :color="active.color"
-        text-color="white"
-        @click="changeActive"
-      >
-        <v-avatar left>
-          <v-icon>{{ active.icon }}</v-icon>
-        </v-avatar>
+   
+    <v-flex xs6 :class="setGridLayoutTitle" v-if="practitioner.name">
+      <v-row class="display-2">{{ name }}</v-row>
+      <v-row class="display-1">
+        {{ position }}<span v-if="position && location">,</span> {{ location }}
+      </v-row>
+      <v-row class>
+        {{ employmentDate }}
+      </v-row>
+      <v-row>
+        <v-chip
+          class="ma-2"
+          :color="active.color"
+          text-color="white"
+          @click="changeActive"
+        >
+          <v-avatar left>
+            <v-icon>{{ active.icon }}</v-icon>
+          </v-avatar>
 
-        {{ active.text }}
-      </v-chip>
+          {{ active.text }}
+        </v-chip>
+      </v-row>
     </v-flex>
     <v-flex xs4 offset-xs1 class="pr-3">
       <Alert ref="alert" />
@@ -32,6 +41,24 @@ import MobileLayout from "@/mixins/MobileLayout.js";
 
 export default {
   mixins: [MobileLayout],
+  asyncComputed: {
+    async location() {
+      let workHistory = this.getCurrentWorkHistory();
+
+      if (workHistory && workHistory.location && workHistory.location[0]) {
+        let location = workHistory.location[0].reference;
+        let id = location.substring(location.lastIndexOf("/") + 1);
+
+        let result = await axios.get(
+          this.config.backend + "/structure-definition/get/Location/" + id
+        );
+
+        return result.data.name;
+      }
+
+      return "";
+    }
+  },
   components: {
     Alert
   },
@@ -55,6 +82,27 @@ export default {
         icon: "mdi-checkbox-marked-circle"
       };
     },
+    employmentDate() {
+      let workHistory = this.getCurrentWorkHistory();
+
+      if (workHistory) {
+        let employmentDate = "";
+
+        if (workHistory.period.start) {
+          employmentDate += workHistory.period.start + " to ";
+
+          if (workHistory.period.end) {
+            employmentDate += workHistory.period.end;
+          } else {
+            employmentDate += "present";
+          }
+        }
+
+        return employmentDate;
+      }
+
+      return "";
+    },
     name() {
       let name = "";
 
@@ -75,6 +123,15 @@ export default {
       }
 
       return name;
+    },
+    position() {
+      let workHistory = this.getCurrentWorkHistory();
+
+      if (workHistory && workHistory.code && workHistory.code[0]) {
+        return workHistory.code[0].text;
+      }
+
+      return "";
     }
   },
   created() {
@@ -88,20 +145,32 @@ export default {
   methods: {
     changeActive() {
       if (this.edit) {
-        let practitioner = this.practitioner;
-        practitioner.active = this.practitioner.active === false ? true : false;
+        this.practitioner.active = !this.practitioner.active;
 
         axios
-          .post(this.config.backend + "/practitioner/edit", practitioner)
+          .post(this.config.backend + "/practitioner/edit", this.practitioner)
           .then(response => {
             if (response.status == 201) {
-              this.$emit("changePractitioner", practitioner);
+              this.$emit("changePractitioner", this.practitioner);
             }
           });
       }
     },
     changeMessage(message, type) {
       this.$refs.alert.changeMessage(message, type);
+    },
+    getCurrentWorkHistory() {
+      if (this.practitioner.workHistory) {
+        for (var i in this.practitioner.workHistory) {
+          let workHistory = this.practitioner.workHistory[i];
+
+          if (workHistory.active) {
+            return workHistory;
+          }
+        }
+      }
+
+      return false;
     },
     getProfilePicture() {
       return this.practitioner.photo[0].url;
