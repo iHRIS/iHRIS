@@ -1,11 +1,14 @@
 <template>
   <v-container grid-list-md>
-    <v-layout row wrap class="pb-5">
+  <v-alert v-model="alert" dismissable type="error">
+        {{ error }}
+  </v-alert>
+    <v-layout row wrap class="pb-5" >
       <v-flex xs6 class="display-2 text-xs-left">
         Search People
       </v-flex>
     </v-layout>
-    <v-layout wrap>
+    <v-layout wrap >
       <v-flex xs9>
         <v-card>
           <v-card-title class="display-1">Results</v-card-title>
@@ -71,6 +74,8 @@ export default {
   data() {
     return {
       config: null,
+      alert: false,
+      error: "",
       headers: [
         {
           text: "Surname",

@@ -10,6 +10,7 @@ export const store = new Vuex.Store({
       username: VueCookies.get("username") || null,
       userId: VueCookies.get("userId") || null
     },
+    roles: VueCookies.get("roles") || null,
     indeterminateProgress: false,
     indeterminateProgressTitle: ""
   },

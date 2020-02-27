@@ -1,9 +1,24 @@
 import Vue from "vue";
 import Router from "vue-router";
 import { store } from "./store.js";
+import {serverBus} from "./main.js";
 
 Vue.use(Router);
 
+var vueInstance=new Vue(
+{
+  props:{
+    error:String
+  },
+  methods:{
+    displayError(msg){
+      this.$nextTick(() => { 
+        this.error=msg;
+        serverBus.$emit("errorGenerated",this.error);
+      });
+    }
+  }
+});
 let router = new Router({
   mode: "history",
   base: process.env.BASE_URL,
@@ -25,6 +40,7 @@ let router = new Router({
       name: "admin-add-user",
       component: () =>
         import(/* webpackChunkName: "adminAddUser" */ "./views/Admin/AddUser.vue")
+        
     },
     {
       path: "/admin/users",
@@ -110,6 +126,13 @@ let router = new Router({
       component: () =>
         import(/* webpackChunkName: "userManual" */ "./views/UserManual.vue")
     }
+    ,
+    {
+      path: "/noaccess",
+      name: "noaccess",
+      component: () =>
+        import(/* webpackChunkName: "NotAllowed" */ "./views/noaccess.vue")
+    }
   ]
 });
 
@@ -118,20 +141,88 @@ router.beforeEach((to, from, next) => {
     const config = require("@/config/config.json");
 
     if (
-      to.path == "/" ||
+      
       to.path == "/login" ||
       to.path == "/logout" ||
       config.demo
     ) {
       next();
-    } else {
+    } 
+    else {
       next({
         path: "/login"
       });
     }
   } else {
-    next();
+    if(
+      to.path == "/" || 
+      to.path == "/admin/add-user" ||
+      to.path == "/admin/users" ||
+      to.path == "/people/search" ||
+      to.path == "/people/add"  ||
+      to.path == "/people/add/:section/:id" ||
+      to.path == "/people/edit/:id" ||
+      to.path == "/people/view/:id" ||
+      to.path == "/relationship" 
+      )
+    {
+      var routeName=to.name;
+      var roles=store.state.roles;
+      var allowed=checkPageRole(roles,routeName);
+      if(allowed){
+        next();
+      }
+      else
+      {
+        var error = "The user does not have the necessary privileges to access the page : "+routeName;
+        next({
+              path: "/noaccess",
+            });
+        
+        vueInstance.displayError(error);
+      }
+
+    }
+    else
+    {
+      next();
+    }
   }
 });
 
+function checkPageRole(roleName,routeName)
+{
+  let roles = [];
+  switch(routeName)
+  {
+    case "search-people":
+      roles = ["Admin", "Edit", "View"];
+      break;
+    case "add-people":
+      roles = ["Admin", "Edit"];
+      break;
+    case "edit-people":
+      roles = ["Admin", "Edit"];
+      break;
+    case "people-edit":
+      roles = ["Admin", "Edit"];
+      break;
+    case "people-view":
+      roles = ["Admin","Edit","View"];
+      break;
+    case "home":
+      roles = ["Admin","Edit","View"];
+      break;
+    case "relationship":
+      roles = ["Admin"];
+      break;
+    case "admin-add-user":
+      roles = ["Admin"];
+      break;
+    case "admin-users":
+      roles = ["Admin"];
+      break;
+  }
+  return roles.includes(roleName) && roles.length;
+};
 export default router;
