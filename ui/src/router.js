@@ -222,6 +222,8 @@ function checkPageRole(roleName,routeName)
     case "admin-users":
       roles = ["Admin"];
       break;
+    default:
+      return true;
   }
   return roles.includes(roleName) && roles.length;
 };

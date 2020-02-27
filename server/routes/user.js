@@ -82,7 +82,10 @@ router.post("/add", function (req, res, next) {
  * Get all users
  */
 router.get("/list", function (req, res, next) {
-  let url = URI(config.fhir.server).segment('fhir').segment('Person').toString();
+  let url = URI(config.fhir.server).segment('fhir').segment('Person');
+  url.addSearch('_filter=username ge _');
+  url=url.toString();
+  console.log("url: "+url);
 
   axios.get(url, {
     withCredentials: true,
@@ -91,58 +94,7 @@ router.get("/list", function (req, res, next) {
       password: config.fhir.password
     }
   }).then(response => {
-    //check if the user
-    var userEntry=[];
-    for (var i in response.data.entry)
-    {
-      var fullUrl= response.data.entry[i].fullUrl;
-      var oPerson = response.data.entry[i].resource;
-      var isUser=false;
-      let extensions = oPerson.extension;
-      for (var j in extensions) {
-        if (extensions[j].url.includes("iHRISUserDetails")){
-          let userDetails = extensions[j].extension;
-          for (var k in userDetails) {
-            if (userDetails[k].url == "username") {
-              isUser=true;
-              break;
-            }
-          }//end for userDetails
-          if(isUser)
-          {
-            break;
-          }
-          else{
-            continue;
-          }
-        }
-      }//end for extensions
-      if(isUser)
-      {
-        userEntry.push({
-          fullUrl:fullUrl,
-          resource: oPerson
-        });
-      }
-      else {
-        continue;
-      }
-      
-    }//end for response.data.entry
-    var oBundle={
-      resourceType:"Bundle",
-      id:"bundleid",
-      link:[{
-        relation: "self",
-        url: "http://scratchpad.ihris.org/hapi/fhir/Person?_format=json"
-      }],
-      entry:[]
-    };
-    if(userEntry.length>0)
-    {
-      oBundle.entry=userEntry;
-    }
-    res.status(201).json(oBundle);
+    res.status(201).json(response.data);
   }).catch(err => {
     res.status(400).json(err);
   });
@@ -184,7 +136,6 @@ router.post("/login", function (req, res, next) {
     }
   }).then(response => {
     let numMatches = response.data.total;
-
     if (numMatches == 0) {
       return res.status(400).json(response.data);
     } else {
