@@ -154,18 +154,7 @@ router.beforeEach((to, from, next) => {
       });
     }
   } else {
-    if(
-      to.path == "/" || 
-      to.path == "/admin/add-user" ||
-      to.path == "/admin/users" ||
-      to.path == "/people/search" ||
-      to.path == "/people/add"  ||
-      to.path == "/people/add/:section/:id" ||
-      to.path == "/people/edit/:id" ||
-      to.path == "/people/view/:id" ||
-      to.path == "/relationship" 
-      )
-    {
+    
       var routeName=to.name;
       var roles=store.state.roles;
       var allowed=checkPageRole(roles,routeName);
@@ -181,12 +170,6 @@ router.beforeEach((to, from, next) => {
         
         vueInstance.displayError(error);
       }
-
-    }
-    else
-    {
-      next();
-    }
   }
 });
 
