@@ -1,7 +1,7 @@
 <template>
   <v-card class="mb-5">
     <v-card-title
-      :class="setDetailCardTitleStyle"
+      :class="applyDetailCardTitleStyle"
       class="SectionTitle"
       @click="toggleSectionDetailDisplay"
     >
@@ -9,7 +9,7 @@
       <v-spacer />
       <v-btn
         fab
-        :class="setDetailCardBtnSize"
+        :class="applyDetailCardBtnSize"
         class="primary"
         @click.stop="
           editing = true;
@@ -22,7 +22,7 @@
         <v-icon >edit</v-icon>
       </v-btn>
       <v-btn
-      :class="setDetailCardBtnSize"
+      :class="applyDetailCardBtnSize"
         fab
         class="error"
         v-show="editButton && edit"
@@ -47,7 +47,7 @@
               <v-spacer />
 
               <v-btn
-                :class="setDetailCardBtnSize"
+                :class="applyDetailCardBtnSize"
                 fab
                 class="primary"
                 v-show="editButton && edit"
@@ -58,7 +58,7 @@
               </v-btn>
 
               <v-btn
-                :class="setDetailCardBtnSize"
+                :class="applyDetailCardBtnSize"
                 fab
                 class="error"
                 v-show="editButton && edit"
@@ -174,15 +174,13 @@ import MobileLayout from "@/mixins/MobileLayout.js";
 
 export default {
   computed:{
-    setDetailCardTitleStyle()
+    applyDetailCardTitleStyle()
     {
       return this.detailCardTitleStyle(this.screenSize);
     },
-    setDetailCardBtnSize()
+    applyDetailCardBtnSize()
     {
       var btnSize=this.detailCardBtnSize(this.screenSize);
-      console.log("Computed btn size: "+btnSize);
-      //return this.detailCardBtnSize(this.screenSize);
       return btnSize;
     }
     },

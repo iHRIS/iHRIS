@@ -8,12 +8,12 @@
         ref="profileHeader"
         v-on:changePractitioner="changePractitioner"
       />
-    <AddSectionsMenu v-if="checkIfSmallScreen"
+    <AddSectionsMenu v-if="smallScreen"
           v-on:toggleForm="toggleForm"
           :data="this.practitioner"
         />
     <v-layout>
-      <v-flex :class="setGridLayout">
+      <v-flex :class="applyGridLayout">
         <div v-for="(element, index) in display" v-bind:key="'edit-' + index">
           <DetailsCard
             v-if="index != 'id' && index != 'resourceType' && index != 'active'"
@@ -44,7 +44,7 @@
         </v-card>
       </v-flex>
       
-      <AddSectionsMenu v-if="!checkIfSmallScreen"
+      <AddSectionsMenu v-if="!smallScreen"
           v-on:toggleForm="toggleForm"
           :data="this.practitioner"
         />
@@ -71,10 +71,10 @@ export default {
     this.screenSize = this.$vuetify.breakpoint.name;
   },
   computed:{
-    setGridLayout(){
+    applyGridLayout(){
       return this.gridLayoutShowRecord(this.$vuetify.breakpoint.name);
     },
-    checkIfSmallScreen()
+    smallScreen()
     {
       return this.smallScreenCompute(this.$vuetify.breakpoint.name);
     }

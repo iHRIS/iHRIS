@@ -1,6 +1,9 @@
 <template>
   <v-container grid-list-md>
-    <ProfileHeader :practitioner="practitioner" />
+    <ProfileHeader 
+    :practitioner="practitioner"
+    :screenSize="screenSize" 
+    />
 
     <v-layout wrap>
       <v-col md="6">
@@ -9,7 +12,9 @@
             :data="element"
             :name="index"
             :ref="'subsection-' + index"
+            :screenSize="screenSize"
             v-if="counter % 2 == 0"
+           
           />
         </v-flex>
       </v-col>
@@ -18,8 +23,10 @@
           <DetailsCard
             :data="element"
             :name="index"
+            :screenSize="screenSize"
             :ref="'subsection-' + index"
             v-if="counter % 2 == 1"
+           
           />
         </v-flex>
       </v-col>
@@ -33,6 +40,14 @@ import ProfileHeader from "@/components/People/ProfileHeader.vue";
 import SectionsToDisplay from "@/mixins/SectionsToDisplay.js";
 
 export default {
+  created(){
+    this.screenSize = this.$vuetify.breakpoint.name;
+  },
+  data(){
+    return{
+      screenSize: ""
+    }
+  },
   components: {
     DetailsCard,
     ProfileHeader

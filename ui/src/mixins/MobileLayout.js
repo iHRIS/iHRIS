@@ -145,6 +145,21 @@ export default {
             }
             return layout;
         },
+        gridProfileHeaderEditRecord(screenSize){
+          var layout = "";
+          switch (screenSize) {
+            case 'xs': layout = 'xs6 ml-5';
+              break;
+            case 'sm': layout = 'xs6 ml-5';
+              break;
+            case 'md': layout = 'xs6';
+              break;
+            case 'lg': layout = 'xs6';
+              break;
+            case 'xl': layout = 'xs6'
+          }
+          return layout;
+      },
     smallScreenCompute(screenSize){
         var smallScreen=false;
         if(screenSize == "xs")
@@ -171,6 +186,7 @@ export default {
         }
         return smallScreen;
     },
+
     detailCardTitleStyle(screenSize)
     {
         var style="";
@@ -204,6 +220,37 @@ export default {
         //console.log("computed size :"+size);
         return size;
     },
+    minProfilePictureWidth(screenSize){
+      console.log()
+      var size='';
+      if(screenSize == "xs")
+      {
+        size='80';
+      }
+      else if(screenSize == "sm")
+      {
+        size='80';
+      }
+      else{
+        size='';
+      }
+      return size;
+  },
+  profileHeaderGridLayout(screenSize){
+    var layout = "";
+    switch (screenSize) {
+      case 'xs': layout = 'xs5';
+        break;
+      case 'sm': layout = 'xs3';
+        break;
+      case 'md': layout = 'xs1';
+        break;
+      case 'lg': layout = 'xs1';
+        break;
+      case 'xl': layout = 'xs1'
+    }
+    return layout;
+  },
   }
 }
   

@@ -1,15 +1,18 @@
 <template>
   <v-layout row wrap class="pb-5">
-    <v-flex xs1 v-if="practitioner.photo">
-      <v-img :src="getProfilePicture()" contain />
+    <v-flex :class="applyProfileHeaderGridLayout" v-if="practitioner.photo">
+      <v-img  :src="getProfilePicture()" 
+        contain
+        :min-width="applyMinProfilePictureWidth"
+       />
     </v-flex>
    
-    <v-flex xs6 :class="setGridLayoutTitle" v-if="practitioner.name">
-      <v-row class="display-2">{{ name }}</v-row>
-      <v-row class="display-1">
+    <v-flex :class="applyGridProfileHeaderEditRecord"  v-if="practitioner.name" >
+      <v-row :class="applyGridLayoutTitle">{{ name }}</v-row>
+      <v-row :class="applyGridLayoutTitle">
         {{ position }}<span v-if="position && location">,</span> {{ location }}
       </v-row>
-      <v-row class>
+      <v-row :class="applyGridLayoutTitle">
         {{ employmentDate }}
       </v-row>
       <v-row>
@@ -63,8 +66,19 @@ export default {
     Alert
   },
   computed: {
-    setGridLayoutTitle(){
+    applyGridLayoutTitle(){
       return this.gridLayoutTitle(this.screenSize);
+    },
+    applyMinProfilePictureWidth()
+    {
+        return this.minProfilePictureWidth(this.screenSize);
+    },
+    applyProfileHeaderGridLayout()
+    {
+        return this.profileHeaderGridLayout(this.screenSize);
+    },
+    applyGridProfileHeaderEditRecord(){
+      return this.gridProfileHeaderEditRecord(this.screenSize);
     },
     active() {
       // active is defined as active unless it is explicitly set to false per the structure definition

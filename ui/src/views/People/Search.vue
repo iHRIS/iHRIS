@@ -1,14 +1,14 @@
 <template>
   <v-container grid-list-md>
     <v-layout row wrap class="pb-5">
-      <v-flex :class="setTitleStyle">
+      <v-flex :class="applyTitleStyle">
         Search People
       </v-flex>
     </v-layout>
     <v-layout row wrap class="pb-5" v-if="checkIfSmallScreen">
-      <v-flex :class="setGridLayout">
+      <v-flex :class="applyGridLayout">
         <v-card>
-          <v-card-title :class="setCardTitleStyle">Search</v-card-title>
+          <v-card-title :class="applyCardTitleStyle">Search</v-card-title>
           <v-card-text>
             <Alert ref="searchAlert" />
             <DynamicForm
@@ -24,9 +24,9 @@
       </v-flex>
     </v-layout>
     <v-layout wrap>
-      <v-flex :class="setGridLayoutResult">
+      <v-flex :class="applyGridLayoutResult">
         <v-card>
-          <v-card-title :class="setCardTitleStyle">Results</v-card-title>
+          <v-card-title :class="applyCardTitleStyle">Results</v-card-title>
           <v-card-text>
             <v-data-table
               :headers="headers"
@@ -81,21 +81,21 @@ import MobileLayout from "@/mixins/MobileLayout.js";
 export default {
   mixins: [MobileLayout],
   computed:{
-    setTitleStyle(){
+    applyTitleStyle(){
       return this.titleStyleSearchPeople(this.$vuetify.breakpoint.name);
     },
     checkIfSmallScreen()
     {
       return this.smallScreenSearchCompute(this.$vuetify.breakpoint.name);
     },
-    setCardTitleStyle()
+    applyCardTitleStyle()
     {
       return this.cardTitleStyle(this.$vuetify.breakpoint.name);
     },
-    setGridLayout(){
+    applyGridLayout(){
       return this.gridLayoutSearchResult(this.$vuetify.breakpoint.name);
     },
-    setGridLayoutResult(){
+    applyGridLayoutResult(){
       return this.gridLayoutShowResult(this.$vuetify.breakpoint.name);
     }
   },

@@ -10,10 +10,10 @@
     permanent
     
   >
-  <v-btn v-if="isSmallScreenSize"
+  <v-btn v-if="smallScreenSize"
     icon
     @click.stop="mini = !mini"
-    ><v-icon  class="white--text">{{getChevronIcon}}</v-icon>
+    ><v-icon  class="white--text">{{chevronIcon}}</v-icon>
   </v-btn>
     <v-list nav v-for="item in menu" :key="item.title">
 
@@ -65,7 +65,7 @@
 
 export default {
   computed:{
-    getChevronIcon()
+    chevronIcon()
     {
       if(this.mini)
       {
@@ -76,7 +76,7 @@ export default {
         return "mdi-chevron-right"
       }
     },
-    isSmallScreenSize(){ 
+    smallScreenSize(){ 
       var smallScreen=false;
       switch (this.screenSize) {
         case 'xs': 
