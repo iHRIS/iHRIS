@@ -1,5 +1,6 @@
 <template>
   <v-text-field
+    :id="setFieldId"
     v-if="parseInt(max) <= 1"
     :label="label"
     outline
@@ -10,6 +11,7 @@
     :hint="hint"
   ></v-text-field>
   <v-combobox
+    :id="setFieldId"
     v-else
     v-model="string"
     hide-selected
@@ -26,7 +28,16 @@
 </template>
 
 <script>
+import GenerateFieldID from "@/mixins/GenerateFieldID.js";
 export default {
+  mixins: [GenerateFieldID],
+  computed:{
+    setFieldId()
+    {
+      
+      return this.generateFieldId(this.formName,this.fieldName);
+    }
+  },
   created() {
     this.string = this.value;
   },
@@ -62,6 +73,6 @@ export default {
       return this["string"];
     }
   },
-  props: ["label", "max", "required", "value", "hint"]
+  props: ["label", "max", "required", "value", "hint","formName","fieldName"]
 };
 </script>

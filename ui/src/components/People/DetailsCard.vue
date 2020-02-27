@@ -153,6 +153,7 @@
         v-on:failedSubmit="showFailedSubmit"
         ref="dynamicEditingForm"
         :key="dynamicFormKey"
+        :validationRules="validationRules"
       />
     </v-card-text>
   </v-card>
@@ -244,6 +245,7 @@ export default {
     DynamicForm
   },
   created() {
+    
     this.config = require("@/config/config.json");
 
     switch (this.name) {
@@ -434,17 +436,20 @@ export default {
         for (key in fields) {
           // if there is more than one period, then we need to flatten the data
           let field = fields[key];
-          let value = null;
-
-          if (key.indexOf(".") > 1) {
-            value = _.get(this.data[index], field.title.slice("."));
-          } else {
-            value = this.data[index][field.title];
+          //Datetime value comes as data[index]['period']['nameofthefield'], 
+          //data[index][field.title] returns undefined since field.title does not correspont the the array key
+          
+          if(fields[key].type == "dateTime" && this.data[index][field.title.split(".")[0]]!=null)
+          {
+            fields[key].value = this.data[index][field.title.split(".")[0]][field.title.split(".")[2].toLowerCase()];
           }
-
-          fields[key].value = value;
+          else{
+            fields[key].value = this.data[index][field.title];
+          } 
+          
         }
       }
+      this.$refs.dynamicEditingForm.changeFields(fields);
 
       this.currentIndex = index;
       this.dynamicFormKey++;
@@ -454,7 +459,9 @@ export default {
     },
     toggleSectionDetailDisplay() {
       this.showSectionDetail = !this.showSectionDetail;
-    }
+    },
+
+
   },
   mixins: [Practitioner, StructureDefinition],
   props: {
@@ -466,7 +473,8 @@ export default {
     name: {
       default: null,
       type: String
-    }
+    },
+    validationRules:{},
   }
 };
 </script>

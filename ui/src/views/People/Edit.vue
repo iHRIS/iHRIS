@@ -21,6 +21,7 @@
             v-on:deleteData="deleteSubsectionData"
             edit
             :ref="'subsection' + index"
+            :validationRules="uiValidationRules"
           />
         </div>
 
@@ -33,6 +34,7 @@
               v-show="details"
               :name="detailTitle"
               :fields="detailFields"
+              :validationRules="uiValidationRules"
               v-on:cancel="cancelDetailsForm"
               v-on:successfulSubmit="submitDetailsForm"
               ref="detailsForm"
@@ -80,8 +82,21 @@ export default {
       detailPath: null,
       detailRaw: null,
       detailTitle: null,
+<<<<<<< HEAD
       alert: false,
       error: ""
+=======
+      uiValidationRules:[
+        {
+          formName:"workHistory",
+          sourceFieldName:"active",
+          condition: "eq",
+          value: true,
+          behavior: "hide",
+          targetFieldName: "period.Period.end"
+        }
+      ]
+>>>>>>> afcbaee789daa969afcfef1afa44293263c65961
     };
   },
   methods: {

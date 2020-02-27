@@ -1,5 +1,5 @@
-<template>
-  <div :id="setFieldId">
+<template >
+<div :id="formName+'_'+label">
     <v-menu 
         ref="menu"
         v-model="menu"
@@ -14,14 +14,12 @@
         <v-text-field 
             v-model="date"
             :label="label"
-            v-if="parseInt(max) <= 1"
             prepend-icon="event"
             readonly
             v-on="on"
             required="required"
             :rules="[rules.required]"
             :hint="hint"
-            outline
           ></v-text-field>
       </template>
       <v-date-picker 
@@ -38,19 +36,11 @@
 </template>
 
 <script>
-import GenerateFieldID from "@/mixins/GenerateFieldID.js";
 
 export default {
-  mixins: [GenerateFieldID],
-  computed:{
-    setFieldId()
-    {
-      
-      return this.generateFieldId(this.formName,this.fieldName);
-    }
-
-  },
+ 
   created() {
+
     this.config = require("@/config/config.json");
     this.locale = this.config.locale;
     if(this.value!=null)
@@ -65,25 +55,13 @@ export default {
       locale: "en-US",
       visibility: true,
       rules: {
-        max: value => {
-          if (this.max == "*") {
-            return true;
-          }
-
-          let max = parseInt(this.max);
-
-          if (value.length > max) {
-            return "Only " + max + " entries allowed.";
-          }
-
-          return true;
-        },
         required: value => {
           return (
             (this.required && value) || !this.required || "Field is required"
           );
         }
       }
+
     };
   },
   methods: {
@@ -91,6 +69,7 @@ export default {
       return this["date"];
     }
   },
-  props: ["label", "max", "required", "value", "hint","formName","fieldName"]
+  props: ["label", "max", "required", "value", "hint","formName"]
 };
 </script>
+
