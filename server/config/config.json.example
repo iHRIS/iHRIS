@@ -1,5 +1,5 @@
 {
-  
+
   "development": {
     "port":3000,
     "definitions": {
@@ -16,6 +16,11 @@
       "server": "localhost",
       "username": "username",
       "password": "password"
+    },
+    "emNutt": {
+      "server": "http://localhost:3002",
+      "username": "ihris",
+      "password": "ihris"
     },
     "kibana": "https://www.elastic.co/products/kibana",
     "mhero": "http://mhero.org/fhir/StructureDefinition",
@@ -38,6 +43,11 @@
       "username": "username",
       "password": "password"
     },
+    "emNutt": {
+      "server": "http://localhost:3002",
+      "username": "ihris",
+      "password": "ihris"
+    },
     "kibana": "https://www.elastic.co/products/kibana",
     "mhero": "http://mhero.org/fhir/StructureDefinition",
     "structureDefinition": "http://server.com/fhir"
@@ -58,6 +68,11 @@
       "server": "localhost",
       "username": "username",
       "password": "password"
+    },
+    "emNutt": {
+      "server": "http://localhost:3002",
+      "username": "ihris",
+      "password": "ihris"
     },
     "kibana": "https://www.elastic.co/products/kibana",
     "mhero": "http://mhero.org/fhir/StructureDefinition",
