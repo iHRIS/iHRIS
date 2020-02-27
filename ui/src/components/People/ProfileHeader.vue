@@ -3,7 +3,8 @@
     <v-flex xs1 v-if="practitioner.photo">
       <v-img :src="getProfilePicture()" contain />
     </v-flex>
-    <v-flex xs6 class="text-xs-left pl-3" v-if="practitioner.name">
+   
+    <v-flex xs6 :class="setGridLayoutTitle" v-if="practitioner.name">
       <v-row class="display-2">{{ name }}</v-row>
       <v-row class="display-1">
         {{ position }}<span v-if="position && location">,</span> {{ location }}
@@ -36,8 +37,10 @@
 import axios from "axios";
 
 import Alert from "@/components/Layout/Alert.vue";
+import MobileLayout from "@/mixins/MobileLayout.js";
 
 export default {
+  mixins: [MobileLayout],
   asyncComputed: {
     async location() {
       let workHistory = this.getCurrentWorkHistory();
@@ -60,6 +63,9 @@ export default {
     Alert
   },
   computed: {
+    setGridLayoutTitle(){
+      return this.gridLayoutTitle(this.screenSize);
+    },
     active() {
       // active is defined as active unless it is explicitly set to false per the structure definition
       if (this.practitioner.active === false) {
@@ -173,6 +179,6 @@ export default {
       this.$refs.alert.reset();
     }
   },
-  props: ["edit", "practitioner"]
+  props: ["edit", "practitioner","screenSize"]
 };
 </script>

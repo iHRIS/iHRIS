@@ -1,13 +1,15 @@
 <template>
   <v-card class="mb-5">
     <v-card-title
-      class="display-1 SectionTitle"
+      :class="setDetailCardTitleStyle"
+      class="SectionTitle"
       @click="toggleSectionDetailDisplay"
     >
       {{ this.name | sentenceCase }}
       <v-spacer />
       <v-btn
         fab
+        :class="setDetailCardBtnSize"
         class="primary"
         @click.stop="
           editing = true;
@@ -17,9 +19,10 @@
         v-if="!Array.isArray(data)"
         v-on:click="toggleForm(name)"
       >
-        <v-icon>edit</v-icon>
+        <v-icon >edit</v-icon>
       </v-btn>
       <v-btn
+      :class="setDetailCardBtnSize"
         fab
         class="error"
         v-show="editButton && edit"
@@ -44,6 +47,7 @@
               <v-spacer />
 
               <v-btn
+                :class="setDetailCardBtnSize"
                 fab
                 class="primary"
                 v-show="editButton && edit"
@@ -54,6 +58,7 @@
               </v-btn>
 
               <v-btn
+                :class="setDetailCardBtnSize"
                 fab
                 class="error"
                 v-show="editButton && edit"
@@ -165,8 +170,22 @@ import _ from "lodash";
 import DynamicForm from "@/components/Form/DynamicForm.vue";
 import Practitioner from "@/mixins/Practitioner.js";
 import StructureDefinition from "@/mixins/StructureDefinition.js";
+import MobileLayout from "@/mixins/MobileLayout.js";
 
 export default {
+  computed:{
+    setDetailCardTitleStyle()
+    {
+      return this.detailCardTitleStyle(this.screenSize);
+    },
+    setDetailCardBtnSize()
+    {
+      var btnSize=this.detailCardBtnSize(this.screenSize);
+      console.log("Computed btn size: "+btnSize);
+      //return this.detailCardBtnSize(this.screenSize);
+      return btnSize;
+    }
+    },
   asyncComputed: {
     async sanitized() {
       let sanitized = [];
@@ -456,7 +475,7 @@ export default {
       this.showSectionDetail = !this.showSectionDetail;
     }
   },
-  mixins: [Practitioner, StructureDefinition],
+  mixins: [Practitioner, StructureDefinition,MobileLayout],
   props: {
     data: {},
     edit: {
@@ -464,6 +483,10 @@ export default {
       type: Boolean
     },
     name: {
+      default: null,
+      type: String
+    },
+    screenSize: {
       default: null,
       type: String
     }

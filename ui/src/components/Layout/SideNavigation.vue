@@ -1,13 +1,25 @@
-<template>
+<template 
+>
   <v-navigation-drawer
     v-model="drawer"
     app
     clipped
     class="primary darken-1 text-uppercase white--text font-weight-bold"
+    
+    :mini-variant.sync="mini"
+    permanent
+    
   >
+  <v-btn v-if="isSmallScreenSize"
+    icon
+    @click.stop="mini = !mini"
+    ><v-icon  class="white--text">{{getChevronIcon}}</v-icon>
+  </v-btn>
     <v-list nav v-for="item in menu" :key="item.title">
+
       <v-list-group v-if="item.submenu.length" no-action class="white--text">
         <template v-slot:activator>
+          
           <v-list-item-icon>
             <v-icon class="white--text">{{ item.icon }}</v-icon>
           </v-list-item-icon>
@@ -50,13 +62,42 @@
 </template>
 
 <script>
-import { serverBus } from "../../main";
 
 export default {
+  computed:{
+    getChevronIcon()
+    {
+      if(this.mini)
+      {
+        return "mdi-chevron-left"
+      }
+      else
+      {
+        return "mdi-chevron-right"
+      }
+    },
+    isSmallScreenSize(){ 
+      var smallScreen=false;
+      switch (this.screenSize) {
+        case 'xs': 
+          smallScreen = true;
+          this.mini=true;
+          break;
+        case 'sm':
+          smallScreen = true;
+          this.mini=true;
+          break;
+        default:
+          smallScreen = false;
+      } 
+      return smallScreen;
+    }
+
+  },
   created() {
-    serverBus.$on("toggleDrawer", drawer => {
-      this.drawer = drawer;
-    });
+  
+     this.screenSize = this.$vuetify.breakpoint.name;
+
   },
   data: function() {
     const config = require("@/config/config.json");
@@ -80,7 +121,9 @@ export default {
     });
 
     return {
-      drawer: true,
+      drawer:true,
+      mini: false,
+      screenSize: "",
       menu: [
         {
           action: { name: "home" },

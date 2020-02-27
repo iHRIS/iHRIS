@@ -1,19 +1,25 @@
 <template>
-  <v-container>
-    <ProfileHeader
-      :practitioner="practitioner"
-      :edit="true"
-      ref="profileHeader"
-      v-on:changePractitioner="changePractitioner"
-    />
 
+  <v-container>
+      <ProfileHeader
+        :practitioner="practitioner"
+        :edit="true"
+        :screenSize="screenSize"
+        ref="profileHeader"
+        v-on:changePractitioner="changePractitioner"
+      />
+    <AddSectionsMenu v-if="checkIfSmallScreen"
+          v-on:toggleForm="toggleForm"
+          :data="this.practitioner"
+        />
     <v-layout>
-      <v-flex xs6 class="pr-3">
+      <v-flex :class="setGridLayout">
         <div v-for="(element, index) in display" v-bind:key="'edit-' + index">
           <DetailsCard
             v-if="index != 'id' && index != 'resourceType' && index != 'active'"
             :data="element"
             :name="index"
+            :screenSize="screenSize"
             v-on:saveData="saveSubsectionData"
             v-on:deleteData="deleteSubsectionData"
             edit
@@ -37,12 +43,11 @@
           </v-card-text>
         </v-card>
       </v-flex>
-      <v-flex xs6 class="pl-3">
-        <AddSectionsMenu
+      
+      <AddSectionsMenu v-if="!checkIfSmallScreen"
           v-on:toggleForm="toggleForm"
           :data="this.practitioner"
         />
-      </v-flex>
     </v-layout>
   </v-container>
 </template>
@@ -59,8 +64,21 @@ import ProfileHeader from "@/components/People/ProfileHeader.vue";
 import SectionsToDisplay from "@/mixins/SectionsToDisplay.js";
 import StructureDefinition from "@/mixins/StructureDefinition.js";
 import Vue from "vue";
+import MobileLayout from "@/mixins/MobileLayout.js";
 
 export default {
+  created(){
+    this.screenSize = this.$vuetify.breakpoint.name;
+  },
+  computed:{
+    setGridLayout(){
+      return this.gridLayoutShowRecord(this.$vuetify.breakpoint.name);
+    },
+    checkIfSmallScreen()
+    {
+      return this.smallScreenCompute(this.$vuetify.breakpoint.name);
+    }
+  },
   components: {
     AddSectionsMenu,
     DetailsCard,
@@ -74,7 +92,8 @@ export default {
       detailFields: {},
       detailPath: null,
       detailRaw: null,
-      detailTitle: null
+      detailTitle: null,
+      screenSize: ""
     };
   },
   methods: {
@@ -423,7 +442,7 @@ export default {
       this.$refs.detailsForm.changeFields(fields);
     }
   },
-  mixins: [Capitalize, SectionsToDisplay, StructureDefinition],
+  mixins: [Capitalize, SectionsToDisplay, StructureDefinition,MobileLayout],
   name: "AddSections"
 };
 </script>
