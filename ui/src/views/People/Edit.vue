@@ -82,10 +82,8 @@ export default {
       detailPath: null,
       detailRaw: null,
       detailTitle: null,
-<<<<<<< HEAD
       alert: false,
       error: ""
-=======
       uiValidationRules:[
         {
           formName:"workHistory",
@@ -96,7 +94,6 @@ export default {
           targetFieldName: "period.Period.end"
         }
       ]
->>>>>>> afcbaee789daa969afcfef1afa44293263c65961
     };
   },
   methods: {
