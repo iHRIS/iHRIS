@@ -9,7 +9,7 @@ const config = require(__dirname + "/../config/config.json")[env];
  * Send message
  */
 router.post("/send-message", function (req, res, next) {
-  let url = URI(config.fhir.server).segment('fhir').segment('CommunicationRequest');
+  let url = URI(config.emNutt.server).segment('fhir').segment('CommunicationRequest');
   let data = req.body;
 
   let recipients = [];
@@ -50,7 +50,7 @@ router.post("/send-message", function (req, res, next) {
  * Get all workflows
  */
 router.get("/workflows", function (req, res, next) {
-  let url = URI(config.fhir.server).segment('fhir').segment('Basic');
+  let url = URI(config.emNutt.server).segment('fhir').segment('Basic');
   url.addQuery('_profile', config.mhero + "/mHeroWorkflows");
   url = url.toString();
 
