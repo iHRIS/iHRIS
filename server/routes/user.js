@@ -32,7 +32,8 @@ router.post("/add", function (req, res, next) {
     id: "user",
     extension: [
       {
-        url: config.fhir.server + "/StructureDefinition/iHRISUserDetails",
+        //use this domain which is the only valid for the search parameters
+        url:config.profileUrlDomain + "/StructureDefinition/iHRISUserDetails",
         extension: [
           {
             url: "username",
@@ -81,7 +82,10 @@ router.post("/add", function (req, res, next) {
  * Get all users
  */
 router.get("/list", function (req, res, next) {
-  let url = URI(config.fhir.server).segment('fhir').segment('Person').toString();
+  let url = URI(config.fhir.server).segment('fhir').segment('Person');
+  url.addSearch('_filter=username ge _');
+  url=url.toString();
+  console.log("url: "+url);
 
   axios.get(url, {
     withCredentials: true,
@@ -132,7 +136,6 @@ router.post("/login", function (req, res, next) {
     }
   }).then(response => {
     let numMatches = response.data.total;
-
     if (numMatches == 0) {
       return res.status(400).json(response.data);
     } else {
@@ -144,6 +147,7 @@ router.post("/login", function (req, res, next) {
           let userDetails = extensions[i].extension;
           let password = null;
           let salt = null;
+          let roles = null;
 
           for (var j in userDetails) {
             if (userDetails[j].url == "password") {
@@ -153,6 +157,10 @@ router.post("/login", function (req, res, next) {
             if (userDetails[j].url == "salt") {
               salt = userDetails[j].valueString;
             }
+            if (userDetails[j].url == "roles") {
+              roles = userDetails[j].valueCoding.code;
+            }
+
           }
 
           let hash = crypto.pbkdf2Sync(
@@ -165,7 +173,8 @@ router.post("/login", function (req, res, next) {
 
           let packet = {
             userId: user.id,
-            username: req.body.username
+            username: req.body.username,
+            roles: roles
           };
 
           // matching password

@@ -1,6 +1,9 @@
 <template>
-  <v-container>
-    <v-flex xs6 offset-xs3>
+  <v-container >
+    <v-alert v-model="alert" dismissable type="error">
+        {{ error }}
+    </v-alert>
+      <v-flex xs6 offset-xs3 >
       <h1>Add a Person</h1>
       <p>
         To track a person in the database, whether an employee or a job
@@ -9,10 +12,6 @@
         for adding data about the person will become available. An HR Staff
         person or an HR Manager can add a new person to the system.
       </p>
-
-      <v-alert v-model="alert" dismissable type="error">
-        {{ error }}
-      </v-alert>
 
       <DynamicForm
         :fields="fields"
@@ -30,11 +29,15 @@
 <script>
 import axios from "axios";
 import DynamicForm from "@/components/Form/DynamicForm.vue";
+import { store } from "@/store.js";
 
 export default {
+  
   created() {
     this.config = require("@/config/config.json");
-    axios
+    
+      NProgress.start();
+      axios
       .get(this.config.backend + "/practitioner/describe/page")
       .then(pageResponse => {
         let fields = [];
@@ -149,6 +152,7 @@ export default {
                           this.dynamicFormKey++;
                           return Promise.resolve();
                         });
+                        NProgress.done()
                     }
                   } else {
                     let matchingField = structureDefinitionResponse.data.snapshot.element.find(
@@ -184,13 +188,15 @@ export default {
         this.error = error.response.data;
         this.alert = true;
         this.addPractitionerForm = false;
+        NProgress.done()
       });
-  },
+   },
   components: {
     DynamicForm
   },
   data() {
     return {
+      allowedToAccess:true,
       addPractitionerForm: true,
       alert: false,
       config: null,
@@ -255,3 +261,4 @@ export default {
   }
 };
 </script>
+

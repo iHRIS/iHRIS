@@ -12,9 +12,11 @@ export default {
   created() {
     VueCookies.remove("username");
     VueCookies.remove("userId");
+    VueCookies.remove("roles");
 
     store.state.authentication.username = null;
     store.state.authentication.userId = null;
+    store.state.roles = null;
 
     this.$router.push({ name: "home" });
   }
