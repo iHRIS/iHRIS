@@ -212,6 +212,10 @@ export default {
 
           let field = element[j];
 
+          if (field[0]) {
+            field = field[0];
+          }
+
           if (field.reference) {
             let reference = field.reference.split("/");
 
@@ -245,6 +249,8 @@ export default {
               }
             } else if (field.text) {
               element[j] = field.text;
+            } else if (field.code) {
+              element[j] = field.code;
             }
           }
         }
