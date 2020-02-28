@@ -1,5 +1,5 @@
 <template>
-  <div :id="setFieldId">
+  <div :id="applyFieldId">
     <v-datetime-picker
           :label="label"
           v-model="datetime"
@@ -15,7 +15,7 @@ import GenerateFieldID from "@/mixins/GenerateFieldID.js";
 export default {
   mixins: [GenerateFieldID],
   computed:{
-    setFieldId()
+    applyFieldId()
     {
       
       return this.generateFieldId(this.formName,this.fieldName);

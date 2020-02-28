@@ -127,7 +127,6 @@ router.post("/login", function (req, res, next) {
   let url = URI(config.fhir.server).segment('fhir').segment('Person');
   url.addQuery('username:exact', req.body.username);
   url = url.toString();
-
   axios.get(url, {
     withCredentials: true,
     auth: {

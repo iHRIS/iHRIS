@@ -17,6 +17,7 @@
     "eslint-plugin-prettier": "^3.1.1",
     "fhir": "4.*",
     "lodash": "^4.17.15",
+    "moment": "^2.24.0",
     "swagger-ui": "^3.23.4",
     "vue": "2.*",
     "vue-async-computed": "^3.8.2",

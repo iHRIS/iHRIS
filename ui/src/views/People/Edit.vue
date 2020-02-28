@@ -68,7 +68,6 @@ import ProfileHeader from "@/components/People/ProfileHeader.vue";
 import SectionsToDisplay from "@/mixins/SectionsToDisplay.js";
 import StructureDefinition from "@/mixins/StructureDefinition.js";
 import Vue from "vue";
-import { store } from "@/store.js";
 import MobileLayout from "@/mixins/MobileLayout.js";
 
 export default {
@@ -99,7 +98,7 @@ export default {
       detailRaw: null,
       detailTitle: null,
       alert: false,
-      error: ""
+      error: "",
       uiValidationRules:[
         {
           formName:"workHistory",
@@ -107,9 +106,9 @@ export default {
           condition: "eq",
           value: true,
           behavior: "hide",
-          targetFieldName: "period.Period.end"
+          targetFieldName: "Period.end"
         }
-      ]
+      ],
       screenSize: ""
     };
   },

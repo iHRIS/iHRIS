@@ -435,7 +435,6 @@ export default {
     toggleForm(index) {
       let fields = this.fields;
       let key = null;
-
       if (Object.keys(fields).length === 1) {
         for (key in fields) {
           if (fields[key].name === "value") {
@@ -455,7 +454,6 @@ export default {
           let field = fields[key];
           //Datetime value comes as data[index]['period']['nameofthefield'], 
           //data[index][field.title] returns undefined since field.title does not correspont the the array key
-          
           if(fields[key].type == "dateTime" && this.data[index][field.title.split(".")[0]]!=null)
           {
             fields[key].value = this.data[index][field.title.split(".")[0]][field.title.split(".")[2].toLowerCase()];

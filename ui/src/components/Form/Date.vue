@@ -1,5 +1,5 @@
 <template>
-  <div :id="setFieldId">
+  <div :id="applyFieldId">
     <v-menu 
         ref="menu"
         v-model="menu"
@@ -39,11 +39,11 @@
 
 <script>
 import GenerateFieldID from "@/mixins/GenerateFieldID.js";
-
+import moment from "moment";
 export default {
   mixins: [GenerateFieldID],
   computed:{
-    setFieldId()
+    applyFieldId()
     {
       
       return this.generateFieldId(this.formName,this.fieldName);
@@ -53,7 +53,7 @@ export default {
   created() {
     this.config = require("@/config/config.json");
     this.locale = this.config.locale;
-    if(this.value!=null)
+    if(this.value!=null && moment(this.value,"YYYY-MM-DD",true).isValid())
     {
         this.date =  this.value;
     }
