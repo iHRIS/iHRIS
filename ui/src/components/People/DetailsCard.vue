@@ -78,7 +78,7 @@
                   <td :width="headerWidth" class="font-weight-bold">
                     {{ fieldIndex | sentenceCase }}
                   </td>
-                  <td>{{ sanitized | separateByCommas }}</td>
+                  <td>{{ sanitized | separateByCommas }} 1</td>
                 </tr>
               </tbody>
             </v-simple-table>
@@ -95,7 +95,7 @@
                 v-for="(sanitized, index) in value"
                 v-bind:key="index"
               >
-                {{ sanitized | separateByCommas }}
+                {{ sanitized | separateByCommas }} 2
               </v-flex>
             </v-layout>
 
@@ -111,7 +111,7 @@
               <td :width="headerWidth" class="font-weight-bold">
                 {{ this.name | sentenceCase }}
               </td>
-              <td>{{ sanitized }}</td>
+              <td>{{ sanitized }} 3</td>
             </tr>
           </tbody>
         </v-simple-table>
@@ -124,7 +124,7 @@
               <td :width="headerWidth" class="font-weight-bold">
                 {{ name | sentenceCase }}
               </td>
-              <td>{{ value }}</td>
+              <td>{{ value }} 4</td>
             </tr>
           </tbody>
         </v-simple-table>
@@ -212,6 +212,10 @@ export default {
 
           let field = element[j];
 
+          if (field[0]) {
+            field = field[0];
+          }
+
           if (field.reference) {
             let reference = field.reference.split("/");
 
@@ -245,6 +249,8 @@ export default {
               }
             } else if (field.text) {
               element[j] = field.text;
+            } else if (field.code) {
+              element[j] = field.code;
             }
           }
         }
