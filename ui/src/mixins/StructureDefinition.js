@@ -49,7 +49,7 @@ export default {
       }
 
       // qualification is a special case
-      if (title == "qualification") {
+      if (title == "Qualifications") {
         let fields = this.getFields(title);
         let qualification = [];
 
@@ -227,6 +227,7 @@ export default {
           return this.getPeriodFields(field);
 
         case "qualification":
+        case "qualifications":
           return this.getQualificationFields();
 
         default:
