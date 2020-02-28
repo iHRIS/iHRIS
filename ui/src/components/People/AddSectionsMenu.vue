@@ -1,16 +1,12 @@
 <template>
   <v-flex :class="gridLayout" v-if="!smallScreenCompute">
-    <v-card class="primary darken-1 white--text" >
-      <v-card-title  :class="titleStyle">Add Sections</v-card-title>
+    <v-card class="primary darken-1 white--text">
+      <v-card-title :class="titleStyle">Add Sections</v-card-title>
       <v-card-text :class="layoutCardText">
-        <v-list 
-          :class = "layoutList"
-          v-for="item in menu"
-          :key="item.title"
-        >
+        <v-list :class="layoutList" v-for="item in menu" :key="item.title">
           <v-list-item
-            active-class = "primary darken-2"
-            :class = "layoutListItem"
+            active-class="primary darken-2"
+            :class="layoutListItem"
             @click.stop="showForm(item.title, item.type, item.raw)"
             three-line
           >
@@ -32,34 +28,31 @@
       </v-card-text>
     </v-card>
   </v-flex>
-   <v-toolbar dark color="primary" class="mb-2" v-else-if="smallScreenCompute">
+  <v-toolbar dark color="primary" class="mb-2" v-else-if="smallScreenCompute">
     <v-menu offset-y>
       <template v-slot:activator="{ on }">
-        <v-btn icon  v-on="on">
+        <v-btn icon v-on="on">
           <v-icon>list</v-icon>
         </v-btn>
         <v-toolbar-title :class="titleStyle">Add Sections</v-toolbar-title>
       </template>
       <v-card>
-        <v-list dense
-        >
-          <v-list-item
-            v-for="item in menu"
-            :key="item.title"
-          >
-           <v-list-item-content style="cursor: pointer">
-            <v-list-item-title 
-              active-class="primary darken-2" 
-              class="my-1 mx-1"
-              @click ="showForm(item.title, item.type, item.raw)"
-              > {{ item.title}}
-            </v-list-item-title>
-           </v-list-item-content>
+        <v-list dense>
+          <v-list-item v-for="item in menu" :key="item.title">
+            <v-list-item-content style="cursor: pointer">
+              <v-list-item-title
+                active-class="primary darken-2"
+                class="my-1 mx-1"
+                @click="showForm(item.title, item.type, item.raw)"
+              >
+                {{ item.title }}
+              </v-list-item-title>
+            </v-list-item-content>
           </v-list-item>
         </v-list>
       </v-card>
     </v-menu>
-   </v-toolbar>
+  </v-toolbar>
 </template>
 
 <script>
@@ -69,96 +62,113 @@ import StructureDefinition from "@/mixins/StructureDefinition.js";
 
 export default {
   computed: {
-    smallScreenCompute(){
-      var smallScreen=false;
-      if(this.$vuetify.breakpoint.name == "xs")
-      {
+    smallScreenCompute() {
+      var smallScreen = false;
+      if (this.$vuetify.breakpoint.name == "xs") {
         smallScreen = true;
-      }
-      else{
+      } else {
         smallScreen = false;
       }
       return smallScreen;
     },
-    gridLayout(){
+    gridLayout() {
       var layout = "";
       switch (this.$vuetify.breakpoint.name) {
-        case 'sm': layout = 'xs5';
+        case "sm":
+          layout = "xs5";
           break;
-        case 'md': layout = 'xs6';
+        case "md":
+          layout = "xs6";
           break;
-        case 'lg': layout = 'xs6';
+        case "lg":
+          layout = "xs6";
           break;
-        case 'xl': layout = 'xs6'
+        case "xl":
+          layout = "xs6";
       }
       return layout;
     },
-    titleStyle(){
-      var style="";
-      
+    titleStyle() {
+      var style = "";
+
       switch (this.$vuetify.breakpoint.name) {
-        case 'xs': style='title font-weight-bold white--text';
+        case "xs":
+          style = "title font-weight-bold white--text";
           break;
-        case 'sm': style='title font-weight-bold white--text';
+        case "sm":
+          style = "title font-weight-bold white--text";
           break;
-        case 'md': style='display-1 font-weight-bold white--text';
+        case "md":
+          style = "display-1 font-weight-bold white--text";
           break;
-        case 'lg': style='display-1 font-weight-bold white--text';
+        case "lg":
+          style = "display-1 font-weight-bold white--text";
           break;
-        case 'xl': style='display-1 font-weight-bold white--text';
+        case "xl":
+          style = "display-1 font-weight-bold white--text";
           break;
       }
       return style;
     },
-    itemIconStyle(){
-      var itemIconStyle="";
+    itemIconStyle() {
+      var itemIconStyle = "";
       switch (this.$vuetify.breakpoint.name) {
-      case 'xs': itemIconStyle='m-0';
-        break;
-      case 'sm': itemIconStyle='m-0';
-        break;
-    }
-    return itemIconStyle;
+        case "xs":
+          itemIconStyle = "m-0";
+          break;
+        case "sm":
+          itemIconStyle = "m-0";
+          break;
+      }
+      return itemIconStyle;
     },
-    layoutCardText(){
-      var layout="";
+    layoutCardText() {
+      var layout = "";
       switch (this.$vuetify.breakpoint.name) {
-      case 'xs': layout='pl-0 pr-0';
-        break;
-      case 'sm': layout='pl-0 pr-0';
-        break;
-    }
-    return layout;
+        case "xs":
+          layout = "pl-0 pr-0";
+          break;
+        case "sm":
+          layout = "pl-0 pr-0";
+          break;
+      }
+      return layout;
     },
-    layoutListItem(){
-      var layout="";
+    layoutListItem() {
+      var layout = "";
       switch (this.$vuetify.breakpoint.name) {
-      case 'xs': layout='pb-0 ma-0';
-        break;
-      case 'sm': layout='pb-0 ma-0';
-        break;
-    }
-    return layout;
+        case "xs":
+          layout = "pb-0 ma-0";
+          break;
+        case "sm":
+          layout = "pb-0 ma-0";
+          break;
+      }
+      return layout;
     },
-    layoutList(){
-      var layout="primary darken-1 white--text ml-0";
+    layoutList() {
+      var layout = "primary darken-1 white--text ml-0";
       switch (this.$vuetify.breakpoint.name) {
-      case 'xs': layout='pb-0 pt-0 primary darken-1 white--text ml-0';
-        break;
-      case 'sm': layout='pb-0 pt-0 primary darken-1 white--text ml-0';
-        break;
-    }
-    return layout;
+        case "xs":
+          layout = "pb-0 pt-0 primary darken-1 white--text ml-0";
+          break;
+        case "sm":
+          layout = "pb-0 pt-0 primary darken-1 white--text ml-0";
+          break;
+      }
+      return layout;
     },
-    layoutListItemIcon(){
-      var layout="";
+    layoutListItemIcon() {
+      var layout = "";
       switch (this.$vuetify.breakpoint.name) {
-      case 'xs': layout='mr-0 ml-0';
-        break;
-      case 'sm': layout='mr-0 ml-0';
-        break;
-    }
-    return layout;
+        case "xs":
+          layout = "mr-0 ml-0";
+          break;
+        case "sm":
+          layout = "mr-0 ml-0";
+          break;
+      }
+      return layout;
     },
     menu() {
       let menu = {};
@@ -226,9 +236,7 @@ export default {
     }
   },
   created() {
-    
     this.sections = [];
-    
 
     this.getSections().then(fields => {
       fields.forEach(field => {
@@ -265,8 +273,7 @@ export default {
     return {
       fields: [],
       sections: [],
-      smallScreen:false
-
+      smallScreen: false
     };
   },
   mixins: [Practitioner, StructureDefinition],

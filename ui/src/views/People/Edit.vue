@@ -1,17 +1,17 @@
 <template>
-
   <v-container>
-      <ProfileHeader
-        :practitioner="practitioner"
-        :edit="true"
-        :screenSize="screenSize"
-        ref="profileHeader"
-        v-on:changePractitioner="changePractitioner"
-      />
-    <AddSectionsMenu v-if="smallScreen"
-          v-on:toggleForm="toggleForm"
-          :data="this.practitioner"
-        />
+    <ProfileHeader
+      :practitioner="practitioner"
+      :edit="true"
+      :screenSize="screenSize"
+      ref="profileHeader"
+      v-on:changePractitioner="changePractitioner"
+    />
+    <AddSectionsMenu
+      v-if="smallScreen"
+      v-on:toggleForm="toggleForm"
+      :data="this.practitioner"
+    />
     <v-layout>
       <v-flex :class="applyGridLayout">
         <div v-for="(element, index) in display" v-bind:key="'edit-' + index">
@@ -43,11 +43,12 @@
           </v-card-text>
         </v-card>
       </v-flex>
-      
-      <AddSectionsMenu v-if="!smallScreen"
-          v-on:toggleForm="toggleForm"
-          :data="this.practitioner"
-        />
+
+      <AddSectionsMenu
+        v-if="!smallScreen"
+        v-on:toggleForm="toggleForm"
+        :data="this.practitioner"
+      />
     </v-layout>
   </v-container>
 </template>
@@ -67,15 +68,14 @@ import Vue from "vue";
 import MobileLayout from "@/mixins/MobileLayout.js";
 
 export default {
-  created(){
+  created() {
     this.screenSize = this.$vuetify.breakpoint.name;
   },
-  computed:{
-    applyGridLayout(){
+  computed: {
+    applyGridLayout() {
       return this.gridLayoutShowRecord(this.$vuetify.breakpoint.name);
     },
-    smallScreen()
-    {
+    smallScreen() {
       return this.smallScreenCompute(this.$vuetify.breakpoint.name);
     }
   },
@@ -442,7 +442,7 @@ export default {
       this.$refs.detailsForm.changeFields(fields);
     }
   },
-  mixins: [Capitalize, SectionsToDisplay, StructureDefinition,MobileLayout],
+  mixins: [Capitalize, SectionsToDisplay, StructureDefinition, MobileLayout],
   name: "AddSections"
 };
 </script>

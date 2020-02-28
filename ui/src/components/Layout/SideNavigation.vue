@@ -1,25 +1,18 @@
-<template 
->
+<template>
   <v-navigation-drawer
     v-model="drawer"
     app
     clipped
     class="primary darken-1 text-uppercase white--text font-weight-bold"
-    
     :mini-variant.sync="mini"
     permanent
-    
   >
-  <v-btn v-if="smallScreenSize"
-    icon
-    @click.stop="mini = !mini"
-    ><v-icon  class="white--text">{{chevronIcon}}</v-icon>
-  </v-btn>
+    <v-btn v-if="smallScreenSize" icon @click.stop="mini = !mini"
+      ><v-icon class="white--text">{{ chevronIcon }}</v-icon>
+    </v-btn>
     <v-list nav v-for="item in menu" :key="item.title">
-
       <v-list-group v-if="item.submenu.length" no-action class="white--text">
         <template v-slot:activator>
-          
           <v-list-item-icon>
             <v-icon class="white--text">{{ item.icon }}</v-icon>
           </v-list-item-icon>
@@ -62,42 +55,24 @@
 </template>
 
 <script>
-
 export default {
-  computed:{
-    chevronIcon()
-    {
-      if(this.mini)
-      {
-        return "mdi-chevron-left"
-      }
-      else
-      {
-        return "mdi-chevron-right"
+  computed: {
+    chevronIcon() {
+      if (this.hasSmallScreenSize()) {
+        return "mdi-chevron-left";
+      } else {
+        return "mdi-chevron-right";
       }
     },
-    smallScreenSize(){ 
-      var smallScreen=false;
-      switch (this.screenSize) {
-        case 'xs': 
-          smallScreen = true;
-          this.mini=true;
-          break;
-        case 'sm':
-          smallScreen = true;
-          this.mini=true;
-          break;
-        default:
-          smallScreen = false;
-      } 
-      return smallScreen;
+    mini() {
+      return this.hasSmallScreenSize();
+    },
+    smallScreenSize() {
+      return this.hasSmallScreenSize();
     }
-
   },
   created() {
-  
-     this.screenSize = this.$vuetify.breakpoint.name;
-
+    this.screenSize = this.$vuetify.breakpoint.name;
   },
   data: function() {
     const config = require("@/config/config.json");
@@ -121,8 +96,7 @@ export default {
     });
 
     return {
-      drawer:true,
-      mini: false,
+      drawer: true,
       screenSize: "",
       menu: [
         {
@@ -139,6 +113,11 @@ export default {
         }
       ]
     };
+  },
+  methods: {
+    hasSmallScreenSize() {
+      return this.screenSize === "sm" || this.screenSize === "xs";
+    }
   }
 };
 </script>
