@@ -113,7 +113,7 @@ export default {
       let practitionerRole = data.practitionerrole;
       delete data.practitionerrole;
 
-      data = {...data, ...practitionerRole};
+      data = { ...data, ...practitionerRole };
 
       axios
         .post(this.config.backend + "/practitioner/add/work-history", data)
