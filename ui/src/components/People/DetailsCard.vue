@@ -78,7 +78,7 @@
                   <td :width="headerWidth" class="font-weight-bold">
                     {{ fieldIndex | sentenceCase }}
                   </td>
-                  <td>{{ sanitized | separateByCommas }} 1</td>
+                  <td>{{ sanitized | separateByCommas }}</td>
                 </tr>
               </tbody>
             </v-simple-table>
@@ -95,7 +95,7 @@
                 v-for="(sanitized, index) in value"
                 v-bind:key="index"
               >
-                {{ sanitized | separateByCommas }} 2
+                {{ sanitized | separateByCommas }}
               </v-flex>
             </v-layout>
 
@@ -111,7 +111,7 @@
               <td :width="headerWidth" class="font-weight-bold">
                 {{ this.name | sentenceCase }}
               </td>
-              <td>{{ sanitized }} 3</td>
+              <td>{{ sanitized }}</td>
             </tr>
           </tbody>
         </v-simple-table>
@@ -124,7 +124,7 @@
               <td :width="headerWidth" class="font-weight-bold">
                 {{ name | sentenceCase }}
               </td>
-              <td>{{ value }} 4</td>
+              <td>{{ value }}</td>
             </tr>
           </tbody>
         </v-simple-table>
