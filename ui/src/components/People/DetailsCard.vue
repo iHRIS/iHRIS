@@ -1,13 +1,15 @@
 <template>
   <v-card class="mb-5">
     <v-card-title
-      class="display-1 SectionTitle"
+      :class="applyDetailCardTitleStyle"
+      class="SectionTitle"
       @click="toggleSectionDetailDisplay"
     >
       {{ this.name | sentenceCase }}
       <v-spacer />
       <v-btn
         fab
+        :class="applyDetailCardBtnSize"
         class="primary"
         @click.stop="
           editing = true;
@@ -17,9 +19,10 @@
         v-if="!Array.isArray(data)"
         v-on:click="toggleForm(name)"
       >
-        <v-icon>edit</v-icon>
+        <v-icon >edit</v-icon>
       </v-btn>
       <v-btn
+      :class="applyDetailCardBtnSize"
         fab
         class="error"
         v-show="editButton && edit"
@@ -44,6 +47,7 @@
               <v-spacer />
 
               <v-btn
+                :class="applyDetailCardBtnSize"
                 fab
                 class="primary"
                 v-show="editButton && edit"
@@ -54,6 +58,7 @@
               </v-btn>
 
               <v-btn
+                :class="applyDetailCardBtnSize"
                 fab
                 class="error"
                 v-show="editButton && edit"
@@ -166,8 +171,20 @@ import _ from "lodash";
 import DynamicForm from "@/components/Form/DynamicForm.vue";
 import Practitioner from "@/mixins/Practitioner.js";
 import StructureDefinition from "@/mixins/StructureDefinition.js";
+import MobileLayout from "@/mixins/MobileLayout.js";
 
 export default {
+  computed:{
+    applyDetailCardTitleStyle()
+    {
+      return this.detailCardTitleStyle(this.screenSize);
+    },
+    applyDetailCardBtnSize()
+    {
+      var btnSize=this.detailCardBtnSize(this.screenSize);
+      return btnSize;
+    }
+    },
   asyncComputed: {
     async sanitized() {
       let sanitized = [];
@@ -463,7 +480,7 @@ export default {
 
 
   },
-  mixins: [Practitioner, StructureDefinition],
+  mixins: [Practitioner, StructureDefinition,MobileLayout],
   props: {
     data: {},
     edit: {
@@ -475,6 +492,10 @@ export default {
       type: String
     },
     validationRules:{},
+    screenSize: {
+      default: null,
+      type: String
+    }
   }
 };
 </script>

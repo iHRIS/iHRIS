@@ -3,7 +3,10 @@
     <v-alert v-model="alert" dismissable type="error">
         {{ error }}
     </v-alert>
-    <ProfileHeader :practitioner="practitioner" />
+    <ProfileHeader 
+    :practitioner="practitioner"
+    :screenSize="screenSize" 
+    />
 
     <v-layout wrap >
       <v-col md="6">
@@ -12,7 +15,9 @@
             :data="element"
             :name="index"
             :ref="'subsection-' + index"
+            :screenSize="screenSize"
             v-if="counter % 2 == 0"
+           
           />
         </v-flex>
       </v-col>
@@ -21,8 +26,10 @@
           <DetailsCard
             :data="element"
             :name="index"
+            :screenSize="screenSize"
             :ref="'subsection-' + index"
             v-if="counter % 2 == 1"
+           
           />
         </v-flex>
       </v-col>
@@ -37,8 +44,12 @@ import SectionsToDisplay from "@/mixins/SectionsToDisplay.js";
 import { store } from "@/store.js";
 
 export default {
-  data() {
-    return {
+  created(){
+    this.screenSize = this.$vuetify.breakpoint.name;
+  },
+  data(){
+    return{
+      screenSize: "",
       alert: false,
       error: ""
     }

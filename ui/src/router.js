@@ -4,6 +4,7 @@ import { store } from "./store.js";
 import {serverBus} from "./main.js";
 
 Vue.use(Router);
+var drawerStautus=true;
 
 var vueInstance=new Vue(
 {

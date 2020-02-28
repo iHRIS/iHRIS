@@ -3,15 +3,33 @@
   <v-alert v-model="alert" dismissable type="error">
         {{ error }}
   </v-alert>
-    <v-layout row wrap class="pb-5" >
-      <v-flex xs6 class="display-2 text-xs-left">
+    <v-layout row wrap class="pb-5">
+      <v-flex :class="applyTitleStyle">
         Search People
       </v-flex>
     </v-layout>
-    <v-layout wrap >
-      <v-flex xs9>
+    <v-layout row wrap class="pb-5" v-if="checkIfSmallScreen">
+      <v-flex :class="applyGridLayout">
         <v-card>
-          <v-card-title class="display-1">Results</v-card-title>
+          <v-card-title :class="applyCardTitleStyle">Search</v-card-title>
+          <v-card-text>
+            <Alert ref="searchAlert" />
+            <DynamicForm
+              :fields="this.fields"
+              cancelLabel="clear"
+              ref="searchForm"
+              v-on:cancel="clearResults"
+              v-on:failedSubmit="showError"
+              v-on:successfulSubmit="search"
+            />
+          </v-card-text>
+        </v-card>
+      </v-flex>
+    </v-layout>
+    <v-layout wrap>
+      <v-flex :class="applyGridLayoutResult">
+        <v-card>
+          <v-card-title :class="applyCardTitleStyle">Results</v-card-title>
           <v-card-text>
             <v-data-table
               :headers="headers"
@@ -37,7 +55,7 @@
           </v-card-text>
         </v-card>
       </v-flex>
-      <v-flex xs3>
+      <v-flex xs3 v-if="!checkIfSmallScreen">
         <v-card>
           <v-card-title class="display-1">Search</v-card-title>
           <v-card-text>
@@ -62,8 +80,28 @@ import axios from "axios";
 
 import Alert from "@/components/Layout/Alert.vue";
 import DynamicForm from "@/components/Form/DynamicForm.vue";
-
+import MobileLayout from "@/mixins/MobileLayout.js";
 export default {
+  mixins: [MobileLayout],
+  computed:{
+    applyTitleStyle(){
+      return this.titleStyleSearchPeople(this.$vuetify.breakpoint.name);
+    },
+    checkIfSmallScreen()
+    {
+      return this.smallScreenSearchCompute(this.$vuetify.breakpoint.name);
+    },
+    applyCardTitleStyle()
+    {
+      return this.cardTitleStyle(this.$vuetify.breakpoint.name);
+    },
+    applyGridLayout(){
+      return this.gridLayoutSearchResult(this.$vuetify.breakpoint.name);
+    },
+    applyGridLayoutResult(){
+      return this.gridLayoutShowResult(this.$vuetify.breakpoint.name);
+    }
+  },
   created() {
     this.config = require("@/config/config.json");
   },

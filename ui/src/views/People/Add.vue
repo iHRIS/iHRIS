@@ -3,9 +3,9 @@
     <v-alert v-model="alert" dismissable type="error">
         {{ error }}
     </v-alert>
-      <v-flex xs6 offset-xs3 >
-      <h1>Add a Person</h1>
-      <p>
+    <v-flex :class="applyGridLayout" >
+      <div :class="applyTitleStyle">Add a Person</div>
+      <p :style="{'font-size':applyFontSizeParagraph}">
         To track a person in the database, whether an employee or a job
         applicant, add a record for that person. Certain information is required
         to start a new record. Once the record is generated, additional options
@@ -30,10 +30,23 @@
 import axios from "axios";
 import DynamicForm from "@/components/Form/DynamicForm.vue";
 import { store } from "@/store.js";
+import MobileLayout from "@/mixins/MobileLayout.js";
 
 export default {
-  
+  mixins: [MobileLayout],
+  computed:{
+    applyFontSizeParagraph(){
+      return this.fontSizeParagraph(this.$vuetify.breakpoint.name);
+    },
+    applyGridLayout(){
+      return this.gridLayoutAddRecord(this.$vuetify.breakpoint.name);
+    },
+    applyTitleStyle(){
+      return this.titleStyle(this.$vuetify.breakpoint.name);
+    }
+  },
   created() {
+    this.screenSize=this.$vuetify.breakpoint.name;
     this.config = require("@/config/config.json");
     
       NProgress.start();
@@ -213,7 +226,8 @@ export default {
       practitioner: {},
       results: {},
       rules: [v => !!v || "Required field"],
-      surname: ""
+      surname: "",
+      screenSize:""
     };
   },
   methods: {
