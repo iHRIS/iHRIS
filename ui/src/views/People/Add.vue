@@ -1,8 +1,8 @@
 <template>
   <v-container>
-    <v-flex :class="applyGridLayout" >
+    <v-flex :class="applyGridLayout">
       <div :class="applyTitleStyle">Add a Person</div>
-      <p :style="{'font-size':applyFontSizeParagraph}">
+      <p :style="{ 'font-size': applyFontSizeParagraph }">
         To track a person in the database, whether an employee or a job
         applicant, add a record for that person. Certain information is required
         to start a new record. Once the record is generated, additional options
@@ -34,19 +34,19 @@ import MobileLayout from "@/mixins/MobileLayout.js";
 
 export default {
   mixins: [MobileLayout],
-  computed:{
-    applyFontSizeParagraph(){
+  computed: {
+    applyFontSizeParagraph() {
       return this.fontSizeParagraph(this.$vuetify.breakpoint.name);
     },
-    applyGridLayout(){
+    applyGridLayout() {
       return this.gridLayoutAddRecord(this.$vuetify.breakpoint.name);
     },
-    applyTitleStyle(){
+    applyTitleStyle() {
       return this.titleStyle(this.$vuetify.breakpoint.name);
     }
   },
   created() {
-    this.screenSize=this.$vuetify.breakpoint.name;
+    this.screenSize = this.$vuetify.breakpoint.name;
     this.config = require("@/config/config.json");
     axios
       .get(this.config.backend + "/practitioner/describe/page")
@@ -222,7 +222,7 @@ export default {
       results: {},
       rules: [v => !!v || "Required field"],
       surname: "",
-      screenSize:""
+      screenSize: ""
     };
   },
   methods: {

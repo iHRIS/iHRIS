@@ -80,22 +80,20 @@ import DynamicForm from "@/components/Form/DynamicForm.vue";
 import MobileLayout from "@/mixins/MobileLayout.js";
 export default {
   mixins: [MobileLayout],
-  computed:{
-    applyTitleStyle(){
+  computed: {
+    applyTitleStyle() {
       return this.titleStyleSearchPeople(this.$vuetify.breakpoint.name);
     },
-    checkIfSmallScreen()
-    {
+    checkIfSmallScreen() {
       return this.smallScreenSearchCompute(this.$vuetify.breakpoint.name);
     },
-    applyCardTitleStyle()
-    {
+    applyCardTitleStyle() {
       return this.cardTitleStyle(this.$vuetify.breakpoint.name);
     },
-    applyGridLayout(){
+    applyGridLayout() {
       return this.gridLayoutSearchResult(this.$vuetify.breakpoint.name);
     },
-    applyGridLayoutResult(){
+    applyGridLayoutResult() {
       return this.gridLayoutShowResult(this.$vuetify.breakpoint.name);
     }
   },

@@ -19,10 +19,10 @@
         v-if="!Array.isArray(data)"
         v-on:click="toggleForm(name)"
       >
-        <v-icon >edit</v-icon>
+        <v-icon>edit</v-icon>
       </v-btn>
       <v-btn
-      :class="applyDetailCardBtnSize"
+        :class="applyDetailCardBtnSize"
         fab
         class="error"
         v-show="editButton && edit"
@@ -173,17 +173,15 @@ import StructureDefinition from "@/mixins/StructureDefinition.js";
 import MobileLayout from "@/mixins/MobileLayout.js";
 
 export default {
-  computed:{
-    applyDetailCardTitleStyle()
-    {
+  computed: {
+    applyDetailCardTitleStyle() {
       return this.detailCardTitleStyle(this.screenSize);
     },
-    applyDetailCardBtnSize()
-    {
-      var btnSize=this.detailCardBtnSize(this.screenSize);
+    applyDetailCardBtnSize() {
+      var btnSize = this.detailCardBtnSize(this.screenSize);
       return btnSize;
     }
-    },
+  },
   asyncComputed: {
     async sanitized() {
       let sanitized = [];
@@ -473,7 +471,7 @@ export default {
       this.showSectionDetail = !this.showSectionDetail;
     }
   },
-  mixins: [Practitioner, StructureDefinition,MobileLayout],
+  mixins: [Practitioner, StructureDefinition, MobileLayout],
   props: {
     data: {},
     edit: {

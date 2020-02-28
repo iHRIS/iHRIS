@@ -1,13 +1,14 @@
 <template>
   <v-layout row wrap class="pb-5">
     <v-flex :class="applyProfileHeaderGridLayout" v-if="practitioner.photo">
-      <v-img  :src="getProfilePicture()" 
+      <v-img
+        :src="getProfilePicture()"
         contain
         :min-width="applyMinProfilePictureWidth"
-       />
+      />
     </v-flex>
-   
-    <v-flex :class="applyGridProfileHeaderEditRecord"  v-if="practitioner.name" >
+
+    <v-flex :class="applyGridProfileHeaderEditRecord" v-if="practitioner.name">
       <v-row :class="applyGridLayoutTitle">{{ name }}</v-row>
       <v-row :class="applyGridLayoutTitle">
         {{ position }}<span v-if="position && location">,</span> {{ location }}
@@ -66,18 +67,16 @@ export default {
     Alert
   },
   computed: {
-    applyGridLayoutTitle(){
+    applyGridLayoutTitle() {
       return this.gridLayoutTitle(this.screenSize);
     },
-    applyMinProfilePictureWidth()
-    {
-        return this.minProfilePictureWidth(this.screenSize);
+    applyMinProfilePictureWidth() {
+      return this.minProfilePictureWidth(this.screenSize);
     },
-    applyProfileHeaderGridLayout()
-    {
-        return this.profileHeaderGridLayout(this.screenSize);
+    applyProfileHeaderGridLayout() {
+      return this.profileHeaderGridLayout(this.screenSize);
     },
-    applyGridProfileHeaderEditRecord(){
+    applyGridProfileHeaderEditRecord() {
       return this.gridProfileHeaderEditRecord(this.screenSize);
     },
     active() {
@@ -193,6 +192,6 @@ export default {
       this.$refs.alert.reset();
     }
   },
-  props: ["edit", "practitioner","screenSize"]
+  props: ["edit", "practitioner", "screenSize"]
 };
 </script>

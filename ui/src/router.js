@@ -1,26 +1,9 @@
 import Vue from "vue";
 import Router from "vue-router";
 import { store } from "./store.js";
-import {serverBus} from "./main.js";
 
 Vue.use(Router);
-var drawerStautus=true;
 
-var vueInstance=new Vue(
-  {
-    props:{
-      error:String
-    },
-    methods:{
-      displayError(msg){
-        this.$nextTick(() => { 
-          this.error=msg;
-          serverBus.$emit("errorGenerated",this.error);
-        });
-      }
-
-    }
-  });
 let router = new Router({
   mode: "history",
   base: process.env.BASE_URL,
