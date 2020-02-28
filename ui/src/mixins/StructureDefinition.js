@@ -37,6 +37,7 @@ export default {
   methods: {
     describe(structureDefinition, parentDefinition, title) {
       let url = "/practitioner/describe/definition/";
+      console.log("Getting " + structureDefinition);
 
       if (!structureDefinition) {
         return;
@@ -287,6 +288,7 @@ export default {
           if (definition === "iHRISPractitionerRole") {
             delete fields.fields["PractitionerRole.practitioner"];
           }
+          console.log(fields.fields);
 
           this.$emit("toggleForm", fields.fields, title, data);
           return fields.fields;
