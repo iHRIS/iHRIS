@@ -93,7 +93,8 @@ export default {
       detailPath: null,
       detailRaw: null,
       detailTitle: null,
-      screenSize: ""
+      screenSize: "",
+      structureDefinition: null
     };
   },
   methods: {
@@ -259,7 +260,7 @@ export default {
 
       return data;
     },
-    saveSubsectionData(data, names, index, profile) {
+    saveSubsectionData(data, names, index, profile, structureDefinition) {
       let field = names.key;
 
       if (field === "workHistory") {
@@ -269,9 +270,15 @@ export default {
       let practitioner = this.practitioner;
 
       for (var j in data) {
-        if (j.startsWith(field + ".")) {
-          // only if it starts with this.detailPath
-          data[j.slice(field.length + 1)] = data[j];
+        if (
+          j.toLowerCase().startsWith(structureDefinition.toLowerCase() + ".")
+        ) {
+          data[
+            j
+              .toLowerCase()
+              .slice(structureDefinition.length + 1)
+              .toLowerCase()
+          ] = data[j];
           delete data[j];
         }
       }
@@ -388,9 +395,17 @@ export default {
         Vue.set(practitioner, "extension", extension);
       } else if (this.detailPath) {
         for (var j in input) {
-          if (j.startsWith(this.detailPath + ".")) {
-            // only if it starts with this.detailPath
-            input[j.slice(this.detailPath.length + 1)] = input[j];
+          if (
+            j
+              .toLowerCase()
+              .startsWith(this.structureDefinition.toLowerCase() + ".")
+          ) {
+            input[
+              j
+                .toLowerCase()
+                .slice(this.structureDefinition.length + 1)
+                .toLowerCase()
+            ] = input[j];
             delete input[j];
           }
         }
@@ -444,12 +459,20 @@ export default {
         }
       }
 
+      let structureDefinition = null;
+
+      for (var i in fields) {
+        structureDefinition = i.substring(0, i.indexOf("."));
+        break;
+      }
+
       this.details = true;
       this.detailFields = fields;
       this.detailPath = null;
       this.detailTitle = title;
       this.detailRaw = data;
       this.extensionProfile = null;
+      this.structureDefinition = structureDefinition;
 
       if (data && data.path) {
         this.detailPath = data.path.replace("Practitioner.", "");
