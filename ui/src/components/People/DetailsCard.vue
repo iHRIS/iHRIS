@@ -457,7 +457,9 @@ export default {
             fields[key].labelOverride = this.name;
           }
 
-          if (this.data[key]) {
+          if (!Array.isArray(this.data)) {
+            fields[key].value = this.data;
+          } else if (this.data[key]) {
             fields[key].value = this.data[key];
           } else {
             let cleanKey = key.substring(key.lastIndexOf(".") + 1);
