@@ -268,6 +268,14 @@ export default {
 
       let practitioner = this.practitioner;
 
+      for (var j in data) {
+        if (j.startsWith(field + ".")) {
+          // only if it starts with this.detailPath
+          data[j.slice(field.length + 1)] = data[j];
+          delete data[j];
+        }
+      }
+
       // this is necessary for subsections that can have multiple entries
       if (index >= 0) {
         Vue.set(practitioner[field], index, this.flatten(data));
