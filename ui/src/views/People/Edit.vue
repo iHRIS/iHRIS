@@ -378,6 +378,7 @@ export default {
 
         for (var fieldKey in this.detailFields) {
           let field = this.detailFields[fieldKey];
+
           valueString = "value" + this.capitalize(field.parentType);
 
           if (this.primitiveTypes.indexOf(field.parentType) >= 0) {
@@ -386,7 +387,17 @@ export default {
               break;
             }
           } else {
-            newExtension[valueString] = input;
+            //newExtension[valueString] = input;
+            for (var k in input) {
+              newExtension[valueString] = {};
+
+              if (k.indexOf(".") >= 0) {
+                newExtension[valueString][k.substring(k.lastIndexOf(".") + 1)] =
+                  input[k];
+              } else {
+                newExtension[valueString][k] = input[k];
+              }
+            }
           }
         }
 
