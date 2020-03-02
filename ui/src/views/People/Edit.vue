@@ -379,6 +379,14 @@ export default {
 
         Vue.set(practitioner, "extension", extension);
       } else if (this.detailPath) {
+        for (var j in input) {
+          if (j.startsWith(this.detailPath + ".")) {
+            // only if it starts with this.detailPath
+            input[j.slice(this.detailPath.length + 1)] = input[j];
+            delete input[j];
+          }
+        }
+
         if (!practitioner[this.detailPath]) {
           Vue.set(this.practitioner, this.detailPath, [input]);
         }
