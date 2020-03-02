@@ -368,6 +368,7 @@ export default {
       profile: null,
       showMultiple: true,
       showSectionDetail: true,
+      structureDefinition: null,
       subheader: null
     };
   },
@@ -398,6 +399,7 @@ export default {
 
       for (var i in fields) {
         fields[i].value = null;
+        this.structureDefinition = i.substring(0, i.indexOf("."));
       }
 
       this.$refs.dynamicEditingForm.changeFields(fields);
@@ -430,13 +432,24 @@ export default {
         inputs = inputs[name];
       }
 
-      this.$emit("saveData", inputs, names, this.currentIndex, this.profile);
+      this.$emit(
+        "saveData",
+        inputs,
+        names,
+        this.currentIndex,
+        this.profile,
+        this.structureDefinition
+      );
 
       this.cancel();
     },
     toggleForm(index) {
       let fields = this.fields;
       let key = null;
+
+      for (var i in fields) {
+        this.structureDefinition = i.substring(0, i.indexOf("."));
+      }
 
       if (Object.keys(fields).length === 1) {
         for (key in fields) {
