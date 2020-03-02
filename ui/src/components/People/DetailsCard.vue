@@ -459,6 +459,13 @@ export default {
 
           if (key.indexOf(".") > 1) {
             value = _.get(this.data[index], field.title.slice("."));
+
+            // if no value is set, it might be a multiarray so we need to tweak title a bit
+            if (value === undefined) {
+              let title = key.toLowerCase().split(".");
+              title.splice(1, 0, 0);
+              value = _.get(this.data[index], title);
+            }
           } else {
             value = this.data[index][field.title];
           }
