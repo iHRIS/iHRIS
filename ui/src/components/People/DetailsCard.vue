@@ -447,9 +447,6 @@ export default {
       let fields = this.fields;
       let key = null;
 
-      console.log(fields);
-      console.log(this.data);
-
       for (var i in fields) {
         this.structureDefinition = i.substring(0, i.indexOf("."));
       }
