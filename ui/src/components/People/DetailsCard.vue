@@ -32,6 +32,13 @@
         <v-icon>delete</v-icon>
       </v-btn>
     </v-card-title>
+
+    <v-card-text>
+      <v-alert v-model="alert.show" dismissable :type="alert.type">
+        {{ alert.message }}
+      </v-alert>
+    </v-card-text>
+
     <transition name="fade">
       <v-card-text
         v-if="Array.isArray(sanitized)"
@@ -146,10 +153,6 @@
     </v-card-text>
 
     <v-card-text v-show="editing">
-      <v-alert v-model="alert.show" dismissable :type="alert.type">
-        {{ alert.message }}
-      </v-alert>
-
       <DynamicForm
         :fields="this.fields"
         :name="this.name"
