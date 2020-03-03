@@ -265,11 +265,10 @@ export default {
         case "xl":
           size = "";
       }
-      //console.log("computed size :"+size);
+
       return size;
     },
     minProfilePictureWidth(screenSize) {
-      console.log();
       var size = "";
       if (screenSize == "xs") {
         size = "80";
