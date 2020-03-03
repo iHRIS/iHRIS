@@ -4,7 +4,12 @@
     app
     clipped
     class="primary darken-1 text-uppercase white--text font-weight-bold"
+    :mini-variant.sync="mini"
+    permanent
   >
+    <v-btn v-if="smallScreenSize" icon @click.stop="mini = !mini"
+      ><v-icon class="white--text">{{ chevronIcon }}</v-icon>
+    </v-btn>
     <v-list nav v-for="item in menu" :key="item.title">
       <v-list-group v-if="item.submenu.length" no-action class="white--text">
         <template v-slot:activator>
@@ -50,13 +55,24 @@
 </template>
 
 <script>
-import { serverBus } from "../../main";
-
 export default {
+  computed: {
+    chevronIcon() {
+      if (this.hasSmallScreenSize()) {
+        return "mdi-chevron-left";
+      } else {
+        return "mdi-chevron-right";
+      }
+    },
+    mini() {
+      return this.hasSmallScreenSize();
+    },
+    smallScreenSize() {
+      return this.hasSmallScreenSize();
+    }
+  },
   created() {
-    serverBus.$on("toggleDrawer", drawer => {
-      this.drawer = drawer;
-    });
+    this.screenSize = this.$vuetify.breakpoint.name;
   },
   data: function() {
     const config = require("@/config/config.json");
@@ -81,6 +97,7 @@ export default {
 
     return {
       drawer: true,
+      screenSize: "",
       menu: [
         {
           action: { name: "home" },
@@ -96,6 +113,11 @@ export default {
         }
       ]
     };
+  },
+  methods: {
+    hasSmallScreenSize() {
+      return this.screenSize === "sm" || this.screenSize === "xs";
+    }
   }
 };
 </script>

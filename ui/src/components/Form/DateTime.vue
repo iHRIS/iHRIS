@@ -7,6 +7,7 @@
     :required="required"
     :rules="[rules.datetime, rules.required]"
     :hint="hint"
+    :value="value"
   ></v-text-field>
   <v-combobox
     v-else
@@ -21,6 +22,7 @@
     :required="required"
     outline
     :hint="hint"
+    :value="value"
   ></v-combobox>
 </template>
 

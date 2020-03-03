@@ -57,7 +57,7 @@
         :required="field.required"
         :ref="field.name"
         :hint="field.short"
-        :datetime="field.value"
+        :value="field.value"
       />
 
       <Decimal
@@ -238,6 +238,7 @@ import Password from "@/components/Form/Password.vue";
 import PositiveInt from "@/components/Form/PositiveInt.vue";
 import Reference from "@/components/Form/Reference.vue";
 import String from "@/components/Form/String.vue";
+import StructureDefinition from "@/mixins/StructureDefinition.js";
 import Time from "@/components/Form/Time.vue";
 import UnsignedInt from "@/components/Form/UnsignedInt.vue";
 import Uri from "@/components/Form/Uri.vue";
@@ -302,7 +303,7 @@ export default {
 
       if (fields) {
         for (var key in fields) {
-          inputs.push(fields[key].name);
+          inputs.push(fields[key]);
 
           if (fields[key].labelOverride) {
             fields[key].label = fields[key].labelOverride;
@@ -341,9 +342,22 @@ export default {
     getInputs() {
       let inputs = {};
 
-      for (let i of this.inputs) {
-        if (this.$refs[i]) {
-          inputs[i] = this.$refs[i][0].getInput();
+      for (var field of this.inputs) {
+        let key = null;
+        let name = field.name;
+
+        if (
+          this.primitiveTypes.indexOf(field.parentType) < 0 &&
+          field.parentType !== null &&
+          field.parentType !== undefined
+        ) {
+          key = field.id.toLowerCase();
+        } else {
+          key = field.name;
+        }
+
+        if (this.$refs[name]) {
+          inputs[key] = this.$refs[name][0].getInput();
         }
       }
 
@@ -376,7 +390,7 @@ export default {
       default: "Submit"
     }
   },
-  mixins: [Capitalize]
+  mixins: [Capitalize, StructureDefinition]
 };
 </script>
 <style>

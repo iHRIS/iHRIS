@@ -3,17 +3,23 @@
     <ProfileHeader
       :practitioner="practitioner"
       :edit="true"
+      :screenSize="screenSize"
       ref="profileHeader"
       v-on:changePractitioner="changePractitioner"
     />
-
+    <AddSectionsMenu
+      v-if="smallScreen"
+      v-on:toggleForm="toggleForm"
+      :data="this.practitioner"
+    />
     <v-layout>
-      <v-flex xs6 class="pr-3">
+      <v-flex :class="applyGridLayout">
         <div v-for="(element, index) in display" v-bind:key="'edit-' + index">
           <DetailsCard
             v-if="index != 'id' && index != 'resourceType' && index != 'active'"
             :data="element"
             :name="index"
+            :screenSize="screenSize"
             v-on:saveData="saveSubsectionData"
             v-on:deleteData="deleteSubsectionData"
             edit
@@ -37,12 +43,12 @@
           </v-card-text>
         </v-card>
       </v-flex>
-      <v-flex xs6 class="pl-3">
-        <AddSectionsMenu
-          v-on:toggleForm="toggleForm"
-          :data="this.practitioner"
-        />
-      </v-flex>
+
+      <AddSectionsMenu
+        v-if="!smallScreen"
+        v-on:toggleForm="toggleForm"
+        :data="this.practitioner"
+      />
     </v-layout>
   </v-container>
 </template>
@@ -59,8 +65,20 @@ import ProfileHeader from "@/components/People/ProfileHeader.vue";
 import SectionsToDisplay from "@/mixins/SectionsToDisplay.js";
 import StructureDefinition from "@/mixins/StructureDefinition.js";
 import Vue from "vue";
+import MobileLayout from "@/mixins/MobileLayout.js";
 
 export default {
+  created() {
+    this.screenSize = this.$vuetify.breakpoint.name;
+  },
+  computed: {
+    applyGridLayout() {
+      return this.gridLayoutShowRecord(this.$vuetify.breakpoint.name);
+    },
+    smallScreen() {
+      return this.smallScreenCompute(this.$vuetify.breakpoint.name);
+    }
+  },
   components: {
     AddSectionsMenu,
     DetailsCard,
@@ -74,7 +92,9 @@ export default {
       detailFields: {},
       detailPath: null,
       detailRaw: null,
-      detailTitle: null
+      detailTitle: null,
+      screenSize: "",
+      structureDefinition: null
     };
   },
   methods: {
@@ -83,14 +103,33 @@ export default {
         reference: "Practitioner/" + this.practitioner.id
       };
 
+      for (var i in data) {
+        if (i.indexOf(".") > -1) {
+          _.set(data, i.split("."), data[i]);
+
+          delete data[i];
+        }
+      }
+
+      let practitionerRole = data.practitionerrole;
+      delete data.practitionerrole;
+
+      data = { ...data, ...practitionerRole };
+
       axios
         .post(this.config.backend + "/practitioner/add/work-history", data)
         .then(response => {
           if (!this.practitioner.workHistory) {
-            this.practitioner.workHistory = [];
+            Vue.set(this.practitioner, "workHistory", []);
           }
 
           this.practitioner.workHistory.push(response.data);
+
+          this.cancelDetailsForm();
+          this.$refs.profileHeader.changeMessage(
+            "Work history added successfully!",
+            "success"
+          );
         });
     },
     cancelDetailsForm() {
@@ -103,7 +142,9 @@ export default {
     changePractitioner(practitioner) {
       this.practitioner = practitioner;
     },
-    deleteSubsectionData(field, index, profile) {
+    deleteSubsectionData(names, index, profile) {
+      let field = names.key;
+
       // work history is stored separately
       if (field === "workHistory") {
         return this.deleteWorkHistory(index);
@@ -118,7 +159,7 @@ export default {
           if (extension.url === profile) {
             for (var i in extension) {
               if (i !== "url") {
-                this.practitioner.extension.splice(i, 1);
+                this.practitioner.extension.splice(key, 1);
                 break;
               }
             }
@@ -133,15 +174,17 @@ export default {
       axios
         .post(this.config.backend + "/practitioner/edit", this.practitioner)
         .then(response => {
+          let name = names.name;
+
           if (response.status == 201) {
-            if (this.$refs["subsection" + field][0]) {
-              this.$refs["subsection" + field][0].showAlert(
+            if (this.$refs["subsection" + name][0]) {
+              this.$refs["subsection" + name][0].showAlert(
                 "Item deleted successfully!",
                 "success"
               );
             }
           } else {
-            this.$refs["subsection-" + field][0].showAlert(
+            this.$refs["subsection-" + name][0].showAlert(
               "There was an error deleting this data.",
               "error"
             );
@@ -158,7 +201,7 @@ export default {
         .then(response => {
           if (response.status == 201) {
             if (this.$refs["subsectionworkHistory"][0]) {
-              Vue.delete(this.practitioner.workHistory[index]);
+              this.practitioner.workHistory.splice(index, 1);
 
               if (this.practitioner.workHistory.length === 0) {
                 Vue.delete(this.practitioner.workHistory);
@@ -204,20 +247,49 @@ export default {
           }
         });
     },
-    saveSubsectionData(data, field, index, profile) {
+    flatten(data) {
+      // if a field name has a . in it, we need to store that in a subfield
+      for (var i in data) {
+        if (i.indexOf(".") >= 0) {
+          let swap = data[i];
+          delete data[i];
+
+          _.set(data, i.slice("."), swap);
+        }
+      }
+
+      return data;
+    },
+    saveSubsectionData(data, names, index, profile, structureDefinition) {
+      let field = names.key;
+
       if (field === "workHistory") {
         return this.editWorkHistory(data, index);
       }
 
       let practitioner = this.practitioner;
 
+      for (var j in data) {
+        if (
+          j.toLowerCase().startsWith(structureDefinition.toLowerCase() + ".")
+        ) {
+          data[
+            j
+              .toLowerCase()
+              .slice(structureDefinition.length + 1)
+              .toLowerCase()
+          ] = data[j];
+          delete data[j];
+        }
+      }
+
       // this is necessary for subsections that can have multiple entries
-      if (index && index >= 0) {
-        practitioner[field][index] = data;
+      if (index >= 0) {
+        Vue.set(practitioner[field], index, this.flatten(data));
       } else if (index == -1) {
         // this is a special case where a new entry is being
         // added to a multiple field
-        practitioner[field].push(data);
+        practitioner[field].push(this.flatten(data));
       } else if (profile !== null) {
         for (var key in practitioner.extension) {
           let extension = practitioner.extension[key];
@@ -225,7 +297,12 @@ export default {
           if (extension.url === profile) {
             for (var i in extension) {
               if (i !== "url") {
-                practitioner.extension[key][i] = data.value;
+                if (data.value) {
+                  practitioner.extension[key][i] = data.value;
+                } else {
+                  practitioner.extension[key][i] = data;
+                }
+
                 break;
               }
             }
@@ -234,7 +311,7 @@ export default {
           }
         }
       } else {
-        practitioner[field] = data;
+        practitioner[field] = this.flatten(data);
       }
 
       this.practitioner = practitioner;
@@ -243,12 +320,12 @@ export default {
         .post(this.config.backend + "/practitioner/edit", practitioner)
         .then(response => {
           if (response.status == 201) {
-            this.$refs["subsection" + field][0].showAlert(
+            this.$refs["subsection" + names.name][0].showAlert(
               "Data changed successfully!",
               "success"
             );
           } else {
-            this.$refs["subsection-" + field][0].showAlert(
+            this.$refs["subsection-" + names.name][0].showAlert(
               "There was an error saving this data.",
               "error"
             );
@@ -301,6 +378,7 @@ export default {
 
         for (var fieldKey in this.detailFields) {
           let field = this.detailFields[fieldKey];
+
           valueString = "value" + this.capitalize(field.parentType);
 
           if (this.primitiveTypes.indexOf(field.parentType) >= 0) {
@@ -309,15 +387,57 @@ export default {
               break;
             }
           } else {
-            newExtension[valueString] = input;
+            //newExtension[valueString] = input;
+            for (var k in input) {
+              newExtension[valueString] = {};
+
+              if (k.indexOf(".") >= 0) {
+                newExtension[valueString][k.substring(k.lastIndexOf(".") + 1)] =
+                  input[k];
+              } else {
+                newExtension[valueString][k] = input[k];
+              }
+            }
           }
         }
 
         extension.push(newExtension);
 
-        practitioner.extension = extension;
+        Vue.set(practitioner, "extension", extension);
       } else if (this.detailPath) {
-        _.set(practitioner, this.detailPath, input);
+        for (var j in input) {
+          if (
+            j
+              .toLowerCase()
+              .startsWith(this.structureDefinition.toLowerCase() + ".")
+          ) {
+            input[
+              j
+                .toLowerCase()
+                .slice(this.structureDefinition.length + 1)
+                .toLowerCase()
+            ] = input[j];
+            delete input[j];
+          }
+        }
+
+        if (!practitioner[this.detailPath]) {
+          Vue.set(this.practitioner, this.detailPath, [input]);
+        }
+
+        input = this.flatten(input);
+
+        // if a field name has a . in it, we need to store that in a subfield
+        for (var i in input) {
+          if (i.indexOf(".") >= 0) {
+            let swap = input[i];
+            delete input[i];
+
+            _.set(input, i.slice("."), swap);
+          }
+        }
+
+        _.set(practitioner, this.detailPath, [input]);
       } else {
         practitioner = { ...practitioner, ...input };
       }
@@ -350,12 +470,20 @@ export default {
         }
       }
 
+      let structureDefinition = null;
+
+      for (var i in fields) {
+        structureDefinition = i.substring(0, i.indexOf("."));
+        break;
+      }
+
       this.details = true;
       this.detailFields = fields;
       this.detailPath = null;
       this.detailTitle = title;
       this.detailRaw = data;
       this.extensionProfile = null;
+      this.structureDefinition = structureDefinition;
 
       if (data && data.path) {
         this.detailPath = data.path.replace("Practitioner.", "");
@@ -369,7 +497,7 @@ export default {
       this.$refs.detailsForm.changeFields(fields);
     }
   },
-  mixins: [Capitalize, SectionsToDisplay, StructureDefinition],
+  mixins: [Capitalize, SectionsToDisplay, StructureDefinition, MobileLayout],
   name: "AddSections"
 };
 </script>

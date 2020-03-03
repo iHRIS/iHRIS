@@ -1,4 +1,5 @@
 import axios from "axios";
+import Capitalize from "@/mixins/Capitalize.js";
 
 export default {
   created() {
@@ -48,7 +49,7 @@ export default {
       }
 
       // qualification is a special case
-      if (title == "qualification") {
+      if (title == "Qualifications") {
         let fields = this.getFields(title);
         let qualification = [];
 
@@ -117,7 +118,10 @@ export default {
         {
           definition: field.definition,
           short: field.short,
-          id: field.id,
+          id: field.id + ".text",
+          labelOverride: this.capitalize(
+            field.id.slice(field.id.lastIndexOf(".") + 1)
+          ),
           max: field.max,
           type: [{ code: "string" }],
           min: field.min
@@ -141,7 +145,7 @@ export default {
         {
           definition: field.definition,
           short: field.short,
-          id: field.id + ".Period.start",
+          id: field.id + ".start",
           labelOverride: "Start",
           max: field.max,
           min: field.min,
@@ -150,7 +154,7 @@ export default {
         {
           definition: field.definition,
           short: field.short,
-          id: field.id + ".Period.end",
+          id: field.id + ".end",
           labelOverride: "End",
           max: field.max,
           min: field.min,
@@ -223,6 +227,7 @@ export default {
           return this.getPeriodFields(field);
 
         case "qualification":
+        case "qualifications":
           return this.getQualificationFields();
 
         default:
@@ -289,5 +294,6 @@ export default {
         });
       }
     }
-  }
+  },
+  mixins: [Capitalize]
 };
