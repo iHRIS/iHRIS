@@ -254,6 +254,8 @@ export default {
               element[j] = field.text;
             } else if (field.code) {
               element[j] = field.code;
+            } else if (field.value) {
+              element[j] = field.value;
             }
           }
         }

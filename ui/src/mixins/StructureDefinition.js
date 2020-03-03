@@ -179,7 +179,14 @@ export default {
           id: "Qualification.issuer",
           max: 1,
           path: "qualification.issuer",
-          type: [{ code: "Reference", targetProfile: ["http://hl7.org/fhir/StructureDefinition/Organization"]}],
+          type: [
+            {
+              code: "Reference",
+              targetProfile: [
+                "http://hl7.org/fhir/StructureDefinition/Organization"
+              ]
+            }
+          ],
           min: 0
         },
         {
