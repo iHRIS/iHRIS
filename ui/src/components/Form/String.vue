@@ -31,7 +31,8 @@ export default {
   created() {
     if (
       (this.max === "*" || parseInt(this.max) > 1) &&
-      !Array.isArray(this.value)
+      !Array.isArray(this.value) &&
+      this.value
     ) {
       this.string = [this.value];
     } else {

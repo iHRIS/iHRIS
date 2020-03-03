@@ -178,8 +178,8 @@ export default {
           definition: "Issuer council or structure",
           id: "Qualification.issuer",
           max: 1,
-          path: "qualification.issuer.name",
-          type: [{ code: "string" }],
+          path: "qualification.issuer",
+          type: [{ code: "Reference", targetProfile: ["http://hl7.org/fhir/StructureDefinition/Organization"]}],
           min: 0
         },
         {
@@ -241,6 +241,7 @@ export default {
             .split("|")
             .map(Function.prototype.call, String.prototype.trim)
         : [];
+
       let type = field.type[0].code;
 
       name = name.replace("[x]", "");
@@ -258,7 +259,7 @@ export default {
         type: type,
         parentType: parentType,
         required: field.min > 0,
-        reference: null,
+        reference: name,
         object: false,
         fields: {}
       };
