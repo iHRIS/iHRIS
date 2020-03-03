@@ -345,7 +345,7 @@ export default {
       let practitioner = this.practitioner;
       let title = this.detailTitle;
 
-      if (title == "qualification") {
+      if (title == "Qualifications") {
         let qualification = {};
 
         for (var key in this.detailFields) {
@@ -361,7 +361,7 @@ export default {
         }
 
         if (!practitioner.qualification) {
-          practitioner.qualification = [];
+          Vue.set(practitioner, "qualification", []);
         }
 
         practitioner.qualification.push(qualification);
