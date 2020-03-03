@@ -10,7 +10,7 @@
 <script>
 export default {
   created() {
-    this.boolean = this.checked;
+    this.boolean = this.value;
   },
   data() {
     return {
@@ -22,6 +22,6 @@ export default {
       return this["boolean"];
     }
   },
-  props: ["checked", "label", "hint"]
+  props: ["checked", "label", "hint", "value"]
 };
 </script>

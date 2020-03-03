@@ -67,6 +67,11 @@ export default {
     );
 
     this.name = structureDefinition;
+    let savedValue = this.value;
+
+    if (Array.isArray(this.value)) {
+      savedValue = this.value[0];
+    }
 
     axios
       .get(
@@ -91,7 +96,7 @@ export default {
         });
 
         this.codes = options;
-        this.reference = this.value;
+        this.reference = savedValue;
       });
 
     this.describe(structureDefinition).then(response => {
