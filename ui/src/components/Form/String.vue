@@ -20,6 +20,7 @@
     append-icon=""
     :rules="[rules.max, rules.required]"
     :required="required"
+    :value="value"
     outline
     :hint="hint"
   ></v-combobox>
@@ -28,7 +29,14 @@
 <script>
 export default {
   created() {
-    this.string = this.value;
+    if (
+      (this.max === "*" || parseInt(this.max) > 1) &&
+      !Array.isArray(this.value)
+    ) {
+      this.string = [this.value];
+    } else {
+      this.string = this.value;
+    }
   },
   data() {
     return {

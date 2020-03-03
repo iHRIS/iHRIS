@@ -447,6 +447,9 @@ export default {
       let fields = this.fields;
       let key = null;
 
+      console.log(fields);
+      console.log(this.data);
+
       for (var i in fields) {
         this.structureDefinition = i.substring(0, i.indexOf("."));
       }
@@ -478,7 +481,13 @@ export default {
             // if no value is set, it might be a multiarray so we need to tweak title a bit
             if (value === undefined) {
               let title = key.toLowerCase().split(".");
+
+              if (title[0] === "practitionerrole") {
+                title.shift();
+              }
+
               title.splice(1, 0, 0);
+
               value = _.get(this.data[index], title);
             }
           } else {
