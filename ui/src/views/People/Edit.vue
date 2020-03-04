@@ -116,15 +116,15 @@ export default {
 
       data = { ...data, ...practitionerRole };
 
+      if (!this.practitioner.workHistory) {
+        Vue.set(this.practitioner, "workHistory", []);
+      }
+
+      this.practitioner.workHistory.push(data);
+
       axios
         .post(this.config.backend + "/practitioner/add/work-history", data)
-        .then(response => {
-          if (!this.practitioner.workHistory) {
-            Vue.set(this.practitioner, "workHistory", []);
-          }
-
-          this.practitioner.workHistory.push(response.data);
-
+        .then(() => {
           this.cancelDetailsForm();
           this.$refs.profileHeader.changeMessage(
             "Work history added successfully!",
