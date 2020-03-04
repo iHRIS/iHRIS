@@ -194,6 +194,31 @@ export default {
         return data;
       }
 
+      // Qualifications requires it's own special thing
+      if (this.name === "Qualifications") {
+        for (var k in data) {
+          let element = data[k];
+          let reference = element.issuer.reference.split("/");
+          let issuer = await axios.get(
+            this.config.backend +
+              "/structure-definition/get/" +
+              reference[0] +
+              "/" +
+              reference[1]
+          );
+
+          sanitized.push({
+            type: element.code.text,
+            issuer: issuer.data.name,
+            number: element.identifier[0].value,
+            received: element.period.start,
+            expiration: element.period.end
+          });
+        }
+
+        return sanitized;
+      }
+
       for (var i in data) {
         let element = data[i];
 
@@ -456,7 +481,18 @@ export default {
         this.structureDefinition = i.substring(0, i.indexOf("."));
       }
 
-      if (Object.keys(fields).length === 1) {
+      // qualifications are weird
+      if (this.name === "Qualifications") {
+        let data = this.data[index];
+
+        fields["Qualification.type"].value = data.code.text;
+        fields["Qualification.issuer"].value = {
+          reference: data.issuer.reference
+        };
+        fields["Qualification.number"].value = data.identifier[0].value;
+        fields["Qualification.received"].value = data.period.start;
+        fields["Qualification.expiration"].value = data.period.end;
+      } else if (Object.keys(fields).length === 1) {
         for (key in fields) {
           if (fields[key].name === "value") {
             fields[key].labelOverride = this.name;
