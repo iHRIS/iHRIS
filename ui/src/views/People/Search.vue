@@ -121,7 +121,8 @@ export default {
     });
     this.getSearchFilters().then(filters => {
         this.fields = filters;
-        this.$refs.searchForm.changeFields(this.fields);
+        this.$refs.searchForm.data = this.fields;
+        this.$refs.searchForm.inputs = this.fields
     });
   },
   methods: {
@@ -201,7 +202,6 @@ export default {
       let allFields = [];
       this.getAllSearchFields().then(fields => {
         fields.forEach(field => {
-          // if (field.id.indexOf("SearchParameter.component") >= 0 && field.type[0].code === "string") {
           allFields.push({
             id: field.id.substring(field.id.lastIndexOf(".") + 1),
             max: parseInt(field.max),
@@ -211,7 +211,6 @@ export default {
             value: null,
             label: field.short
           });
-          // }
         });
       });
       return Promise.resolve(allFields);
