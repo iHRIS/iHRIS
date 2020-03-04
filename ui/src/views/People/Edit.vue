@@ -283,6 +283,27 @@ export default {
         }
       }
 
+      // qualifications need a little extra formatting
+      if (field === "qualification") {
+        let reformatted = {
+          identifier: [
+            {
+              value: data.number
+            }
+          ],
+          code: {
+            text: data.type
+          },
+          issuer: data.issuer,
+          period: {
+            start: data.received,
+            end: data.expiration
+          }
+        };
+
+        data = reformatted;
+      }
+
       // this is necessary for subsections that can have multiple entries
       if (index >= 0) {
         Vue.set(practitioner[field], index, this.flatten(data));
