@@ -229,18 +229,30 @@ export default {
       let id = this.practitioner.workHistory[index].id;
       data.id = id;
 
+      // because of formatting reasons, we need to strip off the practitionerrole from the key
+      for (var i in data) {
+        if (i.startsWith("practitionerrole.")) {
+          let key = i.substring("practitionerrole.".length);
+          data[key] = data[i];
+          delete data[i];
+        }
+      }
+
+      data = this.flatten(data);
+      data.practitioner = this.practitioner.workHistory[index].practitioner;
+
+      Vue.set(this.practitioner.workHistory, index, data);
+
       axios
         .post(this.config.backend + "/practitioner/edit/work-history", data)
         .then(response => {
           if (response.status == 201) {
-            this.$refs["subsection-workHistory"][0].showAlert(
+            this.$refs["subsectionworkHistory"][0].showAlert(
               "Data changed successfully!",
               "success"
             );
-
-            this.practitioner.workHistory[index] = data;
           } else {
-            this.$refs["subsection-workHistory"][0].showAlert(
+            this.$refs["subsectionworkHistory"][0].showAlert(
               "There was an error saving this data.",
               "error"
             );
