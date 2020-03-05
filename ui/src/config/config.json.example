@@ -3,7 +3,5 @@
   "site": "Demonstration site",
   "backend": "http://localhost:3000",
   "kibana": "http://www.mykibana.org",
-  "mHero": {
-    "emNutt": "http://www.myemnutt.com"
-  }
+  "mHero": true
 }

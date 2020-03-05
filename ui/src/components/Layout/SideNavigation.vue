@@ -59,6 +59,9 @@
 </template>
 
 <script>
+import { serverBus } from "../../main";
+import ConfigSettings from "@/mixins/ConfigSettings.js";
+
 export default {
   computed: {
     chevronIcon() {
@@ -99,39 +102,44 @@ export default {
       title: "Add people"
     });
 
+    let menu = [
+      {
+        action: { name: "home" },
+        icon: "dashboard",
+        submenu: [],
+        title: "Dashboard"
+      },
+      {
+        action: { name: "people" },
+        icon: "people",
+        submenu: submenu,
+        title: "People"
+      }
+    ];
+
+    if (this.isMHeroEnabled()) {
+      menu.push({
+        action: { name: "mhero" },
+        icon: "mdi-cellphone-basic",
+        submenu: [
+          {
+            action: { name: "mhero" },
+            title: "Send Message"
+          },
+          {
+            action: { name: "mhero-reports" },
+            title: "Generate Reports"
+          }
+        ],
+        title: "mHero",
+        doNotCapitalize: true
+      });
+    }
+
     return {
       drawer: true,
       screenSize: "",
-      menu: [
-        {
-          action: { name: "home" },
-          icon: "dashboard",
-          submenu: [],
-          title: "Dashboard"
-        },
-        {
-          action: { name: "people" },
-          icon: "people",
-          submenu: submenu,
-          title: "People"
-        },
-        {
-          action: { name: "mhero" },
-          icon: "mdi-cellphone-basic",
-          submenu: [
-            {
-              action: { name: "mhero" },
-              title: "Send Message"
-            },
-            {
-              action: { name: "mhero-reports" },
-              title: "Generate Reports"
-            }
-          ],
-          title: "mHero",
-          doNotCapitalize: true
-        }
-      ]
+      menu: menu
     };
   },
   methods: {
@@ -139,5 +147,6 @@ export default {
       return this.screenSize === "sm" || this.screenSize === "xs";
     }
   }
+  mixins: [ConfigSettings]
 };
 </script>
