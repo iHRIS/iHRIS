@@ -17,32 +17,43 @@
 </template>
 
 <script>
+import ConfigSettings from "@/mixins/ConfigSettings.js";
+
 export default {
   data() {
+    let links = [];
+
+    links.push({
+      text: "iHRIS User Manual",
+      to: { name: "user-manual" }
+    });
+
+    if (this.isMHeroEnabled()) {
+      links.push({
+        text: "mHero User Manual",
+        to: { name: "mhero-user-manual" }
+      });
+    }
+
+    links.push({
+      href: "https://forms.gle/jQJ7N3nDBSxSNne58",
+      text: "Feedback"
+    });
+
+    links.push({
+      href: "https://www.ihris.org",
+      text: "iHRIS Website"
+    });
+
+    links.push({
+      text: "Terms & Conditions",
+      to: { name: "terms-and-conditions" }
+    });
+
     return {
-      links: [
-        {
-          text: "iHRIS User Manual",
-          to: { name: "user-manual" }
-        },
-        {
-          text: "mHero User Manual",
-          to: { name: "mhero-user-manual" }
-        },
-        {
-          href: "https://forms.gle/jQJ7N3nDBSxSNne58",
-          text: "Feedback"
-        },
-        {
-          href: "https://www.ihris.org",
-          text: "iHRIS Website"
-        },
-        {
-          text: "Terms & Conditions",
-          to: { name: "terms-and-conditions" }
-        }
-      ]
+      links: links
     };
-  }
+  },
+  mixins: [ConfigSettings]
 };
 </script>
