@@ -153,7 +153,6 @@ router.post("/add", function (req, res, next) {
 router.post("/edit", function (req, res, next) {
   let data = req.body;
   data["resourceType"] = "Practitioner";
-
   let url = URI(config.fhir.server).segment('fhir').segment('Practitioner').segment(data.id).toString()
   axios.put(url, data, {
     withCredentials: true,

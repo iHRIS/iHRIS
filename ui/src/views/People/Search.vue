@@ -1,5 +1,8 @@
 <template>
   <v-container grid-list-md>
+  <v-alert v-model="alert" dismissable type="error">
+        {{ error }}
+  </v-alert>
     <v-layout row wrap class="pb-5">
       <v-flex :class="applyTitleStyle">
         Search People
@@ -107,6 +110,8 @@ export default {
   data() {
     return {
       config: null,
+      alert: false,
+      error: "",
       headers: [
         {
           text: "Surname",

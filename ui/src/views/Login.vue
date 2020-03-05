@@ -69,9 +69,11 @@ export default {
         .then(response => {
           store.state.authentication.username = response.data.username;
           store.state.authentication.userId = response.data.userId;
+          store.state.roles = response.data.roles;
 
           VueCookies.set("username", response.data.username);
           VueCookies.set("userId", response.data.userId);
+          VueCookies.set("roles", response.data.roles);
 
           this.$router.push({
             name: "home",
