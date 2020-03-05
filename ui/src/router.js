@@ -1,6 +1,9 @@
+import ConfigSettings from "@/mixins/ConfigSettings.js";
 import Vue from "vue";
 import Router from "vue-router";
 import { store } from "./store.js";
+
+const mheroEnabled = ConfigSettings.methods.isMHeroEnabled();
 
 Vue.use(Router);
 
@@ -72,23 +75,35 @@ let router = new Router({
       path: "/mhero",
       name: "mhero",
       component: () =>
-        import(/* webpackChunkName: "MHero" */ "./views/MHero/Workflow.vue")
+        mheroEnabled
+          ? import(/* webpackChunkName: "Mhero" */ "./views/MHero/Workflow.vue")
+          : import(
+              /* webpackChunkName: "Mhero" */ "./views/MHero/NotAvailable.vue"
+            )
     },
     {
       path: "/mhero/reports",
       name: "mhero-reports",
       component: () =>
-        import(
-          /* webpackChunkName: "Mhero Reports" */ "./views/MHero/Reports.vue"
-        )
+        mheroEnabled
+          ? import(
+              /* webpackChunkName: "Mhero Reports" */ "./views/MHero/Reports.vue"
+            )
+          : import(
+              /* webpackChunkName: "Mhero Reports" */ "./views/MHero/NotAvailable.vue"
+            )
     },
     {
       path: "/mhero/user-manual",
       name: "mhero-user-manual",
       component: () =>
-        import(
-          /* webpackChunkName: "Mhero User Manual" */ "./views/MHero/UserManual.vue"
-        )
+        mheroEnabled
+          ? import(
+              /* webpackChunkName: "Mhero User Manual" */ "./views/MHero/UserManual.vue"
+            )
+          : import(
+              /* webpackChunkName: "Mhero User Manual" */ "./views/MHero/NotAvailable.vue"
+            )
     },
     {
       path: "/people/search",

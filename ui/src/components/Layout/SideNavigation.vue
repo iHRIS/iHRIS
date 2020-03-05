@@ -55,6 +55,7 @@
 
 <script>
 import { serverBus } from "../../main";
+import ConfigSettings from "@/mixins/ConfigSettings.js";
 
 export default {
   created() {
@@ -83,39 +84,45 @@ export default {
       title: "Add people"
     });
 
+    let menu = [
+      {
+        action: { name: "home" },
+        icon: "dashboard",
+        submenu: [],
+        title: "Dashboard"
+      },
+      {
+        action: { name: "people" },
+        icon: "people",
+        submenu: submenu,
+        title: "People"
+      }
+    ];
+
+    if (this.isMHeroEnabled()) {
+      menu.push({
+        action: { name: "mhero" },
+        icon: "mdi-cellphone-basic",
+        submenu: [
+          {
+            action: { name: "mhero" },
+            title: "Send Message"
+          },
+          {
+            action: { name: "mhero-reports" },
+            title: "Generate Reports"
+          }
+        ],
+        title: "mHero",
+        doNotCapitalize: true
+      });
+    }
+
     return {
       drawer: true,
-      menu: [
-        {
-          action: { name: "home" },
-          icon: "dashboard",
-          submenu: [],
-          title: "Dashboard"
-        },
-        {
-          action: { name: "people" },
-          icon: "people",
-          submenu: submenu,
-          title: "People"
-        },
-        {
-          action: { name: "mhero" },
-          icon: "mdi-cellphone-basic",
-          submenu: [
-            {
-              action: { name: "mhero" },
-              title: "Send Message"
-            },
-            {
-              action: { name: "mhero-reports" },
-              title: "Generate Reports"
-            }
-          ],
-          title: "mHero",
-          doNotCapitalize: true
-        }
-      ]
+      menu: menu
     };
-  }
+  },
+  mixins: [ConfigSettings]
 };
 </script>
