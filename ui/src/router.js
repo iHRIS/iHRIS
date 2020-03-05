@@ -162,12 +162,6 @@ let router = new Router({
   ]
 });
 
-if (ConfigSettings.methods.isMHeroEnabled()) {
-  console.log("mHero enabled");
-} else {
-  console.log("mHero disabled");
-}
-
 router.beforeEach((to, from, next) => {
   if (!store.state.authentication.username) {
     const config = require("@/config/config.json");
