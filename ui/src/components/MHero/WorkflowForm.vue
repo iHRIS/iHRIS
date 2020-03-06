@@ -165,6 +165,7 @@ export default {
         let jurisdiction = "";
         let name = "";
         let organization = "";
+        let phone = "";
 
         // get the name of the practitioner
         if (practitioner.given) {
@@ -185,6 +186,10 @@ export default {
           cadre = practitioner.positionTitle;
         }
 
+        if (practitioner.phone) {
+          phone = practitioner.phone;
+        }
+
         if (name) {
           practitioners.push({
             cadre: cadre,
@@ -193,6 +198,7 @@ export default {
             id: id,
             jurisdiction: jurisdiction,
             name: name,
+            phone: phone,
             organization: organization
           });
         }
@@ -213,6 +219,7 @@ export default {
         { text: "Facility", value: "facility" },
         { text: "Cadre", value: "cadre" },
         { text: "Organizational Affiliation", value: "organization" },
+        { text: "Phone Number", value: "phone" },
         { text: "Contact Group", value: "contactGroup" }
       ],
       items: ["minutes", "hours", "days", "weeks"],
