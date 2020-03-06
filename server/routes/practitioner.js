@@ -9,7 +9,8 @@ const mixin = require("../mixin");
 const env = process.env.NODE_ENV || 'development';
 
 var config = require(__dirname + '/../config/config.json')[env];
-if(env === "production") {
+
+if (env === "production") {
   config = JSON.parse(fs.readFileSync(`/run/secrets/server_config`, 'utf8'))[env];
 }
 
