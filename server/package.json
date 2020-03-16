@@ -27,5 +27,8 @@
     "supertest": "^4.0.2",
     "urijs": "^1.19.2",
     "winston": "^2.2.0"
+  },
+  "devDependencies": {
+    "minimist": ">=1.2.2"
   }
 }
