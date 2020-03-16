@@ -19,7 +19,7 @@
             <v-radio label="Recurring" value="recurring"></v-radio>
           </v-radio-group>
           <v-row v-if="recurring">
-            <v-col cols="1">
+            <v-col cols="2">
               <v-select v-model="period" label="Period" :items="items" />
             </v-col>
             <v-col cols="3">
@@ -85,7 +85,7 @@ export default {
   computed: {
     frequencySuffix() {
       if (this.period) {
-        let suffix = this.period + "(s)";
+        let suffix = this.period.substring(0, this.period.length - 1) + "(s)";
 
         if (this.period === "weeks") {
           suffix += " on ";
