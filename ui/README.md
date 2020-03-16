@@ -50,6 +50,9 @@ This is a link to where the [server](https://github.com/iHRIS/iHRIS/tree/master/
 ### Kibana
 Kibana is used to render dashboards on the home page. Update the config file to include a link to your kibana installation. You will also need to add this link to the [server](https://github.com/iHRIS/iHRIS/tree/master/server)
 
+### mHero
+mHero is a two-way, mobile phone-based communication system that uses basic text messaging, or SMS, to connect ministries of health and health workers. To enable mHero, you need to setup an [emNutt server](https://github.com/intrahealth/emNutt). You also need to update your configuration file and set mHero to true.
+
 
 # Using Docker
 After cloning and customizing the configurations run the following commands
