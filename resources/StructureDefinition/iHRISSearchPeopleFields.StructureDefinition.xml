@@ -1,11 +1,11 @@
 <StructureDefinition xmlns="http://hl7.org/fhir">
-  <id value="SearchPeopleFields"/>
+  <id value="iHRISSearchPeopleFields"/>
   <text>
     <status value="generated"/>
     <div xmlns="http://www.w3.org/1999/xhtml"><!-- Snipped for brevity --></div>
   </text>
-  <url value="http://ihris.org/fhir/StructureDefinition/SearchPeopleFields"/>
-  <name value="SearchPeopleFields"/>
+  <url value="http://ihris.org/fhir/StructureDefinition/iHRISSearchPeopleFields"/>
+  <name value="iHRISSearchPeopleFields"/>
   <publisher value="iHRIS.org"/>
   <contact>
     <telecom>
@@ -16,17 +16,17 @@
   <description value="StructureDefinition for data table display fields"/>
   <status value="draft"/>
   <date value="2020-02-14T13:14:23.356+11:00"/>
-  <type value="SearchPeopleFields"/>
+  <type value="iHRISSearchPeopleFields"/>
   <abstract value="false"/>
-  <base value="http://ihris.org/fhir/StructureDefinition/SearchPeopleFields"/>
+  <base value="http://ihris.org/fhir/StructureDefinition/iHRISSearchPeopleFields"/>
   <snapshot>
-    <element id="SearchPeopleFields">
-      <path value="SearchPeopleFields"/>
+    <element id="iHRISSearchPeopleFields">
+      <path value="iHRISSearchPeopleFields"/>
       <short value="A resource that defines the search people report fields"/>
       <min value="1"/>
       <max value="1"/>
       <type>
-        <code value="SearchPeopleFields"/>
+        <code value="iHRISSearchPeopleFields"/>
       </type>
       <mapping>
         <identity value="v2"/>
@@ -38,11 +38,11 @@
       </mapping>
       <mapping>
         <identity value="servd"/>
-        <map value="SearchPeopleFields"/>
+        <map value="iHRISSearchPeopleFields"/>
       </mapping>
     </element>
-    <element id="SearchPeopleFields.family">
-      <path value="SearchPeopleFields.family"/>
+    <element id="iHRISSearchPeopleFields.family">
+      <path value="iHRISSearchPeopleFields.family"/>
       <sliceName value="surname" />
       <label value="Surname" />
       <short value="Surname"/>
@@ -54,7 +54,7 @@
       <min value="0"/>
       <max value="1"/>
       <base>
-        <path value="SearchPeopleFields.family" />
+        <path value="iHRISSearchPeopleFields.family" />
         <min value="0" />
         <max value="1" />
       </base>
@@ -62,15 +62,15 @@
         <code value="string"/>
       </type>
     </element>
-    <element id="SearchPeopleFields.firstname">
-      <path value="SearchPeopleFields.firstname"/>
+    <element id="iHRISSearchPeopleFields.firstname">
+      <path value="iHRISSearchPeopleFields.firstname"/>
       <sliceName value="firstname" />
       <label value="Firstname" />
       <short value="Name that this is person is commonly known"/>
       <min value="0"/>
       <max value="1"/>
       <base>
-        <path value="SearchPeopleFields.firstname" />
+        <path value="iHRISSearchPeopleFields.firstname" />
         <min value="0" />
         <max value="1" />
       </base>
@@ -78,8 +78,8 @@
         <code value="string"/>
       </type>
     </element>
-    <element id="SearchPeopleFields.code">
-      <path value="SearchPeopleFields.code" />
+    <element id="iHRISSearchPeopleFields.code">
+      <path value="iHRISSearchPeopleFields.code" />
       <sliceName value="job_title" />
       <label value="Job Title" />
       <short value="Job Title" />
@@ -89,7 +89,7 @@
       <min value="0"/>
       <max value="1"/>
       <base>
-        <path value="SearchPeopleFields.code" />
+        <path value="iHRISSearchPeopleFields.code" />
         <min value="0" />
         <max value="1" />
       </base>
@@ -97,8 +97,8 @@
         <code value="string" />
       </type>
     </element>
-    <element id="SearchPeopleFields.role">
-      <path value="SearchPeopleFields.role" />
+    <element id="iHRISSearchPeopleFields.role">
+      <path value="iHRISSearchPeopleFields.role" />
       <sliceName value="position_title" />
       <label value="Position Title" />
       <short value="Position Title" />
@@ -106,7 +106,7 @@
       <min value="0"/>
       <max value="1"/>
       <base>
-        <path value="SearchPeopleFields.role" />
+        <path value="iHRISSearchPeopleFields.role" />
         <min value="0" />
         <max value="1" />
       </base>
@@ -114,8 +114,8 @@
         <code value="string" />
       </type>
     </element>
-    <element id="SearchPeopleFields.organization">
-      <path value="SearchPeopleFields.organization" />
+    <element id="iHRISSearchPeopleFields.organization">
+      <path value="iHRISSearchPeopleFields.organization" />
       <sliceName value="facility" />
       <label value="Facility" />
       <short value="Facility" />
@@ -125,7 +125,7 @@
       <min value="0"/>
       <max value="1"/>
       <base>
-        <path value="SearchPeopleFields.organization" />
+        <path value="iHRISSearchPeopleFields.organization" />
         <min value="0" />
         <max value="*" />
       </base>
@@ -135,8 +135,8 @@
       </type>
       <exampleString value="Kabwire Referral Hospital"/>
     </element>
-    <element id="SearchPeopleFields.employee_status">
-      <path value="SearchPeopleFields.employee_status" />
+    <element id="iHRISSearchPeopleFields.employee_status">
+      <path value="iHRISSearchPeopleFields.employee_status" />
       <sliceName value="employee_status" />
       <label value="Status" />
       <short value="Employee Status" />
@@ -144,7 +144,7 @@
       <min value="0"/>
       <max value="1"/>
       <base>
-        <path value="SearchPeopleFields.status" />
+        <path value="iHRISSearchPeopleFields.status" />
         <min value="0" />
         <max value="1" />
       </base>
@@ -152,8 +152,8 @@
         <code value="string" />
       </type>
     </element>
-    <element id="SearchPeopleFields.start_date">
-      <path value="SearchPeopleFields.start_date" />
+    <element id="iHRISSearchPeopleFields.start_date">
+      <path value="iHRISSearchPeopleFields.start_date" />
       <sliceName value="start_date" />
       <label value="Start date" />
       <short value="Start date" />
@@ -161,7 +161,7 @@
       <min value="0"/>
       <max value="1"/>
       <base>
-        <path value="SearchPeopleFields.start_date" />
+        <path value="iHRISSearchPeopleFields.start_date" />
         <min value="0" />
         <max value="1" />
       </base>
@@ -171,8 +171,8 @@
     </element>
   </snapshot>
   <differential>
-    <element id="SearchPeopleFields">
-      <path value="SearchPeopleFields"/>
+    <element id="iHRISSearchPeopleFields">
+      <path value="iHRISSearchPeopleFields"/>
       <short value="A search people data table fields"/>
       <min value="1"/>
       <max value="1"/>
@@ -189,40 +189,40 @@
       </mapping>
       <mapping>
         <identity value="servd"/>
-        <map value="SearchPeopleFields"/>
+        <map value="iHRISSearchPeopleFields"/>
       </mapping>
     </element>
-    <element id="SearchPeopleFields.family">
-      <path value="SearchPeopleFields.family" />
+    <element id="iHRISSearchPeopleFields.family">
+      <path value="iHRISSearchPeopleFields.family" />
       <max value="0" />
     </element>
-    <element id="SearchPeopleFields.firstname">
-      <path value="SearchPeopleFields.firstname" />
+    <element id="iHRISSearchPeopleFields.firstname">
+      <path value="iHRISSearchPeopleFields.firstname" />
       <max value="0" />
     </element>
-    <element id="SearchPeopleFields.code">
-      <path value="SearchPeopleFields.code" />
+    <element id="iHRISSearchPeopleFields.code">
+      <path value="iHRISSearchPeopleFields.code" />
       <label value="Job Title" />
       <short value="The specific role of the practitioner" />
       <definition value="The specific role which the practitioner has been assigned to perform." />
       <comment value="A person may not have more than one role." />
     </element>
-    <element id="SearchPeopleFields.role">
-      <path value="SearchPeopleFields.role" />
+    <element id="iHRISSearchPeopleFields.role">
+      <path value="iHRISSearchPeopleFields.role" />
       <max value="0" />
     </element>
-    <element id="SearchPeopleFields.organization">
-      <path value="SearchPeopleFields.organization" />
+    <element id="iHRISSearchPeopleFields.organization">
+      <path value="iHRISSearchPeopleFields.organization" />
       <label value="Facility" />
       <short value="The structure that manages and/or oversees the position of the practitioner" />
       <definition value="The structure (organization,department, unit, etc.) that formally manages and/or oversees the position of the practitioner." />
     </element>
-    <element id="SearchPeopleFields.employee_status">
-      <path value="SearchPeopleFields.employee_status" />
+    <element id="iHRISSearchPeopleFields.employee_status">
+      <path value="iHRISSearchPeopleFields.employee_status" />
       <max value="0" />
     </element>
-    <element id="SearchPeopleFields.start_date">
-      <path value="SearchPeopleFields.start_date" />
+    <element id="iHRISSearchPeopleFields.start_date">
+      <path value="iHRISSearchPeopleFields.start_date" />
       <label value="Start date" />
       <short value="The date on which the practitioner assumed this role" />
     </element>
