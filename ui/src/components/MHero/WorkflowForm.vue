@@ -178,8 +178,8 @@ export default {
 
         name = name.trim();
 
-        if (practitioner.FacilityName) {
-          facility = practitioner.FacilityName;
+        if (practitioner.facilityName) {
+          facility = practitioner.facilityName;
         }
 
         if (practitioner.positionTitle) {
@@ -222,7 +222,7 @@ export default {
         { text: "Phone Number", value: "phone" },
         { text: "Contact Group", value: "contactGroup" }
       ],
-      items: ["minutes", "hours", "days", "weeks"],
+      items: ["hours", "days", "weeks"],
       loading: true,
       period: null,
       practitioners: [],
