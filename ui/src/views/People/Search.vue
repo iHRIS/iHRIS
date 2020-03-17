@@ -101,9 +101,6 @@ export default {
       return this.gridLayoutShowResult(this.$vuetify.breakpoint.name);
     }
   },
-  created() {
-    this.config = require("@/config/config.json");
-  },
   components: {
     Alert,
     DynamicForm
@@ -248,10 +245,6 @@ export default {
         "error"
       );
     }
-  },
-  components: {
-    Alert,
-    DynamicForm
   }
 };
 </script>
