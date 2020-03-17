@@ -1,5 +1,8 @@
 <template>
   <v-container>
+    <v-alert v-model="alert" dismissable type="error">
+        {{ error }}
+    </v-alert>
     <ProfileHeader
       :practitioner="practitioner"
       :edit="true"
@@ -24,6 +27,7 @@
             v-on:deleteData="deleteSubsectionData"
             edit
             :ref="'subsection' + index"
+            :validationRules="uiValidationRules"
           />
         </div>
 
@@ -36,6 +40,7 @@
               v-show="details"
               :name="detailTitle"
               :fields="detailFields"
+              :validationRules="uiValidationRules"
               v-on:cancel="cancelDetailsForm"
               v-on:successfulSubmit="submitDetailsForm"
               ref="detailsForm"
@@ -94,7 +99,20 @@ export default {
       detailRaw: null,
       detailTitle: null,
       screenSize: "",
-      structureDefinition: null
+      structureDefinition: null,
+      alert: false,
+      error: "",
+      uiValidationRules:[
+        {
+          formName:"workHistory",
+          sourceFieldName:"active",
+          condition: "eq",
+          value: true,
+          behavior: "hide",
+          targetFieldName: "Period.end"
+        }
+      ],
+      screenSize: ""
     };
   },
   methods: {
@@ -116,15 +134,15 @@ export default {
 
       data = { ...data, ...practitionerRole };
 
+      if (!this.practitioner.workHistory) {
+        Vue.set(this.practitioner, "workHistory", []);
+      }
+
+      this.practitioner.workHistory.push(data);
+
       axios
         .post(this.config.backend + "/practitioner/add/work-history", data)
-        .then(response => {
-          if (!this.practitioner.workHistory) {
-            Vue.set(this.practitioner, "workHistory", []);
-          }
-
-          this.practitioner.workHistory.push(response.data);
-
+        .then(() => {
           this.cancelDetailsForm();
           this.$refs.profileHeader.changeMessage(
             "Work history added successfully!",
@@ -229,18 +247,30 @@ export default {
       let id = this.practitioner.workHistory[index].id;
       data.id = id;
 
+      // because of formatting reasons, we need to strip off the practitionerrole from the key
+      for (var i in data) {
+        if (i.startsWith("practitionerrole.")) {
+          let key = i.substring("practitionerrole.".length);
+          data[key] = data[i];
+          delete data[i];
+        }
+      }
+
+      data = this.flatten(data);
+      data.practitioner = this.practitioner.workHistory[index].practitioner;
+
+      Vue.set(this.practitioner.workHistory, index, data);
+
       axios
         .post(this.config.backend + "/practitioner/edit/work-history", data)
         .then(response => {
           if (response.status == 201) {
-            this.$refs["subsection-workHistory"][0].showAlert(
+            this.$refs["subsectionworkHistory"][0].showAlert(
               "Data changed successfully!",
               "success"
             );
-
-            this.practitioner.workHistory[index] = data;
           } else {
-            this.$refs["subsection-workHistory"][0].showAlert(
+            this.$refs["subsectionworkHistory"][0].showAlert(
               "There was an error saving this data.",
               "error"
             );
@@ -281,6 +311,27 @@ export default {
           ] = data[j];
           delete data[j];
         }
+      }
+
+      // qualifications need a little extra formatting
+      if (field === "qualification") {
+        let reformatted = {
+          identifier: [
+            {
+              value: data.number
+            }
+          ],
+          code: {
+            text: data.type
+          },
+          issuer: data.issuer,
+          period: {
+            start: data.received,
+            end: data.expiration
+          }
+        };
+
+        data = reformatted;
       }
 
       // this is necessary for subsections that can have multiple entries
@@ -345,7 +396,7 @@ export default {
       let practitioner = this.practitioner;
       let title = this.detailTitle;
 
-      if (title == "qualification") {
+      if (title == "Qualifications") {
         let qualification = {};
 
         for (var key in this.detailFields) {
@@ -361,7 +412,7 @@ export default {
         }
 
         if (!practitioner.qualification) {
-          practitioner.qualification = [];
+          Vue.set(practitioner, "qualification", []);
         }
 
         practitioner.qualification.push(qualification);

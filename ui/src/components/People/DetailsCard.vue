@@ -32,6 +32,13 @@
         <v-icon>delete</v-icon>
       </v-btn>
     </v-card-title>
+
+    <v-card-text>
+      <v-alert v-model="alert.show" dismissable :type="alert.type">
+        {{ alert.message }}
+      </v-alert>
+    </v-card-text>
+
     <transition name="fade">
       <v-card-text
         v-if="Array.isArray(sanitized)"
@@ -146,10 +153,6 @@
     </v-card-text>
 
     <v-card-text v-show="editing">
-      <v-alert v-model="alert.show" dismissable :type="alert.type">
-        {{ alert.message }}
-      </v-alert>
-
       <DynamicForm
         :fields="this.fields"
         :name="this.name"
@@ -158,6 +161,7 @@
         v-on:failedSubmit="showFailedSubmit"
         ref="dynamicEditingForm"
         :key="dynamicFormKey"
+        :validationRules="validationRules"
       />
     </v-card-text>
   </v-card>
@@ -189,6 +193,31 @@ export default {
 
       if (!Array.isArray(data)) {
         return data;
+      }
+
+      // Qualifications requires it's own special thing
+      if (this.name === "Qualifications") {
+        for (var k in data) {
+          let element = data[k];
+          let reference = element.issuer.reference.split("/");
+          let issuer = await axios.get(
+            this.config.backend +
+              "/structure-definition/get/" +
+              reference[0] +
+              "/" +
+              reference[1]
+          );
+
+          sanitized.push({
+            type: element.code.text,
+            issuer: issuer.data.name,
+            number: element.identifier[0].value,
+            received: element.period.start,
+            expiration: element.period.end
+          });
+        }
+
+        return sanitized;
       }
 
       for (var i in data) {
@@ -251,6 +280,8 @@ export default {
               element[j] = field.text;
             } else if (field.code) {
               element[j] = field.code;
+            } else if (field.value) {
+              element[j] = field.value;
             }
           }
         }
@@ -265,6 +296,7 @@ export default {
     DynamicForm
   },
   created() {
+    
     this.config = require("@/config/config.json");
 
     switch (this.name) {
@@ -451,7 +483,18 @@ export default {
         this.structureDefinition = i.substring(0, i.indexOf("."));
       }
 
-      if (Object.keys(fields).length === 1) {
+      // qualifications are weird
+      if (this.name === "Qualifications") {
+        let data = this.data[index];
+
+        fields["Qualification.type"].value = data.code.text;
+        fields["Qualification.issuer"].value = {
+          reference: data.issuer.reference
+        };
+        fields["Qualification.number"].value = data.identifier[0].value;
+        fields["Qualification.received"].value = data.period.start;
+        fields["Qualification.expiration"].value = data.period.end;
+      } else if (Object.keys(fields).length === 1) {
         for (key in fields) {
           if (fields[key].name === "value") {
             fields[key].labelOverride = this.name;
@@ -478,16 +521,29 @@ export default {
             // if no value is set, it might be a multiarray so we need to tweak title a bit
             if (value === undefined) {
               let title = key.toLowerCase().split(".");
+
+              if (title[0] === "practitionerrole") {
+                title.shift();
+              }
+
               title.splice(1, 0, 0);
+
               value = _.get(this.data[index], title);
             }
           } else {
             value = this.data[index][field.title];
+          //Datetime value comes as data[index]['period']['nameofthefield'], 
+          //data[index][field.title] returns undefined since field.title does not correspont the the array key
+          if(fields[key].type == "dateTime" && this.data[index][field.title.split(".")[0]]!=null)
+          {
+            fields[key].value = this.data[index][field.title.split(".")[0]][field.title.split(".")[2].toLowerCase()];
           }
-
-          fields[key].value = value;
+          else{
+            fields[key].value = this.data[index][field.title];
+          } 
         }
-      }
+      }}
+      this.$refs.dynamicEditingForm.changeFields(fields);
 
       this.currentIndex = index;
       this.dynamicFormKey++;
@@ -497,7 +553,9 @@ export default {
     },
     toggleSectionDetailDisplay() {
       this.showSectionDetail = !this.showSectionDetail;
-    }
+    },
+
+
   },
   mixins: [Practitioner, StructureDefinition, MobileLayout],
   props: {
@@ -510,6 +568,7 @@ export default {
       default: null,
       type: String
     },
+    validationRules:{},
     screenSize: {
       default: null,
       type: String
