@@ -134,7 +134,7 @@ export default {
       return axios
         .get(
           this.config.backend +
-          "/practitioner/describe/definition/SearchPeopleFields"
+          "/practitioner/describe/definition/iHRISSearchPeopleFields"
         )
         .then(response => {
           let fields = response.data.snapshot.element;
@@ -169,7 +169,7 @@ export default {
       return axios
         .get(
           this.config.backend +
-            "/practitioner/describe/definition/SearchPeople"
+            "/practitioner/describe/definition/iHRISSearchPeople"
         )
         .then(response => {
           let all_fields = response.data.snapshot.element;
@@ -183,10 +183,10 @@ export default {
               field.id.endsWith(".url") ||
               field.id.includes(".value[x]") ||
               // ignore practitioner and meta fields since they can't be customized
-              field.id == "SearchPeople" ||
-              field.id == "SearchPeople.meta" ||
+              field.id == "iHRISSearchPeople" ||
+              field.id == "iHRISSearchPeople.meta" ||
               // hide active, that's handled separately
-              field.id === "SearchPeople.active" ||
+              field.id === "iHRISSearchPeople.active" ||
               // if someone sets the max to be 0, then don't show it
               field.max == 0
             ) {
