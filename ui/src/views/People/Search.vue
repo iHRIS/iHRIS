@@ -232,7 +232,7 @@ export default {
               editLink: "/people/edit/" + practitioner.resource.id,
               viewLink: "/people/view/" + practitioner.resource.id,
               surname: practitioner.resource.name[0].family,
-              given: practitioner.resource.name[0].given[0]
+              firstname: practitioner.resource.name[0].given[0]
             });
           });
 
