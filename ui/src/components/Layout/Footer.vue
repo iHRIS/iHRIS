@@ -1,28 +1,59 @@
 <template>
   <v-footer color="white" app>
     <v-row justify="center">
-      <v-btn to="user-manual" text class="text-capitalize">
-        User Manual
-      </v-btn>
       <v-btn
-        href="https://forms.gle/jQJ7N3nDBSxSNne58"
+        v-for="link in links"
+        :key="link.text"
         text
-        target="_blank"
-        class="text-capitalize"
-      >
-        Feedback
-      </v-btn>
-      <v-btn
-        href="https://www.ihris.org"
-        target="_blank"
         class="text-none"
-        text
+        :to="link.to"
+        :href="link.href"
+        :target="link.href ? '_blank' : ''"
       >
-        iHRIS Website
-      </v-btn>
-      <v-btn to="terms-conditions" text class="text-capitalize">
-        Terms &amp; Conditions
+        {{ link.text }}
       </v-btn>
     </v-row>
   </v-footer>
 </template>
+
+<script>
+import ConfigSettings from "@/mixins/ConfigSettings.js";
+
+export default {
+  data() {
+    let links = [];
+
+    links.push({
+      text: "iHRIS User Manual",
+      to: { name: "user-manual" }
+    });
+
+    if (this.isMHeroEnabled()) {
+      links.push({
+        text: "mHero User Manual",
+        to: { name: "mhero-user-manual" }
+      });
+    }
+
+    links.push({
+      href: "https://forms.gle/jQJ7N3nDBSxSNne58",
+      text: "Feedback"
+    });
+
+    links.push({
+      href: "https://www.ihris.org",
+      text: "iHRIS Website"
+    });
+
+    links.push({
+      text: "Terms & Conditions",
+      to: { name: "terms-and-conditions" }
+    });
+
+    return {
+      links: links
+    };
+  },
+  mixins: [ConfigSettings]
+};
+</script>
