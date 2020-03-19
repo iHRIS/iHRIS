@@ -59,7 +59,6 @@
 </template>
 
 <script>
-import { serverBus } from "../../main";
 import ConfigSettings from "@/mixins/ConfigSettings.js";
 
 export default {
@@ -146,7 +145,7 @@ export default {
     hasSmallScreenSize() {
       return this.screenSize === "sm" || this.screenSize === "xs";
     }
-  }
+  },
   mixins: [ConfigSettings]
 };
 </script>
