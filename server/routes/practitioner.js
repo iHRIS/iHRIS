@@ -1,13 +1,16 @@
 var express = require("express");
 var router = express.Router();
 var axios = require("axios");
+var elasticsearch = require("elasticsearch");
+
 const URI = require('urijs');
 const fs = require('fs')
 const mixin = require("../mixin");
 const env = process.env.NODE_ENV || 'development';
 
 var config = require(__dirname + '/../config/config.json')[env];
-if(env === "production") {
+
+if (env === "production") {
   config = JSON.parse(fs.readFileSync(`/run/secrets/server_config`, 'utf8'))[env];
 }
 
@@ -47,6 +50,37 @@ router.post("/delete/work-history", function (req, res, next) {
   }).catch(err => {
     res.status(400).json(err);
   });
+});
+
+var client = new elasticsearch.Client({
+  host: config.elastic.server,
+  log: 'trace',
+  apiVersion: config.elastic.version
+});
+
+router.get("/all", async function (req, res, next) {
+  let practitioners = [];
+  let scroll = null;
+  const size = 1000;
+
+  let response = await client.search({
+    index: "practitioner",
+    scroll: "1m",
+    size: size
+  });
+
+  practitioners = response.hits.hits;
+
+  while (response.hits.hits.length === size) {
+    response = await client.scroll({
+      scroll: "1m",
+      scrollId: response._scroll_id
+    });
+
+    practitioners = practitioners.concat(response.hits.hits);
+  }
+
+  res.status(201).json(practitioners);
 });
 
 router.get("/describe/page", function (req, res, next) {

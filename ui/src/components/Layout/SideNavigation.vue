@@ -3,9 +3,9 @@
     v-model="drawer"
     app
     clipped
-    class="primary darken-1 text-uppercase white--text font-weight-bold"
     :mini-variant.sync="mini"
     permanent
+    class="primary darken-1 white--text font-weight-bold"
   >
     <v-btn v-if="smallScreenSize" icon @click.stop="mini = !mini"
       ><v-icon class="white--text">{{ chevronIcon }}</v-icon>
@@ -18,9 +18,11 @@
           </v-list-item-icon>
 
           <v-list-item-content>
-            <v-list-item-title class="white--text">{{
-              item.title
-            }}</v-list-item-title>
+            <v-list-item-title
+              class="white--text"
+              v-bind:class="{ 'text-uppercase': !item.doNotCapitalize }"
+              >{{ item.title }}</v-list-item-title
+            >
           </v-list-item-content>
         </template>
 
@@ -45,9 +47,11 @@
         </v-list-item-icon>
 
         <v-list-item-content>
-          <v-list-item-title class="white--text">{{
-            item.title
-          }}</v-list-item-title>
+          <v-list-item-title
+            class="white--text"
+            v-bind:class="{ 'text-uppercase': !item.doNotCapitalize }"
+            >{{ item.title }}</v-list-item-title
+          >
         </v-list-item-content>
       </v-list-item>
     </v-list>
@@ -55,6 +59,8 @@
 </template>
 
 <script>
+import ConfigSettings from "@/mixins/ConfigSettings.js";
+
 export default {
   computed: {
     chevronIcon() {
@@ -95,29 +101,51 @@ export default {
       title: "Add people"
     });
 
+    let menu = [
+      {
+        action: { name: "home" },
+        icon: "dashboard",
+        submenu: [],
+        title: "Dashboard"
+      },
+      {
+        action: { name: "people" },
+        icon: "people",
+        submenu: submenu,
+        title: "People"
+      }
+    ];
+
+    if (this.isMHeroEnabled()) {
+      menu.push({
+        action: { name: "mhero" },
+        icon: "mdi-cellphone-basic",
+        submenu: [
+          {
+            action: { name: "mhero" },
+            title: "Send Message"
+          },
+          {
+            action: { name: "mhero-reports" },
+            title: "Generate Reports"
+          }
+        ],
+        title: "mHero",
+        doNotCapitalize: true
+      });
+    }
+
     return {
       drawer: true,
       screenSize: "",
-      menu: [
-        {
-          action: { name: "home" },
-          icon: "dashboard",
-          submenu: [],
-          title: "Dashboard"
-        },
-        {
-          action: { name: "people" },
-          icon: "people",
-          submenu: submenu,
-          title: "People"
-        }
-      ]
+      menu: menu
     };
   },
   methods: {
     hasSmallScreenSize() {
       return this.screenSize === "sm" || this.screenSize === "xs";
     }
-  }
+  },
+  mixins: [ConfigSettings]
 };
 </script>

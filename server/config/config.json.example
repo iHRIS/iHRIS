@@ -1,5 +1,5 @@
 {
-  
+
   "development": {
     "port":3000,
     "definitions": {
@@ -9,14 +9,21 @@
       "server": "http://localhost:9200",
       "username": "username",
       "password": "username",
-      "max_compilations_rate": "10000/1m"
+      "max_compilations_rate": "10000/1m",
+      "version": "7.5"
     },
     "fhir": {
       "server": "localhost",
       "username": "username",
       "password": "password"
     },
+    "emNutt": {
+      "server": "http://localhost:3002",
+      "username": "ihris",
+      "password": "ihris"
+    },
     "kibana": "https://www.elastic.co/products/kibana",
+    "mhero": "http://mhero.org/fhir/StructureDefinition",
     "structureDefinition": "http://server.com/fhir"
   },
   "test": {
@@ -27,14 +34,21 @@
     "elastic": {
       "server": "http://localhost:9200",
       "username": "username",
-      "password": "username"
+      "password": "username",
+      "version": "7.5"
     },
     "fhir": {
       "server": "localhost",
       "username": "username",
       "password": "password"
     },
+    "emNutt": {
+      "server": "http://localhost:3002",
+      "username": "ihris",
+      "password": "ihris"
+    },
     "kibana": "https://www.elastic.co/products/kibana",
+    "mhero": "http://mhero.org/fhir/StructureDefinition",
     "structureDefinition": "http://server.com/fhir"
   },
   "production": {
@@ -45,14 +59,21 @@
     "elastic": {
       "server": "http://localhost:9200",
       "username": "username",
-      "password": "username"
+      "password": "username",
+      "version": "7.5"
     },
     "fhir": {
       "server": "localhost",
       "username": "username",
       "password": "password"
     },
+    "emNutt": {
+      "server": "http://localhost:3002",
+      "username": "ihris",
+      "password": "ihris"
+    },
     "kibana": "https://www.elastic.co/products/kibana",
+    "mhero": "http://mhero.org/fhir/StructureDefinition",
     "structureDefinition": "http://server.com/fhir"
   }
 }

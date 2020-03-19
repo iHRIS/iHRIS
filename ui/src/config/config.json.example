@@ -3,5 +3,5 @@
   "site": "Demonstration site",
   "backend": "http://localhost:3000",
   "kibana": "http://www.mykibana.org",
-  "locale": "en-US"
+  "mHero": true
 }
