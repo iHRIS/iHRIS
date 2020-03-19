@@ -231,6 +231,9 @@ export default {
         .then(response => {
           let practitioners = [];
           response.data.entry.forEach(practitioner => {
+            let date = new Date(practitioner.resource.workHistory[0].start_date);
+            let month = date.getMonth() + 1 < 10 ? `0${date.getMonth()+1}` : date.getMonth()+1;
+            let day = date.getDate() < 10 ? `0${date.getDate()}` : date.getDate();
             practitioners.push({
               editLink: "/people/edit/" + practitioner.resource.id,
               viewLink: "/people/view/" + practitioner.resource.id,
@@ -241,7 +244,7 @@ export default {
               facility: practitioner.resource.workHistory[0].facility,
               employee_status:
                 practitioner.resource.workHistory[0].employee_status,
-              start_date: practitioner.resource.workHistory[0].start_date
+              start_date: `${date.getFullYear()}-${month}-${day}`
             });
           });
           this.practitioners = practitioners;
