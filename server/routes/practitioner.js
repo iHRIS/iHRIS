@@ -192,21 +192,85 @@ router.post("/edit/work-history", function (req, res, next) {
 /**
  * Search for practitioners
  */
-router.get("/search", function (req, res, next) {
+router.get("/search", async function (req, res, next) {
   let url = URI(config.fhir.server).segment('fhir').segment('Practitioner').toString();
   url += req._parsedUrl.search;
 
-  axios.get(url, {
+  let credentials = {
     withCredentials: true,
     auth: {
       username: config.fhir.username,
       password: config.fhir.password
     }
-  }).then(response => {
-    res.status(201).json(response.data);
-  }).catch(err => {
+  };
+
+  let response = await axios.get(url, credentials);
+  if(response === null){
     res.status(400).json(err);
-  });
+    return;
+  }
+  let practitioners_data = response.data;
+  let promises = [];
+  //get work history
+  for(let i = 0; i < practitioners_data.entry.length; i++){
+    practitioner = practitioners_data.entry[i].resource;
+    let url = URI(config.fhir.server).segment('fhir').segment('PractitionerRole');
+    url.addQuery('practitioner', practitioner.id);
+    url = url.toString();
+    promises[i] = await axios.get(url, credentials).then(practitionerRoleResponse => {
+      if (practitionerRoleResponse.data.entry) {
+        let workHistory = [];
+        practitionerRoleResponse.data.entry.forEach(job => {
+          if(!workHistory.length) {
+            workHistory.push({
+              job_title: job.resource.code[0].text,
+              // position_title:
+              facility: job.resource.location[0].reference,
+              employee_status: job.resource.active ? "In Service" : "Retired",
+              start_date: job.resource.period.start
+            });
+          } else {
+            if(workHistory[0].start_date < job.resource.period.start) {
+              workHistory.pop();
+              workHistory.push({
+                job_title: job.resource.code[0].text,
+                // position_title:
+                facility: job.resource.location[0].reference,
+                employee_status: job.resource.active ? "In Service" : "Retired",
+                start_date: job.resource.period.start
+              });
+            }
+          }
+          
+        });
+
+        practitioners_data.entry[i].resource.workHistory = workHistory;
+      };
+    });
+  }
+  await Promise.all(promises);
+  // get facility names
+  for(let practitioner = 0; practitioner < practitioners_data.entry.length; practitioner++) {
+    const facility = await getFacilityName(practitioners_data.entry[practitioner].resource.workHistory[0].facility);
+    practitioners_data.entry[practitioner].resource.workHistory[0].facility = facility;
+  }
+  res.status(201).json(practitioners_data);
 });
 
+async function getFacilityName(reference) {
+  let id = reference.substring(reference.lastIndexOf("/") + 1);
+  let url = URI(config.fhir.server).segment('fhir').segment("Location").segment(id).toString();
+  let result = await axios.get(
+    url, {
+      params: {},
+      withCredentials: true,
+      auth: {
+        username: config.fhir.username,
+        password: config.fhir.password
+      }
+    }
+  );
+
+  return result.data.name;
+}
 module.exports = router;

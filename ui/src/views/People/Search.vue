@@ -1,8 +1,8 @@
 <template>
   <v-container grid-list-md>
-  <v-alert v-model="alert" dismissable type="error">
-        {{ error }}
-  </v-alert>
+    <v-alert v-model="alert" dismissable type="error">
+      {{ error }}
+    </v-alert>
     <v-layout row wrap class="pb-5">
       <v-flex :class="applyTitleStyle">
         Search People
@@ -82,7 +82,6 @@ import Alert from "@/components/Layout/Alert.vue";
 import DynamicForm from "@/components/Form/DynamicForm.vue";
 import MobileLayout from "@/mixins/MobileLayout.js";
 export default {
-
   mixins: [MobileLayout],
   computed: {
     applyTitleStyle() {
@@ -105,7 +104,6 @@ export default {
     Alert,
     DynamicForm
   },
-  
   data() {
     return {
       config: null,
@@ -119,12 +117,12 @@ export default {
   created() {
     this.config = require("@/config/config.json");
     this.getDataTableFields().then(fields => {
-      this.headers = fields
+      this.headers = fields;
     });
     this.getSearchFilters().then(filters => {
-        this.fields = filters;
-        this.$refs.searchForm.data = this.fields;
-        this.$refs.searchForm.inputs = this.fields
+      this.fields = filters;
+      this.$refs.searchForm.data = this.fields;
+      this.$refs.searchForm.inputs = this.fields;
     });
   },
   methods: {
@@ -136,7 +134,7 @@ export default {
       return axios
         .get(
           this.config.backend +
-          "/practitioner/describe/definition/iHRISSearchPeopleFields"
+            "/practitioner/describe/definition/iHRISSearchPeopleFields"
         )
         .then(response => {
           let fields = response.data.snapshot.element;
@@ -163,9 +161,15 @@ export default {
               text: field.label,
               value: field.sliceName
             });
+          });
+          datatable_fields.push({
+            text: "Actions",
+            value: "action",
+            align: "left",
+            sortable: false
+          });
+          return Promise.resolve(datatable_fields);
         });
-        return Promise.resolve(datatable_fields)
-      });
     },
     getAllSearchFields() {
       return axios
@@ -226,16 +230,20 @@ export default {
         .get(this.config.backend + "/practitioner/search", params)
         .then(response => {
           let practitioners = [];
-
           response.data.entry.forEach(practitioner => {
             practitioners.push({
               editLink: "/people/edit/" + practitioner.resource.id,
               viewLink: "/people/view/" + practitioner.resource.id,
               surname: practitioner.resource.name[0].family,
-              firstname: practitioner.resource.name[0].given[0]
+              firstname: practitioner.resource.name[0].given[0],
+              job_title: practitioner.resource.workHistory[0].job_title,
+              // position_title:
+              facility: practitioner.resource.workHistory[0].facility,
+              employee_status:
+                practitioner.resource.workHistory[0].employee_status,
+              start_date: practitioner.resource.workHistory[0].start_date
             });
           });
-
           this.practitioners = practitioners;
         });
     },
