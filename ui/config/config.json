@@ -2,5 +2,6 @@
   "site": "Demonstration site",
   "backend": "http://localhost:3000",
   "kibana": "http://v5-demo.ihris.org/kibana",
-  "samplePractitioner": 8755
+  "samplePractitioner": 8755,
+  "mHero": true
 }

@@ -4,7 +4,7 @@ export default {
   },
   data() {
     return {
-      config: null,
+      config: null
     };
   },
   methods: {
