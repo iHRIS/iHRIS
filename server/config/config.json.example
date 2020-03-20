@@ -24,7 +24,10 @@
     },
     "kibana": "https://www.elastic.co/products/kibana",
     "mhero": "http://mhero.org/fhir/StructureDefinition",
-    "structureDefinition": "http://server.com/fhir"
+    "structureDefinition": "http://server.com/fhir",
+    "origins": [
+      "http://localhost:8080"
+    ]
   },
   "test": {
     "port":3000,
@@ -49,7 +52,10 @@
     },
     "kibana": "https://www.elastic.co/products/kibana",
     "mhero": "http://mhero.org/fhir/StructureDefinition",
-    "structureDefinition": "http://server.com/fhir"
+    "structureDefinition": "http://server.com/fhir",
+    "origins": [
+      "http://www.testserver.com"
+    ]
   },
   "production": {
     "port":3000,
@@ -74,6 +80,9 @@
     },
     "kibana": "https://www.elastic.co/products/kibana",
     "mhero": "http://mhero.org/fhir/StructureDefinition",
-    "structureDefinition": "http://server.com/fhir"
+    "structureDefinition": "http://server.com/fhir",
+    "origins": [
+      "http://www.yoursite.com"
+    ]
   }
 }
