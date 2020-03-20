@@ -8,7 +8,7 @@ const env = process.env.NODE_ENV || "development";
 const config = require("./config/config.json")[env];
 
 var dashboardRouter = require('./routes/dashboard');
-var indexRouter = require('./routes/index');
+var siteUpRouter = require('./routes/siteUp');
 var mheroRouter = require('./routes/mhero');
 var practitionerRouter = require('./routes/practitioner');
 var relationshipRouter = require('./routes/relationship');
@@ -30,7 +30,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/', indexRouter);
+app.use('/site-up', siteUpRouter);
 app.use('/dashboard', dashboardRouter);
 app.use('/mhero', mheroRouter);
 app.use('/practitioner', practitionerRouter);
