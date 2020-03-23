@@ -17,12 +17,20 @@ var userRouter = require('./routes/user');
 
 var app = express();
 
-app.use(helmet());
-app.use(cors({
-  origin: config.origins,
+var corsOptions = {
+  origin: function (origin, callback) {
+    if (config.origins.indexOf(origin) !== -1) {
+      callback(null, true);
+    } else {
+      console.log("Attempted request from unknown origin: " + origin);
+    }
+  },
   methods: ["GET", "POST"],
   allowedHeaders: ["Content-Type", "Authorization"]
-}));
+};
+
+app.use(helmet());
+app.use(cors(corsOptions));
 
 app.use(logger('dev'));
 app.use(express.json());
