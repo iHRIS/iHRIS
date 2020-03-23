@@ -198,21 +198,38 @@ export default {
       if (this.name === "Qualifications") {
         for (var k in data) {
           let element = data[k];
-          let reference = element.issuer.reference.split("/");
-          let issuer = await axios.get(
-            this.config.backend +
-              "/structure-definition/get/" +
-              reference[0] +
-              "/" +
-              reference[1]
-          );
+          let issuer = "";
+          let number = "";
+          let received = "";
+          let expiration = "";
+
+          if (element.issuer) {
+            let reference = element.issuer.reference.split("/");
+            let issuer = await axios.get(
+              this.config.backend +
+                "/structure-definition/get/" +
+                reference[0] +
+                "/" +
+                reference[1]
+            );
+            issuer = issuer.data.name;
+          }
+
+          if (element.identifier && element.identifier[0]) {
+            number = element.identifier[0].value;
+          }
+
+          if (element.period) {
+            received = element.period.start;
+            expiration = element.period.end;
+          }
 
           sanitized.push({
             type: element.code.text,
-            issuer: issuer.data.name,
-            number: element.identifier[0].value,
-            received: element.period.start,
-            expiration: element.period.end
+            issuer: issuer,
+            number: number,
+            received: received,
+            expiration: expiration
           });
         }
 
