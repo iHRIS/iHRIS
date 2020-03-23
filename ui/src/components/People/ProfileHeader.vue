@@ -1,5 +1,5 @@
 <template>
-  <v-layout row wrap class="pb-5">
+  <v-layout row wrap class="pb-5 ml-0">
     <v-flex :class="applyProfileHeaderGridLayout" v-if="practitioner.photo">
       <v-img
         :src="getProfilePicture()"
