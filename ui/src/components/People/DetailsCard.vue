@@ -261,7 +261,42 @@ export default {
             field = field[0];
           }
 
-          if (field.reference) {
+          if (field.extension) {
+            if (field[0]) {
+              field = field[0];
+            }
+
+            if (field.extension) {
+              field = field.extension;
+            }
+
+            if (field[0]) {
+              field = field[0];
+            }
+
+            if (field.valueReference) {
+              let reference = field.valueReference.reference.split("/");
+
+              let result = await axios.get(this.config.backend + "/structure-definition/get/" + reference[0] + "/" + reference[1]);
+
+              let text = "";
+
+              // look for a name, title, or text field
+              if (result.data.name) {
+                text = result.data.name;
+              } else if (result.data.title) {
+                text = result.data.title;
+              } else {
+                text = result.data.text;
+              }
+
+              delete element[j];
+
+              if (text !== "" && text !== undefined) {
+                element[field.url] = text;
+              }
+            }
+          } else if (field.reference) {
             let reference = field.reference.split("/");
 
             let result = await axios.get(
