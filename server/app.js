@@ -8,7 +8,6 @@ const env = process.env.NODE_ENV || "development";
 const config = require("./config/config.json")[env];
 
 var dashboardRouter = require('./routes/dashboard');
-var siteUpRouter = require('./routes/siteUp');
 var mheroRouter = require('./routes/mhero');
 var practitionerRouter = require('./routes/practitioner');
 var relationshipRouter = require('./routes/relationship');
@@ -30,6 +29,11 @@ var corsOptions = {
 };
 
 app.use(helmet());
+
+app.get('/site-up', cors(), function(req, res, next) {
+  res.status(201).json({message: "site is up"});
+});
+
 app.use(cors(corsOptions));
 
 app.use(logger('dev'));
@@ -38,7 +42,6 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/site-up', siteUpRouter);
 app.use('/dashboard', dashboardRouter);
 app.use('/mhero', mheroRouter);
 app.use('/practitioner', practitionerRouter);
