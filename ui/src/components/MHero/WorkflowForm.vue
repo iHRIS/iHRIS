@@ -1,5 +1,6 @@
 <template>
   <v-container>
+    <Alert ref="alert" />
     <v-form ref="form">
       <v-card class="mb-5">
         <v-card-text>
@@ -79,9 +80,13 @@
 <script>
 import axios from "axios";
 
+import Alert from "@/components/Layout/Alert.vue";
 import Practitioner from "@/mixins/Practitioner.js";
 
 export default {
+  components: {
+    Alert
+  },
   computed: {
     frequencySuffix() {
       if (this.period) {
@@ -127,6 +132,16 @@ export default {
 
     axios.get(config.backend + "/mhero/workflows").then(response => {
       let workflows = [];
+
+      if (!response.data.entry) {
+        this.$refs.alert.changeMessage(
+          "No workflows found. Messages will not be able to be sent.",
+          "error"
+        );
+
+        this.workflows = [];
+        return;
+      }
 
       response.data.entry.forEach(workflow => {
         let id = workflow.resource.id;
