@@ -63,7 +63,7 @@ router.get("/workflows", function (req, res, next) {
   }).then(response => {
     res.status(201).json(response.data);
   }).catch(err => {
-    res.status(201).json(err);
+    res.status(400).json(err);
   });
 });
 
