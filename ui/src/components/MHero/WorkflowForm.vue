@@ -130,44 +130,52 @@ export default {
   created() {
     const config = require("@/config/config.json");
 
-    axios.get(config.backend + "/mhero/workflows").then(response => {
-      let workflows = [];
+    axios
+      .get(config.backend + "/mhero/workflows")
+      .then(response => {
+        let workflows = [];
 
-      if (
-        !response ||
-        !Object.prototype.hasOwnProperty.call(response, "data") ||
-        !Object.prototype.hasOwnProperty.call(response.data, "entry") ||
-        !response.data.entry.length
-      ) {
-        this.$refs.alert.changeMessage(
-          "No workflows found. Messages will not be sent.",
-          "error"
-        );
+        if (
+          !response ||
+          !Object.prototype.hasOwnProperty.call(response, "data") ||
+          !Object.prototype.hasOwnProperty.call(response.data, "entry") ||
+          !response.data.entry.length
+        ) {
+          this.$refs.alert.changeMessage(
+            "No workflows found. Messages will not be sent.",
+            "error"
+          );
 
-        return;
-      }
-
-      response.data.entry.forEach(workflow => {
-        let id = workflow.resource.id;
-        let value = null;
-
-        for (var i in workflow.resource.extension[0].extension) {
-          let extension = workflow.resource.extension[0].extension[i];
-
-          if (extension.url === "name") {
-            value = extension.valueString;
-            break;
-          }
+          return;
         }
 
-        workflows.push({
-          text: value,
-          value: id
-        });
-      });
+        response.data.entry.forEach(workflow => {
+          let id = workflow.resource.id;
+          let value = null;
 
-      this.workflows = workflows;
-    });
+          for (var i in workflow.resource.extension[0].extension) {
+            let extension = workflow.resource.extension[0].extension[i];
+
+            if (extension.url === "name") {
+              value = extension.valueString;
+              break;
+            }
+          }
+
+          workflows.push({
+            text: value,
+            value: id
+          });
+        });
+
+        this.workflows = workflows;
+      })
+      .catch(() => {
+        this.$refs.alert.changeMessage(
+          "Could not get workflows from server.",
+          "error"
+        );
+      });
 
     axios.get(config.backend + "/practitioner/all").then(response => {
       let practitioners = [];
