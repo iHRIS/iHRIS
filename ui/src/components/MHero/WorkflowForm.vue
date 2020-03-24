@@ -133,13 +133,17 @@ export default {
     axios.get(config.backend + "/mhero/workflows").then(response => {
       let workflows = [];
 
-      if (!response.data.entry) {
+      if (
+        !response ||
+        !Object.prototype.hasOwnProperty.call(response, "data") ||
+        !Object.prototype.hasOwnProperty.call(response.data, "entry") ||
+        !response.data.entry.length
+      ) {
         this.$refs.alert.changeMessage(
-          "No workflows found. Messages will not be able to be sent.",
+          "No workflows found. Messages will not be sent.",
           "error"
         );
 
-        this.workflows = [];
         return;
       }
 
@@ -167,6 +171,18 @@ export default {
 
     axios.get(config.backend + "/practitioner/all").then(response => {
       let practitioners = [];
+
+      if (
+        !response ||
+        !Object.prototype.hasOwnProperty.call(response, "data") ||
+        !response.data.length
+      ) {
+        this.$refs.alert.changeMessage(
+          "No practitioners found. Messages will not be sent.",
+          "error"
+        );
+        return;
+      }
 
       response.data.forEach(record => {
         let practitioner = record._source;
