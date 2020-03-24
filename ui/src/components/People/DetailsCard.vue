@@ -277,7 +277,13 @@ export default {
             if (field.valueReference) {
               let reference = field.valueReference.reference.split("/");
 
-              let result = await axios.get(this.config.backend + "/structure-definition/get/" + reference[0] + "/" + reference[1]);
+              let result = await axios.get(
+                this.config.backend +
+                  "/structure-definition/get/" +
+                  reference[0] +
+                  "/" +
+                  reference[1]
+              );
 
               let text = "";
 
