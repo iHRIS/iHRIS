@@ -17,12 +17,15 @@
     "eslint-plugin-prettier": "^3.1.1",
     "fhir": "4.*",
     "lodash": "^4.17.15",
+    "moment": "^2.24.0",
     "swagger-ui": "^3.23.4",
     "vue": "2.*",
     "vue-async-computed": "^3.8.2",
     "vue-cookies": "^1.5.13",
     "vue-router": "^3.0.7",
+    "vuejs-datepicker": "^1.6.2",
     "vuetify": "^2.1.6",
+    "vuetify2-datetime-picker": "^1.0.0-alpha.3",
     "vuex": "^3.1.1"
   },
   "devDependencies": {

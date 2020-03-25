@@ -1,13 +1,15 @@
 <template>
-  <div>
+  <div  :id="setFieldId">
     <v-autocomplete
       :items="codes"
       :label="label"
       outline
       :required="required"
+      :search-input.sync="selectedText"
       v-model="reference"
       :rules="[rules.required]"
       @change="changeValue"
+      @blur="runUIValidation"
       :hint="hint"
       :multiple="parseInt(max) > 1"
     >
@@ -54,11 +56,19 @@ import axios from "axios";
 
 import Alert from "@/components/Layout/Alert.vue";
 import StructureDefinition from "@/mixins/StructureDefinition.js";
+import GenerateFieldID from "@/mixins/GenerateFieldID.js";
 
 export default {
   components: {
     Alert,
     DynamicForm: () => import("./DynamicForm.vue")
+  },
+  computed:{
+    setFieldId()
+    {
+      
+      return this.generateFieldId(this.formName,this.fieldName);
+    }
   },
   created() {
     this.config = require("@/config/config.json");
@@ -112,6 +122,7 @@ export default {
       fields: [],
       modalAlert: false,
       name: null,
+      selectedText: null,
       reference: null,
       rules: {
         required: value => {
@@ -134,6 +145,9 @@ export default {
     },
     getInput() {
       return this["reference"];
+    },
+    getSelectedText() {
+      return this.selectedText;
     },
     getText(data) {
       if (data.name) {
@@ -176,9 +190,18 @@ export default {
             this.showFailedSubmit();
           }
         });
+    },
+    runUIValidation()
+    {
+      var validationParams={
+        formName: this.formName,
+        fiedlName: this.fieldName,
+        value: this.reference
+      };
+      this.$emit("validationTriggered",validationParams)
     }
   },
-  mixins: [StructureDefinition],
-  props: ["label", "required", "value", "hint", "max", "structureDefinition"]
+  mixins: [StructureDefinition,GenerateFieldID],
+  props: ["label", "required", "value", "hint", "max", "structureDefinition","formName","fieldName"]
 };
 </script>

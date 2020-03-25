@@ -187,7 +187,6 @@ router.post("/add", function (req, res, next) {
 router.post("/edit", function (req, res, next) {
   let data = req.body;
   data["resourceType"] = "Practitioner";
-
   let url = URI(config.fhir.server).segment('fhir').segment('Practitioner').segment(data.id).toString()
   axios.put(url, data, {
     withCredentials: true,
@@ -227,21 +226,70 @@ router.post("/edit/work-history", function (req, res, next) {
 /**
  * Search for practitioners
  */
-router.get("/search", function (req, res, next) {
-  let url = URI(config.fhir.server).segment('fhir').segment('Practitioner').toString();
-  url += req._parsedUrl.search;
-
-  axios.get(url, {
-    withCredentials: true,
-    auth: {
-      username: config.fhir.username,
-      password: config.fhir.password
-    }
-  }).then(response => {
-    res.status(201).json(response.data);
-  }).catch(err => {
-    res.status(400).json(err);
+router.get("/search", async function (req, res, next) {
+  let query_params = req._parsedUrl.query;
+  if(!query_params){
+    res.status(400).json({message: "No search criteria submitted"});
+    return;
+  }
+  query_params = query_params.split('&');
+  let query_objects = query_params.map(query_str => {
+    let obj = new Object();
+    let q = query_str.split("=");
+    obj[q[0]] = q[1];
+    return obj;
   });
+
+  let query = {}
+  query["must"] = []
+  query_objects.forEach(obj => {
+    if(Object.keys(obj)[0] === "family") {
+      query["must"].push({
+        wildcard: {
+          family: `*${obj.family}*`
+        }
+      });
+    }
+    if(Object.keys(obj)[0] == "organization") {
+      query["must"].push({
+        match: {
+          facilityName: {
+            query: obj.organization,
+            operator: "AND"
+          }
+        }
+      });
+    }
+  });
+
+  
+  let practitioners = [];
+  let scroll = null;
+  const size = 1000;
+
+  let response = await client.search({
+    index: "practitioner",
+    scroll: "1m",
+    size: size,
+    body: {
+      query: {
+        bool: query
+      }
+    }
+  });
+
+  practitioners = response.hits.hits;
+
+  while (response.hits.hits.length === size) {
+    response = await client.scroll({
+      scroll: "1m",
+      scrollId: response._scroll_id
+    });
+
+    practitioners = practitioners.concat(response.hits.hits);
+  }
+
+  res.status(201).json(practitioners);
 });
 
 module.exports = router;

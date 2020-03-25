@@ -1,5 +1,8 @@
 <template>
   <v-container>
+    <v-alert v-model="alert" dismissable type="error">
+        {{ error }}
+    </v-alert>
     <ProfileHeader
       :practitioner="practitioner"
       :edit="true"
@@ -24,6 +27,7 @@
             v-on:deleteData="deleteSubsectionData"
             edit
             :ref="'subsection' + index"
+            :validationRules="uiValidationRules"
           />
         </div>
 
@@ -36,6 +40,7 @@
               v-show="details"
               :name="detailTitle"
               :fields="detailFields"
+              :validationRules="uiValidationRules"
               v-on:cancel="cancelDetailsForm"
               v-on:successfulSubmit="submitDetailsForm"
               ref="detailsForm"
@@ -94,7 +99,20 @@ export default {
       detailRaw: null,
       detailTitle: null,
       screenSize: "",
-      structureDefinition: null
+      structureDefinition: null,
+      alert: false,
+      error: "",
+      uiValidationRules:[
+        {
+          formName:"workHistory",
+          sourceFieldName:"active",
+          condition: "eq",
+          value: true,
+          behavior: "hide",
+          targetFieldName: "Period.end"
+        }
+      ],
+      screenSize: ""
     };
   },
   methods: {
