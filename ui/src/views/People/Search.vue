@@ -81,8 +81,10 @@ import axios from "axios";
 import Alert from "@/components/Layout/Alert.vue";
 import DynamicForm from "@/components/Form/DynamicForm.vue";
 import MobileLayout from "@/mixins/MobileLayout.js";
+import StructureDefinition from "@/mixins/StructureDefinition.js";
+
 export default {
-  mixins: [MobileLayout],
+  mixins: [MobileLayout, StructureDefinition],
   computed: {
     applyTitleStyle() {
       return this.titleStyleSearchPeople(this.$vuetify.breakpoint.name);
@@ -208,13 +210,21 @@ export default {
       let allFields = [];
       this.getAllSearchFields().then(fields => {
         fields.forEach(field => {
+          let type = field.type[0].code;
+          let name = field.id.slice(field.id.indexOf(".") + 1);
+          name = name.replace("[x]", "");
+          let reference = name;
+          if (type === "Reference") {
+            reference = field.type[0].targetProfile[0];
+          }
           allFields.push({
             id: field.id.substring(field.id.lastIndexOf(".") + 1),
             max: parseInt(field.max),
             name: field.id.substring(field.id.lastIndexOf(".") + 1),
             required: false,
-            type: field.type[0].code,
+            type: type,
             value: null,
+            reference: reference,
             label: field.short
           });
         });
@@ -222,33 +232,72 @@ export default {
       return Promise.resolve(allFields);
     },
     search() {
-      let params = {
-        params: this.$refs.searchForm.getInputs()
-      };
+      let inputs = this.getInputs();
 
+      if(!inputs) return;
+      
+      let params = {
+        params: inputs
+      };
       axios
         .get(this.config.backend + "/practitioner/search", params)
         .then(response => {
+          if(!response.data.length) {
+            this.practitioners = [];
+            return;
+          }
           let practitioners = [];
-          response.data.entry.forEach(practitioner => {
-            let date = new Date(practitioner.resource.workHistory[0].start_date);
-            let month = date.getMonth() + 1 < 10 ? `0${date.getMonth()+1}` : date.getMonth()+1;
-            let day = date.getDate() < 10 ? `0${date.getDate()}` : date.getDate();
+          response.data.forEach(practitioner => {
+            let id = practitioner._source.practitioner.substring(practitioner._source.practitioner.lastIndexOf("/") + 1);
             practitioners.push({
-              editLink: "/people/edit/" + practitioner.resource.id,
-              viewLink: "/people/view/" + practitioner.resource.id,
-              surname: practitioner.resource.name[0].family,
-              firstname: practitioner.resource.name[0].given[0],
-              job_title: practitioner.resource.workHistory[0].job_title,
-              // position_title:
-              facility: practitioner.resource.workHistory[0].facility,
-              employee_status:
-                practitioner.resource.workHistory[0].employee_status,
-              start_date: `${date.getFullYear()}-${month}-${day}`
+              editLink: "/people/edit/" + id,
+              viewLink: "/people/view/" + id,
+              surname: practitioner._source.family,
+              firstname: practitioner._source.given,
+              position_title: practitioner._source.positionTitle,
+              facility: practitioner._source.facilityName,
+              start_date: practitioner._source.startDate
             });
           });
           this.practitioners = practitioners;
         });
+    },
+    getInputs() {
+      let inputs = {};
+      let isEmpty = true;
+      for (var field of this.$refs.searchForm.inputs) {
+        let key = null;
+        let name = field.name;
+        if (
+          this.primitiveTypes.indexOf(field.parentType) < 0 &&
+          field.parentType !== null &&
+          field.parentType !== undefined
+        ) {
+          key = field.id.toLowerCase();
+        } else {
+          key = field.name;
+        }
+        let input = this.$refs.searchForm.$refs[name];
+        if (input) {
+          let value = input[0].getInput();
+          if(field.type === "Reference") {
+            value = input[0].getSelectedText();
+          }
+          if(value)
+            isEmpty = false;
+            inputs[key] = value;
+        }
+      }
+      if(isEmpty) {
+        this.$refs.searchAlert.changeMessage(
+          "At least one search filter must have a value",
+          "error"
+        );
+        this.practitioners = [];
+        return;
+      }
+      if(this.$refs.searchAlert.show) this.$refs.searchAlert.reset();
+      return inputs;
     },
     showError() {
       this.$refs.searchAlert.showMessage(

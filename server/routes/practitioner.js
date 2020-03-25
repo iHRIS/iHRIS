@@ -227,84 +227,69 @@ router.post("/edit/work-history", function (req, res, next) {
  * Search for practitioners
  */
 router.get("/search", async function (req, res, next) {
-  let url = URI(config.fhir.server).segment('fhir').segment('Practitioner').toString();
-  url += req._parsedUrl.search;
-
-  let credentials = {
-    withCredentials: true,
-    auth: {
-      username: config.fhir.username,
-      password: config.fhir.password
-    }
-  };
-
-  let response = await axios.get(url, credentials);
-  if(response === null){
-    res.status(400).json(err);
+  let query_params = req._parsedUrl.query;
+  if(!query_params){
+    res.status(400).json({message: "No search criteria submitted"});
     return;
   }
-  let practitioners_data = response.data;
-  let promises = [];
-  //get work history
-  for(let i = 0; i < practitioners_data.entry.length; i++){
-    practitioner = practitioners_data.entry[i].resource;
-    let url = URI(config.fhir.server).segment('fhir').segment('PractitionerRole');
-    url.addQuery('practitioner', practitioner.id);
-    url = url.toString();
-    promises[i] = await axios.get(url, credentials).then(practitionerRoleResponse => {
-      if (practitionerRoleResponse.data.entry) {
-        let workHistory = [];
-        practitionerRoleResponse.data.entry.forEach(job => {
-          if(!workHistory.length) {
-            workHistory.push({
-              job_title: job.resource.code[0].text,
-              // position_title:
-              facility: job.resource.location[0].reference,
-              employee_status: job.resource.active ? "In Service" : "Retired",
-              start_date: job.resource.period.start
-            });
-          } else {
-            if(workHistory[0].start_date < job.resource.period.start) {
-              workHistory.pop();
-              workHistory.push({
-                job_title: job.resource.code[0].text,
-                // position_title:
-                facility: job.resource.location[0].reference,
-                employee_status: job.resource.active ? "In Service" : "Retired",
-                start_date: job.resource.period.start
-              });
-            }
+  query_params = query_params.split('&');
+  let query_objects = query_params.map(query_str => {
+    let obj = new Object();
+    let q = query_str.split("=");
+    obj[q[0]] = q[1];
+    return obj;
+  });
+
+  let query = {}
+  query["must"] = []
+  query_objects.forEach(obj => {
+    if(Object.keys(obj)[0] === "family") {
+      query["must"].push({
+        wildcard: {
+          family: `*${obj.family}*`
+        }
+      });
+    }
+    if(Object.keys(obj)[0] == "organization") {
+      query["must"].push({
+        match: {
+          facilityName: {
+            query: obj.organization,
+            operator: "AND"
           }
-          
-        });
+        }
+      });
+    }
+  });
 
-        practitioners_data.entry[i].resource.workHistory = workHistory;
-      };
-    });
-  }
-  await Promise.all(promises);
-  // get facility names
-  for(let practitioner = 0; practitioner < practitioners_data.entry.length; practitioner++) {
-    const facility = await getFacilityName(practitioners_data.entry[practitioner].resource.workHistory[0].facility);
-    practitioners_data.entry[practitioner].resource.workHistory[0].facility = facility;
-  }
-  res.status(201).json(practitioners_data);
-});
+  
+  let practitioners = [];
+  let scroll = null;
+  const size = 1000;
 
-async function getFacilityName(reference) {
-  let id = reference.substring(reference.lastIndexOf("/") + 1);
-  let url = URI(config.fhir.server).segment('fhir').segment("Location").segment(id).toString();
-  let result = await axios.get(
-    url, {
-      params: {},
-      withCredentials: true,
-      auth: {
-        username: config.fhir.username,
-        password: config.fhir.password
+  let response = await client.search({
+    index: "practitioner",
+    scroll: "1m",
+    size: size,
+    body: {
+      query: {
+        bool: query
       }
     }
-  );
+  });
 
-  return result.data.name;
-}
+  practitioners = response.hits.hits;
+
+  while (response.hits.hits.length === size) {
+    response = await client.scroll({
+      scroll: "1m",
+      scrollId: response._scroll_id
+    });
+
+    practitioners = practitioners.concat(response.hits.hits);
+  }
+
+  res.status(201).json(practitioners);
+});
+
 module.exports = router;

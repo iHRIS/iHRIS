@@ -5,6 +5,7 @@
       :label="label"
       outline
       :required="required"
+      :search-input.sync="selectedText"
       v-model="reference"
       :rules="[rules.required]"
       @change="changeValue"
@@ -121,6 +122,7 @@ export default {
       fields: [],
       modalAlert: false,
       name: null,
+      selectedText: null,
       reference: null,
       rules: {
         required: value => {
@@ -143,6 +145,9 @@ export default {
     },
     getInput() {
       return this["reference"];
+    },
+    getSelectedText() {
+      return this.selectedText;
     },
     getText(data) {
       if (data.name) {
