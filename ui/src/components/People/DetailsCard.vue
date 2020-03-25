@@ -354,7 +354,6 @@ export default {
     DynamicForm
   },
   created() {
-    
     this.config = require("@/config/config.json");
 
     switch (this.name) {
@@ -590,17 +589,21 @@ export default {
             }
           } else {
             value = this.data[index][field.title];
-          //Datetime value comes as data[index]['period']['nameofthefield'], 
-          //data[index][field.title] returns undefined since field.title does not correspont the the array key
-          if(fields[key].type == "dateTime" && this.data[index][field.title.split(".")[0]]!=null)
-          {
-            fields[key].value = this.data[index][field.title.split(".")[0]][field.title.split(".")[2].toLowerCase()];
+            //Datetime value comes as data[index]['period']['nameofthefield'],
+            //data[index][field.title] returns undefined since field.title does not correspont the the array key
+            if (
+              fields[key].type == "dateTime" &&
+              this.data[index][field.title.split(".")[0]] != null
+            ) {
+              fields[key].value = this.data[index][field.title.split(".")[0]][
+                field.title.split(".")[2].toLowerCase()
+              ];
+            } else {
+              fields[key].value = this.data[index][field.title];
+            }
           }
-          else{
-            fields[key].value = this.data[index][field.title];
-          } 
         }
-      }}
+      }
       this.$refs.dynamicEditingForm.changeFields(fields);
 
       this.currentIndex = index;
@@ -611,9 +614,7 @@ export default {
     },
     toggleSectionDetailDisplay() {
       this.showSectionDetail = !this.showSectionDetail;
-    },
-
-
+    }
   },
   mixins: [Practitioner, StructureDefinition, MobileLayout],
   props: {
@@ -626,7 +627,7 @@ export default {
       default: null,
       type: String
     },
-    validationRules:{},
+    validationRules: {},
     screenSize: {
       default: null,
       type: String

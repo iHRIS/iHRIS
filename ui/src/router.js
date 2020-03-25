@@ -7,20 +7,19 @@ const mheroEnabled = ConfigSettings.methods.isMHeroEnabled();
 
 Vue.use(Router);
 
-var vueInstance=new Vue(
-{
-  props:{
-    error:String
+var vueInstance = new Vue({
+  props: {
+    error: String
   },
-  methods:{
-    displayError(msg){
-      this.$nextTick(() => { 
-        this.error=msg;
-        serverBus.$emit("errorGenerated",this.error);
+  methods: {
+    displayError(msg) {
+      this.$nextTick(() => {
+        this.error = msg;
       });
     }
   }
 });
+
 let router = new Router({
   mode: "history",
   base: process.env.BASE_URL,
@@ -150,8 +149,7 @@ let router = new Router({
       name: "user-manual",
       component: () =>
         import(/* webpackChunkName: "userManual" */ "./views/UserManual.vue")
-    }
-    ,
+    },
     {
       path: "/noaccess",
       name: "noaccess",
@@ -165,74 +163,80 @@ router.beforeEach((to, from, next) => {
   if (!store.state.authentication.username) {
     const config = require("@/config/config.json");
 
-    if (
-      
-      to.path == "/login" ||
-      to.path == "/logout" ||
-      config.demo
-    ) {
+    if (to.path == "/login" || to.path == "/logout" || config.demo) {
       next();
-    } 
-    else {
+    } else {
       next({
         path: "/login"
       });
     }
+  } else if (ConfigSettings.methods.isDemoMode()) {
+    next();
   } else {
-    
-      var routeName=to.name;
-      var roles=store.state.roles;
-      var allowed=checkPageRole(roles,routeName);
-      if(allowed){
-        next();
-      }
-      else
-      {
-        var error = "The user does not have the necessary privileges to access the page : "+routeName;
-        next({
-              path: "/noaccess",
-            });
-        
-        vueInstance.displayError(error);
-      }
+    var routeName = to.name;
+    var roles = store.state.roles;
+    var allowed = checkPageRole(roles, routeName);
+
+    if (allowed) {
+      next();
+    } else {
+      var error =
+        "The user does not have the necessary privileges to access the page : " +
+        routeName;
+      next({
+        path: "/noaccess"
+      });
+
+      vueInstance.displayError(error);
+    }
   }
 });
 
-function checkPageRole(roleName,routeName)
-{
+function checkPageRole(roleName, routeName) {
   let roles = [];
-  switch(routeName)
-  {
+
+  switch (routeName) {
     case "search-people":
       roles = ["Admin", "Edit", "View"];
       break;
+
     case "add-people":
       roles = ["Admin", "Edit"];
       break;
+
     case "edit-people":
       roles = ["Admin", "Edit"];
       break;
+
     case "people-edit":
       roles = ["Admin", "Edit"];
       break;
+
     case "people-view":
-      roles = ["Admin","Edit","View"];
+      roles = ["Admin", "Edit", "View"];
       break;
+
     case "home":
-      roles = ["Admin","Edit","View"];
+      roles = ["Admin", "Edit", "View"];
       break;
+
     case "relationship":
       roles = ["Admin"];
       break;
+
     case "admin-add-user":
       roles = ["Admin"];
       break;
+
     case "admin-users":
       roles = ["Admin"];
       break;
+
     default:
       return true;
   }
+
   return roles.includes(roleName) && roles.length;
-};
+}
+
 export default router;
