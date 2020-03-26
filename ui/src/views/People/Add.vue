@@ -30,6 +30,7 @@
 import axios from "axios";
 import DynamicForm from "@/components/Form/DynamicForm.vue";
 import MobileLayout from "@/mixins/MobileLayout.js";
+import NProgress from "nprogress";
 
 export default {
   mixins: [MobileLayout],
