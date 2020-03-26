@@ -1,9 +1,9 @@
 <template>
-  <v-container >
+  <v-container>
     <v-alert v-model="alert" dismissable type="error">
-        {{ error }}
+      {{ error }}
     </v-alert>
-    <v-flex :class="applyGridLayout" >
+    <v-flex :class="applyGridLayout">
       <div :class="applyTitleStyle">Add a Person</div>
       <p :style="{ 'font-size': applyFontSizeParagraph }">
         To track a person in the database, whether an employee or a job
@@ -29,7 +29,6 @@
 <script>
 import axios from "axios";
 import DynamicForm from "@/components/Form/DynamicForm.vue";
-import { store } from "@/store.js";
 import MobileLayout from "@/mixins/MobileLayout.js";
 
 export default {
@@ -48,9 +47,8 @@ export default {
   created() {
     this.screenSize = this.$vuetify.breakpoint.name;
     this.config = require("@/config/config.json");
-    
-      NProgress.start();
-      axios
+
+    axios
       .get(this.config.backend + "/practitioner/describe/page")
       .then(pageResponse => {
         let fields = [];
@@ -165,7 +163,6 @@ export default {
                           this.dynamicFormKey++;
                           return Promise.resolve();
                         });
-                        NProgress.done()
                     }
                   } else {
                     let matchingField = structureDefinitionResponse.data.snapshot.element.find(
@@ -201,15 +198,14 @@ export default {
         this.error = error.response.data;
         this.alert = true;
         this.addPractitionerForm = false;
-        NProgress.done()
       });
-   },
+  },
   components: {
     DynamicForm
   },
   data() {
     return {
-      allowedToAccess:true,
+      allowedToAccess: true,
       addPractitionerForm: true,
       alert: false,
       config: null,
@@ -275,4 +271,3 @@ export default {
   }
 };
 </script>
-

@@ -40,7 +40,9 @@ let router = new Router({
       path: "/admin/add-user",
       name: "admin-add-user",
       component: () =>
-        import(/* webpackChunkName: "adminAddUser" */ "./views/Admin/AddUser.vue")
+        import(
+          /* webpackChunkName: "adminAddUser" */ "./views/Admin/AddUser.vue"
+        )
     },
     {
       path: "/admin/users",
@@ -52,13 +54,17 @@ let router = new Router({
       path: "/change-password",
       name: "change-password",
       component: () =>
-        import(/* webpackChunkName: "ChangePassword" */ "./views/ChangePassword.vue")
+        import(
+          /* webpackChunkName: "ChangePassword" */ "./views/ChangePassword.vue"
+        )
     },
     {
       path: "/documentation",
       name: "documentation",
       component: () =>
-        import(/* webpackChunkName: "documentation" */ "./views/Documentation.vue")
+        import(
+          /* webpackChunkName: "documentation" */ "./views/Documentation.vue"
+        )
     },
     {
       path: "/feedback",
@@ -84,23 +90,33 @@ let router = new Router({
       component: () =>
         mheroEnabled
           ? import(/* webpackChunkName: "Mhero" */ "./views/MHero/Workflow.vue")
-          : import(/* webpackChunkName: "Mhero" */ "./views/MHero/NotAvailable.vue")
+          : import(
+              /* webpackChunkName: "Mhero" */ "./views/MHero/NotAvailable.vue"
+            )
     },
     {
       path: "/mhero/reports",
       name: "mhero-reports",
       component: () =>
         mheroEnabled
-          ? import(/* webpackChunkName: "Mhero Reports" */ "./views/MHero/Reports.vue")
-          : import(/* webpackChunkName: "Mhero Reports" */ "./views/MHero/NotAvailable.vue")
+          ? import(
+              /* webpackChunkName: "Mhero Reports" */ "./views/MHero/Reports.vue"
+            )
+          : import(
+              /* webpackChunkName: "Mhero Reports" */ "./views/MHero/NotAvailable.vue"
+            )
     },
     {
       path: "/mhero/user-manual",
       name: "mhero-user-manual",
       component: () =>
         mheroEnabled
-          ? import(/* webpackChunkName: "Mhero User Manual" */ "./views/MHero/UserManual.vue")
-          : import(/* webpackChunkName: "Mhero User Manual" */ "./views/MHero/NotAvailable.vue")
+          ? import(
+              /* webpackChunkName: "Mhero User Manual" */ "./views/MHero/UserManual.vue"
+            )
+          : import(
+              /* webpackChunkName: "Mhero User Manual" */ "./views/MHero/NotAvailable.vue"
+            )
     },
     {
       path: "/people/search",
@@ -118,7 +134,9 @@ let router = new Router({
       path: "/people/add/:section/:id",
       name: "edit-people",
       component: () =>
-        import(/* webpackChunkName: "EditPeople" */ "./views/People/AddSubsection.vue")
+        import(
+          /* webpackChunkName: "EditPeople" */ "./views/People/AddSubsection.vue"
+        )
     },
     {
       path: "/people/edit/:id",
@@ -136,13 +154,17 @@ let router = new Router({
       path: "/relationship",
       name: "relationship",
       component: () =>
-        import(/* webpackChunkName: "about" */ "./views/Relationship/Relationship.vue")
+        import(
+          /* webpackChunkName: "about" */ "./views/Relationship/Relationship.vue"
+        )
     },
     {
       path: "/terms-and-conditions",
       name: "terms-and-conditions",
       component: () =>
-        import(/* webpackChunkName: "termsAndConditions" */ "./views/TermsAndConditions.vue")
+        import(
+          /* webpackChunkName: "termsAndConditions" */ "./views/TermsAndConditions.vue"
+        )
     },
     {
       path: "/user-manual",

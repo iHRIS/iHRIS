@@ -32,11 +32,9 @@
 import GenerateFieldID from "@/mixins/GenerateFieldID.js";
 export default {
   mixins: [GenerateFieldID],
-  computed:{
-    setFieldId()
-    {
-      
-      return this.generateFieldId(this.formName,this.fieldName);
+  computed: {
+    setFieldId() {
+      return this.generateFieldId(this.formName, this.fieldName);
     }
   },
   created() {
@@ -82,6 +80,6 @@ export default {
       return this["string"];
     }
   },
-  props: ["label", "max", "required", "value", "hint","formName","fieldName"]
+  props: ["label", "max", "required", "value", "hint", "formName", "fieldName"]
 };
 </script>
