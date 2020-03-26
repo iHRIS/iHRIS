@@ -2,6 +2,7 @@
     "presets": [["env", { "modules": false }]],
     "env": {
       "test": {
+        "plugins": ["syntax-dynamic-import"],
         "presets": [
           ["env", { 
             "targets": { "node": "current" }
