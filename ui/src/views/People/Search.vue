@@ -234,21 +234,23 @@ export default {
     search() {
       let inputs = this.getInputs();
 
-      if(!inputs) return;
-      
+      if (!inputs) return;
+
       let params = {
         params: inputs
       };
       axios
         .get(this.config.backend + "/practitioner/search", params)
         .then(response => {
-          if(!response.data.length) {
+          if (!response.data.length) {
             this.practitioners = [];
             return;
           }
           let practitioners = [];
           response.data.forEach(practitioner => {
-            let id = practitioner._source.practitioner.substring(practitioner._source.practitioner.lastIndexOf("/") + 1);
+            let id = practitioner._source.practitioner.substring(
+              practitioner._source.practitioner.lastIndexOf("/") + 1
+            );
             practitioners.push({
               editLink: "/people/edit/" + id,
               viewLink: "/people/view/" + id,
@@ -280,15 +282,14 @@ export default {
         let input = this.$refs.searchForm.$refs[name];
         if (input) {
           let value = input[0].getInput();
-          if(field.type === "Reference") {
+          if (field.type === "Reference") {
             value = input[0].getSelectedText();
           }
-          if(value)
-            isEmpty = false;
-            inputs[key] = value;
+          if (value) isEmpty = false;
+          inputs[key] = value;
         }
       }
-      if(isEmpty) {
+      if (isEmpty) {
         this.$refs.searchAlert.changeMessage(
           "At least one search filter must have a value",
           "error"
@@ -296,7 +297,7 @@ export default {
         this.practitioners = [];
         return;
       }
-      if(this.$refs.searchAlert.show) this.$refs.searchAlert.reset();
+      if (this.$refs.searchAlert.show) this.$refs.searchAlert.reset();
       return inputs;
     },
     showError() {

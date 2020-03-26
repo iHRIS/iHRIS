@@ -1,5 +1,5 @@
 <template>
-  <v-form ref="form" v-if="data" >
+  <v-form ref="form" v-if="data">
     <div v-for="field in sanitizedFields" v-bind:key="name + '-' + field.id">
       <Base64Binary
         v-if="field.type == 'base64Binary'"
@@ -18,7 +18,7 @@
         :hint="field.short"
         :value="field.value"
         :fieldName="field.name"
-        :formName = "name"
+        :formName="name"
         @validationTriggered="runValidation($event)"
       />
 
@@ -42,7 +42,7 @@
         :hint="field.short"
         :value="field.value"
       />
-      
+
       <Date
         v-if="field.type == 'date'"
         :label="field.label"
@@ -52,9 +52,9 @@
         :fieldName="field.name"
         :hint="field.short"
         :value="field.value"
-        :formName = "name"
+        :formName="name"
       />
-      
+
       <DateTime
         v-if="field.type.toLowerCase() == 'datetime'"
         :label="field.label"
@@ -64,9 +64,9 @@
         :fieldName="field.name"
         :hint="field.short"
         :value="field.value"
-        :formName = "name"
+        :formName="name"
       />
-      
+
       <Decimal
         v-if="field.type == 'decimal'"
         :label="field.label"
@@ -158,8 +158,8 @@
         :hint="field.short"
         :structureDefinition="field.reference"
         :fieldName="field.name"
-        :formName = "name"
-         @validationTriggered="runValidation($event)"
+        :formName="name"
+        @validationTriggered="runValidation($event)"
       />
 
       <String
@@ -171,7 +171,7 @@
         :value="field.value"
         :hint="field.short"
         :fieldName="field.name"
-        :formName = "name"
+        :formName="name"
       />
 
       <Time
@@ -295,7 +295,6 @@ export default {
   },
   created() {
     this.changeFields(this.fields);
-    
   },
   data() {
     return {
@@ -388,72 +387,82 @@ export default {
         this.$emit("failedSubmit");
       }
     },
-    runValidation(event){
-      for(var index in this.validationRules)
-      {
+    runValidation(event) {
+      for (var index in this.validationRules) {
         var oRule = this.validationRules[index];
-        if(oRule.formName.toLowerCase() == event.formName.toLowerCase() 
-        && oRule.sourceFieldName.toLowerCase() == event.fiedlName.toLowerCase())
-        {
-            var condition = oRule.condition;
-            switch(condition)
-            {
-              case "eq":
-                if(event.value === oRule.value)
-                {
-                   this.applyBehaviour(oRule.behavior,oRule.targetFieldName,oRule.formName,false);
-                }
-                else{
-                  this.applyBehaviour(oRule.behavior,oRule.targetFieldName,oRule.formName,true);
-                }
-                break;
-            case "ne":
-              if(event.value !== oRule.value)
-              {
-                 this.applyBehaviour(oRule.behavior,oRule.targetFieldName,oRule.formName,false);
+        if (
+          oRule.formName.toLowerCase() == event.formName.toLowerCase() &&
+          oRule.sourceFieldName.toLowerCase() == event.fiedlName.toLowerCase()
+        ) {
+          var condition = oRule.condition;
+          switch (condition) {
+            case "eq":
+              if (event.value === oRule.value) {
+                this.applyBehaviour(
+                  oRule.behavior,
+                  oRule.targetFieldName,
+                  oRule.formName,
+                  false
+                );
+              } else {
+                this.applyBehaviour(
+                  oRule.behavior,
+                  oRule.targetFieldName,
+                  oRule.formName,
+                  true
+                );
               }
               break;
-            }
-
+            case "ne":
+              if (event.value !== oRule.value) {
+                this.applyBehaviour(
+                  oRule.behavior,
+                  oRule.targetFieldName,
+                  oRule.formName,
+                  false
+                );
+              }
+              break;
+          }
         }
-
       }
-
     },
-    applyBehaviour(behavior,fieldName,formName,reverse)
-    {
-      var sanitizedFieldId="";
-      sanitizedFieldId=fieldName.split(".").length>0 ? fieldName.replace(/\./g,"_") : fieldName;
-      sanitizedFieldId=(formName+"_"+sanitizedFieldId).toLowerCase()
-      if(!reverse)
-      {
-        switch(behavior){
+    applyBehaviour(behavior, fieldName, formName, reverse) {
+      var sanitizedFieldId = "";
+      sanitizedFieldId =
+        fieldName.split(".").length > 0
+          ? fieldName.replace(/\./g, "_")
+          : fieldName;
+      sanitizedFieldId = (formName + "_" + sanitizedFieldId).toLowerCase();
+      if (!reverse) {
+        switch (behavior) {
           case "hide":
-            document.getElementById(sanitizedFieldId).style.visibility = "hidden";
+            document.getElementById(sanitizedFieldId).style.visibility =
+              "hidden";
             break;
           case "show":
-            document.getElementById(sanitizedFieldId).style.visibility = "visible";
+            document.getElementById(sanitizedFieldId).style.visibility =
+              "visible";
             break;
           case "disable":
-            document.getElementById(sanitizedFieldId).disabled=true;
+            document.getElementById(sanitizedFieldId).disabled = true;
             break;
           case "enable":
             document.getElementById(sanitizedFieldId).disabled = false;
             break;
-
         }
-      }
-      else
-      {
-        switch(behavior){
+      } else {
+        switch (behavior) {
           case "hide":
-            document.getElementById(sanitizedFieldId).style.visibility = "visible";
+            document.getElementById(sanitizedFieldId).style.visibility =
+              "visible";
             break;
           case "show":
-            document.getElementById(sanitizedFieldId).style.visibility = "hidden";
+            document.getElementById(sanitizedFieldId).style.visibility =
+              "hidden";
             break;
           case "disable":
-            document.getElementById(sanitizedFieldId).disabled=false;
+            document.getElementById(sanitizedFieldId).disabled = false;
             break;
           case "enable":
             document.getElementById(sanitizedFieldId).disabled = true;
@@ -461,7 +470,6 @@ export default {
         }
       }
     }
-
   },
   props: {
     cancelLabel: {
@@ -475,7 +483,7 @@ export default {
     submitLabel: {
       default: "Submit"
     },
-    validationRules:{}
+    validationRules: {}
   },
   mixins: [Capitalize, StructureDefinition]
 };

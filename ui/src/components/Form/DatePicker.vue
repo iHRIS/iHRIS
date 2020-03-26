@@ -1,51 +1,43 @@
-<template >
-<div :id="formName+'_'+label">
-    <v-menu 
-        ref="menu"
-        v-model="menu"
-        :close-on-content-click="false"
-        :return-value.sync="date"
-        transition="scale-transition"
-        offset-y
-        max-width="290px"
-        min-width="290px"
-      >
-      <template v-slot:activator="{ on }"  >
-        <v-text-field 
-            v-model="date"
-            :label="label"
-            prepend-icon="event"
-            readonly
-            v-on="on"
-            required="required"
-            :rules="[rules.required]"
-            :hint="hint"
-          ></v-text-field>
+<template>
+  <div :id="formName + '_' + label">
+    <v-menu
+      ref="menu"
+      v-model="menu"
+      :close-on-content-click="false"
+      :return-value.sync="date"
+      transition="scale-transition"
+      offset-y
+      max-width="290px"
+      min-width="290px"
+    >
+      <template v-slot:activator="{ on }">
+        <v-text-field
+          v-model="date"
+          :label="label"
+          prepend-icon="event"
+          readonly
+          v-on="on"
+          required="required"
+          :rules="[rules.required]"
+          :hint="hint"
+        ></v-text-field>
       </template>
-      <v-date-picker 
-        v-model="date" 
-        header-color="primary"
-        :locale = "locale"
-      >
+      <v-date-picker v-model="date" header-color="primary" :locale="locale">
         <v-spacer></v-spacer>
         <v-btn text color="primary" @click="menu = false">Cancel</v-btn>
         <v-btn text color="primary" @click="$refs.menu.save(date)">OK</v-btn>
       </v-date-picker>
-      </v-menu>
+    </v-menu>
   </div>
 </template>
 
 <script>
-
 export default {
- 
   created() {
-
     this.config = require("@/config/config.json");
     this.locale = this.config.locale;
-    if(this.value!=null)
-    {
-        this.date =  this.value;
+    if (this.value != null) {
+      this.date = this.value;
     }
   },
   data() {
@@ -61,7 +53,6 @@ export default {
           );
         }
       }
-
     };
   },
   methods: {
@@ -69,7 +60,6 @@ export default {
       return this["date"];
     }
   },
-  props: ["label", "max", "required", "value", "hint","formName"]
+  props: ["label", "max", "required", "value", "hint", "formName"]
 };
 </script>
-

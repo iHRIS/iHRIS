@@ -1,5 +1,5 @@
 <template>
-  <div  :id="setFieldId">
+  <div :id="setFieldId">
     <v-autocomplete
       :items="codes"
       :label="label"
@@ -63,11 +63,9 @@ export default {
     Alert,
     DynamicForm: () => import("./DynamicForm.vue")
   },
-  computed:{
-    setFieldId()
-    {
-      
-      return this.generateFieldId(this.formName,this.fieldName);
+  computed: {
+    setFieldId() {
+      return this.generateFieldId(this.formName, this.fieldName);
     }
   },
   created() {
@@ -191,17 +189,25 @@ export default {
           }
         });
     },
-    runUIValidation()
-    {
-      var validationParams={
+    runUIValidation() {
+      var validationParams = {
         formName: this.formName,
         fiedlName: this.fieldName,
         value: this.reference
       };
-      this.$emit("validationTriggered",validationParams)
+      this.$emit("validationTriggered", validationParams);
     }
   },
-  mixins: [StructureDefinition,GenerateFieldID],
-  props: ["label", "required", "value", "hint", "max", "structureDefinition","formName","fieldName"]
+  mixins: [StructureDefinition, GenerateFieldID],
+  props: [
+    "label",
+    "required",
+    "value",
+    "hint",
+    "max",
+    "structureDefinition",
+    "formName",
+    "fieldName"
+  ]
 };
 </script>
