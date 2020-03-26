@@ -1,24 +1,22 @@
 <template>
   <div :id="applyFieldId">
     <v-datetime-picker
-          :label="label"
-          v-model="datetime"
-          timePickerFormat="ampm"
-          :width="width"
-          :format="format"
-          ></v-datetime-picker>
-    </div>
+      :label="label"
+      v-model="datetime"
+      timePickerFormat="ampm"
+      :width="width"
+      :format="format"
+    ></v-datetime-picker>
+  </div>
 </template>
 
 <script>
 import GenerateFieldID from "@/mixins/GenerateFieldID.js";
 export default {
   mixins: [GenerateFieldID],
-  computed:{
-    applyFieldId()
-    {
-      
-      return this.generateFieldId(this.formName,this.fieldName);
+  computed: {
+    applyFieldId() {
+      return this.generateFieldId(this.formName, this.fieldName);
     }
   },
   created() {
@@ -30,7 +28,7 @@ export default {
     return {
       datetime: null,
       locale: "en-US",
-      format:"YYYY-MM-DDTHH:mm:ssZ",
+      format: "YYYY-MM-DDTHH:mm:ssZ",
       width: 290,
       rules: {
         required: value => {
@@ -46,6 +44,6 @@ export default {
       return this["datetime"];
     }
   },
-  props: ["label", "max", "required", "value", "hint","formName","fieldName"]
+  props: ["label", "max", "required", "value", "hint", "formName", "fieldName"]
 };
 </script>

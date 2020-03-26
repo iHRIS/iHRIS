@@ -1,7 +1,7 @@
 <template>
   <v-container>
     <v-alert v-model="alert" dismissable type="error">
-        {{ error }}
+      {{ error }}
     </v-alert>
     <ProfileHeader
       :practitioner="practitioner"
@@ -102,17 +102,16 @@ export default {
       structureDefinition: null,
       alert: false,
       error: "",
-      uiValidationRules:[
+      uiValidationRules: [
         {
-          formName:"workHistory",
-          sourceFieldName:"active",
+          formName: "workHistory",
+          sourceFieldName: "active",
           condition: "eq",
           value: true,
           behavior: "hide",
           targetFieldName: "Period.end"
         }
-      ],
-      screenSize: ""
+      ]
     };
   },
   methods: {
