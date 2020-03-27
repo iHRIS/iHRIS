@@ -1,91 +1,62 @@
 <template>
   <v-container>
-    <v-card class="mb-5">
-      <v-card-title>
-        Run Report
-      </v-card-title>
-      <v-card-text>
-        <div v-for="item in numOptions" v-bind:key="item">
-          <ReportOptions />
-        </div>
-        <v-btn @click="numOptions++">
-          Add Filter
-        </v-btn>
-        <v-row>
-          <v-col cols="12" sm="6" md="4">
-            <v-menu
-              v-model="fromPicker"
-              :close-on-content-click="false"
-              :nudge-right="40"
-              transition="scale-transition"
-              offset-y
-              min-width="290px"
-            >
-              <template v-slot:activator="{ on }">
-                <v-text-field
-                  v-model="fromDate"
-                  label="From"
-                  prepend-icon="event"
-                  readonly
-                  v-on="on"
-                ></v-text-field>
-              </template>
-              <v-date-picker
-                v-model="fromDate"
-                @input="fromPicker = false"
-              ></v-date-picker>
-            </v-menu>
-          </v-col>
-          <v-col cols="12" sm="6" md="4">
-            <v-menu
-              v-model="toPicker"
-              :close-on-content-click="false"
-              :nudge-right="40"
-              transition="scale-transition"
-              offset-y
-              min-width="290px"
-            >
-              <template v-slot:activator="{ on }">
-                <v-text-field
-                  v-model="toDate"
-                  label="To"
-                  prepend-icon="event"
-                  readonly
-                  v-on="on"
-                ></v-text-field>
-              </template>
-              <v-date-picker
-                v-model="toDate"
-                @input="toPicker = false"
-              ></v-date-picker>
-            </v-menu>
-          </v-col>
-        </v-row>
-      </v-card-text>
+    <Alert ref="alert" />
 
-      <v-card-actions class="secondary">
-        <v-spacer></v-spacer>
-        <v-btn>Run Report</v-btn>
-      </v-card-actions>
+    <v-card
+      v-for="dashboard in dashboards"
+      v-bind:key="dashboard.id"
+      class="mb-5"
+    >
+      <v-card-title>{{ dashboard.attributes.title }}</v-card-title>
+      <v-card-text>
+        <iframe :src="dashboard.iframeLink" height="800" width="100%"></iframe>
+      </v-card-text>
     </v-card>
   </v-container>
 </template>
 
 <script>
-import ReportOptions from "@/components/MHero/ReportOptions.vue";
+import axios from "axios";
+
+import Alert from "@/components/Layout/Alert.vue";
+import ConfigSettings from "@/mixins/ConfigSettings.js";
 
 export default {
   components: {
-    ReportOptions
+    Alert
+  },
+  created() {
+    let dashboards = this.getMHeroDashboards();
+
+    dashboards.forEach(dashboard => {
+      axios
+        .get(this.getBackendUrl() + "/dashboard/n/" + dashboard)
+        .then(response => {
+
+          for (var i in response.data.saved_objects) {
+            let dashboard = response.data.saved_objects[i];
+            dashboard.iframeLink =
+              this.config.kibana +
+              "/app/kibana#/dashboard/" +
+              dashboard.id +
+              "?embed=true";
+
+            this.dashboards.push(dashboard);
+          }
+        })
+        .catch(() => {
+          this.$refs.alert.changeMessage(
+            "Could not retrieve dashboards.",
+            "error"
+          );
+        });
+    });
   },
   data() {
     return {
-      fromDate: null,
-      fromPicker: false,
-      numOptions: 1,
-      toDate: null,
-      toPicker: false
+      dashboards: []
     };
-  }
+  },
+  mixins: [ConfigSettings]
 };
 </script>
