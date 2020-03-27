@@ -11,6 +11,9 @@ export default {
     getBackendUrl() {
       return this.config.backend;
     },
+    getKibanaLink() {
+      return this.config.kibana;
+    },
     getMHeroDashboards() {
       if (!this.config.mHero) {
         return [];

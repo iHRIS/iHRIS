@@ -1,29 +1,18 @@
 <template>
   <v-container>
-    <Alert ref="alert" />
-
-    <v-card
-      v-for="dashboard in dashboards"
-      v-bind:key="dashboard.id"
-      class="mb-5"
-    >
-      <v-card-title>{{ dashboard.attributes.title }}</v-card-title>
-      <v-card-text>
-        <iframe :src="dashboard.iframeLink" height="800" width="100%"></iframe>
-      </v-card-text>
-    </v-card>
+    <Dashboard :dashboards="dashboards" ref="dashboard" />
   </v-container>
 </template>
 
 <script>
 import axios from "axios";
 
-import Alert from "@/components/Layout/Alert.vue";
 import ConfigSettings from "@/mixins/ConfigSettings.js";
+import Dashboard from "@/components/Layout/Dashboard.vue";
 
 export default {
   components: {
-    Alert
+    Dashboard
   },
   created() {
     let dashboards = this.getMHeroDashboards();
@@ -36,7 +25,7 @@ export default {
           for (var i in response.data.saved_objects) {
             let dashboard = response.data.saved_objects[i];
             dashboard.iframeLink =
-              this.config.kibana +
+              this.getKibanaLink() +
               "/app/kibana#/dashboard/" +
               dashboard.id +
               "?embed=true";
@@ -45,7 +34,7 @@ export default {
           }
         })
         .catch(() => {
-          this.$refs.alert.changeMessage(
+          this.$refs.dashboard.setError(
             "Could not retrieve dashboards.",
             "error"
           );
