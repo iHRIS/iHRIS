@@ -32,4 +32,26 @@ router.get("/all", function (req, res, next) {
   });
 });
 
+/**
+ * Get a dashboard by a specific name
+ */
+router.get("/n/:name", function (req, res, next) {
+  let url = config.kibana + "/api/saved_objects/_find?type=dashboard&search_fields=title&search=" + req.params.name;
+
+  axios.get(url, {
+    headers: {
+      "kbn-xsrf": "kibana"
+    },
+    withCredentials: true,
+    auth: {
+      username: config.fhir.username,
+      password: config.fhir.password
+    }
+  }).then(response => {
+    res.status(201).json(response.data);
+  }).catch(err => {
+    res.status(200).json(err);
+  });
+});
+
 module.exports = router;

@@ -74,11 +74,25 @@ If you are demoing your site and do not wish to bother with authentiction creden
 "demo": true
 ```
 
-### mHero
-mHero is a two-way, mobile phone-based communication system that uses basic text messaging, or SMS, to connect ministries of health and health workers. To enable mHero, you need to setup an [emNutt server](https://github.com/intrahealth/emNutt). You also need to update your configuration file and set mHero to true as shown below. Learn more about mHero by visiting the [official website](https://www.mhero.org/)
+## mHero
+mHero is a two-way, mobile phone-based communication system that uses basic text messaging, or SMS, to connect ministries of health and health workers. To enable mHero, you need to setup an [emNutt server](https://github.com/intrahealth/emNutt). You also need to update your configuration file and set the mHero configuration settings shown below. Learn more about mHero by visiting the [official website](https://www.mhero.org/)
+
+### installed
+This indicates that mHero is set up and ready to use. It is responsible for displaying the mHero menu as well as allowing access to the necessary pages. 
 
 ```
-"mHero": true
+"mHero": {
+  "installed": true
+}
+```
+
+### dashboards
+Once you have set up dashboards inside your kibana instance, you can render those dashboards on the mHero reports page. List the the names of the dashboards you wish to display on this page.
+
+```
+"mHero": {
+  "dashboards": ["My sample dashboard", "A different dashboard"]
+}
 ```
 
 
