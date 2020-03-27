@@ -26,7 +26,6 @@
 import axios from "axios";
 import Alert from "@/components/Layout/Alert.vue";
 import DynamicForm from "@/components/Form/DynamicForm.vue";
-import NProgress from "nprogress";
 export default {
   components: {
     Alert,
@@ -35,7 +34,6 @@ export default {
   created() {
     this.config = require("@/config/config.json");
 
-    NProgress.start();
     this.tempFields = [
       {
         id: "username",
@@ -87,10 +85,8 @@ export default {
           this.tempFields.push(oField);
           this.fields = this.tempFields;
         }
-        NProgress.done();
       })
       .catch(error => {
-        NProgress.done();
         this.$refs.addUserAlert.changeMessage(
           "Data not saved. " + error,
           "error"
