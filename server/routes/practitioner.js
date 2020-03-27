@@ -84,13 +84,8 @@ router.get("/all", async function (req, res, next) {
 });
 
 router.get("/describe/page", function (req, res, next) {
-  let practitionerPage = config.definitions.practitionerPage;
+  let url = URI(config.fhir.server).segment('fhir').segment('Basic').segment('iHRISPagePractitioner').toString();
 
-  if (!practitionerPage) {
-    return res.status(400).json("No practitioner page definition found.");
-  }
-
-  let url = URI(config.fhir.server).segment('fhir').segment(practitionerPage).toString()
   axios.get(url, {
     params: {},
     withCredentials: true,
@@ -262,7 +257,7 @@ router.get("/search", async function (req, res, next) {
     }
   });
 
-  
+
   let practitioners = [];
   let scroll = null;
   const size = 1000;
