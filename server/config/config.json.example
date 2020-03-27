@@ -2,9 +2,6 @@
 
   "development": {
     "port":3000,
-    "definitions": {
-      "practitionerPage": "Basic/iHRISPagePractitioner"
-    },
     "elastic": {
       "server": "http://localhost:9200",
       "username": "username",
@@ -31,9 +28,6 @@
   },
   "test": {
     "port":3000,
-    "definitions": {
-      "practitionerPage": "Basic/iHRISPagePractitioner"
-    },
     "elastic": {
       "server": "http://localhost:9200",
       "username": "username",
@@ -59,9 +53,6 @@
   },
   "production": {
     "port":3000,
-    "definitions": {
-      "practitionerPage": "Basic/iHRISPagePractitioner"
-    },
     "elastic": {
       "server": "http://localhost:9200",
       "username": "username",

@@ -56,7 +56,7 @@
       />
 
       <DateTime
-        v-if="field.type.toLowerCase() == 'datetime'"
+        v-if="field.type && field.type.toLowerCase() == 'datetime'"
         :label="field.label"
         :max="field.max"
         :required="field.required"
