@@ -55,6 +55,7 @@ export default {
         { text: "Facility", value: "facility" },
         { text: "Cadre", value: "cadre" },
         { text: "Organizational Affiliation", value: "organization" },
+        { text: "Phone Number", value: "phone" },
         { text: "Contact Group", value: "contactGroup" }
       ]
     };
