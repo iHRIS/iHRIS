@@ -400,13 +400,6 @@ export default {
   methods: {
     cadreFilter(value) {
       return this.filterColumn(value, this.cadreSelected);
-      /*
-      if (!this.cadreSelected.length) {
-        return true;
-      }
-
-      return this.cadreSelected.includes(value);
-      */
     },
     contactGroupFilter(value) {
       return this.filterColumn(value, this.contactGroupSelected);
