@@ -46,16 +46,8 @@
       </v-card>
 
       <v-card>
-        <v-card-title>
+        <v-card-title class="pb-0">
           Practitioners
-          <v-spacer></v-spacer>
-          <v-text-field
-            v-model="search"
-            append-icon="search"
-            label="Search"
-            single-line
-            hide-details
-          ></v-text-field>
         </v-card-title>
         <v-data-table
           v-model="selected"
@@ -63,11 +55,87 @@
           loading-text="Loading....Please wait"
           :headers="headers"
           :items="practitioners"
-          :search="search"
           item-key="id"
-          show-select
           class="elevation-1"
-        ></v-data-table>
+          show-select
+        >
+          <template v-slot:top>
+            <!-- v-container, v-col and v-row are just for decoration purposes. -->
+            <v-container fluid class="pt-0">
+              <v-row>
+                <v-col cols="2" class="pt-0">
+                  <v-row class="pa-6">
+                    <v-text-field
+                      v-model="searchSelected"
+                      type="text"
+                      label="Search"
+                    ></v-text-field>
+                  </v-row>
+                </v-col>
+
+                <v-col cols="2" class="pt-0">
+                  <v-row class="pa-6">
+                    <v-autocomplete
+                      label="Facilities"
+                      :items="facilities"
+                      v-model="facilitySelected"
+                      chips
+                      multiple
+                    />
+                  </v-row>
+                </v-col>
+
+                <v-col cols="2" class="pt-0">
+                  <v-row class="pa-6">
+                    <v-autocomplete
+                      label="Jurisdictions"
+                      :items="jurisdictions"
+                      v-model="jurisdictionSelected"
+                      chips
+                      multiple
+                    />
+                  </v-row>
+                </v-col>
+
+                <v-col cols="2" class="pt-0">
+                  <v-row class="pa-6">
+                    <v-autocomplete
+                      label="Cadres"
+                      :items="cadres"
+                      v-model="cadreSelected"
+                      chips
+                      multiple
+                    />
+                  </v-row>
+                </v-col>
+
+                <v-col cols="2" class="pt-0">
+                  <v-row class="pa-6">
+                    <v-autocomplete
+                      label="Organizational Affiliations"
+                      :items="organizations"
+                      v-model="organizationSelected"
+                      chips
+                      multiple
+                    />
+                  </v-row>
+                </v-col>
+
+                <v-col cols="2" class="pt-0">
+                  <v-row class="pa-6">
+                    <v-autocomplete
+                      label="Contact Groups"
+                      :items="contactGroups"
+                      v-model="contactGroupSelected"
+                      chips
+                      multiple
+                    />
+                  </v-row>
+                </v-col>
+              </v-row>
+            </v-container>
+          </template>
+        </v-data-table>
         <v-card-actions class="secondary">
           <v-spacer></v-spacer>
           <v-btn @click="nextStep">Review Selection</v-btn>
@@ -192,6 +260,12 @@ export default {
         return;
       }
 
+      let cadres = [];
+      let contactGroups = [];
+      let facilities = [];
+      let jurisdictions = [];
+      let organizations = [];
+
       response.data.forEach(record => {
         let practitioner = record._source;
 
@@ -219,10 +293,18 @@ export default {
 
         if (practitioner.facilityName) {
           facility = practitioner.facilityName;
+
+          if (facilities.indexOf(facility) < 0) {
+            facilities.push(facility);
+          }
         }
 
         if (practitioner.positionTitle) {
           cadre = practitioner.positionTitle;
+
+          if (cadres.indexOf(cadre) < 0) {
+            cadres.push(cadre);
+          }
         }
 
         if (practitioner.phone) {
@@ -243,26 +325,59 @@ export default {
         }
       });
 
+      cadres.sort();
+      contactGroups.sort();
+      facilities.sort();
+      jurisdictions.sort();
+      organizations.sort();
+
+      this.cadres = cadres;
+      this.contactGroups = contactGroups;
+      this.facilities = facilities;
+      this.jurisdictions = jurisdictions;
+      this.organizations = organizations;
       this.practitioners = practitioners;
       this.loading = false;
     });
   },
   data() {
     return {
+      cadres: [],
+      cadreSelected: [],
+      contactGroups: [],
+      contactGroupSelected: [],
+      facilities: [],
+      facilitySelected: [],
       frequency: false,
       frequencyAmount: null,
       frequencySpecifics: [],
       headers: [
-        { text: "Name", value: "name" },
-        { text: "Jurisdiction", value: "jurisdiction" },
-        { text: "Facility", value: "facility" },
-        { text: "Cadre", value: "cadre" },
-        { text: "Organizational Affiliation", value: "organization" },
+        { text: "Name", value: "name", filter: this.searchFilter },
+        {
+          text: "Jurisdiction",
+          value: "jurisdiction",
+          filter: this.jurisdictionFilter
+        },
+        { text: "Facility", value: "facility", filter: this.facilityFilter },
+        { text: "Cadre", value: "cadre", filter: this.cadreFilter },
+        {
+          text: "Organizational Affiliation",
+          value: "organization",
+          filter: this.organizationFilter
+        },
         { text: "Phone Number", value: "phone" },
-        { text: "Contact Group", value: "contactGroup" }
+        {
+          text: "Contact Group",
+          value: "contactGroup",
+          filter: this.contactGroupFilter
+        }
       ],
       items: ["hours", "days", "weeks"],
+      jurisdictions: [],
+      jurisdictionSelected: [],
       loading: true,
+      organizations: [],
+      organizationSelected: [],
       period: null,
       practitioners: [],
       rules: {
@@ -275,6 +390,7 @@ export default {
         }
       },
       search: null,
+      searchSelected: null,
       selected: [],
       workflow: null,
       workflowName: null,
@@ -282,6 +398,32 @@ export default {
     };
   },
   methods: {
+    cadreFilter(value) {
+      return this.filterColumn(value, this.cadreSelected);
+      /*
+      if (!this.cadreSelected.length) {
+        return true;
+      }
+
+      return this.cadreSelected.includes(value);
+      */
+    },
+    contactGroupFilter(value) {
+      return this.filterColumn(value, this.contactGroupSelected);
+    },
+    facilityFilter(value) {
+      return this.filterColumn(value, this.facilitySelected);
+    },
+    filterColumn(value, selected) {
+      if (!selected.length) {
+        return true;
+      }
+
+      return selected.includes(value);
+    },
+    jurisdictionFilter(value) {
+      return this.filterColumn(value, this.jurisdictionSelected);
+    },
     nextStep() {
       if (this.$refs.form.validate()) {
         this.$emit(
@@ -295,6 +437,16 @@ export default {
           this.frequencySpecifics
         );
       }
+    },
+    organizationFilter(value) {
+      return this.filterColumn(value, this.organizationSelected);
+    },
+    searchFilter(value) {
+      if (!this.searchSelected) {
+        return true;
+      }
+
+      return value.toLowerCase().includes(this.searchSelected.toLowerCase());
     }
   },
   mixins: [Practitioner]

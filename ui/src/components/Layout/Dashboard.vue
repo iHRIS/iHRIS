@@ -1,6 +1,12 @@
 <template>
   <v-container>
-    <Alert ref="alert" v-if="dashboards.length == 0" type="error" text="No dashboards found" visible="true" />
+    <Alert
+      ref="alert"
+      v-if="dashboards.length == 0"
+      type="error"
+      text="No dashboards found"
+      visible="true"
+    />
 
     <v-card
       v-for="dashboard in dashboards"

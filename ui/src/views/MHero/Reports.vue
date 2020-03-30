@@ -21,7 +21,6 @@ export default {
       axios
         .get(this.getBackendUrl() + "/dashboard/n/" + dashboard)
         .then(response => {
-
           for (var i in response.data.saved_objects) {
             let dashboard = response.data.saved_objects[i];
             dashboard.iframeLink =
