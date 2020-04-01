@@ -1,69 +1,51 @@
 <template>
   <v-container>
-    <Alert ref="alert" />
+    <Alert ref="alert" v-show="alert" />
 
-    <v-card
-      v-for="dashboard in dashboards"
-      v-bind:key="dashboard.id"
-      class="mb-5"
-    >
-      <v-card-title>{{ dashboard.attributes.title }}</v-card-title>
-      <v-card-text>
-        <iframe :src="dashboard.iframeLink" height="800" width="100%"></iframe>
-      </v-card-text>
-    </v-card>
+    <Dashboard :dashboards="dashboards" ref="dashboard" />
   </v-container>
 </template>
 
 <script>
-import axios from "axios";
-
 import Alert from "@/components/Layout/Alert.vue";
+import ConfigSettings from "@/mixins/ConfigSettings.js";
+import Dashboards from "@/mixins/Dashboards.js";
 
 export default {
   components: {
     Alert
   },
   created() {
-    this.config = require("@/config/config.json");
-    axios
-      .get(this.config.backend + "/dashboard/all")
-      .then(response => {
-        let dashboards = [];
+    let dashboards = this.getDashboards();
 
-        for (var i in response.data.saved_objects) {
-          let dashboard = response.data.saved_objects[i];
-          dashboard.iframeLink =
-            this.config.kibana +
-            "/app/kibana#/dashboard/" +
-            dashboard.id +
-            "?embed=true";
-
-          dashboards.push(dashboard);
-        }
-
-        if (dashboards.length === 0) {
-          this.$refs.alert.changeMessage("No dashboards found.", "error");
-        }
-
-        this.dashboards = dashboards;
-      })
-      .catch(() => {
-        this.$refs.alert.changeMessage(
+    if (!dashboards.length) {
+      this.loadAllDashboards().catch(() => {
+        this.$refs.dashboard.setError(
           "Could not retrieve dashboards.",
           "error"
         );
       });
+    } else {
+      dashboards.forEach(dashboard => {
+        this.addDashboard(dashboard).catch(() => {
+          this.$refs.dashboard.setError(
+            "Could not retrieve dashboards.",
+            "error"
+          );
+        });
+      });
+    }
   },
   data() {
     return {
-      config: null,
+      alert: false,
       dashboards: []
     };
   },
   mounted() {
     if (this.login) {
       this.$refs.alert.changeMessage("Login successful", "success");
+      this.alert = true;
     }
   },
   props: {
@@ -71,6 +53,7 @@ export default {
       default: false,
       type: Boolean
     }
-  }
+  },
+  mixins: [ConfigSettings, Dashboards]
 };
 </script>
