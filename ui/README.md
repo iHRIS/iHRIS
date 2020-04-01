@@ -46,6 +46,13 @@ Place a link to an image file (prefereably png) to have a logo render in the hea
 "logo": "https://www.ihris.org/sites/ihris/files/ihrislogo2019a.png"
 ```
 
+### Dashboards
+A list of dashboards to show on the home page. If no dashboards are shown, then all dashbaords will be rendered.
+
+```
+"dashboards": ["Sample Dashboard 1", "Sample Dashboard 2"]
+```
+
 #### Site
 The text set for the site configuration will be rendered in the header of your application.
 

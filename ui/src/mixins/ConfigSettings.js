@@ -11,6 +11,17 @@ export default {
     getBackendUrl() {
       return this.config.backend;
     },
+    getDashboards() {
+      if (!this.config.dashboards) {
+        return [];
+      }
+
+      if (!Array.isArray(this.config.dashboards)) {
+        return [this.config.dashboards];
+      }
+
+      return this.config.dashboards;
+    },
     getKibanaLink() {
       return this.config.kibana;
     },
