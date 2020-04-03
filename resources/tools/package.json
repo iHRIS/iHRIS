@@ -12,5 +12,8 @@
     "fhir": "^4.7.0",
     "nconf": "^0.10.0",
     "request": "^2.88.0"
+  },
+  "devDependencies": {
+    "kind-of": ">=6.0.3"
   }
 }
