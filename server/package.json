@@ -16,6 +16,7 @@
     "elasticsearch": "^16.6.0",
     "express": "~4.16.0",
     "fhir": "^4.7.2",
+    "fs": "0.0.1-security",
     "helmet": "^3.21.3",
     "jest": "^25.2.2",
     "mariadb": "^2.2.0",
