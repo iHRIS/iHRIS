@@ -24,7 +24,11 @@
     "structureDefinition": "http://server.com/fhir",
     "origins": [
       "http://localhost:8080"
-    ]
+    ],
+    "https": {
+      "certificate": "path/to/certificate",
+      "privateKey": "path/to/private/key"
+    }
   },
   "test": {
     "port":3000,

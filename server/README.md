@@ -76,6 +76,15 @@ emNutt is a separate backend server that facilitates communication between iHRIS
 }
 ```
 
+## HTTPS
+It is STRONGLY recommended that you install an SSL certificate. We recommend using [letsencrypt](https://letsencrypt.org/). There are several installation guides depending on the type of server you are installing this software on. Once you have set up your SSL certificate, update your configuration file to point to where the certificate and the private key live.
+
+```
+"https": {
+  "certificate": "path/to/certificate",
+  "privateKey": "path/to/private/key"
+}
+```
 
 # Using Docker
 After cloning and customizing the configurations run the following commands
