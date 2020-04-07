@@ -2,7 +2,7 @@ export default {
   methods: {
     generateFieldId(formName, fieldName) {
       if (formName == null || fieldName == null) {
-        return;
+        return "";
       } else {
         var sanitizedFieldName =
           fieldName.split(".").length > 0

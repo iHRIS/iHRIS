@@ -1,19 +1,13 @@
 import axios from "axios";
 
+import ConfigSettings from "@/mixins/ConfigSettings.js";
+
 export default {
-  created() {
-    this.config = require("@/config/config.json");
-  },
-  data() {
-    return {
-      config: null
-    };
-  },
   methods: {
     getSections() {
       return axios
         .get(
-          this.config.backend +
+          this.getBackendUrl() +
             "/practitioner/describe/definition/iHRISPractitioner"
         )
         .then(response => {
@@ -58,7 +52,10 @@ export default {
           });
 
           return Promise.resolve(sections);
+        }).catch(() => {
+          return Promise.reject([]);
         });
     }
-  }
+  },
+  mixins: [ConfigSettings]
 };

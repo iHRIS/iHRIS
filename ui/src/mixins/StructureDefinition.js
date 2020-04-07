@@ -1,14 +1,11 @@
 import axios from "axios";
+
 import Capitalize from "@/mixins/Capitalize.js";
+import ConfigSettings from "@/mixins/ConfigSettings.js";
 
 export default {
-  created() {
-    this.config = require("@/config/config.json");
-  },
   data() {
     return {
-      config: null,
-      parser: null,
       primitiveTypes: [
         "base64Binary",
         "boolean",
@@ -64,7 +61,7 @@ export default {
       }
 
       return axios
-        .get(this.config.backend + url)
+        .get(this.getBackendUrl() + url)
         .then(response => {
           if (response.status != 201) {
             return [];
@@ -303,5 +300,5 @@ export default {
       }
     }
   },
-  mixins: [Capitalize]
+  mixins: [Capitalize, ConfigSettings]
 };

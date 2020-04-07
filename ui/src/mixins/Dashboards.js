@@ -1,12 +1,8 @@
 import axios from "axios";
 
 import ConfigSettings from "@/mixins/ConfigSettings.js";
-import Dashboard from "@/components/Layout/Dashboard.vue";
 
 export default {
-  components: {
-    Dashboard
-  },
   data() {
     return {
       dashboards: []
@@ -30,16 +26,16 @@ export default {
           }
         })
         .catch(() => {
-          throw "Could not get all dashboards.";
+          throw "Could not load dashboard: " + dashboard;
         });
     },
     loadAllDashboards() {
       axios
         .get(this.getBackendUrl() + "/dashboard/all")
         .then(response => {
-          if (response.data.saved_objects.length === 0) {
-            this.$refs.alert.changeMessage("No dashboards found.", "error");
-          } else {
+          this.dashboards = [];
+
+          if (response.data.saved_objects.length !== 0) {
             for (var i in response.data.saved_objects) {
               let dashboard = response.data.saved_objects[i];
 
@@ -54,7 +50,7 @@ export default {
           }
         })
         .catch(() => {
-          throw "Could not get dashboard.";
+          throw "Could not get all dashboards.";
         });
     }
   },
