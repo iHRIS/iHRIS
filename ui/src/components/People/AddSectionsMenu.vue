@@ -238,6 +238,7 @@ export default {
   created() {
     this.sections = [];
 
+    console.log("Get sections");
     this.getSections().then(fields => {
       fields.forEach(field => {
         this.$set(this.sections, field.id, field);

@@ -9,7 +9,13 @@ export default {
   },
   methods: {
     getBackendUrl() {
-      return this.config.backend;
+      let backend = this.config.backend;
+
+      if (backend === undefined) {
+        return null;
+      }
+
+      return backend;
     },
     getDashboards() {
       if (!this.config.dashboards) {
@@ -23,7 +29,13 @@ export default {
       return this.config.dashboards;
     },
     getKibanaLink() {
-      return this.config.kibana;
+      let kibana = this.config.kibana;
+
+      if (kibana === undefined) {
+        return null;
+      }
+
+      return kibana;
     },
     getMHeroDashboards() {
       if (!this.config.mHero) {

@@ -2,6 +2,7 @@ export default {
   methods: {
     gridLayoutAddRecord(screenSize) {
       var layout = "";
+
       switch (screenSize) {
         case "xs":
           layout = "xs8 offset-xs2";
@@ -18,10 +19,12 @@ export default {
         case "xl":
           layout = "xs6 offset-xs3";
       }
+
       return layout;
     },
     titleStyle(screenSize) {
       var style = "";
+
       switch (screenSize) {
         case "xs":
           style = "title font-weight-bold";
@@ -39,10 +42,12 @@ export default {
           style = "display-1 font-weight-bold";
           break;
       }
+
       return style;
     },
     gridLayoutTitle(screenSize) {
       var layout = "";
+
       switch (screenSize) {
         case "xs":
           layout = "xs10 title font-weight-bold text-xs-left pl-3";
@@ -60,10 +65,12 @@ export default {
           layout = "xs6 display-1 font-weight-bold text-xs-left pl-3";
           break;
       }
+
       return layout;
     },
     titleStyleSearchPeople(screenSize) {
       var style = "";
+
       switch (screenSize) {
         case "xs":
           style = "xs8 title text-xs-left";
@@ -81,10 +88,12 @@ export default {
           style = "xs6 display-2 text-xs-left";
           break;
       }
+
       return style;
     },
     cardTitleStyle(screenSize) {
       var style = "";
+
       switch (screenSize) {
         case "xs":
           style = "title";
@@ -102,10 +111,12 @@ export default {
           style = "display-1";
           break;
       }
+
       return style;
     },
     fontSizeParagraph(screenSize) {
       var fontSize = "";
+
       switch (screenSize) {
         case "xs":
           fontSize = "12px";
@@ -123,10 +134,12 @@ export default {
           fontSize = "16px";
           break;
       }
+
       return fontSize;
     },
     gridLayoutShowRecord(screenSize) {
       var layout = "";
+
       switch (screenSize) {
         case "xs":
           layout = "xs12 pr-3 ml-2";
@@ -143,10 +156,12 @@ export default {
         case "xl":
           layout = "xs6 pr-3";
       }
+
       return layout;
     },
     gridLayoutSearchResult(screenSize) {
       var layout = "";
+
       switch (screenSize) {
         case "xs":
           layout = "xs12";
@@ -163,10 +178,12 @@ export default {
         case "xl":
           layout = "xs9";
       }
+
       return layout;
     },
     gridLayoutShowResult(screenSize) {
       var layout = "";
+
       switch (screenSize) {
         case "xs":
           layout = "xs12";
@@ -183,10 +200,12 @@ export default {
         case "xl":
           layout = "xs9";
       }
+
       return layout;
     },
     gridProfileHeaderEditRecord(screenSize) {
       var layout = "";
+
       switch (screenSize) {
         case "xs":
           layout = "xs6 ml-5";
@@ -203,19 +222,23 @@ export default {
         case "xl":
           layout = "xs6";
       }
+
       return layout;
     },
     smallScreenCompute(screenSize) {
       var smallScreen = false;
+
       if (screenSize == "xs") {
         smallScreen = true;
       } else {
         smallScreen = false;
       }
+
       return smallScreen;
     },
     smallScreenSearchCompute(screenSize) {
       var smallScreen = false;
+
       if (screenSize == "xs") {
         smallScreen = true;
       } else if (screenSize == "sm") {
@@ -223,11 +246,12 @@ export default {
       } else {
         smallScreen = false;
       }
+
       return smallScreen;
     },
-
     detailCardTitleStyle(screenSize) {
       var style = "";
+
       switch (screenSize) {
         case "xs":
           style = "title";
@@ -245,10 +269,12 @@ export default {
           style = "display-1";
           break;
       }
+
       return style;
     },
     detailCardBtnSize(screenSize) {
       var size = "";
+
       switch (screenSize) {
         case "xs":
           size = "x-small";
@@ -270,6 +296,7 @@ export default {
     },
     minProfilePictureWidth(screenSize) {
       var size = "";
+
       if (screenSize == "xs") {
         size = "80";
       } else if (screenSize == "sm") {
@@ -277,10 +304,12 @@ export default {
       } else {
         size = "";
       }
+
       return size;
     },
     profileHeaderGridLayout(screenSize) {
       var layout = "";
+
       switch (screenSize) {
         case "xs":
           layout = "xs5";
@@ -297,6 +326,7 @@ export default {
         case "xl":
           layout = "xs1";
       }
+
       return layout;
     }
   }
