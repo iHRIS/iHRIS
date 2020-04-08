@@ -1,6 +1,7 @@
 <template>
   <v-container>
     <Alert ref="changePasswordAlert" />
+
     <v-card>
       <v-card-title>Change Password</v-card-title>
       <v-card-text>

@@ -52,7 +52,8 @@ export default {
           });
 
           return Promise.resolve(sections);
-        }).catch(() => {
+        })
+        .catch(() => {
           return Promise.reject([]);
         });
     }

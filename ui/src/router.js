@@ -51,6 +51,12 @@ let router = new Router({
         import(/* webpackChunkName: "adminsUsers" */ "./views/Admin/Users.vue")
     },
     {
+      path: "/bulk-upload",
+      name: "bulk-upload",
+      component: () =>
+        import(/* webpackChunkName: "bulkUpload" */ "./views/BulkUpload.vue")
+    },
+    {
       path: "/change-password",
       name: "change-password",
       component: () =>
