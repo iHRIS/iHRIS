@@ -109,6 +109,12 @@ export default {
         title: "Dashboard"
       },
       {
+        action: { name: "bulk-upload" },
+        icon: "mdi-upload",
+        submenu: [],
+        title: "Bulk Upload"
+      },
+      {
         action: { name: "people" },
         icon: "people",
         submenu: submenu,
