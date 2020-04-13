@@ -3,7 +3,8 @@
     <v-card>
       <v-card-title>Bulk Upload</v-card-title>
       <v-card-text>
-        Please use the form below to upload multiple instances of the provided structure definition.
+        Please use the form below to upload multiple instances of the provided
+        structure definition.
 
         <v-form ref="form">
           How is your file formatted?
@@ -27,7 +28,13 @@
 
           Please select the file to upload.
 
-          <v-file-input outlined :accept="allowedFileExtension" :rules="[rules.required]" label="File" :disabled="!validFileType"></v-file-input>
+          <v-file-input
+            outlined
+            :accept="allowedFileExtension"
+            :rules="[rules.required]"
+            label="File"
+            :disabled="!validFileType"
+          ></v-file-input>
 
           <v-layout align-center justify-end fill-height>
             <v-btn class="primary">Upload</v-btn>
@@ -64,21 +71,23 @@ export default {
       return "primary";
     },
     validFileType() {
-      return this.fileType === "csv" || this.fileType === "json"
+      return this.fileType === "csv" || this.fileType === "json";
     }
   },
   created() {
-    axios.get(this.getBackendUrl() + "/structure-definition/valid").then(response => {
-      let structureDefinitions = response.data;
-      structureDefinitions.sort();
+    axios
+      .get(this.getBackendUrl() + "/structure-definition/valid")
+      .then(response => {
+        let structureDefinitions = response.data;
+        structureDefinitions.sort();
 
-      structureDefinitions.forEach(structureDefinition => {
-        this.structureDefinitions.push({
-          text: structureDefinition,
-          value: structureDefinition
+        structureDefinitions.forEach(structureDefinition => {
+          this.structureDefinitions.push({
+            text: structureDefinition,
+            value: structureDefinition
+          });
         });
       });
-    });
   },
   data() {
     return {
@@ -95,8 +104,8 @@ export default {
       },
       structureDefinition: "",
       structureDefinitions: []
-    }
+    };
   },
   mixins: [ConfigSettings]
-}
+};
 </script>

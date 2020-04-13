@@ -95,8 +95,6 @@ router.get("/valid", async function (req, res, next) {
   url = url.toString();
 
   let previousUrl;
-  console.log(url);
-
   let structureDefinitions = [];
 
   do {
@@ -120,8 +118,6 @@ router.get("/valid", async function (req, res, next) {
         }
       }
     }
-
-    console.log(url);
 
     for (var j in response.data.entry) {
       let entry = response.data.entry[j];
