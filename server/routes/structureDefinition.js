@@ -43,7 +43,6 @@ router.get("/all/:definition", async function (req, res, next) {
     results = results.concat(response.data.entry);
   } while (url !== previousUrl);
 
-
   res.status(201).json(results);
 });
 
@@ -85,6 +84,48 @@ router.get("/get/:definition/:id", function (req, res, next) {
   }).catch(err => {
     res.status(400).json(err);
   });
+});
+
+/**
+ * Get valid structure definitions
+ */
+router.get("/valid", async function (req, res, next) {
+  let url = URI(config.fhir.server).segment('fhir').segment("StructureDefinition");
+  url.addQuery("_count", 500);
+  url = url.toString();
+
+  let previousUrl;
+  let structureDefinitions = [];
+
+  do {
+    previousUrl = url;
+
+    let response = await axios.get(url, {
+      params: {},
+      withCredentials: true,
+      auth: {
+        username: config.fhir.username,
+        password: config.fhir.password
+      }
+    });
+
+    if (response.data.link) {
+      for (var i in response.data.link) {
+        let link = response.data.link[i];
+
+        if (link.relation === "next") {
+          url = link.url;
+        }
+      }
+    }
+
+    for (var j in response.data.entry) {
+      let entry = response.data.entry[j];
+      structureDefinitions.push(entry.resource.id);
+    }
+  } while (url !== previousUrl);
+
+  res.status(201).json(structureDefinitions);
 });
 
 module.exports = router;
