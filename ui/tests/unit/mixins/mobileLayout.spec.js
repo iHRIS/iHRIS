@@ -127,7 +127,7 @@ describe("MobileLayout", () => {
 
   test("Valid small screen search compute is true", () => {
     let result = wrapper.vm.smallScreenSearchCompute("xs");
-    expect(result).toBeTruthy()
+    expect(result).toBeTruthy();
   });
 
   test("Invalid detail card title style results in empty string", () => {

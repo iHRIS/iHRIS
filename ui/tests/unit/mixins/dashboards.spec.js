@@ -2,8 +2,8 @@ import axios from "axios";
 import { mount } from "@vue/test-utils";
 import Dashboards from "@/mixins/Dashboards";
 
-jest.mock('axios');
-jest.mock('@/config/config.json', () => ({
+jest.mock("axios");
+jest.mock("@/config/config.json", () => ({
   backend: "fake backend",
   kibana: "fake kibana link"
 }));
@@ -29,9 +29,11 @@ describe("Dashboards", () => {
   test("Add dashboard adds new dashboard", async () => {
     const response = {
       data: {
-        saved_objects: [{
-          id: "one"
-        }]
+        saved_objects: [
+          {
+            id: "one"
+          }
+        ]
       }
     };
 
@@ -56,10 +58,7 @@ describe("Dashboards", () => {
   test("Add dashboard adds multiple dashboards if returned", async () => {
     const response = {
       data: {
-        saved_objects: [
-          { id: "two" },
-          { id: "three" }
-        ]
+        saved_objects: [{ id: "two" }, { id: "three" }]
       }
     };
 
@@ -91,8 +90,12 @@ describe("Dashboards", () => {
     expect(dashboards.length).toEqual(0);
 
     // now fail to add a dashboard
-    let failedPromise = new Promise((resolve, reject) => setTimeout(() => reject(new Error('Error')), 0));
-    failedPromise.catch(error => { return; });
+    let failedPromise = new Promise((resolve, reject) =>
+      setTimeout(() => reject(new Error("Error")), 0)
+    );
+    failedPromise.catch(() => {
+      return;
+    });
 
     axios.get.mockImplementationOnce(() => failedPromise);
 
@@ -106,21 +109,18 @@ describe("Dashboards", () => {
   test("Multiple calls to add dashboards adds more", async () => {
     const response = {
       data: {
-        saved_objects: [
-          { id: "four" }
-        ]
+        saved_objects: [{ id: "four" }]
       }
     };
 
     const secondCall = {
       data: {
-        saved_objects: [
-          { id: "five" }
-        ]
+        saved_objects: [{ id: "five" }]
       }
     };
 
-    axios.get.mockImplementationOnce(() => Promise.resolve(response))
+    axios.get
+      .mockImplementationOnce(() => Promise.resolve(response))
       .mockImplementationOnce(() => Promise.resolve(secondCall));
 
     await wrapper.vm.addDashboard("multiple call (one)");
@@ -139,10 +139,7 @@ describe("Dashboards", () => {
   test("Load all dashboards loads multiple", async () => {
     const response = {
       data: {
-        saved_objects: [
-          { id: "two" },
-          { id: "three" }
-        ]
+        saved_objects: [{ id: "two" }, { id: "three" }]
       }
     };
 
@@ -163,30 +160,24 @@ describe("Dashboards", () => {
     ];
 
     expect(dashboards).toEqual(expected);
-    expect(axios.get).toHaveBeenCalledWith(
-      "fake backend/dashboard/all"
-    );
+    expect(axios.get).toHaveBeenCalledWith("fake backend/dashboard/all");
   });
 
   test("Load all dashboards erases existing settings", async () => {
     const response = {
       data: {
-        saved_objects: [
-          { id: "four" }
-        ]
+        saved_objects: [{ id: "four" }]
       }
     };
 
     const secondCall = {
       data: {
-        saved_objects: [
-          { id: "five" },
-          { id: "six" }
-        ]
+        saved_objects: [{ id: "five" }, { id: "six" }]
       }
     };
 
-    axios.get.mockImplementationOnce(() => Promise.resolve(response))
+    axios.get
+      .mockImplementationOnce(() => Promise.resolve(response))
       .mockImplementationOnce(() => Promise.resolve(secondCall));
 
     await wrapper.vm.loadAllDashboards();
@@ -224,8 +215,12 @@ describe("Dashboards", () => {
     expect(dashboards.length).toEqual(0);
 
     // now fail to add a dashboard
-    let failedPromise = new Promise((resolve, reject) => setTimeout(() => reject(new Error('Error')), 0));
-    failedPromise.catch(error => { return; });
+    let failedPromise = new Promise((resolve, reject) =>
+      setTimeout(() => reject(new Error("Error")), 0)
+    );
+    failedPromise.catch(() => {
+      return;
+    });
 
     axios.get.mockImplementationOnce(() => failedPromise);
 
@@ -239,10 +234,7 @@ describe("Dashboards", () => {
   test("When load all dashboards fail, existing dashboards are not reset", async () => {
     const response = {
       data: {
-        saved_objects: [
-          { id: "two" },
-          { id: "three" }
-        ]
+        saved_objects: [{ id: "two" }, { id: "three" }]
       }
     };
 
@@ -255,12 +247,16 @@ describe("Dashboards", () => {
     expect(dashboards.length).toBe(2);
 
     // now fail to add a dashboard
-    let failedPromise = new Promise((resolve, reject) => setTimeout(() => reject(new Error('Error')), 0));
-    failedPromise.catch(error => { return; });
+    let failedPromise = new Promise((resolve, reject) =>
+      setTimeout(() => reject(new Error("Error")), 0)
+    );
+    failedPromise.catch(() => {
+      return;
+    });
 
     axios.get.mockImplementationOnce(() => failedPromise);
 
-    let result = await wrapper.vm.loadAllDashboards();
+    await wrapper.vm.loadAllDashboards();
 
     dashboards = wrapper.vm.dashboards;
 
