@@ -26,13 +26,83 @@
           >
           </v-autocomplete>
 
-          <div v-if="fileType === 'json'" id="json-instructions">
+          <div v-if="fileType === 'json'" id="json-instructions" class="pb-10">
             <p class="title">Upload instructions</p>
 
-            <p>Please upload a valid json formatted file. Please refer to this <a href="https://jsonformatter.curiousconcept.com/" target="_blank">JSON formatter</a> to validate your json file. Your file should be an array of records formatted according to your structure definition.</p>
+            <p>
+              Please upload a valid json formatted file. Please refer to this
+              <a
+                href="https://jsonformatter.curiousconcept.com/"
+                target="_blank"
+                >JSON formatter</a
+              >
+              to validate your json file. Your file should be an array of
+              records formatted according to your structure definition.
+            </p>
+
+            <v-dialog v-model="dialog" width="400" id="json-dialog">
+              <template v-slot:activator="{ on }">
+                <v-btn color="red lighten-2" dark v-on="on">
+                  See example
+                </v-btn>
+              </template>
+
+              <v-card>
+                <v-card-title class="headline grey lighten-2" primary-title>
+                  JSON example - Practitioner
+                </v-card-title>
+
+                <v-card-text>
+                  <code>
+                    <pre>
+[
+  {
+    "active": true,
+    "name": [
+      {
+        "use": "official",
+        "family": "Theuoumiogo",
+        "given": [ "Drou" ]
+      }
+    ]
+  }, {
+    "active": true,
+    "name": [
+      {
+        "use": "official",
+        "family": "Thoguji",
+        "given": [ "Woucra" ]
+      }
+    ]
+  }, {
+    "active": true,
+    "name": [
+      {
+        "use": "official",
+        "family": "Pristaicloga",
+        "given": [ "Slaetr" ]
+      }
+    ]
+  }
+]
+                  </pre
+                    >
+                  </code>
+                </v-card-text>
+
+                <v-divider></v-divider>
+
+                <v-card-actions>
+                  <v-spacer></v-spacer>
+                  <v-btn color="primary" text @click="dialog = false">
+                    Close
+                  </v-btn>
+                </v-card-actions>
+              </v-card>
+            </v-dialog>
           </div>
 
-          Please select the file to upload.
+          <p>Please select the file to upload.</p>
 
           <v-file-input
             outlined
@@ -97,6 +167,7 @@ export default {
   },
   data() {
     return {
+      dialog: false,
       file: "",
       fileType: "",
       rules: {

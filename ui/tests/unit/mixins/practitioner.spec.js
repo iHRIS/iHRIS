@@ -2,8 +2,8 @@ import axios from "axios";
 import { mount } from "@vue/test-utils";
 import Practitioner from "@/mixins/Practitioner";
 
-jest.mock('axios');
-jest.mock('@/config/config.json', () => ({
+jest.mock("axios");
+jest.mock("@/config/config.json", () => ({
   backend: "fake backend"
 }));
 
@@ -16,7 +16,6 @@ let response;
 
 describe("Practitioner", () => {
   beforeEach(() => {
-
     wrapper = mount(Component, {
       mixins: [Practitioner]
     });
@@ -40,12 +39,18 @@ describe("Practitioner", () => {
   });
 
   test("Failed get sections returns empty array", async () => {
-    let failedPromise = new Promise((resolve, reject) => setTimeout(() => reject(new Error('Error')), 0));
-    failedPromise.catch(error => { return; });
+    let failedPromise = new Promise((resolve, reject) =>
+      setTimeout(() => reject(new Error("Error")), 0)
+    );
+    failedPromise.catch(() => {
+      return;
+    });
 
     axios.get.mockImplementationOnce(() => failedPromise);
 
-    let sections = await wrapper.vm.getSections().catch(err => { return err; });
+    let sections = await wrapper.vm.getSections().catch(err => {
+      return err;
+    });
 
     expect(sections.length).toBe(0);
     expect(sections).toEqual([]);

@@ -7,7 +7,7 @@ const Component = {
 
 describe("ConfigSettings", () => {
   test("Get backend url returns correct param", () => {
-    jest.mock('@/config/config.json', () => ({
+    jest.mock("@/config/config.json", () => ({
       backend: "backend url"
     }));
 
@@ -21,8 +21,7 @@ describe("ConfigSettings", () => {
   });
 
   test("Missing backend param returns null", () => {
-    jest.mock('@/config/config.json', () => ({
-    }));
+    jest.mock("@/config/config.json", () => ({}));
 
     let wrapper = shallowMount(Component, {
       mixins: [ConfigSettings]
@@ -34,8 +33,7 @@ describe("ConfigSettings", () => {
   });
 
   test("No dashboards setting returns empty array", () => {
-    jest.mock('@/config/config.json', () => ({
-    }));
+    jest.mock("@/config/config.json", () => ({}));
 
     let wrapper = shallowMount(Component, {
       mixins: [ConfigSettings]
@@ -46,7 +44,7 @@ describe("ConfigSettings", () => {
   });
 
   test("Dashboard as string returns array", () => {
-    jest.mock('@/config/config.json', () => ({
+    jest.mock("@/config/config.json", () => ({
       dashboards: "One dashboard"
     }));
 
@@ -59,7 +57,7 @@ describe("ConfigSettings", () => {
   });
 
   test("Dashboard as array returns array of dashboards", () => {
-    jest.mock('@/config/config.json', () => ({
+    jest.mock("@/config/config.json", () => ({
       dashboards: ["One dashboard", "Two dashboards"]
     }));
 
@@ -72,7 +70,7 @@ describe("ConfigSettings", () => {
   });
 
   test("Get kibana returns correct param", () => {
-    jest.mock('@/config/config.json', () => ({
+    jest.mock("@/config/config.json", () => ({
       kibana: "kibana link"
     }));
 
@@ -86,8 +84,7 @@ describe("ConfigSettings", () => {
   });
 
   test("Missing kibana param returns null", () => {
-    jest.mock('@/config/config.json', () => ({
-    }));
+    jest.mock("@/config/config.json", () => ({}));
 
     let wrapper = shallowMount(Component, {
       mixins: [ConfigSettings]
@@ -99,8 +96,7 @@ describe("ConfigSettings", () => {
   });
 
   test("No mHero setting returns empty array", () => {
-    jest.mock('@/config/config.json', () => ({
-    }));
+    jest.mock("@/config/config.json", () => ({}));
 
     let wrapper = shallowMount(Component, {
       mixins: [ConfigSettings]
@@ -111,7 +107,7 @@ describe("ConfigSettings", () => {
   });
 
   test("No mHero dashboards setting returns empty array", () => {
-    jest.mock('@/config/config.json', () => ({
+    jest.mock("@/config/config.json", () => ({
       mHero: {}
     }));
 
@@ -124,7 +120,7 @@ describe("ConfigSettings", () => {
   });
 
   test("mHero Dashboard as string returns array", () => {
-    jest.mock('@/config/config.json', () => ({
+    jest.mock("@/config/config.json", () => ({
       mHero: {
         dashboards: "One dashboard"
       }
@@ -139,7 +135,7 @@ describe("ConfigSettings", () => {
   });
 
   test("mHero Dashboard as array returns array of dashboards", () => {
-    jest.mock('@/config/config.json', () => ({
+    jest.mock("@/config/config.json", () => ({
       mHero: {
         dashboards: ["One dashboard", "Two dashboards"]
       }
@@ -154,8 +150,7 @@ describe("ConfigSettings", () => {
   });
 
   test("No demo config means demo is not enabled", () => {
-    jest.mock('@/config/config.json', () => ({
-    }));
+    jest.mock("@/config/config.json", () => ({}));
 
     let wrapper = shallowMount(Component, {
       mixins: [ConfigSettings]
@@ -166,7 +161,7 @@ describe("ConfigSettings", () => {
   });
 
   test("Demo config not true means demo is not enabled", () => {
-    jest.mock('@/config/config.json', () => ({
+    jest.mock("@/config/config.json", () => ({
       demo: "yes"
     }));
 
@@ -179,7 +174,7 @@ describe("ConfigSettings", () => {
   });
 
   test("Demo config set to true means demo is enabled", () => {
-    jest.mock('@/config/config.json', () => ({
+    jest.mock("@/config/config.json", () => ({
       demo: true
     }));
 
@@ -192,8 +187,7 @@ describe("ConfigSettings", () => {
   });
 
   test("No mHero config means mHero is not enabled", () => {
-    jest.mock('@/config/config.json', () => ({
-    }));
+    jest.mock("@/config/config.json", () => ({}));
 
     let wrapper = shallowMount(Component, {
       mixins: [ConfigSettings]
@@ -204,7 +198,7 @@ describe("ConfigSettings", () => {
   });
 
   test("mHero config set but not installed means mHero is not enabled", () => {
-    jest.mock('@/config/config.json', () => ({
+    jest.mock("@/config/config.json", () => ({
       mHero: {}
     }));
 
@@ -217,7 +211,7 @@ describe("ConfigSettings", () => {
   });
 
   test("mHero config set but installed not true means mHero is not enabled", () => {
-    jest.mock('@/config/config.json', () => ({
+    jest.mock("@/config/config.json", () => ({
       mHero: {
         installed: "yes"
       }
@@ -232,7 +226,7 @@ describe("ConfigSettings", () => {
   });
 
   test("mHero config set and installed is true means mHero is enabled", () => {
-    jest.mock('@/config/config.json', () => ({
+    jest.mock("@/config/config.json", () => ({
       mHero: {
         installed: true
       }
