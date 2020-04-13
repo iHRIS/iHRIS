@@ -15,15 +15,19 @@
 
           Which structure definition are you uploading content to?
 
-          <v-text-field
+          <v-autocomplete
             v-model="structureDefinition"
             label="Structure Definition"
+            :items="structureDefinitions"
             :rules="[rules.required]"
-          ></v-text-field>
+            :loading="hasStructureDefinitions"
+            outlined
+          >
+          </v-autocomplete>
 
           Please select the file to upload.
 
-          <v-file-input :accept="allowedFileExtension" :rules="[rules.required]" label="File" :disabled="!validFileType"></v-file-input>
+          <v-file-input outlined :accept="allowedFileExtension" :rules="[rules.required]" label="File" :disabled="!validFileType"></v-file-input>
 
           <v-layout align-center justify-end fill-height>
             <v-btn class="primary">Upload</v-btn>
@@ -35,6 +39,9 @@
 </template>
 
 <script>
+import axios from "axios";
+
+import ConfigSettings from "@/mixins/ConfigSettings.js";
 
 export default {
   computed: {
@@ -49,9 +56,29 @@ export default {
 
       return ".invalid";
     },
+    hasStructureDefinitions() {
+      if (this.structureDefinitions.length) {
+        return false;
+      }
+
+      return "primary";
+    },
     validFileType() {
       return this.fileType === "csv" || this.fileType === "json"
     }
+  },
+  created() {
+    axios.get(this.getBackendUrl() + "/structure-definition/valid").then(response => {
+      let structureDefinitions = response.data;
+      structureDefinitions.sort();
+
+      structureDefinitions.forEach(structureDefinition => {
+        this.structureDefinitions.push({
+          text: structureDefinition,
+          value: structureDefinition
+        });
+      });
+    });
   },
   data() {
     return {
@@ -66,8 +93,10 @@ export default {
           return "Field is required";
         }
       },
-      structureDefinition: ""
+      structureDefinition: "",
+      structureDefinitions: []
     }
-  }
+  },
+  mixins: [ConfigSettings]
 }
 </script>
