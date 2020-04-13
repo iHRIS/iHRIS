@@ -112,6 +112,16 @@
             :disabled="!validFileType"
           ></v-file-input>
 
+          <div v-if="fileType === 'json'">
+            <p> or, copy / paste the json into the box below.</p>
+
+            <v-textarea
+              outlined
+              v-model="jsonBlob"
+              label="JSON file"
+            ></v-textarea>
+          </div>
+
           <v-layout align-center justify-end fill-height>
             <v-btn class="primary">Upload</v-btn>
           </v-layout>
@@ -151,25 +161,14 @@ export default {
     }
   },
   created() {
-    axios
-      .get(this.getBackendUrl() + "/structure-definition/valid")
-      .then(response => {
-        let structureDefinitions = response.data;
-        structureDefinitions.sort();
-
-        structureDefinitions.forEach(structureDefinition => {
-          this.structureDefinitions.push({
-            text: structureDefinition,
-            value: structureDefinition
-          });
-        });
-      });
+    this.loadStructureDefinitions();
   },
   data() {
     return {
       dialog: false,
       file: "",
       fileType: "",
+      jsonBlob: "",
       rules: {
         required: value => {
           if (value) {
@@ -182,6 +181,23 @@ export default {
       structureDefinition: "",
       structureDefinitions: []
     };
+  },
+  methods: {
+    loadStructureDefinitions() {
+      axios
+        .get(this.getBackendUrl() + "/structure-definition/valid")
+        .then(response => {
+          let structureDefinitions = response.data;
+          structureDefinitions.sort();
+
+          structureDefinitions.forEach(structureDefinition => {
+            this.structureDefinitions.push({
+              text: structureDefinition,
+              value: structureDefinition
+            });
+          });
+        });
+    }
   },
   mixins: [ConfigSettings]
 };
