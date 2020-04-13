@@ -26,6 +26,12 @@
           >
           </v-autocomplete>
 
+          <div v-if="fileType === 'json'" id="json-instructions">
+            <p class="title">Upload instructions</p>
+
+            <p>Please upload a valid json formatted file. Please refer to this <a href="https://jsonformatter.curiousconcept.com/" target="_blank">JSON formatter</a> to validate your json file. Your file should be an array of records formatted according to your structure definition.</p>
+          </div>
+
           Please select the file to upload.
 
           <v-file-input
