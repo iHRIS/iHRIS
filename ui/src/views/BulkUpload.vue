@@ -102,15 +102,20 @@
             </v-dialog>
           </div>
 
-          <p>Please select the file to upload.</p>
+          <div v-if="fileType !== ''">
+            <p>Please select the file to upload.</p>
 
-          <v-file-input
-            outlined
-            :accept="allowedFileExtension"
-            :rules="[rules.required]"
-            label="File"
-            :disabled="!validFileType"
-          ></v-file-input>
+            <v-file-input
+              outlined
+              v-model="filePath"
+              :accept="allowedFileExtension"
+              :rules="[rules.required]"
+              label="File"
+              :disabled="!validFileType"
+              :loading="fileUploadStatus"
+              @change="uploadFile"
+            ></v-file-input>
+          </div>
 
           <div v-if="fileType === 'json'">
             <p> or, copy / paste the json into the box below.</p>
@@ -149,6 +154,13 @@ export default {
 
       return ".invalid";
     },
+    fileUploadStatus() {
+      if (!this.upload) {
+        return false;
+      }
+
+      return "primary";
+    },
     hasStructureDefinitions() {
       if (this.structureDefinitions.length) {
         return false;
@@ -166,7 +178,8 @@ export default {
   data() {
     return {
       dialog: false,
-      file: "",
+      fileData: null,
+      filePath: null,
       fileType: "",
       jsonBlob: "",
       rules: {
@@ -179,7 +192,8 @@ export default {
         }
       },
       structureDefinition: "",
-      structureDefinitions: []
+      structureDefinitions: [],
+      upload: false
     };
   },
   methods: {
@@ -197,6 +211,16 @@ export default {
             });
           });
         });
+    },
+    uploadFile() {
+      this.upload = true;
+
+      let fileReader = new FileReader();
+      fileReader.readAsText(this.filePath);
+      fileReader.onload = () => {
+        this.fileData = fileReader.result;
+        this.upload = false;
+      };
     }
   },
   mixins: [ConfigSettings]
