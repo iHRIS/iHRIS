@@ -26,10 +26,14 @@
           >
           </v-autocomplete>
 
-          <div v-if="fileType === 'json'" id="json-instructions" class="pb-10">
+          <div v-if="fileType !== ''" id="instructions" class="pb-10">
             <p class="title">Upload instructions</p>
 
-            <p>
+            <p v-if="fileType === 'csv'">
+              Please upload a csv formatted file. In order to map your csv to FHIR resources, you will need to create a <a href="https://www.hl7.org/fhir/questionnaire.html" target="_blank">FHIR Questionnaire</a>.
+            </p>
+
+            <p v-if="fileType === 'json'">
               Please upload a valid json formatted file. Please refer to this
               <a
                 href="https://jsonformatter.curiousconcept.com/"
@@ -40,7 +44,7 @@
               records formatted according to your structure definition.
             </p>
 
-            <v-dialog v-model="dialog" width="400" id="json-dialog">
+            <v-dialog v-model="dialog" width="400" id="json-dialog" v-if="fileType === 'json'">
               <template v-slot:activator="{ on }">
                 <v-btn color="red lighten-2" dark v-on="on">
                   See example
