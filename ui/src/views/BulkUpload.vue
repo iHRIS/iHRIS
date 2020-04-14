@@ -14,19 +14,7 @@
             <v-radio label="JSON" value="json"></v-radio>
           </v-radio-group>
 
-          Which structure definition are you uploading content to?
-
-          <v-autocomplete
-            v-model="structureDefinition"
-            label="Structure Definition"
-            :items="structureDefinitions"
-            :rules="[rules.required]"
-            :loading="hasStructureDefinitions"
-            outlined
-          >
-          </v-autocomplete>
-
-          <div v-if="fileType !== ''" id="instructions" class="pb-10">
+          <div v-if="fileType !== ''" id="instructions">
             <p class="title">Upload instructions</p>
 
             <p v-if="fileType === 'csv'">
@@ -106,6 +94,34 @@
             </v-dialog>
           </div>
 
+          <div v-if="fileType === 'json'" class="pt-10" id="structure-definition-field">
+            Which structure definition are you uploading content to?
+
+            <v-autocomplete
+              :no-data-text="noStructureDefinitions"
+              v-model="structureDefinition"
+              label="Structure Definition"
+              :items="structureDefinitions"
+              :rules="[rules.required]"
+              :loading="hasStructureDefinitions"
+              outlined
+            >
+            </v-autocomplete>
+          </div>
+
+          <div v-if="fileType === 'csv'" id="questionnaire-field">
+            <v-autocomplete
+              :no-data-text="noQuestionnaires"
+              v-model="questionnaire"
+              label="Questionnaire"
+              :items="questionnaires"
+              :rules="[rules.required]"
+              :loading="hasQuestionnaires"
+              outlined
+            >
+           </v-autocomplete>
+          </div>
+
           <div v-if="fileType !== ''">
             <p>Please select the file to upload.</p>
 
@@ -165,27 +181,53 @@ export default {
 
       return "primary";
     },
-    hasStructureDefinitions() {
-      if (this.structureDefinitions.length) {
+    hasQuestionnaires() {
+      if (this.downloadedQuestionnaires) {
         return false;
       }
 
       return "primary";
+    },
+    hasStructureDefinitions() {
+      if (this.downloadedStructureDefinitions) {
+        return false;
+      }
+
+      return "primary";
+    },
+    noQuestionnaires() {
+      if (this.downloadedQuestionnaires) {
+        return "No questionnaires were found.";
+      }
+
+      return "Questionnaires are still being loaded.";
+    },
+    noStructureDefinitions() {
+      if (this.downloadedStructureDefinitions) {
+        return "No structure definitions were found.";
+      }
+
+      return "Structure definitions are still being loaded.";
     },
     validFileType() {
       return this.fileType === "csv" || this.fileType === "json";
     }
   },
   created() {
+    this.loadQuestionnaires();
     this.loadStructureDefinitions();
   },
   data() {
     return {
       dialog: false,
+      downloadedQuestionnaires: false,
+      downloadedStructureDefinitions: false,
       fileData: null,
       filePath: null,
       fileType: "",
       jsonBlob: "",
+      questionnaire: "",
+      questionnaires: [],
       rules: {
         required: value => {
           if (value) {
@@ -201,6 +243,20 @@ export default {
     };
   },
   methods: {
+    loadQuestionnaires() {
+      axios.get(this.getBackendUrl() + "/structure-definition/all/Questionnaire").then(response => {
+        response.data.forEach(questionnaire => {
+          this.questionnaires.push({
+            text: questionnaire.resource.name,
+            value: questionnaire.resource.id
+          });
+        });
+
+        this.downloadedQuestionnaires = true;
+      }).catch(() => {
+        this.downloadedQuestionnaires = true;
+      });
+    },
     loadStructureDefinitions() {
       axios
         .get(this.getBackendUrl() + "/structure-definition/valid")
@@ -214,6 +270,10 @@ export default {
               value: structureDefinition
             });
           });
+
+          this.downloadedStructureDefintions = true;
+        }).catch(() => {
+          this.downloadedStructureDefintions = true;
         });
     },
     uploadFile() {
