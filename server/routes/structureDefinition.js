@@ -87,6 +87,37 @@ router.get("/get/:definition/:id", function (req, res, next) {
 });
 
 /**
+ * Upload multiple structure definitions
+ */
+router.post("/upload", function (req, res, next) {
+  let data = req.body;
+
+  console.log(data);
+  res.status(201).json({});
+
+  let bundle = {
+    resourceType: "Bundle",
+    entry: data.bundle
+  };
+
+  let url = URI(config.fhir.server).segment('fhir');
+  url.segment(data['definition']);
+  url = url.toString();
+
+  axios.post(url, bundle, {
+    withCredentials: true,
+    auth: {
+      username: config.fhir.username,
+      password: config.fhir.password
+    }
+  }).then(response => {
+    res.status(201).json(response.data);
+  }).catch(err => {
+    res.status(400).json(err);
+  });
+});
+
+/**
  * Get valid structure definitions
  */
 router.get("/valid", async function (req, res, next) {
