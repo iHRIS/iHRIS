@@ -9,7 +9,12 @@
         <v-form ref="form">
           How is your file formatted?
 
-          <v-radio-group row v-model="fileType" :rules="[rules.required]">
+          <v-radio-group
+            row
+            v-model="fileType"
+            :rules="[rules.fileType]"
+            id="file-type"
+          >
             <v-radio label="CSV" value="csv"></v-radio>
             <v-radio label="JSON" value="json"></v-radio>
           </v-radio-group>
@@ -18,7 +23,13 @@
             <p class="title">Upload instructions</p>
 
             <p v-if="fileType === 'csv'">
-              Please upload a csv formatted file. In order to map your csv to FHIR resources, you will need to create a <a href="https://www.hl7.org/fhir/questionnaire.html" target="_blank">FHIR Questionnaire</a>.
+              Please upload a csv formatted file. In order to map your csv to
+              FHIR resources, you will need to create a
+              <a
+                href="https://www.hl7.org/fhir/questionnaire.html"
+                target="_blank"
+                >FHIR Questionnaire</a
+              >.
             </p>
 
             <p v-if="fileType === 'json'">
@@ -32,7 +43,12 @@
               records formatted according to your structure definition.
             </p>
 
-            <v-dialog v-model="dialog" width="400" id="json-dialog" v-if="fileType === 'json'">
+            <v-dialog
+              v-model="dialog"
+              width="400"
+              id="json-dialog"
+              v-if="fileType === 'json'"
+            >
               <template v-slot:activator="{ on }">
                 <v-btn color="red lighten-2" dark v-on="on">
                   See example
@@ -94,7 +110,11 @@
             </v-dialog>
           </div>
 
-          <div v-if="fileType === 'json'" class="pt-10" id="structure-definition-field">
+          <div
+            v-if="fileType === 'json'"
+            class="pt-10"
+            id="structure-definition-field"
+          >
             Which structure definition are you uploading content to?
 
             <v-autocomplete
@@ -102,7 +122,7 @@
               v-model="structureDefinition"
               label="Structure Definition"
               :items="structureDefinitions"
-              :rules="[rules.required]"
+              :rules="[rules.structureDefinition]"
               :loading="hasStructureDefinitions"
               outlined
             >
@@ -115,21 +135,21 @@
               v-model="questionnaire"
               label="Questionnaire"
               :items="questionnaires"
-              :rules="[rules.required]"
+              :rules="[rules.questionnaire]"
               :loading="hasQuestionnaires"
               outlined
             >
-           </v-autocomplete>
+            </v-autocomplete>
           </div>
 
-          <div v-if="fileType !== ''">
+          <div v-if="fileType !== ''" id="file-upload">
             <p>Please select the file to upload.</p>
 
             <v-file-input
               outlined
               v-model="filePath"
               :accept="allowedFileExtension"
-              :rules="[rules.required]"
+              :rules="[rules.file, rules.fileIsLoaded]"
               label="File"
               :disabled="!validFileType"
               :loading="fileUploadStatus"
@@ -137,18 +157,19 @@
             ></v-file-input>
           </div>
 
-          <div v-if="fileType === 'json'">
-            <p> or, copy / paste the json into the box below.</p>
+          <div v-if="fileType === 'json'" id="json-blob">
+            <p>or, copy / paste the json into the box below.</p>
 
             <v-textarea
               outlined
               v-model="jsonBlob"
               label="JSON file"
+              :rules="[rules.jsonBlob]"
             ></v-textarea>
           </div>
 
           <v-layout align-center justify-end fill-height>
-            <v-btn class="primary">Upload</v-btn>
+            <v-btn class="primary" @click="validateAndSend">Upload</v-btn>
           </v-layout>
         </v-form>
       </v-card-text>
@@ -229,12 +250,78 @@ export default {
       questionnaire: "",
       questionnaires: [],
       rules: {
-        required: value => {
+        file: value => {
           if (value) {
             return true;
           }
 
-          return "Field is required";
+          // if json, blob is okay instead
+          if (this.fileType === "json" && this.jsonBlob !== "") {
+            return true;
+          }
+
+          return "Please select a file to upload.";
+        },
+        fileIsLoaded: () => {
+          // first, check that a file has been attached
+          // if that hasn't happened yet, we haven't hit this validation step
+          if (!this.filePath) {
+            return true;
+          }
+
+          if (this.fileData) {
+            return true;
+          }
+
+          return "Please wait for file to finish uploading.";
+        },
+        fileType: value => {
+          if (value) {
+            return true;
+          }
+
+          return "Please select how your file is formatted.";
+        },
+        jsonBlob: value => {
+          if (value) {
+            return true;
+          }
+
+          // if a csv upload, this isn't needed
+          if (this.fileType === "csv") {
+            return true;
+          }
+
+          // if we have a file upload, this isn't needed
+          if (this.filePath) {
+            return true;
+          }
+
+          return "Please either copy / paste your json data or upload a file.";
+        },
+        questionnaire: value => {
+          if (value) {
+            return true;
+          }
+
+          // if not csv file type, then nothing to validate
+          if (this.fileType !== "csv") {
+            return true;
+          }
+
+          return "Please select the questionnaire for this file.";
+        },
+        structureDefinition: value => {
+          if (value) {
+            return true;
+          }
+
+          // if not json file type, then nothing to validate
+          if (this.fileType !== "json") {
+            return true;
+          }
+
+          return "Please select which structure definition you are updating.";
         }
       },
       structureDefinition: "",
@@ -243,19 +330,25 @@ export default {
     };
   },
   methods: {
+    formIsValid() {
+      return this.$refs.form.validate();
+    },
     loadQuestionnaires() {
-      axios.get(this.getBackendUrl() + "/structure-definition/all/Questionnaire").then(response => {
-        response.data.forEach(questionnaire => {
-          this.questionnaires.push({
-            text: questionnaire.resource.name,
-            value: questionnaire.resource.id
+      axios
+        .get(this.getBackendUrl() + "/structure-definition/all/Questionnaire")
+        .then(response => {
+          response.data.forEach(questionnaire => {
+            this.questionnaires.push({
+              text: questionnaire.resource.name,
+              value: questionnaire.resource.id
+            });
           });
-        });
 
-        this.downloadedQuestionnaires = true;
-      }).catch(() => {
-        this.downloadedQuestionnaires = true;
-      });
+          this.downloadedQuestionnaires = true;
+        })
+        .catch(() => {
+          this.downloadedQuestionnaires = true;
+        });
     },
     loadStructureDefinitions() {
       axios
@@ -272,9 +365,16 @@ export default {
           });
 
           this.downloadedStructureDefintions = true;
-        }).catch(() => {
+        })
+        .catch(() => {
           this.downloadedStructureDefintions = true;
         });
+    },
+    submit() {},
+    validateAndSend() {
+      if (this.formIsValid()) {
+        return this.submit();
+      }
     },
     uploadFile() {
       this.upload = true;
