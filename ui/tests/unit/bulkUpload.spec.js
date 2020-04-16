@@ -1,4 +1,3 @@
-//import axios from "axios";
 import Vue from "vue";
 import Vuetify from "vuetify";
 
@@ -11,14 +10,9 @@ import BulkUpload from "@/views/BulkUpload.vue";
 import { mount, createLocalVue } from "@vue/test-utils";
 
 const localVue = createLocalVue();
-document.body.setAttribute('data-app', true);
+document.body.setAttribute("data-app", true);
 
 let wrapper;
-
-//const mockAxios = jest.genMockFromModule('axios');
-
-// this is the key to fix the axios.create() undefined error!
-//mockAxios.create = jest.fn(() => mockAxios)
 
 jest.mock("axios");
 
@@ -42,47 +36,38 @@ describe("BulkUpload.vue", () => {
     });
   });
 
-  it("Says bulk upload in the title", () => {
-
+  it("Is a vue instance", () => {
     expect(wrapper.isVueInstance()).toBeTruthy();
+  });
+
+  it("Says bulk upload in the title", () => {
     expect(wrapper.findAll(".v-card__title")).toHaveLength(1);
     expect(wrapper.find(".v-card__title").text()).toBe("Bulk Upload");
   });
 
   it("Has the correct form fields", () => {
-    expect(wrapper.isVueInstance()).toBeTruthy();
     expect(wrapper.findAll(".v-input--radio-group__input")).toHaveLength(1);
     expect(wrapper.findAll(".v-btn__content")).toHaveLength(1);
   });
 
   it("File input is disabled by default", () => {
-    expect(wrapper.isVueInstance()).toBeTruthy();
-
     let fileInput = wrapper.find(".v-file-input");
-
     expect(fileInput.exists()).toBeFalsy();
   });
 
   it("File input is enabled when file type is selected", () => {
-    expect(wrapper.isVueInstance()).toBeTruthy();
-
     wrapper.setData({ fileType: "csv" });
 
     let fileInput = wrapper.find(".v-file-input");
-
     expect(fileInput.classes()).not.toContain("v-input--is-disabled");
   });
 
   it("Only allows invalid file types initially", () => {
-    expect(wrapper.isVueInstance()).toBeTruthy();
-
     let allowedExtension = wrapper.vm.allowedFileExtension;
     expect(allowedExtension).toBe(".invalid");
   });
 
   it("Allows valid file types on select", () => {
-    expect(wrapper.isVueInstance()).toBeTruthy();
-
     wrapper.setData({ fileType: "csv" });
 
     let allowedExtension = wrapper.vm.allowedFileExtension;
@@ -106,9 +91,7 @@ describe("BulkUpload.vue", () => {
 
   it("Should populate structure definition from axios call", async () => {
     let response = {
-      data: [
-        "Structure 1", "Structure 2", "Structure 3"
-      ]
+      data: ["Structure 1", "Structure 2", "Structure 3"]
     };
 
     axios.get.mockImplementationOnce(() => Promise.resolve(response));
@@ -125,14 +108,12 @@ describe("BulkUpload.vue", () => {
   });
 
   it("Should not show upload instructions by default", () => {
-    expect(wrapper.isVueInstance()).toBeTruthy();
     expect(wrapper.findAll("#instructions")).toHaveLength(0);
   });
 
   it("Should show instructions when field is selected", () => {
     wrapper.setData({ fileType: "json" });
 
-    expect(wrapper.isVueInstance()).toBeTruthy();
     expect(wrapper.findAll("#instructions")).toHaveLength(1);
 
     wrapper.setData({ fileType: "csv" });
@@ -142,21 +123,16 @@ describe("BulkUpload.vue", () => {
   it("Should show example button in json instructions", () => {
     wrapper.setData({ fileType: "json" });
 
-    expect(wrapper.isVueInstance()).toBeTruthy();
     expect(wrapper.findAll(".v-btn__content")).toHaveLength(2);
   });
 
   it("Should not have a dialog if json is not selected", () => {
-    expect(wrapper.isVueInstance()).toBeTruthy();
-
     let dialog = wrapper.find(".v-dialog");
     expect(dialog.exists()).toBeFalsy();
   });
 
   it("Should hide dialog by default", () => {
     wrapper.setData({ fileType: "json" });
-
-    expect(wrapper.isVueInstance()).toBeTruthy();
 
     let dialog = wrapper.find(".v-dialog");
     let styles = dialog.attributes("style");
@@ -167,8 +143,6 @@ describe("BulkUpload.vue", () => {
 
   it("Should open dialog when json example is clicked", () => {
     wrapper.setData({ fileType: "json" });
-
-    expect(wrapper.isVueInstance()).toBeTruthy();
 
     let dialog = wrapper.find(".v-dialog");
     let button = wrapper.find("#instructions .v-btn__content");
@@ -230,6 +204,7 @@ describe("BulkUpload.vue", () => {
     fileInput.trigger("change");
 
     expect(wrapper.vm.upload).toBeTruthy();
+    expect(fileReaderSpy).toBeCalled();
   });
 
   it("Should not upload by default", () => {
