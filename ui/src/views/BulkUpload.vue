@@ -41,8 +41,7 @@
                   {{ dialogTitle }}
                 </v-card-title>
 
-                <v-card-text v-html="dialogText">
-                </v-card-text>
+                <v-card-text v-html="dialogText"> </v-card-text>
 
                 <v-divider></v-divider>
 
@@ -56,10 +55,7 @@
             </v-dialog>
           </div>
 
-          <div
-            v-if="fileType === 'json'"
-            id="structure-definition-field"
-          >
+          <div v-if="fileType === 'json'" id="structure-definition-field">
             Which structure definition are you uploading content to?
 
             <v-autocomplete
@@ -74,7 +70,7 @@
             </v-autocomplete>
           </div>
 
-            <div v-if="fileType === 'csv'" id="questionnaire-field">
+          <div v-if="fileType === 'csv'" id="questionnaire-field">
             <v-autocomplete
               :no-data-text="noQuestionnaires"
               v-model="questionnaire"
@@ -159,27 +155,27 @@ export default {
         formattedText += "    active: true,\n";
         formattedText += "    name: [\n";
         formattedText += "      {\n";
-        formattedText += "        use: \"official\",\n";
-        formattedText += "        family: \"Theuoumiogo\",\n";
-        formattedText += "        given: [ \"Drou\" ]\n";
+        formattedText += '        use: "official",\n';
+        formattedText += '        family: "Theuoumiogo",\n';
+        formattedText += '        given: [ "Drou" ]\n';
         formattedText += "      }\n";
         formattedText += "    ]\n";
         formattedText += "  }, {\n";
         formattedText += "    active: true,\n";
         formattedText += "    name: [\n";
         formattedText += "      {\n";
-        formattedText += "        use: \"official\",\n";
-        formattedText += "        family: \"Thoguji\",\n";
-        formattedText += "        given: [ \"Woucra\" ]\n";
+        formattedText += '        use: "official",\n';
+        formattedText += '        family: "Thoguji",\n';
+        formattedText += '        given: [ "Woucra" ]\n';
         formattedText += "      }\n";
         formattedText += "    ]\n";
         formattedText += "  }, {\n";
         formattedText += "    active: true,\n";
         formattedText += "    name: [\n";
         formattedText += "      {\n";
-        formattedText += "        use: \"official\",\n";
-        formattedText += "        family: \"Pristaicloga\",\n";
-        formattedText += "        given: [ \"Slaetr\" ]\n";
+        formattedText += '        use: "official",\n';
+        formattedText += '        family: "Pristaicloga",\n';
+        formattedText += '        given: [ "Slaetr" ]\n';
         formattedText += "      }\n";
         formattedText += "    ]\n";
         formattedText += "  }\n";
@@ -239,11 +235,11 @@ export default {
     },
     uploadInstructions() {
       if (this.fileType === "csv") {
-        return "Please upload a csv formatted file. In order to map your csv to FHIR resources, you will need to create a <a href=\"https://www.hl7.org/fhir/questionnaire.html\" target=\"_blank\">FHIR Questionnaire</a>.<br><br>Once you have created your questionnaire, the first line of the csv should contain ids corresponding to questions in the questionnaire. Each subsequent line will contain a response to the questionnaire.";
+        return 'Please upload a csv formatted file. In order to map your csv to FHIR resources, you will need to create a <a href="https://www.hl7.org/fhir/questionnaire.html" target="_blank">FHIR Questionnaire</a>.<br><br>Once you have created your questionnaire, the first line of the csv should contain ids corresponding to questions in the questionnaire. Each subsequent line will contain a response to the questionnaire.';
       }
 
       if (this.fileType === "json") {
-        return "Please upload a valid json formatted file. Please refer to this <a href=\"https://jsonformatter.curiousconcept.com/\" target=\"_blank\">JSON formatter</a>to validate your json file. Your file should be an array of records formatted according to your structure definition.";
+        return 'Please upload a valid json formatted file. Please refer to this <a href="https://jsonformatter.curiousconcept.com/" target="_blank">JSON formatter</a>to validate your json file. Your file should be an array of records formatted according to your structure definition.';
       }
 
       return "";
