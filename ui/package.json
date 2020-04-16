@@ -9,7 +9,9 @@
     "test:unit": "vue-cli-service test:unit"
   },
   "dependencies": {
+    "@babel/core": "^7.9.0",
     "@babel/helper-regex": "^7.5.5",
+    "@babel/preset-env": "^7.9.5",
     "@mdi/font": "^4.5.95",
     "axios": "0.*",
     "core-js": "^2.6.5",
