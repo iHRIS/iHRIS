@@ -235,8 +235,7 @@ export default {
     }
   },
   created() {
-    this.loadQuestionnaires();
-    this.loadStructureDefinitions();
+    this.created();
   },
   data() {
     return {
@@ -330,6 +329,10 @@ export default {
     };
   },
   methods: {
+    created() {
+      this.loadQuestionnaires();
+      this.loadStructureDefinitions();
+    },
     formIsValid() {
       return this.$refs.form.validate();
     },
@@ -337,9 +340,19 @@ export default {
       axios
         .get(this.getBackendUrl() + "/structure-definition/all/Questionnaire")
         .then(response => {
+          let text = "";
+
           response.data.forEach(questionnaire => {
+            if (questionnaire.resource.name) {
+              text = questionnaire.resource.name;
+            } else if (questionnaire.resource.title) {
+              text = questionnaire.resource.title;
+            } else {
+              text = questionnaire.resource.id;
+            }
+
             this.questionnaires.push({
-              text: questionnaire.resource.name,
+              text: text,
               value: questionnaire.resource.id
             });
           });
