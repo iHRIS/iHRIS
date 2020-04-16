@@ -583,4 +583,177 @@ describe("BulkUpload.vue", () => {
 
     expect(jsonTitle).not.toBe(csvTitle);
   });
+
+  it("Returns false for formatting if csv but no file data", () => {
+    wrapper.setData({ fileType: "csv" });
+
+    let data = wrapper.vm.formatData();
+    expect(data).toBeFalsy();
+  });
+
+  it("Skips blank lines for csv formatting", () => {
+    wrapper.setData({ fileType: "csv" });
+    wrapper.setData({ fileData: "a,b,c,d\ne,f,g,h\ni,j,k,l\n\nm,n,o,p" });
+    wrapper.setData({ questionnaire: "questionnaire" });
+
+    let data = wrapper.vm.formatData();
+    let expected = {
+      questionnaire: "questionnaire",
+      responses: [
+        { a: "e", b: "f", c: "g", d: "h" },
+        { a: "i", b: "j", c: "k", d: "l" },
+        { a: "m", b: "n", c: "o", d: "p" }
+      ]
+    };
+
+    expect(data).toEqual(expected);
+  });
+
+  it("Correctly parses and formats csv file", () => {
+    wrapper.setData({ fileType: "csv" });
+    wrapper.setData({ fileData: "a,b,c,d\ne,f,g,h\ni,j,k,l\nm,n,o,p" });
+    wrapper.setData({ questionnaire: "questionnaire" });
+
+    let data = wrapper.vm.formatData();
+    let expected = {
+      questionnaire: "questionnaire",
+      responses: [
+        { a: "e", b: "f", c: "g", d: "h" },
+        { a: "i", b: "j", c: "k", d: "l" },
+        { a: "m", b: "n", c: "o", d: "p" }
+      ]
+    };
+
+    expect(data).toEqual(expected);
+  });
+
+  it("Returns false for formatting if json blob and file data aren’t set", () => {
+    wrapper.setData({ fileType: "json" });
+
+    let data = wrapper.vm.formatData();
+    expect(data).toBeFalsy();
+  });
+
+  it("Uses json blob over file data for formatting when both exist", () => {
+    wrapper.setData({ fileType: "json" });
+    wrapper.setData({ jsonBlob: "blob" });
+    wrapper.setData({ structureDefinition: "definition" });
+    wrapper.setData({ fileData: "file data" });
+
+    let data = wrapper.vm.formatData();
+    let expected = {
+      bundle: "blob",
+      definition: "definition"
+    };
+
+    expect(data).toEqual(expected);
+  });
+
+  it("Uses file data for json formatting if blob does not exist", () => {
+    wrapper.setData({ fileType: "json" });
+    wrapper.setData({ structureDefinition: "definition" });
+    wrapper.setData({ fileData: "file data" });
+
+    let data = wrapper.vm.formatData();
+    let expected = {
+      bundle: "file data",
+      definition: "definition"
+    };
+
+    expect(data).toEqual(expected);
+  });
+
+  it("Returns false for formatting if file type is invalid", () => {
+    wrapper.setData({ fileType: "invalid" });
+    wrapper.setData({ jsonBlob: "blob" });
+    wrapper.setData({ structureDefinition: "definition" });
+    wrapper.setData({ fileData: "file data" });
+    wrapper.setData({ questionnaire: "questionnaire" });
+
+    let data = wrapper.vm.formatData();
+    expect(data).toBeFalsy();
+  });
+
+  test("Submit returns false if data is not set", () => {
+    let formatData = jest.fn();
+    formatData.mockReturnValue(false);
+
+    wrapper = mount(BulkUpload, {
+      localVue,
+      vuetify,
+      methods: { created, formatData }
+    });
+
+    let response = wrapper.vm.submit();
+    expect(response).toBeFalsy();
+  });
+
+  test("Submit returns false if route is not set", () => {
+    let formatData = jest.fn();
+    let uploadRoute = jest.fn();
+
+    formatData.mockReturnValue({ bundle: "bundle", definition: "definition" } );
+    uploadRoute.mockReturnValue(false);
+
+    wrapper = mount(BulkUpload, {
+      localVue,
+      vuetify,
+      methods: { created, formatData, uploadRoute }
+    });
+
+    let response = wrapper.vm.submit();
+    expect(response).toBeFalsy();
+  });
+
+  test("Upload route returns false if not csv or json", () => {
+    wrapper.setData({ fileType: "invalid" });
+
+    let route = wrapper.vm.uploadRoute();
+    expect(route).toBeFalsy();
+  });
+
+  test("Upload route returns different routes for csv and json", () => {
+    wrapper.setData({ fileType: "csv" });
+
+    let csvRoute = wrapper.vm.uploadRoute();
+    expect(csvRoute).not.toBe("");
+
+    wrapper.setData({ fileType: "json" });
+
+    let jsonRoute = wrapper.vm.uploadRoute();
+    expect(jsonRoute).not.toBe("");
+
+    expect(jsonRoute).not.toBe(csvRoute);
+  });
+
+  test("Validate and send returns false if form is not valid", () => {
+    let formIsValid = jest.fn();
+    formIsValid.mockReturnValue(false);
+
+    wrapper = mount(BulkUpload, {
+      localVue,
+      vuetify,
+      methods: { created, formIsValid }
+    });
+
+    let response = wrapper.vm.validateAndSend();
+    expect(response).toBeFalsy();
+  });
+
+  test("Validate and send returns result of submit if form is valid", () => {
+    let formIsValid = jest.fn();
+    formIsValid.mockReturnValue(true);
+
+    let submit = jest.fn();
+    submit.mockReturnValue("asdjfkl");
+
+    wrapper = mount(BulkUpload, {
+      localVue,
+      vuetify,
+      methods: { created, formIsValid, submit }
+    });
+
+    let response = wrapper.vm.validateAndSend();
+    expect(response).toBe("asdjfkl");
+  });
 });
