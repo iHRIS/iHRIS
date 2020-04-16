@@ -347,6 +347,59 @@ export default {
       this.loadQuestionnaires();
       this.loadStructureDefinitions();
     },
+    formatData() {
+      if (this.fileType === "csv") {
+        // only option here is file upload
+        if (!this.fileData) {
+          return false;
+        }
+
+        let responses = [];
+        let file = this.fileData.split("\n");
+
+        // first line should be the header
+        let header = file[0].split(",");
+
+        for (let i = 1; i < file.length; i++) {
+          if (file[i] === "") {
+            continue;
+          }
+
+          let line = file[i].split(",");
+          let response = {};
+
+          for (let j = 0; j < header.length; j++) {
+            response[header[j]] = line[j];
+          }
+
+          responses.push(response);
+        }
+
+        return {
+          questionnaire: this.questionnaire,
+          responses: responses
+        };
+      } else if (this.fileType === "json") {
+        let data;
+
+        // data can come from one of two places:
+        // use blob if something is there
+        if (this.jsonBlob) {
+          data = this.jsonBlob;
+        } else if (this.fileData) {
+          data = this.fileData;
+        } else {
+          return false;
+        }
+
+        return {
+          bundle: data,
+          definition: this.structureDefinition
+        };
+      } else {
+        return false;
+      }
+    },
     formIsValid() {
       return this.$refs.form.validate();
     },
@@ -397,11 +450,23 @@ export default {
           this.downloadedStructureDefintions = true;
         });
     },
-    submit() {},
-    validateAndSend() {
-      if (this.formIsValid()) {
-        return this.submit();
+    submit() {
+      let data = this.formatData();
+      let route = this.uploadRoute();
+
+      if (!data) {
+        return false;
       }
+
+      if (!route) {
+        return false;
+      }
+
+      return axios.post(route, data).then(() => {
+        return true;
+      }).catch(() => {
+        return false;
+      });
     },
     uploadFile() {
       this.upload = true;
@@ -411,7 +476,28 @@ export default {
       fileReader.onload = () => {
         this.fileData = fileReader.result;
         this.upload = false;
+
+        // this is necessary because it can trigger an error that will not go away
+        this.$refs.form.resetValidation();
       };
+    },
+    uploadRoute() {
+      if (this.fileType === "csv") {
+        return this.getBackendUrl() + "/questionnaire/answer";
+      }
+
+      if (this.fileType === "json") {
+        return this.getBackendUrl() + "/structure-definition/upload";
+      }
+
+      return false;
+    },
+    validateAndSend() {
+      if (this.formIsValid()) {
+        return this.submit();
+      }
+
+      return false;
     }
   },
   mixins: [ConfigSettings]
