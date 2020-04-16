@@ -19,35 +19,16 @@
             <v-radio label="JSON" value="json"></v-radio>
           </v-radio-group>
 
-          <div v-if="fileType !== ''" id="instructions">
+          <div v-if="fileType !== ''" id="instructions" class="pb-10">
             <p class="title">Upload instructions</p>
 
-            <p v-if="fileType === 'csv'">
-              Please upload a csv formatted file. In order to map your csv to
-              FHIR resources, you will need to create a
-              <a
-                href="https://www.hl7.org/fhir/questionnaire.html"
-                target="_blank"
-                >FHIR Questionnaire</a
-              >.
-            </p>
-
-            <p v-if="fileType === 'json'">
-              Please upload a valid json formatted file. Please refer to this
-              <a
-                href="https://jsonformatter.curiousconcept.com/"
-                target="_blank"
-                >JSON formatter</a
-              >
-              to validate your json file. Your file should be an array of
-              records formatted according to your structure definition.
-            </p>
+            <p v-html="uploadInstructions"></p>
 
             <v-dialog
               v-model="dialog"
               width="400"
               id="json-dialog"
-              v-if="fileType === 'json'"
+              v-if="fileType !== ''"
             >
               <template v-slot:activator="{ on }">
                 <v-btn color="red lighten-2" dark v-on="on">
@@ -57,45 +38,10 @@
 
               <v-card>
                 <v-card-title class="headline grey lighten-2" primary-title>
-                  JSON example - Practitioner
+                  {{ dialogTitle }}
                 </v-card-title>
 
-                <v-card-text>
-                  <code>
-                    <pre>
-[
-  {
-    "active": true,
-    "name": [
-      {
-        "use": "official",
-        "family": "Theuoumiogo",
-        "given": [ "Drou" ]
-      }
-    ]
-  }, {
-    "active": true,
-    "name": [
-      {
-        "use": "official",
-        "family": "Thoguji",
-        "given": [ "Woucra" ]
-      }
-    ]
-  }, {
-    "active": true,
-    "name": [
-      {
-        "use": "official",
-        "family": "Pristaicloga",
-        "given": [ "Slaetr" ]
-      }
-    ]
-  }
-]
-                  </pre
-                    >
-                  </code>
+                <v-card-text v-html="dialogText">
                 </v-card-text>
 
                 <v-divider></v-divider>
@@ -112,7 +58,6 @@
 
           <div
             v-if="fileType === 'json'"
-            class="pt-10"
             id="structure-definition-field"
           >
             Which structure definition are you uploading content to?
@@ -129,7 +74,7 @@
             </v-autocomplete>
           </div>
 
-          <div v-if="fileType === 'csv'" id="questionnaire-field">
+            <div v-if="fileType === 'csv'" id="questionnaire-field">
             <v-autocomplete
               :no-data-text="noQuestionnaires"
               v-model="questionnaire"
@@ -195,6 +140,68 @@ export default {
 
       return ".invalid";
     },
+    dialogText() {
+      let formattedText = "";
+
+      if (this.fileType === "csv") {
+        formattedText += "1.1.1,1.1.2,1.1.3,1.1.4<br>";
+        formattedText += "Yes,No,Yes,Yes<br>";
+        formattedText += "No,Yes,No,No<br>";
+        formattedText += "Yes,Yes,Yes,Yes<br>";
+        return formattedText;
+      }
+
+      if (this.fileType === "json") {
+        formattedText += "<code>";
+        formattedText += "<pre>";
+        formattedText += "[\n";
+        formattedText += "  {\n";
+        formattedText += "    active: true,\n";
+        formattedText += "    name: [\n";
+        formattedText += "      {\n";
+        formattedText += "        use: \"official\",\n";
+        formattedText += "        family: \"Theuoumiogo\",\n";
+        formattedText += "        given: [ \"Drou\" ]\n";
+        formattedText += "      }\n";
+        formattedText += "    ]\n";
+        formattedText += "  }, {\n";
+        formattedText += "    active: true,\n";
+        formattedText += "    name: [\n";
+        formattedText += "      {\n";
+        formattedText += "        use: \"official\",\n";
+        formattedText += "        family: \"Thoguji\",\n";
+        formattedText += "        given: [ \"Woucra\" ]\n";
+        formattedText += "      }\n";
+        formattedText += "    ]\n";
+        formattedText += "  }, {\n";
+        formattedText += "    active: true,\n";
+        formattedText += "    name: [\n";
+        formattedText += "      {\n";
+        formattedText += "        use: \"official\",\n";
+        formattedText += "        family: \"Pristaicloga\",\n";
+        formattedText += "        given: [ \"Slaetr\" ]\n";
+        formattedText += "      }\n";
+        formattedText += "    ]\n";
+        formattedText += "  }\n";
+        formattedText += "]\n";
+        formattedText += "</pre>";
+        formattedText += "</code>";
+        return formattedText;
+      }
+
+      return formattedText;
+    },
+    dialogTitle() {
+      if (this.fileType === "csv") {
+        return "CSV example";
+      }
+
+      if (this.fileType === "json") {
+        return "JSON example - Practitioner";
+      }
+
+      return "";
+    },
     fileUploadStatus() {
       if (!this.upload) {
         return false;
@@ -229,6 +236,17 @@ export default {
       }
 
       return "Structure definitions are still being loaded.";
+    },
+    uploadInstructions() {
+      if (this.fileType === "csv") {
+        return "Please upload a csv formatted file. In order to map your csv to FHIR resources, you will need to create a <a href=\"https://www.hl7.org/fhir/questionnaire.html\" target=\"_blank\">FHIR Questionnaire</a>.<br><br>Once you have created your questionnaire, the first line of the csv should contain ids corresponding to questions in the questionnaire. Each subsequent line will contain a response to the questionnaire.";
+      }
+
+      if (this.fileType === "json") {
+        return "Please upload a valid json formatted file. Please refer to this <a href=\"https://jsonformatter.curiousconcept.com/\" target=\"_blank\">JSON formatter</a>to validate your json file. Your file should be an array of records formatted according to your structure definition.";
+      }
+
+      return "";
     },
     validFileType() {
       return this.fileType === "csv" || this.fileType === "json";

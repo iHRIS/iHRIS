@@ -122,7 +122,11 @@ describe("BulkUpload.vue", () => {
 
   it("Should show example button in json instructions", () => {
     wrapper.setData({ fileType: "json" });
+    expect(wrapper.findAll(".v-btn__content")).toHaveLength(2);
+  });
 
+  it("Should show example button in csv instructions", () => {
+    wrapper.setData({ fileType: "csv" });
     expect(wrapper.findAll(".v-btn__content")).toHaveLength(2);
   });
 
@@ -155,6 +159,20 @@ describe("BulkUpload.vue", () => {
     expect(styles.includes("display: none")).toBeFalsy();
   });
 
+  it("Should open dialog when csv example is clicked", () => {
+    wrapper.setData({ fileType: "csv" });
+
+    let dialog = wrapper.find(".v-dialog");
+    let button = wrapper.find("#instructions .v-btn__content");
+
+    expect(button.exists()).toBeTruthy();
+    button.trigger("click");
+
+    let styles = dialog.attributes("style");
+
+    expect(styles.includes("display: none")).toBeFalsy();
+  });
+
   it("Should not show json text area if json is not selected", () => {
     let textarea = wrapper.find("textarea");
     expect(textarea.exists()).toBeFalsy();
@@ -165,6 +183,13 @@ describe("BulkUpload.vue", () => {
 
     let textarea = wrapper.find("textarea");
     expect(textarea.exists()).toBeTruthy();
+  });
+
+  it("Should not show json text area if csv is selected", () => {
+    wrapper.setData({ fileType: "csv" });
+
+    let textarea = wrapper.find("textarea");
+    expect(textarea.exists()).toBeFalsy();
   });
 
   it("Should not show structure definition field by default", () => {
@@ -479,5 +504,83 @@ describe("BulkUpload.vue", () => {
 
     let valid = wrapper.vm.formIsValid();
     expect(valid).toBeTruthy();
+  });
+
+  it("Should have no instructions if no fileType is set", () => {
+    let instructions = wrapper.vm.uploadInstructions;
+    expect(instructions).toBe("");
+  });
+
+  it("Should have no instructions if invalid fileType is set", () => {
+    wrapper.setData({ fileType: "invalid" });
+
+    let instructions = wrapper.vm.uploadInstructions;
+    expect(instructions).toBe("");
+  });
+
+  it("Should have different instructions for json and csv", () => {
+    wrapper.setData({ fileType: "json" });
+
+    let jsonInstructions = wrapper.vm.uploadInstructions;
+
+    wrapper.setData({ fileType: "csv" });
+
+    let csvInstructions = wrapper.vm.uploadInstructions;
+
+    expect(jsonInstructions).not.toBe("");
+    expect(csvInstructions).not.toBe("");
+    expect(jsonInstructions).not.toBe(csvInstructions);
+  });
+
+  it("Should have no dialog text if no fileType is set", () => {
+    let text = wrapper.vm.dialogText;
+    expect(text).toBe("");
+  });
+
+  it("Should have no dialog text if invalid fileType is set", () => {
+    wrapper.setData({ fileType: "invalid" });
+
+    let text = wrapper.vm.dialogText;
+    expect(text).toBe("");
+  });
+
+  it("Should have different dialog text for json and csv", () => {
+    wrapper.setData({ fileType: "json" });
+
+    let jsonText = wrapper.vm.dialogText;
+    expect(jsonText).not.toBe("");
+
+    wrapper.setData({ fileType: "csv" });
+
+    let csvText = wrapper.vm.dialogText;
+    expect(csvText).not.toBe("");
+
+    expect(jsonText).not.toBe(csvText);
+  });
+
+  it("Should have no dialog title if no fileType is set", () => {
+    let title = wrapper.vm.dialogTitle;
+    expect(title).toBe("");
+  });
+
+  it("Should have no dialog title if invalid fileType is set", () => {
+    wrapper.setData({ fileType: "invalid" });
+
+    let title = wrapper.vm.dialogTitle;
+    expect(title).toBe("");
+  });
+
+  it("Should have different dialog titles for json and csv", () => {
+    wrapper.setData({ fileType: "json" });
+
+    let jsonTitle = wrapper.vm.dialogTitle;
+    expect(jsonTitle).not.toBe("");
+
+    wrapper.setData({ fileType: "csv" });
+
+    let csvTitle = wrapper.vm.dialogTitle;
+    expect(csvTitle).not.toBe("");
+
+    expect(jsonTitle).not.toBe(csvTitle);
   });
 });
