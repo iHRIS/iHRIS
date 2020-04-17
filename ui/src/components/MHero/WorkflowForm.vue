@@ -246,7 +246,6 @@ export default {
       });
 
     axios.get(config.backend + "/practitioner/all").then(response => {
-      console.log(response);
       let practitioners = [];
 
       if (

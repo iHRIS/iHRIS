@@ -352,7 +352,7 @@ export default {
   methods: {
     created() {
       this.loadQuestionnaires();
-      //this.loadStructureDefinitions();
+      this.loadStructureDefinitions();
     },
     formatData() {
       if (this.fileType === "csv") {
