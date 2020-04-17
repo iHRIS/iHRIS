@@ -3,6 +3,8 @@
     <v-card>
       <v-card-title>Bulk Upload</v-card-title>
       <v-card-text>
+        <Alert ref="alertBanner" v-if="showAlert" />
+
         Please use the form below to upload multiple instances of the provided
         structure definition.
 
@@ -121,9 +123,13 @@
 <script>
 import axios from "axios";
 
+import Alert from "@/components/Layout/Alert.vue";
 import ConfigSettings from "@/mixins/ConfigSettings.js";
 
 export default {
+  components: {
+    Alert
+  },
   computed: {
     allowedFileExtension() {
       if (this.fileType === "csv") {
@@ -337,6 +343,7 @@ export default {
           return "Please select which structure definition you are updating.";
         }
       },
+      showAlert: false,
       structureDefinition: "",
       structureDefinitions: [],
       upload: false
@@ -345,7 +352,7 @@ export default {
   methods: {
     created() {
       this.loadQuestionnaires();
-      this.loadStructureDefinitions();
+      //this.loadStructureDefinitions();
     },
     formatData() {
       if (this.fileType === "csv") {
@@ -451,6 +458,8 @@ export default {
         });
     },
     submit() {
+      this.showAlert = false;
+
       let data = this.formatData();
       let route = this.uploadRoute();
 
@@ -462,11 +471,26 @@ export default {
         return false;
       }
 
-      return axios.post(route, data).then(() => {
-        return true;
-      }).catch(() => {
-        return false;
-      });
+      return axios
+        .post(route, data)
+        .then(response => {
+          this.showAlert = true;
+          this.$refs.alertBanner.changeMessage(
+            response.data.count + " new records added.",
+            "success"
+          );
+
+          return true;
+        })
+        .catch(() => {
+          this.showAlert = true;
+          this.$refs.alertBanner.changeMessage(
+            "There was an error uploading these records.",
+            "error"
+          );
+
+          return false;
+        });
     },
     uploadFile() {
       this.upload = true;
@@ -483,7 +507,7 @@ export default {
     },
     uploadRoute() {
       if (this.fileType === "csv") {
-        return this.getBackendUrl() + "/questionnaire/answer";
+        return this.getBackendUrl() + "/questionnaire/respond";
       }
 
       if (this.fileType === "json") {
