@@ -692,7 +692,7 @@ describe("BulkUpload.vue", () => {
     let formatData = jest.fn();
     let uploadRoute = jest.fn();
 
-    formatData.mockReturnValue({ bundle: "bundle", definition: "definition" } );
+    formatData.mockReturnValue({ bundle: "bundle", definition: "definition" });
     uploadRoute.mockReturnValue(false);
 
     wrapper = mount(BulkUpload, {
@@ -755,5 +755,94 @@ describe("BulkUpload.vue", () => {
 
     let response = wrapper.vm.validateAndSend();
     expect(response).toBe("asdjfkl");
+  });
+
+  test("Alert is hidden by default", () => {
+    let alertComponent = wrapper.find(".v-alert");
+    expect(alertComponent.exists()).toBeFalsy();
+  });
+
+  test("Alert is shown when alert data is set", () => {
+    wrapper.setData({ showAlert: true });
+
+    let alertComponent = wrapper.find(".v-alert");
+    expect(alertComponent.exists()).toBeTruthy();
+  });
+
+  test("Success message shown after successful post", async () => {
+    let response = {
+      success: true,
+      count: 5
+    };
+
+    let formatData = jest.fn();
+    formatData.mockReturnValue(true);
+
+    let uploadRoute = jest.fn();
+    uploadRoute.mockReturnValue(true);
+
+    wrapper = mount(BulkUpload, {
+      localVue,
+      vuetify,
+      methods: { created, formatData, uploadRoute }
+    });
+
+    axios.post.mockImplementationOnce(() => Promise.resolve(response));
+
+    await wrapper.vm.submit();
+
+    let showAlert = wrapper.vm.showAlert;
+    let alertComponent = wrapper.find(".v-alert");
+
+    expect(showAlert).toBeTruthy();
+    expect(alertComponent.exists()).toBeTruthy();
+  });
+
+  test("Error message shown after failed post", async () => {
+    let response = {
+      success: true,
+      count: 5
+    };
+
+    let formatData = jest.fn();
+    formatData.mockReturnValue(true);
+
+    let uploadRoute = jest.fn();
+    uploadRoute.mockReturnValue(true);
+
+    wrapper = mount(BulkUpload, {
+      localVue,
+      vuetify,
+      methods: { formatData, uploadRoute, created }
+    });
+
+    axios.post.mockImplementationOnce(() => Promise.reject(response));
+
+    await wrapper.vm.submit();
+
+    let showAlert = wrapper.vm.showAlert;
+    let alertComponent = wrapper.find(".v-alert");
+
+    expect(showAlert).toBeTruthy();
+    expect(alertComponent.exists()).toBeTruthy();
+  });
+
+  test("Alert hidden when submit is called", () => {
+    let formatData = jest.fn();
+    formatData.mockReturnValue(false);
+
+    wrapper = mount(BulkUpload, {
+      localVue,
+      vuetify,
+      methods: { formatData, created }
+    });
+
+    wrapper.setData({ showAlert: true });
+
+    let result = wrapper.vm.submit();
+    let alertData = wrapper.vm.showAlert;
+
+    expect(result).toBeFalsy();
+    expect(alertData).toBeFalsy();
   });
 });
