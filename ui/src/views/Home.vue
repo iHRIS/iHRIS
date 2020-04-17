@@ -9,11 +9,13 @@
 <script>
 import Alert from "@/components/Layout/Alert.vue";
 import ConfigSettings from "@/mixins/ConfigSettings.js";
+import Dashboard from "@/components/Layout/Dashboard.vue";
 import Dashboards from "@/mixins/Dashboards.js";
 
 export default {
   components: {
-    Alert
+    Alert,
+    Dashboard
   },
   created() {
     let dashboards = this.getDashboards();
