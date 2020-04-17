@@ -6,9 +6,13 @@
 
 <script>
 import ConfigSettings from "@/mixins/ConfigSettings.js";
+import Dashboard from "@/components/Layout/Dashboard.vue";
 import Dashboards from "@/mixins/Dashboards.js";
 
 export default {
+  components: {
+    Dashboard
+  },
   created() {
     let dashboards = this.getMHeroDashboards();
 
