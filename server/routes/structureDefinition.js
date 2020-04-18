@@ -92,17 +92,27 @@ router.get("/get/:definition/:id", function (req, res, next) {
 router.post("/upload", function (req, res, next) {
   let data = req.body;
 
-  console.log(data);
-  res.status(201).json({});
-
   let bundle = {
     resourceType: "Bundle",
-    entry: data.bundle
+    type: "transaction",
+    entry: []
   };
 
-  let url = URI(config.fhir.server).segment('fhir');
-  url.segment(data['definition']);
-  url = url.toString();
+  let content = JSON.parse(data.bundle);
+
+  for (element in content) {
+    content[element].resourceType = data.definition;
+
+    let record = {
+      resource: content[element],
+      request: {
+        method: "POST",
+        url: data.definition
+      }
+    };
+  }
+
+  let url = URI(config.fhir.server).segment('fhir').toString();
 
   axios.post(url, bundle, {
     withCredentials: true,
@@ -111,7 +121,7 @@ router.post("/upload", function (req, res, next) {
       password: config.fhir.password
     }
   }).then(response => {
-    res.status(201).json(response.data);
+    res.status(201).json({ success: true, count: JSON.parse(data.bundle).length });
   }).catch(err => {
     res.status(400).json(err);
   });
@@ -122,7 +132,7 @@ router.post("/upload", function (req, res, next) {
  */
 router.get("/valid", async function (req, res, next) {
   let url = URI(config.fhir.server).segment('fhir').segment("StructureDefinition");
-  url.addQuery("_count", 500);
+  url.addQuery("_count", 5000);
   url = url.toString();
 
   let previousUrl;

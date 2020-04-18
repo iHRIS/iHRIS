@@ -3,7 +3,7 @@
     <v-card>
       <v-card-title>Bulk Upload</v-card-title>
       <v-card-text>
-        <Alert ref="alertBanner" v-if="showAlert" />
+        <Alert ref="alertBanner" v-show="showAlert" />
 
         Please use the form below to upload multiple instances of the provided
         structure definition.
@@ -456,15 +456,13 @@ export default {
             });
           });
 
-          this.downloadedStructureDefintions = true;
+          this.downloadedStructureDefinitions = true;
         })
         .catch(() => {
-          this.downloadedStructureDefintions = true;
+          this.downloadedStructureDefinitions = true;
         });
     },
     submit() {
-      this.showAlert = false;
-
       let data = this.formatData();
       let route = this.uploadRoute();
 
