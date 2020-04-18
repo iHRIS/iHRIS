@@ -23,6 +23,10 @@ const sampleFile = {
 
 const created = jest.fn();
 
+function getUploadButton(wrapper) {
+  return wrapper.find("#upload-button button");
+}
+
 describe("BulkUpload.vue", () => {
   let vuetify;
 
@@ -844,5 +848,132 @@ describe("BulkUpload.vue", () => {
 
     expect(result).toBeFalsy();
     expect(alertData).toBeFalsy();
+  });
+
+  test("Upload button is not loading by default", () => {
+    let loading = wrapper.vm.loading;
+    let uploadButton = getUploadButton(wrapper);
+
+    expect(loading).toBeFalsy();
+    expect(uploadButton.exists()).toBeTruthy();
+    expect(uploadButton.classes()).not.toContain("v-btn--loading");
+  });
+
+  test("Upload button is loading when clicked", () => {
+    let formIsValid = jest.fn();
+    formIsValid.mockReturnValue(true);
+
+    let submit = jest.fn();
+    submit.mockReturnValue(true);
+
+    wrapper = mount(BulkUpload, {
+      localVue,
+      vuetify,
+      methods: { formIsValid, submit, created }
+    });
+
+    let uploadButton = getUploadButton(wrapper);
+    uploadButton.trigger("click");
+
+    let loading = wrapper.vm.loading;
+
+    expect(loading).toBeTruthy();
+
+    uploadButton = getUploadButton(wrapper);
+    expect(uploadButton.classes()).toContain("v-btn--loading");
+  });
+
+  test("Upload button stops loading if form not valid", () => {
+    let formIsValid = jest.fn();
+    formIsValid.mockReturnValue(false);
+
+    let submit = jest.fn();
+    submit.mockReturnValue(true);
+
+    wrapper = mount(BulkUpload, {
+      localVue,
+      vuetify,
+      methods: { formIsValid, submit, created }
+    });
+
+    wrapper.vm.validateAndSend();
+
+    let loading = wrapper.vm.loading;
+    let uploadButton = getUploadButton(wrapper);
+
+    expect(loading).toBeFalsy();
+    expect(uploadButton.classes()).not.toContain("v-btn--loading");
+  });
+
+  test("Upload buttons stops loading if submit fails", () => {
+    let formIsValid = jest.fn();
+    formIsValid.mockReturnValue(true);
+
+    let submit = jest.fn();
+    submit.mockReturnValue(false);
+
+    wrapper = mount(BulkUpload, {
+      localVue,
+      vuetify,
+      methods: { formIsValid, submit, created }
+    });
+
+    wrapper.vm.validateAndSend();
+
+    let loading = wrapper.vm.loading;
+    let uploadButton = getUploadButton(wrapper);
+
+    expect(loading).toBeFalsy();
+    expect(uploadButton.classes()).not.toContain("v-btn--loading");
+  });
+
+  test("Upload button stops loading when data is processed", async () => {
+    let response = {
+      success: true,
+      count: 5
+    };
+
+    let formIsValid = jest.fn();
+    formIsValid.mockReturnValue(true);
+
+    wrapper = mount(BulkUpload, {
+      localVue,
+      vuetify,
+      methods: { formIsValid, created }
+    });
+
+    axios.post.mockImplementationOnce(() => Promise.resolve(response));
+    await wrapper.vm.validateAndSend();
+
+    let loading = wrapper.vm.loading;
+    let uploadButton = getUploadButton(wrapper);
+
+    expect(loading).toBeFalsy();
+    expect(uploadButton.classes()).not.toContain("v-btn--loading");
+  });
+
+  test("Upload buttons stops loading when data fails to process", async () => {
+    let response = {
+      success: true,
+      count: 5
+    };
+
+    let formIsValid = jest.fn();
+    formIsValid.mockReturnValue(true);
+
+    wrapper = mount(BulkUpload, {
+      localVue,
+      vuetify,
+      methods: { formIsValid, created }
+    });
+
+    axios.post.mockImplementationOnce(() => Promise.reject(response));
+    await wrapper.vm.validateAndSend();
+
+    let loading = wrapper.vm.loading;
+    let uploadButton = getUploadButton(wrapper);
+
+    expect(loading).toBeFalsy();
+    expect(uploadButton.classes()).not.toContain("v-btn--loading");
   });
 });
