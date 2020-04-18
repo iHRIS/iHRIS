@@ -113,7 +113,9 @@
 
           <v-layout align-center justify-end fill-height>
             <div id="upload-button">
-              <v-btn class="primary" :loading="loading" @click="validateAndSend">Upload</v-btn>
+              <v-btn class="primary" :loading="loading" @click="validateAndSend"
+                >Upload</v-btn
+              >
             </div>
           </v-layout>
         </v-form>
