@@ -112,7 +112,11 @@
           </div>
 
           <v-layout align-center justify-end fill-height>
-            <v-btn class="primary" @click="validateAndSend">Upload</v-btn>
+            <div id="upload-button">
+              <v-btn class="primary" :loading="loading" @click="validateAndSend"
+                >Upload</v-btn
+              >
+            </div>
           </v-layout>
         </v-form>
       </v-card-text>
@@ -266,6 +270,7 @@ export default {
       filePath: null,
       fileType: "",
       jsonBlob: "",
+      loading: false,
       questionnaire: "",
       questionnaires: [],
       rules: {
@@ -480,6 +485,8 @@ export default {
             "success"
           );
 
+          this.loading = false;
+
           return true;
         })
         .catch(() => {
@@ -488,6 +495,8 @@ export default {
             "There was an error uploading these records.",
             "error"
           );
+
+          this.loading = false;
 
           return false;
         });
@@ -517,10 +526,19 @@ export default {
       return false;
     },
     validateAndSend() {
+      this.loading = true;
+
       if (this.formIsValid()) {
-        return this.submit();
+        let result = this.submit();
+
+        if (!result) {
+          this.loading = false;
+        }
+
+        return result;
       }
 
+      this.loading = false;
       return false;
     }
   },
