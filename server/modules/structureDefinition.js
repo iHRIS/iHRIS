@@ -4,22 +4,19 @@ const fs = require('fs')
 const ParseConformance = require('./parseConformance').ParseConformance
 const env = process.env.NODE_ENV || 'development'
 
-var config = require(__dirname + '/../config/config.json')[env];
-if(env === "production") {
-  config = JSON.parse(fs.readFileSync(`/run/secrets/server_config`, 'utf8'))[env];
-}
+var config = require(`${__dirname}/../config/config_${env}.json`);
 const parser = new ParseConformance(true)
 
 var structureDefinition = (main, callback) => {
 
   var promises = []
-  let url = URI(config.fhir.server).segment('fhir').segment('StructureDefinition').segment(main).toString()
+  let url = URI(config.macm.baseURL).segment('StructureDefinition').segment(main).toString()
   request({
       uri: url,
       json: true,
       auth: {
-        username: config.fhir.username,
-        password: config.fhir.password
+        username: config.macm.username,
+        password: config.macm.password
       }
     })
     .then((ip) => {
@@ -40,13 +37,13 @@ var structureDefinition = (main, callback) => {
       for (let ext in extensions) {
         let pieces = ext.split('/')
         let sd = pieces[pieces.length - 1]
-        let url = URI(config.fhir.server).segment('fhir').segment('StructureDefinition').segment(sd).toString()
+        let url = URI(config.macm.baseURL).segment('StructureDefinition').segment(sd).toString()
         promises.push(request({
           uri: url,
           json: true,
           auth: {
-            username: config.fhir.username,
-            password: config.fhir.password
+            username: config.macm.username,
+            password: config.macm.password
           }
         }))
 
