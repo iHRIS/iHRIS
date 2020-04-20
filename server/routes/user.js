@@ -99,11 +99,12 @@ router.get("/list", function (req, res, next) {
     res.status(400).json(err);
   });
 });
+
 /**
  * Get the iHRISUserDetails structure definition metadata
  */
 router.get("/describe/definition/:definition", function (req, res, next) {
-  
+
   mixin.getDefinition("StructureDefinition", req.params.definition, (err, definition) => {
     if (err) {
       res.status(400).json(err);
@@ -120,6 +121,7 @@ router.get("/describe/definition/:definition", function (req, res, next) {
     }
   })
 });
+
 /**
  * Check login credentials
  */
