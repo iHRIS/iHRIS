@@ -544,13 +544,24 @@ export default {
       if (this.name === "Qualifications") {
         let data = this.data[index];
 
-        fields["Qualification.type"].value = data.code.text;
-        fields["Qualification.issuer"].value = {
-          reference: data.issuer.reference
-        };
-        fields["Qualification.number"].value = data.identifier[0].value;
-        fields["Qualification.received"].value = data.period.start;
-        fields["Qualification.expiration"].value = data.period.end;
+        if (data.code) {
+          fields["Qualification.type"].value = data.code.text;
+        }
+
+        if (data.issuer) {
+          fields["Qualification.issuer"].value = {
+            reference: data.issuer.reference
+          };
+        }
+
+        if (data.identifier) {
+          fields["Qualification.number"].value = data.identifier[0].value;
+        }
+
+        if (data.period) {
+          fields["Qualification.received"].value = data.period.start;
+          fields["Qualification.expiration"].value = data.period.end;
+        }
       } else if (Object.keys(fields).length === 1) {
         for (key in fields) {
           if (fields[key].name === "value") {
