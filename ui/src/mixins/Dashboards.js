@@ -10,7 +10,7 @@ export default {
   },
   methods: {
     addDashboard(dashboard) {
-      axios
+      return axios
         .get(this.getBackendUrl() + "/dashboard/n/" + dashboard)
         .then(response => {
           for (var i in response.data.saved_objects) {
@@ -24,13 +24,18 @@ export default {
 
             this.dashboards.push(dashboard);
           }
+
+          return Promise.resolve({ success: true });
         })
         .catch(() => {
-          throw "Could not load dashboard: " + dashboard;
+          return Promise.reject({
+            success: false,
+            message: "Could not load dashboard: " + dashboard
+          });
         });
     },
     loadAllDashboards() {
-      axios
+      return axios
         .get(this.getBackendUrl() + "/dashboard/all")
         .then(response => {
           this.dashboards = [];
@@ -48,9 +53,14 @@ export default {
               this.dashboards.push(dashboard);
             }
           }
+
+          return Promise.resolve({ success: true });
         })
         .catch(() => {
-          throw "Could not get all dashboards.";
+          return Promise.reject({
+            success: false,
+            message: "Could not get all dashboards."
+          });
         });
     }
   },

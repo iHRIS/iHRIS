@@ -84,22 +84,29 @@ describe("Dashboards", () => {
     );
   });
 
+  test("Add dashboard failure throws exception", async () => {
+    axios.get.mockImplementationOnce(() => Promise.reject({}));
+
+    try {
+      await wrapper.vm.addDashboard("failed dashboard");
+      expect(false).toBeTruthy();
+    } catch (exception) {
+      expect(true).toBeTruthy();
+    }
+  });
+
   test("Add dashboard failure does not add new dashboard", async () => {
     let dashboards = wrapper.vm.dashboards;
 
     expect(dashboards.length).toEqual(0);
 
-    // now fail to add a dashboard
-    let failedPromise = new Promise((resolve, reject) =>
-      setTimeout(() => reject(new Error("Error")), 0)
-    );
-    failedPromise.catch(() => {
-      return;
-    });
+    axios.get.mockImplementationOnce(() => Promise.reject({}));
 
-    axios.get.mockImplementationOnce(() => failedPromise);
-
-    await wrapper.vm.addDashboard("failed dashboard");
+    try {
+      await wrapper.vm.addDashboard("failed dashboard");
+    } catch (exception) {
+      expect(true).toBeTruthy();
+    }
 
     dashboards = wrapper.vm.dashboards;
 
@@ -214,21 +221,28 @@ describe("Dashboards", () => {
 
     expect(dashboards.length).toEqual(0);
 
-    // now fail to add a dashboard
-    let failedPromise = new Promise((resolve, reject) =>
-      setTimeout(() => reject(new Error("Error")), 0)
-    );
-    failedPromise.catch(() => {
-      return;
-    });
+    axios.get.mockImplementationOnce(() => Promise.reject({}));
 
-    axios.get.mockImplementationOnce(() => failedPromise);
-
-    await wrapper.vm.addDashboard("failed dashboard");
+    try {
+      await wrapper.vm.addDashboard("failed dashboard");
+    } catch (exception) {
+      expect(true).toBeTruthy();
+    }
 
     dashboards = wrapper.vm.dashboards;
 
     expect(dashboards.length).toEqual(0);
+  });
+
+  test("When load all dashboards fail, exception is thrown", async () => {
+    axios.get.mockImplementationOnce(() => Promise.reject({}));
+
+    try {
+      await wrapper.vm.loadAllDashboards();
+      expect(false).toBeTruthy();
+    } catch (exception) {
+      expect(true).toBeTruthy();
+    }
   });
 
   test("When load all dashboards fail, existing dashboards are not reset", async () => {
@@ -238,7 +252,9 @@ describe("Dashboards", () => {
       }
     };
 
-    axios.get.mockImplementationOnce(() => Promise.resolve(response));
+    axios.get
+      .mockImplementationOnce(() => Promise.resolve(response))
+      .mockImplementationOnce(() => Promise.reject({}));
 
     await wrapper.vm.addDashboard("new dashboards");
 
@@ -247,16 +263,11 @@ describe("Dashboards", () => {
     expect(dashboards.length).toBe(2);
 
     // now fail to add a dashboard
-    let failedPromise = new Promise((resolve, reject) =>
-      setTimeout(() => reject(new Error("Error")), 0)
-    );
-    failedPromise.catch(() => {
-      return;
-    });
-
-    axios.get.mockImplementationOnce(() => failedPromise);
-
-    await wrapper.vm.loadAllDashboards();
+    try {
+      await wrapper.vm.loadAllDashboards();
+    } catch (exception) {
+      expect(true).toBeTruthy();
+    }
 
     dashboards = wrapper.vm.dashboards;
 
