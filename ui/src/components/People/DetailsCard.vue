@@ -206,14 +206,15 @@ export default {
 
           if (element.issuer) {
             let reference = element.issuer.reference.split("/");
-            let issuer = await axios.get(
+            let response = await axios.get(
               this.config.backend +
                 "/structure-definition/get/" +
                 reference[0] +
                 "/" +
                 reference[1]
             );
-            issuer = issuer.data.name;
+
+            issuer = response.data.name;
           }
 
           if (element.identifier && element.identifier[0]) {
@@ -569,7 +570,18 @@ export default {
           }
 
           if (!Array.isArray(this.data)) {
-            fields[key].value = this.data;
+            // collapse for objects
+            if (
+              typeof this.data === "object" &&
+              this.data !== null &&
+              Object.keys(this.data).length === 1
+            ) {
+              for (index in this.data) {
+                fields[key].value = this.data[index];
+              }
+            } else {
+              fields[key].value = this.data;
+            }
           } else if (this.data[key]) {
             fields[key].value = this.data[key];
           } else {
@@ -598,8 +610,11 @@ export default {
 
               value = _.get(this.data[index], title);
             }
+
+            fields[key].value = value;
           } else {
             value = this.data[index][field.title];
+
             //Datetime value comes as data[index]['period']['nameofthefield'],
             //data[index][field.title] returns undefined since field.title does not correspont the the array key
             if (
@@ -615,6 +630,7 @@ export default {
           }
         }
       }
+
       this.$refs.dynamicEditingForm.changeFields(fields);
 
       this.currentIndex = index;
