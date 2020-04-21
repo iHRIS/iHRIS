@@ -12,6 +12,7 @@
 
 <script>
 import GenerateFieldID from "@/mixins/GenerateFieldID.js";
+
 export default {
   mixins: [GenerateFieldID],
   computed: {
