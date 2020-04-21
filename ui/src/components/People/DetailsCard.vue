@@ -206,6 +206,7 @@ export default {
 
           if (element.issuer) {
             let reference = element.issuer.reference.split("/");
+
             let response = await axios.get(
               this.config.backend +
                 "/structure-definition/get/" +
@@ -217,8 +218,11 @@ export default {
             issuer = response.data.name;
           }
 
+
           if (element.identifier && element.identifier[0]) {
             number = element.identifier[0].value;
+          } else if (element.identifier && element.identifier.value) {
+            number = element.identifier.value;
           }
 
           if (element.period) {

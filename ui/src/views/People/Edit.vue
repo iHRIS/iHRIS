@@ -415,6 +415,7 @@ export default {
         }
 
         practitioner.qualification.push(qualification);
+        Vue.set(practitioner, "qualification", practitioner.qualification);
       } else if (this.detailPath && this.detailPath == "extension") {
         let extension = [];
         let newExtension = {
@@ -437,7 +438,6 @@ export default {
               break;
             }
           } else {
-            //newExtension[valueString] = input;
             for (var k in input) {
               newExtension[valueString] = {};
 
