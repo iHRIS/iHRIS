@@ -218,7 +218,6 @@ export default {
             issuer = response.data.name;
           }
 
-
           if (element.identifier && element.identifier[0]) {
             number = element.identifier[0].value;
           } else if (element.identifier && element.identifier.value) {

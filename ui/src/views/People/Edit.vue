@@ -459,7 +459,8 @@ export default {
           if (
             j
               .toLowerCase()
-              .startsWith(this.structureDefinition.toLowerCase() + ".")
+              .startsWith(this.structureDefinition.toLowerCase() + ".") &&
+            this.structureDefinition.toLowerCase() !== "coding"
           ) {
             input[
               j
