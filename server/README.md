@@ -1,3 +1,11 @@
+# Running the backend
+
+The backend is a nodejs application and can be run using `npm run start`. If you are running iHRIS on a Linux server, we recommend using systemd to manage the backend server. [Here is a sample service file] (https://gist.github.com/lokisapocalypse/934f51052ba63b04e8dd236e6a4f6dd2). If you are using the example service file, the following commands will ensure the server restarts on failure and reboot:
+
+`sudo systemctl start ihris` - this will start the service. The first time you run this, you may need to reload the configuration files
+
+`sudo systemctl enable ihris` - this will ensure the service automatically restarts if the server reboots for any reason.
+
 This project uses a FHIR compliant server as it's data backend. A sample configuration file can be found in config/config.json.example.
 
 # Config
