@@ -9,7 +9,7 @@ Both the ui and server components make use of config files. Both of these config
 The server component relies on the presence of a fhir compliant server. The login credentials can be placed inside the config.json file for the server component.
 
 ## Running iHRIS
-iHRIS is divided into two components, the ui frontend and a backend. To start the ui frontend, run `npm run serve`. To start the backend, run `npm run start`.
+iHRIS is divided into two components, the ui frontend and a backend. To build the ui frontend, run `npm run build`. To start the backend, run `npm run start`.
 
 ## Running iHRIS in a Docker Container
 You can find instructions how to install docker here [Docker Engine Installation](https://docs.docker.com/install/linux/docker-ce/ubuntu/#install-docker-engine---community-1)
