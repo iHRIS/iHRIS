@@ -6,11 +6,15 @@ npm install
 ```
 
 ### Compiles and hot-reloads for development
+If you are developing on iHRIS, use this command to dynamically recompile your project whenever new changes are saved.
+
 ```
 npm run serve
 ```
 
 ### Compiles and minifies for production
+If you are running this on production, run this command to generate minified files to serve. After this command has finished executing, copy the files from `ui/dist` to wherever your webserver serves content.
+
 ```
 npm run build
 ```
