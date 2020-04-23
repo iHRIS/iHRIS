@@ -2,6 +2,7 @@ var express = require("express");
 var router = express.Router();
 var axios = require("axios");
 var elasticsearch = require("elasticsearch");
+var _ = require("lodash");
 
 const URI = require('urijs');
 const fs = require('fs')
@@ -125,7 +126,6 @@ function stripTemplate(items) {
  */
 router.post("/respond", async function (req, res, next) {
   let data = req.body;
-  let counter = 0;
   let id = data["questionnaire"];
   let template = {};
 
@@ -143,10 +143,10 @@ router.post("/respond", async function (req, res, next) {
 
   // if no questionnaire, then stop
   if (!id) {
-    res.status(400).json({message: "No questionnaire received."});
+    return res.status(400).json({message: "No questionnaire received."});
   }
 
-  template.id = id;
+  template.questionnaire = "Questionnaire/" + id;
 
   // get the questionnaire this answers
   let questionnaire = await axios.get(url, credentials);
@@ -155,7 +155,7 @@ router.post("/respond", async function (req, res, next) {
   try {
     questionnaire = questionnaire.data.entry[0];
   } catch {
-    res.status(400).json({message: "Unable to load questionnaire."});
+    return res.status(400).json({message: "Unable to load questionnaire."});
   }
 
   template.item = questionnaire.resource.item;
@@ -164,36 +164,86 @@ router.post("/respond", async function (req, res, next) {
   template.item = stripTemplate(template.item);
   template.resourceType = "QuestionnaireResponse";
 
-  url = URI(config.fhir.server).segment('fhir').segment('QuestionnaireResponse').toString();
+  let definition = template.item[0].linkId;
+
+  let bundle = {
+    resourceType: "Bundle",
+    type: "transaction",
+    entry: []
+  };
+
+  let recordBundle = {
+    resourceType: "Bundle",
+    type: "transaction",
+    entry: []
+  };
 
   // now answer the questionnaire
   for (const k in data.responses) {
     // this make a copy, allowing us to edit the response without changing the template
     let response = JSON.parse(JSON.stringify(template));
+    let jsonPackage = {
+      resourceType: definition
+    };
+
     let answers = data.responses[k];
 
     // answer each question
     for (const question in answers) {
       // find the matching answer
       response['item'] = answerQuestion(question, answers[question], response['item']);
-    }
 
-    try {
-      await axios.post(url, response, {
-        withCredentials: true,
-        auth: {
-          username: config.fhir.username,
-          password: config.fhir.password
+      // and save to the jsonPackage
+      let field = question;
+      let index = field.indexOf("[]");
+
+      if (index >= 0) {
+        let substring = field.slice(0, index);
+
+        if (!jsonPackage[substring]) {
+          jsonPackage[substring] = [];
+          jsonPackage[substring][0] = {};
         }
-      });
-    } catch(error) {
-      return res.status(400).json(error);
+
+        field = field.slice(index + 3);
+
+        _.set(jsonPackage[substring][0], field, answers[question]);
+      } else {
+        _.set(jsonPackage, question, answers[question]);
+      }
     }
 
-    counter++;
+    bundle.entry.push({
+      resource: response,
+      request: {
+        method: "POST",
+        url: "QuestionnaireResponse"
+      }
+    });
+
+    recordBundle.entry.push({
+      resource: jsonPackage,
+      request: {
+        method: "POST",
+        url: definition
+      }
+    });
   }
 
-  res.status(201).json({ success: true, count: counter });
+  url = URI(config.fhir.server).segment('fhir').toString();
+
+  // upload questionnaire response
+  axios.post(url, bundle, credentials).then(() => {
+    // upload to create records
+    // we don't want to create records if we can't save the responses
+    axios.post(url, recordBundle, credentials).then(() => {
+      return res.status(201).json({ success: true, count: recordBundle.entry.length });
+    }).catch(err => {
+      return res.status(400).json({ success: false, error: err, message: "Failure uploading content.", url: url, bundle: recordBundle });
+    });
+  }).catch(error => {
+    return res.status(400).json({ success: false, error: error, message: "Failure uploading responses.", url: url, bundle: bundle });
+  });
 });
 
 module.exports = router;
