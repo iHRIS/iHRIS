@@ -52,6 +52,21 @@ export default {
 
       return this.config.mHero.dashboards;
     },
+    getSamplePractitioner() {
+      // because this gets called in the data method, this might not
+      // be loaded yet so check
+      let config = this.config;
+
+      if (!config) {
+        config = require("@/config/config.json");
+      }
+
+      if (!config.samplePractitioner) {
+        return false;
+      }
+
+      return config.samplePractitioner;
+    },
     isDemoMode() {
       // normally this would go in the created
       // but because we are using this in the router, i need to load it here
