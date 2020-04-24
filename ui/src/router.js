@@ -232,6 +232,10 @@ function checkPageRole(roleName, routeName) {
       roles = ["Admin", "Edit"];
       break;
 
+    case "bulk-upload":
+      roles = ["Admin", "Edit"];
+      break;
+
     case "edit-people":
       roles = ["Admin", "Edit"];
       break;
