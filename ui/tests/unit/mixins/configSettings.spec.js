@@ -239,4 +239,28 @@ describe("ConfigSettings", () => {
     let result = wrapper.vm.isMHeroEnabled();
     expect(result).toBeTruthy();
   });
+
+  test("No sample practitioner set gives false when called", () => {
+    jest.mock("@/config/config.json", () => ({}));
+
+    let wrapper = shallowMount(Component, {
+      mixins: [ConfigSettings]
+    });
+
+    let samplePractitioner = wrapper.vm.getSamplePractitioner();
+    expect(samplePractitioner).toBeFalsy();
+  });
+
+  test("Sample practitioner set is returned when called", () => {
+    jest.mock("@/config/config.json", () => ({
+      samplePractitioner: 1234
+    }));
+
+    let wrapper = shallowMount(Component, {
+      mixins: [ConfigSettings]
+    });
+
+    let samplePractitioner = wrapper.vm.getSamplePractitioner();
+    expect(samplePractitioner).toBe(1234);
+  });
 });

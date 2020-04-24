@@ -81,12 +81,12 @@ export default {
     this.screenSize = this.$vuetify.breakpoint.name;
   },
   data: function() {
-    const config = require("@/config/config.json");
     let submenu = [];
+    let samplePractitioner = this.getSamplePractitioner();
 
-    if (config.samplePractitioner) {
+    if (samplePractitioner) {
       submenu.push({
-        action: { path: "/people/view/" + config.samplePractitioner },
+        action: { path: "/people/view/" + samplePractitioner },
         title: "Sample Practitioner"
       });
     }
@@ -119,6 +119,17 @@ export default {
         icon: "people",
         submenu: submenu,
         title: "People"
+      },
+      {
+        action: { name: "vacancies" },
+        icon: "mdi-clipboard",
+        submenu: [
+          {
+            action: { name: "add-vacancy" },
+            title: "Add new vacancy"
+          }
+        ],
+        title: "Vacancies"
       }
     ];
 

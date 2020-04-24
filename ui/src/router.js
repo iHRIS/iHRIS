@@ -179,6 +179,12 @@ let router = new Router({
         import(/* webpackChunkName: "userManual" */ "./views/UserManual.vue")
     },
     {
+      path: "/vacancy/add",
+      name: "add-vacancy",
+      component: () =>
+        import(/* webpackChunkName: "addVacancy" */ "./views/Vacancy/Add.vue")
+    },
+    {
       path: "/noaccess",
       name: "noaccess",
       component: () =>
@@ -224,6 +230,10 @@ function checkPageRole(roleName, routeName) {
   let roles = [];
 
   switch (routeName) {
+    case "add-vacancy":
+      roles = ["Admin", "Edit"];
+      break;
+
     case "search-people":
       roles = ["Admin", "Edit", "View"];
       break;
