@@ -3,7 +3,6 @@ import Vuetify from "vuetify";
 
 Vue.use(Vuetify);
 
-import axios from "axios";
 import Add from "@/views/Vacancy/Add.vue";
 
 // Utilities

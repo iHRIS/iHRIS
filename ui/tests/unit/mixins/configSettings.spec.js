@@ -241,9 +241,7 @@ describe("ConfigSettings", () => {
   });
 
   test("No sample practitioner set gives false when called", () => {
-    jest.mock("@/config/config.json", () => ({
-
-    }));
+    jest.mock("@/config/config.json", () => ({}));
 
     let wrapper = shallowMount(Component, {
       mixins: [ConfigSettings]

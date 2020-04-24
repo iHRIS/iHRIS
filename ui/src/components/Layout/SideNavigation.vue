@@ -123,10 +123,12 @@ export default {
       {
         action: { name: "vacancies" },
         icon: "mdi-clipboard",
-        submenu: [{
-          action: { name: "add-vacancy" },
-          title: "Add new vacancy",
-        }],
+        submenu: [
+          {
+            action: { name: "add-vacancy" },
+            title: "Add new vacancy"
+          }
+        ],
         title: "Vacancies"
       }
     ];
