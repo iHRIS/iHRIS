@@ -290,6 +290,7 @@ export default {
           data.push(element);
         }
       });
+
       return data;
     }
   },
