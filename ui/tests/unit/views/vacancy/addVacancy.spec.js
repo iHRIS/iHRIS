@@ -3,7 +3,6 @@ import Vuetify from "vuetify";
 
 Vue.use(Vuetify);
 
-import axios from "axios";
 import Add from "@/views/Vacancy/Add.vue";
 
 // Utilities
@@ -13,8 +12,6 @@ const localVue = createLocalVue();
 document.body.setAttribute("data-app", true);
 
 let wrapper;
-
-jest.mock("axios");
 
 const created = jest.fn();
 
@@ -47,14 +44,19 @@ describe("Add.vue", () => {
 
   it("Updates fields based on axios response", async () => {
     let describe = jest.fn();
-    describe.mockReturnValue(Promise.resolve({ id: "id", fields: [
-      {
-        type: "string"
-      },
-      {
-        type: "string"
-      }
-    ]}));
+    describe.mockReturnValue(
+      Promise.resolve({
+        id: "id",
+        fields: [
+          {
+            type: "string"
+          },
+          {
+            type: "string"
+          }
+        ]
+      })
+    );
 
     wrapper = mount(Add, {
       localVue,

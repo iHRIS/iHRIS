@@ -3,16 +3,13 @@
     <v-card>
       <v-card-title>Add Vacancy</v-card-title>
       <v-card-text>
-        <DynamicForm
-          :fields="fields"
-          />
+        <DynamicForm :fields="fields" />
       </v-card-text>
     </v-card>
   </v-container>
 </template>
 
 <script>
-
 import DynamicForm from "@/components/Form/DynamicForm.vue";
 import StructureDefinition from "@/mixins/StructureDefinition.js";
 
