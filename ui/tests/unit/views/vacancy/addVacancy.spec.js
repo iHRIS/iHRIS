@@ -1,7 +1,5 @@
-import Vue from "vue";
+import Vue from "Vue";
 import Vuetify from "vuetify";
-
-Vue.use(Vuetify);
 
 import Add from "@/views/Vacancy/Add.vue";
 
@@ -9,6 +7,7 @@ import Add from "@/views/Vacancy/Add.vue";
 import { mount, createLocalVue } from "@vue/test-utils";
 
 const localVue = createLocalVue();
+
 document.body.setAttribute("data-app", true);
 
 let wrapper;
@@ -42,6 +41,16 @@ describe("Add.vue", () => {
     expect(fields).toEqual([]);
   });
 
+  it("Has a form", () => {
+    let form = wrapper.find("form");
+    expect(form.exists()).toBeTruthy();
+  });
+
+  it("Has an alert", () => {
+    let alertComponent = wrapper.find(".v-alert");
+    expect(alertComponent.exists()).toBeTruthy();
+  });
+
   it("Updates fields based on axios response", async () => {
     let describe = jest.fn();
     describe.mockReturnValue(
@@ -68,5 +77,54 @@ describe("Add.vue", () => {
 
     let fields = wrapper.vm.fields;
     expect(fields.length).toBe(2);
+  });
+
+  test("Alert is hidden by default", () => {
+    let alertComponent = wrapper.find(".v-alert");
+    expect(alertComponent.isVisible()).toBeFalsy();
+  });
+
+  test("Alert is shown if fields fail to throw", async () => {
+    let describe = jest.fn();
+    describe.mockReturnValue(Promise.reject({}));
+
+    wrapper = mount(Add, {
+      localVue,
+      vuetify,
+      methods: { describe }
+    });
+
+    await wrapper.vm.created();
+    await Vue.nextTick();
+
+    let alertComponent = wrapper.find(".v-alert");
+    expect(alertComponent.isVisible()).toBeTruthy();
+  });
+
+  test("No fields are shown if error loading", async () => {
+    let describe = jest.fn();
+    describe.mockReturnValue(Promise.reject({}));
+
+    wrapper = mount(Add, {
+      localVue,
+      vuetify,
+      methods: { describe }
+    });
+
+    await wrapper.vm.created();
+
+    let fields = wrapper.vm.fields;
+    expect(fields.length).toBe(0);
+  });
+
+  test("Alert is shown when variable changes", done => {
+    wrapper.setData({ showAlert: true });
+
+    Vue.nextTick(() => {
+      let alertComponent = wrapper.find(".v-alert");
+      expect(wrapper.vm.showAlert).toBeTruthy();
+      expect(alertComponent.isVisible()).toBeTruthy();
+      done();
+    });
   });
 });
