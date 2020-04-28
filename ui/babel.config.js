@@ -1,3 +1,7 @@
 module.exports = {
-  presets: ["@babel/preset-env", "@vue/app"]
+  presets: [
+    "@babel/preset-env",
+    { exclude: "transform-typeof-symbol" },
+    "@vue/app"
+  ]
 };

@@ -3,7 +3,7 @@
     <v-card>
       <v-card-title>Add Vacancy</v-card-title>
       <v-card-text>
-        <DynamicForm :fields="fields" />
+        <DynamicForm ref="form" :fields="fields" />
       </v-card-text>
     </v-card>
   </v-container>
@@ -29,6 +29,7 @@ export default {
     created() {
       this.describe("iHRISPosition").then(response => {
         this.fields = response.fields;
+        this.$refs.form.changeFields(this.fields);
       });
     }
   },
