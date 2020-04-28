@@ -2,6 +2,7 @@ module.exports = {
   moduleFileExtensions: ["js", "jsx", "json", "vue"],
   clearMocks: true,
   resetModules: true,
+  setupFiles: ["./tests/jest-setup.js"],
   transform: {
     "^.+\\.(vue)$": "vue-jest",
     ".+\\.(css|styl|less|sass|scss|svg|png|jpg|ttf|woff|woff2)$":
