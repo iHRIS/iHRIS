@@ -5,7 +5,11 @@
     <v-card>
       <v-card-title>Add Vacancy</v-card-title>
       <v-card-text>
-        <DynamicForm ref="form" :fields="fields" />
+        <DynamicForm
+          ref="form"
+          :fields="fields"
+          v-on:successfulSubmit="submit"
+        />
       </v-card-text>
     </v-card>
   </v-container>
@@ -44,7 +48,8 @@ export default {
             "error"
           );
         });
-    }
+    },
+    submit() {}
   },
   mixins: [StructureDefinition]
 };
