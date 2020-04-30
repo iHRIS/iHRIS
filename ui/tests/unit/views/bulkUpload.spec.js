@@ -62,8 +62,10 @@ describe("BulkUpload.vue", () => {
   it("File input is enabled when file type is selected", () => {
     wrapper.setData({ fileType: "csv" });
 
-    let fileInput = wrapper.find(".v-file-input");
-    expect(fileInput.classes()).not.toContain("v-input--is-disabled");
+    Vue.nextTick(() => {
+      let fileInput = wrapper.find(".v-file-input");
+      expect(fileInput.classes()).not.toContain("v-input--is-disabled");
+    });
   });
 
   it("Only allows invalid file types initially", () => {
@@ -118,20 +120,32 @@ describe("BulkUpload.vue", () => {
   it("Should show instructions when field is selected", () => {
     wrapper.setData({ fileType: "json" });
 
-    expect(wrapper.findAll("#instructions")).toHaveLength(1);
-
-    wrapper.setData({ fileType: "csv" });
-    expect(wrapper.findAll("#instructions")).toHaveLength(1);
+    Vue.nextTick()
+      .then(() => {
+        expect(wrapper.findAll("#instructions")).toHaveLength(1);
+      })
+      .then(() => {
+        wrapper.setData({ fileType: "csv" });
+      })
+      .then(() => {
+        expect(wrapper.findAll("#instructions")).toHaveLength(1);
+      });
   });
 
   it("Should show example button in json instructions", () => {
     wrapper.setData({ fileType: "json" });
-    expect(wrapper.findAll(".v-btn__content")).toHaveLength(2);
+
+    Vue.nextTick(() => {
+      expect(wrapper.findAll(".v-btn__content")).toHaveLength(2);
+    });
   });
 
   it("Should show example button in csv instructions", () => {
     wrapper.setData({ fileType: "csv" });
-    expect(wrapper.findAll(".v-btn__content")).toHaveLength(2);
+
+    Vue.nextTick(() => {
+      expect(wrapper.findAll(".v-btn__content")).toHaveLength(2);
+    });
   });
 
   it("Should not have a dialog if json is not selected", () => {
@@ -142,39 +156,52 @@ describe("BulkUpload.vue", () => {
   it("Should hide dialog by default", () => {
     wrapper.setData({ fileType: "json" });
 
-    let dialog = wrapper.find(".v-dialog");
-    let styles = dialog.attributes("style");
-
-    expect(dialog.exists()).toBeTruthy();
-    expect(styles.includes("display: none")).toBeTruthy();
+    Vue.nextTick(() => {
+      let dialog = wrapper.find(".v-dialog");
+      expect(dialog.exists()).toBeFalsy();
+    });
   });
 
   it("Should open dialog when json example is clicked", () => {
     wrapper.setData({ fileType: "json" });
 
-    let dialog = wrapper.find(".v-dialog");
-    let button = wrapper.find("#instructions .v-btn__content");
+    let dialog;
+    let button;
 
-    expect(button.exists()).toBeTruthy();
-    button.trigger("click");
-
-    let styles = dialog.attributes("style");
-
-    expect(styles.includes("display: none")).toBeFalsy();
+    Vue.nextTick()
+      .then(() => {
+        dialog = wrapper.find(".v-dialog");
+        button = wrapper.find("#instructions .v-btn__content");
+        expect(button.exists()).toBeTruthy();
+      })
+      .then(() => {
+        button.trigger("click");
+      })
+      .then(() => {
+        let styles = dialog.attributes("style");
+        expect(styles.includes("display: none")).toBeFalsy();
+      });
   });
 
   it("Should open dialog when csv example is clicked", () => {
     wrapper.setData({ fileType: "csv" });
 
-    let dialog = wrapper.find(".v-dialog");
-    let button = wrapper.find("#instructions .v-btn__content");
+    let dialog;
+    let button;
 
-    expect(button.exists()).toBeTruthy();
-    button.trigger("click");
-
-    let styles = dialog.attributes("style");
-
-    expect(styles.includes("display: none")).toBeFalsy();
+    Vue.nextTick()
+      .then(() => {
+        dialog = wrapper.find(".v-dialog");
+        button = wrapper.find("#instructions .v-btn__content");
+        expect(button.exists()).toBeTruthy();
+      })
+      .then(() => {
+        button.trigger("click");
+      })
+      .then(() => {
+        let styles = dialog.attributes("style");
+        expect(styles.includes("display: none")).toBeFalsy();
+      });
   });
 
   it("Should not show json text area if json is not selected", () => {
@@ -185,35 +212,42 @@ describe("BulkUpload.vue", () => {
   it("Should show json text area if json is selected", () => {
     wrapper.setData({ fileType: "json" });
 
-    let textarea = wrapper.find("textarea");
-    expect(textarea.exists()).toBeTruthy();
+    Vue.nextTick(() => {
+      let textarea = wrapper.find("textarea");
+      expect(textarea.exists()).toBeTruthy();
+    });
   });
 
   it("Should not show json text area if csv is selected", () => {
     wrapper.setData({ fileType: "csv" });
 
-    let textarea = wrapper.find("textarea");
-    expect(textarea.exists()).toBeFalsy();
+    Vue.nextTick(() => {
+      let textarea = wrapper.find("textarea");
+      expect(textarea.exists()).toBeFalsy();
+    });
   });
 
   it("Should not show structure definition field by default", () => {
     let input = wrapper.find("#structure-definition-field");
-
     expect(input.exists()).toBeFalsy();
   });
 
   it("Should not show structure definition field if csv is selected", () => {
     wrapper.setData({ fileType: "csv" });
-    let input = wrapper.find("#structure-definition-field");
 
-    expect(input.exists()).toBeFalsy();
+    Vue.nextTick(() => {
+      let input = wrapper.find("#structure-definition-field");
+      expect(input.exists()).toBeFalsy();
+    });
   });
 
   it("Should show structure definition field if csv is selected", () => {
     wrapper.setData({ fileType: "json" });
-    let input = wrapper.find("#structure-definition-field");
 
-    expect(input.exists()).toBeTruthy();
+    Vue.nextTick(() => {
+      let input = wrapper.find("#structure-definition-field");
+      expect(input.exists()).toBeTruthy();
+    });
   });
 
   it("Should not show file uploading by default", () => {
@@ -223,17 +257,24 @@ describe("BulkUpload.vue", () => {
   it("Should show file uploading when new file is added", () => {
     wrapper.setData({ fileType: "json" });
 
-    let fileInput = wrapper.find('input[type="file"]');
-
-    expect(fileInput.exists()).toBeTruthy();
+    let fileInput;
 
     const fileReaderSpy = jest
       .spyOn(FileReader.prototype, "readAsText")
       .mockImplementation(() => null);
-    fileInput.trigger("change");
 
-    expect(wrapper.vm.upload).toBeTruthy();
-    expect(fileReaderSpy).toBeCalled();
+    Vue.nextTick()
+      .then(() => {
+        fileInput = wrapper.find('input[type="file"]');
+        expect(fileInput.exists()).toBeTruthy();
+      })
+      .then(() => {
+        fileInput.trigger("change");
+      })
+      .then(() => {
+        expect(wrapper.vm.upload).toBeTruthy();
+        expect(fileReaderSpy).toBeCalled();
+      });
   });
 
   it("Should not upload by default", () => {
@@ -285,16 +326,20 @@ describe("BulkUpload.vue", () => {
 
   it("Should not show questionnaire field if json is selected", () => {
     wrapper.setData({ fileType: "json" });
-    let input = wrapper.find("#questionnaire-field");
 
-    expect(input.exists()).toBeFalsy();
+    Vue.nextTick(() => {
+      let input = wrapper.find("#questionnaire-field");
+      expect(input.exists()).toBeFalsy();
+    });
   });
 
   it("Should show questionnaire field if csv is selected", () => {
     wrapper.setData({ fileType: "csv" });
-    let input = wrapper.find("#questionnaire-field");
 
-    expect(input.exists()).toBeTruthy();
+    Vue.nextTick(() => {
+      let input = wrapper.find("#questionnaire-field");
+      expect(input.exists()).toBeTruthy();
+    });
   });
 
   it("Should populate questionnaire from axios call", async () => {
@@ -372,113 +417,148 @@ describe("BulkUpload.vue", () => {
   it("Should only have one error message when empty form is submitted", () => {
     wrapper.vm.formIsValid();
 
-    let errorMessages = wrapper.findAll(".v-messages.error--text");
-    expect(errorMessages).toHaveLength(1);
+    Vue.nextTick(() => {
+      let errorMessages = wrapper.findAll(".v-messages.error--text");
+      expect(errorMessages).toHaveLength(1);
+    });
   });
 
   it("Should not show error message on questionnaire if json is selected", () => {
     wrapper.setData({ fileType: "json" });
 
-    let valid = wrapper.vm.formIsValid();
-
-    expect(valid).toBeFalsy();
-
-    let errorMessage = wrapper.find("#questionnaire-field .error--text");
-    expect(errorMessage.exists()).toBeFalsy();
+    Vue.nextTick()
+      .then(() => {
+        let valid = wrapper.vm.formIsValid();
+        expect(valid).toBeFalsy();
+      })
+      .then(() => {
+        let errorMessage = wrapper.find("#questionnaire-field .error--text");
+        expect(errorMessage.exists()).toBeFalsy();
+      });
   });
 
   it("Should not show error message on structure definition if csv is selected", () => {
     wrapper.setData({ fileType: "csv" });
 
-    let valid = wrapper.vm.formIsValid();
-
-    expect(valid).toBeFalsy();
-
-    let errorMessage = wrapper.find("#structure-definition-field .error--text");
-    expect(errorMessage.exists()).toBeFalsy();
+    Vue.nextTick()
+      .then(() => {
+        let valid = wrapper.vm.formIsValid();
+        expect(valid).toBeFalsy();
+      })
+      .then(() => {
+        let errorMessage = wrapper.find(
+          "#structure-definition-field .error--text"
+        );
+        expect(errorMessage.exists()).toBeFalsy();
+      });
   });
 
   it("Should not show error message on JSON blob if csv is selected", () => {
     wrapper.setData({ fileType: "csv" });
 
-    let valid = wrapper.vm.formIsValid();
-
-    expect(valid).toBeFalsy();
-
-    let errorMessage = wrapper.find("#json-blob .error--text");
-    expect(errorMessage.exists()).toBeFalsy();
+    Vue.nextTick()
+      .then(() => {
+        let valid = wrapper.vm.formIsValid();
+        expect(valid).toBeFalsy();
+      })
+      .then(() => {
+        let errorMessage = wrapper.find("#json-blob .error--text");
+        expect(errorMessage.exists()).toBeFalsy();
+      });
   });
 
   it("Should show error message if file is not selected", () => {
     wrapper.setData({ fileType: "csv" });
 
-    let valid = wrapper.vm.formIsValid();
-
-    expect(valid).toBeFalsy();
-
-    let errorMessage = wrapper.find("#file-upload .error--text");
-    expect(errorMessage.exists()).toBeTruthy();
+    Vue.nextTick()
+      .then(() => {
+        let valid = wrapper.vm.formIsValid();
+        expect(valid).toBeFalsy();
+      })
+      .then(() => {
+        let errorMessage = wrapper.find("#file-upload .error--text");
+        expect(errorMessage.exists()).toBeTruthy();
+      });
 
     wrapper.setData({ fileType: "json" });
 
-    valid = wrapper.vm.formIsValid();
-
-    expect(valid).toBeFalsy();
-
-    errorMessage = wrapper.find("#file-upload .error--text");
-    expect(errorMessage.exists()).toBeTruthy();
+    Vue.nextTick()
+      .then(() => {
+        valid = wrapper.vm.formIsValid();
+        expect(valid).toBeFalsy();
+      })
+      .then(() => {
+        errorMessage = wrapper.find("#file-upload .error--text");
+        expect(errorMessage.exists()).toBeTruthy();
+      });
   });
 
   it("Should not show error message for json if blob is selected but no file is selected", () => {
     wrapper.setData({ fileType: "json" });
     wrapper.setData({ jsonBlob: "something" });
 
-    let valid = wrapper.vm.formIsValid();
-
-    expect(valid).toBeFalsy();
-
-    let errorMessage = wrapper.find("#file-upload .error--text");
-    expect(errorMessage.exists()).toBeFalsy();
-
-    errorMessage = wrapper.find("#json-blob .error--text");
-    expect(errorMessage.exists()).toBeFalsy();
+    Vue.nextTick()
+      .then(() => {
+        let valid = wrapper.vm.formIsValid();
+        expect(valid).toBeFalsy();
+      })
+      .then(() => {
+        let errorMessage = wrapper.find("#file-upload .error--text");
+        expect(errorMessage.exists()).toBeFalsy();
+      })
+      .then(() => {
+        errorMessage = wrapper.find("#json-blob .error--text");
+        expect(errorMessage.exists()).toBeFalsy();
+      });
   });
 
   it("Should show error message for json if file is uploaded but no blob is entered", () => {
     wrapper.setData({ fileType: "json" });
     wrapper.setData({ filePath: sampleFile });
 
-    let valid = wrapper.vm.formIsValid();
-
-    expect(valid).toBeFalsy();
-
-    let errorMessage = wrapper.find("#file-upload .error--text");
-    expect(errorMessage.exists()).toBeTruthy();
-
-    errorMessage = wrapper.find("#json-blob .error--text");
-    expect(errorMessage.exists()).toBeFalsy();
+    Vue.nextTick()
+      .then(() => {
+        let valid = wrapper.vm.formIsValid();
+        expect(valid).toBeFalsy();
+      })
+      .then(() => {
+        let errorMessage = wrapper.find("#file-upload .error--text");
+        expect(errorMessage.exists()).toBeTruthy();
+      })
+      .then(() => {
+        errorMessage = wrapper.find("#json-blob .error--text");
+        expect(errorMessage.exists()).toBeFalsy();
+      });
   });
 
   it("Should show error message for questionnaire if csv is selected", () => {
     wrapper.setData({ fileType: "csv" });
 
-    let valid = wrapper.vm.formIsValid();
-
-    expect(valid).toBeFalsy();
-
-    let errorMessage = wrapper.find("#questionnaire-field .error--text");
-    expect(errorMessage.exists()).toBeTruthy();
+    Vue.nextTick()
+      .then(() => {
+        let valid = wrapper.vm.formIsValid();
+        expect(valid).toBeFalsy();
+      })
+      .then(() => {
+        let errorMessage = wrapper.find("#questionnaire-field .error--text");
+        expect(errorMessage.exists()).toBeTruthy();
+      });
   });
 
   it("Should show error message for structure definition if json is selected", () => {
     wrapper.setData({ fileType: "json" });
 
-    let valid = wrapper.vm.formIsValid();
-
-    expect(valid).toBeFalsy();
-
-    let errorMessage = wrapper.find("#structure-definition-field .error--text");
-    expect(errorMessage.exists()).toBeTruthy();
+    Vue.nextTick()
+      .then(() => {
+        let valid = wrapper.vm.formIsValid();
+        expect(valid).toBeFalsy();
+      })
+      .then(() => {
+        let errorMessage = wrapper.find(
+          "#structure-definition-field .error--text"
+        );
+        expect(errorMessage.exists()).toBeTruthy();
+      });
   });
 
   it("Should validate csv fields", () => {
@@ -487,8 +567,10 @@ describe("BulkUpload.vue", () => {
     wrapper.setData({ fileData: "path" });
     wrapper.setData({ filePath: sampleFile });
 
-    let valid = wrapper.vm.formIsValid();
-    expect(valid).toBeTruthy();
+    Vue.nextTick(() => {
+      let valid = wrapper.vm.formIsValid();
+      expect(valid).toBeTruthy();
+    });
   });
 
   it("Should validate json if file and structure definition are set", () => {
@@ -497,8 +579,10 @@ describe("BulkUpload.vue", () => {
     wrapper.setData({ structureDefinition: "definition" });
     wrapper.setData({ fileData: "data" });
 
-    let valid = wrapper.vm.formIsValid();
-    expect(valid).toBeTruthy();
+    Vue.nextTick(() => {
+      let valid = wrapper.vm.formIsValid();
+      expect(valid).toBeTruthy();
+    });
   });
 
   it("Should validate json if blob and structure definition are set", () => {
@@ -506,8 +590,10 @@ describe("BulkUpload.vue", () => {
     wrapper.setData({ structureDefinition: "definition" });
     wrapper.setData({ jsonBlob: "blob" });
 
-    let valid = wrapper.vm.formIsValid();
-    expect(valid).toBeTruthy();
+    Vue.nextTick(() => {
+      let valid = wrapper.vm.formIsValid();
+      expect(valid).toBeTruthy();
+    });
   });
 
   it("Should have no instructions if no fileType is set", () => {
@@ -518,8 +604,10 @@ describe("BulkUpload.vue", () => {
   it("Should have no instructions if invalid fileType is set", () => {
     wrapper.setData({ fileType: "invalid" });
 
-    let instructions = wrapper.vm.uploadInstructions;
-    expect(instructions).toBe("");
+    Vue.nextTick(() => {
+      let instructions = wrapper.vm.uploadInstructions;
+      expect(instructions).toBe("");
+    });
   });
 
   it("Should have different instructions for json and csv", () => {
@@ -763,7 +851,7 @@ describe("BulkUpload.vue", () => {
 
   test("Alert is hidden by default", () => {
     let alertComponent = wrapper.find(".v-alert");
-    expect(alertComponent.exists()).toBeFalsy();
+    expect(alertComponent.isVisible()).toBeFalsy();
   });
 
   test("Alert is shown when alert data is set", () => {
@@ -844,9 +932,9 @@ describe("BulkUpload.vue", () => {
     wrapper.setData({ showAlert: true });
 
     let result = wrapper.vm.submit();
-    let alertData = wrapper.vm.showAlert;
-
     expect(result).toBeFalsy();
+
+    let alertData = wrapper.vm.showAlert;
     expect(alertData).toBeFalsy();
   });
 
@@ -875,12 +963,14 @@ describe("BulkUpload.vue", () => {
     let uploadButton = getUploadButton(wrapper);
     uploadButton.trigger("click");
 
-    let loading = wrapper.vm.loading;
+    Vue.nextTick(() => {
+      let loading = wrapper.vm.loading;
 
-    expect(loading).toBeTruthy();
+      expect(loading).toBeTruthy();
 
-    uploadButton = getUploadButton(wrapper);
-    expect(uploadButton.classes()).toContain("v-btn--loading");
+      uploadButton = getUploadButton(wrapper);
+      expect(uploadButton.classes()).toContain("v-btn--loading");
+    });
   });
 
   test("Upload button stops loading if form not valid", () => {
