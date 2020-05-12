@@ -1,0 +1,18 @@
+{
+  "resourceType": "Parameters",
+  "parameter": [
+    {
+      "name": "fhir:server",
+      "valueString": "http://localhost:8080/hapi/fhir/"
+    },
+    {
+      "name": "keys",
+      "part": [
+        {
+          "name": "ihris",
+          "valueString": "-----BEGIN PUBLIC KEY-----\nMIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDdeFrJr76IQ+SYAoAIw8crZKNW\nir2re7Z7Iu+XzeYYop5+36Ux6uEQKSXo7s1xY2ou9nCkVAddZ1qehBo0e2MCtk62\nmQJbBT18fiZ3veQPvb0LC/9aFl64RuOguPrCZC+sbZLegQ6Wwf96UWyqmR49gaHO\nEdXwdFdSVyBGyS7dmwIDAQAB\n-----END PUBLIC KEY-----"
+        }
+      ]
+    }
+  ]
+}
