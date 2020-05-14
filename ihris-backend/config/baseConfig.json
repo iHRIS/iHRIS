@@ -1,9 +1,24 @@
 {
   "resourceType": "Parameters",
+  "id": "ihris-base-config",
+  "meta": {
+    "profile": [
+      "http://ihris.org/fhir/StructureDefinition/ihris-parameters-local-config"
+    ]
+  },
   "parameter": [
     {
-      "name": "fhir:server",
-      "valueString": "http://localhost:8080/hapi/fhir/"
+      "name": "fhir:base",
+      "valueString": "http://localhost:8080/hapi/fhir"
+    },
+    {
+      "name": "config",
+      "part": [
+        {
+          "name": "ihris",
+          "valueString": "ihris-config"
+        }
+      ]
     },
     {
       "name": "keys",
