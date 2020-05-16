@@ -16,16 +16,28 @@ async function startUp() {
 
   const indexRouter = require('./routes/index')
   const usersRouter = require('./routes/users')
+  const authRouter = require('./routes/auth')
 
-  
   app.use(logger('dev'))
   app.use(express.json())
   app.use(express.urlencoded({ extended: false }))
   app.use(cookieParser())
+  app.use( require('express-session')( { secret: 'should pull from config', resave: true, saveUninitialized: true } ) )
   app.use(express.static(path.join(__dirname, 'public')))
+
   
   app.use('/', indexRouter)
   app.use('/users', usersRouter)
+
+  app.use('/auth', authRouter)
+  app.use(authRouter.passport.initialize())
+  app.use(authRouter.passport.session())
+
+  app.get('/test',
+    ( req, res ) => {
+      res.status(200).json({"user":req.user})
+    }
+  )
 
   configLoaded = true
 }

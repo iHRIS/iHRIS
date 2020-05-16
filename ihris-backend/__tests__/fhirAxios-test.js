@@ -22,14 +22,26 @@ describe( 'interacts with FHIR server using axios', () => {
     ]
   }
 
+  const fhirAxios = require('../modules/fhirAxios')
+  fhirAxios.setOptions()
+
   beforeEach( () => {
     require('axios').__setFhirResults( MOCK_FHIR_OBJ )
   } )
 
-  test( 'reads a FHIR resource', () => {
-    const fhirAxios = require('../modules/fhirAxios')()
+  test( 'reads a FHIR resource', (done) => {
     fhirAxios.read( "Testing", "test" ).then( (response) => {
       expect( response ).toEqual( MOCK_FHIR_OBJ )
+      done()
+    } ).catch( (err) => {
+      done( err )
+    } )
+  } )
+
+  test( 'searches a FHIR resource', (done) => {
+    fhirAxios.search( "Testing", { param: "query" } ).then( (response) => {
+      expect( response ).toEqual( MOCK_FHIR_OBJ )
+      done()
     } ).catch( (err) => {
       done( err )
     } )

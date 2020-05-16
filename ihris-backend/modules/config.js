@@ -18,12 +18,15 @@ nconf.argv().env( {
 let baseConfig = fhirConfig.parseFile( './config/baseConfig.json' )
 nconf.add('base', { type: 'literal', store: baseConfig } )
 
-const fhirAxios = require('./fhirAxios')( { 
+const fhirAxios = require('./fhirAxios')
+
+fhirAxios.setOptions( { 
   base: nconf.get("fhir:base"),
   username: nconf.get("fhir:username"),
   password: nconf.get("fhir:password"),
 } )
 
+nconf.fhirAxios = fhirAxios
 nconf.loadRemote = async() => {
   let remoteConfigs = nconf.get('config')
   let configKeys = Object.keys( remoteConfigs )
