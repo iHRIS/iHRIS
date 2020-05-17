@@ -1,0 +1,40 @@
+{
+  "resourceType": "Library",
+  "id": "ihris-module-example",
+  "meta": {
+    "profile": [
+      "http://ihris.org/fhir/StructureDefinition/ihris-module"
+    ]
+  },
+  "type": {
+    "coding": [
+      {
+        "code": "logic-library"
+      }
+    ]
+  },
+  "content": [
+    {
+      "title": "module-signature",
+      "data": "ynMlj8MNf47R9CtzntdOCVYpHOIt9VvBkoULFQAyayu/CEUPvdsiIrb+zeHteDDA4dIkrx0Fqf6hkPBVVqpl4o1yyZPaRQpFr88W5NsGaKUEVg3LEJjcRUeYW2oEv+5wtlVivO+4K+fyCK+r/2my23M3BpEWcMpuWoXLESuOKpg="
+    },
+    {
+      "title": "module-code",
+      "data": "dmFyIGV4cHJlc3MgPSByZXF1aXJlKCdleHByZXNzJykKdmFyIHJvdXRlciA9IGV4cHJlc3MuUm91dGVyKCkKCnJvdXRlci5nZXQoJy8nLCAocmVxLCByZXMsIG5leHQpID0+IHsKICByZXMuc3RhdHVzKDIwMCkuanNvbih7InN0cmluZyI6IHRydWUsICJ1c2VyIjpyZXEudXNlcn0pCn0gKQoKbW9kdWxlLmV4cG9ydHMgPSByb3V0ZXIK"
+    }
+  ],
+  "status": "active",
+  "name": "ihris-example",
+  "title": "iHRIS Example Module",
+  "author": [
+    {
+      "name": "Test Author",
+      "telecom": [
+        {
+          "system": "email",
+          "value": "test@ihris.org"
+        }
+      ]
+    }
+  ]
+}

@@ -47,4 +47,13 @@ describe( 'interacts with FHIR server using axios', () => {
     } )
   } )
 
+  test( 'updates a FHIR resource', (done) => {
+    fhirAxios.update( MOCK_FHIR_OBJ ).then ( (response) => {
+      expect( response ).toEqual( MOCK_FHIR_OBJ )
+      done()
+    } ).catch( (err) => {
+      done( err )
+    } )
+  } )
+
 } )

@@ -17,6 +17,7 @@
     "passport": "^0.4.1",
     "passport-google-oauth20": "^2.0.0",
     "passport-local": "^1.0.0",
+    "require-from-string": "^2.0.2",
     "url": "^0.11.0"
   },
   "devDependencies": {

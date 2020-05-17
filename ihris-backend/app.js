@@ -5,6 +5,8 @@ const logger = require('morgan')
 const fs = require('fs')
 const fhirConfig = require('./modules/fhirConfig')
 const nconf = require('./modules/config')
+const requireFromString = require('require-from-string')
+const fhirModules = require('./modules/fhirModules')
 
 const app = express()
 
@@ -38,6 +40,25 @@ async function startUp() {
       res.status(200).json({"user":req.user})
     }
   )
+
+  testMod = fhirModules.require()
+  app.use( '/mod', testMod )
+
+  /*
+  let testStr = `
+var express = require('express')
+var router = express.Router()
+
+router.get('/', (req, res, next) => {
+  res.status(200).json({"string": true, "user":req.user})
+} )
+
+module.exports = router
+`
+
+  const testModule = requireFromString(testStr, "ihris-module-test")
+  app.use( '/mod', testModule )
+  */
 
   configLoaded = true
 }

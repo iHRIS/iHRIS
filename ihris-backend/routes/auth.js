@@ -1,8 +1,7 @@
 const express = require('express')
 const router = express.Router()
 const nconf = require('../modules/config')
-const fhirAxios = nconf.fhirAxios
-const crypto = require('crypto')
+const user = require('../modules/user')
 
 const passport = require('passport')
 const GoogleStrategy = require('passport-google-oauth20').Strategy
@@ -15,53 +14,70 @@ passport.use( new GoogleStrategy(
     clientSecret: nconf.get("auth:google:clientSecret"),
     callbackURL: "http://localhost:3000/auth/google/callback"
   },
-  (accessToken, refreshToken, profile, callback) => {
+  (accessToken, refreshToken, profile, done) => {
     console.log(profile)
-    return callback(null, profile)
+
+    user.lookupByProvider( 'google', profile.id ).then( (userObj) => {
+      if ( userObj ) {
+        done(null, userObj.resource)
+      } else {
+        console.log(profile.id+" not found in current users, checking by email.")
+        let email = profile.emails.find( em => em.verified === true )
+        if ( email && email.value ) {
+          console.log( "looking for "+email.value )
+          user.lookupByEmail( email.value ).then( (userObj) => {
+            if ( !userObj.resource.identifier ) userObj.resource.identifier = []
+            userObj.resource.identifier.push( { system: 'google', value: profile.id } )
+            userObj.update().then( (response) => {
+              done( null, response )
+            } ).catch( (err) => {
+              console.log("Failed to update user with provider id for google.")
+              console.error(err)
+              done( null, userObj.resource )
+            } )
+          } ).catch( (err) => {
+            done( err )
+          } )
+        } else {
+          console.log("Couldn't find verified email in profile.")
+          done( null, false )
+        }
+      }
+    } ).catch( (err) => {
+      done( err )
+    } )
   }
 ) )
 
 passport.use( new LocalStrategy(
   ( email, password, done ) => {
     console.log(email)
-    fhirAxios.search( "Person", { telecom: "email|"+email } ).then( (response) => {
-      console.log(response)
-      if ( response.total == 0 ) {
-        done( null, false )
-      } else if ( response.total > 1 ) {
-        console.error( "Multiple users found for " +email )
-        done( null, false )
-      }
-      var details = response.entry[0].resource.extension.find( ext => ext.url === "http://ihris.org/fhir/StructureDefinition/ihris-password" )
-      if ( !details ) {
-        console.error( "Couldn't find password hash for user with " +email )
-        done( null, false )
-      }
-      var hash = details.extension.find( ext => ext.url === "password" )
-      var salt = details.extension.find( ext => ext.url === "salt" )
-      if ( !hash || !hash.valueString || !salt || !salt.valueString ) {
-        console.error( "Couldn't find hash or salt for user with " +email )
-        done( null, false )
-      }
-      var compare = crypto.pbkdf2Sync( password, salt.valueString, 1000, 64, 'sha512' ).toString('hex')
-      if ( compare !== hash.valueString ) {
-        console.error( "Password didn't match for user with "+email )
+
+    user.lookupByEmail( email ).then( (userObj) => {
+      if ( !userObj ) {
         done( null, false )
       } else {
-        done( null, response.entry[0].resource )
+        if ( userObj.checkPassword( password ) ) {
+          done( null, userObj.resource )
+        } else {
+          done( null, false )
+        }
       }
     } ).catch( (err) => {
-      console.log(err)
       done( err )
     } )
   }
 ) )
 
 passport.serializeUser( (user,callback) => {
-  callback(null, user)
+  callback(null, user.id)
 } )
-passport.deserializeUser( (obj,callback) => {
-  callback(null, obj)
+passport.deserializeUser( (id,callback) => {
+  user.find( id ).then( (userObj) => {
+    callback(null, userObj.resource)
+  } ).catch( (err) => {
+    callback( err )
+  } )
 } )
 
 router.use(passport.initialize())
@@ -69,7 +85,7 @@ router.use(passport.session())
 
 router.passport = passport
 
-router.get('/google', passport.authenticate('google', { scope: ['email','profile'] } ) )
+router.get('/google', passport.authenticate('google', { scope: ['email'] } ) )
 router.get('/google/callback',
   passport.authenticate('google', { failureRedirect: '/' } ),
   ( req, res ) => {

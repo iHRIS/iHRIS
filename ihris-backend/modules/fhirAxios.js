@@ -66,6 +66,23 @@ const fhirAxios = {
       } )
 
     } )
+  },
+  update: ( resource ) => {
+    return new Promise( (resolve, reject) => {
+      if ( resource === undefined ) {
+        reject( new Error( "resource must be defined" ) )
+      }
+      let url = new URL(fhirAxios.baseUrl.href)
+      url.pathname += resource.resourceType + "/" + resource.id
+
+      var auth = fhirAxios.getAuth()
+      axios.put( url.href, resource, { auth: auth } ).then ( (response) => {
+        resolve(response.data)
+      } ).catch( (err) => {
+        reject( err )
+      } )
+
+    } )
   }
 }
 
