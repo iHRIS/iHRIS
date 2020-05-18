@@ -14,7 +14,7 @@ Description:      "iHRIS profile of Library resource to manage modules."
 * content contains 
       Signature 1..1 and
       Javascript 1..1
-* content[Signature].contentType 0..0
+* content[Signature].contentType = #text/x-sig
 * content[Signature].language 0..0
 * content[Signature].data 1..1
 * content[Signature].url 0..0
@@ -36,4 +36,6 @@ Usage:            #example
 * author[0].telecom[0].system = #email
 * author[0].telecom[0].value = "test@ihris.org"
 * content[Signature].data = "TEST"
+* content[Signature].contentType = #text/x-sig
 * content[Javascript].data = "TEST"
+* content[Javascript].contentType = #application/javascript

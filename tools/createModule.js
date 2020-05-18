@@ -25,10 +25,12 @@ var moduleLibrary = {
   "content": [
     {
       "title": "module-signature",
+      "contentType": "text/x-sig",
       "data": "TEST"
     },
     {
       "title": "module-code",
+      "contentType": "application/javascript",
       "data": "TEST"
     }
   ],
