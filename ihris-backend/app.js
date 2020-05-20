@@ -1,5 +1,8 @@
 const express = require('express')
+const redis = require('redis')
+const session = require('express-session')
 const path = require('path')
+const crypto = require('crypto')
 const cookieParser = require('cookie-parser')
 const logger = require('morgan')
 const fs = require('fs')
@@ -7,6 +10,9 @@ const fhirConfig = require('./modules/fhirConfig')
 const nconf = require('./modules/config')
 const requireFromString = require('require-from-string')
 const fhirModules = require('./modules/fhirModules')
+
+const RedisStore = require('connect-redis')(session)
+let redisClient = redis.createClient()
 
 const app = express()
 
@@ -24,7 +30,12 @@ async function startUp() {
   app.use(express.json())
   app.use(express.urlencoded({ extended: false }))
   app.use(cookieParser())
-  app.use( require('express-session')( { secret: 'should pull from config', resave: true, saveUninitialized: true } ) )
+  app.use( session( { 
+    store: new RedisStore( {client: redisClient }),
+    secret: nconf.get("session:secret") || crypto.randomBytes(64).toString('hex'),
+    resave: false, 
+    saveUninitialized: false 
+  } ) )
   app.use(express.static(path.join(__dirname, 'public')))
 
   

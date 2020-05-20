@@ -12,7 +12,8 @@ Description:    "Configuration Parameters to be loaded from a local file for iHR
             FhirUser 0..1 and
             FhirPass 0..1 and
             Config 1..1 and
-            Keys 1..1 
+            Keys 1..1 and
+            Session 0..1
 * parameter[FhirBase].name = "fhir:base"
 * parameter[FhirBase].value[x] only string
 * parameter[FhirBase].valueString 1..1
@@ -29,6 +30,7 @@ Description:    "Configuration Parameters to be loaded from a local file for iHR
 * parameter[FhirPass].part 0..0
 * parameter[FhirPass].resource 0..0
 * parameter[Config].name = "config"
+* parameter[Config].value[x] 0..0
 * parameter[Config].part ^slicing.discriminator.type = #pattern
 * parameter[Config].part ^slicing.discriminator.path = "name"
 * parameter[Config].part ^slicing.rules = #open
@@ -54,6 +56,19 @@ Description:    "Configuration Parameters to be loaded from a local file for iHR
 * parameter[Keys].part[KeyId].resource 0..0
 * parameter[Keys].value[x] 0..0
 * parameter[Keys].resource 0..0
+* parameter[Session].name = "session"
+* parameter[Session].part ^slicing.discriminator.type = #pattern
+* parameter[Session].part ^slicing.discriminator.path = "name"
+* parameter[Session].part ^slicing.rules = #open
+* parameter[Session].part contains
+            SessionConfig 1..*
+* parameter[Session].part[SessionConfig].name 1..1
+* parameter[Session].part[SessionConfig].value[x] only string
+* parameter[Session].part[SessionConfig].valueString 1..1
+* parameter[Session].part[SessionConfig].part 0..0
+* parameter[Session].part[SessionConfig].resource 0..0
+* parameter[Session].value[x] 0..0
+* parameter[Session].resource 0..0
 
 Instance:     ihris-base-config
 InstanceOf:   IhrisParametersLocalConfig
@@ -70,3 +85,5 @@ ir2re7Z7Iu+XzeYYop5+36Ux6uEQKSXo7s1xY2ou9nCkVAddZ1qehBo0e2MCtk62
 mQJbBT18fiZ3veQPvb0LC/9aFl64RuOguPrCZC+sbZLegQ6Wwf96UWyqmR49gaHO
 EdXwdFdSVyBGyS7dmwIDAQAB
 -----END PUBLIC KEY-----"
+* parameter[Session].part[SessionConfig][0].name = "secret"
+* parameter[Session].part[SessionConfig][0].valueString = "set some secret here"

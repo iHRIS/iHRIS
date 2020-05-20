@@ -5,6 +5,7 @@ Title:          "iHRIS Practitioner"
 Description:    "iHRIS profile of Practitioner."
 * identifier MS
 * name 1..* MS
+* name.text 1..1 MS
 * telecom MS
 * address MS
 * gender 1..1 MS

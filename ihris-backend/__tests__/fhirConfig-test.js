@@ -54,7 +54,7 @@ describe( 'converts a FHIR Parameters resource into configuration data', () => {
               "system": "urn:iso-astm:E1762-95:2013"
             }
           ],
-          "data": "aTfS/8J0hl6k75tR5NawJgXZtDFACvNEolmriRmHrf6uu2EnrMfqXwzveZOQ1yrZ3Sf6cCLqIaYKsZKIfn+GLX0rVFsBBj4jLppQizZ5v/nPSh4s1opKTiFchrvN+rEGDAN5nFT3JselHgruXu/zBPNYnDbCub1x88zw5IxHAaY=",
+          "data": "WjeTOCdz9Ol70fTl5q6S+bJKA0E/26nj7Ym/d+VVqsnkwh6TxIHqKKtjk7zfwa3X9Il76CQApk+KAZ1EKyagGrGp70H4pzX0zI9Vc1/iz2hGdIkMR+XRnER/LjNqwITLfARLrTWc9Pysc5ic1Cmjk12rfNn7eGJKQP/VX6AiPvA=",
           "when": "2020-05-13T00:00:00Z",
           "who": {
             "reference": "http://ihris.org/fhir/Organization/ihris"
@@ -71,6 +71,10 @@ describe( 'converts a FHIR Parameters resource into configuration data', () => {
           {
             "name": "site:logo",
             "valueString": "ihris-logo.png"
+          },
+          {
+            "name": "fhir:invalid",
+            "valueString": "This should be removed."
           }
         ]
       }

@@ -1,6 +1,9 @@
 const fs = require('fs')
 const crypto = require('crypto')
 
+// Don't allow any settings to these values from a remote config
+const invalidRemoteKeys = [ 'fhir', 'config', 'session', 'keys' ]
+
 const fhirConfig = {
   parseFile: ( file ) => {
     let configString = fs.readFileSync( file )
@@ -61,6 +64,10 @@ const fhirConfig = {
         for ( let param of addconf.part) {
           if( param.hasOwnProperty("valueString") ) {
             let split = param.name.split(':')
+            if ( invalidRemoteKeys.includes( split[0] ) ) {
+              console.error("Can't override "+split[0]+" from remote config file.")
+              continue
+            }
             let last = split.pop()
             let assign = defaults
             for( let level of split ) {
