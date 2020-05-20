@@ -70,8 +70,13 @@ passport.use( new LocalStrategy(
 ) )
 
 passport.serializeUser( (user,callback) => {
-  callback(null, user.id)
+  //callback(null, user.id)
+  callback(null, user)
 } )
+passport.deserializeUser( (user,callback) => {
+  callback(null, user)
+} )
+   /*
 passport.deserializeUser( (id,callback) => {
   user.find( id ).then( (userObj) => {
     callback(null, userObj.resource)
@@ -79,6 +84,7 @@ passport.deserializeUser( (id,callback) => {
     callback( err )
   } )
 } )
+  */
 
 router.use(passport.initialize())
 router.use(passport.session())
@@ -103,6 +109,8 @@ router.post("/login",
 
 router.get('/test',
   ( req, res ) => {
+    if ( !req.user.accesses ) req.user.accesses = 0
+    req.user.accesses++
     res.status(200).json({"user":req.user})
   }
 )

@@ -9,6 +9,7 @@ const user = {
         if ( response.total === 0 ) {
           resolve( false )
         } else if ( response.total > 1 ) {
+          console.error("Too many users found for "+JSON.stringify(query))
           resolve( false )
         } else {
           resolve( new User( response.entry[0].resource ) )
