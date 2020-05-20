@@ -8,6 +8,7 @@ sudo apt-get install -y nodejs
 sudo npm install -g npm
 ```
 ## Redis
+**This must be secured or people will be able to do bad things.**
 ```bash
 sudo apt install redis
 ```
@@ -16,10 +17,12 @@ sudo apt install redis
 sudo apt install tomcat9
 ```
 ## PostgreSQL
+**This must be secured or people will be able to do bad things.**
 ```bash
 sudo apt install postgresql
 ```
 ## HAPI FHIR
+**This must be secured or people will be able to do bad things.**
 ### Create Database and User
 ```bash
 sudo -u postgres psql
