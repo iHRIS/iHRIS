@@ -64,3 +64,7 @@ sudo mkdir /var/lib/tomcat9/target
 sudo chown tomcat:tomcat /var/lib/tomcat9/target
 sudo cp target/hapi.war /var/lib/tomcat9/webapps
 ```
+## SUSHI
+```bash
+sudo npm install -g fsh-sushi@beta
+```
