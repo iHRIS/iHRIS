@@ -42,7 +42,7 @@ Description:    "iHRIS profile of the Basic resource to manage task groups."
     
 Profile:        IhrisRole
 Parent:         Basic
-Id:             ihris-basic-task-group
+Id:             ihris-basic-role
 Title:          "iHRIS Role"
 Description:    "iHRIS profile of the Basic resource to manage user roles."
 * code = IhrisResourceCodeSystem#role
