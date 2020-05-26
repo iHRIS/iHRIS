@@ -2,22 +2,28 @@
 ## Current thinking (May 20)
 
 * Permission: read|write|delete
-* Profile ID (Practitioner or ihris-practitioner)
+* Profile (StructureDefinition) ID (Practitioner or ihris-practitioner)
 ** should be resolvable on the FHIR server
 ** won't allow full URLs, won't resolve from other servers (perhaps change in later iteration)
 * Field
 ** only top level fields
 ** extensions can include URL (also only top level extensions)
+
+*or* 
+
+* Permission: read|write|delete
 * Instance ID (for record level access, but also for specific ValueSets/CodeSystems)
+* Field
 
 Allowed IDs are: [A-Za-z0-9\-\.]{1,64}
 
-Separator?  /
+Separator?  :
 
 ### Examples
 
-* read/ihris-practitioner/*/*
-* read/ihris-practitioner/Practitioner.name/1234
+* read:ihris-practitioner:\*
+** same as - read:ihris-practitioner
+* read:Practitioner/1234:Practitioner.name
 
 
 ## Old thinking
