@@ -14,14 +14,14 @@
       --btn-gradient-end-color: #3a80bd; /* 10. Menu item gradient end  color */
       --btn-gradient-start-color-alpha: #78496a; /* 11. Menu item gradient start color (with alpha) */
       --btn-gradient-end-color-alpha: #643e4db6; /* 12. Menu item gradient end color (with alpha) */
-      --link-color: #569fd3; /* 13. Hyperlink text color */
+      --link-color: #78496a; /* 13. Hyperlink text color */
       --link-hover-color: #569fd3; /* 14. Hyperlink text hover color */
     
       --publish-box-bg-color: #8a8d35; /* 15. Publish box background color */
       --publish-box-border: 1px solid #5f6062; /* 16.  Publish box border definition */
       --publish-box-color: #e6e6e6; /* 16.1. Publish box text color */
     
-      --toc-box-bg-color: #d06f1a; /* 17.  TOC box background color */
+      --toc-box-bg-color: #ddecf6; /* 17.  TOC box background color */
       --toc-box-border: 1px solid  #5f6062; /* 18. TOC box border definition */
       
       --stu-note-background-color: #fff2ff; /* 19. (STU) Note box background color */
