@@ -18,17 +18,8 @@ Description:    "iHRIS profile of the Person resource to manage user access."
 * name[Fullname].use = #official
 * name[Fullname].text 1..1
 * extension contains 
-      IhrisUserRole named role 0..* and
+      IhrisAssignRole named role 0..* and
       IhrisPassword named password 0..1
-
-Extension:      IhrisUserRole
-Id:             ihris-user-role
-Title:          "iHRIS User Role"
-Description:    "iHRIS User Roles with list of tasks given by this role."
-* ^context.type = #element
-* ^context.expression = "Person"
-* value[x] only Coding
-* valueCoding 1..1
 
 Extension:      IhrisPassword
 Id:             ihris-password
@@ -40,9 +31,7 @@ Description:    "iHRIS password extension for local users."
       password 1..1 MS and
       salt 1..1 MS
 * extension[password].value[x] only string
-* extension[password].valueString 1..1
 * extension[salt].value[x] only string
-* extension[salt].valueString 1..1
 
 Instance:       ihris-user-admin
 InstanceOf:     IhrisPersonUser
@@ -54,3 +43,4 @@ Usage:          #example
 * identifier[0].value = "12345"
 * extension[IhrisPassword].extension[password].valueString = "PASS"
 * extension[IhrisPassword].extension[salt].valueString = "SALT"
+* extension[role][0].valueReference = Reference(Basic/ihris-role-admin)
