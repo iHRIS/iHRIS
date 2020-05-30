@@ -4,7 +4,7 @@ Id:             ihris-role
 Title:          "iHRIS Role"
 Description:    "iHRIS Profile of the Basic resource to manage roles."
 * code = IhrisResourceCodeSystem#role
-* modifierExtension contains
+* extension contains
       IhrisRolePrimary named primary 1..1 and
       IhrisAssignRole named role 0..* and
       IhrisTask named task 0..*
@@ -87,20 +87,20 @@ InstanceOf:     IhrisRole
 Title:          "iHRIS Open Role"
 Usage:          #example
 * code = IhrisResourceCodeSystem#role
-* modifierExtension[primary].valueBoolean = true
-* modifierExtension[task][0].extension[permission].valueCode = IhrisTaskPermissionCodeSystem#read
-* modifierExtension[task][0].extension[profile].valueCode = IhrisTaskProfileCodeSystem#StructureDefinition
-* modifierExtension[task][1].extension[permission].valueCode = IhrisTaskPermissionCodeSystem#CodeSystem
-* modifierExtension[task][1].extension[profile].valueCode = IhrisTaskProfileCodeSystem#CodeSystem
-* modifierExtension[task][2].extension[permission].valueCode = IhrisTaskPermissionCodeSystem#read
-* modifierExtension[task][2].extension[profile].valueCode = IhrisTaskProfileCodeSystem#ValueSet
+* extension[primary].valueBoolean = true
+* extension[task][0].extension[permission].valueCode = IhrisTaskPermissionCodeSystem#read
+* extension[task][0].extension[profile].valueCode = IhrisTaskProfileCodeSystem#StructureDefinition
+* extension[task][1].extension[permission].valueCode = IhrisTaskPermissionCodeSystem#read
+* extension[task][1].extension[profile].valueCode = IhrisTaskProfileCodeSystem#CodeSystem
+* extension[task][2].extension[permission].valueCode = IhrisTaskPermissionCodeSystem#read
+* extension[task][2].extension[profile].valueCode = IhrisTaskProfileCodeSystem#ValueSet
 
 Instance:       ihris-role-admin
 InstanceOf:     IhrisRole
 Title:          "iHRIS Admin Role"
 Usage:          #example
 * code = IhrisResourceCodeSystem#role
-* modifierExtension[primary].valueBoolean = true
-* modifierExtension[task][0].extension[permission].valueCode = IhrisTaskPermissionCodeSystem#*
-* modifierExtension[task][0].extension[profile].valueCode = IhrisTaskProfileCodeSystem#*
-* modifierExtension[role][0].valueReference = Reference(Basic/ihris-role-open)
+* extension[primary].valueBoolean = true
+* extension[task][0].extension[permission].valueCode = IhrisTaskPermissionCodeSystem#*
+* extension[task][0].extension[profile].valueCode = IhrisTaskProfileCodeSystem#*
+* extension[role][0].valueReference = Reference(Basic/ihris-role-open)

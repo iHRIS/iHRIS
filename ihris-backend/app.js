@@ -67,7 +67,7 @@ async function startUp() {
   }
   /*
   testMod = fhirModules.require()
-  if ( testMod ) Zpp.use( '/mod', testMod )
+  if ( testMod ) app.use( '/mod', testMod )
   */
 
   /*

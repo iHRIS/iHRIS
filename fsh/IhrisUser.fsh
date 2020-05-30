@@ -41,6 +41,6 @@ Usage:          #example
 * name[Fullname].text = "iHRIS Admin"
 * identifier[0].system = "google"
 * identifier[0].value = "12345"
-* extension[IhrisPassword].extension[password].valueString = "PASS"
-* extension[IhrisPassword].extension[salt].valueString = "SALT"
+* extension[password].extension[password].valueString = "PASS"
+* extension[password].extension[salt].valueString = "SALT"
 * extension[role][0].valueReference = Reference(Basic/ihris-role-admin)
