@@ -2,9 +2,12 @@
 
 jest.mock('axios')
 
+const DEFAULT_URL = "http://localhost:8080/hapi/fhir/"
+
 describe( 'interacts with FHIR server using axios', () => {
   const MOCK_FHIR_OBJ = {
     "resourceType": "Parameters",
+    "id": "test",
     "parameter": [
       {
         "name": "site:name",
@@ -25,12 +28,10 @@ describe( 'interacts with FHIR server using axios', () => {
   const fhirAxios = require('../modules/fhirAxios')
   fhirAxios.setOptions()
 
-  beforeEach( () => {
-    require('axios').__setFhirResults( MOCK_FHIR_OBJ )
-  } )
 
   test( 'reads a FHIR resource', (done) => {
-    fhirAxios.read( "Testing", "test" ).then( (response) => {
+    require('axios').__setFhirResults( DEFAULT_URL + "Parameters/test", null, MOCK_FHIR_OBJ )
+    fhirAxios.read( "Parameters", "test" ).then( (response) => {
       expect( response ).toEqual( MOCK_FHIR_OBJ )
       done()
     } ).catch( (err) => {
@@ -39,7 +40,8 @@ describe( 'interacts with FHIR server using axios', () => {
   } )
 
   test( 'searches a FHIR resource', (done) => {
-    fhirAxios.search( "Testing", { param: "query" } ).then( (response) => {
+    require('axios').__setFhirResults( DEFAULT_URL + "Parameters", { param: "query" }, MOCK_FHIR_OBJ )
+    fhirAxios.search( "Parameters", { param: "query" } ).then( (response) => {
       expect( response ).toEqual( MOCK_FHIR_OBJ )
       done()
     } ).catch( (err) => {
@@ -48,6 +50,7 @@ describe( 'interacts with FHIR server using axios', () => {
   } )
 
   test( 'updates a FHIR resource', (done) => {
+    require('axios').__setFhirResults( DEFAULT_URL + "Parameters/test", MOCK_FHIR_OBJ, MOCK_FHIR_OBJ )
     fhirAxios.update( MOCK_FHIR_OBJ ).then ( (response) => {
       expect( response ).toEqual( MOCK_FHIR_OBJ )
       done()

@@ -11,10 +11,14 @@ including \* which is the entire valueset, but not all possible StructureDefinit
 ** field - string that is a FHIRPath to a field in the structure definition
 ** resource - reference to a specific resource for access
 
+**delete only makes sense on a profile.  It will ignored if trying to set on a resource or including a field.**
+
 ## resolution
 
 Add permission to user object based on roles (or custom module)
 
+
+User.updatePermissions() adds all permissions from roles in User to the permissions array.
 
 user.addPermission( permission, profile/resource, field )
 * sending field when it's already been sent without a field does nothing.  The higher level

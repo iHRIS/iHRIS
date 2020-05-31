@@ -3,6 +3,8 @@
 jest.mock('axios')
 jest.mock('fs')
 
+const DEFAULT_URL = "http://localhost:8080/hapi/fhir/"
+
 describe( 'Loads nconf plus base config', () => {
   const CONFIG_FILE_OUTPUT = {
     "fhir": { "base": "http://localhost:8080/hapi/fhir/" }, 
@@ -90,7 +92,7 @@ describe( 'Loads nconf plus base config', () => {
   }
 
   beforeEach( () => {
-    require('axios').__setFhirResults( MOCK_FHIR_OBJ )
+    require('axios').__setFhirResults( DEFAULT_URL + "Parameters/ihris-config", null, MOCK_FHIR_OBJ )
     require('fs').__setMockFile( MOCK_FILE_DATA )
   } )
 

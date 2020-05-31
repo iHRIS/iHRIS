@@ -3,6 +3,8 @@
 jest.mock('axios')
 jest.mock('fs')
 
+const DEFAULT_URL = "http://localhost:8080/hapi/fhir/"
+
 describe( 'Load modules from FHIR server', () => {
   const MOCK_CONFIG_OBJ = {
     "resourceType": "Parameters",
@@ -39,7 +41,7 @@ describe( 'Load modules from FHIR server', () => {
   const MOCK_FILE_DATA = JSON.stringify( MOCK_CONFIG_OBJ )
   const MOCK_FHIR_OBJ = {
     "resourceType": "Library",
-    "id": "ihris-module-example",
+    "id": "test-module",
     "meta": {
       "profile": [
         "http://ihris.org/fhir/StructureDefinition/ihris-module"
@@ -86,7 +88,7 @@ describe( 'Load modules from FHIR server', () => {
 
   beforeEach( () => {
     require('fs').__setMockFile( MOCK_FILE_DATA )
-    require('axios').__setFhirResults( MOCK_FHIR_OBJ )
+    require('axios').__setFhirResults( DEFAULT_URL + "Library/test-module", null, MOCK_FHIR_OBJ )
   } )
 
   test( 'load a module from FHIR', (done) => {
