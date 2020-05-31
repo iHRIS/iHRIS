@@ -20,7 +20,7 @@ const fhirAxios = {
       fhirAxios.configured = true
     }
   },
-  getAuth: () => {
+  __getAuth: () => {
     if ( fhirAxios.options.username && fhirAxios.options.password ) {
       return { username: fhirAxios.options.username, password: fhirAxios.options.password }
     } else {
@@ -41,7 +41,7 @@ const fhirAxios = {
         url.pathname += "/_history/" + vid
       }
 
-      var auth = fhirAxios.getAuth()
+      let auth = fhirAxios.__getAuth()
       axios.get( url.href, { auth: auth } ).then ( (response) => {
         resolve(response.data)
       } ).catch( (err) => {
@@ -57,7 +57,7 @@ const fhirAxios = {
       }
       let url = new URL(fhirAxios.baseUrl.href)
       url.pathname += resource
-      var auth = fhirAxios.getAuth()
+      let auth = fhirAxios.__getAuth()
 
       axios.get( url.href, { auth: auth, params: params } ).then( (response) => {
         resolve( response.data )
@@ -75,13 +75,46 @@ const fhirAxios = {
       let url = new URL(fhirAxios.baseUrl.href)
       url.pathname += resource.resourceType + "/" + resource.id
 
-      var auth = fhirAxios.getAuth()
+      let auth = fhirAxios.__getAuth()
       axios.put( url.href, resource, { auth: auth } ).then ( (response) => {
-        resolve(response.data)
+        resolve( response.data )
       } ).catch( (err) => {
         reject( err )
       } )
 
+    } )
+  },
+  expand: ( valueset, params ) => {
+    return new Promise( (resolve, reject) => {
+      if ( !valueset ) {
+        reject( new Error( "valueset must be defined" ) )
+      }
+      let url = new URL( fhirAxios.baseUrl.href )
+      url.pathname += "ValueSet/" + valueset + "/$expand"
+
+      let auth = fhirAxios.__getAuth()
+      axios.get( url.href, { auth: auth, params: params } ).then( (response) => {
+        try {
+          let total = response.data.expansion.total
+          let count = response.data.expansion.parameter.find( param => param.name === "count" ).valueInteger
+          let offset = response.data.expansion.offset
+
+          if ( total > offset + count ) {
+            offset += count
+            fhirAxios.expand( valueset, { count: count, offset: offset } ).then ( (contains) => {
+              resolve( response.data.expansion.contains.concat( contains ) )
+            } ).catch( (err) => {
+              reject ( err )
+            } )
+          } else {
+            resolve( response.data.expansion.contains )
+          }
+        } catch ( err ) {
+          reject( err )
+        }
+      } ).catch( (err) => {
+        reject ( err )
+      } )
     } )
   }
 }

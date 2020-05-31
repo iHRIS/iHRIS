@@ -57,6 +57,43 @@ const user = {
     let hash = crypto.pbkdf2Sync( password, salt, 1000, 64, 'sha512' ).toString('hex')
     return { hash: hash, salt: salt }
   },
+  tasksLoaded: false,
+  tasksLoading: false,
+  valueSet: {},
+  loadTaskList: ( refresh ) => {
+    return new Promise( (resolve, reject) => {
+      if ( user.tasksLoading ) {
+        let interval = setInterval( () => {
+          if ( user.tasksLoaded && !user.tasksLoading ) {
+            clearInterval( interval )
+            resolve()
+          }
+        }, 500 )
+      } else if ( user.tasksLoaded && !refresh ) {
+        resolve()
+      } else {
+        user.tasksLoading = true
+        user.tasksLoaded = false
+
+        Promise.all( [
+          fhirAxios.expand( "ihris-task-permission" ),
+          fhirAxios.expand( "ihris-task-profile" )
+        ] ).then( (results) => {
+          user.valueSet[ "ihris-task-permission" ] = results[0].map( exp => exp.code )
+          user.valueSet[ "ihris-task-profile" ] = results[1].map( exp => exp.code )
+
+          user.tasksLoading = false
+          user.tasksLoaded = true
+          resolve()
+        } ).catch( (err) => {
+          reject( err )
+        } )
+
+
+      }
+
+    } )
+  },
   addRole: ( permissions, roleStr ) => {
     return new Promise( (resolve, reject) => {
       const role = roleStr.split( '/' )
@@ -65,6 +102,7 @@ const user = {
         resolve()
       } else {
         fhirAxios.read( role[0], role[1] ).then ( async(response) => {
+          await user.loadTaskList()
           let tasks = response.extension.filter( ext => ext.url === TASK_EXTENSION )
           for( let task of tasks ) {
             let permission = undefined
@@ -113,9 +151,21 @@ const user = {
     } )
   },
   addPermission: ( permissions, permission, resource, field ) => {
+    if ( !user.tasksLoaded ) {
+      console.error("Can't load permissions manually unless the task lists have been loaded for validation.  user.loadTaskList()")
+      return false
+    }
+    if ( !user.valueSet["ihris-task-permission"].includes( permission ) ) {
+      console.error( "Invalid permission given "+permission, user.valueSet["ihris-task-permission"] )
+      return false
+    }
+    if ( !resource.includes('/') && !user.valueSet["ihris-task-profile"].includes( resource ) ) {
+      console.error( "Invalid profile given "+resource, user.valueSet["ihris-task-profile"] )
+      return false
+    }
     if ( permission === "delete" && ( resource.includes('/') || field ) ) {
       console.error("Can't add delete permission on a specific resource or by including a field: "+resource+" - "+field)
-      return
+      return false
     }
     if ( !permissions.hasOwnProperty( permission ) ) {
       permissions[permission] = {}
@@ -130,6 +180,7 @@ const user = {
     } else {
       permissions[permission][resource] = true
     }
+    return true
   }
 }
 
@@ -163,7 +214,7 @@ class User {
   }
 
   addPermission( permission, resource, field ) {
-    user.addPermission( this.#permissions, permission, resource, field )
+    return user.addPermission( this.#permissions, permission, resource, field )
   }
 
   /**

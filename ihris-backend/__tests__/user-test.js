@@ -6,7 +6,142 @@ describe( 'User module for working with users (Person resource)', () => {
 
   const DEFAULT_URL = "http://localhost:8080/hapi/fhir/"
   const axios = require('axios')
+  const user = require('../modules/user')
 
+
+  describe( 'Checking non-user specific functionality', () => {
+    const PERM_RESULTS_MANUAL = {
+      "read": { "Practitioner/abc": true },
+      "write": { "Practitioner/abc": true }
+    }
+    const MOCK_VALUESET_PERM = {
+      "resourceType": "ValueSet",
+      "status": "active",
+      "compose": {
+        "include": [
+          { "system": "http://ihris.org/fhir/CodeSystem/ihris-task-permission" }
+        ]
+      },
+      "expansion": {
+        "identifier": "79f1ee02-e2a2-4a89-ac68-bf348284bba3",
+        "timestamp": "2020-05-31T06:13:32+00:00",
+        "total": 4,
+        "offset": 0,
+        "parameter": [
+          { "name": "offset", "valueInteger": 0 },
+          { "name": "count", "valueInteger": 1000 }
+        ],
+        "contains": [
+          { "system": "http://ihris.org/fhir/CodeSystem/ihris-task-permission", "code": "*", "display": "All" },
+          {
+            "system": "http://ihris.org/fhir/CodeSystem/ihris-task-permission", "code": "read", "display": "Read" },
+          {
+            "system": "http://ihris.org/fhir/CodeSystem/ihris-task-permission", "code": "write", "display": "Write" },
+          {
+            "system": "http://ihris.org/fhir/CodeSystem/ihris-task-permission", "code": "delete", "display": "Delete" }
+        ]
+      }
+    }
+    const MOCK_VALUESET_PROFILE = {
+      "resourceType": "ValueSet",
+      "status": "active",
+      "compose": {
+        "include": [
+          { "system": "http://ihris.org/fhir/CodeSystem/ihris-task-profile" }
+        ]
+      },
+      "expansion": {
+        "identifier": "776a1378-cbc7-471b-b7a2-a084e1b05da9",
+        "timestamp": "2020-05-31T06:14:14+00:00",
+        "total": 6,
+        "offset": 0,
+        "parameter": [
+          { "name": "offset", "valueInteger": 0 },
+          { "name": "count", "valueInteger": 1000 }
+        ],
+        "contains": [
+          { "system": "http://ihris.org/fhir/CodeSystem/ihris-task-profile", "code": "*", "display": "All" },
+          { "system": "http://ihris.org/fhir/CodeSystem/ihris-task-profile", "code": "Practitioner", "display": "Practitioner" },
+          { "system": "http://ihris.org/fhir/CodeSystem/ihris-task-profile", "code": "ihris-practitioner", "display": "ihris-practitioner" },
+          { "system": "http://ihris.org/fhir/CodeSystem/ihris-task-profile", "code": "StructureDefinition", "display": "StructureDefinition" },
+          { "system": "http://ihris.org/fhir/CodeSystem/ihris-task-profile", "code": "ValueSet", "display": "ValueSet" },
+          { "system": "http://ihris.org/fhir/CodeSystem/ihris-task-profile", "code": "CodeSystem", "display": "CodeSystem" }
+        ]
+      }
+    }
+    const VALUESET_EXPANSION_PERM = [ '*', 'read', 'write', 'delete' ]
+    const VALUESET_EXPANSION_PROFILE = [ '*', 'Practitioner', 'ihris-practitioner', 'StructureDefinition', 'ValueSet', 'CodeSystem' ]
+
+
+    test( 'checks manual adding of permission', (done) => {
+      axios.__setFhirResults( DEFAULT_URL + "ValueSet/ihris-task-permission/$expand", null, MOCK_VALUESET_PERM )
+      axios.__setFhirResults( DEFAULT_URL + "ValueSet/ihris-task-profile/$expand", null, MOCK_VALUESET_PROFILE )
+      let userObj = user.__testUser()
+      user.loadTaskList().then( () => {
+        expect( userObj.addPermission( "read", "Practitioner/abc" ) ).toBeTruthy()
+        expect( userObj.addPermission( "write", "Practitioner/abc" ) ).toBeTruthy()
+        // Shouldn't include these
+        expect( userObj.addPermission( "delete", "Practitioner/abc" ) ).toBeFalsy()
+        expect( userObj.addPermission( "delete", "Practitioner", "name" ) ).toBeFalsy()
+        expect( userObj.permissions ).toEqual( PERM_RESULTS_MANUAL )
+        done()
+      } ).catch( (err) => {
+        done( err )
+      } )
+    } )
+
+    test( 'checks loading needed valuesets', (done) => {
+      axios.__setFhirResults( DEFAULT_URL + "ValueSet/ihris-task-permission/$expand", null, MOCK_VALUESET_PERM )
+      axios.__setFhirResults( DEFAULT_URL + "ValueSet/ihris-task-profile/$expand", null, MOCK_VALUESET_PROFILE )
+      expect( user.tasksLoading ).toBeFalsy()
+      user.loadTaskList( true ).then( () => {
+        expect( user.tasksLoaded ).toBeTruthy()
+        expect( user.tasksLoading ).toBeFalsy()
+        expect( user.valueSet["ihris-task-permission"] ).toEqual( VALUESET_EXPANSION_PERM )
+        expect( user.valueSet["ihris-task-profile"] ).toEqual( VALUESET_EXPANSION_PROFILE )
+        done()
+      } ).catch( (err) => {
+        done( err )
+      } )
+    } )
+
+    test( 'checks getting permissions', () => {
+      let userObj = user.__testUser()
+      expect( userObj.addPermission( "*", "*" ) ).toBeTruthy()
+      expect( userObj.getPermission( "read", "Practitioner" ) ).toBeTruthy()
+      userObj.resetPermissions()
+
+      expect( userObj.addPermission( "read", "Practitioner" ) ).toBeTruthy()
+      expect( userObj.getPermission( "read", "Practitioner/1234" ) ).toBeTruthy()
+      userObj.resetPermissions()
+
+
+      expect( userObj.addPermission( "read", "Practitioner", "name" ) ).toBeTruthy()
+      expect( userObj.addPermission( "read", "Practitioner/123", "gender" ) ).toBeTruthy()
+      expect( userObj.getPermission( "read", "Practitioner/123" ) ).toEqual( { "name": true, "gender": true } )
+      expect( userObj.getPermission( "read", "Practitioner" ) ).toEqual( { "name": true } )
+      expect( userObj.addPermission( "read", "Practitioner" ) ).toBeTruthy()
+      expect( userObj.getPermission( "read", "Practitioner" ) ).toBeTruthy()
+      expect( userObj.getPermission( "read", "Practitioner/123" ) ).toBeTruthy()
+      expect( userObj.getPermission( "write", "Practitioner" ) ).toBeFalsy()
+
+    } )
+
+    test( 'checks adding invalid permissions', (done) => {
+      axios.__setFhirResults( DEFAULT_URL + "ValueSet/ihris-task-permission/$expand", null, MOCK_VALUESET_PERM )
+      axios.__setFhirResults( DEFAULT_URL + "ValueSet/ihris-task-profile/$expand", null, MOCK_VALUESET_PROFILE )
+      user.loadTaskList( true ).then( () => {
+        let userObj = user.__testUser()
+        expect( userObj.addPermission( "abc", "Practitioner" ) ).toBeFalsy()
+        expect( userObj.addPermission( "read", "abc" ) ).toBeFalsy()
+        expect( userObj.permissions ).toEqual( {} )
+        done()
+      } ).catch( (err) => {
+        done( err )
+      } )
+    } )
+
+  } )
   describe( 'Looking up local auth users', () => {
 
     const crypto = require('crypto')
@@ -171,13 +306,7 @@ describe( 'User module for working with users (Person resource)', () => {
       },
       "write": { "Practitioner/1234": { "name": true, "gender": true } }
     }
-    const PERM_RESULTS_MANUAL = {
-      "read": { "Practitioner/abc": true },
-      "write": { "Practitioner/abc": true }
-    }
 
-
-    const user = require('../modules/user')
 
     test( 'looks up user by id', (done) => {
       axios.__setFhirResults( DEFAULT_URL + "Person/ihris-user-test", null, MOCK_LOCAL_OBJ )
@@ -215,42 +344,6 @@ describe( 'User module for working with users (Person resource)', () => {
       } )
     } )
 
-    test( 'checks manual adding of permission', (done) => {
-      axios.__setFhirResults( DEFAULT_URL + "Person/ihris-user-test", null, MOCK_LOCAL_OBJ )
-      user.find( 'ihris-user-test' ).then( (userObj) => {
-        userObj.addPermission( "read", "Practitioner/abc" )
-        userObj.addPermission( "write", "Practitioner/abc" )
-        // Shouldn't include these
-        userObj.addPermission( "delete", "Practitioner/abc" )
-        userObj.addPermission( "delete", "Practitioner", "name" )
-        expect( userObj.permissions ).toEqual( PERM_RESULTS_MANUAL )
-        done()
-      } ).catch( (err) => {
-        done(err)
-      } )
-    } )
-
-    test( 'checks getting permissions', () => {
-      let test = user.__testUser()
-      test.addPermission( "*", "*" )
-      expect( test.getPermission( "read", "Practitioner" ) ).toBeTruthy()
-      test.resetPermissions()
-
-      test.addPermission( "read", "Practitioner" )
-      expect( test.getPermission( "read", "Practitioner/1234" ) ).toBeTruthy()
-      test.resetPermissions()
-
-
-      test.addPermission( "read", "Practitioner", "name" )
-      test.addPermission( "read", "Practitioner/123", "gender" )
-      expect( test.getPermission( "read", "Practitioner/123" ) ).toEqual( { "name": true, "gender": true } )
-      expect( test.getPermission( "read", "Practitioner" ) ).toEqual( { "name": true } )
-      test.addPermission( "read", "Practitioner" )
-      expect( test.getPermission( "read", "Practitioner" ) ).toBeTruthy()
-      expect( test.getPermission( "read", "Practitioner/123" ) ).toBeTruthy()
-      expect( test.getPermission( "write", "Practitioner" ) ).toBeFalsy()
-
-    } )
 
   } )
 
@@ -291,7 +384,6 @@ describe( 'User module for working with users (Person resource)', () => {
       ]
     }
 
-    const user = require('../modules/user')
 
     test( 'looks up user by query', (done) => {
       axios.__setFhirResults( DEFAULT_URL + "Person", { _id: "ihris-user-test" }, MOCK_LOOKUP_OBJ )
