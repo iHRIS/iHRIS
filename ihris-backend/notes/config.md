@@ -43,3 +43,21 @@ Environment:
 ```
 IHRIS_FHIR__SERVER=http://locahost:8080/hapi/fhir
 ```
+
+## Config options
+
+### Allowed in local config
+* fhir:server
+* fhir:username
+* fhir:password
+* config
+** name = id of config Parameters resource
+* keys
+** name = public key string
+
+### Allowed in local or remote
+* user:loggedout = id of logged out user resource
+* auth:google:clientId
+* auth:google:clientSecret
+* modules
+** name = id of Library resource

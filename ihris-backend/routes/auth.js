@@ -6,7 +6,9 @@ const user = require('../modules/user')
 const passport = require('passport')
 const GoogleStrategy = require('passport-google-oauth20').Strategy
 const LocalStrategy = require('passport-local').Strategy
+const CustomStrategy = require('passport-custom').Strategy
 
+const defaultUser = nconf.get("user:loggedout") || "ihris-user-loggedout"
 
 passport.use( new GoogleStrategy( 
   {
@@ -15,25 +17,23 @@ passport.use( new GoogleStrategy(
     callbackURL: "http://localhost:3000/auth/google/callback"
   },
   (accessToken, refreshToken, profile, done) => {
-    console.log(profile)
 
     user.lookupByProvider( 'google', profile.id ).then( (userObj) => {
       if ( userObj ) {
-        done(null, userObj.resource)
+        done(null, userObj )
       } else {
         console.log(profile.id+" not found in current users, checking by email.")
         let email = profile.emails.find( em => em.verified === true )
         if ( email && email.value ) {
-          console.log( "looking for "+email.value )
           user.lookupByEmail( email.value ).then( (userObj) => {
             if ( !userObj.resource.identifier ) userObj.resource.identifier = []
             userObj.resource.identifier.push( { system: 'google', value: profile.id } )
             userObj.update().then( (response) => {
-              done( null, response )
+              done( null, userObj )
             } ).catch( (err) => {
               console.log("Failed to update user with provider id for google.")
               console.error(err)
-              done( null, userObj.resource )
+              done( null, userObj )
             } )
           } ).catch( (err) => {
             done( err )
@@ -49,19 +49,33 @@ passport.use( new GoogleStrategy(
   }
 ) )
 
-passport.use( new LocalStrategy(
+passport.use( 'local', new LocalStrategy(
   ( email, password, done ) => {
-    console.log(email)
 
     user.lookupByEmail( email ).then( (userObj) => {
       if ( !userObj ) {
         done( null, false )
       } else {
         if ( userObj.checkPassword( password ) ) {
-          done( null, userObj.resource )
+          done( null, userObj )
         } else {
           done( null, false )
         }
+      }
+    } ).catch( (err) => {
+      done( err )
+    } )
+  }
+) )
+
+passport.use( 'custom-loggedout', new CustomStrategy(
+  ( req, done ) => {
+
+    user.find( defaultUser ).then( (userObj) => {
+      if ( !userObj ) {
+        done( null, false )
+      } else {
+        done( null, userObj )
       }
     } ).catch( (err) => {
       done( err )
@@ -90,6 +104,12 @@ router.use(passport.initialize())
 router.use(passport.session())
 
 router.passport = passport
+
+router.get('/', passport.authenticate('custom-loggedout', { failureRedirect: '/' } ),
+  ( req, res ) => {
+    res.status(200).json({"user":req.user})
+  }
+)
 
 router.get('/google', passport.authenticate('google', { scope: ['email'] } ) )
 router.get('/google/callback',

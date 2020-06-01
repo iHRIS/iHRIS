@@ -77,10 +77,10 @@ const user = {
 
         Promise.all( [
           fhirAxios.expand( "ihris-task-permission" ),
-          fhirAxios.expand( "ihris-task-profile" )
+          fhirAxios.expand( "ihris-task-resource" )
         ] ).then( (results) => {
           user.valueSet[ "ihris-task-permission" ] = results[0].map( exp => exp.code )
-          user.valueSet[ "ihris-task-profile" ] = results[1].map( exp => exp.code )
+          user.valueSet[ "ihris-task-resource" ] = results[1].map( exp => exp.code )
 
           user.tasksLoading = false
           user.tasksLoaded = true
@@ -105,9 +105,11 @@ const user = {
           await user.loadTaskList()
           let tasks = response.extension.filter( ext => ext.url === TASK_EXTENSION )
           for( let task of tasks ) {
+
             let permission = undefined
-            let profile = undefined
             let resource = undefined
+            let id = undefined
+            let constraint = undefined
             let field = undefined
             try {
               permission = task.extension.find( ext => ext.url === "permission" ).valueCode
@@ -116,25 +118,25 @@ const user = {
               continue
             }
             try {
-              profile = task.extension.find( ext => ext.url === "profile" ).valueCode
+              resource = task.extension.find( ext => ext.url === "resource" ).valueCode
             } catch( err ) {
-            }
-            try {
-              resource = task.extension.find( ext => ext.url === "resource" ).valueReference.reference
-            } catch( err ) {
-            }
-            if ( !profile && !resource ) {
-              console.error( "No resource or profile given for task.  Don't know what to do.")
+              console.error("No resource given for task.  Don't know what to do.")
               continue
             }
-            if ( profile ) {
-              resource = profile
+            try {
+              id = task.extension.find( ext => ext.url === "id" ).valueId
+            } catch( err ) {
+              // id takes precedence and only one can be set
+              try {
+                constraint = task.extension.find( ext => ext.url === "constraint" ).valueString
+              } catch( err ) {
+              }
             }
             try {
               field = task.extension.find( ext => ext.url === "field" ).valueString
             } catch( err ) {
             }
-            user.addPermission( permissions, permission, resource, field )
+            user.addPermission( permissions, permission, resource, id, constraint, field )
 
           }
 
@@ -150,62 +152,94 @@ const user = {
       }
     } )
   },
-  addPermission: ( permissions, permission, resource, field ) => {
+  addPermission: ( permissions, permission, resource, id, constraint, field ) => {
     if ( !user.tasksLoaded ) {
-      console.error("Can't load permissions manually unless the task lists have been loaded for validation.  user.loadTaskList()")
+      console.error("Can't load permissions directly unless the task lists have been loaded for validation.  call user.loadTaskList() first.")
       return false
     }
     if ( !user.valueSet["ihris-task-permission"].includes( permission ) ) {
       console.error( "Invalid permission given "+permission, user.valueSet["ihris-task-permission"] )
       return false
     }
-    if ( !resource.includes('/') && !user.valueSet["ihris-task-profile"].includes( resource ) ) {
-      console.error( "Invalid profile given "+resource, user.valueSet["ihris-task-profile"] )
+    if ( !user.valueSet["ihris-task-resource"].includes( resource ) ) {
+      console.error( "Invalid resource given "+resource, user.valueSet["ihris-task-resource"] )
       return false
     }
-    if ( permission === "delete" && ( resource.includes('/') || field ) ) {
-      console.error("Can't add delete permission on a specific resource or by including a field: "+resource+" - "+field)
+    // Can't have an id when it's all resources
+    if ( resource === "*" && ( id || field ) ) {
+      console.error("Can't add global resource permissions on a specific id or by including a field: "+id+" - "+field)
+      return false
+    }
+
+    if ( ( permission === "*" || permission === "delete" ) && ( id || field ) ) {
+      console.error("Can't add delete permission on a specific id or by including a field: "+id+" - "+field)
       return false
     }
     if ( !permissions.hasOwnProperty( permission ) ) {
       permissions[permission] = {}
     }
-    if ( field ) {
+    if ( !field && !id && !constraint ) {
+      permissions[permission][resource] = true
+    } else if ( permissions[permission][resource] !== true ) {
       if ( !permissions[permission].hasOwnProperty( resource ) ) {
         permissions[permission][resource] = {}
-      } 
-      if ( isObject( permissions[permission][resource] ) ) {
-        permissions[permission][resource][field] = true
       }
-    } else {
-      permissions[permission][resource] = true
+      if ( id ) {
+        if ( !permissions[permission][resource].hasOwnProperty( "id" ) ) {
+          permissions[permission][resource].id = {}
+        }
+        if ( field ) {
+          if ( !permissions[permission][resource].id.hasOwnProperty( id ) ) {
+            permissions[permission][resource].id[id] = { }
+          } 
+          if ( isObject( permissions[permission][resource].id[id] ) ) {
+            permissions[permission][resource].id[id][field] = true
+          }
+        } else {
+          permissions[permission][resource].id[id] = true
+        }
+      } else if ( constraint ) {
+        if ( !permissions[permission][resource].hasOwnProperty( "constraint" ) ) {
+          permissions[permission][resource].constraint = {}
+        }
+        if ( field ) {
+          if ( !permissions[permission][resource].constraint.hasOwnProperty( constraint ) ) {
+            permissions[permission][resource].constraint[constraint] = {}
+          } 
+          if ( isObject( permissions[permission][resource].constraint[constraint] ) ) {
+            permissions[permission][resource].constraint[constraint][field] = true
+          }
+        } else {
+          permissions[permission][resource].constraint[constraint] = true
+        }
+      } else {
+        if ( !permissions[permission][resource].hasOwnProperty( "*" ) ) {
+          permissions[permission][resource]["*"] = {}
+        } 
+        permissions[permission][resource]["*"][field] = true
+      }
     }
+
     return true
   }
 }
 
 class User {
 
-  #resource = {}
-  #permissions = {}
+  resource = {}
+  permissions = {}
 
   constructor( resource ) {
-    this.#resource = resource
+    this.resource = resource
   }
   
-  get permissions() {
-    return this.#permissions
-  }
-  get resource() {
-    return this.#resource
-  }
 
   async updatePermissions() {
-    if ( this.#resource.hasOwnProperty("extension") ) {
-      let roles = this.#resource.extension.filter( ext => ext.url === ROLE_EXTENSION )
+    if ( this.resource.hasOwnProperty("extension") ) {
+      let roles = this.resource.extension.filter( ext => ext.url === ROLE_EXTENSION )
       for( let role of roles ) {
         try {
-          await user.addRole( this.#permissions, role.valueReference.reference )
+          await user.addRole( this.permissions, role.valueReference.reference )
         } catch( err ) {
           console.error( "Unable to load permissions", role, err )
         }
@@ -213,16 +247,16 @@ class User {
     }
   }
 
-  addPermission( permission, resource, field ) {
-    return user.addPermission( this.#permissions, permission, resource, field )
+  addPermission( permission, resource, id, constraint, field ) {
+    return user.addPermission( this.permissions, permission, resource, id, constraint, field )
   }
 
   /**
    * Gets a specific permission from the permissions object without any additional checking
    */
-  __getPermission( permission, resource ) {
+  __hasPermission( permission, resource ) {
     try {
-      return this.#permissions[permission][resource]
+      return this.permissions[permission][resource]
     } catch( err ) {
       return false
     }
@@ -230,29 +264,39 @@ class User {
   /**
    * Gets a permission from the permissions object by checking for overriding values.
    */
-  getPermission( permission, resource ) {
-    let perms = [ "*", permission ]
+  hasPermission( permission, resource, id ) {
+    let perms = [ "*" ]
+    if ( permission !== "*" )
+      perms.push( permission )
     let resources = [ "*" ]
-    if ( resource.includes( '/' ) ) {
-      resources.push( resource.slice( 0, resource.indexOf( '/' ) ) )
-    } 
-    resources.push( resource )
-    let fieldList = {}
+    if ( resource !== "*" )
+      resources.push( resource )
+
+    let results = {}
 
     for( let perm of perms ) {
       for( let res of resources ) {
-        let allowed = this.__getPermission( perm, res )
+        let allowed = this.__hasPermission( perm, res )
         if ( allowed === true ) {
           return true
-        } else if ( isObject( allowed ) ) {
-          fieldList = { ...fieldList, ...allowed }
+        } else {
+          // override with most precise
+          results = allowed
         }
       }
     }
-    if ( Object.keys(fieldList).length === 0 ) {
+    if ( Object.keys(results).length === 0 ) {
       return false
     } else {
-      return fieldList
+      if ( id ) {
+        if ( results.hasOwnProperty( "id" ) && results.id.hasOwnProperty( id ) ) {
+          return results.id[id]
+        }
+        if ( results.hasOwnProperty( "*" ) ) {
+          return results["*"]
+        }
+      }
+      return results
     }
   }
 
@@ -260,20 +304,20 @@ class User {
    * Reset the permissions list
    */
   resetPermissions() {
-    this.#permissions = {}
+    this.permissions = {}
   }
 
   checkPassword( password ) {
-    let details = this.#resource.extension.find( ext => 
+    let details = this.resource.extension.find( ext => 
       ext.url === "http://ihris.org/fhir/StructureDefinition/ihris-password" )
     if ( !details ) {
-      console.error( "Password details don't exist in user "+this.#resource.id )
+      console.error( "Password details don't exist in user "+this.resource.id )
       return false
     }
     let hash = details.extension.find( ext => ext.url === "password" )
     let salt = details.extension.find( ext => ext.url === "salt" )
     if ( !hash || !hash.valueString || !salt || !salt.valueString ) {
-      console.error( "Hash or salt doesn't exist in user "+this.#resource.id )
+      console.error( "Hash or salt doesn't exist in user "+this.resource.id )
       return false
     }
     let compare = user.hashPassword( password, salt.valueString )
@@ -285,7 +329,7 @@ class User {
   }
 
   update() {
-    return fhirAxios.update( this.#resource )
+    return fhirAxios.update( this.resource )
   }
 
 }

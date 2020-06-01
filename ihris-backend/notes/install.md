@@ -64,6 +64,14 @@ sudo mkdir /var/lib/tomcat9/target
 sudo chown tomcat:tomcat /var/lib/tomcat9/target
 sudo cp target/hapi.war /var/lib/tomcat9/webapps
 ```
+
+#### Load basic definitions
+Download and install hapi-fhir-cli:
+https://hapifhir.io/hapi-fhir/docs/tools/hapi_fhir_cli.html
+```bash
+./hapi-fhir-cli upload-definitions -v r4 -t http://localhost:8080/hapi/fhir/
+```
+
 ## SUSHI
 ```bash
 sudo npm install -g fsh-sushi@beta

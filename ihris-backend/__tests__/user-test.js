@@ -11,8 +11,8 @@ describe( 'User module for working with users (Person resource)', () => {
 
   describe( 'Checking non-user specific functionality', () => {
     const PERM_RESULTS_MANUAL = {
-      "read": { "Practitioner/abc": true },
-      "write": { "Practitioner/abc": true }
+      "read": { "Practitioner": { "id": { "abc": true } } },
+      "write": { "Practitioner": { "id": { "abc": true } } }
     }
     const MOCK_VALUESET_PERM = {
       "resourceType": "ValueSet",
@@ -42,12 +42,12 @@ describe( 'User module for working with users (Person resource)', () => {
         ]
       }
     }
-    const MOCK_VALUESET_PROFILE = {
+    const MOCK_VALUESET_RESOURCE = {
       "resourceType": "ValueSet",
       "status": "active",
       "compose": {
         "include": [
-          { "system": "http://ihris.org/fhir/CodeSystem/ihris-task-profile" }
+          { "system": "http://ihris.org/fhir/CodeSystem/ihris-task-resource" }
         ]
       },
       "expansion": {
@@ -60,29 +60,28 @@ describe( 'User module for working with users (Person resource)', () => {
           { "name": "count", "valueInteger": 1000 }
         ],
         "contains": [
-          { "system": "http://ihris.org/fhir/CodeSystem/ihris-task-profile", "code": "*", "display": "All" },
-          { "system": "http://ihris.org/fhir/CodeSystem/ihris-task-profile", "code": "Practitioner", "display": "Practitioner" },
-          { "system": "http://ihris.org/fhir/CodeSystem/ihris-task-profile", "code": "ihris-practitioner", "display": "ihris-practitioner" },
-          { "system": "http://ihris.org/fhir/CodeSystem/ihris-task-profile", "code": "StructureDefinition", "display": "StructureDefinition" },
-          { "system": "http://ihris.org/fhir/CodeSystem/ihris-task-profile", "code": "ValueSet", "display": "ValueSet" },
-          { "system": "http://ihris.org/fhir/CodeSystem/ihris-task-profile", "code": "CodeSystem", "display": "CodeSystem" }
+          { "system": "http://ihris.org/fhir/CodeSystem/ihris-task-resource", "code": "*", "display": "All" },
+          { "system": "http://ihris.org/fhir/CodeSystem/ihris-task-resource", "code": "Practitioner", "display": "Practitioner" },
+          { "system": "http://ihris.org/fhir/CodeSystem/ihris-task-resource", "code": "StructureDefinition", "display": "StructureDefinition" },
+          { "system": "http://ihris.org/fhir/CodeSystem/ihris-task-resource", "code": "ValueSet", "display": "ValueSet" },
+          { "system": "http://ihris.org/fhir/CodeSystem/ihris-task-resource", "code": "CodeSystem", "display": "CodeSystem" }
         ]
       }
     }
     const VALUESET_EXPANSION_PERM = [ '*', 'read', 'write', 'delete' ]
-    const VALUESET_EXPANSION_PROFILE = [ '*', 'Practitioner', 'ihris-practitioner', 'StructureDefinition', 'ValueSet', 'CodeSystem' ]
+    const VALUESET_EXPANSION_RESOURCE = [ '*', 'Practitioner', 'StructureDefinition', 'ValueSet', 'CodeSystem' ]
 
 
     test( 'checks manual adding of permission', (done) => {
       axios.__setFhirResults( DEFAULT_URL + "ValueSet/ihris-task-permission/$expand", null, MOCK_VALUESET_PERM )
-      axios.__setFhirResults( DEFAULT_URL + "ValueSet/ihris-task-profile/$expand", null, MOCK_VALUESET_PROFILE )
+      axios.__setFhirResults( DEFAULT_URL + "ValueSet/ihris-task-resource/$expand", null, MOCK_VALUESET_RESOURCE )
       let userObj = user.__testUser()
       user.loadTaskList().then( () => {
-        expect( userObj.addPermission( "read", "Practitioner/abc" ) ).toBeTruthy()
-        expect( userObj.addPermission( "write", "Practitioner/abc" ) ).toBeTruthy()
+        expect( userObj.addPermission( "read", "Practitioner", "abc" ) ).toBeTruthy()
+        expect( userObj.addPermission( "write", "Practitioner", "abc" ) ).toBeTruthy()
         // Shouldn't include these
-        expect( userObj.addPermission( "delete", "Practitioner/abc" ) ).toBeFalsy()
-        expect( userObj.addPermission( "delete", "Practitioner", "name" ) ).toBeFalsy()
+        expect( userObj.addPermission( "delete", "Practitioner", "abc" ) ).toBeFalsy()
+        expect( userObj.addPermission( "delete", "Practitioner", null, null, "name" ) ).toBeFalsy()
         expect( userObj.permissions ).toEqual( PERM_RESULTS_MANUAL )
         done()
       } ).catch( (err) => {
@@ -92,13 +91,13 @@ describe( 'User module for working with users (Person resource)', () => {
 
     test( 'checks loading needed valuesets', (done) => {
       axios.__setFhirResults( DEFAULT_URL + "ValueSet/ihris-task-permission/$expand", null, MOCK_VALUESET_PERM )
-      axios.__setFhirResults( DEFAULT_URL + "ValueSet/ihris-task-profile/$expand", null, MOCK_VALUESET_PROFILE )
+      axios.__setFhirResults( DEFAULT_URL + "ValueSet/ihris-task-resource/$expand", null, MOCK_VALUESET_RESOURCE )
       expect( user.tasksLoading ).toBeFalsy()
       user.loadTaskList( true ).then( () => {
         expect( user.tasksLoaded ).toBeTruthy()
         expect( user.tasksLoading ).toBeFalsy()
         expect( user.valueSet["ihris-task-permission"] ).toEqual( VALUESET_EXPANSION_PERM )
-        expect( user.valueSet["ihris-task-profile"] ).toEqual( VALUESET_EXPANSION_PROFILE )
+        expect( user.valueSet["ihris-task-resource"] ).toEqual( VALUESET_EXPANSION_RESOURCE )
         done()
       } ).catch( (err) => {
         done( err )
@@ -108,28 +107,30 @@ describe( 'User module for working with users (Person resource)', () => {
     test( 'checks getting permissions', () => {
       let userObj = user.__testUser()
       expect( userObj.addPermission( "*", "*" ) ).toBeTruthy()
-      expect( userObj.getPermission( "read", "Practitioner" ) ).toBeTruthy()
+      expect( userObj.hasPermission( "read", "Practitioner" ) ).toBeTruthy()
       userObj.resetPermissions()
 
       expect( userObj.addPermission( "read", "Practitioner" ) ).toBeTruthy()
-      expect( userObj.getPermission( "read", "Practitioner/1234" ) ).toBeTruthy()
+      expect( userObj.hasPermission( "read", "Practitioner", "1234" ) ).toBeTruthy()
       userObj.resetPermissions()
 
 
-      expect( userObj.addPermission( "read", "Practitioner", "name" ) ).toBeTruthy()
-      expect( userObj.addPermission( "read", "Practitioner/123", "gender" ) ).toBeTruthy()
-      expect( userObj.getPermission( "read", "Practitioner/123" ) ).toEqual( { "name": true, "gender": true } )
-      expect( userObj.getPermission( "read", "Practitioner" ) ).toEqual( { "name": true } )
+      expect( userObj.addPermission( "read", "Practitioner", null, null, "name" ) ).toBeTruthy()
+      expect( userObj.addPermission( "read", "Practitioner", "123", null, "gender" ) ).toBeTruthy()
+      expect( userObj.hasPermission( "read", "Practitioner", "123" ) ).toEqual( { "gender": true } )
+      //console.log( userObj.hasPermission( "read", "Practitioner" ) )
+      //console.log( JSON.stringify(userObj.permissions, null, 2) )
+      expect( userObj.hasPermission( "read", "Practitioner" ) ).toEqual( { "*": { "name": true }, "id" : { "123": { "gender" : true } } } )
       expect( userObj.addPermission( "read", "Practitioner" ) ).toBeTruthy()
-      expect( userObj.getPermission( "read", "Practitioner" ) ).toBeTruthy()
-      expect( userObj.getPermission( "read", "Practitioner/123" ) ).toBeTruthy()
-      expect( userObj.getPermission( "write", "Practitioner" ) ).toBeFalsy()
+      expect( userObj.hasPermission( "read", "Practitioner" ) ).toBeTruthy()
+      expect( userObj.hasPermission( "read", "Practitioner", "123" ) ).toBeTruthy()
+      expect( userObj.hasPermission( "write", "Practitioner" ) ).toBeFalsy()
 
     } )
 
     test( 'checks adding invalid permissions', (done) => {
       axios.__setFhirResults( DEFAULT_URL + "ValueSet/ihris-task-permission/$expand", null, MOCK_VALUESET_PERM )
-      axios.__setFhirResults( DEFAULT_URL + "ValueSet/ihris-task-profile/$expand", null, MOCK_VALUESET_PROFILE )
+      axios.__setFhirResults( DEFAULT_URL + "ValueSet/ihris-task-resource/$expand", null, MOCK_VALUESET_RESOURCE )
       user.loadTaskList( true ).then( () => {
         let userObj = user.__testUser()
         expect( userObj.addPermission( "abc", "Practitioner" ) ).toBeFalsy()
@@ -211,35 +212,37 @@ describe( 'User module for working with users (Person resource)', () => {
           "url": "http://ihris.org/fhir/StructureDefinition/ihris-task",
           "extension": [
             { "url": "permission", "valueCode": "read" },
-            { "url": "profile", "valueCode": "StructureDefinition" }
+            { "url": "resource", "valueCode": "StructureDefinition" }
           ]
         },
         {
           "url": "http://ihris.org/fhir/StructureDefinition/ihris-task",
           "extension": [
             { "url": "permission", "valueCode": "read" },
-            { "url": "profile", "valueCode": "CodeSystem" }
+            { "url": "resource", "valueCode": "CodeSystem" }
           ]
         },
         {
           "url": "http://ihris.org/fhir/StructureDefinition/ihris-task",
           "extension": [
             { "url": "permission", "valueCode": "read" },
-            { "url": "profile", "valueCode": "ValueSet" }
+            { "url": "resource", "valueCode": "ValueSet" }
           ]
         },
         {
           "url": "http://ihris.org/fhir/StructureDefinition/ihris-task",
           "extension": [
             { "url": "permission", "valueCode": "read" },
-            { "url": "resource", "valueReference": { "reference": "Practitioner/1234" } }
+            { "url": "resource", "valueCode": "Practitioner" },
+            { "url": "id", "valueId": "1234" }
           ]
         },
         {
           "url": "http://ihris.org/fhir/StructureDefinition/ihris-task",
           "extension": [
             { "url": "permission", "valueCode": "write" },
-            { "url": "resource", "valueReference": { "reference": "Practitioner/1234" } },
+            { "url": "resource", "valueCode": "Practitioner" },
+            { "url": "id", "valueId": "1234" },
             { "url": "field", "valueString": "name" }
           ]
         }
@@ -262,14 +265,16 @@ describe( 'User module for working with users (Person resource)', () => {
           "url": "http://ihris.org/fhir/StructureDefinition/ihris-task",
           "extension": [
             { "url": "permission", "valueCode": "read" },
-            { "url": "resource", "valueReference": { "reference": "ValueSet/ihris-test-valueset" } }
+            { "url": "resource", "valueCode": "ValueSet" },
+            { "url": "id", "valueId": "ihris-test-valueset" }
           ]
         },
         {
           "url": "http://ihris.org/fhir/StructureDefinition/ihris-task",
           "extension": [
             { "url": "permission", "valueCode": "read" },
-            { "url": "resource", "valueReference": { "reference": "Practitioner/1234" } },
+            { "url": "resource", "valueCode": "Practitioner" },
+            { "url": "id", "valueId": "1234" },
             { "url": "field", "valueString": "name" }
           ]
         },
@@ -277,7 +282,8 @@ describe( 'User module for working with users (Person resource)', () => {
           "url": "http://ihris.org/fhir/StructureDefinition/ihris-task",
           "extension": [
             { "url": "permission", "valueCode": "write" },
-            { "url": "resource", "valueReference": { "reference": "Practitioner/1234" } },
+            { "url": "resource", "valueCode": "Practitioner" },
+            { "url": "id", "valueId": "1234" },
             { "url": "field", "valueString": "name" }
           ]
         },
@@ -285,7 +291,8 @@ describe( 'User module for working with users (Person resource)', () => {
           "url": "http://ihris.org/fhir/StructureDefinition/ihris-task",
           "extension": [
             { "url": "permission", "valueCode": "write" },
-            { "url": "resource", "valueReference": { "reference": "Practitioner/1234" } },
+            { "url": "resource", "valueCode": "Practitioner" },
+            { "url": "id", "valueId": "1234" },
             { "url": "field", "valueString": "gender" }
           ]
         }
@@ -301,10 +308,9 @@ describe( 'User module for working with users (Person resource)', () => {
         "StructureDefinition": true,
         "CodeSystem": true,
         "ValueSet": true,
-        "Practitioner/1234": true,
-        "ValueSet/ihris-test-valueset": true
+        "Practitioner": { "id": { "1234" : true } }
       },
-      "write": { "Practitioner/1234": { "name": true, "gender": true } }
+      "write": { "Practitioner" : { "id": { "1234": { "name": true, "gender": true } } } }
     }
 
 

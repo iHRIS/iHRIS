@@ -9,11 +9,11 @@ Description:    "iHRIS Profile of the Basic resource to manage roles."
       IhrisAssignRole named role 0..* and
       IhrisTask named task 0..*
 
-Invariant:      ihris-task-profile-resource
-Description:    "Only one of extension[profile].valueCode or extension[resource].valueReference SHALL be present."
-Expression:     "extension(url = profile).exists() xor extension(url = resource).exists()"
+Invariant:      ihris-task-instance-constraint
+Description:    "Only one of extension[instance].valueCode or extension[constraint].valueReference SHALL be present."
+Expression:     "extension(url = instance).exists() xor extension(url = constraint).exists()"
 Severity:       #error
-XPath:          "exists(f:extension(url = profile)) != exists(f:extension(url = resource))"
+XPath:          "exists(f:extension(url = instance)) != exists(f:extension(url = constraint))"
 
 Extension:      IhrisTask
 Id:             ihris-task
@@ -21,18 +21,20 @@ Title:          "iHRIS Task"
 Description:    "iHRIS Task to be assigned to task groups or roles."
 * ^context.type = #element
 * ^context.expression = IhrisRole
-* obeys ihris-task-profile-resource
+* obeys ihris-task-instance-constraint
 * extension contains
       permission 1..1 MS and
-      profile 0..1 MS and
+      resource 0..1 MS and
+      instance 0..1 MS and
       field 0..1 MS and
-      resource 0..1 MS
+      constraint 0..1 MS
 * extension[permission].value[x] only code
 * extension[permission].valueCode from IhrisTaskPermissionValueSet (required)
-* extension[profile].value[x] only code
-* extension[profile].valueCode from IhrisTaskProfileValueSet (extensible)
+* extension[resource].value[x] only code
+* extension[resource].valueCode from IhrisTaskResourceValueSet (extensible)
+* extension[instance].value[x] only id
 * extension[field].value[x] only string
-* extension[resource].value[x] only Reference
+* extension[constraint].value[x] only string
 
 Extension:      IhrisRolePrimary
 Id:             ihris-role-primary
@@ -67,20 +69,20 @@ Id:             ihris-task-permission
 Title:          "Code system for task permissions."
 * codes from system IhrisTaskPermissionCodeSystem
 
-CodeSystem:     IhrisTaskProfileCodeSystem
-Id:             ihris-task-profile
+CodeSystem:     IhrisTaskResourceCodeSystem
+Id:             ihris-task-resource
 Title:          "Code system for task permissions."
 * #*                    "All"
 * #Practitioner         "Practitioner"
-* #ihris-practitioner   "ihris-practitioner"
 * #StructureDefinition  "StructureDefinition"
 * #ValueSet             "ValueSet"
 * #CodeSystem           "CodeSystem"
+* #Basic                "Basic"
 
-ValueSet:       IhrisTaskProfileValueSet
-Id:             ihris-task-profile
+ValueSet:       IhrisTaskResourceValueSet
+Id:             ihris-task-resource
 Title:          "Code system for task permissions."
-* codes from system IhrisTaskProfileCodeSystem
+* codes from system IhrisTaskResourceCodeSystem
 
 Instance:       ihris-role-open
 InstanceOf:     IhrisRole
@@ -89,11 +91,11 @@ Usage:          #example
 * code = IhrisResourceCodeSystem#role
 * extension[primary].valueBoolean = true
 * extension[task][0].extension[permission].valueCode = IhrisTaskPermissionCodeSystem#read
-* extension[task][0].extension[profile].valueCode = IhrisTaskProfileCodeSystem#StructureDefinition
+* extension[task][0].extension[resource].valueCode = IhrisTaskResourceCodeSystem#StructureDefinition
 * extension[task][1].extension[permission].valueCode = IhrisTaskPermissionCodeSystem#read
-* extension[task][1].extension[profile].valueCode = IhrisTaskProfileCodeSystem#CodeSystem
+* extension[task][1].extension[resource].valueCode = IhrisTaskResourceCodeSystem#CodeSystem
 * extension[task][2].extension[permission].valueCode = IhrisTaskPermissionCodeSystem#read
-* extension[task][2].extension[profile].valueCode = IhrisTaskProfileCodeSystem#ValueSet
+* extension[task][2].extension[resource].valueCode = IhrisTaskResourceCodeSystem#ValueSet
 
 Instance:       ihris-role-admin
 InstanceOf:     IhrisRole
@@ -102,5 +104,5 @@ Usage:          #example
 * code = IhrisResourceCodeSystem#role
 * extension[primary].valueBoolean = true
 * extension[task][0].extension[permission].valueCode = IhrisTaskPermissionCodeSystem#*
-* extension[task][0].extension[profile].valueCode = IhrisTaskProfileCodeSystem#*
+* extension[task][0].extension[resource].valueCode = IhrisTaskResourceCodeSystem#*
 * extension[role][0].valueReference = Reference(Basic/ihris-role-open)
