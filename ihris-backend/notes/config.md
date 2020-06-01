@@ -47,7 +47,7 @@ IHRIS_FHIR__SERVER=http://locahost:8080/hapi/fhir
 ## Config options
 
 ### Allowed in local config
-* fhir:server
+* fhir:server (default: http://localhost:8080/hapi/fhir/)
 * fhir:username
 * fhir:password
 * config
@@ -56,7 +56,7 @@ IHRIS_FHIR__SERVER=http://locahost:8080/hapi/fhir
 ** name = public key string
 
 ### Allowed in local or remote
-* user:loggedout = id of logged out user resource
+* user:loggedout = id of logged out user resource (default: ihris-user-loggedout)
 * auth:google:clientId
 * auth:google:clientSecret
 * modules

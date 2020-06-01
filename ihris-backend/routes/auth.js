@@ -12,8 +12,8 @@ const defaultUser = nconf.get("user:loggedout") || "ihris-user-loggedout"
 
 passport.use( new GoogleStrategy( 
   {
-    clientID: nconf.get("auth:google:clientId"),
-    clientSecret: nconf.get("auth:google:clientSecret"),
+    clientID: nconf.get("auth:google:clientId") || "not set",
+    clientSecret: nconf.get("auth:google:clientSecret") || "not set",
     callbackURL: "http://localhost:3000/auth/google/callback"
   },
   (accessToken, refreshToken, profile, done) => {
@@ -105,9 +105,13 @@ router.use(passport.session())
 
 router.passport = passport
 
-router.get('/', passport.authenticate('custom-loggedout', { failureRedirect: '/' } ),
+router.get('/', passport.authenticate('custom-loggedout', {}),
   ( req, res ) => {
-    res.status(200).json({"user":req.user})
+    if ( req.user ) {
+      res.status(200).json({ok:true})
+    } else {
+      res.status(200).json({ok:false})
+    }
   }
 )
 
@@ -115,14 +119,14 @@ router.get('/google', passport.authenticate('google', { scope: ['email'] } ) )
 router.get('/google/callback',
   passport.authenticate('google', { failureRedirect: '/' } ),
   ( req, res ) => {
-    res.status(200).json({"user":req.user})
+    res.status(200).json({user:req.user})
   }
 )
 
 router.post("/login",
-  passport.authenticate('local', { failureRedirect: '/' } ),
+  passport.authenticate('local', {}),
   ( req, res ) => {
-    res.status(200).json({"user":req.user})
+    res.status(200).json({ok:true})
   }
 )
 
@@ -131,7 +135,7 @@ router.get('/test',
   ( req, res ) => {
     if ( !req.user.accesses ) req.user.accesses = 0
     req.user.accesses++
-    res.status(200).json({"user":req.user})
+    res.status(200).json({user:req.user})
   }
 )
 
