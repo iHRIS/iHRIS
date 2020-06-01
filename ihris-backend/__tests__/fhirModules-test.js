@@ -91,14 +91,11 @@ describe( 'Load modules from FHIR server', () => {
     require('axios').__setFhirResults( DEFAULT_URL + "Library/test-module", null, MOCK_FHIR_OBJ )
   } )
 
-  test( 'load a module from FHIR', (done) => {
+  test( 'load a module from FHIR', () => {
     const fhirModules = require('../modules/fhirModules')
-    fhirModules.require( "test-module" ).then( (requiredModule) => {
+    return fhirModules.require( "test-module" ).then( (requiredModule) => {
       expect( requiredModule.loaded ).toBeTruthy()
       expect( requiredModule.testString() ).toEqual( "test" )
-      done()
-    } ).catch( (err) => {
-      done( err )
     } )
   } )
 

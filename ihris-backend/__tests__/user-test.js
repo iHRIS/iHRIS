@@ -72,35 +72,29 @@ describe( 'User module for working with users (Person resource)', () => {
     const VALUESET_EXPANSION_RESOURCE = [ '*', 'Practitioner', 'StructureDefinition', 'ValueSet', 'CodeSystem' ]
 
 
-    test( 'checks manual adding of permission', (done) => {
+    test( 'checks manual adding of permission', () => {
       axios.__setFhirResults( DEFAULT_URL + "ValueSet/ihris-task-permission/$expand", null, MOCK_VALUESET_PERM )
       axios.__setFhirResults( DEFAULT_URL + "ValueSet/ihris-task-resource/$expand", null, MOCK_VALUESET_RESOURCE )
       let userObj = user.__testUser()
-      user.loadTaskList().then( () => {
+      return user.loadTaskList().then( () => {
         expect( userObj.addPermission( "read", "Practitioner", "abc" ) ).toBeTruthy()
         expect( userObj.addPermission( "write", "Practitioner", "abc" ) ).toBeTruthy()
         // Shouldn't include these
         expect( userObj.addPermission( "delete", "Practitioner", "abc" ) ).toBeFalsy()
         expect( userObj.addPermission( "delete", "Practitioner", null, null, "name" ) ).toBeFalsy()
         expect( userObj.permissions ).toEqual( PERM_RESULTS_MANUAL )
-        done()
-      } ).catch( (err) => {
-        done( err )
       } )
     } )
 
-    test( 'checks loading needed valuesets', (done) => {
+    test( 'checks loading needed valuesets', () => {
       axios.__setFhirResults( DEFAULT_URL + "ValueSet/ihris-task-permission/$expand", null, MOCK_VALUESET_PERM )
       axios.__setFhirResults( DEFAULT_URL + "ValueSet/ihris-task-resource/$expand", null, MOCK_VALUESET_RESOURCE )
       expect( user.tasksLoading ).toBeFalsy()
-      user.loadTaskList( true ).then( () => {
+      return user.loadTaskList( true ).then( () => {
         expect( user.tasksLoaded ).toBeTruthy()
         expect( user.tasksLoading ).toBeFalsy()
         expect( user.valueSet["ihris-task-permission"] ).toEqual( VALUESET_EXPANSION_PERM )
         expect( user.valueSet["ihris-task-resource"] ).toEqual( VALUESET_EXPANSION_RESOURCE )
-        done()
-      } ).catch( (err) => {
-        done( err )
       } )
     } )
 
@@ -128,17 +122,14 @@ describe( 'User module for working with users (Person resource)', () => {
 
     } )
 
-    test( 'checks adding invalid permissions', (done) => {
+    test( 'checks adding invalid permissions', () => {
       axios.__setFhirResults( DEFAULT_URL + "ValueSet/ihris-task-permission/$expand", null, MOCK_VALUESET_PERM )
       axios.__setFhirResults( DEFAULT_URL + "ValueSet/ihris-task-resource/$expand", null, MOCK_VALUESET_RESOURCE )
-      user.loadTaskList( true ).then( () => {
+      return user.loadTaskList( true ).then( () => {
         let userObj = user.__testUser()
         expect( userObj.addPermission( "abc", "Practitioner" ) ).toBeFalsy()
         expect( userObj.addPermission( "read", "abc" ) ).toBeFalsy()
         expect( userObj.permissions ).toEqual( {} )
-        done()
-      } ).catch( (err) => {
-        done( err )
       } )
     } )
 
@@ -314,39 +305,30 @@ describe( 'User module for working with users (Person resource)', () => {
     }
 
 
-    test( 'looks up user by id', (done) => {
+    test( 'looks up user by id', () => {
       axios.__setFhirResults( DEFAULT_URL + "Person/ihris-user-test", null, MOCK_LOCAL_OBJ )
-      user.find( 'ihris-user-test' ).then( (userObj) => {
+      return user.find( 'ihris-user-test' ).then( (userObj) => {
         expect( userObj.resource ).toEqual( MOCK_LOCAL_OBJ )
-        done()
-      } ).catch( (err) => {
-        done(err)
       } )
     } )
 
-    test( 'checks password on user', (done) => {
+    test( 'checks password on user', () => {
       let hash = user.hashPassword( password )
       MOCK_LOCAL_OBJ.extension[0].extension[0].valueString = hash.hash
       MOCK_LOCAL_OBJ.extension[0].extension[1].valueString = hash.salt
       axios.__setFhirResults( DEFAULT_URL + "Person/ihris-user-test", null, MOCK_LOCAL_OBJ )
-      user.find( 'ihris-user-test' ).then( (userObj) => {
+      return user.find( 'ihris-user-test' ).then( (userObj) => {
         expect( userObj.checkPassword( password ) ).toBeTruthy()
         expect( userObj.checkPassword( 'fake' ) ).toBeFalsy()
-        done()
-      } ).catch( (err) => {
-        done(err)
       } )
     } )
 
-    test( 'checks role/permission loading', (done) => {
+    test( 'checks role/permission loading', () => {
       axios.__setFhirResults( DEFAULT_URL + "Person/ihris-user-test", null, MOCK_PERM_OBJ )
       axios.__setFhirResults( DEFAULT_URL + "Basic/ihris-role-test", null, MOCK_ROLE_OBJ )
       axios.__setFhirResults( DEFAULT_URL + "Basic/ihris-role-test2", null, MOCK_ROLE_SECONDARY_OBJ )
-      user.find( 'ihris-user-test' ).then( (userObj) => {
+      return user.find( 'ihris-user-test' ).then( (userObj) => {
         expect( userObj.permissions ).toEqual( PERM_RESULTS )
-        done()
-      } ).catch( (err) => {
-        done(err)
       } )
     } )
 
@@ -391,33 +373,24 @@ describe( 'User module for working with users (Person resource)', () => {
     }
 
 
-    test( 'looks up user by query', (done) => {
+    test( 'looks up user by query', () => {
       axios.__setFhirResults( DEFAULT_URL + "Person", { _id: "ihris-user-test" }, MOCK_LOOKUP_OBJ )
-      user.lookup( { _id: 'ihris-user-test' } ).then( (userObj) => {
+      return user.lookup( { _id: 'ihris-user-test' } ).then( (userObj) => {
         expect( userObj.resource ).toEqual( MOCK_LOOKUP_OBJ.entry[0].resource )
-        done()
-      } ).catch( (err) => {
-        done(err)
       } )
     } )
 
-    test( 'looks up user by email', (done) => {
+    test( 'looks up user by email', () => {
       axios.__setFhirResults( DEFAULT_URL + "Person", { telecom: "email|test@test.org" }, MOCK_LOOKUP_OBJ )
-      user.lookupByEmail( "test@test.org" ).then( (userObj) => {
+      return user.lookupByEmail( "test@test.org" ).then( (userObj) => {
         expect( userObj.resource ).toEqual( MOCK_LOOKUP_OBJ.entry[0].resource )
-        done()
-      } ).catch( (err) => {
-        done(err)
       } )
     } )
 
-    test( 'looks up user by provider id', (done) => {
+    test( 'looks up user by provider id', () => {
       axios.__setFhirResults( DEFAULT_URL + "Person", { identifier: "test_provider|08734987439874309587" }, MOCK_LOOKUP_OBJ )
-      user.lookupByProvider( "test_provider", "08734987439874309587" ).then( (userObj) => {
+      return user.lookupByProvider( "test_provider", "08734987439874309587" ).then( (userObj) => {
         expect( userObj.resource ).toEqual( MOCK_LOOKUP_OBJ.entry[0].resource )
-        done()
-      } ).catch( (err) => {
-        done(err)
       } )
     } )
   } )

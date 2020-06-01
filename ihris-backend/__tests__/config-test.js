@@ -106,17 +106,14 @@ describe( 'Loads nconf plus base config', () => {
     expect( config ).toEqual( CONFIG_FILE_OUTPUT )
   } )
 
-  test( 'loads default config and remote config from mock fhir server', (done) => {
+  test( 'loads default config and remote config from mock fhir server', () => {
     const nconf = require('../modules/config')
-    nconf.loadRemote().then( () => {
+    return nconf.loadRemote().then( () => {
       let config = nconf.get()
       // Delete the argv default entries
       delete config['$0']
       delete config['_']
       expect( config ).toEqual( CONFIG_FULL_OUTPUT )
-      done()
-    } ).catch( (err) => {
-      done(err)
     } )
   } )
 

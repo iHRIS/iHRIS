@@ -132,44 +132,32 @@ describe( 'interacts with FHIR server using axios', () => {
   const axios = require('axios')
 
 
-  test( 'reads a FHIR resource', (done) => {
+  test( 'reads a FHIR resource', () => {
     axios.__setFhirResults( DEFAULT_URL + "Parameters/test", null, MOCK_FHIR_OBJ )
-    fhirAxios.read( "Parameters", "test" ).then( (response) => {
+    return fhirAxios.read( "Parameters", "test" ).then( (response) => {
       expect( response ).toEqual( MOCK_FHIR_OBJ )
-      done()
-    } ).catch( (err) => {
-      done( err )
     } )
   } )
 
-  test( 'searches a FHIR resource', (done) => {
+  test( 'searches a FHIR resource', () => {
     axios.__setFhirResults( DEFAULT_URL + "Parameters", { param: "query" }, MOCK_FHIR_OBJ )
-    fhirAxios.search( "Parameters", { param: "query" } ).then( (response) => {
+    return fhirAxios.search( "Parameters", { param: "query" } ).then( (response) => {
       expect( response ).toEqual( MOCK_FHIR_OBJ )
-      done()
-    } ).catch( (err) => {
-      done( err )
     } )
   } )
 
-  test( 'updates a FHIR resource', (done) => {
+  test( 'updates a FHIR resource', () => {
     axios.__setFhirResults( DEFAULT_URL + "Parameters/test", MOCK_FHIR_OBJ, MOCK_FHIR_OBJ )
-    fhirAxios.update( MOCK_FHIR_OBJ ).then ( (response) => {
+    return fhirAxios.update( MOCK_FHIR_OBJ ).then ( (response) => {
       expect( response ).toEqual( MOCK_FHIR_OBJ )
-      done()
-    } ).catch( (err) => {
-      done( err )
     } )
   } )
 
-  test( 'expands a FHIR ValueSet', (done) => {
+  test( 'expands a FHIR ValueSet', () => {
     axios.__setFhirResults( DEFAULT_URL + "ValueSet/ihris-task-permission/$expand", null, MOCK_VALUESET_OBJ )
     axios.__setFhirResults( DEFAULT_URL + "ValueSet/ihris-task-permission/$expand", { offset: 2, count: 2 }, MOCK_VALUESET_OBJ_2 )
-    fhirAxios.expand( "ihris-task-permission" ).then( (results) => {
+    return fhirAxios.expand( "ihris-task-permission" ).then( (results) => {
       expect( results ).toEqual( COMBINED_VALUESET )
-      done()
-    } ).catch( (err) => {
-      done( err )
     } )
 
   } )
