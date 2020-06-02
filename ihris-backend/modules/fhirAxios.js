@@ -84,7 +84,7 @@ const fhirAxios = {
 
     } )
   },
-  expand: ( valueset, params ) => {
+  expand: ( valueset, params, complete, containsOnly ) => {
     return new Promise( (resolve, reject) => {
       if ( !valueset ) {
         reject( new Error( "valueset must be defined" ) )
@@ -94,23 +94,51 @@ const fhirAxios = {
 
       let auth = fhirAxios.__getAuth()
       axios.get( url.href, { auth: auth, params: params } ).then( (response) => {
-        try {
-          let total = response.data.expansion.total
-          let count = response.data.expansion.parameter.find( param => param.name === "count" ).valueInteger
-          let offset = response.data.expansion.offset
+        if ( complete ) {
+          try {
+            let total = response.data.expansion.total
+            let count = response.data.expansion.parameter.find( param => param.name === "count" ).valueInteger
+            let offset = response.data.expansion.offset
 
-          if ( total > offset + count ) {
-            offset += count
-            fhirAxios.expand( valueset, { count: count, offset: offset } ).then ( (contains) => {
-              resolve( response.data.expansion.contains.concat( contains ) )
-            } ).catch( (err) => {
-              reject ( err )
-            } )
-          } else {
-            resolve( response.data.expansion.contains )
+            if ( total > offset + count ) {
+              offset += count
+              let paging = { count: count, offset: offset }
+              let newparams = { ...params, ...paging }
+              fhirAxios.expand( valueset, newparams, complete, containsOnly ).then ( (continued) => {
+                if ( containsOnly ) {
+                  resolve( response.data.expansion.contains.concat( continued ) )
+                } else {
+                  response.data.expansion.contains = response.data.expansion.contains.concat( continued.expansion.contains )
+                  resolve( response.data )
+                }
+              } ).catch( (err) => {
+                reject ( err )
+              } )
+            } else {
+              if ( containsOnly ) {
+                resolve( response.data.expansion.contains )
+              } else {
+                resolve( response.data )
+              }
+            }
+          } catch ( err ) {
+            reject( err )
           }
-        } catch ( err ) {
-          reject( err )
+        } else {
+          if ( containsOnly ) {
+            try {
+              let total = response.data.expansion.total
+              if ( total === response.data.expansion.contains.length ) {
+                resolve( response.data.expansion.contains )
+              } else {
+                reject( new Error( "Unable to return only the contains expansion when the full expansion wasn't returned." ) )
+              }
+            } catch( err ) {
+              reject( err )
+            }
+          } else {
+            resolve( response.data )
+          }
         }
       } ).catch( (err) => {
         reject ( err )

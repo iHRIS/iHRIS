@@ -120,6 +120,17 @@ describe( 'User module for working with users (Person resource)', () => {
       expect( userObj.hasPermission( "read", "Practitioner", "123" ) ).toBeTruthy()
       expect( userObj.hasPermission( "write", "Practitioner" ) ).toBeFalsy()
 
+      expect( userObj.hasPermission( "delete", "Practitioner" ) ).toBeFalsy()
+      expect( userObj.hasPermission( "read", "Person" ) ).toBeFalsy()
+
+      userObj.resetPermissions()
+      expect( userObj.addPermission( "*", "Practitioner", null, "name.given = 'Test'" ) ).toBeTruthy()
+      expect( userObj.hasPermission( "read", "Practitioner" ) ).toEqual( { constraint: { "name.given = 'Test'": true } } )
+      expect( userObj.addPermission( "read", "Practitioner", "123" ) ).toBeTruthy()
+      expect( userObj.addPermission( "read", "Practitioner", null, "name.given = 'Test2'" ) ).toBeTruthy()
+      expect( userObj.hasPermission( "read", "Practitioner" ) ).toEqual( { id: { "123": true }, constraint: { "name.given = 'Test2'": true } } )
+      expect( userObj.hasPermission( "read", "Practitioner", "123" ) ).toBeTruthy()
+
     } )
 
     test( 'checks adding invalid permissions', () => {

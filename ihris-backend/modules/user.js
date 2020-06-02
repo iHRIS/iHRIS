@@ -13,6 +13,11 @@ const user = {
   __testUser: () => {
     return new User( {} )
   },
+  restoreUser: ( obj ) => {
+    let userObj = new User( obj.resource )
+    userObj.restorePermissions( obj.permissions )
+    return userObj
+  },
   lookup: ( query ) => {
     return new Promise( (resolve, reject) => {
       fhirAxios.search( "Person", query ).then( async(response) => {
@@ -76,8 +81,8 @@ const user = {
         user.tasksLoaded = false
 
         Promise.all( [
-          fhirAxios.expand( "ihris-task-permission" ),
-          fhirAxios.expand( "ihris-task-resource" )
+          fhirAxios.expand( "ihris-task-permission", null, true, true ),
+          fhirAxios.expand( "ihris-task-resource", null, true, true )
         ] ).then( (results) => {
           user.valueSet[ "ihris-task-permission" ] = results[0].map( exp => exp.code )
           user.valueSet[ "ihris-task-resource" ] = results[1].map( exp => exp.code )
@@ -233,106 +238,111 @@ class User {
     this.resource = resource
   }
   
-
-  async updatePermissions() {
-    if ( this.resource.hasOwnProperty("extension") ) {
-      let roles = this.resource.extension.filter( ext => ext.url === ROLE_EXTENSION )
-      for( let role of roles ) {
-        try {
-          await user.addRole( this.permissions, role.valueReference.reference )
-        } catch( err ) {
-          console.error( "Unable to load permissions", role, err )
-        }
-      }
-    }
-  }
-
-  addPermission( permission, resource, id, constraint, field ) {
-    return user.addPermission( this.permissions, permission, resource, id, constraint, field )
-  }
-
-  /**
-   * Gets a specific permission from the permissions object without any additional checking
-   */
-  __hasPermission( permission, resource ) {
-    try {
-      return this.permissions[permission][resource]
-    } catch( err ) {
-      return false
-    }
-  }
-  /**
-   * Gets a permission from the permissions object by checking for overriding values.
-   */
-  hasPermission( permission, resource, id ) {
-    let perms = [ "*" ]
-    if ( permission !== "*" )
-      perms.push( permission )
-    let resources = [ "*" ]
-    if ( resource !== "*" )
-      resources.push( resource )
-
-    let results = {}
-
-    for( let perm of perms ) {
-      for( let res of resources ) {
-        let allowed = this.__hasPermission( perm, res )
-        if ( allowed === true ) {
-          return true
-        } else {
-          // override with most precise
-          results = allowed
-        }
-      }
-    }
-    if ( Object.keys(results).length === 0 ) {
-      return false
-    } else {
-      if ( id ) {
-        if ( results.hasOwnProperty( "id" ) && results.id.hasOwnProperty( id ) ) {
-          return results.id[id]
-        }
-        if ( results.hasOwnProperty( "*" ) ) {
-          return results["*"]
-        }
-      }
-      return results
-    }
-  }
-
-  /**
-   * Reset the permissions list
-   */
-  resetPermissions() {
-    this.permissions = {}
-  }
-
-  checkPassword( password ) {
-    let details = this.resource.extension.find( ext => 
-      ext.url === "http://ihris.org/fhir/StructureDefinition/ihris-password" )
-    if ( !details ) {
-      console.error( "Password details don't exist in user "+this.resource.id )
-      return false
-    }
-    let hash = details.extension.find( ext => ext.url === "password" )
-    let salt = details.extension.find( ext => ext.url === "salt" )
-    if ( !hash || !hash.valueString || !salt || !salt.valueString ) {
-      console.error( "Hash or salt doesn't exist in user "+this.resource.id )
-      return false
-    }
-    let compare = user.hashPassword( password, salt.valueString )
-    if ( compare.hash === hash.valueString ) {
-      return true
-    } else {
-      return false
-    }
-  }
-
-  update() {
-    return fhirAxios.update( this.resource )
-  }
-
 }
+
+
+User.prototype.restorePermissions = function( permissions ) {
+  this.permissions = permissions
+}
+
+User.prototype.updatePermissions = async function() {
+  if ( this.resource.hasOwnProperty("extension") ) {
+    let roles = this.resource.extension.filter( ext => ext.url === ROLE_EXTENSION )
+    for( let role of roles ) {
+      try {
+        await user.addRole( this.permissions, role.valueReference.reference )
+      } catch( err ) {
+        console.error( "Unable to load permissions", role, err )
+      }
+    }
+  }
+}
+
+User.prototype.addPermission = function( permission, resource, id, constraint, field ) {
+  return user.addPermission( this.permissions, permission, resource, id, constraint, field )
+}
+
+/**
+ * Gets a specific permission from the permissions object without any additional checking
+ */
+User.prototype.__hasPermission = function( permission, resource ) {
+  try {
+    return this.permissions[permission][resource]
+  } catch( err ) {
+    return false
+  }
+}
+/**
+ * Gets a permission from the permissions object by checking for overriding values.
+ */
+User.prototype.hasPermission = function( permission, resource, id ) {
+  let perms = [ "*" ]
+  if ( permission !== "*" )
+    perms.push( permission )
+  let resources = [ "*" ]
+  if ( resource !== "*" )
+    resources.push( resource )
+
+  let results = {}
+
+  for( let perm of perms ) {
+    for( let res of resources ) {
+      let allowed = this.__hasPermission( perm, res )
+      if ( allowed === true ) {
+        return true
+      } else if ( allowed !== false && allowed !== undefined ) {
+        // override with most precise
+        results = allowed
+      }
+    }
+  }
+  if ( !isObject(results) || Object.keys(results).length === 0 ) {
+    return false
+  } else {
+    if ( id ) {
+      if ( results.hasOwnProperty( "id" ) && results.id.hasOwnProperty( id ) ) {
+        return results.id[id]
+      }
+      if ( results.hasOwnProperty( "*" ) ) {
+        return results["*"]
+      }
+    }
+    return results
+  }
+}
+
+/**
+ * Reset the permissions list
+ */
+User.prototype.resetPermissions = function() {
+  this.permissions = {}
+}
+
+User.prototype.checkPassword = function( password ) {
+  let details = this.resource.extension.find( ext => 
+    ext.url === "http://ihris.org/fhir/StructureDefinition/ihris-password" )
+  if ( !details ) {
+    console.error( "Password details don't exist in user "+this.resource.id )
+    return false
+  }
+  let hash = details.extension.find( ext => ext.url === "password" )
+  let salt = details.extension.find( ext => ext.url === "salt" )
+  if ( !hash || !hash.valueString || !salt || !salt.valueString ) {
+    console.error( "Hash or salt doesn't exist in user "+this.resource.id )
+    return false
+  }
+  let compare = user.hashPassword( password, salt.valueString )
+  if ( compare.hash === hash.valueString ) {
+    return true
+  } else {
+    return false
+  }
+}
+
+User.prototype.update = function() {
+  return fhirAxios.update( this.resource )
+}
+
 
 
 module.exports = user

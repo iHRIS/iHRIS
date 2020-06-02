@@ -124,7 +124,62 @@ describe( 'interacts with FHIR server using axios', () => {
       "display": "Delete"
     }
   ]
-
+  const COMBINED_VALUESET_COMPLETE = {
+    "resourceType": "ValueSet",
+    "status": "active",
+    "compose": {
+      "include": [
+        {
+          "system": "http://ihris.org/fhir/CodeSystem/ihris-task-permission"
+        }
+      ]
+    },
+    "expansion": {
+      "identifier": "e70e692c-1155-41ae-95d2-3bae153914b9",
+      "timestamp": "2020-05-31T05:29:38+00:00",
+      "total": 4,
+      "offset": 0,
+      "parameter": [
+        {
+          "name": "offset",
+          "valueInteger": 0
+        },
+        {
+          "name": "count",
+          "valueInteger": 2
+        }
+      ],
+      "contains": COMBINED_VALUESET
+    }
+  }
+  const MOCK_VALUESET_FULL_OBJ = {
+    "resourceType": "ValueSet",
+    "status": "active",
+    "compose": {
+      "include": [
+        {
+          "system": "http://ihris.org/fhir/CodeSystem/ihris-task-permission"
+        }
+      ]
+    },
+    "expansion": {
+      "identifier": "e70e692c-1155-41ae-95d2-3bae153914b9",
+      "timestamp": "2020-05-31T05:29:38+00:00",
+      "total": 4,
+      "offset": 0,
+      "parameter": [
+        {
+          "name": "offset",
+          "valueInteger": 0
+        },
+        {
+          "name": "count",
+          "valueInteger": 2
+        }
+      ],
+      "contains": COMBINED_VALUESET
+    }
+  }
   
 
   const fhirAxios = require('../modules/fhirAxios')
@@ -153,13 +208,38 @@ describe( 'interacts with FHIR server using axios', () => {
     } )
   } )
 
-  test( 'expands a FHIR ValueSet', () => {
-    axios.__setFhirResults( DEFAULT_URL + "ValueSet/ihris-task-permission/$expand", null, MOCK_VALUESET_OBJ )
-    axios.__setFhirResults( DEFAULT_URL + "ValueSet/ihris-task-permission/$expand", { offset: 2, count: 2 }, MOCK_VALUESET_OBJ_2 )
-    return fhirAxios.expand( "ihris-task-permission" ).then( (results) => {
+  test( 'expanding a FHIR ValueSet only returning contains array', () => {
+    axios.__setFhirResults( DEFAULT_URL + "ValueSet/ihris-task-permission/$expand", null, MOCK_VALUESET_FULL_OBJ )
+    return fhirAxios.expand( "ihris-task-permission", null, false, true ).then( (results) => {
       expect( results ).toEqual( COMBINED_VALUESET )
     } )
-
   } )
+
+  test( 'error when expanding a FHIR ValueSet only returning contains array', () => {
+    axios.__setFhirResults( DEFAULT_URL + "ValueSet/ihris-task-permission/$expand", null, MOCK_VALUESET_OBJ )
+    return fhirAxios.expand( "ihris-task-permission", null, false, true ).then( (results) => {
+      // This should throw an error and never reach here.
+      expect( false ).toBeTruthy()
+    } ).catch( (err) => {
+      expect( err.message ).toEqual( "Unable to return only the contains expansion when the full expansion wasn't returned." )
+    } )
+  } )
+
+  test( 'expands a FHIR ValueSet combining all results and only returning contains array', () => {
+    axios.__setFhirResults( DEFAULT_URL + "ValueSet/ihris-task-permission/$expand", null, MOCK_VALUESET_OBJ )
+    axios.__setFhirResults( DEFAULT_URL + "ValueSet/ihris-task-permission/$expand", { offset: 2, count: 2 }, MOCK_VALUESET_OBJ_2 )
+    return fhirAxios.expand( "ihris-task-permission", null, true, true ).then( (results) => {
+      expect( results ).toEqual( COMBINED_VALUESET )
+    } )
+  } )
+
+  test( 'expands a FHIR ValueSet combining all results', () => {
+    axios.__setFhirResults( DEFAULT_URL + "ValueSet/ihris-task-permission/$expand", null, MOCK_VALUESET_OBJ )
+    axios.__setFhirResults( DEFAULT_URL + "ValueSet/ihris-task-permission/$expand", { offset: 2, count: 2 }, MOCK_VALUESET_OBJ_2 )
+    return fhirAxios.expand( "ihris-task-permission", null, true ).then( (results) => {
+      expect( results ).toEqual( COMBINED_VALUESET_COMPLETE )
+    } )
+  } )
+
 
 } )

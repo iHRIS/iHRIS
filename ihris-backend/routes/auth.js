@@ -83,12 +83,13 @@ passport.use( 'custom-loggedout', new CustomStrategy(
   }
 ) )
 
-passport.serializeUser( (user,callback) => {
+passport.serializeUser( (obj,callback) => {
   //callback(null, user.id)
-  callback(null, user)
+  callback(null, obj)
 } )
-passport.deserializeUser( (user,callback) => {
-  callback(null, user)
+passport.deserializeUser( (obj,callback) => {
+  let userObj = user.restoreUser( obj )
+  callback(null, userObj)
 } )
    /*
 passport.deserializeUser( (id,callback) => {

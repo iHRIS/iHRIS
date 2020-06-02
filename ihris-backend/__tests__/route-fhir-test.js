@@ -2,18 +2,21 @@
 
 jest.mock('axios')
 
+const DEFAULT_URL = "http://localhost:8080/hapi/fhir/"
+
 const request = require("supertest")
 
 const route = require("../routes/fhir.js")
+const user = require("../modules/user")
 
-const TEST_USER = {
-  resource: {
-    "resourceType": "Person"
-  }
-}
+const TEST_USER = user.restoreUser( {
+  resource: { "resourceType": "Person" },
+  permissions: { "read" : { "StructureDefinition" : true, "CodeSystem" : true, "ValueSet": true } }
+} )
 
 const express = require('express')
 const app = express()
+const axios = require('axios')
 
 // Set up middleware to add mocks for anything that would exist in the request like session and user from passport
 app.use( (req, res, next) => {
@@ -25,10 +28,43 @@ app.use("/", route)
 
 describe( 'Test FHIR routes', () => {
 
-  test( 'test GET resource', () => {
-    return request(app).get("/Practitioner").then( (response) => {
+  test( 'test search CodeSystem', () => {
+    const MOCK_CODESYSTEM = {
+      resourceType: "Bundle",
+      id: "mock-test",
+      test: "test"
+    }
+    axios.__setFhirResults( DEFAULT_URL + "CodeSystem", { test: "test" }, MOCK_CODESYSTEM )
+
+    return request(app).get("/CodeSystem").query("test=test").then( (response) => {
       expect(response.statusCode).toBe( 200 )
-      console.log(response.body)
+      expect(response.body).toEqual( MOCK_CODESYSTEM )
+    } )
+  } )
+
+  test( 'test read StructureDefinition instance', () => {
+    const MOCK_PROFILE = {
+      resourceType: "StructureDefinition",
+      id: "mock-test"
+    }
+    axios.__setFhirResults( DEFAULT_URL + "StructureDefinition/mock-test", null, MOCK_PROFILE )
+
+    return request(app).get("/StructureDefinition/mock-test").then( (response) => {
+      expect(response.statusCode).toBe( 200 )
+      expect(response.body).toEqual( MOCK_PROFILE )
+    } )
+  } )
+
+  test( 'test expand ValueSet instance', () => {
+    const MOCK_VALUESET_EXPANSION = {
+      resourceType: "ValueSet",
+      id: "mock-test"
+    }
+    axios.__setFhirResults( DEFAULT_URL + "StructureDefinition/mock-test", null, MOCK_PROFILE )
+
+    return request(app).get("/StructureDefinition/mock-test").then( (response) => {
+      expect(response.statusCode).toBe( 200 )
+      expect(response.body).toEqual( MOCK_PROFILE )
     } )
   } )
 
