@@ -101,37 +101,92 @@ describe( 'User module for working with users (Person resource)', () => {
     test( 'checks getting permissions', () => {
       let userObj = user.__testUser()
       expect( userObj.addPermission( "*", "*" ) ).toBeTruthy()
-      expect( userObj.hasPermission( "read", "Practitioner" ) ).toBeTruthy()
+      expect( userObj.hasPermissionByName( "read", "Practitioner" ) ).toBeTruthy()
       userObj.resetPermissions()
 
       expect( userObj.addPermission( "read", "Practitioner" ) ).toBeTruthy()
-      expect( userObj.hasPermission( "read", "Practitioner", "1234" ) ).toBeTruthy()
+      expect( userObj.hasPermissionByName( "read", "Practitioner", "1234" ) ).toBeTruthy()
       userObj.resetPermissions()
 
 
       expect( userObj.addPermission( "read", "Practitioner", null, null, "name" ) ).toBeTruthy()
       expect( userObj.addPermission( "read", "Practitioner", "123", null, "gender" ) ).toBeTruthy()
-      expect( userObj.hasPermission( "read", "Practitioner", "123" ) ).toEqual( { "gender": true } )
-      //console.log( userObj.hasPermission( "read", "Practitioner" ) )
+      expect( userObj.hasPermissionByName( "read", "Practitioner", "123" ) ).toEqual( { "gender": true } )
+      //console.log( userObj.hasPermissionByName( "read", "Practitioner" ) )
       //console.log( JSON.stringify(userObj.permissions, null, 2) )
-      expect( userObj.hasPermission( "read", "Practitioner" ) ).toEqual( { "*": { "name": true }, "id" : { "123": { "gender" : true } } } )
+      expect( userObj.hasPermissionByName( "read", "Practitioner" ) ).toEqual( { "*": { "name": true }, "id" : { "123": { "gender" : true } } } )
       expect( userObj.addPermission( "read", "Practitioner" ) ).toBeTruthy()
-      expect( userObj.hasPermission( "read", "Practitioner" ) ).toBeTruthy()
-      expect( userObj.hasPermission( "read", "Practitioner", "123" ) ).toBeTruthy()
-      expect( userObj.hasPermission( "write", "Practitioner" ) ).toBeFalsy()
+      expect( userObj.hasPermissionByName( "read", "Practitioner" ) ).toBeTruthy()
+      expect( userObj.hasPermissionByName( "read", "Practitioner", "123" ) ).toBeTruthy()
+      expect( userObj.hasPermissionByName( "write", "Practitioner" ) ).toBeFalsy()
 
-      expect( userObj.hasPermission( "delete", "Practitioner" ) ).toBeFalsy()
-      expect( userObj.hasPermission( "read", "Person" ) ).toBeFalsy()
+      expect( userObj.hasPermissionByName( "delete", "Practitioner" ) ).toBeFalsy()
+      expect( userObj.hasPermissionByName( "read", "Person" ) ).toBeFalsy()
 
       userObj.resetPermissions()
-      expect( userObj.addPermission( "*", "Practitioner", null, "name.given = 'Test'" ) ).toBeTruthy()
-      expect( userObj.hasPermission( "read", "Practitioner" ) ).toEqual( { constraint: { "name.given = 'Test'": true } } )
+      expect( userObj.addPermission( "*", "Practitioner", null, "name.given ~ 'test'" ) ).toBeTruthy()
+      expect( userObj.hasPermissionByName( "read", "Practitioner" ) ).toEqual( { constraint: { "name.given ~ 'test'": true } } )
       expect( userObj.addPermission( "read", "Practitioner", "123" ) ).toBeTruthy()
-      expect( userObj.addPermission( "read", "Practitioner", null, "name.given = 'Test2'" ) ).toBeTruthy()
-      expect( userObj.hasPermission( "read", "Practitioner" ) ).toEqual( { id: { "123": true }, constraint: { "name.given = 'Test2'": true } } )
-      expect( userObj.hasPermission( "read", "Practitioner", "123" ) ).toBeTruthy()
+      expect( userObj.addPermission( "read", "Practitioner", null, "name.given ~ 'test2'" ) ).toBeTruthy()
+      expect( userObj.hasPermissionByName( "read", "Practitioner" ) ).toEqual( { id: { "123": true }, constraint: { "name.given ~ 'test2'": true } } )
+      expect( userObj.hasPermissionByName( "read", "Practitioner", "123" ) ).toBeTruthy()
 
     } )
+
+    test( 'checks permissions against resource objects', () => {
+      const PRACTITIONER_OBJ = {
+        resourceType: "Practitioner",
+        id: "test-practitioner",
+        meta: {
+          profile: [ "http://ihris.org/fhir/StructureDefinition/ihris-practitioner" ]
+        },
+        name: [
+          {
+            family: "Tester",
+            given: [ "Test", "E." ]
+          }
+        ],
+        gender: "female",
+        birthDate: "1990-03-03"
+      }
+
+      let userObj = user.__testUser()
+      expect( userObj.addPermission( "read", "Practitioner", null, null, [ "name" ] ) ).toBeTruthy()
+      expect( userObj.addPermission( "read", "Practitioner", "test-practitioner", null, [ "gender" ] ) ).toBeTruthy()
+      expect( userObj.addPermission( "read", "Practitioner", null, "meta.profile.exists($this ~ 'http://ihris.org/fhir/StructureDefinition/ihris-practitioner')", [ "birthDate" ] ) ).toBeTruthy()
+      expect( userObj.addPermission( "read", "Practitioner", null, "name.exists(family ~ 'tester')", [ "name.family" ] ) ).toBeTruthy()
+      expect( userObj.hasPermissionByObject( "read", PRACTITIONER_OBJ ) ).toEqual( [ 'name', 'gender', 'birthDate', 'name.family' ] )
+      expect( userObj.hasPermissionByObject( "delete", PRACTITIONER_OBJ ) ).toBeFalsy()
+    } )
+
+    test( 'failing permissions against resource objects', () => {
+      const PRACTITIONER_OBJ = {
+        resourceType: "Practitioner",
+        id: "test-practitioner",
+        meta: {
+          profile: [ "http://ihris.org/fhir/StructureDefinition/ihris-practitioner" ]
+        },
+        name: [
+          {
+            family: "Tester",
+            given: [ "Test", "E." ]
+          }
+        ],
+        gender: "female",
+        birthDate: "1990-03-03"
+      }
+      const PERSON_OBJ = {
+        resourceType: "Person",
+        id: "test-person"
+      }
+
+      let userObj = user.__testUser()
+      expect( userObj.addPermission( "read", "Practitioner", "fail-practitioner", null, [ "gender" ] ) ).toBeTruthy()
+      expect( userObj.addPermission( "read", "Practitioner", null, "meta.profile.exists($this ~ 'http://ihris.org/fhir/StructureDefinition/fail-practitioner')", [ "birthDate" ] ) ).toBeTruthy()
+      expect( userObj.hasPermissionByObject( "read", PRACTITIONER_OBJ ) ).toBeFalsy()
+      expect( userObj.hasPermissionByObject( "read", PERSON_OBJ ) ).toBeFalsy()
+    } )
+
 
     test( 'checks adding invalid permissions', () => {
       axios.__setFhirResults( DEFAULT_URL + "ValueSet/ihris-task-permission/$expand", null, MOCK_VALUESET_PERM )

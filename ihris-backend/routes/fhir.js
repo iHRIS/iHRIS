@@ -2,7 +2,8 @@ const express = require('express')
 const router = express.Router()
 const nconf = require('../modules/config')
 const fhirAxios = nconf.fhirAxios
-const fhirpath = require('fhirpath')
+const fhirFilter = require('../modules/fhirFilter')
+const isEmpty = require('is-empty')
 
 router.get("/", (req, res, next) => {
   res.status(200).json( { user: req.user } )
@@ -37,9 +38,9 @@ router.get("/:resource/:id?", (req, res) => {
   }
   let allowed = false
   if ( req.params.id ) {
-    allowed = req.user.hasPermission( "read", req.params.resource, req.params.id )
+    allowed = req.user.hasPermissionByName( "read", req.params.resource, req.params.id )
   } else {
-    allowed = req.user.hasPermission( "read", req.params.resource )
+    allowed = req.user.hasPermissionByName( "read", req.params.resource )
   }
   if ( !allowed ) {
     return res.status(401).json( DENIED_OUTCOME )
@@ -49,7 +50,16 @@ router.get("/:resource/:id?", (req, res) => {
       if ( allowed === true ) {
         return res.status(200).json(resource)
       } else {
-        return res.status(200).json({"msg":"more to do filtering object"})
+        // Check permissions against the specific resource and return list
+        // of allowed fields
+        let fieldList = req.user.hasPermissionByObject( "read", resource )
+        if ( fieldList === true ) {
+          return res.status(200).json(resource)
+        } else if ( !fieldList ) {
+          return res.status(401).json( DENIED_OUTCOME )
+        } else {
+          return res.status(200).json( fhirFilter.filter( resource, fieldList ) )
+        }
       }
     } ).catch( (err) => {
       let outcome = { ...ERROR_OUTCOME }
@@ -58,6 +68,10 @@ router.get("/:resource/:id?", (req, res) => {
     } )
   } else {
     fhirAxios.search( req.params.resource, req.query ).then( (resource) => {
+      // Need to do deeper checking due to possibility of includes
+      fhirFilter.filterBundle( "read", resource, req.user )
+      
+      // DELETE THE FOLLOWING, ALL NEED TO BE FILTERED
       if ( allowed === true ) {
         return res.status(200).json(resource)
       } else {
@@ -71,6 +85,7 @@ router.get("/:resource/:id?", (req, res) => {
   }
 } )
 
+
 router.get("/ValueSet/:id/\\$expand", (req, res) => {
   if ( !req.user ) {
     let outcome = { ...DENIED_OUTCOME }
@@ -79,9 +94,9 @@ router.get("/ValueSet/:id/\\$expand", (req, res) => {
   }
   let allowed = false
   if ( req.params.id ) {
-    allowed = req.user.hasPermission( "read", "ValueSet", req.params.id )
+    allowed = req.user.hasPermissionByName( "read", "ValueSet", req.params.id )
   } else {
-    allowed = req.user.hasPermission( "read", "ValueSet" )
+    allowed = req.user.hasPermissionByName( "read", "ValueSet" )
   }
   if ( !allowed ) {
     return res.status(401).json( DENIED_OUTCOME )
@@ -99,4 +114,4 @@ router.get("/ValueSet/:id/\\$expand", (req, res) => {
   } )
 } )
 
-module.exports = router;
+module.exports = router

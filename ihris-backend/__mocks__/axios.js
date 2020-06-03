@@ -7,7 +7,7 @@ let fhirResults = {}
 
 function __hashObject( obj ) {
   let objHash = ""
-  if ( obj ) {
+  if ( obj && Object.keys(obj).length > 0 ) {
     objHash = hash( obj )
   }
   return objHash

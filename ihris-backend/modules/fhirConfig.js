@@ -36,7 +36,7 @@ const fhirConfig = {
         }
       }
     } else {
-      console.error( "Invalid profile for configuration file: " + file )
+      console.log( "Invalid profile for configuration file: " + file )
     }
     return defaults
   },
@@ -65,7 +65,7 @@ const fhirConfig = {
           if( param.hasOwnProperty("valueString") ) {
             let split = param.name.split(':')
             if ( invalidRemoteKeys.includes( split[0] ) ) {
-              console.error("Can't override "+split[0]+" from remote config file.")
+              console.log("Can't override "+split[0]+" from remote config file.")
               continue
             }
             let last = split.pop()
@@ -80,10 +80,10 @@ const fhirConfig = {
           }
         }
       } else {
-        console.error( "No valid key set for configuration Parameters " + config.id )
+        console.log( "No valid key set for configuration Parameters " + config.id )
       }
     } else {
-      console.error( "Invalid profile for remote configuration parameters for " + config.id )
+      console.log( "Invalid profile for remote configuration parameters for " + config.id )
     }
 
     return defaults

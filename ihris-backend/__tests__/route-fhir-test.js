@@ -28,11 +28,12 @@ app.use("/", route)
 
 describe( 'Test FHIR routes', () => {
 
-  test( 'test search CodeSystem', () => {
+  test( 'test search CodeSystem: GET /resource?query', () => {
     const MOCK_CODESYSTEM = {
       resourceType: "Bundle",
       id: "mock-test",
-      test: "test"
+      test: "test",
+      entry: []
     }
     axios.__setFhirResults( DEFAULT_URL + "CodeSystem", { test: "test" }, MOCK_CODESYSTEM )
 
@@ -42,7 +43,7 @@ describe( 'Test FHIR routes', () => {
     } )
   } )
 
-  test( 'test read StructureDefinition instance', () => {
+  test( 'test read StructureDefinition instance: GET /resource/id', () => {
     const MOCK_PROFILE = {
       resourceType: "StructureDefinition",
       id: "mock-test"
@@ -55,16 +56,16 @@ describe( 'Test FHIR routes', () => {
     } )
   } )
 
-  test( 'test expand ValueSet instance', () => {
+  test( 'test expand ValueSet instance: GET /ValueSet/id/$expand', () => {
     const MOCK_VALUESET_EXPANSION = {
       resourceType: "ValueSet",
       id: "mock-test"
     }
-    axios.__setFhirResults( DEFAULT_URL + "StructureDefinition/mock-test", null, MOCK_PROFILE )
+    axios.__setFhirResults( DEFAULT_URL + "ValueSet/mock-test/$expand", null, MOCK_VALUESET_EXPANSION )
 
-    return request(app).get("/StructureDefinition/mock-test").then( (response) => {
+    return request(app).get("/ValueSet/mock-test/$expand").then( (response) => {
       expect(response.statusCode).toBe( 200 )
-      expect(response.body).toEqual( MOCK_PROFILE )
+      expect(response.body).toEqual( MOCK_VALUESET_EXPANSION )
     } )
   } )
 

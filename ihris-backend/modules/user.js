@@ -1,11 +1,12 @@
 const nconf = require('./config')
 const fhirAxios = nconf.fhirAxios
 const crypto = require('crypto')
+const fhirFilter = require('./fhirFilter')
 
 const ROLE_EXTENSION = "http://ihris.org/fhir/StructureDefinition/ihris-assign-role"
 const TASK_EXTENSION = "http://ihris.org/fhir/StructureDefinition/ihris-task"
 
-function isObject(obj) {
+const isObject = (obj) => {
   return (!!obj) && (obj.constructor === Object)
 }
 
@@ -24,7 +25,7 @@ const user = {
         if ( response.total === 0 ) {
           resolve( false )
         } else if ( response.total > 1 ) {
-          console.error("Too many users found for "+JSON.stringify(query))
+          console.log("Too many users found for "+JSON.stringify(query))
           resolve( false )
         } else {
           let userObj = new User( response.entry[0].resource )
@@ -103,7 +104,7 @@ const user = {
     return new Promise( (resolve, reject) => {
       const role = roleStr.split( '/' )
       if ( role.length !== 2 ) {
-        console.error( "Invalid role passed to addRole: " +roleStr )
+        console.log( "Invalid role passed to addRole: " +roleStr )
         resolve()
       } else {
         fhirAxios.read( role[0], role[1] ).then ( async(response) => {
@@ -163,21 +164,21 @@ const user = {
       return false
     }
     if ( !user.valueSet["ihris-task-permission"].includes( permission ) ) {
-      console.error( "Invalid permission given "+permission, user.valueSet["ihris-task-permission"] )
+      console.log( "Invalid permission given "+permission, user.valueSet["ihris-task-permission"] )
       return false
     }
     if ( !user.valueSet["ihris-task-resource"].includes( resource ) ) {
-      console.error( "Invalid resource given "+resource, user.valueSet["ihris-task-resource"] )
+      console.log( "Invalid resource given "+resource, user.valueSet["ihris-task-resource"] )
       return false
     }
     // Can't have an id when it's all resources
     if ( resource === "*" && ( id || field ) ) {
-      console.error("Can't add global resource permissions on a specific id or by including a field: "+id+" - "+field)
+      console.log("Can't add global resource permissions on a specific id or by including a field: "+id+" - "+field)
       return false
     }
 
     if ( ( permission === "*" || permission === "delete" ) && ( id || field ) ) {
-      console.error("Can't add delete permission on a specific id or by including a field: "+id+" - "+field)
+      console.log("Can't add delete permission on a specific id or by including a field: "+id+" - "+field)
       return false
     }
     if ( !permissions.hasOwnProperty( permission ) ) {
@@ -265,17 +266,24 @@ User.prototype.addPermission = function( permission, resource, id, constraint, f
 /**
  * Gets a specific permission from the permissions object without any additional checking
  */
-User.prototype.__hasPermission = function( permission, resource ) {
+User.prototype.__hasPermissionByName = function( permission, resource ) {
   try {
     return this.permissions[permission][resource]
   } catch( err ) {
     return false
   }
 }
+
 /**
  * Gets a permission from the permissions object by checking for overriding values.
+ * @return boolean | [ field list ] | Object
+ * { 
+ * "*": [ field list ], 
+ * "id": { "ID": true | [field list ] }
+ * "constraint": { "CONSTRAINT" : true | [field list] }
+ * }
  */
-User.prototype.hasPermission = function( permission, resource, id ) {
+User.prototype.hasPermissionByName = function( permission, resource, id ) {
   let perms = [ "*" ]
   if ( permission !== "*" )
     perms.push( permission )
@@ -287,7 +295,7 @@ User.prototype.hasPermission = function( permission, resource, id ) {
 
   for( let perm of perms ) {
     for( let res of resources ) {
-      let allowed = this.__hasPermission( perm, res )
+      let allowed = this.__hasPermissionByName( perm, res )
       if ( allowed === true ) {
         return true
       } else if ( allowed !== false && allowed !== undefined ) {
@@ -312,6 +320,48 @@ User.prototype.hasPermission = function( permission, resource, id ) {
 }
 
 /**
+ * Gets a permission from the permission object by checking for overriding values
+ * on a FHIR resource object.
+ * @return boolean | [ field list ]
+ */
+User.prototype.hasPermissionByObject = function( permission, resource ) {
+  // First get the base permissions by name then see what constraints
+  // apply. Don't get by ID as we need to determine if that was how it matched.
+  let permissions = this.hasPermissionByName( permission, resource.resourceType )
+  if ( permissions === true ) {
+    return true
+  }
+  if ( !permissions ) {
+    return false
+  }
+  let allowed = {} 
+  if ( permissions.hasOwnProperty("*") && isObject( permissions["*"] ) ) {
+    allowed = permissions["*"]
+  }
+  if ( permissions.hasOwnProperty("id") && permissions.id.hasOwnProperty( resource.id ) ) {
+    if ( permissions.id[resource.id] === true ) {
+      return true
+    } else if ( isObject( permissions.id[resource.id] ) ) {
+      allowed = { ...allowed, ...permissions.id[resource.id] }
+    }
+  }
+  if ( permissions.hasOwnProperty("constraint") && isObject( permissions.constraint ) ) {
+    let constraints = Object.keys( permissions.constraint )
+    for( let constraint of constraints ) {
+      if ( fhirFilter.meetsConstraint( resource, constraint ) ) {
+        if ( permissions.constraint[constraint] === true ) {
+          return true
+        } else if ( isObject( permissions.constraint[constraint] ) ) {
+          allowed = { ...allowed, ...permissions.constraint[constraint] }
+        }
+      }
+    }
+  }
+  let fieldList = Object.keys( allowed )
+  return fieldList.length === 0 ? false : fieldList
+}
+
+/**
  * Reset the permissions list
  */
 User.prototype.resetPermissions = function() {
@@ -322,13 +372,13 @@ User.prototype.checkPassword = function( password ) {
   let details = this.resource.extension.find( ext => 
     ext.url === "http://ihris.org/fhir/StructureDefinition/ihris-password" )
   if ( !details ) {
-    console.error( "Password details don't exist in user "+this.resource.id )
+    console.log( "Password details don't exist in user "+this.resource.id )
     return false
   }
   let hash = details.extension.find( ext => ext.url === "password" )
   let salt = details.extension.find( ext => ext.url === "salt" )
   if ( !hash || !hash.valueString || !salt || !salt.valueString ) {
-    console.error( "Hash or salt doesn't exist in user "+this.resource.id )
+    console.log( "Hash or salt doesn't exist in user "+this.resource.id )
     return false
   }
   let compare = user.hashPassword( password, salt.valueString )

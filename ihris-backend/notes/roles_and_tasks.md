@@ -59,6 +59,10 @@ Full permission will be allowed by anything that gives it.
 * read \*
 * \* \*
 
+Based on the results returned from the previous step, when multiple match types have a restricted 
+field list, it will be concatenated if multiples match.
+
+
 Saved in structure as:
 When the constraint is an ID it must start with '/'
 ```json
@@ -148,3 +152,32 @@ Complex example.
 read Practitioner abc 
 read Practitioner profile = xx fields [ telecom ]
 read Practitioner fields [ name ]
+
+## Constraints
+
+Constraints are FHIRPath expressions.  They will be processed through an exists() method to determine if the 
+resource matches the constraint.  When the element can be an array, special care must be taken.
+
+See http://hl7.org/fhirpath/
+
+Use ~ instead of = to ignore case and extra whitespace for string comparison.
+
+```
+Patient.name.family ~ 'test'
+```
+Will work when there is only one name with family of 'Test', but will fail if there are 
+multiple names.  To find any possible matches you can use:
+```
+Patient.name.exists(family ~ 'test')
+```
+To check for profile matches, the following can be used
+```
+meta.profile.exists( $this = 'http://ihris.org/fhir/StructureDefinition/test-profile' )
+```
+
+Multiple queries can be included.
+```
+meta.profile.exists( $this = 'http://ihris.org/fhir/StructureDefinition/test-profile' ) 
+  and name.exists( family = 'Test' )
+```
+
