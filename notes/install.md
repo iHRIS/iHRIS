@@ -76,3 +76,10 @@ https://hapifhir.io/hapi-fhir/docs/tools/hapi_fhir_cli.html
 ```bash
 sudo npm install -g fsh-sushi@beta
 ```
+
+
+# Front end Development
+
+```bash
+sudo npm install -g @vue/cli
+```
