@@ -80,6 +80,7 @@ sudo npm install -g fsh-sushi@beta
 
 # Front end Development
 
+Built with vue cli 4.4.1
 ```bash
 sudo npm install -g @vue/cli
 ```
