@@ -67,10 +67,50 @@ const fhirAxios = {
 
     } )
   },
+  create: ( resource ) => {
+    return new Promise( (resolve, reject) => {
+      if ( resource === undefined ) {
+        reject( new Error( "resource must be defined" ) )
+      }
+      let url = new URL(fhirAxios.baseUrl.href)
+      url.pathname += resource.resourceType 
+
+      let auth = fhirAxios.__getAuth()
+      axios.post( url.href, resource, { auth: auth } ).then ( (response) => {
+        resolve( response.data )
+      } ).catch( (err) => {
+        reject( err )
+      } )
+
+    } )
+  },
+  delete: ( resource, id ) => {
+    return new Promise( (resolve, reject) => {
+      if ( resource === undefined ) {
+        reject( new Error( "resource must be defined" ) )
+      }
+      if ( id === undefined ) {
+        reject( new Error( "id must be defined" ) )
+      }
+      let url = new URL(fhirAxios.baseUrl.href)
+      url.pathname += resource + "/" + id
+
+      let auth = fhirAxios.__getAuth()
+      axios.delete( url.href, { auth: auth } ).then ( (response) => {
+        resolve( response.data )
+      } ).catch( (err) => {
+        reject( err )
+      } )
+
+    } )
+  },
   update: ( resource ) => {
     return new Promise( (resolve, reject) => {
       if ( resource === undefined ) {
         reject( new Error( "resource must be defined" ) )
+      }
+      if ( !resource.hasOwnProperty("id") || !resource.id ) {
+        reject( new Error( "resource must have an id field" ) )
       }
       let url = new URL(fhirAxios.baseUrl.href)
       url.pathname += resource.resourceType + "/" + resource.id
