@@ -1,6 +1,25 @@
 const axios = require('axios')
 const URL = require('url').URL
 
+class InvalidRequestError extends Error {
+  constructor (message, status) {
+    super( message )
+    this.response = { 
+      status: status || 400, 
+      body: {
+        resourceType: "OperationOutcome",
+        issue: [
+          {
+            severity: "error",
+            code: "required",
+            diagnostics: message
+          }
+        ]
+      } 
+    }
+  }
+}
+
 const fhirAxios = {
   options: { base: undefined, username: undefined, password: undefined },
   baseUrl: undefined,
@@ -30,7 +49,7 @@ const fhirAxios = {
   read: ( resource, id, vid ) => {
     return new Promise( (resolve, reject) => {
       if ( resource === undefined ) {
-        reject( new Error( "resource must be defined" ) )
+        reject( new InvalidRequestError( "resource must be defined" ) )
       }
       let url = new URL(fhirAxios.baseUrl.href)
       url.pathname += resource
@@ -53,7 +72,7 @@ const fhirAxios = {
   search: ( resource, params ) => {
     return new Promise( (resolve, reject) => {
       if ( resource === undefined ) {
-        reject( new Error( "resource must be defined" ) )
+        reject( new InvalidRequestError( "resource must be defined" ) )
       }
       let url = new URL(fhirAxios.baseUrl.href)
       url.pathname += resource
@@ -70,7 +89,9 @@ const fhirAxios = {
   create: ( resource ) => {
     return new Promise( (resolve, reject) => {
       if ( resource === undefined ) {
-        reject( new Error( "resource must be defined" ) )
+        err = new InvalidRequestError( "resource must be defined" )
+        err.response = { status: 404 }
+        reject( err )
       }
       let url = new URL(fhirAxios.baseUrl.href)
       url.pathname += resource.resourceType 
@@ -87,10 +108,10 @@ const fhirAxios = {
   delete: ( resource, id ) => {
     return new Promise( (resolve, reject) => {
       if ( resource === undefined ) {
-        reject( new Error( "resource must be defined" ) )
+        reject( new InvalidRequestError( "resource must be defined" ) )
       }
       if ( id === undefined ) {
-        reject( new Error( "id must be defined" ) )
+        reject( new InvalidRequestError( "id must be defined" ) )
       }
       let url = new URL(fhirAxios.baseUrl.href)
       url.pathname += resource + "/" + id
@@ -107,10 +128,10 @@ const fhirAxios = {
   update: ( resource ) => {
     return new Promise( (resolve, reject) => {
       if ( resource === undefined ) {
-        reject( new Error( "resource must be defined" ) )
+        reject( new InvalidRequestError( "resource must be defined" ) )
       }
       if ( !resource.hasOwnProperty("id") || !resource.id ) {
-        reject( new Error( "resource must have an id field" ) )
+        reject( new InvalidRequestError( "resource must have an id field" ) )
       }
       let url = new URL(fhirAxios.baseUrl.href)
       url.pathname += resource.resourceType + "/" + resource.id
@@ -127,7 +148,7 @@ const fhirAxios = {
   expand: ( valueset, params, complete, containsOnly ) => {
     return new Promise( (resolve, reject) => {
       if ( !valueset ) {
-        reject( new Error( "valueset must be defined" ) )
+        reject( new InvalidRequestError( "valueset must be defined" ) )
       }
       let url = new URL( fhirAxios.baseUrl.href )
       url.pathname += "ValueSet/" + valueset + "/$expand"
@@ -171,7 +192,7 @@ const fhirAxios = {
               if ( total === response.data.expansion.contains.length ) {
                 resolve( response.data.expansion.contains )
               } else {
-                reject( new Error( "Unable to return only the contains expansion when the full expansion wasn't returned." ) )
+                reject( new InvalidRequestError( "Unable to return only the contains element when the full expansion wasn't returned." ) )
               }
             } catch( err ) {
               reject( err )

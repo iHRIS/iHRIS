@@ -64,7 +64,7 @@ const filterLevel = ( prefix, level, allowed ) => {
 }
 
 const runFilter = ( resource, fields, ignoreDefaults ) => {
-  let allowed = [ "resourceType", "id","meta" ]
+  let allowed = [ "resourceType", "id", "meta" ]
   if ( ignoreDefaults ) {
     allowed = fields
   } else {
