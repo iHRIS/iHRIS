@@ -4,10 +4,8 @@ const nconf = require('../modules/config')
 
 /* GET home page. */
 router.get('/site', function(req, res, next) {
-  console.log(req.headers)
   const defaultUser = nconf.get("user:loggedout") || "ihris-user-loggedout"
   let site = nconf.get("site")
-  console.log(req.user)
   if ( req.user ) {
     site.user = {}
     if ( req.user.id === defaultUser ) {
@@ -19,8 +17,6 @@ router.get('/site', function(req, res, next) {
   } else {
     site.user = { loggedin: false }
   }
-  site.updated = new Date().toString()
-  console.log(site)
   res.status(200).json( site )
 });
 

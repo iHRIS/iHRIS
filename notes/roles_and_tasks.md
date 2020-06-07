@@ -5,11 +5,11 @@ Roles are a Basic profile with the following fields:
 * primary[1..1] - boolean for filtering to assign to users
 * role[0..\*] - reference to another role
 * task[0..\*] - task definitions
-** permission - valueset for read|write|delete|\*
-** resource - resource (Practitioner or * for all allowed)
-** instance - id of the resource for a single instance
-** field - string that is a FHIRPath to a field in the structure definition
-** constraint - FHIRPath where expression required for this resource.  Not relevant for instances.  
+ * permission - valueset for read|write|delete|\*
+ * resource - resource (Practitioner or * for all allowed)
+ * instance - id of the resource for a single instance
+ * field - string that is a FHIRPath to a field in the structure definition
+ * constraint - FHIRPath where expression required for this resource.  Not relevant for instances.  
 It will be resolved as resource.where( contraint )
 
 **delete only makes sense on a profile.  It will ignored if trying to set on a resource or including a field.**
@@ -24,10 +24,10 @@ User.updatePermissions() adds all permissions from roles in User to the permissi
 user.addPermission( permission, resource, id, constraint, field )
 * sending field when it's already been sent without a field does nothing.  The higher level
 permission overrides it. (order doesn't matter, sending the higher level later overrides it.)
-** read, Practitioner overrides read, Practitioner, anything
+ * read, Practitioner overrides read, Practitioner, anything
 * sending an id when the higher level resource has already been sent does nothing. (order 
 doesn't matter, sending the higher level later overrides it.)
-** read, Practitioner overrides read, Practitioner, 1234
+ * read, Practitioner overrides read, Practitioner, 1234
 * You can only set either id or contraint.
 * if the resource is \* then the id and field can't be set
 
@@ -108,23 +108,23 @@ Basic access to get any information:
 
 Complex example.  
 * Resolution
-** If the id is 1234, user can see everthing.
-** If the profile is as below, those fields can be seen.
-** Otherwise the default fields can be seen.
+ * If the id is 1234, user can see everthing.
+ * If the profile is as below, those fields can be seen.
+ * Otherwise the default fields can be seen.
 * addPermissions
-** user.addPermission( "read", "Practitioner", null, null, "name" )
-** user.addPermission( "read", "Practitioner", null, null, "gender" )
-** user.addPermission( "read", "Practitioner", null, null, "birthDate" )
-** user.addPermission( "read", "Practitioner", "1234" )
-** user.addPermission( "read", "Practitioner", null, 
+ * user.addPermission( "read", "Practitioner", null, null, "name" )
+ * user.addPermission( "read", "Practitioner", null, null, "gender" )
+ * user.addPermission( "read", "Practitioner", null, null, "birthDate" )
+ * user.addPermission( "read", "Practitioner", "1234" )
+ * user.addPermission( "read", "Practitioner", null, 
     "meta.profile = 'http://ihris.org/fhir/StructureDefinition/ihris-practitioner'", "name" )
-** user.addPermission( "read", "Practitioner", null, 
+ * user.addPermission( "read", "Practitioner", null, 
     "meta.profile = 'http://ihris.org/fhir/StructureDefinition/ihris-practitioner'", "gender" )
-** user.addPermission( "read", "Practitioner", null, 
+ * user.addPermission( "read", "Practitioner", null, 
     "meta.profile = 'http://ihris.org/fhir/StructureDefinition/ihris-practitioner'", "birthDate" )
-** user.addPermission( "read", "Practitioner", null, 
+ * user.addPermission( "read", "Practitioner", null, 
     "meta.profile = 'http://ihris.org/fhir/StructureDefinition/ihris-practitioner'", "qualification" )
-** user.addPermission( "write", "Practitioner", "1234" )
+ * user.addPermission( "write", "Practitioner", "1234" )
 
 ```json
 {

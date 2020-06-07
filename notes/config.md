@@ -51,17 +51,24 @@ IHRIS_FHIR__SERVER=http://locahost:8080/hapi/fhir
 * fhir:username
 * fhir:password
 * config
-** name = id of config Parameters resource
+ * name = id of config Parameters resource
 * keys
-** name = public key string
+ * name = public key string
 
 ### Allowed in local or remote
 * user:loggedout = id of logged out user resource (default: ihris-user-loggedout)
 * auth:google:clientId
 * auth:google:clientSecret
 * modules
-** name = id of Library resource
+ * name = id of Library resource
 * site
-** title = "title" (default: Manage)
-** site = "site" 
-** logo = "logo image" (default: iHRIS5Logo.png)
+ * title = "title" (default: Manage)
+ * site = "site" 
+ * logo = "logo image" (default: iHRIS5Logo.png)
+ * auth - List of authorization options 
+  * name = The name of the config (e.g. google or local)
+   * type = post | get (how the authorization is submitted, with post will create a pop up form)
+   * link = link to get or post
+   * btn
+    * image = image for the button
+    * text = Alt text for the button
