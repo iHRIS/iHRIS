@@ -108,7 +108,7 @@ describe( 'Test auth routes', () => {
     test( 'test local user login', () => {
       return request(app).post("/login").send( "username=test@ihris.org&password=test" ).then ( (response) => {
         expect(response.statusCode).toBe(200)
-        expect(response.body).toEqual({ok:true})
+        expect(response.body).toEqual({ok:true,name:"iHRIS Test User"})
       } )
     } )
 

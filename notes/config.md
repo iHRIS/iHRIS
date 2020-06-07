@@ -61,3 +61,7 @@ IHRIS_FHIR__SERVER=http://locahost:8080/hapi/fhir
 * auth:google:clientSecret
 * modules
 ** name = id of Library resource
+* site
+** title = "title" (default: Manage)
+** site = "site" 
+** logo = "logo image" (default: iHRIS5Logo.png)

@@ -14,7 +14,8 @@
     "vue": "^2.6.11",
     "vue-router": "^3.2.0",
     "vuetify": "^2.2.11",
-    "vuex": "^3.4.0"
+    "vuex": "^3.4.0",
+    "whatwg-fetch": "^3.0.0"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "~4.4.0",
@@ -52,7 +53,10 @@
     "parserOptions": {
       "parser": "babel-eslint"
     },
-    "rules": {},
+    "rules": {
+      "semi": 1,
+      "no-prototype-builtins": 0
+    },
     "overrides": [
       {
         "files": [

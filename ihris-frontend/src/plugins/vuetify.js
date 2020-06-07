@@ -20,7 +20,7 @@ export default new Vuetify({
           darken1: "04070e",
           lighten1: "e5e5e5"
         },
-        accent: "#78496",
+        accent: "#78496a",
         error: "#b32317",
         info: "#005595",
         success: "#8a8d35",

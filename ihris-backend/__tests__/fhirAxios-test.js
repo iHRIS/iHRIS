@@ -358,7 +358,7 @@ describe( 'interacts with FHIR server using axios', () => {
       // This should throw an error and never reach here.
       expect( false ).toBeTruthy()
     } ).catch( (err) => {
-      expect( err.message ).toEqual( "Unable to return only the contains expansion when the full expansion wasn't returned." )
+      expect( err.message ).toEqual( "Unable to return only the contains element when the full expansion wasn't returned." )
     } )
   } )
 

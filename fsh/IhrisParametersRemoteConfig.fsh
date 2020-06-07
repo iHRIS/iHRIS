@@ -4,14 +4,15 @@ Id:             ihris-parameters-remote-config
 Title:          "iHRIS Parameters Remote Config"
 Description:    "Configuration Parameters to be loaded from a remote file for iHRIS."
 * parameter 2..2
-* parameter ^slicing.discriminator.type = #pattern
+* parameter ^slicing.discriminator.type = #value
 * parameter ^slicing.discriminator.path = "name"
-* parameter ^slicing.rules = #open
+* parameter ^slicing.rules = #closed
 * parameter contains 
             Signature 1..1 and
             Config 1..1 
 * parameter[Signature].name = "signature"
 * parameter[Signature].value[x] only Signature
+* parameter[Signature].value[x] ^slicing.rules = #closed
 * parameter[Signature].valueSignature 1..1
 * parameter[Signature].valueSignature.type 1..1
 * parameter[Signature].valueSignature.type = urn:iso-astm:E1762-95:2013#1.2.840.10065.1.12.1.14
@@ -19,13 +20,14 @@ Description:    "Configuration Parameters to be loaded from a remote file for iH
 * parameter[Signature].part 0..0
 * parameter[Signature].resource 0..0
 * parameter[Config].name = "config"
-* parameter[Config].part ^slicing.discriminator.type = #pattern
+* parameter[Config].part ^slicing.discriminator.type = #value
 * parameter[Config].part ^slicing.discriminator.path = "name"
-* parameter[Config].part ^slicing.rules = #open
+* parameter[Config].part ^slicing.rules = #closed
 * parameter[Config].part contains
             ConfigId 1..*
 * parameter[Config].part[ConfigId].name 1..1
 * parameter[Config].part[ConfigId].value[x] only string
+* parameter[Config].part[ConfigId].value[x] ^slicing.rules = #closed
 * parameter[Config].part[ConfigId].valueString 1..1
 * parameter[Config].part[ConfigId].part 0..0
 * parameter[Config].part[ConfigId].resource 0..0

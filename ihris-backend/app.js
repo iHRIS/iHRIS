@@ -23,7 +23,7 @@ async function startUp() {
   console.log(nconf.get())
 
   const indexRouter = require('./routes/index')
-  const usersRouter = require('./routes/users')
+  const configRouter = require('./routes/config')
   const authRouter = require('./routes/auth')
   const fhirRouter = require('./routes/fhir')
 
@@ -41,12 +41,12 @@ async function startUp() {
 
   
   app.use('/', indexRouter)
-  app.use('/users', usersRouter)
 
   app.use('/auth', authRouter)
   app.use(authRouter.passport.initialize())
   app.use(authRouter.passport.session())
 
+  app.use('/config', configRouter)
   app.get('/test',
     ( req, res ) => {
       res.status(200).json({"user":req.user})

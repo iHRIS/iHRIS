@@ -14,7 +14,7 @@ passport.use( new GoogleStrategy(
   {
     clientID: nconf.get("auth:google:clientId") || "not set",
     clientSecret: nconf.get("auth:google:clientSecret") || "not set",
-    callbackURL: "http://localhost:3000/auth/google/callback"
+    callbackURL: "http://localhost:8080/auth/google/callback"
   },
   (accessToken, refreshToken, profile, done) => {
 
@@ -106,7 +106,25 @@ router.use(passport.session())
 
 router.passport = passport
 
-router.get('/', passport.authenticate('custom-loggedout', {}),
+router.get('/', 
+  ( req, res, next ) => {
+    if ( req.user ) {
+      res.status(200).json({ok:true})
+    } else {
+      next()
+    }
+  },
+  passport.authenticate('custom-loggedout', {}),
+  ( req, res ) => {
+    if ( req.user ) {
+      res.status(200).json({ok:true})
+    } else {
+      res.status(200).json({ok:false})
+    }
+  }
+)
+router.get('/logout', 
+  passport.authenticate('custom-loggedout', {}),
   ( req, res ) => {
     if ( req.user ) {
       res.status(200).json({ok:true})
@@ -118,16 +136,18 @@ router.get('/', passport.authenticate('custom-loggedout', {}),
 
 router.get('/google', passport.authenticate('google', { scope: ['email'] } ) )
 router.get('/google/callback',
-  passport.authenticate('google', { failureRedirect: '/' } ),
-  ( req, res ) => {
-    res.status(200).json({user:req.user})
-  }
+  passport.authenticate('google', { failureRedirect: '/', successRedirect: '/' } )
 )
 
 router.post("/login",
   passport.authenticate('local', {}),
   ( req, res ) => {
-    res.status(200).json({ok:true})
+    let name = "Unknown"
+    try {
+      name = req.user.resource.name[0].text
+    } catch(err) {
+    }
+    res.status(200).json({ok:true,name:name})
   }
 )
 

@@ -4,6 +4,7 @@
 ** Save audit messages for activity
 *** login/logout
 *** save/update resource
+* Internationalization
 
 # Notes
 
