@@ -9,7 +9,7 @@ const fhirModules = {
       fhirAxios.read( "Library", mod ).then( (library) => {
         let sign = library.content[0].data
         let module64 = Buffer.from( library.content[1].data, 'base64' )
-        let module = module64.toString('ascii')
+        let module = module64.toString('utf8')
         let publicKeys = Object.values( nconf.get("keys") )
         let verifier = crypto.createVerify( 'sha256' )
 

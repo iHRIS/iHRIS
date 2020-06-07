@@ -16,14 +16,15 @@ const TEST_USER = user.restoreUser( {
       StructureDefinition : true, 
       CodeSystem : true, 
       ValueSet: { id: { "mock-test": true, "mock-field": { code : true } } }, 
-      Person: { id: { "test-person": true } } 
+      Person: { id: { "test-person": true } },
+      DocumentReference: { constraint: { "category.exists(coding.exists(code = 'open'))": true } }
     }, 
     write: { Person: { id: { "test-person": true } } } 
   }
 } )
 const TEST_USER2 = user.restoreUser( {
   resource: { resourceType: "Person" },
-  permissions: { read : { StructureDefinition : true, CodeSystem : true } }
+  permissions: { read : { StructureDefinition : true, CodeSystem : true, DocumentReference: true } },
 } )
 
 const express = require('express')
@@ -181,7 +182,7 @@ describe( 'Test FHIR routes', () => {
       axios.__setFhirResults( DEFAULT_URL + "ValueSet/mock-field/$expand", null, MOCK_VALUESET_EXPANSION )
       appUser = TEST_USER
       return request(app).get("/ValueSet/mock-field/$expand").then( (response) => {
-        expect(response.statusCode).toBe( 402 )
+        expect(response.statusCode).toBe( 401 )
         expect(response.body).toEqual( DENIED_OUTCOME )
       } )
     } )
@@ -244,6 +245,89 @@ describe( 'Test FHIR routes', () => {
       return request(app).put("/Person/test-fail").send( MOCK_PERSON_FAIL ).then( (response) => {
         expect(response.statusCode).toBe( 401 )
         expect(response.body).toEqual( DENIED_OUTCOME )
+      } )
+    } )
+
+  } )
+
+  describe( 'test GET /DocumentReference/id/$html', () => {
+    const MOCK_OPEN_DOCUMENT = {
+      "resourceType": "DocumentReference",
+      "id": "page-test",
+      "meta": { "profile": [ "http://ihris.org/fhir/StructureDefinition/ihris-document" ] },
+      "status": "current",
+      "docStatus": "final",
+      "date": "2020-06-07T14:54:00Z",
+      "category": [
+        {
+          "coding": [
+            { "code": "open", "system": "http://ihris.org/fhir/CodeSystem/ihris-document-category", "display": "Open Access" }
+          ]
+        }
+      ],
+      "content": [
+        {
+          "attachment": {
+            "contentType": "text/markdown",
+            "title": "Testing",
+            "data": "IyBUZXN0aW5nCg=="
+          }
+        }
+      ]
+    }
+    const MOCK_DOCUMENT = "<h1 id=\"testing\">Testing</h1>\n"
+    const MOCK_RESTRICTED_DOCUMENT = {
+      "resourceType": "DocumentReference",
+      "id": "page-test",
+      "meta": { "profile": [ "http://ihris.org/fhir/StructureDefinition/ihris-document" ] },
+      "status": "current",
+      "docStatus": "final",
+      "date": "2020-06-07T14:54:00Z",
+      "category": [
+        {
+          "coding": [
+            { "code": "restricted", "system": "http://ihris.org/fhir/CodeSystem/ihris-document-category", "display": "Open Access" }
+          ]
+        }
+      ],
+      "content": [
+        {
+          "attachment": {
+            "contentType": "text/markdown",
+            "title": "Testing",
+            "data": "IyBUZXN0aW5nCg=="
+          }
+        }
+      ]
+    }
+ 
+    test( 'test open DocumentReference to HTML instance for open user', () => {
+      axios.__setFhirResults( DEFAULT_URL + "DocumentReference/page-test", null, MOCK_OPEN_DOCUMENT )
+
+      appUser = TEST_USER
+      return request(app).get("/DocumentReference/page-test/$html").then( (response) => {
+        expect(response.statusCode).toBe( 200 )
+        expect(response.text).toEqual( MOCK_DOCUMENT )
+      } )
+    } )
+
+    test( 'test restricted DocumentReference to HTML instance for open user', () => {
+      axios.__setFhirResults( DEFAULT_URL + "DocumentReference/page-test", null, MOCK_RESTRICTED_DOCUMENT )
+
+      appUser = TEST_USER
+      return request(app).get("/DocumentReference/page-test/$html").then( (response) => {
+        expect(response.statusCode).toBe( 401 )
+        expect(response.body).toEqual( DENIED_OUTCOME )
+      } )
+    } )
+
+    test( 'test restricted DocumentReference to HTML instance for restricted user', () => {
+      axios.__setFhirResults( DEFAULT_URL + "DocumentReference/page-test", null, MOCK_RESTRICTED_DOCUMENT )
+
+      appUser = TEST_USER2
+      return request(app).get("/DocumentReference/page-test/$html").then( (response) => {
+        expect(response.statusCode).toBe( 200 )
+        expect(response.text).toEqual( MOCK_DOCUMENT )
       } )
     } )
 

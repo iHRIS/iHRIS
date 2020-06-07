@@ -78,6 +78,7 @@ Title:          "Code system for task permissions."
 * #ValueSet             "ValueSet"
 * #CodeSystem           "CodeSystem"
 * #Basic                "Basic"
+* #DocumentReference    "DocumentReference"
 
 ValueSet:       IhrisTaskResourceValueSet
 Id:             ihris-task-resource
@@ -96,6 +97,9 @@ Usage:          #example
 * extension[task][1].extension[resource].valueCode = IhrisTaskResourceCodeSystem#CodeSystem
 * extension[task][2].extension[permission].valueCode = IhrisTaskPermissionCodeSystem#read
 * extension[task][2].extension[resource].valueCode = IhrisTaskResourceCodeSystem#ValueSet
+* extension[task][3].extension[permission].valueCode = IhrisTaskPermissionCodeSystem#read
+* extension[task][3].extension[resource].valueCode = IhrisTaskResourceCodeSystem#DocumentReference
+* extension[task][3].extension[constraint].valueString = "category.exists(coding.exists(code = 'open'))"
 
 Instance:       ihris-role-admin
 InstanceOf:     IhrisRole
