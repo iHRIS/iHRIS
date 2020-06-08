@@ -72,3 +72,9 @@ IHRIS_FHIR__SERVER=http://locahost:8080/hapi/fhir
    * btn
     * image = image for the button
     * text = Alt text for the button
+ * footer
+  * links
+   * name = The name of the link (e.g. about or ihris)
+    * text = Text to display
+    * to = vue route (e.g. /static/page-about
+    * href = external link

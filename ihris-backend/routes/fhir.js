@@ -205,7 +205,7 @@ const docToHTML = ( resource ) => {
     } else {
       html = data
     }
-    return DOMPurify.sanitize(html)
+    return DOMPurify.sanitize("<div>" + html + "</div>")
   } catch( err ) {
     return "Failed to get HTML from DocumentReference"
   }
@@ -240,7 +240,6 @@ router.get("/DocumentReference/:id/\\$html", (req, res) => {
     }
   } ).catch( (err) => {
     /* return response from FHIR server */
-    console.log(err)
     return res.status( err.response.status ).json( err.response.data )
     /* for custom responses
     let outcome = { ...ERROR_OUTCOME }

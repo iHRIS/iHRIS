@@ -3,21 +3,38 @@ Parent:         Practitioner
 Id:             ihris-practitioner
 Title:          "iHRIS Practitioner"
 Description:    "iHRIS profile of Practitioner."
-* identifier MS
+/*
+* identifier 
+* identifier.use 
+* identifier.type 
+* identifier.system 
+* identifier.value 
+* identifier.period 
+* identifier.assigner 
+*/
 * name 1..* MS
-* name.text 1..1 MS
-* telecom MS
-* address MS
+* name.use MS
+* name.family MS
+* name.given MS
+* name.prefix MS
+* name.suffix MS
+/*
+* telecom 0..*
+* address 0..*
+*/
 * gender 1..1 MS
 * birthDate MS
-* photo MS
-* qualification MS
-* communication MS
+/*
+* photo 0..*
+* qualification 0..*
+* communication 0..*
+*/
 * extension contains 
     IhrisPractitionerResidence named residence 0..1 MS and
-    IhrisPractitionerNationality named nationality 0..1 MS and
-    IhrisPractitionerMaritalStatus named maritalStatus 0..1 MS and
-    IhrisPractitionerDependents named dependents 0..1 MS
+    IhrisPractitionerNationality named nationality 0..1 and
+    IhrisPractitionerMaritalStatus named maritalStatus 0..1 and
+    IhrisPractitionerDependents named dependents 0..1 
+* extension[residence].valueReference.reference MS
 
 
 Extension:      IhrisPractitionerResidence
@@ -27,9 +44,9 @@ Description:    "iHRIS extension for Practitioner residence."
 * ^context.type = #element
 * ^context.expression = "Practitioner"
 * value[x] only Reference
-* valueReference 1..1 MS
+* valueReference 1..1 
 * valueReference only Reference(Location)
-* valueReference.reference 1..1 MS
+* valueReference.reference 1..1
 * valueReference.type 0..0
 * valueReference.identifier 0..0
 * valueReference.display 0..0
