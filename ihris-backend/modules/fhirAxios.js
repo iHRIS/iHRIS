@@ -64,6 +64,7 @@ const fhirAxios = {
       axios.get( url.href, { auth: auth } ).then ( (response) => {
         resolve(response.data)
       } ).catch( (err) => {
+        console.log("FA", err)
         reject( err )
       } )
 

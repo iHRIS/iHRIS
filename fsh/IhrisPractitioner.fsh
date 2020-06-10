@@ -13,17 +13,25 @@ Description:    "iHRIS profile of Practitioner."
 * identifier.assigner 
 */
 * name 1..* MS
+* name ^label = "Name"
 * name.use MS
+* name.use ^label = "Use"
 * name.family MS
+* name.family ^label = "Family"
 * name.given MS
+* name.given ^label = "Given Name(s)"
 * name.prefix MS
+* name.prefix ^label = "Prefix"
 * name.suffix MS
+* name.suffix ^label = "Suffix"
 /*
 * telecom 0..*
 * address 0..*
 */
 * gender 1..1 MS
+* gender ^label = "Gender"
 * birthDate MS
+* birthDate ^label = "Birth Date"
 /*
 * photo 0..*
 * qualification 0..*
@@ -44,9 +52,11 @@ Description:    "iHRIS extension for Practitioner residence."
 * ^context.type = #element
 * ^context.expression = "Practitioner"
 * value[x] only Reference
-* valueReference 1..1 
+* valueReference 1..1 MS
+* valueReference ^label = "Residence"
 * valueReference only Reference(Location)
-* valueReference.reference 1..1
+* valueReference.reference 1..1 MS
+* valueReference.reference ^label = "Location"
 * valueReference.type 0..0
 * valueReference.identifier 0..0
 * valueReference.display 0..0
@@ -59,6 +69,7 @@ Description:    "iHRIS extension for Practitioner nationality."
 * ^context.expression = "Practitioner"
 * value[x] only Coding
 * valueCoding 1..1 MS
+* valueCoding ^label = "Nationality"
 * valueCoding from http://hl7.org/fhir/ValueSet/iso3166-1-2 (required)
 
 Extension:      IhrisPractitionerMaritalStatus
@@ -69,6 +80,7 @@ Description:    "iHRIS extension for Practitioner marital status."
 * ^context.expression = "Practitioner"
 * value[x] only Coding
 * valueCoding 1..1 MS
+* valueCoding ^label = "Marital Status"
 * valueCoding from http://hl7.org/fhir/ValueSet/marital-status (required)
 
 Extension:      IhrisPractitionerDependents
@@ -79,3 +91,4 @@ Description:    "iHRIS extension for Practitioner number of dependents."
 * ^context.expression = "Practitioner"
 * value[x] only positiveInt
 * valuePositiveInt 1..1 MS
+* valuePositiveInt ^label = "Number of Dependents"

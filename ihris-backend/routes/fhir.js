@@ -7,6 +7,7 @@ const isEmpty = require('is-empty')
 const marked = require('marked')
 const { JSDOM } = require('jsdom')
 const createDOMPurify = require('dompurify')
+const outcomes = require('../config/operationOutcomes')
 
 const window = new JSDOM('').window
 const DOMPurify = createDOMPurify(window)
@@ -15,40 +16,9 @@ router.get("/", (req, res, next) => {
   res.status(200).json( { user: req.user } )
 } )
 
-const DENIED_OUTCOME = {
-  resourceType: "OperationOutcome",
-  issue: [
-    {
-      severity: "error",
-      code: "forbidden",
-      diagnostics: "Access Denied"
-    }
-  ]
-}
-const NOTLOGGEDIN_OUTCOME = {
-  resourceType: "OperationOutcome",
-  issue: [
-    {
-      severity: "error",
-      code: "forbidden",
-      diagnostics: "Not logged in"
-    }
-  ]
-}
-const ERROR_OUTCOME = {
-  resourceType: "OperationOutcome",
-  issue: [
-    {
-      severity: "error",
-      code: "exception",
-      diagnostics: ""
-    }
-  ]
-}
-
 router.get("/:resource/:id?", (req, res) => {
   if ( !req.user ) {
-    return res.status(401).json( NOTLOGGEDIN_OUTCOME )
+    return res.status(401).json( outcomes.NOTLOGGEDIN)
   }
   let allowed = false
   if ( req.params.id ) {
@@ -57,7 +27,7 @@ router.get("/:resource/:id?", (req, res) => {
     allowed = req.user.hasPermissionByName( "read", req.params.resource )
   }
   if ( !allowed ) {
-    return res.status(401).json( DENIED_OUTCOME )
+    return res.status(401).json( outcomes.DENIED )
   }
   if ( req.params.id ) {
     fhirAxios.read( req.params.resource, req.params.id ).then( (resource) => {
@@ -70,7 +40,7 @@ router.get("/:resource/:id?", (req, res) => {
         if ( fieldList === true ) {
           return res.status(200).json(resource)
         } else if ( !fieldList ) {
-          return res.status(401).json( DENIED_OUTCOME )
+          return res.status(401).json( outcomes.DENIED )
         } else {
           return res.status(200).json( fhirFilter.filter( resource, fieldList ) )
         }
@@ -79,7 +49,7 @@ router.get("/:resource/:id?", (req, res) => {
       /* return response from FHIR server */
       return res.status( err.response.status ).json( err.response.data )
       /* for custom responses
-      let outcome = { ...ERROR_OUTCOME }
+      let outcome = { ...outcomes.ERROR }
       outcome.issue[0].diagnostics = err.message
       return res.status(500).json( outcome )
       */
@@ -102,7 +72,7 @@ router.get("/:resource/:id?", (req, res) => {
       /* return response from FHIR server */
       return res.status( err.response.status ).json( err.response.data )
       /* for custom responses
-      let outcome = { ...ERROR_OUTCOME }
+      let outcome = { ...outcomes.ERROR }
       outcome.issue[0].diagnostics = err.message
       return res.status(500).json( outcome )
       */
@@ -112,7 +82,7 @@ router.get("/:resource/:id?", (req, res) => {
 
 router.post("/:resource", (req, res) => {
   if ( !req.user ) {
-    return res.status(401).json( NOTLOGGEDIN_OUTCOME )
+    return res.status(401).json( outcomes.NOTLOGGEDIN )
   }
   let allowed = req.user.hasPermissionByObject( "write", req.body )
 
@@ -120,7 +90,7 @@ router.post("/:resource", (req, res) => {
   if ( allowed === true ) {
     resource = req.body
   } else if ( !allowed ) {
-    return res.status(401).json( DENIED_OUTCOME )
+    return res.status(401).json( outcomes.DENIED )
   } else {
     resource = fhirFilter.filter( req.body, allowed )
   }
@@ -132,7 +102,7 @@ router.post("/:resource", (req, res) => {
     console.log(err)
     return res.status( err.response.status ).json( err.response.data )
     /* for custom responses
-    let outcome = { ...ERROR_OUTCOME }
+    let outcome = { ...outcomes.ERROR }
     outcome.issue[0].diagnostics = err.message
     return res.status(500).json( outcome )
     */
@@ -141,19 +111,19 @@ router.post("/:resource", (req, res) => {
 
 router.put("/:resource/:id", (req, res) => {
   if ( !req.user ) {
-    return res.status(401).json( NOTLOGGEDIN_OUTCOME )
+    return res.status(401).json( outcomes.NOTLOGGEDIN )
   }
   let update = req.body
   let allowed = req.user.hasPermissionByObject( "write", update )
   if ( !allowed ) {
-    return res.status(401).json( DENIED_OUTCOME )
+    return res.status(401).json( outcomes.DENIED )
   }
 
   if ( allowed !== true ) {
     // Not allowed at this time because it's complicated to combine the filtered
     // results with the original data.  Due to arrays in FHIR elements.
     // Should instead use patching with this access level to update one field at a time.
-    return res.status(401).json( DENIED_OUTCOME )
+    return res.status(401).json( outcomes.DENIED )
   }
 
   fhirAxios.update( update ).then( (resource) => {
@@ -162,7 +132,7 @@ router.put("/:resource/:id", (req, res) => {
     /* return response from FHIR server */
     return res.status( err.response.status ).json( err.response.data )
     /* for custom responses
-    let outcome = { ...ERROR_OUTCOME }
+    let outcome = { ...outcomes.ERROR }
     outcome.issue[0].diagnostics = err.message
     return res.status(500).json( outcome )
     */
@@ -171,24 +141,24 @@ router.put("/:resource/:id", (req, res) => {
 
 router.get("/ValueSet/:id/\\$expand", (req, res) => {
   if ( !req.user ) {
-    return res.status(401).json( NOTLOGGEDIN_OUTCOME )
+    return res.status(401).json( outcomes.NOTLOGGEDIN )
   }
   let allowed = req.user.hasPermissionByName( "read", "ValueSet", req.params.id )
   if ( !allowed ) {
-    return res.status(401).json( DENIED_OUTCOME )
+    return res.status(401).json( outcomes.DENIED )
   }
   fhirAxios.expand( req.params.id, req.query ).then( (resource) => {
     if ( allowed === true ) {
       return res.status(200).json(resource)
     } else {
       // Field level access to ValueSets doesn't really make sense so don't do expansions if not full access
-      return res.status(401).json( DENIED_OUTCOME )
+      return res.status(401).json( outcomes.DENIED )
     }
   } ).catch( (err) => {
     /* return response from FHIR server */
     return res.status( err.response.status ).json( err.response.data )
     /* for custom responses
-    let outcome = { ...ERROR_OUTCOME }
+    let outcome = { ...outcomes.ERROR }
     outcome.issue[0].diagnostics = err.message
     return res.status(500).json( outcome )
     */
@@ -213,12 +183,12 @@ const docToHTML = ( resource ) => {
 
 router.get("/DocumentReference/:id/\\$html", (req, res) => {
   if ( !req.user ) {
-    return res.status(401).json( NOTLOGGEDIN_OUTCOME )
+    return res.status(401).json( outcomes.NOTLOGGEDIN )
   }
 
   let allowed = req.user.hasPermissionByName( "read", "DocumentReference", req.params.id )
   if ( !allowed ) {
-    return res.status(401).json( DENIED_OUTCOME )
+    return res.status(401).json( outcomes.DENIED )
   }
   fhirAxios.read( "DocumentReference", req.params.id ).then( (resource) => {
     if ( allowed === true ) {
@@ -232,17 +202,17 @@ router.get("/DocumentReference/:id/\\$html", (req, res) => {
         let html = docToHTML( resource )
         return res.status(200).send(html)
       } else if ( !fieldList ) {
-        return res.status(401).json( DENIED_OUTCOME )
+        return res.status(401).json( outcomes.DENIED )
       } else {
         // Field level access to ValueSets doesn't really make sense so don't do expansions if not full access
-        return res.status(401).json( DENIED_OUTCOME )
+        return res.status(401).json( outcomes.DENIED )
       }
     }
   } ).catch( (err) => {
     /* return response from FHIR server */
     return res.status( err.response.status ).json( err.response.data )
     /* for custom responses
-    let outcome = { ...ERROR_OUTCOME }
+    let outcome = { ...outcomes.ERROR }
     outcome.issue[0].diagnostics = err.message
     return res.status(500).json( outcome )
     */

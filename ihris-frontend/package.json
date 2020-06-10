@@ -47,14 +47,13 @@
     },
     "extends": [
       "plugin:vue/essential",
-      "eslint:recommended",
-      "@vue/prettier"
+      "eslint:recommended"
     ],
     "parserOptions": {
       "parser": "babel-eslint"
     },
     "rules": {
-      "semi": 1,
+      "semi": 0,
       "no-prototype-builtins": 0
     },
     "overrides": [

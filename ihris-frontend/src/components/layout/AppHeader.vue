@@ -8,6 +8,8 @@
     </v-toolbar-title>
 
     <v-spacer></v-spacer>
+    <div>Welcome <span v-if="header.user.loggedin">, {{ header.user.name }}</span></div>
+    <v-spacer></v-spacer>
     <v-progress-circular
       indeterminate
       v-if="!header.title"
@@ -41,7 +43,6 @@
       </v-list>
     </v-menu>
     <template v-if="header.user.loggedin">
-      Welcome, {{ header.user.name }}
       <v-btn icon @click="logout" title="Logout" :loading="loading" :disabled="loading">
         <v-icon>mdi-logout</v-icon>
       </v-btn>

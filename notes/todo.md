@@ -5,6 +5,13 @@
   * login/logout
   * save/update resource
 * Internationalization
+* add additional fields to resource display
+ * defaultValue[x]
+ * fixed[x]
+ * pattern[x]
+ * minValue[x]
+ * maxValue[x]
+ * constraint
 
 # Notes
 
