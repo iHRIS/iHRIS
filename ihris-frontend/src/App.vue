@@ -1,21 +1,21 @@
 <template>
   <v-app style="background-color: #f4f7f9">
-    <AppHeader :header="header" />
-    <AppNavigation :nav="nav" />
+    <the-header :header="header" />
+    <the-navigation :nav="nav" />
 
 
     <v-content>
       <router-view />
     </v-content>
    
-    <AppFooter :footer="footer" />
+    <the-footer :footer="footer" />
   </v-app>
 </template>
 
 <script>
-import AppHeader from "./components/layout/AppHeader"
-import AppNavigation from "./components/layout/AppNavigation"
-import AppFooter from "./components/layout/AppFooter"
+import TheHeader from "./components/layout/the-header"
+import TheNavigation from "./components/layout/the-navigation"
+import TheFooter from "./components/layout/the-footer"
 
 export default {
   name: "App",
@@ -34,9 +34,9 @@ export default {
     }
   }),
   components: {
-    AppHeader,
-    AppNavigation,
-    AppFooter
+    TheHeader,
+    TheNavigation,
+    TheFooter
   },
   created: function() {
     // make sure we're user has been created in session (logged in or not)

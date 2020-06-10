@@ -1,7 +1,7 @@
 import Vue from "vue"
 import VueRouter from "vue-router"
-import Home from "../views/Home.vue"
-import Test from "../views/Test.vue"
+import Home from "../views/home.vue"
+import Test from "../views/test.vue"
 
 Vue.use(VueRouter)
 
@@ -20,7 +20,7 @@ const routes = [
     path: "/static/:id",
     name: "Static Page",
     component: () =>
-      import(/* webpackChunkName: "about" */ "../views/StaticPage.vue")
+      import(/* webpackChunkName: "about" */ "../views/static-page.vue")
   },
   {
     path: "/about",
@@ -29,7 +29,7 @@ const routes = [
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
     component: () =>
-      import(/* webpackChunkName: "about" */ "../views/About.vue")
+      import(/* webpackChunkName: "about" */ "../views/about.vue")
   }
 ]
 

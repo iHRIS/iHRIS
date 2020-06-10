@@ -37,7 +37,7 @@
           :key="auth.id"
         >
           <v-list-item-title>
-            <AuthButton :data="auth" v-on:loggedin="header.user.loggedin=true; header.user.name=$event"></AuthButton>
+            <auth-button :data="auth" v-on:loggedin="header.user.loggedin=true; header.user.name=$event"></auth-button>
           </v-list-item-title>
         </v-list-item>
       </v-list>
@@ -52,7 +52,7 @@
 </template>
 
 <script>
-import AuthButton from "./AuthButton"
+import AuthButton from "./auth-button"
 
 export default {
   props: ["header"],
