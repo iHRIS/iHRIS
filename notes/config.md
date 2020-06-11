@@ -78,3 +78,18 @@ IHRIS_FHIR__SERVER=http://locahost:8080/hapi/fhir
     * text = Text to display
     * to = vue route (e.g. /static/page-about
     * href = external link
+
+
+# Resources used for configuration
+## Page resource
+
+*work in progress*
+
+The page resource can have search fields to display, filters available, the structure definition, 
+and the display order of fields.  Complex field order can be changed within the complex field, but 
+not across the whole resource.  E.g. name.use, name.family, name.given, but you can't add gender 
+between name.use and name.family.
+
+* filter can include the label in the value.  include any modifier as well.  These must be the
+FHIR search parameters available for the resource.
+ * Name|name:contains

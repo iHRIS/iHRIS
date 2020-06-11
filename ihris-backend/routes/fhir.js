@@ -57,7 +57,9 @@ router.get("/:resource/:id?", (req, res) => {
   } else {
     fhirAxios.search( req.params.resource, req.query ).then( (resource) => {
       // Need to do deeper checking due to possibility of includes
-      fhirFilter.filterBundle( "read", resource, req.user )
+      if ( resource && resource.entry && resource.entry.length > 0 ) {
+        fhirFilter.filterBundle( "read", resource, req.user )
+      }
       return res.status(200).json(resource)
       
       // DELETE THE FOLLOWING, ALL NEED TO BE FILTERED
@@ -70,12 +72,11 @@ router.get("/:resource/:id?", (req, res) => {
       */
     } ).catch( (err) => {
       /* return response from FHIR server */
-      return res.status( err.response.status ).json( err.response.data )
-      /* for custom responses
+      //return res.status( err.response.status ).json( err.response.data )
+      /* for custom responses */
       let outcome = { ...outcomes.ERROR }
       outcome.issue[0].diagnostics = err.message
       return res.status(500).json( outcome )
-      */
     } )
   }
 } )

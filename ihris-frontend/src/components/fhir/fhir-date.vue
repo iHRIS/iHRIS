@@ -1,6 +1,5 @@
 <template>
   <v-container>
-    <h2>{{ label }}</h2>
     <v-menu 
       ref="menu" 
       v-model="menu" 
@@ -13,9 +12,12 @@
         <v-text-field
           v-model="value"
           :label="label"
-          prepend-icon="mdi-calendar"
+          prepend-inner-icon="mdi-calendar"
           readonly
           v-on="on"
+          outlined
+          hide-details="auto"
+          dense
         ></v-text-field>
       </template>
       <v-date-picker
