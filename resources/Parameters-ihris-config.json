@@ -93,18 +93,6 @@
         {
           "name": "site:footer:links:ihris:href",
           "valueString": "http://ihris.org/"
-        },
-        {
-          "name": "auth:google:clientId",
-          "valueString": "519931555899-rln1msntpjhe4j6rcdth795u934dkc0l.apps.googleusercontent.com"
-        },
-        {
-          "name": "auth:google:clientSecret",
-          "valueString": "ZD3VY0kjICuX5Enm3DEP1DG9"
-        },
-        {
-          "name": "modules:mod",
-          "valueString": "test-module"
         }
       ]
     }

@@ -16,11 +16,11 @@
             "code": "1.2.840.10065.1.12.1.14"
           }
         ],
-        "when": "2020-06-11T06:36:53.559Z",
+        "when": "2020-06-11T06:46:39.141Z",
         "who": {
           "reference": "http://ihris.org/fhir/Organization/ihris"
         },
-        "data": "P4d94c4qqCjbbYjgBBu2oQ6WEOrVT6Omclu/+k3E1oiMRa/BjlQh3GfIkdyV2lUDsx+BzX0kYdbVJU3Npkf0RTCfJstUGIBj8ILI/GKJnmwL551Z1LCkCWFzERZc/2odypVhhwgNYiUl/0VY/zZ6JX92ZbPAYtqRBYfvzFx38Dw="
+        "data": "ztBZXpKbSs2iS4xYcRro1ujrAFo5E6vTnb421JTkCbjQimiXQVnfVLKr8erU3IK1gM8iF8iTZ20xMGNMJgJUQBF1avcLGmUIiC8+71kfZi5xEacA/RKDvcpClbbEsaomFSDUYbS+gjgu8EKp8Co/s6khDNW+OITs1Fox3vmiIiI="
       }
     },
     {
@@ -93,18 +93,6 @@
         {
           "name": "site:footer:links:ihris:href",
           "valueString": "http://ihris.org/"
-        },
-        {
-          "name": "auth:google:clientId",
-          "valueString": "519931555899-rln1msntpjhe4j6rcdth795u934dkc0l.apps.googleusercontent.com"
-        },
-        {
-          "name": "auth:google:clientSecret",
-          "valueString": "ZD3VY0kjICuX5Enm3DEP1DG9"
-        },
-        {
-          "name": "modules:mod",
-          "valueString": "test-module"
         }
       ]
     }
