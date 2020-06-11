@@ -1,0 +1,17 @@
+{
+  "name": "ihris-tools",
+  "version": "1.0.0",
+  "description": "",
+  "main": "createModule.js",
+  "dependencies": {
+    "axios": "^0.19.2",
+    "fhir": "^4.7.8",
+    "nconf": "^0.10.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "GPL-3.0-or-later"
+}
