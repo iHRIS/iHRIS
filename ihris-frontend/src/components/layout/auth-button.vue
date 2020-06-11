@@ -46,6 +46,7 @@
 
 <script>
 export default {
+  name: "auth-button",
   props: ["data"],
   data: function() {
     return {

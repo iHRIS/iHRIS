@@ -42,6 +42,7 @@
 <script>
 
 export default {
+  name: "the-navigation",
   props: ["nav"],
   data: function() {
     return {

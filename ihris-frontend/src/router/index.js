@@ -2,6 +2,7 @@ import Vue from "vue"
 import VueRouter from "vue-router"
 import Home from "../views/home.vue"
 import Test from "../views/test.vue"
+import SlotTest from "../views/slot-test.vue"
 
 Vue.use(VueRouter)
 
@@ -17,19 +18,22 @@ const routes = [
     component: Test
   },
   {
-    path: "/static/:id",
-    name: "Static Page",
-    component: () =>
-      import(/* webpackChunkName: "about" */ "../views/static-page.vue")
+    path: "/slot",
+    name: "Slot",
+    component: SlotTest
   },
   {
-    path: "/about",
-    name: "About",
+    path: "/static/:id",
+    name: "Static Page",
+    component: () => import(/* webpackChunkName: "about" */ "../views/static-page.vue")
+  },
+  {
+    path: "/resource/:page/:id?",
+    name: "FHIR Resource Page",
     // route level code-splitting
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
-    component: () =>
-      import(/* webpackChunkName: "about" */ "../views/about.vue")
+    component: () => import(/* webpackChunkName: "about" */ "../views/fhir-page.vue")
   }
 ]
 

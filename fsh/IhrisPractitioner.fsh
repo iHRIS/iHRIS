@@ -19,7 +19,7 @@ Description:    "iHRIS profile of Practitioner."
 * name.family MS
 * name.family ^label = "Family"
 * name.given MS
-* name.given ^label = "Given Name(s)"
+* name.given ^label = "Given Name"
 * name.prefix MS
 * name.prefix ^label = "Prefix"
 * name.suffix MS

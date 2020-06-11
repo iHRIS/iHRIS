@@ -55,6 +55,7 @@
 import AuthButton from "./auth-button"
 
 export default {
+  name: "the-header",
   props: ["header"],
   data: function() {
     return {

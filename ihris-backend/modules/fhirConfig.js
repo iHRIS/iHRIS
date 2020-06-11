@@ -123,6 +123,11 @@ const fhirConfig = {
           piece[copy] = ele.base[copy]
         }
       }
+      for ( let copy of [ "min", "max" ] ) {
+        if ( ele.base.hasOwnProperty(copy) ) {
+          piece["base-"+copy] = ele.base[copy]
+        }
+      }
 
       const types = ["code", "profile", "targetProfile"]
       for( let type of types ) {

@@ -1,17 +1,24 @@
 <template>
   <div>
-    <h1>REFERENCE {{ data }}</h1>
+    <h2>{{label}}</h2>
     <slot></slot>
   </div>
 </template>
 
 <script>
 export default {
-  name: "FHIRReference",
-  props: ["data"],
+  name: "fhir-reference",
+  props: ["field","label","sliceName","targetprofile","min","max","base-min","base-max"],
   data: function() {
     return {
     }
+  },
+  mounted: function() {
+             /*
+    this.$slots.default.forEach(vNode => {
+      console.log(vNode)
+    })
+    */
   }
 }
 </script>

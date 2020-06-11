@@ -19,6 +19,7 @@
 <script>
 
 export default {
+  name: "the-footer",
   props: ["footer"],
   data: function() {
     return {

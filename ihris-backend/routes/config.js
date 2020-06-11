@@ -24,14 +24,38 @@ router.get('/site', function(req, res) {
   res.status(200).json( site )
 })
 
+const camelToKebab = (code) => {
+  return code.replace(/([a-z0-9]|[A-Z]+)([A-Z])/g, '$1-$2').toLowerCase()
+}
+
 const processFields = ( fields, base ) => {
   let output = ""
   for( let field of Object.keys( fields ) ) {
-    output += "<FHIR"+fields[field].code+" name=\""+fields[field].field+"\""
-    let includes = [ "sliceName", "targetProfile", "profile", "min", "max", "label", "id", "path", "binding" ]
-    for( let inc of includes ) {
-      if ( fields[field].hasOwnProperty(inc) ) {
-        output += " "+inc+"=\""+fields[field][inc]+"\""
+    if ( fields[field]["max"] === "0" ) {
+      continue
+    }
+    let eleName = camelToKebab( fields[field].code )
+    let attrs = [ "field", "sliceName", "targetProfile", "profile", "min", "max", "base-min", 
+      "base-max", "label", "path", "binding" ]
+    let isArray = false
+    if ( fields[field]["max"] !== "1" ) {
+      isArray = true
+      output += "<fhir-array"
+      let arr_attrs = [ "label", "min", "max", "id", "path" ]
+      for ( let attr of arr_attrs ) {
+        output += " "+attr+"=\""+fields[field][attr]+"\""
+      }
+      output += ">\n<template #default=\"slotProps\">\n"
+    } else {
+      attrs.unshift("id")
+    }
+    output += "<fhir-"+eleName
+    if ( isArray ) {
+      output += " :slotProps=\"slotProps\""
+    }
+    for( let attr of attrs ) {
+      if ( fields[field].hasOwnProperty(attr) ) {
+        output += " "+attr+"=\""+fields[field][attr]+"\""
       }
     }
     output += ">\n"
@@ -41,7 +65,10 @@ const processFields = ( fields, base ) => {
       output += processFields( fields[field].fields, fields[field] )
     }
 
-    output += "</FHIR"+fields[field].code+">\n" 
+    output += "</fhir-"+eleName+">\n" 
+    if ( isArray ) {
+      output += "</template>\n</fhir-array>\n"
+    }
   }
   return output
 }
@@ -73,13 +100,13 @@ router.get('/page/:page', function(req, res) {
     const structure = fhirConfig.parseStructureDefinition( resource )
     let vueOuput = ""
     for ( let fhir of Object.keys( structure ) ) {
-      vueOutput = '<FHIRResource name="'+fhir+'">'+"\n"
+      vueOutput = '<fhir-resource field="'+fhir+'"><template #default>'+"\n"
 
         if ( structure[fhir].hasOwnProperty("fields") ) {
           vueOutput += processFields( structure[fhir].fields, structure )
         }
       
-      vueOutput += '</FHIRResource>'+"\n"
+      vueOutput += '</template></fhir-resource>'+"\n"
     }
     console.log(vueOutput)
     return res.status(200).send(vueOutput)

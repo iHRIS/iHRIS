@@ -4,7 +4,7 @@
 
 <script>
 export default {
-  name: "StaticPage",
+  name: "static-page",
   data: function() {
     return {
       rawHTML: "Loading..."

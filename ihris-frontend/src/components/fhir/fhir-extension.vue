@@ -1,14 +1,13 @@
 <template>
   <div>
-    <h1>EXTENSION {{ data }}</h1>
     <slot></slot>
   </div>
 </template>
 
 <script>
 export default {
-  name: "FHIRExtension",
-  props: ["data"],
+  name: "fhir-extension",
+  props: ["field","sliceName","min","max","base-min","base-max","profile"],
   data: function() {
     return {
     }

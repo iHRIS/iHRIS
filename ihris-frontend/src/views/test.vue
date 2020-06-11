@@ -10,9 +10,9 @@
 // @ is an alias to /src
 
 const comps = { 
-  FhirExtension: () => import(/* webpackChunkName: "fhir-main" */ "@/components/fhir/fhir-extension" ),
-  FhirReference: () => import(/* webpackChunkName: "fhir-main" */ "@/components/fhir/fhir-reference" ),
-  FhirString: () => import(/* webpackChunkName: "fhir-main" */ "@/components/fhir/fhir-string" )
+  'fhir-extension': () => import(/* webpackChunkName: "fhir-main" */ "@/components/fhir/fhir-extension" ),
+  'fhir-reference': () => import(/* webpackChunkName: "fhir-main" */ "@/components/fhir/fhir-reference" ),
+  'fhir-string': () => import(/* webpackChunkName: "fhir-main" */ "@/components/fhir/fhir-string" )
 }
 var pageId
 
@@ -23,7 +23,7 @@ export default {
   components: {
     FhirForm: function() {
       return new Promise(resolve => {
-        let template = '<div class="fhir"><fhir-extension data="ext from data '+pageId+'"><fhir-reference data="ref from data"><fhir-string data="str from data" /></fhir-reference></fhir-extension></div>'
+        let template = '<div class="fhir"><fhir-extension name="ext from data '+pageId+'"><fhir-reference name="ref from data"><fhir-string name="str from data" /></fhir-reference></fhir-extension></div>'
         resolve({components: comps, template: template})
       })
     }
