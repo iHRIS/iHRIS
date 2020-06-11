@@ -29,18 +29,20 @@ fhirAxios.setOptions( {
 nconf.fhirAxios = fhirAxios
 nconf.loadRemote = async() => {
   let remoteConfigs = nconf.get('config')
-  let configKeys = Object.keys( remoteConfigs )
-  let publicKeys = Object.values( nconf.get("keys") )
-  for( let conf of configKeys ) {
-    try {
-      let response = await fhirAxios.read( "Parameters", remoteConfigs[conf] )
-      let newConfig = fhirConfig.parseRemote( response, publicKeys )
-      nconf.add( conf, { type: 'literal', store: newConfig } )
-    } catch(err) {
-      console.error( "Unable to retrieve configuration Parameters "+remoteConfigs[conf]+" from FHIR server ("+nconf.get("fhir:base")+")" )
-      console.error( err.message )
-      process.exit(1)
-    } 
+  if ( remoteConfigs ) {
+    let configKeys = Object.keys( remoteConfigs )
+    let publicKeys = Object.values( nconf.get("keys") )
+    for( let conf of configKeys ) {
+      try {
+        let response = await fhirAxios.read( "Parameters", remoteConfigs[conf] )
+        let newConfig = fhirConfig.parseRemote( response, publicKeys )
+        nconf.add( conf, { type: 'literal', store: newConfig } )
+      } catch(err) {
+        console.error( "Unable to retrieve configuration Parameters "+remoteConfigs[conf]+" from FHIR server ("+nconf.get("fhir:base")+")" )
+        console.error( err.message )
+        process.exit(1)
+      } 
+    }
   }
 }
 
