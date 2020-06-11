@@ -56,16 +56,18 @@ async function startUp() {
   app.use('/fhir', fhirRouter)
 
   const loadModules = nconf.get("modules")
-  const modPaths = Object.keys( loadModules )
-  for( let mod of modPaths ) {
-    try {
-      let reqMod = await fhirModules.require( loadModules[mod] )
-      if ( reqMod ) {
-        console.log("Loading "+mod+" ("+loadModules[mod]+") to app.")
-        app.use( "/"+mod, reqMod )
+  if ( loadModules ) {
+    const modPaths = Object.keys( loadModules )
+    for( let mod of modPaths ) {
+      try {
+        let reqMod = await fhirModules.require( loadModules[mod] )
+        if ( reqMod ) {
+          console.log("Loading "+mod+" ("+loadModules[mod]+") to app.")
+          app.use( "/"+mod, reqMod )
+        }
+      } catch( err ) {
+        console.log("Failed to load module "+mod+" ("+loadModules[mod]+")")
       }
-    } catch( err ) {
-      console.log("Failed to load module "+mod+" ("+loadModules[mod]+")")
     }
   }
   /*
