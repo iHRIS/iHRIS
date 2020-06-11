@@ -1,0 +1,32 @@
+{
+  "resourceType": "CodeSystem",
+  "status": "active",
+  "content": "complete",
+  "name": "IhrisTaskPermissionCodeSystem",
+  "id": "ihris-task-permission",
+  "title": "Code system for task permissions.",
+  "version": "0.1.0",
+  "url": "http://ihris.org/fhir/CodeSystem/ihris-task-permission",
+  "concept": [
+    {
+      "code": "*",
+      "display": "All",
+      "definition": "Can do any task."
+    },
+    {
+      "code": "read",
+      "display": "Read",
+      "definition": "Can read the given resource."
+    },
+    {
+      "code": "write",
+      "display": "Write",
+      "definition": "Can write the given resource."
+    },
+    {
+      "code": "delete",
+      "display": "Delete",
+      "definition": "Can delete the given resource."
+    }
+  ]
+}

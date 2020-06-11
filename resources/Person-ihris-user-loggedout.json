@@ -1,0 +1,29 @@
+{
+  "resourceType": "Person",
+  "id": "ihris-user-loggedout",
+  "meta": {
+    "profile": [
+      "http://ihris.org/fhir/StructureDefinition/ihris-person-user"
+    ]
+  },
+  "extension": [
+    {
+      "url": "http://ihris.org/fhir/StructureDefinition/ihris-assign-role",
+      "valueReference": {
+        "reference": "Basic/ihris-role-open"
+      }
+    }
+  ],
+  "name": [
+    {
+      "use": "official",
+      "text": "Logged Out"
+    }
+  ],
+  "telecom": [
+    {
+      "system": "email",
+      "value": "loggedout@ihris.org"
+    }
+  ]
+}

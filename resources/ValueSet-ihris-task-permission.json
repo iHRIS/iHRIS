@@ -1,0 +1,16 @@
+{
+  "resourceType": "ValueSet",
+  "status": "active",
+  "name": "IhrisTaskPermissionValueSet",
+  "id": "ihris-task-permission",
+  "title": "Code system for task permissions.",
+  "version": "0.1.0",
+  "url": "http://ihris.org/fhir/ValueSet/ihris-task-permission",
+  "compose": {
+    "include": [
+      {
+        "system": "http://ihris.org/fhir/CodeSystem/ihris-task-permission"
+      }
+    ]
+  }
+}

@@ -1,0 +1,112 @@
+{
+  "resourceType": "Parameters",
+  "id": "ihris-config",
+  "meta": {
+    "profile": [
+      "http://ihris.org/fhir/StructureDefinition/ihris-parameters-remote-config"
+    ]
+  },
+  "parameter": [
+    {
+      "name": "signature",
+      "valueSignature": {
+        "type": [
+          {
+            "system": "urn:iso-astm:E1762-95:2013",
+            "code": "1.2.840.10065.1.12.1.14"
+          }
+        ],
+        "when": "",
+        "who": {
+          "reference": "http://ihris.org/fhir/Organization/ihris"
+        },
+        "data": ""
+      }
+    },
+    {
+      "name": "config",
+      "part": [
+        {
+          "name": "site:title",
+          "valueString": "Manage"
+        },
+        {
+          "name": "site:site",
+          "valueString": "Demo"
+        },
+        {
+          "name": "site:logo",
+          "valueString": "iHRIS5Logo.png"
+        },
+        {
+          "name": "site:auth:local:method",
+          "valueString": "post"
+        },
+        {
+          "name": "site:auth:local:link",
+          "valueString": "/auth/login"
+        },
+        {
+          "name": "site:auth:local:btn:image",
+          "valueString": "btn_ihris_signin.png"
+        },
+        {
+          "name": "site:auth:local:btn:text",
+          "valueString": "Sign in with iHRIS"
+        },
+        {
+          "name": "site:auth:google:method",
+          "valueString": "get"
+        },
+        {
+          "name": "site:auth:google:link",
+          "valueString": "/auth/google"
+        },
+        {
+          "name": "site:auth:google:btn:image",
+          "valueString": "btn_google_signin_light_normal_web.png"
+        },
+        {
+          "name": "site:auth:google:btn:text",
+          "valueString": "Sign in with Google"
+        },
+        {
+          "name": "site:footer:links:about:text",
+          "valueString": "About iHRIS"
+        },
+        {
+          "name": "site:footer:links:about:to",
+          "valueString": "/static/page-about"
+        },
+        {
+          "name": "site:footer:links:feedback:text",
+          "valueString": "Feedback"
+        },
+        {
+          "name": "site:footer:links:feedback:href",
+          "valueString": "https://forms.gle/jQJ7N3nDBSxSNne58"
+        },
+        {
+          "name": "site:footer:links:ihris:text",
+          "valueString": "iHRIS Website"
+        },
+        {
+          "name": "site:footer:links:ihris:href",
+          "valueString": "http://ihris.org/"
+        },
+        {
+          "name": "auth:google:clientId",
+          "valueString": "519931555899-rln1msntpjhe4j6rcdth795u934dkc0l.apps.googleusercontent.com"
+        },
+        {
+          "name": "auth:google:clientSecret",
+          "valueString": "ZD3VY0kjICuX5Enm3DEP1DG9"
+        },
+        {
+          "name": "modules:mod",
+          "valueString": "test-module"
+        }
+      ]
+    }
+  ]
+}
