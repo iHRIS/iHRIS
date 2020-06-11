@@ -232,11 +232,9 @@ const user = {
 
 class User {
 
-  resource = {}
-  permissions = {}
-
   constructor( resource ) {
     this.resource = resource
+    this.permissions = {}
   }
   
 }
