@@ -16,11 +16,11 @@
         <template v-slot:activator>
           <v-list-item-title class="subtitle-1 font-weight-bold text-uppercase">People</v-list-item-title>
         </template>
-        <v-list-item to="/fhir/Practitioner/search" active-class="primary darken-2" class="text-right" dense>
+        <v-list-item to="/resource/search/practitioner" active-class="primary darken-2" class="text-right" dense>
           <v-list-item-title>Search People</v-list-item-title>
           <v-icon>mdi-chevron-right</v-icon>
         </v-list-item>
-        <v-list-item to="/fhir/Practitioner/add" active-class="primary darken-2" class="text-right" dense>
+        <v-list-item to="/resource/add/practitioner" active-class="primary darken-2" class="text-right" dense>
           <v-list-item-title>Add Person</v-list-item-title>
             <v-icon>mdi-chevron-right</v-icon>
         </v-list-item>

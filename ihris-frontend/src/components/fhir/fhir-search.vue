@@ -29,7 +29,7 @@ import fhirpath from "fhirpath"
 
 export default {
   name: "fhir-search",
-  props: ["profile","fields","label","terms"],
+  props: ["profile","fields","label","terms","page"],
   data: function() {
     return {
       debug: "",
@@ -44,8 +44,11 @@ export default {
     }
   },
   watch: {
-    terms: function() {
-      this.getData(true)
+    terms: {
+      handler() {
+        this.getData(true)
+      },
+      deep: true
     },
     options: {
       handler() {
@@ -63,8 +66,8 @@ export default {
     this.getData(true)
   },
   methods: {
-    clickIt: function(id) {
-      console.log(id)
+    clickIt: function(record) {
+      this.$router.push( {path: "/resource/view/"+this.page+"/"+record.id} )
     },
     getData(restart) {
       console.log("getting data",restart)
@@ -103,7 +106,7 @@ export default {
       this.prevPage = this.options.page
 
       fetch( url ).then(response => {
-        console.log("fetching",url)
+        //console.log("fetching",url)
         response.json().then(data => {
           this.results = []
           if ( data.total > 0 ) {

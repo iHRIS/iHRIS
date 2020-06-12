@@ -97,7 +97,6 @@ const processFields = ( fields, base, order ) => {
 
 router.get('/page/:page', function(req, res) {
   let page = "ihris-page-"+req.params.page
-  /*
   if ( !req.user ) {
     return res.status(401).json( outcomes.NOTLOGGEDIN)
   }
@@ -106,7 +105,6 @@ router.get('/page/:page', function(req, res) {
   if ( allowed !== true ) {
     return res.status(401).json( outcomes.DENIED )
   }
-  */
 
   fhirAxios.read( "Basic", page ).then ( (resource) => {
     let pageDisplay = resource.extension.find( ext => ext.url === "http://ihris.org/fhir/StructureDefinition/ihris-page-display" )
@@ -164,7 +162,7 @@ router.get('/page/:page', function(req, res) {
 
       let structureKeys = Object.keys( structure )
 
-      let searchTemplate = '<fhir-search label="'+structureKeys[0]+'" :fields="fields" :terms="terms" profile="'+resource.url+'">'+"\n"
+      let searchTemplate = '<fhir-search page="'+req.params.page+'" label="'+structureKeys[0]+'" :fields="fields" :terms="terms" profile="'+resource.url+'">'+"\n"
       for( let filter of filters ) {
           searchTemplate += '<fhir-search-term v-on:termChange="searchData"'
         if ( filter.length == 1 ) {
