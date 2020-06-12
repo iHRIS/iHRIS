@@ -17,11 +17,6 @@ const comps = {
   "fhir-code": () => import(/* webpackChunkName: "fhir-main" */ "@/components/fhir/fhir-code" ),
   "fhir-date": () => import(/* webpackChunkName: "fhir-main" */ "@/components/fhir/fhir-date" )
 }
-const searchComps = {
-  "fhir-search": () => import(/* webpackChunkName: "fhir-search" */ "@/components/fhir/fhir-search" ),
-  "fhir-search-term": () => import(/* webpackChunkName: "fhir-search" */ "@/components/fhir/fhir-search-term" )
-}
-var pageId
 var page
 
 export default {
@@ -35,17 +30,8 @@ export default {
       return new Promise(resolve => {
         fetch( "/config/page/"+page ).then(response => {
             response.json().then(data => {
-              if ( pageId ) {
-                data.template = data.template.replace('fhir-resource name=', 'fhir-resource page="'+page+'" id="'+pageId+'" name=')
-                resolve({components: comps, template: data.template})
-              } else {
-                resolve({
-                  components: searchComps, 
-                  template: data.search, 
-                  data: function() { return { fields: data.searchData, terms: {} } },
-                  methods: { searchData: function(expression, value) { this.$set(this.terms, expression, value) } }
-                })
-              }
+              data.template = data.template.replace('fhir-resource name=', 'fhir-resource page="'+page+'" name=')
+              resolve({components: comps, template: data.template})
             }).catch(err => {
               console.log(err)
               resolve({template: '<template><h1>Error</h1><p>An error occurred trying to load this page</p>.</template>'})
@@ -58,9 +44,7 @@ export default {
     }
   },
   created: function() {
-    pageId = this.$route.params.id || ""
     page = this.$route.params.page
-    console.log(page+" "+pageId)
   }
 }
 
