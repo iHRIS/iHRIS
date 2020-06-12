@@ -56,6 +56,10 @@ const processFields = ( fields, base, order ) => {
     if ( fields[field]["max"] === "0" ) {
       continue
     }
+    if ( !fields[field].code ) {
+      console.log("No datatype for "+base+" "+field+" so skipping")
+      continue
+    }
     let eleName = camelToKebab( fields[field].code )
     let attrs = [ "field", "sliceName", "targetProfile", "profile", "min", "max", "base-min", 
       "base-max", "label", "path", "binding" ]
