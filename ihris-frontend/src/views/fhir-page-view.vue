@@ -36,7 +36,7 @@ export default {
       return new Promise(resolve => {
         fetch( "/config/page/"+page ).then(response => {
             response.json().then(data => {
-              data.template = data.template.replace('fhir-resource field=', 'fhir-resource page="'+page+'" fhir-id="'+pageId+'" field=')
+              data.template = data.template.replace('fhir-resource profile=', 'fhir-resource fhir-id="'+pageId+'" profile=')
               resolve({components: comps, template: data.template})
               //console.log(data.template)
             }).catch(err => {

@@ -68,7 +68,7 @@ export default {
       this.$router.push( {path: "/resource/view/"+this.page+"/"+record.id} )
     },
     getData(restart) {
-      console.log("getting data",restart)
+      //console.log("getting data",restart)
       this.loading = true
       this.error_message = null
       let url = ""

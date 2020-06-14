@@ -100,7 +100,6 @@ router.post("/:resource", (req, res) => {
     return res.status(201).json(resource)
   } ).catch( (err) => {
     /* return response from FHIR server */
-    console.log(err)
     return res.status( err.response.status ).json( err.response.data )
     /* for custom responses
     let outcome = { ...outcomes.ERROR }

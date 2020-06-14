@@ -187,7 +187,7 @@ router.get('/page/:page', function(req, res) {
 
       let vueOuput = "<template>"
       for ( let fhir of structureKeys ) {
-        vueOutput = '<fhir-resource field="'+fhir+'"><template #default=\"slotProps\">'+"\n"
+        vueOutput = '<fhir-resource profile="'+resource.url+'" page="'+req.params.page+'" field="'+fhir+'"><template #default=\"slotProps\">'+"\n"
 
         if ( structure[fhir].hasOwnProperty("fields") ) {
           vueOutput += processFields( structure[fhir].fields, fhir, sdOrder )

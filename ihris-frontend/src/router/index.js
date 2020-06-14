@@ -8,22 +8,22 @@ Vue.use(VueRouter)
 const routes = [
   {
     path: "/",
-    name: "Home",
+    name: "home",
     component: Home
   },
   {
     path: "/test/:id",
-    name: "Test",
+    name: "test",
     component: Test
   },
   {
     path: "/static/:id",
-    name: "Static Page",
+    name: "static",
     component: () => import(/* webpackChunkName: "about" */ "../views/static-page.vue")
   },
   {
     path: "/resource/view/:page/:id",
-    name: "FHIR Resource View Page",
+    name: "resource_view",
     // route level code-splitting
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
@@ -31,7 +31,7 @@ const routes = [
   },
   {
     path: "/resource/search/:page",
-    name: "FHIR Resource Search Page",
+    name: "resource_search",
     // route level code-splitting
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
@@ -39,7 +39,7 @@ const routes = [
   },
   {
     path: "/resource/add/:page",
-    name: "FHIR Resource Add Page",
+    name: "resource_add",
     // route level code-splitting
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.

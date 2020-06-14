@@ -5,7 +5,7 @@
       max-width="800"
       outlined
     >
-      <v-card-title v-if="fhirId == ''" class="white--text primary darken-1">
+      <v-card-title v-if="!fhirId" class="white--text primary darken-1">
         <v-progress-circular indeterminate v-if="loading" color="primary"></v-progress-circular>
         Add {{ field }}
       </v-card-title>
@@ -16,7 +16,7 @@
       <v-card-text class="mt-5">
         <slot :source="source"></slot>
       </v-card-text>
-      <v-card-actions v-if="fhirId == ''">
+      <v-card-actions v-if="!fhirId">
         <v-spacer></v-spacer>
         <v-btn
           color="success"
@@ -26,18 +26,27 @@
         </v-btn>
       </v-card-actions>
     </v-card>
+    <v-overlay :value="overlay">
+      <v-progress-circular
+        size="50"
+        color="primary"
+        indeterminate
+      ></v-progress-circular>
+      <v-btn icon @click="overlay = false"><v-icon>mdi-close</v-icon></v-btn>
+    </v-overlay>
   </v-container>
 </template>
 
 <script>
 export default {
   name: "fhir-resource",
-  props: ["field","fhir-id","page"],
+  props: ["field","fhir-id","page","profile"],
   data: function() {
     return {
       fhir: {},
       source: { data: {}, path: "", edit: true },
-      loading: false
+      loading: false,
+      overlay: false
     }
   },
   created: function() {
@@ -59,6 +68,18 @@ export default {
     }
   },
   computed: {
+    hasFhirId: function() {
+      if ( this.fhirId == '' ) {
+        console.log("blank")
+        return false
+      } else if ( !this.fhirId ) {
+        console.log("fhirid is falsy")
+        return false
+      } else {
+        console.log("fhirid else")
+        return true
+      }
+    }
     /*
     source: function() {
       return this.$store.state.fhir
@@ -67,11 +88,36 @@ export default {
   },
   methods: {
     processFHIR: function() {
+      this.overlay = true
+      this.loading = true
       //console.log(this.field)
-      this.fhir = {}
-      this.fhir.resourceType = this.field
+      this.fhir = { 
+        resourceType: this.field,
+        meta: {
+          profile: [ this.profile ]
+        }
+      }
       //console.log(this)
       processChildren( this.field, this.fhir, this.$children )
+      console.log("SAVING",this.fhir)
+      fetch( "/fhir/"+this.field, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/fhir+json"
+        },
+        redirect: 'manual',
+        body: JSON.stringify(this.fhir)
+      } ).then(response => {
+        //console.log(response)
+        //console.log(response.headers)
+        if ( response.status === 201 ) {
+          response.json().then(data => {
+            this.overlay = false
+            this.loading = false
+            this.$router.push({ name:"resource_view", params: {page: this.page, id: data.id} })
+          })
+        }
+      } )
       //console.log(this.fhir)
 
       /*
@@ -91,7 +137,7 @@ const processChildren = function( parent, obj, children ) {
 
     let next = obj
 
-    if ( child.field ) {
+    if ( child.field && !child.fieldType /* ignore arrays */ ) {
       //console.log("working on "+parent+" . "+child.field)
       let field
       if ( child.sliceName ) {
