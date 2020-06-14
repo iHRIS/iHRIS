@@ -2,7 +2,6 @@ import Vue from "vue"
 import VueRouter from "vue-router"
 import Home from "../views/home.vue"
 import Test from "../views/test.vue"
-import SlotTest from "../views/slot-test.vue"
 
 Vue.use(VueRouter)
 
@@ -16,11 +15,6 @@ const routes = [
     path: "/test/:id",
     name: "Test",
     component: Test
-  },
-  {
-    path: "/slot",
-    name: "Slot",
-    component: SlotTest
   },
   {
     path: "/static/:id",

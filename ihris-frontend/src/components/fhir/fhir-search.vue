@@ -25,8 +25,6 @@
 
 <script>
 
-import fhirpath from "fhirpath"
-
 export default {
   name: "fhir-search",
   props: ["profile","fields","label","terms","page"],
@@ -114,7 +112,7 @@ export default {
             for( let entry of data.entry ) {
               let result = { id: entry.resource.id }
               for( let field of this.fields ) {
-                result[field[1]] = fhirpath.evaluate(entry.resource, field[1])
+                result[field[1]] = this.$fhirpath.evaluate(entry.resource, field[1])
               }
               this.results.push( result )
             }

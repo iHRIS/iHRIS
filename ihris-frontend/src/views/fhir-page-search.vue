@@ -32,11 +32,11 @@ export default {
               })
             }).catch(err => {
               console.log(err)
-              resolve({template: '<template><h1>Error</h1><p>An error occurred trying to load this page</p>.</template>'})
+              resolve({template: '<div><h1>Error</h1><p>An error occurred trying to load this page</p>.</div>'})
             })
         }).catch(err => {
           console.log(err)
-          resolve({template: '<template><h1>Error</h1><p>An error occurred trying to load this page</p>.</template>'})
+          resolve({template: '<div><h1>Error</h1><p>An error occurred trying to load this page</p>.</div>'})
         })
       })
     }

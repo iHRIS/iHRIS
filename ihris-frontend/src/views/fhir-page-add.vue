@@ -35,15 +35,15 @@ export default {
       return new Promise(resolve => {
         fetch( "/config/page/"+page ).then(response => {
             response.json().then(data => {
-              data.template = data.template.replace('fhir-resource name=', 'fhir-resource page="'+page+'" name=')
+              data.template = data.template.replace('fhir-resource field=', 'fhir-resource page="'+page+'" field=')
               resolve({components: comps, template: data.template})
             }).catch(err => {
               console.log(err)
-              resolve({template: '<template><h1>Error</h1><p>An error occurred trying to load this page</p>.</template>'})
+              resolve({template: '<div><h1>Error</h1><p>An error occurred trying to load this page</p>.</div>'})
             })
         }).catch(err => {
           console.log(err)
-          resolve({template: '<template><h1>Error</h1><p>An error occurred trying to load this page</p>.</template>'})
+          resolve({template: '<div><h1>Error</h1><p>An error occurred trying to load this page</p>.</div>'})
         })
       })
     }

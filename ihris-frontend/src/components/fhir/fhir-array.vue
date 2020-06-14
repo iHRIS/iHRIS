@@ -1,39 +1,69 @@
 <template>
-  <v-container>
-    <v-card>
-      <v-system-bar
-        color="secondary"
-        dark
-      >
-        {{ label }}
-        <v-spacer></v-spacer>
-        <v-btn v-if="subAvailable" icon @click="removeRow()"><v-icon>mdi-minus</v-icon></v-btn>
-        <v-btn v-if="addAvailable" icon @click="addRow()"><v-icon>mdi-plus</v-icon></v-btn>
-        </v-system-bar>
-      <slot v-for="input in inputs" :input="input"></slot>
-    </v-card>
-  </v-container>
+  <div>
+    <div v-if="simpleDisplay">
+      <v-row v-if="simpleDisplay" dense>
+        <v-col cols="3" class="font-weight-bold">{{label}}</v-col><v-col cols="9">{{simpleValue}}</v-col>
+      </v-row>
+      <v-divider></v-divider>
+    </div>
+    <div v-else>
+      <v-card>
+        <v-system-bar
+          color="secondary"
+          dark
+          v-if="source.edit"
+        >
+          {{ label }}
+          <v-spacer></v-spacer>
+          <v-btn v-if="subAvailable" icon @click="removeRow()"><v-icon>mdi-minus</v-icon></v-btn>
+          <v-btn v-if="addAvailable" icon @click="addRow()"><v-icon>mdi-plus</v-icon></v-btn>
+          </v-system-bar>
+        <slot v-for="input in inputs" :input="input" :source="input.source"></slot>
+      </v-card>
+    </div>
+  </div>
 </template>
 
 <script>
 export default {
   name: "fhir-array",
-  props: ["label", "min", "max", "id", "path"],
+  props: ["label", "min", "max", "id", "path", "slotProps", "field", "fieldType" ],
   data: function() {
     return {
-      inputs: []
+      inputs: [],
+      source: { path: "", data: [], edit: true }
     }
   },
   created: function() {
-    for( let idx = 0; idx < this.actualMin; idx++ ) {
-      let label = this.label
-      if ( this.displayIndex ) {
-        label += " ("+(idx+1)+")"
-      }
-      this.inputs.push( { label: label, index: idx } )
+    this.setupInputs()
+  },
+  watch: {
+    slotProps: {
+      handler() {
+
+        //console.log("WATCHARR",this.path,this.slotProps.source)
+        this.setupInputs()
+      },
+      deep: true
     }
   },
   methods: {
+    setupInputs: function() {
+      this.inputs = []
+      this.source = { path: this.path, data: {}, edit: this.slotProps.source.edit }
+      this.source.data = this.$fhirpath.evaluate( this.slotProps.source.data, this.field )
+      for( let idx = 0; idx < this.actualMin; idx++ ) {
+        let label = this.label
+        if ( this.displayIndex ) {
+          label += " ("+(idx+1)+")"
+        }
+        let input = { label: label, index: idx, data: undefined } 
+        if ( this.source.data[idx] ) {
+          input.source = { data: this.source.data[idx], path: this.path+"["+idx+"]", fromArray: true, edit: this.slotProps.source.edit }
+        }
+        this.inputs.push( input )
+      }
+    },
     addRow: function() {
       if ( this.addAvailable ) {
         let label = this.label
@@ -54,7 +84,8 @@ export default {
   },
   computed: {
     actualMin: function() {
-      return this.min < 1 ? 1 : this.min
+      return Math.max( 1, this.min, this.source.data.length )
+      //return this.min < 1 ? 1 : this.min
     },
     addAvailable: function() {
       return this.max === "*" || this.inputs.length < this.max
@@ -64,7 +95,14 @@ export default {
     },
     subAvailable: function() {
       return this.actualMin < this.inputs.length
+    },
+    simpleDisplay: function() {
+      return !this.source.edit && [ "string" ].includes(this.fieldType)
+    },
+    simpleValue: function() {
+      return this.source.data.join(" ")
     }
+
   }
 }
 </script>

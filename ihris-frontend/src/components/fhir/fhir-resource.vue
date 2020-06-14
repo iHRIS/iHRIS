@@ -5,11 +5,18 @@
       max-width="800"
       outlined
     >
-      <v-card-title v-if="id != ''" class="white--text primary darken-1">Add {{ field }}</v-card-title>
-      <v-card-text>
-        <slot></slot>
+      <v-card-title v-if="fhirId == ''" class="white--text primary darken-1">
+        <v-progress-circular indeterminate v-if="loading" color="primary"></v-progress-circular>
+        Add {{ field }}
+      </v-card-title>
+      <v-card-title v-else class="white--text primary darken-1">
+        <v-progress-circular indeterminate v-if="loading" color="primary"></v-progress-circular>
+        Edit {{ field }}
+      </v-card-title>
+      <v-card-text class="mt-5">
+        <slot :source="source"></slot>
       </v-card-text>
-      <v-card-actions>
+      <v-card-actions v-if="fhirId == ''">
         <v-spacer></v-spacer>
         <v-btn
           color="success"
@@ -19,18 +26,44 @@
         </v-btn>
       </v-card-actions>
     </v-card>
-
   </v-container>
 </template>
 
 <script>
 export default {
   name: "fhir-resource",
-  props: ["field","id","page"],
+  props: ["field","fhir-id","page"],
   data: function() {
     return {
-      fhir: {}
+      fhir: {},
+      source: { data: {}, path: "", edit: true },
+      loading: false
     }
+  },
+  created: function() {
+    if ( this.fhirId ) {
+      this.loading = true
+      //console.log("getting",this.field,this.fhirId)
+      fetch( "/fhir/"+this.field+"/"+this.fhirId ).then(response => {
+        response.json().then(data => {
+          //this.$store.commit('setCurrentResource', data)
+          this.source = { data: data, path: this.field, edit: false }
+          this.loading = false
+          //console.log(data)
+        }).catch(err=> {
+          console.log(this.field,this.fhirId,err)
+        })
+      }).catch(err=> {
+        console.log(this.field,this.fhirId,err)
+      })
+    }
+  },
+  computed: {
+    /*
+    source: function() {
+      return this.$store.state.fhir
+    }
+    */
   },
   methods: {
     processFHIR: function() {
@@ -39,7 +72,7 @@ export default {
       this.fhir.resourceType = this.field
       //console.log(this)
       processChildren( this.field, this.fhir, this.$children )
-      console.log(this.fhir)
+      //console.log(this.fhir)
 
       /*
       console.log(this.$scopedSlots.default())

@@ -57,7 +57,7 @@ const processFields = ( fields, base, order ) => {
       continue
     }
     if ( !fields[field].code ) {
-      console.log("No datatype for "+base+" "+field+" so skipping")
+      console.log("No datatype for "+base+" "+field+" so skipping",base,field)
       continue
     }
     let eleName = camelToKebab( fields[field].code )
@@ -66,8 +66,8 @@ const processFields = ( fields, base, order ) => {
     let isArray = false
     if ( fields[field]["max"] !== "1" ) {
       isArray = true
-      output += "<fhir-array"
-      let arr_attrs = [ "label", "min", "max", "id", "path" ]
+      output += "<fhir-array fieldType=\""+eleName+"\" :slotProps=\"slotProps\""
+      let arr_attrs = [ "field", "label", "min", "max", "id", "path" ]
       for ( let attr of arr_attrs ) {
         output += " "+attr+"=\""+fields[field][attr]+"\""
       }
@@ -75,10 +75,13 @@ const processFields = ( fields, base, order ) => {
     } else {
       attrs.unshift("id")
     }
+    output += "<fhir-"+eleName +" :slotProps=\"slotProps\""
+    /*
     output += "<fhir-"+eleName
     if ( isArray ) {
       output += " :slotProps=\"slotProps\""
     }
+    */
     for( let attr of attrs ) {
       if ( fields[field].hasOwnProperty(attr) ) {
         output += " "+attr+"=\""+fields[field][attr]+"\""
@@ -88,7 +91,9 @@ const processFields = ( fields, base, order ) => {
 
 
     if ( fields[field].hasOwnProperty("fields") ) {
+      output += "<template #default=\"slotProps\">\n"
       output += processFields( fields[field].fields, base+"."+fields[field], order )
+      output += "</template>\n"
     }
 
     output += "</fhir-"+eleName+">\n" 
@@ -182,7 +187,7 @@ router.get('/page/:page', function(req, res) {
 
       let vueOuput = "<template>"
       for ( let fhir of structureKeys ) {
-        vueOutput = '<fhir-resource field="'+fhir+'"><template #default>'+"\n"
+        vueOutput = '<fhir-resource field="'+fhir+'"><template #default=\"slotProps\">'+"\n"
 
         if ( structure[fhir].hasOwnProperty("fields") ) {
           vueOutput += processFields( structure[fhir].fields, fhir, sdOrder )
@@ -191,7 +196,7 @@ router.get('/page/:page', function(req, res) {
         vueOutput += '</template></fhir-resource>'+"\n"
       }
       vueOuput = "</template>"
-      //console.log(vueOutput)
+      console.log(vueOutput)
       return res.status(200).json({ search: searchTemplate, searchData: search, template: vueOutput })
     } ).catch( (err) => {
       console.log(err)

@@ -74,6 +74,7 @@ export default {
           this.header.user.loggedin = false 
           this.header.user.name = ""
         }
+        this.$router.push( {path: "/" } )
       })
     }
   }
