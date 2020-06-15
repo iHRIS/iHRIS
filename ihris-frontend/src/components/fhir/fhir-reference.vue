@@ -35,7 +35,8 @@ export default {
         if ( this.slotProps.source.fromArray ) {
           this.source.data = this.slotProps.source.data
         } else {
-          let expression = this.field.substring( this.field.indexOf(':')+1 )
+          let expression = this.field
+          if ( expression.includes('value[x]:') ) expression = expression.substring( 9 )
           this.source.data = this.$fhirpath.evaluate( this.slotProps.source.data, expression )
         }
         //console.log(this.source)

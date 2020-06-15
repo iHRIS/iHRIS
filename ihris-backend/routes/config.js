@@ -67,7 +67,7 @@ const processFields = ( fields, base, order ) => {
     if ( fields[field]["max"] !== "1" ) {
       isArray = true
       output += "<fhir-array fieldType=\""+eleName+"\" :slotProps=\"slotProps\""
-      let arr_attrs = [ "field", "label", "min", "max", "id", "path" ]
+      let arr_attrs = [ "field", "label", "min", "max", "id", "path", "profile", "targetProfile", "sliceName" ]
       for ( let attr of arr_attrs ) {
         output += " "+attr+"=\""+fields[field][attr]+"\""
       }

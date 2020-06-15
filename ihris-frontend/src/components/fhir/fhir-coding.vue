@@ -54,7 +54,6 @@ export default {
     valueCode: function() {
       if ( this.items ) {
         this.value = this.items.find( item => item.code = this.valueCode )
-        console.log(this.value)
       }
     }
   },
@@ -63,7 +62,7 @@ export default {
       if ( this.slotProps.source ) {
         this.source = { path: this.slotProps.source.path+"."+this.field, data: {}, 
           edit: this.slotProps.source.edit, binding: this.binding || this.slotProps.source.binding }
-        console.log("CODING binding", this.binding, this.slotProps.source.binding)
+        //console.log("CODING binding", this.binding, this.slotProps.source.binding)
         if ( this.slotProps.source.fromArray ) {
           this.source.data = this.slotProps.source.data
           // Need to see if this works and figure out what it needs to be
@@ -75,11 +74,11 @@ export default {
         //console.log(this.source)
       }
       let binding = this.binding || this.slotProps.source.binding
-      console.log("CODING",binding)
+      //console.log("CODING",binding)
       let lastSlash = binding.lastIndexOf('/')
       let lastPipe = binding.lastIndexOf('|')
       let valueSetId = binding.slice(lastSlash+1, (lastPipe !== -1 ? lastPipe : binding.length ))
-      console.log("CODING",lastSlash,lastPipe,valueSetId)
+      //console.log("CODING",lastSlash,lastPipe,valueSetId)
       fetch("/fhir/ValueSet/"+valueSetId+"/$expand").then(response=> {
         if( response.ok ) {
           response.json().then(data=>{
@@ -106,7 +105,7 @@ export default {
                   for( let include of data.compose.include ) {
                     if ( include.concept ) {
                       for ( let concept of include.concept ) {
-                        this.items.push( concept )
+                        this.items.push( { system: include.system, ...concept } )
                       }
                     }
                   }

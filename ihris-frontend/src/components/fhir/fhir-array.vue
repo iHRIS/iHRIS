@@ -27,7 +27,7 @@
 <script>
 export default {
   name: "fhir-array",
-  props: ["label", "min", "max", "id", "path", "slotProps", "field", "fieldType" ],
+  props: ["label", "min", "max", "id", "path", "slotProps", "field", "fieldType", "profile", "targetProfile", "sliceName" ],
   data: function() {
     return {
       inputs: [],
@@ -51,7 +51,8 @@ export default {
     setupInputs: function() {
       this.inputs = []
       this.source = { path: this.path, data: {}, edit: this.slotProps.source.edit }
-      this.source.data = this.$fhirpath.evaluate( this.slotProps.source.data, this.field )
+      let expression = this.field.replace(/([^:]+):(.+)/, "$1.where(url='"+this.profile+"')")
+      this.source.data = this.$fhirpath.evaluate( this.slotProps.source.data, expression)
       for( let idx = 0; idx < this.actualMin; idx++ ) {
         let label = this.label
         if ( this.displayIndex ) {

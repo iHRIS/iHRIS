@@ -99,7 +99,7 @@ export default {
       }
       //console.log(this)
       processChildren( this.field, this.fhir, this.$children )
-      console.log("SAVING",this.fhir)
+      console.log("SAVE",this.fhir)
       fetch( "/fhir/"+this.field, {
         method: "POST",
         headers: {

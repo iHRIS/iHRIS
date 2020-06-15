@@ -12,6 +12,7 @@ Description:    "iHRIS profile of Practitioner."
 * identifier.value ^label = "Value"
 * identifier.type MS
 * identifier.type ^label = "Type"
+* identifier.type.coding 1..1 MS
 * name 1..1 MS
 * name ^label = "Name"
 * name.use MS

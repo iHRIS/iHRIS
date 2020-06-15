@@ -103,7 +103,7 @@ export default {
                   for( let include of data.compose.include ) {
                     if ( include.concept ) {
                       for ( let concept of include.concept ) {
-                        this.items.push( concept )
+                        this.items.push( { system: include.system, ...concept } )
                       }
                     }
                   }
