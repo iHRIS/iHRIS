@@ -28,7 +28,7 @@
 <script>
 export default {
   name: "fhir-code",
-  props: ["field","min","max","base-min","base-max","label","binding","slotProps"],
+  props: ["field","min","max","base-min","base-max","label","binding","slotProps","path"],
   data: function() {
     return {
       value: "",
@@ -36,33 +36,68 @@ export default {
       err_messages: null,
       error: false,
       items: [],
-      source: { path: "", data: {}, edit: true }
+      source: { path: "", data: {}, edit: true, binding: this.binding }
     }
   },
   created: function() {
-    this.value = this.startValue
-    let lastSlash = this.binding.lastIndexOf('/')
-    let lastPipe = this.binding.lastIndexOf('|')
-    let valueSetId = this.binding.slice(lastSlash+1, (lastPipe !== -1 ? lastPipe : null ))
+    let binding = this.binding || this.slotProps.source.binding
+    let lastSlash = binding.lastIndexOf('/')
+    let lastPipe = binding.lastIndexOf('|')
+    let valueSetId = binding.slice(lastSlash+1, (lastPipe !== -1 ? lastPipe : null ))
     fetch("/fhir/ValueSet/"+valueSetId+"/$expand").then(response=> {
-      response.json().then(data=>{
-        this.loading = false
-        try {
-          this.items = data.expansion.contains
-          /*
+      if( response.ok ) {
+        response.json().then(data=>{
+          this.loading = false
+          try {
+            this.items = data.expansion.contains
+            /*
           for( let code of data.expansion.contains ) {
             this.items.push( code )
           }
-          */
-        } catch(err) {
+             */
+          } catch(err) {
+            this.error = true
+            this.err_messages = "Invalid response from server."
+          }
+        }).catch(err=>{
+          this.err_messages = err.message
           this.error = true
-          this.err_messages = "Invalid response from server."
-        }
-      }).catch(err=>{
-        this.err_messages = err.message
-        this.error = true
-        this.loading = false
-      })
+          this.loading = false
+        })
+      } else {
+        // Try loading valueset without expansion if expand failed.
+        console.log("Failed to get ValueSet Expansion for "+valueSetId)
+        fetch("/fhir/ValueSet/"+valueSetId).then(response=> {
+          if ( response.ok ) {
+            response.json().then(data=> {
+              this.items = []
+              console.log(data.compose.include)
+              if ( data.compose.include ) {
+                for( let include of data.compose.include ) {
+                  if ( include.concept ) {
+                    for ( let concept of include.concept ) {
+                      this.items.push( concept )
+                    }
+                  }
+                }
+              }
+            }).catch(err=>{
+              this.err_messages = err.message
+              this.error = true
+              this.loading = false
+            })
+          } else {
+            this.error = true
+            this.err_messages = "Invalid response from server."
+            this.loading = false
+          }
+        }).catch(err=>{
+          this.err_messages = err.message
+          this.error = true
+          this.loading = false
+        })
+        
+      }
     }).catch(err=>{
       this.err_messages = err.message
       this.error = true

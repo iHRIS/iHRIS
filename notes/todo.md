@@ -12,6 +12,10 @@
  * minValue[x]
  * maxValue[x]
  * constraint
+* add mixin for fhir elements in frontend
+* add tests for frontend
+* change coding valueset lookup to search based on URL instead of by ID
+* fix valueset expansion lookup to work better on edge cases
 
 # Notes
 

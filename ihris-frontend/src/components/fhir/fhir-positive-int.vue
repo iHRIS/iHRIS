@@ -23,7 +23,7 @@ export default {
       else return undefined
     },
     display: function() {
-      if ( this.slotProps ) return this.slotProps.input.label
+      if ( this.slotProps && this.slotProps.input ) return this.slotProps.input.label
       else return this.label
     }
   }

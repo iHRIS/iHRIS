@@ -36,7 +36,10 @@ Description:    "iHRIS profile of Practitioner."
 * telecom.value ^label = "Value"
 * telecom.use MS
 * telecom.use ^label = "Use"
-* communication 0..0
+* communication 0..* MS
+* communication ^label = "Language"
+* communication.coding 1..1 MS
+* communication from IhrisEthiopiaLanguageValueSet
 * name.family.extension contains IhrisPractitionerFamilyNames named familyNames 0..1 MS
 * name.family.extension[familyNames].extension[fathers].valueString MS
 * name.family.extension[familyNames] ^label = "Family Names"
@@ -48,7 +51,6 @@ Description:    "iHRIS profile of Practitioner."
     IhrisPractitionerProfessionalLicenseCategory named professionalLicenseCategory 0..* MS and
     IhrisPractitionerMaritalStatus named maritalStatus 0..1 MS and
     IhrisPractitionerDependents named dependents 0..1 MS and
-    IhrisPractitionerLanguage named language 0..* MS and
     IhrisPractitionerSpecialTraining named specialTraining 0..* MS and
     IhrisPractitionerRemarkNote named remarkNote 0..* MS and
     IhrisPractitionerResidence named residence 0..1 MS and
@@ -62,8 +64,6 @@ Description:    "iHRIS profile of Practitioner."
 * extension[dependents] ^label = "Dependents"
 * extension[maritalStatus].valueCoding MS
 * extension[maritalStatus] ^label = "Marital Status"
-* extension[language].valueCoding MS
-* extension[language] ^label = "Language"
 * extension[specialTraining].valueString  MS
 * extension[specialTraining] ^label = "Special Training"
 * extension[professionalLicenseCategory].valueString MS
@@ -154,30 +154,14 @@ Description:    "iHRIS extension for Practitioner Residence."
 * valueReference.identifier 0..0
 * valueReference.display 0..0
 
-Extension:      IhrisPractitionerLanguage
-Id:             ihris-practitioner-language
-Title:          "iHRIS Personal Information Language"
-Description:    "iHRIS extension for Personal Information Language."
-* ^context.type = #element
-* ^context.expression = "Practitioner"
-* value[x] only Coding
-* valueCoding 1..1 MS
-* valueCoding ^label = "Language"
-* valueCoding from IhrisLanguageValueSet (required)
-
-CodeSystem:      IhrisLanguageCodeSystem
-Id:              ihris-language-codesystem
-Title:           "iHRIS Language CodeSystem"
-* #english "English" "English"
-* #amharic "Amharic" "Amharic"
-* #oromiffa "Afaan Oromoo" "Afaan Oromoo"
-* #somali "Somali" "Somali"
-* #tigrinya "Tigrinya" "Tigrinya"
-
-ValueSet:         IhrisLanguageValueSet
-Id:               ihris-language-valueset
-Title:            "iHRIS Language ValueSet"
-* codes from system IhrisLanguageCodeSystem
+ValueSet:         IhrisEthiopiaLanguageValueSet
+Id:               ihris-ethiopia-language-valueset
+Title:            "iHRIS Ethiopia Language ValueSet"
+* urn:ietf:bcp:47#en "English"
+* urn:ietf:bcp:47#am "Amharic"
+* urn:ietf:bcp:47#om "Afaan Oromoo"
+* urn:ietf:bcp:47#so "Somali"
+* urn:ietf:bcp:47#ti "Tigrinya"
 
 Extension:      IhrisPractitionerNationality
 Id:             ihris-practitioner-nationality
