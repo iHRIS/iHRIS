@@ -62,7 +62,7 @@ export default {
       if ( this.slotProps.source ) {
         this.source = { path: this.slotProps.source.path+"."+this.field, data: {}, 
           edit: this.slotProps.source.edit, binding: this.binding || this.slotProps.source.binding }
-        //console.log("CODING binding", this.binding, this.slotProps.source.binding)
+        console.log("CODING ", this.binding, this.slotProps)
         if ( this.slotProps.source.fromArray ) {
           this.source.data = this.slotProps.source.data
           // Need to see if this works and figure out what it needs to be
@@ -70,8 +70,9 @@ export default {
         } else {
           let expression = this.field.substring( this.field.indexOf(':')+1 )
           this.source.data = this.$fhirpath.evaluate( this.slotProps.source.data, expression )
+          this.value = this.source.data[0]
         }
-        //console.log(this.source)
+        console.log("CODING",this.source)
       }
       let binding = this.binding || this.slotProps.source.binding
       //console.log("CODING",binding)
