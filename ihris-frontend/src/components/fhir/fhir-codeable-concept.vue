@@ -33,7 +33,7 @@ export default {
       if ( this.slotProps.source ) {
         this.source = { path: this.slotProps.source.path+"."+this.field, data: {}, 
           edit: this.slotProps.source.edit, binding: this.binding }
-        console.log("CC binding",this.binding)
+        //console.log("CC binding",this.binding)
         if ( this.slotProps.source.fromArray ) {
           this.source.data = this.slotProps.source.data
         } else {
