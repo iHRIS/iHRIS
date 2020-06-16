@@ -4,7 +4,6 @@
       <v-select 
         :loading="loading" 
         :label="display" 
-        :name="field" 
         v-model="valueCode" 
         :items="items" 
         outlined 
@@ -26,6 +25,9 @@
 </template>
 
 <script>
+const itemSort = (a,b) => {
+  return (a.display === b.display ? (a.code === b.code ? 0 : (a.code < b.code ? -1: 1)) : (a.display < b.display ? -1 : 1) )
+}
 export default {
   name: "fhir-coding",
   props: ["field","label","sliceName","targetprofile","min","max","base-min","base-max","slotProps","path","binding"],
@@ -53,7 +55,7 @@ export default {
     },
     valueCode: function() {
       if ( this.items ) {
-        this.value = this.items.find( item => item.code = this.valueCode )
+        this.value = this.items.find( item => item.code === this.valueCode )
       }
     }
   },
@@ -62,7 +64,6 @@ export default {
       if ( this.slotProps.source ) {
         this.source = { path: this.slotProps.source.path+"."+this.field, data: {}, 
           edit: this.slotProps.source.edit, binding: this.binding || this.slotProps.source.binding }
-        console.log("CODING ", this.binding, this.slotProps)
         if ( this.slotProps.source.fromArray ) {
           this.source.data = this.slotProps.source.data
           // Need to see if this works and figure out what it needs to be
@@ -72,7 +73,6 @@ export default {
           this.source.data = this.$fhirpath.evaluate( this.slotProps.source.data, expression )
           this.value = this.source.data[0]
         }
-        console.log("CODING",this.source)
       }
       let binding = this.binding || this.slotProps.source.binding
       //console.log("CODING",binding)
@@ -86,6 +86,7 @@ export default {
             this.loading = false
             try {
               this.items = data.expansion.contains
+              this.items.sort( itemSort )
             } catch(err) {
               this.error = true
               this.err_messages = "Invalid response from server."
@@ -106,11 +107,14 @@ export default {
                   for( let include of data.compose.include ) {
                     if ( include.concept ) {
                       for ( let concept of include.concept ) {
-                        this.items.push( { system: include.system, ...concept } )
+                        concept.system = include.system
+                        this.items.push( concept )
+                        //this.items.push( { system: include.system, ...concept } )
                       }
                     }
                   }
                 }
+                this.items.sort( itemSort )
                 this.loading = false
               }).catch(err=>{
                 this.err_messages = err.message

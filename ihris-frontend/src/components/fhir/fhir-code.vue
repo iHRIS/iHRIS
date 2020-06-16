@@ -4,7 +4,6 @@
       <v-select 
         :loading="loading" 
         :label="display" 
-        :name="field" 
         v-model="value" 
         :items="items" 
         outlined 
@@ -26,6 +25,9 @@
 </template>
 
 <script>
+const itemSort = (a,b) => {
+  return (a.display === b.display ? (a.code === b.code ? 0 : (a.code < b.code ? -1: 1)) : (a.display < b.display ? -1 : 1) )
+}
 export default {
   name: "fhir-code",
   props: ["field","min","max","base-min","base-max","label","binding","slotProps","path"],
@@ -78,6 +80,7 @@ export default {
             this.loading = false
             try {
               this.items = data.expansion.contains
+              this.items.sort( itemSort )
               /*
           for( let code of data.expansion.contains ) {
             this.items.push( code )
@@ -103,11 +106,14 @@ export default {
                   for( let include of data.compose.include ) {
                     if ( include.concept ) {
                       for ( let concept of include.concept ) {
-                        this.items.push( { system: include.system, ...concept } )
+                        //this.items.push( { system: include.system, ...concept } )
+                        concept.system = include.system
+                        this.items.push( concept )
                       }
                     }
                   }
                 }
+                this.items.sort( itemSort )
                 this.loading = false
               }).catch(err=>{
                 this.err_messages = err.message

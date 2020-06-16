@@ -17,6 +17,10 @@
 * change coding valueset lookup to search based on URL instead of by ID
 * fix valueset expansion lookup to work better on edge cases
 * cache valuesets in $store object instead of hitting them all the time
+* fix issue with valuesets selecting first item
+ * autocomplete?
+* questionnaire data entry
+* add form validation and required fields
 
 # Notes
 
