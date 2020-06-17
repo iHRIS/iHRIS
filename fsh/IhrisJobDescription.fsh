@@ -16,12 +16,12 @@ Description:    "iHRIS profile of Practitioner."
 * active ^label = "Status"
 * practitioner MS
 * practitioner ^label = "Practitioner"
-* practitioner.valueReference.reference ^label = "Practitioner"
+* practitioner.reference ^label = "Practitioner"
 * healthcareService 0..0
 * telecom 0..0
 * location 1..1 MS
 * location ^label = "Duty Station"
-* location.valueReference.reference ^label = "Duty Station"
+* location.reference ^label = "Duty Station"
 * extension contains
     IhrisPractitionerRoleJobTitle named jobTitle 1..1 MS and
     IhrisPractitionerRoleAbbreviatedJobTitle named abbreviatedJobTitle 0..1 MS and

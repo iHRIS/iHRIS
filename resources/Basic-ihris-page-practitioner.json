@@ -21,7 +21,7 @@
         {
           "url": "resource",
           "valueReference": {
-            "reference": "StructureDefinition/ihris-personal-information"
+            "reference": "StructureDefinition/ihris-practitioner"
           }
         },
         {

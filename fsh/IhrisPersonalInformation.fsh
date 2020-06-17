@@ -1,4 +1,4 @@
-Profile:        IhrisPractitioner
+Profile:        IhrisPersonalInformation
 Parent:         Practitioner
 Id:             ihris-personal-information
 Title:          "iHRIS Personal Information"

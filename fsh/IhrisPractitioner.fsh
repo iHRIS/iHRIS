@@ -3,15 +3,16 @@ Parent:         Practitioner
 Id:             ihris-practitioner
 Title:          "iHRIS Practitioner"
 Description:    "iHRIS profile of Practitioner."
-/*
-* identifier 
-* identifier.use 
-* identifier.type 
-* identifier.system 
-* identifier.value 
-* identifier.period 
-* identifier.assigner 
-*/
+* identifier 0..* MS
+* identifier ^label = "Identifier"
+* identifier.use MS
+* identifier.use ^label = "Use"
+* identifier.type MS
+* identifier.type ^label = "Type"
+* identifier.system MS
+* identifier.system ^label = "System"
+* identifier.value MS
+* identifier.value ^label = "Value"
 * name 1..* MS
 * name ^label = "Name"
 * name.use MS
@@ -24,19 +25,40 @@ Description:    "iHRIS profile of Practitioner."
 * name.prefix ^label = "Prefix"
 * name.suffix MS
 * name.suffix ^label = "Suffix"
-/*
-* telecom 0..*
-* address 0..*
-*/
+* telecom 0..* MS
+* telecom ^label = "Telecom"
+* telecom.system MS
+* telecom.system ^label = "Contact Type"
+* telecom.use MS
+* telecom.use ^label = "Use"
+* telecom.value MS
+* telecom.value ^label = "Value"
+* address 0..* MS
+* address ^label = "Address"
+* address.use MS
+* address.use ^label = "Use"
+* address.type MS
+* address.type ^label = "Type"
+* address.line MS
+* address.line ^label = "Line"
+* address.city MS
+* address.city ^label = "City"
+* address.district MS
+* address.district ^label = "District"
+* address.state MS
+* address.state ^label = "State"
+* address.postalCode MS
+* address.postalCode ^label = "Postal Code"
+* address.country MS
+* address.country ^label = "Country"
 * gender 1..1 MS
 * gender ^label = "Gender"
 * birthDate MS
 * birthDate ^label = "Birth Date"
-/*
-* photo 0..*
-* qualification 0..*
-* communication 0..*
-*/
+* communication 0..* MS
+* communication ^label = "Communication"
+* communication.coding 1..1 MS
+* communication.coding ^label = "Language"
 * extension contains 
     IhrisPractitionerResidence named residence 0..1 MS and
     IhrisPractitionerNationality named nationality 0..1 and
