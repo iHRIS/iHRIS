@@ -6,23 +6,26 @@ Description:    "iHRIS profile of Practitioner."
 
 * identifier MS
 * identifier ^label = "Identifier"
-* identifier.system MS
-* identifier.system ^label = "System"
+* identifier.system 0..0
+/* identifier.system ^label = "System"*/
 * identifier.value MS
 * identifier.value ^label = "Value"
 * identifier.type MS
 * identifier.type ^label = "Type"
 * identifier.type.coding 1..1 MS
+* identifier.type from IhrisEthiopiaIdentifierValueSet
 * name 1..1 MS
 * name ^label = "Name"
 * name.use MS
 * name.use ^label = "Use"
-* name.family MS
-* name.family ^label = "Family"
+* name.family 0..0
+/* name.family ^label = "Family"*/
 * name.given MS
-* name.given ^label = "Given Name"
-* name.prefix MS
-* name.prefix ^label = "Prefix"
+* name.given ^label = "First Name"
+* name.prefix 0..0
+* name.extension contains IhrisPractitionerPrefix named ethiopiaPrefix 0..* MS
+* name.extension[ethiopiaPrefix].valueCoding MS
+* name.extension[ethiopiaPrefix] ^label = "Prefix"
 * name.suffix MS
 * name.suffix ^label = "Suffix"
 * birthDate MS
@@ -41,13 +44,13 @@ Description:    "iHRIS profile of Practitioner."
 * communication ^label = "Language"
 * communication.coding 1..1 MS
 * communication from IhrisEthiopiaLanguageValueSet
-* name.family.extension contains IhrisPractitionerFamilyNames named familyNames 0..1 MS
-* name.family.extension[familyNames].extension[fathers].valueString MS
-* name.family.extension[familyNames] ^label = "Family Names"
-* name.family.extension[familyNames].extension[mothers].valueString MS
-* name.family.extension[familyNames].extension[fathersalternativelanguage].valueString MS
-* name.family.extension[familyNames].extension[grandfatherslastname].valueString MS
-* name.family.extension[familyNames].extension[grandfathersalternativelanguage].valueString MS
+* name.extension contains IhrisPractitionerFamilyNames named familyNames 0..1 MS
+* name.extension[familyNames].extension[fathers].valueString MS
+* name.extension[familyNames] ^label = "Family Names"
+* name.extension[familyNames].extension[mothers].valueString MS
+* name.extension[familyNames].extension[fathersalternativelanguage].valueString MS
+* name.extension[familyNames].extension[grandfatherslastname].valueString MS
+* name.extension[familyNames].extension[grandfathersalternativelanguage].valueString MS
 * extension contains
     IhrisPractitionerProfessionalLicenseCategory named professionalLicenseCategory 0..* MS and
     IhrisPractitionerMaritalStatus named maritalStatus 0..1 MS and
@@ -81,7 +84,7 @@ Id:             ihris-practitioner-familynames
 Title:          "iHRIS FamilyNames"
 Description:    "iHRIS Family Names extension for Ethiopia."
 * ^context.type = #element
-* ^context.expression = "HumanName.family"
+* ^context.expression = "Practitioner"
 * extension contains
       fathers 0..1 MS and
       fathersalternativelanguage 0..1 MS and
@@ -90,24 +93,24 @@ Description:    "iHRIS Family Names extension for Ethiopia."
       mothers 0..1 MS
 * extension[fathers].value[x] only string
 * extension[fathers].valueString 0..1 MS
-* extension[fathers].valueString ^label = "Fathers Name"
-* extension[fathers] ^label = "Fathers Name"
+* extension[fathers].valueString ^label = "Father's Name"
+* extension[fathers] ^label = "Father's Name"
 * extension[fathersalternativelanguage].value[x] only string
 * extension[fathersalternativelanguage].valueString 0..1 MS
-* extension[fathersalternativelanguage].valueString ^label = "Fathers Name Alternative Language"
-* extension[fathersalternativelanguage] ^label = "Fathers Name Alternative Language"
+* extension[fathersalternativelanguage].valueString ^label = "Father's Name Alternative Language"
+* extension[fathersalternativelanguage] ^label = "Father's Name Alternative Language"
 * extension[mothers].value[x] only string
 * extension[mothers].valueString 0..1 MS
-* extension[mothers].valueString ^label = "Mothers Name"
-* extension[mothers] ^label = "Mothers Name"
+* extension[mothers].valueString ^label = "Mother's Name"
+* extension[mothers] ^label = "Mother's Name"
 * extension[grandfatherslastname].value[x] only string
 * extension[grandfatherslastname].valueString 0..1 MS
-* extension[grandfatherslastname].valueString ^label = "Grandfathers Lastname"
-* extension[grandfatherslastname] ^label = "Grandfathers Lastname"
+* extension[grandfatherslastname].valueString ^label = "Grandfather's Lastname"
+* extension[grandfatherslastname] ^label = "Grandfather's Lastname"
 * extension[grandfathersalternativelanguage].value[x] only string
 * extension[grandfathersalternativelanguage].valueString 0..1 MS
-* extension[grandfathersalternativelanguage].valueString ^label = "Grand Father Name Alternative Language"
-* extension[grandfathersalternativelanguage] ^label = "Grand Father Name Alternative Language"
+* extension[grandfathersalternativelanguage].valueString ^label = "Grand Father's Name Alternative Language"
+* extension[grandfathersalternativelanguage] ^label = "Grand Father's Name Alternative Language"
 
 Extension:      IhrisPractitionerProfessionalLicenseCategory
 Id:             ihris-personal-information-professional-license-category
@@ -163,6 +166,51 @@ Title:            "iHRIS Ethiopia Language ValueSet"
 * urn:ietf:bcp:47#om "Afaan Oromoo"
 * urn:ietf:bcp:47#so "Somali"
 * urn:ietf:bcp:47#ti "Tigrinya"
+
+Extension:      IhrisPractitionerPrefix
+Id:             ihris-practitioner-prefix
+Title:          "iHRIS Personal Information Prefix"
+Description:    "iHRIS extension for Personal Prefix."
+* ^context.type = #element
+* ^context.expression = "Practitioner"
+* value[x] only Coding
+* valueCoding 1..1 MS
+* valueCoding ^label = "Prefix"
+* valueCoding from IhrisEthiopiaPrefixValueSet (required)
+
+ValueSet:         IhrisEthiopiaPrefixValueSet
+Id:               ihris-ethiopia-prefix-valueset
+Title:            "iHRIS Ethiopia Prefix ValueSet"
+* codes from system IhrisEthiopiaPrefixCodeSystem
+
+CodeSystem:         IhrisEthiopiaPrefixCodeSystem
+Id:               ihris-ethiopia-pefix-codesystem
+Title:            "iHRIS Ethiopia Prefix Codesystem"
+* #mr "Mr"
+* #mrs "Mrs"
+* #ms "Ms"
+* #dr "Dr"
+* #ato "Ato"
+* #ss "Sister"
+* #prof "Professor"
+* #eng "Enginner"
+* #ro "W/ro"
+* #rt "W/rt"
+
+ValueSet:         IhrisEthiopiaIdentifierValueSet
+Id:               ihris-ethiopia-identifier-valueset
+Title:            "iHRIS Ethiopia Identifier ValueSet"
+* codes from system IhrisEthiopiaIdentifierCodeSystem
+
+CodeSystem:         IhrisEthiopiaIdentifierCodeSystem
+Id:               ihris-ethiopia-identifier-codesystem
+Title:            "iHRIS Ethiopia Identifier Codesystem"
+* #employeeId "Employee Id"
+* #pensionNumber "Pension Number"
+* #tinNumber "Tin Number"
+* #drivingLicenseId "Driving License"
+* #civilServiceId "Civil Service Id"
+* #licenseId "License Id"
 
 Extension:      IhrisPractitionerNationality
 Id:             ihris-practitioner-nationality
