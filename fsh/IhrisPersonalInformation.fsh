@@ -54,13 +54,14 @@ Description:    "iHRIS profile of Practitioner."
 * extension contains
     IhrisPractitionerProfessionalLicenseCategory named professionalLicenseCategory 0..* MS and
     IhrisPractitionerMaritalStatus named maritalStatus 0..1 MS and
-    IhrisPractitionerDependents named dependents 0..1 MS and
+    IhrisPractitionerDependents named dependents 0..* MS and
     IhrisPractitionerSpecialTraining named specialTraining 0..* MS and
     IhrisPractitionerRemarkNote named remarkNote 0..* MS and
     IhrisPractitionerResidence named residence 0..1 MS and
     IhrisPractitionerNationality named nationality 0..1 MS and
     IhrisPractitionerEducationalMajor named educationalMajor 0..1 MS and
-    IhrisPractitionerCategory named category 0..1 MS
+    IhrisPractitionerCategory named category 0..1 MS and
+    IhrisPractitionerEthnicity named ethnicity 0..1 MS
 * extension[residence].valueReference.reference MS
 * extension[nationality].valueCoding MS
 * extension[nationality] ^label = "Nationality"
@@ -287,9 +288,110 @@ Description:    "iHRIS extension for Practitioner marital status."
 Extension:      IhrisPractitionerDependents
 Id:             ihris-practitioner-dependents
 Title:          "iHRIS Practitioner Dependents"
-Description:    "iHRIS extension for Practitioner number of dependents."
+Description:    "iHRIS extension for Practitioner dependents."
 * ^context.type = #element
 * ^context.expression = "Practitioner"
-* value[x] only positiveInt
-* valuePositiveInt 1..1 MS
-* valuePositiveInt ^label = "Number Of Dependents"
+* value[x] only string
+* valueString 1..1 MS
+* valueString ^label = "Dependents"
+
+Extension:      IhrisPractitionerEthnicity
+Id:             ihris-practitioner-ethnicity
+Title:          "iHRIS Personal Information Ethnicity"
+Description:    "iHRIS extension for Personal Information Ethnicity."
+* ^context.type = #element
+* ^context.expression = "Practitioner"
+* value[x] only Coding
+* valueCoding 1..1 MS
+* valueCoding ^label = "Ethnicity"
+* valueCoding from IhrisEthnicityValueSet (required)
+
+CodeSystem:      IhrisEthnicityCodeSystem
+Id:              ihris-Ethnicity-codesystem
+Title:           "iHRIS Ethnicity CodeSystem"
+* #bench "Bench" "Bench"
+* #berta "Berta" "Berta"
+* #betaIsrael "Beta Israel" "Beta Israel"
+* #bodi "Bodi" "Bodi"
+* #brayle "Brayle" "Brayle"
+* #burji "Burji" "Burji"
+* #chara "Chara" "Chara"
+* #daasanach "Daasanach" "Daasanach"
+* #dawro "Dawro" "Dawro"
+* #debaseGawwada "Debase/Gawwada" "Debase/Gawwada"
+* #dime "Dime" "Dime"
+* #dirashe "Dirashe" "Dirashe"
+* #dizi "Dizi" "Dizi"
+* #donga "Donga" "Donga"
+* #fedashe "Fedashe" "Fedashe"
+* #gamo "Gamo" "Gamo"
+* #gebato "Gebato" "Gebato"
+* #gedeo "Gedeo" "Gedeo"
+* #gedicho "Gedicho" "Gedicho"
+* #gidole "Gidole" "Gidole"
+* #goffa "Goffa" "Goffa"
+* #gumuz "Gumuz" "Gumuz"
+* #gurage "Gurage" "Gurage"
+* #hadiya "Hadiya" "Hadiya"
+* #hamar "Hamar" "Hamar"
+* #harari "Harari" "Harari"
+* #irob "Irob" "Irob"
+* #kafficho "Kafficho" "Kafficho"
+* #kambaata "Kambaata" "Kambaata"
+* #karo "Karo" "Karo"
+* #komo "Komo" "Komo"
+* #konso "Konso" "Konso"
+* #konta "Konta" "Konta"
+* #kontoma "Kontoma" "Kontoma"
+* #koore "Koore" "Koore"
+* #kunama "Kunama" "Kunama"
+* #kusumie "Kusumie" "Kusumie"
+* #kwegu "Kwegu" "Kwegu"
+* #majangir "Majangir" "Majangir"
+* #male "Male" "Male"
+* #mao "Mao" "Mao"
+* #mareqo "Mareqo" "Mareqo"
+* #mashola "Mashola" "Mashola"
+* #meen "Me'en" "Me'en"
+* #merePeople "Mere people" "Mere people"
+* #messengo "Messengo" "Messengo"
+* #mossiye "Mossiye" "Mossiye"
+* #murle "Murle" "Murle"
+* #mursi "Mursi" "Mursi"
+* #nao "Nao" "Nao"
+* #nuer "Nuer" "Nuer"
+* #nyangatom "Nyangatom" "Nyangatom"
+* #oromo "Oromo" "Oromo"
+* #oyda "Oyda" "Oyda"
+* #qebena "Qebena" "Qebena"
+* #qechem "Qechem" "Qechem"
+* #qewama "Qewama" "Qewama"
+* #she "She" "She"
+* #shekecho "Shekecho" "Shekecho"
+* #sheko "Sheko" "Sheko"
+* #shinasha "Shinasha" "Shinasha"
+* #shitaUpo "Shita/Upo" "Shita/Upo"
+* #sidama "Sidama" "Sidama"
+* #silte "Silt'e" "Silt'e"
+* #somali "Somali" "Somali"
+* #surma "Surma" "Surma"
+* #tembaro "Tembaro" "Tembaro"
+* #tigrinya "Tigrinya" "Tigrinya"
+* #tsamai "Tsamai" "Tsamai"
+* #welayta "Welayta" "Welayta"
+* #werji "Werji" "Werji"
+* #yem "Yem" "Yem"
+* #zelmam "Zelmam" "Zelmam"
+* #zeyese "Zeyese" "Zeyese"
+* #otherUnknown "Other/unknown" "Other/unknown"
+* #somalian "Somalian" "Somalian"
+* #sudanese "Sudanese" "Sudanese"
+* #eritrean "Eritrean" "Eritrean"
+* #kenyan "Kenyan" "Kenyan"
+* #djiboutian "Djiboutian" "Djiboutian"
+* #otherForeigners "Other foreigners" "Other foreigners"
+
+ValueSet:         IhrisEthnicityValueSet
+Id:               ihris-Ethnicity-valueset
+Title:            "iHRIS Ethnicity ValueSet"
+* codes from system IhrisEthnicityCodeSystem
