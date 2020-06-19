@@ -1,5 +1,5 @@
 <template>
-  <v-app style="background-color: #f4f7f9">
+  <v-app id="top">
     <the-header :header="header" />
     <the-navigation :nav="nav" />
 
@@ -11,6 +11,30 @@
     <the-footer :footer="footer" />
   </v-app>
 </template>
+
+<style>
+.ihris-sections-menu {
+  position: sticky;
+  top: 0;
+  z-index: 2;
+}
+.ihris-sections-menu::before {
+  display: block;
+  content: " ";
+  margin-top: -70px;
+  height: 70px;
+  visibility: hidden;
+  pointer-events: none;
+}
+.ihris-section::before {
+  display: block;
+  content: " ";
+  margin-top: -70px;
+  height: 70px;
+  visibility: hidden;
+  pointer-events: none;
+}
+</style>
 
 <script>
 import TheHeader from "./components/layout/the-header"

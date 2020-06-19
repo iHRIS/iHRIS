@@ -1,46 +1,72 @@
 <template>
-  <v-container class="py-5">
-    <v-card
-      class="mx-auto my-5"
-      max-width="800"
-      outlined
-    >
-      <v-card-title v-if="!fhirId" class="white--text primary darken-1">
-        <v-progress-circular indeterminate v-if="loading" color="primary"></v-progress-circular>
-        Add {{ field }}
-      </v-card-title>
-      <v-card-title v-else class="white--text primary darken-1">
-        <v-progress-circular indeterminate v-if="loading" color="primary"></v-progress-circular>
-        Edit {{ field }}
-      </v-card-title>
-      <v-card-text class="mt-5">
-        <slot :source="source"></slot>
-      </v-card-text>
-      <v-card-actions v-if="!fhirId">
-        <v-spacer></v-spacer>
-        <v-btn
-          color="success"
-          @click="processFHIR()"
-        >
-          Save
-        </v-btn>
-      </v-card-actions>
-    </v-card>
-    <v-overlay :value="overlay">
-      <v-progress-circular
-        size="50"
-        color="primary"
-        indeterminate
-      ></v-progress-circular>
-      <v-btn icon @click="overlay = false"><v-icon>mdi-close</v-icon></v-btn>
-    </v-overlay>
+  <v-container>
+    <v-row>
+      <v-col cols="1">
+        <div class="ihris-sections-menu">
+            <v-navigation-drawer
+              v-if="!fhirId"
+              mini-variant
+              permanent
+              floating
+              >
+              <v-tooltip right>
+                <template v-slot:activator="{ on, attrs }">
+                  <v-btn 
+                    v-bind="attrs" 
+                    v-on="on"
+                    fab
+                    dark
+                    color="primary darken-1"
+                  >
+                    <v-icon dark>mdi-content-save</v-icon>
+                  </v-btn>
+                </template>
+                  <span>Save</span>
+              </v-tooltip>
+            </v-navigation-drawer>
+        </div>
+       </v-col>
+      <v-col cols="7">
+         <v-container class="my-3">
+            <slot :source="source"></slot>
+          </v-container>
+        <v-overlay :value="overlay">
+          <v-progress-circular
+            size="50"
+            color="primary"
+            indeterminate
+            ></v-progress-circular>
+        </v-overlay>
+      </v-col>
+      <v-col cols="4">
+
+        <v-card v-if="sectionMenu" class="ihris-sections-menu" flat color="primary lighten-2">
+          <v-card-text class="ma-0 pa-0">
+            <v-card class="mx-auto" max-width="500" title dark shaped color="primary darken-1">
+
+              <v-card-title class="white--text primary darken-1">
+                Sections
+              </v-card-title>
+              <v-list class="primary darken-1">
+                <v-list-item v-for="section in sectionMenu" :href="'#section-'+section.name" :key="section.name">
+                  <v-list-item-content>
+                    <v-list-item-title class="text-uppercase"><h4>{{ section.title }}</h4></v-list-item-title>
+                    <v-list-item-subtitle>{{ section.desc }}</v-list-item-subtitle>
+                  </v-list-item-content>
+                </v-list-item>
+              </v-list>
+            </v-card>
+          </v-card-text>
+        </v-card>
+      </v-col>
+    </v-row>
   </v-container>
 </template>
 
 <script>
 export default {
-  name: "fhir-resource",
-  props: ["field","fhir-id","page","profile"],
+  name: "ihris-resource",
+  props: ["title","field","fhir-id","page","profile","section-menu"],
   data: function() {
     return {
       fhir: {},

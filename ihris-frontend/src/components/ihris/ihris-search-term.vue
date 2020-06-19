@@ -5,7 +5,7 @@
 
 <script>
 export default {
-  name: "fhir-search-term",
+  name: "ihris-search-term",
   props: ["label","expression"],
   data: function() {
     return {

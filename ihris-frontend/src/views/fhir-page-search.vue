@@ -8,8 +8,8 @@
 // @ is an alias to /src
 
 const searchComps = {
-  "fhir-search": () => import(/* webpackChunkName: "fhir-search" */ "@/components/fhir/fhir-search" ),
-  "fhir-search-term": () => import(/* webpackChunkName: "fhir-search" */ "@/components/fhir/fhir-search-term" )
+  "ihris-search": () => import(/* webpackChunkName: "fhir-search" */ "@/components/ihris/ihris-search" ),
+  "ihris-search-term": () => import(/* webpackChunkName: "fhir-search" */ "@/components/ihris/ihris-search-term" )
 }
 var page
 

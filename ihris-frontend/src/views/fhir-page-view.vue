@@ -8,8 +8,9 @@
 // @ is an alias to /src
 
 const comps = { 
-  "fhir-resource": () => import(/* webpackChunkName: "fhir-main" */ "@/components/fhir/fhir-resource" ),
-  "fhir-array": () => import(/* webpackChunkName: "fhir-main" */ "@/components/fhir/fhir-array" ),
+  "ihris-resource": () => import(/* webpackChunkName: "fhir-main" */ "@/components/ihris/ihris-resource" ),
+  "ihris-section": () => import(/* webpackChunkName: "fhir-main" */ "@/components/ihris/ihris-section" ),
+  "ihris-array": () => import(/* webpackChunkName: "fhir-main" */ "@/components/ihris/ihris-array" ),
   "fhir-extension": () => import(/* webpackChunkName: "fhir-main" */ "@/components/fhir/fhir-extension" ),
   "fhir-reference": () => import(/* webpackChunkName: "fhir-main" */ "@/components/fhir/fhir-reference" ),
   "fhir-string": () => import(/* webpackChunkName: "fhir-main" */ "@/components/fhir/fhir-string" ),
@@ -38,7 +39,7 @@ export default {
       return new Promise(resolve => {
         fetch( "/config/page/"+page ).then(response => {
             response.json().then(data => {
-              data.template = data.template.replace('fhir-resource profile=', 'fhir-resource fhir-id="'+pageId+'" profile=')
+              data.template = data.template.replace('ihris-resource profile=', 'ihris-resource fhir-id="'+pageId+'" profile=')
               resolve({components: comps, template: data.template})
               //console.log(data.template)
             }).catch(err => {

@@ -26,7 +26,7 @@
 <script>
 
 export default {
-  name: "fhir-search",
+  name: "ihris-search",
   props: ["profile","fields","label","terms","page"],
   data: function() {
     return {

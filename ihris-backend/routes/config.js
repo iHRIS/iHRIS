@@ -66,7 +66,7 @@ const processFields = ( fields, base, order ) => {
     let isArray = false
     if ( fields[field]["max"] !== "1" ) {
       isArray = true
-      output += "<fhir-array fieldType=\""+eleName+"\" :slotProps=\"slotProps\""
+      output += "<ihris-array fieldType=\""+eleName+"\" :slotProps=\"slotProps\""
       let arr_attrs = [ "field", "label", "min", "max", "id", "path", "profile", "targetProfile", "sliceName" ]
       for ( let attr of arr_attrs ) {
         output += " "+attr+"=\""+fields[field][attr]+"\""
@@ -98,7 +98,7 @@ const processFields = ( fields, base, order ) => {
 
     output += "</fhir-"+eleName+">\n" 
     if ( isArray ) {
-      output += "</template>\n</fhir-array>\n"
+      output += "</template>\n</ihris-array>\n"
     }
   }
   return output
@@ -106,6 +106,7 @@ const processFields = ( fields, base, order ) => {
 
 router.get('/page/:page', function(req, res) {
   let page = "ihris-page-"+req.params.page
+  /*
   if ( !req.user ) {
     return res.status(401).json( outcomes.NOTLOGGEDIN)
   }
@@ -114,30 +115,74 @@ router.get('/page/:page', function(req, res) {
   if ( allowed !== true ) {
     return res.status(401).json( outcomes.DENIED )
   }
+  */
 
   fhirAxios.read( "Basic", page ).then ( (resource) => {
     let pageDisplay = resource.extension.find( ext => ext.url === "http://ihris.org/fhir/StructureDefinition/ihris-page-display" )
     let pageResource = pageDisplay.extension.find( ext => ext.url === "resource" ).valueReference.reference
     let structureDef = pageResource.split('/')
+    /*
     let order = []
     try {
       order = pageDisplay.extension.filter( ext => ext.url === "order" ).map( ext => ext.valueString )
-    } catch(err) {
-    }
+    } catch(err) { }
+    */
     let search = [ 'id' ]
     try {
       search = pageDisplay.extension.filter( ext => ext.url === "search" ).map( ext => ext.valueString.split('|') )
-    } catch(err) {
-    }
+    } catch(err) { }
     let filters = []
     try {
       filters = pageDisplay.extension.filter( ext => ext.url === "filter" ).map( ext => ext.valueString.split('|') )
-    } catch(err) {
-    }
+    } catch(err) { }
+    let pageSections = resource.extension.filter( ext => ext.url === "http://ihris.org/fhir/StructureDefinition/ihris-page-section" )
 
     console.log(filters)
     console.log(search)
+    let sections = {}
+    let sectionMap = {}
+    for( let section of pageSections ) {
+      let title, description, name, resource
+      let fields = []
+      try {
+        title = section.extension.find( ext => ext.url === "title" ).valueString
+      } catch(err) { }
+      try {
+        description = section.extension.find( ext => ext.url === "description" ).valueString
+      } catch(err) { }
+      try {
+        name = section.extension.find( ext => ext.url === "name" ).valueString
+      } catch(err) { }
+      try {
+        fields = section.extension.filter( ext => ext.url === "field" ).map( ext => ext.valueString )
+      } catch(err) { }
+      try {
+        resource = section.extension.find( ext => ext.url === "resource" ).valueReference.reference
+      } catch(err) { }
+      let sectionOrder = {}
+      for( let ord of fields ) {
+        let lastDot = ord.lastIndexOf('.')
+        let ordId = ord.substring(0,lastDot)
+        let ordField = ord.substring(lastDot+1)
+        if ( !sectionOrder.hasOwnProperty(ordId) ) {
+          sectionOrder[ordId] = []
+        }
+        sectionOrder[ordId].push(ordField)
+      }
+      for( let field of fields ) {
+        sectionMap[field] = name
+      }
+      sections[name] = {
+        title: title,
+        description: description,
+        fields: fields,
+        order: sectionOrder,
+        resource: resource,
+        elements: {}
+      } 
+    }
     let sdOrder = {}
+    /*
     for( let ord of order ) {
       let lastDot = ord.lastIndexOf('.')
       let ordId = ord.substring(0,lastDot)
@@ -147,6 +192,7 @@ router.get('/page/:page', function(req, res) {
       }
       sdOrder[ordId].push(ordField)
     }
+    */
 
 
     fhirAxios.read( structureDef[0], structureDef[1] ).then( (resource) => {
@@ -171,29 +217,63 @@ router.get('/page/:page', function(req, res) {
 
       let structureKeys = Object.keys( structure )
 
-      let searchTemplate = '<fhir-search page="'+req.params.page+'" label="'+structureKeys[0]+'" :fields="fields" :terms="terms" profile="'+resource.url+'">'+"\n"
+      let searchTemplate = '<ihris-search page="'+req.params.page+'" label="'+structureKeys[0]+'" :fields="fields" :terms="terms" profile="'+resource.url+'">'+"\n"
       for( let filter of filters ) {
-          searchTemplate += '<fhir-search-term v-on:termChange="searchData"'
+          searchTemplate += '<ihris-search-term v-on:termChange="searchData"'
         if ( filter.length == 1 ) {
           searchTemplate += ' label="Search" expression="'+filter[0]+'"'
         } else {
           searchTemplate += ' label="'+filter[0]+'" expression="'+filter[1]+'"'
         }
-        searchTemplate += "></fhir-search-term>\n"
+        searchTemplate += "></ihris-search-term>\n"
       }
-      searchTemplate += "</fhir-search>\n"
+      searchTemplate += "</ihris-search>\n"
       console.log(searchTemplate)
 
 
       let vueOuput = "<template>"
       for ( let fhir of structureKeys ) {
-        vueOutput = '<fhir-resource profile="'+resource.url+'" page="'+req.params.page+'" field="'+fhir+'"><template #default=\"slotProps\">'+"\n"
+        if ( !sections.hasOwnProperty(fhir) ) {
+          sections[fhir] = {
+            title: fhir,
+            description: "",
+            fields: [],
+            order: {},
+            resource: undefined,
+            elements: {}
+          }
+        }
+        let sectionKeys = Object.keys(sections)
+        let sectionMenu
+        vueOutput = '<ihris-resource profile="'+resource.url+'" page="'+req.params.page+'" field="'+fhir+'" title="'+sections[fhir].title+'"'
+        if ( sectionKeys.length > 1 ) {
+          sectionMenu = sectionKeys.map( name => { return { name: name, title: sections[name].title, desc: sections[name].description } } )
+          vueOutput += " :section-menu='"+JSON.stringify(sectionMenu)+"'"
+        }
+        vueOutput += '><template #default=\"slotProps\">'+"\n"
 
+        if ( structure[fhir].hasOwnProperty("fields") ) {
+          let fieldKeys = Object.keys( structure[fhir].fields )
+          for( let field of fieldKeys ) {
+            if ( sectionMap.hasOwnProperty( structure[fhir].fields[field].id ) ) {
+              sections[ sectionMap[ structure[fhir].fields[field].id ] ].elements[field] = structure[fhir].fields[field]
+            } else {
+              sections[ fhir ].elements[field] = structure[fhir].fields[field]
+            }
+          }
+        }
+        for ( let name of sectionKeys ) {
+          vueOutput += "<ihris-section :slotProps=\"slotProps\" name=\""+name+"\" title=\""+sections[name].title+"\" description=\""+sections[name].description+"\">\n<template #default=\"slotProps\">\n"
+          vueOutput += processFields( sections[name].elements, fhir, sections[name].order )
+          vueOutput += "</template></ihris-section>\n"
+        }
+        /*
         if ( structure[fhir].hasOwnProperty("fields") ) {
           vueOutput += processFields( structure[fhir].fields, fhir, sdOrder )
         }
+        */
 
-        vueOutput += '</template></fhir-resource>'+"\n"
+        vueOutput += '</template></ihris-resource>'+"\n"
       }
       vueOuput = "</template>"
       console.log(vueOutput)
@@ -232,13 +312,13 @@ router.get('/page/:page', function(req, res) {
     const structure = fhirConfig.parseStructureDefinition( resource )
     let vueOuput = ""
     for ( let fhir of Object.keys( structure ) ) {
-      vueOutput = '<fhir-resource field="'+fhir+'"><template #default>'+"\n"
+      vueOutput = '<ihris-resource field="'+fhir+'"><template #default>'+"\n"
 
         if ( structure[fhir].hasOwnProperty("fields") ) {
           vueOutput += processFields( structure[fhir].fields, structure )
         }
       
-      vueOutput += '</template></fhir-resource>'+"\n"
+      vueOutput += '</template></ihris-resource>'+"\n"
     }
     console.log(vueOutput)
     return res.status(200).send(vueOutput)

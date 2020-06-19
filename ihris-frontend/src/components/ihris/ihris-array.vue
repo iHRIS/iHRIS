@@ -26,7 +26,7 @@
 
 <script>
 export default {
-  name: "fhir-array",
+  name: "ihris-array",
   props: ["label", "min", "max", "id", "path", "slotProps", "field", "fieldType", "profile", "targetProfile", "sliceName" ],
   data: function() {
     return {
