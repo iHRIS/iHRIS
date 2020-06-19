@@ -9,6 +9,7 @@ Description:    "iHRIS profile of Practitioner."
 * identifier.use ^label = "Use"
 * identifier.type MS
 * identifier.type ^label = "Type"
+* identifier.type.coding 1..1 MS
 * identifier.system MS
 * identifier.system ^label = "System"
 * identifier.value MS

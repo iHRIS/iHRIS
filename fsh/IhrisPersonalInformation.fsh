@@ -65,7 +65,7 @@ Description:    "iHRIS profile of Practitioner."
 * extension[residence].valueReference.reference MS
 * extension[nationality].valueCoding MS
 * extension[nationality] ^label = "Nationality"
-* extension[dependents].valuePositiveInt MS
+* extension[dependents].valueString MS
 * extension[dependents] ^label = "Dependents"
 * extension[maritalStatus].valueCoding MS
 * extension[maritalStatus] ^label = "Marital Status"
