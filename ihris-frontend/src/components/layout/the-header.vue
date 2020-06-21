@@ -1,5 +1,5 @@
 <template>
-  <v-app-bar color="white" app clipped-left>
+  <v-app-bar color="white" app clipped-left clipped-right>
     <router-link to="/"><v-img :src="'/images/' + header.logo" contain max-height="36" max-width="106" /></router-link>
 
     <v-toolbar-title class="headline ml-2" bottom="true">

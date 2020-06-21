@@ -20,12 +20,13 @@ Description:    "iHRIS Page Display details."
       filter 1..* MS
 * extension[resource].value[x] only Reference
 * extension[resource].valueReference only Reference(StructureDefinition)
+* extension[resource].valueReference 1..1 MS
 * extension[resource].valueReference ^label = "Primary Resource"
 * extension[search].value[x] only string
-* extension[search].valueString MS
+* extension[search].valueString 1..1 MS
 * extension[search].valueString ^label = "Search Headers"
 * extension[filter].value[x] only string
-* extension[filter].valueString MS
+* extension[filter].valueString 1..1 MS
 * extension[filter].valueString ^label = "Search Filters"
 
 Extension:      IhrisPageSection
@@ -39,23 +40,34 @@ Description:    "iHRIS Page Section information."
       description 1..1 MS and
       name 1..1 MS and
       field 0..* MS and
-      resource 0..1 MS 
+      resource 0..1 MS and
+      linkfield 0..1 MS
 * extension[title].value[x] only string
 * extension[title].valueString MS
 * extension[title].valueString ^label = "Title"
 * extension[description].value[x] only string
-* extension[description].valueString MS
+* extension[description].valueString 1..1 MS
 * extension[description].valueString ^label = "Description"
 * extension[name].value[x] only string
-* extension[name].valueString MS
+* extension[name].valueString 1..1 MS
 * extension[name].valueString ^label = "Name"
 * extension[field].value[x] only string
-* extension[field].valueString MS
+* extension[field].valueString 1..1 MS
 * extension[field].valueString ^label = "Name"
 * extension[resource].value[x] only Reference
 * extension[resource].valueReference only Reference(StructureDefinition)
-* extension[resource].valueReference ^label = "Resource"
+* extension[resource].valueReference MS
+* extension[resource].valueReference ^label = "Secondary Resource"
+* extension[linkfield].value[x] only string
+* extension[linkfield].valueString MS
+* extension[linkfield].valueString ^label = "Secondary Resource Link Field"
 
+Extension:      IhrisPageSectionResource
+Id:             ihris-page-section-resource
+Title:          "iHRIS Page Section Resource"
+Description:    "iHRIS Page Section Resource information."
+* ^context.type = #element
+* ^context.expression = IhrisPageSection
 
 Instance:       ihris-page-practitioner
 InstanceOf:     IhrisPage
@@ -95,3 +107,9 @@ Usage:          #example
 * extension[section][3].extension[description].valueString = "Languages spoken"
 * extension[section][3].extension[name].valueString = "language"
 * extension[section][3].extension[field][0].valueString = "Practitioner.communication"
+* extension[section][4].extension[title].valueString = "Position"
+* extension[section][4].extension[description].valueString = "Position the person holds"
+* extension[section][4].extension[name].valueString = "position"
+* extension[section][4].extension[field][0].valueString = "PractitionerRole.code"
+* extension[section][4].extension[resource].valueReference = Reference(StructureDefinition/ihris-practitioner-role)
+* extension[section][4].extension[linkfield].valueString = "PractitionerRole.practitioner"

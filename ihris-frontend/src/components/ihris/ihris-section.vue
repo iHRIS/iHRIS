@@ -5,7 +5,7 @@
       max-width="700"
       outlined
       >
-      <v-card-title class="primary white--text text-uppercase font-weight-bold">{{ title }}</v-card-title>
+      <v-card-title class="primary darken-1 white--text text-uppercase font-weight-bold">{{ title }}</v-card-title>
       <v-card-text class="my-3">
         <slot :source="slotProps.source"></slot>
       </v-card-text>

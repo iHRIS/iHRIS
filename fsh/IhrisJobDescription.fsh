@@ -1,4 +1,4 @@
-Profile:        IhrisPractitionerRole
+Profile:        IhrisJobDescription
 Parent:         PractitionerRole
 Id:             ihris-job-description
 Title:          "iHRIS Job Description"

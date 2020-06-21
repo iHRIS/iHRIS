@@ -1,8 +1,12 @@
 <template>
   <div>
     <v-container v-if="source.edit">
-      <v-text-field :label="display" :name="field" v-model.number="value" outlined hide-details="auto" dense>
-      </v-text-field>
+      <v-switch
+        v-model="value"
+        :label="display+`: ${value.toString()}`"
+        dense
+      >
+      </v-switch>
     </v-container>
     <div v-else>
       <v-row dense>
@@ -15,22 +19,22 @@
 
 <script>
 export default {
-  name: "fhir-positive-int",
+  name: "fhir-boolean",
   props: ["field", "label", "min", "max", "id", "path", "slotProps", "sliceName","base-min","base-max"],
   data: function() {
     return {
       source: { path: "", data: {}, edit: true },
-      value: ""
+      value: true
     }
   },
   created: function() {
-    //console.log("CREATE POSITIVE INT",this.field,this.slotProps)
+    //console.log("CREATE STRING",this.field,this.slotProps)
     this.setupData()
   },
   watch: {
     slotProps: {
       handler() {
-        //console.log("WATCH POSITIVE INT",this.field,this.path,this.slotProps)
+        //console.log("WATCH STRING",this.field,this.path,this.slotProps)
         this.setupData()
       },
       deep: true
@@ -63,7 +67,7 @@ export default {
       else return undefined
     },
     display: function() {
-      if ( this.slotProps && this.slotProps.input ) return this.slotProps.input.label
+      if ( this.slotProps && this.slotProps.input) return this.slotProps.input.label
       else return this.label
     }
   }

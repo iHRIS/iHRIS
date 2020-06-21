@@ -104,9 +104,24 @@ const processFields = ( fields, base, order ) => {
   return output
 }
 
+const getDefinition = ( resource ) => {
+  let structureDef = resource.split('/')
+  return fhirAxios.read( structureDef[0], structureDef[1] )
+}
+const setupOrder = ( fields, sectionOrder ) => {
+  for( let ord of fields ) {
+    let lastDot = ord.lastIndexOf('.')
+    let ordId = ord.substring(0,lastDot)
+    let ordField = ord.substring(lastDot+1)
+    if ( !sectionOrder.hasOwnProperty(ordId) ) {
+      sectionOrder[ordId] = []
+    }
+    sectionOrder[ordId].push(ordField)
+  }
+}
+
 router.get('/page/:page', function(req, res) {
   let page = "ihris-page-"+req.params.page
-  /*
   if ( !req.user ) {
     return res.status(401).json( outcomes.NOTLOGGEDIN)
   }
@@ -115,12 +130,10 @@ router.get('/page/:page', function(req, res) {
   if ( allowed !== true ) {
     return res.status(401).json( outcomes.DENIED )
   }
-  */
 
   fhirAxios.read( "Basic", page ).then ( (resource) => {
     let pageDisplay = resource.extension.find( ext => ext.url === "http://ihris.org/fhir/StructureDefinition/ihris-page-display" )
     let pageResource = pageDisplay.extension.find( ext => ext.url === "resource" ).valueReference.reference
-    let structureDef = pageResource.split('/')
     /*
     let order = []
     try {
@@ -142,7 +155,7 @@ router.get('/page/:page', function(req, res) {
     let sections = {}
     let sectionMap = {}
     for( let section of pageSections ) {
-      let title, description, name, resource
+      let title, description, name, resource, linkfield
       let fields = []
       try {
         title = section.extension.find( ext => ext.url === "title" ).valueString
@@ -159,7 +172,13 @@ router.get('/page/:page', function(req, res) {
       try {
         resource = section.extension.find( ext => ext.url === "resource" ).valueReference.reference
       } catch(err) { }
+      try {
+        linkfield = section.extension.find( ext => ext.url === "linkfield" ).valueString
+      } catch(err) { }
+
       let sectionOrder = {}
+      setupOrder( fields, sectionOrder )
+      /*
       for( let ord of fields ) {
         let lastDot = ord.lastIndexOf('.')
         let ordId = ord.substring(0,lastDot)
@@ -169,6 +188,7 @@ router.get('/page/:page', function(req, res) {
         }
         sectionOrder[ordId].push(ordField)
       }
+      */
       for( let field of fields ) {
         sectionMap[field] = name
       }
@@ -178,6 +198,7 @@ router.get('/page/:page', function(req, res) {
         fields: fields,
         order: sectionOrder,
         resource: resource,
+        linkfield: linkfield,
         elements: {}
       } 
     }
@@ -195,7 +216,7 @@ router.get('/page/:page', function(req, res) {
     */
 
 
-    fhirAxios.read( structureDef[0], structureDef[1] ).then( (resource) => {
+    getDefinition( pageResource ).then( async (resource) => {
       /*
       if ( allowed !== true ) {
         // Can't think of a reason to have this level of permissions for 
@@ -207,13 +228,13 @@ router.get('/page/:page', function(req, res) {
         }
       }
       */
-      const structure = fhirConfig.parseStructureDefinition( resource )
 
       if ( !resource.hasOwnProperty("snapshot") ) {
         let outcome = { ...outcomes.ERROR }
         outcome.issue[0].diagnostics = "StructureDefinitions must be saved with a snapshop."
         return res.status(404).json( outcome )
       }
+      const structure = fhirConfig.parseStructureDefinition( resource )
 
       let structureKeys = Object.keys( structure )
 
@@ -240,6 +261,7 @@ router.get('/page/:page', function(req, res) {
             fields: [],
             order: {},
             resource: undefined,
+            linkfield: undefined,
             elements: {}
           }
         }
@@ -264,7 +286,30 @@ router.get('/page/:page', function(req, res) {
         }
         for ( let name of sectionKeys ) {
           vueOutput += "<ihris-section :slotProps=\"slotProps\" name=\""+name+"\" title=\""+sections[name].title+"\" description=\""+sections[name].description+"\">\n<template #default=\"slotProps\">\n"
-          vueOutput += processFields( sections[name].elements, fhir, sections[name].order )
+          if ( sections[name].resource ) {
+            let secondary = await getDefinition( sections[name].resource )
+
+            if ( !secondary.hasOwnProperty("snapshot") ) {
+              console.log("StructureDefinitions (", sections[name].resource, ") must be saved with a snapshop.")
+              continue
+            }
+            const secondaryStructure = fhirConfig.parseStructureDefinition( secondary )
+            let secondaryOrder = {}
+            setupOrder( sections[name].fields, secondaryOrder )
+            let secondaryKeys = Object.keys( secondaryStructure )
+            for ( let second_fhir of secondaryKeys ) {
+              vueOutput += '<ihris-secondary profile="'+secondary.url+'" field="'+second_fhir+'" title="'
+                +sections[name].title+'" link-field="'+sections[name].linkfield
+                +'"><template #default="slotProps">' + "\n"
+              vueOutput += processFields( secondaryStructure[second_fhir].fields, second_fhir, secondaryOrder )
+              vueOutput += "</template></ihris-secondary>"
+            }
+
+
+
+          } else {
+            vueOutput += processFields( sections[name].elements, fhir, sections[name].order )
+          }
           vueOutput += "</template></ihris-section>\n"
         }
         /*

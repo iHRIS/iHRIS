@@ -3,7 +3,8 @@
     app
     clipped
     permanent
-    class="primary darken-1 white--text font-weight-bold "
+    class="primary darken-1 white--text font-weight-bold"
+    style="z-index: 3;"
   >
     <v-list nav dark dense>
       <v-list-group

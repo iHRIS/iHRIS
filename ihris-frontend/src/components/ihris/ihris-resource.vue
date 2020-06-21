@@ -1,78 +1,61 @@
 <template>
-  <v-container>
-    <v-row>
-      <v-col cols="1">
-        <div class="ihris-sections-menu">
-            <v-navigation-drawer
-              v-if="!fhirId"
-              mini-variant
-              permanent
-              floating
-              >
-              <v-tooltip right>
-                <template v-slot:activator="{ on, attrs }">
-                  <v-btn 
-                    v-bind="attrs" 
-                    v-on="on"
-                    fab
-                    dark
-                    color="primary darken-1"
-                  >
-                    <v-icon dark>mdi-content-save</v-icon>
-                  </v-btn>
-                </template>
-                  <span>Save</span>
-              </v-tooltip>
-            </v-navigation-drawer>
-        </div>
-       </v-col>
-      <v-col cols="7">
-         <v-container class="my-3">
-            <slot :source="source"></slot>
-          </v-container>
-        <v-overlay :value="overlay">
-          <v-progress-circular
-            size="50"
-            color="primary"
-            indeterminate
-            ></v-progress-circular>
-        </v-overlay>
-      </v-col>
-      <v-col cols="4">
+  <v-container class="my-3">
+        
+    <slot :source="source"></slot>
+    <v-overlay :value="overlay">
+      <v-progress-circular
+        size="50"
+        color="primary"
+        indeterminate
+        ></v-progress-circular>
+    </v-overlay>
 
-        <v-card v-if="sectionMenu" class="ihris-sections-menu" flat color="primary lighten-2">
-          <v-card-text class="ma-0 pa-0">
-            <v-card class="mx-auto" max-width="500" title dark shaped color="primary darken-1">
+    <v-navigation-drawer
+      app
+      right
+      permanent
+      clipped
+      class="primary darken-1 white--text"
+      style="z-index: 3;"
+      >
+      <v-list class="white--text">
+        <v-list-item>
+          <v-btn dark class="accent darken-1" @click="$router.go(-1)" v-if="isEdit">
+          <v-icon light>mdi-content-save</v-icon>
+          <span>Back</span>
+          </v-btn>
+          <v-spacer></v-spacer>
+          <v-btn dark class="success darken-1" @click="processFHIR()">
+          <v-icon light>mdi-content-save</v-icon>
+          <span>Save</span>
+          </v-btn>
+        </v-list-item>
+        <v-divider color="white"></v-divider>
+        <v-subheader class="white--text"><h2>Sections</h2></v-subheader>
+        <v-list-item v-for="section in sectionMenu" :href="'#section-'+section.name" :key="section.name">
+          <v-list-item-content class="white--text">
+            <v-list-item-title class="text-uppercase"><h4>{{ section.title }}</h4></v-list-item-title>
+            <v-list-item-subtitle class="white--text">{{ section.desc }}</v-list-item-subtitle>
+          </v-list-item-content>
+        </v-list-item>
+      </v-list>
 
-              <v-card-title class="white--text primary darken-1">
-                Sections
-              </v-card-title>
-              <v-list class="primary darken-1">
-                <v-list-item v-for="section in sectionMenu" :href="'#section-'+section.name" :key="section.name">
-                  <v-list-item-content>
-                    <v-list-item-title class="text-uppercase"><h4>{{ section.title }}</h4></v-list-item-title>
-                    <v-list-item-subtitle>{{ section.desc }}</v-list-item-subtitle>
-                  </v-list-item-content>
-                </v-list-item>
-              </v-list>
-            </v-card>
-          </v-card-text>
-        </v-card>
-      </v-col>
-    </v-row>
+    </v-navigation-drawer>
   </v-container>
+
 </template>
 
 <script>
 export default {
   name: "ihris-resource",
-  props: ["title","field","fhir-id","page","profile","section-menu"],
+  props: ["title","field","fhir-id","page","profile","section-menu" ],
   data: function() {
     return {
       fhir: {},
       source: { data: {}, path: "", edit: true },
       loading: false,
-      overlay: false
+      overlay: false,
+      isEdit: false
     }
   },
   created: function() {
