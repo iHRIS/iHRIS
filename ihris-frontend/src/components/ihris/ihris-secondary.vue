@@ -6,7 +6,7 @@
 
 <script>
 export default {
-  name: "ihris-secondaru",
+  name: "ihris-secondary",
   props: ["title","field","profile","slotProps","link-field"],
   data: function() {
     return {
