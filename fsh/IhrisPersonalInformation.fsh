@@ -79,6 +79,8 @@ Description:    "iHRIS profile of Practitioner."
 * extension[category] ^label = "Category"
 * extension[remarkNote].valueString MS
 * extension[remarkNote] ^label = "Remark Note"
+* extension[ethnicity].valueCoding MS
+* extension[ethnicity] ^label = "Ethnicity"
 
 Extension:      IhrisPractitionerFamilyNames
 Id:             ihris-practitioner-familynames
