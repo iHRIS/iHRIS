@@ -31,7 +31,8 @@ export default {
   data: function() {
     return {
       inputs: [],
-      source: { path: "", data: [], edit: true }
+      source: { path: "", data: [], edit: true },
+      baseIndex: 0
     }
   },
   created: function() {
@@ -50,9 +51,22 @@ export default {
   methods: {
     setupInputs: function() {
       this.inputs = []
-      this.source = { path: this.path, data: {}, edit: this.slotProps.source.edit }
-      let expression = this.field.replace(/([^:]+):(.+)/, "$1.where(url='"+this.profile+"')")
-      this.source.data = this.$fhirpath.evaluate( this.slotProps.source.data, expression)
+      this.source = { path: this.path, data: {}, edit: true }
+      let path = this.path
+      if ( path.endsWith( ']' ) ) {
+        let lastIdx = path.lastIndexOf( '[' )
+        try {
+          this.baseIndex = Number.parseInt(path.substring( lastIdx+1, path.length-1 ) )
+          path = path.substring(0, lastIdx)
+        } catch( err ) {
+          console.log("Invalid index in",path)
+        }
+      }
+      if ( this.slotProps && this.slotProps.source ) {
+        this.source.edit = this.slotProps.source.edit
+        let expression = this.field.replace(/([^:]+):(.+)/, "$1.where(url='"+this.profile+"')")
+        this.source.data = this.$fhirpath.evaluate( this.slotProps.source.data, expression)
+      }
       for( let idx = 0; idx < this.actualMin; idx++ ) {
         let label = this.label
         if ( this.displayIndex ) {
@@ -60,7 +74,10 @@ export default {
         }
         let input = { label: label, index: idx, data: undefined } 
         if ( this.source.data[idx] ) {
-          input.source = { data: this.source.data[idx], path: this.path+"["+idx+"]", fromArray: true, edit: this.slotProps.source.edit }
+          input.source = { data: this.source.data[idx], path: path+"["+(this.baseIndex+idx)+"]", fromArray: true, edit: true }
+          if ( this.slotProps && this.slotProps.source ) {
+            input.source.edit = this.slotProps.source.edit
+          }
         }
         this.inputs.push( input )
       }
@@ -71,7 +88,7 @@ export default {
         if ( this.displayIndex ) {
           label += " ("+(this.inputs.length+1)+")"
         }
-        this.inputs.push( { label: label, index: this.inputs.length } )
+        this.inputs.push( { label: label, index: this.baseIndex + this.inputs.length } )
       }
     },
     removeRow: function() {
@@ -85,7 +102,7 @@ export default {
   },
   computed: {
     actualMin: function() {
-      return Math.max( 1, this.min, this.source.data.length )
+      return Math.max( this.min, ( this.source.data.length > 0 ? this.source.data.length : 1 ) )
       //return this.min < 1 ? 1 : this.min
     },
     addAvailable: function() {

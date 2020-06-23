@@ -4,6 +4,7 @@ const nconf = require('../modules/config')
 const fhirAxios = nconf.fhirAxios
 const outcomes = require('../config/operationOutcomes')
 const fhirConfig = require('../modules/fhirConfig')
+const crypto = require('crypto')
 
 /* GET home page. */
 router.get('/site', function(req, res) {
@@ -373,6 +374,119 @@ router.get('/page/:page', function(req, res) {
   } )
     */
   
+} )
+
+const processQuestionnaireItems = ( items ) => {
+  let vueOutput = ""
+  for( let item of items ) {
+    if ( item.repeats && !item.readOnly ) {
+      vueOutput += "<ihris-array path=\"" + item.linkId + "\" label=\""
+        + item.text + "\" max=\"*\" min=\"" + ( item.required ? "1" : "0" ) + "\"><template #default=\"slotProps\">\n"
+    }
+    if ( item.type === "group" ) {
+      let label = item.text.split('|',2)
+      vueOutput += '<ihris-questionnaire-group path="' + item.linkId + '" label="' + label[0] + '"'
+      if ( label.length === 2 ) {
+        vueOutput += ' description="' + label[1] + '"'
+      }
+      vueOutput += ">\n\n"
+      vueOutput += processQuestionnaireItems( item.item )
+      vueOutput += "</ihris-questionnaire-group>\n"
+    } else if ( item.readOnly ) {
+      vueOutput += "<ihris-hidden path=\"" + item.linkId + "\" label=\""
+        + item.text + "\""
+      if ( item.answerOption[0].initialSelected ) {
+        let answerTypes = Object.keys( item.answerOption[0] )
+        for( let answerType of answerTypes ) {
+          if ( answerType.startsWith("value") ) {
+            vueOutput += " :hiddenValue='" + JSON.stringify( item.answerOption[0][answerType] ) 
+              + "' hiddenType='" + answerType.substring(5) + "'"
+            break
+          }
+        }
+      }
+      vueOutput += "></ihris-hidden>\n"
+    } else {
+     vueOutput += "<fhir-" + item.type 
+
+      if ( item.hasOwnProperty("text") ) {
+        vueOutput += " label=\""+ item.text + "\""
+      }
+      if ( item.hasOwnProperty("answerValueSet") ) {
+        vueOutput += " binding=\""+ item.answerValueSet + "\""
+      }
+      let attrs = [ "required" ]
+      for( let attr of attrs ) {
+        if ( item.hasOwnProperty(attr) ) {
+          vueOutput += " " + attr + "=\""+ item[attr] + "\""
+        }
+      }
+      vueOutput += "></fhir-" + item.type +">\n"
+
+    }
+    if ( item.repeats && !item.readOnly ) {
+      vueOutput += "</template></ihris-array>\n"
+    }
+  }
+  return vueOutput
+}
+
+router.get('/questionnaire/:questionnaire', function(req, res) {
+  if ( !req.user ) {
+    return res.status(401).json( outcomes.NOTLOGGEDIN)
+  }
+  let allowed = req.user.hasPermissionByName( "read", "Questionnaire", req.params.questionnaire )
+  // Limited access to these don't make sense so not allowing it for now
+  if ( allowed !== true ) {
+    return res.status(401).json( outcomes.DENIED )
+  }
+
+
+  fhirAxios.read( "Questionnaire", req.params.questionnaire ).then ( (resource) => {
+
+
+    let vueOutput = '<ihris-questionnaire id="' + resource.id + '" title="' + resource.title 
+      + '" description="' + resource.description + '" purpose="' + resource.purpose 
+      + '"__SECTIONMENU__>' + "\n"
+
+    
+    let sectionMenu = []
+    for ( let item of resource.item ) {
+      if ( item.type === "group" ) {
+        let md5sum = crypto.createHash('md5')
+        md5sum.update(item.text)
+        md5sum.update(Math.random().toString(36).substring(2))
+        let sectionId = md5sum.digest('hex')
+
+        let label = item.text.split('|',2)
+        vueOutput += '<ihris-questionnaire-section id="' + sectionId + '" path="' + item.linkId + '" label="' + label[0] + '"'
+        if ( label.length === 2 ) {
+          vueOutput += ' description="' + label[1] + '"'
+        }
+        sectionMenu.push( { title: label[0], desc: label[1] || "", id: sectionId } )
+        vueOutput += ">\n\n"
+        vueOutput += processQuestionnaireItems( item.item )
+        vueOutput += "</ihris-questionnaire-section>\n"
+      } else {
+        console.log("Invalid entry for questionnaire.  All top level items must be type group.")
+      }
+    }
+
+    if ( sectionMenu.length < 2 ) {
+      vueOutput = vueOutput.replace("__SECTIONMENU__", "")
+    } else {
+      vueOutput = vueOutput.replace("__SECTIONMENU__", " :section-menu='" + JSON.stringify(sectionMenu) + "'")
+    }
+    vueOutput += "</ihris-questionnaire>\n"
+
+    console.log(vueOutput)
+    return res.status(200).json({ template: vueOutput })
+
+  } ).catch( (err) => {
+    console.log(err)
+    return res.status( err.response.status ).json( err.response.data )
+  } )
+
 } )
 
 module.exports = router;

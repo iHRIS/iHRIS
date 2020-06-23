@@ -31,7 +31,7 @@ export default {
   methods: {
     setupData: function() {
       //console.log("CC",this.field,this.path,this.source,this.slotProps)
-      if ( this.slotProps.source ) {
+      if ( this.slotProps && this.slotProps.source ) {
         this.source = { path: this.slotProps.source.path+"."+this.field, data: {}, 
           edit: this.slotProps.source.edit, binding: this.binding }
         //console.log("CC binding",this.binding)

@@ -30,7 +30,7 @@ export default {
   },
   methods: {
     setupData: function() {
-      if ( this.slotProps.source ) {
+      if ( this.slotProps && this.slotProps.source ) {
         this.source = { path: this.slotProps.source.path+"."+this.field, data: {}, edit: this.slotProps.source.edit }
         if ( this.slotProps.source.fromArray ) {
           this.source.data = this.slotProps.source.data

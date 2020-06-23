@@ -19,6 +19,27 @@ export default {
   props: ["name", "slotProps","title","description"],
   data: function() {
     return {
+      source: { path: "", data: {}, edit: true }
+    }
+  },
+  created: function() {
+    this.setupData()
+  },
+  watch: {
+    slotProps: {
+      handler() {
+        //console.log("WATCH SECTION",this.path,this.slotProps.source)
+        this.setupData()
+      },
+      deep: true
+    }
+  },
+  methods: {
+    setupData: function() {
+      if ( this.slotProps.source ) {
+        this.source = { path: this.slotProps.source.path+"."+this.field, data: {}, edit: this.slotProps.source.edit }
+        this.source.data = this.$fhirpath.evaluate( this.slotProps.source.data, this.field )
+      }
     }
   }
 }
