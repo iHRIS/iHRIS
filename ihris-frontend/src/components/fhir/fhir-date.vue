@@ -44,12 +44,13 @@
 <script>
 export default {
   name: "fhir-date",
-  props: ["field","min","max","base-min","base-max", "label", "slotProps"],
+  props: ["field","min","max","base-min","base-max", "label", "slotProps", "path"],
   data: function() {
     return {
       value: null,
       menu: false,
-      source: { path: "", data: {}, edit: true }
+      source: { path: "", data: {}, edit: true },
+      qField: "valueDate"
     }
   },
   created: function() {

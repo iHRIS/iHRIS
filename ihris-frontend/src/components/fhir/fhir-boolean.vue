@@ -24,7 +24,8 @@ export default {
   data: function() {
     return {
       source: { path: "", data: {}, edit: true },
-      value: true
+      value: true,
+      qField: "valueBoolean"
     }
   },
   created: function() {

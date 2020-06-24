@@ -11,6 +11,8 @@ export default {
   props: ["label", "path", "hiddenType", "hiddenValue"],
   data: function() {
     return {
+      qField: "value"+this.hiddenType,
+      value: this.hiddenValue
     }
   }
 }

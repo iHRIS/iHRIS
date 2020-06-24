@@ -21,8 +21,12 @@
           <v-list-item-title>Search People</v-list-item-title>
           <v-icon>mdi-chevron-right</v-icon>
         </v-list-item>
-        <v-list-item to="/questionnaire/practitioner" active-class="primary darken-2" class="text-right" dense>
+        <v-list-item to="/questionnaire/ihris-practitioner" active-class="primary darken-2" class="text-right" dense>
           <v-list-item-title>Add Person</v-list-item-title>
+            <v-icon>mdi-chevron-right</v-icon>
+        </v-list-item>
+        <v-list-item to="/resource/add/practitioner" active-class="primary darken-2" class="text-right" dense>
+          <v-list-item-title>Add Person (old)</v-list-item-title>
             <v-icon>mdi-chevron-right</v-icon>
         </v-list-item>
       </v-list-group>

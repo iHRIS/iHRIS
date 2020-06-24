@@ -19,6 +19,7 @@ export default {
   props: ["id", "label", "description", "path"],
   data: function() {
     return {
+      isQuestionnaireGroup: true
     }
   }
 }

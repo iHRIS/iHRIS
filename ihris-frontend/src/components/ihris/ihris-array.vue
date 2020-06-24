@@ -32,7 +32,7 @@ export default {
     return {
       inputs: [],
       source: { path: "", data: [], edit: true },
-      baseIndex: 0
+      isArray: true
     }
   },
   created: function() {
@@ -53,15 +53,6 @@ export default {
       this.inputs = []
       this.source = { path: this.path, data: {}, edit: true }
       let path = this.path
-      if ( path.endsWith( ']' ) ) {
-        let lastIdx = path.lastIndexOf( '[' )
-        try {
-          this.baseIndex = Number.parseInt(path.substring( lastIdx+1, path.length-1 ) )
-          path = path.substring(0, lastIdx)
-        } catch( err ) {
-          console.log("Invalid index in",path)
-        }
-      }
       if ( this.slotProps && this.slotProps.source ) {
         this.source.edit = this.slotProps.source.edit
         let expression = this.field.replace(/([^:]+):(.+)/, "$1.where(url='"+this.profile+"')")
@@ -74,7 +65,7 @@ export default {
         }
         let input = { label: label, index: idx, data: undefined } 
         if ( this.source.data[idx] ) {
-          input.source = { data: this.source.data[idx], path: path+"["+(this.baseIndex+idx)+"]", fromArray: true, edit: true }
+          input.source = { data: this.source.data[idx], path: path+"["+idx+"]", fromArray: true, edit: true }
           if ( this.slotProps && this.slotProps.source ) {
             input.source.edit = this.slotProps.source.edit
           }

@@ -32,6 +32,7 @@ export default {
       err_messages: null,
       error: false,
       items: [],
+      qField: "valueCoding"
     }
   },
   created: function() {

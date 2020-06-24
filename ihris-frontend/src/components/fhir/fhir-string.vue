@@ -20,7 +20,8 @@ export default {
   data: function() {
     return {
       source: { path: "", data: {}, edit: true },
-      value: ""
+      value: "",
+      qField: "valueString"
     }
   },
   created: function() {
@@ -59,7 +60,7 @@ export default {
   },
   computed: {
     index: function() {
-      if ( this.slotProps ) return this.slotProps.input
+      if ( this.slotProps ) return this.slotProps.input.index
       else return undefined
     },
     display: function() {

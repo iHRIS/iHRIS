@@ -3,6 +3,7 @@
 * definition is currently only used to determine binding for reference fields
  * Also used as the profile at the top grouping for a resource with the resource linkId (e.g. Practitioner)
 * first level of items in questionnaire should all be type "group" for the sections
+* anything that has repeats: true must have a linkId that ends with an array index (e.g. [0])
 * linkId must be in the correct format to put things in the right place.  This only matters for 
   fields that have values
  * Resource.element.element

@@ -20,7 +20,8 @@ export default {
   data: function() {
     return {
       source: { path: "", data: {}, edit: true },
-      value: ""
+      value: "",
+      qField: "valueUri"
     }
   },
   created: function() {
