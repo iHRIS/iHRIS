@@ -26,6 +26,7 @@ async function startUp() {
   const configRouter = require('./routes/config')
   const authRouter = require('./routes/auth')
   const fhirRouter = require('./routes/fhir')
+  const questionnaireRouter = require('./routes/questionnaire')
 
   app.use(logger('dev'))
   app.use(express.json({ type: ["application/json","application/fhir+json"] }))
@@ -53,6 +54,7 @@ async function startUp() {
     }
   )
 
+  app.use('/fhir', questionnaireRouter)
   app.use('/fhir', fhirRouter)
 
   const loadModules = nconf.get("modules")

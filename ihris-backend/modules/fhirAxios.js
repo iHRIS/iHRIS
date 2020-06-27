@@ -95,7 +95,15 @@ const fhirAxios = {
         reject( err )
       }
       let url = new URL(fhirAxios.baseUrl.href)
-      url.pathname += resource.resourceType 
+      if ( resource.resourceType !== "Bundle" ) {
+        url.pathname += resource.resourceType 
+      } else {
+        if ( !( resource.type === "transaction" || resource.type === "batch" ) ) {
+          err = new InvalidRequestError( "Bundles must of type 'transaction' or 'batch'" )
+          err.response = { status: 404 }
+          reject( err )
+        }
+      }
 
       let auth = fhirAxios.__getAuth()
       axios.post( url.href, resource, { auth: auth } ).then ( (response) => {

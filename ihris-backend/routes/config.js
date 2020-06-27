@@ -391,7 +391,8 @@ router.get('/questionnaire/:questionnaire', function(req, res) {
   fhirAxios.read( "Questionnaire", req.params.questionnaire ).then ( (resource) => {
 
 
-    let vueOutput = '<ihris-questionnaire id="' + resource.id + '" title="' + resource.title 
+    let vueOutput = '<ihris-questionnaire url="' + resource.url + '" id="' + resource.id 
+      + '" title="' + resource.title 
       + '" description="' + resource.description + '" purpose="' + resource.purpose 
       + '"__SECTIONMENU__>' + "\n"
 
