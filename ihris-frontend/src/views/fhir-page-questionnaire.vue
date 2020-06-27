@@ -23,6 +23,7 @@ const comps = {
 }
 
 var questionnaire
+var page
 
 export default {
   name: "fhir-page",
@@ -35,7 +36,7 @@ export default {
       return new Promise(resolve => {
         fetch( "/config/questionnaire/"+questionnaire ).then(response => {
             response.json().then(data => {
-              resolve({components: comps, template: data.template})
+              resolve({data: function() { return { viewPage: page } }, components: comps, template: data.template})
             }).catch(err => {
               console.log(err)
               resolve({template: '<div><h1>Error</h1><p>An error occurred trying to load this page</p>.</div>'})
@@ -47,8 +48,9 @@ export default {
       })
     }
   },
-  created: function() {
+  beforeCreate: function() {
     questionnaire = this.$route.params.questionnaire
+    page = this.$route.params.page
   }
 }
 

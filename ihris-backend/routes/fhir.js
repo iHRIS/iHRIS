@@ -96,8 +96,8 @@ router.post("/:resource", (req, res) => {
     resource = fhirFilter.filter( req.body, allowed )
   }
 
-  fhirAxios.create( resource ).then( (resource) => {
-    return res.status(201).json(resource)
+  fhirAxios.create( resource ).then( (output) => {
+    return res.status(201).json(output)
   } ).catch( (err) => {
     /* return response from FHIR server */
     return res.status( err.response.status ).json( err.response.data )

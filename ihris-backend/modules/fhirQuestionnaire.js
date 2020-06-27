@@ -39,7 +39,7 @@ const fhirQuestionnaire = {
           if ( path !== replaceList[0] ) {
             replaceList.unshift(path)
           }
-          item.path = path
+          item.definition = path
           processChildren( item.item )
 
         } else {
@@ -77,7 +77,7 @@ const fhirQuestionnaire = {
               path = path.replace( replaceList[idx], currReplaceIdx[ replaceList[idx] ] )
             }
           }
-          item.path = path
+          item.definition = path
 
         }
       }
@@ -91,7 +91,7 @@ const fhirQuestionnaire = {
     let entries = {}
     let idCount = 1
     for( let field of fields ) {
-      let paths = field.path.split('.')
+      let paths = field.definition.split('.')
       let entry
       let current
       let arrayIdx = false
@@ -239,7 +239,7 @@ const fhirQuestionnaire = {
 
 
                 let simple = [ "date", "string" ]
-                let data = { linkId: item.linkId, path: item.path, q: question.type }
+                let data = { linkId: item.linkId, definition: item.definition, q: question.type }
                 if ( simple.includes( question.type ) ) {
                   if ( question.repeats ) {
                     data.answer = item.answer.map( answer => answer["value"+capitalize(question.type)] )

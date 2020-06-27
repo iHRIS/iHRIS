@@ -5,15 +5,15 @@ module.exports = {
   "item": [
     {
       "linkId": "Practitioner",
-      "path": "Practitioner",
+      "definition": "Practitioner",
       "item": [
         {
           "linkId": "Practitioner.name[0]",
-          "path": "Practitioner.name[X]",
+          "definition": "Practitioner.name[X]",
           "item": [
             {
               "linkId": "Practitioner.name[0].use",
-              "path": "Practitioner.name[0].use",
+              "definition": "Practitioner.name[0].use",
               "answer": [
                 {
                   "valueCoding": {
@@ -25,7 +25,7 @@ module.exports = {
             },
             {
               "linkId": "Practitioner.name[0].family",
-              "path": "Practitioner.name[0].family",
+              "definition": "Practitioner.name[0].family",
               "answer": [
                 {
                   "valueString": "Family"
@@ -34,7 +34,7 @@ module.exports = {
             },
             {
               "linkId": "Practitioner.name[0].given[0]",
-              "path": "Practitioner.name[0].given[0]",
+              "definition": "Practitioner.name[0].given[0]",
               "answer": [
                 {
                   "valueString": "First"
@@ -48,7 +48,7 @@ module.exports = {
         },
         {
           "linkId": "Practitioner.birthDate",
-          "path": "Practitioner.birthDate",
+          "definition": "Practitioner.birthDate",
           "answer": [
             {
               "valueDate": "2001-10-22"
@@ -57,7 +57,7 @@ module.exports = {
         },
         {
           "linkId": "Practitioner.gender",
-          "path": "Practitioner.gender",
+          "definition": "Practitioner.gender",
           "answer": [
             {
               "valueCoding": {
@@ -71,11 +71,11 @@ module.exports = {
     },
     {
       "linkId": "__Practitioner:contact",
-      "path": "__Practitioner:contact",
+      "definition": "__Practitioner:contact",
       "item": [
         {
           "linkId": "Practitioner.telecom[0].use",
-          "path": "Practitioner.telecom[0].use",
+          "definition": "Practitioner.telecom[0].use",
           "answer": [
             {
               "valueCoding": {
@@ -87,7 +87,7 @@ module.exports = {
         },
         {
           "linkId": "Practitioner.telecom[0].system",
-          "path": "Practitioner.telecom[0].system",
+          "definition": "Practitioner.telecom[0].system",
           "answer": [
             {
               "valueCoding": {
@@ -99,7 +99,7 @@ module.exports = {
         },
         {
           "linkId": "Practitioner.telecom[0].value",
-          "path": "Practitioner.telecom[0].value",
+          "definition": "Practitioner.telecom[0].value",
           "answer": [
             {
               "valueString": "867-5309"
@@ -108,7 +108,7 @@ module.exports = {
         },
         {
           "linkId": "Practitioner.telecom[1].use",
-          "path": "Practitioner.telecom[1].use",
+          "definition": "Practitioner.telecom[1].use",
           "answer": [
             {
               "valueCoding": {
@@ -120,7 +120,7 @@ module.exports = {
         },
         {
           "linkId": "Practitioner.telecom[1].system",
-          "path": "Practitioner.telecom[1].system",
+          "definition": "Practitioner.telecom[1].system",
           "answer": [
             {
               "valueCoding": {
@@ -132,7 +132,7 @@ module.exports = {
         },
         {
           "linkId": "Practitioner.telecom[1].value",
-          "path": "Practitioner.telecom[1].value",
+          "definition": "Practitioner.telecom[1].value",
           "answer": [
             {
               "valueString": "test@ihris.org"
@@ -143,11 +143,11 @@ module.exports = {
     },
     {
       "linkId": "PractitionerRole",
-      "path": "PractitionerRole",
+      "definition": "PractitionerRole",
       "item": [
         {
           "linkId": "PractitionerRole.practitioner",
-          "path": "PractitionerRole.practitioner",
+          "definition": "PractitionerRole.practitioner",
           "answer": [
             {
               "valueString": "__REPLACE__Practitioner"
@@ -156,7 +156,7 @@ module.exports = {
         },
         {
           "linkId": "PractitionerRole.code",
-          "path": "PractitionerRole.code",
+          "definition": "PractitionerRole.code",
           "answer": [
             {
               "valueCoding": {
@@ -168,7 +168,7 @@ module.exports = {
         },
         {
           "linkId": "PractitionerRole.period.start",
-          "path": "PractitionerRole.period.start",
+          "definition": "PractitionerRole.period.start",
           "answer": [
             {
               "valueDate": "2020-01-20"
@@ -179,15 +179,15 @@ module.exports = {
     },
     {
       "linkId": "__Practitioner:identifier",
-      "path": "__Practitioner:identifier",
+      "definition": "__Practitioner:identifier",
       "item": [
         {
           "linkId": "Practitioner.identifier[0]",
-          "path": "Practitioner.identifier[X]",
+          "definition": "Practitioner.identifier[X]",
           "item": [
             {
               "linkId": "Practitioner.identifier[0].system",
-              "path": "Practitioner.identifier[0].system",
+              "definition": "Practitioner.identifier[0].system",
               "answer": [
                 {
                   "valueString": "http://ihris.org/ID/Test"
@@ -196,7 +196,7 @@ module.exports = {
             },
             {
               "linkId": "Practitioner.identifier[0].value",
-              "path": "Practitioner.identifier[0].value",
+              "definition": "Practitioner.identifier[0].value",
               "answer": [
                 {
                   "valueString": "123456789"
@@ -205,7 +205,7 @@ module.exports = {
             },
             {
               "linkId": "Practitioner.identifier[0].type",
-              "path": "Practitioner.identifier[0].type",
+              "definition": "Practitioner.identifier[0].type",
               "answer": [
                 {
                   "valueCoding": {
@@ -220,11 +220,11 @@ module.exports = {
         },
         {
           "linkId": "Practitioner.identifier[0]",
-          "path": "Practitioner.identifier[X]",
+          "definition": "Practitioner.identifier[X]",
           "item": [
             {
               "linkId": "Practitioner.identifier[0].system",
-              "path": "Practitioner.identifier[1].system",
+              "definition": "Practitioner.identifier[1].system",
               "answer": [
                 {
                   "valueString": "http://ihris.org/ID/Employee"
@@ -233,7 +233,7 @@ module.exports = {
             },
             {
               "linkId": "Practitioner.identifier[0].value",
-              "path": "Practitioner.identifier[1].value",
+              "definition": "Practitioner.identifier[1].value",
               "answer": [
                 {
                   "valueString": "123456789"
@@ -242,7 +242,7 @@ module.exports = {
             },
             {
               "linkId": "Practitioner.identifier[0].type",
-              "path": "Practitioner.identifier[1].type",
+              "definition": "Practitioner.identifier[1].type",
               "answer": [
                 {
                   "valueCoding": {

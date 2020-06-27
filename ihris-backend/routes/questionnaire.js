@@ -15,14 +15,14 @@ router.post("/QuestionnaireResponse", (req, res, next) => {
   if ( !req.user ) {
     return res.status(401).json( outcomes.NOTLOGGEDIN )
   }
-  console.log("MIDDLEWARE",JSON.stringify(req.body,null,2))
-  let response = req.body
 
-  fhirQuestionnaire.processQuestionnaire( response ).then( (bundle) => {
+  fhirQuestionnaire.processQuestionnaire( req.body ).then( (bundle) => {
     fhirFilter.filterBundle( "write", bundle, req.user )
 
     fhirAxios.create( bundle ).then ( (results) => {
-      console.log(results)
+      if ( results.entry && results.entry.length > 0 && results.entry[0].response.location ) {
+        req.body.subject = { reference: results.entry[0].response.location }
+      }
       next()
     } ).catch( (err) => {
       return res.status( err.response.status ).json( err.response.data )

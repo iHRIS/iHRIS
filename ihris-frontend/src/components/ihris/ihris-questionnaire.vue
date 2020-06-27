@@ -50,7 +50,7 @@
 <script>
 export default {
   name: "ihris-questionnaire",
-  props: ["id", "url", "title", "description", "purpose", "section-menu"],
+  props: ["id", "url", "title", "description", "purpose", "section-menu", "view-page"],
   data: function() {
     return {
       fhir: {},
@@ -58,10 +58,6 @@ export default {
       overlay: false,
       isEdit: false
     }
-  },
-  created: function() {
-  },
-  computed: {
   },
   methods: {
     processFHIR: function() {
@@ -91,8 +87,18 @@ export default {
           response.json().then(data => {
             this.overlay = false
             this.loading = false
-            //this.$router.push({ name:"resource_view", params: {page: this.page, id: data.id} })
-            console.log(data)
+            if ( this.viewPage && data.subject && data.subject.reference ) {
+              let subject = data.subject.reference.split('/')
+              if ( subject[1] ) {
+                subject = subject[1]
+              } else {
+                subject = data.subject.reference
+              }
+              this.$router.push({ name:"resource_view", params: {page: this.viewPage, id: subject} })
+            } else {
+              this.$router.push({ name:"home" })
+            }
+            //console.log(data)
           })
         }
       } )

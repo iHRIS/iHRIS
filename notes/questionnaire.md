@@ -17,3 +17,4 @@
  * repeats will increment the index given for the main grouping if allowed so use repeated groups last.
   * e.g. name[0] is use official, but additional names can be added without use set.  Still need 
     to work this out
+* response object has link to the primary resource created in the subject field

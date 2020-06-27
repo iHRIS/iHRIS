@@ -89,7 +89,7 @@ const processFields = ( fields, base, order ) => {
       let subAttrs = [ "id", "path", "label", "min", "max", "base-min", "base-max", "code" ]
       for( let refField of Object.keys(refFields) ) {
         subFields[refField] = {}
-        console.log("refLOOP",refField,refFields)
+        //console.log("refLOOP",refField,refFields)
         for( let attr of subAttrs ) {
           if ( refFields[refField].hasOwnProperty(attr) ) {
             if ( (attr === "id" || attr === "path") && fields[field].hasOwnProperty(attr) ) {
@@ -166,8 +166,8 @@ router.get('/page/:page', function(req, res) {
     } catch(err) { }
     let pageSections = resource.extension.filter( ext => ext.url === "http://ihris.org/fhir/StructureDefinition/ihris-page-section" )
 
-    console.log(filters)
-    console.log(search)
+    //console.log(filters)
+    //console.log(search)
     let sections = {}
     let sectionMap = {}
     for( let section of pageSections ) {
@@ -391,7 +391,7 @@ router.get('/questionnaire/:questionnaire', function(req, res) {
   fhirAxios.read( "Questionnaire", req.params.questionnaire ).then ( (resource) => {
 
 
-    let vueOutput = '<ihris-questionnaire url="' + resource.url + '" id="' + resource.id 
+    let vueOutput = '<ihris-questionnaire :view-page="viewPage" url="' + resource.url + '" id="' + resource.id 
       + '" title="' + resource.title 
       + '" description="' + resource.description + '" purpose="' + resource.purpose 
       + '"__SECTIONMENU__>' + "\n"
