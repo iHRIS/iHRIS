@@ -36,7 +36,11 @@ export default {
       return new Promise(resolve => {
         fetch( "/config/questionnaire/"+questionnaire ).then(response => {
             response.json().then(data => {
-              resolve({data: function() { return { viewPage: page } }, components: comps, template: data.template})
+              resolve( {
+                data: function() { return { viewPage: page, isEdit: true } }, 
+                components: comps, 
+                template: data.template
+              } )
             }).catch(err => {
               console.log(err)
               resolve({template: '<div><h1>Error</h1><p>An error occurred trying to load this page</p>.</div>'})

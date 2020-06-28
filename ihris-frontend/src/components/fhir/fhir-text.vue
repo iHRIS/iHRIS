@@ -6,10 +6,10 @@
 <script>
 export default {
   name: "fhir-text",
-  props: [ "field", "label", "min", "max", "path" ],
+  props: [ "field", "label", "min", "max", "path", "edit" ],
   data: function() {
     return {
-      source: { path: "", data: {}, edit: true },
+      source: { path: "", data: {} },
       value: ""
     }
   }

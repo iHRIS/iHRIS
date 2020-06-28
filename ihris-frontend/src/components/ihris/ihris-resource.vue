@@ -20,12 +20,12 @@
       >
       <v-list class="white--text">
         <v-list-item>
-          <v-btn dark class="accent darken-1" @click="$router.go(-1)" v-if="isEdit">
-          <v-icon light>mdi-content-save</v-icon>
-          <span>Back</span>
+          <v-btn v-if="!edit" dark class="secondary" @click="$emit('setEdit', !edit)">
+          <v-icon light>mdi-pencil</v-icon>
+          <span>Edit</span>
           </v-btn>
           <v-spacer></v-spacer>
-          <v-btn dark class="success darken-1" @click="processFHIR()">
+          <v-btn dark class="success darken-1" @click="processFHIR()" v-if="edit">
           <v-icon light>mdi-content-save</v-icon>
           <span>Save</span>
           </v-btn>
@@ -48,11 +48,11 @@
 <script>
 export default {
   name: "ihris-resource",
-  props: ["title","field","fhir-id","page","profile","section-menu" ],
+  props: ["title","field","fhir-id","page","profile","section-menu","edit" ],
   data: function() {
     return {
       fhir: {},
-      source: { data: {}, path: "", edit: true },
+      source: { data: {}, path: "" },
       loading: false,
       overlay: false,
       isEdit: false
@@ -65,7 +65,7 @@ export default {
       fetch( "/fhir/"+this.field+"/"+this.fhirId ).then(response => {
         response.json().then(data => {
           //this.$store.commit('setCurrentResource', data)
-          this.source = { data: data, path: this.field, edit: false }
+          this.source = { data: data, path: this.field }
           this.loading = false
           //console.log(data)
         }).catch(err=> {
@@ -123,7 +123,7 @@ export default {
           response.json().then(data => {
             this.overlay = false
             this.loading = false
-            this.$router.push({ name:"resource_view", params: {page: this.page, id: data.id} })
+            this.$router.push({ name:"resource_view", params: {page: this.page, id: data.id } })
           })
         }
       } )

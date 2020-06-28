@@ -1,6 +1,6 @@
 <template>
   <div>
-    <v-container v-if="source.edit">
+    <v-container v-if="edit">
       <v-select 
         :loading="loading" 
         :label="display" 
@@ -30,7 +30,7 @@ const itemSort = (a,b) => {
 }
 export default {
   name: "fhir-coding",
-  props: ["field","label","sliceName","targetprofile","min","max","base-min","base-max","slotProps","path","binding"],
+  props: ["field","label","sliceName","targetprofile","min","max","base-min","base-max","slotProps","path","binding","edit"],
   data: function() {
     return {
       value: { system: "", code: "", display: "" },
@@ -39,7 +39,7 @@ export default {
       err_messages: null,
       error: false,
       items: [],
-      source: { path: "", data: {}, edit: true, binding: this.binding }
+      source: { path: "", data: {}, binding: this.binding }
     }
   },
   created: function() {
@@ -63,7 +63,7 @@ export default {
     setupData: function() {
       if ( this.slotProps && this.slotProps.source ) {
         this.source = { path: this.slotProps.source.path+"."+this.field, data: {}, 
-          edit: this.slotProps.source.edit, binding: this.binding || this.slotProps.source.binding }
+          binding: this.binding || this.slotProps.source.binding }
         if ( this.slotProps.source.fromArray ) {
           this.source.data = this.slotProps.source.data
           // Need to see if this works and figure out what it needs to be

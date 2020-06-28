@@ -7,10 +7,10 @@
 <script>
 export default {
   name: "ihris-secondary",
-  props: ["title","field","profile","slotProps","link-field"],
+  props: ["title","field","profile","slotProps","link-field", "edit"],
   data: function() {
     return {
-      source: { data: {}, path: this.field, edit: true }
+      source: { data: {}, path: this.field }
     }
   },
   created: function() {
@@ -26,8 +26,8 @@ export default {
   },
   methods: {
     setupData: function() {
-      if ( this.slotProps.source ) {
-        this.source = { path: this.field, data: {}, edit: this.slotProps.source.edit }
+      if ( this.slotProps && this.slotProps.source ) {
+        this.source = { path: this.field, data: {} }
         if ( this.slotProps.source.fromArray ) {
           this.source.data = this.slotProps.source.data
         } else {

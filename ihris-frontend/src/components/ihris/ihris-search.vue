@@ -65,7 +65,7 @@ export default {
   },
   methods: {
     clickIt: function(record) {
-      this.$router.push( {path: "/resource/view/"+this.page+"/"+record.id} )
+      this.$router.push({ name:"resource_view", params: {page: this.page, id: record.id } })
     },
     getData(restart) {
       //console.log("getting data",restart)

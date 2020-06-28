@@ -27,7 +27,7 @@
       v-if="!header.user.loggedin"
     >
       <template v-slot:activator="{ on }">
-        <v-btn icon v-on="on" title="Login">
+        <v-btn color="success" class="mx-2" small fab dark v-on="on" title="Login">
           <v-icon>mdi-login</v-icon>
         </v-btn>
       </template>
@@ -43,7 +43,7 @@
       </v-list>
     </v-menu>
     <template v-if="header.user.loggedin">
-      <v-btn icon @click="logout" title="Logout" :loading="loading" :disabled="loading">
+      <v-btn color="warning" small fab dark @click="logout" title="Logout" :loading="loading" :disabled="loading">
         <v-icon>mdi-logout</v-icon>
       </v-btn>
     </template>

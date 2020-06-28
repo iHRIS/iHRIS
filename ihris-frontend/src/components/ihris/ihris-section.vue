@@ -16,16 +16,17 @@
 <script>
 export default {
   name: "ihris-section",
-  props: ["name", "slotProps","title","description"],
+  props: ["name", "slotProps","title","description", "edit"],
   data: function() {
     return {
-      source: { path: "", data: {}, edit: true }
+      //source: { path: "", data: {} }
     }
   },
   created: function() {
-    this.setupData()
+    //this.setupData()
   },
   watch: {
+    /*
     slotProps: {
       handler() {
         //console.log("WATCH SECTION",this.path,this.slotProps.source)
@@ -33,14 +34,17 @@ export default {
       },
       deep: true
     }
+    */
   },
   methods: {
+    /*
     setupData: function() {
       if ( this.slotProps.source ) {
-        this.source = { path: this.slotProps.source.path+"."+this.field, data: {}, edit: this.slotProps.source.edit }
+        this.source = { path: this.slotProps.source.path+"."+this.field, data: {} }
         this.source.data = this.$fhirpath.evaluate( this.slotProps.source.data, this.field )
       }
     }
+    */
   }
 }
 </script>

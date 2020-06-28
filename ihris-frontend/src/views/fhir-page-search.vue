@@ -14,7 +14,7 @@ const searchComps = {
 var page
 
 export default {
-  name: "fhir-page",
+  name: "fhir-page-search",
   data: function() {
     return {
     }
@@ -25,6 +25,7 @@ export default {
         fetch( "/config/page/"+page ).then(response => {
             response.json().then(data => {
               resolve({
+                name: 'fhir-template',
                 components: searchComps, 
                 template: data.search, 
                 data: function() { return { fields: data.searchData, terms: {} } },

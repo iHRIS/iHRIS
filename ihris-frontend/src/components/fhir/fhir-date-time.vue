@@ -1,6 +1,6 @@
 <template>
   <div>
-    <v-container v-if="source.edit">
+    <v-container v-if="edit">
       <v-menu 
         ref="menu" 
         v-model="menu" 
@@ -44,12 +44,12 @@
 <script>
 export default {
   name: "fhir-date-time",
-  props: ["field","min","max","base-min","base-max", "label", "slotProps", "path"],
+  props: ["field","min","max","base-min","base-max", "label", "slotProps", "path", "edit"],
   data: function() {
     return {
       value: null,
       menu: false,
-      source: { path: "", data: {}, edit: true },
+      source: { path: "", data: {} },
       qField: "valueDateTime"
     }
   },
@@ -72,7 +72,7 @@ export default {
   methods: {
     setupData() {
       if ( this.slotProps && this.slotProps.source ) {
-        this.source = { path: this.slotProps.source.path+"."+this.field, data: {}, edit: this.slotProps.source.edit }
+        this.source = { path: this.slotProps.source.path+"."+this.field, data: {} }
         if ( this.slotProps.source.fromArray ) {
           this.source.data = this.slotProps.source.data
           this.value = this.source.data

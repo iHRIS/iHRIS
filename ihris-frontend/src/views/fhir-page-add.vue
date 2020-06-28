@@ -42,7 +42,12 @@ export default {
       return new Promise(resolve => {
         fetch( "/config/page/"+page ).then(response => {
             response.json().then(data => {
-              resolve({components: comps, template: data.template})
+              resolve( {
+                name: 'fhir-template', 
+                data: function() { return { isEdit: true, fhirId: undefined } }, 
+                components: comps, 
+                template: data.template
+              } )
             }).catch(err => {
               console.log(err)
               resolve({template: '<div><h1>Error</h1><p>An error occurred trying to load this page</p>.</div>'})

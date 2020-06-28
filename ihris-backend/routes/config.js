@@ -67,7 +67,7 @@ const processFields = ( fields, base, order ) => {
     let isArray = false
     if ( fields[field]["max"] !== "1" ) {
       isArray = true
-      output += "<ihris-array fieldType=\""+eleName+"\" :slotProps=\"slotProps\""
+      output += "<ihris-array :edit=\"isEdit\" fieldType=\""+eleName+"\" :slotProps=\"slotProps\""
       let arr_attrs = [ "field", "label", "min", "max", "id", "path", "profile", "targetProfile", "sliceName" ]
       for ( let attr of arr_attrs ) {
         output += " "+attr+"=\""+fields[field][attr]+"\""
@@ -76,7 +76,7 @@ const processFields = ( fields, base, order ) => {
     } else {
       attrs.unshift("id")
     }
-    output += "<fhir-"+eleName +" :slotProps=\"slotProps\""
+    output += "<fhir-"+eleName +" :slotProps=\"slotProps\" :edit=\"isEdit\""
     for( let attr of attrs ) {
       if ( fields[field].hasOwnProperty(attr) ) {
         output += " "+attr+"=\""+fields[field][attr]+"\""
@@ -259,7 +259,7 @@ router.get('/page/:page', function(req, res) {
         }
         let sectionKeys = Object.keys(sections)
         let sectionMenu
-        vueOutput = '<ihris-resource profile="'+resource.url+'" page="'+req.params.page+'" field="'+fhir+'" title="'+sections[fhir].title+'"'
+        vueOutput = '<ihris-resource :fhir-id="fhirId" :edit="isEdit" v-on:setEdit="setEdit($event)" profile="'+resource.url+'" page="'+req.params.page+'" field="'+fhir+'" title="'+sections[fhir].title+'"'
         if ( sectionKeys.length > 1 ) {
           sectionMenu = sectionKeys.map( name => { return { name: name, title: sections[name].title, desc: sections[name].description } } )
           vueOutput += " :section-menu='"+JSON.stringify(sectionMenu).replace(/'/g, "\'")+"'"
@@ -277,7 +277,7 @@ router.get('/page/:page', function(req, res) {
           }
         }
         for ( let name of sectionKeys ) {
-          vueOutput += "<ihris-section :slotProps=\"slotProps\" name=\""+name+"\" title=\""+sections[name].title+"\" description=\""+sections[name].description+"\">\n<template #default=\"slotProps\">\n"
+          vueOutput += "<ihris-section :slotProps=\"slotProps\" :edit=\"isEdit\" name=\""+name+"\" title=\""+sections[name].title+"\" description=\""+sections[name].description+"\">\n<template #default=\"slotProps\">\n"
           if ( sections[name].resource ) {
             let secondary = await getDefinition( sections[name].resource )
 
@@ -290,7 +290,7 @@ router.get('/page/:page', function(req, res) {
             setupOrder( sections[name].fields, secondaryOrder )
             let secondaryKeys = Object.keys( secondaryStructure )
             for ( let second_fhir of secondaryKeys ) {
-              vueOutput += '<ihris-secondary profile="'+secondary.url+'" field="'+second_fhir+'" title="'
+              vueOutput += '<ihris-secondary :edit="isEdit" profile="'+secondary.url+'" field="'+second_fhir+'" title="'
                 +sections[name].title+'" link-field="'+sections[name].linkfield
                 +'"><template #default="slotProps">' + "\n"
               vueOutput += processFields( secondaryStructure[second_fhir].fields, second_fhir, secondaryOrder )
@@ -326,12 +326,12 @@ const processQuestionnaireItems = ( items ) => {
   let vueOutput = ""
   for( let item of items ) {
     if ( item.repeats && !item.readOnly ) {
-      vueOutput += "<ihris-array path=\"" + item.linkId + "\" label=\""
+      vueOutput += "<ihris-array :edit=\"isEdit\" path=\"" + item.linkId + "\" label=\""
         + item.text + "\" max=\"*\" min=\"" + ( item.required ? "1" : "0" ) + "\"><template #default=\"slotProps\">\n"
     }
     if ( item.type === "group" ) {
       let label = item.text.split('|',2)
-      vueOutput += '<ihris-questionnaire-group path="' + item.linkId + '" label="' + label[0] + '"'
+      vueOutput += '<ihris-questionnaire-group :edit=\"isEdit\" path="' + item.linkId + '" label="' + label[0] + '"'
       if ( label.length === 2 ) {
         vueOutput += ' description="' + label[1] + '"'
       }
@@ -353,7 +353,7 @@ const processQuestionnaireItems = ( items ) => {
       }
       vueOutput += "></ihris-hidden>\n"
     } else {
-     vueOutput += "<fhir-" + item.type + " path=\"" + item.linkId + "\""
+     vueOutput += "<fhir-" + item.type + " :edit=\"isEdit\" path=\"" + item.linkId + "\""
 
       if ( item.hasOwnProperty("text") ) {
         vueOutput += " label=\""+ item.text + "\""
@@ -391,7 +391,7 @@ router.get('/questionnaire/:questionnaire', function(req, res) {
   fhirAxios.read( "Questionnaire", req.params.questionnaire ).then ( (resource) => {
 
 
-    let vueOutput = '<ihris-questionnaire :view-page="viewPage" url="' + resource.url + '" id="' + resource.id 
+    let vueOutput = '<ihris-questionnaire :edit=\"isEdit\" :view-page="viewPage" url="' + resource.url + '" id="' + resource.id 
       + '" title="' + resource.title 
       + '" description="' + resource.description + '" purpose="' + resource.purpose 
       + '"__SECTIONMENU__>' + "\n"

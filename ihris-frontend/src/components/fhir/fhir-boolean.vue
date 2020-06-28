@@ -1,6 +1,6 @@
 <template>
   <div>
-    <v-container v-if="source.edit">
+    <v-container v-if="edit">
       <v-switch
         v-model="value"
         :label="display+`: ${value.toString()}`"
@@ -20,10 +20,10 @@
 <script>
 export default {
   name: "fhir-boolean",
-  props: ["field", "label", "min", "max", "id", "path", "slotProps", "sliceName","base-min","base-max"],
+  props: ["field", "label", "min", "max", "id", "path", "slotProps", "sliceName","base-min","base-max", "edit"],
   data: function() {
     return {
-      source: { path: "", data: {}, edit: true },
+      source: { path: "", data: {} },
       value: true,
       qField: "valueBoolean"
     }
@@ -44,7 +44,7 @@ export default {
   methods: {
     setupData() {
       if ( this.slotProps && this.slotProps.source ) {
-        this.source = { path: this.slotProps.source.path+"."+this.field, data: {}, edit: this.slotProps.source.edit }
+        this.source = { path: this.slotProps.source.path+"."+this.field, data: {} }
         if ( this.slotProps.source.fromArray ) {
           this.source.data = this.slotProps.source.data
           this.value = this.source.data

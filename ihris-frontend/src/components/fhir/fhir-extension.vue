@@ -7,10 +7,10 @@
 <script>
 export default {
   name: "fhir-extension",
-  props: ["field","sliceName","min","max","base-min","base-max","profile","slotProps","path"],
+  props: ["field","sliceName","min","max","base-min","base-max","profile","slotProps","path", "edit"],
   data: function() {
     return {
-      source: { path: "", data: [], edit: true }
+      source: { path: "", data: [] }
     }
   },
   created: function() {
@@ -28,7 +28,7 @@ export default {
   methods: {
     setupData: function() {
       if ( this.slotProps && this.slotProps.source ) {
-        this.source = { path: this.slotProps.source.path+"."+this.field, data: {}, edit: this.slotProps.source.edit }
+        this.source = { path: this.slotProps.source.path+"."+this.field, data: {} }
         if ( this.slotProps.source.fromArray ) {
           this.source.data = this.slotProps.source.data
         } else {

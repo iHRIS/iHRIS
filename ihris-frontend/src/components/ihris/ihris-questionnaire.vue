@@ -50,7 +50,7 @@
 <script>
 export default {
   name: "ihris-questionnaire",
-  props: ["id", "url", "title", "description", "purpose", "section-menu", "view-page"],
+  props: ["id", "url", "title", "description", "purpose", "section-menu", "view-page", "edit"],
   data: function() {
     return {
       fhir: {},
@@ -94,7 +94,7 @@ export default {
               } else {
                 subject = data.subject.reference
               }
-              this.$router.push({ name:"resource_view", params: {page: this.viewPage, id: subject} })
+              this.$router.push({ name:"resource_view", params: {page: this.viewPage, id: subject } })
             } else {
               this.$router.push({ name:"home" })
             }
