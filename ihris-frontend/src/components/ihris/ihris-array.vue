@@ -1,7 +1,7 @@
 <template>
   <div>
     <div v-if="simpleDisplay">
-      <v-row v-if="simpleDisplay" dense>
+      <v-row dense>
         <v-col cols="3" class="font-weight-bold">{{label}}</v-col><v-col cols="9">{{simpleValue}}</v-col>
       </v-row>
       <v-divider></v-divider>
@@ -54,7 +54,10 @@ export default {
       this.source = { path: this.path, data: {} }
       let path = this.path
       if ( this.slotProps && this.slotProps.source ) {
-        let expression = this.field.replace(/([^:]+):(.+)/, "$1.where(url='"+this.profile+"')")
+        let expression = this.field
+        if ( this.sliceName ) {
+          expression = this.field.replace(/([^:]+):(.+)/, "$1.where(url='"+this.profile+"')")
+        }
         this.source.data = this.$fhirpath.evaluate( this.slotProps.source.data, expression)
       }
       for( let idx = 0; idx < this.actualMin; idx++ ) {
@@ -68,6 +71,7 @@ export default {
         }
         this.inputs.push( input )
       }
+      //console.log("ARR inputs",this.id,this.source,this.inputs)
     },
     addRow: function() {
       if ( this.addAvailable ) {

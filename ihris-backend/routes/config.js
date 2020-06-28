@@ -70,7 +70,9 @@ const processFields = ( fields, base, order ) => {
       output += "<ihris-array :edit=\"isEdit\" fieldType=\""+eleName+"\" :slotProps=\"slotProps\""
       let arr_attrs = [ "field", "label", "min", "max", "id", "path", "profile", "targetProfile", "sliceName" ]
       for ( let attr of arr_attrs ) {
-        output += " "+attr+"=\""+fields[field][attr]+"\""
+        if ( fields[field].hasOwnProperty(attr) ) {
+          output += " "+attr+"=\""+fields[field][attr]+"\""
+        }
       }
       output += ">\n<template #default=\"slotProps\">\n"
     } else {

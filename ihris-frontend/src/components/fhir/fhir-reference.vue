@@ -1,6 +1,6 @@
 <template>
   <v-card>
-    <v-card-subtitle class="primary--text text-uppercase font-weight-bold">{{ label }}</v-card-subtitle>
+    <v-card-subtitle class="text-uppercase font-weight-bold">{{ label }}</v-card-subtitle>
     <v-card-text>
       <v-text-field :label="display" v-model="value.reference" outlined hide-details="auto" dense>
       </v-text-field>

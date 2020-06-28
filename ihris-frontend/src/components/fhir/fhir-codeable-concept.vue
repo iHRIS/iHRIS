@@ -1,6 +1,6 @@
 <template>
   <v-card>
-    <v-card-subtitle class="primary--text text-uppercase font-weight-bold">{{ display }}</v-card-subtitle>
+    <v-card-subtitle class="text-uppercase font-weight-bold">{{ display }}</v-card-subtitle>
     <v-card-text>
       <slot :source="source"></slot>
     </v-card-text>
@@ -40,7 +40,7 @@ export default {
         } else {
           this.source.data = this.$fhirpath.evaluate( this.slotProps.source.data, this.field )
         }
-        //console.log("CC",this.source)
+        //console.log("CC2",this.field,this.source)
       }
     }
   },

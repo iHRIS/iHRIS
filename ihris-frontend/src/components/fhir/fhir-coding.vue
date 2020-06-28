@@ -17,7 +17,11 @@
     </v-container>
     <div v-else>
       <v-row dense>
-        <v-col cols="3" class="font-weight-bold">{{display}}</v-col><v-col cols="9">{{value.display}}</v-col>
+        <v-col cols="3" class="font-weight-bold">{{display}}</v-col>
+        <v-col cols="9" v-if="loading">
+          <v-progress-linear indeterminate color="primary"></v-progress-linear>
+        </v-col>
+        <v-col cols="9" v-else>{{value.display || ""}}</v-col>
       </v-row>
       <v-divider></v-divider>
     </div>
@@ -55,7 +59,10 @@ export default {
     },
     valueCode: function() {
       if ( this.items ) {
-        this.value = this.items.find( item => item.code === this.valueCode )
+        let findValue = this.items.find( item => item.code === this.valueCode )
+        if ( findValue ) {
+          this.value = findValue
+        }
       }
     }
   },
@@ -67,11 +74,17 @@ export default {
         if ( this.slotProps.source.fromArray ) {
           this.source.data = this.slotProps.source.data
           // Need to see if this works and figure out what it needs to be
-          this.value = this.source.data
+          if ( this.source.data ) {
+            this.value = this.source.data
+          }
         } else {
           let expression = this.field.substring( this.field.indexOf(':')+1 )
           this.source.data = this.$fhirpath.evaluate( this.slotProps.source.data, expression )
-          this.value = this.source.data[0]
+          //console.log("FPATH info",this.path,this.slotProps)
+          //console.log("FPATH setting value to",this.field,this.source.data[0],expression,this.slotProps.source.data)
+          if ( this.source.data[0] ) {
+            this.value = this.source.data[0]
+          }
         }
       }
       let binding = this.binding || this.slotProps.source.binding
@@ -83,7 +96,6 @@ export default {
       fetch("/fhir/ValueSet/"+valueSetId+"/$expand").then(response=> {
         if( response.ok ) {
           response.json().then(data=>{
-            this.loading = false
             try {
               this.items = data.expansion.contains
               this.items.sort( itemSort )
@@ -91,6 +103,7 @@ export default {
               this.error = true
               this.err_messages = "Invalid response from server."
             }
+            this.loading = false
           }).catch(err=>{
             this.err_messages = err.message
             this.error = true
