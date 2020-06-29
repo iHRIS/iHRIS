@@ -40,8 +40,7 @@ Description:    "iHRIS Page Section information."
       description 1..1 MS and
       name 1..1 MS and
       field 0..* MS and
-      resource 0..1 MS and
-      linkfield 0..1 MS
+      resource 0..1 MS
 * extension[title].value[x] only string
 * extension[title].valueString MS
 * extension[title].valueString ^label = "Title"
@@ -54,13 +53,31 @@ Description:    "iHRIS Page Section information."
 * extension[field].value[x] only string
 * extension[field].valueString 1..1 MS
 * extension[field].valueString ^label = "Name"
-* extension[resource].value[x] only Reference
-* extension[resource].valueReference only Reference(StructureDefinition)
-* extension[resource].valueReference MS
-* extension[resource].valueReference ^label = "Secondary Resource"
-* extension[linkfield].value[x] only string
-* extension[linkfield].valueString MS
-* extension[linkfield].valueString ^label = "Secondary Resource Link Field"
+* extension[resource].extension contains
+      resource 1..1 MS and
+      linkfield 1..1 MS and
+      searchfield 0..1 MS and
+      column 1..* MS
+* extension[resource].extension[resource].value[x] only Reference
+* extension[resource].extension[resource].valueReference only Reference(StructureDefinition)
+* extension[resource].extension[resource].valueReference MS
+* extension[resource].extension[resource].valueReference ^label = "Secondary Resource"
+* extension[resource].extension[linkfield].value[x] only string
+* extension[resource].extension[linkfield].valueString MS
+* extension[resource].extension[linkfield].valueString ^label = "Secondary Resource Link Field"
+* extension[resource].extension[searchfield].value[x] only string
+* extension[resource].extension[searchfield].valueString MS
+* extension[resource].extension[searchfield].valueString ^label = "Secondary Resource Search Field (if different from the link field)"
+* extension[resource].extension[column].extension contains
+      header 1..1 MS and
+      field 1..1 MS
+* extension[resource].extension[column].extension[header].value[x] only string 
+* extension[resource].extension[column].extension[header].valueString MS
+* extension[resource].extension[column].extension[header].valueString ^label = "Column Header"
+* extension[resource].extension[column].extension[field].value[x] only string 
+* extension[resource].extension[column].extension[field].valueString MS
+* extension[resource].extension[column].extension[field].valueString ^label = "FHIRPath Expression"
+
 
 Extension:      IhrisPageSectionResource
 Id:             ihris-page-section-resource
@@ -111,5 +128,9 @@ Usage:          #example
 * extension[section][4].extension[description].valueString = "Position the person holds"
 * extension[section][4].extension[name].valueString = "position"
 * extension[section][4].extension[field][0].valueString = "PractitionerRole.code"
-* extension[section][4].extension[resource].valueReference = Reference(StructureDefinition/ihris-practitioner-role)
-* extension[section][4].extension[linkfield].valueString = "PractitionerRole.practitioner"
+* extension[section][4].extension[resource].extension[resource].valueReference = Reference(StructureDefinition/ihris-practitioner-role)
+* extension[section][4].extension[resource].extension[linkfield].valueString = "PractitionerRole.practitioner"
+* extension[section][4].extension[resource].extension[column][0].extension[header].valueString = "Job"
+* extension[section][4].extension[resource].extension[column][0].extension[field].valueString = "PractitionerRole.code.coding[0]"
+* extension[section][4].extension[resource].extension[column][1].extension[header].valueString = "Start Date"
+* extension[section][4].extension[resource].extension[column][1].extension[field].valueString = "PractitionerRole.period.start"

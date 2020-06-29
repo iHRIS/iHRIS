@@ -12,12 +12,12 @@
           color="secondary"
           dark
           v-if="edit"
-        >
+          >
           {{ label }}
           <v-spacer></v-spacer>
           <v-btn v-if="subAvailable" icon @click="removeRow()"><v-icon>mdi-minus</v-icon></v-btn>
           <v-btn v-if="addAvailable" icon @click="addRow()"><v-icon>mdi-plus</v-icon></v-btn>
-          </v-system-bar>
+        </v-system-bar>
         <slot v-for="input in inputs" :input="input" :source="input.source"></slot>
       </v-card>
     </div>

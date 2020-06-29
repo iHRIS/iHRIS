@@ -214,6 +214,21 @@ const fhirAxios = {
         reject ( err )
       } )
     } )
+  },
+  lookup: ( params ) => {
+    return new Promise( (resolve, reject) => {
+      let url = new URL( fhirAxios.baseUrl.href )
+      url.pathname += "CodeSystem/$lookup"
+      url.searchParams.append("system", params.system)
+      url.searchParams.append("code", params.code)
+
+      let auth = fhirAxios.__getAuth()
+      axios.get( url.href, { auth: auth } ).then( (response) => {
+        resolve( response.data )
+      } ).catch( (err) => {
+        reject ( err )
+      } )
+    } )
   }
 }
 

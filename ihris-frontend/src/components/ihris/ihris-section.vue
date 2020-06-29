@@ -1,5 +1,5 @@
 <template>
-  <div :id="'section-'+name" class="ihris-section">
+  <div :id="'section-'+name" class="ihris-section" v-if="!edit || !secondary">
     <v-card 
       class="mx-auto"
       max-width="700"
@@ -16,7 +16,7 @@
 <script>
 export default {
   name: "ihris-section",
-  props: ["name", "slotProps","title","description", "edit"],
+  props: ["name", "slotProps","title","description", "edit", "secondary"],
   data: function() {
     return {
       //source: { path: "", data: {} }

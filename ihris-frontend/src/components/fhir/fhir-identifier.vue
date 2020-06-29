@@ -37,7 +37,7 @@ export default {
         } else {
           this.source.data = this.$fhirpath.evaluate( this.slotProps.source.data, this.field )
         }
-        console.log("ID",this.source,this.slotProps)
+        //console.log("ID",this.source,this.slotProps)
       }
     }
   },

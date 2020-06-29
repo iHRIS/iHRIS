@@ -29,6 +29,8 @@ const fhirStructureDefinition = {
   },
   _getFieldDefinition: ( fieldId, structureDef ) => {
     return new Promise( (resolve, reject) => {
+      // take [#] off of fieldId here
+      fieldId = fieldId.replace( /\[\d+\]/g, '' )
       let field = structureDef.snapshot.element.find( element => element.id === fieldId )
       if ( field ) {
         resolve( field )

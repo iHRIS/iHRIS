@@ -16,7 +16,10 @@ router.get("/", (req, res, next) => {
   res.status(200).json( { user: req.user } )
 } )
 
-router.get("/:resource/:id?", (req, res) => {
+router.get("/:resource/:id?", (req, res, next) => {
+  if ( req.params.id && req.params.id.startsWith('$') ) {
+    return next()
+  }
   if ( !req.user ) {
     return res.status(401).json( outcomes.NOTLOGGEDIN)
   }
@@ -152,6 +155,32 @@ router.get("/ValueSet/:id/\\$expand", (req, res) => {
       return res.status(200).json(resource)
     } else {
       // Field level access to ValueSets doesn't really make sense so don't do expansions if not full access
+      return res.status(401).json( outcomes.DENIED )
+    }
+  } ).catch( (err) => {
+    /* return response from FHIR server */
+    return res.status( err.response.status ).json( err.response.data )
+    /* for custom responses
+    let outcome = { ...outcomes.ERROR }
+    outcome.issue[0].diagnostics = err.message
+    return res.status(500).json( outcome )
+    */
+  } )
+} )
+
+router.get("/CodeSystem/\\$lookup", (req, res) => {
+  if ( !req.user ) {
+    return res.status(401).json( outcomes.NOTLOGGEDIN )
+  }
+  let allowed = req.user.hasPermissionByName( "read", "CodeSystem" )
+  if ( !allowed ) {
+    return res.status(401).json( outcomes.DENIED )
+  }
+  fhirAxios.lookup( req.query ).then( (resource) => {
+    if ( allowed === true ) {
+      return res.status(200).json(resource)
+    } else {
+      // Field level access to CodeSystems doesn't really make sense so don't do lookups if not full access
       return res.status(401).json( outcomes.DENIED )
     }
   } ).catch( (err) => {

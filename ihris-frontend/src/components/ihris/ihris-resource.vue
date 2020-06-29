@@ -24,6 +24,10 @@
           <v-icon light>mdi-pencil</v-icon>
           <span>Edit</span>
           </v-btn>
+          <v-btn v-else dark class="secondary" @click="$emit('setEdit', !edit)">
+          <v-icon light>mdi-pencil-off</v-icon>
+          <span>Cancel</span>
+          </v-btn>
           <v-spacer></v-spacer>
           <v-btn dark class="success darken-1" @click="processFHIR()" v-if="edit">
           <v-icon light>mdi-content-save</v-icon>
@@ -33,7 +37,7 @@
         <v-divider color="white"></v-divider>
         <v-subheader class="white--text"><h2>Sections</h2></v-subheader>
         <v-list-item v-for="section in sectionMenu" :href="'#section-'+section.name" :key="section.name">
-          <v-list-item-content class="white--text">
+          <v-list-item-content class="white--text" v-if="!edit || !section.secondary">
             <v-list-item-title class="text-uppercase"><h4>{{ section.title }}</h4></v-list-item-title>
             <v-list-item-subtitle class="white--text">{{ section.desc }}</v-list-item-subtitle>
           </v-list-item-content>
