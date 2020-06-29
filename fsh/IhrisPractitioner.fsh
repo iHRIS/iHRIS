@@ -193,7 +193,7 @@ Usage:          #definition
 * item[0].item[2].repeats = false
 
 * item[0].item[3].linkId = "Practitioner.extension[0]"
-* item[0].item[3].definition = "http://ihris.org/fhir/StructureDefinition/ihris-practitioner#Practitioner.extension:residence"
+* item[0].item[3].definition = "http://ihris.org/fhir/StructureDefinition/ihris-practitioner#Practitioner.extension:residence.value[x]:valueReference"
 * item[0].item[3].text = "Residence"
 * item[0].item[3].type = #reference
 * item[0].item[3].required = false

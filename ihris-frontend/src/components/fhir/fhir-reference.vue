@@ -75,7 +75,9 @@ export default {
   },
   methods: {
     setupData: function() {
-      this.resource = this.targetProfile.substring( this.targetProfile.lastIndexOf('/')+1 )
+      if ( this.targetProfile ) {
+        this.resource = this.targetProfile.substring( this.targetProfile.lastIndexOf('/')+1 )
+      }
       if ( this.slotProps && this.slotProps.source ) {
         this.source = { path: this.slotProps.source.path+"."+this.field, data: {} }
         if ( this.slotProps.source.fromArray ) {

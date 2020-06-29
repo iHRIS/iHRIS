@@ -362,7 +362,7 @@ router.get('/page/:page', function(req, res) {
 
 } )
 
-const processQuestionnaireItems = ( items ) => {
+const processQuestionnaireItems = async ( items ) => {
   let vueOutput = ""
   for( let item of items ) {
     if ( item.repeats && !item.readOnly ) {
@@ -376,7 +376,7 @@ const processQuestionnaireItems = ( items ) => {
         vueOutput += ' description="' + label[1] + '"'
       }
       vueOutput += ">\n\n"
-      vueOutput += processQuestionnaireItems( item.item )
+      vueOutput += await processQuestionnaireItems( item.item )
       vueOutput += "</ihris-questionnaire-group>\n"
     } else if ( item.readOnly ) {
       vueOutput += "<ihris-hidden path=\"" + item.linkId + "\" label=\""
@@ -395,6 +395,12 @@ const processQuestionnaireItems = ( items ) => {
     } else {
      vueOutput += "<fhir-" + item.type + " :edit=\"isEdit\" path=\"" + item.linkId + "\""
 
+      if ( item.type === "reference" && item.definition ) {
+        let field = await structureDef.getFieldDefinition(item.definition)
+        if ( field && field.type && field.type[0] && field.type[0].targetProfile ) {
+          vueOutput += " targetProfile=\""+field.type[0].targetProfile[0]+"\""
+        }
+      }
       if ( item.hasOwnProperty("text") ) {
         vueOutput += " label=\""+ item.text + "\""
       }
@@ -428,7 +434,7 @@ router.get('/questionnaire/:questionnaire', function(req, res) {
   }
 
 
-  fhirAxios.read( "Questionnaire", req.params.questionnaire ).then ( (resource) => {
+  fhirAxios.read( "Questionnaire", req.params.questionnaire ).then ( async (resource) => {
 
 
     let vueOutput = '<ihris-questionnaire :edit=\"isEdit\" :view-page="viewPage" url="' + resource.url + '" id="' + resource.id 
@@ -452,7 +458,7 @@ router.get('/questionnaire/:questionnaire', function(req, res) {
         }
         sectionMenu.push( { title: label[0], desc: label[1] || "", id: sectionId } )
         vueOutput += ">\n"
-        vueOutput += processQuestionnaireItems( item.item )
+        vueOutput += await processQuestionnaireItems( item.item )
         vueOutput += "</ihris-questionnaire-section>\n"
       } else {
         console.log("Invalid entry for questionnaire.  All top level items must be type group.")
