@@ -24,7 +24,7 @@
           <v-icon light>mdi-pencil</v-icon>
           <span>Edit</span>
           </v-btn>
-          <v-btn v-else dark class="secondary" @click="$emit('setEdit', !edit)">
+          <v-btn v-else dark class="secondary" @click="$router.go(0)">
           <v-icon light>mdi-pencil-off</v-icon>
           <span>Cancel</span>
           </v-btn>
@@ -112,22 +112,33 @@ export default {
       }
       //console.log(this)
       processChildren( this.field, this.fhir, this.$children )
-      console.log("SAVE",this.fhir)
-      fetch( "/fhir/"+this.field, {
+      let url = "/fhir/"+this.field
+      let opts = {
         method: "POST",
         headers: {
           "Content-Type": "application/fhir+json"
         },
         redirect: 'manual',
-        body: JSON.stringify(this.fhir)
-      } ).then(response => {
+      } 
+      if ( this.fhirId ) {
+        this.fhir.id = this.fhirId
+        url += "/" + this.fhirId
+        opts.method = "PUT"
+      }
+      opts.body = JSON.stringify(this.fhir)
+      console.log("SAVE",url,this.fhir)
+      fetch( url, opts ).then(response => {
         //console.log(response)
         //console.log(response.headers)
-        if ( response.status === 201 ) {
+        if ( response.status === 201 || response.status === 200 ) {
           response.json().then(data => {
             this.overlay = false
             this.loading = false
-            this.$router.push({ name:"resource_view", params: {page: this.page, id: data.id } })
+            if ( this.fhirId ) {
+              this.$router.go(0)
+            } else {
+              this.$router.push({ name:"resource_view", params: {page: this.page, id: data.id } })
+            }
           })
         }
       } )

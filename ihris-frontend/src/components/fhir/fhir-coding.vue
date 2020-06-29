@@ -97,7 +97,22 @@ export default {
         if( response.ok ) {
           response.json().then(data=>{
             try {
-              this.items = data.expansion.contains
+              if ( data.expansion.contains && data.expansion.contains.length > 0 ) {
+                if ( data.expansion.contains[0].hasOwnProperty("display") ) {
+                  this.items = data.expansion.contains
+                } else if ( data.compose && data.compose.include ) {
+                  this.items = data.expansion.contains.map( code => {
+                    let include = data.compose.include.find( inc => inc.system === code.system )
+                    if ( include && include.concept ) {
+                      let display = include.concept.find( concept => concept.code === code.code )
+                      if ( display ) {
+                        code.display = display.display
+                      }
+                    }
+                    return code
+                  } )
+                }
+              }
               this.items.sort( itemSort )
             } catch(err) {
               this.error = true

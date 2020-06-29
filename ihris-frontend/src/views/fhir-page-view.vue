@@ -54,7 +54,6 @@ export default {
                 template: data.template,
                 methods: {
                   setEdit: function(val) {
-                    console.log("got",val)
                     this.isEdit = val
                   }
                 }
