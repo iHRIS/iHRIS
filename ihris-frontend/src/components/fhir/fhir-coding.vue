@@ -76,6 +76,7 @@ export default {
           // Need to see if this works and figure out what it needs to be
           if ( this.source.data ) {
             this.value = this.source.data
+            this.valueCode = this.value.code
           }
         } else {
           let expression = this.field.substring( this.field.indexOf(':')+1 )
@@ -84,6 +85,7 @@ export default {
           //console.log("FPATH setting value to",this.field,this.source.data[0],expression,this.slotProps.source.data)
           if ( this.source.data[0] ) {
             this.value = this.source.data[0]
+            this.valueCode = this.value.code
           }
         }
       }

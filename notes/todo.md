@@ -1,6 +1,7 @@
 # ToDo
 
 * Create tests for fhirAxios:lookup and route/fhir CodeSystem/$lookup
+* setup reference lookup to be configurable (in fhir-reference.vue, hard coded to name)
 * Create audit module and tests
  * Save audit messages for activity
   * login/logout
