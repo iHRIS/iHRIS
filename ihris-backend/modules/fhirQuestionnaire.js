@@ -90,6 +90,7 @@ const fhirQuestionnaire = {
     const FHIR_UUID_NAMESPACE = nconf.get("fhir:uuid:namespace") || "e91c9519-eccb-48a8-a506-6659b8c22518"
     let entries = {}
     let idCount = 1
+    console.log("FIELDS",JSON.stringify(fields,null,2))
     for( let field of fields ) {
       let paths = field.definition.split('.')
       let entry
@@ -157,7 +158,16 @@ const fhirQuestionnaire = {
       } else {
         arrayIdx = false
       }
-      if ( typeof field.answer === 'string' && field.answer.startsWith("__REPLACE__") ) {
+      if ( field.hasOwnProperty("url") ) {
+        if ( arrayIdx !== false ) {
+          if ( !current[lastElement][arrayIdx] ) {
+            current[lastElement][arrayIdx] = {}
+          }
+          current[lastElement][arrayIdx].url = field.url
+        } else {
+          current[lastElement].url = field.url
+        }
+      } else if ( typeof field.answer === 'string' && field.answer.startsWith("__REPLACE__") ) {
         let reference = field.answer.substring(11)
         if ( entries.hasOwnProperty(reference) ) {
           current[lastElement] = { reference: entries[reference].fullUrl }
@@ -240,7 +250,110 @@ const fhirQuestionnaire = {
 
                 let simple = [ "date", "string" ]
                 let data = { linkId: item.linkId, definition: item.definition, q: question.type }
-                if ( simple.includes( question.type ) ) {
+
+                if ( item.definition.includes("extension") ) {
+                  //console.log("EXT",question,item)
+                  // Check for multiple extensions so the URL can be set up.
+                  let paths = item.linkId.split('.')
+                  let dataDefs = item.definition.split('.')
+                  let defs = question.definition.split('.')
+                  // Skip the current level
+                  paths.pop()
+                  dataDefs.pop()
+                  // Skip the last 2 for extension and value[x] in defs
+                  defs.pop()
+                  defs.pop()
+                  // Start with the previous level
+                  let path = paths.pop()
+                  let dataDef = dataDefs.pop()
+                  let def = defs.pop()
+                  while( path && dataDef && def ) {
+                    if ( path.includes("extension") ) {
+                      let parentPath = paths.join('.') + '.' + path
+                      let parentDef = defs.join('.') + '.' + def
+                      let parentDataDef = dataDefs.join('.') + '.' + dataDef
+                      if ( !fields.find( field => field.linkId === parentPath) ) {
+                        //console.log("WOULD CHECK AND ADD",defs,def)
+                        let parentExt = await structureDef.getFieldDefinition( parentDef )
+                        //console.log("PARENT",parentExt.type[0].profile)
+                        let parentUrl
+                        if ( parentExt.type[0].profile ) {
+                          parentUrl = parentExt.type[0].profile[0]
+                        } else {
+                          parentUrl = parentExt.sliceName
+                        }
+                        fields.push( {linkId: parentPath, definition: parentDataDef, url: parentUrl} )
+                      }
+                    }
+                    path = paths.pop()
+                    dataDef = dataDefs.pop()
+                    def = defs.pop()
+                  }
+                  try {
+                    let ext = question.definition.substring( 0, question.definition.lastIndexOf('.') )
+                    let extension = await structureDef.getFieldDefinition( ext )
+                    let url
+                    if ( extension.type[0].profile ) {
+                      url = extension.type[0].profile[0]
+                    } else {
+                      url = extension.sliceName
+                    }
+                    if ( question.type === "choice" ) {
+                      let field = await structureDef.getFieldDefinition( question.definition )
+                      //console.log('EXTFIELD',JSON.stringify(field,null,2))
+                      if ( field.type[0].code === "code" ) {
+                        if ( question.repeats ) {
+                          item.answer.forEach( answer => {
+                            let extData = { ...data }
+                            extData.answer = { valueCode: answer.valueCoding.code, url: url }
+                            fields.push( extData )
+                          } )
+                        } else {
+                          data.answer = { valueCode: item.answer[0].valueCoding.code, url: url }
+                          fields.push( data )
+                        }
+                      } else if ( field.type[0].code === "Coding" ) {
+                        if ( question.repeats ) {
+                          item.answer.forEach( answer => {
+                            let extData = { ...data }
+                            extData.answer = { valueCoding: answer.valueCoding, url: url }
+                            fields.push( extData )
+                          } )
+                        } else {
+                          data.answer = { valueCoding: item.answer[0].valueCoding, url: url }
+                          fields.push( data )
+                        }
+                      } else if ( field.type[0].code === "CodeableConcept" ) {
+                        if ( question.repeats ) {
+                          item.answer.forEach( answer => { 
+                            let extData = { ...data }
+                            extData.answer = { url: url, valueCodeableConcept: { coding: [ answer.valueCoding ], text: answer.valueCoding.display } }
+                            fields.push( extData )
+                          } )
+                        } else {
+                          data.answer = { url: url, valueCodeableConcept: { coding: [ item.answer[0].valueCoding ], text: item.answer[0].valueCoding.display } }
+                          fields.push( data )
+                        }
+                      }
+                    } else {
+                      if ( question.repeats ) {
+                        item.answer.forEach( answer => {
+                          let extData = { ...data }
+                          extData.answer = { ...answer }
+                          extData.answer.url = url
+                          fields.push( extData )
+                        } )
+                      } else {
+                        data.answer = { ...item.answer[0] }
+                        data.answer.url = url
+                        fields.push( data )
+                      }
+                    }
+                  } catch( err ) {
+                    reject( err )
+                  }
+
+                } else if ( simple.includes( question.type ) ) {
                   if ( question.repeats ) {
                     data.answer = item.answer.map( answer => answer["value"+capitalize(question.type)] )
                   } else {
@@ -257,6 +370,12 @@ const fhirQuestionnaire = {
                         data.answer = item.answer.map( answer => answer.valueCoding.code )
                       } else {
                         data.answer = item.answer[0].valueCoding.code
+                      }
+                    } else if ( field.type[0].code === "Coding" ) {
+                      if ( question.repeats ) {
+                        data.answer = item.answer.map( answer => answer.valueCoding )
+                      } else {
+                        data.answer = item.answer[0].valueCoding
                       }
                     } else if ( field.type[0].code === "CodeableConcept" ) {
                       if ( question.repeats ) {
@@ -282,6 +401,7 @@ const fhirQuestionnaire = {
                   } else {
                     data.answer = { reference: item.answer }
                   }
+                  fields.push(data)
                 } else {
                   console.log("ERROR: questionnaire doesn't handle questions of type "+question.type+" yet")
                 }

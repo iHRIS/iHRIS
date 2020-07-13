@@ -17,6 +17,7 @@ router.post("/QuestionnaireResponse", (req, res, next) => {
   }
 
   fhirQuestionnaire.processQuestionnaire( req.body ).then( (bundle) => {
+    console.log(JSON.stringify(bundle,null,2))
     fhirFilter.filterBundle( "write", bundle, req.user )
 
     fhirAxios.create( bundle ).then ( (results) => {
@@ -25,9 +26,14 @@ router.post("/QuestionnaireResponse", (req, res, next) => {
       }
       next()
     } ).catch( (err) => {
+      console.log(err)
+      console.log(JSON.stringify(err.response.data,null,2))
       return res.status( err.response.status ).json( err.response.data )
     } )
 
+  } ).catch( (err) => {
+    console.log(err)
+    return res.status( 500 ).json( err )
   } )
 
 } )

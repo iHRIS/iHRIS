@@ -206,7 +206,7 @@ Title:            "iHRIS Ethiopia Identifier ValueSet"
 * codes from system IhrisEthiopiaIdentifierCodeSystem
 
 CodeSystem:         IhrisEthiopiaIdentifierCodeSystem
-Id:               ihris-ethiopia-identifier-codesystem
+Id:               ihris-ethiopia-identifier
 Title:            "iHRIS Ethiopia Identifier Codesystem"
 * #employeeId "Employee Id"
 * #pensionNumber "Pension Number"
@@ -252,7 +252,6 @@ ValueSet:         IhrisEducationalMajorValueSet
 Id:               ihris-educational-major-valueset
 Title:            "iHRIS Educational Major ValueSet"
 * codes from system IhrisEducationalMajorCodeSystem
-
 Extension:      IhrisPractitionerCategory
 Id:             ihris-personal-Information-Category
 Title:          "iHRIS Personal Information Category"
@@ -397,3 +396,483 @@ ValueSet:         IhrisEthnicityValueSet
 Id:               ihris-Ethnicity-valueset
 Title:            "iHRIS Ethnicity ValueSet"
 * codes from system IhrisEthnicityCodeSystem
+
+Instance:       IhrisPractitionerEthiopiaQuestionnaire
+InstanceOf:     Questionnaire
+Usage:          #definition
+* title = "iHRIS Practitioner Ethiopia Questionnaire"
+* description = "iHRIS Practitioner Ethiopia initial data entry questionnaire."
+* id = "ihris-personal-information"
+* url = "http://ihris.org/fhir/Questionnaire/ihris-personal-information"
+* name = "ihris-personal-information"
+* status = #active
+* date = 2020-06-29
+* purpose = "Data entry page for practitioners."
+
+* item[0].linkId = "Practitioner"
+* item[0].definition = "http://ihris.org/fhir/StructureDefinition/ihris-personal-information"
+* item[0].text = "Health Worker|Primary demographic details"
+* item[0].type = #group
+
+* item[0].item[0].linkId = "Practitioner.name"
+* item[0].item[0].definition = "http://ihris.org/fhir/StructureDefinition/ihris-personal-information#Practitioner.name"
+* item[0].item[0].text = "Name"
+* item[0].item[0].type = #group
+
+* item[0].item[0].item[0].linkId = "Practitioner.name.extension.ethiopiaPrefix[0]"
+* item[0].item[0].item[0].definition = "http://ihris.org/fhir/StructureDefinition/ihris-personal-information#Practitioner.name.extension:ethiopiaPrefix"
+* item[0].item[0].item[0].text = "Prefix"
+* item[0].item[0].item[0].type = #choice
+* item[0].item[0].item[0].answerValueSet = "http://ihris.org/fhir/ValueSet/ihris-ethiopia-prefix-valueset"
+* item[0].item[0].item[0].required = false
+* item[0].item[0].item[0].repeats = true
+
+* item[0].item[0].item[1].linkId = "Practitioner.name.extension.familyNames.extension.fathers"
+* item[0].item[0].item[1].definition = "http://ihris.org/fhir/StructureDefinition/ihris-personal-information#Practitioner.name.extension:familyNames.extension:fathers"
+* item[0].item[0].item[1].text = "Father's Name"
+* item[0].item[0].item[1].type = #string
+* item[0].item[0].item[1].required = true
+* item[0].item[0].item[1].repeats = false
+
+* item[0].item[0].item[2].linkId = "Practitioner.name.extension.familyNames.extension.fathersalternativelanguage"
+* item[0].item[0].item[2].definition = "http://ihris.org/fhir/StructureDefinition/ihris-personal-information#Practitioner.name.extension:familyNames.extension:fathersalternativelanguage"
+* item[0].item[0].item[2].text = "Father's Name Alternative Language"
+* item[0].item[0].item[2].type = #string
+* item[0].item[0].item[2].required = true
+* item[0].item[0].item[2].repeats = false
+
+* item[0].item[0].item[3].linkId = "Practitioner.name.extension.familyNames.extension.grandfatherslastname"
+* item[0].item[0].item[3].definition = "http://ihris.org/fhir/StructureDefinition/ihris-personal-information#Practitioner.name.extension:familyNames.extension:grandfatherslastname"
+* item[0].item[0].item[3].text = "Grandfather's Lastname"
+* item[0].item[0].item[3].type = #string
+* item[0].item[0].item[3].required = true
+* item[0].item[0].item[3].repeats = false
+
+* item[0].item[0].item[4].linkId = "Practitioner.name.extension.familyNames.extension[0].grandfathersalternativelanguage"
+* item[0].item[0].item[4].definition = "http://ihris.org/fhir/StructureDefinition/ihris-personal-information#Practitioner.name.extension:familyNames.extension:grandfathersalternativelanguage"
+* item[0].item[0].item[4].text = "Grand Father's Name Alternative Language"
+* item[0].item[0].item[4].type = #string
+* item[0].item[0].item[4].required = true
+* item[0].item[0].item[4].repeats = false
+
+* item[0].item[0].item[5].linkId = "Practitioner.name.extension.familyNames.extension.mothers"
+* item[0].item[0].item[5].definition = "http://ihris.org/fhir/StructureDefinition/ihris-personal-information#Practitioner.name.extension:familyNames.extension:mothers"
+* item[0].item[0].item[5].text = "Mother's Name"
+* item[0].item[0].item[5].type = #string
+* item[0].item[0].item[5].required = true
+* item[0].item[0].item[5].repeats = false
+
+* item[0].item[0].item[6].linkId = "Practitioner.name.given"
+* item[0].item[0].item[6].definition = "http://ihris.org/fhir/StructureDefinition/ihris-personal-information#Practitioner.name.given"
+* item[0].item[0].item[6].text = "First Name"
+* item[0].item[0].item[6].type = #string
+* item[0].item[0].item[6].required = true
+* item[0].item[0].item[6].repeats = true
+
+* item[0].item[1].linkId = "Practitioner"
+* item[0].item[1].definition = "http://ihris.org/fhir/StructureDefinition/ihris-personal-information"
+* item[0].item[1].text = "Demographic Information"
+* item[0].item[1].type = #group
+
+* item[0].item[1].item[0].linkId = "Practitioner.extension.nationality"
+* item[0].item[1].item[0].definition = "http://ihris.org/fhir/StructureDefinition/ihris-personal-information#Practitioner.extension:nationality"
+* item[0].item[1].item[0].text = "Nationality"
+* item[0].item[1].item[0].type = #choice
+* item[0].item[1].item[0].answerValueSet = "http://hl7.org/fhir/ValueSet/iso3166-1-2"
+* item[0].item[1].item[0].required = false
+* item[0].item[1].item[0].repeats = false
+
+* item[0].item[1].item[1].linkId = "Practitioner.birthDate"
+* item[0].item[1].item[1].definition = "http://ihris.org/fhir/StructureDefinition/ihris-personal-information#Practitioner.birthDate"
+* item[0].item[1].item[1].text = "Birth Date"
+* item[0].item[1].item[1].type = #date
+* item[0].item[1].item[1].required = true
+* item[0].item[1].item[1].repeats = false
+
+* item[0].item[1].item[2].linkId = "Practitioner.gender"
+* item[0].item[1].item[2].definition = "http://ihris.org/fhir/StructureDefinition/ihris-personal-information#Practitioner.gender"
+* item[0].item[1].item[2].text = "Gender"
+* item[0].item[1].item[2].type = #choice
+* item[0].item[1].item[2].answerValueSet = "http://hl7.org/fhir/ValueSet/administrative-gender"
+* item[0].item[1].item[2].required = true
+* item[0].item[1].item[2].repeats = false
+
+* item[0].item[1].item[3].linkId = "Practitioner.extension.maritalStatus"
+* item[0].item[1].item[3].definition = "http://ihris.org/fhir/StructureDefinition/ihris-personal-information#Practitioner.extension:maritalStatus"
+* item[0].item[1].item[3].text = "Marital Status"
+* item[0].item[1].item[3].type = #choice
+* item[0].item[1].item[3].answerValueSet = "http://hl7.org/fhir/ValueSet/marital-status"
+* item[0].item[1].item[3].required = false
+* item[0].item[1].item[3].repeats = false
+
+* item[0].item[2].linkId = "Practitioner.extension[0]"
+* item[0].item[2].definition = "http://ihris.org/fhir/StructureDefinition/ihris-practitioner#Practitioner.extension:residence.value[x]:valueReference"
+* item[0].item[2].text = "Residence"
+* item[0].item[2].type = #reference
+* item[0].item[2].required = false
+* item[0].item[2].repeats = false
+
+* item[0].item[3].linkId = "__Practitioner:identifier"
+* item[0].item[3].definition = "http://ihris.org/fhir/StructureDefinition/ihris-personal-information"
+* item[0].item[3].text = "Identifiers|Personal Identifiers"
+* item[0].item[3].type = #group
+
+* item[0].item[3].item[0].linkId = "Practitioner.identifier[0]"
+* item[0].item[3].item[0].definition = "http://ihris.org/fhir/StructureDefinition/ihris-personal-information#Practitioner.identifier"
+* item[0].item[3].item[0].text = "Employee Id"
+* item[0].item[3].item[0].type = #group
+
+* item[0].item[3].item[0].item[0].linkId = "Practitioner.identifier[0].type"
+* item[0].item[3].item[0].item[0].definition = "http://ihris.org/fhir/StructureDefinition/ihris-personal-information#Practitioner.identifier.type"
+* item[0].item[3].item[0].item[0].text = "Type"
+* item[0].item[3].item[0].item[0].type = #choice
+* item[0].item[3].item[0].item[0].required = false
+* item[0].item[3].item[0].item[0].repeats = false
+* item[0].item[3].item[0].item[0].readOnly = true
+* item[0].item[3].item[0].item[0].answerOption.valueCoding = http://ihris.org/fhir/CodeSystem/ihris-ethiopia-identifier#employeeId
+* item[0].item[3].item[0].item[0].answerOption.initialSelected = true
+
+* item[0].item[3].item[0].item[1].linkId = "Practitioner.identifier[0].value"
+* item[0].item[3].item[0].item[1].definition = "http://ihris.org/fhir/StructureDefinition/ihris-personal-information#Practitioner.identifier.value"
+* item[0].item[3].item[0].item[1].text = "Value"
+* item[0].item[3].item[0].item[1].type = #string
+* item[0].item[3].item[0].item[1].required = false
+* item[0].item[3].item[0].item[1].repeats = false
+
+* item[0].item[3].item[1].linkId = "Practitioner.identifier[1]"
+* item[0].item[3].item[1].definition = "http://ihris.org/fhir/StructureDefinition/ihris-personal-information#Practitioner.identifier"
+* item[0].item[3].item[1].text = "Pension Number"
+* item[0].item[3].item[1].type = #group
+
+* item[0].item[3].item[1].item[0].linkId = "Practitioner.identifier[1].type"
+* item[0].item[3].item[1].item[0].definition = "http://ihris.org/fhir/StructureDefinition/ihris-personal-information#Practitioner.identifier.type"
+* item[0].item[3].item[1].item[0].text = "Type"
+* item[0].item[3].item[1].item[0].type = #choice
+* item[0].item[3].item[1].item[0].required = false
+* item[0].item[3].item[1].item[0].repeats = false
+* item[0].item[3].item[1].item[0].readOnly = true
+* item[0].item[3].item[1].item[0].answerOption.valueCoding = http://ihris.org/fhir/CodeSystem/ihris-ethiopia-identifier#pensionNumber
+* item[0].item[3].item[1].item[0].answerOption.initialSelected = true
+
+* item[0].item[3].item[1].item[1].linkId = "Practitioner.identifier[1].value"
+* item[0].item[3].item[1].item[1].definition = "http://ihris.org/fhir/StructureDefinition/ihris-personal-information#Practitioner.identifier.value"
+* item[0].item[3].item[1].item[1].text = "Value"
+* item[0].item[3].item[1].item[1].type = #string
+* item[0].item[3].item[1].item[1].required = false
+* item[0].item[3].item[1].item[1].repeats = false
+
+* item[0].item[3].item[2].linkId = "Practitioner.identifier[2]"
+* item[0].item[3].item[2].definition = "http://ihris.org/fhir/StructureDefinition/ihris-personal-information#Practitioner.identifier"
+* item[0].item[3].item[2].text = "Tin Number"
+* item[0].item[3].item[2].type = #group
+
+* item[0].item[3].item[2].item[0].linkId = "Practitioner.identifier[2].type"
+* item[0].item[3].item[2].item[0].definition = "http://ihris.org/fhir/StructureDefinition/ihris-personal-information#Practitioner.identifier.type"
+* item[0].item[3].item[2].item[0].text = "Type"
+* item[0].item[3].item[2].item[0].type = #choice
+* item[0].item[3].item[2].item[0].required = false
+* item[0].item[3].item[2].item[0].repeats = false
+* item[0].item[3].item[2].item[0].readOnly = true
+* item[0].item[3].item[2].item[0].answerOption.valueCoding = http://ihris.org/fhir/CodeSystem/ihris-ethiopia-identifier#tinNumber
+* item[0].item[3].item[2].item[0].answerOption.initialSelected = true
+
+* item[0].item[3].item[2].item[1].linkId = "Practitioner.identifier[2].value"
+* item[0].item[3].item[2].item[1].definition = "http://ihris.org/fhir/StructureDefinition/ihris-personal-information#Practitioner.identifier.value"
+* item[0].item[3].item[2].item[1].text = "Value"
+* item[0].item[3].item[2].item[1].type = #string
+* item[0].item[3].item[2].item[1].required = false
+* item[0].item[3].item[2].item[1].repeats = false
+
+* item[0].item[3].item[3].linkId = "Practitioner.identifier[3]"
+* item[0].item[3].item[3].definition = "http://ihris.org/fhir/StructureDefinition/ihris-personal-information#Practitioner.identifier"
+* item[0].item[3].item[3].text = "Driving License"
+* item[0].item[3].item[3].type = #group
+
+* item[0].item[3].item[3].item[0].linkId = "Practitioner.identifier[3].type"
+* item[0].item[3].item[3].item[0].definition = "http://ihris.org/fhir/StructureDefinition/ihris-personal-information#Practitioner.identifier.type"
+* item[0].item[3].item[3].item[0].text = "Type"
+* item[0].item[3].item[3].item[0].type = #choice
+* item[0].item[3].item[3].item[0].required = false
+* item[0].item[3].item[3].item[0].repeats = false
+* item[0].item[3].item[3].item[0].readOnly = true
+* item[0].item[3].item[3].item[0].answerOption.valueCoding = http://ihris.org/fhir/CodeSystem/ihris-ethiopia-identifier#drivingLicenseId
+* item[0].item[3].item[3].item[0].answerOption.initialSelected = true
+
+* item[0].item[3].item[3].item[1].linkId = "Practitioner.identifier[3].value"
+* item[0].item[3].item[3].item[1].definition = "http://ihris.org/fhir/StructureDefinition/ihris-personal-information#Practitioner.identifier.value"
+* item[0].item[3].item[3].item[1].text = "Value"
+* item[0].item[3].item[3].item[1].type = #string
+* item[0].item[3].item[3].item[1].required = false
+* item[0].item[3].item[3].item[1].repeats = false
+
+* item[0].item[3].item[4].linkId = "Practitioner.identifier[4]"
+* item[0].item[3].item[4].definition = "http://ihris.org/fhir/StructureDefinition/ihris-personal-information#Practitioner.identifier"
+* item[0].item[3].item[4].text = "Civil Service Id"
+* item[0].item[3].item[4].type = #group
+
+* item[0].item[3].item[4].item[0].linkId = "Practitioner.identifier[4].type"
+* item[0].item[3].item[4].item[0].definition = "http://ihris.org/fhir/StructureDefinition/ihris-personal-information#Practitioner.identifier.type"
+* item[0].item[3].item[4].item[0].text = "Type"
+* item[0].item[3].item[4].item[0].type = #choice
+* item[0].item[3].item[4].item[0].required = false
+* item[0].item[3].item[4].item[0].repeats = false
+* item[0].item[3].item[4].item[0].readOnly = true
+* item[0].item[3].item[4].item[0].answerOption.valueCoding = http://ihris.org/fhir/CodeSystem/ihris-ethiopia-identifier#civilServiceId
+* item[0].item[3].item[4].item[0].answerOption.initialSelected = true
+
+* item[0].item[3].item[4].item[1].linkId = "Practitioner.identifier[4].value"
+* item[0].item[3].item[4].item[1].definition = "http://ihris.org/fhir/StructureDefinition/ihris-personal-information#Practitioner.identifier.value"
+* item[0].item[3].item[4].item[1].text = "Value"
+* item[0].item[3].item[4].item[1].type = #string
+* item[0].item[3].item[4].item[1].required = false
+* item[0].item[3].item[4].item[1].repeats = false
+
+* item[0].item[3].item[5].linkId = "Practitioner.identifier[5]"
+* item[0].item[3].item[5].definition = "http://ihris.org/fhir/StructureDefinition/ihris-personal-information#Practitioner.identifier"
+* item[0].item[3].item[5].text = "License Id"
+* item[0].item[3].item[5].type = #group
+
+* item[0].item[3].item[5].item[0].linkId = "Practitioner.identifier[5].type"
+* item[0].item[3].item[5].item[0].definition = "http://ihris.org/fhir/StructureDefinition/ihris-personal-information#Practitioner.identifier.type"
+* item[0].item[3].item[5].item[0].text = "Type"
+* item[0].item[3].item[5].item[0].type = #choice
+* item[0].item[3].item[5].item[0].required = false
+* item[0].item[3].item[5].item[0].repeats = false
+* item[0].item[3].item[5].item[0].readOnly = true
+* item[0].item[3].item[5].item[0].answerOption.valueCoding = http://ihris.org/fhir/CodeSystem/ihris-ethiopia-identifier#licenseId
+* item[0].item[3].item[5].item[0].answerOption.initialSelected = true
+
+* item[0].item[3].item[5].item[1].linkId = "Practitioner.identifier[5].value"
+* item[0].item[3].item[5].item[1].definition = "http://ihris.org/fhir/StructureDefinition/ihris-personal-information#Practitioner.identifier.value"
+* item[0].item[3].item[5].item[1].text = "Value"
+* item[0].item[3].item[5].item[1].type = #string
+* item[0].item[3].item[5].item[1].required = false
+* item[0].item[3].item[5].item[1].repeats = false
+
+* item[0].item[4].linkId = "__Practitioner:telecom"
+* item[0].item[4].definition = "http://ihris.org/fhir/StructureDefinition/ihris-personal-information#Practitioner.telecom"
+* item[0].item[4].text = "Contacts|Person's Contact Information"
+* item[0].item[4].type = #group
+
+* item[0].item[4].item[0].linkId = "Practitioner.telecom[0]"
+* item[0].item[4].item[0].definition = "http://ihris.org/fhir/StructureDefinition/ihris-practitioner#Practitioner.telecom"
+* item[0].item[4].item[0].text = "Mobile Phone"
+* item[0].item[4].item[0].type = #group
+
+* item[0].item[4].item[0].item[0].linkId = "Practitioner.telecom[0].use"
+* item[0].item[4].item[0].item[0].definition = "http://ihris.org/fhir/StructureDefinition/ihris-practitioner#Practitioner.telecom.use"
+* item[0].item[4].item[0].item[0].text = "Telecom Use"
+* item[0].item[4].item[0].item[0].type = #choice
+* item[0].item[4].item[0].item[0].required = true
+* item[0].item[4].item[0].item[0].repeats = false
+* item[0].item[4].item[0].item[0].readOnly = true
+* item[0].item[4].item[0].item[0].answerOption.valueCoding = http://hl7.org/fhir/contact-point-use#mobile
+* item[0].item[4].item[0].item[0].answerOption.initialSelected = true
+
+* item[0].item[4].item[0].item[1].linkId = "Practitioner.telecom[0].system"
+* item[0].item[4].item[0].item[1].definition = "http://ihris.org/fhir/StructureDefinition/ihris-practitioner#Practitioner.telecom.system"
+* item[0].item[4].item[0].item[1].text = "Telecom System"
+* item[0].item[4].item[0].item[1].type = #choice
+* item[0].item[4].item[0].item[1].required = true
+* item[0].item[4].item[0].item[1].repeats = false
+* item[0].item[4].item[0].item[1].readOnly = true
+* item[0].item[4].item[0].item[1].answerOption.valueCoding = http://hl7.org/fhir/contact-point-system#phone
+* item[0].item[4].item[0].item[1].answerOption.initialSelected = true
+
+* item[0].item[4].item[0].item[2].linkId = "Practitioner.telecom[0].value"
+* item[0].item[4].item[0].item[2].definition = "http://ihris.org/fhir/StructureDefinition/ihris-personal-information#Practitioner.telecom.value"
+* item[0].item[4].item[0].item[2].text = "Mobile Phone"
+* item[0].item[4].item[0].item[2].type = #string
+* item[0].item[4].item[0].item[2].required = true
+* item[0].item[4].item[0].item[2].repeats = false
+
+* item[0].item[4].item[1].linkId = "Practitioner.telecom[1]"
+* item[0].item[4].item[1].definition = "http://ihris.org/fhir/StructureDefinition/ihris-personal-information#Practitioner.telecom"
+* item[0].item[4].item[1].text = "Work Email"
+* item[0].item[4].item[1].type = #group
+
+* item[0].item[4].item[1].item[0].linkId = "Practitioner.telecom[1].use"
+* item[0].item[4].item[1].item[0].definition = "http://ihris.org/fhir/StructureDefinition/ihris-personal-information#Practitioner.telecom.use"
+* item[0].item[4].item[1].item[0].text = "Telecom Use"
+* item[0].item[4].item[1].item[0].type = #choice
+* item[0].item[4].item[1].item[0].required = true
+* item[0].item[4].item[1].item[0].repeats = false
+* item[0].item[4].item[1].item[0].readOnly = true
+* item[0].item[4].item[1].item[0].answerOption.valueCoding = http://hl7.org/fhir/contact-point-use#work
+* item[0].item[4].item[1].item[0].answerOption.initialSelected = true
+
+* item[0].item[4].item[1].item[1].linkId = "Practitioner.telecom[1].system"
+* item[0].item[4].item[1].item[1].definition = "http://ihris.org/fhir/StructureDefinition/ihris-personal-information#Practitioner.telecom.system"
+* item[0].item[4].item[1].item[1].text = "Telecom System"
+* item[0].item[4].item[1].item[1].type = #choice
+* item[0].item[4].item[1].item[1].required = true
+* item[0].item[4].item[1].item[1].repeats = false
+* item[0].item[4].item[1].item[1].readOnly = true
+* item[0].item[4].item[1].item[1].answerOption.valueCoding = http://hl7.org/fhir/contact-point-system#email
+* item[0].item[4].item[1].item[1].answerOption.initialSelected = true
+
+* item[0].item[4].item[1].item[2].linkId = "Practitioner.telecom[1].value"
+* item[0].item[4].item[1].item[2].definition = "http://ihris.org/fhir/StructureDefinition/ihris-personal-information#Practitioner.telecom.value"
+* item[0].item[4].item[1].item[2].text = "Work Email"
+* item[0].item[4].item[1].item[2].type = #string
+* item[0].item[4].item[1].item[2].required = true
+* item[0].item[4].item[1].item[2].repeats = false
+
+* item[0].item[5].linkId = "__Practitioner:communication"
+* item[0].item[5].definition = "http://ihris.org/fhir/StructureDefinition/ihris-personal-information#Practitioner.communication"
+* item[0].item[5].text = "Language Details|Languages spoken"
+* item[0].item[5].type = #group
+
+* item[0].item[5].item[0].linkId = "Practitioner.communication[0]"
+* item[0].item[5].item[0].definition = "http://ihris.org/fhir/StructureDefinition/ihris-personal-information#Practitioner.communication"
+* item[0].item[5].item[0].text = "Language"
+* item[0].item[5].item[0].type = #choice
+* item[0].item[5].item[0].answerValueSet = "http://ihris.org/fhir/ValueSet/ihris-ethiopia-language-valueset"
+* item[0].item[5].item[0].required = false
+* item[0].item[5].item[0].repeats = true
+
+* item[0].item[6].linkId = "__Practitioner:dependents"
+* item[0].item[6].definition = "http://ihris.org/fhir/StructureDefinition/ihris-personal-information#Practitioner.extension:dependents"
+* item[0].item[6].text = "Dependents Details|Dependents"
+* item[0].item[6].type = #group
+
+* item[0].item[6].item[0].linkId = "Practitioner.extension.dependents[0]"
+* item[0].item[6].item[0].definition = "http://ihris.org/fhir/StructureDefinition/ihris-personal-information#Practitioner.extension:dependents"
+* item[0].item[6].item[0].text = "Dependents"
+* item[0].item[6].item[0].type = #string
+* item[0].item[6].item[0].required = false
+* item[0].item[6].item[0].repeats = true
+
+* item[0].item[7].linkId = "__Practitioner:educationalMajor"
+* item[0].item[7].definition = "http://ihris.org/fhir/StructureDefinition/ihris-personal-information#Practitioner.extension:educationalMajor"
+* item[0].item[7].text = "Education Details|Education major information"
+* item[0].item[7].type = #group
+
+* item[0].item[7].item[0].linkId = "Practitioner.extension.educationalMajor"
+* item[0].item[7].item[0].definition = "http://ihris.org/fhir/StructureDefinition/ihris-personal-information#Practitioner.extension:educationalMajor"
+* item[0].item[7].item[0].text = "Educational Major"
+* item[0].item[7].item[0].type = #choice
+* item[0].item[7].item[0].answerValueSet = "http://ihris.org/fhir/ValueSet/ihris-educational-major-valueset"
+* item[0].item[7].item[0].required = true
+* item[0].item[7].item[0].repeats = false
+
+* item[0].item[8].linkId = "__Practitioner:professionalLicenseCategory"
+* item[0].item[8].definition = "http://ihris.org/fhir/StructureDefinition/ihris-personal-information#Practitioner.extension:professionalLicenseCategory"
+* item[0].item[8].text = "License Details|Professional license category"
+* item[0].item[8].type = #group
+
+* item[0].item[8].item[0].linkId = "Practitioner.extension.professionalLicenseCategory[0]"
+* item[0].item[8].item[0].definition = "http://ihris.org/fhir/StructureDefinition/ihris-personal-information#Practitioner.extension:professionalLicenseCategory"
+* item[0].item[8].item[0].text = "Professional License Category"
+* item[0].item[8].item[0].type = #string
+* item[0].item[8].item[0].required = true
+* item[0].item[8].item[0].repeats = true
+
+* item[0].item[9].linkId = "__Practitioner:specialTraining"
+* item[0].item[9].definition = "http://ihris.org/fhir/StructureDefinition/ihris-personal-information#Practitioner.extension:specialTraining"
+* item[0].item[9].text = "Training Details|Special training information"
+* item[0].item[9].type = #group
+
+* item[0].item[9].item[0].linkId = "Practitioner.extension.specialTraining[0]"
+* item[0].item[9].item[0].definition = "http://ihris.org/fhir/StructureDefinition/ihris-personal-information#Practitioner.extension:specialTraining"
+* item[0].item[9].item[0].text = "Special Training"
+* item[0].item[9].item[0].type = #string
+* item[0].item[9].item[0].required = false
+* item[0].item[9].item[0].repeats = true
+
+* item[0].item[10].linkId = "__Practitioner:category"
+* item[0].item[10].definition = "http://ihris.org/fhir/StructureDefinition/ihris-personal-information#Practitioner.extension:category"
+* item[0].item[10].text = "Category Details|Category information"
+* item[0].item[10].type = #group
+
+* item[0].item[10].item[0].linkId = "Practitioner.extension.category"
+* item[0].item[10].item[0].definition = "http://ihris.org/fhir/StructureDefinition/ihris-personal-information#Practitioner.extension:category"
+* item[0].item[10].item[0].text = "Category"
+* item[0].item[10].item[0].type = #choice
+* item[0].item[10].item[0].answerValueSet = "http://ihris.org/fhir/ValueSet/ihris-category-valueset"
+* item[0].item[10].item[0].required = false
+* item[0].item[10].item[0].repeats = false
+
+* item[0].item[11].linkId = "__Practitioner:remarkNote"
+* item[0].item[11].definition = "http://ihris.org/fhir/StructureDefinition/ihris-personal-information#Practitioner.extension:remarkNote"
+* item[0].item[11].text = "Remarks|Remarks or notes"
+* item[0].item[11].type = #group
+
+* item[0].item[11].item[0].linkId = "Practitioner.remarkNote[0]"
+* item[0].item[11].item[0].definition = "http://ihris.org/fhir/StructureDefinition/ihris-personal-information#Practitioner.extension:remarkNote"
+* item[0].item[11].item[0].text = "Remark Note"
+* item[0].item[11].item[0].type = #text
+* item[0].item[11].item[0].required = false
+* item[0].item[11].item[0].repeats = true
+
+* item[1].linkId = "PractitionerRole"
+* item[1].definition = "http://ihris.org/fhir/StructureDefinition/ihris-job-description"
+* item[1].text = "Position|Position the person holds"
+* item[1].type = #group
+
+* item[1].item[0].linkId = "PractitionerRole.code"
+* item[1].item[0].definition = "http://ihris.org/fhir/StructureDefinition/ihris-job-description#PractitionerRole.code"
+* item[1].item[0].text = "Job Title"
+* item[1].item[0].type = #choice
+* item[1].item[0].answerValueSet = "http://ihris.org/fhir/ValueSet/ihris-job-ethiopia"
+* item[1].item[0].required = true
+* item[1].item[0].repeats = false
+
+* item[1].item[1].linkId = "PractitionerRole.location"
+* item[1].item[1].definition = "http://ihris.org/fhir/StructureDefinition/ihris-job-description#PractitionerRole.location"
+* item[1].item[1].text = "Duty Station"
+* item[1].item[1].type = #reference
+* item[1].item[1].required = false
+* item[1].item[1].repeats = false
+
+* item[1].item[2].linkId = "PractitionerRole.extension.shift"
+* item[1].item[2].definition = "http://ihris.org/fhir/StructureDefinition/ihris-job-description#PractitionerRole.extension:shift"
+* item[1].item[2].text = "Shift"
+* item[1].item[2].type = #choice
+* item[1].item[2].answerValueSet = "http://ihris.org/fhir/ValueSet/ihris-shift-valueset"
+* item[1].item[2].required = true
+* item[1].item[2].repeats = false
+
+* item[1].item[3].linkId = "PractitionerRole.extension.employmentStatus"
+* item[1].item[3].definition = "http://ihris.org/fhir/StructureDefinition/ihris-job-description#PractitionerRole.extension:employmentStatus"
+* item[1].item[3].text = "Employment Status"
+* item[1].item[3].type = #choice
+* item[1].item[3].answerValueSet = "http://ihris.org/fhir/ValueSet/ihris-employment-status-valueset"
+* item[1].item[3].required = true
+* item[1].item[3].repeats = false
+
+* item[1].item[4].linkId = "PractitionerRole.extension.jobType"
+* item[1].item[4].definition = "http://ihris.org/fhir/StructureDefinition/ihris-job-description#PractitionerRole.extension:jobType"
+* item[1].item[4].text = "Job Type"
+* item[1].item[4].type = #choice
+* item[1].item[4].answerValueSet = "http://ihris.org/fhir/ValueSet/ihris-job-type-valueset"
+* item[1].item[4].required = true
+* item[1].item[4].repeats = false
+
+* item[1].item[5].linkId = "PractitionerRole.extension.firstEmploymentDate"
+* item[1].item[5].definition = "http://ihris.org/fhir/StructureDefinition/ihris-job-description#PractitionerRole.extension:firstEmploymentDate"
+* item[1].item[5].text = "First Employment Date"
+* item[1].item[5].type = #date
+* item[1].item[5].required = true
+* item[1].item[5].repeats = false
+
+* item[1].item[6].linkId = "PractitionerRole.period.start"
+* item[1].item[6].definition = "http://ihris.org/fhir/StructureDefinition/ihris-job-description#PractitionerRole.period.start"
+* item[1].item[6].text = "Hire Date"
+* item[1].item[6].type = #date
+* item[1].item[6].required = true
+* item[1].item[6].repeats = false
+
+* item[1].item[7].linkId = "PractitionerRole.period.end"
+* item[1].item[7].definition = "http://ihris.org/fhir/StructureDefinition/ihris-job-description#PractitionerRole.period.end"
+* item[1].item[7].text = "End Date"
+* item[1].item[7].type = #date
+* item[1].item[7].required = true
+* item[1].item[7].repeats = false
+
+* item[1].item[8].linkId = "PractitionerRole.extension.jobInformationRemark"
+* item[1].item[8].definition = "http://ihris.org/fhir/StructureDefinition/ihris-job-description#PractitionerRole.extension:jobInformationRemark"
+* item[1].item[8].text = "Remark"
+* item[1].item[8].type = #text
+* item[1].item[8].required = true
+* item[1].item[8].repeats = false

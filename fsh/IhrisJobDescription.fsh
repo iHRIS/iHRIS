@@ -1,4 +1,4 @@
-Profile:        IhrisJobDescription
+Profile:        IhrisPractitionerRole
 Parent:         PractitionerRole
 Id:             ihris-job-description
 Title:          "iHRIS Job Description"
@@ -19,7 +19,7 @@ Description:    "iHRIS profile of Practitioner."
 * practitioner.reference ^label = "Health Worker"
 * healthcareService 0..0
 * telecom 0..0
-* location 1..1 MS
+* location MS
 * location ^label = "Duty Station"
 * location.reference ^label = "Duty Station"
 * code 1..* MS

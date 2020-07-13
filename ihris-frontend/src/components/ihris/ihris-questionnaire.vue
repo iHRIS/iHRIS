@@ -8,7 +8,7 @@
         color="primary"
         indeterminate
         ></v-progress-circular>
-      <v-btn @click="overlay = false">Close</v-btn>
+      <v-btn icon @click="overlay = false"><v-icon>mdi-close</v-icon></v-btn>
     </v-overlay>
 
     <v-navigation-drawer
