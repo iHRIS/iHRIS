@@ -38,7 +38,8 @@ export default {
         if ( this.slotProps.source.fromArray ) {
           this.source.data = this.slotProps.source.data
         } else {
-          this.source.data = this.$fhirpath.evaluate( this.slotProps.source.data, this.field )
+          let expression = this.field.substring( this.field.indexOf(':')+1 )
+          this.source.data = this.$fhirpath.evaluate( this.slotProps.source.data, expression )
         }
         //console.log("CC2",this.field,this.source)
       }

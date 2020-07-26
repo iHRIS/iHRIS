@@ -6,7 +6,7 @@
 <script>
 export default {
   name: "fhir-text",
-  props: [ "field", "label", "min", "max", "path", "edit" ],
+  props: [ "field", "label", "min", "max", "path", "edit", "sliceName", "slotProps" ],
   data: function() {
     return {
       source: { path: "", data: {} },

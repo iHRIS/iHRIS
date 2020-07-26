@@ -199,6 +199,8 @@ const processChildren = function( parent, obj, children ) {
           let sub = {}
           if ( child.profile ) {
             sub.url = child.profile
+          } else if ( field === "extension" && child.sliceName ) {
+            sub.url = child.sliceName
           }
           next[field].push( sub )
           next = sub
