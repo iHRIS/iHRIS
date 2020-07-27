@@ -20,7 +20,7 @@ Id:             ihris-task
 Title:          "iHRIS Task"
 Description:    "iHRIS Task to be assigned to task groups or roles."
 * ^context.type = #element
-* ^context.expression = IhrisRole
+* ^context.expression = "IhrisRole"
 * obeys ihris-task-instance-constraint
 * extension contains
       permission 1..1 MS and
@@ -41,7 +41,7 @@ Id:             ihris-role-primary
 Title:          "iHRIS Role Primary"
 Description:    "iHRIS flag for roles to indicate a primary role for assignment to users."
 * ^context[1].type = #element
-* ^context[1].expression = IhrisRole
+* ^context[1].expression = "IhrisRole"
 * value[x] only boolean
 * valueBoolean 1..1 
 
@@ -52,7 +52,7 @@ Description:    "iHRIS Assign Role to a user or other role."
 * ^context[0].type = #element
 * ^context[0].expression = "Person"
 * ^context[1].type = #element
-* ^context[1].expression = IhrisRole
+* ^context[1].expression = "IhrisRole"
 * value[x] only Reference
 * valueReference only Reference(IhrisRole)
 

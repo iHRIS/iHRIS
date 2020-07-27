@@ -5,7 +5,7 @@
 
 
     <v-content>
-      <router-view />
+      <router-view :key="$route.path"/>
     </v-content>
    
     <the-footer :footer="footer" />

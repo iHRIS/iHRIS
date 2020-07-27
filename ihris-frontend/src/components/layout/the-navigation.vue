@@ -12,7 +12,7 @@
         color="white--text"
         :class="personClass"
         :value="person"
-        @change="setClass()"
+        @change="setPerson()"
       >
         <template v-slot:activator>
           <v-list-item-title class="subtitle-1 font-weight-bold text-uppercase">People</v-list-item-title>
@@ -27,6 +27,25 @@
         </v-list-item>
         <v-list-item to="/resource/add/practitioner" active-class="primary darken-2" class="text-right" dense>
           <v-list-item-title>Add Person (old)</v-list-item-title>
+            <v-icon>mdi-chevron-right</v-icon>
+        </v-list-item>
+      </v-list-group>
+      <v-list-group
+        prepend-icon="mdi-account-multiple"
+        color="white--text"
+        :class="positionClass"
+        :value="position"
+        @change="setPosition()"
+      >
+        <template v-slot:activator>
+          <v-list-item-title class="subtitle-1 font-weight-bold text-uppercase">Position</v-list-item-title>
+        </template>
+        <v-list-item to="/resource/search/practitionerrole" active-class="primary darken-2" class="text-right" dense>
+          <v-list-item-title>Search Positions</v-list-item-title>
+          <v-icon>mdi-chevron-right</v-icon>
+        </v-list-item>
+        <v-list-item to="/resource/add/practitionerrole" active-class="primary darken-2" class="text-right" dense>
+          <v-list-item-title>Add Position</v-list-item-title>
             <v-icon>mdi-chevron-right</v-icon>
         </v-list-item>
       </v-list-group>
@@ -52,16 +71,26 @@ export default {
   data: function() {
     return {
       personClass: "",
-      person: false
+      person: false,
+      positionClass: "",
+      position: false
     }
   },
   methods: {
-    setClass: function() {
+    setPerson: function() {
       this.person = !this.person
       if ( this.person ) {
         this.personClass = "primary darken-2"
       } else {
         this.personClass = ""
+      }
+    },
+    setPosition: function() {
+      this.position = !this.position
+      if ( this.position ) {
+        this.positionClass = "primary darken-2"
+      } else {
+        this.positionClass = ""
       }
     }
   }

@@ -30,3 +30,5 @@ Description:    "iHRIS profile of Practitioner Role."
 * code.coding 1..1 MS
 * specialty 0..* MS
 * specialty ^label = "Specialty"
+* location 1..1 MS
+* location ^label = "Facility"

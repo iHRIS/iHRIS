@@ -13,7 +13,7 @@ Id:             ihris-page-display
 Title:          "iHRIS Page Display"
 Description:    "iHRIS Page Display details."
 * ^context.type = #element
-* ^context.expression = IhrisPage
+* ^context.expression = "IhrisPage"
 * extension contains
       resource 1..1 MS and
       search 1..* MS and
@@ -34,7 +34,7 @@ Id:             ihris-page-section
 Title:          "iHRIS Page Section"
 Description:    "iHRIS Page Section information."
 * ^context.type = #element
-* ^context.expression = IhrisPage
+* ^context.expression = "IhrisPage"
 * extension contains
       title 1..1 MS and
       description 1..1 MS and
@@ -84,7 +84,7 @@ Id:             ihris-page-section-resource
 Title:          "iHRIS Page Section Resource"
 Description:    "iHRIS Page Section Resource information."
 * ^context.type = #element
-* ^context.expression = IhrisPageSection
+* ^context.expression = "IhrisPageSection"
 
 Instance:       ihris-page-practitioner
 InstanceOf:     IhrisPage
@@ -134,3 +134,22 @@ Usage:          #example
 * extension[section][4].extension[resource].extension[column][0].extension[field].valueString = "PractitionerRole.code.coding[0]"
 * extension[section][4].extension[resource].extension[column][1].extension[header].valueString = "Start Date"
 * extension[section][4].extension[resource].extension[column][1].extension[field].valueString = "PractitionerRole.period.start"
+
+Instance:       ihris-page-practitionerrole
+InstanceOf:     IhrisPage
+Title:          "iHRIS PractitionerRole Page"
+Usage:          #example
+* code = IhrisResourceCodeSystem#page
+* extension[display].extension[resource].valueReference = Reference(StructureDefinition/ihris-practitioner-role)
+* extension[display].extension[search][0].valueString = "Job|code"
+* extension[display].extension[search][1].valueString = "Start Date|period.start"
+* extension[display].extension[search][2].valueString = "Practitioner|practitioner"
+* extension[display].extension[search][2].valueString = "Facility|location"
+* extension[display].extension[search][3].valueString = "Specialty|specialty"
+* extension[display].extension[filter][0].valueString = "Job|code"
+* extension[section][0].extension[title].valueString = "Position"
+* extension[section][0].extension[description].valueString = "Position details"
+* extension[section][0].extension[name].valueString = "Position"
+* extension[section][0].extension[field][0].valueString = "PractitionerRole.code"
+* extension[section][0].extension[field][1].valueString = "PractitionerRole.practitioner"
+* extension[section][0].extension[field][2].valueString = "PractitionerRole.location"

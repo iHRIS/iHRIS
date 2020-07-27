@@ -264,7 +264,7 @@ router.get('/page/:page', function(req, res) {
 
       let structureKeys = Object.keys( structure )
 
-      let searchTemplate = '<ihris-search page="'+req.params.page+'" label="'+structureKeys[0]+'" :fields="fields" :terms="terms" profile="'+resource.url+'">'+"\n"
+      let searchTemplate = '<ihris-search :key="$route.params.page" page="'+req.params.page+'" label="'+structureKeys[0]+'" :fields="fields" :terms="terms" profile="'+resource.url+'">'+"\n"
       for( let filter of filters ) {
           searchTemplate += '<ihris-search-term v-on:termChange="searchData"'
         if ( filter.length == 1 ) {
@@ -295,7 +295,7 @@ router.get('/page/:page', function(req, res) {
         }
         let sectionKeys = Object.keys(sections)
         let sectionMenu
-        vueOutput = '<ihris-resource :fhir-id="fhirId" :edit="isEdit" v-on:setEdit="setEdit($event)" profile="'+resource.url+'" page="'+req.params.page+'" field="'+fhir+'" title="'+sections[fhir].title+'"'
+        vueOutput = '<ihris-resource :fhir-id="fhirId" :edit="isEdit" v-on:setEdit="setEdit($event)" profile="'+resource.url+'" :key="$route.params.page+($route.params.id || \'\')" page="'+req.params.page+'" field="'+fhir+'" title="'+sections[fhir].title+'"'
         if ( sectionKeys.length > 1 ) {
           sectionMenu = sectionKeys.map( name => { return { name: name, title: sections[name].title, desc: sections[name].description, secondary: !!sections[name].resource } } )
           vueOutput += " :section-menu='"+JSON.stringify(sectionMenu).replace(/'/g, "\'")+"'"
