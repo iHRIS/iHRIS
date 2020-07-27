@@ -32,7 +32,13 @@ export default {
         if ( this.slotProps.source.fromArray ) {
           this.source.data = this.slotProps.source.data
         } else {
-          let expression = this.field.replace(/([^:]+):(.+)/, "$1.where(url='"+this.profile+"')")
+          let url
+          if ( this.profile ) {
+            url = this.profile
+          } else {
+            url = this.sliceName
+          }
+          let expression = this.field.replace(/([^:]+):(.+)/, "$1.where(url='"+url+"')")
           this.source.data = this.$fhirpath.evaluate( this.slotProps.source.data, expression )
         }
         //console.log(this.source)
