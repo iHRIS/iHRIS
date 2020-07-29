@@ -13,7 +13,16 @@ Description:    "iHRIS Report Details."
 * ^context.type = #element
 * ^context.expression = IhrisReport
 * extension contains
+      name 1..1 MS and
+      graphDefinition 1..1 MS and
       IhrisResourceRelationships named resourceRelationships 1..* MS
+* extension[name].value[x] only string
+* extension[name].valueString 1..1 MS
+* extension[name].valueString ^label = "Report Display Name"
+* extension[graphDefinition].value[x] only Reference
+* extension[graphDefinition].valueReference only Reference(GraphDefinition)
+* extension[graphDefinition].valueReference 1..1 MS
+* extension[graphDefinition].valueReference ^label = "Relationships Between Resources"
 
 Extension:      IhrisResourceRelationships
 Id:             ihris-resource-relationships
@@ -25,7 +34,7 @@ Description:    "iHRIS Resource Relationships"
       name 1..1 MS and
       field 1..* MS and
       filter 1..* MS and
-      query 0..1
+      query 0..1 MS
 * extension[name].value[x] only Reference
 * extension[name].valueReference only Reference(StructureDefinition)
 * extension[name].valueReference 1..1 MS

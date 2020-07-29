@@ -8,22 +8,24 @@ const structureDef = require('../modules/fhirStructureDefinition')
 const crypto = require('crypto')
 
 /* GET home page. */
-router.get('/site', function(req, res) {
+router.get('/site', function (req, res) {
   const defaultUser = nconf.get("user:loggedout") || "ihris-user-loggedout"
   let site = nconf.get("site")
-  if ( req.user ) {
+  if (req.user) {
     site.user = {}
-    if ( req.user.resource.id === defaultUser ) {
+    if (req.user.resource.id === defaultUser) {
       site.user.loggedin = false
     } else {
       site.user.loggedin = true
       site.user.name = req.user.resource.name[0].text
     }
   } else {
-    site.user = { loggedin: false }
+    site.user = {
+      loggedin: false
+    }
   }
   //site.updated = new Date().toISOString()
-  res.status(200).json( site )
+  res.status(200).json(site)
 })
 
 const camelToKebab = (code) => {
@@ -31,16 +33,16 @@ const camelToKebab = (code) => {
 }
 
 const getSortFunc = (sortArr) => {
-  return (a,b) => {
+  return (a, b) => {
     idxA = sortArr.indexOf(a)
     idxB = sortArr.indexOf(b)
-    if ( idxA === idxB ) {
+    if (idxA === idxB) {
       return 0
-    } else if ( idxA === -1 ) {
+    } else if (idxA === -1) {
       return 1
-    } else if ( idxB === -1 ) {
+    } else if (idxB === -1) {
       return -1
-    } else if ( idxA < idxB ) {
+    } else if (idxA < idxB) {
       return -1
     } else {
       return 1
@@ -48,55 +50,56 @@ const getSortFunc = (sortArr) => {
   }
 }
 
-const processFields = ( fields, base, order ) => {
+const processFields = (fields, base, order) => {
   let output = ""
-  let fieldKeys = Object.keys( fields )
-  if ( order[base] ) {
-    fieldKeys.sort( getSortFunc( order[base] ) )
+  let fieldKeys = Object.keys(fields)
+  if (order[base]) {
+    fieldKeys.sort(getSortFunc(order[base]))
   }
-  for( let field of fieldKeys ) {
-    if ( fields[field]["max"] === "0" ) {
+  for (let field of fieldKeys) {
+    if (fields[field]["max"] === "0") {
       continue
     }
-    if ( !fields[field].code ) {
-      console.log("No datatype for "+base+" "+field+" so skipping",base,field)
+    if (!fields[field].code) {
+      console.log("No datatype for " + base + " " + field + " so skipping", base, field)
       continue
     }
-    let eleName = camelToKebab( fields[field].code )
-    let attrs = [ "field", "sliceName", "targetProfile", "profile", "min", "max", "base-min", 
-      "base-max", "label", "path", "binding" ]
+    let eleName = camelToKebab(fields[field].code)
+    let attrs = ["field", "sliceName", "targetProfile", "profile", "min", "max", "base-min",
+      "base-max", "label", "path", "binding"
+    ]
     let isArray = false
-    if ( fields[field]["max"] !== "1" ) {
+    if (fields[field]["max"] !== "1") {
       isArray = true
-      output += "<ihris-array :edit=\"isEdit\" fieldType=\""+eleName+"\" :slotProps=\"slotProps\""
-      let arr_attrs = [ "field", "label", "min", "max", "id", "path", "profile", "targetProfile", "sliceName" ]
-      for ( let attr of arr_attrs ) {
-        if ( fields[field].hasOwnProperty(attr) ) {
-          output += " "+attr+"=\""+fields[field][attr]+"\""
+      output += "<ihris-array :edit=\"isEdit\" fieldType=\"" + eleName + "\" :slotProps=\"slotProps\""
+      let arr_attrs = ["field", "label", "min", "max", "id", "path", "profile", "targetProfile", "sliceName"]
+      for (let attr of arr_attrs) {
+        if (fields[field].hasOwnProperty(attr)) {
+          output += " " + attr + "=\"" + fields[field][attr] + "\""
         }
       }
       output += ">\n<template #default=\"slotProps\">\n"
     } else {
       attrs.unshift("id")
     }
-    output += "<fhir-"+eleName +" :slotProps=\"slotProps\" :edit=\"isEdit\""
-    for( let attr of attrs ) {
-      if ( fields[field].hasOwnProperty(attr) ) {
-        output += " "+attr+"=\""+fields[field][attr]+"\""
+    output += "<fhir-" + eleName + " :slotProps=\"slotProps\" :edit=\"isEdit\""
+    for (let attr of attrs) {
+      if (fields[field].hasOwnProperty(attr)) {
+        output += " " + attr + "=\"" + fields[field][attr] + "\""
       }
     }
     let subFields
-    if ( eleName === "reference" && fields[field].hasOwnProperty("fields") ) {
+    if (eleName === "reference" && fields[field].hasOwnProperty("fields")) {
       let refFields = fields[field].fields
       subFields = {}
-      let subAttrs = [ "id", "path", "label", "min", "max", "base-min", "base-max", "code" ]
-      for( let refField of Object.keys(refFields) ) {
+      let subAttrs = ["id", "path", "label", "min", "max", "base-min", "base-max", "code"]
+      for (let refField of Object.keys(refFields)) {
         subFields[refField] = {}
         //console.log("refLOOP",refField,refFields)
-        for( let attr of subAttrs ) {
-          if ( refFields[refField].hasOwnProperty(attr) ) {
-            if ( (attr === "id" || attr === "path") && fields[field].hasOwnProperty(attr) ) {
-              subFields[refField][attr] = refFields[refField][attr].replace( fields[field][attr]+".", "" )
+        for (let attr of subAttrs) {
+          if (refFields[refField].hasOwnProperty(attr)) {
+            if ((attr === "id" || attr === "path") && fields[field].hasOwnProperty(attr)) {
+              subFields[refField][attr] = refFields[refField][attr].replace(fields[field][attr] + ".", "")
             } else {
               subFields[refField][attr] = refFields[refField][attr]
             }
@@ -104,106 +107,214 @@ const processFields = ( fields, base, order ) => {
         }
       }
     }
-    if ( subFields ) {
-      output += " :sub-fields='" + JSON.stringify( subFields ).replace(/'/g, "\'") +"'"
+    if (subFields) {
+      output += " :sub-fields='" + JSON.stringify(subFields).replace(/'/g, "\'") + "'"
     }
     output += ">\n"
 
-    if ( !subFields && fields[field].hasOwnProperty("fields") ) {
+    if (!subFields && fields[field].hasOwnProperty("fields")) {
       output += "<template #default=\"slotProps\">\n"
-      output += processFields( fields[field].fields, base+"."+fields[field], order )
+      output += processFields(fields[field].fields, base + "." + fields[field], order)
       output += "</template>\n"
     }
 
-    output += "</fhir-"+eleName+">\n" 
-    if ( isArray ) {
+    output += "</fhir-" + eleName + ">\n"
+    if (isArray) {
       output += "</template>\n</ihris-array>\n"
     }
   }
   return output
 }
 
-const getDefinition = ( resource ) => {
+const getDefinition = (resource) => {
   let structureDef = resource.split('/')
-  return fhirAxios.read( structureDef[0], structureDef[1] )
+  return fhirAxios.read(structureDef[0], structureDef[1])
 }
-const setupOrder = ( fields, sectionOrder ) => {
-  for( let ord of fields ) {
+const setupOrder = (fields, sectionOrder) => {
+  for (let ord of fields) {
     let lastDot = ord.lastIndexOf('.')
-    let ordId = ord.substring(0,lastDot)
-    let ordField = ord.substring(lastDot+1)
-    if ( !sectionOrder.hasOwnProperty(ordId) ) {
+    let ordId = ord.substring(0, lastDot)
+    let ordField = ord.substring(lastDot + 1)
+    if (!sectionOrder.hasOwnProperty(ordId)) {
       sectionOrder[ordId] = []
     }
     sectionOrder[ordId].push(ordField)
   }
 }
 
-router.get('/page/:page', function(req, res) {
-  let page = "ihris-page-"+req.params.page
-  if ( !req.user ) {
-    return res.status(401).json( outcomes.NOTLOGGEDIN)
+const parseGraphDefinition = (resource, graphData) => {
+  let hiddenFields = {
+    fields: []
   }
-  let allowed = req.user.hasPermissionByName( "read", "Basic", page )
-  // Limited access to these don't make sense so not allowing it for now
-  if ( allowed !== true ) {
-    return res.status(401).json( outcomes.DENIED )
+  if (resource.start) {
+    hiddenFields.resourceType = resource.start
+  } else {
+    hiddenFields.resourceType = resource.type
   }
+  for (let link of resource.link) {
+    hiddenFields.fields.push([link.path, link.path])
+    for (let target of link.target) {
+      let linkElement, linkTo
+      if (target.params) {
+        linkElement = target.params
+      } else {
+        linkElement = target.type + '.id'
+      }
+      linkTo = link.path
+      graphData.links.push({
+        resourceType: target.type,
+        linkElement,
+        linkTo
+      })
+      if (target.link) {
+        parseGraphDefinition(target, graphData)
+      }
+    }
+  }
+  graphData.hiddenFields.push(hiddenFields)
+}
 
-  fhirAxios.read( "Basic", page ).then ( async (resource) => {
-    let pageDisplay = resource.extension.find( ext => ext.url === "http://ihris.org/fhir/StructureDefinition/ihris-page-display" )
-    let pageResource = pageDisplay.extension.find( ext => ext.url === "resource" ).valueReference.reference
+router.get('/report/:report', function (req, res) {
+  let report = "ihris-report-" + req.params.report
+  // if (!req.user) {
+  //   return res.status(401).json(outcomes.NOTLOGGEDIN)
+  // }
+  // let allowed = req.user.hasPermissionByName("read", "Basic", report)
+  // // Limited access to these don't make sense so not allowing it for now
+  // if (allowed !== true) {
+  //   return res.status(401).json(outcomes.DENIED)
+  // }
+  fhirAxios.read("Basic", report).then(async (resource) => {
+    let reportDetails = resource.extension.find((ext) => {
+      return ext.url === "http://ihris.org/fhir/StructureDefinition/ihris-report-details"
+    })
+    if (!reportDetails) {
+      return res.status(500).send()
+    }
+    let reportName
+    let queryParam = '?'
+    let reportData = {
+      fieldsDetails: []
+    }
+    for (let extensions of reportDetails.extension) {
+      if (extensions.url === 'name') {
+        reportName = extensions.valueString
+      } else if (extensions.url === "http://ihris.org/fhir/StructureDefinition/ihris-resource-relationships") {
+        let fieldsDetails = {
+          fields: []
+        }
+        for (let relData of extensions.extension) {
+          if (relData.url === 'query') {
+            if (!queryParam) {
+              queryParam = '?' + relData.valueString
+            } else {
+              queryParam += relData.valueString + '&'
+            }
+          }
+          if (relData.url === 'name') {
+            fieldsDetails.resourceType = relData.valueString
+          } else if (relData.url === 'field') {
+            let fieldData = relData.valueString.split('|')
+            fieldsDetails.fields.push([fieldData[0], fieldData[1]])
+          }
+        }
+        reportData.fieldsDetails.push(fieldsDetails)
+      }
+    }
+    let template = `<ihris-report :key="$route.params.report" page="${req.params.report}" label="${reportName}" :reportData="reportData" :terms="terms" :dataURL="dataURL"></ihris-report>`
+
+    fhirAxios.read("GraphDefinition", report).then(async (resource) => {
+      let graphData = {
+        hiddenFields: [],
+        links: []
+      }
+      parseGraphDefinition(resource, graphData)
+      // merge graphData to reportData
+      for (let hiddenFields of graphData.hiddenFields) {
+        for (let index in reportData.fieldsDetails) {
+          if (reportData.fieldsDetails[index].resourceType === hiddenFields.resourceType) {
+            reportData.fieldsDetails[index].hiddenFields = hiddenFields.fields
+          }
+        }
+      }
+      let dataURL = resource.start + queryParam
+      reportData.resourcesConnections = graphData.links
+      reportData.primaryResource = resource.start
+      console.log(JSON.stringify(reportData, 0, 2));
+      return res.status(200).json({
+        reportTemplate: template,
+        reportData: reportData,
+        dataURL: dataURL
+      })
+    })
+  })
+})
+
+router.get('/page/:page', function (req, res) {
+  let page = "ihris-page-" + req.params.page
+  // if (!req.user) {
+  //   return res.status(401).json(outcomes.NOTLOGGEDIN)
+  // }
+  // let allowed = req.user.hasPermissionByName("read", "Basic", page)
+  // // Limited access to these don't make sense so not allowing it for now
+  // if (allowed !== true) {
+  //   return res.status(401).json(outcomes.DENIED)
+  // }
+
+  fhirAxios.read("Basic", page).then(async (resource) => {
+    let pageDisplay = resource.extension.find(ext => ext.url === "http://ihris.org/fhir/StructureDefinition/ihris-page-display")
+    let pageResource = pageDisplay.extension.find(ext => ext.url === "resource").valueReference.reference
     /*
     let order = []
     try {
       order = pageDisplay.extension.filter( ext => ext.url === "order" ).map( ext => ext.valueString )
     } catch(err) { }
     */
-    let search = [ 'id' ]
+    let search = ['id']
     try {
-      search = pageDisplay.extension.filter( ext => ext.url === "search" ).map( ext => ext.valueString.split('|') )
-    } catch(err) { }
+      search = pageDisplay.extension.filter(ext => ext.url === "search").map(ext => ext.valueString.split('|'))
+    } catch (err) {}
     let filters = []
     try {
-      filters = pageDisplay.extension.filter( ext => ext.url === "filter" ).map( ext => ext.valueString.split('|') )
-    } catch(err) { }
-    let pageSections = resource.extension.filter( ext => ext.url === "http://ihris.org/fhir/StructureDefinition/ihris-page-section" )
+      filters = pageDisplay.extension.filter(ext => ext.url === "filter").map(ext => ext.valueString.split('|'))
+    } catch (err) {}
+    let pageSections = resource.extension.filter(ext => ext.url === "http://ihris.org/fhir/StructureDefinition/ihris-page-section")
 
     //console.log(filters)
     //console.log(search)
     let sections = {}
     let sectionMap = {}
-    for( let section of pageSections ) {
+    for (let section of pageSections) {
       let title, description, name, resourceExt, resource, linkfield, searchfield
       let fields = []
       let columns = []
       try {
-        title = section.extension.find( ext => ext.url === "title" ).valueString
-      } catch(err) { }
+        title = section.extension.find(ext => ext.url === "title").valueString
+      } catch (err) {}
       try {
-        description = section.extension.find( ext => ext.url === "description" ).valueString
-      } catch(err) { }
+        description = section.extension.find(ext => ext.url === "description").valueString
+      } catch (err) {}
       try {
-        name = section.extension.find( ext => ext.url === "name" ).valueString
-      } catch(err) { }
+        name = section.extension.find(ext => ext.url === "name").valueString
+      } catch (err) {}
       try {
-        fields = section.extension.filter( ext => ext.url === "field" ).map( ext => ext.valueString )
-      } catch(err) { }
+        fields = section.extension.filter(ext => ext.url === "field").map(ext => ext.valueString)
+      } catch (err) {}
       try {
-        resourceExt = section.extension.find( ext => ext.url === "resource" ).extension
+        resourceExt = section.extension.find(ext => ext.url === "resource").extension
 
-        resource = resourceExt.find( ext => ext.url === "resource" ).valueReference.reference
-        if ( resource ) {
-          linkfield = resourceExt.find( ext => ext.url === "linkfield" ).valueString
+        resource = resourceExt.find(ext => ext.url === "resource").valueReference.reference
+        if (resource) {
+          linkfield = resourceExt.find(ext => ext.url === "linkfield").valueString
           try {
-            searchfield = resourceExt.find( ext => ext.url === "searchfield" ).valueString
-          } catch(err) { }
-          let columnsExt = resourceExt.filter( ext => ext.url === "column" )
-          for ( let column of columnsExt ) {
+            searchfield = resourceExt.find(ext => ext.url === "searchfield").valueString
+          } catch (err) {}
+          let columnsExt = resourceExt.filter(ext => ext.url === "column")
+          for (let column of columnsExt) {
             try {
-              let header = column.extension.find( ext => ext.url === "header" ).valueString
-              let field = column.extension.find( ext => ext.url === "field" ).valueString
-              if ( header && field ) {
+              let header = column.extension.find(ext => ext.url === "header").valueString
+              let field = column.extension.find(ext => ext.url === "field").valueString
+              if (header && field) {
                 /*
                 let definition = await structureDef.getFieldDefinition( resource +"#"+ field )
                 let binding = ""
@@ -216,17 +327,24 @@ router.get('/page/:page', function(req, res) {
                   }
                 }
                 */
-                columns.push( {text: header, value: field} )
+                columns.push({
+                  text: header,
+                  value: field
+                })
               }
-            } catch(err) { console.log("ERR",err) }
+            } catch (err) {
+              console.log("ERR", err)
+            }
           }
         }
 
-      } catch(err) { console.log("ERR2",err) }
+      } catch (err) {
+        console.log("ERR2", err)
+      }
 
       let sectionOrder = {}
-      setupOrder( fields, sectionOrder )
-      for( let field of fields ) {
+      setupOrder(fields, sectionOrder)
+      for (let field of fields) {
         sectionMap[field] = name
       }
       sections[name] = {
@@ -239,38 +357,40 @@ router.get('/page/:page', function(req, res) {
         searchfield: searchfield,
         columns: columns,
         elements: {}
-      } 
+      }
     }
     let sdOrder = {}
 
 
-    getDefinition( pageResource ).then( async (resource) => {
-      if ( allowed !== true ) {
-        // Can't think of a reason to have this level of permissions for 
-        // StructureDefinitions, but just in case...
-        let objAllowed = req.user.hasPermissionByObject( "read", resource )
-        if ( objAllowed !== true ) {
-          // But don't allow field level restrictions.  It will complicated the requirements
-          return res.status(401).json( outcomes.DENIED )
+    getDefinition(pageResource).then(async (resource) => {
+      // if (allowed !== true) {
+      //   // Can't think of a reason to have this level of permissions for
+      //   // StructureDefinitions, but just in case...
+      //   let objAllowed = req.user.hasPermissionByObject("read", resource)
+      //   if (objAllowed !== true) {
+      //     // But don't allow field level restrictions.  It will complicated the requirements
+      //     return res.status(401).json(outcomes.DENIED)
+      //   }
+      // }
+
+      if (!resource.hasOwnProperty("snapshot")) {
+        let outcome = {
+          ...outcomes.ERROR
         }
-      }
-
-      if ( !resource.hasOwnProperty("snapshot") ) {
-        let outcome = { ...outcomes.ERROR }
         outcome.issue[0].diagnostics = "StructureDefinitions must be saved with a snapshop."
-        return res.status(404).json( outcome )
+        return res.status(404).json(outcome)
       }
-      const structure = fhirConfig.parseStructureDefinition( resource )
+      const structure = fhirConfig.parseStructureDefinition(resource)
 
-      let structureKeys = Object.keys( structure )
+      let structureKeys = Object.keys(structure)
 
-      let searchTemplate = '<ihris-search :key="$route.params.page" page="'+req.params.page+'" label="'+structureKeys[0]+'" :fields="fields" :terms="terms" profile="'+resource.url+'">'+"\n"
-      for( let filter of filters ) {
-          searchTemplate += '<ihris-search-term v-on:termChange="searchData"'
-        if ( filter.length == 1 ) {
-          searchTemplate += ' label="Search" expression="'+filter[0]+'"'
+      let searchTemplate = '<ihris-search :key="$route.params.page" page="' + req.params.page + '" label="' + structureKeys[0] + '" :fields="fields" :terms="terms" profile="' + resource.url + '">' + "\n"
+      for (let filter of filters) {
+        searchTemplate += '<ihris-search-term v-on:termChange="searchData"'
+        if (filter.length == 1) {
+          searchTemplate += ' label="Search" expression="' + filter[0] + '"'
         } else {
-          searchTemplate += ' label="'+filter[0]+'" expression="'+filter[1]+'"'
+          searchTemplate += ' label="' + filter[0] + '" expression="' + filter[1] + '"'
         }
         searchTemplate += "></ihris-search-term>\n"
       }
@@ -279,8 +399,8 @@ router.get('/page/:page', function(req, res) {
 
 
       let vueOuput = "<template>"
-      for ( let fhir of structureKeys ) {
-        if ( !sections.hasOwnProperty(fhir) ) {
+      for (let fhir of structureKeys) {
+        if (!sections.hasOwnProperty(fhir)) {
           sections[fhir] = {
             title: fhir,
             description: "",
@@ -295,44 +415,51 @@ router.get('/page/:page', function(req, res) {
         }
         let sectionKeys = Object.keys(sections)
         let sectionMenu
-        vueOutput = '<ihris-resource :fhir-id="fhirId" :edit="isEdit" v-on:setEdit="setEdit($event)" profile="'+resource.url+'" :key="$route.params.page+($route.params.id || \'\')" page="'+req.params.page+'" field="'+fhir+'" title="'+sections[fhir].title+'"'
-        if ( sectionKeys.length > 1 ) {
-          sectionMenu = sectionKeys.map( name => { return { name: name, title: sections[name].title, desc: sections[name].description, secondary: !!sections[name].resource } } )
-          vueOutput += " :section-menu='"+JSON.stringify(sectionMenu).replace(/'/g, "\'")+"'"
+        vueOutput = '<ihris-resource :fhir-id="fhirId" :edit="isEdit" v-on:setEdit="setEdit($event)" profile="' + resource.url + '" :key="$route.params.page+($route.params.id || \'\')" page="' + req.params.page + '" field="' + fhir + '" title="' + sections[fhir].title + '"'
+        if (sectionKeys.length > 1) {
+          sectionMenu = sectionKeys.map(name => {
+            return {
+              name: name,
+              title: sections[name].title,
+              desc: sections[name].description,
+              secondary: !!sections[name].resource
+            }
+          })
+          vueOutput += " :section-menu='" + JSON.stringify(sectionMenu).replace(/'/g, "\'") + "'"
         }
-        vueOutput += '><template #default=\"slotProps\">'+"\n"
+        vueOutput += '><template #default=\"slotProps\">' + "\n"
 
-        if ( structure[fhir].hasOwnProperty("fields") ) {
-          let fieldKeys = Object.keys( structure[fhir].fields )
-          for( let field of fieldKeys ) {
-            if ( sectionMap.hasOwnProperty( structure[fhir].fields[field].id ) ) {
-              sections[ sectionMap[ structure[fhir].fields[field].id ] ].elements[field] = structure[fhir].fields[field]
+        if (structure[fhir].hasOwnProperty("fields")) {
+          let fieldKeys = Object.keys(structure[fhir].fields)
+          for (let field of fieldKeys) {
+            if (sectionMap.hasOwnProperty(structure[fhir].fields[field].id)) {
+              sections[sectionMap[structure[fhir].fields[field].id]].elements[field] = structure[fhir].fields[field]
             } else {
-              sections[ fhir ].elements[field] = structure[fhir].fields[field]
+              sections[fhir].elements[field] = structure[fhir].fields[field]
             }
           }
         }
-        for ( let name of sectionKeys ) {
-          vueOutput += "<ihris-section :slotProps=\"slotProps\" :edit=\"isEdit\" name=\""+name+"\" title=\""+sections[name].title+"\" description=\""+sections[name].description+"\" :secondary=\""+!!sections[name].resource+"\">\n<template #default=\"slotProps\">\n"
-          if ( sections[name].resource ) {
-            let secondary = await getDefinition( sections[name].resource )
+        for (let name of sectionKeys) {
+          vueOutput += "<ihris-section :slotProps=\"slotProps\" :edit=\"isEdit\" name=\"" + name + "\" title=\"" + sections[name].title + "\" description=\"" + sections[name].description + "\" :secondary=\"" + !!sections[name].resource + "\">\n<template #default=\"slotProps\">\n"
+          if (sections[name].resource) {
+            let secondary = await getDefinition(sections[name].resource)
 
-            if ( !secondary.hasOwnProperty("snapshot") ) {
+            if (!secondary.hasOwnProperty("snapshot")) {
               console.log("StructureDefinitions (", sections[name].resource, ") must be saved with a snapshop.")
               continue
             }
-            const secondaryStructure = fhirConfig.parseStructureDefinition( secondary )
+            const secondaryStructure = fhirConfig.parseStructureDefinition(secondary)
             let secondaryOrder = {}
-            setupOrder( sections[name].fields, secondaryOrder )
-            let secondaryKeys = Object.keys( secondaryStructure )
-            for ( let second_fhir of secondaryKeys ) {
-              vueOutput += '<ihris-secondary :edit="isEdit" :link-id="fhirId" profile="'+secondary.url
-                +'" field="'+second_fhir
-                +'" title="'+sections[name].title
-                +'" link-field="'+sections[name].linkfield
-                +'" search-field="'+(sections[name].searchfield || "")
-                +'" :columns=\''+JSON.stringify(sections[name].columns).replace(/'/g, "\'")
-                +'\'><template #default="slotProps">' + "\n"
+            setupOrder(sections[name].fields, secondaryOrder)
+            let secondaryKeys = Object.keys(secondaryStructure)
+            for (let second_fhir of secondaryKeys) {
+              vueOutput += '<ihris-secondary :edit="isEdit" :link-id="fhirId" profile="' + secondary.url +
+                '" field="' + second_fhir +
+                '" title="' + sections[name].title +
+                '" link-field="' + sections[name].linkfield +
+                '" search-field="' + (sections[name].searchfield || "") +
+                '" :columns=\'' + JSON.stringify(sections[name].columns).replace(/'/g, "\'") +
+                '\'><template #default="slotProps">' + "\n"
               //vueOutput += processFields( secondaryStructure[second_fhir].fields, second_fhir, secondaryOrder )
               vueOutput += "</template></ihris-secondary>"
             }
@@ -340,132 +467,140 @@ router.get('/page/:page', function(req, res) {
 
 
           } else {
-            vueOutput += processFields( sections[name].elements, fhir, sections[name].order )
+            vueOutput += processFields(sections[name].elements, fhir, sections[name].order)
           }
           vueOutput += "</template></ihris-section>\n"
         }
 
-        vueOutput += '</template></ihris-resource>'+"\n"
+        vueOutput += '</template></ihris-resource>' + "\n"
       }
       vueOuput = "</template>"
       console.log(vueOutput)
-      return res.status(200).json({ search: searchTemplate, searchData: search, template: vueOutput })
-    } ).catch( (err) => {
+      return res.status(200).json({
+        search: searchTemplate,
+        searchData: search,
+        template: vueOutput
+      })
+    }).catch((err) => {
       console.log(err)
-      return res.status( err.response.status ).json( err.response.data )
-    } )
+      return res.status(err.response.status).json(err.response.data)
+    })
 
-  } ).catch( (err) => {
+  }).catch((err) => {
     console.log(err)
-    return res.status( err.response.status ).json( err.response.data )
-  } )
+    return res.status(err.response.status).json(err.response.data)
+  })
 
-} )
+})
 
-const processQuestionnaireItems = async ( items ) => {
+const processQuestionnaireItems = async (items) => {
   let vueOutput = ""
-  for( let item of items ) {
-    if ( item.repeats && !item.readOnly ) {
-      vueOutput += "<ihris-array :edit=\"isEdit\" path=\"" + item.linkId + "\" label=\""
-        + item.text + "\" max=\"*\" min=\"" + ( item.required ? "1" : "0" ) + "\"><template #default=\"slotProps\">\n"
+  for (let item of items) {
+    if (item.repeats && !item.readOnly) {
+      vueOutput += "<ihris-array :edit=\"isEdit\" path=\"" + item.linkId + "\" label=\"" +
+        item.text + "\" max=\"*\" min=\"" + (item.required ? "1" : "0") + "\"><template #default=\"slotProps\">\n"
     }
-    if ( item.type === "group" ) {
-      let label = item.text.split('|',2)
+    if (item.type === "group") {
+      let label = item.text.split('|', 2)
       vueOutput += '<ihris-questionnaire-group :edit=\"isEdit\" path="' + item.linkId + '" label="' + label[0] + '"'
-      if ( label.length === 2 ) {
+      if (label.length === 2) {
         vueOutput += ' description="' + label[1] + '"'
       }
       vueOutput += ">\n\n"
-      vueOutput += await processQuestionnaireItems( item.item )
+      vueOutput += await processQuestionnaireItems(item.item)
       vueOutput += "</ihris-questionnaire-group>\n"
-    } else if ( item.readOnly ) {
-      vueOutput += "<ihris-hidden path=\"" + item.linkId + "\" label=\""
-        + item.text + "\""
-      if ( item.answerOption[0].initialSelected ) {
-        let answerTypes = Object.keys( item.answerOption[0] )
-        for( let answerType of answerTypes ) {
-          if ( answerType.startsWith("value") ) {
-            vueOutput += " :hiddenValue='" + JSON.stringify( item.answerOption[0][answerType] ).replace(/'/g, "\'") 
-              + "' hiddenType='" + answerType.substring(5) + "'"
+    } else if (item.readOnly) {
+      vueOutput += "<ihris-hidden path=\"" + item.linkId + "\" label=\"" +
+        item.text + "\""
+      if (item.answerOption[0].initialSelected) {
+        let answerTypes = Object.keys(item.answerOption[0])
+        for (let answerType of answerTypes) {
+          if (answerType.startsWith("value")) {
+            vueOutput += " :hiddenValue='" + JSON.stringify(item.answerOption[0][answerType]).replace(/'/g, "\'") +
+              "' hiddenType='" + answerType.substring(5) + "'"
             break
           }
         }
       }
       vueOutput += "></ihris-hidden>\n"
     } else {
-     vueOutput += "<fhir-" + item.type + " :edit=\"isEdit\" path=\"" + item.linkId + "\""
+      vueOutput += "<fhir-" + item.type + " :edit=\"isEdit\" path=\"" + item.linkId + "\""
 
-      if ( item.type === "reference" && item.definition ) {
+      if (item.type === "reference" && item.definition) {
         let field = await structureDef.getFieldDefinition(item.definition)
-        if ( field && field.type && field.type[0] && field.type[0].targetProfile ) {
-          vueOutput += " targetProfile=\""+field.type[0].targetProfile[0]+"\""
+        if (field && field.type && field.type[0] && field.type[0].targetProfile) {
+          vueOutput += " targetProfile=\"" + field.type[0].targetProfile[0] + "\""
         }
       }
-      if ( item.hasOwnProperty("text") ) {
-        vueOutput += " label=\""+ item.text + "\""
+      if (item.hasOwnProperty("text")) {
+        vueOutput += " label=\"" + item.text + "\""
       }
-      if ( item.hasOwnProperty("answerValueSet") ) {
-        vueOutput += " binding=\""+ item.answerValueSet + "\""
+      if (item.hasOwnProperty("answerValueSet")) {
+        vueOutput += " binding=\"" + item.answerValueSet + "\""
       }
-      let attrs = [ "required" ]
-      for( let attr of attrs ) {
-        if ( item.hasOwnProperty(attr) ) {
-          vueOutput += " " + attr + "=\""+ item[attr] + "\""
+      let attrs = ["required"]
+      for (let attr of attrs) {
+        if (item.hasOwnProperty(attr)) {
+          vueOutput += " " + attr + "=\"" + item[attr] + "\""
         }
       }
-      vueOutput += "></fhir-" + item.type +">\n"
+      vueOutput += "></fhir-" + item.type + ">\n"
 
     }
-    if ( item.repeats && !item.readOnly ) {
+    if (item.repeats && !item.readOnly) {
       vueOutput += "</template></ihris-array>\n"
     }
   }
   return vueOutput
 }
 
-router.get('/questionnaire/:questionnaire', function(req, res) {
-  if ( !req.user ) {
-    return res.status(401).json( outcomes.NOTLOGGEDIN)
+router.get('/questionnaire/:questionnaire', function (req, res) {
+  if (!req.user) {
+    return res.status(401).json(outcomes.NOTLOGGEDIN)
   }
-  let allowed = req.user.hasPermissionByName( "read", "Questionnaire", req.params.questionnaire )
+  let allowed = req.user.hasPermissionByName("read", "Questionnaire", req.params.questionnaire)
   // Limited access to these don't make sense so not allowing it for now
-  if ( allowed !== true ) {
-    return res.status(401).json( outcomes.DENIED )
+  if (allowed !== true) {
+    return res.status(401).json(outcomes.DENIED)
   }
 
 
-  fhirAxios.read( "Questionnaire", req.params.questionnaire ).then ( async (resource) => {
+  fhirAxios.read("Questionnaire", req.params.questionnaire).then(async (resource) => {
 
 
-    let vueOutput = '<ihris-questionnaire :edit=\"isEdit\" :view-page="viewPage" url="' + resource.url + '" id="' + resource.id 
-      + '" title="' + resource.title 
-      + '" description="' + resource.description + '" purpose="' + resource.purpose 
-      + '"__SECTIONMENU__>' + "\n"
+    let vueOutput = '<ihris-questionnaire :edit=\"isEdit\" :view-page="viewPage" url="' + resource.url + '" id="' + resource.id +
+      '" title="' + resource.title +
+      '" description="' + resource.description + '" purpose="' + resource.purpose +
+      '"__SECTIONMENU__>' + "\n"
 
-    
+
     let sectionMenu = []
-    for ( let item of resource.item ) {
-      if ( item.type === "group" ) {
+    for (let item of resource.item) {
+      if (item.type === "group") {
         let md5sum = crypto.createHash('md5')
         md5sum.update(item.text)
         md5sum.update(Math.random().toString(36).substring(2))
         let sectionId = md5sum.digest('hex')
 
-        let label = item.text.split('|',2)
+        let label = item.text.split('|', 2)
         vueOutput += '<ihris-questionnaire-section id="' + sectionId + '" path="' + item.linkId + '" label="' + label[0] + '"'
-        if ( label.length === 2 ) {
+        if (label.length === 2) {
           vueOutput += ' description="' + label[1] + '"'
         }
-        sectionMenu.push( { title: label[0], desc: label[1] || "", id: sectionId } )
+        sectionMenu.push({
+          title: label[0],
+          desc: label[1] || "",
+          id: sectionId
+        })
         vueOutput += ">\n"
-        vueOutput += await processQuestionnaireItems( item.item )
+        vueOutput += await processQuestionnaireItems(item.item)
         vueOutput += "</ihris-questionnaire-section>\n"
       } else {
         console.log("Invalid entry for questionnaire.  All top level items must be type group.")
       }
     }
 
-    if ( sectionMenu.length < 2 ) {
+    if (sectionMenu.length < 2) {
       vueOutput = vueOutput.replace("__SECTIONMENU__", "")
     } else {
       vueOutput = vueOutput.replace("__SECTIONMENU__", " :section-menu='" + JSON.stringify(sectionMenu).replace(/'/g, "\'") + "'")
@@ -473,13 +608,15 @@ router.get('/questionnaire/:questionnaire', function(req, res) {
     vueOutput += "</ihris-questionnaire>\n"
 
     console.log(vueOutput)
-    return res.status(200).json({ template: vueOutput })
+    return res.status(200).json({
+      template: vueOutput
+    })
 
-  } ).catch( (err) => {
+  }).catch((err) => {
     console.log(err)
-    return res.status( err.response.status ).json( err.response.data )
-  } )
+    return res.status(err.response.status).json(err.response.data)
+  })
 
-} )
+})
 
 module.exports = router;
