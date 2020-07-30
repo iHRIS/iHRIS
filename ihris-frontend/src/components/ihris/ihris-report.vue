@@ -20,6 +20,8 @@
         :loading="loading"
         class="elevation-1"
         @click:row="clickIt"
+        :show-select="reportData.displayCheckbox"
+        v-model="selected"
       ></v-data-table>
     </v-card>
 
@@ -27,6 +29,7 @@
 </template>
 
 <script>
+import { eventBus } from "@/main";
 export default {
   name: "ihris-report",
   props: ["profile", "reportData", "label", "terms", "dataURL", "page"],
@@ -40,10 +43,14 @@ export default {
       total: 0,
       prevPage: -1,
       link: [],
+      selected: [],
       error_message: null
     };
   },
   watch: {
+    selected() {
+      eventBus.$emit("ihris-report-selections", this.selected);
+    },
     terms: {
       handler() {
         this.getData(true);

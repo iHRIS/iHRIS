@@ -192,6 +192,7 @@ router.get('/report/:report', function (req, res) {
       return res.status(500).send()
     }
     let reportName
+    let displayCheckbox
     let queryParam = '?'
     let reportData = {
       fieldsDetails: []
@@ -199,6 +200,8 @@ router.get('/report/:report', function (req, res) {
     for (let extensions of reportDetails.extension) {
       if (extensions.url === 'name') {
         reportName = extensions.valueString
+      } else if (extensions.url === "displayCheckbox") {
+        displayCheckbox = extensions.valueBoolean
       } else if (extensions.url === "http://ihris.org/fhir/StructureDefinition/ihris-resource-relationships") {
         let fieldsDetails = {
           fields: []
@@ -240,7 +243,7 @@ router.get('/report/:report', function (req, res) {
       let dataURL = resource.start + queryParam
       reportData.resourcesConnections = graphData.links
       reportData.primaryResource = resource.start
-      console.log(JSON.stringify(reportData, 0, 2));
+      reportData.displayCheckbox = displayCheckbox
       return res.status(200).json({
         reportTemplate: template,
         reportData: reportData,

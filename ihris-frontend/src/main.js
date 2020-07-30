@@ -8,7 +8,11 @@ import fhirpath from "fhirpath"
 
 Vue.config.productionTip = false
 
-Object.defineProperty(Vue.prototype, '$fhirpath', { value: fhirpath })
+Object.defineProperty(Vue.prototype, '$fhirpath', {
+  value: fhirpath
+})
+
+export const eventBus = new Vue()
 
 new Vue({
   router,

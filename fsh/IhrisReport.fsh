@@ -14,11 +14,15 @@ Description:    "iHRIS Report Details."
 * ^context.expression = IhrisReport
 * extension contains
       name 1..1 MS and
+      displayCheckbox 1..1 MS and
       graphDefinition 1..1 MS and
       IhrisResourceRelationships named resourceRelationships 1..* MS
 * extension[name].value[x] only string
 * extension[name].valueString 1..1 MS
 * extension[name].valueString ^label = "Report Display Name"
+* extension[displayCheckbox].value[x] only boolean
+* extension[displayCheckbox].valueBoolean 0..1 MS
+* extension[displayCheckbox].valueBoolean ^label = "Whether checkboxes should be displayed or not on the report"
 * extension[graphDefinition].value[x] only Reference
 * extension[graphDefinition].valueReference only Reference(GraphDefinition)
 * extension[graphDefinition].valueReference 1..1 MS
