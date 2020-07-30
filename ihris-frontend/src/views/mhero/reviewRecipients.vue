@@ -1,5 +1,9 @@
 <template>
   <v-container>
+    <v-img
+      src="@/assets/mHero.png"
+      width="100"
+    ></v-img>
     <v-card>
       <v-card-text>
         How do you want to send Message
@@ -56,13 +60,15 @@
           normal
           @click="changeDetails"
           rounded
-        >Edit Selections</v-btn>
+        >Edit Recipients</v-btn>
         <v-spacer></v-spacer>
         <v-btn
+          :disabled="!canSend"
           normal
           @click="send"
           rounded
-        >Send Workflow</v-btn>
+        >Send <v-icon>mdi-message</v-icon>
+        </v-btn>
       </v-card-actions>
     </v-card>
   </v-container>
@@ -114,6 +120,18 @@ export default {
       fetch(url, opts).then(() => {
         console.log("Success");
       });
+    }
+  },
+  computed: {
+    canSend() {
+      if (!this.communicationType) {
+        return false;
+      } else if (this.communicationType == "sms" && !this.sms) {
+        return false;
+      } else if (this.communicationType === "flow" && !this.workflow.id) {
+        return false;
+      }
+      return true;
     }
   },
   created() {

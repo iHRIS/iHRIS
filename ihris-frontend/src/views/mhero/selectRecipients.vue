@@ -1,10 +1,16 @@
 <template>
   <v-container>
     <v-card>
+      <v-img
+        src="@/assets/mHero.png"
+        width="100"
+      ></v-img>
       <ihrisReport report='mhero'></ihrisReport>
       <v-card-actions class="secondary">
         <v-spacer></v-spacer>
         <v-btn
+          style="white--font"
+          :disabled="!canReview"
           normal
           @click="nextStep"
           rounded
@@ -22,6 +28,14 @@ export default {
       practitioners: [],
       reportData: {}
     };
+  },
+  computed: {
+    canReview() {
+      if (this.practitioners.length > 0) {
+        return true;
+      }
+      return false;
+    }
   },
   methods: {
     nextStep() {

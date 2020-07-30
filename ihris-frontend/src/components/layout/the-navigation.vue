@@ -86,7 +86,9 @@
         @change="setMhero()"
       >
         <template v-slot:activator>
-          <v-list-item-title class="subtitle-1 font-weight-bold">mHero</v-list-item-title>
+          <v-list-item-title class="subtitle-1 font-weight-bold">
+            mHero
+          </v-list-item-title>
         </template>
         <v-list-item
           to="/page/mhero"
