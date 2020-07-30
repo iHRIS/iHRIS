@@ -49,7 +49,7 @@ export default {
   },
   watch: {
     selected() {
-      eventBus.$emit("ihris-report-selections", this.selected);
+      eventBus.$emit("ihris-report-selections", this.selected, this.reportData);
     },
     terms: {
       handler() {
@@ -114,7 +114,6 @@ export default {
         this.debug = url;
       }
       this.prevPage = this.options.page;
-
       fetch(url)
         .then(response => {
           response

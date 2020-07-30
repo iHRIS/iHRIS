@@ -6,28 +6,35 @@
       "http://ihris.org/fhir/StructureDefinition/ihris-parameters-local-config"
     ]
   },
-  "parameter": [
-    {
+  "parameter": [{
       "name": "fhir:base",
       "valueString": "http://localhost:8081/scratchpad/fhir"
     },
     {
+      "name": "emnutt:base",
+      "valueString": "http://localhost:3002/emNutt/fhir"
+    },
+    {
+      "name": "emnutt:username",
+      "valueString": ""
+    },
+    {
+      "name": "emnutt:password",
+      "valueString": ""
+    },
+    {
       "name": "config",
-      "part": [
-        {
-          "name": "ihris",
-          "valueString": "ihris-config"
-        }
-      ]
+      "part": [{
+        "name": "ihris",
+        "valueString": "ihris-config"
+      }]
     },
     {
       "name": "keys",
-      "part": [
-        {
-          "name": "ihris",
-          "valueString": "-----BEGIN PUBLIC KEY-----\nMIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDdeFrJr76IQ+SYAoAIw8crZKNW\nir2re7Z7Iu+XzeYYop5+36Ux6uEQKSXo7s1xY2ou9nCkVAddZ1qehBo0e2MCtk62\nmQJbBT18fiZ3veQPvb0LC/9aFl64RuOguPrCZC+sbZLegQ6Wwf96UWyqmR49gaHO\nEdXwdFdSVyBGyS7dmwIDAQAB\n-----END PUBLIC KEY-----"
-        }
-      ]
+      "part": [{
+        "name": "ihris",
+        "valueString": "-----BEGIN PUBLIC KEY-----\nMIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDdeFrJr76IQ+SYAoAIw8crZKNW\nir2re7Z7Iu+XzeYYop5+36Ux6uEQKSXo7s1xY2ou9nCkVAddZ1qehBo0e2MCtk62\nmQJbBT18fiZ3veQPvb0LC/9aFl64RuOguPrCZC+sbZLegQ6Wwf96UWyqmR49gaHO\nEdXwdFdSVyBGyS7dmwIDAQAB\n-----END PUBLIC KEY-----"
+      }]
     }
   ]
 }

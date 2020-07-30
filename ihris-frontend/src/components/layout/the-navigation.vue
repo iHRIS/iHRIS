@@ -89,7 +89,7 @@
           <v-list-item-title class="subtitle-1 font-weight-bold">mHero</v-list-item-title>
         </template>
         <v-list-item
-          to="/resource/report/mhero"
+          to="/page/mhero"
           active-class="primary darken-2"
           class="text-right"
           dense
@@ -104,7 +104,7 @@
           dense
         >
           <v-list-item-title>mHero Dashboard</v-list-item-title>
-          <v-icon>mdi-poll-box</v-icon>
+          <v-icon>mdi-chevron-right</v-icon>
         </v-list-item>
       </v-list-group>
 
