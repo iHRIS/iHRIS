@@ -52,3 +52,6 @@ Description:    "iHRIS Resource Relationships"
 * extension[query].value[x] only string
 * extension[query].valueString 1..1 MS
 * extension[query].valueString ^label = "Query to Include Resource"
+* extension[filter].value[x] only string
+* extension[filter].valueString 1..1 MS
+* extension[filter].valueString ^label = "Data filters"

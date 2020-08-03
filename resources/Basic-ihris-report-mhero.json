@@ -33,6 +33,14 @@
           {
             "url": "field",
             "valueString": "Gender|gender"
+          },
+          {
+            "url": "field",
+            "valueString": "Phone|telecom.where(system='phone').value"
+          },
+          {
+            "url": "filter",
+            "valueString": "Gender|gender"
           }
         ]
       },
@@ -65,6 +73,10 @@
           {
             "url": "field",
             "valueString": "Facility|name"
+          },
+          {
+            "url": "filter",
+            "valueString": "Facility|name:contains"
           }
         ]
       }

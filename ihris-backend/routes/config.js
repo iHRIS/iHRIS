@@ -197,6 +197,7 @@ router.get('/report/:report', function (req, res) {
     let reportData = {
       fieldsDetails: []
     }
+    let filters = []
     for (let extensions of reportDetails.extension) {
       if (extensions.url === 'name') {
         reportName = extensions.valueString
@@ -205,6 +206,10 @@ router.get('/report/:report', function (req, res) {
       } else if (extensions.url === "http://ihris.org/fhir/StructureDefinition/ihris-resource-relationships") {
         let fieldsDetails = {
           fields: []
+        }
+        let thisFilter = extensions.extension.filter(ext => ext.url === "filter").map(ext => ext.valueString.split('|'))
+        if(thisFilter.length > 0) {
+          filters = filters.concat(thisFilter)
         }
         for (let relData of extensions.extension) {
           if (relData.url === 'query') {
@@ -224,8 +229,17 @@ router.get('/report/:report', function (req, res) {
         reportData.fieldsDetails.push(fieldsDetails)
       }
     }
-    let template = `<ihris-report :key="$route.params.report" page="${req.params.report}" label="${reportName}" :reportData="reportData" :terms="terms" :dataURL="dataURL"></ihris-report>`
-
+    let template = `<ihris-report :key="$route.params.report" page="${req.params.report}" label="${reportName}" :reportData="reportData" :terms="terms" :dataURL="dataURL">`
+    for (let filter of filters) {
+      template += '<ihris-search-term v-on:termChange="searchData"'
+      if (filter.length == 1) {
+        template += ' label="Search" expression="' + filter[0] + '"'
+      } else {
+        template += ' label="' + filter[0] + '" expression="' + filter[1] + '"'
+      }
+      template += "></ihris-search-term>\n"
+    }
+    template += `</ihris-report>`
     fhirAxios.read("GraphDefinition", report).then(async (resource) => {
       let graphData = {
         hiddenFields: [],
@@ -478,7 +492,7 @@ router.get('/page/:page', function (req, res) {
         vueOutput += '</template></ihris-resource>' + "\n"
       }
       vueOuput = "</template>"
-      console.log(vueOutput)
+      console.log(searchTemplate)
       return res.status(200).json({
         search: searchTemplate,
         searchData: search,
