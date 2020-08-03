@@ -4,7 +4,7 @@ const nconf = require('../modules/config')
 const fhirAxios = nconf.fhirAxios
 const outcomes = require('../config/operationOutcomes')
 const fhirConfig = require('../modules/fhirConfig')
-const structureDef = require('../modules/fhirStructureDefinition')
+const fhirDefinition = require('../modules/fhirDefinition')
 const crypto = require('crypto')
 
 /* GET home page. */
@@ -26,106 +26,13 @@ router.get('/site', function(req, res) {
   res.status(200).json( site )
 })
 
-const camelToKebab = (code) => {
-  return code.replace(/([a-z0-9]|[A-Z]+)([A-Z])/g, '$1-$2').toLowerCase()
-}
-
-const getSortFunc = (sortArr) => {
-  return (a,b) => {
-    idxA = sortArr.indexOf(a)
-    idxB = sortArr.indexOf(b)
-    if ( idxA === idxB ) {
-      return 0
-    } else if ( idxA === -1 ) {
-      return 1
-    } else if ( idxB === -1 ) {
-      return -1
-    } else if ( idxA < idxB ) {
-      return -1
-    } else {
-      return 1
-    }
-  }
-}
-
-const processFields = ( fields, base, order ) => {
-  let output = ""
-  let fieldKeys = Object.keys( fields )
-  if ( order[base] ) {
-    fieldKeys.sort( getSortFunc( order[base] ) )
-  }
-  for( let field of fieldKeys ) {
-    if ( fields[field]["max"] === "0" ) {
-      continue
-    }
-    if ( !fields[field].code ) {
-      console.log("No datatype for "+base+" "+field+" so skipping",base,field)
-      continue
-    }
-    let eleName = camelToKebab( fields[field].code )
-    let attrs = [ "field", "sliceName", "targetProfile", "profile", "min", "max", "base-min", 
-      "base-max", "label", "path", "binding" ]
-    let isArray = false
-    if ( fields[field]["max"] !== "1" ) {
-      isArray = true
-      output += "<ihris-array :edit=\"isEdit\" fieldType=\""+eleName+"\" :slotProps=\"slotProps\""
-      let arr_attrs = [ "field", "label", "min", "max", "id", "path", "profile", "targetProfile", "sliceName" ]
-      for ( let attr of arr_attrs ) {
-        if ( fields[field].hasOwnProperty(attr) ) {
-          output += " "+attr+"=\""+fields[field][attr]+"\""
-        }
-      }
-      output += ">\n<template #default=\"slotProps\">\n"
-    } else {
-      attrs.unshift("id")
-    }
-    output += "<fhir-"+eleName +" :slotProps=\"slotProps\" :edit=\"isEdit\""
-    for( let attr of attrs ) {
-      if ( fields[field].hasOwnProperty(attr) ) {
-        output += " "+attr+"=\""+fields[field][attr]+"\""
-      }
-    }
-    let subFields
-    if ( eleName === "reference" && fields[field].hasOwnProperty("fields") ) {
-      let refFields = fields[field].fields
-      subFields = {}
-      let subAttrs = [ "id", "path", "label", "min", "max", "base-min", "base-max", "code" ]
-      for( let refField of Object.keys(refFields) ) {
-        subFields[refField] = {}
-        //console.log("refLOOP",refField,refFields)
-        for( let attr of subAttrs ) {
-          if ( refFields[refField].hasOwnProperty(attr) ) {
-            if ( (attr === "id" || attr === "path") && fields[field].hasOwnProperty(attr) ) {
-              subFields[refField][attr] = refFields[refField][attr].replace( fields[field][attr]+".", "" )
-            } else {
-              subFields[refField][attr] = refFields[refField][attr]
-            }
-          }
-        }
-      }
-    }
-    if ( subFields ) {
-      output += " :sub-fields='" + JSON.stringify( subFields ).replace(/'/g, "\'") +"'"
-    }
-    output += ">\n"
-
-    if ( !subFields && fields[field].hasOwnProperty("fields") ) {
-      output += "<template #default=\"slotProps\">\n"
-      output += processFields( fields[field].fields, base+"."+fields[field], order )
-      output += "</template>\n"
-    }
-
-    output += "</fhir-"+eleName+">\n" 
-    if ( isArray ) {
-      output += "</template>\n</ihris-array>\n"
-    }
-  }
-  return output
-}
-
 const getDefinition = ( resource ) => {
   let structureDef = resource.split('/')
   return fhirAxios.read( structureDef[0], structureDef[1] )
+}
+const getProperties = ( resource ) => {
+  let codeSystem = resource.split('/')
+  return fhirAxios.search( codeSystem[0], { _id: codeSystem[1], _elements: "url,title,property" } )
 }
 const setupOrder = ( fields, sectionOrder ) => {
   for( let ord of fields ) {
@@ -205,12 +112,12 @@ router.get('/page/:page', function(req, res) {
               let field = column.extension.find( ext => ext.url === "field" ).valueString
               if ( header && field ) {
                 /*
-                let definition = await structureDef.getFieldDefinition( resource +"#"+ field )
+                let definition = await fhirDefinition.getFieldDefinition( resource +"#"+ field )
                 let binding = ""
                 if ( definition.binding ) {
                   binding = details.binding
                 } else if ( details.type[0].code === "Coding" ) {
-                  definition = await structureDef.getFieldDefinition( resource +"#"+ field.substring( 0, field.lastIndexOf('.') ) )
+                  definition = await fhirDefinition.getFieldDefinition( resource +"#"+ field.substring( 0, field.lastIndexOf('.') ) )
                   if ( definition.binding ) {
                     binding = details.binding
                   }
@@ -218,11 +125,11 @@ router.get('/page/:page', function(req, res) {
                 */
                 columns.push( {text: header, value: field} )
               }
-            } catch(err) { console.log("ERR",err) }
+            } catch(err) { }
           }
         }
 
-      } catch(err) { console.log("ERR2",err) }
+      } catch(err) { }
 
       let sectionOrder = {}
       setupOrder( fields, sectionOrder )
@@ -242,31 +149,37 @@ router.get('/page/:page', function(req, res) {
       } 
     }
     let sdOrder = {}
-
-
-    getDefinition( pageResource ).then( async (resource) => {
-      if ( allowed !== true ) {
-        // Can't think of a reason to have this level of permissions for 
-        // StructureDefinitions, but just in case...
-        let objAllowed = req.user.hasPermissionByObject( "read", resource )
-        if ( objAllowed !== true ) {
-          // But don't allow field level restrictions.  It will complicated the requirements
-          return res.status(401).json( outcomes.DENIED )
+    const getSortFunc = (sortArr) => {
+      return (a,b) => {
+        idxA = sortArr.indexOf(a)
+        idxB = sortArr.indexOf(b)
+        if ( idxA === idxB ) {
+          return 0
+        } else if ( idxA === -1 ) {
+          return 1
+        } else if ( idxB === -1 ) {
+          return -1
+        } else if ( idxA < idxB ) {
+          return -1
+        } else {
+          return 1
         }
       }
+    }
 
-      if ( !resource.hasOwnProperty("snapshot") ) {
-        let outcome = { ...outcomes.ERROR }
-        outcome.issue[0].diagnostics = "StructureDefinitions must be saved with a snapshop."
-        return res.status(404).json( outcome )
-      }
-      const structure = fhirConfig.parseStructureDefinition( resource )
+    const createTemplates = async ( resource, structure ) => {
+      //console.log(JSON.stringify(structure,null,2))
 
       let structureKeys = Object.keys( structure )
 
-      let searchTemplate = '<ihris-search :key="$route.params.page" page="'+req.params.page+'" label="'+structureKeys[0]+'" :fields="fields" :terms="terms" profile="'+resource.url+'">'+"\n"
+      let searchElement = "ihris-search"
+      if ( resource.resourceType === "CodeSystem" ) {
+        searchElement += "-code"
+      }
+
+      let searchTemplate = '<'+searchElement+' :key="$route.params.page" page="'+req.params.page+'" label="'+(resource.title || resource.name)+'" :fields="fields" :terms="terms" profile="'+resource.url+'">'+"\n"
       for( let filter of filters ) {
-          searchTemplate += '<ihris-search-term v-on:termChange="searchData"'
+        searchTemplate += '<ihris-search-term v-on:termChange="searchData"'
         if ( filter.length == 1 ) {
           searchTemplate += ' label="Search" expression="'+filter[0]+'"'
         } else {
@@ -274,7 +187,7 @@ router.get('/page/:page', function(req, res) {
         }
         searchTemplate += "></ihris-search-term>\n"
       }
-      searchTemplate += "</ihris-search>\n"
+      searchTemplate += "</"+searchElement+">\n"
       console.log(searchTemplate)
 
 
@@ -312,16 +225,90 @@ router.get('/page/:page', function(req, res) {
             }
           }
         }
+        const processFields = (fields, base, order) => {
+          let output = ""
+          let fieldKeys = Object.keys( fields )
+          if ( order[base] ) {
+            fieldKeys.sort( getSortFunc( order[base] ) )
+          }
+          for( let field of fieldKeys ) {
+            if ( fields[field]["max"] === "0" ) {
+              continue
+            }
+            if ( !fields[field].code ) {
+              console.log("No datatype for "+base+" "+field+" so skipping",base,field)
+              continue
+            }
+            let eleName = fhirDefinition.camelToKebab( fields[field].code )
+            let attrs = [ "field", "sliceName", "targetProfile", "profile", "min", "max", "base-min",
+              "base-max", "label", "path", "binding" ]
+            let isArray = false
+            if ( fields[field]["max"] !== "1" ) {
+              isArray = true
+              output += "<ihris-array :edit=\"isEdit\" fieldType=\""+eleName+"\" :slotProps=\"slotProps\""
+              let arr_attrs = [ "field", "label", "min", "max", "id", "path", "profile", "targetProfile", "sliceName" ]
+              for ( let attr of arr_attrs ) {
+                if ( fields[field].hasOwnProperty(attr) ) {
+                  output += " "+attr+"=\""+fields[field][attr]+"\""
+                }
+              }
+              output += ">\n<template #default=\"slotProps\">\n"
+            } else {
+              attrs.unshift("id")
+            }
+            output += "<fhir-"+eleName +" :slotProps=\"slotProps\" :edit=\"isEdit\""
+            for( let attr of attrs ) {
+              if ( fields[field].hasOwnProperty(attr) ) {
+                output += " "+attr+"=\""+fields[field][attr]+"\""
+              }
+            }
+            let subFields
+            if ( eleName === "reference" && fields[field].hasOwnProperty("fields") ) {
+              let refFields = fields[field].fields
+              subFields = {}
+              let subAttrs = [ "id", "path", "label", "min", "max", "base-min", "base-max", "code" ]
+              for( let refField of Object.keys(refFields) ) {
+                subFields[refField] = {}
+                //console.log("refLOOP",refField,refFields)
+                for( let attr of subAttrs ) {
+                  if ( refFields[refField].hasOwnProperty(attr) ) {
+                    if ( (attr === "id" || attr === "path") && fields[field].hasOwnProperty(attr) ) {
+                      subFields[refField][attr] = refFields[refField][attr].replace( fields[field][attr]+".", "" )
+                    } else {
+                      subFields[refField][attr] = refFields[refField][attr]
+                    }
+                  }
+                }
+              }
+            }
+            if ( subFields ) {
+              output += " :sub-fields='" + JSON.stringify( subFields ).replace(/'/g, "\'") +"'"
+            }
+            output += ">\n"
+
+            if ( !subFields && fields[field].hasOwnProperty("fields") ) {
+              output += "<template #default=\"slotProps\">\n"
+              output += processFields( fields[field].fields, base+"."+fields[field], order )
+              output += "</template>\n"
+            }
+
+            output += "</fhir-"+eleName+">\n"
+            if ( isArray ) {
+              output += "</template>\n</ihris-array>\n"
+            }
+          }
+          return output
+        }
         for ( let name of sectionKeys ) {
           vueOutput += "<ihris-section :slotProps=\"slotProps\" :edit=\"isEdit\" name=\""+name+"\" title=\""+sections[name].title+"\" description=\""+sections[name].description+"\" :secondary=\""+!!sections[name].resource+"\">\n<template #default=\"slotProps\">\n"
           if ( sections[name].resource ) {
             let secondary = await getDefinition( sections[name].resource )
 
             if ( !secondary.hasOwnProperty("snapshot") ) {
-              console.log("StructureDefinitions (", sections[name].resource, ") must be saved with a snapshop.")
+              console.log("StructureDefinitions (", sections[name].resource, ") must be saved with a snapshot.")
               continue
             }
-            const secondaryStructure = fhirConfig.parseStructureDefinition( secondary )
+            const secondaryStructure = fhirDefinition.parseStructureDefinition( secondary )
             let secondaryOrder = {}
             setupOrder( sections[name].fields, secondaryOrder )
             let secondaryKeys = Object.keys( secondaryStructure )
@@ -332,12 +319,10 @@ router.get('/page/:page', function(req, res) {
                 +'" link-field="'+sections[name].linkfield
                 +'" search-field="'+(sections[name].searchfield || "")
                 +'" :columns=\''+JSON.stringify(sections[name].columns).replace(/'/g, "\'")
-                +'\'><template #default="slotProps">' + "\n"
-              //vueOutput += processFields( secondaryStructure[second_fhir].fields, second_fhir, secondaryOrder )
-              vueOutput += "</template></ihris-secondary>"
-            }
-
-
+                  +'\'><template #default="slotProps">' + "\n"
+                  //vueOutput += processFields( secondaryStructure[second_fhir].fields, second_fhir, secondaryOrder )
+                  vueOutput += "</template></ihris-secondary>"
+                }
 
           } else {
             vueOutput += processFields( sections[name].elements, fhir, sections[name].order )
@@ -350,10 +335,61 @@ router.get('/page/:page', function(req, res) {
       vueOuput = "</template>"
       console.log(vueOutput)
       return res.status(200).json({ search: searchTemplate, searchData: search, template: vueOutput })
-    } ).catch( (err) => {
-      console.log(err)
-      return res.status( err.response.status ).json( err.response.data )
-    } )
+    }
+
+    if ( pageResource.startsWith( "CodeSystem" ) ) {
+      getProperties( pageResource ).then( (resource) => {
+        if ( resource.total !== 1 ) {
+          let outcome = { ...outcomes.ERROR }
+          outcome.issue[0].diagnostics = "Unable to find codesystem: "+pageResource+"."
+          return res.status(400).json( outcome )
+        }
+        resource = resource.entry[0].resource
+        /*
+        let property = []
+        if ( resource.hasOwnProperty("property") ) {
+          property = resource.property
+        }
+        */
+
+        const structure = fhirDefinition.parseCodeSystem( resource )
+        createTemplates( resource, structure )
+
+      } ).catch( err => {
+        console.log(err)
+        return res.status( err.response.status ).json( err.response.data )
+      } )
+    } else if ( pageResource.startsWith( "StructureDefinition" ) ) {
+
+      getDefinition( pageResource ).then( (resource) => {
+        if ( allowed !== true ) {
+          // Can't think of a reason to have this level of permissions for 
+          // StructureDefinitions, but just in case...
+          let objAllowed = req.user.hasPermissionByObject( "read", resource )
+          if ( objAllowed !== true ) {
+            // But don't allow field level restrictions.  It will complicated the requirements
+            return res.status(401).json( outcomes.DENIED )
+          }
+        }
+
+        if ( !resource.hasOwnProperty("snapshot") ) {
+          let outcome = { ...outcomes.ERROR }
+          outcome.issue[0].diagnostics = "StructureDefinitions must be saved with a snapshot."
+          return res.status(404).json( outcome )
+        }
+        
+        const structure = fhirDefinition.parseStructureDefinition( resource )
+        createTemplates( resource, structure )
+
+      } ).catch( (err) => {
+        console.log(err)
+        return res.status( err.response.status ).json( err.response.data )
+      } )
+    } else {
+      let outcome = { ...outcomes.ERROR }
+      outcome.issue[0].diagnostics = "Unknown resource type for page: "+pageResource+"."
+      return res.status(400).json( outcome )
+    }
 
   } ).catch( (err) => {
     console.log(err)
@@ -361,67 +397,6 @@ router.get('/page/:page', function(req, res) {
   } )
 
 } )
-
-const processQuestionnaireItems = async ( items ) => {
-  let vueOutput = ""
-  for( let item of items ) {
-    if ( item.repeats && !item.readOnly ) {
-      vueOutput += "<ihris-array :edit=\"isEdit\" path=\"" + item.linkId + "\" label=\""
-        + item.text + "\" max=\"*\" min=\"" + ( item.required ? "1" : "0" ) + "\"><template #default=\"slotProps\">\n"
-    }
-    if ( item.type === "group" ) {
-      let label = item.text.split('|',2)
-      vueOutput += '<ihris-questionnaire-group :edit=\"isEdit\" path="' + item.linkId + '" label="' + label[0] + '"'
-      if ( label.length === 2 ) {
-        vueOutput += ' description="' + label[1] + '"'
-      }
-      vueOutput += ">\n\n"
-      vueOutput += await processQuestionnaireItems( item.item )
-      vueOutput += "</ihris-questionnaire-group>\n"
-    } else if ( item.readOnly ) {
-      vueOutput += "<ihris-hidden path=\"" + item.linkId + "\" label=\""
-        + item.text + "\""
-      if ( item.answerOption[0].initialSelected ) {
-        let answerTypes = Object.keys( item.answerOption[0] )
-        for( let answerType of answerTypes ) {
-          if ( answerType.startsWith("value") ) {
-            vueOutput += " :hiddenValue='" + JSON.stringify( item.answerOption[0][answerType] ).replace(/'/g, "\'") 
-              + "' hiddenType='" + answerType.substring(5) + "'"
-            break
-          }
-        }
-      }
-      vueOutput += "></ihris-hidden>\n"
-    } else {
-     vueOutput += "<fhir-" + item.type + " :edit=\"isEdit\" path=\"" + item.linkId + "\""
-
-      if ( item.type === "reference" && item.definition ) {
-        let field = await structureDef.getFieldDefinition(item.definition)
-        if ( field && field.type && field.type[0] && field.type[0].targetProfile ) {
-          vueOutput += " targetProfile=\""+field.type[0].targetProfile[0]+"\""
-        }
-      }
-      if ( item.hasOwnProperty("text") ) {
-        vueOutput += " label=\""+ item.text + "\""
-      }
-      if ( item.hasOwnProperty("answerValueSet") ) {
-        vueOutput += " binding=\""+ item.answerValueSet + "\""
-      }
-      let attrs = [ "required" ]
-      for( let attr of attrs ) {
-        if ( item.hasOwnProperty(attr) ) {
-          vueOutput += " " + attr + "=\""+ item[attr] + "\""
-        }
-      }
-      vueOutput += "></fhir-" + item.type +">\n"
-
-    }
-    if ( item.repeats && !item.readOnly ) {
-      vueOutput += "</template></ihris-array>\n"
-    }
-  }
-  return vueOutput
-}
 
 router.get('/questionnaire/:questionnaire', function(req, res) {
   if ( !req.user ) {
@@ -444,6 +419,68 @@ router.get('/questionnaire/:questionnaire', function(req, res) {
 
     
     let sectionMenu = []
+
+    const processQuestionnaireItems = async ( items ) => {
+      let vueOutput = ""
+      for( let item of items ) {
+        if ( item.repeats && !item.readOnly ) {
+          vueOutput += "<ihris-array :edit=\"isEdit\" path=\"" + item.linkId + "\" label=\""
+            + item.text + "\" max=\"*\" min=\"" + ( item.required ? "1" : "0" ) + "\"><template #default=\"slotProps\">\n"
+        }
+        if ( item.type === "group" ) {
+          let label = item.text.split('|',2)
+          vueOutput += '<ihris-questionnaire-group :edit=\"isEdit\" path="' + item.linkId + '" label="' + label[0] + '"'
+          if ( label.length === 2 ) {
+            vueOutput += ' description="' + label[1] + '"'
+          }
+          vueOutput += ">\n\n"
+          vueOutput += await processQuestionnaireItems( item.item )
+          vueOutput += "</ihris-questionnaire-group>\n"
+        } else if ( item.readOnly ) {
+          vueOutput += "<ihris-hidden path=\"" + item.linkId + "\" label=\""
+            + item.text + "\""
+          if ( item.answerOption[0].initialSelected ) {
+            let answerTypes = Object.keys( item.answerOption[0] )
+            for( let answerType of answerTypes ) {
+              if ( answerType.startsWith("value") ) {
+                vueOutput += " :hiddenValue='" + JSON.stringify( item.answerOption[0][answerType] ).replace(/'/g, "\'") 
+                  + "' hiddenType='" + answerType.substring(5) + "'"
+                  break
+                }
+            }
+          }
+          vueOutput += "></ihris-hidden>\n"
+        } else {
+          vueOutput += "<fhir-" + item.type + " :edit=\"isEdit\" path=\"" + item.linkId + "\""
+
+          if ( item.type === "reference" && item.definition ) {
+            let field = await fhirDefinition.getFieldDefinition(item.definition)
+            if ( field && field.type && field.type[0] && field.type[0].targetProfile ) {
+              vueOutput += " targetProfile=\""+field.type[0].targetProfile[0]+"\""
+            }
+          }
+          if ( item.hasOwnProperty("text") ) {
+            vueOutput += " label=\""+ item.text + "\""
+          }
+          if ( item.hasOwnProperty("answerValueSet") ) {
+            vueOutput += " binding=\""+ item.answerValueSet + "\""
+          }
+          let attrs = [ "required" ]
+          for( let attr of attrs ) {
+            if ( item.hasOwnProperty(attr) ) {
+              vueOutput += " " + attr + "=\""+ item[attr] + "\""
+            }
+          }
+          vueOutput += "></fhir-" + item.type +">\n"
+
+        }
+        if ( item.repeats && !item.readOnly ) {
+          vueOutput += "</template></ihris-array>\n"
+        }
+      }
+      return vueOutput
+    }
+
     for ( let item of resource.item ) {
       if ( item.type === "group" ) {
         let md5sum = crypto.createHash('md5')

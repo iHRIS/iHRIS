@@ -167,8 +167,13 @@ const fhirAxios = {
         if ( complete ) {
           try {
             let total = response.data.expansion.total
-            let count = response.data.expansion.parameter.find( param => param.name === "count" ).valueInteger
-            let offset = response.data.expansion.offset
+            let count 
+            try {
+              count = response.data.expansion.parameter.find( param => param.name === "count" ).valueInteger
+            } catch (err) {
+              count = total
+            }
+            let offset = response.data.expansion.offset || 0
 
             if ( total > offset + count ) {
               offset += count

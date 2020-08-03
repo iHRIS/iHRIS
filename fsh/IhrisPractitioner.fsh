@@ -84,6 +84,20 @@ Description:    "iHRIS extension for Practitioner residence."
 * valueReference.identifier 0..0
 * valueReference.display 0..0
 
+Extension:      IhrisPractitionerDependentDetail
+Id:             ihris-practitioner-dependent-detail
+Title:          "iHRIS Practitioner Dependent Detail"
+Description:    "iHRIS extension for Practitioner Dependent Detail."
+* ^context.type = #element
+* ^context.expression = "Practitioner"
+* extension contains name 1..1 MS and
+    birthDate 1..1 MS
+* extension[name].value[x] only string
+* extension[name].valueString 1..1 MS
+* extension[name].valueString ^label = "Dependent's Name"
+* extension[birthDate].value[x] only date
+* extension[birthDate].valueDate 1..1 MS
+* extension[birthDate].valueDate ^label = "Dependent's Date of Birth"
 
 Extension:      IhrisPractitionerNationality
 Id:             ihris-practitioner-nationality

@@ -17,9 +17,9 @@ Description:    "iHRIS Page Display details."
 * extension contains
       resource 1..1 MS and
       search 1..* MS and
-      filter 1..* MS
+      filter 0..* MS
 * extension[resource].value[x] only Reference
-* extension[resource].valueReference only Reference(StructureDefinition)
+* extension[resource].valueReference only Reference(StructureDefinition or CodeSystem)
 * extension[resource].valueReference 1..1 MS
 * extension[resource].valueReference ^label = "Primary Resource"
 * extension[search].value[x] only string
@@ -52,7 +52,7 @@ Description:    "iHRIS Page Section information."
 * extension[name].valueString ^label = "Name"
 * extension[field].value[x] only string
 * extension[field].valueString 1..1 MS
-* extension[field].valueString ^label = "Name"
+* extension[field].valueString ^label = "Field"
 * extension[resource].extension contains
       resource 1..1 MS and
       linkfield 1..1 MS and
@@ -78,13 +78,6 @@ Description:    "iHRIS Page Section information."
 * extension[resource].extension[column].extension[field].valueString MS
 * extension[resource].extension[column].extension[field].valueString ^label = "FHIRPath Expression"
 
-
-Extension:      IhrisPageSectionResource
-Id:             ihris-page-section-resource
-Title:          "iHRIS Page Section Resource"
-Description:    "iHRIS Page Section Resource information."
-* ^context.type = #element
-* ^context.expression = "IhrisPageSection"
 
 Instance:       ihris-page-practitioner
 InstanceOf:     IhrisPage
@@ -153,3 +146,27 @@ Usage:          #example
 * extension[section][0].extension[field][0].valueString = "PractitionerRole.code"
 * extension[section][0].extension[field][1].valueString = "PractitionerRole.practitioner"
 * extension[section][0].extension[field][2].valueString = "PractitionerRole.location"
+* extension[section][0].extension[field][3].valueString = "PractitionerRole.period"
+* extension[section][0].extension[field][4].valueString = "PractitionerRole.specialty"
+* extension[section][0].extension[field][5].valueString = "PractitionerRole.identifier"
+
+Instance:       ihris-page-job
+InstanceOf:     IhrisPage
+Title:          "iHRIS Job CodeSystem Page"
+Usage:          #example
+* code = IhrisResourceCodeSystem#page
+* extension[display].extension[resource].valueReference = Reference(CodeSystem/ihris-job)
+* extension[display].extension[search][0].valueString = "Code|code"
+* extension[display].extension[search][1].valueString = "Display|display"
+* extension[display].extension[search][2].valueString = "Cadre|cadre"
+* extension[display].extension[search][3].valueString = "Classification|classification"
+* extension[section][0].extension[title].valueString = "Job"
+* extension[section][0].extension[description].valueString = "Job Titles"
+* extension[section][0].extension[name].valueString = "CodeSystem"
+* extension[section][0].extension[field][0].valueString = "CodeSystem.code"
+* extension[section][0].extension[field][1].valueString = "CodeSystem.definition"
+* extension[section][0].extension[field][2].valueString = "CodeSystem.display"
+* extension[section][0].extension[field][3].valueString = "CodeSystem.cadre"
+* extension[section][0].extension[field][4].valueString = "CodeSystem.classification"
+* extension[section][0].extension[field][4].valueString = "CodeSystem.salary-grade"
+

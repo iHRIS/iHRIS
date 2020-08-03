@@ -33,6 +33,7 @@ export default {
             },
             components: {
               "ihris-search": () => import(/* webpackChunkName: "fhir-search" */ "@/components/ihris/ihris-search" ),
+              "ihris-search-code": () => import(/* webpackChunkName: "fhir-search" */ "@/components/ihris/ihris-search-code" ),
               "ihris-search-term": () => import(/* webpackChunkName: "fhir-search" */ "@/components/ihris/ihris-search-term" )
             }, 
             template: data.search, 

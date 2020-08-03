@@ -20,16 +20,19 @@
   "property": [
     {
       "code": "cadre",
+      "uri": "http://ihris.org/fhir/ValueSet/ihris-cadre",
       "description": "The cadre of this job.",
       "type": "Coding"
     },
     {
       "code": "classification",
+      "uri": "http://ihris.org/fhir/ValueSet/ihris-classification",
       "description": "The classification of this job.",
       "type": "Coding"
     },
     {
       "code": "salary-grade",
+      "uri": "http://ihris.org/fhir/ValueSet/ihris-salary-grade",
       "description": "The salary grade of this job.",
       "type": "Coding"
     }

@@ -87,62 +87,8 @@ const fhirConfig = {
     }
 
     return defaults
-  },
-
-  parseStructureDefinition: ( resource ) => {
-    if ( !resource.hasOwnProperty("snapshot") ) {
-      return false
-    }
-    let structure = {}
-    const ms = resource.snapshot.element.filter( ele => ele.mustSupport )
-    for( let ele of ms ) {
-      let levels = ele.id.split('.')
-
-      let piece = structure
-      for( let idx in levels ) {
-        let field = levels[idx]
-        if ( !piece.hasOwnProperty(field) ) {
-          piece[field] = {}
-        }
-        if ( idx < levels.length - 1 ) {
-          if ( !piece[field].hasOwnProperty("fields") ) {
-            piece[field].fields = {}
-          }
-          piece = piece[field].fields
-        } else {
-          piece = piece[field]
-          piece.field = field
-        }
-      }
-
-      const copies = ["id", "path", "label", "sliceName", "min", "max" ]
-      for( let copy of copies ) {
-        if ( ele.hasOwnProperty(copy) ) {
-          piece[copy] = ele[copy]
-        } else if ( ele.base.hasOwnProperty(copy) ) {
-          piece[copy] = ele.base[copy]
-        }
-      }
-      for ( let copy of [ "min", "max" ] ) {
-        if ( ele.base.hasOwnProperty(copy) ) {
-          piece["base-"+copy] = ele.base[copy]
-        }
-      }
-
-      const types = ["code", "profile", "targetProfile"]
-      for( let type of types ) {
-        if ( ele.type[0].hasOwnProperty(type) ) {
-          piece[type] = ele.type[0][type]
-        }
-      }
-
-      if ( ele.hasOwnProperty("binding") && ele.binding.hasOwnProperty("valueSet") ) {
-        piece.binding = ele.binding.valueSet
-      }
-    }
-    return structure
-
   }
+
 }
 
 module.exports = fhirConfig
