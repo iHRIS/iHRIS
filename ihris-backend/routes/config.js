@@ -519,4 +519,130 @@ router.get('/questionnaire/:questionnaire', function(req, res) {
 
 } )
 
+router.get('/report/:report', function (req, res) {
+  let report = "ihris-report-" + req.params.report
+  // if (!req.user) {
+  //   return res.status(401).json(outcomes.NOTLOGGEDIN)
+  // }
+  // let allowed = req.user.hasPermissionByName("read", "Basic", report)
+  // // Limited access to these don't make sense so not allowing it for now
+  // if (allowed !== true) {
+  //   return res.status(401).json(outcomes.DENIED)
+  // }
+  fhirAxios.read("Basic", report).then(async (resource) => {
+    let reportDetails = resource.extension.find((ext) => {
+      return ext.url === "http://ihris.org/fhir/StructureDefinition/ihris-report-details"
+    })
+    if (!reportDetails) {
+      return res.status(500).send()
+    }
+    let reportName
+    let displayCheckbox
+    let queryParam = '?'
+    let reportData = {
+      fieldsDetails: []
+    }
+    let filters = []
+    const parseGraphDefinition = (resource, graphData) => {
+      let hiddenFields = {
+        fields: []
+      }
+      if (resource.start) {
+        hiddenFields.resourceType = resource.start
+      } else {
+        hiddenFields.resourceType = resource.type
+      }
+      for (let link of resource.link) {
+        hiddenFields.fields.push([link.path, link.path])
+        for (let target of link.target) {
+          let linkElement, linkTo
+          if (target.params) {
+            linkElement = target.params
+          } else {
+            linkElement = target.type + '.id'
+          }
+          linkTo = link.path
+          graphData.links.push({
+            resourceType: target.type,
+            linkElement,
+            linkTo
+          })
+          if (target.link) {
+            parseGraphDefinition(target, graphData)
+          }
+        }
+      }
+      graphData.hiddenFields.push(hiddenFields)
+    }
+
+    for (let extensions of reportDetails.extension) {
+      if (extensions.url === 'name') {
+        reportName = extensions.valueString
+      } else if (extensions.url === "displayCheckbox") {
+        displayCheckbox = extensions.valueBoolean
+      } else if (extensions.url === "http://ihris.org/fhir/StructureDefinition/ihris-resource-relationships") {
+        let fieldsDetails = {
+          fields: []
+        }
+        let thisFilter = extensions.extension.filter(ext => ext.url === "filter").map(ext => ext.valueString.split('|'))
+        if(thisFilter.length > 0) {
+          filters = filters.concat(thisFilter)
+        }
+        for (let relData of extensions.extension) {
+          if (relData.url === 'query') {
+            if (!queryParam) {
+              queryParam = '?' + relData.valueString
+            } else {
+              queryParam += relData.valueString + '&'
+            }
+          }
+          if (relData.url === 'name') {
+            fieldsDetails.resourceType = relData.valueString
+          } else if (relData.url === 'field') {
+            let fieldData = relData.valueString.split('|')
+            fieldsDetails.fields.push([fieldData[0], fieldData[1]])
+          }
+        }
+        reportData.fieldsDetails.push(fieldsDetails)
+      }
+    }
+    let template = `<ihris-report :key="$route.params.report" page="${req.params.report}" label="${reportName}" :reportData="reportData" :terms="terms" :dataURL="dataURL">`
+    for (let filter of filters) {
+      template += '<ihris-search-term v-on:termChange="searchData"'
+      if (filter.length == 1) {
+        template += ' label="Search" expression="' + filter[0] + '"'
+      } else {
+        template += ' label="' + filter[0] + '" expression="' + filter[1] + '"'
+      }
+      template += "></ihris-search-term>\n"
+    }
+    template += `</ihris-report>`
+    fhirAxios.read("GraphDefinition", report).then(async (resource) => {
+      let graphData = {
+        hiddenFields: [],
+        links: []
+      }
+      parseGraphDefinition(resource, graphData)
+      // merge graphData to reportData
+      for (let hiddenFields of graphData.hiddenFields) {
+        for (let index in reportData.fieldsDetails) {
+          if (reportData.fieldsDetails[index].resourceType === hiddenFields.resourceType) {
+            reportData.fieldsDetails[index].hiddenFields = hiddenFields.fields
+          }
+        }
+      }
+      let dataURL = resource.start + queryParam
+      reportData.resourcesConnections = graphData.links
+      reportData.primaryResource = resource.start
+      reportData.displayCheckbox = displayCheckbox
+      return res.status(200).json({
+        reportTemplate: template,
+        reportData: reportData,
+        dataURL: dataURL
+      })
+    })
+  })
+})
+
+
 module.exports = router;

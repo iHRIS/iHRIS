@@ -1,0 +1,85 @@
+{
+  "resourceType": "Basic",
+  "id": "ihris-report-mhero",
+  "meta": {
+    "versionId": "5",
+    "lastUpdated": "2020-07-29T12:12:29.419+03:00",
+    "source": "#wZsikoUr4SukKuEl"
+  },
+  "extension": [{
+    "url": "http://ihris.org/fhir/StructureDefinition/ihris-report-details",
+    "extension": [{
+        "url": "name",
+        "valueString": "Practitioners"
+      },
+      {
+        "url": "displayCheckbox",
+        "valueBoolean": true
+      },
+      {
+        "url": "http://ihris.org/fhir/StructureDefinition/ihris-resource-relationships",
+        "extension": [{
+            "url": "name",
+            "valueString": "Practitioner"
+          },
+          {
+            "url": "field",
+            "valueString": "Given Name(s)|name.where(use='official').given"
+          },
+          {
+            "url": "field",
+            "valueString": "Birth Date|birthDate"
+          },
+          {
+            "url": "field",
+            "valueString": "Gender|gender"
+          },
+          {
+            "url": "field",
+            "valueString": "Phone|telecom.where(system='phone').value"
+          },
+          {
+            "url": "filter",
+            "valueString": "Gender|gender"
+          }
+        ]
+      },
+      {
+        "url": "http://ihris.org/fhir/StructureDefinition/ihris-resource-relationships",
+        "extension": [{
+            "url": "name",
+            "valueString": "PractitionerRole"
+          },
+          {
+            "url": "query",
+            "valueString": "_revinclude=PractitionerRole:practitioner"
+          },
+          {
+            "url": "field",
+            "valueString": "Designation|code.text"
+          }
+        ]
+      },
+      {
+        "url": "http://ihris.org/fhir/StructureDefinition/ihris-resource-relationships",
+        "extension": [{
+            "url": "name",
+            "valueString": "Location"
+          },
+          {
+            "url": "query",
+            "valueString": "_include=PractitionerRole:location"
+          },
+          {
+            "url": "field",
+            "valueString": "Facility|name"
+          },
+          {
+            "url": "filter",
+            "valueString": "Facility|name:contains"
+          }
+        ]
+      }
+    ]
+  }]
+}

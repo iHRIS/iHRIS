@@ -7,6 +7,7 @@
     "test": "jest"
   },
   "dependencies": {
+    "async": "^3.2.0",
     "axios": "^0.19.2",
     "connect-redis": "^4.0.4",
     "cookie-parser": "~1.4.4",
@@ -28,6 +29,7 @@
     "redis": "^3.0.2",
     "require-from-string": "^2.0.2",
     "supertest": "^4.0.2",
+    "urijs": "^1.19.2",
     "url": "^0.11.0",
     "uuid": "^8.2.0"
   },

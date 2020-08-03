@@ -27,20 +27,27 @@ async function startUp() {
   const authRouter = require('./routes/auth')
   const fhirRouter = require('./routes/fhir')
   const questionnaireRouter = require('./routes/questionnaire')
+  const mheroRouter = require('./routes/mhero')
 
   app.use(logger('dev'))
-  app.use(express.json({ type: ["application/json","application/fhir+json"] }))
-  app.use(express.urlencoded({ extended: false }))
+  app.use(express.json({
+    type: ["application/json", "application/fhir+json"]
+  }))
+  app.use(express.urlencoded({
+    extended: false
+  }))
   app.use(cookieParser())
-  app.use( session( { 
-    store: new RedisStore( {client: redisClient }),
+  app.use(session({
+    store: new RedisStore({
+      client: redisClient
+    }),
     secret: nconf.get("session:secret") || crypto.randomBytes(64).toString('hex'),
-    resave: false, 
-    saveUninitialized: false 
-  } ) )
+    resave: false,
+    saveUninitialized: false
+  }))
   app.use(express.static(path.join(__dirname, 'public')))
 
-  
+
   app.use('/', indexRouter)
 
   app.use('/auth', authRouter)
@@ -48,9 +55,12 @@ async function startUp() {
   app.use(authRouter.passport.session())
 
   app.use('/config', configRouter)
+  app.use('/mhero', mheroRouter)
   app.get('/test',
-    ( req, res ) => {
-      res.status(200).json({"user":req.user})
+    (req, res) => {
+      res.status(200).json({
+        "user": req.user
+      })
     }
   )
 
@@ -58,17 +68,17 @@ async function startUp() {
   app.use('/fhir', fhirRouter)
 
   const loadModules = nconf.get("modules")
-  if ( loadModules ) {
-    const modPaths = Object.keys( loadModules )
-    for( let mod of modPaths ) {
+  if (loadModules) {
+    const modPaths = Object.keys(loadModules)
+    for (let mod of modPaths) {
       try {
-        let reqMod = await fhirModules.require( loadModules[mod] )
-        if ( reqMod ) {
-          console.log("Loading "+mod+" ("+loadModules[mod]+") to app.")
-          app.use( "/"+mod, reqMod )
+        let reqMod = await fhirModules.require(loadModules[mod])
+        if (reqMod) {
+          console.log("Loading " + mod + " (" + loadModules[mod] + ") to app.")
+          app.use("/" + mod, reqMod)
         }
-      } catch( err ) {
-        console.log("Failed to load module "+mod+" ("+loadModules[mod]+")")
+      } catch (err) {
+        console.log("Failed to load module " + mod + " (" + loadModules[mod] + ")")
       }
     }
   }
@@ -99,15 +109,14 @@ module.exports = router
 startUp()
 
 app.whenReady = () => {
-  return new Promise( (resolve) => {
-    let idx = setInterval( () => {
-      if ( configLoaded === true ) {
+  return new Promise((resolve) => {
+    let idx = setInterval(() => {
+      if (configLoaded === true) {
         clearInterval(idx)
         resolve()
       }
-    }, 100 )
-  } )
+    }, 100)
+  })
 }
 
 module.exports = app
-
