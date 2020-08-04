@@ -46,7 +46,7 @@ export default {
           this.value = this.source.data
           //console.log("SET value to ", this.source.data, this.slotProps.input)
         } else {
-          let expression = this.field.substring( this.field.indexOf(':')+1 )
+          let expression = this.$fhirutils.pathFieldExpression( this.field )
           this.source.data = this.$fhirpath.evaluate( this.slotProps.source.data, expression )
           //console.log("STR FHIRPATH", this.slotProps.source.data, this.field)
           if ( this.source.data.length == 1 ) {

@@ -21,13 +21,11 @@
         item-key="code"
         :search="search"
         :options.sync="options"
-        :server-items-length="total"
         :footer-props="{ 'items-per-page-options': [5,10,20,50] }"
         :loading="loading"
         class="elevation-1"
         @click:row="clickIt"
-      >
-      </v-data-table>
+      ></v-data-table>
     </v-card>
 
   </v-container>
@@ -47,9 +45,7 @@ export default {
       options: { itemsPerPage: 10 },
       loading: false,
       total: 0,
-      error_message: null,
-      lookup_cache: {},
-      lookup_loading: {}
+      error_message: null
     }
   },
   watch: {
@@ -80,65 +76,11 @@ export default {
     clickIt: function(record) {
       this.$router.push({ name:"resource_view", params: {page: this.page, id: record.code } })
     },
-    codeLookup: function ( system, code ) {
-      return new Promise ( (resolve ) => {
-        let lookup = system + "#" + code
-        if ( this.lookup_loading[ lookup ] ) {
-          setTimeout( () => {
-            resolve( this.codeLookup( system, code ) )
-          }, 100 )
-        } else if ( !this.lookup_cache[ lookup ] ) {
-          this.lookup_loading[ lookup ] = true
-          console.log('looking up',lookup)
-          fetch( "/fhir/CodeSystem/$lookup?system="+system+"&code="+code ).then(response => {
-            if ( response.status === 200 ) {
-              response.json().then( data => {
-                if ( data.parameter ) {
-                  let display = data.parameter.find( param => param.name === "display" )
-                  if ( display ) {
-                    this.lookup_cache[ lookup ] = display.valueString
-                    this.lookup_loading[ lookup ] = false
-                    resolve(this.lookup_cache[lookup])
-                  } else {
-                    console.log("No display data found",data)
-                    this.lookup_cache[ lookup ] = "Unknown"
-                    this.lookup_loading[ lookup ] = false
-                    resolve(this.lookup_cache[lookup])
-                  }
-                } else {
-                  console.log("No display data found",data)
-                  this.lookup_cache[ lookup ] = "Unknown"
-                  this.lookup_loading[ lookup ] = false
-                  resolve(this.lookup_cache[lookup])
-                }
-              } ).catch( err => {
-                console.log(err)
-                this.lookup_cache[ lookup ] = "Error"
-                this.lookup_loading[ lookup ] = false
-                resolve(this.lookup_cache[lookup])
-               } )
-            }
-          } ).catch( err => {
-            console.log(err)
-            this.lookup_cache[ lookup ] = "Error"
-            this.lookup_loading[ lookup ] = false
-            resolve(this.lookup_cache[lookup])
-          } )
-          setTimeout( () => {
-            this.lookup_cache[ lookup ] = "found"
-            this.lookup_loading[ lookup ] = false
-          }, 200 )
-        } else {
-          resolve (this.lookup_cache[ lookup ])
-        }
-      } )
-    },
     getData: function () {
       //console.log("getting data",restart)
       this.loading = true
       this.error_message = null
       let url = "/fhir/CodeSystem"+this.profile.substring(this.profile.lastIndexOf("/"))
-      console.log(url)
 
       fetch( url ).then(response => {
         //console.log("fetching",url)
@@ -147,20 +89,19 @@ export default {
           if ( data.concept && data.concept.length > 0 ) {
             for( let entry of data.concept ) {
               let result = { code: entry.code, display: entry.display, definition: entry.definition }
-              let pending = false
               if ( entry.property ) {
                 for ( let prop of data.property ) {
                   let property = entry.property.find( conceptProp => conceptProp.code === prop.code )
                   if ( property ) {
                     if ( prop.type === "code" ) {
                       if ( property.valueCode ) {
-                        result[ prop.code ] = await this.codeLookup( prop.uri, property.valueCode )
+                        result[ prop.code ] = await this.$fhirutils.codeLookup( prop.uri, property.valueCode )
                       } else {
                         result[ prop.code ] = ""
                       }
                     } else if ( prop.type === "Coding" ) {
                       if ( property.valueCoding ) {
-                        result[ prop.code ] = await this.codeLookup( property.valueCoding.system, property.valueCoding.code )
+                        result[ prop.code ] = await this.$fhirutils.codeLookup( property.valueCoding.system, property.valueCoding.code )
                       } else {
                         result[ prop.code ] = ""
                       }
@@ -171,11 +112,7 @@ export default {
                   //result[field[1]] = this.$fhirpath.evaluate(entry.resource, field[1])
                 }
               }
-              if ( pending ) {
-                this.pending.push( result )
-              } else {
-                this.results.push( result )
-              }
+              this.results.push( result )
             }
           }
           this.total = data.concept.length

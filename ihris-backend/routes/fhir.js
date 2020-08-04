@@ -112,6 +112,45 @@ router.post("/:resource", (req, res) => {
   } )
 } )
 
+router.patch("/CodeSystem/:id/:code", (req, res) => {
+  if ( !req.user ) {
+    return res.status(401).json( outcomes.NOTLOGGEDIN )
+  }
+  let allowed = req.user.hasPermissionByName( "write", "CodeSystem", req.params.id )
+  if ( allowed !== true ) {
+    return res.status(401).json( outcomes.DENIED )
+  }
+  let update = req.body
+  fhirAxios.read( "CodeSystem", req.params.id ).then( (resource) => {
+    let codeIdx = resource.concept.findIndex( concept => concept.code === update.code )
+    if ( codeIdx === -1 ) {
+      resource.concept.push( update )
+    } else {
+      resource.concept[codeIdx] = update
+    }
+    fhirAxios.update( resource ).then( (resource) => {
+      console.log("UPDATED",resource)
+      return res.status(200).json({ok:true})
+    } ).catch( (err) => {
+      /* return response from FHIR server */
+      return res.status( err.response.status ).json( err.response.data )
+      /* for custom responses
+      let outcome = { ...outcomes.ERROR }
+      outcome.issue[0].diagnostics = err.message
+      return res.status(500).json( outcome )
+      */
+    } )
+  } ).catch( (err) => {
+    /* return response from FHIR server */
+    return res.status( err.response.status ).json( err.response.data )
+    /* for custom responses
+      let outcome = { ...outcomes.ERROR }
+      outcome.issue[0].diagnostics = err.message
+      return res.status(500).json( outcome )
+    */
+  } )
+} )
+
 router.put("/:resource/:id", (req, res) => {
   if ( !req.user ) {
     return res.status(401).json( outcomes.NOTLOGGEDIN )

@@ -173,8 +173,10 @@ router.get('/page/:page', function(req, res) {
       let structureKeys = Object.keys( structure )
 
       let searchElement = "ihris-search"
+      let resourceElement = "ihris-resource"
       if ( resource.resourceType === "CodeSystem" ) {
         searchElement += "-code"
+        resourceElement = "ihris-codesystem"
       }
 
       let searchTemplate = '<'+searchElement+' :key="$route.params.page" page="'+req.params.page+'" label="'+(resource.title || resource.name)+'" :fields="fields" :terms="terms" profile="'+resource.url+'">'+"\n"
@@ -208,7 +210,7 @@ router.get('/page/:page', function(req, res) {
         }
         let sectionKeys = Object.keys(sections)
         let sectionMenu
-        vueOutput = '<ihris-resource :fhir-id="fhirId" :edit="isEdit" v-on:setEdit="setEdit($event)" profile="'+resource.url+'" :key="$route.params.page+($route.params.id || \'\')" page="'+req.params.page+'" field="'+fhir+'" title="'+sections[fhir].title+'"'
+        vueOutput = '<'+resourceElement+' :fhir-id="fhirId" :edit="isEdit" v-on:setEdit="setEdit($event)" profile="'+resource.url+'" :key="$route.params.page+($route.params.id || \'\')" page="'+req.params.page+'" field="'+fhir+'" title="'+sections[fhir].title+'"'
         if ( sectionKeys.length > 1 ) {
           sectionMenu = sectionKeys.map( name => { return { name: name, title: sections[name].title, desc: sections[name].description, secondary: !!sections[name].resource } } )
           vueOutput += " :section-menu='"+JSON.stringify(sectionMenu).replace(/'/g, "\'")+"'"
@@ -330,7 +332,7 @@ router.get('/page/:page', function(req, res) {
           vueOutput += "</template></ihris-section>\n"
         }
 
-        vueOutput += '</template></ihris-resource>'+"\n"
+        vueOutput += '</template></'+resourceElement+'>'+"\n"
       }
       vueOuput = "</template>"
       console.log(vueOutput)

@@ -8,7 +8,7 @@
   },
   "parameter": [{
       "name": "fhir:base",
-      "valueString": "http://localhost:8081/scratchpad/fhir"
+      "valueString": "http://localhost:8080/hapi/fhir"
     },
     {
       "name": "emnutt:base",

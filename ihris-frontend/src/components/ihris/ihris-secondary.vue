@@ -102,7 +102,7 @@ export default {
           } )
         }
       } ).catch( err => {
-            this.loading = false
+        this.loading = false
         console.log(err)
       } )
 
@@ -113,26 +113,7 @@ export default {
         return output.join(" ")
       } else if ( isObject( content ) ) {
         if ( content.code && content.system ) {
-          try {
-            let response = await fetch( "/fhir/CodeSystem/$lookup?system="+content.system+"&code="+content.code )
-            if ( response.status === 200 ) {
-              let data = await response.json()
-              if ( data.parameter ) {
-                let display = data.parameter.find( param => param.name === "display" )
-                if ( display ) {
-                  return display.valueString
-                } else {
-                  console.log("No display data found", data)
-                  return content.display || content.code || "Unknown"
-                }
-              }
-            } else {
-              return content.display || content.code || "Unknown"
-            }
-          } catch( err ) {
-            console.log(err)
-            return content.display || content.code || "Unknown"
-          } 
+          return await this.$fhirutils.codeLookup( content.system, content.code )
         } else if ( content.display ) {
           return content.display
         } else if ( content.code ) {

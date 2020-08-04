@@ -35,7 +35,7 @@ export default {
         if ( this.slotProps.source.fromArray ) {
           this.source.data = this.slotProps.source.data
         } else {
-          let expression = this.field.substring( this.field.indexOf(':')+1 )
+          let expression = this.$fhirutils.pathFieldExpression( this.field )
           this.source.data = this.$fhirpath.evaluate( this.slotProps.source.data, expression )
         }
         //console.log("ID",this.source,this.slotProps)
