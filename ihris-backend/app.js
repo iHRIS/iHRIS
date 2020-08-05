@@ -12,7 +12,6 @@ const requireFromString = require('require-from-string')
 const fhirModules = require('./modules/fhirModules')
 
 const RedisStore = require('connect-redis')(session)
-let redisClient = redis.createClient()
 
 const app = express()
 
@@ -21,6 +20,7 @@ var configLoaded = false
 async function startUp() {
   await nconf.loadRemote()
   console.log(nconf.get())
+  let redisClient = redis.createClient( nconf.get("redis:url") )
 
   const indexRouter = require('./routes/index')
   const configRouter = require('./routes/config')
