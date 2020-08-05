@@ -55,6 +55,8 @@ export default {
       links: []
     },
     nav: {
+      active: null,
+      menu: {}
     }
   }),
   components: {
@@ -88,6 +90,11 @@ export default {
           if (data.hasOwnProperty("user")) {
             if (data.user.hasOwnProperty("loggedin")) this.header.user.loggedin = data.user.loggedin
             if (data.user.hasOwnProperty("name")) this.header.user.name = data.user.name
+          }
+            console.log("FROM SITE",data)
+          if (data.hasOwnProperty("nav")) {
+            if (data.nav.hasOwnProperty("active")) this.nav.active = data.nav.active
+            if (data.nav.hasOwnProperty("menu")) this.nav.menu = data.nav.menu
           }
         })
       })
