@@ -9,113 +9,48 @@
     <v-list
       nav
       dark
-      dense
-    >
-      <v-list-group
-        prepend-icon="mdi-account-multiple"
-        color="white--text"
-        :class="personClass"
-        :value="person"
-        @change="setPerson()"
-      >
-        <template v-slot:activator>
-          <v-list-item-title class="subtitle-1 font-weight-bold text-uppercase">People</v-list-item-title>
-        </template>
-        <v-list-item
-          to="/resource/search/practitioner"
-          active-class="primary darken-2"
-          class="text-right"
-          dense
-        >
-          <v-list-item-title>Search People</v-list-item-title>
-          <v-icon>mdi-chevron-right</v-icon>
-        </v-list-item>
-        <v-list-item
-          to="/questionnaire/ihris-practitioner/practitioner"
-          active-class="primary darken-2"
-          class="text-right"
-          dense
-        >
-          <v-list-item-title>Add Person</v-list-item-title>
-          <v-icon>mdi-chevron-right</v-icon>
-        </v-list-item>
-        <v-list-item
-          to="/resource/add/practitioner"
-          active-class="primary darken-2"
-          class="text-right"
-          dense
-        >
-          <v-list-item-title>Add Person (old)</v-list-item-title>
-          <v-icon>mdi-chevron-right</v-icon>
-        </v-list-item>
-      </v-list-group>
-      <v-list-group
-        prepend-icon="mdi-account-multiple"
-        color="white--text"
-        :class="positionClass"
-        :value="position"
-        @change="setPosition()"
-      >
-        <template v-slot:activator>
-          <v-list-item-title class="subtitle-1 font-weight-bold text-uppercase">Position</v-list-item-title>
-        </template>
-        <v-list-item
-          to="/resource/search/practitionerrole"
-          active-class="primary darken-2"
-          class="text-right"
-          dense
-        >
-          <v-list-item-title>Search Positions</v-list-item-title>
-          <v-icon>mdi-chevron-right</v-icon>
-        </v-list-item>
-        <v-list-item
-          to="/resource/add/practitionerrole"
-          active-class="primary darken-2"
-          class="text-right"
-          dense
-        >
-          <v-list-item-title>Add Position</v-list-item-title>
-          <v-icon>mdi-chevron-right</v-icon>
-        </v-list-item>
-      </v-list-group>
-      <v-list-group
-        prepend-icon="mdi-cellphone-basic"
-        color="white--text"
-        :class="mheroClass"
-        :value="mhero"
-        @change="setMhero()"
-      >
-        <template v-slot:activator>
-          <v-list-item-title class="subtitle-1 font-weight-bold">
-            mHero
-          </v-list-item-title>
-        </template>
-        <v-list-item
-          to="/page/mhero"
-          active-class="primary darken-2"
-          class="text-right"
-          dense
-        >
-          <v-list-item-title>Send Messages</v-list-item-title>
-          <v-icon>mdi-chevron-right</v-icon>
-        </v-list-item>
-        <v-list-item
-          to="/resource/add/practitionerrole"
-          active-class="primary darken-2"
-          class="text-right"
-          dense
-        >
-          <v-list-item-title>mHero Dashboard</v-list-item-title>
-          <v-icon>mdi-chevron-right</v-icon>
-        </v-list-item>
-      </v-list-group>
+      dense>
 
-      <v-list-item to="/dashboard">
-        <v-list-item-icon>
-          <v-icon>mdi-poll-box</v-icon>
-        </v-list-item-icon>
-        <v-list-item-title class="subtitle-1 font-weight-bold text-uppercase">Dashboard</v-list-item-title>
-      </v-list-item>
+      <template v-for="item in menu">
+        
+        <template v-if="item.menu">
+
+          <v-list-group
+            :key="item.id"
+            :prepend-icon="item.icon"
+            color="white--text"
+            :value="item.toggle"
+            v-model="item.toggle"
+            :class="(item.toggle ? 'primary darken-2' : '')"
+            no-action
+            >
+            <template v-slot:activator>
+              <v-list-item-title class="subtitle-1 font-weight-bold text-uppercase">{{item.text}}</v-list-item-title>
+            </template>
+            <v-list-item 
+              v-for="sub in item.menu"
+              :key="sub.id"
+              :to="sub.url"
+              active-class="primary darken-2"
+              class="text-right"
+              dense
+              >
+                <v-list-item-title>{{sub.text}}</v-list-item-title>
+                <v-icon>mdi-chevron-right</v-icon>
+              </v-list-item>
+
+          </v-list-group>
+        </template>
+        <template v-else>
+          <v-list-item :to="item.url" :key="item.id">
+            <v-list-item-icon>
+              <v-icon>{{item.icon}}</v-icon>
+            </v-list-item-icon>
+            <v-list-item-title class="subtitle-1 font-weight-bold text-uppercase">{{item.text}}</v-list-item-title>
+          </v-list-item>
+
+        </template>
+      </template>
 
     </v-list>
   </v-navigation-drawer>
@@ -127,39 +62,90 @@ export default {
   props: ["nav"],
   data: function() {
     return {
-      personClass: "",
-      person: false,
-      positionClass: "",
-      position: false,
-      mheroClass: "",
-      mhero: false
+      menu: [ 
+        {
+          id: "person",
+          icon: "mdi-account-multiple",
+          text: "People",
+          toggle: true,
+          menu: [
+            {
+              id: "search",
+              url: "/resource/search/practitioner",
+              text: "Search People"
+            },
+            {
+              id: "add",
+              url: "/questionnaire/ihris-practitioner/practitioner",
+              text: "Add Person"
+            },
+            {
+              id: "add_old",
+              url: "/resource/add/practitioner",
+              text: "Add Person (old)"
+            }
+          ]
+        },
+        {
+          id: "position",
+          icon: "mdi-account-multiple",
+          text: "Positions",
+          toggle: false,
+          menu: [
+            {
+              id: "search",
+              url: "/resource/search/practitionerrole",
+              text: "Search Positions"
+            },
+            {
+              id: "add",
+              url: "/resource/add/practitionerrole",
+              text: "Add Position"
+            }
+          ]
+        },
+        {
+          id: "mhero",
+          icon: "mdi-cellphone-basic",
+          text: "mHero",
+          toggle: false,
+          menu: [
+            {
+              id: "send",
+              url: "/page/mhero",
+              text: "Send Messages"
+            },
+            {
+              id: "dashboard",
+              url: null,
+              text: "mHero Dashboard"
+            }
+          ]
+        },
+        {
+          id: "vocab",
+          icon: "mdi-database",
+          text: "Database",
+          toggle: false,
+          menu: [
+            {
+              id: "job",
+              url: "/resource/search/job",
+              text: "Jobs"
+            }
+          ]
+        },
+        {
+          id: "dashboard",
+          icon: "mdi-poll-box",
+          url: null,
+          text: "Dashboard",
+          toggle: false
+        }
+      ]
     };
   },
   methods: {
-    setPerson: function() {
-      this.person = !this.person;
-      if (this.person) {
-        this.personClass = "primary darken-2";
-      } else {
-        this.personClass = "";
-      }
-    },
-    setPosition: function() {
-      this.position = !this.position;
-      if (this.position) {
-        this.positionClass = "primary darken-2";
-      } else {
-        this.positionClass = "";
-      }
-    },
-    setMhero: function() {
-      this.mhero = !this.mhero;
-      if (this.mhero) {
-        this.mheroClass = "primary darken-2";
-      } else {
-        this.mheroClass = "";
-      }
-    }
   }
 };
 </script>

@@ -29,7 +29,7 @@
 <script>
 export default {
   name: "ihris-search",
-  props: ["profile", "fields", "label", "terms", "page"],
+  props: ["profile", "fields", "label", "terms", "page", "resource"],
   data: function() {
     return {
       debug: "",
@@ -100,7 +100,7 @@ export default {
         }
         url =
           "/fhir/" +
-          this.label +
+          this.resource +
           "?_count=" +
           count +
           "&_total=accurate&_profile=" +

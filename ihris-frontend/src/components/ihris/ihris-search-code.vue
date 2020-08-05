@@ -2,7 +2,7 @@
   <v-container class="py-5">
     <v-card>
       <v-card-title>
-        Search {{ label }}
+        {{ label }}
         <v-spacer></v-spacer>
         <slot></slot>
         <v-text-field
@@ -12,6 +12,11 @@
           single-line
           hide-details>
         </v-text-field>
+        <v-spacer></v-spacer>
+        <v-btn class="primary" :to="'/resource/add/'+page">
+          <v-icon>mdi-database-plus</v-icon>
+          Add {{label}}
+        </v-btn>
       </v-card-title>
       <v-card-subtitle v-if="error_message" class="white--text error">{{ error_message }}</v-card-subtitle>
       <v-data-table
@@ -35,7 +40,7 @@
 
 export default {
   name: "ihris-search-code",
-  props: ["profile","fields","label","terms","page"],
+  props: ["profile","fields","label","terms","page","resource"],
   data: function() {
     return {
       debug: "",

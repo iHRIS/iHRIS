@@ -24,7 +24,7 @@
           <v-icon light>mdi-pencil</v-icon>
           <span>Edit</span>
           </v-btn>
-          <v-btn v-else dark class="secondary" @click="$router.go(0)">
+          <v-btn v-else dark class="secondary" @click="fhirId ? $router.go(0) : $router.go(-1)">
           <v-icon light>mdi-pencil-off</v-icon>
           <span>Cancel</span>
           </v-btn>

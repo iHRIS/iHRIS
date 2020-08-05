@@ -179,7 +179,7 @@ router.get('/page/:page', function(req, res) {
         resourceElement = "ihris-codesystem"
       }
 
-      let searchTemplate = '<'+searchElement+' :key="$route.params.page" page="'+req.params.page+'" label="'+(resource.title || resource.name)+'" :fields="fields" :terms="terms" profile="'+resource.url+'">'+"\n"
+      let searchTemplate = '<'+searchElement+' :key="$route.params.page" page="'+req.params.page+'" label="'+(resource.title || resource.name)+'" :fields="fields" :terms="terms" resource="'+(resource.resourceType === "StructureDefinition" ? resource.type : resource.resourceType)+'" profile="'+resource.url+'">'+"\n"
       for( let filter of filters ) {
         searchTemplate += '<ihris-search-term v-on:termChange="searchData"'
         if ( filter.length == 1 ) {

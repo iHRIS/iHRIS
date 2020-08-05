@@ -1,5 +1,5 @@
 module.exports = {
-  search: '<ihris-search :key="$route.params.page" page="test-practitioner" label="Health Worker" :fields="fields" :terms="terms" profile="http://ihris.org/fhir/StructureDefinition/ihris-test-practitioner">\n' +
+  search: '<ihris-search :key="$route.params.page" page="test-practitioner" label="Health Worker" :fields="fields" :terms="terms" resource="Practitioner" profile="http://ihris.org/fhir/StructureDefinition/ihris-test-practitioner">\n' +
   '<ihris-search-term v-on:termChange="searchData" label="Name" expression="name:contains"></ihris-search-term>\n' +
   '<ihris-search-term v-on:termChange="searchData" label="Gender" expression="gender"></ihris-search-term>\n' +
   '</ihris-search>\n',
