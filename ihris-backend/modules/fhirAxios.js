@@ -1,5 +1,10 @@
 const axios = require('axios')
 const URL = require('url').URL
+const Qs = require('qs')
+
+axios.defaults.paramsSerializer = (params) => {
+  return Qs.stringify(params, {arrayFormat: 'repeat'})
+}
 
 class InvalidRequestError extends Error {
   constructor (message, status) {
@@ -64,7 +69,6 @@ const fhirAxios = {
       axios.get( url.href, { auth: auth } ).then ( (response) => {
         resolve(response.data)
       } ).catch( (err) => {
-        console.log("FA", err)
         reject( err )
       } )
 
