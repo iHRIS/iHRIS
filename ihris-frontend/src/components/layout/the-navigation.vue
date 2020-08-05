@@ -110,7 +110,6 @@ export default {
         this.menu.push( entry )
       }
       this.menu.sort( (a,b) => { a.order === b.order ? 0 : ( a.order < b.order ? -1 : 1 ) } )
-      console.log(this.menu)
     }
   }
 }
