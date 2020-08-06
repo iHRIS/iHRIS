@@ -70,8 +70,10 @@ export default {
       fetch( "/fhir/"+this.field+"/"+codeSystemId ).then(response => {
         response.json().then(data => {
           let types = {}
-          for ( let prop of data.property ) {
-            types[prop.code] = "value"+prop.type.charAt(0).toUpperCase() + prop.type.slice(1)
+          if ( data.property ) {
+            for ( let prop of data.property ) {
+              types[prop.code] = "value"+prop.type.charAt(0).toUpperCase() + prop.type.slice(1)
+            }
           }
           let formatted = data.concept.find( concept => concept.code === this.fhirId )
           //this.$store.commit('setCurrentResource', data)
@@ -106,12 +108,12 @@ export default {
           } catch (err) { //do nothing
           }
           */
-          if ( formatted.property ) {
+          if ( formatted && formatted.property ) {
             for( let property of formatted.property ) {
               formatted[property.code] = property[ types[ property.code ] ]
             }
+            delete formatted.property
           }
-          delete formatted.property
 
           this.source = { data: formatted, path: this.field }
           this.loading = false
