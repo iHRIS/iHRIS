@@ -100,6 +100,15 @@
           <v-icon>mdi-chevron-right</v-icon>
         </v-list-item>
         <v-list-item
+          to="/page/contact-groups"
+          active-class="primary darken-2"
+          class="text-right"
+          dense
+        >
+          <v-list-item-title>Contact Groups</v-list-item-title>
+          <v-icon>mdi-chevron-right</v-icon>
+        </v-list-item>
+        <v-list-item
           to="/resource/add/practitionerrole"
           active-class="primary darken-2"
           class="text-right"

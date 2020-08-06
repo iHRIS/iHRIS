@@ -2,7 +2,7 @@
   <v-container class="py-5">
     <v-card>
       <v-card-title>
-        {{ label }} List
+        {{ label }}
         <v-spacer></v-spacer>
         <slot></slot>
       </v-card-title>
@@ -159,25 +159,16 @@ export default {
                     }
                     for (let resIndex in this.results) {
                       let linkToVal = this.results[resIndex][resConn.linkTo];
-                      if (
-                        Array.isArray(linkToVal) &&
-                        Array.isArray(linkElementVal)
-                      ) {
+                      if (Array.isArray(linkToVal) && Array.isArray(linkElementVal)) {
                         let found = linkToVal.some(
                           r => linkElementVal.indexOf(r) >= 0
                         );
                         if (found) {
                           resultIndexes.push(resIndex);
                         }
-                      } else if (
-                        Array.isArray(linkToVal) &&
-                        linkToVal.indexOf(linkElementVal) !== -1
-                      ) {
+                      } else if (Array.isArray(linkToVal) && linkToVal.indexOf(linkElementVal) !== -1) {
                         resultIndexes.push(resIndex);
-                      } else if (
-                        Array.isArray(linkElementVal) &&
-                        linkElementVal.indexOf(linkToVal) !== -1
-                      ) {
+                      } else if (Array.isArray(linkElementVal) && linkElementVal.indexOf(linkToVal) !== -1) {
                         resultIndexes.push(resIndex);
                       } else if (linkToVal === linkElementVal) {
                         resultIndexes.push(resIndex);
@@ -196,21 +187,17 @@ export default {
                   );
                   for (let field of fieldsDetails.fields) {
                     for (let resultIndex of resultIndexes) {
-                      this.results[resultIndex][
-                        field[1]
-                      ] = this.$fhirpath.evaluate(entry.resource, field[1]);
+                      if(this.results[resultIndex][field[1]]) {
+                          this.results[resultIndex][field[1]] += ", " + this.$fhirpath.evaluate(entry.resource, field[1]);
+                        } else {
+                          this.results[resultIndex][field[1]] = this.$fhirpath.evaluate(entry.resource, field[1]);
+                        }
                     }
                   }
-                  if (
-                    fieldsDetails.hiddenFields &&
-                    Array.isArray(fieldsDetails.hiddenFields)
-                  ) {
+                  if (fieldsDetails.hiddenFields && Array.isArray(fieldsDetails.hiddenFields)) {
                     for (let field of fieldsDetails.hiddenFields) {
                       let fieldPath = field[1].split(".");
-                      let pathValue = this.$fhirpath.evaluate(
-                        entry.resource,
-                        field[1]
-                      );
+                      let pathValue = this.$fhirpath.evaluate(entry.resource, field[1]);
                       if (fieldPath[fieldPath.length - 1] === "id") {
                         pathValue = fieldPath[0] + "/" + pathValue;
                       }

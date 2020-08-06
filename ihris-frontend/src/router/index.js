@@ -3,6 +3,7 @@ import VueRouter from "vue-router"
 import Home from "../views/home.vue"
 import Test from "../views/test.vue"
 import mhero from "../views/mhero/mhero.vue"
+import contactGroups from "../views/mhero/contact-groups.vue"
 
 Vue.use(VueRouter)
 
@@ -15,6 +16,11 @@ const routes = [{
     path: '/page/mhero',
     name: 'mhero',
     component: mhero
+  },
+  {
+    path: '/page/contact-groups',
+    name: 'contact-groups',
+    component: contactGroups
   },
   {
     path: "/test/:id",

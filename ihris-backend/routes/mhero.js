@@ -51,6 +51,31 @@ router.post("/send-message", function (req, res, next) {
   });
 });
 
+router.post('/subscribe-contact-groups', (req, res) => {
+  let subscriptionsData = req.body
+  async.eachSeries(subscriptionsData.groups, (groupID, nxtSubscr) => {
+    fhirAxios.read('Group', groupID).then((groupResource) => {
+      for(let memberID of subscriptionsData.members) {
+        let exist = groupResource.member.find((member) => {
+          return member.entity.reference === memberID
+        })
+        if(!exist) {
+          groupResource.member.push({
+            entity: {
+              reference: memberID
+            }
+          })
+        }
+      }
+      fhirAxios.update(groupResource).then((response) => {
+        return nxtSubscr();
+      })
+    })
+  }, () => {
+    return res.status(200).send()
+  })
+})
+
 /**
  * Get all workflows
  */

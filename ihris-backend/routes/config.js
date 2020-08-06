@@ -146,7 +146,7 @@ router.get('/page/:page', function(req, res) {
         searchfield: searchfield,
         columns: columns,
         elements: {}
-      } 
+      }
     }
     let sdOrder = {}
     const getSortFunc = (sortArr) => {
@@ -363,7 +363,7 @@ router.get('/page/:page', function(req, res) {
 
       getDefinition( pageResource ).then( (resource) => {
         if ( allowed !== true ) {
-          // Can't think of a reason to have this level of permissions for 
+          // Can't think of a reason to have this level of permissions for
           // StructureDefinitions, but just in case...
           let objAllowed = req.user.hasPermissionByObject( "read", resource )
           if ( objAllowed !== true ) {
@@ -377,7 +377,7 @@ router.get('/page/:page', function(req, res) {
           outcome.issue[0].diagnostics = "StructureDefinitions must be saved with a snapshot."
           return res.status(404).json( outcome )
         }
-        
+
         const structure = fhirDefinition.parseStructureDefinition( resource )
         createTemplates( resource, structure )
 
@@ -412,12 +412,12 @@ router.get('/questionnaire/:questionnaire', function(req, res) {
   fhirAxios.read( "Questionnaire", req.params.questionnaire ).then ( async (resource) => {
 
 
-    let vueOutput = '<ihris-questionnaire :edit=\"isEdit\" :view-page="viewPage" url="' + resource.url + '" id="' + resource.id 
-      + '" title="' + resource.title 
-      + '" description="' + resource.description + '" purpose="' + resource.purpose 
+    let vueOutput = '<ihris-questionnaire :edit=\"isEdit\" :view-page="viewPage" url="' + resource.url + '" id="' + resource.id
+      + '" title="' + resource.title
+      + '" description="' + resource.description + '" purpose="' + resource.purpose
       + '"__SECTIONMENU__>' + "\n"
 
-    
+
     let sectionMenu = []
 
     const processQuestionnaireItems = async ( items ) => {
@@ -443,7 +443,7 @@ router.get('/questionnaire/:questionnaire', function(req, res) {
             let answerTypes = Object.keys( item.answerOption[0] )
             for( let answerType of answerTypes ) {
               if ( answerType.startsWith("value") ) {
-                vueOutput += " :hiddenValue='" + JSON.stringify( item.answerOption[0][answerType] ).replace(/'/g, "\'") 
+                vueOutput += " :hiddenValue='" + JSON.stringify( item.answerOption[0][answerType] ).replace(/'/g, "\'")
                   + "' hiddenType='" + answerType.substring(5) + "'"
                   break
                 }
@@ -521,14 +521,14 @@ router.get('/questionnaire/:questionnaire', function(req, res) {
 
 router.get('/report/:report', function (req, res) {
   let report = "ihris-report-" + req.params.report
-  // if (!req.user) {
-  //   return res.status(401).json(outcomes.NOTLOGGEDIN)
-  // }
-  // let allowed = req.user.hasPermissionByName("read", "Basic", report)
-  // // Limited access to these don't make sense so not allowing it for now
-  // if (allowed !== true) {
-  //   return res.status(401).json(outcomes.DENIED)
-  // }
+  if (!req.user) {
+    return res.status(401).json(outcomes.NOTLOGGEDIN)
+  }
+  let allowed = req.user.hasPermissionByName("read", "Basic", report)
+  // Limited access to these don't make sense so not allowing it for now
+  if (allowed !== true) {
+    return res.status(401).json(outcomes.DENIED)
+  }
   fhirAxios.read("Basic", report).then(async (resource) => {
     let reportDetails = resource.extension.find((ext) => {
       return ext.url === "http://ihris.org/fhir/StructureDefinition/ihris-report-details"
@@ -552,23 +552,25 @@ router.get('/report/:report', function (req, res) {
       } else {
         hiddenFields.resourceType = resource.type
       }
-      for (let link of resource.link) {
-        hiddenFields.fields.push([link.path, link.path])
-        for (let target of link.target) {
-          let linkElement, linkTo
-          if (target.params) {
-            linkElement = target.params
-          } else {
-            linkElement = target.type + '.id'
-          }
-          linkTo = link.path
-          graphData.links.push({
-            resourceType: target.type,
-            linkElement,
-            linkTo
-          })
-          if (target.link) {
-            parseGraphDefinition(target, graphData)
+      if(resource.link && Array.isArray(resource.link)) {
+        for (let link of resource.link) {
+          hiddenFields.fields.push([link.path, link.path])
+          for (let target of link.target) {
+            let linkElement, linkTo
+            if (target.params) {
+              linkElement = target.params
+            } else {
+              linkElement = target.type + '.id'
+            }
+            linkTo = link.path
+            graphData.links.push({
+              resourceType: target.type,
+              linkElement,
+              linkTo
+            })
+            if (target.link) {
+              parseGraphDefinition(target, graphData)
+            }
           }
         }
       }

@@ -64,7 +64,7 @@ router.get("/:resource/:id?", (req, res, next) => {
         fhirFilter.filterBundle( "read", resource, req.user )
       }
       return res.status(200).json(resource)
-      
+
       // DELETE THE FOLLOWING, ALL NEED TO BE FILTERED
       /*
       if ( allowed === true ) {
