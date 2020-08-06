@@ -94,7 +94,7 @@ export default {
           if ( data.concept && data.concept.length > 0 ) {
             for( let entry of data.concept ) {
               let result = { code: entry.code, display: entry.display, definition: entry.definition }
-              if ( entry.property ) {
+              if ( entry.property && data.property ) {
                 for ( let prop of data.property ) {
                   let property = entry.property.find( conceptProp => conceptProp.code === prop.code )
                   if ( property ) {
