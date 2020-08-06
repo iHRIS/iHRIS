@@ -106,11 +106,12 @@ export default {
           } catch (err) { //do nothing
           }
           */
-          for( let property of formatted.property ) {
-            formatted[property.code] = property[ types[ property.code ] ]
+          if ( formatted.property ) {
+            for( let property of formatted.property ) {
+              formatted[property.code] = property[ types[ property.code ] ]
+            }
           }
           delete formatted.property
-          console.log(formatted)
 
           this.source = { data: formatted, path: this.field }
           this.loading = false
