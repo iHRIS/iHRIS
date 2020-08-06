@@ -1,0 +1,23 @@
+{
+  "resourceType": "GraphDefinition",
+  "id": "ihris-report-mhero",
+  "meta": {
+    "versionId": "2",
+    "lastUpdated": "2020-07-28T20:53:22.645+03:00",
+    "source": "#TiZ91mWdekRHUPYi"
+  },
+  "start": "Practitioner",
+  "link": [{
+    "path": "Practitioner.id",
+    "target": [{
+      "type": "PractitionerRole",
+      "params": "PractitionerRole.practitioner.reference",
+      "link": [{
+        "path": "PractitionerRole.location.reference",
+        "target": [{
+          "type": "Location"
+        }]
+      }]
+    }]
+  }]
+}

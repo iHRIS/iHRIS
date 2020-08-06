@@ -76,6 +76,26 @@ router.post('/subscribe-contact-groups', (req, res) => {
   })
 })
 
+router.post('/unsubscribe-contact-groups', (req, res) => {
+  let subscriptionsData = req.body
+  async.eachSeries(subscriptionsData.groups, (groupID, nxtSubscr) => {
+    fhirAxios.read('Group', groupID).then((groupResource) => {
+      for(let memberID of subscriptionsData.members) {
+        for(let index in groupResource.member) {
+          if(groupResource.member[index].entity.reference === memberID) {
+            groupResource.member.splice(index, 1)
+          }
+        }
+      }
+      fhirAxios.update(groupResource).then((response) => {
+        return nxtSubscr();
+      })
+    })
+  }, () => {
+    return res.status(200).send()
+  })
+})
+
 /**
  * Get all workflows
  */

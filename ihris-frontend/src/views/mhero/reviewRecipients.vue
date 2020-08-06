@@ -1,5 +1,42 @@
 <template>
   <v-container>
+    <v-dialog
+      persistent
+      v-model="statusDialog.enable"
+      max-width="300"
+    >
+      <v-card>
+        <v-toolbar
+          :color="statusDialog.color"
+          dark
+        >
+          <v-toolbar-title>
+            <v-icon v-text="statusDialog.icon"></v-icon>
+            {{statusDialog.title}}
+          </v-toolbar-title>
+          <v-spacer></v-spacer>
+          <v-btn
+            icon
+            dark
+            @click.native="statusDialog.enable = false"
+          >
+            <v-icon>mdi-close</v-icon>
+          </v-btn>
+        </v-toolbar>
+        <v-card-text>
+          <b>{{statusDialog.description}}</b>
+        </v-card-text>
+        <v-card-actions>
+          <v-spacer />
+          <v-btn
+            dark
+            class="white--font"
+            color="primary"
+            @click="statusDialog.enable = false"
+          >Ok</v-btn>
+        </v-card-actions>
+      </v-card>
+    </v-dialog>
     <v-img
       src="@/assets/mHero.png"
       width="100"
@@ -82,7 +119,15 @@ export default {
       workflows: [],
       workflow: {},
       communicationType: "",
-      sms: ""
+      sms: "",
+      statusDialog: {
+        width: '500px',
+        enable: false,
+        color: 'error',
+        icon: 'mdi-alert-circle-outline',
+        title: '',
+        description: ''
+      }
     };
   },
   methods: {
@@ -118,7 +163,24 @@ export default {
         redirect: "manual"
       };
       fetch(url, opts).then(() => {
-        console.log("Success");
+        this.statusDialog.enable = true
+        this.statusDialog.color = 'success'
+        this.statusDialog.title = 'Success'
+        if(this.communicationType === "sms") {
+          this.statusDialog.description = 'Message Sent Successfully'
+        } else {
+          this.statusDialog.description = 'Workflow Started Successfully'
+        }
+      }).catch(err => {
+        this.statusDialog.enable = true
+        this.statusDialog.color = 'error'
+        this.statusDialog.title = 'Error'
+        if(this.communicationType === "sms") {
+          this.statusDialog.description = 'Failed to send Message'
+        } else {
+          this.statusDialog.description = 'Failed to start a workflow'
+        }
+        console.log(err);
       });
     }
   },

@@ -1,0 +1,37 @@
+{
+  "resourceType": "Basic",
+  "id": "ihris-report-groups",
+  "meta": {
+    "versionId": "5",
+    "lastUpdated": "2020-07-29T12:12:29.419+03:00",
+    "source": "#wZsikoUr4SukKuEl"
+  },
+  "extension": [{
+    "url": "http://ihris.org/fhir/StructureDefinition/ihris-report-details",
+    "extension": [{
+        "url": "name",
+        "valueString": "Groups"
+      },
+      {
+        "url": "displayCheckbox",
+        "valueBoolean": true
+      },
+      {
+        "url": "http://ihris.org/fhir/StructureDefinition/ihris-resource-relationships",
+        "extension": [{
+            "url": "name",
+            "valueString": "Group"
+          },
+          {
+            "url": "field",
+            "valueString": "Group Name|name"
+          },
+          {
+            "url": "filter",
+            "valueString": "Name|name"
+          }
+        ]
+      }
+    ]
+  }]
+}

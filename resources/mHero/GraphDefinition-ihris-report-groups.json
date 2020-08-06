@@ -1,0 +1,11 @@
+{
+  "resourceType": "GraphDefinition",
+  "id": "ihris-report-groups",
+  "meta": {
+    "versionId": "2",
+    "lastUpdated": "2020-07-28T20:53:22.645+03:00",
+    "source": "#TiZ91mWdekRHUPYi"
+  },
+  "status": "active",
+  "start": "Group"
+}
