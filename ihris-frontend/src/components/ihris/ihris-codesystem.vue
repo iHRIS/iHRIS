@@ -183,6 +183,8 @@ export default {
             this.$router.push({ name:"resource_view", params: {page: this.page, id: this.fhir.code } })
           }
         } 
+      } ).catch(err => {
+        console.log("FAILED TO SAVE",url,err)
       } )
       //console.log(this.fhir)
 
