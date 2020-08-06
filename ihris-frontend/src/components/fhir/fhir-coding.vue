@@ -21,7 +21,7 @@
         <v-col cols="9" v-if="loading">
           <v-progress-linear indeterminate color="primary"></v-progress-linear>
         </v-col>
-        <v-col cols="9" v-else>{{value.display || ""}}</v-col>
+        <v-col cols="9" v-else>{{valueDisplay || value.display || ""}}</v-col>
       </v-row>
       <v-divider></v-divider>
     </div>
@@ -39,6 +39,7 @@ export default {
     return {
       value: { system: "", code: "", display: "" },
       valueCode: "",
+      valueDisplay: "",
       loading: true,
       err_messages: null,
       error: false,
@@ -57,12 +58,17 @@ export default {
       },
       deep: true
     },
-    valueCode: function() {
+    valueCode: function( code ) {
       if ( this.items ) {
-        let findValue = this.items.find( item => item.code === this.valueCode )
+        let findValue = this.items.find( item => item.code === code )
         if ( findValue ) {
           this.value = findValue
         }
+      }
+      if ( this.value.system && this.value.code ) {
+        this.$fhirutils.codeLookup( this.value.system, this.value.code ).then( display => {
+          this.valueDisplay = display
+        } )
       }
     }
   },
@@ -77,9 +83,10 @@ export default {
           if ( this.source.data ) {
             this.value = this.source.data
             this.valueCode = this.value.code
+            //console.log("set",this.value,this.valueCode)
           }
         } else {
-          let expression = this.field.substring( this.field.indexOf(':')+1 )
+          let expression = this.$fhirutils.pathFieldExpression( this.field )
           this.source.data = this.$fhirpath.evaluate( this.slotProps.source.data, expression )
           //console.log("FPATH info",this.path,this.slotProps)
           //console.log("FPATH setting value to",this.field,this.source.data[0],expression,this.slotProps.source.data)

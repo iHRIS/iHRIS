@@ -70,6 +70,9 @@ export default {
         this.headers.push({ text: field[0], value: field[1] });
       }
     }
+    eventBus.$on("reload-report", () => {
+      this.getData()
+    })
   },
   mounted: function() {
     this.getData(true);

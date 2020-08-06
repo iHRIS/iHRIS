@@ -28,6 +28,7 @@ export default {
             data: function() { return { isEdit: true, fhirId: undefined } }, 
             components: { 
               "ihris-resource": () => import(/* webpackChunkName: "fhir-main" */ "@/components/ihris/ihris-resource" ),
+              "ihris-codesystem": () => import(/* webpackChunkName: "fhir-main" */ "@/components/ihris/ihris-codesystem" ),
               "ihris-section": () => import(/* webpackChunkName: "fhir-main" */ "@/components/ihris/ihris-section" ),
               "ihris-secondary": () => import(/* webpackChunkName: "fhir-main" */ "@/components/ihris/ihris-secondary" ),
               "ihris-array": () => import(/* webpackChunkName: "fhir-main" */ "@/components/ihris/ihris-array" ),

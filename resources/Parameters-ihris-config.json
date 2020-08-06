@@ -93,6 +93,122 @@
         {
           "name": "site:footer:links:ihris:href",
           "valueString": "http://ihris.org/"
+        },
+        {
+          "name": "site:nav:active",
+          "valueString": "person"
+        },
+        {
+          "name": "site:nav:menu:person:text",
+          "valueString": "People"
+        },
+        {
+          "name": "site:nav:menu:person:order",
+          "valueString": "1"
+        },
+        {
+          "name": "site:nav:menu:person:icon",
+          "valueString": "mdi-account-multiple"
+        },
+        {
+          "name": "site:nav:menu:person:menu:person_search:text",
+          "valueString": "Search People"
+        },
+        {
+          "name": "site:nav:menu:person:menu:person_search:url",
+          "valueString": "/resource/search/practitioner"
+        },
+        {
+          "name": "site:nav:menu:person:menu:person_add:text",
+          "valueString": "Add Person"
+        },
+        {
+          "name": "site:nav:menu:person:menu:person_add:url",
+          "valueString": "/questionnaire/ihris-practitioner/practitioner"
+        },
+        {
+          "name": "site:nav:menu:position:text",
+          "valueString": "Positions"
+        },
+        {
+          "name": "site:nav:menu:position:order",
+          "valueString": "2"
+        },
+        {
+          "name": "site:nav:menu:position:icon",
+          "valueString": "mdi-account-multiple"
+        },
+        {
+          "name": "site:nav:menu:position:menu:position_search:text",
+          "valueString": "Search Positions"
+        },
+        {
+          "name": "site:nav:menu:position:menu:position_search:url",
+          "valueString": "/resource/search/practitionerrole"
+        },
+        {
+          "name": "site:nav:menu:position:menu:position_add:text",
+          "valueString": "Add Position"
+        },
+        {
+          "name": "site:nav:menu:position:menu:position_add:url",
+          "valueString": "/resource/add/practitionerrole"
+        },
+        {
+          "name": "site:nav:menu:mhero:order",
+          "valueString": "3"
+        },
+        {
+          "name": "site:nav:menu:mhero:text",
+          "valueString": "mHero"
+        },
+        {
+          "name": "site:nav:menu:mhero:icon",
+          "valueString": "mdi-cellphone-basic"
+        },
+        {
+          "name": "site:nav:menu:mhero:menu:message:text",
+          "valueString": "Send Messages"
+        },
+        {
+          "name": "site:nav:menu:mhero:menu:message:url",
+          "valueString": "/page/mhero"
+        },
+        {
+          "name": "site:nav:menu:database:text",
+          "valueString": "Database"
+        },
+        {
+          "name": "site:nav:menu:database:order",
+          "valueString": "4"
+        },
+        {
+          "name": "site:nav:menu:database:icon",
+          "valueString": "mdi-database"
+        },
+        {
+          "name": "site:nav:menu:database:menu:job:text",
+          "valueString": "Job Titles"
+        },
+        {
+          "name": "site:nav:menu:database:menu:job:url",
+          "valueString": "/resource/search/job"
+        },
+        {
+          "name": "site:nav:menu:dashboard:text",
+          "valueString": "Dashboard"
+        },
+        {
+          "name": "site:nav:menu:dashboard:order",
+          "valueString": "5"
+        },
+        {
+          "name": "site:nav:menu:dashboard:icon",
+          "valueString": "mdi-poll-box"
+        },
+         {
+          "name": "site:nav:menu:dashboard:url",
+          "valueString": "/dashboard"
         }
       ]
     }

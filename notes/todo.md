@@ -23,6 +23,8 @@
  * autocomplete?
 * questionnaire data entry
 * add form validation and required fields
+* add required fields
+* allow readonly fields (like code for codesystem edit, but not add)
 
 # Notes
 

@@ -7,7 +7,7 @@
     <v-content>
       <router-view :key="$route.path"/>
     </v-content>
-   
+
     <the-footer :footer="footer" />
   </v-app>
 </template>
@@ -55,6 +55,26 @@ export default {
       links: []
     },
     nav: {
+      active: null,
+      menu: {
+        'mhero': {
+          text: 'mHero',
+          icon: 'mdi-cellphone-basic',
+          menu: [{
+            id: 'sendSMS',
+            url: '/page/mhero',
+            text: 'Send Message'
+          }, {
+            id: 'subContGrps',
+            url: '/page/contact-groups',
+            text: 'Contact Groups'
+          }, {
+            id: 'dashboard',
+            url: '',
+            text: 'mHero Dashboard'
+          }]
+        }
+      }
     }
   }),
   components: {
@@ -88,6 +108,10 @@ export default {
           if (data.hasOwnProperty("user")) {
             if (data.user.hasOwnProperty("loggedin")) this.header.user.loggedin = data.user.loggedin
             if (data.user.hasOwnProperty("name")) this.header.user.name = data.user.name
+          }
+          if (data.hasOwnProperty("nav")) {
+            if (data.nav.hasOwnProperty("active")) this.nav.active = data.nav.active
+            if (data.nav.hasOwnProperty("menu")) this.nav.menu = data.nav.menu
           }
         })
       })
