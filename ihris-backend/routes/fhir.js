@@ -120,11 +120,15 @@ router.patch("/CodeSystem/:id/:code", (req, res) => {
   }
   let update = req.body
   fhirAxios.read( "CodeSystem", req.params.id ).then( (resource) => {
-    let codeIdx = resource.concept.findIndex( concept => concept.code === update.code )
-    if ( codeIdx === -1 ) {
-      resource.concept.push( update )
+    if ( resource.concept ) {
+      let codeIdx = resource.concept.findIndex( concept => concept.code === update.code )
+      if ( codeIdx === -1 ) {
+        resource.concept.push( update )
+      } else {
+        resource.concept[codeIdx] = update
+      }
     } else {
-      resource.concept[codeIdx] = update
+      resource.concept = [ update ]
     }
     fhirAxios.update( resource ).then( (resource) => {
       console.log("UPDATED",resource)
