@@ -11,7 +11,7 @@ const fhirutils = {
     fhirutils._code_loading[lookup] = false
     return value
   },
-  codeLookup: ( system, code ) => {
+  codeLookup: ( system, code, binding ) => {
     return new Promise( (resolve) => {
       let lookup = system + "#" + code
       if ( fhirutils._code_loading[lookup] ) {
@@ -28,28 +28,59 @@ const fhirutils = {
                 if ( display ) {
                   resolve( fhirutils._setCache( lookup, display.valueString ) )
                 } else {
-                  console.log("No display parameter found ",lookup,data)
-                  resolve( fhirutils._setCache( lookup, FHIRUTILS_UNKNOWN ) )
+                  console.log("No display parameter from codesystem found ",lookup,data)
+                  resolve( fhirutils._vsCodeLookup( binding, system, code ) )
                 }
               } else {
-                console.log("No display data found ",lookup,data)
-                resolve( fhirutils._setCache( lookup, FHIRUTILS_UNKNOWN ) )
+                console.log("No display data from codesystem found ",lookup,data)
+                resolve( fhirutils._vsCodeLookup( binding, system, code ) )
               }
             } ).catch( err => {
               console.log(err)
-              resolve( fhirutils._setCache( lookup, FHIRUTILS_ERROR ) )
+              resolve( fhirutils._vsCodeLookup( binding, system, code ) )
             } )
           } else {
-            console.log( "Invalid status for ",lookup)
-            resolve( fhirutils._setCache( lookup, FHIRUTILS_ERROR ) )
+            console.log( "Invalid status from codesystem for ",lookup)
+            resolve( fhirutils._vsCodeLookup( binding, system, code ) )
           }
         } ).catch( err => {
           console.log(err)
-          resolve( fhirutils._setCache( lookup, FHIRUTILS_ERROR ) )
+          resolve( fhirutils._vsCodeLookup( binding, system, code ) )
         } )
       } else {
         resolve( fhirutils._code_cache[lookup] )
       }
+    } )
+  },
+  _vsCodeLookup: ( valueset, system, code ) => {
+    return new Promise( (resolve) => {
+      let lookup = system + "#" + code
+      fetch( "/fhir/ValueSet" + valueset.substring( valueset.lastIndexOf('/') ) ).then( response => {
+        if ( response.status === 200 ) {
+          response.json().then( data => {
+            if ( data.compose && data.compose.include ) {
+              let included = data.compose.include.find( include => include.system === system )
+              if ( included.concept ) {
+                let display = included.concept.find( concept => concept.code === code )
+                if ( display.display ) {
+                  return resolve( fhirutils._setCache( lookup, display.display ) )
+                }
+              }
+            }
+            console.log("Unable to find lookup in valueset definition",lookup,data)
+            resolve( fhirutils._setCache( lookup, FHIRUTILS_UNKNOWN ) )
+          } ).catch( err => {
+            console.log(err)
+            resolve( fhirutils._setCache( lookup, FHIRUTILS_ERROR ) )
+          } )
+        } else {
+          console.log( "Invalid status for ",lookup)
+          resolve( fhirutils._setCache( lookup, FHIRUTILS_ERROR ) )
+        }
+      } ).catch( err => {
+        console.log(err)
+        resolve( fhirutils._setCache( lookup, FHIRUTILS_ERROR ) )
+      } )
     } )
   },
   pathFieldExpression: (field) => {

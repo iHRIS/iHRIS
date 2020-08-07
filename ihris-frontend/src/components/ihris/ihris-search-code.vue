@@ -106,7 +106,7 @@ export default {
                       }
                     } else if ( prop.type === "Coding" ) {
                       if ( property.valueCoding ) {
-                        result[ prop.code ] = await this.$fhirutils.codeLookup( property.valueCoding.system, property.valueCoding.code )
+                        result[ prop.code ] = await this.$fhirutils.codeLookup( property.valueCoding.system, property.valueCoding.code, prop.uri )
                       } else {
                         result[ prop.code ] = ""
                       }

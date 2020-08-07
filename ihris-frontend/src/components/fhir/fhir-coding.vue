@@ -66,7 +66,7 @@ export default {
         }
       }
       if ( this.value.system && this.value.code ) {
-        this.$fhirutils.codeLookup( this.value.system, this.value.code ).then( display => {
+        this.$fhirutils.codeLookup( this.value.system, this.value.code, this.binding || this.source.binding ).then( display => {
           this.valueDisplay = display
         } )
       }
