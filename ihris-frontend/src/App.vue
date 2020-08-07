@@ -1,10 +1,23 @@
 <template>
   <v-app id="top">
-    <the-header :header="header" />
-    <the-navigation :nav="nav" />
-
+    <the-header app :header="header" />
+    <the-navigation app :nav="nav" />
 
     <v-content>
+      <v-snackbar
+        app
+        class="mt-12"
+        v-model="$store.state.message.active"
+        :color="$store.state.message.type"
+        top
+        multi-line
+        >
+        {{ $store.state.message.text }}
+          <v-btn icon dark @click="$store.commit('closeMessage')">
+            <v-icon>mdi-close</v-icon>
+          </v-btn>
+      </v-snackbar>
+
       <router-view :key="$route.path"/>
     </v-content>
 
