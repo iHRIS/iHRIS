@@ -33,7 +33,7 @@ router.post("/add", function (req, res, next) {
     extension: [
       {
         //use this domain which is the only valid for the search parameters
-        url:config.profileUrlDomain + "/StructureDefinition/iHRISUserDetails",
+        url:config.structureDefinition + "/StructureDefinition/iHRISUserDetails",
         extension: [
           {
             url: "username",
