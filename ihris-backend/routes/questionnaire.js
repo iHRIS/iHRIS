@@ -16,25 +16,67 @@ router.post("/QuestionnaireResponse", (req, res, next) => {
     return res.status(401).json( outcomes.NOTLOGGEDIN )
   }
 
-  fhirQuestionnaire.processQuestionnaire( req.body ).then( (bundle) => {
-    console.log(JSON.stringify(bundle,null,2))
-    fhirFilter.filterBundle( "write", bundle, req.user )
+  let workflowModules = {}
+  const workflowConfig = {
+    processor: {
+      endrole: '../modules/workflowEndRole'
+    },
+    questionnaire: {
+      'http://ihris.org/fhir/Questionnaire/ihris-endrole': 'endrole'
+    }
+  }
+  // Need to move this processing to loaded modules and add to the config
+  // But for now this is here for testing
 
-    fhirAxios.create( bundle ).then ( (results) => {
-      if ( results.entry && results.entry.length > 0 && results.entry[0].response.location ) {
-        req.body.subject = { reference: results.entry[0].response.location }
-      }
-      next()
+  if ( workflowConfig.questionnaire.hasOwnProperty( req.body.questionnaire ) ) {
+    let processor = workflowConfig.questionnaire[ req.body.questionnaire ]
+    if ( !workflowModules.hasOwnProperty( processor ) ) {
+      workflowModules[processor] = require( workflowConfig.processor[processor] )
+    }
+
+    workflowModules[processor].process( req ).then( (bundle) => {
+      fhirFilter.filterBundle( "write", bundle, req.user )
+
+      fhirAxios.create( bundle ).then ( (results) => {
+        next()
+      } ).catch( (err) => {
+        console.log(err)
+        console.log(JSON.stringify(err.response.data,null,2))
+        return res.status( err.response.status ).json( err.response.data )
+      } )
+
     } ).catch( (err) => {
       console.log(err)
-      console.log(JSON.stringify(err.response.data,null,2))
-      return res.status( err.response.status ).json( err.response.data )
+      if ( err === "Invalid input" ) {
+        return res.status( 400 ).json( err )
+      } else {
+        return res.status( 500 ).json( err )
+      }
     } )
 
-  } ).catch( (err) => {
-    console.log(err)
-    return res.status( 500 ).json( err )
-  } )
+  } else {
+
+    fhirQuestionnaire.processQuestionnaire( req.body ).then( (bundle) => {
+      console.log(JSON.stringify(bundle,null,2))
+      fhirFilter.filterBundle( "write", bundle, req.user )
+
+      fhirAxios.create( bundle ).then ( (results) => {
+        if ( results.entry && results.entry.length > 0 && results.entry[0].response.location ) {
+          req.body.subject = { reference: results.entry[0].response.location }
+        }
+        next()
+      } ).catch( (err) => {
+        console.log(err)
+        console.log(JSON.stringify(err.response.data,null,2))
+        return res.status( err.response.status ).json( err.response.data )
+      } )
+
+    } ).catch( (err) => {
+      console.log(err)
+      return res.status( 500 ).json( err )
+    } )
+
+  }
 
 } )
 

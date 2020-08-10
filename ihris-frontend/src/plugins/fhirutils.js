@@ -1,8 +1,5 @@
 import 'whatwg-fetch'
 
-const FHIRUTILS_ERROR = "Error"
-const FHIRUTILS_UNKNOWN = "Unknown"
-
 const fhirutils = {
   _code_cache: {},
   _code_loading: {},
@@ -11,76 +8,74 @@ const fhirutils = {
     fhirutils._code_loading[lookup] = false
     return value
   },
-  codeLookup: ( system, code, binding ) => {
+  resourceLookup: ( reference ) => {
     return new Promise( (resolve) => {
-      let lookup = system + "#" + code
+      let lookup = reference
       if ( fhirutils._code_loading[lookup] ) {
         setTimeout( () => {
-          resolve( fhirutils.codeLookup( system, code ) )
+          resolve( fhirutils.resource( reference ) )
         }, 200 )
       } else if ( !fhirutils._code_cache[lookup] ) {
         fhirutils._code_loading[lookup] = true
-        fetch( "/fhir/CodeSystem/$lookup?system="+system+"&code="+code ).then( response => {
+        fetch( "/fhir/$short-name?reference="+reference ).then( response => {
           if ( response.status === 200 ) {
             response.json().then( data => {
-              if ( data.parameter ) {
-                let display = data.parameter.find( param => param.name === "display" )
-                if ( display ) {
-                  resolve( fhirutils._setCache( lookup, display.valueString ) )
-                } else {
-                  console.log("No display parameter from codesystem found ",lookup,data)
-                  resolve( fhirutils._vsCodeLookup( binding, system, code ) )
-                }
+              if ( data.display ) {
+                resolve( fhirutils._setCache( lookup, data.display ) )
               } else {
-                console.log("No display data from codesystem found ",lookup,data)
-                resolve( fhirutils._vsCodeLookup( binding, system, code ) )
+                console.log("No display data from reference found ",lookup,data)
+                resolve( fhirutils._setCache( lookup, reference ) )
               }
             } ).catch( err => {
               console.log(err)
-              resolve( fhirutils._vsCodeLookup( binding, system, code ) )
+              resolve( fhirutils._setCache( lookup, reference ) )
             } )
           } else {
-            console.log( "Invalid status from codesystem for ",lookup)
-            resolve( fhirutils._vsCodeLookup( binding, system, code ) )
+            console.log( "Invalid status from reference $short-name for ",lookup)
+            resolve( fhirutils._setCache( lookup, reference ) )
           }
         } ).catch( err => {
           console.log(err)
-          resolve( fhirutils._vsCodeLookup( binding, system, code ) )
+          resolve( fhirutils._setCache( lookup, reference ) )
         } )
       } else {
         resolve( fhirutils._code_cache[lookup] )
       }
     } )
   },
-  _vsCodeLookup: ( valueset, system, code ) => {
+  codeLookup: ( system, code, binding ) => {
     return new Promise( (resolve) => {
       let lookup = system + "#" + code
-      fetch( "/fhir/ValueSet" + valueset.substring( valueset.lastIndexOf('/') ) ).then( response => {
-        if ( response.status === 200 ) {
-          response.json().then( data => {
-            if ( data.compose && data.compose.include ) {
-              let included = data.compose.include.find( include => include.system === system )
-              if ( included.concept ) {
-                let display = included.concept.find( concept => concept.code === code )
-                if ( display.display ) {
-                  return resolve( fhirutils._setCache( lookup, display.display ) )
-                }
+      if ( fhirutils._code_loading[lookup] ) {
+        setTimeout( () => {
+          resolve( fhirutils.codeLookup( system, code, binding ) )
+        }, 200 )
+      } else if ( !fhirutils._code_cache[lookup] ) {
+        fhirutils._code_loading[lookup] = true
+        fetch( "/fhir/$short-name?system="+system+"&code="+code+"&valuset="+binding ).then( response => {
+          if ( response.status === 200 ) {
+            response.json().then( data => {
+              if ( data.display ) {
+                resolve( fhirutils._setCache( lookup, data.display ) )
+              } else {
+                console.log("No display data from codesystem found ",lookup,data)
+                resolve( fhirutils._setCache( lookup, code ) )
               }
-            }
-            console.log("Unable to find lookup in valueset definition",lookup,data)
-            resolve( fhirutils._setCache( lookup, FHIRUTILS_UNKNOWN ) )
-          } ).catch( err => {
-            console.log(err)
-            resolve( fhirutils._setCache( lookup, FHIRUTILS_ERROR ) )
-          } )
-        } else {
-          console.log( "Invalid status for ",lookup)
-          resolve( fhirutils._setCache( lookup, FHIRUTILS_ERROR ) )
-        }
-      } ).catch( err => {
-        console.log(err)
-        resolve( fhirutils._setCache( lookup, FHIRUTILS_ERROR ) )
-      } )
+            } ).catch( err => {
+              console.log(err)
+              resolve( fhirutils._setCache( lookup, code ) )
+            } )
+          } else {
+            console.log( "Invalid status from codesystem $short-name for ",lookup)
+            resolve( fhirutils._setCache( lookup, code ) )
+          }
+        } ).catch( err => {
+          console.log(err)
+          resolve( fhirutils._setCache( lookup, code ) )
+        } )
+      } else {
+        resolve( fhirutils._code_cache[lookup] )
+      }
     } )
   },
   pathFieldExpression: (field) => {

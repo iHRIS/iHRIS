@@ -108,7 +108,7 @@ module.exports = {
   '</template></ihris-section>\n' +
   '<ihris-section :slotProps="slotProps" :edit="isEdit" name="position" title="Position" description="Position the person holds" :secondary="true">\n' +
   '<template #default="slotProps">\n' +
-  `<ihris-secondary :edit="isEdit" :link-id="fhirId" profile="http://ihris.org/fhir/StructureDefinition/ihris-test-practitioner-role" field="PractitionerRole" title="Position" link-field="PractitionerRole.practitioner" search-field="" :columns='[{"text":"Job","value":"PractitionerRole.code.coding[0]"},{"text":"Start Date","value":"PractitionerRole.period.start"}]'><template #default="slotProps">\n` +
+  `<ihris-secondary :edit="isEdit" :link-id="fhirId" profile="http://ihris.org/fhir/StructureDefinition/ihris-test-practitioner-role" field="PractitionerRole" title="Position" link-field="PractitionerRole.practitioner" search-field="" :columns='[{"text":"Job","value":"PractitionerRole.code.coding[0]"},{"text":"Start Date","value":"PractitionerRole.period.start"}]' :actions='[{"link":"/resource/add/practitionerrole","text":"Add Role","row":"true","condition":"PractitionerRole.period.end.empty()","eleClass":"accent"}]'><template #default="slotProps">\n` +
   '</template></ihris-secondary></template></ihris-section>\n' +
   '</template></ihris-resource>\n'
 }

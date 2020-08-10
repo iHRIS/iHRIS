@@ -59,14 +59,14 @@ IHRIS_FHIR__SERVER=http://locahost:8080/hapi/fhir
 * user:loggedout = id of logged out user resource (default: ihris-user-loggedout)
 * auth:google:clientId
 * auth:google:clientSecret
-* modules
- * name = id of Library resource
+* modules (These are for express endpoint modules)
+ * [name] = id of Library resource
 * site
  * title = "title" (default: Manage)
  * site = "site" 
  * logo = "logo image" (default: iHRIS5Logo.png)
  * auth - List of authorization options 
-  * name = The name of the config (e.g. google or local)
+  * [name] = The name of the config (e.g. google or local)
    * type = post | get (how the authorization is submitted, with post will create a pop up form)
    * link = link to get or post
    * btn
@@ -74,10 +74,26 @@ IHRIS_FHIR__SERVER=http://locahost:8080/hapi/fhir
     * text = Alt text for the button
  * footer
   * links
-   * name = The name of the link (e.g. about or ihris)
+   * [name] = The name of the link (e.g. about or ihris)
     * text = Text to display
     * to = vue route (e.g. /static/page-about
     * href = external link
+* shortname
+ * Resource
+  * fhirpath (single fhirpath for displaying for this resource)
+  * format (string for util.format())
+  * order = "[field],[field]" (comma delimited list of named paths)
+  * paths
+   * [field]
+    * fhirpath
+    * join (string to join on, default: " ")
+* workflow
+ * processor
+  * [name] = id of Library resource
+ * questionnaire
+  * [name]
+   * url = canonical URL of the questionnaire
+   * processor = [processor] (name of the processor)
 
 
 # Resources used for configuration

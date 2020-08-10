@@ -26,6 +26,10 @@ const TEST_USER2 = user.restoreUser( {
   resource: { resourceType: "Person" },
   permissions: { read : { StructureDefinition : true, CodeSystem : true, DocumentReference: true } },
 } )
+const TEST_USER3 = user.restoreUser( {
+  resource: { resourceType: "Person" },
+  permissions: { read : { StructureDefinition : true, CodeSystem : true, Location: true, ValueSet: true } },
+} )
 
 const express = require('express')
 const app = express()
@@ -275,7 +279,7 @@ describe( 'Test FHIR routes', () => {
         }
       ]
     }
-    const MOCK_DOCUMENT = "<h1 id=\"testing\">Testing</h1>\n"
+    const MOCK_DOCUMENT = "<div><h1 id=\"testing\">Testing</h1>\n</div>"
     const MOCK_RESTRICTED_DOCUMENT = {
       "resourceType": "DocumentReference",
       "id": "page-test",
@@ -333,5 +337,37 @@ describe( 'Test FHIR routes', () => {
 
   } )
 
+  describe( 'test GET /$short-name', () => {
+    const MOCK_CODE_LOOKUP = {
+      "resourceType": "Parameters",
+      "parameter": [ {
+        "name": "display",
+        "valueString": "Test"
+      } ]
+    }
+    const MOCK_STANDARD_RESOURCE = {
+      "resourceType": "Location",
+      "id": "test",
+      "name": "Test Location"
+    }
+
+    test( 'Lookup a codesystem value that exists', () => {
+      require('axios').__setFhirResults( DEFAULT_URL + "CodeSystem/$lookup?system=test-system&code=test", null, MOCK_CODE_LOOKUP )
+      appUser = TEST_USER3
+      return request(app).get("/$short-name?system=test-system&code=test").then( (response) => {
+        expect( response.body ).toEqual( { display: "Test" } )
+      } )
+    } )
+
+    test( 'resource standard lookup', () => {
+      require('axios').__setFhirResults( DEFAULT_URL + "Location/test", null, MOCK_STANDARD_RESOURCE )
+      appUser = TEST_USER3
+      return request(app).get("/$short-name?reference=Location/test").then( (response) => {
+        expect( response.body ).toEqual( { display: "Test Location" } )
+      } )
+    } )
+
+
+  } )
 
 } )

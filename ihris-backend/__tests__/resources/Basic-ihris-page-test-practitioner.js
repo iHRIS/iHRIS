@@ -183,6 +183,31 @@ module.exports = {
                 }
               ],
               "url": "column"
+            },
+            {
+              "extension": [
+                {
+                  "url": "link",
+                  "valueString": "/resource/add/practitionerrole"
+                },
+                {
+                  "url": "text",
+                  "valueString": "Add Role"
+                },
+                {
+                  "url": "row",
+                  "valueBoolean": "true"
+                },
+                {
+                  "url": "condition",
+                  "valueString": "PractitionerRole.period.end.empty()"
+                },
+                {
+                  "url": "class",
+                  "valueString": "accent"
+                }
+              ],
+              "url": "action"
             }
           ],
           "url": "resource"

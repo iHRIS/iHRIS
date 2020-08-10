@@ -112,12 +112,10 @@ export default {
     getDisplay: function() {
       if ( !this.edit && this.value && this.value.reference ) {
         this.loading = true
-        fetch( "/fhir/"+this.value.reference +"?_elements=name" ).then( response => {
-          response.json().then( data => {
-            this.displayValue = data.name
-            this.items.push({text: data.name, value: this.value.reference})
-            this.loading = false
-          } )
+        this.$fhirutils.resourceLookup( this.value.reference ).then( display => {
+          this.displayValue = display
+          this.items.push( {text: display, value: this.value.reference} )
+          this.loading = false
         } )
       }
     }

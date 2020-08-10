@@ -71,7 +71,7 @@ export default {
           //this.$store.commit('setCurrentResource', data)
           this.source = { data: data, path: this.field }
           this.loading = false
-          //console.log(data)
+          console.log(JSON.stringify(data,null,2))
         }).catch(err=> {
           console.log(this.field,this.fhirId,err)
         })

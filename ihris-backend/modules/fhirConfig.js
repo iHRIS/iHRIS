@@ -30,7 +30,17 @@ const fhirConfig = {
           }
           for ( let part of param.part ) {
             if( part.hasOwnProperty("valueString") ) {
-              defaults[param.name][part.name] = part.valueString
+              //defaults[param.name][part.name] = part.valueString
+              let split = part.name.split(':')
+              let last = split.pop()
+              let assign = defaults[param.name]
+              for( let level of split ) {
+                if ( !assign.hasOwnProperty( level ) ) {
+                  assign[level] = {}
+                }
+                assign = assign[level]
+              }
+              assign[last] = part.valueString
             }
           }
         }

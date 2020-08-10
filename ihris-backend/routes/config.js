@@ -84,6 +84,7 @@ router.get('/page/:page', function(req, res) {
       let title, description, name, resourceExt, resource, linkfield, searchfield
       let fields = []
       let columns = []
+      let actions = []
       try {
         title = section.extension.find( ext => ext.url === "title" ).valueString
       } catch(err) { }
@@ -127,6 +128,28 @@ router.get('/page/:page', function(req, res) {
               }
             } catch(err) { }
           }
+          let actionsExt = resourceExt.filter( ext => ext.url === "action" )
+          for ( let action of actionsExt ) {
+            try {
+              let link = action.extension.find( ext => ext.url === "link" ).valueString
+              let text = action.extension.find( ext => ext.url === "text" ).valueString
+              let row, condition
+              let eleClass = "primary"
+              try {
+                row = action.extension.find( ext => ext.url === "row" ).valueBoolean
+              } catch(err) {}
+              try {
+                condition = action.extension.find( ext => ext.url === "condition" ).valueString
+              } catch(err) {}
+              try {
+                eleClass = action.extension.find( ext => ext.url === "class" ).valueString
+              } catch(err) {}
+              if ( link && text ) {
+                actions.push( {link: link, text: text, row: row, condition: condition, eleClass: eleClass } )
+              }
+            } catch(err) { }
+          }
+
         }
 
       } catch(err) { }
@@ -145,6 +168,7 @@ router.get('/page/:page', function(req, res) {
         linkfield: linkfield,
         searchfield: searchfield,
         columns: columns,
+        actions: actions,
         elements: {}
       }
     }
@@ -205,6 +229,7 @@ router.get('/page/:page', function(req, res) {
             linkfield: undefined,
             searchfield: undefined,
             columns: [],
+            actions: [],
             elements: {}
           }
         }
@@ -321,6 +346,7 @@ router.get('/page/:page', function(req, res) {
                 +'" link-field="'+sections[name].linkfield
                 +'" search-field="'+(sections[name].searchfield || "")
                 +'" :columns=\''+JSON.stringify(sections[name].columns).replace(/'/g, "\'")
+                +'\' :actions=\''+JSON.stringify(sections[name].actions).replace(/'/g, "\'")
                   +'\'><template #default="slotProps">' + "\n"
                   //vueOutput += processFields( secondaryStructure[second_fhir].fields, second_fhir, secondaryOrder )
                   vueOutput += "</template></ihris-secondary>"

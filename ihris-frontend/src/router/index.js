@@ -30,7 +30,7 @@ const routes = [{
   {
     path: "/static/:id",
     name: "static",
-    component: () => import( /* webpackChunkName: "about" */ "../views/static-page.vue")
+    component: () => import( /* webpackChunkName: "static" */ "../views/static-page.vue")
   },
   //{
   //path: "/resource/:type/:page/:id?",
@@ -38,7 +38,7 @@ const routes = [{
   //// route level code-splitting
   //// this generates a separate chunk (about.[hash].js) for this route
   //// which is lazy-loaded when the route is visited.
-  //component: () => import(/* webpackChunkName: "about" */ "../views/fhir-page-resource.vue")
+  //component: () => import(/* webpackChunkName: "fhir" */ "../views/fhir-page-resource.vue")
   //},
   {
     path: "/resource/view/:page/:id",
@@ -46,7 +46,7 @@ const routes = [{
     // route level code-splitting
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
-    component: () => import( /* webpackChunkName: "about" */ "../views/fhir-page-view.vue")
+    component: () => import( /* webpackChunkName: "fhir" */ "../views/fhir-page-view.vue")
   },
   {
     path: "/resource/search/:page",
@@ -54,7 +54,7 @@ const routes = [{
     // route level code-splitting
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
-    component: () => import( /* webpackChunkName: "about" */ "../views/fhir-page-search.vue")
+    component: () => import( /* webpackChunkName: "fhir" */ "../views/fhir-page-search.vue")
   },
   {
     path: "/resource/report/:report",
@@ -62,7 +62,7 @@ const routes = [{
     // route level code-splitting
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
-    component: () => import( /* webpackChunkName: "about" */ "../views/fhir-report.vue")
+    component: () => import( /* webpackChunkName: "fhir" */ "../views/fhir-report.vue")
   },
   {
     path: "/resource/add/:page",
@@ -70,7 +70,7 @@ const routes = [{
     // route level code-splitting
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
-    component: () => import( /* webpackChunkName: "about" */ "../views/fhir-page-add.vue")
+    component: () => import( /* webpackChunkName: "fhir" */ "../views/fhir-page-add.vue")
   },
   {
     path: "/questionnaire/:questionnaire/:page",
@@ -78,7 +78,7 @@ const routes = [{
     // route level code-splitting
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
-    component: () => import( /* webpackChunkName: "about" */ "../views/fhir-page-questionnaire.vue")
+    component: () => import( /* webpackChunkName: "fhir" */ "../views/fhir-page-questionnaire.vue")
   }
 ]
 

@@ -60,7 +60,7 @@ export default {
       }).catch(err => {
         console.log(err)
         Vue.component('ihris-template', {template: '<div><h1>Error</h1><p>An error occurred trying to load this page</p>.</div>'})
-          this.$forceUpdate()
+        this.$forceUpdate()
       })
     }
   },

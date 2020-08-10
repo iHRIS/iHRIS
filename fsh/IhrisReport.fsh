@@ -11,7 +11,7 @@ Id:             ihris-report-details
 Title:          "iHRIS Report Details"
 Description:    "iHRIS Report Details."
 * ^context.type = #element
-* ^context.expression = IhrisReport
+* ^context.expression = "IhrisReport"
 * extension contains
       name 1..1 MS and
       displayCheckbox 1..1 MS and
@@ -33,7 +33,7 @@ Id:             ihris-resource-relationships
 Title:          "iHRIS Resource Relationships"
 Description:    "iHRIS Resource Relationships"
 * ^context.type = #element
-* ^context.expression = IhrisResourceRelationships
+* ^context.expression = "IhrisResourceRelationships"
 * extension contains
       name 1..1 MS and
       field 1..* MS and

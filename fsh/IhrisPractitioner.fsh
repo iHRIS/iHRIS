@@ -131,6 +131,7 @@ Description:    "iHRIS extension for Practitioner number of dependents."
 * valuePositiveInt 1..1 MS
 * valuePositiveInt ^label = "Number of Dependents"
 
+
 Instance:       IhrisPractitionerQuestionnaire
 InstanceOf:     Questionnaire
 Usage:          #definition
@@ -374,4 +375,26 @@ Usage:          #definition
 * item[3].item[0].item[2].answerValueSet = "http://hl7.org/fhir/ValueSet/identifier-type"
 * item[3].item[0].item[2].repeats = false
 * item[3].item[0].item[2].required = false
+
+Instance:       IhrisPractitionerWorkflowEndRole
+InstanceOf:      Questionnaire
+Usage:          #definition
+* title = "iHRIS End Role Workflow"
+* description = "iHRIS workflow to end a current role/job"
+* id = "ihris-endrole"
+* url = "http://ihris.org/fhir/Questionnaire/ihris-endrole"
+* name = "ihris-endrole"
+* status = #active
+* date = 2020-08-09
+* purpose = "Workflow page for ending a role/job."
+
+* item[0].linkId = "PractitionerRole"
+* item[0].text = "Job End Date"
+* item[0].type = #group
+
+* item[0].item[0].linkId = "period.end"
+* item[0].item[0].text = "End Date"
+* item[0].item[0].type = #date
+* item[0].item[0].required = true
+* item[0].item[0].repeats = false
 

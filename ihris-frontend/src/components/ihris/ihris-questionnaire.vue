@@ -18,7 +18,6 @@
       clipped
       class="primary darken-1 white--text"
       style="z-index: 3;"
-      v-if="sectionMenu"
       >
       <v-list class="white--text">
         <v-list-item>
@@ -33,7 +32,7 @@
           </v-btn>
         </v-list-item>
         <v-divider color="white"></v-divider>
-        <v-subheader class="white--text"><h2>Sections</h2></v-subheader>
+        <v-subheader class="white--text" v-if="sectionMenu"><h2>Sections</h2></v-subheader>
         <v-list-item v-for="section in sectionMenu" :href="'#section-'+section.id" :key="section.id">
           <v-list-item-content class="white--text">
             <v-list-item-title class="text-uppercase"><h4>{{ section.title }}</h4></v-list-item-title>
@@ -48,6 +47,7 @@
 </template>
 
 <script>
+const querystring = require('querystring')
 export default {
   name: "ihris-questionnaire",
   props: ["id", "url", "title", "description", "purpose", "section-menu", "view-page", "edit"],
@@ -58,6 +58,9 @@ export default {
       overlay: false,
       isEdit: false
     }
+  },
+  created: function() {
+    console.log("QUERY",this.$route.query)
   },
   methods: {
     processFHIR: function() {
@@ -73,7 +76,7 @@ export default {
       //console.log(this)
       processChildren( this.fhir.item, this.$children )
       console.log("SAVE",this.fhir)
-      fetch( "/fhir/QuestionnaireResponse", {
+      fetch( "/fhir/QuestionnaireResponse?"+querystring.stringify( this.$route.query ), {
         method: "POST",
         headers: {
           "Content-Type": "application/fhir+json"
@@ -100,7 +103,13 @@ export default {
             }
             //console.log(data)
           })
+          this.$store.commit('setMessage', { type: 'success', text: 'Update successful.' } )
         }
+      } ).catch(err => {
+        console.log(err)
+        this.overlay = false
+        this.loading = false
+        this.$store.commit('setMessage', { type: 'error', text: 'Failed to update data.' } )
       } )
       //console.log(this.fhir)
 
