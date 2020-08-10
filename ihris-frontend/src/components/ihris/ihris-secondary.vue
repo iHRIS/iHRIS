@@ -11,13 +11,17 @@
     >
       
       <template v-slot:top>
-        <v-toolbar flat color="white" v-if="topActions.length">
+        <v-toolbar flat color="white">
+          <v-toolbar-title>
+            {{ title }}
+          </v-toolbar-title>
           <v-spacer></v-spacer>
           <v-btn 
             v-for="action in topActions" 
             :to="setupLink( action.link, {} )" 
             :color="action.eleClass" 
             :key="action.text"
+            small
             >
             {{ action.text }}
           </v-btn>
@@ -53,7 +57,8 @@ export default {
       source: { data: {}, path: this.field },
       empty: true,
       items: [],
-      loading: true
+      loading: true,
+      topActions: []
     }
   },
   mounted: function() {
@@ -68,11 +73,6 @@ export default {
       deep: true
     }
     */
-  },
-  computed: {
-    topActions: function() {
-      return this.actions.filter( action => !action.row && action.meets )
-    }
   },
   methods: {
     setupData: function() {
@@ -144,6 +144,7 @@ export default {
                 }
                 this.items.push( row )
               }
+              this.topActions = this.actions.filter( action => !action.row && action.meets )
             }
 
             if ( data.link ) {
