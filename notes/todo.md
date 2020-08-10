@@ -25,6 +25,8 @@
 * add form validation and required fields
 * add required fields
 * allow readonly fields (like code for codesystem edit, but not add)
+* change $short-name operation to allow searches and results of the shortname and update fhir-reference component to use that
+* set up all components to work like fhir-reference for presets (disable element on add page when preset)
 
 # Notes
 

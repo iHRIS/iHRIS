@@ -71,25 +71,88 @@ export default {
           //this.$store.commit('setCurrentResource', data)
           this.source = { data: data, path: this.field }
           this.loading = false
-          console.log(JSON.stringify(data,null,2))
         }).catch(err=> {
           console.log(this.field,this.fhirId,err)
         })
       }).catch(err=> {
         console.log(this.field,this.fhirId,err)
       })
+    } else if ( this.$route.query ) {
+      console.log( this.$route.query )
+      let presets = {
+        resourceType: this.field
+      }
+      let hasPresets = false
+      for( let path of Object.keys( this.$route.query ) ) {
+        if ( path.startsWith( this.field +"." ) ) {
+          hasPresets = true
+          let elements = path.substring( this.field.length+1 ).split('.')
+          let last = elements.pop()
+          let current = presets
+          for( let element of elements ) {
+            if ( element.includes('[') ) {
+              try {
+                let parts = element.split('[')
+                let name = parts[0]
+                let idx = parts[1].slice(0,-1)
+                if ( !current.hasOwnProperty(name) ) {
+                  current[name] = []
+                }
+                if ( idx ) {
+                  let next = {}
+                  current[name][parseInt(idx)] = next
+                  current = next
+                } else {
+                  let next = {}
+                  current[name].push( next )
+                  current = next
+                }
+              } catch( err ) {
+                console.log("Unable to process",path)
+                continue
+              }
+            } else {
+              if ( !current.hasOwnProperty(element) ) {
+                current[element] = {}
+                current = current[element]
+              }
+            }
+          }
+          if ( last.includes('[') ) {
+            try {
+              let parts = last.split('[')
+              let name = parts[0]
+              let idx = parts[1].slice(0,-1)
+              if ( !current.hasOwnProperty(name) ) {
+                current[name] = []
+              }
+              if ( idx ) {
+                current[name][parseInt(idx)] = this.$route.query[path]
+              } else {
+                current[name].push( this.$route.query[path] )
+              }
+
+            } catch( err ) {
+              console.log("Unable to process",path)
+              continue
+            }
+          } else {
+            current[last] = this.$route.query[path]
+          }
+        }
+      }
+      if ( hasPresets ) {
+        this.source = { data: presets, path: this.field }
+      }
     }
   },
   computed: {
     hasFhirId: function() {
       if ( this.fhirId == '' ) {
-        console.log("blank")
         return false
       } else if ( !this.fhirId ) {
-        console.log("fhirid is falsy")
         return false
       } else {
-        console.log("fhirid else")
         return true
       }
     }

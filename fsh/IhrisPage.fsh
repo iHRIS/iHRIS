@@ -153,7 +153,7 @@ Usage:          #example
 * extension[section][4].extension[resource].extension[column][2].extension[field].valueString = "PractitionerRole.period.end"
 * extension[section][4].extension[resource].extension[column][3].extension[header].valueString = "Actions"
 * extension[section][4].extension[resource].extension[column][3].extension[field].valueString = "_action"
-* extension[section][4].extension[resource].extension[action][0].extension[link].valueString = "/resource/add/practitionerrole?practitioner=FHIRID"
+* extension[section][4].extension[resource].extension[action][0].extension[link].valueString = "/resource/add/practitionerrole?PractitionerRole.practitioner.reference=Practitioner/FHIRID"
 * extension[section][4].extension[resource].extension[action][0].extension[text].valueString = "Assign Job"
 * extension[section][4].extension[resource].extension[action][0].extension[row].valueBoolean = false
 * extension[section][4].extension[resource].extension[action][0].extension[condition].valueString = "PractitionerRole.period.end.exists()"

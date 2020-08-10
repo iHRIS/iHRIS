@@ -15,6 +15,7 @@
         hide-details
         :label="display"
         outlined
+        :disabled="preset && $route.name === 'resource_add'"
       ></v-autocomplete>
       <v-row dense v-else>
         <v-col cols="3" class="font-weight-bold">{{display}}</v-col>
@@ -45,7 +46,8 @@ export default {
       select: "",
       resource: "",
       awaitingSearch: false,
-      displayValue: ""
+      displayValue: "",
+      preset: false
     }
   },
   created: function() {
@@ -88,8 +90,8 @@ export default {
           this.source.data = results[0]
         }
         if( this.source.data ) {
+          this.preset = true
           this.select = this.source.data.reference
-          //this.select.reference = this.value.reference
         }
       }
     },
@@ -97,20 +99,23 @@ export default {
       this.loading = true
       let url = "/fhir/"+this.resource+"?"+querystring.stringify( {
         "name:contains": val,
-        "_elements": "name"
+        "_elements": "id"
       } )
       fetch( url ).then( response => {
-        response.json().then( data => {
+        response.json().then( async (data) => {
           this.items = []
           for( let entry of data.entry ) {
-            this.items.push( {text: entry.resource.name, value: entry.resource.resourceType+"/"+entry.resource.id} )
+            let ref = entry.resource.resourceType+"/"+entry.resource.id
+            let item = { value: ref }
+            item.text = await this.$fhirutils.resourceLookup( ref )
+            this.items.push( item )
           }
           this.loading = false
         } )
       } )
     },
     getDisplay: function() {
-      if ( !this.edit && this.value && this.value.reference ) {
+      if ( (!this.edit || this.preset) && this.value && this.value.reference ) {
         this.loading = true
         this.$fhirutils.resourceLookup( this.value.reference ).then( display => {
           this.displayValue = display
