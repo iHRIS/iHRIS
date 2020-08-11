@@ -28,11 +28,7 @@
           },
           {
             "url": "field",
-            "valueString": "Birth Date|birthDate"
-          },
-          {
-            "url": "field",
-            "valueString": "Gender|gender"
+            "valueString": "Surname|name.where(use='official').family"
           },
           {
             "url": "field",
@@ -40,7 +36,23 @@
           },
           {
             "url": "filter",
-            "valueString": "Gender|gender"
+            "valueString": "Name|name:contains"
+          }
+        ]
+      },
+      {
+        "url": "http://ihris.org/fhir/StructureDefinition/ihris-resource-relationships",
+        "extension": [{
+            "url": "name",
+            "valueString": "Group"
+          },
+          {
+            "url": "query",
+            "valueString": "_revinclude=Group:member"
+          },
+          {
+            "url": "field",
+            "valueString": "Group Name|name"
           }
         ]
       },

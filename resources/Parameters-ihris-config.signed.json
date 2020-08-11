@@ -2,6 +2,9 @@
   "resourceType": "Parameters",
   "id": "ihris-config",
   "meta": {
+    "versionId": "7",
+    "lastUpdated": "2020-08-07T11:04:36.113+00:00",
+    "source": "#m0gdpB7BRgtSnCJr",
     "profile": [
       "http://ihris.org/fhir/StructureDefinition/ihris-parameters-remote-config"
     ]
@@ -16,11 +19,11 @@
             "code": "1.2.840.10065.1.12.1.14"
           }
         ],
-        "when": "2020-08-05T15:37:46.728Z",
+        "when": "2020-08-11T15:51:08.691Z",
         "who": {
           "reference": "http://ihris.org/fhir/Organization/ihris"
         },
-        "data": "Oh6kQJeWFzTi/idGAtT1ERZlQDGUlhJqWkdr3oYxnwk2sbYUH8FgHHQYGfmumMuMuZSFAHLaFltgJJAOnaQk7Pgp7smBK8XkYrUD064vvFyMHopV/TewpFVf1+XGjhJKn0gI3hRMc+yTrxdZiqyXiMkbSAjtfYsiXBlSKhxvnbs="
+        "data": "FDHT8xn9A589CmVSDFt7DTf1aw3htX5eHVlFSBkscpNPhcsw0YNziC8D4x4LZhN1g0uy46c1wWahRb4OsRp9taWRHyUemNq+mi5n6FKahNq8fMp8KejTvf6kzY6G7jpKNCn/Bi/97F1d/0pe1KDNSn0onPfHWWB2fRLib9xurtM="
       }
     },
     {
@@ -173,6 +176,14 @@
         {
           "name": "site:nav:menu:mhero:menu:message:url",
           "valueString": "/page/mhero"
+        },
+        {
+          "name": "site:nav:menu:mhero:menu:groups:text",
+          "valueString": "Contact Groups"
+        },
+        {
+          "name": "site:nav:menu:mhero:menu:groups:url",
+          "valueString": "/page/contact-groups"
         },
         {
           "name": "site:nav:menu:database:text",

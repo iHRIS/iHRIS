@@ -3,7 +3,7 @@ const crypto = require('crypto')
 const nconf = require('nconf')
 
 /**
- * node signConfig.js --key /path/to/private.key --config /path/to/Parameters.json 
+ * node signConfig.js --key /path/to/private.key --config /path/to/Parameters.json
  */
 
 var valueSignature = {
