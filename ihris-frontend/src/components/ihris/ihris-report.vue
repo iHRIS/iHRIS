@@ -67,7 +67,8 @@ export default {
   created: function() {
     for (let data of this.reportData.fieldsDetails) {
       for (let field of data.fields) {
-        this.headers.push({ text: field[0], value: field[1] });
+        let fieldPath = data.resourceType + '.' + field[1]
+        this.headers.push({ text: field[0], value: fieldPath });
       }
     }
     eventBus.$on("reload-report", () => {
@@ -189,11 +190,12 @@ export default {
                     }
                   );
                   for (let field of fieldsDetails.fields) {
+                    let fieldPath = fieldsDetails.resourceType + '.' + field[1]
                     for (let resultIndex of resultIndexes) {
-                      if(this.results[resultIndex][field[1]]) {
-                          this.results[resultIndex][field[1]] += ", " + this.$fhirpath.evaluate(entry.resource, field[1]);
+                      if(this.results[resultIndex][fieldPath]) {
+                          this.results[resultIndex][fieldPath] += ", " + this.$fhirpath.evaluate(entry.resource, fieldPath);
                         } else {
-                          this.results[resultIndex][field[1]] = this.$fhirpath.evaluate(entry.resource, field[1]);
+                          this.results[resultIndex][fieldPath] = this.$fhirpath.evaluate(entry.resource, fieldPath);
                         }
                     }
                   }

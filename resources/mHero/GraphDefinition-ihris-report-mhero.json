@@ -18,6 +18,9 @@
           "type": "Location"
         }]
       }]
+    }, {
+      "type": "Group",
+      "params": "Group.member.entity.reference"
     }]
   }]
 }

@@ -69,25 +69,7 @@ export default {
     },
     nav: {
       active: null,
-      menu: {
-        'mhero': {
-          text: 'mHero',
-          icon: 'mdi-cellphone-basic',
-          menu: [{
-            id: 'sendSMS',
-            url: '/page/mhero',
-            text: 'Send Message'
-          }, {
-            id: 'subContGrps',
-            url: '/page/contact-groups',
-            text: 'Contact Groups'
-          }, {
-            id: 'dashboard',
-            url: '',
-            text: 'mHero Dashboard'
-          }]
-        }
-      }
+      menu: {}
     }
   }),
   components: {
