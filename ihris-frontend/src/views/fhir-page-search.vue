@@ -44,7 +44,6 @@ export default {
             }
           })
           this.$forceUpdate()
-          console.log("updated template")
         }).catch(err => {
           console.log(err)
           Vue.component( 'ihris-template', {template: '<div><h1>Error</h1><p>An error occurred trying to load this page</p>.</div>'})

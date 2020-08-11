@@ -78,12 +78,16 @@ export default {
       this.error_message = null;
       let url = "";
       if (restart) this.options.page = 1;
+      console.log(this.link, this.options)
       if (this.options.page > 1) {
         if (this.options.page === this.prevPage - 1) {
           url = this.link.find(link => link.relation === "previous").url;
         } else if (this.options.page === this.prevPage + 1) {
           url = this.link.find(link => link.relation === "next").url;
         }
+        // Should make this smarter to keep the _getpages parameter, 
+        // but the issue is with tracking permissions on the resource
+        url = url.replace(/_getpages=[^&]*&*/, "").replace("/fhir?","/fhir/"+this.resource+"?")
         url = url.substring(url.indexOf("/fhir/"));
       }
       if (url === "") {
@@ -107,45 +111,42 @@ export default {
           this.profile;
         let sTerms = Object.keys(this.terms);
         for (let term of sTerms) {
-          url += "&" + term + "=" + this.terms[term];
+          if ( this.terms[term] ) {
+            url += "&" + term + "=" + this.terms[term];
+          }
         }
         this.debug = url;
       }
       this.prevPage = this.options.page;
-      fetch(url)
-        .then(response => {
-          //console.log("fetching",url)
-          response
-            .json()
-            .then(data => {
-              this.results = [];
-              if (data.total > 0) {
-                this.link = data.link;
-                for (let entry of data.entry) {
-                  let result = { id: entry.resource.id };
-                  for (let field of this.fields) {
-                    result[field[1]] = this.$fhirpath.evaluate(
-                      entry.resource,
-                      field[1]
-                    );
-                  }
-                  this.results.push(result);
-                }
+          console.log("fetching",url)
+      fetch(url).then(response => {
+        response.json().then(data => {
+          this.results = [];
+          if (data.total > 0) {
+            this.link = data.link;
+            for (let entry of data.entry) {
+              let result = { id: entry.resource.id };
+              for (let field of this.fields) {
+                result[field[1]] = this.$fhirpath.evaluate(
+                  entry.resource,
+                  field[1]
+                );
               }
-              this.total = data.total;
-              this.loading = false;
-            })
-            .catch(err => {
-              this.loading = false;
-              this.error_message = "Unable to load results.";
-              console.log(err);
-            });
-        })
-        .catch(err => {
+              this.results.push(result);
+            }
+          }
+          this.total = data.total;
+          this.loading = false;
+        }).catch(err => {
           this.loading = false;
           this.error_message = "Unable to load results.";
           console.log(err);
         });
+      }).catch(err => {
+        this.loading = false;
+        this.error_message = "Unable to load results.";
+        console.log(err);
+      });
     }
   }
 };

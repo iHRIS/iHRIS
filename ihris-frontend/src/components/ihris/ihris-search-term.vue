@@ -1,5 +1,5 @@
 <template>
-  <v-text-field :label="label" v-model="value" outlined hide-details shaped clearable @change="updateSearch()">
+  <v-text-field :label="label" v-model="value" outlined hide-details shaped clearable @change="updateSearch()" @click:clear="clearSearch()">
   </v-text-field>
 </template>
 
@@ -15,6 +15,9 @@ export default {
   methods: {
     updateSearch: function() {
       this.$emit('termChange', this.expression, this.value)
+    },
+    clearSearch: function() {
+      this.$emit('termChange', this.expression, "")
     }
   }
 }
