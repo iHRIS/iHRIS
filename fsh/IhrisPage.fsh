@@ -110,7 +110,7 @@ Usage:          #example
 * extension[display].extension[search][0].valueString = "Surname|Practitioner.name.where(use='official').family"
 * extension[display].extension[search][1].valueString = "Given Name(s)|Practitioner.name.where(use='official').given"
 * extension[display].extension[search][2].valueString = "Birth Date|Practitioner.birthDate"
-* extension[display].extension[search][3].valueString = "Gender|Practitioner.gender|https://www.hl7.org/fhir/administrative-gender"
+* extension[display].extension[search][3].valueString = "Gender|Practitioner.gender|http://hl7.org/fhir/administrative-gender"
 * extension[display].extension[filter][0].valueString = "Name|name:contains"
 * extension[display].extension[filter][1].valueString = "Gender|gender|http://hl7.org/fhir/ValueSet/administrative-gender"
 * extension[section][0].extension[title].valueString = "Health Worker"

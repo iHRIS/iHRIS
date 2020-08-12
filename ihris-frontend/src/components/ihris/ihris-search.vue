@@ -48,14 +48,12 @@ export default {
   watch: {
     terms: {
       handler() {
-    console.log("CALLING FROM terms")
         this.getData(true);
       },
       deep: true
     },
     options: {
       handler() {
-    console.log("CALLING FROM options")
         this.getData();
       },
       deep: true
@@ -65,10 +63,9 @@ export default {
     for (let field of this.fields) {
       this.headers.push({ text: field[0], value: field[1] });
     }
-    console.log("CALLING FROM CREATED")
-    this.getData(true);
   },
   mounted: function() {
+    this.getData(true);
   },
   methods: {
     clickIt: function(record) {
@@ -79,7 +76,6 @@ export default {
     },
     checkRerun() {
       if ( !this.loading && this.update_again.rerun ) {
-        console.log("RUNNING AGAIN",this.update_again)
         this.getData( this.update_again.restart )
         this.update_again = { rerun: false, restart: false }
       }
@@ -87,7 +83,6 @@ export default {
     getData(restart) {
       //console.log("getting data",restart)
       if ( this.loading ) {
-        console.log("ALREADY RUNNING")
         this.update_again.rerun = true
         this.update_again.restart = this.update_again.restart || restart
         return
