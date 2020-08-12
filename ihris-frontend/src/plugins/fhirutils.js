@@ -8,6 +8,22 @@ const fhirutils = {
     fhirutils._code_loading[lookup] = false
     return value
   },
+  lookup: ( display, defaultSystem ) => {
+    if ( !display ) {
+      return new Promise( resolve => resolve(display) )
+    }
+    if ( defaultSystem ) {
+      return fhirutils.codeLookup( defaultSystem, display )
+    } else if ( display.system && display.code ) {
+      return fhirutils.codeLookup( display.system, display.code )
+    } else if ( display.reference ) {
+      return fhirutils.resourceLookup( display.reference )
+    } else if ( /([A-Z]\w*)\/([A-Za-z0-9\-.]{1,64})/.test( display ) ) { 
+      return fhirutils.resourceLookup( display )
+    } else {
+      return new Promise( resolve => resolve(display) )
+    }
+  },
   resourceLookup: ( reference ) => {
     return new Promise( (resolve) => {
       let lookup = reference

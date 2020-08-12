@@ -68,11 +68,15 @@ router.get('/page/:page', function(req, res) {
     */
     let search = [ 'id' ]
     try {
-      search = pageDisplay.extension.filter( ext => ext.url === "search" ).map( ext => ext.valueString.split('|') )
+      search = pageDisplay.extension.filter( ext => ext.url === "search" ).map( ext => 
+        ext.valueString.match( /^([^|]*)\|?([^|]*)?\|?(.*)?$/ ).slice(1,4)
+      )
     } catch(err) { }
     let filters = []
     try {
-      filters = pageDisplay.extension.filter( ext => ext.url === "filter" ).map( ext => ext.valueString.split('|') )
+      filters = pageDisplay.extension.filter( ext => ext.url === "filter" ).map( ext => 
+        ext.valueString.match( /^([^|]*)\|?([^|]*)?\|?(.*)?$/ ).slice(1,4)
+       )
     } catch(err) { }
     let pageSections = resource.extension.filter( ext => ext.url === "http://ihris.org/fhir/StructureDefinition/ihris-page-section" )
 
@@ -206,10 +210,13 @@ router.get('/page/:page', function(req, res) {
       let searchTemplate = '<'+searchElement+' :key="$route.params.page" page="'+req.params.page+'" label="'+(resource.title || resource.name)+'" :fields="fields" :terms="terms" resource="'+(resource.resourceType === "StructureDefinition" ? resource.type : resource.resourceType)+'" profile="'+resource.url+'">'+"\n"
       for( let filter of filters ) {
         searchTemplate += '<ihris-search-term v-on:termChange="searchData"'
-        if ( filter.length == 1 ) {
-          searchTemplate += ' label="Search" expression="'+filter[0]+'"'
-        } else {
+        if ( filter[1] ) {
           searchTemplate += ' label="'+filter[0]+'" expression="'+filter[1]+'"'
+        } else {
+          searchTemplate += ' label="Search" expression="'+filter[0]+'"'
+        }
+        if ( filter[2] ) {
+          searchTemplate += ' binding="'+filter[2]+'"'
         }
         searchTemplate += "></ihris-search-term>\n"
       }
