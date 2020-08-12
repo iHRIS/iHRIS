@@ -101,6 +101,62 @@ const fhirutils = {
     } else {
       return expression
     }
+  },
+  expand: (valueset) => {
+    const itemSort = (a,b) => {
+      return (a.display === b.display ? (a.code === b.code ? 0 : (a.code < b.code ? -1: 1)) : (a.display < b.display ? -1 : 1) )
+    }
+    return new Promise( (resolve, reject) => {
+      let lastSlash = valueset.lastIndexOf('/')
+      let lastPipe = valueset.lastIndexOf('|')
+      let valueSetId = valueset.slice(lastSlash+1, (lastPipe !== -1 ? lastPipe : valueset.length ))
+      let items = []
+
+      fetch("/fhir/ValueSet/"+valueSetId+"/$expand").then(response=> {
+        if( response.ok ) {
+          response.json().then(data=>{
+            try {
+              items = data.expansion.contains
+              items.sort( itemSort )
+              resolve( items )
+            } catch(err) {
+              console.log(err)
+              reject( new Error( "Invalid response from server." ) )
+            }
+          }).catch(err=>{
+            reject( err )
+          })
+        } else {
+          fetch("/fhir/ValueSet/"+valueSetId).then(response=> {
+            if ( response.ok ) {
+              response.json().then(data=> {
+                if ( data.compose.include ) {
+                  for( let include of data.compose.include ) {
+                    if ( include.concept ) {
+                      for ( let concept of include.concept ) {
+                        concept.system = include.system
+                        items.push( concept )
+                      }
+                    }
+                  }
+                }
+                items.sort( itemSort )
+                resolve( items )
+              }).catch(err=>{
+                reject(err)
+              })
+            } else {
+              reject( new Error( "Invalid response from server." ) )
+            }
+          }).catch(err=>{
+            reject(err)
+          })
+
+        }
+      }).catch(err=>{
+        reject(err)
+      })
+    } )
   }
 }
 

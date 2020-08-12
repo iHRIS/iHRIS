@@ -102,16 +102,21 @@ export default {
         "_elements": "id"
       } )
       fetch( url ).then( response => {
-        response.json().then( async (data) => {
-          this.items = []
-          for( let entry of data.entry ) {
-            let ref = entry.resource.resourceType+"/"+entry.resource.id
-            let item = { value: ref }
-            item.text = await this.$fhirutils.resourceLookup( ref )
-            this.items.push( item )
-          }
+        if ( response.ok ) {
+          response.json().then( async (data) => {
+            this.items = []
+            for( let entry of data.entry ) {
+              let ref = entry.resource.resourceType+"/"+entry.resource.id
+              let item = { value: ref }
+              item.text = await this.$fhirutils.resourceLookup( ref )
+              this.items.push( item )
+            }
+            this.loading = false
+          } )
+        } else {
+          console.log("Failed to retrieve",this.resource)
           this.loading = false
-        } )
+        }
       } )
     },
     getDisplay: function() {

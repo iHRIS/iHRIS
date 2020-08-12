@@ -18,9 +18,11 @@
 </template>
 
 <script>
+/*
 const itemSort = (a,b) => {
   return (a.display === b.display ? (a.code === b.code ? 0 : (a.code < b.code ? -1: 1)) : (a.display < b.display ? -1 : 1) )
 }
+*/
 export default {
   name: "fhir-coding",
   props: ["label", "path", "binding", "edit"],
@@ -49,6 +51,16 @@ export default {
     setupData: function() {
       let binding = this.binding 
       //console.log("CODING",binding)
+      this.$fhirutils.expand( binding ).then( items => {
+        this.items = items 
+        this.loading = false
+      } ).catch( err => {
+        console.log(err)
+        this.error = true
+        this.err_messages = err.message
+        this.loading = false
+      } )
+      /*
       let lastSlash = binding.lastIndexOf('/')
       let lastPipe = binding.lastIndexOf('|')
       let valueSetId = binding.slice(lastSlash+1, (lastPipe !== -1 ? lastPipe : binding.length ))
@@ -111,6 +123,7 @@ export default {
         this.error = true
         this.loading = false
       })
+      */
     }
   }
 }

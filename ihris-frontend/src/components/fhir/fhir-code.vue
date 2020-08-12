@@ -25,9 +25,11 @@
 </template>
 
 <script>
+/*
 const itemSort = (a,b) => {
   return (a.display === b.display ? (a.code === b.code ? 0 : (a.code < b.code ? -1: 1)) : (a.display < b.display ? -1 : 1) )
 }
+*/
 export default {
   name: "fhir-code",
   props: ["field","min","max","base-min","base-max","label","binding","slotProps","path","edit","sliceName"],
@@ -72,6 +74,16 @@ export default {
         //console.log(this.source)
       }
       let binding = this.binding || this.slotProps.source.binding
+      this.$fhirutils.expand( binding ).then( items => {
+        this.items = items 
+        this.loading = false
+      } ).catch( err => {
+        console.log(err)
+        this.error = true
+        this.err_messages = err.message
+        this.loading = false
+      } )
+      /*
       let lastSlash = binding.lastIndexOf('/')
       let lastPipe = binding.lastIndexOf('|')
       let valueSetId = binding.slice(lastSlash+1, (lastPipe !== -1 ? lastPipe : binding.length ))
@@ -82,11 +94,6 @@ export default {
             try {
               this.items = data.expansion.contains
               this.items.sort( itemSort )
-              /*
-          for( let code of data.expansion.contains ) {
-            this.items.push( code )
-          }
-               */
             } catch(err) {
               this.error = true
               this.err_messages = "Invalid response from server."
@@ -138,6 +145,7 @@ export default {
         this.error = true
         this.loading = false
       })
+      */
     }
   },
   computed: {

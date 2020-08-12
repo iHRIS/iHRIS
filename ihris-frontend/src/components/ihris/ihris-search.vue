@@ -10,18 +10,20 @@
         v-if="error_message"
         class="white--text error"
       >{{ error_message }}</v-card-subtitle>
-      <v-data-table
-        style="cursor: pointer"
-        :headers="headers"
-        :items="results"
-        item-key="id"
-        :options.sync="options"
-        :server-items-length="total"
-        :footer-props="{ 'items-per-page-options': [5,10,20,50] }"
-        :loading="loading"
-        class="elevation-1"
-        @click:row="clickIt"
-      ></v-data-table>
+      <v-card-text>
+        <v-data-table
+          style="cursor: pointer"
+          :headers="headers"
+          :items="results"
+          item-key="id"
+          :options.sync="options"
+          :server-items-length="total"
+          :footer-props="{ 'items-per-page-options': [5,10,20,50] }"
+          :loading="loading"
+          class="elevation-1"
+          @click:row="clickIt"
+        ></v-data-table>
+      </v-card-text>
     </v-card>
 
   </v-container>
@@ -123,7 +125,11 @@ export default {
           this.profile;
         let sTerms = Object.keys(this.terms);
         for (let term of sTerms) {
-          if ( this.terms[term] ) {
+          if ( Array.isArray( this.terms[term] ) ) {
+            if ( this.terms[term].length > 0 ) {
+              url += "&" + term + "=" + this.terms[term].join(',')
+            }
+          } else if ( this.terms[term] ) {
             url += "&" + term + "=" + this.terms[term];
           }
         }
