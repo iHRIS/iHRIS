@@ -4,6 +4,13 @@
       <v-card-title>
         Search {{ label }}
         <v-spacer></v-spacer>
+        <v-btn :class="addLink ? addLink.class || 'primary' : 'primary'" :to="addLink ? addLink.url : '/resource/add/'+page">
+          <v-icon v-if="addLink && addLink.icon">{{ addLink.icon }}</v-icon>
+          <v-icon v-else>mdi-database-plus</v-icon>
+          Add {{label}}
+        </v-btn>
+      </v-card-title>
+      <v-card-title>
         <slot></slot>
       </v-card-title>
       <v-card-subtitle
@@ -11,6 +18,8 @@
         class="white--text error"
       >{{ error_message }}</v-card-subtitle>
       <v-card-text>
+        <v-container>
+        </v-container>
         <v-data-table
           style="cursor: pointer"
           :headers="headers"
@@ -32,7 +41,7 @@
 <script>
 export default {
   name: "ihris-search",
-  props: ["profile", "fields", "label", "terms", "page", "resource"],
+  props: ["profile", "fields", "label", "terms", "page", "resource", "add-link"],
   data: function() {
     return {
       debug: "",

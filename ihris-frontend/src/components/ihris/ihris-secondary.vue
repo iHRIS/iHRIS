@@ -19,7 +19,7 @@
           <v-btn 
             v-for="action in topActions" 
             :to="setupLink( action.link, {} )" 
-            :color="action.eleClass" 
+            :color="action.class" 
             :key="action.text"
             small
             >
@@ -31,7 +31,7 @@
         <v-btn 
           v-for="action in item.actions" 
           :to="setupLink( action.link, item )" 
-          :color="action.eleClass" 
+          :color="action.class" 
           :key="action.text"
           small
           rounded

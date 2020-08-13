@@ -17,7 +17,8 @@ Description:    "iHRIS Page Display details."
 * extension contains
       resource 1..1 MS and
       search 1..* MS and
-      filter 0..* MS
+      filter 0..* MS and
+      add 0..1 MS 
 * extension[resource].value[x] only Reference
 * extension[resource].valueReference only Reference(StructureDefinition or CodeSystem)
 * extension[resource].valueReference 1..1 MS
@@ -28,6 +29,19 @@ Description:    "iHRIS Page Display details."
 * extension[filter].value[x] only string
 * extension[filter].valueString 1..1 MS
 * extension[filter].valueString ^label = "Search Filters"
+* extension[add].extension contains
+      url 1..1 MS and
+      icon 0..1 MS and
+      class 0..1 MS
+* extension[add].extension[url].value[x] only url
+* extension[add].extension[url].valueUrl MS
+* extension[add].extension[url].valueUrl ^label = "Add Link URL"
+* extension[add].extension[icon].value[x] only string
+* extension[add].extension[icon].valueString MS
+* extension[add].extension[icon].valueString ^label = "Add Link Icon"
+* extension[add].extension[class].value[x] only string
+* extension[add].extension[class].valueString MS
+* extension[add].extension[class].valueString ^label = "Add Link Class"
 
 Extension:      IhrisPageSection
 Id:             ihris-page-section
@@ -117,6 +131,9 @@ Usage:          #example
 * extension[display].extension[search][3].valueString = "Gender|Practitioner.gender|http://hl7.org/fhir/administrative-gender"
 * extension[display].extension[filter][0].valueString = "Name|name:contains"
 * extension[display].extension[filter][1].valueString = "Gender|gender|http://hl7.org/fhir/ValueSet/administrative-gender"
+* extension[display].extension[add].extension[url].valueUrl = "/questionnaire/ihris-practitioner/practitioner"
+* extension[display].extension[add].extension[icon].valueString = "mdi-account-plus"
+* extension[display].extension[add].extension[class].valueString = "accent"
 * extension[section][0].extension[title].valueString = "Health Worker"
 * extension[section][0].extension[description].valueString = "Primary demographic details"
 * extension[section][0].extension[name].valueString = "Practitioner"
