@@ -79,7 +79,7 @@ IHRIS_FHIR__SERVER=http://locahost:8080/hapi/fhir
     * to = vue route (e.g. /static/page-about
     * href = external link
 * shortname
- * Resource
+ * [Resource]
   * fhirpath (single fhirpath for displaying for this resource)
   * format (string for util.format())
   * order = "[field],[field]" (comma delimited list of named paths)
