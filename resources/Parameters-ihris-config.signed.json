@@ -2,9 +2,6 @@
   "resourceType": "Parameters",
   "id": "ihris-config",
   "meta": {
-    "versionId": "7",
-    "lastUpdated": "2020-08-07T11:04:36.113+00:00",
-    "source": "#m0gdpB7BRgtSnCJr",
     "profile": [
       "http://ihris.org/fhir/StructureDefinition/ihris-parameters-remote-config"
     ]
@@ -19,11 +16,11 @@
             "code": "1.2.840.10065.1.12.1.14"
           }
         ],
-        "when": "2020-08-11T15:51:08.691Z",
+        "when": "2020-08-13T20:41:51.959Z",
         "who": {
           "reference": "http://ihris.org/fhir/Organization/ihris"
         },
-        "data": "FDHT8xn9A589CmVSDFt7DTf1aw3htX5eHVlFSBkscpNPhcsw0YNziC8D4x4LZhN1g0uy46c1wWahRb4OsRp9taWRHyUemNq+mi5n6FKahNq8fMp8KejTvf6kzY6G7jpKNCn/Bi/97F1d/0pe1KDNSn0onPfHWWB2fRLib9xurtM="
+        "data": "vYY25dM9LzfjfjWLgYA4UBMcIQx2neFxdOUUiNkCacZ1nSYmx8SQ9o+AZbPVrYXS9n7+QTnJ6NFLZ7GXusPtItULWF7OcJxYUXoBskZ0VbTK7k990BvwKnOWhiJuh5QRnoR3m2vMpoRglSspcEHzkV8WkYSxFBlbI4MDl1H27uI="
       }
     },
     {
@@ -178,14 +175,6 @@
           "valueString": "/page/mhero"
         },
         {
-          "name": "site:nav:menu:mhero:menu:groups:text",
-          "valueString": "Contact Groups"
-        },
-        {
-          "name": "site:nav:menu:mhero:menu:groups:url",
-          "valueString": "/page/contact-groups"
-        },
-        {
           "name": "site:nav:menu:database:text",
           "valueString": "Database"
         },
@@ -220,6 +209,22 @@
         {
           "name": "site:nav:menu:dashboard:url",
           "valueString": "/dashboard"
+        },
+        {
+          "name": "shortname.Practitioner:format",
+          "valueString": "%s, %s"
+        },
+        {
+          "name": "shortname.Practitioner:order",
+          "valueString": "family,given"
+        },
+        {
+          "name": "shortname.Practitioner:paths:family:fhirpath",
+          "valueString": "name.where(use='official').first().family"
+        },
+        {
+          "name": "shortname.Practitioner:paths:given:fhirpath",
+          "valueString": "name.where(use='official').first().given"
         }
       ]
     }

@@ -5,6 +5,9 @@ const crypto = require('crypto')
 const invalidRemoteKeys = [ 'fhir', 'config', 'session', 'keys' ]
 
 const fhirConfig = {
+  checkBoolean: (value) => {
+    return /^(true|yes|1)$/i.test(value)
+  },
   parseFile: ( file ) => {
     let configString = fs.readFileSync( file )
     let config = JSON.parse( configString )
@@ -50,23 +53,29 @@ const fhirConfig = {
     }
     return defaults
   },
-  parseRemote: ( config, keys ) => {
+  parseRemote: ( config, keys, skipSignature ) => {
 
     let defaults = {}
     if ( config.meta && config.meta.profile 
       && config.meta.profile.includes( "http://ihris.org/fhir/StructureDefinition/ihris-parameters-remote-config" ) ) {
 
-      let sig = config.parameter.find( param => param.name === "signature" )
+      let configAccepted = false
       let addconf = config.parameter.find( param => param.name === "config" )
 
-      let verifier = crypto.createVerify( 'sha256' )
-      verifier.update( JSON.stringify( addconf.part ) )
-
-      let configAccepted = false
-      for( let key of keys ) {
-        if ( verifier.verify( key, sig.valueSignature.data, 'base64' ) ) {
-          configAccepted = true
-          break
+      if ( skipSignature ) {
+        console.log("SKIPPING SECURITY CHECK ON REMOTE CONFIG:",config.id,". This should only be done in development.")
+        configAccepted = true
+      } else {
+        let sig = config.parameter.find( param => param.name === "signature" )
+  
+        let verifier = crypto.createVerify( 'sha256' )
+        verifier.update( JSON.stringify( addconf.part ) )
+  
+        for( let key of keys ) {
+          if ( verifier.verify( key, sig.valueSignature.data, 'base64' ) ) {
+            configAccepted = true
+            break
+          }
         }
       }
 

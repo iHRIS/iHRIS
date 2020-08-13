@@ -26,6 +26,10 @@ fhirAxios.setOptions( {
   password: nconf.get("fhir:password"),
 } )
 
+nconf.getBool = (key) => {
+  return fhirConfig.checkBoolean( nconf.get(key) )
+}
+
 nconf.fhirAxios = fhirAxios
 nconf.loadRemote = async() => {
   let remoteConfigs = nconf.get('config')
@@ -35,7 +39,7 @@ nconf.loadRemote = async() => {
     for( let conf of configKeys ) {
       try {
         let response = await fhirAxios.read( "Parameters", remoteConfigs[conf] )
-        let newConfig = fhirConfig.parseRemote( response, publicKeys )
+        let newConfig = fhirConfig.parseRemote( response, publicKeys, nconf.getBool("security:disabled") )
         nconf.add( conf, { type: 'literal', store: newConfig } )
       } catch(err) {
         console.error( "Unable to retrieve configuration Parameters "+remoteConfigs[conf]+" from FHIR server ("+nconf.get("fhir:base")+")" )
@@ -45,5 +49,6 @@ nconf.loadRemote = async() => {
     }
   }
 }
+
 
 module.exports = nconf

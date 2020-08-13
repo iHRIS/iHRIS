@@ -209,6 +209,22 @@
          {
           "name": "site:nav:menu:dashboard:url",
           "valueString": "/dashboard"
+        },
+        {
+          "name": "shortname.Practitioner:format",
+          "valueString": "%s, %s"
+        },
+        {
+          "name": "shortname.Practitioner:order",
+          "valueString": "family,given"
+        },
+        {
+          "name": "shortname.Practitioner:paths:family:fhirpath",
+          "valueString": "name.where(use='official').first().family"
+        },
+        {
+          "name": "shortname.Practitioner:paths:given:fhirpath",
+          "valueString": "name.where(use='official').first().given"
         }
       ]
     }

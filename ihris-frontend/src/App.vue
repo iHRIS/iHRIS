@@ -83,6 +83,11 @@ export default {
 
       fetch("/config/site").then(response => {
         response.json().then(data => {
+          console.log(data)
+          if (data.hasOwnProperty("security") && data.security.hasOwnProperty("disabled")) {
+            this.$store.commit('securityOff', data.security.disabled)
+          }
+          console.log("SECURITY OFF",this.$store.state.security_off)
           if (data.hasOwnProperty("title")) this.header.title = data.title
           if (data.hasOwnProperty("site")) this.header.site = data.site
           if (data.hasOwnProperty("logo")) this.header.logo = data.logo

@@ -72,12 +72,13 @@ async function startUp() {
     const modPaths = Object.keys(loadModules)
     for (let mod of modPaths) {
       try {
-        let reqMod = await fhirModules.require(loadModules[mod])
+        let reqMod = await fhirModules.require(loadModules[mod], nconf.getBool("security:disabled"))
         if (reqMod) {
           console.log("Loading " + mod + " (" + loadModules[mod] + ") to app.")
           app.use("/" + mod, reqMod)
         }
       } catch (err) {
+        console.log(err)
         console.log("Failed to load module " + mod + " (" + loadModules[mod] + ")")
       }
     }

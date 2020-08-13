@@ -7,6 +7,11 @@
       <span class="secondary--text" v-if="header.site"> | {{ header.site }}</span>
     </v-toolbar-title>
 
+    <v-spacer v-if=$store.state.security_off></v-spacer>
+    <div class="error font-weight-bold white--text" dark v-if="$store.state.security_off">
+      Security has been disabled for remote configuration and modules!  <br />
+      This should only be done during development.
+    </div>
     <v-spacer></v-spacer>
     <div>Welcome <span v-if="header.user.loggedin">, {{ header.user.name }}</span></div>
     <v-spacer></v-spacer>

@@ -5,6 +5,7 @@ Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
+    security_off: false,
     message: {
       type: "info",
       text: null,
@@ -13,6 +14,9 @@ export default new Vuex.Store({
     }
   },
   mutations: {
+    securityOff( state, data ) {
+      state.security_off = data
+    },
     closeMessage( state ) {
       state.message.active = false
     },

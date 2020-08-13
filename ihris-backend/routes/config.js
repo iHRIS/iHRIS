@@ -10,7 +10,10 @@ const crypto = require('crypto')
 /* GET home page. */
 router.get('/site', function(req, res) {
   const defaultUser = nconf.get("user:loggedout") || "ihris-user-loggedout"
-  let site = nconf.get("site")
+  let site = nconf.get("site") || {}
+  if ( nconf.getBool("security:disabled") ) {
+    site.security = {disabled: true}
+  }
   if ( req.user ) {
     site.user = {}
     if ( req.user.resource.id === defaultUser ) {
