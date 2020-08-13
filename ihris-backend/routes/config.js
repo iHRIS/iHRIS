@@ -146,10 +146,15 @@ router.get('/page/:page', function(req, res) {
                 condition = action.extension.find( ext => ext.url === "condition" ).valueString
               } catch(err) {}
               try {
+                emptyDisplay = action.extension.find( ext => ext.url === "emptyDisplay" ).valueBoolean
+              } catch(err) {}
+              try {
                 eleClass = action.extension.find( ext => ext.url === "class" ).valueString
               } catch(err) {}
               if ( link && text ) {
-                actions.push( {link: link, text: text, row: row, condition: condition, eleClass: eleClass } )
+                actions.push( {link: link, text: text, row: row, 
+                  condition: condition, emptyDisplay: emptyDisplay, 
+                  eleClass: eleClass } )
               }
             } catch(err) { }
           }

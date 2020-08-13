@@ -83,6 +83,7 @@ Description:    "iHRIS Page Section information."
       text 1..1 MS and
       row 0..1 MS and
       condition 0..1 MS and
+      emptyDisplay 0..1 MS and
       class 0..1 MS 
 * extension[resource].extension[action].extension[link].value[x] only string
 * extension[resource].extension[action].extension[link].valueString MS
@@ -96,6 +97,9 @@ Description:    "iHRIS Page Section information."
 * extension[resource].extension[action].extension[condition].value[x] only string
 * extension[resource].extension[action].extension[condition].valueString MS
 * extension[resource].extension[action].extension[condition].valueString ^label = "FHIRPation Condition do Display"
+* extension[resource].extension[action].extension[emptyDisplay].value[x] only boolean
+* extension[resource].extension[action].extension[emptyDisplay].valueBoolean MS
+* extension[resource].extension[action].extension[emptyDisplay].valueBoolean ^label = "Show when no records?"
 * extension[resource].extension[action].extension[class].value[x] only string
 * extension[resource].extension[action].extension[class].valueString MS
 * extension[resource].extension[action].extension[class].valueString ^label = "Element Class for the Action"
@@ -156,6 +160,7 @@ Usage:          #example
 * extension[section][4].extension[resource].extension[action][0].extension[link].valueString = "/resource/add/practitionerrole?PractitionerRole.practitioner.reference=Practitioner/FHIRID"
 * extension[section][4].extension[resource].extension[action][0].extension[text].valueString = "Assign Job"
 * extension[section][4].extension[resource].extension[action][0].extension[row].valueBoolean = false
+* extension[section][4].extension[resource].extension[action][0].extension[emptyDisplay].valueBoolean = true
 * extension[section][4].extension[resource].extension[action][0].extension[condition].valueString = "PractitionerRole.period.end.exists()"
 * extension[section][4].extension[resource].extension[action][0].extension[class].valueString = "primary"
 * extension[section][4].extension[resource].extension[action][1].extension[link].valueString = "/resource/view/practitionerrole/ITEMID"
