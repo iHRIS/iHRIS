@@ -16,11 +16,11 @@
             "code": "1.2.840.10065.1.12.1.14"
           }
         ],
-        "when": "2020-08-13T20:41:51.959Z",
+        "when": "2020-08-13T23:28:01.715Z",
         "who": {
           "reference": "http://ihris.org/fhir/Organization/ihris"
         },
-        "data": "vYY25dM9LzfjfjWLgYA4UBMcIQx2neFxdOUUiNkCacZ1nSYmx8SQ9o+AZbPVrYXS9n7+QTnJ6NFLZ7GXusPtItULWF7OcJxYUXoBskZ0VbTK7k990BvwKnOWhiJuh5QRnoR3m2vMpoRglSspcEHzkV8WkYSxFBlbI4MDl1H27uI="
+        "data": "rKLRurUMp2Upg2LK+U4VnQ4/lV8tUYm+qv/q0sv4kuW4jV+G2+9J3qNPfAIoawEX/bhHBQ2Nea4eK9RxKxZrk18BNyB1ye25615iTpX31E5yLwjGeUeX023DNb8apph9q+2evqOZZrPo6KDI2jiEpvzFN/sDGN9BUUxDaD/8xNc="
       }
     },
     {
@@ -211,19 +211,19 @@
           "valueString": "/dashboard"
         },
         {
-          "name": "shortname.Practitioner:format",
+          "name": "shortname:Practitioner:format",
           "valueString": "%s, %s"
         },
         {
-          "name": "shortname.Practitioner:order",
+          "name": "shortname:Practitioner:order",
           "valueString": "family,given"
         },
         {
-          "name": "shortname.Practitioner:paths:family:fhirpath",
+          "name": "shortname:Practitioner:paths:family:fhirpath",
           "valueString": "name.where(use='official').first().family"
         },
         {
-          "name": "shortname.Practitioner:paths:given:fhirpath",
+          "name": "shortname:Practitioner:paths:given:fhirpath",
           "valueString": "name.where(use='official').first().given"
         }
       ]
