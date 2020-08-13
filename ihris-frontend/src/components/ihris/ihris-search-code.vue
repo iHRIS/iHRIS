@@ -13,8 +13,9 @@
           hide-details>
         </v-text-field>
         <v-spacer></v-spacer>
-        <v-btn class="primary" :to="'/resource/add/'+page">
-          <v-icon>mdi-database-plus</v-icon>
+        <v-btn :class="addLink ? addLink.class || 'primary' : 'primary'" :to="addLink ? addLink.url : '/resource/add/'+page">
+          <v-icon v-if="addLink && addLink.icon">{{ addLink.icon }}</v-icon>
+          <v-icon v-else>mdi-database-plus</v-icon>
           Add {{label}}
         </v-btn>
       </v-card-title>
@@ -40,7 +41,7 @@
 
 export default {
   name: "ihris-search-code",
-  props: ["profile","fields","label","terms","page","resource"],
+  props: ["profile","fields","label","terms","page","resource","add-link"],
   data: function() {
     return {
       debug: "",
