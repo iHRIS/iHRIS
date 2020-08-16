@@ -1,11 +1,15 @@
 const express = require('express')
+const fs = require('fs')
 const router = express.Router()
 const nconf = require('../modules/config')
 const fhirAxios = nconf.fhirAxios
 const fhirFilter = require('../modules/fhirFilter')
 const fhirQuestionnaire = require('../modules/fhirQuestionnaire')
+const fhirModules = require('../modules/fhirModules')
 const isEmpty = require('is-empty')
 const outcomes = require('../config/operationOutcomes')
+
+let workflowModules = {}
 
 /**
  * This route will process a QuestionnaireReponse and parse
@@ -16,43 +20,50 @@ router.post("/QuestionnaireResponse", (req, res, next) => {
     return res.status(401).json( outcomes.NOTLOGGEDIN )
   }
 
-  let workflowModules = {}
-  const workflowConfig = {
-    processor: {
-      endrole: '../modules/workflowEndRole'
-    },
-    questionnaire: {
-      'http://ihris.org/fhir/Questionnaire/ihris-endrole': 'endrole'
-    }
-  }
-  // Need to move this processing to loaded modules and add to the config
-  // But for now this is here for testing
+  let workflowQuestionnaires = nconf.get("workflow:questionnaire")
+  let workflow = Object.keys(workflowQuestionnaires).find( wf => workflowQuestionnaires[wf].url === req.body.questionnaire )
+  if ( workflow ) {
 
-  if ( workflowConfig.questionnaire.hasOwnProperty( req.body.questionnaire ) ) {
-    let processor = workflowConfig.questionnaire[ req.body.questionnaire ]
-    if ( !workflowModules.hasOwnProperty( processor ) ) {
-      workflowModules[processor] = require( workflowConfig.processor[processor] )
+    let processor = workflow
+    if ( workflowQuestionnaires[workflow].hasOwnProperty('processor') ) {
+      processor = workflowQuestionnaires[workflow].processor
     }
 
-    workflowModules[processor].process( req ).then( (bundle) => {
-      fhirFilter.filterBundle( "write", bundle, req.user )
+    let details = nconf.get('workflow:processor:'+processor)
 
-      fhirAxios.create( bundle ).then ( (results) => {
-        next()
+    if ( !details || (!details.file && !details.library) ) {
+      let outcome = { ...outcomes.ERROR }
+      outcome.issue[0].diagnostics = "Unable to find processor for this questionnaire: "+req.body.questionnaire +" ("+processor+")"
+      return res.status(500).json( outcome )
+    }
+
+    fhirModules.requireWorkflow( workflow, details.library, details.file ).then( (module) => {
+        module.process( req ).then( (bundle) => {
+          fhirFilter.filterBundle( "write", bundle, req.user )
+
+          fhirAxios.create( bundle ).then ( (results) => {
+            next()
+          } ).catch( (err) => {
+            console.log(err)
+            console.log(JSON.stringify(err.response.data,null,2))
+            return res.status( err.response.status ).json( err.response.data )
+          } )
+
+        } ).catch( (err) => {
+          console.log(err)
+          if ( err === "Invalid input" ) {
+            return res.status( 400 ).json( err )
+          } else {
+            return res.status( 500 ).json( err )
+          }
+        } )
+
       } ).catch( (err) => {
         console.log(err)
-        console.log(JSON.stringify(err.response.data,null,2))
-        return res.status( err.response.status ).json( err.response.data )
+        let outcome = { ...outcomes.ERROR }
+        outcome.issue[0].diagnostics = "Unable to find processor module for this questionnaire: "+req.body.questionnaire +" ("+processor+")"
+        return res.status(500).json( outcome )
       } )
-
-    } ).catch( (err) => {
-      console.log(err)
-      if ( err === "Invalid input" ) {
-        return res.status( 400 ).json( err )
-      } else {
-        return res.status( 500 ).json( err )
-      }
-    } )
 
   } else {
 

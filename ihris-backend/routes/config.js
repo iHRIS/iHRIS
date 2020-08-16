@@ -29,6 +29,14 @@ router.get('/site', function(req, res) {
   res.status(200).json( site )
 })
 
+router.get('/reload', function(req,res) {
+  nconf.loadRemote().then( () => {
+    res.status(200).json({ok:true,conf:nconf.get()})
+  } ).catch( err => {
+    res.status(400).json({ok:false,err:err})
+  } )
+} )
+
 const getDefinition = ( resource ) => {
   let structureDef = resource.split('/')
   return fhirAxios.read( structureDef[0], structureDef[1] )

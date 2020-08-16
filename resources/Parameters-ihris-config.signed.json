@@ -16,11 +16,11 @@
             "code": "1.2.840.10065.1.12.1.14"
           }
         ],
-        "when": "2020-08-13T23:28:01.715Z",
+        "when": "2020-08-15T23:45:04.409Z",
         "who": {
           "reference": "http://ihris.org/fhir/Organization/ihris"
         },
-        "data": "rKLRurUMp2Upg2LK+U4VnQ4/lV8tUYm+qv/q0sv4kuW4jV+G2+9J3qNPfAIoawEX/bhHBQ2Nea4eK9RxKxZrk18BNyB1ye25615iTpX31E5yLwjGeUeX023DNb8apph9q+2evqOZZrPo6KDI2jiEpvzFN/sDGN9BUUxDaD/8xNc="
+        "data": "jW9lLkkJbCfHtFK0EwNf4F+cQa/1geEszckzxpaIfaeD5T58PUQR7O4LLY6ED+MmU5Ub6zaqtoMM8GtWeN73P3XqhWkEnd2LE8j/5z908gzpznuo5oyWbdo3Dfdq1bjgsvU4Xm1FQUkmGf4ZW0ZDx5wPEp1cuzwds7yc/LGBqyM="
       }
     },
     {
@@ -225,6 +225,14 @@
         {
           "name": "shortname:Practitioner:paths:given:fhirpath",
           "valueString": "name.where(use='official').first().given"
+        },
+        {
+          "name": "workflow:processor:endrole:library",
+          "valueString": "ihris-workflow-endrole"
+        },
+        {
+          "name": "workflow:questionnaire:endrole:url",
+          "valueString": "http://ihris.org/fhir/Questionnaire/ihris-endrole"
         }
       ]
     }

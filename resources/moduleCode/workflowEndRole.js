@@ -1,4 +1,4 @@
-const nconf = require('./config')
+const nconf = require('config')
 const fhirAxios = nconf.fhirAxios
 
 const workflowEndRole = {

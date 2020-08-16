@@ -90,11 +90,13 @@ IHRIS_FHIR__SERVER=http://locahost:8080/hapi/fhir
     * join (string to join on, default: " ")
 * workflow
  * processor
-  * [name] = id of Library resource
+  * [name] 
+   * library = id of library resource
+   * file = filename of module
  * questionnaire
   * [name]
    * url = canonical URL of the questionnaire
-   * processor = [processor] (name of the processor)
+   * processor = [processor] (name of the processor) (default is same name as questionnaire)
 
 
 # Resources used for configuration

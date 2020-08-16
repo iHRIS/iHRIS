@@ -225,6 +225,14 @@
         {
           "name": "shortname:Practitioner:paths:given:fhirpath",
           "valueString": "name.where(use='official').first().given"
+        },
+        {
+          "name": "workflow:processor:endrole:library",
+          "valueString": "ihris-workflow-endrole"
+        },
+        {
+          "name": "workflow:questionnaire:endrole:url",
+          "valueString": "http://ihris.org/fhir/Questionnaire/ihris-endrole"
         }
       ]
     }
