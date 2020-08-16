@@ -16,11 +16,11 @@
             "code": "1.2.840.10065.1.12.1.14"
           }
         ],
-        "when": "2020-08-15T23:45:04.409Z",
+        "when": "2020-08-16T17:10:21.770Z",
         "who": {
           "reference": "http://ihris.org/fhir/Organization/ihris"
         },
-        "data": "jW9lLkkJbCfHtFK0EwNf4F+cQa/1geEszckzxpaIfaeD5T58PUQR7O4LLY6ED+MmU5Ub6zaqtoMM8GtWeN73P3XqhWkEnd2LE8j/5z908gzpznuo5oyWbdo3Dfdq1bjgsvU4Xm1FQUkmGf4ZW0ZDx5wPEp1cuzwds7yc/LGBqyM="
+        "data": "tPNZ0JfVLGqspTdo/SMiac2L3KkK/u1TXMN4303koQhIgyXGPwfgZItex/SeR0BAJH93plbkZpz1hyAO2OIyVinKYaRzAxIJYxSJyWCYzyAJqRtRYloh3WTq9QbgRrzZhW2X30BDwhi6CuKMe/6eN42xX1yc73Zh53V8kaXmMys="
       }
     },
     {
@@ -233,6 +233,14 @@
         {
           "name": "workflow:questionnaire:endrole:url",
           "valueString": "http://ihris.org/fhir/Questionnaire/ihris-endrole"
+        },
+        {
+          "name": "workflow:processor:promotion:library",
+          "valueString": "ihris-workflow-promotion"
+        },
+        {
+          "name": "workflow:questionnaire:promotion:url",
+          "valueString": "http://ihris.org/fhir/Questionnaire/ihris-promotion"
         }
       ]
     }

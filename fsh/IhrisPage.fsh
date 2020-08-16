@@ -189,7 +189,7 @@ Usage:          #example
 * extension[section][4].extension[resource].extension[action][2].extension[row].valueBoolean = true
 * extension[section][4].extension[resource].extension[action][2].extension[condition].valueString = "PractitionerRole.period.end.empty()"
 * extension[section][4].extension[resource].extension[action][2].extension[class].valueString = "warning"
-* extension[section][4].extension[resource].extension[action][3].extension[link].valueString = "/questionnaire/ihris-promote/practitioner?practitionerrole=ITEMID&practitioner=FHIRID"
+* extension[section][4].extension[resource].extension[action][3].extension[link].valueString = "/questionnaire/ihris-promotion/practitioner?practitionerrole=ITEMID"
 * extension[section][4].extension[resource].extension[action][3].extension[text].valueString = "Enter Promotion"
 * extension[section][4].extension[resource].extension[action][3].extension[row].valueBoolean = true
 * extension[section][4].extension[resource].extension[action][3].extension[condition].valueString = "PractitionerRole.period.end.empty()"

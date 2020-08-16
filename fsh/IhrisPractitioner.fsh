@@ -398,3 +398,32 @@ Usage:          #definition
 * item[0].item[0].required = true
 * item[0].item[0].repeats = false
 
+Instance:       IhrisPractitionerWorkflowPromotion
+InstanceOf:      Questionnaire
+Usage:          #definition
+* title = "iHRIS End Role Workflow"
+* description = "iHRIS workflow to record a promotion"
+* id = "ihris-promotion"
+* url = "http://ihris.org/fhir/Questionnaire/ihris-promotion"
+* name = "ihris-promotion"
+* status = #active
+* date = 2020-08-09
+* purpose = "Workflow page for recording a promotion."
+
+* item[0].linkId = "PractitionerRole"
+* item[0].text = "Promotion Details"
+* item[0].type = #group
+
+* item[0].item[0].linkId = "period.end"
+* item[0].item[0].text = "Position Change Date"
+* item[0].item[0].type = #date
+* item[0].item[0].required = true
+* item[0].item[0].repeats = false
+
+* item[0].item[1].linkId = "code"
+* item[0].item[1].text = "New Job Title"
+* item[0].item[1].type = #choice
+* item[0].item[1].answerValueSet = "http://ihris.org/fhir/ValueSet/ihris-job"
+* item[0].item[1].required = true
+* item[0].item[1].repeats = false
+
