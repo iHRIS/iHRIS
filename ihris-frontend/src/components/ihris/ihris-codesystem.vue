@@ -66,7 +66,7 @@ export default {
     if ( this.fhirId ) {
       this.loading = true
       //console.log("getting",this.field,this.fhirId)
-      let codeSystemId = this.profile.substring( this.profile.lastIndexOf("/") )
+      let codeSystemId = this.profile.substring( this.profile.lastIndexOf("/")+1 )
       fetch( "/fhir/"+this.field+"/"+codeSystemId ).then(response => {
         if ( response.ok ) {
           response.json().then(data => {
@@ -121,7 +121,7 @@ export default {
             //console.log(data)
           }).catch(err=> {
             this.loading = false
-            console.log(this.field,this.fhirId,err)
+            console.log(this.field,this.fhirId,err,response)
           })
         } else {
           this.loading = false
@@ -165,7 +165,7 @@ export default {
       this.fhir = { }
       //console.log(this)
       processChildren( this.field, this.fhir, this.$children )
-      let codeSystemId = this.profile.substring( this.profile.lastIndexOf("/") )
+      let codeSystemId = this.profile.substring( this.profile.lastIndexOf("/")+1 )
       let url = "/fhir/"+this.field+"/"+codeSystemId
       let opts = {
         method: "PATCH",
