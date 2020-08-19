@@ -239,7 +239,7 @@ router.get('/page/:page', function(req, res) {
 
       let searchTemplate = '<'+searchElement+' :key="$route.params.page" page="'+req.params.page+'" label="'+(resource.title || resource.name)+'" :fields="fields" :terms="terms" resource="'+(resource.resourceType === "StructureDefinition" ? resource.type : resource.resourceType)+'" profile="'+resource.url+'"'
       if ( addLink ) {
-        searchTemplate += " :add-link='"+JSON.stringify(addLink).replace(/'/g, "\'")+"'"
+        searchTemplate += " :add-link='"+JSON.stringify(addLink).replace(/'/g, "\\'")+"'"
       }
       searchTemplate += '>'+"\n"
       for( let filter of filters ) {
@@ -279,7 +279,7 @@ router.get('/page/:page', function(req, res) {
         vueOutput = '<'+resourceElement+' :fhir-id="fhirId" :edit="isEdit" v-on:set-edit="setEdit($event)" profile="'+resource.url+'" :key="$route.params.page+($route.params.id || \'\')" page="'+req.params.page+'" field="'+fhir+'" title="'+sections[fhir].title+'"'
         if ( sectionKeys.length > 1 ) {
           sectionMenu = sectionKeys.map( name => { return { name: name, title: sections[name].title, desc: sections[name].description, secondary: !!sections[name].resource } } )
-          vueOutput += " :section-menu='"+JSON.stringify(sectionMenu).replace(/'/g, "\'")+"'"
+          vueOutput += " :section-menu='"+JSON.stringify(sectionMenu).replace(/'/g, "\\'")+"'"
         }
         vueOutput += '><template #default=\"slotProps\">'+"\n"
 
@@ -350,7 +350,7 @@ router.get('/page/:page', function(req, res) {
               }
             }
             if ( subFields ) {
-              output += " :sub-fields='" + JSON.stringify( subFields ).replace(/'/g, "\'") +"'"
+              output += " :sub-fields='" + JSON.stringify( subFields ).replace(/'/g, "\\'") +"'"
             }
             output += ">\n"
 
@@ -386,8 +386,8 @@ router.get('/page/:page', function(req, res) {
                 +'" title="'+sections[name].title
                 +'" link-field="'+sections[name].linkfield
                 +'" search-field="'+(sections[name].searchfield || "")
-                +'" :columns=\''+JSON.stringify(sections[name].columns).replace(/'/g, "\'")
-                +'\' :actions=\''+JSON.stringify(sections[name].actions).replace(/'/g, "\'")
+                +'" :columns=\''+JSON.stringify(sections[name].columns).replace(/'/g, "\\'")
+                +'\' :actions=\''+JSON.stringify(sections[name].actions).replace(/'/g, "\\'")
                   +'\'><template #default="slotProps">' + "\n"
                   //vueOutput += processFields( secondaryStructure[second_fhir].fields, second_fhir, secondaryOrder )
                   vueOutput += "</template></ihris-secondary>"
@@ -512,7 +512,7 @@ router.get('/questionnaire/:questionnaire', function(req, res) {
             let answerTypes = Object.keys( item.answerOption[0] )
             for( let answerType of answerTypes ) {
               if ( answerType.startsWith("value") ) {
-                vueOutput += " :hiddenValue='" + JSON.stringify( item.answerOption[0][answerType] ).replace(/'/g, "\'")
+                vueOutput += " :hiddenValue='" + JSON.stringify( item.answerOption[0][answerType] ).replace(/'/g, "\\'")
                   + "' hiddenType='" + answerType.substring(5) + "'"
                   break
                 }
@@ -574,7 +574,7 @@ router.get('/questionnaire/:questionnaire', function(req, res) {
     if ( sectionMenu.length < 2 ) {
       vueOutput = vueOutput.replace("__SECTIONMENU__", "")
     } else {
-      vueOutput = vueOutput.replace("__SECTIONMENU__", " :section-menu='" + JSON.stringify(sectionMenu).replace(/'/g, "\'") + "'")
+      vueOutput = vueOutput.replace("__SECTIONMENU__", " :section-menu='" + JSON.stringify(sectionMenu).replace(/'/g, "\\'") + "'")
     }
     vueOutput += "</ihris-questionnaire>\n"
 
