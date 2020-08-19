@@ -329,11 +329,11 @@ describe( 'Test FHIR Questionnaire middleware route', () => {
     ]
   }
 
-  describe( 'Test POST /QuestionnaireReponse', () => {
+      /*
+  describe( 'Test POST /QuestionnaireResponse', () => {
 
     test( 'test POST response', () => {
-      axios.__setFhirResults( DEFAULT_URL + "Questionnaire/ihris-test", null, MOCK_CODESYSTEM )
-      /*
+      axios.__setFhirResults( DEFAULT_URL + "Questionnaire/ihris-test", null, MOCK_QUESTIONNAIRE )
       const MOCK_CODESYSTEM = {
         resourceType: "Bundle",
         id: "mock-test",
@@ -346,9 +346,9 @@ describe( 'Test FHIR Questionnaire middleware route', () => {
         expect(response.statusCode).toBe( 200 )
         expect(response.body).toEqual( MOCK_CODESYSTEM )
       } )
-      */
     } )
 
   } )
+      */
 
 } )

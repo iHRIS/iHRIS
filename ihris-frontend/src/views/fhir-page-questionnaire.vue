@@ -26,7 +26,14 @@ export default {
         response.json().then(data => {
           Vue.component('ihris-template', {
             name: 'ihris-template',
-            data: function() { return { viewPage: page, isEdit: true } }, 
+            data: function() { 
+              return { 
+                viewPage: page, 
+                isEdit: true,
+                sectionMenu: data.data.sectionMenu,
+                hidden: data.data.hidden
+              } 
+            }, 
             components: { 
               "ihris-questionnaire": () => import(/* webpackChunkName: "fhir-questionnaire" */ "@/components/ihris/ihris-questionnaire" ),
               "ihris-questionnaire-section": () => import(/* webpackChunkName: "fhir-questionnaire" */ "@/components/ihris/ihris-questionnaire-section" ),

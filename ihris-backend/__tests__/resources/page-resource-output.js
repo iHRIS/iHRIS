@@ -1,15 +1,5 @@
 module.exports = {
-  search: '<ihris-search :key="$route.params.page" page="test-practitioner" label="Health Worker" :fields="fields" :terms="terms" resource="Practitioner" profile="http://ihris.org/fhir/StructureDefinition/ihris-test-practitioner">\n' +
-  '<ihris-search-term v-on:termChange="searchData" label="Name" expression="name:contains"></ihris-search-term>\n' +
-  '<ihris-search-term v-on:termChange="searchData" label="Gender" expression="gender"></ihris-search-term>\n' +
-  '</ihris-search>\n',
-  searchData: [
-    [ 'Surname', "name.where(use='official').family" ],
-    [ 'Given Name(s)', "name.where(use='official').given" ],
-    [ 'Birth Date', 'birthDate' ],
-    [ 'Gender', 'gender' ]
-  ],
-  template: `<ihris-resource :fhir-id="fhirId" :edit="isEdit" v-on:setEdit="setEdit($event)" profile="http://ihris.org/fhir/StructureDefinition/ihris-test-practitioner" :key="$route.params.page+($route.params.id || '')" page="test-practitioner" field="Practitioner" title="Health Worker" :section-menu='[{"name":"Practitioner","title":"Health Worker","desc":"Primary demographic details","secondary":false},{"name":"identifiers","title":"Identifiers","desc":"Personal identifiers","secondary":false},{"name":"position","title":"Position","desc":"Position the person holds","secondary":true}]'><template #default="slotProps">\n` +
+  template: `<ihris-resource :fhir-id="fhirId" :edit="isEdit" v-on:set-edit="setEdit($event)" profile="http://ihris.org/fhir/StructureDefinition/ihris-test-practitioner" :key="$route.params.page+($route.params.id || '')" page="test-practitioner" field="Practitioner" title="Health Worker" :section-menu='sectionMenu'><template #default="slotProps">\n` +
   '<ihris-section :slotProps="slotProps" :edit="isEdit" name="Practitioner" title="Health Worker" description="Primary demographic details" :secondary="false">\n' +
   '<template #default="slotProps">\n' +
   '<ihris-array :edit="isEdit" fieldType="human-name" :slotProps="slotProps" field="name" label="Name" min="1" max="*" id="Practitioner.name" path="Practitioner.name">\n' +
@@ -48,7 +38,7 @@ module.exports = {
   '</fhir-code>\n' +
   '<fhir-extension :slotProps="slotProps" :edit="isEdit" id="Practitioner.extension:residence" field="extension:residence" sliceName="residence" profile="http://ihris.org/fhir/StructureDefinition/ihris-test-residence" min="0" max="1" base-min="0" base-max="*" path="Practitioner.extension">\n' +
   '<template #default="slotProps">\n' +
-  `<fhir-reference :slotProps="slotProps" :edit="isEdit" id="Practitioner.extension:residence.value[x]:valueReference" field="value[x]:valueReference" sliceName="valueReference" targetProfile="http://hl7.org/fhir/StructureDefinition/Location" min="1" max="1" base-min="0" base-max="1" label="Residence" path="Practitioner.extension.value[x]" :sub-fields='{"reference":{"id":"reference","path":"reference","label":"Location","min":1,"max":"1","base-min":0,"base-max":"1","code":"string"}}'>\n` +
+  `<fhir-reference :slotProps="slotProps" :edit="isEdit" id="Practitioner.extension:residence.value[x]:valueReference" field="value[x]:valueReference" sliceName="valueReference" targetProfile="http://hl7.org/fhir/StructureDefinition/Location" min="1" max="1" base-min="0" base-max="1" label="Residence" path="Practitioner.extension.value[x]" :sub-fields='subFields.__SUBFIELDS_TEST_REPLACE_0__'>\n` +
   '</fhir-reference>\n' +
   '</template>\n' +
   '</fhir-extension>\n' +
@@ -108,7 +98,66 @@ module.exports = {
   '</template></ihris-section>\n' +
   '<ihris-section :slotProps="slotProps" :edit="isEdit" name="position" title="Position" description="Position the person holds" :secondary="true">\n' +
   '<template #default="slotProps">\n' +
-  `<ihris-secondary :edit="isEdit" :link-id="fhirId" profile="http://ihris.org/fhir/StructureDefinition/ihris-test-practitioner-role" field="PractitionerRole" title="Position" link-field="PractitionerRole.practitioner" search-field="" :columns='[{"text":"Job","value":"PractitionerRole.code.coding[0]"},{"text":"Start Date","value":"PractitionerRole.period.start"}]' :actions='[{"link":"/resource/add/practitionerrole","text":"Add Role","row":"true","condition":"PractitionerRole.period.end.empty()","eleClass":"accent"}]'><template #default="slotProps">\n` +
+  `<ihris-secondary :edit="isEdit" :link-id="fhirId" profile="http://ihris.org/fhir/StructureDefinition/ihris-test-practitioner-role" field="PractitionerRole" title="Position" link-field="PractitionerRole.practitioner" search-field="" :columns='columns.__COLUMNS_TEST_REPLACE_0__' :actions='actions.__ACTIONS_TEST_REPLACE_0__'><template #default="slotProps">\n` +
   '</template></ihris-secondary></template></ihris-section>\n' +
-  '</template></ihris-resource>\n'
+  '</template></ihris-resource>\n',
+  data: {
+    sectionMenu: [
+      {
+        name: "Practitioner",
+        title: "Health Worker",
+        desc: "Primary demographic details",
+        secondary: false
+      },
+      {
+        name: "identifiers",
+        title: "Identifiers",
+        desc: "Personal identifiers",
+        secondary: false
+      },
+      {
+        name: "position",
+        title: "Position",
+        desc: "Position the person holds",
+        secondary: true
+      }
+    ],
+    subFields: {
+      TEST0: {
+        reference: {
+          id: "reference",
+          path: "reference",
+          label: "Location",
+          min: 1,
+          max: "1",
+          "base-min": 0,
+          "base-max": "1",
+          code: "string"
+        }
+      }
+    },
+    columns: {
+      TEST0: [
+        {
+          text: "Job",
+          value: "PractitionerRole.code.coding[0]"
+        },
+        {
+          text: "Start Date",
+          value: "PractitionerRole.period.start"
+        }
+      ]
+    },
+    actions: {
+      TEST0: [
+        {
+          link: "/resource/add/practitionerrole",
+          text: "Add Role",
+          row: "true",
+          condition: "PractitionerRole.period.end.empty()",
+          class: "accent"
+        }
+      ]
+    }
+  }
 }

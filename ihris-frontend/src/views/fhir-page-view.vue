@@ -29,7 +29,11 @@ export default {
             data: function() { 
               return { 
                 fhirId: pageId, 
-                isEdit: false 
+                isEdit: false,
+                sectionMenu: data.data.sectionMenu,
+                subFields: data.data.subFields,
+                columns: data.data.columns,
+                actions: data.data.actions
               } 
             }, 
             components: { 

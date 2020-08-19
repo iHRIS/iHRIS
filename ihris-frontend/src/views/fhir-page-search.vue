@@ -21,13 +21,14 @@ export default {
   },
   methods: {
     getTemplate: function() {
-      fetch( "/config/page/"+page ).then(response => {
+      fetch( "/config/page/"+page+"/search" ).then(response => {
         response.json().then(data => {
           Vue.component( 'ihris-template', {
             name: 'ihris-template',
             data: function() { 
               return { 
-                fields: data.searchData, 
+                fields: data.data.fields, 
+                addLink: data.data.addLink,
                 terms: {} 
               } 
             },
@@ -36,7 +37,7 @@ export default {
               "ihris-search-code": () => import(/* webpackChunkName: "fhir-search" */ "@/components/ihris/ihris-search-code" ),
               "ihris-search-term": () => import(/* webpackChunkName: "fhir-search" */ "@/components/ihris/ihris-search-term" )
             }, 
-            template: data.search, 
+            template: data.template,
             methods: { 
               searchData: function(expression, value) { 
                 this.$set(this.terms, expression, value) 
