@@ -20,7 +20,7 @@
       >
       <v-list class="white--text">
         <v-list-item>
-          <v-btn v-if="!edit" dark class="secondary" @click="$emit('setEdit', !edit)">
+          <v-btn v-if="!edit" dark class="secondary" @click="$emit('set-edit', !edit)">
           <v-icon light>mdi-pencil</v-icon>
           <span>Edit</span>
           </v-btn>

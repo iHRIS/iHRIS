@@ -89,45 +89,55 @@ export default {
       let url = "/fhir/CodeSystem"+this.profile.substring(this.profile.lastIndexOf("/"))
 
       fetch( url ).then(response => {
-        //console.log("fetching",url)
-        response.json().then(async (data) => {
-          this.results = []
-          if ( data.concept && data.concept.length > 0 ) {
-            for( let entry of data.concept ) {
-              let result = { code: entry.code, display: entry.display, definition: entry.definition }
-              if ( entry.property && data.property ) {
-                for ( let prop of data.property ) {
-                  let property = entry.property.find( conceptProp => conceptProp.code === prop.code )
-                  if ( property ) {
-                    if ( prop.type === "code" ) {
-                      if ( property.valueCode ) {
-                        result[ prop.code ] = await this.$fhirutils.codeLookup( prop.uri, property.valueCode )
+        if ( response.ok ) {
+          response.json().then(async (data) => {
+            this.results = []
+            if ( data.concept && data.concept.length > 0 ) {
+              for( let entry of data.concept ) {
+                let result = { code: entry.code, display: entry.display, definition: entry.definition }
+                if ( entry.property && data.property ) {
+                  for ( let prop of data.property ) {
+                    let property = entry.property.find( conceptProp => conceptProp.code === prop.code )
+                    if ( property ) {
+                      if ( prop.type === "code" ) {
+                        if ( property.valueCode ) {
+                          result[ prop.code ] = await this.$fhirutils.codeLookup( prop.uri, property.valueCode )
+                        } else {
+                          result[ prop.code ] = ""
+                        }
+                      } else if ( prop.type === "Coding" ) {
+                        if ( property.valueCoding ) {
+                          result[ prop.code ] = await this.$fhirutils.codeLookup( property.valueCoding.system, property.valueCoding.code, prop.uri )
+                        } else {
+                          result[ prop.code ] = ""
+                        }
                       } else {
-                        result[ prop.code ] = ""
+                        result[ prop.code ] = property["value"+prop.type.charAt(0).toUpperCase() + prop.type.slice(1)]
                       }
-                    } else if ( prop.type === "Coding" ) {
-                      if ( property.valueCoding ) {
-                        result[ prop.code ] = await this.$fhirutils.codeLookup( property.valueCoding.system, property.valueCoding.code, prop.uri )
-                      } else {
-                        result[ prop.code ] = ""
-                      }
-                    } else {
-                      result[ prop.code ] = property["value"+prop.type.charAt(0).toUpperCase() + prop.type.slice(1)]
                     }
+                    //result[field[1]] = this.$fhirpath.evaluate(entry.resource, field[1])
                   }
-                  //result[field[1]] = this.$fhirpath.evaluate(entry.resource, field[1])
                 }
+                this.results.push( result )
               }
-              this.results.push( result )
             }
-          }
-          this.total = data.concept.length
-          this.loading = false
-        }).catch(err => {
+            this.total = data.concept.length
+            this.loading = false
+          }).catch(err => {
+            this.loading = false
+            this.error_message = "Unable to load results."
+            console.log(err)
+          })
+        } else {
           this.loading = false
           this.error_message = "Unable to load results."
-          console.log(err)
-        })
+          console.log("Invalid response",response)
+          response.text().then(body => {
+            console.log("body text:",body)
+          } ).catch(err => {
+            console.log("Failed to get text:",err)
+          } )
+        }
       }).catch(err => {
         this.loading = false
         this.error_message = "Unable to load results."

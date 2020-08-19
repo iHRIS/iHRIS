@@ -22,14 +22,15 @@ async function startUp() {
   console.log(nconf.get())
   let redisClient = redis.createClient( nconf.get("redis:url") )
 
-  const indexRouter = require('./routes/index')
+  app.use(logger('dev'))
+
+  //const indexRouter = require('./routes/index')
   const configRouter = require('./routes/config')
   const authRouter = require('./routes/auth')
   const fhirRouter = require('./routes/fhir')
   const questionnaireRouter = require('./routes/questionnaire')
   const mheroRouter = require('./routes/mhero')
 
-  app.use(logger('dev'))
   app.use(express.json({
     type: ["application/json", "application/fhir+json"]
   }))
