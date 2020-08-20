@@ -1,8 +1,9 @@
 const fs = require('fs')
 const crypto = require('crypto')
+const winston = require('winston')
 
 // Don't allow any settings to these values from a remote config
-const invalidRemoteKeys = [ 'fhir', 'config', 'session', 'keys' ]
+const invalidRemoteKeys = [ 'fhir', 'config', 'session', 'keys', 'logs' ]
 
 const fhirConfig = {
   checkBoolean: (value) => {
@@ -49,7 +50,7 @@ const fhirConfig = {
         }
       }
     } else {
-      console.log( "Invalid profile for configuration file: " + file )
+      winston.warn( "Invalid profile for configuration file: " + file )
     }
     return defaults
   },
@@ -63,7 +64,7 @@ const fhirConfig = {
       let addconf = config.parameter.find( param => param.name === "config" )
 
       if ( skipSignature ) {
-        console.log("SKIPPING SECURITY CHECK ON REMOTE CONFIG:",config.id,". This should only be done in development.")
+        winston.warn("SKIPPING SECURITY CHECK ON REMOTE CONFIG:",config.id,". This should only be done in development.")
         configAccepted = true
       } else {
         let sig = config.parameter.find( param => param.name === "signature" )
@@ -84,7 +85,7 @@ const fhirConfig = {
           if( param.hasOwnProperty("valueString") ) {
             let split = param.name.split(':')
             if ( invalidRemoteKeys.includes( split[0] ) ) {
-              console.log("Can't override "+split[0]+" from remote config file.")
+              winston.warn("Can't override "+split[0]+" from remote config file.")
               continue
             }
             let last = split.pop()
@@ -99,10 +100,10 @@ const fhirConfig = {
           }
         }
       } else {
-        console.log( "No valid key set for configuration Parameters " + config.id )
+        winston.warn( "No valid key set for configuration Parameters " + config.id )
       }
     } else {
-      console.log( "Invalid profile for remote configuration parameters for " + config.id )
+      winston.warn( "Invalid profile for remote configuration parameters for " + config.id )
     }
 
     return defaults

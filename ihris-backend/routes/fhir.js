@@ -9,6 +9,7 @@ const marked = require('marked')
 const { JSDOM } = require('jsdom')
 const createDOMPurify = require('dompurify')
 const outcomes = require('../config/operationOutcomes')
+const winston = require('winston')
 
 const window = new JSDOM('').window
 const DOMPurify = createDOMPurify(window)
@@ -132,7 +133,7 @@ router.patch("/CodeSystem/:id/:code", (req, res) => {
       resource.concept = [ update ]
     }
     fhirAxios.update( resource ).then( (resource) => {
-      console.log("UPDATED",resource)
+      winston.debug("UPDATED",resource)
       return res.status(200).json({ok:true})
     } ).catch( (err) => {
       /* return response from FHIR server */
@@ -293,14 +294,14 @@ router.get("/\\$short-name", (req, res) => {
   if ( req.query.reference ) {
     let refData = req.query.reference.split('/')
     if ( refData.length !== 2 ) {
-      console.log("invalid",req.query)
+      winston.debug("invalid",req.query)
       return res.status(401).json( outcomes.DENIED )
     }
     allowed = req.user.hasPermissionByName( "read", refData[0] )
 
     // Any read access will give short names
     if ( allowed === false ) {
-      console.log("not allowed",allowed,req.query)
+      winston.debug("not allowed",allowed,req.query)
       return res.status(401).json( outcomes.DENIED )
     }
     fhirShortName.lookup( req.query ).then ( (display) => {
@@ -313,7 +314,7 @@ router.get("/\\$short-name", (req, res) => {
       allowed = allowed && req.user.hasPermissionByName( "read", "ValueSet" ) 
     }
     if ( allowed !== true ) {
-      console.log("not allowed",allowed,req.query)
+      winston.debug("not allowed",allowed,req.query)
       return res.status(401).json( outcomes.DENIED )
     }
     fhirShortName.lookup( req.query ).then ( (display) => {

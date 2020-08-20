@@ -3,8 +3,9 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "node ./bin/www",
-    "test": "jest"
+    "start": "NODE_ENV=production node ./bin/www",
+    "dev": "NODE_ENV=development node ./bin/www",
+    "test": "NODE_ENV=test jest"
   },
   "dependencies": {
     "async": "^3.2.0",
@@ -31,7 +32,8 @@
     "supertest": "^4.0.2",
     "urijs": "^1.19.2",
     "url": "^0.11.0",
-    "uuid": "^8.2.0"
+    "uuid": "^8.2.0",
+    "winston": "^3.3.3"
   },
   "devDependencies": {
     "jest": "^26.0.1"

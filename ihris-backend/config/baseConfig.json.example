@@ -23,6 +23,39 @@
       "valueString": ""
     },
     {
+      "name": "logs",
+      "part": [
+        {
+          "name": "production:console:level",
+          "valueString": "warn"
+        },
+        {
+          "name": "production:file:error:level",
+          "valueString": "error"
+        },
+        {
+          "name": "production:file:error:file",
+          "valueString": "./logs/error.log"
+        },
+        {
+          "name": "production:file:info:level",
+          "valueString": "info"
+        },
+        {
+          "name": "production:file:info:file",
+          "valueString": "./logs/info.log"
+        },
+        {
+          "name": "test:console:level",
+          "valueString": "error"
+        },
+        {
+          "name": "development:console:level",
+          "valueString": "debug"
+        }
+      ]
+    },
+    {
       "name": "config",
       "part": [{
         "name": "ihris",

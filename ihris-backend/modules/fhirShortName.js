@@ -2,6 +2,7 @@ const nconf = require('./config')
 const fhirAxios = nconf.fhirAxios
 const fhirpath = require('fhirpath')
 const util = require('util')
+const winston = require('winston')
 
 const DEFAULT_DETAILS = { fhirpath: "name" }
 const INPROGRESS_DELAY = 300
@@ -76,7 +77,7 @@ const fhirShortName = {
           }
           resolve( fhirShortName._setCache( reference, util.format( format, ...output ) ) )
         } ).catch( (err) => {
-          console.log( "Failed to lookup ", reference, err )
+          winston.info( "Failed to lookup ", reference, err )
           resolve( fhirShortName._setCache( reference, reference ) )
         } )
       }
@@ -96,10 +97,10 @@ const fhirShortName = {
           if ( display ) {
             return resolve( fhirShortName._setCache( lookup, display.valueString ) )
           } else {
-            console.log("Failed to find display parameter for ", lookup)
+            winston.warn("Failed to find display parameter for ", lookup)
           }
         } else {
-          console.log("No display data from codesystem found ", lookup)
+          winston.warn("No display data from codesystem found ", lookup)
         }
         if ( valueset ) {
           resolve( fhirShortName._vsCodeLookup( valueset, system, code ) )
@@ -107,7 +108,7 @@ const fhirShortName = {
           resolve( fhirShortName._setCache( lookup, code ) )
         }
       } ).catch( (err) => {
-        console.log("Failed to retrive codesystem ", lookup, err)
+        winston.warn("Failed to retrive codesystem ", lookup, err)
         if ( valueset ) {
           resolve( fhirShortName._vsCodeLookup( valueset, system, code ) )
         } else {
@@ -129,10 +130,10 @@ const fhirShortName = {
             }
           }
         }
-        console.log( "Unable to find lookup in valueset definition ", valueset, lookup )
+        winston.warn( "Unable to find lookup in valueset definition ", valueset, lookup )
         resolve( fhirShortName._setCache( lookup, code ) )
       } ).catch( (err) => {
-        console.log("Failed to lookup code by valueset ", valueset, lookup, err )
+        winston.warn("Failed to lookup code by valueset ", valueset, lookup, err )
         resolve( fhirShortName._setCache( lookup, code ) )
       } )
     } )

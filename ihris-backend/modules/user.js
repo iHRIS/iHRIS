@@ -2,6 +2,7 @@ const nconf = require('./config')
 const fhirAxios = nconf.fhirAxios
 const crypto = require('crypto')
 const fhirFilter = require('./fhirFilter')
+const winston = require('winston')
 
 const ROLE_EXTENSION = "http://ihris.org/fhir/StructureDefinition/ihris-assign-role"
 const TASK_EXTENSION = "http://ihris.org/fhir/StructureDefinition/ihris-task"
@@ -25,7 +26,7 @@ const user = {
         if ( response.total === 0 ) {
           resolve( false )
         } else if ( response.total > 1 ) {
-          console.log("Too many users found for "+JSON.stringify(query))
+          winston.error("Too many users found for "+JSON.stringify(query))
           resolve( false )
         } else {
           let userObj = new User( response.entry[0].resource )
@@ -104,7 +105,7 @@ const user = {
     return new Promise( (resolve, reject) => {
       const role = roleStr.split( '/' )
       if ( role.length !== 2 ) {
-        console.log( "Invalid role passed to addRole: " +roleStr )
+        winston.error( "Invalid role passed to addRole: " +roleStr )
         resolve()
       } else {
         fhirAxios.read( role[0], role[1] ).then ( async(response) => {
@@ -164,21 +165,21 @@ const user = {
       return false
     }
     if ( !user.valueSet["ihris-task-permission"].includes( permission ) ) {
-      console.log( "Invalid permission given "+permission, user.valueSet["ihris-task-permission"] )
+      winston.error( "Invalid permission given "+permission, user.valueSet["ihris-task-permission"] )
       return false
     }
     if ( !user.valueSet["ihris-task-resource"].includes( resource ) ) {
-      console.log( "Invalid resource given "+resource, user.valueSet["ihris-task-resource"] )
+      winston.error( "Invalid resource given "+resource, user.valueSet["ihris-task-resource"] )
       return false
     }
     // Can't have an id when it's all resources
     if ( resource === "*" && ( id || field ) ) {
-      console.log("Can't add global resource permissions on a specific id or by including a field: "+id+" - "+field)
+      winston.warn("Can't add global resource permissions on a specific id or by including a field: "+id+" - "+field)
       return false
     }
 
     if ( ( permission === "*" || permission === "delete" ) && ( id || field ) ) {
-      console.log("Can't add delete permission on a specific id or by including a field: "+id+" - "+field)
+      winston.warn("Can't add delete permission on a specific id or by including a field: "+id+" - "+field)
       return false
     }
     if ( !permissions.hasOwnProperty( permission ) ) {
@@ -370,13 +371,13 @@ User.prototype.checkPassword = function( password ) {
   let details = this.resource.extension.find( ext => 
     ext.url === "http://ihris.org/fhir/StructureDefinition/ihris-password" )
   if ( !details ) {
-    console.log( "Password details don't exist in user "+this.resource.id )
+    winston.error( "Password details don't exist in user "+this.resource.id )
     return false
   }
   let hash = details.extension.find( ext => ext.url === "password" )
   let salt = details.extension.find( ext => ext.url === "salt" )
   if ( !hash || !hash.valueString || !salt || !salt.valueString ) {
-    console.log( "Hash or salt doesn't exist in user "+this.resource.id )
+    winston.error( "Hash or salt doesn't exist in user "+this.resource.id )
     return false
   }
   let compare = user.hashPassword( password, salt.valueString )

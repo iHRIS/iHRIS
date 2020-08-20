@@ -8,6 +8,7 @@ const fhirQuestionnaire = require('../modules/fhirQuestionnaire')
 const fhirModules = require('../modules/fhirModules')
 const isEmpty = require('is-empty')
 const outcomes = require('../config/operationOutcomes')
+const winston = require('winston')
 
 let workflowModules = {}
 
@@ -44,13 +45,13 @@ router.post("/QuestionnaireResponse", (req, res, next) => {
           fhirAxios.create( bundle ).then ( (results) => {
             next()
           } ).catch( (err) => {
-            console.log(err)
-            console.log(JSON.stringify(err.response.data,null,2))
+            winston.error(err)
+            winston.error(JSON.stringify(err.response.data,null,2))
             return res.status( err.response.status ).json( err.response.data )
           } )
 
         } ).catch( (err) => {
-          console.log(err)
+          winston.error(err)
           if ( err === "Invalid input" ) {
             return res.status( 400 ).json( err )
           } else {
@@ -59,7 +60,7 @@ router.post("/QuestionnaireResponse", (req, res, next) => {
         } )
 
       } ).catch( (err) => {
-        console.log(err)
+        winston.error(err)
         let outcome = { ...outcomes.ERROR }
         outcome.issue[0].diagnostics = "Unable to find processor module for this questionnaire: "+req.body.questionnaire +" ("+processor+")"
         return res.status(500).json( outcome )
@@ -68,7 +69,7 @@ router.post("/QuestionnaireResponse", (req, res, next) => {
   } else {
 
     fhirQuestionnaire.processQuestionnaire( req.body ).then( (bundle) => {
-      console.log(JSON.stringify(bundle,null,2))
+      winston.debug(JSON.stringify(bundle,null,2))
       fhirFilter.filterBundle( "write", bundle, req.user )
 
       fhirAxios.create( bundle ).then ( (results) => {
@@ -77,13 +78,13 @@ router.post("/QuestionnaireResponse", (req, res, next) => {
         }
         next()
       } ).catch( (err) => {
-        console.log(err)
-        console.log(JSON.stringify(err.response.data,null,2))
+        winston.error(err)
+        winston.error(JSON.stringify(err.response.data,null,2))
         return res.status( err.response.status ).json( err.response.data )
       } )
 
     } ).catch( (err) => {
-      console.log(err)
+      winston.error(err)
       return res.status( 500 ).json( err )
     } )
 

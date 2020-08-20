@@ -5,6 +5,7 @@ const path = require('path')
 const crypto = require('crypto')
 const cookieParser = require('cookie-parser')
 const logger = require('morgan')
+const winston = require('winston')
 const fs = require('fs')
 const fhirConfig = require('./modules/fhirConfig')
 const nconf = require('./modules/config')
@@ -19,7 +20,38 @@ var configLoaded = false
 
 async function startUp() {
   await nconf.loadRemote()
-  console.log(nconf.get())
+
+  let runEnv = process.env.NODE_ENV || "production"
+  let logOpts = nconf.get("logs:"+runEnv)
+  if ( !logOpts ) {
+    winston.add( new winston.transports.Console( { 
+      level: "error",
+      format: winston.format.prettyPrint()
+    } ) )
+  } else {
+    for( let transport of Object.keys(logOpts) ) {
+      if ( transport === "console" ) {
+        winston.add( new winston.transports.Console( { 
+          level: logOpts[transport].level || "error",
+          format: winston.format.prettyPrint()
+        } ) )
+      } else if ( transport === "file" ) {
+        for( let type of Object.keys(logOpts[transport]) ) {
+          if ( !logOpts[transport][type].file ) {
+            console.log("Logging by file for "+type+" config needs a file set.")
+          } else {
+            winston.add( new winston.transports.File( { 
+              level: logOpts[transport][type].level || "error", 
+              file: logOpts[transport][type].file
+            } ) )
+          }
+        }
+      }
+    }
+  }
+
+
+  winston.verbose(nconf.get())
   let redisClient = redis.createClient( nconf.get("redis:url") )
 
   app.use(logger('dev'))
@@ -75,12 +107,11 @@ async function startUp() {
       try {
         let reqMod = await fhirModules.require(loadModules[mod])
         if (reqMod) {
-          console.log("Loading " + mod + " (" + loadModules[mod] + ") to app.")
+          winston.info("Loading " + mod + " (" + loadModules[mod] + ") to app.")
           app.use("/" + mod, reqMod)
         }
       } catch (err) {
-        console.log(err)
-        console.log("Failed to load module " + mod + " (" + loadModules[mod] + ")")
+        winston.error("Failed to load module " + mod + " (" + loadModules[mod] + ")",err)
       }
     }
   }

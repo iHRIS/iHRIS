@@ -2,6 +2,7 @@ const express = require('express')
 const router = express.Router()
 const nconf = require('../modules/config')
 const user = require('../modules/user')
+const winston = require('winston')
 
 const passport = require('passport')
 const GoogleStrategy = require('passport-google-oauth20').Strategy
@@ -22,7 +23,7 @@ passport.use( new GoogleStrategy(
       if ( userObj ) {
         done(null, userObj )
       } else {
-        console.log(profile.id+" not found in current users, checking by email.")
+        winston.debug(profile.id+" not found in current users, checking by email.")
         let email = profile.emails.find( em => em.verified === true )
         if ( email && email.value ) {
           user.lookupByEmail( email.value ).then( (userObj) => {
@@ -31,7 +32,7 @@ passport.use( new GoogleStrategy(
             userObj.update().then( (response) => {
               done( null, userObj )
             } ).catch( (err) => {
-              console.log("Failed to update user with provider id for google.")
+              winston.info("Failed to update user with provider id for google.")
               console.error(err)
               done( null, userObj )
             } )
@@ -39,7 +40,7 @@ passport.use( new GoogleStrategy(
             done( err )
           } )
         } else {
-          console.log("Couldn't find verified email in profile.")
+          winston.info("Couldn't find verified email in profile.")
           done( null, false )
         }
       }

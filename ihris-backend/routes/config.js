@@ -6,6 +6,7 @@ const outcomes = require('../config/operationOutcomes')
 const fhirConfig = require('../modules/fhirConfig')
 const fhirDefinition = require('../modules/fhirDefinition')
 const crypto = require('crypto')
+const winston = require('winston')
 
 const getUKey = () => {
   return Math.random().toString(36).replace(/^[^a-z]+/,'') + Math.random().toString(36).substring(2,15)
@@ -81,7 +82,7 @@ router.get('/page/:page/:type?', function(req, res) {
 
 
     const createTemplate = async ( resource, structure ) => {
-      //console.log(JSON.stringify(structure,null,2))
+      winston.silly(JSON.stringify(structure,null,2))
       
       let sections = {}
       let sectionMap = {}
@@ -258,7 +259,7 @@ router.get('/page/:page/:type?', function(req, res) {
               continue
             }
             if ( !fields[field].code ) {
-              console.log("No datatype for "+base+" "+field+" so skipping",base,field)
+              winston.info("No datatype for "+base+" "+field+" so skipping",base,field)
               continue
             }
             let eleName = fhirDefinition.camelToKebab( fields[field].code )
@@ -291,7 +292,7 @@ router.get('/page/:page/:type?', function(req, res) {
               let subAttrs = [ "id", "path", "label", "min", "max", "base-min", "base-max", "code" ]
               for( let refField of Object.keys(refFields) ) {
                 subFields[refField] = {}
-                //console.log("refLOOP",refField,refFields)
+                winston.silly("refLOOP",refField,refFields)
                 for( let attr of subAttrs ) {
                   if ( refFields[refField].hasOwnProperty(attr) ) {
                     if ( (attr === "id" || attr === "path") && fields[field].hasOwnProperty(attr) ) {
@@ -329,7 +330,7 @@ router.get('/page/:page/:type?', function(req, res) {
             let secondary = await getDefinition( sections[name].resource )
 
             if ( !secondary.hasOwnProperty("snapshot") ) {
-              console.log("StructureDefinitions (", sections[name].resource, ") must be saved with a snapshot.")
+              winston.error("StructureDefinitions (", sections[name].resource, ") must be saved with a snapshot.")
               continue
             }
             const secondaryStructure = fhirDefinition.parseStructureDefinition( secondary )
@@ -361,7 +362,7 @@ router.get('/page/:page/:type?', function(req, res) {
         vueOutput += '</template></'+resourceElement+'>'+"\n"
       }
       vueOuput = "</template>"
-      console.log(vueOutput)
+      winston.debug(vueOutput)
       return res.status(200).json({ template: vueOutput, data: { 
         sectionMenu: sectionMenu, 
         subFields: allSubFields,
@@ -371,7 +372,7 @@ router.get('/page/:page/:type?', function(req, res) {
     }
 
     const createSearchTemplate = async ( resource, structure ) => {
-      //console.log(JSON.stringify(structure,null,2))
+      winston.silly(JSON.stringify(structure,null,2))
 
       let search = [ 'id' ]
       try {
@@ -399,8 +400,8 @@ router.get('/page/:page/:type?', function(req, res) {
         addLink = { url: url, icon: icon, class: eleClass }
       } catch(err) {}
 
-      //console.log(filters)
-      //console.log(search)
+      winston.silly(filters)
+      winston.silly(search)
 
       let searchElement = "ihris-search"
       if ( resource.resourceType === "CodeSystem" ) {
@@ -425,7 +426,7 @@ router.get('/page/:page/:type?', function(req, res) {
         searchTemplate += "></ihris-search-term>\n"
       }
       searchTemplate += "</"+searchElement+">\n"
-      console.log(searchTemplate)
+      winston.debug(searchTemplate)
 
 
       return res.status(200).json({ template: searchTemplate, data: { fields: search, addLink: addLink } })
@@ -455,7 +456,7 @@ router.get('/page/:page/:type?', function(req, res) {
         }
 
       } ).catch( err => {
-        console.log(err)
+        winston.error(err)
         return res.status( err.response.status ).json( err.response.data )
       } )
 
@@ -486,7 +487,7 @@ router.get('/page/:page/:type?', function(req, res) {
         }
 
       } ).catch( (err) => {
-        console.log(err)
+        winston.error(err)
         return res.status( err.response.status ).json( err.response.data )
       } )
 
@@ -499,7 +500,7 @@ router.get('/page/:page/:type?', function(req, res) {
     }
 
   } ).catch( (err) => {
-    console.log(err)
+    winston.error(err)
     return res.status( err.response.status ).json( err.response.data )
   } )
 
@@ -608,7 +609,7 @@ router.get('/questionnaire/:questionnaire', function(req, res) {
         vueOutput += await processQuestionnaireItems( item.item )
         vueOutput += "</ihris-questionnaire-section>\n"
       } else {
-        console.log("Invalid entry for questionnaire.  All top level items must be type group.")
+        winston.warn("Invalid entry for questionnaire.  All top level items must be type group.")
       }
     }
 
@@ -620,11 +621,11 @@ router.get('/questionnaire/:questionnaire', function(req, res) {
     }
     vueOutput += "</ihris-questionnaire>\n"
 
-    console.log(vueOutput)
+    winston.debug(vueOutput)
     return res.status(200).json({ template: vueOutput, data: templateData })
 
   } ).catch( (err) => {
-    console.log(err)
+    winston.error(err)
     return res.status( err.response.status ).json( err.response.data )
   } )
 

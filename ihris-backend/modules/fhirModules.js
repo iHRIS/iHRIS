@@ -4,6 +4,7 @@ const path = require('path')
 const requireFromString = require('require-from-string')
 const nconf = require('./config')
 const fhirAxios = nconf.fhirAxios
+const winston = require('winston')
 
 let _workflowModules = {}
 
@@ -20,7 +21,7 @@ const fhirModules = {
         let skipSecurity = nconf.getBool("security:disabled")
 
         if ( skipSecurity ) {
-          console.log("SKIPPING SECURITY CHECK ON REMOTE MODULE:",mod,". This should only be done in development.")
+          winston.warn("SKIPPING SECURITY CHECK ON REMOTE MODULE:",mod,". This should only be done in development.")
           moduleAccepted = true
         } else {
           let verifier = crypto.createVerify( 'sha256' )
@@ -41,7 +42,7 @@ const fhirModules = {
           // and not use third arg to allow relative require
           resolve( requireFromString( module, library.name, { prependPaths: __dirname } ) )
         } else {
-          console.log("No valid keys for "+mod)
+          winston.warn("No valid keys for "+mod)
           reject( null )
         }
 
