@@ -42,7 +42,7 @@ async function startUp() {
           } else {
             winston.add( new winston.transports.File( { 
               level: logOpts[transport][type].level || "error", 
-              file: logOpts[transport][type].file
+              filename: logOpts[transport][type].file
             } ) )
           }
         }
