@@ -527,10 +527,10 @@ router.get('/questionnaire/:questionnaire', function(req, res) {
 
 
     let sectionMenu = []
+    let templateData = { sectionMenu: {}, hidden: {} }
 
     const processQuestionnaireItems = async ( items ) => {
       let vueOutput = ""
-      let templateData = { sectionMenu: {}, hidden: {} }
       for( let item of items ) {
         if ( item.repeats && !item.readOnly ) {
           vueOutput += "<ihris-array :edit=\"isEdit\" path=\"" + item.linkId + "\" label=\""
@@ -626,7 +626,10 @@ router.get('/questionnaire/:questionnaire', function(req, res) {
 
   } ).catch( (err) => {
     winston.error(err)
-    return res.status( err.response.status ).json( err.response.data )
+    let outcome = { ...outcomes.ERROR }
+    outcome.issue[0].diagnostics = "Unable to read questionnaire: "+req.params.questionnaire+"."
+    return res.status(400).json( outcome )
+    //return res.status( err.response.status ).json( err.response.data )
   } )
 
 } )

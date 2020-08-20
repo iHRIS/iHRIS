@@ -18,7 +18,7 @@
           </v-btn>
       </v-snackbar>
 
-      <router-view v-if="$store.state.user.loggedin" :key="$route.path"></router-view>
+      <router-view :key="$route.path"></router-view>
       <router-view v-if="$store.state.user.loggedin" name="homeNav" :nav="nav"></router-view>
     </v-content>
 

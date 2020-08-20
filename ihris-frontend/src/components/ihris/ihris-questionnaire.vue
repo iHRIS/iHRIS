@@ -60,7 +60,7 @@ export default {
     }
   },
   created: function() {
-    console.log("QUERY",this.$route.query)
+    //console.log("QUERY",this.$route.query)
   },
   methods: {
     processFHIR: function() {
