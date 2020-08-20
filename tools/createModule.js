@@ -3,57 +3,15 @@ const crypto = require('crypto')
 const nconf = require('nconf')
 
 /**
- * node createModule.js --key /path/to/private.key --module /path/to/module.js
- * Need to add more options for additional fields like author/email
+ * node createModule.js --key /path/to/private.key --module /path/to/module.js --template /path/to/template.js
  */
-
-var moduleLibrary = {
-  "resourceType": "Library",
-  "id": "ihris-module-example",
-  "meta": {
-    "profile": [
-      "http://ihris.org/fhir/StructureDefinition/ihris-module"
-    ]
-  },
-  "type": {
-    "coding": [
-      {
-        "code": "logic-library"
-      }
-    ]
-  },
-  "content": [
-    {
-      "title": "module-signature",
-      "contentType": "text/x-sig",
-      "data": "TEST"
-    },
-    {
-      "title": "module-code",
-      "contentType": "application/javascript",
-      "data": "TEST"
-    }
-  ],
-  "status": "active",
-  "name": "ihris-example",
-  "title": "iHRIS Example Module",
-  "author": [
-    {
-      "name": "Test Author",
-      "telecom": [
-        {
-          "system": "email",
-          "value": "test@ihris.org"
-        }
-      ]
-    }
-  ]
-}
 
 nconf.argv()
 
 const privateKey = fs.readFileSync( nconf.get("key") )
 const moduleString = fs.readFileSync( nconf.get("module") )
+const moduleTemplate = fs.readFileSync( nconf.get("template") )
+var moduleLibrary = JSON.parse( moduleTemplate )
 
 var signer = crypto.createSign( 'sha256' )
 signer.update( moduleString )
