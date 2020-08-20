@@ -168,6 +168,9 @@ export default {
             this.loading = false
             console.log(err)
           } )
+        } else {
+          this.loading = false
+          console.log("Unable to fetch",url,response.status)
         }
       } ).catch( err => {
         this.loading = false
