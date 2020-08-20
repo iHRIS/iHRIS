@@ -1,0 +1,33 @@
+{
+  "resourceType": "DocumentReference",
+  "id": "page-about",
+  "meta": {
+    "profile": [
+      "http://ihris.org/fhir/StructureDefinition/ihris-document"
+    ]
+  },
+  "status": "current",
+  "docStatus": "final",
+  "category": [
+    {
+      "coding": [
+        {
+          "system": "http://ihris.org/fhir/CodeSystem/ihris-document-category",
+          "code": "open",
+          "display": "Open Access"
+        }
+      ]
+    }
+  ],
+  "date": "2020-06-07T14:54:00Z",
+  "content": [
+    {
+      "attachment": {
+        "contentType": "text/markdown",
+        "data": "IyMgaUhSSVMgSGVhbHRoIFdvcmtmb3JjZSBJbmZvcm1hdGlvbiBTeXN0ZW1zIFNvZnR3YXJlCgoKaUhSSVMsIEludHJhSGVhbHRoIEludGVybmF0aW9uYWwncyBmcmVlLCBvcGVuIHNvdXJjZSBzb2Z0d2FyZSwgaGVscHMgCmNvdW50cmllcyBhcm91bmQgdGhlIHdvcmxkIHRyYWNrIGFuZCBtYW5hZ2UgdGhlaXIgaGVhbHRoIHdvcmtmb3JjZSBkYXRhIAp0byBpbXByb3ZlIGFjY2VzcyB0byBzZXJ2aWNlcy4gQ291bnRyaWVzIHVzZSBpdCB0byBjYXB0dXJlIGFuZCBtYWludGFpbiAKaGlnaC1xdWFsaXR5IGluZm9ybWF0aW9uIGZvciBoZWFsdGggd29ya2ZvcmNlIHBsYW5uaW5nLCBtYW5hZ2VtZW50LCAKcmVndWxhdGlvbiwgYW5kIHRyYWluaW5nLgoKW0RlbW8gb3IgZG93bmxvYWRdKGh0dHBzOi8vd3d3LmlocmlzLm9yZy9paHJpcy00MykgdGhlIGN1cnJlbnQgdmVyc2lvbiBvZiBpSFJJUy4KCmlIUklTIGlzIGJ1aWx0IG9uIGEgZmxleGlibGUgZnJhbWV3b3JrIHRoYXQgYWxsb3dzIG1pbmlzdHJpZXMgb2YgaGVhbHRoLCAKcHJvZmVzc2lvbmFsIGNvdW5jaWxzLCBhbmQgaGVhbHRoIHNlcnZpY2UgZGVsaXZlcnkgb3JnYW5pemF0aW9ucyB0byBhZGFwdCAKYXBwbGljYXRpb25zIGZvciBhIHdpZGUgdmFyaWV0eSBvZiB1c2VzLiBEZXZlbG9wZWQgaW4gY29sbGFib3JhdGlvbiB3aXRoIApuYXRpb25hbCBzdGFrZWhvbGRlcnMgYmVnaW5uaW5nIGluIDIwMDUsIHdpdGggc3VwcG9ydCBmcm9tIFVTQUlELCBpSFJJUyAKaXMgdXNlZCBpbiBtb3JlIHRoYW4gMjAgY291bnRyaWVzIHRvIG1hbmFnZSBvdmVyIGEgbWlsbGlvbiBoZWFsdGggd29ya2VyIApyZWNvcmRzIGF0IGEgcG90ZW50aWFsIGNvc3Qgc2F2aW5ncyBvZiBvdmVyICQyNzUgbWlsbGlvbiB3aGVuIGNvbXBhcmVkIAp0byBjb21tZXJjaWFsIHNvZnR3YXJlLgo=",
+        "title": "About iHRIS"
+      }
+    }
+  ]
+}
+
