@@ -9,7 +9,7 @@
     <v-list
       nav
       dark
-      dense>
+      dense v-if="$store.state.user.loggedin">
 
       <template v-for="item in menu">
 
@@ -53,13 +53,32 @@
       </template>
 
     </v-list>
+    <v-list
+      nav
+      dark
+      class="primary lighten-1"
+      dense v-else>
+      <v-list-item
+        v-for="auth in nav.auths"
+        :key="auth.id"
+      >
+        <v-list-item-title>
+          <auth-button :big="true" :data="auth" v-on:loggedin="$store.commit('login', $event)"></auth-button>
+        </v-list-item-title>
+      </v-list-item>
+    </v-list>
   </v-navigation-drawer>
 </template>
 
 <script>
+import AuthButton from "./auth-button"
+
 export default {
   name: "the-navigation",
   props: ["nav"],
+  components: {
+    AuthButton
+  },
   mounted: function() {
     this.updateMenu()
   },

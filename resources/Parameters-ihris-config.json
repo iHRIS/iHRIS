@@ -51,6 +51,10 @@
           "valueString": "btn_ihris_signin.png"
         },
         {
+          "name": "site:auth:local:btn:image2x",
+          "valueString": "btn_ihris_signin_dark.png"
+        },
+        {
           "name": "site:auth:local:btn:text",
           "valueString": "Sign in with iHRIS"
         },
@@ -65,6 +69,10 @@
         {
           "name": "site:auth:google:btn:image",
           "valueString": "btn_google_signin_light_normal_web.png"
+        },
+        {
+          "name": "site:auth:google:btn:image2x",
+          "valueString": "btn_google_signin_dark_normal_web@2x.png"
         },
         {
           "name": "site:auth:google:btn:text",

@@ -5,6 +5,10 @@ Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
+    user: {
+      loggedin: false,
+      name: ""
+    },
     security_off: false,
     message: {
       type: "info",
@@ -14,6 +18,14 @@ export default new Vuex.Store({
     }
   },
   mutations: {
+    login( state, data ) {
+      state.user.loggedin = true
+      state.user.name = data
+    },
+    logout( state ) {
+      state.user.loggedin = false
+      state.user.name = ""
+    },
     securityOff( state, data ) {
       state.security_off = data
     },

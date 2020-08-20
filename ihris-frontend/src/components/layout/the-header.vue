@@ -13,7 +13,7 @@
       This should only be done during development.
     </div>
     <v-spacer></v-spacer>
-    <div>Welcome <span v-if="header.user.loggedin">, {{ header.user.name }}</span></div>
+    <div>Welcome <span v-if="$store.state.user.loggedin">, {{ $store.state.user.name }}</span></div>
     <v-spacer></v-spacer>
     <v-progress-circular
       indeterminate
@@ -29,7 +29,7 @@
     <v-menu
       left
       bottom
-      v-if="!header.user.loggedin"
+      v-if="!$store.state.user.loggedin"
     >
       <template v-slot:activator="{ on }">
         <v-btn color="success" class="mx-2" small fab dark v-on="on" title="Login">
@@ -42,12 +42,12 @@
           :key="auth.id"
         >
           <v-list-item-title>
-            <auth-button :data="auth" v-on:loggedin="header.user.loggedin=true; header.user.name=$event"></auth-button>
+            <auth-button :data="auth" v-on:loggedin="$store.commit('login', $event)"></auth-button>
           </v-list-item-title>
         </v-list-item>
       </v-list>
     </v-menu>
-    <template v-if="header.user.loggedin">
+    <template v-if="$store.state.user.loggedin">
       <v-btn color="warning" small fab dark @click="logout" title="Logout" :loading="loading" :disabled="loading">
         <v-icon>mdi-logout</v-icon>
       </v-btn>
@@ -76,8 +76,7 @@ export default {
       fetch("/auth/logout").then(response => {
         this.loading = false
         if ( response.status == 200 ) {
-          this.header.user.loggedin = false 
-          this.header.user.name = ""
+          this.$store.commit('logout')
         }
         this.$router.push( {path: "/" } )
       })

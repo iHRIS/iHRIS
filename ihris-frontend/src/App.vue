@@ -18,7 +18,8 @@
           </v-btn>
       </v-snackbar>
 
-      <router-view :key="$route.path"/>
+      <router-view v-if="$store.state.user.loggedin" :key="$route.path"></router-view>
+      <router-view v-if="$store.state.user.loggedin" name="homeNav" :nav="nav"></router-view>
     </v-content>
 
     <the-footer :footer="footer" />
@@ -62,14 +63,14 @@ export default {
       site: null,
       logo: "iHRIS5Logo.png",
       auths: [],
-      user: { loggedin: false, name: "" },
     },
     footer: {
       links: []
     },
     nav: {
       active: null,
-      menu: {}
+      menu: {},
+      auths: []
     }
   }),
   components: {
@@ -93,6 +94,7 @@ export default {
             for(let id of Object.keys(data.auth)) {
               data.auth[id].id = id
               this.header.auths.push(data.auth[id])
+              this.nav.auths.push(data.auth[id])
             }
           }
           if (data.hasOwnProperty("footer")) {
@@ -104,8 +106,11 @@ export default {
             }
           }
           if (data.hasOwnProperty("user")) {
-            if (data.user.hasOwnProperty("loggedin")) this.header.user.loggedin = data.user.loggedin
-            if (data.user.hasOwnProperty("name")) this.header.user.name = data.user.name
+            if ( data.user.loggedin ) {
+              this.$store.commit('login', data.user.name || "" )
+            } else {
+              this.$store.commit('logout')
+            }
           }
           if (data.hasOwnProperty("nav")) {
             if (data.nav.hasOwnProperty("active")) this.nav.active = data.nav.active

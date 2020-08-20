@@ -1,6 +1,8 @@
 import Vue from "vue"
 import VueRouter from "vue-router"
-import Home from "../views/home.vue"
+//import Home from "../views/home.vue"
+import Static from "../views/static-page.vue"
+import HomeNav from "../views/home-nav.vue"
 //import Test from "../views/test.vue"
 //import mhero from "../views/mhero/mhero.vue"
 //import contactGroups from "../views/mhero/contact-groups.vue"
@@ -10,7 +12,11 @@ Vue.use(VueRouter)
 const routes = [{
     path: "/",
     name: "home",
-    component: Home
+    components: {
+      default: Static,
+      homeNav: HomeNav
+    },
+    props: { default: { id: "page-home", blankOnErr: true } }
   },
   {
     path: '/page/mhero',
@@ -32,7 +38,8 @@ const routes = [{
   {
     path: "/static/:id",
     name: "static",
-    component: () => import( /* webpackChunkName: "static" */ "../views/static-page.vue")
+    //component: () => import( /* webpackChunkName: "static" */ "../views/static-page.vue")
+    component: Static
   },
   //{
   //path: "/resource/:type/:page/:id?",

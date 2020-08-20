@@ -1,12 +1,12 @@
 <template>
   <div class="text-xs-center">
     <a v-if="data.method=='get'" :href="data.link">
-      <img v-if="data.btn.image" :src="'/images/' + data.btn.image" :alt="data.btn.text" width="191" height="46"/>
+      <img v-if="image" :src="'/images/' + image" :alt="data.btn.text" width="191" height="46"/>
     </a>
     <v-dialog v-if="data.method=='post'" v-model="dialog" width="500">
       <template v-slot:activator="{ on }">
         <a v-on="on">
-          <img v-if="data.btn.image" :src="'/images/' + data.btn.image" :alt="data.btn.text" width="191" height="46"/>
+          <img v-if="image" :src="'/images/' + image" :alt="data.btn.text" width="191" height="46"/>
         </a>
       </template>
       <v-form>
@@ -47,7 +47,7 @@
 <script>
 export default {
   name: "auth-button",
-  props: ["data"],
+  props: ["data", "big"],
   data: function() {
     return {
       dialog: false,
@@ -58,6 +58,15 @@ export default {
       message: "",
       snackbar: false,
       absolute: true
+    }
+  },
+  computed: {
+    image: function() {
+      if ( this.big ) {
+        return this.data.btn.image2x
+      } else {
+        return this.data.btn.image
+      }
     }
   },
   methods: {
