@@ -1,6 +1,7 @@
 const axios = require('axios')
 const nconf = require('nconf')
 const fs = require('fs')
+const URI = require('urijs');
 const Fhir = require('fhir').Fhir
 
 nconf.argv()
@@ -26,7 +27,7 @@ for ( let file of nconf.get('_') ) {
       if ( fhir.resourceType === "Bundle" &&
         ( fhir.type === "transaction" || fhir.type === "batch" ) ) {
         console.log( "Saving " + fhir.type )
-        let dest = server
+        let dest = URI(server).toString()
         axios.post( dest, fhir ).then( ( res ) => {
           console.log( dest+": "+ res.status )
           console.log( JSON.stringify( res.data, null, 2 ) )
@@ -35,7 +36,7 @@ for ( let file of nconf.get('_') ) {
         } )
       } else {
         console.log( "Saving " + fhir.resourceType +" - "+fhir.id )
-        let dest = server + fhir.resourceType + "/" + fhir.id
+        let dest = URI(server).segment(fhir.resourceType).segment(fhir.id).toString()
         axios.put( dest, fhir ).then( ( res ) => {
           console.log( dest+": "+ res.status )
           console.log( res.headers['content-location'] )

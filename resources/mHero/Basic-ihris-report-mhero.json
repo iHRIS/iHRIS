@@ -53,6 +53,10 @@
           {
             "url": "field",
             "valueString": "Group Name|name"
+          },
+          {
+            "url": "filter",
+            "valueString": "Group Name|name"
           }
         ]
       },

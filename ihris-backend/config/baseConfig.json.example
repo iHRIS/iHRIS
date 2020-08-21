@@ -28,6 +28,10 @@
       "valueString": "http://localhost:9200"
     },
     {
+      "name": "elasticsearch:max_compiliation_rate",
+      "valueString": "10000/1m"
+    },
+    {
       "name": "kibana:base",
       "valueString": "http://localhost:5601"
     },
