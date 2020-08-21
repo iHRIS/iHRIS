@@ -83,7 +83,7 @@ router.get('/page/:page/:type?', function(req, res) {
 
     const createTemplate = async ( resource, structure ) => {
       winston.silly(JSON.stringify(structure,null,2))
-      
+
       let sections = {}
       let sectionMap = {}
       for( let section of pageSections ) {
@@ -154,8 +154,8 @@ router.get('/page/:page/:type?', function(req, res) {
                   eleClass = action.extension.find( ext => ext.url === "class" ).valueString
                 } catch(err) {}
                 if ( link && text ) {
-                  actions.push( {link: link, text: text, row: row, 
-                    condition: condition, emptyDisplay: emptyDisplay, 
+                  actions.push( {link: link, text: text, row: row,
+                    condition: condition, emptyDisplay: emptyDisplay,
                     class: eleClass } )
                 }
               } catch(err) { }
@@ -363,8 +363,8 @@ router.get('/page/:page/:type?', function(req, res) {
       }
       vueOuput = "</template>"
       winston.debug(vueOutput)
-      return res.status(200).json({ template: vueOutput, data: { 
-        sectionMenu: sectionMenu, 
+      return res.status(200).json({ template: vueOutput, data: {
+        sectionMenu: sectionMenu,
         subFields: allSubFields,
         columns: allColumns,
         actions: allActions
@@ -376,13 +376,13 @@ router.get('/page/:page/:type?', function(req, res) {
 
       let search = [ 'id' ]
       try {
-        search = pageDisplay.extension.filter( ext => ext.url === "search" ).map( ext => 
+        search = pageDisplay.extension.filter( ext => ext.url === "search" ).map( ext =>
           ext.valueString.match( /^([^|]*)\|?([^|]*)?\|?(.*)?$/ ).slice(1,4)
         )
       } catch(err) { }
       let filters = []
       try {
-        filters = pageDisplay.extension.filter( ext => ext.url === "filter" ).map( ext => 
+        filters = pageDisplay.extension.filter( ext => ext.url === "filter" ).map( ext =>
           ext.valueString.match( /^([^|]*)\|?([^|]*)?\|?(.*)?$/ ).slice(1,4)
         )
       } catch(err) { }
@@ -554,7 +554,7 @@ router.get('/questionnaire/:questionnaire', function(req, res) {
               if ( answerType.startsWith("value") ) {
                 let answerKey = getUKey()
                 templateData.hidden[answerKey] = item.answerOption[0][answerType]
-                vueOutput += " :hiddenValue='hidden." + answerKey 
+                vueOutput += " :hiddenValue='hidden." + answerKey
                   + "' hiddenType='" + answerType.substring(5) + "'"
                   break
                 }
