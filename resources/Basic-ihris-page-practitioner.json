@@ -1,0 +1,78 @@
+{
+  "resourceType": "Basic",
+  "id": "ihris-page-practitioner",
+  "meta": {
+    "profile": [
+      "http://ihris.org/fhir/StructureDefinition/ihris-page"
+    ]
+  },
+  "code": {
+    "coding": [
+      {
+        "code": "page",
+        "system": "http://ihris.org/fhir/CodeSystem/ihris-resource-codesystem"
+      }
+    ]
+  },
+  "extension": [
+    {
+      "url": "http://ihris.org/fhir/StructureDefinition/ihris-page-display",
+      "extension": [
+        {
+          "url": "resource",
+          "valueReference": {
+            "reference": "StructureDefinition/ihris-practitioner"
+          }
+        },
+        {
+          "url": "search",
+          "valueString": "Surname|name.where(use='official').family"
+        },
+        {
+          "url": "filter",
+          "valueString": "Name|name:contains"
+        },
+        {
+          "url": "search",
+          "valueString": "Given Name(s)|name.where(use='official').given"
+        },
+        {
+          "url": "search",
+          "valueString": "Birth Date|birthDate"
+        },
+        {
+          "url": "search",
+          "valueString": "Gender|gender"
+        },
+        {
+          "url": "filter",
+          "valueString": "Gender|gender"
+        },
+        {
+          "url": "order",
+          "valueString": "Practitioner.name"
+        },
+        {
+          "url": "order",
+          "valueString": "Practitioner.name.given"
+        },
+        {
+          "url": "order",
+          "valueString": "Practitioner.name.family"
+        },
+        {
+          "url": "order",
+          "valueString": "Practitioner.birthDate"
+        },
+        {
+          "url": "order",
+          "valueString": "Practitioner.gender"
+        },
+        {
+          "url": "order",
+          "valueString": "Practitioner.extension:residence"
+        }
+      ]
+    }
+  ]
+}

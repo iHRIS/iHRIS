@@ -1,0 +1,27 @@
+
+$body-font-family: "Open Sans", sans-serif;
+$heading-font-family: "Open Sans", sans-serif;
+$font-weights: ( 'light': 300, 'regular': 300, 'medium': 600, 'bold': 700, 'black': 800 );
+$material-light: (
+  'background': #f4f7f9
+);
+$headings: (
+  'h1': (
+    'weight': 600
+  ),
+  'h2': (
+    'weight': 600
+  ),
+  'h3': (
+    'weight': 600
+  ),
+  'h4': (
+    'weight': 600
+  ),
+  'h5': (
+    'weight': 700
+  ),
+  'h6': (
+    'weight': 700
+  )
+);

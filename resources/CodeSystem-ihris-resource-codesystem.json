@@ -1,0 +1,17 @@
+{
+  "resourceType": "CodeSystem",
+  "status": "active",
+  "content": "complete",
+  "name": "IhrisResourceCodeSystem",
+  "id": "ihris-resource-codesystem",
+  "title": "Code System for iHRIS Basic Resources.",
+  "version": "0.1.0",
+  "url": "http://ihris.org/fhir/CodeSystem/ihris-resource-codesystem",
+  "concept": [
+    {
+      "code": "role",
+      "display": "iHRIS Role",
+      "definition": "User roles that are available to be assigned to users."
+    }
+  ]
+}

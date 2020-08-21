@@ -1,0 +1,130 @@
+<template>
+  <div>
+    <v-container v-if="source.edit">
+      <v-menu
+        ref="startmenu"
+        v-model="startmenu"
+        :close-on-content-click="false"
+        transition="scale-transition"
+        offset-y
+        min-width="290px"
+        >
+        <template v-slot:activator="{ on }">
+          <v-text-field
+            v-model="value.start"
+            :label="label+' Start'"
+            prepend-inner-icon="mdi-calendar"
+            readonly
+            v-on="on"
+            outlined
+            hide-details="auto"
+            dense
+            ></v-text-field>
+        </template>
+        <v-date-picker
+          ref="startpicker"
+          color="secondary"
+          :landscape="$vuetify.breakpoint.smAndUp"
+          v-model="value.start"
+          :max="new Date().toISOString().substr(0,10)"
+          min="1920-01-01"
+          @change="saveStart"
+          ></v-date-picker>
+      </v-menu>
+      <v-menu
+        ref="endmenu"
+        v-model="endmenu"
+        :close-on-content-click="false"
+        transition="scale-transition"
+        offset-y
+        min-width="290px"
+        >
+        <template v-slot:activator="{ on }">
+          <v-text-field
+            v-model="value.end"
+            :label="label+' End'"
+            prepend-inner-icon="mdi-calendar"
+            readonly
+            v-on="on"
+            outlined
+            hide-details="auto"
+            dense
+            ></v-text-field>
+        </template>
+        <v-date-picker
+          ref="endpicker"
+          color="secondary"
+          :landscape="$vuetify.breakpoint.smAndUp"
+          v-model="value.end"
+          :max="new Date().toISOString().substr(0,10)"
+          min="1920-01-01"
+          @change="saveEnd"
+          ></v-date-picker>
+      </v-menu>
+
+    </v-container>
+    <div v-else>
+      <v-row dense>
+        <v-col v-if="value.start" cols="3" class="font-weight-bold">{{display}} Start</v-col><v-col cols="9">{{value.start}}</v-col>
+        <v-col v-if="value.end" cols="3" class="font-weight-bold">{{display}} End</v-col><v-col cols="9">{{value.end}}</v-col>
+      </v-row>
+      <v-divider></v-divider>
+    </div>
+  </div>
+</template>
+
+<script>
+export default {
+  name: "fhir-period",
+  props: ["field","label","sliceName","min","max","base-min","base-max","slotProps","path"],
+  data: function() {
+    return {
+      value: { start: null, end: null },
+      source: { path: "", data: {}, edit: true, binding: this.binding },
+      startmenu: false,
+      endmenu: false
+    }
+  },
+  created: function() {
+    this.setupData()
+  },
+  watch: {
+    slotProps: {
+      handler() {
+        //console.log("WATCH CODING",this.path,this.slotProps)
+        this.setupData()
+      },
+      deep: true
+    }
+  },
+  methods: {
+    setupData: function() {
+      if ( this.slotProps && this.slotProps.source ) {
+        this.source = { path: this.slotProps.source.path+"."+this.field, data: {}, 
+          edit: this.slotProps.source.edit, binding: this.binding || this.slotProps.source.binding }
+        if ( this.slotProps.source.fromArray ) {
+          this.source.data = this.slotProps.source.data
+          // Need to see if this works and figure out what it needs to be
+          this.value = this.source.data
+        } else {
+          let expression = this.field.substring( this.field.indexOf(':')+1 )
+          this.source.data = this.$fhirpath.evaluate( this.slotProps.source.data, expression )
+          this.value = this.source.data[0]
+        }
+      }
+    },
+    saveStart (date) {
+      this.$refs.startmenu.save(date)
+    },
+    saveEnd (date) {
+      this.$refs.endmenu.save(date)
+    }
+  },
+  computed: {
+    display: function() {
+      if ( this.slotProps && this.slotProps.input) return this.slotProps.input.label
+      else return this.label
+    }
+  }
+}
+</script>

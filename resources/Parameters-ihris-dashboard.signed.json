@@ -1,0 +1,52 @@
+{
+  "resourceType": "Parameters",
+  "id": "ihris-dashboard",
+  "meta": {
+    "profile": [
+      "http://ihris.org/fhir/StructureDefinition/ihris-parameters-remote-config"
+    ]
+  },
+  "parameter": [
+    {
+      "name": "signature",
+      "valueSignature": {
+        "type": [
+          {
+            "system": "urn:iso-astm:E1762-95:2013",
+            "code": "1.2.840.10065.1.12.1.14"
+          }
+        ],
+        "when": "2020-08-21T07:40:23.650Z",
+        "who": {
+          "reference": "http://ihris.org/fhir/Organization/ihris"
+        },
+        "data": "CsPT1RCVT1SWuH4Es/D2xCvqjsK4rry7VVl12rZAwHunaypOBgXbSmnBiFxk24h1VI3LLro6nlASS58eM8vdPW26QN2r+q9r4Ite212lxcqrLagK+2QFtJq+LrILUAL7aH1zke2NDCrnjXDv3oLMU1WNFKVvQ6bkPFeL0A3Iknk="
+      }
+    },
+    {
+      "name": "config",
+      "part": [
+        {
+          "name": "site:nav:menu:dashboard:text",
+          "valueString": "Dashboard"
+        },
+        {
+          "name": "site:nav:menu:dashboard:order",
+          "valueString": "5"
+        },
+        {
+          "name": "site:nav:menu:dashboard:icon",
+          "valueString": "mdi-poll-box"
+        },
+        {
+          "name": "site:nav:menu:dashboard:menu:staff:text",
+          "valueString": "Staff"
+        },
+        {
+          "name": "site:nav:menu:dashboard:menu:staff:url",
+          "valueString": "/dashboard/02a830b0-682f-11ea-b869-59440bc44685"
+        }
+      ]
+    }
+  ]
+}

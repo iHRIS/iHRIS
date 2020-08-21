@@ -1,0 +1,42 @@
+{
+  "resourceType": "Library",
+  "id": "ihris-workflow-promotion",
+  "meta": {
+    "profile": [
+      "http://ihris.org/fhir/StructureDefinition/ihris-module"
+    ]
+  },
+  "type": {
+    "coding": [
+      {
+        "code": "logic-library"
+      }
+    ]
+  },
+  "content": [
+    {
+      "title": "module-signature",
+      "contentType": "text/x-sig",
+      "data": "vdlLwd17rMAJI0RfJc6obDQMnoAci81x2YZPksjC/0vnKWCA0gCxU0/0slgBNwdJiAuPwfJoQMeIj89lS58Fn9ilLurV1GB3qJhhHMzWadSzk5wVi6nQLT1ZAmxFxt7y04OvOQx4uTEYvyq2VbFj9SbdL59LVeekEJidq/v/d5M="
+    },
+    {
+      "title": "module-code",
+      "contentType": "application/javascript",
+      "data": "Y29uc3QgbmNvbmYgPSByZXF1aXJlKCdjb25maWcnKQpjb25zdCBmaGlyQXhpb3MgPSBuY29uZi5maGlyQXhpb3MKCmNvbnN0IHdvcmtmbG93RW5kUm9sZSA9IHsKICBwcm9jZXNzOiAoIHJlcSApID0+IHsKICAgIHJldHVybiBuZXcgUHJvbWlzZSggKHJlc29sdmUsIHJlamVjdCkgPT4gewogICAgICBsZXQgYnVuZGxlID0gewogICAgICAgIHJlc291cmNlVHlwZTogIkJ1bmRsZSIsCiAgICAgICAgdHlwZTogInRyYW5zYWN0aW9uIiwKICAgICAgICBlbnRyeTogW10KICAgICAgfQogICAgICBmaGlyQXhpb3MucmVhZCggIlByYWN0aXRpb25lclJvbGUiLCByZXEucXVlcnkucHJhY3RpdGlvbmVycm9sZSApLnRoZW4oIChyZXNvdXJjZSkgPT4gewogICAgICAgIGlmICggcmVxLmJvZHkgJiYgcmVxLmJvZHkuaXRlbSAKICAgICAgICAgICYmIHJlcS5ib2R5Lml0ZW0gJiYgcmVxLmJvZHkuaXRlbVswXS5saW5rSWQgPT09ICJQcmFjdGl0aW9uZXJSb2xlIgogICAgICAgICAgJiYgcmVxLmJvZHkuaXRlbVswXS5pdGVtICYmIHJlcS5ib2R5Lml0ZW1bMF0uaXRlbVswXS5saW5rSWQgPT09ICJwZXJpb2QuZW5kIiAKICAgICAgICAgICYmIHJlcS5ib2R5Lml0ZW1bMF0uaXRlbVswXS5hbnN3ZXIgJiYgcmVxLmJvZHkuaXRlbVswXS5pdGVtWzBdLmFuc3dlclswXSAKICAgICAgICAgICYmIHJlcS5ib2R5Lml0ZW1bMF0uaXRlbVswXS5hbnN3ZXJbMF0udmFsdWVEYXRlIAogICAgICAgICAgJiYgcmVxLmJvZHkuaXRlbVswXS5pdGVtWzFdLmxpbmtJZCA9PT0gImNvZGUiIAogICAgICAgICAgJiYgcmVxLmJvZHkuaXRlbVswXS5pdGVtWzFdLmFuc3dlciAmJiByZXEuYm9keS5pdGVtWzBdLml0ZW1bMV0uYW5zd2VyWzBdIAogICAgICAgICAgJiYgcmVxLmJvZHkuaXRlbVswXS5pdGVtWzFdLmFuc3dlclswXS52YWx1ZUNvZGluZyApIHsKCiAgICAgICAgICByZXNvdXJjZS5wZXJpb2QuZW5kID0gcmVxLmJvZHkuaXRlbVswXS5pdGVtWzBdLmFuc3dlclswXS52YWx1ZURhdGUKICAgICAgICAgIGJ1bmRsZS5lbnRyeS5wdXNoKCB7IAogICAgICAgICAgICByZXNvdXJjZTogcmVzb3VyY2UsCiAgICAgICAgICAgIHJlcXVlc3Q6IHsKICAgICAgICAgICAgICBtZXRob2Q6ICJQVVQiLAogICAgICAgICAgICAgIHVybDogcmVzb3VyY2UucmVzb3VyY2VUeXBlICsiLyIrIHJlc291cmNlLmlkCiAgICAgICAgICAgIH0KICAgICAgICAgIH0gKQogICAgICAgICAgaWYgKCByZXNvdXJjZS5wcmFjdGl0aW9uZXIgJiYgcmVzb3VyY2UucHJhY3RpdGlvbmVyLnJlZmVyZW5jZSApIHsKICAgICAgICAgICAgcmVxLmJvZHkuc3ViamVjdCA9IHsgcmVmZXJlbmNlOiByZXNvdXJjZS5wcmFjdGl0aW9uZXIucmVmZXJlbmNlIH0KICAgICAgICAgIH0KCiAgICAgICAgICBsZXQgbmV3Um9sZSA9IHsKICAgICAgICAgICAgcmVzb3VyY2VUeXBlOiAiUHJhY3RpdGlvbmVyUm9sZSIsCiAgICAgICAgICAgIG1ldGE6IHsKICAgICAgICAgICAgICBwcm9maWxlOiBbIHJlc291cmNlLm1ldGEucHJvZmlsZVswXSBdCiAgICAgICAgICAgIH0sCiAgICAgICAgICAgIHByYWN0aXRpb25lcjogeyByZWZlcmVuY2U6IHJlc291cmNlLnByYWN0aXRpb25lci5yZWZlcmVuY2UgfSwKICAgICAgICAgICAgY29kZTogWwogICAgICAgICAgICAgIHsgY29kaW5nOiBbIHJlcS5ib2R5Lml0ZW1bMF0uaXRlbVsxXS5hbnN3ZXJbMF0udmFsdWVDb2RpbmcgXSB9CiAgICAgICAgICAgIF0sCiAgICAgICAgICAgIHBlcmlvZDogeyBzdGFydDogcmVxLmJvZHkuaXRlbVswXS5pdGVtWzBdLmFuc3dlclswXS52YWx1ZURhdGUgfSwKICAgICAgICAgIH0KCiAgICAgICAgICBidW5kbGUuZW50cnkucHVzaCggewogICAgICAgICAgICByZXNvdXJjZTogbmV3Um9sZSwKICAgICAgICAgICAgcmVxdWVzdDogewogICAgICAgICAgICAgIG1ldGhvZDogIlBPU1QiLAogICAgICAgICAgICAgIHVybDogIlByYWN0aXRpb25lclJvbGUiCiAgICAgICAgICAgIH0KICAgICAgICAgIH0gKQoKICAgICAgICAgIHJlc29sdmUoIGJ1bmRsZSApCiAgICAgICAgfSBlbHNlIHsKICAgICAgICAgIHJlamVjdCgiSW52YWxpZCBpbnB1dCIpCiAgICAgICAgfQogICAgICB9ICkuY2F0Y2goIChlcnIpID0+IHsKICAgICAgICByZWplY3QoZXJyKQogICAgICB9ICkKICAgIH0gKQogIH0KfQogCm1vZHVsZS5leHBvcnRzID0gd29ya2Zsb3dFbmRSb2xlCg=="
+    }
+  ],
+  "status": "active",
+  "name": "ihris-workflow-promotion",
+  "title": "iHRIS Workflow for Promotion",
+  "author": [
+    {
+      "name": "Luke Duncan",
+      "telecom": [
+        {
+          "system": "email",
+          "value": "lduncan@intrahealth.org"
+        }
+      ]
+    }
+  ]
+}

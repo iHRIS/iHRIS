@@ -1,0 +1,23 @@
+{
+  "resourceType": "ValueSet",
+  "status": "active",
+  "name": "IhrisRoleValueSet",
+  "id": "ihris-role",
+  "title": "Value Set for iHRIS Roles.",
+  "version": "0.1.0",
+  "url": "http://ihris.org/fhir/ValueSet/ihris-role",
+  "compose": {
+    "include": [
+      {
+        "system": "http://ihris.org/fhir/CodeSystem/ihris-role",
+        "filter": [
+          {
+            "property": "type",
+            "op": "=",
+            "value": "role"
+          }
+        ]
+      }
+    ]
+  }
+}

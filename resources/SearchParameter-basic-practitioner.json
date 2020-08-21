@@ -1,0 +1,19 @@
+{
+  "resourceType": "SearchParameter",
+  "id": "basic-practitioner",
+  "url": "http://ihris.org/fhir/SearchParameter/basic-practitioner",
+  "name": "Search Parameter on an practitioner extension on Basic resources",
+  "status": "active",
+  "description": "Search by practitioner for a Basic resource.",
+  "code": "practitioner",
+  "base": [
+    "Basic"
+  ],
+  "type": "reference",
+  "expression": "Basic.extension('http://ihris.org/fhir/StructureDefinition/ihris-practitioner-reference')",
+  "xpath": "f:Basic/f:extension[@url='http://ihris.org/fhir/StructureDefinition/ihris-practitioner-reference']",
+  "xpathUsage": "normal",
+  "target": [
+    "Practitioner"
+  ]
+}

@@ -1,0 +1,42 @@
+{
+  "resourceType": "Library",
+  "id": "ihris-workflow-endrole",
+  "meta": {
+    "profile": [
+      "http://ihris.org/fhir/StructureDefinition/ihris-module"
+    ]
+  },
+  "type": {
+    "coding": [
+      {
+        "code": "logic-library"
+      }
+    ]
+  },
+  "content": [
+    {
+      "title": "module-signature",
+      "contentType": "text/x-sig",
+      "data": "WU2ipcBtS2klrdFZTPdH6BuVn1BaqCkPanmKqt5Hs7PWPGKCkXgHwXDWOj2d1+tzOGR+/vpmORv5yvM2tYDlwcEMwD+jqhaKEsu5RWu0sacKSip2pK/es5YYNS6r12/5kYWqzexMKgnDn6D6vs/EOJjbhumQ/slV02BmjxGHWaY="
+    },
+    {
+      "title": "module-code",
+      "contentType": "application/javascript",
+      "data": "Y29uc3QgbmNvbmYgPSByZXF1aXJlKCdjb25maWcnKQpjb25zdCBmaGlyQXhpb3MgPSBuY29uZi5maGlyQXhpb3MKCmNvbnN0IHdvcmtmbG93RW5kUm9sZSA9IHsKICBwcm9jZXNzOiAoIHJlcSApID0+IHsKICAgIHJldHVybiBuZXcgUHJvbWlzZSggKHJlc29sdmUsIHJlamVjdCkgPT4gewogICAgICBsZXQgYnVuZGxlID0gewogICAgICAgIHJlc291cmNlVHlwZTogIkJ1bmRsZSIsCiAgICAgICAgdHlwZTogInRyYW5zYWN0aW9uIiwKICAgICAgICBlbnRyeTogW10KICAgICAgfQogICAgICBmaGlyQXhpb3MucmVhZCggIlByYWN0aXRpb25lclJvbGUiLCByZXEucXVlcnkucHJhY3RpdGlvbmVycm9sZSApLnRoZW4oIChyZXNvdXJjZSkgPT4gewogICAgICAgIGlmICggcmVxLmJvZHkgJiYgcmVxLmJvZHkuaXRlbSAKICAgICAgICAgICYmIHJlcS5ib2R5Lml0ZW0gJiYgcmVxLmJvZHkuaXRlbVswXS5saW5rSWQgPT09ICJQcmFjdGl0aW9uZXJSb2xlIgogICAgICAgICAgJiYgcmVxLmJvZHkuaXRlbVswXS5pdGVtICYmIHJlcS5ib2R5Lml0ZW1bMF0uaXRlbVswXS5saW5rSWQgPT09ICJwZXJpb2QuZW5kIiAKICAgICAgICAgICYmIHJlcS5ib2R5Lml0ZW1bMF0uaXRlbVswXS5hbnN3ZXIgJiYgcmVxLmJvZHkuaXRlbVswXS5pdGVtWzBdLmFuc3dlclswXSAKICAgICAgICAgICYmIHJlcS5ib2R5Lml0ZW1bMF0uaXRlbVswXS5hbnN3ZXJbMF0udmFsdWVEYXRlICkgewogICAgICAgICAgcmVzb3VyY2UucGVyaW9kLmVuZCA9IHJlcS5ib2R5Lml0ZW1bMF0uaXRlbVswXS5hbnN3ZXJbMF0udmFsdWVEYXRlCiAgICAgICAgICBidW5kbGUuZW50cnkucHVzaCggeyAKICAgICAgICAgICAgcmVzb3VyY2U6IHJlc291cmNlLAogICAgICAgICAgICByZXF1ZXN0OiB7CiAgICAgICAgICAgICAgbWV0aG9kOiAiUFVUIiwKICAgICAgICAgICAgICB1cmw6IHJlc291cmNlLnJlc291cmNlVHlwZSArIi8iKyByZXNvdXJjZS5pZAogICAgICAgICAgICB9CiAgICAgICAgICB9ICkKICAgICAgICAgIGlmICggcmVzb3VyY2UucHJhY3RpdGlvbmVyICYmIHJlc291cmNlLnByYWN0aXRpb25lci5yZWZlcmVuY2UgKSB7CiAgICAgICAgICAgIHJlcS5ib2R5LnN1YmplY3QgPSB7IHJlZmVyZW5jZTogcmVzb3VyY2UucHJhY3RpdGlvbmVyLnJlZmVyZW5jZSB9CiAgICAgICAgICB9CiAgICAgICAgICByZXNvbHZlKCBidW5kbGUgKQogICAgICAgIH0gZWxzZSB7CiAgICAgICAgICByZWplY3QoIkludmFsaWQgaW5wdXQiKQogICAgICAgIH0KICAgICAgfSApLmNhdGNoKCAoZXJyKSA9PiB7CiAgICAgICAgcmVqZWN0KGVycikKICAgICAgfSApCiAgICB9ICkKICB9Cn0KIAptb2R1bGUuZXhwb3J0cyA9IHdvcmtmbG93RW5kUm9sZQo="
+    }
+  ],
+  "status": "active",
+  "name": "ihris-workflow-endrole",
+  "title": "iHRIS Workflow End Role",
+  "author": [
+    {
+      "name": "Luke Duncan",
+      "telecom": [
+        {
+          "system": "email",
+          "value": "lduncan@intrahealth.org"
+        }
+      ]
+    }
+  ]
+}

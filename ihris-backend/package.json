@@ -1,0 +1,43 @@
+{
+  "name": "ihris-backend",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "start": "NODE_ENV=production node ./bin/www",
+    "dev": "NODE_ENV=development node ./bin/www",
+    "test": "NODE_ENV=test jest"
+  },
+  "dependencies": {
+    "async": "^3.2.0",
+    "axios": "^0.19.2",
+    "connect-redis": "^4.0.4",
+    "cookie-parser": "~1.4.4",
+    "debug": "~2.6.9",
+    "dompurify": "^2.0.11",
+    "express": "~4.16.1",
+    "express-session": "^1.17.1",
+    "fhir2es": "^1.1.4",
+    "fhirpath": "^2.1.5",
+    "http-proxy-middleware": "^1.0.5",
+    "is-empty": "^1.2.0",
+    "lodash": "^4.17.19",
+    "marked": "^1.1.0",
+    "morgan": "~1.9.1",
+    "nconf": "^0.10.0",
+    "object-hash": "^2.0.3",
+    "passport": "^0.4.1",
+    "passport-custom": "^1.1.1",
+    "passport-google-oauth20": "^2.0.0",
+    "passport-local": "^1.0.0",
+    "redis": "^3.0.2",
+    "require-from-string": "^2.0.2",
+    "supertest": "^4.0.2",
+    "urijs": "^1.19.2",
+    "url": "^0.11.0",
+    "uuid": "^8.2.0",
+    "winston": "^3.3.3"
+  },
+  "devDependencies": {
+    "jest": "^26.0.1"
+  }
+}

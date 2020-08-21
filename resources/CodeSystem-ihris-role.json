@@ -1,0 +1,64 @@
+{
+  "resourceType": "CodeSystem",
+  "status": "active",
+  "content": "complete",
+  "name": "IhrisRoleCodeSystem",
+  "id": "ihris-role",
+  "title": "Code System for iHRIS Roles.",
+  "version": "1.0.0",
+  "url": "http://ihris.org/fhir/CodeSystem/ihris-role",
+  "property": [
+    { 
+      "code": "task",
+      "type": "string"
+    },
+    { 
+      "code": "taskgroup",
+      "type": "string"
+    },
+    {
+      "code": "type",
+      "type": "string"
+    }
+  ],
+  "concept": [
+    {
+      "code": "admin",
+      "display": "Admin Role",
+      "definition": "The admin role for doing everything",
+      "property": [
+        {
+          "code": "type",
+          "valueString": "role"
+        },
+        {
+          "code": "task",
+          "valueString": "*:*"
+        },
+        {
+          "code": "taskgroup",
+          "valueString": "open"
+        }
+      ]
+    },
+    {
+      "code": "open",
+      "display": "Task group for open permissions",
+      "definition": "List of all fully open permissions",
+      "property": [
+        {
+          "code": "type",
+          "valueString": "taskgroup"
+        },
+        {
+          "code": "task",
+          "valueString": "read:StructureDefinition"
+        },
+        {
+          "code": "task",
+          "valueString": "read:ValueSet"
+        }
+      ]
+    }
+  ]
+}

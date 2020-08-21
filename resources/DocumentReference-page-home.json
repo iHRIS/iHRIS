@@ -1,0 +1,32 @@
+{
+  "resourceType": "DocumentReference",
+  "id": "page-home",
+  "meta": {
+    "profile": [
+      "http://ihris.org/fhir/StructureDefinition/ihris-document"
+    ]
+  },
+  "status": "current",
+  "docStatus": "final",
+  "category": [
+    {
+      "coding": [
+        {
+          "system": "http://ihris.org/fhir/CodeSystem/ihris-document-category",
+          "code": "open",
+          "display": "Open Access"
+        }
+      ]
+    }
+  ],
+  "date": "2020-08-19T14:54:00Z",
+  "content": [
+    {
+      "attachment": {
+        "contentType": "text/markdown",
+        "data": "KipXZWxjb21lIHRvIHRoZSBpSFJJUyBEZW1vKioK",
+        "title": "iHRIS Demo"
+      }
+    }
+  ]
+}

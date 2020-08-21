@@ -1,0 +1,28 @@
+{
+  "resourceType": "GraphDefinition",
+  "id": "ihris-report-contact-groups",
+  "meta": {
+    "versionId": "1",
+    "lastUpdated": "2020-08-05T07:43:59.683+03:00",
+    "source": "#NyzP2ea2jXmPyq1J"
+  },
+  "start": "Practitioner",
+  "link": [{
+    "path": "Practitioner.id",
+    "target": [{
+        "type": "PractitionerRole",
+        "params": "PractitionerRole.practitioner.reference",
+        "link": [{
+          "path": "PractitionerRole.location.reference",
+          "target": [{
+            "type": "Location"
+          }]
+        }]
+      },
+      {
+        "type": "Group",
+        "params": "Group.member.entity.reference"
+      }
+    ]
+  }]
+}

@@ -1,0 +1,16 @@
+{
+  "resourceType": "ValueSet",
+  "status": "active",
+  "name": "IhrisTaskGroupValueSet",
+  "id": "ihris-task-group",
+  "title": "Value Set for iHRIS Task Groups.",
+  "version": "0.1.0",
+  "url": "http://ihris.org/fhir/ValueSet/ihris-task-group",
+  "compose": {
+    "include": [
+      {
+        "system": "http://ihris.org/fhir/CodeSystem/ihris-role"
+      }
+    ]
+  }
+}

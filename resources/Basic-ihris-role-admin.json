@@ -1,0 +1,42 @@
+{
+  "resourceType": "Basic",
+  "id": "ihris-role-admin",
+  "meta": {
+    "profile": [
+      "http://ihris.org/fhir/StructureDefinition/ihris-role"
+    ]
+  },
+  "code": {
+    "coding": [
+      {
+        "code": "role",
+        "system": "http://ihris.org/fhir/CodeSystem/ihris-resource-codesystem"
+      }
+    ]
+  },
+  "extension": [
+    {
+      "url": "http://ihris.org/fhir/StructureDefinition/ihris-role-primary",
+      "valueBoolean": true
+    },
+    {
+      "extension": [
+        {
+          "url": "permission",
+          "valueCode": "*"
+        },
+        {
+          "url": "resource",
+          "valueCode": "*"
+        }
+      ],
+      "url": "http://ihris.org/fhir/StructureDefinition/ihris-task"
+    },
+    {
+      "url": "http://ihris.org/fhir/StructureDefinition/ihris-assign-role",
+      "valueReference": {
+        "reference": "Basic/ihris-role-open"
+      }
+    }
+  ]
+}

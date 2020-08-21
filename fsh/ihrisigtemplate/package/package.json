@@ -1,0 +1,12 @@
+{
+    "name": "ihrisigtemplate",
+    "type": "fhir.template",
+    "license": "CC0-1.0",
+    "description": "iHRIS FHIR Template - for use with iHRIS FHIR IGs",
+    "author": "http://ihris.org",
+    "base": "fhir.base.template",
+    "dependencies": {
+      "fhir.base.template": "current"
+    },
+    "version": "0.1.0"
+  }

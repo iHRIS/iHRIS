@@ -1,0 +1,28 @@
+{
+  "resourceType": "ValueSet",
+  "id": "ihris-cadre",
+  "url": "http://ihris.org/fhir/ValueSet/ihris-cadre",
+  "name": "iHRISCadre",
+  "title": "iHRIS Cadre",
+  "status": "active",
+  "experimental": false,
+  "publisher": "iHRIS Foundation",
+  "contact": [
+    {
+      "telecom": [
+        {
+          "system": "url",
+          "value": "http://ihris.org"
+        }
+      ]
+    }
+  ],
+  "description": "Sample iHRIS ValueSet for: iHRISCadre",
+  "compose": {
+    "include": [
+      {
+        "system": "http://ihris.org/fhir/CodeSystem/ihris-cadre"
+      }
+    ]
+  }
+}
