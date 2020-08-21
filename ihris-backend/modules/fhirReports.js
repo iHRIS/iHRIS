@@ -24,7 +24,7 @@ const fhirReports = {
             ESBaseURL: server,
             ESUsername: username,
             ESPassword: password,
-            ESMaxCompilationRate: nconf.get("elasticsearch:max_compiliation_rate"),
+            ESMaxCompilationRate: nconf.get("elasticsearch:max_compiliation_rate") || "10000/1m",
             FHIRBaseURL: nconf.get("fhir:base") || "http://localhost:8080/hapi/fhir",
             FHIRUsername: nconf.get("fhir:username"),
             FHIRPassword: nconf.get("fhir:password")
