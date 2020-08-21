@@ -82,6 +82,15 @@ sudo npm install -g fsh-sushi@beta
 Ubuntu install instructions:
 https://www.elastic.co/guide/en/elasticsearch/reference/current/deb.html
 
+Make sure to install ElasticSearch and Kibana:
+```bash
+sudo apt install elasticsearch kibana
+```
+
+After installing, edit /etc/kibana/kibana.yml and set server.basePath
+```yaml
+server.basePath: "/kibana"
+```
 
 # Back end server
 
