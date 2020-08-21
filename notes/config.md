@@ -10,7 +10,7 @@ for overriding from the ENV.
   "resourceType": "Parameters",
   "parameter": [
     {
-      "name": "fhir:server",
+      "name": "fhir:base",
       "valueString": "http://localhost:8080/hapi/fhir/"
     },
     {
@@ -36,18 +36,18 @@ variables.
 
 Command line:
 ```
---fhir:server http://locahost:8080/hapi/fhir
+--fhir:base http://locahost:8080/hapi/fhir
 ```
 
 Environment:
 ```
-IHRIS_FHIR__SERVER=http://locahost:8080/hapi/fhir
+IHRIS_FHIR__BASE=http://locahost:8080/hapi/fhir
 ```
 
 ## Config options
 
 ### Allowed in local config
-* fhir:server (default: http://localhost:8080/hapi/fhir/)
+* fhir:base (default: http://localhost:8080/hapi/fhir/)
 * fhir:username
 * fhir:password
 * security:disabled (when set to true the no signature checks are done on remote config or modules)
@@ -55,6 +55,11 @@ IHRIS_FHIR__SERVER=http://locahost:8080/hapi/fhir
  * name = id of config Parameters resource
 * keys
  * name = public key string
+* elasticsearch:base (default: http://localhost:9200)
+* elasticsearch:username
+* elasticsearch:password
+* elasticsearch:max_compilation_rate (default: "10000/1m")
+* reports:refresh time between recaching reports (in ms) (default: 900000)
 
 ### Allowed in local or remote
 * user:loggedout = id of logged out user resource (default: ihris-user-loggedout)

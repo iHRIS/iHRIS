@@ -3,7 +3,8 @@ const crypto = require('crypto')
 const winston = require('winston')
 
 // Don't allow any settings to these values from a remote config
-const invalidRemoteKeys = [ 'fhir', 'config', 'session', 'keys', 'logs' ]
+const invalidRemoteKeys = [ 'fhir', 'config', 'session', 'keys', 
+  'logs', 'emnutt', 'elasticsearch', 'reports' ]
 
 const fhirConfig = {
   checkBoolean: (value) => {

@@ -11,6 +11,8 @@ const fhirConfig = require('./modules/fhirConfig')
 const nconf = require('./modules/config')
 const requireFromString = require('require-from-string')
 const fhirModules = require('./modules/fhirModules')
+const fhirReports = require('./modules/fhirReports')
+const { createProxyMiddleware } = require('http-proxy-middleware')
 
 const RedisStore = require('connect-redis')(session)
 
@@ -20,6 +22,17 @@ var configLoaded = false
 
 async function startUp() {
   await nconf.loadRemote()
+
+  try {
+    let reportsRunning = await fhirReports.setup()
+    if ( reportsRunning ) {
+      fhirReports.runReports()
+    } else {
+      winston.error("Failed to start up reports to ElasticSearch.")
+    }
+  } catch( err ) {
+    winston.error( err )
+  }
 
   let runEnv = process.env.NODE_ENV || "production"
   let logOpts = nconf.get("logs:"+runEnv)
@@ -55,6 +68,16 @@ async function startUp() {
   let redisClient = redis.createClient( nconf.get("redis:url") )
 
   app.use(logger('dev'))
+
+  // This has to be before the body parser or it won't proxy a POST body
+  app.use('/kibana', createProxyMiddleware( { 
+    target: nconf.get('kibana:base') || "http://localhost:5601"
+    //headers: { 'kbn-xsrf': true },
+    //changeOrigin: true,
+    //ws: true,
+    //followRedirects: true
+  } ) )
+
 
   //const indexRouter = require('./routes/index')
   const configRouter = require('./routes/config')

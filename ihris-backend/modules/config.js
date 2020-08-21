@@ -23,7 +23,7 @@ const fhirAxios = require('./fhirAxios')
 fhirAxios.setOptions( { 
   base: nconf.get("fhir:base"),
   username: nconf.get("fhir:username"),
-  password: nconf.get("fhir:password"),
+  password: nconf.get("fhir:password")
 } )
 
 nconf.getBool = (key) => {

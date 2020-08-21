@@ -77,6 +77,37 @@ https://hapifhir.io/hapi-fhir/docs/tools/hapi_fhir_cli.html
 sudo npm install -g fsh-sushi@beta
 ```
 
+## ElasticSearch
+
+Ubuntu install instructions:
+https://www.elastic.co/guide/en/elasticsearch/reference/current/deb.html
+
+
+# Back end server
+
+## Before starting
+
+You'll need to run npm install when additional node modules are installed or updated
+and also before starting the first time.
+
+```bash
+cd ihris-backend/
+npm install
+```
+
+## Development mode
+Run the following to start the server in development mode.
+```bash
+cd ihris-backend/
+npm run dev
+```
+## Production mode
+Run the following to start the server in production mode.
+```bash
+cd ihris-backend/
+npm run start
+
+TODO: Convert this to a systemd script for startup and shutdown
 
 # Front end Development
 
@@ -84,3 +115,33 @@ Built with vue cli 4.4.1
 ```bash
 sudo npm install -g @vue/cli
 ```
+
+
+## To run in development mode
+
+You may need to edit the proxy settings in ihris-frontend/vue.config.js
+depending on where you started the backend.
+
+
+```bash
+cd ihris-frontend/
+npm run serve
+```
+
+The output will give you a URL to access the frontend.
+
+## Production
+
+The frontend will be built and saved to the backend server public 
+files (ihris-backend/public/) to be served or you can run them from any 
+static web server.
+
+```bash
+cd ihris-frontend/
+npm run build
+```
+
+The files in ihris-frontend/dist/ can be served statically from your
+web server.  Releases will be compiled to the ihris-backend/public/
+directory so you will only need to do this if you want to make changes
+to the frontend software.

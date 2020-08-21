@@ -6,7 +6,8 @@
       "http://ihris.org/fhir/StructureDefinition/ihris-parameters-local-config"
     ]
   },
-  "parameter": [{
+  "parameter": [
+    {
       "name": "fhir:base",
       "valueString": "http://localhost:8080/hapi/fhir"
     },
@@ -21,6 +22,14 @@
     {
       "name": "emnutt:password",
       "valueString": ""
+    },
+    {
+      "name": "elasticsearch:base",
+      "valueString": "http://localhost:9200"
+    },
+    {
+      "name": "kibana:base",
+      "valueString": "http://localhost:5601"
     },
     {
       "name": "logs",
@@ -57,9 +66,22 @@
     },
     {
       "name": "config",
+      "part": [
+        {
+          "name": "ihris",
+          "valueString": "ihris-config"
+        },
+        {
+          "name": "dashboard",
+          "valueString": "ihris-dashboard"
+        }
+      ]
+    },
+    {
+      "name": "modules",
       "part": [{
-        "name": "ihris",
-        "valueString": "ihris-config"
+        "name": "test-mod",
+        "valueString": "test-module"
       }]
     },
     {

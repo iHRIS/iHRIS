@@ -28,6 +28,8 @@
 * change $short-name operation to allow searches and results of the shortname and update fhir-reference component to use that
 * set up all components to work like fhir-reference for presets (disable element on add page when preset)
 * set up "static" FHIR resource (documentreference?) for images (logos, etc.)
+* create fhir-attachment component
+* make end point to reload a remote config file (Parameters)
 
 # Notes
 

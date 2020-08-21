@@ -1,0 +1,144 @@
+{
+  "resourceType": "Basic",
+  "id": "staff",
+  "meta": {
+    "versionId": "6",
+    "lastUpdated": "2020-04-18T14:25:58.246+03:00",
+    "source": "#9bPzqTgeJQSqHE9W",
+    "profile": [
+      "http://ihris.org/fhir/StructureDefinition/iHRISRelationship"
+       ]
+  },
+  "extension": [{
+    "url": "http://ihris.org/fhir/StructureDefinition/iHRISReportDetails",
+    "extension": [{
+      "url": "label",
+      "valueString": "Staff Report"
+    },
+    {
+      "url": "name",
+      "valueString": "practitioner"
+    }, 
+    {
+      "url": "resource",
+      "valueString": "Practitioner"
+    }, 
+    {
+      "url": "query",
+      "valueString": "active=true"
+    },
+    {
+      "url": "http://ihris.org/fhir/StructureDefinition/iHRISReportElement",
+      "extension": [{
+        "url": "label",
+        "valueString": "gender"
+      },
+      {
+        "url": "name",
+        "valueString": "gender"
+      }
+      ]
+    },
+    {
+      "url": "http://ihris.org/fhir/StructureDefinition/iHRISReportElement",
+      "extension": [{
+        "url": "label",
+        "valueString": "birthDate"
+      },
+      {
+        "url": "name",
+        "valueString": "birthDate"
+      }
+      ]
+    },
+    {
+      "url": "http://ihris.org/fhir/StructureDefinition/iHRISReportElement",
+      "extension": [{
+        "url": "label",
+        "valueString": "given"
+      },
+      {
+        "url": "name",
+        "valueString": "name.where(use='official').first().given"
+      }
+      ]
+    },
+    {
+      "url": "http://ihris.org/fhir/StructureDefinition/iHRISReportElement",
+      "extension": [{
+        "url": "label",
+        "valueString": "family"
+      },
+      {
+        "url": "name",
+        "valueString": "name.where(use='official').first().family"
+      }
+      ]
+    },
+    {
+      "url": "http://ihris.org/fhir/StructureDefinition/iHRISReportElement",
+      "extension": [{
+        "url": "label",
+        "valueString": "phone"
+      },
+      {
+        "url": "name",
+        "valueString": "telecom.where(system='phone').first().value"
+      }
+      ]
+    }
+    ]
+  },
+  {
+    "url": "http://ihris.org/fhir/StructureDefinition/iHRISReportLink",
+    "extension": [{
+      "url": "name",
+      "valueString": "role"
+    },
+    {
+      "url": "resource",
+      "valueString": "PractitionerRole"
+    },
+    {
+      "url": "linkElement",
+      "valueString": "PractitionerRole.practitioner.reference"
+    },
+    {
+      "url": "linkTo",
+      "valueString": "practitioner"
+    },
+    {
+      "url": "multiple",
+      "valueBoolean": false
+    },
+    {
+      "url": "query",
+      "valueString": "active=true"
+    },
+    {
+      "url": "http://ihris.org/fhir/StructureDefinition/iHRISReportElement",
+      "extension": [{
+        "url": "label",
+        "valueString": "startDate"
+      },
+      {
+        "url": "name",
+        "valueString": "period.start"
+      }
+      ]
+    }
+    ]
+  }
+  ],
+  "code": {
+    "coding": [{
+      "system": "http://ihris.org/fhir/ValueSet/ihris-resource",
+      "code": "iHRISRelationship"
+    }],
+    "text": "iHRISRelationship"
+  },
+  "subject": {
+    "reference": "StructureDefinition/ihris-practitioner"
+  }
+}
+
