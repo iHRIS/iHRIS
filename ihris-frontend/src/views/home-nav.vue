@@ -108,14 +108,14 @@ export default {
               order: this.nav.menu[menu_id].menu[sub_id].order
             }
             entry.menu.push( sub )
-            entry.menu.sort( (a,b) => { a.order === b.order ? 0 : ( a.order < b.order ? -1 : 1 ) } )
+            entry.menu.sort( (a,b) => a.order === b.order ? 0 : ( a.order < b.order ? -1 : 1 ) )
           }
         } else if ( this.nav.menu[menu_id].url ) {
           entry.url = this.nav.menu[menu_id].url
         }
         this.menu.push( entry )
       }
-      this.menu.sort( (a,b) => { a.order === b.order ? 0 : ( a.order < b.order ? -1 : 1 ) } )
+      this.menu.sort( (a,b) => a.order === b.order ? 0 : ( a.order < b.order ? -1 : 1 ) )
     }
   }
 };
