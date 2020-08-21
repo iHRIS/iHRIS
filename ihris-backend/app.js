@@ -23,28 +23,28 @@ var configLoaded = false
 async function startUp() {
   await nconf.loadRemote()
 
-  try {
-    let reportsRunning = await fhirReports.setup()
-    if ( reportsRunning ) {
-      fhirReports.runReports()
-    } else {
-      winston.error("Failed to start up reports to ElasticSearch.")
-    }
-  } catch( err ) {
-    winston.error( err )
-  }
+  // try {
+  //   let reportsRunning = await fhirReports.setup()
+  //   if ( reportsRunning ) {
+  //     fhirReports.runReports()
+  //   } else {
+  //     winston.error("Failed to start up reports to ElasticSearch.")
+  //   }
+  // } catch( err ) {
+  //   winston.error( err )
+  // }
 
   let runEnv = process.env.NODE_ENV || "production"
   let logOpts = nconf.get("logs:"+runEnv)
   if ( !logOpts ) {
-    winston.add( new winston.transports.Console( { 
+    winston.add( new winston.transports.Console( {
       level: "error",
       format: winston.format.prettyPrint()
     } ) )
   } else {
     for( let transport of Object.keys(logOpts) ) {
       if ( transport === "console" ) {
-        winston.add( new winston.transports.Console( { 
+        winston.add( new winston.transports.Console( {
           level: logOpts[transport].level || "error",
           format: winston.format.prettyPrint()
         } ) )
@@ -53,8 +53,8 @@ async function startUp() {
           if ( !logOpts[transport][type].file ) {
             console.log("Logging by file for "+type+" config needs a file set.")
           } else {
-            winston.add( new winston.transports.File( { 
-              level: logOpts[transport][type].level || "error", 
+            winston.add( new winston.transports.File( {
+              level: logOpts[transport][type].level || "error",
               filename: logOpts[transport][type].file
             } ) )
           }
@@ -70,7 +70,7 @@ async function startUp() {
   app.use(logger('dev'))
 
   // This has to be before the body parser or it won't proxy a POST body
-  app.use('/kibana', createProxyMiddleware( { 
+  app.use('/kibana', createProxyMiddleware( {
     target: nconf.get('kibana:base') || "http://localhost:5601"
     //headers: { 'kbn-xsrf': true },
     //changeOrigin: true,
@@ -160,7 +160,7 @@ module.exports = router
   */
 
   // Fallback for the vue router using history mode
-  // If this causes issues, would need to either 
+  // If this causes issues, would need to either
   // server the ui from a subdirectory or change to hash mode
   app.use( (req,res) => {
     res.sendFile(path.join(__dirname, 'public/index.html'))
