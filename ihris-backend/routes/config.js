@@ -634,6 +634,84 @@ router.get('/questionnaire/:questionnaire', function(req, res) {
 
 } )
 
+router.get('/report/es/:report', (req, res) => {
+  let report = "ihris-es-report-" + req.params.report
+  if (!req.user) {
+    return res.status(401).json(outcomes.NOTLOGGEDIN)
+  }
+  let allowed = req.user.hasPermissionByName("read", "Basic", report)
+  // Limited access to these don't make sense so not allowing it for now
+  if (allowed !== true) {
+    return res.status(401).json(outcomes.DENIED)
+  }
+  fhirAxios.read("Basic", report).then(async (resource) => {
+    let reportName
+    let indexName
+    let reportData = {
+      fieldsDetails: [],
+      filters: [],
+      displayCheckbox: false
+    }
+    for(let extension of resource.extension) {
+      let reportElements = extension.extension.filter((ext) => {
+        if(extension.url === 'http://ihris.org/fhir/StructureDefinition/iHRISReportDetails' && ext.url === 'label') {
+          reportName = ext.valueString
+        }
+        if(extension.url === 'http://ihris.org/fhir/StructureDefinition/iHRISReportDetails' && ext.url === 'name') {
+          indexName = ext.valueString
+        }
+        if(extension.url === 'http://ihris.org/fhir/StructureDefinition/iHRISReportDetails' && ext.url === 'displayCheckbox') {
+          reportData.displayCheckbox = ext.valueBoolean
+        }
+        return ext.url === "http://ihris.org/fhir/StructureDefinition/iHRISReportElement"
+      })
+      for(let element of reportElements) {
+        let displayName, esField
+        let label = element.extension.find((ext) => {
+          return ext.url === 'label'
+        })
+        let display = element.extension.find((ext) => {
+          return ext.url === 'display'
+        })
+        let filter = element.extension.find((ext) => {
+          return ext.url === 'filter' && ext.valueBoolean === true
+        })
+        if(filter) {
+          let dropDownFilter = element.extension.find((ext) => {
+            return ext.url === 'dropDownFilter' && ext.valueBoolean === true
+          })
+          let isDropDown = false
+          if(dropDownFilter) {
+            isDropDown = true
+          }
+          reportData.filters.push({
+            field: label.valueString,
+            display: display.valueString,
+            isDropDown: isDropDown
+          })
+        }
+        esField = label.valueString
+        displayName = display.valueString
+        reportData.fieldsDetails.push([displayName, esField])
+      }
+    }
+    reportData.indexName = indexName
+    let template = `<ihris-es-report :key="$route.params.report" page="${req.params.report}" label="${reportName}" :reportData="reportData" :terms="terms" >`
+    for (let filter of reportData.filters) {
+      if(filter.isDropDown) {
+        template += `<ihris-search-term v-on:termChange="searchData" label="${filter.display}" expression="${filter.field}" isDropDown="${filter.isDropDown}" :reportData="reportData"></ihris-search-term>\n`
+      } else {
+        template += `<ihris-search-term v-on:termChange="searchData" label="${filter.display}" expression="${filter.field}" :reportData="reportData"></ihris-search-term>\n`
+      }
+    }
+    template += `</ihris-es-report>`
+    return res.status(200).json({
+      reportTemplate: template,
+      reportData: reportData
+    })
+  })
+})
+
 router.get('/report/:report', function (req, res) {
   let report = "ihris-report-" + req.params.report
   if (!req.user) {

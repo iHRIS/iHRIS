@@ -83,6 +83,7 @@ async function startUp() {
   const configRouter = require('./routes/config')
   const authRouter = require('./routes/auth')
   const fhirRouter = require('./routes/fhir')
+  const esRouter = require('./routes/es')
   const questionnaireRouter = require('./routes/questionnaire')
   const mheroRouter = require('./routes/mhero')
 
@@ -122,6 +123,7 @@ async function startUp() {
 
   app.use('/fhir', questionnaireRouter)
   app.use('/fhir', fhirRouter)
+  app.use('/es', esRouter)
 
   const loadModules = nconf.get("modules")
   if (loadModules) {

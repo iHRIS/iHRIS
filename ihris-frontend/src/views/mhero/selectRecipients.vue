@@ -5,7 +5,7 @@
         src="@/assets/mHero.png"
         width="100"
       ></v-img>
-      <ihrisReport report='mhero'></ihrisReport>
+      <ihrisReport report='mhero-send-message'></ihrisReport>
       <v-card-actions class="secondary">
         <v-spacer></v-spacer>
         <v-btn
@@ -20,7 +20,7 @@
   </v-container>
 </template>
 <script>
-import ihrisReport from "@/views/fhir-report";
+import ihrisReport from "@/views/es-report";
 import { eventBus } from "@/main";
 export default {
   data() {
