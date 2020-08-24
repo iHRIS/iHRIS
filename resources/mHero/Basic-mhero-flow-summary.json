@@ -1,0 +1,163 @@
+{
+  "resourceType": "Basic",
+  "id": "ihris-es-report-mhero-flow-summary",
+  "meta": {
+    "versionId": "1",
+    "lastUpdated": "2019-07-30T07:34:24.098+00:00",
+    "profile": [
+      "http://ihris.org/fhir/StructureDefinition/iHRISRelationship"
+    ]
+  },
+  "extension": [{
+    "url": "http://ihris.org/fhir/StructureDefinition/iHRISReportDetails",
+    "extension": [{
+      "url": "label",
+      "valueString": "mHero Flow Summary"
+    }, {
+      "url": "name",
+      "valueString": "mheroflowsummary"
+    }, {
+      "url": "resource",
+      "valueString": "Basic"
+    }, {
+      "url": "query",
+      "valueString": "_profile=http://mHero.org/fhir/StructureDefinition/mhero-workflows"
+    }, {
+      "url": "http://ihris.org/fhir/StructureDefinition/iHRISReportElement",
+      "extension": [{
+        "url": "display",
+        "valueString": "Name"
+      }, {
+        "url": "label",
+        "valueString": "name"
+      }, {
+        "url": "name",
+        "valueString": "extension.where(url='http://mHero.org/fhir/StructureDefinition/mhero-workflows-details').extension.where(url='name').valueString"
+      }]
+    }, {
+      "url": "http://ihris.org/fhir/StructureDefinition/iHRISReportElement",
+      "extension": [{
+        "url": "display",
+        "valueString": "UUID"
+      }, {
+        "url": "label",
+        "valueString": "UUID"
+      }, {
+        "url": "name",
+        "valueString": "extension.where(url='http://mHero.org/fhir/StructureDefinition/mhero-workflows-details').extension.where(url='uuid').valueString"
+      }]
+    }, {
+      "url": "http://ihris.org/fhir/StructureDefinition/iHRISReportElement",
+      "extension": [{
+        "url": "display",
+        "valueString": "Type"
+      }, {
+        "url": "label",
+        "valueString": "flow_type"
+      }, {
+        "url": "name",
+        "valueString": "extension.where(url='http://mHero.org/fhir/StructureDefinition/mhero-workflows-details').extension.where(url='flow_type').valueString"
+      }]
+    }, {
+      "url": "http://ihris.org/fhir/StructureDefinition/iHRISReportElement",
+      "extension": [{
+        "url": "display",
+        "valueString": "Archived"
+      }, {
+        "url": "label",
+        "valueString": "archived"
+      }, {
+        "url": "name",
+        "valueString": "extension.where(url='http://mHero.org/fhir/StructureDefinition/mhero-workflows-details').extension.where(url='archived').valueBoolean"
+      }]
+    }, {
+      "url": "http://ihris.org/fhir/StructureDefinition/iHRISReportElement",
+      "extension": [{
+        "url": "display",
+        "valueString": "Expires"
+      }, {
+        "url": "label",
+        "valueString": "expires"
+      }, {
+        "url": "name",
+        "valueString": "extension.where(url='http://mHero.org/fhir/StructureDefinition/mhero-workflows-details').extension.where(url='expires').valueInteger"
+      }]
+    }, {
+      "url": "http://ihris.org/fhir/StructureDefinition/iHRISReportElement",
+      "extension": [{
+        "url": "display",
+        "valueString": "Active"
+      }, {
+        "url": "label",
+        "valueString": "active"
+      }, {
+        "url": "name",
+        "valueString": "extension.where(url='http://mHero.org/fhir/StructureDefinition/mhero-workflows-details').extension.where(url='http://mHero.org/fhir/StructureDefinition/mhero-run-summary').extension.where(url='active').valueInteger"
+      }]
+    }, {
+      "url": "http://ihris.org/fhir/StructureDefinition/iHRISReportElement",
+      "extension": [{
+        "url": "display",
+        "valueString": "Completed"
+      }, {
+        "url": "label",
+        "valueString": "completed"
+      }, {
+        "url": "name",
+        "valueString": "extension.where(url='http://mHero.org/fhir/StructureDefinition/mhero-workflows-details').extension.where(url='http://mHero.org/fhir/StructureDefinition/mhero-run-summary').extension.where(url='completed').valueInteger"
+      }]
+    }, {
+      "url": "http://ihris.org/fhir/StructureDefinition/iHRISReportElement",
+      "extension": [{
+        "url": "display",
+        "valueString": "Interrupted"
+      }, {
+        "url": "label",
+        "valueString": "interrupted"
+      }, {
+        "url": "name",
+        "valueString": "extension.where(url='http://mHero.org/fhir/StructureDefinition/mhero-workflows-details').extension.where(url='http://mHero.org/fhir/StructureDefinition/mhero-run-summary').extension.where(url='interrupted').valueInteger"
+      }]
+    }, {
+      "url": "http://ihris.org/fhir/StructureDefinition/iHRISReportElement",
+      "extension": [{
+        "url": "display",
+        "valueString": "Expired"
+      }, {
+        "url": "label",
+        "valueString": "expired"
+      }, {
+        "url": "name",
+        "valueString": "extension.where(url='http://mHero.org/fhir/StructureDefinition/mhero-workflows-details').extension.where(url='http://mHero.org/fhir/StructureDefinition/mhero-run-summary').extension.where(url='expired').valueInteger"
+      }]
+    }, {
+      "url": "http://ihris.org/fhir/StructureDefinition/iHRISReportElement",
+      "extension": [{
+        "url": "label",
+        "valueString": "Workflow Created At"
+      }, {
+        "url": "name",
+        "valueString": "extension.where(url='http://mHero.org/fhir/StructureDefinition/mhero-workflows-details').extension.where(url='created_on').valueDateTime"
+      }]
+    }, {
+      "url": "http://ihris.org/fhir/StructureDefinition/iHRISReportElement",
+      "extension": [{
+        "url": "label",
+        "valueString": "Workflow LastModified"
+      }, {
+        "url": "name",
+        "valueString": "extension.where(url='http://mHero.org/fhir/StructureDefinition/mhero-workflows-details').extension.where(url='modified_on').valueDateTime"
+      }]
+    }]
+  }],
+  "code": {
+    "coding": [{
+      "system": "http://ihris.org/fhir/ValueSet/ihris-resource",
+      "code": "iHRISRelationship"
+    }],
+    "text": "iHRISRelationship"
+  },
+  "subject": {
+    "reference": "StructureDefinition/Basic"
+  }
+}

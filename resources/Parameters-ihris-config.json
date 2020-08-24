@@ -16,11 +16,11 @@
             "code": "1.2.840.10065.1.12.1.14"
           }
         ],
-        "when": "",
+        "when": "2020-08-24T18:33:26.035Z",
         "who": {
           "reference": "http://ihris.org/fhir/Organization/ihris"
         },
-        "data": ""
+        "data": "ukFuspNf3sTJ6HmUey+1dMXwfDBkDo3y7sVZSNfFrPAc/mpMeoqn/9zx0xxmPls2ijSTXjAUaA/NFe/sqhjbo/8fkshd1H3P1Laogqkkvmj/2+OYf2KYbEUs1zHfyAAab18VbTC0HE1ZuY8IaiFshPb9IvWZPygE3FyFhDBA7Bs="
       }
     },
     {
@@ -191,6 +191,14 @@
           "valueString": "/page/contact-groups"
         },
         {
+          "name": "site:nav:menu:mhero:menu:reports:text",
+          "valueString": "Reports"
+        },
+        {
+          "name": "site:nav:menu:mhero:menu:reports:url",
+          "valueString": "/page/mhero-reports"
+        },
+        {
           "name": "site:nav:menu:database:text",
           "valueString": "Database"
         },
@@ -222,7 +230,7 @@
           "name": "site:nav:menu:dashboard:icon",
           "valueString": "mdi-poll-box"
         },
-         {
+        {
           "name": "site:nav:menu:dashboard:url",
           "valueString": "/dashboard"
         },

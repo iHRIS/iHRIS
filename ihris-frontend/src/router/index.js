@@ -28,6 +28,16 @@ const routes = [{
     name: 'contact-groups',
     component: () => import( /* webpackChunkName: "mhero" */ "../views/mhero/contact-groups.vue")
   },
+  {
+    path: '/page/mhero-reports',
+    name: 'mhero-reports-base',
+    component: () => import( /* webpackChunkName: "mhero" */ "../views/mhero/mhero-reports-base.vue")
+  },
+  {
+    path: '/report/:report',
+    name: 'mhero-reports',
+    component: () => import( /* webpackChunkName: "mhero" */ "../views/mhero/mhero-reports.vue")
+  },
   /*
   {
     path: "/test/:id",

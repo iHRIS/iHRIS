@@ -636,6 +636,7 @@ router.get('/questionnaire/:questionnaire', function(req, res) {
 
 router.get('/report/es/:report', (req, res) => {
   let report = "ihris-es-report-" + req.params.report
+  console.log(report);
   if (!req.user) {
     return res.status(401).json(outcomes.NOTLOGGEDIN)
   }
@@ -673,6 +674,9 @@ router.get('/report/es/:report', (req, res) => {
         let display = element.extension.find((ext) => {
           return ext.url === 'display'
         })
+        if(!display) {
+          continue;
+        }
         let filter = element.extension.find((ext) => {
           return ext.url === 'filter' && ext.valueBoolean === true
         })

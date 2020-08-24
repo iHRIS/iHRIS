@@ -23,16 +23,16 @@ var configLoaded = false
 async function startUp() {
   await nconf.loadRemote()
 
-  try {
-    let reportsRunning = await fhirReports.setup()
-    if ( reportsRunning ) {
-      fhirReports.runReports()
-    } else {
-      winston.error("Failed to start up reports to ElasticSearch.")
-    }
-  } catch( err ) {
-    winston.error( err )
-  }
+  // try {
+  //   let reportsRunning = await fhirReports.setup()
+  //   if ( reportsRunning ) {
+  //     fhirReports.runReports()
+  //   } else {
+  //     winston.error("Failed to start up reports to ElasticSearch.")
+  //   }
+  // } catch( err ) {
+  //   winston.error( err )
+  // }
 
   let runEnv = process.env.NODE_ENV || "production"
   let logOpts = nconf.get("logs:"+runEnv)

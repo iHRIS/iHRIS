@@ -160,7 +160,7 @@
       v-if="addGroupDialog"
       v-model="addGroupDialog"
       persistent
-      width="850px"
+      width="550px"
     >
       <v-card>
         <v-toolbar
