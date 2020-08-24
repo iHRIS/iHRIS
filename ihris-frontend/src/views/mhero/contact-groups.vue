@@ -372,7 +372,8 @@ export default {
       let members = this.getFullEntityIDs(this.subscribingPractitioners)
       let groups = [];
       this.subscribingGroups.forEach(group => {
-        groups.push(group.id);
+        let id = group.group.split('/')[1]
+        groups.push(id);
       });
       let data = {
         members,
