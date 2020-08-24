@@ -40,10 +40,8 @@ export default {
   methods: {
     nextStep() {
       let headers = [];
-      for (let data of this.reportData.fieldsDetails) {
-        for (let field of data.fields) {
-          headers.push({ text: field[0], value: field[1] });
-        }
+      for (let field of this.reportData.fieldsDetails) {
+        headers.push({ text: field[0], value: field[1] });
       }
       this.$emit("mheroRecipientsSelected", this.practitioners, headers);
     }

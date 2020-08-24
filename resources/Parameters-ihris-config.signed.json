@@ -259,6 +259,15 @@
           "valueString": "http://ihris.org/fhir/Questionnaire/ihris-promotion"
         }
       ]
+    },
+    {
+      "name": "sync",
+      "part": [
+        {
+          "name": "escaching",
+          "valueDateTime": "1970-03-09T17:32:44"
+        }
+      ]
     }
   ]
 }

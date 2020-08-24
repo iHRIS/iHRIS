@@ -19,7 +19,7 @@
         :footer-props="{ 'items-per-page-options': [5,10,20,50] }"
         :loading="loading"
         class="elevation-1"
-        @click:row="clickIt"
+        item-key="id"
         :show-select="reportData.displayCheckbox"
         v-model="selected"
       ></v-data-table>
@@ -44,7 +44,7 @@ export default {
       prevPage: -1,
       link: [],
       selected: [],
-      error_message: null
+      error_message: null,
     };
   },
   watch: {
@@ -133,9 +133,13 @@ export default {
                 this.link = data.link;
                 for (let hit of data.hits.hits) {
                   let result = {}
-                  for (let field of this.reportData.fieldsDetails) {
-                    result[field[1]] = hit['_source'][field[1]]
+                  // for (let field of this.reportData.fieldsDetails) {
+                  //   result[field[1]] = hit['_source'][field[1]]
+                  // }
+                  for(let field in hit['_source']) {
+                    result[field] = hit['_source'][field]
                   }
+                  result.id = hit['_id']
                   this.results.push(result)
                 }
               }

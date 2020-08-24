@@ -161,7 +161,7 @@
         src="@/assets/mHero.png"
         width="100"
       ></v-img>
-      <ihrisReport report='contact-groups'></ihrisReport>
+      <ihrisReport report='mhero-send-message'></ihrisReport>
       <v-card-actions class="secondary">
         <v-btn
           color="error"
@@ -189,7 +189,7 @@
   </v-container>
 </template>
 <script>
-import ihrisReport from "@/views/fhir-report";
+import ihrisReport from "@/views/es-report";
 import { eventBus } from "@/main";
 export default {
   data() {
@@ -207,7 +207,7 @@ export default {
         text: "Name",
         value: "name"
       }],
-      tblOptions: { 'itemsPerPage': 1 },
+      tblOptions: { 'itemsPerPage': 5 },
       prevPage: -1,
       link: [],
       statusDialog: {
@@ -241,10 +241,8 @@ export default {
     },
     headers() {
       let headers = []
-      for (let data of this.reportData.fieldsDetails) {
-        for (let field of data.fields) {
-          headers.push({ text: field[0], value: field[1] });
-        }
+      for (let field of this.reportData.fieldsDetails) {
+        headers.push({ text: field[0], value: field[1] });
       }
       return headers
     }
@@ -261,16 +259,13 @@ export default {
     getFullEntityIDs(entities) {
       let entityIDs = []
       entities.forEach(practitioner => {
-        let entityResTypes = ["Practitioner", "Patient", "Person"]
+        let entityResTypes = ["practitioner", "patient", "person"]
         let entityID
         for(let resType of entityResTypes) {
-          if(practitioner[resType + ".id"]) {
-            entityID = practitioner[resType + ".id"]
+          if(practitioner[resType]) {
+            entityID = practitioner[resType]
             break
           }
-        }
-        if(!entityID) {
-          entityID = this.reportData.primaryResource + "/" + practitioner.id
         }
         entityIDs.push(entityID)
       });
@@ -294,12 +289,13 @@ export default {
           members += ',' + entityID
         }
       }
-      url += members + '&_count=1&_total=accurate'
+      let count = this.tblOptions.itemsPerPage || 5;
+      url += members + `&_count=${count}&_total=accurate`
       this.getMembersGroups(url, true)
     },
     getMembersGroups(url, restart) {
       if (restart) this.tblOptions.page = 1;
-      if (this.tblOptions.page > 1) {
+      if (!url) {
         if (this.tblOptions.page === this.prevPage - 1) {
           url = this.link.find(link => link.relation === "previous").url;
         } else if (this.tblOptions.page === this.prevPage + 1) {
@@ -313,6 +309,7 @@ export default {
           response
             .json()
             .then(data => {
+              this.unsubscribingGroups = []
               if(data.total > 0) {
                 this.link = data.link;
                 this.totalUnsubGroups = data.total

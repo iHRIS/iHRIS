@@ -49,15 +49,15 @@
             row
             wrap
           >
-            <v-flex xs2>
+            <v-flex xs4>
               <v-radio
-                label="Workflow"
+                label="Use existing message flow"
                 value="flow"
               ></v-radio>
             </v-flex>
-            <v-flex xs2>
+            <v-flex xs4>
               <v-radio
-                label="Ad-hoc Message"
+                label="Create new one time message"
                 value="sms"
               ></v-radio>
             </v-flex>
@@ -138,7 +138,13 @@ export default {
       let practitioners = [];
 
       this.practitioners.forEach(practitioner => {
-        practitioners.push(practitioner.id);
+        let id = practitioner.practitioner.split('/')
+        if(id.length === 2) {
+          id = id[1]
+        } else {
+          id = practitioner.practitioner
+        }
+        practitioners.push(id);
       });
 
       let data = {
@@ -162,14 +168,24 @@ export default {
         body: data,
         redirect: "manual"
       };
-      fetch(url, opts).then(() => {
+      fetch(url, opts).then((response) => {
         this.statusDialog.enable = true
-        this.statusDialog.color = 'success'
-        this.statusDialog.title = 'Success'
-        if(this.communicationType === "sms") {
-          this.statusDialog.description = 'Message Sent Successfully'
+        if(response.status >= 200 && response.status <= 299) {
+          this.statusDialog.color = 'success'
+          this.statusDialog.title = 'Success'
+          if(this.communicationType === "sms") {
+            this.statusDialog.description = 'Message Sent Successfully'
+          } else {
+            this.statusDialog.description = 'Workflow Started Successfully'
+          }
         } else {
-          this.statusDialog.description = 'Workflow Started Successfully'
+          this.statusDialog.color = 'error'
+          this.statusDialog.title = 'Error'
+          if(this.communicationType === "sms") {
+            this.statusDialog.description = 'Failed to send Message'
+          } else {
+            this.statusDialog.description = 'Failed to start a workflow'
+          }
         }
       }).catch(err => {
         this.statusDialog.enable = true
