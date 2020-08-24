@@ -126,7 +126,7 @@
           </v-btn>
         </v-toolbar>
         <v-card-text>
-          <ihrisReport report='groups'></ihrisReport>
+          <ihrisReport report='mhero-groups'></ihrisReport>
         </v-card-text>
         <v-card-actions>
           <v-spacer />
@@ -410,7 +410,7 @@ export default {
   },
   created() {
     eventBus.$on("ihris-report-selections", (selections, reportData) => {
-      if(reportData.primaryResource === "Group") {
+      if(reportData.indexName === "group") {
         this.subscribingGroups = selections
       } else {
         this.subscribingPractitioners = selections;

@@ -1,0 +1,66 @@
+{
+  "resourceType": "Basic",
+  "id": "ihris-es-report-mhero-groups",
+  "meta": {
+    "versionId": "6",
+    "lastUpdated": "2020-04-18T14:25:58.246+03:00",
+    "source": "#9bPzqTgeJQSqHE9W",
+    "profile": [
+      "http://ihris.org/fhir/StructureDefinition/iHRISRelationship"
+    ]
+  },
+  "extension": [{
+      "url": "http://ihris.org/fhir/StructureDefinition/iHRISReportDetails",
+      "extension": [{
+          "url": "label",
+          "valueString": "Group Lists"
+        },
+        {
+          "url": "displayCheckbox",
+          "valueBoolean": true
+        },
+        {
+          "url": "name",
+          "valueString": "group"
+        }, {
+          "url": "resource",
+          "valueString": "Group"
+        },
+        {
+          "url": "http://ihris.org/fhir/StructureDefinition/iHRISReportElement",
+          "extension": [{
+            "url": "display",
+            "valueString": "Name"
+          },
+          {
+              "url": "label",
+              "valueString": "name"
+            },
+            {
+              "url": "name",
+              "valueString": "name"
+            },
+            {
+              "url": "filter",
+              "valueBoolean": true
+            },
+            {
+              "url": "dropDownFilter",
+              "valueBoolean": false
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "code": {
+    "coding": [{
+      "system": "http://ihris.org/fhir/ValueSet/ihris-resource",
+      "code": "iHRISRelationship"
+    }],
+    "text": "iHRISRelationship"
+  },
+  "subject": {
+    "reference": "StructureDefinition/iHRISPractitioner"
+  }
+}
