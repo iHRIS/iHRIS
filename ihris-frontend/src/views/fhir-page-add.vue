@@ -24,18 +24,18 @@ export default {
       fetch( "/config/page/"+page ).then(response => {
         response.json().then(data => {
           Vue.component('ihris-template', {
-            name: 'ihris-template', 
-            data: function() { 
+            name: 'ihris-template',
+            data: function() {
               return {
-                isEdit: true, 
+                isEdit: true,
                 fhirId: undefined,
                 sectionMenu: data.data.sectionMenu,
                 subFields: data.data.subFields,
                 columns: data.data.columns,
                 actions: data.data.actions
-              } 
-            }, 
-            components: { 
+              }
+            },
+            components: {
               "ihris-resource": () => import(/* webpackChunkName: "fhir-main" */ "@/components/ihris/ihris-resource" ),
               "ihris-codesystem": () => import(/* webpackChunkName: "fhir-main" */ "@/components/ihris/ihris-codesystem" ),
               "ihris-section": () => import(/* webpackChunkName: "fhir-main" */ "@/components/ihris/ihris-section" ),

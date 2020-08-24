@@ -76,6 +76,20 @@ router.post('/subscribe-contact-groups', (req, res) => {
   })
 })
 
+router.post('/add-group', (req, res) => {
+  let name = req.body.name
+  let resource = {
+    resourceType: 'Group',
+    name,
+  }
+  fhirAxios.create(resource).then(() => {
+    return res.status(201).send()
+  }).catch((err) => {
+    console.log(err);
+    return res.status(500).send()
+  })
+})
+
 router.post('/unsubscribe-contact-groups', (req, res) => {
   let subscriptionsData = req.body
   async.eachSeries(subscriptionsData.groups, (groupID, nxtSubscr) => {
