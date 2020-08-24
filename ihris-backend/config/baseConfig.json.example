@@ -28,12 +28,28 @@
       "valueString": "http://localhost:9200"
     },
     {
+      "name": "elasticsearch:username",
+      "valueString": ""
+    },
+    {
+      "name": "elasticsearch:password",
+      "valueString": ""
+    },
+    {
       "name": "elasticsearch:max_compiliation_rate",
       "valueString": "10000/1m"
     },
     {
       "name": "kibana:base",
       "valueString": "http://localhost:5601"
+    },
+    {
+      "name": "kibana:username",
+      "valueString": ""
+    },
+    {
+      "name": "kibana:password",
+      "valueString": ""
     },
     {
       "name": "logs",
