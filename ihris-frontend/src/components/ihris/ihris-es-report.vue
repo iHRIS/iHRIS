@@ -107,17 +107,27 @@ export default {
           if(!this.terms[sTerm] || this.terms[sTerm].length === 0) {
             continue;
           }
+          let sTermDet = this.reportData.filters.find((filter) => {
+            return filter.field === sTerm
+          })
+          let esFieldName
+          if(sTermDet.dataType === 'text') {
+            esFieldName = sTerm + '.keyword'
+          } else {
+            esFieldName = sTerm
+          }
           if(Array.isArray(this.terms[sTerm])) {
-            terms.terms[sTerm + '.keyword'] = []
+            terms.terms[esFieldName] = []
             for(let value of this.terms[sTerm]) {
-              terms.terms[sTerm + '.keyword'].push(value)
+              terms.terms[esFieldName].push(value)
             }
           } else {
-            terms.terms[sTerm + '.keyword'] = [this.terms[sTerm]]
+            terms.terms[esFieldName] = [this.terms[sTerm]]
           }
           body.query.bool.must.push(terms)
         }
       }
+      console.log(JSON.stringify(body,0,2));
       fetch(url, {
         method: 'POST',
         headers: {

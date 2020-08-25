@@ -1,5 +1,7 @@
 var express = require('express')
 var router = express.Router()
+const axios = require('axios')
+const URI = require('urijs');
 const nconf = require('../modules/config')
 const fhirAxios = nconf.fhirAxios
 const outcomes = require('../config/operationOutcomes')
@@ -699,19 +701,43 @@ router.get('/report/es/:report', (req, res) => {
         reportData.fieldsDetails.push([displayName, esField])
       }
     }
-    reportData.indexName = indexName
-    let template = `<ihris-es-report :key="$route.params.report" page="${req.params.report}" label="${reportName}" :reportData="reportData" :terms="terms" >`
-    for (let filter of reportData.filters) {
-      if(filter.isDropDown) {
-        template += `<ihris-search-term v-on:termChange="searchData" label="${filter.display}" expression="${filter.field}" isDropDown="${filter.isDropDown}" :reportData="reportData"></ihris-search-term>\n`
-      } else {
-        template += `<ihris-search-term v-on:termChange="searchData" label="${filter.display}" expression="${filter.field}" :reportData="reportData"></ihris-search-term>\n`
+    // populate data type of filters
+    let url = URI(nconf.get('elasticsearch:base')).segment(indexName).segment('_mapping').toString()
+    const options = {
+      method: 'GET',
+      url,
+      auth: {
+        username: nconf.get('elasticsearch:username'),
+        password: nconf.get('elasticsearch:password'),
       }
-    }
-    template += `</ihris-es-report>`
-    return res.status(200).json({
-      reportTemplate: template,
-      reportData: reportData
+    };
+    axios(options).then((mappings) => {
+      for(index in reportData.filters) {
+        let field = reportData.filters[index].field
+        if(!mappings.data[indexName].mappings.properties[field]) {
+          winston.error('Field ' + field + 'not found on elasticsearch mapping')
+          continue
+        }
+        let dataType = mappings.data[indexName].mappings.properties[field].type
+        reportData.filters[index].dataType = dataType
+      }
+      reportData.indexName = indexName
+      let template = `<ihris-es-report :key="$route.params.report" page="${req.params.report}" label="${reportName}" :reportData="reportData" :terms="terms" >`
+      for (let filter of reportData.filters) {
+        if(filter.isDropDown) {
+          template += `<ihris-search-term v-on:termChange="searchData" label="${filter.display}" expression="${filter.field}" isDropDown="${filter.isDropDown}" :reportData="reportData"></ihris-search-term>\n`
+        } else {
+          template += `<ihris-search-term v-on:termChange="searchData" label="${filter.display}" expression="${filter.field}" :reportData="reportData"></ihris-search-term>\n`
+        }
+      }
+      template += `</ihris-es-report>`
+      return res.status(200).json({
+        reportTemplate: template,
+        reportData: reportData
+      })
+    }).catch((err) => {
+      console.log(err);
+      return res.status(500).send()
     })
   })
 })
