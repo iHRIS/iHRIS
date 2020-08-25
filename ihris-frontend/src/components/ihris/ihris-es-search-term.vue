@@ -39,31 +39,35 @@ export default {
   mounted: function() {
     this.loading = true;
     if(this.isDropDown) {
-      let url = `/es/populateFilter/${this.reportData.indexName}/${this.expression}`
-    fetch(url, {
-      method: 'GET'
-    }).then(response => {
-        response
-          .json()
-          .then(data => {
-            this.loading = false;
-            for(let bucket of data) {
-              this.items.push(
-                bucket.key.value
-              )
-            }
-          })
-          .catch(err => {
-            this.loading = false;
-            this.error_message = "Unable to load results.";
-            console.log(err);
-          });
+      let sTermDet = this.reportData.filters.find((filter) => {
+        return filter.field === this.expression
       })
-      .catch(err => {
-        this.loading = false;
-        this.error_message = "Unable to load results.";
-        console.log(err);
-      });
+      let dataType = sTermDet.dataType
+      let url = `/es/populateFilter/${this.reportData.indexName}/${this.expression}?dataType=${dataType}`
+      fetch(url, {
+        method: 'GET'
+      }).then(response => {
+          response
+            .json()
+            .then(data => {
+              this.loading = false;
+              for(let bucket of data) {
+                this.items.push(
+                  bucket.key.value
+                )
+              }
+            })
+            .catch(err => {
+              this.loading = false;
+              this.error_message = "Unable to load results.";
+              console.log(err);
+            });
+        })
+        .catch(err => {
+          this.loading = false;
+          this.error_message = "Unable to load results.";
+          console.log(err);
+        });
     }
   },
   methods: {

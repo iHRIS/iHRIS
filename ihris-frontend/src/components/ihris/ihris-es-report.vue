@@ -127,7 +127,6 @@ export default {
           body.query.bool.must.push(terms)
         }
       }
-      console.log(JSON.stringify(body,0,2));
       fetch(url, {
         method: 'POST',
         headers: {
@@ -143,9 +142,6 @@ export default {
                 this.link = data.link;
                 for (let hit of data.hits.hits) {
                   let result = {}
-                  // for (let field of this.reportData.fieldsDetails) {
-                  //   result[field[1]] = hit['_source'][field[1]]
-                  // }
                   for(let field in hit['_source']) {
                     result[field] = hit['_source'][field]
                   }
