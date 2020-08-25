@@ -75,8 +75,16 @@ router.get('/populateFilter/:index/:field', (req, res) => {
 
   //get filter data type
   let url = URI(nconf.get('elasticsearch:base')).segment(indexName).segment('_mapping').toString()
-  axios.get(url).then((mappings) => {
-    let dataType = mappings[indexName].mappings.properties[field].type
+  const options = {
+    method: 'GET',
+    url,
+    auth: {
+      username: nconf.get('elasticsearch:username'),
+      password: nconf.get('elasticsearch:password'),
+    }
+  };
+  axios(options).then((mappings) => {
+    let dataType = mappings.data[indexName].mappings.properties[field].type
     if(dataType === 'text') {
       field = `${field}.keyword`
     }
@@ -100,7 +108,7 @@ router.get('/populateFilter/:index/:field', (req, res) => {
         return callback1(null, next !== false);
       },
       callback => {
-        const options = {
+        let options = {
           method: 'GET',
           url,
           auth: {
