@@ -72,51 +72,65 @@ router.post('/:index/:operation?', (req, res) => {
 router.get('/populateFilter/:index/:field', (req, res) => {
   let indexName = req.params.index
   let field = req.params.field
-  let body = {
-    size: 0,
-    aggs: {
-      uniq_values: {
-        composite: {
-          sources: [
-            { value: { terms: { field: `${field}.keyword` } } }
-          ]
+
+  //get filter data type
+  let url = URI(nconf.get('elasticsearch:base')).segment(indexName).segment('_mapping').toString()
+  axios.get(url).then((mappings) => {
+    let dataType = mappings[indexName].mappings.properties[field].type
+    if(dataType === 'text') {
+      field = `${field}.keyword`
+    }
+    let body = {
+      size: 0,
+      aggs: {
+        uniq_values: {
+          composite: {
+            sources: [
+              { value: { terms: { field: field } } }
+            ]
+          }
         }
       }
     }
-  }
-  let url = URI(nconf.get('elasticsearch:base')).segment(indexName).segment('_search').toString()
-  let next = true
-  let buckets = []
-  async.whilst(
-    callback1 => {
-      return callback1(null, next !== false);
-    },
-    callback => {
-      const options = {
-        method: 'GET',
-        url,
-        auth: {
-          username: nconf.get('elasticsearch:username'),
-          password: nconf.get('elasticsearch:password'),
-        },
-        data: body
-      };
-      next = false;
-      axios(options).then((response) => {
-        buckets = buckets.concat(response.data.aggregations.uniq_values.buckets)
-        if(response.data.aggregations.uniq_values.buckets.length > 0) {
-          body.aggs.uniq_values.composite.after = {}
-          body.aggs.uniq_values.composite.after.value = response.data.aggregations.uniq_values.after_key.value
-          next = true
-        }
-        return callback(null, next);
-      }).catch((err) => {
-        console.log(err);
-        return res.status(500).send()
-      })
-    }, () => {
-      return res.status(200).json(buckets)
-    }
-  );
+    let url = URI(nconf.get('elasticsearch:base')).segment(indexName).segment('_search').toString()
+    let next = true
+    let buckets = []
+    async.whilst(
+      callback1 => {
+        return callback1(null, next !== false);
+      },
+      callback => {
+        const options = {
+          method: 'GET',
+          url,
+          auth: {
+            username: nconf.get('elasticsearch:username'),
+            password: nconf.get('elasticsearch:password'),
+          },
+          data: body
+        };
+        next = false;
+        axios(options).then((response) => {
+          buckets = buckets.concat(response.data.aggregations.uniq_values.buckets)
+          if(response.data.aggregations.uniq_values.buckets.length > 0) {
+            body.aggs.uniq_values.composite.after = {}
+            body.aggs.uniq_values.composite.after.value = response.data.aggregations.uniq_values.after_key.value
+            next = true
+          }
+          return callback(null, next);
+        }).catch((err) => {
+          console.log(err);
+          return res.status(500).send()
+        })
+      }, () => {
+        return res.status(200).json(buckets)
+      }
+    );
+  }).catch((err) => {
+    console.log(err);
+    return res.status(500).send()
+  })
+
+
 })
 module.exports = router

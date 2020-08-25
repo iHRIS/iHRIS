@@ -21,7 +21,7 @@
       "valueString": "Basic"
     }, {
       "url": "query",
-      "valueString": "_profile=http://mHero.org/fhir/StructureDefinition/mhero-flow-run"
+      "valueString": "meta.profile=http://mHero.org/fhir/StructureDefinition/mhero-flow-run"
     }, {
       "url": "http://ihris.org/fhir/StructureDefinition/iHRISReportElement",
       "extension": [{
@@ -184,7 +184,7 @@
       },
       {
         "url": "query",
-        "valueString": "_profile=http://mHero.org/fhir/StructureDefinition/mhero-workflows"
+        "valueString": "meta.profile=http://mHero.org/fhir/StructureDefinition/mhero-workflows"
       },
       {
         "url": "http://ihris.org/fhir/StructureDefinition/iHRISReportElement",

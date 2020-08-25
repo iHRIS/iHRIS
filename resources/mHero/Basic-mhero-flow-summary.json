@@ -21,7 +21,7 @@
       "valueString": "Basic"
     }, {
       "url": "query",
-      "valueString": "_profile=http://mHero.org/fhir/StructureDefinition/mhero-workflows"
+      "valueString": "meta.profile=http://mHero.org/fhir/StructureDefinition/mhero-workflows"
     }, {
       "url": "http://ihris.org/fhir/StructureDefinition/iHRISReportElement",
       "extension": [{
@@ -33,13 +33,18 @@
       }, {
         "url": "name",
         "valueString": "extension.where(url='http://mHero.org/fhir/StructureDefinition/mhero-workflows-details').extension.where(url='name').valueString"
+      },
+      {
+        "url": "filter",
+        "valueBoolean": true
+      },
+      {
+        "url": "dropDownFilter",
+        "valueBoolean": false
       }]
     }, {
       "url": "http://ihris.org/fhir/StructureDefinition/iHRISReportElement",
       "extension": [{
-        "url": "display",
-        "valueString": "UUID"
-      }, {
         "url": "label",
         "valueString": "UUID"
       }, {
@@ -57,6 +62,14 @@
       }, {
         "url": "name",
         "valueString": "extension.where(url='http://mHero.org/fhir/StructureDefinition/mhero-workflows-details').extension.where(url='flow_type').valueString"
+      },
+      {
+        "url": "filter",
+        "valueBoolean": true
+      },
+      {
+        "url": "dropDownFilter",
+        "valueBoolean": true
       }]
     }, {
       "url": "http://ihris.org/fhir/StructureDefinition/iHRISReportElement",
@@ -69,6 +82,14 @@
       }, {
         "url": "name",
         "valueString": "extension.where(url='http://mHero.org/fhir/StructureDefinition/mhero-workflows-details').extension.where(url='archived').valueBoolean"
+      },
+      {
+        "url": "filter",
+        "valueBoolean": true
+      },
+      {
+        "url": "dropDownFilter",
+        "valueBoolean": true
       }]
     }, {
       "url": "http://ihris.org/fhir/StructureDefinition/iHRISReportElement",
