@@ -38,30 +38,38 @@ npm start
 #### ihris service file
 
 If you are running iHRIS on a Linux server, we recommend using systemd to manage the backend server.
-Here is an example of the service file.
+
+You can edit the file ihris.service in this directory and copy it to /lib/systemd/system/.  You will need to set
+the correct WorkingDirectory.
+
+After copying the file you will need to reload the daemon:
+```bash
+sudo systemctl daemon-reload
 ```
-[Unit]
-Description=iHRIS Backend
-After=network.target
 
-[Service]
-WorkingDirectory=/opt/www/ihris/ihris-backend
-ExecStart=/usr/bin/npm run start
-
-SyslogIdentifier=ihris
-
-RestartSec=10
-Restart=always
-
-[Install]
-WantedBy=multi-user.target
+To enable the service when the server restarts:
+```bash
+sudo systemctl enable ihris.service
 ```
+
 #### Run the server
-If you are using the example service file, the following commands will ensure the server restarts on failure and reboot
+This will start the service. 
+```bash
+sudo systemctl start ihris.service
 ```
-sudo systemctl start ihris 
+
+You can view the output with journalctl with either of these commands:
+```bash
+journalctl -xe
+journalctl -u ihris.service
 ```
-This will start the service. The first time you run this, you may need to reload the configuration files
+
+After making changes you can update the file with:
+```bash
+sudo systemctl restart ihris.service
 ```
-sudo systemctl enable ihris
+
+To stop the service:
+```bash
+sudo systemctl stop ihris.service
 ```

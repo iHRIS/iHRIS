@@ -1,0 +1,14 @@
+[Unit]
+Description=iHRIS Backend Service
+After=tomcat9.service
+
+[Service]
+WorkingDirectory=PATH_TO_iHRIS/ihris-backend
+ExecStart=/usr/bin/npm run start
+Restart=always
+RestartSec=10
+
+SyslogIdentifier=iHRIS
+
+[Install]
+WantedBy=multi-user.target
