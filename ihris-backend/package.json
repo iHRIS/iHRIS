@@ -5,7 +5,7 @@
   "scripts": {
     "start": "NODE_ENV=production node ./bin/www",
     "dev": "NODE_ENV=development node ./bin/www",
-    "test": "NODE_ENV=test jest"
+    "test": "NODE_ENV=test jest --testPathIgnorePatterns='resources/'"
   },
   "dependencies": {
     "async": "^3.2.0",
@@ -39,5 +39,8 @@
   },
   "devDependencies": {
     "jest": "^26.0.1"
+  },
+  "jest": {
+    "setupFile": [ "jest-setup.js" ]
   }
 }

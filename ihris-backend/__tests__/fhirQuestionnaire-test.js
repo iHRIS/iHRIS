@@ -1,5 +1,6 @@
 'use strict'
 
+const jest_setup = require('../jest-setup')
 jest.mock('axios')
 
 const DEFAULT_URL = "http://localhost:8080/hapi/fhir/"

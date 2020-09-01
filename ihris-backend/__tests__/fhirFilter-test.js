@@ -1,5 +1,6 @@
 'use strict'
 
+const jest_setup = require('../jest-setup')
 
 describe( 'Tests the FHIR Filter module', () => {
   const fhirFilter = require("../modules/fhirFilter")

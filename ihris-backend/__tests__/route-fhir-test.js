@@ -1,5 +1,6 @@
 'use strict'
 
+const jest_setup = require('../jest-setup')
 jest.mock('axios')
 
 const DEFAULT_URL = "http://localhost:8080/hapi/fhir/"
@@ -279,7 +280,7 @@ describe( 'Test FHIR routes', () => {
         }
       ]
     }
-    const MOCK_DOCUMENT = "<div><h1 id=\"testing\">Testing</h1>\n</div>"
+    const MOCK_DOCUMENT = { title: "Testing", html: "<div><h1 id=\"testing\">Testing</h1>\n</div>" }
     const MOCK_RESTRICTED_DOCUMENT = {
       "resourceType": "DocumentReference",
       "id": "page-test",
@@ -311,7 +312,7 @@ describe( 'Test FHIR routes', () => {
       appUser = TEST_USER
       return request(app).get("/DocumentReference/page-test/$html").then( (response) => {
         expect(response.statusCode).toBe( 200 )
-        expect(response.text).toEqual( MOCK_DOCUMENT )
+        expect(response.body).toEqual( MOCK_DOCUMENT )
       } )
     } )
 
@@ -331,7 +332,7 @@ describe( 'Test FHIR routes', () => {
       appUser = TEST_USER2
       return request(app).get("/DocumentReference/page-test/$html").then( (response) => {
         expect(response.statusCode).toBe( 200 )
-        expect(response.text).toEqual( MOCK_DOCUMENT )
+        expect(response.body).toEqual( MOCK_DOCUMENT )
       } )
     } )
 

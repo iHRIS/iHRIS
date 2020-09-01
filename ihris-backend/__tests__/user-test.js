@@ -1,5 +1,7 @@
 'use strict'
 
+const jest_setup = require('../jest-setup')
+
 jest.mock('axios')
 
 describe( 'User module for working with users (Person resource)', () => {

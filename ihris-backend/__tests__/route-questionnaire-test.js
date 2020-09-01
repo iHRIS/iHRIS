@@ -1,5 +1,6 @@
 'use strict'
 
+const jest_setup = require('../jest-setup')
 jest.mock('axios')
 
 const DEFAULT_URL = "http://localhost:8080/hapi/fhir/"
@@ -329,7 +330,6 @@ describe( 'Test FHIR Questionnaire middleware route', () => {
     ]
   }
 
-      /*
   describe( 'Test POST /QuestionnaireResponse', () => {
 
     test( 'test POST response', () => {
@@ -342,13 +342,14 @@ describe( 'Test FHIR Questionnaire middleware route', () => {
       }
 
       appUser = TEST_USER
+      /*
       return request(app).get("/CodeSystem").query("test=test").then( (response) => {
         expect(response.statusCode).toBe( 200 )
         expect(response.body).toEqual( MOCK_CODESYSTEM )
       } )
+      */
     } )
 
   } )
-      */
 
 } )

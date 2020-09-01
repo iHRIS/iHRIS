@@ -1,5 +1,6 @@
 'use strict'
 
+const jest_setup = require('../jest-setup')
 jest.mock('axios')
 
 const DEFAULT_URL = "http://localhost:8080/hapi/fhir/"
@@ -9,7 +10,6 @@ const route = require("../routes/config.js")
 const axios = require('axios')
 const user = require("../modules/user")
 const outcomes = require("../config/operationOutcomes")
-
 const express = require('express')
 const app = express()
 const nconf = require('../modules/config')

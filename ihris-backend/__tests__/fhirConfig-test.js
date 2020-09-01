@@ -1,5 +1,6 @@
 'use strict'
 
+const jest_setup = require('../jest-setup')
 jest.mock('fs')
 
 describe( 'converts a FHIR Parameters resource into configuration data', () => {
