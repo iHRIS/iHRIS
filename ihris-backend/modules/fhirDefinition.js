@@ -92,6 +92,20 @@ const fhirDefinition = {
           piece[copy] = ele.base[copy]
         }
       }
+
+      const min_max_copies = [ "Date", "DateTime", "Instant", "Time", "Decimal", "Integer", 
+        "PositiveInt", "UnsignedInt" ]
+      for( let copy of min_max_copies ) {
+        for( let type of [ "min", "max" ] ) {
+          let prop = type+"Value"+copy
+          if ( ele.hasOwnProperty(prop) ) {
+            piece[prop] = ele[prop]
+          } else if ( ele.base.hasOwnProperty(prop) ) {
+            piece[prop] = ele.base[prop]
+          }
+        }
+      }
+
       for ( let copy of [ "min", "max" ] ) {
         if ( ele.base.hasOwnProperty(copy) ) {
           piece["base-"+copy] = ele.base[copy]

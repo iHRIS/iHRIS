@@ -77,14 +77,41 @@ router.get('/page/:page/:type?', function(req, res) {
 
   fhirAxios.read( "Basic", page ).then ( async (resource) => {
     let pageDisplay = resource.extension.find( ext => ext.url === "http://ihris.org/fhir/StructureDefinition/ihris-page-display" )
+
     let pageResource = pageDisplay.extension.find( ext => ext.url === "resource" ).valueReference.reference
-
-
     let pageSections = resource.extension.filter( ext => ext.url === "http://ihris.org/fhir/StructureDefinition/ihris-page-section" )
-
 
     const createTemplate = async ( resource, structure ) => {
       winston.silly(JSON.stringify(structure,null,2))
+
+      let links = []
+      try {
+        let linkExts = pageDisplay.extension.filter( ext => ext.url === "link" )
+
+        for( let linkExt of linkExts ) {
+          let field, text, button, icon
+
+          let url = linkExt.extension.find( ext => ext.url === "url" ).valueUrl
+
+          try {
+            field = linkExt.extension.find( ext => ext.url === "field" ).valueString
+          } catch(err) {}
+          try {
+            text = linkExt.extension.find( ext => ext.url === "text" ).valueString
+          } catch(err) {}
+          try {
+            button = linkExt.extension.find( ext => ext.url === "button" ).valueBoolean
+          } catch(err) {}
+          try {
+            icon = linkExt.extension.find( ext => ext.url === "icon" ).valueString
+          } catch(err) {}
+
+          links.push( { url: url, field: field, text: text, button: button, icon: icon } )
+
+        }
+
+      } catch(err) {}
+
 
       let sections = {}
       let sectionMap = {}
@@ -238,6 +265,9 @@ router.get('/page/:page/:type?', function(req, res) {
           sectionMenu = sectionKeys.map( name => { return { name: name, title: sections[name].title, desc: sections[name].description, secondary: !!sections[name].resource } } )
           vueOutput += " :section-menu='sectionMenu'"
         }
+        if ( links.length > 0 ) {
+          vueOutput += " :links='links'"
+        }
         vueOutput += '><template #default=\"slotProps\">'+"\n"
 
         if ( structure[fhir].hasOwnProperty("fields") ) {
@@ -267,11 +297,18 @@ router.get('/page/:page/:type?', function(req, res) {
             let eleName = fhirDefinition.camelToKebab( fields[field].code )
             let attrs = [ "field", "sliceName", "targetProfile", "profile", "min", "max", "base-min",
               "base-max", "label", "path", "binding" ]
+            const minmax = [ "Date", "DateTime", "Instant", "Time", "Decimal", "Integer", "PositiveInt", 
+              "UnsignedInt" ]
+            for( let mm of minmax ) {
+              for( let type of [ "min", "max" ] ) {
+                attrs.push( type+"Value"+mm )
+              }
+            }
             let isArray = false
             if ( fields[field]["max"] !== "1" ) {
               isArray = true
               output += "<ihris-array :edit=\"isEdit\" fieldType=\""+eleName+"\" :slotProps=\"slotProps\""
-              let arr_attrs = [ "field", "label", "min", "max", "id", "path", "profile", "targetProfile", "sliceName" ]
+              const arr_attrs = [ "field", "label", "min", "max", "id", "path", "profile", "targetProfile", "sliceName" ]
               for ( let attr of arr_attrs ) {
                 if ( fields[field].hasOwnProperty(attr) ) {
                   output += " "+attr+"=\""+fields[field][attr]+"\""
@@ -369,7 +406,8 @@ router.get('/page/:page/:type?', function(req, res) {
         sectionMenu: sectionMenu,
         subFields: allSubFields,
         columns: allColumns,
-        actions: allActions
+        actions: allActions,
+        links: links
       } })
     }
 
@@ -434,6 +472,7 @@ router.get('/page/:page/:type?', function(req, res) {
       return res.status(200).json({ template: searchTemplate, data: { fields: search, addLink: addLink } })
     }
 
+
     if ( pageResource.startsWith( "CodeSystem" ) ) {
 
       getProperties( pageResource ).then( (resource) => {
@@ -464,6 +503,7 @@ router.get('/page/:page/:type?', function(req, res) {
 
     } else if ( pageResource.startsWith( "StructureDefinition" ) ) {
 
+      console.log("GETTING",pageResource)
       getDefinition( pageResource ).then( (resource) => {
         if ( allowed !== true ) {
           // Can't think of a reason to have this level of permissions for
@@ -489,8 +529,10 @@ router.get('/page/:page/:type?', function(req, res) {
         }
 
       } ).catch( (err) => {
+        console.log(err)
         winston.error(err)
-        return res.status( err.response.status ).json( err.response.data )
+        //return res.status( err.response.status ).json( err.response.data )
+        return res.status( 500 ).json( { error: err.message } )
       } )
 
     } else {

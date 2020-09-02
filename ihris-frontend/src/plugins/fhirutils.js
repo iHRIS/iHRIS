@@ -29,7 +29,7 @@ const fhirutils = {
       let lookup = reference
       if ( fhirutils._code_loading[lookup] ) {
         setTimeout( () => {
-          resolve( fhirutils.resource( reference ) )
+          resolve( fhirutils.resourceLookup( reference ) )
         }, 200 )
       } else if ( !fhirutils._code_cache[lookup] ) {
         fhirutils._code_loading[lookup] = true

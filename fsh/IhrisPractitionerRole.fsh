@@ -3,6 +3,7 @@ Parent:         PractitionerRole
 Id:             ihris-practitioner-role
 Title:          "iHRIS Practitioner Role"
 Description:    "iHRIS profile of Practitioner Role."
+
 * identifier 0..* MS
 * identifier ^label = "Identifier"
 * identifier.use MS
@@ -20,8 +21,12 @@ Description:    "iHRIS profile of Practitioner Role."
 * period ^label = "Period of Employment"
 * period.start 1..1 MS
 * period.start ^label = "Start Date"
+* period.start ^minValueDate = "1950-01-01"
+* period.start ^maxValueDate = "2030-01-01"
 * period.end 0..1 MS
 * period.end ^label = "End Date"
+* period.end ^minValueDate = "1950-01-01"
+* period.end ^maxValueDate = "2030-01-01"
 * practitioner 0..1 MS
 * practitioner ^label = "Health Worker"
 * code 1..1 MS

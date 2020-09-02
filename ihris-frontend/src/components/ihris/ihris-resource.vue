@@ -35,7 +35,13 @@
           </v-btn>
         </v-list-item>
         <v-divider color="white"></v-divider>
-        <v-subheader class="white--text"><h2>Sections</h2></v-subheader>
+        <v-list-item v-if="!edit && links && links.length">
+          <v-btn v-for="(link,idx) in links" :key="link.url" :text="!link.button" :to="getLinkUrl(link)" class="primary">
+            <v-icon light v-if="link.icon">{{link.icon}}</v-icon>
+            {{ linktext[idx]  }}
+          </v-btn>
+        </v-list-item>
+        <v-subheader v-if="sectionMenu" class="white--text"><h2>Sections</h2></v-subheader>
         <v-list-item v-for="section in sectionMenu" :href="'#section-'+section.name" :key="section.name">
           <v-list-item-content class="white--text" v-if="!edit || !section.secondary">
             <v-list-item-title class="text-uppercase"><h4>{{ section.title }}</h4></v-list-item-title>
@@ -52,14 +58,15 @@
 <script>
 export default {
   name: "ihris-resource",
-  props: ["title","field","fhir-id","page","profile","section-menu","edit" ],
+  props: ["title","field","fhir-id","page","profile","section-menu","edit","links" ],
   data: function() {
     return {
       fhir: {},
       source: { data: {}, path: "" },
       loading: false,
       overlay: false,
-      isEdit: false
+      isEdit: false,
+      linktext: [ ]
     }
   },
   created: function() {
@@ -70,6 +77,7 @@ export default {
         response.json().then(data => {
           //this.$store.commit('setCurrentResource', data)
           this.source = { data: data, path: this.field }
+          this.setLinkText()
           this.loading = false
         }).catch(err=> {
           console.log(this.field,this.fhirId,err)
@@ -163,6 +171,44 @@ export default {
     */
   },
   methods: {
+    getLinkField: function(field) {
+      let content = this.$fhirpath.evaluate( this.source.data, field )
+      if ( content ) {
+        return content[0]
+      } else {
+        return false
+      }
+    },
+    getLinkUrl: function(link) {
+      let field
+      if ( link.field ) {
+        field = this.getLinkField(link.field)
+      }
+      if ( field ) {
+        if ( field.includes('/') ) {
+          let ref = field.split('/')
+          field = ref[1]
+        }
+        return link.url.replace("FIELD",field)
+      } else {
+        return link.url 
+      }
+    },
+    setLinkText: function() {
+      for ( let idx in this.links ) {
+        let link = this.links[idx]
+        if ( link.text ) {
+          this.linktext[idx] = link.text
+        } else if ( link.field ) {
+          let field = this.getLinkField(link.field)
+          if ( field ) {
+            this.$fhirutils.lookup(field).then( display => {
+              this.$set( this.linktext, idx, display )
+            } )
+          }
+        }
+      }
+    },
     processFHIR: function() {
       this.overlay = true
       this.loading = true
