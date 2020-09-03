@@ -39,7 +39,7 @@ describe( 'Test FHIR Questionnaire processing', () => {
     const MOCK_QUESTIONNAIRE_RESPONSE = require("./resources/QuestionnaireResponse-ihris-ethiopia-test")
     let response = { ...MOCK_QUESTIONNAIRE_RESPONSE }
     questionnaire.setQuestionnairePaths( response )
-    console.log(JSON.stringify(response,null,2))
+    //console.log(JSON.stringify(response,null,2))
     //const RESPONSE_PROCESSED = require("./resources/QuestionnaireResponse-ihris-test-processed")
     //expect(response).toEqual(RESPONSE_PROCESSED)
     //console.log("RESP",JSON.stringify(response,null,2))

@@ -12,7 +12,7 @@ module.exports = {
     {
       "linkId": "Practitioner",
       "definition": "http://ihris.org/fhir/StructureDefinition/ihris-personal-information",
-      "text": "Health Worker|Primary Person details",
+      "text": "Basic Information|Basic health worker details",
       "type": "group",
       "item": [
         {
@@ -28,67 +28,75 @@ module.exports = {
               "type": "choice",
               "answerValueSet": "http://ihris.org/fhir/ValueSet/ihris-ethiopia-prefix-valueset",
               "required": false,
-              "repeats": true
+              "repeats": false
             },
             {
               "linkId": "Practitioner.name[0].given[0]",
               "definition": "http://ihris.org/fhir/StructureDefinition/ihris-personal-information#Practitioner.name.given",
-              "text": "Last Name",
+              "text": "First Name",
               "type": "string",
               "required": true,
-              "repeats": true
+              "repeats": false
+            },
+            {
+              "linkId": "Practitioner.name[0].use",
+              "definition": "http://ihris.org/fhir/StructureDefinition/ihris-personal-information#Practitioner.name.use",
+              "text": "Use",
+              "type": "choice",
+              "required": true,
+              "repeats": false,
+              "readOnly": true,
+              "answerOption": [
+                {
+                  "valueCoding": {
+                    "code": "official",
+                    "system": "http://hl7.org/fhir/name-use"
+                  },
+                  "initialSelected": true
+                }
+              ]
             }
           ]
         },
         {
-          "linkId": "Practitioner.extension[0]",
-          "definition": "http://ihris.org/fhir/StructureDefinition/ihris-personal-information#Practitioner.extension:familyNames",
-          "text": "Family Names",
-          "type": "group",
+          "linkId": "Practitioner.extension[0].extension[0]",
+          "definition": "http://ihris.org/fhir/StructureDefinition/ihris-personal-information#Practitioner.extension:familyNames.extension:fathers.value[x]:valueString",
+          "text": "Father's Name",
+          "type": "string",
           "required": true,
-          "repeats": false,
-          "item": [
-            {
-              "linkId": "Practitioner.extension[0].extension[0]",
-              "definition": "http://ihris.org/fhir/StructureDefinition/ihris-personal-information#Practitioner.extension:familyNames.extension:fathers.value[x]:valueString",
-              "text": "Father's Name",
-              "type": "string",
-              "required": true,
-              "repeats": false
-            },
-            {
-              "linkId": "Practitioner.extension[0].extension[1]",
-              "definition": "http://ihris.org/fhir/StructureDefinition/ihris-personal-information#Practitioner.extension:familyNames.extension:fathersalternativelanguage.value[x]:valueString",
-              "text": "Father's Name Alternative Language",
-              "type": "string",
-              "required": true,
-              "repeats": false
-            },
-            {
-              "linkId": "Practitioner.extension[0].extension[2]",
-              "definition": "http://ihris.org/fhir/StructureDefinition/ihris-personal-information#Practitioner.extension:familyNames.extension:grandfatherslastname.value[x]:valueString",
-              "text": "Grandfather's Lastname",
-              "type": "string",
-              "required": true,
-              "repeats": false
-            },
-            {
-              "linkId": "Practitioner.extension[0].extension[3]",
-              "definition": "http://ihris.org/fhir/StructureDefinition/ihris-personal-information#Practitioner.extension:familyNames.extension:grandfathersalternativelanguage.value[x]:valueString",
-              "text": "Grand Father's Name Alternative Language",
-              "type": "string",
-              "required": true,
-              "repeats": false
-            },
-            {
-              "linkId": "Practitioner.extension[0].extension[4]",
-              "definition": "http://ihris.org/fhir/StructureDefinition/ihris-personal-information#Practitioner.extension:familyNames.extension:mothers.value[x]:valueString",
-              "text": "Mother's Name",
-              "type": "string",
-              "required": true,
-              "repeats": false
-            }
-          ]
+          "repeats": false
+        },
+        {
+          "linkId": "Practitioner.extension[0].extension[1]",
+          "definition": "http://ihris.org/fhir/StructureDefinition/ihris-personal-information#Practitioner.extension:familyNames.extension:fathersalternativelanguage.value[x]:valueString",
+          "text": "Father's Name Alternative Language",
+          "type": "string",
+          "required": true,
+          "repeats": false
+        },
+        {
+          "linkId": "Practitioner.extension[0].extension[2]",
+          "definition": "http://ihris.org/fhir/StructureDefinition/ihris-personal-information#Practitioner.extension:familyNames.extension:grandfatherslastname.value[x]:valueString",
+          "text": "Grandfather's Lastname",
+          "type": "string",
+          "required": true,
+          "repeats": false
+        },
+        {
+          "linkId": "Practitioner.extension[0].extension[3]",
+          "definition": "http://ihris.org/fhir/StructureDefinition/ihris-personal-information#Practitioner.extension:familyNames.extension:grandfathersalternativelanguage.value[x]:valueString",
+          "text": "Grand Father's Name Alternative Language",
+          "type": "string",
+          "required": true,
+          "repeats": false
+        },
+        {
+          "linkId": "Practitioner.extension[0].extension[4]",
+          "definition": "http://ihris.org/fhir/StructureDefinition/ihris-personal-information#Practitioner.extension:familyNames.extension:mothers.value[x]:valueString",
+          "text": "Mother's Name",
+          "type": "string",
+          "required": true,
+          "repeats": false
         },
         {
           "linkId": "Practitioner.extension[1]",
@@ -178,6 +186,14 @@ module.exports = {
                   "type": "string",
                   "required": false,
                   "repeats": false
+                },
+                {
+                  "linkId": "Practitioner.identifier[0].system",
+                  "definition": "http://ihris.org/fhir/StructureDefinition/ihris-personal-information#Practitioner.identifier.system",
+                  "text": "System",
+                  "type": "string",
+                  "repeats": false,
+                  "required": false
                 }
               ]
             },
@@ -212,6 +228,14 @@ module.exports = {
                   "type": "string",
                   "required": false,
                   "repeats": false
+                },
+                {
+                  "linkId": "Practitioner.identifier[1].system",
+                  "definition": "http://ihris.org/fhir/StructureDefinition/ihris-personal-information#Practitioner.identifier.system",
+                  "text": "System",
+                  "type": "string",
+                  "repeats": false,
+                  "required": false
                 }
               ]
             },
@@ -246,6 +270,14 @@ module.exports = {
                   "type": "string",
                   "required": false,
                   "repeats": false
+                },
+                {
+                  "linkId": "Practitioner.identifier[2].system",
+                  "definition": "http://ihris.org/fhir/StructureDefinition/ihris-personal-information#Practitioner.identifier.system",
+                  "text": "System",
+                  "type": "string",
+                  "repeats": false,
+                  "required": false
                 }
               ]
             },
@@ -280,6 +312,14 @@ module.exports = {
                   "type": "string",
                   "required": false,
                   "repeats": false
+                },
+                {
+                  "linkId": "Practitioner.identifier[3].system",
+                  "definition": "http://ihris.org/fhir/StructureDefinition/ihris-personal-information#Practitioner.identifier.system",
+                  "text": "System",
+                  "type": "string",
+                  "repeats": false,
+                  "required": false
                 }
               ]
             },
@@ -314,6 +354,14 @@ module.exports = {
                   "type": "string",
                   "required": false,
                   "repeats": false
+                },
+                {
+                  "linkId": "Practitioner.identifier[4].system",
+                  "definition": "http://ihris.org/fhir/StructureDefinition/ihris-personal-information#Practitioner.identifier.system",
+                  "text": "System",
+                  "type": "string",
+                  "repeats": false,
+                  "required": false
                 }
               ]
             },
@@ -348,6 +396,14 @@ module.exports = {
                   "type": "string",
                   "required": false,
                   "repeats": false
+                },
+                {
+                  "linkId": "Practitioner.identifier[5].system",
+                  "definition": "http://ihris.org/fhir/StructureDefinition/ihris-personal-information#Practitioner.identifier.system",
+                  "text": "System",
+                  "type": "string",
+                  "repeats": false,
+                  "required": false
                 }
               ]
             }
@@ -489,12 +545,10 @@ module.exports = {
           "type": "group",
           "item": [
             {
-              "linkId": "Practitioner:educationalMajor",
+              "linkId": "__Practitioner:educationalMajor",
               "definition": "http://ihris.org/fhir/StructureDefinition/ihris-personal-information#Practitioner.extension:educationalMajor",
               "text": "Education Details|Education major information",
               "type": "group",
-              "required": false,
-              "repeats": true,
               "item": [
                 {
                   "linkId": "Practitioner.extension[4]",
@@ -508,7 +562,7 @@ module.exports = {
               ]
             },
             {
-              "linkId": "Practitioner:professionalLicenseCategory",
+              "linkId": "__Practitioner:professionalLicenseCategory",
               "definition": "http://ihris.org/fhir/StructureDefinition/ihris-personal-information#Practitioner.extension:professionalLicenseCategory",
               "text": "License Details|Professional license category",
               "type": "group",
@@ -524,7 +578,7 @@ module.exports = {
               ]
             },
             {
-              "linkId": "Practitioner:specialTraining",
+              "linkId": "__Practitioner:specialTraining",
               "definition": "http://ihris.org/fhir/StructureDefinition/ihris-personal-information#Practitioner.extension:specialTraining",
               "text": "Training Details|Special training information",
               "type": "group",
@@ -573,13 +627,29 @@ module.exports = {
               "repeats": true
             }
           ]
+        },
+        {
+          "linkId": "__Practitioner:photo",
+          "definition": "http://ihris.org/fhir/StructureDefinition/ihris-personal-information#Practitioner.photo",
+          "text": "Photo|Person's Passport Photo",
+          "type": "group",
+          "item": [
+            {
+              "linkId": "Practitioner.extension[9]",
+              "definition": "http://ihris.org/fhir/StructureDefinition/ihris-personal-information#Practitioner.photo",
+              "text": "Photo",
+              "type": "attachment",
+              "required": false,
+              "repeats": false
+            }
+          ]
         }
       ]
     },
     {
       "linkId": "PractitionerRole",
       "definition": "http://ihris.org/fhir/StructureDefinition/ihris-job-description",
-      "text": "Position|Position the person holds",
+      "text": "Position Informatiom|Health worker position informatiom",
       "type": "group",
       "item": [
         {
@@ -657,6 +727,21 @@ module.exports = {
           "type": "text",
           "required": true,
           "repeats": false
+        },
+        {
+          "linkId": "PractitionerRole.practitioner",
+          "definition": "http://ihris.org/fhir/StructureDefinition/ihris-job-description#PractitionerRole.practitioner",
+          "text": "Practitioner",
+          "type": "string",
+          "required": true,
+          "repeats": false,
+          "readOnly": true,
+          "answerOption": [
+            {
+              "valueString": "__REPLACE__Practitioner",
+              "initialSelected": true
+            }
+          ]
         }
       ]
     }

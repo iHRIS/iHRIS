@@ -5,7 +5,7 @@ module.exports = {
   "item": [
     {
       "linkId": "Practitioner",
-      "text": "Health Worker",
+      "text": "Basic Information",
       "item": [
         {
           "linkId": "Practitioner.name[0]",
@@ -17,15 +17,82 @@ module.exports = {
                 {
                   "valueCoding": {
                     "system": "http://ihris.org/fhir/CodeSystem/ihris-ethiopia-pefix-codesystem",
-                    "code": "dr",
-                    "display": "Dr"
+                    "code": "mr",
+                    "display": "Mr"
                   }
                 }
               ]
             },
             {
               "linkId": "Practitioner.name[0].given[0]",
-              "answer": [{ "valueString": "Peter" }]
+              "answer": [
+                {
+                  "valueString": "Tom"
+                }
+              ]
+            },
+            {
+              "linkId": "Practitioner.name[0].use",
+              "answer": [
+                {
+                  "valueCoding": {
+                    "system": "http://hl7.org/fhir/name-use",
+                    "code": "official"
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "linkId": "Practitioner.extension[0].extension[0]",
+          "answer": [
+            {
+              "valueString": "Johns"
+            }
+          ]
+        },
+        {
+          "linkId": "Practitioner.extension[0].extension[1]",
+          "answer": [
+            {
+              "valueString": "asF"
+            }
+          ]
+        },
+        {
+          "linkId": "Practitioner.extension[0].extension[2]",
+          "answer": [
+            {
+              "valueString": ""
+            }
+          ]
+        },
+        {
+          "linkId": "Practitioner.extension[0].extension[3]",
+          "answer": [
+            {
+              "valueString": ""
+            }
+          ]
+        },
+        {
+          "linkId": "Practitioner.extension[0].extension[4]",
+          "answer": [
+            {
+              "valueString": "dfg"
+            }
+          ]
+        },
+        {
+          "linkId": "Practitioner.extension[1]",
+          "answer": [
+            {
+              "valueCoding": {
+                "code": "UG",
+                "display": "Uganda",
+                "system": "urn:iso:std:iso:3166"
+              }
             }
           ]
         },
@@ -33,10 +100,6 @@ module.exports = {
           "linkId": "__Practitioner:demographic",
           "text": "Demographic Information",
           "item": [
-            {
-              "linkId": "Practitioner.birthDate",
-              "answer": [{ "valueDate": "1990-06-01" }]
-            },
             {
               "linkId": "Practitioner.gender",
               "answer": [
@@ -58,6 +121,14 @@ module.exports = {
                     "code": "M",
                     "display": "Married"
                   }
+                }
+              ]
+            },
+            {
+              "linkId": "Practitioner.birthDate",
+              "answer": [
+                {
+                  "valueDate": "2020-01-01"
                 }
               ]
             }
@@ -84,7 +155,19 @@ module.exports = {
                 },
                 {
                   "linkId": "Practitioner.identifier[0].value",
-                  "answer": [{ "valueString": "451267" }]
+                  "answer": [
+                    {
+                      "valueString": "DGFSG"
+                    }
+                  ]
+                },
+                {
+                  "linkId": "Practitioner.identifier[0].system",
+                  "answer": [
+                    {
+                      "valueString": "DSGSF"
+                    }
+                  ]
                 }
               ]
             },
@@ -105,7 +188,19 @@ module.exports = {
                 },
                 {
                   "linkId": "Practitioner.identifier[1].value",
-                  "answer": [{ "valueString": "327ui0" }]
+                  "answer": [
+                    {
+                      "valueString": "ZDG"
+                    }
+                  ]
+                },
+                {
+                  "linkId": "Practitioner.identifier[1].system",
+                  "answer": [
+                    {
+                      "valueString": "zxcgfx"
+                    }
+                  ]
                 }
               ]
             },
@@ -126,7 +221,19 @@ module.exports = {
                 },
                 {
                   "linkId": "Practitioner.identifier[2].value",
-                  "answer": [{ "valueString": "45362789" }]
+                  "answer": [
+                    {
+                      "valueString": ""
+                    }
+                  ]
+                },
+                {
+                  "linkId": "Practitioner.identifier[2].system",
+                  "answer": [
+                    {
+                      "valueString": ""
+                    }
+                  ]
                 }
               ]
             },
@@ -147,7 +254,19 @@ module.exports = {
                 },
                 {
                   "linkId": "Practitioner.identifier[3].value",
-                  "answer": [{ "valueString": "" }]
+                  "answer": [
+                    {
+                      "valueString": "zxcf"
+                    }
+                  ]
+                },
+                {
+                  "linkId": "Practitioner.identifier[3].system",
+                  "answer": [
+                    {
+                      "valueString": "zxfb"
+                    }
+                  ]
                 }
               ]
             },
@@ -168,7 +287,19 @@ module.exports = {
                 },
                 {
                   "linkId": "Practitioner.identifier[4].value",
-                  "answer": [{ "valueString": "" }]
+                  "answer": [
+                    {
+                      "valueString": ""
+                    }
+                  ]
+                },
+                {
+                  "linkId": "Practitioner.identifier[4].system",
+                  "answer": [
+                    {
+                      "valueString": ""
+                    }
+                  ]
                 }
               ]
             },
@@ -189,7 +320,19 @@ module.exports = {
                 },
                 {
                   "linkId": "Practitioner.identifier[5].value",
-                  "answer": [{ "valueString": "" }]
+                  "answer": [
+                    {
+                      "valueString": ""
+                    }
+                  ]
+                },
+                {
+                  "linkId": "Practitioner.identifier[5].system",
+                  "answer": [
+                    {
+                      "valueString": ""
+                    }
+                  ]
                 }
               ]
             }
@@ -227,7 +370,11 @@ module.exports = {
                 },
                 {
                   "linkId": "Practitioner.telecom[0].value",
-                  "answer": [{ "valueString": "0772200221" }]
+                  "answer": [
+                    {
+                      "valueString": "9193139100"
+                    }
+                  ]
                 }
               ]
             },
@@ -259,7 +406,11 @@ module.exports = {
                 },
                 {
                   "linkId": "Practitioner.telecom[1].value",
-                  "answer": [{ "valueString": "prwangohe@gmail.com" }]
+                  "answer": [
+                    {
+                      "valueString": "dacciavatti@intrahealth.org"
+                    }
+                  ]
                 }
               ]
             }
@@ -274,9 +425,9 @@ module.exports = {
               "answer": [
                 {
                   "valueCoding": {
+                    "system": "http://ihris.org/fhir/CodeSystem/ihris-ethiopia-language",
                     "code": "en",
-                    "display": "English",
-                    "system": "urn:ietf:bcp:47"
+                    "display": "English"
                   }
                 }
               ]
@@ -288,44 +439,6 @@ module.exports = {
           "text": "Education Details",
           "item": [
             {
-              "linkId": "Practitioner:professionalLicenseCategory",
-              "text": "License Details",
-              "item": [
-                {
-                  "linkId": "Practitioner.extension[5]",
-                  "answer": [{ "valueString": "" }]
-                }
-              ]
-            },
-            {
-              "linkId": "Practitioner:specialTraining",
-              "text": "Training Details",
-              "item": [
-                {
-                  "linkId": "Practitioner.extension[6]",
-                  "answer": [{ "valueString": "" }]
-                }
-              ]
-            },
-            {
-              "linkId": "Practitioner:category",
-              "text": "Category Details",
-              "item": [
-                {
-                  "linkId": "Practitioner.extension[7]",
-                  "answer": [
-                    {
-                      "valueCoding": {
-                        "system": "http://ihris.org/fhir/CodeSystem/ihris-category-codesystem",
-                        "code": "administrative",
-                        "display": "Administrative"
-                      }
-                    }
-                  ]
-                }
-              ]
-            },
-            {
               "linkId": "Practitioner:educationalMajor",
               "text": "Education Details",
               "item": [
@@ -335,8 +448,54 @@ module.exports = {
                     {
                       "valueCoding": {
                         "system": "http://ihris.org/fhir/CodeSystem/ihris-educational-major-codesystem",
-                        "code": "emergencyMedicalTech",
-                        "display": "Emergency Medical Tech"
+                        "code": "medicine",
+                        "display": "Medicine"
+                      }
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "linkId": "Practitioner:professionalLicenseCategory",
+              "text": "License Details",
+              "item": [
+                {
+                  "linkId": "Practitioner.extension[5]",
+                  "answer": [
+                    {
+                      "valueString": "gzxfGxf"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "linkId": "Practitioner:specialTraining",
+              "text": "Training Details",
+              "item": [
+                {
+                  "linkId": "Practitioner.extension[6]",
+                  "answer": [
+                    {
+                      "valueString": "sadgasf"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "linkId": "Practitioner:category",
+              "text": "Category Details",
+              "item": [
+                {
+                  "linkId": "Practitioner.extension[8]",
+                  "answer": [
+                    {
+                      "valueCoding": {
+                        "system": "http://ihris.org/fhir/CodeSystem/ihris-category-codesystem",
+                        "code": "administrative",
+                        "display": "Administrative"
                       }
                     }
                   ]
@@ -351,51 +510,25 @@ module.exports = {
           "item": []
         },
         {
-          "linkId": "Practitioner.extension[0]",
-          "item": [
-            {
-              "linkId": "Practitioner.extension[0].extension[0]",
-              "answer": [{ "valueString": "Rwangohe" }]
-            },
-            {
-              "linkId": "Practitioner.extension[0].extension[1]",
-              "answer": [{ "valueString": "" }]
-            },
-            {
-              "linkId": "Practitioner.extension[0].extension[2]",
-              "answer": [{ "valueString": "" }]
-            },
-            {
-              "linkId": "Practitioner.extension[0].extension[3]",
-              "answer": [{ "valueString": "" }]
-            },
-            {
-              "linkId": "Practitioner.extension[0].extension[4]",
-              "answer": [{ "valueString": "" }]
-            }
-          ]
-        },
-        {
-          "linkId": "Practitioner.extension[1]",
-          "answer": [
-            {
-              "valueCoding": {
-                "code": "ET",
-                "display": "Ethiopia",
-                "system": "urn:iso:std:iso:3166"
-              }
-            }
-          ]
+          "linkId": "__Practitioner:photo",
+          "text": "Photo",
+          "item": []
         },
         {
           "linkId": "Practitioner.extension[2]",
-          "answer": [{ "valueReference": { "reference": "" } }]
+          "answer": [
+            {
+              "valueReference": {
+                "reference": "Location/3206"
+              }
+            }
+          ]
         }
       ]
     },
     {
       "linkId": "PractitionerRole",
-      "text": "Position",
+      "text": "Position Informatiom",
       "item": [
         {
           "linkId": "PractitionerRole.code",
@@ -403,21 +536,17 @@ module.exports = {
             {
               "valueCoding": {
                 "system": "http://ihris.org/fhir/CodeSystem/ihris-job-ethiopia",
-                "code": "PHPSIV",
-                "display": "Public Health Professional Specialist IV",
+                "code": "CHOIV",
+                "display": "Community Health Organization (HO) IV",
                 "designation": [
                   {
                     "language": "urn:ietf:bcp:47#am",
-                    "value": "ፐብሊክ ሄልዝ ፕሮፌሽናል ስፔሻሊሰት IV"
+                    "value": "ህብረተሰብ ጤና አጠባበቅ (HO) IV"
                   }
                 ]
               }
             }
           ]
-        },
-        {
-          "linkId": "PractitionerRole.location",
-          "answer": [{ "valueReference": { "reference": "" } }]
         },
         {
           "linkId": "PractitionerRole.extension[0]",
@@ -449,23 +578,53 @@ module.exports = {
             {
               "valueCoding": {
                 "system": "http://ihris.org/fhir/CodeSystem/ihris-job-type-codesystem",
-                "code": "newHire",
-                "display": "New Hire"
+                "code": "redeployment",
+                "display": "Redeployment"
+              }
+            }
+          ]
+        },
+        {
+          "linkId": "PractitionerRole.practitioner",
+          "answer": [
+            {
+              "valueString": "__REPLACE__Practitioner"
+            }
+          ]
+        },
+        {
+          "linkId": "PractitionerRole.location",
+          "answer": [
+            {
+              "valueReference": {
+                "reference": "Location/3206"
               }
             }
           ]
         },
         {
           "linkId": "PractitionerRole.extension[3]",
-          "answer": [{ "valueDate": "2018-01-01" }]
+          "answer": [
+            {
+              "valueDate": "2020-01-01"
+            }
+          ]
         },
         {
           "linkId": "PractitionerRole.period.start",
-          "answer": [{ "valueDate": "2018-01-01" }]
+          "answer": [
+            {
+              "valueDate": "2020-01-01"
+            }
+          ]
         },
         {
           "linkId": "PractitionerRole.period.end",
-          "answer": [{ "valueDate": null }]
+          "answer": [
+            {
+              "valueDate": null
+            }
+          ]
         }
       ]
     }

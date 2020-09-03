@@ -160,6 +160,15 @@ const fhirQuestionnaire = {
         arrayIdx = false
       }
       if ( field.hasOwnProperty("url") ) {
+
+        if ( !current.hasOwnProperty( lastElement ) ) {
+          if ( arrayIdx !== false ) {
+            current[lastElement] = []
+          } else {
+            current[lastElement] = {}
+          }
+        }
+
         if ( arrayIdx !== false ) {
           if ( !current[lastElement][arrayIdx] ) {
             current[lastElement][arrayIdx] = {}
@@ -168,6 +177,7 @@ const fhirQuestionnaire = {
         } else {
           current[lastElement].url = field.url
         }
+
       } else if ( typeof field.answer === 'string' && field.answer.startsWith("__REPLACE__") ) {
         let reference = field.answer.substring(11)
         if ( entries.hasOwnProperty(reference) ) {
@@ -177,13 +187,13 @@ const fhirQuestionnaire = {
         if ( !current.hasOwnProperty( lastElement ) ) {
           if ( arrayIdx !== false ) {
             if ( Array.isArray( field.answer ) ) {
-              current[lastElement] = field.answer
+              current[lastElement] = field.answer 
             } else {
               current[lastElement] = []
-              current[lastElement][arrayIdx] = field.answer
+              current[lastElement][arrayIdx] = field.answer || ""
             }
           } else {
-            current[lastElement] = field.answer
+            current[lastElement] = field.answer || ""
           }
         } else {
           if ( arrayIdx !== false ) {
@@ -191,18 +201,33 @@ const fhirQuestionnaire = {
               if ( Array.isArray( current[lastElement] ) && current[lastElement].length > 0 ) {
                 current[lastElement] = current[lastElement].concat( field.answer )
               } else {
-                current[lastElement] = field.answer
+                current[lastElement] = field.answer 
               }
             } else {
-              current[lastElement][arrayIdx] = field.answer
+              current[lastElement][arrayIdx] = field.answer || ""
             }
           } else {
-            current[lastElement] = field.answer
+            current[lastElement] = field.answer || ""
           }
         }
       }
     }
     let bundleEntries = []
+    const isObject = (obj) => {
+      return (!!obj) && (obj.constructor === Object)
+    }
+    const recursiveFilter = (filterObj) => {
+      for( let key of Object.keys( filterObj ) ) {
+        if ( isObject( filterObj[key] ) ) {
+          recursiveFilter( filterObj[key] )
+        } else if ( Array.isArray( filterObj[key] ) ) {
+          filterObj[key] = filterObj[key].filter( ele => ele !== null )
+        }
+      }
+    }
+
+    recursiveFilter( entries )
+
     for( let entry of Object.keys(entries) ) {
       bundleEntries.push( entries[entry] )
     }
