@@ -78,9 +78,9 @@ router.post("/QuestionnaireResponse", (req, res, next) => {
         }
         next()
       } ).catch( (err) => {
-        winston.error(err)
-        winston.error(JSON.stringify(err.response.data,null,2))
-        return res.status( err.response.status ).json( err.response.data )
+        winston.error(err.message)
+        //return res.status( err.response.status ).json( err.response.data )
+        return res.status( 400 ).json( { err: err.message } )
       } )
 
     } ).catch( (err) => {
