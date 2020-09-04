@@ -79,6 +79,15 @@ router.get('/page/:page/:type?', function(req, res) {
     let pageDisplay = resource.extension.find( ext => ext.url === "http://ihris.org/fhir/StructureDefinition/ihris-page-display" )
 
     let pageResource = pageDisplay.extension.find( ext => ext.url === "resource" ).valueReference.reference
+    let pageFields = {}
+    try {
+      pageDisplay.extension.filter( ext => ext.url === "field" ).map( ext => {
+        let path = ext.extension.find( subext => subext.url === "path" ).valueString
+        let type = ext.extension.find( subext => subext.url === "type" ).valueString
+        pageFields[path] = type
+      } )
+    } catch(err) {}
+
     let pageSections = resource.extension.filter( ext => ext.url === "http://ihris.org/fhir/StructureDefinition/ihris-page-section" )
 
     const createTemplate = async ( resource, structure ) => {
@@ -319,6 +328,10 @@ router.get('/page/:page/:type?', function(req, res) {
               attrs.unshift("id")
             }
             output += "<fhir-"+eleName +" :slotProps=\"slotProps\" :edit=\"isEdit\""
+            console.log("CHECKING",pageFields,fields[field].path)
+            if ( pageFields.hasOwnProperty(fields[field].path) ) {
+              output += " displayType=\""+ pageFields[ fields[field].path ] +"\""
+            }
             for( let attr of attrs ) {
               if ( fields[field].hasOwnProperty(attr) ) {
                 output += " "+attr+"=\""+fields[field][attr]+"\""
@@ -506,7 +519,6 @@ router.get('/page/:page/:type?', function(req, res) {
 
     } else if ( pageResource.startsWith( "StructureDefinition" ) ) {
 
-      console.log("GETTING",pageResource)
       getDefinition( pageResource ).then( (resource) => {
         if ( allowed !== true ) {
           // Can't think of a reason to have this level of permissions for

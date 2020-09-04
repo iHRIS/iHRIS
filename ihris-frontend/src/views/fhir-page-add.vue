@@ -32,7 +32,8 @@ export default {
                 sectionMenu: data.data.sectionMenu,
                 subFields: data.data.subFields,
                 columns: data.data.columns,
-                actions: data.data.actions
+                actions: data.data.actions,
+                links: data.data.links
               }
             },
             components: {
