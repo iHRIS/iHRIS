@@ -16,11 +16,11 @@
             "code": "1.2.840.10065.1.12.1.14"
           }
         ],
-        "when": "2020-08-24T18:24:10.119Z",
+        "when": "2020-09-04T19:15:11.644Z",
         "who": {
           "reference": "http://ihris.org/fhir/Organization/ihris"
         },
-        "data": "R1AzhiiCqZFid8TzX3GjRoHpxl4KxjDxP/XmN51/3eZq6zcpOc8Xopf9RJ6smCZVb3ZMJG8/i6Hgrqf/oiZvxyfLpB16S5Qd3rpkdKiM73BHjkpKLXYn+tt9+cP0rnScc+Huxsq9l5HMLaS/SbL/11Zy3xQMeCUupxp3DL+PZ6U="
+        "data": "0CW/euaqD4fCBKZqpmCT4motMd2Yh1NtgkfNvmNF8VjhNqKWhJ0rvAZFfP+jLdQvLd7byLWJ0CvsPq11YQOef6ChL29k34JlYWdVCgh9uGViSE+RVnEmsv7003z0B1LoIBHWnc/Vd9gxwKquiMmjtslGLWF3OQUsOzFQ7kReLi4="
       }
     },
     {
@@ -195,7 +195,7 @@
           "valueString": "Reports"
         },
         {
-          "name": "site:nav:menu:mhero:menu:message:url",
+          "name": "site:nav:menu:mhero:menu:reports:url",
           "valueString": "/page/mhero-reports"
         },
         {
@@ -265,6 +265,22 @@
         {
           "name": "workflow:questionnaire:promotion:url",
           "valueString": "http://ihris.org/fhir/Questionnaire/ihris-promotion"
+        },
+        {
+          "name": "defaults:components:date-time:minValueDateTime",
+          "valueString": "1920-01-01"
+        },
+        {
+          "name": "defaults:components:date-time:maxValueDateTime",
+          "valueString": "2030-01-01"
+        },
+        {
+          "name": "defaults:components:date:minValueDate",
+          "valueString": "1920-01-01"
+        },
+        {
+          "name": "defaults:components:date:maxValueDate",
+          "valueString": "2030-01-01"
         }
       ]
     },

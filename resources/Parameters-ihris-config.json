@@ -265,6 +265,22 @@
         {
           "name": "workflow:questionnaire:promotion:url",
           "valueString": "http://ihris.org/fhir/Questionnaire/ihris-promotion"
+        },
+        {
+          "name": "defaults:components:date-time:minValueDateTime",
+          "valueString": "1920-01-01"
+        },
+        {
+          "name": "defaults:components:date-time:maxValueDateTime",
+          "valueString": "2030-01-01"
+        },
+        {
+          "name": "defaults:components:date:minValueDate",
+          "valueString": "1920-01-01"
+        },
+        {
+          "name": "defaults:components:date:maxValueDate",
+          "valueString": "2030-01-01"
         }
       ]
     },

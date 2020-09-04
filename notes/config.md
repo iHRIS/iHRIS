@@ -84,6 +84,11 @@ IHRIS_FHIR__BASE=http://locahost:8080/hapi/fhir
     * text = Text to display
     * to = vue route (e.g. /static/page-about
     * href = external link
+* defaults
+ * components
+  * [type] (e.g. date-time)
+   * minValue[x] (e.g. minValueDateTime) = "value"
+   * maxValue[x] (e.g. maxValueDateTime) = "value"
 * shortname
  * [Resource]
   * fhirpath (single fhirpath for displaying for this resource)

@@ -26,8 +26,8 @@
           color="secondary"
           :landscape="$vuetify.breakpoint.smAndUp"
           v-model="value"
-          :max="new Date().toISOString().substr(0,10)"
-          min="1920-01-01"
+          :max="maxValueDateTime"
+          :min="minValueDateTime"
           @change="save"
         ></v-date-picker>
       </v-menu>
@@ -44,7 +44,7 @@
 <script>
 export default {
   name: "fhir-date-time",
-  props: ["field","min","max","base-min","base-max", "label", "slotProps", "path", "edit","sliceName"],
+  props: ["field","min","max","base-min","base-max", "label", "slotProps", "path", "edit","sliceName", "minValueDateTime", "maxValueDateTime"],
   data: function() {
     return {
       value: null,

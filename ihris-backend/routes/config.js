@@ -322,6 +322,9 @@ router.get('/page/:page/:type?', function(req, res) {
             for( let attr of attrs ) {
               if ( fields[field].hasOwnProperty(attr) ) {
                 output += " "+attr+"=\""+fields[field][attr]+"\""
+              } else if ( nconf.get("defaults:components:"+eleName+":"+attr) ) {
+                output += " "+attr+"=\""
+                  +nconf.get("defaults:components:"+eleName+":"+attr)+"\""
               }
             }
             let subFields
