@@ -87,7 +87,6 @@ export default {
       if ( this.displayType ) {
         this.pickerType = this.displayType
       }
-      console.log(this.pickerType)
       if ( this.slotProps && this.slotProps.source ) {
         this.source = { path: this.slotProps.source.path+"."+this.field, data: {} }
         if ( this.slotProps.source.fromArray ) {
