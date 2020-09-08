@@ -11,7 +11,7 @@
       </template>
       <v-form>
         <v-card>
-          <v-card-title class="headline info" dark primary-title>Login</v-card-title>
+          <v-card-title class="headline info white--text" dark primary-title>Login</v-card-title>
           <v-card-text>
             <v-text-field 
               v-model="username" 
@@ -80,25 +80,31 @@ export default {
         headers: {"Content-Type": "application/x-www-form-urlencoded"}, 
         body: formData
       } ).then(response => {
-        response.json().then(data => {
           this.loggingin = false
-          if ( response.status == 200 ) {
-            this.dialog = false
-            //this.absolute=false
-            this.snackbar=true
-            this.message="Login successful"
-            this.$emit("loggedin", data.name)
+          if ( response.ok ) {
+            response.json().then(data => {
+              this.dialog = false
+              //this.absolute=false
+              this.snackbar=true
+              this.message="Login successful"
+              this.$emit("loggedin", data.name)
+            }).catch(err => {
+              this.loggingin = false
+              this.snackbar=true
+              this.message=err.message
+            })
           } else {
             //this.absolute=true
-            this.message="Login failed"
+            this.message="Username or password are incorrect"
             this.snackbar=true
+            this.loggingin = false
           }
-        })
       } ).catch(err => {
+        console.log(err)
         //this.absolute=true
         this.loggingin = false
         this.snackbar=true
-        this.message=err.message
+        this.message="Login failed: "+err.message
       } )
     }
   }
