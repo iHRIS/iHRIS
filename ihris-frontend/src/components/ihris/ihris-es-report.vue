@@ -73,6 +73,7 @@ export default {
     })
   },
   mounted: function() {
+    this.getTotalRecords();
     this.getData(true);
   },
   methods: {
@@ -81,6 +82,18 @@ export default {
         name: "resource_view",
         params: { page: this.page, id: record.id }
       });
+    },
+    getTotalRecords() {
+    let url = `/es/${this.reportData.indexName}/_count`
+    fetch(url, {
+        method: 'GET'
+      }).then(response => {
+        response
+          .json()
+          .then(data => {
+            this.total = data.count
+          })
+      })
     },
     getData(restart) {
       this.loading = true;
@@ -149,7 +162,7 @@ export default {
                   this.results.push(result)
                 }
               }
-              this.total = data.hits.total.value;
+              // this.total = data.hits.total.value;
               this.loading = false;
             })
             .catch(err => {
