@@ -74,7 +74,7 @@ https://hapifhir.io/hapi-fhir/docs/tools/hapi_fhir_cli.html
 
 ## SUSHI
 ```bash
-sudo npm install -g fsh-sushi@beta
+sudo npm install -g fsh-sushi
 ```
 
 ## ElasticSearch

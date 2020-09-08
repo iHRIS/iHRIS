@@ -12,11 +12,11 @@
       "extension": [
         {
           "url": "password",
-          "valueString": "30f399c18d988e87d6961fc05ec5986eb83525b400166ba09f91d95ce6b18bfe804c54589b795c5ac69f0d911f922fc0736202a5fcce4aa83ce546c8318a68b1"
+          "valueString": "0da67ef3726a1e0adfbd3c3880c00f33167daeab1f8c728e10b547d382c2b91a96402958209d6af3c947ae9ab53d879dddb79ad046454ade2b12257fe792f8fa"
         },
         {
           "url": "salt",
-          "valueString": "80676b6c5c7b35813fc18a9e8f8e543b"
+          "valueString": "239cfeb1222bfb394549125b234e668e"
         }
       ]
     },
