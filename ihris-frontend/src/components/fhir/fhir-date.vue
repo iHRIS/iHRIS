@@ -65,10 +65,10 @@ export default {
   },
   computed: {
     minYear: function() {
-      return this.minValueDateTime.substring(0,4)
+      return this.minValueDate.substring(0,4)
     },
     maxYear: function() {
-      return this.maxValueDateTime.substring(0,4)
+      return this.maxValueDate.substring(0,4)
     }
   },
   watch: {

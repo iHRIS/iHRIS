@@ -61,6 +61,7 @@ export default {
   created: function() {
     //console.log("CREATE DATETIME",this.field,this.slotProps)
     this.setupData()
+    console.log("MINMAX DT",this.minValueDateTime, this.maxValueDateTime)
   },
   computed: {
     minYear: function() {

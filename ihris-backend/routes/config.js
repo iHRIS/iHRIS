@@ -328,7 +328,6 @@ router.get('/page/:page/:type?', function(req, res) {
               attrs.unshift("id")
             }
             output += "<fhir-"+eleName +" :slotProps=\"slotProps\" :edit=\"isEdit\""
-            console.log("CHECKING",pageFields,fields[field].path)
             if ( pageFields.hasOwnProperty(fields[field].path) ) {
               output += " displayType=\""+ pageFields[ fields[field].path ] +"\""
             }
@@ -544,8 +543,7 @@ router.get('/page/:page/:type?', function(req, res) {
         }
 
       } ).catch( (err) => {
-        console.log(err)
-        winston.error(err)
+        winston.error(err.message)
         //return res.status( err.response.status ).json( err.response.data )
         return res.status( 500 ).json( { error: err.message } )
       } )
@@ -591,11 +589,18 @@ router.get('/questionnaire/:questionnaire', function(req, res) {
     const processQuestionnaireItems = async ( items ) => {
       let vueOutput = ""
       for( let item of items ) {
+        let displayType
+        if ( item.linkId.includes('#') ) {
+          let linkDetails = item.linkId.split('#')
+          item.linkId = linkDetails[0]
+          displayType = linkDetails[1]
+        }
         if ( item.repeats && !item.readOnly ) {
           vueOutput += "<ihris-array :edit=\"isEdit\" path=\"" + item.linkId + "\" label=\""
             + item.text + "\" max=\"*\" min=\"" + ( item.required ? "1" : "0" ) + "\"><template #default=\"slotProps\">\n"
         }
-        if ( item.type === "group" ) {
+        let itemType = fhirDefinition.camelToKebab( item.type )
+        if ( itemType === "group" ) {
           let label = item.text.split('|',2)
           vueOutput += '<ihris-questionnaire-group :edit=\"isEdit\" path="' + item.linkId + '" label="' + label[0] + '"'
           if ( label.length === 2 ) {
@@ -621,19 +626,37 @@ router.get('/questionnaire/:questionnaire', function(req, res) {
           }
           vueOutput += "></ihris-hidden>\n"
         } else {
-          vueOutput += "<fhir-" + item.type + " :edit=\"isEdit\" path=\"" + item.linkId + "\""
+          vueOutput += "<fhir-" + itemType + " :edit=\"isEdit\" path=\"" + item.linkId + "\""
 
-          if ( item.type === "reference" && item.definition ) {
-            let field = await fhirDefinition.getFieldDefinition(item.definition)
-            if ( field && field.type && field.type[0] && field.type[0].targetProfile ) {
+          let field 
+          if ( item.definition ) {
+            field = await fhirDefinition.getFieldDefinition(item.definition)
+            if ( itemType === "reference" && field && field.type && field.type[0] && field.type[0].targetProfile ) {
               vueOutput += " targetProfile=\""+field.type[0].targetProfile[0]+"\""
             }
+            const minmax = [ "Date", "DateTime", "Instant", "Time", "Decimal", "Integer", "PositiveInt", 
+              "UnsignedInt" ]
+            for( let mm of minmax ) {
+              for( let type of [ "min", "max" ] ) {
+                let attr = type+"Value"+mm
+                if ( field.hasOwnProperty(attr) ) {
+                  vueOutput += " "+attr+"=\""+field[attr]+"\""
+                } else if ( nconf.get("defaults:components:"+itemType+":"+attr) ) {
+                  vueOutput += " "+attr+"=\""
+                    +nconf.get("defaults:components:"+itemType+":"+attr)+"\""
+                }
+              }
+            }
           }
+
           if ( item.hasOwnProperty("text") ) {
             vueOutput += " label=\""+ item.text + "\""
           }
           if ( item.hasOwnProperty("answerValueSet") ) {
             vueOutput += " binding=\""+ item.answerValueSet + "\""
+          }
+          if ( displayType ) {
+            vueOutput += " displayType=\""+ displayType +"\""
           }
           let attrs = [ "required" ]
           for( let attr of attrs ) {
@@ -641,7 +664,7 @@ router.get('/questionnaire/:questionnaire', function(req, res) {
               vueOutput += " " + attr + "=\""+ item[attr] + "\""
             }
           }
-          vueOutput += "></fhir-" + item.type +">\n"
+          vueOutput += "></fhir-" + itemType +">\n"
 
         }
         if ( item.repeats && !item.readOnly ) {
@@ -684,7 +707,7 @@ router.get('/questionnaire/:questionnaire', function(req, res) {
     return res.status(200).json({ template: vueOutput, data: templateData })
 
   } ).catch( (err) => {
-    winston.error(err)
+    winston.error(err.message)
     let outcome = { ...outcomes.ERROR }
     outcome.issue[0].diagnostics = "Unable to read questionnaire: "+req.params.questionnaire+"."
     return res.status(400).json( outcome )
@@ -695,7 +718,6 @@ router.get('/questionnaire/:questionnaire', function(req, res) {
 
 router.get('/report/es/:report', (req, res) => {
   let report = "ihris-es-report-" + req.params.report
-  console.log(report);
   if (!req.user) {
     return res.status(401).json(outcomes.NOTLOGGEDIN)
   }
@@ -793,7 +815,7 @@ router.get('/report/es/:report', (req, res) => {
         reportData: reportData
       })
     }).catch((err) => {
-      console.log(err);
+      winston.error(err.message);
       return res.status(500).send()
     })
   })

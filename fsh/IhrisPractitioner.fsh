@@ -331,14 +331,14 @@ Usage:          #definition
 * item[2].item[2].linkId = "PractitionerRole.period.start"
 * item[2].item[2].definition = "http://ihris.org/fhir/StructureDefinition/ihris-practitioner-role#PractitionerRole.period.start"
 * item[2].item[2].text = "Start Date"
-* item[2].item[2].type = #date
+* item[2].item[2].type = #dateTime
 * item[2].item[2].required = true
 * item[2].item[2].repeats = false
 
 * item[2].item[3].linkId = "PractitionerRole.period.end"
 * item[2].item[3].definition = "http://ihris.org/fhir/StructureDefinition/ihris-practitioner-role#PractitionerRole.period.end"
 * item[2].item[3].text = "End Date"
-* item[2].item[3].type = #date
+* item[2].item[3].type = #dateTime
 * item[2].item[3].required = false
 * item[2].item[3].repeats = false
 
