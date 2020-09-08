@@ -85,6 +85,10 @@ export default {
   },
   methods: {
     updateMenu: function() {
+      if ( this.$store.state.user.loggedin && this.nav.home ) {
+        this.$router.push(this.nav.home)
+        return
+      }
       this.menu = []
       for( let menu_id of Object.keys(this.nav.menu) ) {
         let entry = {
@@ -116,6 +120,7 @@ export default {
         this.menu.push( entry )
       }
       this.menu.sort( (a,b) => a.order === b.order ? 0 : ( a.order < b.order ? -1 : 1 ) )
+
     }
   }
 };

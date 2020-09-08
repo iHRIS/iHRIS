@@ -115,7 +115,9 @@ export default {
           if (data.hasOwnProperty("nav")) {
             if (data.nav.hasOwnProperty("active")) this.nav.active = data.nav.active
             if (data.nav.hasOwnProperty("menu")) this.nav.menu = data.nav.menu
+            if (data.nav.hasOwnProperty("home")) this.nav.home = data.nav.home
           }
+
         })
       })
     })

@@ -78,6 +78,19 @@ IHRIS_FHIR__BASE=http://locahost:8080/hapi/fhir
    * btn
     * image = image for the button
     * text = Alt text for the button
+ * nav
+  * active = the name of the menu to make active by default
+  * home = url of Vue view to display for the home page
+  * menu
+   * [name]
+    * text = Text to display
+    * order = number for sorting
+    * icon = Icon to display with this menu item
+    * menu (sub menu for this section)
+     * [name]
+      * text = Text to display
+      * url = URL for this entry
+    * url = URL for this top level menu with no children
  * footer
   * links
    * [name] = The name of the link (e.g. about or ihris)
