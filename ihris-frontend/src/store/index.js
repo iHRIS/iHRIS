@@ -15,7 +15,8 @@ export default new Vuex.Store({
       text: null,
       timeout: 5000,
       active: false
-    }
+    },
+    cols: { header: 4, content: 8 }
   },
   mutations: {
     login( state, data ) {

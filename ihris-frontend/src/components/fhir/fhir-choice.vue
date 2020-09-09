@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <v-container>
     <v-select 
       :loading="loading" 
       :label="label" 
@@ -14,7 +14,7 @@
       dense
       >
     </v-select>
-  </div>
+  </v-container>
 </template>
 
 <script>

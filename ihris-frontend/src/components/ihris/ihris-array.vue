@@ -2,7 +2,7 @@
   <div>
     <div v-if="simpleDisplay">
       <v-row dense>
-        <v-col cols="3" class="font-weight-bold">{{label}}</v-col><v-col cols="9">{{simpleValue}}</v-col>
+        <v-col :cols="$store.state.cols.header" class="font-weight-bold">{{label}}</v-col><v-col :cols="$store.state.cols.header">{{simpleValue}}</v-col>
       </v-row>
       <v-divider></v-divider>
     </div>

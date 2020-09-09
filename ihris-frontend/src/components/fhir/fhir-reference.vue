@@ -1,32 +1,32 @@
 <template>
-  <v-card>
-    <v-card-subtitle class="text-uppercase font-weight-bold">{{ label }}</v-card-subtitle>
-    <v-card-text>
+  <div>
+    <v-container v-if="edit">
       <v-autocomplete
-        v-if="edit"
         v-model="select"
         :loading="loading"
         :items="items"
         :search-input.sync="search"
         cache-items
-        class="mx-4"
         flat
         hide-no-data
         hide-details
         :label="display"
         outlined
+        dense
+        placeholder="Start typing for selection"
         :disabled="preset && $route.name === 'resource_add'"
       ></v-autocomplete>
-      <v-row dense v-else>
-        <v-col cols="3" class="font-weight-bold">{{display}}</v-col>
-        <v-col cols="9" v-if="loading">
+    </v-container>
+    <div v-else>
+      <v-row dense>
+        <v-col :cols="$store.state.cols.header" class="font-weight-bold">{{display}}</v-col>
+        <v-col :cols="$store.state.cols.content" v-if="loading">
           <v-progress-linear indeterminate color="primary"></v-progress-linear>
         </v-col>
-        <v-col cols="9" v-else>{{displayValue}}</v-col>
+        <v-col :cols="$store.state.cols.content" v-else>{{displayValue}}</v-col>
       </v-row>
-
-    </v-card-text>
-  </v-card>
+    </div>
+  </div>
 </template>
 
 <script>

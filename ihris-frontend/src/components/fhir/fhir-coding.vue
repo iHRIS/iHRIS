@@ -17,11 +17,11 @@
     </v-container>
     <div v-else>
       <v-row dense>
-        <v-col cols="3" class="font-weight-bold">{{display}}</v-col>
-        <v-col cols="9" v-if="loading">
+        <v-col :cols="$store.state.cols.header" class="font-weight-bold">{{display}}</v-col>
+        <v-col :cols="$store.state.cols.content" v-if="loading">
           <v-progress-linear indeterminate color="primary"></v-progress-linear>
         </v-col>
-        <v-col cols="9" v-else>{{valueDisplay || value.display || ""}}</v-col>
+        <v-col :cols="$store.state.cols.content" v-else>{{valueDisplay || value.display || ""}}</v-col>
       </v-row>
       <v-divider></v-divider>
     </div>
