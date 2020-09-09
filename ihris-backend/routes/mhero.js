@@ -115,7 +115,7 @@ router.post('/unsubscribe-contact-groups', (req, res) => {
  */
 router.get("/workflows", function (req, res, next) {
   let queries = {
-    '_profile': 'http://mHero.org/fhir/StructureDefinition/mhero-workflows',
+    '_profile': 'http://mhero.org/fhir/StructureDefinition/mhero-workflows',
     '_count': 2
   }
   let resourceType = 'Basic'
