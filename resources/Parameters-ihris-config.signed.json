@@ -16,11 +16,11 @@
             "code": "1.2.840.10065.1.12.1.14"
           }
         ],
-        "when": "2020-09-04T19:15:11.644Z",
+        "when": "2020-09-10T17:41:15.223Z",
         "who": {
           "reference": "http://ihris.org/fhir/Organization/ihris"
         },
-        "data": "0CW/euaqD4fCBKZqpmCT4motMd2Yh1NtgkfNvmNF8VjhNqKWhJ0rvAZFfP+jLdQvLd7byLWJ0CvsPq11YQOef6ChL29k34JlYWdVCgh9uGViSE+RVnEmsv7003z0B1LoIBHWnc/Vd9gxwKquiMmjtslGLWF3OQUsOzFQ7kReLi4="
+        "data": "0yiHjrlW+3r4GTgtXp/8LuvNHzvUVnrIohnF8HqdhJJvtCTehnnzBRth3JEMU7fhTUz4ujNQfKKIXw7X6QUFA6ssOaxHxZIZMGso3rdV8F5ciYxB6PR54TGrc0NAQNIu4F6TGiZyVOtulStzuAzD27dXkDMIlJod98xd3DIiLdA="
       }
     },
     {
@@ -211,12 +211,64 @@
           "valueString": "mdi-database"
         },
         {
+          "name": "site:nav:menu:database:menu:cadre:text",
+          "valueString": "Cadres"
+        },
+        {
+          "name": "site:nav:menu:database:menu:cadre:url",
+          "valueString": "/resource/search/cadre"
+        },
+        {
+          "name": "site:nav:menu:database:menu:cadre:order",
+          "valueString": "1"
+        },
+        {
+          "name": "site:nav:menu:database:menu:classification:text",
+          "valueString": "Classifications"
+        },
+        {
+          "name": "site:nav:menu:database:menu:classification:url",
+          "valueString": "/resource/search/classification"
+        },
+        {
+          "name": "site:nav:menu:database:menu:classification:order",
+          "valueString": "2"
+        },
+        {
+          "name": "site:nav:menu:database:menu:salary-grade:text",
+          "valueString": "Salary Grades"
+        },
+        {
+          "name": "site:nav:menu:database:menu:salary-grade:url",
+          "valueString": "/resource/search/salary-grade"
+        },
+        {
+          "name": "site:nav:menu:database:menu:salary-grade:order",
+          "valueString": "3"
+        },
+        {
           "name": "site:nav:menu:database:menu:job:text",
           "valueString": "Job Titles"
         },
         {
           "name": "site:nav:menu:database:menu:job:url",
           "valueString": "/resource/search/job"
+        },
+        {
+          "name": "site:nav:menu:database:menu:job:order",
+          "valueString": "4"
+        },
+        {
+          "name": "site:nav:menu:database:menu:leave-type:text",
+          "valueString": "Leave Types"
+        },
+        {
+          "name": "site:nav:menu:database:menu:leave-type:url",
+          "valueString": "/resource/search/leave-type"
+        },
+        {
+          "name": "site:nav:menu:database:menu:leave-type:order",
+          "valueString": "5"
         },
         {
           "name": "site:nav:menu:dashboard:text",
@@ -265,6 +317,22 @@
         {
           "name": "workflow:questionnaire:promotion:url",
           "valueString": "http://ihris.org/fhir/Questionnaire/ihris-promotion"
+        },
+        {
+          "name": "workflow:processor:leave:file",
+          "valueString": "../modules/workflowLeave"
+        },
+        {
+          "name": "workflow:questionnaire:leave:url",
+          "valueString": "http://ihris.org/fhir/Questionnaire/ihris-leave"
+        },
+        {
+          "name": "workflow:processor:performance:file",
+          "valueString": "../modules/workflowPerformance"
+        },
+        {
+          "name": "workflow:questionnaire:performance:url",
+          "valueString": "http://ihris.org/fhir/Questionnaire/ihris-performance"
         },
         {
           "name": "defaults:components:date-time:minValueDateTime",
