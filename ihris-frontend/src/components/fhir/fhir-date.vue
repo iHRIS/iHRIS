@@ -66,7 +66,6 @@ export default {
   created: function() {
     //console.log("CREATE STRING",this.field,this.slotProps)
     this.setupData()
-    console.log("MINMAX",this.minValueDate, this.maxValueDate)
   },
   computed: {
     minYear: function() {
