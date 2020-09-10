@@ -2,7 +2,8 @@
 
 ## Installation
 
-See the notes/ directory for additional installation instructions for development.
+See the notes/ directory for additional installation instructions for development.  
+Installation instructions for supporting software is [here](notes/install.md).
 A docker version for simpler installation will be created soon.
 
 iHRIS is built with a VueJS frontend and a NodeJS backend, both of which are included 
