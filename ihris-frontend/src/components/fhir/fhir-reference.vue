@@ -1,6 +1,6 @@
 <template>
-  <div>
-    <v-container v-if="edit">
+  <ihris-element :edit="edit" :loading="loading">
+    <template #form>
       <v-autocomplete
         v-model="select"
         :loading="loading"
@@ -16,25 +16,27 @@
         placeholder="Start typing for selection"
         :disabled="preset && $route.name === 'resource_add'"
       ></v-autocomplete>
-    </v-container>
-    <div v-else>
-      <v-row dense>
-        <v-col :cols="$store.state.cols.header" class="font-weight-bold">{{display}}</v-col>
-        <v-col :cols="$store.state.cols.content" v-if="loading">
-          <v-progress-linear indeterminate color="primary"></v-progress-linear>
-        </v-col>
-        <v-col :cols="$store.state.cols.content" v-else>{{displayValue}}</v-col>
-      </v-row>
-    </div>
-  </div>
+    </template>
+    <template #header>
+      {{display}}
+    </template>
+    <template #value>
+      {{displayValue}}
+    </template>
+  </ihris-element>
 </template>
 
 <script>
+import IhrisElement from "../ihris/ihris-element.vue"
+
 const querystring = require('querystring')
 export default {
   name: "fhir-reference",
   props: ["field","label","sliceName","targetProfile","min","max","base-min","base-max",
     "slotProps","path","sub-fields","edit"],
+  components: {
+    IhrisElement
+  },
   data: function() {
     return {
       source: { path: "", data: {} },

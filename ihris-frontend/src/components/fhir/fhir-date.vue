@@ -1,6 +1,6 @@
 <template>
-  <div>
-    <v-container v-if="edit">
+  <ihris-element :edit="edit" :loading="false">
+    <template #form>
       <v-text-field v-model="value" type="number" :label="label" :min="minYear" :max="maxYear" v-if="pickerType==='year'"></v-text-field>
       <v-menu 
         ref="menu" 
@@ -34,21 +34,26 @@
           @change="save"
         ></v-date-picker>
       </v-menu>
-    </v-container>
-    <div v-else>
-      <v-row dense>
-        <v-col :cols="$store.state.cols.header" class="font-weight-bold">{{label}}</v-col><v-col :cols="$store.state.cols.content">{{value}}</v-col>
-      </v-row>
-      <v-divider></v-divider>
-    </div>
-  </div>
+    </template>
+    <template #header>
+      {{label}}
+    </template>
+    <template #value>
+      {{value}}
+    </template>
+  </ihris-element>
 </template>
 
 <script>
+import IhrisElement from "../ihris/ihris-element.vue"
+
 export default {
   name: "fhir-date",
   props: ["field","min","max","base-min","base-max", "label", "slotProps", "path", "edit","sliceName", 
     "minValueDate", "maxValueDate", "displayType"],
+  components: {
+    IhrisElement
+  },
   data: function() {
     return {
       value: null,

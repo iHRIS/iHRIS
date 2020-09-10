@@ -1,6 +1,6 @@
 <template>
-  <div>
-    <v-container v-if="edit">
+  <ihris-element :edit="edit" :loading="loading">
+    <template #form>
       <v-select 
         :loading="loading" 
         :label="display" 
@@ -14,21 +14,19 @@
         item-value="code"
         dense
       ></v-select>
-    </v-container>
-    <div v-else>
-      <v-row dense>
-        <v-col :cols="$store.state.cols.header" class="font-weight-bold">{{display}}</v-col>
-        <v-col :cols="$store.state.cols.content" v-if="loading">
-          <v-progress-linear indeterminate color="primary"></v-progress-linear>
-        </v-col>
-        <v-col :cols="$store.state.cols.content" v-else>{{valueDisplay || value.display || ""}}</v-col>
-      </v-row>
-      <v-divider></v-divider>
-    </div>
-  </div>
+    </template>
+    <template #header>
+      {{display}}
+    </template>
+    <template #value>
+      {{valueDisplay || value.display || ""}}
+    </template>
+  </ihris-element>
 </template>
 
 <script>
+import IhrisElement from "../ihris/ihris-element.vue"
+
 /*
 const itemSort = (a,b) => {
   return (a.display === b.display ? (a.code === b.code ? 0 : (a.code < b.code ? -1: 1)) : (a.display < b.display ? -1 : 1) )
@@ -37,6 +35,9 @@ const itemSort = (a,b) => {
 export default {
   name: "fhir-coding",
   props: ["field","label","sliceName","targetprofile","min","max","base-min","base-max","slotProps","path","binding","edit"],
+  components: {
+    IhrisElement
+  },
   data: function() {
     return {
       value: { system: "", code: "", display: "" },

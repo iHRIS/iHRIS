@@ -1,22 +1,27 @@
 <template>
-  <div>
-    <v-container v-if="edit">
+  <ihris-element :edit="edit" :loading="false">
+    <template #form>
       <v-text-field :label="display" v-model="value" outlined hide-details="auto" dense>
       </v-text-field>
-    </v-container>
-    <div v-else>
-      <v-row dense>
-        <v-col :cols="$store.state.cols.header" class="font-weight-bold">{{ display }}</v-col><v-col :cols="$store.state.cols.content">{{ value }}</v-col>
-      </v-row>
-      <v-divider></v-divider>
-    </div>
-  </div>
+    </template>
+    <template #header>
+      {{display}}
+    </template>
+    <template #value>
+      {{value}}
+    </template>
+  </ihris-element>
 </template>
 
 <script>
+import IhrisElement from "../ihris/ihris-element.vue"
+
 export default {
   name: "fhir-uri",
   props: ["field", "label", "min", "max", "id", "path", "slotProps", "sliceName","base-min","base-max", "edit"],
+  components: {
+    IhrisElement
+  },
   data: function() {
     return {
       source: { path: "", data: {} },
