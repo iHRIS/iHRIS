@@ -77,6 +77,46 @@ https://hapifhir.io/hapi-fhir/docs/tools/hapi_fhir_cli.html
 sudo npm install -g fsh-sushi
 ```
 
+You can make customizations for your own configurations in the fsh/ 
+directory.  To get the default data, you can compile the FSH files with:
+```bash
+cd fsh/
+sushi -s .
+```
+
+Any time you make changes to the FSH files you should rebuild them 
+this way.
+
+## Loading Resources
+
+There is a script in the tools/ directory to load some sample configuration
+files as well as the FHIR resources created by SUSHI.  The first time
+you will need to run npm install:
+
+```bash
+cd tools/
+npm install
+```
+
+**All the following commands should be run from the tools/ directory, 
+replacing the server with the correct location for your installation.**
+
+After that, you can use the load.js script to load FHIR resources into
+your FHIR server with:
+```bash
+node load.js --server http://localhost:8080/hapi/fhir PATH/TO/FHIR.json
+```
+
+To load the starter resources, you should start with:
+```bash
+node load.js --server http://localhost:8080/hapi/fhir ../resources/*.json
+```
+
+After building the FSH files, you can import them with the following:
+```bash
+node load.js --server http://localhost:8080/hapi/fhir ../fsh/build/input/{profiles,extensions,examples,resources,vocabulary}/*.json
+```
+
 ## ElasticSearch
 
 Ubuntu install instructions:
