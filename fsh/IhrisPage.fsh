@@ -73,13 +73,17 @@ Description:    "iHRIS Page Display details."
 
 * extension[field].extension contains
       path 1..1 MS and
-      type 1..1 MS
+      type 0..1 MS and
+      readOnlyIfSet 0..1 MS
 * extension[field].extension[path].value[x] only string
 * extension[field].extension[path].valueString MS
 * extension[field].extension[path].valueString ^label = "Field Path from StructureDefintion"
 * extension[field].extension[type].value[x] only string
 * extension[field].extension[type].valueString MS
 * extension[field].extension[type].valueString ^label = "Display type for the field"
+* extension[field].extension[readOnlyIfSet].value[x] only boolean
+* extension[field].extension[readOnlyIfSet].valueBoolean MS
+* extension[field].extension[readOnlyIfSet].valueBoolean ^label = "Read Only if the value is set"
 
 
 Extension:      IhrisPageSection

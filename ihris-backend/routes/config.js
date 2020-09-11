@@ -83,8 +83,14 @@ router.get('/page/:page/:type?', function(req, res) {
     try {
       pageDisplay.extension.filter( ext => ext.url === "field" ).map( ext => {
         let path = ext.extension.find( subext => subext.url === "path" ).valueString
-        let type = ext.extension.find( subext => subext.url === "type" ).valueString
-        pageFields[path] = type
+        let type, readOnlyIfSet
+        try {
+          type = ext.extension.find( subext => subext.url === "type" ).valueString
+        } catch(err) {}
+        try {
+          readOnlyIfSet = ext.extension.find( subext => subext.url === "readOnlyIfSet" ).valueBoolean
+        } catch(err) {}
+        pageFields[path] = { type: type, readOnlyIfSet: readOnlyIfSet }
       } )
     } catch(err) {}
 
@@ -329,7 +335,12 @@ router.get('/page/:page/:type?', function(req, res) {
             }
             output += "<fhir-"+eleName +" :slotProps=\"slotProps\" :edit=\"isEdit\""
             if ( pageFields.hasOwnProperty(fields[field].path) ) {
-              output += " displayType=\""+ pageFields[ fields[field].path ] +"\""
+              if ( pageFields[ fields[field].path ].type ) {
+                output += " displayType=\""+ pageFields[ fields[field].path ].type +"\""
+              }
+              if ( pageFields[ fields[field].path ].readOnlyIfSet ) {
+                output += " :readOnlyIfSet=\""+ pageFields[ fields[field].path ].readOnlyIfSet +"\""
+              }
             }
             for( let attr of attrs ) {
               if ( fields[field].hasOwnProperty(attr) ) {
@@ -512,7 +523,8 @@ router.get('/page/:page/:type?', function(req, res) {
         }
 
       } ).catch( err => {
-        winston.error(err)
+        winston.error(err.message)
+        winston.error(err.stack)
         return res.status( err.response.status ).json( err.response.data )
       } )
 
@@ -544,6 +556,7 @@ router.get('/page/:page/:type?', function(req, res) {
 
       } ).catch( (err) => {
         winston.error(err.message)
+        winston.error(err.stack)
         //return res.status( err.response.status ).json( err.response.data )
         return res.status( 500 ).json( { error: err.message } )
       } )
@@ -557,7 +570,8 @@ router.get('/page/:page/:type?', function(req, res) {
     }
 
   } ).catch( (err) => {
-    winston.error(err)
+    winston.error(err.message)
+    winston.error(err.stack)
     return res.status( err.response.status ).json( err.response.data )
   } )
 
@@ -708,6 +722,7 @@ router.get('/questionnaire/:questionnaire', function(req, res) {
 
   } ).catch( (err) => {
     winston.error(err.message)
+    winston.error(err.stack)
     let outcome = { ...outcomes.ERROR }
     outcome.issue[0].diagnostics = "Unable to read questionnaire: "+req.params.questionnaire+"."
     return res.status(400).json( outcome )
@@ -816,6 +831,7 @@ router.get('/report/es/:report', (req, res) => {
       })
     }).catch((err) => {
       winston.error(err.message);
+      winston.error(err.stack);
       return res.status(500).send()
     })
   })

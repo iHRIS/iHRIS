@@ -1,7 +1,7 @@
 <template>
   <ihris-element :edit="edit" :loading="false">
     <template #form>
-      <v-text-field v-model="value" type="number" :label="label" :min="minYear" :max="maxYear" v-if="pickerType==='year'"></v-text-field>
+      <v-text-field v-model="value" type="number" :disabled="readOnlyIfSet && value" :label="label" :min="minYear" :max="maxYear" v-if="pickerType==='year'"></v-text-field>
       <v-menu 
         ref="menu" 
         v-model="menu" 
@@ -31,6 +31,7 @@
           :max="maxValueDateTime"
           :min="minValueDateTime"
           :type="pickerType"
+          :disabled="readOnlyIfSet && value"
           @change="save"
         ></v-date-picker>
       </v-menu>
@@ -50,7 +51,7 @@ import IhrisElement from "../ihris/ihris-element.vue"
 export default {
   name: "fhir-date-time",
   props: ["field","min","max","base-min","base-max", "label", "slotProps", "path", "edit","sliceName", 
-    "minValueDateTime", "maxValueDateTime", "displayType"],
+    "minValueDateTime", "maxValueDateTime", "displayType","readOnlyIfSet"],
   components: {
     IhrisElement
   },

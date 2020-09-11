@@ -4,6 +4,7 @@
       <v-switch
         v-model="value"
         :label="display+`: ${value.toString()}`"
+        :disabled="readOnlyIfSet && value"
         dense
       >
       </v-switch>
@@ -22,7 +23,7 @@ import IhrisElement from "../ihris/ihris-element.vue"
 
 export default {
   name: "fhir-boolean",
-  props: ["field", "label", "min", "max", "id", "path", "slotProps", "sliceName","base-min","base-max", "edit"],
+  props: ["field", "label", "min", "max", "id", "path", "slotProps", "sliceName","base-min","base-max", "edit", "readOnlyIfSet"],
   components: {
     IhrisElement
   },

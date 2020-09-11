@@ -12,16 +12,17 @@
         :error="error"
         item-text="display"
         item-value="code"
+        :disabled="readOnlyIfSet && value.value"
         dense
       ></v-select>
-      <v-text-field :label="display" v-model="value.value" outlined hide-details="auto" dense>
+      <v-text-field :label="display" :disabled="readOnlyIfSet && value.value" v-model="value.value" outlined hide-details="auto" dense>
       </v-text-field>
     </template>
     <template #header>
       {{display}}
     </template>
     <template #value>
-      {{value}}
+      {{valueDisplay}} {{value.value}}
     </template>
   </ihris-element>
 </template>
@@ -36,7 +37,7 @@ const itemSort = (a,b) => {
 */
 export default {
   name: "fhir-coding",
-  props: ["field","label","sliceName","targetprofile","min","max","base-min","base-max","slotProps","path","binding","edit"],
+  props: ["field","label","sliceName","targetprofile","min","max","base-min","base-max","slotProps","path","binding","edit","readOnlyIfSet"],
   components: {
     IhrisElement
   },

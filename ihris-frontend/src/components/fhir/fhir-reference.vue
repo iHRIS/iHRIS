@@ -14,7 +14,7 @@
         outlined
         dense
         placeholder="Start typing for selection"
-        :disabled="preset && $route.name === 'resource_add'"
+        :disabled="(readOnlyIfSet && value.reference) || (preset && $route.name === 'resource_add')"
       ></v-autocomplete>
     </template>
     <template #header>
@@ -33,7 +33,7 @@ const querystring = require('querystring')
 export default {
   name: "fhir-reference",
   props: ["field","label","sliceName","targetProfile","min","max","base-min","base-max",
-    "slotProps","path","sub-fields","edit"],
+    "slotProps","path","sub-fields","edit","readOnlyIfSet"],
   components: {
     IhrisElement
   },

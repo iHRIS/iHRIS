@@ -1,7 +1,7 @@
 <template>
   <ihris-element :edit="edit" :loading="false">
     <template #form>
-      <v-text-field :label="display" :name="field" v-model.number="value" outlined hide-details="auto" dense>
+      <v-text-field :label="display" :disabled="readOnlyIfSet && value" :name="field" v-model.number="value" outlined hide-details="auto" dense>
       </v-text-field>
     </template>
     <template #header>
@@ -18,7 +18,7 @@ import IhrisElement from "../ihris/ihris-element.vue"
 
 export default {
   name: "fhir-positive-int",
-  props: ["field", "label", "min", "max", "id", "path", "slotProps", "sliceName","base-min","base-max", "edit"],
+  props: ["field", "label", "min", "max", "id", "path", "slotProps", "sliceName","base-min","base-max", "edit", "readOnlyIfSet"],
   components: {
     IhrisElement
   },
