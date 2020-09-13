@@ -253,9 +253,9 @@ router.get("/DocumentReference/:id/\\$html", (req, res) => {
         } else {
           html = data
         }
-        return { 
-          title: resource.content[0].attachment.title, 
-          html: DOMPurify.sanitize("<div>" + html + "</div>") 
+        return {
+          title: resource.content[0].attachment.title,
+          html: DOMPurify.sanitize("<div>" + html + "</div>")
         }
       } catch( err ) {
         return "Failed to get HTML from DocumentReference"
@@ -313,9 +313,9 @@ router.get("/\\$short-name", (req, res) => {
     } )
   } else {
     // can add more complexity later, but for now just check for access to CodeSystems and ValueSets
-    allowed = req.user.hasPermissionByName( "read", "CodeSystem" ) 
+    allowed = req.user.hasPermissionByName( "read", "CodeSystem" )
     if ( req.query.valueset ) {
-      allowed = allowed && req.user.hasPermissionByName( "read", "ValueSet" ) 
+      allowed = allowed && req.user.hasPermissionByName( "read", "ValueSet" )
     }
     if ( allowed !== true ) {
       winston.debug("not allowed",allowed,req.query)

@@ -21,7 +21,7 @@
         },
         {
           "url": "name",
-          "valueString": "practitioner"
+          "valueString": "mheropractitioner"
         }, {
           "url": "resource",
           "valueString": "Practitioner"
@@ -87,7 +87,7 @@
         },
         {
           "url": "linkTo",
-          "valueString": "practitioner"
+          "valueString": "mheropractitioner"
         },
         {
           "url": "multiple",
@@ -135,7 +135,7 @@
         },
         {
           "url": "linkTo",
-          "valueString": "practitioner"
+          "valueString": "mheropractitioner"
         },
         {
           "url": "multiple",

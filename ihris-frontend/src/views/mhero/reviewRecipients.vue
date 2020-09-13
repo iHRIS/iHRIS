@@ -51,13 +51,13 @@
           >
             <v-flex xs4>
               <v-radio
-                label="Use existing message flow"
+                label="Use existing message flow**"
                 value="flow"
               ></v-radio>
             </v-flex>
             <v-flex xs4>
               <v-radio
-                label="Create new one time message"
+                label="Create new one time message**"
                 value="sms"
               ></v-radio>
             </v-flex>
@@ -79,6 +79,33 @@
           label="Text Message"
           v-model="sms"
         ></v-textarea>
+        <v-card v-if="showFrequence">
+          <v-card-title primary-title>
+            Frequency*
+          </v-card-title>
+          <v-card-text>
+            <v-radio-group
+              row
+              v-model="frequency"
+            >
+              <v-radio
+                label="Once"
+                value="once"
+              ></v-radio>
+              <v-radio
+                label="Recurring"
+                value="recurring"
+              ></v-radio>
+            </v-radio-group>
+            <v-row v-if="recurring">
+              <div>
+                <VueCronEditorBuefy v-model="cronExpression" :preserveStateOnSwitchToAdvanced='true'/>
+              </div>
+            </v-row>
+          </v-card-text>
+        </v-card>
+
+
       </v-card-text>
     </v-card>
     <br>
@@ -112,6 +139,7 @@
 </template>
 
 <script>
+import VueCronEditorBuefy from 'vue-cron-editor-buefy';
 export default {
   props: ["headers", "practitioners"],
   data() {
@@ -127,7 +155,9 @@ export default {
         icon: 'mdi-alert-circle-outline',
         title: '',
         description: ''
-      }
+      },
+      cronExpression: "14 14 */3 * *",
+      frequency: false
     };
   },
   methods: {
@@ -136,13 +166,12 @@ export default {
     },
     send() {
       let practitioners = [];
-
       this.practitioners.forEach(practitioner => {
-        let id = practitioner.practitioner.split('/')
+        let id = practitioner.mheropractitioner.split('/')
         if(id.length === 2) {
           id = id[1]
         } else {
-          id = practitioner.practitioner
+          id = practitioner.mheropractitioner
         }
         practitioners.push(id);
       });
@@ -151,6 +180,9 @@ export default {
         practitioners: practitioners,
         workflow: this.workflow.id
       };
+      if(this.frequency === 'recurring') {
+        data.cronExpression = this.cronExpression
+      }
       if (this.communicationType === "sms") {
         data.sms = this.sms;
         data.workflow = null;
@@ -209,7 +241,28 @@ export default {
       } else if (this.communicationType === "flow" && !this.workflow.id) {
         return false;
       }
+      if(!this.frequency) {
+        return false
+      }
+      if(this.frequency === 'recurring' && !this.cronExpression) {
+        return false
+      }
       return true;
+    },
+    showFrequence() {
+      if(this.communicationType === 'flow' && Object.keys(this.workflow).length > 0) {
+        return true
+      }
+      if(this.communicationType === 'sms' && this.sms) {
+        return true
+      }
+      return false
+    },
+    recurring() {
+      return this.frequency === "recurring";
+    },
+    showRecurringOptions() {
+      return this.frequency === "recurring" && this.period === "weeks";
     }
   },
   created() {
@@ -218,6 +271,9 @@ export default {
         this.workflows = data;
       });
     });
-  }
+  },
+  components: {
+    VueCronEditorBuefy
+  },
 };
 </script>

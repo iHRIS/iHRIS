@@ -37,6 +37,22 @@ router.post("/send-message", function (req, res, next) {
     recipient: recipients,
     resourceType: "CommunicationRequest"
   };
+  if(data.cronExpression) {
+    if(!communicationReq.meta) {
+      communicationReq.meta = {}
+    }
+    if(!communicationReq.meta.profile) {
+      communicationReq.meta.profile = []
+    }
+    if(!communicationReq.extension) {
+      communicationReq.extension = []
+    }
+    communicationReq.meta.profile.push("http://mhero.org/fhir/StructureDefinition/mhero-communication-request")
+    communicationReq.extension.push({
+      url: "http://mhero.org/fhir/StructureDefinition/recurrance-cron-expression",
+      valueString: data.cronExpression
+    })
+  }
   let url = URI(nconf.get("emnutt:base")).segment('CommunicationRequest');
   axios.post(url.toString(), communicationReq, {
     withCredentials: true,

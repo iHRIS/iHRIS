@@ -53,12 +53,14 @@ export default {
     },
     terms: {
       handler() {
+        this.getTotalRecords();
         this.getData(true);
       },
       deep: true
     },
     options: {
       handler() {
+        this.getTotalRecords();
         this.getData();
       },
       deep: true
@@ -69,6 +71,7 @@ export default {
       this.headers.push({ text: field[0], value: field[1] });
     }
     eventBus.$on("reload-report", () => {
+      this.getTotalRecords();
       this.getData()
     })
   },
@@ -83,28 +86,7 @@ export default {
         params: { page: this.page, id: record.id }
       });
     },
-    getTotalRecords() {
-    let url = `/es/${this.reportData.indexName}/_count`
-    fetch(url, {
-        method: 'GET'
-      }).then(response => {
-        response
-          .json()
-          .then(data => {
-            this.total = data.count
-          })
-      })
-    },
-    getData(restart) {
-      this.loading = true;
-      this.error_message = null;
-      let url = "";
-      if (restart) this.options.page = 1;
-      let count = this.options.itemsPerPage || 10;
-      let from = (this.options.page * this.options.itemsPerPage) - this.options.itemsPerPage
-      url = `/es/${this.reportData.indexName}/_search?size=${count}&from=${from}`
-      this.prevPage = this.options.page;
-
+    buildTerms() {
       let body = {
         query: {
           bool: {
@@ -140,6 +122,36 @@ export default {
           body.query.bool.must.push(terms)
         }
       }
+      return body
+    },
+    getTotalRecords() {
+      let url = `/es/${this.reportData.indexName}/_count`
+      let body = this.buildTerms()
+      fetch(url, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(body)
+        }).then(response => {
+          response
+            .json()
+            .then(data => {
+              this.total = data.count
+            })
+        })
+    },
+    getData(restart) {
+      this.loading = true;
+      this.error_message = null;
+      let url = "";
+      if (restart) this.options.page = 1;
+      let count = this.options.itemsPerPage || 10;
+      let from = (this.options.page * this.options.itemsPerPage) - this.options.itemsPerPage
+      url = `/es/${this.reportData.indexName}/_search?size=${count}&from=${from}`
+      this.prevPage = this.options.page;
+
+      let body = this.buildTerms()
       fetch(url, {
         method: 'POST',
         headers: {

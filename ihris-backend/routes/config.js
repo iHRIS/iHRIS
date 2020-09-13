@@ -312,7 +312,7 @@ router.get('/page/:page/:type?', function(req, res) {
             let eleName = fhirDefinition.camelToKebab( fields[field].code )
             let attrs = [ "field", "sliceName", "targetProfile", "profile", "min", "max", "base-min",
               "base-max", "label", "path", "binding" ]
-            const minmax = [ "Date", "DateTime", "Instant", "Time", "Decimal", "Integer", "PositiveInt", 
+            const minmax = [ "Date", "DateTime", "Instant", "Time", "Decimal", "Integer", "PositiveInt",
               "UnsignedInt" ]
             for( let mm of minmax ) {
               for( let type of [ "min", "max" ] ) {
@@ -642,13 +642,13 @@ router.get('/questionnaire/:questionnaire', function(req, res) {
         } else {
           vueOutput += "<fhir-" + itemType + " :edit=\"isEdit\" path=\"" + item.linkId + "\""
 
-          let field 
+          let field
           if ( item.definition ) {
             field = await fhirDefinition.getFieldDefinition(item.definition)
             if ( itemType === "reference" && field && field.type && field.type[0] && field.type[0].targetProfile ) {
               vueOutput += " targetProfile=\""+field.type[0].targetProfile[0]+"\""
             }
-            const minmax = [ "Date", "DateTime", "Instant", "Time", "Decimal", "Integer", "PositiveInt", 
+            const minmax = [ "Date", "DateTime", "Instant", "Time", "Decimal", "Integer", "PositiveInt",
               "UnsignedInt" ]
             for( let mm of minmax ) {
               for( let type of [ "min", "max" ] ) {

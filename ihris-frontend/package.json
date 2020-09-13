@@ -13,6 +13,7 @@
     "core-js": "^3.6.5",
     "fhirpath": "^2.2.2",
     "vue": "^2.6.11",
+    "vue-cron-editor-buefy": "^0.2.13",
     "vue-router": "^3.2.0",
     "vuetify": "^2.2.11",
     "vuex": "^3.4.0",
