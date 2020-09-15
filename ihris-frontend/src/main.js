@@ -16,6 +16,7 @@ Object.defineProperty(Vue.prototype, '$fhirutils', {
   value: fhirutils
 })
 
+Vue.use(require('vue-moment'));
 export const eventBus = new Vue()
 
 new Vue({

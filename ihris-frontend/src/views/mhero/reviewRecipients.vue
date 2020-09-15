@@ -102,10 +102,91 @@
                 <VueCronEditorBuefy v-model="cronExpression" :preserveStateOnSwitchToAdvanced='true'/>
               </div>
             </v-row>
+            <v-card v-if="frequency === 'once'">
+              <v-card-title>
+                Send Time*
+              </v-card-title>
+              <v-card-text>
+                <v-radio-group
+                  row
+                  v-model="sendTimeCategory"
+                >
+                  <v-radio
+                    label="Now"
+                    value="now"
+                  ></v-radio>
+                  <v-radio
+                    label="Later"
+                    value="later"
+                  ></v-radio>
+                </v-radio-group>
+                <v-row v-if="sendTimeCategory === 'later'">
+                  <v-col sm="2">
+                    <v-menu
+                      v-model="dateMenu"
+                      :close-on-content-click="false"
+                      transition="scale-transition"
+                      offset-y
+                      max-width="290px"
+                      min-width="290px"
+                    >
+                      <template v-slot:activator="{ on, attrs }">
+                        <v-text-field
+                          v-model="computedDateFormatted"
+                          label="Date*"
+                          hint="DD/MM/YYYY"
+                          persistent-hint
+                          prepend-icon="mdi-calendar"
+                          readonly
+                          v-bind="attrs"
+                          v-on="on"
+                        ></v-text-field>
+                      </template>
+                      <v-date-picker
+                        v-model="sendDate"
+                        no-title
+                        @input="dateMenu = false"
+                        :min="minDate"
+                        :max="maxDate"
+                      ></v-date-picker>
+                    </v-menu>
+                  </v-col>
+                  <v-col sm="2">
+                    <v-menu
+                      ref="timeMenu"
+                      v-model="timeMenu"
+                      :close-on-content-click="false"
+                      :nudge-right="40"
+                      :return-value.sync="sendTime"
+                      transition="scale-transition"
+                      offset-y
+                      max-width="290px"
+                      min-width="290px"
+                    >
+                      <template v-slot:activator="{ on, attrs }">
+                        <v-text-field
+                          v-model="sendTime"
+                          label="Time*"
+                          prepend-icon="mdi-clock-outline"
+                          readonly
+                          v-bind="attrs"
+                          v-on="on"
+                        ></v-text-field>
+                      </template>
+                      <v-time-picker
+                        v-if="timeMenu"
+                        v-model="sendTime"
+                        format="24hr"
+                        full-width
+                        @click:minute="$refs.timeMenu.save(sendTime)"
+                      ></v-time-picker>
+                    </v-menu>
+                  </v-col>
+                </v-row>
+              </v-card-text>
+            </v-card>
           </v-card-text>
         </v-card>
-
-
       </v-card-text>
     </v-card>
     <br>
@@ -142,25 +223,35 @@
 import VueCronEditorBuefy from 'vue-cron-editor-buefy';
 export default {
   props: ["headers", "practitioners"],
-  data() {
-    return {
-      workflows: [],
-      workflow: {},
-      communicationType: "",
-      sms: "",
-      statusDialog: {
-        width: '500px',
-        enable: false,
-        color: 'error',
-        icon: 'mdi-alert-circle-outline',
-        title: '',
-        description: ''
-      },
-      cronExpression: "14 14 */3 * *",
-      frequency: false
-    };
-  },
+  data: vm => ({
+    workflows: [],
+    workflow: {},
+    communicationType: "",
+    sms: "",
+    statusDialog: {
+      width: '500px',
+      enable: false,
+      color: 'error',
+      icon: 'mdi-alert-circle-outline',
+      title: '',
+      description: ''
+    },
+    cronExpression: "14 14 */3 * *",
+    frequency: false,
+    sendTimeCategory: '',
+    sendTime: null,
+    timeMenu: false,
+    dateMenu: false,
+    sendDate: new Date().toISOString().substr(0, 10),
+    sendDateFormatted: vm.formatDate(new Date().toISOString().substr(0, 10))
+  }),
   methods: {
+    formatDate (date) {
+      if (!date) return null
+
+      const [year, month, day] = date.split('-')
+      return `${day}/${month}/${year}`
+    },
     changeDetails() {
       this.$emit("editWorkflow");
     },
@@ -180,9 +271,11 @@ export default {
         practitioners: practitioners,
         workflow: this.workflow.id
       };
-      if(this.frequency === 'recurring') {
+      if(this.frequency === 'recurring' || (this.frequency === 'once' && this.sendTimeCategory === 'later')) {
         data.cronExpression = this.cronExpression
       }
+      data.frequency = this.frequency
+      data.sendTimeCategory = this.sendTimeCategory
       if (this.communicationType === "sms") {
         data.sms = this.sms;
         data.workflow = null;
@@ -232,7 +325,38 @@ export default {
       });
     }
   },
+  watch: {
+    frequency(value) {
+      if(value === 'recurring') {
+        this.cronExpression = '14 14 */3 * *'
+      } else {
+        this.cronExpression = ''
+      }
+    },
+    sendTime(time) {
+      let timeArr = time.split(':')
+      let dateArr = this.sendDate.split('-')
+      this.cronExpression = timeArr[1] + " " + timeArr[0] + " " + dateArr[2] + " " + dateArr[1] + " *"
+    },
+    sendDate(date) {
+      if(!this.sendTime) {
+        return
+      }
+      let timeArr = this.sendTime.split(':')
+      let dateArr = date.split('-')
+      this.cronExpression = timeArr[1] + " " + timeArr[0] + " " + dateArr[2] + " " + dateArr[1] + " *"
+    }
+  },
   computed: {
+    minDate() {
+      return this.$moment().format("YYYY-MM-DD")
+    },
+    maxDate() {
+      return this.$moment(this.$moment().subtract("days", 1).format("YYYY-MM-DD"), "YYYY-MM-DD").add("years", 1).format("YYYY-MM-DD")
+    },
+    computedDateFormatted () {
+      return this.formatDate(this.sendDate)
+    },
     canSend() {
       if (!this.communicationType) {
         return false;
@@ -245,6 +369,12 @@ export default {
         return false
       }
       if(this.frequency === 'recurring' && !this.cronExpression) {
+        return false
+      }
+      if(this.frequency === 'once' && !this.sendTimeCategory) {
+        return false
+      }
+      if(this.frequency === 'once' && this.sendTimeCategory === 'later' && !this.cronExpression) {
         return false
       }
       return true;

@@ -37,7 +37,7 @@ router.post("/send-message", function (req, res, next) {
     recipient: recipients,
     resourceType: "CommunicationRequest"
   };
-  if(data.cronExpression) {
+  if(data.frequency === 'recurring' || (data.frequency === 'once' && data.sendTimeCategory === 'later')) {
     if(!communicationReq.meta) {
       communicationReq.meta = {}
     }
@@ -48,9 +48,25 @@ router.post("/send-message", function (req, res, next) {
       communicationReq.extension = []
     }
     communicationReq.meta.profile.push("http://mhero.org/fhir/StructureDefinition/mhero-communication-request")
-    communicationReq.extension.push({
-      url: "http://mhero.org/fhir/StructureDefinition/recurrance-cron-expression",
+    let extension = []
+    let freq = {
+      url: 'frequency',
+      valueString: data.frequency
+    }
+    extension.push(freq)
+    if(data.sendTimeCategory) {
+      extension.push({
+        url: 'sendCategory',
+        valueString: data.sendTimeCategory
+      })
+    }
+    extension.push({
+      url: 'cronExpression',
       valueString: data.cronExpression
+    })
+    communicationReq.extension.push({
+      url: "http://mhero.org/fhir/StructureDefinition/sms-cron-expression-schedule",
+      extension
     })
   }
   let url = URI(nconf.get("emnutt:base")).segment('CommunicationRequest');
