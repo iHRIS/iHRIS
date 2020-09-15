@@ -27,6 +27,7 @@
               :type="show_pass ? 'text' : 'password'"
               @click:append="show_pass = !show_pass"
               prepend-icon="mdi-form-textbox-password"
+              @keyup.native.enter="submit"
               ></v-text-field>
           </v-card-text>
           <v-divider></v-divider>
