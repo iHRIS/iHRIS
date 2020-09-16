@@ -334,11 +334,11 @@ router.get('/page/:page/:type?', function(req, res) {
               attrs.unshift("id")
             }
             output += "<fhir-"+eleName +" :slotProps=\"slotProps\" :edit=\"isEdit\""
-            if ( pageFields.hasOwnProperty(fields[field].path) ) {
+            if ( pageFields.hasOwnProperty(fields[field].id) ) {
               if ( pageFields[ fields[field].path ].type ) {
                 output += " displayType=\""+ pageFields[ fields[field].path ].type +"\""
               }
-              if ( pageFields[ fields[field].path ].readOnlyIfSet ) {
+              if ( pageFields[ fields[field].id ].readOnlyIfSet ) {
                 output += " :readOnlyIfSet=\""+ pageFields[ fields[field].path ].readOnlyIfSet +"\""
               }
             }
