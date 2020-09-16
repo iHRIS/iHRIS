@@ -14,7 +14,7 @@
         outlined
         dense
         placeholder="Start typing for selection"
-        :disabled="(readOnlyIfSet && value.reference) || (preset && $route.name === 'resource_add')"
+        :disabled="(disabled) || (preset && $route.name === 'resource_add')"
       ></v-autocomplete>
     </template>
     <template #header>
@@ -49,7 +49,8 @@ export default {
       resource: "",
       awaitingSearch: false,
       displayValue: "",
-      preset: false
+      preset: false,
+      disabled: false
     }
   },
   created: function() {
@@ -96,6 +97,7 @@ export default {
           this.select = this.source.data.reference
         }
       }
+      this.disabled = this.readOnlyIfSet && this.preset
     },
     querySelections: function( val ) {
       this.loading = true

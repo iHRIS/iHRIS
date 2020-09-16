@@ -4,7 +4,7 @@
       <v-switch
         v-model="value"
         :label="display+`: ${value.toString()}`"
-        :disabled="readOnlyIfSet && value"
+        :disabled="disabled"
         dense
       >
       </v-switch>
@@ -31,7 +31,8 @@ export default {
     return {
       source: { path: "", data: {} },
       value: true,
-      qField: "valueBoolean"
+      qField: "valueBoolean",
+      disabled: false
     }
   },
   created: function() {
@@ -63,6 +64,7 @@ export default {
             this.value = this.source.data[0]
           }
         }
+        this.disabled = this.readOnlyIfSet && (!!this.value)
         //console.log(this.source)
       }
     }

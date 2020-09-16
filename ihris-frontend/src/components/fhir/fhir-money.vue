@@ -12,10 +12,10 @@
         :error="error"
         item-text="display"
         item-value="code"
-        :disabled="readOnlyIfSet && value.value"
+        :disabled="disabled"
         dense
       ></v-select>
-      <v-text-field :label="display" :disabled="readOnlyIfSet && value.value" v-model="value.value" outlined hide-details="auto" dense>
+      <v-text-field :label="display" :disabled="disabled" v-model="value.value" outlined hide-details="auto" dense>
       </v-text-field>
     </template>
     <template #header>
@@ -52,7 +52,8 @@ export default {
       err_messages: null,
       error: false,
       items: [],
-      source: { path: "", data: {} }
+      source: { path: "", data: {} },
+      disabled: false
     }
   },
   created: function() {
@@ -92,6 +93,7 @@ export default {
           // Need to see if this works and figure out what it needs to be
           if ( this.source.data ) {
             this.value = this.source.data
+            this.disabled = this.readOnlyIfSet && (!!this.value.value)
             this.valueCurrency = this.value.currency
             //console.log("set",this.value,this.valueCurrency)
           }
@@ -102,6 +104,7 @@ export default {
           //console.log("FPATH setting value to",this.field,this.source.data[0],expression,this.slotProps.source.data)
           if ( this.source.data[0] ) {
             this.value = this.source.data[0]
+            this.disabled = this.readOnlyIfSet && (!!this.value.value)
             this.valueCurrency = this.value.currency
           }
         }

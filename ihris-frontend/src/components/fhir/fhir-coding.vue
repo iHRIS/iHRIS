@@ -12,7 +12,7 @@
         :error="error"
         item-text="display"
         item-value="code"
-        :disabled="readOnlyIfSet && (valueDisplay || value.display)"
+        :disabled="disabled"
         dense
       ></v-select>
     </template>
@@ -48,7 +48,8 @@ export default {
       err_messages: null,
       error: false,
       items: [],
-      source: { path: "", data: {}, binding: this.binding }
+      source: { path: "", data: {}, binding: this.binding },
+      disabled: false
     }
   },
   created: function() {
@@ -99,6 +100,7 @@ export default {
             this.valueCode = this.value.code
           }
         }
+        this.disabled = this.readOnlyIfSet && (!!this.valueCode)
       }
       let binding = this.binding || this.slotProps.source.binding
       this.$fhirutils.expand( binding ).then( items => {

@@ -12,7 +12,7 @@
         :error="error"
         item-text="display"
         item-value="code"
-        :disabled="readOnlyIfSet && value"
+        :disabled="disabled"
         dense
       ></v-select>
     </template>
@@ -46,7 +46,8 @@ export default {
       err_messages: null,
       error: false,
       items: [],
-      source: { path: "", data: {}, binding: this.binding }
+      source: { path: "", data: {}, binding: this.binding },
+      disabled: false
     }
   },
   created: function() {
@@ -77,6 +78,7 @@ export default {
             this.value = this.source.data[0]
           }
         }
+        this.disabled = this.readOnlyIfSet && (!!this.value)
         //console.log(this.source)
       }
       let binding = this.binding || this.slotProps.source.binding

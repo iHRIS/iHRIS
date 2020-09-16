@@ -1,7 +1,7 @@
 <template>
   <ihris-element :edit="edit" :loading="false">
     <template #form>
-      <v-text-field v-model="value" type="number" :disabled="readOnlyIfSet && value" :label="label" :min="minYear" :max="maxYear" v-if="pickerType==='year'"></v-text-field>
+      <v-text-field v-model="value" type="number" :disabled="disabled" :label="label" :min="minYear" :max="maxYear" v-if="pickerType==='year'"></v-text-field>
       <v-menu 
         ref="menu" 
         v-model="menu" 
@@ -31,7 +31,7 @@
           :max="maxValueDateTime"
           :min="minValueDateTime"
           :type="pickerType"
-          :disabled="readOnlyIfSet && value"
+          :disabled="disabled"
           @change="save"
         ></v-date-picker>
       </v-menu>
@@ -61,7 +61,8 @@ export default {
       menu: false,
       source: { path: "", data: {} },
       qField: "valueDateTime",
-      pickerType: "date"
+      pickerType: "date",
+      disabled: false
     }
   },
   created: function() {
@@ -107,6 +108,7 @@ export default {
             this.value = this.source.data[0]
           }
         }
+        this.disabled = this.readOnlyIfSet && (!!this.value)
         //console.log(this.source)
       }
     },
