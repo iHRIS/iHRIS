@@ -336,10 +336,10 @@ router.get('/page/:page/:type?', function(req, res) {
             output += "<fhir-"+eleName +" :slotProps=\"slotProps\" :edit=\"isEdit\""
             if ( pageFields.hasOwnProperty(fields[field].id) ) {
               if ( pageFields[ fields[field].path ].type ) {
-                output += " displayType=\""+ pageFields[ fields[field].path ].type +"\""
+                output += " displayType=\""+ pageFields[ fields[field].id ].type +"\""
               }
               if ( pageFields[ fields[field].id ].readOnlyIfSet ) {
-                output += " :readOnlyIfSet=\""+ pageFields[ fields[field].path ].readOnlyIfSet +"\""
+                output += " :readOnlyIfSet=\""+ pageFields[ fields[field].id ].readOnlyIfSet +"\""
               }
             }
             for( let attr of attrs ) {
