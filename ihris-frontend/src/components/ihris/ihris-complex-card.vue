@@ -10,7 +10,7 @@
 <script>
 export default {
   name: "ihris-complex-card",
-  props: ["field", "slotProps","sliceName","min","max","base-min","base-max","label","path","edit"],
+  props: ["complexField", "slotProps","label"],
   data: function() {
     return {
       source: { path: "", data: {} }
@@ -31,11 +31,11 @@ export default {
   methods: {
     setupData: function() {
       if ( this.slotProps && this.slotProps.source ) {
-        this.source = { path: this.slotProps.source.path+"."+this.field, data: {} }
+        this.source = { path: this.slotProps.source.path+"."+this.complexField, data: {} }
         if ( this.slotProps.source.fromArray ) {
           this.source.data = this.slotProps.source.data
         } else {
-          let expression = this.$fhirutils.pathFieldExpression( this.field )
+          let expression = this.$fhirutils.pathFieldExpression( this.complexField )
           this.source.data = this.$fhirpath.evaluate( this.slotProps.source.data, expression )
         }
         //console.log(this.source)

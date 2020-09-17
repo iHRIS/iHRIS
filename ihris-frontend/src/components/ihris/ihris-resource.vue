@@ -241,6 +241,7 @@ export default {
         //console.log(response.headers)
         if ( response.status === 201 || response.status === 200 ) {
           response.json().then(data => {
+            console.log("RESPONSE",data)
             this.overlay = false
             this.loading = false
             if ( this.fhirId ) {

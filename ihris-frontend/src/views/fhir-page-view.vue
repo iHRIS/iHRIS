@@ -47,6 +47,7 @@ export default {
               "fhir-reference": () => import(/* webpackChunkName: "fhir-secondary" */ "@/components/fhir/fhir-reference" ),
               "fhir-backbone-element": () => import(/* webpackChunkName: "fhir-secondary" */ "@/components/fhir/fhir-backbone-element" ),
               "fhir-string": () => import(/* webpackChunkName: "fhir-primary" */ "@/components/fhir/fhir-string" ),
+              "fhir-attachment": () => import(/* webpackChunkName: "fhir-secondary" */ "@/components/fhir/fhir-attachment" ),
               "fhir-human-name": () => import(/* webpackChunkName: "fhir-name" */ "@/components/fhir/fhir-human-name" ),
               "fhir-code": () => import(/* webpackChunkName: "fhir-primary" */ "@/components/fhir/fhir-code" ),
               "fhir-date": () => import(/* webpackChunkName: "fhir-primary" */ "@/components/fhir/fhir-date" ),

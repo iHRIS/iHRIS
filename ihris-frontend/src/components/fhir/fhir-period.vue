@@ -1,15 +1,8 @@
 <template>
   <ihris-complex-card
-    :field="field"
+    :complexField="field"
     :slotProps="slotProps"
-    :sliceName="sliceName"
-    :min="min"
-    :max="max"
-    :base-min="baseMin"
-    :base-max="baseMax"
     :label="label"
-    :path="path"
-    :edit="edit"
   >
     <template #default="slotProps">
       <slot :source="slotProps.source"></slot>

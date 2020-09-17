@@ -57,6 +57,8 @@ Description:    "iHRIS profile of Practitioner."
 * gender ^label = "Gender"
 * birthDate MS
 * birthDate ^label = "Birth Date"
+* photo 0..1 MS
+* photo ^label = "Photo"
 * communication 0..* MS
 * communication ^label = "Communication"
 * communication.coding 1..1 MS
