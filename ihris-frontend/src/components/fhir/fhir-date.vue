@@ -13,7 +13,7 @@
       >
         <template v-slot:activator="{ on }">
           <v-text-field
-            v-model="value"
+            v-model="displayValue"
             :label="label"
             prepend-inner-icon="mdi-calendar"
             readonly
@@ -34,6 +34,16 @@
           :disabled="disabled"
           @change="save"
         ></v-date-picker>
+        <v-ethiopian-date-picker
+          ref="etPicker"
+          color="secondary"
+          :landscape="$vuetify.breakpoint.smAndUp"
+          v-model="etValue"
+          :type="pickerType"
+          :disabled="disabled"
+          @change="save"
+          locale="am"
+        ></v-ethiopian-date-picker>
       </v-menu>
     </template>
     <template #header>
@@ -47,17 +57,21 @@
 
 <script>
 import IhrisElement from "../ihris/ihris-element.vue"
+import VEthiopianDatePicker from "../v-ethiopian-date-picker.esm.js"
+import ethiopic from "ethiopic-calendar"
 
 export default {
   name: "fhir-date",
   props: ["field","min","max","base-min","base-max", "label", "slotProps", "path", "edit","sliceName", 
     "minValueDate", "maxValueDate", "displayType","readOnlyIfSet"],
   components: {
-    IhrisElement
+    IhrisElement,
+    VEthiopianDatePicker
   },
   data: function() {
     return {
       value: null,
+      etValue: null,
       menu: false,
       source: { path: "", data: {} },
       qField: "valueDate",
@@ -75,11 +89,14 @@ export default {
     },
     maxYear: function() {
       return this.maxValueDate.substring(0,4)
+    },
+    displayValue: function() {
+      return this.value && "Gregorian: " + this.value + " Ethiopic: "+this.etValue
     }
   },
   watch: {
     menu (val) {
-      val && setTimeout(() => (this.$refs.picker.activePicker = 'YEAR'))
+      val && setTimeout(() => (this.$refs.picker.activePicker = 'YEAR', this.$refs.etPicker.activePicker = 'YEAR'))
     },
     slotProps: {
       handler() {
@@ -87,7 +104,17 @@ export default {
         this.setupData()
       },
       deep: true
-    }
+    },
+    value (val) {
+      const [ year, month, day ] = val.split('-').map(Number)
+      let etDate = ethiopic.ge( year, month || 1, day  || 1)
+      this.etValue = etDate.year.toString().padStart(4,'0') + "-" + etDate.month.toString().padStart(2,'0') + "-" + etDate.day.toString().padStart(2, '0')
+    },
+    etValue (val) {
+      const [ etYear, etMonth, etDay ] = val.split('-').map(Number)
+      let gDate = ethiopic.eg( etYear, etMonth || 1, etDay  || 1)
+      this.value = gDate.year.toString().padStart(4,'0') + "-" + gDate.month.toString().padStart(2,'0') + "-" + gDate.day.toString().padStart(2, '0')
+    },
   },
   methods: {
     setupData() {
