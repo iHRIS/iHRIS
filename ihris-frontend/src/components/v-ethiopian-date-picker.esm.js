@@ -3,7 +3,6 @@ import { pad } from 'vuetify/lib/components/VDatePicker/util';
 import isDateAllowed from 'vuetify/lib/components/VDatePicker/util/isDateAllowed';
 import ethiopicCalendar from 'ethiopic-calendar';
 
-/*
 let passiveSupported = false;
 
 try {
@@ -38,31 +37,12 @@ const keyCodes = Object.freeze({
   pageup: 33,
   pagedown: 34
 }); // This remaps internal names like '$cancel' or '$vuetify.icons.cancel'
-*/
 function wrapInArray(v) {
   return v != null ? Array.isArray(v) ? v : [v] : [];
 }
 
 class ETDate {
 
-  ETmonths = {
-    en: [
-      "Mäskäräm", "Ṭəqəmt", "Ḫədar", "Taḫśaś", "Ṭərr", "Yäkatit",
-      "Mägabit", "Miyazya", "Gənbo", "Säne", "Ḥamle", "Nähase", "Ṗagume"
-    ],
-    am: [ 
-      "መስከረም", "ጥቅምት", "ኅዳር", "ታኅሣሥ)", "ጥር", "የካቲት", "መጋቢት",
-      "ሚያዝያ", "ግንቦት", "ሰኔ", "ሐምሌ", "ነሐሴ", "ጳጉሜን"
-    ]
-  }
-  ETdays = {
-    en: [ 'Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday' ],
-    am: [ "እሑድ", "ሰኞ", "ማክሰ", "ረቡዕ", "ሐሙስ", "ዓርብ", "ቅዳሜ" ]
-  }
-  ETdays_short = {
-    en: [ 'S', 'M', 'T', 'W', 'T', 'F', 'S' ],
-    am: [ "እ", "ሰ", "ማ", "ረ", "ሐ", "ዓ", "ቅ" ]
-  }
 
   constructor( year, month, date ) { 
     if ( year && month && date ) {
@@ -73,6 +53,45 @@ class ETDate {
       const now = new Date();
       this.fromGregorian( now.getFullYear(), now.getMonth()+1, now.getDate() );
     }   
+  }
+
+  getMonthName(locale) {
+    const ETmonths = {
+      en: [
+        "Mäskäräm", "Ṭəqəmt", "Ḫədar", "Taḫśaś", "Ṭərr", "Yäkatit",
+        "Mägabit", "Miyazya", "Gənbo", "Säne", "Ḥamle", "Nähase", "Ṗagume"
+      ],
+      am: [
+        "መስከረም", "ጥቅምት", "ኅዳር", "ታኅሣሥ)", "ጥር", "የካቲት", "መጋቢት",
+        "ሚያዝያ", "ግንቦት", "ሰኔ", "ሐምሌ", "ነሐሴ", "ጳጉሜን"
+      ]
+    };
+    if ( !ETmonths.hasOwnProperty(locale) ) {
+      locale = 'en';
+    }
+    return ETmonths[locale][this.month-1]
+  }
+
+  getDayName(locale) {
+    var ETdays = {
+      en: [ 'Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday' ],
+      am: [ "እሑድ", "ሰኞ", "ማክሰ", "ረቡዕ", "ሐሙስ", "ዓርብ", "ቅዳሜ" ]
+    };
+    if ( !ETdays.hasOwnProperty(locale) ) {
+      locale = 'en';
+    }
+    return ETdays[locale][this.dayOfWeek()]
+  }
+
+  getDayAbbrev(locale) {
+    var ETdays_short = {
+      en: [ 'S', 'M', 'T', 'W', 'T', 'F', 'S' ],
+      am: [ "እ", "ሰ", "ማ", "ረ", "ሐ", "ዓ", "ቅ" ]
+    };
+    if ( !ETdays_short.hasOwnProperty(locale) ) {
+      locale = 'en';
+    }
+    return ETdays_short[locale][this.dayOfWeek()]
   }
 
   toString() {
@@ -118,45 +137,31 @@ class ETDate {
     return numWeek
   }
 
-  format(type, locale) {
+    format(type, locale) {
     if ( type === 'day' ) {
       return this.date
     } else if ( type === 'year' ) {
       return this.year
     } else if ( type === 'month' ) {
-      if ( !this.ETmonths.hasOwnProperty(locale) ) {
-        locale = 'en'
-      }
-      return this.ETmonths[locale][this.month-1]
+      return this.getMonthName(locale)
     } else if ( type === 'date' ) {
-      if ( !this.ETdays.hasOwnProperty(locale) ) {
-        locale = 'en'
-      }
-      return this.ETdays[locale][this.dayOfWeek()] + " " + this.ETmonths[locale][this.month-1] + " " + this.date + "፣ " + this.year
+      return this.getDayName(locale) + " " + this.getMonthName(locale)
+        + " " + this.date + "፣ " + this.year
     } else if ( type === "monthYear" ) {
-      if ( !this.ETmonths.hasOwnProperty(locale) ) {
-        locale = 'en'
-      }
-      return this.ETmonths[locale][this.month-1] + " " + this.year
+      return this.getMonthName(locale) + " " + this.year
     } else if ( type === 'weekday' ) {
-      if ( !this.ETdays_short.hasOwnProperty(locale) ) {
-        locale = 'en'
-      }
-      return this.ETdays_short[locale][this.dayOfWeek()]
+      return this.getDayAbbrev(locale)
     }
   }
 
 }
 
 
-
-
-
 function createFormatter(type, locale) {
   return dateString => {
     const [year, month, date] = dateString.trim().split(' ')[0].split('-').map(Number);
 
-    const et_date = new ETDate(year, month || 1, date || 1)
+    const et_date = new ETDate(year, month || 1, date || 1);
 
     return et_date.format(type, locale)
   }
@@ -265,6 +270,10 @@ var VEthiopianDatePickerDateTable = {
         },
         weekdayFormatter() {
             return this.weekdayFormat || createFormatter('weekday', this.currentLocale);
+        },
+        weekDays() {
+          const first = parseInt( this.firstDayOfWeek, 10 );
+          return Array(7).fill().map( (x,i) => this.weekdayFormatter(`2013-01-${first + i + 10}`))
         }
     },
     methods: {

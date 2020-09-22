@@ -23,27 +23,38 @@
             dense
           ></v-text-field>
         </template>
-        <v-date-picker
-          ref="picker"
-          color="secondary"
-          :landscape="$vuetify.breakpoint.smAndUp"
-          v-model="value"
-          :max="maxValueDate"
-          :min="minValueDate"
-          :type="pickerType"
-          :disabled="disabled"
-          @change="save"
-        ></v-date-picker>
-        <v-ethiopian-date-picker
-          ref="etPicker"
-          color="secondary"
-          :landscape="$vuetify.breakpoint.smAndUp"
-          v-model="etValue"
-          :type="pickerType"
-          :disabled="disabled"
-          @change="save"
-          locale="am"
-        ></v-ethiopian-date-picker>
+        <v-container>
+          <v-row>
+            <v-card >
+              <v-card-subtitle class="primary white--text">Gregorian Calendar</v-card-subtitle>
+              <v-date-picker
+                ref="picker"
+                color="secondary"
+                :landscape="$vuetify.breakpoint.smAndUp"
+                v-model="value"
+                :max="maxValueDate"
+                :min="minValueDate"
+                :type="pickerType"
+                :disabled="disabled"
+                @change="save"
+                ></v-date-picker>
+            </v-card>
+            <v-card >
+              <v-card-subtitle class="primary white--text">Ethiopian Calendar</v-card-subtitle>
+              <v-ethiopian-date-picker
+                ref="etPicker"
+                label="Ethiopian"
+                color="secondary"
+                :landscape="$vuetify.breakpoint.smAndUp"
+                v-model="etValue"
+                :type="pickerType"
+                :disabled="disabled"
+                @change="save"
+                locale="am"
+                ></v-ethiopian-date-picker>
+            </v-card>
+          </v-row>
+        </v-container>
       </v-menu>
     </template>
     <template #header>
@@ -91,7 +102,7 @@ export default {
       return this.maxValueDate.substring(0,4)
     },
     displayValue: function() {
-      return this.value && "Gregorian: " + this.value + " Ethiopic: "+this.etValue
+      return this.value && "Gregorian: " + this.value + " Ethiopian: "+this.etValue
     }
   },
   watch: {
