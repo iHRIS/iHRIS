@@ -23,8 +23,8 @@
             dense
           ></v-text-field>
         </template>
-        <v-container>
-          <v-row>
+        <v-container class="ma-0 pa-0" v-if="isEthiopian">
+          <v-row no-gutters>
             <v-card >
               <v-card-subtitle class="primary white--text">Gregorian Calendar</v-card-subtitle>
               <v-date-picker
@@ -39,7 +39,7 @@
                 @change="save"
                 ></v-date-picker>
             </v-card>
-            <v-card >
+            <v-card>
               <v-card-subtitle class="primary white--text">Ethiopian Calendar</v-card-subtitle>
               <v-ethiopian-date-picker
                 ref="etPicker"
@@ -47,6 +47,8 @@
                 color="secondary"
                 :landscape="$vuetify.breakpoint.smAndUp"
                 v-model="etValue"
+                :max="maxValueETDate"
+                :min="minValueETDate"
                 :type="pickerType"
                 :disabled="disabled"
                 @change="save"
@@ -55,6 +57,19 @@
             </v-card>
           </v-row>
         </v-container>
+        <v-date-picker
+          v-else
+          ref="picker"
+          color="secondary"
+          :landscape="$vuetify.breakpoint.smAndUp"
+          v-model="value"
+          :max="maxValueDate"
+          :min="minValueDate"
+          :type="pickerType"
+          :disabled="disabled"
+          @change="save"
+          ></v-date-picker>
+
       </v-menu>
     </template>
     <template #header>
@@ -74,7 +89,7 @@ import ethiopic from "ethiopic-calendar"
 export default {
   name: "fhir-date",
   props: ["field","min","max","base-min","base-max", "label", "slotProps", "path", "edit","sliceName", 
-    "minValueDate", "maxValueDate", "displayType","readOnlyIfSet"],
+    "minValueDate", "maxValueDate", "displayType","readOnlyIfSet", "calendar"],
   components: {
     IhrisElement,
     VEthiopianDatePicker
@@ -101,8 +116,29 @@ export default {
     maxYear: function() {
       return this.maxValueDate.substring(0,4)
     },
+    isEthiopian: function() {
+      return this.calendar === "Ethiopian"
+    },
+    minValueETDate: function() {
+      if ( this.minValueDate ) {
+        return this.convertGE( this.minValueDate )
+      } else {
+        return null
+      }
+    },
+    maxValueETDate: function() {
+      if ( this.maxValueDate ) {
+        return this.convertGE( this.maxValueDate )
+      } else {
+        return null
+      }
+    },
     displayValue: function() {
-      return this.value && "Gregorian: " + this.value + " Ethiopian: "+this.etValue
+      if ( this.isEthiopian ) {
+        return this.value && "Gregorian: " + this.value + " Ethiopian: "+this.etValue
+      } else {
+        return this.value
+      }
     }
   },
   watch: {
@@ -117,17 +153,33 @@ export default {
       deep: true
     },
     value (val) {
+      this.etValue = this.convertGE( val )
+      /*
       const [ year, month, day ] = val.split('-').map(Number)
       let etDate = ethiopic.ge( year, month || 1, day  || 1)
       this.etValue = etDate.year.toString().padStart(4,'0') + "-" + etDate.month.toString().padStart(2,'0') + "-" + etDate.day.toString().padStart(2, '0')
+      */
     },
     etValue (val) {
+      this.value = this.convertEG( val )
+      /*
       const [ etYear, etMonth, etDay ] = val.split('-').map(Number)
       let gDate = ethiopic.eg( etYear, etMonth || 1, etDay  || 1)
       this.value = gDate.year.toString().padStart(4,'0') + "-" + gDate.month.toString().padStart(2,'0') + "-" + gDate.day.toString().padStart(2, '0')
-    },
+      */
+    }
   },
   methods: {
+    convertGE(val) {
+      const [ year, month, day ] = val.split('-').map(Number)
+      let etDate = ethiopic.ge( year, month || 1, day  || 1)
+      return etDate.year.toString().padStart(4,'0') + "-" + etDate.month.toString().padStart(2,'0') + "-" + etDate.day.toString().padStart(2, '0')
+    },
+    convertEG(val) {
+      const [ etYear, etMonth, etDay ] = val.split('-').map(Number)
+      let gDate = ethiopic.eg( etYear, etMonth || 1, etDay  || 1)
+      return gDate.year.toString().padStart(4,'0') + "-" + gDate.month.toString().padStart(2,'0') + "-" + gDate.day.toString().padStart(2, '0')
+    },
     setupData() {
       if ( this.displayType ) {
         this.pickerType = this.displayType

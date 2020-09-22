@@ -311,7 +311,7 @@ router.get('/page/:page/:type?', function(req, res) {
             }
             let eleName = fhirDefinition.camelToKebab( fields[field].code )
             let attrs = [ "field", "sliceName", "targetProfile", "profile", "min", "max", "base-min",
-              "base-max", "label", "path", "binding" ]
+              "base-max", "label", "path", "binding", "calendar" ]
             const minmax = [ "Date", "DateTime", "Instant", "Time", "Decimal", "Integer", "PositiveInt",
               "UnsignedInt" ]
             for( let mm of minmax ) {
@@ -660,6 +660,13 @@ router.get('/questionnaire/:questionnaire', function(req, res) {
                     +nconf.get("defaults:components:"+itemType+":"+attr)+"\""
                 }
               }
+            }
+          }
+          const def_attrs = [ "calendar" ]
+          for( let attr of def_attrs ) {
+            if ( nconf.get("defaults:components:"+itemType+":"+attr) ) {
+              vueOutput += " "+attr+"=\""
+                +nconf.get("defaults:components:"+itemType+":"+attr)+"\""
             }
           }
 

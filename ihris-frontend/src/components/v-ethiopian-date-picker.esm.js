@@ -3,6 +3,7 @@ import { pad } from 'vuetify/lib/components/VDatePicker/util';
 import isDateAllowed from 'vuetify/lib/components/VDatePicker/util/isDateAllowed';
 import ethiopicCalendar from 'ethiopic-calendar';
 
+/*
 let passiveSupported = false;
 
 try {
@@ -37,6 +38,7 @@ const keyCodes = Object.freeze({
   pageup: 33,
   pagedown: 34
 }); // This remaps internal names like '$cancel' or '$vuetify.icons.cancel'
+*/
 function wrapInArray(v) {
   return v != null ? Array.isArray(v) ? v : [v] : [];
 }
