@@ -84,7 +84,7 @@
 
 <script>
 import IhrisElement from "../ihris/ihris-element.vue"
-import VEthiopianDatePicker from "../v-ethiopian-date-picker.esm.js"
+import VEthiopianDatePicker from "vuetify-ethiopian-calendar"
 import ethiopic from "ethiopic-calendar"
 
 export default {
