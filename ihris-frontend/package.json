@@ -18,7 +18,7 @@
     "vue-moment": "^4.1.0",
     "vue-router": "^3.2.0",
     "vuetify": "^2.2.11",
-    "vuetify-ethiopian-calendar": "^1.0.1",
+    "vuetify-ethiopian-calendar": "^1.0.2",
     "vuex": "^3.4.0",
     "whatwg-fetch": "^3.0.0"
   },

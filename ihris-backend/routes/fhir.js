@@ -132,6 +132,7 @@ router.patch("/CodeSystem/:id/:code", (req, res) => {
     } else {
       resource.concept = [ update ]
     }
+    resource.date = new Date().toISOString()
     fhirAxios.update( resource ).then( (resource) => {
       winston.debug("UPDATED",resource)
       return res.status(200).json({ok:true})

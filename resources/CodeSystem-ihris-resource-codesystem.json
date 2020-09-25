@@ -5,6 +5,7 @@
   "name": "IhrisResourceCodeSystem",
   "id": "ihris-resource-codesystem",
   "title": "Code System for iHRIS Basic Resources.",
+  "date": "2020-09-25T20:48:33.646Z",
   "version": "0.1.0",
   "url": "http://ihris.org/fhir/CodeSystem/ihris-resource-codesystem",
   "concept": [

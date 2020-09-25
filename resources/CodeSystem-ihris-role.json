@@ -5,6 +5,7 @@
   "name": "IhrisRoleCodeSystem",
   "id": "ihris-role",
   "title": "Code System for iHRIS Roles.",
+  "date": "2020-09-25T20:48:33.646Z",
   "version": "1.0.0",
   "url": "http://ihris.org/fhir/CodeSystem/ihris-role",
   "property": [
