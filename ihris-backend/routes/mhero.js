@@ -23,8 +23,8 @@ router.post("/send-message", function (req, res, next) {
   let payload = []
   if (data.workflow) {
     payload.push({
-      contentAttachment: {
-        url: data.workflow
+      contentReference: {
+        reference: 'Basic/' + data.workflow
       }
     })
   } else if (data.sms) {
