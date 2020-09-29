@@ -16,11 +16,11 @@
             "code": "1.2.840.10065.1.12.1.14"
           }
         ],
-        "when": "2020-09-10T17:41:15.223Z",
+        "when": "2020-09-29T13:00:38.180Z",
         "who": {
           "reference": "http://ihris.org/fhir/Organization/ihris"
         },
-        "data": "0yiHjrlW+3r4GTgtXp/8LuvNHzvUVnrIohnF8HqdhJJvtCTehnnzBRth3JEMU7fhTUz4ujNQfKKIXw7X6QUFA6ssOaxHxZIZMGso3rdV8F5ciYxB6PR54TGrc0NAQNIu4F6TGiZyVOtulStzuAzD27dXkDMIlJod98xd3DIiLdA="
+        "data": "jBFlB51Z+/Fm2AzCB+hCB9Sqc7MK3WwXm6IAp7+yaeGL+ICw6/v85fCj4NX49yXkbIctaBYtM50ljyg9N3I6LO2fINzNH8a3GPZfRbTITSu+BTWYOV8PJo2kvEOXyezOnV80xcixc1AHl2P1JSRMEBl3u6FGQheIPVIhzi9VOzI="
       }
     },
     {
@@ -181,6 +181,14 @@
         {
           "name": "site:nav:menu:mhero:menu:message:url",
           "valueString": "/page/mhero"
+        },
+        {
+          "name": "site:nav:menu:mhero:menu:scheduledcommunications:text",
+          "valueString": "Scheduled Messages"
+        },
+        {
+          "name": "site:nav:menu:mhero:menu:scheduledcommunications:url",
+          "valueString": "/page/mhero-scheduled-message"
         },
         {
           "name": "site:nav:menu:mhero:menu:groups:text",
@@ -349,15 +357,6 @@
         {
           "name": "defaults:components:date:maxValueDate",
           "valueString": "2030-01-01"
-        }
-      ]
-    },
-    {
-      "name": "sync",
-      "part": [
-        {
-          "name": "escaching",
-          "valueDateTime": "1970-03-09T17:32:44"
         }
       ]
     }

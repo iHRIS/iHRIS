@@ -1,0 +1,169 @@
+{
+  "resourceType": "Basic",
+  "id": "ihris-es-report-scheduled-messages",
+  "meta": {
+    "versionId": "6",
+    "lastUpdated": "2020-04-18T14:25:58.246+03:00",
+    "source": "#9bPzqTgeJQSqHE9W",
+    "profile": [
+      "http://ihris.org/fhir/StructureDefinition/iHRISRelationship"
+    ]
+  },
+  "extension": [{
+      "url": "http://ihris.org/fhir/StructureDefinition/iHRISReportDetails",
+      "extension": [{
+          "url": "label",
+          "valueString": "Scheduled Messages"
+        },
+        {
+          "url": "displayCheckbox",
+          "valueBoolean": true
+        },
+        {
+          "url": "name",
+          "valueString": "scheduledmessages"
+        }, {
+          "url": "resource",
+          "valueString": "CommunicationRequest"
+        }, {
+          "url": "query",
+          "valueString": "status=on-hold"
+        },
+        {
+          "url": "http://ihris.org/fhir/StructureDefinition/iHRISReportElement",
+          "extension": [{
+            "url": "display",
+            "valueString": "Frequency"
+          },
+          {
+              "url": "label",
+              "valueString": "frequency"
+            },
+            {
+              "url": "name",
+              "valueString": "extension.where(url='http://mhero.org/fhir/StructureDefinition/sms-cron-expression-schedule').extension.where(url='frequency').valueString"
+            },
+            {
+              "url": "filter",
+              "valueBoolean": true
+            },
+            {
+              "url": "dropDownFilter",
+              "valueBoolean": true
+            }
+          ]
+        },
+        {
+          "url": "http://ihris.org/fhir/StructureDefinition/iHRISReportElement",
+          "extension": [{
+            "url": "display",
+            "valueString": "Time"
+          },
+          {
+              "url": "label",
+              "valueString": "time"
+            },
+            {
+              "url": "name",
+              "valueString": "extension.where(url='http://mhero.org/fhir/StructureDefinition/sms-cron-expression-schedule').extension.where(url='cronExpressionParsed').valueString"
+            },
+            {
+              "url": "filter",
+              "valueBoolean": false
+            },
+            {
+              "url": "dropDownFilter",
+              "valueBoolean": false
+            }
+          ]
+        },
+        {
+          "url": "http://ihris.org/fhir/StructureDefinition/iHRISReportElement",
+          "extension": [{
+            "url": "display",
+            "valueString": "Message"
+          },
+          {
+              "url": "label",
+              "valueString": "message"
+            },
+            {
+              "url": "name",
+              "valueString": "payload.contentString"
+            },
+            {
+              "url": "filter",
+              "valueBoolean": false
+            },
+            {
+              "url": "dropDownFilter",
+              "valueBoolean": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "url": "http://ihris.org/fhir/StructureDefinition/iHRISReportLink",
+      "extension": [{
+          "url": "name",
+          "valueString": "workflow"
+        },
+        {
+          "url": "resource",
+          "valueString": "Basic"
+        },
+        {
+          "url": "linkElement",
+          "valueString": "Basic.id"
+        },
+        {
+          "url": "linkTo",
+          "valueString": "scheduledmessages.payload.contentReference.reference"
+        },
+        {
+          "url": "multiple",
+          "valueBoolean": false
+        },
+        {
+          "url": "query",
+          "valueString": "meta.profile=http://mhero.org/fhir/StructureDefinition/mhero-workflows"
+        },
+        {
+          "url": "http://ihris.org/fhir/StructureDefinition/iHRISReportElement",
+          "extension": [{
+            "url": "display",
+            "valueString": "Workflow"
+          },
+          {
+              "url": "label",
+              "valueString": "workflowname"
+            },
+            {
+              "url": "name",
+              "valueString": "extension.where(url='http://mhero.org/fhir/StructureDefinition/mhero-workflows-details').extension.where(url='name').valueString"
+            },
+            {
+              "url": "filter",
+              "valueBoolean": true
+            },
+            {
+              "url": "dropDownFilter",
+              "valueBoolean": true
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "code": {
+    "coding": [{
+      "system": "http://ihris.org/fhir/ValueSet/ihris-resource",
+      "code": "iHRISRelationship"
+    }],
+    "text": "iHRISRelationship"
+  },
+  "subject": {
+    "reference": "StructureDefinition/iHRISPractitioner"
+  }
+}

@@ -183,6 +183,14 @@
           "valueString": "/page/mhero"
         },
         {
+          "name": "site:nav:menu:mhero:menu:scheduledcommunications:text",
+          "valueString": "Scheduled Messages"
+        },
+        {
+          "name": "site:nav:menu:mhero:menu:scheduledcommunications:url",
+          "valueString": "/page/mhero-scheduled-message"
+        },
+        {
           "name": "site:nav:menu:mhero:menu:groups:text",
           "valueString": "Contact Groups"
         },
