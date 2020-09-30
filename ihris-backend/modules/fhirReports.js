@@ -4,10 +4,12 @@ const axios = require('axios')
 const { CacheFhirToES } = require('fhir2es')
 
 const DEFAULT_DELAY = 900000
+const DEFAULT_SHORT_DELAY = 5000
 
 const fhirReports = {
   _caching: "",
   _cacheLoop: undefined,
+  _delayRun: undefined,
   setup: () => {
     return new Promise( (resolve, reject) => {
       let server = nconf.get('elasticsearch:base') || "http://localhost:9200"
@@ -49,6 +51,18 @@ const fhirReports = {
         fhirReports.runReports()
       }, nconf.get("report:refresh") || DEFAULT_DELAY )
     }
+  },
+  delayedRun: ( delay ) => {
+    if ( !delay ) {
+      delay = DEFAULT_SHORT_DELAY
+    }
+    if ( fhirReports._delayRun ) {
+      clearTimeout( fhirReports._delayRun )
+      fhirReports._delayRun = undefined
+    }
+    fhirReports._delayRun = setTimeout( () => {
+      fhirReports.runReports()
+    }, delay )
   }
 }
 

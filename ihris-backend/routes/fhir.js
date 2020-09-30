@@ -4,6 +4,7 @@ const nconf = require('../modules/config')
 const fhirAxios = nconf.fhirAxios
 const fhirFilter = require('../modules/fhirFilter')
 const fhirShortName = require('../modules/fhirShortName')
+const fhirReports = require('../modules/fhirReports')
 const isEmpty = require('is-empty')
 const marked = require('marked')
 const { JSDOM } = require('jsdom')
@@ -101,6 +102,7 @@ router.post("/:resource", (req, res) => {
   }
 
   fhirAxios.create( resource ).then( (output) => {
+    fhirReports.delayedRun()
     return res.status(201).json(output)
   } ).catch( (err) => {
     /* return response from FHIR server */
@@ -134,7 +136,7 @@ router.patch("/CodeSystem/:id/:code", (req, res) => {
     }
     resource.date = new Date().toISOString()
     fhirAxios.update( resource ).then( (resource) => {
-      winston.debug("UPDATED",resource)
+      fhirReports.delayedRun()
       return res.status(200).json({ok:true})
     } ).catch( (err) => {
       /* return response from FHIR server */
@@ -172,6 +174,7 @@ router.put("/:resource/:id", (req, res) => {
   }
 
   fhirAxios.update( update ).then( (resource) => {
+    fhirReports.delayedRun()
     return res.status(200).json(resource)
   } ).catch( (err) => {
     /* return response from FHIR server */

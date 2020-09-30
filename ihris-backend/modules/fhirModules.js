@@ -42,7 +42,7 @@ const fhirModules = {
           // and not use third arg to allow relative require
           resolve( requireFromString( module, library.name, { prependPaths: __dirname } ) )
         } else {
-          winston.warn("No valid keys for "+mod)
+          winston.error("This module was not SIGNED and cannot be loaded: "+mod)
           reject( null )
         }
 
