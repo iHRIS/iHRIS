@@ -24,6 +24,11 @@ const routes = [{
     component: () => import( /* webpackChunkName: "mhero" */ "../views/mhero/mhero.vue")
   },
   {
+    path: '/page/mhero-scheduled-message',
+    name: 'mhero-scheduled-message',
+    component: () => import( /* webpackChunkName: "mhero" */ "../views/mhero/mhero-scheduled-message.vue")
+  },
+  {
     path: '/page/contact-groups',
     name: 'contact-groups',
     component: () => import( /* webpackChunkName: "mhero" */ "../views/mhero/contact-groups.vue")

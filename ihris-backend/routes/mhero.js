@@ -23,8 +23,8 @@ router.post("/send-message", function (req, res, next) {
   let payload = []
   if (data.workflow) {
     payload.push({
-      contentAttachment: {
-        url: data.workflow
+      contentReference: {
+        reference: 'Basic/' + data.workflow
       }
     })
   } else if (data.sms) {
@@ -82,6 +82,22 @@ router.post("/send-message", function (req, res, next) {
     res.status(500).send(err);
   });
 });
+
+router.post('/cancel-message-schedule', (req, res) => {
+  let schedules = req.body.schedules
+  let url = URI(nconf.get("emnutt:base")).segment('cancelMessageSchedule');
+  axios.post(url.toString(), {schedules}, {
+    withCredentials: true,
+    auth: {
+      username: nconf.get("emnutt:username"),
+      password: nconf.get("emnutt:password")
+    }
+  }).then(response => {
+    res.status(201).json(response.data);
+  }).catch(err => {
+    res.status(500).send(err);
+  });
+})
 
 router.post('/subscribe-contact-groups', (req, res) => {
   let subscriptionsData = req.body
