@@ -31,16 +31,16 @@ nav:
   # - User:
   # - Implementer:
   - Developer:
-    - dev/config.md
     - dev/fhir_http.md
-    - dev/install.md
     - dev/modules.md
     - dev/questionnaire.md
     - dev/roles_and_tasks.md
     - dev/short_name.md
     - dev/task_resolution.md
     - dev/todo.md
-  # - Sysadmin:
+  - Sysadmin:
+    - admin/install.md
+    - admin/config.md
 
 markdown_extensions:
   - admonition
@@ -61,7 +61,7 @@ plugins:
 extra:
   social:
     - icon: fontawesome/brands/github
-      link: https://github.com/ihris/iHRIS
+      link: https://github.com/iHRIS/iHRIS
 
 
 # theme:
