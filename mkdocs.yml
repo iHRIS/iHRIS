@@ -1,0 +1,70 @@
+# Project information
+site_name: "iHRIS v5 Documentation"
+site_description: "Technical documentation for iHRIS v5"
+site_author: "IntraHealth International"
+site_url: "https://github.com/ihris/iHRIS"
+
+# Repository
+repo_name: "iHRIS"
+repo_url: "https://github.com/ihris/iHRIS"
+
+# Copyright
+copyright: "Copyright &copy; 2020 IntraHealth International"
+
+# Theme
+theme:
+  name: "material"
+  palette:
+    primary: "blue grey"
+    accent: "indigo"
+  language: "en"
+  font:
+    text: "Roboto"
+    code: "Roboto Mono"
+  features:
+    # - navigation.expand
+    - tabs
+
+nav:
+  - Home:
+    - 'index.md'
+  # - User:
+  # - Implementer:
+  - Developer:
+    - dev/config.md
+    - dev/fhir_http.md
+    - dev/install.md
+    - dev/modules.md
+    - dev/questionnaire.md
+    - dev/roles_and_tasks.md
+    - dev/short_name.md
+    - dev/task_resolution.md
+    - dev/todo.md
+  # - Sysadmin:
+
+markdown_extensions:
+  - admonition
+  - codehilite:
+      guess_lang: false
+  - toc:
+      toc_depth : "3"
+  - footnotes
+  
+# https://github.com/zhaoterryy/mkdocs-pdf-export-plugin not working
+plugins:
+  - search
+  - git-revision-date-localized
+  # - mknotebooks
+  # - pdf-export:
+  #     combined: true
+
+extra:
+  social:
+    - icon: fontawesome/brands/github
+      link: https://github.com/ihris/iHRIS
+
+
+# theme:
+# logo: 'images/logo.png' must be 128x128
+# logo:
+#   icon: 'menu_book'
