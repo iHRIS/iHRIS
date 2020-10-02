@@ -1,5 +1,7 @@
 # iHRIS ![docs](https://github.com/iHRIS/iHRIS/workflows/docs/badge.svg)
 
+Technical documentation has been started and is hosted at: [https://iHRIS.github.io/iHRIS](https://iHRIS.github.io/iHRIS)
+
 ## Installation
 
 See the notes/ directory for additional installation instructions for development.  
