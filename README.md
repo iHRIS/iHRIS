@@ -1,4 +1,4 @@
-# iHRIS
+# iHRIS ![docs](https://github.com/iHRIS/iHRIS/workflows/docs/badge.svg)
 
 ## Installation
 
