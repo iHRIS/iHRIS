@@ -40,10 +40,36 @@ sudo apt install maven
 git clone https://github.com/hapifhir/hapi-fhir-jpaserver-starter.git
 cd hapi-fhir-jpaserver-starter
 ```
-Edit ```pom.xml``` and change the following line from hapi-fhir-jpaserver:
+Edit ```pom.xml``` and change the following line from hapi-fhir-jpaserver or ROOT (starting with version 5.1.0):
 ```xml
     <finalName>hapi</finalName>
 ```
+
+#### For versions starting with 5.1.0 
+Edit ```src/main/resources/application.yaml``` and update the following values:
+
+```
+spring:
+  datasource:
+    url: 'jdbc:postgresql://localhost:5432/hapi'
+    username: hapi
+    password: PASS
+    driveClassName: org.postgresql.Driver
+  jpa:
+    properties:
+      hibernate.dialect: org.hibernate.dialect.PostgreSQL95Dialect
+      hibernate.search.default.indexBase=/var/lib/tomcat9/target/lucenefiles
+hapi:
+  fhir:
+    tester:
+      id: home
+      name: iHRIS
+      server_address: http://localhost:8080/hapi/fhir/
+      refuse_to_fetch_third_party_urls: false
+      fhir_version: R4
+```
+
+#### For versions prior to 5.1.0 use these instead of editing application.yaml
 Edit ```src/main/resources/hapi.properties``` and set the following:
 ```
 server_address=http://localhost:8080/hapi/fhir/
@@ -55,9 +81,11 @@ datasource.password=PASS
 
 hibernate.dialect=org.hibernate.dialect.PostgreSQL95Dialect
 
-hibernate.search.default.indexBase=/var/lib/tomcat9/webapps/hapi/target/lucenefiles
+hibernate.search.default.indexBase=/var/lib/tomcat9/target/lucenefiles
 ```
-Create war file
+
+#### Create war file
+
 ```bash
 mvn clean install -DskipTests
 sudo mkdir /var/lib/tomcat9/target
