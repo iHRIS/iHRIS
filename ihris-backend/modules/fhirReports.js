@@ -1,5 +1,5 @@
 const nconf = require('./config')
-const winson = require('winston')
+const winston = require('winston')
 const axios = require('axios')
 const { CacheFhirToES } = require('fhir2es')
 
@@ -41,6 +41,10 @@ const fhirReports = {
     } )
   },
   runReports: ( single ) => {
+    if ( !fhirReports._caching ) {
+      winston.error("Tried to run reports but the caching isn't available.")
+      return
+    }
     fhirReports._caching.cache()
     if ( !single ) {
       if ( fhirReports._cacheLoop ) {
