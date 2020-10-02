@@ -22,7 +22,7 @@ theme:
     text: "Roboto"
     code: "Roboto Mono"
   features:
-    - tabs
+    - navigation.tabs
   # - navigation.expand
 
 nav:
