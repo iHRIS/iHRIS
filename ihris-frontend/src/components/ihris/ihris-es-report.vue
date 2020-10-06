@@ -16,6 +16,7 @@
         :items="results"
         :options.sync="options"
         :server-items-length="total"
+        :footer-props="{ 'items-per-page-options': [5,10,20,50,-1] }"
         :loading="loading"
         class="elevation-1"
         item-key="id"
@@ -164,6 +165,9 @@ export default {
       let url = "";
       if (restart) this.options.page = 1;
       let count = this.options.itemsPerPage || 10;
+      if(count === -1) {
+        count = this.total
+      }
       let from = (this.options.page * this.options.itemsPerPage) - this.options.itemsPerPage
       url = `/es/${this.reportData.indexName}/_search?size=${count}&from=${from}`
       this.prevPage = this.options.page;
