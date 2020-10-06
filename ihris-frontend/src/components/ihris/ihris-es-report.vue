@@ -16,7 +16,7 @@
         :items="results"
         :options.sync="options"
         :server-items-length="total"
-        :footer-props="{ 'items-per-page-options': [5,10,20,50] }"
+        :footer-props="{ 'items-per-page-options': [5,10,20,50,-1] }"
         :loading="loading"
         class="elevation-1"
         item-key="id"
@@ -96,30 +96,48 @@ export default {
       }
       if(Object.keys(this.terms).length > 0) {
         for(let sTerm in this.terms) {
-          let terms = {
-            terms: {}
-          }
           if(!this.terms[sTerm] || this.terms[sTerm].length === 0) {
             continue;
           }
           let sTermDet = this.reportData.filters.find((filter) => {
             return filter.field === sTerm
           })
+          if(!sTermDet.isDropDown) {
+            this.terms[sTerm] = this.terms[sTerm].replace(/\s+/g, ' ').trim()
+          }
           let esFieldName
-          if(sTermDet.dataType === 'text') {
+          if(sTermDet.isDropDown) {
             esFieldName = sTerm + '.keyword'
           } else {
             esFieldName = sTerm
           }
           if(Array.isArray(this.terms[sTerm])) {
+            let terms = {
+              terms: {}
+            }
             terms.terms[esFieldName] = []
             for(let value of this.terms[sTerm]) {
               terms.terms[esFieldName].push(value)
             }
+            body.query.bool.must.push(terms)
           } else {
-            terms.terms[esFieldName] = [this.terms[sTerm]]
+            if(!sTermDet.isDropDown) {
+              let termArr = this.terms[sTerm].split(' ')
+              for(let tm of termArr) {
+                let wildCard = {
+                  wildcard: {}
+                }
+                wildCard.wildcard[esFieldName] = tm + '*'
+                body.query.bool.must.push(wildCard)
+              }
+            } else {
+              let terms = {
+                terms: {}
+              }
+              terms.terms[esFieldName] = [this.terms[sTerm]]
+              body.query.bool.must.push(terms)
+            }
           }
-          body.query.bool.must.push(terms)
         }
       }
       return body

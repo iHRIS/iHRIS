@@ -1,5 +1,5 @@
 <template>
-  <v-select
+  <v-autocomplete
     v-if="isDropDown"
     :loading="loading"
     :label="label"
@@ -18,7 +18,7 @@
     @click:clear="clearSearch()"
     item-text="display"
     item-value="code">
-  </v-select>
+  </v-autocomplete>
   <v-text-field v-else :label="label" v-model="value" dense outlined hide-details shaped clearable @change="updateSearch()" @click:clear="clearSearch()">
   </v-text-field>
 </template>
