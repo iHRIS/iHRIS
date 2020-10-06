@@ -16,7 +16,6 @@
         :items="results"
         :options.sync="options"
         :server-items-length="total"
-        :footer-props="{ 'items-per-page-options': [5,10,20,50,-1] }"
         :loading="loading"
         class="elevation-1"
         item-key="id"
