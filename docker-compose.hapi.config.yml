@@ -1,0 +1,7 @@
+version: '3'
+
+services:
+
+  upload:
+    container_name: upload
+    image: ihris/upload-definitions:latest

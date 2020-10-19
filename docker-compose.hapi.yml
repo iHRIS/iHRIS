@@ -1,0 +1,16 @@
+version: '3'
+
+services:
+
+  fhir:
+    container_name: fhir
+    image: hapiproject/hapi:latest
+    ports:
+      - "8080:8080"
+    environment:
+      - "profiles.active=r4"
+      # - "tester.server_address=http://localhost:8080/fhir"
+
+  # upload:
+  #   container_name: upload
+  #   image: ihris/upload-definitions:latest

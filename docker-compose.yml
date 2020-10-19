@@ -2,31 +2,19 @@ version: '3'
 
 services:
 
-  # ihris:
-  #   container_name: ihris
-  #   image: ihris/ihris
-  #   ports:
-  #     - "3000:3000"
-  #   depends_on:
-  #     - fhir
-  #     # - es
-  #   restart: on-failure
-  #   environment:
-  #     - "IHRIS_FHIR__BASE=http://fhir:8080/fhir"
-  #   #   - NODE_ENV=cicd
-
-  fhir:
-    container_name: fhir
-    image: hapiproject/hapi:latest
+  ihris:
+    container_name: ihris
+    image: ihris/ihris
     ports:
-      - "8080:8080"
+      - "3000:3000"
+    depends_on:
+      - fhir
+      # - es
+    restart: on-failure
     environment:
-      - "profiles.active=r4"
-      # - "tester.server_address=http://localhost:8080/fhir"
-
-  upload:
-    container_name: upload
-    image: ihris/upload-definitions:latest
+      - "IHRIS_FHIR__BASE=http://fhir:8080/fhir"
+      - "AUTOLOAD_RESOURCE_DIR=../resources"
+    #   - NODE_ENV=cicd
 
   redis:
     image: redis:alpine
