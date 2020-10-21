@@ -2,7 +2,7 @@
   <v-container class="py-5">
     <v-card>
       <v-card-title>
-        {{ label }} {{itemsPerPage}}
+        {{ label }}
         <v-spacer></v-spacer>
         <slot></slot>
       </v-card-title>
