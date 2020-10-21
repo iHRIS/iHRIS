@@ -22,7 +22,9 @@ services:
     environment:
       IHRIS_FHIR__BASE: http://fhir:8080/fhir
       AUTOLOAD_RESOURCE_DIR: ../resources
-      IHRIS_REDIS__URL: http://redis
+      IHRIS_REDIS__URL: redis://redis
+      IHRIS_ELASTICSEARCH__BASE: http://es:9200
+      IHRIS_KIBANA__BASE: http://kibana:5601
 
 
 volumes:
