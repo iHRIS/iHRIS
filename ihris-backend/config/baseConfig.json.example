@@ -90,19 +90,13 @@
         {
           "name": "ihris",
           "valueString": "ihris-config"
-        },
-        {
-          "name": "dashboard",
-          "valueString": "ihris-dashboard"
         }
       ]
     },
     {
       "name": "modules",
-      "part": [{
-        "name": "test-mod",
-        "valueString": "test-module"
-      }]
+      "part": [
+      ]
     },
     {
       "name": "keys",
