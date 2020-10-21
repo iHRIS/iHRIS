@@ -354,7 +354,7 @@ export default {
     getFullEntityIDs(entities) {
       let entityIDs = []
       entities.forEach(practitioner => {
-        let entityResTypes = ["practitioner", "patient", "person"]
+        let entityResTypes = ["mheropractitioner", "practitioner", "patient", "person"]
         let entityID
         for(let resType of entityResTypes) {
           if(practitioner[resType]) {
@@ -390,13 +390,16 @@ export default {
     },
     getMembersGroups(url, restart) {
       if (restart) this.tblOptions.page = 1;
-      if (!url) {
+      if (!url && this.link.length > 0) {
         if (this.tblOptions.page === this.prevPage - 1) {
           url = this.link.find(link => link.relation === "previous").url;
         } else if (this.tblOptions.page === this.prevPage + 1) {
           url = this.link.find(link => link.relation === "next").url;
         }
         url = url.substring(url.indexOf("/fhir/"));
+      }
+      if(!url) {
+        return
       }
       this.prevPage = this.tblOptions.page;
       fetch(url)

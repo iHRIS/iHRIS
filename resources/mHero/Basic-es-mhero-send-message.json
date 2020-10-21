@@ -214,9 +214,6 @@
           "valueBoolean": false
         },
         {
-          "url": "query"
-        },
-        {
           "url": "http://ihris.org/fhir/StructureDefinition/iHRISReportElement",
           "extension": [{
             "url": "display",

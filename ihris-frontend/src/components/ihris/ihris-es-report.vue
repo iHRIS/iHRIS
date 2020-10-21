@@ -2,7 +2,7 @@
   <v-container class="py-5">
     <v-card>
       <v-card-title>
-        {{ label }}
+        {{ label }} {{itemsPerPage}}
         <v-spacer></v-spacer>
         <slot></slot>
       </v-card-title>
@@ -16,7 +16,7 @@
         :items="results"
         :options.sync="options"
         :server-items-length="total"
-        :footer-props="{ 'items-per-page-options': [5,10,20,50,-1] }"
+        :footer-props="{ 'items-per-page-options': itemsPerPage }"
         :loading="loading"
         class="elevation-1"
         item-key="id"
@@ -64,6 +64,17 @@ export default {
         this.getData();
       },
       deep: true
+    }
+  },
+  computed: {
+    itemsPerPage() {
+      let items = [5,10,20,50]
+      if(this.total > 10000) {
+        items.push(10000)
+      } else {
+        items.push(-1)
+      }
+      return items
     }
   },
   created: function() {
