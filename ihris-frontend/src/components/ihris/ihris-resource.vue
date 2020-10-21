@@ -35,12 +35,14 @@
           </v-btn>
         </v-list-item>
         <v-divider color="white"></v-divider>
-        <v-list-item v-if="!edit && links && links.length">
-          <v-btn v-for="(link,idx) in links" :key="link.url" :text="!link.button" :to="getLinkUrl(link)" class="primary">
-            <v-icon light v-if="link.icon">{{link.icon}}</v-icon>
-            {{ linktext[idx]  }}
-          </v-btn>
-        </v-list-item>
+        <template v-if="!edit && links && links.length">
+          <v-list-item v-for="(link,idx) in links" :key="link.url">
+            <v-btn :key="link.url" :text="!link.button" :to="getLinkUrl(link)" class="primary">
+              <v-icon light v-if="link.icon">{{link.icon}}</v-icon>
+              {{ linktext[idx]  }}
+            </v-btn>
+          </v-list-item>
+        </template>
         <v-subheader v-if="sectionMenu" class="white--text"><h2>Sections</h2></v-subheader>
         <v-list-item v-for="section in sectionMenu" :href="'#section-'+section.name" :key="section.name">
           <v-list-item-content class="white--text" v-if="!edit || !section.secondary">

@@ -1,0 +1,70 @@
+version: '3'
+
+services:
+
+  # ihris:
+  #   container_name: ihris
+  #   image: ihris/ihris
+  #   ports:
+  #     - "3000:3000"
+  #   depends_on:
+  #     - fhir
+  #     # - es
+  #   restart: on-failure
+  #   environment:
+  #     - "IHRIS_FHIR__BASE=http://fhir:8080/fhir"
+  #   #   - NODE_ENV=cicd
+
+  fhir:
+    container_name: fhir
+    image: hapiproject/hapi:latest
+    ports:
+      - "8080:8080"
+    environment:
+      - "profiles.active=r4"
+      # - "tester.server_address=http://localhost:8080/fhir"
+
+  upload:
+    container_name: upload
+    image: ihris/upload-definitions:latest
+
+  redis:
+    image: redis:alpine
+    command: ["redis-server", "--appendonly", "yes"]
+    hostname: redis
+    volumes:
+      - redis-data:/data
+
+
+  es:
+    container_name: es
+    image: docker.elastic.co/elasticsearch/elasticsearch:7.9.2
+    environment:
+      - node.name=es01
+      - discovery.type=single-node
+      - bootstrap.memory_lock=true
+      - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+    volumes:
+      - data01:/usr/share/elasticsearch/data
+    ports:
+      - 9200:9200
+
+
+  kibana:
+    image: docker.elastic.co/kibana/kibana:7.9.2
+    container_name: kibana
+    ports:
+      - 5601:5601
+    environment:
+      ELASTICSEARCH_URL: http://es:9200
+      ELASTICSEARCH_HOSTS: http://es:9200
+
+
+volumes:
+  data01:
+    driver: local
+  redis-data:

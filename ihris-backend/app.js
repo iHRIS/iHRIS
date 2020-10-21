@@ -21,6 +21,49 @@ const app = express()
 var configLoaded = false
 
 async function startUp() {
+
+
+const fs = require('fs')
+
+  if ( process.env.AUTOLOAD_RESOURCE_DIR ) {
+    const axios = require('axios')
+    const URI = require('urijs')
+    const path = require('path')
+
+    winston.info( "Loading Autoload resource directory: " + process.env.AUTOLOAD_RESOURCE_DIR )
+    let files = fs.readdirSync( process.env.AUTOLOAD_RESOURCE_DIR )
+    let server = nconf.get("fhir:base")
+    for ( let file of files ) {
+      if ( file.endsWith('.json') ) {
+        let fullFile = path.format( { dir: process.env.AUTOLOAD_RESOURCE_DIR, base: file } )
+        let data = fs.readFileSync( fullFile )
+        let fhir = JSON.parse( data )
+        if ( fhir.resourceType === "Bundle" &&
+          ( fhir.type === "transaction" || fhir.type === "batch" ) ) {
+          winston.info( "Saving " + fhir.type )
+          let dest = URI(server).toString()
+          axios.post( dest, fhir ).then( ( res ) => {
+            winston.info( dest+": "+ res.status )
+            winston.info( JSON.stringify( res.data, null, 2 ) )
+          } ).catch( (err) => {
+            winston.error(err.message)
+          } )
+        } else {
+          winston.info( "Saving " + fhir.resourceType +" - "+fhir.id )
+          let dest = URI(server).segment(fhir.resourceType).segment(fhir.id).toString()
+          axios.put( dest, fhir ).then( ( res ) => {
+            winston.info( dest+": "+ res.status )
+            winston.info( res.headers['content-location'] )
+          } ).catch( (err) => {
+            winston.error(err.message)
+            winston.error(JSON.stringify(err.response.data,null,2))
+          } )
+        }
+      }
+    } 
+  }
+
+
   await nconf.loadRemote()
 
   try {
