@@ -8,9 +8,28 @@ services:
     ports:
       - "8080:8080"
     environment:
-      - "profiles.active=r4"
+      profiles.active: r4
+      spring.datasource.url: 'jdbc:postgresql://db:5432/hapi'
+      spring.datasource.username: admin
+      spring.datasource.password: admin
+      spring.datasource.driverClassName: org.postgresql.Driver
       # - "tester.server_address=http://localhost:8080/fhir"
+    volumes:
+      - hapi-data:/data/hapi
+    depends_on:
+      - db
 
-  # upload:
-  #   container_name: upload
-  #   image: ihris/upload-definitions:latest
+  db:
+    image: postgres
+    restart: always
+    environment:
+      POSTGRES_PASSWORD: admin
+      POSTGRES_USER: admin
+      POSTGRES_DB: hapi
+    # not needed for networking between containers but here for troubleshooting
+    ports:
+      - "5432:5432"
+
+volumes:
+    hapi-data:
+        # external: true

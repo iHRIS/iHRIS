@@ -1,5 +1,5 @@
 # Project information
-site_name: "iHRIS v5 Documentation"
+site_name: "iHRIS v5 Technical Documentation"
 site_description: "Technical documentation for iHRIS v5"
 site_author: "IntraHealth International"
 site_url: "https://github.com/iHRIS/iHRIS"
@@ -39,6 +39,7 @@ nav:
     - dev/task_resolution.md
     - dev/todo.md
   - Sysadmin:
+    - admin/docker.md
     - admin/install.md
     - admin/config.md
 
