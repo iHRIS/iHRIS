@@ -35,6 +35,7 @@
     "urijs": "^1.19.2",
     "url": "^0.11.0",
     "uuid": "^8.3.0",
+    "webidl-conversions": "^6.1.0",
     "winston": "^3.3.3"
   },
   "devDependencies": {
