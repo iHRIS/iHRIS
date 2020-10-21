@@ -306,7 +306,7 @@ Usage:          #example
 * extension[display].extension[search][2].valueString = "Practitioner|PractitionerRole.practitioner"
 * extension[display].extension[search][3].valueString = "Facility|PractitionerRole.location"
 * extension[display].extension[search][4].valueString = "Specialty|PractitionerRole.specialty"
-* extension[display].extension[filter][0].valueString = "Job|code|http://ihris.org/fhir/ValueSet/ihris-job"
+* extension[display].extension[filter][0].valueString = "Job|role|http://ihris.org/fhir/ValueSet/ihris-job"
 * extension[section][0].extension[title].valueString = "Position"
 * extension[section][0].extension[description].valueString = "Position details"
 * extension[section][0].extension[name].valueString = "Position"
