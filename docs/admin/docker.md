@@ -12,7 +12,7 @@ git clone https://github.com/iHRIS/iHRIS.git
 cd iHRIS
 ```
 
-## HAPI Configuration
+## HAPI
 
 If you don't have a HAPI server running, bring up HAPI using the dedicated HAPI docker-compose file. This instance also includes a Postgres database.
 
@@ -20,6 +20,8 @@ If you don't have a HAPI server running, bring up HAPI using the dedicated HAPI 
 docker-compose -f docker-compose.hapi.yml up -d
 # the -d backgrounds the server stdout
 ```
+
+## Upload Core Structure Definitions from HL7
 
 The core structure definitions must be loaded into HAPI. If using an existing HAPI instance, this is still required.
 
@@ -42,6 +44,22 @@ upload    | 2020-10-19 16:09:46.619 [main] INFO  ca.uhn.fhir.cli.App HAPI FHIR i
 upload exited with code 0
 ```
 
+## Upload iHRIS Custom Definitions
+
+You can either customize and upload your own iHRIS definitions, or for evaluation and demo purposes use a provided image.
+
+```
+
+```
+
+docker run --env IHRIS_FHIR__BASE=http://fhir:8080/fhir --network ihris_default 80356b663895
+
+
+docker run --rm -it --network ihris_default $(docker build -q -f Dockerfile.ihris.config .)
+
+
+
+
 ## ElasticSearch and Kibana
 
 You may already have ElasticSearch and Kibana running. They are required for functionality. If not, run the following:
@@ -60,7 +78,10 @@ By default, the Docker image includes loading local (repo) structure definitions
 docker-compose -f docker-compose.ihris.yml up -d
 ```
 
-Now 
+Now open [http://localhost:3000](http://localhost:3000) and log in using username: admin@ihris.org and password: ihris
+
+
+
 
 ## Troubleshooting Notes
 
