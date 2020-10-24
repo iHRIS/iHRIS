@@ -12,9 +12,9 @@ git clone https://github.com/iHRIS/iHRIS.git
 cd iHRIS
 ```
 
-## HAPI
+## Launch HAPI
 
-If you don't have a HAPI server running, bring up HAPI using the dedicated HAPI docker-compose file. This instance also includes a Postgres database.
+If there isn't a HAPI server running, one can be brought up using the HAPI docker-compose file. This instance also includes a Postgres database.
 
 ```sh
 docker-compose -f docker-compose.hapi.yml up -d
@@ -35,6 +35,11 @@ docker-compose -f docker-compose.hapi.config.yml up
 
 You should see the stdout when running this. It will take ~5 minutes depending on your network latency.
 
+To run against a different HAPI FHIR server, the image can be run to target a different address:
+```
+docker run --env IHRIS_FHIR__BASE=http://localhost:8080/fhir ihris/upload-definitions:latest
+```
+
 ```log
 # example output
 upload    | 2020-10-19 16:08:23.233 [main] INFO  c.u.f.c.ValidationDataUploader Uploading ValueSet 540/1167 : ValueSet/property-representation (1510 bytes}
@@ -44,23 +49,20 @@ upload    | 2020-10-19 16:09:46.619 [main] INFO  ca.uhn.fhir.cli.App HAPI FHIR i
 upload exited with code 0
 ```
 
-## Upload iHRIS Custom Definitions
+## Upload Customized iHRIS Definitions
 
-You can either customize and upload your own iHRIS definitions, or for evaluation and demo purposes use a provided image.
-
-```
+iHRIS customizations are written as structure definitions. There is a core set of structure definitions in the iHRIS repository. These must be loaded into HAPI (in addition to the base uploaded above). You can either customize and upload your own iHRIS definitions, or for evaluation and demo purposes use a provided image.
 
 ```
+docker-compose -f docker-compose.ihris.config.yml up
+```
 
-docker run --env IHRIS_FHIR__BASE=http://fhir:8080/fhir --network ihris_default 80356b663895
+To run against a different HAPI FHIR server, the image can be run to target a different address:
+```
+docker run --env IHRIS_FHIR__BASE=http://localhost:8080/fhir ihris/ihris-config:latest
+```
 
-
-docker run --rm -it --network ihris_default $(docker build -q -f Dockerfile.ihris.config .)
-
-
-
-
-## ElasticSearch and Kibana
+## Launch ElasticSearch and Kibana
 
 You may already have ElasticSearch and Kibana running. They are required for functionality. If not, run the following:
 
@@ -69,11 +71,9 @@ docker-compose -f docker-compose.elastic.yml up -d
 ```
 
 
-## Redis and iHRIS
+## Launch Redis and iHRIS
 
-iHRIS customizations are written as structure definitions. There is a core set of structure definitions in the iHRIS repository. These must be loaded into HAPI (in addition to the base uploaded above). 
 
-By default, the Docker image includes loading local (repo) structure definitions. See configuration for more details.
 ```
 docker-compose -f docker-compose.ihris.yml up -d
 ```
@@ -81,7 +81,14 @@ docker-compose -f docker-compose.ihris.yml up -d
 Now open [http://localhost:3000](http://localhost:3000) and log in using username: admin@ihris.org and password: ihris
 
 
+## Load Demo Data
 
+iHRIS does not come loaded with demo data. If there is a need to load fake data for evaluation and demo, there is an existing container to do so.
+```
+docker-compose -f docker-compose.ihris.data yml up -d
+```
+
+Enjoy!
 
 ## Troubleshooting Notes
 
