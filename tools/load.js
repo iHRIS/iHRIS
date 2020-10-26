@@ -1,8 +1,11 @@
+const http = require('http')
 const axios = require('axios')
 const nconf = require('nconf')
 const fs = require('fs')
 const URI = require('urijs');
 const Fhir = require('fhir').Fhir
+
+http.globalAgent.maxSockets = 8
 
 nconf.argv()
 
