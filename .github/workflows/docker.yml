@@ -33,7 +33,7 @@ jobs:
           push: true
           tags: |
             ihris/ihris:${{ github.sha }}
-            ihris:latest
+            ihris/ihris:latest
       -
         name: Image digest
         run: echo ${{ steps.docker_build.outputs.digest }}
