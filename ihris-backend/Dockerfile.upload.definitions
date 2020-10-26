@@ -11,4 +11,13 @@ VOLUME /data
 RUN wget https://github.com/jamesagnew/hapi-fhir/releases/download/v5.1.0/hapi-fhir-5.1.0-cli.tar.bz2 \
     && tar -xf hapi-fhir-5.1.0-cli.tar.bz2 && rm hapi-fhir-5.1.0-cli.tar.bz2
 
-ENTRYPOINT /hapi-fhir/hapi-fhir-cli upload-definitions -v r4 -t http://fhir:8080/fhir/
+# RUN apt-get update && apt-get install -y wget
+ENV DOCKERIZE_VERSION v0.5.0
+RUN wget https://github.com/jwilder/dockerize/releases/download/$DOCKERIZE_VERSION/dockerize-linux-amd64-$DOCKERIZE_VERSION.tar.gz \
+    && tar -C /usr/local/bin -xzvf dockerize-linux-amd64-$DOCKERIZE_VERSION.tar.gz \
+    && rm dockerize-linux-amd64-$DOCKERIZE_VERSION.tar.gz
+
+ARG IHRIS_FHIR__BASE=http://fhir:8080/fhir
+ENV IHRIS_FHIR__BASE=$IHRIS_FHIR__BASE
+
+ENTRYPOINT dockerize -wait ${IHRIS_FHIR__BASE}/metadata /hapi-fhir/hapi-fhir-cli upload-definitions -v r4 -t $IHRIS_FHIR__BASE

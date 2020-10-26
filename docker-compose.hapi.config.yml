@@ -1,0 +1,9 @@
+version: '3'
+
+services:
+
+  upload:
+    container_name: upload
+    image: ihris/upload-definitions:latest
+    environment:
+      IHRIS_FHIR__BASE: http://fhir:8080/fhir

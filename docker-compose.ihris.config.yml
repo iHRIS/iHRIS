@@ -1,0 +1,9 @@
+version: '3'
+
+services:
+
+  ihris-config:
+    container_name: ihris-config
+    image: ihris/ihris-config:latest
+    environment:
+      IHRIS_FHIR__BASE: http://fhir:8080/fhir

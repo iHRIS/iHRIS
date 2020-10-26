@@ -1,0 +1,4 @@
+mkdocs-material
+mkdocs-pdf-export-plugin
+mknotebooks
+mkdocs-git-revision-date-localized-plugin
