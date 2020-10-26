@@ -30,12 +30,7 @@ jobs:
           push: true
           tags: |
             ihris/ihris:${{ github.sha }}
-            # wont work apparently
-            # ihris/ihris:$(git rev-parse --short HEAD)
             ihris:latest
-        #   build-args: |
-        #     arg1=value1
-        #     arg2=value2
       -
         name: Image digest
         run: echo ${{ steps.docker_build.outputs.digest }}
