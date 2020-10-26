@@ -126,7 +126,7 @@ export default {
     index: function() {
       if ( this.slotProps && this.slotProps.input ) return this.slotProps.input.index
       else return undefined
-    }
+    },
     display: function() {
       if ( this.slotProps && this.slotProps.input) return this.slotProps.input.label
       else return this.label
