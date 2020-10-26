@@ -33,7 +33,10 @@ Description:    "iHRIS profile of Practitioner Role."
 * code ^label = "Job"
 * code from http://ihris.org/fhir/ValueSet/ihris-job
 * code.coding 1..1 MS
+* code.coding ^label = "Job"
 * specialty 0..* MS
 * specialty ^label = "Specialty"
+* specialty.coding 1..1 MS
+* specialty.coding ^label = "Specialty"
 * location 1..1 MS
 * location ^label = "Facility"

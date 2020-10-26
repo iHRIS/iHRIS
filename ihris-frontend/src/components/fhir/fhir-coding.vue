@@ -13,6 +13,7 @@
         item-text="display"
         item-value="code"
         :disabled="disabled"
+        :rules="rules"
         dense
       ></v-select>
     </template>
@@ -195,9 +196,20 @@ export default {
     }
   },
   computed: {
+    index: function() {
+      if ( this.slotProps && this.slotProps.input ) return this.slotProps.input.index
+      else return undefined
+    },
     display: function() {
       if ( this.slotProps && this.slotProps.input) return this.slotProps.input.label
       else return this.label
+    },
+    rules: function() {
+      if ( (this.index || 0) < this.min ) {
+        return [ v => !!v || this.display+" is required" ]
+      } else {
+        return []
+      }
     }
     /*
     displayValue: function() {

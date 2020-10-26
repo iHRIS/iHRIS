@@ -13,9 +13,10 @@
         item-text="display"
         item-value="code"
         :disabled="disabled"
+        :rules="rules"
         dense
       ></v-select>
-      <v-text-field :label="display" :disabled="disabled" v-model="value.value" outlined hide-details="auto" dense>
+      <v-text-field :label="display" :disabled="disabled" v-model="value.value" outlined hide-details="auto" :rules="rules_val" dense>
       </v-text-field>
     </template>
     <template #header>
@@ -122,9 +123,31 @@ export default {
     }
   },
   computed: {
+    index: function() {
+      if ( this.slotProps && this.slotProps.input ) return this.slotProps.input.index
+      else return undefined
+    },
     display: function() {
       if ( this.slotProps && this.slotProps.input) return this.slotProps.input.label
       else return this.label
+    },
+    rules: function() {
+      if ( (this.index || 0) < this.min ) {
+        return [ v => !!v || this.display+" is required" ]
+      } else {
+        return []
+      }
+    },
+    rules_val: function() {
+      const num_check = v => {
+        let num = Number(v)
+        return !Number.isNaN(num) || this.display+" must be a number"
+      }
+      let rules = [ num_check ]
+      if ( (this.index || 0) < this.min ) {
+        rules.push ( v => !!v || this.display+" is required" )
+      }
+      return rules
     }
   }
 }

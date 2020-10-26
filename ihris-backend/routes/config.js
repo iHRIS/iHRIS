@@ -313,7 +313,7 @@ router.get('/page/:page/:type?', function(req, res) {
             let attrs = [ "field", "sliceName", "targetProfile", "profile", "min", "max", "base-min",
               "base-max", "label", "path", "binding", "calendar" ]
             const minmax = [ "Date", "DateTime", "Instant", "Time", "Decimal", "Integer", "PositiveInt",
-              "UnsignedInt" ]
+              "UnsignedInt", "Quantity" ]
             for( let mm of minmax ) {
               for( let type of [ "min", "max" ] ) {
                 attrs.push( type+"Value"+mm )
@@ -344,7 +344,12 @@ router.get('/page/:page/:type?', function(req, res) {
             }
             for( let attr of attrs ) {
               if ( fields[field].hasOwnProperty(attr) ) {
-                output += " "+attr+"=\""+fields[field][attr]+"\""
+                if ( fields[field][attr] 
+                  && fields[field][attr].value && fields[field][attr].code ) {
+                  output += " "+attr+"=\""+fields[field][attr].value+fields[field][attr].code+"\""
+                } else {
+                  output += " "+attr+"=\""+fields[field][attr]+"\""
+                }
               } else if ( nconf.get("defaults:components:"+eleName+":"+attr) ) {
                 output += " "+attr+"=\""
                   +nconf.get("defaults:components:"+eleName+":"+attr)+"\""
@@ -649,12 +654,17 @@ router.get('/questionnaire/:questionnaire', function(req, res) {
               vueOutput += " targetProfile=\""+field.type[0].targetProfile[0]+"\""
             }
             const minmax = [ "Date", "DateTime", "Instant", "Time", "Decimal", "Integer", "PositiveInt",
-              "UnsignedInt" ]
+              "UnsignedInt", "Quantity" ]
             for( let mm of minmax ) {
               for( let type of [ "min", "max" ] ) {
                 let attr = type+"Value"+mm
                 if ( field.hasOwnProperty(attr) ) {
-                  vueOutput += " "+attr+"=\""+field[attr]+"\""
+                  if ( field[attr] 
+                    && field[attr].value && field[attr].code ) {
+                    vueOutput += " "+attr+"=\""+field[attr].value+field[attr].code+"\""
+                  } else {
+                    vueOutput += " "+attr+"=\""+field[attr]+"\""
+                  }
                 } else if ( nconf.get("defaults:components:"+itemType+":"+attr) ) {
                   vueOutput += " "+attr+"=\""
                     +nconf.get("defaults:components:"+itemType+":"+attr)+"\""
@@ -679,12 +689,24 @@ router.get('/questionnaire/:questionnaire', function(req, res) {
           if ( displayType ) {
             vueOutput += " displayType=\""+ displayType +"\""
           }
+          if ( item.required ) {
+            vueOutput += ' min="1"'
+          } else {
+            vueOutput += ' max="0"'
+          }
+          if ( item.repeats ) {
+            vueOutput += ' max="*"'
+          } else {
+            vueOutput += ' max="1"'
+          }
+          /*
           let attrs = [ "required" ]
           for( let attr of attrs ) {
             if ( item.hasOwnProperty(attr) ) {
               vueOutput += " " + attr + "=\""+ item[attr] + "\""
             }
           }
+          */
           vueOutput += "></fhir-" + itemType +">\n"
 
         }
