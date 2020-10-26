@@ -62,6 +62,13 @@ To run against a different HAPI FHIR server, the image can be run to target a di
 docker run --env IHRIS_FHIR__BASE=http://localhost:8080/fhir ihris/ihris-config:latest
 ```
 
+## Load Demo Data
+
+iHRIS does not come loaded with demo data. If there is a need to load fake data for evaluation and demo, there is an existing container to do so.
+```
+docker-compose -f docker-compose.ihris.data yml up -d
+```
+
 ## Launch ElasticSearch and Kibana
 
 You may already have ElasticSearch and Kibana running. They are required for functionality. If not, run the following:
@@ -80,13 +87,6 @@ docker-compose -f docker-compose.ihris.yml up -d
 
 Now open [http://localhost:3000](http://localhost:3000) and log in using username: admin@ihris.org and password: ihris
 
-
-## Load Demo Data
-
-iHRIS does not come loaded with demo data. If there is a need to load fake data for evaluation and demo, there is an existing container to do so.
-```
-docker-compose -f docker-compose.ihris.data yml up -d
-```
 
 Enjoy!
 
