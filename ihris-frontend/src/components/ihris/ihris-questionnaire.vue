@@ -1,47 +1,60 @@
 <template>
   <v-container class="my-3">
+
+    <v-form 
+      ref="form"
+      v-model="valid"
+    >
         
-    <slot></slot>
-    <v-overlay :value="overlay">
-      <v-progress-circular
-        size="50"
-        color="primary"
-        indeterminate
-        ></v-progress-circular>
-      <v-btn icon @click="overlay = false"><v-icon>mdi-close</v-icon></v-btn>
-    </v-overlay>
-
-    <v-navigation-drawer
-      app
-      right
-      permanent
-      clipped
-      class="primary darken-1 white--text"
-      style="z-index: 3;"
-      >
-      <v-list class="white--text">
-        <v-list-item>
-          <v-btn dark class="accent darken-1" @click="$router.go(-1)" v-if="isEdit">
-          <v-icon light>mdi-content-save</v-icon>
-          <span>Back</span>
-          </v-btn>
-          <v-spacer></v-spacer>
-          <v-btn dark class="success darken-1" @click="processFHIR()">
-          <v-icon light>mdi-content-save</v-icon>
-          <span>Save</span>
-          </v-btn>
-        </v-list-item>
-        <v-divider color="white"></v-divider>
-        <v-subheader class="white--text" v-if="sectionMenu"><h2>Sections</h2></v-subheader>
-        <v-list-item v-for="section in sectionMenu" :href="'#section-'+section.id" :key="section.id">
-          <v-list-item-content class="white--text">
-            <v-list-item-title class="text-uppercase"><h4>{{ section.title }}</h4></v-list-item-title>
-            <v-list-item-subtitle class="white--text">{{ section.desc }}</v-list-item-subtitle>
-          </v-list-item-content>
-        </v-list-item>
-      </v-list>
-
-    </v-navigation-drawer>
+      <slot></slot>
+      <v-overlay :value="overlay">
+        <v-progress-circular
+          size="50"
+          color="primary"
+          indeterminate
+          ></v-progress-circular>
+        <v-btn icon @click="overlay = false"><v-icon>mdi-close</v-icon></v-btn>
+      </v-overlay>
+  
+      <v-navigation-drawer
+        app
+        right
+        permanent
+        clipped
+        class="primary darken-1 white--text"
+        style="z-index: 3;"
+        >
+        <v-list class="white--text">
+          <v-list-item>
+            <v-btn dark class="accent darken-1" @click="$router.go(-1)" v-if="isEdit">
+            <v-icon light>mdi-content-save</v-icon>
+            <span>Back</span>
+            </v-btn>
+            <v-spacer></v-spacer>
+            <v-btn dark class="success darken-1" @click="processFHIR()" :disabled="!valid">
+            <v-icon light>mdi-content-save</v-icon>
+            <span>Save</span>
+            </v-btn>
+          </v-list-item>
+          <v-list-item>
+            <v-spacer/>
+            <v-btn dark class="accent" @click="$refs.form.validate()" v-if="edit">
+              <v-icon light>mdi-account-check</v-icon>
+              <span>Validate</span>
+            </v-btn>
+          </v-list-item>
+          <v-divider color="white"></v-divider>
+          <v-subheader class="white--text" v-if="sectionMenu"><h2>Sections</h2></v-subheader>
+          <v-list-item v-for="section in sectionMenu" :href="'#section-'+section.id" :key="section.id">
+            <v-list-item-content class="white--text">
+              <v-list-item-title class="text-uppercase"><h4>{{ section.title }}</h4></v-list-item-title>
+              <v-list-item-subtitle class="white--text">{{ section.desc }}</v-list-item-subtitle>
+            </v-list-item-content>
+          </v-list-item>
+        </v-list>
+  
+      </v-navigation-drawer>
+    </v-form>
   </v-container>
 
 </template>
@@ -56,7 +69,8 @@ export default {
       fhir: {},
       loading: false,
       overlay: false,
-      isEdit: false
+      isEdit: false,
+      valid: true
     }
   },
   created: function() {
@@ -64,6 +78,8 @@ export default {
   },
   methods: {
     processFHIR: function() {
+      this.$refs.form.validate()
+      if ( !this.valid ) return
       this.overlay = true
       this.loading = true
       //console.log(this.field)

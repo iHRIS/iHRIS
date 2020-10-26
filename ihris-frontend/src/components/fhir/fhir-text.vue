@@ -1,7 +1,7 @@
 <template>
   <ihris-element :edit="edit" :loading="false">
     <template #form>
-      <v-textarea :disabled="disabled" :label="label" v-model="value" outlined hide-details="auto" dense>
+      <v-textarea :disabled="disabled" :label="label" v-model="value" outlined hide-details="auto" :rules="rules" dense>
       </v-textarea>
     </template>
     <template #header>
@@ -72,6 +72,13 @@ export default {
     display: function() {
       if ( this.slotProps && this.slotProps.input) return this.slotProps.input.label
       else return this.label
+    },
+    rules: function() {
+      if ( (this.index || 0) < this.min ) {
+        return [ v => !!v || this.display+" is required" ]
+      } else {
+        return []
+      }
     }
   }
 }

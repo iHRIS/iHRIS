@@ -1,3 +1,9 @@
+Invariant:      ihris-age-18
+Description:    "birthDate must be more than 18 years ago."
+Expression:     "birthDate < today() - 18 years"
+Severity:       #error
+
+
 Profile:        IhrisPractitioner
 Parent:         Practitioner
 Id:             ihris-practitioner
@@ -19,9 +25,9 @@ Description:    "iHRIS profile of Practitioner."
 * name ^label = "Name"
 * name.use MS
 * name.use ^label = "Use"
-* name.family MS
+* name.family 1..1 MS
 * name.family ^label = "Family"
-* name.given MS
+* name.given 1..* MS
 * name.given ^label = "Given Name"
 * name.prefix MS
 * name.prefix ^label = "Prefix"
@@ -41,7 +47,7 @@ Description:    "iHRIS profile of Practitioner."
 * address.use ^label = "Use"
 * address.type MS
 * address.type ^label = "Type"
-* address.line MS
+* address.line 1..1 MS
 * address.line ^label = "Line"
 * address.city MS
 * address.city ^label = "City"
@@ -57,6 +63,13 @@ Description:    "iHRIS profile of Practitioner."
 * gender ^label = "Gender"
 * birthDate MS
 * birthDate ^label = "Birth Date"
+* birthDate obeys ihris-age-18
+* birthDate ^minValueQuantity.system = "http://unitsofmeasure.org/"
+* birthDate ^minValueQuantity.code = #a
+* birthDate ^minValueQuantity.value = 100
+* birthDate ^maxValueQuantity.system = "http://unitsofmeasure.org/"
+* birthDate ^maxValueQuantity.code = #a
+* birthDate ^maxValueQuantity.value = -18
 * photo 0..1 MS
 * photo ^label = "Photo"
 * communication 0..* MS
@@ -251,7 +264,7 @@ Usage:          #definition
 * item[1].item[0].item[2].definition = "http://ihris.org/fhir/StructureDefinition/ihris-practitioner#Practitioner.address.line"
 * item[1].item[0].item[2].text = "Street Address"
 * item[1].item[0].item[2].type = #string
-* item[1].item[0].item[2].required = false
+* item[1].item[0].item[2].required = true
 * item[1].item[0].item[2].repeats = true
 
 * item[1].item[0].item[3].linkId = "Practitioner.address[0].city"

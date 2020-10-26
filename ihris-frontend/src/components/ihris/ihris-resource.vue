@@ -1,58 +1,71 @@
 <template>
   <v-container class="my-3">
         
-    <slot :source="source"></slot>
-    <v-overlay :value="overlay">
-      <v-progress-circular
-        size="50"
-        color="primary"
-        indeterminate
-        ></v-progress-circular>
-    </v-overlay>
+    <v-form 
+      ref="form"
+      v-model="valid"
+    >
+  
+      <slot :source="source"></slot>
+      <v-overlay :value="overlay">
+        <v-progress-circular
+          size="50"
+          color="primary"
+          indeterminate
+          ></v-progress-circular>
+      </v-overlay>
 
-    <v-navigation-drawer
-      app
-      right
-      permanent
-      clipped
-      class="primary darken-1 white--text"
-      style="z-index: 3;"
-      >
-      <v-list class="white--text">
-        <v-list-item>
-          <v-btn v-if="!edit" dark class="secondary" @click="$emit('set-edit', !edit)">
-          <v-icon light>mdi-pencil</v-icon>
-          <span>Edit</span>
-          </v-btn>
-          <v-btn v-else dark class="secondary" @click="$router.go(0)">
-          <v-icon light>mdi-pencil-off</v-icon>
-          <span>Cancel</span>
-          </v-btn>
-          <v-spacer></v-spacer>
-          <v-btn dark class="success darken-1" @click="processFHIR()" v-if="edit">
-          <v-icon light>mdi-content-save</v-icon>
-          <span>Save</span>
-          </v-btn>
-        </v-list-item>
-        <v-divider color="white"></v-divider>
-        <template v-if="!edit && links && links.length">
-          <v-list-item v-for="(link,idx) in links" :key="link.url">
-            <v-btn :key="link.url" :text="!link.button" :to="getLinkUrl(link)" class="primary">
-              <v-icon light v-if="link.icon">{{link.icon}}</v-icon>
-              {{ linktext[idx]  }}
+      <v-navigation-drawer
+        app
+        right
+        permanent
+        clipped
+        class="primary darken-1 white--text"
+        style="z-index: 3;"
+        >
+        <v-list class="white--text">
+          <v-list-item>
+            <v-btn v-if="!edit" dark class="secondary" @click="$emit('set-edit', !edit)">
+              <v-icon light>mdi-pencil</v-icon>
+              <span>Edit</span>
+            </v-btn>
+            <v-btn v-else dark class="secondary" @click="$router.go(0)">
+              <v-icon light>mdi-pencil-off</v-icon>
+              <span>Cancel</span>
+            </v-btn>
+            <v-spacer></v-spacer>
+            <v-btn dark class="success darken-1" @click="processFHIR()" v-if="edit" :disabled="!valid">
+              <v-icon light>mdi-content-save</v-icon>
+              <span>Save</span>
             </v-btn>
           </v-list-item>
-        </template>
-        <v-subheader v-if="sectionMenu" class="white--text"><h2>Sections</h2></v-subheader>
-        <v-list-item v-for="section in sectionMenu" :href="'#section-'+section.name" :key="section.name">
-          <v-list-item-content class="white--text" v-if="!edit || !section.secondary">
-            <v-list-item-title class="text-uppercase"><h4>{{ section.title }}</h4></v-list-item-title>
-            <v-list-item-subtitle class="white--text">{{ section.desc }}</v-list-item-subtitle>
-          </v-list-item-content>
-        </v-list-item>
-      </v-list>
-
-    </v-navigation-drawer>
+          <v-list-item v-if="edit">
+            <v-spacer/>
+            <v-btn dark class="accent" @click="$refs.form.validate()" v-if="edit">
+              <v-icon light>mdi-account-check</v-icon>
+              <span>Validate</span>
+            </v-btn>
+          </v-list-item>
+          <v-divider color="white"></v-divider>
+          <template v-if="!edit && links && links.length">
+            <v-list-item v-for="(link,idx) in links" :key="link.url">
+              <v-btn :key="link.url" :text="!link.button" :to="getLinkUrl(link)" class="primary">
+                <v-icon light v-if="link.icon">{{link.icon}}</v-icon>
+                {{ linktext[idx]  }}
+              </v-btn>
+            </v-list-item>
+          </template>
+          <v-subheader v-if="sectionMenu" class="white--text"><h2>Sections</h2></v-subheader>
+          <v-list-item v-for="section in sectionMenu" :href="'#section-'+section.name" :key="section.name">
+            <v-list-item-content class="white--text" v-if="!edit || !section.secondary">
+              <v-list-item-title class="text-uppercase"><h4>{{ section.title }}</h4></v-list-item-title>
+              <v-list-item-subtitle class="white--text">{{ section.desc }}</v-list-item-subtitle>
+            </v-list-item-content>
+          </v-list-item>
+        </v-list>
+  
+      </v-navigation-drawer>
+    </v-form>
   </v-container>
 
 </template>
@@ -64,6 +77,7 @@ export default {
   data: function() {
     return {
       fhir: {},
+      valid: true,
       source: { data: {}, path: "" },
       loading: false,
       overlay: false,
@@ -212,6 +226,8 @@ export default {
       }
     },
     processFHIR: function() {
+      this.$refs.form.validate()
+      if ( !this.valid ) return
       this.overlay = true
       this.loading = true
       //console.log(this.field)

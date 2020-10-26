@@ -13,6 +13,7 @@
         item-text="display"
         item-value="code"
         :disabled="disabled"
+        :rules="rules"
         dense
       ></v-select>
     </template>
@@ -91,72 +92,13 @@ export default {
         this.err_messages = err.message
         this.loading = false
       } )
-      /*
-      let lastSlash = binding.lastIndexOf('/')
-      let lastPipe = binding.lastIndexOf('|')
-      let valueSetId = binding.slice(lastSlash+1, (lastPipe !== -1 ? lastPipe : binding.length ))
-      fetch("/fhir/ValueSet/"+valueSetId+"/$expand").then(response=> {
-        if( response.ok ) {
-          response.json().then(data=>{
-            this.loading = false
-            try {
-              this.items = data.expansion.contains
-              this.items.sort( itemSort )
-            } catch(err) {
-              this.error = true
-              this.err_messages = "Invalid response from server."
-            }
-          }).catch(err=>{
-            this.err_messages = err.message
-            this.error = true
-            this.loading = false
-          })
-        } else {
-          // Try loading valueset without expansion if expand failed.
-          console.log("Failed to get ValueSet Expansion for "+valueSetId)
-          fetch("/fhir/ValueSet/"+valueSetId).then(response=> {
-            if ( response.ok ) {
-              response.json().then(data=> {
-                this.items = []
-                if ( data.compose.include ) {
-                  for( let include of data.compose.include ) {
-                    if ( include.concept ) {
-                      for ( let concept of include.concept ) {
-                        //this.items.push( { system: include.system, ...concept } )
-                        concept.system = include.system
-                        this.items.push( concept )
-                      }
-                    }
-                  }
-                }
-                this.items.sort( itemSort )
-                this.loading = false
-              }).catch(err=>{
-                this.err_messages = err.message
-                this.error = true
-                this.loading = false
-              })
-            } else {
-              this.error = true
-              this.err_messages = "Invalid response from server."
-              this.loading = false
-            }
-          }).catch(err=>{
-            this.err_messages = err.message
-            this.error = true
-            this.loading = false
-          })
-
-        }
-      }).catch(err=>{
-        this.err_messages = err.message
-        this.error = true
-        this.loading = false
-      })
-      */
     }
   },
   computed: {
+    index: function () {
+      if ( this.slotProps && this.slotProps.input ) return this.slotProps.input.index
+      else return undefined
+    },
     display: function() {
       if ( this.slotProps && this.slotProps.input) return this.slotProps.input.label
       else return this.label
@@ -167,6 +109,13 @@ export default {
         return found.display
       } else {
         return ""
+      }
+    },
+    rules: function() {
+      if ( (this.index || 0) < this.min ) {
+        return [ v => !!v || this.display+" is required" ]
+      } else {
+        return []
       }
     }
   }

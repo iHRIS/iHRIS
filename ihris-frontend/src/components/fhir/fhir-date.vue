@@ -1,7 +1,7 @@
 <template>
   <ihris-element :edit="edit" :loading="false">
     <template #form>
-      <v-text-field v-model="value" type="number" :disabled="disabled" :label="label" :min="minYear" :max="maxYear" v-if="pickerType==='year'"></v-text-field>
+      <v-text-field v-model="value" type="number" :disabled="disabled" :label="label" :min="minYear" :max="maxYear" v-if="pickerType==='year'" :rules="rules" dense></v-text-field>
       <v-menu 
         ref="menu" 
         v-model="menu" 
@@ -20,6 +20,7 @@
             v-on="on"
             outlined
             hide-details="auto"
+            :rules="rules"
             dense
           ></v-text-field>
         </template>
@@ -32,8 +33,8 @@
                 color="secondary"
                 :landscape="$vuetify.breakpoint.smAndUp"
                 v-model="value"
-                :max="maxValueDate"
-                :min="minValueDate"
+                :max="dateValueMax"
+                :min="dateValueMin"
                 :type="pickerType"
                 :disabled="disabled"
                 @change="save"
@@ -63,8 +64,8 @@
           color="secondary"
           :landscape="$vuetify.breakpoint.smAndUp"
           v-model="value"
-          :max="maxValueDate"
-          :min="minValueDate"
+          :max="dateValueMax"
+          :min="dateValueMin"
           :type="pickerType"
           :disabled="disabled"
           @change="save"
@@ -89,7 +90,7 @@ import ethiopic from "ethiopic-calendar"
 export default {
   name: "fhir-date",
   props: ["field","min","max","base-min","base-max", "label", "slotProps", "path", "edit","sliceName", 
-    "minValueDate", "maxValueDate", "displayType","readOnlyIfSet", "calendar"],
+    "minValueDate", "maxValueDate", "minValueQuantity", "maxValueQuantity", "displayType","readOnlyIfSet", "calendar"],
   components: {
     IhrisElement,
     VEthiopianDatePicker
@@ -110,25 +111,48 @@ export default {
     this.setupData()
   },
   computed: {
+    dateValueMax: function() {
+      if ( this.maxValueQuantity ) {
+        let maxDate = this.convertQuantity( this.maxValueQuantity, "add" )
+        if ( maxDate ) {
+          return maxDate
+        }
+      } 
+      if ( this.maxValueDate ) {
+        return this.maxValueDate
+      }
+      return undefined
+    },
+    dateValueMin: function() {
+      if ( this.minValueQuantity ) {
+        let minDate = this.convertQuantity( this.minValueQuantity, "subtract" )
+        if ( minDate ) {
+          return minDate
+        }
+      } else if ( this.minValueDate ) {
+        return this.minValueDate
+      }
+      return undefined
+    },
     minYear: function() {
-      return this.minValueDate.substring(0,4)
+      return this.dateValueMin.substring(0,4)
     },
     maxYear: function() {
-      return this.maxValueDate.substring(0,4)
+      return this.dateValueMax.substring(0,4)
     },
     isEthiopian: function() {
       return this.calendar === "Ethiopian"
     },
     minValueETDate: function() {
-      if ( this.minValueDate ) {
-        return this.convertGE( this.minValueDate )
+      if ( this.dateValueMin ) {
+        return this.convertGE( this.dateValueMin )
       } else {
         return null
       }
     },
     maxValueETDate: function() {
-      if ( this.maxValueDate ) {
-        return this.convertGE( this.maxValueDate )
+      if ( this.dateValueMax ) {
+        return this.convertGE( this.dateValueMax )
       } else {
         return null
       }
@@ -138,6 +162,17 @@ export default {
         return this.value && "Gregorian: " + this.value + " Ethiopian: "+this.etValue
       } else {
         return this.value
+      }
+    },
+    index: function() {
+      if ( this.slotProps && this.slotProps.input ) return this.slotProps.input.index
+      else return undefined
+    },
+    rules: function() {
+      if ( (this.index || 0) < this.min ) {
+        return [ v => !!v || this.label+" is required" ]
+      } else {
+        return []
       }
     }
   },
@@ -170,6 +205,31 @@ export default {
     }
   },
   methods: {
+    convertQuantity(val, direction) {
+      const unitsofmeasure = {
+        'a': 'years',
+        'mo': 'months',
+        'wk': 'weeks',
+        'd': 'days',
+      }
+      const quant = /(-?\d+)([a-z]{1,3})/
+
+      let match = val.match( quant )
+      if ( match.length === 3 ) {
+        try {
+          let value = match[1]
+          let unit = unitsofmeasure[ match[2] ]
+          if ( direction === "subtract" ) {
+            return this.$moment( this.$moment().subtract(value, unit) ).format('YYYY-MM-DD')
+          } else {
+            return this.$moment( this.$moment().add(value, unit) ).format('YYYY-MM-DD')
+          }
+        } catch (e) {
+          console.log("Failed to get date from quantity",e)
+        }
+      }
+      return undefined
+    },
     convertGE(val) {
       const [ year, month, day ] = val.split('-').map(Number)
       let etDate = ethiopic.ge( year, month || 1, day  || 1)

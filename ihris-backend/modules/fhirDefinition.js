@@ -94,7 +94,7 @@ const fhirDefinition = {
       }
 
       const min_max_copies = [ "Date", "DateTime", "Instant", "Time", "Decimal", "Integer", 
-        "PositiveInt", "UnsignedInt" ]
+        "PositiveInt", "UnsignedInt", "Quantity" ]
       for( let copy of min_max_copies ) {
         for( let type of [ "min", "max" ] ) {
           let prop = type+"Value"+copy

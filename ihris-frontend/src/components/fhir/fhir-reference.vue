@@ -14,6 +14,7 @@
         outlined
         dense
         placeholder="Start typing for selection"
+        :rules="rules"
         :disabled="(disabled) || (preset && $route.name === 'resource_add')"
       ></v-autocomplete>
     </template>
@@ -142,6 +143,13 @@ export default {
     display: function() {
       if ( this.slotProps && this.slotProps.input) return this.slotProps.input.label
       else return this.label
+    },
+    rules: function() {
+      if ( (this.index || 0) < this.min ) {
+        return [ v => !!v || this.display+" is required" ]
+      } else {
+        return []
+      }
     }
   }
 

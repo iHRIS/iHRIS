@@ -6,7 +6,7 @@
       </v-row>
       <v-divider></v-divider>
     </div>
-    <div v-else>
+    <v-container v-else>
       <v-card>
         <v-system-bar
           color="secondary"
@@ -15,12 +15,12 @@
           >
           {{ label }}
           <v-spacer></v-spacer>
-          <v-btn v-if="subAvailable" icon @click="removeRow()"><v-icon>mdi-minus</v-icon></v-btn>
+          <v-btn v-if="subAvailable" icon @click="removeRow()"><v-icon class="font-weight-bold">mdi-minus</v-icon></v-btn>
           <v-btn v-if="addAvailable" icon @click="addRow()"><v-icon>mdi-plus</v-icon></v-btn>
         </v-system-bar>
         <slot v-for="input in inputs" :input="input" :source="input.source"></slot>
       </v-card>
-    </div>
+    </v-container>
   </div>
 </template>
 
@@ -32,7 +32,8 @@ export default {
     return {
       inputs: [],
       source: { path: "", data: [] },
-      isArray: true
+      isArray: true,
+      lockWatch: false
     }
   },
   created: function() {
@@ -42,8 +43,11 @@ export default {
     slotProps: {
       handler() {
 
-        //console.log("WATCHARR",this.path,this.slotProps.source)
-        this.setupInputs()
+        if ( !this.lockWatch ) {
+          //console.log("WATCHARR",this.path,this.slotProps.source)
+          this.setupInputs()
+          this.lockWatch = true
+        }
       },
       deep: true
     }
@@ -74,13 +78,15 @@ export default {
       //console.log("ARR inputs",this.id,this.source,this.inputs)
     },
     addRow: function() {
+      this.lockWatch = true
       if ( this.addAvailable ) {
         let label = this.label
         if ( this.displayIndex ) {
           label += " ("+(this.inputs.length+1)+")"
         }
-        this.inputs.push( { label: label, index: this.baseIndex + this.inputs.length } )
+        this.inputs.push( { label: label, index: this.inputs.length } )
       }
+      console.log(this.inputs)
     },
     removeRow: function() {
       if ( this.subAvailable ) {
@@ -93,7 +99,7 @@ export default {
   },
   computed: {
     actualMin: function() {
-      return Math.max( this.min, ( this.source.data.length > 0 ? this.source.data.length : 1 ) )
+      return Math.max( this.min, ( this.source.data.length > 0 ? this.source.data.length : 0 ) )
       //return this.min < 1 ? 1 : this.min
     },
     addAvailable: function() {

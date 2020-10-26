@@ -106,6 +106,18 @@ const fhirutils = {
     const itemSort = (a,b) => {
       return (a.display === b.display ? (a.code === b.code ? 0 : (a.code < b.code ? -1: 1)) : (a.display < b.display ? -1 : 1) )
     }
+    const populateItemsFromCompose = ( valueset, items ) => {
+      if ( valueset.compose.include ) {
+        for( let include of valueset.compose.include ) {
+          if ( include.concept ) {
+            for ( let concept of include.concept ) {
+              concept.system = include.system
+              items.push( concept )
+            }
+          }
+        }
+      }
+    }
     return new Promise( (resolve, reject) => {
       let lastSlash = valueset.lastIndexOf('/')
       let lastPipe = valueset.lastIndexOf('|')
@@ -116,7 +128,11 @@ const fhirutils = {
         if( response.ok ) {
           response.json().then(data=>{
             try {
-              items = data.expansion.contains
+              if ( ( !data.expansion || data.expansion.total === 0 ) && data.compose.include ) {
+                populateItemsFromCompose( data, items )
+              } else {
+                items = data.expansion.contains
+              }
               items.sort( itemSort )
               resolve( items )
             } catch(err) {
@@ -130,6 +146,8 @@ const fhirutils = {
           fetch("/fhir/ValueSet/"+valueSetId).then(response=> {
             if ( response.ok ) {
               response.json().then(data=> {
+                populateItemsFromCompose( data, items )
+                /*
                 if ( data.compose.include ) {
                   for( let include of data.compose.include ) {
                     if ( include.concept ) {
@@ -140,6 +158,7 @@ const fhirutils = {
                     }
                   }
                 }
+                */
                 items.sort( itemSort )
                 resolve( items )
               }).catch(err=>{

@@ -1,7 +1,7 @@
 <template>
   <ihris-element :edit="edit" :loading="false">
     <template #form>
-      <v-text-field :label="display" :disabled="disabled" :name="field" v-model.number="value" outlined hide-details="auto" dense>
+      <v-text-field :label="display" :disabled="disabled" :name="field" v-model.number="value" outlined hide-details="auto" :rules="rules" dense>
       </v-text-field>
     </template>
     <template #header>
@@ -71,6 +71,17 @@ export default {
     display: function() {
       if ( this.slotProps && this.slotProps.input ) return this.slotProps.input.label
       else return this.label
+    },
+    rules: function() {
+      const num_check = v => {
+        let num = Number(v)
+        return (Number.isInteger(num) && num >= 0) || this.display+" must be a positive integer"
+      }
+      let rules = [ num_check ]
+      if ( (this.index || 0) < this.min ) {
+        rules.push ( v => !!v || this.display+" is required" )
+      }
+      return rules
     }
   }
 }

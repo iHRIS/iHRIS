@@ -5,6 +5,7 @@
         v-model="value"
         :label="display+`: ${value.toString()}`"
         :disabled="disabled"
+        :rules="rules"
         dense
       >
       </v-switch>
@@ -71,12 +72,19 @@ export default {
   },
   computed: {
     index: function() {
-      if ( this.slotProps ) return this.slotProps.input
+      if ( this.slotProps && this.slotProps.input ) return this.slotProps.input.index
       else return undefined
     },
     display: function() {
       if ( this.slotProps && this.slotProps.input) return this.slotProps.input.label
       else return this.label
+    },
+    rules: function() {
+      if ( (this.index || 0) < this.min ) {
+        return [ v => !!v || this.display+" is required" ]
+      } else {
+        return []
+      }
     }
   }
 }
