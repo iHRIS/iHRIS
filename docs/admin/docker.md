@@ -3,6 +3,23 @@
 !!! note 
     Time to complete: 20 minutes
 
+
+## Requirements
+
+Memory dedicated to Docker should be increased to 4GB or more. This is a snapshot of memory usage with demo records and no dashboards. iHRIS, Redis, and Postgres use very minimal RAM, compared to Kibana (552MiB), ElasticSearch (846MiB), and HAPI FHIR Server (821MiB).
+```
+$ docker stats --no-stream
+CONTAINER ID        NAME                CPU %               MEM USAGE / LIMIT  
+e70fb8fa618b        ihris               0.00%               66.21MiB / 3.848GiB
+8c97df1a9977        ihris_redis_1       0.18%               2.156MiB / 3.848GiB
+6899574ca46f        kibana              1.00%               552.5MiB / 3.848GiB
+e0a178ab8a1f        es                  2.17%               846.8MiB / 3.848GiB
+19cd64447c41        fhir                1.19%               821.4MiB / 3.848GiB
+8c1f348e9e3e        ihris_db_1          0.20%               54.07MiB / 3.848GiB
+```
+
+## Clone the Repository
+
 Clone the repository and change to the root of it.
 
 ```sh
@@ -53,6 +70,7 @@ upload exited with code 0
 
 iHRIS customizations are written as structure definitions. There is a core set of structure definitions in the iHRIS repository. These must be loaded into HAPI (in addition to the base uploaded above). You can either customize and upload your own iHRIS definitions, or for evaluation and demo purposes use a provided image.
 
+To use the existing structure definitions:
 ```
 docker-compose -f docker-compose.ihris.config.yml up
 ```
@@ -66,7 +84,7 @@ docker run --env IHRIS_FHIR__BASE=http://localhost:8080/fhir ihris/ihris-config:
 
 iHRIS does not come loaded with demo data. If there is a need to load fake data for evaluation and demo, there is an existing container to do so.
 ```
-docker-compose -f docker-compose.ihris.data yml up -d
+docker-compose -f docker-compose.ihris.data.yml up -d
 ```
 
 ## Launch ElasticSearch and Kibana
@@ -87,6 +105,7 @@ docker-compose -f docker-compose.ihris.yml up -d
 
 Now open [http://localhost:3000](http://localhost:3000) and log in using username: admin@ihris.org and password: ihris
 
+There will be no dashboards by default.
 
 Enjoy!
 
