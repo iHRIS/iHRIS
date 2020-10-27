@@ -6,6 +6,8 @@
 
 ## Requirements
 
+The Docker approach requires Docker for Mac, Linux, or Windows. 
+
 Memory dedicated to Docker should be increased to 4GB or more. This is a snapshot of memory usage with demo records and no dashboards. iHRIS, Redis, and Postgres use very minimal RAM, compared to Kibana (552MiB), ElasticSearch (846MiB), and HAPI FHIR Server (821MiB).
 ```
 $ docker stats --no-stream
