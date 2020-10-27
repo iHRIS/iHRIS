@@ -16,6 +16,7 @@
         :rules="rules"
         dense
       ></v-select>
+      <template #label>{{display}} <span v-if="required" class="red--text font-weight-bold">*</span></template>
     </template>
     <template #header>
       {{display}}
@@ -111,8 +112,11 @@ export default {
         return ""
       }
     },
+    required: function() {
+      return (this.index || 0) < this.min 
+    },
     rules: function() {
-      if ( (this.index || 0) < this.min ) {
+      if ( this.required ) {
         return [ v => !!v || this.display+" is required" ]
       } else {
         return []

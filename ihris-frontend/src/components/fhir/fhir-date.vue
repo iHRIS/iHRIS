@@ -1,7 +1,9 @@
 <template>
   <ihris-element :edit="edit" :loading="false">
     <template #form>
-      <v-text-field v-model="value" type="number" :disabled="disabled" :label="label" :min="minYear" :max="maxYear" v-if="pickerType==='year'" :rules="rules" dense></v-text-field>
+      <v-text-field v-model="value" type="number" :disabled="disabled" :label="label" :min="minYear" :max="maxYear" v-if="pickerType==='year'" :rules="rules" dense>
+        <template #label>{{label}} <span v-if="required" class="red--text font-weight-bold">*</span></template>
+      </v-text-field>
       <v-menu 
         ref="menu" 
         v-model="menu" 
@@ -22,7 +24,9 @@
             hide-details="auto"
             :rules="rules"
             dense
-          ></v-text-field>
+          >
+            <template #label>{{label}} <span v-if="required" class="red--text font-weight-bold">*</span></template>
+          </v-text-field>
         </template>
         <v-container class="ma-0 pa-0" v-if="isEthiopian">
           <v-row no-gutters>
@@ -168,8 +172,11 @@ export default {
       if ( this.slotProps && this.slotProps.input ) return this.slotProps.input.index
       else return undefined
     },
+    required: function() {
+      return (this.index || 0) < this.min 
+    },
     rules: function() {
-      if ( (this.index || 0) < this.min ) {
+      if ( this.required ) {
         return [ v => !!v || this.label+" is required" ]
       } else {
         return []

@@ -8,6 +8,7 @@
         :rules="rules"
         dense
       >
+      <template #label>{{display}}: {{value.toString()}} <span v-if="required" class="red--text font-weight-bold">*</span></template>
       </v-switch>
     </template>
     <template #header>
@@ -79,8 +80,11 @@ export default {
       if ( this.slotProps && this.slotProps.input) return this.slotProps.input.label
       else return this.label
     },
+    required: function() {
+      return (this.index || 0) < this.min
+    },
     rules: function() {
-      if ( (this.index || 0) < this.min ) {
+      if ( this.required ) {
         return [ v => !!v || this.display+" is required" ]
       } else {
         return []
