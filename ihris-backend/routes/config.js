@@ -692,7 +692,7 @@ router.get('/questionnaire/:questionnaire', function(req, res) {
           if ( item.required ) {
             vueOutput += ' min="1"'
           } else {
-            vueOutput += ' max="0"'
+            vueOutput += ' min="0"'
           }
           if ( item.repeats ) {
             vueOutput += ' max="*"'

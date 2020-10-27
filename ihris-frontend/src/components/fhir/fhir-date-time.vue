@@ -1,17 +1,27 @@
 <template>
   <ihris-element :edit="edit" :loading="false">
     <template #form>
-      <v-text-field v-model="value" type="number" :disabled="disabled" :label="label" :min="minYear" :max="maxYear" v-if="pickerType==='year'" :rules="rules" dense>
+      <v-text-field 
+        v-if="pickerType==='year'" 
+        v-model="value" 
+        type="number" 
+        :disabled="disabled" 
+        :label="label" 
+        :min="minYear" 
+        :max="maxYear" 
+        :rules="rules" 
+        dense
+      >
         <template #label>{{label}} <span v-if="required" class="red--text font-weight-bold">*</span></template>
       </v-text-field>
       <v-menu 
+        v-else
         ref="menu" 
         v-model="menu" 
         :close-on-content-click="false" 
         transition="scale-transition" 
         offset-y 
         min-width="290px"
-        v-else
       >
         <template v-slot:activator="{ on }">
           <v-text-field
@@ -31,22 +41,17 @@
 
         <v-container class="ma-0 pa-0" v-if="isEthiopian">
           <v-row no-gutters>
-            <v-card >
-              <v-card-subtitle class="primary white--text">Gregorian Calendar</v-card-subtitle>
-              <v-date-picker
-                ref="picker"
-                color="secondary"
-                :landscape="$vuetify.breakpoint.smAndUp"
-                v-model="value"
-                :max="dateValueMax"
-                :min="dateValueMin"
-                :type="pickerType"
-                :disabled="disabled"
-                @change="save"
-                ></v-date-picker>
-            </v-card>
             <v-card>
-              <v-card-subtitle class="primary white--text">Ethiopian Calendar</v-card-subtitle>
+              <v-card-title class="primary white--text">
+                Ethiopian Calendar<v-spacer/><v-btn
+                  dark
+                  class="white--text"
+                  icon
+                  @click="showGregorian = !showGregorian"
+                  group
+                  small
+                  ><v-icon v-if="!showGregorian" >mdi-calendar-multiple</v-icon><v-icon v-else>mdi-calendar</v-icon></v-btn>
+              </v-card-title>
               <v-ethiopian-date-picker
                 ref="etPicker"
                 label="Ethiopian"
@@ -60,6 +65,29 @@
                 @change="save"
                 locale="am"
                 ></v-ethiopian-date-picker>
+            </v-card>
+            <v-card v-if="showGregorian">
+              <v-card-title class="primary white--text">
+                Gregorian Calendar<v-spacer/><v-btn
+                  dark
+                  class="white--text"
+                  icon
+                  @click="showGregorian = false"
+                  group
+                  small
+                  ><v-icon>mdi-close</v-icon></v-btn>
+              </v-card-title>
+              <v-date-picker
+                ref="gPicker"
+                color="secondary"
+                :landscape="$vuetify.breakpoint.smAndUp"
+                v-model="value"
+                :max="dateValueMax"
+                :min="dateValueMin"
+                :type="pickerType"
+                :disabled="disabled"
+                @change="save"
+                ></v-date-picker>
             </v-card>
           </v-row>
         </v-container>
@@ -108,7 +136,8 @@ export default {
       source: { path: "", data: {} },
       qField: "valueDateTime",
       pickerType: "date",
-      disabled: false
+      disabled: false,
+      showGregorian: false
     }
   },
   created: function() {
@@ -164,7 +193,7 @@ export default {
     },
     displayValue: function() {
       if ( this.isEthiopian ) {
-        return this.value && "Gregorian: " + this.value + " Ethiopian: "+this.etValue
+        return this.value && "Ethiopian: "+this.etValue + " Gregorian: " + this.value 
       } else {
         return this.value
       }
@@ -186,7 +215,14 @@ export default {
   },
   watch: {
     menu (val) {
-      val && setTimeout(() => (this.$refs.picker.activePicker = 'YEAR', this.$refs.etPicker.activePicker = 'YEAR'))
+      if ( this.isEthiopian ) {
+        !this.value && val && setTimeout(() => (this.$refs.etPicker.activePicker = 'YEAR'))
+      } else {
+        !this.value && val && setTimeout(() => (this.$refs.picker.activePicker = 'YEAR'))
+      }
+    },
+    showGregorian (val) {
+      !this.value && val && setTimeout(() => (this.$refs.gPicker.activePicker = 'YEAR'))
     },
     slotProps: {
       handler() {
