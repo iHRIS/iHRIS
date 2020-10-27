@@ -9,6 +9,7 @@
         class="mt-12"
         v-model="$store.state.message.active"
         :color="$store.state.message.type"
+        :timeout="$store.state.message.timeout"
         top
         multi-line
         >

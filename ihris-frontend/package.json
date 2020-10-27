@@ -13,6 +13,7 @@
     "core-js": "^3.6.5",
     "ethiopic-calendar": "^2.0.0",
     "fhirpath": "^2.2.2",
+    "idle-vue": "^2.0.5",
     "vue": "^2.6.11",
     "vue-cron-editor-buefy": "^0.2.13",
     "vue-moment": "^4.1.0",

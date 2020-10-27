@@ -15,8 +15,9 @@
         :disabled="disabled"
         :rules="rules"
         dense
-      ></v-select>
-      <template #label>{{display}} <span v-if="required" class="red--text font-weight-bold">*</span></template>
+      >
+        <template #label>{{display}} <span v-if="required" class="red--text font-weight-bold">*</span></template>
+      </v-select>
     </template>
     <template #header>
       {{display}}

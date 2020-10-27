@@ -70,13 +70,19 @@ export default {
   components: {
     AuthButton
   },
+  onIdle() {
+      if ( this.$store.state.user.loggedin ) this.logout(null, true)
+  },
   methods: {
-    logout() {
+    logout(e, force) {
       this.loading = true
-      fetch("/auth/logout").then(response => {
+      fetch("/auth/logout").then(() => {
         this.loading = false
-        if ( response.status == 200 ) {
-          this.$store.commit('logout')
+        this.$store.commit('logout')
+        if ( force ) {
+          this.$store.commit('setMessage', { type: 'warning', text: 'You have been logged out due to inactivity.', timeout: 3600000 } )
+        } else {
+          this.$store.commit('setMessage', { type: 'success', text: 'You have logged out.' } )
         }
         this.$router.push( {path: "/" } )
       })
