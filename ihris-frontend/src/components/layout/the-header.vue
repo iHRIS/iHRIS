@@ -1,4 +1,6 @@
 <template>
+  <div>
+  
   <v-app-bar color="white" app clipped-left clipped-right>
     <router-link to="/"><v-img :src="'/images/' + header.logo" contain max-height="36" max-width="106" /></router-link>
 
@@ -54,6 +56,13 @@
     </template>
   </v-app-bar>
 
+    <v-overlay :value="idle_countdown">
+      <v-card class="secondary lighten-1">
+        <v-card-title class="headline warning white--text" primary-title>Idle - Auto Logout</v-card-title>
+        <v-card-text class="black--text">You have been idle too long and will be logged out in {{ idle_logout }} seconds.</v-card-text>
+      </v-card>
+    </v-overlay>
+  </div>
 </template>
 
 <script>
@@ -64,17 +73,35 @@ export default {
   props: ["header"],
   data: function() {
     return {
-      loading: false
+      loading: false,
+      idle_countdown: false,
+      idle_logout: 30
     }
   },
   components: {
     AuthButton
   },
   onIdle() {
-      if ( this.$store.state.user.loggedin ) this.logout(null, true)
+      //if ( this.$store.state.user.loggedin ) this.logout(null, true)
+      if ( this.$store.state.user.loggedin ) this.idleDialog()
+  },
+  onActive() {
+    this.idle_countdown = false
   },
   methods: {
-    logout(e, force) {
+    idleDialog() {
+      this.idle_logout = 30 
+      this.idle_countdown = true
+      let timerId = setInterval( () => {
+        if ( !this.isAppIdle ) return clearInterval( timerId )
+        this.idle_logout -= 1
+        if ( this.idle_logout < 1 ) {
+          clearInterval( timerId )
+          this.logout(null, true)
+        }
+      }, 1000 )
+    },
+    logout(ev, force) {
       this.loading = true
       fetch("/auth/logout").then(() => {
         this.loading = false
