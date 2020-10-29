@@ -1,15 +1,50 @@
 <template>
   <ihris-element :edit="edit" :loading="false">
     <template #form>
-      <v-text-field :disabled="disabled" :label="display" v-model="value" outlined hide-details="auto" :rules="rules" dense>
+      <v-file-input 
+        :disabled="disabled" 
+        :label="display" 
+        :loading="loading"
+        v-model="upload" 
+        outlined 
+        hide-details="auto" 
+        :rules="rules" 
+        dense
+        @change='doUpload'
+      >
         <template #label>{{display}} <span v-if="required" class="red--text font-weight-bold">*</span></template>
-      </v-text-field>
+        <template #append-outer>
+          <v-menu 
+            v-if="objURL"
+            offset-y
+            left
+            eager
+          >
+            <template v-slot:activator="{on, attrs}">
+              <v-btn
+                color="accent"
+                dark
+                fab
+                x-small
+                v-bind="attrs"
+                v-on="on"><v-icon>mdi-file-eye</v-icon></v-btn>
+            </template>
+            <v-list>
+              <v-list-item>
+                <img v-if="isImage" :src="objURL"/>
+                <a v-else :download="value.title" :href="objURL">{{value.title}}</a>
+              </v-list-item>
+            </v-list>
+          </v-menu>
+        </template>
+      </v-file-input>
     </template>
     <template #header>
       {{display}}
     </template>
     <template #value>
-      {{value}}
+      <img v-if="isImage" :src="objURL"/>
+      <a v-else :href="objURL">{{value.title}}</a>
     </template>
   </ihris-element>
 </template>
@@ -26,19 +61,23 @@ export default {
   data: function() {
     return {
       source: { path: "", data: {} },
-      value: "",
-      qField: "valueString",
-      disabled: false
+      loading: false,
+      upload: undefined,
+      value: { contentType: "", data: "", title: "" },
+      origValue: { contentType: "", data: "", title: "" },
+      qField: "valueAttachment",
+      disabled: false,
+      objURL: false
     }
   },
   created: function() {
-    //console.log("CREATE STRING",this.field,this.slotProps)
+    //console.log("CREATE ATTACH",this.field,this.slotProps)
     this.setupData()
   },
   watch: {
     slotProps: {
       handler() {
-        //console.log("WATCH STRING",this.field,this.path,this.slotProps)
+        //console.log("WATCH ATTACH",this.field,this.path,this.slotProps)
         this.setupData()
       },
       deep: true
@@ -60,12 +99,47 @@ export default {
             this.value = this.source.data[0]
           }
         }
+        this.origValue = this.value
+        this.setObjectURL()
         this.disabled = this.readOnlyIfSet && (!!this.value)
         //console.log(this.source)
+      }
+    },
+    setObjectURL() {
+      if ( this.objURL ) {
+        URL.revokeObjectURL( this.objURL )
+      }
+      if ( this.value.data && this.value.contentType ) {
+        let dataURL = "data:"+this.value.contentType+";base64,"+this.value.data
+        fetch(dataURL).then( res => res.blob() ).then( blob => this.objURL = URL.createObjectURL( blob ) ).catch( e => {
+          console.log("Failed to get data from base64.",e)
+        } )
+      }
+    },
+    doUpload() {
+      if ( !this.upload ) {
+        this.upload = undefined
+        this.value = this.origValue
+        this.objURL = ""
+      } else {
+        this.loading = true
+        this.value.contentType = this.upload.type
+        this.value.title = this.upload.name
+        let reader = new FileReader()
+        reader.readAsArrayBuffer( this.upload )
+        reader.onload = () => {
+          let data = Buffer.from( reader.result )
+          this.value.data = data.toString('base64')
+          this.loading = false
+          this.objURL = URL.createObjectURL( this.upload )
+        }
       }
     }
   },
   computed: {
+    isImage: function() {
+      return this.value.contentType && this.value.contentType.startsWith("image/")
+    },
     index: function() {
       if ( this.slotProps && this.slotProps.input ) return this.slotProps.input.index
       else return undefined

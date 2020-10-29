@@ -102,7 +102,6 @@ export default {
         console.log(this.field,this.fhirId,err)
       })
     } else if ( this.$route.query ) {
-      console.log( this.$route.query )
       let presets = {
         resourceType: this.field
       }
