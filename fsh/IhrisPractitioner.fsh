@@ -149,7 +149,7 @@ Description:    "iHRIS extension for Practitioner number of dependents."
 
 
 Instance:       IhrisPractitionerQuestionnaire
-InstanceOf:     Questionnaire
+InstanceOf:     IhrisQuestionnaire
 Usage:          #definition
 * title = "iHRIS Practitioner Questionnaire"
 * description = "iHRIS Practitioner initial data entry questionnaire."
@@ -360,6 +360,10 @@ Usage:          #definition
 * item[2].definition = "http://ihris.org/fhir/StructureDefinition/ihris-practitioner-role"
 * item[2].text = "Position|Position the person holds"
 * item[2].type = #group
+* item[2].extension[constraint].extension[key].valueId = "ihris-start-end-date"
+* item[2].extension[constraint].extension[severity].valueCode = #error
+* item[2].extension[constraint].extension[expression].valueString = ""
+* item[2].extension[constraint].extension[human].valueString = "The end date must be after the start date."
 
 * item[2].item[0].linkId = "PractitionerRole.practitioner"
 * item[2].item[0].definition = "http://ihris.org/fhir/StructureDefinition/ihris-practitioner-role#PractitionerRole.practitioner"
