@@ -106,17 +106,28 @@ export default {
           response.json().then(data => {
             this.overlay = false
             this.loading = false
-            if ( this.viewPage && data.subject && data.subject.reference ) {
-              let subject = data.subject.reference.split('/')
-              if ( subject[1] ) {
-                subject = subject[1]
-              } else {
+            if ( this.viewPage ) {
+              let subject
+              if ( data.meta.tag ) {
+                let redirect = data.meta.tag.find( tag => tag.system === "http://ihris.org/fhir/tags/resource" )
+                if ( redirect && redirect.code ) {
+                  subject = redirect.code
+                }
+              } 
+              if ( !subject && data.subject && data.subject.reference ) {
                 subject = data.subject.reference
               }
-              this.$router.push({ name:"resource_view", params: {page: this.viewPage, id: subject } })
-            } else {
-              this.$router.push({ name:"home" })
+              if ( subject ) {
+                let viewPageId = subject.split('/')
+                if ( viewPageId[1] ) {
+                  viewPageId = viewPageId[1]
+                } else {
+                  viewPageId = subject
+                }
+                this.$router.push({ name:"resource_view", params: {page: this.viewPage, id: viewPageId } })
+              }
             }
+            this.$router.push({ name:"home" })
             //console.log(data)
           })
           this.$store.commit('setMessage', { type: 'success', text: 'Update successful.' } )

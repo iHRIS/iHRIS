@@ -43,7 +43,16 @@ router.post("/QuestionnaireResponse", (req, res, next) => {
           fhirFilter.filterBundle( "write", bundle, req.user )
 
           fhirAxios.create( bundle ).then ( (results) => {
-            next()
+            if ( module.postProcess ) {
+              module.postProcess( req, results ).then( () => {
+                next()
+              } ).catch( (err) => {
+                winston.error(err.message)
+                return res.status( 400 ).json( { err: err.message } )
+              } )
+            } else {
+              next()
+            }
           } ).catch( (err) => {
             winston.error(err.message)
             //return res.status( err.response.status ).json( err.response.data )
