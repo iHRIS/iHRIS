@@ -53,7 +53,8 @@ export default {
       //error: false,
       items: [],
       source: { path: "", data: {}, binding: this.binding },
-      disabled: false
+      disabled: false,
+      lockWatch: false
     }
   },
   created: function() {
@@ -63,7 +64,9 @@ export default {
     slotProps: {
       handler() {
         //console.log("WATCH CODING",this.path,this.slotProps)
-        this.setupData()
+        if ( !this.lockWatch ) {
+          this.setupData()
+        }
       },
       deep: true
     },
@@ -92,6 +95,7 @@ export default {
           if ( this.source.data ) {
             this.value = this.source.data
             this.valueCode = this.value.code
+            this.lockWatch = true
             //console.log("set",this.value,this.valueCode)
           }
         } else {
@@ -102,6 +106,7 @@ export default {
           if ( this.source.data[0] ) {
             this.value = this.source.data[0]
             this.valueCode = this.value.code
+            this.lockWatch = true
           }
         }
         this.disabled = this.readOnlyIfSet && (!!this.valueCode)

@@ -58,7 +58,8 @@ export default {
       //error: false,
       items: [],
       source: { path: "", data: {} },
-      disabled: false
+      disabled: false,
+      lockWatch: false
     }
   },
   created: function() {
@@ -68,7 +69,9 @@ export default {
     slotProps: {
       handler() {
         //console.log("WATCH CODING",this.path,this.slotProps)
-        this.setupData()
+        if ( !this.lockWatch ) {
+          this.setupData()
+        }
       },
       deep: true
     },
@@ -100,6 +103,7 @@ export default {
             this.value = this.source.data
             this.disabled = this.readOnlyIfSet && (!!this.value.value)
             this.valueCurrency = this.value.currency
+            this.lockWatch = true
             //console.log("set",this.value,this.valueCurrency)
           }
         } else {
@@ -111,6 +115,7 @@ export default {
             this.value = this.source.data[0]
             this.disabled = this.readOnlyIfSet && (!!this.value.value)
             this.valueCurrency = this.value.currency
+            this.lockWatch = true
           }
         }
       }

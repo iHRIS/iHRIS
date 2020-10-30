@@ -56,7 +56,8 @@ export default {
       displayValue: "",
       preset: false,
       disabled: false,
-      errors: []
+      errors: [],
+      lockWatch: false
     }
   },
   created: function() {
@@ -66,7 +67,9 @@ export default {
     slotProps: {
       handler() {
         //console.log("WATCH REFERENCE",this.path,this.slotProps)
-        this.setupData()
+        if ( !this.lockWatch ) {
+          this.setupData()
+        }
       },
       deep: true
     },
@@ -101,6 +104,7 @@ export default {
         if( this.source.data ) {
           this.preset = true
           this.select = this.source.data.reference
+          this.lockWatch = true
         }
       }
       this.disabled = this.readOnlyIfSet && this.preset
