@@ -27,6 +27,10 @@ Description:    "iHRIS profile of Practitioner."
 * name.use ^label = "Use"
 * name.family 1..1 MS
 * name.family ^label = "Family"
+* name.family ^constraint[0].key = "ihris-name-check"
+* name.family ^constraint[0].severity = #error
+* name.family ^constraint[0].expression = "matches('^[A-Za-z ]*$')"
+* name.family ^constraint[0].human = "Name must be only text."
 * name.given 1..* MS
 * name.given ^label = "Given Name"
 * name.prefix MS

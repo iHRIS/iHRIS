@@ -343,6 +343,7 @@ export default {
       console.log("SAVE",url,this.fhir)
       this.loading = false
       this.overlay = false
+      /*
       fetch( url, opts ).then(response => {
         //console.log(response)
         //console.log(response.headers)
@@ -359,6 +360,7 @@ export default {
           })
         }
       } )
+      */
       //console.log(this.fhir)
 
       /*

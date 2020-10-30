@@ -111,18 +111,30 @@ export default {
             let answer = {}
             answer[child.qField] = child.value
             item.answer.push( answer )
+            if ( child.constraints ) {
+              child.errors = []
+              let constraints = child.constraints.split(",")
+              for( let constraint of constraints ) {
+                if ( this.constraints[constraint] ) {
+                  let results = this.$fhirpath.evaluate(child.value, this.constraints[constraint].expression)
+                  if ( !results.every(Boolean) ) {
+                    child.errors.push( this.constraints[constraint].human )
+                    this.advancedValid = false
+                  }
+                }
+              }
+            }
           }
 
           if ( child.$children ) {
             //console.log("PROCESSING CHILDREN OF",child.path)
             processChildren( next, child.$children, myItemMap )
           } 
-          if ( child.constraints ) {
+          if ( child.isQuestionnaireGroup && child.constraints ) {
             child.errors = []
             let constraints = child.constraints.split(",")
             for( let constraint of constraints ) {
               if ( this.constraints[constraint] ) {
-                console.log("CONSTRAINT",constraint,next,this.constraints[constraint])
                 let results = this.$fhirpath.evaluate(next, this.constraints[constraint].expression)
                 if ( !results.every(Boolean) ) {
                   child.errors.push( this.constraints[constraint].human )

@@ -345,8 +345,8 @@ router.get('/page/:page/:type?', function(req, res) {
             }
             if ( fields[field].hasOwnProperty("constraint") ) {
               let constraintKeys = []
-              for( constraint of fields[field].constraint ) {
-                if ( constraint.key.startsWith("ihris-") ) {
+              for( let constraint of fields[field].constraint ) {
+                if ( constraint.key && constraint.key.startsWith("ihris-") ) {
                   constraints[ constraint.key ] = constraint
                   constraintKeys.push( constraint.key )
                 }
@@ -619,22 +619,34 @@ router.get('/questionnaire/:questionnaire', function(req, res) {
     let sectionMenu = []
     let templateData = { sectionMenu: {}, hidden: {}, constraints: {} }
 
-    const processConstraints = ( extension ) => {
-      let itemConstraints = extension.filter( ext => ext.url === "http://hl7.org/fhir/StructureDefinition/questionnaire-constraint" )
+    const processConstraints = ( extension, fieldDef ) => {
       let constraintKeys = []
-      for( let itemCon of itemConstraints ) {
-        let constraint = {}
-        try {
-          let key = itemCon.extension.find( ext => ext.url === "key" ).valueId
-          let severity = itemCon.extension.find( ext => ext.url === "severity" ).valueCode
-          let expression = itemCon.extension.find( ext => ext.url === "expression" ).valueString
-          let human = itemCon.extension.find( ext => ext.url === "human" ).valueString
-          constraint = { key, severity, expression, human }
-          templateData.constraints[ constraint.key ] = constraint
-          constraintKeys.push( constraint.key )
-        } catch(err) {
-          winston.error( "Failed to get constraints on "+item.linkId )
-          winston.error( err.message )
+      if ( fieldDef && fieldDef.hasOwnProperty("constraint") ) {
+        for( let constraint of fieldDef.constraint ) {
+          if ( constraint.key && constraint.key.startsWith('ihris-') ) {
+            templateData.constraints[ constraint.key ] = constraint
+            constraintKeys.push( constraint.key )
+          }
+        }
+      }
+      if ( extension ) {
+        let itemConstraints = extension.filter( ext => ext.url === "http://hl7.org/fhir/StructureDefinition/questionnaire-constraint" )
+        for( let itemCon of itemConstraints ) {
+          let constraint = {}
+          try {
+            let key = itemCon.extension.find( ext => ext.url === "key" ).valueId
+            let severity = itemCon.extension.find( ext => ext.url === "severity" ).valueCode
+            let expression = itemCon.extension.find( ext => ext.url === "expression" ).valueString
+            let human = itemCon.extension.find( ext => ext.url === "human" ).valueString
+            if ( key.startsWith("ihris-") ) {
+              constraint = { key, severity, expression, human }
+              templateData.constraints[ constraint.key ] = constraint
+              constraintKeys.push( constraint.key )
+            }
+          } catch(err) {
+            winston.error( "Failed to get constraints on "+item.linkId )
+            winston.error( err.message )
+          }
         }
       }
       if ( constraintKeys.length > 0 ) {
@@ -724,8 +736,8 @@ router.get('/questionnaire/:questionnaire', function(req, res) {
             }
           }
 
-          if ( item.extension ) {
-            let constraintList = processConstraints( item.extension )
+          if ( item.extension || (field && field.hasOwnProperty("constraint") ) ) {
+            let constraintList = processConstraints( item.extension, field )
             if ( constraintList ) {
               vueOutput += ' constraints="' + constraintList + '"'
             }
