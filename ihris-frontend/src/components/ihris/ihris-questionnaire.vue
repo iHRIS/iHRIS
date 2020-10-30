@@ -180,8 +180,8 @@ export default {
           response.json().then(data => {
             this.overlay = false
             this.loading = false
+            let subject
             if ( this.viewPage ) {
-              let subject
               if ( data.meta.tag ) {
                 let redirect = data.meta.tag.find( tag => tag.system === "http://ihris.org/fhir/tags/resource" )
                 if ( redirect && redirect.code ) {
@@ -201,7 +201,9 @@ export default {
                 this.$router.push({ name:"resource_view", params: {page: this.viewPage, id: viewPageId } })
               }
             }
-            this.$router.push({ name:"home" })
+            if ( !subject ) {
+              this.$router.push({ name:"home" })
+            }
             //console.log(data)
           })
           this.$store.commit('setMessage', { type: 'success', text: 'Update successful.' } )
