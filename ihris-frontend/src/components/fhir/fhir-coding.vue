@@ -8,13 +8,13 @@
         :items="items" 
         outlined 
         hide-details="auto" 
-        :error-messages="err_messages"
-        :error="error"
+        :error-messages="errors"
         item-text="display"
         item-value="code"
         :disabled="disabled"
         :rules="rules"
         dense
+        @change="errors = []"
       >
         <template #label>{{display}} <span v-if="required" class="red--text font-weight-bold">*</span></template>
       </v-select>
@@ -38,7 +38,8 @@ const itemSort = (a,b) => {
 */
 export default {
   name: "fhir-coding",
-  props: ["field","label","sliceName","targetprofile","min","max","base-min","base-max","slotProps","path","binding","edit","readOnlyIfSet"],
+  props: ["field","label","sliceName","targetprofile","min","max","base-min","base-max","slotProps","path","binding","edit","readOnlyIfSet",
+    "constraints"],
   components: {
     IhrisElement
   },
@@ -48,8 +49,8 @@ export default {
       valueCode: "",
       valueDisplay: "",
       loading: true,
-      err_messages: null,
-      error: false,
+      errors: [],
+      //error: false,
       items: [],
       source: { path: "", data: {}, binding: this.binding },
       disabled: false
@@ -111,8 +112,8 @@ export default {
         this.loading = false
       } ).catch( err => {
         console.log(err)
-        this.error = true
-        this.err_messages = err.message
+        //this.error = true
+        this.errors = err.message
         this.loading = false
       } )
       //console.log("CODING",binding)
@@ -144,11 +145,11 @@ export default {
               this.items.sort( itemSort )
             } catch(err) {
               this.error = true
-              this.err_messages = "Invalid response from server."
+              this.errors = "Invalid response from server."
             }
             this.loading = false
           }).catch(err=>{
-            this.err_messages = err.message
+            this.errors = err.message
             this.error = true
             this.loading = false
           })
@@ -173,24 +174,24 @@ export default {
                 this.items.sort( itemSort )
                 this.loading = false
               }).catch(err=>{
-                this.err_messages = err.message
+                this.errors = err.message
                 this.error = true
                 this.loading = false
               })
             } else {
               this.error = true
-              this.err_messages = "Invalid response from server."
+              this.errors = "Invalid response from server."
               this.loading = false
             }
           }).catch(err=>{
-            this.err_messages = err.message
+            this.errors = err.message
             this.error = true
             this.loading = false
           })
 
         }
       }).catch(err=>{
-        this.err_messages = err.message
+        this.errors = err.message
         this.error = true
         this.loading = false
       })

@@ -1,6 +1,7 @@
 <template>
   <v-card>
     <v-card-subtitle class="primary--text text-uppercase font-weight-bold">{{ display }}</v-card-subtitle>
+    <v-card-text v-for="(error,idx) in errors" :key="idx" class="error white--text font-weight-bold">{{error}}</v-card-text>
     <v-card-text>
       <slot :source="source"></slot>
     </v-card-text>
@@ -10,7 +11,7 @@
 <script>
 export default {
   name: "ihris-complex-card",
-  props: ["complexField", "slotProps","label"],
+  props: ["complexField", "slotProps","label","errors"],
   data: function() {
     return {
       source: { path: "", data: {} }

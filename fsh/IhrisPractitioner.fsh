@@ -362,7 +362,7 @@ Usage:          #definition
 * item[2].type = #group
 * item[2].extension[constraint].extension[key].valueId = "ihris-start-end-date"
 * item[2].extension[constraint].extension[severity].valueCode = #error
-* item[2].extension[constraint].extension[expression].valueString = ""
+* item[2].extension[constraint].extension[expression].valueString = "where(linkId='PractitionerRole.period.end').answer.first().valueDateTime.empty() or where(linkId='PractitionerRole.period.end').answer.first().valueDateTime >= where(linkId='PractitionerRole.period.start').answer.first().valueDateTime"
 * item[2].extension[constraint].extension[human].valueString = "The end date must be after the start date."
 
 * item[2].item[0].linkId = "PractitionerRole.practitioner"

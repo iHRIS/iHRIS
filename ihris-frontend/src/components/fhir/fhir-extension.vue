@@ -7,10 +7,11 @@
 <script>
 export default {
   name: "fhir-extension",
-  props: ["field","sliceName","min","max","base-min","base-max","profile","slotProps","path", "edit"],
+  props: ["field","sliceName","min","max","base-min","base-max","profile","slotProps","path", "edit","constraints"],
   data: function() {
     return {
-      source: { path: "", data: [] }
+      source: { path: "", data: [] },
+      errors: []
     }
   },
   created: function() {

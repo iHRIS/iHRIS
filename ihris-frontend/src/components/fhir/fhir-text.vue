@@ -1,7 +1,7 @@
 <template>
   <ihris-element :edit="edit" :loading="false">
     <template #form>
-      <v-textarea :disabled="disabled" :label="display" v-model="value" outlined hide-details="auto" :rules="rules" dense>
+      <v-textarea :error-messages="errors" @change="errors = []" :disabled="disabled" :label="display" v-model="value" outlined hide-details="auto" :rules="rules" dense>
         <template #label>{{display}} <span v-if="required" class="red--text font-weight-bold">*</span></template>
       </v-textarea>
     </template>
@@ -19,7 +19,8 @@ import IhrisElement from "../ihris/ihris-element.vue"
 
 export default {
   name: "fhir-text",
-  props: [ "field", "label", "min", "max", "path", "edit", "sliceName", "slotProps", "base-min", "base-max", "readOnlyIfSet" ],
+  props: [ "field", "label", "min", "max", "path", "edit", "sliceName", "slotProps", "base-min", "base-max", "readOnlyIfSet",
+    "constraints"],
   components: {
     IhrisElement
   },
@@ -28,7 +29,8 @@ export default {
       source: { path: "", data: {} },
       value: "",
       qField: "valueText",
-      disabled: false
+      disabled: false,
+      errors: []
     }
   },
   created: function() {

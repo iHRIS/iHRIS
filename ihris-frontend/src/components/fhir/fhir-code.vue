@@ -8,13 +8,13 @@
         :items="items" 
         outlined 
         hide-details="auto" 
-        :error-messages="err_messages"
-        :error="error"
+        :error-messages="errors"
         item-text="display"
         item-value="code"
         :disabled="disabled"
         :rules="rules"
         dense
+        @change="errors = []"
       >
         <template #label>{{display}} <span v-if="required" class="red--text font-weight-bold">*</span></template>
       </v-select>
@@ -38,7 +38,7 @@ const itemSort = (a,b) => {
 */
 export default {
   name: "fhir-code",
-  props: ["field","min","max","base-min","base-max","label","binding","slotProps","path","edit","sliceName","readOnlyIfSet"],
+  props: ["field","min","max","base-min","base-max","label","binding","slotProps","path","edit","sliceName","readOnlyIfSet","constraints"],
   components: {
     IhrisElement
   },
@@ -46,8 +46,8 @@ export default {
     return {
       value: "",
       loading: true,
-      err_messages: null,
-      error: false,
+      errors: [],
+      //error: false,
       items: [],
       source: { path: "", data: {}, binding: this.binding },
       disabled: false
@@ -90,8 +90,8 @@ export default {
         this.loading = false
       } ).catch( err => {
         console.log(err)
-        this.error = true
-        this.err_messages = err.message
+        //this.error = true
+        this.errors.push( err.message )
         this.loading = false
       } )
     }

@@ -31,7 +31,8 @@ export default {
                 viewPage: page, 
                 isEdit: true,
                 sectionMenu: data.data.sectionMenu,
-                hidden: data.data.hidden
+                hidden: data.data.hidden,
+                constraints: data.data.constraints
               } 
             }, 
             components: { 

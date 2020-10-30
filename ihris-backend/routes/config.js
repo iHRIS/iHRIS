@@ -251,6 +251,7 @@ router.get('/page/:page/:type?', function(req, res) {
       let allSubFields = {}
       let allColumns = {}
       let allActions = {}
+      let constraints = {}
 
       let vueOuput = "<template>"
       for ( let fhir of structureKeys ) {
@@ -275,7 +276,7 @@ router.get('/page/:page/:type?', function(req, res) {
           resourceElement = "ihris-codesystem"
         }
 
-        vueOutput = '<'+resourceElement+' :fhir-id="fhirId" :edit="isEdit" v-on:set-edit="setEdit($event)" profile="'+resource.url+'" :key="$route.params.page+($route.params.id || \'\')" page="'+req.params.page+'" field="'+fhir+'" title="'+sections[fhir].title+'"'
+        vueOutput = '<'+resourceElement+' :fhir-id="fhirId" :edit="isEdit" v-on:set-edit="setEdit($event)" profile="'+resource.url+'" :key="$route.params.page+($route.params.id || \'\')" page="'+req.params.page+'" field="'+fhir+'" title="'+sections[fhir].title+'" :constraints="constraints"'
         if ( sectionKeys.length > 1 ) {
           sectionMenu = sectionKeys.map( name => { return { name: name, title: sections[name].title, desc: sections[name].description, secondary: !!sections[name].resource } } )
           vueOutput += " :section-menu='sectionMenu'"
@@ -340,6 +341,18 @@ router.get('/page/:page/:type?', function(req, res) {
               }
               if ( pageFields[ fields[field].id ].readOnlyIfSet ) {
                 output += " :readOnlyIfSet=\""+ pageFields[ fields[field].id ].readOnlyIfSet +"\""
+              }
+            }
+            if ( fields[field].hasOwnProperty("constraint") ) {
+              let constraintKeys = []
+              for( constraint of fields[field].constraint ) {
+                if ( constraint.key.startsWith("ihris-") ) {
+                  constraints[ constraint.key ] = constraint
+                  constraintKeys.push( constraint.key )
+                }
+              }
+              if ( constraintKeys.length > 0 ) {
+                output += " constraints=\"" + constraintKeys.join(",") + "\""
               }
             }
             for( let attr of attrs ) {
@@ -438,7 +451,8 @@ router.get('/page/:page/:type?', function(req, res) {
         subFields: allSubFields,
         columns: allColumns,
         actions: allActions,
-        links: links
+        links: links,
+        constraints: constraints
       } })
     }
 
@@ -596,15 +610,39 @@ router.get('/questionnaire/:questionnaire', function(req, res) {
   fhirAxios.read( "Questionnaire", req.params.questionnaire ).then ( async (resource) => {
 
 
-    let vueOutput = '<ihris-questionnaire :edit=\"isEdit\" :view-page="viewPage" url="' + resource.url + '" id="' + resource.id
+    let vueOutput = '<ihris-questionnaire :edit=\"isEdit\" :view-page="viewPage" :constraints="constraints" url="' + resource.url + '" id="' + resource.id
       + '" title="' + resource.title
       + '" description="' + resource.description + '" purpose="' + resource.purpose
       + '"__SECTIONMENU__>' + "\n"
 
 
     let sectionMenu = []
-    let templateData = { sectionMenu: {}, hidden: {} }
+    let templateData = { sectionMenu: {}, hidden: {}, constraints: {} }
 
+    const processConstraints = ( extension ) => {
+      let itemConstraints = extension.filter( ext => ext.url === "http://hl7.org/fhir/StructureDefinition/questionnaire-constraint" )
+      let constraintKeys = []
+      for( let itemCon of itemConstraints ) {
+        let constraint = {}
+        try {
+          let key = itemCon.extension.find( ext => ext.url === "key" ).valueId
+          let severity = itemCon.extension.find( ext => ext.url === "severity" ).valueCode
+          let expression = itemCon.extension.find( ext => ext.url === "expression" ).valueString
+          let human = itemCon.extension.find( ext => ext.url === "human" ).valueString
+          constraint = { key, severity, expression, human }
+          templateData.constraints[ constraint.key ] = constraint
+          constraintKeys.push( constraint.key )
+        } catch(err) {
+          winston.error( "Failed to get constraints on "+item.linkId )
+          winston.error( err.message )
+        }
+      }
+      if ( constraintKeys.length > 0 ) {
+        return constraintKeys.join(",") 
+      } else {
+        return null
+      }
+    }
     const processQuestionnaireItems = async ( items ) => {
       let vueOutput = ""
       for( let item of items ) {
@@ -624,6 +662,12 @@ router.get('/questionnaire/:questionnaire', function(req, res) {
           vueOutput += '<ihris-questionnaire-group :edit=\"isEdit\" path="' + item.linkId + '" label="' + label[0] + '"'
           if ( label.length === 2 ) {
             vueOutput += ' description="' + label[1] + '"'
+          }
+          if ( item.extension ) {
+            let constraintList = processConstraints( item.extension )
+            if ( constraintList ) {
+              vueOutput += ' constraints="' + constraintList + '"'
+            }
           }
           vueOutput += ">\n\n"
           vueOutput += await processQuestionnaireItems( item.item )
@@ -680,6 +724,13 @@ router.get('/questionnaire/:questionnaire', function(req, res) {
             }
           }
 
+          if ( item.extension ) {
+            let constraintList = processConstraints( item.extension )
+            if ( constraintList ) {
+              vueOutput += ' constraints="' + constraintList + '"'
+            }
+          }
+
           if ( item.hasOwnProperty("text") ) {
             vueOutput += " label=\""+ item.text + "\""
           }
@@ -728,6 +779,12 @@ router.get('/questionnaire/:questionnaire', function(req, res) {
         vueOutput += '<ihris-questionnaire-section id="' + sectionId + '" path="' + item.linkId + '" label="' + label[0] + '"'
         if ( label.length === 2 ) {
           vueOutput += ' description="' + label[1] + '"'
+        }
+        if ( item.extension ) {
+          let constraintList = processConstraints( item.extension )
+          if ( constraintList ) {
+            vueOutput += ' constraints="' + constraintList +'"'
+          }
         }
         sectionMenu.push( { title: label[0], desc: label[1] || "", id: sectionId } )
         vueOutput += ">\n"

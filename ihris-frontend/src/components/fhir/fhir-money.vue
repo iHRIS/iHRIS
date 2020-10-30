@@ -9,7 +9,6 @@
         outlined 
         hide-details="auto" 
         :error-messages="err_messages"
-        :error="error"
         item-text="display"
         item-value="code"
         :disabled="disabled"
@@ -18,7 +17,7 @@
       >
         <template #label>Currency ({{display}}) <span v-if="required" class="red--text font-weight-bold">*</span></template>
       </v-select>
-      <v-text-field :label="display" :disabled="disabled" v-model="value.value" outlined hide-details="auto" :rules="rules_val" dense>
+      <v-text-field :error-messages="errors" @change="errors = []" :label="display" :disabled="disabled" v-model="value.value" outlined hide-details="auto" :rules="rules_val" dense>
         <template #label>{{display}} <span v-if="required" class="red--text font-weight-bold">*</span></template>
       </v-text-field>
     </template>
@@ -41,7 +40,8 @@ const itemSort = (a,b) => {
 */
 export default {
   name: "fhir-coding",
-  props: ["field","label","sliceName","targetprofile","min","max","base-min","base-max","slotProps","path","binding","edit","readOnlyIfSet"],
+  props: ["field","label","sliceName","targetprofile","min","max","base-min","base-max","slotProps","path","binding","edit","readOnlyIfSet",
+    "constraints"],
   components: {
     IhrisElement
   },
@@ -54,7 +54,8 @@ export default {
       currencyValueSet: "http://hl7.org/fhir/ValueSet/currencies",
       loading: true,
       err_messages: null,
-      error: false,
+      errors: [],
+      //error: false,
       items: [],
       source: { path: "", data: {} },
       disabled: false
@@ -119,7 +120,7 @@ export default {
         this.loading = false
       } ).catch( err => {
         console.log(err)
-        this.error = true
+        //this.error = true
         this.err_messages = err.message
         this.loading = false
       } )

@@ -309,7 +309,7 @@ Usage:          #example
 * extension[display].extension[filter][0].valueString = "Job|role|http://ihris.org/fhir/ValueSet/ihris-job"
 * extension[section][0].extension[title].valueString = "Position"
 * extension[section][0].extension[description].valueString = "Position details"
-* extension[section][0].extension[name].valueString = "Position"
+* extension[section][0].extension[name].valueString = "PractitionerRole"
 * extension[section][0].extension[field][0].valueString = "PractitionerRole.code"
 * extension[section][0].extension[field][1].valueString = "PractitionerRole.practitioner"
 * extension[section][0].extension[field][2].valueString = "PractitionerRole.location"

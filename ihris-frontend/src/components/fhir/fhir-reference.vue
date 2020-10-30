@@ -16,6 +16,8 @@
         placeholder="Start typing for selection"
         :rules="rules"
         :disabled="(disabled) || (preset && $route.name === 'resource_add')"
+        :error-messages="errors"
+        @change="errors = []"
       >
         <template #label>{{display}} <span v-if="required" class="red--text font-weight-bold">*</span></template>
       </v-autocomplete>
@@ -36,7 +38,7 @@ const querystring = require('querystring')
 export default {
   name: "fhir-reference",
   props: ["field","label","sliceName","targetProfile","min","max","base-min","base-max",
-    "slotProps","path","sub-fields","edit","readOnlyIfSet"],
+    "slotProps","path","sub-fields","edit","readOnlyIfSet","constraints"],
   components: {
     IhrisElement
   },
@@ -53,7 +55,8 @@ export default {
       awaitingSearch: false,
       displayValue: "",
       preset: false,
-      disabled: false
+      disabled: false,
+      errors: []
     }
   },
   created: function() {

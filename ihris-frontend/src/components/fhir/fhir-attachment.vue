@@ -11,6 +11,7 @@
         :rules="rules" 
         dense
         @change='doUpload'
+        :error-messages="errors"
       >
         <template #label>{{display}} <span v-if="required" class="red--text font-weight-bold">*</span></template>
         <template #append-outer>
@@ -54,7 +55,8 @@ import IhrisElement from "../ihris/ihris-element.vue"
 
 export default {
   name: "fhir-attachment",
-  props: ["field", "label", "min", "max", "id", "path", "slotProps", "sliceName","base-min","base-max","edit","readOnlyIfSet"],
+  props: ["field", "label", "min", "max", "id", "path", "slotProps", "sliceName","base-min","base-max","edit","readOnlyIfSet",
+    "constraints"],
   components: {
     IhrisElement
   },
@@ -67,7 +69,8 @@ export default {
       origValue: { contentType: "", data: "", title: "" },
       qField: "valueAttachment",
       disabled: false,
-      objURL: false
+      objURL: false,
+      errors: []
     }
   },
   created: function() {
@@ -117,6 +120,7 @@ export default {
       }
     },
     doUpload() {
+      this.errors = []
       if ( !this.upload ) {
         this.upload = undefined
         this.value = this.origValue

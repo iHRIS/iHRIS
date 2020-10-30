@@ -7,12 +7,12 @@
       :items="items" 
       outlined 
       hide-details="auto" 
-      :error-messages="err_messages"
-      :error="error"
+      :error-messages="errors"
       item-text="display"
       item-value="code"
       :rules="rules"
       dense
+      @change="errors = []"
       >
       <template #label>{{label}} <span v-if="required" class="red--text font-weight-bold">*</span></template>
     </v-select>
@@ -27,14 +27,14 @@ const itemSort = (a,b) => {
 */
 export default {
   name: "fhir-coding",
-  props: ["label", "path", "binding", "edit", "min", "max"],
+  props: ["label", "path", "binding", "edit", "min", "max","constraints"],
   data: function() {
     return {
       value: { system: "", code: "", display: "" },
       valueCode: "",
       loading: true,
-      err_messages: null,
-      error: false,
+      errors: [],
+      //error: false,
       items: [],
       qField: "valueCoding"
     }
@@ -58,8 +58,8 @@ export default {
         this.loading = false
       } ).catch( err => {
         console.log(err)
-        this.error = true
-        this.err_messages = err.message
+        //this.error = true
+        this.errors.push( err.message )
         this.loading = false
       } )
     }

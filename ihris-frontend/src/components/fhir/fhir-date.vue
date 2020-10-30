@@ -10,6 +10,8 @@
         :min="minYear" 
         :max="maxYear" 
         :rules="rules" 
+        :error-messages="errors"
+        @change="errors = []"
         dense
       >
         <template #label>{{label}} <span v-if="required" class="red--text font-weight-bold">*</span></template>
@@ -33,6 +35,7 @@
             outlined
             hide-details="auto"
             :rules="rules"
+            :error-messages="errors"
             dense
           >
             <template #label>{{label}} <span v-if="required" class="red--text font-weight-bold">*</span></template>
@@ -109,7 +112,7 @@
       {{label}}
     </template>
     <template #value>
-      {{value}}
+      {{displayValue}}
     </template>
   </ihris-element>
 </template>
@@ -122,7 +125,8 @@ import ethiopic from "ethiopic-calendar"
 export default {
   name: "fhir-date",
   props: ["field","min","max","base-min","base-max", "label", "slotProps", "path", "edit","sliceName", 
-    "minValueDate", "maxValueDate", "minValueQuantity", "maxValueQuantity", "displayType","readOnlyIfSet", "calendar"],
+    "minValueDate", "maxValueDate", "minValueQuantity", "maxValueQuantity", "displayType","readOnlyIfSet", "calendar",
+    "constraints" ],
   components: {
     IhrisElement,
     VEthiopianDatePicker
@@ -136,7 +140,8 @@ export default {
       qField: "valueDate",
       pickerType: "date",
       disabled: false,
-      showGregorian: false
+      showGregorian: false,
+      errors: []
     }
   },
   created: function() {
@@ -306,6 +311,7 @@ export default {
       }
     },
     save (date) {
+      this.errors = []
       this.$refs.menu.save(date)
     }
   }

@@ -33,7 +33,8 @@ export default {
                 subFields: data.data.subFields,
                 columns: data.data.columns,
                 actions: data.data.actions,
-                links: data.data.links
+                links: data.data.links,
+                constraints: data.data.constraints
               }
             },
             components: {

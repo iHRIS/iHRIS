@@ -84,7 +84,7 @@ const fhirDefinition = {
         }
       }
 
-      const copies = ["id", "path", "label", "sliceName", "min", "max" ]
+      const copies = ["id", "path", "label", "sliceName", "min", "max", "constraint" ]
       for( let copy of copies ) {
         if ( ele.hasOwnProperty(copy) ) {
           piece[copy] = ele[copy]

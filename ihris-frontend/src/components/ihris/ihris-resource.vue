@@ -34,17 +34,16 @@
               <span>Cancel</span>
             </v-btn>
             <v-spacer></v-spacer>
-            <v-btn dark class="success darken-1" @click="processFHIR()" v-if="edit" :disabled="!valid">
-              <v-icon light>mdi-content-save</v-icon>
-              <span>Save</span>
-            </v-btn>
-          </v-list-item>
-          <v-list-item v-if="edit">
-            <v-spacer/>
-            <v-btn dark class="accent" @click="$refs.form.validate()" v-if="edit">
-              <v-icon light>mdi-account-check</v-icon>
-              <span>Validate</span>
-            </v-btn>
+            <template v-if="edit">
+              <v-btn v-if="valid" dark class="success darken-1" @click="processFHIR()" :disabled="!valid">
+                <v-icon light>mdi-content-save</v-icon>
+                <span>Save</span>
+              </v-btn>
+              <v-btn v-else dark class="warning" @click="$refs.form.validate()">
+                <v-icon light>mdi-content-save</v-icon>
+                <span>Save</span>
+              </v-btn>
+            </template>
           </v-list-item>
           <v-divider color="white"></v-divider>
           <template v-if="!edit && links && links.length">
@@ -73,7 +72,7 @@
 <script>
 export default {
   name: "ihris-resource",
-  props: ["title","field","fhir-id","page","profile","section-menu","edit","links" ],
+  props: ["title","field","fhir-id","page","profile","section-menu","edit","links","constraints" ],
   data: function() {
     return {
       fhir: {},
@@ -82,7 +81,8 @@ export default {
       loading: false,
       overlay: false,
       isEdit: false,
-      linktext: [ ]
+      linktext: [ ],
+      advancedValid: true
     }
   },
   created: function() {
@@ -227,8 +227,90 @@ export default {
     processFHIR: function() {
       this.$refs.form.validate()
       if ( !this.valid ) return
+      this.advancedValid = true
       this.overlay = true
       this.loading = true
+
+      //const processChildren = function( parent, obj, children ) {
+      const processChildren = ( parent, obj, children ) => {
+        //console.log("called on "+parent)
+
+        children.forEach( child => {
+
+          let fullField = parent
+
+          let next = obj
+
+          if ( child.field && !child.fieldType /* ignore arrays */ ) {
+            //console.log("working on "+parent+" . "+child.field)
+            let field
+            if ( child.sliceName ) {
+              if ( child.field.startsWith("value[x]") ) {
+                field = child.field.substring(9)
+                fullField += "." + field
+              } else {
+                field = child.field.replace(":"+child.sliceName, "")
+                fullField += "." + field
+              }
+            } else {
+              field = child.field
+              fullField += "."+field
+            }
+            if ( child.max !== "1" || child.baseMax !== "1" ) {
+              if ( !obj.hasOwnProperty(field) ) {
+                next[field] = []
+              }
+            } else {
+              next[field] = {}
+            }
+            //console.log(fullField)
+            //console.log(child.max, child.baseMax)
+            //console.log(child)
+            if ( child.hasOwnProperty("value") ) {
+              //console.log( fullField +"="+ child.value )
+              if ( Array.isArray( next[field] ) ) {
+                next[field].push( child.value )
+              } else {
+                next[field] = child.value
+              }
+              next = next[field]
+            } else {
+              if ( Array.isArray( next[field] ) ) {
+                let sub = {}
+                if ( child.profile ) {
+                  sub.url = child.profile
+                } else if ( field === "extension" && child.sliceName ) {
+                  sub.url = child.sliceName
+                }
+                next[field].push( sub )
+                next = sub
+              } else {
+                next = next[field]
+              }
+            }
+          }
+
+          if ( child.$children ) {
+            processChildren( fullField, next, child.$children )
+          } 
+          if ( child.constraints ) {
+            child.errors = []
+            let constraints = child.constraints.split(",")
+            for( let constraint of constraints ) {
+              if ( this.constraints[constraint] ) {
+                let results = this.$fhirpath.evaluate(next, this.constraints[constraint].expression)
+                if ( !results.every(Boolean) ) {
+                  child.errors.push( this.constraints[constraint].human )
+                  this.advancedValid = false
+                }
+              }
+            }
+          }
+
+        } )
+
+      }
+
       //console.log(this.field)
       this.fhir = { 
         resourceType: this.field,
@@ -238,6 +320,12 @@ export default {
       }
       //console.log(this)
       processChildren( this.field, this.fhir, this.$children )
+      if ( !this.advancedValid ) {
+        this.overlay = false
+        this.loading = false
+        this.$store.commit('setMessage', { type: 'error', text: 'There were errors on the form.' })
+        return
+      }
       let url = "/fhir/"+this.field
       let opts = {
         method: "POST",
@@ -253,6 +341,8 @@ export default {
       }
       opts.body = JSON.stringify(this.fhir)
       console.log("SAVE",url,this.fhir)
+      this.loading = false
+      this.overlay = false
       fetch( url, opts ).then(response => {
         //console.log(response)
         //console.log(response.headers)
@@ -279,71 +369,6 @@ export default {
   }
 }
 
-const processChildren = function( parent, obj, children ) {
-  //console.log("called on "+parent)
-
-  children.forEach( child => {
-
-    let fullField = parent
-
-    let next = obj
-
-    if ( child.field && !child.fieldType /* ignore arrays */ ) {
-      //console.log("working on "+parent+" . "+child.field)
-      let field
-      if ( child.sliceName ) {
-        if ( child.field.startsWith("value[x]") ) {
-          field = child.field.substring(9)
-          fullField += "." + field
-        } else {
-          field = child.field.replace(":"+child.sliceName, "")
-          fullField += "." + field
-        }
-      } else {
-        field = child.field
-        fullField += "."+field
-      }
-      if ( child.max !== "1" || child.baseMax !== "1" ) {
-        if ( !obj.hasOwnProperty(field) ) {
-          next[field] = []
-        }
-      } else {
-        next[field] = {}
-      }
-      //console.log(fullField)
-        //console.log(child.max, child.baseMax)
-      //console.log(child)
-      if ( child.hasOwnProperty("value") ) {
-        //console.log( fullField +"="+ child.value )
-        if ( Array.isArray( next[field] ) ) {
-          next[field].push( child.value )
-        } else {
-          next[field] = child.value
-        }
-        next = next[field]
-      } else {
-        if ( Array.isArray( next[field] ) ) {
-          let sub = {}
-          if ( child.profile ) {
-            sub.url = child.profile
-          } else if ( field === "extension" && child.sliceName ) {
-            sub.url = child.sliceName
-          }
-          next[field].push( sub )
-          next = sub
-        } else {
-          next = next[field]
-        }
-      }
-    }
-
-    if ( child.$children ) {
-      processChildren( fullField, next, child.$children )
-    } 
-
-  } )
-
-}
 
 
 </script>

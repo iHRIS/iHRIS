@@ -7,10 +7,11 @@
 <script>
 export default {
   name: "fhir-codeable-concept",
-  props: ["field", "slotProps","sliceName","min","max","base-min","base-max","label","path","binding","edit"],
+  props: ["field", "slotProps","sliceName","min","max","base-min","base-max","label","path","binding","edit","constraints"],
   data: function() {
     return {
-      source: { path: "", data: {}, binding: this.binding }
+      source: { path: "", data: {}, binding: this.binding },
+      errors: []
     }
   },
   created: function() {

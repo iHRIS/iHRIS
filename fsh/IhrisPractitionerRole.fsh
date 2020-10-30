@@ -10,6 +10,7 @@ Description:    "iHRIS profile of Practitioner Role."
 * identifier.use ^label = "Use"
 * identifier.type MS
 * identifier.type ^label = "Type"
+* identifier.type.coding ^label = "Type"
 * identifier.type.coding 1..1 MS
 * identifier.system MS
 * identifier.system ^label = "System"
@@ -19,6 +20,10 @@ Description:    "iHRIS profile of Practitioner Role."
 * active ^label = "Active"
 * period 1..1 MS
 * period ^label = "Period of Employment"
+* period ^constraint[0].key = "ihris-period-start-end"
+* period ^constraint[0].severity = #error
+* period ^constraint[0].human = "The end date must be after the start date"
+* period ^constraint[0].expression = "end.empty() or end = '' or end >= start"
 * period.start 1..1 MS
 * period.start ^label = "Start Date"
 * period.start ^minValueDateTime = "1950-01-01"

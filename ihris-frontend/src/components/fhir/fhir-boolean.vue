@@ -7,6 +7,8 @@
         :disabled="disabled"
         :rules="rules"
         dense
+        :error-messages="errors"
+        @change="errors = []"
       >
       <template #label>{{display}}: {{value.toString()}} <span v-if="required" class="red--text font-weight-bold">*</span></template>
       </v-switch>
@@ -25,7 +27,8 @@ import IhrisElement from "../ihris/ihris-element.vue"
 
 export default {
   name: "fhir-boolean",
-  props: ["field", "label", "min", "max", "id", "path", "slotProps", "sliceName","base-min","base-max", "edit", "readOnlyIfSet"],
+  props: ["field", "label", "min", "max", "id", "path", "slotProps", "sliceName","base-min","base-max", "edit", "readOnlyIfSet",
+    "constraints"],
   components: {
     IhrisElement
   },
@@ -34,7 +37,8 @@ export default {
       source: { path: "", data: {} },
       value: true,
       qField: "valueBoolean",
-      disabled: false
+      disabled: false,
+      errors: []
     }
   },
   created: function() {
