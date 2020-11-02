@@ -1,4 +1,4 @@
-# iHRIS ![docs](https://github.com/iHRIS/iHRIS/workflows/docs/badge.svg) ![docker build](https://github.com/iHRIS/iHRIS/workflows/docker/badge.svg)
+# iHRIS ![docs](https://github.com/iHRIS/iHRIS/workflows/docs/badge.svg) ![docker](https://github.com/iHRIS/iHRIS/workflows/docker/badge.svg) ![docker-fsh](https://github.com/iHRIS/iHRIS/workflows/docker-fsh/badge.svg)
 
 Technical documentation has been started and is hosted at: [https://iHRIS.github.io/iHRIS](https://iHRIS.github.io/iHRIS)
 
