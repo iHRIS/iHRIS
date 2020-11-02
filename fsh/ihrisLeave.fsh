@@ -33,6 +33,10 @@ Title:          "Leave details"
 * extension[leave-type].valueCoding ^label = "Leave Type"
 * extension[period].value[x] only Period
 * extension[period].valuePeriod ^label = "Leave Period"
+* extension[period].valuePeriod ^constraint[0].key = "ihris-period-start-end"
+* extension[period].valuePeriod ^constraint[0].severity = #error
+* extension[period].valuePeriod ^constraint[0].expression = "end.empty() or end = '' or end >= start"
+* extension[period].valuePeriod ^constraint[0].human = "End date must be after the start date."
 * extension[period].valuePeriod.start 1..1 MS
 * extension[period].valuePeriod.start ^label = "Leave Start Date"
 * extension[period].valuePeriod.start ^minValueDateTime = "1950-01-01"
