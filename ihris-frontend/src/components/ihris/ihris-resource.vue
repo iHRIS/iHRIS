@@ -224,7 +224,7 @@ export default {
         }
       }
     },
-    processFHIR: function() {
+    processFHIR: async function() {
       this.$refs.form.validate()
       if ( !this.valid ) return
       this.advancedValid = true
@@ -232,10 +232,10 @@ export default {
       this.loading = true
 
       //const processChildren = function( parent, obj, children ) {
-      const processChildren = ( parent, obj, children ) => {
+      const processChildren = async ( parent, obj, children ) => {
         //console.log("called on "+parent)
 
-        children.forEach( child => {
+        for( let child of children ) {
 
           let fullField = parent
 
@@ -291,23 +291,26 @@ export default {
           }
 
           if ( child.$children ) {
-            processChildren( fullField, next, child.$children )
+            try { 
+              await processChildren( fullField, next, child.$children )
+            } catch( err ) {
+              this.advancedValid = false
+              console.log(err)
+            }
           } 
           if ( child.constraints ) {
             child.errors = []
-            let constraints = child.constraints.split(",")
-            for( let constraint of constraints ) {
-              if ( this.constraints[constraint] ) {
-                let results = this.$fhirpath.evaluate(next, this.constraints[constraint].expression)
-                if ( !results.every(Boolean) ) {
-                  child.errors.push( this.constraints[constraint].human )
-                  this.advancedValid = false
-                }
-              }
+            try {
+              this.advancedValid = await this.$fhirutils.checkConstraints( child.constraints, 
+                this.constraints, next, child.errors, this.fhirId )
+            } catch( err ) {
+              this.advancedValid = false
+              child.errors.push("An unknown error occurred.")
+              console.log(err)
             }
           }
 
-        } )
+        }
 
       }
 
@@ -319,7 +322,12 @@ export default {
         }
       }
       //console.log(this)
-      processChildren( this.field, this.fhir, this.$children )
+      try {
+        await processChildren( this.field, this.fhir, this.$children )
+      } catch( err ) {
+        this.advancedValid = false
+        console.log(err)
+      }
       if ( !this.advancedValid ) {
         this.overlay = false
         this.loading = false

@@ -11,6 +11,10 @@ Title:          "iHRIS Practitioner"
 Description:    "iHRIS profile of Practitioner."
 * identifier 0..* MS
 * identifier ^label = "Identifier"
+* identifier ^constraint[0].key = "ihris-search-identifier"
+* identifier ^constraint[0].severity = #error
+* identifier ^constraint[0].expression = "'Practitioner' | 'identifier' | iif(system.exists(), system & '|' & value, value)"
+* identifier ^constraint[0].human = "The identifier must be unique and another record has this identifier"
 * identifier.use MS
 * identifier.use ^label = "Use"
 * identifier.type MS
@@ -121,6 +125,10 @@ Description:    "iHRIS extension for Practitioner residence."
 * value[x] only Reference
 * valueReference 1..1 MS
 * valueReference ^label = "Residence"
+* valueReference ^constraint[0].key = "ihris-location-residence"
+* valueReference ^constraint[0].severity = #warning
+* valueReference ^constraint[0].expression = "reference.matches('^Location/')"
+* valueReference ^constraint[0].human = "Must be a location"
 * valueReference only Reference(Location)
 * valueReference.reference 1..1 MS
 * valueReference.reference ^label = "Location"
@@ -388,10 +396,10 @@ Usage:          #definition
 * item[2].definition = "http://ihris.org/fhir/StructureDefinition/ihris-practitioner-role"
 * item[2].text = "Position|Position the person holds"
 * item[2].type = #group
-* item[2].extension[constraint].extension[key].valueId = "ihris-start-end-date"
-* item[2].extension[constraint].extension[severity].valueCode = #error
-* item[2].extension[constraint].extension[expression].valueString = "where(linkId='PractitionerRole.period.end').answer.first().valueDateTime.empty() or where(linkId='PractitionerRole.period.end').answer.first().valueDateTime >= where(linkId='PractitionerRole.period.start').answer.first().valueDateTime"
-* item[2].extension[constraint].extension[human].valueString = "The end date must be after the start date."
+* item[2].extension[constraint][0].extension[key].valueId = "ihris-start-end-date"
+* item[2].extension[constraint][0].extension[severity].valueCode = #error
+* item[2].extension[constraint][0].extension[expression].valueString = "where(linkId='PractitionerRole.period.end').answer.first().valueDateTime.empty() or where(linkId='PractitionerRole.period.end').answer.first().valueDateTime >= where(linkId='PractitionerRole.period.start').answer.first().valueDateTime"
+* item[2].extension[constraint][0].extension[human].valueString = "The end date must be after the start date."
 
 * item[2].item[0].linkId = "PractitionerRole.practitioner"
 * item[2].item[0].definition = "http://ihris.org/fhir/StructureDefinition/ihris-practitioner-role#PractitionerRole.practitioner"

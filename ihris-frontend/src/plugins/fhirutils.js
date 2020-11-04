@@ -1,3 +1,4 @@
+const fhirpath = require('fhirpath')
 import 'whatwg-fetch'
 
 const fhirutils = {
@@ -7,6 +8,67 @@ const fhirutils = {
     fhirutils._code_cache[lookup] = value
     fhirutils._code_loading[lookup] = false
     return value
+  },
+  checkConstraints: ( constraintList, constraintDetails, element, errors, fhirId ) => {
+    return new Promise( (resolve, reject) => {
+      let constraints = constraintList.split(",")
+      let promises = []
+      for( let constraint of constraints ) {
+        if ( constraintDetails[constraint] ) {
+          let results = fhirpath.evaluate(element, constraintDetails[constraint].expression)
+          if ( constraint.startsWith('ihris-search') ) {
+            let resource = results.shift()
+            let query = [ "_elements=id" ]
+            while ( results.length ) {
+              query.push( results.shift() + "=" + encodeURI( results.shift() ) )
+            }
+            promises.push( new Promise( (resolve, reject) => {
+              fetch( "/fhir/"+resource+"?"+query.join("&") ).then( response => {
+                if ( response.status === 200 ) {
+                  response.json().then( bundle => {
+                    if ( bundle.total === 0 ) {
+                      resolve( true )
+                    } else if ( fhirId ) {
+                      let ids = fhirpath.evaluate( bundle.entry, "resource.id" )
+                      if ( ids.includes( fhirId ) ) {
+                        // This is the record that matched
+                        resolve( true )
+                      } else {
+                        errors.push( constraintDetails[constraint].human )
+                        resolve( false )
+                      }
+                    } else {
+                      errors.push( constraintDetails[constraint].human )
+                      resolve( false )
+                    }
+                  } ).catch( err => {
+                    reject( err )
+                  } )
+                } else {
+                  reject( "Failed to search: "+response.status )
+                }
+              } ).catch( err => {
+                reject( err )
+              } )
+            } ) )
+          } else if ( !results.every(Boolean) ) {
+            errors.push( constraintDetails[constraint].human )
+            promises.push( false )
+          } else {
+            promises.push( true )
+          }
+        }
+      }
+      Promise.all( promises ).then( results => {
+        if ( results.every(Boolean) ) {
+          resolve(true)
+        } else {
+          resolve(false)
+        }
+      } ).catch( err => {
+        reject( err )
+      } )
+    } )
   },
   lookup: ( display, defaultSystem ) => {
     if ( !display ) {

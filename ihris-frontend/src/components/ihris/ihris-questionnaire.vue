@@ -75,18 +75,18 @@ export default {
     //console.log("QUERY",this.$route.query)
   },
   methods: {
-    processFHIR: function() {
+    processFHIR: async function() {
       this.$refs.form.validate()
       if ( !this.valid ) return
       this.advancedValid = true
       this.overlay = true
       this.loading = true
 
-      const processChildren = ( obj, children, itemMap ) => {
+      const processChildren = async ( obj, children, itemMap ) => {
         //console.log("called on "+parent)
         if ( !itemMap ) itemMap = {}
 
-        children.forEach( child => {
+        for ( let child of children ) {
 
           let next = obj
           let myItemMap = {}
@@ -113,39 +113,41 @@ export default {
             item.answer.push( answer )
             if ( child.constraints ) {
               child.errors = []
-              let constraints = child.constraints.split(",")
-              for( let constraint of constraints ) {
-                if ( this.constraints[constraint] ) {
-                  let results = this.$fhirpath.evaluate(child.value, this.constraints[constraint].expression)
-                  if ( !results.every(Boolean) ) {
-                    child.errors.push( this.constraints[constraint].human )
-                    this.advancedValid = false
-                  }
-                }
+              try {
+                this.advancedValid = await this.$fhirutils.checkConstraints( child.constraints, 
+                  this.constraints, child.value, child.errors )
+              } catch( err ) {
+                this.advancedValid = false
+                child.errors.push("An unknown error occurred.")
+                console.log(err)
               }
             }
           }
 
           if ( child.$children ) {
             //console.log("PROCESSING CHILDREN OF",child.path)
-            processChildren( next, child.$children, myItemMap )
+            try {
+              await processChildren( next, child.$children, myItemMap )
+            } catch( err ) {
+              this.advancedValid = false
+              console.log(err)
+            }
+
           } 
           if ( child.isQuestionnaireGroup && child.constraints ) {
             child.errors = []
-            let constraints = child.constraints.split(",")
-            for( let constraint of constraints ) {
-              if ( this.constraints[constraint] ) {
-                let results = this.$fhirpath.evaluate(next, this.constraints[constraint].expression)
-                if ( !results.every(Boolean) ) {
-                  child.errors.push( this.constraints[constraint].human )
-                  this.advancedValid = false
-                }
-              }
+            try {
+              this.advancedValid = await this.$fhirutils.checkConstraints( child.constraints, 
+                this.constraints, next, child.errors )
+            } catch( err ) {
+              this.advancedValid = false
+              child.errors.push("An unknown error occurred.")
+              console.log(err)
             }
           }
 
 
-        } )
+        }
 
       }
 
@@ -158,7 +160,12 @@ export default {
         item: []
       }
       //console.log(this)
-      processChildren( this.fhir.item, this.$children )
+      try {
+        await processChildren( this.fhir.item, this.$children )
+      } catch( err ) {
+        this.advancedValid = false
+        console.log(err)
+      }
       if ( !this.advancedValid ) {
         this.overlay = false
         this.loading = false
