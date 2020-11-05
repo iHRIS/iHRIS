@@ -55,6 +55,7 @@ router.get("/:resource/:id?", (req, res, next) => {
       /* return response from FHIR server */
       //return res.status( err.response.status ).json( err.response.data )
       /* for custom responses */
+      winston.error(err.message)
       let outcome = { ...outcomes.ERROR }
       outcome.issue[0].diagnostics = err.message
       return res.status(500).json( outcome )
@@ -79,6 +80,7 @@ router.get("/:resource/:id?", (req, res, next) => {
       /* return response from FHIR server */
       //return res.status( err.response.status ).json( err.response.data )
       /* for custom responses */
+      winston.error(err.message)
       let outcome = { ...outcomes.ERROR }
       outcome.issue[0].diagnostics = err.message
       return res.status(500).json( outcome )
