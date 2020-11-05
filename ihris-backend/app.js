@@ -130,11 +130,14 @@ const fs = require('fs')
   const questionnaireRouter = require('./routes/questionnaire')
   const mheroRouter = require('./routes/mhero')
 
+  const limit = nconf.get("express:limit") || "50mb"
   app.use(express.json({
-    type: ["application/json", "application/fhir+json"]
+    type: ["application/json", "application/fhir+json"],
+    limit: limit
   }))
   app.use(express.urlencoded({
-    extended: false
+    extended: false,
+    limit: limit
   }))
   app.use(cookieParser())
   app.use(session({

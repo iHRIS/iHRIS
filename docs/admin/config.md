@@ -62,6 +62,7 @@ IHRIS_FHIR__BASE=http://locahost:8080/hapi/fhir
 * reports:refresh time between recaching reports (in ms) (default: 900000)
 
 ### Allowed in local or remote
+* express:limit = max upload file size (defaults to "50mb")
 * user:loggedout = id of logged out user resource (default: ihris-user-loggedout)
 * auth:google:clientId
 * auth:google:clientSecret
