@@ -274,7 +274,7 @@ const fhirQuestionnaire = {
                 let question = questionnaireRef[item.linkId]
 
 
-                let simple = [ "date", "string", "dateTime", "text" ]
+                let simple = [ "date", "string", "dateTime", "text", "attachment" ]
                 let data = { linkId: item.linkId, definition: item.definition, q: question.type }
 
                 if ( item.definition.includes("extension") ) {
