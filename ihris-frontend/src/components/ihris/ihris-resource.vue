@@ -301,7 +301,7 @@ export default {
           if ( child.constraints ) {
             child.errors = []
             try {
-              this.advancedValid = await this.$fhirutils.checkConstraints( child.constraints, 
+              this.advancedValid = this.advancedValid && await this.$fhirutils.checkConstraints( child.constraints, 
                 this.constraints, next, child.errors, this.fhirId )
             } catch( err ) {
               this.advancedValid = false
@@ -334,6 +334,7 @@ export default {
         this.$store.commit('setMessage', { type: 'error', text: 'There were errors on the form.' })
         return
       }
+      console.log("FINISHED PROCESS AND CHECK.")
       let url = "/fhir/"+this.field
       let opts = {
         method: "POST",
@@ -349,14 +350,11 @@ export default {
       }
       opts.body = JSON.stringify(this.fhir)
       console.log("SAVE",url,this.fhir)
-      this.loading = false
-      this.overlay = false
       fetch( url, opts ).then(response => {
         //console.log(response)
         //console.log(response.headers)
         if ( response.status === 201 || response.status === 200 ) {
           response.json().then(data => {
-            console.log("RESPONSE",data)
             this.overlay = false
             this.loading = false
             if ( this.fhirId ) {

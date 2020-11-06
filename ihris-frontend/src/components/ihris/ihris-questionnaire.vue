@@ -114,7 +114,7 @@ export default {
             if ( child.constraints ) {
               child.errors = []
               try {
-                this.advancedValid = await this.$fhirutils.checkConstraints( child.constraints, 
+                this.advancedValid = this.advancedValid && await this.$fhirutils.checkConstraints( child.constraints, 
                   this.constraints, child.value, child.errors )
               } catch( err ) {
                 this.advancedValid = false
@@ -137,7 +137,7 @@ export default {
           if ( child.isQuestionnaireGroup && child.constraints ) {
             child.errors = []
             try {
-              this.advancedValid = await this.$fhirutils.checkConstraints( child.constraints, 
+              this.advancedValid = this.advancedValid && await this.$fhirutils.checkConstraints( child.constraints, 
                 this.constraints, next, child.errors )
             } catch( err ) {
               this.advancedValid = false
