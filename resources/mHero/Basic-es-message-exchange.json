@@ -15,10 +15,13 @@
       "valueString": "mHero Message Exchange"
     }, {
       "url": "name",
-      "valueString": "mheromessageexchange"
+      "valueString": "messagerequest"
     }, {
       "url": "resource",
       "valueString": "Communication"
+    }, {
+      "url": "query",
+      "valueString": "Communication.inResponseTo.exists()=false"
     }, {
       "url": "http://ihris.org/fhir/StructureDefinition/iHRISReportElement",
       "extension": [{
@@ -31,6 +34,39 @@
     }, {
       "url": "http://ihris.org/fhir/StructureDefinition/iHRISReportElement",
       "extension": [{
+        "url": "display",
+        "valueString": "Question"
+      }, {
+        "url": "label",
+        "valueString": "question"
+      }, {
+        "url": "name",
+        "valueString": "payload.last().contentString"
+      }]
+    }]
+  }, {
+    "url": "http://ihris.org/fhir/StructureDefinition/iHRISReportLink",
+    "extension": [{
+      "url": "label",
+      "valueString": "mHero Message Exchange"
+    }, {
+      "url": "name",
+      "valueString": "messageresponse"
+    }, {
+      "url": "resource",
+      "valueString": "Communication"
+    }, {
+      "url": "linkElement",
+      "valueString": "Communication.inResponseTo"
+    }, {
+      "url": "linkTo",
+      "valueString": "messagerequest.id"
+    }, {
+      "url": "query",
+      "valueString": "Communication.inResponseTo.exists()=true"
+    }, {
+      "url": "http://ihris.org/fhir/StructureDefinition/iHRISReportElement",
+      "extension": [{
         "url": "label",
         "valueString": "Received"
       }, {
@@ -40,8 +76,11 @@
     }, {
       "url": "http://ihris.org/fhir/StructureDefinition/iHRISReportElement",
       "extension": [{
+        "url": "display",
+        "valueString": "Answer"
+      }, {
         "url": "label",
-        "valueString": "Message"
+        "valueString": "answer"
       }, {
         "url": "name",
         "valueString": "payload.last().contentString"
@@ -63,7 +102,7 @@
       },
       {
         "url": "linkTo",
-        "valueString": "mheromessageexchange.sender.reference || mheromessageexchange.recipient.reference"
+        "valueString": "messagerequest.sender.reference | messagerequest.recipient.reference"
       },
       {
         "url": "multiple",
@@ -122,7 +161,7 @@
       },
       {
         "url": "linkTo",
-        "valueString": "mheromessageexchange.extension.where(url='http://mhero.org/fhir/StructureDefinition/mhero-comm-flow-run').valueReference.reference"
+        "valueString": "messagerequest.extension.where(url='http://mhero.org/fhir/StructureDefinition/mhero-comm-flow-run').valueReference.reference"
       },
       {
         "url": "multiple",

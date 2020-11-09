@@ -14,7 +14,10 @@
           normal
           @click="nextStep"
           rounded
-        >Review Selection</v-btn>
+        >
+          <v-icon left>mdi-form-select</v-icon>
+          Select Flow
+        </v-btn>
       </v-card-actions>
     </v-card>
   </v-container>

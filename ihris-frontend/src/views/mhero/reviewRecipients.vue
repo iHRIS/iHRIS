@@ -43,7 +43,7 @@
     ></v-img>
     <v-card>
       <v-card-text>
-        How do you want to send Message
+        Do you want to send an existing workflow or a new message?
         <v-radio-group v-model="communicationType">
           <v-layout
             row
@@ -57,7 +57,7 @@
             </v-flex>
             <v-flex xs4>
               <v-radio
-                label="Create new one time message**"
+                label="Create new message**"
                 value="sms"
               ></v-radio>
             </v-flex>
@@ -78,12 +78,20 @@
           color="blue"
           label="Text Message"
           v-model="sms"
+          @input="countCharacters"
         ></v-textarea>
+        <template v-if="communicationType == 'sms'">
+          {{chars}}/{{totalChars}}
+        </template>
         <v-card v-if="showFrequence">
           <v-card-title primary-title>
             Frequency*
           </v-card-title>
+          <v-card-title secondary-title>
+
+          </v-card-title>
           <v-card-text>
+            How often do you want to send the workflow
             <v-radio-group
               row
               v-model="frequency"
@@ -205,14 +213,16 @@
           normal
           @click="changeDetails"
           rounded
-        >Edit Recipients</v-btn>
+        ><v-icon left>mdi-pencil</v-icon> Edit Recipients</v-btn>
         <v-spacer></v-spacer>
         <v-btn
           :disabled="!canSend"
           normal
           @click="send"
           rounded
-        >Send <v-icon>mdi-message</v-icon>
+        >
+          <v-icon left>mdi-message</v-icon>
+          Send
         </v-btn>
       </v-card-actions>
     </v-card>
@@ -224,6 +234,8 @@ import VueCronEditorBuefy from 'vue-cron-editor-buefy';
 export default {
   props: ["headers", "practitioners"],
   data: vm => ({
+    chars: 0,
+    totalChars: 100,
     workflows: [],
     workflow: {},
     communicationType: "",
@@ -254,6 +266,9 @@ export default {
     },
     changeDetails() {
       this.$emit("editWorkflow");
+    },
+    countCharacters() {
+      this.chars = this.sms.length
     },
     send() {
       let practitioners = [];

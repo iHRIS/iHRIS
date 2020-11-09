@@ -13,7 +13,7 @@
       "url": "http://ihris.org/fhir/StructureDefinition/iHRISReportDetails",
       "extension": [{
           "url": "label",
-          "valueString": "Staff Report"
+          "valueString": "Employee List"
         },
         {
           "url": "displayCheckbox",
@@ -90,6 +90,10 @@
           "valueString": "mheropractitioner"
         },
         {
+          "url": "linkElementSearchParameter",
+          "valueString": "member"
+        },
+        {
           "url": "multiple",
           "valueBoolean": true
         },
@@ -97,7 +101,7 @@
           "url": "http://ihris.org/fhir/StructureDefinition/iHRISReportElement",
           "extension": [{
             "url": "display",
-            "valueString": "Group"
+            "valueString": "Contact Group"
           },
           {
               "url": "label",
@@ -138,6 +142,10 @@
           "valueString": "mheropractitioner"
         },
         {
+          "url": "linkElementSearchParameter",
+          "valueString": "practitioner"
+        },
+        {
           "url": "multiple",
           "valueBoolean": false
         }
@@ -147,7 +155,7 @@
       "url": "http://ihris.org/fhir/StructureDefinition/iHRISReportLink",
       "extension": [{
           "url": "name",
-          "valueString": "location"
+          "valueString": "facility"
         },
         {
           "url": "resource",
@@ -174,6 +182,54 @@
           {
               "url": "label",
               "valueString": "facilityName"
+            },
+            {
+              "url": "name",
+              "valueString": "name"
+            },
+            {
+              "url": "filter",
+              "valueBoolean": true
+            },
+            {
+              "url": "dropDownFilter",
+              "valueBoolean": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "url": "http://ihris.org/fhir/StructureDefinition/iHRISReportLink",
+      "extension": [{
+          "url": "name",
+          "valueString": "region"
+        },
+        {
+          "url": "resource",
+          "valueString": "Location"
+        },
+        {
+          "url": "linkElement",
+          "valueString": "Location.id"
+        },
+        {
+          "url": "linkTo",
+          "valueString": "facility.partOf.reference"
+        },
+        {
+          "url": "multiple",
+          "valueBoolean": false
+        },
+        {
+          "url": "http://ihris.org/fhir/StructureDefinition/iHRISReportElement",
+          "extension": [{
+            "url": "display",
+            "valueString": "Region"
+          },
+          {
+              "url": "label",
+              "valueString": "regionName"
             },
             {
               "url": "name",

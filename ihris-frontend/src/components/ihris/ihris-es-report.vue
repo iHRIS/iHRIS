@@ -70,6 +70,8 @@ export default {
     itemsPerPage() {
       let items = [5,10,20,50]
       if(this.total > 10000) {
+        items.push(2000)
+        items.push(5000)
         items.push(10000)
       } else {
         items.push(-1)
