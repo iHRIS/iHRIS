@@ -235,7 +235,7 @@ export default {
   props: ["headers", "practitioners"],
   data: vm => ({
     chars: 0,
-    totalChars: 100,
+    totalChars: 160,
     workflows: [],
     workflow: {},
     communicationType: "",
