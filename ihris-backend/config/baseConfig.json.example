@@ -41,7 +41,7 @@
     },
     {
       "name": "elasticsearch:max_scroll_context",
-      "valueString": "100000/1m"
+      "valueString": "100000"
     },
     {
       "name": "kibana:base",
