@@ -37,7 +37,11 @@
     },
     {
       "name": "elasticsearch:max_compiliation_rate",
-      "valueString": "10000/1m"
+      "valueString": "100000/1m"
+    },
+    {
+      "name": "elasticsearch:max_scroll_context",
+      "valueString": "100000/1m"
     },
     {
       "name": "kibana:base",
