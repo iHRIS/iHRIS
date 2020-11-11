@@ -126,7 +126,7 @@
           </v-btn>
         </v-toolbar>
         <v-card-text>
-          <ihrisReport report='mhero-groups'></ihrisReport>
+          <ihrisReport report='ihris-es-report-mhero-groups'></ihrisReport>
         </v-card-text>
         <v-card-actions>
           <v-spacer />
@@ -212,7 +212,7 @@
           <v-btn color="primary" @click="addGroupDialog = true"><v-icon left>mdi-database-plus</v-icon> Add New Group</v-btn>
         </v-flex>
       </v-layout>
-      <ihrisReport report='mhero-send-message'></ihrisReport>
+      <ihrisReport report='ihris-es-report-mhero-send-message'></ihrisReport>
       <v-card-actions class="secondary">
         <v-btn
           color="error"
@@ -396,7 +396,9 @@ export default {
         } else if (this.tblOptions.page === this.prevPage + 1) {
           url = this.link.find(link => link.relation === "next").url;
         }
-        url = url.substring(url.indexOf("/fhir/"));
+        if(url) {
+          url = url.substring(url.indexOf("/fhir/"));
+        }
       }
       if(!url) {
         return

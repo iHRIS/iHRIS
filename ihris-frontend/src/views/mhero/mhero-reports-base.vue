@@ -28,7 +28,7 @@
           </v-list-item>
           <v-list-item
             to="/report/ihris-es-report-message-exchange"
-            key="2"
+            key="3"
           >
             <v-list-item-title class="text-h2">Message Exchange</v-list-item-title>
           </v-list-item>

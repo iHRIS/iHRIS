@@ -5,7 +5,7 @@
         src="@/assets/mHero.png"
         width="100"
       ></v-img>
-      <ihrisReport report='mhero-send-message'></ihrisReport>
+      <ihrisReport report='ihris-es-report-mhero-send-message'></ihrisReport>
       <v-card-actions class="secondary">
         <v-spacer></v-spacer>
         <v-btn
