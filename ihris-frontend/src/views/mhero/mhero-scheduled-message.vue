@@ -86,7 +86,7 @@
         src="@/assets/mHero.png"
         width="100"
       ></v-img>
-      <ihrisReport report='scheduled-messages'></ihrisReport>
+      <ihrisReport report='ihris-es-report-scheduled-messages'></ihrisReport>
       <v-card-actions class="secondary">
         <v-spacer></v-spacer>
         <v-btn

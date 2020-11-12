@@ -15,16 +15,22 @@
       <v-card-text>
         <v-list >
           <v-list-item
-            to="/report/mhero-flow-summary"
+            to="/report/ihris-es-report-mhero-flow-summary"
             key="1"
           >
             <v-list-item-title class="text-h2">Flow Summary</v-list-item-title>
           </v-list-item>
           <v-list-item
-            to="/report/mhero-flow-run-summary"
+            to="/report/ihris-es-report-mhero-flow-run-summary"
             key="2"
           >
             <v-list-item-title class="text-h2">Flow Run Summary</v-list-item-title>
+          </v-list-item>
+          <v-list-item
+            to="/report/ihris-es-report-message-exchange"
+            key="3"
+          >
+            <v-list-item-title class="text-h2">Message Exchange</v-list-item-title>
           </v-list-item>
         </v-list>
       </v-card-text>

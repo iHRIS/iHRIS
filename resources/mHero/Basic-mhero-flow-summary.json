@@ -40,7 +40,7 @@
       },
       {
         "url": "dropDownFilter",
-        "valueBoolean": false
+        "valueBoolean": true
       }]
     }, {
       "url": "http://ihris.org/fhir/StructureDefinition/iHRISReportElement",

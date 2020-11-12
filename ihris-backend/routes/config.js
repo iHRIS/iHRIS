@@ -357,7 +357,7 @@ router.get('/page/:page/:type?', function(req, res) {
             }
             for( let attr of attrs ) {
               if ( fields[field].hasOwnProperty(attr) ) {
-                if ( fields[field][attr] 
+                if ( fields[field][attr]
                   && fields[field][attr].value && fields[field][attr].code ) {
                   output += " "+attr+"=\""+fields[field][attr].value+fields[field][attr].code+"\""
                 } else {
@@ -650,7 +650,7 @@ router.get('/questionnaire/:questionnaire', function(req, res) {
         }
       }
       if ( constraintKeys.length > 0 ) {
-        return constraintKeys.join(",") 
+        return constraintKeys.join(",")
       } else {
         return null
       }
@@ -715,7 +715,7 @@ router.get('/questionnaire/:questionnaire', function(req, res) {
               for( let type of [ "min", "max" ] ) {
                 let attr = type+"Value"+mm
                 if ( field.hasOwnProperty(attr) ) {
-                  if ( field[attr] 
+                  if ( field[attr]
                     && field[attr].value && field[attr].code ) {
                     vueOutput += " "+attr+"=\""+field[attr].value+field[attr].code+"\""
                   } else {
@@ -830,7 +830,8 @@ router.get('/questionnaire/:questionnaire', function(req, res) {
 } )
 
 router.get('/report/es/:report', (req, res) => {
-  let report = "ihris-es-report-" + req.params.report
+  let report = req.params.report
+  console.log(report);
   if (!req.user) {
     return res.status(401).json(outcomes.NOTLOGGEDIN)
   }
