@@ -19,6 +19,26 @@
           </v-btn>
       </v-snackbar>
 
+      <v-dialog
+        v-model="$store.state.progress.enabled"
+        persistent
+        width="300"
+      >
+        <v-card
+          color="primary"
+          dark
+        >
+          <v-card-text>
+            {{$store.state.progress.title}}
+            <v-progress-linear
+              indeterminate
+              color="white"
+              class="mb-0"
+            ></v-progress-linear>
+          </v-card-text>
+        </v-card>
+      </v-dialog>
+
       <router-view :key="$route.path"></router-view>
       <router-view v-if="$store.state.user.loggedin" name="homeNav" :nav="nav"></router-view>
     </v-content>

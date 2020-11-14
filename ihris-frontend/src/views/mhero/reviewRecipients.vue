@@ -308,7 +308,10 @@ export default {
         body: data,
         redirect: "manual"
       };
+      this.$store.state.progress.enabled = true
+      this.$store.state.progress.title = "Processing request..."
       fetch(url, opts).then((response) => {
+        this.$store.state.progress.enabled = false
         this.statusDialog.enable = true
         if(response.status >= 200 && response.status <= 299) {
           this.statusDialog.color = 'success'
@@ -319,6 +322,7 @@ export default {
             this.statusDialog.description = 'Workflow Started Successfully'
           }
         } else {
+          this.$store.state.progress.enabled = false
           this.statusDialog.color = 'error'
           this.statusDialog.title = 'Error'
           if(this.communicationType === "sms") {

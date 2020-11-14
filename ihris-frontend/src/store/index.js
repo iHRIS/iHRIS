@@ -16,7 +16,11 @@ export default new Vuex.Store({
       timeout: 5000,
       active: false
     },
-    cols: { header: 4, content: 8 }
+    cols: { header: 4, content: 8 },
+    progress: {
+      enabled: false,
+      title: ''
+    }
   },
   mutations: {
     login( state, data ) {
