@@ -32,7 +32,7 @@
             </template>
             <v-list>
               <v-list-item>
-                <img v-if="isImage" :src="objURL"/>
+                <v-img v-if="isImage" :src="objURL"/>
                 <a v-else :download="value.title" :href="objURL">{{value.title}}</a>
               </v-list-item>
             </v-list>
@@ -44,7 +44,20 @@
       {{display}}
     </template>
     <template #value>
-      <img v-if="isImage" :src="objURL"/>
+      <v-menu 
+        v-if="isImage"
+        absolute
+        eager
+        >
+        <template v-slot:activator="{on, attrs}">
+          <v-img :src="objURL" contain :max-height="150" position="left" v-bind="attrs" v-on="on" />
+        </template>
+        <v-list min-width="0">
+          <v-list-item>
+            <v-img :src="objURL" />
+          </v-list-item>
+        </v-list>
+      </v-menu>
       <a v-else :href="objURL">{{value.title}}</a>
     </template>
   </ihris-element>
@@ -69,7 +82,7 @@ export default {
       origValue: { contentType: "", data: "", title: "" },
       qField: "valueAttachment",
       disabled: false,
-      objURL: false,
+      objURL: "",
       errors: [],
       lockWatch: false
     }
