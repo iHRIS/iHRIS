@@ -186,6 +186,18 @@ export default {
       this.prevPage = this.options.page;
 
       let body = this.buildTerms()
+      let sorting = []
+      for(let index in this.options.sortBy) {
+        let sortCol = this.options.sortBy[index]
+        let sort = {}
+        if(this.options.sortDesc[index]) {
+          sort[sortCol + '.keyword'] = 'desc'
+        } else {
+          sort[sortCol + '.keyword'] = 'asc'
+        }
+        sorting.push(sort)
+      }
+      body.sort = sorting
       fetch(url, {
         method: 'POST',
         headers: {
@@ -208,7 +220,6 @@ export default {
                   this.results.push(result)
                 }
               }
-              // this.total = data.hits.total.value;
               this.loading = false;
             })
             .catch(err => {
