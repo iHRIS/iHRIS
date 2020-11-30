@@ -91,6 +91,19 @@ const fhirAxios = {
 
     } )
   },
+  searchLink: ( url ) => {
+    return new Promise( (resolve, reject) => {
+      let url = new URL(next.url)
+      let auth = fhirAxios.__getAuth()
+
+      axios.get( url.href, { auth: auth, params: params } ).then( (response) => {
+        resolve( response.data )
+      } ).catch( (err) => {
+        reject( err )
+      } )
+
+    } )
+  },
   create: ( resource ) => {
     return new Promise( (resolve, reject) => {
       if ( resource === undefined ) {
@@ -144,6 +157,7 @@ const fhirAxios = {
         reject( new InvalidRequestError( "resource must be defined" ) )
       }
       if ( !resource.hasOwnProperty("id") || !resource.id ) {
+        console.log(resource)
         reject( new InvalidRequestError( "resource must have an id field" ) )
       }
       let url = new URL(fhirAxios.baseUrl.href)

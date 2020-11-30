@@ -5,6 +5,7 @@ const fhirAxios = nconf.fhirAxios
 const fhirFilter = require('../modules/fhirFilter')
 const fhirShortName = require('../modules/fhirShortName')
 const fhirReports = require('../modules/fhirReports')
+const fhirSecurity = require('../modules/fhirSecurity')
 const isEmpty = require('is-empty')
 const marked = require('marked')
 const { JSDOM } = require('jsdom')
@@ -92,24 +93,38 @@ router.post("/:resource", (req, res) => {
   if ( !req.user ) {
     return res.status(401).json( outcomes.NOTLOGGEDIN )
   }
-  let allowed = req.user.hasPermissionByObject( "write", req.body )
+  fhirSecurity.preProcess( req.body ).then( (uuid) => {
+    let allowed = req.user.hasPermissionByObject( "write", req.body )
 
-  let resource
-  if ( allowed === true ) {
-    resource = req.body
-  } else if ( !allowed ) {
-    return res.status(401).json( outcomes.DENIED )
-  } else {
-    resource = fhirFilter.filter( req.body, allowed )
-  }
+    let resource
+    if ( allowed === true ) {
+      resource = req.body
+    } else if ( !allowed ) {
+      return res.status(401).json( outcomes.DENIED )
+    } else {
+      resource = fhirFilter.filter( req.body, allowed )
+    }
 
-  fhirAxios.create( resource ).then( (output) => {
-    fhirReports.delayedRun()
-    return res.status(201).json(output)
+    fhirAxios.create( resource ).then( (output) => {
+      fhirSecurity.postProcess( output, uuid ).then( (results) => {
+        fhirReports.delayedRun()
+        return res.status(201).json(output)
+      } ).catch( (err) => {
+        winston.error("Failed to postprocess security metadata ON POST"+err.message)
+        let outcome = { ...outcomes.ERROR }
+        outcome.issue[0].diagnostics = err.message
+        return res.status(500).json( outcome )
+      } )
+    } ).catch( (err) => {
+      /* return response from FHIR server */
+      //return res.status( err.response.status ).json( err.response.data )
+      /* for custom responses */
+      let outcome = { ...outcomes.ERROR }
+      outcome.issue[0].diagnostics = err.message
+      return res.status(500).json( outcome )
+    } )
   } ).catch( (err) => {
-    /* return response from FHIR server */
-    //return res.status( err.response.status ).json( err.response.data )
-    /* for custom responses */
+    winston.error("Failed to preprocess security metadata ON POST"+err.message)
     let outcome = { ...outcomes.ERROR }
     outcome.issue[0].diagnostics = err.message
     return res.status(500).json( outcome )
@@ -163,25 +178,39 @@ router.put("/:resource/:id", (req, res) => {
     return res.status(401).json( outcomes.NOTLOGGEDIN )
   }
   let update = req.body
-  let allowed = req.user.hasPermissionByObject( "write", update )
-  if ( !allowed ) {
-    return res.status(401).json( outcomes.DENIED )
-  }
+  fhirSecurity.preProcess( update ).then( (uuid) => {
+    let allowed = req.user.hasPermissionByObject( "write", update )
+    if ( !allowed ) {
+      return res.status(401).json( outcomes.DENIED )
+    }
 
-  if ( allowed !== true ) {
-    // Not allowed at this time because it's complicated to combine the filtered
-    // results with the original data.  Due to arrays in FHIR elements.
-    // Should instead use patching with this access level to update one field at a time.
-    return res.status(401).json( outcomes.DENIED )
-  }
+    if ( allowed !== true ) {
+      // Not allowed at this time because it's complicated to combine the filtered
+      // results with the original data.  Due to arrays in FHIR elements.
+      // Should instead use patching with this access level to update one field at a time.
+      return res.status(401).json( outcomes.DENIED )
+    }
 
-  fhirAxios.update( update ).then( (resource) => {
-    fhirReports.delayedRun()
-    return res.status(200).json(resource)
+    fhirAxios.update( update ).then( (resource) => {
+      fhirSecurity.postProcess( resource, uuid ).then( (results) => {
+        fhirReports.delayedRun()
+        return res.status(200).json(resource)
+      } ).catch( (err) => {
+        winston.error("Failed to postprocess security metadata on PUT "+err.message)
+        let outcome = { ...outcomes.ERROR }
+        outcome.issue[0].diagnostics = err.message
+        return res.status(500).json( outcome )
+      } )
+    } ).catch( (err) => {
+      /* return response from FHIR server */
+      //return res.status( err.response.status ).json( err.response.data )
+      /* for custom responses */
+      let outcome = { ...outcomes.ERROR }
+      outcome.issue[0].diagnostics = err.message
+      return res.status(500).json( outcome )
+    } )
   } ).catch( (err) => {
-    /* return response from FHIR server */
-    //return res.status( err.response.status ).json( err.response.data )
-    /* for custom responses */
+    winston.error("Failed to preprocess security metadata on PUT "+err.message)
     let outcome = { ...outcomes.ERROR }
     outcome.issue[0].diagnostics = err.message
     return res.status(500).json( outcome )

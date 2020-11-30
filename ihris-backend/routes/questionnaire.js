@@ -4,6 +4,7 @@ const router = express.Router()
 const nconf = require('../modules/config')
 const fhirAxios = nconf.fhirAxios
 const fhirFilter = require('../modules/fhirFilter')
+const fhirSecurity = require('../modules/fhirSecurity')
 const fhirQuestionnaire = require('../modules/fhirQuestionnaire')
 const fhirModules = require('../modules/fhirModules')
 const isEmpty = require('is-empty')
@@ -40,24 +41,42 @@ router.post("/QuestionnaireResponse", (req, res, next) => {
 
     fhirModules.requireWorkflow( workflow, details.library, details.file ).then( (module) => {
         module.process( req ).then( (bundle) => {
-          fhirFilter.filterBundle( "write", bundle, req.user )
+          fhirSecurity.preProcess( bundle ).then( (uuid) => {
+            fhirFilter.filterBundle( "write", bundle, req.user )
 
-          fhirAxios.create( bundle ).then ( (results) => {
-            if ( module.postProcess ) {
-              module.postProcess( req, results ).then( () => {
-                next()
-              } ).catch( (err) => {
-                winston.error(err.message)
-                return res.status( 400 ).json( { err: err.message } )
-              } )
-            } else {
-              next()
-            }
+            fhirAxios.create( bundle ).then ( (results) => {
+              if ( module.postProcess ) {
+                module.postProcess( req, results ).then( () => {
+                  fhirSecurity.postProcess( results, uuid ).then( (results) => {
+                    next()
+                  } ).catch( (err) => {
+                    winston.error(err.message)
+                    return res.status( 500 ).json( { err: err.message } )
+                  } )
+                } ).catch( (err) => {
+                  winston.error(err.message)
+                  return res.status( 500 ).json( { err: err.message } )
+                } )
+              } else {
+                fhirSecurity.postProcess( results, uuid ).then( (results) => {
+                  next()
+                } ).catch( (err) => {
+                  winston.error(err.message)
+                  return res.status( 500 ).json( { err: err.message } )
+                } )
+              }
+            } ).catch( (err) => {
+              winston.error(err.message)
+              //return res.status( err.response.status ).json( err.response.data )
+              return res.status( 500 ).json( { err: err.message } )
+            } )
+
           } ).catch( (err) => {
             winston.error(err.message)
-            //return res.status( err.response.status ).json( err.response.data )
-            return res.status( 400 ).json( { err: err.message } )
+            return res.status( 500 ).json( err )
           } )
+
+
 
         } ).catch( (err) => {
           winston.error(err.message)
@@ -79,18 +98,33 @@ router.post("/QuestionnaireResponse", (req, res, next) => {
 
     fhirQuestionnaire.processQuestionnaire( req.body ).then( (bundle) => {
       winston.debug(JSON.stringify(bundle,null,2))
-      fhirFilter.filterBundle( "write", bundle, req.user )
+      fhirSecurity.preProcess( bundle ).then( (uuid) => {
+        fhirFilter.filterBundle( "write", bundle, req.user )
 
-      fhirAxios.create( bundle ).then ( (results) => {
-        if ( results.entry && results.entry.length > 0 && results.entry[0].response.location ) {
-          req.body.subject = { reference: results.entry[0].response.location }
-        }
-        next()
+        fhirAxios.create( bundle ).then ( (results) => {
+          if ( results.entry && results.entry.length > 0 && results.entry[0].response.location ) {
+            req.body.subject = { reference: results.entry[0].response.location }
+          }
+          fhirSecurity.postProcess( results, uuid ).then( (results) => {
+            next()
+          } ).catch( (err) => {
+            winston.error(err.message)
+            return res.status( 500 ).json( { err: err.message } )
+          } )
+        } ).catch( (err) => {
+          winston.error(err.message)
+          //return res.status( err.response.status ).json( err.response.data )
+          return res.status( 500 ).json( { err: err.message } )
+        } )
+
+
       } ).catch( (err) => {
         winston.error(err.message)
-        //return res.status( err.response.status ).json( err.response.data )
-        return res.status( 400 ).json( { err: err.message } )
+        return res.status( 500 ).json( err )
       } )
+
+
+
 
     } ).catch( (err) => {
       winston.error(err.message)
