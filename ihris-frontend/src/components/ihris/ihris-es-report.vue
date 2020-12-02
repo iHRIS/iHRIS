@@ -178,6 +178,7 @@ export default {
             .json()
             .then(data => {
               this.total = data.count
+              eventBus.$emit("report-total-records", this.total)
             })
         })
     },
@@ -229,7 +230,6 @@ export default {
                   this.results.push(result)
                 }
               }
-              eventBus.$emit("report-total-records", this.results.length)
               if(this.selectAll) {
                 this.selected = this.results
               } else {

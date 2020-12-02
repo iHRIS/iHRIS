@@ -15,7 +15,7 @@
           rounded
         >
           <v-icon left>mdi-arrow-expand-all</v-icon>
-          Select Flow and Send to All {{totalRecords}}
+          Select Flow and Send to All {{parseInt(totalRecords).toLocaleString()}}
         </v-btn>
         <v-spacer></v-spacer>
         <v-btn
