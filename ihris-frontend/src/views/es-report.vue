@@ -12,7 +12,30 @@ import Vue from "vue";
 
 export default {
   name: "fhir-report",
-  props: ["report"],
+  props: {
+    report: {
+      type: String,
+      default: ""
+    },
+    terms: {
+      type: Object,
+      default: function() {
+        return {};
+      }
+    },
+    hideFilters: {
+      type: Boolean,
+      default: false
+    },
+    hideCheckboxes: {
+      type: Boolean,
+      default: false
+    },
+    hideLabel: {
+      type: Boolean,
+      default: false
+    }
+  },
   data: function() {
     return {};
   },
@@ -31,13 +54,20 @@ export default {
           response
             .json()
             .then(data => {
+              let terms = this.terms
+              let hideFilters = this.hideFilters
+              let hideCheckboxes = this.hideCheckboxes
+              let hideLabel = this.hideLabel
               Vue.component("ihris-template", {
                 name: "ihris-template",
                 data: function() {
                   return {
                     reportData: data.reportData,
                     dataURL: data.dataURL,
-                    terms: {}
+                    terms: terms,
+                    hideLabel,
+                    hideFilters,
+                    hideCheckboxes
                   };
                 },
                 components: {
@@ -58,7 +88,6 @@ export default {
                 }
               });
               this.$forceUpdate();
-              console.log("updated template");
             })
             .catch(err => {
               console.log(err);

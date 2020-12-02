@@ -316,6 +316,8 @@ export default {
   },
   methods: {
     addGroup() {
+      this.$store.state.progress.enabled = true
+      this.$store.state.progress.title = "Adding Group..."
       let data = JSON.stringify({
         name: this.grouName
       });
@@ -329,6 +331,7 @@ export default {
         redirect: "manual"
       };
       fetch(url, opts).then((response) => {
+        this.$store.state.progress.enabled = false
         if(response.status >= 200 && response.status <= 299) {
           this.addGroupDialog = false
           this.statusDialog.enable = true
@@ -343,6 +346,7 @@ export default {
         }
         eventBus.$emit("reload-report")
       }).catch(err => {
+        this.$store.state.progress.enabled = false
         this.unSubscribeDialog = false
         this.statusDialog.enable = true
         this.statusDialog.color = 'error'
@@ -433,6 +437,8 @@ export default {
         })
     },
     saveUnSubscribe() {
+      this.$store.state.progress.enabled = true
+      this.$store.state.progress.title = "Unsubscribing Practitioners..."
       let members = this.getFullEntityIDs(this.subscribingPractitioners)
       let groups = [];
       this.selectedUnsubGrps.forEach(group => {
@@ -453,6 +459,7 @@ export default {
         redirect: "manual"
       };
       fetch(url, opts).then(() => {
+        this.$store.state.progress.enabled = false
         this.unSubscribeDialog = false
         this.statusDialog.enable = true
         this.statusDialog.color = 'success'
@@ -460,6 +467,7 @@ export default {
         this.statusDialog.description = 'Contacts UnSubscribed successfully'
         eventBus.$emit("reload-report")
       }).catch(err => {
+        this.$store.state.progress.enabled = false
         this.unSubscribeDialog = false
         this.statusDialog.enable = true
         this.statusDialog.color = 'error'
@@ -469,6 +477,8 @@ export default {
       });
     },
     saveSubscription() {
+      this.$store.state.progress.enabled = true
+      this.$store.state.progress.title = "Subscribing Practitioners..."
       let members = this.getFullEntityIDs(this.subscribingPractitioners)
       let groups = [];
       this.subscribingGroups.forEach(group => {
@@ -490,6 +500,7 @@ export default {
         redirect: "manual"
       };
       fetch(url, opts).then(() => {
+        this.$store.state.progress.enabled = false
         this.subscribeDialog = false
         this.statusDialog.enable = true
         this.statusDialog.color = 'success'
@@ -497,6 +508,7 @@ export default {
         this.statusDialog.description = 'Contacts subscribed successfully'
         eventBus.$emit("reload-report")
       }).catch(err => {
+        this.$store.state.progress.enabled = false
         this.subscribeDialog = false
         this.statusDialog.enable = true
         this.statusDialog.color = 'error'

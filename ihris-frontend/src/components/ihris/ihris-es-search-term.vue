@@ -1,6 +1,6 @@
 <template>
   <v-autocomplete
-    v-if="isDropDown"
+    v-if="isDropDown && !hideFilters"
     :loading="loading"
     :label="label"
     v-model="value"
@@ -19,14 +19,14 @@
     item-text="display"
     item-value="code">
   </v-autocomplete>
-  <v-text-field v-else :label="label" v-model="value" dense outlined hide-details shaped clearable @change="updateSearch()" @click:clear="clearSearch()">
+  <v-text-field v-else-if="!hideFilters" :label="label" v-model="value" dense outlined hide-details shaped clearable @change="updateSearch()" @click:clear="clearSearch()">
   </v-text-field>
 </template>
 
 <script>
 export default {
   name: "ihris-search-term",
-  props: ["label","expression","isDropDown", "reportData"],
+  props: ["label","expression","isDropDown", "reportData", "hideFilters"],
   data: function() {
     return {
       loading: false,

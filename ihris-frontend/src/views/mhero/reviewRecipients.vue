@@ -202,7 +202,14 @@
       <v-card-title>
         Recipients
       </v-card-title>
+      <ihrisReport v-if="sendToMatchingTerms"
+        report='ihris-es-report-mhero-send-message'
+        :terms="terms" :hideFilters="true"
+        :hideCheckboxes="true"
+        :hideLabel="true"
+      />
       <v-data-table
+        v-else
         :headers="headers"
         :items="practitioners"
         item-key="id"
@@ -230,9 +237,10 @@
 </template>
 
 <script>
+import ihrisReport from "@/views/es-report";
 import VueCronEditorBuefy from 'vue-cron-editor-buefy';
 export default {
-  props: ["headers", "practitioners"],
+  props: ["headers", "practitioners", "terms", "sendToMatchingTerms", "reportData"],
   data: vm => ({
     chars: 0,
     totalChars: 160,
@@ -284,7 +292,10 @@ export default {
 
       let data = {
         practitioners: practitioners,
-        workflow: this.workflow.id
+        workflow: this.workflow.id,
+        terms: this.terms,
+        sendToMatchingTerms: this.sendToMatchingTerms,
+        reportData: this.reportData
       };
       if(this.frequency === 'recurring' || (this.frequency === 'once' && this.sendTimeCategory === 'later')) {
         data.cronExpression = this.cronExpression
@@ -422,7 +433,8 @@ export default {
     });
   },
   components: {
-    VueCronEditorBuefy
+    VueCronEditorBuefy,
+    ihrisReport: ihrisReport
   },
 };
 </script>

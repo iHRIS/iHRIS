@@ -8,6 +8,9 @@
         <reviewRecipients
           :headers="headers"
           :practitioners="selectedPractitioners"
+          :sendToMatchingTerms="sendToMatchingTerms"
+          :terms="terms"
+          :reportData="reportData"
           @editWorkflow="changeWorkflow"
         />
       </v-stepper-content>
@@ -28,6 +31,9 @@ export default {
     return {
       headers: [],
       selectedPractitioners: [],
+      terms: {},
+      sendToMatchingTerms: false,
+      reportData: {},
       stepper: 1
     };
   },
@@ -35,9 +41,12 @@ export default {
     changeWorkflow() {
       this.stepper = 1;
     },
-    importData(selectedPractitioners, headers) {
+    importData(selectedPractitioners, headers, terms, sendToMatchingTerms, reportData) {
       this.selectedPractitioners = selectedPractitioners;
       this.headers = headers;
+      this.terms = terms
+      this.sendToMatchingTerms = sendToMatchingTerms
+      this.reportData = reportData
       this.stepper = 2;
     }
   }

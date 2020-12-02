@@ -1,7 +1,7 @@
 <template>
   <v-container class="py-5">
     <v-card>
-      <v-card-title>
+      <v-card-title v-if="!hideLabel">
         {{ label }}
         <v-spacer></v-spacer>
         <slot></slot>
@@ -20,7 +20,7 @@
         :loading="loading"
         class="elevation-1"
         item-key="id"
-        :show-select="reportData.displayCheckbox"
+        :show-select="reportData.displayCheckbox && !hideCheckboxes"
         v-model="selected"
       ></v-data-table>
     </v-card>
@@ -32,7 +32,7 @@
 import { eventBus } from "@/main";
 export default {
   name: "ihris-report",
-  props: ["profile", "reportData", "label", "terms", "dataURL", "page"],
+  props: ["reportData", "label", "terms", "dataURL", "page", "hideCheckboxes", "hideLabel"],
   data: function() {
     return {
       debug: "",
@@ -45,14 +45,19 @@ export default {
       link: [],
       selected: [],
       error_message: null,
+      selectAll: false
     };
   },
   watch: {
     selected() {
-      eventBus.$emit("ihris-report-selections", this.selected, this.reportData);
+      if(this.selected.length !== this.results.length && this.selectAll) {
+        this.selectAll = false
+      }
+      eventBus.$emit("ihris-report-selections", this.selected, this.reportData, this.terms, this.selectAll);
     },
     terms: {
       handler() {
+        this.selectAll = false
         this.getTotalRecords();
         this.getData(true);
       },
@@ -86,6 +91,10 @@ export default {
     eventBus.$on("reload-report", () => {
       this.getTotalRecords();
       this.getData()
+    })
+    eventBus.$on("mhero-select-all", () => {
+      this.selected = this.results
+      this.selectAll = true
     })
   },
   mounted: function() {
@@ -219,6 +228,12 @@ export default {
                   result.id = hit['_id']
                   this.results.push(result)
                 }
+              }
+              eventBus.$emit("report-total-records", this.results.length)
+              if(this.selectAll) {
+                this.selected = this.results
+              } else {
+                this.selected = []
               }
               this.loading = false;
             })
