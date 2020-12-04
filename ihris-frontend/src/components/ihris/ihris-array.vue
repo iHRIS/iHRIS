@@ -42,11 +42,9 @@ export default {
   watch: {
     slotProps: {
       handler() {
-
         if ( !this.lockWatch ) {
           //console.log("WATCHARR",this.path,this.slotProps.source)
           this.setupInputs()
-          this.lockWatch = true
         }
       },
       deep: true
@@ -63,6 +61,9 @@ export default {
           expression = this.field.replace(/([^:]+):(.+)/, "$1.where(url='"+this.profile+"')")
         }
         this.source.data = this.$fhirpath.evaluate( this.slotProps.source.data, expression)
+        if ( this.source.data.length > 0 ) {
+          this.lockWatch = true
+        }
       }
       for( let idx = 0; idx < this.actualMin; idx++ ) {
         let label = this.label
@@ -75,7 +76,6 @@ export default {
         }
         this.inputs.push( input )
       }
-      //console.log("ARR inputs",this.id,this.source,this.inputs)
     },
     addRow: function() {
       this.lockWatch = true
