@@ -5,14 +5,41 @@ const { v5: uuidv5 } = require('uuid')
 
 const FHIR_UPDATE_NAMESPACE = nconf.get("fhir:uuid:namespace") || "e91c9519-eccb-48a8-a506-6659b8c22518"
 
+const objId = (() => {
+  let currId = 0
+  const map = new WeakMap()
+
+  return (obj) => {
+    if ( !map.has(obj) ) map.set(obj, ++currId)
+    return map.get(obj)
+  }
+
+} )()
+
+const getLocationReferences = (location) => {
+  return location.map( loc => loc.reference ).filter( loc => !!loc )
+}
+const compareLocations = (loc1, loc2) => {
+  if ( !Array.isArray(loc1) || !Array.isArray(loc2) ) {
+    return false
+  }
+  let refs1 = getLocationReferences(loc1).sort()
+  let refs2 = getLocationReferences(loc2).sort()
+  return refs1.length === refs2.length &&
+    refs1.every( (ref, i) => ref === refs2[i] )
+}
+
 const fhirSecurityLocation = {
-  system: "http://ihris.org/fhir/security/location",
+  url: "location",
   oldSecurity: {},
   /**
    * get the location hierarchy for a given location
    */
   getLocationHierarchy: (location) => {
     // http://antiquity:8080/hapi/fhir/Location?_id=Location/TF.S.NYS&status=active&_include:iterate=Location:partof
+    if ( Array.isArray( location ) ) {
+      location = getLocationReferences( location ).join(",")
+    }
     return new Promise( (resolve, reject) => {
       fhirAxios.search( "Location", 
         { _id: location, status: "active", "_include:iterate": "Location:partof" } ).then( (bundle) => {
@@ -31,16 +58,13 @@ const fhirSecurityLocation = {
    * remove and update security with given locations on the resource
    */
   resetLocationSecurityOnResource: (resource, locations) => {
-    if ( !resource.meta ) {
-      resource.meta = {}
-    }
-    if ( !resource.meta.security ) {
-      resource.meta.security = []
-    }
-    resource.meta.security = resource.meta.security.filter( security => security.system !== fhirSecurityLocation.system )
+    let securityExt = fhirSecurity.getSecurityExtension( resource )
 
-    let security = locations.map( location => { return { system: fhirSecurityLocation.system, code: location } } )
-    resource.meta.security = resource.meta.security.concat( security )
+
+    securityExt.extension = securityExt.extension.filter( ext => ext.url !== fhirSecurityLocation.url )
+
+    let security = locations.map( location => { return { url: fhirSecurityLocation.url, valueString: location } } )
+    securityExt.extension = securityExt.extension.concat( security )
 
   },
   /** 
@@ -66,14 +90,17 @@ const fhirSecurityLocation = {
    * Remove oldSecurity and add newSecurity on the resource
    */
   replaceSecurityOnResource: (resource, oldArray, newSecurity) => {
-    resource.meta.security = resource.meta.security.filter( sec => !oldArray.includes( sec.system + "|" + sec.code ) )
-    resource.meta.security = resource.meta.security.concat( newSecurity )
+    let securityExt = fhirSecurity.getSecurityExtension( resource )
+
+    securityExt.extension = securityExt.extension.filter( ext => !oldArray.includes( ext.url + "|" + ext.valueString ) )
+
+    securityExt.extension = securityExt.extension.concat( newSecurity )
   },
    /**
    * Remove oldSecurity and add newSecurity to any Locations with the given location tag
    */
   replaceSecurityOnLocation: (location, oldSecurity, newSecurity) => {
-    let oldArray = oldSecurity.map( sec => sec.system + "|" + sec.code )
+    let oldArray = oldSecurity.map( ext => ext.url + "|" + ext.valueString )
     const processLocationSecurity = (bundle) => {
       if ( bundle.entry ) {
         for( let entry of bundle.entry ) {
@@ -99,7 +126,7 @@ const fhirSecurityLocation = {
       }
     }
 
-    fhirAxios.search( "Location", { _security: fhirSecurityLocation.system + "|" + location } ).then( (bundle) => {
+    fhirAxios.search( "Location", { 'related-location': location } ).then( (bundle) => {
       processLocationSecurity( bundle )
     } ).catch( (err) => {
       winston.error("Failed to get security for location "+location+" "+err.message)
@@ -124,7 +151,7 @@ const fhirSecurityLocation = {
           return resolve( true )
         }
       } else {
-        fhirSecurityLocation.oldSecurity[uuid] = previous.meta.security
+        fhirSecurityLocation.oldSecurity[uuid] = fhirSecurity.getSecurityExtension(previous).extension
         if ( resource.partOf && resource.partOf.reference ) {
           fhirSecurityLocation.getLocationHierarchy( resource.partOf.reference ).then( (locations) => {
             locations.push( "Location/"+resource.id )
@@ -147,8 +174,10 @@ const fhirSecurityLocation = {
    */
   postProcess: (uuid, resource) => {
     return new Promise( ( resolve, reject ) => {
+      let securityExt = fhirSecurity.getSecurityExtension( resource )
       if ( resource.meta.versionId === "1" ) {
-        resource.meta.security.push( { system: fhirSecurityLocation.system, code: "Location/"+resource.id } )
+
+        securityExt.extension.push( { url: fhirSecurityLocaiton.url, valueString: "Location/"+resource.id } )
         fhirAxios.update( resource ).then( (resource) => {
           return resolve( true )
         } ).catch( (err) => {
@@ -156,7 +185,7 @@ const fhirSecurityLocation = {
           return reject(err)
         } )
       } else {
-        fhirSecurityLocation.replaceSecurityOnLocation( "Location/"+resource.id, fhirSecurityLocation.oldSecurity[uuid], resource.meta.security )
+        fhirSecurityLocation.replaceSecurityOnLocation( "Location/"+resource.id, fhirSecurityLocation.oldSecurity[uuid], securityExt.extension )
         delete fhirSecurityLocation.oldSecurity[uuid]
         fhirSecurityPractitioner.resetLocationSecurityByLocation("Location/"+resource.id)
         return resolve( true )
@@ -243,7 +272,7 @@ const fhirSecurityLocation = {
 }
 
 const fhirSecurityPractitioner = {
-  system: "http://ihris.org/fhir/security/practitioner",
+  url: "practitioner",
   resourceTypes: [ "Practitioner", "PractitionerRole", "Basic" ],
   /*
   resourceSearch: {
@@ -268,15 +297,16 @@ const fhirSecurityPractitioner = {
       params.append( "_include:iterate", "Location:partof" )
 
       fhirAxios.search( "PractitionerRole", params ).then ( (bundle) => {
+        let locations = []
         if ( bundle.entry ) {
-          let locations = []
           for( let entry of bundle.entry ) {
             if ( entry.resource.resourceType === "Location" ) {
               locations.push( "Location/" + entry.resource.id )
+            } else {
             }
           } 
-          resolve( locations )
         }
+        resolve( locations )
       } ).catch( (err) => {
         winston.error("Failed to update matching practitioners "+practitioner+" "+err.message)
         reject( err )
@@ -313,8 +343,12 @@ const fhirSecurityPractitioner = {
   resetPractitionerSecurityOnResource: (resource) => {
     let securityValue = fhirSecurityPractitioner.getPractitionerReference( resource )
     if ( !securityValue ) return
-    resource.meta.security = resource.meta.security.filter( security => security.system !== fhirSecurityPractitioner.system )
-    resource.meta.security.push( { system: fhirSecurityPractitioner.system, code: securityValue } )
+    let securityExt = fhirSecurity.getSecurityExtension( resource )
+
+
+    securityExt.extension = securityExt.extension.filter( ext => ext.url !== fhirSecurityPractitioner.url )
+    securityExt.extension.push( { url: fhirSecurityPractitioner.url, valueString: securityValue } )
+
   },
   /**
    * reset location security for all resources matching the practitioner security metadata
@@ -324,7 +358,8 @@ const fhirSecurityPractitioner = {
       if ( bundle.entry ) {
         bundle.entry.forEach( (other) => {
           fhirSecurityLocation.resetLocationSecurityOnResource( other.resource, locations )
-          fhirAxios.update( other.resource ).catch( (err) => {
+          fhirAxios.update( other.resource ).then( (saved) => {
+          } ).catch( (err) => {
             winston.error("Failed to update "+other.resource.resourceType+"/"+other.resource.id+" security for practitioner "
               +practitioner+" "+err.message)
           } )
@@ -343,7 +378,7 @@ const fhirSecurityPractitioner = {
     }
     fhirSecurityPractitioner.getLocationsForPractitioner( practitioner ).then( (locations) => {
       fhirSecurityPractitioner.resourceTypes.forEach( (resourceType) => {
-        fhirAxios.search( resourceType, { _security: fhirSecurityPractitioner.system + "|" + practitioner } ).then( (bundle) => {
+        fhirAxios.search( resourceType, { 'related-practitioner': practitioner } ).then( (bundle) => {
           processPractitionerSecurity( bundle, locations )
         } ).catch( (err) => {
           winston.error("Failed to get "+resourceType+" security for practitioner "+practitioner+" "+err.message)
@@ -367,7 +402,8 @@ const fhirSecurityPractitioner = {
       if ( bundle.entry ) {
         for( let entry of bundle.entry ) {
           try {
-            let practitioner = entry.resource.meta.security.find( security => security.system === fhirSecurityPractitioner.system ).code
+            let securityExt = fhirSecurity.getSecurityExtension( resource )
+            let practitioner = securityExt.extension.find( ext => ext.url === fhirSecurityPractitioner.url ).valueString
             practitionerList[ practitioner ] = true
           } catch (err) { }
         } 
@@ -389,7 +425,7 @@ const fhirSecurityPractitioner = {
     }
 
     fhirSecurityPractitioner.resourceTypes.forEach( (resourceType) => {
-      fhirAxios.search( resourceType, { _security: fhirSecurityLocation.system + "|" + location } ).then( (bundle) => {
+      fhirAxios.search( resourceType, { 'related-location': location } ).then( (bundle) => {
         processLocationSecurity( bundle )
       } ).catch( (err) => {
         winston.error("Failed to get "+resourceType+" security for location "+location+" "+err.message)
@@ -404,8 +440,8 @@ const fhirSecurityPractitioner = {
       let roles = bundle.entry.filter( entry => entry.resource.resourceType === "PractitionerRole" )
       let promises = []
       for( let role of roles ) {
-        if ( role.resource.location ) {
-          promises.push( fhirSecurityLocation.getLocationHierarchy( role.resource.location.reference ) )
+        if ( role.resource.location.length > 0 ) {
+          promises.push( fhirSecurityLocation.getLocationHierarchy( role.resource.location ) )
         }
       }
       Promise.all( promises ).then( (locationLists) => {
@@ -478,10 +514,8 @@ const fhirSecurityPractitioner = {
         pracId = parts[0]
       }
       fhirAxios.read("Practitioner", pracId).then( (practitioner) => {
-        if ( !resource.meta ) {
-          resource.meta = {}
-        }
-        resource.meta.security = practitioner.meta.security
+        let securityExt = fhirSecurity.getSecurityExtension( resource )
+        securityExt.extension = fhirSecurity.getSecurityExtension( practitioner ).extension
         resolve(true)
       } ).catch( (err) => {
         winston.error("Failed to get practitioner "+pracId+" "+err.message)
@@ -509,7 +543,7 @@ const fhirSecurityPractitioner = {
     } else {
       if ( resource.resourceType === "PractitionerRole" ) {
         if ( resource.practitioner.reference !== previous.practitioner.reference 
-          || resource.location.reference !== previous.location.reference
+          || !compareLocations( resource.location, previous.location )
           || resource.active !== previous.active
           || (resource.period && resource.period.end)
         ) {
@@ -551,12 +585,12 @@ const fhirSecurityPractitioner = {
       } else if ( resource.resourceType == "PractitionerRole" ) {
         if ( !previous ) {
           fhirSecurityPractitioner.resetPractitionerSecurityOnResource( resource )
-          if ( resource.location && resource.location.reference ) {
-            fhirSecurityLocation.getLocationHierarchy( resource.location.reference ).then( (locations) => {
+          if ( resource.location && resource.location.length > 0 ) {
+            fhirSecurityLocation.getLocationHierarchy( resource.location ).then( (locations) => {
               fhirSecurityLocation.resetLocationSecurityOnResource( resource, locations )
               return resolve( true )
             } ).catch( (err) => {
-              winston.error("Failed to get location hierarchy for "+resource.location.reference+" "+err.message)
+              winston.error("Failed to get location hierarchy for "+JSON.stringify(resource.location)+" "+err.message)
               return reject( err )
             } )
           } else {
@@ -564,12 +598,23 @@ const fhirSecurityPractitioner = {
           }
         } else {
           fhirSecurityPractitioner.resetPractitionerSecurityOnResource( resource )
-          if ( resource.location && resource.location.reference ) {
-            fhirSecurityLocation.getLocationHierarchy( resource.location.reference ).then( (locations) => {
+          const today = new Date( new Date().toISOString().substring(0, 10) )
+          let start, end
+          if ( resource.period ) {
+            if ( resource.period.start ) {
+              start = new Date( resource.period.start )
+            }
+            if ( resource.period.end ) {
+              end = new Date( resource.period.end )
+            }
+          }
+          const dateValid = (start ? start <= today : true ) && ( end ? end >= today : true )
+          if ( resource.active && dateValid && resource.location && resource.location.length > 0 ) {
+            fhirSecurityLocation.getLocationHierarchy( resource.location ).then( (locations) => {
               fhirSecurityLocation.resetLocationSecurityOnResource( resource, locations )
               return resolve( true )
             } ).catch( (err) => {
-              winston.error("Failed to get location hierarchy for "+resource.location.reference+" "+err.message)
+              winston.error("Failed to get location hierarchy for "+JSON.stringify(resource.location)+" "+err.message)
               return reject( err )
             } )
           } else {
@@ -716,9 +761,27 @@ const fhirSecurityPractitioner = {
 
 const fhirSecurity = {
 
+  url: "http://ihris.org/fhir/StructureDefinition/ihris-related-group",
   modules: { fhirSecurityPractitioner, fhirSecurityLocation },
   updateRequiredCache: { "fhirSecurityPractitioner" : {}, "fhirSecurityLocation": {} },
   updateCount: 1,
+  /**
+   * return the security extension from the resource
+   */
+  getSecurityExtension: (resource) => {
+    if ( !resource.extension ) {
+      resource.extension = []
+    }
+    let security = resource.extension.find( ext => ext.url === fhirSecurity.url )
+    if ( !security ) {
+      security = {
+        url: fhirSecurity.url,
+        extension: []
+      }
+      resource.extension.push( security )
+    }
+    return security
+  },
   /** 
    * replace security with previous security metadata 
    * used when nothing triggers an update to security metadata
@@ -727,18 +790,14 @@ const fhirSecurity = {
    * This should only be called before the resource has been saved
    */
   replaceSecurity: (resource, security) => {
-    resource.meta.security = security
+    let securityExt = fhirSecurity.getSecurityExtension( resource )
+    securityExt.extension = security
   },
   /**
    * pre process the given resource to add necessary security tags
    */
   preProcess: (resource) => {
-    if ( !resource.meta ) {
-      resource.meta = {}
-    }
-    if ( !resource.meta.security ) {
-      resource.meta.security = []
-    }
+    let securityExt = fhirSecurity.getSecurityExtension( resource )
     let uuid = uuidv5( "UPDATE_REQUIRED_"+(fhirSecurity.updateCount++), FHIR_UPDATE_NAMESPACE )
 
     return new Promise( async (resolve, reject) => {
@@ -747,15 +806,14 @@ const fhirSecurity = {
         fhirSecurity.replaceSecurity( resource, [] )
         try {
           let previous = await fhirAxios.read( resource.resourceType, resource.id )
+          let previousSecurity = fhirSecurity.getSecurityExtension( previous )
+          fhirSecurity.replaceSecurity( resource, previousSecurity.extension )
           for( let modName of Object.keys(fhirSecurity.modules) ) {
             let module = fhirSecurity.modules[modName]
             if ( module.updateRequired( resource, previous ) ) {
               fhirSecurity.updateRequiredCache[ modName ][ uuid ] = true
               promises.push( module.preProcess( uuid, resource, previous ) )
             } else {
-              if ( previous.meta && previous.meta.security ) {
-                fhirSecurity.replaceSecurity( resource, previous.meta.security )
-              }
             }
           }
         } catch(err) {

@@ -93,11 +93,14 @@ export default {
       return (this.index || 0) < this.min
     },
     rules: function() {
+      return []
+      /* for boolean false is ok so no validation required
       if ( this.required ) {
         return [ v => !!v || this.display+" is required" ]
       } else {
         return []
       }
+      */
     }
   }
 }
