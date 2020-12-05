@@ -122,7 +122,7 @@ router.post("/send-message", function (req, res) {
         }).then(() => {
           return nxt()
         }).catch(err => {
-          winston.error(err)
+          winston.error(err.message)
           errorOccured = true
           return nxt()
         });
@@ -145,7 +145,7 @@ router.post("/send-message", function (req, res) {
           }
           res.status(201).json(response.data);
         }).catch(err => {
-          winston.error(err)
+          winston.error(err.message)
           return res.status(500).send(errorOccured)
         });
       } else {
@@ -264,7 +264,7 @@ router.post('/subscribe-contact-groups', (req, res) => {
     fhirReports.setup().then(() => {
       fhirReports.runReports()
     }).catch((err) => {
-      winston.error( err )
+      winston.error( err.message )
     })
     return res.status(200).send()
   })
@@ -285,11 +285,11 @@ router.post('/add-group', (req, res) => {
         winston.error("Failed to start up reports to ElasticSearch.")
       }
     } catch( err ) {
-      winston.error( err )
+      winston.error( err.message )
     }
     return res.status(201).send()
   }).catch((err) => {
-    console.log(err);
+    winston.error(err.message);
     return res.status(500).send()
   })
 })
@@ -319,7 +319,7 @@ router.post('/unsubscribe-contact-groups', (req, res) => {
     fhirReports.setup().then(() => {
       fhirReports.runReports()
     }).catch((err) => {
-      winston.error( err )
+      winston.error( err.message )
     })
     return res.status(200).send()
   })

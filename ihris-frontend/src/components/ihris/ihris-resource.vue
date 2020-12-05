@@ -318,20 +318,9 @@ export default {
 
       //console.log(this.field)
       this.fhir = { 
-        resourceType: this.field
-      }
-      if ( !this.orig ) {
-        this.fhir.meta = { profile: [ this.profile ] }
-      } else {
-        this.fhir.meta = this.orig.meta
-        if ( !this.fhir.meta ) {
-          this.fhir.meta = {}
-        }
-        if ( !this.fhir.meta.profile ) {
-          this.fhir.meta.profile = []
-        }
-        if ( !this.fhir.meta.profile.includes( this.profile ) ) {
-          this.fhir.meta.profile.push( this.profile )
+        resourceType: this.field,
+        meta: {
+          profile: [ this.profile ] 
         }
       }
       //console.log(this)

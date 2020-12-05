@@ -831,7 +831,7 @@ router.get('/questionnaire/:questionnaire', function(req, res) {
 
 router.get('/report/es/:report', (req, res) => {
   let report = req.params.report
-  console.log(report);
+  winston.info(report);
   if (!req.user) {
     return res.status(401).json(outcomes.NOTLOGGEDIN)
   }

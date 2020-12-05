@@ -82,14 +82,14 @@ const fs = require('fs')
   if ( !logOpts ) {
     winston.add( new winston.transports.Console( {
       level: "error",
-      format: winston.format.prettyPrint()
+      format: winston.format.combine( winston.format.errors({stack:true}), winston.format.prettyPrint() )
     } ) )
   } else {
     for( let transport of Object.keys(logOpts) ) {
       if ( transport === "console" ) {
         winston.add( new winston.transports.Console( {
           level: logOpts[transport].level || "error",
-          format: winston.format.prettyPrint()
+          format: winston.format.combine( winston.format.errors({stack:true}), winston.format.prettyPrint() )
         } ) )
       } else if ( transport === "file" ) {
         for( let type of Object.keys(logOpts[transport]) ) {
