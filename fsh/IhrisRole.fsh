@@ -81,6 +81,7 @@ Title:          "Code system for task permissions."
 * #Basic                "Basic"
 * #DocumentReference    "DocumentReference"
 * #Questionnaire        "Questionnaire"
+* #QuestionnaireResponse "QuestionnaireResponse"
 * #PractitionerRole     "PractitionerRole"
 * #Location             "Location"
 
