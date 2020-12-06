@@ -319,6 +319,20 @@ User.prototype.hasPermissionByName = function( permission, resource, id ) {
 }
 
 /**
+ * Get the list of filters for a resource
+ * @return array
+ */
+User.prototype.getFilter = function( resource ) {
+  if ( this.permissions && this.permissions.hasOwnProperty('filter')
+    && this.permissions.filter && this.permissions.filter.hasOwnProperty(resource)
+    && this.permissions.filter[resource].hasOwnProperty("constraint") ) {
+    return Object.keys( this.permissions.filter[resource].constraint )
+  } else {
+    return undefined
+  }
+}
+
+/**
  * Gets a permission from the permission object by checking for overriding values
  * on a FHIR resource object.
  * @return boolean | [ field list ]
@@ -353,6 +367,7 @@ User.prototype.hasPermissionByObject = function( permission, resource ) {
         } else if ( isObject( permissions.constraint[constraint] ) ) {
           allowed = { ...allowed, ...permissions.constraint[constraint] }
         }
+      } else {
       }
     }
   }
