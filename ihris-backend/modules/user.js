@@ -131,7 +131,7 @@ const user = {
               continue
             }
             try {
-              id = task.extension.find( ext => ext.url === "id" ).valueId
+              id = task.extension.find( ext => ext.url === "instance" ).valueId
             } catch( err ) {
               // id takes precedence and only one can be set
               try {
