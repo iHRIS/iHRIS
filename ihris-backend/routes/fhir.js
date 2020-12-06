@@ -63,12 +63,14 @@ router.get("/:resource/:id?", (req, res, next) => {
     } )
   } else {
     let userFilters = req.user.getFilter( req.params.resource )
-    for( let filter of userFilters ) {
-      let keyVal = filter.split('=',2)
-      if ( keyVal.length === 2 ) {
-        req.query[keyVal[0]] = keyVal[1]
-      } else {
-        winston.error("Unable to process filter constraing for "+req.params.resource+" "+filter)
+    if ( userFilters ) {
+      for( let filter of userFilters ) {
+        let keyVal = filter.split('=',2)
+        if ( keyVal.length === 2 ) {
+          req.query[keyVal[0]] = keyVal[1]
+        } else {
+          winston.error("Unable to process filter constraing for "+req.params.resource+" "+filter)
+        }
       }
     }
     fhirAxios.search( req.params.resource, req.query ).then( (resource) => {

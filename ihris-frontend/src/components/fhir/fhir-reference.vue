@@ -112,8 +112,7 @@ export default {
     querySelections: function( val ) {
       this.loading = true
       let url = "/fhir/"+this.resource+"?"+querystring.stringify( {
-        "name:contains": val,
-        "_elements": "id"
+        "name:contains": val
       } )
       fetch( url ).then( response => {
         if ( response.ok ) {
