@@ -1,23 +1,7 @@
 <template>
   <ihris-element :edit="edit" :loading="false">
     <template #form>
-      <v-text-field 
-        v-if="pickerType==='year'" 
-        v-model="value" 
-        type="number" 
-        :disabled="disabled" 
-        :label="label" 
-        :min="minYear" 
-        :max="maxYear" 
-        :rules="rules" 
-        :error-messages="errors"
-        @change="errors = []"
-        dense
-      >
-        <template #label>{{label}} <span v-if="required" class="red--text font-weight-bold">*</span></template>
-      </v-text-field>
       <v-menu 
-        v-else
         ref="menu" 
         v-model="menu" 
         :close-on-content-click="false" 
@@ -43,7 +27,7 @@
         </template>
         <v-container class="ma-0 pa-0" v-if="isEthiopian">
           <v-row no-gutters>
-            <v-card>
+            <v-card min-width="300px">
               <v-card-title class="primary white--text">
                 Ethiopian Calendar<v-spacer/><v-btn
                   dark
@@ -54,7 +38,25 @@
                   small
                   ><v-icon v-if="!showGregorian" >mdi-calendar-multiple</v-icon><v-icon v-else>mdi-calendar</v-icon></v-btn>
               </v-card-title>
+              <v-card-text v-if="pickerType==='year'">
+                <br />
+                <v-text-field 
+                  v-model="etValue" 
+                  clearable
+                  type="number" 
+                  :disabled="disabled" 
+                  :label="label" 
+                  :min="minYearET" 
+                  :max="maxYearET" 
+                  :rules="rules" 
+                  :error-messages="errors"
+                  @change="errors = []"
+                  dense
+                >
+                </v-text-field>
+              </v-card-text>
               <v-ethiopian-date-picker
+                v-else
                 ref="etPicker"
                 label="Ethiopian"
                 color="secondary"
@@ -68,7 +70,7 @@
                 locale="am"
                 ></v-ethiopian-date-picker>
             </v-card>
-            <v-card v-if="showGregorian">
+            <v-card v-if="showGregorian" min-width="300px">
               <v-card-title class="primary white--text">
                 Gregorian Calendar<v-spacer/><v-btn
                   dark
@@ -79,7 +81,25 @@
                   small
                   ><v-icon>mdi-close</v-icon></v-btn>
               </v-card-title>
+              <v-card-text v-if="pickerType==='year'">
+                <br />
+                <v-text-field 
+                  v-model="value" 
+                  clearable
+                  type="number" 
+                  :disabled="disabled" 
+                  :label="label" 
+                  :min="minYear" 
+                  :max="maxYear" 
+                  :rules="rules" 
+                  :error-messages="errors"
+                  @change="errors = []"
+                  dense
+                >
+                </v-text-field>
+              </v-card-text>
               <v-date-picker
+                v-else
                 ref="gPicker"
                 color="secondary"
                 :landscape="$vuetify.breakpoint.smAndUp"
@@ -93,6 +113,24 @@
             </v-card>
           </v-row>
         </v-container>
+        <v-card min-width="300px" v-else-if="pickerType==='year'" >
+          <v-card-text>
+            <br />
+            <v-text-field 
+              v-model="value" 
+              type="number" 
+              :disabled="disabled" 
+              :label="label" 
+              :min="minYear" 
+              :max="maxYear" 
+              :rules="rules" 
+              :error-messages="errors"
+              @change="errors = []"
+              dense
+            >
+            </v-text-field>
+          </v-card-text>
+        </v-card>
         <v-date-picker
           v-else
           ref="picker"
@@ -174,10 +212,16 @@ export default {
       return undefined
     },
     minYear: function() {
-      return this.dateValueMin.substring(0,4)
+      return this.dateValueMin ? this.dateValueMin.substring(0,4) : undefined
     },
     maxYear: function() {
-      return this.dateValueMax.substring(0,4)
+      return this.dateValueMax ? this.dateValueMax.substring(0,4) : undefined
+    },
+    minYearET: function() {
+      return this.minValueETDate ? this.minValueETDate.substring(0,4) : undefined
+    },
+    maxYearET: function() {
+      return this.maxValueETDate ? this.maxValueETDate.substring(0,4) : undefined
     },
     isEthiopian: function() {
       return this.calendar === "Ethiopian"
@@ -220,10 +264,12 @@ export default {
   },
   watch: {
     menu (val) {
-      if ( this.isEthiopian ) {
-        !this.value && val && setTimeout(() => (this.$refs.etPicker.activePicker = 'YEAR'))
-      } else {
-        !this.value && val && setTimeout(() => (this.$refs.picker.activePicker = 'YEAR'))
+      if ( this.pickerType !== 'year' ) {
+        if ( this.isEthiopian ) {
+          !this.value && val && setTimeout(() => (this.$refs.etPicker.activePicker = 'YEAR'))
+        } else {
+          !this.value && val && setTimeout(() => (this.$refs.picker.activePicker = 'YEAR'))
+        }
       }
     },
     showGregorian (val) {
@@ -239,7 +285,15 @@ export default {
       deep: true
     },
     value (val) {
-      this.etValue = this.convertGE( val )
+      if ( !val ) {
+        this.etValue = val
+      } else if ( this.pickerType === 'year' ) {
+        if ( val.length === 4 ) {
+          this.etValue = this.convertGE( val )
+        }
+       } else {
+        this.etValue = this.convertGE( val )
+      }
       /*
       const [ year, month, day ] = val.split('-').map(Number)
       let etDate = ethiopic.ge( year, month || 1, day  || 1)
@@ -247,7 +301,15 @@ export default {
       */
     },
     etValue (val) {
-      this.value = this.convertEG( val )
+      if ( !val ) {
+        this.value = val
+      } else if ( this.pickerType === 'year' ) {
+        if ( val.length === 4 ) {
+          this.value = this.convertEG( val )
+        }
+      } else {
+        this.value = this.convertEG( val )
+      }
       /*
       const [ etYear, etMonth, etDay ] = val.split('-').map(Number)
       let gDate = ethiopic.eg( etYear, etMonth || 1, etDay  || 1)
@@ -282,14 +344,26 @@ export default {
       return undefined
     },
     convertGE(val) {
+      if ( !val ) return val
       const [ year, month, day ] = val.split('-').map(Number)
-      let etDate = ethiopic.ge( year, month || 1, day  || 1)
-      return etDate.year.toString().padStart(4,'0') + "-" + etDate.month.toString().padStart(2,'0') + "-" + etDate.day.toString().padStart(2, '0')
+      if ( this.pickerType === 'year' ) {
+        let etDate = ethiopic.ge( year, month || 6, day || 1) // so it will be the same year in both directions
+        return etDate.year.toString().padStart(4,'0') 
+      } else {
+        let etDate = ethiopic.ge( year, month || 1, day || 1)
+        return etDate.year.toString().padStart(4,'0') + "-" + etDate.month.toString().padStart(2,'0') + "-" + etDate.day.toString().padStart(2, '0')
+      }
     },
     convertEG(val) {
+      if ( !val ) return val
       const [ etYear, etMonth, etDay ] = val.split('-').map(Number)
-      let gDate = ethiopic.eg( etYear, etMonth || 1, etDay  || 1)
-      return gDate.year.toString().padStart(4,'0') + "-" + gDate.month.toString().padStart(2,'0') + "-" + gDate.day.toString().padStart(2, '0')
+      if ( this.pickerType === 'year' ) {
+        let gDate = ethiopic.eg( etYear, etMonth|| 6, etDay || 1) // so it will be the same year in both directions
+        return gDate.year.toString().padStart(4,'0') 
+      } else {
+        let gDate = ethiopic.eg( etYear, etMonth || 1, etDay || 1)
+        return gDate.year.toString().padStart(4,'0') + "-" + gDate.month.toString().padStart(2,'0') + "-" + gDate.day.toString().padStart(2, '0')
+      }
     },
     setupData() {
       if ( this.displayType ) {
