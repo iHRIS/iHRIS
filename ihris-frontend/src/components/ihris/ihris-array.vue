@@ -86,7 +86,6 @@ export default {
         }
         this.inputs.push( { label: label, index: this.inputs.length } )
       }
-      console.log(this.inputs)
     },
     removeRow: function() {
       if ( this.subAvailable ) {
