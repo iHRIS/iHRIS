@@ -18,8 +18,9 @@ Description:    "iHRIS profile of the Person resource to manage user access."
 * name[Fullname].use = #official
 * name[Fullname].text 1..1
 * extension contains 
-      IhrisAssignRole named role 0..* and
-      IhrisPassword named password 0..1
+      IhrisAssignRole named role 0..* MS and
+      IhrisPassword named password 0..1 MS
+* extension[role].valueReference.reference MS
 
 Extension:      IhrisPassword
 Id:             ihris-password
@@ -31,7 +32,11 @@ Description:    "iHRIS password extension for local users."
       password 1..1 MS and
       salt 1..1 MS
 * extension[password].value[x] only string
+* extension[password].valueString ^label = "Password"
+* extension[password].valueString 1..1 MS
 * extension[salt].value[x] only string
+* extension[salt].valueString ^label = "Salt"
+* extension[salt].valueString 1..1 MS
 
 Instance:       ihris-user-admin
 InstanceOf:     IhrisPersonUser

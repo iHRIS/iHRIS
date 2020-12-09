@@ -54,7 +54,10 @@ Description:    "iHRIS Assign Role to a user or other role."
 * ^context[1].type = #element
 * ^context[1].expression = "IhrisRole"
 * value[x] only Reference
+* valueReference 1..1 MS
+* valueReference ^label = "Role"
 * valueReference only Reference(IhrisRole)
+* valueReference.reference ^label = "Role"
 
 CodeSystem:     IhrisTaskPermissionCodeSystem
 Id:             ihris-task-permission
