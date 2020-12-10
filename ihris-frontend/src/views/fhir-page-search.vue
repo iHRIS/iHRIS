@@ -25,23 +25,23 @@ export default {
         response.json().then(data => {
           Vue.component( 'ihris-template', {
             name: 'ihris-template',
-            data: function() { 
-              return { 
-                fields: data.data.fields, 
+            data: function() {
+              return {
+                fields: data.data.fields,
                 addLink: data.data.addLink,
-                terms: {} 
-              } 
+                terms: {}
+              }
             },
             components: {
               "ihris-search": () => import(/* webpackChunkName: "fhir-search" */ "@/components/ihris/ihris-search" ),
               "ihris-search-code": () => import(/* webpackChunkName: "fhir-search" */ "@/components/ihris/ihris-search-code" ),
               "ihris-search-term": () => import(/* webpackChunkName: "fhir-search" */ "@/components/ihris/ihris-search-term" )
-            }, 
+            },
             template: data.template,
-            methods: { 
-              searchData: function(expression, value) { 
-                this.$set(this.terms, expression, value) 
-              } 
+            methods: {
+              searchData: function(expression, value) {
+                this.$set(this.terms, expression, value)
+              }
             }
           })
           this.$forceUpdate()

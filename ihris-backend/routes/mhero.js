@@ -255,6 +255,7 @@ router.post('/subscribe-contact-groups', (req, res) => {
         return nxtSubscr();
       }).catch(() => {
         errorOccured = true
+        return nxtSubscr();
       })
     })
   }, () => {

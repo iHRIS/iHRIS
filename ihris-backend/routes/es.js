@@ -4,6 +4,7 @@ const async = require('async')
 const express = require('express')
 const router = express.Router()
 const nconf = require('../modules/config')
+const es = require('../modules/es')
 
 router.get('/:index/:operation?', (req, res) => {
   let indexName = req.params.index

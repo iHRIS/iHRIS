@@ -343,6 +343,7 @@ export default {
           }
         }
       }).catch(err => {
+        this.$store.state.progress.enabled = false
         this.statusDialog.enable = true
         this.statusDialog.color = 'error'
         this.statusDialog.title = 'Error'
