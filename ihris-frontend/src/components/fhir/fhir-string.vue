@@ -1,8 +1,21 @@
 <template>
   <ihris-element :edit="edit" :loading="false">
     <template #form>
-      <v-text-field :error-messages="errors" @change="errors = []" :disabled="disabled" :label="display" v-model="value" outlined hide-details="auto" :rules="rules" dense>
-        <template #label>{{display}} <span v-if="required" class="red--text font-weight-bold">*</span></template>
+      <v-text-field 
+        :error-messages="errors" 
+        @change="errors = []" 
+        :disabled="disabled" 
+        :label="display" 
+        v-model="value" 
+        outlined 
+        hide-details="auto" 
+        :rules="rules" 
+        :type="isPassword ? (showPassword ? 'text' : 'password') : 'text'"
+        :append-icon="isPassword ? (showPassword ? 'mdi-eye' : 'mdi-eye-off') : ''"
+        @click:append="showPassword = !showPassword"
+        dense
+      >
+      <template #label>{{display}}<span v-if="required" class="red--text font-weight-bold">*</span></template>
       </v-text-field>
     </template>
     <template #header>
@@ -20,7 +33,7 @@ import IhrisElement from "../ihris/ihris-element.vue"
 export default {
   name: "fhir-string",
   props: ["field", "label", "min", "max", "id", "path", "slotProps", "sliceName","base-min","base-max","edit","readOnlyIfSet",
-    "constraints"],
+    "constraints", "displayType"],
   components: {
     IhrisElement
   },
@@ -28,6 +41,7 @@ export default {
     return {
       source: { path: "", data: {} },
       value: "",
+      showPassword: false,
       qField: "valueString",
       disabled: false,
       errors: [],
@@ -90,6 +104,9 @@ export default {
       } else {
         return []
       }
+    },
+    isPassword: function() {
+      return this.displayType === 'password'
     }
   }
 }

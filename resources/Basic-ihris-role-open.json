@@ -41,6 +41,19 @@
         },
         {
           "url": "resource",
+          "valueCode": "DocumentReference"
+        }
+      ]
+    },
+    {
+      "url": "http://ihris.org/fhir/StructureDefinition/ihris-task",
+      "extension": [
+        {
+          "url": "permission",
+          "valueCode": "read"
+        },
+        {
+          "url": "resource",
           "valueCode": "CodeSystem"
         }
       ]

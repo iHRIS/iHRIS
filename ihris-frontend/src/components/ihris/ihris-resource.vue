@@ -76,6 +76,7 @@ export default {
   data: function() {
     return {
       fhir: {},
+      orig: {},
       valid: true,
       source: { data: {}, path: "" },
       loading: false,
@@ -92,7 +93,7 @@ export default {
       fetch( "/fhir/"+this.field+"/"+this.fhirId ).then(response => {
         response.json().then(data => {
           //this.$store.commit('setCurrentResource', data)
-          this.fhir = data
+          this.orig = data
           this.source = { data: data, path: this.field }
           this.setLinkText()
           this.loading = false
@@ -316,22 +317,10 @@ export default {
       }
 
       //console.log(this.field)
-      if ( !this.fhir ) {
-        this.fhir = { 
-          resourceType: this.field,
-          meta: {
-            profile: [ this.profile ]
-          }
-        }
-      } else {
-        if ( !this.fhir.meta ) {
-          this.fhir.meta = {}
-        }
-        if ( !this.fhir.meta.profile ) {
-          this.fhir.meta.profile = []
-        }
-        if ( !this.fhir.meta.profile.includes( this.profile ) ) {
-          this.fhir.meta.profile.push( this.profile )
+      this.fhir = { 
+        resourceType: this.field,
+        meta: {
+          profile: [ this.profile ] 
         }
       }
       //console.log(this)

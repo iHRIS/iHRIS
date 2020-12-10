@@ -32,7 +32,7 @@ router.get('/:index/:operation?', (req, res) => {
   }).then((response) => {
     res.status(200).json(response.data)
   }).catch((err) => {
-    console.log(err);
+    winston.error(err.message);
     return res.status(500).send()
   })
 })
@@ -65,7 +65,7 @@ router.post('/:index/:operation?', (req, res) => {
   }).then((response) => {
     res.status(200).json(response.data)
   }).catch((err) => {
-    console.log(err);
+    winston.error(err.message);
     return res.status(500).send()
   })
 })
@@ -128,7 +128,7 @@ router.get('/populateFilter/:index/:field', (req, res) => {
           }
           return callback(null, next);
         }).catch((err) => {
-          console.log(err);
+          winston.error(err.message);
           return res.status(500).send()
         })
       }, () => {
@@ -136,7 +136,7 @@ router.get('/populateFilter/:index/:field', (req, res) => {
       }
     );
   }).catch((err) => {
-    console.log(err);
+    winston.error(err.message);
     return res.status(500).send()
   })
 

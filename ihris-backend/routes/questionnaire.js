@@ -22,6 +22,18 @@ router.post("/QuestionnaireResponse", (req, res, next) => {
     return res.status(401).json( outcomes.NOTLOGGEDIN )
   }
 
+  const checkBundleForError = (bundle) => {
+    if ( bundle.entry ) {
+      for ( let entry of bundle.entry ) {
+        if ( entry.resource && entry.resource.resourceType === "OperationOutcome" ) {
+          return entry.resource
+        }
+      }
+    }
+    return false
+  }
+
+
   let workflowQuestionnaires = nconf.get("workflow:questionnaire")
   let workflow = Object.keys(workflowQuestionnaires).find( wf => workflowQuestionnaires[wf].url === req.body.questionnaire )
   if ( workflow ) {
@@ -38,11 +50,14 @@ router.post("/QuestionnaireResponse", (req, res, next) => {
       outcome.issue[0].diagnostics = "Unable to find processor for this questionnaire: "+req.body.questionnaire +" ("+processor+")"
       return res.status(500).json( outcome )
     }
-
     fhirModules.requireWorkflow( workflow, details.library, details.file ).then( (module) => {
         module.process( req ).then( (bundle) => {
           fhirSecurity.preProcess( bundle ).then( (uuid) => {
             fhirFilter.filterBundle( "write", bundle, req.user )
+            let errorCheck = checkBundleForError( bundle )
+            if ( errorCheck ) {
+              return res.status( 401 ).json( errorCheck )
+            }
 
             fhirAxios.create( bundle ).then ( (results) => {
               if ( module.postProcess ) {
@@ -100,6 +115,10 @@ router.post("/QuestionnaireResponse", (req, res, next) => {
       winston.debug(JSON.stringify(bundle,null,2))
       fhirSecurity.preProcess( bundle ).then( (uuid) => {
         fhirFilter.filterBundle( "write", bundle, req.user )
+        let errorCheck = checkBundleForError( bundle )
+        if ( errorCheck ) {
+          return res.status( 401 ).json( errorCheck )
+        }
 
         fhirAxios.create( bundle ).then ( (results) => {
           if ( results.entry && results.entry.length > 0 && results.entry[0].response.location ) {

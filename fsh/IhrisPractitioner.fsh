@@ -433,6 +433,13 @@ Usage:          #definition
 * item[2].item[3].required = false
 * item[2].item[3].repeats = false
 
+* item[2].item[4].linkId = "PractitionerRole.location[0]"
+* item[2].item[4].definition = "http://ihris.org/fhir/StructureDefinition/ihris-practitioner-role#PractitionerRole.location"
+* item[2].item[4].text = "Facility"
+* item[2].item[4].type = #reference
+* item[2].item[4].required = true
+* item[2].item[4].repeats = false
+
 * item[3].linkId = "Practitioner.identifier"
 * item[3].definition = "http://ihris.org/fhir/StructureDefinition/ihris-practitioner#Practitioner.identifier"
 * item[3].text = "Identifiers|Identifiers for the practitioner"

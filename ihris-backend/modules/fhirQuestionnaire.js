@@ -420,13 +420,13 @@ const fhirQuestionnaire = {
                   }
                 } else if ( question.type === "reference" ) {
                   //Need to update this when references are fully handled
-                  //to worith with identifier or other options besides .reference
+                  //to work with identifier or other options besides .reference
                   winston.debug("WARNING: References need to be finished in fhirQuestionnaire.js")
                   data.field = "Reference"
                   if ( question.repeats ) {
-                    data.answer = item.answer.map( answer => { return { reference: answer } } )
+                    data.answer = item.answer.map( answer => answer.valueReference )
                   } else {
-                    data.answer = { reference: item.answer }
+                    data.answer = item.answer[0].valueReference
                   }
                   fields.push(data)
                 } else {

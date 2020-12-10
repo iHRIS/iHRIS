@@ -704,13 +704,13 @@ router.get('/questionnaire/:questionnaire', function(req, res) {
           vueOutput += "<fhir-" + itemType + " :edit=\"isEdit\" path=\"" + item.linkId + "\""
 
           let field
+          const minmax = [ "Date", "DateTime", "Instant", "Time", "Decimal", "Integer", "PositiveInt",
+            "UnsignedInt", "Quantity" ]
           if ( item.definition ) {
             field = await fhirDefinition.getFieldDefinition(item.definition)
             if ( itemType === "reference" && field && field.type && field.type[0] && field.type[0].targetProfile ) {
               vueOutput += " targetProfile=\""+field.type[0].targetProfile[0]+"\""
             }
-            const minmax = [ "Date", "DateTime", "Instant", "Time", "Decimal", "Integer", "PositiveInt",
-              "UnsignedInt", "Quantity" ]
             for( let mm of minmax ) {
               for( let type of [ "min", "max" ] ) {
                 let attr = type+"Value"+mm
@@ -722,6 +722,16 @@ router.get('/questionnaire/:questionnaire', function(req, res) {
                     vueOutput += " "+attr+"=\""+field[attr]+"\""
                   }
                 } else if ( nconf.get("defaults:components:"+itemType+":"+attr) ) {
+                  vueOutput += " "+attr+"=\""
+                    +nconf.get("defaults:components:"+itemType+":"+attr)+"\""
+                }
+              }
+            }
+          } else {
+            for( let mm of minmax ) {
+              for( let type of [ "min", "max" ] ) {
+                let attr = type+"Value"+mm
+                if ( nconf.get("defaults:components:"+itemType+":"+attr) ) {
                   vueOutput += " "+attr+"=\""
                     +nconf.get("defaults:components:"+itemType+":"+attr)+"\""
                 }
@@ -831,7 +841,7 @@ router.get('/questionnaire/:questionnaire', function(req, res) {
 
 router.get('/report/es/:report', (req, res) => {
   let report = req.params.report
-  console.log(report);
+  winston.info(report);
   if (!req.user) {
     return res.status(401).json(outcomes.NOTLOGGEDIN)
   }

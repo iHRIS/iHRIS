@@ -62,6 +62,17 @@ router.get("/:resource/:id?", (req, res, next) => {
       return res.status(500).json( outcome )
     } )
   } else {
+    let userFilters = req.user.getFilter( req.params.resource )
+    if ( userFilters ) {
+      for( let filter of userFilters ) {
+        let keyVal = filter.split('=',2)
+        if ( keyVal.length === 2 ) {
+          req.query[keyVal[0]] = keyVal[1]
+        } else {
+          winston.error("Unable to process filter constraing for "+req.params.resource+" "+filter)
+        }
+      }
+    }
     fhirAxios.search( req.params.resource, req.query ).then( (resource) => {
       // Need to do deeper checking due to possibility of includes
       if ( resource && resource.entry && resource.entry.length > 0 ) {

@@ -54,7 +54,10 @@ Description:    "iHRIS Assign Role to a user or other role."
 * ^context[1].type = #element
 * ^context[1].expression = "IhrisRole"
 * value[x] only Reference
+* valueReference 1..1 MS
+* valueReference ^label = "Role"
 * valueReference only Reference(IhrisRole)
+* valueReference.reference ^label = "Role"
 
 CodeSystem:     IhrisTaskPermissionCodeSystem
 Id:             ihris-task-permission
@@ -63,6 +66,7 @@ Title:          "Code system for task permissions."
 * #read   "Read"    "Can read the given resource."
 * #write  "Write"   "Can write the given resource."
 * #delete "Delete"  "Can delete the given resource."
+* #filter "Filter"  "Search filter constraints."
 
 ValueSet:       IhrisTaskPermissionValueSet
 Id:             ihris-task-permission
@@ -79,6 +83,10 @@ Title:          "Code system for task permissions."
 * #CodeSystem           "CodeSystem"
 * #Basic                "Basic"
 * #DocumentReference    "DocumentReference"
+* #Questionnaire        "Questionnaire"
+* #QuestionnaireResponse "QuestionnaireResponse"
+* #PractitionerRole     "PractitionerRole"
+* #Location             "Location"
 
 ValueSet:       IhrisTaskResourceValueSet
 Id:             ihris-task-resource

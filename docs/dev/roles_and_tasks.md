@@ -5,11 +5,13 @@ Roles are a Basic profile with the following fields:
 * primary[1..1] - boolean for filtering to assign to users
 * role[0..\*] - reference to another role
 * task[0..\*] - task definitions
- * permission - valueset for read|write|delete|\*
+ * permission - valueset for read|write|delete|filter|\*
  * resource - resource (Practitioner or * for all allowed)
  * instance - id of the resource for a single instance
  * field - string that is a FHIRPath to a field in the structure definition
- * constraint - FHIRPath where expression required for this resource.  Not relevant for instances.  
+ * constraint 
+   * FHIRPath where expression required for this resource.  Not relevant for instances.  
+   * query string for filter permission to be used on a all searches by this user
 It will be resolved as resource.where( contraint )
 
 **delete only makes sense on a profile.  It will ignored if trying to set on a resource or including a field.**

@@ -1,0 +1,15 @@
+{
+  "resourceType": "SearchParameter",
+  "id": "basic-related-practitioner",
+  "url": "http://ihris.org/fhir/SearchParameter/basic-related-practitioner",
+  "name": "Search Parameter on related practitioner resources for security",
+  "status": "active",
+  "description": "Search by related practitioner for a Basic resource.",
+  "code": "related-practitioner",
+  "base": [
+    "Basic"
+  ],
+  "type": "string",
+  "expression": "Basic.extension('http://ihris.org/fhir/StructureDefinition/ihris-related-group').extension('practitioner')",
+  "xpathUsage": "normal"
+}

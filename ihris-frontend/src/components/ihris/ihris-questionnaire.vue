@@ -214,6 +214,25 @@ export default {
             //console.log(data)
           })
           this.$store.commit('setMessage', { type: 'success', text: 'Update successful.' } )
+        } else {
+          this.overlay = false
+          this.loading = false
+          response.json().then(data => {
+            let errors
+            if ( data.resourceType == "OperationOutcome" ) {
+              try {
+                errors = Array.from(new Set(data.issue.map( issue => issue.diagnostics ))).join(", ")
+              } catch (err) {
+                console.log("Unable to retrieve errors from ",data)
+              }
+            } else {
+              errors = "Unknown"
+            }
+            this.$store.commit('setMessage', { type: 'error', text: 'An error occurred trying to save this record: '+errors })
+          } ).catch( err => {
+            this.$store.commit('setMessage', { type: 'error', text: 'An unknown error occurred trying to save this record.' })
+            console.log("Error on retrieving error status",err)
+          } )
         }
       } ).catch(err => {
         console.log(err)

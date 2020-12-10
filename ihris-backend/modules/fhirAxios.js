@@ -2,8 +2,12 @@ const axios = require('axios')
 const URL = require('url').URL
 const Qs = require('qs')
 
-axios.defaults.paramsSerializer = (params) => {
-  return Qs.stringify(params, {arrayFormat: 'repeat'})
+axios.defaults.paramsSerializer = function (params) {
+  if ( params instanceof URLSearchParams ) {
+    return params.toString()
+  } else {
+    return Qs.stringify(params, {arrayFormat: 'repeat'})
+  }
 }
 
 class InvalidRequestError extends Error {
@@ -83,7 +87,8 @@ const fhirAxios = {
       url.pathname += resource
       let auth = fhirAxios.__getAuth()
 
-      axios.get( url.href, { auth: auth, params: params } ).then( (response) => {
+      //axios.get( url.href, { auth, params } ).then( (response) => {
+      axios.get( url.href, { auth, params, headers: { 'Cache-Control': 'no-cache'} } ).then( (response) => {
         resolve( response.data )
       } ).catch( (err) => {
         reject( err )
@@ -157,7 +162,6 @@ const fhirAxios = {
         reject( new InvalidRequestError( "resource must be defined" ) )
       }
       if ( !resource.hasOwnProperty("id") || !resource.id ) {
-        console.log(resource)
         reject( new InvalidRequestError( "resource must have an id field" ) )
       }
       let url = new URL(fhirAxios.baseUrl.href)
