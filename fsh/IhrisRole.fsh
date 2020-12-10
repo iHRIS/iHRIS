@@ -5,6 +5,7 @@ Title:          "iHRIS Role"
 Description:    "iHRIS Profile of the Basic resource to manage roles."
 * code = IhrisResourceCodeSystem#role
 * extension contains
+      IhrisBasicName named name 1..1 and
       IhrisRolePrimary named primary 1..1 and
       IhrisAssignRole named role 0..* and
       IhrisTask named task 0..*
@@ -98,6 +99,7 @@ InstanceOf:     IhrisRole
 Title:          "iHRIS Open Role"
 Usage:          #example
 * code = IhrisResourceCodeSystem#role
+* extension[name].valueString = "Open Role"
 * extension[primary].valueBoolean = true
 * extension[task][0].extension[permission].valueCode = IhrisTaskPermissionCodeSystem#read
 * extension[task][0].extension[resource].valueCode = IhrisTaskResourceCodeSystem#StructureDefinition
@@ -114,6 +116,7 @@ InstanceOf:     IhrisRole
 Title:          "iHRIS Admin Role"
 Usage:          #example
 * code = IhrisResourceCodeSystem#role
+* extension[name].valueString = "Admin Role"
 * extension[primary].valueBoolean = true
 * extension[task][0].extension[permission].valueCode = IhrisTaskPermissionCodeSystem#*
 * extension[task][0].extension[resource].valueCode = IhrisTaskResourceCodeSystem#*
