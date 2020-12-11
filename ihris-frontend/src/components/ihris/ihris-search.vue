@@ -112,6 +112,11 @@ export default {
         // but the issue is with tracking permissions on the resource
         url = url.replace(/_getpages=[^&]*&*/, "").replace("/fhir?","/fhir/"+this.resource+"?")
         url = url.substring(url.indexOf("/fhir/"));
+
+        //some of the hapi instances requires _total=accurate to always be available for them to return total resources
+        if(url.indexOf('_total=accurate') === -1) {
+          url = url + '&_total=accurate'
+        }
       }
       if (url === "") {
         let count = this.options.itemsPerPage || 10;
