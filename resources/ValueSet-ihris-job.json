@@ -5,6 +5,7 @@
   "name": "iHRISJob",
   "title": "iHRIS Job",
   "status": "active",
+  "version": "1.0.0",
   "experimental": false,
   "date": "2020-09-25T20:48:33.646Z",
   "publisher": "iHRIS Foundation",

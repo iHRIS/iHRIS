@@ -150,6 +150,41 @@ router.patch("/CodeSystem/:id/:code", (req, res) => {
   if ( allowed !== true ) {
     return res.status(401).json( outcomes.DENIED )
   }
+
+  const incrementValueSetVersion = ( codeSystem ) => {
+    const increment = (version) => {
+      if ( !version ) return "0.0.1"
+      try {
+        let parts = version.split(".")
+        if ( parts.length > 2 ) {
+          let last = Number(parts.pop())
+          parts.push( ++last )
+        } else if ( parts.length === 2 ) {
+          parts.push(1)
+        } else if ( parts.length === 1 ) {
+          parts.push(0)
+          parts.push(1)
+        }
+        return parts.join(".")
+      } catch (err) {
+        return version + ".1"
+      }
+    }
+    fhirAxios.search( "ValueSet", { reference: codeSystem, _count: "200" } ).then ( (bundle) => {
+      if ( bundle.entry ) {
+        for( let entry of bundle.entry ) {
+          if ( !entry.resource ) continue
+          entry.resource.version = increment( entry.resource.version )
+          fhirAxios.update( entry.resource ).catch( (err) => {
+            winston.error("Failed to update valueset to increment version: "+entry.resource.id)
+          } )
+        }
+      }
+    } ).catch( (err) => {
+      winston.error("Unable to find valuesets to increment for "+codeSystem+": "+err.message)
+    } )
+  }
+
   let update = req.body
   fhirAxios.read( "CodeSystem", req.params.id ).then( (resource) => {
     if ( resource.concept ) {
@@ -163,7 +198,8 @@ router.patch("/CodeSystem/:id/:code", (req, res) => {
       resource.concept = [ update ]
     }
     resource.date = new Date().toISOString()
-    fhirAxios.update( resource ).then( (resource) => {
+    fhirAxios.update( resource ).then( (response) => {
+      incrementValueSetVersion( resource.url )
       fhirReports.delayedRun()
       return res.status(200).json({ok:true})
     } ).catch( (err) => {
