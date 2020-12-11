@@ -37,7 +37,7 @@ import IhrisElement from "../ihris/ihris-element.vue"
 const querystring = require('querystring')
 export default {
   name: "fhir-reference",
-  props: ["field","label","sliceName","targetProfile","min","max","base-min","base-max",
+  props: ["field","label","sliceName","targetProfile","targetResource","min","max","base-min","base-max",
     "slotProps","path","sub-fields","edit","readOnlyIfSet","constraints"],
   components: {
     IhrisElement
@@ -89,8 +89,8 @@ export default {
   },
   methods: {
     setupData: function() {
-      if ( this.targetProfile ) {
-        this.resource = this.targetProfile.substring( this.targetProfile.lastIndexOf('/')+1 )
+      if ( this.targetProfile && this.targetResource ) {
+        this.resource = this.targetResource
       }
       if ( this.slotProps && this.slotProps.source ) {
         this.source = { path: this.slotProps.source.path+"."+this.field, data: {} }
@@ -111,9 +111,11 @@ export default {
     },
     querySelections: function( val ) {
       this.loading = true
-      let url = "/fhir/"+this.resource+"?"+querystring.stringify( {
-        "name:contains": val
-      } )
+      let params = { "name:contains": val }
+      if ( !this.targetProfile.endsWith( this.resource ) ) {
+        params._profile = this.targetProfile
+      }
+      let url = "/fhir/"+this.resource+"?"+querystring.stringify( params )
       fetch( url ).then( response => {
         if ( response.ok ) {
           response.json().then( async (data) => {

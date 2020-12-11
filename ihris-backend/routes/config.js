@@ -48,6 +48,28 @@ const getDefinition = ( resource ) => {
   let structureDef = resource.split('/')
   return fhirAxios.read( structureDef[0], structureDef[1] )
 }
+const profileResources = {}
+const getProfileResource = ( profile ) => {
+  return new Promise( (resolve, reject) => {
+    let id = profile.substring( profile.lastIndexOf('/')+1 )
+    if ( profileResources.hasOwnProperty(id) ) {
+      resolve( profileResources[id] )
+    } else {
+      getDefinition( "StructureDefinition/"+id ).then( (resource) => {
+        if ( resource.type ) {
+          profileResources[id] = resource.type
+          resolve( resource.type )
+        } else {
+          winston.error("Unable to get resource type from structure definition "+id)
+          reject( new Error("Unable to get resource.type for "+id) )
+        }
+      } ).catch ( (err) => {
+        winston.error("Unable to get structure definition for "+id)
+        reject( err )
+      } )
+    }
+  } )
+}
 const getProperties = ( resource ) => {
   let codeSystem = resource.split('/')
   return fhirAxios.search( codeSystem[0], { _id: codeSystem[1], _elements: "url,title,property" } )
@@ -296,7 +318,7 @@ router.get('/page/:page/:type?', function(req, res) {
             }
           }
         }
-        const processFields = (fields, base, order) => {
+        const processFields = async (fields, base, order) => {
           let output = ""
           let fieldKeys = Object.keys( fields )
           if ( order[base] ) {
@@ -311,7 +333,13 @@ router.get('/page/:page/:type?', function(req, res) {
               continue
             }
             let eleName = fhirDefinition.camelToKebab( fields[field].code )
-            let attrs = [ "field", "sliceName", "targetProfile", "profile", "min", "max", "base-min",
+
+            if ( fields[field].hasOwnProperty("targetProfile") && fields[field].targetProfile ) {
+              fields[field].targetResource = await getProfileResource( fields[field].targetProfile )
+            }
+
+
+            let attrs = [ "field", "sliceName", "targetProfile", "targetResource", "profile", "min", "max", "base-min",
               "base-max", "label", "path", "binding", "calendar" ]
             const minmax = [ "Date", "DateTime", "Instant", "Time", "Decimal", "Integer", "PositiveInt",
               "UnsignedInt", "Quantity" ]
@@ -324,7 +352,7 @@ router.get('/page/:page/:type?', function(req, res) {
             if ( fields[field]["max"] !== "1" ) {
               isArray = true
               output += "<ihris-array :edit=\"isEdit\" fieldType=\""+eleName+"\" :slotProps=\"slotProps\""
-              const arr_attrs = [ "field", "label", "min", "max", "id", "path", "profile", "targetProfile", "sliceName" ]
+              const arr_attrs = [ "field", "label", "min", "max", "id", "path", "profile", "targetProfile", "targetResource", "sliceName" ]
               for ( let attr of arr_attrs ) {
                 if ( fields[field].hasOwnProperty(attr) ) {
                   output += " "+attr+"=\""+fields[field][attr]+"\""
@@ -396,7 +424,7 @@ router.get('/page/:page/:type?', function(req, res) {
 
             if ( !subFields && fields[field].hasOwnProperty("fields") ) {
               output += "<template #default=\"slotProps\">\n"
-              output += processFields( fields[field].fields, base+"."+fields[field], order )
+              output += await processFields( fields[field].fields, base+"."+fields[field], order )
               output += "</template>\n"
             }
 
@@ -432,12 +460,12 @@ router.get('/page/:page/:type?', function(req, res) {
                 +'" :columns=\'columns.'+sectionKey
                 +'\' :actions=\'actions.'+sectionKey
                   +'\'><template #default="slotProps">' + "\n"
-                  //vueOutput += processFields( secondaryStructure[second_fhir].fields, second_fhir, secondaryOrder )
+                  //vueOutput += await processFields( secondaryStructure[second_fhir].fields, second_fhir, secondaryOrder )
                   vueOutput += "</template></ihris-secondary>"
                 }
 
           } else {
-            vueOutput += processFields( sections[name].elements, fhir, sections[name].order )
+            vueOutput += await processFields( sections[name].elements, fhir, sections[name].order )
           }
           vueOutput += "</template></ihris-section>\n"
         }
@@ -710,6 +738,8 @@ router.get('/questionnaire/:questionnaire', function(req, res) {
             field = await fhirDefinition.getFieldDefinition(item.definition)
             if ( itemType === "reference" && field && field.type && field.type[0] && field.type[0].targetProfile ) {
               vueOutput += " targetProfile=\""+field.type[0].targetProfile[0]+"\""
+              let targetResource = await getProfileResource( field.type[0].targetProfile[0] )
+              vueOutput += " targetResource=\""+targetResource+"\""
             }
             for( let mm of minmax ) {
               for( let type of [ "min", "max" ] ) {

@@ -5,10 +5,11 @@ Title:          "iHRIS Role"
 Description:    "iHRIS Profile of the Basic resource to manage roles."
 * code = IhrisResourceCodeSystem#role
 * extension contains
-      IhrisBasicName named name 1..1 and
+      IhrisBasicName named name 1..1 MS and
       IhrisRolePrimary named primary 1..1 and
       IhrisAssignRole named role 0..* and
       IhrisTask named task 0..*
+* extension[name].valueString 1..1 MS
 
 Invariant:      ihris-task-instance-constraint
 Description:    "Only one of extension[instance].valueCode or extension[constraint].valueReference SHALL be present."
