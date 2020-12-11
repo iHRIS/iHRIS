@@ -16,6 +16,10 @@
   },
   "extension": [
     {
+      "url": "http://ihris.org/fhir/StructureDefinition/ihris-basic-name",
+      "valueString": "Open Role"
+    },
+     {
       "url": "http://ihris.org/fhir/StructureDefinition/ihris-role-primary",
       "valueBoolean": true
     },
