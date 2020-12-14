@@ -45,6 +45,28 @@ Edit ```pom.xml``` and change the following line from hapi-fhir-jpaserver or ROO
     <finalName>hapi</finalName>
 ```
 
+#### For versions starting with 5.2.0
+Things were streamlined a bit so the values to edit are simpler.
+Edit ```src/main/resources/application.yaml``` and update the following values:
+
+```
+spring:
+  datasource:
+    url: 'jdbc:postgresql://localhost:5432/hapi'
+    username: hapi
+    password: PASS
+    driveClassName: org.postgresql.Driver
+
+hapi:
+  fhir:
+    tester:
+      id: home
+      name: iHRIS
+      server_address: http://localhost:8080/hapi/fhir/
+      refuse_to_fetch_third_party_urls: false
+      fhir_version: R4
+```
+
 #### For versions starting with 5.1.0 
 Edit ```src/main/resources/application.yaml``` and update the following values:
 
@@ -87,10 +109,20 @@ hibernate.search.default.indexBase=/var/lib/tomcat9/target/lucenefiles
 #### Create war file
 
 ```bash
+sudo apt install default-jdk
 mvn clean install -DskipTests
 sudo mkdir /var/lib/tomcat9/target
 sudo chown tomcat:tomcat /var/lib/tomcat9/target
 sudo cp target/hapi.war /var/lib/tomcat9/webapps
+```
+
+#### Set paths in startup file
+Edit ```/etc/systemd/system/multi-user.taret.wants/tomcat9.service
+
+In the security section add the following directory with a ReadWritePath
+
+```
+ReadWritePath=/var/lib/tomcat9/target/
 ```
 
 #### Load basic definitions
