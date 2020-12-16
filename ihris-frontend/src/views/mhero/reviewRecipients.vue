@@ -3,7 +3,7 @@
     <v-dialog
       persistent
       v-model="statusDialog.enable"
-      max-width="300"
+      max-width="400"
     >
       <v-card>
         <v-toolbar
@@ -23,9 +23,25 @@
             <v-icon>mdi-close</v-icon>
           </v-btn>
         </v-toolbar>
+        <center>
         <v-card-text>
           <b>{{statusDialog.description}}</b>
+          <v-layout row wrap v-if="Object.keys(sendStatus).length > 0">
+            <v-flex xs5>
+              <label style='color:green'>Success</label>
+            </v-flex>
+            <v-flex xs3>
+              <b>{{sendStatus.success}}</b>
+            </v-flex>
+            <v-flex xs5>
+              <label style='color:red'>Failed</label>
+            </v-flex>
+            <v-flex xs3>
+              <b>{{sendStatus.failed}}</b>
+            </v-flex>
+          </v-layout>
         </v-card-text>
+        </center>
         <v-card-actions>
           <v-spacer />
           <v-btn
@@ -260,6 +276,7 @@ export default {
     frequency: false,
     sendTimeCategory: '',
     sendTime: null,
+    sendStatus: {},
     timeMenu: false,
     dateMenu: false,
     sendDate: new Date().toISOString().substr(0, 10),
@@ -279,6 +296,7 @@ export default {
       this.chars = this.sms.length
     },
     send() {
+      this.sendStatus = {}
       let practitioners = [];
       this.practitioners.forEach(practitioner => {
         let id = practitioner.mheropractitioner.split('/')
@@ -321,36 +339,42 @@ export default {
       };
       this.$store.state.progress.enabled = true
       this.$store.state.progress.title = "Processing request..."
-      fetch(url, opts).then((response) => {
+      fetch(url, opts)
+      .then(response => {
         this.$store.state.progress.enabled = false
         this.statusDialog.enable = true
         if(response.status >= 200 && response.status <= 299) {
           this.statusDialog.color = 'success'
-          this.statusDialog.title = 'Success'
+          this.statusDialog.title = 'Done'
           if(this.communicationType === "sms") {
-            this.statusDialog.description = 'Message Sent Successfully'
+            this.statusDialog.description = 'Message Processed Successfully'
           } else {
-            this.statusDialog.description = 'Workflow Started Successfully'
+            this.statusDialog.description = 'Workflow Processed Successfully'
           }
         } else {
           this.$store.state.progress.enabled = false
           this.statusDialog.color = 'error'
           this.statusDialog.title = 'Error'
           if(this.communicationType === "sms") {
-            this.statusDialog.description = 'Failed to send Message'
+            this.statusDialog.description = 'Some errors occured while sending message'
           } else {
-            this.statusDialog.description = 'Failed to start a workflow'
+            this.statusDialog.description = 'Some errors occured while starting a workflow'
           }
         }
-      }).catch(err => {
+        return response.json()
+      })
+      .then(respData => {
+        this.sendStatus = respData
+      })
+      .catch(err => {
         this.$store.state.progress.enabled = false
         this.statusDialog.enable = true
         this.statusDialog.color = 'error'
         this.statusDialog.title = 'Error'
         if(this.communicationType === "sms") {
-          this.statusDialog.description = 'Failed to send Message'
+          this.statusDialog.description = 'Some errors occured while sending message'
         } else {
-          this.statusDialog.description = 'Failed to start a workflow'
+          this.statusDialog.description = 'Some errors occured while starting a workflow'
         }
         console.log(err);
       });

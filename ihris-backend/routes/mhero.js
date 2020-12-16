@@ -5,6 +5,7 @@ const axios = require("axios");
 const winston = require("winston");
 const lodash = require("lodash")
 const URI = require("urijs");
+const { v4: uuidv4 } = require('uuid')
 const es = require("../modules/es")
 const nconf = require('../modules/config')
 const fhirReports = require('../modules/fhirReports')
@@ -32,11 +33,11 @@ router.post("/send-message", function (req, res) {
         errorOccured = true
         return resolve()
       }
-      if(!practs.hits || !practs.hits.hits || !Array.isArray(practs.hits.hits) || practs.hits.hits.length === 0) {
+      if(!Array.isArray(practs) || practs.length === 0) {
         errorOccured = true
         return resolve()
       }
-      practitioners = practs.hits.hits
+      practitioners = practs
       resolve()
     })
   })
@@ -45,14 +46,17 @@ router.post("/send-message", function (req, res) {
     if(errorOccured) {
       return res.status(500).send()
     }
+    let messageKey
     let payload = []
     if (data.workflow) {
+      messageKey = data.workflow
       payload.push({
         contentReference: {
           reference: 'Basic/' + data.workflow
         }
       })
     } else if (data.sms) {
+      messageKey = data.sms
       payload.push({
         contentString: data.sms
       })
@@ -60,7 +64,8 @@ router.post("/send-message", function (req, res) {
     let communicationReq = {
       payload,
       recipient: [],
-      resourceType: "CommunicationRequest"
+      resourceType: "CommunicationRequest",
+      id: uuidv4()
     };
     if(data.frequency === 'recurring' || (data.frequency === 'once' && data.sendTimeCategory === 'later')) {
       if(!communicationReq.meta) {
@@ -94,7 +99,11 @@ router.post("/send-message", function (req, res) {
         extension
       })
     }
-
+    let status = {
+      failed: 0,
+      success: 0,
+      descriptions: {}
+    };
     let recipients = [];
     async.each(practitioners, (practitioner, nxt) => {
       if(data.sendToMatchingTerms) {
@@ -110,18 +119,29 @@ router.post("/send-message", function (req, res) {
       });
       if(recipients.length > 10000) {
         let tmpRecipients = lodash.cloneDeep(recipients)
-        communicationReq.recipient = tmpRecipients
+        let tmpCommunicationReq = lodash.cloneDeep(communicationReq)
+        tmpCommunicationReq.recipient = tmpRecipients
         recipients = []
         let url = URI(nconf.get("emnutt:base")).segment('CommunicationRequest');
-        axios.post(url.toString(), communicationReq, {
+        axios.post(url.toString(), tmpCommunicationReq, {
           withCredentials: true,
           auth: {
             username: nconf.get("emnutt:username"),
             password: nconf.get("emnutt:password")
           }
-        }).then(() => {
+        }).then((sendStatus) => {
+          if(sendStatus.data[tmpCommunicationReq.id]) {
+            status.failed += sendStatus.data[tmpCommunicationReq.id][messageKey].failed
+            status.success += sendStatus.data[tmpCommunicationReq.id][messageKey].success
+            status.descriptions = Object.assign(status.descriptions, sendStatus.data[tmpCommunicationReq.id][messageKey].descriptions)
+          }
           return nxt()
         }).catch(err => {
+          if(err.response && err.response.data && err.response.data[communicationReq.id]) {
+            status.failed += err.response.data[tmpCommunicationReq.id][messageKey].failed
+            status.success += err.response.data[tmpCommunicationReq.id][messageKey].success
+            status.descriptions = Object.assign(status.descriptions, err.response.data[tmpCommunicationReq.id][messageKey].descriptions)
+          }
           winston.error(err.message)
           errorOccured = true
           return nxt()
@@ -139,20 +159,30 @@ router.post("/send-message", function (req, res) {
             username: nconf.get("emnutt:username"),
             password: nconf.get("emnutt:password")
           }
-        }).then((response) => {
-          if(errorOccured) {
-            return res.status(500).send(errorOccured)
+        }).then((sendStatus) => {
+          if(sendStatus.data[communicationReq.id]) {
+            status.failed += sendStatus.data[communicationReq.id][messageKey].failed
+            status.success += sendStatus.data[communicationReq.id][messageKey].success
+            status.descriptions = Object.assign(status.descriptions, sendStatus.data[communicationReq.id][messageKey].descriptions)
           }
-          res.status(201).json(response.data);
+          if(errorOccured) {
+            return res.status(500).json(status)
+          }
+          res.status(201).json(status);
         }).catch(err => {
+          if(err.response && err.response.data && err.response.data[communicationReq.id]) {
+            status.failed += err.response.data[communicationReq.id][messageKey].failed
+            status.success += err.response.data[communicationReq.id][messageKey].success
+            status.descriptions = Object.assign(status.descriptions, err.response.data[communicationReq.id][messageKey].descriptions)
+          }
           winston.error(err.message)
-          return res.status(500).send(errorOccured)
+          return res.status(500).json(status)
         });
       } else {
         if(errorOccured) {
-          return res.status(500).send(errorOccured)
+          return res.status(500).json(status)
         }
-        res.status(201).json(response.data);
+        res.status(201).json(status);
       }
     })
   })
