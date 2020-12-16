@@ -168,7 +168,7 @@ router.post("/send-message", function (req, res) {
           if(errorOccured) {
             return res.status(500).json(status)
           }
-          res.status(201).json(status);
+          res.status(201).json(status)
         }).catch(err => {
           if(err.response && err.response.data && err.response.data[communicationReq.id]) {
             status.failed += err.response.data[communicationReq.id][messageKey].failed

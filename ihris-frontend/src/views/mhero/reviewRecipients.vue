@@ -8,7 +8,6 @@
       <v-card>
         <v-toolbar
           :color="statusDialog.color"
-          dark
         >
           <v-toolbar-title>
             <v-icon v-text="statusDialog.icon"></v-icon>
@@ -26,7 +25,7 @@
         <center>
         <v-card-text>
           <b>{{statusDialog.description}}</b>
-          <v-layout row wrap v-if="Object.keys(sendStatus).length > 0">
+          <!-- <v-layout row wrap v-if="Object.keys(sendStatus).length > 0">
             <v-flex xs5>
               <label style='color:green'>Success</label>
             </v-flex>
@@ -39,7 +38,7 @@
             <v-flex xs3>
               <b>{{sendStatus.failed}}</b>
             </v-flex>
-          </v-layout>
+          </v-layout> -->
         </v-card-text>
         </center>
         <v-card-actions>
@@ -307,7 +306,6 @@ export default {
         }
         practitioners.push(id);
       });
-
       let data = {
         practitioners: practitioners,
         workflow: this.workflow.id,
@@ -352,6 +350,7 @@ export default {
             this.statusDialog.description = 'Workflow Processed Successfully'
           }
         } else {
+          console.log(response.status);
           this.$store.state.progress.enabled = false
           this.statusDialog.color = 'error'
           this.statusDialog.title = 'Error'
@@ -367,16 +366,12 @@ export default {
         this.sendStatus = respData
       })
       .catch(err => {
+        console.log(err)
         this.$store.state.progress.enabled = false
         this.statusDialog.enable = true
-        this.statusDialog.color = 'error'
-        this.statusDialog.title = 'Error'
-        if(this.communicationType === "sms") {
-          this.statusDialog.description = 'Some errors occured while sending message'
-        } else {
-          this.statusDialog.description = 'Some errors occured while starting a workflow'
-        }
-        console.log(err);
+        this.statusDialog.color = 'yellow'
+        this.statusDialog.title = 'Warning'
+        this.statusDialog.description = 'Processing is taking longer to complete. Server is still processing the request'
       });
     }
   },
