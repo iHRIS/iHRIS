@@ -33,7 +33,7 @@
     "redis": "^3.0.2",
     "require-from-string": "^2.0.2",
     "supertest": "^4.0.2",
-    "urijs": "^1.19.2",
+    "urijs": "^1.19.5",
     "url": "^0.11.0",
     "uuid": "^8.3.0",
     "webidl-conversions": "^6.1.0",
