@@ -52,6 +52,71 @@
         </v-card-actions>
       </v-card>
     </v-dialog>
+    <v-dialog
+      v-model="progressDialog"
+      hide-overlay
+      persistent
+      width="350"
+    >
+      <v-card
+        color="white"
+        dark
+      >
+        <v-card-text>
+          <center>
+            <font style="color:blue">
+              <template v-if="!progressData.statusText">
+                Sending Request
+              </template>
+              <template else>
+                {{progressData.statusText}}
+                <template v-if="progressData.statusText == 'Completed' && progressData.error">
+                  <font style="color: red; font-weight: bold">- {{progressData.error}}</font>
+                </template>
+                <template v-else-if="progressData.statusText == 'Completed'">
+                  <font style="color: green; font-weight: bold">- Successfully</font>
+                </template>
+              </template>
+            </font><br>
+            <v-progress-circular
+              v-if="progressData.percent != null"
+              :rotate="-90"
+              :size="100"
+              :width="15"
+              :value="progressData.percent"
+              color="primary"
+            >
+              <v-avatar
+                color="indigo"
+                size="50px"
+              >
+                <span class="white--text">
+                  <b>{{ progressData.percent }}%</b>
+                </span>
+              </v-avatar>
+            </v-progress-circular>
+            <v-progress-linear
+              indeterminate
+              color="red"
+              class="mb-0"
+              v-else
+            ></v-progress-linear>
+          </center>
+        </v-card-text>
+        <v-card-actions>
+          <v-spacer></v-spacer>
+          <v-btn
+            v-if="progressData.statusText == 'Completed'"
+            color="success"
+            rounded
+            @click="progressDialog = false"
+          >
+            <v-icon left>mdi-close</v-icon>
+            Close
+          </v-btn>
+        </v-card-actions>
+      </v-card>
+    </v-dialog>
     <v-img
       src="@/assets/mHero.png"
       width="100"
@@ -276,6 +341,9 @@ export default {
     sendTimeCategory: '',
     sendTime: null,
     sendStatus: {},
+    progressReqTimer: '',
+    progressData: {},
+    progressDialog: false,
     timeMenu: false,
     dateMenu: false,
     sendDate: new Date().toISOString().substr(0, 10),
@@ -295,6 +363,7 @@ export default {
       this.chars = this.sms.length
     },
     send() {
+      this.progressData = {}
       this.sendStatus = {}
       let practitioners = [];
       this.practitioners.forEach(practitioner => {
@@ -340,7 +409,8 @@ export default {
       fetch(url, opts)
       .then(response => {
         this.$store.state.progress.enabled = false
-        this.statusDialog.enable = true
+        this.progressDialog = true
+        // this.statusDialog.enable = true
         if(response.status >= 200 && response.status <= 299) {
           this.statusDialog.color = 'success'
           this.statusDialog.title = 'Done'
@@ -350,7 +420,6 @@ export default {
             this.statusDialog.description = 'Workflow Processed Successfully'
           }
         } else {
-          console.log(response.status);
           this.$store.state.progress.enabled = false
           this.statusDialog.color = 'error'
           this.statusDialog.title = 'Error'
@@ -363,7 +432,10 @@ export default {
         return response.json()
       })
       .then(respData => {
-        this.sendStatus = respData
+        this.progressReqTimer = setInterval(() => {
+          this.getProgress(respData)
+        }, 2000);
+        // this.sendStatus = respData
       })
       .catch(err => {
         console.log(err)
@@ -373,6 +445,59 @@ export default {
         this.statusDialog.title = 'Warning'
         this.statusDialog.description = 'Processing is taking longer to complete. Server is still processing the request'
       });
+    },
+    getProgress(requestsIDs) {
+      let url = `/mhero/getProgress?clientIDs=${JSON.stringify(requestsIDs)}`
+      fetch(url)
+      .then(response => {
+        return response.json()
+      })
+      .then(respData => {
+        let totalRecords = 0
+        let processedRecords = 0
+        let statusText = ''
+        let step = 0
+        let allCompleted = true
+        let errorOccured = false
+        for(let resp of respData) {
+          if(resp.totalRecords) {
+            totalRecords += resp.totalRecords
+          }
+          if(resp.processedRecords) {
+            processedRecords += resp.processedRecords
+          }
+          if(resp.step && resp.step > step) {
+            statusText = resp.status
+            step = resp.step
+          }
+          if(statusText != 'done') {
+            allCompleted = false
+          }
+          if(resp.error) {
+            errorOccured = resp.error;
+          }
+        }
+        if(allCompleted) {
+          clearInterval(this.progressReqTimer)
+          statusText = 'Completed'
+        }
+        this.progressData = {
+          totalRecords,
+          processedRecords,
+          statusText,
+          error: errorOccured
+        }
+        if(step > 1) {
+          if(processedRecords > 0) {
+            this.progressData.percent = processedRecords/totalRecords*100
+          } else {
+            this.progressData.percent = 0
+          }
+          this.progressData.percent = Number.parseFloat(this.progressData.percent).toFixed(1)
+        } else {
+          this.progressData.percent = null
+        }
+      })
     }
   },
   watch: {

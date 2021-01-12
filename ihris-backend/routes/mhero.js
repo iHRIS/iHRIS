@@ -105,6 +105,7 @@ router.post("/send-message", function (req, res) {
       descriptions: {}
     };
     let recipients = [];
+    let requestsIDs = [];
     async.each(practitioners, (practitioner, nxt) => {
       if(data.sendToMatchingTerms) {
         practitioner = practitioner._source[data.reportData.indexName].split('/')
@@ -130,6 +131,7 @@ router.post("/send-message", function (req, res) {
             password: nconf.get("emnutt:password")
           }
         }).then((sendStatus) => {
+          requestsIDs.push(sendStatus.data.reqID)
           if(sendStatus.data[tmpCommunicationReq.id]) {
             status.failed += sendStatus.data[tmpCommunicationReq.id][messageKey].failed
             status.success += sendStatus.data[tmpCommunicationReq.id][messageKey].success
@@ -160,15 +162,16 @@ router.post("/send-message", function (req, res) {
             password: nconf.get("emnutt:password")
           }
         }).then((sendStatus) => {
+          requestsIDs.push(sendStatus.data.reqID)
           if(sendStatus.data[communicationReq.id]) {
             status.failed += sendStatus.data[communicationReq.id][messageKey].failed
             status.success += sendStatus.data[communicationReq.id][messageKey].success
             status.descriptions = Object.assign(status.descriptions, sendStatus.data[communicationReq.id][messageKey].descriptions)
           }
           if(errorOccured) {
-            return res.status(500).json(status)
+            return res.status(500).json(requestsIDs)
           }
-          res.status(201).json(status)
+          res.status(201).json(requestsIDs)
         }).catch(err => {
           if(err.response && err.response.data && err.response.data[communicationReq.id]) {
             status.failed += err.response.data[communicationReq.id][messageKey].failed
@@ -176,13 +179,13 @@ router.post("/send-message", function (req, res) {
             status.descriptions = Object.assign(status.descriptions, err.response.data[communicationReq.id][messageKey].descriptions)
           }
           winston.error(err.message)
-          return res.status(500).json(status)
+          return res.status(500).json(requestsIDs)
         });
       } else {
         if(errorOccured) {
-          return res.status(500).json(status)
+          return res.status(500).json(requestsIDs)
         }
-        res.status(201).json(status);
+        res.status(201).json(requestsIDs);
       }
     })
   })
@@ -243,6 +246,26 @@ router.post("/send-message", function (req, res) {
     }
     return body
   }
+});
+
+router.get('/getProgress', (req, res) => {
+  let url = URI(nconf.get("emnutt:base")).segment('getProgress').toString();
+  axios({
+    url,
+    params: {
+      clientIDs: req.query.clientIDs
+    },
+    withCredentials: true,
+    auth: {
+      username: nconf.get("emnutt:username"),
+      password: nconf.get("emnutt:password")
+    }
+  }).then((resp) => {
+    return res.json(resp.data)
+  }).catch((err) => {
+    console.log(err);
+    return res.status(500).send()
+  })
 });
 
 router.post('/cancel-message-schedule', (req, res) => {
