@@ -1,2 +1,0 @@
-(window["webpackJsonp"]=window["webpackJsonp"]||[]).push([["dashboard"],{cdc1:function(a,e,r){"use strict";r.r(e);var n=function(){var a=this,e=a.$createElement,r=a._self._c||e;return r("iframe",{attrs:{src:"/kibana/app/kibana#/dashboard/"+a.$route.params.id+"?embed=true",width:"100%",height:"100%"}})},t=[],s={name:"kibana-dashboard",props:["id"]},d=s,i=r("2877"),o=Object(i["a"])(d,n,t,!1,null,null,null);e["default"]=o.exports}}]);
-//# sourceMappingURL=dashboard.00ce91d0.js.map

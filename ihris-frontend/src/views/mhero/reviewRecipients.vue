@@ -56,20 +56,46 @@
       v-model="progressDialog"
       hide-overlay
       persistent
-      width="350"
+      width="500"
     >
       <v-card
         color="white"
         dark
       >
+        <v-toolbar
+          color="success"
+        >
+          <v-toolbar-title>
+            <v-icon>mdi-info</v-icon>
+            <template v-if="communicationType == 'flow'">
+              Workflow
+              <template v-if="frequency === 'recurring' || (frequency === 'once' && sendTimeCategory === 'later')">
+                Scheduling
+              </template>
+              <template v-else>
+                Starting
+              </template> Progress
+            </template>
+            <template v-else>
+              Message
+              <template v-if="frequency === 'recurring' || (frequency === 'once' && sendTimeCategory === 'later')">
+                Scheduling
+              </template>
+              <template v-else>
+                Sending
+              </template> Progress
+            </template>
+          </v-toolbar-title>
+          <v-spacer></v-spacer>
+        </v-toolbar>
         <v-card-text>
           <center>
             <font style="color:blue">
               <template v-if="!progressData.statusText">
                 Sending Request
               </template>
-              <template else>
-                {{progressData.statusText}}
+              <template v-else>
+                {{progressData.step}}/{{progressData.totalSteps}} {{progressData.statusText}}
                 <template v-if="progressData.statusText == 'Completed' && progressData.error">
                   <font style="color: red; font-weight: bold">- {{progressData.error}}</font>
                 </template>
@@ -99,9 +125,32 @@
               indeterminate
               color="red"
               class="mb-0"
-              v-else
+              v-else-if="progressData.statusText != 'Completed'"
             ></v-progress-linear>
           </center>
+          <br>
+          <v-layout row wrap v-if="Object.keys(sendStatus).length > 0">
+            <v-flex xs5>
+              <v-alert
+                outlined
+                border="top"
+                elevation="12"
+                color="green"
+                text
+                type="success"
+              >Success: {{sendStatus.success.toLocaleString()}}</v-alert>
+            </v-flex>
+            <v-spacer></v-spacer>
+            <v-flex xs5>
+              <v-alert
+                outlined
+                border="top"
+                elevation="12"
+                text
+                type="error"
+              >Failed: {{sendStatus.failed.toLocaleString()}}</v-alert>
+            </v-flex>
+          </v-layout>
         </v-card-text>
         <v-card-actions>
           <v-spacer></v-spacer>
@@ -435,7 +484,6 @@ export default {
         this.progressReqTimer = setInterval(() => {
           this.getProgress(respData)
         }, 2000);
-        // this.sendStatus = respData
       })
       .catch(err => {
         console.log(err)
@@ -457,9 +505,12 @@ export default {
         let processedRecords = 0
         let statusText = ''
         let step = 0
+        let totalSteps = 0
         let allCompleted = true
         let errorOccured = false
+        let sendStatus = {}
         for(let resp of respData) {
+          totalSteps = resp.totalSteps
           if(resp.totalRecords) {
             totalRecords += resp.totalRecords
           }
@@ -476,12 +527,36 @@ export default {
           if(resp.error) {
             errorOccured = resp.error;
           }
+          if(resp.sendStatus && resp.sendStatus[resp.id]) {
+            for(let msgID in resp.sendStatus[resp.id]) {
+              for(let status in resp.sendStatus[resp.id][msgID]) {
+                if(!sendStatus[resp.id]) {
+                  sendStatus[resp.id] = {}
+                }
+                if(!sendStatus[resp.id][status]) {
+                  sendStatus[resp.id][status] = 0
+                }
+                sendStatus[resp.id][status] = parseInt(resp.sendStatus[resp.id][msgID][status])
+              }
+            }
+          }
+        }
+        this.sendStatus = {}
+        for(let id in sendStatus) {
+          for(let status in sendStatus[id]) {
+            if(!this.sendStatus[status]) {
+              this.sendStatus[status] = 0
+            }
+            this.sendStatus[status] += sendStatus[id][status]
+          }
         }
         if(allCompleted) {
           clearInterval(this.progressReqTimer)
           statusText = 'Completed'
         }
         this.progressData = {
+          step,
+          totalSteps,
           totalRecords,
           processedRecords,
           statusText,

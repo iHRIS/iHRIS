@@ -99,11 +99,6 @@ router.post("/send-message", function (req, res) {
         extension
       })
     }
-    let status = {
-      failed: 0,
-      success: 0,
-      descriptions: {}
-    };
     let recipients = [];
     let requestsIDs = [];
     async.each(practitioners, (practitioner, nxt) => {
@@ -132,18 +127,8 @@ router.post("/send-message", function (req, res) {
           }
         }).then((sendStatus) => {
           requestsIDs.push(sendStatus.data.reqID)
-          if(sendStatus.data[tmpCommunicationReq.id]) {
-            status.failed += sendStatus.data[tmpCommunicationReq.id][messageKey].failed
-            status.success += sendStatus.data[tmpCommunicationReq.id][messageKey].success
-            status.descriptions = Object.assign(status.descriptions, sendStatus.data[tmpCommunicationReq.id][messageKey].descriptions)
-          }
           return nxt()
         }).catch(err => {
-          if(err.response && err.response.data && err.response.data[communicationReq.id]) {
-            status.failed += err.response.data[tmpCommunicationReq.id][messageKey].failed
-            status.success += err.response.data[tmpCommunicationReq.id][messageKey].success
-            status.descriptions = Object.assign(status.descriptions, err.response.data[tmpCommunicationReq.id][messageKey].descriptions)
-          }
           winston.error(err.message)
           errorOccured = true
           return nxt()
@@ -163,21 +148,11 @@ router.post("/send-message", function (req, res) {
           }
         }).then((sendStatus) => {
           requestsIDs.push(sendStatus.data.reqID)
-          if(sendStatus.data[communicationReq.id]) {
-            status.failed += sendStatus.data[communicationReq.id][messageKey].failed
-            status.success += sendStatus.data[communicationReq.id][messageKey].success
-            status.descriptions = Object.assign(status.descriptions, sendStatus.data[communicationReq.id][messageKey].descriptions)
-          }
           if(errorOccured) {
             return res.status(500).json(requestsIDs)
           }
           res.status(201).json(requestsIDs)
         }).catch(err => {
-          if(err.response && err.response.data && err.response.data[communicationReq.id]) {
-            status.failed += err.response.data[communicationReq.id][messageKey].failed
-            status.success += err.response.data[communicationReq.id][messageKey].success
-            status.descriptions = Object.assign(status.descriptions, err.response.data[communicationReq.id][messageKey].descriptions)
-          }
           winston.error(err.message)
           return res.status(500).json(requestsIDs)
         });
