@@ -243,6 +243,26 @@ router.get('/getProgress', (req, res) => {
   })
 });
 
+router.get('/clearProgress', (req, res) => {
+  let url = URI(nconf.get("emnutt:base")).segment('clearProgress').toString();
+  axios({
+    url,
+    params: {
+      clientIDs: req.query.clientIDs
+    },
+    withCredentials: true,
+    auth: {
+      username: nconf.get("emnutt:username"),
+      password: nconf.get("emnutt:password")
+    }
+  }).then((resp) => {
+    return res.json(resp.data)
+  }).catch((err) => {
+    console.log(err);
+    return res.status(500).send()
+  })
+});
+
 router.post('/cancel-message-schedule', (req, res) => {
   let schedules = req.body.schedules
   let url = URI(nconf.get("emnutt:base")).segment('cancelMessageSchedule');
@@ -253,7 +273,7 @@ router.post('/cancel-message-schedule', (req, res) => {
       password: nconf.get("emnutt:password")
     }
   }).then(response => {
-    res.status(201).json(response.data);
+    res.status(200).json([response.data.reqID]);
   }).catch(err => {
     res.status(500).send(err);
   });

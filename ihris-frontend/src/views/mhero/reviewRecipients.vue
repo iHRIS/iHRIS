@@ -1,5 +1,11 @@
 <template>
   <v-container>
+    <mheroprogress
+      :title="progressTitle"
+      :requestIDs="requestIDs"
+      :progressDialog="progressDialog"
+      @closeProgressDialog="progressDialog = false"
+    />
     <v-dialog
       persistent
       v-model="statusDialog.enable"
@@ -25,20 +31,6 @@
         <center>
         <v-card-text>
           <b>{{statusDialog.description}}</b>
-          <!-- <v-layout row wrap v-if="Object.keys(sendStatus).length > 0">
-            <v-flex xs5>
-              <label style='color:green'>Success</label>
-            </v-flex>
-            <v-flex xs3>
-              <b>{{sendStatus.success}}</b>
-            </v-flex>
-            <v-flex xs5>
-              <label style='color:red'>Failed</label>
-            </v-flex>
-            <v-flex xs3>
-              <b>{{sendStatus.failed}}</b>
-            </v-flex>
-          </v-layout> -->
         </v-card-text>
         </center>
         <v-card-actions>
@@ -49,120 +41,6 @@
             color="primary"
             @click="statusDialog.enable = false"
           >Ok</v-btn>
-        </v-card-actions>
-      </v-card>
-    </v-dialog>
-    <v-dialog
-      v-model="progressDialog"
-      hide-overlay
-      persistent
-      width="500"
-    >
-      <v-card
-        color="white"
-        dark
-      >
-        <v-toolbar
-          color="success"
-        >
-          <v-toolbar-title>
-            <v-icon>mdi-info</v-icon>
-            <template v-if="communicationType == 'flow'">
-              Workflow
-              <template v-if="frequency === 'recurring' || (frequency === 'once' && sendTimeCategory === 'later')">
-                Scheduling
-              </template>
-              <template v-else>
-                Starting
-              </template> Progress
-            </template>
-            <template v-else>
-              Message
-              <template v-if="frequency === 'recurring' || (frequency === 'once' && sendTimeCategory === 'later')">
-                Scheduling
-              </template>
-              <template v-else>
-                Sending
-              </template> Progress
-            </template>
-          </v-toolbar-title>
-          <v-spacer></v-spacer>
-        </v-toolbar>
-        <v-card-text>
-          <center>
-            <font style="color:blue">
-              <template v-if="!progressData.statusText">
-                Sending Request
-              </template>
-              <template v-else>
-                {{progressData.step}}/{{progressData.totalSteps}} {{progressData.statusText}}
-                <template v-if="progressData.statusText == 'Completed' && progressData.error">
-                  <font style="color: red; font-weight: bold">- {{progressData.error}}</font>
-                </template>
-                <template v-else-if="progressData.statusText == 'Completed'">
-                  <font style="color: green; font-weight: bold">- Successfully</font>
-                </template>
-              </template>
-            </font><br>
-            <v-progress-circular
-              v-if="progressData.percent != null"
-              :rotate="-90"
-              :size="100"
-              :width="15"
-              :value="progressData.percent"
-              color="primary"
-            >
-              <v-avatar
-                color="indigo"
-                size="50px"
-              >
-                <span class="white--text">
-                  <b>{{ progressData.percent }}%</b>
-                </span>
-              </v-avatar>
-            </v-progress-circular>
-            <v-progress-linear
-              indeterminate
-              color="red"
-              class="mb-0"
-              v-else-if="progressData.statusText != 'Completed'"
-            ></v-progress-linear>
-          </center>
-          <br>
-          <v-layout row wrap v-if="Object.keys(sendStatus).length > 0">
-            <v-flex xs5>
-              <v-alert
-                outlined
-                border="top"
-                elevation="12"
-                color="green"
-                text
-                type="success"
-              >Success: {{sendStatus.success.toLocaleString()}}</v-alert>
-            </v-flex>
-            <v-spacer></v-spacer>
-            <v-flex xs5>
-              <v-alert
-                outlined
-                border="top"
-                elevation="12"
-                text
-                type="error"
-              >Failed: {{sendStatus.failed.toLocaleString()}}</v-alert>
-            </v-flex>
-          </v-layout>
-        </v-card-text>
-        <v-card-actions>
-          <v-spacer></v-spacer>
-          <v-btn
-            v-if="progressData.statusText == 'Completed'"
-            color="success"
-            rounded
-            @click="progressDialog = false"
-          >
-            <v-icon left>mdi-close</v-icon>
-            Close
-          </v-btn>
         </v-card-actions>
       </v-card>
     </v-dialog>
@@ -366,6 +244,7 @@
 </template>
 
 <script>
+import mheroprogress from "../../components/mhero/progress"
 import ihrisReport from "@/views/es-report";
 import VueCronEditorBuefy from 'vue-cron-editor-buefy';
 export default {
@@ -390,8 +269,8 @@ export default {
     sendTimeCategory: '',
     sendTime: null,
     sendStatus: {},
-    progressReqTimer: '',
-    progressData: {},
+    progressTitle: '',
+    requestIDs: [],
     progressDialog: false,
     timeMenu: false,
     dateMenu: false,
@@ -459,6 +338,15 @@ export default {
       .then(response => {
         this.$store.state.progress.enabled = false
         this.progressDialog = true
+        if(this.communicationType == 'flow') {
+          this.progressTitle = 'Workflow'
+        }
+        if(this.frequency === 'recurring' || (this.frequency === 'once' && this.sendTimeCategory === 'later')) {
+          this.progressTitle += ' Scheduling'
+        } else {
+          this.progressTitle += ' Starting'
+        }
+        this.progressTitle += ' Progress'
         // this.statusDialog.enable = true
         if(response.status >= 200 && response.status <= 299) {
           this.statusDialog.color = 'success'
@@ -481,9 +369,7 @@ export default {
         return response.json()
       })
       .then(respData => {
-        this.progressReqTimer = setInterval(() => {
-          this.getProgress(respData)
-        }, 2000);
+        this.requestIDs = respData
       })
       .catch(err => {
         console.log(err)
@@ -654,7 +540,8 @@ export default {
   },
   components: {
     VueCronEditorBuefy,
-    ihrisReport: ihrisReport
+    ihrisReport: ihrisReport,
+    mheroprogress
   },
 };
 </script>

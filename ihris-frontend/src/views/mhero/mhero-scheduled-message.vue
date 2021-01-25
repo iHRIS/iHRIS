@@ -1,5 +1,11 @@
 <template>
   <v-container>
+    <mheroprogress
+      :title="progressTitle"
+      :requestIDs="requestIDs"
+      :progressDialog="progressDialog"
+      @closeProgressDialog="progressDialog = false"
+    />
     <v-dialog
       persistent
       v-model="statusDialog.enable"
@@ -102,9 +108,14 @@
   </v-container>
 </template>
 <script>
+import mheroprogress from "../../components/mhero/progress"
 import ihrisReport from "@/views/es-report";
 import { eventBus } from "@/main";
 export default {
+  components: {
+    mheroprogress,
+    ihrisReport: ihrisReport
+  },
   data() {
     return {
       schedules: [],
@@ -117,7 +128,10 @@ export default {
         icon: 'mdi-alert-circle-outline',
         title: '',
         description: ''
-      }
+      },
+      progressDialog: false,
+      requestIDs: [],
+      progressTitle: ''
     };
   },
   computed: {
@@ -155,17 +169,14 @@ export default {
       this.$store.state.progress.title = "Cancelling schedule"
       fetch(url, opts).then((response) => {
         this.$store.state.progress.enabled = false
-        this.statusDialog.enable = true
-        if(response.status >= 200 && response.status <= 299) {
-          this.statusDialog.color = 'success'
-          this.statusDialog.title = 'Success'
-          this.statusDialog.description = 'Schedule Cancelled Successfully'
-        } else {
-          this.statusDialog.color = 'error'
-          this.statusDialog.title = 'Error'
-          this.statusDialog.description = 'Failed to Cancel Schedule'
-        }
-      }).catch(err => {
+        this.progressDialog = true
+        this.progressTitle = 'Canceling schedule'
+        return response.json()
+      })
+      .then(respData => {
+        this.requestIDs = respData
+      })
+      .catch(err => {
         this.$store.state.progress.enabled = false
         this.statusDialog.enable = true
         this.statusDialog.color = 'error'
@@ -174,9 +185,6 @@ export default {
         console.log(err);
       });
     }
-  },
-  components: {
-    ihrisReport: ihrisReport
   },
   created() {
     eventBus.$on("ihris-report-selections", (selections, reportData) => {
