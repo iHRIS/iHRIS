@@ -16,7 +16,7 @@
     "dompurify": "^2.1.1",
     "express": "~4.16.1",
     "express-session": "^1.17.1",
-    "fhir2es": "^2.1.1",
+    "fhir2es": ">3.0.0",
     "fhirpath": "^2.6.1",
     "http-proxy-middleware": "^1.0.5",
     "is-empty": "^1.2.0",
