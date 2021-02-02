@@ -18,7 +18,7 @@
 import IhrisElement from "../ihris/ihris-element.vue"
 
 export default {
-  name: "fhir-positive-int",
+  name: "fhir-unsigned-int",
   props: ["field", "label", "min", "max", "id", "path", "slotProps", "sliceName","base-min","base-max", "edit", "readOnlyIfSet",
     "constraints"],
   components: {
@@ -34,13 +34,13 @@ export default {
     }
   },
   created: function() {
-    //console.log("CREATE POSITIVE INT",this.field,this.slotProps)
+    //console.log("CREATE UNSIGNED INT",this.field,this.slotProps)
     this.setupData()
   },
   watch: {
     slotProps: {
       handler() {
-        //console.log("WATCH POSITIVE INT",this.field,this.path,this.slotProps)
+        //console.log("WATCH UNSIGNED INT",this.field,this.path,this.slotProps)
         if ( !this.lockWatch ) {
           this.setupData()
         }
@@ -86,7 +86,7 @@ export default {
     rules: function() {
       const num_check = v => {
         let num = Number(v)
-        return (Number.isInteger(num) && num > 0) || this.display+" must be a positive integer"
+        return (Number.isInteger(num) && num >= 0) || this.display+" must be an unsigned integer"
       }
       let rules = [ num_check ]
       if ( this.required ) {
