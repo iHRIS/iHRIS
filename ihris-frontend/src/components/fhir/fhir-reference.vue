@@ -155,7 +155,7 @@ export default {
       else return this.label
     },
     required: function() {
-      return (this.index || 0) < this.min 
+      return (this.index || 0) < this.min
     },
     rules: function() {
       if ( this.required ) {

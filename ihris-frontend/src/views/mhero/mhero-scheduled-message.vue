@@ -130,7 +130,7 @@ export default {
         description: ''
       },
       progressDialog: false,
-      requestIDs: [],
+      requestIDs: {},
       progressTitle: ''
     };
   },

@@ -42,6 +42,13 @@ router.post("/send-message", function (req, res) {
     })
   })
 
+  let parentReqId = uuidv4()
+  let meta = {
+    tag: [{
+      system: "parentReqId",
+      code: parentReqId
+    }]
+  }
   preparePractitioners.then(() => {
     if(errorOccured) {
       return res.status(500).send()
@@ -62,6 +69,7 @@ router.post("/send-message", function (req, res) {
       })
     }
     let communicationReq = {
+      meta,
       payload,
       recipient: [],
       resourceType: "CommunicationRequest",
@@ -100,7 +108,7 @@ router.post("/send-message", function (req, res) {
       })
     }
     let recipients = [];
-    let requestsIDs = [];
+    let childrenReqIDs = [];
     async.each(practitioners, (practitioner, nxt) => {
       if(data.sendToMatchingTerms) {
         practitioner = practitioner._source[data.reportData.indexName].split('/')
@@ -126,7 +134,7 @@ router.post("/send-message", function (req, res) {
             password: nconf.get("emnutt:password")
           }
         }).then((sendStatus) => {
-          requestsIDs.push(sendStatus.data.reqID)
+          childrenReqIDs.push(sendStatus.data.reqID)
           return nxt()
         }).catch(err => {
           winston.error(err.message)
@@ -147,20 +155,20 @@ router.post("/send-message", function (req, res) {
             password: nconf.get("emnutt:password")
           }
         }).then((sendStatus) => {
-          requestsIDs.push(sendStatus.data.reqID)
+          childrenReqIDs.push(sendStatus.data.reqID)
           if(errorOccured) {
-            return res.status(500).json(requestsIDs)
+            return res.status(500).json({childrenReqIDs, parentReqId})
           }
-          res.status(201).json(requestsIDs)
+          res.status(201).json({childrenReqIDs, parentReqId})
         }).catch(err => {
           winston.error(err.message)
-          return res.status(500).json(requestsIDs)
+          return res.status(500).json({childrenReqIDs, parentReqId})
         });
       } else {
         if(errorOccured) {
-          return res.status(500).json(requestsIDs)
+          return res.status(500).json({childrenReqIDs, parentReqId})
         }
-        res.status(201).json(requestsIDs);
+        res.status(201).json({childrenReqIDs, parentReqId});
       }
     })
   })
@@ -228,7 +236,7 @@ router.get('/getProgress', (req, res) => {
   axios({
     url,
     params: {
-      clientIDs: req.query.clientIDs
+      requestIDs: req.query.requestIDs
     },
     withCredentials: true,
     auth: {
@@ -248,7 +256,7 @@ router.get('/clearProgress', (req, res) => {
   axios({
     url,
     params: {
-      clientIDs: req.query.clientIDs
+      requestIDs: req.query.requestIDs
     },
     withCredentials: true,
     auth: {
@@ -273,7 +281,7 @@ router.post('/cancel-message-schedule', (req, res) => {
       password: nconf.get("emnutt:password")
     }
   }).then(response => {
-    res.status(200).json([response.data.reqID]);
+    res.status(200).json({childrenReqIDs: [response.data.reqID]});
   }).catch(err => {
     res.status(500).send(err);
   });

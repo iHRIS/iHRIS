@@ -4,7 +4,7 @@
       v-model="progressDialog"
       hide-overlay
       persistent
-      width="500"
+      width="800"
     >
       <v-card
         color="white"
@@ -61,7 +61,7 @@
           </center>
           <br>
           <v-layout row wrap v-if="Object.keys(sendStatus).length > 0">
-            <v-flex xs5>
+            <v-flex xs3>
               <v-alert
                 outlined
                 border="top"
@@ -72,7 +72,7 @@
               >Success: {{sendStatus.success.toLocaleString()}}</v-alert>
             </v-flex>
             <v-spacer></v-spacer>
-            <v-flex xs5>
+            <v-flex xs3>
               <v-alert
                 outlined
                 border="top"
@@ -80,6 +80,16 @@
                 text
                 type="error"
               >Failed: {{sendStatus.failed.toLocaleString()}}</v-alert>
+            </v-flex>
+            <v-spacer></v-spacer>
+            <v-flex xs3>
+              <v-alert
+                outlined
+                border="top"
+                elevation="12"
+                text
+                type="warning"
+              >Ignored: {{sendStatus.ignored.toLocaleString()}}</v-alert>
             </v-flex>
           </v-layout>
         </v-card-text>
@@ -110,9 +120,9 @@ export default {
       type: String
     },
     requestIDs: {
-      type: Array,
+      type: Object,
       default: function() {
-        return [];
+        return {};
       }
     }
   },
@@ -134,7 +144,7 @@ export default {
   },
   methods: {
     getProgress() {
-      let url = `/mhero/getProgress?clientIDs=${JSON.stringify(this.requestIDs)}`
+      let url = `/mhero/getProgress?requestIDs=${JSON.stringify(this.requestIDs)}`
       fetch(url)
       .then(response => {
         return response.json()
@@ -215,7 +225,7 @@ export default {
       })
     },
     clearProgressData() {
-      let url = `/mhero/clearProgress?clientIDs=${JSON.stringify(this.requestIDs)}`
+      let url = `/mhero/clearProgress?requestIDs=${JSON.stringify(this.requestIDs)}`
       fetch(url)
       .catch((err) => {
         console.log(err);

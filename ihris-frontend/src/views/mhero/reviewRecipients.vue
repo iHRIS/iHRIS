@@ -270,7 +270,7 @@ export default {
     sendTime: null,
     sendStatus: {},
     progressTitle: '',
-    requestIDs: [],
+    requestIDs: {},
     progressDialog: false,
     timeMenu: false,
     dateMenu: false,
@@ -379,86 +379,6 @@ export default {
         this.statusDialog.title = 'Warning'
         this.statusDialog.description = 'Processing is taking longer to complete. Server is still processing the request'
       });
-    },
-    getProgress(requestsIDs) {
-      let url = `/mhero/getProgress?clientIDs=${JSON.stringify(requestsIDs)}`
-      fetch(url)
-      .then(response => {
-        return response.json()
-      })
-      .then(respData => {
-        let totalRecords = 0
-        let processedRecords = 0
-        let statusText = ''
-        let step = 0
-        let totalSteps = 0
-        let allCompleted = true
-        let errorOccured = false
-        let sendStatus = {}
-        for(let resp of respData) {
-          totalSteps = resp.totalSteps
-          if(resp.totalRecords) {
-            totalRecords += resp.totalRecords
-          }
-          if(resp.processedRecords) {
-            processedRecords += resp.processedRecords
-          }
-          if(resp.step && resp.step > step) {
-            statusText = resp.status
-            step = resp.step
-          }
-          if(statusText != 'done') {
-            allCompleted = false
-          }
-          if(resp.error) {
-            errorOccured = resp.error;
-          }
-          if(resp.sendStatus && resp.sendStatus[resp.id]) {
-            for(let msgID in resp.sendStatus[resp.id]) {
-              for(let status in resp.sendStatus[resp.id][msgID]) {
-                if(!sendStatus[resp.id]) {
-                  sendStatus[resp.id] = {}
-                }
-                if(!sendStatus[resp.id][status]) {
-                  sendStatus[resp.id][status] = 0
-                }
-                sendStatus[resp.id][status] = parseInt(resp.sendStatus[resp.id][msgID][status])
-              }
-            }
-          }
-        }
-        this.sendStatus = {}
-        for(let id in sendStatus) {
-          for(let status in sendStatus[id]) {
-            if(!this.sendStatus[status]) {
-              this.sendStatus[status] = 0
-            }
-            this.sendStatus[status] += sendStatus[id][status]
-          }
-        }
-        if(allCompleted) {
-          clearInterval(this.progressReqTimer)
-          statusText = 'Completed'
-        }
-        this.progressData = {
-          step,
-          totalSteps,
-          totalRecords,
-          processedRecords,
-          statusText,
-          error: errorOccured
-        }
-        if(step > 1) {
-          if(processedRecords > 0) {
-            this.progressData.percent = processedRecords/totalRecords*100
-          } else {
-            this.progressData.percent = 0
-          }
-          this.progressData.percent = Number.parseFloat(this.progressData.percent).toFixed(1)
-        } else {
-          this.progressData.percent = null
-        }
-      })
     }
   },
   watch: {
