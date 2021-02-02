@@ -282,8 +282,10 @@ const processChildren = function( parent, obj, children ) {
           }
           let prop = { code: field }
           let type = toCamel( child.$vnode.componentOptions.tag )
-          prop[type] = child.value
-          next.property.push( prop )
+          if ( child.value && ( child.value.hasOwnProperty("system") ? (child.value.code || child.value.value) : true ) ) {
+            prop[type] = child.value
+            next.property.push( prop )
+          }
         } else {
           next[field] = child.value
         }
