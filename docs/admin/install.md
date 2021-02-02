@@ -111,18 +111,18 @@ hibernate.search.default.indexBase=/var/lib/tomcat9/target/lucenefiles
 ```bash
 sudo apt install default-jdk
 mvn clean install -DskipTests
-sudo mkdir /var/lib/tomcat9/target
-sudo chown tomcat:tomcat /var/lib/tomcat9/target
+sudo mkdir -p /var/lib/tomcat9/target/lucenefiles
+sudo chown -R tomcat:tomcat /var/lib/tomcat9/target
 sudo cp target/hapi.war /var/lib/tomcat9/webapps
 ```
 
 #### Set paths in startup file
-Edit ```/etc/systemd/system/multi-user.taret.wants/tomcat9.service
+Edit ```/etc/systemd/system/multi-user.target.wants/tomcat9.service
 
 In the security section add the following directory with a ReadWritePath
 
 ```
-ReadWritePath=/var/lib/tomcat9/target/
+ReadWritePaths=/var/lib/tomcat9/target/
 ```
 
 #### Load basic definitions
