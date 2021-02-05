@@ -117,7 +117,7 @@ sudo cp target/hapi.war /var/lib/tomcat9/webapps
 ```
 
 #### Set paths in startup file
-Edit ```/etc/systemd/system/multi-user.target.wants/tomcat9.service
+Edit ```/etc/systemd/system/multi-user.target.wants/tomcat9.service```
 
 In the security section add the following directory with a ReadWritePath
 
@@ -129,12 +129,17 @@ ReadWritePaths=/var/lib/tomcat9/target/
 Download and install hapi-fhir-cli:
 https://hapifhir.io/hapi-fhir/docs/tools/hapi_fhir_cli.html
 ```bash
+wget https://github.com/hapifhir/hapi-fhir/releases/download/v5.2.0/hapi-fhir-5.2.0-cli.tar.bz2
+```
+Then load the basic definitions
+```bash
 ./hapi-fhir-cli upload-definitions -v r4 -t http://localhost:8080/hapi/fhir/
 ```
 
 ## SUSHI
 ```bash
-sudo npm install -g fsh-sushi
+sudo npm install -g fsh-sushi@0.15.0
+sudo npm install -g antlr4@4.8.0
 ```
 
 You can make customizations for your own configurations in the fsh/ 
