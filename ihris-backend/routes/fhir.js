@@ -6,6 +6,7 @@ const fhirFilter = require('../modules/fhirFilter')
 const fhirShortName = require('../modules/fhirShortName')
 const fhirReports = require('../modules/fhirReports')
 const fhirSecurity = require('../modules/fhirSecurity')
+const fhirAudit = require('../modules/fhirAudit')
 const isEmpty = require('is-empty')
 const marked = require('marked')
 const { JSDOM } = require('jsdom')
@@ -15,10 +16,6 @@ const winston = require('winston')
 
 const window = new JSDOM('').window
 const DOMPurify = createDOMPurify(window)
-
-router.get("/", (req, res, next) => {
-  res.status(200).json( { user: req.user } )
-} )
 
 router.get("/:resource/:id?", (req, res, next) => {
   if ( req.params.resource.startsWith('$') || ( req.params.id && req.params.id.startsWith('$') ) ) {
@@ -117,6 +114,7 @@ router.post("/:resource", (req, res) => {
     }
 
     fhirAxios.create( resource ).then( (output) => {
+      fhirAudit.create( req.user, req.ip, output.resourceType + "/" + output.id, true)
       fhirSecurity.postProcess( output, uuid ).then( (results) => {
         fhirReports.delayedRun()
         return res.status(201).json(output)
@@ -130,12 +128,14 @@ router.post("/:resource", (req, res) => {
       /* return response from FHIR server */
       //return res.status( err.response.status ).json( err.response.data )
       /* for custom responses */
+      fhirAudit.create( req.user, req.ip, null, false, { resource: resource, err: err } )
       let outcome = { ...outcomes.ERROR }
       outcome.issue[0].diagnostics = err.message
       return res.status(500).json( outcome )
     } )
   } ).catch( (err) => {
     winston.error("Failed to preprocess security metadata ON POST"+err.message)
+    fhirAudit.create( req.user, req.ip, null, false, { resource: resource, err: err } )
     let outcome = { ...outcomes.ERROR }
     outcome.issue[0].diagnostics = err.message
     return res.status(500).json( outcome )
@@ -199,6 +199,7 @@ router.patch("/CodeSystem/:id/:code", (req, res) => {
     }
     resource.date = new Date().toISOString()
     fhirAxios.update( resource ).then( (response) => {
+      fhirAudit.patch( req.user, req.ip, "CodeSystem/" + resource.id, true, { code: req.params.code } )
       incrementValueSetVersion( resource.url )
       fhirReports.delayedRun()
       return res.status(200).json({ok:true})
@@ -206,6 +207,8 @@ router.patch("/CodeSystem/:id/:code", (req, res) => {
       /* return response from FHIR server */
       //return res.status( err.response.status ).json( err.response.data )
       /* for custom responses */
+      //console.log(err)
+      fhirAudit.patch( req.user, req.ip, "CodeSystem/" + resource.id, false, { resource: resource, err: err, code: req.params.code } )
       let outcome = { ...outcomes.ERROR }
       outcome.issue[0].diagnostics = err.message
       return res.status(500).json( outcome )
@@ -214,6 +217,8 @@ router.patch("/CodeSystem/:id/:code", (req, res) => {
     /* return response from FHIR server */
     //return res.status( err.response.status ).json( err.response.data )
     /* for custom responses */
+      //console.log(err)
+      fhirAudit.patch( req.user, req.ip, "CodeSystem/" + req.params.id, false, { resource: update, err: err, code: req.params.code } )
       let outcome = { ...outcomes.ERROR }
       outcome.issue[0].diagnostics = err.message
       return res.status(500).json( outcome )
@@ -239,6 +244,7 @@ router.put("/:resource/:id", (req, res) => {
     }
 
     fhirAxios.update( update ).then( (resource) => {
+      fhirAudit.update( req.user, req.ip, resource.resourceType + "/" + resource.id, true )
       fhirSecurity.postProcess( resource, uuid ).then( (results) => {
         fhirReports.delayedRun()
         return res.status(200).json(resource)
@@ -252,11 +258,13 @@ router.put("/:resource/:id", (req, res) => {
       /* return response from FHIR server */
       //return res.status( err.response.status ).json( err.response.data )
       /* for custom responses */
+      fhirAudit.update( req.user, req.ip, update.resourceType + "/" + update.id, false, { resource: update, err: err } )
       let outcome = { ...outcomes.ERROR }
       outcome.issue[0].diagnostics = err.message
       return res.status(500).json( outcome )
     } )
   } ).catch( (err) => {
+    fhirAudit.update( req.user, req.ip, update.resourceType + "/" + update.id, false, { resource: update, err: err } )
     winston.error("Failed to preprocess security metadata on PUT "+err.message)
     let outcome = { ...outcomes.ERROR }
     outcome.issue[0].diagnostics = err.message

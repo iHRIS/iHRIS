@@ -22,8 +22,7 @@ var configLoaded = false
 
 async function startUp() {
 
-
-const fs = require('fs')
+  const fs = require('fs')
 
   if ( process.env.AUTOLOAD_RESOURCE_DIR ) {
     const axios = require('axios')
