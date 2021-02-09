@@ -25,23 +25,24 @@
     }, {
       "url": "http://ihris.org/fhir/StructureDefinition/iHRISReportElement",
       "extension": [{
-        "url": "display",
-        "valueString": "Responded"
-      }, {
-        "url": "label",
-        "valueString": "responded"
-      }, {
-        "url": "name",
-        "valueString": "extension.where(url='http://mhero.org/fhir/StructureDefinition/mhero-flow-run-details').extension.where(url='responded').valueBoolean"
-      },
-      {
-        "url": "filter",
-        "valueBoolean": true
-      },
-      {
-        "url": "dropDownFilter",
-        "valueBoolean": true
-      }]
+          "url": "display",
+          "valueString": "Responded"
+        }, {
+          "url": "label",
+          "valueString": "responded"
+        }, {
+          "url": "name",
+          "valueString": "extension.where(url='http://mhero.org/fhir/StructureDefinition/mhero-flow-run-details').extension.where(url='responded').valueBoolean"
+        },
+        {
+          "url": "filter",
+          "valueBoolean": true
+        },
+        {
+          "url": "dropDownFilter",
+          "valueBoolean": true
+        }
+      ]
     }, {
       "url": "http://ihris.org/fhir/StructureDefinition/iHRISReportElement",
       "extension": [{
@@ -89,6 +90,12 @@
       }, {
         "url": "name",
         "valueString": "extension.where(url='http://mhero.org/fhir/StructureDefinition/mhero-flow-run-details').extension.where(url='exit_type').valueString"
+      }, {
+        "url": "filter",
+        "valueBoolean": true
+      }, {
+        "url": "dropDownFilter",
+        "valueBoolean": true
       }]
     }]
   }, {
@@ -120,14 +127,21 @@
       {
         "url": "http://ihris.org/fhir/StructureDefinition/iHRISReportElement",
         "extension": [{
-            "url": "label",
-            "valueString": "fullname"
-          },
-          {
-            "url": "name",
-            "valueString": "name.where(use='official').last().text"
-          }
-        ]
+          "url": "display",
+          "valueString": "Fullname"
+        }, {
+          "url": "label",
+          "valueString": "fullname"
+        }, {
+          "url": "name",
+          "valueString": "name.where(use='official').last().text"
+        }, {
+          "url": "filter",
+          "valueBoolean": true
+        }, {
+          "url": "dropDownFilter",
+          "valueBoolean": false
+        }]
       }
     ]
   }, {
@@ -159,15 +173,21 @@
       {
         "url": "http://ihris.org/fhir/StructureDefinition/iHRISReportElement",
         "extension": [{
-          "url": "display",
-          "valueString": "Workflow"
-        }, {
+            "url": "display",
+            "valueString": "Workflow"
+          }, {
             "url": "label",
             "valueString": "WorkflowName"
           },
           {
             "url": "name",
             "valueString": "extension.where(url='http://mhero.org/fhir/StructureDefinition/mhero-workflows-details').extension.where(url='name').valueString"
+          }, {
+            "url": "filter",
+            "valueBoolean": true
+          }, {
+            "url": "dropDownFilter",
+            "valueBoolean": true
           }
         ]
       }
