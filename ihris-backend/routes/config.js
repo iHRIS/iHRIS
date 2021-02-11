@@ -955,12 +955,12 @@ router.get('/report/es/:report', (req, res) => {
         reportData.filters[index].dataType = dataType
       }
       reportData.indexName = indexName
-      let template = `<ihris-es-report :key="$route.params.report" page="${req.params.report}" label="${reportName}" :reportData="reportData" :terms="terms" :hideCheckboxes="hideCheckboxes" :hideLabel="hideLabel" >`
+      let template = `<ihris-es-report :key="$route.params.report" page="${req.params.report}" label="${reportName}" :reportData="reportData" :terms="terms" :termsConditions="termsConditions" :hideCheckboxes="hideCheckboxes" :hideLabel="hideLabel" >`
       for (let filter of reportData.filters) {
         if(filter.isDropDown) {
-          template += `<ihris-search-term v-on:termChange="searchData" label="${filter.display}" expression="${filter.field}" isDropDown="${filter.isDropDown}" :reportData="reportData" :hideFilters="hideFilters"></ihris-search-term>\n`
+          template += `<ihris-es-search-term v-on:termChange="searchData" label="${filter.display}" expression="${filter.field}" isDropDown="${filter.isDropDown}" :reportData="reportData" :hideFilters="hideFilters"></ihris-es-search-term>\n`
         } else {
-          template += `<ihris-search-term v-on:termChange="searchData" label="${filter.display}" expression="${filter.field}" :reportData="reportData" :hideFilters="hideFilters"></ihris-search-term>\n`
+          template += `<ihris-es-search-term v-on:termChange="searchData" label="${filter.display}" expression="${filter.field}" :reportData="reportData" :hideFilters="hideFilters"></ihris-es-search-term>\n`
         }
       }
       template += `</ihris-es-report>`

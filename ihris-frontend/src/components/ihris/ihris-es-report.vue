@@ -32,7 +32,7 @@
 import { eventBus } from "@/main";
 export default {
   name: "ihris-report",
-  props: ["reportData", "label", "terms", "dataURL", "page", "hideCheckboxes", "hideLabel"],
+  props: ["reportData", "label", "terms", "termsConditions", "dataURL", "page", "hideCheckboxes", "hideLabel"],
   data: function() {
     return {
       debug: "",
@@ -53,13 +53,23 @@ export default {
       if(this.selected.length !== this.results.length && this.selectAll) {
         this.selectAll = false
       }
-      eventBus.$emit("ihris-report-selections", this.selected, this.reportData, this.terms, this.selectAll);
+      eventBus.$emit("ihris-report-selections", this.selected, this.reportData, this.terms, this.termsConditions, this.selectAll);
     },
     terms: {
       handler() {
         this.selectAll = false
         this.getTotalRecords();
         this.getData(true);
+      },
+      deep: true
+    },
+    termsConditions: {
+      handler() {
+        if(Object.keys(this.terms).length > 0) {
+          this.selectAll = false
+          this.getTotalRecords();
+          this.getData(true);
+        }
       },
       deep: true
     },
@@ -112,7 +122,8 @@ export default {
       let body = {
         query: {
           bool: {
-            must: []
+            must: [],
+            must_not: []
           }
         }
       }
@@ -141,7 +152,11 @@ export default {
             for(let value of this.terms[sTerm]) {
               terms.terms[esFieldName].push(value)
             }
-            body.query.bool.must.push(terms)
+            if(this.termsConditions[sTerm] === 'exclude') {
+              body.query.bool.must_not.push(terms)
+            } else {
+              body.query.bool.must.push(terms)
+            }
           } else {
             if(!sTermDet.isDropDown) {
               let termArr = this.terms[sTerm].split(' ')
@@ -150,18 +165,27 @@ export default {
                   wildcard: {}
                 }
                 wildCard.wildcard[esFieldName] = tm + '*'
-                body.query.bool.must.push(wildCard)
+                if(this.termsConditions[sTerm] === 'exclude') {
+                  body.query.bool.must_not.push(wildCard)
+                } else {
+                  body.query.bool.must.push(wildCard)
+                }
               }
             } else {
               let terms = {
                 terms: {}
               }
               terms.terms[esFieldName] = [this.terms[sTerm]]
-              body.query.bool.must.push(terms)
+              if(this.termsConditions[sTerm] === 'exclude') {
+                body.query.bool.must_not.push(terms)
+              } else {
+                body.query.bool.must.push(terms)
+              }
             }
           }
         }
       }
+      eventBus.$emit('builtESTerms', body)
       return body
     },
     getTotalRecords() {

@@ -41,6 +41,7 @@ export default {
       practitioners: [],
       reportData: {},
       terms: {},
+      termsConditions: {},
       sendToMatchingTerms: false,
       totalRecords: 0
     };
@@ -62,7 +63,7 @@ export default {
       for (let field of this.reportData.fieldsDetails) {
         headers.push({ text: field[0], value: field[1] });
       }
-      this.$emit("mheroRecipientsSelected", this.practitioners, headers, this.terms, this.sendToMatchingTerms, this.reportData);
+      this.$emit("mheroRecipientsSelected", this.practitioners, headers, this.terms, this.termsConditions, this.sendToMatchingTerms, this.reportData);
     }
   },
   components: {
@@ -72,9 +73,10 @@ export default {
     eventBus.$on("report-total-records", (totalRecords) => {
       this.totalRecords = totalRecords
     })
-    eventBus.$on("ihris-report-selections", (selections, reportData, terms, sendToMatchingTerms) => {
+    eventBus.$on("ihris-report-selections", (selections, reportData, terms, termsConditions, sendToMatchingTerms) => {
       this.sendToMatchingTerms = sendToMatchingTerms
       this.terms = terms
+      this.termsConditions = termsConditions
       this.practitioners = selections;
       this.reportData = reportData;
       if(this.sendToMatchingTerms) {

@@ -211,7 +211,9 @@
       </v-card-title>
       <ihrisReport v-if="sendToMatchingTerms"
         report='ihris-es-report-mhero-send-message'
-        :terms="terms" :hideFilters="true"
+        :terms="terms"
+        :termsConditions="termsConditions"
+        :hideFilters="true"
         :hideCheckboxes="true"
         :hideLabel="true"
       />
@@ -247,9 +249,11 @@
 import mheroprogress from "../../components/mhero/progress"
 import ihrisReport from "@/views/es-report";
 import VueCronEditorBuefy from 'vue-cron-editor-buefy';
+import { eventBus } from "@/main";
 export default {
-  props: ["headers", "practitioners", "terms", "sendToMatchingTerms", "reportData"],
+  props: ["headers", "practitioners", "terms", "termsConditions", "sendToMatchingTerms", "reportData"],
   data: vm => ({
+    builtTerms: {},
     chars: 0,
     totalChars: 160,
     workflows: [],
@@ -306,7 +310,7 @@ export default {
       let data = {
         practitioners: practitioners,
         workflow: this.workflow.id,
-        terms: this.terms,
+        builtTerms: this.builtTerms,
         sendToMatchingTerms: this.sendToMatchingTerms,
         reportData: this.reportData
       };
@@ -452,6 +456,9 @@ export default {
     }
   },
   created() {
+    eventBus.$on('builtESTerms', (val) => {
+      this.builtTerms = val
+    })
     fetch("/mhero/workflows").then(response => {
       response.json().then(data => {
         this.workflows = data;

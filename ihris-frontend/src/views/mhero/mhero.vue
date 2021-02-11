@@ -10,6 +10,7 @@
           :practitioners="selectedPractitioners"
           :sendToMatchingTerms="sendToMatchingTerms"
           :terms="terms"
+          :termsConditions="termsConditions"
           :reportData="reportData"
           @editWorkflow="changeWorkflow"
         />
@@ -32,6 +33,7 @@ export default {
       headers: [],
       selectedPractitioners: [],
       terms: {},
+      termsConditions: {},
       sendToMatchingTerms: false,
       reportData: {},
       stepper: 1
@@ -41,10 +43,11 @@ export default {
     changeWorkflow() {
       this.stepper = 1;
     },
-    importData(selectedPractitioners, headers, terms, sendToMatchingTerms, reportData) {
+    importData(selectedPractitioners, headers, terms, termsConditions, sendToMatchingTerms, reportData) {
       this.selectedPractitioners = selectedPractitioners;
       this.headers = headers;
       this.terms = terms
+      this.termsConditions = termsConditions
       this.sendToMatchingTerms = sendToMatchingTerms
       this.reportData = reportData
       this.stepper = 2;

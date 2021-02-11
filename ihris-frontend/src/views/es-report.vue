@@ -23,6 +23,12 @@ export default {
         return {};
       }
     },
+    termsConditions: {
+      type: Object,
+      default: function() {
+        return {};
+      }
+    },
     hideFilters: {
       type: Boolean,
       default: false
@@ -55,6 +61,7 @@ export default {
             .json()
             .then(data => {
               let terms = this.terms
+              let termsConditions = this.termsConditions
               let hideFilters = this.hideFilters
               let hideCheckboxes = this.hideCheckboxes
               let hideLabel = this.hideLabel
@@ -65,6 +72,7 @@ export default {
                     reportData: data.reportData,
                     dataURL: data.dataURL,
                     terms: terms,
+                    termsConditions: termsConditions,
                     hideLabel,
                     hideFilters,
                     hideCheckboxes
@@ -75,15 +83,18 @@ export default {
                     import(
                       /* webpackChunkName: "fhir-search" */ "@/components/ihris/ihris-es-report"
                     ),
-                  "ihris-search-term": () =>
+                  "ihris-es-search-term": () =>
                     import(
                       /* webpackChunkName: "fhir-search" */ "@/components/ihris/ihris-es-search-term"
                     )
                 },
                 template: data.reportTemplate,
                 methods: {
-                  searchData: function(expression, value) {
+                  searchData: function(expression, value, filterType) {
                     this.$set(this.terms, expression, value);
+                    if((this.terms[expression] && typeof this.terms[expression] === 'object' && this.terms[expression].length > 0) || (typeof this.terms[expression] === 'string' && this.terms[expression] !== '')) {
+                      this.$set(this.termsConditions, expression, filterType);
+                    }
                   }
                 }
               });

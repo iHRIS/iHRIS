@@ -24,11 +24,12 @@ router.post("/send-message", function (req, res) {
       practitioners = data.practitioners
       return resolve()
     }
-    let terms = buildTerms(data.terms, data.reportData.filters)
+    console.error(JSON.stringify(data.builtTerms,0,2));
     es.getData({
       indexName: data.reportData.indexName,
-      searchQuery: terms
+      searchQuery: data.builtTerms
     }, (err, practs) => {
+      console.log(practs.length);
       if(err) {
         errorOccured = true
         return resolve()
@@ -172,63 +173,6 @@ router.post("/send-message", function (req, res) {
       }
     })
   })
-
-  function buildTerms(terms, termsMetaData) {
-    let body = {
-      query: {
-        bool: {
-          must: []
-        }
-      }
-    }
-    if(Object.keys(terms).length > 0) {
-      for(let sTerm in terms) {
-        if(!terms[sTerm] || terms[sTerm].length === 0) {
-          continue;
-        }
-        let sTermDet = termsMetaData && termsMetaData.find((filter) => {
-          return filter.field === sTerm
-        })
-        if(!sTermDet.isDropDown) {
-          terms[sTerm] = terms[sTerm].replace(/\s+/g, ' ').trim()
-        }
-        let esFieldName
-        if(sTermDet.isDropDown) {
-          esFieldName = sTerm + '.keyword'
-        } else {
-          esFieldName = sTerm
-        }
-        if(Array.isArray(terms[sTerm])) {
-          let tms = {
-            terms: {}
-          }
-          tms.terms[esFieldName] = []
-          for(let value of terms[sTerm]) {
-            tms.terms[esFieldName].push(value)
-          }
-          body.query.bool.must.push(tms)
-        } else {
-          if(!sTermDet.isDropDown) {
-            let termArr = terms[sTerm].split(' ')
-            for(let tm of termArr) {
-              let wildCard = {
-                wildcard: {}
-              }
-              wildCard.wildcard[esFieldName] = tm + '*'
-              body.query.bool.must.push(wildCard)
-            }
-          } else {
-            let tms = {
-              terms: {}
-            }
-            tms.terms[esFieldName] = [terms[sTerm]]
-            body.query.bool.must.push(tms)
-          }
-        }
-      }
-    }
-    return body
-  }
 });
 
 router.get('/getProgress', (req, res) => {

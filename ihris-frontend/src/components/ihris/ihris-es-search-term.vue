@@ -18,6 +18,23 @@
     @click:clear="clearSearch()"
     item-text="display"
     item-value="code">
+    <template v-slot:prepend-item>
+      <v-radio-group
+        v-model="filterType"
+        @change="updateSearch()"
+        row
+      >
+        <v-radio
+          label="Include"
+          value="include"
+        ></v-radio>
+        <v-radio
+          label="Exclude"
+          value="exclude"
+        ></v-radio>
+      </v-radio-group>
+      <v-divider></v-divider>
+    </template>
   </v-autocomplete>
   <v-text-field v-else-if="!hideFilters" :label="label" v-model="value" dense outlined hide-details shaped clearable @change="updateSearch()" @click:clear="clearSearch()">
   </v-text-field>
@@ -33,6 +50,7 @@ export default {
       items: [],
       error: false,
       err_messages: null,
+      filterType: 'include',
       value: []
     }
   },
@@ -72,7 +90,7 @@ export default {
   },
   methods: {
     updateSearch: function() {
-      this.$emit('termChange', this.expression, this.value)
+      this.$emit('termChange', this.expression, this.value, this.filterType)
     },
     clearSearch: function() {
       this.$emit('termChange', this.expression, [])
