@@ -22,7 +22,7 @@
     "is-empty": "^1.2.0",
     "jest-cucumber": "^3.0.0",
     "lodash": "^4.17.20",
-    "marked": "^1.2.0",
+    "marked": "^2.0.0",
     "morgan": "~1.9.1",
     "nconf": "^0.10.0",
     "object-hash": "^2.0.3",
