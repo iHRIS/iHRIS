@@ -4,7 +4,7 @@ services:
 
   fhir:
     container_name: fhir
-    image: hapiproject/hapi:latest
+    image: hapiproject/hapi:v5.2.1
     ports:
       - "8080:8080"
     environment:
