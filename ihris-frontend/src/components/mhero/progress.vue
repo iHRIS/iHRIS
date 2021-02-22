@@ -27,6 +27,7 @@
               </template>
               <template v-else>
                 {{progressData.step}}/{{progressData.totalSteps}} {{progressData.statusText}}
+
                 <template v-if="progressData.statusText == 'Completed' && progressData.error">
                   <font style="color: red; font-weight: bold">- {{progressData.error}}</font>
                 </template>
@@ -69,6 +70,7 @@
                 color="green"
                 text
                 type="success"
+                transition="scale-transition"
               >Success: {{sendStatus.success.toLocaleString()}}</v-alert>
             </v-flex>
             <v-spacer></v-spacer>
@@ -79,6 +81,7 @@
                 elevation="12"
                 text
                 type="error"
+                transition="scale-transition"
               >Failed: {{sendStatus.failed.toLocaleString()}}</v-alert>
             </v-flex>
             <v-spacer></v-spacer>
@@ -89,11 +92,21 @@
                 elevation="12"
                 text
                 type="warning"
+                transition="scale-transition"
               >Ignored: {{sendStatus.ignored.toLocaleString()}}</v-alert>
             </v-flex>
           </v-layout>
         </v-card-text>
         <v-card-actions>
+          <v-alert
+            v-if="progressData.percent != null"
+            icon="mdi-upload-multiple"
+            type="success"
+            color="primary"
+            transition="scale-transition"
+          >
+            {{(parseInt(sendStatus.success) + parseInt(sendStatus.failed) + parseInt(sendStatus.ignored)).toLocaleString()}}/{{progressData.totalRecords.toLocaleString()}}
+          </v-alert>
           <v-spacer></v-spacer>
           <v-btn
             v-if="progressData.statusText == 'Completed'"
@@ -153,7 +166,8 @@ export default {
         let totalRecords = 0
         let processedRecords = 0
         let statusText = ''
-        let step = 0
+        let higherStep = 0
+        let lowerStep = 100
         let totalSteps = 0
         let allCompleted = true
         let errorOccured = false
@@ -166,9 +180,14 @@ export default {
           if(resp.processedRecords) {
             processedRecords += resp.processedRecords
           }
-          if(resp.step && resp.step > step) {
-            statusText = resp.status
-            step = resp.step
+          if(resp.step && resp.step > higherStep) {
+            higherStep = resp.step
+          }
+          if(resp.step && resp.step <= lowerStep) {
+            if(!statusText || (statusText && resp.status !== 'done')) {
+              statusText = resp.status
+              lowerStep = resp.step
+            }
           }
           if(resp.status != 'done') {
             allCompleted = false
@@ -205,14 +224,14 @@ export default {
           statusText = 'Completed'
         }
         this.progressData = {
-          step,
+          step: higherStep,
           totalSteps,
           totalRecords,
           processedRecords,
           statusText,
           error: errorOccured
         }
-        if(step > 1) {
+        if(higherStep > 1) {
           if(processedRecords > 0) {
             this.progressData.percent = processedRecords/totalRecords*100
           } else {

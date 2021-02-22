@@ -90,11 +90,11 @@ Description:    "iHRIS profile of Practitioner."
 * communication.extension[proficiency] ^label = "Language Proficiency"
 * communication.extension[proficiency].extension[level].valueCoding MS
 * communication.extension[proficiency].extension[type].valueCoding MS
-* extension contains 
+* extension contains
     IhrisPractitionerResidence named residence 0..1 MS and
     IhrisPractitionerNationality named nationality 0..1 and
     IhrisPractitionerMaritalStatus named maritalStatus 0..1 and
-    IhrisPractitionerDependents named dependents 0..1 
+    IhrisPractitionerDependents named dependents 0..1
 * extension[residence].valueReference.reference MS
 
 Extension:      IhrisPractitionerLanguageProficiency
@@ -103,7 +103,7 @@ Title:          "iHRIS Practitioner Language Proficiency"
 Description:    "iHRIS extension for Practitioner Language Proficiency."
 * ^context.type = #element
 * ^context.expression = "Practitioner"
-* extension contains 
+* extension contains
     level 0..1 MS and
     type 0..* MS
 * extension[level].value[x] only Coding

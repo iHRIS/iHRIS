@@ -24,12 +24,10 @@ router.post("/send-message", function (req, res) {
       practitioners = data.practitioners
       return resolve()
     }
-    console.error(JSON.stringify(data.builtTerms,0,2));
     es.getData({
       indexName: data.reportData.indexName,
       searchQuery: data.builtTerms
     }, (err, practs) => {
-      console.log(practs.length);
       if(err) {
         errorOccured = true
         return resolve()
