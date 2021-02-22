@@ -35,7 +35,7 @@ Description:    "Defines the primary resource of the relationship"
 * extension[query].valueString ^label = "FHIR path to limit instances of this resource"
 * extension[displayCheckbox].value[x] only boolean
 * extension[displayCheckbox].valueBoolean 1..1
-* extension[displayCheckbox].valueString ^label = "Whether rows of the report are selectable or not"
+* extension[displayCheckbox].valueBoolean ^label = "Whether rows of the report are selectable or not"
 
 
 Extension:      IhrisReportLink
