@@ -138,19 +138,19 @@ Then load the basic definitions
 
 ## SUSHI
 ```bash
-sudo npm install -g fsh-sushi@0.15.0
-sudo npm install -g antlr4@4.8.0
+sudo npm install -g fsh-sushi
+sudo npm install -g antlr4
 ```
 
-You can make customizations for your own configurations in the fsh/ 
+You can make customizations for your own configurations in the ig/ 
 directory.  To get the default data, you can compile the FSH files with:
 ```bash
-cd fsh/
+cd ig/
 sushi -s .
 ```
 
 Any time you make changes to the FSH files you should rebuild them 
-this way.
+this way.  The FSH files are in ig/input/fsh/.
 
 ## Loading Resources
 
@@ -179,7 +179,7 @@ node load.js --server http://localhost:8080/hapi/fhir ../resources/*.json
 
 After building the FSH files, you can import them with the following:
 ```bash
-node load.js --server http://localhost:8080/hapi/fhir ../fsh/build/input/{profiles,extensions,examples,resources,vocabulary}/*.json
+node load.js --server http://localhost:8080/hapi/fhir ../ig/fsh-generated/resources/*.json
 ```
 
 ## ElasticSearch
