@@ -41,7 +41,7 @@ const fhirSecurityLocation = {
       location = getLocationReferences( location ).join(",")
     }
     return new Promise( (resolve, reject) => {
-      fhirAxios.search( "Location", 
+      fhirAxios.search( "Location",
         { _id: location, status: "active", "_include:iterate": "Location:partof" } ).then( (bundle) => {
           let locations = []
           for( let entry of bundle.entry ) {
@@ -67,7 +67,7 @@ const fhirSecurityLocation = {
     securityExt.extension = securityExt.extension.concat( security )
 
   },
-  /** 
+  /**
    * determine if a security update is required for this resource
    */
   updateRequired: (resource, previous) => {
@@ -111,8 +111,8 @@ const fhirSecurityLocation = {
             winston.error("Failed to update "+entry.resource.resourceType+"/"+entry.resource.id+" security for location "
               +location+" "+err.message)
           } )
-           
-        } 
+
+        }
       }
       if ( bundle.link ) {
         let next = bundle.link.find( link => link.relation === "next" )
@@ -132,7 +132,7 @@ const fhirSecurityLocation = {
       winston.error("Failed to get security for location "+location+" "+err.message)
     } )
   },
-  /** 
+  /**
    * set security metadata on the given resource
    * used to set the security metadata on this resource for locations
    */
@@ -305,7 +305,7 @@ const fhirSecurityPractitioner = {
               locations.push( "Location/" + entry.resource.id )
             } else {
             }
-          } 
+          }
         }
         resolve( locations )
       } ).catch( (err) => {
@@ -318,7 +318,7 @@ const fhirSecurityPractitioner = {
    * return the practitioner reference set on this resource
    */
   getPractitionerReference: (resource) => {
-    let reference 
+    let reference
     if ( resource.resourceType === "Practitioner" && resource.id ) {
       reference = "Practitioner/"+resource.id
     } else if ( resource.resourceType === "PractitionerRole" && resource.practitioner && resource.practitioner.reference ) {
@@ -336,9 +336,9 @@ const fhirSecurityPractitioner = {
     }
     return reference
   },
-  /** 
+  /**
    * set security metadata on the given resource
-   * used to set the security metadata on this resource based on 
+   * used to set the security metadata on this resource based on
    * loaded modules
    */
   resetPractitionerSecurityOnResource: (resource) => {
@@ -408,7 +408,7 @@ const fhirSecurityPractitioner = {
             let practitioner = securityExt.extension.find( ext => ext.url === fhirSecurityPractitioner.url ).valueString
             practitionerList[ practitioner ] = true
           } catch (err) { }
-        } 
+        }
       }
       if ( bundle.link ) {
         let next = bundle.link.find( link => link.relation === "next" )
@@ -442,7 +442,7 @@ const fhirSecurityPractitioner = {
       let roles = bundle.entry.filter( entry => entry.resource.resourceType === "PractitionerRole" )
       let promises = []
       for( let role of roles ) {
-        if ( role.resource.location.length > 0 ) {
+        if ( role.resource.location && role.resource.location.length > 0 ) {
           promises.push( fhirSecurityLocation.getLocationHierarchy( role.resource.location ) )
         }
       }
@@ -453,7 +453,7 @@ const fhirSecurityPractitioner = {
         }
         for( let entry of bundle.entry ) {
           if ( fhirSecurityPractitioner.resourceTypes.includes( entry.resource.resourceType ) ) {
-            fhirSecurityLocation.resetLocationSecurityOnResource(entry.resource, locations) 
+            fhirSecurityLocation.resetLocationSecurityOnResource(entry.resource, locations)
           }
         }
         resolve(true)
@@ -527,19 +527,19 @@ const fhirSecurityPractitioner = {
       } )
     } )
   },
-  /** 
+  /**
    * check to see if the security metadata needs to be updated
    * returns boolean
    */
   updateRequired: (resource, previous) => {
     if ( !previous ) {
-      if ( resource.resourceType === "Practitioner" 
+      if ( resource.resourceType === "Practitioner"
         || resource.resourceType === "PractitionerRole" ) {
         return true
-      } else if ( resource.resourceType === "Basic" 
-        && resource.extension.find( 
-          ext => ext.url === "http://ihris.org/fhir/StructureDefinition/ihris-practitioner-reference" 
-        ) ) { 
+      } else if ( resource.resourceType === "Basic"
+        && resource.extension.find(
+          ext => ext.url === "http://ihris.org/fhir/StructureDefinition/ihris-practitioner-reference"
+        ) ) {
         return true
       } else if ( resource.resourceType === "Bundle" && resource.type === "transaction" ) {
         if ( resource.entry && resource.entry.find( entry => entry.resource.resourceType === "Practitioner" || entry.resource.resourceType === "PractitionerRole" ) ) {
@@ -552,7 +552,7 @@ const fhirSecurityPractitioner = {
       }
     } else {
       if ( resource.resourceType === "PractitionerRole" ) {
-        if ( resource.practitioner 
+        if ( resource.practitioner
           && resource.practitioner.reference !== (previous.practitioner ? previous.practitioner.reference : undefined)
           || !compareLocations( resource.location, previous.location )
           || resource.active !== previous.active
@@ -579,7 +579,7 @@ const fhirSecurityPractitioner = {
       }
     }
   },
-  /** 
+  /**
    * set security metadata on the given resource
    * used to set the security metadata on this resource for practitioners
    */
@@ -659,7 +659,7 @@ const fhirSecurityPractitioner = {
       // Add location security metadata if needed
       /*
       if ( resource.resourceType === "PractitionerRole" ) {
-        if ( previous && ( previous.practitioner.reference !== resource.practitioner.reference 
+        if ( previous && ( previous.practitioner.reference !== resource.practitioner.reference
           || previous.active !== resource.active ) ) {
           fhirSecurityPractitioner.updateMatching( previous.practitioner.reference )
         }
@@ -745,7 +745,7 @@ const fhirSecurityPractitioner = {
           if ( entry.resource.resourceType === "Location" ) {
             locations.push( "Location/" + entry.resource.id )
           }
-        } 
+        }
         if ( resource ) {
           fhirSecurityLocation.replaceSecurity( resource, locations, true )
         }
@@ -787,10 +787,10 @@ const fhirSecurity = {
     }
     return security
   },
-  /** 
-   * replace security with previous security metadata 
+  /**
+   * replace security with previous security metadata
    * used when nothing triggers an update to security metadata
-   * This is to be sure that no one tried to set security content 
+   * This is to be sure that no one tried to set security content
    * when submitting resources
    * This should only be called before the resource has been saved
    */
@@ -823,7 +823,7 @@ const fhirSecurity = {
           }
         } catch(err) {
           reject(err)
-        } 
+        }
       } else {
         for( let modName of Object.keys(fhirSecurity.modules) ) {
           let module = fhirSecurity.modules[modName]
@@ -840,7 +840,7 @@ const fhirSecurity = {
        } )
     } )
 
-    
+
   },
 
   /**
@@ -851,7 +851,7 @@ const fhirSecurity = {
       let promises = []
       for( let modName of Object.keys(fhirSecurity.modules) ) {
         let module = fhirSecurity.modules[modName]
-        if ( fhirSecurity.updateRequiredCache[modName].hasOwnProperty( uuid ) 
+        if ( fhirSecurity.updateRequiredCache[modName].hasOwnProperty( uuid )
           && fhirSecurity.updateRequiredCache[modName][uuid] ) {
 
           promises.push( module.postProcess( uuid, resource ) )
@@ -868,7 +868,7 @@ const fhirSecurity = {
 
   },
 
-  /** 
+  /**
    * check to see if the security metadata needs to be updated
    * returns boolean
    */
@@ -876,9 +876,9 @@ const fhirSecurity = {
   updateRequired: (resource) => {
   },
   */
-  /** 
+  /**
    * set security metadata on the given resource
-   * used to set the security metadata on this resource based on 
+   * used to set the security metadata on this resource based on
    * loaded modules
    */
   /*

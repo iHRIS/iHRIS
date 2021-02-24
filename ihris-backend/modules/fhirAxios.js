@@ -13,8 +13,8 @@ axios.defaults.paramsSerializer = function (params) {
 class InvalidRequestError extends Error {
   constructor (message, status) {
     super( message )
-    this.response = { 
-      status: status || 400, 
+    this.response = {
+      status: status || 400,
       body: {
         resourceType: "OperationOutcome",
         issue: [
@@ -24,7 +24,7 @@ class InvalidRequestError extends Error {
             diagnostics: message
           }
         ]
-      } 
+      }
     }
   }
 }
@@ -118,7 +118,7 @@ const fhirAxios = {
       }
       let url = new URL(fhirAxios.baseUrl.href)
       if ( resource.resourceType !== "Bundle" ) {
-        url.pathname += resource.resourceType 
+        url.pathname += resource.resourceType
       } else {
         if ( !( resource.type === "transaction" || resource.type === "batch" ) ) {
           err = new InvalidRequestError( "Bundles must of type 'transaction' or 'batch'" )
@@ -189,7 +189,7 @@ const fhirAxios = {
         if ( complete ) {
           try {
             let total = response.data.expansion.total
-            let count 
+            let count
             try {
               count = response.data.expansion.parameter.find( param => param.name === "count" ).valueInteger
             } catch (err) {

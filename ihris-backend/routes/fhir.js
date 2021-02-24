@@ -112,7 +112,6 @@ router.post("/:resource", (req, res) => {
     } else {
       resource = fhirFilter.filter( req.body, allowed )
     }
-
     fhirAxios.create( resource ).then( (output) => {
       fhirAudit.create( req.user, req.ip, output.resourceType + "/" + output.id, true)
       fhirSecurity.postProcess( output, uuid ).then( (results) => {
