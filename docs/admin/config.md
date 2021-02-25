@@ -55,6 +55,7 @@ IHRIS_FHIR__BASE=http://locahost:8080/hapi/fhir
  * name = id of config Parameters resource
 * keys
  * name = public key string
+* redis:url (default: local server)
 * elasticsearch:base (default: http://localhost:9200)
 * elasticsearch:username
 * elasticsearch:password
@@ -103,6 +104,16 @@ IHRIS_FHIR__BASE=http://locahost:8080/hapi/fhir
   * [type] (e.g. date-time)
    * minValue[x] (e.g. minValueDateTime) = "value"
    * maxValue[x] (e.g. maxValueDateTime) = "value"
+   * calendar = "Ethiopian"
+ * fields
+  * [field def] (e.g. PractitionerRole.location)
+   * type = "type" (e.g. "month", "year", "password", "tree")
+   * initialValue = "resource/id" (e.g. Location/TF)
+   * readOnlyIfSet = bool
+   * user_filter
+#* resource = "resource" (e.g. PractitionerRole) default is from field_def
+    * regex = "regexp" (e.g. "related-location=(.+)")
+    * replace = "replace" (e.g. "$1")
 * shortname
  * [Resource]
   * fhirpath (single fhirpath for displaying for this resource)
