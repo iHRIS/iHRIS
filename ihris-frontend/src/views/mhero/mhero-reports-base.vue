@@ -15,20 +15,32 @@
       <v-card-text>
         <v-list >
           <v-list-item
-            to="/report/ihris-es-report-mhero-flow-summary"
+            to="/report/ihris-es-report-mhero-flow-run-summary"
             key="1"
           >
             <v-list-item-title class="text-h2">Flow Summary</v-list-item-title>
           </v-list-item>
           <v-list-item
-            to="/report/ihris-es-report-mhero-flow-run-summary"
+            to="/report/ihris-es-report-mhero-flow-run-breakdown"
             key="2"
           >
-            <v-list-item-title class="text-h2">Flow Run Summary</v-list-item-title>
+            <v-list-item-title class="text-h2">Flow Run By Practitioner</v-list-item-title>
+          </v-list-item>
+          <v-list-item
+            to="/report/ihris-es-report-mhero-message-send-breakdown"
+            key="3"
+          >
+            <v-list-item-title class="text-h2">Message Sending By Practitioner</v-list-item-title>
+          </v-list-item>
+          <v-list-item
+            to="/report/ihris-es-report-mhero-message-send-summary"
+            key="4"
+          >
+            <v-list-item-title class="text-h2">Message Sending Summary</v-list-item-title>
           </v-list-item>
           <v-list-item
             to="/report/ihris-es-report-message-exchange"
-            key="3"
+            key="5"
           >
             <v-list-item-title class="text-h2">Message Exchange</v-list-item-title>
           </v-list-item>

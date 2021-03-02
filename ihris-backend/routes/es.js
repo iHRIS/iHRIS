@@ -54,6 +54,7 @@ router.post('/:index/:operation?', (req, res) => {
     url = url.addQuery('size', size)
   }
   url = url.toString()
+  console.log(JSON.stringify(body,0,2));
   axios({
     method: 'GET',
     url,

@@ -161,14 +161,18 @@ export default {
             if(!sTermDet.isDropDown) {
               let termArr = this.terms[sTerm].split(' ')
               for(let tm of termArr) {
-                let wildCard = {
-                  wildcard: {}
-                }
-                wildCard.wildcard[esFieldName] = tm + '*'
-                if(this.termsConditions[sTerm] === 'exclude') {
-                  body.query.bool.must_not.push(wildCard)
+                let query = {}
+                if(this.reportData.mappings.mappings.properties[esFieldName].type === 'text') {
+                  query.wildcard = {}
+                  query.wildcard[esFieldName] = tm + '*'
                 } else {
-                  body.query.bool.must.push(wildCard)
+                  query.term = {}
+                  query.term[esFieldName] = tm
+                }
+                if(this.termsConditions[sTerm] === 'exclude') {
+                  body.query.bool.must_not.push(query)
+                } else {
+                  body.query.bool.must.push(query)
                 }
               }
             } else {
@@ -224,10 +228,16 @@ export default {
       for(let index in this.options.sortBy) {
         let sortCol = this.options.sortBy[index]
         let sort = {}
-        if(this.options.sortDesc[index]) {
-          sort[sortCol + '.keyword'] = 'desc'
+        let sortColESName
+        if(this.reportData.mappings.mappings.properties[sortCol].type === 'text') {
+          sortColESName = sortCol + '.keyword'
         } else {
-          sort[sortCol + '.keyword'] = 'asc'
+          sortColESName = sortCol
+        }
+        if(this.options.sortDesc[index]) {
+          sort[sortColESName] = 'desc'
+        } else {
+          sort[sortColESName] = 'asc'
         }
         sorting.push(sort)
       }

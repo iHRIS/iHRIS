@@ -945,6 +945,7 @@ router.get('/report/es/:report', (req, res) => {
       }
     };
     axios(options).then((mappings) => {
+      reportData.mappings = mappings.data[indexName]
       for(index in reportData.filters) {
         let field = reportData.filters[index].field
         if(!mappings.data[indexName].mappings.properties[field]) {

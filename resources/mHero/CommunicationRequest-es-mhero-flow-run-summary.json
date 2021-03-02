@@ -1,0 +1,258 @@
+{
+  "resourceType": "Basic",
+  "id": "ihris-es-report-mhero-flow-run-summary",
+  "meta": {
+    "versionId": "6",
+    "lastUpdated": "2020-04-18T14:25:58.246+03:00",
+    "source": "#9bPzqTgeJQSqHE9W",
+    "profile": [
+      "http://ihris.org/fhir/StructureDefinition/iHRISRelationship"
+    ]
+  },
+  "extension": [{
+      "url": "http://ihris.org/fhir/StructureDefinition/iHRISReportDetails",
+      "extension": [{
+          "url": "label",
+          "valueString": "Flow Run Summary"
+        },
+        {
+          "url": "displayCheckbox",
+          "valueBoolean": false
+        },
+        {
+          "url": "name",
+          "valueString": "mheroflowrunsummary"
+        }, {
+          "url": "resource",
+          "valueString": "Bundle"
+        },
+        {
+          "url": "http://ihris.org/fhir/StructureDefinition/iHRISReportElement",
+          "extension": [{
+            "url": "display",
+            "valueString": "Flow/Message Name"
+          },
+          {
+              "url": "label",
+              "valueString": "WorkflowName"
+            },
+            {
+              "url": "name",
+              "valueString": "name"
+            },
+            {
+              "url": "filter",
+              "valueBoolean": true
+            },
+            {
+              "url": "dropDownFilter",
+              "valueBoolean": true
+            }
+          ]
+        },
+        {
+          "url": "http://ihris.org/fhir/StructureDefinition/iHRISReportElement",
+          "extension": [{
+            "url": "display",
+            "valueString": "Date Sent"
+          },
+          {
+              "url": "label",
+              "valueString": "startedDate"
+            },
+            {
+              "url": "name",
+              "valueString": "name"
+            },
+            {
+              "url": "filter",
+              "valueBoolean": true
+            },
+            {
+              "url": "dropDownFilter",
+              "valueBoolean": false
+            }
+          ]
+        },
+        {
+          "url": "http://ihris.org/fhir/StructureDefinition/iHRISReportElement",
+          "extension": [{
+            "url": "display",
+            "valueString": "Time Sent"
+          },
+          {
+              "url": "label",
+              "valueString": "startedTime"
+            },
+            {
+              "url": "name",
+              "valueString": "name"
+            },
+            {
+              "url": "filter",
+              "valueBoolean": true
+            },
+            {
+              "url": "dropDownFilter",
+              "valueBoolean": false
+            }
+          ]
+        },
+        {
+          "url": "http://ihris.org/fhir/StructureDefinition/iHRISReportElement",
+          "extension": [{
+            "url": "display",
+            "valueString": "Total Sent"
+          },
+          {
+              "url": "label",
+              "valueString": "sent"
+            },
+            {
+              "url": "name",
+              "valueString": "name"
+            },
+            {
+              "url": "filter",
+              "valueBoolean": false
+            },
+            {
+              "url": "dropDownFilter",
+              "valueBoolean": false
+            }
+          ]
+        },
+        {
+          "url": "http://ihris.org/fhir/StructureDefinition/iHRISReportElement",
+          "extension": [{
+            "url": "display",
+            "valueString": "Total Failed"
+          },
+          {
+              "url": "label",
+              "valueString": "failed"
+            },
+            {
+              "url": "name",
+              "valueString": "name"
+            },
+            {
+              "url": "filter",
+              "valueBoolean": false
+            },
+            {
+              "url": "dropDownFilter",
+              "valueBoolean": false
+            }
+          ]
+        },
+        {
+          "url": "http://ihris.org/fhir/StructureDefinition/iHRISReportElement",
+          "extension": [{
+            "url": "display",
+            "valueString": "Total Responded"
+          },
+          {
+              "url": "label",
+              "valueString": "responded"
+            },
+            {
+              "url": "name",
+              "valueString": "name"
+            },
+            {
+              "url": "filter",
+              "valueBoolean": false
+            },
+            {
+              "url": "dropDownFilter",
+              "valueBoolean": false
+            }
+          ]
+        },
+        {
+          "url": "http://ihris.org/fhir/StructureDefinition/iHRISReportElement",
+          "extension": [{
+            "url": "display",
+            "valueString": "Total Completed"
+          },
+          {
+              "url": "label",
+              "valueString": "completed"
+            },
+            {
+              "url": "name",
+              "valueString": "name"
+            },
+            {
+              "url": "filter",
+              "valueBoolean": false
+            },
+            {
+              "url": "dropDownFilter",
+              "valueBoolean": false
+            }
+          ]
+        },
+        {
+          "url": "http://ihris.org/fhir/StructureDefinition/iHRISReportElement",
+          "extension": [{
+            "url": "display",
+            "valueString": "Total Interrupted"
+          },
+          {
+              "url": "label",
+              "valueString": "interrupted"
+            },
+            {
+              "url": "name",
+              "valueString": "name"
+            },
+            {
+              "url": "filter",
+              "valueBoolean": false
+            },
+            {
+              "url": "dropDownFilter",
+              "valueBoolean": false
+            }
+          ]
+        },
+        {
+          "url": "http://ihris.org/fhir/StructureDefinition/iHRISReportElement",
+          "extension": [{
+            "url": "display",
+            "valueString": "Total Expired"
+          },
+          {
+              "url": "label",
+              "valueString": "expired"
+            },
+            {
+              "url": "name",
+              "valueString": "name"
+            },
+            {
+              "url": "filter",
+              "valueBoolean": false
+            },
+            {
+              "url": "dropDownFilter",
+              "valueBoolean": false
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "code": {
+    "coding": [{
+      "system": "http://ihris.org/fhir/ValueSet/ihris-resource",
+      "code": "iHRISRelationship"
+    }],
+    "text": "iHRISRelationship"
+  },
+  "subject": {
+    "reference": "StructureDefinition/iHRISPractitioner"
+  }
+}

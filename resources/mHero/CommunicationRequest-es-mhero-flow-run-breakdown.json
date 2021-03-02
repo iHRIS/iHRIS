@@ -1,6 +1,6 @@
 {
   "resourceType": "Basic",
-  "id": "ihris-es-report-mhero-flow-run-summary",
+  "id": "ihris-es-report-mhero-flow-run-breakdown",
   "meta": {
     "versionId": "1",
     "lastUpdated": "2019-07-30T07:34:24.098+00:00",
@@ -12,16 +12,59 @@
     "url": "http://ihris.org/fhir/StructureDefinition/iHRISReportDetails",
     "extension": [{
       "url": "label",
-      "valueString": "Detailed Workflow Completion Report"
+      "valueString": "Flow Run By Practitioner"
     }, {
       "url": "name",
-      "valueString": "mheroflowrunsummary"
+      "valueString": "mheroflowrunbreakdown"
     }, {
       "url": "resource",
-      "valueString": "Basic"
+      "valueString": "CommunicationRequest"
     }, {
       "url": "query",
-      "valueString": "meta.profile=http://mhero.org/fhir/StructureDefinition/mhero-flow-run"
+      "valueString": "status=completed,entered-in-error&extension.url=http://mhero.org/fhir/StructureDefinition/mhero-comm-req-flow-starts"
+    }, {
+      "url": "http://ihris.org/fhir/StructureDefinition/iHRISReportElement",
+      "extension": [{
+        "url": "display",
+        "valueString": "Send Date"
+      }, {
+        "url": "label",
+        "valueString": "started"
+      }, {
+        "url": "name",
+        "valueString": "occurrenceDateTime"
+      },
+      {
+        "url": "filter",
+        "valueBoolean": true
+      }, {
+        "url": "dropDownFilter",
+        "valueBoolean": false
+      }]
+    }, {
+      "url": "http://ihris.org/fhir/StructureDefinition/iHRISReportElement",
+      "extension": [{
+        "url": "display",
+        "valueString": "Workflow End Date"
+      }, {
+        "url": "label",
+        "valueString": "exited_on"
+      }, {
+        "url": "name",
+        "valueString": "extension.where(url='http://mhero.org/fhir/StructureDefinition/mhero-comm-req-flow-starts').extension.where(url='exited_on').valueDateTime"
+      }]
+    }, {
+      "url": "http://ihris.org/fhir/StructureDefinition/iHRISReportElement",
+      "extension": [{
+        "url": "display",
+        "valueString": "Last Interacted on"
+      }, {
+        "url": "label",
+        "valueString": "modified_on"
+      }, {
+        "url": "name",
+        "valueString": "extension.where(url='http://mhero.org/fhir/StructureDefinition/mhero-comm-req-flow-starts').extension.where(url='modified_on').valueDateTime"
+      }]
     }, {
       "url": "http://ihris.org/fhir/StructureDefinition/iHRISReportElement",
       "extension": [{
@@ -32,7 +75,7 @@
           "valueString": "responded"
         }, {
           "url": "name",
-          "valueString": "extension.where(url='http://mhero.org/fhir/StructureDefinition/mhero-flow-run-details').extension.where(url='responded').valueBoolean"
+          "valueString": "extension.where(url='http://mhero.org/fhir/StructureDefinition/mhero-comm-req-flow-starts').extension.where(url='responded').valueString"
         },
         {
           "url": "filter",
@@ -47,49 +90,31 @@
       "url": "http://ihris.org/fhir/StructureDefinition/iHRISReportElement",
       "extension": [{
         "url": "display",
-        "valueString": "Started"
-      }, {
-        "url": "label",
-        "valueString": "started"
-      }, {
-        "url": "name",
-        "valueString": "extension.where(url='http://mhero.org/fhir/StructureDefinition/mhero-flow-run-details').extension.where(url='created_on').valueDateTime"
-      }]
-    }, {
-      "url": "http://ihris.org/fhir/StructureDefinition/iHRISReportElement",
-      "extension": [{
-        "url": "display",
-        "valueString": "Modified On"
-      }, {
-        "url": "label",
-        "valueString": "modified_on"
-      }, {
-        "url": "name",
-        "valueString": "extension.where(url='http://mhero.org/fhir/StructureDefinition/mhero-flow-run-details').extension.where(url='modified_on').valueDateTime"
-      }]
-    }, {
-      "url": "http://ihris.org/fhir/StructureDefinition/iHRISReportElement",
-      "extension": [{
-        "url": "display",
-        "valueString": "Workflow End Date"
-      }, {
-        "url": "label",
-        "valueString": "exited_on"
-      }, {
-        "url": "name",
-        "valueString": "extension.where(url='http://mhero.org/fhir/StructureDefinition/mhero-flow-run-details').extension.where(url='exited_on').valueDateTime"
-      }]
-    }, {
-      "url": "http://ihris.org/fhir/StructureDefinition/iHRISReportElement",
-      "extension": [{
-        "url": "display",
         "valueString": "Workflow Run Status"
       }, {
         "url": "label",
         "valueString": "exit_type"
       }, {
         "url": "name",
-        "valueString": "extension.where(url='http://mhero.org/fhir/StructureDefinition/mhero-flow-run-details').extension.where(url='exit_type').valueString"
+        "valueString": "extension.where(url='http://mhero.org/fhir/StructureDefinition/mhero-comm-req-flow-starts').extension.where(url='exit_type').valueString"
+      }, {
+        "url": "filter",
+        "valueBoolean": true
+      }, {
+        "url": "dropDownFilter",
+        "valueBoolean": true
+      }]
+    }, {
+      "url": "http://ihris.org/fhir/StructureDefinition/iHRISReportElement",
+      "extension": [{
+        "url": "display",
+        "valueString": "Send Status"
+      }, {
+        "url": "label",
+        "valueString": "send_status"
+      }, {
+        "url": "name",
+        "valueString": "status"
       }, {
         "url": "filter",
         "valueBoolean": true
@@ -114,15 +139,11 @@
       },
       {
         "url": "linkTo",
-        "valueString": "mheroflowrunsummary.extension.where(url='http://mhero.org/fhir/StructureDefinition/mhero-flow-run-details').extension.where(url='recipient').valueReference.reference"
+        "valueString": "mheroflowrunbreakdown.recipient.reference"
       },
       {
         "url": "multiple",
         "valueBoolean": false
-      },
-      {
-        "url": "query",
-        "valueString": "active=true"
       },
       {
         "url": "http://ihris.org/fhir/StructureDefinition/iHRISReportElement",
@@ -142,6 +163,22 @@
           "url": "dropDownFilter",
           "valueBoolean": false
         }]
+      },
+      {
+        "url": "http://ihris.org/fhir/StructureDefinition/iHRISReportElement",
+        "extension": [{
+          "url": "display",
+          "valueString": "Phone Number"
+        },
+        {
+            "url": "label",
+            "valueString": "phone"
+          },
+          {
+            "url": "name",
+            "valueString": "telecom.where(system='phone').value"
+          }
+        ]
       }
     ]
   }, {
@@ -160,7 +197,7 @@
       },
       {
         "url": "linkTo",
-        "valueString": "mheroflowrunsummary.extension.where(url='http://mhero.org/fhir/StructureDefinition/mhero-flow-run-details').extension.where(url='flow').valueReference.reference"
+        "valueString": "mheroflowrunbreakdown.payload.contentReference.reference"
       },
       {
         "url": "multiple",

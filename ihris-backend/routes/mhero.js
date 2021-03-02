@@ -1,5 +1,6 @@
-var express = require("express");
-var router = express.Router();
+const express = require("express");
+const router = express.Router();
+const moment = require("moment")
 const async = require("async");
 const axios = require("axios");
 const winston = require("winston");
@@ -105,6 +106,8 @@ router.post("/send-message", function (req, res) {
         url: "http://mhero.org/fhir/StructureDefinition/sms-cron-expression-schedule",
         extension
       })
+    } else {
+      communicationReq.occurrenceDateTime = moment().format("YYYY-MM-DDTHH:mm:ss")
     }
     let recipients = [];
     let childrenReqIDs = [];
