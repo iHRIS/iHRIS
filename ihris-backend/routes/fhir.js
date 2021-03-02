@@ -113,7 +113,8 @@ router.post("/:resource", (req, res) => {
       resource = fhirFilter.filter( req.body, allowed )
     }
     fhirAxios.create( resource ).then( (output) => {
-      fhirAudit.create( req.user, req.ip, output.resourceType + "/" + output.id, true)
+      fhirAudit.create( req.user, req.ip, output.resourceType + "/" + output.id 
+        + (output.meta.versionId ? "/_history/"+output.meta.versionId : ""), true)
       fhirSecurity.postProcess( output, uuid ).then( (results) => {
         fhirReports.delayedRun()
         return res.status(201).json(output)
@@ -198,7 +199,8 @@ router.patch("/CodeSystem/:id/:code", (req, res) => {
     }
     resource.date = new Date().toISOString()
     fhirAxios.update( resource ).then( (response) => {
-      fhirAudit.patch( req.user, req.ip, "CodeSystem/" + resource.id, true, { code: req.params.code } )
+      fhirAudit.patch( req.user, req.ip, "CodeSystem/" + resource.id
+        + (response.meta.versionId ? "/_history/"+response.meta.versionId : ""), true, { code: req.params.code } )
       incrementValueSetVersion( resource.url )
       fhirReports.delayedRun()
       return res.status(200).json({ok:true})
@@ -243,7 +245,8 @@ router.put("/:resource/:id", (req, res) => {
     }
 
     fhirAxios.update( update ).then( (resource) => {
-      fhirAudit.update( req.user, req.ip, resource.resourceType + "/" + resource.id, true )
+      fhirAudit.update( req.user, req.ip, resource.resourceType + "/" + resource.id
+        + (resource.meta.versionId ? "/_history/"+resource.meta.versionId : ""), true )
       fhirSecurity.postProcess( resource, uuid ).then( (results) => {
         fhirReports.delayedRun()
         return res.status(200).json(resource)
