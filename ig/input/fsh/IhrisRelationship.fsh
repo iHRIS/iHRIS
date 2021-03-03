@@ -19,6 +19,7 @@ Description:    "Defines the primary resource of the relationship"
       label 0..1 MS and
       resource 1..1 MS and
       query 0..1 MS and
+      cachingDisabled 0..1 MS and
       displayCheckbox 0..1 MS and
       IhrisReportElement named reportelement 0..* MS
 * extension[name].value[x] only string
@@ -33,6 +34,9 @@ Description:    "Defines the primary resource of the relationship"
 * extension[query].value[x] only string
 * extension[query].valueString 1..1
 * extension[query].valueString ^label = "FHIR path to limit instances of this resource"
+* extension[cachingDisabled].value[x] only boolean
+* extension[cachingDisabled].valueBoolean 1..1
+* extension[cachingDisabled].valueBoolean ^label = "Disable caching data for this relationship"
 * extension[displayCheckbox].value[x] only boolean
 * extension[displayCheckbox].valueBoolean 1..1
 * extension[displayCheckbox].valueBoolean ^label = "Whether rows of the report are selectable or not"

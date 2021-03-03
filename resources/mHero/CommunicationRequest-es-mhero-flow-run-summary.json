@@ -25,16 +25,19 @@
         }, {
           "url": "resource",
           "valueString": "Bundle"
+        }, {
+          "url": "cachingDisabled",
+          "valueBoolean": true
         },
         {
           "url": "http://ihris.org/fhir/StructureDefinition/iHRISReportElement",
           "extension": [{
             "url": "display",
-            "valueString": "Flow/Message Name"
+            "valueString": "Workflow"
           },
           {
               "url": "label",
-              "valueString": "WorkflowName"
+              "valueString": "flowName"
             },
             {
               "url": "name",
