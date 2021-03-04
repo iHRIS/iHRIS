@@ -123,6 +123,7 @@
   </v-container>
 </template>
 <script>
+import { eventBus } from "@/main";
 export default {
   props: {
     progressDialog: {
@@ -222,6 +223,7 @@ export default {
           clearInterval(this.progressReqTimer)
           this.clearProgressData()
           statusText = 'Completed'
+          eventBus.$emit('mheroProcessingCompleted')
         }
         this.progressData = {
           step: higherStep,

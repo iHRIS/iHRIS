@@ -39,10 +39,10 @@ export default {
             } )
           } else {
             Vue.component('ihris-template', {
-              name: 'ihris-template', 
-              data: function() { 
-                return { 
-                  fhirId: pageId, 
+              name: 'ihris-template',
+              data: function() {
+                return {
+                  fhirId: pageId,
                   isEdit: false,
                   sectionMenu: data.data.sectionMenu,
                   subFields: data.data.subFields,
@@ -50,9 +50,9 @@ export default {
                   actions: data.data.actions,
                   links: data.data.links,
                   constraints: data.data.constraints
-                } 
-              }, 
-              components: { 
+                }
+              },
+              components: {
                 "ihris-resource": () => import(/* webpackChunkName: "fhir-primary" */ "@/components/ihris/ihris-resource" ),
                 "ihris-codesystem": () => import(/* webpackChunkName: "fhir-codesystem" */ "@/components/ihris/ihris-codesystem" ),
                 "ihris-section": () => import(/* webpackChunkName: "fhir-primary" */ "@/components/ihris/ihris-section" ),
@@ -85,6 +85,9 @@ export default {
                 setEdit: function(val) {
                   this.isEdit = val
                 }
+              },
+              created() {
+                console.log(data.template);
               }
             } )
           }
@@ -105,7 +108,7 @@ export default {
   components: {
   },
   beforeCreate: function() {
-    pageId = this.$route.params.id 
+    pageId = this.$route.params.id
     page = this.$route.params.page
     Vue.component('ihris-template', { template: '<div>Loading...</div>' } )
   }

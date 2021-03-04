@@ -61,7 +61,7 @@
           <v-btn
             icon
             dark
-            @click.native="statusDialog.enable = false"
+            @click.native="confirmSendingDialog = false"
           >
             <v-icon>mdi-close</v-icon>
           </v-btn>

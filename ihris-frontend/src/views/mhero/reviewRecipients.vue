@@ -8,6 +8,56 @@
     />
     <v-dialog
       persistent
+      v-model="confirmSendingDialog"
+      max-width="600"
+    >
+      <v-card>
+        <v-toolbar
+          color="primary"
+          dark
+        >
+          <v-toolbar-title>
+            <v-icon>mdi-alert-circle-outline</v-icon>
+            Confirmation
+          </v-toolbar-title>
+          <v-spacer></v-spacer>
+          <v-btn
+            icon
+            dark
+            @click.native="confirmSendingDialog = false"
+          >
+            <v-icon>mdi-close</v-icon>
+          </v-btn>
+        </v-toolbar>
+        <v-card-text>
+          <template v-if="communicationType == 'flow'">
+            <b>Are you sure you want to start flow to below recipient(s)?</b>
+          </template>
+          <template v-else-if="communicationType == 'sms'">
+            <b>Are you sure you want to send message to below recipient(s)?</b>
+          </template>
+        </v-card-text>
+        <v-card-actions>
+          <v-btn
+            dark
+            class="white--font"
+            color="error"
+            @click="confirmSendingDialog = false"
+          >
+          No</v-btn>
+          <v-spacer />
+          <v-btn
+            :disabled="sending"
+            dark
+            class="white--font"
+            color="green"
+            @click="send"
+          >Yes</v-btn>
+        </v-card-actions>
+      </v-card>
+    </v-dialog>
+    <v-dialog
+      persistent
       v-model="statusDialog.enable"
       max-width="400"
     >
@@ -232,9 +282,9 @@
         ><v-icon left>mdi-pencil</v-icon> Edit Recipients</v-btn>
         <v-spacer></v-spacer>
         <v-btn
-          :disabled="!canSend"
+          :disabled="!canSend || sending"
           normal
-          @click="send"
+          @click="confirmSendingDialog = true"
           rounded
         >
           <v-icon left>mdi-message</v-icon>
@@ -253,6 +303,8 @@ import { eventBus } from "@/main";
 export default {
   props: ["headers", "practitioners", "terms", "termsConditions", "sendToMatchingTerms", "reportData"],
   data: vm => ({
+    sending: false,
+    confirmSendingDialog: false,
     builtTerms: {},
     chars: 0,
     totalChars: 160,
@@ -295,6 +347,11 @@ export default {
       this.chars = this.sms.length
     },
     send() {
+      if(this.sending) {
+        return
+      }
+      this.sending = true
+      this.confirmSendingDialog = false
       this.progressData = {}
       this.sendStatus = {}
       let practitioners = [];
@@ -458,6 +515,9 @@ export default {
   created() {
     eventBus.$on('builtESTerms', (val) => {
       this.builtTerms = val
+    })
+    eventBus.$on('mheroProcessingCompleted', () => {
+      this.sending = false
     })
     fetch("/mhero/workflows").then(response => {
       response.json().then(data => {
