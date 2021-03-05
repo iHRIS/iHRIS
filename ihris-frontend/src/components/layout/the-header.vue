@@ -44,7 +44,7 @@
           :key="auth.id"
         >
           <v-list-item-title>
-            <auth-button :data="auth" v-on:loggedin="$store.commit('login', $event)"></auth-button>
+            <auth-button :data="auth" v-on:loggedin="$emit('loggedin', $event)"></auth-button>
           </v-list-item-title>
         </v-list-item>
       </v-list>
@@ -105,7 +105,8 @@ export default {
       this.loading = true
       fetch("/auth/logout").then(() => {
         this.loading = false
-        this.$store.commit('logout')
+        //this.$store.commit('logout')
+        this.$emit('loggedout')
         if ( force ) {
           this.$store.commit('setMessage', { type: 'warning', text: 'You have been logged out due to inactivity.', timeout: 3600000 } )
         } else {

@@ -14,10 +14,31 @@ const getUKey = () => {
   return Math.random().toString(36).replace(/^[^a-z]+/,'') + Math.random().toString(36).substring(2,15)
 }
 
+const filterNavigation = ( user, nav, prefix ) => {
+  for( let key of Object.keys(nav.menu) ) {
+    let instance
+    if ( prefix ) {
+      instance = prefix +":"+ key
+    } else {
+      instance = key
+    }
+    if ( nav.menu[key].menu ) {
+      filterNavigation( user, nav.menu[key], instance )
+      if ( Object.keys(nav.menu[key].menu).length === 0 ) {
+        delete nav.menu[key]
+      }
+    } else {
+      if( !user.hasPermissionByName( "special", "navigation", instance ) ) {
+        delete nav.menu[key]
+      }
+    }
+  }
+}
+
 /* GET home page. */
 router.get('/site', function(req, res) {
   const defaultUser = nconf.get("user:loggedout") || "ihris-user-loggedout"
-  let site = nconf.get("site") || {}
+  let site = JSON.parse(JSON.stringify(nconf.get("site") || {}))
   if ( nconf.getBool("security:disabled") ) {
     site.security = {disabled: true}
   }
@@ -29,8 +50,10 @@ router.get('/site', function(req, res) {
       site.user.loggedin = true
       site.user.name = req.user.resource.name[0].text
     }
+    filterNavigation( req.user, site.nav )
   } else {
     site.user = { loggedin: false }
+    delete site.nav
   }
   //site.updated = new Date().toISOString()
   res.status(200).json( site )
