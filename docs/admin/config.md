@@ -111,7 +111,7 @@ IHRIS_FHIR__BASE=http://locahost:8080/hapi/fhir
    * initialValue = "resource/id" (e.g. Location/TF)
    * readOnlyIfSet = bool
    * user_filter
-#* resource = "resource" (e.g. PractitionerRole) default is from field_def
+    * resource = "resource" (e.g. PractitionerRole) default is from field_def
     * regex = "regexp" (e.g. "related-location=(.+)")
     * replace = "replace" (e.g. "$1")
 * shortname

@@ -59,6 +59,8 @@ spring:
 
 hapi:
   fhir:
+    fhir_version: R4
+    enable_index_missing_fields: true
     tester:
       id: home
       name: iHRIS

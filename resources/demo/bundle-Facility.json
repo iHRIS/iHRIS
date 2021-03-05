@@ -7,8 +7,8 @@
         "resourceType": "Organization",
         "meta": {
           "profile": [
-            "http://ihe.net/fhir/StructureDefinition/IHE_mCSD_Organization",
-            "http://ihe.net/fhir/StructureDefinition/IHE_mCSD_FacilityOrganization"
+            "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Organization",
+            "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.FacilityOrganization"
           ]
         },
         "id": "TF.W.RSH.1",
@@ -45,8 +45,8 @@
         "resourceType": "Location",
         "meta": {
           "profile": [
-            "http://ihe.net/fhir/StructureDefinition/IHE_mCSD_Location",
-            "http://ihe.net/fhir/StructureDefinition/IHE_mCSD_FacilityLocation"
+            "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location",
+            "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.FacilityLocation"
           ]
         },
         "id": "TF.W.RSH.1",
@@ -96,8 +96,8 @@
         "resourceType": "Organization",
         "meta": {
           "profile": [
-            "http://ihe.net/fhir/StructureDefinition/IHE_mCSD_Organization",
-            "http://ihe.net/fhir/StructureDefinition/IHE_mCSD_FacilityOrganization"
+            "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Organization",
+            "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.FacilityOrganization"
           ]
         },
         "id": "TF.W.NYG.10",
@@ -134,8 +134,8 @@
         "resourceType": "Location",
         "meta": {
           "profile": [
-            "http://ihe.net/fhir/StructureDefinition/IHE_mCSD_Location",
-            "http://ihe.net/fhir/StructureDefinition/IHE_mCSD_FacilityLocation"
+            "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location",
+            "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.FacilityLocation"
           ]
         },
         "id": "TF.W.NYG.10",
@@ -185,8 +185,8 @@
         "resourceType": "Organization",
         "meta": {
           "profile": [
-            "http://ihe.net/fhir/StructureDefinition/IHE_mCSD_Organization",
-            "http://ihe.net/fhir/StructureDefinition/IHE_mCSD_FacilityOrganization"
+            "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Organization",
+            "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.FacilityOrganization"
           ]
         },
         "id": "TF.S.NYS.11",
@@ -223,8 +223,8 @@
         "resourceType": "Location",
         "meta": {
           "profile": [
-            "http://ihe.net/fhir/StructureDefinition/IHE_mCSD_Location",
-            "http://ihe.net/fhir/StructureDefinition/IHE_mCSD_FacilityLocation"
+            "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location",
+            "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.FacilityLocation"
           ]
         },
         "id": "TF.S.NYS.11",
@@ -274,8 +274,8 @@
         "resourceType": "Organization",
         "meta": {
           "profile": [
-            "http://ihe.net/fhir/StructureDefinition/IHE_mCSD_Organization",
-            "http://ihe.net/fhir/StructureDefinition/IHE_mCSD_FacilityOrganization"
+            "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Organization",
+            "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.FacilityOrganization"
           ]
         },
         "id": "TF.CC.CAP.12",
@@ -312,8 +312,8 @@
         "resourceType": "Location",
         "meta": {
           "profile": [
-            "http://ihe.net/fhir/StructureDefinition/IHE_mCSD_Location",
-            "http://ihe.net/fhir/StructureDefinition/IHE_mCSD_FacilityLocation"
+            "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location",
+            "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.FacilityLocation"
           ]
         },
         "id": "TF.CC.CAP.12",
@@ -363,8 +363,8 @@
         "resourceType": "Organization",
         "meta": {
           "profile": [
-            "http://ihe.net/fhir/StructureDefinition/IHE_mCSD_Organization",
-            "http://ihe.net/fhir/StructureDefinition/IHE_mCSD_FacilityOrganization"
+            "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Organization",
+            "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.FacilityOrganization"
           ]
         },
         "id": "TF.S.HGM.13",
@@ -401,8 +401,8 @@
         "resourceType": "Location",
         "meta": {
           "profile": [
-            "http://ihe.net/fhir/StructureDefinition/IHE_mCSD_Location",
-            "http://ihe.net/fhir/StructureDefinition/IHE_mCSD_FacilityLocation"
+            "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location",
+            "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.FacilityLocation"
           ]
         },
         "id": "TF.S.HGM.13",
@@ -452,8 +452,8 @@
         "resourceType": "Organization",
         "meta": {
           "profile": [
-            "http://ihe.net/fhir/StructureDefinition/IHE_mCSD_Organization",
-            "http://ihe.net/fhir/StructureDefinition/IHE_mCSD_FacilityOrganization"
+            "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Organization",
+            "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.FacilityOrganization"
           ]
         },
         "id": "TF.N.BRB.14",
@@ -490,8 +490,8 @@
         "resourceType": "Location",
         "meta": {
           "profile": [
-            "http://ihe.net/fhir/StructureDefinition/IHE_mCSD_Location",
-            "http://ihe.net/fhir/StructureDefinition/IHE_mCSD_FacilityLocation"
+            "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location",
+            "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.FacilityLocation"
           ]
         },
         "id": "TF.N.BRB.14",
@@ -541,8 +541,8 @@
         "resourceType": "Organization",
         "meta": {
           "profile": [
-            "http://ihe.net/fhir/StructureDefinition/IHE_mCSD_Organization",
-            "http://ihe.net/fhir/StructureDefinition/IHE_mCSD_FacilityOrganization"
+            "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Organization",
+            "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.FacilityOrganization"
           ]
         },
         "id": "TF.N.BRB.17",
@@ -579,8 +579,8 @@
         "resourceType": "Location",
         "meta": {
           "profile": [
-            "http://ihe.net/fhir/StructureDefinition/IHE_mCSD_Location",
-            "http://ihe.net/fhir/StructureDefinition/IHE_mCSD_FacilityLocation"
+            "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location",
+            "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.FacilityLocation"
           ]
         },
         "id": "TF.N.BRB.17",
@@ -630,8 +630,8 @@
         "resourceType": "Organization",
         "meta": {
           "profile": [
-            "http://ihe.net/fhir/StructureDefinition/IHE_mCSD_Organization",
-            "http://ihe.net/fhir/StructureDefinition/IHE_mCSD_FacilityOrganization"
+            "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Organization",
+            "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.FacilityOrganization"
           ]
         },
         "id": "TF.CC.CAP.2",
@@ -668,8 +668,8 @@
         "resourceType": "Location",
         "meta": {
           "profile": [
-            "http://ihe.net/fhir/StructureDefinition/IHE_mCSD_Location",
-            "http://ihe.net/fhir/StructureDefinition/IHE_mCSD_FacilityLocation"
+            "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location",
+            "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.FacilityLocation"
           ]
         },
         "id": "TF.CC.CAP.2",
@@ -719,8 +719,8 @@
         "resourceType": "Organization",
         "meta": {
           "profile": [
-            "http://ihe.net/fhir/StructureDefinition/IHE_mCSD_Organization",
-            "http://ihe.net/fhir/StructureDefinition/IHE_mCSD_FacilityOrganization"
+            "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Organization",
+            "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.FacilityOrganization"
           ]
         },
         "id": "TF.N.MSZ.3",
@@ -757,8 +757,8 @@
         "resourceType": "Location",
         "meta": {
           "profile": [
-            "http://ihe.net/fhir/StructureDefinition/IHE_mCSD_Location",
-            "http://ihe.net/fhir/StructureDefinition/IHE_mCSD_FacilityLocation"
+            "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location",
+            "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.FacilityLocation"
           ]
         },
         "id": "TF.N.MSZ.3",
@@ -808,8 +808,8 @@
         "resourceType": "Organization",
         "meta": {
           "profile": [
-            "http://ihe.net/fhir/StructureDefinition/IHE_mCSD_Organization",
-            "http://ihe.net/fhir/StructureDefinition/IHE_mCSD_FacilityOrganization"
+            "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Organization",
+            "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.FacilityOrganization"
           ]
         },
         "id": "TF.S.GIS.4",
@@ -846,8 +846,8 @@
         "resourceType": "Location",
         "meta": {
           "profile": [
-            "http://ihe.net/fhir/StructureDefinition/IHE_mCSD_Location",
-            "http://ihe.net/fhir/StructureDefinition/IHE_mCSD_FacilityLocation"
+            "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location",
+            "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.FacilityLocation"
           ]
         },
         "id": "TF.S.GIS.4",
@@ -897,8 +897,8 @@
         "resourceType": "Organization",
         "meta": {
           "profile": [
-            "http://ihe.net/fhir/StructureDefinition/IHE_mCSD_Organization",
-            "http://ihe.net/fhir/StructureDefinition/IHE_mCSD_FacilityOrganization"
+            "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Organization",
+            "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.FacilityOrganization"
           ]
         },
         "id": "TF.E.RWB.5",
@@ -935,8 +935,8 @@
         "resourceType": "Location",
         "meta": {
           "profile": [
-            "http://ihe.net/fhir/StructureDefinition/IHE_mCSD_Location",
-            "http://ihe.net/fhir/StructureDefinition/IHE_mCSD_FacilityLocation"
+            "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location",
+            "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.FacilityLocation"
           ]
         },
         "id": "TF.E.RWB.5",
@@ -986,8 +986,8 @@
         "resourceType": "Organization",
         "meta": {
           "profile": [
-            "http://ihe.net/fhir/StructureDefinition/IHE_mCSD_Organization",
-            "http://ihe.net/fhir/StructureDefinition/IHE_mCSD_FacilityOrganization"
+            "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Organization",
+            "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.FacilityOrganization"
           ]
         },
         "id": "TF.E.KAH.6",
@@ -1024,8 +1024,8 @@
         "resourceType": "Location",
         "meta": {
           "profile": [
-            "http://ihe.net/fhir/StructureDefinition/IHE_mCSD_Location",
-            "http://ihe.net/fhir/StructureDefinition/IHE_mCSD_FacilityLocation"
+            "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location",
+            "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.FacilityLocation"
           ]
         },
         "id": "TF.E.KAH.6",
@@ -1075,8 +1075,8 @@
         "resourceType": "Organization",
         "meta": {
           "profile": [
-            "http://ihe.net/fhir/StructureDefinition/IHE_mCSD_Organization",
-            "http://ihe.net/fhir/StructureDefinition/IHE_mCSD_FacilityOrganization"
+            "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Organization",
+            "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.FacilityOrganization"
           ]
         },
         "id": "TF.N.GYU.7",
@@ -1113,8 +1113,8 @@
         "resourceType": "Location",
         "meta": {
           "profile": [
-            "http://ihe.net/fhir/StructureDefinition/IHE_mCSD_Location",
-            "http://ihe.net/fhir/StructureDefinition/IHE_mCSD_FacilityLocation"
+            "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location",
+            "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.FacilityLocation"
           ]
         },
         "id": "TF.N.GYU.7",
@@ -1164,8 +1164,8 @@
         "resourceType": "Organization",
         "meta": {
           "profile": [
-            "http://ihe.net/fhir/StructureDefinition/IHE_mCSD_Organization",
-            "http://ihe.net/fhir/StructureDefinition/IHE_mCSD_FacilityOrganization"
+            "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Organization",
+            "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.FacilityOrganization"
           ]
         },
         "id": "TF.E.GAT.8",
@@ -1202,8 +1202,8 @@
         "resourceType": "Location",
         "meta": {
           "profile": [
-            "http://ihe.net/fhir/StructureDefinition/IHE_mCSD_Location",
-            "http://ihe.net/fhir/StructureDefinition/IHE_mCSD_FacilityLocation"
+            "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location",
+            "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.FacilityLocation"
           ]
         },
         "id": "TF.E.GAT.8",
@@ -1253,8 +1253,8 @@
         "resourceType": "Organization",
         "meta": {
           "profile": [
-            "http://ihe.net/fhir/StructureDefinition/IHE_mCSD_Organization",
-            "http://ihe.net/fhir/StructureDefinition/IHE_mCSD_FacilityOrganization"
+            "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Organization",
+            "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.FacilityOrganization"
           ]
         },
         "id": "TF.W.KAR.9",
@@ -1291,8 +1291,8 @@
         "resourceType": "Location",
         "meta": {
           "profile": [
-            "http://ihe.net/fhir/StructureDefinition/IHE_mCSD_Location",
-            "http://ihe.net/fhir/StructureDefinition/IHE_mCSD_FacilityLocation"
+            "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location",
+            "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.FacilityLocation"
           ]
         },
         "id": "TF.W.KAR.9",
