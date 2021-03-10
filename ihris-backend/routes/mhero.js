@@ -254,7 +254,8 @@ router.post('/subscribe-contact-groups', (req, res) => {
       }
       fhirAxios.update(groupResource).then((response) => {
         return nxtSubscr();
-      }).catch(() => {
+      }).catch((err) => {
+        console.log(err);
         errorOccured = true
         return nxtSubscr();
       })

@@ -93,9 +93,11 @@ export default {
     }
   },
   mounted: function() {
-    this.filterDataType = this.reportData.mappings.mappings.properties[this.expression].type
-    this.loading = true;
-    if(this.isDropDown) {
+    if(this.reportData.mappings.mappings.properties[this.expression]) {
+      this.filterDataType = this.reportData.mappings.mappings.properties[this.expression].type
+    }
+    if(this.isDropDown && this.filterDataType) {
+      this.loading = true;
       let url = `/es/populateFilter/${this.reportData.indexName}/${this.expression}?dataType=${this.filterDataType}`
       fetch(url, {
         method: 'GET'

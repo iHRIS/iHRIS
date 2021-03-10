@@ -162,7 +162,7 @@ export default {
               let termArr = this.terms[sTerm].split(' ')
               for(let tm of termArr) {
                 let query = {}
-                if(this.reportData.mappings.mappings.properties[esFieldName].type === 'text') {
+                if(this.reportData.mappings.mappings.properties[esFieldName] && this.reportData.mappings.mappings.properties[esFieldName].type === 'text') {
                   query.wildcard = {}
                   query.wildcard[esFieldName] = tm + '*'
                 } else {
@@ -229,7 +229,7 @@ export default {
         let sortCol = this.options.sortBy[index]
         let sort = {}
         let sortColESName
-        if(this.reportData.mappings.mappings.properties[sortCol].type === 'text') {
+        if(this.reportData.mappings.mappings.properties[sortCol] && this.reportData.mappings.mappings.properties[sortCol].type === 'text') {
           sortColESName = sortCol + '.keyword'
         } else {
           sortColESName = sortCol

@@ -59,7 +59,7 @@ async function startUp() {
           } )
         }
       }
-    } 
+    }
   }
 
 
