@@ -1,7 +1,47 @@
 <template>
   <ihris-element :edit="edit" :loading="loading">
     <template #form>
+      <v-menu 
+        v-if="displayType == 'tree'"
+        ref="menu"
+        v-model="menu"
+        :close-on-content-click="false"
+        transition="scale-transition"
+        offset-y
+        min-width="290px"
+        max-height="500px"
+        >
+        <template v-slot:activator="{ on }">
+          <v-text-field
+            v-model="displayValue"
+            :label="display"
+            readonly
+            v-on="on"
+            outlined
+            hide-details="auto"
+            :rules="rules"
+            :error-messages="errors"
+            :loading="loading"
+            dense>
+            <template #label>{{display}} <span v-if="required" class="red--text font-weight-bold">*</span></template>
+          </v-text-field>
+        </template>
+        <v-card v-if="!((disabled) || (preset && $route.name === 'resource_add'))">
+          <v-treeview
+            :active.sync="active"
+            :items="items"
+            :load-children="fetchChildren"
+            :open.sync="open"
+            item-disabled="locked"
+            activatable
+            :multiple-active="false"
+            selection-type="independent"
+            :loading="loading"
+            ></v-treeview>
+        </v-card>
+      </v-menu>
       <v-autocomplete
+        v-else
         v-model="select"
         :loading="loading"
         :items="items"
@@ -35,10 +75,11 @@
 import IhrisElement from "../ihris/ihris-element.vue"
 
 const querystring = require('querystring')
+const fhirurl = "http://hl7.org/fhir/StructureDefinition/"
 export default {
   name: "fhir-reference",
   props: ["field","label","sliceName","targetProfile","targetResource","min","max","base-min","base-max",
-    "slotProps","path","sub-fields","edit","readOnlyIfSet","constraints"],
+    "slotProps","path","sub-fields","edit","readOnlyIfSet","constraints", "displayType", "initialValue", "overrideValue"],
   components: {
     IhrisElement
   },
@@ -49,6 +90,7 @@ export default {
       qField: "valueReference",
       loading: false,
       search: "",
+      menu: false,
       items: [],
       select: "",
       resource: "",
@@ -57,7 +99,11 @@ export default {
       preset: false,
       disabled: false,
       errors: [],
-      lockWatch: false
+      lockWatch: false,
+      active: [],
+      open: [],
+      treeLookup: {},
+      allAllowed: true
     }
   },
   created: function() {
@@ -85,12 +131,30 @@ export default {
     select: function(val) {
       this.value.reference = val
       this.getDisplay()
+    },
+    active: function() {
+      if ( this.active.length ) {
+        this.select = this.active[0]
+        this.displayValue = this.treeLookup[ this.select ]
+      } else {
+        this.select = undefined
+        this.displayValue = ""
+      }
+      this.menu = false
     }
   },
   methods: {
     setupData: function() {
       if ( this.targetProfile && this.targetResource ) {
+        if ( this.targetProfile.replace( fhirurl, "" ) === this.targetResource ) {
+          this.allAllowed = true
+        } else {
+          this.allAllowed = false
+        }
         this.resource = this.targetResource
+      }
+      if ( this.displayType === "tree" ) {
+        this.setupTreeItems()
       }
       if ( this.slotProps && this.slotProps.source ) {
         this.source = { path: this.slotProps.source.path+"."+this.field, data: {} }
@@ -109,6 +173,107 @@ export default {
       }
       this.disabled = this.readOnlyIfSet && this.preset
     },
+    setupTreeItems: function() {
+      let treetop = this.initialValue
+      if ( this.overrideValue ) {
+        treetop = this.overrideValue
+      }
+      this.loading = true
+      let params = {}
+      if ( treetop ) {
+        params = { "partof": treetop }
+      } else {
+        params = { "partof:missing": true }
+      }
+      params._count = 500
+      let url = "/fhir/"+this.resource+"?"+querystring.stringify( params )
+      this.items = []
+      this.addItems( url, this.items )
+
+    },
+    checkChildren: function(item) {
+      let params = { "partof": item.id, "_summary": "count" }
+      let url = "/fhir/"+this.resource+"?"+querystring.stringify( params )
+      return new Promise( resolve => {
+        fetch( url ).then( response => {
+          if ( response.ok ) {
+            response.json().then( data => {
+              if ( data.total && data.total > 0 ) {
+                item.children = []
+              }
+              resolve()
+            } ).catch( err => {
+              console.log("failed to check children for",url,err)
+              resolve()
+            } )
+          } else {
+            console.log("failed to check children for",url,response.status)
+            resolve()
+          }
+        } ).catch( err => {
+          console.log("failed to check children for",url,err)
+          resolve()
+        } )
+      } )
+    },
+    addItems: function(url, items) {
+      fetch( url ).then( response => {
+        if ( response.ok ) {
+          response.json().then( async data => {
+            if ( data.entry && data.entry.length > 0 ) {
+              for( let entry of data.entry ) {
+                let locked = this.allAllowed ? false : !entry.resource.meta.profile.includes( this.targetProfile )
+                let item = { 
+                  id: entry.resource.resourceType+"/"+entry.resource.id,
+                  name: entry.resource.name,
+                  locked: locked
+                }
+                await this.checkChildren( item )
+                this.treeLookup[ item.id ] = item.name
+                items.push( item )
+              }
+            }
+            if ( data.link ) {
+              let next = data.link.find( link => link.relation === "next" )
+              if ( next ) {
+                this.addItems( next.url, items )
+              } else {
+                this.loading = false
+              }
+            } else {
+              this.loading = false
+            }
+          } ).catch( err => {
+            console.log("Failed to add items for",url,err)
+            this.loading = false
+          } )
+        } else {
+          console.log("Failed to add items for",url,response.status)
+          this.loading = false
+        }
+      } ).catch( err => {
+        console.log("Failed to add items for",url,err)
+        this.loading = false
+      } )
+    },
+    fetchChildren: function(item) {
+      let params = {}
+      params = { "partof": item.id, _count: 500 }
+      let url = "/fhir/"+this.resource+"?"+querystring.stringify( params )
+      this.loading = true
+      this.addItems( url, item.children )
+      return new Promise( resolve => {
+        let count = 0
+        const checkLoading = () => {
+          if ( !this.loading || count++ > 100) {
+            resolve()
+          } else {
+            setTimeout( checkLoading, 200 )
+          }
+        }
+        checkLoading()
+      } )
+    },
     querySelections: function( val ) {
       this.loading = true
       let params = { "name:contains": val }
@@ -120,11 +285,13 @@ export default {
         if ( response.ok ) {
           response.json().then( async (data) => {
             this.items = []
-            for( let entry of data.entry ) {
-              let ref = entry.resource.resourceType+"/"+entry.resource.id
-              let item = { value: ref }
-              item.text = await this.$fhirutils.resourceLookup( ref )
-              this.items.push( item )
+            if ( data.entry && data.entry.length ) {
+              for( let entry of data.entry ) {
+                let ref = entry.resource.resourceType+"/"+entry.resource.id
+                let item = { value: ref }
+                item.text = await this.$fhirutils.resourceLookup( ref )
+                this.items.push( item )
+              }
             }
             this.loading = false
           } )
@@ -139,7 +306,9 @@ export default {
         this.loading = true
         this.$fhirutils.resourceLookup( this.value.reference ).then( display => {
           this.displayValue = display
-          this.items.push( {text: display, value: this.value.reference} )
+          if ( this.displayType !== "tree" ) {
+            this.items.push( {text: display, value: this.value.reference} )
+          }
           this.loading = false
         } )
       }

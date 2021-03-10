@@ -14,10 +14,31 @@ const getUKey = () => {
   return Math.random().toString(36).replace(/^[^a-z]+/,'') + Math.random().toString(36).substring(2,15)
 }
 
+const filterNavigation = ( user, nav, prefix ) => {
+  for( let key of Object.keys(nav.menu) ) {
+    let instance
+    if ( prefix ) {
+      instance = prefix +":"+ key
+    } else {
+      instance = key
+    }
+    if ( nav.menu[key].menu ) {
+      filterNavigation( user, nav.menu[key], instance )
+      if ( Object.keys(nav.menu[key].menu).length === 0 ) {
+        delete nav.menu[key]
+      }
+    } else {
+      if( !user.hasPermissionByName( "special", "navigation", instance ) ) {
+        delete nav.menu[key]
+      }
+    }
+  }
+}
+
 /* GET home page. */
 router.get('/site', function(req, res) {
   const defaultUser = nconf.get("user:loggedout") || "ihris-user-loggedout"
-  let site = nconf.get("site") || {}
+  let site = JSON.parse(JSON.stringify(nconf.get("site") || {}))
   if ( nconf.getBool("security:disabled") ) {
     site.security = {disabled: true}
   }
@@ -29,8 +50,10 @@ router.get('/site', function(req, res) {
       site.user.loggedin = true
       site.user.name = req.user.resource.name[0].text
     }
+    filterNavigation( req.user, site.nav )
   } else {
     site.user = { loggedin: false }
+    delete site.nav
   }
   //site.updated = new Date().toISOString()
   res.status(200).json( site )
@@ -83,6 +106,17 @@ const setupOrder = ( fields, sectionOrder ) => {
       sectionOrder[ordId] = []
     }
     sectionOrder[ordId].push(ordField)
+  }
+}
+
+const processUserFilter = ( user, resource, regex_str, replace ) => {
+  let filters = user.getFilter( resource )
+  try { 
+    let regex = new RegExp( regex_str )
+    let output = filters.find( filter => regex.test( filter ) ).replace( regex, replace )
+    return output
+  } catch( err ) {
+    return undefined
   }
 }
 
@@ -340,7 +374,7 @@ router.get('/page/:page/:type?', function(req, res) {
 
 
             let attrs = [ "field", "sliceName", "targetProfile", "targetResource", "profile", "min", "max", "base-min",
-              "base-max", "label", "path", "binding", "calendar" ]
+              "base-max", "label", "path", "binding", "calendar", "initialValue" ]
             const minmax = [ "Date", "DateTime", "Instant", "Time", "Decimal", "Integer", "PositiveInt",
               "UnsignedInt", "Quantity" ]
             for( let mm of minmax ) {
@@ -363,12 +397,46 @@ router.get('/page/:page/:type?', function(req, res) {
               attrs.unshift("id")
             }
             output += "<fhir-"+eleName +" :slotProps=\"slotProps\" :edit=\"isEdit\""
+            let displayType, readOnlyIfSet
             if ( pageFields.hasOwnProperty(fields[field].id) ) {
               if ( pageFields[ fields[field].id ].type ) {
-                output += " displayType=\""+ pageFields[ fields[field].id ].type +"\""
+                //output += " displayType=\""+ pageFields[ fields[field].id ].type +"\""
+                displayType = pageFields[ fields[field].id ].type 
               }
               if ( pageFields[ fields[field].id ].readOnlyIfSet ) {
-                output += " :readOnlyIfSet=\""+ pageFields[ fields[field].id ].readOnlyIfSet +"\""
+                readOnlyIfSet = true
+              }
+            }
+            if ( !readOnlyIfSet && nconf.get( "defaults:fields:"+fields[field].id+":readOnlyIfSet" ) ) {
+              readOnlyIfSet = true
+            }
+            if ( readOnlyIfSet ) {
+              output += " :readOnlyIfSet=\"true\""
+            }
+            if ( !displayType ) {
+              if ( nconf.get("defaults:fields:"+fields[field].id+":type" ) ) {
+                displayType = nconf.get("defaults:fields:"+fields[field].id+":type" )
+              }
+            }
+            if ( displayType ) {
+              output += " displayType=\""+ displayType +"\""
+            }
+            if ( nconf.get("defaults:fields:"+fields[field].id+":user_filter") ) {
+              let resource = fields[field].id.substring( 0, fields[field].id.indexOf('.') )
+              let regex = "(.+)"
+              let replace = "$1"
+              if ( nconf.get("defaults:fields:"+fields[field].id+":user_filter:regex") ) {
+                regex = nconf.get("defaults:fields:"+fields[field].id+":user_filter:regex") 
+              }
+              if ( nconf.get("defaults:fields:"+fields[field].id+":user_filter:replace") ) {
+                replace = nconf.get("defaults:fields:"+fields[field].id+":user_filter:replace") 
+              }
+              if ( nconf.get("defaults:fields:"+fields[field].id+":user_filter:resource") ) {
+                resource = nconf.get("defaults:fields:"+fields[field].id+":user_filter:resource") 
+              }
+              let overrideValue = processUserFilter( req.user, resource, regex, replace )
+              if ( overrideValue ) {
+                output += " overrideValue=\""+overrideValue+"\""
               }
             }
             if ( fields[field].hasOwnProperty("constraint") ) {
@@ -391,6 +459,9 @@ router.get('/page/:page/:type?', function(req, res) {
                 } else {
                   output += " "+attr+"=\""+fields[field][attr]+"\""
                 }
+              } else if ( nconf.get("defaults:fields:"+fields[field].id+":"+attr) ) {
+                output += " "+attr+"=\""
+                  +nconf.get("defaults:fields:"+fields[field].id+":"+attr)+"\""
               } else if ( nconf.get("defaults:components:"+eleName+":"+attr) ) {
                 output += " "+attr+"=\""
                   +nconf.get("defaults:components:"+eleName+":"+attr)+"\""
@@ -757,6 +828,40 @@ router.get('/questionnaire/:questionnaire', function(req, res) {
                 }
               }
             }
+
+            if ( !displayType ) {
+              if ( nconf.get("defaults:fields:"+field.id+":type" ) ) {
+                displayType = nconf.get("defaults:fields:"+field.id+":type" )
+              }
+            }
+
+            if ( nconf.get("defaults:fields:"+field.id+":user_filter") ) {
+              let resource = field.id.substring( 0, field.id.indexOf('.') )
+              let regex = "(.+)"
+              let replace = "$1"
+              if ( nconf.get("defaults:fields:"+field.id+":user_filter:regex") ) {
+                regex = nconf.get("defaults:fields:"+field.id+":user_filter:regex") 
+              }
+              if ( nconf.get("defaults:fields:"+field.id+":user_filter:replace") ) {
+                replace = nconf.get("defaults:fields:"+field.id+":user_filter:replace") 
+              }
+              if ( nconf.get("defaults:fields:"+field.id+":user_filter:resource") ) {
+                resource = nconf.get("defaults:fields:"+field.id+":user_filter:resource") 
+              }
+              let overrideValue = processUserFilter( req.user, resource, regex, replace )
+              if ( overrideValue ) {
+                vueOutput += " overrideValue=\""+overrideValue+"\""
+              }
+            }
+
+            const field_attrs = [ "initialValue" ]
+            for( let attr of field_attrs ) {
+              if ( nconf.get("defaults:fields:"+field.id+":"+attr) ) {
+                vueOutput += " "+attr+"=\""
+                  +nconf.get("defaults:fields:"+field.id+":"+attr)+"\""
+              }
+            }
+
           } else {
             for( let mm of minmax ) {
               for( let type of [ "min", "max" ] ) {

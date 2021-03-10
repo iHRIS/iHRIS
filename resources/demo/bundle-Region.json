@@ -7,7 +7,7 @@
         "resourceType": "Location",
         "meta": {
           "profile": [
-            "http://ihe.net/fhir/StructureDefinition/IHE_mCSD_Location"
+            "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
           ]
         },
         "id": "TF.W",
@@ -47,7 +47,7 @@
         "resourceType": "Location",
         "meta": {
           "profile": [
-            "http://ihe.net/fhir/StructureDefinition/IHE_mCSD_Location"
+            "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
           ]
         },
         "id": "TF.S",
@@ -87,7 +87,7 @@
         "resourceType": "Location",
         "meta": {
           "profile": [
-            "http://ihe.net/fhir/StructureDefinition/IHE_mCSD_Location"
+            "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
           ]
         },
         "id": "TF.CC",
@@ -127,7 +127,7 @@
         "resourceType": "Location",
         "meta": {
           "profile": [
-            "http://ihe.net/fhir/StructureDefinition/IHE_mCSD_Location"
+            "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
           ]
         },
         "id": "TF.E",
@@ -167,7 +167,7 @@
         "resourceType": "Location",
         "meta": {
           "profile": [
-            "http://ihe.net/fhir/StructureDefinition/IHE_mCSD_Location"
+            "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
           ]
         },
         "id": "TF.N",

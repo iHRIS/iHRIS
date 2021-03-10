@@ -63,7 +63,7 @@
         :key="auth.id"
       >
         <v-list-item-title>
-          <auth-button :big="true" :data="auth" v-on:loggedin="$store.commit('login', $event)"></auth-button>
+          <auth-button :big="true" :data="auth" v-on:loggedin="$emit('loggedin', $event)"></auth-button>
         </v-list-item-title>
       </v-list-item>
     </v-list>

@@ -168,7 +168,7 @@ const user = {
       winston.error( "Invalid permission given "+permission, user.valueSet["ihris-task-permission"] )
       return false
     }
-    if ( !user.valueSet["ihris-task-resource"].includes( resource ) ) {
+    if ( permission !== "special" && !user.valueSet["ihris-task-resource"].includes( resource ) ) {
       winston.error( "Invalid resource given "+resource, user.valueSet["ihris-task-resource"] )
       return false
     }
@@ -307,8 +307,12 @@ User.prototype.hasPermissionByName = function( permission, resource, id ) {
     return false
   } else {
     if ( id ) {
-      if ( results.hasOwnProperty( "id" ) && results.id.hasOwnProperty( id ) ) {
-        return results.id[id]
+      if ( results.hasOwnProperty( "id" ) ) {
+        if (results.id.hasOwnProperty( id ) ) {
+          return results.id[id]
+        } else {
+          return false
+        }
       }
       if ( results.hasOwnProperty( "*" ) ) {
         return results["*"]

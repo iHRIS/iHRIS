@@ -69,6 +69,7 @@ Title:          "Code system for task permissions."
 * #write  "Write"   "Can write the given resource."
 * #delete "Delete"  "Can delete the given resource."
 * #filter "Filter"  "Search filter constraints."
+* #special "Special"  "Special non-resource permissions."
 
 ValueSet:       IhrisTaskPermissionValueSet
 Id:             ihris-task-permission

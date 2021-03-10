@@ -1,7 +1,7 @@
 <template>
   <v-app id="top">
-    <the-header app :header="header" />
-    <the-navigation app :nav="nav" />
+    <the-header app :header="header" v-on:loggedin="updateConfig" v-on:loggedout="updateConfig" />
+    <the-navigation app :nav="nav" v-on:loggedin="updateConfig" />
 
     <v-content>
       <v-snackbar
@@ -99,49 +99,56 @@ export default {
     TheNavigation,
     TheFooter
   },
-  created: function() {
-    // make sure we're user has been created in session (logged in or not)
-    fetch("/auth").then(()=> {
+  methods: {
+    updateConfig: function() {
+      // make sure we're user has been created in session (logged in or not)
+      fetch("/auth").then(()=> {
 
-      fetch("/config/site").then(response => {
-        response.json().then(data => {
-          if (data.hasOwnProperty("security") && data.security.hasOwnProperty("disabled")) {
-            this.$store.commit('securityOff', data.security.disabled)
-          }
-          if (data.hasOwnProperty("title")) this.header.title = data.title
-          if (data.hasOwnProperty("site")) this.header.site = data.site
-          if (data.hasOwnProperty("logo")) this.header.logo = data.logo
-          if (data.hasOwnProperty("auth")) {
-            for(let id of Object.keys(data.auth)) {
-              data.auth[id].id = id
-              this.header.auths.push(data.auth[id])
-              this.nav.auths.push(data.auth[id])
+        fetch("/config/site").then(response => {
+          response.json().then(data => {
+            if (data.hasOwnProperty("security") && data.security.hasOwnProperty("disabled")) {
+              this.$store.commit('securityOff', data.security.disabled)
             }
-          }
-          if (data.hasOwnProperty("footer")) {
-            if (data.footer.hasOwnProperty("links")) {
-              for(let id of Object.keys(data.footer.links)) {
-                data.footer.links[id].id = id
-                this.footer.links.push(data.footer.links[id])
+            if (data.hasOwnProperty("title")) this.header.title = data.title
+            if (data.hasOwnProperty("site")) this.header.site = data.site
+            if (data.hasOwnProperty("logo")) this.header.logo = data.logo
+            if (data.hasOwnProperty("auth")) {
+              this.header.auths = []
+              this.nav.auths = []
+              for(let id of Object.keys(data.auth)) {
+                data.auth[id].id = id
+                this.header.auths.push(data.auth[id])
+                this.nav.auths.push(data.auth[id])
               }
             }
-          }
-          if (data.hasOwnProperty("user")) {
-            if ( data.user.loggedin ) {
-              this.$store.commit('login', data.user.name || "" )
-            } else {
-              this.$store.commit('logout')
+            if (data.hasOwnProperty("footer")) {
+              if (data.footer.hasOwnProperty("links")) {
+                for(let id of Object.keys(data.footer.links)) {
+                  data.footer.links[id].id = id
+                  this.footer.links.push(data.footer.links[id])
+                }
+              }
             }
-          }
-          if (data.hasOwnProperty("nav")) {
-            if (data.nav.hasOwnProperty("active")) this.nav.active = data.nav.active
-            if (data.nav.hasOwnProperty("menu")) this.nav.menu = data.nav.menu
-            if (data.nav.hasOwnProperty("home")) this.nav.home = data.nav.home
-          }
+            if (data.hasOwnProperty("user")) {
+              if ( data.user.loggedin ) {
+                this.$store.commit('login', data.user.name || "" )
+              } else {
+                this.$store.commit('logout')
+              }
+            }
+            if (data.hasOwnProperty("nav")) {
+              if (data.nav.hasOwnProperty("active")) this.nav.active = data.nav.active
+              if (data.nav.hasOwnProperty("menu")) this.nav.menu = data.nav.menu
+              if (data.nav.hasOwnProperty("home")) this.nav.home = data.nav.home
+            }
 
+          })
         })
       })
-    })
+    }
+  },
+  created: function() {
+    this.updateConfig()
   }
 }
 </script>

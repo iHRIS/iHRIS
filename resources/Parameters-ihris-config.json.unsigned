@@ -337,6 +337,27 @@
         {
           "name": "defaults:components:date:maxValueDate",
           "valueString": "2030-01-01"
+        },
+        {
+          "name": "defaults:fields:PractitionerRole.location:type",
+          "valueString": "tree"
+        },
+        {
+          "name": "defaults:fields:PractitionerRole.location:user_filter:regex",
+          "valueString": "related-location=(.+)"
+        },
+        {
+          "name": "defaults:fields:PractitionerRole.location:user_filter:replace",
+          "valueString": "$1"
+        },
+        {
+          "name": "defaults:fields:Practitioner.extension:residence.value[x]:valueReference:type",
+          "valueString": "tree"
+        },
+        {
+          "name": "defaults:fields:Practitioner.extension:residence.value[x]:valueReference:initialValue",
+          "valueString": "Location/TF"
+
         }
       ]
     }
