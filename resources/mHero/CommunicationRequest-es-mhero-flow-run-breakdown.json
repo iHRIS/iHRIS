@@ -25,22 +25,23 @@
     }, {
       "url": "http://ihris.org/fhir/StructureDefinition/iHRISReportElement",
       "extension": [{
-        "url": "display",
-        "valueString": "Send Date"
-      }, {
-        "url": "label",
-        "valueString": "started"
-      }, {
-        "url": "name",
-        "valueString": "occurrenceDateTime"
-      },
-      {
-        "url": "filter",
-        "valueBoolean": true
-      }, {
-        "url": "dropDownFilter",
-        "valueBoolean": false
-      }]
+          "url": "display",
+          "valueString": "Send Date"
+        }, {
+          "url": "label",
+          "valueString": "started"
+        }, {
+          "url": "name",
+          "valueString": "occurrenceDateTime"
+        },
+        {
+          "url": "filter",
+          "valueBoolean": true
+        }, {
+          "url": "dropDownFilter",
+          "valueBoolean": false
+        }
+      ]
     }, {
       "url": "http://ihris.org/fhir/StructureDefinition/iHRISReportElement",
       "extension": [{
@@ -167,10 +168,10 @@
       {
         "url": "http://ihris.org/fhir/StructureDefinition/iHRISReportElement",
         "extension": [{
-          "url": "display",
-          "valueString": "Phone Number"
-        },
-        {
+            "url": "display",
+            "valueString": "Phone Number"
+          },
+          {
             "url": "label",
             "valueString": "phone"
           },
@@ -223,6 +224,221 @@
             "url": "filter",
             "valueBoolean": true
           }, {
+            "url": "dropDownFilter",
+            "valueBoolean": true
+          }
+        ]
+      }
+    ]
+  }, {
+    "url": "http://ihris.org/fhir/StructureDefinition/iHRISReportLink",
+    "extension": [{
+        "url": "name",
+        "valueString": "role"
+      },
+      {
+        "url": "resource",
+        "valueString": "PractitionerRole"
+      },
+      {
+        "url": "linkElement",
+        "valueString": "PractitionerRole.practitioner.reference"
+      },
+      {
+        "url": "linkTo",
+        "valueString": "practitioner"
+      },
+      {
+        "url": "linkElementSearchParameter",
+        "valueString": "practitioner"
+      },
+      {
+        "url": "multiple",
+        "valueBoolean": false
+      }
+    ]
+  }, {
+    "url": "http://ihris.org/fhir/StructureDefinition/iHRISReportLink",
+    "extension": [{
+        "url": "name",
+        "valueString": "facility"
+      },
+      {
+        "url": "resource",
+        "valueString": "Location"
+      },
+      {
+        "url": "linkElement",
+        "valueString": "Location.id"
+      },
+      {
+        "url": "linkTo",
+        "valueString": "role.location"
+      },
+      {
+        "url": "multiple",
+        "valueBoolean": false
+      },
+      {
+        "url": "http://ihris.org/fhir/StructureDefinition/iHRISReportElement",
+        "extension": [{
+            "url": "display",
+            "valueString": "Facility"
+          },
+          {
+            "url": "label",
+            "valueString": "facilityName"
+          },
+          {
+            "url": "name",
+            "valueString": "name"
+          },
+          {
+            "url": "filter",
+            "valueBoolean": true
+          },
+          {
+            "url": "dropDownFilter",
+            "valueBoolean": true
+          }
+        ]
+      }
+    ]
+  }, {
+    "url": "http://ihris.org/fhir/StructureDefinition/iHRISReportLink",
+    "extension": [{
+        "url": "name",
+        "valueString": "district"
+      },
+      {
+        "url": "resource",
+        "valueString": "Location"
+      },
+      {
+        "url": "linkElement",
+        "valueString": "Location.id"
+      },
+      {
+        "url": "linkTo",
+        "valueString": "facility.partOf.reference"
+      },
+      {
+        "url": "multiple",
+        "valueBoolean": false
+      }
+    ]
+  }, {
+    "url": "http://ihris.org/fhir/StructureDefinition/iHRISReportLink",
+    "extension": [{
+        "url": "name",
+        "valueString": "region"
+      },
+      {
+        "url": "resource",
+        "valueString": "Location"
+      },
+      {
+        "url": "linkElement",
+        "valueString": "Location.id"
+      },
+      {
+        "url": "linkTo",
+        "valueString": "district.partOf.reference"
+      },
+      {
+        "url": "multiple",
+        "valueBoolean": false
+      },
+      {
+        "url": "http://ihris.org/fhir/StructureDefinition/iHRISReportElement",
+        "extension": [{
+            "url": "display",
+            "valueString": "County"
+          },
+          {
+            "url": "label",
+            "valueString": "regionName"
+          },
+          {
+            "url": "name",
+            "valueString": "name"
+          },
+          {
+            "url": "filter",
+            "valueBoolean": true
+          },
+          {
+            "url": "dropDownFilter",
+            "valueBoolean": true
+          }
+        ]
+      }
+    ]
+  }, {
+    "url": "http://ihris.org/fhir/StructureDefinition/iHRISReportLink",
+    "extension": [{
+        "url": "name",
+        "valueString": "position"
+      },
+      {
+        "url": "resource",
+        "valueString": "Basic"
+      },
+      {
+        "url": "linkElement",
+        "valueString": "Basic.id"
+      },
+      {
+        "url": "linkTo",
+        "valueString": "role.extension.where(url='http://ihris.org/fhir/StructureDefinition/iHRISPractitionerRoleDetails').extension.where(url='position').valueReference.reference"
+      },
+      {
+        "url": "multiple",
+        "valueBoolean": false
+      },
+      {
+        "url": "http://ihris.org/fhir/StructureDefinition/iHRISReportElement",
+        "extension": [{
+            "url": "display",
+            "valueString": "Job Title"
+          },
+          {
+            "url": "label",
+            "valueString": "job"
+          },
+          {
+            "url": "name",
+            "valueString": "extension.where(url='http://ihris.org/fhir/StructureDefinition/iHIRSPositionDetails').extension.where(url='http://ihris.org/fhir/CodeSystem/ihris-job').extension.where(url='name').valueString"
+          },
+          {
+            "url": "filter",
+            "valueBoolean": true
+          },
+          {
+            "url": "dropDownFilter",
+            "valueBoolean": true
+          }
+        ]
+      },
+      {
+        "url": "http://ihris.org/fhir/StructureDefinition/iHRISReportElement",
+        "extension": [{
+            "url": "display",
+            "valueString": "Cadre"
+          },
+          {
+            "url": "label",
+            "valueString": "cadre"
+          },
+          {
+            "url": "name",
+            "valueString": "extension.where(url='http://ihris.org/fhir/StructureDefinition/iHIRSPositionDetails').extension.where(url='http://ihris.org/fhir/CodeSystem/ihris-cadre').extension.where(url='name').valueString"
+          },
+          {
+            "url": "filter",
+            "valueBoolean": true
+          },
+          {
             "url": "dropDownFilter",
             "valueBoolean": true
           }

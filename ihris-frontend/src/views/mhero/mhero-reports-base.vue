@@ -27,26 +27,50 @@
             <v-list-item-title class="text-h2">Flow Run Summary</v-list-item-title>
           </v-list-item>
           <v-list-item
-            to="/report/ihris-es-report-mhero-flow-run-breakdown"
+            to="/report/ihris-es-report-mhero-flow-run-summary-bycadre"
             key="3"
+          >
+            <v-list-item-title class="text-h2">Flow Run Summary By Cadre</v-list-item-title>
+          </v-list-item>
+          <v-list-item
+            to="/report/ihris-es-report-mhero-flow-run-summary-byregion"
+            key="4"
+          >
+            <v-list-item-title class="text-h2">Flow Run Summary By County</v-list-item-title>
+          </v-list-item>
+          <v-list-item
+            to="/report/ihris-es-report-mhero-flow-run-breakdown"
+            key="5"
           >
             <v-list-item-title class="text-h2">Flow Run Breakdown</v-list-item-title>
           </v-list-item>
           <v-list-item
             to="/report/ihris-es-report-mhero-message-send-summary"
-            key="4"
+            key="6"
           >
             <v-list-item-title class="text-h2">Message Sending Summary</v-list-item-title>
           </v-list-item>
           <v-list-item
+            to="/report/ihris-es-report-mhero-message-send-summary-bycadre"
+            key="7"
+          >
+            <v-list-item-title class="text-h2">Message Sending Summary By Cadre</v-list-item-title>
+          </v-list-item>
+          <v-list-item
+            to="/report/ihris-es-report-mhero-message-send-summary-byregion"
+            key="8"
+          >
+            <v-list-item-title class="text-h2">Message Sending Summary By County</v-list-item-title>
+          </v-list-item>
+          <v-list-item
             to="/report/ihris-es-report-mhero-message-send-breakdown"
-            key="5"
+            key="9"
           >
             <v-list-item-title class="text-h2">Message Sending Breakdown</v-list-item-title>
           </v-list-item>
           <v-list-item
             to="/report/ihris-es-report-message-exchange"
-            key="6"
+            key="10"
           >
             <v-list-item-title class="text-h2">Message Exchange</v-list-item-title>
           </v-list-item>
@@ -57,8 +81,6 @@
   </v-container>
 </template>
 <script>
-// import ihrisReport from "@/views/es-report";
-// import { eventBus } from "@/main";
 export default {
 
 };
