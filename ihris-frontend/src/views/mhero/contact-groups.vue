@@ -206,12 +206,6 @@
         src="@/assets/mHero.png"
         width="100"
       ></v-img>
-      <v-layout row wrap>
-        <v-spacer></v-spacer>
-        <v-flex xs3>
-          <v-btn color="primary" @click="addGroupDialog = true"><v-icon left>mdi-database-plus</v-icon> Add New Group</v-btn>
-        </v-flex>
-      </v-layout>
       <ihrisReport report='ihris-es-report-mhero-send-message'></ihrisReport>
       <v-card-actions class="secondary">
         <v-btn
@@ -235,6 +229,8 @@
         >
         Subscribe
         </v-btn>
+        <v-spacer></v-spacer>
+        <v-btn color="info" @click="addGroupDialog = true" rounded><v-icon left>mdi-database-plus</v-icon> Add New Group</v-btn>
       </v-card-actions>
     </v-card>
   </v-container>

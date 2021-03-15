@@ -2,9 +2,58 @@ const axios = require('axios')
 const URI = require('urijs');
 const async = require('async')
 const winston = require('winston')
+const os = require('os')
+const fs = require('fs')
+const { nanoid } = require('nanoid')
 const express = require('express')
 const router = express.Router()
+const es = require('../modules/es')
 const nconf = require('../modules/config')
+
+router.post('/export/:format/:index', (req, res) => {
+  let searchQry = req.body.query
+  let headers = req.body.headers
+  let label = req.body.label
+  es.getData({indexName: req.params.index, searchQuery: searchQry}, (err, documents) => {
+    if(err) {
+      return res.status(500).send()
+    }
+    let rows = ''
+    for(let header of headers) {
+      if(!rows) {
+        rows = header.text
+      } else {
+        rows += ',' + header.text
+      }
+    }
+    rows += os.EOL
+    for(let doc of documents) {
+      let row
+      for(let header of headers) {
+        if(row === undefined) {
+          if(doc._source[header.value] === null || doc._source[header.value] === undefined) {
+            row = ' '
+          } else {
+            row = doc._source[header.value]
+          }
+        } else {
+          if(doc._source[header.value] === null || doc._source[header.value] === undefined) {
+            row += ','
+          } else {
+            row += ',' + doc._source[header.value]
+          }
+        }
+      }
+      rows += row + os.EOL
+    }
+    if (!fs.existsSync(`${__dirname}/../tmp`)){
+      fs.mkdirSync(`${__dirname}/../tmp`);
+    }
+    let fileName = `${__dirname}/../tmp/${label}-${nanoid(10)}.csv`
+    fs.writeFileSync(fileName, rows)
+    return res.send(fileName.replace(`${__dirname}/..`, ''))
+  })
+})
 
 router.get('/:index/:operation?', (req, res) => {
   let indexName = req.params.index

@@ -25,6 +25,10 @@ module.exports = {
       '^/es': {
         target: 'http://localhost:3000/',
         logLevel: 'debug'
+      },
+      '^/tmp': {
+        target: 'http://localhost:3000/',
+        logLevel: 'debug'
       }
     }
   },

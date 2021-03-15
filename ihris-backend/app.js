@@ -158,6 +158,7 @@ async function startUp() {
 
   app.use('/config', configRouter)
   app.use('/mhero', mheroRouter)
+  app.use("/tmp", express.static("tmp"));
   app.get('/test',
     (req, res) => {
       res.status(200).json({

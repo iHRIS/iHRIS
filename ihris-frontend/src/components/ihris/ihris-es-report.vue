@@ -2,8 +2,28 @@
   <v-container class="py-5">
     <v-card>
       <v-card-title v-if="!hideLabel">
-        {{ label }}
-        <v-spacer></v-spacer>
+        <v-layout row wrap>
+          <v-flex xs10>
+            {{ label }}
+          </v-flex>
+          <v-spacer></v-spacer>
+          <v-flex xs2>
+            <v-btn
+              color="info"
+              @click="reportExport('csv')"
+            >
+              <v-progress-circular
+                indeterminate
+                color="amber"
+                v-if="downloading"
+              ></v-progress-circular>
+              <v-icon left v-else>mdi-microsoft-excel</v-icon>
+              Export
+            </v-btn>
+          </v-flex>
+        </v-layout>
+      </v-card-title>
+      <v-card-title v-if="!hideLabel">
         <slot></slot>
       </v-card-title>
       <v-card-subtitle
@@ -36,6 +56,7 @@ export default {
   data: function() {
     return {
       debug: "",
+      downloading: false,
       headers: [],
       results: [],
       options: { itemsPerPage: 10 },
@@ -84,13 +105,6 @@ export default {
   computed: {
     itemsPerPage() {
       let items = [5,10,20,50]
-      // if(this.total > 10000) {
-      //   items.push(2000)
-      //   items.push(5000)
-      //   items.push(10000)
-      // } else {
-      //   items.push(-1)
-      // }
       return items
     }
   },
@@ -282,6 +296,29 @@ export default {
           this.error_message = "Unable to load results.";
           console.log(err);
         });
+    },
+    reportExport(format) {
+      this.downloading = true
+      let url = `/es/export/${format}/${this.reportData.indexName}`
+      let body = {
+        query: this.buildTerms(),
+        headers: this.headers,
+        label: this.label
+      }
+      fetch(url, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(body)
+      }).then((response) => {
+        response
+          .text()
+          .then(exportFile => {
+            this.downloading = false
+            window.open(exportFile, "_self");
+          })
+      })
     }
   }
 };
