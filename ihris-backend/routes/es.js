@@ -34,13 +34,13 @@ router.post('/export/:format/:index', (req, res) => {
           if(doc._source[header.value] === null || doc._source[header.value] === undefined) {
             row = ' '
           } else {
-            row = doc._source[header.value]
+            row = "\""+doc._source[header.value]+"\"";
           }
         } else {
           if(doc._source[header.value] === null || doc._source[header.value] === undefined) {
             row += ','
           } else {
-            row += ',' + doc._source[header.value]
+            row += ',' + "\""+doc._source[header.value]+"\"";
           }
         }
       }
