@@ -1,0 +1,91 @@
+{
+  "resourceType": "Basic",
+  "id": "ihris-role-dataclerk",
+  "meta": {
+    "versionId": "1",
+    "lastUpdated": "2020-12-14T08:28:58.985+00:00",
+    "source": "#LNVSyAUmPyC9fYaO",
+    "profile": [ "http://ihris.org/fhir/StructureDefinition/ihris-role" ]
+  },
+  "extension": [ {
+    "url": "http://ihris.org/fhir/StructureDefinition/ihris-basic-name",
+    "valueString": "Data Clerk Role"
+  }, {
+    "url": "http://ihris.org/fhir/StructureDefinition/ihris-role-primary",
+    "valueBoolean": false
+  }, {
+    "url": "http://ihris.org/fhir/StructureDefinition/ihris-task",
+    "extension": [ {
+      "url": "permission",
+      "valueCode": "read"
+    }, {
+      "url": "resource",
+      "valueCode": "Location"
+    } ]
+  }, {
+    "url": "http://ihris.org/fhir/StructureDefinition/ihris-task",
+    "extension": [ {
+      "url": "permission",
+      "valueCode": "read"
+    }, {
+      "url": "resource",
+      "valueCode": "Basic"
+    }, {
+      "url": "instance",
+      "valueId": "ihris-page-practitioner"
+    } ]
+  }, {
+    "url": "http://ihris.org/fhir/StructureDefinition/ihris-task",
+    "extension": [ {
+      "url": "permission",
+      "valueCode": "read"
+    }, {
+      "url": "resource",
+      "valueCode": "Questionnaire"
+    } ]
+  }, {
+    "url": "http://ihris.org/fhir/StructureDefinition/ihris-task",
+    "extension": [ {
+      "url": "permission",
+      "valueCode": "write"
+    }, {
+      "url": "resource",
+      "valueCode": "QuestionnaireResponse"
+    } ]
+  }, {
+    "url": "http://ihris.org/fhir/StructureDefinition/ihris-task",
+    "extension": [ {
+      "url": "permission",
+      "valueCode": "special"
+    }, {
+      "url": "resource",
+      "valueCode": "navigation"
+    }, {
+      "url": "instance",
+      "valueId": "person:person_add"
+    } ]
+  }, {
+    "url": "http://ihris.org/fhir/StructureDefinition/ihris-task",
+    "extension": [ {
+      "url": "permission",
+      "valueCode": "special"
+    }, {
+      "url": "resource",
+      "valueCode": "navigation"
+    }, {
+      "url": "instance",
+      "valueId": "person:person_search"
+    } ]
+  }, {
+    "url": "http://ihris.org/fhir/StructureDefinition/ihris-assign-role",
+    "valueReference": {
+      "reference": "Basic/ihris-role-open"
+    }
+  } ],
+  "code": {
+    "coding": [ {
+      "system": "http://ihris.org/fhir/CodeSystem/ihris-resource-codesystem",
+      "code": "role"
+    } ]
+  }
+}
