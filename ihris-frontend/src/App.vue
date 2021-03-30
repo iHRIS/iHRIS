@@ -121,14 +121,6 @@ export default {
                 this.nav.auths.push(data.auth[id])
               }
             }
-            if (data.hasOwnProperty("footer")) {
-              if (data.footer.hasOwnProperty("links")) {
-                for(let id of Object.keys(data.footer.links)) {
-                  data.footer.links[id].id = id
-                  this.footer.links.push(data.footer.links[id])
-                }
-              }
-            }
             if (data.hasOwnProperty("user")) {
               if ( data.user.loggedin ) {
                 this.$store.commit('login', data.user.name || "" )
@@ -149,6 +141,21 @@ export default {
   },
   created: function() {
     this.updateConfig()
+    fetch("/auth").then(()=> {
+
+        fetch("/config/site").then(response => {
+          response.json().then(data => {
+            if (data.hasOwnProperty("footer")) {
+              if (data.footer.hasOwnProperty("links")) {
+                for(let id of Object.keys(data.footer.links)) {
+                  data.footer.links[id].id = id
+                  this.footer.links.push(data.footer.links[id])
+                }
+              }
+            }
+          })
+        })
+      })
   }
 }
 </script>

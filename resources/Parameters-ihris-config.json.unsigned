@@ -143,8 +143,52 @@
           "valueString": "/resource/add/practitionerrole"
         },
         {
-          "name": "site:nav:menu:mhero:order",
+          "name": "site:nav:menu:location:text",
+          "valueString": "Locations and Facilities"
+        },
+        {
+          "name": "site:nav:menu:location:order",
           "valueString": "3"
+        },
+        {
+          "name": "site:nav:menu:location:icon",
+          "valueString": "mdi-map-marker-multiple"
+        },
+        {
+          "name": "site:nav:menu:location:menu:location_search:text",
+          "valueString": "Search Locations"
+        },
+        {
+          "name": "site:nav:menu:location:menu:location_search:url",
+          "valueString": "/resource/search/location"
+        },
+        {
+          "name": "site:nav:menu:location:menu:location_add:text",
+          "valueString": "Add Location"
+        },
+        {
+          "name": "site:nav:menu:location:menu:location_add:url",
+          "valueString": "/resource/add/location"
+        },
+        {
+          "name": "site:nav:menu:location:menu:facility_search:text",
+          "valueString": "Search Facilities"
+        },
+        {
+          "name": "site:nav:menu:location:menu:facility_search:url",
+          "valueString": "/resource/search/facility"
+        },
+        {
+          "name": "site:nav:menu:location:menu:facility_add:text",
+          "valueString": "Add Facility"
+        },
+        {
+          "name": "site:nav:menu:location:menu:facility_add:url",
+          "valueString": "/resource/add/facility"
+        },
+        {
+          "name": "site:nav:menu:mhero:order",
+          "valueString": "4"
         },
         {
           "name": "site:nav:menu:mhero:text",
@@ -192,7 +236,7 @@
         },
         {
           "name": "site:nav:menu:database:order",
-          "valueString": "4"
+          "valueString": "5"
         },
         {
           "name": "site:nav:menu:database:icon",
@@ -264,7 +308,7 @@
         },
         {
           "name": "site:nav:menu:dashboard:order",
-          "valueString": "5"
+          "valueString": "6"
         },
         {
           "name": "site:nav:menu:dashboard:icon",
@@ -273,6 +317,38 @@
         {
           "name": "site:nav:menu:dashboard:url",
           "valueString": "/dashboard"
+        },
+        {
+          "name": "site:nav:menu:users:text",
+          "valueString": "System Users"
+        },
+        {
+          "name": "site:nav:menu:users:order",
+          "valueString": "7"
+        },
+        {
+          "name": "site:nav:menu:users:icon",
+          "valueString": "mdi-account-box-outline"
+        },
+        {
+          "name": "site:nav:menu:users:menu:users_search:text",
+          "valueString": "Search Users"
+        },
+        {
+          "name": "site:nav:menu:users:menu:users_search:url",
+          "valueString": "/resource/search/user"
+        },
+        {
+          "name": "shortname:Basic:format",
+          "valueString": "%s"
+        },
+        {
+          "name": "shortname:Basic:order",
+          "valueString": "name"
+        },
+        {
+          "name": "shortname:Basic:paths:name:fhirpath",
+          "valueString": "extension.where(url='http://ihris.org/fhir/StructureDefinition/ihris-basic-name').valueString"
         },
         {
           "name": "shortname:Practitioner:format",
@@ -289,6 +365,18 @@
         {
           "name": "shortname:Practitioner:paths:given:fhirpath",
           "valueString": "name.where(use='official').first().given"
+        },
+        {
+          "name": "shortname:Location:format",
+          "valueString": "%s"
+        },
+        {
+          "name": "shortname:Location:order",
+          "valueString": "name"
+        },
+        {
+          "name": "shortname:Location:paths:name:fhirpath",
+          "valueString": "name"
         },
         {
           "name": "workflow:processor:endrole:library",
@@ -321,6 +409,14 @@
         {
           "name": "workflow:questionnaire:performance:url",
           "valueString": "http://ihris.org/fhir/Questionnaire/ihris-performance"
+        },
+        {
+          "name": "workflow:processor:user:file",
+          "valueString": "../modules/workflowUser"
+        },
+        {
+          "name": "workflow:questionnaire:user:url",
+          "valueString": "http://ihris.org/fhir/Questionnaire/ihris-user"
         },
         {
           "name": "defaults:components:date-time:minValueDateTime",
@@ -356,8 +452,39 @@
         },
         {
           "name": "defaults:fields:Practitioner.extension:residence.value[x]:valueReference:initialValue",
+          "valueString": "Location/TF
+        },
+        {
+          "name": "defaults:fields:Person.extension:location.value[x]:valueReference:type",
+          "valueString": "tree"
+        },
+        {
+          "name": "defaults:fields:Person.extension:location.value[x]:valueReference:initialValue",
           "valueString": "Location/TF"
-
+        },
+        {
+          "name": "defaults:fields:Person.extension:location.value[x]:valueReference:user_filter:regex",
+          "valueString": "related-location=(.+)"
+        },
+        {
+          "name": "defaults:fields:Person.extension:location.value[x]:valueReference:user_filter:replace",
+          "valueString": "$1"
+        },
+        {
+          "name": "defaults:fields:Location.partOf:type",
+          "valueString": "tree"
+        },
+        {
+          "name": "defaults:fields:Location.partOf:initialValue",
+          "valueString": "Location/TF"
+        },
+        {
+          "name": "defaults:fields:Location.partOf:user_filter:regex",
+          "valueString": "related-location=(.+)"
+        },
+        {
+          "name": "defaults:fields:Location.partOf:user_filter:replace",
+          "valueString": "$1"
         }
       ]
     }
