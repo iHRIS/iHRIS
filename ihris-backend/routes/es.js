@@ -51,7 +51,11 @@ router.post('/export/:format/:index', (req, res) => {
     }
     let fileName = `${__dirname}/../tmp/${label}-${nanoid(10)}.csv`
     fs.writeFileSync(fileName, rows)
-    return res.send(fileName.replace(`${__dirname}/..`, ''))
+    res.send(fileName.replace(`${__dirname}/..`, ''))
+    //remove the file after 4 minutes
+    setTimeout(() => {
+      fs.unlinkSync(fileName);
+    }, 240000);
   })
 })
 

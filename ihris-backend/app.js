@@ -8,6 +8,7 @@ const logger = require('morgan')
 const winston = require('winston')
 const fs = require('fs')
 const fhirConfig = require('./modules/fhirConfig')
+const generalMixin = require('./mixin/generalMixin')
 const nconf = require('./modules/config')
 const requireFromString = require('require-from-string')
 const fhirModules = require('./modules/fhirModules')
@@ -64,6 +65,8 @@ async function startUp() {
 
 
   await nconf.loadRemote()
+
+  generalMixin.removeDir(`${__dirname}/tmp`)
 
   try {
     let reportsRunning = await fhirReports.setup()
