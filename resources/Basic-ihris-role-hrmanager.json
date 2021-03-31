@@ -122,6 +122,54 @@
       "valueCode": "navigation"
     }, {
       "url": "instance",
+      "valueId": "mhero:message"
+    } ]
+  },{
+    "url": "http://ihris.org/fhir/StructureDefinition/ihris-task",
+    "extension": [ {
+      "url": "permission",
+      "valueCode": "special"
+    }, {
+      "url": "resource",
+      "valueCode": "navigation"
+    }, {
+      "url": "instance",
+      "valueId": "mhero:scheduledcommunications"
+    } ]
+  },{
+    "url": "http://ihris.org/fhir/StructureDefinition/ihris-task",
+    "extension": [ {
+      "url": "permission",
+      "valueCode": "special"
+    }, {
+      "url": "resource",
+      "valueCode": "navigation"
+    }, {
+      "url": "instance",
+      "valueId": "mhero:groups"
+    } ]
+  },{
+    "url": "http://ihris.org/fhir/StructureDefinition/ihris-task",
+    "extension": [ {
+      "url": "permission",
+      "valueCode": "special"
+    }, {
+      "url": "resource",
+      "valueCode": "navigation"
+    }, {
+      "url": "instance",
+      "valueId": "mhero:reports"
+    } ]
+  },{
+    "url": "http://ihris.org/fhir/StructureDefinition/ihris-task",
+    "extension": [ {
+      "url": "permission",
+      "valueCode": "special"
+    }, {
+      "url": "resource",
+      "valueCode": "navigation"
+    }, {
+      "url": "instance",
       "valueId": "dashboard:staff"
     } ]
   },{

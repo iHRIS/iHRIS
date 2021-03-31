@@ -1,6 +1,6 @@
 {
   "resourceType": "Basic",
-  "id": "ihris-role-hrofficer",
+  "id": "ihris-role-location-based-admin",
   "meta": {
     "versionId": "1",
     "lastUpdated": "2020-12-14T08:28:58.985+00:00",
@@ -9,10 +9,10 @@
   },
   "extension": [ {
     "url": "http://ihris.org/fhir/StructureDefinition/ihris-basic-name",
-    "valueString": "HR Officer Role"
+    "valueString": "Admin - Location Based"
   }, {
     "url": "http://ihris.org/fhir/StructureDefinition/ihris-role-primary",
-    "valueBoolean": false
+    "valueBoolean": true
   }, {
     "url": "http://ihris.org/fhir/StructureDefinition/ihris-task",
     "extension": [ {
@@ -20,9 +20,45 @@
       "valueCode": "read"
     }, {
       "url": "resource",
-      "valueCode": "Location"
+      "valueCode": "Practitioner"
     } ]
   }, {
+    "url": "http://ihris.org/fhir/StructureDefinition/ihris-task",
+    "extension": [ {
+      "url": "permission",
+      "valueCode": "read"
+    }, {
+      "url": "resource",
+      "valueCode": "Basic"
+    } ]
+  }, {
+    "url": "http://ihris.org/fhir/StructureDefinition/ihris-task",
+    "extension": [ {
+      "url": "permission",
+      "valueCode": "read"
+    }, {
+      "url": "resource",
+      "valueCode": "Person"
+    } ]
+  }, {
+    "url": "http://ihris.org/fhir/StructureDefinition/ihris-task",
+    "extension": [ {
+      "url": "permission",
+      "valueCode": "read"
+    }, {
+      "url": "resource",
+      "valueCode": "ValueSet"
+    } ]
+  },  {
+    "url": "http://ihris.org/fhir/StructureDefinition/ihris-task",
+    "extension": [ {
+      "url": "permission",
+      "valueCode": "read"
+    }, {
+      "url": "resource",
+      "valueCode": "CodeSystem"
+    } ]
+  },{
     "url": "http://ihris.org/fhir/StructureDefinition/ihris-task",
     "extension": [ {
       "url": "permission",
@@ -45,6 +81,18 @@
     }, {
       "url": "instance",
       "valueId": "ihris-page-practitionerrole"
+    } ]
+  },{
+    "url": "http://ihris.org/fhir/StructureDefinition/ihris-task",
+    "extension": [ {
+      "url": "permission",
+      "valueCode": "read"
+    }, {
+      "url": "resource",
+      "valueCode": "Basic"
+    }, {
+      "url": "instance",
+      "valueId": "ihris-page-user"
     } ]
   }, {
     "url": "http://ihris.org/fhir/StructureDefinition/ihris-task",
@@ -122,7 +170,31 @@
       "valueCode": "navigation"
     }, {
       "url": "instance",
-      "valueId": "mhero:message"
+      "valueId": "location:facility_search"
+    } ]
+  }, {
+    "url": "http://ihris.org/fhir/StructureDefinition/ihris-task",
+    "extension": [ {
+      "url": "permission",
+      "valueCode": "special"
+    }, {
+      "url": "resource",
+      "valueCode": "navigation"
+    }, {
+      "url": "instance",
+      "valueId": "location:facility_add"
+    } ]
+  }, {
+    "url": "http://ihris.org/fhir/StructureDefinition/ihris-task",
+    "extension": [ {
+      "url": "permission",
+      "valueCode": "special"
+    }, {
+      "url": "resource",
+      "valueCode": "navigation"
+    }, {
+      "url": "instance",
+      "valueId": "database"
     } ]
   },{
     "url": "http://ihris.org/fhir/StructureDefinition/ihris-task",
@@ -134,7 +206,19 @@
       "valueCode": "navigation"
     }, {
       "url": "instance",
-      "valueId": "mhero:scheduledcommunications"
+      "valueId": "location:location_search"
+    } ]
+  }, {
+    "url": "http://ihris.org/fhir/StructureDefinition/ihris-task",
+    "extension": [ {
+      "url": "permission",
+      "valueCode": "special"
+    }, {
+      "url": "resource",
+      "valueCode": "navigation"
+    }, {
+      "url": "instance",
+      "valueId": "location:location_add"
     } ]
   },{
     "url": "http://ihris.org/fhir/StructureDefinition/ihris-task",
@@ -146,19 +230,7 @@
       "valueCode": "navigation"
     }, {
       "url": "instance",
-      "valueId": "mhero:groups"
-    } ]
-  },{
-    "url": "http://ihris.org/fhir/StructureDefinition/ihris-task",
-    "extension": [ {
-      "url": "permission",
-      "valueCode": "special"
-    }, {
-      "url": "resource",
-      "valueCode": "navigation"
-    }, {
-      "url": "instance",
-      "valueId": "mhero:reports"
+      "valueId": "dashboard:staff"
     } ]
   },{
     "url": "http://ihris.org/fhir/StructureDefinition/ihris-task",
@@ -171,6 +243,18 @@
     }, {
       "url": "instance",
       "valueId": "reports"
+    } ]
+  },{
+    "url": "http://ihris.org/fhir/StructureDefinition/ihris-task",
+    "extension": [ {
+      "url": "permission",
+      "valueCode": "special"
+    }, {
+      "url": "resource",
+      "valueCode": "navigation"
+    }, {
+      "url": "instance",
+      "valueId": "users:users_search"
     } ]
   }, {
     "url": "http://ihris.org/fhir/StructureDefinition/ihris-assign-role",

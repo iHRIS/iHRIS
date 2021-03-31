@@ -1,15 +1,20 @@
 const nconf = require('./config')
 const user = require('./user')
+const fhirSecurity = require('./fhirSecurity')
 const winston = require('winston')
 const crypto = require('crypto')
 const outcomes = require('../config/operationOutcomes')
+const { resolve } = require('path')
+const { promises } = require('dns')
 //const differenceInBusinessDays = require('date-fns/differenceInBusinessDays')
 const fhirAxios = nconf.fhirAxios
+const fhirSecurityLocation = fhirSecurity.fhirSecurityLocation
 
 const ROLE_EXTENSION = "http://ihris.org/fhir/StructureDefinition/ihris-assign-role"
 const TASK_EXTENSION = "http://ihris.org/fhir/StructureDefinition/ihris-task"
 
 var locationRoleID = undefined
+
 const workflowUser = {
   process: ( req ) => {
     return new Promise( async (resolve, reject) => {
@@ -19,6 +24,7 @@ const workflowUser = {
           type: "transaction",
           entry: []
         }
+        
         if ( req.body && req.body.item 
           && req.body.item && req.body.item[0].linkId === "Person"
           && req.body.item[0].item && req.body.item[0].item[0].linkId === "Person.name[0].text" 
@@ -45,21 +51,21 @@ const workflowUser = {
                         userRoles = await fhirAxios.search("Basic", { locationconstraint: "related-location=" +req.body.item[0].item[5].answer[0].valueReference  })
                       } catch (err) {
                         winston.error("Error Getting user roles for user" + req.body.item[0].item[3].answer[0].valueString)
-                        reject(new Error("Error Getting user roles for user" + req.body.item[0].item[3].answer[0].valueString))
+                        resolve(await workflowUser.outcome("Error Getting user roles for user " +req.body.item[0].item[3].answer[0].valueString))
                       }
+                      let locationValueReference = req.body.item[0].item[5].answer[0].valueReference.reference
                       if(userRoles.entry){
                         userRoleId = userRoles.entry[0].resource.id
                         extensions.push({ url: "http://ihris.org/fhir/StructureDefinition/ihris-assign-role",
                         valueReference: { reference: "Basic/" +userRoleId}
                         })
                       } else {
-                        let locationValueReference = req.body.item[0].item[5].answer[0].valueReference.reference
                         let newRole = undefined
                         try {
                           newRole = await workflowUser.createLocationRole(locationValueReference)
                         } catch (error) {
                           winston.error("Error creating new role for " + locationValueReference)
-                          reject(new Error("Error creating new role for " + locationValueReference))
+                          resolve(await workflowUser.outcome("Error creating new role for " +locationValueReference))
                         }
                         let roleURL = "Basic/"+locationRoleID
                         bundle.entry.push( {
@@ -76,6 +82,25 @@ const workflowUser = {
                       }
                       extensions.push({ url: "http://ihris.org/fhir/StructureDefinition/ihris-user-location",
                       valueReference:req.body.item[0].item[5].answer[0].valueReference
+                              })
+                      let primaryLocationID = locationValueReference.split("/")
+                      //winston.info("PRIMARY ID",primaryLocationID )
+                      let relatedExt = []
+                      //let relatedLocations = []
+                      try {
+                        let relatedLocationsBundle  = await fhirAxios.search( "Location",
+                          { _id: primaryLocationID[1], status: "active", "_include:iterate": "Location:partof" } )
+                        for( let entry of relatedLocationsBundle.entry ) {
+                          relatedExt.push({ url:"location",
+                                  valueString: "Location/" + entry.resource.id
+                                  })
+                        }
+                      } catch (err) {
+                        winston.error("Failed to get related locations for ",primaryLocationID[1] )
+                        resolve(await workflowUser.outcome("Failed to Find location "+primaryLocationID[1]))
+                      }
+                      extensions.push({ url: "http://ihris.org/fhir/StructureDefinition/ihris-related-group",
+                      extension:relatedExt
                               })
                     }
                     if( req.body.item[0].item[4].linkId === "role" 
@@ -109,13 +134,12 @@ const workflowUser = {
                        // })
                       } catch (err) {
                           winston.error("Error setting Password ")
-                          reject(new Error( "Error setting Password " ))
+                          reject(err)
                       }
                     
                     } else {
                       winston.info("NO PASSWORD SET ")
-                      reject(new Error( "NO PASSWORD SET " ))
-                     
+                      resolve(await workflowUser.outcome("No Password set for this User")) 
                     }
                     let userName = userEmail.split('@')
                     let newUser = {
@@ -148,7 +172,8 @@ const workflowUser = {
                     })
               } else {
                 winston.error("User " + req.body.item[0].item[3].answer[0].valueString + " Exist")
-                reject(err.message)
+                resolve(await workflowUser.outcome("User " + req.body.item[0].item[3].answer[0].valueString + " Exist"))
+                //reject(err.message)
               }
               //winston.info("Bundle")
               //winston.info(JSON.stringify( bundle,null,2))
@@ -236,118 +261,6 @@ const workflowUser = {
             url: "resource",
             valueCode: "QuestionnaireResponse"
           } ]
-        }, {
-          url: "http://ihris.org/fhir/StructureDefinition/ihris-task",
-          extension: [ {
-            url: "permission",
-            valueCode: "special"
-          }, {
-            url: "resource",
-            valueCode: "navigation"
-          }, {
-            url: "instance",
-            valueId: "person:person_add"
-          } ]
-        }, {
-          url: "http://ihris.org/fhir/StructureDefinition/ihris-task",
-          extension: [ {
-            url: "permission",
-            valueCode: "special"
-          }, {
-            url: "resource",
-            valueCode: "navigation"
-          }, {
-            url: "instance",
-            valueId: "person:person_search"
-          } ]
-        }, {
-          url: "http://ihris.org/fhir/StructureDefinition/ihris-task",
-          extension: [ {
-            url: "permission",
-            valueCode: "special"
-          }, {
-            url: "resource",
-            valueCode: "navigation"
-          }, {
-            url: "instance",
-            valueId: "position:position_add"
-          } ]
-        }, {
-          url: "http://ihris.org/fhir/StructureDefinition/ihris-task",
-          extension: [ {
-            url: "permission",
-            valueCode: "special"
-          }, {
-            url: "resource",
-            valueCode: "navigation"
-          }, {
-            url: "instance",
-            valueId: "position:position_search"
-          } ]
-        },{
-          url: "http://ihris.org/fhir/StructureDefinition/ihris-task",
-          extension: [ {
-            url: "permission",
-            valueCode: "special"
-          }, {
-            url: "resource",
-            valueCode: "navigation"
-          }, {
-            url: "instance",
-            valueId: "dashboard:staff"
-          } ]
-        },
-        {
-          url: "http://ihris.org/fhir/StructureDefinition/ihris-task",
-          extension: [ {
-            url: "permission",
-            valueCode: "special"
-          }, {
-            url: "resource",
-            valueCode: "navigation"
-          }, {
-            url: "instance",
-            valueId: "location:location_search"
-          } ]
-        },
-        {
-          url: "http://ihris.org/fhir/StructureDefinition/ihris-task",
-          extension: [ {
-            url: "permission",
-            valueCode: "special"
-          }, {
-            url: "resource",
-            valueCode: "navigation"
-          }, {
-            url: "instance",
-            valueId: "location:facility_search"
-          } ]
-        },
-        {
-          url: "http://ihris.org/fhir/StructureDefinition/ihris-task",
-          extension: [ {
-            url: "permission",
-            valueCode: "special"
-          }, {
-            url: "resource",
-            valueCode: "navigation"
-          }, {
-            url: "instance",
-            valueId: "location:facility_add"
-          } ]
-        },
-        {
-          url: "http://ihris.org/fhir/StructureDefinition/ihris-task",
-          extension: [ {
-            url: "permission",
-            valueCode: "special"
-          }, {
-            url: "resource",
-            valueCode: "navigation"
-          }, {
-            url: "instance",
-            valueId: "reports"
-          } ]
         },
         {
           url: "http://ihris.org/fhir/StructureDefinition/ihris-task",
@@ -361,7 +274,19 @@ const workflowUser = {
             url: "constraint",
             valueString: "extension.where(url = 'http://ihris.org/fhir/StructureDefinition/ihris-related-group' ).extension.exists( url = 'location' and valueString = '" +locationReference+"')"
           } ]
-        }, {
+        },{
+          url: "http://ihris.org/fhir/StructureDefinition/ihris-task",
+          extension: [ {
+            url: "permission",
+            valueCode: "filter"
+          }, {
+            url: "resource",
+            valueCode: "Person"
+          }, {
+            url: "constraint",
+            valueString: "related-location="+locationReference
+          } ]
+        },{
           url: "http://ihris.org/fhir/StructureDefinition/ihris-task",
           extension: [ {
             url: "permission",
@@ -411,6 +336,31 @@ const workflowUser = {
         reject(err.message)
       }
     })
-  } 
+  },
+  outcome: (message) => {
+    return new Promise ((resolve, reject ) => {
+      let outcomeBundle = {
+        resourceType: "Bundle",
+        type: "transaction",
+        entry: [{
+          resource:{
+            resourceType: "OperationOutcome",
+            issue: [
+            {
+              severity: "error",
+              code: "exception",
+              diagnostics: message
+            }]
+          },
+          request: {
+            method: "POST",
+            url: "OperationOutcome"
+          }
+        }]
+      }
+      winston.info(JSON.stringify(outcomeBundle,null,2))
+      resolve(outcomeBundle)
+    })
+  }
 }
 module.exports = workflowUser

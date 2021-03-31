@@ -79,7 +79,7 @@ Usage:          #example
 * extension[display].extension[link][0].extension[text].valueString = "View User"
 * extension[display].extension[link][0].extension[button].valueBoolean = true
 * extension[display].extension[link][0].extension[icon].valueString = "mdi-account-arrow-right"
-* extension[display].extension[link][0].extension[url].valueUrl = "/resource/view/users/FIELD"
+* extension[display].extension[link][0].extension[url].valueUrl = "/resource/view/user/FIELD"
 * extension[display].extension[link][1].extension[field].valueString = ""
 * extension[display].extension[link][1].extension[text].valueString = "Add Another User"
 * extension[display].extension[link][1].extension[button].valueBoolean = true

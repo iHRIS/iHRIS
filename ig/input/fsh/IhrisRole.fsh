@@ -64,6 +64,8 @@ Description:    "iHRIS Assign Role to a user or other role."
 CodeSystem:     IhrisTaskPermissionCodeSystem
 Id:             ihris-task-permission
 Title:          "Code system for task permissions."
+* ^date = "2021-03-26T09:25:04.362Z"
+* ^version = "0.3.0"
 * #*      "All"     "Can do any task."
 * #read   "Read"    "Can read the given resource."
 * #write  "Write"   "Can write the given resource."
@@ -74,11 +76,15 @@ Title:          "Code system for task permissions."
 ValueSet:       IhrisTaskPermissionValueSet
 Id:             ihris-task-permission
 Title:          "Code system for task permissions."
+* ^date = "2021-03-26T09:25:04.362Z"
+* ^version = "0.3.0"
 * codes from system IhrisTaskPermissionCodeSystem
 
 CodeSystem:     IhrisTaskResourceCodeSystem
 Id:             ihris-task-resource
 Title:          "Code system for task permissions."
+* ^date = "2021-03-26T09:25:04.362Z"
+* ^version = "0.3.0"
 * #*                    "All"
 * #Practitioner         "Practitioner"
 * #StructureDefinition  "StructureDefinition"
@@ -90,10 +96,13 @@ Title:          "Code system for task permissions."
 * #QuestionnaireResponse "QuestionnaireResponse"
 * #PractitionerRole     "PractitionerRole"
 * #Location             "Location"
+* #Person               "Person"
 
 ValueSet:       IhrisTaskResourceValueSet
 Id:             ihris-task-resource
 Title:          "Code system for task permissions."
+* ^date = "2021-03-26T09:25:04.362Z"
+* ^version = "0.3.0"
 * codes from system IhrisTaskResourceCodeSystem
 
 Instance:       ihris-role-open
