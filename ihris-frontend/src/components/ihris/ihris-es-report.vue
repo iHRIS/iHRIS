@@ -117,6 +117,7 @@ export default {
       this.getData()
     })
     eventBus.$on("mhero-select-all", () => {
+      this.selected = []
       this.selected = this.results
       this.selectAll = true
     })
@@ -280,9 +281,10 @@ export default {
               }
               if(this.selectAll) {
                 this.selected = this.results
-              } else {
-                this.selected = []
               }
+              //  else {
+              //   this.selected = []
+              // }
               this.loading = false;
             })
             .catch(err => {

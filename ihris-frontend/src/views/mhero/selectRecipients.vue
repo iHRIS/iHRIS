@@ -38,6 +38,7 @@ import { eventBus } from "@/main";
 export default {
   data() {
     return {
+      send: false,
       practitioners: [],
       reportData: {},
       terms: {},
@@ -57,6 +58,7 @@ export default {
   methods: {
     sendToAll() {
       eventBus.$emit("mhero-select-all")
+      this.send = true
     },
     nextStep() {
       let headers = [];
@@ -64,6 +66,7 @@ export default {
         headers.push({ text: field[0], value: field[1] });
       }
       this.$emit("mheroRecipientsSelected", this.practitioners, headers, this.terms, this.termsConditions, this.sendToMatchingTerms, this.reportData);
+      this.send = false
     }
   },
   components: {
@@ -79,7 +82,7 @@ export default {
       this.termsConditions = termsConditions
       this.practitioners = selections;
       this.reportData = reportData;
-      if(this.sendToMatchingTerms) {
+      if(this.send) {
         this.nextStep()
       }
     });
