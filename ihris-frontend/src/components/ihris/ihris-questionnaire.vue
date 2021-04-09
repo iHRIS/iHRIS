@@ -26,9 +26,9 @@
         >
         <v-list class="white--text">
           <v-list-item>
-            <v-btn dark class="accent darken-1" @click="$router.go(-1)" v-if="isEdit">
-              <v-icon light>mdi-content-save</v-icon>
-              <span>Back</span>
+            <v-btn dark class="secondary" @click="$router.go(-1)">
+              <v-icon light>mdi-pencil-off</v-icon>
+              <span>Cancel</span>
             </v-btn>
             <v-spacer></v-spacer>
             <v-btn v-if="valid" dark class="success darken-1" @click="processFHIR()" :disabled="!valid">
