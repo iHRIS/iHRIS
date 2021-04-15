@@ -1,14 +1,10 @@
 const nconf = require('./config')
 const user = require('./user')
-const fhirSecurity = require('./fhirSecurity')
 const winston = require('winston')
 const crypto = require('crypto')
 const outcomes = require('../config/operationOutcomes')
-const { resolve } = require('path')
-const { promises } = require('dns')
 //const differenceInBusinessDays = require('date-fns/differenceInBusinessDays')
 const fhirAxios = nconf.fhirAxios
-const fhirSecurityLocation = fhirSecurity.fhirSecurityLocation
 
 const ROLE_EXTENSION = "http://ihris.org/fhir/StructureDefinition/ihris-assign-role"
 const TASK_EXTENSION = "http://ihris.org/fhir/StructureDefinition/ihris-task"
