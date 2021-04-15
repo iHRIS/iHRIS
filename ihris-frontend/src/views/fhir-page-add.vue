@@ -77,7 +77,8 @@ export default {
                 "fhir-unsigned-int": () => import(/* webpackChunkName: "fhir-secondary" */ "@/components/fhir/fhir-unsigned-int" ),
                 "fhir-integer": () => import(/* webpackChunkName: "fhir-secondary" */ "@/components/fhir/fhir-integer" ),
                 "fhir-coding": () => import(/* webpackChunkName: "fhir-primary" */ "@/components/fhir/fhir-coding" ),
-                "fhir-money": () => import(/* webpackChunkName: "fhir-secondary" */ "@/components/fhir/fhir-money" )
+                "fhir-money": () => import(/* webpackChunkName: "fhir-secondary" */ "@/components/fhir/fhir-money" ),
+                "fhir-decimal": () => import(/* webpackChunkName: "fhir-decimal" */ "@/components/fhir/fhir-decimal" )
               },
               template: data.template
             } )

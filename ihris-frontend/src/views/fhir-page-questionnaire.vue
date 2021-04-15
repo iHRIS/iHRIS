@@ -63,7 +63,8 @@ export default {
                 "fhir-boolean": () => import(/* webpackChunkName: "fhir-main" */ "@/components/fhir/fhir-boolean" ),
                 "fhir-integer": () => import(/* webpackChunkName: "fhir-main" */ "@/components/fhir/fhir-integer" ),
                 "fhir-choice": () => import(/* webpackChunkName: "fhir-main" */ "@/components/fhir/fhir-choice" ),
-                "fhir-attachment": () => import(/* webpackChunkName: "fhir-secondary" */ "@/components/fhir/fhir-attachment" )
+                "fhir-attachment": () => import(/* webpackChunkName: "fhir-secondary" */ "@/components/fhir/fhir-attachment" ),
+                "fhir-decimal": () => import(/* webpackChunkName: "fhir-decimal" */ "@/components/fhir/fhir-decimal" )
               },
               template: data.template
             } )
