@@ -189,6 +189,8 @@ export default {
           return content.display
         } else if ( content.code ) {
           return content.code
+        } else if ( content.reference ) {
+          return await this.$fhirutils.resourceLookup( content.reference)
         } else {
           console.log("Unable to process content:",content)
           return "Unknown"
