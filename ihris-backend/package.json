@@ -21,7 +21,7 @@
     "http-proxy-middleware": "^1.0.5",
     "is-empty": "^1.2.0",
     "jest-cucumber": "^3.0.0",
-    "lodash": "^4.17.20",
+    "lodash": "^4.17.21",
     "marked": "^2.0.0",
     "moment": "^2.29.1",
     "morgan": "~1.9.1",
