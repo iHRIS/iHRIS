@@ -15,7 +15,7 @@ let workflowModules = {}
 
 /**
  * This route will process a QuestionnaireReponse and parse
- * it into the underlying resources and save them.  
+ * it into the underlying resources and save them.
  */
 router.post("/QuestionnaireResponse", (req, res, next) => {
   if ( !req.user ) {
@@ -32,7 +32,7 @@ router.post("/QuestionnaireResponse", (req, res, next) => {
     }
     return false
   }
-
+  logger.error(JSON.stringify(req.body,0,2));
 
   let workflowQuestionnaires = nconf.get("workflow:questionnaire")
   let workflow = Object.keys(workflowQuestionnaires).find( wf => workflowQuestionnaires[wf].url === req.body.questionnaire )

@@ -40,16 +40,16 @@ export default {
           } else {
             Vue.component('ihris-template', {
               name: 'ihris-template',
-              data: function() { 
-                return { 
-                  viewPage: page, 
+              data: function() {
+                return {
+                  viewPage: page,
                   isEdit: true,
                   sectionMenu: data.data.sectionMenu,
                   hidden: data.data.hidden,
                   constraints: data.data.constraints
-                } 
-              }, 
-              components: { 
+                }
+              },
+              components: {
                 "ihris-questionnaire": () => import(/* webpackChunkName: "fhir-questionnaire" */ "@/components/ihris/ihris-questionnaire" ),
                 "ihris-questionnaire-section": () => import(/* webpackChunkName: "fhir-questionnaire" */ "@/components/ihris/ihris-questionnaire-section" ),
                 "ihris-questionnaire-group": () => import(/* webpackChunkName: "fhir-questionnaire" */ "@/components/ihris/ihris-questionnaire-group" ),

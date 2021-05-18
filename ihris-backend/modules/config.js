@@ -20,7 +20,7 @@ nconf.add('base', { type: 'literal', store: baseConfig } )
 
 const fhirAxios = require('./fhirAxios')
 
-fhirAxios.setOptions( { 
+fhirAxios.setOptions( {
   base: nconf.get("fhir:base"),
   username: nconf.get("fhir:username"),
   password: nconf.get("fhir:password")
@@ -45,10 +45,9 @@ nconf.loadRemote = async() => {
         console.error( "Unable to retrieve configuration Parameters "+remoteConfigs[conf]+" from FHIR server ("+nconf.get("fhir:base")+")" )
         console.error( err.message )
         process.exit(1)
-      } 
+      }
     }
   }
 }
-
 
 module.exports = nconf

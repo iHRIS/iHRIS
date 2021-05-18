@@ -1,7 +1,7 @@
 <template>
   <ihris-element :edit="edit" :loading="loading">
     <template #form>
-      <v-menu 
+      <v-menu
         v-if="displayType == 'tree'"
         ref="menu"
         v-model="menu"
@@ -223,7 +223,7 @@ export default {
             if ( data.entry && data.entry.length > 0 ) {
               for( let entry of data.entry ) {
                 let locked = this.allAllowed ? false : !entry.resource.meta.profile.includes( this.targetProfile )
-                let item = { 
+                let item = {
                   id: entry.resource.resourceType+"/"+entry.resource.id,
                   name: entry.resource.name,
                   locked: locked

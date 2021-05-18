@@ -22,7 +22,7 @@ const fhirDefinition = {
           field = structureDef.snapshot.element.find( element => element.id === fieldSplit.join('.') )
           if ( field ) found = true
         }
-        let subExpression = "http://hl7.org/fhir/StructureDefinition/" + field.type[0].code 
+        let subExpression = "http://hl7.org/fhir/StructureDefinition/" + field.type[0].code
           + "#" + field.type[0].code +"."+ remainder.join('.')
         fhirDefinition.getFieldDefinition( subExpression ).then( (field) => {
           resolve(field)
@@ -93,7 +93,7 @@ const fhirDefinition = {
         }
       }
 
-      const min_max_copies = [ "Date", "DateTime", "Instant", "Time", "Decimal", "Integer", 
+      const min_max_copies = [ "Date", "DateTime", "Instant", "Time", "Decimal", "Integer",
         "PositiveInt", "UnsignedInt", "Quantity" ]
       for( let copy of min_max_copies ) {
         for( let type of [ "min", "max" ] ) {
@@ -130,7 +130,7 @@ const fhirDefinition = {
 
   },
   parseCodeSystem: ( resource ) => {
-    let structure = { 
+    let structure = {
       CodeSystem: {
         fields: {
           code: {
@@ -167,7 +167,7 @@ const fhirDefinition = {
             code: "string"
           }
         }
-      } 
+      }
     }
     let piece = structure.CodeSystem.fields
     if ( resource.hasOwnProperty("property") ) {

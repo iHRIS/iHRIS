@@ -13,7 +13,7 @@ const winston = require('winston')
 const getUKey = () => {
   return Math.random().toString(36).replace(/^[^a-z]+/,'') + Math.random().toString(36).substring(2,15)
 }
-
+console.log(nconf.get("defaults"));
 const filterNavigation = ( user, nav, prefix ) => {
   for( let key of Object.keys(nav.menu) ) {
     let instance
@@ -111,7 +111,7 @@ const setupOrder = ( fields, sectionOrder ) => {
 
 const processUserFilter = ( user, resource, regex_str, replace ) => {
   let filters = user.getFilter( resource )
-  try { 
+  try {
     let regex = new RegExp( regex_str )
     let output = filters.find( filter => regex.test( filter ) ).replace( regex, replace )
     return output
@@ -309,7 +309,7 @@ router.get('/page/:page/:type?', function(req, res) {
       let allActions = {}
       let constraints = {}
 
-      let vueOuput = "<template>"
+      let vueOutput = "<template>"
       for ( let fhir of structureKeys ) {
         if ( !sections.hasOwnProperty(fhir) ) {
           sections[fhir] = {
@@ -401,7 +401,7 @@ router.get('/page/:page/:type?', function(req, res) {
             if ( pageFields.hasOwnProperty(fields[field].id) ) {
               if ( pageFields[ fields[field].id ].type ) {
                 //output += " displayType=\""+ pageFields[ fields[field].id ].type +"\""
-                displayType = pageFields[ fields[field].id ].type 
+                displayType = pageFields[ fields[field].id ].type
               }
               if ( pageFields[ fields[field].id ].readOnlyIfSet ) {
                 readOnlyIfSet = true
@@ -426,13 +426,13 @@ router.get('/page/:page/:type?', function(req, res) {
               let regex = "(.+)"
               let replace = "$1"
               if ( nconf.get("defaults:fields:"+fields[field].id+":user_filter:regex") ) {
-                regex = nconf.get("defaults:fields:"+fields[field].id+":user_filter:regex") 
+                regex = nconf.get("defaults:fields:"+fields[field].id+":user_filter:regex")
               }
               if ( nconf.get("defaults:fields:"+fields[field].id+":user_filter:replace") ) {
-                replace = nconf.get("defaults:fields:"+fields[field].id+":user_filter:replace") 
+                replace = nconf.get("defaults:fields:"+fields[field].id+":user_filter:replace")
               }
               if ( nconf.get("defaults:fields:"+fields[field].id+":user_filter:resource") ) {
-                resource = nconf.get("defaults:fields:"+fields[field].id+":user_filter:resource") 
+                resource = nconf.get("defaults:fields:"+fields[field].id+":user_filter:resource")
               }
               let overrideValue = processUserFilter( req.user, resource, regex, replace )
               if ( overrideValue ) {
@@ -543,7 +543,7 @@ router.get('/page/:page/:type?', function(req, res) {
 
         vueOutput += '</template></'+resourceElement+'>'+"\n"
       }
-      vueOuput = "</template>"
+      vueOutput += "</template>"
       winston.debug(vueOutput)
       return res.status(200).json({ template: vueOutput, data: {
         sectionMenu: sectionMenu,
@@ -840,13 +840,13 @@ router.get('/questionnaire/:questionnaire', function(req, res) {
               let regex = "(.+)"
               let replace = "$1"
               if ( nconf.get("defaults:fields:"+field.id+":user_filter:regex") ) {
-                regex = nconf.get("defaults:fields:"+field.id+":user_filter:regex") 
+                regex = nconf.get("defaults:fields:"+field.id+":user_filter:regex")
               }
               if ( nconf.get("defaults:fields:"+field.id+":user_filter:replace") ) {
-                replace = nconf.get("defaults:fields:"+field.id+":user_filter:replace") 
+                replace = nconf.get("defaults:fields:"+field.id+":user_filter:replace")
               }
               if ( nconf.get("defaults:fields:"+field.id+":user_filter:resource") ) {
-                resource = nconf.get("defaults:fields:"+field.id+":user_filter:resource") 
+                resource = nconf.get("defaults:fields:"+field.id+":user_filter:resource")
               }
               let overrideValue = processUserFilter( req.user, resource, regex, replace )
               if ( overrideValue ) {

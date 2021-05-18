@@ -1,11 +1,11 @@
 <template>
   <v-container class="my-3">
 
-    <v-form 
+    <v-form
       ref="form"
       v-model="valid"
     >
-        
+
       <slot></slot>
       <v-overlay :value="overlay">
         <v-progress-circular
@@ -15,7 +15,7 @@
           ></v-progress-circular>
         <v-btn icon @click="overlay = false"><v-icon>mdi-close</v-icon></v-btn>
       </v-overlay>
-  
+
       <v-navigation-drawer
         app
         right
@@ -49,7 +49,7 @@
             </v-list-item-content>
           </v-list-item>
         </v-list>
-  
+
       </v-navigation-drawer>
     </v-form>
   </v-container>
@@ -95,7 +95,7 @@ export default {
             //console.log("ARRAY", child.path)
           } else if ( child.isQuestionnaireGroup ) {
             //console.log("GROUP", child.path)
-            let section = { linkId: child.path, text: child.label, item: [] } 
+            let section = { linkId: child.path, text: child.label, item: [] }
             next.push( section )
             next = section.item
           } else if ( child.qField ) {
@@ -114,7 +114,7 @@ export default {
             if ( child.constraints ) {
               child.errors = []
               try {
-                this.advancedValid = this.advancedValid && await this.$fhirutils.checkConstraints( child.constraints, 
+                this.advancedValid = this.advancedValid && await this.$fhirutils.checkConstraints( child.constraints,
                   this.constraints, child.value, child.errors )
               } catch( err ) {
                 this.advancedValid = false
@@ -133,11 +133,11 @@ export default {
               console.log(err)
             }
 
-          } 
+          }
           if ( child.isQuestionnaireGroup && child.constraints ) {
             child.errors = []
             try {
-              this.advancedValid = this.advancedValid && await this.$fhirutils.checkConstraints( child.constraints, 
+              this.advancedValid = this.advancedValid && await this.$fhirutils.checkConstraints( child.constraints,
                 this.constraints, next, child.errors )
             } catch( err ) {
               this.advancedValid = false
@@ -153,7 +153,7 @@ export default {
 
 
       //console.log(this.field)
-      this.fhir = { 
+      this.fhir = {
         resourceType: "QuestionnaireResponse",
         questionnaire: this.url,
         status: "completed",
@@ -194,7 +194,7 @@ export default {
                 if ( redirect && redirect.code ) {
                   subject = redirect.code
                 }
-              } 
+              }
               if ( !subject && data.subject && data.subject.reference ) {
                 subject = data.subject.reference
               }
