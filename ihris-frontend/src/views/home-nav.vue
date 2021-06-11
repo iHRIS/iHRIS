@@ -17,7 +17,7 @@
               :class="colors[idx % colors.length]"
             >
               <v-icon dark>{{item.icon}}</v-icon>
-              {{item.text}} 
+              {{item.text}}
             </v-card-title>
 
             <v-card-text>
@@ -31,8 +31,8 @@
                 </v-list-item>
               </v-list>
               <v-list v-else>
-                <v-list-item 
-                  :to="item.url" 
+                <v-list-item
+                  :to="item.url"
                   :key="item.id"
                 >
                   <v-list-item-title class="text-h2">{{item.text}}</v-list-item-title>

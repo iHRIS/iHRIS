@@ -13,7 +13,6 @@ const winston = require('winston')
 const getUKey = () => {
   return Math.random().toString(36).replace(/^[^a-z]+/,'') + Math.random().toString(36).substring(2,15)
 }
-console.log(nconf.get("defaults"));
 const filterNavigation = ( user, nav, prefix ) => {
   for( let key of Object.keys(nav.menu) ) {
     let instance

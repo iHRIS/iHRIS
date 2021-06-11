@@ -155,6 +155,10 @@
       {
         "url": "multiple",
         "valueBoolean": false
+      },
+      {
+        "url": "query",
+        "valueString": "active=true"
       }
     ]
   },

@@ -452,7 +452,7 @@
         },
         {
           "name": "defaults:fields:Practitioner.extension:residence.value[x]:valueReference:initialValue",
-          "valueString": "Location/TF
+          "valueString": "Location/TF"
         },
         {
           "name": "defaults:fields:Person.extension:location.value[x]:valueReference:type",
