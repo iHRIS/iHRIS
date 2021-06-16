@@ -255,7 +255,7 @@ Usage:          #example
 * extension[section][5].extension[resource].extension[column][4].extension[field].valueString = "extension.where(url='http://ihris.org/fhir/StructureDefinition/ihris-leave').extension.where(url='period').valuePeriod.end"
 * extension[section][5].extension[resource].extension[column][5].extension[header].valueString = "Actions"
 * extension[section][5].extension[resource].extension[column][5].extension[field].valueString = "_action"
-* extension[section][5].extension[resource].extension[action][0].extension[link].valueString = "/questionnaire/ihris-leave-ethiopia/practitioner?practitioner=FHIRID"
+* extension[section][5].extension[resource].extension[action][0].extension[link].valueString = "/questionnaire/ihris-leave/practitioner?practitioner=FHIRID"
 * extension[section][5].extension[resource].extension[action][0].extension[text].valueString = "Add Leave"
 * extension[section][5].extension[resource].extension[action][0].extension[row].valueBoolean = false
 * extension[section][5].extension[resource].extension[action][0].extension[emptyDisplay].valueBoolean = true

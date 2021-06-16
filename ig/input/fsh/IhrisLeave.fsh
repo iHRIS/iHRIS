@@ -72,7 +72,7 @@ Title:            "iHRIS leave Type ValueSet"
 * codes from system IhrisLeaveTypeCodeSystem
 
 Instance:       IhrisPractitionerWorkflowLeave
-InstanceOf:      Questionnaire
+InstanceOf:     IhrisQuestionnaire
 Usage:          #definition
 * title = "iHRIS Leave Workflow"
 * description = "iHRIS workflow to record a leave"
