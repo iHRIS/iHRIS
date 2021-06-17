@@ -1,0 +1,141 @@
+{
+  "resourceType": "Basic",
+  "id": "ihris-es-report-mhero-inbox-message-breakdown",
+  "meta": {
+    "versionId": "1",
+    "lastUpdated": "2019-07-30T07:34:24.098+00:00",
+    "profile": [
+      "http://ihris.org/fhir/StructureDefinition/iHRISRelationship"
+    ]
+  },
+  "extension": [{
+    "url": "http://ihris.org/fhir/StructureDefinition/iHRISReportDetails",
+    "extension": [{
+      "url": "label",
+      "valueString": "Inbox Messages By Practitioner"
+    }, {
+      "url": "name",
+      "valueString": "mheroinboxmessagebreakdown"
+    }, {
+      "url": "resource",
+      "valueString": "Communication"
+    }, {
+      "url": "query",
+      "valueString": "category.coding.where(system='http://ihris.org/fhir/CodeSystem/message-category').code=inbox"
+    }, {
+      "url": "http://ihris.org/fhir/StructureDefinition/iHRISReportElement",
+      "extension": [{
+        "url": "display",
+        "valueString": "Message"
+      }, {
+        "url": "label",
+        "valueString": "message"
+      }, {
+        "url": "name",
+        "valueString": "payload.contentString"
+      }]
+    }, {
+      "url": "http://ihris.org/fhir/StructureDefinition/iHRISReportElement",
+      "extension": [{
+        "url": "display",
+        "valueString": "Date"
+      }, {
+        "url": "label",
+        "valueString": "Date"
+      }, {
+        "url": "name",
+        "valueString": "received"
+      }, {
+        "url": "filter",
+        "valueBoolean": true
+      }, {
+        "url": "dropDownFilter",
+        "valueBoolean": false
+      }]
+    }]
+  }, {
+    "url": "http://ihris.org/fhir/StructureDefinition/iHRISReportLink",
+    "extension": [{
+        "url": "name",
+        "valueString": "practitioner"
+      },
+      {
+        "url": "resource",
+        "valueString": "Practitioner"
+      },
+      {
+        "url": "linkElement",
+        "valueString": "Practitioner.id"
+      },
+      {
+        "url": "linkTo",
+        "valueString": "mheroinboxmessagebreakdown.recipient.reference"
+      },
+      {
+        "url": "multiple",
+        "valueBoolean": false
+      },
+      {
+        "url": "http://ihris.org/fhir/StructureDefinition/iHRISReportElement",
+        "extension": [{
+          "url": "display",
+          "valueString": "Fullname"
+        }, {
+          "url": "label",
+          "valueString": "fullname"
+        }, {
+          "url": "name",
+          "valueString": "concat(name.where(use='official').last().given,name.where(use='official').last().family)"
+        }, {
+          "url": "filter",
+          "valueBoolean": true
+        }, {
+          "url": "dropDownFilter",
+          "valueBoolean": false
+        }]
+      },
+      {
+        "url": "http://ihris.org/fhir/StructureDefinition/iHRISReportElement",
+        "extension": [{
+          "url": "display",
+          "valueString": "Gender"
+        },
+        {
+            "url": "label",
+            "valueString": "gender"
+          },
+          {
+            "url": "name",
+            "valueString": "gender"
+          }
+        ]
+      },
+      {
+        "url": "http://ihris.org/fhir/StructureDefinition/iHRISReportElement",
+        "extension": [{
+          "url": "display",
+          "valueString": "Phone Number"
+        },
+        {
+            "url": "label",
+            "valueString": "phone"
+          },
+          {
+            "url": "name",
+            "valueString": "telecom.where(system='phone').value"
+          }
+        ]
+      }
+    ]
+  }],
+  "code": {
+    "coding": [{
+      "system": "http://ihris.org/fhir/ValueSet/ihris-resource",
+      "code": "iHRISRelationship"
+    }],
+    "text": "iHRISRelationship"
+  },
+  "subject": {
+    "reference": "StructureDefinition/Basic"
+  }
+}

@@ -156,7 +156,7 @@
           "valueString": "fullname"
         }, {
           "url": "name",
-          "valueString": "name.where(use='official').last().text"
+          "valueString": "concat(name.where(use='official').last().given,name.where(use='official').last().family)"
         }, {
           "url": "filter",
           "valueBoolean": true
