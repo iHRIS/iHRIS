@@ -69,6 +69,12 @@
             <v-list-item-title class="text-h2">Message Sending Breakdown</v-list-item-title>
           </v-list-item>
           <v-list-item
+            to="/report/ihris-es-report-mhero-inbox-message-breakdown"
+            key="9"
+          >
+            <v-list-item-title class="text-h2">Inbox Messages</v-list-item-title>
+          </v-list-item>
+          <v-list-item
             to="/report/ihris-es-report-message-exchange"
             key="10"
           >
