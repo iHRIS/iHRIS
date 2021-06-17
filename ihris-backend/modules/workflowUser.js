@@ -1,15 +1,14 @@
 const nconf = require('./config')
-const user = require('./user')
+const user = require('./user').user
 const winston = require('winston')
 const crypto = require('crypto')
 const outcomes = require('../config/operationOutcomes')
-//const differenceInBusinessDays = require('date-fns/differenceInBusinessDays')
 const fhirAxios = nconf.fhirAxios
 
 const ROLE_EXTENSION = "http://ihris.org/fhir/StructureDefinition/ihris-assign-role"
 const TASK_EXTENSION = "http://ihris.org/fhir/StructureDefinition/ihris-task"
 
-var locationRoleID = undefined
+let locationRoleID = undefined
 
 const workflowUser = {
   process: ( req ) => {
@@ -20,7 +19,6 @@ const workflowUser = {
           type: "transaction",
           entry: []
         }
-        
         if ( req.body && req.body.item 
           && req.body.item && req.body.item[0].linkId === "Person"
           && req.body.item[0].item && req.body.item[0].item[0].linkId === "Person.name[0].text" 
@@ -37,7 +35,6 @@ const workflowUser = {
             let userRoleId = undefined
             let extensions = []
             user.lookupByEmail(userEmail).then( async (userObj) =>  {
-
               if ( !userObj ) {
                 if(req.body.item[0].item[5].linkId === "location" 
                     && req.body.item[0].item[5].answer 
