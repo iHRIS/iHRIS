@@ -114,7 +114,7 @@ Usage:          #example
 * extension[reportdetails].extension[query].valueString = "identifier.system=http://app.rapidpro.io/contact-uuid"
 * extension[reportdetails].extension[displayCheckbox].valueBoolean = true
 * extension[reportdetails].extension[reportelement][0].extension[label].valueString = "fullname"
-* extension[reportdetails].extension[reportelement][0].extension[name].valueString = "name.where(use='official').last().text"
+* extension[reportdetails].extension[reportelement][0].extension[name].valueString = "concat(name.where(use='official').last().given,name.where(use='official').last().family)"
 * extension[reportdetails].extension[reportelement][0].extension[display].valueString = "Fullname"
 * extension[reportdetails].extension[reportelement][0].extension[filter].valueBoolean = true
 * extension[reportdetails].extension[reportelement][0].extension[dropDownFilter].valueBoolean = false
@@ -134,6 +134,7 @@ Usage:          #example
 * extension[reportlink].extension[reportelement][0].extension[dropDownFilter].valueBoolean = true
 * extension[reportlink].extension[name].valueString = "role"
 * extension[reportlink].extension[resource].valueString = "PractitionerRole"
+* extension[reportlink].extension[query].valueString = "period.start:missing=false"
 * extension[reportlink].extension[linkElement].valueString = "PractitionerRole.practitioner.reference"
 * extension[reportlink].extension[linkTo].valueString = "mheropractitioner"
 * extension[reportlink].extension[linkElementSearchParameter].valueString = "practitioner"

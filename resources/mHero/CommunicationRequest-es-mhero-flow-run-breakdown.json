@@ -117,6 +117,9 @@
         "url": "name",
         "valueString": "status"
       }, {
+        "url": "valueModifier",
+        "valueString": "send_status==completed?Sent:send_status==entered-in-error?Failed"
+      }, {
         "url": "filter",
         "valueBoolean": true
       }, {
@@ -180,6 +183,25 @@
             "valueString": "telecom.where(system='phone').value"
           }
         ]
+      },
+      {
+        "url": "http://ihris.org/fhir/StructureDefinition/iHRISReportElement",
+        "extension": [{
+          "url": "display",
+          "valueString": "Gender"
+        }, {
+          "url": "label",
+          "valueString": "gender"
+        }, {
+          "url": "name",
+          "valueString": "gender"
+        }, {
+          "url": "filter",
+          "valueBoolean": true
+        }, {
+          "url": "dropDownFilter",
+          "valueBoolean": true
+        }]
       }
     ]
   }, {
@@ -277,7 +299,7 @@
       },
       {
         "url": "linkTo",
-        "valueString": "role.location"
+        "valueString": "role.location.reference"
       },
       {
         "url": "multiple",

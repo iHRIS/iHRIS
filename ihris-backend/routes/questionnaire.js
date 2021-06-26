@@ -10,7 +10,6 @@ const fhirModules = require('../modules/fhirModules')
 const isEmpty = require('is-empty')
 const outcomes = require('../config/operationOutcomes')
 const winston = require('winston')
-
 let workflowModules = {}
 
 /**
@@ -35,6 +34,7 @@ router.post("/QuestionnaireResponse", (req, res, next) => {
 
   let workflowQuestionnaires = nconf.get("workflow:questionnaire")
   let workflow = Object.keys(workflowQuestionnaires).find( wf => workflowQuestionnaires[wf].url === req.body.questionnaire )
+
   if ( workflow ) {
 
     let processor = workflow
@@ -51,6 +51,8 @@ router.post("/QuestionnaireResponse", (req, res, next) => {
     }
     fhirModules.requireWorkflow( workflow, details.library, details.file ).then( (module) => {
         module.process( req ).then( (bundle) => {
+          console.error(JSON.stringify(bundle,0,2));
+          process.exit()
           fhirSecurity.preProcess( bundle ).then( (uuid) => {
             fhirFilter.filterBundle( "write", bundle, req.user )
             let errorCheck = checkBundleForError( bundle )
@@ -109,7 +111,6 @@ router.post("/QuestionnaireResponse", (req, res, next) => {
       } )
 
   } else {
-
     fhirQuestionnaire.processQuestionnaire( req.body ).then( (bundle) => {
       winston.debug(JSON.stringify(bundle,null,2))
       fhirSecurity.preProcess( bundle ).then( (uuid) => {

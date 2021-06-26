@@ -167,7 +167,7 @@
         },
         {
           "url": "linkTo",
-          "valueString": "role.location"
+          "valueString": "role.location.reference"
         },
         {
           "url": "multiple",

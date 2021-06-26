@@ -100,6 +100,34 @@
               "valueBoolean": false
             }
           ]
+        },
+        {
+          "url": "http://ihris.org/fhir/StructureDefinition/iHRISReportElement",
+          "extension": [{
+            "url": "display",
+            "valueString": "Status"
+          },
+          {
+              "url": "label",
+              "valueString": "status"
+            },
+            {
+              "url": "name",
+              "valueString": "status"
+            },
+            {
+              "url": "valueModifier",
+              "valueString": "status==on-hold?Active:Inactive"
+            },
+            {
+              "url": "filter",
+              "valueBoolean": true
+            },
+            {
+              "url": "dropDownFilter",
+              "valueBoolean": true
+            }
+          ]
         }
       ]
     },

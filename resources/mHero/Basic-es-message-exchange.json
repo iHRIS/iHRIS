@@ -57,7 +57,7 @@
       "valueString": "Communication"
     }, {
       "url": "linkElement",
-      "valueString": "Communication.inResponseTo"
+      "valueString": "Communication.inResponseTo.reference"
     }, {
       "url": "linkTo",
       "valueString": "messagerequest.id"
