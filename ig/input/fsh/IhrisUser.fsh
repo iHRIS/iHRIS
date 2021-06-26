@@ -89,8 +89,10 @@ Usage:          #example
 * extension[display].extension[search][1].valueString = "Username/Email|Person.telecom.where(system='email').value"
 * extension[display].extension[search][2].valueString = "Role|Person.extension.where(url='http://ihris.org/fhir/StructureDefinition/ihris-assign-role').valueReference.reference"
 * extension[display].extension[search][3].valueString = "Location|Person.extension.where(url='http://ihris.org/fhir/StructureDefinition/ihris-user-location').valueReference.reference"
+* extension[display].extension[filter][0].valueString = "User|name:contains"
 * extension[display].extension[field][0].extension[path].valueString = "Person.extension:password.extension:password.value[x]:valueString"
 * extension[display].extension[field][0].extension[type].valueString = "password"
+* extension[display].extension[field][0].extension[readOnlyIfSet].valueBoolean = true
 * extension[display].extension[add].extension[url].valueUrl = "/questionnaire/ihris-user/user"
 * extension[display].extension[add].extension[icon].valueString = "mdi-account-plus"
 * extension[display].extension[add].extension[class].valueString = "accent"
@@ -101,6 +103,7 @@ Usage:          #example
 * extension[section][0].extension[field][1].valueString = "Person.telecom"
 * extension[section][0].extension[field][2].valueString = "Person.extension:role.value[x]:valueReference"
 * extension[section][0].extension[field][3].valueString = "Person.extension:location.value[x]:valueReference"
+* extension[section][0].extension[field][4].valueString = "Person.extension:password.extension:password.value[x]:valueString"
 
 Instance:       IhrisUser
 InstanceOf:     IhrisQuestionnaire
@@ -119,7 +122,7 @@ Usage:          #definition
 * item[0].type = #group
 * item[0].extension[constraint].extension[key].valueId = "ihris-password-check"
 * item[0].extension[constraint].extension[severity].valueCode = #error
-* item[0].extension[constraint].extension[expression].valueString = "where(linkId='password#password').answer.first().valueString != where(linkId='confrimpassword#password').answer.first().valueString"
+* item[0].extension[constraint].extension[expression].valueString = "where(linkId='password').answer.first().valueString = where(linkId='confrimpassword').answer.first().valueString"
 * item[0].extension[constraint].extension[human].valueString = "Please make sure Password and Confrim Password Match."
 
 * item[0].item[0].linkId = "Person.name[0].text"

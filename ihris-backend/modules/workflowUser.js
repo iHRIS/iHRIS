@@ -1,15 +1,14 @@
 const nconf = require('./config')
-const user = require('./user')
+const user = require('./user').user
 const winston = require('winston')
 const crypto = require('crypto')
 const outcomes = require('../config/operationOutcomes')
-//const differenceInBusinessDays = require('date-fns/differenceInBusinessDays')
 const fhirAxios = nconf.fhirAxios
 
 const ROLE_EXTENSION = "http://ihris.org/fhir/StructureDefinition/ihris-assign-role"
 const TASK_EXTENSION = "http://ihris.org/fhir/StructureDefinition/ihris-task"
 
-var locationRoleID = undefined
+let locationRoleID = undefined
 
 const workflowUser = {
   process: ( req ) => {
@@ -106,13 +105,11 @@ const workflowUser = {
               })
             }
             let personPassLink = personLink.item && personLink.item.find(item => item.linkId === "password")
-            console.log(personPassLink);
             if(personPassLink && personPassLink.answer && personPassLink.answer.length > 0 && personPassLink.answer[0].valueString) {
               try {
                 // user.hashPassword(req.body.item[0].item[6].answer[0].valueString).then((hashedPassword) => {
                 let passwordExt = []
                 let password = personPassLink.answer[0].valueString
-                console.log(password);
                 let salt = crypto.randomBytes(16).toString('hex')
                 let hash = crypto.pbkdf2Sync( password, salt, 1000, 64, 'sha512' ).toString('hex')
                 passwordExt.push({ url:"password",
