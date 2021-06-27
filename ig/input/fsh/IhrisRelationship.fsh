@@ -83,6 +83,7 @@ Description:    "Lists fields of a resource to be displayed/cached"
       label 1..1 MS and
       name 1..1 MS and
       display 0..1 MS and
+      valueModifier 0..1 MS and
       filter 0..1 MS and
       dropDownFilter 0..1 MS
 * extension[label].value[x] only string
@@ -94,6 +95,9 @@ Description:    "Lists fields of a resource to be displayed/cached"
 * extension[display].value[x] only string
 * extension[display].valueString 1..1
 * extension[display].valueString ^label = "Human readable name if the relation is to be displayed on the UI"
+* extension[valueModifier].value[x] only string
+* extension[valueModifier].valueString 1..1
+* extension[valueModifier].valueString ^label = "Modify value to be displayed"
 * extension[filter].value[x] only boolean
 * extension[filter].valueBoolean 1..1
 * extension[filter].valueBoolean ^label = "Display as a filter"
@@ -121,6 +125,10 @@ Usage:          #example
 * extension[reportdetails].extension[reportelement][1].extension[label].valueString = "phone"
 * extension[reportdetails].extension[reportelement][1].extension[name].valueString = "telecom.where(system='phone').value"
 * extension[reportdetails].extension[reportelement][1].extension[display].valueString = "Phone Number"
+* extension[reportdetails].extension[reportelement][1].extension[label].valueString = "gender"
+* extension[reportdetails].extension[reportelement][1].extension[name].valueString = "gender"
+* extension[reportdetails].extension[reportelement][1].extension[valueModifier].valueString = "gender==male?Male:gender==female?Female:Unknown"
+* extension[reportdetails].extension[reportelement][1].extension[display].valueString = "Gender"
 * extension[reportlink].extension[name].valueString = "group"
 * extension[reportlink].extension[resource].valueString = "Group"
 * extension[reportlink].extension[linkElement].valueString = "Group.member.entity.reference"
