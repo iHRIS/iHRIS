@@ -1,12 +1,8 @@
 const nconf = require('./config')
-const user = require('./user').user
+const user = require('./user')
 const winston = require('winston')
 const crypto = require('crypto')
-const outcomes = require('../config/operationOutcomes')
 const fhirAxios = nconf.fhirAxios
-
-const ROLE_EXTENSION = "http://ihris.org/fhir/StructureDefinition/ihris-assign-role"
-const TASK_EXTENSION = "http://ihris.org/fhir/StructureDefinition/ihris-task"
 
 let locationRoleID = undefined
 

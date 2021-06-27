@@ -1,5 +1,4 @@
 const express = require('express')
-const fs = require('fs')
 const router = express.Router()
 const nconf = require('../modules/config')
 const fhirAxios = nconf.fhirAxios
@@ -7,10 +6,8 @@ const fhirFilter = require('../modules/fhirFilter')
 const fhirSecurity = require('../modules/fhirSecurity')
 const fhirQuestionnaire = require('../modules/fhirQuestionnaire')
 const fhirModules = require('../modules/fhirModules')
-const isEmpty = require('is-empty')
 const outcomes = require('../config/operationOutcomes')
 const winston = require('winston')
-let workflowModules = {}
 
 /**
  * This route will process a QuestionnaireReponse and parse
@@ -51,8 +48,6 @@ router.post("/QuestionnaireResponse", (req, res, next) => {
     }
     fhirModules.requireWorkflow( workflow, details.library, details.file ).then( (module) => {
         module.process( req ).then( (bundle) => {
-          console.error(JSON.stringify(bundle,0,2));
-          process.exit()
           fhirSecurity.preProcess( bundle ).then( (uuid) => {
             fhirFilter.filterBundle( "write", bundle, req.user )
             let errorCheck = checkBundleForError( bundle )
