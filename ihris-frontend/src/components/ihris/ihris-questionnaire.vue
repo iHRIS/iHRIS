@@ -227,6 +227,9 @@ export default {
               }
             } else {
               errors = "Unknown"
+              if(data) {
+                errors = data
+              }
             }
             this.$store.commit('setMessage', { type: 'error', text: 'An error occurred trying to save this record: '+errors })
           } ).catch( err => {

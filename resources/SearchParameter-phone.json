@@ -1,0 +1,19 @@
+{
+  "resourceType": "SearchParameter",
+  "id": "practitioner-phone",
+  "url": "http://ihris.org/fhir/SearchParameter/practitioner-phone",
+  "name": "Search Parameter on a name extension on Basic resources",
+  "status": "active",
+  "description": "Search by phone for a Practitioner resource.",
+  "code": "phonenumber",
+  "base": [
+    "Practitioner"
+  ],
+  "target": [
+    "Practitioner"
+  ],
+  "type": "string",
+  "expression": "Practitioner.telecom.where(system='phone').value",
+  "xpath": "f:Practitioner/f:telecom[@system='phone']/value",
+  "xpathUsage": "normal"
+}

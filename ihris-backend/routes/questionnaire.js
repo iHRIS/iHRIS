@@ -90,10 +90,11 @@ router.post("/QuestionnaireResponse", (req, res, next) => {
 
 
         } ).catch( (err) => {
-          winston.error(err.message)
           if ( err === "Invalid input" ) {
+            winston.error(err)
             return res.status( 400 ).json( err )
           } else {
+            winston.error(err.message)
             return res.status( 500 ).json( err )
           }
         } )

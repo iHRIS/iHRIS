@@ -24,6 +24,10 @@
       "valueString": ""
     },
     {
+      "name": "mhero:countrycode",
+      "valueString": ""
+    },
+    {
       "name": "elasticsearch:base",
       "valueString": "http://localhost:9200"
     },
