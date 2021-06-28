@@ -44,6 +44,18 @@
       "valueCode": "Basic"
     }, {
       "url": "instance",
+      "valueId": "ihris-es-report-mhero-contacts"
+    } ]
+  }, {
+    "url": "http://ihris.org/fhir/StructureDefinition/ihris-task",
+    "extension": [ {
+      "url": "permission",
+      "valueCode": "read"
+    }, {
+      "url": "resource",
+      "valueCode": "Basic"
+    }, {
+      "url": "instance",
       "valueId": "ihris-es-report-mhero-send-message"
     } ]
   }, {

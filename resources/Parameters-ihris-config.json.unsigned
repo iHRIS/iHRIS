@@ -419,14 +419,6 @@
           "valueString": "http://ihris.org/fhir/Questionnaire/ihris-user"
         },
         {
-          "name": "workflow:processor:practitioner:file",
-          "valueString": "../modules/workflowPractitioner"
-        },
-        {
-          "name": "workflow:questionnaire:practitioner:url",
-          "valueString": "http://ihris.org/fhir/Questionnaire/ihris-practitioner"
-        },
-        {
           "name": "defaults:components:date-time:minValueDateTime",
           "valueString": "1920-01-01"
         },

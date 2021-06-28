@@ -15,6 +15,12 @@
       <v-card-text>
         <v-list >
           <v-list-item
+            to="/report/ihris-es-report-mhero-contacts"
+            key="1"
+          >
+            <v-list-item-title class="text-h2">Contacts List</v-list-item-title>
+          </v-list-item>
+          <v-list-item
             to="/report/ihris-es-report-mhero-workflows"
             key="1"
           >
