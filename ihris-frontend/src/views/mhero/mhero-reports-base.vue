@@ -18,13 +18,13 @@
             to="/report/ihris-es-report-mhero-contacts"
             key="1"
           >
-            <v-list-item-title class="text-h2">Contacts List (Only those with phone)</v-list-item-title>
+            <v-list-item-title class="text-h2">Practitioners List (Only those with phone)</v-list-item-title>
           </v-list-item>
           <v-list-item
             to="/report/ihris-es-report-all-practitioners"
             key="2"
           >
-            <v-list-item-title class="text-h2">Employees List (All employees)</v-list-item-title>
+            <v-list-item-title class="text-h2">Practitioners List (All employees)</v-list-item-title>
           </v-list-item>
           <v-list-item
             to="/report/ihris-es-report-mhero-workflows"

@@ -13,7 +13,7 @@
       "url": "http://ihris.org/fhir/StructureDefinition/iHRISReportDetails",
       "extension": [{
           "url": "label",
-          "valueString": "Contacts List"
+          "valueString": "Practitioners List (Only those with phone)"
         },
         {
           "url": "displayCheckbox",
