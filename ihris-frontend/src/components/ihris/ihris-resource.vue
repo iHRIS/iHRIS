@@ -1,11 +1,11 @@
 <template>
   <v-container class="my-3">
-        
-    <v-form 
+
+    <v-form
       ref="form"
       v-model="valid"
     >
-  
+
       <slot :source="source"></slot>
       <v-overlay :value="overlay">
         <v-progress-circular
@@ -62,7 +62,7 @@
             </v-list-item-content>
           </v-list-item>
         </v-list>
-  
+
       </v-navigation-drawer>
     </v-form>
   </v-container>
@@ -208,7 +208,7 @@ export default {
         }
         return link.url.replace("FIELD",field)
       } else {
-        return link.url 
+        return link.url
       }
     },
     setLinkText: function() {
@@ -293,17 +293,17 @@ export default {
           }
 
           if ( child.$children ) {
-            try { 
+            try {
               await processChildren( fullField, next, child.$children )
             } catch( err ) {
               this.advancedValid = false
               console.log(err)
             }
-          } 
+          }
           if ( child.constraints ) {
             child.errors = []
             try {
-              this.advancedValid = this.advancedValid && await this.$fhirutils.checkConstraints( child.constraints, 
+              this.advancedValid = this.advancedValid && await this.$fhirutils.checkConstraints( child.constraints,
                 this.constraints, next, child.errors, this.fhirId )
             } catch( err ) {
               this.advancedValid = false
@@ -317,10 +317,10 @@ export default {
       }
 
       //console.log(this.field)
-      this.fhir = { 
+      this.fhir = {
         resourceType: this.field,
         meta: {
-          profile: [ this.profile ] 
+          profile: [ this.profile ]
         }
       }
       //console.log(this)
@@ -344,7 +344,7 @@ export default {
           "Content-Type": "application/fhir+json"
         },
         redirect: 'manual',
-      } 
+      }
       if ( this.fhirId ) {
         this.fhir.id = this.fhirId
         url += "/" + this.fhirId

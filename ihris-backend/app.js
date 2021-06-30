@@ -173,7 +173,6 @@ async function startUp() {
   app.use('/fhir', questionnaireRouter)
   app.use('/fhir', fhirRouter)
   app.use('/es', esRouter)
-
   const loadModules = nconf.get("modules")
   if (loadModules) {
     const modPaths = Object.keys(loadModules)

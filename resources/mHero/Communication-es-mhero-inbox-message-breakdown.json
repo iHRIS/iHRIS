@@ -12,7 +12,7 @@
     "url": "http://ihris.org/fhir/StructureDefinition/iHRISReportDetails",
     "extension": [{
       "url": "label",
-      "valueString": "Inbox Messages By Practitioner"
+      "valueString": "Inbox Messages"
     }, {
       "url": "name",
       "valueString": "mheroinboxmessagebreakdown"

@@ -49,6 +49,10 @@ Description:    "iHRIS profile of Practitioner."
 * telecom.use ^label = "Use"
 * telecom.value MS
 * telecom.value ^label = "Value"
+* telecom ^constraint[0].key = "ihris-search-phone"
+* telecom ^constraint[0].severity = #error
+* telecom ^constraint[0].expression = "'Practitioner' | 'phonenumber' | iif(value.exists(), system & '|' & value, value)"
+* telecom ^constraint[0].human = "The identifier must be unique and another record has this identifier"
 * address 0..* MS
 * address ^label = "Address"
 * address.use MS

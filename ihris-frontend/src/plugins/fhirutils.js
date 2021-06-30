@@ -10,6 +10,7 @@ const fhirutils = {
     return value
   },
   checkConstraints: ( constraintList, constraintDetails, element, errors, fhirId ) => {
+    console.log(constraintList);
     return new Promise( (resolve, reject) => {
       let constraints = constraintList.split(",")
       let promises = []
@@ -80,7 +81,7 @@ const fhirutils = {
       return fhirutils.codeLookup( display.system, display.code )
     } else if ( display.reference ) {
       return fhirutils.resourceLookup( display.reference )
-    } else if ( /([A-Z]\w*)\/([A-Za-z0-9\-.]{1,64})/.test( display ) ) { 
+    } else if ( /([A-Z]\w*)\/([A-Za-z0-9\-.]{1,64})/.test( display ) ) {
       return fhirutils.resourceLookup( display )
     } else {
       return new Promise( resolve => resolve(display) )
