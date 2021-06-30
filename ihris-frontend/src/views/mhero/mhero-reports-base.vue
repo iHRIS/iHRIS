@@ -24,7 +24,7 @@
             to="/report/ihris-es-report-all-practitioners"
             key="2"
           >
-            <v-list-item-title class="text-h2">Practitioners List (All employees)</v-list-item-title>
+            <v-list-item-title class="text-h2">Practitioners List (All practitioners)</v-list-item-title>
           </v-list-item>
           <v-list-item
             to="/report/ihris-es-report-mhero-workflows"
