@@ -5,9 +5,6 @@
 <script>
 export default {
   name: "kibana-dashboard",
-  props: [ "id" ],
-  created() {
-    console.log('/kibana/app/kibana#/dashboard/'+this.$route.params.id+'?embed=true');
-  }
+  props: [ "id" ]
 }
 </script>
