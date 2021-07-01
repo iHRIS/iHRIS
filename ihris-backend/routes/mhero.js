@@ -330,7 +330,22 @@ router.post('/unsubscribe-contact-groups', (req, res) => {
 
 router.put('/optout', (req, res) => {
   let url = URI(nconf.get("emnutt:base").replace('/fhir', '')).segment('optout');
-  console.log(url.toString());
+  axios.put(url.toString(), req.body, {
+    withCredentials: true,
+    auth: {
+      username: nconf.get("emnutt:username"),
+      password: nconf.get("emnutt:password")
+    }
+  }).then(() => {
+    return res.status(200).send()
+  }).catch(err => {
+    winston.error(err.message)
+    return res.status(500).send()
+  });
+})
+
+router.put('/undoOptout', (req, res) => {
+  let url = URI(nconf.get("emnutt:base").replace('/fhir', '')).segment('undoOptout');
   axios.put(url.toString(), req.body, {
     withCredentials: true,
     auth: {
