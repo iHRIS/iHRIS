@@ -9,7 +9,7 @@
         },
         {
           "url": "displayCheckbox",
-          "valueBoolean": false
+          "valueBoolean": true
         },
         {
           "url": "name",

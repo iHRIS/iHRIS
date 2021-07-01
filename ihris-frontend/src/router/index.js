@@ -19,6 +19,11 @@ const routes = [{
     props: { default: { id: "page-home", blankOnErr: true } }
   },
   {
+    path: '/page/blockContacts',
+    name: 'mhero',
+    component: () => import( /* webpackChunkName: "mhero" */ "../views/mhero/blockContacts.vue")
+  },
+  {
     path: '/page/mhero',
     name: 'mhero',
     component: () => import( /* webpackChunkName: "mhero" */ "../views/mhero/mhero.vue")

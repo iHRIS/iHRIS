@@ -18,6 +18,7 @@ const workflowPractitioner = {
         let phoneQuery = ''
         let countrycode = nconf.get("mhero:countrycode")
         for(let ph of phone) {
+          ph.value = ph.value.replace(/ /g,'')
           if(countrycode) {
             ph.value = ph.value.replace(countrycode, '')
           } else {
