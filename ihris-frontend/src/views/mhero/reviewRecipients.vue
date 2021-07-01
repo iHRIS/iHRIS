@@ -1,5 +1,6 @@
 <template>
   <v-container>
+    {{sendDate}} {{sendTime}}
     <mheroprogress
       :title="progressTitle"
       :requestIDs="requestIDs"
@@ -346,7 +347,25 @@ export default {
     countCharacters() {
       this.chars = this.sms.length
     },
+    validSendTime() {
+      if(!this.sendTime || !this.sendDate) {
+        return true
+      }
+      let selectedTime = this.$moment(this.sendDate + 'T' + this.sendTime + ':00', 'YYYY-MM-DDTHH:mm:ss').format()
+      if(this.$moment(selectedTime).isSameOrBefore(this.$moment().format('YYYY-MM-DDTHH:mm:ss'))) {
+        this.statusDialog.enable = true
+        this.statusDialog.color = 'error'
+        this.statusDialog.title = 'Error'
+        this.statusDialog.description = 'Selected send time is before the current time'
+        return false
+      }
+      return true
+    },
     send() {
+      if(!this.validSendTime()) {
+        this.confirmSendingDialog = false
+        return
+      }
       if(this.sending) {
         return
       }
@@ -491,7 +510,7 @@ export default {
       if(this.frequency === 'once' && !this.sendTimeCategory) {
         return false
       }
-      if(this.frequency === 'once' && this.sendTimeCategory === 'later' && !this.cronExpression) {
+      if(this.frequency === 'once' && this.sendTimeCategory === 'later' && (!this.cronExpression || !this.validSendTime())) {
         return false
       }
       return true;

@@ -32,10 +32,10 @@
         {
           "url": "http://ihris.org/fhir/StructureDefinition/iHRISReportElement",
           "extension": [{
-            "url": "display",
-            "valueString": "Fullname"
-          },
-          {
+              "url": "display",
+              "valueString": "Fullname"
+            },
+            {
               "url": "label",
               "valueString": "fullname"
             },
@@ -56,10 +56,10 @@
         {
           "url": "http://ihris.org/fhir/StructureDefinition/iHRISReportElement",
           "extension": [{
-            "url": "display",
-            "valueString": "Phone Number"
-          },
-          {
+              "url": "display",
+              "valueString": "Phone Number"
+            },
+            {
               "url": "label",
               "valueString": "phone"
             },
@@ -100,10 +100,10 @@
         {
           "url": "http://ihris.org/fhir/StructureDefinition/iHRISReportElement",
           "extension": [{
-            "url": "display",
-            "valueString": "Contact Group"
-          },
-          {
+              "url": "display",
+              "valueString": "Contact Group"
+            },
+            {
               "url": "label",
               "valueString": "groupname"
             },
@@ -176,12 +176,84 @@
         {
           "url": "http://ihris.org/fhir/StructureDefinition/iHRISReportElement",
           "extension": [{
-            "url": "display",
-            "valueString": "Facility"
-          },
-          {
+              "url": "display",
+              "valueString": "Facility"
+            },
+            {
               "url": "label",
               "valueString": "facilityName"
+            },
+            {
+              "url": "name",
+              "valueString": "name"
+            },
+            {
+              "url": "filter",
+              "valueBoolean": true
+            },
+            {
+              "url": "dropDownFilter",
+              "valueBoolean": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "url": "http://ihris.org/fhir/StructureDefinition/iHRISReportLink",
+      "extension": [{
+          "url": "name",
+          "valueString": "district"
+        },
+        {
+          "url": "resource",
+          "valueString": "Location"
+        },
+        {
+          "url": "linkElement",
+          "valueString": "Location.id"
+        },
+        {
+          "url": "linkTo",
+          "valueString": "facility.partOf.reference"
+        },
+        {
+          "url": "multiple",
+          "valueBoolean": false
+        }
+      ]
+    },
+    {
+      "url": "http://ihris.org/fhir/StructureDefinition/iHRISReportLink",
+      "extension": [{
+          "url": "name",
+          "valueString": "region"
+        },
+        {
+          "url": "resource",
+          "valueString": "Location"
+        },
+        {
+          "url": "linkElement",
+          "valueString": "Location.id"
+        },
+        {
+          "url": "linkTo",
+          "valueString": "district.partOf.reference"
+        },
+        {
+          "url": "multiple",
+          "valueBoolean": false
+        },
+        {
+          "url": "http://ihris.org/fhir/StructureDefinition/iHRISReportElement",
+          "extension": [{
+              "url": "display",
+              "valueString": "County"
+            },
+            {
+              "url": "label",
+              "valueString": "regionName"
             },
             {
               "url": "name",
@@ -224,10 +296,10 @@
         {
           "url": "http://ihris.org/fhir/StructureDefinition/iHRISReportElement",
           "extension": [{
-            "url": "display",
-            "valueString": "Job Title"
-          },
-          {
+              "url": "display",
+              "valueString": "Job Title"
+            },
+            {
               "url": "label",
               "valueString": "job"
             },
@@ -248,10 +320,10 @@
         {
           "url": "http://ihris.org/fhir/StructureDefinition/iHRISReportElement",
           "extension": [{
-            "url": "display",
-            "valueString": "Cadre"
-          },
-          {
+              "url": "display",
+              "valueString": "Cadre"
+            },
+            {
               "url": "label",
               "valueString": "cadre"
             },
