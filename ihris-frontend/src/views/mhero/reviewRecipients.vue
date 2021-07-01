@@ -1,6 +1,5 @@
 <template>
   <v-container>
-    {{sendDate}} {{sendTime}}
     <mheroprogress
       :title="progressTitle"
       :requestIDs="requestIDs"
