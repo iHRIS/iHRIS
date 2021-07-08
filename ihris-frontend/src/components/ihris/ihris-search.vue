@@ -117,6 +117,10 @@ export default {
         if(url.indexOf('_total=accurate') === -1) {
           url = url + '&_total=accurate'
         }
+        //add profile to url
+        if(this.profile){
+          url = url + '&_profile=' + this.profile
+        }
       }
       if (url === "") {
         let count = this.options.itemsPerPage || 10;
