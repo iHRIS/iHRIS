@@ -27,7 +27,7 @@
         },
         {
           "url": "query",
-          "valueString": "meta.profile=http://mhero.org/fhir/StructureDefinition/mhero-workflows"
+          "valueString": "meta.profile contains 'http://mhero.org/fhir/StructureDefinition/mhero-workflows'"
         },
         {
           "url": "http://ihris.org/fhir/StructureDefinition/iHRISReportElement",

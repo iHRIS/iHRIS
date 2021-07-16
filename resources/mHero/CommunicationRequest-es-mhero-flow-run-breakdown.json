@@ -21,7 +21,7 @@
       "valueString": "CommunicationRequest"
     }, {
       "url": "query",
-      "valueString": "status=completed,entered-in-error&extension.url=http://mhero.org/fhir/StructureDefinition/mhero-comm-req-flow-starts"
+      "valueString": "(status='completed' or status='entered-in-error') and extension.exists(url='http://mhero.org/fhir/StructureDefinition/mhero-comm-req-flow-starts')"
     }, {
       "url": "http://ihris.org/fhir/StructureDefinition/iHRISReportElement",
       "extension": [{
@@ -228,7 +228,7 @@
       },
       {
         "url": "query",
-        "valueString": "meta.profile=http://mhero.org/fhir/StructureDefinition/mhero-workflows"
+        "valueString": "meta.profile contains 'http://mhero.org/fhir/StructureDefinition/mhero-workflows'"
       },
       {
         "url": "http://ihris.org/fhir/StructureDefinition/iHRISReportElement",

@@ -1,6 +1,6 @@
 {
   "resourceType": "Basic",
-  "id": "ihris-es-report-scheduled-messages",
+  "id": "ihris-es-report-all-scheduled-messages",
   "meta": {
     "versionId": "6",
     "lastUpdated": "2020-04-18T14:25:58.246+03:00",
@@ -21,13 +21,13 @@
         },
         {
           "url": "name",
-          "valueString": "scheduledmessages"
+          "valueString": "allscheduledmessages"
         }, {
           "url": "resource",
           "valueString": "CommunicationRequest"
         }, {
           "url": "query",
-          "valueString": "status='on-hold'"
+          "valueString": "extension.exists(url='http://mhero.org/fhir/StructureDefinition/sms-cron-expression-schedule')"
         },
         {
           "url": "http://ihris.org/fhir/StructureDefinition/iHRISReportElement",
@@ -117,7 +117,7 @@
             },
             {
               "url": "valueModifier",
-              "valueString": "status==on-hold?Active:Inactive"
+              "valueString": "status==on-hold?Active:status==active?Active:Inactive"
             },
             {
               "url": "filter",
@@ -163,7 +163,7 @@
         },
         {
           "url": "linkTo",
-          "valueString": "scheduledmessages.payload.contentReference.reference"
+          "valueString": "allscheduledmessages.payload.contentReference.reference"
         },
         {
           "url": "multiple",

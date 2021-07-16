@@ -21,7 +21,7 @@
       "valueString": "Communication"
     }, {
       "url": "query",
-      "valueString": "category.coding.where(system='http://ihris.org/fhir/CodeSystem/message-category').code=inbox"
+      "valueString": "category.coding.exists(system='http://ihris.org/fhir/CodeSystem/message-category' and code='inbox')"
     }, {
       "url": "http://ihris.org/fhir/StructureDefinition/iHRISReportElement",
       "extension": [{

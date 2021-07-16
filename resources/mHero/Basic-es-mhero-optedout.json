@@ -19,7 +19,7 @@
           "valueString": "Practitioner"
         }, {
           "url": "query",
-          "valueString": "meta.tag.where(system='http://mhero.org/codesystem').code=optedout"
+          "valueString": "meta.tag.exists(system='http://mhero.org/codesystem' and code='optedout')=true"
         },
         {
           "url": "http://ihris.org/fhir/StructureDefinition/iHRISReportElement",

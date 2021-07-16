@@ -27,7 +27,7 @@
           "valueString": "Practitioner"
         }, {
           "url": "query",
-          "valueString": "identifier.system=http://app.rapidpro.io/contact-uuid&meta.tag.exists(system='http://mhero.org/codesystem' and code='optedout')=false"
+          "valueString": "identifier.exists(system='http://app.rapidpro.io/contact-uuid') and meta.tag.exists(system='http://mhero.org/codesystem' and code='optedout')=false and active=true"
         },
         {
           "url": "http://ihris.org/fhir/StructureDefinition/iHRISReportElement",

@@ -187,7 +187,7 @@ const fhirQuestionnaire = {
         if ( !current.hasOwnProperty( lastElement ) ) {
           if ( arrayIdx !== false ) {
             if ( Array.isArray( field.answer ) ) {
-              current[lastElement] = field.answer 
+              current[lastElement] = field.answer
             } else {
               current[lastElement] = []
               current[lastElement][arrayIdx] = field.answer || ""
@@ -201,7 +201,7 @@ const fhirQuestionnaire = {
               if ( Array.isArray( current[lastElement] ) && current[lastElement].length > 0 ) {
                 current[lastElement] = current[lastElement].concat( field.answer )
               } else {
-                current[lastElement] = field.answer 
+                current[lastElement] = field.answer
               }
             } else {
               current[lastElement][arrayIdx] = field.answer || ""
@@ -351,7 +351,7 @@ const fhirQuestionnaire = {
                         }
                       } else if ( field.type[0].code === "CodeableConcept" ) {
                         if ( question.repeats ) {
-                          item.answer.forEach( answer => { 
+                          item.answer.forEach( answer => {
                             let extData = { ...data }
                             extData.answer = { url: url, valueCodeableConcept: { coding: [ answer.valueCoding ], text: answer.valueCoding.display } }
                             fields.push( extData )
@@ -411,7 +411,7 @@ const fhirQuestionnaire = {
                       }
                     } else {
                       data.field = field.type[0]
-                      data.answer = item.answer 
+                      data.answer = item.answer
                     }
 
                     fields.push(data)
