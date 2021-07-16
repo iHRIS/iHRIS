@@ -1,7 +1,7 @@
 Profile:        IhrisPersonUser
 Parent:         Person
 Id:             ihris-person-user
-Title:          "User Profile"
+Title:          "System User"
 Description:    "iHRIS profile of the Person resource to manage user access."
 * name 1..1 MS
 * name ^label = "Name"
