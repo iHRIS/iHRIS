@@ -1,7 +1,7 @@
 Profile:        IhrisPersonUser
 Parent:         Person
 Id:             ihris-person-user
-Title:          "User Profile."
+Title:          "System User"
 Description:    "iHRIS profile of the Person resource to manage user access."
 * name 1..1 MS
 * name ^label = "Name"
@@ -20,7 +20,7 @@ Description:    "iHRIS profile of the Person resource to manage user access."
 * telecom.value 1..1 MS
 * telecom.value ^label = "Email"
 * extension contains 
-      IhrisAssignRole named role 0..* MS and
+      IhrisAssignRole named role 0..1 MS and
       IhrisPassword named password 0..1 MS and
       IhrisUserLocation named location 0..* MS
 * extension[role] ^label = "Role(s)"
@@ -75,16 +75,11 @@ Title:          "User"
 Usage:          #example
 * code = IhrisResourceCodeSystem#page
 * extension[display].extension[resource].valueReference = Reference(StructureDefinition/ihris-person-user)
-* extension[display].extension[link][0].extension[field].valueString = "Person.id"
-* extension[display].extension[link][0].extension[text].valueString = "View User"
+* extension[display].extension[link][0].extension[field].valueString = ""
+* extension[display].extension[link][0].extension[text].valueString = "Add Another User"
 * extension[display].extension[link][0].extension[button].valueBoolean = true
 * extension[display].extension[link][0].extension[icon].valueString = "mdi-account-arrow-right"
-* extension[display].extension[link][0].extension[url].valueUrl = "/resource/view/user/FIELD"
-* extension[display].extension[link][1].extension[field].valueString = ""
-* extension[display].extension[link][1].extension[text].valueString = "Add Another User"
-* extension[display].extension[link][1].extension[button].valueBoolean = true
-* extension[display].extension[link][1].extension[icon].valueString = "mdi-account-arrow-right"
-* extension[display].extension[link][1].extension[url].valueUrl = "/questionnaire/ihris-user/user"
+* extension[display].extension[link][0].extension[url].valueUrl = "/questionnaire/ihris-user/user"
 * extension[display].extension[search][0].valueString = "User|Person.name.where(use='official').text"
 * extension[display].extension[search][1].valueString = "Username/Email|Person.telecom.where(system='email').value"
 * extension[display].extension[search][2].valueString = "Role|Person.extension.where(url='http://ihris.org/fhir/StructureDefinition/ihris-assign-role').valueReference.reference"

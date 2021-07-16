@@ -56,6 +56,9 @@ spring:
     username: hapi
     password: PASS
     driveClassName: org.postgresql.Driver
+  jpa:
+    properties:
+        hibernate.search.enabled: true
 
 hapi:
   fhir:
