@@ -9,17 +9,17 @@
       class="elevation-1"
       dense
     >
-      
+
       <template v-slot:top>
         <v-toolbar flat color="white">
           <v-toolbar-title>
             {{ title }}
           </v-toolbar-title>
           <v-spacer></v-spacer>
-          <v-btn 
-            v-for="action in topActions" 
-            :to="setupLink( action.link, {} )" 
-            :color="action.class" 
+          <v-btn
+            v-for="action in topActions"
+            :to="setupLink( action.link, {} )"
+            :color="action.class"
             :key="action.text"
             small
             >
@@ -28,10 +28,10 @@
         </v-toolbar>
       </template>
       <template v-slot:item._action="{ item }">
-        <v-btn 
-          v-for="action in item.actions" 
-          :to="setupLink( action.link, item )" 
-          :color="action.class" 
+        <v-btn
+          v-for="action in item.actions"
+          :to="setupLink( action.link, item )"
+          :color="action.class"
           :key="action.text"
           small
           rounded
@@ -50,7 +50,7 @@ const isObject = (obj) => {
 
 export default {
   name: "ihris-secondary",
-  props: ["title", "field", "profile", "slotProps", "link-id", "link-field", 
+  props: ["title", "field", "profile", "slotProps", "link-id", "link-field",
     "search-field", "edit", "columns", "actions"],
   data: function() {
     return {
@@ -69,7 +69,7 @@ export default {
     slotProps: {
       handler() {
         this.setupData()
-      }, 
+      },
       deep: true
     }
     */
@@ -87,17 +87,24 @@ export default {
         //console.log(this.source)
       }
       */
-      let url = "/fhir/" + this.field
-      let queryStr = []
-      if ( this.profile ) {
-        queryStr.push( "_profile="+this.profile )
-      }
-      if ( this.searchField ) {
-        queryStr.push( this.searchField+"="+this.linkId )
+      let url
+      //for searchfield in the form Location:organization with Location being the primary resource, then use _include to retrieve secondary resources
+      if(this.searchField.split(':').length === 2) {
+        let resource = this.searchField.split(':')[0]
+        url = "fhir/" + resource + "?_id=" + this.linkId + "&_include=" + this.searchField
       } else {
-        queryStr.push( this.linkField.substring( this.linkField.indexOf('.') +1 ) +"="+this.linkId )
+        url = "/fhir/" + this.field
+        let queryStr = []
+        if ( this.profile ) {
+          queryStr.push( "_profile="+this.profile )
+        }
+        if ( this.searchField ) {
+          queryStr.push( this.searchField+"="+this.linkId )
+        } else {
+          queryStr.push( this.linkField.substring( this.linkField.indexOf('.') +1 ) +"="+this.linkId )
+        }
+        url += "?" + queryStr.join("&")
       }
-      url += "?" + queryStr.join("&")
       this.items = []
       this.loading = true
       this.addItems( url )
