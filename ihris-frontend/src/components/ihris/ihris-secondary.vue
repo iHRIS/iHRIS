@@ -115,6 +115,9 @@ export default {
           response.json().then( async data => {
             if ( data.entry && data.entry.length > 0 ) {
               for( let entry of data.entry ) {
+                if(this.searchField.split(':').length === 2 && entry.resource.resourceType === this.searchField.split(':')[0]) {
+                  continue
+                }
                 let row = { id: entry.resource.id }
                 for( let header of this.columns ) {
                   if ( header.value === "_action" ) continue
