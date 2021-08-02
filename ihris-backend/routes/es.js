@@ -9,6 +9,7 @@ const express = require('express')
 const router = express.Router()
 const es = require('../modules/es')
 const nconf = require('../modules/config')
+const outcomes = require('../config/operationOutcomes')
 
 router.post('/export/:format/:index', (req, res) => {
   let searchQry = req.body.query
@@ -91,9 +92,32 @@ router.get('/:index/:operation?', (req, res) => {
 })
 
 router.post('/:index/:operation?', (req, res) => {
+  if (!req.user) {
+    return res.status(401).json(outcomes.NOTLOGGEDIN)
+  }
   let indexName = req.params.index
   let operation = req.params.operation
+  let reportOptions = req.body.reportOptions
+  delete req.body.reportOptions
   let body = req.body
+  if(reportOptions.locationBasedConstraint) {
+    let userLocExt = req.user.extension && req.user.extension.find((ext) => {
+      return ext.url === 'http://ihris.org/fhir/StructureDefinition/ihris-user-location'
+    })
+    if(userLocExt) {
+      let userLoc = userLocExt.valueReference.reference
+      if(userLoc) {
+        body.query.bool.must.push({
+          script: {
+            script: {
+              source: `if(doc['ihris-related-group.keyword'].size() != 0) {if(doc['ihris-related-group.keyword'].value.contains('${userLoc}')){return true}}`,
+              lang: "painless"
+            }
+          }
+        })
+      }
+    }
+  }
   let from = req.query.from
   let size = req.query.size
   let url = URI(nconf.get('elasticsearch:base')).segment(indexName)

@@ -990,7 +990,8 @@ router.get('/report/es/:report', (req, res) => {
     let reportData = {
       fieldsDetails: [],
       filters: [],
-      displayCheckbox: false
+      displayCheckbox: false,
+      locationBasedConstraint: false
     }
     for(let extension of resource.extension) {
       let reportElements = extension.extension.filter((ext) => {
@@ -1002,6 +1003,9 @@ router.get('/report/es/:report', (req, res) => {
         }
         if(extension.url === 'http://ihris.org/fhir/StructureDefinition/iHRISReportDetails' && ext.url === 'displayCheckbox') {
           reportData.displayCheckbox = ext.valueBoolean
+        }
+        if(extension.url === 'http://ihris.org/fhir/StructureDefinition/iHRISReportDetails' && ext.url === 'locationBasedConstraint') {
+          reportData.locationBasedConstraint = ext.valueBoolean
         }
         return ext.url === "http://ihris.org/fhir/StructureDefinition/iHRISReportElement"
       })

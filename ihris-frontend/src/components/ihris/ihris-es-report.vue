@@ -239,6 +239,9 @@ export default {
       this.prevPage = this.options.page;
 
       let body = this.buildTerms()
+      body.reportOptions = {
+        locationBasedConstraint: this.reportData.locationBasedConstraint
+      }
       let sorting = []
       for(let index in this.options.sortBy) {
         let sortCol = this.options.sortBy[index]
