@@ -122,10 +122,6 @@ export default {
       this.selectAll = true
     })
   },
-  mounted: function() {
-    this.getTotalRecords();
-    this.getData(true);
-  },
   methods: {
     clickIt: function(record) {
       this.$router.push({
@@ -210,6 +206,9 @@ export default {
     getTotalRecords() {
       let url = `/es/${this.reportData.indexName}/_count`
       let body = this.buildTerms()
+      body.reportOptions = {
+        locationBasedConstraint: this.reportData.locationBasedConstraint
+      }
       fetch(url, {
           method: 'POST',
           headers: {
