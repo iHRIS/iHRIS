@@ -101,7 +101,7 @@ router.post('/:index/:operation?', (req, res) => {
   delete req.body.reportOptions
   let body = req.body
   if(reportOptions.locationBasedConstraint) {
-    let userLocExt = req.user.extension && req.user.extension.find((ext) => {
+    let userLocExt = req.user.resource.extension && req.user.resource.extension.find((ext) => {
       return ext.url === 'http://ihris.org/fhir/StructureDefinition/ihris-user-location'
     })
     if(userLocExt) {
