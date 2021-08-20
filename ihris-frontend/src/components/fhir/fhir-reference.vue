@@ -1,7 +1,7 @@
 <template>
   <ihris-element :edit="edit" :loading="loading">
     <template #form>
-      <v-menu
+      <v-menu 
         v-if="displayType == 'tree'"
         ref="menu"
         v-model="menu"
@@ -103,7 +103,8 @@ export default {
       active: [],
       open: [],
       treeLookup: {},
-      allAllowed: true
+      allAllowed: true,
+      isFacility: false
     }
   },
   created: function() {
@@ -173,15 +174,20 @@ export default {
       }
       this.disabled = this.readOnlyIfSet && this.preset
     },
-    setupTreeItems: function() {
+    setupTreeItems: async function() {
       let treetop = this.initialValue
       if ( this.overrideValue ) {
         treetop = this.overrideValue
       }
       this.loading = true
-      let params = {}
+      let params = {} 
       if ( treetop ) {
-        params = { "partof": treetop }
+        await this.checkFacility(treetop)
+        if (this.isFacility){
+          params = {"_id": treetop}
+        } else {
+          params = { "partof": treetop }
+        } 
       } else {
         params = { "partof:missing": true }
       }
@@ -190,6 +196,31 @@ export default {
       this.items = []
       this.addItems( url, this.items )
 
+    },
+    checkFacility: function(id) {
+      let params = { "_id": id, "_profile":"http://ihris.org/fhir/StructureDefinition/ihris-facility" ,"_summary": "count" }
+      let url = "/fhir/"+this.resource+"?"+querystring.stringify( params )
+      return new Promise( resolve => {
+        fetch( url ).then( response => {
+          if ( response.ok ) {
+            response.json().then( data => {
+              if ( data.total && data.total == 1 ) {
+                this.isFacility = true
+              }
+              resolve()
+            } ).catch( err => {
+              console.log("failed to check facility for",url,err)
+              resolve()
+            } )
+          } else {
+            console.log("failed to check facility for",url,response.status)
+            resolve()
+          }
+        } ).catch( err => {
+          console.log("failed to check facility for",url,err)
+          resolve()
+        } )
+      } )
     },
     checkChildren: function(item) {
       let params = { "partof": item.id, "_summary": "count" }
@@ -223,7 +254,7 @@ export default {
             if ( data.entry && data.entry.length > 0 ) {
               for( let entry of data.entry ) {
                 let locked = this.allAllowed ? false : !entry.resource.meta.profile.includes( this.targetProfile )
-                let item = {
+                let item = { 
                   id: entry.resource.resourceType+"/"+entry.resource.id,
                   name: entry.resource.name,
                   locked: locked
