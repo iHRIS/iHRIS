@@ -26,6 +26,9 @@
           "url": "resource",
           "valueString": "Practitioner"
         }, {
+          "url": "locationBasedConstraint",
+          "valueBoolean": true
+        }, {
           "url": "query",
           "valueString": "identifier.exists(system='http://app.rapidpro.io/contact-uuid') and meta.tag.exists(system='http://mhero.org/codesystem' and code='optedout')=false and active=true"
         },
@@ -68,6 +71,16 @@
               "valueString": "telecom.where(system='phone').value"
             }
           ]
+        },
+        {
+          "url": "http://ihris.org/fhir/StructureDefinition/iHRISReportElement",
+          "extension": [{
+            "url": "label",
+            "valueString": "ihris-related-group"
+          }, {
+            "url": "name",
+            "valueString": "extension.where(url='http://ihris.org/fhir/StructureDefinition/ihris-related-group').extension.where(url='location').valueString"
+          }]
         }
       ]
     },

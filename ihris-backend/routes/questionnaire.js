@@ -54,7 +54,6 @@ router.post("/QuestionnaireResponse", (req, res, next) => {
             if ( errorCheck ) {
               return res.status( 401 ).json( errorCheck )
             }
-
             fhirAxios.create( bundle ).then ( (results) => {
               if ( module.postProcess ) {
                 module.postProcess( req, results ).then( () => {

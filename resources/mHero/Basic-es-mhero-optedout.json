@@ -18,6 +18,9 @@
           "url": "resource",
           "valueString": "Practitioner"
         }, {
+          "url": "locationBasedConstraint",
+          "valueBoolean": true
+        }, {
           "url": "query",
           "valueString": "meta.tag.exists(system='http://mhero.org/codesystem' and code='optedout')=true"
         },
@@ -76,6 +79,15 @@
           }, {
             "url": "dropDownFilter",
             "valueBoolean": true
+          }]
+        }, {
+          "url": "http://ihris.org/fhir/StructureDefinition/iHRISReportElement",
+          "extension": [{
+            "url": "label",
+            "valueString": "ihris-related-group"
+          }, {
+            "url": "name",
+            "valueString": "extension.where(url='http://ihris.org/fhir/StructureDefinition/ihris-related-group').extension.where(url='location').valueString"
           }]
         }
       ]

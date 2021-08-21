@@ -15,6 +15,9 @@
           "url": "name",
           "valueString": "allpractitioners"
         }, {
+          "url": "locationBasedConstraint",
+          "valueBoolean": true
+        }, {
           "url": "resource",
           "valueString": "Practitioner"
         },
@@ -83,6 +86,15 @@
           }, {
             "url": "name",
             "valueString": "identifier.where(system='http://app.rapidpro.io/contact-uuid').value"
+          }]
+        }, {
+          "url": "http://ihris.org/fhir/StructureDefinition/iHRISReportElement",
+          "extension": [{
+            "url": "label",
+            "valueString": "ihris-related-group"
+          }, {
+            "url": "name",
+            "valueString": "extension.where(url='http://ihris.org/fhir/StructureDefinition/ihris-related-group').extension.where(url='location').valueString"
           }]
         }
       ]
@@ -165,8 +177,7 @@
     },
     {
       "url": "http://ihris.org/fhir/StructureDefinition/iHRISReportLink",
-      "extension": [
-        {
+      "extension": [{
           "url": "name",
           "valueString": "district"
         },
@@ -190,8 +201,7 @@
     },
     {
       "url": "http://ihris.org/fhir/StructureDefinition/iHRISReportLink",
-      "extension": [
-        {
+      "extension": [{
           "url": "name",
           "valueString": "region"
         },
@@ -213,8 +223,7 @@
         },
         {
           "url": "http://ihris.org/fhir/StructureDefinition/iHRISReportElement",
-          "extension": [
-            {
+          "extension": [{
               "url": "display",
               "valueString": "County"
             },

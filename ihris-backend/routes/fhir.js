@@ -113,7 +113,7 @@ router.post("/:resource", (req, res) => {
       resource = fhirFilter.filter( req.body, allowed )
     }
     fhirAxios.create( resource ).then( (output) => {
-      fhirAudit.create( req.user, req.ip, output.resourceType + "/" + output.id 
+      fhirAudit.create( req.user, req.ip, output.resourceType + "/" + output.id
         + (output.meta.versionId ? "/_history/"+output.meta.versionId : ""), true)
       fhirSecurity.postProcess( uuid, output ).then( (results) => {
         fhirReports.delayedRun()

@@ -20,6 +20,9 @@
       "url": "resource",
       "valueString": "Communication"
     }, {
+      "url": "locationBasedConstraint",
+      "valueBoolean": true
+    }, {
       "url": "query",
       "valueString": "category.coding.exists(system='http://ihris.org/fhir/CodeSystem/message-category' and code='inbox')"
     }, {
@@ -130,6 +133,16 @@
         }, {
           "url": "dropDownFilter",
           "valueBoolean": false
+        }]
+      },
+      {
+        "url": "http://ihris.org/fhir/StructureDefinition/iHRISReportElement",
+        "extension": [{
+          "url": "label",
+          "valueString": "ihris-related-group"
+        }, {
+          "url": "name",
+          "valueString": "extension.where(url='http://ihris.org/fhir/StructureDefinition/ihris-related-group').extension.where(url='location').valueString"
         }]
       }
     ]

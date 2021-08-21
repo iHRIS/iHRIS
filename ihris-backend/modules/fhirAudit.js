@@ -46,7 +46,7 @@ const fhirAudit = {
       delete audit.source.observer.identifier
       audit.source.observer.reference = nconf.get("audit:observer")
     }
- 
+
     return audit
   },
 

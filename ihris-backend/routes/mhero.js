@@ -10,12 +10,18 @@ const { v4: uuidv4 } = require('uuid')
 const es = require("../modules/es")
 const nconf = require('../modules/config')
 const fhirReports = require('../modules/fhirReports')
+const fhirAudit = require('../modules/fhirAudit')
 const fhirAxios = nconf.fhirAxios
+
+const outcomes = require('../config/operationOutcomes')
 
 /**
  * Send message
  */
 router.post("/send-message", function (req, res) {
+  if ( !req.user ) {
+    return res.status(401).json( outcomes.NOTLOGGEDIN )
+  }
   winston.info('Sending mhero message')
   let errorOccured = false
   let data = req.body
@@ -109,6 +115,15 @@ router.post("/send-message", function (req, res) {
     } else {
       communicationReq.occurrenceDateTime = moment().format("YYYY-MM-DDTHH:mm:ss")
     }
+    if(!communicationReq.extension) {
+      communicationReq.extension = []
+    }
+    communicationReq.extension.push({
+      url: 'sender',
+      valueReference: {
+        reference: req.user.resource.resourceType + '/' + req.user.resource.id
+      }
+    })
     let recipients = [];
     let childrenReqIDs = [];
     async.each(practitioners, (practitioner, nxt) => {
@@ -217,6 +232,9 @@ router.get('/clearProgress', (req, res) => {
 });
 
 router.post('/cancel-message-schedule', (req, res) => {
+  if ( !req.user ) {
+    return res.status(401).json( outcomes.NOTLOGGEDIN )
+  }
   let schedules = req.body.schedules
   let url = URI(nconf.get("emnutt:base")).segment('cancelMessageSchedule');
   axios.post(url.toString(), {schedules}, {
@@ -226,13 +244,22 @@ router.post('/cancel-message-schedule', (req, res) => {
       password: nconf.get("emnutt:password")
     }
   }).then(response => {
+    for(let schedule of schedules) {
+      fhirAudit.update( req.user, req.ip, schedule, true )
+    }
     res.status(200).json({childrenReqIDs: [response.data.reqID]});
   }).catch(err => {
+    for(let schedule of schedules) {
+      fhirAudit.update( req.user, req.ip, schedule, false )
+    }
     res.status(500).send(err);
   });
 })
 
 router.post('/subscribe-contact-groups', (req, res) => {
+  if ( !req.user ) {
+    return res.status(401).json( outcomes.NOTLOGGEDIN )
+  }
   let subscriptionsData = req.body
   let errorOccured = false
   async.eachSeries(subscriptionsData.groups, (groupID, nxtSubscr) => {
@@ -253,10 +280,13 @@ router.post('/subscribe-contact-groups', (req, res) => {
         }
       }
       fhirAxios.update(groupResource).then((response) => {
+        fhirAudit.update( req.user, req.ip, response.resourceType + "/" + response.id
+        + (response.meta.versionId ? "/_history/"+response.meta.versionId : ""), true )
         return nxtSubscr();
       }).catch((err) => {
         console.log(err);
         errorOccured = true
+        fhirAudit.update( req.user, req.ip, groupResource.resourceType + "/" + groupResource.id, false, { resource: groupResource, err: err } )
         return nxtSubscr();
       })
     })
@@ -274,12 +304,17 @@ router.post('/subscribe-contact-groups', (req, res) => {
 })
 
 router.post('/add-group', (req, res) => {
+  if ( !req.user ) {
+    return res.status(401).json( outcomes.NOTLOGGEDIN )
+  }
   let name = req.body.name
   let resource = {
     resourceType: 'Group',
     name,
   }
-  fhirAxios.create(resource).then(async() => {
+  fhirAxios.create(resource).then(async(response) => {
+    fhirAudit.create( req.user, req.ip, response.resourceType + "/" + response.id
+        + (response.meta.versionId ? "/_history/"+response.meta.versionId : ""), true )
     try {
       let reportsRunning = await fhirReports.setup()
       if ( reportsRunning ) {
@@ -298,6 +333,9 @@ router.post('/add-group', (req, res) => {
 })
 
 router.post('/unsubscribe-contact-groups', (req, res) => {
+  if ( !req.user ) {
+    return res.status(401).json( outcomes.NOTLOGGEDIN )
+  }
   let errorOccured = false
   let subscriptionsData = req.body
   async.eachSeries(subscriptionsData.groups, (groupID, nxtSubscr) => {
@@ -310,8 +348,11 @@ router.post('/unsubscribe-contact-groups', (req, res) => {
         }
       }
       fhirAxios.update(groupResource).then((response) => {
+        fhirAudit.update( req.user, req.ip, response.resourceType + "/" + response.id
+        + (response.meta.versionId ? "/_history/"+response.meta.versionId : ""), true )
         return nxtSubscr();
-      }).catch(() => {
+      }).catch((err) => {
+        fhirAudit.update( req.user, req.ip, groupResource.resourceType + "/" + groupResource.id, false, { resource: groupResource, err: err } )
         errorOccured = true
       })
     })
@@ -329,6 +370,9 @@ router.post('/unsubscribe-contact-groups', (req, res) => {
 })
 
 router.put('/optout', (req, res) => {
+  if ( !req.user ) {
+    return res.status(401).json( outcomes.NOTLOGGEDIN )
+  }
   let url = URI(nconf.get("emnutt:base").replace('/fhir', '')).segment('optout');
   axios.put(url.toString(), req.body, {
     withCredentials: true,
@@ -336,7 +380,14 @@ router.put('/optout', (req, res) => {
       username: nconf.get("emnutt:username"),
       password: nconf.get("emnutt:password")
     }
-  }).then(() => {
+  }).then((response) => {
+    if(Array.isArray(response)) {
+      for(let entry of response) {
+        if(entry.response && entry.response.location) {
+          fhirAudit.update( req.user, req.ip, entry.response.location, true )
+        }
+      }
+    }
     return res.status(200).send()
   }).catch(err => {
     winston.error(err.message)
@@ -345,6 +396,9 @@ router.put('/optout', (req, res) => {
 })
 
 router.put('/undoOptout', (req, res) => {
+  if ( !req.user ) {
+    return res.status(401).json( outcomes.NOTLOGGEDIN )
+  }
   let url = URI(nconf.get("emnutt:base").replace('/fhir', '')).segment('undoOptout');
   axios.put(url.toString(), req.body, {
     withCredentials: true,
@@ -352,7 +406,14 @@ router.put('/undoOptout', (req, res) => {
       username: nconf.get("emnutt:username"),
       password: nconf.get("emnutt:password")
     }
-  }).then(() => {
+  }).then((response) => {
+    if(Array.isArray(response)) {
+      for(let entry of response) {
+        if(entry.response && entry.response.location) {
+          fhirAudit.update( req.user, req.ip, entry.response.location, true )
+        }
+      }
+    }
     return res.status(200).send()
   }).catch(err => {
     winston.error(err.message)
@@ -364,6 +425,9 @@ router.put('/undoOptout', (req, res) => {
  * Get all workflows
  */
 router.get("/workflows", function (req, res, next) {
+  if ( !req.user ) {
+    return res.status(401).json( outcomes.NOTLOGGEDIN )
+  }
   let queries = {
     '_profile': 'http://mhero.org/fhir/StructureDefinition/mhero-workflows'
   }
