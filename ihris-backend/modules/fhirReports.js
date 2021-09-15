@@ -1,7 +1,7 @@
 const nconf = require('./config')
-const winston = require('winston')
 const axios = require('axios')
 const { CacheFhirToES } = require('fhir2es')
+const logger = require('../winston')
 
 const DEFAULT_DELAY = 900000
 const DEFAULT_SHORT_DELAY = 5000
@@ -43,7 +43,7 @@ const fhirReports = {
   },
   runReports: ( single ) => {
     if ( !fhirReports._caching ) {
-      winston.error("Tried to run reports but the caching isn't available.")
+      logger.error("Tried to run reports but the caching isn't available.")
       return
     }
     fhirReports._caching.cache()

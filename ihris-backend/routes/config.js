@@ -8,7 +8,7 @@ const outcomes = require('../config/operationOutcomes')
 const fhirConfig = require('../modules/fhirConfig')
 const fhirDefinition = require('../modules/fhirDefinition')
 const crypto = require('crypto')
-const winston = require('winston')
+const logger = require('../winston')
 
 const getUKey = () => {
   return Math.random().toString(36).replace(/^[^a-z]+/,'') + Math.random().toString(36).substring(2,15)
@@ -82,11 +82,11 @@ const getProfileResource = ( profile ) => {
           profileResources[id] = resource.type
           resolve( resource.type )
         } else {
-          winston.error("Unable to get resource type from structure definition "+id)
+          logger.error("Unable to get resource type from structure definition "+id)
           reject( new Error("Unable to get resource.type for "+id) )
         }
       } ).catch ( (err) => {
-        winston.error("Unable to get structure definition for "+id)
+        logger.error("Unable to get structure definition for "+id)
         reject( err )
       } )
     }
@@ -152,7 +152,7 @@ router.get('/page/:page/:type?', function(req, res) {
     let pageSections = resource.extension.filter( ext => ext.url === "http://ihris.org/fhir/StructureDefinition/ihris-page-section" )
 
     const createTemplate = async ( resource, structure ) => {
-      winston.silly(JSON.stringify(structure,null,2))
+      logger.silly(JSON.stringify(structure,null,2))
 
       let links = []
       try {
@@ -362,7 +362,7 @@ router.get('/page/:page/:type?', function(req, res) {
               continue
             }
             if ( !fields[field].code ) {
-              winston.info("No datatype for "+base+" "+field+" so skipping",base,field)
+              logger.info("No datatype for "+base+" "+field+" so skipping",base,field)
               continue
             }
             let eleName = fhirDefinition.camelToKebab( fields[field].code )
@@ -473,7 +473,7 @@ router.get('/page/:page/:type?', function(req, res) {
               let subAttrs = [ "id", "path", "label", "min", "max", "base-min", "base-max", "code" ]
               for( let refField of Object.keys(refFields) ) {
                 subFields[refField] = {}
-                winston.silly("refLOOP",refField,refFields)
+                logger.silly("refLOOP",refField,refFields)
                 for( let attr of subAttrs ) {
                   if ( refFields[refField].hasOwnProperty(attr) ) {
                     if ( (attr === "id" || attr === "path") && fields[field].hasOwnProperty(attr) ) {
@@ -511,7 +511,7 @@ router.get('/page/:page/:type?', function(req, res) {
             let secondary = await getDefinition( sections[name].resource )
 
             if ( !secondary.hasOwnProperty("snapshot") ) {
-              winston.error("StructureDefinitions (", sections[name].resource, ") must be saved with a snapshot.")
+              logger.error("StructureDefinitions (", sections[name].resource, ") must be saved with a snapshot.")
               continue
             }
             const secondaryStructure = fhirDefinition.parseStructureDefinition( secondary )
@@ -543,7 +543,7 @@ router.get('/page/:page/:type?', function(req, res) {
         vueOutput += '</template></'+resourceElement+'>'+"\n"
       }
       vueOutput += "</template>"
-      winston.debug(vueOutput)
+      logger.debug(vueOutput)
       return res.status(200).json({ template: vueOutput, data: {
         sectionMenu: sectionMenu,
         subFields: allSubFields,
@@ -555,7 +555,7 @@ router.get('/page/:page/:type?', function(req, res) {
     }
 
     const createSearchTemplate = async ( resource, structure ) => {
-      winston.silly(JSON.stringify(structure,null,2))
+      logger.silly(JSON.stringify(structure,null,2))
 
       let search = [ 'id' ]
       try {
@@ -583,8 +583,8 @@ router.get('/page/:page/:type?', function(req, res) {
         addLink = { url: url, icon: icon, class: eleClass }
       } catch(err) {}
 
-      winston.silly(filters)
-      winston.silly(search)
+      logger.silly(filters)
+      logger.silly(search)
 
       let searchElement = "ihris-search"
       if ( resource.resourceType === "CodeSystem" ) {
@@ -609,7 +609,7 @@ router.get('/page/:page/:type?', function(req, res) {
         searchTemplate += "></ihris-search-term>\n"
       }
       searchTemplate += "</"+searchElement+">\n"
-      winston.debug(searchTemplate)
+      logger.debug(searchTemplate)
 
 
       return res.status(200).json({ template: searchTemplate, data: { fields: search, addLink: addLink } })
@@ -640,8 +640,8 @@ router.get('/page/:page/:type?', function(req, res) {
         }
 
       } ).catch( err => {
-        winston.error(err.message)
-        winston.error(err.stack)
+        logger.error(err.message)
+        logger.error(err.stack)
         return res.status( err.response.status ).json( err.response.data )
       } )
 
@@ -672,8 +672,8 @@ router.get('/page/:page/:type?', function(req, res) {
         }
 
       } ).catch( (err) => {
-        winston.error(err.message)
-        winston.error(err.stack)
+        logger.error(err.message)
+        logger.error(err.stack)
         //return res.status( err.response.status ).json( err.response.data )
         return res.status( 500 ).json( { error: err.message } )
       } )
@@ -687,8 +687,8 @@ router.get('/page/:page/:type?', function(req, res) {
     }
 
   } ).catch( (err) => {
-    winston.error(err.message)
-    winston.error(err.stack)
+    logger.error(err.message)
+    logger.error(err.stack)
     return res.status( err.response.status ).json( err.response.data )
   } )
 
@@ -742,8 +742,8 @@ router.get('/questionnaire/:questionnaire', function(req, res) {
               constraintKeys.push( constraint.key )
             }
           } catch(err) {
-            winston.error( "Failed to get constraints on "+item.linkId )
-            winston.error( err.message )
+            logger.error( "Failed to get constraints on "+item.linkId )
+            logger.error( err.message )
           }
         }
       }
@@ -947,7 +947,7 @@ router.get('/questionnaire/:questionnaire', function(req, res) {
         vueOutput += await processQuestionnaireItems( item.item )
         vueOutput += "</ihris-questionnaire-section>\n"
       } else {
-        winston.warn("Invalid entry for questionnaire.  All top level items must be type group.")
+        logger.warn("Invalid entry for questionnaire.  All top level items must be type group.")
       }
     }
 
@@ -959,12 +959,12 @@ router.get('/questionnaire/:questionnaire', function(req, res) {
     }
     vueOutput += "</ihris-questionnaire>\n"
 
-    winston.debug(vueOutput)
+    logger.debug(vueOutput)
     return res.status(200).json({ template: vueOutput, data: templateData })
 
   } ).catch( (err) => {
-    winston.error(err.message)
-    winston.error(err.stack)
+    logger.error(err.message)
+    logger.error(err.stack)
     let outcome = { ...outcomes.ERROR }
     outcome.issue[0].diagnostics = "Unable to read questionnaire: "+req.params.questionnaire+"."
     return res.status(400).json( outcome )
@@ -975,7 +975,7 @@ router.get('/questionnaire/:questionnaire', function(req, res) {
 
 router.get('/report/es/:report', (req, res) => {
   let report = req.params.report
-  winston.info(report);
+  logger.info(report);
   if (!req.user) {
     return res.status(401).json(outcomes.NOTLOGGEDIN)
   }
@@ -1057,7 +1057,7 @@ router.get('/report/es/:report', (req, res) => {
       for(index in reportData.filters) {
         let field = reportData.filters[index].field
         if(!mappings.data[indexName].mappings.properties[field]) {
-          winston.error('Field ' + field + 'not found on elasticsearch mapping')
+          logger.error('Field ' + field + 'not found on elasticsearch mapping')
           continue
         }
         let dataType = mappings.data[indexName].mappings.properties[field].type
@@ -1078,8 +1078,8 @@ router.get('/report/es/:report', (req, res) => {
         reportData: reportData
       })
     }).catch((err) => {
-      winston.error(err.message);
-      winston.error(err.stack);
+      logger.error(err.message);
+      logger.error(err.stack);
       return res.status(500).send()
     })
   })
@@ -1211,6 +1211,19 @@ router.get('/report/:report', function (req, res) {
     })
   })
 })
+
+router.get('/app', (req, res) => {
+  logger.info('Received a request to get general configuration');
+  const otherConfig = {
+    idp: nconf.get('app:idp'),
+    keycloak: {
+      baseURL: nconf.get('keycloak:baseURL'),
+      realm: nconf.get('keycloak:realm'),
+      UIClientId: nconf.get('keycloak:UIClientId'),
+    },
+  };
+  res.status(200).json(otherConfig);
+});
 
 
 module.exports = router;

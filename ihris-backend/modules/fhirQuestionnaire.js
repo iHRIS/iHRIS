@@ -2,7 +2,7 @@ const nconf = require('./config')
 const fhirAxios = nconf.fhirAxios
 const structureDef = require('./fhirDefinition')
 const { v5: uuidv5 } = require('uuid')
-const winston = require('winston')
+const logger = require('../winston')
 
 
 const fhirQuestionnaire = {
@@ -91,7 +91,7 @@ const fhirQuestionnaire = {
     const FHIR_UUID_NAMESPACE = nconf.get("fhir:uuid:namespace") || "e91c9519-eccb-48a8-a506-6659b8c22518"
     let entries = {}
     let idCount = 1
-    winston.silly("FIELDS",JSON.stringify(fields,null,2))
+    logger.silly("FIELDS",JSON.stringify(fields,null,2))
     for( let field of fields ) {
       let paths = field.definition.split('.')
       let entry
@@ -303,7 +303,7 @@ const fhirQuestionnaire = {
                 let data = { linkId: item.linkId, definition: item.definition, q: question.type }
 
                 if ( item.definition.includes("extension") ) {
-                  winston.silly("EXT",question,item)
+                  logger.silly("EXT",question,item)
                   // Check for multiple extensions so the URL can be set up.
                   let paths = item.linkId.split('.')
                   let dataDefs = item.definition.split('.')
@@ -324,9 +324,9 @@ const fhirQuestionnaire = {
                       let parentDef = defs.join('.') + '.' + def
                       let parentDataDef = dataDefs.join('.') + '.' + dataDef
                       if ( !fields.find( field => field.linkId === parentPath) ) {
-                        winston.silly("WOULD CHECK AND ADD",defs,def)
+                        logger.silly("WOULD CHECK AND ADD",defs,def)
                         let parentExt = await structureDef.getFieldDefinition( parentDef )
-                        winston.silly("PARENT",parentExt.type[0].profile)
+                        logger.silly("PARENT",parentExt.type[0].profile)
                         let parentUrl
                         if ( parentExt.type[0].profile ) {
                           parentUrl = parentExt.type[0].profile[0]
@@ -351,7 +351,7 @@ const fhirQuestionnaire = {
                     }
                     if ( question.type === "choice" ) {
                       let field = await structureDef.getFieldDefinition( question.definition )
-                      winston.silly('EXTFIELD',JSON.stringify(field,null,2))
+                      logger.silly('EXTFIELD',JSON.stringify(field,null,2))
                       if ( field.type[0].code === "code" ) {
                         if ( question.repeats ) {
                           item.answer.forEach( answer => {
@@ -446,7 +446,7 @@ const fhirQuestionnaire = {
                 } else if ( question.type === "reference" ) {
                   //Need to update this when references are fully handled
                   //to work with identifier or other options besides .reference
-                  winston.debug("WARNING: References need to be finished in fhirQuestionnaire.js")
+                  logger.debug("WARNING: References need to be finished in fhirQuestionnaire.js")
                   data.field = "Reference"
                   if ( question.repeats ) {
                     data.answer = item.answer.map( answer => answer.valueReference )
@@ -455,7 +455,7 @@ const fhirQuestionnaire = {
                   }
                   fields.push(data)
                 } else {
-                  winston.error("ERROR: questionnaire doesn't handle questions of type "+question.type+" yet")
+                  logger.error("ERROR: questionnaire doesn't handle questions of type "+question.type+" yet")
                 }
 
               }
@@ -465,8 +465,8 @@ const fhirQuestionnaire = {
         }
 
         await processItems( response.item )
-        winston.silly("FINISHED",JSON.stringify(fields,null,2))
-        winston.silly(fields)
+        logger.silly("FINISHED",JSON.stringify(fields,null,2))
+        logger.silly(fields)
         let bundle = fhirQuestionnaire._createBundle( fields, questionnaireRef )
         resolve(bundle)
 

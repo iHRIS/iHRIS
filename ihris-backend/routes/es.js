@@ -1,12 +1,12 @@
 const axios = require('axios')
 const URI = require('urijs');
 const async = require('async')
-const winston = require('winston')
 const os = require('os')
 const fs = require('fs')
 const { nanoid } = require('nanoid')
 const express = require('express')
 const router = express.Router()
+const logger = require('../winston')
 const es = require('../modules/es')
 const nconf = require('../modules/config')
 const outcomes = require('../config/operationOutcomes')
@@ -86,7 +86,7 @@ router.get('/:index/:operation?', (req, res) => {
   }).then((response) => {
     res.status(200).json(response.data)
   }).catch((err) => {
-    winston.error(err.message);
+    logger.error(err.message);
     return res.status(500).send()
   })
 })
@@ -142,7 +142,7 @@ router.post('/:index/:operation?', (req, res) => {
   }).then((response) => {
     res.status(200).json(response.data)
   }).catch((err) => {
-    winston.error(err.message);
+    logger.error(err.message);
     return res.status(500).send()
   })
 })
@@ -205,7 +205,7 @@ router.get('/populateFilter/:index/:field', (req, res) => {
           }
           return callback(null, next);
         }).catch((err) => {
-          winston.error(err.message);
+          logger.error(err.message);
           return res.status(500).send()
         })
       }, () => {
@@ -213,7 +213,7 @@ router.get('/populateFilter/:index/:field', (req, res) => {
       }
     );
   }).catch((err) => {
-    winston.error(err.message);
+    logger.error(err.message);
     return res.status(500).send()
   })
 

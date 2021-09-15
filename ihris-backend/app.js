@@ -4,10 +4,10 @@ const session = require('express-session')
 const path = require('path')
 const crypto = require('crypto')
 const cookieParser = require('cookie-parser')
-const logger = require('morgan')
-const winston = require('winston')
+const morgan = require('morgan')
+const logger = require('./winston')
 const fs = require('fs')
-const fhirConfig = require('./modules/fhirConfig')
+const user = require('./modules/user');
 const generalMixin = require('./mixin/generalMixin')
 const nconf = require('./modules/config')
 const requireFromString = require('require-from-string')
@@ -30,7 +30,7 @@ async function startUp() {
     const URI = require('urijs')
     const path = require('path')
 
-    winston.info( "Loading Autoload resource directory: " + process.env.AUTOLOAD_RESOURCE_DIR )
+    logger.info( "Loading Autoload resource directory: " + process.env.AUTOLOAD_RESOURCE_DIR )
     let files = fs.readdirSync( process.env.AUTOLOAD_RESOURCE_DIR )
     let server = nconf.get("fhir:base")
     for ( let file of files ) {
@@ -40,23 +40,23 @@ async function startUp() {
         let fhir = JSON.parse( data )
         if ( fhir.resourceType === "Bundle" &&
           ( fhir.type === "transaction" || fhir.type === "batch" ) ) {
-          winston.info( "Saving " + fhir.type )
+          logger.info( "Saving " + fhir.type )
           let dest = URI(server).toString()
           axios.post( dest, fhir ).then( ( res ) => {
-            winston.info( dest+": "+ res.status )
-            winston.info( JSON.stringify( res.data, null, 2 ) )
+            logger.info( dest+": "+ res.status )
+            logger.info( JSON.stringify( res.data, null, 2 ) )
           } ).catch( (err) => {
-            winston.error(err.message)
+            logger.error(err.message)
           } )
         } else {
-          winston.info( "Saving " + fhir.resourceType +" - "+fhir.id )
+          logger.info( "Saving " + fhir.resourceType +" - "+fhir.id )
           let dest = URI(server).segment(fhir.resourceType).segment(fhir.id).toString()
           axios.put( dest, fhir ).then( ( res ) => {
-            winston.info( dest+": "+ res.status )
-            winston.info( res.headers['content-location'] )
+            logger.info( dest+": "+ res.status )
+            logger.info( res.headers['content-location'] )
           } ).catch( (err) => {
-            winston.error(err.message)
-            winston.error(JSON.stringify(err.response.data,null,2))
+            logger.error(err.message)
+            logger.error(JSON.stringify(err.response.data,null,2))
           } )
         }
       }
@@ -71,48 +71,39 @@ async function startUp() {
   try {
     let reportsRunning = await fhirReports.setup()
     if ( reportsRunning ) {
-      fhirReports.runReports()
+      // fhirReports.runReports()
     } else {
-      winston.error("Failed to start up reports to ElasticSearch.")
+      logger.error("Failed to start up reports to ElasticSearch.")
     }
   } catch( err ) {
-    winston.error( err )
+    logger.error( err )
   }
 
-  let runEnv = process.env.NODE_ENV || "production"
-  let logOpts = nconf.get("logs:"+runEnv)
-  if ( !logOpts ) {
-    winston.add( new winston.transports.Console( {
-      level: "error",
-      format: winston.format.combine( winston.format.errors({stack:true}), winston.format.prettyPrint() )
-    } ) )
-  } else {
-    for( let transport of Object.keys(logOpts) ) {
-      if ( transport === "console" ) {
-        winston.add( new winston.transports.Console( {
-          level: logOpts[transport].level || "error",
-          format: winston.format.combine( winston.format.errors({stack:true}), winston.format.prettyPrint() )
-        } ) )
-      } else if ( transport === "file" ) {
-        for( let type of Object.keys(logOpts[transport]) ) {
-          if ( !logOpts[transport][type].file ) {
-            console.log("Logging by file for "+type+" config needs a file set.")
-          } else {
-            winston.add( new winston.transports.File( {
-              level: logOpts[transport][type].level || "error",
-              filename: logOpts[transport][type].file
-            } ) )
-          }
-        }
-      }
-    }
-  }
-
-
-  winston.verbose(nconf.get())
   let redisClient = redis.createClient( nconf.get("redis:url") )
+  const store = new RedisStore({
+    client: redisClient
+  })
 
-  app.use(logger('dev'))
+  let keycloak;
+  if (nconf.get('app:idp') === 'keycloak') {
+    keycloak = require('./modules/keycloakConnect').initKeycloak(store);
+  }
+
+  const isLoggedIn = (req, res, next) => {
+    if(req.path === '/config/app' || req.path === '/users/addUser') {
+      return next()
+    }
+    if (nconf.get('app:idp') === 'keycloak') {
+      if (req.cookies && req.cookies.userObj) {
+        req.user = user.restoreUser(JSON.parse(req.cookies.userObj));
+      }
+      return keycloak.protect()(req, res, next);
+    } else {
+      return next()
+    }
+  };
+
+  app.use(morgan('dev'))
 
   // This has to be before the body parser or it won't proxy a POST body
   app.use('/kibana', createProxyMiddleware( {
@@ -143,9 +134,7 @@ async function startUp() {
   }))
   app.use(cookieParser())
   app.use(session({
-    store: new RedisStore({
-      client: redisClient
-    }),
+    store,
     secret: nconf.get("session:secret") || crypto.randomBytes(64).toString('hex'),
     resave: false,
     saveUninitialized: false
@@ -156,19 +145,21 @@ async function startUp() {
   //app.use('/', indexRouter)
 
   app.use('/auth', authRouter)
-  app.use(authRouter.passport.initialize())
-  app.use(authRouter.passport.session())
-
+  if (keycloak) {
+    app.use(keycloak.middleware());
+  } else {
+    app.use(authRouter.passport.initialize())
+    app.use(authRouter.passport.session())
+  }
+  app.use(isLoggedIn);
   app.use('/config', configRouter)
   app.use('/mhero', mheroRouter)
   app.use("/tmp", express.static("tmp"));
-  app.get('/test',
-    (req, res) => {
-      res.status(200).json({
-        "user": req.user
-      })
-    }
-  )
+  app.get('/test', (req, res) => {
+    res.status(200).json({
+      "user": req.user
+    })
+  })
 
   app.use('/fhir', questionnaireRouter)
   app.use('/fhir', fhirRouter)
@@ -180,11 +171,11 @@ async function startUp() {
       try {
         let reqMod = await fhirModules.require(loadModules[mod])
         if (reqMod) {
-          winston.info("Loading " + mod + " (" + loadModules[mod] + ") to app.")
+          logger.info("Loading " + mod + " (" + loadModules[mod] + ") to app.")
           app.use("/" + mod, reqMod)
         }
       } catch (err) {
-        winston.error("Failed to load module " + mod + " (" + loadModules[mod] + ")",err)
+        logger.error("Failed to load module " + mod + " (" + loadModules[mod] + ")",err)
       }
     }
   }

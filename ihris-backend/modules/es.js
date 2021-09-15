@@ -2,6 +2,7 @@ const axios = require('axios')
 const URI = require('urijs');
 const async = require('async')
 const nconf = require('./config')
+const logger = require('../winston')
 
 const getData = ({indexName, searchQuery}, callback) => {
   let error = false
@@ -43,7 +44,7 @@ const getData = ({indexName, searchQuery}, callback) => {
         return callback(null)
       }).catch((err) => {
         error = err
-        console.error(err);
+        logger.error(err);
         scroll_id = null
         return callback(null)
       })

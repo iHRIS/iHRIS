@@ -1,6 +1,6 @@
 const nconf = require('./config')
 const fhirAxios = nconf.fhirAxios
-const winston = require('winston')
+const logger = require('../winston')
 const { v5: uuidv5 } = require('uuid')
 
 const FHIR_UPDATE_NAMESPACE = nconf.get("fhir:uuid:namespace") || "e91c9519-eccb-48a8-a506-6659b8c22518"
@@ -49,7 +49,7 @@ const fhirSecurityLocation = {
           }
           resolve( locations )
         } ).catch( (err) => {
-          winston.error("Unable to get hierarchy for "+location)
+          logger.error("Unable to get hierarchy for "+location)
           reject( err )
         } )
     } )
@@ -108,7 +108,7 @@ const fhirSecurityLocation = {
           if ( location === "Location/" + entry.resource.id ) continue
           fhirSecurityLocation.replaceSecurityOnResource( entry.resource, oldArray, newSecurity )
           fhirAxios.update( entry.resource ).catch( (err) => {
-            winston.error("Failed to update "+entry.resource.resourceType+"/"+entry.resource.id+" security for location "
+            logger.error("Failed to update "+entry.resource.resourceType+"/"+entry.resource.id+" security for location "
               +location+" "+err.message)
           } )
 
@@ -120,7 +120,7 @@ const fhirSecurityLocation = {
           fhirAxios.searchLink( next.url ).then( (nextBundle) => {
             processLocationSecurity( nextBundle )
           } ).catch( (err) => {
-            winston.error("Failed to get search link for "+next.url+" "+err.message)
+            logger.error("Failed to get search link for "+next.url+" "+err.message)
           } )
         }
       }
@@ -129,7 +129,7 @@ const fhirSecurityLocation = {
     fhirAxios.search( "Location", { 'related-location': location } ).then( (bundle) => {
       processLocationSecurity( bundle )
     } ).catch( (err) => {
-      winston.error("Failed to get security for location "+location+" "+err.message)
+      logger.error("Failed to get security for location "+location+" "+err.message)
     } )
   },
   /**
@@ -144,7 +144,7 @@ const fhirSecurityLocation = {
             fhirSecurityLocation.resetLocationSecurityOnResource( resource, locations )
             return resolve( true )
           } ).catch( (err) => {
-            winston.error("Failed to get location hierarchy for "+resource.partOf.reference+" "+err.message)
+            logger.error("Failed to get location hierarchy for "+resource.partOf.reference+" "+err.message)
             return reject( err )
           } )
         } else {
@@ -158,7 +158,7 @@ const fhirSecurityLocation = {
             fhirSecurityLocation.resetLocationSecurityOnResource( resource, locations )
             return resolve( true )
           } ).catch( (err) => {
-            winston.error("Failed to get location hierarchy for "+resource.partOf.reference+" "+err.message)
+            logger.error("Failed to get location hierarchy for "+resource.partOf.reference+" "+err.message)
             return reject( err )
           } )
         } else {
@@ -181,7 +181,7 @@ const fhirSecurityLocation = {
         fhirAxios.update( resource ).then( (resource) => {
           return resolve( true )
         } ).catch( (err) => {
-          winston.error("Failed to update security metadata on Location/"+resource.id)
+          logger.error("Failed to update security metadata on Location/"+resource.id)
           return reject(err)
         } )
       } else {
@@ -218,18 +218,18 @@ const fhirSecurityLocation = {
             fhirSecurityLocation.replaceSecurity( resource, newLocations, oldLocations )
             fhirSecurityLocation.updateMatching( resource.id, oldLocations, newLocations )
           } ).catch( (err) => {
-            winston.error("Unable to get location hierarchy for "+resource.id+" "+err.message)
+            logger.error("Unable to get location hierarchy for "+resource.id+" "+err.message)
             reject(err)
           } )
         } ).catch( (err) => {
-          winston.error("Unable to get old location hierarchy for "+resource.id+" "+err.message)
+          logger.error("Unable to get old location hierarchy for "+resource.id+" "+err.message)
           reject(err)
         } )
       } else {
         fhirSecurityLocation.getLocationHierarchy( resource.partOf.reference ).then( (newLocations) => {
           fhirSecurityLocation.replaceSecurity( resource, newLocations )
         } ).catch( (err) => {
-          winston.error("Unable to get location hierarchy for new Location "+err.message)
+          logger.error("Unable to get location hierarchy for new Location "+err.message)
           reject(err)
         } )
       }
@@ -242,7 +242,7 @@ const fhirSecurityLocation = {
           if ( !(resourceType === "Location" && other.id === resourceId) ) {
             fhirSecurityLocation.replaceSecurity( other, newLocations, oldLocations )
             fhirAxios.update( other ).catch( (err) => {
-              winston.error("Failed to update "+resourceType+"/"+other.id+" security for location "
+              logger.error("Failed to update "+resourceType+"/"+other.id+" security for location "
                 +location+" "+err.message)
             } )
           }
@@ -254,7 +254,7 @@ const fhirSecurityLocation = {
           fhirAxios.searchLink( next.url ).then( (nextBundle) => {
             processLocationSecurity( nextBundle, oldLocations, newLocations, resourceId )
           } ).catch( (err) => {
-            winston.error("Failed to get search link for "+next.url+" "+err.message)
+            logger.error("Failed to get search link for "+next.url+" "+err.message)
           } )
         }
       }
@@ -264,7 +264,7 @@ const fhirSecurityLocation = {
       fhirAxios.search( resourceType, { _security: fhirSecurityLocation.system + "|Location/" + location } ).then( (bundle) => {
         processLocationSecurity( bundle, oldLocations, newLocations, location ) )
       } ).catch( (err) => {
-        winston.error("Failed to get "+resourceType+" security for practitioner "+practitioner+" "+err.message)
+        logger.error("Failed to get "+resourceType+" security for practitioner "+practitioner+" "+err.message)
       } )
     } )
   }
@@ -309,7 +309,7 @@ const fhirSecurityPractitioner = {
         }
         resolve( locations )
       } ).catch( (err) => {
-        winston.error("Failed to update matching practitioners "+practitioner+" "+err.message)
+        logger.error("Failed to update matching practitioners "+practitioner+" "+err.message)
         reject( err )
       } )
     } )
@@ -327,11 +327,11 @@ const fhirSecurityPractitioner = {
       try {
         reference = resource.extension.find( ext => ext.url === "http://ihris.org/fhir/StructureDefinition/ihris-practitioner-reference" ).valueReference.reference
       } catch( err ) {
-        winston.error("Failed to get practitioner extension reference from Basic/"+resource.id)
+        logger.error("Failed to get practitioner extension reference from Basic/"+resource.id)
         return undefined
       }
     } else {
-      winston.error("Invalid resource type passed to fhirSecurityPractitioner.setSecurity: "+resource.resourceType)
+      logger.error("Invalid resource type passed to fhirSecurityPractitioner.setSecurity: "+resource.resourceType)
       return undefined
     }
     return reference
@@ -362,7 +362,7 @@ const fhirSecurityPractitioner = {
           fhirSecurityLocation.resetLocationSecurityOnResource( other.resource, locations )
           fhirAxios.update( other.resource ).then( (saved) => {
           } ).catch( (err) => {
-            winston.error("Failed to update "+other.resource.resourceType+"/"+other.resource.id+" security for practitioner "
+            logger.error("Failed to update "+other.resource.resourceType+"/"+other.resource.id+" security for practitioner "
               +practitioner+" "+err.message)
           } )
         } )
@@ -373,7 +373,7 @@ const fhirSecurityPractitioner = {
           fhirAxios.searchLink( next.url ).then( (nextBundle) => {
             processPractitionerSecurity( nextBundle, locations )
           } ).catch( (err) => {
-            winston.error("Failed to get search link for "+next.url+" "+err.message)
+            logger.error("Failed to get search link for "+next.url+" "+err.message)
           } )
         }
       }
@@ -383,11 +383,11 @@ const fhirSecurityPractitioner = {
         fhirAxios.search( resourceType, { 'related-practitioner': practitioner } ).then( (bundle) => {
           processPractitionerSecurity( bundle, locations )
         } ).catch( (err) => {
-          winston.error("Failed to get "+resourceType+" security for practitioner "+practitioner+" "+err.message)
+          logger.error("Failed to get "+resourceType+" security for practitioner "+practitioner+" "+err.message)
         } )
       } )
     } ).catch( (err) => {
-      winston.error("Failed to get locations for "+practitioner+" "+err.message)
+      logger.error("Failed to get locations for "+practitioner+" "+err.message)
     } )
   },
   /**
@@ -416,7 +416,7 @@ const fhirSecurityPractitioner = {
           fhirAxios.searchLink( next.url ).then( (nextBundle) => {
             processLocationSecurity( nextBundle )
           } ).catch( (err) => {
-            winston.error("Failed to get search link for "+next.url+" "+err.message)
+            logger.error("Failed to get search link for "+next.url+" "+err.message)
           } )
         } else {
           processPractitionerList()
@@ -430,7 +430,7 @@ const fhirSecurityPractitioner = {
       fhirAxios.search( resourceType, { 'related-location': location } ).then( (bundle) => {
         processLocationSecurity( bundle )
       } ).catch( (err) => {
-        winston.error("Failed to get "+resourceType+" security for location "+location+" "+err.message)
+        logger.error("Failed to get "+resourceType+" security for location "+location+" "+err.message)
       } )
     } )
   },
@@ -458,7 +458,7 @@ const fhirSecurityPractitioner = {
         }
         resolve(true)
       } ).catch( (err) => {
-        winston.error("Failed to get location lists for bundle "+err.message)
+        logger.error("Failed to get location lists for bundle "+err.message)
         reject( err )
       } )
     } )
@@ -473,7 +473,7 @@ const fhirSecurityPractitioner = {
       if ( entry.response && entry.response.location ) {
         let parts = entry.response.location.split('/')
         if ( parts.length < 2 ) {
-          winston.error("Invalid location returned from response "+entry.response.location)
+          logger.error("Invalid location returned from response "+entry.response.location)
         } else {
           if ( fhirSecurityPractitioner.resourceTypes.includes( parts[0] ) ) {
 
@@ -485,21 +485,21 @@ const fhirSecurityPractitioner = {
                 try {
                   locationCache[practitioner] = await fhirSecurityPractitioner.getLocationsForPractitioner(practitioner)
                 } catch ( err ) {
-                  winston.error("Failed to get locations for "+practitioner+" "+err.message)
+                  logger.error("Failed to get locations for "+practitioner+" "+err.message)
                   locationCache[practitioner] = []
                 }
               }
               fhirSecurityLocation.resetLocationSecurityOnResource( resource, locationCache[practitioner] )
               */
               fhirAxios.update( resource ).catch( (err) => {
-                winston.error("Failed to update "+resource.resourceType+"/"+resource.id+" security for practitioner "
+                logger.error("Failed to update "+resource.resourceType+"/"+resource.id+" security for practitioner "
                   +practitioner+" "+err.message)
               } )
             } )
           }
         }
       } else {
-        winston.error("Failed to get response in transaction response for setPractitionerSecurityOnBundleResponse.")
+        logger.error("Failed to get response in transaction response for setPractitionerSecurityOnBundleResponse.")
       }
     }
   },
@@ -522,7 +522,7 @@ const fhirSecurityPractitioner = {
         securityExt.extension = fhirSecurity.getSecurityExtension( practitioner ).extension
         resolve(true)
       } ).catch( (err) => {
-        winston.error("Failed to get practitioner "+pracId+" "+err.message)
+        logger.error("Failed to get practitioner "+pracId+" "+err.message)
         reject(err)
       } )
     } )
@@ -595,7 +595,7 @@ const fhirSecurityPractitioner = {
               fhirSecurityLocation.resetLocationSecurityOnResource( resource, locations )
               return resolve( true )
             } ).catch( (err) => {
-              winston.error("Failed to get location hierarchy for "+JSON.stringify(resource.location)+" "+err.message)
+              logger.error("Failed to get location hierarchy for "+JSON.stringify(resource.location)+" "+err.message)
               return reject( err )
             } )
           } else {
@@ -619,7 +619,7 @@ const fhirSecurityPractitioner = {
               fhirSecurityLocation.resetLocationSecurityOnResource( resource, locations )
               return resolve( true )
             } ).catch( (err) => {
-              winston.error("Failed to get location hierarchy for "+JSON.stringify(resource.location)+" "+err.message)
+              logger.error("Failed to get location hierarchy for "+JSON.stringify(resource.location)+" "+err.message)
               return reject( err )
             } )
           } else {
@@ -631,14 +631,14 @@ const fhirSecurityPractitioner = {
         fhirSecurityPractitioner.copyPractitionerSecurity(resource).then( (results) => {
           return resolve( true )
         } ).catch( (err) => {
-          winston.error("Failed to copy practitioner security for basic resource "+resource.id+" "+err.message)
+          logger.error("Failed to copy practitioner security for basic resource "+resource.id+" "+err.message)
           return reject(err)
         } )
       } else if ( resource.resourceType === "Bundle" ) {
         fhirSecurityPractitioner.setLocationSecurityOnBundle(resource).then( (results) => {
           return resolve( true )
         } ).catch( (err) => {
-          winston.error("Failed to preprocess bundle "+err.message)
+          logger.error("Failed to preprocess bundle "+err.message)
           return reject(err)
         } )
       } else {
@@ -647,7 +647,7 @@ const fhirSecurityPractitioner = {
       //let securityValue = fhirSecurityPractitioner.getPractitionerReference( resource )
       /*
       if ( !securityValue ) {
-        winston.error("Invalid resource type passed to fhirSecurityPractitioner.setSecurity: "+resource.resourceType)
+        logger.error("Invalid resource type passed to fhirSecurityPractitioner.setSecurity: "+resource.resourceType)
         return reject(new Error("Invalid resource type passed to fhirSecurityPractitioner.setSecurity"))
       }
       */
@@ -682,7 +682,7 @@ const fhirSecurityPractitioner = {
           fhirAxios.update( resource ).then( (resource) => {
             return resolve( true )
           } ).catch( (err) => {
-            winston.error("Failed to update security metadata on Practitioner/"+resource.id)
+            logger.error("Failed to update security metadata on Practitioner/"+resource.id)
             return reject(err)
           } )
         }
@@ -711,7 +711,7 @@ const fhirSecurityPractitioner = {
           if ( !(resourceType === resource.resourceType && other.id === resourceId) ) {
             fhirSecurityLocation.replaceSecurity( other, locations, true )
             fhirAxios.update( other ).catch( (err) => {
-              winston.error("Failed to update "+resourceType+"/"+other.id+" security for practitioner "
+              logger.error("Failed to update "+resourceType+"/"+other.id+" security for practitioner "
                 +practitioner+" "+err.message)
             } )
           }
@@ -723,7 +723,7 @@ const fhirSecurityPractitioner = {
           fhirAxios.searchLink( next.url ).then( (nextBundle) => {
             processPractitionerSecurity( nextBundle, resourceType, resourceId )
           } ).catch( (err) => {
-            winston.error("Failed to get search link for "+next.url+" "+err.message)
+            logger.error("Failed to get search link for "+next.url+" "+err.message)
           } )
         }
       }
@@ -753,12 +753,12 @@ const fhirSecurityPractitioner = {
           fhirAxios.search( resourceType, { _security: fhirSecurityPractitioner.system + "|" + practitioner } ).then( (bundle) => {
             processPractitionerSecurity( bundle, (resource ? resource.resourceType : undefined), (resource ? resource.id : undefined) )
           } ).catch( (err) => {
-            winston.error("Failed to get "+resourceType+" security for practitioner "+practitioner+" "+err.message)
+            logger.error("Failed to get "+resourceType+" security for practitioner "+practitioner+" "+err.message)
           } )
         } )
       }
     } ).catch( (err) => {
-      winston.error("Failed to update matching practitioners "+practitioner+" "+resource.id+" "+err.message)
+      logger.error("Failed to update matching practitioners "+practitioner+" "+resource.id+" "+err.message)
     } )
   }
   */

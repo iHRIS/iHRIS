@@ -4,7 +4,7 @@ const path = require('path')
 const requireFromString = require('require-from-string')
 const nconf = require('./config')
 const fhirAxios = nconf.fhirAxios
-const winston = require('winston')
+const logger = require('../winston')
 
 let _workflowModules = {}
 
@@ -21,7 +21,7 @@ const fhirModules = {
         let skipSecurity = nconf.getBool("security:disabled")
 
         if ( skipSecurity ) {
-          winston.warn("SKIPPING SECURITY CHECK ON REMOTE MODULE:",mod,". This should only be done in development.")
+          logger.warn("SKIPPING SECURITY CHECK ON REMOTE MODULE:",mod,". This should only be done in development.")
           moduleAccepted = true
         } else {
           let verifier = crypto.createVerify( 'sha256' )
@@ -38,11 +38,11 @@ const fhirModules = {
 
         if ( moduleAccepted ) {
           // Could also pass in the second args as an object like:
-          // { filename: library.name, path: __dirname } 
+          // { filename: library.name, path: __dirname }
           // and not use third arg to allow relative require
           resolve( requireFromString( module, library.name, { prependPaths: __dirname } ) )
         } else {
-          winston.error("This module was not SIGNED and cannot be loaded: "+mod)
+          logger.error("This module was not SIGNED and cannot be loaded: "+mod)
           reject( null )
         }
 

@@ -2,7 +2,7 @@ const nconf = require('./config')
 const fhirAxios = nconf.fhirAxios
 const crypto = require('crypto')
 const fhirFilter = require('./fhirFilter')
-const winston = require('winston')
+const logger = require('../winston')
 
 const ROLE_EXTENSION = "http://ihris.org/fhir/StructureDefinition/ihris-assign-role"
 const TASK_EXTENSION = "http://ihris.org/fhir/StructureDefinition/ihris-task"
@@ -26,7 +26,7 @@ const user = {
         if ( response.total === 0 ) {
           resolve( false )
         } else if ( response.total > 1 ) {
-          winston.error("Too many users found for "+JSON.stringify(query))
+          logger.error("Too many users found for "+JSON.stringify(query))
           resolve( false )
         } else {
           let userObj = new User( response.entry[0].resource )
@@ -57,6 +57,15 @@ const user = {
       } )
     } )
   },
+  createUserInstance: (userResource, roleResource) => new Promise(async (resolve, reject) => {
+    const userObj = new User(userResource);
+    userObj.updatePermissions([roleResource]).then(() => {
+      resolve(userObj);
+    }).catch((err) => {
+      logger.error(err);
+      reject(err);
+    });
+  }),
   hashPassword: ( password, salt ) => {
     if ( !salt ) {
       salt = crypto.randomBytes(16).toString('hex')
@@ -101,61 +110,104 @@ const user = {
 
     } )
   },
-  addRole: ( permissions, roleStr ) => {
+  addRole: ({ permissions = {}, roleRef, roleResource }) => {
     return new Promise( (resolve, reject) => {
-      const role = roleStr.split( '/' )
-      if ( role.length !== 2 ) {
-        winston.error( "Invalid role passed to addRole: " +roleStr )
+      const findRoleResource = new Promise((res, rej) => {
+        if (roleResource) {
+          return res();
+        }
+        const role = roleRef.split('/');
+        if (role.length !== 2) {
+          logger.error(`Invalid role passed to addRole: ${roleRef}`);
+          rej();
+        } else {
+          fhirAxios.read(role[0], role[1]).then((response) => {
+            roleResource = response;
+            return res();
+          }).catch((err) => {
+            logger.error(err);
+            rej();
+          });
+        }
+      });
+      findRoleResource.then(async () => {
+        await resolveTasks(roleResource);
+        await user.loadTaskList()
+        let tasks = roleResource.extension.filter( ext => ext.url === TASK_EXTENSION )
+        for( let task of tasks ) {
+
+          let permission = undefined
+          let resource = undefined
+          let id = undefined
+          let constraint = undefined
+          let field = undefined
+          try {
+            permission = task.extension.find( ext => ext.url === "permission" ).valueCode
+          } catch( err ) {
+            console.error("No permission given for task.  Don't know what to do.")
+            continue
+          }
+          try {
+            resource = task.extension.find( ext => ext.url === "resource" ).valueCode
+          } catch( err ) {
+            console.error("No resource given for task.  Don't know what to do.")
+            continue
+          }
+          try {
+            id = task.extension.find( ext => ext.url === "instance" ).valueId
+          } catch( err ) {
+            // id takes precedence and only one can be set
+            try {
+              constraint = task.extension.find( ext => ext.url === "constraint" ).valueString
+            } catch( err ) {
+            }
+          }
+          try {
+            field = task.extension.find( ext => ext.url === "field" ).valueString
+          } catch( err ) {
+          }
+          user.addPermission( permissions, permission, resource, id, constraint, field )
+
+        }
+
+        let roles = roleResource.extension.filter( ext => ext.url === ROLE_EXTENSION )
+        for( let role of roles ) {
+          await user.addRole({ permissions, roleRef: role.valueReference.reference });
+        }
         resolve()
-      } else {
-        fhirAxios.read( role[0], role[1] ).then ( async(response) => {
-          await user.loadTaskList()
-          let tasks = response.extension.filter( ext => ext.url === TASK_EXTENSION )
-          for( let task of tasks ) {
+      }).catch(err => reject(err));
 
-            let permission = undefined
-            let resource = undefined
-            let id = undefined
-            let constraint = undefined
-            let field = undefined
-            try {
-              permission = task.extension.find( ext => ext.url === "permission" ).valueCode
-            } catch( err ) {
-              console.error("No permission given for task.  Don't know what to do.")
-              continue
-            }
-            try {
-              resource = task.extension.find( ext => ext.url === "resource" ).valueCode
-            } catch( err ) {
-              console.error("No resource given for task.  Don't know what to do.")
-              continue
-            }
-            try {
-              id = task.extension.find( ext => ext.url === "instance" ).valueId
-            } catch( err ) {
-              // id takes precedence and only one can be set
-              try {
-                constraint = task.extension.find( ext => ext.url === "constraint" ).valueString
-              } catch( err ) {
-              }
-            }
-            try {
-              field = task.extension.find( ext => ext.url === "field" ).valueString
-            } catch( err ) {
-            }
-            user.addPermission( permissions, permission, resource, id, constraint, field )
-
+      function resolveTasks(role) {
+        return new Promise((resolve, reject) => {
+          if (Array.isArray(role.extension)) {
+            const promises = [];
+            role.extension.forEach((extension, index) => {
+              promises.push(new Promise((resolve, reject) => {
+                if (extension.url !== 'task' || !extension.valueReference) {
+                  return resolve();
+                }
+                const id = extension.valueReference.reference.split('/')[1];
+                fhirAxios.read('Basic', id, '', 'DEFAULT').then((task) => {
+                  const taskExt = task.extension && task.extension.find(ext => ext.url === `${config.get('profileBaseUrl')}/StructureDefinition/task-attributes`);
+                  if (taskExt) {
+                    role.extension[index] = {};
+                    role.extension[index].url = TASK_EXTENSION;
+                    role.extension[index].extension = taskExt.extension;
+                  }
+                  resolve();
+                }).catch((err) => {
+                  logger.error(err);
+                  return reject();
+                });
+              }));
+            });
+            Promise.all(promises).then(() => {
+              resolve();
+            }).catch(() => {
+              reject();
+            });
           }
-
-          let roles = response.extension.filter( ext => ext.url === ROLE_EXTENSION )
-          for( let role of roles ) {
-            await user.addRole( permissions, role.valueReference.reference )
-          }
-          resolve()
-        } ).catch( (err) => {
-          console.error( err )
-          reject( err )
-        } )
+        });
       }
     } )
   },
@@ -165,21 +217,21 @@ const user = {
       return false
     }
     if ( !user.valueSet["ihris-task-permission"].includes( permission ) ) {
-      winston.error( "Invalid permission given "+permission, user.valueSet["ihris-task-permission"] )
+      logger.error( "Invalid permission given "+permission, user.valueSet["ihris-task-permission"] )
       return false
     }
     if ( permission !== "special" && !user.valueSet["ihris-task-resource"].includes( resource ) ) {
-      winston.error( "Invalid resource given "+resource, user.valueSet["ihris-task-resource"] )
+      logger.error( "Invalid resource given "+resource, user.valueSet["ihris-task-resource"] )
       return false
     }
     // Can't have an id when it's all resources
     if ( resource === "*" && ( id || field ) ) {
-      winston.warn("Can't add global resource permissions on a specific id or by including a field: "+id+" - "+field)
+      logger.warn("Can't add global resource permissions on a specific id or by including a field: "+id+" - "+field)
       return false
     }
 
     if ( ( permission === "*" || permission === "delete" ) && ( id || field ) ) {
-      winston.warn("Can't add delete permission on a specific id or by including a field: "+id+" - "+field)
+      logger.warn("Can't add delete permission on a specific id or by including a field: "+id+" - "+field)
       return false
     }
     if ( !permissions.hasOwnProperty( permission ) ) {
@@ -198,7 +250,7 @@ const user = {
         if ( field ) {
           if ( !permissions[permission][resource].id.hasOwnProperty( id ) ) {
             permissions[permission][resource].id[id] = { }
-          } 
+          }
           if ( isObject( permissions[permission][resource].id[id] ) ) {
             permissions[permission][resource].id[id][field] = true
           }
@@ -212,7 +264,7 @@ const user = {
         if ( field ) {
           if ( !permissions[permission][resource].constraint.hasOwnProperty( constraint ) ) {
             permissions[permission][resource].constraint[constraint] = {}
-          } 
+          }
           if ( isObject( permissions[permission][resource].constraint[constraint] ) ) {
             permissions[permission][resource].constraint[constraint][field] = true
           }
@@ -222,7 +274,7 @@ const user = {
       } else {
         if ( !permissions[permission][resource].hasOwnProperty( "*" ) ) {
           permissions[permission][resource]["*"] = {}
-        } 
+        }
         permissions[permission][resource]["*"][field] = true
       }
     }
@@ -237,7 +289,7 @@ class User {
     this.resource = resource
     this.permissions = {}
   }
-  
+
 }
 
 
@@ -245,12 +297,13 @@ User.prototype.restorePermissions = function( permissions ) {
   this.permissions = permissions
 }
 
-User.prototype.updatePermissions = async function() {
+User.prototype.updatePermissions = async function(roleResources) {
   if ( this.resource.hasOwnProperty("extension") ) {
     let roles = this.resource.extension.filter( ext => ext.url === ROLE_EXTENSION )
     for( let role of roles ) {
       try {
-        await user.addRole( this.permissions, role.valueReference.reference )
+        const roleResource = roleResources && roleResources.find(resource => resource.id === role.valueReference.reference.split('/')[1]);
+        await user.addRole({ permissions: this.permissions, roleRef: role.valueReference.reference, roleResource });
       } catch( err ) {
         console.error( "Unable to load permissions", role, err )
       }
@@ -276,8 +329,8 @@ User.prototype.__hasPermissionByName = function( permission, resource ) {
 /**
  * Gets a permission from the permissions object by checking for overriding values.
  * @return boolean | [ field list ] | Object
- * { 
- * "*": [ field list ], 
+ * {
+ * "*": [ field list ],
  * "id": { "ID": true | [field list ] }
  * "constraint": { "CONSTRAINT" : true | [field list] }
  * }
@@ -351,7 +404,7 @@ User.prototype.hasPermissionByObject = function( permission, resource ) {
   if ( !permissions ) {
     return false
   }
-  let allowed = {} 
+  let allowed = {}
   if ( permissions.hasOwnProperty("*") && isObject( permissions["*"] ) ) {
     allowed = permissions["*"]
   }
@@ -387,16 +440,16 @@ User.prototype.resetPermissions = function() {
 }
 
 User.prototype.checkPassword = function( password ) {
-  let details = this.resource.extension.find( ext => 
+  let details = this.resource.extension.find( ext =>
     ext.url === "http://ihris.org/fhir/StructureDefinition/ihris-password" )
   if ( !details ) {
-    winston.error( "Password details don't exist in user "+this.resource.id )
+    logger.error( "Password details don't exist in user "+this.resource.id )
     return false
   }
   let hash = details.extension.find( ext => ext.url === "password" )
   let salt = details.extension.find( ext => ext.url === "salt" )
   if ( !hash || !hash.valueString || !salt || !salt.valueString ) {
-    winston.error( "Hash or salt doesn't exist in user "+this.resource.id )
+    logger.error( "Hash or salt doesn't exist in user "+this.resource.id )
     return false
   }
   let compare = user.hashPassword( password, salt.valueString )

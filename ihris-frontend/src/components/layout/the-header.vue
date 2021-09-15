@@ -1,6 +1,6 @@
 <template>
   <div>
-  
+
   <v-app-bar color="white" app clipped-left clipped-right>
     <router-link to="/"><v-img :src="'/images/' + header.logo" contain max-height="36" max-width="106" /></router-link>
 
@@ -40,7 +40,7 @@
       </template>
       <v-list>
         <v-list-item
-          v-for="auth in header.auths" 
+          v-for="auth in header.auths"
           :key="auth.id"
         >
           <v-list-item-title>
@@ -66,6 +66,7 @@
 </template>
 
 <script>
+import VueCookies from 'vue-cookies'
 import AuthButton from "./auth-button"
 
 export default {
@@ -90,7 +91,7 @@ export default {
   },
   methods: {
     idleDialog() {
-      this.idle_logout = 30 
+      this.idle_logout = 30
       this.idle_countdown = true
       let timerId = setInterval( () => {
         if ( !this.isAppIdle ) return clearInterval( timerId )
@@ -102,18 +103,23 @@ export default {
       }, 1000 )
     },
     logout(ev, force) {
-      this.loading = true
-      fetch("/auth/logout").then(() => {
-        this.loading = false
-        //this.$store.commit('logout')
-        this.$emit('loggedout')
-        if ( force ) {
-          this.$store.commit('setMessage', { type: 'warning', text: 'You have been logged out due to inactivity.', timeout: 3600000 } )
-        } else {
-          this.$store.commit('setMessage', { type: 'success', text: 'You have logged out.' } )
-        }
-        this.$router.push( {path: "/" } )
-      })
+      if(this.$store.state.idp === 'keycloak') {
+        VueCookies.remove('userObj')
+        this.$keycloak.logout()
+      } else {
+        this.loading = true
+        fetch("/auth/logout").then(() => {
+          this.loading = false
+          //this.$store.commit('logout')
+          this.$emit('loggedout')
+          if ( force ) {
+            this.$store.commit('setMessage', { type: 'warning', text: 'You have been logged out due to inactivity.', timeout: 3600000 } )
+          } else {
+            this.$store.commit('setMessage', { type: 'success', text: 'You have logged out.' } )
+          }
+          this.$router.push( {path: "/" } )
+        })
+      }
     }
   }
 }

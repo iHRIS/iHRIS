@@ -12,7 +12,7 @@ const marked = require('marked')
 const { JSDOM } = require('jsdom')
 const createDOMPurify = require('dompurify')
 const outcomes = require('../config/operationOutcomes')
-const winston = require('winston')
+const logger = require('../winston')
 
 const window = new JSDOM('').window
 const DOMPurify = createDOMPurify(window)
@@ -53,7 +53,7 @@ router.get("/:resource/:id?", (req, res, next) => {
       /* return response from FHIR server */
       //return res.status( err.response.status ).json( err.response.data )
       /* for custom responses */
-      winston.error(err.message)
+      logger.error(err.message)
       let outcome = { ...outcomes.ERROR }
       outcome.issue[0].diagnostics = err.message
       return res.status(500).json( outcome )
@@ -66,7 +66,7 @@ router.get("/:resource/:id?", (req, res, next) => {
         if ( keyVal.length === 2 ) {
           req.query[keyVal[0]] = keyVal[1]
         } else {
-          winston.error("Unable to process filter constraing for "+req.params.resource+" "+filter)
+          logger.error("Unable to process filter constraing for "+req.params.resource+" "+filter)
         }
       }
     }
@@ -89,7 +89,7 @@ router.get("/:resource/:id?", (req, res, next) => {
       /* return response from FHIR server */
       //return res.status( err.response.status ).json( err.response.data )
       /* for custom responses */
-      winston.error(err.message)
+      logger.error(err.message)
       let outcome = { ...outcomes.ERROR }
       outcome.issue[0].diagnostics = err.message
       return res.status(500).json( outcome )
@@ -119,7 +119,7 @@ router.post("/:resource", (req, res) => {
         fhirReports.delayedRun()
         return res.status(201).json(output)
       } ).catch( (err) => {
-        winston.error("Failed to postprocess security metadata ON POST"+err.message)
+        logger.error("Failed to postprocess security metadata ON POST"+err.message)
         let outcome = { ...outcomes.ERROR }
         outcome.issue[0].diagnostics = err.message
         return res.status(500).json( outcome )
@@ -134,7 +134,7 @@ router.post("/:resource", (req, res) => {
       return res.status(500).json( outcome )
     } )
   } ).catch( (err) => {
-    winston.error("Failed to preprocess security metadata ON POST"+err.message)
+    logger.error("Failed to preprocess security metadata ON POST"+err.message)
     fhirAudit.create( req.user, req.ip, null, false, { resource: resource, err: err } )
     let outcome = { ...outcomes.ERROR }
     outcome.issue[0].diagnostics = err.message
@@ -176,12 +176,12 @@ router.patch("/CodeSystem/:id/:code", (req, res) => {
           if ( !entry.resource ) continue
           entry.resource.version = increment( entry.resource.version )
           fhirAxios.update( entry.resource ).catch( (err) => {
-            winston.error("Failed to update valueset to increment version: "+entry.resource.id)
+            logger.error("Failed to update valueset to increment version: "+entry.resource.id)
           } )
         }
       }
     } ).catch( (err) => {
-      winston.error("Unable to find valuesets to increment for "+codeSystem+": "+err.message)
+      logger.error("Unable to find valuesets to increment for "+codeSystem+": "+err.message)
     } )
   }
 
@@ -251,7 +251,7 @@ router.put("/:resource/:id", (req, res) => {
         fhirReports.delayedRun()
         return res.status(200).json(resource)
       } ).catch( (err) => {
-        winston.error("Failed to postprocess security metadata on PUT "+err.message)
+        logger.error("Failed to postprocess security metadata on PUT "+err.message)
         let outcome = { ...outcomes.ERROR }
         outcome.issue[0].diagnostics = err.message
         return res.status(500).json( outcome )
@@ -267,7 +267,7 @@ router.put("/:resource/:id", (req, res) => {
     } )
   } ).catch( (err) => {
     fhirAudit.update( req.user, req.ip, update.resourceType + "/" + update.id, false, { resource: update, err: err } )
-    winston.error("Failed to preprocess security metadata on PUT "+err.message)
+    logger.error("Failed to preprocess security metadata on PUT "+err.message)
     let outcome = { ...outcomes.ERROR }
     outcome.issue[0].diagnostics = err.message
     return res.status(500).json( outcome )
@@ -390,14 +390,14 @@ router.get("/\\$short-name", (req, res) => {
   if ( req.query.reference ) {
     let refData = req.query.reference.split('/')
     if ( refData.length !== 2 ) {
-      winston.debug("invalid",req.query)
+      logger.debug("invalid",req.query)
       return res.status(401).json( outcomes.DENIED )
     }
     allowed = req.user.hasPermissionByName( "read", refData[0] )
 
     // Any read access will give short names
     if ( allowed === false ) {
-      winston.debug("not allowed",allowed,req.query)
+      logger.debug("not allowed",allowed,req.query)
       return res.status(401).json( outcomes.DENIED )
     }
     fhirShortName.lookup( req.query ).then ( (display) => {
@@ -410,7 +410,7 @@ router.get("/\\$short-name", (req, res) => {
       allowed = allowed && req.user.hasPermissionByName( "read", "ValueSet" )
     }
     if ( allowed !== true ) {
-      winston.debug("not allowed",allowed,req.query)
+      logger.debug("not allowed",allowed,req.query)
       return res.status(401).json( outcomes.DENIED )
     }
     fhirShortName.lookup( req.query ).then ( (display) => {

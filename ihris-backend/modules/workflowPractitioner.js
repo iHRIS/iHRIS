@@ -1,5 +1,5 @@
 const nconf = require('./config')
-const winston = require('winston')
+const logger = require('../winston')
 const fhirQuestionnaire = require('./fhirQuestionnaire')
 const fhirAxios = nconf.fhirAxios
 
@@ -43,7 +43,7 @@ const workflowPractitioner = {
           }
           return resolve(bundle)
         }).catch( (err) => {
-          winston.error(err)
+          logger.error(err)
           reject(err)
         })
       })

@@ -33,7 +33,7 @@ export default {
                 }
               },
               components: {
-                "ihris-outcome": () => import(/* webpackChunkName: "fhir-outcome" */ "@/components/ihris/ihris-outcome" )
+                "ihris-outcome": () => import( "@/components/ihris/ihris-outcome" )
               },
               template: '<div><ihris-outcome :issues="issues"></ihris-outcome></div>'
             } )

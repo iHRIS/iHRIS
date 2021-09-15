@@ -3,7 +3,6 @@ const router = express.Router();
 const moment = require("moment")
 const async = require("async");
 const axios = require("axios");
-const winston = require("winston");
 const lodash = require("lodash")
 const URI = require("urijs");
 const { v4: uuidv4 } = require('uuid')
@@ -11,6 +10,7 @@ const es = require("../modules/es")
 const nconf = require('../modules/config')
 const fhirReports = require('../modules/fhirReports')
 const fhirAudit = require('../modules/fhirAudit')
+const logger = require('../winston')
 const fhirAxios = nconf.fhirAxios
 
 const outcomes = require('../config/operationOutcomes')
@@ -22,7 +22,7 @@ router.post("/send-message", function (req, res) {
   if ( !req.user ) {
     return res.status(401).json( outcomes.NOTLOGGEDIN )
   }
-  winston.info('Sending mhero message')
+  logger.info('Sending mhero message')
   let errorOccured = false
   let data = req.body
   let practitioners = []
@@ -154,7 +154,7 @@ router.post("/send-message", function (req, res) {
           childrenReqIDs.push(sendStatus.data.reqID)
           return nxt()
         }).catch(err => {
-          winston.error(err.message)
+          logger.error(err.message)
           errorOccured = true
           return nxt()
         });
@@ -178,7 +178,7 @@ router.post("/send-message", function (req, res) {
           }
           res.status(201).json({childrenReqIDs, parentReqId})
         }).catch(err => {
-          winston.error(err.message)
+          logger.error(err.message)
           return res.status(500).json({childrenReqIDs, parentReqId})
         });
       } else {
@@ -297,7 +297,7 @@ router.post('/subscribe-contact-groups', (req, res) => {
     fhirReports.setup().then(() => {
       fhirReports.runReports()
     }).catch((err) => {
-      winston.error( err.message )
+      logger.error( err.message )
     })
     return res.status(200).send()
   })
@@ -320,14 +320,14 @@ router.post('/add-group', (req, res) => {
       if ( reportsRunning ) {
         fhirReports.runReports()
       } else {
-        winston.error("Failed to start up reports to ElasticSearch.")
+        logger.error("Failed to start up reports to ElasticSearch.")
       }
     } catch( err ) {
-      winston.error( err.message )
+      logger.error( err.message )
     }
     return res.status(201).send()
   }).catch((err) => {
-    winston.error(err.message);
+    logger.error(err.message);
     return res.status(500).send()
   })
 })
@@ -363,7 +363,7 @@ router.post('/unsubscribe-contact-groups', (req, res) => {
     fhirReports.setup().then(() => {
       fhirReports.runReports()
     }).catch((err) => {
-      winston.error( err.message )
+      logger.error( err.message )
     })
     return res.status(200).send()
   })
@@ -390,7 +390,7 @@ router.put('/optout', (req, res) => {
     }
     return res.status(200).send()
   }).catch(err => {
-    winston.error(err.message)
+    logger.error(err.message)
     return res.status(500).send()
   });
 })
@@ -416,7 +416,7 @@ router.put('/undoOptout', (req, res) => {
     }
     return res.status(200).send()
   }).catch(err => {
-    winston.error(err.message)
+    logger.error(err.message)
     return res.status(500).send()
   });
 })

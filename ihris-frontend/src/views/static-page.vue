@@ -27,7 +27,7 @@ export default {
       if ( response.ok ) {
         response.json().then(data => {
           this.rawHTML = data.html
-          this.title = data.title 
+          this.title = data.title
         }).catch(err=>{
           console.log(err)
           if ( this.blankOnErr ) {

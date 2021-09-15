@@ -1,5 +1,5 @@
 const nconf = require('./config')
-const winston = require('winston')
+const logger = require('../winston')
 const fhirAxios = nconf.fhirAxios
 
 const workflowPerformance = {
@@ -10,12 +10,12 @@ const workflowPerformance = {
         type: "transaction",
         entry: []
       }
-      //winston.info(JSON.stringify( req.body,null,2))
+      //logger.info(JSON.stringify( req.body,null,2))
       fhirAxios.read( "Practitioner", req.query.practitioner ).then( (resource) => {
-        if ( req.body && req.body.item 
+        if ( req.body && req.body.item
           && req.body.item && req.body.item[0].linkId === "Basic"
-          && req.body.item[0].item && req.body.item[0].item[0].linkId === "Basic.extension[0].extension[0]" 
-          && req.body.item[0].item[0].answer && req.body.item[0].item[0].answer[0] 
+          && req.body.item[0].item && req.body.item[0].item[0].linkId === "Basic.extension[0].extension[0]"
+          && req.body.item[0].item[0].answer && req.body.item[0].item[0].answer[0]
           && req.body.item[0].item[0].answer[0].valueString) {
             if ( req.query.practitioner ) {
               req.body.subject = { reference: "Practitioner/" +req.query.practitioner }
@@ -28,20 +28,20 @@ const workflowPerformance = {
             }
 
             let complexExt = []
-            if ( req.body.item[0].item[0].linkId === "Basic.extension[0].extension[0]" 
-                && req.body.item[0].item[0].answer 
-                && req.body.item[0].item[0].answer[0] 
+            if ( req.body.item[0].item[0].linkId === "Basic.extension[0].extension[0]"
+                && req.body.item[0].item[0].answer
+                && req.body.item[0].item[0].answer[0]
                 && req.body.item[0].item[0].answer[0].valueString){
                 complexExt.push({ url: "evaluator",
                 valueString:req.body.item[0].item[0].answer[0].valueString })
             }
-            if ( (req.body.item[0].item[1].linkId === "Basic.extension[0].extension[1]" 
-                && req.body.item[0].item[1].answer 
-                && req.body.item[0].item[1].answer[0] 
+            if ( (req.body.item[0].item[1].linkId === "Basic.extension[0].extension[1]"
+                && req.body.item[0].item[1].answer
+                && req.body.item[0].item[1].answer[0]
                 && req.body.item[0].item[1].answer[0].valueDate)||(
-                req.body.item[0].item[2].linkId === "Basic.extension[0].extension[2]" 
-                && req.body.item[0].item[2].answer 
-                && req.body.item[0].item[2].answer[0] 
+                req.body.item[0].item[2].linkId === "Basic.extension[0].extension[2]"
+                && req.body.item[0].item[2].answer
+                && req.body.item[0].item[2].answer[0]
                 && req.body.item[0].item[2].answer[0].valueDate
                 )){
                 complexExt.push({ url: "period",
@@ -49,9 +49,9 @@ const workflowPerformance = {
                               end:req.body.item[0].item[2].answer[0].valueDate}
                              })
             }
-            if ( req.body.item[0].item[3].linkId === "Basic.extension[0].extension[3]" 
-                && req.body.item[0].item[3].answer 
-                && req.body.item[0].item[3].answer[0] 
+            if ( req.body.item[0].item[3].linkId === "Basic.extension[0].extension[3]"
+                && req.body.item[0].item[3].answer
+                && req.body.item[0].item[3].answer[0]
                 && req.body.item[0].item[3].answer[0].valueCoding){
                 complexExt.push({ url: "score",
                 valueCoding:req.body.item[0].item[3].answer[0].valueCoding })
@@ -80,11 +80,11 @@ const workflowPerformance = {
           reject("Invalid input")
         }
       } ).catch( (err) => {
-        winston.error(err)
+        logger.error(err)
         reject(err)
       } )
     } )
   }
 }
- 
+
 module.exports = workflowPerformance

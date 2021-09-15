@@ -1,5 +1,5 @@
 const nconf = require('./config')
-const winston = require('winston')
+const logger = require('../winston')
 const fhirAxios = require('./fhirAxios')
 
 const AUDIT_TEMPLATE = {
@@ -33,8 +33,8 @@ const fhirAudit = {
   save: (audit) => {
     fhirAxios.create(audit).then( (response) => {
     } ).catch( (err) => {
-      winston.error("Failed to create audit trail: "+err.message)
-      winston.error(JSON.stringify(audit,null,2))
+      logger.error("Failed to create audit trail: "+err.message)
+      logger.error(JSON.stringify(audit,null,2))
     } )
   },
 

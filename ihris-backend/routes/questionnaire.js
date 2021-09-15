@@ -7,7 +7,7 @@ const fhirSecurity = require('../modules/fhirSecurity')
 const fhirQuestionnaire = require('../modules/fhirQuestionnaire')
 const fhirModules = require('../modules/fhirModules')
 const outcomes = require('../config/operationOutcomes')
-const winston = require('winston')
+const logger = require('../winston')
 
 /**
  * This route will process a QuestionnaireReponse and parse
@@ -60,29 +60,29 @@ router.post("/QuestionnaireResponse", (req, res, next) => {
                   fhirSecurity.postProcess( results, uuid ).then( (results) => {
                     next()
                   } ).catch( (err) => {
-                    winston.error(err.message)
+                    logger.error(err.message)
                     return res.status( 500 ).json( { err: err.message } )
                   } )
                 } ).catch( (err) => {
-                  winston.error(err.message)
+                  logger.error(err.message)
                   return res.status( 500 ).json( { err: err.message } )
                 } )
               } else {
                 fhirSecurity.postProcess( results, uuid ).then( (results) => {
                   next()
                 } ).catch( (err) => {
-                  winston.error(err.message)
+                  logger.error(err.message)
                   return res.status( 500 ).json( { err: err.message } )
                 } )
               }
             } ).catch( (err) => {
-              winston.error(err.message)
+              logger.error(err.message)
               //return res.status( err.response.status ).json( err.response.data )
               return res.status( 500 ).json( { err: err.message } )
             } )
 
           } ).catch( (err) => {
-            winston.error(err.message)
+            logger.error(err.message)
             return res.status( 500 ).json( err )
           } )
 
@@ -90,16 +90,16 @@ router.post("/QuestionnaireResponse", (req, res, next) => {
 
         } ).catch( (err) => {
           if ( err === "Invalid input" ) {
-            winston.error(err)
+            logger.error(err)
             return res.status( 400 ).json( err )
           } else {
-            winston.error(err.message)
+            logger.error(err.message)
             return res.status( 500 ).json( err )
           }
         } )
 
       } ).catch( (err) => {
-        winston.error(err.message)
+        logger.error(err.message)
         let outcome = { ...outcomes.ERROR }
         outcome.issue[0].diagnostics = "Unable to find processor module for this questionnaire: "+req.body.questionnaire +" ("+processor+")"
         return res.status(500).json( outcome )
@@ -107,7 +107,7 @@ router.post("/QuestionnaireResponse", (req, res, next) => {
 
   } else {
     fhirQuestionnaire.processQuestionnaire( req.body ).then( (bundle) => {
-      winston.debug(JSON.stringify(bundle,null,2))
+      logger.debug(JSON.stringify(bundle,null,2))
       fhirSecurity.preProcess( bundle ).then( (uuid) => {
         fhirFilter.filterBundle( "write", bundle, req.user )
         let errorCheck = checkBundleForError( bundle )
@@ -122,18 +122,18 @@ router.post("/QuestionnaireResponse", (req, res, next) => {
           fhirSecurity.postProcess( results, uuid ).then( (results) => {
             next()
           } ).catch( (err) => {
-            winston.error(err.message)
+            logger.error(err.message)
             return res.status( 500 ).json( { err: err.message } )
           } )
         } ).catch( (err) => {
-          winston.error(err.message)
+          logger.error(err.message)
           //return res.status( err.response.status ).json( err.response.data )
           return res.status( 500 ).json( { err: err.message } )
         } )
 
 
       } ).catch( (err) => {
-        winston.error(err.message)
+        logger.error(err.message)
         return res.status( 500 ).json( err )
       } )
 
@@ -141,7 +141,7 @@ router.post("/QuestionnaireResponse", (req, res, next) => {
 
 
     } ).catch( (err) => {
-      winston.error(err.message)
+      logger.error(err.message)
       return res.status( 500 ).json( err )
     } )
 

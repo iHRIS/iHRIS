@@ -1,6 +1,6 @@
 const nconf = require('./config')
 const user = require('./user')
-const winston = require('winston')
+const logger = require('../winston')
 const crypto = require('crypto')
 const fhirAxios = nconf.fhirAxios
 
@@ -41,7 +41,7 @@ const workflowUser = {
               try {
                 userRoles = await fhirAxios.search("Basic", { locationconstraint: "related-location=" + personLocationLink.answer[0].valueReference  })
               } catch (err) {
-                winston.error("Error Getting user roles for user" + userEmail)
+                logger.error("Error Getting user roles for user" + userEmail)
                 resolve(await workflowUser.outcome("Error Getting user roles for user " + userEmail))
               }
               let locationValueReference = personLocationLink.answer[0].valueReference.reference
@@ -55,7 +55,7 @@ const workflowUser = {
                 try {
                   newRole = await workflowUser.createLocationRole(locationValueReference)
                 } catch (error) {
-                  winston.error("Error creating new role for " + locationValueReference)
+                  logger.error("Error creating new role for " + locationValueReference)
                   resolve(await workflowUser.outcome("Error creating new role for " +locationValueReference))
                 }
                 let roleURL = "Basic/"+locationRoleID
@@ -75,7 +75,7 @@ const workflowUser = {
               valueReference:personLocationLink.answer[0].valueReference
                       })
               let primaryLocationID = locationValueReference.split("/")
-              //winston.info("PRIMARY ID",primaryLocationID )
+              //logger.info("PRIMARY ID",primaryLocationID )
               let relatedExt = []
               //let relatedLocations = []
               try {
@@ -87,7 +87,7 @@ const workflowUser = {
                           })
                 }
               } catch (err) {
-                winston.error("Failed to get related locations for ",primaryLocationID[1] )
+                logger.error("Failed to get related locations for ",primaryLocationID[1] )
                 resolve(await workflowUser.outcome("Failed to Find location "+primaryLocationID[1]))
               }
               extensions.push({ url: "http://ihris.org/fhir/StructureDefinition/ihris-related-group",
@@ -119,12 +119,12 @@ const workflowUser = {
                 })
                 // })
               } catch (err) {
-                winston.error("Error setting Password ")
+                logger.error("Error setting Password ")
                 reject(err)
               }
 
             } else {
-              winston.info("NO PASSWORD SET ")
+              logger.info("NO PASSWORD SET ")
               resolve(await workflowUser.outcome("No Password set for this User"))
             }
             let userName = userEmail.split('@')
@@ -157,7 +157,7 @@ const workflowUser = {
               }
             })
           } else {
-            winston.error("User " + userEmail + " Exist")
+            logger.error("User " + userEmail + " Exist")
             resolve(await workflowUser.outcome("User " + userEmail + " Exist"))
             //reject(err.message)
           }
@@ -166,7 +166,7 @@ const workflowUser = {
           reject( err.message )
         })
       } catch (err){
-        winston.error(err)
+        logger.error(err)
         reject(err.message)
       }
     })
@@ -315,7 +315,7 @@ const workflowUser = {
           reject( err )
         } )
       } catch (err) {
-        winston.error("Error creating location role for " + locationReference )
+        logger.error("Error creating location role for " + locationReference )
         reject(err.message)
       }
     })
@@ -341,7 +341,7 @@ const workflowUser = {
           }
         }]
       }
-      winston.info(JSON.stringify(outcomeBundle,null,2))
+      logger.info(JSON.stringify(outcomeBundle,null,2))
       resolve(outcomeBundle)
     })
   }

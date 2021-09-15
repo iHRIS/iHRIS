@@ -9,6 +9,7 @@ export default new Vuex.Store({
       loggedin: false,
       name: ""
     },
+    idp: 'ihris',
     security_off: false,
     message: {
       type: "info",

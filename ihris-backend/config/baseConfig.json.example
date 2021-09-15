@@ -8,6 +8,42 @@
   },
   "parameter": [
     {
+      "name": "app:idp",
+      "valueString": "ihris"
+    },
+    {
+      "name": "builtFSHFIles",
+      "valueString": "../../ig/input/fsh/build/input"
+    },
+    {
+      "name": "profileBaseUrl",
+      "valueString": "http://ihris.org/fhir"
+    },
+    {
+      "name": "keycloak:baseURL",
+      "valueString": "http://localhost:8080/auth"
+    },
+    {
+      "name": "keycloak:realm",
+      "valueString": "iHRIS"
+    },
+    {
+      "name": "keycloak:UIClientId",
+      "valueString": "ihris-frontend"
+    },
+    {
+      "name": "keycloak:backendClientId",
+      "valueString": "ihris-backend"
+    },
+    {
+      "name": "keycloak:RESTClientUser",
+      "valueString": "ihris@keycloak.org"
+    },
+    {
+      "name": "keycloak:RESTClientPassword",
+      "valueString": "ihris"
+    },
+    {
       "name": "fhir:base",
       "valueString": "http://localhost:8080/hapi/fhir"
     },
