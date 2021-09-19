@@ -188,7 +188,7 @@ const user = {
                 }
                 const id = extension.valueReference.reference.split('/')[1];
                 fhirAxios.read('Basic', id, '', 'DEFAULT').then((task) => {
-                  const taskExt = task.extension && task.extension.find(ext => ext.url === `${config.get('profileBaseUrl')}/StructureDefinition/task-attributes`);
+                  const taskExt = task.extension && task.extension.find(ext => ext.url === `${nconf.get('profileBaseUrl')}/StructureDefinition/task-attributes`);
                   if (taskExt) {
                     role.extension[index] = {};
                     role.extension[index].url = TASK_EXTENSION;
