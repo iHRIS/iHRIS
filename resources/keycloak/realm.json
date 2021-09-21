@@ -387,6 +387,27 @@
     },
     "notBefore" : 0,
     "groups" : [ ]
+  }, {
+    "id" : "c20fcbd8-42b5-4157-903b-aaff85bfb0c8",
+    "createdTimestamp" : 1632218770464,
+    "username" : "admin@ihris.org",
+    "enabled" : true,
+    "totp" : false,
+    "emailVerified" : true,
+    "firstName" : "iHRIS Admin",
+    "email" : "admin@ihris.org",
+    "credentials" : [ {
+      "id" : "468acda2-9039-4bcf-b61b-7f3c50529a83",
+      "type" : "password",
+      "createdDate" : 1632218832407,
+      "secretData" : "{\"value\":\"5ZWcavxTzpLku0mxF0ilYic63r+IjmLUglaVpWSNv0qw3JdiMcFbdpBW6aR3V5RztrrlkFOxg9EnOYqEyuKI0Q==\",\"salt\":\"tRgkHw/XdNGZiJAVXi/WTQ==\",\"additionalParameters\":{}}",
+      "credentialData" : "{\"hashIterations\":27500,\"algorithm\":\"pbkdf2-sha256\",\"additionalParameters\":{}}"
+    } ],
+    "disableableCredentialTypes" : [ ],
+    "requiredActions" : [ "UPDATE_PASSWORD" ],
+    "realmRoles" : [ "Admin Role", "default-roles-ihris" ],
+    "notBefore" : 0,
+    "groups" : [ ]
   } ],
   "scopeMappings" : [ {
     "clientScope" : "offline_access",
