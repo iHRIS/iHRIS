@@ -177,14 +177,14 @@ your FHIR server with:
 node load.js --server http://localhost:8080/hapi/fhir PATH/TO/FHIR.json
 ```
 
-To load the starter resources, you should start with:
-```bash
-node load.js --server http://localhost:8080/hapi/fhir ../resources/*.json
-```
-
 After building the FSH files, you can import them with the following:
 ```bash
 node load.js --server http://localhost:8080/hapi/fhir ../ig/fsh-generated/resources/*.json
+```
+
+Then to load the starter resources run the command bellow
+```bash
+node load.js --server http://localhost:8080/hapi/fhir ../resources/*.json
 ```
 
 ## ElasticSearch
