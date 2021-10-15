@@ -60,7 +60,7 @@ const workflowLeave = {
                 valueInteger:req.body.item[0].item[3].answer[0].valueInteger })
                 logger.info(JSON.stringify(complexExt,null,2))
             } */
-            if ( req.body.item[0].item[3].linkId === "Basic.extension[0].extension[4]"
+            if ( req.body.item[0].item[3].linkId === "Basic.extension[0].extension[3]"
                 && req.body.item[0].item[3].answer
                 && req.body.item[0].item[3].answer[0]
                 && req.body.item[0].item[3].answer[0].valueDate){
