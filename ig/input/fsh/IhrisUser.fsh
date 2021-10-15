@@ -183,3 +183,49 @@ Usage:          #definition
 * item[0].item[7].type = #string
 * item[0].item[7].required = true
 * item[0].item[7].repeats = false
+
+Instance:       IhrisChangePassword
+InstanceOf:     IhrisQuestionnaire
+Usage:          #definition
+* title = "iHRIS Change Password Workflow"
+* description = "iHRIS workflow to Change Users Password"
+* id = "ihris-change-password"
+* url = "http://ihris.org/fhir/Questionnaire/ihris-change-password"
+* name = "ihris-change-password"
+* status = #active
+* date = 2020-12-08
+* purpose = "Workflow page for changing a user's password."
+
+* item[0].linkId = "Person"
+* item[0].text = "Change Password"
+* item[0].type = #group
+* item[0].extension[constraint][0].extension[key].valueId = "ihris-password-check"
+* item[0].extension[constraint][0].extension[severity].valueCode = #error
+* item[0].extension[constraint][0].extension[expression].valueString = "where(linkId='newpassword').answer.first().valueString = where(linkId='confrimpassword').answer.first().valueString"
+* item[0].extension[constraint][0].extension[human].valueString = "Please make sure New Password and Confrim Password Match."
+* item[0].extension[constraint][1].extension[key].valueId = "ihris-oldpassword-check"
+* item[0].extension[constraint][1].extension[severity].valueCode = #error
+* item[0].extension[constraint][1].extension[expression].valueString = "where(linkId='oldpassword').answer.first().valueString != where(linkId='newpassword').answer.first().valueString"
+* item[0].extension[constraint][1].extension[human].valueString = "Please make sure New Password is not the Same as Old Password."
+
+* item[0].item[0].linkId = "oldpassword#password"
+* item[0].item[0].text = "Old Password"
+* item[0].item[0].type = #string
+* item[0].item[0].required = true
+* item[0].item[0].repeats = false
+
+* item[0].item[1].linkId = "newpassword#password"
+* item[0].item[1].text = "Password"
+* item[0].item[1].type = #string
+* item[0].item[1].required = true
+* item[0].item[1].repeats = false
+* item[0].item[1].extension[constraint].extension[key].valueId = "ihris-password-strength-check"
+* item[0].item[1].extension[constraint].extension[severity].valueCode = #error
+* item[0].item[1].extension[constraint].extension[expression].valueString = "matches('^(?=.*\\\\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$')"
+* item[0].item[1].extension[constraint].extension[human].valueString = "Password Should be Minimum eight characters, at least one uppercase letter, one lowercase letter, one number and one special character"
+
+* item[0].item[2].linkId = "confrimpassword#password"
+* item[0].item[2].text = "Confirm Password"
+* item[0].item[2].type = #string
+* item[0].item[2].required = true
+* item[0].item[2].repeats = false

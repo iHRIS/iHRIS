@@ -16,11 +16,11 @@
             "code": "1.2.840.10065.1.12.1.14"
           }
         ],
-        "when": "2021-10-15T09:59:20.887Z",
+        "when": "2021-10-15T10:29:53.997Z",
         "who": {
           "reference": "http://ihris.org/fhir/Organization/ihris"
         },
-        "data": "K3V9M/6hB4hV+4yaF2XfEqWh93y38pa5vLwfMSeKGDYQEH24902ZL84a7VsxbYe5PXqCKPO5VsEM2oqkU6ddsKO23eZ0t/lrBKFa424P5dRjDZBpQISCET7Nq+dSbnj7MtdL42gJYvqhnZZRF43NNEnx1Xd2k0w7Gd3aOA4sH5o="
+        "data": "zE5qnJbNXLvHqTnS6G1CTzGmz+lNvjZmWKfpTsIbSUdAYqlHJhUWYXOPJ3UvKOcOmaTLX1oHgEoT9/AvWHYSS9+EIZzXLP5ylgiXndIHVC45d0PqSSfM5arxOq6JGuD3OIg7PMI8SRpacQBxHsHKB5vJC4voopbYrXhK3X6p3Hs="
       }
     },
     {
@@ -435,6 +435,42 @@
           "valueString": "/dashboard"
         },
         {
+          "name": "site:nav:menu:users:text",
+          "valueString": "System Users"
+        },
+        {
+          "name": "site:nav:menu:users:order",
+          "valueString": "6"
+        },
+        {
+          "name": "site:nav:menu:users:icon",
+          "valueString": "mdi-account-box-outline"
+        },
+        {
+          "name": "site:nav:menu:users:menu:users_search:text",
+          "valueString": "Search Users"
+        },
+        {
+          "name": "site:nav:menu:users:menu:users_search:url",
+          "valueString": "/resource/search/user"
+        },
+        {
+          "name": "site:nav:menu:password:text",
+          "valueString": "Change Password"
+        },
+        {
+          "name": "site:nav:menu:password:order",
+          "valueString": "7"
+        },
+        {
+          "name": "site:nav:menu:password:icon",
+          "valueString": "mdi-lock-reset"
+        },
+        {
+          "name": "site:nav:menu:password:url",
+          "valueString": "/questionnaire/ihris-change-password/person"
+        },
+        {
           "name": "shortname:Practitioner:format",
           "valueString": "%s, %s"
         },
@@ -585,6 +621,14 @@
         {
           "name": "workflow:questionnaire:salary:url",
           "valueString": "http://ihris.org/fhir/Questionnaire/ihris-salary"
+        },
+        {
+          "name": "workflow:processor:user:file",
+          "valueString": "../modules/workflowUser"
+        },
+        {
+          "name": "workflow:questionnaire:user:url",
+          "valueString": "http://ihris.org/fhir/Questionnaire/ihris-user"
         },
         {
           "name": "defaults:components:date-time:minValueDateTime",
