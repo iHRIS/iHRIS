@@ -6,7 +6,7 @@ RUN git clone --branch ${branch} https://github.com/iHRIS/iHRIS /src/
 
 
 # generate fsh files
-WORKDIR /src/fsh
+WORKDIR /src/ig
 RUN npm install -g fsh-sushi
 RUN sushi -s .
 

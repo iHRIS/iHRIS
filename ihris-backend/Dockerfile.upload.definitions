@@ -8,8 +8,8 @@ RUN mkdir /hapi-fhir && mkdir /data && ln -s /data /hapi-fhir/target && cd /hapi
 WORKDIR /hapi-fhir
 VOLUME /data
 
-RUN wget https://github.com/jamesagnew/hapi-fhir/releases/download/v5.1.0/hapi-fhir-5.1.0-cli.tar.bz2 \
-    && tar -xf hapi-fhir-5.1.0-cli.tar.bz2 && rm hapi-fhir-5.1.0-cli.tar.bz2
+RUN wget https://github.com/jamesagnew/hapi-fhir/releases/download/v5.5.1/hapi-fhir-5.5.1-cli.tar.bz2 \
+    && tar -xf hapi-fhir-5.5.1-cli.tar.bz2 && rm hapi-fhir-5.5.1-cli.tar.bz2
 
 # RUN apt-get update && apt-get install -y wget
 ENV DOCKERIZE_VERSION v0.5.0
