@@ -16,11 +16,11 @@
             "code": "1.2.840.10065.1.12.1.14"
           }
         ],
-        "when": "2020-10-21T13:09:46.744Z",
+        "when": "2021-10-15T09:59:20.887Z",
         "who": {
           "reference": "http://ihris.org/fhir/Organization/ihris"
         },
-        "data": "HTe0nBHPFrxc4A3lJsZhzL9zlG4mZW4TxXXsGhT7OPi9GFPoQavnzUyzWY3t4PPlKvX5BDdDuEwfIA+HAj2CORqgD7/LnSGgUPuvpV/BicW4G/Shw5p4aI4/OpaVSGAs+ws+pL8n8MwCVtKEluyUYHsX+xa4pI/0NkA5ekdUZlA="
+        "data": "K3V9M/6hB4hV+4yaF2XfEqWh93y38pa5vLwfMSeKGDYQEH24902ZL84a7VsxbYe5PXqCKPO5VsEM2oqkU6ddsKO23eZ0t/lrBKFa424P5dRjDZBpQISCET7Nq+dSbnj7MtdL42gJYvqhnZZRF43NNEnx1Xd2k0w7Gd3aOA4sH5o="
       }
     },
     {
@@ -143,6 +143,34 @@
           "valueString": "/resource/add/practitionerrole"
         },
         {
+          "name": "site:nav:menu:location:text",
+          "valueString": "Locations and Facilities"
+        },
+        {
+          "name": "site:nav:menu:location:order",
+          "valueString": "4"
+        },
+        {
+          "name": "site:nav:menu:location:icon",
+          "valueString": "mdi-map-marker-multiple"
+        },
+        {
+          "name": "site:nav:menu:location:menu:location_search:text",
+          "valueString": "Locations"
+        },
+        {
+          "name": "site:nav:menu:location:menu:location_search:url",
+          "valueString": "/resource/search/location"
+        },
+        {
+          "name": "site:nav:menu:location:menu:facility_search:text",
+          "valueString": "Facilities"
+        },
+        {
+          "name": "site:nav:menu:location:menu:facility_search:url",
+          "valueString": "/resource/search/facility"
+        },
+        {
           "name": "site:nav:menu:mhero:order",
           "valueString": "3"
         },
@@ -247,6 +275,18 @@
           "valueString": "4"
         },
         {
+          "name": "site:nav:menu:database:menu:job-type:text",
+          "valueString": "Job Type"
+        },
+        {
+          "name": "site:nav:menu:database:menu:job-type:url",
+          "valueString": "/resource/search/job-type"
+        },
+        {
+          "name": "site:nav:menu:database:menu:job-type:order",
+          "valueString": "5"
+        },
+        {
           "name": "site:nav:menu:database:menu:leave-type:text",
           "valueString": "Leave Types"
         },
@@ -256,7 +296,127 @@
         },
         {
           "name": "site:nav:menu:database:menu:leave-type:order",
-          "valueString": "5"
+          "valueString": "6"
+        },
+        {
+          "name": "site:nav:menu:database:menu:employment-status:text",
+          "valueString": "Employment Status"
+        },
+        {
+          "name": "site:nav:menu:database:menu:employment-status:url",
+          "valueString": "/resource/search/employment-status"
+        },
+        {
+          "name": "site:nav:menu:database:menu:employment-status:order",
+          "valueString": "7"
+        },
+        {
+          "name": "site:nav:menu:database:menu:reason-departure:text",
+          "valueString": "Reasons For departure"
+        },
+        {
+          "name": "site:nav:menu:database:menu:reason-departure:url",
+          "valueString": "/resource/search/reason-departure"
+        },
+        {
+          "name": "site:nav:menu:database:menu:reason-departure:order",
+          "valueString": "8"
+        },
+        {
+          "name": "site:nav:menu:database:menu:educational-major:text",
+          "valueString": "Educational Major"
+        },
+        {
+          "name": "site:nav:menu:database:menu:educational-major:url",
+          "valueString": "/resource/search/educational-major"
+        },
+        {
+          "name": "site:nav:menu:database:menu:educational-major:order",
+          "valueString": "9"
+        },
+        {
+          "name": "site:nav:menu:database:menu:degree:text",
+          "valueString": "Degree/Course"
+        },
+        {
+          "name": "site:nav:menu:database:menu:degree:url",
+          "valueString": "/resource/search/degree"
+        },
+        {
+          "name": "site:nav:menu:database:menu:degree:order",
+          "valueString": "10"
+        },
+        {
+          "name": "site:nav:menu:database:menu:education-level:text",
+          "valueString": "Education Level"
+        },
+        {
+          "name": "site:nav:menu:database:menu:education-level:url",
+          "valueString": "/resource/search/education-level"
+        },
+        {
+          "name": "site:nav:menu:database:menu:education-level:order",
+          "valueString": "11"
+        },
+        {
+          "name": "site:nav:menu:database:menu:institution-type:text",
+          "valueString": "Education Institution Type"
+        },
+        {
+          "name": "site:nav:menu:database:menu:institution-type:url",
+          "valueString": "/resource/search/institution-type"
+        },
+        {
+          "name": "site:nav:menu:database:menu:institution-type:order",
+          "valueString": "12"
+        },
+        {
+          "name": "site:nav:menu:database:menu:institution:text",
+          "valueString": "Education Institution"
+        },
+        {
+          "name": "site:nav:menu:database:menu:institution:url",
+          "valueString": "/resource/search/institution"
+        },
+        {
+          "name": "site:nav:menu:database:menu:institution:order",
+          "valueString": "13"
+        },
+        {
+          "name": "site:nav:menu:database:menu:disciplineaction:text",
+          "valueString": "Discipline Action Type"
+        },
+        {
+          "name": "site:nav:menu:database:menu:disciplineaction:url",
+          "valueString": "/resource/search/discipline-action-type"
+        },
+        {
+          "name": "site:nav:menu:database:menu:disciplineaction:order",
+          "valueString": "14"
+        },
+        {
+          "name": "site:nav:menu:database:menu:salarysource:text",
+          "valueString": "Funds Source"
+        },
+        {
+          "name": "site:nav:menu:database:menu:salarysource:url",
+          "valueString": "/resource/search/salary-source"
+        },
+        {
+          "name": "site:nav:menu:database:menu:salarysource:order",
+          "valueString": "14"
+        },
+        {
+          "name": "site:nav:menu:database:menu:frequency:text",
+          "valueString": "Pay Frequency"
+        },
+        {
+          "name": "site:nav:menu:database:menu:frequency:url",
+          "valueString": "/resource/search/frequency"
+        },
+        {
+          "name": "site:nav:menu:database:menu:frequency:order",
+          "valueString": "16"
         },
         {
           "name": "site:nav:menu:dashboard:text",
@@ -291,6 +451,70 @@
           "valueString": "name.where(use='official').first().given"
         },
         {
+          "name": "shortname:Location:format",
+          "valueString": "%s"
+        },
+        {
+          "name": "shortname:Location:order",
+          "valueString": "name"
+        },
+        {
+          "name": "shortname:Location:paths:name:fhirpath",
+          "valueString": "name"
+        },
+        {
+          "name": "shortname:Basic:format",
+          "valueString": "%s"
+        },
+        {
+          "name": "shortname:Basic:order",
+          "valueString": "name"
+        },
+        {
+          "name": "shortname:Basic:paths:name:fhirpath",
+          "valueString": "extension.where(url='http://ihris.org/fhir/StructureDefinition/ihris-basic-name').valueString"
+        },
+        {
+          "name": "shortname:CodeSystem:format",
+          "valueString": "%s"
+        },
+        {
+          "name": "shortname:CodeSystem:order",
+          "valueString": "name"
+        },
+        {
+          "name": "shortname:CodeSystem:paths:name:fhirpath",
+          "valueString": "CodeSystem.where(id='ihris-job').display"
+        },
+        {
+          "name": "defaults:fields:PractitionerRole.location:type",
+          "valueString": "tree"
+        },
+        {
+          "name": "defaults:fields:PractitionerRole.location:user_filter:regex",
+          "valueString": "related-location=(.+)"
+        },
+        {
+          "name": "defaults:fields:PractitionerRole.location:user_filter:replace",
+          "valueString": "$1"
+        },
+        {
+          "name": "defaults:fields:Practitioner.extension:residence.value[x]:valueReference:type",
+          "valueString": "tree"
+        },
+        {
+          "name": "defaults:fields:Location.partOf:type",
+          "valueString": "tree"
+        },
+        {
+          "name": "defaults:fields:Location.partOf:user_filter:regex",
+          "valueString": "related-location=(.+)"
+        },
+        {
+          "name": "defaults:fields:Location.partOf:user_filter:replace",
+          "valueString": "$1"
+        },
+        {
           "name": "workflow:processor:endrole:library",
           "valueString": "ihris-workflow-endrole"
         },
@@ -321,6 +545,46 @@
         {
           "name": "workflow:questionnaire:performance:url",
           "valueString": "http://ihris.org/fhir/Questionnaire/ihris-performance"
+        },
+        {
+          "name": "workflow:processor:education:file",
+          "valueString": "../modules/workflowEducationHistory"
+        },
+        {
+          "name": "workflow:questionnaire:education:url",
+          "valueString": "http://ihris.org/fhir/Questionnaire/ihris-education-history"
+        },
+        {
+          "name": "workflow:processor:employment:file",
+          "valueString": "../modules/workflowEmploymentHistory"
+        },
+        {
+          "name": "workflow:questionnaire:employment:url",
+          "valueString": "http://ihris.org/fhir/Questionnaire/ihris-employment-history"
+        },
+        {
+          "name": "workflow:processor:emergency:file",
+          "valueString": "../modules/workflowEmergency"
+        },
+        {
+          "name": "workflow:questionnaire:emergency:url",
+          "valueString": "http://ihris.org/fhir/Questionnaire/ihris-emergency"
+        },
+        {
+          "name": "workflow:processor:discipline:file",
+          "valueString": "../modules/workflowDiscipline"
+        },
+        {
+          "name": "workflow:questionnaire:discipline:url",
+          "valueString": "http://ihris.org/fhir/Questionnaire/ihris-discipline"
+        },
+        {
+          "name": "workflow:processor:salary:file",
+          "valueString": "../modules/workflowSalary"
+        },
+        {
+          "name": "workflow:questionnaire:salary:url",
+          "valueString": "http://ihris.org/fhir/Questionnaire/ihris-salary"
         },
         {
           "name": "defaults:components:date-time:minValueDateTime",
