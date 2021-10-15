@@ -187,6 +187,24 @@ Description:    "iHRIS extension for Practitioner number of dependents."
 * valuePositiveInt 1..1 MS
 * valuePositiveInt ^label = "Number of Dependents"
 
+CodeSystem:      IhrisRelationCodesystem
+Id:              ihris-relation-codesystem
+Title:           "Relationship"
+* ^date = "2020-10-29T08:41:04.362Z"
+* ^version = "0.2.0"
+* #spouse "Spouse" "Spouse"
+* #mother "Mother" "Mother"
+* #father "Father" "Father"
+* #adoptedchild "Adopted Child" "Adopted Child"
+* #bilogicalChild "Biological Child" "Biological Child"
+* #other "other" "other"
+
+ValueSet:         IhrisRelationValueSet
+Id:               ihris-relation-valueset
+Title:            "iHRIS Relationship ValueSet"
+* ^date = "2020-10-29T08:41:04.362Z"
+* ^version = "0.2.0"
+* codes from system IhrisRelationCodesystem
 
 Instance:       IhrisPractitionerQuestionnaire
 InstanceOf:     IhrisQuestionnaire
