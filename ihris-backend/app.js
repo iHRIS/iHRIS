@@ -71,7 +71,7 @@ async function startUp() {
   try {
     let reportsRunning = await fhirReports.setup()
     if ( reportsRunning ) {
-      // fhirReports.runReports()
+      fhirReports.runReports()
     } else {
       logger.error("Failed to start up reports to ElasticSearch.")
     }

@@ -8,7 +8,7 @@ Description:    "iHRIS Profile of the Basic resource to manage roles."
       IhrisBasicName named name 1..1 MS and
       IhrisRolePrimary named primary 1..1 and
       IhrisAssignRole named role 0..* and
-      task 0..*
+      IhrisAssignTask named task 0..*
 * extension[name].valueString 1..1 MS
 * extension[task].value[x] only Reference(Basic)
 * extension[task].valueReference 1..1 MS
@@ -23,7 +23,7 @@ Description:    "iHRIS Profile of the Basic resource to manage tasks."
 * extension contains
       IhrisBasicName named name 1..1 MS and
       TaskAttributes named attributes 0..1 and
-      compositeTask 0..*
+      CompositeTask named compositeTask 0..*
 * extension[name].valueString 1..1 MS
 * extension[compositeTask].value[x] only Reference(Basic)
 * extension[compositeTask].valueReference 1..1 MS
@@ -57,6 +57,30 @@ Description:    "iHRIS Assign Role to a user or other role."
 * valueReference ^label = "Role"
 * valueReference only Reference(IhrisRole)
 * valueReference.reference ^label = "Role"
+
+Extension:      IhrisAssignTask
+Id:             ihris-assign-task
+Title:          "iHRIS Assign Task"
+Description:    "iHRIS Assign Task to a user or other task."
+* ^context[0].type = #element
+* ^context[0].expression = "IhrisRole"
+* value[x] only Reference
+* valueReference 1..1 MS
+* valueReference ^label = "Task"
+* valueReference only Reference(IhrisTask)
+* valueReference.reference ^label = "Task"
+
+Extension:      CompositeTask
+Id:             composite-task
+Title:          "Composite Task"
+Description:    "Tasks Inheritance"
+* ^context[0].type = #element
+* ^context[0].expression = "IhrisTask"
+* value[x] only Reference
+* valueReference 1..1 MS
+* valueReference ^label = "Task"
+* valueReference only Reference(IhrisTask)
+* valueReference.reference ^label = "Task"
 
 Extension:      TaskAttributes
 Id:             task-attributes
