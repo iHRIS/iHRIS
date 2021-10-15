@@ -36,7 +36,7 @@ Title:          "Salary details"
 * extension[salaryScale].value[x] only Coding
 * extension[salaryScale].valueCoding MS
 * extension[salaryScale].valueCoding ^label = "Pay Grade"
-* extension[salaryScale].valueCoding from IhrisSalaryScaleValueSet (required)
+* extension[salaryScale].valueCoding from http://ihris.org/fhir/ValueSet/ihris-salary-grade (required)
 * extension[bsalary].value[x] only string
 * extension[bsalary].valueString MS
 * extension[bsalary].valueString ^label = "Basic Salary"

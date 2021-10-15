@@ -127,7 +127,7 @@ Title:            "iHRIS position Status"
 * ^version = "0.2.0"
 * codes from system IhrisPositionStatusCodeSystem
 
-*Extension:      IhrisPractitionerRoleReasonDeparture
+Extension:      IhrisPractitionerRoleReasonDeparture
 Id:             ihris-practitionerrole-reason-departure
 Title:          "iHRIS Job Description Reason for Departure"
 Description:    "iHRIS extension for Job Description Reason for Departure."
@@ -136,7 +136,7 @@ Description:    "iHRIS extension for Job Description Reason for Departure."
 * value[x] only Coding
 * valueCoding 0..1 MS
 * valueCoding ^label = "Reason for Change/Departure"
-* valueCoding from IhrisReasonDepartureValueSet (required)*/
+* valueCoding from IhrisReasonDepartureValueSet (required)
 
 CodeSystem:      IhrisReasonDepartureCodeSystem
 Id:              ihris-reason-departure-codesystem

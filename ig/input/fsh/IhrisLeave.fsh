@@ -106,11 +106,11 @@ Usage:          #definition
 * item[0].item[2].required = true
 * item[0].item[2].repeats = false
 
-* item[0].item[4].linkId = "Basic.extension[0].extension[4]"
-* item[0].item[4].text = "Date Requested"
-* item[0].item[4].type = #date
-* item[0].item[4].required = true
-* item[0].item[4].repeats = false
+* item[0].item[3].linkId = "Basic.extension[0].extension[3]"
+* item[0].item[3].text = "Date Requested"
+* item[0].item[3].type = #date
+* item[0].item[3].required = true
+* item[0].item[3].repeats = false
 
 Instance:       ihris-page-leave
 InstanceOf:     IhrisPage

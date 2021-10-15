@@ -54,6 +54,26 @@ Title:          "Education History details"
 * extension[attachment].valueAttachment 0..1 MS
 * extension[attachment].valueAttachment ^label = "Attachment"
 
+CodeSystem:      IhrisEducationalMajorCodeSystem
+Id:              ihris-educational-major-codesystem
+Title:           "Educational Major"
+* ^date = "2020-11-11T08:41:04.362Z"
+* ^version = "0.3.0"
+* #emergencyMedicalTech "Emergency Medical Tech" "Emergency Medical Tech"
+* #medicalSurgicalAssistant "Medical/Surgical Assistant" "Medical/Surgical Assistant"
+* #medicalLabTech "Medical Lab/Tech" "Medical Lab/Tech"
+* #medicine "Medicine" "Medicine"
+* #nursing "Nursing" "Nursing"
+* #pharmacy "Pharmacy" "Pharmacy"
+* #otherHealthProfessions "Other Health Professions" "Other Health Professions"
+
+ValueSet:         IhrisEducationalMajorValueSet
+Id:               ihris-educational-major-valueset
+Title:            "iHRIS Educational Major ValueSet"
+* ^date = "2020-11-11T08:41:04.362Z"
+* ^version = "0.3.0"
+* codes from system IhrisEducationalMajorCodeSystem
+
 CodeSystem:      IhrisDegree
 Id:              ihris-degree
 Title:           "Degree"

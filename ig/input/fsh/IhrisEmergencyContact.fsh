@@ -23,7 +23,7 @@ Extension:      IhrisEmergency
 Id:             ihris-emergency
 Title:          "Emergency details"
 * extension contains name 1..1 MS and
-    altlangName 0..1 MS and
+    relation 1..1 MS and
     phone 0..1 MS and
     mobile 0..1 MS and
     workPhone 0..1 MS and
