@@ -1,0 +1,16 @@
+{
+  "resourceType": "SearchParameter",
+  "id": "position-status-search",
+  "url": "http://ihris.org/fhir/SearchParameter/position-status-search",
+  "name": "Search Parameter for a practitionerRole position status",
+  "status": "active",
+  "description": "Search for a practitionerRole position status.",
+  "code": "positionstatus",
+  "base": [
+    "PractitionerRole"
+  ],
+  "type": "token",
+  "expression": "PractitionerRole.extension.where(url='http://ihris.org/fhir/StructureDefinition/ihris-practitionerrole-position-status')",
+  "xpath": "f:PractitionerRole/f:extension[@url='http://ihris.org/fhir/StructureDefinition/ihris-practitionerrole-position-status']",
+  "xpathUsage": "normal"
+}

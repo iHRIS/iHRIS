@@ -1,0 +1,16 @@
+{
+  "resourceType": "SearchParameter",
+  "id": "leaveperiod-search",
+  "url": "http://ihris.org/fhir/SearchParameter/leaveperiod-search",
+  "name": "Search Parameter for a practitioner's Leave Period",
+  "status": "active",
+  "description": "Search for a practitioner's Leave Period",
+  "code": "leaveperiod",
+  "base": [
+    "Basic"
+  ],
+  "type": "date",
+  "expression": "Basic.extension.where(url='http://ihris.org/fhir/StructureDefinition/ihris-ethiopia-leave').extension.where(url='period')",
+  "xpath": "f:Basic/f:extension[@url='http://ihris.org/fhir/StructureDefinition/ihris-ethiopia-leave']/f:extension[@url='period']",
+  "xpathUsage": "normal"
+}

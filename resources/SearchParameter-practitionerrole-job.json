@@ -1,0 +1,16 @@
+{
+  "resourceType": "SearchParameter",
+  "id": "job-search",
+  "url": "http://ihris.org/fhir/SearchParameter/job-search",
+  "name": "Search Parameter for a practitionerRole job",
+  "status": "active",
+  "description": "Search for a practitionerRole job.",
+  "code": "job",
+  "base": [
+    "PractitionerRole"
+  ],
+  "type": "token",
+  "expression": "PractitionerRole.code",
+  "xpath": "f:PractitionerRole/f:code",
+  "xpathUsage": "normal"
+}

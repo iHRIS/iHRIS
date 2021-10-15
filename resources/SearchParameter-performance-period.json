@@ -1,0 +1,16 @@
+{
+  "resourceType": "SearchParameter",
+  "id": "performanceperiod-search",
+  "url": "http://ihris.org/fhir/SearchParameter/performanceperiod-search",
+  "name": "Search Parameter for a practitioner's Performance Period",
+  "status": "active",
+  "description": "Search for a practitioner's Performance Period",
+  "code": "performanceperiod",
+  "base": [
+    "Basic"
+  ],
+  "type": "date",
+  "expression": "Basic.extension.where(url='http://ihris.org/fhir/StructureDefinition/ihris-performance').extension.where(url='period')",
+  "xpath": "f:Basic/f:extension[@url='http://ihris.org/fhir/StructureDefinition/ihris-performance']/f:extension[@url='period']",
+  "xpathUsage": "normal"
+}

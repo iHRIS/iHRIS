@@ -1,0 +1,16 @@
+{
+  "resourceType": "SearchParameter",
+  "id": "performancetype-search",
+  "url": "http://ihris.org/fhir/SearchParameter/performancetype-search",
+  "name": "Search Parameter for a practitioner's Performance Assesment Type",
+  "status": "active",
+  "description": "Search for a practitioner's Performance Assesment Type.",
+  "code": "performancetype",
+  "base": [
+    "Basic"
+  ],
+  "type": "token",
+  "expression": "Basic.extension.where(url='http://ihris.org/fhir/StructureDefinition/ihris-performance').extension.where(url='performanceType')",
+  "xpath": "f:Basic/f:extension[@url='http://ihris.org/fhir/StructureDefinition/ihris-performance']/f:extension[@url='performanceType']",
+  "xpathUsage": "normal"
+}
