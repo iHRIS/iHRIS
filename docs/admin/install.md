@@ -65,7 +65,7 @@ hapi:
     fhir_version: R4
     enable_index_missing_fields: true
     tester:
-      home
+       home:
         name: iHRIS
         server_address: http://localhost:8080/hapi/fhir/
         refuse_to_fetch_third_party_urls: false
@@ -121,6 +121,7 @@ https://hapifhir.io/hapi-fhir/docs/tools/hapi_fhir_cli.html
 ```bash
 wget https://github.com/hapifhir/hapi-fhir/releases/download/v5.2.0/hapi-fhir-5.2.0-cli.tar.bz2
 ```
+**Note**: Be sure to download the hapi fhir cli for the version on hapi ypu have installed. You can check the version in the pom.xml file.
 Then load the basic definitions
 ```bash
 ./hapi-fhir-cli upload-definitions -v r4 -t http://localhost:8080/hapi/fhir/
