@@ -187,6 +187,78 @@ Usage:          #example
 * extension[attributes][0].extension[permission].valueCode = IhrisTaskPermissionCodeSystem#read
 * extension[attributes][0].extension[resource].valueCode = IhrisTaskResourceCodeSystem#StructureDefinition
 
+Instance:       ihris-task-read-basic-resource
+InstanceOf:     IhrisTask
+Title:          "iHRIS Task To Read Basic resource"
+Usage:          #example
+* code = IhrisResourceCodeSystem#task
+* extension[name].valueString = "read-basic-resource"
+* extension[attributes][0].extension[permission].valueCode = IhrisTaskPermissionCodeSystem#read
+* extension[attributes][0].extension[resource].valueCode = IhrisTaskResourceCodeSystem#Basic
+
+Instance:       ihris-task-read-person-resource
+InstanceOf:     IhrisTask
+Title:          "iHRIS Task To Read Person resource"
+Usage:          #example
+* code = IhrisResourceCodeSystem#task
+* extension[name].valueString = "read-person-resource"
+* extension[attributes][0].extension[permission].valueCode = IhrisTaskPermissionCodeSystem#read
+* extension[attributes][0].extension[resource].valueCode = IhrisTaskResourceCodeSystem#Person
+
+Instance:       ihris-task-read-practitioner-resource
+InstanceOf:     IhrisTask
+Title:          "iHRIS Task To Read Practitioner resource"
+Usage:          #example
+* code = IhrisResourceCodeSystem#task
+* extension[name].valueString = "read-practitioner-resource"
+* extension[attributes][0].extension[permission].valueCode = IhrisTaskPermissionCodeSystem#read
+* extension[attributes][0].extension[resource].valueCode = IhrisTaskResourceCodeSystem#Practitioner
+
+Instance:       ihris-task-read-practitioner-role-resource
+InstanceOf:     IhrisTask
+Title:          "iHRIS Task To Read PractitionerRole resource"
+Usage:          #example
+* code = IhrisResourceCodeSystem#task
+* extension[name].valueString = "read-practitioner-role-resource"
+* extension[attributes][0].extension[permission].valueCode = IhrisTaskPermissionCodeSystem#read
+* extension[attributes][0].extension[resource].valueCode = IhrisTaskResourceCodeSystem#PractitionerRole
+
+Instance:       ihris-task-read-location-resource
+InstanceOf:     IhrisTask
+Title:          "iHRIS Task To Read Location resource"
+Usage:          #example
+* code = IhrisResourceCodeSystem#task
+* extension[name].valueString = "read-location-resource"
+* extension[attributes][0].extension[permission].valueCode = IhrisTaskPermissionCodeSystem#read
+* extension[attributes][0].extension[resource].valueCode = IhrisTaskResourceCodeSystem#Location
+
+Instance:       ihris-task-read-organization-resource
+InstanceOf:     IhrisTask
+Title:          "iHRIS Task To Read Organization resource"
+Usage:          #example
+* code = IhrisResourceCodeSystem#task
+* extension[name].valueString = "read-organization-resource"
+* extension[attributes][0].extension[permission].valueCode = IhrisTaskPermissionCodeSystem#read
+* extension[attributes][0].extension[resource].valueCode = IhrisTaskResourceCodeSystem#Organization
+
+Instance:       ihris-task-read-questionnaire-resource
+InstanceOf:     IhrisTask
+Title:          "iHRIS Task To Read Questionnaire resource"
+Usage:          #example
+* code = IhrisResourceCodeSystem#task
+* extension[name].valueString = "read-questionnaire-resource"
+* extension[attributes][0].extension[permission].valueCode = IhrisTaskPermissionCodeSystem#read
+* extension[attributes][0].extension[resource].valueCode = IhrisTaskResourceCodeSystem#Questionnaire
+
+Instance:       ihris-task-read-questionnaire-response-resource
+InstanceOf:     IhrisTask
+Title:          "iHRIS Task To Read Questionnaire Response resource"
+Usage:          #example
+* code = IhrisResourceCodeSystem#task
+* extension[name].valueString = "read-questionnaire-response-resource"
+* extension[attributes][0].extension[permission].valueCode = IhrisTaskPermissionCodeSystem#read
+* extension[attributes][0].extension[resource].valueCode = IhrisTaskResourceCodeSystem#QuestionnaireResponse
+
 Instance:       ihris-task-read-code-system
 InstanceOf:     IhrisTask
 Title:          "iHRIS Task To Read CodeSystem resource"
@@ -215,4 +287,123 @@ Usage:          #example
 * extension[attributes][0].extension[resource].valueCode = IhrisTaskResourceCodeSystem#DocumentReference
 * extension[attributes][0].extension[constraint].valueString = "category.exists(coding.exists(code = 'open'))"
 
+Instance:       ihris-task-write-structure-definition
+InstanceOf:     IhrisTask
+Title:          "iHRIS Task To Write StructureDefinition Resource"
+Usage:          #example
+* code = IhrisResourceCodeSystem#task
+* extension[name].valueString = "write-structure-definition"
+* extension[attributes][0].extension[permission].valueCode = IhrisTaskPermissionCodeSystem#write
+* extension[attributes][0].extension[resource].valueCode = IhrisTaskResourceCodeSystem#StructureDefinition
+* extension[compositeTask][0].valueReference = Reference(Basic/ihris-task-read-structure-definition)
 
+Instance:       ihris-task-write-basic-resource
+InstanceOf:     IhrisTask
+Title:          "iHRIS Task To Write Basic resource"
+Usage:          #example
+* code = IhrisResourceCodeSystem#task
+* extension[name].valueString = "write-basic-resource"
+* extension[attributes][0].extension[permission].valueCode = IhrisTaskPermissionCodeSystem#write
+* extension[attributes][0].extension[resource].valueCode = IhrisTaskResourceCodeSystem#Basic
+* extension[compositeTask][0].valueReference = Reference(Basic/ihris-task-read-basic-resource)
+
+Instance:       ihris-task-write-person-resource
+InstanceOf:     IhrisTask
+Title:          "iHRIS Task To Write Person resource"
+Usage:          #example
+* code = IhrisResourceCodeSystem#task
+* extension[name].valueString = "write-person-resource"
+* extension[attributes][0].extension[permission].valueCode = IhrisTaskPermissionCodeSystem#write
+* extension[attributes][0].extension[resource].valueCode = IhrisTaskResourceCodeSystem#Person
+* extension[compositeTask][0].valueReference = Reference(Basic/ihris-task-read-person-resource)
+
+Instance:       ihris-task-write-practitioner-resource
+InstanceOf:     IhrisTask
+Title:          "iHRIS Task To Write Practitioner resource"
+Usage:          #example
+* code = IhrisResourceCodeSystem#task
+* extension[name].valueString = "write-practitioner-resource"
+* extension[attributes][0].extension[permission].valueCode = IhrisTaskPermissionCodeSystem#write
+* extension[attributes][0].extension[resource].valueCode = IhrisTaskResourceCodeSystem#Practitioner
+* extension[compositeTask][0].valueReference = Reference(Basic/ihris-task-read-practitioner-resource)
+
+Instance:       ihris-task-write-practitioner-role-resource
+InstanceOf:     IhrisTask
+Title:          "iHRIS Task To Write PractitionerRole resource"
+Usage:          #example
+* code = IhrisResourceCodeSystem#task
+* extension[name].valueString = "write-practitioner-role-resource"
+* extension[attributes][0].extension[permission].valueCode = IhrisTaskPermissionCodeSystem#write
+* extension[attributes][0].extension[resource].valueCode = IhrisTaskResourceCodeSystem#PractitionerRole
+* extension[compositeTask][0].valueReference = Reference(Basic/ihris-task-read-practitioner-role-resource)
+
+Instance:       ihris-task-write-location-resource
+InstanceOf:     IhrisTask
+Title:          "iHRIS Task To Write Location resource"
+Usage:          #example
+* code = IhrisResourceCodeSystem#task
+* extension[name].valueString = "write-location-resource"
+* extension[attributes][0].extension[permission].valueCode = IhrisTaskPermissionCodeSystem#write
+* extension[attributes][0].extension[resource].valueCode = IhrisTaskResourceCodeSystem#Location
+* extension[compositeTask][0].valueReference = Reference(Basic/ihris-task-read-location-resource)
+
+Instance:       ihris-task-write-organization-resource
+InstanceOf:     IhrisTask
+Title:          "iHRIS Task To Write Organization resource"
+Usage:          #example
+* code = IhrisResourceCodeSystem#task
+* extension[name].valueString = "write-organization-resource"
+* extension[attributes][0].extension[permission].valueCode = IhrisTaskPermissionCodeSystem#write
+* extension[attributes][0].extension[resource].valueCode = IhrisTaskResourceCodeSystem#Organization
+* extension[compositeTask][0].valueReference = Reference(Basic/ihris-task-read-organization-resource)
+
+Instance:       ihris-task-write-questionnaire-resource
+InstanceOf:     IhrisTask
+Title:          "iHRIS Task To Write Questionnaire resource"
+Usage:          #example
+* code = IhrisResourceCodeSystem#task
+* extension[name].valueString = "write-questionnaire-resource"
+* extension[attributes][0].extension[permission].valueCode = IhrisTaskPermissionCodeSystem#write
+* extension[attributes][0].extension[resource].valueCode = IhrisTaskResourceCodeSystem#Questionnaire
+* extension[compositeTask][0].valueReference = Reference(Basic/ihris-task-read-questionnaire-resource)
+
+Instance:       ihris-task-write-questionnaire-response-resource
+InstanceOf:     IhrisTask
+Title:          "iHRIS Task To Write Questionnaire Response resource"
+Usage:          #example
+* code = IhrisResourceCodeSystem#task
+* extension[name].valueString = "write-questionnaire-response-resource"
+* extension[attributes][0].extension[permission].valueCode = IhrisTaskPermissionCodeSystem#write
+* extension[attributes][0].extension[resource].valueCode = IhrisTaskResourceCodeSystem#QuestionnaireResponse
+* extension[compositeTask][0].valueReference = Reference(Basic/ihris-task-read-questionnaire-response-resource)
+
+Instance:       ihris-task-write-code-system
+InstanceOf:     IhrisTask
+Title:          "iHRIS Task To Write CodeSystem resource"
+Usage:          #example
+* code = IhrisResourceCodeSystem#task
+* extension[name].valueString = "write-code-system"
+* extension[attributes][0].extension[permission].valueCode = IhrisTaskPermissionCodeSystem#write
+* extension[attributes][0].extension[resource].valueCode = IhrisTaskResourceCodeSystem#CodeSystem
+* extension[compositeTask][0].valueReference = Reference(Basic/ihris-task-read-code-system)
+
+Instance:       ihris-task-write-value-set
+InstanceOf:     IhrisTask
+Title:          "iHRIS Task To Write Valueset Resource"
+Usage:          #example
+* code = IhrisResourceCodeSystem#task
+* extension[name].valueString = "write-value-set"
+* extension[attributes][0].extension[permission].valueCode = IhrisTaskPermissionCodeSystem#write
+* extension[attributes][0].extension[resource].valueCode = IhrisTaskResourceCodeSystem#ValueSet
+* extension[compositeTask][0].valueReference = Reference(Basic/ihris-task-read-value-set)
+
+Instance:       ihris-task-write-document-reference
+InstanceOf:     IhrisTask
+Title:          "iHRIS Task To Write DocumentReference"
+Usage:          #example
+* code = IhrisResourceCodeSystem#task
+* extension[name].valueString = "write-document-reference"
+* extension[attributes][0].extension[permission].valueCode = IhrisTaskPermissionCodeSystem#write
+* extension[attributes][0].extension[resource].valueCode = IhrisTaskResourceCodeSystem#DocumentReference
+* extension[attributes][0].extension[constraint].valueString = "category.exists(coding.exists(code = 'open'))"
+* extension[compositeTask][0].valueReference = Reference(Basic/ihris-task-read-document-reference)
