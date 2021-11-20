@@ -65,11 +65,11 @@ hapi:
     fhir_version: R4
     enable_index_missing_fields: true
     tester:
-      id: home
-      name: iHRIS
-      server_address: http://localhost:8080/hapi/fhir/
-      refuse_to_fetch_third_party_urls: false
-      fhir_version: R4
+       home:
+        name: iHRIS
+        server_address: http://localhost:8080/hapi/fhir/
+        refuse_to_fetch_third_party_urls: false
+        fhir_version: R4
 ```
 
 #### For versions starting with 5.1.0 
@@ -94,21 +94,6 @@ hapi:
       server_address: http://localhost:8080/hapi/fhir/
       refuse_to_fetch_third_party_urls: false
       fhir_version: R4
-```
-
-#### For versions prior to 5.1.0 use these instead of editing application.yaml
-Edit ```src/main/resources/hapi.properties``` and set the following:
-```
-server_address=http://localhost:8080/hapi/fhir/
-
-datasource.driver=org.postgresql.Driver
-datasource.url=jdbc:postgresql://localhost:5432/hapi
-datasource.username=hapi
-datasource.password=PASS
-
-hibernate.dialect=org.hibernate.dialect.PostgreSQL95Dialect
-
-hibernate.search.default.indexBase=/var/lib/tomcat9/target/lucenefiles
 ```
 
 #### Create war file
@@ -136,6 +121,7 @@ https://hapifhir.io/hapi-fhir/docs/tools/hapi_fhir_cli.html
 ```bash
 wget https://github.com/hapifhir/hapi-fhir/releases/download/v5.2.0/hapi-fhir-5.2.0-cli.tar.bz2
 ```
+**Note**: Be sure to download the hapi fhir cli for the version on hapi ypu have installed. You can check the version in the pom.xml file.
 Then load the basic definitions
 ```bash
 ./hapi-fhir-cli upload-definitions -v r4 -t http://localhost:8080/hapi/fhir/

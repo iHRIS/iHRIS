@@ -36,6 +36,8 @@ Description:    "iHRIS profile of Practitioner."
     IhrisPractitionerRoleEmploymentStatus named employmentStatus 0..1 MS and
     IhrisPractitionerRoleJobType named jobType 0..1 MS and
     IhrisPractitionerRoleFirstEmploymentDate named firstEmploymentDate 1..1 MS and
+    IhrisPractitionerRoleReasonDeparture named reasonForDepature 0..1 MS and
+    IhrisPractitionerRolePositionStatus named positionStatus 1..1 MS and
     IhrisPractitionerRoleJobInformationRemark named jobInformationRemark 0..1 MS
 * extension[shift].valueCoding MS
 * extension[shift] ^label = "Shift"
@@ -45,6 +47,10 @@ Description:    "iHRIS profile of Practitioner."
 * extension[jobType] ^label = "Job Type"
 * extension[firstEmploymentDate].valueDate MS
 * extension[firstEmploymentDate] ^label = "First Employment Date"
+* extension[positionStatus].valueCoding MS
+* extension[positionStatus] ^label = "Position Status"
+* extension[reasonForDepature].valueCoding MS
+* extension[reasonForDepature] ^label = "Reason for Departure"
 * extension[jobInformationRemark].valueString MS
 * extension[jobInformationRemark] ^label = "Remark"
 
@@ -93,6 +99,65 @@ ValueSet:         IhrisEmploymentStatusValueSet
 Id:               ihris-employment-status-valueset
 Title:            "iHRIS Employment Status ValueSet"
 * codes from system IhrisEmploymentStatusCodeSystem
+
+Extension:      IhrisPractitionerRolePositionStatus
+Id:             ihris-practitionerrole-position-status
+Title:          "iHRIS Job Description Position Status"
+Description:    "iHRIS extension for Job Description Position Status."
+* ^context.type = #element
+* ^context.expression = "PractitionerRole"
+* value[x] only Coding
+* valueCoding 1..1 MS
+* valueCoding ^label = "Position Status"
+* valueCoding from IhrisPositionStatusValueSet (required)
+
+CodeSystem:      IhrisPositionStatusCodeSystem
+Id:              ihris-position-status
+Title:           "Position Status"
+* ^date = "2020-10-29T08:41:04.362Z"
+* ^version = "0.2.0"
+* #vacant "Vacant" "Vacant"
+* #occupied "Occupied" "Occupied" 
+* #closed "Closed" "Closed"
+
+ValueSet:         IhrisPositionStatusValueSet
+Id:               ihris-position-status
+Title:            "iHRIS position Status"
+* ^date = "2020-10-29T08:41:04.362Z"
+* ^version = "0.2.0"
+* codes from system IhrisPositionStatusCodeSystem
+
+Extension:      IhrisPractitionerRoleReasonDeparture
+Id:             ihris-practitionerrole-reason-departure
+Title:          "iHRIS Job Description Reason for Departure"
+Description:    "iHRIS extension for Job Description Reason for Departure."
+* ^context.type = #element
+* ^context.expression = "PractitionerRole"
+* value[x] only Coding
+* valueCoding 0..1 MS
+* valueCoding ^label = "Reason for Change/Departure"
+* valueCoding from IhrisReasonDepartureValueSet (required)
+
+CodeSystem:      IhrisReasonDepartureCodeSystem
+Id:              ihris-reason-departure-codesystem
+Title:           "Reason For Change/Departure"
+* ^date = "2020-11-14T08:41:04.362Z"
+* ^version = "0.3.0"
+* #transfer "Transfer" "Transfer"
+* #death "Death" "death"
+* #redeployment  "Redeployment" "Redeployment"
+* #earlyRetirement "Early Retirement" "Early Retirement"
+* #mandatoryRetirement "Mandatory Retirement" "Mandatory Retirement"
+* #resignation "Resignation" "Resignation"
+* #health "Health Related" "Health Related"
+* #quit "Quit" "Quit"
+
+ValueSet:         IhrisReasonDepartureValueSet
+Id:               ihris-reason-departure-valueset
+Title:            "iHRIS Reason Departure ValueSet"
+* ^date = "2020-11-14T08:41:04.362Z"
+* ^version = "0.3.0"
+* codes from system IhrisReasonDepartureCodeSystem
 
 Extension:      IhrisPractitionerRoleJobType
 Id:             ihris-practitionerrole-job-type

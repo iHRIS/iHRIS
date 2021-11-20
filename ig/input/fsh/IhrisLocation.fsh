@@ -1,7 +1,7 @@
 Profile:        IhrisJurisdiction
 Parent:         Location
 Id:             ihris-jurisdiction
-Title:          "iHRIS Jurisdiction"
+Title:          "Jurisdiction"
 Description:    "iHRIS Profile of Locations to manage jurisdictions."
 * type 1..1 MS
 * type ^label = "Location Type"
@@ -17,7 +17,8 @@ Description:    "iHRIS Profile of Locations to manage jurisdictions."
 * partOf 0..1 MS
 * partOf only Reference(IhrisJurisdiction)
 * partOf ^label = "Part Of(Country/Region/District/County)"
-* extension contains http://hl7.org/fhir/StructureDefinition/location-boundary-geojson named geojson 0..*
+* extension contains http://hl7.org/fhir/StructureDefinition/location-boundary-geojson named geojson 0..1
+* extension[geojson] ^label = "Location Boundary(Geojson)"
 
 Profile:        IhrisFacility
 Parent:         Location
@@ -36,9 +37,13 @@ Description:    "iHRIS Profile of Locations to manage facilities."
 * status ^label = "Status"
 * position 0..1 MS
 * position ^label = "Co-ordinates"
+* position.longitude 1..1 MS
+* position.longitude ^label = "Longitude"
+* position.latitude 1..1 MS
+* position.latitude ^label = "Latitude"
 * partOf 1..1 MS 
 * partOf only Reference(IhrisJurisdiction)
-* partOf ^label = "Part Of(Country/Region/Zone/Woreda)"
+* partOf ^label = "Part Of(Country/Region/District/County)"
 
 ValueSet:         IhrisJurisdictionType
 Id:               ihris-jurisdiction-type
@@ -68,8 +73,8 @@ Usage:          #example
 * extension[display].extension[search][2].valueString = "Facility Physical Type|physicalType.text"
 * extension[display].extension[search][3].valueString = "Jurisdiction|partOf.reference"
 * extension[display].extension[search][4].valueString = "Status|status"
-/* extension[display].extension[search][3].valueString = "Longitute|position.longitude"
-* extension[display].extension[search][4].valueString = "Latitude|position.latitude"*/
+* extension[display].extension[search][5].valueString = "Longitute|position.longitude"
+* extension[display].extension[search][6].valueString = "Latitude|position.latitude"
 * extension[display].extension[filter][0].valueString = "Name|name:contains"
 * extension[display].extension[filter][1].valueString = "Type|type|http://terminology.hl7.org/CodeSystem/v3-RoleCode"
 * extension[display].extension[filter][2].valueString = "Physical Type|physicalType|http://hl7.org/fhir/ValueSet/location-physical-type"
