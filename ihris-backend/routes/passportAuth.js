@@ -4,6 +4,7 @@ const nconf = require('../modules/config')
 const user = require('../modules/user')
 const logger = require('../winston')
 const fhirAudit = require('../modules/fhirAudit')
+const jwt = require('jsonwebtoken');
 
 const passport = require('passport')
 const GoogleStrategy = require('passport-google-oauth20').Strategy
@@ -155,6 +156,34 @@ router.post("/login", passport.authenticate('local', {}), ( req, res ) => {
   }
   res.status(200).json({ok:true,name:name})
 })
+
+router.post('/token', (req, res) => {
+  // For API Access only
+  logger.info('Generating token');
+  const secret = nconf.get('auth:secret');
+  const tokenDuration = nconf.get('auth:tokenDuration');
+  const { email, password } = req.body;
+
+  user.lookupByEmail(email).then((userObj) => {
+    if (!userObj) {
+      logger.error('User not found');
+      fhirAudit.login(userObj, req.ip, false, email);
+      return res.status(401).send();
+    }
+    if (userObj.checkPassword(password)) {
+      fhirAudit.login(userObj, req.ip, true, email);
+      const token = jwt.sign({ user: userObj }, secret, { expiresIn: tokenDuration });
+      res.status(200).json({ access_token: token });
+    } else {
+      logger.error('Invalid password');
+      fhirAudit.login(userObj, req.ip, false, email);
+      return res.status(401).send();
+    }
+  }).catch((err) => {
+    fhirAudit.login({}, req.ip, false, email);
+    return res.status(500).send();
+  });
+});
 
 router.get('/test',
   ( req, res ) => {

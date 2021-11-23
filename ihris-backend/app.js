@@ -4,6 +4,7 @@ const session = require('express-session')
 const path = require('path')
 const crypto = require('crypto')
 const cookieParser = require('cookie-parser')
+const jwt = require('jsonwebtoken')
 const morgan = require('morgan')
 const logger = require('./winston')
 const fs = require('fs')
@@ -90,14 +91,51 @@ async function startUp() {
   }
 
   const isLoggedIn = (req, res, next) => {
-    if(req.path === '/config/app' || req.path === '/users/addUser') {
+    if(req.path === '/config/app' || req.path === '/users/addUser' || req.path.startsWith('/auth/token') ){
       return next()
     }
     if (nconf.get('app:idp') === 'keycloak') {
       if (req.cookies && req.cookies.userObj) {
         req.user = user.restoreUser(JSON.parse(req.cookies.userObj));
       }
-      return keycloak.protect()(req, res, next);
+      //return keycloak.protect()(req, res, next);
+      if (req.headers.authorization) {
+        axios({
+          url: `http://localhost:${nconf.get('server:port')}/auth`,
+          method: 'POST',
+          headers: {
+            Authorization: req.headers.authorization,
+          },
+        }).then((resp) => {
+          if (resp.data.resource) {
+            req.user = user.restoreUser(resp.data);
+            return keycloak.protect()(req, res, next);
+          }
+        }).catch((err) => {
+          logger.error(err);
+          return res.status(500).send();
+        });
+      }
+    } else if (nconf.get('app:idp') === 'ihris') {
+      if (!req.user && req.headers.authorization && req.headers.authorization.split(' ').length === 2) {
+        // Only for API Access when using ihris as IDP
+        const token = req.headers.authorization.split(' ')[1];
+        let decoded;
+        jwt.verify(token, config.get('auth:secret'), (err, dec) => {
+          if (!err) {
+            decoded = dec;
+          }
+        });
+        if (decoded && decoded.user) {
+          req.user = user.restoreUser(decoded.user);
+        }
+      }
+      if (!req.user) {
+        res.setHeader('Access-Control-Allow-Origin', req.headers.origin);
+        res.set('Access-Control-Allow-Credentials', true);
+        return res.status(401).json(outcomes.NOTLOGGEDIN);
+      }
+
     } else {
       return next()
     }

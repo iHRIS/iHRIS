@@ -96,6 +96,14 @@
       "valueString": ""
     },
     {
+      "name": "auth:secret",
+      "valueString": "C1Nz8Tfa4fzKCI8rS7sgO9vkwvPCTA4p1vesXeppCiTNMq3u6K2Z2VfXG8PCrV3"
+    },
+    {
+      "name": "auth:tokenDuration",
+      "valueString": "5400"
+    },
+    {
       "name": "logs",
       "part": [
         {
