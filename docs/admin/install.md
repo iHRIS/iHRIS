@@ -45,7 +45,7 @@ Edit ```pom.xml``` and change the following line from hapi-fhir-jpaserver or ROO
     <finalName>hapi</finalName>
 ```
 
-#### For versions starting with 5.2.0
+#### For versions starting with 5.2.0 to the latest
 Things were streamlined a bit so the values to edit are simpler.
 Edit ```src/main/resources/application.yaml``` and update the following values:
 
@@ -114,14 +114,19 @@ In the security section add the following directory with a ReadWritePath
 ```
 ReadWritePaths=/var/lib/tomcat9/target/
 ```
+#### Access Hapi-fhir server
+Test the [hapi-fhir server](http://localhost:8080/hapi) to make sure it's running
+```
+http://localhost:8080/hapi
+```
 
 #### Load basic definitions
 Download and install hapi-fhir-cli:
 https://hapifhir.io/hapi-fhir/docs/tools/hapi_fhir_cli.html
 ```bash
-wget https://github.com/hapifhir/hapi-fhir/releases/download/v5.2.0/hapi-fhir-5.2.0-cli.tar.bz2
+wget https://github.com/hapifhir/hapi-fhir/releases/download/v5.6.0/hapi-fhir-5.6.0-cli.tar.bz2
 ```
-**Note**: Be sure to download the hapi fhir cli for the version on hapi ypu have installed. You can check the version in the pom.xml file.
+**Note**: Be sure to download the hapi fhir cli for the version on hapi you have installed. You can check the version in the pom.xml file.
 Then load the basic definitions
 ```bash
 ./hapi-fhir-cli upload-definitions -v r4 -t http://localhost:8080/hapi/fhir/
@@ -130,7 +135,6 @@ Then load the basic definitions
 ## SUSHI
 ```bash
 sudo npm install -g fsh-sushi
-sudo npm install -g antlr4
 ```
 
 You can make customizations for your own configurations in the ig/ 
@@ -211,7 +215,7 @@ Run the following to start the server in production mode.
 ```bash
 cd ihris-backend/
 npm run start
-
+```
 TODO: Convert this to a systemd script for startup and shutdown
 
 # Front end Development
@@ -220,7 +224,6 @@ Built with vue cli 4.4.1
 ```bash
 sudo npm install -g @vue/cli
 ```
-
 
 ## To run in development mode
 
