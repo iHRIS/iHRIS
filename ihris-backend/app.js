@@ -91,7 +91,7 @@ async function startUp() {
   }
 
   const isLoggedIn = (req, res, next) => {
-    if(req.path === '/config/app' || req.path === '/users/addUser' || req.path.startsWith('/auth/token') ){
+    if(req.path.startsWith('/config') || req.path.startsWith('/fhir') || req.path.startsWith('/auth/token') ){
       return next()
     }
     if (nconf.get('app:idp') === 'keycloak') {
