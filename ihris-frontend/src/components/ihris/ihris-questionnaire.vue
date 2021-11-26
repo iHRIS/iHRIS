@@ -40,6 +40,12 @@
               <span>Save</span>
             </v-btn>
           </v-list-item>
+          <v-list-item  >
+            <v-btn dark class="primary" @click="$router.push('/bulk-registration')">
+              <v-icon light>mdi-attachment</v-icon>
+              <span>Upload CSV/Excel</span>
+            </v-btn>
+          </v-list-item>
           <v-divider color="white"></v-divider>
           <v-subheader class="white--text" v-if="sectionMenu"><h2>Sections</h2></v-subheader>
           <v-list-item v-for="section in sectionMenu" :href="'#section-'+section.id" :key="section.id">

@@ -13,6 +13,7 @@ const { JSDOM } = require('jsdom')
 const createDOMPurify = require('dompurify')
 const outcomes = require('../config/operationOutcomes')
 const logger = require('../winston')
+const bulkRegistration = require('../modules/bulkRegistration')
 
 const window = new JSDOM('').window
 const DOMPurify = createDOMPurify(window)
@@ -420,5 +421,21 @@ router.get("/\\$short-name", (req, res) => {
   }
 
 } )
+
+router.post('/bulkRegistration', (req, res) => {
+  if(!req.body){
+    return res.status(400).end()
+  }else{
+    const usersData = req.body
+      let bundle = bulkRegistration(usersData)
+    fhirAxios.create( bundle ).then( (results) => {
+      return res.status(201).json(results)
+    } ).catch( (err) => {
+      winston.error(err.message)
+        return res.status( 500 ).json( { err: err.message } )
+    } )
+  }
+
+})
 
 module.exports = router
