@@ -466,4 +466,4 @@ User.prototype.update = function() {
 
 
 
-module.exports = { user, User}
+module.exports = user
