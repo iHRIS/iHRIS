@@ -13,7 +13,8 @@ services:
       spring.datasource.username: admin
       spring.datasource.password: admin
       spring.datasource.driverClassName: org.postgresql.Driver
-      # - "tester.server_address=http://localhost:8080/fhir"
+      spring.jpa.properties.hibernate.search.enabled: 'true'
+      hapi.fhir.tester.home.server_address: "http://localhost:8080/hapi/fhir"
     volumes:
       - hapi-data:/data/hapi
     depends_on:
