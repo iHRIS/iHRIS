@@ -108,6 +108,10 @@
       "valueString": "practitioner"
     },
     {
+      "url": "linkElementSearchParameter",
+      "valueString": "practitioner"
+    },
+    {
       "url": "multiple",
       "valueBoolean": false
     },
