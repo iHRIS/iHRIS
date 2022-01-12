@@ -140,6 +140,7 @@ Title:          "Code system for task permissions."
 * #PractitionerRole     "PractitionerRole"
 * #Location             "Location"
 * #Person               "Person"
+* #navigation           "Navigation"
 
 ValueSet:       IhrisTaskResourceValueSet
 Id:             ihris-task-resource

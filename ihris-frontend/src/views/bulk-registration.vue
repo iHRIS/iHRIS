@@ -7,7 +7,7 @@
     >
       <v-card class="pt-4 pb-8">
         <v-card-title class="justify-center mb-4">
-          <span v-if="!loading" class="text-h5 ">Select file</span>
+          <span v-if="!loading" class="text-h5 ">Select Your file</span>
         </v-card-title>
         <v-card-text v-if="!loading" :disabled="loading">
           <input
@@ -33,7 +33,7 @@
           >
             {{ progress }}
           </v-progress-circular>
-          <h1 v-if="progress===100">Done Uploading Users Information</h1>
+          <h1 v-if="progress===100">Done Uploading Health Workers' Information</h1>
           <h1 v-else>uploading...</h1>
         </v-card-text>
         <v-card-text v-if="hasError" :disabled="loading">
@@ -111,7 +111,7 @@ export default {
       if (this.loading) return;
       const files = e.dataTransfer.files;
       if (files.length !== 1) {
-        this.$toast.error("Only support uploading one file!");
+        this.$toast.error("Only supports uploading one file!");
         return;
       }
       const rawFile = files[0]; // only use files[0]
