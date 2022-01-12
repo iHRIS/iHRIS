@@ -351,16 +351,18 @@ export default {
         opts.method = "PUT"
       }
       opts.body = JSON.stringify(this.fhir)
-      console.log("SAVE",url,this.fhir)
       fetch( url, opts ).then(response => {
-        //console.log(response)
         //console.log(response.headers)
         if ( response.status === 201 || response.status === 200 ) {
           response.json().then(data => {
             this.overlay = false
             this.loading = false
             if ( this.fhirId ) {
-              this.$router.go(0)
+               this.$store.commit("setMessage", {
+                type: "success",
+                text: "Update successful.",
+              });
+              setTimeout(() => this.$router.go(0), 2000);
             } else {
               this.$router.push({ name:"resource_view", params: {page: this.page, id: data.id } })
             }
