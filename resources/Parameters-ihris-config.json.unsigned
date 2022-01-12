@@ -16,7 +16,7 @@
             "code": "1.2.840.10065.1.12.1.14"
           }
         ],
-        "when": "2020-09-29T13:00:38.180Z",
+        "when": "2021-10-15T10:29:53.997Z",
         "who": {
           "reference": "http://ihris.org/fhir/Organization/ihris"
         },
@@ -143,6 +143,14 @@
           "valueString": "/resource/add/practitionerrole"
         },
         {
+          "name": "site:nav:menu:location:text",
+          "valueString": "Locations and Facilities"
+        },
+        {
+          "name": "site:nav:menu:location:order",
+          "valueString": "4"
+        },
+        {
           "name": "site:nav:menu:location:icon",
           "valueString": "mdi-map-marker-multiple"
         },
@@ -262,7 +270,6 @@
           "name": "site:nav:menu:database:menu:job:url",
           "valueString": "/resource/search/job"
         },
-        
         {
           "name": "site:nav:menu:database:menu:job:order",
           "valueString": "4"
@@ -326,7 +333,8 @@
         {
           "name": "site:nav:menu:database:menu:educational-major:order",
           "valueString": "9"
-        },{
+        },
+        {
           "name": "site:nav:menu:database:menu:degree:text",
           "valueString": "Degree/Course"
         },
@@ -420,11 +428,71 @@
         },
         {
           "name": "site:nav:menu:dashboard:icon",
-          "valueString": "mdi-poll-box"
+          "valueString": "mdi-chart-arc"
         },
         {
           "name": "site:nav:menu:dashboard:url",
           "valueString": "/dashboard"
+        },
+        {
+          "name": "site:nav:menu:reports:text",
+          "valueString": "Reports"
+        },
+        {
+          "name": "site:nav:menu:reports:order",
+          "valueString": "6"
+        },
+        {
+          "name": "site:nav:menu:reports:icon",
+          "valueString": "mdi-chart-bar"
+        },
+        {
+          "name": "site:nav:menu:reports:menu:staff:text",
+          "valueString": "Staff Report"
+        },
+        {
+          "name": "site:nav:menu:reports:menu:staff:url",
+          "valueString": "/report/ihris-es-report-staff"
+        },
+        {
+          "name": "site:nav:menu:reports:menu:staff:order",
+          "valueString": "1"
+        },
+        {
+          "name": "site:nav:menu:users:text",
+          "valueString": "System Users"
+        },
+        {
+          "name": "site:nav:menu:users:order",
+          "valueString": "7"
+        },
+        {
+          "name": "site:nav:menu:users:icon",
+          "valueString": "mdi-account-box-outline"
+        },
+        {
+          "name": "site:nav:menu:users:menu:users_search:text",
+          "valueString": "Search Users"
+        },
+        {
+          "name": "site:nav:menu:users:menu:users_search:url",
+          "valueString": "/resource/search/user"
+        },
+        {
+          "name": "site:nav:menu:password:text",
+          "valueString": "Change Password"
+        },
+        {
+          "name": "site:nav:menu:password:order",
+          "valueString": "8"
+        },
+        {
+          "name": "site:nav:menu:password:icon",
+          "valueString": "mdi-lock-reset"
+        },
+        {
+          "name": "site:nav:menu:password:url",
+          "valueString": "/questionnaire/ihris-change-password/person"
         },
         {
           "name": "shortname:Practitioner:format",
@@ -577,6 +645,14 @@
         {
           "name": "workflow:questionnaire:salary:url",
           "valueString": "http://ihris.org/fhir/Questionnaire/ihris-salary"
+        },
+        {
+          "name": "workflow:processor:user:file",
+          "valueString": "../modules/workflowUser"
+        },
+        {
+          "name": "workflow:questionnaire:user:url",
+          "valueString": "http://ihris.org/fhir/Questionnaire/ihris-user"
         },
         {
           "name": "defaults:components:date-time:minValueDateTime",

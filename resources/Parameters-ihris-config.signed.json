@@ -16,11 +16,11 @@
             "code": "1.2.840.10065.1.12.1.14"
           }
         ],
-        "when": "2021-10-15T10:29:53.997Z",
+        "when": "2022-01-12T19:13:23.804Z",
         "who": {
           "reference": "http://ihris.org/fhir/Organization/ihris"
         },
-        "data": "zE5qnJbNXLvHqTnS6G1CTzGmz+lNvjZmWKfpTsIbSUdAYqlHJhUWYXOPJ3UvKOcOmaTLX1oHgEoT9/AvWHYSS9+EIZzXLP5ylgiXndIHVC45d0PqSSfM5arxOq6JGuD3OIg7PMI8SRpacQBxHsHKB5vJC4voopbYrXhK3X6p3Hs="
+        "data": "nFxE1+sm8MyY61ItRfiGoI6NLMyjAUQ/UlC5ci4p7XIRwRiFIEzM+/LqB1l3IcWVClSWfeeaXkYMwJMNBThVfOsPYhbSo0R1s/UNKUPNmy/8zLUUiSOyBFxy1i2byFpqA9DRSHfoTpGCuRKAqYvHGRavkhFGkHfvT85+seInWfU="
       }
     },
     {
@@ -428,11 +428,35 @@
         },
         {
           "name": "site:nav:menu:dashboard:icon",
-          "valueString": "mdi-poll-box"
+          "valueString": "mdi-chart-arc"
         },
         {
           "name": "site:nav:menu:dashboard:url",
           "valueString": "/dashboard"
+        },
+        {
+          "name": "site:nav:menu:reports:text",
+          "valueString": "Reports"
+        },
+        {
+          "name": "site:nav:menu:reports:order",
+          "valueString": "6"
+        },
+        {
+          "name": "site:nav:menu:reports:icon",
+          "valueString": "mdi-chart-bar"
+        },
+        {
+          "name": "site:nav:menu:reports:menu:staff:text",
+          "valueString": "Staff Report"
+        },
+        {
+          "name": "site:nav:menu:reports:menu:staff:url",
+          "valueString": "/report/ihris-es-report-staff"
+        },
+        {
+          "name": "site:nav:menu:reports:menu:staff:order",
+          "valueString": "1"
         },
         {
           "name": "site:nav:menu:users:text",
@@ -440,7 +464,7 @@
         },
         {
           "name": "site:nav:menu:users:order",
-          "valueString": "6"
+          "valueString": "7"
         },
         {
           "name": "site:nav:menu:users:icon",
@@ -460,7 +484,7 @@
         },
         {
           "name": "site:nav:menu:password:order",
-          "valueString": "7"
+          "valueString": "8"
         },
         {
           "name": "site:nav:menu:password:icon",
