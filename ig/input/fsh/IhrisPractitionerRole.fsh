@@ -45,4 +45,4 @@ Description:    "iHRIS profile of Practitioner Role."
 * specialty.coding ^label = "Specialty"
 * location 1..1 MS 
 * location ^label = "Facility"
-* location only Reference(http://ihe.net/fhir/StructureDefinition/IHE.mCSD.FacilityLocation)
+* location only Reference(IhrisFacility)
