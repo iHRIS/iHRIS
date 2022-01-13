@@ -1,6 +1,6 @@
 Profile:        IhrisRelationship
 Parent:         Basic
-Id:             ihris-relationship
+Id:             iHRISRelationship
 Title:          "iHRIS Resources Relationship Profile"
 Description:    "iHRIS Resources Relationship Profile"
 
@@ -9,7 +9,7 @@ Description:    "iHRIS Resources Relationship Profile"
       IhrisReportLink named reportlink 0..* MS
 
 Extension:      IhrisReportDetails
-Id:             ihris-report-details
+Id:             iHRISReportDetails
 Title:          "Details of a report"
 Description:    "Defines the primary resource of the relationship"
 * ^context.type = #element
@@ -21,6 +21,7 @@ Description:    "Defines the primary resource of the relationship"
       query 0..1 MS and
       cachingDisabled 0..1 MS and
       displayCheckbox 0..1 MS and
+      locationBasedConstraint 0..1 MS and
       IhrisReportElement named reportelement 0..* MS
 * extension[name].value[x] only string
 * extension[name].valueString 1..1
@@ -40,10 +41,14 @@ Description:    "Defines the primary resource of the relationship"
 * extension[displayCheckbox].value[x] only boolean
 * extension[displayCheckbox].valueBoolean 1..1
 * extension[displayCheckbox].valueBoolean ^label = "Whether rows of the report are selectable or not"
+* extension[locationBasedConstraint].value[x] only boolean
+* extension[locationBasedConstraint].valueBoolean 1..1
+* extension[locationBasedConstraint].valueBoolean ^label = "Whether rows of the report are are limited by location or not"
+
 
 
 Extension:      IhrisReportLink
-Id:             ihris-report-link
+Id:             iHRISReportLink
 Title:          "Links to the primary resource"
 Description:    "Links to the primary resource"
 * extension contains
@@ -76,14 +81,13 @@ Description:    "Links to the primary resource"
 
 
 Extension:      IhrisReportElement
-Id:             ihris-report-element
+Id:             iHRISReportElement
 Title:          "Resource Fields"
 Description:    "Lists fields of a resource to be displayed/cached"
 * extension contains
       label 1..1 MS and
       name 1..1 MS and
       display 0..1 MS and
-      valueModifier 0..1 MS and
       filter 0..1 MS and
       dropDownFilter 0..1 MS
 * extension[label].value[x] only string
@@ -95,9 +99,6 @@ Description:    "Lists fields of a resource to be displayed/cached"
 * extension[display].value[x] only string
 * extension[display].valueString 1..1
 * extension[display].valueString ^label = "Human readable name if the relation is to be displayed on the UI"
-* extension[valueModifier].value[x] only string
-* extension[valueModifier].valueString 1..1
-* extension[valueModifier].valueString ^label = "Modify value to be displayed"
 * extension[filter].value[x] only boolean
 * extension[filter].valueBoolean 1..1
 * extension[filter].valueBoolean ^label = "Display as a filter"
@@ -118,17 +119,13 @@ Usage:          #example
 * extension[reportdetails].extension[query].valueString = "identifier.system=http://app.rapidpro.io/contact-uuid"
 * extension[reportdetails].extension[displayCheckbox].valueBoolean = true
 * extension[reportdetails].extension[reportelement][0].extension[label].valueString = "fullname"
-* extension[reportdetails].extension[reportelement][0].extension[name].valueString = "concat(name.where(use='official').last().given,name.where(use='official').last().family)"
+* extension[reportdetails].extension[reportelement][0].extension[name].valueString = "name.where(use='official').last().text"
 * extension[reportdetails].extension[reportelement][0].extension[display].valueString = "Fullname"
 * extension[reportdetails].extension[reportelement][0].extension[filter].valueBoolean = true
 * extension[reportdetails].extension[reportelement][0].extension[dropDownFilter].valueBoolean = false
 * extension[reportdetails].extension[reportelement][1].extension[label].valueString = "phone"
 * extension[reportdetails].extension[reportelement][1].extension[name].valueString = "telecom.where(system='phone').value"
 * extension[reportdetails].extension[reportelement][1].extension[display].valueString = "Phone Number"
-* extension[reportdetails].extension[reportelement][1].extension[label].valueString = "gender"
-* extension[reportdetails].extension[reportelement][1].extension[name].valueString = "gender"
-* extension[reportdetails].extension[reportelement][1].extension[valueModifier].valueString = "gender==male?Male:gender==female?Female:Unknown"
-* extension[reportdetails].extension[reportelement][1].extension[display].valueString = "Gender"
 * extension[reportlink].extension[name].valueString = "group"
 * extension[reportlink].extension[resource].valueString = "Group"
 * extension[reportlink].extension[linkElement].valueString = "Group.member.entity.reference"
@@ -142,7 +139,6 @@ Usage:          #example
 * extension[reportlink].extension[reportelement][0].extension[dropDownFilter].valueBoolean = true
 * extension[reportlink].extension[name].valueString = "role"
 * extension[reportlink].extension[resource].valueString = "PractitionerRole"
-* extension[reportlink].extension[query].valueString = "period.start:missing=false"
 * extension[reportlink].extension[linkElement].valueString = "PractitionerRole.practitioner.reference"
 * extension[reportlink].extension[linkTo].valueString = "mheropractitioner"
 * extension[reportlink].extension[linkElementSearchParameter].valueString = "practitioner"

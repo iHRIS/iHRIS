@@ -1,3 +1,8 @@
+<style>
+.highlighted {
+  background-color: #5396dc !important;
+}
+</style>
 <template>
   <v-container class="my-3">
 
@@ -55,7 +60,11 @@
             </v-list-item>
           </template>
           <v-subheader v-if="sectionMenu" class="white--text"><h2>Sections</h2></v-subheader>
-          <v-list-item v-for="section in sectionMenu" :href="'#section-'+section.name" :key="section.name">
+          <v-list-item v-for="section in sectionMenu"
+          :href="'#section-'+section.name"
+          :key="section.name"
+          :class="'#section-' + section.name === path ? 'highlighted' : ''"
+          >
             <v-list-item-content class="white--text" v-if="!edit || !section.secondary">
               <v-list-item-title class="text-uppercase"><h4>{{ section.title }}</h4></v-list-item-title>
               <v-list-item-subtitle class="white--text">{{ section.desc }}</v-list-item-subtitle>
@@ -79,12 +88,23 @@ export default {
       orig: {},
       valid: true,
       source: { data: {}, path: "" },
+      path: "",
       loading: false,
       overlay: false,
       isEdit: false,
       linktext: [ ],
       advancedValid: true
     }
+  },
+   mounted() {
+    if (!this.isQuestionnaire) {
+      window.addEventListener("scroll", this.handleScroll);
+    } else {
+      window.removeEventListener("scroll", this.handleScroll);
+    }
+  },
+  beforeDestroy() {
+    window.removeEventListener("scroll", this.handleScroll);
   },
   created: function() {
     if ( this.fhirId ) {
@@ -188,6 +208,16 @@ export default {
     */
   },
   methods: {
+     handleScroll() {
+      this.hasScrolled = window.top.scrollY >= 100;
+      this.sectionMenu.map((data) => {
+        let divs = document.getElementById(`section-${data.name}`);
+        let sectionTop = divs.offsetTop;
+        if (pageYOffset >= sectionTop) {
+          this.path = `#section-${data.name}`;
+        }
+      });
+    },
     getLinkField: function(field) {
       let content = this.$fhirpath.evaluate( this.source.data, field )
       if ( content ) {
@@ -351,16 +381,18 @@ export default {
         opts.method = "PUT"
       }
       opts.body = JSON.stringify(this.fhir)
-      console.log("SAVE",url,this.fhir)
       fetch( url, opts ).then(response => {
-        //console.log(response)
         //console.log(response.headers)
         if ( response.status === 201 || response.status === 200 ) {
           response.json().then(data => {
             this.overlay = false
             this.loading = false
             if ( this.fhirId ) {
-              this.$router.go(0)
+               this.$store.commit("setMessage", {
+                type: "success",
+                text: "Update successful.",
+              });
+              setTimeout(() => this.$router.go(0), 2000);
             } else {
               this.$router.push({ name:"resource_view", params: {page: this.page, id: data.id } })
             }
@@ -376,7 +408,5 @@ export default {
     }
   }
 }
-
-
 
 </script>
