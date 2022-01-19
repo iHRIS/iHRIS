@@ -11,7 +11,7 @@ const workflowEndRole = {
         entry: []
       }
       //winston.info(JSON.stringify( req.body,null,2))
-      let resource = await fhirAxios.read( "PractitionerRole", req.query.practitionerrole )
+      fhirAxios.read( "PractitionerRole", req.query.practitioner ).then( (resource) => {
       try {
         if (resource){
           if ( req.body && req.body.item 
@@ -31,22 +31,31 @@ const workflowEndRole = {
               resource.period.end = req.body.item[0].item[0].answer[0].valueDate
               resource.active = false
          
+              //console.log("Resource ",resource.practitioner.reference)
+              if ( req.query.practitioner ) {
+                req.body.subject = { reference: "Practitioner/" +req.query.practitioner }
+              }
+              let extensions = []
+              if ( resource.resourceType === "Practitioner") {
+                  extensions.push({ url: "http://ihris.org/fhir/StructureDefinition/ihris-practitioner-reference",
+                  valueReference: { reference: "Practitioner/" +req.query.practitioner}
+               })
+              }
+
+              let practitioner = await fhirAxios.read(
+                "Practitioner",
+                resource.practitioner.reference.replace("Practitioner/", "")
+              );
+              practitioner.active = false;
+
               bundle.entry.push( { 
                 resource: resource,
                 request: {
                   method: "PUT",
                   url: resource.resourceType +"/"+ resource.id
                 }
-              } )
-              //console.log("Resource ",resource.practitioner.reference)
-              if ( resource.practitioner && resource.practitioner.reference ) {
-                req.body.subject = { reference: resource.practitioner.reference }
-              }
-              let practitioner = await fhirAxios.read(
-                "Practitioner",
-                resource.practitioner.reference.replace("Practitioner/", "")
-              );
-              practitioner.active = false;
+              })
+              
               bundle.entry.push({
                 resource: practitioner,
                 request: {
@@ -66,6 +75,10 @@ const workflowEndRole = {
       } catch(err) {
         reject(err)
       }
+    }).catch( (err) => {
+      winston.error(err.message)
+      reject(err)
+    } )
     })
   },
   postProcess: ( req, results ) => {

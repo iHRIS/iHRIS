@@ -11,7 +11,7 @@ const workflowPromotion = {
         entry: []
       }
       //winston.info(JSON.stringify( req.body,null,2))
-      let resource = await fhirAxios.read( "PractitionerRole", req.query.practitionerrole )
+      fhirAxios.read( "Practitioner", req.query.practitionerrole ).then( (resource) =>{
       try {
         if (resource){
          
@@ -39,9 +39,14 @@ const workflowPromotion = {
             } )
 
             if ( resource.practitioner && resource.practitioner.reference ) {
-              req.body.subject = { reference: resource.practitioner.reference }
+              req.body.subject = { reference: "Practitioner/"+req.query.practitioner }
             }
             let extensions = []
+            if ( resource.resourceType === "Practitioner") {
+              extensions.push({ url: "http://ihris.org/fhir/StructureDefinition/ihris-practitioner-reference",
+              valueReference: { reference: "Practitioner/" +req.query.practitioner}
+           })
+          }
             let roleorganization = ""
             if ( req.body.item[0].item[1].item[1].linkId === "salaryScale" 
               && req.body.item[0].item[1].item[1].answer 
@@ -136,6 +141,10 @@ const workflowPromotion = {
         winston.error(err)
         resolve(await workflowPromotion.outcome(err.message))
       } 
+    }).catch(err =>{
+      winston.error(err.message)
+      reject(err)
+    })
     })
   },
   postProcess: ( req, results ) => {
