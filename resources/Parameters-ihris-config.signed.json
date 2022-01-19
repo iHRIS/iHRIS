@@ -575,16 +575,24 @@
           "valueString": "$1"
         },
         {
-          "name": "workflow:processor:endrole:library",
-          "valueString": "ihris-workflow-endrole"
+          "name": "workflow:processor:endrole:file",
+          "valueString": "../modules/workflowEndRole"
         },
         {
           "name": "workflow:questionnaire:endrole:url",
           "valueString": "http://ihris.org/fhir/Questionnaire/ihris-endrole"
         },
         {
-          "name": "workflow:processor:promotion:library",
-          "valueString": "ihris-workflow-promotion"
+          "name": "workflow:questionnaire:contract:url",
+          "valueString": "http://ihris.org/fhir/Questionnaire/ihris-contract"
+        },
+        {
+          "name": "workflow:processor:renewrole:file",
+          "valueString": "../modules/workflowRenewRole"
+        },
+        {
+          "name": "workflow:processor:promotion:file",
+          "valueString": "../modules/workflowPromotion"
         },
         {
           "name": "workflow:questionnaire:promotion:url",

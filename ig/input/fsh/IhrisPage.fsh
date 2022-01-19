@@ -599,7 +599,7 @@ InstanceOf:     IhrisPage
 Title:          "iHRIS Salary Scale CodeSystem Page"
 Usage:          #example
 * code = IhrisResourceCodeSystem#page
-* extension[display].extension[resource].valueReference = Reference(CodeSystem/ihris-salary-scale-codesystem)
+* extension[display].extension[resource].valueReference = Reference(CodeSystem/ihris-salary-grade)
 * extension[display].extension[search][0].valueString = "Code|code"
 * extension[display].extension[search][1].valueString = "Display|display"
 * extension[display].extension[field][0].extension[path].valueString = "CodeSystem.code"

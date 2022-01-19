@@ -592,7 +592,7 @@ Usage:          #definition
 * item[0].item[1].item[1].linkId = "salaryScale"
 * item[0].item[1].item[1].text = "New Salary Scale"
 * item[0].item[1].item[1].type = #choice
-* item[0].item[1].item[1].answerValueSet = "http://ihris.org/fhir/ValueSet/ihris-salary-scale-valueset"
+* item[0].item[1].item[1].answerValueSet = "http://ihris.org/fhir/ValueSet/ihris-salary-grade"
 * item[0].item[1].item[1].required = false
 * item[0].item[1].item[1].repeats = false
 
