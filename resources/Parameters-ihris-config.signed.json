@@ -146,7 +146,7 @@
         
         {
           "name": "site:nav:menu:database:text",
-          "valueString": "Database"
+          "valueString": "System Administration"
         },
         {
           "name": "site:nav:menu:database:order",
@@ -181,18 +181,6 @@
           "valueString": "2"
         },
         {
-          "name": "site:nav:menu:database:menu:salary-grade:text",
-          "valueString": "Salary Grades"
-        },
-        {
-          "name": "site:nav:menu:database:menu:salary-grade:url",
-          "valueString": "/resource/search/salary-grade"
-        },
-        {
-          "name": "site:nav:menu:database:menu:salary-grade:order",
-          "valueString": "3"
-        },
-        {
           "name": "site:nav:menu:database:menu:job:text",
           "valueString": "Job Titles"
         },
@@ -202,7 +190,7 @@
         },
         {
           "name": "site:nav:menu:database:menu:job:order",
-          "valueString": "4"
+          "valueString": "3"
         },
         {
           "name": "site:nav:menu:database:menu:job-type:text",
@@ -214,7 +202,7 @@
         },
         {
           "name": "site:nav:menu:database:menu:job-type:order",
-          "valueString": "5"
+          "valueString": "4"
         },
         {
           "name": "site:nav:menu:database:menu:leave-type:text",
@@ -226,7 +214,7 @@
         },
         {
           "name": "site:nav:menu:database:menu:leave-type:order",
-          "valueString": "6"
+          "valueString": "5"
         },
         {
           "name": "site:nav:menu:database:menu:employment-status:text",
@@ -238,7 +226,7 @@
         },
         {
           "name": "site:nav:menu:database:menu:employment-status:order",
-          "valueString": "7"
+          "valueString": "6"
         },
         {
           "name": "site:nav:menu:database:menu:reason-departure:text",
@@ -250,7 +238,7 @@
         },
         {
           "name": "site:nav:menu:database:menu:reason-departure:order",
-          "valueString": "8"
+          "valueString": "7"
         },
         {
           "name": "site:nav:menu:database:menu:educational-major:text",
@@ -262,20 +250,9 @@
         },
         {
           "name": "site:nav:menu:database:menu:educational-major:order",
-          "valueString": "9"
+          "valueString": "8"
         },
-        {
-          "name": "site:nav:menu:database:menu:degree:text",
-          "valueString": "Degree/Course"
-        },
-        {
-          "name": "site:nav:menu:database:menu:degree:url",
-          "valueString": "/resource/search/degree"
-        },
-        {
-          "name": "site:nav:menu:database:menu:degree:order",
-          "valueString": "10"
-        },
+        
         {
           "name": "site:nav:menu:database:menu:education-level:text",
           "valueString": "Education Level"
@@ -286,68 +263,9 @@
         },
         {
           "name": "site:nav:menu:database:menu:education-level:order",
-          "valueString": "11"
+          "valueString": "9"
         },
-        {
-          "name": "site:nav:menu:database:menu:institution-type:text",
-          "valueString": "Education Institution Type"
-        },
-        {
-          "name": "site:nav:menu:database:menu:institution-type:url",
-          "valueString": "/resource/search/institution-type"
-        },
-        {
-          "name": "site:nav:menu:database:menu:institution-type:order",
-          "valueString": "12"
-        },
-        {
-          "name": "site:nav:menu:database:menu:institution:text",
-          "valueString": "Education Institution"
-        },
-        {
-          "name": "site:nav:menu:database:menu:institution:url",
-          "valueString": "/resource/search/institution"
-        },
-        {
-          "name": "site:nav:menu:database:menu:institution:order",
-          "valueString": "13"
-        },
-        {
-          "name": "site:nav:menu:database:menu:disciplineaction:text",
-          "valueString": "Discipline Action Type"
-        },
-        {
-          "name": "site:nav:menu:database:menu:disciplineaction:url",
-          "valueString": "/resource/search/discipline-action-type"
-        },
-        {
-          "name": "site:nav:menu:database:menu:disciplineaction:order",
-          "valueString": "14"
-        },
-        {
-          "name": "site:nav:menu:database:menu:salarysource:text",
-          "valueString": "Funds Source"
-        },
-        {
-          "name": "site:nav:menu:database:menu:salarysource:url",
-          "valueString": "/resource/search/salary-source"
-        },
-        {
-          "name": "site:nav:menu:database:menu:salarysource:order",
-          "valueString": "14"
-        },
-        {
-          "name": "site:nav:menu:database:menu:frequency:text",
-          "valueString": "Pay Frequency"
-        },
-        {
-          "name": "site:nav:menu:database:menu:frequency:url",
-          "valueString": "/resource/search/frequency"
-        },
-        {
-          "name": "site:nav:menu:database:menu:frequency:order",
-          "valueString": "16"
-        },
+        
         {
           "name": "site:nav:menu:dashboard:text",
           "valueString": "Dashboard"

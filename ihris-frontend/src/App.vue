@@ -40,7 +40,7 @@
       </v-dialog>
 
       <router-view :key="$route.path"></router-view>
-      <router-view v-if="$store.state.user.loggedin" name="homeNav" :nav="nav"></router-view>
+      <router-view v-if="$store.state.user.loggedin" name="home" :nav="nav"></router-view>
     </v-content>
 
     <the-footer :footer="footer" />
@@ -82,7 +82,7 @@ export default {
     header: {
       title: false,
       site: null,
-      logo: "iHRIS5Logo.png",
+      logo: "logo.png",
       auths: [],
     },
     footer: {
