@@ -28,7 +28,7 @@
       "part": [
         {
           "name": "site:title",
-          "valueString": "Manage"
+          "valueString": "MoH-NHWR"
         },
         {
           "name": "site:site",
@@ -36,7 +36,7 @@
         },
         {
           "name": "site:logo",
-          "valueString": "iHRIS5Logo.png"
+          "valueString": "logo.png"
         },
         {
           "name": "site:auth:local:method",
@@ -92,7 +92,7 @@
         },
         {
           "name": "site:nav:menu:person:order",
-          "valueString": "1"
+          "valueString": "2"
         },
         {
           "name": "site:nav:menu:person:icon",
@@ -121,7 +121,7 @@
         },
         {
           "name": "site:nav:menu:location:order",
-          "valueString": "2"
+          "valueString": "3"
         },
         {
           "name": "site:nav:menu:location:icon",
@@ -150,7 +150,7 @@
         },
         {
           "name": "site:nav:menu:database:order",
-          "valueString": "3"
+          "valueString": "4"
         },
         {
           "name": "site:nav:menu:database:icon",
@@ -354,7 +354,7 @@
         },
         {
           "name": "site:nav:menu:dashboard:order",
-          "valueString": "4"
+          "valueString": "1"
         },
         {
           "name": "site:nav:menu:dashboard:icon",
