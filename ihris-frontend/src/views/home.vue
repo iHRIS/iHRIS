@@ -1,8 +1,8 @@
 <template>
   <div class="home">
     <v-container>
-      <h1>iHRIS Demo</h1>
-      <p>Welcome to the iHRIS Demo</p>
+      <h1>MoH-NHWR Demo</h1>
+      <p>Welcome to the MoH-NHWR Demo</p>
     </v-container>
   </div>
 </template>
