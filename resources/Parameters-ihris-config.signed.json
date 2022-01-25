@@ -56,11 +56,11 @@
         },
         {
           "name": "site:auth:local:btn:text",
-          "valueString": "Sign in with iHRIS"
+          "valueString": "Sign in with NHWR"
         },
         {
           "name": "site:footer:links:about:text",
-          "valueString": "About iHRIS"
+          "valueString": "About NHWR"
         },
         {
           "name": "site:footer:links:about:to",
@@ -72,15 +72,15 @@
         },
         {
           "name": "site:footer:links:feedback:href",
-          "valueString": "https://forms.gle/jQJ7N3nDBSxSNne58"
+          "valueString": ""
         },
         {
           "name": "site:footer:links:ihris:text",
-          "valueString": "iHRIS Website"
+          "valueString": "NHWR Website"
         },
         {
           "name": "site:footer:links:ihris:href",
-          "valueString": "http://ihris.org/"
+          "valueString": ""
         },
         {
           "name": "site:nav:active",
@@ -88,7 +88,7 @@
         },
         {
           "name": "site:nav:menu:person:text",
-          "valueString": "People"
+          "valueString": "Health Workers"
         },
         {
           "name": "site:nav:menu:person:order",
@@ -100,7 +100,7 @@
         },
         {
           "name": "site:nav:menu:person:menu:person_search:text",
-          "valueString": "Search People"
+          "valueString": "Search Health Worker"
         },
         {
           "name": "site:nav:menu:person:menu:person_search:url",
@@ -108,47 +108,20 @@
         },
         {
           "name": "site:nav:menu:person:menu:person_add:text",
-          "valueString": "Add Person"
+          "valueString": "Add Health Worker"
         },
         {
           "name": "site:nav:menu:person:menu:person_add:url",
           "valueString": "/questionnaire/ihris-practitioner/practitioner"
         },
-        {
-          "name": "site:nav:menu:position:text",
-          "valueString": "Positions"
-        },
-        {
-          "name": "site:nav:menu:position:order",
-          "valueString": "2"
-        },
-        {
-          "name": "site:nav:menu:position:icon",
-          "valueString": "mdi-account-multiple"
-        },
-        {
-          "name": "site:nav:menu:position:menu:position_search:text",
-          "valueString": "Search Positions"
-        },
-        {
-          "name": "site:nav:menu:position:menu:position_search:url",
-          "valueString": "/resource/search/practitionerrole"
-        },
-        {
-          "name": "site:nav:menu:position:menu:position_add:text",
-          "valueString": "Add Position"
-        },
-        {
-          "name": "site:nav:menu:position:menu:position_add:url",
-          "valueString": "/resource/add/practitionerrole"
-        },
+        
         {
           "name": "site:nav:menu:location:text",
           "valueString": "Locations and Facilities"
         },
         {
           "name": "site:nav:menu:location:order",
-          "valueString": "4"
+          "valueString": "2"
         },
         {
           "name": "site:nav:menu:location:icon",
@@ -170,57 +143,14 @@
           "name": "site:nav:menu:location:menu:facility_search:url",
           "valueString": "/resource/search/facility"
         },
-        {
-          "name": "site:nav:menu:mhero:order",
-          "valueString": "3"
-        },
-        {
-          "name": "site:nav:menu:mhero:text",
-          "valueString": "mHero"
-        },
-        {
-          "name": "site:nav:menu:mhero:icon",
-          "valueString": "mdi-cellphone-basic"
-        },
-        {
-          "name": "site:nav:menu:mhero:menu:message:text",
-          "valueString": "Send Messages"
-        },
-        {
-          "name": "site:nav:menu:mhero:menu:message:url",
-          "valueString": "/page/mhero"
-        },
-        {
-          "name": "site:nav:menu:mhero:menu:scheduledcommunications:text",
-          "valueString": "Scheduled Messages"
-        },
-        {
-          "name": "site:nav:menu:mhero:menu:scheduledcommunications:url",
-          "valueString": "/page/mhero-scheduled-message"
-        },
-        {
-          "name": "site:nav:menu:mhero:menu:groups:text",
-          "valueString": "Contact Groups"
-        },
-        {
-          "name": "site:nav:menu:mhero:menu:groups:url",
-          "valueString": "/page/contact-groups"
-        },
-        {
-          "name": "site:nav:menu:mhero:menu:reports:text",
-          "valueString": "Reports"
-        },
-        {
-          "name": "site:nav:menu:mhero:menu:reports:url",
-          "valueString": "/page/mhero-reports"
-        },
+        
         {
           "name": "site:nav:menu:database:text",
           "valueString": "Database"
         },
         {
           "name": "site:nav:menu:database:order",
-          "valueString": "4"
+          "valueString": "3"
         },
         {
           "name": "site:nav:menu:database:icon",
@@ -424,7 +354,7 @@
         },
         {
           "name": "site:nav:menu:dashboard:order",
-          "valueString": "5"
+          "valueString": "4"
         },
         {
           "name": "site:nav:menu:dashboard:icon",
@@ -440,7 +370,7 @@
         },
         {
           "name": "site:nav:menu:reports:order",
-          "valueString": "6"
+          "valueString": "5"
         },
         {
           "name": "site:nav:menu:reports:icon",
@@ -464,7 +394,7 @@
         },
         {
           "name": "site:nav:menu:users:order",
-          "valueString": "7"
+          "valueString": "6"
         },
         {
           "name": "site:nav:menu:users:icon",
@@ -484,7 +414,7 @@
         },
         {
           "name": "site:nav:menu:password:order",
-          "valueString": "8"
+          "valueString": "7"
         },
         {
           "name": "site:nav:menu:password:icon",

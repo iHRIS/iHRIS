@@ -57,15 +57,18 @@ const fhirConfig = {
   },
   parseRemote: ( config, keys, skipSignature ) => {
 
+
+    console.log("config found",config)
+
     let defaults = {}
     if ( config.meta && config.meta.profile
       && config.meta.profile.includes( "http://ihris.org/fhir/StructureDefinition/ihris-parameters-remote-config" ) ) {
 
       let configAccepted = false
-      let addconf = config.parameter.find( param => param.name === "config" )
+      let  addconf  = config.parameter.find( param => param.name === "config" )
 
       if ( skipSignature ) {
-        logger.warn("SKIPPING SECURITY CHECK ON REMOTE CONFIG:",config.id,". This should only be done in development.")
+        // logger.warn("SKIPPING SECURITY CHECK ON REMOTE CONFIG:",config.id,". This should only be done in development.")
         configAccepted = true
       } else {
         let sig = config.parameter.find( param => param.name === "signature" )
@@ -101,7 +104,8 @@ const fhirConfig = {
           }
         }
       } else {
-        logger.warn( "No valid key set for configuration Parameters " + config.id )
+        console.log("Something Happened" ,configAccepted)
+        // logger.warn( "No valid key set for configuration Parameters " + config.id )
       }
     } else {
       logger.warn( "Invalid profile for remote configuration parameters for " + config.id )
