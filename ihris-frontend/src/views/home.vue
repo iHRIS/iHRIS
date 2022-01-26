@@ -128,13 +128,13 @@ export default {
       series: [],
       chartOptions: {
         chart: {
-          width: 500,
+          width: 480,
           type: "pie",
         },
         labels: ["Health Workers", "Facilities", "Districts"],
         responsive: [
           {
-            breakpoint: 500,
+            breakpoint: 480,
             options: {
               chart: {
                 width: 200,
@@ -151,13 +151,13 @@ export default {
       seriesGender: [],
       chartGenderOptions: {
         chart: {
-          width: 500,
+          width: 480,
           type: "pie",
         },
         labels: ["Female", "Male"],
         responsive: [
           {
-            breakpoint: 500,
+            breakpoint: 480,
             options: {
               chart: {
                 width: 200,

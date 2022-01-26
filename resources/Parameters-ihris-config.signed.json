@@ -28,11 +28,11 @@
       "part": [
         {
           "name": "site:title",
-          "valueString": "MoH-NHWR"
+          "valueString": "MoH"
         },
         {
           "name": "site:site",
-          "valueString": "Demo"
+          "valueString": "NHWR"
         },
         {
           "name": "site:logo",
