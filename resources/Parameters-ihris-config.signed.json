@@ -28,11 +28,11 @@
       "part": [
         {
           "name": "site:title",
-          "valueString": "MoH"
+          "valueString": "NHWR"
         },
         {
           "name": "site:site",
-          "valueString": "NHWR"
+          "valueString": "MoH"
         },
         {
           "name": "site:logo",
@@ -114,7 +114,6 @@
           "name": "site:nav:menu:person:menu:person_add:url",
           "valueString": "/questionnaire/ihris-practitioner/practitioner"
         },
-        
         {
           "name": "site:nav:menu:location:text",
           "valueString": "Locations and Facilities"
@@ -143,7 +142,6 @@
           "name": "site:nav:menu:location:menu:facility_search:url",
           "valueString": "/resource/search/facility"
         },
-        
         {
           "name": "site:nav:menu:database:text",
           "valueString": "System Administration"
@@ -252,7 +250,6 @@
           "name": "site:nav:menu:database:menu:educational-major:order",
           "valueString": "8"
         },
-        
         {
           "name": "site:nav:menu:database:menu:education-level:text",
           "valueString": "Education Level"
@@ -265,7 +262,6 @@
           "name": "site:nav:menu:database:menu:education-level:order",
           "valueString": "9"
         },
-        
         {
           "name": "site:nav:menu:dashboard:text",
           "valueString": "Dashboard"
