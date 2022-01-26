@@ -40,7 +40,29 @@
                 ></apexchart>
               </v-card>
             </v-col>
+            <v-col cols="6">
+              <v-card class="mx-auto px-4 py-4">
+                <v-card-title> Health Worker Gender Distribution </v-card-title>
+                <apexchart
+                  type="pie"
+                  width="380"
+                  :options="chartGenderOptions"
+                  :series="seriesGender"
+                ></apexchart>
+              </v-card>
+            </v-col>
           </v-row>
+
+          <!-- <v-row>
+            <v-col cols="6" sm="3" lg="12" class="px-6 py-6">
+              <apexchart
+                type="bar"
+                height="430"
+                :options="chartBarOptions"
+                :series="seriesBarChart"
+              ></apexchart>
+            </v-col>
+          </v-row> -->
         </v-col>
       </v-row>
       <v-row></v-row>
@@ -62,6 +84,47 @@ export default {
       totalHealthWorkers: 0,
       totalFacilities: 0,
       totalDistricts: 0,
+      totalFemale: 0,
+      totalMale: 0,
+      seriesBarChart: [
+        {
+          data: [44, 55, 41, 64, 22, 43, 21],
+        },
+        {
+          data: [53, 32, 33, 52, 13, 44, 32],
+        },
+      ],
+      chartBarOptions: {
+        chart: {
+          type: "bar",
+          height: 430,
+        },
+        plotOptions: {
+          bar: {
+            horizontal: false,
+            dataLabels: {
+              position: "top",
+            },
+          },
+        },
+        dataLabels: {
+          enabled: true,
+          offsetX: -6,
+          style: {
+            fontSize: "12px",
+            colors: ["#fff"],
+          },
+        },
+
+        tooltip: {
+          shared: true,
+          intersect: false,
+        },
+        xaxis: {
+          categories: [2001, 2002, 2003, 2004, 2005, 2006, 2007],
+        },
+      },
+      // all data
       series: [],
       chartOptions: {
         chart: {
@@ -83,12 +146,37 @@ export default {
           },
         ],
       },
+
+      // gender data
+      seriesGender: [],
+      chartGenderOptions: {
+        chart: {
+          width: 500,
+          type: "pie",
+        },
+        labels: ["Female", "Male"],
+        responsive: [
+          {
+            breakpoint: 500,
+            options: {
+              chart: {
+                width: 200,
+              },
+              legend: {
+                position: "bottom",
+              },
+            },
+          },
+        ],
+      },
     };
   },
   mounted() {
     this.getTotalHealthWorkers();
     this.getTotalFacilities();
     this.getTotalDistricts();
+    this.getTotalFemaleHealthWorkers();
+    this.getTotalMaleHealthWorkers();
   },
   methods: {
     getTotalHealthWorkers() {
@@ -140,6 +228,48 @@ export default {
         .then((response) => {
           this.totalDistricts = response.data.total;
           this.series.push(response.data.total);
+        })
+        .catch((err) => {
+          console.log("error", err);
+        });
+    },
+
+    //  gender data fetch
+    getTotalFemaleHealthWorkers() {
+      // get total health workers
+      let url = "";
+      // check other pages
+      if (url === "") {
+        url =
+          "http://localhost:8080/hapi/fhir/Practitioner?_total=accurate&gender=female";
+      }
+
+      axios
+        .get(url)
+        .then((response) => {
+          this.totalFemale = response.data.total;
+          this.seriesGender.push(response.data.total);
+          console.log("female", this.totalFemale);
+        })
+        .catch((err) => {
+          console.log("error", err);
+        });
+    },
+    getTotalMaleHealthWorkers() {
+      // get total health workers
+      let url = "";
+      // check other pages
+      if (url === "") {
+        url =
+          "http://localhost:8080/hapi/fhir/Practitioner?_total=accurate&gender=male";
+      }
+
+      axios
+        .get(url)
+        .then((response) => {
+          this.totalMale = response.data.total;
+          this.seriesGender.push(response.data.total);
+          console.log("male", this.totalMale);
         })
         .catch((err) => {
           console.log("error", err);
