@@ -31,7 +31,7 @@
           <v-row>
             <v-col cols="6">
               <v-card class="mx-auto px-4 py-4">
-                <v-card-title> Pie Chart </v-card-title>
+                <v-card-title> Stats </v-card-title>
                 <apexchart
                   type="pie"
                   width="380"
