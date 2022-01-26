@@ -2,6 +2,8 @@ import Vue from "vue"
 import App from "./App.vue"
 import router from "./router"
 import store from "./store"
+import VueApexCharts from 'vue-apexcharts'
+
 const fetchDefaults = require("fetch-defaults")
 import * as Keycloak from 'keycloak-js';
 import VueCookies from 'vue-cookies'
@@ -20,14 +22,15 @@ Object.defineProperty(Vue.prototype, '$fhirutils', {
   value: fhirutils
 })
 
+Vue.component('apexchart', VueApexCharts)
 Vue.use(require('vue-moment'));
 export const eventBus = new Vue()
 Vue.use(IdleVue, { eventEmitter: eventBus, store, idleTime: 900000, startAtIdle: false })
 
-fetch("/config/app").then((response)=> {
+fetch("/config/app").then((response) => {
   response.json().then(data => {
     store.state.idp = data.idp
-    if(store.state.idp === 'keycloak') {
+    if (store.state.idp === 'keycloak') {
       let initOptions = {
         realm: data.keycloak.realm,
         clientId: data.keycloak.UIClientId,
@@ -53,12 +56,12 @@ fetch("/config/app").then((response)=> {
         })
       }
       Vue.use(Plugin)
-      keycloak.init({onLoad: initOptions.onLoad}).then( auth => {
+      keycloak.init({ onLoad: initOptions.onLoad }).then(auth => {
         if (!auth) {
           window.location.reload();
         } else {
           window.fetch = fetchDefaults(fetch, {
-            headers: {Authorization: `Bearer ${keycloak.token}`}
+            headers: { Authorization: `Bearer ${keycloak.token}` }
           })
           keycloak.loadUserInfo().then((userinfo) => {
             let user = {
@@ -73,7 +76,7 @@ fetch("/config/app").then((response)=> {
               }],
               active: true
             }
-            if(userinfo.email) {
+            if (userinfo.email) {
               user.telecom = [{
                 system: 'email',
                 value: userinfo.email
@@ -99,7 +102,7 @@ fetch("/config/app").then((response)=> {
               console.error(err)
             })
           })
-          setInterval(() =>{
+          setInterval(() => {
             keycloak.updateToken(70)
           }, 60000)
         }

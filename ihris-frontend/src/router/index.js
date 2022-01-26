@@ -3,6 +3,8 @@ import VueRouter from "vue-router"
 //import Home from "../views/home.vue"
 import Static from "../views/static-page.vue"
 import HomeNav from "../views/home-nav.vue"
+import Dashboard from "../views/home.vue";
+
 //import Test from "../views/test.vue"
 //import mhero from "../views/mhero/mhero.vue"
 //import contactGroups from "../views/mhero/contact-groups.vue"
@@ -120,7 +122,9 @@ const routes = [{
     // route level code-splitting
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
-    component: () => import( /* webpackChunkName: "dashboard" */ "../views/home-nav.vue")
+    // component: () => import( /* webpackChunkName: "dashboard" */ "../views/home-nav.vue")
+    component: Dashboard,
+
   },
   {
     path: "/bulk-registration",

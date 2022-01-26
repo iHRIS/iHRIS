@@ -10,6 +10,7 @@
     "lint": "vue-cli-service lint"
   },
   "dependencies": {
+    "apexcharts": "^3.33.0",
     "core-js": "^3.6.5",
     "ethiopic-calendar": "^2.0.0",
     "fetch-defaults": "^1.0.0",
@@ -17,6 +18,7 @@
     "idle-vue": "^2.0.5",
     "keycloak-js": "^15.0.2",
     "vue": "^2.6.11",
+    "vue-apexcharts": "^1.6.2",
     "vue-cookies": "^1.7.4",
     "vue-cron-editor-buefy": "^0.2.13",
     "vue-moment": "^4.1.0",
