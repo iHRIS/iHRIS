@@ -3,45 +3,27 @@
     <v-col cols="6" sm="3" lg="12" class="px-6 py-6">
       <v-row>
         <v-col>
+          <!-- first line -->
           <v-row>
-            <v-col>
+            <v-col cols="6">
               <v-card class="mx-auto my-4" color="green">
                 <v-card-title>
                   Health Workers {{ totalHealthWorkers }}
                 </v-card-title>
                 <v-card-subtitle> Number of Health Workers</v-card-subtitle>
               </v-card>
-            </v-col>
-
-            <v-col>
               <v-card class="mx-auto my-4" color="blue">
                 <v-card-title> Facilities {{ totalFacilities }} </v-card-title>
                 <v-card-subtitle> Number of Facilities</v-card-subtitle>
               </v-card>
-            </v-col>
-
-            <v-col>
               <v-card class="mx-auto my-4" color="#ff5733">
                 <v-card-title> District {{ totalDistricts }} </v-card-title>
                 <v-card-subtitle> Number of Districts</v-card-subtitle>
               </v-card>
             </v-col>
-          </v-row>
 
-          <v-row>
             <v-col cols="6">
-              <v-card class="mx-auto px-4 py-4">
-                <v-card-title> Stats </v-card-title>
-                <apexchart
-                  type="pie"
-                  width="380"
-                  :options="chartOptions"
-                  :series="series"
-                ></apexchart>
-              </v-card>
-            </v-col>
-            <v-col cols="6">
-              <v-card class="mx-auto px-4 py-4">
+              <v-card class="mx-auto">
                 <v-card-title> Health Worker Gender Distribution </v-card-title>
                 <apexchart
                   type="pie"
@@ -52,17 +34,50 @@
               </v-card>
             </v-col>
           </v-row>
-
-          <!-- <v-row>
-            <v-col cols="6" sm="3" lg="12" class="px-6 py-6">
-              <apexchart
-                type="bar"
-                height="430"
-                :options="chartBarOptions"
-                :series="seriesBarChart"
-              ></apexchart>
+          <!--  second line -->
+          <v-row>
+            <v-col cols="6">
+              <v-card class="mx-auto">
+                <v-card-title> Stats </v-card-title>
+                <apexchart
+                  type="pie"
+                  width="380"
+                  :options="chartOptions"
+                  :series="series"
+                ></apexchart>
+              </v-card>
             </v-col>
-          </v-row> -->
+            <v-col cols="6">
+              <v-card class="mx-auto">
+                <v-card-title> Cadre Distribution </v-card-title>
+                <apexchart
+                  type="pie"
+                  width="380"
+                  :options="chartCadreOptions"
+                  :series="seriesCadre"
+                ></apexchart>
+                <!-- <highcharts
+                  :options="testOptions"
+                ></highcharts> -->
+              </v-card>
+            </v-col>
+          </v-row>
+
+          <v-row></v-row>
+          <!-- third line -->
+          <v-row>
+            <v-col cols="16" lg="12" sm="4">
+              <v-card class="mx-auto">
+                <v-card-title> Age Distribution</v-card-title>
+                <apexchart
+                  type="bar"
+                  height="430"
+                  :options="chartBarOptions"
+                  :series="seriesBarChart"
+                ></apexchart>
+              </v-card>
+            </v-col>
+          </v-row>
         </v-col>
       </v-row>
       <v-row></v-row>
@@ -72,12 +87,15 @@
 
 <script>
 import VueApexCharts from "vue-apexcharts";
+// import HighchartsVue from "highcharts-vue";
+
 import axios from "axios";
 
 export default {
   name: "Home",
   components: {
     apexchart: VueApexCharts,
+    // highcharts: HighchartsVue,
   },
   data() {
     return {
@@ -86,12 +104,11 @@ export default {
       totalDistricts: 0,
       totalFemale: 0,
       totalMale: 0,
+
+      // barchart data
       seriesBarChart: [
         {
-          data: [44, 55, 41, 64, 22, 43, 21],
-        },
-        {
-          data: [53, 32, 33, 52, 13, 44, 32],
+          data: [40, 35, 41, 25, 20],
         },
       ],
       chartBarOptions: {
@@ -116,12 +133,8 @@ export default {
           },
         },
 
-        tooltip: {
-          shared: true,
-          intersect: false,
-        },
         xaxis: {
-          categories: [2001, 2002, 2003, 2004, 2005, 2006, 2007],
+          categories: ["Below 30", "30-39", "40-49", "50-59", "60 and Above"],
         },
       },
       // all data
@@ -137,7 +150,7 @@ export default {
             breakpoint: 480,
             options: {
               chart: {
-                width: 200,
+                width: 400,
               },
               legend: {
                 position: "bottom",
@@ -160,12 +173,48 @@ export default {
             breakpoint: 480,
             options: {
               chart: {
-                width: 200,
+                width: 400,
               },
               legend: {
                 position: "bottom",
               },
             },
+          },
+        ],
+      },
+      //  cadre data
+      seriesCadre: [20, 34, 45, 56],
+      chartCadreOptions: {
+        chart: {
+          width: 380,
+          type: "pie",
+        },
+        labels: [
+          "Medical Doctor",
+          "Nurse",
+          "Allied Health Professional",
+          "Pharmacist",
+        ],
+        responsive: [
+          {
+            breakpoint: 480,
+            options: {
+              chart: {
+                width: 400,
+              },
+              legend: {
+                position: "bottom",
+              },
+            },
+          },
+        ],
+      },
+
+      // test data
+      testOptions: {
+        series: [
+          {
+            data: [1, 2, 3], // sample data
           },
         ],
       },
@@ -184,7 +233,7 @@ export default {
       let url = "";
       // check other pages
       if (url === "") {
-        url = "http://localhost:8080/hapi/fhir/Practitioner?_total=accurate";
+        url = "/fhir/Practitioner?_total=accurate";
       }
 
       axios
@@ -202,7 +251,7 @@ export default {
       let url = "";
       // check other pages
       if (url === "") {
-        url = "http://localhost:8080/hapi/fhir/Organisation";
+        url = "/fhir/Organisation";
       }
 
       axios
@@ -220,7 +269,7 @@ export default {
       let url = "";
       // check other pages
       if (url === "") {
-        url = "http://localhost:8080/hapi/fhir/Location";
+        url = "/fhir/Location?_total=accurate";
       }
 
       axios
@@ -240,8 +289,7 @@ export default {
       let url = "";
       // check other pages
       if (url === "") {
-        url =
-          "http://localhost:8080/hapi/fhir/Practitioner?_total=accurate&gender=female";
+        url = "/fhir/Practitioner?_total=accurate&gender=female";
       }
 
       axios
@@ -260,8 +308,7 @@ export default {
       let url = "";
       // check other pages
       if (url === "") {
-        url =
-          "http://localhost:8080/hapi/fhir/Practitioner?_total=accurate&gender=male";
+        url = "/fhir/Practitioner?_total=accurate&gender=male";
       }
 
       axios
