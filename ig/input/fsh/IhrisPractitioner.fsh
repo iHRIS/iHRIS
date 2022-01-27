@@ -519,9 +519,9 @@ Usage:          #definition
 * item[0].item[0].repeats = false
 
 * item[0].item[1].linkId = "departure"
-* item[0].item[1].text = "Reason For Depature"
+* item[0].item[1].text = "Reason For Departure"
 * item[0].item[1].type = #choice
-* item[0].item[1].answerValueSet = "http://ihris.org/fhir/ValueSet/ihris-reason-depature-valueset"
+* item[0].item[1].answerValueSet = "http://ihris.org/fhir/ValueSet/ihris-reason-departure-valueset"
 * item[0].item[1].required = true
 * item[0].item[1].repeats = false
 
