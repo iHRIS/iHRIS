@@ -21,16 +21,9 @@
                 <v-card-subtitle> Number of Districts</v-card-subtitle>
               </v-card>
             </v-col>
-
             <v-col cols="6">
               <v-card class="mx-auto">
-                <v-card-title> Health Worker Gender Distribution </v-card-title>
-                <apexchart
-                  type="pie"
-                  width="380"
-                  :options="chartGenderOptions"
-                  :series="seriesGender"
-                ></apexchart>
+                <highcharts :options="chartGenderOptions"></highcharts>
               </v-card>
             </v-col>
           </v-row>
@@ -38,65 +31,28 @@
           <v-row>
             <v-col cols="6">
               <v-card class="mx-auto">
-                <v-card-title> Stats </v-card-title>
-                <apexchart
-                  type="pie"
-                  width="380"
-                  :options="chartOptions"
-                  :series="series"
-                ></apexchart>
+                <highcharts :options="chartCadreOptions"></highcharts>
               </v-card>
             </v-col>
             <v-col cols="6">
               <v-card class="mx-auto">
-                <v-card-title> Cadre Distribution </v-card-title>
-                <apexchart
-                  type="pie"
-                  width="380"
-                  :options="chartCadreOptions"
-                  :series="seriesCadre"
-                ></apexchart>
-                <!-- <highcharts
-                  :options="testOptions"
-                ></highcharts> -->
-              </v-card>
-            </v-col>
-          </v-row>
-
-          <v-row></v-row>
-          <!-- third line -->
-          <v-row>
-            <v-col cols="16" lg="12" sm="4">
-              <v-card class="mx-auto">
-                <v-card-title> Age Distribution</v-card-title>
-                <apexchart
-                  type="bar"
-                  height="430"
-                  :options="chartBarOptions"
-                  :series="seriesBarChart"
-                ></apexchart>
+                <highcharts :options="barChartOptions"></highcharts>
               </v-card>
             </v-col>
           </v-row>
         </v-col>
       </v-row>
-      <v-row></v-row>
     </v-col>
   </v-sheet>
 </template>
 
 <script>
-import VueApexCharts from "vue-apexcharts";
-// import HighchartsVue from "highcharts-vue";
+// import VueApexCharts from "vue-apexcharts";
 
 import axios from "axios";
 
 export default {
   name: "Home",
-  components: {
-    apexchart: VueApexCharts,
-    // highcharts: HighchartsVue,
-  },
   data() {
     return {
       totalHealthWorkers: 0,
@@ -104,119 +60,285 @@ export default {
       totalDistricts: 0,
       totalFemale: 0,
       totalMale: 0,
-
-      // barchart data
-      seriesBarChart: [
-        {
-          data: [40, 35, 41, 25, 20],
-        },
-      ],
-      chartBarOptions: {
-        chart: {
-          type: "bar",
-          height: 430,
-        },
-        plotOptions: {
-          bar: {
-            horizontal: false,
-            dataLabels: {
-              position: "top",
+      barChartOptions: {
+        exporting: {
+          buttons: {
+            contextButton: {
+              menuItems: [
+                "viewFullscreen",
+                "downloadPNG",
+                "downloadJPEG",
+                "downloadPDF",
+              ],
             },
           },
         },
-        dataLabels: {
-          enabled: true,
-          offsetX: -6,
-          style: {
-            fontSize: "12px",
-            colors: ["#fff"],
+        chart: {
+          type: "column",
+        },
+        title: {
+          text: "Age Distribution",
+        },
+        subtitle: {
+          text: "Source: MoH",
+        },
+        xAxis: {
+          categories: ["Below 30", "30-39", "40-49", "50-59", "60 and Above"],
+          crosshair: true,
+        },
+        yAxis: {
+          min: 0,
+          title: {
+            text: "Age (Number)",
           },
         },
 
-        xaxis: {
-          categories: ["Below 30", "30-39", "40-49", "50-59", "60 and Above"],
+        plotOptions: {
+          column: {
+            pointPadding: 0.2,
+            borderWidth: 0,
+          },
         },
+        series: [
+          {
+            name: "Below 30",
+            data: [20],
+          },
+          {
+            name: "30-39",
+            data: [34],
+          },
+          {
+            name: "40-49",
+            data: [20],
+          },
+          {
+            name: "50-59",
+            data: [10],
+          },
+          {
+            name: "60 and Above",
+            data: [4],
+          },
+        ],
       },
       // all data
-      series: [],
       chartOptions: {
-        chart: {
-          width: 480,
-          type: "pie",
-        },
-        labels: ["Health Workers", "Facilities", "Districts"],
-        responsive: [
-          {
-            breakpoint: 480,
-            options: {
-              chart: {
-                width: 400,
-              },
-              legend: {
-                position: "bottom",
-              },
+        exporting: {
+          buttons: {
+            contextButton: {
+              menuItems: [
+                "viewFullscreen",
+                "downloadPNG",
+                "downloadJPEG",
+                "downloadPDF",
+              ],
             },
           },
-        ],
-      },
-
-      // gender data
-      seriesGender: [],
-      chartGenderOptions: {
-        chart: {
-          width: 480,
-          type: "pie",
         },
-        labels: ["Female", "Male"],
-        responsive: [
+        series: [
           {
-            breakpoint: 480,
-            options: {
-              chart: {
-                width: 400,
+            colorByPoint: true,
+            data: [
+              {
+                name: "Health Workers",
+                y: 61.41,
+                selected: true,
+                sliced: true,
               },
-              legend: {
-                position: "bottom",
+              {
+                name: "Facilities",
+                y: 40,
               },
-            },
+              {
+                name: "Districts",
+                y: 30,
+              },
+            ],
           },
         ],
-      },
-      //  cadre data
-      seriesCadre: [20, 34, 45, 56],
-      chartCadreOptions: {
         chart: {
+          plotBackgroundColor: null,
+          plotBorderWidth: null,
+          plotShadow: false,
           width: 380,
           type: "pie",
         },
-        labels: [
-          "Medical Doctor",
-          "Nurse",
-          "Allied Health Professional",
-          "Pharmacist",
-        ],
-        responsive: [
-          {
-            breakpoint: 480,
-            options: {
-              chart: {
-                width: 400,
-              },
-              legend: {
-                position: "bottom",
-              },
+        title: {
+          text: "General Statistics",
+        },
+        tooltip: {
+          pointFormat: "{series.name}: <b>{point.percentage:.1f}%</b>",
+        },
+
+        accessibility: {
+          point: {
+            valueSuffix: "%",
+          },
+        },
+        plotOptions: {
+          pie: {
+            allowPointSelect: true,
+            cursor: "pointer",
+            dataLabels: {
+              enabled: true,
+              format: "<b>{point.name}</b>: {point.percentage:.1f} %",
             },
           },
-        ],
+        },
       },
 
-      // test data
-      testOptions: {
+      // gender data
+      chartGenderOptions: {
+        exporting: {
+          buttons: {
+            contextButton: {
+              menuItems: [
+                "viewFullscreen",
+                "downloadPNG",
+                "downloadJPEG",
+                "downloadPDF",
+              ],
+            },
+          },
+        },
         series: [
           {
-            data: [1, 2, 3], // sample data
+            name: "Genders",
+            colorByPoint: true,
+            data: [
+              {
+                name: "Female",
+                y: 61.41,
+                selected: true,
+                sliced: true,
+              },
+              {
+                name: "Male",
+                y: 40,
+              },
+            ],
           },
         ],
+        chart: {
+          plotBackgroundColor: null,
+          plotBorderWidth: null,
+          plotShadow: false,
+          width: 380,
+          type: "pie",
+        },
+        title: {
+          text: "Gender Distribution",
+        },
+        tooltip: {
+          pointFormat: "{series.name}: <b>{point.percentage:.1f}%</b>",
+        },
+
+        accessibility: {
+          point: {
+            valueSuffix: "%",
+          },
+        },
+        plotOptions: {
+          pie: {
+            allowPointSelect: true,
+            cursor: "pointer",
+            dataLabels: {
+              enabled: true,
+              format: "<b>{point.name}</b>: {point.percentage:.1f} %",
+            },
+          },
+        },
+      },
+      //  cadre data
+      chartCadreOptions: {
+        exporting: {
+          buttons: {
+            contextButton: {
+              menuItems: [
+                "viewFullscreen",
+                "downloadPNG",
+                "downloadJPEG",
+                "downloadPDF",
+              ],
+            },
+          },
+        },
+        series: [
+          {
+            name: "Cadres",
+            colorByPoint: true,
+            data: [
+              {
+                name: "Medical Doctors",
+                y: 61.41,
+                selected: true,
+                sliced: true,
+              },
+              {
+                name: "Nursing Professionals",
+                y: 40,
+              },
+              {
+                name: "Allied Health Professionals",
+                y: 30,
+              },
+              {
+                name: "Health Community Workers",
+                y: 50,
+              },
+              {
+                name: "Support Staff",
+                y: 50,
+              },
+              {
+                name: "Pharmacy Professionals",
+                y: 50,
+              },
+              {
+                name: "Non Health Professionals",
+                y: 50,
+              },
+              {
+                name: "Midwifrey Professionals",
+                y: 50,
+              },
+              {
+                name: "Medical Professionals",
+                y: 50,
+              },
+            ],
+          },
+        ],
+
+        chart: {
+          plotBackgroundColor: null,
+          plotBorderWidth: null,
+          plotShadow: false,
+          width: 380,
+          type: "pie",
+        },
+        title: {
+          text: "Cadre Distribution",
+        },
+        tooltip: {
+          pointFormat: "{series.name}: <b>{point.percentage:.1f}%</b>",
+        },
+        accessibility: {
+          point: {
+            valueSuffix: "%",
+          },
+        },
+        plotOptions: {
+          pie: {
+            allowPointSelect: true,
+            cursor: "pointer",
+            dataLabels: {
+              enabled: true,
+              format: "<b>{point.name}</b>: {point.percentage:.1f} %",
+            },
+          },
+        },
       },
     };
   },

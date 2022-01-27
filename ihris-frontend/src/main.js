@@ -4,8 +4,8 @@ import router from "./router"
 import store from "./store"
 import VueApexCharts from 'vue-apexcharts'
 import HighchartsVue from "highcharts-vue";
-
-
+import Highcharts from 'highcharts'
+import exportingInit from 'highcharts/modules/exporting';
 const fetchDefaults = require("fetch-defaults")
 import * as Keycloak from 'keycloak-js';
 import VueCookies from 'vue-cookies'
@@ -26,6 +26,7 @@ Object.defineProperty(Vue.prototype, '$fhirutils', {
 
 Vue.component('apexchart', VueApexCharts)
 Vue.use(HighchartsVue);
+exportingInit(Highcharts);
 Vue.use(require('vue-moment'));
 export const eventBus = new Vue()
 Vue.use(IdleVue, { eventEmitter: eventBus, store, idleTime: 900000, startAtIdle: false })
