@@ -7,7 +7,7 @@
         "resourceType": "Location",
         "meta": {
           "profile": [
-            "http://ihris.org/fhir/StructureDefinition/ihris-jurisdiction"
+            "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
           ]
         },
         "id": "TF.CC.CAP",
@@ -47,7 +47,7 @@
         "resourceType": "Location",
         "meta": {
           "profile": [
-            "http://ihris.org/fhir/StructureDefinition/ihris-jurisdiction"
+            "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
           ]
         },
         "id": "TF.E.KAH",
@@ -87,7 +87,7 @@
         "resourceType": "Location",
         "meta": {
           "profile": [
-            "http://ihris.org/fhir/StructureDefinition/ihris-jurisdiction"
+            "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
           ]
         },
         "id": "TF.W.RSN",
@@ -127,7 +127,7 @@
         "resourceType": "Location",
         "meta": {
           "profile": [
-            "http://ihris.org/fhir/StructureDefinition/ihris-jurisdiction"
+            "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
           ]
         },
         "id": "TF.S.NYS",
@@ -167,7 +167,7 @@
         "resourceType": "Location",
         "meta": {
           "profile": [
-            "http://ihris.org/fhir/StructureDefinition/ihris-jurisdiction"
+            "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
           ]
         },
         "id": "TF.S.HGM",
@@ -207,7 +207,7 @@
         "resourceType": "Location",
         "meta": {
           "profile": [
-            "http://ihris.org/fhir/StructureDefinition/ihris-jurisdiction"
+            "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
           ]
         },
         "id": "TF.E.BWO",
@@ -247,7 +247,7 @@
         "resourceType": "Location",
         "meta": {
           "profile": [
-            "http://ihris.org/fhir/StructureDefinition/ihris-jurisdiction"
+            "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
           ]
         },
         "id": "TF.N.GAN",
@@ -287,7 +287,7 @@
         "resourceType": "Location",
         "meta": {
           "profile": [
-            "http://ihris.org/fhir/StructureDefinition/ihris-jurisdiction"
+            "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
           ]
         },
         "id": "TF.W.RUT",
@@ -327,7 +327,7 @@
         "resourceType": "Location",
         "meta": {
           "profile": [
-            "http://ihris.org/fhir/StructureDefinition/ihris-jurisdiction"
+            "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
           ]
         },
         "id": "TF.S.KAK",
@@ -367,7 +367,7 @@
         "resourceType": "Location",
         "meta": {
           "profile": [
-            "http://ihris.org/fhir/StructureDefinition/ihris-jurisdiction"
+            "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
           ]
         },
         "id": "TF.E.NYT",
@@ -407,7 +407,7 @@
         "resourceType": "Location",
         "meta": {
           "profile": [
-            "http://ihris.org/fhir/StructureDefinition/ihris-jurisdiction"
+            "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
           ]
         },
         "id": "TF.N.BRB",
@@ -447,7 +447,7 @@
         "resourceType": "Location",
         "meta": {
           "profile": [
-            "http://ihris.org/fhir/StructureDefinition/ihris-jurisdiction"
+            "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
           ]
         },
         "id": "TF.E.NGU",
@@ -487,7 +487,7 @@
         "resourceType": "Location",
         "meta": {
           "profile": [
-            "http://ihris.org/fhir/StructureDefinition/ihris-jurisdiction"
+            "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
           ]
         },
         "id": "TF.S.NYR",
@@ -527,7 +527,7 @@
         "resourceType": "Location",
         "meta": {
           "profile": [
-            "http://ihris.org/fhir/StructureDefinition/ihris-jurisdiction"
+            "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
           ]
         },
         "id": "TF.W.NGT",
@@ -567,7 +567,7 @@
         "resourceType": "Location",
         "meta": {
           "profile": [
-            "http://ihris.org/fhir/StructureDefinition/ihris-jurisdiction"
+            "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
           ]
         },
         "id": "TF.E.RWB",
@@ -607,7 +607,7 @@
         "resourceType": "Location",
         "meta": {
           "profile": [
-            "http://ihris.org/fhir/StructureDefinition/ihris-jurisdiction"
+            "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
           ]
         },
         "id": "TF.N.GTB",
@@ -647,7 +647,7 @@
         "resourceType": "Location",
         "meta": {
           "profile": [
-            "http://ihris.org/fhir/StructureDefinition/ihris-jurisdiction"
+            "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
           ]
         },
         "id": "TF.S.RWN",
@@ -687,7 +687,7 @@
         "resourceType": "Location",
         "meta": {
           "profile": [
-            "http://ihris.org/fhir/StructureDefinition/ihris-jurisdiction"
+            "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
           ]
         },
         "id": "TF.W.KAR",
@@ -727,7 +727,7 @@
         "resourceType": "Location",
         "meta": {
           "profile": [
-            "http://ihris.org/fhir/StructureDefinition/ihris-jurisdiction"
+            "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
           ]
         },
         "id": "TF.E.KIR",
@@ -767,7 +767,7 @@
         "resourceType": "Location",
         "meta": {
           "profile": [
-            "http://ihris.org/fhir/StructureDefinition/ihris-jurisdiction"
+            "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
           ]
         },
         "id": "TF.W.NYI",
@@ -807,7 +807,7 @@
         "resourceType": "Location",
         "meta": {
           "profile": [
-            "http://ihris.org/fhir/StructureDefinition/ihris-jurisdiction"
+            "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
           ]
         },
         "id": "TF.S.MUB",
@@ -847,7 +847,7 @@
         "resourceType": "Location",
         "meta": {
           "profile": [
-            "http://ihris.org/fhir/StructureDefinition/ihris-jurisdiction"
+            "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
           ]
         },
         "id": "TF.S.NYD",
@@ -887,7 +887,7 @@
         "resourceType": "Location",
         "meta": {
           "profile": [
-            "http://ihris.org/fhir/StructureDefinition/ihris-jurisdiction"
+            "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
           ]
         },
         "id": "TF.N.GYU",
@@ -927,7 +927,7 @@
         "resourceType": "Location",
         "meta": {
           "profile": [
-            "http://ihris.org/fhir/StructureDefinition/ihris-jurisdiction"
+            "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
           ]
         },
         "id": "TF.W.GAS",
@@ -967,7 +967,7 @@
         "resourceType": "Location",
         "meta": {
           "profile": [
-            "http://ihris.org/fhir/StructureDefinition/ihris-jurisdiction"
+            "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
           ]
         },
         "id": "TF.S.GIS",
@@ -1007,7 +1007,7 @@
         "resourceType": "Location",
         "meta": {
           "profile": [
-            "http://ihris.org/fhir/StructureDefinition/ihris-jurisdiction"
+            "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
           ]
         },
         "id": "TF.W.NYG",
@@ -1047,7 +1047,7 @@
         "resourceType": "Location",
         "meta": {
           "profile": [
-            "http://ihris.org/fhir/StructureDefinition/ihris-jurisdiction"
+            "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
           ]
         },
         "id": "TF.W.RSH",
@@ -1087,7 +1087,7 @@
         "resourceType": "Location",
         "meta": {
           "profile": [
-            "http://ihris.org/fhir/StructureDefinition/ihris-jurisdiction"
+            "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
           ]
         },
         "id": "TF.N.MSZ",
@@ -1127,7 +1127,7 @@
         "resourceType": "Location",
         "meta": {
           "profile": [
-            "http://ihris.org/fhir/StructureDefinition/ihris-jurisdiction"
+            "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
           ]
         },
         "id": "TF.N.RUS",
@@ -1167,7 +1167,7 @@
         "resourceType": "Location",
         "meta": {
           "profile": [
-            "http://ihris.org/fhir/StructureDefinition/ihris-jurisdiction"
+            "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
           ]
         },
         "id": "TF.E.GAT",
