@@ -107,14 +107,6 @@
           "valueString": "/resource/search/practitioner"
         },
         {
-          "name": "site:nav:menu:person:menu:person_add:text",
-          "valueString": "Add Health Worker"
-        },
-        {
-          "name": "site:nav:menu:person:menu:person_add:url",
-          "valueString": "/questionnaire/ihris-practitioner/practitioner"
-        },
-        {
           "name": "site:nav:menu:location:text",
           "valueString": "Locations and Facilities"
         },
