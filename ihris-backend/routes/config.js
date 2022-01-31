@@ -11,23 +11,23 @@ const crypto = require('crypto')
 const logger = require('../winston')
 
 const getUKey = () => {
-  return Math.random().toString(36).replace(/^[^a-z]+/,'') + Math.random().toString(36).substring(2,15)
+  return Math.random().toString(36).replace(/^[^a-z]+/, '') + Math.random().toString(36).substring(2, 15)
 }
-const filterNavigation = ( user, nav, prefix ) => {
-  for( let key of Object.keys(nav.menu) ) {
+const filterNavigation = (user, nav, prefix) => {
+  for (let key of Object.keys(nav.menu)) {
     let instance
-    if ( prefix ) {
-      instance = prefix +":"+ key
+    if (prefix) {
+      instance = prefix + ":" + key
     } else {
       instance = key
     }
-    if ( nav.menu[key].menu ) {
-      filterNavigation( user, nav.menu[key], instance )
-      if ( Object.keys(nav.menu[key].menu).length === 0 ) {
+    if (nav.menu[key].menu) {
+      filterNavigation(user, nav.menu[key], instance)
+      if (Object.keys(nav.menu[key].menu).length === 0) {
         delete nav.menu[key]
       }
     } else {
-      if( !user.hasPermissionByName( "special", "navigation", instance ) ) {
+      if (!user.hasPermissionByName("special", "navigation", instance)) {
         delete nav.menu[key]
       }
     }
@@ -35,188 +35,202 @@ const filterNavigation = ( user, nav, prefix ) => {
 }
 
 /* GET home page. */
-router.get('/site', function(req, res) {
+router.get('/site', function (req, res) {
   const defaultUser = nconf.get("user:loggedout") || "ihris-user-loggedout"
   let site = JSON.parse(JSON.stringify(nconf.get("site") || {}))
-  if ( nconf.getBool("security:disabled") ) {
-    site.security = {disabled: true}
+  if (nconf.getBool("security:disabled")) {
+    site.security = { disabled: true }
   }
-  if ( req.user ) {
+  if (req.user) {
     site.user = {}
-    if ( req.user.resource.id === defaultUser ) {
+    if (req.user.resource.id === defaultUser) {
       site.user.loggedin = false
     } else {
       site.user.loggedin = true
       site.user.name = req.user.resource.name[0].text
     }
-    filterNavigation( req.user, site.nav )
+    filterNavigation(req.user, site.nav)
   } else {
     site.user = { loggedin: false }
     delete site.nav
   }
   //site.updated = new Date().toISOString()
-  res.status(200).json( site )
+  res.status(200).json(site)
 })
 
-router.get('/reload', function(req,res) {
-  nconf.loadRemote().then( () => {
-    res.status(200).json({ok:true,conf:nconf.get()})
-  } ).catch( err => {
-    res.status(400).json({ok:false,err:err})
-  } )
-} )
+router.get('/reload', function (req, res) {
+  nconf.loadRemote().then(() => {
+    res.status(200).json({ ok: true, conf: nconf.get() })
+  }).catch(err => {
+    res.status(400).json({ ok: false, err: err })
+  })
+})
 
-const getDefinition = ( resource ) => {
+const getDefinition = (resource) => {
   let structureDef = resource.split('/')
-  return fhirAxios.read( structureDef[0], structureDef[1] )
+  return fhirAxios.read(structureDef[0], structureDef[1])
 }
 const profileResources = {}
-const getProfileResource = ( profile ) => {
-  return new Promise( (resolve, reject) => {
-    let id = profile.substring( profile.lastIndexOf('/')+1 )
-    if ( profileResources.hasOwnProperty(id) ) {
-      resolve( profileResources[id] )
+const getProfileResource = (profile) => {
+  return new Promise((resolve, reject) => {
+    let id = profile.substring(profile.lastIndexOf('/') + 1)
+    if (profileResources.hasOwnProperty(id)) {
+      resolve(profileResources[id])
     } else {
-      getDefinition( "StructureDefinition/"+id ).then( (resource) => {
-        if ( resource.type ) {
+      getDefinition("StructureDefinition/" + id).then((resource) => {
+        if (resource.type) {
           profileResources[id] = resource.type
-          resolve( resource.type )
+          resolve(resource.type)
         } else {
-          logger.error("Unable to get resource type from structure definition "+id)
-          reject( new Error("Unable to get resource.type for "+id) )
+          logger.error("Unable to get resource type from structure definition " + id)
+          reject(new Error("Unable to get resource.type for " + id))
         }
-      } ).catch ( (err) => {
-        logger.error("Unable to get structure definition for "+id)
-        reject( err )
-      } )
+      }).catch((err) => {
+        logger.error("Unable to get structure definition for " + id)
+        reject(err)
+      })
     }
-  } )
+  })
 }
-const getProperties = ( resource ) => {
+const getProperties = (resource) => {
   let codeSystem = resource.split('/')
-  return fhirAxios.search( codeSystem[0], { _id: codeSystem[1], _elements: "url,title,property" } )
+  return fhirAxios.search(codeSystem[0], { _id: codeSystem[1], _elements: "url,title,property" })
 }
-const setupOrder = ( fields, sectionOrder ) => {
-  for( let ord of fields ) {
+const setupOrder = (fields, sectionOrder) => {
+  for (let ord of fields) {
     let lastDot = ord.lastIndexOf('.')
-    let ordId = ord.substring(0,lastDot)
-    let ordField = ord.substring(lastDot+1)
-    if ( !sectionOrder.hasOwnProperty(ordId) ) {
+    let ordId = ord.substring(0, lastDot)
+    let ordField = ord.substring(lastDot + 1)
+    if (!sectionOrder.hasOwnProperty(ordId)) {
       sectionOrder[ordId] = []
     }
     sectionOrder[ordId].push(ordField)
   }
 }
 
-const processUserFilter = ( user, resource, regex_str, replace ) => {
-  let filters = user.getFilter( resource )
+const processUserFilter = (user, resource, regex_str, replace) => {
+  let filters = user.getFilter(resource)
   try {
-    let regex = new RegExp( regex_str )
-    let output = filters.find( filter => regex.test( filter ) ).replace( regex, replace )
+    let regex = new RegExp(regex_str)
+    let output = filters.find(filter => regex.test(filter)).replace(regex, replace)
     return output
-  } catch( err ) {
+  } catch (err) {
     return undefined
   }
 }
 
-router.get('/page/:page/:type?', function(req, res) {
-  let page = "ihris-page-"+req.params.page
-  if ( !req.user ) {
-    return res.status(401).json( outcomes.NOTLOGGEDIN )
+router.get('/page/:page/:type?', function (req, res) {
+  let page = "ihris-page-" + req.params.page
+  if (!req.user) {
+    return res.status(401).json(outcomes.NOTLOGGEDIN)
   }
-  let allowed = req.user.hasPermissionByName( "read", "Basic", page )
+  let allowed = req.user.hasPermissionByName("read", "Basic", page)
   // Limited access to these don't make sense so not allowing it for now
-  if ( allowed !== true ) {
-    return res.status(401).json( outcomes.DENIED )
+  if (allowed !== true) {
+    return res.status(401).json(outcomes.DENIED)
   }
 
-  fhirAxios.read( "Basic", page ).then ( async (resource) => {
-    let pageDisplay = resource.extension.find( ext => ext.url === "http://ihris.org/fhir/StructureDefinition/ihris-page-display" )
+  fhirAxios.read("Basic", page).then(async (resource) => {
+    let pageDisplay = resource.extension.find(ext => ext.url === "http://ihris.org/fhir/StructureDefinition/ihris-page-display")
 
-    let pageResource = pageDisplay.extension.find( ext => ext.url === "resource" ).valueReference.reference
+    // console.log("Page Display", pageDisplay)
+
+    let pageResource = pageDisplay.extension.find(ext => ext.url === "resource").valueReference.reference
     let pageFields = {}
     try {
-      pageDisplay.extension.filter( ext => ext.url === "field" ).map( ext => {
-        let path = ext.extension.find( subext => subext.url === "path" ).valueString
+      pageDisplay.extension.filter(ext => ext.url === "field").map(ext => {
+        let path = ext.extension.find(subext => subext.url === "path").valueString
+
+        console.log("path", path + "ext", ext)
+
         let type, readOnlyIfSet
+
         try {
-          type = ext.extension.find( subext => subext.url === "type" ).valueString
-        } catch(err) {}
+          type = ext.extension.find(subext => subext.url === "type").valueString
+        } catch (err) { }
         try {
-          readOnlyIfSet = ext.extension.find( subext => subext.url === "readOnlyIfSet" ).valueBoolean
-        } catch(err) {}
+          readOnlyIfSet = ext.extension.find(subext => subext.url === "readOnlyIfSet").valueBoolean
+        } catch (err) { }
+
+
         pageFields[path] = { type: type, readOnlyIfSet: readOnlyIfSet }
-      } )
-    } catch(err) {}
 
-    let pageSections = resource.extension.filter( ext => ext.url === "http://ihris.org/fhir/StructureDefinition/ihris-page-section" )
 
-    const createTemplate = async ( resource, structure ) => {
-      logger.silly(JSON.stringify(structure,null,2))
+      })
+    } catch (err) { }
+
+    console.log("pageFields", pageFields)
+
+    console.log("pageResource", pageResource)
+
+    let pageSections = resource.extension.filter(ext => ext.url === "http://ihris.org/fhir/StructureDefinition/ihris-page-section")
+
+    const createTemplate = async (resource, structure) => {
+      logger.silly(JSON.stringify(structure, null, 2))
 
       let links = []
       try {
-        let linkExts = pageDisplay.extension.filter( ext => ext.url === "link" )
+        let linkExts = pageDisplay.extension.filter(ext => ext.url === "link")
 
-        for( let linkExt of linkExts ) {
+        for (let linkExt of linkExts) {
           let field, text, button, icon
 
-          let url = linkExt.extension.find( ext => ext.url === "url" ).valueUrl
+          let url = linkExt.extension.find(ext => ext.url === "url").valueUrl
 
           try {
-            field = linkExt.extension.find( ext => ext.url === "field" ).valueString
-          } catch(err) {}
+            field = linkExt.extension.find(ext => ext.url === "field").valueString
+          } catch (err) { }
           try {
-            text = linkExt.extension.find( ext => ext.url === "text" ).valueString
-          } catch(err) {}
+            text = linkExt.extension.find(ext => ext.url === "text").valueString
+          } catch (err) { }
           try {
-            button = linkExt.extension.find( ext => ext.url === "button" ).valueBoolean
-          } catch(err) {}
+            button = linkExt.extension.find(ext => ext.url === "button").valueBoolean
+          } catch (err) { }
           try {
-            icon = linkExt.extension.find( ext => ext.url === "icon" ).valueString
-          } catch(err) {}
+            icon = linkExt.extension.find(ext => ext.url === "icon").valueString
+          } catch (err) { }
 
-          links.push( { url: url, field: field, text: text, button: button, icon: icon } )
+          links.push({ url: url, field: field, text: text, button: button, icon: icon })
 
         }
 
-      } catch(err) {}
+      } catch (err) { }
 
 
       let sections = {}
       let sectionMap = {}
-      for( let section of pageSections ) {
+      for (let section of pageSections) {
         let title, description, name, resourceExt, resource, linkfield, searchfield
         let fields = []
         let columns = []
         let actions = []
         try {
-          title = section.extension.find( ext => ext.url === "title" ).valueString
-        } catch(err) { }
+          title = section.extension.find(ext => ext.url === "title").valueString
+        } catch (err) { }
         try {
-          description = section.extension.find( ext => ext.url === "description" ).valueString
-        } catch(err) { }
+          description = section.extension.find(ext => ext.url === "description").valueString
+        } catch (err) { }
         try {
-          name = section.extension.find( ext => ext.url === "name" ).valueString
-        } catch(err) { }
+          name = section.extension.find(ext => ext.url === "name").valueString
+        } catch (err) { }
         try {
-          fields = section.extension.filter( ext => ext.url === "field" ).map( ext => ext.valueString )
-        } catch(err) { }
+          fields = section.extension.filter(ext => ext.url === "field").map(ext => ext.valueString)
+        } catch (err) { }
         try {
-          resourceExt = section.extension.find( ext => ext.url === "resource" ).extension
+          resourceExt = section.extension.find(ext => ext.url === "resource").extension
 
-          resource = resourceExt.find( ext => ext.url === "resource" ).valueReference.reference
-          if ( resource ) {
-            linkfield = resourceExt.find( ext => ext.url === "linkfield" ).valueString
+          resource = resourceExt.find(ext => ext.url === "resource").valueReference.reference
+          if (resource) {
+            linkfield = resourceExt.find(ext => ext.url === "linkfield").valueString
             try {
-              searchfield = resourceExt.find( ext => ext.url === "searchfield" ).valueString
-            } catch(err) { }
-            let columnsExt = resourceExt.filter( ext => ext.url === "column" )
-            for ( let column of columnsExt ) {
+              searchfield = resourceExt.find(ext => ext.url === "searchfield").valueString
+            } catch (err) { }
+            let columnsExt = resourceExt.filter(ext => ext.url === "column")
+            for (let column of columnsExt) {
               try {
-                let header = column.extension.find( ext => ext.url === "header" ).valueString
-                let field = column.extension.find( ext => ext.url === "field" ).valueString
-                if ( header && field ) {
+                let header = column.extension.find(ext => ext.url === "header").valueString
+                let field = column.extension.find(ext => ext.url === "field").valueString
+                if (header && field) {
                   /*
                 let definition = await fhirDefinition.getFieldDefinition( resource +"#"+ field )
                 let binding = ""
@@ -229,44 +243,46 @@ router.get('/page/:page/:type?', function(req, res) {
                   }
                 }
                 */
-                  columns.push( {text: header, value: field} )
+                  columns.push({ text: header, value: field })
                 }
-              } catch(err) { }
+              } catch (err) { }
             }
-            let actionsExt = resourceExt.filter( ext => ext.url === "action" )
-            for ( let action of actionsExt ) {
+            let actionsExt = resourceExt.filter(ext => ext.url === "action")
+            for (let action of actionsExt) {
               try {
-                let link = action.extension.find( ext => ext.url === "link" ).valueString
-                let text = action.extension.find( ext => ext.url === "text" ).valueString
+                let link = action.extension.find(ext => ext.url === "link").valueString
+                let text = action.extension.find(ext => ext.url === "text").valueString
                 let row, condition, emptyDisplay
                 let eleClass = "primary"
                 try {
-                  row = action.extension.find( ext => ext.url === "row" ).valueBoolean
-                } catch(err) {}
+                  row = action.extension.find(ext => ext.url === "row").valueBoolean
+                } catch (err) { }
                 try {
-                  condition = action.extension.find( ext => ext.url === "condition" ).valueString
-                } catch(err) {}
+                  condition = action.extension.find(ext => ext.url === "condition").valueString
+                } catch (err) { }
                 try {
-                  emptyDisplay = action.extension.find( ext => ext.url === "emptyDisplay" ).valueBoolean
-                } catch(err) {}
+                  emptyDisplay = action.extension.find(ext => ext.url === "emptyDisplay").valueBoolean
+                } catch (err) { }
                 try {
-                  eleClass = action.extension.find( ext => ext.url === "class" ).valueString
-                } catch(err) {}
-                if ( link && text ) {
-                  actions.push( {link: link, text: text, row: row,
+                  eleClass = action.extension.find(ext => ext.url === "class").valueString
+                } catch (err) { }
+                if (link && text) {
+                  actions.push({
+                    link: link, text: text, row: row,
                     condition: condition, emptyDisplay: emptyDisplay,
-                    class: eleClass } )
+                    class: eleClass
+                  })
                 }
-              } catch(err) { }
+              } catch (err) { }
             }
 
           }
 
-        } catch(err) { }
+        } catch (err) { }
 
         let sectionOrder = {}
-        setupOrder( fields, sectionOrder )
-        for( let field of fields ) {
+        setupOrder(fields, sectionOrder)
+        for (let field of fields) {
           sectionMap[field] = name
         }
         sections[name] = {
@@ -284,16 +300,16 @@ router.get('/page/:page/:type?', function(req, res) {
       }
       let sdOrder = {}
       const getSortFunc = (sortArr) => {
-        return (a,b) => {
+        return (a, b) => {
           idxA = sortArr.indexOf(a)
           idxB = sortArr.indexOf(b)
-          if ( idxA === idxB ) {
+          if (idxA === idxB) {
             return 0
-          } else if ( idxA === -1 ) {
+          } else if (idxA === -1) {
             return 1
-          } else if ( idxB === -1 ) {
+          } else if (idxB === -1) {
             return -1
-          } else if ( idxA < idxB ) {
+          } else if (idxA < idxB) {
             return -1
           } else {
             return 1
@@ -301,7 +317,7 @@ router.get('/page/:page/:type?', function(req, res) {
         }
       }
 
-      let structureKeys = Object.keys( structure )
+      let structureKeys = Object.keys(structure)
       let sectionMenu
       let allSubFields = {}
       let allColumns = {}
@@ -309,8 +325,8 @@ router.get('/page/:page/:type?', function(req, res) {
       let constraints = {}
 
       let vueOutput = "<template>"
-      for ( let fhir of structureKeys ) {
-        if ( !sections.hasOwnProperty(fhir) ) {
+      for (let fhir of structureKeys) {
+        if (!sections.hasOwnProperty(fhir)) {
           sections[fhir] = {
             title: fhir,
             description: "",
@@ -327,157 +343,157 @@ router.get('/page/:page/:type?', function(req, res) {
         let sectionKeys = Object.keys(sections)
 
         let resourceElement = "ihris-resource"
-        if ( resource.resourceType === "CodeSystem" ) {
+        if (resource.resourceType === "CodeSystem") {
           resourceElement = "ihris-codesystem"
         }
 
-        vueOutput = '<'+resourceElement+' :fhir-id="fhirId" :edit="isEdit" v-on:set-edit="setEdit($event)" profile="'+resource.url+'" :key="$route.params.page+($route.params.id || \'\')" page="'+req.params.page+'" field="'+fhir+'" title="'+sections[fhir].title+'" :constraints="constraints"'
-        if ( sectionKeys.length > 1 ) {
-          sectionMenu = sectionKeys.map( name => { return { name: name, title: sections[name].title, desc: sections[name].description, secondary: !!sections[name].resource } } )
+        vueOutput = '<' + resourceElement + ' :fhir-id="fhirId" :edit="isEdit" v-on:set-edit="setEdit($event)" profile="' + resource.url + '" :key="$route.params.page+($route.params.id || \'\')" page="' + req.params.page + '" field="' + fhir + '" title="' + sections[fhir].title + '" :constraints="constraints"'
+        if (sectionKeys.length > 1) {
+          sectionMenu = sectionKeys.map(name => { return { name: name, title: sections[name].title, desc: sections[name].description, secondary: !!sections[name].resource } })
           vueOutput += " :section-menu='sectionMenu'"
         }
-        if ( links.length > 0 ) {
+        if (links.length > 0) {
           vueOutput += " :links='links'"
         }
-        vueOutput += '><template #default=\"slotProps\">'+"\n"
+        vueOutput += '><template #default=\"slotProps\">' + "\n"
 
-        if ( structure[fhir].hasOwnProperty("fields") ) {
-          let fieldKeys = Object.keys( structure[fhir].fields )
-          for( let field of fieldKeys ) {
-            if ( sectionMap.hasOwnProperty( structure[fhir].fields[field].id ) ) {
-              sections[ sectionMap[ structure[fhir].fields[field].id ] ].elements[field] = structure[fhir].fields[field]
+        if (structure[fhir].hasOwnProperty("fields")) {
+          let fieldKeys = Object.keys(structure[fhir].fields)
+          for (let field of fieldKeys) {
+            if (sectionMap.hasOwnProperty(structure[fhir].fields[field].id)) {
+              sections[sectionMap[structure[fhir].fields[field].id]].elements[field] = structure[fhir].fields[field]
             } else {
-              sections[ fhir ].elements[field] = structure[fhir].fields[field]
+              sections[fhir].elements[field] = structure[fhir].fields[field]
             }
           }
         }
         const processFields = async (fields, base, order) => {
           let output = ""
-          let fieldKeys = Object.keys( fields )
-          if ( order[base] ) {
-            fieldKeys.sort( getSortFunc( order[base] ) )
+          let fieldKeys = Object.keys(fields)
+          if (order[base]) {
+            fieldKeys.sort(getSortFunc(order[base]))
           }
-          for( let field of fieldKeys ) {
-            if ( fields[field]["max"] === "0" ) {
+          for (let field of fieldKeys) {
+            if (fields[field]["max"] === "0") {
               continue
             }
-            if ( !fields[field].code ) {
-              logger.info("No datatype for "+base+" "+field+" so skipping",base,field)
+            if (!fields[field].code) {
+              logger.info("No datatype for " + base + " " + field + " so skipping", base, field)
               continue
             }
-            let eleName = fhirDefinition.camelToKebab( fields[field].code )
+            let eleName = fhirDefinition.camelToKebab(fields[field].code)
 
-            if ( fields[field].hasOwnProperty("targetProfile") && fields[field].targetProfile ) {
-              fields[field].targetResource = await getProfileResource( fields[field].targetProfile )
+            if (fields[field].hasOwnProperty("targetProfile") && fields[field].targetProfile) {
+              fields[field].targetResource = await getProfileResource(fields[field].targetProfile)
             }
 
 
-            let attrs = [ "field", "sliceName", "targetProfile", "targetResource", "profile", "min", "max", "base-min",
-              "base-max", "label", "path", "binding", "calendar", "initialValue" ]
-            const minmax = [ "Date", "DateTime", "Instant", "Time", "Decimal", "Integer", "PositiveInt",
-              "UnsignedInt", "Quantity" ]
-            for( let mm of minmax ) {
-              for( let type of [ "min", "max" ] ) {
-                attrs.push( type+"Value"+mm )
+            let attrs = ["field", "sliceName", "targetProfile", "targetResource", "profile", "min", "max", "base-min",
+              "base-max", "label", "path", "binding", "calendar", "initialValue"]
+            const minmax = ["Date", "DateTime", "Instant", "Time", "Decimal", "Integer", "PositiveInt",
+              "UnsignedInt", "Quantity"]
+            for (let mm of minmax) {
+              for (let type of ["min", "max"]) {
+                attrs.push(type + "Value" + mm)
               }
             }
             let isArray = false
-            if ( fields[field]["max"] !== "1" ) {
+            if (fields[field]["max"] !== "1") {
               isArray = true
-              output += "<ihris-array :edit=\"isEdit\" fieldType=\""+eleName+"\" :slotProps=\"slotProps\""
-              const arr_attrs = [ "field", "label", "min", "max", "id", "path", "profile", "targetProfile", "targetResource", "sliceName" ]
-              for ( let attr of arr_attrs ) {
-                if ( fields[field].hasOwnProperty(attr) ) {
-                  output += " "+attr+"=\""+fields[field][attr]+"\""
+              output += "<ihris-array :edit=\"isEdit\" fieldType=\"" + eleName + "\" :slotProps=\"slotProps\""
+              const arr_attrs = ["field", "label", "min", "max", "id", "path", "profile", "targetProfile", "targetResource", "sliceName"]
+              for (let attr of arr_attrs) {
+                if (fields[field].hasOwnProperty(attr)) {
+                  output += " " + attr + "=\"" + fields[field][attr] + "\""
                 }
               }
               output += ">\n<template #default=\"slotProps\">\n"
             } else {
               attrs.unshift("id")
             }
-            output += "<fhir-"+eleName +" :slotProps=\"slotProps\" :edit=\"isEdit\""
+            output += "<fhir-" + eleName + " :slotProps=\"slotProps\" :edit=\"isEdit\""
             let displayType, readOnlyIfSet
-            if ( pageFields.hasOwnProperty(fields[field].id) ) {
-              if ( pageFields[ fields[field].id ].type ) {
+            if (pageFields.hasOwnProperty(fields[field].id)) {
+              if (pageFields[fields[field].id].type) {
                 //output += " displayType=\""+ pageFields[ fields[field].id ].type +"\""
-                displayType = pageFields[ fields[field].id ].type
+                displayType = pageFields[fields[field].id].type
               }
-              if ( pageFields[ fields[field].id ].readOnlyIfSet ) {
+              if (pageFields[fields[field].id].readOnlyIfSet) {
                 readOnlyIfSet = true
               }
             }
-            if ( !readOnlyIfSet && nconf.get( "defaults:fields:"+fields[field].id+":readOnlyIfSet" ) ) {
+            if (!readOnlyIfSet && nconf.get("defaults:fields:" + fields[field].id + ":readOnlyIfSet")) {
               readOnlyIfSet = true
             }
-            if ( readOnlyIfSet ) {
+            if (readOnlyIfSet) {
               output += " :readOnlyIfSet=\"true\""
             }
-            if ( !displayType ) {
-              if ( nconf.get("defaults:fields:"+fields[field].id+":type" ) ) {
-                displayType = nconf.get("defaults:fields:"+fields[field].id+":type" )
+            if (!displayType) {
+              if (nconf.get("defaults:fields:" + fields[field].id + ":type")) {
+                displayType = nconf.get("defaults:fields:" + fields[field].id + ":type")
               }
             }
-            if ( displayType ) {
-              output += " displayType=\""+ displayType +"\""
+            if (displayType) {
+              output += " displayType=\"" + displayType + "\""
             }
-            if ( nconf.get("defaults:fields:"+fields[field].id+":user_filter") ) {
-              let resource = fields[field].id.substring( 0, fields[field].id.indexOf('.') )
+            if (nconf.get("defaults:fields:" + fields[field].id + ":user_filter")) {
+              let resource = fields[field].id.substring(0, fields[field].id.indexOf('.'))
               let regex = "(.+)"
               let replace = "$1"
-              if ( nconf.get("defaults:fields:"+fields[field].id+":user_filter:regex") ) {
-                regex = nconf.get("defaults:fields:"+fields[field].id+":user_filter:regex")
+              if (nconf.get("defaults:fields:" + fields[field].id + ":user_filter:regex")) {
+                regex = nconf.get("defaults:fields:" + fields[field].id + ":user_filter:regex")
               }
-              if ( nconf.get("defaults:fields:"+fields[field].id+":user_filter:replace") ) {
-                replace = nconf.get("defaults:fields:"+fields[field].id+":user_filter:replace")
+              if (nconf.get("defaults:fields:" + fields[field].id + ":user_filter:replace")) {
+                replace = nconf.get("defaults:fields:" + fields[field].id + ":user_filter:replace")
               }
-              if ( nconf.get("defaults:fields:"+fields[field].id+":user_filter:resource") ) {
-                resource = nconf.get("defaults:fields:"+fields[field].id+":user_filter:resource")
+              if (nconf.get("defaults:fields:" + fields[field].id + ":user_filter:resource")) {
+                resource = nconf.get("defaults:fields:" + fields[field].id + ":user_filter:resource")
               }
-              let overrideValue = processUserFilter( req.user, resource, regex, replace )
-              if ( overrideValue ) {
-                output += " overrideValue=\""+overrideValue+"\""
+              let overrideValue = processUserFilter(req.user, resource, regex, replace)
+              if (overrideValue) {
+                output += " overrideValue=\"" + overrideValue + "\""
               }
             }
-            if ( fields[field].hasOwnProperty("constraint") ) {
+            if (fields[field].hasOwnProperty("constraint")) {
               let constraintKeys = []
-              for( let constraint of fields[field].constraint ) {
-                if ( constraint.key && constraint.key.startsWith("ihris-") ) {
-                  constraints[ constraint.key ] = constraint
-                  constraintKeys.push( constraint.key )
+              for (let constraint of fields[field].constraint) {
+                if (constraint.key && constraint.key.startsWith("ihris-")) {
+                  constraints[constraint.key] = constraint
+                  constraintKeys.push(constraint.key)
                 }
               }
-              if ( constraintKeys.length > 0 ) {
+              if (constraintKeys.length > 0) {
                 output += " constraints=\"" + constraintKeys.join(",") + "\""
               }
             }
-            for( let attr of attrs ) {
-              if ( fields[field].hasOwnProperty(attr) ) {
-                if ( fields[field][attr]
-                  && fields[field][attr].value && fields[field][attr].code ) {
-                  output += " "+attr+"=\""+fields[field][attr].value+fields[field][attr].code+"\""
+            for (let attr of attrs) {
+              if (fields[field].hasOwnProperty(attr)) {
+                if (fields[field][attr]
+                  && fields[field][attr].value && fields[field][attr].code) {
+                  output += " " + attr + "=\"" + fields[field][attr].value + fields[field][attr].code + "\""
                 } else {
-                  output += " "+attr+"=\""+fields[field][attr]+"\""
+                  output += " " + attr + "=\"" + fields[field][attr] + "\""
                 }
-              } else if ( nconf.get("defaults:fields:"+fields[field].id+":"+attr) ) {
-                output += " "+attr+"=\""
-                  +nconf.get("defaults:fields:"+fields[field].id+":"+attr)+"\""
-              } else if ( nconf.get("defaults:components:"+eleName+":"+attr) ) {
-                output += " "+attr+"=\""
-                  +nconf.get("defaults:components:"+eleName+":"+attr)+"\""
+              } else if (nconf.get("defaults:fields:" + fields[field].id + ":" + attr)) {
+                output += " " + attr + "=\""
+                  + nconf.get("defaults:fields:" + fields[field].id + ":" + attr) + "\""
+              } else if (nconf.get("defaults:components:" + eleName + ":" + attr)) {
+                output += " " + attr + "=\""
+                  + nconf.get("defaults:components:" + eleName + ":" + attr) + "\""
               }
             }
             let subFields
-            if ( eleName === "reference" && fields[field].hasOwnProperty("fields") ) {
+            if (eleName === "reference" && fields[field].hasOwnProperty("fields")) {
               let refFields = fields[field].fields
               subFields = {}
-              let subAttrs = [ "id", "path", "label", "min", "max", "base-min", "base-max", "code" ]
-              for( let refField of Object.keys(refFields) ) {
+              let subAttrs = ["id", "path", "label", "min", "max", "base-min", "base-max", "code"]
+              for (let refField of Object.keys(refFields)) {
                 subFields[refField] = {}
-                logger.silly("refLOOP",refField,refFields)
-                for( let attr of subAttrs ) {
-                  if ( refFields[refField].hasOwnProperty(attr) ) {
-                    if ( (attr === "id" || attr === "path") && fields[field].hasOwnProperty(attr) ) {
-                      subFields[refField][attr] = refFields[refField][attr].replace( fields[field][attr]+".", "" )
+                logger.silly("refLOOP", refField, refFields)
+                for (let attr of subAttrs) {
+                  if (refFields[refField].hasOwnProperty(attr)) {
+                    if ((attr === "id" || attr === "path") && fields[field].hasOwnProperty(attr)) {
+                      subFields[refField][attr] = refFields[refField][attr].replace(fields[field][attr] + ".", "")
                     } else {
                       subFields[refField][attr] = refFields[refField][attr]
                     }
@@ -485,130 +501,132 @@ router.get('/page/:page/:type?', function(req, res) {
                 }
               }
             }
-            if ( subFields ) {
+            if (subFields) {
               let subKey = getUKey()
               allSubFields[subKey] = subFields
-              output += " :sub-fields='subFields." + subKey +"'"
+              output += " :sub-fields='subFields." + subKey + "'"
             }
             output += ">\n"
 
-            if ( !subFields && fields[field].hasOwnProperty("fields") ) {
+            if (!subFields && fields[field].hasOwnProperty("fields")) {
               output += "<template #default=\"slotProps\">\n"
-              output += await processFields( fields[field].fields, base+"."+fields[field], order )
+              output += await processFields(fields[field].fields, base + "." + fields[field], order)
               output += "</template>\n"
             }
 
-            output += "</fhir-"+eleName+">\n"
-            if ( isArray ) {
+            output += "</fhir-" + eleName + ">\n"
+            if (isArray) {
               output += "</template>\n</ihris-array>\n"
             }
           }
           return output
         }
-        for ( let name of sectionKeys ) {
-          vueOutput += "<ihris-section :slotProps=\"slotProps\" :edit=\"isEdit\" name=\""+name+"\" title=\""+sections[name].title+"\" description=\""+sections[name].description+"\" :secondary=\""+!!sections[name].resource+"\">\n<template #default=\"slotProps\">\n"
-          if ( sections[name].resource ) {
-            let secondary = await getDefinition( sections[name].resource )
+        for (let name of sectionKeys) {
+          vueOutput += "<ihris-section :slotProps=\"slotProps\" :edit=\"isEdit\" name=\"" + name + "\" title=\"" + sections[name].title + "\" description=\"" + sections[name].description + "\" :secondary=\"" + !!sections[name].resource + "\">\n<template #default=\"slotProps\">\n"
+          if (sections[name].resource) {
+            let secondary = await getDefinition(sections[name].resource)
 
-            if ( !secondary.hasOwnProperty("snapshot") ) {
+            if (!secondary.hasOwnProperty("snapshot")) {
               logger.error("StructureDefinitions (", sections[name].resource, ") must be saved with a snapshot.")
               continue
             }
-            const secondaryStructure = fhirDefinition.parseStructureDefinition( secondary )
+            const secondaryStructure = fhirDefinition.parseStructureDefinition(secondary)
             let secondaryOrder = {}
-            setupOrder( sections[name].fields, secondaryOrder )
-            let secondaryKeys = Object.keys( secondaryStructure )
-            for ( let second_fhir of secondaryKeys ) {
+            setupOrder(sections[name].fields, secondaryOrder)
+            let secondaryKeys = Object.keys(secondaryStructure)
+            for (let second_fhir of secondaryKeys) {
               let sectionKey = getUKey()
               allColumns[sectionKey] = sections[name].columns
               allActions[sectionKey] = sections[name].actions
-              vueOutput += '<ihris-secondary :edit="isEdit" :link-id="fhirId" profile="'+secondary.url
-                +'" field="'+second_fhir
-                +'" title="'+sections[name].title
-                +'" link-field="'+sections[name].linkfield
-                +'" search-field="'+(sections[name].searchfield || "")
-                +'" :columns=\'columns.'+sectionKey
-                +'\' :actions=\'actions.'+sectionKey
-                  +'\'><template #default="slotProps">' + "\n"
-                  //vueOutput += await processFields( secondaryStructure[second_fhir].fields, second_fhir, secondaryOrder )
-                  vueOutput += "</template></ihris-secondary>"
-                }
+              vueOutput += '<ihris-secondary :edit="isEdit" :link-id="fhirId" profile="' + secondary.url
+                + '" field="' + second_fhir
+                + '" title="' + sections[name].title
+                + '" link-field="' + sections[name].linkfield
+                + '" search-field="' + (sections[name].searchfield || "")
+                + '" :columns=\'columns.' + sectionKey
+                + '\' :actions=\'actions.' + sectionKey
+                + '\'><template #default="slotProps">' + "\n"
+              //vueOutput += await processFields( secondaryStructure[second_fhir].fields, second_fhir, secondaryOrder )
+              vueOutput += "</template></ihris-secondary>"
+            }
 
           } else {
-            vueOutput += await processFields( sections[name].elements, fhir, sections[name].order )
+            vueOutput += await processFields(sections[name].elements, fhir, sections[name].order)
           }
           vueOutput += "</template></ihris-section>\n"
         }
 
-        vueOutput += '</template></'+resourceElement+'>'+"\n"
+        vueOutput += '</template></' + resourceElement + '>' + "\n"
       }
       vueOutput += "</template>"
       logger.debug(vueOutput)
-      return res.status(200).json({ template: vueOutput, data: {
-        sectionMenu: sectionMenu,
-        subFields: allSubFields,
-        columns: allColumns,
-        actions: allActions,
-        links: links,
-        constraints: constraints
-      } })
+      return res.status(200).json({
+        template: vueOutput, data: {
+          sectionMenu: sectionMenu,
+          subFields: allSubFields,
+          columns: allColumns,
+          actions: allActions,
+          links: links,
+          constraints: constraints
+        }
+      })
     }
 
-    const createSearchTemplate = async ( resource, structure ) => {
-      logger.silly(JSON.stringify(structure,null,2))
+    const createSearchTemplate = async (resource, structure) => {
+      logger.silly(JSON.stringify(structure, null, 2))
 
-      let search = [ 'id' ]
+      let search = ['id']
       try {
-        search = pageDisplay.extension.filter( ext => ext.url === "search" ).map( ext =>
-          ext.valueString.match( /^([^|]*)\|?([^|]*)?\|?(.*)?$/ ).slice(1,4)
+        search = pageDisplay.extension.filter(ext => ext.url === "search").map(ext =>
+          ext.valueString.match(/^([^|]*)\|?([^|]*)?\|?(.*)?$/).slice(1, 4)
         )
-      } catch(err) { }
+      } catch (err) { }
       let filters = []
       try {
-        filters = pageDisplay.extension.filter( ext => ext.url === "filter" ).map( ext =>
-          ext.valueString.match( /^([^|]*)\|?([^|]*)?\|?(.*)?$/ ).slice(1,4)
+        filters = pageDisplay.extension.filter(ext => ext.url === "filter").map(ext =>
+          ext.valueString.match(/^([^|]*)\|?([^|]*)?\|?(.*)?$/).slice(1, 4)
         )
-      } catch(err) { }
+      } catch (err) { }
       let addLink = null
       try {
-        let add = pageDisplay.extension.find( ext => ext.url === "add" )
-        let url = add.extension.find( ext => ext.url === "url" ).valueUrl
+        let add = pageDisplay.extension.find(ext => ext.url === "add")
+        let url = add.extension.find(ext => ext.url === "url").valueUrl
         let icon, eleClass
         try {
-          icon = add.extension.find( ext => ext.url === "icon" ).valueString
-        } catch(err) {}
+          icon = add.extension.find(ext => ext.url === "icon").valueString
+        } catch (err) { }
         try {
-          eleClass = add.extension.find( ext => ext.url === "class" ).valueString
-        } catch(err) {}
+          eleClass = add.extension.find(ext => ext.url === "class").valueString
+        } catch (err) { }
         addLink = { url: url, icon: icon, class: eleClass }
-      } catch(err) {}
+      } catch (err) { }
 
       logger.silly(filters)
       logger.silly(search)
 
       let searchElement = "ihris-search"
-      if ( resource.resourceType === "CodeSystem" ) {
+      if (resource.resourceType === "CodeSystem") {
         searchElement += "-code"
       }
 
-      let searchTemplate = '<'+searchElement+' :key="$route.params.page" page="'+req.params.page+'" label="'+(resource.title || resource.name)+'" :fields="fields" :terms="terms" resource="'+(resource.resourceType === "StructureDefinition" ? resource.type : resource.resourceType)+'" profile="'+resource.url+'"'
-      if ( addLink ) {
+      let searchTemplate = '<' + searchElement + ' :key="$route.params.page" page="' + req.params.page + '" label="' + (resource.title || resource.name) + '" :fields="fields" :terms="terms" resource="' + (resource.resourceType === "StructureDefinition" ? resource.type : resource.resourceType) + '" profile="' + resource.url + '"'
+      if (addLink) {
         searchTemplate += " :add-link='addLink'"
       }
-      searchTemplate += '>'+"\n"
-      for( let filter of filters ) {
+      searchTemplate += '>' + "\n"
+      for (let filter of filters) {
         searchTemplate += '<ihris-search-term v-on:termChange="searchData"'
-        if ( filter[1] ) {
-          searchTemplate += ' label="'+filter[0]+'" expression="'+filter[1]+'"'
+        if (filter[1]) {
+          searchTemplate += ' label="' + filter[0] + '" expression="' + filter[1] + '"'
         } else {
-          searchTemplate += ' label="Search" expression="'+filter[0]+'"'
+          searchTemplate += ' label="Search" expression="' + filter[0] + '"'
         }
-        if ( filter[2] ) {
-          searchTemplate += ' binding="'+filter[2]+'"'
+        if (filter[2]) {
+          searchTemplate += ' binding="' + filter[2] + '"'
         }
         searchTemplate += "></ihris-search-term>\n"
       }
-      searchTemplate += "</"+searchElement+">\n"
+      searchTemplate += "</" + searchElement + ">\n"
       logger.debug(searchTemplate)
 
 
@@ -616,13 +634,13 @@ router.get('/page/:page/:type?', function(req, res) {
     }
 
 
-    if ( pageResource.startsWith( "CodeSystem" ) ) {
+    if (pageResource.startsWith("CodeSystem")) {
 
-      getProperties( pageResource ).then( (resource) => {
-        if ( resource.total !== 1 ) {
+      getProperties(pageResource).then((resource) => {
+        if (resource.total !== 1) {
           let outcome = { ...outcomes.ERROR }
-          outcome.issue[0].diagnostics = "Unable to find codesystem: "+pageResource+"."
-          return res.status(400).json( outcome )
+          outcome.issue[0].diagnostics = "Unable to find codesystem: " + pageResource + "."
+          return res.status(400).json(outcome)
         }
         resource = resource.entry[0].resource
         /*
@@ -632,80 +650,80 @@ router.get('/page/:page/:type?', function(req, res) {
         }
         */
 
-        const structure = fhirDefinition.parseCodeSystem( resource )
-        if ( req.params.type === "search" ) {
-          return createSearchTemplate( resource, structure )
+        const structure = fhirDefinition.parseCodeSystem(resource)
+        if (req.params.type === "search") {
+          return createSearchTemplate(resource, structure)
         } else {
-          return createTemplate( resource, structure )
+          return createTemplate(resource, structure)
         }
 
-      } ).catch( err => {
+      }).catch(err => {
         logger.error(err.message)
         logger.error(err.stack)
-        return res.status( err.response.status ).json( err.response.data )
-      } )
+        return res.status(err.response.status).json(err.response.data)
+      })
 
-    } else if ( pageResource.startsWith( "StructureDefinition" ) ) {
+    } else if (pageResource.startsWith("StructureDefinition")) {
 
-      getDefinition( pageResource ).then( (resource) => {
-        if ( allowed !== true ) {
+      getDefinition(pageResource).then((resource) => {
+        if (allowed !== true) {
           // Can't think of a reason to have this level of permissions for
           // StructureDefinitions, but just in case...
-          let objAllowed = req.user.hasPermissionByObject( "read", resource )
-          if ( objAllowed !== true ) {
+          let objAllowed = req.user.hasPermissionByObject("read", resource)
+          if (objAllowed !== true) {
             // But don't allow field level restrictions.  It will complicated the requirements
-            return res.status(401).json( outcomes.DENIED )
+            return res.status(401).json(outcomes.DENIED)
           }
         }
 
-        if ( !resource.hasOwnProperty("snapshot") ) {
+        if (!resource.hasOwnProperty("snapshot")) {
           let outcome = { ...outcomes.ERROR }
           outcome.issue[0].diagnostics = "StructureDefinitions must be saved with a snapshot."
-          return res.status(404).json( outcome )
+          return res.status(404).json(outcome)
         }
 
-        const structure = fhirDefinition.parseStructureDefinition( resource )
-        if ( req.params.type === "search" ) {
-          return createSearchTemplate( resource, structure )
+        const structure = fhirDefinition.parseStructureDefinition(resource)
+        if (req.params.type === "search") {
+          return createSearchTemplate(resource, structure)
         } else {
-          return createTemplate( resource, structure )
+          return createTemplate(resource, structure)
         }
 
-      } ).catch( (err) => {
+      }).catch((err) => {
         logger.error(err.message)
         logger.error(err.stack)
         //return res.status( err.response.status ).json( err.response.data )
-        return res.status( 500 ).json( { error: err.message } )
-      } )
+        return res.status(500).json({ error: err.message })
+      })
 
     } else {
 
       let outcome = { ...outcomes.ERROR }
-      outcome.issue[0].diagnostics = "Unknown resource type for page: "+pageResource+"."
-      return res.status(400).json( outcome )
+      outcome.issue[0].diagnostics = "Unknown resource type for page: " + pageResource + "."
+      return res.status(400).json(outcome)
 
     }
 
-  } ).catch( (err) => {
+  }).catch((err) => {
     logger.error(err.message)
     logger.error(err.stack)
-    return res.status( err.response.status ).json( err.response.data )
-  } )
+    return res.status(err.response.status).json(err.response.data)
+  })
 
-} )
+})
 
-router.get('/questionnaire/:questionnaire', function(req, res) {
-  if ( !req.user ) {
-    return res.status(401).json( outcomes.NOTLOGGEDIN)
+router.get('/questionnaire/:questionnaire', function (req, res) {
+  if (!req.user) {
+    return res.status(401).json(outcomes.NOTLOGGEDIN)
   }
-  let allowed = req.user.hasPermissionByName( "read", "Questionnaire", req.params.questionnaire )
+  let allowed = req.user.hasPermissionByName("read", "Questionnaire", req.params.questionnaire)
   // Limited access to these don't make sense so not allowing it for now
-  if ( allowed !== true ) {
-    return res.status(401).json( outcomes.DENIED )
+  if (allowed !== true) {
+    return res.status(401).json(outcomes.DENIED)
   }
 
 
-  fhirAxios.read( "Questionnaire", req.params.questionnaire ).then ( async (resource) => {
+  fhirAxios.read("Questionnaire", req.params.questionnaire).then(async (resource) => {
 
 
     let vueOutput = '<ihris-questionnaire :edit=\"isEdit\" :view-page="viewPage" :constraints="constraints" url="' + resource.url + '" id="' + resource.id
@@ -717,84 +735,84 @@ router.get('/questionnaire/:questionnaire', function(req, res) {
     let sectionMenu = []
     let templateData = { sectionMenu: {}, hidden: {}, constraints: {} }
 
-    const processConstraints = ( extension, fieldDef ) => {
+    const processConstraints = (extension, fieldDef) => {
       let constraintKeys = []
-      if ( fieldDef && fieldDef.hasOwnProperty("constraint") ) {
-        for( let constraint of fieldDef.constraint ) {
-          if ( constraint.key && constraint.key.startsWith('ihris-') ) {
-            templateData.constraints[ constraint.key ] = constraint
-            constraintKeys.push( constraint.key )
+      if (fieldDef && fieldDef.hasOwnProperty("constraint")) {
+        for (let constraint of fieldDef.constraint) {
+          if (constraint.key && constraint.key.startsWith('ihris-')) {
+            templateData.constraints[constraint.key] = constraint
+            constraintKeys.push(constraint.key)
           }
         }
       }
-      if ( extension ) {
-        let itemConstraints = extension.filter( ext => ext.url === "http://hl7.org/fhir/StructureDefinition/questionnaire-constraint" )
-        for( let itemCon of itemConstraints ) {
+      if (extension) {
+        let itemConstraints = extension.filter(ext => ext.url === "http://hl7.org/fhir/StructureDefinition/questionnaire-constraint")
+        for (let itemCon of itemConstraints) {
           let constraint = {}
           try {
-            let key = itemCon.extension.find( ext => ext.url === "key" ).valueId
-            let severity = itemCon.extension.find( ext => ext.url === "severity" ).valueCode
-            let expression = itemCon.extension.find( ext => ext.url === "expression" ).valueString
-            let human = itemCon.extension.find( ext => ext.url === "human" ).valueString
-            if ( key.startsWith("ihris-") ) {
+            let key = itemCon.extension.find(ext => ext.url === "key").valueId
+            let severity = itemCon.extension.find(ext => ext.url === "severity").valueCode
+            let expression = itemCon.extension.find(ext => ext.url === "expression").valueString
+            let human = itemCon.extension.find(ext => ext.url === "human").valueString
+            if (key.startsWith("ihris-")) {
               constraint = { key, severity, expression, human }
-              templateData.constraints[ constraint.key ] = constraint
-              constraintKeys.push( constraint.key )
+              templateData.constraints[constraint.key] = constraint
+              constraintKeys.push(constraint.key)
             }
-          } catch(err) {
-            logger.error( "Failed to get constraints on "+item.linkId )
-            logger.error( err.message )
+          } catch (err) {
+            logger.error("Failed to get constraints on " + item.linkId)
+            logger.error(err.message)
           }
         }
       }
-      if ( constraintKeys.length > 0 ) {
+      if (constraintKeys.length > 0) {
         return constraintKeys.join(",")
       } else {
         return null
       }
     }
-    const processQuestionnaireItems = async ( items ) => {
+    const processQuestionnaireItems = async (items) => {
       let vueOutput = ""
-      for( let item of items ) {
+      for (let item of items) {
         let displayType
-        if ( item.linkId.includes('#') ) {
+        if (item.linkId.includes('#')) {
           let linkDetails = item.linkId.split('#')
           item.linkId = linkDetails[0]
           displayType = linkDetails[1]
         }
-        if ( item.repeats && !item.readOnly ) {
+        if (item.repeats && !item.readOnly) {
           vueOutput += "<ihris-array :edit=\"isEdit\" path=\"" + item.linkId + "\" label=\""
-            + item.text + "\" max=\"*\" min=\"" + ( item.required ? "1" : "0" ) + "\"><template #default=\"slotProps\">\n"
+            + item.text + "\" max=\"*\" min=\"" + (item.required ? "1" : "0") + "\"><template #default=\"slotProps\">\n"
         }
-        let itemType = fhirDefinition.camelToKebab( item.type )
-        if ( itemType === "group" ) {
-          let label = item.text.split('|',2)
+        let itemType = fhirDefinition.camelToKebab(item.type)
+        if (itemType === "group") {
+          let label = item.text.split('|', 2)
           vueOutput += '<ihris-questionnaire-group :edit=\"isEdit\" path="' + item.linkId + '" label="' + label[0] + '"'
-          if ( label.length === 2 ) {
+          if (label.length === 2) {
             vueOutput += ' description="' + label[1] + '"'
           }
-          if ( item.extension ) {
-            let constraintList = processConstraints( item.extension )
-            if ( constraintList ) {
+          if (item.extension) {
+            let constraintList = processConstraints(item.extension)
+            if (constraintList) {
               vueOutput += ' constraints="' + constraintList + '"'
             }
           }
           vueOutput += ">\n\n"
-          vueOutput += await processQuestionnaireItems( item.item )
+          vueOutput += await processQuestionnaireItems(item.item)
           vueOutput += "</ihris-questionnaire-group>\n"
-        } else if ( item.readOnly ) {
+        } else if (item.readOnly) {
           vueOutput += "<ihris-hidden path=\"" + item.linkId + "\" label=\""
             + item.text + "\""
-          if ( item.answerOption[0].initialSelected ) {
-            let answerTypes = Object.keys( item.answerOption[0] )
-            for( let answerType of answerTypes ) {
-              if ( answerType.startsWith("value") ) {
+          if (item.answerOption[0].initialSelected) {
+            let answerTypes = Object.keys(item.answerOption[0])
+            for (let answerType of answerTypes) {
+              if (answerType.startsWith("value")) {
                 let answerKey = getUKey()
                 templateData.hidden[answerKey] = item.answerOption[0][answerType]
                 vueOutput += " :hiddenValue='hidden." + answerKey
                   + "' hiddenType='" + answerType.substring(5) + "'"
-                  break
-                }
+                break
+              }
             }
           }
           vueOutput += "></ihris-hidden>\n"
@@ -802,106 +820,109 @@ router.get('/questionnaire/:questionnaire', function(req, res) {
           vueOutput += "<fhir-" + itemType + " :edit=\"isEdit\" path=\"" + item.linkId + "\""
 
           let field
-          const minmax = [ "Date", "DateTime", "Instant", "Time", "Decimal", "Integer", "PositiveInt",
-            "UnsignedInt", "Quantity" ]
-          if ( item.definition ) {
+          const minmax = ["Date", "DateTime", "Instant", "Time", "Decimal", "Integer", "PositiveInt",
+            "UnsignedInt", "Quantity"]
+          if (item.definition) {
             field = await fhirDefinition.getFieldDefinition(item.definition)
-            if ( itemType === "reference" && field && field.type && field.type[0] && field.type[0].targetProfile ) {
-              vueOutput += " targetProfile=\""+field.type[0].targetProfile[0]+"\""
-              let targetResource = await getProfileResource( field.type[0].targetProfile[0] )
-              vueOutput += " targetResource=\""+targetResource+"\""
+            if (itemType === "reference" && field && field.type && field.type[0] && field.type[0].targetProfile) {
+              vueOutput += " targetProfile=\"" + field.type[0].targetProfile[0] + "\""
+              let targetResource = await getProfileResource(field.type[0].targetProfile[0])
+              vueOutput += " targetResource=\"" + targetResource + "\""
             }
-            for( let mm of minmax ) {
-              for( let type of [ "min", "max" ] ) {
-                let attr = type+"Value"+mm
-                if ( field.hasOwnProperty(attr) ) {
-                  if ( field[attr]
-                    && field[attr].value && field[attr].code ) {
-                    vueOutput += " "+attr+"=\""+field[attr].value+field[attr].code+"\""
+            for (let mm of minmax) {
+              for (let type of ["min", "max"]) {
+                let attr = type + "Value" + mm
+                if (field.hasOwnProperty(attr)) {
+                  if (field[attr]
+                    && field[attr].value && field[attr].code) {
+                    vueOutput += " " + attr + "=\"" + field[attr].value + field[attr].code + "\""
                   } else {
-                    vueOutput += " "+attr+"=\""+field[attr]+"\""
+                    vueOutput += " " + attr + "=\"" + field[attr] + "\""
                   }
-                } else if ( nconf.get("defaults:components:"+itemType+":"+attr) ) {
-                  vueOutput += " "+attr+"=\""
-                    +nconf.get("defaults:components:"+itemType+":"+attr)+"\""
+                } else if (nconf.get("defaults:components:" + itemType + ":" + attr)) {
+                  vueOutput += " " + attr + "=\""
+                    + nconf.get("defaults:components:" + itemType + ":" + attr) + "\""
                 }
               }
             }
 
-            if ( !displayType ) {
-              if ( nconf.get("defaults:fields:"+field.id+":type" ) ) {
-                displayType = nconf.get("defaults:fields:"+field.id+":type" )
+            if (!displayType) {
+              if (nconf.get("defaults:fields:" + field.id + ":type")) {
+                displayType = nconf.get("defaults:fields:" + field.id + ":type")
               }
             }
 
-            if ( nconf.get("defaults:fields:"+field.id+":user_filter") ) {
-              let resource = field.id.substring( 0, field.id.indexOf('.') )
+            if (nconf.get("defaults:fields:" + field.id + ":user_filter")) {
+              let resource = field.id.substring(0, field.id.indexOf('.'))
               let regex = "(.+)"
               let replace = "$1"
-              if ( nconf.get("defaults:fields:"+field.id+":user_filter:regex") ) {
-                regex = nconf.get("defaults:fields:"+field.id+":user_filter:regex")
+              if (nconf.get("defaults:fields:" + field.id + ":user_filter:regex")) {
+                regex = nconf.get("defaults:fields:" + field.id + ":user_filter:regex")
               }
-              if ( nconf.get("defaults:fields:"+field.id+":user_filter:replace") ) {
-                replace = nconf.get("defaults:fields:"+field.id+":user_filter:replace")
+              if (nconf.get("defaults:fields:" + field.id + ":user_filter:replace")) {
+                replace = nconf.get("defaults:fields:" + field.id + ":user_filter:replace")
               }
-              if ( nconf.get("defaults:fields:"+field.id+":user_filter:resource") ) {
-                resource = nconf.get("defaults:fields:"+field.id+":user_filter:resource")
+              if (nconf.get("defaults:fields:" + field.id + ":user_filter:resource")) {
+                resource = nconf.get("defaults:fields:" + field.id + ":user_filter:resource")
               }
-              let overrideValue = processUserFilter( req.user, resource, regex, replace )
-              if ( overrideValue ) {
-                vueOutput += " overrideValue=\""+overrideValue+"\""
+              let overrideValue = processUserFilter(req.user, resource, regex, replace)
+              if (overrideValue) {
+                vueOutput += " overrideValue=\"" + overrideValue + "\""
               }
             }
 
-            const field_attrs = [ "initialValue" ]
-            for( let attr of field_attrs ) {
-              if ( nconf.get("defaults:fields:"+field.id+":"+attr) ) {
-                vueOutput += " "+attr+"=\""
-                  +nconf.get("defaults:fields:"+field.id+":"+attr)+"\""
+            const field_attrs = ["initialValue"]
+            for (let attr of field_attrs) {
+              if (nconf.get("defaults:fields:" + field.id + ":" + attr)) {
+                vueOutput += " " + attr + "=\""
+                  + nconf.get("defaults:fields:" + field.id + ":" + attr) + "\""
+
+
+                console.log("vueOutput", vueOutput)
               }
             }
 
           } else {
-            for( let mm of minmax ) {
-              for( let type of [ "min", "max" ] ) {
-                let attr = type+"Value"+mm
-                if ( nconf.get("defaults:components:"+itemType+":"+attr) ) {
-                  vueOutput += " "+attr+"=\""
-                    +nconf.get("defaults:components:"+itemType+":"+attr)+"\""
+            for (let mm of minmax) {
+              for (let type of ["min", "max"]) {
+                let attr = type + "Value" + mm
+                if (nconf.get("defaults:components:" + itemType + ":" + attr)) {
+                  vueOutput += " " + attr + "=\""
+                    + nconf.get("defaults:components:" + itemType + ":" + attr) + "\""
                 }
               }
             }
           }
-          const def_attrs = [ "calendar" ]
-          for( let attr of def_attrs ) {
-            if ( nconf.get("defaults:components:"+itemType+":"+attr) ) {
-              vueOutput += " "+attr+"=\""
-                +nconf.get("defaults:components:"+itemType+":"+attr)+"\""
+          const def_attrs = ["calendar"]
+          for (let attr of def_attrs) {
+            if (nconf.get("defaults:components:" + itemType + ":" + attr)) {
+              vueOutput += " " + attr + "=\""
+                + nconf.get("defaults:components:" + itemType + ":" + attr) + "\""
             }
           }
 
-          if ( item.extension || (field && field.hasOwnProperty("constraint") ) ) {
-            let constraintList = processConstraints( item.extension, field )
-            if ( constraintList ) {
+          if (item.extension || (field && field.hasOwnProperty("constraint"))) {
+            let constraintList = processConstraints(item.extension, field)
+            if (constraintList) {
               vueOutput += ' constraints="' + constraintList + '"'
             }
           }
 
-          if ( item.hasOwnProperty("text") ) {
-            vueOutput += " label=\""+ item.text + "\""
+          if (item.hasOwnProperty("text")) {
+            vueOutput += " label=\"" + item.text + "\""
           }
-          if ( item.hasOwnProperty("answerValueSet") ) {
-            vueOutput += " binding=\""+ item.answerValueSet + "\""
+          if (item.hasOwnProperty("answerValueSet")) {
+            vueOutput += " binding=\"" + item.answerValueSet + "\""
           }
-          if ( displayType ) {
-            vueOutput += " displayType=\""+ displayType +"\""
+          if (displayType) {
+            vueOutput += " displayType=\"" + displayType + "\""
           }
-          if ( item.required ) {
+          if (item.required) {
             vueOutput += ' min="1"'
           } else {
             vueOutput += ' min="0"'
           }
-          if ( item.repeats ) {
+          if (item.repeats) {
             vueOutput += ' max="*"'
           } else {
             vueOutput += ' max="1"'
@@ -914,44 +935,44 @@ router.get('/questionnaire/:questionnaire', function(req, res) {
             }
           }
           */
-          vueOutput += "></fhir-" + itemType +">\n"
+          vueOutput += "></fhir-" + itemType + ">\n"
 
         }
-        if ( item.repeats && !item.readOnly ) {
+        if (item.repeats && !item.readOnly) {
           vueOutput += "</template></ihris-array>\n"
         }
       }
       return vueOutput
     }
 
-    for ( let item of resource.item ) {
-      if ( item.type === "group" ) {
+    for (let item of resource.item) {
+      if (item.type === "group") {
         let md5sum = crypto.createHash('md5')
         md5sum.update(item.text)
         md5sum.update(Math.random().toString(36).substring(2))
         let sectionId = md5sum.digest('hex')
 
-        let label = item.text.split('|',2)
+        let label = item.text.split('|', 2)
         vueOutput += '<ihris-questionnaire-section id="' + sectionId + '" path="' + item.linkId + '" label="' + label[0] + '"'
-        if ( label.length === 2 ) {
+        if (label.length === 2) {
           vueOutput += ' description="' + label[1] + '"'
         }
-        if ( item.extension ) {
-          let constraintList = processConstraints( item.extension )
-          if ( constraintList ) {
-            vueOutput += ' constraints="' + constraintList +'"'
+        if (item.extension) {
+          let constraintList = processConstraints(item.extension)
+          if (constraintList) {
+            vueOutput += ' constraints="' + constraintList + '"'
           }
         }
-        sectionMenu.push( { title: label[0], desc: label[1] || "", id: sectionId } )
+        sectionMenu.push({ title: label[0], desc: label[1] || "", id: sectionId })
         vueOutput += ">\n"
-        vueOutput += await processQuestionnaireItems( item.item )
+        vueOutput += await processQuestionnaireItems(item.item)
         vueOutput += "</ihris-questionnaire-section>\n"
       } else {
         logger.warn("Invalid entry for questionnaire.  All top level items must be type group.")
       }
     }
 
-    if ( sectionMenu.length < 2 ) {
+    if (sectionMenu.length < 2) {
       vueOutput = vueOutput.replace("__SECTIONMENU__", "")
     } else {
       vueOutput = vueOutput.replace("__SECTIONMENU__", " :section-menu='sectionMenu'")
@@ -962,16 +983,16 @@ router.get('/questionnaire/:questionnaire', function(req, res) {
     logger.debug(vueOutput)
     return res.status(200).json({ template: vueOutput, data: templateData })
 
-  } ).catch( (err) => {
+  }).catch((err) => {
     logger.error(err.message)
     logger.error(err.stack)
     let outcome = { ...outcomes.ERROR }
-    outcome.issue[0].diagnostics = "Unable to read questionnaire: "+req.params.questionnaire+"."
-    return res.status(400).json( outcome )
+    outcome.issue[0].diagnostics = "Unable to read questionnaire: " + req.params.questionnaire + "."
+    return res.status(400).json(outcome)
     //return res.status( err.response.status ).json( err.response.data )
-  } )
+  })
 
-} )
+})
 
 router.get('/report/es/:report', (req, res) => {
   let report = req.params.report
@@ -993,23 +1014,23 @@ router.get('/report/es/:report', (req, res) => {
       displayCheckbox: false,
       locationBasedConstraint: false
     }
-    for(let extension of resource.extension) {
+    for (let extension of resource.extension) {
       let reportElements = extension.extension.filter((ext) => {
-        if(extension.url === 'http://ihris.org/fhir/StructureDefinition/iHRISReportDetails' && ext.url === 'label') {
+        if (extension.url === 'http://ihris.org/fhir/StructureDefinition/iHRISReportDetails' && ext.url === 'label') {
           reportName = ext.valueString
         }
-        if(extension.url === 'http://ihris.org/fhir/StructureDefinition/iHRISReportDetails' && ext.url === 'name') {
+        if (extension.url === 'http://ihris.org/fhir/StructureDefinition/iHRISReportDetails' && ext.url === 'name') {
           indexName = ext.valueString
         }
-        if(extension.url === 'http://ihris.org/fhir/StructureDefinition/iHRISReportDetails' && ext.url === 'displayCheckbox') {
+        if (extension.url === 'http://ihris.org/fhir/StructureDefinition/iHRISReportDetails' && ext.url === 'displayCheckbox') {
           reportData.displayCheckbox = ext.valueBoolean
         }
-        if(extension.url === 'http://ihris.org/fhir/StructureDefinition/iHRISReportDetails' && ext.url === 'locationBasedConstraint') {
+        if (extension.url === 'http://ihris.org/fhir/StructureDefinition/iHRISReportDetails' && ext.url === 'locationBasedConstraint') {
           reportData.locationBasedConstraint = ext.valueBoolean
         }
         return ext.url === "http://ihris.org/fhir/StructureDefinition/iHRISReportElement"
       })
-      for(let element of reportElements) {
+      for (let element of reportElements) {
         let displayName, esField
         let label = element.extension.find((ext) => {
           return ext.url === 'label'
@@ -1017,18 +1038,18 @@ router.get('/report/es/:report', (req, res) => {
         let display = element.extension.find((ext) => {
           return ext.url === 'display'
         })
-        if(!display) {
+        if (!display) {
           continue;
         }
         let filter = element.extension.find((ext) => {
           return ext.url === 'filter' && ext.valueBoolean === true
         })
-        if(filter) {
+        if (filter) {
           let dropDownFilter = element.extension.find((ext) => {
             return ext.url === 'dropDownFilter' && ext.valueBoolean === true
           })
           let isDropDown = false
-          if(dropDownFilter) {
+          if (dropDownFilter) {
             isDropDown = true
           }
           reportData.filters.push({
@@ -1054,9 +1075,9 @@ router.get('/report/es/:report', (req, res) => {
     };
     axios(options).then((mappings) => {
       reportData.mappings = mappings.data[indexName]
-      for(index in reportData.filters) {
+      for (index in reportData.filters) {
         let field = reportData.filters[index].field
-        if(!mappings.data[indexName].mappings.properties[field]) {
+        if (!mappings.data[indexName].mappings.properties[field]) {
           logger.error('Field ' + field + 'not found on elasticsearch mapping')
           continue
         }
@@ -1066,7 +1087,7 @@ router.get('/report/es/:report', (req, res) => {
       reportData.indexName = indexName
       let template = `<ihris-es-report :key="$route.params.report" page="${req.params.report}" label="${reportName}" :reportData="reportData" :terms="terms" :termsConditions="termsConditions" :hideCheckboxes="hideCheckboxes" :hideLabel="hideLabel" >`
       for (let filter of reportData.filters) {
-        if(filter.isDropDown) {
+        if (filter.isDropDown) {
           template += `<ihris-es-search-term v-on:termChange="searchData" label="${filter.display}" expression="${filter.field}" isDropDown="${filter.isDropDown}" :reportData="reportData" :hideFilters="hideFilters"></ihris-es-search-term>\n`
         } else {
           template += `<ihris-es-search-term v-on:termChange="searchData" label="${filter.display}" expression="${filter.field}" :reportData="reportData" :hideFilters="hideFilters"></ihris-es-search-term>\n`
@@ -1118,7 +1139,7 @@ router.get('/report/:report', function (req, res) {
       } else {
         hiddenFields.resourceType = resource.type
       }
-      if(resource.link && Array.isArray(resource.link)) {
+      if (resource.link && Array.isArray(resource.link)) {
         for (let link of resource.link) {
           hiddenFields.fields.push([link.path, link.path])
           for (let target of link.target) {
@@ -1153,7 +1174,7 @@ router.get('/report/:report', function (req, res) {
           fields: []
         }
         let thisFilter = extensions.extension.filter(ext => ext.url === "filter").map(ext => ext.valueString.split('|'))
-        if(thisFilter.length > 0) {
+        if (thisFilter.length > 0) {
           filters = filters.concat(thisFilter)
         }
         for (let relData of extensions.extension) {

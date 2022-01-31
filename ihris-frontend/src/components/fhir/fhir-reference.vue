@@ -1,7 +1,7 @@
 <template>
   <ihris-element :edit="edit" :loading="loading">
     <template #form>
-      <v-menu 
+      <v-menu
         v-if="displayType == 'tree'"
         ref="menu"
         v-model="menu"
@@ -10,7 +10,7 @@
         offset-y
         min-width="290px"
         max-height="500px"
-        >
+      >
         <template v-slot:activator="{ on }">
           <v-text-field
             v-model="displayValue"
@@ -22,11 +22,19 @@
             :rules="rules"
             :error-messages="errors"
             :loading="loading"
-            dense>
-            <template #label>{{display}} <span v-if="required" class="red--text font-weight-bold">*</span></template>
+            dense
+          >
+            <template #label
+              >{{ display }}
+              <span v-if="required" class="red--text font-weight-bold"
+                >*</span
+              ></template
+            >
           </v-text-field>
         </template>
-        <v-card v-if="!((disabled) || (preset && $route.name === 'resource_add'))">
+        <v-card
+          v-if="!(disabled || (preset && $route.name === 'resource_add'))"
+        >
           <v-treeview
             :active.sync="active"
             :items="items"
@@ -37,7 +45,7 @@
             :multiple-active="false"
             selection-type="independent"
             :loading="loading"
-            ></v-treeview>
+          ></v-treeview>
         </v-card>
       </v-menu>
       <v-autocomplete
@@ -55,35 +63,58 @@
         dense
         placeholder="Start typing for selection"
         :rules="rules"
-        :disabled="(disabled) || (preset && $route.name === 'resource_add')"
+        :disabled="disabled || (preset && $route.name === 'resource_add')"
         :error-messages="errors"
         @change="errors = []"
       >
-        <template #label>{{display}} <span v-if="required" class="red--text font-weight-bold">*</span></template>
+        <template #label
+          >{{ display }}
+          <span v-if="required" class="red--text font-weight-bold"
+            >*</span
+          ></template
+        >
       </v-autocomplete>
     </template>
     <template #header>
-      {{display}}
+      {{ display }}
     </template>
     <template #value>
-      {{displayValue}}
+      {{ displayValue }}
     </template>
   </ihris-element>
 </template>
 
 <script>
-import IhrisElement from "../ihris/ihris-element.vue"
+import IhrisElement from "../ihris/ihris-element.vue";
 
-const querystring = require('querystring')
-const fhirurl = "http://hl7.org/fhir/StructureDefinition/"
+const querystring = require("querystring");
+const fhirurl = "http://hl7.org/fhir/StructureDefinition/";
 export default {
   name: "fhir-reference",
-  props: ["field","label","sliceName","targetProfile","targetResource","min","max","base-min","base-max",
-    "slotProps","path","sub-fields","edit","readOnlyIfSet","constraints", "displayType", "initialValue", "overrideValue"],
+  props: [
+    "field",
+    "label",
+    "sliceName",
+    "targetProfile",
+    "targetResource",
+    "min",
+    "max",
+    "base-min",
+    "base-max",
+    "slotProps",
+    "path",
+    "sub-fields",
+    "edit",
+    "readOnlyIfSet",
+    "constraints",
+    "displayType",
+    "initialValue",
+    "overrideValue",
+  ],
   components: {
-    IhrisElement
+    IhrisElement,
   },
-  data: function() {
+  data: function () {
     return {
       source: { path: "", data: {} },
       value: { reference: "" },
@@ -104,267 +135,297 @@ export default {
       open: [],
       treeLookup: {},
       allAllowed: true,
-      isFacility: false
-    }
+      isFacility: false,
+    };
   },
-  created: function() {
-    this.setupData()
+  created: function () {
+    this.setupData();
   },
   watch: {
     slotProps: {
       handler() {
         //console.log("WATCH REFERENCE",this.path,this.slotProps)
-        if ( !this.lockWatch ) {
-          this.setupData()
+        if (!this.lockWatch) {
+          this.setupData();
         }
       },
-      deep: true
+      deep: true,
     },
     search: function (val) {
-      if ( !this.awaitingSearch) {
-        setTimeout( () => {
-          val && val.length > 1 && this.querySelections( this.search )
-          this.awaitingSearch = false
-        }, 500 )
+      if (!this.awaitingSearch) {
+        setTimeout(() => {
+          val && val.length > 1 && this.querySelections(this.search);
+          this.awaitingSearch = false;
+        }, 500);
       }
-      this.awaitingSearch = true
+      this.awaitingSearch = true;
     },
-    select: function(val) {
-      this.value.reference = val
-      this.getDisplay()
+    select: function (val) {
+      this.value.reference = val;
+      this.getDisplay();
     },
-    active: function() {
-      if ( this.active.length ) {
-        this.select = this.active[0]
-        this.displayValue = this.treeLookup[ this.select ]
+    active: function () {
+      if (this.active.length) {
+        this.select = this.active[0];
+        this.displayValue = this.treeLookup[this.select];
       } else {
-        this.select = undefined
-        this.displayValue = ""
+        this.select = undefined;
+        this.displayValue = "";
       }
-      this.menu = false
-    }
+      this.menu = false;
+    },
   },
   methods: {
-    setupData: function() {
-      if ( this.targetProfile && this.targetResource ) {
-        if ( this.targetProfile.replace( fhirurl, "" ) === this.targetResource ) {
-          this.allAllowed = true
+    setupData: function () {
+      if (this.targetProfile && this.targetResource) {
+        if (this.targetProfile.replace(fhirurl, "") === this.targetResource) {
+          this.allAllowed = true;
         } else {
-          this.allAllowed = false
+          this.allAllowed = false;
         }
-        this.resource = this.targetResource
+        this.resource = this.targetResource;
       }
-      if ( this.displayType === "tree" ) {
-        this.setupTreeItems()
+      if (this.displayType === "tree") {
+        this.setupTreeItems();
       }
-      if ( this.slotProps && this.slotProps.source ) {
-        this.source = { path: this.slotProps.source.path+"."+this.field, data: {} }
-        if ( this.slotProps.source.fromArray ) {
-          this.source.data = this.slotProps.source.data
+      if (this.slotProps && this.slotProps.source) {
+        this.source = {
+          path: this.slotProps.source.path + "." + this.field,
+          data: {},
+        };
+        if (this.slotProps.source.fromArray) {
+          this.source.data = this.slotProps.source.data;
         } else {
-          let expression = this.$fhirutils.pathFieldExpression( this.field )
-          let results = this.$fhirpath.evaluate( this.slotProps.source.data, expression )
-          this.source.data = results[0]
+          let expression = this.$fhirutils.pathFieldExpression(this.field);
+          let results = this.$fhirpath.evaluate(
+            this.slotProps.source.data,
+            expression
+          );
+          this.source.data = results[0];
         }
-        if( this.source.data ) {
-          this.preset = true
-          this.select = this.source.data.reference
-          this.lockWatch = true
+        if (this.source.data) {
+          this.preset = true;
+          this.select = this.source.data.reference;
+          this.lockWatch = true;
         }
       }
-      this.disabled = this.readOnlyIfSet && this.preset
+      this.disabled = this.readOnlyIfSet && this.preset;
     },
-    setupTreeItems: async function() {
-      let treetop = this.initialValue
-      if ( this.overrideValue ) {
-        treetop = this.overrideValue
-      }
-      this.loading = true
-      let params = {} 
-      if ( treetop ) {
-        await this.checkFacility(treetop)
-        if (this.isFacility){
-          params = {"_id": treetop}
-        } else {
-          params = { "partof": treetop }
-        } 
-      } else {
-        params = { "partof:missing": true }
-      }
-      params._count = 500
-      let url = "/fhir/"+this.resource+"?"+querystring.stringify( params )
-      this.items = []
-      this.addItems( url, this.items )
+    setupTreeItems: async function () {
+      let treetop = this.initialValue;
 
+      console.log("TreeTop", treetop);
+      if (this.overrideValue) {
+        treetop = this.overrideValue;
+      }
+      this.loading = true;
+      let params = {};
+      if (treetop) {
+        await this.checkFacility(treetop);
+        if (this.isFacility) {
+          params = { _id: treetop };
+        } else {
+          params = { partof: treetop };
+        }
+      } else {
+        params = { "partof:missing": true };
+      }
+      params._count = 500;
+      let url = "/fhir/" + this.resource + "?" + querystring.stringify(params);
+      this.items = [];
+      this.addItems(url, this.items);
     },
-    checkFacility: function(id) {
-      let params = { "_id": id, "_profile":"http://ihris.org/fhir/StructureDefinition/ihris-facility" ,"_summary": "count" }
-      let url = "/fhir/"+this.resource+"?"+querystring.stringify( params )
-      return new Promise( resolve => {
-        fetch( url ).then( response => {
-          if ( response.ok ) {
-            response.json().then( data => {
-              if ( data.total && data.total == 1 ) {
-                this.isFacility = true
-              }
-              resolve()
-            } ).catch( err => {
-              console.log("failed to check facility for",url,err)
-              resolve()
-            } )
-          } else {
-            console.log("failed to check facility for",url,response.status)
-            resolve()
-          }
-        } ).catch( err => {
-          console.log("failed to check facility for",url,err)
-          resolve()
-        } )
-      } )
-    },
-    checkChildren: function(item) {
-      let params = { "partof": item.id, "_summary": "count" }
-      let url = "/fhir/"+this.resource+"?"+querystring.stringify( params )
-      return new Promise( resolve => {
-        fetch( url ).then( response => {
-          if ( response.ok ) {
-            response.json().then( data => {
-              if ( data.total && data.total > 0 ) {
-                item.children = []
-              }
-              resolve()
-            } ).catch( err => {
-              console.log("failed to check children for",url,err)
-              resolve()
-            } )
-          } else {
-            console.log("failed to check children for",url,response.status)
-            resolve()
-          }
-        } ).catch( err => {
-          console.log("failed to check children for",url,err)
-          resolve()
-        } )
-      } )
-    },
-    addItems: function(url, items) {
-      fetch( url ).then( response => {
-        if ( response.ok ) {
-          response.json().then( async data => {
-            if ( data.entry && data.entry.length > 0 ) {
-              for( let entry of data.entry ) {
-                let locked = this.allAllowed ? false : !entry.resource.meta.profile.includes( this.targetProfile )
-                let item = { 
-                  id: entry.resource.resourceType+"/"+entry.resource.id,
-                  name: entry.resource.name,
-                  locked: locked
-                }
-                await this.checkChildren( item )
-                this.treeLookup[ item.id ] = item.name
-                items.push( item )
-              }
-            }
-            if ( data.link ) {
-              let next = data.link.find( link => link.relation === "next" )
-              if ( next ) {
-                this.addItems( next.url, items )
-              } else {
-                this.loading = false
-              }
+    checkFacility: function (id) {
+      let params = {
+        _id: id,
+        _profile: "http://ihris.org/fhir/StructureDefinition/ihris-facility",
+        _summary: "count",
+      };
+      let url = "/fhir/" + this.resource + "?" + querystring.stringify(params);
+      return new Promise((resolve) => {
+        fetch(url)
+          .then((response) => {
+            if (response.ok) {
+              response
+                .json()
+                .then((data) => {
+                  if (data.total && data.total == 1) {
+                    this.isFacility = true;
+                  }
+                  resolve();
+                })
+                .catch((err) => {
+                  console.log("failed to check facility for", url, err);
+                  resolve();
+                });
             } else {
-              this.loading = false
+              console.log("failed to check facility for", url, response.status);
+              resolve();
             }
-          } ).catch( err => {
-            console.log("Failed to add items for",url,err)
-            this.loading = false
-          } )
-        } else {
-          console.log("Failed to add items for",url,response.status)
-          this.loading = false
-        }
-      } ).catch( err => {
-        console.log("Failed to add items for",url,err)
-        this.loading = false
-      } )
+          })
+          .catch((err) => {
+            console.log("failed to check facility for", url, err);
+            resolve();
+          });
+      });
     },
-    fetchChildren: function(item) {
-      let params = {}
-      params = { "partof": item.id, _count: 500 }
-      let url = "/fhir/"+this.resource+"?"+querystring.stringify( params )
-      this.loading = true
-      this.addItems( url, item.children )
-      return new Promise( resolve => {
-        let count = 0
-        const checkLoading = () => {
-          if ( !this.loading || count++ > 100) {
-            resolve()
+    checkChildren: function (item) {
+      let params = { partof: item.id, _summary: "count" };
+      let url = "/fhir/" + this.resource + "?" + querystring.stringify(params);
+      return new Promise((resolve) => {
+        fetch(url)
+          .then((response) => {
+            if (response.ok) {
+              response
+                .json()
+                .then((data) => {
+                  if (data.total && data.total > 0) {
+                    item.children = [];
+                  }
+                  resolve();
+                })
+                .catch((err) => {
+                  console.log("failed to check children for", url, err);
+                  resolve();
+                });
+            } else {
+              console.log("failed to check children for", url, response.status);
+              resolve();
+            }
+          })
+          .catch((err) => {
+            console.log("failed to check children for", url, err);
+            resolve();
+          });
+      });
+    },
+    addItems: function (url, items) {
+      fetch(url)
+        .then((response) => {
+          if (response.ok) {
+            response
+              .json()
+              .then(async (data) => {
+                if (data.entry && data.entry.length > 0) {
+                  for (let entry of data.entry) {
+                    let locked = this.allAllowed
+                      ? false
+                      : !entry.resource.meta.profile.includes(
+                          this.targetProfile
+                        );
+                    let item = {
+                      id: entry.resource.resourceType + "/" + entry.resource.id,
+                      name: entry.resource.name,
+                      locked: locked,
+                    };
+                    await this.checkChildren(item);
+                    this.treeLookup[item.id] = item.name;
+                    items.push(item);
+                  }
+                }
+                if (data.link) {
+                  let next = data.link.find((link) => link.relation === "next");
+                  if (next) {
+                    this.addItems(next.url, items);
+                  } else {
+                    this.loading = false;
+                  }
+                } else {
+                  this.loading = false;
+                }
+              })
+              .catch((err) => {
+                console.log("Failed to add items for", url, err);
+                this.loading = false;
+              });
           } else {
-            setTimeout( checkLoading, 200 )
+            console.log("Failed to add items for", url, response.status);
+            this.loading = false;
           }
-        }
-        checkLoading()
-      } )
+        })
+        .catch((err) => {
+          console.log("Failed to add items for", url, err);
+          this.loading = false;
+        });
     },
-    querySelections: function( val ) {
-      this.loading = true
-      let params = { "name:contains": val }
-      if ( !this.targetProfile.endsWith( this.resource ) ) {
-        params._profile = this.targetProfile
+    fetchChildren: function (item) {
+      let params = {};
+      params = { partof: item.id, _count: 500 };
+      let url = "/fhir/" + this.resource + "?" + querystring.stringify(params);
+      this.loading = true;
+      this.addItems(url, item.children);
+      return new Promise((resolve) => {
+        let count = 0;
+        const checkLoading = () => {
+          if (!this.loading || count++ > 100) {
+            resolve();
+          } else {
+            setTimeout(checkLoading, 200);
+          }
+        };
+        checkLoading();
+      });
+    },
+    querySelections: function (val) {
+      this.loading = true;
+      let params = { "name:contains": val };
+      if (!this.targetProfile.endsWith(this.resource)) {
+        params._profile = this.targetProfile;
       }
-      let url = "/fhir/"+this.resource+"?"+querystring.stringify( params )
-      fetch( url ).then( response => {
-        if ( response.ok ) {
-          response.json().then( async (data) => {
-            this.items = []
-            if ( data.entry && data.entry.length ) {
-              for( let entry of data.entry ) {
-                let ref = entry.resource.resourceType+"/"+entry.resource.id
-                let item = { value: ref }
-                item.text = await this.$fhirutils.resourceLookup( ref )
-                this.items.push( item )
+      let url = "/fhir/" + this.resource + "?" + querystring.stringify(params);
+      fetch(url).then((response) => {
+        if (response.ok) {
+          response.json().then(async (data) => {
+            this.items = [];
+            if (data.entry && data.entry.length) {
+              for (let entry of data.entry) {
+                let ref = entry.resource.resourceType + "/" + entry.resource.id;
+                let item = { value: ref };
+                item.text = await this.$fhirutils.resourceLookup(ref);
+                this.items.push(item);
               }
             }
-            this.loading = false
-          } )
+            this.loading = false;
+          });
         } else {
-          console.log("Failed to retrieve",this.resource)
-          this.loading = false
+          console.log("Failed to retrieve", this.resource);
+          this.loading = false;
         }
-      } )
+      });
     },
-    getDisplay: function() {
-      if ( (!this.edit || this.preset) && this.value && this.value.reference ) {
-        this.loading = true
-        this.$fhirutils.resourceLookup( this.value.reference ).then( display => {
-          this.displayValue = display
-          if ( this.displayType !== "tree" ) {
-            this.items.push( {text: display, value: this.value.reference} )
+    getDisplay: function () {
+      if ((!this.edit || this.preset) && this.value && this.value.reference) {
+        this.loading = true;
+        this.$fhirutils.resourceLookup(this.value.reference).then((display) => {
+          this.displayValue = display;
+          if (this.displayType !== "tree") {
+            this.items.push({ text: display, value: this.value.reference });
           }
-          this.loading = false
-        } )
+          this.loading = false;
+        });
       }
-    }
+    },
   },
   computed: {
-    index: function() {
-      if ( this.slotProps ) return this.slotProps.input
-      else return undefined
+    index: function () {
+      if (this.slotProps) return this.slotProps.input;
+      else return undefined;
     },
-    display: function() {
-      if ( this.slotProps && this.slotProps.input) return this.slotProps.input.label
-      else return this.label
+    display: function () {
+      if (this.slotProps && this.slotProps.input)
+        return this.slotProps.input.label;
+      else return this.label;
     },
-    required: function() {
-      return (this.index || 0) < this.min
+    required: function () {
+      return (this.index || 0) < this.min;
     },
-    rules: function() {
-      if ( this.required ) {
-        return [ v => !!v || this.display+" is required" ]
+    rules: function () {
+      if (this.required) {
+        return [(v) => !!v || this.display + " is required"];
       } else {
-        return []
+        return [];
       }
-    }
-  }
-
-}
+    },
+  },
+};
 </script>
