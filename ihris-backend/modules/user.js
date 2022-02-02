@@ -24,30 +24,22 @@ const user = {
     return new Promise((resolve, reject) => {
       fhirAxios.search("Person", query).then(async (response) => {
         if (response.total === 0) {
-          console.log("No users found", response.total)
           resolve(false)
         } else if (response.total > 1) {
-          console.log("too many users", response.total)
           logger.error("Too many users found for " + JSON.stringify(query))
           resolve(false)
         } else {
           let userObj = new User(response.entry[0].resource)
-          console.log("found him", userObj)
-
           await userObj.updatePermissions()
           resolve(userObj)
         }
       }).catch((err) => {
-
-        console.log("error found while looking for user",err)
-
         console.error(err)
         reject(err)
       })
     })
   },
   lookupByEmail: (email) => {
-    console.log("email", email)
     return user.lookup({ telecom: "email|" + email })
   },
   lookupByProvider: (provider, id) => {

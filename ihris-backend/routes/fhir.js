@@ -51,8 +51,6 @@ router.get("/:resource/:id?", (req, res, next) => {
         }
       }
     }).catch((err) => {
-
-      console.log("eccccccccccccccccccccccccccccccccccccccc",err)
       /* return response from FHIR server */
       //return res.status( err.response.status ).json( err.response.data )
       /* for custom responses */
