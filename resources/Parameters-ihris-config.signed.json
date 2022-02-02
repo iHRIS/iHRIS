@@ -16,11 +16,11 @@
             "code": "1.2.840.10065.1.12.1.14"
           }
         ],
-        "when": "2022-01-12T19:13:23.804Z",
+        "when": "2022-02-02T11:05:31.704Z",
         "who": {
           "reference": "http://ihris.org/fhir/Organization/ihris"
         },
-        "data": "nFxE1+sm8MyY61ItRfiGoI6NLMyjAUQ/UlC5ci4p7XIRwRiFIEzM+/LqB1l3IcWVClSWfeeaXkYMwJMNBThVfOsPYhbSo0R1s/UNKUPNmy/8zLUUiSOyBFxy1i2byFpqA9DRSHfoTpGCuRKAqYvHGRavkhFGkHfvT85+seInWfU="
+        "data": "QY0cs6vs1sWZmJTTyP5jZbFxRynxOUNibMYfbZYiak5L9Nfag7+6xQ99K/qbD3LjG2kAkRnM6NuHYdKD8SG64rT6Bwgw0kPC7uOhcvJj+U0zCRoNj7Zx7ZsPLMWIz+lon49ypALStpX3hoMsxq386vjzEthnbg3AIeDODRXEBxI="
       }
     },
     {
@@ -397,6 +397,10 @@
         {
           "name": "defaults:fields:Practitioner.extension:residence.value[x]:valueReference:type",
           "valueString": "tree"
+        },
+        {
+          "name": "defaults:fields:Practitioner.extension:residence.value[x]:valueReference:initialValue",
+          "valueString": "Location/UG"
         },
         {
           "name": "defaults:fields:Location.partOf:type",

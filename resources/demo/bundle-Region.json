@@ -10,11 +10,11 @@
             "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
           ]
         },
-        "id": "TF.W",
+        "id": "UG.W",
         "name": "West",
         "status": "active",
         "partOf": {
-          "reference": "Location/TF"
+          "reference": "Location/UG"
         },
         "type": [
           {
@@ -39,7 +39,7 @@
       },
       "request": {
         "method": "PUT",
-        "url": "Location/TF.W"
+        "url": "Location/UG.W"
       }
     },
     {
@@ -50,11 +50,11 @@
             "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
           ]
         },
-        "id": "TF.S",
+        "id": "UG.S",
         "name": "South",
         "status": "active",
         "partOf": {
-          "reference": "Location/TF"
+          "reference": "Location/UG"
         },
         "type": [
           {
@@ -79,7 +79,7 @@
       },
       "request": {
         "method": "PUT",
-        "url": "Location/TF.S"
+        "url": "Location/UG.S"
       }
     },
     {
@@ -90,11 +90,11 @@
             "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
           ]
         },
-        "id": "TF.CC",
+        "id": "UG.CC",
         "name": "Capital City",
         "status": "active",
         "partOf": {
-          "reference": "Location/TF"
+          "reference": "Location/UG"
         },
         "type": [
           {
@@ -119,7 +119,7 @@
       },
       "request": {
         "method": "PUT",
-        "url": "Location/TF.CC"
+        "url": "Location/UG.CC"
       }
     },
     {
@@ -130,11 +130,11 @@
             "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
           ]
         },
-        "id": "TF.E",
+        "id": "UG.E",
         "name": "East",
         "status": "active",
         "partOf": {
-          "reference": "Location/TF"
+          "reference": "Location/UG"
         },
         "type": [
           {
@@ -159,7 +159,7 @@
       },
       "request": {
         "method": "PUT",
-        "url": "Location/TF.E"
+        "url": "Location/UG.E"
       }
     },
     {
@@ -170,11 +170,11 @@
             "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
           ]
         },
-        "id": "TF.N",
+        "id": "UG.N",
         "name": "North",
         "status": "active",
         "partOf": {
-          "reference": "Location/TF"
+          "reference": "Location/UG"
         },
         "type": [
           {
@@ -199,7 +199,7 @@
       },
       "request": {
         "method": "PUT",
-        "url": "Location/TF.N"
+        "url": "Location/UG.N"
       }
     }
   ]

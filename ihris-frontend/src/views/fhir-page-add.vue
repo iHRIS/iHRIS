@@ -58,7 +58,7 @@ export default {
                 "ihris-secondary": () => import(/* webpackChunkName: "fhir-primary" */ "@/components/ihris/ihris-secondary" ),
                 "ihris-array": () => import(/* webpackChunkName: "fhir-primary" */ "@/components/ihris/ihris-array" ),
                 "fhir-extension": () => import(/* webpackChunkName: "fhir-primary" */ "@/components/fhir/fhir-extension" ),
-                // "fhir-reference": () => import(/* webpackChunkName: "fhir-secondary" */ "@/components/fhir/fhir-reference" ),
+                "fhir-reference": () => import(/* webpackChunkName: "fhir-secondary" */ "@/components/fhir/fhir-reference" ),
                 "fhir-backbone-element": () => import(/* webpackChunkName: "fhir-secondary" */ "@/components/fhir/fhir-backbone-element" ),
                 "fhir-string": () => import(/* webpackChunkName: "fhir-primary" */ "@/components/fhir/fhir-string" ),
                 "fhir-attachment": () => import(/* webpackChunkName: "fhir-secondary" */ "@/components/fhir/fhir-attachment" ),

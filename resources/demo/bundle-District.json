@@ -10,11 +10,11 @@
             "http://ihris.org/fhir/StructureDefinition/ihris-jurisdiction"
           ]
         },
-        "id": "TF.CC.CAP",
+        "id": "UG.CC.CAP",
         "name": "Capital",
         "status": "active",
         "partOf": {
-          "reference": "Location/TF.CC"
+          "reference": "Location/UG.CC"
         },
         "type": [
           {
@@ -39,7 +39,7 @@
       },
       "request": {
         "method": "PUT",
-        "url": "Location/TF.CC.CAP"
+        "url": "Location/UG.CC.CAP"
       }
     },
     {
@@ -50,11 +50,11 @@
             "http://ihris.org/fhir/StructureDefinition/ihris-jurisdiction"
           ]
         },
-        "id": "TF.E.KAH",
+        "id": "UG.E.KAH",
         "name": "Kahini",
         "status": "active",
         "partOf": {
-          "reference": "Location/TF.E"
+          "reference": "Location/UG.E"
         },
         "type": [
           {
@@ -79,7 +79,7 @@
       },
       "request": {
         "method": "PUT",
-        "url": "Location/TF.E.KAH"
+        "url": "Location/UG.E.KAH"
       }
     },
     {
@@ -90,11 +90,11 @@
             "http://ihris.org/fhir/StructureDefinition/ihris-jurisdiction"
           ]
         },
-        "id": "TF.W.RSN",
+        "id": "UG.W.RSN",
         "name": "Rusenyi",
         "status": "active",
         "partOf": {
-          "reference": "Location/TF.W"
+          "reference": "Location/UG.W"
         },
         "type": [
           {
@@ -119,7 +119,7 @@
       },
       "request": {
         "method": "PUT",
-        "url": "Location/TF.W.RSN"
+        "url": "Location/UG.W.RSN"
       }
     },
     {
@@ -130,11 +130,11 @@
             "http://ihris.org/fhir/StructureDefinition/ihris-jurisdiction"
           ]
         },
-        "id": "TF.S.NYS",
+        "id": "UG.S.NYS",
         "name": "Nyusa",
         "status": "active",
         "partOf": {
-          "reference": "Location/TF.S"
+          "reference": "Location/UG.S"
         },
         "type": [
           {
@@ -159,7 +159,7 @@
       },
       "request": {
         "method": "PUT",
-        "url": "Location/TF.S.NYS"
+        "url": "Location/UG.S.NYS"
       }
     },
     {
@@ -170,11 +170,11 @@
             "http://ihris.org/fhir/StructureDefinition/ihris-jurisdiction"
           ]
         },
-        "id": "TF.S.HGM",
+        "id": "UG.S.HGM",
         "name": "Hugoma",
         "status": "active",
         "partOf": {
-          "reference": "Location/TF.S"
+          "reference": "Location/UG.S"
         },
         "type": [
           {
@@ -199,7 +199,7 @@
       },
       "request": {
         "method": "PUT",
-        "url": "Location/TF.S.HGM"
+        "url": "Location/UG.S.HGM"
       }
     },
     {
@@ -210,11 +210,11 @@
             "http://ihris.org/fhir/StructureDefinition/ihris-jurisdiction"
           ]
         },
-        "id": "TF.E.BWO",
+        "id": "UG.E.BWO",
         "name": "Bwogo",
         "status": "active",
         "partOf": {
-          "reference": "Location/TF.E"
+          "reference": "Location/UG.E"
         },
         "type": [
           {
@@ -239,7 +239,7 @@
       },
       "request": {
         "method": "PUT",
-        "url": "Location/TF.E.BWO"
+        "url": "Location/UG.E.BWO"
       }
     },
     {
@@ -250,11 +250,11 @@
             "http://ihris.org/fhir/StructureDefinition/ihris-jurisdiction"
           ]
         },
-        "id": "TF.N.GAN",
+        "id": "UG.N.GAN",
         "name": "Ganemba",
         "status": "active",
         "partOf": {
-          "reference": "Location/TF.N"
+          "reference": "Location/UG.N"
         },
         "type": [
           {
@@ -279,7 +279,7 @@
       },
       "request": {
         "method": "PUT",
-        "url": "Location/TF.N.GAN"
+        "url": "Location/UG.N.GAN"
       }
     },
     {
@@ -290,11 +290,11 @@
             "http://ihris.org/fhir/StructureDefinition/ihris-jurisdiction"
           ]
         },
-        "id": "TF.W.RUT",
+        "id": "UG.W.RUT",
         "name": "Rutunda",
         "status": "active",
         "partOf": {
-          "reference": "Location/TF.W"
+          "reference": "Location/UG.W"
         },
         "type": [
           {
@@ -319,7 +319,7 @@
       },
       "request": {
         "method": "PUT",
-        "url": "Location/TF.W.RUT"
+        "url": "Location/UG.W.RUT"
       }
     },
     {
@@ -330,11 +330,11 @@
             "http://ihris.org/fhir/StructureDefinition/ihris-jurisdiction"
           ]
         },
-        "id": "TF.S.KAK",
+        "id": "UG.S.KAK",
         "name": "Kakoma",
         "status": "active",
         "partOf": {
-          "reference": "Location/TF.S"
+          "reference": "Location/UG.S"
         },
         "type": [
           {
@@ -359,7 +359,7 @@
       },
       "request": {
         "method": "PUT",
-        "url": "Location/TF.S.KAK"
+        "url": "Location/UG.S.KAK"
       }
     },
     {
@@ -370,11 +370,11 @@
             "http://ihris.org/fhir/StructureDefinition/ihris-jurisdiction"
           ]
         },
-        "id": "TF.E.NYT",
+        "id": "UG.E.NYT",
         "name": "Nyatimba",
         "status": "active",
         "partOf": {
-          "reference": "Location/TF.E"
+          "reference": "Location/UG.E"
         },
         "type": [
           {
@@ -399,7 +399,7 @@
       },
       "request": {
         "method": "PUT",
-        "url": "Location/TF.E.NYT"
+        "url": "Location/UG.E.NYT"
       }
     },
     {
@@ -410,11 +410,11 @@
             "http://ihris.org/fhir/StructureDefinition/ihris-jurisdiction"
           ]
         },
-        "id": "TF.N.BRB",
+        "id": "UG.N.BRB",
         "name": "Buraba",
         "status": "active",
         "partOf": {
-          "reference": "Location/TF.N"
+          "reference": "Location/UG.N"
         },
         "type": [
           {
@@ -439,7 +439,7 @@
       },
       "request": {
         "method": "PUT",
-        "url": "Location/TF.N.BRB"
+        "url": "Location/UG.N.BRB"
       }
     },
     {
@@ -450,11 +450,11 @@
             "http://ihris.org/fhir/StructureDefinition/ihris-jurisdiction"
           ]
         },
-        "id": "TF.E.NGU",
+        "id": "UG.E.NGU",
         "name": "Ngungo",
         "status": "active",
         "partOf": {
-          "reference": "Location/TF.E"
+          "reference": "Location/UG.E"
         },
         "type": [
           {
@@ -479,7 +479,7 @@
       },
       "request": {
         "method": "PUT",
-        "url": "Location/TF.E.NGU"
+        "url": "Location/UG.E.NGU"
       }
     },
     {
@@ -490,11 +490,11 @@
             "http://ihris.org/fhir/StructureDefinition/ihris-jurisdiction"
           ]
         },
-        "id": "TF.S.NYR",
+        "id": "UG.S.NYR",
         "name": "Nyaramba",
         "status": "active",
         "partOf": {
-          "reference": "Location/TF.S"
+          "reference": "Location/UG.S"
         },
         "type": [
           {
@@ -519,7 +519,7 @@
       },
       "request": {
         "method": "PUT",
-        "url": "Location/TF.S.NYR"
+        "url": "Location/UG.S.NYR"
       }
     },
     {
@@ -530,11 +530,11 @@
             "http://ihris.org/fhir/StructureDefinition/ihris-jurisdiction"
           ]
         },
-        "id": "TF.W.NGT",
+        "id": "UG.W.NGT",
         "name": "Ngotumba",
         "status": "active",
         "partOf": {
-          "reference": "Location/TF.W"
+          "reference": "Location/UG.W"
         },
         "type": [
           {
@@ -559,7 +559,7 @@
       },
       "request": {
         "method": "PUT",
-        "url": "Location/TF.W.NGT"
+        "url": "Location/UG.W.NGT"
       }
     },
     {
@@ -570,11 +570,11 @@
             "http://ihris.org/fhir/StructureDefinition/ihris-jurisdiction"
           ]
         },
-        "id": "TF.E.RWB",
+        "id": "UG.E.RWB",
         "name": "Rwabiro",
         "status": "active",
         "partOf": {
-          "reference": "Location/TF.E"
+          "reference": "Location/UG.E"
         },
         "type": [
           {
@@ -599,7 +599,7 @@
       },
       "request": {
         "method": "PUT",
-        "url": "Location/TF.E.RWB"
+        "url": "Location/UG.E.RWB"
       }
     },
     {
@@ -610,11 +610,11 @@
             "http://ihris.org/fhir/StructureDefinition/ihris-jurisdiction"
           ]
         },
-        "id": "TF.N.GTB",
+        "id": "UG.N.GTB",
         "name": "Gataba",
         "status": "active",
         "partOf": {
-          "reference": "Location/TF.N"
+          "reference": "Location/UG.N"
         },
         "type": [
           {
@@ -639,7 +639,7 @@
       },
       "request": {
         "method": "PUT",
-        "url": "Location/TF.N.GTB"
+        "url": "Location/UG.N.GTB"
       }
     },
     {
@@ -650,11 +650,11 @@
             "http://ihris.org/fhir/StructureDefinition/ihris-jurisdiction"
           ]
         },
-        "id": "TF.S.RWN",
+        "id": "UG.S.RWN",
         "name": "Ruwendo",
         "status": "active",
         "partOf": {
-          "reference": "Location/TF.S"
+          "reference": "Location/UG.S"
         },
         "type": [
           {
@@ -679,7 +679,7 @@
       },
       "request": {
         "method": "PUT",
-        "url": "Location/TF.S.RWN"
+        "url": "Location/UG.S.RWN"
       }
     },
     {
@@ -690,11 +690,11 @@
             "http://ihris.org/fhir/StructureDefinition/ihris-jurisdiction"
           ]
         },
-        "id": "TF.W.KAR",
+        "id": "UG.W.KAR",
         "name": "Karita",
         "status": "active",
         "partOf": {
-          "reference": "Location/TF.W"
+          "reference": "Location/UG.W"
         },
         "type": [
           {
@@ -719,7 +719,7 @@
       },
       "request": {
         "method": "PUT",
-        "url": "Location/TF.W.KAR"
+        "url": "Location/UG.W.KAR"
       }
     },
     {
@@ -730,11 +730,11 @@
             "http://ihris.org/fhir/StructureDefinition/ihris-jurisdiction"
           ]
         },
-        "id": "TF.E.KIR",
+        "id": "UG.E.KIR",
         "name": "Kirasho",
         "status": "active",
         "partOf": {
-          "reference": "Location/TF.E"
+          "reference": "Location/UG.E"
         },
         "type": [
           {
@@ -759,7 +759,7 @@
       },
       "request": {
         "method": "PUT",
-        "url": "Location/TF.E.KIR"
+        "url": "Location/UG.E.KIR"
       }
     },
     {
@@ -770,11 +770,11 @@
             "http://ihris.org/fhir/StructureDefinition/ihris-jurisdiction"
           ]
         },
-        "id": "TF.W.NYI",
+        "id": "UG.W.NYI",
         "name": "Nyira",
         "status": "active",
         "partOf": {
-          "reference": "Location/TF.W"
+          "reference": "Location/UG.W"
         },
         "type": [
           {
@@ -799,7 +799,7 @@
       },
       "request": {
         "method": "PUT",
-        "url": "Location/TF.W.NYI"
+        "url": "Location/UG.W.NYI"
       }
     },
     {
@@ -810,11 +810,11 @@
             "http://ihris.org/fhir/StructureDefinition/ihris-jurisdiction"
           ]
         },
-        "id": "TF.S.MUB",
+        "id": "UG.S.MUB",
         "name": "Mubuye",
         "status": "active",
         "partOf": {
-          "reference": "Location/TF.S"
+          "reference": "Location/UG.S"
         },
         "type": [
           {
@@ -839,7 +839,7 @@
       },
       "request": {
         "method": "PUT",
-        "url": "Location/TF.S.MUB"
+        "url": "Location/UG.S.MUB"
       }
     },
     {
@@ -850,11 +850,11 @@
             "http://ihris.org/fhir/StructureDefinition/ihris-jurisdiction"
           ]
         },
-        "id": "TF.S.NYD",
+        "id": "UG.S.NYD",
         "name": "Nyaduha",
         "status": "active",
         "partOf": {
-          "reference": "Location/TF.S"
+          "reference": "Location/UG.S"
         },
         "type": [
           {
@@ -879,7 +879,7 @@
       },
       "request": {
         "method": "PUT",
-        "url": "Location/TF.S.NYD"
+        "url": "Location/UG.S.NYD"
       }
     },
     {
@@ -890,11 +890,11 @@
             "http://ihris.org/fhir/StructureDefinition/ihris-jurisdiction"
           ]
         },
-        "id": "TF.N.GYU",
+        "id": "UG.N.GYU",
         "name": "Gyumba",
         "status": "active",
         "partOf": {
-          "reference": "Location/TF.N"
+          "reference": "Location/UG.N"
         },
         "type": [
           {
@@ -919,7 +919,7 @@
       },
       "request": {
         "method": "PUT",
-        "url": "Location/TF.N.GYU"
+        "url": "Location/UG.N.GYU"
       }
     },
     {
@@ -930,11 +930,11 @@
             "http://ihris.org/fhir/StructureDefinition/ihris-jurisdiction"
           ]
         },
-        "id": "TF.W.GAS",
+        "id": "UG.W.GAS",
         "name": "Gasunga",
         "status": "active",
         "partOf": {
-          "reference": "Location/TF.W"
+          "reference": "Location/UG.W"
         },
         "type": [
           {
@@ -959,7 +959,7 @@
       },
       "request": {
         "method": "PUT",
-        "url": "Location/TF.W.GAS"
+        "url": "Location/UG.W.GAS"
       }
     },
     {
@@ -970,11 +970,11 @@
             "http://ihris.org/fhir/StructureDefinition/ihris-jurisdiction"
           ]
         },
-        "id": "TF.S.GIS",
+        "id": "UG.S.GIS",
         "name": "Gisamba",
         "status": "active",
         "partOf": {
-          "reference": "Location/TF.S"
+          "reference": "Location/UG.S"
         },
         "type": [
           {
@@ -999,7 +999,7 @@
       },
       "request": {
         "method": "PUT",
-        "url": "Location/TF.S.GIS"
+        "url": "Location/UG.S.GIS"
       }
     },
     {
@@ -1010,11 +1010,11 @@
             "http://ihris.org/fhir/StructureDefinition/ihris-jurisdiction"
           ]
         },
-        "id": "TF.W.NYG",
+        "id": "UG.W.NYG",
         "name": "Nyagano",
         "status": "active",
         "partOf": {
-          "reference": "Location/TF.W"
+          "reference": "Location/UG.W"
         },
         "type": [
           {
@@ -1039,7 +1039,7 @@
       },
       "request": {
         "method": "PUT",
-        "url": "Location/TF.W.NYG"
+        "url": "Location/UG.W.NYG"
       }
     },
     {
@@ -1050,11 +1050,11 @@
             "http://ihris.org/fhir/StructureDefinition/ihris-jurisdiction"
           ]
         },
-        "id": "TF.W.RSH",
+        "id": "UG.W.RSH",
         "name": "Rushonga",
         "status": "active",
         "partOf": {
-          "reference": "Location/TF.W"
+          "reference": "Location/UG.W"
         },
         "type": [
           {
@@ -1079,7 +1079,7 @@
       },
       "request": {
         "method": "PUT",
-        "url": "Location/TF.W.RSH"
+        "url": "Location/UG.W.RSH"
       }
     },
     {
@@ -1090,11 +1090,11 @@
             "http://ihris.org/fhir/StructureDefinition/ihris-jurisdiction"
           ]
         },
-        "id": "TF.N.MSZ",
+        "id": "UG.N.MSZ",
         "name": "Musoza",
         "status": "active",
         "partOf": {
-          "reference": "Location/TF.N"
+          "reference": "Location/UG.N"
         },
         "type": [
           {
@@ -1119,7 +1119,7 @@
       },
       "request": {
         "method": "PUT",
-        "url": "Location/TF.N.MSZ"
+        "url": "Location/UG.N.MSZ"
       }
     },
     {
@@ -1130,11 +1130,11 @@
             "http://ihris.org/fhir/StructureDefinition/ihris-jurisdiction"
           ]
         },
-        "id": "TF.N.RUS",
+        "id": "UG.N.RUS",
         "name": "Rusoro",
         "status": "active",
         "partOf": {
-          "reference": "Location/TF.N"
+          "reference": "Location/UG.N"
         },
         "type": [
           {
@@ -1159,7 +1159,7 @@
       },
       "request": {
         "method": "PUT",
-        "url": "Location/TF.N.RUS"
+        "url": "Location/UG.N.RUS"
       }
     },
     {
@@ -1170,11 +1170,11 @@
             "http://ihris.org/fhir/StructureDefinition/ihris-jurisdiction"
           ]
         },
-        "id": "TF.E.GAT",
+        "id": "UG.E.GAT",
         "name": "Gatarama",
         "status": "active",
         "partOf": {
-          "reference": "Location/TF.E"
+          "reference": "Location/UG.E"
         },
         "type": [
           {
@@ -1199,7 +1199,7 @@
       },
       "request": {
         "method": "PUT",
-        "url": "Location/TF.E.GAT"
+        "url": "Location/UG.E.GAT"
       }
     }
   ]

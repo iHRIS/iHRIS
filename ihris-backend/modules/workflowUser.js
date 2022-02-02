@@ -1,5 +1,5 @@
 const nconf = require('./config')
-const user = require('./user').user
+const user = require('./user')
 const winston = require('winston')
 const crypto = require('crypto')
 const outcomes = require('../config/operationOutcomes')
@@ -12,6 +12,9 @@ let locationRoleID = undefined
 
 const workflowUser = {
   process: ( req ) => {
+
+    // console.log("resqquest",JSON.stringify(req.body,null,2))
+
     return new Promise( async (resolve, reject) => {
       try {
         let bundle = {
@@ -36,6 +39,9 @@ const workflowUser = {
             let extensions = []
             user.lookupByEmail(userEmail).then( async (userObj) =>  {
               if ( !userObj ) {
+
+                console.log("we are here",userEmail)
+
                 if(req.body.item[0].item[5].linkId === "location" 
                     && req.body.item[0].item[5].answer 
                     && req.body.item[0].item[5].answer[0] 
@@ -168,8 +174,8 @@ const workflowUser = {
                 resolve(await workflowUser.outcome("User " + req.body.item[0].item[3].answer[0].valueString + " Exist"))
                 //reject(err.message)
               }
-              //winston.info("Bundle")
-              //winston.info(JSON.stringify( bundle,null,2))
+              winston.info("Bundle")
+              winston.info(JSON.stringify( bundle,null,2))
               resolve(bundle)
             }).catch( (err) => {
               reject( err.message )

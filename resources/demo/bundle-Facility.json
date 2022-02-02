@@ -8,14 +8,14 @@
         "meta": {
           "profile": "http://ihris.org/fhir/StructureDefinition/ihris-facility"
         },
-        "id": "TF.W.RSH.1",
+        "id": "UG.W.RSH.1",
         "name": "Rushonga Hospital",
         "active": true,
         "type": [
           {
             "coding": [
               {
-                "system": "urn:ietf:rfc:3986",
+                "system": "urn:ieUG:rfc:3986",
                 "code": "urn:ihe:iti:mcsd:2019:facility"
               }
             ],
@@ -34,7 +34,7 @@
       },
       "request": {
         "method": "PUT",
-        "url": "Organization/TF.W.RSH.1"
+        "url": "Organization/UG.W.RSH.1"
       }
     },
     {
@@ -43,18 +43,18 @@
         "meta": {
           "profile": "http://ihris.org/fhir/StructureDefinition/ihris-facility"
         },
-        "id": "TF.W.RSH.1",
+        "id": "UG.W.RSH.1",
         "name": "Rushonga Hospital",
         "status": "active",
         "partOf": {
-          "reference": "Location/TF.W.RSH"
+          "reference": "Location/UG.W.RSH"
         },
-        "managingOrganization": "Organization/TF.W.RSH.1",
+        "managingOrganization": "Organization/UG.W.RSH.1",
         "type": [
           {
             "coding": [
               {
-                "system": "urn:ietf:rfc:3986",
+                "system": "urn:ieUG:rfc:3986",
                 "code": "urn:ihe:iti:mcsd:2019:facility"
               }
             ],
@@ -82,7 +82,7 @@
       },
       "request": {
         "method": "PUT",
-        "url": "Location/TF.W.RSH.1"
+        "url": "Location/UG.W.RSH.1"
       }
     },
     {
@@ -91,14 +91,14 @@
         "meta": {
           "profile": "http://ihris.org/fhir/StructureDefinition/ihris-facility"
         },
-        "id": "TF.W.NYG.10",
+        "id": "UG.W.NYG.10",
         "name": "Nyagano Health Center",
         "active": true,
         "type": [
           {
             "coding": [
               {
-                "system": "urn:ietf:rfc:3986",
+                "system": "urn:ieUG:rfc:3986",
                 "code": "urn:ihe:iti:mcsd:2019:facility"
               }
             ],
@@ -117,7 +117,7 @@
       },
       "request": {
         "method": "PUT",
-        "url": "Organization/TF.W.NYG.10"
+        "url": "Organization/UG.W.NYG.10"
       }
     },
     {
@@ -126,18 +126,18 @@
         "meta": {
           "profile": "http://ihris.org/fhir/StructureDefinition/ihris-facility"
         },
-        "id": "TF.W.NYG.10",
+        "id": "UG.W.NYG.10",
         "name": "Nyagano Health Center",
         "status": "active",
         "partOf": {
-          "reference": "Location/TF.W.NYG"
+          "reference": "Location/UG.W.NYG"
         },
-        "managingOrganization": "Organization/TF.W.NYG.10",
+        "managingOrganization": "Organization/UG.W.NYG.10",
         "type": [
           {
             "coding": [
               {
-                "system": "urn:ietf:rfc:3986",
+                "system": "urn:ieUG:rfc:3986",
                 "code": "urn:ihe:iti:mcsd:2019:facility"
               }
             ],
@@ -165,7 +165,7 @@
       },
       "request": {
         "method": "PUT",
-        "url": "Location/TF.W.NYG.10"
+        "url": "Location/UG.W.NYG.10"
       }
     },
     {
@@ -174,14 +174,14 @@
         "meta": {
           "profile": "http://ihris.org/fhir/StructureDefinition/ihris-facility"
         },
-        "id": "TF.S.NYS.11",
+        "id": "UG.S.NYS.11",
         "name": "Nyusa Clinic",
         "active": true,
         "type": [
           {
             "coding": [
               {
-                "system": "urn:ietf:rfc:3986",
+                "system": "urn:ieUG:rfc:3986",
                 "code": "urn:ihe:iti:mcsd:2019:facility"
               }
             ],
@@ -200,7 +200,7 @@
       },
       "request": {
         "method": "PUT",
-        "url": "Organization/TF.S.NYS.11"
+        "url": "Organization/UG.S.NYS.11"
       }
     },
     {
@@ -209,18 +209,18 @@
         "meta": {
           "profile": "http://ihris.org/fhir/StructureDefinition/ihris-facility"
         },
-        "id": "TF.S.NYS.11",
+        "id": "UG.S.NYS.11",
         "name": "Nyusa Clinic",
         "status": "active",
         "partOf": {
-          "reference": "Location/TF.S.NYS"
+          "reference": "Location/UG.S.NYS"
         },
-        "managingOrganization": "Organization/TF.S.NYS.11",
+        "managingOrganization": "Organization/UG.S.NYS.11",
         "type": [
           {
             "coding": [
               {
-                "system": "urn:ietf:rfc:3986",
+                "system": "urn:ieUG:rfc:3986",
                 "code": "urn:ihe:iti:mcsd:2019:facility"
               }
             ],
@@ -248,7 +248,7 @@
       },
       "request": {
         "method": "PUT",
-        "url": "Location/TF.S.NYS.11"
+        "url": "Location/UG.S.NYS.11"
       }
     },
     {
@@ -257,14 +257,14 @@
         "meta": {
           "profile": "http://ihris.org/fhir/StructureDefinition/ihris-facility"
         },
-        "id": "TF.CC.CAP.12",
+        "id": "UG.CC.CAP.12",
         "name": "Capital City Clinic",
         "active": true,
         "type": [
           {
             "coding": [
               {
-                "system": "urn:ietf:rfc:3986",
+                "system": "urn:ieUG:rfc:3986",
                 "code": "urn:ihe:iti:mcsd:2019:facility"
               }
             ],
@@ -283,7 +283,7 @@
       },
       "request": {
         "method": "PUT",
-        "url": "Organization/TF.CC.CAP.12"
+        "url": "Organization/UG.CC.CAP.12"
       }
     },
     {
@@ -292,18 +292,18 @@
         "meta": {
           "profile": "http://ihris.org/fhir/StructureDefinition/ihris-facility"
         },
-        "id": "TF.CC.CAP.12",
+        "id": "UG.CC.CAP.12",
         "name": "Capital City Clinic",
         "status": "active",
         "partOf": {
-          "reference": "Location/TF.CC.CAP"
+          "reference": "Location/UG.CC.CAP"
         },
-        "managingOrganization": "Organization/TF.CC.CAP.12",
+        "managingOrganization": "Organization/UG.CC.CAP.12",
         "type": [
           {
             "coding": [
               {
-                "system": "urn:ietf:rfc:3986",
+                "system": "urn:ieUG:rfc:3986",
                 "code": "urn:ihe:iti:mcsd:2019:facility"
               }
             ],
@@ -331,7 +331,7 @@
       },
       "request": {
         "method": "PUT",
-        "url": "Location/TF.CC.CAP.12"
+        "url": "Location/UG.CC.CAP.12"
       }
     },
     {
@@ -340,14 +340,14 @@
         "meta": {
           "profile": "http://ihris.org/fhir/StructureDefinition/ihris-facility"
         },
-        "id": "TF.S.HGM.13",
+        "id": "UG.S.HGM.13",
         "name": "Hugoma Dispensary",
         "active": true,
         "type": [
           {
             "coding": [
               {
-                "system": "urn:ietf:rfc:3986",
+                "system": "urn:ieUG:rfc:3986",
                 "code": "urn:ihe:iti:mcsd:2019:facility"
               }
             ],
@@ -366,7 +366,7 @@
       },
       "request": {
         "method": "PUT",
-        "url": "Organization/TF.S.HGM.13"
+        "url": "Organization/UG.S.HGM.13"
       }
     },
     {
@@ -375,18 +375,18 @@
         "meta": {
           "profile": "http://ihris.org/fhir/StructureDefinition/ihris-facility"
         },
-        "id": "TF.S.HGM.13",
+        "id": "UG.S.HGM.13",
         "name": "Hugoma Dispensary",
         "status": "active",
         "partOf": {
-          "reference": "Location/TF.S.HGM"
+          "reference": "Location/UG.S.HGM"
         },
-        "managingOrganization": "Organization/TF.S.HGM.13",
+        "managingOrganization": "Organization/UG.S.HGM.13",
         "type": [
           {
             "coding": [
               {
-                "system": "urn:ietf:rfc:3986",
+                "system": "urn:ieUG:rfc:3986",
                 "code": "urn:ihe:iti:mcsd:2019:facility"
               }
             ],
@@ -414,7 +414,7 @@
       },
       "request": {
         "method": "PUT",
-        "url": "Location/TF.S.HGM.13"
+        "url": "Location/UG.S.HGM.13"
       }
     },
     {
@@ -423,14 +423,14 @@
         "meta": {
           "profile": "http://ihris.org/fhir/StructureDefinition/ihris-facility"
         },
-        "id": "TF.N.BRB.14",
+        "id": "UG.N.BRB.14",
         "name": "Example Clinic",
         "active": true,
         "type": [
           {
             "coding": [
               {
-                "system": "urn:ietf:rfc:3986",
+                "system": "urn:ieUG:rfc:3986",
                 "code": "urn:ihe:iti:mcsd:2019:facility"
               }
             ],
@@ -449,7 +449,7 @@
       },
       "request": {
         "method": "PUT",
-        "url": "Organization/TF.N.BRB.14"
+        "url": "Organization/UG.N.BRB.14"
       }
     },
     {
@@ -458,18 +458,18 @@
         "meta": {
           "profile": "http://ihris.org/fhir/StructureDefinition/ihris-facility"
         },
-        "id": "TF.N.BRB.14",
+        "id": "UG.N.BRB.14",
         "name": "Example Clinic",
         "status": "active",
         "partOf": {
-          "reference": "Location/TF.N.BRB"
+          "reference": "Location/UG.N.BRB"
         },
-        "managingOrganization": "Organization/TF.N.BRB.14",
+        "managingOrganization": "Organization/UG.N.BRB.14",
         "type": [
           {
             "coding": [
               {
-                "system": "urn:ietf:rfc:3986",
+                "system": "urn:ieUG:rfc:3986",
                 "code": "urn:ihe:iti:mcsd:2019:facility"
               }
             ],
@@ -497,7 +497,7 @@
       },
       "request": {
         "method": "PUT",
-        "url": "Location/TF.N.BRB.14"
+        "url": "Location/UG.N.BRB.14"
       }
     },
     {
@@ -506,14 +506,14 @@
         "meta": {
           "profile": "http://ihris.org/fhir/StructureDefinition/ihris-facility"
         },
-        "id": "TF.N.BRB.17",
+        "id": "UG.N.BRB.17",
         "name": "Test Facility",
         "active": true,
         "type": [
           {
             "coding": [
               {
-                "system": "urn:ietf:rfc:3986",
+                "system": "urn:ieUG:rfc:3986",
                 "code": "urn:ihe:iti:mcsd:2019:facility"
               }
             ],
@@ -532,7 +532,7 @@
       },
       "request": {
         "method": "PUT",
-        "url": "Organization/TF.N.BRB.17"
+        "url": "Organization/UG.N.BRB.17"
       }
     },
     {
@@ -541,18 +541,18 @@
         "meta": {
           "profile": "http://ihris.org/fhir/StructureDefinition/ihris-facility"
         },
-        "id": "TF.N.BRB.17",
+        "id": "UG.N.BRB.17",
         "name": "Test Facility",
         "status": "active",
         "partOf": {
-          "reference": "Location/TF.N.BRB"
+          "reference": "Location/UG.N.BRB"
         },
-        "managingOrganization": "Organization/TF.N.BRB.17",
+        "managingOrganization": "Organization/UG.N.BRB.17",
         "type": [
           {
             "coding": [
               {
-                "system": "urn:ietf:rfc:3986",
+                "system": "urn:ieUG:rfc:3986",
                 "code": "urn:ihe:iti:mcsd:2019:facility"
               }
             ],
@@ -580,7 +580,7 @@
       },
       "request": {
         "method": "PUT",
-        "url": "Location/TF.N.BRB.17"
+        "url": "Location/UG.N.BRB.17"
       }
     },
     {
@@ -589,14 +589,14 @@
         "meta": {
           "profile": "http://ihris.org/fhir/StructureDefinition/ihris-facility"
         },
-        "id": "TF.CC.CAP.2",
+        "id": "UG.CC.CAP.2",
         "name": "Capital City Hospital",
         "active": true,
         "type": [
           {
             "coding": [
               {
-                "system": "urn:ietf:rfc:3986",
+                "system": "urn:ieUG:rfc:3986",
                 "code": "urn:ihe:iti:mcsd:2019:facility"
               }
             ],
@@ -615,7 +615,7 @@
       },
       "request": {
         "method": "PUT",
-        "url": "Organization/TF.CC.CAP.2"
+        "url": "Organization/UG.CC.CAP.2"
       }
     },
     {
@@ -624,18 +624,18 @@
         "meta": {
           "profile": "http://ihris.org/fhir/StructureDefinition/ihris-facility"
         },
-        "id": "TF.CC.CAP.2",
+        "id": "UG.CC.CAP.2",
         "name": "Capital City Hospital",
         "status": "active",
         "partOf": {
-          "reference": "Location/TF.CC.CAP"
+          "reference": "Location/UG.CC.CAP"
         },
-        "managingOrganization": "Organization/TF.CC.CAP.2",
+        "managingOrganization": "Organization/UG.CC.CAP.2",
         "type": [
           {
             "coding": [
               {
-                "system": "urn:ietf:rfc:3986",
+                "system": "urn:ieUG:rfc:3986",
                 "code": "urn:ihe:iti:mcsd:2019:facility"
               }
             ],
@@ -663,7 +663,7 @@
       },
       "request": {
         "method": "PUT",
-        "url": "Location/TF.CC.CAP.2"
+        "url": "Location/UG.CC.CAP.2"
       }
     },
     {
@@ -672,14 +672,14 @@
         "meta": {
           "profile": "http://ihris.org/fhir/StructureDefinition/ihris-facility"
         },
-        "id": "TF.N.MSZ.3",
+        "id": "UG.N.MSZ.3",
         "name": "Musoza Hospital",
         "active": true,
         "type": [
           {
             "coding": [
               {
-                "system": "urn:ietf:rfc:3986",
+                "system": "urn:ieUG:rfc:3986",
                 "code": "urn:ihe:iti:mcsd:2019:facility"
               }
             ],
@@ -698,7 +698,7 @@
       },
       "request": {
         "method": "PUT",
-        "url": "Organization/TF.N.MSZ.3"
+        "url": "Organization/UG.N.MSZ.3"
       }
     },
     {
@@ -707,18 +707,18 @@
         "meta": {
           "profile": "http://ihris.org/fhir/StructureDefinition/ihris-facility"
         },
-        "id": "TF.N.MSZ.3",
+        "id": "UG.N.MSZ.3",
         "name": "Musoza Hospital",
         "status": "active",
         "partOf": {
-          "reference": "Location/TF.N.MSZ"
+          "reference": "Location/UG.N.MSZ"
         },
-        "managingOrganization": "Organization/TF.N.MSZ.3",
+        "managingOrganization": "Organization/UG.N.MSZ.3",
         "type": [
           {
             "coding": [
               {
-                "system": "urn:ietf:rfc:3986",
+                "system": "urn:ieUG:rfc:3986",
                 "code": "urn:ihe:iti:mcsd:2019:facility"
               }
             ],
@@ -746,7 +746,7 @@
       },
       "request": {
         "method": "PUT",
-        "url": "Location/TF.N.MSZ.3"
+        "url": "Location/UG.N.MSZ.3"
       }
     },
     {
@@ -755,14 +755,14 @@
         "meta": {
           "profile": "http://ihris.org/fhir/StructureDefinition/ihris-facility"
         },
-        "id": "TF.S.GIS.4",
+        "id": "UG.S.GIS.4",
         "name": "Gisamba Hospital",
         "active": true,
         "type": [
           {
             "coding": [
               {
-                "system": "urn:ietf:rfc:3986",
+                "system": "urn:ieUG:rfc:3986",
                 "code": "urn:ihe:iti:mcsd:2019:facility"
               }
             ],
@@ -781,7 +781,7 @@
       },
       "request": {
         "method": "PUT",
-        "url": "Organization/TF.S.GIS.4"
+        "url": "Organization/UG.S.GIS.4"
       }
     },
     {
@@ -790,18 +790,18 @@
         "meta": {
           "profile": "http://ihris.org/fhir/StructureDefinition/ihris-facility"
         },
-        "id": "TF.S.GIS.4",
+        "id": "UG.S.GIS.4",
         "name": "Gisamba Hospital",
         "status": "active",
         "partOf": {
-          "reference": "Location/TF.S.GIS"
+          "reference": "Location/UG.S.GIS"
         },
-        "managingOrganization": "Organization/TF.S.GIS.4",
+        "managingOrganization": "Organization/UG.S.GIS.4",
         "type": [
           {
             "coding": [
               {
-                "system": "urn:ietf:rfc:3986",
+                "system": "urn:ieUG:rfc:3986",
                 "code": "urn:ihe:iti:mcsd:2019:facility"
               }
             ],
@@ -829,7 +829,7 @@
       },
       "request": {
         "method": "PUT",
-        "url": "Location/TF.S.GIS.4"
+        "url": "Location/UG.S.GIS.4"
       }
     },
     {
@@ -838,14 +838,14 @@
         "meta": {
           "profile": "http://ihris.org/fhir/StructureDefinition/ihris-facility"
         },
-        "id": "TF.E.RWB.5",
+        "id": "UG.E.RWB.5",
         "name": "Rwabira Hospital",
         "active": true,
         "type": [
           {
             "coding": [
               {
-                "system": "urn:ietf:rfc:3986",
+                "system": "urn:ieUG:rfc:3986",
                 "code": "urn:ihe:iti:mcsd:2019:facility"
               }
             ],
@@ -864,7 +864,7 @@
       },
       "request": {
         "method": "PUT",
-        "url": "Organization/TF.E.RWB.5"
+        "url": "Organization/UG.E.RWB.5"
       }
     },
     {
@@ -873,18 +873,18 @@
         "meta": {
           "profile": "http://ihris.org/fhir/StructureDefinition/ihris-facility"
         },
-        "id": "TF.E.RWB.5",
+        "id": "UG.E.RWB.5",
         "name": "Rwabira Hospital",
         "status": "active",
         "partOf": {
-          "reference": "Location/TF.E.RWB"
+          "reference": "Location/UG.E.RWB"
         },
-        "managingOrganization": "Organization/TF.E.RWB.5",
+        "managingOrganization": "Organization/UG.E.RWB.5",
         "type": [
           {
             "coding": [
               {
-                "system": "urn:ietf:rfc:3986",
+                "system": "urn:ieUG:rfc:3986",
                 "code": "urn:ihe:iti:mcsd:2019:facility"
               }
             ],
@@ -912,7 +912,7 @@
       },
       "request": {
         "method": "PUT",
-        "url": "Location/TF.E.RWB.5"
+        "url": "Location/UG.E.RWB.5"
       }
     },
     {
@@ -921,14 +921,14 @@
         "meta": {
           "profile": "http://ihris.org/fhir/StructureDefinition/ihris-facility"
         },
-        "id": "TF.E.KAH.6",
+        "id": "UG.E.KAH.6",
         "name": "Kahini Medical Center",
         "active": true,
         "type": [
           {
             "coding": [
               {
-                "system": "urn:ietf:rfc:3986",
+                "system": "urn:ieUG:rfc:3986",
                 "code": "urn:ihe:iti:mcsd:2019:facility"
               }
             ],
@@ -947,7 +947,7 @@
       },
       "request": {
         "method": "PUT",
-        "url": "Organization/TF.E.KAH.6"
+        "url": "Organization/UG.E.KAH.6"
       }
     },
     {
@@ -956,18 +956,18 @@
         "meta": {
           "profile": "http://ihris.org/fhir/StructureDefinition/ihris-facility"
         },
-        "id": "TF.E.KAH.6",
+        "id": "UG.E.KAH.6",
         "name": "Kahini Medical Center",
         "status": "active",
         "partOf": {
-          "reference": "Location/TF.E.KAH"
+          "reference": "Location/UG.E.KAH"
         },
-        "managingOrganization": "Organization/TF.E.KAH.6",
+        "managingOrganization": "Organization/UG.E.KAH.6",
         "type": [
           {
             "coding": [
               {
-                "system": "urn:ietf:rfc:3986",
+                "system": "urn:ieUG:rfc:3986",
                 "code": "urn:ihe:iti:mcsd:2019:facility"
               }
             ],
@@ -995,7 +995,7 @@
       },
       "request": {
         "method": "PUT",
-        "url": "Location/TF.E.KAH.6"
+        "url": "Location/UG.E.KAH.6"
       }
     },
     {
@@ -1004,14 +1004,14 @@
         "meta": {
           "profile": "http://ihris.org/fhir/StructureDefinition/ihris-facility"
         },
-        "id": "TF.N.GYU.7",
+        "id": "UG.N.GYU.7",
         "name": "Gyumba Medical Center",
         "active": true,
         "type": [
           {
             "coding": [
               {
-                "system": "urn:ietf:rfc:3986",
+                "system": "urn:ieUG:rfc:3986",
                 "code": "urn:ihe:iti:mcsd:2019:facility"
               }
             ],
@@ -1030,7 +1030,7 @@
       },
       "request": {
         "method": "PUT",
-        "url": "Organization/TF.N.GYU.7"
+        "url": "Organization/UG.N.GYU.7"
       }
     },
     {
@@ -1039,18 +1039,18 @@
         "meta": {
           "profile": "http://ihris.org/fhir/StructureDefinition/ihris-facility"
         },
-        "id": "TF.N.GYU.7",
+        "id": "UG.N.GYU.7",
         "name": "Gyumba Medical Center",
         "status": "active",
         "partOf": {
-          "reference": "Location/TF.N.GYU"
+          "reference": "Location/UG.N.GYU"
         },
-        "managingOrganization": "Organization/TF.N.GYU.7",
+        "managingOrganization": "Organization/UG.N.GYU.7",
         "type": [
           {
             "coding": [
               {
-                "system": "urn:ietf:rfc:3986",
+                "system": "urn:ieUG:rfc:3986",
                 "code": "urn:ihe:iti:mcsd:2019:facility"
               }
             ],
@@ -1078,7 +1078,7 @@
       },
       "request": {
         "method": "PUT",
-        "url": "Location/TF.N.GYU.7"
+        "url": "Location/UG.N.GYU.7"
       }
     },
     {
@@ -1087,14 +1087,14 @@
         "meta": {
           "profile": "http://ihris.org/fhir/StructureDefinition/ihris-facility"
         },
-        "id": "TF.E.GAT.8",
+        "id": "UG.E.GAT.8",
         "name": "Gatarama Health Center",
         "active": true,
         "type": [
           {
             "coding": [
               {
-                "system": "urn:ietf:rfc:3986",
+                "system": "urn:ieUG:rfc:3986",
                 "code": "urn:ihe:iti:mcsd:2019:facility"
               }
             ],
@@ -1113,7 +1113,7 @@
       },
       "request": {
         "method": "PUT",
-        "url": "Organization/TF.E.GAT.8"
+        "url": "Organization/UG.E.GAT.8"
       }
     },
     {
@@ -1122,18 +1122,18 @@
         "meta": {
           "profile": "http://ihris.org/fhir/StructureDefinition/ihris-facility"
         },
-        "id": "TF.E.GAT.8",
+        "id": "UG.E.GAT.8",
         "name": "Gatarama Health Center",
         "status": "active",
         "partOf": {
-          "reference": "Location/TF.E.GAT"
+          "reference": "Location/UG.E.GAT"
         },
-        "managingOrganization": "Organization/TF.E.GAT.8",
+        "managingOrganization": "Organization/UG.E.GAT.8",
         "type": [
           {
             "coding": [
               {
-                "system": "urn:ietf:rfc:3986",
+                "system": "urn:ieUG:rfc:3986",
                 "code": "urn:ihe:iti:mcsd:2019:facility"
               }
             ],
@@ -1161,7 +1161,7 @@
       },
       "request": {
         "method": "PUT",
-        "url": "Location/TF.E.GAT.8"
+        "url": "Location/UG.E.GAT.8"
       }
     },
     {
@@ -1170,14 +1170,14 @@
         "meta": {
           "profile": "http://ihris.org/fhir/StructureDefinition/ihris-facility"
         },
-        "id": "TF.W.KAR.9",
+        "id": "UG.W.KAR.9",
         "name": "Karita Health Center",
         "active": true,
         "type": [
           {
             "coding": [
               {
-                "system": "urn:ietf:rfc:3986",
+                "system": "urn:ieUG:rfc:3986",
                 "code": "urn:ihe:iti:mcsd:2019:facility"
               }
             ],
@@ -1196,7 +1196,7 @@
       },
       "request": {
         "method": "PUT",
-        "url": "Organization/TF.W.KAR.9"
+        "url": "Organization/UG.W.KAR.9"
       }
     },
     {
@@ -1205,18 +1205,18 @@
         "meta": {
           "profile": "http://ihris.org/fhir/StructureDefinition/ihris-facility"
         },
-        "id": "TF.W.KAR.9",
+        "id": "UG.W.KAR.9",
         "name": "Karita Health Center",
         "status": "active",
         "partOf": {
-          "reference": "Location/TF.W.KAR"
+          "reference": "Location/UG.W.KAR"
         },
-        "managingOrganization": "Organization/TF.W.KAR.9",
+        "managingOrganization": "Organization/UG.W.KAR.9",
         "type": [
           {
             "coding": [
               {
-                "system": "urn:ietf:rfc:3986",
+                "system": "urn:ieUG:rfc:3986",
                 "code": "urn:ihe:iti:mcsd:2019:facility"
               }
             ],
@@ -1244,7 +1244,7 @@
       },
       "request": {
         "method": "PUT",
-        "url": "Location/TF.W.KAR.9"
+        "url": "Location/UG.W.KAR.9"
       }
     }
   ]
