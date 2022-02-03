@@ -7,7 +7,7 @@
         "resourceType": "Location",
         "meta": {
           "profile": [
-            "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+            "http://ihris.org/fhir/StructureDefinition/ihris-jurisdiction"
           ]
         },
         "id": "UG.W",
@@ -47,7 +47,7 @@
         "resourceType": "Location",
         "meta": {
           "profile": [
-            "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+            "http://ihris.org/fhir/StructureDefinition/ihris-jurisdiction"
           ]
         },
         "id": "UG.S",
@@ -87,11 +87,11 @@
         "resourceType": "Location",
         "meta": {
           "profile": [
-            "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+            "http://ihris.org/fhir/StructureDefinition/ihris-jurisdiction"
           ]
         },
         "id": "UG.CC",
-        "name": "Capital City",
+        "name": "Central",
         "status": "active",
         "partOf": {
           "reference": "Location/UG"
@@ -127,7 +127,7 @@
         "resourceType": "Location",
         "meta": {
           "profile": [
-            "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+            "http://ihris.org/fhir/StructureDefinition/ihris-jurisdiction"
           ]
         },
         "id": "UG.E",
@@ -167,7 +167,7 @@
         "resourceType": "Location",
         "meta": {
           "profile": [
-            "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+            "http://ihris.org/fhir/StructureDefinition/ihris-jurisdiction"
           ]
         },
         "id": "UG.N",
