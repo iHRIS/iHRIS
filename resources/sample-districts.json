@@ -1,0 +1,46 @@
+{
+    "resourceType": "Bundle",
+    "type": "transaction",
+    "entry": [
+        {
+            "resource": {
+                "resourceType": "Location",
+                "meta": {
+                    "profile": [
+                        "http://ihris.org/fhir/StructureDefinition/ihris-jurisdiction"
+                    ]
+                },
+                "id": "UG.CC.KLA",
+                "name": "Kampala",
+                "status": "active",
+                "partOf": {
+                    "reference": "Location/UG.CC"
+                },
+                "type": [
+                    {
+                        "coding": [
+                            {
+                                "system": "http://ihris.org/fhir/CodeSystem/ihris-jurisdiction",
+                                "code": "district"
+                            }
+                        ],
+                        "text": "District"
+                    }
+                ],
+                "physicalType": {
+                    "coding": [
+                        {
+                            "system": "http://hl7.org/fhir/codesystem-location-physical-type.html",
+                            "code": "jdn"
+                        }
+                    ],
+                    "text": "Jurisdiction"
+                }
+            },
+            "request": {
+                "method": "PUT",
+                "url": "Location/UG.CC.CAP"
+            }
+        }
+    ]
+}
