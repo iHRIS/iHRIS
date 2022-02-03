@@ -13,7 +13,7 @@
                 <v-card-subtitle> Number of Health Workers</v-card-subtitle>
               </v-card>
               <v-card class="mx-auto my-4" color="blue">
-                <v-card-title> Facilities {{ totalFacilities }} </v-card-title>
+                <v-card-title> Facilities 31 </v-card-title>
                 <v-card-subtitle> Number of Facilities</v-card-subtitle>
               </v-card>
               <v-card class="mx-auto my-4" color="#ff5733">

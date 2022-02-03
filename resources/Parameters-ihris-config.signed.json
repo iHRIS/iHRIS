@@ -28,11 +28,11 @@
       "part": [
         {
           "name": "site:title",
-          "valueString": "NHWR"
+          "valueString": "MoH"
         },
         {
           "name": "site:site",
-          "valueString": "MoH"
+          "valueString": "Uganda National Health Worker Registry"
         },
         {
           "name": "site:logo",
