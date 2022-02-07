@@ -159,9 +159,6 @@ router.get('/page/:page/:type?', function (req, res) {
       })
     } catch (err) { }
 
-    console.log("pageFields", pageFields)
-
-    console.log("pageResource", pageResource)
 
     let pageSections = resource.extension.filter(ext => ext.url === "http://ihris.org/fhir/StructureDefinition/ihris-page-section")
 

@@ -49,6 +49,38 @@
           "valueString": "Gender|gender"
         },
         {
+          "url": "search",
+          "valueString": "Facility"
+        },
+        {
+          "url": "filter",
+          "valueString": "Facility|Location.partOf"
+        },
+        {
+          "url": "search",
+          "valueString": "District"
+        },
+        {
+          "url": "filter",
+          "valueString": "District|Location.partOf"
+        },
+        {
+          "url": "search",
+          "valueString": "Region"
+        },
+        {
+          "url": "filter",
+          "valueString": "Region|Location.partOf"
+        },
+        {
+          "url": "search",
+          "valueString": "Department"
+        },
+        {
+          "url": "filter",
+          "valueString": "Department|Location.partOf"
+        },
+        {
           "url": "order",
           "valueString": "Practitioner.name"
         },

@@ -23,8 +23,7 @@ const user = {
   lookup: (query) => {
     return new Promise((resolve, reject) => {
       fhirAxios.search("Person", query).then(async (response) => {
-        if (response.total === 0) {
-          resolve(false)
+        if (response.total === 0) {          resolve(false)
         } else if (response.total > 1) {
           logger.error("Too many users found for " + JSON.stringify(query))
           resolve(false)

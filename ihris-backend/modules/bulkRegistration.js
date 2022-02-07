@@ -7,7 +7,7 @@ const fhirAxios = require("./fhirAxios");
 const { v4: uuidv4 } = require("uuid");
 
 const searchLocationReference = async (name) => {
-  let location = "Location/ET";
+  let location = "Location/UG";
   let bundle = await fhirAxios.search("Location", {
     name: name,
   });
