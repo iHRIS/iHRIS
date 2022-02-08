@@ -1,0 +1,2280 @@
+{
+            "resource": {
+                "resourceType": "Location",
+                "meta": {
+                    "profile": [
+                        "http://ihris.org/fhir/StructureDefinition/ihris-jurisdiction"
+                    ]
+                },
+                "id": "UG.N.LAM",
+                "name": "Lamwo",
+                "status": "active",
+                "partOf": {
+                    "reference": "Location/UG.N"
+                },
+                "type": [
+                    {
+                        "coding": [
+                            {
+                                "system": "http://ihris.org/fhir/CodeSystem/ihris-jurisdiction",
+                                "code": "district"
+                            }
+                        ],
+                        "text": "District"
+                    }
+                ],
+                "physicalType": {
+                    "coding": [
+                        {
+                            "system": "http://hl7.org/fhir/codesystem-location-physical-type.html",
+                            "code": "jdn"
+                        }
+                    ],
+                    "text": "Jurisdiction"
+                }
+            },
+            "request": {
+                "method": "PUT",
+                "url": "Location/UG.N.LAM"
+            }
+        },
+		{
+            "resource": {
+                "resourceType": "Location",
+                "meta": {
+                    "profile": [
+                        "http://ihris.org/fhir/StructureDefinition/ihris-jurisdiction"
+                    ]
+                },
+                "id": "UG.N.LIRA",
+                "name": "Lira",
+                "status": "active",
+                "partOf": {
+                    "reference": "Location/UG.N"
+                },
+                "type": [
+                    {
+                        "coding": [
+                            {
+                                "system": "http://ihris.org/fhir/CodeSystem/ihris-jurisdiction",
+                                "code": "district"
+                            }
+                        ],
+                        "text": "District"
+                    }
+                ],
+                "physicalType": {
+                    "coding": [
+                        {
+                            "system": "http://hl7.org/fhir/codesystem-location-physical-type.html",
+                            "code": "jdn"
+                        }
+                    ],
+                    "text": "Jurisdiction"
+                }
+            },
+            "request": {
+                "method": "PUT",
+                "url": "Location/UG.N.LIRA"
+            }
+        },
+		{
+            "resource": {
+                "resourceType": "Location",
+                "meta": {
+                    "profile": [
+                        "http://ihris.org/fhir/StructureDefinition/ihris-jurisdiction"
+                    ]
+                },
+                "id": "UG.N.LUSOT",
+                "name": "Lusot",
+                "status": "active",
+                "partOf": {
+                    "reference": "Location/UG.N"
+                },
+                "type": [
+                    {
+                        "coding": [
+                            {
+                                "system": "http://ihris.org/fhir/CodeSystem/ihris-jurisdiction",
+                                "code": "district"
+                            }
+                        ],
+                        "text": "District"
+                    }
+                ],
+                "physicalType": {
+                    "coding": [
+                        {
+                            "system": "http://hl7.org/fhir/codesystem-location-physical-type.html",
+                            "code": "jdn"
+                        }
+                    ],
+                    "text": "Jurisdiction"
+                }
+            },
+            "request": {
+                "method": "PUT",
+                "url": "Location/UG.N.LUSOT"
+            }
+        },
+		{
+            "resource": {
+                "resourceType": "Location",
+                "meta": {
+                    "profile": [
+                        "http://ihris.org/fhir/StructureDefinition/ihris-jurisdiction"
+                    ]
+                },
+                "id": "UG.E.LUUKA",
+                "name": "Luuka",
+                "status": "active",
+                "partOf": {
+                    "reference": "Location/UG.E"
+                },
+                "type": [
+                    {
+                        "coding": [
+                            {
+                                "system": "http://ihris.org/fhir/CodeSystem/ihris-jurisdiction",
+                                "code": "district"
+                            }
+                        ],
+                        "text": "District"
+                    }
+                ],
+                "physicalType": {
+                    "coding": [
+                        {
+                            "system": "http://hl7.org/fhir/codesystem-location-physical-type.html",
+                            "code": "jdn"
+                        }
+                    ],
+                    "text": "Jurisdiction"
+                }
+            },
+            "request": {
+                "method": "PUT",
+                "url": "Location/UG.E.LUUKA"
+            }
+        },
+		{
+            "resource": {
+                "resourceType": "Location",
+                "meta": {
+                    "profile": [
+                        "http://ihris.org/fhir/StructureDefinition/ihris-jurisdiction"
+                    ]
+                },
+                "id": "UG.CC.LUW",
+                "name": "Luweero",
+                "status": "active",
+                "partOf": {
+                    "reference": "Location/UG.CC"
+                },
+                "type": [
+                    {
+                        "coding": [
+                            {
+                                "system": "http://ihris.org/fhir/CodeSystem/ihris-jurisdiction",
+                                "code": "district"
+                            }
+                        ],
+                        "text": "District"
+                    }
+                ],
+                "physicalType": {
+                    "coding": [
+                        {
+                            "system": "http://hl7.org/fhir/codesystem-location-physical-type.html",
+                            "code": "jdn"
+                        }
+                    ],
+                    "text": "Jurisdiction"
+                }
+            },
+            "request": {
+                "method": "PUT",
+                "url": "Location/UG.CC.LUW"
+            }
+        },
+		{
+            "resource": {
+                "resourceType": "Location",
+                "meta": {
+                    "profile": [
+                        "http://ihris.org/fhir/StructureDefinition/ihris-jurisdiction"
+                    ]
+                },
+                "id": "UG.CC.LWENGO",
+                "name": "Lwengo",
+                "status": "active",
+                "partOf": {
+                    "reference": "Location/UG.CC"
+                },
+                "type": [
+                    {
+                        "coding": [
+                            {
+                                "system": "http://ihris.org/fhir/CodeSystem/ihris-jurisdiction",
+                                "code": "district"
+                            }
+                        ],
+                        "text": "District"
+                    }
+                ],
+                "physicalType": {
+                    "coding": [
+                        {
+                            "system": "http://hl7.org/fhir/codesystem-location-physical-type.html",
+                            "code": "jdn"
+                        }
+                    ],
+                    "text": "Jurisdiction"
+                }
+            },
+            "request": {
+                "method": "PUT",
+                "url": "Location/UG.CC.LWENGO"
+            }
+        },
+		{
+            "resource": {
+                "resourceType": "Location",
+                "meta": {
+                    "profile": [
+                        "http://ihris.org/fhir/StructureDefinition/ihris-jurisdiction"
+                    ]
+                },
+                "id": "UG.CC.LYA",
+                "name": "Lyantonde",
+                "status": "active",
+                "partOf": {
+                    "reference": "Location/UG.CC"
+                },
+                "type": [
+                    {
+                        "coding": [
+                            {
+                                "system": "http://ihris.org/fhir/CodeSystem/ihris-jurisdiction",
+                                "code": "district"
+                            }
+                        ],
+                        "text": "District"
+                    }
+                ],
+                "physicalType": {
+                    "coding": [
+                        {
+                            "system": "http://hl7.org/fhir/codesystem-location-physical-type.html",
+                            "code": "jdn"
+                        }
+                    ],
+                    "text": "Jurisdiction"
+                }
+            },
+            "request": {
+                "method": "PUT",
+                "url": "Location/UG.CC.LYA"
+            }
+        },
+		{
+            "resource": {
+                "resourceType": "Location",
+                "meta": {
+                    "profile": [
+                        "http://ihris.org/fhir/StructureDefinition/ihris-jurisdiction"
+                    ]
+                },
+                "id": "UG.N.MAD",
+                "name": "Madi-Okollo",
+                "status": "active",
+                "partOf": {
+                    "reference": "Location/UG.N"
+                },
+                "type": [
+                    {
+                        "coding": [
+                            {
+                                "system": "http://ihris.org/fhir/CodeSystem/ihris-jurisdiction",
+                                "code": "district"
+                            }
+                        ],
+                        "text": "District"
+                    }
+                ],
+                "physicalType": {
+                    "coding": [
+                        {
+                            "system": "http://hl7.org/fhir/codesystem-location-physical-type.html",
+                            "code": "jdn"
+                        }
+                    ],
+                    "text": "Jurisdiction"
+                }
+            },
+            "request": {
+                "method": "PUT",
+                "url": "Location/UG.N.MAD"
+            }
+        },
+		{
+            "resource": {
+                "resourceType": "Location",
+                "meta": {
+                    "profile": [
+                        "http://ihris.org/fhir/StructureDefinition/ihris-jurisdiction"
+                    ]
+                },
+                "id": "UG.E.MAN",
+                "name": "Manafwa",
+                "status": "active",
+                "partOf": {
+                    "reference": "Location/UG.E"
+                },
+                "type": [
+                    {
+                        "coding": [
+                            {
+                                "system": "http://ihris.org/fhir/CodeSystem/ihris-jurisdiction",
+                                "code": "district"
+                            }
+                        ],
+                        "text": "District"
+                    }
+                ],
+                "physicalType": {
+                    "coding": [
+                        {
+                            "system": "http://hl7.org/fhir/codesystem-location-physical-type.html",
+                            "code": "jdn"
+                        }
+                    ],
+                    "text": "Jurisdiction"
+                }
+            },
+            "request": {
+                "method": "PUT",
+                "url": "Location/UG.E.MAN"
+            }
+        },
+		{
+            "resource": {
+                "resourceType": "Location",
+                "meta": {
+                    "profile": [
+                        "http://ihris.org/fhir/StructureDefinition/ihris-jurisdiction"
+                    ]
+                },
+                "id": "UG.N.MARACHA",
+                "name": "Maracha",
+                "status": "active",
+                "partOf": {
+                    "reference": "Location/UG.N"
+                },
+                "type": [
+                    {
+                        "coding": [
+                            {
+                                "system": "http://ihris.org/fhir/CodeSystem/ihris-jurisdiction",
+                                "code": "district"
+                            }
+                        ],
+                        "text": "District"
+                    }
+                ],
+                "physicalType": {
+                    "coding": [
+                        {
+                            "system": "http://hl7.org/fhir/codesystem-location-physical-type.html",
+                            "code": "jdn"
+                        }
+                    ],
+                    "text": "Jurisdiction"
+                }
+            },
+            "request": {
+                "method": "PUT",
+                "url": "Location/UG.N.MARACHA"
+            }
+        },
+		{
+            "resource": {
+                "resourceType": "Location",
+                "meta": {
+                    "profile": [
+                        "http://ihris.org/fhir/StructureDefinition/ihris-jurisdiction"
+                    ]
+                },
+                "id": "UG.CC.MASAKA",
+                "name": "Masaka",
+                "status": "active",
+                "partOf": {
+                    "reference": "Location/UG.CC"
+                },
+                "type": [
+                    {
+                        "coding": [
+                            {
+                                "system": "http://ihris.org/fhir/CodeSystem/ihris-jurisdiction",
+                                "code": "district"
+                            }
+                        ],
+                        "text": "District"
+                    }
+                ],
+                "physicalType": {
+                    "coding": [
+                        {
+                            "system": "http://hl7.org/fhir/codesystem-location-physical-type.html",
+                            "code": "jdn"
+                        }
+                    ],
+                    "text": "Jurisdiction"
+                }
+            },
+            "request": {
+                "method": "PUT",
+                "url": "Location/UG.CC.MASAKA"
+            }
+        },
+		{
+            "resource": {
+                "resourceType": "Location",
+                "meta": {
+                    "profile": [
+                        "http://ihris.org/fhir/StructureDefinition/ihris-jurisdiction"
+                    ]
+                },
+                "id": "UG.W.MAS",
+                "name": "Masindi",
+                "status": "active",
+                "partOf": {
+                    "reference": "Location/UG.W"
+                },
+                "type": [
+                    {
+                        "coding": [
+                            {
+                                "system": "http://ihris.org/fhir/CodeSystem/ihris-jurisdiction",
+                                "code": "district"
+                            }
+                        ],
+                        "text": "District"
+                    }
+                ],
+                "physicalType": {
+                    "coding": [
+                        {
+                            "system": "http://hl7.org/fhir/codesystem-location-physical-type.html",
+                            "code": "jdn"
+                        }
+                    ],
+                    "text": "Jurisdiction"
+                }
+            },
+            "request": {
+                "method": "PUT",
+                "url": "Location/UG.W.MAS"
+            }
+        },
+		{
+            "resource": {
+                "resourceType": "Location",
+                "meta": {
+                    "profile": [
+                        "http://ihris.org/fhir/StructureDefinition/ihris-jurisdiction"
+                    ]
+                },
+                "id": "UG.E.MAY",
+                "name": "Mayuge",
+                "status": "active",
+                "partOf": {
+                    "reference": "Location/UG.E"
+                },
+                "type": [
+                    {
+                        "coding": [
+                            {
+                                "system": "http://ihris.org/fhir/CodeSystem/ihris-jurisdiction",
+                                "code": "district"
+                            }
+                        ],
+                        "text": "District"
+                    }
+                ],
+                "physicalType": {
+                    "coding": [
+                        {
+                            "system": "http://hl7.org/fhir/codesystem-location-physical-type.html",
+                            "code": "jdn"
+                        }
+                    ],
+                    "text": "Jurisdiction"
+                }
+            },
+            "request": {
+                "method": "PUT",
+                "url": "Location/UG.E.MAY"
+            }
+        },
+		{
+            "resource": {
+                "resourceType": "Location",
+                "meta": {
+                    "profile": [
+                        "http://ihris.org/fhir/StructureDefinition/ihris-jurisdiction"
+                    ]
+                },
+                "id": "UG.E.MBALE",
+                "name": "Mbale",
+                "status": "active",
+                "partOf": {
+                    "reference": "Location/UG.W"
+                },
+                "type": [
+                    {
+                        "coding": [
+                            {
+                                "system": "http://ihris.org/fhir/CodeSystem/ihris-jurisdiction",
+                                "code": "district"
+                            }
+                        ],
+                        "text": "District"
+                    }
+                ],
+                "physicalType": {
+                    "coding": [
+                        {
+                            "system": "http://hl7.org/fhir/codesystem-location-physical-type.html",
+                            "code": "jdn"
+                        }
+                    ],
+                    "text": "Jurisdiction"
+                }
+            },
+            "request": {
+                "method": "PUT",
+                "url": "Location/UG.W.MBALE"
+            }
+        },
+		{
+            "resource": {
+                "resourceType": "Location",
+                "meta": {
+                    "profile": [
+                        "http://ihris.org/fhir/StructureDefinition/ihris-jurisdiction"
+                    ]
+                },
+                "id": "UG.W.MBA",
+                "name": "Mbarara",
+                "status": "active",
+                "partOf": {
+                    "reference": "Location/UG.W"
+                },
+                "type": [
+                    {
+                        "coding": [
+                            {
+                                "system": "http://ihris.org/fhir/CodeSystem/ihris-jurisdiction",
+                                "code": "district"
+                            }
+                        ],
+                        "text": "District"
+                    }
+                ],
+                "physicalType": {
+                    "coding": [
+                        {
+                            "system": "http://hl7.org/fhir/codesystem-location-physical-type.html",
+                            "code": "jdn"
+                        }
+                    ],
+                    "text": "Jurisdiction"
+                }
+            },
+            "request": {
+                "method": "PUT",
+                "url": "Location/UG.W.MBA"
+            }
+        },
+		{
+            "resource": {
+                "resourceType": "Location",
+                "meta": {
+                    "profile": [
+                        "http://ihris.org/fhir/StructureDefinition/ihris-jurisdiction"
+                    ]
+                },
+                "id": "UG.W.MIT",
+                "name": "Mitooma",
+                "status": "active",
+                "partOf": {
+                    "reference": "Location/UG.W"
+                },
+                "type": [
+                    {
+                        "coding": [
+                            {
+                                "system": "http://ihris.org/fhir/CodeSystem/ihris-jurisdiction",
+                                "code": "district"
+                            }
+                        ],
+                        "text": "District"
+                    }
+                ],
+                "physicalType": {
+                    "coding": [
+                        {
+                            "system": "http://hl7.org/fhir/codesystem-location-physical-type.html",
+                            "code": "jdn"
+                        }
+                    ],
+                    "text": "Jurisdiction"
+                }
+            },
+            "request": {
+                "method": "PUT",
+                "url": "Location/UG.W.MIT"
+            }
+        },
+		{
+            "resource": {
+                "resourceType": "Location",
+                "meta": {
+                    "profile": [
+                        "http://ihris.org/fhir/StructureDefinition/ihris-jurisdiction"
+                    ]
+                },
+                "id": "UG.CC.MITYANA",
+                "name": "Mityana",
+                "status": "active",
+                "partOf": {
+                    "reference": "Location/UG.CC"
+                },
+                "type": [
+                    {
+                        "coding": [
+                            {
+                                "system": "http://ihris.org/fhir/CodeSystem/ihris-jurisdiction",
+                                "code": "district"
+                            }
+                        ],
+                        "text": "District"
+                    }
+                ],
+                "physicalType": {
+                    "coding": [
+                        {
+                            "system": "http://hl7.org/fhir/codesystem-location-physical-type.html",
+                            "code": "jdn"
+                        }
+                    ],
+                    "text": "Jurisdiction"
+                }
+            },
+            "request": {
+                "method": "PUT",
+                "url": "Location/UG.CC.MITYANA"
+            }
+        },
+		{
+            "resource": {
+                "resourceType": "Location",
+                "meta": {
+                    "profile": [
+                        "http://ihris.org/fhir/StructureDefinition/ihris-jurisdiction"
+                    ]
+                },
+                "id": "UG.N.MOR",
+                "name": "Moroto",
+                "status": "active",
+                "partOf": {
+                    "reference": "Location/UG.N"
+                },
+                "type": [
+                    {
+                        "coding": [
+                            {
+                                "system": "http://ihris.org/fhir/CodeSystem/ihris-jurisdiction",
+                                "code": "district"
+                            }
+                        ],
+                        "text": "District"
+                    }
+                ],
+                "physicalType": {
+                    "coding": [
+                        {
+                            "system": "http://hl7.org/fhir/codesystem-location-physical-type.html",
+                            "code": "jdn"
+                        }
+                    ],
+                    "text": "Jurisdiction"
+                }
+            },
+            "request": {
+                "method": "PUT",
+                "url": "Location/UG.N.MOR"
+            }
+        },
+		{
+            "resource": {
+                "resourceType": "Location",
+                "meta": {
+                    "profile": [
+                        "http://ihris.org/fhir/StructureDefinition/ihris-jurisdiction"
+                    ]
+                },
+                "id": "UG.N.MOYO",
+                "name": "Moyo",
+                "status": "active",
+                "partOf": {
+                    "reference": "Location/UG.N"
+                },
+                "type": [
+                    {
+                        "coding": [
+                            {
+                                "system": "http://ihris.org/fhir/CodeSystem/ihris-jurisdiction",
+                                "code": "district"
+                            }
+                        ],
+                        "text": "District"
+                    }
+                ],
+                "physicalType": {
+                    "coding": [
+                        {
+                            "system": "http://hl7.org/fhir/codesystem-location-physical-type.html",
+                            "code": "jdn"
+                        }
+                    ],
+                    "text": "Jurisdiction"
+                }
+            },
+            "request": {
+                "method": "PUT",
+                "url": "Location/UG.N.MOYO"
+            }
+        },
+		{
+            "resource": {
+                "resourceType": "Location",
+                "meta": {
+                    "profile": [
+                        "http://ihris.org/fhir/StructureDefinition/ihris-jurisdiction"
+                    ]
+                },
+                "id": "UG.CC.MPI",
+                "name": "Mpigi",
+                "status": "active",
+                "partOf": {
+                    "reference": "Location/UG.CC"
+                },
+                "type": [
+                    {
+                        "coding": [
+                            {
+                                "system": "http://ihris.org/fhir/CodeSystem/ihris-jurisdiction",
+                                "code": "district"
+                            }
+                        ],
+                        "text": "District"
+                    }
+                ],
+                "physicalType": {
+                    "coding": [
+                        {
+                            "system": "http://hl7.org/fhir/codesystem-location-physical-type.html",
+                            "code": "jdn"
+                        }
+                    ],
+                    "text": "Jurisdiction"
+                }
+            },
+            "request": {
+                "method": "PUT",
+                "url": "Location/UG.CC.MPI"
+            }
+        },
+		{
+            "resource": {
+                "resourceType": "Location",
+                "meta": {
+                    "profile": [
+                        "http://ihris.org/fhir/StructureDefinition/ihris-jurisdiction"
+                    ]
+                },
+                "id": "UG.CC.MUB",
+                "name": "Mubende",
+                "status": "active",
+                "partOf": {
+                    "reference": "Location/UG.CC"
+                },
+                "type": [
+                    {
+                        "coding": [
+                            {
+                                "system": "http://ihris.org/fhir/CodeSystem/ihris-jurisdiction",
+                                "code": "district"
+                            }
+                        ],
+                        "text": "District"
+                    }
+                ],
+                "physicalType": {
+                    "coding": [
+                        {
+                            "system": "http://hl7.org/fhir/codesystem-location-physical-type.html",
+                            "code": "jdn"
+                        }
+                    ],
+                    "text": "Jurisdiction"
+                }
+            },
+            "request": {
+                "method": "PUT",
+                "url": "Location/UG.CC.MUB"
+            }
+        },
+		{
+            "resource": {
+                "resourceType": "Location",
+                "meta": {
+                    "profile": [
+                        "http://ihris.org/fhir/StructureDefinition/ihris-jurisdiction"
+                    ]
+                },
+                "id": "UG.CC.MUK",
+                "name": "Mukono",
+                "status": "active",
+                "partOf": {
+                    "reference": "Location/UG.CC"
+                },
+                "type": [
+                    {
+                        "coding": [
+                            {
+                                "system": "http://ihris.org/fhir/CodeSystem/ihris-jurisdiction",
+                                "code": "district"
+                            }
+                        ],
+                        "text": "District"
+                    }
+                ],
+                "physicalType": {
+                    "coding": [
+                        {
+                            "system": "http://hl7.org/fhir/codesystem-location-physical-type.html",
+                            "code": "jdn"
+                        }
+                    ],
+                    "text": "Jurisdiction"
+                }
+            },
+            "request": {
+                "method": "PUT",
+                "url": "Location/UG.CC.MUK"
+            }
+        },
+		{
+            "resource": {
+                "resourceType": "Location",
+                "meta": {
+                    "profile": [
+                        "http://ihris.org/fhir/StructureDefinition/ihris-jurisdiction"
+                    ]
+                },
+                "id": "UG.N.NAB",
+                "name": "Nabilatuk",
+                "status": "active",
+                "partOf": {
+                    "reference": "Location/UG.N"
+                },
+                "type": [
+                    {
+                        "coding": [
+                            {
+                                "system": "http://ihris.org/fhir/CodeSystem/ihris-jurisdiction",
+                                "code": "district"
+                            }
+                        ],
+                        "text": "District"
+                    }
+                ],
+                "physicalType": {
+                    "coding": [
+                        {
+                            "system": "http://hl7.org/fhir/codesystem-location-physical-type.html",
+                            "code": "jdn"
+                        }
+                    ],
+                    "text": "Jurisdiction"
+                }
+            },
+            "request": {
+                "method": "PUT",
+                "url": "Location/UG.N.NAB"
+            }
+        },
+		{
+            "resource": {
+                "resourceType": "Location",
+                "meta": {
+                    "profile": [
+                        "http://ihris.org/fhir/StructureDefinition/ihris-jurisdiction"
+                    ]
+                },
+                "id": "UG.N.NAK",
+                "name": "Nakapiripirit",
+                "status": "active",
+                "partOf": {
+                    "reference": "Location/UG.N"
+                },
+                "type": [
+                    {
+                        "coding": [
+                            {
+                                "system": "http://ihris.org/fhir/CodeSystem/ihris-jurisdiction",
+                                "code": "district"
+                            }
+                        ],
+                        "text": "District"
+                    }
+                ],
+                "physicalType": {
+                    "coding": [
+                        {
+                            "system": "http://hl7.org/fhir/codesystem-location-physical-type.html",
+                            "code": "jdn"
+                        }
+                    ],
+                    "text": "Jurisdiction"
+                }
+            },
+            "request": {
+                "method": "PUT",
+                "url": "Location/UG.N.NAK"
+            }
+        },
+		{
+            "resource": {
+                "resourceType": "Location",
+                "meta": {
+                    "profile": [
+                        "http://ihris.org/fhir/StructureDefinition/ihris-jurisdiction"
+                    ]
+                },
+                "id": "UG.CC.NAKASEKE",
+                "name": "Nakaseke",
+                "status": "active",
+                "partOf": {
+                    "reference": "Location/UG.CC"
+                },
+                "type": [
+                    {
+                        "coding": [
+                            {
+                                "system": "http://ihris.org/fhir/CodeSystem/ihris-jurisdiction",
+                                "code": "district"
+                            }
+                        ],
+                        "text": "District"
+                    }
+                ],
+                "physicalType": {
+                    "coding": [
+                        {
+                            "system": "http://hl7.org/fhir/codesystem-location-physical-type.html",
+                            "code": "jdn"
+                        }
+                    ],
+                    "text": "Jurisdiction"
+                }
+            },
+            "request": {
+                "method": "PUT",
+                "url": "Location/UG.CC.NAKASEKE"
+            }
+        },
+		{
+            "resource": {
+                "resourceType": "Location",
+                "meta": {
+                    "profile": [
+                        "http://ihris.org/fhir/StructureDefinition/ihris-jurisdiction"
+                    ]
+                },
+                "id": "UG.CC.NAKASONGOLA",
+                "name": "Nakasongola",
+                "status": "active",
+                "partOf": {
+                    "reference": "Location/UG.CC"
+                },
+                "type": [
+                    {
+                        "coding": [
+                            {
+                                "system": "http://ihris.org/fhir/CodeSystem/ihris-jurisdiction",
+                                "code": "district"
+                            }
+                        ],
+                        "text": "District"
+                    }
+                ],
+                "physicalType": {
+                    "coding": [
+                        {
+                            "system": "http://hl7.org/fhir/codesystem-location-physical-type.html",
+                            "code": "jdn"
+                        }
+                    ],
+                    "text": "Jurisdiction"
+                }
+            },
+            "request": {
+                "method": "PUT",
+                "url": "Location/UG.CC.NAKASONGOLA"
+            }
+        },
+		{
+            "resource": {
+                "resourceType": "Location",
+                "meta": {
+                    "profile": [
+                        "http://ihris.org/fhir/StructureDefinition/ihris-jurisdiction"
+                    ]
+                },
+                "id": "UG.CC.NAM",
+                "name": "Namayingo",
+                "status": "active",
+                "partOf": {
+                    "reference": "Location/UG.E"
+                },
+                "type": [
+                    {
+                        "coding": [
+                            {
+                                "system": "http://ihris.org/fhir/CodeSystem/ihris-jurisdiction",
+                                "code": "district"
+                            }
+                        ],
+                        "text": "District"
+                    }
+                ],
+                "physicalType": {
+                    "coding": [
+                        {
+                            "system": "http://hl7.org/fhir/codesystem-location-physical-type.html",
+                            "code": "jdn"
+                        }
+                    ],
+                    "text": "Jurisdiction"
+                }
+            },
+            "request": {
+                "method": "PUT",
+                "url": "Location/UG.E.NAM"
+            }
+        },
+		{
+            "resource": {
+                "resourceType": "Location",
+                "meta": {
+                    "profile": [
+                        "http://ihris.org/fhir/StructureDefinition/ihris-jurisdiction"
+                    ]
+                },
+                "id": "UG.E.NAMISINDWA",
+                "name": "Namisindwa",
+                "status": "active",
+                "partOf": {
+                    "reference": "Location/UG.CC"
+                },
+                "type": [
+                    {
+                        "coding": [
+                            {
+                                "system": "http://ihris.org/fhir/CodeSystem/ihris-jurisdiction",
+                                "code": "district"
+                            }
+                        ],
+                        "text": "District"
+                    }
+                ],
+                "physicalType": {
+                    "coding": [
+                        {
+                            "system": "http://hl7.org/fhir/codesystem-location-physical-type.html",
+                            "code": "jdn"
+                        }
+                    ],
+                    "text": "Jurisdiction"
+                }
+            },
+            "request": {
+                "method": "PUT",
+                "url": "Location/UG.E.NAMISINDWA"
+            }
+        },
+		{
+            "resource": {
+                "resourceType": "Location",
+                "meta": {
+                    "profile": [
+                        "http://ihris.org/fhir/StructureDefinition/ihris-jurisdiction"
+                    ]
+                },
+                "id": "UG.E.NAMUTUMBA",
+                "name": "Namutumba",
+                "status": "active",
+                "partOf": {
+                    "reference": "Location/UG.E"
+                },
+                "type": [
+                    {
+                        "coding": [
+                            {
+                                "system": "http://ihris.org/fhir/CodeSystem/ihris-jurisdiction",
+                                "code": "district"
+                            }
+                        ],
+                        "text": "District"
+                    }
+                ],
+                "physicalType": {
+                    "coding": [
+                        {
+                            "system": "http://hl7.org/fhir/codesystem-location-physical-type.html",
+                            "code": "jdn"
+                        }
+                    ],
+                    "text": "Jurisdiction"
+                }
+            },
+            "request": {
+                "method": "PUT",
+                "url": "Location/UG.E.NAMUTUMBA"
+            }
+        },
+		{
+            "resource": {
+                "resourceType": "Location",
+                "meta": {
+                    "profile": [
+                        "http://ihris.org/fhir/StructureDefinition/ihris-jurisdiction"
+                    ]
+                },
+                "id": "UG.N.NAP",
+                "name": "Napak",
+                "status": "active",
+                "partOf": {
+                    "reference": "Location/UG.N"
+                },
+                "type": [
+                    {
+                        "coding": [
+                            {
+                                "system": "http://ihris.org/fhir/CodeSystem/ihris-jurisdiction",
+                                "code": "district"
+                            }
+                        ],
+                        "text": "District"
+                    }
+                ],
+                "physicalType": {
+                    "coding": [
+                        {
+                            "system": "http://hl7.org/fhir/codesystem-location-physical-type.html",
+                            "code": "jdn"
+                        }
+                    ],
+                    "text": "Jurisdiction"
+                }
+            },
+            "request": {
+                "method": "PUT",
+                "url": "Location/UG.N.NAP"
+            }
+        },
+		{
+            "resource": {
+                "resourceType": "Location",
+                "meta": {
+                    "profile": [
+                        "http://ihris.org/fhir/StructureDefinition/ihris-jurisdiction"
+                    ]
+                },
+                "id": "UG.N.NEB",
+                "name": "Nebbi",
+                "status": "active",
+                "partOf": {
+                    "reference": "Location/UG.N"
+                },
+                "type": [
+                    {
+                        "coding": [
+                            {
+                                "system": "http://ihris.org/fhir/CodeSystem/ihris-jurisdiction",
+                                "code": "district"
+                            }
+                        ],
+                        "text": "District"
+                    }
+                ],
+                "physicalType": {
+                    "coding": [
+                        {
+                            "system": "http://hl7.org/fhir/codesystem-location-physical-type.html",
+                            "code": "jdn"
+                        }
+                    ],
+                    "text": "Jurisdiction"
+                }
+            },
+            "request": {
+                "method": "PUT",
+                "url": "Location/UG.N.NEB"
+            }
+        },
+		{
+            "resource": {
+                "resourceType": "Location",
+                "meta": {
+                    "profile": [
+                        "http://ihris.org/fhir/StructureDefinition/ihris-jurisdiction"
+                    ]
+                },
+                "id": "UG.E.NGO",
+                "name": "Ngora",
+                "status": "active",
+                "partOf": {
+                    "reference": "Location/UG.E"
+                },
+                "type": [
+                    {
+                        "coding": [
+                            {
+                                "system": "http://ihris.org/fhir/CodeSystem/ihris-jurisdiction",
+                                "code": "district"
+                            }
+                        ],
+                        "text": "District"
+                    }
+                ],
+                "physicalType": {
+                    "coding": [
+                        {
+                            "system": "http://hl7.org/fhir/codesystem-location-physical-type.html",
+                            "code": "jdn"
+                        }
+                    ],
+                    "text": "Jurisdiction"
+                }
+            },
+            "request": {
+                "method": "PUT",
+                "url": "Location/UG.E.NGO"
+            }
+        },
+		{
+            "resource": {
+                "resourceType": "Location",
+                "meta": {
+                    "profile": [
+                        "http://ihris.org/fhir/StructureDefinition/ihris-jurisdiction"
+                    ]
+                },
+                "id": "UG.W.NTO",
+                "name": "Ntoroko",
+                "status": "active",
+                "partOf": {
+                    "reference": "Location/UG.W"
+                },
+                "type": [
+                    {
+                        "coding": [
+                            {
+                                "system": "http://ihris.org/fhir/CodeSystem/ihris-jurisdiction",
+                                "code": "district"
+                            }
+                        ],
+                        "text": "District"
+                    }
+                ],
+                "physicalType": {
+                    "coding": [
+                        {
+                            "system": "http://hl7.org/fhir/codesystem-location-physical-type.html",
+                            "code": "jdn"
+                        }
+                    ],
+                    "text": "Jurisdiction"
+                }
+            },
+            "request": {
+                "method": "PUT",
+                "url": "Location/UG.W.NTO"
+            }
+        },
+		{
+            "resource": {
+                "resourceType": "Location",
+                "meta": {
+                    "profile": [
+                        "http://ihris.org/fhir/StructureDefinition/ihris-jurisdiction"
+                    ]
+                },
+                "id": "UG.W.NTU",
+                "name": "Ntungamo",
+                "status": "active",
+                "partOf": {
+                    "reference": "Location/UG.W"
+                },
+                "type": [
+                    {
+                        "coding": [
+                            {
+                                "system": "http://ihris.org/fhir/CodeSystem/ihris-jurisdiction",
+                                "code": "district"
+                            }
+                        ],
+                        "text": "District"
+                    }
+                ],
+                "physicalType": {
+                    "coding": [
+                        {
+                            "system": "http://hl7.org/fhir/codesystem-location-physical-type.html",
+                            "code": "jdn"
+                        }
+                    ],
+                    "text": "Jurisdiction"
+                }
+            },
+            "request": {
+                "method": "PUT",
+                "url": "Location/UG.W.NTU"
+            }
+        },
+		{
+            "resource": {
+                "resourceType": "Location",
+                "meta": {
+                    "profile": [
+                        "http://ihris.org/fhir/StructureDefinition/ihris-jurisdiction"
+                    ]
+                },
+                "id": "UG.N.NWO",
+                "name": "Nwoya",
+                "status": "active",
+                "partOf": {
+                    "reference": "Location/UG.N"
+                },
+                "type": [
+                    {
+                        "coding": [
+                            {
+                                "system": "http://ihris.org/fhir/CodeSystem/ihris-jurisdiction",
+                                "code": "district"
+                            }
+                        ],
+                        "text": "District"
+                    }
+                ],
+                "physicalType": {
+                    "coding": [
+                        {
+                            "system": "http://hl7.org/fhir/codesystem-location-physical-type.html",
+                            "code": "jdn"
+                        }
+                    ],
+                    "text": "Jurisdiction"
+                }
+            },
+            "request": {
+                "method": "PUT",
+                "url": "Location/UG.N.NWO"
+            }
+        },
+		{
+            "resource": {
+                "resourceType": "Location",
+                "meta": {
+                    "profile": [
+                        "http://ihris.org/fhir/StructureDefinition/ihris-jurisdiction"
+                    ]
+                },
+                "id": "UG.N.OBO",
+                "name": "Obongi",
+                "status": "active",
+                "partOf": {
+                    "reference": "Location/UG.N"
+                },
+                "type": [
+                    {
+                        "coding": [
+                            {
+                                "system": "http://ihris.org/fhir/CodeSystem/ihris-jurisdiction",
+                                "code": "district"
+                            }
+                        ],
+                        "text": "District"
+                    }
+                ],
+                "physicalType": {
+                    "coding": [
+                        {
+                            "system": "http://hl7.org/fhir/codesystem-location-physical-type.html",
+                            "code": "jdn"
+                        }
+                    ],
+                    "text": "Jurisdiction"
+                }
+            },
+            "request": {
+                "method": "PUT",
+                "url": "Location/UG.N.OBO"
+            }
+        },
+		{
+            "resource": {
+                "resourceType": "Location",
+                "meta": {
+                    "profile": [
+                        "http://ihris.org/fhir/StructureDefinition/ihris-jurisdiction"
+                    ]
+                },
+                "id": "UG.N.OMO",
+                "name": "Omoro",
+                "status": "active",
+                "partOf": {
+                    "reference": "Location/UG.N"
+                },
+                "type": [
+                    {
+                        "coding": [
+                            {
+                                "system": "http://ihris.org/fhir/CodeSystem/ihris-jurisdiction",
+                                "code": "district"
+                            }
+                        ],
+                        "text": "District"
+                    }
+                ],
+                "physicalType": {
+                    "coding": [
+                        {
+                            "system": "http://hl7.org/fhir/codesystem-location-physical-type.html",
+                            "code": "jdn"
+                        }
+                    ],
+                    "text": "Jurisdiction"
+                }
+            },
+            "request": {
+                "method": "PUT",
+                "url": "Location/UG.N.OMO"
+            }
+        },
+		{
+            "resource": {
+                "resourceType": "Location",
+                "meta": {
+                    "profile": [
+                        "http://ihris.org/fhir/StructureDefinition/ihris-jurisdiction"
+                    ]
+                },
+                "id": "UG.N.OTU",
+                "name": "Otuke",
+                "status": "active",
+                "partOf": {
+                    "reference": "Location/UG.N"
+                },
+                "type": [
+                    {
+                        "coding": [
+                            {
+                                "system": "http://ihris.org/fhir/CodeSystem/ihris-jurisdiction",
+                                "code": "district"
+                            }
+                        ],
+                        "text": "District"
+                    }
+                ],
+                "physicalType": {
+                    "coding": [
+                        {
+                            "system": "http://hl7.org/fhir/codesystem-location-physical-type.html",
+                            "code": "jdn"
+                        }
+                    ],
+                    "text": "Jurisdiction"
+                }
+            },
+            "request": {
+                "method": "PUT",
+                "url": "Location/UG.N.OTU"
+            }
+        },
+		{
+            "resource": {
+                "resourceType": "Location",
+                "meta": {
+                    "profile": [
+                        "http://ihris.org/fhir/StructureDefinition/ihris-jurisdiction"
+                    ]
+                },
+                "id": "UG.N.OYA",
+                "name": "Oyam",
+                "status": "active",
+                "partOf": {
+                    "reference": "Location/UG.N"
+                },
+                "type": [
+                    {
+                        "coding": [
+                            {
+                                "system": "http://ihris.org/fhir/CodeSystem/ihris-jurisdiction",
+                                "code": "district"
+                            }
+                        ],
+                        "text": "District"
+                    }
+                ],
+                "physicalType": {
+                    "coding": [
+                        {
+                            "system": "http://hl7.org/fhir/codesystem-location-physical-type.html",
+                            "code": "jdn"
+                        }
+                    ],
+                    "text": "Jurisdiction"
+                }
+            },
+            "request": {
+                "method": "PUT",
+                "url": "Location/UG.N.OYA"
+            }
+        },
+		{
+            "resource": {
+                "resourceType": "Location",
+                "meta": {
+                    "profile": [
+                        "http://ihris.org/fhir/StructureDefinition/ihris-jurisdiction"
+                    ]
+                },
+                "id": "UG.N.PAD",
+                "name": "Pader",
+                "status": "active",
+                "partOf": {
+                    "reference": "Location/UG.N"
+                },
+                "type": [
+                    {
+                        "coding": [
+                            {
+                                "system": "http://ihris.org/fhir/CodeSystem/ihris-jurisdiction",
+                                "code": "district"
+                            }
+                        ],
+                        "text": "District"
+                    }
+                ],
+                "physicalType": {
+                    "coding": [
+                        {
+                            "system": "http://hl7.org/fhir/codesystem-location-physical-type.html",
+                            "code": "jdn"
+                        }
+                    ],
+                    "text": "Jurisdiction"
+                }
+            },
+            "request": {
+                "method": "PUT",
+                "url": "Location/UG.N.PAD"
+            }
+        },
+		{
+            "resource": {
+                "resourceType": "Location",
+                "meta": {
+                    "profile": [
+                        "http://ihris.org/fhir/StructureDefinition/ihris-jurisdiction"
+                    ]
+                },
+                "id": "UG.N.PAK",
+                "name": "Pakwach",
+                "status": "active",
+                "partOf": {
+                    "reference": "Location/UG.N"
+                },
+                "type": [
+                    {
+                        "coding": [
+                            {
+                                "system": "http://ihris.org/fhir/CodeSystem/ihris-jurisdiction",
+                                "code": "district"
+                            }
+                        ],
+                        "text": "District"
+                    }
+                ],
+                "physicalType": {
+                    "coding": [
+                        {
+                            "system": "http://hl7.org/fhir/codesystem-location-physical-type.html",
+                            "code": "jdn"
+                        }
+                    ],
+                    "text": "Jurisdiction"
+                }
+            },
+            "request": {
+                "method": "PUT",
+                "url": "Location/UG.N.PAK"
+            }
+        },
+		{
+            "resource": {
+                "resourceType": "Location",
+                "meta": {
+                    "profile": [
+                        "http://ihris.org/fhir/StructureDefinition/ihris-jurisdiction"
+                    ]
+                },
+                "id": "UG.E.PAL",
+                "name": "Pallisa",
+                "status": "active",
+                "partOf": {
+                    "reference": "Location/UG.E"
+                },
+                "type": [
+                    {
+                        "coding": [
+                            {
+                                "system": "http://ihris.org/fhir/CodeSystem/ihris-jurisdiction",
+                                "code": "district"
+                            }
+                        ],
+                        "text": "District"
+                    }
+                ],
+                "physicalType": {
+                    "coding": [
+                        {
+                            "system": "http://hl7.org/fhir/codesystem-location-physical-type.html",
+                            "code": "jdn"
+                        }
+                    ],
+                    "text": "Jurisdiction"
+                }
+            },
+            "request": {
+                "method": "PUT",
+                "url": "Location/UG.E.PAL"
+            }
+        },
+		{
+            "resource": {
+                "resourceType": "Location",
+                "meta": {
+                    "profile": [
+                        "http://ihris.org/fhir/StructureDefinition/ihris-jurisdiction"
+                    ]
+                },
+                "id": "UG.CC.RAK",
+                "name": "Rakai",
+                "status": "active",
+                "partOf": {
+                    "reference": "Location/UG.CC"
+                },
+                "type": [
+                    {
+                        "coding": [
+                            {
+                                "system": "http://ihris.org/fhir/CodeSystem/ihris-jurisdiction",
+                                "code": "district"
+                            }
+                        ],
+                        "text": "District"
+                    }
+                ],
+                "physicalType": {
+                    "coding": [
+                        {
+                            "system": "http://hl7.org/fhir/codesystem-location-physical-type.html",
+                            "code": "jdn"
+                        }
+                    ],
+                    "text": "Jurisdiction"
+                }
+            },
+            "request": {
+                "method": "PUT",
+                "url": "Location/UG.CC.RAK"
+            }
+        },
+		{
+            "resource": {
+                "resourceType": "Location",
+                "meta": {
+                    "profile": [
+                        "http://ihris.org/fhir/StructureDefinition/ihris-jurisdiction"
+                    ]
+                },
+                "id": "UG.W.RUB",
+                "name": "Rubanda",
+                "status": "active",
+                "partOf": {
+                    "reference": "Location/UG.W"
+                },
+                "type": [
+                    {
+                        "coding": [
+                            {
+                                "system": "http://ihris.org/fhir/CodeSystem/ihris-jurisdiction",
+                                "code": "district"
+                            }
+                        ],
+                        "text": "District"
+                    }
+                ],
+                "physicalType": {
+                    "coding": [
+                        {
+                            "system": "http://hl7.org/fhir/codesystem-location-physical-type.html",
+                            "code": "jdn"
+                        }
+                    ],
+                    "text": "Jurisdiction"
+                }
+            },
+            "request": {
+                "method": "PUT",
+                "url": "Location/UG.W.RUB"
+            }
+        },
+		{
+            "resource": {
+                "resourceType": "Location",
+                "meta": {
+                    "profile": [
+                        "http://ihris.org/fhir/StructureDefinition/ihris-jurisdiction"
+                    ]
+                },
+                "id": "UG.W.RUBIRIZI",
+                "name": "Rubirizi",
+                "status": "active",
+                "partOf": {
+                    "reference": "Location/UG.W"
+                },
+                "type": [
+                    {
+                        "coding": [
+                            {
+                                "system": "http://ihris.org/fhir/CodeSystem/ihris-jurisdiction",
+                                "code": "district"
+                            }
+                        ],
+                        "text": "District"
+                    }
+                ],
+                "physicalType": {
+                    "coding": [
+                        {
+                            "system": "http://hl7.org/fhir/codesystem-location-physical-type.html",
+                            "code": "jdn"
+                        }
+                    ],
+                    "text": "Jurisdiction"
+                }
+            },
+            "request": {
+                "method": "PUT",
+                "url": "Location/UG.W.RUBIRIZI"
+            }
+        },
+		{
+            "resource": {
+                "resourceType": "Location",
+                "meta": {
+                    "profile": [
+                        "http://ihris.org/fhir/StructureDefinition/ihris-jurisdiction"
+                    ]
+                },
+                "id": "UG.W.RUK",
+                "name": "Rukiga",
+                "status": "active",
+                "partOf": {
+                    "reference": "Location/UG.W"
+                },
+                "type": [
+                    {
+                        "coding": [
+                            {
+                                "system": "http://ihris.org/fhir/CodeSystem/ihris-jurisdiction",
+                                "code": "district"
+                            }
+                        ],
+                        "text": "District"
+                    }
+                ],
+                "physicalType": {
+                    "coding": [
+                        {
+                            "system": "http://hl7.org/fhir/codesystem-location-physical-type.html",
+                            "code": "jdn"
+                        }
+                    ],
+                    "text": "Jurisdiction"
+                }
+            },
+            "request": {
+                "method": "PUT",
+                "url": "Location/UG.W.RUK"
+            }
+        },
+		{
+            "resource": {
+                "resourceType": "Location",
+                "meta": {
+                    "profile": [
+                        "http://ihris.org/fhir/StructureDefinition/ihris-jurisdiction"
+                    ]
+                },
+                "id": "UG.W.RUKUNGIRI",
+                "name": "Rukungiri",
+                "status": "active",
+                "partOf": {
+                    "reference": "Location/UG.W"
+                },
+                "type": [
+                    {
+                        "coding": [
+                            {
+                                "system": "http://ihris.org/fhir/CodeSystem/ihris-jurisdiction",
+                                "code": "district"
+                            }
+                        ],
+                        "text": "District"
+                    }
+                ],
+                "physicalType": {
+                    "coding": [
+                        {
+                            "system": "http://hl7.org/fhir/codesystem-location-physical-type.html",
+                            "code": "jdn"
+                        }
+                    ],
+                    "text": "Jurisdiction"
+                }
+            },
+            "request": {
+                "method": "PUT",
+                "url": "Location/UG.W.Rukungiri"
+            }
+        },
+		{
+            "resource": {
+                "resourceType": "Location",
+                "meta": {
+                    "profile": [
+                        "http://ihris.org/fhir/StructureDefinition/ihris-jurisdiction"
+                    ]
+                },
+                "id": "UG.W.RWA",
+                "name": "Rwampara",
+                "status": "active",
+                "partOf": {
+                    "reference": "Location/UG.E"
+                },
+                "type": [
+                    {
+                        "coding": [
+                            {
+                                "system": "http://ihris.org/fhir/CodeSystem/ihris-jurisdiction",
+                                "code": "district"
+                            }
+                        ],
+                        "text": "District"
+                    }
+                ],
+                "physicalType": {
+                    "coding": [
+                        {
+                            "system": "http://hl7.org/fhir/codesystem-location-physical-type.html",
+                            "code": "jdn"
+                        }
+                    ],
+                    "text": "Jurisdiction"
+                }
+            },
+            "request": {
+                "method": "PUT",
+                "url": "Location/UG.W.RWA"
+            }
+        },
+		{
+            "resource": {
+                "resourceType": "Location",
+                "meta": {
+                    "profile": [
+                        "http://ihris.org/fhir/StructureDefinition/ihris-jurisdiction"
+                    ]
+                },
+                "id": "UG.CC.SEM",
+                "name": "Sembabule",
+                "status": "active",
+                "partOf": {
+                    "reference": "Location/UG.CC"
+                },
+                "type": [
+                    {
+                        "coding": [
+                            {
+                                "system": "http://ihris.org/fhir/CodeSystem/ihris-jurisdiction",
+                                "code": "district"
+                            }
+                        ],
+                        "text": "District"
+                    }
+                ],
+                "physicalType": {
+                    "coding": [
+                        {
+                            "system": "http://hl7.org/fhir/codesystem-location-physical-type.html",
+                            "code": "jdn"
+                        }
+                    ],
+                    "text": "Jurisdiction"
+                }
+            },
+            "request": {
+                "method": "PUT",
+                "url": "Location/UG.CC.SEM"
+            }
+        },
+		{
+            "resource": {
+                "resourceType": "Location",
+                "meta": {
+                    "profile": [
+                        "http://ihris.org/fhir/StructureDefinition/ihris-jurisdiction"
+                    ]
+                },
+                "id": "UG.E.SER",
+                "name": "Serere",
+                "status": "active",
+                "partOf": {
+                    "reference": "Location/UG.E"
+                },
+                "type": [
+                    {
+                        "coding": [
+                            {
+                                "system": "http://ihris.org/fhir/CodeSystem/ihris-jurisdiction",
+                                "code": "district"
+                            }
+                        ],
+                        "text": "District"
+                    }
+                ],
+                "physicalType": {
+                    "coding": [
+                        {
+                            "system": "http://hl7.org/fhir/codesystem-location-physical-type.html",
+                            "code": "jdn"
+                        }
+                    ],
+                    "text": "Jurisdiction"
+                }
+            },
+            "request": {
+                "method": "PUT",
+                "url": "Location/UG.E.SER"
+            }
+        },
+		{
+            "resource": {
+                "resourceType": "Location",
+                "meta": {
+                    "profile": [
+                        "http://ihris.org/fhir/StructureDefinition/ihris-jurisdiction"
+                    ]
+                },
+                "id": "UG.W.SHE",
+                "name": "Sheema",
+                "status": "active",
+                "partOf": {
+                    "reference": "Location/UG.E"
+                },
+                "type": [
+                    {
+                        "coding": [
+                            {
+                                "system": "http://ihris.org/fhir/CodeSystem/ihris-jurisdiction",
+                                "code": "district"
+                            }
+                        ],
+                        "text": "District"
+                    }
+                ],
+                "physicalType": {
+                    "coding": [
+                        {
+                            "system": "http://hl7.org/fhir/codesystem-location-physical-type.html",
+                            "code": "jdn"
+                        }
+                    ],
+                    "text": "Jurisdiction"
+                }
+            },
+            "request": {
+                "method": "PUT",
+                "url": "Location/UG.W.SHE"
+            }
+        },
+		{
+            "resource": {
+                "resourceType": "Location",
+                "meta": {
+                    "profile": [
+                        "http://ihris.org/fhir/StructureDefinition/ihris-jurisdiction"
+                    ]
+                },
+                "id": "UG.E.SIR",
+                "name": "Sironko",
+                "status": "active",
+                "partOf": {
+                    "reference": "Location/UG.E"
+                },
+                "type": [
+                    {
+                        "coding": [
+                            {
+                                "system": "http://ihris.org/fhir/CodeSystem/ihris-jurisdiction",
+                                "code": "district"
+                            }
+                        ],
+                        "text": "District"
+                    }
+                ],
+                "physicalType": {
+                    "coding": [
+                        {
+                            "system": "http://hl7.org/fhir/codesystem-location-physical-type.html",
+                            "code": "jdn"
+                        }
+                    ],
+                    "text": "Jurisdiction"
+                }
+            },
+            "request": {
+                "method": "PUT",
+                "url": "Location/UG.E.SIR"
+            }
+        },
+		{
+            "resource": {
+                "resourceType": "Location",
+                "meta": {
+                    "profile": [
+                        "http://ihris.org/fhir/StructureDefinition/ihris-jurisdiction"
+                    ]
+                },
+                "id": "UG.E.SOROTI",
+                "name": "Soroti",
+                "status": "active",
+                "partOf": {
+                    "reference": "Location/UG.E"
+                },
+                "type": [
+                    {
+                        "coding": [
+                            {
+                                "system": "http://ihris.org/fhir/CodeSystem/ihris-jurisdiction",
+                                "code": "district"
+                            }
+                        ],
+                        "text": "District"
+                    }
+                ],
+                "physicalType": {
+                    "coding": [
+                        {
+                            "system": "http://hl7.org/fhir/codesystem-location-physical-type.html",
+                            "code": "jdn"
+                        }
+                    ],
+                    "text": "Jurisdiction"
+                }
+            },
+            "request": {
+                "method": "PUT",
+                "url": "Location/UG.E.SOROTI"
+            }
+        },
+		{
+            "resource": {
+                "resourceType": "Location",
+                "meta": {
+                    "profile": [
+                        "http://ihris.org/fhir/StructureDefinition/ihris-jurisdiction"
+                    ]
+                },
+                "id": "UG.E.TORORO",
+                "name": "Tororo",
+                "status": "active",
+                "partOf": {
+                    "reference": "Location/UG.E"
+                },
+                "type": [
+                    {
+                        "coding": [
+                            {
+                                "system": "http://ihris.org/fhir/CodeSystem/ihris-jurisdiction",
+                                "code": "district"
+                            }
+                        ],
+                        "text": "District"
+                    }
+                ],
+                "physicalType": {
+                    "coding": [
+                        {
+                            "system": "http://hl7.org/fhir/codesystem-location-physical-type.html",
+                            "code": "jdn"
+                        }
+                    ],
+                    "text": "Jurisdiction"
+                }
+            },
+            "request": {
+                "method": "PUT",
+                "url": "Location/UG.E.TORORO"
+            }
+        },
+		{
+            "resource": {
+                "resourceType": "Location",
+                "meta": {
+                    "profile": [
+                        "http://ihris.org/fhir/StructureDefinition/ihris-jurisdiction"
+                    ]
+                },
+                "id": "UG.CC.WAK",
+                "name": "Wakiso",
+                "status": "active",
+                "partOf": {
+                    "reference": "Location/UG.CC"
+                },
+                "type": [
+                    {
+                        "coding": [
+                            {
+                                "system": "http://ihris.org/fhir/CodeSystem/ihris-jurisdiction",
+                                "code": "district"
+                            }
+                        ],
+                        "text": "District"
+                    }
+                ],
+                "physicalType": {
+                    "coding": [
+                        {
+                            "system": "http://hl7.org/fhir/codesystem-location-physical-type.html",
+                            "code": "jdn"
+                        }
+                    ],
+                    "text": "Jurisdiction"
+                }
+            },
+            "request": {
+                "method": "PUT",
+                "url": "Location/UG.CC.WAK"
+            }
+        },
+		{
+            "resource": {
+                "resourceType": "Location",
+                "meta": {
+                    "profile": [
+                        "http://ihris.org/fhir/StructureDefinition/ihris-jurisdiction"
+                    ]
+                },
+                "id": "UG.N.YUM",
+                "name": "Yumbe",
+                "status": "active",
+                "partOf": {
+                    "reference": "Location/UG.N"
+                },
+                "type": [
+                    {
+                        "coding": [
+                            {
+                                "system": "http://ihris.org/fhir/CodeSystem/ihris-jurisdiction",
+                                "code": "district"
+                            }
+                        ],
+                        "text": "District"
+                    }
+                ],
+                "physicalType": {
+                    "coding": [
+                        {
+                            "system": "http://hl7.org/fhir/codesystem-location-physical-type.html",
+                            "code": "jdn"
+                        }
+                    ],
+                    "text": "Jurisdiction"
+                }
+            },
+            "request": {
+                "method": "PUT",
+                "url": "Location/UG.N.YUM"
+            }
+        },
+		{
+            "resource": {
+                "resourceType": "Location",
+                "meta": {
+                    "profile": [
+                        "http://ihris.org/fhir/StructureDefinition/ihris-jurisdiction"
+                    ]
+                },
+                "id": "UG.N.ZOM",
+                "name": "Zombo",
+                "status": "active",
+                "partOf": {
+                    "reference": "Location/UG.N"
+                },
+                "type": [
+                    {
+                        "coding": [
+                            {
+                                "system": "http://ihris.org/fhir/CodeSystem/ihris-jurisdiction",
+                                "code": "district"
+                            }
+                        ],
+                        "text": "District"
+                    }
+                ],
+                "physicalType": {
+                    "coding": [
+                        {
+                            "system": "http://hl7.org/fhir/codesystem-location-physical-type.html",
+                            "code": "jdn"
+                        }
+                    ],
+                    "text": "Jurisdiction"
+                }
+            },
+            "request": {
+                "method": "PUT",
+                "url": "Location/UG.N.ZOM"
+            }
+        }

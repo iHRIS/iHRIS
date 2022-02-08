@@ -40,8 +40,6 @@ const workflowUser = {
             user.lookupByEmail(userEmail).then( async (userObj) =>  {
               if ( !userObj ) {
 
-                console.log("we are here",userEmail)
-
                 if(req.body.item[0].item[5].linkId === "location" 
                     && req.body.item[0].item[5].answer 
                     && req.body.item[0].item[5].answer[0] 

@@ -3,44 +3,44 @@ const crypto = require('crypto')
 const logger = require('../winston')
 
 // Don't allow any settings to these values from a remote config
-const invalidRemoteKeys = [ 'fhir', 'config', 'session', 'keys',
-  'logs', 'emnutt', 'elasticsearch', 'reports' ]
+const invalidRemoteKeys = ['fhir', 'config', 'session', 'keys',
+  'logs', 'emnutt', 'elasticsearch', 'reports']
 
 const fhirConfig = {
   checkBoolean: (value) => {
     return /^(true|yes|1)$/i.test(value)
   },
-  parseFile: ( file ) => {
-    let configString = fs.readFileSync( file )
-    let config = JSON.parse( configString )
+  parseFile: (file) => {
+    let configString = fs.readFileSync(file)
+    let config = JSON.parse(configString)
 
     let defaults = {}
-    if ( config.meta && config.meta.profile
-      && config.meta.profile.includes( "http://ihris.org/fhir/StructureDefinition/ihris-parameters-local-config" ) ) {
-      for ( let param of config.parameter ) {
-        if( param.hasOwnProperty("valueString") ) {
+    if (config.meta && config.meta.profile
+      && config.meta.profile.includes("http://ihris.org/fhir/StructureDefinition/ihris-parameters-local-config")) {
+      for (let param of config.parameter) {
+        if (param.hasOwnProperty("valueString")) {
           let split = param.name.split(':')
           let last = split.pop()
           let assign = defaults
-          for( let level of split ) {
-            if ( !assign.hasOwnProperty( level ) ) {
+          for (let level of split) {
+            if (!assign.hasOwnProperty(level)) {
               assign[level] = {}
             }
             assign = assign[level]
           }
           assign[last] = param.valueString
-        } else if ( param.hasOwnProperty("part") ) {
-          if ( !defaults.hasOwnProperty( param.name ) ) {
+        } else if (param.hasOwnProperty("part")) {
+          if (!defaults.hasOwnProperty(param.name)) {
             defaults[param.name] = {}
           }
-          for ( let part of param.part ) {
-            if( part.hasOwnProperty("valueString") ) {
+          for (let part of param.part) {
+            if (part.hasOwnProperty("valueString")) {
               //defaults[param.name][part.name] = part.valueString
               let split = part.name.split(':')
               let last = split.pop()
               let assign = defaults[param.name]
-              for( let level of split ) {
-                if ( !assign.hasOwnProperty( level ) ) {
+              for (let level of split) {
+                if (!assign.hasOwnProperty(level)) {
                   assign[level] = {}
                 }
                 assign = assign[level]
@@ -51,51 +51,48 @@ const fhirConfig = {
         }
       }
     } else {
-      logger.warn( "Invalid profile for configuration file: " + file )
+      logger.warn("Invalid profile for configuration file: " + file)
     }
     return defaults
   },
-  parseRemote: ( config, keys, skipSignature ) => {
-
-
-    console.log("config found",config)
+  parseRemote: (config, keys, skipSignature) => {
 
     let defaults = {}
-    if ( config.meta && config.meta.profile
-      && config.meta.profile.includes( "http://ihris.org/fhir/StructureDefinition/ihris-parameters-remote-config" ) ) {
+    if (config.meta && config.meta.profile
+      && config.meta.profile.includes("http://ihris.org/fhir/StructureDefinition/ihris-parameters-remote-config")) {
 
       let configAccepted = false
-      let  addconf  = config.parameter.find( param => param.name === "config" )
+      let addconf = config.parameter.find(param => param.name === "config")
 
-      if ( skipSignature ) {
+      if (skipSignature) {
         // logger.warn("SKIPPING SECURITY CHECK ON REMOTE CONFIG:",config.id,". This should only be done in development.")
         configAccepted = true
       } else {
-        let sig = config.parameter.find( param => param.name === "signature" )
+        let sig = config.parameter.find(param => param.name === "signature")
 
-        let verifier = crypto.createVerify( 'sha256' )
-        verifier.update( JSON.stringify( addconf.part ) )
+        let verifier = crypto.createVerify('sha256')
+        verifier.update(JSON.stringify(addconf.part))
 
-        for( let key of keys ) {
-          if ( verifier.verify( key, sig.valueSignature.data, 'base64' ) ) {
+        for (let key of keys) {
+          if (verifier.verify(key, sig.valueSignature.data, 'base64')) {
             configAccepted = true
             break
           }
         }
       }
 
-      if ( configAccepted ) {
-        for ( let param of addconf.part) {
-          if( param.hasOwnProperty("valueString") ) {
+      if (configAccepted) {
+        for (let param of addconf.part) {
+          if (param.hasOwnProperty("valueString")) {
             let split = param.name.split(':')
-            if ( invalidRemoteKeys.includes( split[0] ) ) {
-              logger.warn("Can't override "+split[0]+" from remote config file.")
+            if (invalidRemoteKeys.includes(split[0])) {
+              logger.warn("Can't override " + split[0] + " from remote config file.")
               continue
             }
             let last = split.pop()
             let assign = defaults
-            for( let level of split ) {
-              if ( !assign.hasOwnProperty( level ) ) {
+            for (let level of split) {
+              if (!assign.hasOwnProperty(level)) {
                 assign[level] = {}
               }
               assign = assign[level]
@@ -104,11 +101,11 @@ const fhirConfig = {
           }
         }
       } else {
-        console.log("Something Happened" ,configAccepted)
+        console.log("Something Happened", configAccepted)
         // logger.warn( "No valid key set for configuration Parameters " + config.id )
       }
     } else {
-      logger.warn( "Invalid profile for remote configuration parameters for " + config.id )
+      logger.warn("Invalid profile for remote configuration parameters for " + config.id)
     }
 
     return defaults

@@ -61,9 +61,6 @@ passport.use(new GoogleStrategy(
 passport.use('local', new LocalStrategy({ passReqToCallback: true },
   (req, email, password, done) => {
     user.lookupByEmail(email).then((userObj) => {
-
-      console.log("user",JSON.stringify(userObj,null,2))
-
       if (!userObj) {
         fhirAudit.login(userObj, req.ip, false, email)
         done(null, false)
@@ -158,7 +155,7 @@ router.post("/login", passport.authenticate('local', {}), (req, res) => {
     name = req.user.resource.name[0].text
   } catch (err) {
   }
-  res.status(200).json({ ok: true, name: name, data: req.user })
+  res.status(200).json({ ok: true, name: name })
 })
 
 router.post('/token', (req, res) => {
