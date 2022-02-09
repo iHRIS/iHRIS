@@ -15,9 +15,9 @@ const workflowLeave = {
         };
         
         resource = await fhirAxios.read("Practitioner", req.query.practitioner);
-        if (resource.active == false) {
+        /*if (resource.active == false) {
           resolve(await workflowLeave.outcome("This practitioner is not currently active"));
-        }
+        }*/
         if (
           req.body &&
           req.body.item &&
@@ -107,6 +107,9 @@ const workflowLeave = {
               valueDate: req.body.item[0].item[3].answer[0].valueDate,
             });
           }
+
+          console.log("EXT ", complexExt)
+          return;
           if (complexExt) {
             extensions.push({
               url: "http://ihris.org/fhir/StructureDefinition/ihris-leave",
