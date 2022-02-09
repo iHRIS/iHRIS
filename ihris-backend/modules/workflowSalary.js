@@ -130,9 +130,6 @@ const workflowSalary = {
         } else {
           resolve(await workflowSalary.outcome("No Salary Scale provided"))
         }
-      } ).catch( (err) => {
-        winston.error(err)
-        resolve(await workflowSalary.outcome("No Person(Practitioner) Record found"))
       } )
     } )
   },

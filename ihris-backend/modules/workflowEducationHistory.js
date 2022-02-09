@@ -98,12 +98,7 @@ const workflowEducationHistory = {
             }
           } )
           resolve( bundle )
-        } else {
-          resolve(await workflowEducationHistory.outcome("Institution not provided"))
-        }
-      } ).catch( (err) => {
-        winston.error(err)
-        resolve(await workflowEducationHistory.outcome("No Person(Practitioner) Record found"))
+        } 
       } )
     } )
   },

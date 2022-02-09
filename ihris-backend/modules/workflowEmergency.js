@@ -126,10 +126,6 @@ const workflowEmergency = {
           //reject("Invalid input")
           resolve(await workflowEmergency.outcome("Emergency Contact Name not provided"))
         }
-      } ).catch( (err) => {
-        //winston.error(err.message)
-        resolve(await workflowEmergency.outcome("No Person(Practitioner) Record found"))
-        //reject(err)
       } )
     } )
   },
