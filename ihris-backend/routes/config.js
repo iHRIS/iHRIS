@@ -1104,6 +1104,9 @@ router.get('/report/es/:report', (req, res) => {
 })
 
 router.get('/report/:report', function (req, res) {
+
+  console.log("report",req.params.report)
+
   let report = "ihris-report-" + req.params.report
   if (!req.user) {
     return res.status(401).json(outcomes.NOTLOGGEDIN)
