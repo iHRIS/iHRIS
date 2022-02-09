@@ -255,12 +255,12 @@ Usage:          #example
 * extension[section][5].extension[resource].extension[column][4].extension[field].valueString = "extension.where(url='http://ihris.org/fhir/StructureDefinition/ihris-leave').extension.where(url='period').valuePeriod.end"
 * extension[section][5].extension[resource].extension[column][5].extension[header].valueString = "Actions"
 * extension[section][5].extension[resource].extension[column][5].extension[field].valueString = "_action"
-* extension[section][5].extension[resource].extension[action][0].extension[link].valueString = "/questionnaire/ihris-leave/practitioner?practitioner=FHIRID"
+* extension[section][5].extension[resource].extension[action][0].extension[link].valueString = "/questionnaire/ihris-leave/leave?practitioner=FHIRID"
 * extension[section][5].extension[resource].extension[action][0].extension[text].valueString = "Add Leave"
 * extension[section][5].extension[resource].extension[action][0].extension[row].valueBoolean = false
 * extension[section][5].extension[resource].extension[action][0].extension[emptyDisplay].valueBoolean = true
 * extension[section][5].extension[resource].extension[action][0].extension[class].valueString = "primary"
-* extension[section][5].extension[resource].extension[action][1].extension[link].valueString = "/resource/view/basicleave/ITEMID"
+* extension[section][5].extension[resource].extension[action][1].extension[link].valueString = "/resource/view/leave/ITEMID"
 * extension[section][5].extension[resource].extension[action][1].extension[text].valueString = "View"
 * extension[section][5].extension[resource].extension[action][1].extension[row].valueBoolean = true
 * extension[section][5].extension[resource].extension[action][1].extension[class].valueString = "primary"
@@ -280,7 +280,7 @@ Usage:          #example
 * extension[section][6].extension[resource].extension[column][3].extension[field].valueString = "extension.where(url='http://ihris.org/fhir/StructureDefinition/ihris-performance').extension.where(url='period').valuePeriod.end"
 * extension[section][6].extension[resource].extension[column][4].extension[header].valueString = "Actions"
 * extension[section][6].extension[resource].extension[column][4].extension[field].valueString = "_action"
-* extension[section][6].extension[resource].extension[action][0].extension[link].valueString = "/questionnaire/ihris-performance/practitioner?practitioner=FHIRID"
+* extension[section][6].extension[resource].extension[action][0].extension[link].valueString = "/questionnaire/ihris-performance/performance?practitioner=FHIRID"
 * extension[section][6].extension[resource].extension[action][0].extension[text].valueString = "Add Perfromamce Evaluation"
 * extension[section][6].extension[resource].extension[action][0].extension[row].valueBoolean = false
 * extension[section][6].extension[resource].extension[action][0].extension[emptyDisplay].valueBoolean = true
