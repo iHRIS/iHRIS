@@ -16,10 +16,8 @@ const workflowContract = {
           entry: []
         }
       
-        //winston.info(JSON.stringify( req.body,null,2))
-        resource = await fhirAxios.read( "Practitioner", req.query.practitioner )
-      
-        if (resource.resourceType === "Practitioner") {
+        
+        fhirAxios.read( "Practitioner", req.query.practitioner ).then( (resource) => {
           if ( req.body && req.body.item 
             && req.body.item && req.body.item[0].linkId === "PractitionerRole"
             && req.body.item[0].item && req.body.item[0].item[0].linkId === "PractitionerRole.code" 
@@ -127,10 +125,7 @@ const workflowContract = {
             winston.error("Either Duty Post or Job title not provided")
             resolve(await workflowContract.outcome("Either Duty Post or Job title not provided"))
           }
-        } else {
-          winston.error("No Person(Practitioner) Record found")
-          resolve(await workflowContract.outcome("No Person(Practitioner) Record found"))
-        }
+        })
       } catch(err) {
         reject(err)
       } 

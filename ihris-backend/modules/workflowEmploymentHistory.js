@@ -118,10 +118,6 @@ const workflowEmploymentHistory = {
           //reject("Invalid input")
           resolve(await workflowEmploymentHistory.outcome("Organization not provided"))
         }
-      } ).catch( (err) => {
-        winston.error(err)
-        //reject(err)
-        resolve(await workflowEmploymentHistory.outcome("No Person(Practitioner) Record found"))
       } )
     } )
   },

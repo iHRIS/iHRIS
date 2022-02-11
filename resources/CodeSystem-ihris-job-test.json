@@ -1,0 +1,65 @@
+{
+  "resourceType": "CodeSystem",
+  "id": "ihris-job",
+  "url": "http://ihris.org/fhir/CodeSystem/ihris-job",
+  "name": "iHRISJob",
+  "title": "iHRIS Job",
+  "date": "2022-01-18T20:48:33.646Z",
+  "version":"5",
+  "publisher": "iHRIS Foundation",
+  "contact": [
+    {
+      "telecom": [
+        {
+          "system": "url",
+          "value": "http://ihris.org"
+        }
+      ]
+    }
+  ],
+  "description": "Sample iHRIS CodeSystem for: iHRISJob",
+  "content": "complete",
+  "property": [
+    {
+      "code": "cadre",
+      "uri": "http://ihris.org/fhir/ValueSet/ihris-cadre",
+      "description": "The cadre of this job.",
+      "type": "Coding"
+    },
+    {
+      "code": "classification",
+      "uri": "http://ihris.org/fhir/ValueSet/ihris-classification",
+      "description": "The classification of this job.",
+      "type": "Coding"
+    },
+    {
+      "code": "salary-grade",
+      "uri": "http://ihris.org/fhir/ValueSet/ihris-salary-grade",
+      "description": "The salary grade of this job.",
+      "type": "Coding"
+    }
+  ],
+  "concept": [
+    {
+      "code": "PT-30000",
+      "display": "SOMETHING",
+      "definition": "Department managers plan, direct and coordinate the internal administration or financial operations of the enterprise or organisation, under the broad guidance of the directors.",
+      "property": [
+        {
+          "code": "classification",
+          "valueCoding": {
+            "system": "http://ihris.org/fhir/CodeSystem/ihris-classification",
+            "code": "non-health"
+          }
+        },
+        {
+          "code": "salary-grade",
+          "valueCoding": {
+            "system": "http://ihris.org/fhir/CodeSystem/ihris-salary-grade",
+            "code": "prof-mid-level"
+          }
+        }
+      ]
+    }
+  ]
+}

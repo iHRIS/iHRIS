@@ -110,9 +110,6 @@ const workflowDiscipline = {
           //reject("Invalid input")
           resolve(await workflowDiscipline.outcome("Disciplinary Action Type not provided"))
         }
-      } ).catch( (err) => {
-        winston.error(err)
-        resolve(await workflowDiscipline.outcome("No Person(Practitioner) Record found"))
       } )
     } )
   },

@@ -387,12 +387,13 @@ export default {
           response.json().then(data => {
             this.overlay = false
             this.loading = false
+           
             if ( this.fhirId ) {
-               this.$store.commit("setMessage", {
+              this.$store.commit("setMessage", {
                 type: "success",
                 text: "Update successful.",
               });
-              setTimeout(() => this.$router.go(0), 2000);
+              setTimeout(() => this.$router.go(0), 1000);
             } else {
               this.$router.push({ name:"resource_view", params: {page: this.page, id: data.id } })
             }
