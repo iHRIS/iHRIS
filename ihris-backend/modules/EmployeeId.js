@@ -49,7 +49,7 @@ module.exports = create = async (userData) => {
         width: backJpgDims.width,
         height: backJpgDims.height
     } )
-    let logoPath = path.join(__dirname,'../', 'images/iHRIS5Logo.png')
+    let logoPath = path.join(__dirname,'../', 'images/logo.png')
     const logo = fs.readFileSync(logoPath)
     const ministryLogo = await pdfDoc.embedPng(logo)
     page.drawImage( ministryLogo,

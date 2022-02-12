@@ -1060,7 +1060,7 @@ router.get('/report/es/:report', (req, res) => {
         reportData.fieldsDetails.push([displayName, esField])
       }
     }
-    // populate data type of filters
+   // populate data type of filters
     let url = URI(nconf.get('elasticsearch:base')).segment(indexName).segment('_mapping').toString()
     const options = {
       method: 'GET',
@@ -1100,14 +1100,14 @@ router.get('/report/es/:report', (req, res) => {
       logger.error(err.stack);
       return res.status(500).send()
     })
+
   })
 })
 
 router.get('/report/:report', function (req, res) {
 
-  console.log("report",req.params.report)
+  let report = req.params.report
 
-  let report = "ihris-report-" + req.params.report
   if (!req.user) {
     return res.status(401).json(outcomes.NOTLOGGEDIN)
   }
@@ -1117,6 +1117,7 @@ router.get('/report/:report', function (req, res) {
     return res.status(401).json(outcomes.DENIED)
   }
   fhirAxios.read("Basic", report).then(async (resource) => {
+
     let reportDetails = resource.extension.find((ext) => {
       return ext.url === "http://ihris.org/fhir/StructureDefinition/ihris-report-details"
     })
