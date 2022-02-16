@@ -491,8 +491,5 @@
       "code": "iHRISRelationship"
     }],
     "text": "iHRISRelationship"
-  },
-  "subject": {
-    "reference": "StructureDefinition/Basic"
   }
 }

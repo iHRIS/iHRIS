@@ -247,8 +247,5 @@
       }
     ],
     "text": "iHRISRelationship"
-  },
-  "subject": {
-    "reference": "StructureDefinition/Basic"
   }
 }
