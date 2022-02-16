@@ -1,7 +1,7 @@
 Profile:        IhrisJurisdiction
 Parent:         Location
 Id:             ihris-jurisdiction
-Title:          "Jurisdiction"
+Title:          "NHWR Jurisdiction"
 Description:    "iHRIS Profile of Locations to manage jurisdictions."
 * type 1..1 MS
 * type ^label = "Location Type"
@@ -23,8 +23,8 @@ Description:    "iHRIS Profile of Locations to manage jurisdictions."
 Profile:        IhrisFacility
 Parent:         Location
 Id:             ihris-facility
-Title:          "iHRIS Facility"
-Description:    "iHRIS Profile of Locations to manage facilities."
+Title:          "NHWR Facility"
+Description:    "NHWR Profile of Locations to manage facilities."
 * type 1..* MS
 * type ^label = "Facilty Service Type"
 * type.coding 1..1 MS
@@ -64,7 +64,7 @@ Title:           "Jurisdiction Type(Country/Region/District/County)"
 
 Instance:       ihris-page-facility
 InstanceOf:     IhrisPage
-Title:          "iHRIS Facility Page"
+Title:          "NHWR Facility Page"
 Usage:          #example
 * code = IhrisResourceCodeSystem#page
 * extension[display].extension[resource].valueReference = Reference(StructureDefinition/ihris-facility)
@@ -103,7 +103,7 @@ Usage:          #example
 
 Instance:       ihris-page-location
 InstanceOf:     IhrisPage
-Title:          "iHRIS Location Page"
+Title:          "NHWR Location Page"
 Usage:          #example
 * code = IhrisResourceCodeSystem#page
 * extension[display].extension[resource].valueReference = Reference(StructureDefinition/ihris-jurisdiction)
