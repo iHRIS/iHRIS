@@ -28,8 +28,10 @@ const getData = ({indexName, searchQuery}, callback) => {
           password: nconf.get('elasticsearch:password'),
         }
       }).then((response) => {
+        console.log("RESPONSE")
         if(response.data.hits && response.data.hits.hits && Array.isArray(response.data.hits.hits)) {
           documents = documents.concat(response.data.hits.hits)
+          console.log("Documents ", documents)
         }
         if(response.data.hits.hits.length === 0 || !response.data._scroll_id) {
           scroll_id = null

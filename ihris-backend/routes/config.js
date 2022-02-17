@@ -14,28 +14,62 @@ const getUKey = () => {
   return Math.random().toString(36).replace(/^[^a-z]+/,'') + Math.random().toString(36).substring(2,15)
 }
 const filterNavigation = ( user, nav, prefix ) => {
-  for( let key of Object.keys(nav.menu) ) {
-    let instance
-    if ( prefix ) {
-      instance = prefix +":"+ key
-    } else {
-      instance = key
-    }
-    if ( nav.menu[key].menu ) {
-      filterNavigation( user, nav.menu[key], instance )
-      if ( Object.keys(nav.menu[key].menu).length === 0 ) {
+  let email = user.resource.telecom[0].value
+  let roleObj = user.resource.extension.filter(ext => ext.url === "http://ihris.org/fhir/StructureDefinition/ihris-assign-role")
+  let roles = []
+  let reference = ""
+  roleObj.forEach(r =>{
+    let elt = r.valueReference.reference.split("/")
+    roles.push(elt.pop())
+  })
+  
+  if(roles.includes('ihris-role-self')){
+
+    let refObj = user.resource.extension.filter(ext => ext.url === "http://ihris.org/fhir/StructureDefinition/ihris-user-practitioner")
+    reference = refObj[0].valueReference.reference.toLowerCase()
+ 
+    for( let key of Object.keys(nav.menu) ) {
+      let instance
+      if ( prefix ) {
+        instance = prefix +"-"+ key
+      } else {
+        instance = key
+      }
+      if(instance === "profile"){
+        nav.menu[key].url += `/${reference}`
+      }
+      console.log(instance)
+      if(!user.hasPermissionByName( "special", "navigation", instance ) ) {
         delete nav.menu[key]
       }
-    } else {
-      if( !user.hasPermissionByName( "special", "navigation", instance ) ) {
-        delete nav.menu[key]
+    }
+    console.log("NAV ",user)
+  }
+  else{
+    for( let key of Object.keys(nav.menu) ) {
+      let instance
+      if ( prefix ) {
+        instance = prefix +"-"+ key
+      } else {
+        instance = key
+      }
+      if ( nav.menu[key].menu ) {
+        filterNavigation( user, nav.menu[key], instance )
+        if ( Object.keys(nav.menu[key].menu).length === 0 ) {
+          delete nav.menu[key]
+        }
+      } else {
+        if(/*!user.hasPermissionByName( "special", "navigation", instance)  ||*/ nav.menu[key].exclusive) {
+          delete nav.menu[key]
+        }
       }
     }
   }
+  
 }
 
 /* GET home page. */
-router.get('/site', function(req, res) {
+router.get('/site', async function(req, res) {
   const defaultUser = nconf.get("user:loggedout") || "ihris-user-loggedout"
   let site = JSON.parse(JSON.stringify(nconf.get("site") || {}))
   if ( nconf.getBool("security:disabled") ) {
@@ -48,6 +82,29 @@ router.get('/site', function(req, res) {
     } else {
       site.user.loggedin = true
       site.user.name = req.user.resource.name[0].text
+      let locReference = ""
+      let refObj = req.user.resource.extension.find(ext => 
+        ext.url === "http://ihris.org/fhir/StructureDefinition/ihris-user-location"
+        )
+      let location = ""
+      if(refObj){
+        locReference = refObj.valueReference.reference
+        location = await getLocationByRef(locReference).then(loc =>{
+            return loc
+        })
+        if(location !== "") location = " - "+location
+      }
+      site.user.location = location
+      req.user.resource.extension.forEach(ext => {
+        if(ext.url === "http://ihris.org/fhir/StructureDefinition/ihris-user-practitioner"){
+          site.user.reference = ext.valueReference.reference
+        }
+        
+        if(ext.url === "http://ihris.org/fhir/StructureDefinition/ihris-assign-role"){
+          let _role = ext.valueReference.reference.split("/")
+          site.user.role = _role.pop()
+        }
+      })
     }
     filterNavigation( req.user, site.nav )
   } else {
@@ -1073,7 +1130,7 @@ router.get('/report/es/:report', (req, res) => {
         }
       }
       template += `</ihris-es-report>`
-      return res.status(200).json({
+      res.status(200).json({
         reportTemplate: template,
         reportData: reportData
       })

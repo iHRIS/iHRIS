@@ -17,7 +17,7 @@ const fhirReports = require('./modules/fhirReports')
 const { createProxyMiddleware } = require('http-proxy-middleware')
 const cors = require('cors')
 const RedisStore = require('connect-redis')(session)
-
+const outcomes = require('./config/operationOutcomes')
 const app = express()
 
 app.use(cors())
@@ -75,7 +75,7 @@ async function startUp() {
 
   await nconf.loadRemote()
 
-  generalMixin.removeDir(`${__dirname}/tmp`)
+  //generalMixin.removeDir(`${__dirname}/tmp`)
 
   try {
     let reportsRunning = await fhirReports.setup()
@@ -99,7 +99,7 @@ async function startUp() {
   }
 
   const isLoggedIn = (req, res, next) => {
-    if(req.path.startsWith('/config') || req.path.startsWith('/fhir') || req.path.startsWith('/auth/token') ){
+    if(req.path.startsWith('/config') || req.path.startsWith('/fhir') || req.path.startsWith('/es') || req.path.startsWith('/auth/token') ){
       return next()
     }
     if (nconf.get('app:idp') === 'keycloak') {
@@ -139,7 +139,7 @@ async function startUp() {
         }
       }
       if (!req.user) {
-        res.setHeader('Access-Control-Allow-Origin', req.headers.origin);
+        res.setHeader('Access-Control-Allow-Origin', '*'/*req.headers.origin*/);
         res.set('Access-Control-Allow-Credentials', true);
         return res.status(401).json(outcomes.NOTLOGGEDIN);
       }
@@ -150,14 +150,17 @@ async function startUp() {
   };
 
   app.use(morgan('dev'))
-
+  const kibanaUSER = nconf.get('kibana:username')
+  const kibanaPASS = nconf.get('kibana:password')
+  
   // This has to be before the body parser or it won't proxy a POST body
   app.use('/kibana', createProxyMiddleware( {
-    target: nconf.get('kibana:base') || "http://localhost:5601"
+    target: nconf.get('kibana:base') || "http://localhost:5601",
     //headers: { 'kbn-xsrf': true },
     //changeOrigin: true,
     //ws: true,
     //followRedirects: true
+    //auth: ''+kibanaUSER+':'+kibanaPASS
   } ) )
 
 
@@ -186,7 +189,6 @@ async function startUp() {
     saveUninitialized: false
   }))
   app.use(express.static(path.join(__dirname, 'public')))
-
 
   //app.use('/', indexRouter)
 
@@ -225,6 +227,7 @@ async function startUp() {
       }
     }
   }
+
   /*
   testMod = fhirModules.require()
   if ( testMod ) app.use( '/mod', testMod )
