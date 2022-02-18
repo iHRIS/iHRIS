@@ -46,74 +46,64 @@ Usage:          #example
 * extension[reportdetails].extension[reportelement][5].extension[display].valueString = "BirthDate"
 
 
-* extension[reportdetails].extension[reportelement][6].extension[label].valueString = "nationality"
-* extension[reportdetails].extension[reportelement][6].extension[name].valueString = "Practitioner.extension.where(url='http://ihris.org/fhir/StructureDefinition/ihris-practitioner-nationality').valueCoding.display"
-* extension[reportdetails].extension[reportelement][6].extension[display].valueString = "Citizenship"
+* extension[reportdetails].extension[reportelement][6].extension[label].valueString = "phone"
+* extension[reportdetails].extension[reportelement][6].extension[name].valueString = "telecom.where(use='official').value"
+* extension[reportdetails].extension[reportelement][6].extension[display].valueString = "Phone Number"
+* extension[reportdetails].extension[reportelement][6].extension[filter].valueBoolean = false
+* extension[reportdetails].extension[reportelement][6].extension[dropDownFilter].valueBoolean = false
+
+// * extension[reportlink][0].extension[name].valueString = "role"
+// * extension[reportlink][0].extension[resource].valueString = "PractitionerRole"
+// * extension[reportlink][0].extension[linkElement].valueString = "PractitionerRole.practitioner.reference"
+// * extension[reportlink][0].extension[linkTo].valueString = "practitioner"
+// * extension[reportlink][0].extension[linkElementSearchParameter].valueString = "practitioner"
+// * extension[reportlink][0].extension[multiple].valueBoolean = false
+// * extension[reportlink][0].extension[reportelement][0].extension[label].valueString = "job"
+// * extension[reportlink][0].extension[reportelement][0].extension[name].valueString = "code.coding.where(system='http://ihris.org/fhir/CodeSystem/ihris-job').display"
+// * extension[reportlink][0].extension[reportelement][0].extension[display].valueString = "Job Title"
 
 
-* extension[reportdetails].extension[reportelement][7].extension[label].valueString = "phone"
-* extension[reportdetails].extension[reportelement][7].extension[name].valueString = "Practitioner.extension.where(url='http://ihris.org/fhir/StructureDefinition/ihris-practitioner-phone').valueString"
-* extension[reportdetails].extension[reportelement][7].extension[display].valueString = "Phone Number"
-* extension[reportdetails].extension[reportelement][7].extension[filter].valueBoolean = false
-* extension[reportdetails].extension[reportelement][7].extension[dropDownFilter].valueBoolean = false
+// * extension[reportlink][0].extension[reportelement][1].extension[label].valueString = "startDate"
+// * extension[reportlink][0].extension[reportelement][1].extension[name].valueString = "period.start"
+// * extension[reportlink][0].extension[reportelement][1].extension[display].valueString = "Start Date"
 
-* extension[reportdetails].extension[reportelement][8].extension[label].valueString = "ihris-related-group"
-* extension[reportdetails].extension[reportelement][8].extension[name].valueString = "Practitioner.extension.where(url='http://ihris.org/fhir/StructureDefinition/ihris-related-group').extension.where(url='location').valueString"
-* extension[reportdetails].extension[reportelement][8].extension[filter].valueBoolean = false
-* extension[reportdetails].extension[reportelement][8].extension[dropDownFilter].valueBoolean = false
 
-* extension[reportlink][0].extension[name].valueString = "role"
-* extension[reportlink][0].extension[resource].valueString = "PractitionerRole"
-* extension[reportlink][0].extension[linkElement].valueString = "PractitionerRole.practitioner.reference"
-* extension[reportlink][0].extension[linkTo].valueString = "practitioner"
-* extension[reportlink][0].extension[linkElementSearchParameter].valueString = "practitioner"
+// * extension[reportlink][0].extension[reportelement][2].extension[label].valueString = "endDate"
+// * extension[reportlink][0].extension[reportelement][2].extension[name].valueString = "period.end"
+// * extension[reportlink][0].extension[reportelement][2].extension[display].valueString = "End Date"
+
+
+
+* extension[reportlink][0].extension[name].valueString = "facility"
+* extension[reportlink][0].extension[resource].valueString = "Location"
+* extension[reportlink][0].extension[linkElement].valueString = "Location.id"
+* extension[reportlink][0].extension[linkTo].valueString = "role.location.reference"
 * extension[reportlink][0].extension[multiple].valueBoolean = false
-* extension[reportlink][0].extension[reportelement][0].extension[label].valueString = "job"
-* extension[reportlink][0].extension[reportelement][0].extension[name].valueString = "code.coding.where(system='http://ihris.org/fhir/CodeSystem/ihris-job').display"
-* extension[reportlink][0].extension[reportelement][0].extension[display].valueString = "Job Title"
+* extension[reportlink][0].extension[reportelement][0].extension[label].valueString = "dutyPost"
+* extension[reportlink][0].extension[reportelement][0].extension[name].valueString = "name"
+* extension[reportlink][0].extension[reportelement][0].extension[display].valueString = "Facility/Place of work"
+* extension[reportlink][0].extension[reportelement][0].extension[filter].valueBoolean = true
+* extension[reportlink][0].extension[reportelement][0].extension[dropDownFilter].valueBoolean = true
 
-
-* extension[reportlink][0].extension[reportelement][1].extension[label].valueString = "startDate"
-* extension[reportlink][0].extension[reportelement][1].extension[name].valueString = "period.start"
-* extension[reportlink][0].extension[reportelement][1].extension[display].valueString = "Start Date"
-
-
-* extension[reportlink][0].extension[reportelement][2].extension[label].valueString = "endDate"
-* extension[reportlink][0].extension[reportelement][2].extension[name].valueString = "period.end"
-* extension[reportlink][0].extension[reportelement][2].extension[display].valueString = "End Date"
-
-
-
-* extension[reportlink][1].extension[name].valueString = "facility"
+* extension[reportlink][1].extension[name].valueString = "district"
 * extension[reportlink][1].extension[resource].valueString = "Location"
 * extension[reportlink][1].extension[linkElement].valueString = "Location.id"
-* extension[reportlink][1].extension[linkTo].valueString = "role.location.reference"
+* extension[reportlink][1].extension[linkTo].valueString = "facility.partOf.reference"
 * extension[reportlink][1].extension[multiple].valueBoolean = false
-* extension[reportlink][1].extension[reportelement][0].extension[label].valueString = "dutyPost"
+* extension[reportlink][1].extension[reportelement][0].extension[label].valueString = "parentDistrict"
 * extension[reportlink][1].extension[reportelement][0].extension[name].valueString = "name"
-* extension[reportlink][1].extension[reportelement][0].extension[display].valueString = "Facility/Place of work"
+* extension[reportlink][1].extension[reportelement][0].extension[display].valueString = "District"
 * extension[reportlink][1].extension[reportelement][0].extension[filter].valueBoolean = true
 * extension[reportlink][1].extension[reportelement][0].extension[dropDownFilter].valueBoolean = true
 
-* extension[reportlink][2].extension[name].valueString = "district"
+
+* extension[reportlink][2].extension[name].valueString = "region"
 * extension[reportlink][2].extension[resource].valueString = "Location"
 * extension[reportlink][2].extension[linkElement].valueString = "Location.id"
-* extension[reportlink][2].extension[linkTo].valueString = "facility.partOf.reference"
+* extension[reportlink][2].extension[linkTo].valueString = "district.partOf.reference"
 * extension[reportlink][2].extension[multiple].valueBoolean = false
-* extension[reportlink][2].extension[reportelement][0].extension[label].valueString = "parentDistrict"
+* extension[reportlink][2].extension[reportelement][0].extension[label].valueString = "parentRegion"
 * extension[reportlink][2].extension[reportelement][0].extension[name].valueString = "name"
-* extension[reportlink][2].extension[reportelement][0].extension[display].valueString = "District"
+* extension[reportlink][2].extension[reportelement][0].extension[display].valueString = "Region"
 * extension[reportlink][2].extension[reportelement][0].extension[filter].valueBoolean = true
 * extension[reportlink][2].extension[reportelement][0].extension[dropDownFilter].valueBoolean = true
-
-
-* extension[reportlink][3].extension[name].valueString = "region"
-* extension[reportlink][3].extension[resource].valueString = "Location"
-* extension[reportlink][3].extension[linkElement].valueString = "Location.id"
-* extension[reportlink][3].extension[linkTo].valueString = "district.partOf.reference"
-* extension[reportlink][3].extension[multiple].valueBoolean = false
-* extension[reportlink][3].extension[reportelement][0].extension[label].valueString = "parentRegion"
-* extension[reportlink][3].extension[reportelement][0].extension[name].valueString = "name"
-* extension[reportlink][3].extension[reportelement][0].extension[display].valueString = "Region"
-* extension[reportlink][3].extension[reportelement][0].extension[filter].valueBoolean = true
-* extension[reportlink][3].extension[reportelement][0].extension[dropDownFilter].valueBoolean = true
