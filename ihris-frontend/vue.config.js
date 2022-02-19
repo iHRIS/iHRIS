@@ -1,5 +1,7 @@
 module.exports = {
   runtimeCompiler: true,
+  outputDir: "../ihris-backend/public",
+  transpileDependencies: ["vuetify"],
   devServer: {
     proxy: {
       '^/fhir': {
