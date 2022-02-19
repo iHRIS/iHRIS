@@ -1,8 +1,8 @@
 Profile:          IhrisModule
 Parent:           Library
 Id:               ihris-module
-Title:            "iHRIS Module"
-Description:      "iHRIS profile of Library resource to manage modules."
+Title:            "NHWR Module"
+Description:      "NHWR profile of Library resource to manage modules."
 * name 1..1
 * title 1..1
 * author 1..*
@@ -27,11 +27,11 @@ Description:      "iHRIS profile of Library resource to manage modules."
 
 Instance:         ihris-module-example
 InstanceOf:       IhrisModule
-Title:            "iHRIS Module Example"
+Title:            "NHWR Module Example"
 Usage:            #example
 * status = #active
 * name = "ihris-example"
-* title = "iHRIS Example Module"
+* title = "NHWR Example Module"
 * author[0].name = "Test Author"
 * author[0].telecom[0].system = #email
 * author[0].telecom[0].value = "test@ihris.org"

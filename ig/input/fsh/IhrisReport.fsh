@@ -1,16 +1,16 @@
 Profile:        IhrisReport
 Parent:         Basic
 Id:             ihris-report
-Title:          "iHRIS Report"
-Description:    "iHRIS Profile of the Basic resource to manage reports."
+Title:          "NHWR Report"
+Description:    "NHWR Profile of the Basic resource to manage reports."
 * extension contains
       IhrisReportDetails named reportDetails 1..1 MS
 
 
 Extension:      IhrisResourceRelationships
 Id:             ihris-resource-relationships
-Title:          "iHRIS Resource Relationships"
-Description:    "iHRIS Resource Relationships"
+Title:          "NHWR Resource Relationships"
+Description:    "NHWR Resource Relationships"
 * ^context.type = #element
 * ^context.expression = "IhrisResourceRelationships"
 * extension contains

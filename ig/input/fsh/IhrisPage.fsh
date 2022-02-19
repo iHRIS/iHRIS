@@ -1,8 +1,8 @@
 Profile:        IhrisPage
 Parent:         Basic
 Id:             ihris-page
-Title:          "iHRIS Page"
-Description:    "iHRIS Profile of the Basic resource to manage pages."
+Title:          "NHWR Page"
+Description:    "NHWR Profile of the Basic resource to manage pages."
 * code = IhrisResourceCodeSystem#page
 * extension contains
       IhrisPageDisplay named display 1..1 MS and
@@ -10,8 +10,8 @@ Description:    "iHRIS Profile of the Basic resource to manage pages."
 
 Extension:      IhrisPageDisplay
 Id:             ihris-page-display
-Title:          "iHRIS Page Display"
-Description:    "iHRIS Page Display details."
+Title:          "NHWR Page Display"
+Description:    "NHWR Page Display details."
 * ^context.type = #element
 * ^context.expression = "IhrisPage"
 * extension contains
@@ -88,8 +88,8 @@ Description:    "iHRIS Page Display details."
 
 Extension:      IhrisPageSection
 Id:             ihris-page-section
-Title:          "iHRIS Page Section"
-Description:    "iHRIS Page Section information."
+Title:          "NHWR Page Section"
+Description:    "NHWR Page Section information."
 * ^context.type = #element
 * ^context.expression = "IhrisPage"
 * extension contains
@@ -421,7 +421,7 @@ Usage:          #example
 
 Instance:       ihris-page-practitionerrole
 InstanceOf:     IhrisPage
-Title:          "iHRIS PractitionerRole Page"
+Title:          "NHWR PractitionerRole Page"
 Usage:          #example
 * code = IhrisResourceCodeSystem#page
 * extension[display].extension[resource].valueReference = Reference(StructureDefinition/ihris-practitioner-role)
@@ -448,7 +448,7 @@ Usage:          #example
 
 Instance:       ihris-page-job
 InstanceOf:     IhrisPage
-Title:          "iHRIS Job CodeSystem Page"
+Title:          "NHWR Job CodeSystem Page"
 Usage:          #example
 * code = IhrisResourceCodeSystem#page
 * extension[display].extension[resource].valueReference = Reference(CodeSystem/ihris-job)
@@ -468,7 +468,7 @@ Usage:          #example
 
 Instance:       ihris-page-salary-grade
 InstanceOf:     IhrisPage
-Title:          "iHRIS Salary Scale CodeSystem Page"
+Title:          "NHWR Salary Scale CodeSystem Page"
 Usage:          #example
 * code = IhrisResourceCodeSystem#page
 * extension[display].extension[resource].valueReference = Reference(CodeSystem/ihris-salary-grade)
@@ -483,7 +483,7 @@ Usage:          #example
 
 Instance:       ihris-page-classification
 InstanceOf:     IhrisPage
-Title:          "iHRIS Classification CodeSystem Page"
+Title:          "NHWR Classification CodeSystem Page"
 Usage:          #example
 * code = IhrisResourceCodeSystem#page
 * extension[display].extension[resource].valueReference = Reference(CodeSystem/ihris-classification)
@@ -498,7 +498,7 @@ Usage:          #example
 
 Instance:       ihris-page-cadre
 InstanceOf:     IhrisPage
-Title:          "iHRIS Cadre CodeSystem Page"
+Title:          "NHWR Cadre CodeSystem Page"
 Usage:          #example
 * code = IhrisResourceCodeSystem#page
 * extension[display].extension[resource].valueReference = Reference(CodeSystem/ihris-cadre)
@@ -513,7 +513,7 @@ Usage:          #example
 
 Instance:       ihris-page-leave-type
 InstanceOf:     IhrisPage
-Title:          "iHRIS Leave Type CodeSystem Page"
+Title:          "NHWR Leave Type CodeSystem Page"
 Usage:          #example
 * code = IhrisResourceCodeSystem#page
 * extension[display].extension[resource].valueReference = Reference(CodeSystem/ihris-leave-type-codesystem)
@@ -528,7 +528,7 @@ Usage:          #example
 
 Instance:       ihris-page-educational-major
 InstanceOf:     IhrisPage
-Title:          "iHRIS Educational Major CodeSystem Page"
+Title:          "NHWR Educational Major CodeSystem Page"
 Usage:          #example
 * code = IhrisResourceCodeSystem#page
 * extension[display].extension[resource].valueReference = Reference(CodeSystem/ihris-educational-major-codesystem)
@@ -545,7 +545,7 @@ Usage:          #example
 
 Instance:       ihris-page-shift
 InstanceOf:     IhrisPage
-Title:          "iHRIS Shift CodeSystem Page"
+Title:          "NHWR Shift CodeSystem Page"
 Usage:          #example
 * code = IhrisResourceCodeSystem#page
 * extension[display].extension[resource].valueReference = Reference(CodeSystem/ihris-shift-codesystem)
@@ -562,7 +562,7 @@ Usage:          #example
 
 Instance:       ihris-page-employment-status
 InstanceOf:     IhrisPage
-Title:          "iHRIS Employment Status CodeSystem Page"
+Title:          "NHWR Employment Status CodeSystem Page"
 Usage:          #example
 * code = IhrisResourceCodeSystem#page
 * extension[display].extension[resource].valueReference = Reference(CodeSystem/ihris-employment-status-codesystem)
@@ -579,7 +579,7 @@ Usage:          #example
 
 Instance:       ihris-page-job-type
 InstanceOf:     IhrisPage
-Title:          "iHRIS Job Type CodeSystem Page"
+Title:          "NHWR Job Type CodeSystem Page"
 Usage:          #example
 * code = IhrisResourceCodeSystem#page
 * extension[display].extension[resource].valueReference = Reference(CodeSystem/ihris-job-type-codesystem)
@@ -596,7 +596,7 @@ Usage:          #example
 
 Instance:       ihris-page-salary-scale
 InstanceOf:     IhrisPage
-Title:          "iHRIS Salary Scale CodeSystem Page"
+Title:          "NHWR Salary Scale CodeSystem Page"
 Usage:          #example
 * code = IhrisResourceCodeSystem#page
 * extension[display].extension[resource].valueReference = Reference(CodeSystem/ihris-salary-scale-codesystem)
@@ -613,7 +613,7 @@ Usage:          #example
 
 Instance:       ihris-page-reason-departure
 InstanceOf:     IhrisPage
-Title:          "iHRIS Reason for Departure CodeSystem Page"
+Title:          "NHWR Reason for Departure CodeSystem Page"
 Usage:          #example
 * code = IhrisResourceCodeSystem#page
 * extension[display].extension[resource].valueReference = Reference(CodeSystem/ihris-reason-departure-codesystem)
@@ -630,7 +630,7 @@ Usage:          #example
 
 Instance:       ihris-page-degree
 InstanceOf:     IhrisPage
-Title:          "iHRIS Degree CodeSystem Page"
+Title:          "NHWR Degree CodeSystem Page"
 Usage:          #example
 * code = IhrisResourceCodeSystem#page
 * extension[display].extension[resource].valueReference = Reference(CodeSystem/ihris-degree)
@@ -647,7 +647,7 @@ Usage:          #example
 
 Instance:       ihris-page-education-level
 InstanceOf:     IhrisPage
-Title:          "iHRIS Education Level CodeSystem Page"
+Title:          "NHWR Education Level CodeSystem Page"
 Usage:          #example
 * code = IhrisResourceCodeSystem#page
 * extension[display].extension[resource].valueReference = Reference(CodeSystem/ihris-education-level)
@@ -664,7 +664,7 @@ Usage:          #example
 
 Instance:       ihris-page-institution-type
 InstanceOf:     IhrisPage
-Title:          "iHRIS Institution Type CodeSystem Page"
+Title:          "NHWR Institution Type CodeSystem Page"
 Usage:          #example
 * code = IhrisResourceCodeSystem#page
 * extension[display].extension[resource].valueReference = Reference(CodeSystem/ihris-institution-type)
@@ -681,7 +681,7 @@ Usage:          #example
 
 Instance:       ihris-page-relation
 InstanceOf:     IhrisPage
-Title:          "iHRIS relationship type CodeSystem Page"
+Title:          "NHWR relationship type CodeSystem Page"
 Usage:          #example
 * code = IhrisResourceCodeSystem#page
 * extension[display].extension[resource].valueReference = Reference(CodeSystem/ihris-relation-codesystem)

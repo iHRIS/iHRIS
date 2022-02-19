@@ -2,7 +2,7 @@ Profile:        IhrisBasicEmploymentHistory
 Parent:         IhrisPractitionerBasic
 Id:             ihris-basic-employment-history
 Title:          "Work Experience Information"
-Description:    "iHRIS Profile of the Basic resource for Work Experience."
+Description:    "NHWR Profile of the Basic resource for Work Experience."
 * extension[practitioner].valueReference 1..1 MS
 * extension[practitioner].valueReference ^label = "Health Worker"
 * extension contains
@@ -75,8 +75,8 @@ Title:          "Work Experience details"
 Instance:       IhrisPractitionerWorkflowEmploymentHistory
 InstanceOf:     IhrisQuestionnaire
 Usage:          #definition
-* title = "iHRIS Work Experience Workflow"
-* description = "iHRIS workflow to record a Work Experience"
+* title = "NHWR Work Experience Workflow"
+* description = "NHWR workflow to record a Work Experience"
 * id = "ihris-employment-history"
 * url = "http://ihris.org/fhir/Questionnaire/ihris-employment-history"
 * name = "ihris-employment-history"
@@ -157,7 +157,7 @@ Usage:          #definition
 
 Instance:       ihris-page-employment-history
 InstanceOf:     IhrisPage
-Title:          "iHRIS Basic Work Experience Page"
+Title:          "NHWR Basic Work Experience Page"
 Usage:          #example
 * code = IhrisResourceCodeSystem#page
 * extension[display].extension[resource].valueReference = Reference(StructureDefinition/ihris-basic-employment-history)

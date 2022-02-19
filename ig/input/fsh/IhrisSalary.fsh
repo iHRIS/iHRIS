@@ -2,7 +2,7 @@ Profile:        IhrisBasicSalary
 Parent:         IhrisPractitionerBasic
 Id:             ihris-basic-salary
 Title:          "Salary Information"
-Description:    "iHRIS Profile of the Basic resource for Salary."
+Description:    "NHWR Profile of the Basic resource for Salary."
 * extension[practitioner].valueReference 1..1 MS
 * extension[practitioner].valueReference ^label = "Health Worker"
 * extension contains
@@ -104,7 +104,7 @@ Title:            "iHRIS Frequency ValueSet"
 Instance:       IhrisPractitionerWorkflowSalary
 InstanceOf:     IhrisQuestionnaire
 Usage:          #definition
-* title = "iHRIS Salary Workflow"
+* title = "NHWR Salary Workflow"
 * description = "iHRIS workflow to record a Salary"
 * id = "ihris-salary"
 * url = "http://ihris.org/fhir/Questionnaire/ihris-salary"
@@ -186,7 +186,7 @@ Usage:          #definition
 
 Instance:       ihris-page-salary
 InstanceOf:     IhrisPage
-Title:          "iHRIS Basic Salary Page"
+Title:          "NHWR Basic Salary Page"
 Usage:          #example
 * code = IhrisResourceCodeSystem#page
 * extension[display].extension[resource].valueReference = Reference(StructureDefinition/ihris-basic-salary)
@@ -218,7 +218,7 @@ Usage:          #example
 
 Instance:       ihris-page-salary-ladder
 InstanceOf:     IhrisPage
-Title:          "iHRIS Salary Ladder CodeSystem Page"
+Title:          "NHWR Salary Ladder CodeSystem Page"
 Usage:          #example
 * code = IhrisResourceCodeSystem#page
 * extension[display].extension[resource].valueReference = Reference(CodeSystem/ihris-salary-ladder-codesystem)
@@ -235,7 +235,7 @@ Usage:          #example
 
 Instance:       ihris-page-salary-step
 InstanceOf:     IhrisPage
-Title:          "iHRIS Salary Step CodeSystem Page"
+Title:          "NHWR Salary Step CodeSystem Page"
 Usage:          #example
 * code = IhrisResourceCodeSystem#page
 * extension[display].extension[resource].valueReference = Reference(CodeSystem/ihris-salary-step-codesystem)
@@ -252,7 +252,7 @@ Usage:          #example
 
 Instance:       ihris-page-salary-source
 InstanceOf:     IhrisPage
-Title:          "iHRIS Salary source CodeSystem Page"
+Title:          "NHWR Salary source CodeSystem Page"
 Usage:          #example
 * code = IhrisResourceCodeSystem#page
 * extension[display].extension[resource].valueReference = Reference(CodeSystem/ihris-salary-source-codesystem)
@@ -269,7 +269,7 @@ Usage:          #example
 
 Instance:       ihris-page-frequency
 InstanceOf:     IhrisPage
-Title:          "iHRIS Pay Frequency CodeSystem Page"
+Title:          "NHWR Pay Frequency CodeSystem Page"
 Usage:          #example
 * code = IhrisResourceCodeSystem#page
 * extension[display].extension[resource].valueReference = Reference(CodeSystem/ihris-frequency-codesystem)

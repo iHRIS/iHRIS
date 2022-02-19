@@ -1,6 +1,6 @@
 Instance:       ihris-es-report-staff
 InstanceOf:     IhrisRelationship
-Title:          "Staff Relationship"
+Title:          "NHWR Relationship"
 Usage:          #example
 
 * code.text = "iHRISRelationship"

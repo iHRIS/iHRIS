@@ -7,8 +7,8 @@ Severity:       #error
 Profile:        IhrisPractitioner
 Parent:         Practitioner
 Id:             ihris-practitioner
-Title:          "iHRIS Practitioner"
-Description:    "iHRIS profile of Practitioner."
+Title:          "NHWR Practitioner"
+Description:    "NHWR profile of Practitioner."
 * identifier 0..* MS
 * identifier ^label = "Identifier"
 * identifier ^constraint[0].key = "ihris-search-identifier"
@@ -103,8 +103,8 @@ Description:    "iHRIS profile of Practitioner."
 
 Extension:      IhrisPractitionerLanguageProficiency
 Id:             ihris-practitioner-language-proficiency
-Title:          "iHRIS Practitioner Language Proficiency"
-Description:    "iHRIS extension for Practitioner Language Proficiency."
+Title:          "NHWR Practitioner Language Proficiency"
+Description:    "NHWR extension for Practitioner Language Proficiency."
 * ^context.type = #element
 * ^context.expression = "Practitioner"
 * extension contains
@@ -122,8 +122,8 @@ Description:    "iHRIS extension for Practitioner Language Proficiency."
 
 Extension:      IhrisPractitionerResidence
 Id:             ihris-practitioner-residence
-Title:          "iHRIS Practitioner Residence"
-Description:    "iHRIS extension for Practitioner residence."
+Title:          "NHWR Practitioner Residence"
+Description:    "NHWR extension for Practitioner residence."
 * ^context.type = #element
 * ^context.expression = "Practitioner"
 * value[x] only Reference
@@ -142,8 +142,8 @@ Description:    "iHRIS extension for Practitioner residence."
 
 Extension:      IhrisPractitionerDependentDetail
 Id:             ihris-practitioner-dependent-detail
-Title:          "iHRIS Practitioner Dependent Detail"
-Description:    "iHRIS extension for Practitioner Dependent Detail."
+Title:          "NHWR Practitioner Dependent Detail"
+Description:    "NHWR extension for Practitioner Dependent Detail."
 * ^context.type = #element
 * ^context.expression = "Practitioner"
 * extension contains name 1..1 MS and
@@ -157,8 +157,8 @@ Description:    "iHRIS extension for Practitioner Dependent Detail."
 
 Extension:      IhrisPractitionerNationality
 Id:             ihris-practitioner-nationality
-Title:          "iHRIS Practitioner Nationality"
-Description:    "iHRIS extension for Practitioner nationality."
+Title:          "NHWR Practitioner Nationality"
+Description:    "NHWR extension for Practitioner nationality."
 * ^context.type = #element
 * ^context.expression = "Practitioner"
 * value[x] only Coding
@@ -168,8 +168,8 @@ Description:    "iHRIS extension for Practitioner nationality."
 
 Extension:      IhrisPractitionerMaritalStatus
 Id:             ihris-practitioner-marital-status
-Title:          "iHRIS Practitioner Marital Status"
-Description:    "iHRIS extension for Practitioner marital status."
+Title:          "NHWR Practitioner Marital Status"
+Description:    "NHWR extension for Practitioner marital status."
 * ^context.type = #element
 * ^context.expression = "Practitioner"
 * value[x] only Coding
@@ -179,8 +179,8 @@ Description:    "iHRIS extension for Practitioner marital status."
 
 Extension:      IhrisPractitionerDependents
 Id:             ihris-practitioner-dependents
-Title:          "iHRIS Practitioner Dependents"
-Description:    "iHRIS extension for Practitioner number of dependents."
+Title:          "NHWR Practitioner Dependents"
+Description:    "NHWR extension for Practitioner number of dependents."
 * ^context.type = #element
 * ^context.expression = "Practitioner"
 * value[x] only positiveInt
@@ -201,7 +201,7 @@ Title:           "Relationship"
 
 ValueSet:         IhrisRelationValueSet
 Id:               ihris-relation-valueset
-Title:            "iHRIS Relationship ValueSet"
+Title:            "NHWR Relationship ValueSet"
 * ^date = "2020-10-29T08:41:04.362Z"
 * ^version = "0.2.0"
 * codes from system IhrisRelationCodesystem
@@ -209,8 +209,8 @@ Title:            "iHRIS Relationship ValueSet"
 Instance:       IhrisPractitionerQuestionnaire
 InstanceOf:     IhrisQuestionnaire
 Usage:          #definition
-* title = "iHRIS Practitioner Questionnaire"
-* description = "iHRIS Practitioner initial data entry questionnaire."
+* title = "NHWR Practitioner Questionnaire"
+* description = "NHWR Practitioner initial data entry questionnaire."
 * id = "ihris-practitioner"
 * url = "http://ihris.org/fhir/Questionnaire/ihris-practitioner"
 * name = "ihris-practitioner"
@@ -499,8 +499,8 @@ Usage:          #definition
 Instance:       IhrisPractitionerWorkflowEndRole
 InstanceOf:     IhrisQuestionnaire
 Usage:          #definition
-* title = "iHRIS End Role Workflow"
-* description = "iHRIS workflow to end a current role/job"
+* title = "NHWR End Role Workflow"
+* description = "NHWR workflow to end a current role/job"
 * id = "ihris-endrole"
 * url = "http://ihris.org/fhir/Questionnaire/ihris-endrole"
 * name = "ihris-endrole"
@@ -537,8 +537,8 @@ Usage:          #definition
 Instance:       IhrisPractitionerWorkflowPromotion
 InstanceOf:     IhrisQuestionnaire
 Usage:          #definition
-* title = "iHRIS End Role Workflow"
-* description = "iHRIS workflow to record a promotion"
+* title = "NHWR End Role Workflow"
+* description = "NHWR workflow to record a promotion"
 * id = "ihris-promotion"
 * url = "http://ihris.org/fhir/Questionnaire/ihris-promotion"
 * name = "ihris-promotion"

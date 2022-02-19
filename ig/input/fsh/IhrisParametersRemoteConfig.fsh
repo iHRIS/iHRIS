@@ -1,7 +1,7 @@
 Profile:        IhrisParametersRemoteConfig
 Parent:         Parameters
 Id:             ihris-parameters-remote-config
-Title:          "iHRIS Parameters Remote Config"
+Title:          "NHWR Parameters Remote Config"
 Description:    "Configuration Parameters to be loaded from a remote file for iHRIS."
 * parameter 2..2
 * parameter ^slicing.discriminator.type = #value
@@ -36,8 +36,8 @@ Description:    "Configuration Parameters to be loaded from a remote file for iH
 
 Instance:     ihris-config
 InstanceOf:   IhrisParametersRemoteConfig
-Title:        "iHRIS Parameters Remote Config Example"
-Description:  "iHRIS Parameters Remote Config Example"
+Title:        "NHWR Parameters Remote Config Example"
+Description:  "NHWR Parameters Remote Config Example"
 Usage:        #example
 * parameter[Signature].valueSignature.data = "aTfS/8J0hl6k75tR5NawJgXZtDFACvNEolmriRmHrf6uu2EnrMfqXwzveZOQ1yrZ3Sf6cCLqIaYKsZKIfn+GLX0rVFsBBj4jLppQizZ5v/nPSh4s1opKTiFchrvN+rEGDAN5nFT3JselHgruXu/zBPNYnDbCub1x88zw5IxHAaY="
 * parameter[Signature].valueSignature.when = "2020-05-13T00:00:00Z"

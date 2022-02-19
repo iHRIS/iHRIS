@@ -1,8 +1,8 @@
 Profile:        IhrisRole
 Parent:         Basic
 Id:             ihris-role
-Title:          "iHRIS Role"
-Description:    "iHRIS Profile of the Basic resource to manage roles."
+Title:          "NHWR Role"
+Description:    "NHWR Profile of the Basic resource to manage roles."
 * code = IhrisResourceCodeSystem#role
 * extension contains
       IhrisBasicName named name 1..1 MS and
@@ -17,8 +17,8 @@ Description:    "iHRIS Profile of the Basic resource to manage roles."
 Profile:        IhrisTask
 Parent:         Basic
 Id:             ihris-task
-Title:          "iHRIS Task"
-Description:    "iHRIS Profile of the Basic resource to manage tasks."
+Title:          "NHWR Task"
+Description:    "NHWR Profile of the Basic resource to manage tasks."
 * code = IhrisResourceCodeSystem#task
 * extension contains
       IhrisBasicName named name 1..1 MS and
@@ -37,8 +37,8 @@ XPath:          "exists(f:extension(url = instance)) != exists(f:extension(url =
 
 Extension:      IhrisRolePrimary
 Id:             ihris-role-primary
-Title:          "iHRIS Role Primary"
-Description:    "iHRIS flag for roles to indicate a primary role for assignment to users."
+Title:          "NHWR Role Primary"
+Description:    "NHWR flag for roles to indicate a primary role for assignment to users."
 * ^context[1].type = #element
 * ^context[1].expression = "IhrisRole"
 * value[x] only boolean
@@ -46,8 +46,8 @@ Description:    "iHRIS flag for roles to indicate a primary role for assignment 
 
 Extension:      IhrisAssignRole
 Id:             ihris-assign-role
-Title:          "iHRIS Assign Role"
-Description:    "iHRIS Assign Role to a user or other role."
+Title:          "NHWR Assign Role"
+Description:    "NHWR Assign Role to a user or other role."
 * ^context[0].type = #element
 * ^context[0].expression = "Person"
 * ^context[1].type = #element
@@ -60,8 +60,8 @@ Description:    "iHRIS Assign Role to a user or other role."
 
 Extension:      IhrisAssignTask
 Id:             ihris-assign-task
-Title:          "iHRIS Assign Task"
-Description:    "iHRIS Assign Task to a user or other task."
+Title:          "NHWR Assign Task"
+Description:    "NHWR Assign Task to a user or other task."
 * ^context[0].type = #element
 * ^context[0].expression = "IhrisRole"
 * value[x] only Reference
@@ -151,7 +151,7 @@ Title:          "Code system for task permissions."
 
 Instance:       ihris-role-open
 InstanceOf:     IhrisRole
-Title:          "iHRIS Open Role"
+Title:          "NHWR Open Role"
 Usage:          #example
 * code = IhrisResourceCodeSystem#role
 * extension[name].valueString = "Open Role"
@@ -163,7 +163,7 @@ Usage:          #example
 
 Instance:       ihris-role-admin
 InstanceOf:     IhrisRole
-Title:          "iHRIS Admin Role"
+Title:          "NHWR Admin Role"
 Usage:          #example
 * code = IhrisResourceCodeSystem#role
 * extension[name].valueString = "Admin Role"
@@ -173,7 +173,7 @@ Usage:          #example
 
 Instance:       ihris-task-all-permissions-to-everything
 InstanceOf:     IhrisTask
-Title:          "iHRIS Task With All Permissions To Everything"
+Title:          "NHWR Task With All Permissions To Everything"
 Usage:          #example
 * code = IhrisResourceCodeSystem#task
 * extension[name].valueString = "all-permissions-to-everything"
@@ -182,7 +182,7 @@ Usage:          #example
 
 Instance:       ihris-task-read-structure-definition
 InstanceOf:     IhrisTask
-Title:          "iHRIS Task To Read StructureDefinition Resource"
+Title:          "NHWR Task To Read StructureDefinition Resource"
 Usage:          #example
 * code = IhrisResourceCodeSystem#task
 * extension[name].valueString = "read-structure-definition"
@@ -191,7 +191,7 @@ Usage:          #example
 
 Instance:       ihris-task-read-basic-resource
 InstanceOf:     IhrisTask
-Title:          "iHRIS Task To Read Basic resource"
+Title:          "NHWR Task To Read Basic resource"
 Usage:          #example
 * code = IhrisResourceCodeSystem#task
 * extension[name].valueString = "read-basic-resource"
@@ -200,7 +200,7 @@ Usage:          #example
 
 Instance:       ihris-task-read-person-resource
 InstanceOf:     IhrisTask
-Title:          "iHRIS Task To Read Person resource"
+Title:          "NHWR Task To Read Person resource"
 Usage:          #example
 * code = IhrisResourceCodeSystem#task
 * extension[name].valueString = "read-person-resource"
@@ -209,7 +209,7 @@ Usage:          #example
 
 Instance:       ihris-task-read-practitioner-resource
 InstanceOf:     IhrisTask
-Title:          "iHRIS Task To Read Practitioner resource"
+Title:          "NHWR Task To Read Practitioner resource"
 Usage:          #example
 * code = IhrisResourceCodeSystem#task
 * extension[name].valueString = "read-practitioner-resource"
@@ -218,7 +218,7 @@ Usage:          #example
 
 Instance:       ihris-task-read-practitioner-role-resource
 InstanceOf:     IhrisTask
-Title:          "iHRIS Task To Read PractitionerRole resource"
+Title:          "NHWR Task To Read PractitionerRole resource"
 Usage:          #example
 * code = IhrisResourceCodeSystem#task
 * extension[name].valueString = "read-practitioner-role-resource"
@@ -227,7 +227,7 @@ Usage:          #example
 
 Instance:       ihris-task-read-location-resource
 InstanceOf:     IhrisTask
-Title:          "iHRIS Task To Read Location resource"
+Title:          "NHWR Task To Read Location resource"
 Usage:          #example
 * code = IhrisResourceCodeSystem#task
 * extension[name].valueString = "read-location-resource"
@@ -236,7 +236,7 @@ Usage:          #example
 
 Instance:       ihris-task-read-organization-resource
 InstanceOf:     IhrisTask
-Title:          "iHRIS Task To Read Organization resource"
+Title:          "NHWR Task To Read Organization resource"
 Usage:          #example
 * code = IhrisResourceCodeSystem#task
 * extension[name].valueString = "read-organization-resource"
@@ -245,7 +245,7 @@ Usage:          #example
 
 Instance:       ihris-task-read-questionnaire-resource
 InstanceOf:     IhrisTask
-Title:          "iHRIS Task To Read Questionnaire resource"
+Title:          "NHWR Task To Read Questionnaire resource"
 Usage:          #example
 * code = IhrisResourceCodeSystem#task
 * extension[name].valueString = "read-questionnaire-resource"
@@ -254,7 +254,7 @@ Usage:          #example
 
 Instance:       ihris-task-read-questionnaire-response-resource
 InstanceOf:     IhrisTask
-Title:          "iHRIS Task To Read Questionnaire Response resource"
+Title:          "NHWR Task To Read Questionnaire Response resource"
 Usage:          #example
 * code = IhrisResourceCodeSystem#task
 * extension[name].valueString = "read-questionnaire-response-resource"
@@ -263,7 +263,7 @@ Usage:          #example
 
 Instance:       ihris-task-read-code-system
 InstanceOf:     IhrisTask
-Title:          "iHRIS Task To Read CodeSystem resource"
+Title:          "NHWR Task To Read CodeSystem resource"
 Usage:          #example
 * code = IhrisResourceCodeSystem#task
 * extension[name].valueString = "read-code-system"
@@ -272,7 +272,7 @@ Usage:          #example
 
 Instance:       ihris-task-read-value-set
 InstanceOf:     IhrisTask
-Title:          "iHRIS Task To Read Valueset Resource"
+Title:          "NHWR Task To Read Valueset Resource"
 Usage:          #example
 * code = IhrisResourceCodeSystem#task
 * extension[name].valueString = "read-value-set"
@@ -281,7 +281,7 @@ Usage:          #example
 
 Instance:       ihris-task-read-document-reference
 InstanceOf:     IhrisTask
-Title:          "iHRIS Task To Read DocumentReference"
+Title:          "NHWR Task To Read DocumentReference"
 Usage:          #example
 * code = IhrisResourceCodeSystem#task
 * extension[name].valueString = "read-document-reference"
@@ -291,7 +291,7 @@ Usage:          #example
 
 Instance:       ihris-task-write-structure-definition
 InstanceOf:     IhrisTask
-Title:          "iHRIS Task To Write StructureDefinition Resource"
+Title:          "NHWR Task To Write StructureDefinition Resource"
 Usage:          #example
 * code = IhrisResourceCodeSystem#task
 * extension[name].valueString = "write-structure-definition"
@@ -301,7 +301,7 @@ Usage:          #example
 
 Instance:       ihris-task-write-basic-resource
 InstanceOf:     IhrisTask
-Title:          "iHRIS Task To Write Basic resource"
+Title:          "NHWR Task To Write Basic resource"
 Usage:          #example
 * code = IhrisResourceCodeSystem#task
 * extension[name].valueString = "write-basic-resource"
@@ -311,7 +311,7 @@ Usage:          #example
 
 Instance:       ihris-task-write-person-resource
 InstanceOf:     IhrisTask
-Title:          "iHRIS Task To Write Person resource"
+Title:          "NHWR Task To Write Person resource"
 Usage:          #example
 * code = IhrisResourceCodeSystem#task
 * extension[name].valueString = "write-person-resource"
@@ -321,7 +321,7 @@ Usage:          #example
 
 Instance:       ihris-task-write-practitioner-resource
 InstanceOf:     IhrisTask
-Title:          "iHRIS Task To Write Practitioner resource"
+Title:          "NHWR Task To Write Practitioner resource"
 Usage:          #example
 * code = IhrisResourceCodeSystem#task
 * extension[name].valueString = "write-practitioner-resource"
@@ -331,7 +331,7 @@ Usage:          #example
 
 Instance:       ihris-task-write-practitioner-role-resource
 InstanceOf:     IhrisTask
-Title:          "iHRIS Task To Write PractitionerRole resource"
+Title:          "NHWR Task To Write PractitionerRole resource"
 Usage:          #example
 * code = IhrisResourceCodeSystem#task
 * extension[name].valueString = "write-practitioner-role-resource"
@@ -341,7 +341,7 @@ Usage:          #example
 
 Instance:       ihris-task-write-location-resource
 InstanceOf:     IhrisTask
-Title:          "iHRIS Task To Write Location resource"
+Title:          "NHWR Task To Write Location resource"
 Usage:          #example
 * code = IhrisResourceCodeSystem#task
 * extension[name].valueString = "write-location-resource"
@@ -351,7 +351,7 @@ Usage:          #example
 
 Instance:       ihris-task-write-organization-resource
 InstanceOf:     IhrisTask
-Title:          "iHRIS Task To Write Organization resource"
+Title:          "NHWR Task To Write Organization resource"
 Usage:          #example
 * code = IhrisResourceCodeSystem#task
 * extension[name].valueString = "write-organization-resource"
@@ -361,7 +361,7 @@ Usage:          #example
 
 Instance:       ihris-task-write-questionnaire-resource
 InstanceOf:     IhrisTask
-Title:          "iHRIS Task To Write Questionnaire resource"
+Title:          "NHWR Task To Write Questionnaire resource"
 Usage:          #example
 * code = IhrisResourceCodeSystem#task
 * extension[name].valueString = "write-questionnaire-resource"
@@ -371,7 +371,7 @@ Usage:          #example
 
 Instance:       ihris-task-write-questionnaire-response-resource
 InstanceOf:     IhrisTask
-Title:          "iHRIS Task To Write Questionnaire Response resource"
+Title:          "NHWR Task To Write Questionnaire Response resource"
 Usage:          #example
 * code = IhrisResourceCodeSystem#task
 * extension[name].valueString = "write-questionnaire-response-resource"
@@ -381,7 +381,7 @@ Usage:          #example
 
 Instance:       ihris-task-write-code-system
 InstanceOf:     IhrisTask
-Title:          "iHRIS Task To Write CodeSystem resource"
+Title:          "NHWR Task To Write CodeSystem resource"
 Usage:          #example
 * code = IhrisResourceCodeSystem#task
 * extension[name].valueString = "write-code-system"
@@ -391,7 +391,7 @@ Usage:          #example
 
 Instance:       ihris-task-write-value-set
 InstanceOf:     IhrisTask
-Title:          "iHRIS Task To Write Valueset Resource"
+Title:          "NHWR Task To Write Valueset Resource"
 Usage:          #example
 * code = IhrisResourceCodeSystem#task
 * extension[name].valueString = "write-value-set"
@@ -401,7 +401,7 @@ Usage:          #example
 
 Instance:       ihris-task-write-document-reference
 InstanceOf:     IhrisTask
-Title:          "iHRIS Task To Write DocumentReference"
+Title:          "NHWR Task To Write DocumentReference"
 Usage:          #example
 * code = IhrisResourceCodeSystem#task
 * extension[name].valueString = "write-document-reference"

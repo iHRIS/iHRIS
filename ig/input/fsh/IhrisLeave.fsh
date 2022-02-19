@@ -2,7 +2,7 @@ Profile:        IhrisBasicLeave
 Parent:         IhrisPractitionerBasic
 Id:             ihris-basic-leave
 Title:          "Leave Information"
-Description:    "iHRIS Profile of the Basic resource for Leave."
+Description:    "NHWR Profile of the Basic resource for Leave."
 * extension[practitioner].valueReference 1..1 MS
 * extension[practitioner].valueReference ^label = "Health Worker"
 * extension contains
@@ -74,8 +74,8 @@ Title:            "iHRIS leave Type ValueSet"
 Instance:       IhrisPractitionerWorkflowLeave
 InstanceOf:     IhrisQuestionnaire
 Usage:          #definition
-* title = "iHRIS Leave Workflow"
-* description = "iHRIS workflow to record a leave"
+* title = "NHWR Leave Workflow"
+* description = "NHWR workflow to record a leave"
 * id = "ihris-leave"
 * url = "http://ihris.org/fhir/Questionnaire/ihris-leave"
 * name = "ihris-leave"
@@ -114,7 +114,7 @@ Usage:          #definition
 
 Instance:       ihris-page-leave
 InstanceOf:     IhrisPage
-Title:          "iHRIS Basic Leave Page"
+Title:          "NHWR Basic Leave Page"
 Usage:          #example
 * code = IhrisResourceCodeSystem#page
 * extension[display].extension[resource].valueReference = Reference(StructureDefinition/ihris-basic-leave)

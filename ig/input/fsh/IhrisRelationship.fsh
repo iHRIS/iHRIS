@@ -1,8 +1,8 @@
 Profile:        IhrisRelationship
 Parent:         Basic
 Id:             iHRISRelationship
-Title:          "iHRIS Resources Relationship Profile"
-Description:    "iHRIS Resources Relationship Profile"
+Title:          "NHWR Resources Relationship Profile"
+Description:    "NHWR Resources Relationship Profile"
 
 * extension contains
       IhrisReportDetails named reportdetails 1..1 MS and
@@ -109,10 +109,10 @@ Description:    "Lists fields of a resource to be displayed/cached"
 
 Instance:       ihris-es-report-mhero-send-message
 InstanceOf:     IhrisRelationship
-Title:          "iHRIS Relationship Example"
+Title:          "NHWR Relationship Example"
 Usage:          #example
 
-* code.text = "iHRIS Relationship"
+* code.text = "NHWR Relationship"
 * extension[reportdetails].extension[name].valueString = "mheropractitioner"
 * extension[reportdetails].extension[label].valueString = "Employee List"
 * extension[reportdetails].extension[resource].valueString = "Practitioner"

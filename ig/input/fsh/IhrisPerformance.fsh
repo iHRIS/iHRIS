@@ -2,7 +2,7 @@ Profile:        IhrisBasicPerformance
 Parent:         IhrisPractitionerBasic
 Id:             ihris-basic-performance
 Title:          "Performance Information"
-Description:    "iHRIS Profile of the Basic resource for Performance."
+Description:    "NHWR Profile of the Basic resource for Performance."
 * extension[practitioner].valueReference 1..1 MS
 * extension[practitioner].valueReference ^label = "Health Worker"
 * extension contains
@@ -48,14 +48,14 @@ Title:           "Performance Score"
 
 ValueSet:         IhrisPerformanceScoreValueSet
 Id:               ihris-performance-score-valueset
-Title:            "iHRIS Performance Score ValueSet"
+Title:            "NHWR Performance Score ValueSet"
 * ^version = "0.2.0"
 * codes from system IhrisPerformanceScore
 
 Instance:       IhrisPractitionerWorkflowPerformance
 InstanceOf:      Questionnaire
 Usage:          #definition
-* title = "iHRIS Performance Workflow"
+* title = "NHWR Performance Workflow"
 * description = "iHRIS workflow to record a Performance"
 * id = "ihris-performance"
 * url = "http://ihris.org/fhir/Questionnaire/ihris-performance"
@@ -95,7 +95,7 @@ Usage:          #definition
 
 Instance:       ihris-page-performance
 InstanceOf:     IhrisPage
-Title:          "iHRIS Basic Performance Page"
+Title:          "NHWR Basic Performance Page"
 Usage:          #example
 * code = IhrisResourceCodeSystem#page
 * extension[display].extension[resource].valueReference = Reference(StructureDefinition/ihris-basic-performance)

@@ -1,8 +1,8 @@
 Profile:        IhrisPersonUser
 Parent:         Person
 Id:             ihris-person-user
-Title:          "System User"
-Description:    "iHRIS profile of the Person resource to manage user access."
+Title:          "NHWR User"
+Description:    "NHWR profile of the Person resource to manage user access."
 * name 1..1 MS
 * name ^label = "Name"
 * name ^slicing.discriminator.type = #pattern
@@ -30,8 +30,8 @@ Description:    "iHRIS profile of the Person resource to manage user access."
 
 Extension:      IhrisPassword
 Id:             ihris-password
-Title:          "iHRIS Password"
-Description:    "iHRIS password extension for local users."
+Title:          "NHWR Password"
+Description:    "NHWR password extension for local users."
 * ^context.type = #element
 * ^context.expression = "Person"
 * extension contains 
@@ -46,8 +46,8 @@ Description:    "iHRIS password extension for local users."
 
 Extension:      IhrisUserLocation
 Id:             ihris-user-location
-Title:          "iHRIS User Location"
-Description:    "iHRIS user Location extension for local users."
+Title:          "NHWR User Location"
+Description:    "NHWR user Location extension for local users."
 * ^context.type = #element
 * ^context.expression = "Person"
 * value[x] only Reference
@@ -59,10 +59,10 @@ Description:    "iHRIS user Location extension for local users."
 
 Instance:       ihris-user-admin
 InstanceOf:     IhrisPersonUser
-Title:          "iHRIS Admin User"
+Title:          "NHWR Admin User"
 Usage:          #example
 * telecom.value = "admin@ihris.org"
-* name.text = "iHRIS Admin"
+* name.text = "NHWR Admin"
 * identifier[0].system = "google"
 * identifier[0].value = "12345"
 * extension[password].extension[password].valueString = "PASS"
@@ -76,7 +76,7 @@ Usage:          #example
 * code = IhrisResourceCodeSystem#page
 * extension[display].extension[resource].valueReference = Reference(StructureDefinition/ihris-person-user)
 * extension[display].extension[link][0].extension[field].valueString = ""
-* extension[display].extension[link][0].extension[text].valueString = "Add Another User"
+* extension[display].extension[link][0].extension[text].valueString = "Add Another NHWR User"
 * extension[display].extension[link][0].extension[button].valueBoolean = true
 * extension[display].extension[link][0].extension[icon].valueString = "mdi-account-arrow-right"
 * extension[display].extension[link][0].extension[url].valueUrl = "/questionnaire/ihris-user/user"
@@ -92,7 +92,7 @@ Usage:          #example
 * extension[display].extension[add].extension[icon].valueString = "mdi-account-plus"
 * extension[display].extension[add].extension[class].valueString = "accent"
 * extension[section][0].extension[title].valueString = "Person"
-* extension[section][0].extension[description].valueString = "System User details"
+* extension[section][0].extension[description].valueString = "NHWR System User details"
 * extension[section][0].extension[name].valueString = "Person"
 * extension[section][0].extension[field][0].valueString = "Person.name"
 * extension[section][0].extension[field][1].valueString = "Person.telecom"
@@ -103,8 +103,8 @@ Usage:          #example
 Instance:       IhrisUser
 InstanceOf:     IhrisQuestionnaire
 Usage:          #definition
-* title = "iHRIS Users Workflow"
-* description = "iHRIS workflow to record a Users"
+* title = "NHWR Users Workflow"
+* description = "NHWR workflow to record a Users"
 * id = "ihris-user"
 * url = "http://ihris.org/fhir/Questionnaire/ihris-user"
 * name = "ihris-user"
@@ -187,8 +187,8 @@ Usage:          #definition
 Instance:       IhrisChangePassword
 InstanceOf:     IhrisQuestionnaire
 Usage:          #definition
-* title = "iHRIS Change Password Workflow"
-* description = "iHRIS workflow to Change Users Password"
+* title = "NHWR Change Password Workflow"
+* description = "NHWR workflow to Change Users Password"
 * id = "ihris-change-password"
 * url = "http://ihris.org/fhir/Questionnaire/ihris-change-password"
 * name = "ihris-change-password"

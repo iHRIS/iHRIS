@@ -1,7 +1,7 @@
 Profile:        IhrisParametersLocalConfig
 Parent:         Parameters
 Id:             ihris-parameters-local-config
-Title:          "iHRIS Parameters Local Config"
+Title:          "NHWR Parameters Local Config"
 Description:    "Configuration Parameters to be loaded from a local file for iHRIS."
 * parameter 3..3
 * parameter ^slicing.discriminator.type = #pattern
@@ -72,8 +72,8 @@ Description:    "Configuration Parameters to be loaded from a local file for iHR
 
 Instance:     ihris-base-config
 InstanceOf:   IhrisParametersLocalConfig
-Title:        "iHRIS Parameters Local Config Example"
-Description:  "iHRIS Parameters Local Config Example"
+Title:        "NHWR Parameters Local Config Example"
+Description:  "NHWR Parameters Local Config Example"
 Usage:        #example
 * parameter[FhirBase].valueString = "http://localhost:8080/hapi/fhir"
 * parameter[Config].part[ConfigId][0].name = "ihris"

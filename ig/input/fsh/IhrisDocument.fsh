@@ -1,8 +1,8 @@
 Profile:        IhrisDocument
 Parent:         DocumentReference
 Id:             ihris-document
-Title:          "iHRIS Document"
-Description:    "iHRIS Profile of the DocumentReference resource to manage static documents."
+Title:          "NHWR Document"
+Description:    "NHWR Profile of the DocumentReference resource to manage static documents."
 * subject 0..0
 * type 0..0
 * category 1..1 

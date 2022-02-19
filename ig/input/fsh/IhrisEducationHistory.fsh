@@ -69,7 +69,7 @@ Title:           "Educational Major"
 
 ValueSet:         IhrisEducationalMajorValueSet
 Id:               ihris-educational-major-valueset
-Title:            "iHRIS Educational Major ValueSet"
+Title:            "NHWR Educational Major ValueSet"
 * ^date = "2020-11-11T08:41:04.362Z"
 * ^version = "0.3.0"
 * codes from system IhrisEducationalMajorCodeSystem
@@ -100,7 +100,7 @@ Title:           "Education Level"
 
 ValueSet:         IhrisEducationLevelValueSet
 Id:               ihris-education-level-valueset
-Title:            "iHRIS Education Level ValueSet"
+Title:            "NHWR Education Level ValueSet"
 * ^date = "2020-09-29T08:41:04.362Z"
 * ^version = "0.2.0"
 * codes from system IhrisEducationLevel
@@ -113,7 +113,7 @@ Title:           "Institution"
 
 ValueSet:         IhrisInstitutionValueSet
 Id:               ihris-institution-valueset
-Title:            "iHRIS Institution Value Set"
+Title:            "NHWR Institution Value Set"
 * ^date = "2020-11-10T08:41:04.362Z"
 * ^version = "0.3.0"
 * codes from system IhrisInstitution
@@ -190,7 +190,7 @@ Title:            "iHRIS Institution Type Value Set"
 Instance:       IhrisPractitionerWorkflowEducationHistory
 InstanceOf:      Questionnaire
 Usage:          #definition
-* title = "iHRIS Education History Workflow"
+* title = "NHWR Education History Workflow"
 * description = "iHRIS workflow to record a Education History"
 * id = "ihris-education-history"
 * url = "http://ihris.org/fhir/Questionnaire/ihris-education-history"

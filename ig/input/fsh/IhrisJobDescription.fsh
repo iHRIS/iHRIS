@@ -1,8 +1,8 @@
 Profile:        IhrisJobDescription
 Parent:         PractitionerRole
 Id:             ihris-job-description
-Title:          "iHRIS Job Description"
-Description:    "iHRIS profile of Practitioner."
+Title:          "NHWR Job Description"
+Description:    "NHWR profile of Practitioner."
 * identifier MS
 * identifier ^label = "Identifier"
 * identifier.system MS
@@ -56,8 +56,8 @@ Description:    "iHRIS profile of Practitioner."
 
 Extension:      IhrisPractitionerRoleShift
 Id:             ihris-practitionerrole-shift
-Title:          "iHRIS Job Description Shift"
-Description:    "iHRIS extension for Job Description Shift."
+Title:          "NHWR Job Description Shift"
+Description:    "NHWR extension for Job Description Shift."
 * ^context.type = #element
 * ^context.expression = "PractitionerRole"
 * value[x] only Coding
@@ -67,19 +67,19 @@ Description:    "iHRIS extension for Job Description Shift."
 
 CodeSystem:      IhrisShiftCodeSystem
 Id:              ihris-shift-codesystem
-Title:           "iHRIS Shift Code System"
+Title:           "NHWR Shift Code System"
 * #duty "Duty" "Duty"
 * #work "Work" "Work"
 
 ValueSet:         IhrisShiftValueSet
 Id:               ihris-shift-valueset
-Title:            "iHRIS Shift Value Set"
+Title:            "NHWR Shift Value Set"
 * codes from system IhrisShiftCodeSystem
 
 Extension:      IhrisPractitionerRoleEmploymentStatus
 Id:             ihris-practitionerrole-employment-status
-Title:          "iHRIS Job Description Employment Status"
-Description:    "iHRIS extension for Job Description Employment Status."
+Title:          "NHWR Job Description Employment Status"
+Description:    "NHWR extension for Job Description Employment Status."
 * ^context.type = #element
 * ^context.expression = "PractitionerRole"
 * value[x] only Coding
@@ -89,7 +89,7 @@ Description:    "iHRIS extension for Job Description Employment Status."
 
 CodeSystem:      IhrisEmploymentStatusCodeSystem
 Id:              ihris-employment-status-codesystem
-Title:           "iHRIS Employment Status CodeSystem"
+Title:           "NHWR Employment Status CodeSystem"
 * #contract "Contract" "Contract"
 * #fullTime "Full-time" "Full-time"
 * #partTime "Part-Time" "Part-Time"
@@ -97,13 +97,13 @@ Title:           "iHRIS Employment Status CodeSystem"
 
 ValueSet:         IhrisEmploymentStatusValueSet
 Id:               ihris-employment-status-valueset
-Title:            "iHRIS Employment Status ValueSet"
+Title:            "NHWR Employment Status ValueSet"
 * codes from system IhrisEmploymentStatusCodeSystem
 
 Extension:      IhrisPractitionerRolePositionStatus
 Id:             ihris-practitionerrole-position-status
-Title:          "iHRIS Job Description Position Status"
-Description:    "iHRIS extension for Job Description Position Status."
+Title:          "NHWR Job Description Position Status"
+Description:    "NHWR extension for Job Description Position Status."
 * ^context.type = #element
 * ^context.expression = "PractitionerRole"
 * value[x] only Coding
@@ -122,15 +122,15 @@ Title:           "Position Status"
 
 ValueSet:         IhrisPositionStatusValueSet
 Id:               ihris-position-status
-Title:            "iHRIS position Status"
+Title:            "NHWR position Status"
 * ^date = "2020-10-29T08:41:04.362Z"
 * ^version = "0.2.0"
 * codes from system IhrisPositionStatusCodeSystem
 
 Extension:      IhrisPractitionerRoleReasonDeparture
 Id:             ihris-practitionerrole-reason-departure
-Title:          "iHRIS Job Description Reason for Departure"
-Description:    "iHRIS extension for Job Description Reason for Departure."
+Title:          "NHWR Job Description Reason for Departure"
+Description:    "NHWR extension for Job Description Reason for Departure."
 * ^context.type = #element
 * ^context.expression = "PractitionerRole"
 * value[x] only Coding
@@ -154,15 +154,15 @@ Title:           "Reason For Change/Departure"
 
 ValueSet:         IhrisReasonDepartureValueSet
 Id:               ihris-reason-departure-valueset
-Title:            "iHRIS Reason Departure ValueSet"
+Title:            "NHWR Reason Departure ValueSet"
 * ^date = "2020-11-14T08:41:04.362Z"
 * ^version = "0.3.0"
 * codes from system IhrisReasonDepartureCodeSystem
 
 Extension:      IhrisPractitionerRoleJobType
 Id:             ihris-practitionerrole-job-type
-Title:          "iHRIS Job Description Job Type"
-Description:    "iHRIS extension for Job Description Job Type."
+Title:          "NHWR Job Description Job Type"
+Description:    "NHWR extension for Job Description Job Type."
 * ^context.type = #element
 * ^context.expression = "PractitionerRole"
 * value[x] only Coding
@@ -172,20 +172,20 @@ Description:    "iHRIS extension for Job Description Job Type."
 
 CodeSystem:      IhrisJobTypeCodeSystem
 Id:              ihris-job-type-codesystem
-Title:           "iHRIS Job Type CodeSystem"
+Title:           "NHWR Job Type CodeSystem"
 * #transfer "Transfer" "Transfer"
 * #newHire "New Hire" "New Hire"
 * #redeployment  "Redeployment" "Redeployment"
 
 ValueSet:         IhrisJobTypeValueSet
 Id:               ihris-job-type-valueset
-Title:            "iHRIS Job Type ValueSet"
+Title:            "NHWR Job Type ValueSet"
 * codes from system IhrisJobTypeCodeSystem
 
 Extension:      IhrisPractitionerRoleFirstEmploymentDate
 Id:             ihris-practitionerrole-first-employment-date
-Title:          "iHRIS Job Description First Employment Date"
-Description:    "iHRIS extension for First Employment Date."
+Title:          "NHWR Job Description First Employment Date"
+Description:    "NHWR extension for First Employment Date."
 * ^context.type = #element
 * ^context.expression = "PractitionerRole"
 * value[x] only date
@@ -194,8 +194,8 @@ Description:    "iHRIS extension for First Employment Date."
 
 Extension:      IhrisPractitionerRoleJobInformationRemark
 Id:             ihris-practitionerrole-job-information-remark
-Title:          "iHRIS Job Description Job Information Remark"
-Description:    "iHRIS extension for Job Information Remark."
+Title:          "NHWR Job Description Job Information Remark"
+Description:    "NHWR extension for Job Information Remark."
 * ^context.type = #element
 * ^context.expression = "PractitionerRole"
 * value[x] only string
@@ -204,13 +204,13 @@ Description:    "iHRIS extension for Job Information Remark."
 
 ValueSet:         IhrisJobEthiopiaValueset
 Id:               ihris-job-ethiopia
-Title:            "iHRIS Job Title Value Set"
-Description:      "iHRIS ValueSet for: iHRISJobEthiopia"
+Title:            "NHWR Job Title Value Set"
+Description:      "NHWR ValueSet for: iHRISJobEthiopia"
 * codes from system IhrisJobEthiopiaCodeSystem
 
 CodeSystem:      IhrisJobEthiopiaCodeSystem
 Id:              ihris-job-ethiopia
-Title:           "iHRIS Job Title Code System for Ethiopia"
+Title:           "NHWR Job Title Code System for Ethiopia"
 * ^concept[0].designation[0].language = #urn:ietf:bcp:47#am
 * ^concept[0].designation[0].value = "ደረጃ 3 ፕሮስቴቲክ ኦርቶቲክ ቴክኒሻን I"
 * ^concept[0].display = "Level 3: Prosthetic Orthotic Technique I"

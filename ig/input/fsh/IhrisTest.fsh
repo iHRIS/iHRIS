@@ -1,7 +1,7 @@
 Profile:      IhrisTestPractitioner
 Parent:       Practitioner
 Id:           ihris-test-practitioner
-Description:  "iHRIS profile of Practitioner for tests."
+Description:  "NHWR profile of Practitioner for tests."
 * identifier 0..* MS
 * identifier ^label = "Identifier"
 * identifier.use MS
@@ -40,8 +40,8 @@ Description:  "iHRIS profile of Practitioner for tests."
 
 Extension:      IhrisTestResidence
 Id:             ihris-test-residence
-Title:          "iHRIS Practitioner Residence"
-Description:    "iHRIS Test extension for Practitioner residence."
+Title:          "NHWR Practitioner Residence"
+Description:    "NHWR Test extension for Practitioner residence."
 * ^context.type = #element
 * ^context.expression = "Practitioner"
 * value[x] only Reference
@@ -56,8 +56,8 @@ Description:    "iHRIS Test extension for Practitioner residence."
 
 Extension:      IhrisTestDependent
 Id:             ihris-test-dependent
-Title:          "iHRIS Practitioner Dependent Detail"
-Description:    "iHRIS Test extension for Practitioner Dependent Detail."
+Title:          "NHWR Practitioner Dependent Detail"
+Description:    "NHWR Test extension for Practitioner Dependent Detail."
 * ^context.type = #element
 * ^context.expression = "Practitioner"
 * extension contains name 1..* MS and
@@ -77,8 +77,8 @@ Description:    "iHRIS Test extension for Practitioner Dependent Detail."
 Profile:        IhrisTestPractitionerRole
 Parent:         PractitionerRole
 Id:             ihris-test-practitioner-role
-Title:          "iHRIS Test Practitioner Role"
-Description:    "iHRIS Test profile of Practitioner Role."
+Title:          "NHWR Test Practitioner Role"
+Description:    "NHWR Test profile of Practitioner Role."
 * identifier 0..* MS
 * identifier ^label = "Identifier"
 * identifier.use MS
@@ -111,7 +111,7 @@ Description:    "iHRIS Test profile of Practitioner Role."
 
 CodeSystem:     IhrisTestCodeSystem
 Id:             ihris-test-codesystem
-Title:          "iHRIS Test CodeSystem"
+Title:          "NHWR Test CodeSystem"
 * ^property[0].code = #prop1
 * ^property[0].description = "First Property"
 * ^property[0].type = #string
@@ -124,7 +124,7 @@ Title:          "iHRIS Test CodeSystem"
 
 Instance:       ihris-page-test-practitioner
 InstanceOf:     IhrisPage
-Title:          "iHRIS Test Practitioner Page"
+Title:          "NHWR Test Practitioner Page"
 Usage:          #example
 * code = IhrisResourceCodeSystem#page
 * extension[display].extension[resource].valueReference = Reference(StructureDefinition/ihris-test-practitioner)
@@ -164,7 +164,7 @@ Usage:          #example
 
 Instance:       ihris-page-test-codesystem
 InstanceOf:     IhrisPage
-Title:          "iHRIS Test CodeSystem Page"
+Title:          "NHWR Test CodeSystem Page"
 Usage:          #example
 * code = IhrisResourceCodeSystem#page
 * extension[display].extension[resource].valueReference = Reference(CodeSystem/ihris-test-codesystem)

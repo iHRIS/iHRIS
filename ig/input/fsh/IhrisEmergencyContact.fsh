@@ -68,8 +68,8 @@ Title:          "Emergency details"
 Instance:       IhrisPractitionerWorkflowEmergency
 InstanceOf:     IhrisQuestionnaire
 Usage:          #definition
-* title = "iHRIS Emergency Workflow"
-* description = "iHRIS workflow to record a Emergency"
+* title = "NHWR Emergency Workflow"
+* description = "NHWR workflow to record a Emergency"
 * id = "ihris-emergency"
 * url = "http://ihris.org/fhir/Questionnaire/ihris-emergency"
 * name = "ihris-emergency"
@@ -168,7 +168,7 @@ Usage:          #definition
 
 Instance:       ihris-page-emergency
 InstanceOf:     IhrisPage
-Title:          "iHRIS Basic Emergency Page"
+Title:          "NHWR Basic Emergency Page"
 Usage:          #example
 * code = IhrisResourceCodeSystem#page
 * extension[display].extension[resource].valueReference = Reference(StructureDefinition/ihris-basic-emergency)

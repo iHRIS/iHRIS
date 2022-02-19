@@ -2,7 +2,7 @@ Profile:        IhrisJurisdiction
 Parent:         Location
 Id:             ihris-jurisdiction
 Title:          "NHWR Jurisdiction"
-Description:    "iHRIS Profile of Locations to manage jurisdictions."
+Description:    "NHWR Profile of Locations to manage jurisdictions."
 * type 1..1 MS
 * type ^label = "Location Type"
 * type.coding 1..1 MS
@@ -47,7 +47,7 @@ Description:    "NHWR Profile of Locations to manage facilities."
 
 ValueSet:         IhrisJurisdictionType
 Id:               ihris-jurisdiction-type
-Title:            "iHRIS Jurisdiction Type ValueSet"
+Title:            "NHWR Jurisdiction Type ValueSet"
 * ^date = "2020-11-12T08:41:04.362Z"
 * ^version = "0.3.0"
 * codes from system IhrisJurisdictionType
