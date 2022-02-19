@@ -7,7 +7,7 @@
         "resourceType": "Location",
         "meta": {
           "profile": [
-            "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+            "http://hl7.org/fhir/StructureDefinition/Location"
           ]
         },
         "id": "AD",
@@ -51,7 +51,7 @@
         "resourceType": "Location",
         "meta": {
           "profile": [
-            "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+            "http://hl7.org/fhir/StructureDefinition/Location"
           ]
         },
         "id": "AE",
@@ -95,7 +95,7 @@
         "resourceType": "Location",
         "meta": {
           "profile": [
-            "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+            "http://hl7.org/fhir/StructureDefinition/Location"
           ]
         },
         "id": "AF",
@@ -139,7 +139,7 @@
         "resourceType": "Location",
         "meta": {
           "profile": [
-            "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+            "http://hl7.org/fhir/StructureDefinition/Location"
           ]
         },
         "id": "AG",
@@ -183,7 +183,7 @@
         "resourceType": "Location",
         "meta": {
           "profile": [
-            "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+            "http://hl7.org/fhir/StructureDefinition/Location"
           ]
         },
         "id": "AI",
@@ -227,7 +227,7 @@
         "resourceType": "Location",
         "meta": {
           "profile": [
-            "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+            "http://hl7.org/fhir/StructureDefinition/Location"
           ]
         },
         "id": "AL",
@@ -271,7 +271,7 @@
         "resourceType": "Location",
         "meta": {
           "profile": [
-            "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+            "http://hl7.org/fhir/StructureDefinition/Location"
           ]
         },
         "id": "AM",
@@ -315,7 +315,7 @@
         "resourceType": "Location",
         "meta": {
           "profile": [
-            "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+            "http://hl7.org/fhir/StructureDefinition/Location"
           ]
         },
         "id": "AN",
@@ -359,7 +359,7 @@
         "resourceType": "Location",
         "meta": {
           "profile": [
-            "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+            "http://hl7.org/fhir/StructureDefinition/Location"
           ]
         },
         "id": "AO",
@@ -403,7 +403,7 @@
         "resourceType": "Location",
         "meta": {
           "profile": [
-            "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+            "http://hl7.org/fhir/StructureDefinition/Location"
           ]
         },
         "id": "AQ",
@@ -447,7 +447,7 @@
         "resourceType": "Location",
         "meta": {
           "profile": [
-            "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+            "http://hl7.org/fhir/StructureDefinition/Location"
           ]
         },
         "id": "AR",
@@ -491,7 +491,7 @@
         "resourceType": "Location",
         "meta": {
           "profile": [
-            "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+            "http://hl7.org/fhir/StructureDefinition/Location"
           ]
         },
         "id": "AS",
@@ -535,7 +535,7 @@
         "resourceType": "Location",
         "meta": {
           "profile": [
-            "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+            "http://hl7.org/fhir/StructureDefinition/Location"
           ]
         },
         "id": "AT",
@@ -579,7 +579,7 @@
         "resourceType": "Location",
         "meta": {
           "profile": [
-            "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+            "http://hl7.org/fhir/StructureDefinition/Location"
           ]
         },
         "id": "AU",
@@ -623,7 +623,7 @@
         "resourceType": "Location",
         "meta": {
           "profile": [
-            "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+            "http://hl7.org/fhir/StructureDefinition/Location"
           ]
         },
         "id": "AW",
@@ -667,7 +667,7 @@
         "resourceType": "Location",
         "meta": {
           "profile": [
-            "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+            "http://hl7.org/fhir/StructureDefinition/Location"
           ]
         },
         "id": "AX",
@@ -711,7 +711,7 @@
         "resourceType": "Location",
         "meta": {
           "profile": [
-            "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+            "http://hl7.org/fhir/StructureDefinition/Location"
           ]
         },
         "id": "AZ",
@@ -755,7 +755,7 @@
         "resourceType": "Location",
         "meta": {
           "profile": [
-            "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+            "http://hl7.org/fhir/StructureDefinition/Location"
           ]
         },
         "id": "BA",
@@ -799,7 +799,7 @@
         "resourceType": "Location",
         "meta": {
           "profile": [
-            "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+            "http://hl7.org/fhir/StructureDefinition/Location"
           ]
         },
         "id": "BB",
@@ -843,7 +843,7 @@
         "resourceType": "Location",
         "meta": {
           "profile": [
-            "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+            "http://hl7.org/fhir/StructureDefinition/Location"
           ]
         },
         "id": "BD",
@@ -887,7 +887,7 @@
         "resourceType": "Location",
         "meta": {
           "profile": [
-            "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+            "http://hl7.org/fhir/StructureDefinition/Location"
           ]
         },
         "id": "BE",
@@ -931,7 +931,7 @@
         "resourceType": "Location",
         "meta": {
           "profile": [
-            "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+            "http://hl7.org/fhir/StructureDefinition/Location"
           ]
         },
         "id": "BF",
@@ -975,7 +975,7 @@
         "resourceType": "Location",
         "meta": {
           "profile": [
-            "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+            "http://hl7.org/fhir/StructureDefinition/Location"
           ]
         },
         "id": "BG",
@@ -1019,7 +1019,7 @@
         "resourceType": "Location",
         "meta": {
           "profile": [
-            "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+            "http://hl7.org/fhir/StructureDefinition/Location"
           ]
         },
         "id": "BH",
@@ -1063,7 +1063,7 @@
         "resourceType": "Location",
         "meta": {
           "profile": [
-            "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+            "http://hl7.org/fhir/StructureDefinition/Location"
           ]
         },
         "id": "BI",
@@ -1107,7 +1107,7 @@
         "resourceType": "Location",
         "meta": {
           "profile": [
-            "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+            "http://hl7.org/fhir/StructureDefinition/Location"
           ]
         },
         "id": "BJ",
@@ -1151,7 +1151,7 @@
         "resourceType": "Location",
         "meta": {
           "profile": [
-            "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+            "http://hl7.org/fhir/StructureDefinition/Location"
           ]
         },
         "id": "BL",
@@ -1195,7 +1195,7 @@
         "resourceType": "Location",
         "meta": {
           "profile": [
-            "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+            "http://hl7.org/fhir/StructureDefinition/Location"
           ]
         },
         "id": "BM",
@@ -1239,7 +1239,7 @@
         "resourceType": "Location",
         "meta": {
           "profile": [
-            "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+            "http://hl7.org/fhir/StructureDefinition/Location"
           ]
         },
         "id": "BN",
@@ -1283,7 +1283,7 @@
         "resourceType": "Location",
         "meta": {
           "profile": [
-            "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+            "http://hl7.org/fhir/StructureDefinition/Location"
           ]
         },
         "id": "BO",
@@ -1327,7 +1327,7 @@
         "resourceType": "Location",
         "meta": {
           "profile": [
-            "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+            "http://hl7.org/fhir/StructureDefinition/Location"
           ]
         },
         "id": "BR",
@@ -1371,7 +1371,7 @@
         "resourceType": "Location",
         "meta": {
           "profile": [
-            "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+            "http://hl7.org/fhir/StructureDefinition/Location"
           ]
         },
         "id": "BS",
@@ -1415,7 +1415,7 @@
         "resourceType": "Location",
         "meta": {
           "profile": [
-            "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+            "http://hl7.org/fhir/StructureDefinition/Location"
           ]
         },
         "id": "BT",
@@ -1459,7 +1459,7 @@
         "resourceType": "Location",
         "meta": {
           "profile": [
-            "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+            "http://hl7.org/fhir/StructureDefinition/Location"
           ]
         },
         "id": "BV",
@@ -1503,7 +1503,7 @@
         "resourceType": "Location",
         "meta": {
           "profile": [
-            "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+            "http://hl7.org/fhir/StructureDefinition/Location"
           ]
         },
         "id": "BW",
@@ -1547,7 +1547,7 @@
         "resourceType": "Location",
         "meta": {
           "profile": [
-            "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+            "http://hl7.org/fhir/StructureDefinition/Location"
           ]
         },
         "id": "BY",
@@ -1591,7 +1591,7 @@
         "resourceType": "Location",
         "meta": {
           "profile": [
-            "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+            "http://hl7.org/fhir/StructureDefinition/Location"
           ]
         },
         "id": "BZ",
@@ -1635,7 +1635,7 @@
         "resourceType": "Location",
         "meta": {
           "profile": [
-            "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+            "http://hl7.org/fhir/StructureDefinition/Location"
           ]
         },
         "id": "CA",
@@ -1679,7 +1679,7 @@
         "resourceType": "Location",
         "meta": {
           "profile": [
-            "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+            "http://hl7.org/fhir/StructureDefinition/Location"
           ]
         },
         "id": "CC",
@@ -1723,7 +1723,7 @@
         "resourceType": "Location",
         "meta": {
           "profile": [
-            "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+            "http://hl7.org/fhir/StructureDefinition/Location"
           ]
         },
         "id": "CD",
@@ -1767,7 +1767,7 @@
         "resourceType": "Location",
         "meta": {
           "profile": [
-            "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+            "http://hl7.org/fhir/StructureDefinition/Location"
           ]
         },
         "id": "CF",
@@ -1811,7 +1811,7 @@
         "resourceType": "Location",
         "meta": {
           "profile": [
-            "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+            "http://hl7.org/fhir/StructureDefinition/Location"
           ]
         },
         "id": "CG",
@@ -1855,7 +1855,7 @@
         "resourceType": "Location",
         "meta": {
           "profile": [
-            "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+            "http://hl7.org/fhir/StructureDefinition/Location"
           ]
         },
         "id": "CH",
@@ -1899,7 +1899,7 @@
         "resourceType": "Location",
         "meta": {
           "profile": [
-            "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+            "http://hl7.org/fhir/StructureDefinition/Location"
           ]
         },
         "id": "CI",
@@ -1943,7 +1943,7 @@
         "resourceType": "Location",
         "meta": {
           "profile": [
-            "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+            "http://hl7.org/fhir/StructureDefinition/Location"
           ]
         },
         "id": "CK",
@@ -1987,7 +1987,7 @@
         "resourceType": "Location",
         "meta": {
           "profile": [
-            "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+            "http://hl7.org/fhir/StructureDefinition/Location"
           ]
         },
         "id": "CL",
@@ -2031,7 +2031,7 @@
         "resourceType": "Location",
         "meta": {
           "profile": [
-            "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+            "http://hl7.org/fhir/StructureDefinition/Location"
           ]
         },
         "id": "CM",
@@ -2075,7 +2075,7 @@
         "resourceType": "Location",
         "meta": {
           "profile": [
-            "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+            "http://hl7.org/fhir/StructureDefinition/Location"
           ]
         },
         "id": "CN",
@@ -2119,7 +2119,7 @@
         "resourceType": "Location",
         "meta": {
           "profile": [
-            "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+            "http://hl7.org/fhir/StructureDefinition/Location"
           ]
         },
         "id": "CO",
@@ -2163,7 +2163,7 @@
         "resourceType": "Location",
         "meta": {
           "profile": [
-            "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+            "http://hl7.org/fhir/StructureDefinition/Location"
           ]
         },
         "id": "CR",
@@ -2207,7 +2207,7 @@
         "resourceType": "Location",
         "meta": {
           "profile": [
-            "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+            "http://hl7.org/fhir/StructureDefinition/Location"
           ]
         },
         "id": "CU",
@@ -2251,7 +2251,7 @@
         "resourceType": "Location",
         "meta": {
           "profile": [
-            "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+            "http://hl7.org/fhir/StructureDefinition/Location"
           ]
         },
         "id": "CV",
@@ -2295,7 +2295,7 @@
         "resourceType": "Location",
         "meta": {
           "profile": [
-            "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+            "http://hl7.org/fhir/StructureDefinition/Location"
           ]
         },
         "id": "CX",
@@ -2339,7 +2339,7 @@
         "resourceType": "Location",
         "meta": {
           "profile": [
-            "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+            "http://hl7.org/fhir/StructureDefinition/Location"
           ]
         },
         "id": "CY",
@@ -2383,7 +2383,7 @@
         "resourceType": "Location",
         "meta": {
           "profile": [
-            "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+            "http://hl7.org/fhir/StructureDefinition/Location"
           ]
         },
         "id": "CZ",
@@ -2427,7 +2427,7 @@
         "resourceType": "Location",
         "meta": {
           "profile": [
-            "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+            "http://hl7.org/fhir/StructureDefinition/Location"
           ]
         },
         "id": "DE",
@@ -2471,7 +2471,7 @@
         "resourceType": "Location",
         "meta": {
           "profile": [
-            "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+            "http://hl7.org/fhir/StructureDefinition/Location"
           ]
         },
         "id": "DJ",
@@ -2515,7 +2515,7 @@
         "resourceType": "Location",
         "meta": {
           "profile": [
-            "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+            "http://hl7.org/fhir/StructureDefinition/Location"
           ]
         },
         "id": "DK",
@@ -2559,7 +2559,7 @@
         "resourceType": "Location",
         "meta": {
           "profile": [
-            "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+            "http://hl7.org/fhir/StructureDefinition/Location"
           ]
         },
         "id": "DM",
@@ -2603,7 +2603,7 @@
         "resourceType": "Location",
         "meta": {
           "profile": [
-            "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+            "http://hl7.org/fhir/StructureDefinition/Location"
           ]
         },
         "id": "DO",
@@ -2647,7 +2647,7 @@
         "resourceType": "Location",
         "meta": {
           "profile": [
-            "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+            "http://hl7.org/fhir/StructureDefinition/Location"
           ]
         },
         "id": "DZ",
@@ -2691,7 +2691,7 @@
         "resourceType": "Location",
         "meta": {
           "profile": [
-            "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+            "http://hl7.org/fhir/StructureDefinition/Location"
           ]
         },
         "id": "EC",
@@ -2735,7 +2735,7 @@
         "resourceType": "Location",
         "meta": {
           "profile": [
-            "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+            "http://hl7.org/fhir/StructureDefinition/Location"
           ]
         },
         "id": "EE",
@@ -2779,7 +2779,7 @@
         "resourceType": "Location",
         "meta": {
           "profile": [
-            "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+            "http://hl7.org/fhir/StructureDefinition/Location"
           ]
         },
         "id": "EG",
@@ -2823,7 +2823,7 @@
         "resourceType": "Location",
         "meta": {
           "profile": [
-            "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+            "http://hl7.org/fhir/StructureDefinition/Location"
           ]
         },
         "id": "EH",
@@ -2867,7 +2867,7 @@
         "resourceType": "Location",
         "meta": {
           "profile": [
-            "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+            "http://hl7.org/fhir/StructureDefinition/Location"
           ]
         },
         "id": "ER",
@@ -2911,7 +2911,7 @@
         "resourceType": "Location",
         "meta": {
           "profile": [
-            "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+            "http://hl7.org/fhir/StructureDefinition/Location"
           ]
         },
         "id": "ES",
@@ -2955,7 +2955,7 @@
         "resourceType": "Location",
         "meta": {
           "profile": [
-            "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+            "http://hl7.org/fhir/StructureDefinition/Location"
           ]
         },
         "id": "ET",
@@ -2999,7 +2999,7 @@
         "resourceType": "Location",
         "meta": {
           "profile": [
-            "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+            "http://hl7.org/fhir/StructureDefinition/Location"
           ]
         },
         "id": "FI",
@@ -3043,7 +3043,7 @@
         "resourceType": "Location",
         "meta": {
           "profile": [
-            "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+            "http://hl7.org/fhir/StructureDefinition/Location"
           ]
         },
         "id": "FJ",
@@ -3087,7 +3087,7 @@
         "resourceType": "Location",
         "meta": {
           "profile": [
-            "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+            "http://hl7.org/fhir/StructureDefinition/Location"
           ]
         },
         "id": "FK",
@@ -3131,7 +3131,7 @@
         "resourceType": "Location",
         "meta": {
           "profile": [
-            "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+            "http://hl7.org/fhir/StructureDefinition/Location"
           ]
         },
         "id": "FM",
@@ -3175,7 +3175,7 @@
         "resourceType": "Location",
         "meta": {
           "profile": [
-            "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+            "http://hl7.org/fhir/StructureDefinition/Location"
           ]
         },
         "id": "FO",
@@ -3219,7 +3219,7 @@
         "resourceType": "Location",
         "meta": {
           "profile": [
-            "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+            "http://hl7.org/fhir/StructureDefinition/Location"
           ]
         },
         "id": "FR",
@@ -3263,7 +3263,7 @@
         "resourceType": "Location",
         "meta": {
           "profile": [
-            "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+            "http://hl7.org/fhir/StructureDefinition/Location"
           ]
         },
         "id": "GA",
@@ -3307,7 +3307,7 @@
         "resourceType": "Location",
         "meta": {
           "profile": [
-            "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+            "http://hl7.org/fhir/StructureDefinition/Location"
           ]
         },
         "id": "GB",
@@ -3351,7 +3351,7 @@
         "resourceType": "Location",
         "meta": {
           "profile": [
-            "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+            "http://hl7.org/fhir/StructureDefinition/Location"
           ]
         },
         "id": "GD",
@@ -3395,7 +3395,7 @@
         "resourceType": "Location",
         "meta": {
           "profile": [
-            "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+            "http://hl7.org/fhir/StructureDefinition/Location"
           ]
         },
         "id": "GE",
@@ -3439,7 +3439,7 @@
         "resourceType": "Location",
         "meta": {
           "profile": [
-            "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+            "http://hl7.org/fhir/StructureDefinition/Location"
           ]
         },
         "id": "GF",
@@ -3483,7 +3483,7 @@
         "resourceType": "Location",
         "meta": {
           "profile": [
-            "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+            "http://hl7.org/fhir/StructureDefinition/Location"
           ]
         },
         "id": "GG",
@@ -3527,7 +3527,7 @@
         "resourceType": "Location",
         "meta": {
           "profile": [
-            "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+            "http://hl7.org/fhir/StructureDefinition/Location"
           ]
         },
         "id": "GH",
@@ -3571,7 +3571,7 @@
         "resourceType": "Location",
         "meta": {
           "profile": [
-            "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+            "http://hl7.org/fhir/StructureDefinition/Location"
           ]
         },
         "id": "GI",
@@ -3615,7 +3615,7 @@
         "resourceType": "Location",
         "meta": {
           "profile": [
-            "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+            "http://hl7.org/fhir/StructureDefinition/Location"
           ]
         },
         "id": "GL",
@@ -3659,7 +3659,7 @@
         "resourceType": "Location",
         "meta": {
           "profile": [
-            "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+            "http://hl7.org/fhir/StructureDefinition/Location"
           ]
         },
         "id": "GM",
@@ -3703,7 +3703,7 @@
         "resourceType": "Location",
         "meta": {
           "profile": [
-            "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+            "http://hl7.org/fhir/StructureDefinition/Location"
           ]
         },
         "id": "GN",
@@ -3747,7 +3747,7 @@
         "resourceType": "Location",
         "meta": {
           "profile": [
-            "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+            "http://hl7.org/fhir/StructureDefinition/Location"
           ]
         },
         "id": "GP",
@@ -3791,7 +3791,7 @@
         "resourceType": "Location",
         "meta": {
           "profile": [
-            "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+            "http://hl7.org/fhir/StructureDefinition/Location"
           ]
         },
         "id": "GQ",
@@ -3835,7 +3835,7 @@
         "resourceType": "Location",
         "meta": {
           "profile": [
-            "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+            "http://hl7.org/fhir/StructureDefinition/Location"
           ]
         },
         "id": "GR",
@@ -3879,7 +3879,7 @@
         "resourceType": "Location",
         "meta": {
           "profile": [
-            "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+            "http://hl7.org/fhir/StructureDefinition/Location"
           ]
         },
         "id": "GS",
@@ -3923,7 +3923,7 @@
         "resourceType": "Location",
         "meta": {
           "profile": [
-            "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+            "http://hl7.org/fhir/StructureDefinition/Location"
           ]
         },
         "id": "GT",
@@ -3967,7 +3967,7 @@
         "resourceType": "Location",
         "meta": {
           "profile": [
-            "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+            "http://hl7.org/fhir/StructureDefinition/Location"
           ]
         },
         "id": "GU",
@@ -4011,7 +4011,7 @@
         "resourceType": "Location",
         "meta": {
           "profile": [
-            "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+            "http://hl7.org/fhir/StructureDefinition/Location"
           ]
         },
         "id": "GW",
@@ -4055,7 +4055,7 @@
         "resourceType": "Location",
         "meta": {
           "profile": [
-            "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+            "http://hl7.org/fhir/StructureDefinition/Location"
           ]
         },
         "id": "GY",
@@ -4099,7 +4099,7 @@
         "resourceType": "Location",
         "meta": {
           "profile": [
-            "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+            "http://hl7.org/fhir/StructureDefinition/Location"
           ]
         },
         "id": "HK",
@@ -4143,7 +4143,7 @@
         "resourceType": "Location",
         "meta": {
           "profile": [
-            "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+            "http://hl7.org/fhir/StructureDefinition/Location"
           ]
         },
         "id": "HM",
@@ -4187,7 +4187,7 @@
         "resourceType": "Location",
         "meta": {
           "profile": [
-            "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+            "http://hl7.org/fhir/StructureDefinition/Location"
           ]
         },
         "id": "HN",
@@ -4231,7 +4231,7 @@
         "resourceType": "Location",
         "meta": {
           "profile": [
-            "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+            "http://hl7.org/fhir/StructureDefinition/Location"
           ]
         },
         "id": "HR",
@@ -4275,7 +4275,7 @@
         "resourceType": "Location",
         "meta": {
           "profile": [
-            "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+            "http://hl7.org/fhir/StructureDefinition/Location"
           ]
         },
         "id": "HT",
@@ -4319,7 +4319,7 @@
         "resourceType": "Location",
         "meta": {
           "profile": [
-            "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+            "http://hl7.org/fhir/StructureDefinition/Location"
           ]
         },
         "id": "HU",
@@ -4363,7 +4363,7 @@
         "resourceType": "Location",
         "meta": {
           "profile": [
-            "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+            "http://hl7.org/fhir/StructureDefinition/Location"
           ]
         },
         "id": "ID",
@@ -4407,7 +4407,7 @@
         "resourceType": "Location",
         "meta": {
           "profile": [
-            "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+            "http://hl7.org/fhir/StructureDefinition/Location"
           ]
         },
         "id": "IE",
@@ -4451,7 +4451,7 @@
         "resourceType": "Location",
         "meta": {
           "profile": [
-            "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+            "http://hl7.org/fhir/StructureDefinition/Location"
           ]
         },
         "id": "IL",
@@ -4495,7 +4495,7 @@
         "resourceType": "Location",
         "meta": {
           "profile": [
-            "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+            "http://hl7.org/fhir/StructureDefinition/Location"
           ]
         },
         "id": "IM",
@@ -4539,7 +4539,7 @@
         "resourceType": "Location",
         "meta": {
           "profile": [
-            "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+            "http://hl7.org/fhir/StructureDefinition/Location"
           ]
         },
         "id": "IN",
@@ -4583,7 +4583,7 @@
         "resourceType": "Location",
         "meta": {
           "profile": [
-            "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+            "http://hl7.org/fhir/StructureDefinition/Location"
           ]
         },
         "id": "IO",
@@ -4627,7 +4627,7 @@
         "resourceType": "Location",
         "meta": {
           "profile": [
-            "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+            "http://hl7.org/fhir/StructureDefinition/Location"
           ]
         },
         "id": "IQ",
@@ -4671,7 +4671,7 @@
         "resourceType": "Location",
         "meta": {
           "profile": [
-            "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+            "http://hl7.org/fhir/StructureDefinition/Location"
           ]
         },
         "id": "IR",
@@ -4715,7 +4715,7 @@
         "resourceType": "Location",
         "meta": {
           "profile": [
-            "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+            "http://hl7.org/fhir/StructureDefinition/Location"
           ]
         },
         "id": "IS",
@@ -4759,7 +4759,7 @@
         "resourceType": "Location",
         "meta": {
           "profile": [
-            "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+            "http://hl7.org/fhir/StructureDefinition/Location"
           ]
         },
         "id": "IT",
@@ -4803,7 +4803,7 @@
         "resourceType": "Location",
         "meta": {
           "profile": [
-            "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+            "http://hl7.org/fhir/StructureDefinition/Location"
           ]
         },
         "id": "JE",
@@ -4847,7 +4847,7 @@
         "resourceType": "Location",
         "meta": {
           "profile": [
-            "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+            "http://hl7.org/fhir/StructureDefinition/Location"
           ]
         },
         "id": "JM",
@@ -4891,7 +4891,7 @@
         "resourceType": "Location",
         "meta": {
           "profile": [
-            "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+            "http://hl7.org/fhir/StructureDefinition/Location"
           ]
         },
         "id": "JO",
@@ -4935,7 +4935,7 @@
         "resourceType": "Location",
         "meta": {
           "profile": [
-            "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+            "http://hl7.org/fhir/StructureDefinition/Location"
           ]
         },
         "id": "JP",
@@ -4979,7 +4979,7 @@
         "resourceType": "Location",
         "meta": {
           "profile": [
-            "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+            "http://hl7.org/fhir/StructureDefinition/Location"
           ]
         },
         "id": "KE",
@@ -5023,7 +5023,7 @@
         "resourceType": "Location",
         "meta": {
           "profile": [
-            "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+            "http://hl7.org/fhir/StructureDefinition/Location"
           ]
         },
         "id": "KG",
@@ -5067,7 +5067,7 @@
         "resourceType": "Location",
         "meta": {
           "profile": [
-            "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+            "http://hl7.org/fhir/StructureDefinition/Location"
           ]
         },
         "id": "KH",
@@ -5111,7 +5111,7 @@
         "resourceType": "Location",
         "meta": {
           "profile": [
-            "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+            "http://hl7.org/fhir/StructureDefinition/Location"
           ]
         },
         "id": "KI",
@@ -5155,7 +5155,7 @@
         "resourceType": "Location",
         "meta": {
           "profile": [
-            "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+            "http://hl7.org/fhir/StructureDefinition/Location"
           ]
         },
         "id": "KM",
@@ -5199,7 +5199,7 @@
         "resourceType": "Location",
         "meta": {
           "profile": [
-            "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+            "http://hl7.org/fhir/StructureDefinition/Location"
           ]
         },
         "id": "KN",
@@ -5243,7 +5243,7 @@
         "resourceType": "Location",
         "meta": {
           "profile": [
-            "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+            "http://hl7.org/fhir/StructureDefinition/Location"
           ]
         },
         "id": "KP",
@@ -5287,7 +5287,7 @@
         "resourceType": "Location",
         "meta": {
           "profile": [
-            "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+            "http://hl7.org/fhir/StructureDefinition/Location"
           ]
         },
         "id": "KR",
@@ -5331,7 +5331,7 @@
         "resourceType": "Location",
         "meta": {
           "profile": [
-            "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+            "http://hl7.org/fhir/StructureDefinition/Location"
           ]
         },
         "id": "KW",
@@ -5375,7 +5375,7 @@
         "resourceType": "Location",
         "meta": {
           "profile": [
-            "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+            "http://hl7.org/fhir/StructureDefinition/Location"
           ]
         },
         "id": "KY",
@@ -5419,7 +5419,7 @@
         "resourceType": "Location",
         "meta": {
           "profile": [
-            "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+            "http://hl7.org/fhir/StructureDefinition/Location"
           ]
         },
         "id": "KZ",
@@ -5463,7 +5463,7 @@
         "resourceType": "Location",
         "meta": {
           "profile": [
-            "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+            "http://hl7.org/fhir/StructureDefinition/Location"
           ]
         },
         "id": "LA",
@@ -5507,7 +5507,7 @@
         "resourceType": "Location",
         "meta": {
           "profile": [
-            "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+            "http://hl7.org/fhir/StructureDefinition/Location"
           ]
         },
         "id": "LB",
@@ -5551,7 +5551,7 @@
         "resourceType": "Location",
         "meta": {
           "profile": [
-            "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+            "http://hl7.org/fhir/StructureDefinition/Location"
           ]
         },
         "id": "LC",
@@ -5595,7 +5595,7 @@
         "resourceType": "Location",
         "meta": {
           "profile": [
-            "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+            "http://hl7.org/fhir/StructureDefinition/Location"
           ]
         },
         "id": "LI",
@@ -5639,7 +5639,7 @@
         "resourceType": "Location",
         "meta": {
           "profile": [
-            "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+            "http://hl7.org/fhir/StructureDefinition/Location"
           ]
         },
         "id": "LK",
@@ -5683,7 +5683,7 @@
         "resourceType": "Location",
         "meta": {
           "profile": [
-            "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+            "http://hl7.org/fhir/StructureDefinition/Location"
           ]
         },
         "id": "LR",
@@ -5727,7 +5727,7 @@
         "resourceType": "Location",
         "meta": {
           "profile": [
-            "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+            "http://hl7.org/fhir/StructureDefinition/Location"
           ]
         },
         "id": "LS",
@@ -5771,7 +5771,7 @@
         "resourceType": "Location",
         "meta": {
           "profile": [
-            "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+            "http://hl7.org/fhir/StructureDefinition/Location"
           ]
         },
         "id": "LT",
@@ -5815,7 +5815,7 @@
         "resourceType": "Location",
         "meta": {
           "profile": [
-            "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+            "http://hl7.org/fhir/StructureDefinition/Location"
           ]
         },
         "id": "LU",
@@ -5859,7 +5859,7 @@
         "resourceType": "Location",
         "meta": {
           "profile": [
-            "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+            "http://hl7.org/fhir/StructureDefinition/Location"
           ]
         },
         "id": "LV",
@@ -5903,7 +5903,7 @@
         "resourceType": "Location",
         "meta": {
           "profile": [
-            "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+            "http://hl7.org/fhir/StructureDefinition/Location"
           ]
         },
         "id": "LY",
@@ -5947,7 +5947,7 @@
         "resourceType": "Location",
         "meta": {
           "profile": [
-            "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+            "http://hl7.org/fhir/StructureDefinition/Location"
           ]
         },
         "id": "MA",
@@ -5991,7 +5991,7 @@
         "resourceType": "Location",
         "meta": {
           "profile": [
-            "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+            "http://hl7.org/fhir/StructureDefinition/Location"
           ]
         },
         "id": "MC",
@@ -6035,7 +6035,7 @@
         "resourceType": "Location",
         "meta": {
           "profile": [
-            "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+            "http://hl7.org/fhir/StructureDefinition/Location"
           ]
         },
         "id": "MD",
@@ -6079,7 +6079,7 @@
         "resourceType": "Location",
         "meta": {
           "profile": [
-            "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+            "http://hl7.org/fhir/StructureDefinition/Location"
           ]
         },
         "id": "ME",
@@ -6123,7 +6123,7 @@
         "resourceType": "Location",
         "meta": {
           "profile": [
-            "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+            "http://hl7.org/fhir/StructureDefinition/Location"
           ]
         },
         "id": "MF",
@@ -6167,7 +6167,7 @@
         "resourceType": "Location",
         "meta": {
           "profile": [
-            "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+            "http://hl7.org/fhir/StructureDefinition/Location"
           ]
         },
         "id": "MG",
@@ -6211,7 +6211,7 @@
         "resourceType": "Location",
         "meta": {
           "profile": [
-            "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+            "http://hl7.org/fhir/StructureDefinition/Location"
           ]
         },
         "id": "MH",
@@ -6255,7 +6255,7 @@
         "resourceType": "Location",
         "meta": {
           "profile": [
-            "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+            "http://hl7.org/fhir/StructureDefinition/Location"
           ]
         },
         "id": "MK",
@@ -6299,7 +6299,7 @@
         "resourceType": "Location",
         "meta": {
           "profile": [
-            "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+            "http://hl7.org/fhir/StructureDefinition/Location"
           ]
         },
         "id": "ML",
@@ -6343,7 +6343,7 @@
         "resourceType": "Location",
         "meta": {
           "profile": [
-            "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+            "http://hl7.org/fhir/StructureDefinition/Location"
           ]
         },
         "id": "MM",
@@ -6387,7 +6387,7 @@
         "resourceType": "Location",
         "meta": {
           "profile": [
-            "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+            "http://hl7.org/fhir/StructureDefinition/Location"
           ]
         },
         "id": "MN",
@@ -6431,7 +6431,7 @@
         "resourceType": "Location",
         "meta": {
           "profile": [
-            "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+            "http://hl7.org/fhir/StructureDefinition/Location"
           ]
         },
         "id": "MO",
@@ -6475,7 +6475,7 @@
         "resourceType": "Location",
         "meta": {
           "profile": [
-            "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+            "http://hl7.org/fhir/StructureDefinition/Location"
           ]
         },
         "id": "MP",
@@ -6519,7 +6519,7 @@
         "resourceType": "Location",
         "meta": {
           "profile": [
-            "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+            "http://hl7.org/fhir/StructureDefinition/Location"
           ]
         },
         "id": "MQ",
@@ -6563,7 +6563,7 @@
         "resourceType": "Location",
         "meta": {
           "profile": [
-            "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+            "http://hl7.org/fhir/StructureDefinition/Location"
           ]
         },
         "id": "MR",
@@ -6607,7 +6607,7 @@
         "resourceType": "Location",
         "meta": {
           "profile": [
-            "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+            "http://hl7.org/fhir/StructureDefinition/Location"
           ]
         },
         "id": "MS",
@@ -6651,7 +6651,7 @@
         "resourceType": "Location",
         "meta": {
           "profile": [
-            "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+            "http://hl7.org/fhir/StructureDefinition/Location"
           ]
         },
         "id": "MT",
@@ -6695,7 +6695,7 @@
         "resourceType": "Location",
         "meta": {
           "profile": [
-            "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+            "http://hl7.org/fhir/StructureDefinition/Location"
           ]
         },
         "id": "MU",
@@ -6739,7 +6739,7 @@
         "resourceType": "Location",
         "meta": {
           "profile": [
-            "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+            "http://hl7.org/fhir/StructureDefinition/Location"
           ]
         },
         "id": "MV",
@@ -6783,7 +6783,7 @@
         "resourceType": "Location",
         "meta": {
           "profile": [
-            "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+            "http://hl7.org/fhir/StructureDefinition/Location"
           ]
         },
         "id": "MW",
@@ -6827,7 +6827,7 @@
         "resourceType": "Location",
         "meta": {
           "profile": [
-            "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+            "http://hl7.org/fhir/StructureDefinition/Location"
           ]
         },
         "id": "MX",
@@ -6871,7 +6871,7 @@
         "resourceType": "Location",
         "meta": {
           "profile": [
-            "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+            "http://hl7.org/fhir/StructureDefinition/Location"
           ]
         },
         "id": "MY",
@@ -6915,7 +6915,7 @@
         "resourceType": "Location",
         "meta": {
           "profile": [
-            "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+            "http://hl7.org/fhir/StructureDefinition/Location"
           ]
         },
         "id": "MZ",
@@ -6959,7 +6959,7 @@
         "resourceType": "Location",
         "meta": {
           "profile": [
-            "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+            "http://hl7.org/fhir/StructureDefinition/Location"
           ]
         },
         "id": "NA",
@@ -7003,7 +7003,7 @@
         "resourceType": "Location",
         "meta": {
           "profile": [
-            "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+            "http://hl7.org/fhir/StructureDefinition/Location"
           ]
         },
         "id": "NC",
@@ -7047,7 +7047,7 @@
         "resourceType": "Location",
         "meta": {
           "profile": [
-            "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+            "http://hl7.org/fhir/StructureDefinition/Location"
           ]
         },
         "id": "NE",
@@ -7091,7 +7091,7 @@
         "resourceType": "Location",
         "meta": {
           "profile": [
-            "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+            "http://hl7.org/fhir/StructureDefinition/Location"
           ]
         },
         "id": "NF",
@@ -7135,7 +7135,7 @@
         "resourceType": "Location",
         "meta": {
           "profile": [
-            "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+            "http://hl7.org/fhir/StructureDefinition/Location"
           ]
         },
         "id": "NG",
@@ -7179,7 +7179,7 @@
         "resourceType": "Location",
         "meta": {
           "profile": [
-            "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+            "http://hl7.org/fhir/StructureDefinition/Location"
           ]
         },
         "id": "NI",
@@ -7223,7 +7223,7 @@
         "resourceType": "Location",
         "meta": {
           "profile": [
-            "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+            "http://hl7.org/fhir/StructureDefinition/Location"
           ]
         },
         "id": "NL",
@@ -7267,7 +7267,7 @@
         "resourceType": "Location",
         "meta": {
           "profile": [
-            "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+            "http://hl7.org/fhir/StructureDefinition/Location"
           ]
         },
         "id": "NO",
@@ -7311,7 +7311,7 @@
         "resourceType": "Location",
         "meta": {
           "profile": [
-            "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+            "http://hl7.org/fhir/StructureDefinition/Location"
           ]
         },
         "id": "NP",
@@ -7355,7 +7355,7 @@
         "resourceType": "Location",
         "meta": {
           "profile": [
-            "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+            "http://hl7.org/fhir/StructureDefinition/Location"
           ]
         },
         "id": "NR",
@@ -7399,7 +7399,7 @@
         "resourceType": "Location",
         "meta": {
           "profile": [
-            "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+            "http://hl7.org/fhir/StructureDefinition/Location"
           ]
         },
         "id": "NU",
@@ -7443,7 +7443,7 @@
         "resourceType": "Location",
         "meta": {
           "profile": [
-            "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+            "http://hl7.org/fhir/StructureDefinition/Location"
           ]
         },
         "id": "NZ",
@@ -7487,7 +7487,7 @@
         "resourceType": "Location",
         "meta": {
           "profile": [
-            "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+            "http://hl7.org/fhir/StructureDefinition/Location"
           ]
         },
         "id": "OM",
@@ -7531,7 +7531,7 @@
         "resourceType": "Location",
         "meta": {
           "profile": [
-            "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+            "http://hl7.org/fhir/StructureDefinition/Location"
           ]
         },
         "id": "PA",
@@ -7575,7 +7575,7 @@
         "resourceType": "Location",
         "meta": {
           "profile": [
-            "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+            "http://hl7.org/fhir/StructureDefinition/Location"
           ]
         },
         "id": "PE",
@@ -7619,7 +7619,7 @@
         "resourceType": "Location",
         "meta": {
           "profile": [
-            "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+            "http://hl7.org/fhir/StructureDefinition/Location"
           ]
         },
         "id": "PF",
@@ -7663,7 +7663,7 @@
         "resourceType": "Location",
         "meta": {
           "profile": [
-            "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+            "http://hl7.org/fhir/StructureDefinition/Location"
           ]
         },
         "id": "PG",
@@ -7707,7 +7707,7 @@
         "resourceType": "Location",
         "meta": {
           "profile": [
-            "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+            "http://hl7.org/fhir/StructureDefinition/Location"
           ]
         },
         "id": "PH",
@@ -7751,7 +7751,7 @@
         "resourceType": "Location",
         "meta": {
           "profile": [
-            "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+            "http://hl7.org/fhir/StructureDefinition/Location"
           ]
         },
         "id": "PK",
@@ -7795,7 +7795,7 @@
         "resourceType": "Location",
         "meta": {
           "profile": [
-            "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+            "http://hl7.org/fhir/StructureDefinition/Location"
           ]
         },
         "id": "PL",
@@ -7839,7 +7839,7 @@
         "resourceType": "Location",
         "meta": {
           "profile": [
-            "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+            "http://hl7.org/fhir/StructureDefinition/Location"
           ]
         },
         "id": "PM",
@@ -7883,7 +7883,7 @@
         "resourceType": "Location",
         "meta": {
           "profile": [
-            "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+            "http://hl7.org/fhir/StructureDefinition/Location"
           ]
         },
         "id": "PN",
@@ -7927,7 +7927,7 @@
         "resourceType": "Location",
         "meta": {
           "profile": [
-            "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+            "http://hl7.org/fhir/StructureDefinition/Location"
           ]
         },
         "id": "PR",
@@ -7971,7 +7971,7 @@
         "resourceType": "Location",
         "meta": {
           "profile": [
-            "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+            "http://hl7.org/fhir/StructureDefinition/Location"
           ]
         },
         "id": "PS",
@@ -8015,7 +8015,7 @@
         "resourceType": "Location",
         "meta": {
           "profile": [
-            "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+            "http://hl7.org/fhir/StructureDefinition/Location"
           ]
         },
         "id": "PT",
@@ -8059,7 +8059,7 @@
         "resourceType": "Location",
         "meta": {
           "profile": [
-            "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+            "http://hl7.org/fhir/StructureDefinition/Location"
           ]
         },
         "id": "PW",
@@ -8103,7 +8103,7 @@
         "resourceType": "Location",
         "meta": {
           "profile": [
-            "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+            "http://hl7.org/fhir/StructureDefinition/Location"
           ]
         },
         "id": "PY",
@@ -8147,7 +8147,7 @@
         "resourceType": "Location",
         "meta": {
           "profile": [
-            "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+            "http://hl7.org/fhir/StructureDefinition/Location"
           ]
         },
         "id": "QA",
@@ -8191,7 +8191,7 @@
         "resourceType": "Location",
         "meta": {
           "profile": [
-            "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+            "http://hl7.org/fhir/StructureDefinition/Location"
           ]
         },
         "id": "RE",
@@ -8235,7 +8235,7 @@
         "resourceType": "Location",
         "meta": {
           "profile": [
-            "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+            "http://hl7.org/fhir/StructureDefinition/Location"
           ]
         },
         "id": "RO",
@@ -8279,7 +8279,7 @@
         "resourceType": "Location",
         "meta": {
           "profile": [
-            "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+            "http://hl7.org/fhir/StructureDefinition/Location"
           ]
         },
         "id": "RS",
@@ -8323,7 +8323,7 @@
         "resourceType": "Location",
         "meta": {
           "profile": [
-            "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+            "http://hl7.org/fhir/StructureDefinition/Location"
           ]
         },
         "id": "RU",
@@ -8367,7 +8367,7 @@
         "resourceType": "Location",
         "meta": {
           "profile": [
-            "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+            "http://hl7.org/fhir/StructureDefinition/Location"
           ]
         },
         "id": "RW",
@@ -8411,7 +8411,7 @@
         "resourceType": "Location",
         "meta": {
           "profile": [
-            "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+            "http://hl7.org/fhir/StructureDefinition/Location"
           ]
         },
         "id": "SA",
@@ -8455,7 +8455,7 @@
         "resourceType": "Location",
         "meta": {
           "profile": [
-            "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+            "http://hl7.org/fhir/StructureDefinition/Location"
           ]
         },
         "id": "SB",
@@ -8499,7 +8499,7 @@
         "resourceType": "Location",
         "meta": {
           "profile": [
-            "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+            "http://hl7.org/fhir/StructureDefinition/Location"
           ]
         },
         "id": "SC",
@@ -8543,7 +8543,7 @@
         "resourceType": "Location",
         "meta": {
           "profile": [
-            "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+            "http://hl7.org/fhir/StructureDefinition/Location"
           ]
         },
         "id": "SD",
@@ -8587,7 +8587,7 @@
         "resourceType": "Location",
         "meta": {
           "profile": [
-            "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+            "http://hl7.org/fhir/StructureDefinition/Location"
           ]
         },
         "id": "SDN",
@@ -8631,7 +8631,7 @@
         "resourceType": "Location",
         "meta": {
           "profile": [
-            "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+            "http://hl7.org/fhir/StructureDefinition/Location"
           ]
         },
         "id": "SE",
@@ -8675,7 +8675,7 @@
         "resourceType": "Location",
         "meta": {
           "profile": [
-            "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+            "http://hl7.org/fhir/StructureDefinition/Location"
           ]
         },
         "id": "SG",
@@ -8719,7 +8719,7 @@
         "resourceType": "Location",
         "meta": {
           "profile": [
-            "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+            "http://hl7.org/fhir/StructureDefinition/Location"
           ]
         },
         "id": "SH",
@@ -8763,7 +8763,7 @@
         "resourceType": "Location",
         "meta": {
           "profile": [
-            "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+            "http://hl7.org/fhir/StructureDefinition/Location"
           ]
         },
         "id": "SI",
@@ -8807,7 +8807,7 @@
         "resourceType": "Location",
         "meta": {
           "profile": [
-            "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+            "http://hl7.org/fhir/StructureDefinition/Location"
           ]
         },
         "id": "SJ",
@@ -8851,7 +8851,7 @@
         "resourceType": "Location",
         "meta": {
           "profile": [
-            "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+            "http://hl7.org/fhir/StructureDefinition/Location"
           ]
         },
         "id": "SK",
@@ -8895,7 +8895,7 @@
         "resourceType": "Location",
         "meta": {
           "profile": [
-            "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+            "http://hl7.org/fhir/StructureDefinition/Location"
           ]
         },
         "id": "SL",
@@ -8939,7 +8939,7 @@
         "resourceType": "Location",
         "meta": {
           "profile": [
-            "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+            "http://hl7.org/fhir/StructureDefinition/Location"
           ]
         },
         "id": "SM",
@@ -8983,7 +8983,7 @@
         "resourceType": "Location",
         "meta": {
           "profile": [
-            "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+            "http://hl7.org/fhir/StructureDefinition/Location"
           ]
         },
         "id": "SN",
@@ -9027,7 +9027,7 @@
         "resourceType": "Location",
         "meta": {
           "profile": [
-            "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+            "http://hl7.org/fhir/StructureDefinition/Location"
           ]
         },
         "id": "SO",
@@ -9071,7 +9071,7 @@
         "resourceType": "Location",
         "meta": {
           "profile": [
-            "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+            "http://hl7.org/fhir/StructureDefinition/Location"
           ]
         },
         "id": "SR",
@@ -9115,7 +9115,7 @@
         "resourceType": "Location",
         "meta": {
           "profile": [
-            "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+            "http://hl7.org/fhir/StructureDefinition/Location"
           ]
         },
         "id": "ST",
@@ -9159,7 +9159,7 @@
         "resourceType": "Location",
         "meta": {
           "profile": [
-            "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+            "http://hl7.org/fhir/StructureDefinition/Location"
           ]
         },
         "id": "SV",
@@ -9203,7 +9203,7 @@
         "resourceType": "Location",
         "meta": {
           "profile": [
-            "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+            "http://hl7.org/fhir/StructureDefinition/Location"
           ]
         },
         "id": "SY",
@@ -9247,7 +9247,7 @@
         "resourceType": "Location",
         "meta": {
           "profile": [
-            "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+            "http://hl7.org/fhir/StructureDefinition/Location"
           ]
         },
         "id": "SZ",
@@ -9291,7 +9291,7 @@
         "resourceType": "Location",
         "meta": {
           "profile": [
-            "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+            "http://hl7.org/fhir/StructureDefinition/Location"
           ]
         },
         "id": "TC",
@@ -9335,7 +9335,7 @@
         "resourceType": "Location",
         "meta": {
           "profile": [
-            "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+            "http://hl7.org/fhir/StructureDefinition/Location"
           ]
         },
         "id": "TD",
@@ -9379,7 +9379,7 @@
         "resourceType": "Location",
         "meta": {
           "profile": [
-            "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+            "http://hl7.org/fhir/StructureDefinition/Location"
           ]
         },
         "id": "TF",
@@ -9423,7 +9423,7 @@
         "resourceType": "Location",
         "meta": {
           "profile": [
-            "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+            "http://hl7.org/fhir/StructureDefinition/Location"
           ]
         },
         "id": "TG",
@@ -9467,7 +9467,7 @@
         "resourceType": "Location",
         "meta": {
           "profile": [
-            "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+            "http://hl7.org/fhir/StructureDefinition/Location"
           ]
         },
         "id": "TH",
@@ -9511,7 +9511,7 @@
         "resourceType": "Location",
         "meta": {
           "profile": [
-            "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+            "http://hl7.org/fhir/StructureDefinition/Location"
           ]
         },
         "id": "TJ",
@@ -9555,7 +9555,7 @@
         "resourceType": "Location",
         "meta": {
           "profile": [
-            "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+            "http://hl7.org/fhir/StructureDefinition/Location"
           ]
         },
         "id": "TK",
@@ -9599,7 +9599,7 @@
         "resourceType": "Location",
         "meta": {
           "profile": [
-            "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+            "http://hl7.org/fhir/StructureDefinition/Location"
           ]
         },
         "id": "TL",
@@ -9643,7 +9643,7 @@
         "resourceType": "Location",
         "meta": {
           "profile": [
-            "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+            "http://hl7.org/fhir/StructureDefinition/Location"
           ]
         },
         "id": "TM",
@@ -9687,7 +9687,7 @@
         "resourceType": "Location",
         "meta": {
           "profile": [
-            "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+            "http://hl7.org/fhir/StructureDefinition/Location"
           ]
         },
         "id": "TN",
@@ -9731,7 +9731,7 @@
         "resourceType": "Location",
         "meta": {
           "profile": [
-            "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+            "http://hl7.org/fhir/StructureDefinition/Location"
           ]
         },
         "id": "TO",
@@ -9775,7 +9775,7 @@
         "resourceType": "Location",
         "meta": {
           "profile": [
-            "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+            "http://hl7.org/fhir/StructureDefinition/Location"
           ]
         },
         "id": "TR",
@@ -9819,7 +9819,7 @@
         "resourceType": "Location",
         "meta": {
           "profile": [
-            "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+            "http://hl7.org/fhir/StructureDefinition/Location"
           ]
         },
         "id": "TT",
@@ -9863,7 +9863,7 @@
         "resourceType": "Location",
         "meta": {
           "profile": [
-            "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+            "http://hl7.org/fhir/StructureDefinition/Location"
           ]
         },
         "id": "TV",
@@ -9907,7 +9907,7 @@
         "resourceType": "Location",
         "meta": {
           "profile": [
-            "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+            "http://hl7.org/fhir/StructureDefinition/Location"
           ]
         },
         "id": "TW",
@@ -9951,7 +9951,7 @@
         "resourceType": "Location",
         "meta": {
           "profile": [
-            "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+            "http://hl7.org/fhir/StructureDefinition/Location"
           ]
         },
         "id": "TZ",
@@ -9995,7 +9995,7 @@
         "resourceType": "Location",
         "meta": {
           "profile": [
-            "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+            "http://hl7.org/fhir/StructureDefinition/Location"
           ]
         },
         "id": "UA",
@@ -10039,7 +10039,7 @@
         "resourceType": "Location",
         "meta": {
           "profile": [
-            "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+            "http://hl7.org/fhir/StructureDefinition/Location"
           ]
         },
         "id": "UG",
@@ -10083,7 +10083,7 @@
         "resourceType": "Location",
         "meta": {
           "profile": [
-            "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+            "http://hl7.org/fhir/StructureDefinition/Location"
           ]
         },
         "id": "UM",
@@ -10127,7 +10127,7 @@
         "resourceType": "Location",
         "meta": {
           "profile": [
-            "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+            "http://hl7.org/fhir/StructureDefinition/Location"
           ]
         },
         "id": "US",
@@ -10171,7 +10171,7 @@
         "resourceType": "Location",
         "meta": {
           "profile": [
-            "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+            "http://hl7.org/fhir/StructureDefinition/Location"
           ]
         },
         "id": "UY",
@@ -10215,7 +10215,7 @@
         "resourceType": "Location",
         "meta": {
           "profile": [
-            "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+            "http://hl7.org/fhir/StructureDefinition/Location"
           ]
         },
         "id": "UZ",
@@ -10259,7 +10259,7 @@
         "resourceType": "Location",
         "meta": {
           "profile": [
-            "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+            "http://hl7.org/fhir/StructureDefinition/Location"
           ]
         },
         "id": "VA",
@@ -10303,7 +10303,7 @@
         "resourceType": "Location",
         "meta": {
           "profile": [
-            "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+            "http://hl7.org/fhir/StructureDefinition/Location"
           ]
         },
         "id": "VC",
@@ -10347,7 +10347,7 @@
         "resourceType": "Location",
         "meta": {
           "profile": [
-            "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+            "http://hl7.org/fhir/StructureDefinition/Location"
           ]
         },
         "id": "VE",
@@ -10391,7 +10391,7 @@
         "resourceType": "Location",
         "meta": {
           "profile": [
-            "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+            "http://hl7.org/fhir/StructureDefinition/Location"
           ]
         },
         "id": "VG",
@@ -10435,7 +10435,7 @@
         "resourceType": "Location",
         "meta": {
           "profile": [
-            "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+            "http://hl7.org/fhir/StructureDefinition/Location"
           ]
         },
         "id": "VI",
@@ -10479,7 +10479,7 @@
         "resourceType": "Location",
         "meta": {
           "profile": [
-            "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+            "http://hl7.org/fhir/StructureDefinition/Location"
           ]
         },
         "id": "VN",
@@ -10523,7 +10523,7 @@
         "resourceType": "Location",
         "meta": {
           "profile": [
-            "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+            "http://hl7.org/fhir/StructureDefinition/Location"
           ]
         },
         "id": "VU",
@@ -10567,7 +10567,7 @@
         "resourceType": "Location",
         "meta": {
           "profile": [
-            "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+            "http://hl7.org/fhir/StructureDefinition/Location"
           ]
         },
         "id": "WF",
@@ -10611,7 +10611,7 @@
         "resourceType": "Location",
         "meta": {
           "profile": [
-            "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+            "http://hl7.org/fhir/StructureDefinition/Location"
           ]
         },
         "id": "WS",
@@ -10655,7 +10655,7 @@
         "resourceType": "Location",
         "meta": {
           "profile": [
-            "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+            "http://hl7.org/fhir/StructureDefinition/Location"
           ]
         },
         "id": "YE",
@@ -10699,7 +10699,7 @@
         "resourceType": "Location",
         "meta": {
           "profile": [
-            "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+            "http://hl7.org/fhir/StructureDefinition/Location"
           ]
         },
         "id": "YT",
@@ -10743,7 +10743,7 @@
         "resourceType": "Location",
         "meta": {
           "profile": [
-            "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+            "http://hl7.org/fhir/StructureDefinition/Location"
           ]
         },
         "id": "ZA",
@@ -10787,7 +10787,7 @@
         "resourceType": "Location",
         "meta": {
           "profile": [
-            "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+            "http://hl7.org/fhir/StructureDefinition/Location"
           ]
         },
         "id": "ZM",
@@ -10831,7 +10831,7 @@
         "resourceType": "Location",
         "meta": {
           "profile": [
-            "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+            "http://hl7.org/fhir/StructureDefinition/Location"
           ]
         },
         "id": "ZW",
