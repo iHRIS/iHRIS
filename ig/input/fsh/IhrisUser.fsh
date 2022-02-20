@@ -241,8 +241,8 @@ Usage:          #definition
 * item[0].item[2].repeats = false
 
 
-Instance:         IhrisPageRoles
-InstanceOf:       IhrisPage
-Title:            "NHWR Roles" 
-Usage:            #example
-* code = IhrisResourceCodeSystem#page
+// Instance:         IhrisPageRoles
+// InstanceOf:       IhrisPage
+// Title:            "NHWR Roles" 
+// Usage:            #example
+// * code = IhrisResourceCodeSystem#page
