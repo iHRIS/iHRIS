@@ -320,7 +320,7 @@
         },
         {
           "name": "site:nav:menu:users:menu:users_roles:url",
-          "valueString": "/resource/search/user"
+          "valueString": "resoure/search/roles"
         },
         {
           "name": "site:nav:menu:password:text",

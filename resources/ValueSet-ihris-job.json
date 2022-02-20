@@ -3,7 +3,7 @@
   "id": "ihris-job",
   "url": "http://ihris.org/fhir/ValueSet/ihris-job",
   "name": "iHRISJob",
-  "title": "iHRIS Job",
+  "title": "NHWR Job",
   "status": "active",
   "version": "1.0.0",
   "experimental": false,
