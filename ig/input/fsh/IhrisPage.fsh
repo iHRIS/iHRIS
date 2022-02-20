@@ -177,7 +177,7 @@ Usage:          #example
 * extension[display].extension[add].extension[url].valueUrl = "/questionnaire/ihris-practitioner/practitioner"
 * extension[display].extension[add].extension[icon].valueString = "mdi-account-plus"
 * extension[display].extension[add].extension[class].valueString = "accent"
-* extension[section][0].extension[title].valueString = "Health Worker"
+* extension[section][0].extension[title].valueString = "NHWR Health Worker"
 * extension[section][0].extension[description].valueString = "Primary demographic details"
 * extension[section][0].extension[name].valueString = "Practitioner"
 * extension[section][0].extension[field][0].valueString = "Practitioner.name"

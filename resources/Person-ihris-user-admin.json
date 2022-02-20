@@ -30,13 +30,13 @@
   "name": [
     {
       "use": "official",
-      "text": "iHRIS Admin"
+      "text": "NHWR Admin"
     }
   ],
   "telecom": [
     {
       "system": "email",
-      "value": "admin@ihris.org"
+      "value": "admin@nhwr.org"
     }
   ]
 }

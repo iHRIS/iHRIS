@@ -69,7 +69,7 @@ Title:           "Disciplinary Action Type"
 
 ValueSet:         IhrisEthiopiaDisciplinaryActionTypeValueSet
 Id:               ihris-discipline-action-type-valueset
-Title:            "iHRIS Disciplinary Action Type ValueSet"
+Title:            "NHWR Disciplinary Action Type ValueSet"
 * ^date = "2020-11-10T08:41:04.362Z"
 * ^version = "0.3.0"
 * codes from system IhrisDisciplinaryActionType
@@ -77,7 +77,7 @@ Title:            "iHRIS Disciplinary Action Type ValueSet"
 Instance:       IhrisPractitionerWorkflowDiscipline
 InstanceOf:     IhrisQuestionnaire
 Usage:          #definition
-* title = "iHRIS Discipline Workflow"
+* title = "NHWR Discipline Workflow"
 * description = "iHRIS workflow to record a Discipline"
 * id = "ihris-discipline"
 * url = "http://ihris.org/fhir/Questionnaire/ihris-discipline"
@@ -145,7 +145,7 @@ Usage:          #definition
 
 Instance:       ihris-page-discipline
 InstanceOf:     IhrisPage
-Title:          "iHRIS Basic Discipline Page"
+Title:          "NHWR Basic Discipline Page"
 Usage:          #example
 * code = IhrisResourceCodeSystem#page
 * extension[display].extension[resource].valueReference = Reference(StructureDefinition/ihris-basic-discipline)
@@ -176,7 +176,7 @@ Usage:          #example
 
 Instance:       ihris-page-discipline-action-type
 InstanceOf:     IhrisPage
-Title:          "iHRIS Discipline Action Type CodeSystem Page"
+Title:          "NHWR Discipline Action Type CodeSystem Page"
 Usage:          #example
 * code = IhrisResourceCodeSystem#page
 * extension[display].extension[resource].valueReference = Reference(CodeSystem/ihris-discipline-action-type-codesystem)

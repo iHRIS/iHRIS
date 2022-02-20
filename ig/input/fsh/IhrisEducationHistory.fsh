@@ -2,7 +2,7 @@ Profile:        IhrisBasicEducationHistory
 Parent:         IhrisPractitionerBasic
 Id:             ihris-basic-education-history
 Title:          "Education History Information"
-Description:    "iHRIS Profile of the Basic resource for Education History."
+Description:    "NHWR Profile of the Basic resource for Education History."
 * extension[practitioner].valueReference 1..1 MS
 * extension[practitioner].valueReference ^label = "Health Worker"
 * extension contains
@@ -191,7 +191,7 @@ Instance:       IhrisPractitionerWorkflowEducationHistory
 InstanceOf:      Questionnaire
 Usage:          #definition
 * title = "NHWR Education History Workflow"
-* description = "iHRIS workflow to record a Education History"
+* description = "NHWR workflow to record a Education History"
 * id = "ihris-education-history"
 * url = "http://ihris.org/fhir/Questionnaire/ihris-education-history"
 * name = "ihris-education-history"
@@ -288,7 +288,7 @@ Usage:          #example
 
 Instance:       ihris-page-institution
 InstanceOf:     IhrisPage
-Title:          "iHRIS Institution CodeSystem Page"
+Title:          "NHWR Institution CodeSystem Page"
 Usage:          #example
 * code = IhrisResourceCodeSystem#page
 * extension[display].extension[resource].valueReference = Reference(CodeSystem/ihris-institution)

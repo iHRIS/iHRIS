@@ -43,6 +43,6 @@ Usage:        #example
 * parameter[Signature].valueSignature.when = "2020-05-13T00:00:00Z"
 * parameter[Signature].valueSignature.who = Reference(http://ihris.org/fhir/Organization/ihris)
 * parameter[Config].part[ConfigId][0].name = "site:title"
-* parameter[Config].part[ConfigId][0].valueString = "iHRIS"
+* parameter[Config].part[ConfigId][0].valueString = "NHWR"
 * parameter[Config].part[ConfigId][1].name = "site:logo"
 * parameter[Config].part[ConfigId][1].valueString = "ihris-logo.png"

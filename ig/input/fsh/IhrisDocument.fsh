@@ -28,7 +28,7 @@ Title:          "Code system for document categories."
 
 Instance:       page-about
 InstanceOf:     IhrisDocument
-Title:          "iHRIS About Page"
+Title:          "NHWR About Page"
 Usage:          #example
 * status = #current
 * docStatus = #final

@@ -296,7 +296,7 @@
         },
         {
           "name": "site:nav:menu:users:text",
-          "valueString": "System Users"
+          "valueString": "User Management"
         },
         {
           "name": "site:nav:menu:users:order",
@@ -312,6 +312,14 @@
         },
         {
           "name": "site:nav:menu:users:menu:users_search:url",
+          "valueString": "/resource/search/user"
+        },
+        {
+          "name": "site:nav:menu:users:menu:users_roles:text",
+          "valueString": "Search Roles"
+        },
+        {
+          "name": "site:nav:menu:users:menu:users_roles:url",
           "valueString": "/resource/search/user"
         },
         {
