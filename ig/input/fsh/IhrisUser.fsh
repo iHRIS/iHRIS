@@ -241,8 +241,21 @@ Usage:          #definition
 * item[0].item[2].repeats = false
 
 
-// Instance:         IhrisPageRoles
-// InstanceOf:       IhrisPage
-// Title:            "NHWR Roles" 
-// Usage:            #example
-// * code = IhrisResourceCodeSystem#page
+Instance:         ihris-page-roles
+InstanceOf:       IhrisPage
+Title:            "NHWR Roles" 
+Usage:            #example
+* code = IhrisResourceCodeSystem#page
+* extension[display].extension[resource].valueReference = Reference(StructureDefinition/ihris-role)
+* extension[display].extension[link][0].extension[field].valueString = ""
+* extension[display].extension[link][0].extension[text].valueString = "NHWR Roles"
+* extension[display].extension[link][0].extension[button].valueBoolean = true
+* extension[display].extension[link][0].extension[icon].valueString = "mdi-account-arrow-right"
+* extension[display].extension[link][0].extension[url].valueUrl = ""
+* extension[display].extension[add].extension[url].valueUrl = "/questionnaire/ihris-role/user"
+* extension[display].extension[add].extension[icon].valueString = "mdi-account-plus"
+* extension[display].extension[add].extension[class].valueString = "accent"
+* extension[display].extension[search][0].valueString = "Id|Basic.id"
+* extension[display].extension[search][1].valueString = "Name|Basic.extension.where(url='http://ihris.org/fhir/StructureDefinition/ihris-basic-name').valueString"
+* extension[display].extension[search][2].valueString = "Reference|Basic.extension.where(url='http://ihris.org/fhir/StructureDefinition/ihris-assign-role').valueReference.reference"
+* extension[display].extension[filter][0].valueString = "Role|Basic.extension:name:contains"

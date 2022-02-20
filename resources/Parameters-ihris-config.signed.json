@@ -315,12 +315,20 @@
           "valueString": "/resource/search/user"
         },
         {
+          "name": "site:nav:menu:users:menu:users_search:order",
+          "valueString": "1"
+        },
+        {
           "name": "site:nav:menu:users:menu:users_roles:text",
           "valueString": "Search Roles"
         },
         {
           "name": "site:nav:menu:users:menu:users_roles:url",
-          "valueString": "resoure/search/roles"
+          "valueString": "resource/search/roles"
+        },
+        {
+          "name": "site:nav:menu:users:menu:users_roles:order",
+          "valueString": "2"
         },
         {
           "name": "site:nav:menu:password:text",
