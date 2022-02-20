@@ -240,7 +240,7 @@ Usage:          #definition
 * item[0].item[2].required = true
 * item[0].item[2].repeats = false
 
-
+// search roles page
 Instance:         ihris-page-roles
 InstanceOf:       IhrisPage
 Title:            "NHWR Roles" 
@@ -252,10 +252,51 @@ Usage:            #example
 * extension[display].extension[link][0].extension[button].valueBoolean = true
 * extension[display].extension[link][0].extension[icon].valueString = "mdi-account-arrow-right"
 * extension[display].extension[link][0].extension[url].valueUrl = ""
-* extension[display].extension[add].extension[url].valueUrl = "/questionnaire/ihris-role/user"
+* extension[display].extension[add].extension[url].valueUrl = "/questionnaire/ihris-add-role"
 * extension[display].extension[add].extension[icon].valueString = "mdi-account-plus"
 * extension[display].extension[add].extension[class].valueString = "accent"
 * extension[display].extension[search][0].valueString = "Id|Basic.id"
 * extension[display].extension[search][1].valueString = "Name|Basic.extension.where(url='http://ihris.org/fhir/StructureDefinition/ihris-basic-name').valueString"
 * extension[display].extension[search][2].valueString = "Reference|Basic.extension.where(url='http://ihris.org/fhir/StructureDefinition/ihris-assign-role').valueReference.reference"
-* extension[display].extension[filter][0].valueString = "Role|Basic.extension:name:contains"
+* extension[display].extension[filter][0].valueString = "Role|Basic.extension:id:contains"
+
+// add roles page
+Instance:         ihris-page-add-role
+InstanceOf:       IhrisQuestionnaire
+Usage:          #definition
+* title = "NHWR AddRole Workflow"
+* description = "NHWR workflow to record a Role"
+* id = "ihris-add-role"
+* url = "http://ihris.org/fhir/Questionnaire/ihris-add-role"
+* name = "ihris-add-role"
+* status = #active
+* date = 2022-02-20
+* purpose = "Workflow page for recording a user role information."
+
+* item[0].linkId = "Basic"
+* item[0].text = "Add  Role"
+* item[0].type = #group
+
+* item[0].item[0].linkId = "rolename#rolename"
+* item[0].item[0].text = "Role Name"
+* item[0].item[0].type = #string
+* item[0].item[0].required = false
+* item[0].item[0].repeats = false
+
+* item[0].item[1].linkId = "tasks#tasks"
+* item[0].item[1].text = "Tasks "
+* item[0].item[1].type = #string
+* item[0].item[1].required = false
+* item[0].item[1].repeats = false
+
+* item[0].item[2].linkId = "resource#resource"
+* item[0].item[2].text = "Resource"
+* item[0].item[2].type = #string
+* item[0].item[2].required = false
+* item[0].item[2].repeats = false
+
+* item[0].item[3].linkId = "permissions#permissions"
+* item[0].item[3].text = "Permissions"
+* item[0].item[3].type = #string
+* item[0].item[3].required = false
+* item[0].item[3].repeats = false

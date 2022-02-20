@@ -45,4 +45,4 @@ Usage:        #example
 * parameter[Config].part[ConfigId][0].name = "site:title"
 * parameter[Config].part[ConfigId][0].valueString = "NHWR"
 * parameter[Config].part[ConfigId][1].name = "site:logo"
-* parameter[Config].part[ConfigId][1].valueString = "ihris-logo.png"
+* parameter[Config].part[ConfigId][1].valueString = "logo.png"
