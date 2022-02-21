@@ -319,15 +319,15 @@
           "valueString": "1"
         },
         {
-          "name": "site:nav:menu:users:menu:users_roles:text",
+          "name": "site:nav:menu:users:menu:roles:text",
           "valueString": "Search Roles"
         },
         {
-          "name": "site:nav:menu:users:menu:users_roles:url",
+          "name": "site:nav:menu:users:menu:roles:url",
           "valueString": "resource/search/roles"
         },
         {
-          "name": "site:nav:menu:users:menu:users_roles:order",
+          "name": "site:nav:menu:users:menu:roles:order",
           "valueString": "2"
         },
         {

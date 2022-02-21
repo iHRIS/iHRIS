@@ -80,16 +80,6 @@ Usage:          #example
 * extension[display].extension[link][0].extension[button].valueBoolean = true
 * extension[display].extension[link][0].extension[icon].valueString = "mdi-account-arrow-right"
 * extension[display].extension[link][0].extension[url].valueUrl = "/questionnaire/ihris-user/user"
-* extension[display].extension[link][1].extension[field].valueString = ""
-* extension[display].extension[link][1].extension[text].valueString = "NHWR Permissions"
-* extension[display].extension[link][1].extension[button].valueBoolean = true
-* extension[display].extension[link][1].extension[icon].valueString = "mdi-account-arrow-right"
-* extension[display].extension[link][1].extension[url].valueUrl = ""
-* extension[display].extension[link][2].extension[field].valueString = ""
-* extension[display].extension[link][2].extension[text].valueString = "NHWR Roles"
-* extension[display].extension[link][2].extension[button].valueBoolean = true
-* extension[display].extension[link][2].extension[icon].valueString = "mdi-account-arrow-right"
-* extension[display].extension[link][2].extension[url].valueUrl = ""
 * extension[display].extension[search][0].valueString = "User|Person.name.where(use='official').text"
 * extension[display].extension[search][1].valueString = "Username/Email|Person.telecom.where(system='email').value"
 * extension[display].extension[search][2].valueString = "Role|Person.extension.where(url='http://ihris.org/fhir/StructureDefinition/ihris-assign-role').valueReference.reference"
@@ -252,7 +242,7 @@ Usage:            #example
 * extension[display].extension[link][0].extension[button].valueBoolean = true
 * extension[display].extension[link][0].extension[icon].valueString = "mdi-account-arrow-right"
 * extension[display].extension[link][0].extension[url].valueUrl = ""
-* extension[display].extension[add].extension[url].valueUrl = "/questionnaire/ihris-add-role"
+* extension[display].extension[add].extension[url].valueUrl = "/questionnaire/ihris-add-role/user"
 * extension[display].extension[add].extension[icon].valueString = "mdi-account-plus"
 * extension[display].extension[add].extension[class].valueString = "accent"
 * extension[display].extension[search][0].valueString = "Id|Basic.id"
