@@ -437,7 +437,9 @@ router.get("/workflows", function (req, res, next) {
     return callback(null, Object.keys(queries).length > 0);
   }, callback => {
     fhirAxios.search(resourceType, queries).then((searchBundle) => {
-      resourceData = resourceData.concat(searchBundle.entry)
+      if(searchBundle.entry) {
+        resourceData = resourceData.concat(searchBundle.entry)
+      }
       queries = {}
       const next = searchBundle.link && searchBundle.link.find(link => link.relation === 'next');
       if (next) {

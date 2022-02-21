@@ -99,14 +99,15 @@ async function startUp() {
   }
 
   const isLoggedIn = (req, res, next) => {
-    if(req.path.startsWith('/config') || req.path.startsWith('/fhir') || req.path.startsWith('/auth/token') ){
+    let unauthenticatedRoutes = ["/config/app", "/auth", "/fhir/DocumentReference/page-home/$html", "/config/site"]
+    if(unauthenticatedRoutes.includes(req.path)){
       return next()
     }
     if (nconf.get('app:idp') === 'keycloak') {
       if (req.cookies && req.cookies.userObj) {
         req.user = user.restoreUser(JSON.parse(req.cookies.userObj));
+        return keycloak.protect()(req, res, next);
       }
-      //return keycloak.protect()(req, res, next);
       if (req.headers.authorization) {
         axios({
           url: `http://localhost:${nconf.get('server:port')}/auth`,
@@ -143,7 +144,7 @@ async function startUp() {
         res.set('Access-Control-Allow-Credentials', true);
         return res.status(401).json(outcomes.NOTLOGGEDIN);
       }
-
+      return next();
     } else {
       return next()
     }

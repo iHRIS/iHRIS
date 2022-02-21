@@ -18,16 +18,16 @@ function initKeycloak(store) {
     return _keycloak;
   }
 
-  logger.info('Initializing Keycloak...');
+  console.info('Initializing Keycloak...');
   _keycloak = new Keycloak({ store }, keycloakConfig);
   return _keycloak;
 }
 
 function getKeycloak() {
   if (!_keycloak) {
-    logger.error('Keycloak has not been initialized. Please called init first.');
+    console.error('Keycloak has not been initialized. Please called init first.');
   }
-  logger.info('Keycloak Initialized');
+  console.info('Keycloak Initialized');
   return _keycloak;
 }
 

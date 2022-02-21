@@ -100,6 +100,8 @@ Description:    "iHRIS profile of Practitioner."
     IhrisPractitionerMaritalStatus named maritalStatus 0..1 and
     IhrisPractitionerDependents named dependents 0..1
 * extension[residence].valueReference.reference MS
+* active 1..1 MS
+* active ^label = "Active"
 
 Extension:      IhrisPractitionerLanguageProficiency
 Id:             ihris-practitioner-language-proficiency
@@ -287,6 +289,12 @@ Usage:          #definition
 * item[0].item[3].type = #reference
 * item[0].item[3].required = false
 * item[0].item[3].repeats = false
+
+* item[0].item[4].linkId = "Practitioner.active"
+* item[0].item[4].definition = "http://ihris.org/fhir/StructureDefinition/ihris-practitioner#Practitioner.active"
+* item[0].item[4].text = "Active"
+* item[0].item[4].type = #boolean
+* item[0].item[4].required = true
 
 * item[1].linkId = "__Practitioner:contact"
 * item[1].definition = "http://ihris.org/fhir/StructureDefinition/ihris-practitioner"

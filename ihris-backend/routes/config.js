@@ -1057,7 +1057,7 @@ router.get('/report/es/:report', (req, res) => {
       for(index in reportData.filters) {
         let field = reportData.filters[index].field
         if(!mappings.data[indexName].mappings.properties[field]) {
-          logger.error('Field ' + field + 'not found on elasticsearch mapping')
+          logger.error('Field ' + field + ' not found on elasticsearch mapping')
           continue
         }
         let dataType = mappings.data[indexName].mappings.properties[field].type

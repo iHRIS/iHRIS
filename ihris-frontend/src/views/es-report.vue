@@ -101,6 +101,7 @@ export default {
               this.$forceUpdate();
             })
             .catch(err => {
+              console.log('error');
               console.log(err);
               Vue.component("ihris-template", {
                 template:
