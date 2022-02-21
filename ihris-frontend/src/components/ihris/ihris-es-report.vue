@@ -109,7 +109,6 @@ export default {
     }
   },
   created: function() {
-    console.log('ihris-es-report');
     for (let field of this.reportData.fieldsDetails) {
       this.headers.push({ text: field[0], value: field[1] });
     }

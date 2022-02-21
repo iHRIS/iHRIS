@@ -27,7 +27,6 @@ Vue.use(IdleVue, { eventEmitter: eventBus, store, idleTime: 900000, startAtIdle:
 fetch("/config/app").then((response)=> {
   response.json().then(data => {
     store.state.idp = data.idp
-    console.log(JSON.stringify(data,0,2));
     if(store.state.idp === 'keycloak') {
       let initOptions = {
         realm: data.keycloak.realm,
