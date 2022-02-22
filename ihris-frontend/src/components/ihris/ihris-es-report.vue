@@ -50,6 +50,7 @@
 
 <script>
 import { eventBus } from "@/main";
+import axios from "axios"
 export default {
   name: "ihris-report",
   props: ["reportData", "label", "terms", "termsConditions", "dataURL", "page", "hideCheckboxes", "hideLabel"],
@@ -302,27 +303,27 @@ export default {
         });
     },
     reportExport(format) {
-      this.downloading = true
-      let url = `/es/export/${format}/${this.reportData.indexName}`
+      this.downloading = true;
+      let url = `/es/export/${format}/${this.reportData.indexName}`;
       let body = {
         query: this.buildTerms(),
         headers: this.headers,
-        label: this.label
-      }
-      fetch(url, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(body)
+        label: this.label,
+        selected: this.selected,
+      };
+      axios({
+        url: url,
+        method: "POST",
+        responseType: "blob",
+        data: body,
       }).then((response) => {
-        response
-          .text()
-          .then(exportFile => {
-            this.downloading = false
-            window.open(exportFile, "_self");
-          })
-      })
+        this.downloading = false;
+        let blob = new Blob([response.data], { type: "text/csv" });
+        let link = document.createElement("a");
+        link.href = window.URL.createObjectURL(blob);
+        link.download = `${this.label}.${format}`;
+        link.click();
+      });
     }
   }
 };
