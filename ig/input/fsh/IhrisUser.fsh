@@ -251,7 +251,7 @@ Usage:            #example
 * extension[display].extension[filter][0].valueString = "Role|Basic.extension:id:contains"
 
 // add roles page
-Instance:         ihris-page-add-role
+Instance:         IhrisAddRole
 InstanceOf:       IhrisQuestionnaire
 Usage:          #definition
 * title = "NHWR AddRole Workflow"
@@ -264,28 +264,28 @@ Usage:          #definition
 * purpose = "Workflow page for recording a user role information."
 
 * item[0].linkId = "Basic"
-* item[0].text = "Add  Role"
+* item[0].text = "Add Role"
 * item[0].type = #group
 
-* item[0].item[0].linkId = "rolename#rolename"
+* item[0].item[0].linkId = "rolename"
 * item[0].item[0].text = "Role Name"
 * item[0].item[0].type = #string
 * item[0].item[0].required = false
 * item[0].item[0].repeats = false
 
-* item[0].item[1].linkId = "tasks#tasks"
+* item[0].item[1].linkId = "tasks"
 * item[0].item[1].text = "Tasks "
 * item[0].item[1].type = #string
 * item[0].item[1].required = false
 * item[0].item[1].repeats = false
 
-* item[0].item[2].linkId = "resource#resource"
+* item[0].item[2].linkId = "resource"
 * item[0].item[2].text = "Resource"
 * item[0].item[2].type = #string
 * item[0].item[2].required = false
 * item[0].item[2].repeats = false
 
-* item[0].item[3].linkId = "permissions#permissions"
+* item[0].item[3].linkId = "permissions"
 * item[0].item[3].text = "Permissions"
 * item[0].item[3].type = #string
 * item[0].item[3].required = false

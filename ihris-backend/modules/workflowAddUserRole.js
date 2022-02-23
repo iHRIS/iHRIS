@@ -15,12 +15,14 @@ const ASSIGN_ROLE_EXTENSION = `${nconf.get('profileBaseUrl')}/StructureDefinitio
 
 const workflowAddUserRole = {
     process: (req) => {
+
+        console.log("role request",JSON.stringify(req.body,null,2))
+
         return new Promise((resolve, reject) => {
 
             let role = {
 
             }
-
 
         });
     },
