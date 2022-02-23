@@ -167,7 +167,7 @@ export default {
           console.log("loading progress" + this.progress)
           const workbook = XLSX.read(data, {type: "array", cellDates: true, dateNF: 'yyyy/mm/dd;@'});
           const finalData = Object.keys(workbook.Sheets).map((name) => ({data: XLSX.utils.sheet_to_json(workbook.Sheets[name])}))
-          axios.post(`/fhir/bulkRegistration`, finalData[0].data).then((response) => {
+          axios.post(`/config/bulkRegistration`, finalData[0].data).then((response) => {
             if (response.status === 201) {
               this.message = "Users created Successfully!"
               this.snackbar = true
