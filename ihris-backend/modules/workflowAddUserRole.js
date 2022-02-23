@@ -6,13 +6,6 @@ const fhirQuestionnaire = require('./fhirQuestionnaire')
 const { response } = require('express')
 const fhirAxios = nconf.fhirAxios
 
-
-const TASK_EXTENSION = `${nconf.get('profileBaseUrl')}/StructureDefinition/ihris-task`;
-const ROLE_EXTENSION = `${nconf.get('profileBaseUrl')}/StructureDefinition/ihris-role`;
-const ASSIGN_ROLE_EXTENSION = `${nconf.get('profileBaseUrl')}/StructureDefinition/ihris-assign-role`;
-
-
-
 const workflowAddUserRole = {
     process: (req) => {
 
@@ -47,7 +40,6 @@ const workflowAddUserRole = {
 
                 extensions.push(name)
 
-
                 // is primary
                 roleIsPrimary = req.body.item[0].item.find((item) => item.linkId == "primary").answer[0].valueBoolean
 
@@ -78,7 +70,7 @@ const workflowAddUserRole = {
 
                 let newRole = {
                     resourceType: "Basic",
-                    id: "ihris-role-" + roleName,
+                    id: "ihris-role-" + roleName.toLowerCase(),
                     meta: {
                         profile: ["http://ihris.org/fhir/StructureDefinition/ihris-role"]
                     },
