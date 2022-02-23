@@ -8,10 +8,6 @@ const fhirAxios = nconf.fhirAxios
 
 const workflowAddTasks = {
     process: (req) => {
-
-
-        console.log("req", JSON.stringify(req.body, null, 2))
-
         return new Promise((resolve, reject) => {
 
             let bundle = {
