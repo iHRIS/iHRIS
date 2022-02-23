@@ -70,7 +70,7 @@ const workflowAddUserRole = {
 
                 let newRole = {
                     resourceType: "Basic",
-                    id: "ihris-role-" + roleName.toLowerCase(),
+                    id: "ihris-role-" + roleName.replace(/ /g, "").toLowerCase(),
                     meta: {
                         profile: ["http://ihris.org/fhir/StructureDefinition/ihris-role"]
                     },
@@ -84,7 +84,7 @@ const workflowAddUserRole = {
                         ]
                     }
                 }
-                let url = "Basic/ihris-role-" + roleName.toLowerCase()
+                let url = "Basic/ihris-role-" + roleName.replace(/ /g, "").toLowerCase()
                 bundle.entry.push({
                     resource: newRole,
                     request: {
