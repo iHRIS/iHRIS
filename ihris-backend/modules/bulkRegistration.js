@@ -1,21 +1,11 @@
 const fs = require("fs");
 const util = require("util");
 const isEmpty = require("is-empty");
-const fhirSecurity = require("../modules/fhirSecurity");
+const fhirSecurity = require("./fhirSecurity");
 const winston = require("winston");
 const fhirAxios = require("./fhirAxios");
 const { v4: uuidv4 } = require("uuid");
-
-const searchLocationReference = async (name) => {
-  let location = "Location/ET";
-  let bundle = await fhirAxios.search("Location", {
-    name: name,
-  });
-  if (bundle.entry.length > 0) {
-    location = `Location/${bundle.entry[0].resource.id}`;
-  }
-  return location;
-};
+const { Console } = require("console");
 
 const userDataIsValidation = (userData) => {
   const validation = {
@@ -37,17 +27,18 @@ const userDataIsValidation = (userData) => {
         delete user[oldKeys[i]];
       }
     }
-    console.log(user);
+    //console.log(user);
     let requiredFieldKeys = [
-      "EmployeeId",
-      "FileNumber",
-      "FirstName",
-      "FatherName",
-      "Sex",
-      "Resident",
-      "Grand_Father_Name",
-      "Date_of_Birth",
-      "Marital_Status",
+      "Surname",
+      "GivenName",
+      "Gender",
+      "BirthDate",
+      "PhoneNumber",
+      "Email",
+      "Organization",
+      "JobTitle",
+      "EmploymentTerms",
+      "PayGrade"
     ];
     requiredFieldKeys.forEach((key, index) => {
       if (isEmpty(user[`${key}`])) {
@@ -74,20 +65,15 @@ const userDataIsValidation = (userData) => {
   return validation;
 };
 
-let practitionerBundle = {
+let bundle = {
   resourceType: "Bundle",
   type: "transaction",
-};
-let practitionerRoleBundle = {
-  resourceType: "Bundle",
-  type: "transaction",
+  entry: []
 };
 
-const practitionerTemplate = (users) => {
-  let practitioner = [];
-  let practitionerRole = [];
-
-  users.map((user) => {
+const template = async (users) => {
+  let bundleData = [];
+  users.map(async (user) => {
     let userId = uuidv4();
     let oldKeys = Object.keys(user);
     let newKeys = Object.keys(user).map((ol) => ol.split(" ").join("_"));
@@ -100,13 +86,165 @@ const practitionerTemplate = (users) => {
         delete user[oldKeys[i]];
       }
     }
-    if (user["Education_level"]) {
-      practitionerRole.push({
+    bundleData = [
+      ...bundleData, {
+        resource: {
+          resourceType: "Practitioner",
+          meta: {
+            profile: [
+              "http://ihris.org/fhir/StructureDefinition/ihris-practitioner",
+            ],
+          },
+          extension: [
+            {
+              url: "http://ihris.org/fhir/StructureDefinition/ihris-practitioner-nationality",
+              valueCoding: user["nationalityCoding"]
+            },
+            {
+              url: "http://ihris.org/fhir/StructureDefinition/ihris-practitioner-phone",
+              valueString: user["PhoneNumber"]
+            },
+            {
+              url: "http://ihris.org/fhir/StructureDefinition/ihris-practitioner-email",
+              valueString: user["Email"]
+            },
+          ],
+          identifier: [
+            {
+              type: {
+                coding: [
+                  {
+                    system:
+                      "http://ihris.org/fhir/CodeSystem/ihris-identifier-codesystem",
+                    code: "NationalID",
+                  },
+                ],
+              },
+              value: user["NationalID"],
+            },
+            {
+              type: {
+                coding: [
+                  {
+                    system:
+                      "http://ihris.org/fhir/CodeSystem/ihris-identifier-codesystem",
+                    code: "WorkID",
+                  },
+                ],
+              },
+              value: user["EmployeeNumber"],
+            },
+            {
+              type: {
+                coding: [
+                  {
+                    system:
+                      "http://ihris.org/fhir/CodeSystem/ihris-identifier-codesystem",
+                    code: "Passport",
+                  },
+                ],
+              },
+              value: user["Passport"],
+            }
+          ],
+          active: true,
+          name: [
+            {
+              extension: [
+                {
+                  url: "http://ihris.org/fhir/StructureDefinition/ihris-practitioner-prefix",
+                  valueCoding: user["prefixCoding"]
+                },
+                {
+                  url: "http://ihris.org/fhir/StructureDefinition/ihris-practitioner-maiden-name",
+                  valueString: user["MaidenName"],
+                },
+              ],
+              use: "official",
+              text: user["KnownAs"],
+              family: user["Surname"],
+              given: [user["GivenName"]],
+            },
+          ],
+          address: [
+            {
+              use: "home",
+              type: "physical",
+              line: user["StreetAddress"],
+              city: user["City/Town"],
+              district: user["District"],
+              state: user["Province"],
+            }
+          ],
+          gender: user["Gender"],
+          birthDate: user["BirthDate"],
+        },
+        request: {
+          method: "PUT",
+          url: `Practitioner/${userId}`,
+        }
+      },
+      {
+        resource: {
+          resourceType: "PractitionerRole",
+          meta: {
+            profile: [
+              "http://ihris.org/fhir/StructureDefinition/ihris-practitioner-role",
+            ],
+          },
+          extension: [
+            {
+              url: "http://ihris.org/fhir/StructureDefinition/ihris-practitioner-role-employment-terms",
+              valueCoding: user["empTermsCoding"]
+            },
+            {
+              url: "http://ihris.org/fhir/StructureDefinition/ihris-practitioner-role-position-type",
+              valueCoding: user["postTypeCoding"]
+            },
+            {
+              url: "http://ihris.org/fhir/StructureDefinition/ihris-practitioner-role-function",
+              valueCoding: user["positionFunctionCoding"]
+            },
+            {
+              url: "http://ihris.org/fhir/StructureDefinition/ihris-practitioner-role-hours",
+              valueInteger: user["HoursPerWeek"]
+            }
+          ],
+          period: {
+            start: user["StartDate"],
+            end: user["EndDate"]
+          },
+          practitioner: {
+            reference: `Practitioner/${userId}`
+          },
+          organization: {
+            reference: `Organization/${user["organizationID"]}`
+          },
+          location: [
+            {
+              reference: `Location/${user["locationID"]}`
+            }
+          ],
+          active: true,
+          code: [
+            {
+              coding: [
+                user["jobCoding"]
+              ],
+            },
+          ],
+        },
+        request: {
+          method: "POST",
+          url: "PractitionerRole",
+        }
+      },
+      {
         resource: {
           resourceType: "Basic",
           meta: {
             profile: [
-              "http://ihris.org/fhir/StructureDefinition/ihris-basic-education-history",
+              "http://ihris.org/fhir/StructureDefinition/ihris-basic-salary",
             ],
           },
           extension: [
@@ -117,16 +255,16 @@ const practitionerTemplate = (users) => {
               },
             },
             {
-              url: "http://ihris.org/fhir/StructureDefinition/ihris-education-history",
+              url: "http://ihris.org/fhir/StructureDefinition/ihris-salary",
               extension: [
                 {
-                  url: "level",
-                  valueCoding: {
-                    system:
-                      "http://ihris.org/fhir/CodeSystem/ihris-education-level",
-                    display: user["Education_level"],
-                  },
+                  url: "salaryScale",
+                  valueCoding: user["payGradeCoding"]
                 },
+                {
+                  url: "bsalary",
+                  valueString: user["CTC"]
+                }
               ],
             },
           ],
@@ -134,204 +272,64 @@ const practitionerTemplate = (users) => {
         request: {
           method: "POST",
           url: "Basic",
-        },
-      });
-    }
-    if (
-      user["Facility_Name"] &&
-      user["Hired_Date"] &&
-      user["Job_title"] &&
-      user["Employment_status"]
-    ) {
-      practitioner.push({
+        }
+      },
+      {
         resource: {
-          resourceType: "PractitionerRole",
+          resourceType: "Basic",
           meta: {
             profile: [
-              "http://ihris.org/fhir/StructureDefinition/ihris-job-description",
+              "http://ihris.org/fhir/StructureDefinition/ihris-basic-training",
             ],
           },
           extension: [
             {
-              url: "http://ihris.org/fhir/StructureDefinition/ihris-practitionerrole-employment-status",
-              valueCoding: {
-                system:
-                  "http://ihris.org/fhir/CodeSystem/ihris-employment-status-codesystem",
-                code: user["Employment_status"],
+              url: "http://ihris.org/fhir/StructureDefinition/ihris-practitioner-reference",
+              valueReference: {
+                reference: `Practitioner/${userId}`,
               },
             },
-          ],
-          period: {
-            start: user["Hired_Date"],
-          },
-          practitioner: {
-            reference: `Practitioner/${userId}`,
-          },
-          code: [
             {
-              coding: [
+              url: "http://ihris.org/fhir/StructureDefinition/ihris-training",
+              extension: [
                 {
-                  system: "http://ihris.org/fhir/CodeSystem/ihris-job-ethiopia",
-                  display: user["Job_title"],
+                  url: "level",
+                  valueCoding: user["trainingCoding"]
                 },
+                {
+                  url: "degree",
+                  valueString: user["HighestTrainingName"]
+                }
               ],
             },
           ],
         },
         request: {
           method: "POST",
-          url: "PractitionerRole",
-        },
-      });
-    }
-    practitioner.push({
-      resource: {
-        resourceType: "Practitioner",
-        meta: {
-          profile: [
-            "http://ihris.org/fhir/StructureDefinition/ihris-personal-information",
-          ],
-        },
-        extension: [
-          {
-            url: "http://ihris.org/fhir/StructureDefinition/ihris-practitioner-familynames",
-            extension: [
-              {
-                url: "fathers",
-                valueString: user["FatherName"],
-              },
-              {
-                url: "fathersalternativelanguage",
-                valueString: user["Father_Name_Alternate_Language(Amharic)"],
-              },
-              {
-                url: "grandfatherslastname",
-                valueString: user["Grand_Father_Name"],
-              },
-              {
-                url: "grandfathersalternativelanguage",
-                valueString:
-                  user["Grand_Father_Name_Alternate_Language(Amharic)"],
-              },
-              {
-                url: "mothers",
-                valueString: user["Mother_Name"],
-              },
-              {
-                url: "mothersalternativelanguage",
-                valueString: user["Mother_Name_Alternate_Language(Amharic)"],
-              },
-            ],
-          },
-          {
-            url: "http://ihris.org/fhir/StructureDefinition/ihris-practitioner-nationality",
-            valueCoding: {
-              system: "urn:iso:std:iso:3166",
-              display: user["Nationality"],
-            },
-          },
-          {
-            url: "http://ihris.org/fhir/StructureDefinition/ihris-practitioner-marital-status",
-            valueCoding: {
-              system:
-                "http://ihris.org/fhir/CodeSystem/ihris-marital-status-codesystem",
-              display: user["Marital_Status"],
-            },
-          },
-          {
-            url: "http://ihris.org/fhir/StructureDefinition/ihris-practitioner-residence",
-            valueReference: {
-              reference: user["Resident"],
-            },
-          },
-          {
-            url: "http://ihris.org/fhir/StructureDefinition/ihris-personal-information-phone",
-            valueString: user["Phone_number"],
-          },
-          {
-            url: "http://ihris.org/fhir/StructureDefinition/ihris-personal-Information-category",
-            valueCoding: {
-              system:
-                "http://ihris.org/fhir/CodeSystem/ihris-category-codesystem",
-              display: user["Profession"],
-            },
-          },
-        ],
-        identifier: [
-          {
-            type: {
-              coding: [
-                {
-                  system:
-                    "http://ihris.org/fhir/CodeSystem/ihris-ethiopia-identifier",
-                  code: "employeeId",
-                },
-              ],
-            },
-            value: user["EmployeeId"],
-          },
-          {
-            type: {
-              coding: [
-                {
-                  system:
-                    "http://ihris.org/fhir/CodeSystem/ihris-ethiopia-identifier",
-                  code: "fileNo",
-                },
-              ],
-            },
-            value: user["FileNumber"],
-          },
-        ],
-        active: true,
-        name: [
-          {
-            extension: [
-              {
-                url: "http://ihris.org/fhir/StructureDefinition/ihris-practitioner-prefix",
-                valueCoding: {
-                  system:
-                    "http://ihris.org/fhir/CodeSystem/ihris-ethiopia-prefix-codesystem",
-                  display: user["Prefix"],
-                },
-              },
-              {
-                url: "http://ihris.org/fhir/StructureDefinition/ihris-practitioner-givenAltLang",
-                valueString: user["Firs_Name_Alternate_Language(Amharic)"],
-              },
-            ],
-            use: "official",
-            given: [user["FirstName"]],
-          },
-        ],
-        gender: user["Sex"],
-        birthDate: user["Date_of_Birth"],
-      },
-      request: {
-        method: "PUT",
-        url: `Practitioner/${userId}`,
-      },
-    });
+          url: "Basic",
+        }
+      }
+    ];
   });
-  return { practitioner, practitionerRole };
+  return bundleData;
 };
 
 function processJobs(usersData) {
-  const validation = userDataIsValidation(usersData);
-  if (!validation.isValid) {
-    return validation;
-  } else {
-    let practitioner = practitionerTemplate(usersData);
-    practitionerBundle.entry = practitioner.practitioner;
-    practitionerRoleBundle.entry = practitioner.practitionerRole;
-    return {
-      isValid: true,
-      data: {
-        practitionerBundle,
-        practitionerRoleBundle,
-      },
-    };
-  }
+  return new Promise((resolve, reject) => {
+    const validation =  userDataIsValidation(usersData);
+    if (!validation.isValid) {
+      resolve(validation)
+    } else {
+      template(usersData).then(practitionerDetails => {
+        bundle.entry = practitionerDetails;
+      }).then(() => {
+        validation.isValid = true
+        validation.data = { bundle }
+      }).then(()=>{
+        resolve(validation)
+      })
+    }
+  })
 }
 
 module.exports = processJobs;
