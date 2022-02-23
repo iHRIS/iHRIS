@@ -16,11 +16,11 @@
             "code": "1.2.840.10065.1.12.1.14"
           }
         ],
-        "when": "2022-02-22T07:02:45.640Z",
+        "when": "2022-02-22T12:50:50.499Z",
         "who": {
           "reference": "http://ihris.org/fhir/Organization/ihris"
         },
-        "data": "L3gadbjKFIc4FHssz3oqlD4qv4586pWIbv4NHfhj7RnaaULNJC7fKjuVtqQK0Q3okntdH9cAOGO5k1rSWRW7Jd30dgn8BEIGbipFatuWINA6rEq+fPY2KC1EkpX0cbPaQC+nbQRM0R+phEbyGOZe0pU7lTwe0OuJVNEpwvo66Gg="
+        "data": "G2t00WnanoKIZj8Kt6RqGCDhx4v5JA8Fv2vrWpeckZ89TN/EeUqv0DqXfhg1waR3URxKCCdzWtWBl3hNIKHsa5ksaTrY2pVePtS8zU9pPOuc+skLK5cS9oxLZ0P0s0W7nRvNQVCOpEIfzCc0LYnByFecpuJ2lsKlKIvyt06nhCc="
       }
     },
     {
@@ -331,6 +331,18 @@
           "valueString": "2"
         },
         {
+          "name": "site:nav:menu:users:menu:tasks:text",
+          "valueString": "Search Tasks"
+        },
+        {
+          "name": "site:nav:menu:users:menu:tasks:url",
+          "valueString": "resource/search/tasks"
+        },
+        {
+          "name": "site:nav:menu:users:menu:tasks:order",
+          "valueString": "3"
+        },
+        {
           "name": "site:nav:menu:password:text",
           "valueString": "Change Password"
         },
@@ -525,6 +537,14 @@
         {
           "name": "workflow:questionnaire:role:url",
           "valueString": "http://ihris.org/fhir/Questionnaire/ihris-add-role"
+        },
+        {
+          "name": "workflow:processor:task:file",
+          "valueString": "../modules/workflowAddTasks"
+        },
+        {
+          "name": "workflow:questionnaire:task:url",
+          "valueString": "http://ihris.org/fhir/Questionnaire/ihris-add-task"
         },
         {
           "name": "defaults:components:date-time:minValueDateTime",

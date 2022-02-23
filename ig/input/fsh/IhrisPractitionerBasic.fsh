@@ -15,4 +15,4 @@ Description:    "NHWR Practitioner Reference to link Basic resource to a Practit
 * ^context[0].expression = "Basic"
 * value[x] only Reference 
 * valueReference only Reference(IhrisPractitioner) 
-* valueReference ^label = "Heallth Worker"
+* valueReference ^label = "Health Worker"

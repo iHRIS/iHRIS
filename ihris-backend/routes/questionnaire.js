@@ -41,6 +41,8 @@ router.post("/QuestionnaireResponse", (req, res, next) => {
 
     let details = nconf.get('workflow:processor:'+processor)
 
+    console.log("details",details)
+
     if ( !details || (!details.file && !details.library) ) {
       let outcome = { ...outcomes.ERROR }
       outcome.issue[0].diagnostics = "Unable to find processor for this questionnaire: "+req.body.questionnaire +" ("+processor+")"
