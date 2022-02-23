@@ -8,6 +8,10 @@ const fhirAxios = nconf.fhirAxios
 
 const workflowAddTasks = {
     process: (req) => {
+
+
+        console.log("req", JSON.stringify(req.body, null, 2))
+
         return new Promise((resolve, reject) => {
 
             let bundle = {
@@ -36,6 +40,15 @@ const workflowAddTasks = {
                     taskPermission = req.body.item[1].item.find((item) => item.linkId == "permission").answer[0].valueCoding.code
 
                     taskResource = req.body.item[1].item.find((item) => item.linkId == "resource").answer[0].valueCoding.code
+
+
+                    if (taskResource === "*") {
+                        taskResource = "all"
+                    }
+
+                    if (taskPermission === "*") {
+                        taskPermission = "all"
+                    }
 
                     let name = {
                         url: "http://ihris.org/fhir/StructureDefinition/ihris-basic-name",
