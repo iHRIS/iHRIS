@@ -16,11 +16,11 @@
             "code": "1.2.840.10065.1.12.1.14"
           }
         ],
-        "when": "2022-02-24T09:49:40.497Z",
+        "when": "2022-02-24T09:57:10.475Z",
         "who": {
           "reference": "http://ihris.org/fhir/Organization/ihris"
         },
-        "data": "aJQ0at7ojgMw1jyrO7/UW49QXj8Fk1GzvSMDybZdk+2Dq9ENXMAQJLkr+WrH25/UiKJGHsng2+T7eEKtWkrrnWWUIW9F8UpfusKfXmQDBm31GclVnscETJJUisT8Th6Tb7mcFNjeCofVfX7FrHqcqvGYNKriA2NG5nPGrmoBMrM="
+        "data": "PaYqq9DOTZ9K3Y5FGQOmMO2z4nc5F7BHWamCtvvttvj4hmxPhGCkX02Heety81QGbV3TqliNnVtPS3tRRO6/orf3xua3w7uTjF/oq7sLW3l9rT/GaQymr4lOS5WJsdP6EKhhE31YXdcbwOWVZxGxqafOlaQZ0IAD7KP56FLRnh4="
       }
     },
     {
@@ -477,6 +477,22 @@
         {
           "name": "site:nav:menu:users:menu:users_search:url",
           "valueString": "/resource/search/user"
+        },
+        {
+          "name": "site:nav:menu:users:menu:users_role:text",
+          "valueString": "User Roles"
+        },
+        {
+          "name": "site:nav:menu:users:menu:users_role:url",
+          "valueString": "/resource/search/role"
+        },
+        {
+          "name": "site:nav:menu:users:menu:role_tasks:text",
+          "valueString": "User Role Tasks"
+        },
+        {
+          "name": "site:nav:menu:users:menu:role_tasks:url",
+          "valueString": "/resource/search/task"
         },
         {
           "name": "site:nav:menu:password:text",
