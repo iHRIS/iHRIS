@@ -10,7 +10,10 @@ Description:    "iHRIS Profile of the Basic resource to manage roles."
       IhrisAssignRole named role 0..* and
       IhrisAssignTask named task 0..*
 * extension[name].valueString 1..1 MS
-* extension[task].value[x] only Reference(Basic)
+* extension[role].value[x] only Reference(IhrisRole)
+* extension[role].valueReference 1..1 MS
+* extension[role].valueReference ^label = "Role"
+* extension[task].value[x] only Reference(IhrisTask)
 * extension[task].valueReference 1..1 MS
 * extension[task].valueReference ^label = "Task"
 
@@ -25,6 +28,21 @@ Description:    "iHRIS Profile of the Basic resource to manage tasks."
       TaskAttributes named attributes 0..1 and
       CompositeTask named compositeTask 0..*
 * extension[name].valueString 1..1 MS
+* extension[attributes].extension[permission] ^label = "Permission"
+* extension[attributes].extension[permission].valueCode 1..1 MS
+* extension[attributes].extension[permission].valueCode ^label = "Permission"
+* extension[attributes].extension[resource] ^label = "Resource"
+* extension[attributes].extension[resource].valueCode 0..1 MS
+* extension[attributes].extension[resource].valueCode ^label = "Resource"
+* extension[attributes].extension[instance] ^label = "Instance"
+* extension[attributes].extension[instance].valueId 0..1 MS
+* extension[attributes].extension[instance].valueId ^label = "Instance"
+* extension[attributes].extension[field] ^label = "Field"
+* extension[attributes].extension[field].valueString 0..1 MS
+* extension[attributes].extension[field].valueString ^label = "Field"
+* extension[attributes].extension[constraint] ^label = "Constraint"
+* extension[attributes].extension[constraint].valueString 0..1 MS
+* extension[attributes].extension[constraint].valueString ^label = "Constraint"
 * extension[compositeTask].value[x] only Reference(Basic)
 * extension[compositeTask].valueReference 1..1 MS
 * extension[compositeTask].valueReference ^label = "Composite Task"
@@ -409,3 +427,165 @@ Usage:          #example
 * extension[attributes][0].extension[resource].valueCode = IhrisTaskResourceCodeSystem#DocumentReference
 * extension[attributes][0].extension[constraint].valueString = "category.exists(coding.exists(code = 'open'))"
 * extension[compositeTask][0].valueReference = Reference(Basic/ihris-task-read-document-reference)
+
+Instance:         ihris-page-role
+InstanceOf:       IhrisPage
+Title:            "iHRIS Roles" 
+Usage:            #example
+* code = IhrisResourceCodeSystem#page
+* extension[display].extension[resource].valueReference = Reference(StructureDefinition/ihris-role)
+* extension[display].extension[link][0].extension[field].valueString = ""
+* extension[display].extension[link][0].extension[text].valueString = "View Other Roles"
+* extension[display].extension[link][0].extension[button].valueBoolean = true
+* extension[display].extension[link][0].extension[icon].valueString = "mdi-account-arrow-right"
+* extension[display].extension[link][0].extension[url].valueUrl = "/resource/view/basic"
+* extension[display].extension[add].extension[url].valueUrl = "/questionnaire/ihris-role/role"
+* extension[display].extension[add].extension[icon].valueString = "mdi-account-plus"
+* extension[display].extension[add].extension[class].valueString = "accent"
+* extension[display].extension[search][0].valueString = "Id|Basic.id"
+* extension[display].extension[search][1].valueString = "Name|Basic.extension.where(url='http://ihris.org/fhir/StructureDefinition/ihris-basic-name').valueString"
+* extension[display].extension[search][2].valueString = "Role Reference|Basic.extension.where(url='http://ihris.org/fhir/StructureDefinition/ihris-assign-role').valueReference.reference"
+* extension[display].extension[filter][0].valueString = "Role|Basic.extension:id:contains"
+* extension[section][0].extension[title].valueString = "Role"
+* extension[section][0].extension[description].valueString = "System User Role details"
+* extension[section][0].extension[name].valueString = "Basic"
+* extension[section][0].extension[field][0].valueString = "Basic.extension:name.value[x]:valueString"
+* extension[section][0].extension[field][1].valueString = "Basic.extension:role.value[x]:valueReference"
+* extension[section][0].extension[field][2].valueString = "Basic.extension:task.value[x]:valueReference"
+* extension[section][0].extension[field][3].valueString = "Basic.extension:primary.value[x]:valueBoolean"
+
+
+Instance:         IhrisRole
+InstanceOf:       IhrisQuestionnaire
+Usage:          #definition
+* title = "iHRIS AddRole Workflow"
+* description = "iHRIS workflow to record a Role"
+* id = "ihris-role"
+* url = "http://ihris.org/fhir/Questionnaire/ihris-role"
+* name = "ihris-role"
+* status = #active
+* date = 2022-02-20
+* purpose = "Workflow page for recording a user role information."
+
+* item[0].linkId = "Role"
+* item[0].text = "Add Role"
+* item[0].type = #group
+
+* item[0].item[0].linkId = "rolename"
+* item[0].item[0].text = "Role Name"
+* item[0].item[0].type = #string
+* item[0].item[0].required = false
+* item[0].item[0].repeats = false
+
+* item[0].item[1].linkId = "tasks"
+* item[0].item[1].definition = "http://ihris.org/fhir/StructureDefinition/ihris-role#Basic.extension:task.value[x]:valueReference"
+* item[0].item[1].text = "Tasks"
+* item[0].item[1].type = #reference
+* item[0].item[1].required = false
+* item[0].item[1].repeats = true
+
+* item[0].item[2].linkId = "roles"
+* item[0].item[2].definition = "http://ihris.org/fhir/StructureDefinition/ihris-role#Basic.extension:role.value[x]:valueReference"
+* item[0].item[2].text = "Roles"
+* item[0].item[2].type = #reference
+* item[0].item[2].required = false
+* item[0].item[2].repeats = true
+
+* item[0].item[3].linkId = "primary"
+* item[0].item[3].text = "Is Role Primary"
+* item[0].item[3].type = #boolean
+* item[0].item[3].required = true
+* item[0].item[3].repeats = false
+
+Instance:         ihris-page-task
+InstanceOf:       IhrisPage
+Title:            "iHRIS Tasks" 
+Usage:            #example
+* code = IhrisResourceCodeSystem#page
+* extension[display].extension[resource].valueReference = Reference(StructureDefinition/ihris-task)
+* extension[display].extension[link][0].extension[field].valueString = ""
+* extension[display].extension[link][0].extension[text].valueString = "View Other Tasks"
+* extension[display].extension[link][0].extension[button].valueBoolean = true
+* extension[display].extension[link][0].extension[icon].valueString = "mdi-account-arrow-right"
+* extension[display].extension[link][0].extension[url].valueUrl = "/resource/view/basic"
+* extension[display].extension[add].extension[url].valueUrl = "/questionnaire/ihris-task/task"
+* extension[display].extension[add].extension[icon].valueString = "mdi-account-plus"
+* extension[display].extension[add].extension[class].valueString = "accent"
+* extension[display].extension[search][0].valueString = "Id|Basic.id"
+* extension[display].extension[search][1].valueString = "Name|Basic.extension.where(url='http://ihris.org/fhir/StructureDefinition/ihris-basic-name').valueString"
+* extension[display].extension[filter][0].valueString = "Task|Basic.extension:id:contains"
+* extension[section][0].extension[title].valueString = "Task"
+* extension[section][0].extension[description].valueString = "System User task details"
+* extension[section][0].extension[name].valueString = "Basic"
+* extension[section][0].extension[field][0].valueString = "Basic.extension:name.value[x]:valueString"
+* extension[section][0].extension[field][1].valueString = "Basic.extension:attributes"
+* extension[section][0].extension[field][2].valueString = "Basic.extension:compositeTask.value[x]:valueReference"
+
+
+Instance:         IhrisTask
+InstanceOf:       IhrisQuestionnaire
+Usage:          #definition
+* title = "iHRIS Add Task Workflow"
+* description = "iHRIS workflow to record a Role"
+* id = "ihris-task"
+* url = "http://ihris.org/fhir/Questionnaire/ihris-task"
+* name = "ihris-add-task"
+* status = #active
+* date = 2022-02-20
+* purpose = "Workflow page for user role tasks information."
+
+* item[0].linkId = "Task"
+* item[0].text = "Add Task"
+* item[0].type = #group
+
+* item[1].linkId = "TaskAttributes"
+* item[1].text = "Task Attributes"
+* item[1].type = #group
+
+* item[1].item[0].linkId = "permission"
+* item[1].item[0].definition = "http://ihris.org/fhir/StructureDefinition/ihris-task#Basic.extension:attributes.extension:permission.value[x]:valueCode"
+* item[1].item[0].text = "Permission"
+* item[1].item[0].type = #choice
+* item[1].item[0].answerValueSet = "http://ihris.org/fhir/ValueSet/ihris-task-permission"
+* item[1].item[0].required = true
+* item[1].item[0].repeats = false
+
+* item[1].item[1].linkId = "resource"
+* item[1].item[1].definition = "http://ihris.org/fhir/StructureDefinition/ihris-task#Basic.extension:attributes.extension:resource.value[x]:valueCode"
+* item[1].item[1].text = "Resource"
+* item[1].item[1].type = #choice
+* item[1].item[1].answerValueSet = "http://ihris.org/fhir/ValueSet/ihris-task-resource"
+* item[1].item[1].required = false
+* item[1].item[1].repeats = false
+
+* item[1].item[2].linkId = "instance"
+* item[1].item[2].definition = "http://ihris.org/fhir/StructureDefinition/ihris-task#Basic.extension:attributes.extension:instance.value[x]:valueId"
+* item[1].item[2].text = "Instance"
+* item[1].item[2].type = #string
+* item[1].item[2].required = false
+* item[1].item[2].repeats = false
+
+* item[1].item[3].linkId = "constraint"
+* item[1].item[3].definition = "http://ihris.org/fhir/StructureDefinition/ihris-task#Basic.extension:attributes.extension:constraint.value[x]:valueString"
+* item[1].item[3].text = "Constraint"
+* item[1].item[3].type = #string
+* item[1].item[3].required = false
+* item[1].item[3].repeats = false
+
+* item[1].item[4].linkId = "field"
+* item[1].item[4].definition = "http://ihris.org/fhir/StructureDefinition/ihris-task#Basic.extension:attributes.extension:field.value[x]:valueString"
+* item[1].item[4].text = "Field"
+* item[1].item[4].type = #string
+* item[1].item[4].required = false
+* item[1].item[4].repeats = false
+
+* item[2].linkId = "CompositeTasks"
+* item[2].text = "Composite/Linked Tasks"
+* item[2].type = #group
+
+* item[2].item[0].linkId = "linkedtasks"
+* item[2].item[0].definition = "http://ihris.org/fhir/StructureDefinition/ihris-task#Basic.extension:compositeTask.value[x]:valueReference"
+* item[2].item[0].text = "Composite/Linked Tasks"
+* item[2].item[0].type = #reference
+* item[2].item[0].required = false
+* item[2].item[0].repeats = true

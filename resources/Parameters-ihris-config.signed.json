@@ -16,11 +16,11 @@
             "code": "1.2.840.10065.1.12.1.14"
           }
         ],
-        "when": "2022-01-12T19:13:23.804Z",
+        "when": "2022-02-24T09:49:40.497Z",
         "who": {
           "reference": "http://ihris.org/fhir/Organization/ihris"
         },
-        "data": "nFxE1+sm8MyY61ItRfiGoI6NLMyjAUQ/UlC5ci4p7XIRwRiFIEzM+/LqB1l3IcWVClSWfeeaXkYMwJMNBThVfOsPYhbSo0R1s/UNKUPNmy/8zLUUiSOyBFxy1i2byFpqA9DRSHfoTpGCuRKAqYvHGRavkhFGkHfvT85+seInWfU="
+        "data": "aJQ0at7ojgMw1jyrO7/UW49QXj8Fk1GzvSMDybZdk+2Dq9ENXMAQJLkr+WrH25/UiKJGHsng2+T7eEKtWkrrnWWUIW9F8UpfusKfXmQDBm31GclVnscETJJUisT8Th6Tb7mcFNjeCofVfX7FrHqcqvGYNKriA2NG5nPGrmoBMrM="
       }
     },
     {
@@ -661,6 +661,22 @@
         {
           "name": "workflow:questionnaire:user:url",
           "valueString": "http://ihris.org/fhir/Questionnaire/ihris-user"
+        },
+        {
+          "name": "workflow:processor:role:file",
+          "valueString": "../modules/workflowUserRole"
+        },
+        {
+          "name": "workflow:questionnaire:role:url",
+          "valueString": "http://ihris.org/fhir/Questionnaire/ihris-role"
+        },
+        {
+          "name": "workflow:processor:task:file",
+          "valueString": "../modules/workflowTask"
+        },
+        {
+          "name": "workflow:questionnaire:task:url",
+          "valueString": "http://ihris.org/fhir/Questionnaire/ihris-task"
         },
         {
           "name": "defaults:components:date-time:minValueDateTime",
