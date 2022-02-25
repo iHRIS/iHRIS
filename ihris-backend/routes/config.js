@@ -770,6 +770,9 @@ router.get('/questionnaire/:questionnaire', function (req, res) {
     }
     const processQuestionnaireItems = async (items) => {
       let vueOutput = ""
+
+      console.log("items", JSON.stringify(items,null,2))
+
       for (let item of items) {
         let displayType
         if (item.linkId.includes('#')) {

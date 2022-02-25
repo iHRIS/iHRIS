@@ -3,7 +3,7 @@ import VueRouter from "vue-router"
 //import Home from "../views/home.vue"
 import Static from "../views/static-page.vue"
 import HomeNav from "../views/home-nav.vue"
-import Dashboard from "../views/kibana-dashboard.vue";
+import Dashboard from "../views/home.vue";
 
 //import Test from "../views/test.vue"
 //import mhero from "../views/mhero/mhero.vue"

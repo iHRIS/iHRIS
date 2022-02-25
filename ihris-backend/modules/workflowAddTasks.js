@@ -16,104 +16,124 @@ const workflowAddTasks = {
                 entry: []
             }
 
+            let taskname = undefined
+            let resourceId = undefined
             let taskResource = undefined
             let taskInstance = undefined
-            let taskConstraint = undefined
-            let taskField = undefined
             let taskPermission = undefined
             let extensions = []
+            let attributesExtension = []
 
-            if (req.body) {
+            try {
+                if (req.body && req.body.item
+                    && req.body.item[0].linkId === "Task"
+                ) {
 
-                if (req.body.item[1] !== "") {
-
-                    taskInstance = req.body.item[1].item.find((item) => item.linkId == "instance").answer[0].valueString
-
-                    taskConstraint = req.body.item[1].item.find((item) => item.linkId == "constraint").answer[0].valueString
-
-                    taskField = req.body.item[1].item.find((item) => item.linkId == "field").answer[0].valueString
-
-                    taskPermission = req.body.item[1].item.find((item) => item.linkId == "permission").answer[0].valueCoding.code
-
-                    taskResource = req.body.item[1].item.find((item) => item.linkId == "resource").answer[0].valueCoding.code
-
-
-                    if (taskResource === "*") {
-                        taskResource = "all"
-                    }
-
-                    if (taskPermission === "*") {
-                        taskPermission = "all"
-                    }
-
-                    let name = {
-                        url: "http://ihris.org/fhir/StructureDefinition/ihris-basic-name",
-                        valueString: taskPermission + "-" + taskResource + "-" + "resource"
-                    }
-
-                    extensions.push(name)
-
-
-                }
-
-                // add task attributes
-                let taskAttributes = {
-                    url: "http://ihris.org/fhir/StructureDefinition/task-attributes",
-                    extension: [
-                        {
-                            "url": "permission",
-                            "valueCode": taskPermission
-                        },
-                        {
-                            "url": "resource",
-                            "valueCode": taskResource
-                        }, {
-                            "url": "constraint",
-                            "valueString": taskConstraint
-                        }, {
-                            "url": "instance",
-                            "valueId": taskInstance
-                        }, {
-                            "url": "field",
-                            "valueCode": taskField
+                    if ((req.body.item[1].item[0].linkId === "permission"
+                        && req.body.item[1].item[0].answer[0].valueCoding
+                        && req.body.item[1].item[1].linkId === "resource"
+                        && req.body.item[1].item[1].answer[0].valueCoding) ||
+                        (req.body.item[1].item[0].linkId === "permission"
+                            && req.body.item[1].item[0].answer[0].valueCoding
+                            && req.body.item[1].item[2].linkId === "instance"
+                            && req.body.item[1].item[2].answer[0].valueString)) {
+                        taskPermission = req.body.item[1].item[0].answer[0].valueCoding.code
+                        if (taskPermission === "*") {
+                            taskPermission = "all"
                         }
+                        attributesExtension.push({
+                            url: "permission",
+                            valueCode: taskPermission
+                        })
+                        if (req.body.item[1].item[2].linkId === "instance"
+                            && req.body.item[1].item[2].answer[0].valueString) {
+                            taskInstance = req.body.item[1].item[2].answer[0].valueString
+                            attributesExtension.push({
+                                url: "instance",
+                                valueString: taskInstance
+                            })
+                        }
+                        if (req.body.item[1].item[1].linkId === "resource"
+                            && req.body.item[1].item[1].answer[0].valueCoding) {
+                            taskResource = req.body.item[1].item[1].answer[0].valueCoding.code
 
-                    ]
-                }
-
-                extensions.push(taskAttributes)
-
-
-                // create basic object
-                let newTask = {
-                    resourceType: "Basic",
-                    id: "ihris-task-" + taskPermission + "-" + taskResource + "-" + "resource",
-                    meta: {
-                        profile: ["http://ihris.org/fhir/StructureDefinition/ihris-task"]
-                    },
-                    extension: extensions,
-                    code: {
-                        coding: [
-                            {
-                                code: "task",
-                                system: "http://ihris.org/fhir/CodeSystem/ihris-resource-codesystem"
+                            if (taskResource === "*") {
+                                taskResource = "all"
                             }
-                        ]
-                    },
-                }
-                let url = "Basic/ihris-task-" + taskPermission + "-" + taskResource + "-" + "resource"
-                bundle.entry.push({
-                    resource: newTask,
-                    request: {
-                        method: "PUT",
-                        url: url
-                    }
-                })
-            }
-            winston.info("Bundle")
-            winston.info(JSON.stringify(bundle, null, 2))
-            resolve(bundle)
 
+                            attributesExtension.push({
+                                url: "resource",
+                                valueCode: taskResource
+                            })
+                        } else {
+                            winston.error("No Resource attribute found")
+                            resolve(await workflowAddTasks.outcome("No Resource attribute found"))
+                        }
+                        if (req.body.item[1].item[3].linkId === "constraint"
+                            && req.body.item[1].item[3].answer[0].valueString) {
+                            attributesExtension.push({
+                                url: "constraint",
+                                valueString: req.body.item[1].item[3].answer[0].valueString
+                            })
+                        }
+                        if (req.body.item[1].item[4].linkId === "field"
+                            && req.body.item[1].item[4].answer[0].valueString) {
+                            attributesExtension.push({
+                                url: "field",
+                                valueString: req.body.item[1].item[4].answer[0].valueString
+                            })
+                        }
+                        extensions.push({
+                            url: "http://ihris.org/fhir/StructureDefinition/task-attributes",
+                            extension: attributesExtension
+                        })
+                    } else {
+                        winston.error("Task permission has to be selected with either 'resource' or 'instance'")
+                        resolve(await workflowAddTasks.outcome("Task permission has to be selected with either 'resource' or 'instance'"))
+                    }
+                    if (taskResource && taskInstance) {
+                        resourceId = taskPermission + "-" + taskInstance
+
+                    } else if (taskResource && !taskInstance) {
+                        resourceId = taskPermission + "-" + taskResource + "-" + "resource"
+                        extensions.push({
+                            url: "http://ihris.org/fhir/StructureDefinition/ihris-basic-name",
+                            valueString: resourceId
+                        })
+                    }
+                    let newTask = {
+                        resourceType: "Basic",
+                        id: "ihris-task-" + resourceId,
+                        meta: {
+                            profile: ["http://ihris.org/fhir/StructureDefinition/ihris-task"]
+                        },
+                        extension: extensions,
+                        code: {
+                            coding: [
+                                {
+                                    code: "task",
+                                    system: "http://ihris.org/fhir/CodeSystem/ihris-resource-codesystem"
+                                }
+                            ]
+                        },
+                    }
+                    bundle.entry.push({
+                        resource: newTask,
+                        request: {
+                            method: "PUT",
+                            url: "Basic/ihris-task-" + resourceId
+                        }
+                    })
+                    winston.info(JSON.stringify(bundle, null, 2))
+                    resolve(bundle)
+                } else {
+                    winston.error("Task Questionnaire not found")
+                    resolve(await workflowAddTasks.outcome("Task Questionnaire not found"))
+                }
+            } catch (err) {
+                winston.error(err)
+                resolve(await workflowAddTasks.outcome(err.message))
+            }
         });
     },
 

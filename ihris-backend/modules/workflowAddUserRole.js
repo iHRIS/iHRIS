@@ -9,11 +9,6 @@ const fhirAxios = nconf.fhirAxios
 const workflowAddUserRole = {
     process: (req) => {
 
-
-        console.log("req", JSON.stringify(req.body, null, 2))
-
-
-
         return new Promise((resolve, reject) => {
 
             let bundle = {
@@ -23,80 +18,94 @@ const workflowAddUserRole = {
             }
 
             let roleName = undefined
-            let roleTask = undefined
-            let roleIsPrimary = undefined
+            let roleTasks = undefined
+            let roleRoles = undefined
 
             let extensions = []
-
-            if (req.body !== "") {
-
-                // role names
-                roleName = req.body.item[0].item.find((item) => item.linkId == "rolename").answer[0].valueString
-
-                let name = {
-                    url: "http://ihris.org/fhir/StructureDefinition/ihris-basic-name",
-                    valueString: roleName
-                }
-
-                extensions.push(name)
-
-                // is primary
-                roleIsPrimary = req.body.item[0].item.find((item) => item.linkId == "primary").answer[0].valueBoolean
-
-                let primary = {
-                    url: "http://ihris.org/fhir/StructureDefinition/ihris-role-primary",
-                    valueBoolean: roleIsPrimary
-                }
-                extensions.push(primary)
-
-
-                // role tasks
-                roleTask = req.body.item[0].item.find((item) => item.linkId == "tasks").answer
-
-                let tasks = {}
-
-                roleTask.forEach(element => {
-                    tasks = {
-                        url: "http://ihris.org/fhir/StructureDefinition/ihris-assign-task",
-                        valueReference: {
-                            reference: element.valueReference.reference
-                        }
-
+            try {
+                if (req.body && req.body.item
+                    && req.body.item[0].linkId === "Role"
+                    && req.body.item[0].item[0].linkId === "rolename"
+                    && req.body.item[0].item[0].answer[0].valueString
+                    ) {
+                    roleName = req.body.item[0].item[0].answer[0].valueString
+                    let name = {
+                        url: "http://ihris.org/fhir/StructureDefinition/ihris-basic-name",
+                        valueString: roleName
                     }
-                });
-
-                extensions.push(tasks)
-
-
-                let newRole = {
-                    resourceType: "Basic",
-                    id: "ihris-role-" + roleName.replace(/ /g, "").toLowerCase(),
-                    meta: {
-                        profile: ["http://ihris.org/fhir/StructureDefinition/ihris-role"]
-                    },
-                    extension: extensions,
-                    code: {
-                        coding: [
-                            {
-                                code: "role",
-                                system: "http://ihris.org/fhir/CodeSystem/ihris-resource-codesystem"
+                    extensions.push(name)
+    
+                    if ( req.body.item[0].item[3].linkId === "primary" 
+                    && req.body.item[0].item[3].item[1].answer 
+                    && req.body.item[0].item[3].answer[0] 
+                    && req.body.item[0].item[3].answer[0].valueBoolean){
+                        extensions.push({ url: "http://ihris.org/fhir/StructureDefinition/ihris-role-primary",
+                        valueBoolean:req.body.item[0].item[3].answer[0].valueBoolean })
+                    }
+    
+                    // role tasks
+                    roleTasks = req.body.item[0].item.find((item) => item.linkId == "tasks").answer
+                    let tasks = {}
+                    roleTasks.forEach(element => {
+                        tasks = {
+                            url: "http://ihris.org/fhir/StructureDefinition/ihris-assign-task",
+                            valueReference: {
+                                reference: element.valueReference.reference
                             }
-                        ]
+    
+                        }
+                    });
+                    extensions.push(tasks)
+    
+                    //role roles
+                    roleRoles = req.body.item[0].item.find((item) => item.linkId == "roles").answer
+                    let roles = {}
+                    roleRoles.forEach(element => {
+                        roles = {
+                            url: "http://ihris.org/fhir/StructureDefinition/ihris-assign-role",
+                            valueReference: {
+                                reference: element.valueReference.reference
+                            }
+    
+                        }
+                    });
+                    extensions.push(roles)
+    
+                    let newRole = {
+                        resourceType: "Basic",
+                        id: "ihris-role-" + roleName.toLowerCase(),
+                        meta: {
+                            profile: ["http://ihris.org/fhir/StructureDefinition/ihris-role"]
+                        },
+                        extension: extensions,
+                        code: {
+                            coding: [
+                                {
+                                    code: "role",
+                                    system: "http://ihris.org/fhir/CodeSystem/ihris-resource-codesystem"
+                                }
+                            ]
+                        }
                     }
+                    let url = "Basic/ihris-role-" + roleName.toLowerCase()
+                    bundle.entry.push({
+                        resource: newRole,
+                        request: {
+                            method: "PUT",
+                            url: url
+                        }
+                    })
+                    winston.info("Bundle")
+                    winston.info(JSON.stringify(bundle, null, 2))
+                    resolve(bundle)
+                } else {
+                    winston.error("Role name not provided")
+                    resolve(await workflowAddUserRole.outcome("Role name not provided"))
                 }
-                let url = "Basic/ihris-role-" + roleName.replace(/ /g, "").toLowerCase()
-                bundle.entry.push({
-                    resource: newRole,
-                    request: {
-                        method: "PUT",
-                        url: url
-                    }
-                })
+            } catch (err) {
+                winston.error(err.message)
+               resolve(await workflowAddUserRole.outcome(err.message))
             }
-
-            winston.info("Bundle")
-            winston.info(JSON.stringify(bundle, null, 2))
-            resolve(bundle)
 
         });
     },
