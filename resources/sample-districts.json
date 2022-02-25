@@ -41,6 +41,126 @@
                 "method": "PUT",
                 "url": "Location/UG.CC.CAP"
             }
+        },
+        {
+            "resource": {
+                "resourceType": "Location",
+                "meta": {
+                    "profile": [
+                        "http://ihris.org/fhir/StructureDefinition/ihris-jurisdiction"
+                    ]
+                },
+                "id": "UG.N.GULU",
+                "name": "GULU",
+                "status": "active",
+                "partOf": {
+                    "reference": "Location/UG.N"
+                },
+                "type": [
+                    {
+                        "coding": [
+                            {
+                                "system": "http://ihris.org/fhir/CodeSystem/ihris-jurisdiction",
+                                "code": "district"
+                            }
+                        ],
+                        "text": "District"
+                    }
+                ],
+                "physicalType": {
+                    "coding": [
+                        {
+                            "system": "http://hl7.org/fhir/codesystem-location-physical-type.html",
+                            "code": "jdn"
+                        }
+                    ],
+                    "text": "Jurisdiction"
+                }
+            },
+            "request": {
+                "method": "PUT",
+                "url": "Location/UG.N.GULU"
+            }
+        },
+        {
+            "resource": {
+                "resourceType": "Location",
+                "meta": {
+                    "profile": [
+                        "http://ihris.org/fhir/StructureDefinition/ihris-jurisdiction"
+                    ]
+                },
+                "id": "UG.W.MBARARA",
+                "name": "MBARARA",
+                "status": "active",
+                "partOf": {
+                    "reference": "Location/UG.W"
+                },
+                "type": [
+                    {
+                        "coding": [
+                            {
+                                "system": "http://ihris.org/fhir/CodeSystem/ihris-jurisdiction",
+                                "code": "district"
+                            }
+                        ],
+                        "text": "District"
+                    }
+                ],
+                "physicalType": {
+                    "coding": [
+                        {
+                            "system": "http://hl7.org/fhir/codesystem-location-physical-type.html",
+                            "code": "jdn"
+                        }
+                    ],
+                    "text": "Jurisdiction"
+                }
+            },
+            "request": {
+                "method": "PUT",
+                "url": "Location/UG.W.MBARARA"
+            }
+        },
+        {
+            "resource": {
+                "resourceType": "Location",
+                "meta": {
+                    "profile": [
+                        "http://ihris.org/fhir/StructureDefinition/ihris-jurisdiction"
+                    ]
+                },
+                "id": "UG.N.ARUA",
+                "name": "ARUA",
+                "status": "active",
+                "partOf": {
+                    "reference": "Location/UG.N"
+                },
+                "type": [
+                    {
+                        "coding": [
+                            {
+                                "system": "http://ihris.org/fhir/CodeSystem/ihris-jurisdiction",
+                                "code": "district"
+                            }
+                        ],
+                        "text": "District"
+                    }
+                ],
+                "physicalType": {
+                    "coding": [
+                        {
+                            "system": "http://hl7.org/fhir/codesystem-location-physical-type.html",
+                            "code": "jdn"
+                        }
+                    ],
+                    "text": "Jurisdiction"
+                }
+            },
+            "request": {
+                "method": "PUT",
+                "url": "Location/UG.N.ARUA"
+            }
         }
     ]
 }

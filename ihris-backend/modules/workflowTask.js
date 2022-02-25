@@ -6,9 +6,11 @@ const fhirQuestionnaire = require('./fhirQuestionnaire')
 const { response } = require('express')
 const fhirAxios = nconf.fhirAxios
 
-const workflowAddTasks = {
+const workflowTask = {
     process: (req) => {
         return new Promise((resolve, reject) => {
+
+            console.log("req",JSON.stringify(req,null,2))
 
             let bundle = {
                 resourceType: "Bundle",
@@ -67,7 +69,7 @@ const workflowAddTasks = {
                             })
                         } else {
                             winston.error("No Resource attribute found")
-                            resolve(await workflowAddTasks.outcome("No Resource attribute found"))
+                            resolve(await workflowTask.outcome("No Resource attribute found"))
                         }
                         if (req.body.item[1].item[3].linkId === "constraint"
                             && req.body.item[1].item[3].answer[0].valueString) {
@@ -89,7 +91,7 @@ const workflowAddTasks = {
                         })
                     } else {
                         winston.error("Task permission has to be selected with either 'resource' or 'instance'")
-                        resolve(await workflowAddTasks.outcome("Task permission has to be selected with either 'resource' or 'instance'"))
+                        resolve(await workflowTask.outcome("Task permission has to be selected with either 'resource' or 'instance'"))
                     }
                     if (taskResource && taskInstance) {
                         resourceId = taskPermission + "-" + taskInstance
@@ -128,11 +130,11 @@ const workflowAddTasks = {
                     resolve(bundle)
                 } else {
                     winston.error("Task Questionnaire not found")
-                    resolve(await workflowAddTasks.outcome("Task Questionnaire not found"))
+                    resolve(await workflowTask.outcome("Task Questionnaire not found"))
                 }
             } catch (err) {
                 winston.error(err)
-                resolve(await workflowAddTasks.outcome(err.message))
+                resolve(await workflowTask.outcome(err.message))
             }
         });
     },
@@ -176,4 +178,4 @@ const workflowAddTasks = {
 
 };
 
-module.exports = workflowAddTasks
+module.exports = workflowTask

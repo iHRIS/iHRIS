@@ -6,21 +6,59 @@
           <!-- first line -->
           <v-row>
             <v-col cols="6">
-              <v-card class="mx-auto my-4" color="green">
+              <v-card
+                id="card-1"
+                elevation="4"
+                class="mx-4 my-4"
+                outlined
+                shaped
+                color="green"
+                height="25%"
+              >
                 <v-card-title>
-                  Health Workers {{ totalHealthWorkers }}
+                  <p style="color: white">Health Workers</p>
                 </v-card-title>
-                <v-card-subtitle> Number of Health Workers</v-card-subtitle>
+                <v-card-text>
+                  <p style="color: white">{{ totalHealthWorkers }}</p>
+                </v-card-text>
               </v-card>
-              <v-card class="mx-auto my-4" color="blue">
-                <v-card-title> Facilities 31 </v-card-title>
-                <v-card-subtitle> Number of Facilities</v-card-subtitle>
+
+              <v-card
+                id="card-1"
+                elevation="4"
+                class="mx-4 my-4"
+                outlined
+                shaped
+                color="blue"
+                height="25%"
+              >
+                <v-card-title>
+                  <p style="color: white">Facilities</p>
+                </v-card-title>
+                <v-card-text>
+                  <p style="color: white">{{ totalFacilities }}</p>
+                </v-card-text>
               </v-card>
-              <v-card class="mx-auto my-4" color="#ff5733">
-                <v-card-title> District {{ totalDistricts }} </v-card-title>
-                <v-card-subtitle> Number of Districts</v-card-subtitle>
+
+              <v-card
+                id="card-1"
+                class="mx-4 my-4"
+                elevation="4"
+                outlined
+                shaped
+                color="#ff5733"
+                height="25%"
+              >
+                <v-card-title>
+                  <p style="color: white">District</p>
+                </v-card-title>
+                <v-card-text>
+                  <p style="color: white">{{ totalDistricts }}</p>
+                </v-card-text>
               </v-card>
             </v-col>
+
+            <!-- gender chart -->
             <v-col cols="6">
               <v-card class="mx-auto">
                 <highcharts :options="chartGenderOptions"></highcharts>
@@ -29,11 +67,13 @@
           </v-row>
           <!--  second line -->
           <v-row>
+            <!-- cadre chart -->
             <v-col cols="6">
               <v-card class="mx-auto">
                 <highcharts :options="chartCadreOptions"></highcharts>
               </v-card>
             </v-col>
+            <!--  barchart -->
             <v-col cols="6">
               <v-card class="mx-auto">
                 <highcharts :options="barChartOptions"></highcharts>

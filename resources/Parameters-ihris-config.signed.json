@@ -520,7 +520,7 @@
         },
         {
           "name": "workflow:processor:role:file",
-          "valueString": "../modules/workflowAddUserRole"
+          "valueString": "../modules/workflowUserRole"
         },
         {
           "name": "workflow:questionnaire:role:url",
@@ -528,7 +528,7 @@
         },
         {
           "name": "workflow:processor:task:file",
-          "valueString": "../modules/workflowAddTasks"
+          "valueString": "../modules/workflowTask"
         },
         {
           "name": "workflow:questionnaire:task:url",

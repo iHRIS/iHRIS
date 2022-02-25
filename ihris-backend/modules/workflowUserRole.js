@@ -6,7 +6,7 @@ const fhirQuestionnaire = require('./fhirQuestionnaire')
 const { response } = require('express')
 const fhirAxios = nconf.fhirAxios
 
-const workflowAddUserRole = {
+const workflowUserRole = {
     process: (req) => {
 
         return new Promise((resolve, reject) => {
@@ -100,11 +100,11 @@ const workflowAddUserRole = {
                     resolve(bundle)
                 } else {
                     winston.error("Role name not provided")
-                    resolve(await workflowAddUserRole.outcome("Role name not provided"))
+                    resolve(await workflowUserRole.outcome("Role name not provided"))
                 }
             } catch (err) {
                 winston.error(err.message)
-               resolve(await workflowAddUserRole.outcome(err.message))
+               resolve(await workflowUserRole.outcome(err.message))
             }
 
         });
@@ -149,4 +149,4 @@ const workflowAddUserRole = {
 
 };
 
-module.exports = workflowAddUserRole
+module.exports = workflowUserRole
