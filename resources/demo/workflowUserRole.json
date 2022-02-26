@@ -1,0 +1,39 @@
+{
+    "resourceType": "QuestionnaireResponse",
+    "questionnaire": "http://ihris.org/fhir/Questionnaire/ihris-role",
+    "status": "completed",
+    "item": [
+        {
+            "linkId": "Role",
+            "text": "Add Role",
+            "item": [
+                {
+                    "linkId": "rolename",
+                    "answer": [
+                        {
+                            "valueString": "test"
+                        }
+                    ]
+                },
+                {
+                    "linkId": "tasks",
+                    "answer": [
+                        {
+                            "valueReference": {
+                                "reference": "Basic/ihris-task-read-document-reference"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "linkId": "primary",
+                    "answer": [
+                        {
+                            "valueBoolean": true
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}

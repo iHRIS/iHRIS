@@ -1,0 +1,74 @@
+{
+    "resourceType": "QuestionnaireResponse",
+    "questionnaire": "http://ihris.org/fhir/Questionnaire/ihris-task",
+    "status": "completed",
+    "item": [
+        {
+            "linkId": "Task",
+            "text": "Add Task",
+            "item": [
+                {
+                    "linkId": "TaskAttributes",
+                    "text": "Task Attributes",
+                    "item": [
+                        {
+                            "linkId": "permission",
+                            "answer": [
+                                {
+                                    "valueCoding": {
+                                        "system": "http://ihris.org/fhir/CodeSystem/ihris-task-permission",
+                                        "version": "0.3.0",
+                                        "code": "read",
+                                        "display": "Read"
+                                    }
+                                }
+                            ]
+                        },
+                        {
+                            "linkId": "resource",
+                            "answer": [
+                                {
+                                    "valueCoding": {
+                                        "system": "http://ihris.org/fhir/CodeSystem/ihris-task-resource",
+                                        "version": "0.3.0",
+                                        "code": "DocumentReference",
+                                        "display": "DocumentReference"
+                                    }
+                                }
+                            ]
+                        },
+                        {
+                            "linkId": "instance",
+                            "answer": [
+                                {
+                                    "valueString": ""
+                                }
+                            ]
+                        },
+                        {
+                            "linkId": "constraint",
+                            "answer": [
+                                {
+                                    "valueString": ""
+                                }
+                            ]
+                        },
+                        {
+                            "linkId": "field",
+                            "answer": [
+                                {
+                                    "valueString": ""
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "linkId": "CompositeTasks",
+                    "text": "Composite/Linked Tasks",
+                    "item": []
+                }
+            ]
+        }
+    ]
+}
