@@ -2,7 +2,7 @@ Profile:        IhrisBasicDiscipline
 Parent:         IhrisPractitionerBasic
 Id:             ihris-basic-discipline
 Title:          "Discipline Information"
-Description:    "iHRIS Profile of the Basic resource for Discipline."
+Description:    "NHWR Profile of the Basic resource for Discipline."
 * extension[practitioner].valueReference 1..1 MS
 * extension[practitioner].valueReference ^label = "Health Worker"
 * extension contains
@@ -78,7 +78,7 @@ Instance:       IhrisPractitionerWorkflowDiscipline
 InstanceOf:     IhrisQuestionnaire
 Usage:          #definition
 * title = "NHWR Discipline Workflow"
-* description = "iHRIS workflow to record a Discipline"
+* description = "NHWR workflow to record a Discipline"
 * id = "ihris-discipline"
 * url = "http://ihris.org/fhir/Questionnaire/ihris-discipline"
 * name = "ihris-discipline"
