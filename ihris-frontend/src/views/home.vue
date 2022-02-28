@@ -413,7 +413,7 @@ export default {
       let url = "";
       // check other pages
       if (url === "") {
-        url = "/fhir/Organisation";
+        url = "/fhir/Organization";
       }
 
       axios
