@@ -10,6 +10,7 @@ const passport = require('passport')
 const GoogleStrategy = require('passport-google-oauth20').Strategy
 const LocalStrategy = require('passport-local').Strategy
 const CustomStrategy = require('passport-custom').Strategy
+const TOTPStrategy = require('totp').Strategy
 
 const defaultUser = nconf.get("user:loggedout") || "ihris-user-loggedout"
 
@@ -96,6 +97,23 @@ passport.use('custom-loggedout', new CustomStrategy(
   }
 ))
 
+passport.use('totp', new TOTPStrategy((req, done) => {
+
+  user.lookupByEmail(req.user.email).then((userObj) => {
+    if (!userObj) {
+      fhirAudit.login(userObj, req.ip, false, email)
+      done(null, false)
+    } else {
+      fhirAudit.login(userObj, req.ip, true, email)
+      done(null, userObj)
+    }
+  }).catch((err) => {
+    done(err)
+
+  })
+
+}))
+
 passport.serializeUser((obj, callback) => {
   //callback(null, user.id)
   callback(null, obj)
@@ -158,6 +176,23 @@ router.post("/login", passport.authenticate('local', {}), (req, res) => {
   res.status(200).json({ ok: true, name: name })
 })
 
+router.post("/verify-otp", passport.authenticate('totp', { failureRedirect: '/verify-otp' }), (req, res) => {
+
+  if (res.status !== 200) {
+    res.json({
+      success: false,
+      message: "OTP verification  failed"
+    })
+  } else {
+    res.status(200).json({
+      success: true,
+      message: "OTP has been verified"
+    })
+  }
+
+
+})
+
 router.post('/token', (req, res) => {
   // For API Access only
   logger.info('Generating token');
@@ -185,6 +220,7 @@ router.post('/token', (req, res) => {
     return res.status(500).send();
   });
 });
+
 
 router.get('/test',
   (req, res) => {
