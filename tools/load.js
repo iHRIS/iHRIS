@@ -35,7 +35,8 @@ for (let file of nconf.get('_')) {
         console.log( dest+": "+ res.status )
         console.log( JSON.stringify( res.data, null, 2 ) )
       }).catch((err) => {
-        console.error(err)
+        // console.log( JSON.stringify( err.request.data, null, 2 ) )
+        console.error(err.request)
       })
     } else {
       console.log("Saving " + fhir.resourceType + " - " + fhir.id)

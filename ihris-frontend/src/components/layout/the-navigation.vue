@@ -25,7 +25,7 @@
             no-action
             >
             <template v-slot:activator>
-              <v-list-item-title class="subtitle-1 font-weight-bold text-uppercase">{{item.text}}</v-list-item-title>
+              <v-list-item-title class="subtitle-1 font-weight-bold ">{{item.text}}</v-list-item-title>
             </template>
             <v-list-item
               v-for="sub in item.menu"
@@ -46,7 +46,7 @@
             <v-list-item-icon>
               <v-icon>{{item.icon}}</v-icon>
             </v-list-item-icon>
-            <v-list-item-title class="subtitle-1 font-weight-bold text-uppercase">{{item.text}}</v-list-item-title>
+            <v-list-item-title class="subtitle-1 font-weight-bold ">{{item.text}}</v-list-item-title>
           </v-list-item>
 
         </template>

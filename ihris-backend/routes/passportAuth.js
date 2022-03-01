@@ -10,7 +10,7 @@ const passport = require('passport')
 const GoogleStrategy = require('passport-google-oauth20').Strategy
 const LocalStrategy = require('passport-local').Strategy
 const CustomStrategy = require('passport-custom').Strategy
-const TOTPStrategy = require('totp').Strategy
+const TOTPStrategy = require('passport-totp').Strategy
 
 const defaultUser = nconf.get("user:loggedout") || "ihris-user-loggedout"
 

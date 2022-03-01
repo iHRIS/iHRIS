@@ -422,39 +422,4 @@ router.get("/\\$short-name", (req, res) => {
 
 })
 
-router.post("/bulkRegistration", (req, res) => {
-  if (!req.body) {
-    return res.status(400).end();
-  } else {
-    const usersData = req.body;
-    let response = bulkRegistration(usersData);
-    if (response.isValid) {
-      fhirAxios
-        .create(response.data.practitionerBundle)
-        .then((results) => {
-          fhirAxios
-            .create(response.data.practitionerRoleBundle)
-            .then((results) => { })
-            .catch((err) => {
-              console.log(JSON.stringify(err, null, 2));
-              winston.error(err.message);
-              return res.status(500).json({ err: err.message });
-            });
-          return res.status(201).json(results);
-        })
-        .catch((err) => {
-          winston.error(err.message);
-          return res.status(500).json({ err: err.message });
-        });
-    } else {
-      return res.json(response);
-    }
-  }
-});
-
-router.get("/csvTemplate", (req, res) => {
-  let p = path.join(__dirname, "../", "file/sampleInput.xlsx");
-  res.download(p);
-});
-
 module.exports = router
