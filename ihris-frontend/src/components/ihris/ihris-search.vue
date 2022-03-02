@@ -4,11 +4,11 @@
       <v-card-title>
         Search {{ label }}
         <v-spacer></v-spacer>
-        <v-btn :class="addLink ? addLink.class || 'primary' : 'primary'" :to="addLink ? addLink.url : '/resource/add/'+page">
+        <!-- <v-btn :class="addLink ? addLink.class || 'primary' : 'primary'" :to="addLink ? addLink.url : '/resource/add/'+page">
           <v-icon v-if="addLink && addLink.icon">{{ addLink.icon }}</v-icon>
           <v-icon v-else>mdi-database-plus</v-icon>
           Add {{label}}
-        </v-btn>
+        </v-btn> -->
       </v-card-title>
       <v-card-title>
         <slot></slot>
