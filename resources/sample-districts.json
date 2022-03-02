@@ -39,7 +39,7 @@
             },
             "request": {
                 "method": "PUT",
-                "url": "Location/UG.CC.CAP"
+                "url": "Location/UG.CC.KLA"
             }
         },
         {
@@ -961,127 +961,126 @@
                 "method": "PUT",
                 "url": "Location/UG.CC.BUI"
             }
-        },{
+        },
+        {
             "resource": {
-              "resourceType": "Location",
-              "meta": {
-                "profile": [
-                  "http://ihris.org/fhir/StructureDefinition/ihris-jurisdiction"
-                ]
-              },
-              "id": "UG.E.BULAMBULI",
-              "name": "Bulambuli",
-              "status": "active",
-              "partOf": {
-                "reference": "Location/UG.E"
-              },
-              "type": [
-                {
-                  "coding": [
+                "resourceType": "Location",
+                "meta": {
+                    "profile": [
+                        "http://ihris.org/fhir/StructureDefinition/ihris-jurisdiction"
+                    ]
+                },
+                "id": "UG.E.BULAMBULI",
+                "name": "Bulambuli",
+                "status": "active",
+                "partOf": {
+                    "reference": "Location/UG.E"
+                },
+                "type": [
                     {
-                      "system": "http://ihris.org/fhir/CodeSystem/ihris-jurisdiction",
-                      "code": "district"
+                        "coding": [
+                            {
+                                "system": "http://ihris.org/fhir/CodeSystem/ihris-jurisdiction",
+                                "code": "district"
+                            }
+                        ],
+                        "text": "District"
                     }
-                  ],
-                  "text": "District"
-                }
-              ],
-              "physicalType": {
-                "coding": [
-                  {
-                    "system": "http://hl7.org/fhir/codesystem-location-physical-type.html",
-                    "code": "jdn"
-                  }
                 ],
-                "text": "Jurisdiction"
-              }
+                "physicalType": {
+                    "coding": [
+                        {
+                            "system": "http://hl7.org/fhir/codesystem-location-physical-type.html",
+                            "code": "jdn"
+                        }
+                    ],
+                    "text": "Jurisdiction"
+                }
             },
             "request": {
-              "method": "PUT",
-              "url": "Location/UG.E.BULAMBULI"
+                "method": "PUT",
+                "url": "Location/UG.E.BULAMBULI"
             }
-          },
-          {
+        },
+        {
             "resource": {
-              "resourceType": "Location",
-              "meta": {
-                "profile": [
-                  "http://ihris.org/fhir/StructureDefinition/ihris-jurisdiction"
-                ]
-              },
-              "id": "UG.W.BUN",
-              "name": "Bunyangabu",
-              "status": "active",
-              "partOf": {
-                "reference": "Location/UG.W"
-              },
-              "type": [
-                {
-                  "coding": [
+                "resourceType": "Location",
+                "meta": {
+                    "profile": [
+                        "http://ihris.org/fhir/StructureDefinition/ihris-jurisdiction"
+                    ]
+                },
+                "id": "UG.W.BUN",
+                "name": "Bunyangabu",
+                "status": "active",
+                "partOf": {
+                    "reference": "Location/UG.W"
+                },
+                "type": [
                     {
-                      "system": "http://ihris.org/fhir/CodeSystem/ihris-jurisdiction",
-                      "code": "district"
+                        "coding": [
+                            {
+                                "system": "http://ihris.org/fhir/CodeSystem/ihris-jurisdiction",
+                                "code": "district"
+                            }
+                        ],
+                        "text": "District"
                     }
-                  ],
-                  "text": "District"
-                }
-              ],
-              "physicalType": {
-                "coding": [
-                  {
-                    "system": "http://hl7.org/fhir/codesystem-location-physical-type.html",
-                    "code": "jdn"
-                  }
                 ],
-                "text": "Jurisdiction"
-              }
+                "physicalType": {
+                    "coding": [
+                        {
+                            "system": "http://hl7.org/fhir/codesystem-location-physical-type.html",
+                            "code": "jdn"
+                        }
+                    ],
+                    "text": "Jurisdiction"
+                }
             },
             "request": {
-              "method": "PUT",
-              "url": "Location/UG.W.BUN"
+                "method": "PUT",
+                "url": "Location/UG.W.BUN"
             }
-          },
-          {
+        },
+        {
             "resource": {
-              "resourceType": "Location",
-              "meta": {
-                "profile": [
-                  "http://ihris.org/fhir/StructureDefinition/ihris-jurisdiction"
-                ]
-              },
-              "id": "UG.E.BUT",
-              "name": "Butaleja",
-              "status": "active",
-              "partOf": {
-                "reference": "Location/UG.E"
-              },
-              "type": [
-                {
-                  "coding": [
+                "resourceType": "Location",
+                "meta": {
+                    "profile": [
+                        "http://ihris.org/fhir/StructureDefinition/ihris-jurisdiction"
+                    ]
+                },
+                "id": "UG.E.BUT",
+                "name": "Butaleja",
+                "status": "active",
+                "partOf": {
+                    "reference": "Location/UG.E"
+                },
+                "type": [
                     {
-                      "system": "http://ihris.org/fhir/CodeSystem/ihris-jurisdiction",
-                      "code": "district"
+                        "coding": [
+                            {
+                                "system": "http://ihris.org/fhir/CodeSystem/ihris-jurisdiction",
+                                "code": "district"
+                            }
+                        ],
+                        "text": "District"
                     }
-                  ],
-                  "text": "District"
-                }
-              ],
-              "physicalType": {
-                "coding": [
-                  {
-                    "system": "http://hl7.org/fhir/codesystem-location-physical-type.html",
-                    "code": "jdn"
-                  }
                 ],
-                "text": "Jurisdiction"
-              }
+                "physicalType": {
+                    "coding": [
+                        {
+                            "system": "http://hl7.org/fhir/codesystem-location-physical-type.html",
+                            "code": "jdn"
+                        }
+                    ],
+                    "text": "Jurisdiction"
+                }
             },
             "request": {
-              "method": "PUT",
-              "url": "Location/UG.E.BUT"
+                "method": "PUT",
+                "url": "Location/UG.E.BUT"
             }
-          }
-        
-       
+        }
     ]
 }
