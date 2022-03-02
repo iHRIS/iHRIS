@@ -84,7 +84,89 @@
                 "method": "PUT",
                 "url": "Location/UG.CC.KLA.1"
             }
+        },
+        {
+            "resource": {
+                "resourceType": "Organization",
+                "meta": {
+                    "profile": "http://ihris.org/fhir/StructureDefinition/ihris-facility"
+                },
+                "id": "UG.N.GULU.1",
+                "name": "Gulu Referal Hospital",
+                "active": true,
+                "type": [
+                    {
+                        "coding": [
+                            {
+                                "system": "urn:ietf:rfc:3986",
+                                "code": "urn:ihe:iti:mcsd:2019:facility"
+                            }
+                        ],
+                        "text": "Facility"
+                    },
+                    {
+                        "coding": [
+                            {
+                                "system": "http://terminology.hl7.org/CodeSystem/v3-RoleCode",
+                                "code": "HOSP"
+                            }
+                        ],
+                        "text": "HOSP"
+                    }
+                ]
+            },
+            "request": {
+                "method": "PUT",
+                "url": "Organization/UG.N.GULU.1"
+            }
+        },
+        {
+            "resource": {
+                "resourceType": "Location",
+                "meta": {
+                    "profile": "http://ihris.org/fhir/StructureDefinition/ihris-facility"
+                },
+                "id": "UG.N.GULU.1",
+                "name": "Gulu Referal Hospital",
+                "status": "active",
+                "partOf": {
+                    "reference": "Location/UG.N.GULU"
+                },
+                "managingOrganization": "Organization/UG.N.GULU.1",
+                "type": [
+                    {
+                        "coding": [
+                            {
+                                "system": "urn:ietf:rfc:3986",
+                                "code": "urn:ihe:iti:mcsd:2019:facility"
+                            }
+                        ],
+                        "text": "Facility"
+                    },
+                    {
+                        "coding": [
+                            {
+                                "system": "http://terminology.hl7.org/CodeSystem/v3-RoleCode",
+                                "code": "GIM"
+                            }
+                        ],
+                        "text": "GIM"
+                    }
+                ],
+                "physicalType": {
+                    "coding": [
+                        {
+                            "system": "http://hl7.org/fhir/codesystem-location-physical-type.html",
+                            "code": "bu"
+                        }
+                    ],
+                    "text": "Building"
+                }
+            },
+            "request": {
+                "method": "PUT",
+                "url": "Location/UG.N.GULU.1"
+            }
         }
-        
     ]
 }
