@@ -455,7 +455,7 @@ Usage:          #definition
 * item[2].item[3].required = false
 * item[2].item[3].repeats = false
 
-* item[2].item[4].linkId = "PractitionerRole.location[0]"
+* item[2].item[4].linkId = "PractitionerRole.location"
 * item[2].item[4].definition = "http://ihris.org/fhir/StructureDefinition/ihris-practitioner-role#PractitionerRole.location"
 * item[2].item[4].text = "Facility"
 * item[2].item[4].type = #reference
