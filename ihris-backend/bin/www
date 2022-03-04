@@ -9,6 +9,15 @@ var app = require('../app');
 var debug = require('debug')('ihris-backend:server');
 var http = require('http');
 
+//  register mediator
+const registerMediator = require('openhim-mediator-utils')
+// fetch mediator config 
+const mediatorConfig = require(`${__dirname}/../config/mediator`);
+// config
+const config = require('../modules/config')
+// logger
+const logger = require('../winston')
+// fhir audit
 const fhirAudit = require('../modules/fhirAudit')
 /**
  * Get port from environment and store in Express.
@@ -27,11 +36,25 @@ var server = http.createServer(app);
  * Listen on provided port, on all network interfaces.
  */
 
-app.whenReady().then( () => {
-  server.listen(port);
+app.whenReady().then(() => {
+
+  server.listen(port, () => {
+    // heartbeat
+    const configEmitter = registerMediator.activateHeartbeat(config.get('mediator:api'));
+    configEmitter.on('config', newConfig => {
+      logger.info('Received updated config:', JSON.stringify(newConfig, null, 2));
+    })
+
+    configEmitter.on('error', err => {
+      logger.info('Heartbeat failed', err)
+    })
+
+  });
   server.on('error', onError);
   server.on('listening', onListening);
-} )
+
+
+})
 
 /**
  * Normalize a port into a number, string, or false.

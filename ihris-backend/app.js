@@ -18,10 +18,19 @@ const { createProxyMiddleware } = require('http-proxy-middleware')
 const cors = require('cors')
 const RedisStore = require('connect-redis')(session)
 
+
+//  register mediator
+const registerMediator = require('openhim-mediator-utils')
+// fetch mediator config 
+const mediatorConfig = require('./config/mediator.json');
+// config
+// const config = require('../modules/config')
+
+
 const app = express()
 
 app.use(cors())
-app.use(function(req, res, next) {
+app.use(function (req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
   res.header('Access-Control-Allow-Methods', 'DELETE, PUT, GET, POST');
   res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
@@ -34,42 +43,48 @@ async function startUp() {
 
   const fs = require('fs')
 
-  if ( process.env.AUTOLOAD_RESOURCE_DIR ) {
+  if (process.env.AUTOLOAD_RESOURCE_DIR) {
     const axios = require('axios')
     const URI = require('urijs')
     const path = require('path')
 
-    logger.info( "Loading Autoload resource directory: " + process.env.AUTOLOAD_RESOURCE_DIR )
-    let files = fs.readdirSync( process.env.AUTOLOAD_RESOURCE_DIR )
+    logger.info("Loading Autoload resource directory: " + process.env.AUTOLOAD_RESOURCE_DIR)
+    let files = fs.readdirSync(process.env.AUTOLOAD_RESOURCE_DIR)
     let server = nconf.get("fhir:base")
-    for ( let file of files ) {
-      if ( file.endsWith('.json') ) {
-        let fullFile = path.format( { dir: process.env.AUTOLOAD_RESOURCE_DIR, base: file } )
-        let data = fs.readFileSync( fullFile )
-        let fhir = JSON.parse( data )
-        if ( fhir.resourceType === "Bundle" &&
-          ( fhir.type === "transaction" || fhir.type === "batch" ) ) {
-          logger.info( "Saving " + fhir.type )
+    for (let file of files) {
+      if (file.endsWith('.json')) {
+        let fullFile = path.format({ dir: process.env.AUTOLOAD_RESOURCE_DIR, base: file })
+        let data = fs.readFileSync(fullFile)
+        let fhir = JSON.parse(data)
+        if (fhir.resourceType === "Bundle" &&
+          (fhir.type === "transaction" || fhir.type === "batch")) {
+          logger.info("Saving " + fhir.type)
           let dest = URI(server).toString()
-          axios.post( dest, fhir ).then( ( res ) => {
-            logger.info( dest+": "+ res.status )
-            logger.info( JSON.stringify( res.data, null, 2 ) )
-          } ).catch( (err) => {
+          axios.post(dest, fhir).then((res) => {
+            logger.info(dest + ": " + res.status)
+            logger.info(JSON.stringify(res.data, null, 2))
+          }).catch((err) => {
             logger.error(err.message)
-          } )
+          })
         } else {
-          logger.info( "Saving " + fhir.resourceType +" - "+fhir.id )
+          logger.info("Saving " + fhir.resourceType + " - " + fhir.id)
           let dest = URI(server).segment(fhir.resourceType).segment(fhir.id).toString()
-          axios.put( dest, fhir ).then( ( res ) => {
-            logger.info( dest+": "+ res.status )
-            logger.info( res.headers['content-location'] )
-          } ).catch( (err) => {
+          axios.put(dest, fhir).then((res) => {
+            logger.info(dest + ": " + res.status)
+            logger.info(res.headers['content-location'])
+          }).catch((err) => {
             logger.error(err.message)
-            logger.error(JSON.stringify(err.response.data,null,2))
-          } )
+            logger.error(JSON.stringify(err.response.data, null, 2))
+          })
         }
       }
     }
+  }
+
+
+  // 
+  if (nconf.get('mediator:register')) {
+    process.env.NODE_TLS_REJECT_UNAUTHORIZED = 0;
   }
 
 
@@ -79,16 +94,16 @@ async function startUp() {
 
   try {
     let reportsRunning = await fhirReports.setup()
-    if ( reportsRunning ) {
+    if (reportsRunning) {
       fhirReports.runReports()
     } else {
       logger.error("Failed to start up reports to ElasticSearch.")
     }
-  } catch( err ) {
-    logger.error( err )
+  } catch (err) {
+    logger.error(err)
   }
 
-  let redisClient = redis.createClient( nconf.get("redis:url") )
+  let redisClient = redis.createClient(nconf.get("redis:url"))
   const store = new RedisStore({
     client: redisClient
   })
@@ -99,7 +114,7 @@ async function startUp() {
   }
 
   const isLoggedIn = (req, res, next) => {
-    if(req.path.startsWith('/config') || req.path.startsWith('/fhir') || req.path.startsWith('/auth/token') ){
+    if (req.path.startsWith('/config') || req.path.startsWith('/fhir') || req.path.startsWith('/auth/token')) {
       return next()
     }
     if (nconf.get('app:idp') === 'keycloak') {
@@ -152,13 +167,13 @@ async function startUp() {
   app.use(morgan('dev'))
 
   // This has to be before the body parser or it won't proxy a POST body
-  app.use('/kibana', createProxyMiddleware( {
+  app.use('/kibana', createProxyMiddleware({
     target: nconf.get('kibana:base') || "http://localhost:5601"
     //headers: { 'kbn-xsrf': true },
     //changeOrigin: true,
     //ws: true,
     //followRedirects: true
-  } ) )
+  }))
 
 
   //const indexRouter = require('./routes/index')
@@ -221,10 +236,41 @@ async function startUp() {
           app.use("/" + mod, reqMod)
         }
       } catch (err) {
-        logger.error("Failed to load module " + mod + " (" + loadModules[mod] + ")",err)
+        logger.error("Failed to load module " + mod + " (" + loadModules[mod] + ")", err)
       }
     }
   }
+
+  // connecting to openhim
+  logger.info("Connecting to openhim console")
+
+  if (nconf.get('mediator:register')) {
+
+    logger.info('Running worker registry as a mediator');
+
+    registerMediator.registerMediator(nconf.get('mediator:api'), mediatorConfig, err => {
+      if (err) {
+        logger.info('Failed to register this mediator, check your config');
+        logger.info(err.stack);
+        process.exit(1);
+      }
+
+      nconf.set('mediator:api:urn', mediatorConfig.urn);
+
+      registerMediator.fetchConfig(nconf.get('mediator:api'), (err, newConfig) => {
+        if (err) {
+          logger.info('Failed to fetch initial config');
+          logger.info(err);
+          process.exit(1);
+        }
+        nconf.set('mediator:api:urn', mediatorConfig.urn);
+        logger.info('Received initial config:', newConfig);
+        logger.info('Successfully registered mediator!');
+
+      })
+    })
+  }
+
   /*
   testMod = fhirModules.require()
   if ( testMod ) app.use( '/mod', testMod )
@@ -249,9 +295,9 @@ module.exports = router
   // Fallback for the vue router using history mode
   // If this causes issues, would need to either
   // server the ui from a subdirectory or change to hash mode
-  app.use( (req,res) => {
+  app.use((req, res) => {
     res.sendFile(path.join(__dirname, 'public/index.html'))
-  } )
+  })
 
   configLoaded = true
 }
