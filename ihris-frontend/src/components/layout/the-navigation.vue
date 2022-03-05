@@ -2,8 +2,9 @@
   <v-navigation-drawer
     app
     clipped
+    permanent
     class="primary darken-1 white--text font-weight-bold"
-    style="z-index: 3"
+    :width="310"
   >
     <v-list shaped nav dark dense v-if="$store.state.user.loggedin">
       <template v-for="item in menu">
