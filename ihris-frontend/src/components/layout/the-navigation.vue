@@ -2,7 +2,6 @@
   <v-navigation-drawer
     app
     clipped
-    permanent
     class="primary darken-1 white--text font-weight-bold"
     style="z-index: 3"
   >
