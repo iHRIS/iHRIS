@@ -47,6 +47,7 @@ app.whenReady().then(() => {
 
     configEmitter.on('error', err => {
       logger.info('Heartbeat failed', err)
+      process.exit(1)
     })
 
   });

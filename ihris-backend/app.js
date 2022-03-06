@@ -82,7 +82,7 @@ async function startUp() {
   }
 
 
-  // 
+  // disable certificate
   if (nconf.get('mediator:register')) {
     process.env.NODE_TLS_REJECT_UNAUTHORIZED = 0;
   }
@@ -202,9 +202,6 @@ async function startUp() {
   }))
   app.use(express.static(path.join(__dirname, 'public')))
 
-
-  //app.use('/', indexRouter)
-
   app.use('/auth', authRouter)
   if (keycloak) {
     app.use(keycloak.middleware());
@@ -271,30 +268,6 @@ async function startUp() {
     })
   }
 
-  /*
-  testMod = fhirModules.require()
-  if ( testMod ) app.use( '/mod', testMod )
-  */
-
-  /*
-  let testStr = `
-var express = require('express')
-var router = express.Router()
-
-router.get('/', (req, res, next) => {
-  res.status(200).json({"string": true, "user":req.user})
-} )
-
-module.exports = router
-`
-
-  const testModule = requireFromString(testStr, "ihris-module-test")
-  app.use( '/mod', testModule )
-  */
-
-  // Fallback for the vue router using history mode
-  // If this causes issues, would need to either
-  // server the ui from a subdirectory or change to hash mode
   app.use((req, res) => {
     res.sendFile(path.join(__dirname, 'public/index.html'))
   })
