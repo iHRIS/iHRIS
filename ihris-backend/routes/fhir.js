@@ -17,6 +17,57 @@ const logger = require('../winston')
 const window = new JSDOM('').window
 const DOMPurify = createDOMPurify(window)
 
+
+
+// access by only the mediator
+router.get("/:resource/:resourceType?", (req, res) => {
+
+  fhirAxios.read(req.params.resource).then((resource) => {
+    return res.status(200).json({
+      success: true,
+      message: "Returned resources successfully",
+      data: resource
+    })
+  }).catch((err) => {
+
+    logger.error(err.message)
+    let outcome = { ...outcomes.ERROR }
+    outcome.issue[0].diagnostics = err.message
+    return res.status(500).json(outcome)
+  })
+
+
+
+})
+
+router.post("/:resource/:resourceType", (req, res) => {
+
+  logger.info('Received a request to add a bundle of resources');
+
+  const resource = req.body;
+
+  if (resource.resourceType === "Bundle" &&
+    (resource.type === "transaction" || resource.type === "batch")) {
+
+    fhirAxios.create(resource).then((resource) => {
+
+      return res.status(200).json({
+        success: 200,
+        message: "Created resources successfully",
+        data: resource
+      })
+
+    })
+
+
+  } else {
+    console.log("Saving " + resource.resourceType + " - " + fhir.id)
+
+  }
+
+
+})
+
 router.get("/:resource/:id?", (req, res, next) => {
   if (req.params.resource.startsWith('$') || (req.params.id && req.params.id.startsWith('$'))) {
     return next()
