@@ -52,13 +52,18 @@ router.post("/:resource/:resourceType", (req, res) => {
     fhirAxios.create(resource).then((resource) => {
 
       return res.status(200).json({
-        success: 200,
+        success: true,
         message: "Created resources successfully",
         data: resource
       })
 
+    }).catch((err) => {
+      return res.status(200).json({
+        success: false,
+        message: "Failed to create resources successfully",
+        data: err
+      })
     })
-
 
   } else {
     console.log("Saving " + resource.resourceType + " - " + fhir.id)
