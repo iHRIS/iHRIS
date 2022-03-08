@@ -22,21 +22,40 @@ const DOMPurify = createDOMPurify(window)
 //access by only the mediator
 router.get("/mediator/:resource?", (req, res) => {
 
-  fhirAxios.read(req.params.resource, req.params.id).then((resource) => {
-    return res.status(200).json({
-      success: true,
-      message: "Returned resources successfully",
-      data: resource
+  if (!req.query) {
+    fhirAxios.read(req.params.resource).then((resource) => {
+      return res.status(200).json({
+        success: true,
+        message: "Returned resources successfully",
+        data: resource
+      })
+    }).catch((err) => {
+
+      logger.error(err.message)
+      let outcome = { ...outcomes.ERROR }
+      outcome.issue[0].diagnostics = err.message
+      return res.status(500).json(outcome)
     })
-  }).catch((err) => {
-
-    logger.error(err.message)
-    let outcome = { ...outcomes.ERROR }
-    outcome.issue[0].diagnostics = err.message
-    return res.status(500).json(outcome)
-  })
-
-
+  }else {
+    fhirAxios.search(req.params.resource, req.query).then((resource) => {
+      // Need to do deeper checking due to possibility of includes
+  
+      return res.status(200).json({
+        success: true,
+        message: "Returned resources successfully",
+        data: resource
+      })
+  
+    }).catch((err) => {
+      /* return response from FHIR server */
+      //return res.status( err.response.status ).json( err.response.data )
+      /* for custom responses */
+      logger.error(err.message)
+      let outcome = { ...outcomes.ERROR }
+      outcome.issue[0].diagnostics = err.message
+      return res.status(500).json(outcome)
+    })
+  }
 
 })
 
