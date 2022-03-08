@@ -175,9 +175,9 @@ Usage:          #example
 * extension[display].extension[filter][0].valueString = "Name|name:contains"
 * extension[display].extension[filter][1].valueString = "Gender|gender|http://hl7.org/fhir/ValueSet/administrative-gender"
 * extension[display].extension[filter][2].valueString = "Birth Date|Practitioner.birthDate"
-// * extension[display].extension[add].extension[url].valueUrl = "/questionnaire/ihris-practitioner/practitioner"
-// * extension[display].extension[add].extension[icon].valueString = "mdi-account-plus"
-// * extension[display].extension[add].extension[class].valueString = "accent"
+* extension[display].extension[add].extension[url].valueUrl = "/questionnaire/ihris-practitioner/practitioner"
+* extension[display].extension[add].extension[icon].valueString = "mdi-account-plus"
+* extension[display].extension[add].extension[class].valueString = "accent"
 * extension[section][0].extension[title].valueString = "NHWR Health Worker"
 * extension[section][0].extension[description].valueString = "Primary demographic details"
 * extension[section][0].extension[name].valueString = "Practitioner"
@@ -447,6 +447,31 @@ Usage:          #example
 * extension[section][0].extension[field][4].valueString = "PractitionerRole.specialty"
 * extension[section][0].extension[field][5].valueString = "PractitionerRole.identifier"
 
+
+
+// ihris page logs
+Instance:       ihris-page-auditevent
+InstanceOf:     IhrisPage
+Title:          "AuditEvent"
+Usage:          #example
+* code = IhrisResourceCodeSystem#page
+* extension[display].extension[resource].valueReference = Reference(StructureDefinition/ihris-auditevent)
+* extension[display].extension[search][0].valueString = "Id|AuditEvent.id"
+* extension[display].extension[search][1].valueString = "Action|AuditEvent.action"
+* extension[display].extension[search][2].valueString = "Outcome|AuditEvent.outcome"
+* extension[display].extension[search][3].valueString = "Recorded|AuditEvent.recorded"
+* extension[display].extension[filter][0].valueString = "Id|AudiEvent:contains"
+* extension[display].extension[add].extension[url].valueUrl = "/questionnaire/ihris-practitioner/practitioner"
+* extension[display].extension[add].extension[icon].valueString = "mdi-account-plus"
+* extension[display].extension[add].extension[class].valueString = "accent"
+* extension[section][0].extension[title].valueString = "NHWR Audit Events"
+* extension[section][0].extension[description].valueString = "Primary demographic details"
+* extension[section][0].extension[name].valueString = "AuditEvent"
+* extension[section][0].extension[field][0].valueString = "AuditEvent.id"
+* extension[section][0].extension[field][1].valueString = "AuditEvent.action"
+* extension[section][0].extension[field][2].valueString = "AuditEvent.outcome"
+* extension[section][0].extension[field][3].valueString = "AuditEvent.recorded"
+
 Instance:       ihris-page-job
 InstanceOf:     IhrisPage
 Title:          "NHWR Job CodeSystem Page"
@@ -696,3 +721,8 @@ Usage:          #example
 * extension[section][0].extension[field][0].valueString = "CodeSystem.display"
 * extension[section][0].extension[field][1].valueString = "CodeSystem.code"
 * extension[section][0].extension[field][2].valueString = "CodeSystem.definition"
+
+
+
+
+
