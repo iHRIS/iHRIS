@@ -1,20 +1,20 @@
 Instance:       ihris-es-report-staff
 InstanceOf:     IhrisRelationship
-Title:          "Staff Relationship"
+Title:          "NHWR Relationship"
 Usage:          #example
 
 * code.text = "iHRISRelationship"
 * code.coding = #iHRISRelationship
 * subject.reference = "StructureDefinition/ihris-practitioner"
 * extension[reportdetails].extension[name].valueString = "practitioner"
-* extension[reportdetails].extension[label].valueString = "Staff Report"
+* extension[reportdetails].extension[label].valueString = "NHWR Report"
 * extension[reportdetails].extension[resource].valueString = "Practitioner"
 * extension[reportdetails].extension[query].valueString = "active=true"
 * extension[reportdetails].extension[displayCheckbox].valueBoolean = true
 * extension[reportdetails].extension[locationBasedConstraint].valueBoolean = true
-* extension[reportdetails].extension[reportelement][0].extension[label].valueString = "employeeId"
-* extension[reportdetails].extension[reportelement][0].extension[name].valueString = "identifier.where(type.coding.where(code='employeeId')).value"
-* extension[reportdetails].extension[reportelement][0].extension[display].valueString = "Employee Id"
+* extension[reportdetails].extension[reportelement][0].extension[label].valueString = "nationalId"
+* extension[reportdetails].extension[reportelement][0].extension[name].valueString = "identifier.where(type.coding.where(code='NI')).value"
+* extension[reportdetails].extension[reportelement][0].extension[display].valueString = "National Id"
 * extension[reportdetails].extension[reportelement][0].extension[filter].valueBoolean = true
 * extension[reportdetails].extension[reportelement][0].extension[dropDownFilter].valueBoolean = false
 
