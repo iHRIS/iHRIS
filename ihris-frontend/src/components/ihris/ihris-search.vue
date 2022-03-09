@@ -4,22 +4,28 @@
       <v-card-title>
         Search {{ label }}
         <v-spacer></v-spacer>
-        <v-btn :class="addLink ? addLink.class || 'primary' : 'primary'" :to="addLink ? addLink.url : '/resource/add/'+page">
-          <v-icon v-if="addLink && addLink.icon">{{ addLink.icon }}</v-icon>
-          <v-icon v-else>mdi-database-plus</v-icon>
-          Add {{label}}
-        </v-btn>
+
+        <div v-if="page === 'practitioner'"></div>
+        <div v-else>
+          <v-btn
+            :class="addLink ? addLink.class || 'primary' : 'primary'"
+            :to="addLink ? addLink.url : '/resource/add/' + page"
+          >
+            <v-icon v-if="addLink && addLink.icon">{{ addLink.icon }}</v-icon>
+            <v-icon v-else>mdi-database-plus</v-icon>
+
+            Add {{ label }}
+          </v-btn>
+        </div>
       </v-card-title>
       <v-card-title>
         <slot></slot>
       </v-card-title>
-      <v-card-subtitle
-        v-if="error_message"
-        class="white--text error"
-      >{{ error_message }}</v-card-subtitle>
+      <v-card-subtitle v-if="error_message" class="white--text error">{{
+        error_message
+      }}</v-card-subtitle>
       <v-card-text>
-        <v-container>
-        </v-container>
+        <v-container> </v-container>
         <v-data-table
           style="cursor: pointer"
           :headers="headers"
@@ -27,22 +33,29 @@
           item-key="id"
           :options.sync="options"
           :server-items-length="total"
-          :footer-props="{ 'items-per-page-options': [5,10,20,50] }"
+          :footer-props="{ 'items-per-page-options': [5, 10, 20, 50] }"
           :loading="loading"
           class="elevation-1"
           @click:row="clickIt"
         ></v-data-table>
       </v-card-text>
     </v-card>
-
   </v-container>
 </template>
 
 <script>
 export default {
   name: "ihris-search",
-  props: ["profile", "fields", "label", "terms", "page", "resource", "add-link"],
-  data: function() {
+  props: [
+    "profile",
+    "fields",
+    "label",
+    "terms",
+    "page",
+    "resource",
+    "add-link",
+  ],
+  data: function () {
     return {
       debug: "",
       headers: [],
@@ -53,7 +66,7 @@ export default {
       prevPage: -1,
       link: [],
       error_message: null,
-      update_again: { rerun: false, restart: false }
+      update_again: { rerun: false, restart: false },
     };
   },
   watch: {
@@ -61,42 +74,42 @@ export default {
       handler() {
         this.getData(true);
       },
-      deep: true
+      deep: true,
     },
     options: {
       handler() {
         this.getData();
       },
-      deep: true
-    }
+      deep: true,
+    },
   },
-  created: function() {
+  created: function () {
     for (let field of this.fields) {
       this.headers.push({ text: field[0], value: field[1] });
     }
   },
-  mounted: function() {
+  mounted: function () {
     this.getData(true);
   },
   methods: {
-    clickIt: function(record) {
+    clickIt: function (record) {
       this.$router.push({
         name: "resource_view",
-        params: { page: this.page, id: record.id }
+        params: { page: this.page, id: record.id },
       });
     },
     checkRerun() {
-      if ( !this.loading && this.update_again.rerun ) {
-        this.getData( this.update_again.restart )
-        this.update_again = { rerun: false, restart: false }
+      if (!this.loading && this.update_again.rerun) {
+        this.getData(this.update_again.restart);
+        this.update_again = { rerun: false, restart: false };
       }
     },
     getData(restart) {
       //console.log("getting data",restart)
-      if ( this.loading ) {
-        this.update_again.rerun = true
-        this.update_again.restart = this.update_again.restart || restart
-        return
+      if (this.loading) {
+        this.update_again.rerun = true;
+        this.update_again.restart = this.update_again.restart || restart;
+        return;
       }
       this.loading = true;
       this.error_message = null;
@@ -104,22 +117,24 @@ export default {
       if (restart) this.options.page = 1;
       if (this.options.page > 1) {
         if (this.options.page === this.prevPage - 1) {
-          url = this.link.find(link => link.relation === "previous").url;
+          url = this.link.find((link) => link.relation === "previous").url;
         } else if (this.options.page === this.prevPage + 1) {
-          url = this.link.find(link => link.relation === "next").url;
+          url = this.link.find((link) => link.relation === "next").url;
         }
         // Should make this smarter to keep the _getpages parameter,
         // but the issue is with tracking permissions on the resource
-        url = url.replace(/_getpages=[^&]*&*/, "").replace("/fhir?","/fhir/"+this.resource+"?")
+        url = url
+          .replace(/_getpages=[^&]*&*/, "")
+          .replace("/fhir?", "/fhir/" + this.resource + "?");
         url = url.substring(url.indexOf("/fhir/"));
 
         //some of the hapi instances requires _total=accurate to always be available for them to return total resources
-        if(url.indexOf('_total=accurate') === -1) {
-          url = url + '&_total=accurate'
+        if (url.indexOf("_total=accurate") === -1) {
+          url = url + "&_total=accurate";
         }
         //add profile to url
-        if(this.profile){
-          url = url + '&_profile=' + this.profile
+        if (this.profile) {
+          url = url + "&_profile=" + this.profile;
         }
       }
       if (url === "") {
@@ -143,11 +158,11 @@ export default {
           this.profile;
         let sTerms = Object.keys(this.terms);
         for (let term of sTerms) {
-          if ( Array.isArray( this.terms[term] ) ) {
-            if ( this.terms[term].length > 0 ) {
-              url += "&" + term + "=" + this.terms[term].join(',')
+          if (Array.isArray(this.terms[term])) {
+            if (this.terms[term].length > 0) {
+              url += "&" + term + "=" + this.terms[term].join(",");
             }
-          } else if ( this.terms[term] ) {
+          } else if (this.terms[term]) {
             url += "&" + term + "=" + this.terms[term];
           }
         }
@@ -155,36 +170,47 @@ export default {
       }
       this.prevPage = this.options.page;
       //console.log("fetching",url)
-      fetch(url).then(response => {
-        response.json().then(async (data) => {
-          this.results = [];
-          if (data.total > 0) {
-            this.link = data.link;
-            for (let entry of data.entry) {
-              let result = { id: entry.resource.id };
-              for (let field of this.fields) {
-                let fieldDisplay = this.$fhirpath.evaluate( entry.resource, field[1] );
-                result[field[1]] = await this.$fhirutils.lookup( fieldDisplay[0], field[2] )
+      fetch(url)
+        .then((response) => {
+          response
+            .json()
+            .then(async (data) => {
+              this.results = [];
+              if (data.total > 0) {
+                this.link = data.link;
+                for (let entry of data.entry) {
+                  let result = { id: entry.resource.id };
+                  for (let field of this.fields) {
+                    let fieldDisplay = this.$fhirpath.evaluate(
+                      entry.resource,
+                      field[1]
+                    );
+                    result[field[1]] = await this.$fhirutils.lookup(
+                      fieldDisplay[0],
+                      field[2]
+                    );
+                  }
+                  this.results.push(result);
+                }
               }
-              this.results.push(result);
-            }
-          }
-          this.total = data.total;
-          this.loading = false;
-          this.checkRerun()
-        }).catch(err => {
+              this.total = data.total;
+              this.loading = false;
+              this.checkRerun();
+            })
+            .catch((err) => {
+              this.loading = false;
+              this.error_message = "Unable to load results.";
+              this.checkRerun();
+              console.log(err);
+            });
+        })
+        .catch((err) => {
           this.loading = false;
           this.error_message = "Unable to load results.";
-          this.checkRerun()
+          this.checkRerun();
           console.log(err);
         });
-      }).catch(err => {
-        this.loading = false;
-        this.error_message = "Unable to load results.";
-        this.checkRerun()
-        console.log(err);
-      });
-    }
-  }
+    },
+  },
 };
 </script>
