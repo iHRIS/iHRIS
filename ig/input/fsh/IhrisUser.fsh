@@ -1,7 +1,7 @@
 Profile:        IhrisPersonUser
 Parent:         Person
 Id:             ihris-person-user
-Title:          "NHWR User"
+Title:          "System User"
 Description:    "NHWR profile of the Person resource to manage user access."
 * name 1..1 MS
 * name ^label = "Name"
@@ -61,7 +61,7 @@ Instance:       ihris-user-admin
 InstanceOf:     IhrisPersonUser
 Title:          "NHWR Admin User"
 Usage:          #example
-* telecom.value = "admin@nhwr.org"
+* telecom.value = "admin@ihris.org"
 * name.text = "NHWR Admin"
 * identifier[0].system = "google"
 * identifier[0].value = "12345"
@@ -76,7 +76,7 @@ Usage:          #example
 * code = IhrisResourceCodeSystem#page
 * extension[display].extension[resource].valueReference = Reference(StructureDefinition/ihris-person-user)
 * extension[display].extension[link][0].extension[field].valueString = ""
-* extension[display].extension[link][0].extension[text].valueString = "Add Another NHWR User"
+* extension[display].extension[link][0].extension[text].valueString = "Add Another User"
 * extension[display].extension[link][0].extension[button].valueBoolean = true
 * extension[display].extension[link][0].extension[icon].valueString = "mdi-account-arrow-right"
 * extension[display].extension[link][0].extension[url].valueUrl = "/questionnaire/ihris-user/user"
@@ -92,7 +92,7 @@ Usage:          #example
 * extension[display].extension[add].extension[icon].valueString = "mdi-account-plus"
 * extension[display].extension[add].extension[class].valueString = "accent"
 * extension[section][0].extension[title].valueString = "Person"
-* extension[section][0].extension[description].valueString = "NHWR System User details"
+* extension[section][0].extension[description].valueString = "System User details"
 * extension[section][0].extension[name].valueString = "Person"
 * extension[section][0].extension[field][0].valueString = "Person.name"
 * extension[section][0].extension[field][1].valueString = "Person.telecom"
@@ -188,7 +188,7 @@ Instance:       IhrisChangePassword
 InstanceOf:     IhrisQuestionnaire
 Usage:          #definition
 * title = "NHWR Change Password Workflow"
-* description = "NHWR workflow to Change Users Password"
+* description = "iHRIS workflow to Change Users Password"
 * id = "ihris-change-password"
 * url = "http://ihris.org/fhir/Questionnaire/ihris-change-password"
 * name = "ihris-change-password"

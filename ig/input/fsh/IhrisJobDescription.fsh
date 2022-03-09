@@ -32,13 +32,20 @@ Description:    "NHWR profile of Practitioner."
 * period.end 0..1 MS
 * period.end ^label = "End Date"
 * extension contains
+    IhrisPractitionerRoleSalary named salary 0..1 MS and
     IhrisPractitionerRoleShift named shift 0..1 MS and
     IhrisPractitionerRoleEmploymentStatus named employmentStatus 0..1 MS and
     IhrisPractitionerRoleJobType named jobType 0..1 MS and
     IhrisPractitionerRoleFirstEmploymentDate named firstEmploymentDate 1..1 MS and
     IhrisPractitionerRoleReasonDeparture named reasonForDepature 0..1 MS and
     IhrisPractitionerRolePositionStatus named positionStatus 1..1 MS and
-    IhrisPractitionerRoleJobInformationRemark named jobInformationRemark 0..1 MS
+    IhrisPractitionerRoleJobInformationRemark named jobInformationRemark 0..1 MS and
+    IhrisPractitionerRoleSalaryScale named salaryScale 0..1 MS 
+* extension[salary].valueMoney MS
+* extension[salary] ^label = "Salary"
+* extension[salaryScale].valueCoding MS
+* extension[salaryScale] ^label = "Salary Scale"
+
 * extension[shift].valueCoding MS
 * extension[shift] ^label = "Shift"
 * extension[employmentStatus].valueCoding MS
@@ -53,6 +60,41 @@ Description:    "NHWR profile of Practitioner."
 * extension[reasonForDepature] ^label = "Reason for Departure"
 * extension[jobInformationRemark].valueString MS
 * extension[jobInformationRemark] ^label = "Remark"
+
+
+Extension:      IhrisPractitionerRoleSalaryScale
+Id:             ihris-practitionerrole-salary-scale
+Title:          "NHWR Salary Scale"
+Description:    "NHWR extension for Job Description Salary Scale."
+* ^context.type = #element
+* ^context.expression = "PractitionerRole"
+* value[x] only Coding
+* valueCoding 0..1 MS
+* valueCoding ^label = "Salary Scale"
+* valueCoding from IhrisSalaryScaleValueSet (required)
+
+CodeSystem:      IhrisSalaryScaleCodeSystem
+Id:              ihris-salary-scale-codesystem
+Title:           "Salary Scale"
+* ^date = "2020-09-29T08:41:04.362Z"
+* ^version = "0.3.0"
+
+ValueSet:         IhrisSalaryScaleValueSet
+Id:               ihris-salary-scale-valueset
+Title:            "iHRIS Salary Scale ValueSet"
+* ^date = "2020-09-29T08:41:04.362Z"
+* ^version = "0.3.0"
+* codes from system IhrisSalaryScaleCodeSystem
+
+Extension:      IhrisPractitionerRoleSalary
+Id:             ihris-practitionerrole-salary
+Title:          "NHWR Job Description salary"
+Description:    "NHWR extension for Job Information Salary."
+* ^context.type = #element
+* ^context.expression = "PractitionerRole"
+* value[x] only Money
+* valueMoney 0..1 MS
+* valueMoney ^label = "Salary"
 
 Extension:      IhrisPractitionerRoleShift
 Id:             ihris-practitionerrole-shift

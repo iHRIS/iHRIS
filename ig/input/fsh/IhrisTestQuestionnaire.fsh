@@ -2,7 +2,7 @@ Instance:       IhrisTestQuestionnaire
 InstanceOf:     Questionnaire
 Usage:          #definition
 * title = "NHWR Test Questionnaire"
-* description = "iHRIS Test initial data entry questionnaire."
+* description = "NHWR Test initial data entry questionnaire."
 * id = "ihris-test"
 * url = "http://ihris.org/fhir/Questionnaire/ihris-test"
 * name = "ihris-test"

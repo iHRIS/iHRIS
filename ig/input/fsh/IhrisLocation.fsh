@@ -1,7 +1,7 @@
 Profile:        IhrisJurisdiction
 Parent:         Location
 Id:             ihris-jurisdiction
-Title:          "NHWR Jurisdiction"
+Title:          "Jurisdiction"
 Description:    "NHWR Profile of Locations to manage jurisdictions."
 * type 1..1 MS
 * type ^label = "Location Type"

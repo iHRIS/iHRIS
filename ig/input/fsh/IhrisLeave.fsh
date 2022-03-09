@@ -74,8 +74,8 @@ Title:            "iHRIS leave Type ValueSet"
 Instance:       IhrisPractitionerWorkflowLeave
 InstanceOf:     IhrisQuestionnaire
 Usage:          #definition
-* title = "NHWR Leave Workflow"
-* description = "NHWR workflow to record a leave"
+* title = "iHRIS Leave Workflow"
+* description = "iHRIS workflow to record a leave"
 * id = "ihris-leave"
 * url = "http://ihris.org/fhir/Questionnaire/ihris-leave"
 * name = "ihris-leave"

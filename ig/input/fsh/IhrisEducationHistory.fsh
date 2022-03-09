@@ -82,7 +82,7 @@ Title:           "Degree"
 
 ValueSet:         IhrisDegreeValueSet
 Id:               ihris-degree-valueset
-Title:            "iHRIS Degree ValueSet"
+Title:            "NHWR Degree ValueSet"
 * ^date = "2020-11-10T08:41:04.362Z"
 * ^version = "0.3.0"
 * codes from system IhrisDegree
@@ -190,8 +190,8 @@ Title:            "iHRIS Institution Type Value Set"
 Instance:       IhrisPractitionerWorkflowEducationHistory
 InstanceOf:      Questionnaire
 Usage:          #definition
-* title = "NHWR Education History Workflow"
-* description = "NHWR workflow to record a Education History"
+* title = "iHRIS Education History Workflow"
+* description = "iHRIS workflow to record a Education History"
 * id = "ihris-education-history"
 * url = "http://ihris.org/fhir/Questionnaire/ihris-education-history"
 * name = "ihris-education-history"
@@ -288,7 +288,7 @@ Usage:          #example
 
 Instance:       ihris-page-institution
 InstanceOf:     IhrisPage
-Title:          "NHWR Institution CodeSystem Page"
+Title:          "iHRIS Institution CodeSystem Page"
 Usage:          #example
 * code = IhrisResourceCodeSystem#page
 * extension[display].extension[resource].valueReference = Reference(CodeSystem/ihris-institution)

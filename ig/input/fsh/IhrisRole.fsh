@@ -428,7 +428,6 @@ Usage:          #example
 * extension[attributes][0].extension[constraint].valueString = "category.exists(coding.exists(code = 'open'))"
 * extension[compositeTask][0].valueReference = Reference(Basic/ihris-task-read-document-reference)
 
-// search roles page
 Instance:         ihris-page-role
 InstanceOf:       IhrisPage
 Title:            "NHWR Roles" 
@@ -500,7 +499,7 @@ Usage:          #definition
 
 Instance:         ihris-page-task
 InstanceOf:       IhrisPage
-Title:            "iHRIS Tasks" 
+Title:            "NHWR Tasks" 
 Usage:            #example
 * code = IhrisResourceCodeSystem#page
 * extension[display].extension[resource].valueReference = Reference(StructureDefinition/ihris-task)

@@ -1,15 +1,15 @@
-Instance:       ihris-es-report-staff
+Instance:       ihris-es-report-staff-test
 InstanceOf:     IhrisRelationship
-Title:          "Staff Relationship"
+Title:          "Staff Relationship Test"
 Usage:          #example
 
 * code.text = "iHRISRelationship"
 * code.coding = #iHRISRelationship
 * subject.reference = "StructureDefinition/ihris-practitioner"
-* extension[reportdetails].extension[name].valueString = "practitioner"
+* extension[reportdetails].extension[name].valueString = "employee"
 * extension[reportdetails].extension[label].valueString = "Staff Report"
 * extension[reportdetails].extension[resource].valueString = "Practitioner"
-* extension[reportdetails].extension[query].valueString = "active=true"
+//* extension[reportdetails].extension[query].valueString = "active=true"
 * extension[reportdetails].extension[displayCheckbox].valueBoolean = true
 * extension[reportdetails].extension[locationBasedConstraint].valueBoolean = true
 * extension[reportdetails].extension[reportelement][0].extension[label].valueString = "employeeId"

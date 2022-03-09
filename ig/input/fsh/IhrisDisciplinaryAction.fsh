@@ -78,7 +78,7 @@ Instance:       IhrisPractitionerWorkflowDiscipline
 InstanceOf:     IhrisQuestionnaire
 Usage:          #definition
 * title = "NHWR Discipline Workflow"
-* description = "NHWR workflow to record a Discipline"
+* description = "iHRIS workflow to record a Discipline"
 * id = "ihris-discipline"
 * url = "http://ihris.org/fhir/Questionnaire/ihris-discipline"
 * name = "ihris-discipline"

@@ -45,4 +45,4 @@ Description:    "NHWR profile of Practitioner Role."
 * specialty.coding ^label = "Specialty"
 * location 1..1 MS 
 * location ^label = "Facility"
-* location only Reference(IhrisFacility)
+* location only Reference(IhrisJurisdiction)

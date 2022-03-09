@@ -174,11 +174,10 @@ Usage:          #example
 * extension[display].extension[search][3].valueString = "Gender|Practitioner.gender|http://hl7.org/fhir/administrative-gender"
 * extension[display].extension[filter][0].valueString = "Name|name:contains"
 * extension[display].extension[filter][1].valueString = "Gender|gender|http://hl7.org/fhir/ValueSet/administrative-gender"
-* extension[display].extension[filter][2].valueString = "Birth Date|Practitioner.birthDate"
 * extension[display].extension[add].extension[url].valueUrl = "/questionnaire/ihris-practitioner/practitioner"
 * extension[display].extension[add].extension[icon].valueString = "mdi-account-plus"
 * extension[display].extension[add].extension[class].valueString = "accent"
-* extension[section][0].extension[title].valueString = "NHWR Health Worker"
+* extension[section][0].extension[title].valueString = "Health Worker"
 * extension[section][0].extension[description].valueString = "Primary demographic details"
 * extension[section][0].extension[name].valueString = "Practitioner"
 * extension[section][0].extension[field][0].valueString = "Practitioner.name"
@@ -256,12 +255,12 @@ Usage:          #example
 * extension[section][5].extension[resource].extension[column][4].extension[field].valueString = "extension.where(url='http://ihris.org/fhir/StructureDefinition/ihris-leave').extension.where(url='period').valuePeriod.end"
 * extension[section][5].extension[resource].extension[column][5].extension[header].valueString = "Actions"
 * extension[section][5].extension[resource].extension[column][5].extension[field].valueString = "_action"
-* extension[section][5].extension[resource].extension[action][0].extension[link].valueString = "/questionnaire/ihris-leave/practitioner?practitioner=FHIRID"
+* extension[section][5].extension[resource].extension[action][0].extension[link].valueString = "/questionnaire/ihris-leave/leave?practitioner=FHIRID"
 * extension[section][5].extension[resource].extension[action][0].extension[text].valueString = "Add Leave"
 * extension[section][5].extension[resource].extension[action][0].extension[row].valueBoolean = false
 * extension[section][5].extension[resource].extension[action][0].extension[emptyDisplay].valueBoolean = true
 * extension[section][5].extension[resource].extension[action][0].extension[class].valueString = "primary"
-* extension[section][5].extension[resource].extension[action][1].extension[link].valueString = "/resource/view/basicleave/ITEMID"
+* extension[section][5].extension[resource].extension[action][1].extension[link].valueString = "/resource/view/leave/ITEMID"
 * extension[section][5].extension[resource].extension[action][1].extension[text].valueString = "View"
 * extension[section][5].extension[resource].extension[action][1].extension[row].valueBoolean = true
 * extension[section][5].extension[resource].extension[action][1].extension[class].valueString = "primary"
@@ -281,7 +280,7 @@ Usage:          #example
 * extension[section][6].extension[resource].extension[column][3].extension[field].valueString = "extension.where(url='http://ihris.org/fhir/StructureDefinition/ihris-performance').extension.where(url='period').valuePeriod.end"
 * extension[section][6].extension[resource].extension[column][4].extension[header].valueString = "Actions"
 * extension[section][6].extension[resource].extension[column][4].extension[field].valueString = "_action"
-* extension[section][6].extension[resource].extension[action][0].extension[link].valueString = "/questionnaire/ihris-performance/practitioner?practitioner=FHIRID"
+* extension[section][6].extension[resource].extension[action][0].extension[link].valueString = "/questionnaire/ihris-performance/performance?practitioner=FHIRID"
 * extension[section][6].extension[resource].extension[action][0].extension[text].valueString = "Add Perfromamce Evaluation"
 * extension[section][6].extension[resource].extension[action][0].extension[row].valueBoolean = false
 * extension[section][6].extension[resource].extension[action][0].extension[emptyDisplay].valueBoolean = true
@@ -447,31 +446,6 @@ Usage:          #example
 * extension[section][0].extension[field][4].valueString = "PractitionerRole.specialty"
 * extension[section][0].extension[field][5].valueString = "PractitionerRole.identifier"
 
-
-
-// ihris page logs
-Instance:       ihris-page-auditevent
-InstanceOf:     IhrisPage
-Title:          "AuditEvent"
-Usage:          #example
-* code = IhrisResourceCodeSystem#page
-* extension[display].extension[resource].valueReference = Reference(StructureDefinition/ihris-auditevent)
-* extension[display].extension[search][0].valueString = "Id|AuditEvent.id"
-* extension[display].extension[search][1].valueString = "Action|AuditEvent.action"
-* extension[display].extension[search][2].valueString = "Outcome|AuditEvent.outcome"
-* extension[display].extension[search][3].valueString = "Recorded|AuditEvent.recorded"
-* extension[display].extension[filter][0].valueString = "Id|AudiEvent:contains"
-* extension[display].extension[add].extension[url].valueUrl = "/questionnaire/ihris-practitioner/practitioner"
-* extension[display].extension[add].extension[icon].valueString = "mdi-account-plus"
-* extension[display].extension[add].extension[class].valueString = "accent"
-* extension[section][0].extension[title].valueString = "NHWR Audit Events"
-* extension[section][0].extension[description].valueString = "Primary demographic details"
-* extension[section][0].extension[name].valueString = "AuditEvent"
-* extension[section][0].extension[field][0].valueString = "AuditEvent.id"
-* extension[section][0].extension[field][1].valueString = "AuditEvent.action"
-* extension[section][0].extension[field][2].valueString = "AuditEvent.outcome"
-* extension[section][0].extension[field][3].valueString = "AuditEvent.recorded"
-
 Instance:       ihris-page-job
 InstanceOf:     IhrisPage
 Title:          "NHWR Job CodeSystem Page"
@@ -625,7 +599,7 @@ InstanceOf:     IhrisPage
 Title:          "NHWR Salary Scale CodeSystem Page"
 Usage:          #example
 * code = IhrisResourceCodeSystem#page
-* extension[display].extension[resource].valueReference = Reference(CodeSystem/ihris-salary-scale-codesystem)
+* extension[display].extension[resource].valueReference = Reference(CodeSystem/ihris-salary-grade)
 * extension[display].extension[search][0].valueString = "Code|code"
 * extension[display].extension[search][1].valueString = "Display|display"
 * extension[display].extension[field][0].extension[path].valueString = "CodeSystem.code"
@@ -721,8 +695,3 @@ Usage:          #example
 * extension[section][0].extension[field][0].valueString = "CodeSystem.display"
 * extension[section][0].extension[field][1].valueString = "CodeSystem.code"
 * extension[section][0].extension[field][2].valueString = "CodeSystem.definition"
-
-
-
-
-

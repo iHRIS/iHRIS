@@ -100,6 +100,8 @@ Description:    "NHWR profile of Practitioner."
     IhrisPractitionerMaritalStatus named maritalStatus 0..1 and
     IhrisPractitionerDependents named dependents 0..1
 * extension[residence].valueReference.reference MS
+* active 1..1 MS
+* active ^label = "Active"
 
 Extension:      IhrisPractitionerLanguageProficiency
 Id:             ihris-practitioner-language-proficiency
@@ -288,6 +290,12 @@ Usage:          #definition
 * item[0].item[3].required = false
 * item[0].item[3].repeats = false
 
+* item[0].item[4].linkId = "Practitioner.active"
+* item[0].item[4].definition = "http://ihris.org/fhir/StructureDefinition/ihris-practitioner#Practitioner.active"
+* item[0].item[4].text = "Active"
+* item[0].item[4].type = #boolean
+* item[0].item[4].required = true
+
 * item[1].linkId = "__Practitioner:contact"
 * item[1].definition = "http://ihris.org/fhir/StructureDefinition/ihris-practitioner"
 * item[1].text = "Contact Details|Address, email, phone numbers"
@@ -455,7 +463,7 @@ Usage:          #definition
 * item[2].item[3].required = false
 * item[2].item[3].repeats = false
 
-* item[2].item[4].linkId = "PractitionerRole.location"
+* item[2].item[4].linkId = "PractitionerRole.location[0]"
 * item[2].item[4].definition = "http://ihris.org/fhir/StructureDefinition/ihris-practitioner-role#PractitionerRole.location"
 * item[2].item[4].text = "Facility"
 * item[2].item[4].type = #reference
@@ -519,9 +527,9 @@ Usage:          #definition
 * item[0].item[0].repeats = false
 
 * item[0].item[1].linkId = "departure"
-* item[0].item[1].text = "Reason For Depature"
+* item[0].item[1].text = "Reason For Departure"
 * item[0].item[1].type = #choice
-* item[0].item[1].answerValueSet = "http://ihris.org/fhir/ValueSet/ihris-reason-depature-valueset"
+* item[0].item[1].answerValueSet = "http://ihris.org/fhir/ValueSet/ihris-reason-departure-valueset"
 * item[0].item[1].required = true
 * item[0].item[1].repeats = false
 
@@ -538,7 +546,7 @@ Instance:       IhrisPractitionerWorkflowPromotion
 InstanceOf:     IhrisQuestionnaire
 Usage:          #definition
 * title = "NHWR End Role Workflow"
-* description = "NHWR workflow to record a promotion"
+* description = "iHRIS workflow to record a promotion"
 * id = "ihris-promotion"
 * url = "http://ihris.org/fhir/Questionnaire/ihris-promotion"
 * name = "ihris-promotion"
@@ -592,7 +600,7 @@ Usage:          #definition
 * item[0].item[1].item[1].linkId = "salaryScale"
 * item[0].item[1].item[1].text = "New Salary Scale"
 * item[0].item[1].item[1].type = #choice
-* item[0].item[1].item[1].answerValueSet = "http://ihris.org/fhir/ValueSet/ihris-salary-scale-valueset"
+* item[0].item[1].item[1].answerValueSet = "http://ihris.org/fhir/ValueSet/ihris-salary-grade"
 * item[0].item[1].item[1].required = false
 * item[0].item[1].item[1].repeats = false
 

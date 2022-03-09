@@ -56,7 +56,7 @@ Instance:       IhrisPractitionerWorkflowPerformance
 InstanceOf:      Questionnaire
 Usage:          #definition
 * title = "NHWR Performance Workflow"
-* description = "iHRIS workflow to record a Performance"
+* description = "NHWR workflow to record a Performance"
 * id = "ihris-performance"
 * url = "http://ihris.org/fhir/Questionnaire/ihris-performance"
 * name = "ihris-performance"

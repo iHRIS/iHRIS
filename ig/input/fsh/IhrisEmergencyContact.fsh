@@ -2,7 +2,7 @@ Profile:        IhrisBasicEmergency
 Parent:         IhrisPractitionerBasic
 Id:             ihris-basic-emergency
 Title:          "Emergency Information"
-Description:    "iHRIS Profile of the Basic resource for Emergency."
+Description:    "NHWR Profile of the Basic resource for Emergency."
 * extension[practitioner].valueReference 1..1 MS
 * extension[practitioner].valueReference ^label = "Health Worker"
 * extension contains
@@ -173,7 +173,7 @@ Usage:          #example
 * code = IhrisResourceCodeSystem#page
 * extension[display].extension[resource].valueReference = Reference(StructureDefinition/ihris-basic-emergency)
 * extension[display].extension[link][0].extension[field].valueString = "Basic.extension.where(url='http://ihris.org/fhir/StructureDefinition/ihris-practitioner-reference').valueReference.reference"
-* extension[display].extension[link][0].extension[text].valueString = "View NHWR Health Worker"
+* extension[display].extension[link][0].extension[text].valueString = "View Health Worker"
 * extension[display].extension[link][0].extension[button].valueBoolean = true
 * extension[display].extension[link][0].extension[icon].valueString = "mdi-account-arrow-right"
 * extension[display].extension[link][0].extension[url].valueUrl = "/resource/view/practitioner/FIELD"
