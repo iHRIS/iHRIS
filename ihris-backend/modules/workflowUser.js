@@ -13,7 +13,7 @@ let locationRoleID = undefined
 const workflowUser = {
   process: ( req ) => {
 
-    // console.log("resqquest",JSON.stringify(req.body,null,2))
+    console.log("resqquest",JSON.stringify(req.body,null,2))
 
     return new Promise( async (resolve, reject) => {
       try {
@@ -100,23 +100,23 @@ const workflowUser = {
                       extension:relatedExt
                               })
                     }
-                    if( req.body.item[0].item[4].linkId === "role" 
-                    && req.body.item[0].item[4].answer 
-                    && req.body.item[0].item[4].answer[0] 
-                    && req.body.item[0].item[4].answer[0].valueReference) { 
-                      extensions.push({ url: "http://ihris.org/fhir/StructureDefinition/ihris-assign-role",
-                      valueReference: req.body.item[0].item[4].answer[0].valueReference
-                      })
-                    }
-                    if( req.body.item[0].item[6].linkId === "password" 
+                    if( req.body.item[0].item[6].linkId === "role" 
                     && req.body.item[0].item[6].answer 
                     && req.body.item[0].item[6].answer[0] 
-                    && req.body.item[0].item[6].answer[0].valueString) { 
+                    && req.body.item[0].item[6].answer[0].valueReference) { 
+                      extensions.push({ url: "http://ihris.org/fhir/StructureDefinition/ihris-assign-role",
+                      valueReference: req.body.item[0].item[6].answer[0].valueReference
+                      })
+                    }
+                    if( req.body.item[0].item[4].linkId === "password" 
+                    && req.body.item[0].item[4].answer 
+                    && req.body.item[0].item[4].answer[0] 
+                    && req.body.item[0].item[4].answer[0].valueString) { 
                     
                       try {
                         // user.hashPassword(req.body.item[0].item[6].answer[0].valueString).then((hashedPassword) => {
                         let passwordExt = []
-                        let password = req.body.item[0].item[6].answer[0].valueString
+                        let password = req.body.item[0].item[4].answer[0].valueString
                         let salt = crypto.randomBytes(16).toString('hex')
                         let hash = crypto.pbkdf2Sync( password, salt, 1000, 64, 'sha512' ).toString('hex')
                         passwordExt.push({ url:"password",
