@@ -4,6 +4,11 @@ const fhirAxios = require('./fhirAxios')
 
 const AUDIT_TEMPLATE = {
   resourceType: "AuditEvent",
+  meta: {
+    profile: [
+      "http://hl7.org/fhir/StructureDefinition/AuditEvent"
+    ]
+  },
   type: {
     system: "http://terminology.hl7.org/CodeSystem/audit-event-type",
     code: "rest"
@@ -20,10 +25,10 @@ const AUDIT_TEMPLATE = {
         value: "urn:oid:2.16.840.1.113883.3.9049.1"
       }
     },
-    type: [ {
+    type: [{
       system: "https://www.hl7.org/fhir/codesystem-audit-source-type.html",
       code: "3"
-    } ]
+    }]
   },
   entity: []
 }
@@ -31,18 +36,18 @@ const AUDIT_TEMPLATE = {
 const fhirAudit = {
 
   save: (audit) => {
-    fhirAxios.create(audit).then( (response) => {
-    } ).catch( (err) => {
-      logger.error("Failed to create audit trail: "+err.message)
-      logger.error(JSON.stringify(audit,null,2))
-    } )
+    fhirAxios.create(audit).then((response) => {
+    }).catch((err) => {
+      logger.error("Failed to create audit trail: " + err.message)
+      logger.error(JSON.stringify(audit, null, 2))
+    })
   },
 
   audit: () => {
     let audit = JSON.parse(JSON.stringify(AUDIT_TEMPLATE))
     let now = new Date()
     audit.recorded = now.toISOString()
-    if ( nconf.get("audit:observer") ) {
+    if (nconf.get("audit:observer")) {
       delete audit.source.observer.identifier
       audit.source.observer.reference = nconf.get("audit:observer")
     }
@@ -61,9 +66,9 @@ const fhirAudit = {
       }
     }
     try {
-    agent.altId = user.resource.telecom[0].value
-    } catch(err) {
-      if ( user && user.resource && user.resource.telecom ) {
+      agent.altId = user.resource.telecom[0].value
+    } catch (err) {
+      if (user && user.resource && user.resource.telecom) {
         agent.altId = JSON.stringify(user.resource.telecom)
       } else {
         agent.altId = email || "?"
@@ -71,8 +76,8 @@ const fhirAudit = {
     }
     try {
       agent.name = user.resource.name[0].text
-    } catch(err) {
-      if ( user && user.resource && user.resource.name ) {
+    } catch (err) {
+      if (user && user.resource && user.resource.name) {
         agent.name = JSON.stringify(user.resource.name)
       } else {
         agent.name = ""
@@ -88,13 +93,15 @@ const fhirAudit = {
       system: "http://dicom.nema.org/resources/ontology/DCM",
       code: "110100"
     }
-    startupAudit.agent.push( {
+    startupAudit.agent.push({
       requestor: false,
-    } )
-    startupAudit.subtype.push( {
+    })
+    startupAudit.subtype.push({
       system: "http://dicom.nema.org/resources/ontology/DCM",
-      code: "110120"
-    } )
+      code: "110120",
+      display:"Application Start"
+      
+    }),
     fhirAudit.save(startupAudit)
   },
 
@@ -104,14 +111,16 @@ const fhirAudit = {
       system: "http://dicom.nema.org/resources/ontology/DCM",
       code: "110100"
     }
-    if ( !success ) {
+    if (!success) {
       loginAudit.outcome = "4"
     }
-    loginAudit.subtype.push( {
+    loginAudit.subtype.push({
       system: "http://dicom.nema.org/resources/ontology/DCM",
-      code: "110122"
-    } )
-    loginAudit.agent.push( fhirAudit.getAgent( user, ip, email ) )
+      code: "110122",
+      display: "Login"
+
+    })
+    loginAudit.agent.push(fhirAudit.getAgent(user, ip, email))
     fhirAudit.save(loginAudit)
   },
 
@@ -121,117 +130,121 @@ const fhirAudit = {
       system: "http://dicom.nema.org/resources/ontology/DCM",
       code: "110100"
     }
-    logoutAudit.subtype.push( {
+    logoutAudit.subtype.push({
       system: "http://dicom.nema.org/resources/ontology/DCM",
-      code: "110123"
-    } )
-    logoutAudit.agent.push( fhirAudit.getAgent( user, ip ) )
+      code: "110123",
+      display: "Logout"
+    })
+    logoutAudit.agent.push(fhirAudit.getAgent(user, ip))
     fhirAudit.save(logoutAudit)
   },
 
   create: (user, ip, what, success, detail) => {
     let createAudit = fhirAudit.audit()
-    createAudit.agent.push( fhirAudit.getAgent( user, ip ) )
-    if ( !success ) {
+    createAudit.agent.push(fhirAudit.getAgent(user, ip))
+    if (!success) {
       createAudit.outcome = 4
     }
-    createAudit.subtype.push( {
+    createAudit.subtype.push({
       system: "http://hl7.org/fhir/restful-interaction",
-      code: "create"
-    } )
+      code: "create", 
+      display: "Create"
+    })
     createAudit.action = "C"
-    if ( what ) {
-      createAudit.entity.push( {
+    if (what) {
+      createAudit.entity.push({
         what: { reference: what }
-      } )
+      })
     }
-    if ( detail ) {
-      createAudit.entity.push( {
+    if (detail) {
+      createAudit.entity.push({
         detail: [
           {
             type: "resource",
-            valueString: JSON.stringify(detail.resource,null,2)
+            valueString: JSON.stringify(detail.resource, null, 2)
           },
           {
             type: "error",
             valueString: detail.err.message
           }
         ]
-      } )
+      })
     }
     fhirAudit.save(createAudit)
   },
 
   update: (user, ip, what, success, detail) => {
     let updateAudit = fhirAudit.audit()
-    updateAudit.agent.push( fhirAudit.getAgent( user, ip ) )
-    if ( !success ) {
+    updateAudit.agent.push(fhirAudit.getAgent(user, ip))
+    if (!success) {
       updateAudit.outcome = 4
     }
-    updateAudit.subtype.push( {
+    updateAudit.subtype.push({
       system: "http://hl7.org/fhir/restful-interaction",
-      code: "update"
-    } )
+      code: "update",
+      display:"Update"
+    })
     updateAudit.action = "U"
-    if ( what ) {
-      updateAudit.entity.push( {
+    if (what) {
+      updateAudit.entity.push({
         what: { reference: what }
-      } )
+      })
     }
-    if ( detail ) {
-      updateAudit.entity.push( {
+    if (detail) {
+      updateAudit.entity.push({
         detail: [
           {
             type: "resource",
-            valueString: JSON.stringify(detail.resource,null,2)
+            valueString: JSON.stringify(detail.resource, null, 2)
           },
           {
             type: "error",
             valueString: detail.err.message || "?"
           }
         ]
-      } )
+      })
     }
     fhirAudit.save(updateAudit)
   },
 
   patch: (user, ip, what, success, detail) => {
     let updateAudit = fhirAudit.audit()
-    updateAudit.agent.push( fhirAudit.getAgent( user, ip ) )
-    if ( !success ) {
+    updateAudit.agent.push(fhirAudit.getAgent(user, ip))
+    if (!success) {
       updateAudit.outcome = 4
     }
-    updateAudit.subtype.push( {
+    updateAudit.subtype.push({
       system: "http://hl7.org/fhir/restful-interaction",
-      code: "patch"
-    } )
+      code: "patch",
+      display:"Patch"
+    })
     updateAudit.action = "U"
-    if ( what ) {
-      updateAudit.entity.push( {
+    if (what) {
+      updateAudit.entity.push({
         what: { reference: what }
-      } )
+      })
     }
-    if ( detail ) {
+    if (detail) {
       let details = []
-      if ( detail.resource ) {
-        details.push( {
-            type: "resource",
-            valueString: JSON.stringify(detail.resource,null,2)
-        } )
+      if (detail.resource) {
+        details.push({
+          type: "resource",
+          valueString: JSON.stringify(detail.resource, null, 2)
+        })
       }
-      if ( detail.err ) {
-        details.push( {
-            type: "error",
-            valueString: detail.err.message
-        } )
+      if (detail.err) {
+        details.push({
+          type: "error",
+          valueString: detail.err.message
+        })
       }
-      if ( detail.code ) {
-        details.push( {
-            type: "code",
-            valueString: detail.code
-        } )
+      if (detail.code) {
+        details.push({
+          type: "code",
+          valueString: detail.code
+        })
       }
-      updateAudit.entity.push( { detail: details } )
+      updateAudit.entity.push({ detail: details })
     }
     fhirAudit.save(updateAudit)
   },
