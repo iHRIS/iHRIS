@@ -16,11 +16,11 @@
             "code": "1.2.840.10065.1.12.1.14"
           }
         ],
-        "when": "2022-02-24T09:57:10.475Z",
+        "when": "2022-03-11T07:40:37.187Z",
         "who": {
           "reference": "http://ihris.org/fhir/Organization/ihris"
         },
-        "data": "PaYqq9DOTZ9K3Y5FGQOmMO2z4nc5F7BHWamCtvvttvj4hmxPhGCkX02Heety81QGbV3TqliNnVtPS3tRRO6/orf3xua3w7uTjF/oq7sLW3l9rT/GaQymr4lOS5WJsdP6EKhhE31YXdcbwOWVZxGxqafOlaQZ0IAD7KP56FLRnh4="
+        "data": "KBJS9kWyKn0kE49RyQiK9IMcy8wSTM54flLIzkjX/fEMC7U6eqGd6TtH7vQtAyTnbfpcJW369QNgzp9Y46N/MclYshCpkS2HK4nqDksT8Ki9b0hIIRwSxCYC3QEld7qo7wrOXEhCz9k7qd+DlH7W/M5LbEJ56oo2lX7py1hve7Y="
       }
     },
     {
@@ -509,6 +509,22 @@
         {
           "name": "site:nav:menu:password:url",
           "valueString": "/questionnaire/ihris-change-password/person"
+        },
+        {
+          "name": "site:nav:menu:audit:text",
+          "valueString": "Audit Logs"
+        },
+        {
+          "name": "site:nav:menu:audit:order",
+          "valueString": "9"
+        },
+        {
+          "name": "site:nav:menu:audit:icon",
+          "valueString": "mdi-lock-reset"
+        },
+        {
+          "name": "site:nav:menu:audit:url",
+          "valueString": "/resource/view/auditevent"
         },
         {
           "name": "shortname:Practitioner:format",

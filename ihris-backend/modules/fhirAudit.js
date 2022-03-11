@@ -4,6 +4,9 @@ const fhirAxios = require('./fhirAxios')
 
 const AUDIT_TEMPLATE = {
   resourceType: "AuditEvent",
+  meta: {
+    profile: ["http://ihris.org/fhir/StructureDefinition/ihris-auditevent"]
+  },
   type: {
     system: "http://terminology.hl7.org/CodeSystem/audit-event-type",
     code: "rest"
@@ -93,7 +96,8 @@ const fhirAudit = {
     } )
     startupAudit.subtype.push( {
       system: "http://dicom.nema.org/resources/ontology/DCM",
-      code: "110120"
+      code: "110120",
+      display: "Application Start"
     } )
     fhirAudit.save(startupAudit)
   },
@@ -109,7 +113,8 @@ const fhirAudit = {
     }
     loginAudit.subtype.push( {
       system: "http://dicom.nema.org/resources/ontology/DCM",
-      code: "110122"
+      code: "110122",
+      display: "Login"
     } )
     loginAudit.agent.push( fhirAudit.getAgent( user, ip, email ) )
     fhirAudit.save(loginAudit)
@@ -123,7 +128,8 @@ const fhirAudit = {
     }
     logoutAudit.subtype.push( {
       system: "http://dicom.nema.org/resources/ontology/DCM",
-      code: "110123"
+      code: "110123",
+      display: "Logout"
     } )
     logoutAudit.agent.push( fhirAudit.getAgent( user, ip ) )
     fhirAudit.save(logoutAudit)
@@ -137,7 +143,8 @@ const fhirAudit = {
     }
     createAudit.subtype.push( {
       system: "http://hl7.org/fhir/restful-interaction",
-      code: "create"
+      code: "create",
+      display: "create"
     } )
     createAudit.action = "C"
     if ( what ) {
@@ -170,7 +177,8 @@ const fhirAudit = {
     }
     updateAudit.subtype.push( {
       system: "http://hl7.org/fhir/restful-interaction",
-      code: "update"
+      code: "update",
+      display: "update"
     } )
     updateAudit.action = "U"
     if ( what ) {
@@ -203,7 +211,8 @@ const fhirAudit = {
     }
     updateAudit.subtype.push( {
       system: "http://hl7.org/fhir/restful-interaction",
-      code: "patch"
+      code: "patch",
+      display: "patch"
     } )
     updateAudit.action = "U"
     if ( what ) {
@@ -235,8 +244,6 @@ const fhirAudit = {
     }
     fhirAudit.save(updateAudit)
   },
-
-
 }
 
 
