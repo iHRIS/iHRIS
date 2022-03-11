@@ -6,6 +6,7 @@
         <v-spacer></v-spacer>
 
         <div v-if="page === 'practitioner'"></div>
+        <div v-else-if="page === 'facility'"></div>
         <div v-else>
           <v-btn
             :class="addLink ? addLink.class || 'primary' : 'primary'"
@@ -134,7 +135,7 @@ export default {
         }
         //add profile to url
         if (this.profile) {
-          url = url + "&_profile=" + this.profile;
+          url = url + "&_profile=" + this.profile+"&_sort=-_lastUpdated";
         }
       }
       if (url === "") {

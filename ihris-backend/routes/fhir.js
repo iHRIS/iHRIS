@@ -77,7 +77,7 @@ router.post("/mediator/:resource", (req, res) => {
       })
 
     }).catch((err) => {
-      return res.status(200).json({
+      return res.status(400).json({
         success: false,
         message: "Failed to create resources successfully",
         data: err
