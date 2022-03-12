@@ -36,16 +36,16 @@ router.get("/mediator/:resource?", (req, res) => {
       outcome.issue[0].diagnostics = err.message
       return res.status(500).json(outcome)
     })
-  }else {
+  } else {
     fhirAxios.search(req.params.resource, req.query).then((resource) => {
       // Need to do deeper checking due to possibility of includes
-  
+
       return res.status(200).json({
         success: true,
         message: "Returned resources successfully",
         data: resource
       })
-  
+
     }).catch((err) => {
       /* return response from FHIR server */
       //return res.status( err.response.status ).json( err.response.data )
@@ -77,12 +77,13 @@ router.post("/mediator/:resource", (req, res) => {
       })
 
     }).catch((err) => {
+
       return res.status(400).json({
         success: false,
         message: "Failed to create resources successfully",
         data: err
-      })
-    })
+      });
+    });
 
   } else {
     console.log("Saving " + resource.resourceType + " - " + fhir.id)
