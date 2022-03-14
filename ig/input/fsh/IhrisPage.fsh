@@ -177,7 +177,7 @@ Usage:          #example
 * extension[display].extension[search][6].valueString = "Active|Practitioner.active"
 * extension[display].extension[search][7].valueString = "Phone|Practitioner.telecom.where(system='phone').value"
 * extension[display].extension[search][8].valueString = "Email|Practitioner.telecom.where(system='email').value"
-* extension[display].extension[search][9].valueString = "Qualification|Practitioner.qualification.text"
+* extension[display].extension[search][9].valueString = "Qualification|Practitioner.qualification.code.text"
 * extension[display].extension[filter][0].valueString = "Surname|family:contains"
 * extension[display].extension[filter][1].valueString = "Given Name(s)|given:contains"
 * extension[display].extension[filter][2].valueString = "Gender|gender|http://hl7.org/fhir/administrative-gender"
