@@ -16,11 +16,11 @@
             "code": "1.2.840.10065.1.12.1.14"
           }
         ],
-        "when": "2022-03-11T06:50:14.874Z",
+        "when": "2022-03-14T05:33:19.104Z",
         "who": {
           "reference": "http://ihris.org/fhir/Organization/ihris"
         },
-        "data": "K3DHIDdgH11cQdZlcYJCFE5q9pc/N4j1qic9Cw2thmnxDi7+j557FwR7jGj8PoFuFjW8oNKISVUylpLSwJ14GHXaJPTGqqQqFRNWPq9xDCvs6W9Hw5QAI+Zl/0W3x5h9m04mPwEM2MVCMjhRtJUYRxmS9N2iKbKuDeiWXP3U5xQ="
+        "data": "Ndl/jxgJfq3wn5d6+r3GtpsPJjr8JIthTQDNuZ6MmgB+H84We1z+jK0rpvglkLU5T52R7oDYpT6lwTPXZNDqsqtAPCXiRcTT9cZ6wLotBTzMsg4KzkKharDJjJxFQr9ElmHixASQY/cGOrIqJeH7Hjd8zpd6L1XHooN2F8QPfJw="
       }
     },
     {
@@ -321,6 +321,30 @@
         {
           "name": "site:nav:menu:reports:menu:staff:order",
           "valueString": "1"
+        },
+        {
+          "name": "site:nav:menu:reports:menu:contacts:text",
+          "valueString": "Health Worker Contacts "
+        },
+        {
+          "name": "site:nav:menu:reports:menu:contacts:url",
+          "valueString": "/report/contacts"
+        },
+        {
+          "name": "site:nav:menu:reports:menu:contacts:order",
+          "valueString": "2"
+        },
+        {
+          "name": "site:nav:menu:reports:menu:positions:text",
+          "valueString": "Health Worker Positions "
+        },
+        {
+          "name": "site:nav:menu:reports:menu:positions:url",
+          "valueString": "/report/positions"
+        },
+        {
+          "name": "site:nav:menu:reports:menu:positions:order",
+          "valueString": "3"
         },
         {
           "name": "site:nav:menu:users:text",

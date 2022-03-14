@@ -69,7 +69,8 @@ router.post("/mediator/:resource", (req, res) => {
     (resource.type === "transaction" || resource.type === "batch")) {
 
     fhirAxios.create(resource).then((resource) => {
-
+      fhirAudit.create(req.user, req.ip, output.resourceType + "/" + output.id
+        + (output.meta.versionId ? "/_history/" + output.meta.versionId : ""), true)
       return res.status(200).json({
         success: true,
         message: "Created resources successfully",
@@ -77,7 +78,7 @@ router.post("/mediator/:resource", (req, res) => {
       })
 
     }).catch((err) => {
-
+      fhirAudit.create(req.user, req.ip, null, false, { resource: resource, err: err })
       return res.status(400).json({
         success: false,
         message: "Failed to create resources successfully",
@@ -166,6 +167,7 @@ router.get("/:resource/:id?", (req, res, next) => {
       //return res.status( err.response.status ).json( err.response.data )
       /* for custom responses */
       logger.error(err.message)
+      fhirAudit.create(req.user, req.ip, null, false, { resource: resource, err: err })
       let outcome = { ...outcomes.ERROR }
       outcome.issue[0].diagnostics = err.message
       return res.status(500).json(outcome)

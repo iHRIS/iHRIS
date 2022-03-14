@@ -135,7 +135,7 @@ export default {
         }
         //add profile to url
         if (this.profile) {
-          url = url + "&_profile=" + this.profile+"&_sort=-_lastUpdated";
+          url = url + "&_profile=" + this.profile + "&_sort=-_lastUpdated";
         }
       }
       if (url === "") {
@@ -156,7 +156,8 @@ export default {
           "?_count=" +
           count +
           "&_total=accurate&_profile=" +
-          this.profile;
+          this.profile +
+          "&_sort=-_lastUpdated";
         let sTerms = Object.keys(this.terms);
         for (let term of sTerms) {
           if (Array.isArray(this.terms[term])) {
