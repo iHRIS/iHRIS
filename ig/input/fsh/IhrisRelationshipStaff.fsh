@@ -13,7 +13,7 @@ Usage:          #example
 * extension[reportdetails].extension[displayCheckbox].valueBoolean = true
 * extension[reportdetails].extension[locationBasedConstraint].valueBoolean = true
 * extension[reportdetails].extension[reportelement][0].extension[label].valueString = "nationalId"
-* extension[reportdetails].extension[reportelement][0].extension[name].valueString = "identifier.where(type.coding.where(code='NI')).value"
+* extension[reportdetails].extension[reportelement][0].extension[name].valueString = "identifier.where(type.coding.where(code='NIN')).value"
 * extension[reportdetails].extension[reportelement][0].extension[display].valueString = "National Id"
 * extension[reportdetails].extension[reportelement][0].extension[filter].valueBoolean = true
 * extension[reportdetails].extension[reportelement][0].extension[dropDownFilter].valueBoolean = false

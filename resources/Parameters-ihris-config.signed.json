@@ -16,11 +16,11 @@
             "code": "1.2.840.10065.1.12.1.14"
           }
         ],
-        "when": "2022-03-14T05:33:19.104Z",
+        "when": "2022-03-15T11:46:58.967Z",
         "who": {
           "reference": "http://ihris.org/fhir/Organization/ihris"
         },
-        "data": "Ndl/jxgJfq3wn5d6+r3GtpsPJjr8JIthTQDNuZ6MmgB+H84We1z+jK0rpvglkLU5T52R7oDYpT6lwTPXZNDqsqtAPCXiRcTT9cZ6wLotBTzMsg4KzkKharDJjJxFQr9ElmHixASQY/cGOrIqJeH7Hjd8zpd6L1XHooN2F8QPfJw="
+        "data": "TxIXQsY0hdXG2Az88X7w2Arhwf+yY7SsC4c64/ihyc8aoqW7ztkP66LEjDMX2PkfW9lANBUyOjsp4N7SuUuLp5UnUe3l77yY8Ogv556DnQVuSLWenbSfWA5feOhs+XudhhlKiYLtGtGE3gNFQoOJfoXtTQzd38iHWHvegLQpbpE="
       }
     },
     {
@@ -328,7 +328,7 @@
         },
         {
           "name": "site:nav:menu:reports:menu:contacts:url",
-          "valueString": "/report/contacts"
+          "valueString": "/report/ihris-es-contacts-report"
         },
         {
           "name": "site:nav:menu:reports:menu:contacts:order",
@@ -340,7 +340,7 @@
         },
         {
           "name": "site:nav:menu:reports:menu:positions:url",
-          "valueString": "/report/positions"
+          "valueString": "/report/ihris-es-positions-report"
         },
         {
           "name": "site:nav:menu:reports:menu:positions:order",
