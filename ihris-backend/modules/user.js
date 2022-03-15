@@ -2,10 +2,10 @@ const nconf = require('./config')
 const fhirAxios = nconf.fhirAxios
 const crypto = require('crypto')
 const fhirFilter = require('./fhirFilter')
-const logger = require('../winston')
+const winston = require('../winston')
 
 const ROLE_EXTENSION = "http://ihris.org/fhir/StructureDefinition/ihris-assign-role"
-const TASK_EXTENSION = "http://ihris.org/fhir/StructureDefinition/ihris-task"
+const TASK_EXTENSION = "http://ihris.org/fhir/StructureDefinition/ihris-assign-task"
 
 const isObject = (obj) => {
   return (!!obj) && (obj.constructor === Object)
@@ -17,7 +17,9 @@ const user = {
   },
   restoreUser: ( obj ) => {
     let userObj = new User( obj.resource )
-    userObj.restorePermissions( obj.permissions )
+    if (obj.permissions){
+      userObj.restorePermissions( obj.permissions )
+    }
     return userObj
   },
   lookup: ( query ) => {
@@ -26,11 +28,12 @@ const user = {
         if ( response.total === 0 ) {
           resolve( false )
         } else if ( response.total > 1 ) {
-          logger.error("Too many users found for "+JSON.stringify(query))
+          winston.error("Too many users found for "+JSON.stringify(query))
           resolve( false )
         } else {
           let userObj = new User( response.entry[0].resource )
-          await userObj.updatePermissions()
+          let roleObj = userObj.resource.extension.filter(ext => ext.url == "http://ihris.org/fhir/StructureDefinition/ihris-assign-role" )
+          await userObj.updatePermissions(roleObj)
           resolve( userObj )
         }
       } ).catch( (err) => {
@@ -62,7 +65,7 @@ const user = {
     userObj.updatePermissions([roleResource]).then(() => {
       resolve(userObj);
     }).catch((err) => {
-      logger.error(err);
+      winston.error(err);
       reject(err);
     });
   }),
@@ -118,14 +121,14 @@ const user = {
         }
         const role = roleRef.split('/');
         if (role.length !== 2) {
-          logger.error(`Invalid role passed to addRole: ${roleRef}`);
+          winston.error(`Invalid role passed to addRole: ${roleRef}`);
           rej();
         } else {
           fhirAxios.read(role[0], role[1]).then((response) => {
             roleResource = response;
             return res();
           }).catch((err) => {
-            logger.error(err);
+            winston.error(err);
             rej();
           });
         }
@@ -135,35 +138,48 @@ const user = {
         await user.loadTaskList()
         let tasks = roleResource.extension.filter( ext => ext.url === TASK_EXTENSION )
         for( let task of tasks ) {
-
           let permission = undefined
           let resource = undefined
           let id = undefined
           let constraint = undefined
           let field = undefined
+          let taskObj = undefined
+          let permissionObj = undefined
+          let elt = task.valueReference.reference.split("/")
+          await fhirAxios.read( elt[0], elt[1]).then( async(response) => {
+            taskObj = response
+           }).catch( (err) => {
+            winston.error(err.message)
+           });
+           try {
+            permissionObj = taskObj.extension.find( ext => ext.url === "http://ihris.org/fhir/StructureDefinition/task-attributes" )
+          } catch( err ) {
+            console.error("No Task attribute found. Don't know what to do.")
+            continue
+          }
           try {
-            permission = task.extension.find( ext => ext.url === "permission" ).valueCode
+            permission = permissionObj.extension.find( ext => ext.url === "permission" ).valueCode
           } catch( err ) {
             console.error("No permission given for task.  Don't know what to do.")
             continue
           }
           try {
-            resource = task.extension.find( ext => ext.url === "resource" ).valueCode
+            resource = permissionObj.extension.find( ext => ext.url === "resource" ).valueCode
           } catch( err ) {
             console.error("No resource given for task.  Don't know what to do.")
             continue
           }
           try {
-            id = task.extension.find( ext => ext.url === "instance" ).valueId
+            id = permissionObj.extension.find( ext => ext.url === "instance" ).valueId
           } catch( err ) {
             // id takes precedence and only one can be set
             try {
-              constraint = task.extension.find( ext => ext.url === "constraint" ).valueString
+              constraint = permissionObj.extension.find( ext => ext.url === "constraint" ).valueString
             } catch( err ) {
             }
           }
           try {
-            field = task.extension.find( ext => ext.url === "field" ).valueString
+            field = permissionObj.extension.find( ext => ext.url === "field" ).valueString
           } catch( err ) {
           }
           user.addPermission( permissions, permission, resource, id, constraint, field )
@@ -183,7 +199,7 @@ const user = {
             const promises = [];
             role.extension.forEach((extension, index) => {
               promises.push(new Promise((resolve, reject) => {
-                if (extension.url !== 'task' || !extension.valueReference) {
+                if (extension.url !== 'http://ihris.org/fhir/StructureDefinition/ihris-assign-task' || !extension.valueReference) {
                   return resolve();
                 }
                 const id = extension.valueReference.reference.split('/')[1];
@@ -196,7 +212,7 @@ const user = {
                   }
                   resolve();
                 }).catch((err) => {
-                  logger.error(err);
+                  winston.error(err);
                   return reject();
                 });
               }));
@@ -213,25 +229,25 @@ const user = {
   },
   addPermission: ( permissions, permission, resource, id, constraint, field ) => {
     if ( !user.tasksLoaded ) {
-      console.error("Can't load permissions directly unless the task lists have been loaded for validation.  call user.loadTaskList() first.")
+      winston.error("Can't load permissions directly unless the task lists have been loaded for validation.  call user.loadTaskList() first.")
       return false
     }
     if ( !user.valueSet["ihris-task-permission"].includes( permission ) ) {
-      logger.error( "Invalid permission given "+permission, user.valueSet["ihris-task-permission"] )
+      winston.error( "Invalid permission given "+permission, user.valueSet["ihris-task-permission"] )
       return false
     }
     if ( permission !== "special" && !user.valueSet["ihris-task-resource"].includes( resource ) ) {
-      logger.error( "Invalid resource given "+resource, user.valueSet["ihris-task-resource"] )
+      winston.error( "Invalid resource given "+resource, user.valueSet["ihris-task-resource"] )
       return false
     }
     // Can't have an id when it's all resources
     if ( resource === "*" && ( id || field ) ) {
-      logger.warn("Can't add global resource permissions on a specific id or by including a field: "+id+" - "+field)
+      winston.warn("Can't add global resource permissions on a specific id or by including a field: "+id+" - "+field)
       return false
     }
 
     if ( ( permission === "*" || permission === "delete" ) && ( id || field ) ) {
-      logger.warn("Can't add delete permission on a specific id or by including a field: "+id+" - "+field)
+      winston.warn("Can't add delete permission on a specific id or by including a field: "+id+" - "+field)
       return false
     }
     if ( !permissions.hasOwnProperty( permission ) ) {
@@ -250,7 +266,7 @@ const user = {
         if ( field ) {
           if ( !permissions[permission][resource].id.hasOwnProperty( id ) ) {
             permissions[permission][resource].id[id] = { }
-          }
+          } 
           if ( isObject( permissions[permission][resource].id[id] ) ) {
             permissions[permission][resource].id[id][field] = true
           }
@@ -264,7 +280,7 @@ const user = {
         if ( field ) {
           if ( !permissions[permission][resource].constraint.hasOwnProperty( constraint ) ) {
             permissions[permission][resource].constraint[constraint] = {}
-          }
+          } 
           if ( isObject( permissions[permission][resource].constraint[constraint] ) ) {
             permissions[permission][resource].constraint[constraint][field] = true
           }
@@ -274,7 +290,7 @@ const user = {
       } else {
         if ( !permissions[permission][resource].hasOwnProperty( "*" ) ) {
           permissions[permission][resource]["*"] = {}
-        }
+        } 
         permissions[permission][resource]["*"][field] = true
       }
     }
@@ -289,7 +305,7 @@ class User {
     this.resource = resource
     this.permissions = {}
   }
-
+  
 }
 
 
@@ -329,8 +345,8 @@ User.prototype.__hasPermissionByName = function( permission, resource ) {
 /**
  * Gets a permission from the permissions object by checking for overriding values.
  * @return boolean | [ field list ] | Object
- * {
- * "*": [ field list ],
+ * { 
+ * "*": [ field list ], 
  * "id": { "ID": true | [field list ] }
  * "constraint": { "CONSTRAINT" : true | [field list] }
  * }
@@ -404,7 +420,7 @@ User.prototype.hasPermissionByObject = function( permission, resource ) {
   if ( !permissions ) {
     return false
   }
-  let allowed = {}
+  let allowed = {} 
   if ( permissions.hasOwnProperty("*") && isObject( permissions["*"] ) ) {
     allowed = permissions["*"]
   }
@@ -440,16 +456,16 @@ User.prototype.resetPermissions = function() {
 }
 
 User.prototype.checkPassword = function( password ) {
-  let details = this.resource.extension.find( ext =>
+  let details = this.resource.extension.find( ext => 
     ext.url === "http://ihris.org/fhir/StructureDefinition/ihris-password" )
   if ( !details ) {
-    logger.error( "Password details don't exist in user "+this.resource.id )
+    winston.error( "Password details don't exist in user "+this.resource.id )
     return false
   }
   let hash = details.extension.find( ext => ext.url === "password" )
   let salt = details.extension.find( ext => ext.url === "salt" )
   if ( !hash || !hash.valueString || !salt || !salt.valueString ) {
-    logger.error( "Hash or salt doesn't exist in user "+this.resource.id )
+    winston.error( "Hash or salt doesn't exist in user "+this.resource.id )
     return false
   }
   let compare = user.hashPassword( password, salt.valueString )

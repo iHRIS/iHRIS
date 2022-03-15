@@ -6,7 +6,6 @@ const fhirAxios = nconf.fhirAxios;
 const workflowLeave = {
   process: (req) => {
     return new Promise(async (resolve, reject) => {
-      try {
         let resource;
         let bundle = {
           resourceType: "Bundle",
@@ -16,9 +15,26 @@ const workflowLeave = {
         /*if (resource.active == false) {
           resolve(await workflowLeave.outcome("This practitioner is not currently active"));
         }*/
-        fhirAxios
-          .read("Practitioner", req.query.practitioner)
-          .then((resource) => {
+        resource = await fhirAxios.read( "Practitioner", req.query.practitioner )
+       
+        if(resource){
+          try{
+            if (req.query.practitioner) {
+              req.body.subject = {
+                reference: "Practitioner/" + req.query.practitioner,
+              };
+            }
+
+            let extensions = [];
+            if (resource.resourceType === "Practitioner") {
+              extensions.push({
+                url: "http://ihris.org/fhir/StructureDefinition/ihris-practitioner-reference",
+                valueReference: {
+                  reference: "Practitioner/" + req.query.practitioner,
+                },
+              });
+            }
+
             if (
               req.body &&
               req.body.item &&
@@ -31,21 +47,6 @@ const workflowLeave = {
               req.body.item[0].item[0].answer[0] &&
               req.body.item[0].item[0].answer[0].valueCoding
             ) {
-              if (req.query.practitioner) {
-                req.body.subject = {
-                  reference: "Practitioner/" + req.query.practitioner,
-                };
-              }
-              let extensions = [];
-              if (resource.resourceType === "Practitioner") {
-                extensions.push({
-                  url: "http://ihris.org/fhir/StructureDefinition/ihris-practitioner-reference",
-                  valueReference: {
-                    reference: "Practitioner/" + req.query.practitioner,
-                  },
-                });
-              }
-
               let complexExt = [];
               if (
                 req.body.item[0].item[0].linkId ===
@@ -64,7 +65,7 @@ const workflowLeave = {
                   "Basic.extension[0].extension[1]" &&
                   req.body.item[0].item[1].answer &&
                   req.body.item[0].item[1].answer[0] &&
-                  req.body.item[0].item[1].answer[0].valueDateTime) ||
+                  req.body.item[0].item[1].answer[0].valueDate) ||
                 (req.body.item[0].item[2].linkId ===
                   "Basic.extension[0].extension[2]" &&
                   req.body.item[0].item[2].answer &&
@@ -88,14 +89,7 @@ const workflowLeave = {
                   valueInteger: requestedDays,
                 });
               }
-              /*if ( req.body.item[0].item[3].linkId === "Basic.extension[0].extension[3]"
-                && req.body.item[0].item[3].answer
-                && req.body.item[0].item[3].answer[0]
-                && req.body.item[0].item[3].answer[0].valueInteger){
-                complexExt.push({ url: "daysRequested",
-                valueInteger:req.body.item[0].item[3].answer[0].valueInteger })
-                logger.info(JSON.stringify(complexExt,null,2))
-            } */
+             
               if (
                 req.body.item[0].item[3].linkId ===
                   "Basic.extension[0].extension[3]" &&
@@ -135,12 +129,14 @@ const workflowLeave = {
             } else {
               resolve(await workflowLeave.outcome("No Leave Type provided"));
             }
-          });
-      } catch (err) {
-        //winston.error(err);
-        reject(err);
-      }
-    });
+
+          }catch(err){
+            logger.error(err)
+            resolve(await workflowLeave.outcome(err.message))
+          }
+        }
+        
+    })
   },
   postProcess: (req, results) => {
     return new Promise((resolve, reject) => {

@@ -34,7 +34,7 @@ const workflowPractitioner = {
           }
         }
         if(!phoneQuery) {
-          return esolve(bundle)
+          return resolve(bundle)
         }
         let params = {'phonenumber:contains': phoneQuery}
         fhirAxios.search( "Practitioner", params ).then( (resource) => {

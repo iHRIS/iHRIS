@@ -26,7 +26,7 @@ const filterNavigation = ( user, nav, prefix ) => {
   if(roles.includes('ihris-role-self')){
 
     let refObj = user.resource.extension.filter(ext => ext.url === "http://ihris.org/fhir/StructureDefinition/ihris-user-practitioner")
-    reference = refObj[0].valueReference.reference.toLowerCase()
+    reference = refObj[0].valueReference.reference
  
     for( let key of Object.keys(nav.menu) ) {
       let instance
@@ -36,14 +36,12 @@ const filterNavigation = ( user, nav, prefix ) => {
         instance = key
       }
       if(instance === "profile"){
-        nav.menu[key].url += `/${reference}`
+        nav.menu[key].url += `/${reference.charAt(0).toLocaleLowerCase() + reference.slice(1)}`
       }
-      console.log(instance)
       if(!user.hasPermissionByName( "special", "navigation", instance ) ) {
         delete nav.menu[key]
       }
     }
-    console.log("NAV ",user)
   }
   else{
     for( let key of Object.keys(nav.menu) ) {
@@ -122,6 +120,23 @@ router.get('/reload', function(req,res) {
     res.status(400).json({ok:false,err:err})
   } )
 } )
+
+const getLocationByRef = async (reference) =>  {
+  return new Promise(resolve =>{
+    if(reference && reference !== ''){
+      let urlObj = reference.split("/")
+      fhirAxios.read( urlObj[0], urlObj.pop() ).then(async (resource) => {
+          resolve(resource.name)
+      }).catch( (err) => {
+        winston.error(err.message)
+        let outcome = { ...outcomes.ERROR }
+        outcome.issue[0].diagnostics = err.message
+        resolve("")
+      })
+    }
+  })
+  
+}
 
 const getDefinition = ( resource ) => {
   let structureDef = resource.split('/')

@@ -12,9 +12,9 @@ const workflowPerformance = {
         entry: [],
       };
       //logger.info(JSON.stringify( req.body,null,2))
-      fhirAxios
-        .read("Practitioner", req.query.practitioner)
-        .then((resource) => {
+      resource = await fhirAxios.read("Practitioner", req.query.practitioner);
+      if (resource) {
+        try {
           if (
             req.body &&
             req.body.item &&
@@ -114,7 +114,11 @@ const workflowPerformance = {
           } else {
             resolve(await workflowPerformance.outcome("No Evaluator provided"));
           }
-        });
+        } catch (err) {
+          logger.error(err);
+          resolve(await workflowPerformance.outcome(err.message));
+        }
+      }
     });
   },
   postProcess: (req, results) => {

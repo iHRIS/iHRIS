@@ -13,7 +13,6 @@ const outcomes = require("../config/operationOutcomes");
 
 
 router.post("/export/:format/:index", (req, res) => {
-  console.log(JSON.stringify(req.body.selected));
   let searchQry = req.body.query;
   let headers = req.body.headers;
   let label = req.body.label;

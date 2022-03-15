@@ -8,6 +8,7 @@ const fhirQuestionnaire = require('../modules/fhirQuestionnaire')
 const fhirModules = require('../modules/fhirModules')
 const outcomes = require('../config/operationOutcomes')
 const logger = require('../winston')
+const winston = require('winston/lib/winston/transports')
 
 /**
  * This route will process a QuestionnaireReponse and parse
@@ -17,7 +18,6 @@ router.post("/QuestionnaireResponse", (req, res, next) => {
   if ( !req.user ) {
     return res.status(401).json( outcomes.NOTLOGGEDIN )
   }
-
   const checkBundleForError = (bundle) => {
     if ( bundle.entry ) {
       for ( let entry of bundle.entry ) {
@@ -33,7 +33,6 @@ router.post("/QuestionnaireResponse", (req, res, next) => {
   let workflow = Object.keys(workflowQuestionnaires).find( wf => workflowQuestionnaires[wf].url === req.body.questionnaire )
 
   if ( workflow ) {
-
     let processor = workflow
     if ( workflowQuestionnaires[workflow].hasOwnProperty('processor') ) {
       processor = workflowQuestionnaires[workflow].processor
@@ -114,7 +113,6 @@ router.post("/QuestionnaireResponse", (req, res, next) => {
         if ( errorCheck ) {
           return res.status( 401 ).json( errorCheck )
         }
-
         fhirAxios.create( bundle ).then ( (results) => {
           if ( results.entry && results.entry.length > 0 && results.entry[0].response.location ) {
             req.body.subject = { reference: results.entry[0].response.location }

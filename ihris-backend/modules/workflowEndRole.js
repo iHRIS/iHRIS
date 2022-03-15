@@ -5,13 +5,14 @@ const fhirAxios = nconf.fhirAxios
 const workflowEndRole = {
   process: ( req ) => {
     return new Promise( async (resolve, reject) => {
+      let resource
       let bundle = {
         resourceType: "Bundle",
         type: "transaction",
         entry: []
       }
       //winston.info(JSON.stringify( req.body,null,2))
-      fhirAxios.read( "PractitionerRole", req.query.practitioner ).then( (resource) => {
+      resource = await fhirAxios.read( "PractitionerRole", req.query.practitioner )
       try {
         if (resource){
           if ( req.body && req.body.item 
@@ -75,10 +76,6 @@ const workflowEndRole = {
       } catch(err) {
         reject(err)
       }
-    }).catch( (err) => {
-      winston.error(err.message)
-      reject(err)
-    } )
     })
   },
   postProcess: ( req, results ) => {

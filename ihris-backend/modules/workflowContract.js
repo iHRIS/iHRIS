@@ -17,7 +17,8 @@ const workflowContract = {
         }
       
         
-        fhirAxios.read( "Practitioner", req.query.practitioner ).then( (resource) => {
+        resource = fhirAxios.read( "Practitioner", req.query.practitioner )
+        if(resource){
           if ( req.body && req.body.item 
             && req.body.item && req.body.item[0].linkId === "PractitionerRole"
             && req.body.item[0].item && req.body.item[0].item[0].linkId === "PractitionerRole.code" 
@@ -125,9 +126,10 @@ const workflowContract = {
             winston.error("Either Duty Post or Job title not provided")
             resolve(await workflowContract.outcome("Either Duty Post or Job title not provided"))
           }
-        })
+        }
       } catch(err) {
-        reject(err)
+        winston.error(err)
+        resolve(await workflowContract.outcome(err.message))
       } 
     })
   },

@@ -18,7 +18,7 @@ const bulkRegistration = require('../modules/bulkRegistration')
 const window = new JSDOM('').window
 const DOMPurify = createDOMPurify(window)
 
-router.get("/:resource/:id?", (req, res, next) => {
+router.get("/:resource/:id?", (req, res, next) => {  
   if ( req.params.resource.startsWith('$') || ( req.params.id && req.params.id.startsWith('$') ) ) {
     return next()
   }
@@ -246,7 +246,7 @@ router.put("/:resource/:id", (req, res) => {
     }
 
     fhirAxios.update( update ).then( (resource) => {
-      fhirAudit.update( req.user, req.ip, resource.resourceType + "/" + resource.id
+      fhir.update( req.user, req.ip, resource.resourceType + "/" + resource.id
         + (resource.meta.versionId ? "/_history/"+resource.meta.versionId : ""), true )
       fhirSecurity.postProcess( resource, uuid ).then( (results) => {
         fhirReports.delayedRun()

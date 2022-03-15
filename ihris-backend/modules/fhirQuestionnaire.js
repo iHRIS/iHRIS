@@ -285,7 +285,6 @@ const fhirQuestionnaire = {
         const capitalize = (str) => {
           return str[0].toUpperCase() + str.slice(1)
         }
-
         const processItems = (items) => {
           return new Promise( async (resolve,reject) => {
             for( let item of items ) {
@@ -297,11 +296,8 @@ const fhirQuestionnaire = {
                 }
               } else {
                 let question = questionnaireRef[item.linkId]
-
-
                 let simple = [ "date", "string", "dateTime", "text", "attachment" ]
-                let data = { linkId: item.linkId, definition: item.definition, q: question.type }
-
+                let data = { linkId: item.linkId, definition: item.definition, q: question.type }               
                 if ( item.definition.includes("extension") ) {
                   logger.silly("EXT",question,item)
                   // Check for multiple extensions so the URL can be set up.

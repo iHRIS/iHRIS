@@ -5,15 +5,16 @@ const fhirAxios = nconf.fhirAxios
 const workflowPromotion = {
   process: ( req ) => {
     return new Promise( async (resolve, reject) => {
+      let resource
       let bundle = {
         resourceType: "Bundle",
         type: "transaction",
         entry: []
       }
       //winston.info(JSON.stringify( req.body,null,2))
-      fhirAxios.read( "Practitioner", req.query.practitionerrole ).then( (resource) =>{
-      try {
-        if (resource){
+      resource = await fhirAxios.read("Practitioner", req.query.practitioner);
+      if (resource) {
+        try {
          
           if ( req.body && req.body.item 
             && req.body.item && req.body.item[0].linkId === "PractitionerRole"
@@ -136,15 +137,11 @@ const workflowPromotion = {
             winston.error("Either End date or Job title not provided")
             resolve(await workflowPromotion.outcome("Either End date or Job title not provided"))
           }
-        }
-      } catch(err) {
-        winston.error(err)
-        resolve(await workflowPromotion.outcome(err.message))
-      } 
-    }).catch(err =>{
-      winston.error(err.message)
-      reject(err)
-    })
+        } catch(err) {
+          winston.error(err)
+          resolve(await workflowPromotion.outcome(err.message))
+        } 
+      }
     })
   },
   postProcess: ( req, results ) => {
