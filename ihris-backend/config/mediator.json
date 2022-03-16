@@ -7,10 +7,10 @@
         "fhirServer": {
             "username": "hapi",
             "password": "PASS",
-            "baseURL": "http://localhost:8080/hapi/fhir"
+            "baseURL": "http://ec2-34-226-246-236.compute-1.amazonaws.com:8080/hapi/fhir"
         },
         "elastic": {
-            "server": "http://localhost:9200",
+            "server": "http://ec2-34-226-246-236.compute-1.amazonaws.com:9200",
             "username": "",
             "password": "",
             "max_compilations_rate": "10000/1m",
@@ -26,7 +26,7 @@
             "responseBody": true,
             "name": "Add or Get Practitioner Resource Data From/To NHWR",
             "description": "Add or Get Practitioner Resource Data From/To NHWR",
-            "urlPattern": "/fhir",
+            "urlPattern": "/fhir/mediator/",
             "matchContentRegex": null,
             "matchContentXpath": null,
             "matchContentValue": null,
@@ -83,8 +83,8 @@
     "endpoints": [
         {
             "name": "Activate  National Health Worker Registry",
-            "host": "localhost",
-            "path": "/fhir/Practitioner",
+            "host": "http://ec2-34-226-246-236.compute-1.amazonaws.com",
+            "path": "/fhir/mediator/Practitioner",
             "port": 3000,
             "primary": true,
             "forwardAuthHeader": false,
@@ -101,7 +101,7 @@
             "template": [
                 {
                     "type": "string",
-                    "description": "The base URL (e.g. http://localhost:8080/hapi/fhir)",
+                    "description": "The base URL (e.g. http://ec2-34-226-246-236.compute-1.amazonaws.com:8080/hapi/fhir)",
                     "displayName": "Base URL",
                     "param": "baseURL"
                 },
@@ -128,7 +128,7 @@
             "template": [
                 {
                     "type": "string",
-                    "description": "The base URL (e.g. http://localhost:9200)",
+                    "description": "The base URL (e.g. http://ec2-34-226-246-236.compute-1.amazonaws.com:9200)",
                     "displayName": "Base URL",
                     "param": "server"
                 },
