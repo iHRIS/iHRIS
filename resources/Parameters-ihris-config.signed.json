@@ -16,11 +16,11 @@
             "code": "1.2.840.10065.1.12.1.14"
           }
         ],
-        "when": "2022-03-15T20:47:17.846Z",
+        "when": "2022-03-16T05:48:56.918Z",
         "who": {
           "reference": "http://ihris.org/fhir/Organization/ihris"
         },
-        "data": "NOYdapRCo52KBHZ2VLouChbOClfq47/6UphwyllHfQgngKOwiLCelg4fTpeawvz0rrA4NUM0KfTi/DT4yqVDxiaJwSJFuCvdRzcMMoByfPO7U6/SFjJgZFNLkfDCp43OTfkl54/yjDeYPoD0jpEe2PRLHNCNjqAzTXSPqio0LUk="
+        "data": "DGgprIg/9dKbLXEOs3B5a/bb/wM0cYnoMAV8Qrf+DIDIZMXgf1kmDnz0SzvKp9fWhyrYRnzeCqViBOEzIqdli9CcoGFlhqDju8z9wz1xOW7H0M7rJc5ftqBedXY4fTuq7OIzihxXs8gBKE8WKV1Rug+JArpwSfFzjkX3JgY1wkg="
       }
     },
     {
@@ -107,180 +107,20 @@
           "valueString": "/resource/search/practitioner"
         },
         {
-          "name": "site:nav:menu:position:text",
-          "valueString": "Positions"
-        },
-        {
-          "name": "site:nav:menu:position:order",
-          "valueString": "3"
-        },
-        {
-          "name": "site:nav:menu:position:icon",
-          "valueString": "mdi-account-multiple"
-        },
-        {
-          "name": "site:nav:menu:position:menu:position_search:text",
-          "valueString": "Search Positions"
-        },
-        {
-          "name": "site:nav:menu:position:menu:position_search:url",
-          "valueString": "/resource/search/practitionerrole"
-        },
-        {
-          "name": "site:nav:menu:position:menu:position_add:text",
-          "valueString": "Add Position"
-        },
-        {
-          "name": "site:nav:menu:position:menu:position_add:url",
-          "valueString": "/resource/add/practitionerrole"
-        },
-        {
-          "name": "site:nav:menu:location:text",
-          "valueString": "Locations and Facilities"
-        },
-        {
-          "name": "site:nav:menu:location:order",
-          "valueString": "4"
-        },
-        {
-          "name": "site:nav:menu:location:icon",
-          "valueString": "mdi-map-marker-multiple"
-        },
-        {
-          "name": "site:nav:menu:location:menu:location_search:text",
-          "valueString": "Locations"
-        },
-        {
-          "name": "site:nav:menu:location:menu:location_search:url",
-          "valueString": "/resource/search/location"
-        },
-        {
-          "name": "site:nav:menu:location:menu:facility_search:text",
-          "valueString": "Facilities"
-        },
-        {
-          "name": "site:nav:menu:location:menu:facility_search:url",
-          "valueString": "/resource/search/facility"
-        },
-        {
-          "name": "site:nav:menu:database:text",
-          "valueString": "System Administration"
-        },
-        {
-          "name": "site:nav:menu:database:order",
-          "valueString": "5"
-        },
-        {
-          "name": "site:nav:menu:database:icon",
-          "valueString": "mdi-database"
-        },
-        {
-          "name": "site:nav:menu:database:menu:cadre:text",
-          "valueString": "Cadres"
-        },
-        {
-          "name": "site:nav:menu:database:menu:cadre:url",
-          "valueString": "/resource/search/cadre"
-        },
-        {
-          "name": "site:nav:menu:database:menu:cadre:order",
+          "name": "site:nav:menu:person:menu:person_search:order",
           "valueString": "1"
         },
         {
-          "name": "site:nav:menu:database:menu:classification:text",
-          "valueString": "Classifications"
+          "name": "site:nav:menu:person:menu:person_facility:text",
+          "valueString": "Search Health Facility"
         },
         {
-          "name": "site:nav:menu:database:menu:classification:url",
-          "valueString": "/resource/search/classification"
+          "name": "site:nav:menu:person:menu:person_facility:url",
+          "valueString": "/resource/search/facility"
         },
         {
-          "name": "site:nav:menu:database:menu:classification:order",
+          "name": "site:nav:menu:person:menu:person_facility:order",
           "valueString": "2"
-        },
-        {
-          "name": "site:nav:menu:database:menu:job:text",
-          "valueString": "Job Titles"
-        },
-        {
-          "name": "site:nav:menu:database:menu:job:url",
-          "valueString": "/resource/search/job"
-        },
-        {
-          "name": "site:nav:menu:database:menu:job:order",
-          "valueString": "3"
-        },
-        {
-          "name": "site:nav:menu:database:menu:job-type:text",
-          "valueString": "Job Type"
-        },
-        {
-          "name": "site:nav:menu:database:menu:job-type:url",
-          "valueString": "/resource/search/job-type"
-        },
-        {
-          "name": "site:nav:menu:database:menu:job-type:order",
-          "valueString": "4"
-        },
-        {
-          "name": "site:nav:menu:database:menu:leave-type:text",
-          "valueString": "Leave Types"
-        },
-        {
-          "name": "site:nav:menu:database:menu:leave-type:url",
-          "valueString": "/resource/search/leave-type"
-        },
-        {
-          "name": "site:nav:menu:database:menu:leave-type:order",
-          "valueString": "5"
-        },
-        {
-          "name": "site:nav:menu:database:menu:employment-status:text",
-          "valueString": "Employment Status"
-        },
-        {
-          "name": "site:nav:menu:database:menu:employment-status:url",
-          "valueString": "/resource/search/employment-status"
-        },
-        {
-          "name": "site:nav:menu:database:menu:employment-status:order",
-          "valueString": "6"
-        },
-        {
-          "name": "site:nav:menu:database:menu:reason-departure:text",
-          "valueString": "Reasons For departure"
-        },
-        {
-          "name": "site:nav:menu:database:menu:reason-departure:url",
-          "valueString": "/resource/search/reason-departure"
-        },
-        {
-          "name": "site:nav:menu:database:menu:reason-departure:order",
-          "valueString": "7"
-        },
-        {
-          "name": "site:nav:menu:database:menu:educational-major:text",
-          "valueString": "Educational Major"
-        },
-        {
-          "name": "site:nav:menu:database:menu:educational-major:url",
-          "valueString": "/resource/search/educational-major"
-        },
-        {
-          "name": "site:nav:menu:database:menu:educational-major:order",
-          "valueString": "8"
-        },
-        {
-          "name": "site:nav:menu:database:menu:education-level:text",
-          "valueString": "Education Level"
-        },
-        {
-          "name": "site:nav:menu:database:menu:education-level:url",
-          "valueString": "/resource/search/education-level"
-        },
-        {
-          "name": "site:nav:menu:database:menu:education-level:order",
-          "valueString": "9"
         },
         {
           "name": "site:nav:menu:dashboard:text",
@@ -304,7 +144,7 @@
         },
         {
           "name": "site:nav:menu:reports:order",
-          "valueString": "6"
+          "valueString": "3"
         },
         {
           "name": "site:nav:menu:reports:icon",
@@ -352,7 +192,7 @@
         },
         {
           "name": "site:nav:menu:users:order",
-          "valueString": "7"
+          "valueString": "4"
         },
         {
           "name": "site:nav:menu:users:icon",
@@ -376,7 +216,7 @@
         },
         {
           "name": "site:nav:menu:users:menu:tasks_search:text",
-          "valueString": "Search Tasks"
+          "valueString": "Search Permissions"
         },
         {
           "name": "site:nav:menu:users:menu:tasks_search:url",
@@ -388,7 +228,7 @@
         },
         {
           "name": "site:nav:menu:password:order",
-          "valueString": "8"
+          "valueString": "5"
         },
         {
           "name": "site:nav:menu:password:icon",
@@ -404,7 +244,7 @@
         },
         {
           "name": "site:nav:menu:audit:order",
-          "valueString": "9"
+          "valueString": "6"
         },
         {
           "name": "site:nav:menu:audit:icon",
