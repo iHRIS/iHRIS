@@ -19,7 +19,7 @@
     "express": "~4.16.1",
     "express-fileupload": "^1.2.1",
     "express-session": "^1.17.2",
-    "fhir2es": "^3.0.13",
+    "fhir2es": "^4.0.2",
     "fhirpath": "^2.9.0",
     "http-proxy-middleware": "^1.3.1",
     "is-empty": "^1.2.0",
