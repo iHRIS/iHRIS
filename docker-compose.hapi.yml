@@ -10,8 +10,8 @@ services:
     environment:
       profiles.active: r4
       spring.datasource.url: 'jdbc:postgresql://db:5432/hapi'
-      spring.datasource.username: admin
-      spring.datasource.password: admin
+      spring.datasource.username: "hapi"
+      spring.datasource.password: PASS
       spring.datasource.driverClassName: org.postgresql.Driver
       spring.jpa.properties.hibernate.search.enabled: 'true'
       hapi.fhir.tester.home.server_address: "http://localhost:8080/hapi/fhir"
@@ -24,9 +24,9 @@ services:
     image: postgres
     restart: always
     environment:
-      POSTGRES_PASSWORD: admin
-      POSTGRES_USER: admin
-      POSTGRES_DB: hapi
+      POSTGRES_PASSWORD: "PASS"
+      POSTGRES_USER: "hapi"
+      POSTGRES_DB: "hapi"
     # not needed for networking between containers but here for troubleshooting
     ports:
       - "5432:5432"
