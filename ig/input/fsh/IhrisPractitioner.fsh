@@ -96,9 +96,17 @@ Description:    "NHWR profile of Practitioner."
 * communication.extension[proficiency].extension[type].valueCoding MS
 * extension contains
     IhrisPractitionerResidence named residence 0..1 MS and
-    IhrisPractitionerNationality named nationality 0..1 and
-    IhrisPractitionerMaritalStatus named maritalStatus 0..1 and
-    IhrisPractitionerDependents named dependents 0..1
+    IhrisPractitionerNationality named nationality 0..1 MS and
+    IhrisPractitionerMaritalStatus named maritalStatus 0..1 MS and
+    IhrisPractitionerDependents named dependents 0..1 MS and 
+    IhrisPractitionerInstitutionCategory named institutionCategory 0..1 MS and
+    IhrisPractitionerInstitutionType named institutionType 0..1 MS and
+    IhrisPractitionerFacility named facility 0..1 MS and
+    IhrisPractitionerFacilityType named facilityType 0..1 MS and 
+    IhrisPractitionerRegion named region 0..1 MS and 
+    IhrisPractitionerRegistrationBoard named registrationBoard 0..1 MS and 
+    IhrisPractitionerCategory named practitionerCategory 0..1 MS and
+    IhrisPractitionerSubmittingSystem named submittingSystem  0..1 MS
 * extension[residence].valueReference.reference MS
 * active 1..1 MS
 * active ^label = "Active"
@@ -188,6 +196,97 @@ Description:    "NHWR extension for Practitioner number of dependents."
 * value[x] only positiveInt
 * valuePositiveInt 1..1 MS
 * valuePositiveInt ^label = "Number of Dependents"
+
+// additional extensions
+// institution category
+Extension: IhrisPractitionerInstitutionCategory
+Id: ihris-practitioner-institution-category
+Title: "Institution Category"
+Description: "Extension for Institution Category"
+* ^context.type = #element
+* ^context.expression = "Practitioner"
+* value[x] only string
+* valueString 1..1 MS
+* valueString ^label = "Institution Category"
+
+//institution type
+Extension: IhrisPractitionerInstitutionType
+Id: ihris-practitioner-institution-type
+Title: "Institution Type"
+Description: "Extension for Institution Type"
+* ^context.type = #element
+* ^context.expression = "Practitioner"
+* value[x] only string
+* valueString 1..1 MS
+* valueString ^label = "Institution Type"
+
+// facility
+Extension: IhrisPractitionerFacility
+Id: ihris-practitioner-facility
+Title: "Facility"
+Description: "Extension for Facility"
+* ^context.type = #element
+* ^context.expression = "Practitioner"
+* value[x] only string
+* valueString 1..1 MS
+* valueString ^label = "Facility"
+
+//facility
+Extension: IhrisPractitionerFacilityType
+Id: ihris-practitioner-facility-type
+Title: "Facility Type"
+Description: "Extension Practitioner Facility Type"
+* ^context.type = #element
+* ^context.expression = "Practitioner"
+* value[x] only string
+* valueString 1..1 MS
+* valueString ^label = "Facility Type"
+
+// region
+Extension: IhrisPractitionerRegion
+Id: ihris-practitioner-region
+Title: "Region"
+Description: "Extension for Practitioner Region"
+* ^context.type = #element
+* ^context.expression = "Practitioner"
+* value[x] only string
+* valueString 1..1 MS
+* valueString ^label = "Region"
+
+// registration board
+Extension: IhrisPractitionerRegistrationBoard
+Id: ihris-practitioner-registration-board
+Title: "Registration Baord"
+Description: "Extension for Registration Board"
+* ^context.type = #element
+* ^context.expression = "Practitioner"
+* value[x] only string
+* valueString 1..1 MS
+* valueString ^label = "Registration Board"
+
+// practitioner category
+Extension: IhrisPractitionerCategory
+Id: ihris-practitioner-category
+Title: "Category"
+Description: "Extension for practitioner category"
+* ^context.type = #element
+* ^context.expression = "Practitioner"
+* value[x] only string
+* valueString 1..1 MS
+* valueString ^label = "Category"
+
+// submitting system
+Extension: IhrisPractitionerSubmittingSystem
+Id: ihris-practitioner-submitting-system
+Title: "Submitting System"
+Description: " Extension for Submitting Systems"
+* ^context.type = #element
+* ^context.expression = "Practitioner"
+* value[x] only string
+* valueString 1..1 MS
+* valueString ^label = "Category"
+
+
 
 CodeSystem:      IhrisRelationCodesystem
 Id:              ihris-relation-codesystem
