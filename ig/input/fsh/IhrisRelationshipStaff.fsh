@@ -48,8 +48,19 @@ Usage:          #example
 * extension[reportdetails].extension[reportelement][6].extension[name].valueString = "address.where(use='work).text"
 * extension[reportdetails].extension[reportelement][6].extension[display].valueString = "Address"
 
-* extension[reportdetails].extension[reportelement][7].extension[label].valueString = "residence"
-* extension[reportdetails].extension[reportelement][7].extension[name].valueString = "Practitioner.extension.where(url='http://ihris.org/fhir/StructureDefinition/ihris-practitioner-residence').valueReference.reference"
-* extension[reportdetails].extension[reportelement][7].extension[display].valueString = "Residence"
-* extension[reportdetails].extension[reportelement][7].extension[filter].valueBoolean = true
-* extension[reportdetails].extension[reportelement][7].extension[dropDownFilter].valueBoolean = true
+// * extension[reportdetails].extension[reportelement][7].extension[label].valueString = "residence"
+// * extension[reportdetails].extension[reportelement][7].extension[name].valueString = "Practitioner.extension.where(url='http://ihris.org/fhir/StructureDefinition/ihris-practitioner-residence').valueReference.reference"
+// * extension[reportdetails].extension[reportelement][7].extension[display].valueString = "Residence"
+// * extension[reportdetails].extension[reportelement][7].extension[filter].valueBoolean = true
+// * extension[reportdetails].extension[reportelement][7].extension[dropDownFilter].valueBoolean = true
+
+// * extension[reportlink].extension[name].valueString = "facility"
+// * extension[reportlink].extension[resource].valueString = "Location"
+// * extension[reportlink].extension[linkElement].valueString = "Location.id"
+// * extension[reportlink].extension[linkTo].valueString = "role.location.reference"
+// * extension[reportlink].extension[multiple].valueBoolean = false
+// * extension[reportlink].extension[reportelement][0].extension[label].valueString = "dutyPost"
+// * extension[reportlink].extension[reportelement][0].extension[name].valueString = "name"
+// * extension[reportlink].extension[reportelement][0].extension[display].valueString = "Facility/Place of work"
+// * extension[reportlink].extension[reportelement][0].extension[filter].valueBoolean = true
+// * extension[reportlink].extension[reportelement][0].extension[dropDownFilter].valueBoolean = true

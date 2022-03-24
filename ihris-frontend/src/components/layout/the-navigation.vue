@@ -3,8 +3,8 @@
     app
     clipped
     permanent
-    class="primary darken-1 white--text font-weight-bold"
-    :width="310"
+    class="primary darken-1 white--text"
+    :width="250"
   >
     <v-list shaped nav dark dense v-if="$store.state.user.loggedin">
       <template v-for="item in menu">
@@ -19,7 +19,7 @@
             no-action
           >
             <template v-slot:activator>
-              <v-list-item-title class="subtitle-1 font-weight-bold">{{
+              <v-list-item-title class="subtitle-1">{{
                 item.text
               }}</v-list-item-title>
             </template>
@@ -41,7 +41,7 @@
             <v-list-item-icon>
               <v-icon>{{ item.icon }}</v-icon>
             </v-list-item-icon>
-            <v-list-item-title class="subtitle-1 font-weight-bold">{{
+            <v-list-item-title class="subtitle-1 ">{{
               item.text
             }}</v-list-item-title>
           </v-list-item>

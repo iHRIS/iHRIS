@@ -159,34 +159,6 @@
           "valueString": "/report/ihris-es-report-staff"
         },
         {
-          "name": "site:nav:menu:reports:menu:staff:order",
-          "valueString": "1"
-        },
-        {
-          "name": "site:nav:menu:reports:menu:contacts:text",
-          "valueString": "Health Worker Contacts "
-        },
-        {
-          "name": "site:nav:menu:reports:menu:contacts:url",
-          "valueString": "/report/ihris-es-contacts-report"
-        },
-        {
-          "name": "site:nav:menu:reports:menu:contacts:order",
-          "valueString": "2"
-        },
-        {
-          "name": "site:nav:menu:reports:menu:positions:text",
-          "valueString": "Health Worker Positions "
-        },
-        {
-          "name": "site:nav:menu:reports:menu:positions:url",
-          "valueString": "/report/ihris-es-positions-report"
-        },
-        {
-          "name": "site:nav:menu:reports:menu:positions:order",
-          "valueString": "3"
-        },
-        {
           "name": "site:nav:menu:users:text",
           "valueString": "User Management"
         },
