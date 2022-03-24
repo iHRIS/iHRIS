@@ -46,3 +46,29 @@ Description:    "NHWR profile of Practitioner Role."
 * location 1..1 MS 
 * location ^label = "Facility"
 * location only Reference(IhrisJurisdiction)
+* extension contains 
+    IhrisPractitionerRoleCadre named cadre 0..1 MS
+    
+Extension: IhrisPractitionerRoleCadre
+Id: ihris-practitionerrole-cadre
+Title: "Cadre"
+Description: "Cadre extension for Cadre"
+* ^context.type = #element
+* ^context.expression = "PractitionerRole"
+* value[x] only Coding
+* valueCoding 1..1 MS 
+* valueCoding ^label = "Cadre"
+* valueCoding from IhrisCadreValueSet 
+
+ValueSet:         IhrisCadreValueSet
+Id:               ihris-cadre-valueset
+Title:            "NHWR Cadre ValueSet"
+* ^date = "2020-10-29T08:41:04.362Z"
+* ^version = "0.2.0"
+* codes from system IhrisCadreCodesystem
+
+CodeSystem:      IhrisCadreCodesystem
+Id:              ihris-cadre-codesystem
+Title:           "Cadre"
+* ^date = "2020-10-29T08:41:04.362Z"
+* ^version = "0.2.0"

@@ -72,12 +72,6 @@ Usage:          #example
 * extension[reportlink][0].extension[reportelement][2].extension[filter].valueBoolean = true
 * extension[reportlink][0].extension[reportelement][2].extension[dropDownFilter].valueBoolean = false
 
-* extension[reportlink][0].extension[reportelement][3].extension[label].valueString = "cadre"
-* extension[reportlink][0].extension[reportelement][3].extension[name].valueString = "PractitionerRole.extension.where(url='http://ihris.org/fhir/StructureDefinition/ihris-practitionerrole-cadre').valueCoding.display"
-* extension[reportlink][0].extension[reportelement][3].extension[display].valueString = "Cadre"
-* extension[reportlink][0].extension[reportelement][3].extension[filter].valueBoolean = true
-* extension[reportlink][0].extension[reportelement][3].extension[dropDownFilter].valueBoolean = true
-
 
 // * extension[reportlink][0].extension[reportelement][5].extension[label].valueString = "fyear"
 // * extension[reportlink][0].extension[reportelement][5].extension[name].valueString = "year(period.start)"
