@@ -25,7 +25,7 @@
             "requestBody": true,
             "responseBody": true,
             "name": "Add or Get Practitioner Resource Data From/To NHWR ",
-            "description": "Add or Get Practitioner Resource Data From/To NHWR",
+            "description": "Add or Get Practitioner Resource Data From/To NHWR ",
             "urlPattern": "/fhir/mediator/",
             "matchContentRegex": null,
             "matchContentXpath": null,
