@@ -1,13 +1,13 @@
 FROM node:14-buster
 
 ARG branch=dev
-RUN apt-get -qq clean all && apt -qq update && apt -qq upgrade && apt install -y -qq git
+RUN apt-get -qq clean all && apt -qq update && apt -qq upgrade -y && apt install -y -qq git
 RUN git clone --branch ${branch} https://github.com/jabahum/iHRIS /src/
 
 
 # generate fsh files
 WORKDIR /src/ig
-RUN npm install -g fsh-sushi
+RUN npm install -g fsh-sushi@1.3.2
 RUN sushi -s .
 
 WORKDIR /src/tools
