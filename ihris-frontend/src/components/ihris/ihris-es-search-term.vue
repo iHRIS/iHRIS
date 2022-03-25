@@ -1,6 +1,8 @@
 <template>
   <label>
+    <!-- <v-col class="l"></v-col> -->
     <v-autocomplete
+      class="mx-1 my-1"
       v-if="isDropDown && !hideFilters"
       :loading="loading"
       :label="label"
@@ -9,7 +11,6 @@
       outlined
       :error-messages="err_messages"
       :error="error"
-      shaped
       clearable
       hide-details
       small-chips
@@ -18,21 +19,12 @@
       @change="updateSearch()"
       @click:clear="clearSearch()"
       item-text="display"
-      item-value="code">
+      item-value="code"
+    >
       <template v-slot:prepend-item>
-        <v-radio-group
-          v-model="filterType"
-          @change="updateSearch()"
-          row
-        >
-          <v-radio
-            label="Include"
-            value="include"
-          ></v-radio>
-          <v-radio
-            label="Exclude"
-            value="exclude"
-          ></v-radio>
+        <v-radio-group v-model="filterType" @change="updateSearch()" row>
+          <v-radio label="Include" value="include"></v-radio>
+          <v-radio label="Exclude" value="exclude"></v-radio>
         </v-radio-group>
         <v-divider></v-divider>
       </template>
@@ -49,6 +41,7 @@
         >
           <template v-slot:activator="{ on, attrs }">
             <v-text-field
+              class="mx-1 my-1"
               v-model="value"
               :label="label"
               readonly
@@ -58,11 +51,11 @@
               dense
               outlined
               hide-details
-              shaped
               @input="updateSearch"
             ></v-text-field>
           </template>
           <v-date-picker
+            class="mx-1 my-1"
             ref="picker"
             v-model="value"
             :max="new Date().toISOString().substr(0, 10)"
@@ -71,7 +64,18 @@
           ></v-date-picker>
         </v-menu>
       </template>
-      <v-text-field v-else :label="label" v-model="value" dense outlined hide-details shaped clearable @change="updateSearch()" @click:clear="clearSearch()" />
+      <v-text-field
+        class="mx-1 my-1"
+        v-else
+        :label="label"
+        v-model="value"
+        dense
+        outlined
+        hide-details
+        clearable
+        @change="updateSearch()"
+        @click:clear="clearSearch()"
+      />
     </template>
   </label>
 </template>
@@ -79,46 +83,46 @@
 <script>
 export default {
   name: "ihris-search-term",
-  props: ["label","expression","isDropDown", "reportData", "hideFilters"],
-  data: function() {
+  props: ["label", "expression", "isDropDown", "reportData", "hideFilters"],
+  data: function () {
     return {
       loading: false,
       items: [],
       error: false,
       err_messages: null,
-      filterType: 'include',
+      filterType: "include",
       value: null,
-      filterDataType: '',
+      filterDataType: "",
       dateMenu: false,
-    }
+    };
   },
-  mounted: function() {
-    if(this.reportData.mappings.mappings.properties[this.expression]) {
-      this.filterDataType = this.reportData.mappings.mappings.properties[this.expression].type
+  mounted: function () {
+    if (this.reportData.mappings.mappings.properties[this.expression]) {
+      this.filterDataType =
+        this.reportData.mappings.mappings.properties[this.expression].type;
     }
-    if(this.isDropDown && this.filterDataType) {
+    if (this.isDropDown && this.filterDataType) {
       this.loading = true;
-      let url = `/es/populateFilter/${this.reportData.indexName}/${this.expression}?dataType=${this.filterDataType}`
+      let url = `/es/populateFilter/${this.reportData.indexName}/${this.expression}?dataType=${this.filterDataType}`;
       fetch(url, {
-        method: 'GET'
-      }).then(response => {
+        method: "GET",
+      })
+        .then((response) => {
           response
             .json()
-            .then(data => {
+            .then((data) => {
               this.loading = false;
-              for(let bucket of data) {
-                this.items.push(
-                  bucket.key.value
-                )
+              for (let bucket of data) {
+                this.items.push(bucket.key.value);
               }
             })
-            .catch(err => {
+            .catch((err) => {
               this.loading = false;
               this.error_message = "Unable to load results.";
               console.log(err);
             });
         })
-        .catch(err => {
+        .catch((err) => {
           this.loading = false;
           this.error_message = "Unable to load results.";
           console.log(err);
@@ -126,17 +130,17 @@ export default {
     }
   },
   methods: {
-    updateSearch: function() {
-      this.$emit('termChange', this.expression, this.value, this.filterType)
+    updateSearch: function () {
+      this.$emit("termChange", this.expression, this.value, this.filterType);
     },
-    clearSearch: function() {
-      this.$emit('termChange', this.expression, [])
-    }
+    clearSearch: function () {
+      this.$emit("termChange", this.expression, []);
+    },
   },
   watch: {
-    dateMenu (val) {
-      val && setTimeout(() => (this.$refs.picker.activePicker = 'YEAR'))
+    dateMenu(val) {
+      val && setTimeout(() => (this.$refs.picker.activePicker = "YEAR"));
     },
   },
-}
+};
 </script>
