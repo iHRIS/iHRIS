@@ -1,4 +1,4 @@
-Instance:       ihris-es-report-cadre
+Instance:       ihris-es-report-inservice
 InstanceOf:     IhrisRelationship
 Title:          "NHWR Relationship"
 Usage:          #example
@@ -7,7 +7,7 @@ Usage:          #example
 * code.coding = #iHRISRelationship
 * subject.reference = "StructureDefinition/ihris-practitioner"
 * extension[reportdetails].extension[name].valueString = "practitioner"
-* extension[reportdetails].extension[label].valueString = "NHWR Cadre Report"
+* extension[reportdetails].extension[label].valueString = "NHWR Inservice Report"
 * extension[reportdetails].extension[resource].valueString = "Practitioner"
 * extension[reportdetails].extension[query].valueString = "active=true"
 * extension[reportdetails].extension[displayCheckbox].valueBoolean = true

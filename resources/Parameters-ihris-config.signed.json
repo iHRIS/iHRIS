@@ -16,11 +16,11 @@
             "code": "1.2.840.10065.1.12.1.14"
           }
         ],
-        "when": "2022-03-16T07:30:02.682Z",
+        "when": "2022-03-25T08:28:23.123Z",
         "who": {
           "reference": "http://ihris.org/fhir/Organization/ihris"
         },
-        "data": "DGgprIg/9dKbLXEOs3B5a/bb/wM0cYnoMAV8Qrf+DIDIZMXgf1kmDnz0SzvKp9fWhyrYRnzeCqViBOEzIqdli9CcoGFlhqDju8z9wz1xOW7H0M7rJc5ftqBedXY4fTuq7OIzihxXs8gBKE8WKV1Rug+JArpwSfFzjkX3JgY1wkg="
+        "data": "JwRW4At4NEXzb6B1cH68o0ElWwTiGJPcVJjCHuxhHE6FmEr4neP0hLW9+6hHHTdbb9V2PejEgDUnMkodCP9tLcXnckE4BDKzkDfILYqnBJ/e53EnZEikKLg/9CyVhdbJk7KTobiDTIFTCUYsxLu9YbwVlwjUGxF8TZV2LyoAWlI="
       }
     },
     {
@@ -157,6 +157,46 @@
         {
           "name": "site:nav:menu:reports:menu:staff:url",
           "valueString": "/report/ihris-es-report-staff"
+        },
+        {
+          "name": "site:nav:menu:reports:menu:staff:order",
+          "valueString": "1"
+        },
+        {
+          "name": "site:nav:menu:reports:menu:inservice:text",
+          "valueString": "Health Worker Inservice Report"
+        },
+        {
+          "name": "site:nav:menu:reports:menu:inservice:url",
+          "valueString": "/report/ihris-es-report-inservice"
+        },
+        {
+          "name": "site:nav:menu:reports:menu:inservice:order",
+          "valueString": "2"
+        },
+        {
+          "name": "site:nav:menu:reports:menu:cadre:text",
+          "valueString": "Health Worker Cadre Report"
+        },
+        {
+          "name": "site:nav:menu:reports:menu:cadre:url",
+          "valueString": "/report/ihris-es-report-cadre"
+        },
+        {
+          "name": "site:nav:menu:reports:menu:cadre:order",
+          "valueString": "3"
+        },
+        {
+          "name": "site:nav:menu:reports:menu:systems:text",
+          "valueString": "Health Worker Systems Report"
+        },
+        {
+          "name": "site:nav:menu:reports:menu:systems:url",
+          "valueString": "/report/ihris-es-report-systems"
+        },
+        {
+          "name": "site:nav:menu:reports:menu:systems:order",
+          "valueString": "4"
         },
         {
           "name": "site:nav:menu:users:text",
