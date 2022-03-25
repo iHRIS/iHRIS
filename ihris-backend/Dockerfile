@@ -1,7 +1,7 @@
-FROM node:erbium-slim
+FROM node:14-buster
 
 ARG branch=dev
-RUN apt-get -qq update && apt-get install -y -qq git
+RUN apt-get -qq clean all && apt -qq update && apt -qq upgrade && apt install -y -qq git
 RUN git clone --branch ${branch} https://github.com/jabahum/iHRIS /src/
 
 
