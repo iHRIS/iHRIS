@@ -62,3 +62,5 @@ typings/
 
 # config
 config/baseConfig.json
+config/baseConfig.json.example
+
