@@ -31,7 +31,7 @@
                 <span>Edit</span>
               </v-btn>
               <v-spacer></v-spacer>
-              <v-btn>
+              <v-btn @click="$emit('set-print')">
                 <v-icon light>mdi-printer</v-icon>
                 <span>Print</span>
               </v-btn>
