@@ -1,6 +1,6 @@
 <template>
   <div>
-    <v-app-bar color="white" app clipped-left clipped-right>
+    <v-app-bar class="primary darken-1 white--text" app clipped-left clipped-right>
       <router-link to="/"
         ><v-img
           :src="'/images/' + header.logo"
@@ -10,10 +10,10 @@
       /></router-link>
 
       <v-toolbar-title class="headline ml-2" bottom="true">
-        <span v-if="header.title" class="primary--text">{{
+        <span v-if="header.title" class="white--text">{{
           header.title
         }}</span>
-        <span class="secondary--text" v-if="header.site">
+        <span class="white--text" v-if="header.site">
           | {{ header.site }}</span
         >
       </v-toolbar-title>
