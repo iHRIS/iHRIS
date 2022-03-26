@@ -183,7 +183,7 @@ Title:          "Practitioner"
 Usage:          #example
 * code = IhrisResourceCodeSystem#page
 * extension[display].extension[resource].valueReference = Reference(StructureDefinition/ihris-practitioner)
-* extension[display].extension[search][0].valueString = "Identification Number|Practitioner.extension.where(url='ihris-practitioner-identification-number').valueString"
+* extension[display].extension[search][0].valueString = "Identification Number|Practitioner.extension.where(url='http://ihris.org/fhir/StructureDefinition/ihris-practitioner-identification-number').valueString"
 * extension[display].extension[search][1].valueString = "Surname|Practitioner.name.where(use='official').family"
 * extension[display].extension[search][2].valueString = "Given Name(s)|Practitioner.name.where(use='official').given"
 * extension[display].extension[search][3].valueString = "Birth Date|Practitioner.birthDate"
@@ -199,6 +199,7 @@ Usage:          #example
 * extension[display].extension[filter][2].valueString = "Gender|gender|http://hl7.org/fhir/administrative-gender"
 * extension[display].extension[filter][3].valueString = "Place Of Work|address"
 * extension[display].extension[filter][4].valueString = "National ID(NIN)|identifier"
+* extension[display].extension[filter][5].valueString = "Identification Number|Practitioner.extension.where(url='http://ihris.org/fhir/StructureDefinition/ihris-practitioner-identification-number').valueString"
 * extension[display].extension[add].extension[url].valueUrl = "/questionnaire/ihris-practitioner/practitioner"
 * extension[display].extension[add].extension[icon].valueString = "mdi-account-plus"
 * extension[display].extension[add].extension[class].valueString = "accent"
