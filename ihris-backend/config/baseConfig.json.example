@@ -45,7 +45,7 @@
     },
     {
       "name": "fhir:base",
-      "valueString": "http://localhost:8080/hapi/fhir"
+      "valueString": "http://wrkfhir:8080/fhir"
     },
     {
       "name": "emnutt:base",
@@ -65,7 +65,7 @@
     },
     {
       "name": "elasticsearch:base",
-      "valueString": "http://localhost:9200"
+      "valueString": "http://wrkes:9200"
     },
     {
       "name": "elasticsearch:username",
@@ -85,7 +85,7 @@
     },
     {
       "name": "kibana:base",
-      "valueString": "http://localhost:5601"
+      "valueString": "http://wrkkibana:5601"
     },
     {
       "name": "kibana:username",
