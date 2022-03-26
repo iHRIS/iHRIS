@@ -456,6 +456,11 @@ export default {
       processSlots( this.field, this.$scopedSlots.default() )
       */
     },
+
+    // test print pdf
+    printSection() {
+      this.$htmlToPaper("printSection");
+    },
   },
 };
 </script>

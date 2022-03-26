@@ -106,7 +106,8 @@ Description:    "NHWR profile of Practitioner."
     IhrisPractitionerRegion named region 0..1 MS and 
     IhrisPractitionerRegistrationBoard named registrationBoard 0..1 MS and 
     IhrisPractitionerCategory named practitionerCategory 0..1 MS and
-    IhrisPractitionerSubmittingSystem named submittingSystem  0..1 MS
+    IhrisPractitionerSubmittingSystem named submittingSystem  0..1 MS and 
+    IhrisPractitionerIdentificationNumber named identificationNumber  0..1 MS
 * extension[residence].valueReference.reference MS
 * active 1..1 MS
 * active ^label = "Active"
@@ -285,6 +286,17 @@ Description: " Extension for Submitting Systems"
 * value[x] only string
 * valueString 1..1 MS
 * valueString ^label = "Category"
+
+// identification number
+Extension: IhrisPractitionerIdentificationNumber
+Id: ihris-practitioner-identification-number
+Title: "Identification Number"
+Description: " Extension for Identification Number"
+* ^context.type = #element
+* ^context.expression = "Practitioner"
+* value[x] only string
+* valueString 1..1 MS
+* valueString ^label = "Identification Number"
 
 
 

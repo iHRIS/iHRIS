@@ -20,7 +20,8 @@ Description:    "NHWR Page Display details."
       filter 0..* MS and
       add 0..1 MS and
       field 0..* MS and
-      link 0..* MS 
+      link 0..* MS and 
+      print 0..1 MS 
 
 * extension[resource].value[x] only Reference
 * extension[resource].valueReference only Reference(StructureDefinition or CodeSystem)
@@ -85,6 +86,20 @@ Description:    "NHWR Page Display details."
 * extension[field].extension[readOnlyIfSet].valueBoolean MS
 * extension[field].extension[readOnlyIfSet].valueBoolean ^label = "Read Only if the value is set"
 
+// print view button
+* extension[print].extension contains
+      url 1..1 MS and
+      icon 0..1 MS and
+      class 0..1 MS
+* extension[print].extension[url].value[x] only url
+* extension[print].extension[url].valueUrl MS
+* extension[print].extension[url].valueUrl ^label = "Add Link URL"
+* extension[print].extension[icon].value[x] only string
+* extension[print].extension[icon].valueString MS
+* extension[print].extension[icon].valueString ^label = "Add Link Icon"
+* extension[print].extension[class].value[x] only string
+* extension[print].extension[class].valueString MS
+* extension[print].extension[class].valueString ^label = "Add Link Class"
 
 Extension:      IhrisPageSection
 Id:             ihris-page-section
@@ -168,16 +183,17 @@ Title:          "Practitioner"
 Usage:          #example
 * code = IhrisResourceCodeSystem#page
 * extension[display].extension[resource].valueReference = Reference(StructureDefinition/ihris-practitioner)
-* extension[display].extension[search][0].valueString = "Surname|Practitioner.name.where(use='official').family"
-* extension[display].extension[search][1].valueString = "Given Name(s)|Practitioner.name.where(use='official').given"
-* extension[display].extension[search][2].valueString = "Birth Date|Practitioner.birthDate"
-* extension[display].extension[search][3].valueString = "Gender|Practitioner.gender|http://hl7.org/fhir/administrative-gender"
-* extension[display].extension[search][4].valueString = "Place of Work|Practitioner.address.where(use='work').text"
-* extension[display].extension[search][5].valueString = "National ID(NIN) |Practitioner.indentifier.where(use='official').value"
-* extension[display].extension[search][6].valueString = "Active|Practitioner.active"
-* extension[display].extension[search][7].valueString = "Phone|Practitioner.telecom.where(system='phone').value"
-* extension[display].extension[search][8].valueString = "Email|Practitioner.telecom.where(system='email').value"
-* extension[display].extension[search][9].valueString = "Qualification|Practitioner.qualification.code.text"
+* extension[display].extension[search][0].valueString = "Identification Number|Practitioner.extension.where(url='ihris-practitioner-identification-number').valueString"
+* extension[display].extension[search][1].valueString = "Surname|Practitioner.name.where(use='official').family"
+* extension[display].extension[search][2].valueString = "Given Name(s)|Practitioner.name.where(use='official').given"
+* extension[display].extension[search][3].valueString = "Birth Date|Practitioner.birthDate"
+* extension[display].extension[search][4].valueString = "Gender|Practitioner.gender|http://hl7.org/fhir/administrative-gender"
+* extension[display].extension[search][5].valueString = "Place of Work|Practitioner.address.where(use='work').text"
+* extension[display].extension[search][6].valueString = "National ID(NIN) |Practitioner.indentifier.where(use='official').value"
+* extension[display].extension[search][7].valueString = "Active|Practitioner.active"
+* extension[display].extension[search][8].valueString = "Phone|Practitioner.telecom.where(system='phone').value"
+* extension[display].extension[search][9].valueString = "Email|Practitioner.telecom.where(system='email').value"
+* extension[display].extension[search][10].valueString = "Qualification|Practitioner.qualification.code.text"
 * extension[display].extension[filter][0].valueString = "Surname|family:contains"
 * extension[display].extension[filter][1].valueString = "Given Name(s)|given:contains"
 * extension[display].extension[filter][2].valueString = "Gender|gender|http://hl7.org/fhir/administrative-gender"
@@ -246,187 +262,202 @@ Usage:          #example
 * extension[section][4].extension[resource].extension[action][3].extension[row].valueBoolean = true
 * extension[section][4].extension[resource].extension[action][3].extension[condition].valueString = "PractitionerRole.period.end.empty()"
 * extension[section][4].extension[resource].extension[action][3].extension[class].valueString = "accent"
-* extension[section][5].extension[title].valueString = "Leave Information"
-* extension[section][5].extension[description].valueString = "Leave Details for the Person"
-* extension[section][5].extension[name].valueString = "leave"
-* extension[section][5].extension[resource].extension[resource].valueReference = Reference(StructureDefinition/ihris-basic-leave)
+// * extension[section][5].extension[title].valueString = "Leave Information"
+// * extension[section][5].extension[description].valueString = "Leave Details for the Person"
+// * extension[section][5].extension[name].valueString = "leave"
+// * extension[section][5].extension[resource].extension[resource].valueReference = Reference(StructureDefinition/ihris-basic-leave)
+// * extension[section][5].extension[resource].extension[searchfield].valueString = "practitioner"
+// * extension[section][5].extension[resource].extension[linkfield].valueString = "Basic.extension.where(url='http://ihris.org/fhir/StructureDefinition/ihris-practitioner-reference').valueReference.reference"
+// * extension[section][5].extension[resource].extension[column][0].extension[header].valueString = "Leave Type"
+// * extension[section][5].extension[resource].extension[column][0].extension[field].valueString = "extension.where(url='http://ihris.org/fhir/StructureDefinition/ihris-leave').extension.where(url='leave-type').valueCoding"
+// * extension[section][5].extension[resource].extension[column][1].extension[header].valueString = "Days Requested"
+// * extension[section][5].extension[resource].extension[column][1].extension[field].valueString = "extension.where(url='http://ihris.org/fhir/StructureDefinition/ihris-leave').extension.where(url='daysRequested').valueInteger"
+// * extension[section][5].extension[resource].extension[column][2].extension[header].valueString = "Requested Date"
+// * extension[section][5].extension[resource].extension[column][2].extension[field].valueString = "extension.where(url='http://ihris.org/fhir/StructureDefinition/ihris-leave').extension.where(url='dateRequested').valueDate"
+// * extension[section][5].extension[resource].extension[column][3].extension[header].valueString = "Start Date"
+// * extension[section][5].extension[resource].extension[column][3].extension[field].valueString = "extension.where(url='http://ihris.org/fhir/StructureDefinition/ihris-leave').extension.where(url='period').valuePeriod.start"
+// * extension[section][5].extension[resource].extension[column][4].extension[header].valueString = "End Date"
+// * extension[section][5].extension[resource].extension[column][4].extension[field].valueString = "extension.where(url='http://ihris.org/fhir/StructureDefinition/ihris-leave').extension.where(url='period').valuePeriod.end"
+// * extension[section][5].extension[resource].extension[column][5].extension[header].valueString = "Actions"
+// * extension[section][5].extension[resource].extension[column][5].extension[field].valueString = "_action"
+// * extension[section][5].extension[resource].extension[action][0].extension[link].valueString = "/questionnaire/ihris-leave/leave?practitioner=FHIRID"
+// * extension[section][5].extension[resource].extension[action][0].extension[text].valueString = "Add Leave"
+// * extension[section][5].extension[resource].extension[action][0].extension[row].valueBoolean = false
+// * extension[section][5].extension[resource].extension[action][0].extension[emptyDisplay].valueBoolean = true
+// * extension[section][5].extension[resource].extension[action][0].extension[class].valueString = "primary"
+// * extension[section][5].extension[resource].extension[action][1].extension[link].valueString = "/resource/view/leave/ITEMID"
+// * extension[section][5].extension[resource].extension[action][1].extension[text].valueString = "View"
+// * extension[section][5].extension[resource].extension[action][1].extension[row].valueBoolean = true
+// * extension[section][5].extension[resource].extension[action][1].extension[class].valueString = "primary"
+// * extension[section][6].extension[title].valueString = "Performance Evaluation Information"
+// * extension[section][6].extension[description].valueString = "Performance Evaluation for the Person"
+// * extension[section][6].extension[name].valueString = "performance"
+// * extension[section][6].extension[resource].extension[resource].valueReference = Reference(StructureDefinition/ihris-basic-performance)
+// * extension[section][6].extension[resource].extension[searchfield].valueString = "practitioner"
+// * extension[section][6].extension[resource].extension[linkfield].valueString = "Basic.extension.where(url='http://ihris.org/fhir/StructureDefinition/ihris-practitioner-reference').valueReference.reference"
+// * extension[section][6].extension[resource].extension[column][0].extension[header].valueString = "Evaluator's Name"
+// * extension[section][6].extension[resource].extension[column][0].extension[field].valueString = "extension.where(url='http://ihris.org/fhir/StructureDefinition/ihris-performance').extension.where(url='evaluator').valueString"
+// * extension[section][6].extension[resource].extension[column][1].extension[header].valueString = "Score"
+// * extension[section][6].extension[resource].extension[column][1].extension[field].valueString = "extension.where(url='http://ihris.org/fhir/StructureDefinition/ihris-performance').extension.where(url='score').valueCoding.display"
+// * extension[section][6].extension[resource].extension[column][2].extension[header].valueString = "Start Date"
+// * extension[section][6].extension[resource].extension[column][2].extension[field].valueString = "extension.where(url='http://ihris.org/fhir/StructureDefinition/ihris-performance').extension.where(url='period').valuePeriod.start"
+// * extension[section][6].extension[resource].extension[column][3].extension[header].valueString = "End Date"
+// * extension[section][6].extension[resource].extension[column][3].extension[field].valueString = "extension.where(url='http://ihris.org/fhir/StructureDefinition/ihris-performance').extension.where(url='period').valuePeriod.end"
+// * extension[section][6].extension[resource].extension[column][4].extension[header].valueString = "Actions"
+// * extension[section][6].extension[resource].extension[column][4].extension[field].valueString = "_action"
+// * extension[section][6].extension[resource].extension[action][0].extension[link].valueString = "/questionnaire/ihris-performance/performance?practitioner=FHIRID"
+// * extension[section][6].extension[resource].extension[action][0].extension[text].valueString = "Add Perfromamce Evaluation"
+// * extension[section][6].extension[resource].extension[action][0].extension[row].valueBoolean = false
+// * extension[section][6].extension[resource].extension[action][0].extension[emptyDisplay].valueBoolean = true
+// * extension[section][6].extension[resource].extension[action][0].extension[class].valueString = "primary"
+// * extension[section][6].extension[resource].extension[action][1].extension[link].valueString = "/resource/view/performance/ITEMID"
+// * extension[section][6].extension[resource].extension[action][1].extension[text].valueString = "View"
+// * extension[section][6].extension[resource].extension[action][1].extension[row].valueBoolean = true
+// * extension[section][6].extension[resource].extension[action][1].extension[class].valueString = "primary"
+* extension[section][5].extension[title].valueString = "Education History"
+* extension[section][5].extension[description].valueString = "Education History Details for the Person"
+* extension[section][5].extension[name].valueString = "education-history"
+* extension[section][5].extension[resource].extension[resource].valueReference = Reference(StructureDefinition/ihris-basic-education-history)
 * extension[section][5].extension[resource].extension[searchfield].valueString = "practitioner"
 * extension[section][5].extension[resource].extension[linkfield].valueString = "Basic.extension.where(url='http://ihris.org/fhir/StructureDefinition/ihris-practitioner-reference').valueReference.reference"
-* extension[section][5].extension[resource].extension[column][0].extension[header].valueString = "Leave Type"
-* extension[section][5].extension[resource].extension[column][0].extension[field].valueString = "extension.where(url='http://ihris.org/fhir/StructureDefinition/ihris-leave').extension.where(url='leave-type').valueCoding"
-* extension[section][5].extension[resource].extension[column][1].extension[header].valueString = "Days Requested"
-* extension[section][5].extension[resource].extension[column][1].extension[field].valueString = "extension.where(url='http://ihris.org/fhir/StructureDefinition/ihris-leave').extension.where(url='daysRequested').valueInteger"
-* extension[section][5].extension[resource].extension[column][2].extension[header].valueString = "Requested Date"
-* extension[section][5].extension[resource].extension[column][2].extension[field].valueString = "extension.where(url='http://ihris.org/fhir/StructureDefinition/ihris-leave').extension.where(url='dateRequested').valueDate"
-* extension[section][5].extension[resource].extension[column][3].extension[header].valueString = "Start Date"
-* extension[section][5].extension[resource].extension[column][3].extension[field].valueString = "extension.where(url='http://ihris.org/fhir/StructureDefinition/ihris-leave').extension.where(url='period').valuePeriod.start"
-* extension[section][5].extension[resource].extension[column][4].extension[header].valueString = "End Date"
-* extension[section][5].extension[resource].extension[column][4].extension[field].valueString = "extension.where(url='http://ihris.org/fhir/StructureDefinition/ihris-leave').extension.where(url='period').valuePeriod.end"
-* extension[section][5].extension[resource].extension[column][5].extension[header].valueString = "Actions"
-* extension[section][5].extension[resource].extension[column][5].extension[field].valueString = "_action"
-* extension[section][5].extension[resource].extension[action][0].extension[link].valueString = "/questionnaire/ihris-leave/leave?practitioner=FHIRID"
-* extension[section][5].extension[resource].extension[action][0].extension[text].valueString = "Add Leave"
+* extension[section][5].extension[resource].extension[column][0].extension[header].valueString = "Education Institution"
+* extension[section][5].extension[resource].extension[column][0].extension[field].valueString = "extension.where(url='http://ihris.org/fhir/StructureDefinition/ihris-education-history').extension.where(url='institution').valueCoding"
+* extension[section][5].extension[resource].extension[column][1].extension[header].valueString = "Degree"
+* extension[section][5].extension[resource].extension[column][1].extension[field].valueString = "extension.where(url='http://ihris.org/fhir/StructureDefinition/ihris-education-history').extension.where(url='degree').valueCoding"
+* extension[section][5].extension[resource].extension[column][1].extension[header].valueString = "level"
+* extension[section][5].extension[resource].extension[column][1].extension[field].valueString = "extension.where(url='http://ihris.org/fhir/StructureDefinition/ihris-education-history').extension.where(url='level').valueCoding"
+* extension[section][5].extension[resource].extension[column][2].extension[header].valueString = "Educational Major"
+* extension[section][5].extension[resource].extension[column][2].extension[field].valueString = "extension.where(url='http://ihris.org/fhir/StructureDefinition/ihris-education-history').extension.where(url='educationalMajor').valueCoding"
+* extension[section][5].extension[resource].extension[column][3].extension[header].valueString = "Year"
+* extension[section][5].extension[resource].extension[column][3].extension[field].valueString = "extension.where(url='http://ihris.org/fhir/StructureDefinition/ihris-education-history').extension.where(url='year').valueDate"
+* extension[section][5].extension[resource].extension[column][4].extension[header].valueString = "Actions"
+* extension[section][5].extension[resource].extension[column][4].extension[field].valueString = "_action"
+* extension[section][5].extension[resource].extension[action][0].extension[link].valueString = "/questionnaire/ihris-education-history/basic-education-history?practitioner=FHIRID"
+* extension[section][5].extension[resource].extension[action][0].extension[text].valueString = "Add Education History"
 * extension[section][5].extension[resource].extension[action][0].extension[row].valueBoolean = false
 * extension[section][5].extension[resource].extension[action][0].extension[emptyDisplay].valueBoolean = true
 * extension[section][5].extension[resource].extension[action][0].extension[class].valueString = "primary"
-* extension[section][5].extension[resource].extension[action][1].extension[link].valueString = "/resource/view/leave/ITEMID"
+* extension[section][5].extension[resource].extension[action][1].extension[link].valueString = "/resource/view/basic-education-history/ITEMID"
 * extension[section][5].extension[resource].extension[action][1].extension[text].valueString = "View"
 * extension[section][5].extension[resource].extension[action][1].extension[row].valueBoolean = true
 * extension[section][5].extension[resource].extension[action][1].extension[class].valueString = "primary"
-* extension[section][6].extension[title].valueString = "Performance Evaluation Information"
-* extension[section][6].extension[description].valueString = "Performance Evaluation for the Person"
-* extension[section][6].extension[name].valueString = "performance"
-* extension[section][6].extension[resource].extension[resource].valueReference = Reference(StructureDefinition/ihris-basic-performance)
+* extension[section][6].extension[title].valueString = "Work Experience"
+* extension[section][6].extension[description].valueString = "Work Experience for the Person"
+* extension[section][6].extension[name].valueString = "employment-history"
+* extension[section][6].extension[resource].extension[resource].valueReference = Reference(StructureDefinition/ihris-basic-employment-history)
 * extension[section][6].extension[resource].extension[searchfield].valueString = "practitioner"
 * extension[section][6].extension[resource].extension[linkfield].valueString = "Basic.extension.where(url='http://ihris.org/fhir/StructureDefinition/ihris-practitioner-reference').valueReference.reference"
-* extension[section][6].extension[resource].extension[column][0].extension[header].valueString = "Evaluator's Name"
-* extension[section][6].extension[resource].extension[column][0].extension[field].valueString = "extension.where(url='http://ihris.org/fhir/StructureDefinition/ihris-performance').extension.where(url='evaluator').valueString"
-* extension[section][6].extension[resource].extension[column][1].extension[header].valueString = "Score"
-* extension[section][6].extension[resource].extension[column][1].extension[field].valueString = "extension.where(url='http://ihris.org/fhir/StructureDefinition/ihris-performance').extension.where(url='score').valueCoding.display"
-* extension[section][6].extension[resource].extension[column][2].extension[header].valueString = "Start Date"
-* extension[section][6].extension[resource].extension[column][2].extension[field].valueString = "extension.where(url='http://ihris.org/fhir/StructureDefinition/ihris-performance').extension.where(url='period').valuePeriod.start"
-* extension[section][6].extension[resource].extension[column][3].extension[header].valueString = "End Date"
-* extension[section][6].extension[resource].extension[column][3].extension[field].valueString = "extension.where(url='http://ihris.org/fhir/StructureDefinition/ihris-performance').extension.where(url='period').valuePeriod.end"
+* extension[section][6].extension[resource].extension[column][0].extension[header].valueString = "Organization Name"
+* extension[section][6].extension[resource].extension[column][0].extension[field].valueString = "extension.where(url='http://ihris.org/fhir/StructureDefinition/ihris-employment-history').extension.where(url='organization').valueString"
+* extension[section][6].extension[resource].extension[column][1].extension[header].valueString = "Position"
+* extension[section][6].extension[resource].extension[column][1].extension[field].valueString = "extension.where(url='http://ihris.org/fhir/StructureDefinition/ihris-employment-history').extension.where(url='startingPosition').valueString"
+* extension[section][6].extension[resource].extension[column][2].extension[header].valueString = "Date Started"
+* extension[section][6].extension[resource].extension[column][2].extension[field].valueString = "extension.where(url='http://ihris.org/fhir/StructureDefinition/ihris-employment-history').extension.where(url='period').valuePeriod.start"
+* extension[section][6].extension[resource].extension[column][3].extension[header].valueString = "Date Ended"
+* extension[section][6].extension[resource].extension[column][3].extension[field].valueString = "extension.where(url='http://ihris.org/fhir/StructureDefinition/ihris-employment-history').extension.where(url='period').valuePeriod.end"
 * extension[section][6].extension[resource].extension[column][4].extension[header].valueString = "Actions"
 * extension[section][6].extension[resource].extension[column][4].extension[field].valueString = "_action"
-* extension[section][6].extension[resource].extension[action][0].extension[link].valueString = "/questionnaire/ihris-performance/performance?practitioner=FHIRID"
-* extension[section][6].extension[resource].extension[action][0].extension[text].valueString = "Add Perfromamce Evaluation"
+* extension[section][6].extension[resource].extension[action][0].extension[link].valueString = "/questionnaire/ihris-employment-history/employment-history?practitioner=FHIRID"
+* extension[section][6].extension[resource].extension[action][0].extension[text].valueString = "Add Work Experience"
 * extension[section][6].extension[resource].extension[action][0].extension[row].valueBoolean = false
 * extension[section][6].extension[resource].extension[action][0].extension[emptyDisplay].valueBoolean = true
 * extension[section][6].extension[resource].extension[action][0].extension[class].valueString = "primary"
-* extension[section][6].extension[resource].extension[action][1].extension[link].valueString = "/resource/view/performance/ITEMID"
+* extension[section][6].extension[resource].extension[action][1].extension[link].valueString = "/resource/view/employment-history/ITEMID"
 * extension[section][6].extension[resource].extension[action][1].extension[text].valueString = "View"
 * extension[section][6].extension[resource].extension[action][1].extension[row].valueBoolean = true
 * extension[section][6].extension[resource].extension[action][1].extension[class].valueString = "primary"
-* extension[section][7].extension[title].valueString = "Education History"
-* extension[section][7].extension[description].valueString = "Education History Details for the Person"
-* extension[section][7].extension[name].valueString = "education-history"
-* extension[section][7].extension[resource].extension[resource].valueReference = Reference(StructureDefinition/ihris-basic-education-history)
+* extension[section][7].extension[title].valueString = "Emergency Contact"
+* extension[section][7].extension[description].valueString = "Emergency Contact for the Person"
+* extension[section][7].extension[name].valueString = "emergency"
+* extension[section][7].extension[resource].extension[resource].valueReference = Reference(StructureDefinition/ihris-basic-emergency)
 * extension[section][7].extension[resource].extension[searchfield].valueString = "practitioner"
 * extension[section][7].extension[resource].extension[linkfield].valueString = "Basic.extension.where(url='http://ihris.org/fhir/StructureDefinition/ihris-practitioner-reference').valueReference.reference"
-* extension[section][7].extension[resource].extension[column][0].extension[header].valueString = "Education Institution"
-* extension[section][7].extension[resource].extension[column][0].extension[field].valueString = "extension.where(url='http://ihris.org/fhir/StructureDefinition/ihris-education-history').extension.where(url='institution').valueCoding"
-* extension[section][7].extension[resource].extension[column][1].extension[header].valueString = "Degree"
-* extension[section][7].extension[resource].extension[column][1].extension[field].valueString = "extension.where(url='http://ihris.org/fhir/StructureDefinition/ihris-education-history').extension.where(url='degree').valueCoding"
-* extension[section][7].extension[resource].extension[column][1].extension[header].valueString = "level"
-* extension[section][7].extension[resource].extension[column][1].extension[field].valueString = "extension.where(url='http://ihris.org/fhir/StructureDefinition/ihris-education-history').extension.where(url='level').valueCoding"
-* extension[section][7].extension[resource].extension[column][2].extension[header].valueString = "Educational Major"
-* extension[section][7].extension[resource].extension[column][2].extension[field].valueString = "extension.where(url='http://ihris.org/fhir/StructureDefinition/ihris-education-history').extension.where(url='educationalMajor').valueCoding"
-* extension[section][7].extension[resource].extension[column][3].extension[header].valueString = "Year"
-* extension[section][7].extension[resource].extension[column][3].extension[field].valueString = "extension.where(url='http://ihris.org/fhir/StructureDefinition/ihris-education-history').extension.where(url='year').valueDate"
-* extension[section][7].extension[resource].extension[column][4].extension[header].valueString = "Actions"
-* extension[section][7].extension[resource].extension[column][4].extension[field].valueString = "_action"
-* extension[section][7].extension[resource].extension[action][0].extension[link].valueString = "/questionnaire/ihris-education-history/basic-education-history?practitioner=FHIRID"
-* extension[section][7].extension[resource].extension[action][0].extension[text].valueString = "Add Education History"
+* extension[section][7].extension[resource].extension[column][0].extension[header].valueString = "Name"
+* extension[section][7].extension[resource].extension[column][0].extension[field].valueString = "extension.where(url='http://ihris.org/fhir/StructureDefinition/ihris-emergency').extension.where(url='name').valueString"
+* extension[section][7].extension[resource].extension[column][1].extension[header].valueString = "Relationship"
+* extension[section][7].extension[resource].extension[column][1].extension[field].valueString = "extension.where(url='http://ihris.org/fhir/StructureDefinition/ihris-emergency').extension.where(url='relation').valueCoding.display"
+* extension[section][7].extension[resource].extension[column][2].extension[header].valueString = "Mobile Phone"
+* extension[section][7].extension[resource].extension[column][2].extension[field].valueString = "extension.where(url='http://ihris.org/fhir/StructureDefinition/ihris-emergency').extension.where(url='mobile').valueString"
+* extension[section][7].extension[resource].extension[column][3].extension[header].valueString = "Actions"
+* extension[section][7].extension[resource].extension[column][3].extension[field].valueString = "_action"
+* extension[section][7].extension[resource].extension[action][0].extension[link].valueString = "/questionnaire/ihris-emergency/emergency?practitioner=FHIRID"
+* extension[section][7].extension[resource].extension[action][0].extension[text].valueString = "Add Emergency Contact"
 * extension[section][7].extension[resource].extension[action][0].extension[row].valueBoolean = false
 * extension[section][7].extension[resource].extension[action][0].extension[emptyDisplay].valueBoolean = true
 * extension[section][7].extension[resource].extension[action][0].extension[class].valueString = "primary"
-* extension[section][7].extension[resource].extension[action][1].extension[link].valueString = "/resource/view/basic-education-history/ITEMID"
+* extension[section][7].extension[resource].extension[action][1].extension[link].valueString = "/resource/view/emergency/ITEMID"
 * extension[section][7].extension[resource].extension[action][1].extension[text].valueString = "View"
 * extension[section][7].extension[resource].extension[action][1].extension[row].valueBoolean = true
 * extension[section][7].extension[resource].extension[action][1].extension[class].valueString = "primary"
-* extension[section][8].extension[title].valueString = "Work Experience"
-* extension[section][8].extension[description].valueString = "Work Experience for the Person"
-* extension[section][8].extension[name].valueString = "employment-history"
-* extension[section][8].extension[resource].extension[resource].valueReference = Reference(StructureDefinition/ihris-basic-employment-history)
-* extension[section][8].extension[resource].extension[searchfield].valueString = "practitioner"
-* extension[section][8].extension[resource].extension[linkfield].valueString = "Basic.extension.where(url='http://ihris.org/fhir/StructureDefinition/ihris-practitioner-reference').valueReference.reference"
-* extension[section][8].extension[resource].extension[column][0].extension[header].valueString = "Organization Name"
-* extension[section][8].extension[resource].extension[column][0].extension[field].valueString = "extension.where(url='http://ihris.org/fhir/StructureDefinition/ihris-employment-history').extension.where(url='organization').valueString"
-* extension[section][8].extension[resource].extension[column][1].extension[header].valueString = "Position"
-* extension[section][8].extension[resource].extension[column][1].extension[field].valueString = "extension.where(url='http://ihris.org/fhir/StructureDefinition/ihris-employment-history').extension.where(url='startingPosition').valueString"
-* extension[section][8].extension[resource].extension[column][2].extension[header].valueString = "Date Started"
-* extension[section][8].extension[resource].extension[column][2].extension[field].valueString = "extension.where(url='http://ihris.org/fhir/StructureDefinition/ihris-employment-history').extension.where(url='period').valuePeriod.start"
-* extension[section][8].extension[resource].extension[column][3].extension[header].valueString = "Date Ended"
-* extension[section][8].extension[resource].extension[column][3].extension[field].valueString = "extension.where(url='http://ihris.org/fhir/StructureDefinition/ihris-employment-history').extension.where(url='period').valuePeriod.end"
-* extension[section][8].extension[resource].extension[column][4].extension[header].valueString = "Actions"
-* extension[section][8].extension[resource].extension[column][4].extension[field].valueString = "_action"
-* extension[section][8].extension[resource].extension[action][0].extension[link].valueString = "/questionnaire/ihris-employment-history/employment-history?practitioner=FHIRID"
-* extension[section][8].extension[resource].extension[action][0].extension[text].valueString = "Add Work Experience"
-* extension[section][8].extension[resource].extension[action][0].extension[row].valueBoolean = false
-* extension[section][8].extension[resource].extension[action][0].extension[emptyDisplay].valueBoolean = true
-* extension[section][8].extension[resource].extension[action][0].extension[class].valueString = "primary"
-* extension[section][8].extension[resource].extension[action][1].extension[link].valueString = "/resource/view/employment-history/ITEMID"
-* extension[section][8].extension[resource].extension[action][1].extension[text].valueString = "View"
-* extension[section][8].extension[resource].extension[action][1].extension[row].valueBoolean = true
-* extension[section][8].extension[resource].extension[action][1].extension[class].valueString = "primary"
-* extension[section][9].extension[title].valueString = "Emergency Contact"
-* extension[section][9].extension[description].valueString = "Emergency Contact for the Person"
-* extension[section][9].extension[name].valueString = "emergency"
-* extension[section][9].extension[resource].extension[resource].valueReference = Reference(StructureDefinition/ihris-basic-emergency)
-* extension[section][9].extension[resource].extension[searchfield].valueString = "practitioner"
-* extension[section][9].extension[resource].extension[linkfield].valueString = "Basic.extension.where(url='http://ihris.org/fhir/StructureDefinition/ihris-practitioner-reference').valueReference.reference"
-* extension[section][9].extension[resource].extension[column][0].extension[header].valueString = "Name"
-* extension[section][9].extension[resource].extension[column][0].extension[field].valueString = "extension.where(url='http://ihris.org/fhir/StructureDefinition/ihris-emergency').extension.where(url='name').valueString"
-* extension[section][9].extension[resource].extension[column][1].extension[header].valueString = "Relationship"
-* extension[section][9].extension[resource].extension[column][1].extension[field].valueString = "extension.where(url='http://ihris.org/fhir/StructureDefinition/ihris-emergency').extension.where(url='relation').valueCoding.display"
-* extension[section][9].extension[resource].extension[column][2].extension[header].valueString = "Mobile Phone"
-* extension[section][9].extension[resource].extension[column][2].extension[field].valueString = "extension.where(url='http://ihris.org/fhir/StructureDefinition/ihris-emergency').extension.where(url='mobile').valueString"
-* extension[section][9].extension[resource].extension[column][3].extension[header].valueString = "Actions"
-* extension[section][9].extension[resource].extension[column][3].extension[field].valueString = "_action"
-* extension[section][9].extension[resource].extension[action][0].extension[link].valueString = "/questionnaire/ihris-emergency/emergency?practitioner=FHIRID"
-* extension[section][9].extension[resource].extension[action][0].extension[text].valueString = "Add Emergency Contact"
-* extension[section][9].extension[resource].extension[action][0].extension[row].valueBoolean = false
-* extension[section][9].extension[resource].extension[action][0].extension[emptyDisplay].valueBoolean = true
-* extension[section][9].extension[resource].extension[action][0].extension[class].valueString = "primary"
-* extension[section][9].extension[resource].extension[action][1].extension[link].valueString = "/resource/view/emergency/ITEMID"
-* extension[section][9].extension[resource].extension[action][1].extension[text].valueString = "View"
-* extension[section][9].extension[resource].extension[action][1].extension[row].valueBoolean = true
-* extension[section][9].extension[resource].extension[action][1].extension[class].valueString = "primary"
-* extension[section][10].extension[title].valueString = "Employee Disciplinary Information"
-* extension[section][10].extension[description].valueString = "Employee Discipline for the Person"
-* extension[section][10].extension[name].valueString = "Employee Discipline"
-* extension[section][10].extension[resource].extension[resource].valueReference = Reference(StructureDefinition/ihris-basic-discipline)
-* extension[section][10].extension[resource].extension[searchfield].valueString = "practitioner"
-* extension[section][10].extension[resource].extension[linkfield].valueString = "Basic.extension.where(url='http://ihris.org/fhir/StructureDefinition/ihris-practitioner-reference').valueReference.reference"
-* extension[section][10].extension[resource].extension[column][0].extension[header].valueString = "Discipline Action Type"
-* extension[section][10].extension[resource].extension[column][0].extension[field].valueString = "extension.where(url='http://ihris.org/fhir/StructureDefinition/ihris-discipline').extension.where(url='actionType').valueCoding.display"
-* extension[section][10].extension[resource].extension[column][1].extension[header].valueString = "Action Taken"
-* extension[section][10].extension[resource].extension[column][1].extension[field].valueString = "extension.where(url='http://ihris.org/fhir/StructureDefinition/ihris-discipline').extension.where(url='actionTaken').valueString"
-* extension[section][10].extension[resource].extension[column][2].extension[header].valueString = "Start Date"
-* extension[section][10].extension[resource].extension[column][2].extension[field].valueString = "extension.where(url='http://ihris.org/fhir/StructureDefinition/ihris-discipline').extension.where(url='period').valuePeriod.start"
-* extension[section][10].extension[resource].extension[column][3].extension[header].valueString = "End Date"
-* extension[section][10].extension[resource].extension[column][3].extension[field].valueString = "extension.where(url='http://ihris.org/fhir/StructureDefinition/ihris-discipline').extension.where(url='period').valuePeriod.end"
-* extension[section][10].extension[resource].extension[column][4].extension[header].valueString = "Actions"
-* extension[section][10].extension[resource].extension[column][4].extension[field].valueString = "_action"
-* extension[section][10].extension[resource].extension[action][0].extension[link].valueString = "/questionnaire/ihris-discipline/discipline?practitioner=FHIRID"
-* extension[section][10].extension[resource].extension[action][0].extension[text].valueString = "Add Disciplinary Action"
-* extension[section][10].extension[resource].extension[action][0].extension[row].valueBoolean = false
-* extension[section][10].extension[resource].extension[action][0].extension[emptyDisplay].valueBoolean = true
-* extension[section][10].extension[resource].extension[action][0].extension[class].valueString = "primary"
-* extension[section][10].extension[resource].extension[action][1].extension[link].valueString = "/resource/view/discipline/ITEMID"
-* extension[section][10].extension[resource].extension[action][1].extension[text].valueString = "View"
-* extension[section][10].extension[resource].extension[action][1].extension[row].valueBoolean = true
-* extension[section][10].extension[resource].extension[action][1].extension[class].valueString = "primary"
-* extension[section][11].extension[title].valueString = "Employee Salary Information"
-* extension[section][11].extension[description].valueString = "Employee Salary Information for the Person"
-* extension[section][11].extension[name].valueString = "Employee Salary Information"
-* extension[section][11].extension[resource].extension[resource].valueReference = Reference(StructureDefinition/ihris-basic-salary)
-* extension[section][11].extension[resource].extension[searchfield].valueString = "practitioner"
-* extension[section][11].extension[resource].extension[linkfield].valueString = "Basic.extension.where(url='http://ihris.org/fhir/StructureDefinition/ihris-practitioner-reference').valueReference.reference"
-* extension[section][11].extension[resource].extension[column][0].extension[header].valueString = "Pay Grade"
-* extension[section][11].extension[resource].extension[column][0].extension[field].valueString = "extension.where(url='http://ihris.org/fhir/StructureDefinition/ihris-salary').extension.where(url='salaryScale').valueCoding.display"
-* extension[section][11].extension[resource].extension[column][1].extension[header].valueString = "Basic Salary"
-* extension[section][11].extension[resource].extension[column][1].extension[field].valueString = "extension.where(url='http://ihris.org/fhir/StructureDefinition/ihris-salary').extension.where(url='bsalary').valueString"
-* extension[section][11].extension[resource].extension[column][2].extension[header].valueString = "Allowances"
-* extension[section][11].extension[resource].extension[column][2].extension[field].valueString = "extension.where(url='http://ihris.org/fhir/StructureDefinition/ihris-salary').extension.where(url='allowance').valueString"
-* extension[section][11].extension[resource].extension[column][3].extension[header].valueString = "Benefits"
-* extension[section][11].extension[resource].extension[column][3].extension[field].valueString = "extension.where(url='http://ihris.org/fhir/StructureDefinition/ihris-salary').extension.where(url='benefits').valueString"
-* extension[section][11].extension[resource].extension[column][4].extension[header].valueString = "Start Date"
-* extension[section][11].extension[resource].extension[column][4].extension[field].valueString = "extension.where(url='http://ihris.org/fhir/StructureDefinition/ihris-salary').extension.where(url='period').valuePeriod.start"
-* extension[section][11].extension[resource].extension[column][5].extension[header].valueString = "End Date"
-* extension[section][11].extension[resource].extension[column][5].extension[field].valueString = "extension.where(url='http://ihris.org/fhir/StructureDefinition/ihris-salary').extension.where(url='period').valuePeriod.end"
-* extension[section][11].extension[resource].extension[column][6].extension[header].valueString = "Actions"
-* extension[section][11].extension[resource].extension[column][6].extension[field].valueString = "_action"
-* extension[section][11].extension[resource].extension[action][0].extension[link].valueString = "/questionnaire/ihris-salary/salary?practitioner=FHIRID"
-* extension[section][11].extension[resource].extension[action][0].extension[text].valueString = "Add Salary Info"
-* extension[section][11].extension[resource].extension[action][0].extension[row].valueBoolean = false
-* extension[section][11].extension[resource].extension[action][0].extension[emptyDisplay].valueBoolean = true
-* extension[section][11].extension[resource].extension[action][0].extension[class].valueString = "primary"
-* extension[section][11].extension[resource].extension[action][1].extension[link].valueString = "/resource/view/salary/ITEMID"
-* extension[section][11].extension[resource].extension[action][1].extension[text].valueString = "View"
-* extension[section][11].extension[resource].extension[action][1].extension[row].valueBoolean = true
-* extension[section][11].extension[resource].extension[action][1].extension[class].valueString = "primary"
+// * extension[section][10].extension[title].valueString = "Employee Disciplinary Information"
+// * extension[section][10].extension[description].valueString = "Employee Discipline for the Person"
+// * extension[section][10].extension[name].valueString = "Employee Discipline"
+// * extension[section][10].extension[resource].extension[resource].valueReference = Reference(StructureDefinition/ihris-basic-discipline)
+// * extension[section][10].extension[resource].extension[searchfield].valueString = "practitioner"
+// * extension[section][10].extension[resource].extension[linkfield].valueString = "Basic.extension.where(url='http://ihris.org/fhir/StructureDefinition/ihris-practitioner-reference').valueReference.reference"
+// * extension[section][10].extension[resource].extension[column][0].extension[header].valueString = "Discipline Action Type"
+// * extension[section][10].extension[resource].extension[column][0].extension[field].valueString = "extension.where(url='http://ihris.org/fhir/StructureDefinition/ihris-discipline').extension.where(url='actionType').valueCoding.display"
+// * extension[section][10].extension[resource].extension[column][1].extension[header].valueString = "Action Taken"
+// * extension[section][10].extension[resource].extension[column][1].extension[field].valueString = "extension.where(url='http://ihris.org/fhir/StructureDefinition/ihris-discipline').extension.where(url='actionTaken').valueString"
+// * extension[section][10].extension[resource].extension[column][2].extension[header].valueString = "Start Date"
+// * extension[section][10].extension[resource].extension[column][2].extension[field].valueString = "extension.where(url='http://ihris.org/fhir/StructureDefinition/ihris-discipline').extension.where(url='period').valuePeriod.start"
+// * extension[section][10].extension[resource].extension[column][3].extension[header].valueString = "End Date"
+// * extension[section][10].extension[resource].extension[column][3].extension[field].valueString = "extension.where(url='http://ihris.org/fhir/StructureDefinition/ihris-discipline').extension.where(url='period').valuePeriod.end"
+// * extension[section][10].extension[resource].extension[column][4].extension[header].valueString = "Actions"
+// * extension[section][10].extension[resource].extension[column][4].extension[field].valueString = "_action"
+// * extension[section][10].extension[resource].extension[action][0].extension[link].valueString = "/questionnaire/ihris-discipline/discipline?practitioner=FHIRID"
+// * extension[section][10].extension[resource].extension[action][0].extension[text].valueString = "Add Disciplinary Action"
+// * extension[section][10].extension[resource].extension[action][0].extension[row].valueBoolean = false
+// * extension[section][10].extension[resource].extension[action][0].extension[emptyDisplay].valueBoolean = true
+// * extension[section][10].extension[resource].extension[action][0].extension[class].valueString = "primary"
+// * extension[section][10].extension[resource].extension[action][1].extension[link].valueString = "/resource/view/discipline/ITEMID"
+// * extension[section][10].extension[resource].extension[action][1].extension[text].valueString = "View"
+// * extension[section][10].extension[resource].extension[action][1].extension[row].valueBoolean = true
+// * extension[section][10].extension[resource].extension[action][1].extension[class].valueString = "primary"
+// * extension[section][11].extension[title].valueString = "Employee Salary Information"
+// * extension[section][11].extension[description].valueString = "Employee Salary Information for the Person"
+// * extension[section][11].extension[name].valueString = "Employee Salary Information"
+// * extension[section][11].extension[resource].extension[resource].valueReference = Reference(StructureDefinition/ihris-basic-salary)
+// * extension[section][11].extension[resource].extension[searchfield].valueString = "practitioner"
+// * extension[section][11].extension[resource].extension[linkfield].valueString = "Basic.extension.where(url='http://ihris.org/fhir/StructureDefinition/ihris-practitioner-reference').valueReference.reference"
+// * extension[section][11].extension[resource].extension[column][0].extension[header].valueString = "Pay Grade"
+// * extension[section][11].extension[resource].extension[column][0].extension[field].valueString = "extension.where(url='http://ihris.org/fhir/StructureDefinition/ihris-salary').extension.where(url='salaryScale').valueCoding.display"
+// * extension[section][11].extension[resource].extension[column][1].extension[header].valueString = "Basic Salary"
+// * extension[section][11].extension[resource].extension[column][1].extension[field].valueString = "extension.where(url='http://ihris.org/fhir/StructureDefinition/ihris-salary').extension.where(url='bsalary').valueString"
+// * extension[section][11].extension[resource].extension[column][2].extension[header].valueString = "Allowances"
+// * extension[section][11].extension[resource].extension[column][2].extension[field].valueString = "extension.where(url='http://ihris.org/fhir/StructureDefinition/ihris-salary').extension.where(url='allowance').valueString"
+// * extension[section][11].extension[resource].extension[column][3].extension[header].valueString = "Benefits"
+// * extension[section][11].extension[resource].extension[column][3].extension[field].valueString = "extension.where(url='http://ihris.org/fhir/StructureDefinition/ihris-salary').extension.where(url='benefits').valueString"
+// * extension[section][11].extension[resource].extension[column][4].extension[header].valueString = "Start Date"
+// * extension[section][11].extension[resource].extension[column][4].extension[field].valueString = "extension.where(url='http://ihris.org/fhir/StructureDefinition/ihris-salary').extension.where(url='period').valuePeriod.start"
+// * extension[section][11].extension[resource].extension[column][5].extension[header].valueString = "End Date"
+// * extension[section][11].extension[resource].extension[column][5].extension[field].valueString = "extension.where(url='http://ihris.org/fhir/StructureDefinition/ihris-salary').extension.where(url='period').valuePeriod.end"
+// * extension[section][11].extension[resource].extension[column][6].extension[header].valueString = "Actions"
+// * extension[section][11].extension[resource].extension[column][6].extension[field].valueString = "_action"
+// * extension[section][11].extension[resource].extension[action][0].extension[link].valueString = "/questionnaire/ihris-salary/salary?practitioner=FHIRID"
+// * extension[section][11].extension[resource].extension[action][0].extension[text].valueString = "Add Salary Info"
+// * extension[section][11].extension[resource].extension[action][0].extension[row].valueBoolean = false
+// * extension[section][11].extension[resource].extension[action][0].extension[emptyDisplay].valueBoolean = true
+// * extension[section][11].extension[resource].extension[action][0].extension[class].valueString = "primary"
+// * extension[section][11].extension[resource].extension[action][1].extension[link].valueString = "/resource/view/salary/ITEMID"
+// * extension[section][11].extension[resource].extension[action][1].extension[text].valueString = "View"
+// * extension[section][11].extension[resource].extension[action][1].extension[row].valueBoolean = true
+// * extension[section][11].extension[resource].extension[action][1].extension[class].valueString = "primary"
+
+
+
+// practitioner print preview page
+// Instance:       ihris-page-print-practitioner
+// InstanceOf:     IhrisPage
+// Title:          "Practitioner"
+// Usage:          #example
+// * code = IhrisResourceCodeSystem#page
+// * extension[display].extension[resource].valueReference = Reference(StructureDefinition/ihris-practitioner)
+// * extension[display].extension[link].extension[text].valueString = "Practitioner Print Preview"
+// * extension[display].extension[link].extension[button].valueBoolean = true
+// * extension[display].extension[link].extension[icon].valueString = "mdi-account-arrow-right"
+// * extension[display].extension[link].extension[url].valueUrl = "/resource/view/practitioner/FIELD"
+
 
 Instance:       ihris-page-practitionerrole
 InstanceOf:     IhrisPage
