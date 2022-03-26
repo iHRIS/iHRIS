@@ -169,7 +169,7 @@ Usage:          #definition
 * item[0].item[5].definition = "http://ihris.org/fhir/StructureDefinition/ihris-person-user#Person.extension:location.value[x]:valueReference"
 * item[0].item[5].text = "Location/Facility"
 * item[0].item[5].type = #reference
-* item[0].item[5].required = false
+* item[0].item[5].required = true
 * item[0].item[5].repeats = false
 
 * item[0].item[6].linkId = "password#password"
