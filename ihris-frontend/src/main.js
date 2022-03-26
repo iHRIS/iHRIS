@@ -14,6 +14,8 @@ import vuetify from "./plugins/vuetify"
 import 'whatwg-fetch'
 import fhirpath from "fhirpath"
 import fhirutils from "./plugins/fhirutils"
+import VueHtmlToPaper from "vue-html-to-paper";
+
 
 Vue.config.productionTip = false
 
@@ -23,6 +25,18 @@ Object.defineProperty(Vue.prototype, '$fhirpath', {
 Object.defineProperty(Vue.prototype, '$fhirutils', {
   value: fhirutils
 })
+
+const options = {
+  name: "_blank",
+  specs: ["fullscreen=yes", "titlebar=yes", "scrollbars=yes"],
+  styles: [
+    "https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css",
+    "https://unpkg.com/kidlat-css/css/kidlat.css"
+  ]
+};
+
+Vue.use(VueHtmlToPaper, options);
+
 
 Vue.component('apexchart', VueApexCharts)
 Vue.use(HighchartsVue);

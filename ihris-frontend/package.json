@@ -23,6 +23,7 @@
     "vue-apexcharts": "^1.6.2",
     "vue-cookies": "^1.7.4",
     "vue-cron-editor-buefy": "^0.2.13",
+    "vue-html-to-paper": "^1.4.4",
     "vue-moment": "^4.1.0",
     "vue-router": "^3.2.0",
     "vuetify": "^2.2.11",
