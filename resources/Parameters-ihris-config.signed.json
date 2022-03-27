@@ -16,11 +16,11 @@
             "code": "1.2.840.10065.1.12.1.14"
           }
         ],
-        "when": "2022-03-25T08:28:23.123Z",
+        "when": "2022-03-27T05:05:51.472Z",
         "who": {
           "reference": "http://ihris.org/fhir/Organization/ihris"
         },
-        "data": "JwRW4At4NEXzb6B1cH68o0ElWwTiGJPcVJjCHuxhHE6FmEr4neP0hLW9+6hHHTdbb9V2PejEgDUnMkodCP9tLcXnckE4BDKzkDfILYqnBJ/e53EnZEikKLg/9CyVhdbJk7KTobiDTIFTCUYsxLu9YbwVlwjUGxF8TZV2LyoAWlI="
+        "data": "T+/0g92dz1afnY4GcNj1Ry4b3jEPRfSOYDuHVDEbarRdhKj5nKqAgnY9UrsPejBEpmBGXHJS+2aCE9KHSyaJ111WCOXMK7dp6pJAqvY1NVMgQ74WrMW56XjWcyyl4vdXTvhHXeXuXupCIyaY8DcRsyYfGGMz4INrbpmyqy3rVrQ="
       }
     },
     {
@@ -28,11 +28,11 @@
       "part": [
         {
           "name": "site:title",
-          "valueString": "MoH"
+          "valueString": ""
         },
         {
           "name": "site:site",
-          "valueString": "Uganda National Health Worker Registry"
+          "valueString": "National Health Worker Registry"
         },
         {
           "name": "site:logo",
@@ -109,18 +109,6 @@
         {
           "name": "site:nav:menu:person:menu:person_search:order",
           "valueString": "1"
-        },
-        {
-          "name": "site:nav:menu:person:menu:person_facility:text",
-          "valueString": "Search Health Facility"
-        },
-        {
-          "name": "site:nav:menu:person:menu:person_facility:url",
-          "valueString": "/resource/search/facility"
-        },
-        {
-          "name": "site:nav:menu:person:menu:person_facility:order",
-          "valueString": "2"
         },
         {
           "name": "site:nav:menu:dashboard:text",

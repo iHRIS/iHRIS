@@ -14,7 +14,7 @@
           header.title
         }}</span>
         <span class="white--text" v-if="header.site">
-          | {{ header.site }}</span
+          {{ header.site }}</span
         >
       </v-toolbar-title>
 
@@ -35,15 +35,15 @@
         >
       </div>
       <v-spacer></v-spacer>
-      <v-progress-circular
+      <!-- <v-progress-circular
         indeterminate
         v-if="!header.title"
         color="primary"
-      ></v-progress-circular>
-      <v-btn icon to="/" title="Home">
+      ></v-progress-circular> -->
+      <v-btn icon to="/" color="white" title="Home">
         <v-icon>mdi-home</v-icon>
       </v-btn>
-      <v-btn icon title="Help">
+      <v-btn icon color="white" title="Help">
         <v-icon>mdi-help</v-icon>
       </v-btn>
       <v-menu left bottom v-if="!$store.state.user.loggedin">
