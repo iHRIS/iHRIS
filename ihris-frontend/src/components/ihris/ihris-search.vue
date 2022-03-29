@@ -7,6 +7,7 @@
 
         <div v-if="page === 'practitioner'"></div>
         <div v-else-if="page === 'facility'"></div>
+        <div v-else-if="page === 'auditevent'"></div>
         <div v-else>
           <v-btn
             :class="addLink ? addLink.class || 'primary' : 'primary'"
