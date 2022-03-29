@@ -434,11 +434,11 @@ Title:            "NHWR Roles"
 Usage:            #example
 * code = IhrisResourceCodeSystem#page
 * extension[display].extension[resource].valueReference = Reference(StructureDefinition/ihris-role)
-* extension[display].extension[link][0].extension[field].valueString = ""
-* extension[display].extension[link][0].extension[text].valueString = "View Other Roles"
-* extension[display].extension[link][0].extension[button].valueBoolean = true
-* extension[display].extension[link][0].extension[icon].valueString = "mdi-account-arrow-right"
-* extension[display].extension[link][0].extension[url].valueUrl = "/resource/view/basic"
+// * extension[display].extension[link][0].extension[field].valueString = ""
+// * extension[display].extension[link][0].extension[text].valueString = "View Other Roles"
+// * extension[display].extension[link][0].extension[button].valueBoolean = true
+// * extension[display].extension[link][0].extension[icon].valueString = "mdi-account-arrow-right"
+// * extension[display].extension[link][0].extension[url].valueUrl = "/resource/view/basic"
 * extension[display].extension[add].extension[url].valueUrl = "/questionnaire/ihris-role/role"
 * extension[display].extension[add].extension[icon].valueString = "mdi-account-plus"
 * extension[display].extension[add].extension[class].valueString = "accent"
@@ -503,11 +503,11 @@ Title:            "NHWR Permissions"
 Usage:            #example
 * code = IhrisResourceCodeSystem#page
 * extension[display].extension[resource].valueReference = Reference(StructureDefinition/ihris-task)
-* extension[display].extension[link][0].extension[field].valueString = ""
-* extension[display].extension[link][0].extension[text].valueString = "View Other Permissions"
-* extension[display].extension[link][0].extension[button].valueBoolean = true
-* extension[display].extension[link][0].extension[icon].valueString = "mdi-account-arrow-right"
-* extension[display].extension[link][0].extension[url].valueUrl = "/resource/view/basic"
+// * extension[display].extension[link][0].extension[field].valueString = ""
+// * extension[display].extension[link][0].extension[text].valueString = "View Other Permissions"
+// * extension[display].extension[link][0].extension[button].valueBoolean = true
+// * extension[display].extension[link][0].extension[icon].valueString = "mdi-account-arrow-right"
+// * extension[display].extension[link][0].extension[url].valueUrl = "/resource/view/basic"
 * extension[display].extension[add].extension[url].valueUrl = "/questionnaire/ihris-task/task"
 * extension[display].extension[add].extension[icon].valueString = "mdi-account-plus"
 * extension[display].extension[add].extension[class].valueString = "accent"

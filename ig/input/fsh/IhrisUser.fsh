@@ -91,7 +91,7 @@ Usage:          #example
 * extension[display].extension[add].extension[url].valueUrl = "/questionnaire/ihris-user/user"
 * extension[display].extension[add].extension[icon].valueString = "mdi-account-plus"
 * extension[display].extension[add].extension[class].valueString = "accent"
-* extension[section][0].extension[title].valueString = "Person"
+* extension[section][0].extension[title].valueString = "User"
 * extension[section][0].extension[description].valueString = "System User details"
 * extension[section][0].extension[name].valueString = "Person"
 * extension[section][0].extension[field][0].valueString = "Person.name"
