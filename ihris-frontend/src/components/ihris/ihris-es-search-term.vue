@@ -1,6 +1,6 @@
 <template>
-  <label>
-    <!-- <v-col class="l"></v-col> -->
+  <!-- <label> -->
+  <div>
     <v-autocomplete
       class="mx-1 my-1"
       v-if="isDropDown && !hideFilters"
@@ -77,7 +77,10 @@
         @click:clear="clearSearch()"
       />
     </template>
-  </label>
+  </div>
+  <!-- <v-col class="l"></v-col> -->
+
+  <!-- </label> -->
 </template>
 
 <script>
