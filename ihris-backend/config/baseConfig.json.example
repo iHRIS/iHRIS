@@ -44,6 +44,10 @@
       "valueString": "ihris"
     },
     {
+      "name": "redis:url",
+      "valueString": "wrkredis://redis"
+    },
+    {
       "name": "fhir:base",
       "valueString": "http://wrkfhir:8080/fhir"
     },
