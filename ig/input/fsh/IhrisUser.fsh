@@ -83,7 +83,7 @@ Usage:          #example
 * extension[display].extension[search][0].valueString = "User|Person.name.where(use='official').text"
 * extension[display].extension[search][1].valueString = "Username/Email|Person.telecom.where(system='email').value"
 * extension[display].extension[search][2].valueString = "Role|Person.extension.where(url='http://ihris.org/fhir/StructureDefinition/ihris-assign-role').valueReference.reference"
-* extension[display].extension[search][3].valueString = "Location|Person.extension.where(url='http://ihris.org/fhir/StructureDefinition/ihris-user-location').valueReference.reference"
+// * extension[display].extension[search][3].valueString = "Location|Person.extension.where(url='http://ihris.org/fhir/StructureDefinition/ihris-user-location').valueReference.reference"
 * extension[display].extension[filter][0].valueString = "User|name:contains"
 * extension[display].extension[field][0].extension[path].valueString = "Person.extension:password.extension:password.value[x]:valueString"
 * extension[display].extension[field][0].extension[type].valueString = "password"
@@ -165,24 +165,24 @@ Usage:          #definition
 * item[0].item[4].required = true
 * item[0].item[4].repeats = false
 
-* item[0].item[5].linkId = "location"
-* item[0].item[5].definition = "http://ihris.org/fhir/StructureDefinition/ihris-person-user#Person.extension:location.value[x]:valueReference"
-* item[0].item[5].text = "Location/Facility"
-* item[0].item[5].type = #reference
+// * item[0].item[5].linkId = "location"
+// * item[0].item[5].definition = "http://ihris.org/fhir/StructureDefinition/ihris-person-user#Person.extension:location.value[x]:valueReference"
+// * item[0].item[5].text = "Location/Facility"
+// * item[0].item[5].type = #reference
+// * item[0].item[5].required = true
+// * item[0].item[5].repeats = false
+
+* item[0].item[5].linkId = "password#password"
+* item[0].item[5].text = "Password"
+* item[0].item[5].type = #string
 * item[0].item[5].required = true
 * item[0].item[5].repeats = false
 
-* item[0].item[6].linkId = "password#password"
-* item[0].item[6].text = "Password"
+* item[0].item[6].linkId = "confrimpassword#password"
+* item[0].item[6].text = "Confirm Password"
 * item[0].item[6].type = #string
 * item[0].item[6].required = true
 * item[0].item[6].repeats = false
-
-* item[0].item[7].linkId = "confrimpassword#password"
-* item[0].item[7].text = "Confirm Password"
-* item[0].item[7].type = #string
-* item[0].item[7].required = true
-* item[0].item[7].repeats = false
 
 Instance:       IhrisChangePassword
 InstanceOf:     IhrisQuestionnaire

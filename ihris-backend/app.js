@@ -88,7 +88,7 @@ async function startUp() {
     logger.error(err)
   }
 
-  let redisClient = redis.createClient({ host: "wrkredis://redis", port: 9079 })
+  let redisClient = redis.createClient(nconf.get("redis:url"))
 
   redisClient.on('connect', function () {
 
