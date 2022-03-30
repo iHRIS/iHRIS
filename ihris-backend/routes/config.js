@@ -9,6 +9,8 @@ const fhirConfig = require('../modules/fhirConfig')
 const fhirDefinition = require('../modules/fhirDefinition')
 const crypto = require('crypto')
 const logger = require('../winston')
+const employeeCv = require("../modules/EmployeeCvPrintOut");
+const path = require('path')
 
 const getUKey = () => {
   return Math.random().toString(36).replace(/^[^a-z]+/, '') + Math.random().toString(36).substring(2, 15)
@@ -1447,6 +1449,57 @@ router.get('/app', (req, res) => {
     },
   };
   res.status(200).json(otherConfig);
+});
+
+
+// print pdff
+
+router.get("/employeeCv/:id", async (req, res) => {
+  if (req.params.id) {
+    const userData = {};
+    userData.id = req.params.id;
+    const educationData = [];
+    const workExperiences = [];
+    const languages = [];
+    const skills = [];
+
+
+
+    try {
+      let data = await fhirAxios.search("Practitioner", {
+        _profile:
+          "http://ihris.org/fhir/StructureDefinition/ihris-practitioner",
+        _id: req.params.id,
+      });
+
+
+      userData.fullName = data.entry[0].resource.name[0].text;
+      userData.gender = data.entry[0].resource.gender;
+      userData.photo = data.entry[0].resource.photo;
+      userData.telecom = data.entry[0].resource.telecom;
+
+      userData.address = data.entry[0].resource.address[0];
+      userData.qualification = data.entry[0].resource.qualification
+      // userData.address.district = data.entry[0].resource.address[0].district;
+      // userData.address.city = data.entry[0].resource.address[0].city;
+      // userData.address.country = data.entry[0].resource.address[0].country;
+      console.log("data", data.entry[0].resource);
+    } catch (e) {
+      console.log(e);
+    }
+    let fileName = `${userData.id}_cv.pdf`;
+    let p = path.join(__dirname, "../employee_cvs_generated/", fileName);
+
+
+
+    console.log("User Data", JSON.stringify(userData, null, 2));
+
+    employeeCv(userData)
+        .then((_) => {
+            res.download(p);
+        })
+        .catch((e) => console.log(e));
+  }
 });
 
 

@@ -31,9 +31,13 @@
                 <span>Edit</span>
               </v-btn>
               <v-spacer></v-spacer>
-              <v-btn @click="$emit('set-print')">
-                <v-icon light>mdi-printer</v-icon>
-                <span>Print</span>
+              <v-btn
+                :loading="loadingCv"
+                class="primary mx-2"
+                @click="printEmployeeCv()"
+              >
+                <v-icon light> mdi-file-pdf-box</v-icon>
+                <span> Print</span>
               </v-btn>
             </template>
 
@@ -105,6 +109,7 @@
 </template>
 
 <script>
+import axios from "axios";
 export default {
   name: "ihris-resource",
   props: [
@@ -126,6 +131,7 @@ export default {
       source: { data: {}, path: "" },
       path: "",
       loading: false,
+      loadingCv: false,
       overlay: false,
       isEdit: false,
       linktext: [],
@@ -458,8 +464,30 @@ export default {
     },
 
     // test print pdf
-    printSection() {
-      this.$htmlToPaper("printSection");
+    // printSection() {
+    //   this.$htmlToPaper("printSection");
+    // },
+    printEmployeeCv() {
+      this.loadingCv = true;
+      axios({
+        url: `/config/employeeCv/${this.fhirId}`,
+        method: "GET",
+        responseType: "blob",
+      })
+        .then((response) => {
+          console.log("CV Response: " + response);
+
+          let blob = new Blob([response.data], { type: "application/pdf" });
+          let link = document.createElement("a");
+          link.href = window.URL.createObjectURL(blob);
+          link.download = "EmployeeCv.pdf";
+          link.click();
+          this.loadingCv = false;
+        })
+        .catch((e) => {
+          console.log(e);
+          this.loadingCv = false;
+        });
     },
   },
 };

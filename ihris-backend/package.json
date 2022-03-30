@@ -40,6 +40,7 @@
     "passport-google-oauth20": "^2.0.0",
     "passport-local": "^1.0.0",
     "passport-totp": "0.0.2",
+    "pdf-lib": "^1.17.1",
     "redis": ">=3.1.1",
     "require-from-string": "^2.0.2",
     "supertest": "^4.0.2",
