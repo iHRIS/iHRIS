@@ -45,7 +45,7 @@
     },
     {
       "name": "redis:url",
-      "valueString": "wrkredis://redis"
+      "valueString": "wrkredis://redis:6379"
     },
     {
       "name": "fhir:base",
