@@ -93,7 +93,7 @@ Usage:          #example
 * extension[reportdetails].extension[reportelement][14].extension[filter].valueBoolean = true
 
 * extension[reportdetails].extension[reportelement][15].extension[label].valueString = "identificationNumber"
-* extension[reportdetails].extension[reportelement][15].extension[name].valueString = "extension.where(url='http://ihris.org/fhir/StructureDefinition/ihris-practitioner-identification-number).valueString"
+* extension[reportdetails].extension[reportelement][15].extension[name].valueString = "extension.where(url='http://ihris.org/fhir/StructureDefinition/ihris-practitioner-identification-number').valueString"
 * extension[reportdetails].extension[reportelement][15].extension[display].valueString = "Identification Number"
 * extension[reportdetails].extension[reportelement][15].extension[filter].valueBoolean = true
 * extension[reportdetails].extension[reportelement][15].extension[dropDownFilter].valueBoolean = false

@@ -8,37 +8,37 @@ const createCV = async (userData) => {
   const pdfDoc = await PDFDocument.load(templateCv);
   const page = pdfDoc.getPage(0);
 
-  // if (
-  //   userData.photo &&
-  //   userData.photo.length > 0 &&
-  //   userData.photo[0].data &&
-  //   userData.photo[0].contentType
-  // ) {
-  //   let dataURL =
-  //     "data:" +
-  //     userData.photo[0].contentType +
-  //     ";base64," +
-  //     userData.photo[0].data;
-  //   if (userData.photo[0].contentType === "image/png") {
-  //     let base64Data = dataURL.replace(/^data:image\/png;base64,/, "");
-  //     const profilePicture = await pdfDoc.embedPng(base64Data);
-  //     page.drawImage(profilePicture, {
-  //       x: 40,
-  //       y: 710,
-  //       width: 80,
-  //       height: 80,
-  //     });
-  //   } else if (userData.photo[0].contentType === "image/jpeg") {
-  //     let base64Data = dataURL.replace(/^data:image\/jpeg;base64,/, "");
-  //     const profilePicture = await pdfDoc.embedJpg(base64Data);
-  //     page.drawImage(profilePicture, {
-  //       x: 40,
-  //       y: 710,
-  //       width: 80,
-  //       height: 80,
-  //     });
-  //   }
-  // }
+  if (
+    userData.photo &&
+    userData.photo.length > 0 &&
+    userData.photo[0].data &&
+    userData.photo[0].contentType
+  ) {
+    let dataURL =
+      "data:" +
+      userData.photo[0].contentType +
+      ";base64," +
+      userData.photo[0].data;
+    if (userData.photo[0].contentType === "image/png") {
+      let base64Data = dataURL.replace(/^data:image\/png;base64,/, "");
+      const profilePicture = await pdfDoc.embedPng(base64Data);
+      page.drawImage(profilePicture, {
+        x: 40,
+        y: 710,
+        width: 80,
+        height: 80,
+      });
+    } else if (userData.photo[0].contentType === "image/jpeg") {
+      let base64Data = dataURL.replace(/^data:image\/jpeg;base64,/, "");
+      const profilePicture = await pdfDoc.embedJpg(base64Data);
+      page.drawImage(profilePicture, {
+        x: 40,
+        y: 710,
+        width: 80,
+        height: 80,
+      });
+    }
+  }
 
   page.drawText(userData.fullName.toUpperCase(), {
     x: 130,
@@ -56,16 +56,16 @@ const createCV = async (userData) => {
   //     size: 12,
   //   });
   // }
-  if (userData.telecom) {
+  if (userData.phone) {
     // console.log(userData.email);
-    page.drawText(userData.telecom[0].value, {  
+    page.drawText(userData.phone, {
       x: 395,
       y: 728,
       size: 12,
     });
   }
-  if (userData.telecom) {
-    page.drawText(userData.telecom[1].value, {
+  if (userData.email) {
+    page.drawText(userData.email, {
       x: 395,
       y: 750,
       size: 12,
@@ -94,8 +94,8 @@ const createCV = async (userData) => {
         y: 565 - index * 180,
         size: 16,
       });
-      if (education.code.text) {
-        page.drawText(education.code.text, {
+      if (education) {
+        page.drawText(education, {
           x: 60,
           y: 540 - index * 180,
           size: 16,
@@ -180,15 +180,15 @@ const createCV = async (userData) => {
   //   });
   // }
 
-  // if (userData.languages && userData.languages.length > 0) {
-  //   userData.languages.map((lang, index) => {
-  //     page.drawText(`${lang}`, {
-  //       x: 50 + index * 100,
-  //       y: 90,
-  //       size: 16,
-  //     });
-  //   });
-  // }
+  if (userData.languages && userData.languages.length > 0) {
+    userData.languages.map((lang, index) => {
+      page.drawText(`${lang}`, {
+        x: 50 + index * 100,
+        y: 90,
+        size: 16,
+      });
+    });
+  }
   const pdfBytes = await pdfDoc.save();
   let fileName = `${userData.id}_cv.pdf`;
   fs.writeFileSync(`employee_cvs_generated/${fileName}`, pdfBytes);

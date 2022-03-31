@@ -82,7 +82,7 @@ Usage:          #example
 * extension[display].extension[link][0].extension[url].valueUrl = "/questionnaire/ihris-user/user"
 * extension[display].extension[search][0].valueString = "User|Person.name.where(use='official').text"
 * extension[display].extension[search][1].valueString = "Username/Email|Person.telecom.where(system='email').value"
-* extension[display].extension[search][2].valueString = "Role|Person.extension.where(url='http://ihris.org/fhir/StructureDefinition/ihris-assign-role').valueReference.reference"
+* extension[display].extension[search][2].valueString = "Groups|Person.extension.where(url='http://ihris.org/fhir/StructureDefinition/ihris-assign-role').valueReference.reference"
 // * extension[display].extension[search][3].valueString = "Location|Person.extension.where(url='http://ihris.org/fhir/StructureDefinition/ihris-user-location').valueReference.reference"
 * extension[display].extension[filter][0].valueString = "User|name:contains"
 * extension[display].extension[field][0].extension[path].valueString = "Person.extension:password.extension:password.value[x]:valueString"
@@ -160,7 +160,7 @@ Usage:          #definition
 
 * item[0].item[4].linkId = "role"
 * item[0].item[4].definition = "http://ihris.org/fhir/StructureDefinition/ihris-person-user#Person.extension:role.value[x]:valueReference"
-* item[0].item[4].text = "Role"
+* item[0].item[4].text = "Group"
 * item[0].item[4].type = #reference
 * item[0].item[4].required = true
 * item[0].item[4].repeats = false

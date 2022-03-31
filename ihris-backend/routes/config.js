@@ -1463,30 +1463,40 @@ router.get("/employeeCv/:id", async (req, res) => {
     const languages = [];
     const skills = [];
 
-
-
     try {
-      let data = await fhirAxios.search("Practitioner", {
-        _profile:
-          "http://ihris.org/fhir/StructureDefinition/ihris-practitioner",
-        _id: req.params.id,
-      });
+      let user = await fhirAxios.read("Practitioner", req.params.id);
 
+      userData.fullName = user.name[0].text ? user.name[0].text : "Not Set";
+      userData.email = user.telecom.find(x => x.system === "email").value;
+      userData.phone = user.telecom.find(x => x.system === "phone").value;
+      userData.gender = user.gender;
 
-      userData.fullName = data.entry[0].resource.name[0].text;
-      userData.gender = data.entry[0].resource.gender;
-      userData.photo = data.entry[0].resource.photo;
-      userData.telecom = data.entry[0].resource.telecom;
+      if (user.qualification && user.qualification.length > 0) {
+        user.qualification.map(x => {
+          if (x.code.text !== undefined) {
+            educationData.push(x.code.text)
+          }
+        })
+      }
 
-      userData.address = data.entry[0].resource.address[0];
-      userData.qualification = data.entry[0].resource.qualification
-      // userData.address.district = data.entry[0].resource.address[0].district;
-      // userData.address.city = data.entry[0].resource.address[0].city;
-      // userData.address.country = data.entry[0].resource.address[0].country;
-      console.log("data", data.entry[0].resource);
+      userData.qualification = educationData;
+
+      if (user.communication && user.communication.length > 0) {
+        user.communication.map((lang) => {
+          console.log(JSON.stringify(lang, null, 2));
+          languages.push(lang.coding[0].display);
+        });
+      }
+
+      // console.log(languages, "languages")
+
+      userData.languages = languages;
+
     } catch (e) {
       console.log(e);
     }
+
+    // generate pdf name
     let fileName = `${userData.id}_cv.pdf`;
     let p = path.join(__dirname, "../employee_cvs_generated/", fileName);
 
@@ -1494,11 +1504,12 @@ router.get("/employeeCv/:id", async (req, res) => {
 
     console.log("User Data", JSON.stringify(userData, null, 2));
 
+    // download pdf
     employeeCv(userData)
-        .then((_) => {
-            res.download(p);
-        })
-        .catch((e) => console.log(e));
+      .then((_) => {
+        res.download(p);
+      })
+      .catch((e) => console.log(e));
   }
 });
 
