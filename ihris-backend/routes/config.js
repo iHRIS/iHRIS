@@ -1470,6 +1470,7 @@ router.get("/employeeCv/:id", async (req, res) => {
       userData.email = user.telecom.find(x => x.system === "email").value;
       userData.phone = user.telecom.find(x => x.system === "phone").value;
       userData.gender = user.gender;
+      userData.photo = user.photo;
 
       if (user.qualification && user.qualification.length > 0) {
         user.qualification.map(x => {
