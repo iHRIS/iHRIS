@@ -7,7 +7,7 @@ Severity:       #error
 Profile:        IhrisPractitioner
 Parent:         Practitioner
 Id:             ihris-practitioner
-Title:          "NHWR Practitioner"
+Title:          "NHWR Health Workers"
 Description:    "NHWR profile of Practitioner."
 * identifier 0..* MS
 * identifier ^label = "Identifier"

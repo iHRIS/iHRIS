@@ -16,11 +16,11 @@
             "code": "1.2.840.10065.1.12.1.14"
           }
         ],
-        "when": "2022-03-30T13:40:08.807Z",
+        "when": "2022-04-01T20:29:16.495Z",
         "who": {
           "reference": "http://ihris.org/fhir/Organization/ihris"
         },
-        "data": "Otgpq37YohMHWIIx9xMmxlYEKxZzC7TOGHsGQ+yi23qmzs8AB5La2N2NecHUvYDepLoQkH+8SE947HLZpm+D1x9p+B/4AWo3NDG39yO+CgGwAUpxD6rbO1gd91xx0Vou0PCc+RRNea+7g6SlQaOqCJwIoMI2GdQ3h4ig5f8n62Q="
+        "data": "Jt+HsXg2vfLGGvi+JUOoTPccrRJwhNttHfQzloCfFLmmd1HBeF34gW4bEqmXIaTujnzr/m3LXdKihqGC6JtzyO7+gRQ3o6i00MXtILThBOSz62vyE2g0dG+WDFboePOtrx7SyKnHF3uL2u25GVjIkYMOZ5S1fHy+ixb31sjsxz0="
       }
     },
     {
@@ -60,7 +60,7 @@
         },
         {
           "name": "site:footer:links:about:text",
-          "valueString": "About NHWR"
+          "valueString": "About MoH"
         },
         {
           "name": "site:footer:links:about:to",
@@ -76,7 +76,7 @@
         },
         {
           "name": "site:footer:links:ihris:text",
-          "valueString": "NHWR Website"
+          "valueString": "MoH Website"
         },
         {
           "name": "site:footer:links:ihris:href",
@@ -248,7 +248,7 @@
         },
         {
           "name": "site:nav:menu:audit:icon",
-          "valueString": "mdi-lock-reset"
+          "valueString": "mdi-chart-line-variant"
         },
         {
           "name": "site:nav:menu:audit:url",
