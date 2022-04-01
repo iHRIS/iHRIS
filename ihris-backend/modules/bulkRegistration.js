@@ -94,8 +94,43 @@ const template = async (users) => {
           },
           extension: [
             {
-              url: "http://ihris.org/fhir/StructureDefinition/ihris-practitioner-nationality",
-              valueCoding: user["nationalityCoding"]
+              url: "http://ihris.org/fhir/StructureDefinition/ihris-practitioner-marital-status",
+              valueCoding: {
+                system: "http://terminology.hl7.org/CodeSystem/v3-MaritalStatus",
+                code: user["MaritalStatus"],
+              }
+            },
+            {
+              url: "http://ihris.org/fhir/StructureDefinition/ihris-practitioner-dependents",
+              valueInteger: user["Dependents"],
+            },
+            {
+              url: "http://ihris.org/fhir/StructureDefinition/ihris-practitioner-identification-number",
+              valueString: user["IdentificationNumber"]
+            }, {
+              url: "http://ihris.org/fhir/StructureDefinition/ihris-practitioner-institution-category",
+              valueString: user["InstitutionCategory"]
+            }, {
+              url: "http://ihris.org/fhir/StructureDefinition/ihris-practitioner-institution-type",
+              valueString: user["InstitutionType"]
+            }, {
+              url: "http://ihris.org/fhir/StructureDefinition/ihris-practitioner-facility",
+              valueString: user["Facility"]
+            }, {
+              url: "http://ihris.org/fhir/StructureDefinition/ihris-practitioner-facility-type",
+              valueString: user["FacilityType"]
+            }, {
+              url: "http://ihris.org/fhir/StructureDefinition/ihris-practitioner-region",
+              valueString: user["Region"]
+            }, {
+              url: "http://ihris.org/fhir/StructureDefinition/ihris-practitioner-registration-board",
+              valueString: user["RegistrationBoard"]
+            }, {
+              url: "http://ihris.org/fhir/StructureDefinition/ihris-practitioner-category",
+              valueString: user["HealthCategory"]
+            }, {
+              url: "http://ihris.org/fhir/StructureDefinition/ihris-practitioner-submitting-system",
+              valueString: user["SubmittingSystem"]
             }
           ],
           identifier: [
@@ -106,6 +141,7 @@ const template = async (users) => {
                     system:
                       "http://ihris.org/fhir/CodeSystem/ihris-identifier-codesystem",
                     code: "nin",
+                    display: "National Identification Number",
                   },
                 ],
               },
@@ -118,6 +154,7 @@ const template = async (users) => {
                     system:
                       "http://ihris.org/fhir/CodeSystem/ihris-identifier-codesystem",
                     code: "Passport",
+                    display: "Passport",
                   },
                 ],
               },
@@ -133,12 +170,26 @@ const template = async (users) => {
               given: [user["GivenName"]],
             },
           ],
+          telecom: [
+            {
+              system: "email",
+              value: user["Email"],
+              use: "work",
+              rank: 1
+            },
+            {
+              system: "phone",
+              value: user["PhoneNumber"],
+              use: "home",
+              rank: 2
+            }
+          ],
           address: [
             {
               use: "home",
               type: "physical",
               line: user["StreetAddress"],
-              city: user["City/Town"],
+              city: user["CityTown"],
               district: user["District"],
             }
           ],
