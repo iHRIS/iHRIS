@@ -11,6 +11,7 @@ const crypto = require('crypto')
 const logger = require('../winston')
 const employeeCv = require("../modules/EmployeeCvPrintOut");
 const path = require('path')
+const bulkRegistration = require('../modules/bulkRegistration');
 
 const getUKey = () => {
   return Math.random().toString(36).replace(/^[^a-z]+/, '') + Math.random().toString(36).substring(2, 15)
@@ -1239,197 +1240,205 @@ router.get('/report/:report', function (req, res) {
   })
 })
 
-const searchLocationReference = async (province, district, subdistrict) => {
-  let location = "Location/UG";
-  let partOfLocation = [];
-  partOfLocation.push(location);
-  if (province) {
-    let provinceBundle = await fhirAxios.search("Location", {
-      name: region.trim(),
-      partof: "UG",
-    });
+// const searchLocationReference = async (province, district, subdistrict) => {
+//   let location = "Location/UG";
+//   let partOfLocation = [];
+//   partOfLocation.push(location);
+//   if (province) {
+//     let provinceBundle = await fhirAxios.search("Location", {
+//       name: region.trim(),
+//       partof: "UG",
+//     });
 
-    if (provinceBundle && provinceBundle.entry && provinceBundle.entry.length > 0) {
-      partOfLocation.push(`Location/${provinceBundle.entry[0].resource.id}`);
-      location = `Location/${provinceBundle.entry[0].resource.id}`;
-      if (district) {
-        let districtBundle = await fhirAxios.search("Location", {
-          name: district.trim(),
-          partof: `${provinceBundle.entry[0].resource.id}`,
-        });
-        if (districtBundle && districtBundle.entry && districtBundle.entry.length > 0) {
-          partOfLocation.push(`Location/${districtBundle.entry[0].resource.id}`);
-          location = `Location/${districtBundle.entry[0].resource.id}`;
-          if (subdistrict) {
-            let subdistrictBundle = await fhirAxios.search("Location", {
-              name: subdistrict.trim(),
-              partof: `${districtBundle.entry[0].resource.id}`,
-            });
-            if (
-              subdistrictBundle &&
-              subdistrictBundle.entry &&
-              subdistrictBundle.entry.length > 0
-            ) {
-              partOfLocation.push(
-                `Location/${subdistrictBundle.entry[0].resource.id}`
-              );
-              location = `Location/${subdistrictBundle.entry[0].resource.id}`;
-            } else {
-              location = `Location/${districtBundle.entry[0].resource.id}`;
-            }
-          } else {
-            location = `Location/${districtBundle.entry[0].resource.id}`;
-          }
-        }
-      } else {
-        location = `Location/${provinceBundle.entry[0].resource.id}`;
-      }
-    }
-  }
+//     if (provinceBundle && provinceBundle.entry && provinceBundle.entry.length > 0) {
+//       partOfLocation.push(`Location/${provinceBundle.entry[0].resource.id}`);
+//       location = `Location/${provinceBundle.entry[0].resource.id}`;
+//       if (district) {
+//         let districtBundle = await fhirAxios.search("Location", {
+//           name: district.trim(),
+//           partof: `${provinceBundle.entry[0].resource.id}`,
+//         });
+//         if (districtBundle && districtBundle.entry && districtBundle.entry.length > 0) {
+//           partOfLocation.push(`Location/${districtBundle.entry[0].resource.id}`);
+//           location = `Location/${districtBundle.entry[0].resource.id}`;
+//           if (subdistrict) {
+//             let subdistrictBundle = await fhirAxios.search("Location", {
+//               name: subdistrict.trim(),
+//               partof: `${districtBundle.entry[0].resource.id}`,
+//             });
+//             if (
+//               subdistrictBundle &&
+//               subdistrictBundle.entry &&
+//               subdistrictBundle.entry.length > 0
+//             ) {
+//               partOfLocation.push(
+//                 `Location/${subdistrictBundle.entry[0].resource.id}`
+//               );
+//               location = `Location/${subdistrictBundle.entry[0].resource.id}`;
+//             } else {
+//               location = `Location/${districtBundle.entry[0].resource.id}`;
+//             }
+//           } else {
+//             location = `Location/${districtBundle.entry[0].resource.id}`;
+//           }
+//         }
+//       } else {
+//         location = `Location/${provinceBundle.entry[0].resource.id}`;
+//       }
+//     }
+//   }
 
-  return { location, partOfLocation };
-};
+//   return { location, partOfLocation };
+// };
 
-const getCodeSystem = (value, valueSet) => {
-  return new Promise((resolve, reject) => {
-    let valuecoding = {}
-    fhirAxios.expand(valueSet, true, true).then((expansion) => {
-      try {
-        valuecoding = expansion.expansion.contains.find(element => element.display === value)
-        resolve(valuecoding)
-      } catch (error) {
-        console.log(error)
-        logger.error(error)
-        reject(error)
-      }
-    }).catch((err) => {
-      console.log(err)
-      logger.error(err.message);
-      reject(err);
-    })
-  })
-}
+// const getCodeSystem = (value, valueSet) => {
+//   return new Promise((resolve, reject) => {
+//     let valuecoding = {}
+//     fhirAxios.expand(valueSet, true, true).then((expansion) => {
+//       try {
+//         valuecoding = expansion.expansion.contains.find(element => element.display === value)
+//         resolve(valuecoding)
+//       } catch (error) {
+//         console.log(error)
+//         logger.error(error)
+//         reject(error)
+//       }
+//     }).catch((err) => {
+//       console.log(err)
+//       logger.error(err.message);
+//       reject(err);
+//     })
+//   })
+// }
 
-const getReferences = (resourceType, resource) => {
-  return new Promise((resolve, reject) => {
-    let params = { 'name:contains': resource }
-    fhirAxios.search(resourceType, params).then(result => {
-      try {
-        let references = result.entry.map(entry => entry.resource.id)
-        resolve(references[0])
-      } catch (error) {
-        console.log(error)
-        logger.error(error)
-        reject(error)
-      }
-    }).catch((err) => {
-      console.log(err)
-      logger.error(err.message);
-      reject(err);
-    })
-  })
-}
+// const getReferences = (resourceType, resource) => {
+//   return new Promise((resolve, reject) => {
+//     let params = { 'name:contains': resource }
+//     fhirAxios.search(resourceType, params).then(result => {
+//       try {
+//         let references = result.entry.map(entry => entry.resource.id)
+//         resolve(references[0])
+//       } catch (error) {
+//         console.log(error)
+//         logger.error(error)
+//         reject(error)
+//       }
+//     }).catch((err) => {
+//       console.log(err)
+//       logger.error(err.message);
+//       reject(err);
+//     })
+//   })
+// }
 
-const setUserdata = async (usersData) => {
-  let data = []
-  if (usersData.length > 0) {
-    for (let i = 0; i < usersData.length; i++) {
-      await getCodeSystem(usersData[i]["Nationality"], "iso3166-1-2").then(response => {
-        usersData[i].nationalityCoding = response
-      }).catch((err) => {
-        console.log(err)
-        logger.error(err.message);
-      })
-      await getCodeSystem(usersData[i]["Prefix"], "ihris-prefix-valueset").then(response => {
-        usersData[i].prefixCoding = response
-      }).catch((err) => {
-        console.log(err)
-        logger.error(err.message);
-      })
-      await getCodeSystem(usersData[i]["EmploymentTerms"], "ihris-employment-terms-value-set").then(response => {
-        usersData[i].empTermsCoding = response
-      }).catch((err) => {
-        console.log(err)
-        logger.error(err.message);
-      })
-      await getCodeSystem(usersData[i]["PositionType"], "ihris-position-type-valueset").then(response => {
-        usersData[i].postTypeCoding = response
-      }).catch((err) => {
-        console.log(err)
-        logger.error(err.message);
-      })
-      await getCodeSystem(usersData[i]["Duties"], "ihris-position-duty-valueset").then(response => {
-        usersData[i].positionFunctionCoding = response
-      }).catch((err) => {
-        console.log(err)
-        logger.error(err.message);
-      })
-      await getCodeSystem(usersData[i]["JobTitle"], "ihris-job").then(response => {
-        usersData[i].jobCoding = response
-      }).catch((err) => {
-        console.log(err)
-        logger.error(err.message)
-      })
-      await getReferences("Location", usersData[i]["FacilityName"]).then(response => {
-        usersData[i].locationID = response
-      }).catch((err) => {
-        console.log(err)
-        logger.error(err.message)
-      })
-      await getReferences("Organization", usersData[i]["Organization"]).then(response => {
-        usersData[i].organizationID = response;
-      }).catch((err) => {
-        console.log(err)
-        logger.error(err.message)
-      })
-      await getCodeSystem(usersData[i]["PayGrade"], "ihris-salary-grade").then(response => {
-        usersData[i].payGradeCoding = response
-      }).catch((err) => {
-        console.log(err)
-        logger.error(err.message)
-      })
-      await getCodeSystem(usersData[i]["HighestTrainingLevel"], "ihris-training-level-valueset").then(response => {
-        usersData[i].trainingCoding = response
-      }).catch((err) => {
-        console.log(err)
-        logger.error(err.message);
-      })
-      data.push(usersData[i]);
-    }
-    return data
-  } else {
-    return "No data found"
-  }
-}
+// const setUserdata = async (usersData) => {
+//   let data = []
+//   if (usersData.length > 0) {
+//     for (let i = 0; i < usersData.length; i++) {
+//       await getCodeSystem(usersData[i]["Nationality"], "iso3166-1-2").then(response => {
+//         usersData[i].nationalityCoding = response
+//       }).catch((err) => {
+//         console.log(err)
+//         logger.error(err.message);
+//       })
+//       await getCodeSystem(usersData[i]["Prefix"], "ihris-prefix-valueset").then(response => {
+//         usersData[i].prefixCoding = response
+//       }).catch((err) => {
+//         console.log(err)
+//         logger.error(err.message);
+//       })
+//       await getCodeSystem(usersData[i]["EmploymentTerms"], "ihris-employment-terms-value-set").then(response => {
+//         usersData[i].empTermsCoding = response
+//       }).catch((err) => {
+//         console.log(err)
+//         logger.error(err.message);
+//       })
+//       await getCodeSystem(usersData[i]["PositionType"], "ihris-position-type-valueset").then(response => {
+//         usersData[i].postTypeCoding = response
+//       }).catch((err) => {
+//         console.log(err)
+//         logger.error(err.message);
+//       })
+//       await getCodeSystem(usersData[i]["Duties"], "ihris-position-duty-valueset").then(response => {
+//         usersData[i].positionFunctionCoding = response
+//       }).catch((err) => {
+//         console.log(err)
+//         logger.error(err.message);
+//       })
+//       await getCodeSystem(usersData[i]["JobTitle"], "ihris-job").then(response => {
+//         usersData[i].jobCoding = response
+//       }).catch((err) => {
+//         console.log(err)
+//         logger.error(err.message)
+//       })
+//       await getReferences("Location", usersData[i]["FacilityName"]).then(response => {
+//         usersData[i].locationID = response
+//       }).catch((err) => {
+//         console.log(err)
+//         logger.error(err.message)
+//       })
+//       await getReferences("Organization", usersData[i]["Organization"]).then(response => {
+//         usersData[i].organizationID = response;
+//       }).catch((err) => {
+//         console.log(err)
+//         logger.error(err.message)
+//       })
+//       await getCodeSystem(usersData[i]["PayGrade"], "ihris-salary-grade").then(response => {
+//         usersData[i].payGradeCoding = response
+//       }).catch((err) => {
+//         console.log(err)
+//         logger.error(err.message)
+//       })
+//       await getCodeSystem(usersData[i]["HighestTrainingLevel"], "ihris-training-level-valueset").then(response => {
+//         usersData[i].trainingCoding = response
+//       }).catch((err) => {
+//         console.log(err)
+//         logger.error(err.message);
+//       })
+//       data.push(usersData[i]);
+//     }
+//     return data
+//   } else {
+//     return "No data found"
+//   }
+// }
 
 router.post("/bulkRegistration", async (req, res) => {
   if (!req.body) {
     return res.status(400).end();
   } else {
-    await setUserdata(req.body).then(async (userResults) => {
-      if (userResults.length > 0) {
-        await bulkRegistration(userResults).then(async response => {
-          if (response.isValid) {
-            console.log(JSON.stringify(response.data.bundle, null, 2))
-            await fhirAxios.create(response.data.bundle)
-              .then((results) => {
-                return res.status(201).json(results);
-              }).catch((err) => {
-                logger.error(err);
-                return res.status(500).json(err);
-              })
-          } else {
-            return res.json(response);
-          }
-        }).catch(err => {
-          console.log(err)
-          logger.error(err.message)
-        })
+
+    console.log ("all csv data", req.body)
+
+    await bulkRegistration(req.body).then(async response => {
+
+      console.log("responses",response)
+
+      if (response.isValid) {
+        console.log(JSON.stringify(response.data.bundle, null, 2))
+        await fhirAxios.create(response.data.bundle)
+          .then((results) => {
+            return res.status(201).json(results);
+          }).catch((err) => {
+            logger.error(err);
+            return res.status(500).json(err);
+          })
+      } else {
+        return res.json(response);
       }
-    }).catch((err) => {
+    }).catch(err => {
       console.log(err)
       logger.error(err.message)
     })
+
+    // await setUserdata(req.body).then(async (userResults) => {
+    //   if (userResults.length > 0) {
+        
+    //   }
+    // }).catch((err) => {
+    //   console.log(err)
+    //   logger.error(err.message)
+    // })
   }
 });
 

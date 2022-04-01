@@ -1,51 +1,63 @@
 <template>
-  <v-row >
-    <v-dialog
-        v-model="dialog"
-        max-width="700px"
-        persistent
-    >
+  <v-row>
+    <v-dialog v-model="dialog" max-width="700px" persistent>
       <v-card class="pt-4 pb-8">
         <v-card-title class="justify-center mb-4">
-          <span v-if="!loading" class="text-h5 ">Select Your file</span>
+          <span v-if="!loading" class="text-h5">Select Your file</span>
         </v-card-title>
         <v-card-text v-if="!loading" :disabled="loading">
           <input
-              ref="excel-upload-input"
-              accept=".xlsx, .xls, .csv"
-              class="excel-upload-input"
-              type="file"
-              @change="handleClick"
+            ref="excel-upload-input"
+            accept=".xlsx, .xls, .csv"
+            class="excel-upload-input"
+            type="file"
+            @change="handleClick"
           />
-          <div class="drop" @dragenter="handleDragover" @dragover="handleDragover" @drop="handleDrop">
+          <div
+            class="drop"
+            @dragenter="handleDragover"
+            @dragover="handleDragover"
+            @drop="handleDrop"
+          >
             Drop excel file here or
           </div>
         </v-card-text>
-        <v-card-text v-if="!hasError&&loading" :disabled="loading" align="center">
+        <v-card-text
+          v-if="!hasError && loading"
+          :disabled="loading"
+          align="center"
+        >
           <v-progress-circular
-              v-if="loading"
-              :rotate="360"
-              :size="100"
-              :value="progress"
-              :width="15"
-              class="mb-8"
-              color="green"
+            v-if="loading"
+            :rotate="360"
+            :size="100"
+            :value="progress"
+            :width="15"
+            class="mb-8"
+            color="green"
           >
             {{ progress }}
           </v-progress-circular>
-          <h1 v-if="progress===100">Done Uploading Health Workers' Information</h1>
+          <h1 v-if="progress === 100">
+            Done Uploading Health Workers' Information
+          </h1>
           <h1 v-else>uploading...</h1>
         </v-card-text>
         <v-card-text v-if="hasError" :disabled="loading">
           <v-col style="text-align-last: center">
-          <v-icon class="mb-8 icon">mdi-alert-circle</v-icon>
-          <h2   class="mb-4 text-center">{{message}}</h2>
+            <v-icon class="mb-8 icon">mdi-alert-circle</v-icon>
+            <h2 class="mb-4 text-center">{{ message }}</h2>
           </v-col>
           <ul class="ml-12" style="list-style-type: none">
-            <li v-for="(item,index) in error" :key="index">
-              <h3 class="mb-2"><v-icon class="mr-2">mdi-alert-circle</v-icon> Row {{ item.index }}</h3>
-              <ul  v-for="(message,index) in item.errors" :key="index">
-                <li style="list-style-type: none"><h4>{{ message }}</h4></li>
+            <li v-for="(item, index) in error" :key="index">
+              <h3 class="mb-2">
+                <v-icon class="mr-2">mdi-alert-circle</v-icon> Row
+                {{ item.index }}
+              </h3>
+              <ul v-for="(message, index) in item.errors" :key="index">
+                <li style="list-style-type: none">
+                  <h4>{{ message }}</h4>
+                </li>
               </ul>
             </li>
           </ul>
@@ -53,24 +65,21 @@
         <v-card-actions class="pr-8 pt-6 mr-6">
           <v-spacer></v-spacer>
           <v-btn
-              v-if="!loading || hasError"
-              class="warning mr-4 pr-2"
-              type="button"
-              @click="cancelSelect"
+            v-if="!loading || hasError"
+            class="warning mr-4 pr-2"
+            type="button"
+            @click="cancelSelect"
           >
-            <v-icon class="pr-2" dark>
-              mdi-close
-            </v-icon>
+            <v-icon class="pr-2" dark> mdi-close </v-icon>
             Cancel
           </v-btn>
-          <v-btn v-if="!loading"
-                 color="primary"
-                 type="button"
-                 @click="handleUpload"
+          <v-btn
+            v-if="!loading"
+            color="primary"
+            type="button"
+            @click="handleUpload"
           >
-            <v-icon class="pr-2" dark>
-              mdi-folder
-            </v-icon>
+            <v-icon class="pr-2" dark> mdi-folder </v-icon>
             Browse
           </v-btn>
         </v-card-actions>
@@ -81,7 +90,7 @@
 
 <script>
 import XLSX from "xlsx";
-import axios from 'axios'
+import axios from "axios";
 
 export default {
   props: {
@@ -90,7 +99,7 @@ export default {
   },
   data() {
     return {
-      hasError:false,
+      hasError: false,
       message: "",
       error: [],
       snackbar: false,
@@ -98,7 +107,7 @@ export default {
       loading: false,
       progress: 0,
       excelData: {
-        fileName: '',
+        fileName: "",
         header: null,
         results: null,
       },
@@ -117,7 +126,7 @@ export default {
       const rawFile = files[0]; // only use files[0]
       if (!this.isExcel(rawFile)) {
         this.$toast.error(
-            "Only supports upload .xlsx, .xls, .csv suffix files"
+          "Only supports upload .xlsx, .xls, .csv suffix files"
         );
         return false;
       }
@@ -139,7 +148,7 @@ export default {
       if (!rawFile) return;
       if (!this.isExcel(rawFile)) {
         this.$toast.error(
-            "Only supports upload .xlsx, .xls, .csv suffix files"
+          "Only supports upload .xlsx, .xls, .csv suffix files"
         );
         return false;
       }
@@ -163,43 +172,51 @@ export default {
         const reader = new FileReader();
         reader.onload = (e) => {
           const data = e.target.result;
-          this.progress = Math.round((e.loaded / e.total) * 100)
-          console.log("loading progress" + this.progress)
-          const workbook = XLSX.read(data, {type: "array", cellDates: true, dateNF: 'yyyy/mm/dd;@'});
-          const finalData = Object.keys(workbook.Sheets).map((name) => ({data: XLSX.utils.sheet_to_json(workbook.Sheets[name])}))
-          axios.post(`/config/bulkRegistration`, finalData[0].data).then((response) => {
-            if (response.status === 201) {
-              this.message = "Users created Successfully!"
-              this.snackbar = true
-              setTimeout(() =>{
-                this.$router.push('/resource/search/practitioner')
-              }, 2000);
-            }else if(!response.data.isValid){
-              console.log(response.data.message)
-              if(response.data.rows.length > 5){
-                this.error = null
-                this.hasError = true
-                this.snackbar = true
-                let indexes = response.data.rows.map(i=>i+2)
-                this.message = `The uploaded document contains some incorrect data, Please check you're data at row ${indexes.join()}. `
-              }else{
-                this.error = response.data.message
-                this.hasError = true
-                this.message = `The uploaded document contains some incorrect data, please check you're data at `
-                this.snackbar = true
+          this.progress = Math.round((e.loaded / e.total) * 100);
+          console.log("loading progress" + this.progress);
+          const workbook = XLSX.read(data, {
+            type: "array",
+            cellDates: true,
+            dateNF: "yyyy/mm/dd;@",
+          });
+          const finalData = Object.keys(workbook.Sheets).map((name) => ({
+            data: XLSX.utils.sheet_to_json(workbook.Sheets[name]),
+          }));
+          axios
+            .post(`/config/bulkRegistration`, finalData[0].data)
+            .then((response) => {
+              if (response.status === 201) {
+                this.message = "Users created Successfully!";
+                this.snackbar = true;
+                setTimeout(() => {
+                  this.$router.push("/resource/search/practitioner");
+                }, 2000);
+              } else if (!response.data.isValid) {
+                console.log(response.data.message);
+                if (response.data.rows.length > 5) {
+                  this.error = null;
+                  this.hasError = true;
+                  this.snackbar = true;
+                  let indexes = response.data.rows.map((i) => i + 2);
+                  this.message = `The uploaded document contains some incorrect data, Please check you're data at row ${indexes.join()}. `;
+                } else {
+                  this.error = response.data.message;
+                  this.hasError = true;
+                  this.message = `The uploaded document contains some incorrect data, please check you're data at `;
+                  this.snackbar = true;
+                }
+              } else {
+                this.hasError = true;
+                this.loading = false;
+                this.$router.push(
+                  "/questionnaire/ihris-practitioner/practitioner"
+                );
               }
-
-            }
-            else {
-              this.hasError = true
-              this.loading = false
-              this.$router.push('/questionnaire/ihris-practitioner/practitioner')
-            }
-          }).catch(e => console.log(e))
+            })
+            .catch((e) => console.log(e));
           resolve();
         };
         reader.readAsArrayBuffer(rawFile);
-
       });
     },
     isExcel(file) {
@@ -207,8 +224,10 @@ export default {
     },
     cancelSelect() {
       this.dialog = false;
-      this.$router.push({path: "/questionnaire/ihris-practitioner/practitioner"})
-    }
+      this.$router.push({
+        path: "/questionnaire/ihris-practitioner/practitioner",
+      });
+    },
   },
 };
 </script>
