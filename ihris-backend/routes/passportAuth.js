@@ -10,7 +10,7 @@ const passport = require('passport')
 const GoogleStrategy = require('passport-google-oauth20').Strategy
 const LocalStrategy = require('passport-local').Strategy
 const CustomStrategy = require('passport-custom').Strategy
-const TOTPStrategy = require('passport-totp').Strategy
+const TotpStrategy = require('passport-totp').Strategy;
 
 const defaultUser = nconf.get("user:loggedout") || "ihris-user-loggedout"
 
@@ -97,7 +97,7 @@ passport.use('custom-loggedout', new CustomStrategy(
   }
 ))
 
-passport.use('totp', new TOTPStrategy((req, done) => {
+passport.use('totp', new TotpStrategy((req, done) => {
 
   user.lookupByEmail(req.user.email).then((userObj) => {
     if (!userObj) {
@@ -174,6 +174,16 @@ router.post("/login", passport.authenticate('local', {}), (req, res) => {
   } catch (err) {
   }
   res.status(200).json({ ok: true, name: name })
+})
+
+
+// otp setup
+router.get("/otp/setup", (req, res) => {
+  if (req.user) {
+    res.status(200).json({ ok: true })
+  } else {
+    res.status(200).json({ ok: false })
+  }
 })
 
 router.post("/verify-otp", passport.authenticate('totp', { failureRedirect: '/verify-otp' }), (req, res) => {

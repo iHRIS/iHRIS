@@ -28,24 +28,23 @@
         This should only be done during development.
       </div>
       <v-spacer></v-spacer>
-      <div>
-        Welcome
+      <div class="mx-4">
         <span v-if="$store.state.user.loggedin"
-          >, {{ $store.state.user.name }}</span
+          > {{ $store.state.user.name }}</span
         >
       </div>
-      <v-spacer></v-spacer>
+      <!-- <v-spacer></v-spacer> -->
       <!-- <v-progress-circular
         indeterminate
         v-if="!header.title"
         color="primary"
       ></v-progress-circular> -->
-      <v-btn icon to="/" color="white" title="Home">
+      <!-- <v-btn icon to="/" color="white" title="Home">
         <v-icon>mdi-home</v-icon>
       </v-btn>
       <v-btn icon color="white" title="Help">
         <v-icon>mdi-help</v-icon>
-      </v-btn>
+      </v-btn> -->
       <v-menu left bottom v-if="!$store.state.user.loggedin">
         <template v-slot:activator="{ on }">
           <v-btn

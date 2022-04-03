@@ -8,7 +8,7 @@
         <div v-if="page === 'practitioner'">
           <v-dialog v-model="dialog" max-width="700px" persistent>
             <template v-slot:activator="{ on, attrs }">
-              <v-btn color="primary" dark v-bind="attrs" v-on="on">
+              <v-btn color="primary darken-1" dark v-bind="attrs" v-on="on">
                 Import CSV
               </v-btn>
             </template>
@@ -101,7 +101,7 @@
         <div v-else-if="page === 'auditevent'"></div>
         <div v-else>
           <v-btn
-            :class="addLink ? addLink.class || 'primary' : 'primary'"
+            :class="addLink ? addLink.class || 'primary darken-1' : 'primary darken-1'"
             :to="addLink ? addLink.url : '/resource/add/' + page"
           >
             <v-icon v-if="addLink && addLink.icon">{{ addLink.icon }}</v-icon>
