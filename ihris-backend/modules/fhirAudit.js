@@ -5,9 +5,7 @@ const fhirAxios = require('./fhirAxios')
 const AUDIT_TEMPLATE = {
   resourceType: "AuditEvent",
   meta: {
-    profile: [
-      "http://hl7.org/fhir/StructureDefinition/AuditEvent"
-    ]
+    profile: ["http://ihris.org/fhir/StructureDefinition/ihris-auditevent"]
   },
   type: {
     system: "http://terminology.hl7.org/CodeSystem/audit-event-type",
@@ -99,9 +97,8 @@ const fhirAudit = {
     startupAudit.subtype.push({
       system: "http://dicom.nema.org/resources/ontology/DCM",
       code: "110120",
-      display:"Application Start"
-      
-    }),
+      display: "Application Start"
+    })
     fhirAudit.save(startupAudit)
   },
 
@@ -118,7 +115,6 @@ const fhirAudit = {
       system: "http://dicom.nema.org/resources/ontology/DCM",
       code: "110122",
       display: "Login"
-
     })
     loginAudit.agent.push(fhirAudit.getAgent(user, ip, email))
     fhirAudit.save(loginAudit)
@@ -147,8 +143,8 @@ const fhirAudit = {
     }
     createAudit.subtype.push({
       system: "http://hl7.org/fhir/restful-interaction",
-      code: "create", 
-      display: "Create"
+      code: "create",
+      display: "create"
     })
     createAudit.action = "C"
     if (what) {
@@ -182,7 +178,7 @@ const fhirAudit = {
     updateAudit.subtype.push({
       system: "http://hl7.org/fhir/restful-interaction",
       code: "update",
-      display:"Update"
+      display: "update"
     })
     updateAudit.action = "U"
     if (what) {
@@ -216,7 +212,7 @@ const fhirAudit = {
     updateAudit.subtype.push({
       system: "http://hl7.org/fhir/restful-interaction",
       code: "patch",
-      display:"Patch"
+      display: "patch"
     })
     updateAudit.action = "U"
     if (what) {
@@ -248,8 +244,6 @@ const fhirAudit = {
     }
     fhirAudit.save(updateAudit)
   },
-
-
 }
 
 
