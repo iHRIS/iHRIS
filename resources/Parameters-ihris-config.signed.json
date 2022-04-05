@@ -16,11 +16,11 @@
             "code": "1.2.840.10065.1.12.1.14"
           }
         ],
-        "when": "2022-04-01T20:29:16.495Z",
+        "when": "2022-04-05T20:43:27.868Z",
         "who": {
           "reference": "http://ihris.org/fhir/Organization/ihris"
         },
-        "data": "Jt+HsXg2vfLGGvi+JUOoTPccrRJwhNttHfQzloCfFLmmd1HBeF34gW4bEqmXIaTujnzr/m3LXdKihqGC6JtzyO7+gRQ3o6i00MXtILThBOSz62vyE2g0dG+WDFboePOtrx7SyKnHF3uL2u25GVjIkYMOZ5S1fHy+ixb31sjsxz0="
+        "data": "FTpzwKErqbH06Bcrd1MQAF0GVMnfm2oVrCJVX0GnVSvN0qkNp4gefiep662onUtjIzz48/Ndv/fS9koZEbgFmMBwNA8Y6hIPyWLuPmIBWT87y92yweLzaFp/4JYP00yo3qZl385qyam5wMZoKaZsfVjzyj6NNjVeO+JutahFlV4="
       }
     },
     {
@@ -207,8 +207,16 @@
           "valueString": "/resource/search/user"
         },
         {
-          "name": "site:nav:menu:users:menu:roles_search:text",
+          "name": "site:nav:menu:users:menu:group_search:text",
           "valueString": "Groups"
+        },
+        {
+          "name": "site:nav:menu:users:menu:group_search:url",
+          "valueString": "/resource/search/group"
+        },
+        {
+          "name": "site:nav:menu:users:menu:roles_search:text",
+          "valueString": "Roles"
         },
         {
           "name": "site:nav:menu:users:menu:roles_search:url",

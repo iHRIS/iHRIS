@@ -1,7 +1,7 @@
 Profile:        IhrisRole
 Parent:         Basic
 Id:             ihris-role
-Title:          "NHWR Groups"
+Title:          "NHWR Roles"
 Description:    "NHWR Profile of the Basic resource to manage roles."
 * code = IhrisResourceCodeSystem#role
 * extension contains
@@ -46,6 +46,25 @@ Description:    "NHWR Profile of the Basic resource to manage permissions."
 * extension[compositeTask].value[x] only Reference(Basic)
 * extension[compositeTask].valueReference 1..1 MS
 * extension[compositeTask].valueReference ^label = "Composite Task"
+
+
+
+// groups profile
+Profile:        IhrisGroup
+Parent:         Basic
+Id:             ihris-group
+Title:          "NHWR Groups"
+Description:    "NHWR Profile of the Basic resource to manage groups."
+* code = IhrisResourceCodeSystem#role
+* extension contains 
+      IhrisBasicName named name 1..1 MS and
+      IhrisAssignRole named role 0..*
+* extension[name].valueString 1..1 MS
+* extension[role].value[x] only Reference(IhrisRole)
+* extension[role].valueReference 1..1 MS
+* extension[role].valueReference ^label = "Role"
+
+
 
 Invariant:      ihris-task-instance-constraint
 Description:    "Only one of extension[instance].valueCode or extension[constraint].valueReference SHALL be present."
@@ -430,7 +449,7 @@ Usage:          #example
 
 Instance:         ihris-page-role
 InstanceOf:       IhrisPage
-Title:            "NHWR Groups" 
+Title:            "NHWR Roles" 
 Usage:            #example
 * code = IhrisResourceCodeSystem#page
 * extension[display].extension[resource].valueReference = Reference(StructureDefinition/ihris-role)
@@ -445,9 +464,9 @@ Usage:            #example
 // * extension[display].extension[search][0].valueString = "Id|Basic.id"
 * extension[display].extension[search][0].valueString = "Name|Basic.extension.where(url='http://ihris.org/fhir/StructureDefinition/ihris-basic-name').valueString"
 * extension[display].extension[search][1].valueString = "Role Reference|Basic.extension.where(url='http://ihris.org/fhir/StructureDefinition/ihris-assign-role').valueReference.reference"
-* extension[display].extension[filter][0].valueString = "Group|extension.valueString:contains"
-* extension[section][0].extension[title].valueString = "Group"
-* extension[section][0].extension[description].valueString = "System User Groups details"
+* extension[display].extension[filter][0].valueString = "Role|extension.valueString:contains"
+* extension[section][0].extension[title].valueString = "Role"
+* extension[section][0].extension[description].valueString = "System User Role details"
 * extension[section][0].extension[name].valueString = "Basic"
 * extension[section][0].extension[field][0].valueString = "Basic.extension:name.value[x]:valueString"
 * extension[section][0].extension[field][1].valueString = "Basic.extension:role.value[x]:valueReference"
@@ -468,11 +487,11 @@ Usage:          #definition
 * purpose = "Workflow page for recording a user role information."
 
 * item[0].linkId = "Role"
-* item[0].text = "Add Group"
+* item[0].text = "Add Role"
 * item[0].type = #group
 
 * item[0].item[0].linkId = "rolename"
-* item[0].item[0].text = "Group Name"
+* item[0].item[0].text = "Role Name"
 * item[0].item[0].type = #string
 * item[0].item[0].required = false
 * item[0].item[0].repeats = false
@@ -486,7 +505,7 @@ Usage:          #definition
 
 * item[0].item[2].linkId = "roles"
 * item[0].item[2].definition = "http://ihris.org/fhir/StructureDefinition/ihris-role#Basic.extension:role.value[x]:valueReference"
-* item[0].item[2].text = "Groups"
+* item[0].item[2].text = "Roles"
 * item[0].item[2].type = #reference
 * item[0].item[2].required = false
 * item[0].item[2].repeats = true
@@ -589,3 +608,57 @@ Usage:          #definition
 * item[0].item[1].item[0].type = #reference
 * item[0].item[1].item[0].required = false
 * item[0].item[1].item[0].repeats = true
+
+
+
+// group crud 
+// user groups list
+Instance:         ihris-page-group
+InstanceOf:       IhrisPage
+Title:            "NHWR Groups" 
+Usage:            #example 
+* code = IhrisResourceCodeSystem#page
+* extension[display].extension[resource].valueReference = Reference(StructureDefinition/ihris-group)
+* extension[display].extension[add].extension[url].valueUrl = "/questionnaire/ihris-group/group"
+* extension[display].extension[add].extension[icon].valueString = "mdi-account-plus"
+* extension[display].extension[add].extension[class].valueString = "accent"
+// * extension[display].extension[search][0].valueString = "Id|Basic.id"
+* extension[display].extension[search][0].valueString = "Name|Basic.extension.where(url='http://ihris.org/fhir/StructureDefinition/ihris-basic-name').valueString"
+* extension[display].extension[search][1].valueString = "Role Reference|Basic.extension.where(url='http://ihris.org/fhir/StructureDefinition/ihris-assign-role').valueReference.reference"
+* extension[display].extension[filter][0].valueString = "Role|extension.valueString:contains"
+* extension[section][0].extension[title].valueString = "Groups"
+* extension[section][0].extension[description].valueString = "System User Groups details"
+* extension[section][0].extension[name].valueString = "Basic"
+* extension[section][0].extension[field][0].valueString = "Basic.extension:name.value[x]:valueString"
+* extension[section][0].extension[field][1].valueString = "Basic.extension:role.value[x]:valueReference"
+
+
+// user group add 
+Instance:         IhrisGroup
+InstanceOf:       IhrisQuestionnaire
+Usage:          #definition
+* title = "NHWR AddGroup Workflow"
+* description = "NHWR workflow to record a Group"
+* id = "ihris-group"
+* url = "http://ihris.org/fhir/Questionnaire/ihris-group"
+* name = "ihris-group"
+* status = #active
+* date = 2022-02-20
+* purpose = "Workflow page for recording a user group information."
+
+* item[0].linkId = "Group"
+* item[0].text = "Add Group"
+* item[0].type = #group
+
+* item[0].item[0].linkId = "groupname"
+* item[0].item[0].text = "Group Name"
+* item[0].item[0].type = #string
+* item[0].item[0].required = false
+* item[0].item[0].repeats = false
+
+* item[0].item[1].linkId = "roles"
+* item[0].item[1].definition = "http://ihris.org/fhir/StructureDefinition/ihris-role#Basic.extension:role.value[x]:valueReference"
+* item[0].item[1].text = "Roles"
+* item[0].item[1].type = #reference
+* item[0].item[1].required = false
+* item[0].item[1].repeats = true
