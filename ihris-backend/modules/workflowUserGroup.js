@@ -9,12 +9,102 @@ const fhirAxios = nconf.fhirAxios
 const workflowUserGroup = {
     process: (req) => {
 
+        console.log("resqquest", JSON.stringify(req.body.item[0], null, 2))
 
-        console.log("user group",req)
 
         return new Promise(async (resolve, reject) => {
 
-          
+            let groupName = undefined
+            let userRoles = undefined
+
+            let extensions = []
+
+
+            try {
+                let bundle = {
+                    resourceType: "Bundle",
+                    type: "transaction",
+                    entry: []
+                }
+
+                // values check
+                if (req.body && req.body.item
+                    && req.body.item[0].linkId === "Group"
+                    && req.body.item[0].item[0].linkId === "groupname"
+                    && req.body.item[0].item[0].answer[0].valueString
+                ) {
+
+                    // get groupname
+                    if (req.body.item[0].item[0].linkId == "groupname") {
+
+                        groupName = req.body.item[0].item[0].answer[0].valueString
+                        let name = {
+                            url: "http://ihris.org/fhir/StructureDefinition/ihris-basic-name",
+                            valueString: groupName
+                        }
+                        extensions.push(name)
+                    }
+                    // get roles
+                    if (req.body.item[0].item.find((item) => item.linkId == "roles")) {
+                        //role roles
+                        userRoles = req.body.item[0].item.find((item) => item.linkId == "roles").answer
+                        let roles = {}
+                        userRoles.forEach(element => {
+                            roles = {
+                                url: "http://ihris.org/fhir/StructureDefinition/ihris-assign-role",
+                                valueReference: {
+                                    reference: element.valueReference.reference
+                                }
+
+                            }
+                        });
+                        extensions.push(roles)
+                    }
+
+                } else {
+                    winston.error("Group name not provided")
+                    resolve(await workflowUserGroup.outcome("Group name not provided"))
+                }
+
+
+
+                // formalaise the user group
+                let newGroup = {
+                    resourceType: "Basic",
+                    id: "ihris-group-" + groupName.replace(/ /g, "").toLowerCase(),
+                    meta: {
+                        profile: ["http://ihris.org/fhir/StructureDefinition/ihris-group"]
+                    },
+                    extension: extensions,
+                    code: {
+                        coding: [
+                            {
+                                code: "group",
+                                system: "http://ihris.org/fhir/CodeSystem/ihris-resource-codesystem"
+                            }
+                        ]
+                    },
+                }
+
+                // create  the group id
+                let url = "Basic/ihris-group-" + groupName.replace(/ /g, "").toLowerCase()
+
+                bundle.entry.push({
+                    resource: newGroup,
+                    request: {
+                        method: "PUT",
+                        url: url
+                    }
+                })
+                winston.info(JSON.stringify(bundle, null, 2))
+                resolve(bundle)
+
+            } catch (err) {
+                winston.error(err.message)
+                resolve(await workflowUserGroup.outcome(err.message))
+            }
+
+
         })
     },
 

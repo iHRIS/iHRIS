@@ -625,7 +625,7 @@ Usage:            #example
 // * extension[display].extension[search][0].valueString = "Id|Basic.id"
 * extension[display].extension[search][0].valueString = "Name|Basic.extension.where(url='http://ihris.org/fhir/StructureDefinition/ihris-basic-name').valueString"
 * extension[display].extension[search][1].valueString = "Role Reference|Basic.extension.where(url='http://ihris.org/fhir/StructureDefinition/ihris-assign-role').valueReference.reference"
-* extension[display].extension[filter][0].valueString = "Role|extension.valueString:contains"
+* extension[display].extension[filter][0].valueString = "Group|extension.valueString:contains"
 * extension[section][0].extension[title].valueString = "Groups"
 * extension[section][0].extension[description].valueString = "System User Groups details"
 * extension[section][0].extension[name].valueString = "Basic"
