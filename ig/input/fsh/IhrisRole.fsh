@@ -95,6 +95,21 @@ Description:    "NHWR Assign Role to a user or other role."
 * valueReference only Reference(IhrisRole)
 * valueReference.reference ^label = "Role"
 
+
+// user group extension
+Extension:      IhrisUserGroup
+Id:             ihris-user-group
+Title:          "NHWR User Group"
+Description:    "NHWR group extension for local users."
+* ^context.type = #element
+* ^context.expression = "Person"
+* value[x] only Reference
+* valueReference 1..1 MS
+* valueReference ^label = "Group(s)"
+* valueReference only Reference(IhrisGroup)
+* valueReference.reference 1..1 MS
+* valueReference.reference ^label = "Group(s)"
+
 Extension:      IhrisAssignTask
 Id:             ihris-assign-task
 Title:          "NHWR Assign Permission"
