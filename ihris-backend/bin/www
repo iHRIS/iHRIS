@@ -11,8 +11,7 @@ var http = require('http');
 
 //  register mediator
 const registerMediator = require('openhim-mediator-utils')
-// fetch mediator config 
-const mediatorConfig = require(`${__dirname}/../config/mediator`);
+
 // config
 const config = require('../modules/config')
 // logger
@@ -47,7 +46,7 @@ app.whenReady().then(() => {
 
     configEmitter.on('error', err => {
       logger.info('Heartbeat failed', err)
-      process.exit(1)
+      // process.exit(1)
     })
 
   });

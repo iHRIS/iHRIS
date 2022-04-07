@@ -74,16 +74,26 @@
                 </ul>
               </v-card-text>
               <v-card-actions class="pr-8 pt-6 mr-6">
-                <v-spacer></v-spacer>
                 <v-btn
                   v-if="!loading || hasError"
-                  class="warning mr-4 pr-2"
+                  class="warning ml-10 pr-2"
                   type="button"
                   @click="cancelSelect"
                 >
                   <v-icon class="pr-2" dark> mdi-close </v-icon>
                   Cancel
                 </v-btn>
+                <v-spacer></v-spacer>
+                <v-btn
+                  v-if="!loading || hasError"
+                  class="success mr-4 pr-2"
+                  type="button"
+                  @click="downloadInputCSVTemplate"
+                >
+                  <v-icon class="pr-2" dark> mdi-download </v-icon>
+                  Sample XLSX
+                </v-btn>
+
                 <v-btn
                   v-if="!loading"
                   color="primary"
@@ -101,7 +111,9 @@
         <div v-else-if="page === 'auditevent'"></div>
         <div v-else>
           <v-btn
-            :class="addLink ? addLink.class || 'primary darken-1' : 'primary darken-1'"
+            :class="
+              addLink ? addLink.class || 'primary darken-1' : 'primary darken-1'
+            "
             :to="addLink ? addLink.url : '/resource/add/' + page"
           >
             <v-icon v-if="addLink && addLink.icon">{{ addLink.icon }}</v-icon>
@@ -434,6 +446,28 @@ export default {
     },
     cancelSelect() {
       this.dialog = false;
+    },
+
+    // download template csv file
+    downloadInputCSVTemplate() {
+      axios({
+        url: "/config/csvTemplate",
+        method: "GET",
+        responseType: "blob",
+      })
+        .then((response) => {
+
+          let blob = new Blob([response.data], { type: "application/xlsx" });
+          let link = document.createElement("a");
+          link.href = window.URL.createObjectURL(blob);
+          link.download = "SampleCSV.xlsx";
+          link.click();
+          this.loadingCv = false;
+        })
+        .catch((e) => {
+          console.log(e);
+          this.loadingCv = false;
+        });
     },
   },
 };

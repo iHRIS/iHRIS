@@ -83,7 +83,7 @@
     "endpoints": [
         {
             "name": "Activate  National Health Worker Registry",
-            "host": "http://wrkihris:3000",
+            "host": "http://wrkihris",
             "path": "/fhir/mediator/Practitioner",
             "port": 3000,
             "primary": true,
