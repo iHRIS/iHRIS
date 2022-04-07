@@ -47,6 +47,8 @@ Usage:          #example
 * extension[reportdetails].extension[reportelement][6].extension[label].valueString = "address"
 * extension[reportdetails].extension[reportelement][6].extension[name].valueString = "address.where(use='work').district"
 * extension[reportdetails].extension[reportelement][6].extension[display].valueString = "District"
+* extension[reportdetails].extension[reportelement][10].extension[filter].valueBoolean = true
+
 
 * extension[reportdetails].extension[reportelement][7].extension[label].valueString = "institutionCategory"
 * extension[reportdetails].extension[reportelement][7].extension[name].valueString = "Practitioner.extension.where(url='http://ihris.org/fhir/StructureDefinition/ihris-practitioner-institution-category').valueString"
@@ -74,6 +76,8 @@ Usage:          #example
 * extension[reportdetails].extension[reportelement][11].extension[label].valueString = "region"
 * extension[reportdetails].extension[reportelement][11].extension[name].valueString = "Practitioner.extension.where(url='http://ihris.org/fhir/StructureDefinition/ihris-practitioner-region').valueString"
 * extension[reportdetails].extension[reportelement][11].extension[display].valueString = "Region"
+* extension[reportdetails].extension[reportelement][10].extension[filter].valueBoolean = true
+
 
 * extension[reportdetails].extension[reportelement][12].extension[label].valueString = "registrationBoard"
 * extension[reportdetails].extension[reportelement][12].extension[name].valueString = "Practitioner.extension.where(url='http://ihris.org/fhir/StructureDefinition/ihris-practitioner-registration-board').valueString"
