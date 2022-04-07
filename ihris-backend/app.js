@@ -15,6 +15,12 @@ const requireFromString = require('require-from-string')
 const fhirModules = require('./modules/fhirModules')
 const fhirReports = require('./modules/fhirReports')
 const { createProxyMiddleware } = require('http-proxy-middleware')
+
+//  register mediator
+const registerMediator = require('openhim-mediator-utils')
+// fetch mediator config 
+const mediatorConfig = require('./config/mediator.json');
+
 const cors = require('cors')
 const RedisStore = require('connect-redis')(session)
 
@@ -237,6 +243,41 @@ async function startUp() {
       }
     }
   }
+
+
+  // mediator
+  logger.info("Connecting to openhim console")
+
+  if (nconf.get('mediator:register')) {
+
+    logger.info('Running worker registry as a mediator');
+
+
+    registerMediator.registerMediator(nconf.get('mediator:api'), mediatorConfig, err => {
+      if (err) {
+        logger.info('Failed to register this mediator, check your config');
+        logger.info(err.stack);
+        logger.info('Exiting',err.message);
+        process.exit(1);
+      }
+
+      nconf.set('mediator:api:urn', mediatorConfig.urn);
+
+      registerMediator.fetchConfig(nconf.get('mediator:api'), (err, newConfig) => {
+        if (err) {
+          logger.info('Failed to fetch initial config');
+          logger.info(err);
+          process.exit(1);
+        }
+        nconf.set('mediator:api:urn', mediatorConfig.urn);
+        logger.info('Received initial config:', newConfig);
+        logger.info('Successfully registered mediator!');
+
+      })
+    })
+  }
+
+
   /*
   testMod = fhirModules.require()
   if ( testMod ) app.use( '/mod', testMod )

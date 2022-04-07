@@ -39,16 +39,16 @@ var server = http.createServer(app);
 app.whenReady().then(() => {
 
   server.listen(port, () => {
-    // heartbeat
-    // const configEmitter = registerMediator.activateHeartbeat(config.get('mediator:api'));
-    // configEmitter.on('config', newConfig => {
-    //   logger.info('Received updated config:', JSON.stringify(newConfig, null, 2));
-    // })
+    //heartbeat
+    const configEmitter = registerMediator.activateHeartbeat(config.get('mediator:api'));
+    configEmitter.on('config', newConfig => {
+      logger.info('Received updated config:', JSON.stringify(newConfig, null, 2));
+    })
 
-    // configEmitter.on('error', err => {
-    //   logger.info('Heartbeat failed', err)
-    //   process.exit(1)
-    // })
+    configEmitter.on('error', err => {
+      logger.info('Heartbeat failed', err)
+      process.exit(1)
+    })
 
   });
   server.on('error', onError);

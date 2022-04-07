@@ -101,7 +101,7 @@
     },
     {
       "name": "mediator:api:apiURL",
-      "valueString": "https://localhost:8081"
+      "valueString": "https://178.18.250.54:8081"
     },
     {
       "name": "mediator:api:username",

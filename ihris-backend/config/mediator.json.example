@@ -1,0 +1,185 @@
+{
+    "urn": "urn:uuid:2711b9f2-2809-45ef-81f6-2899232adf08",
+    "version": "0.0.1",
+    "name": "National Health Worker Registry",
+    "description": "National Health Worker Registry",
+    "config": {
+        "fhirServer": {
+            "username": "hapi",
+            "password": "PASS",
+            "baseURL": "http://wrkfhir:8080/fhir"
+        },
+        "elastic": {
+            "server": "http://wrkes:9200",
+            "username": "",
+            "password": "",
+            "max_compilations_rate": "10000/1m",
+            "index": "practitioner"
+        },
+        "matching": {
+            "tool": "elasticsearch"
+        }
+    },
+    "defaultChannelConfig": [
+        {
+            "requestBody": true,
+            "responseBody": true,
+            "name": "Add or Get Practitioner Resource Data From/To NHWR ",
+            "description": "Add or Get Practitioner Resource Data From/To NHWR ",
+            "urlPattern": "/fhir/mediator/",
+            "matchContentRegex": null,
+            "matchContentXpath": null,
+            "matchContentValue": null,
+            "matchContentJson": null,
+            "pollingSchedule": null,
+            "tcpHost": null,
+            "tcpPort": null,
+            "autoRetryPeriodMinutes": 60,
+            "autoRetryEnabled": false,
+            "rewriteUrlsConfig": [],
+            "addAutoRewriteRules": true,
+            "rewriteUrls": false,
+            "status": "enabled",
+            "alerts": [],
+            "txRerunAcl": [],
+            "txViewFullAcl": [],
+            "txViewAcl": [],
+            "properties": [],
+            "matchContentTypes": [],
+            "routes": [
+                {
+                    "type": "http",
+                    "status": "enabled",
+                    "forwardAuthHeader": false,
+                    "name": "Add/Get Resources",
+                    "secured": false,
+                    "host": "localhost",
+                    "port": 3000,
+                    "path": "",
+                    "pathTransform": "",
+                    "primary": true,
+                    "username": "",
+                    "password": ""
+                }
+            ],
+            "authType": "private",
+            "whitelist": [],
+            "allow": [
+                "admin"
+            ],
+            "type": "http",
+            "methods": [
+                "GET",
+                "POST",
+                "PUT",
+                "DELETE"
+            ],
+            "updatedBy": {
+                "id": "5d5d94607329d74724442f67",
+                "name": "Super User"
+            }
+        }
+    ],
+    "endpoints": [
+        {
+            "name": "Activate  National Health Worker Registry",
+            "host": "http://wrkihris:3000",
+            "path": "/fhir/mediator/Practitioner",
+            "port": 3000,
+            "primary": true,
+            "forwardAuthHeader": false,
+            "status": "enabled",
+            "type": "http"
+        }
+    ],
+    "configDefs": [
+        {
+            "param": "fhirServer",
+            "displayName": "FHIR Server",
+            "description": "FHIR Server Configuration Details",
+            "type": "struct",
+            "template": [
+                {
+                    "type": "string",
+                    "description": "The base URL (e.g. http://moh.com/hapi/fhir)",
+                    "displayName": "Base URL",
+                    "param": "baseURL"
+                },
+                {
+                    "type": "string",
+                    "description": "Username required to access FHIR server",
+                    "displayName": "Username",
+                    "param": "username"
+                },
+                {
+                    "type": "password",
+                    "description": "Password required to access FHIR server",
+                    "displayName": "Password",
+                    "param": "password"
+                }
+            ],
+            "values": []
+        },
+        {
+            "param": "elastic",
+            "displayName": "Elasticsearch Server",
+            "description": "Elasticsearch Server Configuration Details",
+            "type": "struct",
+            "template": [
+                {
+                    "type": "string",
+                    "description": "The base URL (e.g. http://moh.com:9200)",
+                    "displayName": "Base URL",
+                    "param": "server"
+                },
+                {
+                    "type": "string",
+                    "description": "Username required to access elasticsearch server",
+                    "displayName": "Username",
+                    "param": "username"
+                },
+                {
+                    "type": "password",
+                    "description": "Password required to access elasticsearch server",
+                    "displayName": "Password",
+                    "param": "password"
+                },
+                {
+                    "type": "string",
+                    "description": "Number of requests to compile per minute",
+                    "displayName": "Maximum Compilations Rate",
+                    "param": "max_compilations_rate"
+                },
+                {
+                    "type": "string",
+                    "description": "index to use for data storage",
+                    "displayName": "Index Name",
+                    "param": "index"
+                }
+            ],
+            "values": []
+        },
+        {
+            "param": "matching",
+            "displayName": "FHIR Server",
+            "description": "FHIR Server Configuration Details",
+            "type": "struct",
+            "template": [
+                {
+                    "type": "option",
+                    "values": [
+                        "mediator",
+                        "elasticsearch"
+                    ],
+                    "description": "Tool to Use for Matching",
+                    "displayName": "Tool to Use for Matching",
+                    "param": "tool"
+                }
+            ],
+            "values": []
+        }
+    ],
+    "_uptime": 2201.945,
+    "_lastHeartbeat": "2017-12-15T03:47:03.365Z",
+    "_configModifiedTS": "2017-12-15T02:52:49.054Z"
+}

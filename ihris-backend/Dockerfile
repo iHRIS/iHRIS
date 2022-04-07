@@ -20,6 +20,7 @@ RUN npm install
 # RUN cp /src/server/config/config_cicd_template.json /src/server/config/config_cicd.json
 
 RUN cp /src/ihris-backend/config/baseConfig.json.example /src/ihris-backend/config/baseConfig.json
+RUN cp /src/ihris-backend/config/mediator.json.example /src/ihris-backend/config/mediator.json
 
 # ARG NODE_ENV=docker
 ARG NODE_ENV=production
