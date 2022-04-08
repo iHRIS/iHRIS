@@ -1,0 +1,16 @@
+{
+    "resourceType": "SearchParameter",
+    "id": "practitioner-region",
+    "url": "http://ihris.org/fhir/SearchParameter/practitioner-region",
+    "name": "Search Parameter for a Practitioner  Region ",
+    "status": "active",
+    "description": "Search for a Practitioner Region.",
+    "code": "practitionerregion",
+    "base": [
+        "Practitioner"
+    ],
+    "type": "string",
+    "expression": "Practitioner.extension.where(url='http://ihris.org/fhir/StructureDefinition/ihris-practitioner-region')",
+    "xpath": "f:Practitioner/f:extension[@url='http://ihris.org/fhir/StructureDefinition/ihris-practitioner-region']",
+    "xpathUsage": "normal"
+}

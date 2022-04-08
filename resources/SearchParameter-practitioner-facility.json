@@ -1,0 +1,19 @@
+{
+    "resourceType": "SearchParameter",
+    "id": "practitioner-facility",
+    "url": "http://ihris.org/fhir/SearchParameter/practitioner-facility",
+    "name": "Search Parameter for a Practitioner  Facility ",
+    "status": "active",
+    "description": "Search for a Practitioner Facility.",
+    "code": "practitionerfacility",
+    "base": [
+        "Practitioner"
+    ],
+    "target": [
+        "Practitioner"
+    ],
+    "type": "string",
+    "expression": "Practitioner.extension.where(url='http://ihris.org/fhir/StructureDefinition/ihris-practitioner-facility')",
+    "xpath": "f:Practitioner/f:extension[@url='http://ihris.org/fhir/StructureDefinition/ihris-practitioner-facility']",
+    "xpathUsage": "normal"
+}
