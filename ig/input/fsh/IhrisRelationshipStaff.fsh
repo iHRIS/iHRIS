@@ -45,56 +45,72 @@ Usage:          #example
 * extension[reportdetails].extension[reportelement][5].extension[display].valueString = "Email"
 
 * extension[reportdetails].extension[reportelement][6].extension[label].valueString = "address"
-* extension[reportdetails].extension[reportelement][6].extension[name].valueString = "address.where(use='work').district"
+* extension[reportdetails].extension[reportelement][6].extension[name].valueString = "address"
 * extension[reportdetails].extension[reportelement][6].extension[display].valueString = "District"
-* extension[reportdetails].extension[reportelement][10].extension[filter].valueBoolean = true
+* extension[reportdetails].extension[reportelement][6].extension[filter].valueBoolean = true
 
 
 * extension[reportdetails].extension[reportelement][7].extension[label].valueString = "institutionCategory"
 * extension[reportdetails].extension[reportelement][7].extension[name].valueString = "Practitioner.extension.where(url='http://ihris.org/fhir/StructureDefinition/ihris-practitioner-institution-category').valueString"
 * extension[reportdetails].extension[reportelement][7].extension[display].valueString = "Institution Category"
 * extension[reportdetails].extension[reportelement][7].extension[filter].valueBoolean = true
+* extension[reportdetails].extension[reportelement][7].extension[dropDownFilter].valueBoolean = true
+
 
 * extension[reportdetails].extension[reportelement][8].extension[label].valueString = "institutionType"
 * extension[reportdetails].extension[reportelement][8].extension[name].valueString = "Practitioner.extension.where(url='http://ihris.org/fhir/StructureDefinition/ihris-practitioner-institution-type').valueString"
 * extension[reportdetails].extension[reportelement][8].extension[display].valueString = "Institution Type"
 * extension[reportdetails].extension[reportelement][8].extension[filter].valueBoolean = true
+* extension[reportdetails].extension[reportelement][8].extension[dropDownFilter].valueBoolean = true
+
 
 
 * extension[reportdetails].extension[reportelement][9].extension[label].valueString = "facility"
 * extension[reportdetails].extension[reportelement][9].extension[name].valueString = "Practitioner.extension.where(url='http://ihris.org/fhir/StructureDefinition/ihris-practitioner-facility').valueString"
-* extension[reportdetails].extension[reportelement][9].extension[display].valueString = "Facility"
+* extension[reportdetails].extension[reportelement][9].extension[display].valueString = "Facility/Place of work"
 * extension[reportdetails].extension[reportelement][9].extension[filter].valueBoolean = true
+* extension[reportdetails].extension[reportelement][9].extension[dropDownFilter].valueBoolean = true
+
 
 
 * extension[reportdetails].extension[reportelement][10].extension[label].valueString = "facilityType"
 * extension[reportdetails].extension[reportelement][10].extension[name].valueString = "Practitioner.extension.where(url='http://ihris.org/fhir/StructureDefinition/ihris-practitioner-facility-type').valueString"
 * extension[reportdetails].extension[reportelement][10].extension[display].valueString = "Facility Type"
 * extension[reportdetails].extension[reportelement][10].extension[filter].valueBoolean = true
+* extension[reportdetails].extension[reportelement][10].extension[dropDownFilter].valueBoolean = true
+
 
 
 * extension[reportdetails].extension[reportelement][11].extension[label].valueString = "region"
 * extension[reportdetails].extension[reportelement][11].extension[name].valueString = "Practitioner.extension.where(url='http://ihris.org/fhir/StructureDefinition/ihris-practitioner-region').valueString"
 * extension[reportdetails].extension[reportelement][11].extension[display].valueString = "Region"
-* extension[reportdetails].extension[reportelement][10].extension[filter].valueBoolean = true
+* extension[reportdetails].extension[reportelement][11].extension[filter].valueBoolean = true
+* extension[reportdetails].extension[reportelement][11].extension[dropDownFilter].valueBoolean = true
+
 
 
 * extension[reportdetails].extension[reportelement][12].extension[label].valueString = "registrationBoard"
 * extension[reportdetails].extension[reportelement][12].extension[name].valueString = "Practitioner.extension.where(url='http://ihris.org/fhir/StructureDefinition/ihris-practitioner-registration-board').valueString"
 * extension[reportdetails].extension[reportelement][12].extension[display].valueString = "Registration Board"
 * extension[reportdetails].extension[reportelement][12].extension[filter].valueBoolean = true
+* extension[reportdetails].extension[reportelement][12].extension[dropDownFilter].valueBoolean = true
+
 
 
 * extension[reportdetails].extension[reportelement][13].extension[label].valueString = "practitionerCategory"
 * extension[reportdetails].extension[reportelement][13].extension[name].valueString = "Practitioner.extension.where(url='http://ihris.org/fhir/StructureDefinition/ihris-practitioner-category').valueString"
 * extension[reportdetails].extension[reportelement][13].extension[display].valueString = "Health Category"
 * extension[reportdetails].extension[reportelement][13].extension[filter].valueBoolean = true
+* extension[reportdetails].extension[reportelement][13].extension[dropDownFilter].valueBoolean = true
+
 
 
 * extension[reportdetails].extension[reportelement][14].extension[label].valueString = "submitingSystem"
 * extension[reportdetails].extension[reportelement][14].extension[name].valueString = "Practitioner.extension.where(url='http://ihris.org/fhir/StructureDefinition/ihris-practitioner-submitting-system').valueString"
 * extension[reportdetails].extension[reportelement][14].extension[display].valueString = "Submitting System"
 * extension[reportdetails].extension[reportelement][14].extension[filter].valueBoolean = true
+* extension[reportdetails].extension[reportelement][14].extension[dropDownFilter].valueBoolean = true
+
 
 * extension[reportdetails].extension[reportelement][15].extension[label].valueString = "identificationNumber"
 * extension[reportdetails].extension[reportelement][15].extension[name].valueString = "Practitioner.extension.where(url='http://ihris.org/fhir/StructureDefinition/ihris-practitioner-identification-number').valueString"
@@ -140,13 +156,13 @@ Usage:          #example
 // * extension[reportlink][0].extension[reportelement][5].extension[filter].valueBoolean = false
 // * extension[reportlink][0].extension[reportelement][5].extension[dropDownFilter].valueBoolean = true
 
-* extension[reportlink][1].extension[name].valueString = "facility"
-* extension[reportlink][1].extension[resource].valueString = "Location"
-* extension[reportlink][1].extension[linkElement].valueString = "Location.id"
-* extension[reportlink][1].extension[linkTo].valueString = "role.location.reference"
-* extension[reportlink][1].extension[multiple].valueBoolean = false
-* extension[reportlink][1].extension[reportelement][0].extension[label].valueString = "dutyPost"
-* extension[reportlink][1].extension[reportelement][0].extension[name].valueString = "name"
-* extension[reportlink][1].extension[reportelement][0].extension[display].valueString = "Facility/Place of work"
-* extension[reportlink][1].extension[reportelement][0].extension[filter].valueBoolean = true
-* extension[reportlink][1].extension[reportelement][0].extension[dropDownFilter].valueBoolean = true
+// * extension[reportlink][1].extension[name].valueString = "facility"
+// * extension[reportlink][1].extension[resource].valueString = "Location"
+// * extension[reportlink][1].extension[linkElement].valueString = "Location.id"
+// * extension[reportlink][1].extension[linkTo].valueString = "role.location.reference"
+// * extension[reportlink][1].extension[multiple].valueBoolean = false
+// * extension[reportlink][1].extension[reportelement][0].extension[label].valueString = "dutyPost"
+// * extension[reportlink][1].extension[reportelement][0].extension[name].valueString = "name"
+// * extension[reportlink][1].extension[reportelement][0].extension[display].valueString = "Facility/Place of work"
+// * extension[reportlink][1].extension[reportelement][0].extension[filter].valueBoolean = true
+// * extension[reportlink][1].extension[reportelement][0].extension[dropDownFilter].valueBoolean = true
