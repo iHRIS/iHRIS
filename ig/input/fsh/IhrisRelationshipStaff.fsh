@@ -48,6 +48,8 @@ Usage:          #example
 * extension[reportdetails].extension[reportelement][6].extension[name].valueString = "address"
 * extension[reportdetails].extension[reportelement][6].extension[display].valueString = "District"
 * extension[reportdetails].extension[reportelement][6].extension[filter].valueBoolean = true
+* extension[reportdetails].extension[reportelement][6].extension[dropDownFilter].valueBoolean = true
+
 
 
 * extension[reportdetails].extension[reportelement][7].extension[label].valueString = "institutionCategory"

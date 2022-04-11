@@ -1,15 +1,15 @@
 # Project information
-site_name: "iHRIS v5 Technical Documentation"
-site_description: "Technical documentation for iHRIS v5"
-site_author: "IntraHealth International"
-site_url: "https://github.com/iHRIS/iHRIS"
+site_name: "NHWR v1 Technical Documentation"
+site_description: "Technical documentation for NHWR v1"
+site_author: "MoH Uganda"
+site_url: "https://github.com/jabahum/iHRIS"
 
 # Repository
 repo_name: "iHRIS"
-repo_url: "https://github.com/iHRIS/iHRIS"
+repo_url: "https://github.com/jabahum/iHRIS"
 
 # Copyright
-copyright: "Copyright &copy; 2020 IntraHealth International"
+copyright: "Copyright &copy; 2022 Moh Uganda"
 
 # Theme
 theme:
@@ -62,7 +62,7 @@ plugins:
 extra:
   social:
     - icon: fontawesome/brands/github
-      link: https://github.com/iHRIS/iHRIS
+      link: https://github.com/jabahum/iHRIS
 
 
 # theme:

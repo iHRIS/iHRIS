@@ -1,6 +1,11 @@
 <template>
   <div>
-    <v-app-bar class="primary darken-1 white--text" app clipped-left clipped-right>
+    <v-app-bar
+      class="primary darken-1 white--text"
+      app
+      clipped-left
+      clipped-right
+    >
       <router-link to="/"
         ><v-img
           :src="'/images/' + header.logo"
@@ -10,12 +15,8 @@
       /></router-link>
 
       <v-toolbar-title class="headline ml-2" bottom="true">
-        <span v-if="header.title" class="white--text">{{
-          header.title
-        }}</span>
-        <span class="white--text" v-if="header.site">
-          {{ header.site }}</span
-        >
+        <span v-if="header.title" class="white--text">{{ header.title }}</span>
+        <span class="white--text" v-if="header.site"> {{ header.site }}</span>
       </v-toolbar-title>
 
       <v-spacer v-if="$store.state.security_off"></v-spacer>
@@ -29,8 +30,8 @@
       </div>
       <v-spacer></v-spacer>
       <div class="mx-4">
-        <span v-if="$store.state.user.loggedin"
-          > {{ $store.state.user.name }}</span
+        <span v-if="$store.state.user.loggedin">
+          {{ $store.state.user.name }}</span
         >
       </div>
       <!-- <v-spacer></v-spacer> -->
