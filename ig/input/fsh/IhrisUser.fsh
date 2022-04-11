@@ -22,14 +22,14 @@ Description:    "NHWR profile of the Person resource to manage user access."
 * extension contains 
       IhrisAssignRole named role 0..1 MS and
       IhrisPassword named password 0..1 MS and
-      IhrisUserGroup named group 0..1 MS and
-      IhrisUserLocation named location 0..* MS
+      IhrisUserGroup named group 0..1 MS 
+      // IhrisUserLocation named location 0..* MS
 * extension[role] ^label = "Role(s)"
 * extension[role].valueReference.reference MS
 * extension[group] ^label = "Group(s)"
 * extension[group].valueReference.reference MS
-* extension[location] ^label = "Location/Facility"
-* extension[location].valueReference.reference MS
+// * extension[location] ^label = "Location/Facility"
+// * extension[location].valueReference.reference MS
 
 Extension:      IhrisPassword
 Id:             ihris-password
@@ -79,11 +79,11 @@ Title:          "User"
 Usage:          #example
 * code = IhrisResourceCodeSystem#page
 * extension[display].extension[resource].valueReference = Reference(StructureDefinition/ihris-person-user)
-* extension[display].extension[link][0].extension[field].valueString = ""
-* extension[display].extension[link][0].extension[text].valueString = "Add Another User"
-* extension[display].extension[link][0].extension[button].valueBoolean = true
-* extension[display].extension[link][0].extension[icon].valueString = "mdi-account-arrow-right"
-* extension[display].extension[link][0].extension[url].valueUrl = "/questionnaire/ihris-user/user"
+// * extension[display].extension[link][0].extension[field].valueString = ""
+// * extension[display].extension[link][0].extension[text].valueString = "Add Another User"
+// * extension[display].extension[link][0].extension[button].valueBoolean = true
+// * extension[display].extension[link][0].extension[icon].valueString = "mdi-account-arrow-right"
+// * extension[display].extension[link][0].extension[url].valueUrl = "/questionnaire/ihris-user/user"
 * extension[display].extension[search][0].valueString = "User|Person.name.where(use='official').text"
 * extension[display].extension[search][1].valueString = "Username/Email|Person.telecom.where(system='email').value"
 * extension[display].extension[search][2].valueString = "Role|Person.extension.where(url='http://ihris.org/fhir/StructureDefinition/ihris-assign-role').valueReference.reference"
@@ -101,8 +101,8 @@ Usage:          #example
 * extension[section][0].extension[field][0].valueString = "Person.name"
 * extension[section][0].extension[field][1].valueString = "Person.telecom"
 * extension[section][0].extension[field][2].valueString = "Person.extension:role.value[x]:valueReference"
-* extension[section][0].extension[field][3].valueString = "Person.extension:location.value[x]:valueReference"
-* extension[section][0].extension[field][4].valueString = "Person.extension:password.extension:password.value[x]:valueString"
+// * extension[section][0].extension[field][3].valueString = "Person.extension:location.value[x]:valueReference"
+* extension[section][0].extension[field][3].valueString = "Person.extension:password.extension:password.value[x]:valueString"
 
 Instance:       IhrisUser
 InstanceOf:     IhrisQuestionnaire
