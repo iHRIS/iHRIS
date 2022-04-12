@@ -109,13 +109,42 @@ Description:    "NHWR profile of Practitioner."
     IhrisPractitionerSubmittingSystem named submittingSystem  0..1 MS and 
     IhrisPractitionerIdentificationNumber named identificationNumber  0..1 MS
 * extension[residence].valueReference.reference ^label = "Residence"
+// * extension[nationality].valueString MS
+// * extension[nationality] ^label = "Nationality "
+// * extension[nationality].valueCoding = "Not Set"
+// * extension[maritalStatus].valueString MS
+// * extension[maritalStatus] ^label = "Marital Status "
+// * extension[maritalStatus].valueString = "Not Set"
+// * extension[dependents].valueString MS
+// * extension[dependents] ^label = "Dependents "
+// * extension[dependents].valueInteger = "Not Set"
+* extension[institutionCategory].valueString MS
+* extension[institutionCategory] ^label = "Institution Category "
+* extension[institutionCategory].valueString = "Not Set"
+* extension[institutionType].valueString MS
+* extension[institutionType] ^label = "Institution Type "
+* extension[institutionType].valueString = "Not Set"
+* extension[facility].valueString MS
+* extension[facility] ^label = "Facility "
+* extension[facility].valueString = "Not Set"
+* extension[facilityType].valueString MS
+* extension[facilityType] ^label = "Facility Type "
+* extension[facilityType].valueString = "Not Set"
+* extension[region].valueString MS
+* extension[region] ^label = "Facility Type "
+* extension[region].valueString = "Not Set"
+* extension[registrationBoard].valueString MS
+* extension[registrationBoard] ^label = "Registration Board "
+* extension[registrationBoard].valueString = "Not Set"
+* extension[practitionerCategory].valueString MS
+* extension[practitionerCategory] ^label = "Category"
+* extension[practitionerCategory].valueString.value = "Not Set"
 * extension[submittingSystem].valueString MS
 * extension[submittingSystem] ^label = "Submitting System"
 * extension[submittingSystem].valueString.value = "Not Set"
 * extension[identificationNumber].valueString MS
 * extension[identificationNumber] ^label = "Identification Number"
 * extension[identificationNumber].valueString.value = "Not Set"
-
 * active 1..1 MS
 * active ^label = "Active"
 
