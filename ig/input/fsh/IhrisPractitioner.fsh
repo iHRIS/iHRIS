@@ -108,7 +108,14 @@ Description:    "NHWR profile of Practitioner."
     IhrisPractitionerCategory named practitionerCategory 0..1 MS and
     IhrisPractitionerSubmittingSystem named submittingSystem  0..1 MS and 
     IhrisPractitionerIdentificationNumber named identificationNumber  0..1 MS
-* extension[residence].valueReference.reference MS
+* extension[residence].valueReference.reference ^label = "Residence"
+* extension[submittingSystem].valueString MS
+* extension[submittingSystem] ^label = "Submitting System"
+* extension[submittingSystem].valueString.value = "Not Set"
+* extension[identificationNumber].valueString MS
+* extension[identificationNumber] ^label = "Identification Number"
+* extension[identificationNumber].valueString.value = "Not Set"
+
 * active 1..1 MS
 * active ^label = "Active"
 
@@ -209,6 +216,7 @@ Description: "Extension for Institution Category"
 * value[x] only string
 * valueString 1..1 MS
 * valueString ^label = "Institution Category"
+* valueString = "Not Set"
 
 //institution type
 Extension: IhrisPractitionerInstitutionType
@@ -285,7 +293,8 @@ Description: " Extension for Submitting Systems"
 * ^context.expression = "Practitioner"
 * value[x] only string
 * valueString 1..1 MS
-* valueString ^label = "Category"
+* valueString ^label = "Submitting Systems"
+
 
 // identification number
 Extension: IhrisPractitionerIdentificationNumber
