@@ -14,9 +14,9 @@
             </template>
             <v-card class="pt-4 pb-8">
               <v-card-title class="justify-center mb-4">
-                <span v-if="!loading" class="text-h5">Select Your file</span>
+                <span v-if="!loadingCSV" class="text-h5">Select Your file</span>
               </v-card-title>
-              <v-card-text v-if="!loading" :disabled="loading">
+              <v-card-text v-if="!loadingCSV" :disabled="loadingCSV">
                 <input
                   ref="excel-upload-input"
                   accept=".xlsx, .xls, .csv"
@@ -34,12 +34,12 @@
                 </div>
               </v-card-text>
               <v-card-text
-                v-if="!hasError && loading"
-                :disabled="loading"
+                v-if="!hasError && loadingCSV"
+                :disabled="loadingCSV"
                 align="center"
               >
                 <v-progress-circular
-                  v-if="loading"
+                  v-if="loadingCSV"
                   :rotate="360"
                   :size="100"
                   :value="progress"
@@ -54,7 +54,7 @@
                 </h1>
                 <h1 v-else>uploading...</h1>
               </v-card-text>
-              <v-card-text v-if="hasError" :disabled="loading">
+              <v-card-text v-if="hasError" :disabled="loadingCSV">
                 <v-col style="text-align-last: center">
                   <v-icon class="mb-8 icon">mdi-alert-circle</v-icon>
                   <h2 class="mb-4 text-center">{{ message }}</h2>
@@ -75,7 +75,7 @@
               </v-card-text>
               <v-card-actions class="pr-8 pt-6 mr-6">
                 <v-btn
-                  v-if="!loading || hasError"
+                  v-if="!loadingCSV || hasError"
                   class="warning ml-10 pr-2"
                   type="button"
                   @click="cancelSelect"
@@ -85,7 +85,7 @@
                 </v-btn>
                 <v-spacer></v-spacer>
                 <v-btn
-                  v-if="!loading || hasError"
+                  v-if="!loadingCSV || hasError"
                   class="success mr-4 pr-2"
                   type="button"
                   @click="downloadInputCSVTemplate"
@@ -95,7 +95,7 @@
                 </v-btn>
 
                 <v-btn
-                  v-if="!loading"
+                  v-if="!loadingCSV"
                   color="primary"
                   type="button"
                   @click="handleUpload"
@@ -169,6 +169,7 @@ export default {
       results: [],
       options: { itemsPerPage: 50 },
       loading: false,
+      loadingCSV:false,
       total: 0,
       prevPage: -1,
       link: [],
@@ -338,7 +339,7 @@ export default {
     handleDrop(e) {
       e.stopPropagation();
       e.preventDefault();
-      if (this.loading) return;
+      if (this.loadingCSV) return;
       const files = e.dataTransfer.files;
       if (files.length !== 1) {
         this.$toast.error("Only supports uploading one file!");
@@ -388,7 +389,7 @@ export default {
       }
     },
     parseData(rawFile) {
-      this.loading = true;
+      this.loadingCSV = true;
       return new Promise((resolve) => {
         const reader = new FileReader();
         reader.onload = (e) => {
@@ -409,7 +410,7 @@ export default {
               if (response.status === 201) {
                 this.message = "Users created Successfully!";
                 this.snackbar = true;
-                this.loading = false;
+                this.loadingCSV = false;
                 setTimeout(() => {
                   this.$router.push("/resource/search/practitioner");
                 }, 2000);
@@ -429,7 +430,7 @@ export default {
                 }
               } else {
                 this.hasError = true;
-                this.loading = false;
+                this.loadingCSV = false;
                 // this.$router.push(
                 //   "/questionnaire/ihris-practitioner/practitioner"
                 // );
@@ -462,11 +463,11 @@ export default {
           link.href = window.URL.createObjectURL(blob);
           link.download = "SampleCSV.xlsx";
           link.click();
-          this.loadingCv = false;
+          this.loadingCSV = false;
         })
         .catch((e) => {
           console.log(e);
-          this.loadingCv = false;
+          this.loadingCSV = false;
         });
     },
   },
