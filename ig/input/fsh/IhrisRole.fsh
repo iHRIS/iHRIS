@@ -518,18 +518,18 @@ Usage:          #definition
 * item[0].item[1].required = false
 * item[0].item[1].repeats = true
 
-* item[0].item[2].linkId = "roles"
-* item[0].item[2].definition = "http://ihris.org/fhir/StructureDefinition/ihris-role#Basic.extension:role.value[x]:valueReference"
-* item[0].item[2].text = "Roles"
-* item[0].item[2].type = #reference
-* item[0].item[2].required = false
-* item[0].item[2].repeats = true
+// * item[0].item[2].linkId = "roles"
+// * item[0].item[2].definition = "http://ihris.org/fhir/StructureDefinition/ihris-role#Basic.extension:role.value[x]:valueReference"
+// * item[0].item[2].text = "Roles"
+// * item[0].item[2].type = #reference
+// * item[0].item[2].required = false
+// * item[0].item[2].repeats = true
 
-* item[0].item[3].linkId = "primary"
-* item[0].item[3].text = "Is Role Primary"
-* item[0].item[3].type = #boolean
-* item[0].item[3].required = true
-* item[0].item[3].repeats = false
+* item[0].item[2].linkId = "primary"
+* item[0].item[2].text = "Is Role Primary"
+* item[0].item[2].type = #boolean
+* item[0].item[2].required = true
+* item[0].item[2].repeats = false
 
 Instance:         ihris-page-task
 InstanceOf:       IhrisPage

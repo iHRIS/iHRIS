@@ -5,6 +5,7 @@
         {{ label }}
         <v-spacer></v-spacer>
 
+        <!-- if practitioner -->
         <div v-if="page === 'practitioner'">
           <v-dialog v-model="dialog" max-width="700px" persistent>
             <template v-slot:activator="{ on, attrs }">
@@ -107,8 +108,14 @@
             </v-card>
           </v-dialog>
         </div>
+
+        <!-- if facility -->
         <div v-else-if="page === 'facility'"></div>
+        <!-- if auditevent -->
         <div v-else-if="page === 'auditevent'"></div>
+<!-- if permission -->
+        <div v-else-if="page === 'permissions'"></div>
+        <!-- if none of the above -->
         <div v-else>
           <v-btn
             :class="
@@ -122,6 +129,7 @@
             Add {{ label }}
           </v-btn>
         </div>
+        
       </v-card-title>
       <v-card-title>
         <slot></slot>
@@ -169,7 +177,6 @@ export default {
       results: [],
       options: { itemsPerPage: 50 },
       loading: false,
-      loadingCSV:false,
       total: 0,
       prevPage: -1,
       link: [],
@@ -177,6 +184,7 @@ export default {
       update_again: { rerun: false, restart: false },
 
       hasError: false,
+      loadingCSV: false,
       message: "",
       error: [],
       snackbar: false,
@@ -411,9 +419,9 @@ export default {
                 this.message = "Users created Successfully!";
                 this.snackbar = true;
                 this.loadingCSV = false;
-                setTimeout(() => {
-                  this.$router.push("/resource/search/practitioner");
-                }, 2000);
+                // setTimeout(() => {
+                //   this.$router.push("/resource/search/practitioner");
+                // }, 2000);
               } else if (!response.data.isValid) {
                 console.log(response.data.message);
                 if (response.data.rows.length > 5) {
@@ -457,7 +465,6 @@ export default {
         responseType: "blob",
       })
         .then((response) => {
-
           let blob = new Blob([response.data], { type: "application/xlsx" });
           let link = document.createElement("a");
           link.href = window.URL.createObjectURL(blob);
