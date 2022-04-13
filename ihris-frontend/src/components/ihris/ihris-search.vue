@@ -114,7 +114,7 @@
         <!-- if auditevent -->
         <div v-else-if="page === 'auditevent'"></div>
 <!-- if permission -->
-        <div v-else-if="page === 'permissions'"></div>
+        <div v-else-if="page === 'task'"></div>
         <!-- if none of the above -->
         <div v-else>
           <v-btn

@@ -30,7 +30,11 @@
   "name": [
     {
       "use": "official",
-      "text": "MoH Admin"
+      "text": "MoH Admin",
+      "family": "Admin",
+      "given": [
+        "MoH"
+      ]
     }
   ],
   "telecom": [

@@ -11,6 +11,10 @@ Description:    "NHWR profile of the Person resource to manage user access."
 * name.use = #official
 * name.text 1..1 MS
 * name.text ^label = "Fullname"
+* name.family 1..1 MS
+* name.family ^label = "Surname (Family)"
+* name.given 1..1 MS
+* name.given ^label = "Given Name (Given)"
 * telecom 1..1 MS
 * telecom ^label = "Email"
 * telecom ^slicing.discriminator.type = #pattern
@@ -67,6 +71,8 @@ Title:          "NHWR Admin User"
 Usage:          #example
 * telecom.value = "admin@ihris.org"
 * name.text = "NHWR Admin"
+* name.family = "Admin"
+* name.given = "NHWR"
 * identifier[0].system = "google"
 * identifier[0].value = "12345"
 * extension[password].extension[password].valueString = "PASS"
@@ -84,10 +90,12 @@ Usage:          #example
 // * extension[display].extension[link][0].extension[button].valueBoolean = true
 // * extension[display].extension[link][0].extension[icon].valueString = "mdi-account-arrow-right"
 // * extension[display].extension[link][0].extension[url].valueUrl = "/questionnaire/ihris-user/user"
-* extension[display].extension[search][0].valueString = "User|Person.name.where(use='official').text"
-* extension[display].extension[search][1].valueString = "Username/Email|Person.telecom.where(system='email').value"
-* extension[display].extension[search][2].valueString = "Role|Person.extension.where(url='http://ihris.org/fhir/StructureDefinition/ihris-assign-role').valueReference.reference"
-* extension[display].extension[search][3].valueString = "Group|Person.extension.where(url='http://ihris.org/fhir/StructureDefinition/ihris-user-group').valueReference.reference"
+* extension[display].extension[search][0].valueString = "Surname|Person.name.where(use='official').family"
+* extension[display].extension[search][1].valueString = "Given Name|Person.name.where(use='official').given"
+* extension[display].extension[search][2].valueString = "User|Person.name.where(use='official').text"
+* extension[display].extension[search][3].valueString = "Username/Email|Person.telecom.where(system='email').value"
+* extension[display].extension[search][4].valueString = "Role|Person.extension.where(url='http://ihris.org/fhir/StructureDefinition/ihris-assign-role').valueReference.reference"
+* extension[display].extension[search][5].valueString = "Group|Person.extension.where(url='http://ihris.org/fhir/StructureDefinition/ihris-user-group').valueReference.reference"
 * extension[display].extension[filter][0].valueString = "User|name:contains"
 * extension[display].extension[field][0].extension[path].valueString = "Person.extension:password.extension:password.value[x]:valueString"
 * extension[display].extension[field][0].extension[type].valueString = "password"
@@ -134,59 +142,79 @@ Usage:          #definition
 * item[0].item[0].extension[constraint].extension[expression].valueString = "matches('^[A-Za-z ]*$')"
 * item[0].item[0].extension[constraint].extension[human].valueString = "Name must be only text."
 
-* item[0].item[1].linkId = "Person.name[0].use"
-* item[0].item[1].text = "Use"
-* item[0].item[1].type = #choice
+* item[0].item[1].linkId = "Person.name[0].family"
+* item[0].item[1].text = "Surname"
+* item[0].item[1].type = #string
 * item[0].item[1].required = true
 * item[0].item[1].repeats = false
-* item[0].item[1].readOnly = true
-* item[0].item[1].answerOption.valueCoding = http://hl7.org/fhir/name-use#official
-* item[0].item[1].answerOption.initialSelected = true
+* item[0].item[1].extension[constraint].extension[key].valueId = "ihris-name-check"
+* item[0].item[1].extension[constraint].extension[severity].valueCode = #error
+* item[0].item[1].extension[constraint].extension[expression].valueString = "matches('^[A-Za-z ]*$')"
+* item[0].item[1].extension[constraint].extension[human].valueString = "Name must be only text."
 
-* item[0].item[2].linkId = "Person.telecom[0].system"
-* item[0].item[2].text = "Telecom System"
-* item[0].item[2].type = #choice
+* item[0].item[2].linkId = "Person.name[0].given"
+* item[0].item[2].text = "Given Name"
+* item[0].item[2].type = #string
 * item[0].item[2].required = true
 * item[0].item[2].repeats = false
-* item[0].item[2].readOnly = true
-* item[0].item[2].answerOption.valueCoding = http://hl7.org/fhir/contact-point-system#email
-* item[0].item[2].answerOption.initialSelected = true
+* item[0].item[2].extension[constraint].extension[key].valueId = "ihris-name-check"
+* item[0].item[2].extension[constraint].extension[severity].valueCode = #error
+* item[0].item[2].extension[constraint].extension[expression].valueString = "matches('^[A-Za-z ]*$')"
+* item[0].item[2].extension[constraint].extension[human].valueString = "Name must be only text."
 
-* item[0].item[3].linkId = "Person.telecom[0].value"
-* item[0].item[3].text = "Email"
-* item[0].item[3].type = #string
+* item[0].item[3].linkId = "Person.name[0].use"
+* item[0].item[3].text = "Use"
+* item[0].item[3].type = #choice
 * item[0].item[3].required = true
 * item[0].item[3].repeats = false
-* item[0].item[3].extension[constraint].extension[key].valueId = "ihris-email-check"
-* item[0].item[3].extension[constraint].extension[severity].valueCode = #error
-* item[0].item[3].extension[constraint].extension[expression].valueString = "matches('^[0-9a-zA-Z_.]+@([0-9a-zA-Z]+[.])+[a-zA-Z]{2,4}$')"
-* item[0].item[3].extension[constraint].extension[human].valueString = "Email Address is not properly formatted."
+* item[0].item[3].readOnly = true
+* item[0].item[3].answerOption.valueCoding = http://hl7.org/fhir/name-use#official
+* item[0].item[3].answerOption.initialSelected = true
 
-* item[0].item[4].linkId = "role"
-* item[0].item[4].definition = "http://ihris.org/fhir/StructureDefinition/ihris-person-user#Person.extension:role.value[x]:valueReference"
-* item[0].item[4].text = "Role"
-* item[0].item[4].type = #reference
+* item[0].item[4].linkId = "Person.telecom[0].system"
+* item[0].item[4].text = "Telecom System"
+* item[0].item[4].type = #choice
 * item[0].item[4].required = true
 * item[0].item[4].repeats = false
+* item[0].item[4].readOnly = true
+* item[0].item[4].answerOption.valueCoding = http://hl7.org/fhir/contact-point-system#email
+* item[0].item[4].answerOption.initialSelected = true
 
-* item[0].item[5].linkId = "group"
-* item[0].item[5].definition = "http://ihris.org/fhir/StructureDefinition/ihris-person-user#Person.extension:group.value[x]:valueReference"
-* item[0].item[5].text = "Group"
-* item[0].item[5].type = #reference
+* item[0].item[5].linkId = "Person.telecom[0].value"
+* item[0].item[5].text = "Email"
+* item[0].item[5].type = #string
 * item[0].item[5].required = true
 * item[0].item[5].repeats = false
+* item[0].item[5].extension[constraint].extension[key].valueId = "ihris-email-check"
+* item[0].item[5].extension[constraint].extension[severity].valueCode = #error
+* item[0].item[5].extension[constraint].extension[expression].valueString = "matches('^[0-9a-zA-Z_.]+@([0-9a-zA-Z]+[.])+[a-zA-Z]{2,4}$')"
+* item[0].item[5].extension[constraint].extension[human].valueString = "Email Address is not properly formatted."
 
-* item[0].item[6].linkId = "password#password"
-* item[0].item[6].text = "Password"
-* item[0].item[6].type = #string
+* item[0].item[6].linkId = "role"
+* item[0].item[6].definition = "http://ihris.org/fhir/StructureDefinition/ihris-person-user#Person.extension:role.value[x]:valueReference"
+* item[0].item[6].text = "Role"
+* item[0].item[6].type = #reference
 * item[0].item[6].required = true
 * item[0].item[6].repeats = false
 
-* item[0].item[7].linkId = "confrimpassword#password"
-* item[0].item[7].text = "Confirm Password"
-* item[0].item[7].type = #string
+* item[0].item[7].linkId = "group"
+* item[0].item[7].definition = "http://ihris.org/fhir/StructureDefinition/ihris-person-user#Person.extension:group.value[x]:valueReference"
+* item[0].item[7].text = "Group"
+* item[0].item[7].type = #reference
 * item[0].item[7].required = true
 * item[0].item[7].repeats = false
+
+* item[0].item[8].linkId = "password#password"
+* item[0].item[8].text = "Password"
+* item[0].item[8].type = #string
+* item[0].item[8].required = true
+* item[0].item[8].repeats = false
+
+* item[0].item[9].linkId = "confrimpassword#password"
+* item[0].item[9].text = "Confirm Password"
+* item[0].item[9].type = #string
+* item[0].item[9].required = true
+* item[0].item[9].repeats = false
 
 Instance:       IhrisChangePassword
 InstanceOf:     IhrisQuestionnaire

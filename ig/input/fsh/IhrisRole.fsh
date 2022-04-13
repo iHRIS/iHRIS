@@ -639,7 +639,7 @@ Usage:            #example
 * extension[display].extension[add].extension[class].valueString = "accent"
 // * extension[display].extension[search][0].valueString = "Id|Basic.id"
 * extension[display].extension[search][0].valueString = "Name|Basic.extension.where(url='http://ihris.org/fhir/StructureDefinition/ihris-basic-name').valueString"
-* extension[display].extension[search][1].valueString = "Role Reference|Basic.extension.where(url='http://ihris.org/fhir/StructureDefinition/ihris-assign-role').valueReference.reference"
+// * extension[display].extension[search][1].valueString = "Role Reference|Basic.extension.where(url='http://ihris.org/fhir/StructureDefinition/ihris-assign-role').valueReference.reference"
 * extension[display].extension[filter][0].valueString = "Group|extension.valueString:contains"
 * extension[section][0].extension[title].valueString = "Groups"
 * extension[section][0].extension[description].valueString = "System User Groups details"
@@ -671,9 +671,9 @@ Usage:          #definition
 * item[0].item[0].required = false
 * item[0].item[0].repeats = false
 
-* item[0].item[1].linkId = "roles"
-* item[0].item[1].definition = "http://ihris.org/fhir/StructureDefinition/ihris-role#Basic.extension:role.value[x]:valueReference"
-* item[0].item[1].text = "Roles"
-* item[0].item[1].type = #reference
-* item[0].item[1].required = false
-* item[0].item[1].repeats = true
+// * item[0].item[1].linkId = "roles"
+// * item[0].item[1].definition = "http://ihris.org/fhir/StructureDefinition/ihris-role#Basic.extension:role.value[x]:valueReference"
+// * item[0].item[1].text = "Roles"
+// * item[0].item[1].type = #reference
+// * item[0].item[1].required = false
+// * item[0].item[1].repeats = true
