@@ -104,7 +104,7 @@ const workflowTask = {
                     }
                     let newTask = {
                         resourceType: "Basic",
-                        id: "ihris-task-" + resourceId,
+                        id: "nhwr-task-" + resourceId,
                         meta: {
                             profile: ["http://ihris.org/fhir/StructureDefinition/ihris-task"]
                         },
@@ -122,7 +122,7 @@ const workflowTask = {
                         resource: newTask,
                         request: {
                             method: "PUT",
-                            url: "Basic/ihris-task-" + resourceId
+                            url: "Basic/nhwr-task-" + resourceId
                         }
                     })
                     winston.info(JSON.stringify(bundle, null, 2))

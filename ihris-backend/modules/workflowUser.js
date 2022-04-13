@@ -178,7 +178,7 @@ const workflowUser = {
             let userName = userEmail.split('@')
             let newUser = {
               resourceType: "Person",
-              id: "ihris-user-" + userName[0],
+              id: "nhwr-user-" + userName[0],
               meta: {
                 profile: ["http://ihris.org/fhir/StructureDefinition/ihris-person-user"]
               },
@@ -196,7 +196,7 @@ const workflowUser = {
                 }
               ]
             }
-            let url = "Person/ihris-user-" + userName[0]
+            let url = "Person/nhwr-user-" + userName[0]
             bundle.entry.push({
               resource: newUser,
               request: {

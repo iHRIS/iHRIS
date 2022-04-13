@@ -2,7 +2,7 @@
   <v-container class="py-5">
     <v-card>
       <v-card-title>
-        Search {{ label }}
+        {{ label }}
         <v-spacer></v-spacer>
 
         <div v-if="page === 'practitioner'">
@@ -138,7 +138,7 @@
           item-key="id"
           :options.sync="options"
           :server-items-length="total"
-          :footer-props="{ 'items-per-page-options': [5, 10, 20, 50] }"
+          :footer-props="{ 'items-per-page-options': [50, 100, 150, 200] }"
           :loading="loading"
           class="elevation-1"
           @click:row="clickIt"
@@ -167,7 +167,7 @@ export default {
       debug: "",
       headers: [],
       results: [],
-      options: { itemsPerPage: 10 },
+      options: { itemsPerPage: 50 },
       loading: false,
       total: 0,
       prevPage: -1,

@@ -71,7 +71,7 @@ const workflowUserGroup = {
                 // formalaise the user group
                 let newGroup = {
                     resourceType: "Basic",
-                    id: "ihris-group-" + groupName.replace(/ /g, "").toLowerCase(),
+                    id: "nhwr-group-" + groupName.replace(/ /g, "").toLowerCase(),
                     meta: {
                         profile: ["http://ihris.org/fhir/StructureDefinition/ihris-group"]
                     },
@@ -87,7 +87,7 @@ const workflowUserGroup = {
                 }
 
                 // create  the group id
-                let url = "Basic/ihris-group-" + groupName.replace(/ /g, "").toLowerCase()
+                let url = "Basic/nhwr-group-" + groupName.replace(/ /g, "").toLowerCase()
 
                 bundle.entry.push({
                     resource: newGroup,
