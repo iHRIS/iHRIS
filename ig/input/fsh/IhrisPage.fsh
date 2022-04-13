@@ -195,7 +195,7 @@ Usage:          #example
 * extension[display].extension[search][8].valueString = "Email|Practitioner.telecom.where(system='email').value"
 // * extension[display].extension[search][10].valueString = "Qualification|Practitioner.qualification.code.text"
 * extension[display].extension[search][9].valueString = "Facility|Practitioner.extension.where(url='http://ihris.org/fhir/StructureDefinition/ihris-practitioner-facility').valueString"
-* extension[display].extension[search][10].valueString = "District|address.district"
+* extension[display].extension[search][10].valueString = "District|address.where(use='work').text"
 * extension[display].extension[search][11].valueString = "Region|Practitioner.extension.where(url='http://ihris.org/fhir/StructureDefinition/ihris-practitioner-region').valueString"
 * extension[display].extension[filter][0].valueString = "Surname|family:contains"
 * extension[display].extension[filter][1].valueString = "Given Name(s)|given:contains"
@@ -204,7 +204,7 @@ Usage:          #example
 * extension[display].extension[filter][4].valueString = "National ID(NIN)|identifier:contains"
 * extension[display].extension[filter][5].valueString = "Identification Number|practitioneridentificationnumber:contains"
 * extension[display].extension[filter][6].valueString = "Facility|practitionerfacility:contains"
-* extension[display].extension[filter][7].valueString = "District|address"
+* extension[display].extension[filter][7].valueString = "District|address:contains"
 * extension[display].extension[filter][8].valueString = "Region|practitionerregion:contains"
 
 * extension[display].extension[add].extension[url].valueUrl = "/questionnaire/ihris-practitioner/practitioner"
