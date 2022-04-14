@@ -21,6 +21,19 @@
       ]
     },
     {
+      "url": "http://ihris.org/fhir/StructureDefinition/ihris-user-otp",
+      "extension": [
+        {
+          "url": "code",
+          "valueString": "123456"
+        },
+        {
+          "url": "expiresIn",
+          "valueString": "10s"
+        }
+      ]
+    },
+    {
       "url": "http://ihris.org/fhir/StructureDefinition/ihris-assign-role",
       "valueReference": {
         "reference": "Basic/ihris-role-hrmanager"

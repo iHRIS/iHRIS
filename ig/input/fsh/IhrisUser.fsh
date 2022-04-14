@@ -26,6 +26,7 @@ Description:    "NHWR profile of the Person resource to manage user access."
 * extension contains 
       IhrisAssignRole named role 0..1 MS and
       IhrisPassword named password 0..1 MS and
+      IhrisUserOtp named otp 0..1 MS and
       IhrisUserGroup named group 0..1 MS 
       // IhrisUserLocation named location 0..* MS
 * extension[role] ^label = "Role(s)"
@@ -65,6 +66,25 @@ Description:    "NHWR user Location extension for local users."
 * valueReference.reference ^label = "Location/Facility"
 
 
+// extension to hold otp
+Extension: IhrisUserOtp
+Id: ihris-user-otp
+Title: "Ihris User Otp"
+Description: "NHWR user otp extension"
+* ^context.type = #element
+* ^context.expression = "Person"
+* extension contains 
+      code 1..1 MS and 
+      expiresIn 1..1 MS
+* extension[code].value[x] only string
+* extension[code].valueString ^label = "Code"
+* extension[code].valueString 1..1 MS
+* extension[expiresIn].value[x] only string
+* extension[expiresIn].valueString ^label = "expiresIn"
+* extension[expiresIn].valueString 1..1 MS
+
+
+
 Instance:       ihris-user-admin
 InstanceOf:     IhrisPersonUser
 Title:          "NHWR Admin User"
@@ -77,6 +97,8 @@ Usage:          #example
 * identifier[0].value = "12345"
 * extension[password].extension[password].valueString = "PASS"
 * extension[password].extension[salt].valueString = "SALT"
+* extension[otp].extension[code].valueString = "123456"
+* extension[otp].extension[expiresIn].valueString = "10s"
 * extension[role][0].valueReference = Reference(Basic/ihris-role-admin)
 
 Instance:       ihris-page-user

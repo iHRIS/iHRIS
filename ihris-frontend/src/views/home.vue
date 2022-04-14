@@ -413,7 +413,8 @@ export default {
       let url = "";
       // check other pages
       if (url === "") {
-        url = "/fhir/Location?_profile=http://ihris.org/fhir/StructureDefinition/ihris-facility";
+        url =
+          "/fhir/Location?_profile=http://ihris.org/fhir/StructureDefinition/ihris-facility";
       }
 
       axios
