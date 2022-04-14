@@ -31,7 +31,7 @@ const workflowUser = {
           && req.body.item[0].item[3].answer 
           && req.body.item[0].item[3].answer[0] 
           && req.body.item[0].item[3].answer[0].valueString) {*/
-        let userEmail = req.body.item[0].item[3].answer[0].valueString
+        let userEmail = req.body.item[0].item.find((item) => item.linkId === "Person.telecom[0].value").answer[0].valueString
         let userSurname = undefined
         let userGivenName = undefined
         let userRoles = undefined
@@ -206,7 +206,7 @@ const workflowUser = {
                   use: "official",
                   text: req.body.item[0].item[0].answer[0].valueString,
                   family: userSurname,
-                  userGivenName: userGivenName
+                  given: userGivenName
                 }
               ],
               telecom: [
@@ -216,6 +216,9 @@ const workflowUser = {
                 }
               ]
             }
+
+            console.log("", JSON.stringify(newUser, null, 2))
+
             let url = "Person/nhwr-user-" + userName[0]
             bundle.entry.push({
               resource: newUser,
