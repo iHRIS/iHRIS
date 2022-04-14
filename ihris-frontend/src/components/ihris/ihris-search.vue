@@ -7,6 +7,7 @@
 
         <!-- if practitioner -->
         <div v-if="page === 'practitioner'">
+          <!-- import csv -->
           <v-dialog v-model="dialog" max-width="700px" persistent>
             <template v-slot:activator="{ on, attrs }">
               <v-btn color="primary darken-1" dark v-bind="attrs" v-on="on">
@@ -113,7 +114,7 @@
         <div v-else-if="page === 'facility'"></div>
         <!-- if auditevent -->
         <div v-else-if="page === 'auditevent'"></div>
-<!-- if permission -->
+        <!-- if permission -->
         <div v-else-if="page === 'task'"></div>
         <!-- if none of the above -->
         <div v-else>
@@ -129,7 +130,6 @@
             Add {{ label }}
           </v-btn>
         </div>
-        
       </v-card-title>
       <v-card-title>
         <slot></slot>
@@ -459,6 +459,7 @@ export default {
 
     // download template csv file
     downloadInputCSVTemplate() {
+      this.loadingCSV = true;
       axios({
         url: "/config/csvTemplate",
         method: "GET",
