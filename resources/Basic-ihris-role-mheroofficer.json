@@ -5,333 +5,474 @@
     "versionId": "1",
     "lastUpdated": "2020-12-14T08:28:58.985+00:00",
     "source": "#LNVSyAUmPyC9fYaO",
-    "profile": [ "http://ihris.org/fhir/StructureDefinition/ihris-role" ]
+    "profile": [
+      "http://ihris.org/fhir/StructureDefinition/ihris-role"
+    ]
   },
-  "extension": [ {
-    "url": "http://ihris.org/fhir/StructureDefinition/ihris-basic-name",
-    "valueString": "mHero Officer"
-  }, {
-    "url": "http://ihris.org/fhir/StructureDefinition/ihris-role-primary",
-    "valueBoolean": false
-  }, {
-    "url": "http://ihris.org/fhir/StructureDefinition/ihris-task",
-    "extension": [ {
-      "url": "permission",
-      "valueCode": "read"
-    }, {
-      "url": "resource",
-      "valueCode": "Location"
-    } ]
-  }, {
-    "url": "http://ihris.org/fhir/StructureDefinition/ihris-task",
-    "extension": [ {
-      "url": "permission",
-      "valueCode": "read"
-    }, {
-      "url": "resource",
-      "valueCode": "Basic"
-    }, {
-      "url": "instance",
-      "valueId": "ihris-page-practitioner"
-    } ]
-  }, {
-    "url": "http://ihris.org/fhir/StructureDefinition/ihris-task",
-    "extension": [ {
-      "url": "permission",
-      "valueCode": "read"
-    }, {
-      "url": "resource",
-      "valueCode": "Basic"
-    }, {
-      "url": "instance",
-      "valueId": "ihris-es-report-mhero-contacts"
-    } ]
-  }, {
-    "url": "http://ihris.org/fhir/StructureDefinition/ihris-task",
-    "extension": [ {
-      "url": "permission",
-      "valueCode": "read"
-    }, {
-      "url": "resource",
-      "valueCode": "Basic"
-    }, {
-      "url": "instance",
-      "valueId": "ihris-es-report-mhero-send-message"
-    } ]
-  }, {
-    "url": "http://ihris.org/fhir/StructureDefinition/ihris-task",
-    "extension": [ {
-      "url": "permission",
-      "valueCode": "read"
-    }, {
-      "url": "resource",
-      "valueCode": "Basic"
-    }, {
-      "url": "instance",
-      "valueId": "ihris-es-report-scheduled-messages"
-    } ]
-  }, {
-    "url": "http://ihris.org/fhir/StructureDefinition/ihris-task",
-    "extension": [ {
-      "url": "permission",
-      "valueCode": "read"
-    }, {
-      "url": "resource",
-      "valueCode": "Basic"
-    }, {
-      "url": "instance",
-      "valueId": "ihris-es-report-mhero-workflows"
-    } ]
-  }, {
-    "url": "http://ihris.org/fhir/StructureDefinition/ihris-task",
-    "extension": [ {
-      "url": "permission",
-      "valueCode": "read"
-    }, {
-      "url": "resource",
-      "valueCode": "Basic"
-    }, {
-      "url": "instance",
-      "valueId": "ihris-es-report-mhero-flow-run-summary"
-    } ]
-  }, {
-    "url": "http://ihris.org/fhir/StructureDefinition/ihris-task",
-    "extension": [ {
-      "url": "permission",
-      "valueCode": "read"
-    }, {
-      "url": "resource",
-      "valueCode": "Basic"
-    }, {
-      "url": "instance",
-      "valueId": "ihris-es-report-mhero-flow-run-summary-bycadre"
-    } ]
-  }, {
-    "url": "http://ihris.org/fhir/StructureDefinition/ihris-task",
-    "extension": [ {
-      "url": "permission",
-      "valueCode": "read"
-    }, {
-      "url": "resource",
-      "valueCode": "Basic"
-    }, {
-      "url": "instance",
-      "valueId": "ihris-es-report-mhero-flow-run-summary-bygender"
-    } ]
-  }, {
-    "url": "http://ihris.org/fhir/StructureDefinition/ihris-task",
-    "extension": [ {
-      "url": "permission",
-      "valueCode": "read"
-    }, {
-      "url": "resource",
-      "valueCode": "Basic"
-    }, {
-      "url": "instance",
-      "valueId": "ihris-es-report-mhero-flow-run-summary-byregion"
-    } ]
-  }, {
-    "url": "http://ihris.org/fhir/StructureDefinition/ihris-task",
-    "extension": [ {
-      "url": "permission",
-      "valueCode": "read"
-    }, {
-      "url": "resource",
-      "valueCode": "Basic"
-    }, {
-      "url": "instance",
-      "valueId": "ihris-es-report-mhero-flow-run-breakdown"
-    } ]
-  }, {
-    "url": "http://ihris.org/fhir/StructureDefinition/ihris-task",
-    "extension": [ {
-      "url": "permission",
-      "valueCode": "read"
-    }, {
-      "url": "resource",
-      "valueCode": "Basic"
-    }, {
-      "url": "instance",
-      "valueId": "ihris-es-report-mhero-message-send-summary"
-    } ]
-  }, {
-    "url": "http://ihris.org/fhir/StructureDefinition/ihris-task",
-    "extension": [ {
-      "url": "permission",
-      "valueCode": "read"
-    }, {
-      "url": "resource",
-      "valueCode": "Basic"
-    }, {
-      "url": "instance",
-      "valueId": "ihris-es-report-mhero-message-send-summary-bycadre"
-    } ]
-  }, {
-    "url": "http://ihris.org/fhir/StructureDefinition/ihris-task",
-    "extension": [ {
-      "url": "permission",
-      "valueCode": "read"
-    }, {
-      "url": "resource",
-      "valueCode": "Basic"
-    }, {
-      "url": "instance",
-      "valueId": "ihris-es-report-mhero-message-send-summary-bygender"
-    } ]
-  }, {
-    "url": "http://ihris.org/fhir/StructureDefinition/ihris-task",
-    "extension": [ {
-      "url": "permission",
-      "valueCode": "read"
-    }, {
-      "url": "resource",
-      "valueCode": "Basic"
-    }, {
-      "url": "instance",
-      "valueId": "ihris-es-report-mhero-message-send-summary-byregion"
-    } ]
-  }, {
-    "url": "http://ihris.org/fhir/StructureDefinition/ihris-task",
-    "extension": [ {
-      "url": "permission",
-      "valueCode": "read"
-    }, {
-      "url": "resource",
-      "valueCode": "Basic"
-    }, {
-      "url": "instance",
-      "valueId": "ihris-es-report-mhero-message-send-breakdown"
-    } ]
-  }, {
-    "url": "http://ihris.org/fhir/StructureDefinition/ihris-task",
-    "extension": [ {
-      "url": "permission",
-      "valueCode": "read"
-    }, {
-      "url": "resource",
-      "valueCode": "Basic"
-    }, {
-      "url": "instance",
-      "valueId": "ihris-es-report-mhero-inbox-message-breakdown"
-    } ]
-  }, {
-    "url": "http://ihris.org/fhir/StructureDefinition/ihris-task",
-    "extension": [ {
-      "url": "permission",
-      "valueCode": "read"
-    }, {
-      "url": "resource",
-      "valueCode": "Basic"
-    }, {
-      "url": "instance",
-      "valueId": "ihris-es-report-message-exchange"
-    } ]
-  }, {
-    "url": "http://ihris.org/fhir/StructureDefinition/ihris-task",
-    "extension": [ {
-      "url": "permission",
-      "valueCode": "special"
-    }, {
-      "url": "resource",
-      "valueCode": "navigation"
-    }, {
-      "url": "instance",
-      "valueId": "person:person_search"
-    } ]
-  }, {
-    "url": "http://ihris.org/fhir/StructureDefinition/ihris-task",
-    "extension": [ {
-      "url": "permission",
-      "valueCode": "special"
-    }, {
-      "url": "resource",
-      "valueCode": "navigation"
-    }, {
-      "url": "instance",
-      "valueId": "position:position_search"
-    } ]
-  }, {
-    "url": "http://ihris.org/fhir/StructureDefinition/ihris-task",
-    "extension": [ {
-      "url": "permission",
-      "valueCode": "special"
-    }, {
-      "url": "resource",
-      "valueCode": "navigation"
-    }, {
-      "url": "instance",
-      "valueId": "mhero:message"
-    } ]
-  }, {
-    "url": "http://ihris.org/fhir/StructureDefinition/ihris-task",
-    "extension": [ {
-      "url": "permission",
-      "valueCode": "special"
-    }, {
-      "url": "resource",
-      "valueCode": "navigation"
-    }, {
-      "url": "instance",
-      "valueId": "mhero:scheduledcommunications"
-    } ]
-  }, {
-    "url": "http://ihris.org/fhir/StructureDefinition/ihris-task",
-    "extension": [ {
-      "url": "permission",
-      "valueCode": "special"
-    }, {
-      "url": "resource",
-      "valueCode": "navigation"
-    }, {
-      "url": "instance",
-      "valueId": "mhero:groups"
-    } ]
-  }, {
-    "url": "http://ihris.org/fhir/StructureDefinition/ihris-task",
-    "extension": [ {
-      "url": "permission",
-      "valueCode": "special"
-    }, {
-      "url": "resource",
-      "valueCode": "navigation"
-    }, {
-      "url": "instance",
-      "valueId": "mhero:reports"
-    } ]
-  }, {
-    "url": "http://ihris.org/fhir/StructureDefinition/ihris-task",
-    "extension": [ {
-      "url": "permission",
-      "valueCode": "special"
-    }, {
-      "url": "resource",
-      "valueCode": "navigation"
-    }, {
-      "url": "instance",
-      "valueId": "dashboard:staff"
-    } ]
-  }, {
-    "url": "http://ihris.org/fhir/StructureDefinition/ihris-task",
-    "extension": [ {
-      "url": "permission",
-      "valueCode": "special"
-    }, {
-      "url": "resource",
-      "valueCode": "navigation"
-    }, {
-      "url": "instance",
-      "valueId": "reports"
-    } ]
-  }, {
-    "url": "http://ihris.org/fhir/StructureDefinition/ihris-assign-role",
-    "valueReference": {
-      "reference": "Basic/ihris-role-open"
+  "extension": [
+    {
+      "url": "http://ihris.org/fhir/StructureDefinition/ihris-basic-name",
+      "valueString": "mHero Officer"
+    },
+    {
+      "url": "http://ihris.org/fhir/StructureDefinition/ihris-role-description",
+      "valueString": "mHero Officer Role"
+    },
+    {
+      "url": "http://ihris.org/fhir/StructureDefinition/ihris-role-primary",
+      "valueBoolean": false
+    },
+    {
+      "url": "http://ihris.org/fhir/StructureDefinition/ihris-task",
+      "extension": [
+        {
+          "url": "permission",
+          "valueCode": "read"
+        },
+        {
+          "url": "resource",
+          "valueCode": "Location"
+        }
+      ]
+    },
+    {
+      "url": "http://ihris.org/fhir/StructureDefinition/ihris-task",
+      "extension": [
+        {
+          "url": "permission",
+          "valueCode": "read"
+        },
+        {
+          "url": "resource",
+          "valueCode": "Basic"
+        },
+        {
+          "url": "instance",
+          "valueId": "ihris-page-practitioner"
+        }
+      ]
+    },
+    {
+      "url": "http://ihris.org/fhir/StructureDefinition/ihris-task",
+      "extension": [
+        {
+          "url": "permission",
+          "valueCode": "read"
+        },
+        {
+          "url": "resource",
+          "valueCode": "Basic"
+        },
+        {
+          "url": "instance",
+          "valueId": "ihris-es-report-mhero-contacts"
+        }
+      ]
+    },
+    {
+      "url": "http://ihris.org/fhir/StructureDefinition/ihris-task",
+      "extension": [
+        {
+          "url": "permission",
+          "valueCode": "read"
+        },
+        {
+          "url": "resource",
+          "valueCode": "Basic"
+        },
+        {
+          "url": "instance",
+          "valueId": "ihris-es-report-mhero-send-message"
+        }
+      ]
+    },
+    {
+      "url": "http://ihris.org/fhir/StructureDefinition/ihris-task",
+      "extension": [
+        {
+          "url": "permission",
+          "valueCode": "read"
+        },
+        {
+          "url": "resource",
+          "valueCode": "Basic"
+        },
+        {
+          "url": "instance",
+          "valueId": "ihris-es-report-scheduled-messages"
+        }
+      ]
+    },
+    {
+      "url": "http://ihris.org/fhir/StructureDefinition/ihris-task",
+      "extension": [
+        {
+          "url": "permission",
+          "valueCode": "read"
+        },
+        {
+          "url": "resource",
+          "valueCode": "Basic"
+        },
+        {
+          "url": "instance",
+          "valueId": "ihris-es-report-mhero-workflows"
+        }
+      ]
+    },
+    {
+      "url": "http://ihris.org/fhir/StructureDefinition/ihris-task",
+      "extension": [
+        {
+          "url": "permission",
+          "valueCode": "read"
+        },
+        {
+          "url": "resource",
+          "valueCode": "Basic"
+        },
+        {
+          "url": "instance",
+          "valueId": "ihris-es-report-mhero-flow-run-summary"
+        }
+      ]
+    },
+    {
+      "url": "http://ihris.org/fhir/StructureDefinition/ihris-task",
+      "extension": [
+        {
+          "url": "permission",
+          "valueCode": "read"
+        },
+        {
+          "url": "resource",
+          "valueCode": "Basic"
+        },
+        {
+          "url": "instance",
+          "valueId": "ihris-es-report-mhero-flow-run-summary-bycadre"
+        }
+      ]
+    },
+    {
+      "url": "http://ihris.org/fhir/StructureDefinition/ihris-task",
+      "extension": [
+        {
+          "url": "permission",
+          "valueCode": "read"
+        },
+        {
+          "url": "resource",
+          "valueCode": "Basic"
+        },
+        {
+          "url": "instance",
+          "valueId": "ihris-es-report-mhero-flow-run-summary-bygender"
+        }
+      ]
+    },
+    {
+      "url": "http://ihris.org/fhir/StructureDefinition/ihris-task",
+      "extension": [
+        {
+          "url": "permission",
+          "valueCode": "read"
+        },
+        {
+          "url": "resource",
+          "valueCode": "Basic"
+        },
+        {
+          "url": "instance",
+          "valueId": "ihris-es-report-mhero-flow-run-summary-byregion"
+        }
+      ]
+    },
+    {
+      "url": "http://ihris.org/fhir/StructureDefinition/ihris-task",
+      "extension": [
+        {
+          "url": "permission",
+          "valueCode": "read"
+        },
+        {
+          "url": "resource",
+          "valueCode": "Basic"
+        },
+        {
+          "url": "instance",
+          "valueId": "ihris-es-report-mhero-flow-run-breakdown"
+        }
+      ]
+    },
+    {
+      "url": "http://ihris.org/fhir/StructureDefinition/ihris-task",
+      "extension": [
+        {
+          "url": "permission",
+          "valueCode": "read"
+        },
+        {
+          "url": "resource",
+          "valueCode": "Basic"
+        },
+        {
+          "url": "instance",
+          "valueId": "ihris-es-report-mhero-message-send-summary"
+        }
+      ]
+    },
+    {
+      "url": "http://ihris.org/fhir/StructureDefinition/ihris-task",
+      "extension": [
+        {
+          "url": "permission",
+          "valueCode": "read"
+        },
+        {
+          "url": "resource",
+          "valueCode": "Basic"
+        },
+        {
+          "url": "instance",
+          "valueId": "ihris-es-report-mhero-message-send-summary-bycadre"
+        }
+      ]
+    },
+    {
+      "url": "http://ihris.org/fhir/StructureDefinition/ihris-task",
+      "extension": [
+        {
+          "url": "permission",
+          "valueCode": "read"
+        },
+        {
+          "url": "resource",
+          "valueCode": "Basic"
+        },
+        {
+          "url": "instance",
+          "valueId": "ihris-es-report-mhero-message-send-summary-bygender"
+        }
+      ]
+    },
+    {
+      "url": "http://ihris.org/fhir/StructureDefinition/ihris-task",
+      "extension": [
+        {
+          "url": "permission",
+          "valueCode": "read"
+        },
+        {
+          "url": "resource",
+          "valueCode": "Basic"
+        },
+        {
+          "url": "instance",
+          "valueId": "ihris-es-report-mhero-message-send-summary-byregion"
+        }
+      ]
+    },
+    {
+      "url": "http://ihris.org/fhir/StructureDefinition/ihris-task",
+      "extension": [
+        {
+          "url": "permission",
+          "valueCode": "read"
+        },
+        {
+          "url": "resource",
+          "valueCode": "Basic"
+        },
+        {
+          "url": "instance",
+          "valueId": "ihris-es-report-mhero-message-send-breakdown"
+        }
+      ]
+    },
+    {
+      "url": "http://ihris.org/fhir/StructureDefinition/ihris-task",
+      "extension": [
+        {
+          "url": "permission",
+          "valueCode": "read"
+        },
+        {
+          "url": "resource",
+          "valueCode": "Basic"
+        },
+        {
+          "url": "instance",
+          "valueId": "ihris-es-report-mhero-inbox-message-breakdown"
+        }
+      ]
+    },
+    {
+      "url": "http://ihris.org/fhir/StructureDefinition/ihris-task",
+      "extension": [
+        {
+          "url": "permission",
+          "valueCode": "read"
+        },
+        {
+          "url": "resource",
+          "valueCode": "Basic"
+        },
+        {
+          "url": "instance",
+          "valueId": "ihris-es-report-message-exchange"
+        }
+      ]
+    },
+    {
+      "url": "http://ihris.org/fhir/StructureDefinition/ihris-task",
+      "extension": [
+        {
+          "url": "permission",
+          "valueCode": "special"
+        },
+        {
+          "url": "resource",
+          "valueCode": "navigation"
+        },
+        {
+          "url": "instance",
+          "valueId": "person:person_search"
+        }
+      ]
+    },
+    {
+      "url": "http://ihris.org/fhir/StructureDefinition/ihris-task",
+      "extension": [
+        {
+          "url": "permission",
+          "valueCode": "special"
+        },
+        {
+          "url": "resource",
+          "valueCode": "navigation"
+        },
+        {
+          "url": "instance",
+          "valueId": "position:position_search"
+        }
+      ]
+    },
+    {
+      "url": "http://ihris.org/fhir/StructureDefinition/ihris-task",
+      "extension": [
+        {
+          "url": "permission",
+          "valueCode": "special"
+        },
+        {
+          "url": "resource",
+          "valueCode": "navigation"
+        },
+        {
+          "url": "instance",
+          "valueId": "mhero:message"
+        }
+      ]
+    },
+    {
+      "url": "http://ihris.org/fhir/StructureDefinition/ihris-task",
+      "extension": [
+        {
+          "url": "permission",
+          "valueCode": "special"
+        },
+        {
+          "url": "resource",
+          "valueCode": "navigation"
+        },
+        {
+          "url": "instance",
+          "valueId": "mhero:scheduledcommunications"
+        }
+      ]
+    },
+    {
+      "url": "http://ihris.org/fhir/StructureDefinition/ihris-task",
+      "extension": [
+        {
+          "url": "permission",
+          "valueCode": "special"
+        },
+        {
+          "url": "resource",
+          "valueCode": "navigation"
+        },
+        {
+          "url": "instance",
+          "valueId": "mhero:groups"
+        }
+      ]
+    },
+    {
+      "url": "http://ihris.org/fhir/StructureDefinition/ihris-task",
+      "extension": [
+        {
+          "url": "permission",
+          "valueCode": "special"
+        },
+        {
+          "url": "resource",
+          "valueCode": "navigation"
+        },
+        {
+          "url": "instance",
+          "valueId": "mhero:reports"
+        }
+      ]
+    },
+    {
+      "url": "http://ihris.org/fhir/StructureDefinition/ihris-task",
+      "extension": [
+        {
+          "url": "permission",
+          "valueCode": "special"
+        },
+        {
+          "url": "resource",
+          "valueCode": "navigation"
+        },
+        {
+          "url": "instance",
+          "valueId": "dashboard:staff"
+        }
+      ]
+    },
+    {
+      "url": "http://ihris.org/fhir/StructureDefinition/ihris-task",
+      "extension": [
+        {
+          "url": "permission",
+          "valueCode": "special"
+        },
+        {
+          "url": "resource",
+          "valueCode": "navigation"
+        },
+        {
+          "url": "instance",
+          "valueId": "reports"
+        }
+      ]
+    },
+    {
+      "url": "http://ihris.org/fhir/StructureDefinition/ihris-assign-role",
+      "valueReference": {
+        "reference": "Basic/ihris-role-open"
+      }
     }
-  } ],
+  ],
   "code": {
-    "coding": [ {
-      "system": "http://ihris.org/fhir/CodeSystem/ihris-resource-codesystem",
-      "code": "role"
-    } ]
+    "coding": [
+      {
+        "system": "http://ihris.org/fhir/CodeSystem/ihris-resource-codesystem",
+        "code": "role"
+      }
+    ]
   }
 }

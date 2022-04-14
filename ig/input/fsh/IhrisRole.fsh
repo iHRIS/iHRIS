@@ -6,10 +6,12 @@ Description:    "NHWR Profile of the Basic resource to manage roles."
 * code = IhrisResourceCodeSystem#role
 * extension contains
       IhrisBasicName named name 1..1 MS and
+      IhrisRoleDescription named description 1..1 MS and 
       IhrisRolePrimary named primary 1..1 and
       IhrisAssignRole named role 0..* and
       IhrisAssignTask named task 0..*
 * extension[name].valueString 1..1 MS
+* extension[description].valueString 1..1 MS
 * extension[role].value[x] only Reference(IhrisRole)
 * extension[role].valueReference 1..1 MS
 * extension[role].valueReference ^label = "Role"
@@ -94,6 +96,17 @@ Description:    "NHWR Assign Role to a user or other role."
 * valueReference ^label = "Role"
 * valueReference only Reference(IhrisRole)
 * valueReference.reference ^label = "Role"
+
+// role description
+Extension:      IhrisRoleDescription
+Id:             ihris-role-description
+Title:          "NHWR Role Description"
+Description:    "NHWR Gives a brief description about a particular role."
+* ^context[1].type = #element
+* ^context[1].expression = "IhrisRole"
+* value[x] only string
+* valueString 1..1 MS
+* valueString ^label = "Role Description"
 
 
 // user group extension
@@ -207,6 +220,7 @@ Title:          "NHWR Open Role"
 Usage:          #example
 * code = IhrisResourceCodeSystem#role
 * extension[name].valueString = "Open Role"
+* extension[description].valueString = "This is an open role usable by all users"
 * extension[primary].valueBoolean = true
 * extension[task][0].valueReference = Reference(Basic/ihris-task-read-structure-definition)
 * extension[task][1].valueReference = Reference(Basic/ihris-task-read-code-system)
@@ -219,6 +233,7 @@ Title:          "NHWR Admin Role"
 Usage:          #example
 * code = IhrisResourceCodeSystem#role
 * extension[name].valueString = "Admin Role"
+* extension[description].valueString = "This is an Admin role usable by all only admin users"
 * extension[primary].valueBoolean = true
 * extension[task][0].valueReference = Reference(Basic/ihris-task-all-permissions-to-everything)
 * extension[role][0].valueReference = Reference(Basic/ihris-role-open)
@@ -511,12 +526,18 @@ Usage:          #definition
 * item[0].item[0].required = false
 * item[0].item[0].repeats = false
 
-* item[0].item[1].linkId = "tasks"
-* item[0].item[1].definition = "http://ihris.org/fhir/StructureDefinition/ihris-role#Basic.extension:task.value[x]:valueReference"
-* item[0].item[1].text = "Permissions"
-* item[0].item[1].type = #reference
+* item[0].item[1].linkId = "roledescription"
+* item[0].item[1].text = "Role Description"
+* item[0].item[1].type = #string
 * item[0].item[1].required = false
-* item[0].item[1].repeats = true
+* item[0].item[1].repeats = false
+
+* item[0].item[2].linkId = "tasks"
+* item[0].item[2].definition = "http://ihris.org/fhir/StructureDefinition/ihris-role#Basic.extension:task.value[x]:valueReference"
+* item[0].item[2].text = "Permissions"
+* item[0].item[2].type = #reference
+* item[0].item[2].required = false
+* item[0].item[2].repeats = true
 
 // * item[0].item[2].linkId = "roles"
 // * item[0].item[2].definition = "http://ihris.org/fhir/StructureDefinition/ihris-role#Basic.extension:role.value[x]:valueReference"
@@ -525,11 +546,11 @@ Usage:          #definition
 // * item[0].item[2].required = false
 // * item[0].item[2].repeats = true
 
-* item[0].item[2].linkId = "primary"
-* item[0].item[2].text = "Is Role Primary"
-* item[0].item[2].type = #boolean
-* item[0].item[2].required = true
-* item[0].item[2].repeats = false
+* item[0].item[3].linkId = "primary"
+* item[0].item[3].text = "Is Role Primary"
+* item[0].item[3].type = #boolean
+* item[0].item[3].required = true
+* item[0].item[3].repeats = false
 
 Instance:         ihris-page-task
 InstanceOf:       IhrisPage

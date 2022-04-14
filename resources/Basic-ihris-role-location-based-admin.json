@@ -15,6 +15,10 @@
       "valueString": "Admin - Location Based"
     },
     {
+      "url": "http://ihris.org/fhir/StructureDefinition/ihris-role-description",
+      "valueString": "Location based admin role"
+    },
+    {
       "url": "http://ihris.org/fhir/StructureDefinition/ihris-role-primary",
       "valueBoolean": true
     },

@@ -15,6 +15,10 @@
       "valueString": "HR Officer Role"
     },
     {
+      "url": "http://ihris.org/fhir/StructureDefinition/ihris-role-description",
+      "valueString": "Hr Officer Role"
+    },
+    {
       "url": "http://ihris.org/fhir/StructureDefinition/ihris-role-primary",
       "valueBoolean": false
     },

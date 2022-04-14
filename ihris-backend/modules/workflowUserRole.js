@@ -8,6 +8,7 @@ const fhirAxios = nconf.fhirAxios
 
 const workflowUserRole = {
     process: (req) => {
+        console.log("resqquest", JSON.stringify(req.body.item[0], null, 2))
 
         return new Promise(async (resolve, reject) => {
 
@@ -18,6 +19,7 @@ const workflowUserRole = {
             }
 
             let roleName = undefined
+            let roleDescription = undefined
             let roleTasks = undefined
             let roleRoles = undefined
 
@@ -30,6 +32,9 @@ const workflowUserRole = {
                     && req.body.item[0].item[0].answer[0].valueString
                 ) {
 
+
+                    // role name
+
                     if (req.body.item[0].item[0].linkId == "rolename") {
 
                         roleName = req.body.item[0].item[0].answer[0].valueString
@@ -40,6 +45,7 @@ const workflowUserRole = {
                         extensions.push(name)
                     }
 
+                    // is primary role
 
                     if (req.body.item[0].item[2].linkId === "primary"
                         && req.body.item[0].item[2].answer[0]
@@ -50,6 +56,7 @@ const workflowUserRole = {
                         })
                     }
 
+                    // tasks
                     if (req.body.item[0].item.find((item) => item.linkId == "tasks")) {
                         // role tasks
                         roleTasks = req.body.item[0].item.find((item) => item.linkId == "tasks").answer
@@ -65,6 +72,22 @@ const workflowUserRole = {
                         });
                         extensions.push(tasks)
                     }
+
+                    // role description roledescription
+                    if (req.body.item[0].item.find((item) => item.linkId === "roledescription") !== undefined
+                        && req.body.item[0].item.find((item) => item.linkId === "roledescription").answer[0]
+                        && req.body.item[0].item.find((item) => item.linkId === "roledescription").answer[0].valueString) {
+
+                        roleDescription = req.body.item[0].item.find((item) => item.linkId === "roledescription").answer[0].valueString
+                        let description = {
+                            url: "http://ihris.org/fhir/StructureDefinition/ihris-role-description",
+                            valueString: roleDescription
+                        }
+                        extensions.push(description)
+                    }
+
+
+                    // tasks
                     if (req.body.item[0].item.find((item) => item.linkId == "roles")) {
                         //role roles
                         roleRoles = req.body.item[0].item.find((item) => item.linkId == "roles").answer
