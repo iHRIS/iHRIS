@@ -32,6 +32,8 @@ const workflowUser = {
           && req.body.item[0].item[3].answer[0] 
           && req.body.item[0].item[3].answer[0].valueString) {*/
         let userEmail = req.body.item[0].item[3].answer[0].valueString
+        let userSurname = undefined
+        let userGivenName = undefined
         let userRoles = undefined
         let constraint = undefined
         let hasLocation = false
@@ -108,7 +110,23 @@ const workflowUser = {
               })
             }
 
+            // surname
+            if (req.body.item[0].item.find((item) => item.linkId === "Person.name[0].family") != undefined
+              && req.body.item[0].item.find((item) => item.linkId === "Person.name[0].family").answer
+              && req.body.item[0].item.find((item) => item.linkId === "Person.name[0].family").answer[0]
+              && req.body.item[0].item.find((item) => item.linkId === "Person.name[0].family").answer[0].valueString
+            ) {
+              userSurname = req.body.item[0].item.find((item) => item.linkId === "Person.name[0].family").answer[0].valueString
+            }
 
+            // given name 
+            if (req.body.item[0].item.find((item) => item.linkId === "Person.name[0].given") != undefined
+              && req.body.item[0].item.find((item) => item.linkId === "Person.name[0].given").answer
+              && req.body.item[0].item.find((item) => item.linkId === "Person.name[0].given").answer[0]
+              && req.body.item[0].item.find((item) => item.linkId === "Person.name[0].given").answer[0].valueString
+            ) {
+              userGivenName = req.body.item[0].item.find((item) => item.linkId === "Person.name[0].given").answer[0].valueString
+            }
             // role item
 
             if (req.body.item[0].item.find((item) => item.linkId === "role") !== undefined
@@ -122,7 +140,7 @@ const workflowUser = {
             }
 
             // group item
-            if (req.body.item[0].item.find((item) => item.linkId === "group") !== undefined){
+            if (req.body.item[0].item.find((item) => item.linkId === "group") !== undefined) {
               let group = req.body.item[0].item.find((item) => item.linkId === "group")
               if (group.answer && group.answer[0] && group.answer[0].valueReference) {
                 extensions.push({
@@ -186,7 +204,9 @@ const workflowUser = {
               name: [
                 {
                   use: "official",
-                  text: req.body.item[0].item[0].answer[0].valueString
+                  text: req.body.item[0].item[0].answer[0].valueString,
+                  family: userSurname,
+                  userGivenName: userGivenName
                 }
               ],
               telecom: [
