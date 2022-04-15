@@ -165,7 +165,7 @@ router.post("/login", passport.authenticate('local', {}), (req, res) => {
             otp: otp
           }
 
-          if (codeDetails && codeDetails.valueString === "12345678") {
+          if (codeDetails) {
 
             userObj.resource.extension.find(ext => ext.url === "http://ihris.org/fhir/StructureDefinition/ihris-user-otp").extension.find(ext => ext.url === "code").valueString = otp
 
@@ -210,7 +210,7 @@ router.post("/verify-otp", (req, res) => {
 
       if (userObj.verifyOtp(otp)) {
 
-        userObj.resource.extension.find(ext => ext.url === "http://ihris.org/fhir/StructureDefinition/ihris-user-otp").extension.find(ext => ext.url === "code").valueString = "12345678"
+        userObj.resource.extension.find(ext => ext.url === "http://ihris.org/fhir/StructureDefinition/ihris-user-otp").extension.find(ext => ext.url === "code").valueString = ""
 
         userObj.update().then((response) => {
           fhirAudit.login(userObj, req.ip, true, email)

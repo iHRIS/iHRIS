@@ -32,7 +32,7 @@ const sendMail = async (params) => {
 
   // mail options 
   var mailOptions = {
-    from: '"Systems Admin" <jabajnan8@gmail.com>',
+    from: '"Systems Admin" <jeremyjabar@gmail.com>',
     to: params.to,
     subject: 'OTP  Verification',
     template: 'email',
