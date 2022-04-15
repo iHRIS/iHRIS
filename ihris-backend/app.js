@@ -116,7 +116,7 @@ async function startUp() {
   }
 
   const isLoggedIn = (req, res, next) => {
-    let unauthenticatedRoutes = ["/config/app", "/auth", "/fhir/DocumentReference/page-home/$html", "/config/site","/fhir/mediator/"]
+    let unauthenticatedRoutes = ["/config/app", "/auth", "/fhir/DocumentReference/page-home/$html", "/config/site","/fhir/mediator/Practitioner"]
     if (unauthenticatedRoutes.includes(req.path)) {
       return next()
     }
