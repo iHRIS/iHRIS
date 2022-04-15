@@ -17,6 +17,13 @@
         {
           "url": "salt",
           "valueString": "239cfeb1222bfb394549125b234e668e"
+        },        {
+          "url": "resetPasswordToken",
+          "valueString": "PASS"
+        },
+        {
+          "url": "resetPasswordExpiry",
+          "valueString": "PASS"
         }
       ]
     },
@@ -25,7 +32,7 @@
       "extension": [
         {
           "url": "code",
-          "valueString": "123456"
+          "valueString": "12345678"
         },
         {
           "url": "expiresIn",

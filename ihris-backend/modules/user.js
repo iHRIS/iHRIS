@@ -73,6 +73,39 @@ const user = {
     let hash = crypto.pbkdf2Sync(password, salt, 1000, 64, 'sha512').toString('hex')
     return { hash: hash, salt: salt }
   },
+
+  // verify otp
+  checkOtp: (otp) => {
+    if (!otp) {
+      logger.error("otp code is empty (null || undefined) ")
+      return false
+    }
+
+    if (otp.length !== 8 || !otp.match(/^[0-9]+$/)) {
+      logger.error("otp code is invalid ")
+      return false
+    }
+
+    if (otp.match(/^[0-9]{8}$/)) {
+      return true
+    }
+
+  },
+
+  // generate otp
+  generateOTP: (length) => {
+    // declare all characters
+    const characters = '0123456789';
+
+    let result = '';
+    const charactersLength = characters.length;
+    for (let i = 0; i < length; i++) {
+      result += characters.charAt(Math.floor(Math.random() * charactersLength));
+    }
+
+    return result.trim();
+  },
+
   tasksLoaded: false,
   tasksLoading: false,
   valueSet: {},
@@ -458,6 +491,33 @@ User.prototype.checkPassword = function (password) {
   } else {
     return false
   }
+}
+
+User.prototype.verifyOtp = function (otp) {
+
+
+  let detailsOtp = this.resource.extension.find(ext => ext.url === "http://ihris.org/fhir/StructureDefinition/ihris-user-otp")
+
+  if (!detailsOtp) {
+    logger.error("Otp details don't exist in user " + this.resource.id)
+    return false
+  }
+
+  let otpValue = detailsOtp.extension.find(ext => ext.url === "code")
+  let otpExpiry = detailsOtp.extension.find(ext => ext.url === "expiresIn")
+
+  // check if otp details exit and are valid
+  if (!otpValue || !otpValue.valueString || !otpExpiry || !otpExpiry.valueString) {
+    logger.error("Code or Expires doesn't exist in user " + this.resource.id)
+    return false
+  }
+
+  // compare 
+  if (otpValue.valueString === otp) {
+    return true
+
+  }
+
 }
 
 User.prototype.update = function () {

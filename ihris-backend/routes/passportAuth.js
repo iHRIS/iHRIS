@@ -6,11 +6,15 @@ const logger = require('../winston')
 const fhirAudit = require('../modules/fhirAudit')
 const jwt = require('jsonwebtoken');
 
+// email 
+const email = require('../modules/sendEmail')
+
 const passport = require('passport')
+const s = require('connect-redis')
+const { object } = require('webidl-conversions')
 const GoogleStrategy = require('passport-google-oauth20').Strategy
 const LocalStrategy = require('passport-local').Strategy
 const CustomStrategy = require('passport-custom').Strategy
-const TotpStrategy = require('passport-totp').Strategy;
 
 const defaultUser = nconf.get("user:loggedout") || "ihris-user-loggedout"
 
@@ -97,23 +101,6 @@ passport.use('custom-loggedout', new CustomStrategy(
   }
 ))
 
-passport.use('totp', new TotpStrategy((req, done) => {
-
-  user.lookupByEmail(req.user.email).then((userObj) => {
-    if (!userObj) {
-      fhirAudit.login(userObj, req.ip, false, email)
-      done(null, false)
-    } else {
-      fhirAudit.login(userObj, req.ip, true, email)
-      done(null, userObj)
-    }
-  }).catch((err) => {
-    done(err)
-
-  })
-
-}))
-
 passport.serializeUser((obj, callback) => {
   //callback(null, user.id)
   callback(null, obj)
@@ -122,15 +109,6 @@ passport.deserializeUser((obj, callback) => {
   let userObj = user.restoreUser(obj)
   callback(null, userObj)
 })
-/*
-passport.deserializeUser( (id,callback) => {
-user.find( id ).then( (userObj) => {
- callback(null, userObj.resource)
-} ).catch( (err) => {
- callback( err )
-} )
-} )
-*/
 
 router.use(passport.initialize())
 router.use(passport.session())
@@ -166,43 +144,111 @@ router.get('/google/callback',
   passport.authenticate('google', { failureRedirect: '/', successRedirect: '/' })
 )
 
+
+// login 
 router.post("/login", passport.authenticate('local', {}), (req, res) => {
   let name = "Unknown"
 
   try {
     name = req.user.resource.name[0].text
+
+    user.lookupByEmail(req.user.resource.telecom[0].value)
+      .then((userObj) => {
+        if (userObj) {
+
+          const otp = user.generateOTP(8)
+
+          let codeDetails = userObj.resource.extension.find(ext => ext.url === "http://ihris.org/fhir/StructureDefinition/ihris-user-otp").extension.find(ext => ext.url === "code")
+
+          let params = {
+            to: req.user.resource.telecom[0].value,
+            otp: otp
+          }
+
+          if (codeDetails && codeDetails.valueString === "12345678") {
+
+            userObj.resource.extension.find(ext => ext.url === "http://ihris.org/fhir/StructureDefinition/ihris-user-otp").extension.find(ext => ext.url === "code").valueString = otp
+
+            userObj.update().then((response) => {
+
+              const sendEmail = email(params);
+
+              logger.info("SENT EMAIL", sendEmail.message)
+
+              res.status(200).json({ ok: true, name: name, otp: otp })
+            }).catch((err) => {
+              res.status(400).json({ ok: false, message: "failed to user object otp" })
+            })
+          }
+        }
+
+      })
+      .catch((err) => { })
+
+
   } catch (err) {
-  }
-  res.status(200).json({ ok: true, name: name })
-})
-
-
-// otp setup
-router.get("/otp/setup", (req, res) => {
-  if (req.user) {
-    res.status(200).json({ ok: true })
-  } else {
-    res.status(200).json({ ok: false })
+    fhirAudit.login({}, req.ip, false, name);
+    return res.status(500).send();
   }
 })
 
-router.post("/verify-otp", passport.authenticate('totp', { failureRedirect: '/verify-otp' }), (req, res) => {
 
-  if (res.status !== 200) {
-    res.json({
-      success: false,
-      message: "OTP verification  failed"
+// verify otp
+router.post("/verify-otp", (req, res) => {
+
+  let otp = req.body.otp
+  let email = req.body.email
+
+  if (otp === undefined) {
+    logger.error("No otp provided.")
+    return res.status(400).send();
+  }
+
+  if (user.checkOtp(otp)) {
+    // check if otp is valid  and if it is valid then update the user
+    user.lookupByEmail(email).then((userObj) => {
+
+      if (userObj.verifyOtp(otp)) {
+
+        userObj.resource.extension.find(ext => ext.url === "http://ihris.org/fhir/StructureDefinition/ihris-user-otp").extension.find(ext => ext.url === "code").valueString = "12345678"
+
+        userObj.update().then((response) => {
+          fhirAudit.login(userObj, req.ip, true, email)
+          return res.status(200).json({
+            "ok": true,
+            "message": "OTP verified successfully"
+          });
+        }).catch((err) => { })
+
+      } else {
+        fhirAudit.login(userObj, req.ip, false, email)
+        return res.status(400).send();
+      }
+    }).catch((err) => {
+      logger.error(err.message)
+      return res.status(500).send();
+
     })
+
   } else {
-    res.status(200).json({
-      success: true,
-      message: "OTP has been verified"
-    })
+    return res.status(400).send();
   }
 
+});
+
+
+// send  password reset request
+router.post("/password-reset", async (req, res) => {
 
 })
 
+// reset your password
+router.post("/password-reset/:userId/:token", async (req, res) => {
+
+})
+
+
+// generate token for use on the api 
 router.post('/token', (req, res) => {
   // For API Access only
   logger.info('Generating token');

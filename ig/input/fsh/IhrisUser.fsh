@@ -43,8 +43,16 @@ Description:    "NHWR password extension for local users."
 * ^context.type = #element
 * ^context.expression = "Person"
 * extension contains 
+      resetPasswordToken 1..1 MS and
+      resetPasswordExpiry 1..1 MS and
       password 1..1 MS and
       salt 1..1 MS
+* extension[resetPasswordToken].value[x] only string
+* extension[resetPasswordToken].valueString ^label = "restPasswordToken"
+* extension[resetPasswordToken].valueString 1..1 MS
+* extension[resetPasswordExpiry].value[x] only string
+* extension[resetPasswordExpiry].valueString ^label = "resetPasswordExpiry"
+* extension[resetPasswordExpiry].valueString 1..1 MS
 * extension[password].value[x] only string
 * extension[password].valueString ^label = "Password"
 * extension[password].valueString 1..1 MS
@@ -95,6 +103,8 @@ Usage:          #example
 * name.given = "NHWR"
 * identifier[0].system = "google"
 * identifier[0].value = "12345"
+* extension[password].extension[resetPasswordToken].valueString = "PASS"
+* extension[password].extension[resetPasswordExpiry].valueString = "PASS"
 * extension[password].extension[password].valueString = "PASS"
 * extension[password].extension[salt].valueString = "SALT"
 * extension[otp].extension[code].valueString = "123456"
