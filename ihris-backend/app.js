@@ -116,7 +116,7 @@ async function startUp() {
   }
 
   const isLoggedIn = (req, res, next) => {
-    let unauthenticatedRoutes = ["/config/app", "/auth", "/fhir/DocumentReference/page-home/$html", "/config/site"]
+    let unauthenticatedRoutes = ["/config/app", "/auth", "/fhir/DocumentReference/page-home/$html", "/config/site","/fhir/mediator/"]
     if (unauthenticatedRoutes.includes(req.path)) {
       return next()
     }
@@ -244,6 +244,10 @@ async function startUp() {
     }
   }
 
+
+  if (nconf.get('mediator:register')) {
+    process.env.NODE_TLS_REJECT_UNAUTHORIZED = 0;
+  }
 
   // mediator
   logger.info("Connecting to openhim console")
