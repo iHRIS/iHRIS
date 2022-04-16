@@ -27,7 +27,7 @@ const sendMail = async (email, subject, payload, template) => {
   
   // mail options 
   var mailOptions = {
-    from: '"Systems Admin" <jeremyjabar@gmail.com>',
+    from: '"Systems Admin" <jabajnan8@gmail.com>',
     to: email,
     subject: subject,
     html: compiledTemplate(payload)

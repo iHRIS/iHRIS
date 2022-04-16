@@ -7,11 +7,8 @@ const fhirAudit = require('../modules/fhirAudit')
 const jwt = require('jsonwebtoken');
 const crypto = require('crypto');
 const clientURL = process.env.CLIENT_URL;
-
-
-
 // email 
-const emailEmail = require('../modules/sendEmail')
+const sendEmail = require('../modules/sendEmail')
 
 const passport = require('passport')
 const s = require('connect-redis')
@@ -179,10 +176,11 @@ router.post("/login", passport.authenticate('local', {}), (req, res) => {
                   name: userObj.resource.name[0].text.name,
                   otp: otp
                 },
-                "./views/email.handlebars");
+                "../views/email.handlebars");
 
               res.status(200).json({ ok: true, name: name, otp: otp })
             }).catch((err) => {
+              logger.error(err.message)
               res.status(400).json({ ok: false, message: "failed to user object otp" })
             })
           }
@@ -190,7 +188,8 @@ router.post("/login", passport.authenticate('local', {}), (req, res) => {
 
       })
       .catch((err) => {
-        res.status(400).json({ ok: false, message: "failed to user object" })
+        logger.error(err.message)
+        res.status(400).json({ ok: false, message: err.message })
 
       })
 

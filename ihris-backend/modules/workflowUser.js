@@ -166,6 +166,9 @@ const workflowUser = {
                 let password = req.body.item[0].item.find((item) => item.linkId === "password").answer[0].valueString
                 let salt = crypto.randomBytes(16).toString('hex')
                 let hash = crypto.pbkdf2Sync(password, salt, 1000, 64, 'sha512').toString('hex')
+
+
+
                 passwordExt.push({
                   url: "password",
                   valueString: hash
@@ -189,6 +192,23 @@ const workflowUser = {
               resolve(await workflowUser.outcome("No Password set for this User"))
             }
 
+
+            // otp item
+            extensions.push({
+
+              url: "http://ihris.org/fhir/StructureDefinition/ihris-user-otp",
+              extension: [
+                {
+                  url: "code",
+                  valueString: "12345678"
+                },
+                {
+                  url: "expiresIn",
+                  valueString: "10s"
+                }
+              ]
+            }
+            );
 
 
 
