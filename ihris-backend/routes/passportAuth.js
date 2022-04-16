@@ -6,9 +6,6 @@ const logger = require('../winston')
 const fhirAudit = require('../modules/fhirAudit')
 const jwt = require('jsonwebtoken');
 const crypto = require('crypto');
-const { promisify } = require('util');
-const bcrypt = require("bcrypt");
-const bcryptSalt = process.env.BCRYPT_SALT;
 const clientURL = process.env.CLIENT_URL;
 
 
@@ -271,9 +268,8 @@ router.post("/password-reset", async (req, res) => {
       if (userObj) {
 
         //  generate a token
-        const resetToken = (await promisify(crypto.randomBytes)(64)).toString('hex');
-
-        const hash = await bcrypt.hash(resetToken, Number(bcryptSalt));
+        let resetToken = crypto.randomBytes(64).toString('hex')
+        let hash = crypto.pbkdf2Sync(resetToken, 1000, 64, 'sha512').toString('hex')
 
         // update the password reset token and password reset expiry in the user object
         userObj.resource.extension.find(ext => ext.url === "http://ihris.org/fhir/StructureDefinition/ihris-password").extension.find(ext => ext.url === "resetPasswordToken").valueString = hash
@@ -283,7 +279,7 @@ router.post("/password-reset", async (req, res) => {
 
         userObj.update().then((response) => {
 
-          const link = `${clientURL}/passwordReset?token=${resetToken}&id=${userObj.resource.id}`;
+          const link = `${clientURL}/passwordReset?token=${resetToken}&userId=${userObj.resource.id}`;
 
 
           sendEmail(
@@ -313,7 +309,7 @@ router.post("/password-reset", async (req, res) => {
 })
 
 // reset your password
-router.post("/password-reset/:userId/:token", async (req, res) => {
+router.post("/password-reset/:token/:userId", async (req, res) => {
 
   let token = req.params.token;
   let userId = req.params.userId
@@ -324,23 +320,34 @@ router.post("/password-reset/:userId/:token", async (req, res) => {
 
     let resetPasswordToken = userObj.resource.extension.find(ext => ext.url === "http://ihris.org/fhir/StructureDefinition/ihris-password").extension.find(ext => ext.url === "resetPasswordToken").valueString
 
+    let resetPasswordExpiry = userObj.resource.extension.find(ext => ext.url === "http://ihris.org/fhir/StructureDefinition/ihris-password").extension.find(ext => ext.url === "resetPasswordExpiry").valueString
+
     // check if user objct has a reset token
     if (!resetPasswordToken) {
       logger.error("Invalid or expired password reset token")
       return false
     }
 
-    const isValid = await bcrypt.compare(token, resetPasswordToken)
-
-    // check if token hash is valid
-    if (isValid) {
-      logger.error("Invalid or expired password reset token")
+    // check if the new password and confirm password match
+    if (newPassword !== confirmPassword) {
+      logger.error("New password and confirm password do not match")
       return false
     }
 
     if (!newPassword.matches('^(?=.*\\\\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$') || newPassword !== confirmPassword) {
       logger.error("Password does not meet the requirements")
       return false
+    }
+
+
+    let hashedToken = crypto.pbkdf2Sync(token, 1000, 64, 'sha512').toString('hex')
+
+    if (hashedToken === resetPasswordToken) {
+      // check if the token has expired
+      if (new Date(resetPasswordExpiry) < new Date()) {
+        logger.error("Invalid or expired password reset token")
+        return false
+      }
     }
 
     // check if provided password is valid
