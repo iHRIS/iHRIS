@@ -1,11 +1,13 @@
-const hbs = require('nodemailer-express-handlebars')
 
 const nodemailer = require('nodemailer');
+const handlebars = require("handlebars");
+
 
 const path = require('path');
+const fs = require("fs");
 
 
-const sendMail = async (params) => {
+const sendMail = async (email, subject, payload, template) => {
 
   const transporter = nodemailer.createTransport({
     host: 'smtp.gmail.com',
@@ -18,28 +20,17 @@ const sendMail = async (params) => {
     }
   });
 
-  // point to the template folder
-  const handlebarOptions = {
-    viewEngine: {
-      partialsDir: path.resolve('./views/'),
-      defaultLayout: false,
-    },
-    viewPath: path.resolve('./views/'),
-  };
 
-  // use a template file with nodemailer
-  transporter.use('compile', hbs(handlebarOptions))
+  const source = fs.readFileSync(path.join(__dirname, template), "utf8");
+  const compiledTemplate = handlebars.compile(source);
 
+  
   // mail options 
   var mailOptions = {
     from: '"Systems Admin" <jeremyjabar@gmail.com>',
-    to: params.to,
-    subject: 'OTP  Verification',
-    template: 'email',
-    context: {
-      name: "Systems Admin",
-      otp: params.otp
-    }
+    to: email,
+    subject: subject,
+    html: compiledTemplate(payload)
   };
 
   // trigger the sending of the E-mail

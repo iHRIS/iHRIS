@@ -5,13 +5,21 @@ const user = require('../modules/user')
 const logger = require('../winston')
 const fhirAudit = require('../modules/fhirAudit')
 const jwt = require('jsonwebtoken');
+const crypto = require('crypto');
+const { promisify } = require('util');
+const bcrypt = require("bcrypt");
+const bcryptSalt = process.env.BCRYPT_SALT;
+const clientURL = process.env.CLIENT_URL;
+
+
 
 // email 
-const email = require('../modules/sendEmail')
+const emailEmail = require('../modules/sendEmail')
 
 const passport = require('passport')
 const s = require('connect-redis')
 const { object } = require('webidl-conversions')
+const { request } = require('http')
 const GoogleStrategy = require('passport-google-oauth20').Strategy
 const LocalStrategy = require('passport-local').Strategy
 const CustomStrategy = require('passport-custom').Strategy
@@ -160,10 +168,6 @@ router.post("/login", passport.authenticate('local', {}), (req, res) => {
 
           let codeDetails = userObj.resource.extension.find(ext => ext.url === "http://ihris.org/fhir/StructureDefinition/ihris-user-otp").extension.find(ext => ext.url === "code")
 
-          let params = {
-            to: req.user.resource.telecom[0].value,
-            otp: otp
-          }
 
           if (codeDetails) {
 
@@ -171,9 +175,14 @@ router.post("/login", passport.authenticate('local', {}), (req, res) => {
 
             userObj.update().then((response) => {
 
-              const sendEmail = email(params);
-
-              logger.info("SENT EMAIL", sendEmail.message)
+              sendEmail(
+                userObj.resource.telecom[0].value,
+                "OTP Verification",
+                {
+                  name: userObj.resource.name[0].text.name,
+                  otp: otp
+                },
+                "./views/email.handlebars");
 
               res.status(200).json({ ok: true, name: name, otp: otp })
             }).catch((err) => {
@@ -183,7 +192,10 @@ router.post("/login", passport.authenticate('local', {}), (req, res) => {
         }
 
       })
-      .catch((err) => { })
+      .catch((err) => {
+        res.status(400).json({ ok: false, message: "failed to user object" })
+
+      })
 
 
   } catch (err) {
@@ -218,7 +230,14 @@ router.post("/verify-otp", (req, res) => {
             "ok": true,
             "message": "OTP verified successfully"
           });
-        }).catch((err) => { })
+        }).catch((err) => {
+          fhirAudit.login(userObj, req.ip, false, email)
+          return res.status(400).json({
+            "ok": false,
+            "message": "Failed to update user object"
+          });
+
+        })
 
       } else {
         fhirAudit.login(userObj, req.ip, false, email)
@@ -240,10 +259,132 @@ router.post("/verify-otp", (req, res) => {
 // send  password reset request
 router.post("/password-reset", async (req, res) => {
 
+  let resetEmail = req.body.email
+
+  if (resetEmail === undefined) {
+    logger.error("No email provided.")
+    return res.status(400).send();
+  }
+
+  try {
+    user.lookupByEmail(resetEmail).then((userObj) => {
+      if (userObj) {
+
+        //  generate a token
+        const resetToken = (await promisify(crypto.randomBytes)(64)).toString('hex');
+
+        const hash = await bcrypt.hash(resetToken, Number(bcryptSalt));
+
+        // update the password reset token and password reset expiry in the user object
+        userObj.resource.extension.find(ext => ext.url === "http://ihris.org/fhir/StructureDefinition/ihris-password").extension.find(ext => ext.url === "resetPasswordToken").valueString = hash
+
+        userObj.resource.extension.find(ext => ext.url === "http://ihris.org/fhir/StructureDefinition/ihris-password").extension.find(ext => ext.url === "resetPasswordExpiry").valueString = new Date(Date.now() + (60 * 60 * 1000)).toDateString
+
+
+        userObj.update().then((response) => {
+
+          const link = `${clientURL}/passwordReset?token=${resetToken}&id=${userObj.resource.id}`;
+
+
+          sendEmail(
+            userObj.resource.telecom[0].value,
+            "Password Reset Request",
+            {
+              name: userObj.resource.name[0].text.name,
+              link: link
+            },
+            "./views/requestResetPassword.handlebars");
+
+          return res.status(200).json({
+            "ok": true,
+            "message": "Password reset request sent successfully",
+            "link": link
+          });
+        }).catch((err) => { })
+      }
+    }).catch((err) => { });
+  } catch (err) {
+    logger.error(err.message)
+    return res.status(500).send();
+
+  }
+
+
 })
 
 // reset your password
 router.post("/password-reset/:userId/:token", async (req, res) => {
+
+  let token = req.params.token;
+  let userId = req.params.userId
+  let newPassword = req.body.newPassword;
+  let confirmPassword = req.body.confirmPassword;
+
+  user.find(userId).then((userObj) => {
+
+    let resetPasswordToken = userObj.resource.extension.find(ext => ext.url === "http://ihris.org/fhir/StructureDefinition/ihris-password").extension.find(ext => ext.url === "resetPasswordToken").valueString
+
+    // check if user objct has a reset token
+    if (!resetPasswordToken) {
+      logger.error("Invalid or expired password reset token")
+      return false
+    }
+
+    const isValid = await bcrypt.compare(token, resetPasswordToken)
+
+    // check if token hash is valid
+    if (isValid) {
+      logger.error("Invalid or expired password reset token")
+      return false
+    }
+
+    if (!newPassword.matches('^(?=.*\\\\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$') || newPassword !== confirmPassword) {
+      logger.error("Password does not meet the requirements")
+      return false
+    }
+
+    // check if provided password is valid
+    user.hashPassword(newPassword, "").then((response) => {
+
+      userObj.resource.extension.find(ext => ext.url === "http://ihris.org/fhir/StructureDefinition/ihris-password").extension.find(ext => ext.url === "password").valueString = response.hash
+      userObj.resource.extension.find(ext => ext.url === "http://ihris.org/fhir/StructureDefinition/ihris-password").extension.find(ext => ext.url === "salt").valueString = response.salt
+
+
+      userObj.update().then((response) => {
+
+
+        sendEmail(
+          userObj.resource.telecom[0].value,
+          "Password Reset Successfully",
+          {
+            name: userObj.resource.name[0].text.name,
+          },
+          "./views/resetPassword.handlebars"
+        );
+
+        return res.status(200).json({
+          "ok": true,
+          "message": "Password reset successfully"
+        });
+      }).catch((err) => {
+        logger.error(err.message)
+        return res.status(500).send();
+
+      })
+
+    }).catch((err) => {
+      logger.error(err.message)
+      return false
+    });
+
+
+  }).catch((err) => {
+    logger.error(err.message)
+    return res.status(500).send();
+  })
+
+  // check if the user exists and return password reset token for the user and the token expiry
+
 
 })
 
