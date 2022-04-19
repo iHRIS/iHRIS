@@ -253,7 +253,7 @@ router.post("/verify-otp", (req, res) => {
 
 
 // send  password reset request
-router.post("/password-reset", async (req, res) => {
+router.post("/password-reset-request", async (req, res) => {
 
   let resetEmail = req.body.email
 
@@ -263,12 +263,12 @@ router.post("/password-reset", async (req, res) => {
   }
 
   try {
-    user.lookupByEmail(resetEmail).then((userObj) => {
+    user.lookupByEmail(resetEmail.toString()).then((userObj) => {
       if (userObj) {
 
         //  generate a token
         let resetToken = crypto.randomBytes(64).toString('hex')
-        let hash = crypto.pbkdf2Sync(resetToken, 1000, 64, 'sha512').toString('hex')
+        let hash = crypto.pbkdf2Sync(userObj.resource.telecom[0].value, resetToken, 1000, 64, 'sha512').toString('hex')
 
         // update the password reset token and password reset expiry in the user object
         userObj.resource.extension.find(ext => ext.url === "http://ihris.org/fhir/StructureDefinition/ihris-password").extension.find(ext => ext.url === "resetPasswordToken").valueString = hash
@@ -278,7 +278,7 @@ router.post("/password-reset", async (req, res) => {
 
         userObj.update().then((response) => {
 
-          const link = `${clientURL}/passwordReset?token=${resetToken}&userId=${userObj.resource.id}`;
+          const link = `${clientURL}/password-reset?token=${resetToken}&userId=${userObj.resource.id}`;
 
 
           sendEmail(
@@ -288,16 +288,29 @@ router.post("/password-reset", async (req, res) => {
               name: userObj.resource.name[0].text.name,
               link: link
             },
-            "./views/requestResetPassword.handlebars");
+            "../views/requestResetPassword.handlebars");
 
           return res.status(200).json({
             "ok": true,
             "message": "Password reset request sent successfully",
             "link": link
           });
-        }).catch((err) => { })
+        }).catch((err) => {
+          logger.error(err.message)
+          res.status(500).json({
+            "ok": false,
+            "message": "Failed to update user object"
+          })
+        })
       }
-    }).catch((err) => { });
+    }).catch((err) => {
+      logger.error(err.message)
+      res.status(500).json({
+        "ok": false,
+        "message": "Failed to lookup user object"
+      })
+
+    });
   } catch (err) {
     logger.error(err.message)
     return res.status(500).send();
@@ -308,10 +321,10 @@ router.post("/password-reset", async (req, res) => {
 })
 
 // reset your password
-router.post("/password-reset/:token/:userId", async (req, res) => {
+router.post("/password-reset", async (req, res) => {
 
-  let token = req.params.token;
-  let userId = req.params.userId
+  let token = req.query.token;
+  let userId = req.query.userId
   let newPassword = req.body.newPassword;
   let confirmPassword = req.body.confirmPassword;
 
@@ -324,72 +337,73 @@ router.post("/password-reset/:token/:userId", async (req, res) => {
     // check if user objct has a reset token
     if (!resetPasswordToken) {
       logger.error("Invalid or expired password reset token")
-      return false
+      return res.status(400).json({ ok: false, message: "Invalid or expired password reset token" })
     }
 
     // check if the new password and confirm password match
     if (newPassword !== confirmPassword) {
       logger.error("New password and confirm password do not match")
-      return false
+      return res.status(400).json({ ok: false, message: "New password and confirm password do not match" })
     }
 
-    if (!newPassword.matches('^(?=.*\\\\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$') || newPassword !== confirmPassword) {
-      logger.error("Password does not meet the requirements")
-      return false
-    }
+    // if (!newPassword.match('^(?=.*\\\\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$')) {
+    //   logger.error("Password does not meet the requirements")
+    //   return false
+    // }
 
 
-    let hashedToken = crypto.pbkdf2Sync(token, 1000, 64, 'sha512').toString('hex')
+    let hashedToken = crypto.pbkdf2Sync(userObj.resource.telecom[0].value, token, 1000, 64, 'sha512').toString('hex')
 
     if (hashedToken === resetPasswordToken) {
       // check if the token has expired
       if (new Date(resetPasswordExpiry) < new Date()) {
         logger.error("Invalid or expired password reset token")
-        return false
+        return res.status(400).json({
+          "ok": false,
+          "message": "Invalid or expired password reset token"
+        });
       }
     }
 
-    // check if provided password is valid
-    user.hashPassword(newPassword, "").then((response) => {
-
-      userObj.resource.extension.find(ext => ext.url === "http://ihris.org/fhir/StructureDefinition/ihris-password").extension.find(ext => ext.url === "password").valueString = response.hash
-      userObj.resource.extension.find(ext => ext.url === "http://ihris.org/fhir/StructureDefinition/ihris-password").extension.find(ext => ext.url === "salt").valueString = response.salt
 
 
-      userObj.update().then((response) => {
+    userObj.resource.extension.find(ext => ext.url === "http://ihris.org/fhir/StructureDefinition/ihris-password").extension.find(ext => ext.url === "password").valueString = hashedToken
+    userObj.resource.extension.find(ext => ext.url === "http://ihris.org/fhir/StructureDefinition/ihris-password").extension.find(ext => ext.url === "salt").valueString = token
+
+    userObj.update().then((resp) => {
 
 
-        sendEmail(
-          userObj.resource.telecom[0].value,
-          "Password Reset Successfully",
-          {
-            name: userObj.resource.name[0].text.name,
-          },
-          "./views/resetPassword.handlebars"
-        );
+      sendEmail(
+        userObj.resource.telecom[0].value,
+        "Password Reset Successfully",
+        {
+          name: userObj.resource.name[0].text.name,
+        },
+        "../views/resetPassword.handlebars"
+      );
 
-        return res.status(200).json({
-          "ok": true,
-          "message": "Password reset successfully"
-        });
-      }).catch((err) => {
-        logger.error(err.message)
-        return res.status(500).send();
-
-      })
-
+      return res.status(200).json({
+        "ok": true,
+        "message": "Password reset successfully"
+      });
     }).catch((err) => {
       logger.error(err.message)
-      return false
-    });
+      return res.status(500).json({
+        "ok": false,
+        "message": "Failed to update user object" + err.message
+      });
+
+    })
 
 
   }).catch((err) => {
     logger.error(err.message)
-    return res.status(500).send();
+    return res.status(500).json({
+      "ok": false,
+      "message": "Failed to lookup user object" + err.message
+    });
   })
 
-  // check if the user exists and return password reset token for the user and the token expiry
 
 
 })

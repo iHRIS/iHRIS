@@ -17,7 +17,8 @@
         {
           "url": "salt",
           "valueString": "239cfeb1222bfb394549125b234e668e"
-        },        {
+        },
+        {
           "url": "resetPasswordToken",
           "valueString": "PASS"
         },

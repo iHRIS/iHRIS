@@ -177,6 +177,16 @@ const workflowUser = {
                   url: "salt",
                   valueString: salt
                 })
+                passwordExt.push(
+                  {
+                    "url": "resetPasswordToken",
+                    "valueString": "PASS"
+                  },
+                  {
+                    "url": "resetPasswordExpiry",
+                    "valueString": "PASS"
+                  }
+                )
                 extensions.push({
                   url: "http://ihris.org/fhir/StructureDefinition/ihris-password",
                   extension: passwordExt
@@ -192,10 +202,8 @@ const workflowUser = {
               resolve(await workflowUser.outcome("No Password set for this User"))
             }
 
-
             // otp item
             extensions.push({
-
               url: "http://ihris.org/fhir/StructureDefinition/ihris-user-otp",
               extension: [
                 {
@@ -209,9 +217,6 @@ const workflowUser = {
               ]
             }
             );
-
-
-
             // formulate user object
             let userName = userEmail.split('@')
             let newUser = {
