@@ -21,6 +21,7 @@
     "express-session": "^1.17.2",
     "fhir2es": "^4.0.2",
     "fhirpath": "^2.9.0",
+    "googleapis": "^100.0.0",
     "http-proxy-middleware": "^1.3.1",
     "is-empty": "^1.2.0",
     "jest-cucumber": "^3.0.1",

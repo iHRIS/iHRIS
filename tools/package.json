@@ -7,7 +7,10 @@
     "axios": "^0.21.1",
     "fhir": "^4.7.8",
     "nconf": "^0.10.0",
-    "urijs": "^1.19.6"
+    "googleapis": "~32.0.0",
+    "urijs": "^1.19.6",
+    "dotenv": "~4.0.0"
+
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
