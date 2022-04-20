@@ -6,7 +6,6 @@
         <v-divider />
         <v-card-text>
           <v-form
-            v-model="isValid"
             ref="resetPasswordForm"
             lazy-validation
             class="elevation-0"
@@ -54,7 +53,7 @@ export default {
         newPassword: "",
         confirmPassword: "",
       },
-      isValid: false,
+      // isValid: false,
     };
   },
   computed: {
@@ -67,13 +66,13 @@ export default {
   },
   methods: {
     submit: function () {
-      if (this.isValid) {
+      // if (this.isValid) {
         this.dialog = false;
         this.$store.dispatch("resetPassword", {
           email: this.data.email,
           newPassword: this.form.newPassword,
         });
-      }
+      // }
     },
   },
 };
