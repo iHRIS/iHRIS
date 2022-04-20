@@ -55,7 +55,7 @@
                 class="mx-2"
                 @click="forgotPassword"
                 outlined
-                small
+                big
                 color="primary"
               >
                 Forgot Password?</v-btn
@@ -63,6 +63,7 @@
               <v-spacer></v-spacer>
 
               <v-btn
+                class="mx-2"
                 color="success"
                 :loading="loggingin"
                 :disabled="loggingin"
