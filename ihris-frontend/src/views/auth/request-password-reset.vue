@@ -29,7 +29,6 @@
 <script>
 export default {
   name: "request-password-reset",
-  props: ["data"],
   data: function () {
     return {
       show_pass: false,

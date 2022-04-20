@@ -1,6 +1,5 @@
 import Vue from "vue"
 import VueRouter from "vue-router"
-//import Home from "../views/home.vue"
 import Static from "../views/static-page.vue"
 
 
@@ -11,6 +10,7 @@ const routes = [
   {
     path: "/",
     name: "login",
+    component: () => import(/* webpackChunkName: "about" */ '../views/auth/sign-in.vue'),
     redirect: "/sign-in",
     children: [
       {
@@ -42,6 +42,16 @@ const routes = [
     component: () => import('../views/dashboard.vue'),
     redirect: "/dashboard/home",
     children: [
+      {
+        path: "/dashboard/home",
+        name: "home",
+        // route level code-splitting
+        // this generates a separate chunk (about.[hash].js) for this route
+        // which is lazy-loaded when the route is visited.
+        // component: () => import( /* webpackChunkName: "dashboard" */ "../views/home-nav.vue")
+        component: () => import( /* webpackChunkName: "dashboard" */ "../views/home-nav.vue"),
+
+      },
       {
         path: '/page/blockContacts',
         name: 'mhero',
@@ -138,16 +148,7 @@ const routes = [
         // which is lazy-loaded when the route is visited.
         component: () => import( /* webpackChunkName: "questionnaire" */ "../views/fhir-page-questionnaire.vue")
       },
-      // {
-      //   path: "/dashboard/home",
-      //   name: "home",
-      //   // route level code-splitting
-      //   // this generates a separate chunk (about.[hash].js) for this route
-      //   // which is lazy-loaded when the route is visited.
-      //   // component: () => import( /* webpackChunkName: "dashboard" */ "../views/home-nav.vue")
-      //   component: () => import( /* webpackChunkName: "dashboard" */ "../views/home-nav.vue"),
 
-      // },
       {
         path: "/bulk-registration",
         name: "bulk_registration",

@@ -1,57 +1,80 @@
 <template>
-  <div>
-    <v-row>
-      <!-- <v-avatar size="100px" class="elevation-0">
-        <img src="/images/" + header.logo alt=""
-      /></v-avatar> -->
-      <v-form>
-        <v-card min-width="400px">
-          <v-card-title class="headline info white--text" dark primary-title
-            >Login</v-card-title
-          >
-          <v-card-text>
-            <v-text-field
-              v-model="username"
-              label="Email Address"
-              required
-              prepend-icon="mdi-email"
-            ></v-text-field>
-            <v-text-field
-              v-model="password"
-              label="Password"
-              required
-              :append-icon="show_pass ? 'mdi-eye' : 'mdi-eye-off'"
-              :type="show_pass ? 'text' : 'password'"
-              @click:append="show_pass = !show_pass"
-              prepend-icon="mdi-form-textbox-password"
-              @keyup.native.enter="submit"
-            ></v-text-field>
-          </v-card-text>
-          <v-divider></v-divider>
-          <v-card-actions>
-            <v-snackbar
-              v-model="snackbar"
-              :absolute="absolute"
-              color="secondary"
-            >
-              {{ message }}
-              <v-btn color="warning" text @click="snackbar = false"
-                >Close</v-btn
+  <v-main>
+    <v-row align="center" justify="center" style="height: 100vh">
+      <v-col>
+        <v-row align="center" justify="center">
+          <v-avatar size="100">
+            <img src="/images/logo.png" alt="NHWR"
+          /></v-avatar>
+        </v-row>
+
+        <v-row align="center" justify="center" class="mt-4 mb-4">
+          <h2>National Health Workers Registry</h2>
+        </v-row>
+
+        <v-row align="center" justify="center">
+          <v-card min-width="500px">
+            <v-card-title class="info white--text">
+              <v-row align="center" justify="center">
+                <h4>Sign In</h4>
+              </v-row>
+            </v-card-title>
+
+            <v-card-text>
+              <v-text-field
+                v-model="username"
+                label="Email Address"
+                required
+                prepend-icon="mdi-email"
+              ></v-text-field>
+              <v-text-field
+                v-model="password"
+                label="Password"
+                required
+                :append-icon="show_pass ? 'mdi-eye' : 'mdi-eye-off'"
+                :type="show_pass ? 'text' : 'password'"
+                @click:append="show_pass = !show_pass"
+                prepend-icon="mdi-form-textbox-password"
+                @keyup.native.enter="submit"
+              ></v-text-field>
+            </v-card-text>
+            <v-divider></v-divider>
+            <v-card-actions>
+              <v-snackbar
+                v-model="snackbar"
+                :absolute="absolute"
+                color="secondary"
               >
-            </v-snackbar>
-            <v-spacer></v-spacer>
-            <v-btn
-              color="success"
-              :loading="loggingin"
-              :disabled="loggingin"
-              @click="submit"
-              >Login</v-btn
-            >
-          </v-card-actions>
-        </v-card>
-      </v-form>
+                {{ message }}
+                <v-btn color="warning" text @click="snackbar = false"
+                  >Close</v-btn
+                >
+              </v-snackbar>
+
+              <v-btn
+                class="mx-2"
+                @click="forgotPassword"
+                outlined
+                small
+                color="primary"
+              >
+                Forgot Password?</v-btn
+              >
+              <v-spacer></v-spacer>
+
+              <v-btn
+                color="success"
+                :loading="loggingin"
+                :disabled="loggingin"
+                @click="submit"
+                >Login</v-btn
+              >
+            </v-card-actions>
+          </v-card>
+        </v-row>
+      </v-col>
     </v-row>
-  </div>
+  </v-main>
 </template>
 
 <script>
@@ -94,7 +117,7 @@ export default {
                 this.message = "Login successful";
                 this.$emit("loggedin", data.name);
                 this.$router.push({
-                  name: "home",
+                  name: "dashboard",
                 });
               })
               .catch((err) => {
@@ -116,6 +139,11 @@ export default {
           this.snackbar = true;
           this.message = "Login failed: " + err.message;
         });
+    },
+    forgotPassword() {
+      this.$router.push({
+        path: "/forgot-password",
+      });
     },
   },
 };

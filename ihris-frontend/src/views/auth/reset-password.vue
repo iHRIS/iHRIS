@@ -44,7 +44,6 @@
 <script>
 export default {
   name: "reset-password",
-  props: ["data"],
   data: function () {
     return {
       show_pass: false,
