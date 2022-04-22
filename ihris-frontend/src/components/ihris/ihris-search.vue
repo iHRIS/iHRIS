@@ -188,7 +188,7 @@ export default {
       message: "",
       error: [],
       snackbar: false,
-      dialog: true,
+      dialog: false,
       progress: 0,
       excelData: {
         fileName: "",
