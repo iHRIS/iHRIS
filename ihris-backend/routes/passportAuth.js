@@ -169,16 +169,21 @@ router.post("/login", passport.authenticate('local', {}), (req, res) => {
 
             userObj.update().then((response) => {
 
-              sendEmail(
-                response.telecom[0].value,
-                "OTP Verification",
-                {
-                  name: response.name[0].text,
-                  otp: otp
-                },
-                "../views/email.handlebars");
+              if (response.ok) {
+                sendEmail(
+                  response.telecom[0].value,
+                  "OTP Verification",
+                  {
+                    name: response.name[0].text,
+                    otp: otp
+                  },
+                  "../views/email.handlebars");
+                res.status(200).json({ ok: true, name: name, otp: otp, user: response })
 
-              res.status(200).json({ ok: true, name: name, otp: otp, user: response })
+              }
+
+
+
             }).catch((err) => {
               logger.error(err.message)
               res.status(400).json({ ok: false, message: "failed to user object otp" })
@@ -282,20 +287,24 @@ router.post("/password-reset-request", async (req, res) => {
           const link = `${clientURL}/password-reset?token=${resetToken}&userId=${userObj.resource.id}`;
 
 
-          sendEmail(
-            response.telecom[0].value,
-            "Password Reset Request",
-            {
-              name: response.name[0].text,
-              link: link
-            },
-            "../views/requestResetPassword.handlebars");
+          if (response.ok) {
+            sendEmail(
+              response.telecom[0].value,
+              "Password Reset Request",
+              {
+                name: response.name[0].text,
+                link: link
+              },
+              "../views/requestResetPassword.handlebars");
 
-          return res.status(200).json({
-            "ok": true,
-            "message": "Password reset request sent successfully",
-            "link": link
-          });
+            return res.status(200).json({
+              "ok": true,
+              "message": "Password reset request sent successfully",
+              "link": link
+            });
+          }
+
+
         }).catch((err) => {
           logger.error(err.message)
           res.status(500).json({
@@ -373,20 +382,23 @@ router.post("/password-reset", async (req, res) => {
 
     userObj.update().then((resp) => {
 
+      if (resp.ok) {
+        sendEmail(
+          userObj.resource.telecom[0].value,
+          "Password Reset Successfully",
+          {
+            name: resp.resource.name[0].text,
+          },
+          "../views/resetPassword.handlebars"
+        );
 
-      sendEmail(
-        userObj.resource.telecom[0].value,
-        "Password Reset Successfully",
-        {
-          name: userObj.resource.name[0].text,
-        },
-        "../views/resetPassword.handlebars"
-      );
+        return res.status(200).json({
+          "ok": true,
+          "message": "Password reset successfully"
+        });
+      }
 
-      return res.status(200).json({
-        "ok": true,
-        "message": "Password reset successfully"
-      });
+
     }).catch((err) => {
       logger.error(err.message)
       return res.status(500).json({
