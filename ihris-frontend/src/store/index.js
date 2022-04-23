@@ -7,7 +7,8 @@ export default new Vuex.Store({
   state: {
     user: {
       loggedin: false,
-      name: ""
+      name: "",
+      email: ""
     },
     idp: 'ihris',
     security_off: false,
@@ -24,22 +25,22 @@ export default new Vuex.Store({
     }
   },
   mutations: {
-    login( state, data ) {
+    login(state, data) {
       state.user.loggedin = true
       state.user.name = data
     },
-    logout( state ) {
+    logout(state) {
       state.user.loggedin = false
       state.user.name = ""
     },
-    securityOff( state, data ) {
+    securityOff(state, data) {
       state.security_off = data
     },
-    closeMessage( state ) {
+    closeMessage(state) {
       state.message.active = false
     },
-    setMessage( state, data ) {
-      if ( typeof data === "string" ) {
+    setMessage(state, data) {
+      if (typeof data === "string") {
         state.message.type = "info"
         state.message.timeout = 5000
         state.message.text = data

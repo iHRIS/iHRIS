@@ -15,6 +15,8 @@ import 'whatwg-fetch'
 import fhirpath from "fhirpath"
 import fhirutils from "./plugins/fhirutils"
 import VueHtmlToPaper from "vue-html-to-paper";
+import OtpInput from "@bachdgvn/vue-otp-input";
+
 
 
 Vue.config.productionTip = false
@@ -39,6 +41,7 @@ Vue.use(VueHtmlToPaper, options);
 
 
 Vue.component('apexchart', VueApexCharts)
+Vue.component("v-otp-input", OtpInput);
 Vue.use(HighchartsVue);
 exportingInit(Highcharts);
 Vue.use(require('vue-moment'));

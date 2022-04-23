@@ -6,7 +6,7 @@
       clipped-left
       clipped-right
     >
-      <router-link to="/"
+      <router-link to="/dashboard"
         ><v-img
           :src="'/images/' + header.logo"
           contain

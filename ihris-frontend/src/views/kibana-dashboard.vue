@@ -1,5 +1,5 @@
 <template>
-  <iframe :src="'kibana/app/kibana#/dashboard/'+$route.params.id+'?embed=true'" width="100%" height="100%"></iframe>
+  <iframe :src="'kibana/app/kibana#/dashboard/a1685950-b387-11ec-b785-77bd68b3bb25?embed=true'" width="100%" height="100%"></iframe>
 </template>
 
 <script>

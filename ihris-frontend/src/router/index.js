@@ -10,7 +10,7 @@ const routes = [
   {
     path: "/",
     name: "login",
-    component: () => import(/* webpackChunkName: "about" */ '../views/auth/sign-in.vue'),
+    component: () => import(/* webpackChunkName: "about" */ '../views/auth/auth.vue'),
     redirect: "/sign-in",
     children: [
       {
@@ -49,7 +49,7 @@ const routes = [
         // this generates a separate chunk (about.[hash].js) for this route
         // which is lazy-loaded when the route is visited.
         // component: () => import( /* webpackChunkName: "dashboard" */ "../views/home-nav.vue")
-        component: () => import( /* webpackChunkName: "dashboard" */ "../views/home-nav.vue"),
+        component: () => import( /* webpackChunkName: "dashboard" */ "../views/home.vue"),
 
       },
       {
