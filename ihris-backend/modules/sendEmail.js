@@ -46,6 +46,7 @@ const sendMail = async (email, subject, payload, template) => {
   const source = fs.readFileSync(path.join(__dirname, template), "utf8");
   const compiledTemplate = handlebars.compile(source);
 
+  console.log('payload: ', JSON.stringify(payload,null,2));
 
   // mail options 
   var mailOptions = {
@@ -54,6 +55,8 @@ const sendMail = async (email, subject, payload, template) => {
     subject: subject,
     html: compiledTemplate(payload)
   };
+
+  console.log('mailOptions: ', JSON.stringify(mailOptions,null,2));
 
   // trigger the sending of the E-mail
   transporter.sendMail(mailOptions, function (error, info) {

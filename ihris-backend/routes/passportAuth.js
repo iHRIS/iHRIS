@@ -173,7 +173,7 @@ router.post("/login", passport.authenticate('local', {}), (req, res) => {
                 response.telecom[0].value,
                 "OTP Verification",
                 {
-                  name: response.name[0].text.name,
+                  name: response.name[0].text,
                   otp: otp
                 },
                 "../views/email.handlebars");
@@ -286,7 +286,7 @@ router.post("/password-reset-request", async (req, res) => {
             response.telecom[0].value,
             "Password Reset Request",
             {
-              name: response.name[0].text.name,
+              name: response.name[0].text,
               link: link
             },
             "../views/requestResetPassword.handlebars");
@@ -378,7 +378,7 @@ router.post("/password-reset", async (req, res) => {
         userObj.resource.telecom[0].value,
         "Password Reset Successfully",
         {
-          name: userObj.resource.name[0].text.name,
+          name: userObj.resource.name[0].text,
         },
         "../views/resetPassword.handlebars"
       );
