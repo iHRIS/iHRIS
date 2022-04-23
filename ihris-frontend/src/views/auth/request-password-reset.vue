@@ -83,22 +83,22 @@ export default {
       var formData = new URLSearchParams();
       formData.append("email", this.form.email);
       this.$refs.requestPasswordResetForm.validate();
-      fetch("/auth/request-password-reset", {
+      fetch("/auth/password-reset-request", {
         method: "POST",
         body: formData,
       })
         .then((response) => response.json())
         .then((data) => {
           this.loggingin = false;
-          console.log(data);
-          // if (data.success) {
-          //   this.message = data.message;
-          //   this.snackbar = true;
-          // } else {
-          //   this.message = data.message;
-          //   this.snackbar = true;
-          // }
+          if (data.ok) {
+            this.message = data.message;
+            this.snackbar = true;
+          } else {
+            this.message = data.message;
+            this.snackbar = true;
+          }
         })
+        
         .catch((error) => {
           this.loggingin = false;
           this.message = error;

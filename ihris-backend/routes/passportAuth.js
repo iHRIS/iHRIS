@@ -170,15 +170,15 @@ router.post("/login", passport.authenticate('local', {}), (req, res) => {
             userObj.update().then((response) => {
 
               sendEmail(
-                userObj.resource.telecom[0].value,
+                response.telecom[0].value,
                 "OTP Verification",
                 {
-                  name: userObj.resource.name[0].text.name,
+                  name: response.name[0].text.name,
                   otp: otp
                 },
                 "../views/email.handlebars");
 
-              res.status(200).json({ ok: true, name: name, otp: otp })
+              res.status(200).json({ ok: true, name: name, otp: otp, user: response })
             }).catch((err) => {
               logger.error(err.message)
               res.status(400).json({ ok: false, message: "failed to user object otp" })
@@ -224,7 +224,8 @@ router.post("/verify-otp", (req, res) => {
           fhirAudit.login(userObj, req.ip, true, email)
           return res.status(200).json({
             "ok": true,
-            "message": "OTP verified successfully"
+            "message": "OTP verified successfully",
+            "user": response
           });
         }).catch((err) => {
           fhirAudit.login(userObj, req.ip, false, email)
@@ -282,10 +283,10 @@ router.post("/password-reset-request", async (req, res) => {
 
 
           sendEmail(
-            userObj.resource.telecom[0].value,
+            response.telecom[0].value,
             "Password Reset Request",
             {
-              name: userObj.resource.name[0].text.name,
+              name: response.name[0].text.name,
               link: link
             },
             "../views/requestResetPassword.handlebars");

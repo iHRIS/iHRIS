@@ -10,6 +10,7 @@
     "lint": "vue-cli-service lint"
   },
   "dependencies": {
+    "@bachdgvn/vue-otp-input": "^1.0.8",
     "apexcharts": "^3.33.0",
     "core-js": "^3.6.5",
     "ethiopic-calendar": "^2.0.0",
@@ -19,6 +20,7 @@
     "highcharts-vue": "^1.4.0",
     "idle-vue": "^2.0.5",
     "keycloak-js": "^15.0.2",
+    "less-loader": "^10.2.0",
     "vue": "^2.6.11",
     "vue-apexcharts": "^1.6.2",
     "vue-cookies": "^1.7.4",

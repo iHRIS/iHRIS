@@ -112,13 +112,15 @@ export default {
             response
               .json()
               .then((data) => {
+                console.log(data)
                 this.dialog = false;
                 //this.absolute=false
                 this.snackbar = true;
                 this.message = "Login successful";
-                this.$emit("loggedin", data.name);
+                this.$store.state.user.email = data.user.telecom[0].value
+                // this.$emit("loggedin", data.name);
                 this.$router.push({
-                  name: "dashboard",
+                  name: "verify-otp",
                 });
               })
               .catch((err) => {
@@ -146,6 +148,12 @@ export default {
         path: "/forgot-password",
       });
     },
+
+    verifyOtp(){
+      this.$router.push({
+        path:"/verify-otp"
+      })
+    }
   },
 };
 </script>
