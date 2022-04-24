@@ -61,7 +61,7 @@
                 color="success"
                 :loading="loggingin"
                 :disabled="loggingin"
-                @click="submit"
+                @click="handleSubmit"
                 >Submit</v-btn
               >
             </v-card-actions>
@@ -110,13 +110,17 @@ export default {
         })
           .then((response) => response.json())
           .then((data) => {
+            console.log(data);
             if (data.ok) {
               this.message = "OTP verified successfully";
               this.snackbar = true;
               this.loggingin = false;
               this.$store.commit("user", data);
-              this.$emit("loggedin", data.name[0].text);
-              this.$router.push("/dashboard");
+              this.$emit("loggedin", data.user.name[0].text);
+              // this.$router.push("/dashboard");
+              this.$router.push({
+                  name: "dashboard",
+                });
             } else {
               this.message = data.message;
               this.snackbar = true;

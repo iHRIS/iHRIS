@@ -162,26 +162,21 @@ router.post("/login", passport.authenticate('local', {}), (req, res) => {
 
           let codeDetails = userObj.resource.extension.find(ext => ext.url === "http://ihris.org/fhir/StructureDefinition/ihris-user-otp").extension.find(ext => ext.url === "code")
 
-
           if (codeDetails) {
 
             userObj.resource.extension.find(ext => ext.url === "http://ihris.org/fhir/StructureDefinition/ihris-user-otp").extension.find(ext => ext.url === "code").valueString = otp
 
             userObj.update().then((response) => {
 
-              if (response.ok) {
-                sendEmail(
-                  response.telecom[0].value,
-                  "OTP Verification",
-                  {
-                    name: response.name[0].text,
-                    otp: otp
-                  },
-                  "../views/email.handlebars");
-                res.status(200).json({ ok: true, name: name, otp: otp, user: response })
-
-              }
-
+              sendEmail(
+                response.telecom[0].value,
+                "OTP Verification",
+                {
+                  name: response.name[0].text,
+                  otp: otp
+                },
+                "../views/email.handlebars");
+              res.status(200).json({ ok: true, name: name, otp: otp, user: response })
 
 
             }).catch((err) => {
@@ -227,6 +222,14 @@ router.post("/verify-otp", (req, res) => {
 
         userObj.update().then((response) => {
           fhirAudit.login(userObj, req.ip, true, email)
+          console.log(JSON.stringify(response, null, 2))
+          sendEmail(
+            response.telecom[0].value,
+            "Successful Login",
+            {
+              name: response.name[0].text,
+            },
+            "../views/welcome.handlebars");
           return res.status(200).json({
             "ok": true,
             "message": "OTP verified successfully",
@@ -286,24 +289,20 @@ router.post("/password-reset-request", async (req, res) => {
 
           const link = `${clientURL}/password-reset?token=${resetToken}&userId=${userObj.resource.id}`;
 
+          sendEmail(
+            response.telecom[0].value,
+            "Password Reset Request",
+            {
+              name: response.name[0].text,
+              link: link
+            },
+            "../views/requestResetPassword.handlebars");
 
-          if (response.ok) {
-            sendEmail(
-              response.telecom[0].value,
-              "Password Reset Request",
-              {
-                name: response.name[0].text,
-                link: link
-              },
-              "../views/requestResetPassword.handlebars");
-
-            return res.status(200).json({
-              "ok": true,
-              "message": "Password reset request sent successfully",
-              "link": link
-            });
-          }
-
+          return res.status(200).json({
+            "ok": true,
+            "message": "Password reset request sent successfully",
+            "link": link
+          });
 
         }).catch((err) => {
           logger.error(err.message)
@@ -382,21 +381,20 @@ router.post("/password-reset", async (req, res) => {
 
     userObj.update().then((resp) => {
 
-      if (resp.ok) {
-        sendEmail(
-          userObj.resource.telecom[0].value,
-          "Password Reset Successfully",
-          {
-            name: resp.resource.name[0].text,
-          },
-          "../views/resetPassword.handlebars"
-        );
+      sendEmail(
+        userObj.resource.telecom[0].value,
+        "Password Reset Successfully",
+        {
+          name: resp.resource.name[0].text,
+        },
+        "../views/resetPassword.handlebars"
+      );
 
-        return res.status(200).json({
-          "ok": true,
-          "message": "Password reset successfully"
-        });
-      }
+      return res.status(200).json({
+        "ok": true,
+        "message": "Password reset successfully"
+      });
+
 
 
     }).catch((err) => {
