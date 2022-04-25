@@ -277,7 +277,7 @@ router.post("/password-reset-request", async (req, res) => {
 
         //  generate a token
         let resetToken = crypto.randomBytes(64).toString('hex')
-        let hash = crypto.pbkdf2Sync(userObj.resource.telecom[0].value, resetToken, 1000, 64, 'sha512').toString('hex')
+        let hash = crypto.pbkdf2Sync(userObj.resource.id, resetToken, 1000, 64, 'sha512').toString('hex')
 
         // update the password reset token and password reset expiry in the user object
         userObj.resource.extension.find(ext => ext.url === "http://ihris.org/fhir/StructureDefinition/ihris-password").extension.find(ext => ext.url === "resetPasswordToken").valueString = hash
@@ -287,7 +287,7 @@ router.post("/password-reset-request", async (req, res) => {
 
         userObj.update().then((response) => {
 
-          const link = `${clientURL}/password-reset?token=${resetToken}&userId=${userObj.resource.id}`;
+          const link = `${clientURL}/reset-password?token=${resetToken}&userId=${userObj.resource.id}`;
 
           sendEmail(
             response.telecom[0].value,
@@ -330,7 +330,7 @@ router.post("/password-reset-request", async (req, res) => {
 })
 
 // reset your password
-router.post("/password-reset", async (req, res) => {
+router.post("/reset-password", async (req, res) => {
 
   let token = req.query.token;
   let userId = req.query.userId
@@ -355,13 +355,9 @@ router.post("/password-reset", async (req, res) => {
       return res.status(400).json({ ok: false, message: "New password and confirm password do not match" })
     }
 
-    // if (!newPassword.match('^(?=.*\\\\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$')) {
-    //   logger.error("Password does not meet the requirements")
-    //   return false
-    // }
+  
 
-
-    let hashedToken = crypto.pbkdf2Sync(userObj.resource.telecom[0].value, token, 1000, 64, 'sha512').toString('hex')
+    let hashedToken = crypto.pbkdf2Sync(userId, token, 1000, 64, 'sha512').toString('hex')
 
     if (hashedToken === resetPasswordToken) {
       // check if the token has expired
@@ -374,18 +370,21 @@ router.post("/password-reset", async (req, res) => {
       }
     }
 
+    // hash the new password
+    let newPasswordSalt = crypto.randomBytes(64).toString('hex')
+    let newHashedPassword = crypto.pbkdf2Sync(newPasswordSalt, newPassword, 1000, 64, 'sha512').toString('hex')
 
 
-    userObj.resource.extension.find(ext => ext.url === "http://ihris.org/fhir/StructureDefinition/ihris-password").extension.find(ext => ext.url === "password").valueString = hashedToken
-    userObj.resource.extension.find(ext => ext.url === "http://ihris.org/fhir/StructureDefinition/ihris-password").extension.find(ext => ext.url === "salt").valueString = token
+    userObj.resource.extension.find(ext => ext.url === "http://ihris.org/fhir/StructureDefinition/ihris-password").extension.find(ext => ext.url === "password").valueString = newHashedPassword
+    userObj.resource.extension.find(ext => ext.url === "http://ihris.org/fhir/StructureDefinition/ihris-password").extension.find(ext => ext.url === "salt").valueString = newPasswordSalt
 
     userObj.update().then((resp) => {
 
       sendEmail(
-        userObj.resource.telecom[0].value,
+        resp.telecom[0].value,
         "Password Reset Successfully",
         {
-          name: resp.resource.name[0].text,
+          name: resp.name[0].text,
         },
         "../views/resetPassword.handlebars"
       );
