@@ -105,21 +105,22 @@ export default {
         method: "POST",
         body: formData,
       })
-        .then(function (response) {
-          return response.json();
-        })
-        .then(function (data) {
-          console.log(data);
+        .then((response) => response.json())
+        .then((data) => {
+          this.loggingin = false;
           if (data.ok) {
             this.message = data.message;
             this.snackbar = true;
-            this.loggingin = false;
-            this.$router.push({ name: "sign-in" });
           } else {
             this.message = data.message;
             this.snackbar = true;
-            this.loggingin = false;
           }
+        })
+
+        .catch((error) => {
+          this.loggingin = false;
+          this.message = error;
+          this.snackbar = true;
         });
     },
   },
