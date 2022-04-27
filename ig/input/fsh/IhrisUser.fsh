@@ -9,6 +9,8 @@ Description:    "NHWR profile of the Person resource to manage user access."
 * name ^slicing.discriminator.path = "use"
 * name ^slicing.rules = #open
 * name.use = #official
+* name.use MS
+* name.use ^label = "Use"
 * name.text 1..1 MS
 * name.text ^label = "Fullname"
 * name.family 1..1 MS
@@ -20,6 +22,8 @@ Description:    "NHWR profile of the Person resource to manage user access."
 * telecom ^slicing.discriminator.type = #pattern
 * telecom ^slicing.discriminator.path = "system"
 * telecom ^slicing.rules = #open
+* telecom.system MS
+* telecom.system ^label = "Contact Type"
 * telecom.system = #email
 * telecom.value 1..1 MS
 * telecom.value ^label = "Email"
