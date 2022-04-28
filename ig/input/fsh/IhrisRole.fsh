@@ -477,6 +477,53 @@ Usage:          #example
 * extension[attributes][0].extension[constraint].valueString = "category.exists(coding.exists(code = 'open'))"
 * extension[compositeTask][0].valueReference = Reference(Basic/ihris-task-read-document-reference)
 
+// users to access audit logs
+Instance:       ihris-task-navigation-users-audit-event
+InstanceOf:     IhrisTask
+Usage:          #example
+Title:          "iHRIS Task To Navigate to Users Audit Event"
+* code = IhrisResourceCodeSystem#task
+* extension[name].valueString = "navigation-users-audit-event"
+* extension[attributes][0].extension[permission].valueCode = IhrisTaskPermissionCodeSystem#special
+* extension[attributes][0].extension[resource].valueCode = IhrisTaskResourceCodeSystem#navigation
+* extension[attributes][0].extension[instance].valueId = "audit"
+
+// * extension[attributes][0].extension[instance].valueId = "users-users_search" incase u need deny access to sub menus to the users
+
+// users to access reports
+Instance:       ihris-task-navigation-users-reports
+InstanceOf:     IhrisTask
+Usage:          #example
+Title:          "iHRIS Task To Navigate to Users Reports"
+* code = IhrisResourceCodeSystem#task
+* extension[name].valueString = "navigation-users-reports"
+* extension[attributes][0].extension[permission].valueCode = IhrisTaskPermissionCodeSystem#special
+* extension[attributes][0].extension[resource].valueCode = IhrisTaskResourceCodeSystem#navigation
+* extension[attributes][0].extension[instance].valueId = "reports"
+
+//users to access change password
+Instance:       ihris-task-navigation-users-password
+InstanceOf:     IhrisTask
+Usage:          #example
+Title:          "iHRIS Task To Navigate to Users Password"
+* code = IhrisResourceCodeSystem#task
+* extension[name].valueString = "navigation-users-password"
+* extension[attributes][0].extension[permission].valueCode = IhrisTaskPermissionCodeSystem#special
+* extension[attributes][0].extension[resource].valueCode = IhrisTaskResourceCodeSystem#navigation
+* extension[attributes][0].extension[instance].valueId = "password"
+
+
+// users to access user management
+Instance:       ihris-task-navigation-users-users
+InstanceOf:     IhrisTask
+Usage:          #example
+Title:          "iHRIS Task To Navigate to Users Users"
+* code = IhrisResourceCodeSystem#task
+* extension[name].valueString = "navigation-users-users"
+* extension[attributes][0].extension[permission].valueCode = IhrisTaskPermissionCodeSystem#special
+* extension[attributes][0].extension[resource].valueCode = IhrisTaskResourceCodeSystem#navigation
+* extension[attributes][0].extension[instance].valueId = "users"
+
 Instance:         ihris-page-role
 InstanceOf:       IhrisPage
 Title:            "NHWR Roles" 
