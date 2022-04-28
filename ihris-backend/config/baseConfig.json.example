@@ -101,7 +101,7 @@
     },
     {
       "name": "mediator:api:apiURL",
-      "valueString": "https://mediator-staging.planetsystems.co"
+      "valueString": "https://mediator-core-staging.planetsystems.co"
     },
     {
       "name": "mediator:api:username",
