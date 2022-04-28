@@ -101,7 +101,7 @@
     },
     {
       "name": "mediator:api:apiURL",
-      "valueString": "https://178.18.250.54:8081"
+      "valueString": "https://mediator-staging.planetsystems.co"
     },
     {
       "name": "mediator:api:username",
