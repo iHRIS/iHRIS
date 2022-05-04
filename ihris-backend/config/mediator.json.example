@@ -53,7 +53,7 @@
                     "forwardAuthHeader": false,
                     "name": "Add/Get Resources",
                     "secured": false,
-                    "host": "nhwr-staging.planetsystems.co",
+                    "host": "nhwr",
                     "port": 3000,
                     "path": "",
                     "pathTransform": "",
@@ -83,7 +83,7 @@
     "endpoints": [
         {
             "name": "Activate  National Health Worker Registry",
-            "host": "nhwr-staging.planetsystems.co",
+            "host": "nhwr",
             "path": "/fhir/mediator/Practitioner",
             "port": 3000,
             "primary": true,

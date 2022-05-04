@@ -101,7 +101,7 @@
     },
     {
       "name": "mediator:api:apiURL",
-      "valueString": "https://mediator-core-staging.planetsystems.co"
+      "valueString": "https://medi-openhim-core:8080"
     },
     {
       "name": "mediator:api:username",
