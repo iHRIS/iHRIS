@@ -15,8 +15,6 @@ const requireFromString = require('require-from-string')
 const fhirModules = require('./modules/fhirModules')
 const fhirReports = require('./modules/fhirReports')
 const { createProxyMiddleware } = require('http-proxy-middleware')
-const dotenv = require('dotenv');
-dotenv.config();
 
 //  register mediator
 const registerMediator = require('openhim-mediator-utils')
