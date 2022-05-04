@@ -37,6 +37,8 @@ const workflowTask = {
                             && req.body.item[1].item[2].linkId === "instance"
                             && req.body.item[1].item[2].answer[0].valueString)) {
 
+
+                        // permission
                         taskPermission = req.body.item[0].item[0].item[0].answer[0].valueCoding.code
                         if (taskPermission === "*") {
                             taskPermission = "all"
@@ -45,6 +47,9 @@ const workflowTask = {
                             url: "permission",
                             valueCode: taskPermission
                         })
+
+
+                        // intance
                         if (req.body.item[0].item[0].item[2].linkId === "instance"
                             && req.body.item[0].item[0].item[2].answer[0].valueString) {
                             taskInstance = req.body.item[0].item[0].item[2].answer[0].valueString
@@ -53,6 +58,7 @@ const workflowTask = {
                                 valueString: taskInstance
                             })
                         }
+                        // resource
                         if (req.body.item[0].item[0].item[1].linkId === "resource"
                             && req.body.item[0].item[0].item[1].answer[0].valueCoding) {
                             taskResource = req.body.item[0].item[0].item[1].answer[0].valueCoding.code
@@ -70,6 +76,7 @@ const workflowTask = {
                             resolve(await workflowTask.outcome("No Resource attribute found"))
                         }
 
+                        // constraint
                         if (req.body.item[0].item[0].item[3].linkId === "constraint"
                             && req.body.item[0].item[0].item[3].answer[0].valueString) {
                             attributesExtension.push({
@@ -77,6 +84,8 @@ const workflowTask = {
                                 valueString: req.body.item[0].item[0].item[3].answer[0].valueString
                             })
                         }
+
+                        // field
                         if (req.body.item[0].item[0].item[4].linkId === "field"
                             && req.body.item[0].item[0].item[4].answer[0].valueString) {
                             attributesExtension.push({
@@ -84,6 +93,8 @@ const workflowTask = {
                                 valueString: req.body.item[0].item[0].item[4].answer[0].valueString
                             })
                         }
+
+
                         extensions.push({
                             url: "http://ihris.org/fhir/StructureDefinition/task-attributes",
                             extension: attributesExtension

@@ -132,6 +132,41 @@
       "valueString": "5400"
     },
     {
+      "name": "auth:CLIENT_URL",
+      "valueString": "http://ec2-34-226-246-236.compute-1.amazonaws.com:3000"
+    },
+
+    {
+      "name": "auth:GMAIL_ADDRESS",
+      "valueString": ""
+    },
+
+    {
+      "name": "auth:GMAIL_OAUTH_CLIENT_ID",
+      "valueString": ""
+    },
+
+    {
+      "name": "auth:GMAIL_OAUTH_PROJECT_ID",
+      "valueString": ""
+    },
+
+
+    {
+      "name": "auth:GMAIL_OAUTH_CLIENT_SECRET",
+      "valueString": ""
+    },
+
+    {
+      "name": "auth:GMAIL_OAUTH_REDIRECT_URL",
+      "valueString": "http://ec2-34-226-246-236.compute-1.amazonaws.com:3000"
+    },
+
+    {
+      "name": "auth:REFRESH_TOKEN",
+      "valueString": ""
+    },
+    {
       "name": "logs",
       "part": [
         {

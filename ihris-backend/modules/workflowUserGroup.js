@@ -44,21 +44,28 @@ const workflowUserGroup = {
                         }
                         extensions.push(name)
                     }
+
+                    // group description
+                    if (req.body.item[0].item.find((item) => item.linkId == "groupdescription")) {
+                        groupDescription = req.body.item[0].item.find((item) => item.linkId == "groupdescription").answer[0].valueString
+                        let description = {
+                            url: "http://ihris.org/fhir/StructureDefinition/ihris-group-description",
+                            valueString: groupDescription
+                        }
+                        extensions.push(description)
+                    }
                     // get roles
                     if (req.body.item[0].item.find((item) => item.linkId == "roles")) {
                         //role roles
                         userRoles = req.body.item[0].item.find((item) => item.linkId == "roles").answer
-                        let roles = {}
-                        userRoles.forEach(element => {
-                            roles = {
+                        userRoles.map((roleRole) => {
+                            let role = {
                                 url: "http://ihris.org/fhir/StructureDefinition/ihris-assign-role",
-                                valueReference: {
-                                    reference: element.valueReference.reference
-                                }
-
+                                valueReference: roleRole.valueReference.reference
                             }
-                        });
-                        extensions.push(roles)
+                            extensions.push(role)
+                        })
+
                     }
 
                 } else {

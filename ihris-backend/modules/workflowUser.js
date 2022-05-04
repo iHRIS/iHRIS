@@ -48,6 +48,8 @@ const workflowUser = {
               && req.body.item[0].item[5].answer
               && req.body.item[0].item[5].answer[0]
               && req.body.item[0].item[5].answer[0].valueReference.reference != "") {
+
+                
               try {
                 userRoles = await fhirAxios.search("Basic", { locationconstraint: "related-location=" + req.body.item[0].item[5].answer[0].valueReference })
               } catch (err) {

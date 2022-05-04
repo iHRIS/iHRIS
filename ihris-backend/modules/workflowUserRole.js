@@ -33,9 +33,8 @@ const workflowUserRole = {
                 ) {
 
 
-                    // role name
-
-                    if (req.body.item[0].item[0].linkId == "rolename") {
+                    // role name rolename
+                    if (req.body.item[0].item.find((item) => item.linkId == "rolename")) {
 
                         roleName = req.body.item[0].item[0].answer[0].valueString
                         let name = {
@@ -43,34 +42,7 @@ const workflowUserRole = {
                             valueString: roleName
                         }
                         extensions.push(name)
-                    }
 
-                    // is primary role
-
-                    if (req.body.item[0].item[2].linkId === "primary"
-                        && req.body.item[0].item[2].answer[0]
-                        && req.body.item[0].item[2].answer[0].valueBoolean) {
-                        extensions.push({
-                            url: "http://ihris.org/fhir/StructureDefinition/ihris-role-primary",
-                            valueBoolean: req.body.item[0].item[2].answer[0].valueBoolean
-                        })
-                    }
-
-                    // tasks
-                    if (req.body.item[0].item.find((item) => item.linkId == "tasks")) {
-                        // role tasks
-                        roleTasks = req.body.item[0].item.find((item) => item.linkId == "tasks").answer
-                        let tasks = {}
-                        roleTasks.forEach(element => {
-                            tasks = {
-                                url: "http://ihris.org/fhir/StructureDefinition/ihris-assign-task",
-                                valueReference: {
-                                    reference: element.valueReference.reference
-                                }
-
-                            }
-                        });
-                        extensions.push(tasks)
                     }
 
                     // role description roledescription
@@ -86,22 +58,42 @@ const workflowUserRole = {
                         extensions.push(description)
                     }
 
+                    // is primary role
 
-                    // tasks
+                    if (req.body.item[0].item.find((item) => item.linkId == "primary")
+                        && req.body.item[0].item[2].answer[0]
+                        && req.body.item[0].item[2].answer[0].valueBoolean) {
+                        extensions.push({
+                            url: "http://ihris.org/fhir/StructureDefinition/ihris-role-primary",
+                            valueBoolean: req.body.item[0].item[2].answer[0].valueBoolean
+                        })
+                    }
+
+                    // tasks (needs a different approach)
+                    if (req.body.item[0].item.find((item) => item.linkId == "tasks")) {
+                        // role tasks
+                        roleTasks = req.body.item[0].item.find((item) => item.linkId == "tasks").answer
+                        roleTasks.map((roleTask) => {
+                            let task = {
+                                url: "http://ihris.org/fhir/StructureDefinition/ihris-assign-task",
+                                valueReference: roleTask.valueReference.reference
+                            }
+                            extensions.push(task)
+                        })
+                    }
+
+                    // roles
                     if (req.body.item[0].item.find((item) => item.linkId == "roles")) {
                         //role roles
                         roleRoles = req.body.item[0].item.find((item) => item.linkId == "roles").answer
-                        let roles = {}
-                        roleRoles.forEach(element => {
-                            roles = {
+                        roleRoles.map((roleRole) => {
+                            let role = {
                                 url: "http://ihris.org/fhir/StructureDefinition/ihris-assign-role",
-                                valueReference: {
-                                    reference: element.valueReference.reference
-                                }
-
+                                valueReference: roleRole.valueReference.reference
                             }
-                        });
-                        extensions.push(roles)
+                            extensions.push(role)
+                        })
+
                     }
 
 
