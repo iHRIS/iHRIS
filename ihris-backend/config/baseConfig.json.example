@@ -99,9 +99,9 @@
       "name": "kibana:password",
       "valueString": ""
     },
-    {
+     {
       "name": "mediator:api:apiURL",
-      "valueString": "https://178.18.250.54:8081"
+      "valueString": "https://100.66.44.100:19002"
     },
     {
       "name": "mediator:api:username",
@@ -117,7 +117,7 @@
     },
     {
       "name": "mediator:api:urn",
-      "valueString": "urn:uuid:33610bdc-5d84-4f5c-a1dc-0b246a7d41be"
+      "valueString": "urn:uuid:3fbf8711-d1e3-48a0-a52c-5a234c082c75"
     },
     {
       "name": "mediator:register",

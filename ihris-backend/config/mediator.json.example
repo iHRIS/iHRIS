@@ -3,23 +3,6 @@
     "version": "0.0.1",
     "name": "National Health Worker Registry",
     "description": "National Health Worker Registry",
-    "config": {
-        "fhirServer": {
-            "username": "hapi",
-            "password": "PASS",
-            "baseURL": "http://wrkfhir:8080/fhir"
-        },
-        "elastic": {
-            "server": "http://wrkes:9200",
-            "username": "",
-            "password": "",
-            "max_compilations_rate": "10000/1m",
-            "index": "practitioner"
-        },
-        "matching": {
-            "tool": "elasticsearch"
-        }
-    },
     "defaultChannelConfig": [
         {
             "requestBody": true,
@@ -53,9 +36,9 @@
                     "forwardAuthHeader": false,
                     "name": "Add/Get Resources",
                     "secured": false,
-                    "host": "nhwr-staging.planetsystems.co",
-                    "port": 3000,
-                    "path": "",
+                    "host": "100.66.44.100",
+                    "port": 9000,
+                    "path": "/fhir/mediator/",  
                     "pathTransform": "",
                     "primary": true,
                     "username": "",
@@ -81,11 +64,11 @@
         }
     ],
     "endpoints": [
-        {
+         {
             "name": "Activate  National Health Worker Registry",
-            "host": "nhwr-staging.planetsystems.co",
+            "host": "https://100.66.44.100",
             "path": "/fhir/mediator/Practitioner",
-            "port": 3000,
+            "port": 9000,
             "primary": true,
             "forwardAuthHeader": false,
             "status": "enabled",

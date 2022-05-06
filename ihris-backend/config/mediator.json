@@ -1,25 +1,8 @@
 {
-    "urn": "urn:uuid:2711b9f2-2809-45ef-81f6-2899232adf08",
+    "urn": "urn:uuid:3fbf8711-d1e3-48a0-a52c-5a234c082c75",
     "version": "0.0.1",
     "name": "National Health Worker Registry",
     "description": "National Health Worker Registry",
-    "config": {
-        "fhirServer": {
-            "username": "hapi",
-            "password": "PASS",
-            "baseURL": "http://ec2-34-226-246-236.compute-1.amazonaws.com:8080/hapi/fhir"
-        },
-        "elastic": {
-            "server": "http://ec2-34-226-246-236.compute-1.amazonaws.com:9200",
-            "username": "",
-            "password": "",
-            "max_compilations_rate": "10000/1m",
-            "index": "practitioner"
-        },
-        "matching": {
-            "tool": "elasticsearch"
-        }
-    },
     "defaultChannelConfig": [
         {
             "requestBody": true,
@@ -53,9 +36,9 @@
                     "forwardAuthHeader": false,
                     "name": "Add/Get Resources",
                     "secured": false,
-                    "host": "localhost",
-                    "port": 3000,
-                    "path": "",
+                    "host": "https://100.66.44.100",
+                    "port": 9000,
+                    "path": "/fhir/mediator/",  
                     "pathTransform": "",
                     "primary": true,
                     "username": "",
@@ -83,9 +66,9 @@
     "endpoints": [
         {
             "name": "Activate  National Health Worker Registry",
-            "host": "http://ec2-34-226-246-236.compute-1.amazonaws.com",
+            "host": "https://nhwr-staging.planetsystems.co",
             "path": "/fhir/mediator/Practitioner",
-            "port": 3000,
+            "port": 443,
             "primary": true,
             "forwardAuthHeader": false,
             "status": "enabled",
