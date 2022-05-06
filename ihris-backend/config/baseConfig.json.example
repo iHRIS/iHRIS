@@ -101,7 +101,7 @@
     },
     {
       "name": "mediator:api:apiURL",
-      "valueString": "https://mediator-core-staging.planetsystems.co"
+      "valueString": "https://178.18.250.54:8081"
     },
     {
       "name": "mediator:api:username",
@@ -109,7 +109,7 @@
     },
     {
       "name": "mediator:api:password",
-      "valueString": "Levers7-Unfixable-Unclasp"
+      "valueString": "password"
     },
     {
       "name": "mediator:api:trustSelfSigned",
