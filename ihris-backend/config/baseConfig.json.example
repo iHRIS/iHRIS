@@ -45,11 +45,11 @@
     },
     {
       "name": "redis:url",
-      "valueString": "wrkredis://redis:6379"
+      "valueString": "redis://100.66.44.100:9079"
     },
     {
       "name": "fhir:base",
-      "valueString": "http://wrkfhir:8080/fhir"
+      "valueString": "http://100.66.44.100:9080/fhir"
     },
     {
       "name": "emnutt:base",
@@ -69,7 +69,7 @@
     },
     {
       "name": "elasticsearch:base",
-      "valueString": "http://wrkes:9200"
+      "valueString": "http://100.66.44.100:9200"
     },
     {
       "name": "elasticsearch:username",
@@ -89,7 +89,7 @@
     },
     {
       "name": "kibana:base",
-      "valueString": "http://wrkkibana:5601"
+      "valueString": "http://100.66.44.100:9001"
     },
     {
       "name": "kibana:username",
@@ -99,7 +99,7 @@
       "name": "kibana:password",
       "valueString": ""
     },
-     {
+    {
       "name": "mediator:api:apiURL",
       "valueString": "https://100.66.44.100:19002"
     },
@@ -131,9 +131,10 @@
       "name": "auth:tokenDuration",
       "valueString": "5400"
     },
+
     {
       "name": "auth:CLIENT_URL",
-      "valueString": "http://ec2-34-226-246-236.compute-1.amazonaws.com:3000"
+      "valueString": "http://localhost:3000"
     },
 
     {
@@ -159,7 +160,7 @@
 
     {
       "name": "auth:GMAIL_OAUTH_REDIRECT_URL",
-      "valueString": "http://ec2-34-226-246-236.compute-1.amazonaws.com:3000"
+      "valueString": "http://localhost:3000"
     },
 
     {

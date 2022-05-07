@@ -1,5 +1,5 @@
 {
-    "urn": "urn:uuid:33610bdc-5d84-4f5c-a1dc-0b246a7d41be",
+    "urn": "urn:uuid:3fbf8711-d1e3-48a0-a52c-5a234c082c75",
     "version": "0.0.1",
     "name": "National Health Worker Registry",
     "description": "National Health Worker Registry",
@@ -36,7 +36,7 @@
                     "forwardAuthHeader": false,
                     "name": "Add/Get Resources",
                     "secured": false,
-                    "host": "100.66.44.100",
+                    "host": "https://100.66.44.100",
                     "port": 9000,
                     "path": "/fhir/mediator/",  
                     "pathTransform": "",
@@ -64,11 +64,11 @@
         }
     ],
     "endpoints": [
-         {
+        {
             "name": "Activate  National Health Worker Registry",
-            "host": "http://100.66.44.100",
+            "host": "http://100.66.44.100:9000",
             "path": "/fhir/mediator/Practitioner",
-            "port": 9000,
+            "port": 443,
             "primary": true,
             "forwardAuthHeader": false,
             "status": "enabled",
@@ -84,7 +84,7 @@
             "template": [
                 {
                     "type": "string",
-                    "description": "The base URL (e.g. http://moh.com/hapi/fhir)",
+                    "description": "The base URL (e.g. http://ec2-34-226-246-236.compute-1.amazonaws.com:8080/hapi/fhir)",
                     "displayName": "Base URL",
                     "param": "baseURL"
                 },
@@ -111,7 +111,7 @@
             "template": [
                 {
                     "type": "string",
-                    "description": "The base URL (e.g. http://moh.com:9200)",
+                    "description": "The base URL (e.g. http://ec2-34-226-246-236.compute-1.amazonaws.com:9200)",
                     "displayName": "Base URL",
                     "param": "server"
                 },
