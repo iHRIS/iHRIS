@@ -1,5 +1,6 @@
 var express = require('express')
 var router = express.Router()
+const nodeMailer = require("nodemailer");
 const axios = require('axios')
 const URI = require('urijs');
 const nconf = require('../modules/config')
@@ -1426,5 +1427,51 @@ router.get('/app', (req, res) => {
   res.status(200).json(otherConfig);
 });
 
+/**
+ * Route serving send email notification.
+ * @name POST/sendEmail
+ * @param {object} body Information about the email.
+ * @param {string} body.email The receiver email.
+ * @param {string} body.subject The email subject.
+ * @param {string} body.message The email body.
+ * @param {string=} body.fullName The email receiver full name.
+ */
+router.post("/sendEmail", async (req, res) => {
+  if (!req.body || !req.body.email || !req.body.subject || !req.body.message) {
+      return res.status(400).json(outcomes.ERROR);
+  }
+  const {email, subject, message, fullName} = req.body;
+  const user = nconf.get("email:username");
+  const password = nconf.get("email:password");
+
+  const transporter = nodeMailer.createTransport({
+      service: "gmail", // Gmail as the email provider but is is better if we use other SMTP server
+      auth: {
+          user: user,
+          pass: password
+      },
+  })
+  const from = `"iHRIS Notification" <${user}>`
+  const to = email;
+  const mailSubject = subject
+  const name= fullName? fullName: "User"
+  const mailBody = `<div>
+      <p> Dear <b>${name}</b>,<br>
+       ${message}
+   </div>
+   `;
+  try {
+      await transporter.sendMail({
+          from: from, // sender address
+          to: to, // list of receivers
+          subject: mailSubject, // Subject line
+          html: mailBody // html body
+      });
+      return res.status(200).json({message: "Email sent successfully"});
+  } catch (err) {
+      console.log(err);
+      return res.status(500).json(outcomes.ERROR);
+  }
+});
 
 module.exports = router;
