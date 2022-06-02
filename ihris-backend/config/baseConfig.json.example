@@ -64,6 +64,14 @@
       "valueString": ""
     },
     {
+      "name": "email:username",
+      "valueString": "iHRISNotification@gmail.com"
+    },
+    {
+      "name": "email:password",
+      "valueString": "sf9{aCGB#3x5q+#%"
+    },
+    {
       "name": "elasticsearch:base",
       "valueString": "http://localhost:9200"
     },
