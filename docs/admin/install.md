@@ -124,7 +124,7 @@ http://localhost:8080/hapi
 Download and install hapi-fhir-cli:
 https://hapifhir.io/hapi-fhir/docs/tools/hapi_fhir_cli.html
 ```bash
-wget https://github.com/hapifhir/hapi-fhir/releases/download/v5.6.0/hapi-fhir-5.6.0-cli.tar.bz2
+wget https://github.com/hapifhir/hapi-fhir/releases/download/v5.7.0/hapi-fhir-5.7.0-cli.tar.bz2
 ```
 **Note**: Be sure to download the hapi fhir cli for the version on hapi you have installed. You can check the version in the pom.xml file.
 Then load the basic definitions
