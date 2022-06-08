@@ -10,7 +10,7 @@
         :href="link.href"
         :target="link.href ? '_blank': ''"
       >
-        {{ link.text }}
+        {{ $t(`App.footer.${link.text}`) }}
       </v-btn>
     </v-row>
   </v-footer>

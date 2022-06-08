@@ -83,6 +83,22 @@
           "valueString": "http://ihris.org/"
         },
         {
+          "name": "site:nav:menu:dashboard:text",
+          "valueString": "Dashboard"
+        },
+        {
+          "name": "site:nav:menu:dashboard:order",
+          "valueString": "0"
+        },
+        {
+          "name": "site:nav:menu:dashboard:icon",
+          "valueString": "mdi-chart-arc"
+        },
+        {
+          "name": "site:nav:menu:dashboard:url",
+          "valueString": "/dashboard"
+        },
+        {
           "name": "site:nav:active",
           "valueString": "person"
         },
@@ -148,7 +164,7 @@
         },
         {
           "name": "site:nav:menu:location:order",
-          "valueString": "4"
+          "valueString": "3"
         },
         {
           "name": "site:nav:menu:location:icon",
@@ -172,7 +188,7 @@
         },
         {
           "name": "site:nav:menu:mhero:order",
-          "valueString": "3"
+          "valueString": "5"
         },
         {
           "name": "site:nav:menu:mhero:text",
@@ -419,22 +435,6 @@
           "valueString": "16"
         },
         {
-          "name": "site:nav:menu:dashboard:text",
-          "valueString": "Dashboard"
-        },
-        {
-          "name": "site:nav:menu:dashboard:order",
-          "valueString": "5"
-        },
-        {
-          "name": "site:nav:menu:dashboard:icon",
-          "valueString": "mdi-chart-arc"
-        },
-        {
-          "name": "site:nav:menu:dashboard:url",
-          "valueString": "/dashboard"
-        },
-        {
           "name": "site:nav:menu:reports:text",
           "valueString": "Reports"
         },
@@ -464,7 +464,7 @@
         },
         {
           "name": "site:nav:menu:users:order",
-          "valueString": "7"
+          "valueString": "8"
         },
         {
           "name": "site:nav:menu:users:icon",
@@ -479,12 +479,44 @@
           "valueString": "/resource/search/user"
         },
         {
+          "name": "site:nav:menu:users:menu:users_role:text",
+          "valueString": "User Roles"
+        },
+        {
+          "name": "site:nav:menu:users:menu:users_role:url",
+          "valueString": "/resource/search/role"
+        },
+        {
+          "name": "site:nav:menu:users:menu:role_tasks:text",
+          "valueString": "User Role Tasks"
+        },
+        {
+          "name": "site:nav:menu:users:menu:role_tasks:url",
+          "valueString": "/resource/search/task"
+        },
+        {
+          "name": "site:nav:menu:audit:text",
+          "valueString": "Audit Logs"
+        },
+        {
+          "name": "site:nav:menu:audit:order",
+          "valueString": "7"
+        },
+        {
+          "name": "site:nav:menu:audit:icon",
+          "valueString": "mdi-lock-reset"
+        },
+        {
+          "name": "site:nav:menu:audit:url",
+          "valueString": "/resource/view/auditevent"
+        },
+        {
           "name": "site:nav:menu:password:text",
           "valueString": "Change Password"
         },
         {
           "name": "site:nav:menu:password:order",
-          "valueString": "8"
+          "valueString": "9"
         },
         {
           "name": "site:nav:menu:password:icon",

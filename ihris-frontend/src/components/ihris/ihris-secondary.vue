@@ -1,19 +1,19 @@
 <template>
   <v-container class="my-3" v-if="!edit">
     <v-data-table
-      :headers="columns"
+      :headers="translatedHeader"
       :items="items"
       item-key="id"
       :items-per-page="5"
       :loading="loading"
       class="elevation-1"
       dense
+      :footer-props="{ 'items-per-page-text':$t('App.ihris-search.tableText'), 'items-per-page-options': [5,10,20,50] }"
     >
-
       <template v-slot:top>
         <v-toolbar flat color="white">
           <v-toolbar-title>
-            {{ title }}
+            {{ $t(`App.ihris-secondary.${title}`) }}
           </v-toolbar-title>
           <v-spacer></v-spacer>
           <v-btn
@@ -23,7 +23,7 @@
             :key="action.text"
             small
             >
-            {{ action.text }}
+            {{ $t(`App.ihris-secondary.${action.text}`) }}
           </v-btn>
         </v-toolbar>
       </template>
@@ -58,7 +58,8 @@ export default {
       empty: true,
       items: [],
       loading: true,
-      topActions: []
+      topActions: [],
+      translatedHeader:[]
     }
   },
   mounted: function() {
@@ -76,6 +77,10 @@ export default {
   },
   methods: {
     setupData: function() {
+      this.translatedHeader =  this.columns.map((x)=> ({
+        text: this.$t(`App.ihris-secondary.table.${x.text}`),
+        value: x.value
+      }))
       /*
       if ( this.slotProps && this.slotProps.source ) {
         this.source = { path: this.field, data: {} }
@@ -216,3 +221,9 @@ export default {
 }
 
 </script>
+
+<style>
+tbody tr:nth-of-type(even) {
+  background-color: #E0F2F1;
+}
+</style>

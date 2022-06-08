@@ -13,7 +13,7 @@
         @change='doUpload'
         :error-messages="errors"
       >
-        <template #label>{{display}} <span v-if="required" class="red--text font-weight-bold">*</span></template>
+        <template #label>{{$t(`App.ihris-attachment.${display}`)}} <span v-if="required" class="red--text font-weight-bold">*</span></template>
         <template #append-outer>
           <v-menu 
             v-if="objURL"
@@ -41,7 +41,7 @@
       </v-file-input>
     </template>
     <template #header>
-      {{display}}
+      {{$t(`App.fhir-attachment.${display}`)}}
     </template>
     <template #value>
       <v-menu 
