@@ -5,7 +5,7 @@
         :loading="loading" 
         :label="'Currency ('+display+')'" 
         v-model="valueCurrency" 
-        :items="items" 
+        :items="items.filter(x => !x.code.includes('(deactivated)'))"
         outlined 
         hide-details="auto" 
         :error-messages="err_messages"

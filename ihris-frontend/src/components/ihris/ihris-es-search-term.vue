@@ -9,7 +9,6 @@
       outlined
       :error-messages="err_messages"
       :error="error"
-      shaped
       clearable
       hide-details
       small-chips
@@ -17,6 +16,7 @@
       multiple
       @change="updateSearch()"
       @click:clear="clearSearch()"
+      class="ma-1"
       item-text="display"
       item-value="code">
       <template v-slot:prepend-item>
@@ -58,8 +58,8 @@
               dense
               outlined
               hide-details
-              shaped
               @input="updateSearch"
+              class="ma-1"
             ></v-text-field>
           </template>
           <v-date-picker
@@ -71,7 +71,7 @@
           ></v-date-picker>
         </v-menu>
       </template>
-      <v-text-field v-else :label="label" v-model="value" dense outlined hide-details shaped clearable @change="updateSearch()" @click:clear="clearSearch()" />
+      <v-text-field v-else prepend-inner-icon="mdi-filter-variant" :label="label" v-model="value" dense outlined hide-details clearable   class="ma-1" @change="updateSearch()" @click:clear="clearSearch()" />
     </template>
   </label>
 </template>

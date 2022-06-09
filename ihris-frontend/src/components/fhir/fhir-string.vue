@@ -4,8 +4,8 @@
       <v-text-field 
         :error-messages="errors" 
         @change="errors = []" 
-        :disabled="disabled" 
-        :label="display" 
+        :disabled="disabled"
+        :label="$t(`App.fhir-string.${display}`)"
         v-model="value" 
         outlined 
         hide-details="auto" 
@@ -15,11 +15,11 @@
         @click:append="showPassword = !showPassword"
         dense
       >
-      <template #label>{{display}}<span v-if="required" class="red--text font-weight-bold">*</span></template>
+      <template #label>{{$t(`App.fhir-string.${display}`)}}<span v-if="required" class="red--text font-weight-bold">*</span></template>
       </v-text-field>
     </template>
     <template #header>
-      {{display}}
+      {{$t(`App.fhir-string.${display}`)}}
     </template>
     <template #value>
       {{value}}

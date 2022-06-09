@@ -12,7 +12,7 @@
         <template v-slot:activator="{ on }">
           <v-text-field
             v-model="displayValue"
-            :label="label"
+            :label="$t(`App.fhir-date-time.${label}`)"
             prepend-inner-icon="mdi-calendar"
             readonly
             v-on="on"
@@ -22,7 +22,7 @@
             :error-messages="errors"
             dense
           >
-            <template #label>{{label}} <span v-if="required" class="red--text font-weight-bold">*</span></template>
+            <template #label>{{$t(`App.fhir-date-time.${label}`)}} <span v-if="required" class="red--text font-weight-bold">*</span></template>
           </v-text-field>
         </template>
 
@@ -148,7 +148,7 @@
       </v-menu>
     </template>
     <template #header>
-      {{label}}
+      {{$t(`App.fhir-date-time.${label}`)}}
     </template>
     <template #value>
       {{displayValue}}

@@ -28,7 +28,7 @@
           <v-list-item>
             <v-btn class="secondary" dark @click="$router.go(-1)">
               <v-icon light>mdi-pencil-off</v-icon>
-              <span>Cancel</span>
+              <span>{{ $t("App.ihris-questionnaire.Cancel") }}</span>
             </v-btn>
             <v-spacer></v-spacer>
             <v-btn
@@ -39,11 +39,11 @@
               @click="processFHIR()"
             >
               <v-icon light>mdi-content-save</v-icon>
-              <span>Save</span>
+           <span>{{ $t("App.ihris-questionnaire.Save") }}</span>
             </v-btn>
             <v-btn v-else class="warning" dark @click="$refs.form.validate()">
               <v-icon light>mdi-content-save</v-icon>
-              <span>Save</span>
+              <span>{{ $t("App.ihris-questionnaire.Save") }}</span>
             </v-btn>
           </v-list-item>
           <v-list-item
@@ -58,7 +58,7 @@
               @click="$router.push('/bulk-registration')"
             >
               <v-icon light>mdi-attachment</v-icon>
-              <span>Upload CSV/Excel</span>
+              <span>{{ $t("App.ihris-questionnaire.uploadCSV") }}</span>
             </v-btn>
           </v-list-item>
           <v-list-item
@@ -69,12 +69,12 @@
           >
             <v-btn class="primary" dark @click="getCsvTemplate">
               <v-icon light>mdi-download</v-icon>
-              <span>Get CSV Template</span>
+              <span>{{ $t("App.ihris-questionnaire.getCSVTemplate") }}</span>
             </v-btn>
           </v-list-item>
           <v-divider color="white"></v-divider>
           <v-subheader v-if="sectionMenu" class="white--text"
-            ><h2>Sections</h2></v-subheader
+            ><h2>{{ $t("App.ihris-questionnaire.Section") }}</h2></v-subheader
           >
           <v-list-item
             v-for="section in sectionMenu"
@@ -84,10 +84,12 @@
           >
             <v-list-item-content class="white--text">
               <v-list-item-title class="text-uppercase"
-                ><h4>{{ section.title }}</h4></v-list-item-title
+                >
+                <h4>{{ $t(`App.ihris-questionnaire-section.${section.title}`) }}</h4>
+              </v-list-item-title
               >
               <v-list-item-subtitle class="white--text">{{
-                section.desc
+                  $t(`App.ihris-questionnaire-section.${section.desc}`)
               }}</v-list-item-subtitle>
             </v-list-item-content>
           </v-list-item>

@@ -5,6 +5,7 @@
     permanent
     class="primary darken-1 white--text font-weight-bold"
     style="z-index: 3;"
+    v-if="$store.state.user.loggedin"
   >
     <v-list
       nav
@@ -25,7 +26,7 @@
             no-action
             >
             <template v-slot:activator>
-              <v-list-item-title class="subtitle-1 font-weight-bold text-uppercase">{{item.text}}</v-list-item-title>
+              <v-list-item-title class="subtitle-1 font-weight-bold text-uppercase">{{$t(`App.menu.${item.text}`)}}</v-list-item-title>
             </template>
             <v-list-item
               v-for="sub in item.menu"
@@ -35,7 +36,7 @@
               class="text-right"
               dense
               >
-                <v-list-item-title>{{sub.text}}</v-list-item-title>
+                <v-list-item-title>{{$t(`App.menu.${sub.text}`)}}</v-list-item-title>
                 <v-icon>mdi-chevron-right</v-icon>
               </v-list-item>
 
@@ -46,7 +47,7 @@
             <v-list-item-icon>
               <v-icon>{{item.icon}}</v-icon>
             </v-list-item-icon>
-            <v-list-item-title class="subtitle-1 font-weight-bold text-uppercase">{{item.text}}</v-list-item-title>
+            <v-list-item-title class="subtitle-1 font-weight-bold text-uppercase">{{$t(`App.menu.${item.text}`)}}</v-list-item-title>
           </v-list-item>
 
         </template>

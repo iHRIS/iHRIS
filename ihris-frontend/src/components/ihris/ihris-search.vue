@@ -2,12 +2,12 @@
   <v-container class="py-5">
     <v-card>
       <v-card-title>
-        Search {{ label }}
+        {{ $t("App.ihris-search.search") }} {{$t(`App.ihris-search.${label}`)}}
         <v-spacer></v-spacer>
         <v-btn :class="addLink ? addLink.class || 'primary' : 'primary'" :to="addLink ? addLink.url : '/resource/add/'+page">
           <v-icon v-if="addLink && addLink.icon">{{ addLink.icon }}</v-icon>
           <v-icon v-else>mdi-database-plus</v-icon>
-          Add {{label}}
+          {{ $t("App.ihris-search.add") }} {{$t(`App.ihris-search.${label}`)}}
         </v-btn>
       </v-card-title>
       <v-card-title>
@@ -27,7 +27,7 @@
           item-key="id"
           :options.sync="options"
           :server-items-length="total"
-          :footer-props="{ 'items-per-page-options': [5,10,20,50] }"
+          :footer-props="{ 'items-per-page-text':$t('App.ihris-search.tableText'), 'items-per-page-options': [5,10,20,50] }"
           :loading="loading"
           class="elevation-1"
           @click:row="clickIt"
@@ -72,7 +72,7 @@ export default {
   },
   created: function() {
     for (let field of this.fields) {
-      this.headers.push({ text: field[0], value: field[1] });
+      this.headers.push({ text: this.$t(`App.ihris-search.${field[0]}`), value: field[1] });
     }
   },
   mounted: function() {
@@ -188,3 +188,8 @@ export default {
   }
 };
 </script>
+<style>
+tbody tr:nth-of-type(even) {
+  background-color: #E0F2F1;
+}
+</style>
