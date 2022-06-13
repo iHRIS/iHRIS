@@ -695,6 +695,22 @@
           "valueString": "http://ihris.org/fhir/Questionnaire/ihris-user"
         },
         {
+          "name": "workflow:processor:role:file",
+          "valueString": "../modules/workflowUserRole"
+        },
+        {
+          "name": "workflow:questionnaire:role:url",
+          "valueString": "http://ihris.org/fhir/Questionnaire/ihris-role"
+        },
+        {
+          "name": "workflow:processor:task:file",
+          "valueString": "../modules/workflowTask"
+        },
+        {
+          "name": "workflow:questionnaire:task:url",
+          "valueString": "http://ihris.org/fhir/Questionnaire/ihris-task"
+        },
+        {
           "name": "defaults:components:date-time:minValueDateTime",
           "valueString": "1920-01-01"
         },
