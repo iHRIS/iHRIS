@@ -4,7 +4,7 @@ services:
 
   fhir:
     container_name: fhir
-    image: hapiproject/hapi:v5.5.1
+    image: hapiproject/hapi:v5.7.0
     ports:
       - "8080:8080"
     environment:
@@ -14,7 +14,15 @@ services:
       spring.datasource.password: admin
       spring.datasource.driverClassName: org.postgresql.Driver
       spring.jpa.properties.hibernate.search.enabled: 'true'
-      hapi.fhir.tester.home.server_address: "http://localhost:8080/hapi/fhir"
+      spring.jpa.properties.hibernate.search.backend.type: lucene
+      spring.jpa.properties.hibernate.search.backend.analysis.configurer: ca.uhn.fhir.jpa.search.HapiLuceneAnalysisConfigurer
+      spring.jpa.properties.hibernate.search.backend.directory.type: local-filesystem
+      spring.jpa.properties.hibernate.search.backend.directory.root: target/lucenefiles
+      spring.jpa.properties.hibernate.search.backend.lucene_version: lucene_current
+      spring.jpa.properties.hibernate.dialect: ca.uhn.fhir.jpa.model.dialect.HapiFhirPostgres94Dialect
+      hapi.fhir.tester.home.server_address: "http://localhost:8080/fhir"
+      hapi.fhir.enable_index_missing_fields: 'true'
+
     volumes:
       - hapi-data:/data/hapi
     depends_on:
