@@ -5428,17 +5428,9 @@ Description: "The gender of a person used for administrative purposes."
 * ^valueSet = "http://hl7.org/fhir/ValueSet/administrative-gender"
 * ^content = #complete
 * #male "Male" "Male."
-* #male ^extension[0].url = "http://hl7.org/fhir/StructureDefinition/codesystem-concept-comments"
-* #male ^extension[=].valueString = "Male"
 * #female "Female" "Female."
-* #female ^extension[=].url = "http://hl7.org/fhir/StructureDefinition/codesystem-concept-comments"
-* #female ^extension[=].valueString = "Female"
 * #other "Other" "Other."
-* #other ^extension[=].url = "http://hl7.org/fhir/StructureDefinition/codesystem-concept-comments"
-* #other ^extension[=].valueString = "The administrative gender is a value other than male/female/unknown. Where this value is selected, systems may often choose to include an extension with the localized more specific value."
 * #unknown "Unknown" "Unknown."
-* #unknown ^extension[=].url = "http://hl7.org/fhir/StructureDefinition/codesystem-concept-comments"
-* #unknown ^extension[=].valueString = "A proper value is applicable, but not known.  Usage Notes: This means the actual value is not known. If the only thing that is unknown is how to properly express the value in the necessary constraints (value set, datatype, etc.), then the OTH or UNC flavor should be used. No properties should be included for a datatype with this property unless:  Those properties themselves directly translate to a semantic of \"unknown\". (E.g. a local code sent as a translation that conveys 'unknown') Those properties further qualify the nature of what is unknown. (E.g. specifying a use code of \"H\" and a URL prefix of \"tel:\" to convey that it is the home phone number that is unknown.)"
 
 ValueSet: AdministrativeGender
 Id: administrative-gender
@@ -5508,243 +5500,243 @@ Description: "Code system of concepts specifying an educational degree (e.g., MD
 * #PN ^property[=].valueCode = #A
 * #AAS "Associate of Applied Science" "Associate of Applied Science"
 * #AAS ^id = "3595"
-* #AAS ^property[=].code = #status
+* #AAS ^property[+].code = #status
 * #AAS ^property[=].valueCode = #A
 * #AA "Associate of Arts" "Associate of Arts"
 * #AA ^id = "3596"
-* #AA ^property[=].code = #status
+* #AA ^property[+].code = #status
 * #AA ^property[=].valueCode = #A
 * #ABA "Associate of Business Administration" "Associate of Business Administration"
 * #ABA ^id = "3597"
-* #ABA ^property[=].code = #status
+* #ABA ^property[+].code = #status
 * #ABA ^property[=].valueCode = #A
 * #AE "Associate of Engineering" "Associate of Engineering"
 * #AE ^id = "3598"
-* #AE ^property[=].code = #status
+* #AE ^property[+].code = #status
 * #AE ^property[=].valueCode = #A
 * #AS "Associate of Science" "Associate of Science"
 * #AS ^id = "3599"
-* #AS ^property[=].code = #status
+* #AS ^property[+].code = #status
 * #AS ^property[=].valueCode = #A
 * #BA "Bachelor of Arts" "Bachelor of Arts"
 * #BA ^id = "3600"
-* #BA ^property[=].code = #status
+* #BA ^property[+].code = #status
 * #BA ^property[=].valueCode = #A
 * #BBA "Bachelor of Business Administration" "Bachelor of Business Administration"
 * #BBA ^id = "3601"
-* #BBA ^property[=].code = #status
+* #BBA ^property[+].code = #status
 * #BBA ^property[=].valueCode = #A
 * #BE "Bachelor or Engineering" "Bachelor or Engineering"
 * #BE ^id = "3602"
-* #BE ^property[=].code = #status
+* #BE ^property[+].code = #status
 * #BE ^property[=].valueCode = #A
 * #BFA "Bachelor of Fine Arts" "Bachelor of Fine Arts"
 * #BFA ^id = "3603"
-* #BFA ^property[=].code = #status
+* #BFA ^property[+].code = #status
 * #BFA ^property[=].valueCode = #A
 * #BN "Bachelor of Nursing" "Bachelor of Nursing"
 * #BN ^id = "3604"
-* #BN ^property[=].code = #status
+* #BN ^property[+].code = #status
 * #BN ^property[=].valueCode = #A
 * #BS "Bachelor of Science" "Bachelor of Science"
 * #BS ^id = "3605"
-* #BS ^property[=].code = #status
+* #BS ^property[+].code = #status
 * #BS ^property[=].valueCode = #A
 * #BSL "Bachelor of Science - Law" "Bachelor of Science - Law"
 * #BSL ^id = "3606"
-* #BSL ^property[=].code = #status
+* #BSL ^property[+].code = #status
 * #BSL ^property[=].valueCode = #A
 * #BSN "Bachelor on Science - Nursing" "Bachelor on Science - Nursing"
 * #BSN ^id = "3607"
-* #BSN ^property[=].code = #status
+* #BSN ^property[+].code = #status
 * #BSN ^property[=].valueCode = #A
 * #BT "Bachelor of Theology" "Bachelor of Theology"
 * #BT ^id = "3608"
-* #BT ^property[=].code = #status
+* #BT ^property[+].code = #status
 * #BT ^property[=].valueCode = #A
 * #CER "Certificate" "Certificate"
 * #CER ^id = "3609"
-* #CER ^property[=].code = #status
+* #CER ^property[+].code = #status
 * #CER ^property[=].valueCode = #A
 * #CANP "Certified Adult Nurse Practitioner" "Certified Adult Nurse Practitioner"
 * #CANP ^id = "3610"
-* #CANP ^property[=].code = #status
+* #CANP ^property[+].code = #status
 * #CANP ^property[=].valueCode = #A
 * #CMA "Certified Medical Assistant" "Certified Medical Assistant"
 * #CMA ^id = "3611"
-* #CMA ^property[=].code = #status
+* #CMA ^property[+].code = #status
 * #CMA ^property[=].valueCode = #A
 * #CNP "Certified Nurse Practitioner" "Certified Nurse Practitioner"
 * #CNP ^id = "3612"
-* #CNP ^property[=].code = #status
+* #CNP ^property[+].code = #status
 * #CNP ^property[=].valueCode = #A
 * #CNM "Certified Nurse Midwife" "Certified Nurse Midwife"
 * #CNM ^id = "3613"
-* #CNM ^property[=].code = #status
+* #CNM ^property[+].code = #status
 * #CNM ^property[=].valueCode = #A
 * #CRN "Certified Registered Nurse" "Certified Registered Nurse"
 * #CRN ^id = "3614"
-* #CRN ^property[=].code = #status
+* #CRN ^property[+].code = #status
 * #CRN ^property[=].valueCode = #A
 * #CNS "Certified Nurse Specialist" "Certified Nurse Specialist"
 * #CNS ^id = "3615"
-* #CNS ^property[=].code = #status
+* #CNS ^property[+].code = #status
 * #CNS ^property[=].valueCode = #A
 * #CPNP "Certified Pediatric Nurse Practitioner" "Certified Pediatric Nurse Practitioner"
 * #CPNP ^id = "3616"
-* #CPNP ^property[=].code = #status
+* #CPNP ^property[+].code = #status
 * #CPNP ^property[=].valueCode = #A
 * #CTR "Certified Tumor Registrar" "Certified Tumor Registrar"
 * #CTR ^id = "3617"
-* #CTR ^property[=].code = #status
+* #CTR ^property[+].code = #status
 * #CTR ^property[=].valueCode = #A
 * #DIP "Diploma" "Diploma"
 * #DIP ^id = "3618"
-* #DIP ^property[=].code = #status
+* #DIP ^property[+].code = #status
 * #DIP ^property[=].valueCode = #A
 * #DBA "Doctor of Business Administration" "Doctor of Business Administration"
 * #DBA ^id = "3619"
-* #DBA ^property[=].code = #status
+* #DBA ^property[+].code = #status
 * #DBA ^property[=].valueCode = #A
 * #DED "Doctor of Education" "Doctor of Education"
 * #DED ^id = "3620"
-* #DED ^property[=].code = #status
+* #DED ^property[+].code = #status
 * #DED ^property[=].valueCode = #A
 * #PharmD "Doctor of Pharmacy" "Doctor of Pharmacy"
 * #PharmD ^id = "3621"
-* #PharmD ^property[=].code = #status
+* #PharmD ^property[+].code = #status
 * #PharmD ^property[=].valueCode = #A
 * #PHE "Doctor of Engineering" "Doctor of Engineering"
 * #PHE ^id = "3622"
-* #PHE ^property[=].code = #status
+* #PHE ^property[+].code = #status
 * #PHE ^property[=].valueCode = #A
 * #PHD "Doctor of Philosophy" "Doctor of Philosophy"
 * #PHD ^id = "3623"
-* #PHD ^property[=].code = #status
+* #PHD ^property[+].code = #status
 * #PHD ^property[=].valueCode = #A
 * #PHS "Doctor of Science" "Doctor of Science"
 * #PHS ^id = "3624"
-* #PHS ^property[=].code = #status
+* #PHS ^property[+].code = #status
 * #PHS ^property[=].valueCode = #A
 * #MD "Doctor of Medicine" "Doctor of Medicine"
 * #MD ^id = "3625"
-* #MD ^property[=].code = #status
+* #MD ^property[+].code = #status
 * #MD ^property[=].valueCode = #A
 * #DO "Doctor of Osteopathy" "Doctor of Osteopathy"
 * #DO ^id = "3626"
-* #DO ^property[=].code = #status
+* #DO ^property[+].code = #status
 * #DO ^property[=].valueCode = #A
 * #EMT "Emergency Medical Technician" "Emergency Medical Technician"
 * #EMT ^id = "3627"
-* #EMT ^property[=].code = #status
+* #EMT ^property[+].code = #status
 * #EMT ^property[=].valueCode = #A
 * #EMTP "Emergency Medical Technician - Paramedic" "Emergency Medical Technician - Paramedic"
 * #EMTP ^id = "3628"
-* #EMTP ^property[=].code = #status
+* #EMTP ^property[+].code = #status
 * #EMTP ^property[=].valueCode = #A
 * #FPNP "Family Practice Nurse Practitioner" "Family Practice Nurse Practitioner"
 * #FPNP ^id = "3629"
-* #FPNP ^property[=].code = #status
+* #FPNP ^property[+].code = #status
 * #FPNP ^property[=].valueCode = #A
 * #HS "High School Graduate" "High School Graduate"
 * #HS ^id = "3630"
-* #HS ^property[=].code = #status
+* #HS ^property[+].code = #status
 * #HS ^property[=].valueCode = #A
 * #JD "Juris Doctor" "Juris Doctor"
 * #JD ^id = "3631"
-* #JD ^property[=].code = #status
+* #JD ^property[+].code = #status
 * #JD ^property[=].valueCode = #A
 * #MA "Master of Arts" "Master of Arts"
 * #MA ^id = "3632"
-* #MA ^property[=].code = #status
+* #MA ^property[+].code = #status
 * #MA ^property[=].valueCode = #A
 * #MBA "Master of Business Administration" "Master of Business Administration"
 * #MBA ^id = "3633"
-* #MBA ^property[=].code = #status
+* #MBA ^property[+].code = #status
 * #MBA ^property[=].valueCode = #A
 * #MCE "Master of Civil Engineering" "Master of Civil Engineering"
 * #MCE ^id = "3634"
-* #MCE ^property[=].code = #status
+* #MCE ^property[+].code = #status
 * #MCE ^property[=].valueCode = #A
 * #MDI "Master of Divinity" "Master of Divinity"
 * #MDI ^id = "3635"
-* #MDI ^property[=].code = #status
+* #MDI ^property[+].code = #status
 * #MDI ^property[=].valueCode = #A
 * #MED "Master of Education" "Master of Education"
 * #MED ^id = "3636"
-* #MED ^property[=].code = #status
+* #MED ^property[+].code = #status
 * #MED ^property[=].valueCode = #A
 * #MEE "Master of Electrical Engineering" "Master of Electrical Engineering"
 * #MEE ^id = "3637"
-* #MEE ^property[=].code = #status
+* #MEE ^property[+].code = #status
 * #MEE ^property[=].valueCode = #A
 * #ME "Master of Engineering" "Master of Engineering"
 * #ME ^id = "3638"
-* #ME ^property[=].code = #status
+* #ME ^property[+].code = #status
 * #ME ^property[=].valueCode = #A
 * #MFA "Master of Fine Arts" "Master of Fine Arts"
 * #MFA ^id = "3639"
-* #MFA ^property[=].code = #status
+* #MFA ^property[+].code = #status
 * #MFA ^property[=].valueCode = #A
 * #MME "Master of Mechanical Engineering" "Master of Mechanical Engineering"
 * #MME ^id = "3640"
-* #MME ^property[=].code = #status
+* #MME ^property[+].code = #status
 * #MME ^property[=].valueCode = #A
 * #MS "Master of Science" "Master of Science"
 * #MS ^id = "3641"
-* #MS ^property[=].code = #status
+* #MS ^property[+].code = #status
 * #MS ^property[=].valueCode = #A
 * #MSL "Master of Science - Law" "Master of Science - Law"
 * #MSL ^id = "3642"
-* #MSL ^property[=].code = #status
+* #MSL ^property[+].code = #status
 * #MSL ^property[=].valueCode = #A
 * #MSN "Master of Science - Nursing" "Master of Science - Nursing"
 * #MSN ^id = "3643"
-* #MSN ^property[=].code = #status
+* #MSN ^property[+].code = #status
 * #MSN ^property[=].valueCode = #A
 * #MTH "Master of Theology" "Master of Theology"
 * #MTH ^id = "3644"
-* #MTH ^property[=].code = #status
+* #MTH ^property[+].code = #status
 * #MTH ^property[=].valueCode = #A
 * #MDA "Medical Assistant" "Medical Assistant"
 * #MDA ^id = "3645"
-* #MDA ^property[=].code = #status
+* #MDA ^property[+].code = #status
 * #MDA ^property[=].valueCode = #A
 * #MT "Medical Technician" "Medical Technician"
 * #MT ^id = "3646"
-* #MT ^property[=].code = #status
+* #MT ^property[+].code = #status
 * #MT ^property[=].valueCode = #A
 * #NG "Non-Graduate" "Non-Graduate"
 * #NG ^id = "3647"
-* #NG ^property[=].code = #status
+* #NG ^property[+].code = #status
 * #NG ^property[=].valueCode = #A
 * #NP "Nurse Practitioner" "Nurse Practitioner"
 * #NP ^id = "3648"
-* #NP ^property[=].code = #status
+* #NP ^property[+].code = #status
 * #NP ^property[=].valueCode = #A
 * #PA "Physician Assistant" "Physician Assistant"
 * #PA ^id = "3649"
-* #PA ^property[=].code = #status
+* #PA ^property[+].code = #status
 * #PA ^property[=].valueCode = #A
 * #RMA "Registered Medical Assistant" "Registered Medical Assistant"
 * #RMA ^id = "3650"
-* #RMA ^property[=].code = #status
+* #RMA ^property[+].code = #status
 * #RMA ^property[=].valueCode = #A
 * #RN "Registered Nurse" "Registered Nurse"
 * #RN ^id = "3651"
-* #RN ^property[=].code = #status
+* #RN ^property[+].code = #status
 * #RN ^property[=].valueCode = #A
 * #RPH "Registered Pharmacist" "Registered Pharmacist"
 * #RPH ^id = "3652"
-* #RPH ^property[=].code = #status
+* #RPH ^property[+].code = #status
 * #RPH ^property[=].valueCode = #A
 * #SEC "Secretarial Certificate" "Secretarial Certificate"
 * #SEC ^id = "3653"
-* #SEC ^property[=].code = #status
+* #SEC ^property[+].code = #status
 * #SEC ^property[=].valueCode = #A
 * #TS "Trade School Graduate" "Trade School Graduate"
 * #TS ^id = "3654"
-* #TS ^property[=].code = #status
+* #TS ^property[+].code = #status
 * #TS ^property[=].valueCode = #A
 
 ValueSet: Hl7VSDegreeLicenseCertificate
