@@ -37,3 +37,15 @@ Usage:          #example
 * content[0].attachment.contentType = #text/markdown
 * content[0].attachment.title = "About iHRIS"
 * content[0].attachment.data = "IyBBYm91dCBpSFJJUwoKVGhpcyBpcyBhIHRlc3RpbmcgYWJvdXQgcGFnZS4K"
+
+Instance: page-home
+InstanceOf: DocumentReference
+Usage: #example
+* meta.profile = "http://ihris.org/fhir/StructureDefinition/ihris-document"
+* status = #current
+* docStatus = #final
+* category = http://ihris.org/fhir/CodeSystem/ihris-document-category#open "Open Access"
+* date = "2020-08-19T14:54:00Z"
+* content.attachment.contentType = #text/markdown
+* content.attachment.data = "KipXZWxjb21lIHRvIHRoZSBpSFJJUyBEZW1vKioK"
+* content.attachment.title = "iHRIS Demo"
