@@ -32,21 +32,21 @@
           <v-list-item>
             <v-btn v-if="!edit" dark class="secondary" @click="$emit('set-edit', !edit)">
               <v-icon light>mdi-pencil</v-icon>
-              <span>Edit</span>
+              <span>{{ $t(`App.ihris-resource.Edit`) }}</span>
             </v-btn>
             <v-btn v-else dark class="secondary" @click="$router.go(0)">
               <v-icon light>mdi-pencil-off</v-icon>
-              <span>Cancel</span>
+              <span>{{ $t(`App.ihris-resource.Cancel`) }}</span>
             </v-btn>
             <v-spacer></v-spacer>
             <template v-if="edit">
               <v-btn v-if="valid" dark class="success darken-1" @click="processFHIR()" :disabled="!valid">
                 <v-icon light>mdi-content-save</v-icon>
-                <span>Save</span>
+                <span></span>
               </v-btn>
               <v-btn v-else dark class="warning" @click="$refs.form.validate()">
                 <v-icon light>mdi-content-save</v-icon>
-                <span>Save</span>
+                <span>{{ $t(`App.ihris-resource.Save`) }}</span>
               </v-btn>
             </template>
           </v-list-item>
@@ -59,16 +59,16 @@
               </v-btn>
             </v-list-item>
           </template>
-          <v-subheader v-if="sectionMenu" class="white--text"><h2>Sections</h2></v-subheader>
+          <v-subheader v-if="sectionMenu" class="white--text"><h2>{{$t(`App.ihris-resource.Sections`)}}</h2></v-subheader>
           <v-list-item v-for="section in sectionMenu"
           :href="'#section-'+section.name"
           :key="section.name"
           :class="'#section-' + section.name === path ? 'highlighted' : ''"
           >
             <v-list-item-content class="white--text" v-if="!edit || !section.secondary">
-              <v-list-item-title class="text-uppercase"><h4>{{ section.title }}</h4></v-list-item-title>
-              <v-list-item-subtitle class="white--text">{{ section.desc }}</v-list-item-subtitle>
-            </v-list-item-content>
+              <v-list-item-title class="text-uppercase"><h4>{{$t(`App.ihris-resource.${section.title}`)}}</h4></v-list-item-title>
+              <v-list-item-subtitle class="white--text">{{ $t(`App.ihris-resource.${section.desc}`)}}</v-list-item-subtitle>
+              </v-list-item-content>
           </v-list-item>
         </v-list>
 

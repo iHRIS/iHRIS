@@ -140,6 +140,11 @@ export default {
     }
   },
   created: function() {
+    if(!localStorage.getItem('activeLang')){
+      localStorage.setItem('activeLang', "English")
+      localStorage.setItem('activeFlag', "en")
+      localStorage.setItem('activeCode', "en")
+    }
     this.updateConfig()
     fetch("/auth").then(()=> {
 

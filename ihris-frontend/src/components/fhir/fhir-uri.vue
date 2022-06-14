@@ -2,11 +2,11 @@
   <ihris-element :edit="edit" :loading="false">
     <template #form>
       <v-text-field :error-messages="errors" @change="errors = []" :disabled="disabled" :label="display" v-model="value" outlined hide-details="auto" :rules="rules" dense>
-        <template #label>{{display}} <span v-if="required" class="red--text font-weight-bold">*</span></template>
+        <template #label>{{$t(`App.fhir-uri.${display}`)}} <span v-if="required" class="red--text font-weight-bold">*</span></template>
       </v-text-field>
     </template>
     <template #header>
-      {{display}}
+      {{$t(`App.fhir-uri.${display}`)}}
     </template>
     <template #value>
       {{value}}

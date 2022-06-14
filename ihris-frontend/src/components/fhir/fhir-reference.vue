@@ -14,7 +14,7 @@
         <template v-slot:activator="{ on }">
           <v-text-field
             v-model="displayValue"
-            :label="display"
+            :label="$t(`App.fhir-reference.${display}`)"
             readonly
             v-on="on"
             outlined
@@ -23,7 +23,7 @@
             :error-messages="errors"
             :loading="loading"
             dense>
-            <template #label>{{display}} <span v-if="required" class="red--text font-weight-bold">*</span></template>
+            <template #label>{{$t(`App.fhir-reference.${display}`)}} <span v-if="required" class="red--text font-weight-bold">*</span></template>
           </v-text-field>
         </template>
         <v-card v-if="!((disabled) || (preset && $route.name === 'resource_add'))">
@@ -59,11 +59,11 @@
         :error-messages="errors"
         @change="errors = []"
       >
-        <template #label>{{display}} <span v-if="required" class="red--text font-weight-bold">*</span></template>
+        <template #label>{{$t(`App.fhir-reference.${display}`)}} <span v-if="required" class="red--text font-weight-bold">*</span></template>
       </v-autocomplete>
     </template>
     <template #header>
-      {{display}}
+      {{$t(`App.fhir-reference.${display}`)}}
     </template>
     <template #value>
       {{displayValue}}
@@ -189,7 +189,7 @@ export default {
           params = { "partof": treetop }
         } 
       } else {
-        params = { "partof:missing": true }
+        params = { "partof": "ET" }
       }
       params._count = 500
       let url = "/fhir/"+this.resource+"?"+querystring.stringify( params )
@@ -248,6 +248,7 @@ export default {
       } )
     },
     addItems: function(url, items) {
+      console.log("the url",url)
       fetch( url ).then( response => {
         if ( response.ok ) {
           response.json().then( async data => {
@@ -279,6 +280,7 @@ export default {
             this.loading = false
           } )
         } else {
+          console.log("//////////////////////////////")
           console.log("Failed to add items for",url,response.status)
           this.loading = false
         }
