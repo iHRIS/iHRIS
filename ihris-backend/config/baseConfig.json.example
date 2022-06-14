@@ -12,12 +12,20 @@
       "valueString": "ihris"
     },
     {
+      "name": "app:installed",
+      "valueString": "false"
+    },
+    {
       "name": "builtFSHFIles",
-      "valueString": "../../ig/input/fsh/build/input"
+      "valueString": "../../ig/fsh-generated/resources"
     },
     {
       "name": "profileBaseUrl",
       "valueString": "http://ihris.org/fhir"
+    },
+    {
+      "name": "keycloak:installedLocation",
+      "valueString": "/home/user/keycloak-15.0.2"
     },
     {
       "name": "keycloak:baseURL",
@@ -30,6 +38,14 @@
     {
       "name": "keycloak:UIClientId",
       "valueString": "ihris-frontend"
+    },
+    {
+      "name": "keycloak:adminUser",
+      "valueString": "admin"
+    },
+    {
+      "name": "keycloak:adminPassword",
+      "valueString": "admin"
     },
     {
       "name": "keycloak:backendClientId",
