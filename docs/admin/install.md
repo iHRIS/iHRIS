@@ -120,18 +120,6 @@ Test the [hapi-fhir server](http://localhost:8080/hapi) to make sure it's runnin
 http://localhost:8080/hapi
 ```
 
-#### Load basic definitions
-Download and install hapi-fhir-cli:
-https://hapifhir.io/hapi-fhir/docs/tools/hapi_fhir_cli.html
-```bash
-wget https://github.com/hapifhir/hapi-fhir/releases/download/v5.7.0/hapi-fhir-5.7.0-cli.tar.bz2
-```
-**Note**: Be sure to download the hapi fhir cli for the version on hapi you have installed. You can check the version in the pom.xml file.
-Then load the basic definitions
-```bash
-./hapi-fhir-cli upload-definitions -v r4 -t http://localhost:8080/hapi/fhir/
-```
-
 ## SUSHI
 ```bash
 sudo npm install -g fsh-sushi
