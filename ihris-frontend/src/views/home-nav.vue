@@ -1,7 +1,6 @@
 <template>
   <div class="home">
     <v-container v-if="$store.state.user.loggedin">
-
       <v-row>
       <template v-for="(item,idx) in menu">
 
@@ -17,7 +16,7 @@
               :class="colors[idx % colors.length]"
             >
               <v-icon dark>{{item.icon}}</v-icon>
-              {{item.text}}
+              {{$t(`App.menu.${item.text}`)}}
             </v-card-title>
 
             <v-card-text>
@@ -27,7 +26,7 @@
                   :key="sub.id"
                   :to="sub.url"
                 >
-                  <v-list-item-title class="text-h2">{{sub.text}}</v-list-item-title>
+                  <v-list-item-title class="text-h2">{{$t(`App.menu.${sub.text}`)}}</v-list-item-title>
                 </v-list-item>
               </v-list>
               <v-list v-else>
@@ -35,7 +34,7 @@
                   :to="item.url"
                   :key="item.id"
                 >
-                  <v-list-item-title class="text-h2">{{item.text}}</v-list-item-title>
+                  <v-list-item-title class="text-h2">{{$t(`App.menu.${item.text}`)}}</v-list-item-title>
                 </v-list-item>
               </v-list>
             </v-card-text>

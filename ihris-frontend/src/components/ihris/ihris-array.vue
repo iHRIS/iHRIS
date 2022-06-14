@@ -2,7 +2,7 @@
   <div>
     <div v-if="simpleDisplay">
       <v-row dense>
-        <v-col :cols="$store.state.cols.header" class="font-weight-bold">{{label}}</v-col><v-col :cols="$store.state.cols.header">{{simpleValue}}</v-col>
+        <v-col :cols="$store.state.cols.header" class="font-weight-bold">{{$t(`App.ihris-array.${label}`)}}</v-col><v-col :cols="$store.state.cols.header">{{simpleValue}}</v-col>
       </v-row>
       <v-divider></v-divider>
     </div>
@@ -13,7 +13,7 @@
           dark
           v-if="edit"
           >
-          {{ label }}
+          {{ $t(`App.ihris-array.${label}`) }}
           <v-spacer></v-spacer>
           <v-btn v-if="subAvailable" icon @click="removeRow()"><v-icon class="font-weight-bold">mdi-minus</v-icon></v-btn>
           <v-btn v-if="addAvailable" icon @click="addRow()"><v-icon>mdi-plus</v-icon></v-btn>

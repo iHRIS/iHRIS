@@ -35,7 +35,7 @@
           </v-btn>
         </v-list-item>
         <v-divider color="white"></v-divider>
-        <v-subheader class="white--text"><h2>Sections</h2></v-subheader>
+        <v-subheader class="white--text"><h2>{{$t(`App.ihris-codesystem.section`)}}</h2></v-subheader>
         <v-list-item v-for="section in sectionMenu" :href="'#section-'+section.name" :key="section.name">
           <v-list-item-content class="white--text" v-if="!edit || !section.secondary">
             <v-list-item-title class="text-uppercase"><h4>{{ section.title }}</h4></v-list-item-title>
@@ -184,8 +184,6 @@ export default {
       opts.body = JSON.stringify(this.fhir)
       console.log("SAVE",url,this.fhir)
       fetch( url, opts ).then(response => {
-        //console.log(response)
-        //console.log(response.headers)
         if ( response.status === 200 ) {
           this.overlay = false
           this.loading = false

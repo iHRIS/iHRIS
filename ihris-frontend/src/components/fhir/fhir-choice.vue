@@ -4,7 +4,7 @@
       :loading="loading" 
       :label="label" 
       v-model="valueCode" 
-      :items="items" 
+      :items="items.filter(x => !x.code.includes('(deactivated)'))"
       outlined 
       hide-details="auto" 
       :error-messages="errors"
@@ -14,7 +14,7 @@
       dense
       @change="errors = []"
       >
-      <template #label>{{label}} <span v-if="required" class="red--text font-weight-bold">*</span></template>
+      <template #label>{{$t(`App.fhir-choice.${label}`)}} <span v-if="required" class="red--text font-weight-bold">*</span></template>
     </v-select>
   </v-container>
 </template>

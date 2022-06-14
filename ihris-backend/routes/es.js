@@ -11,54 +11,112 @@ const es = require('../modules/es')
 const nconf = require('../modules/config')
 const outcomes = require('../config/operationOutcomes')
 
-router.post('/export/:format/:index', (req, res) => {
-  let searchQry = req.body.query
-  let headers = req.body.headers
-  let label = req.body.label
-  es.getData({indexName: req.params.index, searchQuery: searchQry}, (err, documents) => {
-    if(err) {
-      return res.status(500).send()
-    }
-    let rows = ''
-    for(let header of headers) {
-      if(!rows) {
-        rows = header.text
+router.post("/export/:format/:index", (req, res) => {
+  let searchQry = req.body.query;
+  let headers = req.body.headers;
+  let label = req.body.label;
+  let isSelected = req.body.selected;
+
+  if (isSelected && isSelected.length > 0) {
+    let rows = "";
+    for (let header of headers) {
+      if (!rows) {
+        rows = header.text;
       } else {
-        rows += ',' + header.text
+        rows += "," + header.text;
       }
     }
-    rows += os.EOL
-    for(let doc of documents) {
-      let row
-      for(let header of headers) {
-        if(row === undefined) {
-          if(doc._source[header.value] === null || doc._source[header.value] === undefined) {
-            row = ' '
+    rows += os.EOL;
+    for (let doc of isSelected) {
+      let row;
+      for (let header of headers) {
+        if (row === undefined) {
+          if (doc[header.value] === null || doc[header.value] === undefined) {
+            console.log("doc: ", doc, "header", header);
+            row = " ";
           } else {
-            row = "\""+doc._source[header.value]+"\"";
+            row = '"' + doc[header.value] + '"';
           }
         } else {
-          if(doc._source[header.value] === null || doc._source[header.value] === undefined) {
-            row += ','
+          if (doc[header.value] === null || doc[header.value] === undefined) {
+            row += ",";
           } else {
-            row += ',' + "\""+doc._source[header.value]+"\"";
+            row += "," + '"' + doc[header.value] + '"';
           }
         }
       }
-      rows += row + os.EOL
+      rows += row + os.EOL;
     }
-    if (!fs.existsSync(`${__dirname}/../tmp`)){
+    if (!fs.existsSync(`${__dirname}/../tmp`)) {
       fs.mkdirSync(`${__dirname}/../tmp`);
     }
-    let fileName = `${__dirname}/../tmp/${label}-${nanoid(10)}.csv`
-    fs.writeFileSync(fileName, rows)
-    res.send(fileName.replace(`${__dirname}/..`, ''))
-    //remove the file after 4 minutes
-    setTimeout(() => {
-      fs.unlinkSync(fileName);
-    }, 240000);
-  })
-})
+    let fileName = `${__dirname}/../tmp/${label}-${nanoid(10)}.csv`;
+    fs.writeFileSync(fileName, rows);
+    if (fs.existsSync(fileName)) {
+      res.download(fileName);
+      setTimeout(() => {
+        fs.unlinkSync(fileName);
+      }, 240000);
+      // res.send(fileName.replace(`${__dirname}/..`, ""));
+    }
+  } else {
+    es.getData(
+        { indexName: req.params.index, searchQuery: searchQry },
+        (err, documents) => {
+          if (err) {
+            return res.status(500).send();
+          }
+          let rows = "";
+          for (let header of headers) {
+            if (!rows) {
+              rows = header.text;
+            } else {
+              rows += "," + header.text;
+            }
+          }
+          rows += os.EOL;
+          for (let doc of documents) {
+            let row;
+            for (let header of headers) {
+              if (row === undefined) {
+                if (
+                    doc._source[header.value] === null ||
+                    doc._source[header.value] === undefined
+                ) {
+                  row = " ";
+                } else {
+                  row = '"' + doc._source[header.value] + '"';
+                }
+              } else {
+                if (
+                    doc._source[header.value] === null ||
+                    doc._source[header.value] === undefined
+                ) {
+                  row += ",";
+                } else {
+                  row += "," + '"' + doc._source[header.value] + '"';
+                }
+              }
+            }
+            rows += row + os.EOL;
+          }
+          if (!fs.existsSync(`${__dirname}/../tmp`)) {
+            fs.mkdirSync(`${__dirname}/../tmp`);
+          }
+          let fileName = `${__dirname}/../tmp/${label}-${nanoid(10)}.csv`;
+          fs.writeFileSync(fileName, rows);
+          if (fs.existsSync(fileName)) {
+            res.download(fileName);
+            setTimeout(() => {
+              fs.unlinkSync(fileName);
+            }, 240000);
+            // res.send(fileName.replace(`${__dirname}/..`, ""));
+          }
+          //remove the file after 4 minutes
+        }
+    );
+  }
+});
 
 router.get('/:index/:operation?', (req, res) => {
   let indexName = req.params.index

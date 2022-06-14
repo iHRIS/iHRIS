@@ -2,13 +2,13 @@
   <v-select
     v-if="binding"
     :loading="loading"
-    :label="label"
+    :label="$t(`App.ihris-search-term.${label}`)"
     v-model="value"
-    :items="items"
+    :items="items.filter(x => !x.code.includes('(deactivated)'))"
     outlined
     :error-messages="err_messages"
     :error="error"
-    shaped
+    class="ma-2"
     clearable
     hide-details
     small-chips
@@ -19,7 +19,7 @@
     item-text="display"
     item-value="code">
   </v-select>
-  <v-text-field v-else :label="label" v-model="value" dense outlined hide-details shaped clearable @change="updateSearch()" @click:clear="clearSearch()">
+  <v-text-field v-else :label="$t(`App.ihris-search-term.${label}`)" class="ma-2" v-model="value" dense outlined hide-details  clearable @change="updateSearch()" @click:clear="clearSearch()">
   </v-text-field>
 </template>
 

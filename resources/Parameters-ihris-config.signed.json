@@ -16,11 +16,11 @@
             "code": "1.2.840.10065.1.12.1.14"
           }
         ],
-        "when": "2022-03-11T07:40:37.187Z",
+        "when": "2022-06-13T14:02:21.608Z",
         "who": {
           "reference": "http://ihris.org/fhir/Organization/ihris"
         },
-        "data": "KBJS9kWyKn0kE49RyQiK9IMcy8wSTM54flLIzkjX/fEMC7U6eqGd6TtH7vQtAyTnbfpcJW369QNgzp9Y46N/MclYshCpkS2HK4nqDksT8Ki9b0hIIRwSxCYC3QEld7qo7wrOXEhCz9k7qd+DlH7W/M5LbEJ56oo2lX7py1hve7Y="
+        "data": "kNyE86/sFakqZVQLbWug58S2/pVBLYmiALYRFSChgcesdrwFfe9CshMMcSMV/W7rphTV/uS/ZD3LDlr3xO2PyiVsNa2O+i5uvexGtVWegY74vnvrTaeK/H9kT2xWHRXC5R8nl4TY4N3rosqPjacSrYXPwYER/kunqag8QPWb/II="
       }
     },
     {
@@ -81,6 +81,22 @@
         {
           "name": "site:footer:links:ihris:href",
           "valueString": "http://ihris.org/"
+        },
+        {
+          "name": "site:nav:menu:dashboard:text",
+          "valueString": "Dashboard"
+        },
+        {
+          "name": "site:nav:menu:dashboard:order",
+          "valueString": "0"
+        },
+        {
+          "name": "site:nav:menu:dashboard:icon",
+          "valueString": "mdi-chart-arc"
+        },
+        {
+          "name": "site:nav:menu:dashboard:url",
+          "valueString": "/dashboard"
         },
         {
           "name": "site:nav:active",
@@ -148,7 +164,7 @@
         },
         {
           "name": "site:nav:menu:location:order",
-          "valueString": "4"
+          "valueString": "3"
         },
         {
           "name": "site:nav:menu:location:icon",
@@ -172,7 +188,7 @@
         },
         {
           "name": "site:nav:menu:mhero:order",
-          "valueString": "3"
+          "valueString": "5"
         },
         {
           "name": "site:nav:menu:mhero:text",
@@ -419,22 +435,6 @@
           "valueString": "16"
         },
         {
-          "name": "site:nav:menu:dashboard:text",
-          "valueString": "Dashboard"
-        },
-        {
-          "name": "site:nav:menu:dashboard:order",
-          "valueString": "5"
-        },
-        {
-          "name": "site:nav:menu:dashboard:icon",
-          "valueString": "mdi-chart-arc"
-        },
-        {
-          "name": "site:nav:menu:dashboard:url",
-          "valueString": "/dashboard"
-        },
-        {
           "name": "site:nav:menu:reports:text",
           "valueString": "Reports"
         },
@@ -464,7 +464,7 @@
         },
         {
           "name": "site:nav:menu:users:order",
-          "valueString": "7"
+          "valueString": "8"
         },
         {
           "name": "site:nav:menu:users:icon",
@@ -495,28 +495,12 @@
           "valueString": "/resource/search/task"
         },
         {
-          "name": "site:nav:menu:password:text",
-          "valueString": "Change Password"
-        },
-        {
-          "name": "site:nav:menu:password:order",
-          "valueString": "8"
-        },
-        {
-          "name": "site:nav:menu:password:icon",
-          "valueString": "mdi-lock-reset"
-        },
-        {
-          "name": "site:nav:menu:password:url",
-          "valueString": "/questionnaire/ihris-change-password/person"
-        },
-        {
           "name": "site:nav:menu:audit:text",
           "valueString": "Audit Logs"
         },
         {
           "name": "site:nav:menu:audit:order",
-          "valueString": "9"
+          "valueString": "7"
         },
         {
           "name": "site:nav:menu:audit:icon",
@@ -525,6 +509,22 @@
         {
           "name": "site:nav:menu:audit:url",
           "valueString": "/resource/view/auditevent"
+        },
+        {
+          "name": "site:nav:menu:password:text",
+          "valueString": "Change Password"
+        },
+        {
+          "name": "site:nav:menu:password:order",
+          "valueString": "9"
+        },
+        {
+          "name": "site:nav:menu:password:icon",
+          "valueString": "mdi-lock-reset"
+        },
+        {
+          "name": "site:nav:menu:password:url",
+          "valueString": "/questionnaire/ihris-change-password/person"
         },
         {
           "name": "shortname:Practitioner:format",

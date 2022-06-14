@@ -1,6 +1,6 @@
 <template>
   <v-card>
-    <v-card-subtitle class="primary--text text-uppercase font-weight-bold">{{ display }}</v-card-subtitle>
+    <v-card-subtitle class="primary--text text-uppercase font-weight-bold">{{ $t(`App.ihris-complex-card.${display}`) }}</v-card-subtitle>
     <v-card-text v-for="(error,idx) in errors" :key="idx" class="error white--text font-weight-bold">{{error}}</v-card-text>
     <v-card-text>
       <slot :source="source"></slot>

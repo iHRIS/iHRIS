@@ -1,6 +1,6 @@
 import Vue from "vue"
 import VueRouter from "vue-router"
-//import Home from "../views/home.vue"
+import Home from "../views/home.vue"
 import Static from "../views/static-page.vue"
 import HomeNav from "../views/home-nav.vue"
 //import Test from "../views/test.vue"
@@ -13,7 +13,7 @@ const routes = [{
     path: "/",
     name: "home",
     components: {
-      default: Static,
+      default: Home,
       homeNav: HomeNav
     },
     props: { default: { id: "page-home", blankOnErr: true } }

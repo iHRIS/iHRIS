@@ -1,21 +1,18 @@
 <template>
   <div>
-
   <v-app-bar color="white" app clipped-left clipped-right>
     <router-link to="/"><v-img :src="'/images/' + header.logo" contain max-height="36" max-width="106" /></router-link>
-
     <v-toolbar-title class="headline ml-2" bottom="true">
-      <span v-if="header.title" class="primary--text">{{ header.title }}</span>
-      <span class="secondary--text" v-if="header.site"> | {{ header.site }}</span>
+      <span v-if="header.title" class="primary--text">{{ $t('App.title') }}</span>
+      <span class="secondary--text" v-if="header.site"> | {{ $t('App.site')}}</span>
     </v-toolbar-title>
-
     <v-spacer v-if=$store.state.security_off></v-spacer>
     <div class="error font-weight-bold white--text" dark v-if="$store.state.security_off">
       Security has been disabled for remote configuration and modules!  <br />
       This should only be done during development.
     </div>
     <v-spacer></v-spacer>
-    <div>Welcome <span v-if="$store.state.user.loggedin">, {{ $store.state.user.name }}</span></div>
+    <div>{{$t("App.wellCome")}} <span v-if="$store.state.user.loggedin">, {{ $store.state.user.name }}</span></div>
     <v-spacer></v-spacer>
     <v-progress-circular
       indeterminate
@@ -28,34 +25,15 @@
     <v-btn icon title="Help">
       <v-icon>mdi-help</v-icon>
     </v-btn>
-    <v-menu
-      left
-      bottom
-      v-if="!$store.state.user.loggedin"
-    >
-      <template v-slot:activator="{ on }">
-        <v-btn color="success" class="mx-2" small fab dark v-on="on" title="Login">
-          <v-icon>mdi-login</v-icon>
-        </v-btn>
-      </template>
-      <v-list>
-        <v-list-item
-          v-for="auth in header.auths"
-          :key="auth.id"
-        >
-          <v-list-item-title>
-            <auth-button :data="auth" v-on:loggedin="$emit('loggedin', $event)"></auth-button>
-          </v-list-item-title>
-        </v-list-item>
-      </v-list>
-    </v-menu>
+    <div>
+      <language-switcher />
+    </div>
     <template v-if="$store.state.user.loggedin">
       <v-btn color="warning" small fab dark @click="logout" title="Logout" :loading="loading" :disabled="loading">
         <v-icon>mdi-logout</v-icon>
       </v-btn>
     </template>
   </v-app-bar>
-
     <v-overlay :value="idle_countdown">
       <v-card class="secondary lighten-1">
         <v-card-title class="headline warning white--text" primary-title>Idle - Auto Logout</v-card-title>
@@ -67,7 +45,7 @@
 
 <script>
 import VueCookies from 'vue-cookies'
-import AuthButton from "./auth-button"
+import LanguageSwitcher from "@/components/layout/language-switcher";
 
 export default {
   name: "the-header",
@@ -80,7 +58,7 @@ export default {
     }
   },
   components: {
-    AuthButton
+    LanguageSwitcher,
   },
   onIdle() {
       //if ( this.$store.state.user.loggedin ) this.logout(null, true)
