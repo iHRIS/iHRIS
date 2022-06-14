@@ -5755,3 +5755,1006 @@ Description: "Concepts specifying an educational degree (e.g., MD).  Used in the
 * ^contact.telecom.value = "https://github.com/HL7/UTG"
 * ^copyright = "Copyright HL7. Licensed under creative commons public domain"
 * include codes from system http://terminology.hl7.org/CodeSystem/v2-0360|2.1.0
+
+ValueSet: Currencies
+Id: currencies
+Title: "CurrencyCode"
+Description: "Currency codes from ISO 4217 (see https://www.iso.org/iso-4217-currency-codes.html)"
+* ^meta.versionId = "1"
+* ^meta.lastUpdated = "2020-05-31T23:14:39.281+00:00"
+* ^meta.source = "#jOyZdehzLMngJhS1"
+* ^meta.profile = "http://hl7.org/fhir/StructureDefinition/shareablevalueset"
+* ^extension[0].url = "http://hl7.org/fhir/StructureDefinition/structuredefinition-wg"
+* ^extension[=].valueCode = #vocab
+* ^extension[+].url = "http://hl7.org/fhir/StructureDefinition/structuredefinition-standards-status"
+* ^extension[=].valueCode = #normative
+* ^extension[+].url = "http://hl7.org/fhir/StructureDefinition/structuredefinition-normative-version"
+* ^extension[=].valueCode = #4.0.0
+* ^extension[+].url = "http://hl7.org/fhir/StructureDefinition/structuredefinition-fmm"
+* ^extension[=].valueInteger = 5
+* ^url = "http://hl7.org/fhir/ValueSet/currencies"
+* ^identifier.system = "urn:ietf:rfc:3986"
+* ^identifier.value = "urn:oid:2.16.840.1.113883.4.642.3.1025"
+* ^version = "4.0.1"
+* ^status = #active
+* ^experimental = false
+* ^date = "2019-11-01T09:29:23+11:00"
+* ^publisher = "HL7 International - FHIR-Infrastructure"
+* ^contact.telecom.system = #url
+* ^contact.telecom.value = "http://hl7.org/fhir"
+* urn:iso:std:iso:4217#AED "United Arab Emirates dirham"
+* urn:iso:std:iso:4217#AFN "Afghan afghani"
+* urn:iso:std:iso:4217#ALL "Albanian lek"
+* urn:iso:std:iso:4217#AMD "Armenian dram"
+* urn:iso:std:iso:4217#ANG "Netherlands Antillean guilder"
+* urn:iso:std:iso:4217#AOA "Angolan kwanza"
+* urn:iso:std:iso:4217#ARS "Argentine peso"
+* urn:iso:std:iso:4217#AUD "Australian dollar"
+* urn:iso:std:iso:4217#AWG "Aruban florin"
+* urn:iso:std:iso:4217#AZN "Azerbaijani manat"
+* urn:iso:std:iso:4217#BAM "Bosnia and Herzegovina convertible mark"
+* urn:iso:std:iso:4217#BBD "Barbados dollar"
+* urn:iso:std:iso:4217#BDT "Bangladeshi taka"
+* urn:iso:std:iso:4217#BGN "Bulgarian lev"
+* urn:iso:std:iso:4217#BHD "Bahraini dinar"
+* urn:iso:std:iso:4217#BIF "Burundian franc"
+* urn:iso:std:iso:4217#BMD "Bermudian dollar"
+* urn:iso:std:iso:4217#BND "Brunei dollar"
+* urn:iso:std:iso:4217#BOB "Boliviano"
+* urn:iso:std:iso:4217#BOV "Bolivian Mvdol (funds code)"
+* urn:iso:std:iso:4217#BRL "Brazilian real"
+* urn:iso:std:iso:4217#BSD "Bahamian dollar"
+* urn:iso:std:iso:4217#BTN "Bhutanese ngultrum"
+* urn:iso:std:iso:4217#BWP "Botswana pula"
+* urn:iso:std:iso:4217#BYN "Belarusian ruble"
+* urn:iso:std:iso:4217#BZD "Belize dollar"
+* urn:iso:std:iso:4217#CAD "Canadian dollar"
+* urn:iso:std:iso:4217#CDF "Congolese franc"
+* urn:iso:std:iso:4217#CHE "WIR Euro (complementary currency)"
+* urn:iso:std:iso:4217#CHF "Swiss franc"
+* urn:iso:std:iso:4217#CHW "WIR Franc (complementary currency)"
+* urn:iso:std:iso:4217#CLF "Unidad de Fomento (funds code)"
+* urn:iso:std:iso:4217#CLP "Chilean peso"
+* urn:iso:std:iso:4217#CNY "Renminbi (Chinese) yuan[8]"
+* urn:iso:std:iso:4217#COP "Colombian peso"
+* urn:iso:std:iso:4217#COU "Unidad de Valor Real (UVR) (funds code)[9]"
+* urn:iso:std:iso:4217#CRC "Costa Rican colon"
+* urn:iso:std:iso:4217#CUC "Cuban convertible peso"
+* urn:iso:std:iso:4217#CUP "Cuban peso"
+* urn:iso:std:iso:4217#CVE "Cape Verde escudo"
+* urn:iso:std:iso:4217#CZK "Czech koruna"
+* urn:iso:std:iso:4217#DJF "Djiboutian franc"
+* urn:iso:std:iso:4217#DKK "Danish krone"
+* urn:iso:std:iso:4217#DOP "Dominican peso"
+* urn:iso:std:iso:4217#DZD "Algerian dinar"
+* urn:iso:std:iso:4217#EGP "Egyptian pound"
+* urn:iso:std:iso:4217#ERN "Eritrean nakfa"
+* urn:iso:std:iso:4217#ETB "Ethiopian birr"
+* urn:iso:std:iso:4217#EUR "Euro"
+* urn:iso:std:iso:4217#FJD "Fiji dollar"
+* urn:iso:std:iso:4217#FKP "Falkland Islands pound"
+* urn:iso:std:iso:4217#GBP "Pound sterling"
+* urn:iso:std:iso:4217#GEL "Georgian lari"
+* urn:iso:std:iso:4217#GGP "Guernsey Pound"
+* urn:iso:std:iso:4217#GHS "Ghanaian cedi"
+* urn:iso:std:iso:4217#GIP "Gibraltar pound"
+* urn:iso:std:iso:4217#GMD "Gambian dalasi"
+* urn:iso:std:iso:4217#GNF "Guinean franc"
+* urn:iso:std:iso:4217#GTQ "Guatemalan quetzal"
+* urn:iso:std:iso:4217#GYD "Guyanese dollar"
+* urn:iso:std:iso:4217#HKD "Hong Kong dollar"
+* urn:iso:std:iso:4217#HNL "Honduran lempira"
+* urn:iso:std:iso:4217#HRK "Croatian kuna"
+* urn:iso:std:iso:4217#HTG "Haitian gourde"
+* urn:iso:std:iso:4217#HUF "Hungarian forint"
+* urn:iso:std:iso:4217#IDR "Indonesian rupiah"
+* urn:iso:std:iso:4217#ILS "Israeli new shekel"
+* urn:iso:std:iso:4217#IMP "Isle of Man Pound"
+* urn:iso:std:iso:4217#INR "Indian rupee"
+* urn:iso:std:iso:4217#IQD "Iraqi dinar"
+* urn:iso:std:iso:4217#IRR "Iranian rial"
+* urn:iso:std:iso:4217#ISK "Icelandic króna"
+* urn:iso:std:iso:4217#JEP "Jersey Pound"
+* urn:iso:std:iso:4217#JMD "Jamaican dollar"
+* urn:iso:std:iso:4217#JOD "Jordanian dinar"
+* urn:iso:std:iso:4217#JPY "Japanese yen"
+* urn:iso:std:iso:4217#KES "Kenyan shilling"
+* urn:iso:std:iso:4217#KGS "Kyrgyzstani som"
+* urn:iso:std:iso:4217#KHR "Cambodian riel"
+* urn:iso:std:iso:4217#KMF "Comoro franc"
+* urn:iso:std:iso:4217#KPW "North Korean won"
+* urn:iso:std:iso:4217#KRW "South Korean won"
+* urn:iso:std:iso:4217#KWD "Kuwaiti dinar"
+* urn:iso:std:iso:4217#KYD "Cayman Islands dollar"
+* urn:iso:std:iso:4217#KZT "Kazakhstani tenge"
+* urn:iso:std:iso:4217#LAK "Lao kip"
+* urn:iso:std:iso:4217#LBP "Lebanese pound"
+* urn:iso:std:iso:4217#LKR "Sri Lankan rupee"
+* urn:iso:std:iso:4217#LRD "Liberian dollar"
+* urn:iso:std:iso:4217#LSL "Lesotho loti"
+* urn:iso:std:iso:4217#LYD "Libyan dinar"
+* urn:iso:std:iso:4217#MAD "Moroccan dirham"
+* urn:iso:std:iso:4217#MDL "Moldovan leu"
+* urn:iso:std:iso:4217#MGA "Malagasy ariary"
+* urn:iso:std:iso:4217#MKD "Macedonian denar"
+* urn:iso:std:iso:4217#MMK "Myanmar kyat"
+* urn:iso:std:iso:4217#MNT "Mongolian tögrög"
+* urn:iso:std:iso:4217#MOP "Macanese pataca"
+* urn:iso:std:iso:4217#MRU "Mauritanian ouguiya"
+* urn:iso:std:iso:4217#MUR "Mauritian rupee"
+* urn:iso:std:iso:4217#MVR "Maldivian rufiyaa"
+* urn:iso:std:iso:4217#MWK "Malawian kwacha"
+* urn:iso:std:iso:4217#MXN "Mexican peso"
+* urn:iso:std:iso:4217#MXV "Mexican Unidad de Inversion (UDI) (funds code)"
+* urn:iso:std:iso:4217#MYR "Malaysian ringgit"
+* urn:iso:std:iso:4217#MZN "Mozambican metical"
+* urn:iso:std:iso:4217#NAD "Namibian dollar"
+* urn:iso:std:iso:4217#NGN "Nigerian naira"
+* urn:iso:std:iso:4217#NIO "Nicaraguan córdoba"
+* urn:iso:std:iso:4217#NOK "Norwegian krone"
+* urn:iso:std:iso:4217#NPR "Nepalese rupee"
+* urn:iso:std:iso:4217#NZD "New Zealand dollar"
+* urn:iso:std:iso:4217#OMR "Omani rial"
+* urn:iso:std:iso:4217#PAB "Panamanian balboa"
+* urn:iso:std:iso:4217#PEN "Peruvian Sol"
+* urn:iso:std:iso:4217#PGK "Papua New Guinean kina"
+* urn:iso:std:iso:4217#PHP "Philippine piso[13]"
+* urn:iso:std:iso:4217#PKR "Pakistani rupee"
+* urn:iso:std:iso:4217#PLN "Polish złoty"
+* urn:iso:std:iso:4217#PYG "Paraguayan guaraní"
+* urn:iso:std:iso:4217#QAR "Qatari riyal"
+* urn:iso:std:iso:4217#RON "Romanian leu"
+* urn:iso:std:iso:4217#RSD "Serbian dinar"
+* urn:iso:std:iso:4217#RUB "Russian ruble"
+* urn:iso:std:iso:4217#RWF "Rwandan franc"
+* urn:iso:std:iso:4217#SAR "Saudi riyal"
+* urn:iso:std:iso:4217#SBD "Solomon Islands dollar"
+* urn:iso:std:iso:4217#SCR "Seychelles rupee"
+* urn:iso:std:iso:4217#SDG "Sudanese pound"
+* urn:iso:std:iso:4217#SEK "Swedish krona/kronor"
+* urn:iso:std:iso:4217#SGD "Singapore dollar"
+* urn:iso:std:iso:4217#SHP "Saint Helena pound"
+* urn:iso:std:iso:4217#SLL "Sierra Leonean leone"
+* urn:iso:std:iso:4217#SOS "Somali shilling"
+* urn:iso:std:iso:4217#SRD "Surinamese dollar"
+* urn:iso:std:iso:4217#SSP "South Sudanese pound"
+* urn:iso:std:iso:4217#STN "São Tomé and Príncipe dobra"
+* urn:iso:std:iso:4217#SVC "Salvadoran colón"
+* urn:iso:std:iso:4217#SYP "Syrian pound"
+* urn:iso:std:iso:4217#SZL "Swazi lilangeni"
+* urn:iso:std:iso:4217#THB "Thai baht"
+* urn:iso:std:iso:4217#TJS "Tajikistani somoni"
+* urn:iso:std:iso:4217#TMT "Turkmenistan manat"
+* urn:iso:std:iso:4217#TND "Tunisian dinar"
+* urn:iso:std:iso:4217#TOP "Tongan paʻanga"
+* urn:iso:std:iso:4217#TRY "Turkish lira"
+* urn:iso:std:iso:4217#TTD "Trinidad and Tobago dollar"
+* urn:iso:std:iso:4217#TVD "Tuvalu Dollar"
+* urn:iso:std:iso:4217#TWD "New Taiwan dollar"
+* urn:iso:std:iso:4217#TZS "Tanzanian shilling"
+* urn:iso:std:iso:4217#UAH "Ukrainian hryvnia"
+* urn:iso:std:iso:4217#UGX "Ugandan shilling"
+* urn:iso:std:iso:4217#USD "United States dollar"
+* urn:iso:std:iso:4217#USN "United States dollar (next day) (funds code)"
+* urn:iso:std:iso:4217#UYI "Uruguay Peso en Unidades Indexadas (URUIURUI) (funds code)"
+* urn:iso:std:iso:4217#UYU "Uruguayan peso"
+* urn:iso:std:iso:4217#UZS "Uzbekistan som"
+* urn:iso:std:iso:4217#VEF "Venezuelan bolívar"
+* urn:iso:std:iso:4217#VND "Vietnamese đồng"
+* urn:iso:std:iso:4217#VUV "Vanuatu vatu"
+* urn:iso:std:iso:4217#WST "Samoan tala"
+* urn:iso:std:iso:4217#XAF "CFA franc BEAC"
+* urn:iso:std:iso:4217#XAG "Silver (one troy ounce)"
+* urn:iso:std:iso:4217#XAU "Gold (one troy ounce)"
+* urn:iso:std:iso:4217#XBA "European Composite Unit (EURCO) (bond market unit)"
+* urn:iso:std:iso:4217#XBB "European Monetary Unit (E.M.U.-6) (bond market unit)"
+* urn:iso:std:iso:4217#XBC "European Unit of Account 9 (E.U.A.-9) (bond market unit)"
+* urn:iso:std:iso:4217#XBD "European Unit of Account 17 (E.U.A.-17) (bond market unit)"
+* urn:iso:std:iso:4217#XCD "East Caribbean dollar"
+* urn:iso:std:iso:4217#XDR "Special drawing rights"
+* urn:iso:std:iso:4217#XOF "CFA franc BCEAO"
+* urn:iso:std:iso:4217#XPD "Palladium (one troy ounce)"
+* urn:iso:std:iso:4217#XPF "CFP franc (franc Pacifique)"
+* urn:iso:std:iso:4217#XPT "Platinum (one troy ounce)"
+* urn:iso:std:iso:4217#XSU "SUCRE"
+* urn:iso:std:iso:4217#XTS "Code reserved for testing purposes"
+* urn:iso:std:iso:4217#XUA "ADB Unit of Account"
+* urn:iso:std:iso:4217#XXX "No currency"
+* urn:iso:std:iso:4217#YER "Yemeni rial"
+* urn:iso:std:iso:4217#ZAR "South African rand"
+* urn:iso:std:iso:4217#ZMW "Zambian kwacha"
+* urn:iso:std:iso:4217#ZWL "Zimbabwean dollar "
+
+CodeSystem: currencies
+Id: currencies
+Title: "Code System for Currencies."
+* ^status = #active
+* ^content = #complete
+* ^date = "2020-09-25T20:48:33.646Z"
+* ^version = "4.0.1"
+* ^url = "urn:iso:std:iso:4217"
+* #AED "United Arab Emirates dirham"
+* #AFN "Afghan afghani"
+* #ALL "Albanian lek"
+* #AMD "Armenian dram"
+* #ANG "Netherlands Antillean guilder"
+* #AOA "Angolan kwanza"
+* #ARS "Argentine peso"
+* #AUD "Australian dollar"
+* #AWG "Aruban florin"
+* #AZN "Azerbaijani manat"
+* #BAM "Bosnia and Herzegovina convertible mark"
+* #BBD "Barbados dollar"
+* #BDT "Bangladeshi taka"
+* #BGN "Bulgarian lev"
+* #BHD "Bahraini dinar"
+* #BIF "Burundian franc"
+* #BMD "Bermudian dollar"
+* #BND "Brunei dollar"
+* #BOB "Boliviano"
+* #BOV "Bolivian Mvdol (funds code)"
+* #BRL "Brazilian real"
+* #BSD "Bahamian dollar"
+* #BTN "Bhutanese ngultrum"
+* #BWP "Botswana pula"
+* #BYN "Belarusian ruble"
+* #BZD "Belize dollar"
+* #CAD "Canadian dollar"
+* #CDF "Congolese franc"
+* #CHE "WIR Euro (complementary currency)"
+* #CHF "Swiss franc"
+* #CHW "WIR Franc (complementary currency)"
+* #CLF "Unidad de Fomento (funds code)"
+* #CLP "Chilean peso"
+* #CNY "Renminbi (Chinese) yuan[8]"
+* #COP "Colombian peso"
+* #COU "Unidad de Valor Real (UVR) (funds code)[9]"
+* #CRC "Costa Rican colon"
+* #CUC "Cuban convertible peso"
+* #CUP "Cuban peso"
+* #CVE "Cape Verde escudo"
+* #CZK "Czech koruna"
+* #DJF "Djiboutian franc"
+* #DKK "Danish krone"
+* #DOP "Dominican peso"
+* #DZD "Algerian dinar"
+* #EGP "Egyptian pound"
+* #ERN "Eritrean nakfa"
+* #ETB "Ethiopian birr"
+* #EUR "Euro"
+* #FJD "Fiji dollar"
+* #FKP "Falkland Islands pound"
+* #GBP "Pound sterling"
+* #GEL "Georgian lari"
+* #GGP "Guernsey Pound"
+* #GHS "Ghanaian cedi"
+* #GIP "Gibraltar pound"
+* #GMD "Gambian dalasi"
+* #GNF "Guinean franc"
+* #GTQ "Guatemalan quetzal"
+* #GYD "Guyanese dollar"
+* #HKD "Hong Kong dollar"
+* #HNL "Honduran lempira"
+* #HRK "Croatian kuna"
+* #HTG "Haitian gourde"
+* #HUF "Hungarian forint"
+* #IDR "Indonesian rupiah"
+* #ILS "Israeli new shekel"
+* #IMP "Isle of Man Pound"
+* #INR "Indian rupee"
+* #IQD "Iraqi dinar"
+* #IRR "Iranian rial"
+* #ISK "Icelandic króna"
+* #JEP "Jersey Pound"
+* #JMD "Jamaican dollar"
+* #JOD "Jordanian dinar"
+* #JPY "Japanese yen"
+* #KES "Kenyan shilling"
+* #KGS "Kyrgyzstani som"
+* #KHR "Cambodian riel"
+* #KMF "Comoro franc"
+* #KPW "North Korean won"
+* #KRW "South Korean won"
+* #KWD "Kuwaiti dinar"
+* #KYD "Cayman Islands dollar"
+* #KZT "Kazakhstani tenge"
+* #LAK "Lao kip"
+* #LBP "Lebanese pound"
+* #LKR "Sri Lankan rupee"
+* #LRD "Liberian dollar"
+* #LSL "Lesotho loti"
+* #LYD "Libyan dinar"
+* #MAD "Moroccan dirham"
+* #MDL "Moldovan leu"
+* #MGA "Malagasy ariary"
+* #MKD "Macedonian denar"
+* #MMK "Myanmar kyat"
+* #MNT "Mongolian tögrög"
+* #MOP "Macanese pataca"
+* #MRU "Mauritanian ouguiya"
+* #MUR "Mauritian rupee"
+* #MVR "Maldivian rufiyaa"
+* #MWK "Malawian kwacha"
+* #MXN "Mexican peso"
+* #MXV "Mexican Unidad de Inversion (UDI) (funds code)"
+* #MYR "Malaysian ringgit"
+* #MZN "Mozambican metical"
+* #NAD "Namibian dollar"
+* #NGN "Nigerian naira"
+* #NIO "Nicaraguan córdoba"
+* #NOK "Norwegian krone"
+* #NPR "Nepalese rupee"
+* #NZD "New Zealand dollar"
+* #OMR "Omani rial"
+* #PAB "Panamanian balboa"
+* #PEN "Peruvian Sol"
+* #PGK "Papua New Guinean kina"
+* #PHP "Philippine piso[13]"
+* #PKR "Pakistani rupee"
+* #PLN "Polish złoty"
+* #PYG "Paraguayan guaraní"
+* #QAR "Qatari riyal"
+* #RON "Romanian leu"
+* #RSD "Serbian dinar"
+* #RUB "Russian ruble"
+* #RWF "Rwandan franc"
+* #SAR "Saudi riyal"
+* #SBD "Solomon Islands dollar"
+* #SCR "Seychelles rupee"
+* #SDG "Sudanese pound"
+* #SEK "Swedish krona/kronor"
+* #SGD "Singapore dollar"
+* #SHP "Saint Helena pound"
+* #SLL "Sierra Leonean leone"
+* #SOS "Somali shilling"
+* #SRD "Surinamese dollar"
+* #SSP "South Sudanese pound"
+* #STN "São Tomé and Príncipe dobra"
+* #SVC "Salvadoran colón"
+* #SYP "Syrian pound"
+* #SZL "Swazi lilangeni"
+* #THB "Thai baht"
+* #TJS "Tajikistani somoni"
+* #TMT "Turkmenistan manat"
+* #TND "Tunisian dinar"
+* #TOP "Tongan pa anga"
+* #TRY "Turkish lira"
+* #TTD "Trinidad and Tobago dollar"
+* #TVD "Tuvalu Dollar"
+* #TWD "New Taiwan dollar"
+* #TZS "Tanzanian shilling"
+* #UAH "Ukrainian hryvnia"
+* #UGX "Ugandan shilling"
+* #USD "United States dollar"
+* #USN "United States dollar (next day) (funds code)"
+* #UYI "Uruguay Peso en Unidades Indexadas (URUIURUI) (funds code)"
+* #UYU "Uruguayan peso"
+* #UZS "Uzbekistan som"
+* #VEF "Venezuelan bolívar"
+* #VND "Vietnamese đồng"
+* #VUV "Vanuatu vatu"
+* #WST "Samoan tala"
+* #XAF "CFA franc BEAC"
+* #XAG "Silver (one troy ounce)"
+* #XAU "Gold (one troy ounce)"
+* #XCD "East Caribbean dollar"
+* #XDR "Special drawing rights"
+* #XOF "CFA franc BCEAO"
+* #XPD "Palladium (one troy ounce)"
+* #XPF "CFP franc (franc Pacifique)"
+* #XPT "Platinum (one troy ounce)"
+* #XSU "SUCRE"
+* #XTS "Code reserved for testing purposes"
+* #XUA "ADB Unit of Account"
+* #XXX "No currency"
+* #YER "Yemeni rial"
+* #ZAR "South African rand"
+* #ZMW "Zambian kwacha"
+* #ZWL "Zimbabwean dollar "
+
+Alias: $ihris-cadre = http://ihris.org/fhir/CodeSystem/ihris-cadre
+
+ValueSet: iHRISCadre
+Id: ihris-cadre
+Title: "iHRIS Cadre"
+Description: "Sample iHRIS ValueSet for: iHRISCadre"
+* ^url = "http://ihris.org/fhir/ValueSet/ihris-cadre"
+* ^status = #active
+* ^experimental = false
+* ^date = "2020-09-25T21:03:12.952Z"
+* ^publisher = "iHRIS Foundation"
+* ^contact.telecom.system = #url
+* ^contact.telecom.value = "http://ihris.org"
+* include codes from system $ihris-cadre
+
+CodeSystem: iHRISCadre
+Id: ihris-cadre
+Title: "iHRIS Cadre"
+Description: "Sample iHRIS CodeSystem for: iHRISCadre"
+* ^url = "http://ihris.org/fhir/CodeSystem/ihris-cadre"
+* ^version = "5"
+* ^date = "2020-09-25T20:48:33.646Z"
+* ^publisher = "iHRIS Foundation"
+* ^contact.telecom.system = #url
+* ^contact.telecom.value = "http://ihris.org"
+* ^content = #complete
+* #doctor "Medical Doctor"
+* #nurse "Nurse"
+* #allied-health "Allied Health Professional"
+* #pharmacist "Pharmacist"
+
+Alias: $ihris-classification = http://ihris.org/fhir/CodeSystem/ihris-classification
+
+ValueSet: iHRISClassification
+Id: ihris-classification
+Title: "iHRIS Classification"
+Description: "Sample iHRIS ValueSet for: iHRISClassification"
+* ^url = "http://ihris.org/fhir/ValueSet/ihris-classification"
+* ^status = #active
+* ^experimental = false
+* ^date = "2020-09-25T20:48:33.646Z"
+* ^publisher = "iHRIS Foundation"
+* ^contact.telecom.system = #url
+* ^contact.telecom.value = "http://ihris.org"
+* include codes from system $ihris-classification
+
+CodeSystem: iHRISClassification
+Id: ihris-classification
+Title: "iHRIS Classification"
+Description: "Sample iHRIS CodeSystem for: iHRISClassification"
+* ^url = "http://ihris.org/fhir/CodeSystem/ihris-classification"
+* ^date = "2020-09-25T20:48:33.646Z"
+* ^publisher = "iHRIS Foundation"
+* ^contact.telecom.system = #url
+* ^contact.telecom.value = "http://ihris.org"
+* ^content = #complete
+* #doctor "Medical Doctor" "Medical doctors"
+* #nurse "Nurse" "Nursing and midwifery professionals"
+* #allied-health "Allied Health Professional" "Modern health associate professionals (except nursing)"
+* #non-health "Non-Health Professional" "Professionals, not health"
+* #support "Non-Health Support Staff" "Support staff, not health-related"
+* #pharmacist "Pharmacist" "Dispenses drugs."
+
+Alias: $ihris-job = http://ihris.org/fhir/CodeSystem/ihris-job
+
+ValueSet: iHRISJob
+Id: ihris-job
+Title: "iHRIS Job"
+Description: "Sample iHRIS ValueSet for: iHRISJob"
+* ^url = "http://ihris.org/fhir/ValueSet/ihris-job"
+* ^status = #active
+* ^version = "1.0.0"
+* ^experimental = false
+* ^date = "2022-01-18T20:48:33.646Z"
+* ^publisher = "iHRIS Foundation"
+* ^contact.telecom.system = #url
+* ^contact.telecom.value = "http://ihris.org"
+* include codes from system $ihris-job
+
+CodeSystem: iHRISJob
+Id: ihris-job
+Title: "iHRIS Job"
+Description: "Sample iHRIS CodeSystem for: iHRISJob"
+* ^url = "http://ihris.org/fhir/CodeSystem/ihris-job"
+* ^date = "2020-09-25T20:48:33.646Z"
+* ^publisher = "iHRIS Foundation"
+* ^contact.telecom.system = #url
+* ^contact.telecom.value = "http://ihris.org"
+* ^content = #complete
+* ^property[0].code = #cadre
+* ^property[=].uri = "http://ihris.org/fhir/ValueSet/ihris-cadre"
+* ^property[=].description = "The cadre of this job."
+* ^property[=].type = #Coding
+* ^property[+].code = #classification
+* ^property[=].uri = "http://ihris.org/fhir/ValueSet/ihris-classification"
+* ^property[=].description = "The classification of this job."
+* ^property[=].type = #Coding
+* ^property[+].code = #salary-grade
+* ^property[=].uri = "http://ihris.org/fhir/ValueSet/ihris-salary-grade"
+* ^property[=].description = "The salary grade of this job."
+* ^property[=].type = #Coding
+* #1231-1C "Manager" "Department managers plan, direct and coordinate the internal administration or financial operations of the enterprise or organisation, under the broad guidance of the directors."
+* #1231-1C ^property[0].code = #classification
+* #1231-1C ^property[=].valueCoding = http://ihris.org/fhir/CodeSystem/ihris-classification#non-health
+* #1231-1C ^property[+].code = #salary-grade
+* #1231-1C ^property[=].valueCoding = http://ihris.org/fhir/CodeSystem/ihris-salary-grade#prof-mid-level
+* #1420-A "Administrative Assistant"
+* #1420-A ^property[0].code = #classification
+* #1420-A ^property[=].valueCoding.system = "http://ihris.org/fhir/CodeSystem/ihris-classification"
+* #1420-A ^property[=].valueCoding = http://ihris.org/fhir/CodeSystem/ihris-classification#non-health
+* #1420-A ^property[+].code = #salary-grade
+* #1420-A ^property[=].valueCoding.system = "http://ihris.org/fhir/CodeSystem/ihris-salary-grade"
+* #1420-A ^property[=].valueCoding = http://ihris.org/fhir/CodeSystem/ihris-salary-grade#entry-level
+* #2221-1D "Medical Doctor" "Medical doctors conduct research, improve or develop concepts, theories and operational methods, and apply preventive or curative measures."
+* #2221-1D ^property[0].code = #cadre
+* #2221-1D ^property[=].valueCoding.system = "http://ihris.org/fhir/CodeSystem/ihris-cadre"
+* #2221-1D ^property[=].valueCoding = http://ihris.org/fhir/CodeSystem/ihris-classification#doctor
+* #2221-1D ^property[+].code = #classification
+* #2221-1D ^property[=].valueCoding.system = "http://ihris.org/fhir/CodeSystem/ihris-classification"
+* #2221-1D ^property[=].valueCoding = http://ihris.org/fhir/CodeSystem/ihris-salary-grade#doctor
+* #2221-1D ^property[+].code = #salary-grade
+* #2221-1D ^property[=].valueCoding = http://ihris.org/fhir/CodeSystem/ihris-salary-grade#director
+* #2221-2D "Specialized Doctor" "Medical doctors conduct research, improve or develop concepts, theories and operational methods, and apply preventive or curative measures."
+* #2221-2D ^property[0].code = #cadre
+* #2221-2D ^property[=].valueCoding.system = "http://ihris.org/fhir/CodeSystem/ihris-cadre"
+* #2221-2D ^property[=].valueCoding = http://ihris.org/fhir/CodeSystem/ihris-classification#doctor
+* #2221-2D ^property[+].code = #classification
+* #2221-2D ^property[=].valueCoding.system = "http://ihris.org/fhir/CodeSystem/ihris-classification"
+* #2221-2D ^property[=].valueCoding = http://ihris.org/fhir/CodeSystem/ihris-salary-grade#doctor
+* #2221-2D ^property[+].code = #salary-grade
+* #2221-2D ^property[=].valueCoding.system = "http://ihris.org/fhir/CodeSystem/ihris-salary-grade"
+* #2221-2D ^property[=].valueCoding = http://ihris.org/fhir/CodeSystem/ihris-salary-grade#director
+* #2221-3D "Opthalmologist" "Medical doctors conduct research, improve or develop concepts, theories and operational methods, and apply preventive or curative measures."
+* #2221-3D ^property[0].code = #cadre
+* #2221-3D ^property[=].valueCoding.system = "http://ihris.org/fhir/CodeSystem/ihris-cadre"
+* #2221-3D ^property[=].valueCoding = http://ihris.org/fhir/CodeSystem/ihris-classification#doctor
+* #2221-3D ^property[+].code = #classification
+* #2221-3D ^property[=].valueCoding.system = "http://ihris.org/fhir/CodeSystem/ihris-classification"
+* #2221-3D ^property[=].valueCoding = http://ihris.org/fhir/CodeSystem/ihris-salary-grade#doctor
+* #2221-3D ^property[+].code = #salary-grade
+* #2221-3D ^property[=].valueCoding.system = "http://ihris.org/fhir/CodeSystem/ihris-salary-grade"
+* #2221-3D ^property[=].valueCoding = http://ihris.org/fhir/CodeSystem/ihris-salary-grade#director
+* #2221-4D "Orthopedist" "Lab technicians perform technical tasks connected with the development of medical, public health and other practical applications of research results."
+* #2221-4D ^property[0].code = #cadre
+* #2221-4D ^property[=].valueCoding.system = "http://ihris.org/fhir/CodeSystem/ihris-cadre"
+* #2221-4D ^property[=].valueCoding = http://ihris.org/fhir/CodeSystem/ihris-classification#doctor
+* #2221-4D ^property[+].code = #classification
+* #2221-4D ^property[=].valueCoding.system = "http://ihris.org/fhir/CodeSystem/ihris-classification"
+* #2221-4D ^property[=].valueCoding = http://ihris.org/fhir/CodeSystem/ihris-salary-grade#doctor
+* #2221-4D ^property[+].code = #salary-grade
+* #2221-4D ^property[=].valueCoding.system = "http://ihris.org/fhir/CodeSystem/ihris-salary-grade"
+* #2221-4D ^property[=].valueCoding = http://ihris.org/fhir/CodeSystem/ihris-salary-grade#director
+* #2221-5D "Surgeon" "Medical doctors conduct research, improve or develop concepts, theories and operational methods, and apply preventive or curative measures."
+* #2221-5D ^property[0].code = #cadre
+* #2221-5D ^property[=].valueCoding.system = "http://ihris.org/fhir/CodeSystem/ihris-cadre"
+* #2221-5D ^property[=].valueCoding = http://ihris.org/fhir/CodeSystem/ihris-classification#doctor
+* #2221-5D ^property[+].code = #classification
+* #2221-5D ^property[=].valueCoding.system = "http://ihris.org/fhir/CodeSystem/ihris-classification"
+* #2221-5D ^property[=].valueCoding = http://ihris.org/fhir/CodeSystem/ihris-salary-grade#doctor
+* #2221-5D ^property[+].code = #salary-grade
+* #2221-5D ^property[=].valueCoding.system = "http://ihris.org/fhir/CodeSystem/ihris-salary-grade"
+* #2221-5D ^property[=].valueCoding = http://ihris.org/fhir/CodeSystem/ihris-salary-grade#director
+* #2222-2D "Dentist" "Dentists conduct research, improve or develop concepts, theories and operational methods, and apply medical knowledge in the field of dentistry."
+* #2222-2D ^property[0].code = #cadre
+* #2222-2D ^property[=].valueCoding.system = "http://ihris.org/fhir/CodeSystem/ihris-cadre"
+* #2222-2D ^property[=].valueCoding = http://ihris.org/fhir/CodeSystem/ihris-classification#allied-health
+* #2222-2D ^property[+].code = #classification
+* #2222-2D ^property[=].valueCoding.system = "http://ihris.org/fhir/CodeSystem/ihris-classification"
+* #2222-2D ^property[=].valueCoding = http://ihris.org/fhir/CodeSystem/ihris-salary-grade#allied-health
+* #2222-2D ^property[+].code = #salary-grade
+* #2222-2D ^property[=].valueCoding.system = "http://ihris.org/fhir/CodeSystem/ihris-salary-grade"
+* #2222-2D ^property[=].valueCoding = http://ihris.org/fhir/CodeSystem/ihris-salary-grade#director
+* #2224-1D "Pharmacist" "Pharmacists apply pharmaceutical concepts and theories by preparing and dispensing or selling medicaments and drugs."
+* #2224-1D ^property[0].code = #cadre
+* #2224-1D ^property[=].valueCoding.system = "http://ihris.org/fhir/CodeSystem/ihris-cadre"
+* #2224-1D ^property[=].valueCoding = http://ihris.org/fhir/CodeSystem/ihris-classification#allied-health
+* #2224-1D ^property[+].code = #classification
+* #2224-1D ^property[=].valueCoding.system = "http://ihris.org/fhir/CodeSystem/ihris-classification"
+* #2224-1D ^property[=].valueCoding = http://ihris.org/fhir/CodeSystem/ihris-salary-grade#allied-health
+* #2224-1D ^property[+].code = #salary-grade
+* #2224-1D ^property[=].valueCoding.system = "http://ihris.org/fhir/CodeSystem/ihris-salary-grade"
+* #2224-1D ^property[=].valueCoding = http://ihris.org/fhir/CodeSystem/ihris-salary-grade#director
+* #2229-3C "Epidemiologist" "Epidemiologists conduct research, improve or develop concepts, theories and operational methods, and apply preventive or curative measures in epidemiology."
+* #2229-3C ^property[0].code = #cadre
+* #2229-3C ^property[=].valueCoding.system = "http://ihris.org/fhir/CodeSystem/ihris-cadre"
+* #2229-3C ^property[=].valueCoding = http://ihris.org/fhir/CodeSystem/ihris-classification#allied-health
+* #2229-3C ^property[+].code = #classification
+* #2229-3C ^property[=].valueCoding.system = "http://ihris.org/fhir/CodeSystem/ihris-classification"
+* #2229-3C ^property[=].valueCoding = http://ihris.org/fhir/CodeSystem/ihris-salary-grade#allied-health
+* #2229-3C ^property[+].code = #salary-grade
+* #2229-3C ^property[=].valueCoding.system = "http://ihris.org/fhir/CodeSystem/ihris-salary-grade"
+* #2229-3C ^property[=].valueCoding = http://ihris.org/fhir/CodeSystem/ihris-salary-grade#prof-mid-level
+* #2230-1B "Nurse" "Nursing and midwifery professionals assist medical doctors in their tasks, deal with emergencies in their absence, and provide professional nursing care for the sick, injured, physically and mentally disabled, and others in need of such care."
+* #2230-1B ^property[0].code = #cadre
+* #2230-1B ^property[=].valueCoding.system = "http://ihris.org/fhir/CodeSystem/ihris-cadre"
+* #2230-1B ^property[=].valueCoding = http://ihris.org/fhir/CodeSystem/ihris-classification#nurse
+* #2230-1B ^property[+].code = #classification
+* #2230-1B ^property[=].valueCoding.system = "http://ihris.org/fhir/CodeSystem/ihris-classification"
+* #2230-1B ^property[=].valueCoding = http://ihris.org/fhir/CodeSystem/ihris-salary-grade#nurse
+* #2230-1B ^property[+].code = #salary-grade
+* #2230-1B ^property[=].valueCoding.system = "http://ihris.org/fhir/CodeSystem/ihris-salary-grade"
+* #2230-1B ^property[=].valueCoding = http://ihris.org/fhir/CodeSystem/ihris-salary-grade#prof-entry-level
+* #2230-1C "Deputy Chief Nurse" "Nursing and midwifery professionals assist medical doctors in their tasks, deal with emergencies in their absence, and provide professional nursing care for the sick, injured, physically and mentally disabled, and others in need of such care."
+* #2230-1C ^property[0].code = #cadre
+* #2230-1C ^property[=].valueCoding.system = "http://ihris.org/fhir/CodeSystem/ihris-cadre"
+* #2230-1C ^property[=].valueCoding = http://ihris.org/fhir/CodeSystem/ihris-classification#nurse
+* #2230-1C ^property[+].code = #classification
+* #2230-1C ^property[=].valueCoding.system = "http://ihris.org/fhir/CodeSystem/ihris-classification"
+* #2230-1C ^property[=].valueCoding = http://ihris.org/fhir/CodeSystem/ihris-salary-grade#nurse
+* #2230-1C ^property[+].code = #salary-grade
+* #2230-1C ^property[=].valueCoding.system = "http://ihris.org/fhir/CodeSystem/ihris-salary-grade"
+* #2230-1C ^property[=].valueCoding = http://ihris.org/fhir/CodeSystem/ihris-salary-grade#prof-mid-level
+* #2230-1D "Chief Nurse" "Nursing and midwifery professionals assist medical doctors in their tasks, deal with emergencies in their absence, and provide professional nursing care for the sick, injured, physically and mentally disabled, and others in need of such care."
+* #2230-1D ^property[0].code = #cadre
+* #2230-1D ^property[=].valueCoding.system = "http://ihris.org/fhir/CodeSystem/ihris-cadre"
+* #2230-1D ^property[=].valueCoding = http://ihris.org/fhir/CodeSystem/ihris-classification#nurse
+* #2230-1D ^property[+].code = #classification
+* #2230-1D ^property[=].valueCoding.system = "http://ihris.org/fhir/CodeSystem/ihris-classification"
+* #2230-1D ^property[=].valueCoding = http://ihris.org/fhir/CodeSystem/ihris-salary-grade#nurse
+* #2230-1D ^property[+].code = #salary-grade
+* #2230-1D ^property[=].valueCoding.system = "http://ihris.org/fhir/CodeSystem/ihris-salary-grade"
+* #2230-1D ^property[=].valueCoding = http://ihris.org/fhir/CodeSystem/ihris-salary-grade#director
+* #2230-2B "Midwife" "Midwifery professionals deliver or assist in the delivery of babies, provide antenatal and post-natal care and instruct parents in baby care."
+* #2230-2B ^property[0].code = #cadre
+* #2230-2B ^property[=].valueCoding.system = "http://ihris.org/fhir/CodeSystem/ihris-cadre"
+* #2230-2B ^property[=].valueCoding = http://ihris.org/fhir/CodeSystem/ihris-classification#nurse
+* #2230-2B ^property[+].code = #classification
+* #2230-2B ^property[=].valueCoding.system = "http://ihris.org/fhir/CodeSystem/ihris-classification"
+* #2230-2B ^property[=].valueCoding = http://ihris.org/fhir/CodeSystem/ihris-salary-grade#nurse
+* #2230-2B ^property[+].code = #salary-grade
+* #2230-2B ^property[=].valueCoding.system = "http://ihris.org/fhir/CodeSystem/ihris-salary-grade"
+* #2230-2B ^property[=].valueCoding = http://ihris.org/fhir/CodeSystem/ihris-salary-grade#prof-entry-level
+* #2411-1B "Accountant" "Accountants advise on accounting matters and perform accountancy services or audits."
+* #2411-1B ^property[0].code = #classification
+* #2411-1B ^property[=].valueCoding.system = "http://ihris.org/fhir/CodeSystem/ihris-classification"
+* #2411-1B ^property[=].valueCoding = http://ihris.org/fhir/CodeSystem/ihris-classification#non-health
+* #2411-1B ^property[+].code = #salary-grade
+* #2411-1B ^property[=].valueCoding.system = "http://ihris.org/fhir/CodeSystem/ihris-salary-grade"
+* #2411-1B ^property[=].valueCoding = http://ihris.org/fhir/CodeSystem/ihris-salary-grade#prof-entry-level
+* #2432-1B "Archivist" "Medical archivists collect and store recorded or published material, and retrieve and provide information as requested."
+* #2432-1B ^property[0].code = #cadre
+* #2432-1B ^property[=].valueCoding.system = "http://ihris.org/fhir/CodeSystem/ihris-cadre"
+* #2432-1B ^property[=].valueCoding = http://ihris.org/fhir/CodeSystem/ihris-classification#allied-health
+* #2432-1B ^property[+].code = #classification
+* #2432-1B ^property[=].valueCoding.system = "http://ihris.org/fhir/CodeSystem/ihris-classification"
+* #2432-1B ^property[=].valueCoding = http://ihris.org/fhir/CodeSystem/ihris-salary-grade#allied-health
+* #2432-1B ^property[+].code = #salary-grade
+* #2432-1B ^property[=].valueCoding.system = "http://ihris.org/fhir/CodeSystem/ihris-salary-grade"
+* #2432-1B ^property[=].valueCoding = http://ihris.org/fhir/CodeSystem/ihris-salary-grade#prof-entry-level
+* #2445-1B "Counselor"
+* #2445-1B ^property[0].code = #classification
+* #2445-1B ^property[=].valueCoding.system = "http://ihris.org/fhir/CodeSystem/ihris-classification"
+* #2445-1B ^property[=].valueCoding = http://ihris.org/fhir/CodeSystem/ihris-classification#non-health
+* #2445-1B ^property[+].code = #salary-grade
+* #2445-1B ^property[=].valueCoding.system = "http://ihris.org/fhir/CodeSystem/ihris-salary-grade"
+* #2445-1B ^property[=].valueCoding = http://ihris.org/fhir/CodeSystem/ihris-salary-grade#prof-entry-level
+* #2445-1C "Clinical Psychologist" "Psychologists research into and study mental processes and behaviour of human beings as individuals or in groups, and apply this knowledge to promote personal, social, educational or occupational adjustment and development."
+* #2445-1C ^property[0].code = #cadre
+* #2445-1C ^property[=].valueCoding.system = "http://ihris.org/fhir/CodeSystem/ihris-cadre"
+* #2445-1C ^property[=].valueCoding = http://ihris.org/fhir/CodeSystem/ihris-classification#allied-health
+* #2445-1C ^property[+].code = #classification
+* #2445-1C ^property[=].valueCoding.system = "http://ihris.org/fhir/CodeSystem/ihris-classification"
+* #2445-1C ^property[=].valueCoding = http://ihris.org/fhir/CodeSystem/ihris-salary-grade#allied-health
+* #2445-1C ^property[+].code = #salary-grade
+* #2445-1C ^property[=].valueCoding.system = "http://ihris.org/fhir/CodeSystem/ihris-salary-grade"
+* #2445-1C ^property[=].valueCoding = http://ihris.org/fhir/CodeSystem/ihris-salary-grade#prof-mid-level
+* #2446-1C "Social Worker" "Social work professionals provide guidance to clients in social and related matters to enable them to find and use resources to overcome difficulties and achieve particular goals."
+* #2446-1C ^property[0].code = #cadre
+* #2446-1C ^property[=].valueCoding.system = "http://ihris.org/fhir/CodeSystem/ihris-cadre"
+* #2446-1C ^property[=].valueCoding = http://ihris.org/fhir/CodeSystem/ihris-classification#allied-health
+* #2446-1C ^property[+].code = #classification
+* #2446-1C ^property[=].valueCoding.system = "http://ihris.org/fhir/CodeSystem/ihris-classification"
+* #2446-1C ^property[=].valueCoding = http://ihris.org/fhir/CodeSystem/ihris-salary-grade#allied-health
+* #2446-1C ^property[+].code = #salary-grade
+* #2446-1C ^property[=].valueCoding.system = "http://ihris.org/fhir/CodeSystem/ihris-salary-grade"
+* #2446-1C ^property[=].valueCoding = http://ihris.org/fhir/CodeSystem/ihris-salary-grade#prof-mid-level
+* #3211-1A "Technician" "Lab technicians perform technical tasks connected with the development of medical, public health and other practical applications of research results."
+* #3211-1A ^property[0].code = #cadre
+* #3211-1A ^property[=].valueCoding.system = "http://ihris.org/fhir/CodeSystem/ihris-cadre"
+* #3211-1A ^property[=].valueCoding = http://ihris.org/fhir/CodeSystem/ihris-classification#allied-health
+* #3211-1A ^property[+].code = #classification
+* #3211-1A ^property[=].valueCoding.system = "http://ihris.org/fhir/CodeSystem/ihris-classification"
+* #3211-1A ^property[=].valueCoding = http://ihris.org/fhir/CodeSystem/ihris-salary-grade#allied-health
+* #3211-1A ^property[+].code = #salary-grade
+* #3211-1A ^property[=].valueCoding.system = "http://ihris.org/fhir/CodeSystem/ihris-salary-grade"
+* #3211-1A ^property[=].valueCoding = http://ihris.org/fhir/CodeSystem/ihris-salary-grade#entry-level
+* #3211-1C "Lab Technician" "Lab technicians perform technical tasks connected with the development of medical, public health and other practical applications of research results."
+* #3211-1C ^property[0].code = #cadre
+* #3211-1C ^property[=].valueCoding.system = "http://ihris.org/fhir/CodeSystem/ihris-cadre"
+* #3211-1C ^property[=].valueCoding = http://ihris.org/fhir/CodeSystem/ihris-classification#allied-health
+* #3211-1C ^property[+].code = #classification
+* #3211-1C ^property[=].valueCoding.system = "http://ihris.org/fhir/CodeSystem/ihris-classification"
+* #3211-1C ^property[=].valueCoding = http://ihris.org/fhir/CodeSystem/ihris-salary-grade#allied-health
+* #3211-1C ^property[+].code = #salary-grade
+* #3211-1C ^property[=].valueCoding.system = "http://ihris.org/fhir/CodeSystem/ihris-salary-grade"
+* #3211-1C ^property[=].valueCoding = http://ihris.org/fhir/CodeSystem/ihris-salary-grade#prof-mid-level
+* #3211-2A "Lab Assistant" "Lab assistants carry out laboratory tasks, more limited in scope and complexity than those carried out by Lab Technicians."
+* #3211-2A ^property[0].code = #cadre
+* #3211-2A ^property[=].valueCoding.system = "http://ihris.org/fhir/CodeSystem/ihris-cadre"
+* #3211-2A ^property[=].valueCoding = http://ihris.org/fhir/CodeSystem/ihris-classification#allied-health
+* #3211-2A ^property[+].code = #classification
+* #3211-2A ^property[=].valueCoding.system = "http://ihris.org/fhir/CodeSystem/ihris-classification"
+* #3211-2A ^property[=].valueCoding = http://ihris.org/fhir/CodeSystem/ihris-salary-grade#allied-health
+* #3211-2A ^property[+].code = #salary-grade
+* #3211-2A ^property[=].valueCoding.system = "http://ihris.org/fhir/CodeSystem/ihris-salary-grade"
+* #3211-2A ^property[=].valueCoding = http://ihris.org/fhir/CodeSystem/ihris-salary-grade#entry-level
+* #3211-3B "Radiology Technician" "Radiologist technicians perform technical tasks connected with the development of medical, public health and other practical applications of research results in radiology."
+* #3211-3B ^property[0].code = #cadre
+* #3211-3B ^property[=].valueCoding.system = "http://ihris.org/fhir/CodeSystem/ihris-cadre"
+* #3211-3B ^property[=].valueCoding = http://ihris.org/fhir/CodeSystem/ihris-classification#allied-health
+* #3211-3B ^property[+].code = #classification
+* #3211-3B ^property[=].valueCoding.system = "http://ihris.org/fhir/CodeSystem/ihris-classification"
+* #3211-3B ^property[=].valueCoding = http://ihris.org/fhir/CodeSystem/ihris-salary-grade#allied-health
+* #3211-3B ^property[+].code = #salary-grade
+* #3211-3B ^property[=].valueCoding.system = "http://ihris.org/fhir/CodeSystem/ihris-salary-grade"
+* #3211-3B ^property[=].valueCoding = http://ihris.org/fhir/CodeSystem/ihris-salary-grade#prof-entry-level
+* #3211-4B "Orthopedist Aide" "Medical assistants carry out advisory, diagnostic, preventive and curative medical tasks, more limited in scope and complexity than those carried out by Medical doctors."
+* #3211-4B ^property[0].code = #cadre
+* #3211-4B ^property[=].valueCoding.system = "http://ihris.org/fhir/CodeSystem/ihris-cadre"
+* #3211-4B ^property[=].valueCoding = http://ihris.org/fhir/CodeSystem/ihris-classification#allied-health
+* #3211-4B ^property[+].code = #classification
+* #3211-4B ^property[=].valueCoding.system = "http://ihris.org/fhir/CodeSystem/ihris-classification"
+* #3211-4B ^property[=].valueCoding = http://ihris.org/fhir/CodeSystem/ihris-salary-grade#allied-health
+* #3211-4B ^property[+].code = #salary-grade
+* #3211-4B ^property[=].valueCoding.system = "http://ihris.org/fhir/CodeSystem/ihris-salary-grade"
+* #3211-4B ^property[=].valueCoding = http://ihris.org/fhir/CodeSystem/ihris-salary-grade#prof-entry-level
+* #3221-1C "Medical Assistant" "Medical assistants carry out advisory, diagnostic, preventive and curative medical tasks, more limited in scope and complexity than those carried out by Medical doctors."
+* #3221-1C ^property[0].code = #cadre
+* #3221-1C ^property[=].valueCoding.system = "http://ihris.org/fhir/CodeSystem/ihris-cadre"
+* #3221-1C ^property[=].valueCoding = http://ihris.org/fhir/CodeSystem/ihris-classification#allied-health
+* #3221-1C ^property[+].code = #classification
+* #3221-1C ^property[=].valueCoding.system = "http://ihris.org/fhir/CodeSystem/ihris-classification"
+* #3221-1C ^property[=].valueCoding = http://ihris.org/fhir/CodeSystem/ihris-salary-grade#allied-health
+* #3221-1C ^property[+].code = #salary-grade
+* #3221-1C ^property[=].valueCoding.system = "http://ihris.org/fhir/CodeSystem/ihris-salary-grade"
+* #3221-1C ^property[=].valueCoding = http://ihris.org/fhir/CodeSystem/ihris-salary-grade#prof-mid-level
+* #3221-2B "Anesthesiology Assistant" "Anesthesiologist techs carry out advisory, diagnostic, preventive and curative medical tasks, more limited in scope and complexity than those carried out by Anesthesiologists."
+* #3221-2B ^property[0].code = #cadre
+* #3221-2B ^property[=].valueCoding.system = "http://ihris.org/fhir/CodeSystem/ihris-cadre"
+* #3221-2B ^property[=].valueCoding = http://ihris.org/fhir/CodeSystem/ihris-classification#allied-health
+* #3221-2B ^property[+].code = #classification
+* #3221-2B ^property[=].valueCoding.system = "http://ihris.org/fhir/CodeSystem/ihris-classification"
+* #3221-2B ^property[=].valueCoding = http://ihris.org/fhir/CodeSystem/ihris-salary-grade#allied-health
+* #3221-2B ^property[+].code = #salary-grade
+* #3221-2B ^property[=].valueCoding.system = "http://ihris.org/fhir/CodeSystem/ihris-salary-grade"
+* #3221-2B ^property[=].valueCoding = http://ihris.org/fhir/CodeSystem/ihris-salary-grade#prof-entry-level
+* #3222-1A "Hygienist Aide" "Sanitarians provide technical assistance and advice on measures to restore or improve sanitary conditions, and supervise their implementation."
+* #3222-1A ^property[0].code = #cadre
+* #3222-1A ^property[=].valueCoding.system = "http://ihris.org/fhir/CodeSystem/ihris-cadre"
+* #3222-1A ^property[=].valueCoding = http://ihris.org/fhir/CodeSystem/ihris-classification#allied-health
+* #3222-1A ^property[+].code = #classification
+* #3222-1A ^property[=].valueCoding.system = "http://ihris.org/fhir/CodeSystem/ihris-classification"
+* #3222-1A ^property[=].valueCoding = http://ihris.org/fhir/CodeSystem/ihris-salary-grade#allied-health
+* #3222-1A ^property[+].code = #salary-grade
+* #3222-1A ^property[=].valueCoding.system = "http://ihris.org/fhir/CodeSystem/ihris-salary-grade"
+* #3222-1A ^property[=].valueCoding = http://ihris.org/fhir/CodeSystem/ihris-salary-grade#entry-level
+* #3222-1B "Hygienist" "Sanitarians provide technical assistance and advice on measures to restore or improve sanitary conditions, and supervise their implementation."
+* #3222-1B ^property[0].code = #cadre
+* #3222-1B ^property[=].valueCoding.system = "http://ihris.org/fhir/CodeSystem/ihris-cadre"
+* #3222-1B ^property[=].valueCoding = http://ihris.org/fhir/CodeSystem/ihris-classification#allied-health
+* #3222-1B ^property[+].code = #classification
+* #3222-1B ^property[=].valueCoding.system = "http://ihris.org/fhir/CodeSystem/ihris-classification"
+* #3222-1B ^property[=].valueCoding = http://ihris.org/fhir/CodeSystem/ihris-salary-grade#allied-health
+* #3222-1B ^property[+].code = #salary-grade
+* #3222-1B ^property[=].valueCoding.system = "http://ihris.org/fhir/CodeSystem/ihris-salary-grade"
+* #3222-1B ^property[=].valueCoding = http://ihris.org/fhir/CodeSystem/ihris-salary-grade#prof-entry-level
+* #3223-1B "Nutritionist" "Nutritionists conduct research and improve or develop concepts and operational methods concerning the preparation and application of diets for general and therapeutic purposes."
+* #3223-1B ^property[0].code = #cadre
+* #3223-1B ^property[=].valueCoding.system = "http://ihris.org/fhir/CodeSystem/ihris-cadre"
+* #3223-1B ^property[=].valueCoding = http://ihris.org/fhir/CodeSystem/ihris-classification#allied-health
+* #3223-1B ^property[+].code = #classification
+* #3223-1B ^property[=].valueCoding.system = "http://ihris.org/fhir/CodeSystem/ihris-classification"
+* #3223-1B ^property[=].valueCoding = http://ihris.org/fhir/CodeSystem/ihris-salary-grade#allied-health
+* #3223-1B ^property[+].code = #salary-grade
+* #3223-1B ^property[=].valueCoding.system = "http://ihris.org/fhir/CodeSystem/ihris-salary-grade"
+* #3223-1B ^property[=].valueCoding = http://ihris.org/fhir/CodeSystem/ihris-salary-grade#prof-entry-level
+* #3223-1C "Anesthesiologist" "Nutritionists conduct research and improve or develop concepts and operational methods concerning the preparation and application of diets for general and therapeutic purposes."
+* #3223-1C ^property[0].code = #cadre
+* #3223-1C ^property[=].valueCoding.system = "http://ihris.org/fhir/CodeSystem/ihris-cadre"
+* #3223-1C ^property[=].valueCoding = http://ihris.org/fhir/CodeSystem/ihris-classification#allied-health
+* #3223-1C ^property[+].code = #classification
+* #3223-1C ^property[=].valueCoding.system = "http://ihris.org/fhir/CodeSystem/ihris-classification"
+* #3223-1C ^property[=].valueCoding = http://ihris.org/fhir/CodeSystem/ihris-salary-grade#allied-health
+* #3223-1C ^property[+].code = #salary-grade
+* #3223-1C ^property[=].valueCoding.system = "http://ihris.org/fhir/CodeSystem/ihris-salary-grade"
+* #3223-1C ^property[=].valueCoding = http://ihris.org/fhir/CodeSystem/ihris-salary-grade#prof-mid-level
+* #3223-2A "Nutritionist Aide" "Nutritionist Aides assist nutritionists with research, concepts and operational methods concerning the preparation and application of diets for general and therapeutic purposes."
+* #3223-2A ^property[0].code = #cadre
+* #3223-2A ^property[=].valueCoding.system = "http://ihris.org/fhir/CodeSystem/ihris-cadre"
+* #3223-2A ^property[=].valueCoding = http://ihris.org/fhir/CodeSystem/ihris-classification#allied-health
+* #3223-2A ^property[+].code = #classification
+* #3223-2A ^property[=].valueCoding.system = "http://ihris.org/fhir/CodeSystem/ihris-classification"
+* #3223-2A ^property[=].valueCoding = http://ihris.org/fhir/CodeSystem/ihris-salary-grade#allied-health
+* #3223-2A ^property[+].code = #salary-grade
+* #3223-2A ^property[=].valueCoding.system = "http://ihris.org/fhir/CodeSystem/ihris-salary-grade"
+* #3223-2A ^property[=].valueCoding = http://ihris.org/fhir/CodeSystem/ihris-salary-grade#entry-level
+* #3225-1B "Dental Technician" "Dental technicians carry out advisory, diagnostic, preventive and curative dental tasks, more limited in scope and complexity than those carried out by Dentists."
+* #3225-1B ^property[0].code = #cadre
+* #3225-1B ^property[=].valueCoding.system = "http://ihris.org/fhir/CodeSystem/ihris-cadre"
+* #3225-1B ^property[=].valueCoding = http://ihris.org/fhir/CodeSystem/ihris-classification#allied-health
+* #3225-1B ^property[+].code = #classification
+* #3225-1B ^property[=].valueCoding.system = "http://ihris.org/fhir/CodeSystem/ihris-classification"
+* #3225-1B ^property[=].valueCoding = http://ihris.org/fhir/CodeSystem/ihris-salary-grade#allied-health
+* #3225-1B ^property[+].code = #salary-grade
+* #3225-1B ^property[=].valueCoding.system = "http://ihris.org/fhir/CodeSystem/ihris-salary-grade"
+* #3225-1B ^property[=].valueCoding = http://ihris.org/fhir/CodeSystem/ihris-salary-grade#prof-entry-level
+* #3226-1A "Physiotherapy Aide" "Physiotherapists and related associate professionals treat disorders of bones, muscles and parts of the circulatory or the nervous system by manipulative methods."
+* #3226-1A ^property[0].code = #cadre
+* #3226-1A ^property[=].valueCoding.system = "http://ihris.org/fhir/CodeSystem/ihris-cadre"
+* #3226-1A ^property[=].valueCoding = http://ihris.org/fhir/CodeSystem/ihris-classification#allied-health
+* #3226-1A ^property[+].code = #classification
+* #3226-1A ^property[=].valueCoding.system = "http://ihris.org/fhir/CodeSystem/ihris-classification"
+* #3226-1A ^property[=].valueCoding = http://ihris.org/fhir/CodeSystem/ihris-salary-grade#allied-health
+* #3226-1A ^property[+].code = #salary-grade
+* #3226-1A ^property[=].valueCoding.system = "http://ihris.org/fhir/CodeSystem/ihris-salary-grade"
+* #3226-1A ^property[=].valueCoding = http://ihris.org/fhir/CodeSystem/ihris-salary-grade#entry-level
+* #3226-1B "Physiotherapist" "Physiotherapists treat disorders of bones, muscles and parts of the circulatory or the nervous system by manipulative methods, and ultrasound, heating, laser or similar techniques."
+* #3226-1B ^property[0].code = #cadre
+* #3226-1B ^property[=].valueCoding.system = "http://ihris.org/fhir/CodeSystem/ihris-cadre"
+* #3226-1B ^property[=].valueCoding = http://ihris.org/fhir/CodeSystem/ihris-classification#allied-health
+* #3226-1B ^property[+].code = #classification
+* #3226-1B ^property[=].valueCoding.system = "http://ihris.org/fhir/CodeSystem/ihris-classification"
+* #3226-1B ^property[=].valueCoding = http://ihris.org/fhir/CodeSystem/ihris-salary-grade#allied-health
+* #3226-1B ^property[+].code = #salary-grade
+* #3226-1B ^property[=].valueCoding.system = "http://ihris.org/fhir/CodeSystem/ihris-salary-grade"
+* #3226-1B ^property[=].valueCoding = http://ihris.org/fhir/CodeSystem/ihris-salary-grade#prof-entry-level
+* #3228-1B "Pharmacy Technician" "Pharmaceutical assistants dispense and prepare medicaments, lotions and mixtures under the guidance of Pharmacists, in pharmacies, hospitals and dispensaries."
+* #3228-1B ^property[0].code = #cadre
+* #3228-1B ^property[=].valueCoding.system = "http://ihris.org/fhir/CodeSystem/ihris-cadre"
+* #3228-1B ^property[=].valueCoding = http://ihris.org/fhir/CodeSystem/ihris-classification#allied-health
+* #3228-1B ^property[+].code = #classification
+* #3228-1B ^property[=].valueCoding.system = "http://ihris.org/fhir/CodeSystem/ihris-classification"
+* #3228-1B ^property[=].valueCoding = http://ihris.org/fhir/CodeSystem/ihris-salary-grade#allied-health
+* #3228-1B ^property[+].code = #salary-grade
+* #3228-1B ^property[=].valueCoding.system = "http://ihris.org/fhir/CodeSystem/ihris-salary-grade"
+* #3228-1B ^property[=].valueCoding = http://ihris.org/fhir/CodeSystem/ihris-salary-grade#prof-mid-level
+* #3229-3A "Environmental Health Worker"
+* #3229-3A ^property[0].code = #cadre
+* #3229-3A ^property[=].valueCoding.system = "http://ihris.org/fhir/CodeSystem/ihris-cadre"
+* #3229-3A ^property[=].valueCoding = http://ihris.org/fhir/CodeSystem/ihris-classification#allied-health
+* #3229-3A ^property[+].code = #classification
+* #3229-3A ^property[=].valueCoding.system = "http://ihris.org/fhir/CodeSystem/ihris-classification"
+* #3229-3A ^property[=].valueCoding = http://ihris.org/fhir/CodeSystem/ihris-salary-grade#allied-health
+* #3229-3A ^property[+].code = #salary-grade
+* #3229-3A ^property[=].valueCoding.system = "http://ihris.org/fhir/CodeSystem/ihris-salary-grade"
+* #3229-3A ^property[=].valueCoding = http://ihris.org/fhir/CodeSystem/ihris-salary-grade#entry-level
+* #3232-2A "Nurse Midwife Aid" "Midwifery assistants deliver or assist doctors or midwifery professionals in the delivery of babies, provide antenatal and post-natal care and instruct parents in baby care."
+* #3232-2A ^property[0].code = #cadre
+* #3232-2A ^property[=].valueCoding.system = "http://ihris.org/fhir/CodeSystem/ihris-cadre"
+* #3232-2A ^property[=].valueCoding = http://ihris.org/fhir/CodeSystem/ihris-classification#nurse
+* #3232-2A ^property[+].code = #classification
+* #3232-2A ^property[=].valueCoding.system = "http://ihris.org/fhir/CodeSystem/ihris-classification"
+* #3232-2A ^property[=].valueCoding = http://ihris.org/fhir/CodeSystem/ihris-salary-grade#nurse
+* #3232-2A ^property[+].code = #salary-grade
+* #3232-2A ^property[=].valueCoding.system = "http://ihris.org/fhir/CodeSystem/ihris-salary-grade"
+* #3232-2A ^property[=].valueCoding = http://ihris.org/fhir/CodeSystem/ihris-salary-grade#entry-level
+* #3431-1D "Administrator" "Administrators implement and support the communication, documentation and internal managerial co-ordination activities of an organisational unit."
+* #3431-1D ^property[0].code = #classification
+* #3431-1D ^property[=].valueCoding.system = "http://ihris.org/fhir/CodeSystem/ihris-classification"
+* #3431-1D ^property[=].valueCoding = http://ihris.org/fhir/CodeSystem/ihris-classification#non-health
+* #3431-1D ^property[+].code = #salary-grade
+* #3431-1D ^property[=].valueCoding.system = "http://ihris.org/fhir/CodeSystem/ihris-salary-grade"
+* #3431-1D ^property[=].valueCoding = http://ihris.org/fhir/CodeSystem/ihris-salary-grade#director
+* #3460-1A "Social Work Aide" "Social work aides provide guidance to clients in social and related matters to enable them to find and use resources to overcome difficulties and achieve particular goals."
+* #3460-1A ^property[0].code = #cadre
+* #3460-1A ^property[=].valueCoding.system = "http://ihris.org/fhir/CodeSystem/ihris-cadre"
+* #3460-1A ^property[=].valueCoding = http://ihris.org/fhir/CodeSystem/ihris-classification#allied-health
+* #3460-1A ^property[+].code = #classification
+* #3460-1A ^property[=].valueCoding.system = "http://ihris.org/fhir/CodeSystem/ihris-classification"
+* #3460-1A ^property[=].valueCoding = http://ihris.org/fhir/CodeSystem/ihris-salary-grade#allied-health
+* #3460-1A ^property[+].code = #salary-grade
+* #3460-1A ^property[=].valueCoding.system = "http://ihris.org/fhir/CodeSystem/ihris-salary-grade"
+* #3460-1A ^property[=].valueCoding = http://ihris.org/fhir/CodeSystem/ihris-salary-grade#entry-level
+* #4115-1A "Secretary" "Secretaries use typewriters or word-processing equipment to check and transcribe correspondence and other documents, deal with incoming and outgoing mail, screen requests for meetings or appointments, record and screen leave and other staff entitlements."
+* #4115-1A ^property[0].code = #classification
+* #4115-1A ^property[=].valueCoding.system = "http://ihris.org/fhir/CodeSystem/ihris-classification"
+* #4115-1A ^property[=].valueCoding = http://ihris.org/fhir/CodeSystem/ihris-classification#support
+* #4115-1A ^property[+].code = #salary-grade
+* #4115-1A ^property[=].valueCoding.system = "http://ihris.org/fhir/CodeSystem/ihris-salary-grade"
+* #4115-1A ^property[=].valueCoding = http://ihris.org/fhir/CodeSystem/ihris-salary-grade#entry-level
+* #4211-1A "Cashier" "Cashiers receive payments for goods or services."
+* #4211-1A ^property[0].code = #classification
+* #4211-1A ^property[=].valueCoding.system = "http://ihris.org/fhir/CodeSystem/ihris-classification"
+* #4211-1A ^property[=].valueCoding = http://ihris.org/fhir/CodeSystem/ihris-classification#support
+* #4211-1A ^property[+].code = #salary-grade
+* #4211-1A ^property[=].valueCoding.system = "http://ihris.org/fhir/CodeSystem/ihris-salary-grade"
+* #4211-1A ^property[=].valueCoding = http://ihris.org/fhir/CodeSystem/ihris-salary-grade#entry-level
+* #4222-1A "Receptionist" "Receptionists receive clients or patients, provide information and make appointments on behalf of various establishments including hospitals, medical or dental surgeries."
+* #4222-1A ^property[0].code = #classification
+* #4222-1A ^property[=].valueCoding.system = "http://ihris.org/fhir/CodeSystem/ihris-classification"
+* #4222-1A ^property[=].valueCoding = http://ihris.org/fhir/CodeSystem/ihris-classification#support
+* #4222-1A ^property[+].code = #salary-grade
+* #4222-1A ^property[=].valueCoding.system = "http://ihris.org/fhir/CodeSystem/ihris-salary-grade"
+* #4222-1A ^property[=].valueCoding = http://ihris.org/fhir/CodeSystem/ihris-salary-grade#entry-level
+* #5121-2A "Laundry Staff" "Laundry staff organise, supervise and carry out laundry functions in medical institutions."
+* #5121-2A ^property[0].code = #classification
+* #5121-2A ^property[=].valueCoding.system = "http://ihris.org/fhir/CodeSystem/ihris-classification"
+* #5121-2A ^property[=].valueCoding = http://ihris.org/fhir/CodeSystem/ihris-classification#support
+* #5121-2A ^property[+].code = #salary-grade
+* #5121-2A ^property[=].valueCoding.system = "http://ihris.org/fhir/CodeSystem/ihris-salary-grade"
+* #5121-2A ^property[=].valueCoding = http://ihris.org/fhir/CodeSystem/ihris-salary-grade#entry-level
+* #5132-1A "Nurse Aide" "Institution-based Nurse Aides perform simple tasks to assist medical, nursing, midwifery and dental professionals or associate professionals in their duties."
+* #5132-1A ^property[0].code = #cadre
+* #5132-1A ^property[=].valueCoding.system = "http://ihris.org/fhir/CodeSystem/ihris-cadre"
+* #5132-1A ^property[=].valueCoding = http://ihris.org/fhir/CodeSystem/ihris-classification#nurse
+* #5132-1A ^property[+].code = #classification
+* #5132-1A ^property[=].valueCoding.system = "http://ihris.org/fhir/CodeSystem/ihris-classification"
+* #5132-1A ^property[=].valueCoding = http://ihris.org/fhir/CodeSystem/ihris-salary-grade#nurse
+* #5132-1A ^property[+].code = #salary-grade
+* #5132-1A ^property[=].valueCoding.system = "http://ihris.org/fhir/CodeSystem/ihris-salary-grade"
+* #5132-1A ^property[=].valueCoding = http://ihris.org/fhir/CodeSystem/ihris-salary-grade#entry-level
+* #5169-1A "Guard" "Guards patrol buildings and areas to prevent illegal entry, theft, violence and other unlawful acts, and, if necessary, use force to prevent such acts and apprehend perpetrators, as well as act as bodyguards."
+* #5169-1A ^property[0].code = #classification
+* #5169-1A ^property[=].valueCoding.system = "http://ihris.org/fhir/CodeSystem/ihris-classification"
+* #5169-1A ^property[=].valueCoding = http://ihris.org/fhir/CodeSystem/ihris-classification#support
+* #5169-1A ^property[+].code = #salary-grade
+* #5169-1A ^property[=].valueCoding.system = "http://ihris.org/fhir/CodeSystem/ihris-salary-grade"
+* #5169-1A ^property[=].valueCoding = http://ihris.org/fhir/CodeSystem/ihris-salary-grade#entry-level
+* #6113-1A "Gardener" "Gardeners plan and carry out the necessary operations to grow vegetables by intensive cultivation techniques, to cultivate trees, shrubs, flowers and other plants, and to produce saplings, bulbs and seeds."
+* #6113-1A ^property[0].code = #classification
+* #6113-1A ^property[=].valueCoding.system = "http://ihris.org/fhir/CodeSystem/ihris-classification"
+* #6113-1A ^property[=].valueCoding = http://ihris.org/fhir/CodeSystem/ihris-classification#support
+* #6113-1A ^property[+].code = #salary-grade
+* #6113-1A ^property[=].valueCoding.system = "http://ihris.org/fhir/CodeSystem/ihris-salary-grade"
+* #6113-1A ^property[=].valueCoding = http://ihris.org/fhir/CodeSystem/ihris-salary-grade#entry-level
+* #7137-1B "Electrician" "Building and related electricians install, maintain and repair electrical wiring systems and related equipment."
+* #7137-1B ^property[0].code = #classification
+* #7137-1B ^property[=].valueCoding.system = "http://ihris.org/fhir/CodeSystem/ihris-classification"
+* #7137-1B ^property[=].valueCoding = http://ihris.org/fhir/CodeSystem/ihris-classification#support
+* #7137-1B ^property[+].code = #salary-grade
+* #7137-1B ^property[=].valueCoding.system = "http://ihris.org/fhir/CodeSystem/ihris-salary-grade"
+* #7137-1B ^property[=].valueCoding = http://ihris.org/fhir/CodeSystem/ihris-salary-grade#prof-entry-level
+* #7231-1B "Mechanic" "Motor vehicle mechanics and fitters fit, install, maintain, service and repair engines and the mechanical and related equipment of motor cycles, passenger cars and delivery trucks and other motor vehicles."
+* #7231-1B ^property[0].code = #classification
+* #7231-1B ^property[=].valueCoding.system = "http://ihris.org/fhir/CodeSystem/ihris-classification"
+* #7231-1B ^property[=].valueCoding = http://ihris.org/fhir/CodeSystem/ihris-classification#support
+* #7231-1B ^property[+].code = #salary-grade
+* #7231-1B ^property[=].valueCoding.system = "http://ihris.org/fhir/CodeSystem/ihris-salary-grade"
+* #7231-1B ^property[=].valueCoding = http://ihris.org/fhir/CodeSystem/ihris-salary-grade#prof-entry-level
+* #8322-1A "Driver" "Drivers drive and tend motor cars and vans to transport passengers, mail or goods."
+* #8322-1A ^property[0].code = #classification
+* #8322-1A ^property[=].valueCoding.system = "http://ihris.org/fhir/CodeSystem/ihris-classification"
+* #8322-1A ^property[=].valueCoding = http://ihris.org/fhir/CodeSystem/ihris-classification#support
+* #8322-1A ^property[+].code = #salary-grade
+* #8322-1A ^property[=].valueCoding.system = "http://ihris.org/fhir/CodeSystem/ihris-salary-grade"
+* #8322-1A ^property[=].valueCoding = http://ihris.org/fhir/CodeSystem/ihris-salary-grade#entry-level
+* #NURS-I "Nurse I"
+* #NURS-I ^property[0].code = #cadre
+* #NURS-I ^property[=].valueCoding.system = "http://ihris.org/fhir/CodeSystem/ihris-cadre"
+* #NURS-I ^property[=].valueCoding = http://ihris.org/fhir/CodeSystem/ihris-classification#nurse
+* #NURS-I ^property[+].code = #classification
+* #NURS-I ^property[=].valueCoding.system = "http://ihris.org/fhir/CodeSystem/ihris-classification"
+* #NURS-I ^property[=].valueCoding = http://ihris.org/fhir/CodeSystem/ihris-salary-grade#nurse
+* #NURS-I ^property[+].code = #salary-grade
+* #NURS-I ^property[=].valueCoding.system = "http://ihris.org/fhir/CodeSystem/ihris-salary-grade"
+* #NURS-I ^property[=].valueCoding = http://ihris.org/fhir/CodeSystem/ihris-salary-grade#prof-entry-level
+* #RM-001 "Records Manager" "Manages medical records."
+* #RM-001 ^property[0].code = #classification
+* #RM-001 ^property[=].valueCoding.system = "http://ihris.org/fhir/CodeSystem/ihris-classification"
+* #RM-001 ^property[=].valueCoding = http://ihris.org/fhir/CodeSystem/ihris-classification#support
+* #RM-001 ^property[+].code = #salary-grade
+* #RM-001 ^property[=].valueCoding.system = "http://ihris.org/fhir/CodeSystem/ihris-salary-grade"
+* #RM-001 ^property[=].valueCoding = http://ihris.org/fhir/CodeSystem/ihris-salary-grade#prof-entry-level
+
+Alias: $ihris-salary-grade = http://ihris.org/fhir/CodeSystem/ihris-salary-grade
+
+ValueSet: iHRISSalaryGrade
+Id: ihris-salary-grade
+Title: "iHRIS Salary Grade"
+Description: "Sample iHRIS ValueSet for: iHRISSalaryGrade"
+* ^url = "http://ihris.org/fhir/ValueSet/ihris-salary-grade"
+* ^date = "2020-09-25T20:48:33.646Z"
+* ^status = #active
+* ^experimental = false
+* ^publisher = "iHRIS Foundation"
+* ^contact.telecom.system = #url
+* ^contact.telecom.value = "http://ihris.org"
+* include codes from system $ihris-salary-grade
+
+CodeSystem: iHRISSalaryGrade
+Id: ihris-salary-grade
+Title: "iHRIS Salary Grade"
+Description: "Sample iHRIS CodeSystem for: iHRISSalaryGrade"
+* ^url = "http://ihris.org/fhir/CodeSystem/ihris-salary-grade"
+* ^date = "2020-09-25T20:48:33.646Z"
+* ^publisher = "iHRIS Foundation"
+* ^contact.telecom.system = #url
+* ^contact.telecom.value = "http://ihris.org"
+* ^content = #complete
+* ^property[0].code = #start
+* ^property[=].description = "The starting salary for this grade."
+* ^property[=].type = #Coding
+* ^property[+].code = #midpoint
+* ^property[=].description = "The midpoint salary for this grade."
+* ^property[=].type = #Coding
+* ^property[+].code = #end
+* ^property[=].description = "The end point salary for this grade."
+* ^property[=].type = #Coding
+* ^property[+].code = #currency
+* ^property[=].description = "The currency used (urn:iso:std:iso:4217)."
+* ^property[=].type = #Coding
+* #entry-level "Entry-Level" "Entry-level and support positions."
+* #prof-entry-level "Professional Entry-Level" "Professional first grade."
+* #prof-mid-level "Professional Mid-Level/Managerial"
+* #director "Specialist/Director"
+* #specialist "Technical Specialist" "Not included in any standard salary grades."

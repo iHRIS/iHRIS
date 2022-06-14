@@ -189,6 +189,23 @@ Usage:          #example
 * extension[task][0].valueReference = Reference(Basic/ihris-task-all-permissions-to-everything)
 * extension[role][0].valueReference = Reference(Basic/ihris-role-open)
 
+/*Instance: ihris-role-admin
+InstanceOf: Basic
+Usage: #example
+* meta.profile = "http://ihris.org/fhir/StructureDefinition/ihris-role"
+* code = http://ihris.org/fhir/CodeSystem/ihris-resource-codesystem#role
+* extension[0].url = "http://ihris.org/fhir/StructureDefinition/ihris-basic-name"
+* extension[=].valueString = "Admin Role"
+* extension[+].url = "http://ihris.org/fhir/StructureDefinition/ihris-role-primary"
+* extension[=].valueBoolean = true
+* extension[+].extension[0].url = "permission"
+* extension[=].extension[=].valueCode = #*
+* extension[=].extension[+].url = "resource"
+* extension[=].extension[=].valueCode = #*
+* extension[=].url = "http://ihris.org/fhir/StructureDefinition/ihris-task"
+* extension[+].url = "http://ihris.org/fhir/StructureDefinition/ihris-assign-role"
+* extension[=].valueReference = Reference(Basic/ihris-role-open)*/
+
 Instance:       ihris-task-all-permissions-to-everything
 InstanceOf:     IhrisTask
 Title:          "iHRIS Task With All Permissions To Everything"
