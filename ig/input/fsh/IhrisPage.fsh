@@ -695,3 +695,20 @@ Usage:          #example
 * extension[section][0].extension[field][0].valueString = "CodeSystem.display"
 * extension[section][0].extension[field][1].valueString = "CodeSystem.code"
 * extension[section][0].extension[field][2].valueString = "CodeSystem.definition"
+
+Instance:       ihris-page-identifier
+InstanceOf:     IhrisPage
+Title:          "iHRIS Identifier type CodeSystem Page"
+Usage:          #example
+* code = IhrisResourceCodeSystem#page
+* extension[display].extension[resource].valueReference = Reference(CodeSystem/v2-0203)
+* extension[display].extension[search][0].valueString = "Code|code"
+* extension[display].extension[search][1].valueString = "Display|display"
+* extension[display].extension[field][0].extension[path].valueString = "CodeSystem.code"
+* extension[display].extension[field][0].extension[readOnlyIfSet].valueBoolean = true
+* extension[section][0].extension[title].valueString = "Identifier Type"
+* extension[section][0].extension[description].valueString = "Identifier Type"
+* extension[section][0].extension[name].valueString = "CodeSystem"
+* extension[section][0].extension[field][0].valueString = "CodeSystem.display"
+* extension[section][0].extension[field][1].valueString = "CodeSystem.code"
+* extension[section][0].extension[field][2].valueString = "CodeSystem.definition"
