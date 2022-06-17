@@ -45,23 +45,22 @@ const getFilesFromDir = (searchDir) => {
   });
 };
 const updateConfigFile = function (path, newValue, callback) {
+  
   let pathString = path.join(':');
   nconf.set(pathString, newValue);
-  logger.info('Updating config file');
+  console.info('Updating config file');
   let configFile = `${__dirname}/../config/baseConfig.json`;
   let configString = fs.readFileSync( configFile )
   let configData = JSON.parse( configString )
-  let updateConfigData = configData.parameter.map( param => {
-    if (param.name === pathString){
-      param.valueString = newValue
-    }
-    return param
+  let index = configData.parameter.findIndex( param => {
+    return param.name === pathString
   })
-  fs.writeFile(configFile, JSON.stringify(updateConfigData, 0, 2), (err) => {
+  configData.parameter[index].valueString = ""+newValue
+  fs.writeFile(configFile, JSON.stringify(configData, 0, 2), (err) => {
     if (err) {
       throw err;
     }
-    logger.info('Done updating config file');
+    console.info('Done updating config file');
     return callback();
   });
 }
