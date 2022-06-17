@@ -34,7 +34,7 @@ Description:    "Configuration Parameters to be loaded from a remote file for iH
 * parameter[Config].value[x] 0..0
 * parameter[Config].resource 0..0
 
-Instance:     ihris-config
+/*Instance:     ihris-config
 InstanceOf:   IhrisParametersRemoteConfig
 Title:        "iHRIS Parameters Remote Config Example"
 Description:  "iHRIS Parameters Remote Config Example"
@@ -45,4 +45,4 @@ Usage:        #example
 * parameter[Config].part[ConfigId][0].name = "site:title"
 * parameter[Config].part[ConfigId][0].valueString = "iHRIS"
 * parameter[Config].part[ConfigId][1].name = "site:logo"
-* parameter[Config].part[ConfigId][1].valueString = "ihris-logo.png"
+* parameter[Config].part[ConfigId][1].valueString = "ihris-logo.png"*/

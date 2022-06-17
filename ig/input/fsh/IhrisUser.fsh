@@ -109,6 +109,7 @@ Description:    "iHRIS user Practitioner extension for local users."
 * valueReference.reference ^label = "Self Service Practitioner"
 
 Instance:       ihris-user-admin
+/*Instance:       ihris-user-admin
 InstanceOf:     IhrisPersonUser
 Title:          "iHRIS Admin User"
 Usage:          #example
@@ -120,10 +121,50 @@ Usage:          #example
 * extension[password].extension[resetPasswordExpiry].valueString = "PASS"
 * extension[password].extension[password].valueString = "PASS"
 * extension[password].extension[salt].valueString = "SALT"
-* extension[otp].extension[code].valueString = "123456"
-* extension[otp].extension[expiresIn].valueString = "10s"
-* extension[role][0].valueReference = Reference(Basic/ihris-role-admin)
-* extension[firstTimeLogin].valueBoolean = false
+* extension[role][0].valueReference = Reference(Basic/ihris-role-admin)*/
+
+Instance: ihris-user-admin
+InstanceOf: Person
+Usage: #example
+* meta.profile = "http://ihris.org/fhir/StructureDefinition/ihris-person-user"
+* extension[0].url = "http://ihris.org/fhir/StructureDefinition/ihris-password"
+* extension[=].extension[0].url = "password"
+* extension[=].extension[=].valueString = "0da67ef3726a1e0adfbd3c3880c00f33167daeab1f8c728e10b547d382c2b91a96402958209d6af3c947ae9ab53d879dddb79ad046454ade2b12257fe792f8fa"
+* extension[=].extension[+].url = "salt"
+* extension[=].extension[=].valueString = "239cfeb1222bfb394549125b234e668e"
+* extension[+].url = "http://ihris.org/fhir/StructureDefinition/ihris-assign-role"
+* extension[=].valueReference = Reference(Basic/ihris-role-admin)
+* name.use = #official
+* name.text = "iHRIS Admin"
+* telecom.system = #email
+* telecom.value = "admin@ihris.org"
+
+Instance: ihris-user-loggedout
+InstanceOf: Person
+Usage: #example
+* meta.profile = "http://ihris.org/fhir/StructureDefinition/ihris-person-user"
+* extension.url = "http://ihris.org/fhir/StructureDefinition/ihris-assign-role"
+* extension.valueReference = Reference(Basic/ihris-role-open)
+* name.use = #official
+* name.text = "Logged Out"
+* telecom.system = #email
+* telecom.value = "loggedout@ihris.org"
+
+Instance: ihris-user-demo
+InstanceOf: Person
+Usage: #example
+* meta.profile = "http://ihris.org/fhir/StructureDefinition/ihris-person-user"
+* extension[0].url = "http://ihris.org/fhir/StructureDefinition/ihris-password"
+* extension[=].extension[0].url = "password"
+* extension[=].extension[=].valueString = "0da67ef3726a1e0adfbd3c3880c00f33167daeab1f8c728e10b547d382c2b91a96402958209d6af3c947ae9ab53d879dddb79ad046454ade2b12257fe792f8fa"
+* extension[=].extension[+].url = "salt"
+* extension[=].extension[=].valueString = "239cfeb1222bfb394549125b234e668e"
+* extension[+].url = "http://ihris.org/fhir/StructureDefinition/ihris-assign-role"
+* extension[=].valueReference = Reference(Basic/ihris-role-hrmanager)
+* name.use = #official
+* name.text = "iHRIS Demo User"
+* telecom.system = #email
+* telecom.value = "demo@ihris.org"
 
 Instance:       ihris-page-user
 InstanceOf:     IhrisPage

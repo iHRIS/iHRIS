@@ -10,6 +10,7 @@ const logger = require('./winston')
 const fs = require('fs')
 const user = require('./modules/user');
 const generalMixin = require('./mixin/generalMixin')
+const defaultSetups = require('./defaultSetup.js');
 const nconf = require('./modules/config')
 const requireFromString = require('require-from-string')
 const fhirModules = require('./modules/fhirModules')
@@ -31,10 +32,9 @@ app.use(function(req, res, next) {
 var configLoaded = false
 
 async function startUp() {
-
   const fs = require('fs')
 
-  if ( process.env.AUTOLOAD_RESOURCE_DIR ) {
+  /*if ( process.env.AUTOLOAD_RESOURCE_DIR ) {
     const axios = require('axios')
     const URI = require('urijs')
     const path = require('path')
@@ -70,7 +70,7 @@ async function startUp() {
         }
       }
     }
-  }
+  }*/
 
 
   await nconf.loadRemote()
@@ -186,46 +186,48 @@ async function startUp() {
     resave: false,
     saveUninitialized: false
   }))
-  app.use(express.static(path.join(__dirname, 'public')))
+
+    app.use(express.static(path.join(__dirname, 'public')))
 
 
-  //app.use('/', indexRouter)
+    //app.use('/', indexRouter)
 
-  app.use('/auth', authRouter)
-  if (keycloak) {
-    app.use(keycloak.middleware());
-  } else {
-    app.use(authRouter.passport.initialize())
-    app.use(authRouter.passport.session())
-  }
-  app.use(isLoggedIn);
-  app.use('/config', configRouter)
-  app.use('/mhero', mheroRouter)
-  app.use("/tmp", express.static("tmp"));
-  app.get('/test', (req, res) => {
-    res.status(200).json({
-      "user": req.user
+    app.use('/auth', authRouter)
+    if (keycloak) {
+      app.use(keycloak.middleware());
+    } else {
+      app.use(authRouter.passport.initialize())
+      app.use(authRouter.passport.session())
+    }
+    app.use(isLoggedIn);
+    app.use('/config', configRouter)
+    app.use('/mhero', mheroRouter)
+    app.use("/tmp", express.static("tmp"));
+    app.get('/test', (req, res) => {
+      res.status(200).json({
+        "user": req.user
+      })
     })
-  })
 
-  app.use('/fhir', questionnaireRouter)
-  app.use('/fhir', fhirRouter)
-  app.use('/es', esRouter)
-  const loadModules = nconf.get("modules")
-  if (loadModules) {
-    const modPaths = Object.keys(loadModules)
-    for (let mod of modPaths) {
-      try {
-        let reqMod = await fhirModules.require(loadModules[mod])
-        if (reqMod) {
-          logger.info("Loading " + mod + " (" + loadModules[mod] + ") to app.")
-          app.use("/" + mod, reqMod)
+    app.use('/fhir', questionnaireRouter)
+    app.use('/fhir', fhirRouter)
+    app.use('/es', esRouter)
+
+    const loadModules = nconf.get("modules")
+    if (loadModules) {
+      const modPaths = Object.keys(loadModules)
+      for (let mod of modPaths) {
+        try {
+          let reqMod = await fhirModules.require(loadModules[mod])
+          if (reqMod) {
+            logger.info("Loading " + mod + " (" + loadModules[mod] + ") to app.")
+            app.use("/" + mod, reqMod)
+          }
+        } catch (err) {
+          logger.error("Failed to load module " + mod + " (" + loadModules[mod] + ")",err)
         }
-      } catch (err) {
-        logger.error("Failed to load module " + mod + " (" + loadModules[mod] + ")",err)
       }
     }
-  }
   /*
   testMod = fhirModules.require()
   if ( testMod ) app.use( '/mod', testMod )
@@ -257,7 +259,14 @@ module.exports = router
   configLoaded = true
 }
 
-startUp()
+defaultSetups.initialize().then(() => {
+  startUp();
+}).catch(() => {
+  logger.warn('iHRIS may have issues running because of above error(s)');
+  startUp();
+});
+
+//startUp()
 
 app.whenReady = () => {
   return new Promise((resolve) => {
