@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "start": "NODE_ENV=production node ./bin/www",
-    "dev": "NODE_ENV=development nodemon ./bin/www",
+    "dev": "NODE_ENV=development node ./bin/www",
     "test": "NODE_ENV=test jest"
   },
   "dependencies": {
@@ -48,10 +48,11 @@
     "webidl-conversions": "^6.1.0",
     "winston": "^3.3.3",
     "winston-daily-rotate-file": "^4.5.5",
-    "xlsx": "^0.17.2"
+    "xlsx": "^0.17.2",
+    "nodemailer": "^6.7.5"
   },
   "devDependencies": {
     "jest": "^26.6.3",
-    "nodemon": "^2.0.15"
+    "nodemon": "^2.0.16"
   }
 }

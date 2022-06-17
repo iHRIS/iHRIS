@@ -32,7 +32,6 @@ app.use(function(req, res, next) {
 var configLoaded = false
 
 async function startUp() {
-
   const fs = require('fs')
 
   /*if ( process.env.AUTOLOAD_RESOURCE_DIR ) {
@@ -188,7 +187,6 @@ async function startUp() {
     saveUninitialized: false
   }))
 
-  const postInitialization = () => {
     app.use(express.static(path.join(__dirname, 'public')))
 
 
@@ -230,14 +228,6 @@ async function startUp() {
         }
       }
     }
-  };
-
-  defaultSetups.initialize().then(() => {
-    postInitialization();
-  }).catch(() => {
-    logger.warn('iHRIS may have issues running because of above error(s)');
-    postInitialization();
-  });
   /*
   testMod = fhirModules.require()
   if ( testMod ) app.use( '/mod', testMod )
@@ -269,7 +259,14 @@ module.exports = router
   configLoaded = true
 }
 
-startUp()
+defaultSetups.initialize().then(() => {
+  startUp();
+}).catch(() => {
+  logger.warn('iHRIS may have issues running because of above error(s)');
+  startUp();
+});
+
+//startUp()
 
 app.whenReady = () => {
   return new Promise((resolve) => {

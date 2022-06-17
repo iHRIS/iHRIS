@@ -1,5 +1,5 @@
 const fs = require('fs');
-const nconf = require('./modules/config')
+const nconf = require('../modules/config')
 const removeDir = function(path) {
   if (fs.existsSync(path)) {
     const files = fs.readdirSync(path);

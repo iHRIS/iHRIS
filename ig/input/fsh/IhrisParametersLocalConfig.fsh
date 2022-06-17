@@ -70,7 +70,7 @@ Description:    "Configuration Parameters to be loaded from a local file for iHR
 * parameter[Session].value[x] 0..0
 * parameter[Session].resource 0..0
 
-Instance:     ihris-base-config
+/*Instance:     ihris-base-config
 InstanceOf:   IhrisParametersLocalConfig
 Title:        "iHRIS Parameters Local Config Example"
 Description:  "iHRIS Parameters Local Config Example"
@@ -86,4 +86,4 @@ mQJbBT18fiZ3veQPvb0LC/9aFl64RuOguPrCZC+sbZLegQ6Wwf96UWyqmR49gaHO
 EdXwdFdSVyBGyS7dmwIDAQAB
 -----END PUBLIC KEY-----"
 * parameter[Session].part[SessionConfig][0].name = "secret"
-* parameter[Session].part[SessionConfig][0].valueString = "set some secret here"
+* parameter[Session].part[SessionConfig][0].valueString = "set some secret here"*/
