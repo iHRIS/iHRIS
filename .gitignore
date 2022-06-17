@@ -38,6 +38,9 @@ typings/
 # next.js build output
 .next
 
+./rsa_1024_priv.pem
+
 # VIM swp files
 *.swp
 
+rsa_1024_priv.pem
