@@ -64,12 +64,32 @@
       "valueString": ""
     },
     {
-      "name": "email:username",
+      "name": "auth:GMAIL_ADDRESS",
       "valueString": "iHRISNotification@gmail.com"
     },
     {
-      "name": "email:password",
-      "valueString": "sf9{aCGB#3x5q+#%"
+      "name": "auth:GMAIL_OAUTH_CLIENT_ID",
+      "valueString": "390357737843-inbmba86itvofhvan713dt4h4dbklv9c.apps.googleusercontent.com"
+    },
+    {
+      "name": "auth:GMAIL_OAUTH_PROJECT_ID",
+      "valueString": ""
+    },
+    {
+      "name": "auth:GMAIL_OAUTH_CLIENT_SECRET",
+      "valueString": "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"
+    },
+    {
+      "name": "auth:GMAIL_OAUTH_REDIRECT_URL",
+      "valueString": "https://developers.google.com/oauthplayground"
+    },
+    {
+      "name": "auth:CLIENT_URL",
+      "valueString": "http://localhost:8081"
+    },
+    {
+      "name": "auth:REFRESH_TOKEN",
+      "valueString": "1//047LGlJk6fgWRCgYIARAAGAQSNwF-L9IrcXbLOZy5wxo47fGq_MuqcUEqkFnP43Tig7x_XUnkHut1mdrc1JCtn0cXO5181_8Ue7I"
     },
     {
       "name": "elasticsearch:base",

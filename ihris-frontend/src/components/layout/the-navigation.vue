@@ -22,8 +22,9 @@
             color="white--text"
             :value="item.active"
             v-model="item.active"
-            :class="(item.active ? 'primary darken-2' : '')"
+            :class="(item.active ? 'primary pa-2' : '')"
             no-action
+            style="border-radius: 20px;"
             >
             <template v-slot:activator>
               <v-list-item-title class="subtitle-1 font-weight-bold text-uppercase">{{$t(`App.menu.${item.text}`)}}</v-list-item-title>
@@ -100,7 +101,8 @@ export default {
     updateMenu: function() {
       this.menu = []
       for( let menu_id of Object.keys(this.nav.menu) ) {
-        let entry = {
+        let entry ={}
+        entry = {
           id: menu_id,
           text: this.nav.menu[menu_id].text,
           icon: this.nav.menu[menu_id].icon,
@@ -121,15 +123,27 @@ export default {
               order: this.nav.menu[menu_id].menu[sub_id].order
             }
             entry.menu.push( sub )
-            entry.menu.sort( (a,b) => a.order === b.order ? 0 : ( a.order < b.order ? -1 : 1 ) )
+            entry.menu.sort( (a,b) => a.text === b.text ? 0 : ( a.text < b.text ? -1 : 1 ) )
+            //entry.menu.sort( (a,b) => Number(a.order) === Number(b.order) ? 0 : ( Number(a.order) < Number(b.order) ? -1 : 1 ) )
           }
         } else if ( this.nav.menu[menu_id].url ) {
           entry.url = this.nav.menu[menu_id].url
         }
         this.menu.push( entry )
       }
-      this.menu.sort( (a,b) => a.order === b.order ? 0 : ( a.order < b.order ? -1 : 1 ) )
+
+      this.menu.sort( (a,b) => Number(a.order) === Number(b.order) ? 0 : ( Number(a.order) < Number(b.order) ? -1 : 1 ) )
     }
   }
 }
 </script>
+<style scoped>
+.v-application .primary {
+  background-color: #569fd36e !important;
+  border-color: var(--v-primary-base) !important;
+}
+.v-application .primary.darken-2 {
+  background-color: #00000000 !important;
+  border-color: #000000 !important;
+}
+</style>

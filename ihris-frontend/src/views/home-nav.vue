@@ -84,13 +84,10 @@ export default {
   },
   methods: {
     updateMenu: function() {
-      if ( this.$store.state.user.loggedin && this.nav.home ) {
-        this.$router.push(this.nav.home)
-        return
-      }
       this.menu = []
       for( let menu_id of Object.keys(this.nav.menu) ) {
-        let entry = {
+        let entry ={}
+        entry = {
           id: menu_id,
           text: this.nav.menu[menu_id].text,
           icon: this.nav.menu[menu_id].icon,
@@ -111,15 +108,16 @@ export default {
               order: this.nav.menu[menu_id].menu[sub_id].order
             }
             entry.menu.push( sub )
-            entry.menu.sort( (a,b) => a.order === b.order ? 0 : ( a.order < b.order ? -1 : 1 ) )
+            entry.menu.sort( (a,b) => a.text === b.text ? 0 : ( a.text < b.text ? -1 : 1 ) )
+            //entry.menu.sort( (a,b) => Number(a.order) === Number(b.order) ? 0 : ( Number(a.order) < Number(b.order) ? -1 : 1 ) )
           }
         } else if ( this.nav.menu[menu_id].url ) {
           entry.url = this.nav.menu[menu_id].url
         }
         this.menu.push( entry )
       }
-      this.menu.sort( (a,b) => a.order === b.order ? 0 : ( a.order < b.order ? -1 : 1 ) )
 
+      this.menu.sort( (a,b) => Number(a.order) === Number(b.order) ? 0 : ( Number(a.order) < Number(b.order) ? -1 : 1 ) )
     }
   }
 };

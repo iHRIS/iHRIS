@@ -1,0 +1,14 @@
+{
+  "resourceType": "SearchParameter",
+  "title": "Facility Location",
+  "id": "facility-location-search-parameter",
+  "base": [
+    "Location"
+  ],
+  "description": "Search Facility by Location",
+  "status": "active",
+  "code": "facility-location",
+  "type": "reference",
+  "expression": "Location.extension('http://ihris.org/fhir/StructureDefinition/ihris-facility-location')",
+  "xpathUsage": "normal"
+}

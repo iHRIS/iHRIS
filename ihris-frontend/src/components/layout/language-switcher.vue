@@ -27,6 +27,8 @@ export default {
       langs: [
         {code:'en', title: 'English', flag: 'en' },
         {code:'fr',  title: 'French', flag: 'fr' },
+        {code:'es', title: 'Spanish', flag: 'es' },
+        {code:'it',  title: 'Italian', flag: 'it' }
       ],
       activeLang: 'English',
       activeFlag: 'en',
@@ -35,6 +37,7 @@ export default {
     }
   },
 created() {
+   // this.$i18n.availableLocales.map((lang) => (this.langs.push({code:lang, title: lang, flag: 'en' })))
   this.activeLang = localStorage.getItem('activeLang')
   this.activeFlag = localStorage.getItem('activeFlag')
   this.$i18n.locale = localStorage.getItem('activeCode')

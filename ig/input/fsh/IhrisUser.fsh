@@ -22,11 +22,41 @@ Description:    "iHRIS profile of the Person resource to manage user access."
 * extension contains 
       IhrisAssignRole named role 0..1 MS and
       IhrisPassword named password 0..1 MS and
-      IhrisUserLocation named location 0..* MS
+      IhrisUserLocation named location 0..* MS and
+      IhrisUserPractitioner named practitioner 0..1 MS and
+      IhrisUserOtp named otp 0..1 MS and
+      IhrisFirstTimeLogin named firstTimeLogin 1..1 MS
 * extension[role] ^label = "Role(s)"
 * extension[role].valueReference.reference MS
 * extension[location] ^label = "Location/Facility"
 * extension[location].valueReference.reference MS
+* extension[practitioner] ^label = "Self Service Practitioner"
+* extension[practitioner].valueReference MS
+
+Extension: IhrisUserOtp
+Id: ihris-user-otp
+Title: "Ihris User Otp"
+Description: "iHRIS user otp extension"
+* ^context.type = #element
+* ^context.expression = "Person"
+* extension contains
+      code 1..1 MS and
+      expiresIn 1..1 MS
+* extension[code].value[x] only string
+* extension[code].valueString ^label = "Code"
+* extension[code].valueString 1..1 MS
+* extension[expiresIn].value[x] only string
+* extension[expiresIn].valueString ^label = "expiresIn"
+* extension[expiresIn].valueString 1..1 MS
+
+Extension: IhrisFirstTimeLogin
+Id: ihris-first-time-login
+Title: "Ihris first time login"
+Description: "iHRIS first time login extension"
+* ^context.type = #element
+* ^context.expression = "Person"
+* value[x] only boolean
+* valueBoolean 1..1
 
 Extension:      IhrisPassword
 Id:             ihris-password
@@ -34,9 +64,17 @@ Title:          "iHRIS Password"
 Description:    "iHRIS password extension for local users."
 * ^context.type = #element
 * ^context.expression = "Person"
-* extension contains 
+* extension contains
+      resetPasswordToken 1..1 MS and
+      resetPasswordExpiry 1..1 MS and
       password 1..1 MS and
       salt 1..1 MS
+* extension[resetPasswordToken].value[x] only string
+* extension[resetPasswordToken].valueString ^label = "restPasswordToken"
+* extension[resetPasswordToken].valueString 1..1 MS
+* extension[resetPasswordExpiry].value[x] only string
+* extension[resetPasswordExpiry].valueString ^label = "resetPasswordExpiry"
+* extension[resetPasswordExpiry].valueString 1..1 MS
 * extension[password].value[x] only string
 * extension[password].valueString ^label = "Password"
 * extension[password].valueString 1..1 MS
@@ -57,6 +95,19 @@ Description:    "iHRIS user Location extension for local users."
 * valueReference.reference 1..1 MS
 * valueReference.reference ^label = "Location/Facility"
 
+Extension:      IhrisUserPractitioner
+Id:             ihris-user-practitioner
+Title:          "iHRIS User Practitioner"
+Description:    "iHRIS user Practitioner extension for local users."
+* ^context.type = #element
+* ^context.expression = "Person"
+* value[x] only Reference
+* valueReference 0..1 MS
+* valueReference ^label = "Self Service Practitioner"
+* valueReference only Reference(IhrisPractitioner)
+* valueReference.reference 0..1 MS
+* valueReference.reference ^label = "Self Service Practitioner"
+
 Instance:       ihris-user-admin
 InstanceOf:     IhrisPersonUser
 Title:          "iHRIS Admin User"
@@ -65,9 +116,14 @@ Usage:          #example
 * name.text = "iHRIS Admin"
 * identifier[0].system = "google"
 * identifier[0].value = "12345"
+* extension[password].extension[resetPasswordToken].valueString = "PASS"
+* extension[password].extension[resetPasswordExpiry].valueString = "PASS"
 * extension[password].extension[password].valueString = "PASS"
 * extension[password].extension[salt].valueString = "SALT"
+* extension[otp].extension[code].valueString = "123456"
+* extension[otp].extension[expiresIn].valueString = "10s"
 * extension[role][0].valueReference = Reference(Basic/ihris-role-admin)
+* extension[firstTimeLogin].valueBoolean = false
 
 Instance:       ihris-page-user
 InstanceOf:     IhrisPage
@@ -75,11 +131,16 @@ Title:          "User"
 Usage:          #example
 * code = IhrisResourceCodeSystem#page
 * extension[display].extension[resource].valueReference = Reference(StructureDefinition/ihris-person-user)
-* extension[display].extension[link][0].extension[field].valueString = ""
-* extension[display].extension[link][0].extension[text].valueString = "Add Another User"
+* extension[display].extension[link][0].extension[field].valueString = "Person.id"
+* extension[display].extension[link][0].extension[text].valueString = "View User"
 * extension[display].extension[link][0].extension[button].valueBoolean = true
 * extension[display].extension[link][0].extension[icon].valueString = "mdi-account-arrow-right"
-* extension[display].extension[link][0].extension[url].valueUrl = "/questionnaire/ihris-user/user"
+* extension[display].extension[link][0].extension[url].valueUrl = "/resource/view/user/FIELD"
+* extension[display].extension[link][1].extension[field].valueString = ""
+* extension[display].extension[link][1].extension[text].valueString = "Add Another User"
+* extension[display].extension[link][1].extension[button].valueBoolean = true
+* extension[display].extension[link][1].extension[icon].valueString = "mdi-account-arrow-right"
+* extension[display].extension[link][1].extension[url].valueUrl = "/questionnaire/ihris-user/user"
 * extension[display].extension[search][0].valueString = "User|Person.name.where(use='official').text"
 * extension[display].extension[search][1].valueString = "Username/Email|Person.telecom.where(system='email').value"
 * extension[display].extension[search][2].valueString = "Role|Person.extension.where(url='http://ihris.org/fhir/StructureDefinition/ihris-assign-role').valueReference.reference"
@@ -98,7 +159,8 @@ Usage:          #example
 * extension[section][0].extension[field][1].valueString = "Person.telecom"
 * extension[section][0].extension[field][2].valueString = "Person.extension:role.value[x]:valueReference"
 * extension[section][0].extension[field][3].valueString = "Person.extension:location.value[x]:valueReference"
-* extension[section][0].extension[field][4].valueString = "Person.extension:password.extension:password.value[x]:valueString"
+* extension[section][0].extension[field][4].valueString = "Person.extension:practitioner.value[x]:valueReference"
+* extension[section][0].extension[field][5].valueString = "Person.extension:password.extension:password.value[x]:valueString"
 
 Instance:       IhrisUser
 InstanceOf:     IhrisQuestionnaire
@@ -167,22 +229,34 @@ Usage:          #definition
 
 * item[0].item[5].linkId = "location"
 * item[0].item[5].definition = "http://ihris.org/fhir/StructureDefinition/ihris-person-user#Person.extension:location.value[x]:valueReference"
-* item[0].item[5].text = "Location/Facility"
+* item[0].item[5].text = "Facility"
 * item[0].item[5].type = #reference
-* item[0].item[5].required = false
+* item[0].item[5].required = true
 * item[0].item[5].repeats = false
 
-* item[0].item[6].linkId = "password#password"
-* item[0].item[6].text = "Password"
-* item[0].item[6].type = #string
-* item[0].item[6].required = true
-* item[0].item[6].repeats = false
+// * item[0].item[6].linkId = "practitioner"
+// * item[0].item[6].definition = "http://ihris.org/fhir/StructureDefinition/ihris-person-user#Person.extension:practitioner.value[x]:valueReference"
+// * item[0].item[6].text = "Self Service Practitioner"
+// * item[0].item[6].type = #reference
+// * item[0].item[6].required = false
+// * item[0].item[6].repeats = false
 
-* item[0].item[7].linkId = "confrimpassword#password"
-* item[0].item[7].text = "Confirm Password"
-* item[0].item[7].type = #string
-* item[0].item[7].required = true
-* item[0].item[7].repeats = false
+
+// * item[0].item[6].linkId = "password#password"
+// * item[0].item[6].text = "Password"
+// * item[0].item[6].type = #string
+// * item[0].item[6].required = true
+// * item[0].item[6].repeats = false
+// * item[0].item[6].extension[constraint].extension[key].valueId = "ihris-password-strength-check"
+// * item[0].item[6].extension[constraint].extension[severity].valueCode = #error
+// * item[0].item[6].extension[constraint].extension[expression].valueString = "matches('^(?=.*\\\\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$')"
+// * item[0].item[6].extension[constraint].extension[human].valueString = "Password Should be Minimum eight characters, at least one uppercase letter, one lowercase letter, one number and one special character"
+
+// * item[0].item[7].linkId = "confrimpassword#password"
+// * item[0].item[7].text = "Confirm Password"
+// * item[0].item[7].type = #string
+// * item[0].item[7].required = true
+// * item[0].item[7].repeats = false
 
 Instance:       IhrisChangePassword
 InstanceOf:     IhrisQuestionnaire

@@ -6,6 +6,7 @@ import HomeNav from "../views/home-nav.vue"
 //import Test from "../views/test.vue"
 //import mhero from "../views/mhero/mhero.vue"
 //import contactGroups from "../views/mhero/contact-groups.vue"
+// import store from "@/store";
 
 Vue.use(VueRouter)
 
@@ -17,6 +18,16 @@ const routes = [{
       homeNav: HomeNav
     },
     props: { default: { id: "page-home", blankOnErr: true } }
+  },
+  {
+    path: '/reset-password',
+    name: 'reset-password',
+    component: () => import('../views/auth/reset-password.vue'),
+  },
+  {
+    path: '/change-password',
+    name: 'change-password',
+    component: () => import('../views/auth/change-password.vue')
   },
   {
     path: '/page/blockContacts',
@@ -129,6 +140,21 @@ const routes = [{
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
     component: () => import( /* webpackChunkName: "questionnaire" */ "../views/bulk-registration")
+  },    {
+    path: "/adminUnit/by-location",
+    name: "by-location",
+    component: () =>
+        import(
+            /* webpackChunkName: "questionnaire" */ "../views/admin-unit-by-location"
+            ),
+  },
+  {
+    path: "/adminUnit/by-reporting",
+    name: "by-reporting",
+    component: () =>
+        import(
+            /* webpackChunkName: "questionnaire" */ "../views/admin-unit-by-reporting"
+            ),
   },
 ]
 
@@ -137,5 +163,19 @@ const router = new VueRouter({
   base: process.env.BASE_URL,
   routes
 })
+
+// router.beforeEach((to, from, next) => {
+//     if (!store.state.user.loggedin) {
+//       if (to.path !== '/' && to.path !== '/reset-password' &&to.path !== '/change-password') {
+//         next({
+//           path: '/'
+//         })
+//       }else {
+//         next()
+//       }
+//     } else {
+//       next()
+//     }
+// })
 
 export default router

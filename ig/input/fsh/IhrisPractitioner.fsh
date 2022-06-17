@@ -477,24 +477,24 @@ Usage:          #definition
 
 * item[3].item[0].linkId = "Practitioner.identifier[0]"
 * item[3].item[0].definition = "http://ihris.org/fhir/StructureDefinition/ihris-practitioner#Practitioner.identifier"
-* item[3].item[0].text = "Identifier"
+* item[3].item[0].text = "Medical License Number"
 * item[3].item[0].type = #group
-* item[3].item[0].repeats = true
-* item[3].item[0].required = false
+* item[3].item[0].repeats = false
+* item[3].item[0].required = true
 
 * item[3].item[0].item[0].linkId = "Practitioner.identifier[0].system"
 * item[3].item[0].item[0].definition = "http://ihris.org/fhir/StructureDefinition/ihris-practitioner#Practitioner.identifier.system"
 * item[3].item[0].item[0].text = "System"
 * item[3].item[0].item[0].type = #string
 * item[3].item[0].item[0].repeats = false
-* item[3].item[0].item[0].required = false
+* item[3].item[0].item[0].required = true
 
 * item[3].item[0].item[1].linkId = "Practitioner.identifier[0].value"
 * item[3].item[0].item[1].definition = "http://ihris.org/fhir/StructureDefinition/ihris-practitioner#Practitioner.identifier.value"
-* item[3].item[0].item[1].text = "ID Number"
+* item[3].item[0].item[1].text = "Medical License Number"
 * item[3].item[0].item[1].type = #string
 * item[3].item[0].item[1].repeats = false
-* item[3].item[0].item[1].required = false
+* item[3].item[0].item[1].required = true
 
 * item[3].item[0].item[2].linkId = "Practitioner.identifier[0].type"
 * item[3].item[0].item[2].definition = "http://ihris.org/fhir/StructureDefinition/ihris-practitioner#Practitioner.identifier.type"
@@ -502,7 +502,36 @@ Usage:          #definition
 * item[3].item[0].item[2].type = #choice
 * item[3].item[0].item[2].answerValueSet = "http://hl7.org/fhir/ValueSet/identifier-type"
 * item[3].item[0].item[2].repeats = false
-* item[3].item[0].item[2].required = false
+* item[3].item[0].item[2].required = true
+
+* item[3].item[1].linkId = "Practitioner.identifier[1]"
+* item[3].item[1].definition = "http://ihris.org/fhir/StructureDefinition/ihris-practitioner#Practitioner.identifier"
+* item[3].item[1].text = "Identifier"
+* item[3].item[1].type = #group
+* item[3].item[1].repeats = true
+* item[3].item[1].required = false
+
+* item[3].item[1].item[0].linkId = "Practitioner.identifier[0].system"
+* item[3].item[1].item[0].definition = "http://ihris.org/fhir/StructureDefinition/ihris-practitioner#Practitioner.identifier.system"
+* item[3].item[1].item[0].text = "System"
+* item[3].item[1].item[0].type = #string
+* item[3].item[1].item[0].repeats = false
+* item[3].item[1].item[0].required = false
+
+* item[3].item[1].item[1].linkId = "Practitioner.identifier[0].value"
+* item[3].item[1].item[1].definition = "http://ihris.org/fhir/StructureDefinition/ihris-practitioner#Practitioner.identifier.value"
+* item[3].item[1].item[1].text = "ID Number"
+* item[3].item[1].item[1].type = #string
+* item[3].item[1].item[1].repeats = false
+* item[3].item[1].item[1].required = false
+
+* item[3].item[1].item[2].linkId = "Practitioner.identifier[0].type"
+* item[3].item[1].item[2].definition = "http://ihris.org/fhir/StructureDefinition/ihris-practitioner#Practitioner.identifier.type"
+* item[3].item[1].item[2].text = "ID Type"
+* item[3].item[1].item[2].type = #choice
+* item[3].item[1].item[2].answerValueSet = "http://hl7.org/fhir/ValueSet/identifier-type"
+* item[3].item[1].item[2].repeats = false
+* item[3].item[1].item[2].required = false
 
 Instance:       IhrisPractitionerWorkflowEndRole
 InstanceOf:     IhrisQuestionnaire

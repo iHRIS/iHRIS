@@ -1,65 +1,164 @@
-var express = require('express')
-var router = express.Router()
-const nodeMailer = require("nodemailer");
+const express = require('express')
+const router = express.Router()
 const axios = require('axios')
 const URI = require('urijs');
 const nconf = require('../modules/config')
 const fhirAxios = nconf.fhirAxios
 const outcomes = require('../config/operationOutcomes')
-const fhirConfig = require('../modules/fhirConfig')
 const fhirDefinition = require('../modules/fhirDefinition')
 const crypto = require('crypto')
 const logger = require('../winston')
 const path = require("path")
 const bulkRegistration = require("../modules/bulkRegistration")
+const employeeId = require("../modules/employeeIdPrintout");
+const employeeCv = require("../modules/employeeCvPrintout");
 
 const getUKey = () => {
   return Math.random().toString(36).replace(/^[^a-z]+/,'') + Math.random().toString(36).substring(2,15)
 }
-const filterNavigation = ( user, nav, prefix ) => {
-  for( let key of Object.keys(nav.menu) ) {
-    let instance
-    if ( prefix ) {
-      instance = prefix +":"+ key
-    } else {
-      instance = key
-    }
-    if ( nav.menu[key].menu ) {
-      filterNavigation( user, nav.menu[key], instance )
-      if ( Object.keys(nav.menu[key].menu).length === 0 ) {
-        delete nav.menu[key]
+const filterNavigation = (user, nav, prefix) => {
+  let email = user.resource.telecom[0].value;
+  let roleObj = user.resource.extension.filter(
+      (ext) =>
+          ext.url === "http://ihris.org/fhir/StructureDefinition/ihris-assign-role"
+  );
+  let roles = [];
+  let reference = "";
+  roleObj.forEach((r) => {
+    let elt = r.valueReference.reference.split("/");
+    roles.push(elt.pop());
+  });
+
+  if (roles.includes("ihris-role-self")) {
+    let refObj = user.resource.extension.filter(
+        (ext) =>
+            ext.url ===
+            "http://ihris.org/fhir/StructureDefinition/ihris-user-practitioner"
+    );
+    reference = refObj[0].valueReference.reference.toLowerCase();
+
+    for (let key of Object.keys(nav.menu)) {
+      let instance;
+      if (prefix) {
+        instance = prefix + "-" + key;
+      } else {
+        instance = key;
       }
-    } else {
-      if( !user.hasPermissionByName( "special", "navigation", instance ) ) {
-        delete nav.menu[key]
+      if (instance === "profile") {
+        nav.menu[key].url += `/${reference}`;
+      }
+      if (instance==="leaveRequest"||instance==="evaluation") {
+        nav.menu[key].url += `${reference.split('/').pop()}`;
+      }
+      if (!user.hasPermissionByName("special", "navigation", instance)) {
+        delete nav.menu[key];
+      }
+    }
+  } else {
+    for (let key of Object.keys(nav.menu)) {
+      let instance;
+      if (prefix) {
+        instance = prefix + "-" + key;
+      } else {
+        instance = key;
+      }
+      if (nav.menu[key].menu) {
+        filterNavigation(user, nav.menu[key], instance);
+        if (Object.keys(nav.menu[key].menu).length === 0) {
+          delete nav.menu[key];
+        }
+      } else {
+        if (
+            !user.hasPermissionByName("special", "navigation", instance) ||
+            nav.menu[key].exclusive
+        ) {
+          delete nav.menu[key];
+        }
       }
     }
   }
-}
+};
 
 /* GET home page. */
-router.get('/site', function(req, res) {
-  const defaultUser = nconf.get("user:loggedout") || "ihris-user-loggedout"
-  let site = JSON.parse(JSON.stringify(nconf.get("site") || {}))
-  if ( nconf.getBool("security:disabled") ) {
-    site.security = {disabled: true}
+router.get("/site", async function (req, res) {
+  const defaultUser = nconf.get("user:loggedout") || "ihris-user-loggedout";
+  let site = JSON.parse(JSON.stringify(nconf.get("site") || {}));
+  if (nconf.getBool("security:disabled")) {
+    site.security = { disabled: true };
   }
-  if ( req.user ) {
-    site.user = {}
-    if ( req.user.resource.id === defaultUser ) {
-      site.user.loggedin = false
+  if (req.user) {
+    site.user = {};
+    if (req.user.resource.id === defaultUser) {
+      site.user.loggedin = false;
     } else {
-      site.user.loggedin = true
-      site.user.name = req.user.resource.name[0].text
+      site.user.loggedin = true;
+      site.user.name = req.user.resource.name[0].text;
+      let locReference = "";
+      let refObj = req.user.resource.extension.find(
+          (ext) =>
+              ext.url ===
+              "http://ihris.org/fhir/StructureDefinition/ihris-user-location"
+      );
+      let location = ""
+
+      if (refObj) {
+        // site.user.locationId =
+        locReference = refObj.valueReference.reference;
+        location = await getLocationByRef(locReference).then((loc) => {
+          return loc;
+        });
+        let physicalLocation = await fhirAxios
+            .read("Location", locReference.split("/").pop())
+            .then((loc) => {
+              return loc;
+            });
+
+        let physicalLocationExtension = physicalLocation.extension.find(
+            (ext) =>
+                ext.url ===
+                "http://ihris.org/fhir/StructureDefinition/ihris-facility-location"
+        );
+
+        let physicalLocationName = "";
+
+        if (physicalLocationExtension) {
+          let physicalLocationId =
+              physicalLocationExtension.valueReference.reference;
+          physicalLocationName = await fhirAxios
+              .read("Location", physicalLocationId.split("/").pop())
+              .then((loc) => {
+                return loc.name;
+              });
+        }
+        site.user.physicalLocation = physicalLocationName;
+        site.user.facilityId = locReference.split("/").pop();
+        if (location !== "") location = " - " + location;
+      }
+      site.user.location = location;
+      req.user.resource.extension.forEach((ext) => {
+        if (
+            ext.url ===
+            "http://ihris.org/fhir/StructureDefinition/ihris-user-practitioner"
+        ) {
+          site.user.reference = ext.valueReference.reference;
+        }
+
+        if (
+            ext.url ===
+            "http://ihris.org/fhir/StructureDefinition/ihris-assign-role"
+        ) {
+          let _role = ext.valueReference.reference.split("/");
+          site.user.role = _role.pop();
+        }
+      });
     }
-    filterNavigation( req.user, site.nav )
+    filterNavigation(req.user, site.nav);
   } else {
-    site.user = { loggedin: false }
-    delete site.nav
+    site.user = { loggedin: false };
+    delete site.nav;
   }
-  //site.updated = new Date().toISOString()
-  res.status(200).json( site )
-})
+  res.status(200).json(site);
+});
 
 router.get('/reload', function(req,res) {
   nconf.loadRemote().then( () => {
@@ -1427,50 +1526,430 @@ router.get('/app', (req, res) => {
   res.status(200).json(otherConfig);
 });
 
-/**
- * Route serving send email notification.
- * @name POST/sendEmail
- * @param {object} body Information about the email.
- * @param {string} body.email The receiver email.
- * @param {string} body.subject The email subject.
- * @param {string} body.message The email body.
- * @param {string=} body.fullName The email receiver full name.
- */
-router.post("/sendEmail", async (req, res) => {
-  if (!req.body || !req.body.email || !req.body.subject || !req.body.message) {
-      return res.status(400).json(outcomes.ERROR);
-  }
-  const {email, subject, message, fullName} = req.body;
-  const user = nconf.get("email:username");
-  const password = nconf.get("email:password");
+router.get("/employeeId/:id", (req, res) => {
+  if (req.params.id) {
+    fhirAxios.read("/Practitioner", req.params.id).then(async (user) => {
+      let userData = {};
+      userData.id = req.params.id;
 
-  const transporter = nodeMailer.createTransport({
-      service: "gmail", // Gmail as the email provider but is is better if we use other SMTP server
-      auth: {
-          user: user,
-          pass: password
-      },
-  })
-  const from = `"iHRIS Notification" <${user}>`
-  const to = email;
-  const mailSubject = subject
-  const name= fullName? fullName: "User"
-  const mailBody = `<div>
-      <p> Dear <b>${name}</b>,<br>
-       ${message}
-   </div>
-   `;
-  try {
-      await transporter.sendMail({
-          from: from, // sender address
-          to: to, // list of receivers
-          subject: mailSubject, // Subject line
-          html: mailBody // html body
+      let userPhone = user.extension.find(
+          (obj) =>
+              obj.url ===
+              "http://ihris.org/fhir/StructureDefinition/ihris-personal-information-phone"
+      );
+
+      userData.phone = userPhone ? userPhone.valueString : "";
+
+      // let employeeIdNo = user.identifier.find(
+      //     (obj) => obj.type.coding[0].code === "employeeId"
+      // );
+
+      // userData.employeeId = employeeIdNo ? employeeIdNo.value : "";
+      userData.employeeId = "12345";
+
+      let location = user.extension.find(
+          (obj) =>
+              obj.url ===
+              "http://ihris.org/fhir/StructureDefinition/ihris-practitioner-residence"
+      );
+
+      let locationId = location ? location.valueReference.reference : "";
+
+      if (locationId) {
+        let residence = await fhirAxios.search(locationId);
+
+        userData.residence = residence.name ? residence.name : "";
+      } else {
+        userData.residence = "";
+      }
+      let nationality = user.extension.find(
+          (obj) =>
+              obj.url ===
+              "http://ihris.org/fhir/StructureDefinition/ihris-practitioner-nationality"
+      );
+
+      userData.nationality = nationality ? nationality.valueCoding.display : "";
+
+      let userEmail = user.extension.find(
+          (obj) =>
+              obj.url ===
+              "http://ihris.org/fhir/StructureDefinition/ihris-personal-information-email"
+      );
+      userData.email = userEmail ? userEmail.valueString : "";
+      let data = await fhirAxios.search("PractitionerRole", {
+        _profile:
+            "http://ihris.org/fhir/StructureDefinition/ihris-job-description",
+        practitioner: req.params.id,
       });
-      return res.status(200).json({message: "Email sent successfully"});
-  } catch (err) {
+      let organizationLocation =
+          data.entry && data.entry.length > 0
+              ? data.entry[0].resource.location[0].reference.split("/")
+              : null;
+      if (organizationLocation != null) {
+        let organizationData = await fhirAxios.read(
+            organizationLocation[0],
+            organizationLocation[1]
+        );
+        userData.logo =
+            organizationData &&
+            organizationData.extension &&
+            organizationData.extension[0] &&
+            organizationData.extension[0].extension.length > 0 &&
+            organizationData.extension[0].extension[0] &&
+            organizationData.extension[0].extension[0].valueAttachment
+                ? organizationData.extension[0].extension[0].valueAttachment
+                : null;
+        userData.signature =
+            organizationData &&
+            organizationData.extension &&
+            organizationData.extension[0] &&
+            organizationData.extension[0].extension.length &&
+            organizationData.extension[0].extension[2] &&
+            organizationData.extension[0].extension[2].valueAttachment
+                ? organizationData.extension[0].extension[2].valueAttachment
+                : null;
+        userData.stamp =
+            organizationData &&
+            organizationData.extension &&
+            organizationData.extension[0] &&
+            organizationData.extension[0].extension.length &&
+            organizationData.extension[0].extension[1] &&
+            organizationData.extension[0].extension[1].valueAttachment
+                ? organizationData.extension[0].extension[1].valueAttachment
+                : null;
+      }
+      let role = data.entry
+          ? data.entry[0].resource.code[0].coding[0].display
+          : "";
+      userData.position = role ? role : "";
+
+      let prefix =
+          user.name[0] &&
+          user.name[0].extension &&
+          user.name[0].extension.length > 0 &&
+          user.name[0].extension[0] &&
+          user.name[0].extension[0].valueCoding
+              ? user.name[0].extension[0].valueCoding.display
+              : "";
+      userData.fullName="Muluken Boagle"
+      // userData.fullName = `${prefix ? prefix : ""} ${user.name[0].given[0]} ${
+      //     user.extension[0].extension[0].valueString
+      // } ${user.extension[0].extension[2].valueString}`;
+      userData.gender = user.gender;
+      userData.photo = user.photo;
+      // userData.position = user.extension[9] ? user.extension[9].valueCoding.display : ''
+      let fileName = `${userData.id}_id.png`;
+      let p = path.join(__dirname, "../employee_ids_generated/", fileName);
+      employeeId(userData).then((_) => {
+        res.download(p);
+      });
+    });
+  }
+});
+
+router.get("/employeeCv/:id", async (req, res) => {
+  if (req.params.id) {
+    const userData = {};
+    userData.id = req.params.id;
+    const educationData = [];
+    const workExperiences = [];
+    const languages = [];
+    const skills = [];
+    try {
+      const data = await fhirAxios.search(`/Basic`, {
+        practitioner: req.params.id,
+        _profile:
+            "http://ihris.org/fhir/StructureDefinition/ihris-basic-employment-history",
+      });
+      if (data && data.entry && data.entry.length > 0) {
+        data.entry.map((expr) => {
+          // console.log(JSON.stringify(expr, null, 2));
+          let workExperience = {};
+          workExperience.organization = expr.resource.extension[1].extension[0]
+              ? expr.resource.extension[1].extension[0].valueString
+              : "";
+          workExperience.address = expr.resource.extension[1].extension[1]
+              ? expr.resource.extension[1].extension[1].valueString
+              : "";
+          workExperience.startingPosition = expr.resource.extension[1]
+              .extension[2]
+              ? expr.resource.extension[1].extension[2].valueString
+              : "";
+          workExperience.period = expr.resource.extension[1].extension[3]
+              ? expr.resource.extension[1].extension[3].valuePeriod
+              : "";
+          workExperiences.push(workExperience);
+        });
+      }
+    } catch (e) {
+      console.log(e);
+    }
+
+    try {
+      let data = await fhirAxios.search("PractitionerRole", {
+        _profile:
+            "http://ihris.org/fhir/StructureDefinition/ihris-job-description",
+        practitioner: req.params.id,
+      });
+
+      let role = data.entry
+          ? data.entry[0].resource.code[0].coding[0].display
+          : "";
+      userData.position = role ? role : "";
+    } catch (e) {
+      console.log(e);
+    }
+    try {
+      const data = await fhirAxios.search(`/Basic`, {
+        practitioner: req.params.id,
+        _profile:
+            "http://ihris.org/fhir/StructureDefinition/ihris-basic-education-history",
+      });
+      if (data && data.entry && data.entry.length > 0) {
+        data.entry.map((data) => {
+          let educationInfo = {};
+          educationInfo.institution = data.resource.extension[1].extension[0]
+              .valueCoding
+              ? data.resource.extension[1].extension[0].valueCoding.display
+              : "";
+          educationInfo.level = data.resource.extension[1].extension[1]
+              ? data.resource.extension[1].extension[1].valueCoding.display
+              : "";
+          educationInfo.educationalMajor = data.resource.extension[1]
+              .extension[2]
+              ? data.resource.extension[1].extension[2].valueCoding.display
+              : "";
+          educationInfo.year = data.resource.extension[1].extension[3]
+              ? data.resource.extension[1].extension[3].valueDate
+              : "";
+          educationData.push(educationInfo);
+        });
+      }
+    } catch (e) {
+      console.log(e);
+    }
+    try {
+      const user = await fhirAxios.read("/Practitioner", req.params.id);
+      userData.fullName = `muluken Bogale`;
+      // userData.fullName = `${user.name[0].given[0]} ${user.extension[0].extension[0].valueString} ${user.extension[0].extension[2].valueString}`;
+      userData.gender = user.gender;
+      userData.photo = user.photo;
+      userData.phone = user.extension.find(
+          (obj) =>
+              obj.url ===
+              "http://ihris.org/fhir/StructureDefinition/ihris-personal-information-phone"
+      ).valueString;
+
+      userData.email = user.extension.find(
+          (obj) =>
+              obj.url ===
+              "http://ihris.org/fhir/StructureDefinition/ihris-personal-information-email"
+      ).valueString;
+
+      userData.education = educationData;
+
+      if (user.communication && user.communication.length > 0) {
+        user.communication.map((lang) => {
+
+          languages.push(lang.coding[0].display);
+        });
+      }
+      userData.languages = languages;
+      userData.workExperiences = workExperiences;
+    } catch (e) {
+      console.log(e);
+    }
+    let fileName = `${userData.id}_cv.pdf`;
+    let p = path.join(__dirname, "../employee_cvs_generated/", fileName);
+    employeeCv(userData)
+        .then((_) => {
+          res.download(p);
+        })
+        .catch((e) => console.log(e));
+  }
+});
+router.post("/facilityInformation", async (req, res) => {
+  const getAge = (birthdate, ageRange) => {
+    let birthYear = new Date(birthdate).getFullYear();
+    let currentDate = new Date();
+    let currentYear = currentDate.getFullYear();
+    let age = currentYear - birthYear;
+    if (age >= 20 && age <= 35) {
+      ageRange["20to35"] += 1;
+    }
+    if (age >= 36 && age <= 45) {
+      ageRange["36to45"] += 1;
+    }
+    if (age >= 46 && age <= 55) {
+      ageRange["46to55"] += 1;
+    }
+    if (age >= 56 && age <= 65) {
+      ageRange["56to65"] += 1;
+    }
+    if (age >= 66) {
+      ageRange["gt65"] += 1;
+    }
+  };
+
+  if (!req.body) {
+    return res.status(400).end();
+  } else {
+    let response = {};
+    let facilityInformation = [];
+    try {
+      let locationData = await fhirAxios.read("Location", req.body.id.split("/").pop());
+      if (locationData) {
+        if (locationData.partOf) {
+          let facilityData = await fhirAxios.read("Location", locationData.partOf.reference.split("/").pop());
+          if (facilityData) {
+            facilityInformation.push({
+              name: "Report To", value: facilityData.name,
+            });
+          }
+        }
+        facilityInformation.push({
+          name: "Status", value: locationData.status,
+        });
+        let ownership = locationData.extension.find((x) => x.url === "http://ihris.org/fhir/StructureDefinition/ihris-facility-ownership-prefix");
+        let region = locationData.extension.find((x) => x.url === "http://ihris.org/fhir/StructureDefinition/ihris-facility-location");
+        if (region) {
+          let data = await fhirAxios.search("Location", {
+            _id: region.valueReference.reference.split("/").pop(), "_include:iterate": "Location:partof",
+          });
+          if (data && data.entry.length > 0) {
+            data.entry.map((d) => {
+              if (d.resource.type && d.resource.type.length > 0 && d.resource.type[0].coding && d.resource.type[0].coding.length > 0 && d.resource.type[0].coding[0].code !== "country") {
+                facilityInformation.push({
+                  name: d.resource.type[0].text, value: d.resource.name,
+                });
+              }
+            });
+          }
+        }
+        if (ownership && ownership.valueCoding) {
+          facilityInformation.push({
+            name: "Ownership", value: ownership.valueCoding.display,
+          });
+        }
+        if (locationData.type && locationData.type.length > 0) {
+          facilityInformation.push({
+            name: "Type", value: locationData.type[0].coding[0].display,
+          });
+        }
+        if (locationData.physicalType) {
+          facilityInformation.push({
+            name: "Physical type", value: locationData.physicalType.coding[0].display,
+          });
+        }
+      }
+    } catch (err) {
       console.log(err);
-      return res.status(500).json(outcomes.ERROR);
+      logger.error(err.message);
+    }
+    response.facilityInformation = facilityInformation;
+    if (req.body.partOf) {
+      let data = await fhirAxios.search("PractitionerRole", {
+        _profile: "http://ihris.org/fhir/StructureDefinition/ihris-job-description",
+        "related-location:exact": req.body.id,
+        active: "true",
+        "_include:iterate": "PractitionerRole:practitioner",
+      });
+      response.total = data.total;
+      let gender = {
+        male: 0, female: 0,
+      };
+
+      let ageRange = {
+        "20to35": 0, "36to45": 0, "46to55": 0, "56to65": 0, gt65: 0,
+      };
+
+      let professionCategory = {
+        professional: 0, administrative: 0, academic: 0,
+      };
+
+      if (data.total > 0) {
+        data.entry.map((data) => {
+          if (data.resource.resourceType === "Practitioner") {
+            if (data.resource.gender === "male") {
+              gender.male += 1;
+            } else {
+              gender.female += 1;
+            }
+            getAge(data.resource.birthDate, ageRange);
+
+            let profession = data.resource.extension.find((x) => x.url === "http://ihris.org/fhir/StructureDefinition/ihris-personal-Information-category");
+            if (profession && profession.valueCoding) {
+              if (profession.valueCoding.code === "professional") {
+                professionCategory.professional += 1;
+              }
+              if (profession.valueCoding.code === "administrative") {
+                professionCategory.administrative += 1;
+              }
+              if (profession.valueCoding.code === "academic") {
+                professionCategory.academic += 1;
+              }
+            }
+          }
+        });
+      }
+      response.gender = gender;
+      response.ageRange = ageRange;
+      response.professionCategory = professionCategory;
+    } else {
+      try {
+        let data = await fhirAxios.search("PractitionerRole", {
+          _profile: "http://ihris.org/fhir/StructureDefinition/ihris-job-description",
+          location: req.body.id.split("/").pop(),
+          active: "true",
+          "_include:iterate": "PractitionerRole:practitioner",
+        });
+        response.total = data.total;
+        let gender = {
+          male: 0, female: 0,
+        };
+
+        let ageRange = {
+          "20to35": 0, "36to45": 0, "46to55": 0, "56to65": 0, gt65: 0,
+        };
+
+        let professionCategory = {
+          professional: 0, administrative: 0, academic: 0,
+        };
+
+        if (data.total > 0) {
+          data.entry.map((data) => {
+            if (data.resource.resourceType === "Practitioner") {
+              if (data.resource.gender === "male") {
+                gender.male += 1;
+              } else {
+                gender.female += 1;
+              }
+              getAge(data.resource.birthDate, ageRange);
+
+              let profession = data.resource.extension.find((x) => x.url === "http://ihris.org/fhir/StructureDefinition/ihris-personal-Information-category");
+              if (profession && profession.valueCoding) {
+                if (profession.valueCoding.code === "professional") {
+                  professionCategory.professional += 1;
+                }
+                if (profession.valueCoding.code === "administrative") {
+                  professionCategory.administrative += 1;
+                }
+                if (profession.valueCoding.code === "academic") {
+                  professionCategory.academic += 1;
+                }
+              }
+            }
+          });
+        }
+        response.gender = gender;
+        response.ageRange = ageRange;
+        response.professionCategory = professionCategory;
+      } catch (err) {
+        console.log(err);
+      }
+    }
+    console.log(response);
+    res.send(response);
   }
 });
 

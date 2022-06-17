@@ -60,7 +60,7 @@ Title:          "Emergency details"
 * extension[otherEmail].valueString ^label = "Other Email"
 * extension[address].value[x] only string
 * extension[address].valueString 0..1 MS
-* extension[address].valueString ^label = "P.O.BOX"
+* extension[address].valueString ^label = "PO BOX"
 * extension[attachment].value[x] only Attachment
 * extension[attachment].valueAttachment 0..1 MS
 * extension[attachment].valueAttachment ^label = "Attachment"
@@ -149,7 +149,7 @@ Usage:          #definition
 * item[0].item[6].extension[constraint].extension[human].valueString = "Email Address is not properly formatted."
 
 * item[0].item[7].linkId = "Basic.extension[0].extension[7]"
-* item[0].item[7].text = "P.O.BOX"
+* item[0].item[7].text = "PO BOX"
 * item[0].item[7].type = #text
 * item[0].item[7].required = false
 * item[0].item[7].repeats = false

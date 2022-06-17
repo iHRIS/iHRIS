@@ -103,7 +103,6 @@ export default {
     updateConfig: function() {
       // make sure we're user has been created in session (logged in or not)
       fetch("/auth").then(()=> {
-
         fetch("/config/site").then(response => {
           response.json().then(data => {
             if (data.hasOwnProperty("security") && data.security.hasOwnProperty("disabled")) {
@@ -123,7 +122,15 @@ export default {
             }
             if (data.hasOwnProperty("user")) {
               if ( data.user.loggedin ) {
-                this.$store.commit('login', data.user.name || "" )
+                let user = {
+                  name: data.user.name,
+                  location: data.user.location,
+                  role: data.user.role,
+                  reference: data.user.reference,
+                  facilityId: data.user.facilityId,
+                  physicalLocation: data.user.physicalLocation
+                };
+                this.$store.commit('login', user )
               } else {
                 this.$store.commit('logout')
               }
@@ -133,7 +140,6 @@ export default {
               if (data.nav.hasOwnProperty("menu")) this.nav.menu = data.nav.menu
               if (data.nav.hasOwnProperty("home")) this.nav.home = data.nav.home
             }
-
           })
         })
       })
