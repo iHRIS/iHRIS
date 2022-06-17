@@ -17,7 +17,7 @@
     },
     {
       "name": "builtFSHFIles",
-      "valueString": "../../ig/fsh-generated/resources"
+      "valueString": "../ig/fsh-generated/resources"
     },
     {
       "name": "profileBaseUrl",

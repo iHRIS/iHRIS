@@ -13,7 +13,7 @@ const server = nconf.get("fhir:base")
 const loadKeycloakData = () => new Promise((resolve, reject) => {
   const installed = nconf.get('app:installed');
   const idp = nconf.get('app:idp');
-  if (installed || idp !== 'keycloak') {
+  if (installed === "true" || idp !== 'keycloak') {
     return resolve();
   }
  
@@ -99,7 +99,7 @@ const loadKeycloakData = () => new Promise((resolve, reject) => {
  
 const loadFSHFiles = () => new Promise(async (resolvePar, rejectPar) => {
   const installed = nconf.get('app:installed');
-  if (installed) {
+  if (installed === "true" ) {
     return resolvePar();
   }
   const fshDir = nconf.get('builtFSHFIles');
@@ -204,11 +204,11 @@ module.exports = {
         });
       },
     ], () => {
-      if (errorOccured) {
-        return reject();
-      }
+      // if (errorOccured) {
+      //   return reject();
+      // }
       mixin.updateConfigFile(['app', 'installed'], true, () => {
-        console.info('Done loading Default data');
+        console.log('Done loading Default data');
         return resolve();
       });
     });
