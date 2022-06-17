@@ -36,20 +36,14 @@ Usage:          #example
 * extension[reportdetails].extension[reportelement][3].extension[filter].valueBoolean = true
 * extension[reportdetails].extension[reportelement][3].extension[dropDownFilter].valueBoolean = false
 
-* extension[reportdetails].extension[reportelement][4].extension[label].valueString = "given"
-* extension[reportdetails].extension[reportelement][4].extension[name].valueString = "name.where(use='official').first().given"
-* extension[reportdetails].extension[reportelement][4].extension[display].valueString = "Given name"
+* extension[reportdetails].extension[reportelement][4].extension[label].valueString = "gender"
+* extension[reportdetails].extension[reportelement][4].extension[name].valueString = "gender"
+* extension[reportdetails].extension[reportelement][4].extension[display].valueString = "Gender"
 * extension[reportdetails].extension[reportelement][4].extension[filter].valueBoolean = true
-* extension[reportdetails].extension[reportelement][4].extension[dropDownFilter].valueBoolean = false
+* extension[reportdetails].extension[reportelement][4].extension[dropDownFilter].valueBoolean = true
 
-* extension[reportdetails].extension[reportelement][5].extension[label].valueString = "gender"
-* extension[reportdetails].extension[reportelement][5].extension[name].valueString = "gender"
-* extension[reportdetails].extension[reportelement][5].extension[display].valueString = "Gender"
+* extension[reportdetails].extension[reportelement][5].extension[label].valueString = "residence"
+* extension[reportdetails].extension[reportelement][5].extension[name].valueString = "Practitioner.extension.where(url='http://ihris.org/fhir/StructureDefinition/ihris-practitioner-residence').valueReference.reference"
+* extension[reportdetails].extension[reportelement][5].extension[display].valueString = "Residence"
 * extension[reportdetails].extension[reportelement][5].extension[filter].valueBoolean = true
 * extension[reportdetails].extension[reportelement][5].extension[dropDownFilter].valueBoolean = true
-
-* extension[reportdetails].extension[reportelement][6].extension[label].valueString = "residence"
-* extension[reportdetails].extension[reportelement][6].extension[name].valueString = "Practitioner.extension.where(url='http://ihris.org/fhir/StructureDefinition/ihris-practitioner-residence').valueReference.reference"
-* extension[reportdetails].extension[reportelement][6].extension[display].valueString = "Residence"
-* extension[reportdetails].extension[reportelement][6].extension[filter].valueBoolean = true
-* extension[reportdetails].extension[reportelement][6].extension[dropDownFilter].valueBoolean = true

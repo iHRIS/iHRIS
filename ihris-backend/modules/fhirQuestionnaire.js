@@ -300,9 +300,9 @@ const fhirQuestionnaire = {
 
 
                 let simple = [ "date", "string", "dateTime", "text", "attachment","integer", "decimal", "uri", "boolean" ]
-                let data = { linkId: item.linkId, definition: item.definition, q: question.type }
+                let data = { linkId: item.linkId, definition: item.definition, q: question && question.type ? question.type : null, }
 
-                if ( item.definition.includes("extension") ) {
+                if ( item.definition&&item.definition.includes("extension") ) {
                   logger.silly("EXT",question,item)
                   // Check for multiple extensions so the URL can be set up.
                   let paths = item.linkId.split('.')
@@ -404,14 +404,16 @@ const fhirQuestionnaire = {
                     reject( err )
                   }
 
-                } else if ( simple.includes( question.type ) ) {
+                } else if (question &&
+                    question.type && simple.includes( question.type ) ) {
                   if ( question.repeats ) {
                     data.answer = item.answer.map( answer => answer["value"+capitalize(question.type)] )
                   } else {
                     data.answer = item.answer[0]["value"+capitalize(question.type)]
                   }
                   fields.push(data)
-                } else if ( question.type === "choice" ) {
+                } else if ( question &&
+                    question.type &&question.type === "choice" ) {
                   try {
                     let field = await structureDef.getFieldDefinition( question.definition )
                     //fields[item.linkId] = { answer: item.answer, field: field.type[0] }
@@ -443,7 +445,8 @@ const fhirQuestionnaire = {
                   } catch( err ) {
                     reject( err )
                   }
-                } else if ( question.type === "reference" ) {
+                } else if (question &&
+                    question.type && question.type === "reference" ) {
                   //Need to update this when references are fully handled
                   //to work with identifier or other options besides .reference
                   logger.debug("WARNING: References need to be finished in fhirQuestionnaire.js")
@@ -455,7 +458,10 @@ const fhirQuestionnaire = {
                   }
                   fields.push(data)
                 } else {
-                  logger.error("ERROR: questionnaire doesn't handle questions of type "+question.type+" yet")
+                  console.log("uuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuu")
+                  logger.error(`ERROR: questionnaire doesn't handle questions of type  ${
+                      question && question.type ? question.type : ""
+                  }  yet`)
                 }
 
               }

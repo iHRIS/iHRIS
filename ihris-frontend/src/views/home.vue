@@ -1,5 +1,85 @@
 <template>
   <div class="home" >
+    <v-dialog v-model="dialog" width="500">
+      <v-form>
+        <v-card>
+          <v-card-title class="white--text justify-center primary darken-1">
+            <v-icon color="white" left>
+              mdi-account-plus
+            </v-icon>
+            {{$t('App.home.register')}}
+          </v-card-title>
+          <v-card-text class="px-12 pt-6">
+            <v-text-field
+                outlined
+                dense
+                v-model="email"
+                type="email"
+                :label="$t('App.home.emailAddress')"
+                required
+                prepend-icon="mdi-email"
+            ></v-text-field>
+            <v-text-field
+                outlined
+                dense
+                v-model="medicalLicenseNumber"
+                :label="$t(`App.home.medicalLicenseNumber`)"
+                required
+                prepend-icon="mdi-account-key"
+            ></v-text-field>
+          </v-card-text>
+          <v-card-actions>
+            <v-snackbar v-model="snackbarRegister" :absolute="absolute" color="secondary">
+              {{ message }}
+              <v-btn color="warning" text @click="snackbarRegister = false">Close</v-btn>
+            </v-snackbar>
+            <v-spacer></v-spacer>
+            <v-btn class="mr-8 mb-6 primary" :loading="registering" :disabled="registering" @click="register">
+              <v-icon left>
+                mdi-account-plus
+              </v-icon>
+              Sign Up
+            </v-btn>
+          </v-card-actions>
+        </v-card>
+      </v-form>
+    </v-dialog>
+    <v-dialog v-model="resetPasswordDialog" width="500">
+      <v-form>
+        <v-card>
+          <v-card-title class="white--text justify-center primary darken-1">
+            <v-icon color="white" left>
+              mdi-lock-reset
+            </v-icon>
+            {{$t('App.home.resetPassword')}}
+          </v-card-title>
+          <v-card-text class="px-12 pt-12">
+            <v-text-field
+                outlined
+                dense
+                v-model="resetPasswordEmail"
+                type="email"
+                :label="$t(`App.home.emailAddress`)"
+                required
+                prepend-icon="mdi-email"
+            ></v-text-field>
+          </v-card-text>
+          <v-card-actions>
+            <v-snackbar v-model="snackbarRegister" :absolute="absolute" color="secondary">
+              {{ message }}
+              <v-btn color="warning" text @click="snackbarRegister = false">Close</v-btn>
+            </v-snackbar>
+            <v-spacer></v-spacer>
+            <v-btn class="mr-8 mb-6 primary" :loading="registering" :disabled="registering" @click="resetPassword">
+              <v-icon left>
+                mdi-lock-reset
+              </v-icon>
+              {{$t('App.home.resetPassword')}}
+            </v-btn>
+          </v-card-actions>
+        </v-card>
+      </v-form>
+    </v-dialog>
         <v-container class="lighten-1" fill-height  >
           <v-card-text v-if="!$store.state.user.loggedin">
             <v-row class="ma-0 pa-0 pt-12" >
@@ -79,6 +159,23 @@
                     <v-spacer></v-spacer>
                     <v-btn :disabled="loggingin" :loading="loggingin" light @click="submit">{{$t(`App.home.signin`)}}</v-btn>
                   </v-card-actions>
+                  <v-card-actions class="mt-12">
+                    <v-btn
+                        @click="()=>{this.resetPasswordDialog=true}"
+                        class="mx-2 text--white"
+                        outlined
+                        color="primary"
+                        style="text-transform: none" text
+                    >
+                      {{$t(`App.home.forgotPassword`)}}</v-btn
+                    >
+                    <v-spacer></v-spacer>
+                    <v-btn @click="()=>{this.dialog=true}" class="mx-2 text--white"
+                           outlined
+                           color="primary" style="text-transform: none" text >
+                      {{$t(`App.home.noAccount`)}}
+                    </v-btn>
+                  </v-card-actions>
                 </v-card>
               </v-col>
             </v-row>
@@ -105,6 +202,12 @@ export default {
       snackbarRegister: false,
       absolute: true,
       auth: {},
+      dialog: false,
+      email: "",
+      medicalLicenseNumber:"",
+      registering: false,
+      resetPasswordDialog: false,
+      resetPasswordEmail: "",
     }
   },
   methods:{
@@ -147,6 +250,121 @@ export default {
           this.loggingin = false
           this.snackbar = true
           this.message = "Login failed: " + err.message
+        })
+      }
+    },
+    resetPassword(){
+      this.loggingin = true;
+      let formData = new URLSearchParams();
+      formData.append("email", this.resetPasswordEmail);
+      //eslint-disable-next-line
+      let mailFormat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+      if (this.resetPasswordEmail === "") {
+        this.message = "Email Field is required!"
+        this.snackbarRegister = true
+        this.signingin = false
+      }
+      else if (!this.resetPasswordEmail.match(mailFormat)) {
+        this.message = "Please enter a valid email"
+        this.snackbarRegister = true
+        this.signingin = false
+      }
+      else {
+        fetch("/auth/password-reset-request", {
+          method: "POST",
+          body: formData,
+        }).then((response) => response.json())
+            .then((data) => {
+              this.loggingin = false;
+              if (data.ok) {
+                console.log(data)
+                this.message = data.message;
+                this.snackbar = true;
+                setTimeout(() => {
+                  this.resetPasswordDialog = false
+                  this.$router.push("/");
+                }, 1000)
+              } else {
+                this.message = data.message;
+                this.snackbar = true;
+              }
+            }).catch((error) => {
+          this.loggingin = false;
+          this.message = error;
+          this.snackbar = true;
+        });
+      }
+
+    },
+    register() {
+      this.signingin = true
+      let formData = new URLSearchParams()
+      formData.append("username", this.email)
+      formData.append("medicalLicenseNumber", this.medicalLicenseNumber)
+      if (this.email === "" ||  this.medicalLicenseNumber === "") {
+        this.message = "Please fill in all fields"
+        this.snackbarRegister = true
+        this.signingin = false
+      }
+      else {
+        //eslint-disable-next-line
+        let mailFormat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+        if (!this.email.match(mailFormat)) {
+          this.message = "Please enter a valid email"
+          this.snackbarRegister = true
+          this.signingin = false
+        }
+      }
+      if (this.signingin !== false) {
+        console.log("this is the data",formData)
+        fetch('/auth/signup/', {
+          method: "POST",
+          headers: {"Content-Type": "application/x-www-form-urlencoded"},
+          body: formData
+        }).then(response => {
+          this.signingin = false
+          if (response.ok) {
+            response.json().then(data => {
+              console.log("data",data)
+              //this.dialog = false
+              this.snackbarRegister = true
+              this.message = "Sign up successful! Please login to continue"
+              setTimeout(() => {
+                this.dialog = false
+                this.$router.push("/");
+              }, 1000)
+
+            }).catch(err => {
+              this.signingin = false
+              this.snackbarRegister = true
+              this.message = err.message
+            })
+          } else {
+            if(response.status === 409) {
+              this.message = "User already exists with this email address!"
+              this.snackbarRegister = true
+              this.signingin = false
+            }
+            if(response.status === 404) {
+              this.message = "No practitioner found with given information"
+              this.snackbarRegister = true
+              this.signingin = false
+            }
+            if(response.status === 402) {
+              this.message = "Email does not match with registered practitioner email"
+              this.snackbarRegister = true
+              this.signingin = false
+            }
+            if(response.status === 403) {
+              this.message = "No Email found for this practitioner. please add your email first!"
+              this.snackbarRegister = true
+              this.signingin = false
+            }
+          }
+        }).catch(err => {
+          this.signingin = false
+          this.snackbarRegister = true
+          this.message = "Sign Up failed: " + err.message
         })
       }
     },

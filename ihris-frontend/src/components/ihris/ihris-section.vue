@@ -7,17 +7,24 @@
       >
       <v-card-title class="primary darken-1 white--text text-uppercase font-weight-bold">{{ $t(`App.ihris-section.${title}`) }}
       </v-card-title>
-      <v-card-text class="my-3">
+      <v-card-text class="my-3" v-if="name!=='language'">
         <slot :source="slotProps.source"></slot>
+      </v-card-text>
+      <v-card-text class="my-3" v-if="name==='language'">
+        <language-detail></language-detail>
       </v-card-text>
     </v-card>
   </div>
 </template>
 
 <script>
+import LanguageDetail from '../../views/languageDetail.vue'
 export default {
   name: "ihris-section",
   props: ["name", "slotProps","title","description", "edit", "secondary"],
+  components: {
+    "language-detail": LanguageDetail
+  },
   data: function() {
     return {
       //source: { path: "", data: {} }

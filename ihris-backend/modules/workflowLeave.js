@@ -18,18 +18,18 @@ const workflowLeave = {
         }*/
         fhirAxios
           .read("Practitioner", req.query.practitioner)
-          .then((resource) => {
+          .then(async (resource) => {
             if (
-              req.body &&
-              req.body.item &&
-              req.body.item &&
-              req.body.item[0].linkId === "Basic" &&
-              req.body.item[0].item &&
-              req.body.item[0].item[0].linkId ===
+                req.body &&
+                req.body.item &&
+                req.body.item &&
+                req.body.item[0].linkId === "Basic" &&
+                req.body.item[0].item &&
+                req.body.item[0].item[0].linkId ===
                 "Basic.extension[0].extension[0]" &&
-              req.body.item[0].item[0].answer &&
-              req.body.item[0].item[0].answer[0] &&
-              req.body.item[0].item[0].answer[0].valueCoding
+                req.body.item[0].item[0].answer &&
+                req.body.item[0].item[0].answer[0] &&
+                req.body.item[0].item[0].answer[0].valueCoding
             ) {
               if (req.query.practitioner) {
                 req.body.subject = {
@@ -48,11 +48,11 @@ const workflowLeave = {
 
               let complexExt = [];
               if (
-                req.body.item[0].item[0].linkId ===
+                  req.body.item[0].item[0].linkId ===
                   "Basic.extension[0].extension[0]" &&
-                req.body.item[0].item[0].answer &&
-                req.body.item[0].item[0].answer[0] &&
-                req.body.item[0].item[0].answer[0].valueCoding
+                  req.body.item[0].item[0].answer &&
+                  req.body.item[0].item[0].answer[0] &&
+                  req.body.item[0].item[0].answer[0].valueCoding
               ) {
                 complexExt.push({
                   url: "leave-type",
@@ -60,16 +60,16 @@ const workflowLeave = {
                 });
               }
               if (
-                (req.body.item[0].item[1].linkId ===
-                  "Basic.extension[0].extension[1]" &&
-                  req.body.item[0].item[1].answer &&
-                  req.body.item[0].item[1].answer[0] &&
-                  req.body.item[0].item[1].answer[0].valueDateTime) ||
-                (req.body.item[0].item[2].linkId ===
-                  "Basic.extension[0].extension[2]" &&
-                  req.body.item[0].item[2].answer &&
-                  req.body.item[0].item[2].answer[0] &&
-                  req.body.item[0].item[2].answer[0].valueDateTime)
+                  (req.body.item[0].item[1].linkId ===
+                      "Basic.extension[0].extension[1]" &&
+                      req.body.item[0].item[1].answer &&
+                      req.body.item[0].item[1].answer[0] &&
+                      req.body.item[0].item[1].answer[0].valueDateTime) ||
+                  (req.body.item[0].item[2].linkId ===
+                      "Basic.extension[0].extension[2]" &&
+                      req.body.item[0].item[2].answer &&
+                      req.body.item[0].item[2].answer[0] &&
+                      req.body.item[0].item[2].answer[0].valueDateTime)
               ) {
                 complexExt.push({
                   url: "period",
@@ -80,8 +80,8 @@ const workflowLeave = {
                 });
 
                 let requestedDays = differenceInBusinessDays(
-                  new Date(req.body.item[0].item[2].answer[0].valueDateTime),
-                  new Date(req.body.item[0].item[1].answer[0].valueDateTime)
+                    new Date(req.body.item[0].item[2].answer[0].valueDateTime),
+                    new Date(req.body.item[0].item[1].answer[0].valueDateTime)
                 );
                 complexExt.push({
                   url: "daysRequested",
@@ -97,11 +97,11 @@ const workflowLeave = {
                 logger.info(JSON.stringify(complexExt,null,2))
             } */
               if (
-                req.body.item[0].item[3].linkId ===
+                  req.body.item[0].item[3].linkId ===
                   "Basic.extension[0].extension[3]" &&
-                req.body.item[0].item[3].answer &&
-                req.body.item[0].item[3].answer[0] &&
-                req.body.item[0].item[3].answer[0].valueDate
+                  req.body.item[0].item[3].answer &&
+                  req.body.item[0].item[3].answer[0] &&
+                  req.body.item[0].item[3].answer[0].valueDate
               ) {
                 complexExt.push({
                   url: "dateRequested",
@@ -135,8 +135,9 @@ const workflowLeave = {
             } else {
               resolve(await workflowLeave.outcome("No Leave Type provided"));
             }
-          });
+          }).catch((err)=>console.log("hello",JSON.stringify(err,null,2)));
       } catch (err) {
+        console.log(JSON.stringify(err,null,2))
         //winston.error(err);
         reject(err);
       }

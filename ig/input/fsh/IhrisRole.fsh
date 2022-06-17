@@ -189,6 +189,135 @@ Usage:          #example
 * extension[task][0].valueReference = Reference(Basic/ihris-task-all-permissions-to-everything)
 * extension[role][0].valueReference = Reference(Basic/ihris-role-open)*/
 
+
+Instance:       ihris-task-navigation-profile
+InstanceOf:     IhrisTask
+Usage:          #example
+Title:          "iHRIS Task To Navigate to Profile"
+* code = IhrisResourceCodeSystem#task
+* extension[name].valueString = "navigation-profile"
+* extension[attributes][0].extension[permission].valueCode = IhrisTaskPermissionCodeSystem#special
+* extension[attributes][0].extension[resource].valueCode = IhrisTaskResourceCodeSystem#navigation
+* extension[attributes][0].extension[instance].valueId = "profile"
+
+Instance:      ihris-task-read-ihris-page-practitioner
+InstanceOf:    IhrisTask
+Usage:         #example
+Title:         "iHRIS Task To Read Practitioner Page"
+* code = IhrisResourceCodeSystem#task
+* extension[name].valueString = "read-ihris-page-practitioner"
+* extension[attributes][0].extension[permission].valueCode = IhrisTaskPermissionCodeSystem#read
+* extension[attributes][0].extension[resource].valueCode = IhrisTaskResourceCodeSystem#Basic
+* extension[attributes][0].extension[instance].valueId = "ihris-page-practitioner"
+* extension[compositeTask][0].valueReference = Reference(Basic/ihris-task-write-value-set)
+* extension[compositeTask][1].valueReference = Reference(Basic/ihris-task-write-practitioner-resource)
+* extension[compositeTask][2].valueReference = Reference(Basic/ihris-task-write-location-resource)
+
+Instance:       ihris-task-read-ihris-page-practitioner-role
+InstanceOf:     IhrisTask
+Usage:          #example
+Title:          "iHRIS Task To Read PractitionerRole Page"
+* code = IhrisResourceCodeSystem#task
+* extension[name].valueString = "read-ihris-page-practitioner-role"
+* extension[attributes][0].extension[permission].valueCode = IhrisTaskPermissionCodeSystem#read
+* extension[attributes][0].extension[resource].valueCode = IhrisTaskResourceCodeSystem#Basic
+* extension[attributes][0].extension[instance].valueId = "ihris-page-practitionerrole"
+* extension[compositeTask][0].valueReference = Reference(Basic/ihris-task-write-practitioner-role-resource)
+* extension[compositeTask][1].valueReference = Reference(Basic/ihris-task-write-practitioner-resource)
+* extension[compositeTask][2].valueReference = Reference(Basic/ihris-task-write-location-resource)
+
+Instance:       ihris-task-read-questionnaire-leave
+InstanceOf:     IhrisTask
+Title:          "iHRIS Task To Read Questionnaire ihris-leave"
+Usage:          #example
+* code = IhrisResourceCodeSystem#task
+* extension[name].valueString = "read-questionnaire"
+* extension[attributes][0].extension[permission].valueCode = IhrisTaskPermissionCodeSystem#read
+* extension[attributes][0].extension[resource].valueCode = IhrisTaskResourceCodeSystem#Questionnaire
+* extension[attributes][0].extension[instance].valueId = "ihris-leave"
+* extension[compositeTask][0].valueReference = Reference(Basic/ihris-task-read-questionnaire-resource)
+
+Instance:       ihris-task-write-questionnaire-leave
+InstanceOf:     IhrisTask
+Title:          "iHRIS Task To Write Questionnaire ihris-leave"
+Usage:          #example
+* code = IhrisResourceCodeSystem#task
+* extension[name].valueString = "write-questionnaire"
+* extension[attributes][0].extension[permission].valueCode = IhrisTaskPermissionCodeSystem#write
+* extension[attributes][0].extension[resource].valueCode = IhrisTaskResourceCodeSystem#Questionnaire
+* extension[attributes][0].extension[instance].valueId = "ihris-leave"
+* extension[compositeTask][0].valueReference = Reference(Basic/ihris-task-read-questionnaire-resource)
+
+Instance:       ihris-task-write-questionnaire-change-password
+InstanceOf:     IhrisTask
+Title:          "iHRIS Task To Write Questionnaire ihris-password"
+Usage:          #example
+* code = IhrisResourceCodeSystem#task
+* extension[name].valueString = "write-questionnaire"
+* extension[attributes][0].extension[permission].valueCode = IhrisTaskPermissionCodeSystem#write
+* extension[attributes][0].extension[resource].valueCode = IhrisTaskResourceCodeSystem#Questionnaire
+* extension[attributes][0].extension[instance].valueId = "ihris-change-password"
+
+Instance:        ihris-task-navigation-leave
+InstanceOf:      IhrisTask
+Usage:           #example
+Title:           "iHRIS Task To Navigate to Leave"
+* code = IhrisResourceCodeSystem#task
+* extension[name].valueString = "navigation-leave"
+* extension[attributes][0].extension[permission].valueCode = IhrisTaskPermissionCodeSystem#special
+* extension[attributes][0].extension[resource].valueCode = IhrisTaskResourceCodeSystem#navigation
+* extension[attributes][0].extension[instance].valueId = "leaveRequest"
+
+Instance:        ihris-task-navigation-evaluation
+InstanceOf:      IhrisTask
+Usage:           #example
+Title:           "iHRIS Task To Navigate to evaluation"
+* code = IhrisResourceCodeSystem#task
+* extension[name].valueString = "navigation-evaluation"
+* extension[attributes][0].extension[permission].valueCode = IhrisTaskPermissionCodeSystem#special
+* extension[attributes][0].extension[resource].valueCode = IhrisTaskResourceCodeSystem#navigation
+* extension[attributes][0].extension[instance].valueId = "evaluation"
+
+Instance:        ihris-task-navigation-password
+InstanceOf:      IhrisTask
+Usage:           #example
+Title:           "iHRIS Task To Navigate to password"
+* code = IhrisResourceCodeSystem#task
+* extension[name].valueString = "navigation-password"
+* extension[attributes][0].extension[permission].valueCode = IhrisTaskPermissionCodeSystem#special
+* extension[attributes][0].extension[resource].valueCode = IhrisTaskResourceCodeSystem#navigation
+* extension[attributes][0].extension[instance].valueId = "password"
+
+Instance:      ihris-role-self
+InstanceOf:    IhrisRole
+Usage:         #example
+Title:         "iHRIS Self Service Role"
+* code = IhrisResourceCodeSystem#role
+* extension[name].valueString = "Self Service Role"
+* extension[primary].valueBoolean = false
+* extension[task][0].valueReference = Reference(Basic/ihris-task-read-questionnaire-resource)
+* extension[task][1].valueReference = Reference(Basic/ihris-task-navigation-profile)
+* extension[task][2].valueReference = Reference(Basic/ihris-task-navigation-leave)
+// * extension[task][3].valueReference = Reference(Basic/ihris-task-navigation-evaluation)
+* extension[task][3].valueReference = Reference(Basic/ihris-task-navigation-password)
+* extension[task][4].valueReference = Reference(Basic/ihris-task-read-ihris-page-practitioner)
+* extension[task][5].valueReference = Reference(Basic/ihris-task-read-ihris-page-practitioner-role)
+* extension[task][6].valueReference = Reference(Basic/ihris-task-read-code-system)
+* extension[task][7].valueReference = Reference(Basic/ihris-task-read-value-set)
+* extension[task][8].valueReference = Reference(Basic/ihris-task-read-location-resource)
+* extension[task][9].valueReference = Reference(Basic/ihris-task-read-practitioner-resource)
+* extension[task][10].valueReference = Reference(Basic/ihris-task-read-practitioner-role-resource)
+* extension[task][11].valueReference = Reference(Basic/ihris-task-write-practitioner-resource)
+* extension[task][12].valueReference = Reference(Basic/ihris-task-read-questionnaire-response-resource)
+* extension[task][13].valueReference = Reference(Basic/ihris-task-read-basic-resource)
+* extension[task][14].valueReference = Reference(Basic/ihris-task-write-questionnaire-response-resource)
+* extension[task][15].valueReference = Reference(Basic/ihris-task-write-questionnaire-resource)
+* extension[task][16].valueReference = Reference(Basic/ihris-task-read-questionnaire-leave)
+* extension[task][17].valueReference = Reference(Basic/ihris-task-write-questionnaire-leave)
+* extension[task][18].valueReference = Reference(Basic/ihris-task-write-basic-resource)
+* extension[task][19].valueReference = Reference(Basic/ihris-task-write-questionnaire-change-password)
+* extension[task][20].valueReference = Reference(Basic/ihris-task-write-person-resource)
+
 Instance: ihris-role-admin
 InstanceOf: Basic
 Usage: #example

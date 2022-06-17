@@ -37,7 +37,17 @@
             :multiple-active="false"
             selection-type="independent"
             :loading="loading"
-            ></v-treeview>
+            >
+            <template slot="label" slot-scope="{ item }">
+              <v-icon v-if="item.isFacility" class="pr-2" color="teal darken-2">
+                mdi-domain
+              </v-icon>
+              <v-icon v-else class="pr-2" color="teal darken-2">
+                mdi-map-marker
+              </v-icon>
+           {{ item.name }}
+            </template>
+          </v-treeview>
         </v-card>
       </v-menu>
       <v-autocomplete
@@ -258,7 +268,8 @@ export default {
                 let item = { 
                   id: entry.resource.resourceType+"/"+entry.resource.id,
                   name: entry.resource.name,
-                  locked: locked
+                  locked: locked,
+                  isFacility: this.targetProfile === "http://ihris.org/fhir/StructureDefinition/ihris-facility",
                 }
                 await this.checkChildren( item )
                 this.treeLookup[ item.id ] = item.name
