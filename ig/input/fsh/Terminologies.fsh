@@ -659,6 +659,1006 @@ Description: "A coded type for an identifier that can be used to determine which
 * $v2-0203#FILL
 * $v2-0203#JHN
 
+CodeSystem: IdentifierType
+Id: v2-0203
+Title: "identifierType"
+Description: "HL7-defined code system of concepts specifying type of identifier. Used in HL7 Version 2.x messaging data types CX, PLN, PPN, XCN and XON."
+* ^extension.url = "http://hl7.org/fhir/StructureDefinition/structuredefinition-wg"
+* ^extension.valueCode = #inm
+* ^url = "http://terminology.hl7.org/CodeSystem/v2-0203"
+* ^identifier.system = "urn:ietf:rfc:3986"
+* ^identifier.value = "urn:oid:2.16.840.1.113883.18.108"
+* ^version = "2.9.0"
+* ^status = #active
+* ^experimental = false
+* ^date = "2019-12-01"
+* ^publisher = "HL7, Inc"
+* ^contact.telecom.system = #url
+* ^contact.telecom.value = "http://www.hl7.org/"
+* ^purpose = "Underlying Master Code System for V2 table 0203 (Identifier Type)"
+* ^copyright = "Copyright HL7. Licensed under creative commons public domain"
+* ^caseSensitive = true
+* ^valueSet = "http://terminology.hl7.org/ValueSet/v2-0203"
+* ^hierarchyMeaning = #is-a
+* ^compositional = false
+* ^versionNeeded = false
+* ^content = #complete
+* ^property[0].code = #status
+* ^property[=].uri = "http://terminology.hl7.org/CodeSystem/utg-concept-properties#status"
+* ^property[=].description = "Status of the concept"
+* ^property[=].type = #code
+* ^property[+].code = #deprecated
+* ^property[=].uri = "http://terminology.hl7.org/CodeSystem/utg-concept-properties#v2-table-deprecated"
+* ^property[=].description = "Version of HL7 in which the code was deprecated"
+* ^property[=].type = #code
+* ^property[+].code = #v2-concComment
+* ^property[=].uri = "http://terminology.hl7.org/CodeSystem/utg-concept-properties#v2-concComment"
+* ^property[=].description = "V2 Concept Comment"
+* ^property[=].type = #string
+* ^property[+].code = #v2-concCommentAsPub
+* ^property[=].uri = "http://terminology.hl7.org/CodeSystem/utg-concept-properties#v2-concCommentAsPub"
+* ^property[=].description = "V2 Concept Comment As Published"
+* ^property[=].type = #string
+* ^property[+].code = #HL7usageNotes
+* ^property[=].uri = "http://terminology.hl7.org/CodeSystem/utg-concept-properties#HL7usageNotes"
+* ^property[=].description = "HL7 Concept Usage Notes"
+* ^property[=].type = #string
+* #AC "Accreditation/Certification Identifier" "Identifier that has been assigned by an accreditation or certification organization in specific fields, indicating a recognized skill"
+* #AC ^id = "1968"
+* #AC ^property[0].code = #v2-concComment
+* #AC ^property[=].valueString = "In Ask at Order Entry (AOE) questions this can be used to identify the ID with the assigning authority.  For instance, a credentialed sonographer whose identifier assigned by the credentialing body has been entered can be properly labeled."
+* #AC ^property[+].code = #status
+* #AC ^property[=].valueCode = #N
+* #ACSN "Accession ID" "Accession Identifier"
+* #ACSN ^id = "1969"
+* #ACSN ^property[0].code = #v2-concCommentAsPub
+* #ACSN ^property[=].valueString = "Accession Identifier"
+* #ACSN ^property[+].code = #status
+* #ACSN ^property[=].valueCode = #A
+* #AIN "Animal Identification Number (US Official)" "A numbering system for the official identification of individual animals in the United States that provides a nationally unique identification number for each animal. The first two numbers on a tag are the numbers assigned to a specific State."
+* #AIN ^id = "1970"
+* #AIN ^property[0].code = #v2-concComment
+* #AIN ^property[=].valueString = "AIN is the official acronym used by USDA"
+* #AIN ^property[+].code = #status
+* #AIN ^property[=].valueCode = #N
+* #AM "American Express" "American Express"
+* #AM ^id = "1971"
+* #AM ^designation.language = #de
+* #AM ^designation.use = http://terminology.hl7.org/CodeSystem/hl7TermMaintInfra#preferredForLanguage
+* #AM ^designation.value = "American Express"
+* #AM ^property[0].code = #v2-concComment
+* #AM ^property[=].valueString = "Deprecated and replaced by BC in v 2.5."
+* #AM ^property[+].code = #v2-concCommentAsPub
+* #AM ^property[=].valueString = "Deprecated and replaced by BC in v 2.5."
+* #AM ^property[+].code = #status
+* #AM ^property[=].valueCode = #A
+* #AMA "American Medical Association Number" "A physician identifier assigned by the AMA."
+* #AMA ^id = "1972"
+* #AMA ^property[0].code = #v2-concCommentAsPub
+* #AMA ^property[=].valueString = "A physician identifier assigned by the AMA."
+* #AMA ^property[+].code = #status
+* #AMA ^property[=].valueCode = #A
+* #AN "Account number" "Account An identifier that is unique to an account."
+* #AN ^id = "1973"
+* #AN ^designation.language = #de
+* #AN ^designation.use.system = "http://terminology.hl7.org/CodeSystem/hl7TermMaintInfra"
+* #AN ^designation.use = http://terminology.hl7.org/CodeSystem/hl7TermMaintInfra#preferredForLanguage
+* #AN ^designation.value = "Kontonummer"
+* #AN ^property[0].code = #v2-concCommentAsPub
+* #AN ^property[=].valueString = "An identifier that is unique to an account."
+* #AN ^property[+].code = #status
+* #AN ^property[=].valueCode = #A
+* #ANC "Account number Creditor" "A more precise definition of an account number"
+* #ANC ^id = "1974"
+* #ANC ^property[0].code = #v2-concComment
+* #ANC ^property[=].valueString = "Class: Financial<p>Sometimes two distinct account numbers must be transmitted in the same message, one as the creditor, the other as the debitor.<p>Kreditorenkontonummer"
+* #ANC ^property[+].code = #v2-concCommentAsPub
+* #ANC ^property[=].valueString = "Class: Financial<p>A more precise definition of an account number: sometimes two distinct account numbers must be transmitted in the same message, one as the creditor, the other as the debitor.<p>Kreditorenkontonummer"
+* #ANC ^property[+].code = #status
+* #ANC ^property[=].valueCode = #A
+* #AND "Account number debitor" "A more precise definition of an account number"
+* #AND ^id = "1975"
+* #AND ^property[0].code = #v2-concComment
+* #AND ^property[=].valueString = "Class: Financial<p>Sometimes two distinct account numbers must be transmitted in the same message, one as the creditor, the other as the debitor.<p>Debitorenkontonummer"
+* #AND ^property[+].code = #v2-concCommentAsPub
+* #AND ^property[=].valueString = "Class: Financial<p>A more precise definition of an account number: sometimes two distinct account numbers must be transmitted in the same message, one as the creditor, the other as the debitor.<p>Debitorenkontonummer"
+* #AND ^property[+].code = #status
+* #AND ^property[=].valueCode = #A
+* #ANON "Anonymous identifier" "An identifier for a living subject whose real identity is protected or suppressed"
+* #ANON ^id = "1976"
+* #ANON ^property[0].code = #v2-concComment
+* #ANON ^property[=].valueString = "Justification: For public health reporting purposes, anonymous identifiers are occasionally used for protecting patient identity in reporting certain results. For instance, a state health department may choose to use a scheme for generating an anonymous identifier for reporting a patient that has had a positive human immunodeficiency virus antibody test. Anonymous identifiers can be used in PID 3 by replacing the medical record number or other non-anonymous identifier. The assigning authority for an anonymous identifier would be the state/local health department."
+* #ANON ^property[+].code = #v2-concCommentAsPub
+* #ANON ^property[=].valueString = "An identifier for a living subject whose real identity is protected or suppressed\r\nJustification: For public health reporting purposes, anonymous identifiers are occasionally used for protecting patient identity in reporting certain results. For instance, a state health department may choose to use a scheme for generating an anonymous identifier for reporting a patient that has had a positive human immunodeficiency virus antibody test. Anonymous identifiers can be used in PID 3 by replacing the medical record number or other non-anonymous identifier. The assigning authority for an anonymous identifier would be the state/local health department."
+* #ANON ^property[+].code = #status
+* #ANON ^property[=].valueCode = #A
+* #ANT "Temporary Account Number" "Temporary version of an Account Number"
+* #ANT ^id = "1977"
+* #ANT ^property[0].code = #v2-concComment
+* #ANT ^property[=].valueString = "Class: Financial\r\nUse Case: An ancillary system that does not normally assign account numbers is the first time to register a patient. This ancillary system will generate a temporary account number that will only be used until an official account number is assigned."
+* #ANT ^property[+].code = #v2-concCommentAsPub
+* #ANT ^property[=].valueString = "Class: Financial\r\nTemporary version of an Account Number.\r\nUse Case: An ancillary system that does not normally assign account numbers is the first time to register a patient. This ancillary system will generate a temporary account number that will only be used until an official account number is assigned."
+* #ANT ^property[+].code = #status
+* #ANT ^property[=].valueCode = #A
+* #APRN "Advanced Practice Registered Nurse number" "An identifier that is unique to an advanced practice registered nurse within the jurisdiction of a certifying board"
+* #APRN ^id = "1978"
+* #APRN ^property[0].code = #v2-concCommentAsPub
+* #APRN ^property[=].valueString = "An identifier that is unique to an advanced practice registered nurse within the jurisdiction of a certifying board"
+* #APRN ^property[+].code = #status
+* #APRN ^property[=].valueCode = #A
+* #ASID "Ancestor Specimen ID" "A unique identifier for the ancestor specimen."
+* #ASID ^id = "1979"
+* #ASID ^property[0].code = #v2-concComment
+* #ASID ^property[=].valueString = "All child, grandchild, etc. specimens of the ancestor specimen share the same Ancestor Specimen ID."
+* #ASID ^property[+].code = #v2-concCommentAsPub
+* #ASID ^property[=].valueString = "A unique identifier for the ancestor specimen. All child, grandchild, etc. specimens of the ancestor specimen share the same Ancestor Specimen ID."
+* #ASID ^property[+].code = #status
+* #ASID ^property[=].valueCode = #A
+* #BA "Bank Account Number" "Bank Account Number"
+* #BA ^id = "1980"
+* #BA ^property[0].code = #v2-concComment
+* #BA ^property[=].valueString = "Class: Financial"
+* #BA ^property[+].code = #v2-concCommentAsPub
+* #BA ^property[=].valueString = "Class: Financial"
+* #BA ^property[+].code = #status
+* #BA ^property[=].valueCode = #A
+* #BC "Bank Card Number" "An identifier that is unique to a person's bank card"
+* #BC ^id = "1981"
+* #BC ^property[0].code = #v2-concComment
+* #BC ^property[=].valueString = "Class: Financial<p>Replaces AM, DI, DS, MS, and VS beginning in v 2.5."
+* #BC ^property[+].code = #v2-concCommentAsPub
+* #BC ^property[=].valueString = "Class: Financial<p>An identifier that is unique to a person's bank card. Replaces AM, DI, DS, MS, and VS beginning in v 2.5."
+* #BC ^property[+].code = #status
+* #BC ^property[=].valueCode = #A
+* #BCFN "Birth Certificate File Number" "The identifier used within the jurisdictional vital records office file system as an auxiliary means of accessing the record associated with the birth certificate."
+* #BCFN ^id = "1982"
+* #BCFN ^property[0].code = #status
+* #BCFN ^property[=].valueCode = #N
+* #BCT "Birth Certificate" "A number associated with a document identifying the event of a person's birth"
+* #BCT ^id = "1983"
+* #BCT ^property[0].code = #v2-concCommentAsPub
+* #BCT ^property[=].valueString = "A number associated with a document identifying the event of a person's birth."
+* #BCT ^property[+].code = #status
+* #BCT ^property[=].valueCode = #A
+* #BR "Birth registry number" "An identifier unique within the Assigning Authority that is the official legal record of a person's birth."
+* #BR ^id = "1984"
+* #BR ^designation.language = #de
+* #BR ^designation.use.system = "http://terminology.hl7.org/CodeSystem/hl7TermMaintInfra"
+* #BR ^designation.use = http://terminology.hl7.org/CodeSystem/hl7TermMaintInfra#preferredForLanguage
+* #BR ^designation.value = "Geburtsregisternummer"
+* #BR ^property[0].code = #v2-concCommentAsPub
+* #BR ^property[=].valueString = "An identifier unique within the Assigning Authority that is the official legal record of a person's birth."
+* #BR ^property[+].code = #status
+* #BR ^property[=].valueCode = #A
+* #BRN "Breed Registry Number" "Breed Registry Number"
+* #BRN ^id = "1985"
+* #BRN ^property[0].code = #status
+* #BRN ^property[=].valueCode = #A
+* #BSNR "Primary physician office number" "Primary physician office number"
+* #BSNR ^id = "1986"
+* #BSNR ^property[0].code = #v2-concComment
+* #BSNR ^property[=].valueString = "Betriebsstättennummer - for use in the German realm."
+* #BSNR ^property[+].code = #v2-concCommentAsPub
+* #BSNR ^property[=].valueString = "Betriebsstättennummer - for use in the German realm."
+* #BSNR ^property[+].code = #status
+* #BSNR ^property[=].valueCode = #A
+* #CAAI "Consumer Application Account Identifier" "An identifier for the consumer (e.g., patient, caregiver) for an application such as a portal or App."
+* #CAAI ^id = "1987"
+* #CAAI ^property[0].code = #v2-concComment
+* #CAAI ^property[=].valueString = "This may be the same as a username, but frequently is different."
+* #CAAI ^property[+].code = #status
+* #CAAI ^property[=].valueCode = #N
+* #CC "Cost Center number" "Cost Center number"
+* #CC ^id = "1988"
+* #CC ^property[0].code = #v2-concComment
+* #CC ^property[=].valueString = "Class: Financial<p>Use Case: needed especially for transmitting information about invoices."
+* #CC ^property[+].code = #v2-concCommentAsPub
+* #CC ^property[=].valueString = "Class: Financial<p>Use Case: needed especially for transmitting information about invoices."
+* #CC ^property[+].code = #status
+* #CC ^property[=].valueCode = #A
+* #CONM "Change of Name Document" "A number associated with a document identifying a person's legal change of name."
+* #CONM ^id = "1989"
+* #CONM ^property[0].code = #v2-concCommentAsPub
+* #CONM ^property[=].valueString = "A number associated with a document identifying a person's legal change of name."
+* #CONM ^property[+].code = #status
+* #CONM ^property[=].valueCode = #A
+* #CY "County number" "County number"
+* #CY ^id = "1990"
+* #CY ^property[0].code = #status
+* #CY ^property[=].valueCode = #A
+* #CZ "Citizenship Card" "A number assigned by a person's country of residence to identify a person's citizenship."
+* #CZ ^id = "1991"
+* #CZ ^property[0].code = #v2-concCommentAsPub
+* #CZ ^property[=].valueString = "A number assigned by a person's country of residence to identify a person's citizenship."
+* #CZ ^property[+].code = #status
+* #CZ ^property[=].valueCode = #A
+* #DC "Death Certificate ID" "The identifier assigned to a death certificate, and printed on the death certificate when issued by a jurisdictional vital records office"
+* #DC ^id = "1992"
+* #DC ^property[0].code = #status
+* #DC ^property[=].valueCode = #A
+* #DCFN "Death Certificate File Number" "The identifier used within the jurisdictional vital records office file system as an auxiliary means of accessing the record associated with the death certificate."
+* #DCFN ^id = "1993"
+* #DCFN ^property[0].code = #status
+* #DCFN ^property[=].valueCode = #A
+* #DDS "Dentist license number" "An identifier that is unique to a dentist within the jurisdiction of the licensing board"
+* #DDS ^id = "1994"
+* #DDS ^property[0].code = #v2-concCommentAsPub
+* #DDS ^property[=].valueString = "An identifier that is unique to a dentist within the jurisdiction of the licensing board"
+* #DDS ^property[+].code = #status
+* #DDS ^property[=].valueCode = #A
+* #DEA "Drug Enforcement Administration registration number" "An identifier for an individual or organization relative to controlled substance regulation and transactions."
+* #DEA ^id = "1995"
+* #DEA ^property[0].code = #v2-concComment
+* #DEA ^property[=].valueString = "Use case: This is a registration number that identifies an individual or organization relative to controlled substance regulation and transactions. \r\nA DEA number has a very precise and widely accepted meaning within the United States. Surprisingly, the US Drug Enforcement Administration does not solely assign DEA numbers in the United States. Hospitals have the authority to issue DEA numbers to their medical residents. These DEA numbers are based upon the hospital’s DEA number, but the authority rests with the hospital on the assignment to the residents. Thus, DEA as an Identifier Type is necessary in addition to DEA as an Assigning Authority."
+* #DEA ^property[+].code = #v2-concCommentAsPub
+* #DEA ^property[=].valueString = "An identifier for an individual or organization relative to controlled substance regulation and transactions.\r\nUse case: This is a registration number that identifies an individual or organization relative to controlled substance regulation and transactions. \r\nA DEA number has a very precise and widely accepted meaning within the United States. Surprisingly, the US Drug Enforcement Administration does not solely assign DEA numbers in the United States. Hospitals have the authority to issue DEA numbers to their medical residents. These DEA numbers are based upon the hospital’s DEA number, but the authority rests with the hospital on the assignment to the residents. Thus, DEA as an Identifier Type is necessary in addition to DEA as an Assigning Authority."
+* #DEA ^property[+].code = #status
+* #DEA ^property[=].valueCode = #A
+* #DFN "Drug Furnishing or prescriptive authority Number" "An identifier issued to a health care provider authorizing the person to write drug orders"
+* #DFN ^id = "1996"
+* #DFN ^property[0].code = #v2-concComment
+* #DFN ^property[=].valueString = "Use Case: A nurse practitioner has authorization to furnish or prescribe pharmaceutical substances; this identifier is in component 1."
+* #DFN ^property[+].code = #v2-concCommentAsPub
+* #DFN ^property[=].valueString = "An identifier issued to a health care provider authorizing the person to write drug orders<p>Use Case: A nurse practitioner has authorization to furnish or prescribe pharmaceutical substances; this identifier is in component 1."
+* #DFN ^property[+].code = #status
+* #DFN ^property[=].valueCode = #A
+* #DI "Diner's Club card" "Diner's Club card"
+* #DI ^id = "1997"
+* #DI ^designation.language = #de
+* #DI ^designation.use.system = "http://terminology.hl7.org/CodeSystem/hl7TermMaintInfra"
+* #DI ^designation.use = http://terminology.hl7.org/CodeSystem/hl7TermMaintInfra#preferredForLanguage
+* #DI ^designation.value = "Diners Club"
+* #DI ^property[0].code = #v2-concComment
+* #DI ^property[=].valueString = "Deprecated and replaced by BC in v 2.5."
+* #DI ^property[+].code = #v2-concCommentAsPub
+* #DI ^property[=].valueString = "Deprecated and replaced by BC in v 2.5."
+* #DI ^property[+].code = #status
+* #DI ^property[=].valueCode = #A
+* #DL "Driver's license number" "Driver's license number"
+* #DL ^id = "1998"
+* #DL ^designation.language = #de
+* #DL ^designation.use.system = "http://terminology.hl7.org/CodeSystem/hl7TermMaintInfra"
+* #DL ^designation.use = http://terminology.hl7.org/CodeSystem/hl7TermMaintInfra#preferredForLanguage
+* #DL ^designation.value = "Führerscheinnummer"
+* #DL ^property[0].code = #status
+* #DL ^property[=].valueCode = #A
+* #DN "Doctor number" "Doctor number"
+* #DN ^id = "1999"
+* #DN ^designation.language = #de
+* #DN ^designation.use.system = "http://terminology.hl7.org/CodeSystem/hl7TermMaintInfra"
+* #DN ^designation.use = http://terminology.hl7.org/CodeSystem/hl7TermMaintInfra#preferredForLanguage
+* #DN ^designation.value = "Arztnummer"
+* #DN ^property[0].code = #status
+* #DN ^property[=].valueCode = #A
+* #DO "Osteopathic License number" "An identifier that is unique to an osteopath within the jurisdiction of a licensing board."
+* #DO ^id = "2000"
+* #DO ^property[0].code = #v2-concCommentAsPub
+* #DO ^property[=].valueString = "An identifier that is unique to an osteopath within the jurisdiction of a licensing board."
+* #DO ^property[+].code = #status
+* #DO ^property[=].valueCode = #A
+* #DP "Diplomatic Passport" "A number assigned to a diplomatic passport."
+* #DP ^id = "2001"
+* #DP ^property[0].code = #v2-concCommentAsPub
+* #DP ^property[=].valueString = "A number assigned to a diplomatic passport."
+* #DP ^property[+].code = #status
+* #DP ^property[=].valueCode = #A
+* #DPM "Podiatrist license number" "An identifier that is unique to a podiatrist within the jurisdiction of the licensing board."
+* #DPM ^id = "2002"
+* #DPM ^property[0].code = #v2-concCommentAsPub
+* #DPM ^property[=].valueString = "An identifier that is unique to a podiatrist within the jurisdiction of the licensing board."
+* #DPM ^property[+].code = #status
+* #DPM ^property[=].valueCode = #A
+* #DR "Donor Registration Number" "Donor Registration Number"
+* #DR ^id = "2003"
+* #DR ^property[0].code = #status
+* #DR ^property[=].valueCode = #A
+* #DS "Discover Card" "Discover Card"
+* #DS ^id = "2004"
+* #DS ^designation.language = #de
+* #DS ^designation.use.system = "http://terminology.hl7.org/CodeSystem/hl7TermMaintInfra"
+* #DS ^designation.use = http://terminology.hl7.org/CodeSystem/hl7TermMaintInfra#preferredForLanguage
+* #DS ^designation.value = "Discover Card"
+* #DS ^property[0].code = #v2-concComment
+* #DS ^property[=].valueString = "Deprecated and replaced by BC in v 2.5."
+* #DS ^property[+].code = #v2-concCommentAsPub
+* #DS ^property[=].valueString = "Deprecated and replaced by BC in v 2.5."
+* #DS ^property[+].code = #status
+* #DS ^property[=].valueCode = #A
+* #DSG "Diagnostic Study Group" "Unique Identifier that groups several orders that are to be performed together."
+* #DSG ^id = "2005"
+* #DSG ^property[0].code = #v2-concComment
+* #DSG ^property[=].valueString = "Example: Radiology studies"
+* #DSG ^property[+].code = #status
+* #DSG ^property[=].valueCode = #N
+* #EI "Employee number" "A number that uniquely identifies an employee to an employer."
+* #EI ^id = "2006"
+* #EI ^designation.language = #de
+* #EI ^designation.use.system = "http://terminology.hl7.org/CodeSystem/hl7TermMaintInfra"
+* #EI ^designation.use = http://terminology.hl7.org/CodeSystem/hl7TermMaintInfra#preferredForLanguage
+* #EI ^designation.value = "Arbeitnehmernummer"
+* #EI ^property[0].code = #v2-concCommentAsPub
+* #EI ^property[=].valueString = "A number that uniquely identifies an employee to an employer."
+* #EI ^property[+].code = #status
+* #EI ^property[=].valueCode = #A
+* #EN "Employer number" "Employer number"
+* #EN ^id = "2007"
+* #EN ^designation.language = #de
+* #EN ^designation.use.system = "http://terminology.hl7.org/CodeSystem/hl7TermMaintInfra"
+* #EN ^designation.use = http://terminology.hl7.org/CodeSystem/hl7TermMaintInfra#preferredForLanguage
+* #EN ^designation.value = "Arbeitgebernummer"
+* #EN ^property[0].code = #status
+* #EN ^property[=].valueCode = #A
+* #ESN "Staff Enterprise Number" "An identifier that is unique to a staff member within an enterprise (as identified by the Assigning Authority)."
+* #ESN ^id = "2008"
+* #ESN ^property[0].code = #v2-concCommentAsPub
+* #ESN ^property[=].valueString = "An identifier that is unique to a staff member within an enterprise (as identified by the Assigning Authority)."
+* #ESN ^property[+].code = #status
+* #ESN ^property[=].valueCode = #A
+* #FDR "Fetal Death Report ID" "The identifier assigned to a fetal death report, and printed on the fetal death report when issued by a jurisdictional vital records office"
+* #FDR ^id = "2009"
+* #FDR ^property[0].code = #status
+* #FDR ^property[=].valueCode = #N
+* #FDRFN "Fetal Death Report File Number" "The identifier used within the jurisdictional vital records office file system as an auxiliary means of accessing the record associated with the fetal death report certificate."
+* #FDRFN ^id = "2010"
+* #FDRFN ^property[0].code = #status
+* #FDRFN ^property[=].valueCode = #N
+* #FGN "Filler Group Number" "Unique identifier assigned to a group of orders by the filler application."
+* #FGN ^id = "2011"
+* #FGN ^property[0].code = #v2-concComment
+* #FGN ^property[=].valueString = "This is analogous to the Placer Group Number ORC-4, except that it is assigned by the filler."
+* #FGN ^property[+].code = #status
+* #FGN ^property[=].valueCode = #N
+* #FI "Facility ID" "Facility ID"
+* #FI ^id = "2012"
+* #FI ^property[0].code = #status
+* #FI ^property[=].valueCode = #A
+* #FILL "Filler Identifier" "An identifier for a request where the identifier is issued by the person, or service, that produces the observations or fulfills the request."
+* #FILL ^id = "2013"
+* #FILL ^property[0].code = #status
+* #FILL ^property[=].valueCode = #A
+* #GI "Guarantor internal identifier" "Guarantor internal identifier"
+* #GI ^id = "2014"
+* #GI ^designation.language = #de
+* #GI ^designation.use.system = "http://terminology.hl7.org/CodeSystem/hl7TermMaintInfra"
+* #GI ^designation.use = http://terminology.hl7.org/CodeSystem/hl7TermMaintInfra#preferredForLanguage
+* #GI ^designation.value = "interne ID des Zahlungspflichtigen"
+* #GI ^property[0].code = #v2-concComment
+* #GI ^property[=].valueString = "Class: Financial"
+* #GI ^property[+].code = #v2-concCommentAsPub
+* #GI ^property[=].valueString = "Class: Financial"
+* #GI ^property[+].code = #status
+* #GI ^property[=].valueCode = #A
+* #GIN "Animal Group Identifier (US Official)" "Identifier that can be used to unambiguously describe a specific group of animals."
+* #GIN ^id = "2015"
+* #GIN ^property[0].code = #v2-concComment
+* #GIN ^property[=].valueString = "GIN is the official acronym used by USDA"
+* #GIN ^property[+].code = #status
+* #GIN ^property[=].valueCode = #N
+* #GL "General ledger number" "General ledger number"
+* #GL ^id = "2016"
+* #GL ^property[0].code = #v2-concComment
+* #GL ^property[=].valueString = "Class: Financial"
+* #GL ^property[+].code = #v2-concCommentAsPub
+* #GL ^property[=].valueString = "Class: Financial"
+* #GL ^property[+].code = #status
+* #GL ^property[=].valueCode = #A
+* #GN "Guarantor external  identifier" "Guarantor external  identifier"
+* #GN ^id = "2017"
+* #GN ^designation.language = #de
+* #GN ^designation.use.system = "http://terminology.hl7.org/CodeSystem/hl7TermMaintInfra"
+* #GN ^designation.use = http://terminology.hl7.org/CodeSystem/hl7TermMaintInfra#preferredForLanguage
+* #GN ^designation.value = "externe ID des Zahlungspflichtigen"
+* #GN ^property[0].code = #v2-concComment
+* #GN ^property[=].valueString = "Class: Financial"
+* #GN ^property[+].code = #v2-concCommentAsPub
+* #GN ^property[=].valueString = "Class: Financial"
+* #GN ^property[+].code = #status
+* #GN ^property[=].valueCode = #A
+* #HC "Health Card Number" "Health Card Number"
+* #HC ^id = "2018"
+* #HC ^property[0].code = #status
+* #HC ^property[=].valueCode = #A
+* #IND "Indigenous/Aboriginal" "A number assigned to a member of an indigenous or aboriginal group outside of Canada."
+* #IND ^id = "2019"
+* #IND ^property[0].code = #v2-concCommentAsPub
+* #IND ^property[=].valueString = "A number assigned to a member of an indigenous or aboriginal group outside of Canada."
+* #IND ^property[+].code = #status
+* #IND ^property[=].valueCode = #A
+* #JHN "Jurisdictional health number" "Jurisdictional health number"
+* #JHN ^id = "2020"
+* #JHN ^property[0].code = #v2-concComment
+* #JHN ^property[=].valueString = "Class: Insurance<p>2 uses: a) UK jurisdictional CHI number; b) Canadian provincial health card number:"
+* #JHN ^property[+].code = #v2-concCommentAsPub
+* #JHN ^property[=].valueString = "Class: Insurance<p>2 uses: a) UK jurisdictional CHI number; b) Canadian provincial health card number:"
+* #JHN ^property[+].code = #status
+* #JHN ^property[=].valueCode = #A
+* #LACSN "Laboratory Accession ID" "A laboratory accession id is used in the laboratory domain."
+* #LACSN ^id = "2021"
+* #LACSN ^property[0].code = #v2-concComment
+* #LACSN ^property[=].valueString = "The concept of accession is used in other domains such as radiology, so the LACSN is used to distinguish a lab accession id from an radiology accession id"
+* #LACSN ^property[+].code = #v2-concCommentAsPub
+* #LACSN ^property[=].valueString = "A laboratory accession id is used in the laboratory domain. The concept of accession is used in other domains such as radiology, so the LACSN is used to distinguish a lab accession id from an radiology accession id"
+* #LACSN ^property[+].code = #status
+* #LACSN ^property[=].valueCode = #A
+* #LANR "Lifelong physician number" "Lifelong physician number"
+* #LANR ^id = "2022"
+* #LANR ^property[0].code = #v2-concComment
+* #LANR ^property[=].valueString = "Lebenslange Arztnummer - for use in German realm."
+* #LANR ^property[+].code = #v2-concCommentAsPub
+* #LANR ^property[=].valueString = "Lebenslange Arztnummer - for use in German realm."
+* #LANR ^property[+].code = #status
+* #LANR ^property[=].valueCode = #A
+* #LI "Labor and industries number" "Labor and industries number"
+* #LI ^id = "2023"
+* #LI ^property[0].code = #status
+* #LI ^property[=].valueCode = #A
+* #L&I "Labor and industries number" "Labor and industries number.  Note that this was introduced erroneously (with an ampersand in the code value) many years ago."
+* #L&I ^id = "8023"
+* #L&I ^property[0].code = #status
+* #L&I ^property[=].valueCode = #D
+* #L&I ^property[+].code = #HL7usageNotes
+* #L&I ^property[=].valueString = "Deprecated as of v 2.5; Use LI instead."
+* #LN "License number" "License number"
+* #LN ^id = "2024"
+* #LN ^property[0].code = #status
+* #LN ^property[=].valueCode = #A
+* #LR "Local Registry ID" "Local Registry ID"
+* #LR ^id = "2025"
+* #LR ^property[0].code = #status
+* #LR ^property[=].valueCode = #A
+* #MA "Patient Medicaid number" "Patient Medicaid number"
+* #MA ^id = "2026"
+* #MA ^designation.language = #de
+* #MA ^designation.use.system = "http://terminology.hl7.org/CodeSystem/hl7TermMaintInfra"
+* #MA ^designation.use = http://terminology.hl7.org/CodeSystem/hl7TermMaintInfra#preferredForLanguage
+* #MA ^designation.value = "Armennummer"
+* #MA ^property[0].code = #v2-concComment
+* #MA ^property[=].valueString = "Class: Insurance"
+* #MA ^property[+].code = #v2-concCommentAsPub
+* #MA ^property[=].valueString = "Class: Insurance"
+* #MA ^property[+].code = #status
+* #MA ^property[=].valueCode = #A
+* #MB "Member Number" "An identifier for the insured of an insurance policy (this insured always has a subscriber), usually assigned by the insurance carrier."
+* #MB ^id = "2027"
+* #MB ^property[0].code = #v2-concComment
+* #MB ^property[=].valueString = "Use Case: Person is covered by an insurance policy. This person may or may not be the subscriber of the policy."
+* #MB ^property[+].code = #v2-concCommentAsPub
+* #MB ^property[=].valueString = "An identifier for the insured of an insurance policy (this insured always has a subscriber), usually assigned by the insurance carrier.<p>Use Case: Person is covered by an insurance policy. This person may or may not be the subscriber of the policy."
+* #MB ^property[+].code = #status
+* #MB ^property[=].valueCode = #A
+* #MC "Patient's Medicare number" "Patient's Medicare number"
+* #MC ^id = "2028"
+* #MC ^designation.language = #de
+* #MC ^designation.use.system = "http://terminology.hl7.org/CodeSystem/hl7TermMaintInfra"
+* #MC ^designation.use = http://terminology.hl7.org/CodeSystem/hl7TermMaintInfra#preferredForLanguage
+* #MC ^designation.value = "Rentnernummer"
+* #MC ^property[0].code = #v2-concComment
+* #MC ^property[=].valueString = "Class: Insurance"
+* #MC ^property[+].code = #v2-concCommentAsPub
+* #MC ^property[=].valueString = "Class: Insurance"
+* #MC ^property[+].code = #status
+* #MC ^property[=].valueCode = #A
+* #MCD "Practitioner Medicaid number" "Practitioner Medicaid number"
+* #MCD ^id = "2029"
+* #MCD ^property[0].code = #v2-concComment
+* #MCD ^property[=].valueString = "Class: Insurance"
+* #MCD ^property[+].code = #v2-concCommentAsPub
+* #MCD ^property[=].valueString = "Class: Insurance"
+* #MCD ^property[+].code = #status
+* #MCD ^property[=].valueCode = #A
+* #MCN "Microchip Number" "Microchip Number"
+* #MCN ^id = "2030"
+* #MCN ^property[0].code = #status
+* #MCN ^property[=].valueCode = #A
+* #MCR "Practitioner Medicare number" "Practitioner Medicare number"
+* #MCR ^id = "2031"
+* #MCR ^property[0].code = #v2-concComment
+* #MCR ^property[=].valueString = "Class: Insurance"
+* #MCR ^property[+].code = #v2-concCommentAsPub
+* #MCR ^property[=].valueString = "Class: Insurance"
+* #MCR ^property[+].code = #status
+* #MCR ^property[=].valueCode = #A
+* #MCT "Marriage Certificate" "A number associated with a document identifying the event of a person's marriage."
+* #MCT ^id = "2032"
+* #MCT ^property[0].code = #v2-concCommentAsPub
+* #MCT ^property[=].valueString = "A number associated with a document identifying the event of a person's marriage."
+* #MCT ^property[+].code = #status
+* #MCT ^property[=].valueCode = #A
+* #MD "Medical License number" "An identifier that is unique to a medical doctor within the jurisdiction of a licensing board."
+* #MD ^id = "2033"
+* #MD ^property[0].code = #v2-concComment
+* #MD ^property[=].valueString = "Use Case: These license numbers are sometimes used as identifiers. In some states, the same authority issues all three identifiers, e.g., medical, osteopathic, and physician assistant licenses all issued by one state medical board. For this case, the CX data type requires distinct identifier types to accurately interpret component 1. Additionally, the distinction among these license types is critical in most health care settings (this is not to convey full licensing information, which requires a segment to support all related attributes)."
+* #MD ^property[+].code = #v2-concCommentAsPub
+* #MD ^property[=].valueString = "An identifier that is unique to a medical doctor within the jurisdiction of a licensing board.\r\nUse Case: These license numbers are sometimes used as identifiers. In some states, the same authority issues all three identifiers, e.g., medical, osteopathic, and physician assistant licenses all issued by one state medical board. For this case, the CX data type requires distinct identifier types to accurately interpret component 1. Additionally, the distinction among these license types is critical in most health care settings (this is not to convey full licensing information, which requires a segment to support all related attributes)."
+* #MD ^property[+].code = #status
+* #MD ^property[=].valueCode = #A
+* #MI "Military ID number" "A number assigned to an individual who has had military duty, but is not currently on active duty. The number is assigned by the DOD or Veterans' Affairs (VA)."
+* #MI ^id = "2034"
+* #MI ^property[0].code = #v2-concCommentAsPub
+* #MI ^property[=].valueString = "A number assigned to an individual who has had military duty, but is not currently on active duty. The number is assigned by the DOD or Veterans' Affairs (VA)."
+* #MI ^property[+].code = #status
+* #MI ^property[=].valueCode = #A
+* #MR "Medical record number" "An identifier that is unique to a patient within a set of medical records, not necessarily unique within an application."
+* #MR ^id = "2035"
+* #MR ^designation.language = #de
+* #MR ^designation.use.system = "http://terminology.hl7.org/CodeSystem/hl7TermMaintInfra"
+* #MR ^designation.use = http://terminology.hl7.org/CodeSystem/hl7TermMaintInfra#preferredForLanguage
+* #MR ^designation.value = "Krankenaktennummer"
+* #MR ^property[0].code = #v2-concCommentAsPub
+* #MR ^property[=].valueString = "An identifier that is unique to a patient within a set of medical records, not necessarily unique within an application."
+* #MR ^property[+].code = #status
+* #MR ^property[=].valueCode = #A
+* #MRT "Temporary Medical Record Number" "Temporary version of a Medical Record Number"
+* #MRT ^id = "2036"
+* #MRT ^property[0].code = #v2-concComment
+* #MRT ^property[=].valueString = "Use Case: An ancillary system that does not normally assign medical record numbers is the first time to register a patient. This ancillary system will generate a temporary medical record number that will only be used until an official medical record number is assigned."
+* #MRT ^property[+].code = #v2-concCommentAsPub
+* #MRT ^property[=].valueString = "Temporary version of a Medical Record Number\r\nUse Case: An ancillary system that does not normally assign medical record numbers is the first time to register a patient. This ancillary system will generate a temporary medical record number that will only be used until an official medical record number is assigned."
+* #MRT ^property[+].code = #status
+* #MRT ^property[=].valueCode = #A
+* #MS "MasterCard" "MasterCard"
+* #MS ^id = "2037"
+* #MS ^designation.language = #de
+* #MS ^designation.use.system = "http://terminology.hl7.org/CodeSystem/hl7TermMaintInfra"
+* #MS ^designation.use = http://terminology.hl7.org/CodeSystem/hl7TermMaintInfra#preferredForLanguage
+* #MS ^designation.value = "MasterCard"
+* #MS ^property[0].code = #v2-concComment
+* #MS ^property[=].valueString = "Deprecated and replaced by BC in v 2.5."
+* #MS ^property[+].code = #v2-concCommentAsPub
+* #MS ^property[=].valueString = "Deprecated and replaced by BC in v 2.5."
+* #MS ^property[+].code = #status
+* #MS ^property[=].valueCode = #A
+* #NBSNR "Secondary physician office number" "Secondary physician office number"
+* #NBSNR ^id = "2038"
+* #NBSNR ^property[0].code = #v2-concComment
+* #NBSNR ^property[=].valueString = "Nebenbetriebsstättennummer - for use in the German realm."
+* #NBSNR ^property[+].code = #v2-concCommentAsPub
+* #NBSNR ^property[=].valueString = "Nebenbetriebsstättennummer - for use in the German realm."
+* #NBSNR ^property[+].code = #status
+* #NBSNR ^property[=].valueCode = #A
+* #NCT "Naturalization Certificate" "A number associated with a document identifying a person's retention of citizenship in a particular country."
+* #NCT ^id = "2039"
+* #NCT ^property[0].code = #v2-concCommentAsPub
+* #NCT ^property[=].valueString = "A number associated with a document identifying a person's retention of citizenship in a particular country."
+* #NCT ^property[+].code = #status
+* #NCT ^property[=].valueCode = #A
+* #NE "National employer identifier" "National employer identifier"
+* #NE ^id = "2040"
+* #NE ^property[0].code = #v2-concComment
+* #NE ^property[=].valueString = "In the US, the Assigning Authority for this value is typically CMS, but it may be used by all providers and insurance companies in HIPAA related transactions."
+* #NE ^property[+].code = #v2-concCommentAsPub
+* #NE ^property[=].valueString = "In the US, the Assigning Authority for this value is typically CMS, but it may be used by all providers and insurance companies in HIPAA related transactions."
+* #NE ^property[+].code = #status
+* #NE ^property[=].valueCode = #A
+* #NH "National Health Plan Identifier" "National Health Plan Identifier"
+* #NH ^id = "2041"
+* #NH ^property[0].code = #v2-concComment
+* #NH ^property[=].valueString = "Class: Insurance\r\nUsed for the UK NHS national identifier."
+* #NH ^property[+].code = #v2-concCommentAsPub
+* #NH ^property[=].valueString = "Class: Insurance<p>Used for the UK NHS national identifier.<p>In the US, the Assigning Authority for this value is typically CMS, but it may be used by all providers and insurance companies in HIPAA related transactions."
+* #NH ^property[+].code = #status
+* #NH ^property[=].valueCode = #A
+* #NI "National unique individual identifier" "National unique individual identifier"
+* #NI ^id = "2042"
+* #NI ^property[0].code = #v2-concComment
+* #NI ^property[=].valueString = "Class: Insurance\r\nIn the US, the Assigning Authority for this value is typically CMS, but it may be used by all providers and insurance companies in HIPAA related transactions."
+* #NI ^property[+].code = #v2-concCommentAsPub
+* #NI ^property[=].valueString = "Class: Insurance\r\nIn the US, the Assigning Authority for this value is typically CMS, but it may be used by all providers and insurance companies in HIPAA related transactions."
+* #NI ^property[+].code = #status
+* #NI ^property[=].valueCode = #A
+* #NII "National Insurance Organization Identifier" "National Insurance Organization Identifier"
+* #NII ^id = "2043"
+* #NII ^designation.language = #de
+* #NII ^designation.use.system = "http://terminology.hl7.org/CodeSystem/hl7TermMaintInfra"
+* #NII ^designation.use = http://terminology.hl7.org/CodeSystem/hl7TermMaintInfra#preferredForLanguage
+* #NII ^designation.value = "Institutskennzeichen der Krankenkasse"
+* #NII ^property[0].code = #v2-concComment
+* #NII ^property[=].valueString = "Class: Insurance\r\nIn Germany a national identifier for an insurance company. It is printed on the insurance card (health card). It is not to be confused with the health card number itself.<p>Krankenkassen-ID der KV-Karte"
+* #NII ^property[+].code = #v2-concCommentAsPub
+* #NII ^property[=].valueString = "Class: Insurance\r\nIn Germany a national identifier for an insurance company. It is printed on the insurance card (health card). It is not to be confused with the health card number itself.<p>Krankenkassen-ID der KV-Karte"
+* #NII ^property[+].code = #status
+* #NII ^property[=].valueCode = #A
+* #NIIP "National Insurance Payor Identifier (Payor)" "National Insurance Payor Identifier (Payor)"
+* #NIIP ^id = "2044"
+* #NIIP ^designation.language = #de
+* #NIIP ^designation.use.system = "http://terminology.hl7.org/CodeSystem/hl7TermMaintInfra"
+* #NIIP ^designation.use = http://terminology.hl7.org/CodeSystem/hl7TermMaintInfra#preferredForLanguage
+* #NIIP ^designation.value = "Vertragskassennummer (VKNR)"
+* #NIIP ^property[0].code = #v2-concComment
+* #NIIP ^property[=].valueString = "Class: Insurance\r\nIn Germany the insurance identifier addressed as the payor.<p>Krankenkassen-ID des Rechnungsempfängers<p>Use case: a subdivision issues the card with their identifier, but the main division is going to pay the invoices."
+* #NIIP ^property[+].code = #v2-concCommentAsPub
+* #NIIP ^property[=].valueString = "Class: Insurance\r\nIn Germany the insurance identifier addressed as the payor.<p>Krankenkassen-ID des Rechnungsempfängers<p>Use case: a subdivision issues the card with their identifier, but the main division is going to pay the invoices."
+* #NIIP ^property[+].code = #status
+* #NIIP ^property[=].valueCode = #A
+* #NNxxx "National Person Identifier where the xxx is the ISO table 3166 3-character (alphabetic) country code" "National Person Identifier where the xxx is the ISO table 3166 3-character (alphabetic) country code"
+* #NNxxx ^id = "2045"
+* #NNxxx ^property[0].code = #status
+* #NNxxx ^property[=].valueCode = #A
+* #NP "Nurse practitioner number" "An identifier that is unique to a nurse practitioner within the jurisdiction of a certifying board."
+* #NP ^id = "2046"
+* #NP ^property[0].code = #v2-concCommentAsPub
+* #NP ^property[=].valueString = "An identifier that is unique to a nurse practitioner within the jurisdiction of a certifying board."
+* #NP ^property[+].code = #status
+* #NP ^property[=].valueCode = #A
+* #NPI "National provider identifier" "National provider identifier"
+* #NPI ^id = "2047"
+* #NPI ^property[0].code = #v2-concComment
+* #NPI ^property[=].valueString = "Class: Insurance\r\nIn the US, the Assigning Authority for this value is typically CMS, but it may be used by all providers and insurance companies in HIPAA related transactions."
+* #NPI ^property[+].code = #v2-concCommentAsPub
+* #NPI ^property[=].valueString = "Class: Insurance\r\nIn the US, the Assigning Authority for this value is typically CMS, but it may be used by all providers and insurance companies in HIPAA related transactions."
+* #NPI ^property[+].code = #status
+* #NPI ^property[=].valueCode = #A
+* #OBI "Observation Instance Identifier" "Unique and persistent identifier for an observation instance"
+* #OBI ^id = "2048"
+* #OBI ^property[0].code = #v2-concComment
+* #OBI ^property[=].valueString = "For example in the IHE-LCC Profile this is used to identify the OBX-21 of the result for which a clarification is requested using an OML^O59_OML_O59 message structure"
+* #OBI ^property[+].code = #status
+* #OBI ^property[=].valueCode = #N
+* #OD "Optometrist license number" "A number that is unique to an individual optometrist within the jurisdiction of the licensing board."
+* #OD ^id = "2049"
+* #OD ^property[0].code = #v2-concCommentAsPub
+* #OD ^property[=].valueString = "A number that is unique to an individual optometrist within the jurisdiction of the licensing board."
+* #OD ^property[+].code = #status
+* #OD ^property[=].valueCode = #A
+* #PA "Physician Assistant number" "An identifier that is unique to a physician assistant within the jurisdiction of a licensing board"
+* #PA ^id = "2050"
+* #PA ^designation.language = #de
+* #PA ^designation.use.system = "http://terminology.hl7.org/CodeSystem/hl7TermMaintInfra"
+* #PA ^designation.use = http://terminology.hl7.org/CodeSystem/hl7TermMaintInfra#preferredForLanguage
+* #PA ^designation.value = "Assistenzarztnummer"
+* #PA ^property[0].code = #v2-concCommentAsPub
+* #PA ^property[=].valueString = "An identifier that is unique to a physician assistant within the jurisdiction of a licensing board"
+* #PA ^property[+].code = #status
+* #PA ^property[=].valueCode = #A
+* #PC "Parole Card" "A number identifying a person on parole."
+* #PC ^id = "2051"
+* #PC ^property[0].code = #v2-concCommentAsPub
+* #PC ^property[=].valueString = "A number identifying a person on parole."
+* #PC ^property[+].code = #status
+* #PC ^property[=].valueCode = #A
+* #PCN "Penitentiary/correctional institution Number" "A number assigned to individual who is incarcerated."
+* #PCN ^id = "2052"
+* #PCN ^property[0].code = #v2-concCommentAsPub
+* #PCN ^property[=].valueString = "A number assigned to individual who is incarcerated."
+* #PCN ^property[+].code = #status
+* #PCN ^property[=].valueCode = #A
+* #PE "Living Subject Enterprise Number" "An identifier that is unique to a living subject within an enterprise (as identified by the Assigning Authority)."
+* #PE ^id = "2053"
+* #PE ^property[0].code = #v2-concCommentAsPub
+* #PE ^property[=].valueString = "An identifier that is unique to a living subject within an enterprise (as identified by the Assigning Authority)."
+* #PE ^property[+].code = #status
+* #PE ^property[=].valueCode = #A
+* #PEN "Pension Number" "Pension Number"
+* #PEN ^id = "2054"
+* #PEN ^property[0].code = #status
+* #PEN ^property[=].valueCode = #A
+* #PGN "Placer Group Number" "Unique identifier assigned to a group of orders by the placer application."
+* #PGN ^id = "2055"
+* #PGN ^property[0].code = #v2-concComment
+* #PGN ^property[=].valueString = "This is analogous to the Placer Group Number ORC-4."
+* #PGN ^property[+].code = #status
+* #PGN ^property[=].valueCode = #N
+* #PHC "Public Health Case Identifier" "Identifier assigned to a person during a case investigation as part of a public health event"
+* #PHC ^id = "2056"
+* #PHC ^property[0].code = #v2-concComment
+* #PHC ^property[=].valueString = "For example every person affected by the Norovirus outbreak on a cruise ship will be assigned a case ID for investigation and follow up"
+* #PHC ^property[+].code = #status
+* #PHC ^property[=].valueCode = #N
+* #PHE "Public Health Event Identifier" "Identifier assigned to an event of interest to public health"
+* #PHE ^id = "2057"
+* #PHE ^property[0].code = #v2-concComment
+* #PHE ^property[=].valueString = "For example an outbreak of Norovirus on a cruise ship – this is assigned by a public health jurisdiction at the local, state or federal level"
+* #PHE ^property[+].code = #status
+* #PHE ^property[=].valueCode = #N
+* #PHO "Public Health Official ID" "An identifier for a person working at a public health agency (PHA),  assigned or issued by the agency"
+* #PHO ^id = "2058"
+* #PHO ^property[0].code = #v2-concComment
+* #PHO ^property[=].valueString = "May need to identify contact in a PHA that approved a test request or is in charge of an investigation."
+* #PHO ^property[+].code = #status
+* #PHO ^property[=].valueCode = #N
+* #PI "Patient internal identifier" "A number that is unique to a patient within an Assigning Authority."
+* #PI ^id = "2059"
+* #PI ^designation.language = #de
+* #PI ^designation.use.system = "http://terminology.hl7.org/CodeSystem/hl7TermMaintInfra"
+* #PI ^designation.use = http://terminology.hl7.org/CodeSystem/hl7TermMaintInfra#preferredForLanguage
+* #PI ^designation.value = "interne Patienten-ID"
+* #PI ^property[0].code = #v2-concCommentAsPub
+* #PI ^property[=].valueString = "A number that is unique to a patient within an Assigning Authority."
+* #PI ^property[+].code = #status
+* #PI ^property[=].valueCode = #A
+* #PIN "Premises Identifier Number (US Official)" "Identifier that uniquely identifies a geographic location in the US."
+* #PIN ^id = "2060"
+* #PIN ^property[0].code = #v2-concComment
+* #PIN ^property[=].valueString = "The owner of the premises, or a person designated by the owner of the premises, can register his/her location. A premises identification number, or PIN, is then permanently assigned to that location associating it with the mailing address. If there is no mailing address at the property, geographic coordinates—latitude and longitude—can be used instead to describe the location.   A premises identification number (PIN) is a unique, 7-digit code that includes both letters and numbers. Example: A123R69"
+* #PIN ^property[+].code = #status
+* #PIN ^property[=].valueCode = #N
+* #PLAC "Placer Identifier" "An identifier for a request where the identifier is issued by the person or service making the request."
+* #PLAC ^id = "2061"
+* #PLAC ^property[0].code = #status
+* #PLAC ^property[=].valueCode = #A
+* #PN "Person number" "A number that is unique to a living subject within an Assigning Authority."
+* #PN ^id = "2062"
+* #PN ^designation.language = #de
+* #PN ^designation.use.system = "http://terminology.hl7.org/CodeSystem/hl7TermMaintInfra"
+* #PN ^designation.use = http://terminology.hl7.org/CodeSystem/hl7TermMaintInfra#preferredForLanguage
+* #PN ^designation.value = "Personen-ID"
+* #PN ^property[0].code = #v2-concCommentAsPub
+* #PN ^property[=].valueString = "A number that is unique to a living subject within an Assigning Authority."
+* #PN ^property[+].code = #status
+* #PN ^property[=].valueCode = #A
+* #PNT "Temporary Living Subject Number" "Temporary version of a Living Subject Number."
+* #PNT ^id = "2063"
+* #PNT ^property[0].code = #v2-concCommentAsPub
+* #PNT ^property[=].valueString = "Temporary version of a Lining Subject Number."
+* #PNT ^property[+].code = #status
+* #PNT ^property[=].valueCode = #A
+* #PPIN "Medicare/CMS Performing Provider Identification Number" "Medicare/CMS Performing Provider Identification Number"
+* #PPIN ^id = "2064"
+* #PPIN ^property[0].code = #v2-concComment
+* #PPIN ^property[=].valueString = "Class:  Insurance"
+* #PPIN ^property[+].code = #v2-concCommentAsPub
+* #PPIN ^property[=].valueString = "Class:  Insurance"
+* #PPIN ^property[+].code = #HL7usageNotes
+* #PPIN ^property[=].valueString = "Class:  Insurance"
+* #PPIN ^property[+].code = #status
+* #PPIN ^property[=].valueCode = #A
+* #PPN "Passport number" "A unique number assigned to the document affirming that a person is a citizen of the country."
+* #PPN ^id = "2065"
+* #PPN ^designation.language = #de
+* #PPN ^designation.use.system = "http://terminology.hl7.org/CodeSystem/hl7TermMaintInfra"
+* #PPN ^designation.use = http://terminology.hl7.org/CodeSystem/hl7TermMaintInfra#preferredForLanguage
+* #PPN ^designation.value = "Passnummer"
+* #PPN ^property[0].code = #v2-concComment
+* #PPN ^property[=].valueString = "In the US this number is issued only by the State Department."
+* #PPN ^property[+].code = #v2-concCommentAsPub
+* #PPN ^property[=].valueString = "A unique number assigned to the document affirming that a person is a citizen of the country. In the US this number is issued only by the State Department."
+* #PPN ^property[+].code = #status
+* #PPN ^property[=].valueCode = #A
+* #PRC "Permanent Resident Card Number" "Permanent Resident Card Number"
+* #PRC ^id = "2066"
+* #PRC ^property[0].code = #status
+* #PRC ^property[=].valueCode = #A
+* #PRN "Provider number" "A number that is unique to an individual provider, a provider group or an organization within an Assigning Authority."
+* #PRN ^id = "2067"
+* #PRN ^property[0].code = #v2-concComment
+* #PRN ^property[=].valueString = "Use case: This allows PRN to represent either an individual (a nurse) or a group/organization (orthopedic surgery team)."
+* #PRN ^property[+].code = #v2-concCommentAsPub
+* #PRN ^property[=].valueString = "A number that is unique to an individual provider, a provider group or an organization within an Assigning Authority.<p>Use case: This allows PRN to represent either an individual (a nurse) or a group/organization (orthopedic surgery team)."
+* #PRN ^property[+].code = #status
+* #PRN ^property[=].valueCode = #A
+* #PT "Patient external identifier" "Patient external identifier"
+* #PT ^id = "2068"
+* #PT ^designation.language = #de
+* #PT ^designation.use.system = "http://terminology.hl7.org/CodeSystem/hl7TermMaintInfra"
+* #PT ^designation.use = http://terminology.hl7.org/CodeSystem/hl7TermMaintInfra#preferredForLanguage
+* #PT ^designation.value = "externe Patienten-ID"
+* #PT ^property[0].code = #status
+* #PT ^property[=].valueCode = #A
+* #QA "QA number" "QA number"
+* #QA ^id = "2069"
+* #QA ^property[0].code = #status
+* #QA ^property[=].valueCode = #A
+* #RI "Resource identifier" "A generalized resource identifier."
+* #RI ^id = "2070"
+* #RI ^property[0].code = #v2-concComment
+* #RI ^property[=].valueString = "Use Case: An identifier type is needed to accommodate what are commonly known as resources. The resources can include human (e.g. a respiratory therapist), non-human (e.g., a companion animal), inanimate object (e.g., an exam room), organization (e.g., diabetic education class) or any other physical or logical entity."
+* #RI ^property[+].code = #v2-concCommentAsPub
+* #RI ^property[=].valueString = "A generalized resource identifier.\r\nUse Case: An identifier type is needed to accommodate what are commonly known as resources. The resources can include human (e.g. a respiratory therapist), non-human (e.g., a companion animal), inanimate object (e.g., an exam room), organization (e.g., diabetic education class) or any other physical or logical entity."
+* #RI ^property[+].code = #status
+* #RI ^property[=].valueCode = #A
+* #RN "Registered Nurse Number" "An identifier that is unique to a registered nurse within the jurisdiction of the licensing board."
+* #RN ^id = "2071"
+* #RN ^property[0].code = #v2-concCommentAsPub
+* #RN ^property[=].valueString = "An identifier that is unique to a registered nurse within the jurisdiction of the licensing board."
+* #RN ^property[+].code = #status
+* #RN ^property[=].valueCode = #A
+* #RPH "Pharmacist license number" "An identifier that is unique to a pharmacist within the jurisdiction of the licensing board."
+* #RPH ^id = "2072"
+* #RPH ^property[0].code = #v2-concCommentAsPub
+* #RPH ^property[=].valueString = "An identifier that is unique to a pharmacist within the jurisdiction of the licensing board."
+* #RPH ^property[+].code = #status
+* #RPH ^property[=].valueCode = #A
+* #RR "Railroad Retirement number" "An identifier for an individual enrolled with the Railroad Retirement Administration.  Analogous to, but distinct from, a Social Security Number"
+* #RR ^id = "2073"
+* #RR ^designation.language = #de
+* #RR ^designation.use.system = "http://terminology.hl7.org/CodeSystem/hl7TermMaintInfra"
+* #RR ^designation.use = http://terminology.hl7.org/CodeSystem/hl7TermMaintInfra#preferredForLanguage
+* #RR ^designation.value = "Seniorenkartennummer"
+* #RR ^property[0].code = #v2-concCommentAsPub
+* #RR ^property[=].valueString = "An identifier for an individual enrolled with the Railroad Retirement Administration.  Analogous to, but distinct from, a Social Security Number"
+* #RR ^property[+].code = #status
+* #RR ^property[=].valueCode = #A
+* #RRI "Regional registry ID" "Regional registry ID"
+* #RRI ^id = "2074"
+* #RRI ^property[0].code = #status
+* #RRI ^property[=].valueCode = #A
+* #RRP "Railroad Retirement Provider" "Railroad Retirement Provider"
+* #RRP ^id = "2075"
+* #RRP ^property[0].code = #v2-concComment
+* #RRP ^property[=].valueString = "Class:  Insurance"
+* #RRP ^property[+].code = #v2-concCommentAsPub
+* #RRP ^property[=].valueString = "Class:  Insurance"
+* #RRP ^property[+].code = #status
+* #RRP ^property[=].valueCode = #A
+* #SAMN "SAMN# accession Number" "The accession number for the BioSample data repository at the National Center for Biotechnology Information (NCBI)"
+* #SAMN ^id = "2076"
+* #SAMN ^property[0].code = #v2-concComment
+* #SAMN ^property[=].valueString = "This accession is a permanent record locator for the BioSample record which contains metadata about the biological sample."
+* #SAMN ^property[+].code = #status
+* #SAMN ^property[=].valueCode = #N
+* #SB "Social Beneficiary Identifier" "An identifier issued by a governmental organization to a person to identify the person should they apply for or receive social services and/or benefits"
+* #SB ^id = "2077"
+* #SB ^property[0].code = #status
+* #SB ^property[=].valueCode = #A
+* #SID "Specimen ID" "Identifier for a specimen."
+* #SID ^id = "2078"
+* #SID ^property[0].code = #v2-concComment
+* #SID ^property[=].valueString = "Used when it is not known if the specimen ID is a unique specimen ID (USID) or an ancestor ID (ASID)."
+* #SID ^property[+].code = #v2-concCommentAsPub
+* #SID ^property[=].valueString = "Identifier for a specimen. Used when it is not known if the specimen ID is a unique specimen ID (USID) or an ancestor ID (ASID)."
+* #SID ^property[+].code = #status
+* #SID ^property[=].valueCode = #A
+* #SL "State license" "State license"
+* #SL ^id = "2079"
+* #SL ^property[0].code = #status
+* #SL ^property[=].valueCode = #A
+* #SN "Subscriber Number" "An identifier for a subscriber of an insurance policy which is unique for, and usually assigned by, the insurance carrier."
+* #SN ^id = "2080"
+* #SN ^property[0].code = #v2-concComment
+* #SN ^property[=].valueString = "Class: Insurance\r\nUse Case: A person is the subscriber of an insurance policy. The person’s family may be plan members, but are not the subscriber."
+* #SN ^property[+].code = #v2-concCommentAsPub
+* #SN ^property[=].valueString = "Class: Insurance\r\nAn identifier for a subscriber of an insurance policy which is unique for, and usually assigned by, the insurance carrier.\r\nUse Case: A person is the subscriber of an insurance policy. The person’s family may be plan members, but are not the subscriber."
+* #SN ^property[+].code = #status
+* #SN ^property[=].valueCode = #A
+* #SNBSN "State assigned NDBS card Identifier" "The identifier on a Newborn Screening Dried Bloodspot (NDBS) card that is assigned by the state which provided the sample collection cards and to whom this information must be reported"
+* #SNBSN ^id = "2081"
+* #SNBSN ^property[0].code = #v2-concComment
+* #SNBSN ^property[=].valueString = "For use either with OBX-5 as CX datatype, where OBX-3 uses LOINC 57716-3^State printed on filter paper card [Identifier] in NBS card^LN, or in SPM-31"
+* #SNBSN ^property[+].code = #status
+* #SNBSN ^property[=].valueCode = #N
+* #SNO "Serial Number" "An identifier affixed to an item by the manufacturer when it is first made, where each item has a different identifier."
+* #SNO ^id = "2082"
+* #SNO ^property[0].code = #status
+* #SNO ^property[=].valueCode = #A
+* #SP "Study Permit" "A number associated with a permit identifying a person who is a resident of a jurisdiction for the purpose of education."
+* #SP ^id = "2083"
+* #SP ^property[0].code = #v2-concCommentAsPub
+* #SP ^property[=].valueString = "A number associated with a permit identifying a person who is a resident of a jurisdiction for the purpose of education."
+* #SP ^property[+].code = #status
+* #SP ^property[=].valueCode = #A
+* #SR "State registry ID" "State registry ID"
+* #SR ^id = "2084"
+* #SR ^property[0].code = #status
+* #SR ^property[=].valueCode = #A
+* #SRX "SRA Accession number" "The accession number generated by the Sequence Read Archive (SRA) at the National Center for Biotechnology Information (NCBI) when sequence data are uploaded to NCBI."
+* #SRX ^id = "2085"
+* #SRX ^property[0].code = #v2-concComment
+* #SRX ^property[=].valueString = "This provides both the sequence data and metadata on how the sample was sequenced. – This accession is a permanent record locator for the submitted un-assembled sequence data."
+* #SRX ^property[+].code = #status
+* #SRX ^property[=].valueCode = #N
+* #SS "Social Security number" "Social Security number"
+* #SS ^id = "2086"
+* #SS ^designation.language = #de
+* #SS ^designation.use.system = "http://terminology.hl7.org/CodeSystem/hl7TermMaintInfra"
+* #SS ^designation.use = http://terminology.hl7.org/CodeSystem/hl7TermMaintInfra#preferredForLanguage
+* #SS ^designation.value = "Sozialversicherungsnummer"
+* #SS ^property[0].code = #status
+* #SS ^property[=].valueCode = #A
+* #STN "Shipment Tracking Number" "Identifier assigned to a package being shipped"
+* #STN ^id = "2087"
+* #STN ^property[0].code = #v2-concComment
+* #STN ^property[=].valueString = "For example the Fed Ex / UPS / DHS / USPS tracking number"
+* #STN ^property[+].code = #status
+* #STN ^property[=].valueCode = #N
+* #TAX "Tax ID number" "Tax ID number"
+* #TAX ^id = "2088"
+* #TAX ^designation.language = #de
+* #TAX ^designation.use.system = "http://terminology.hl7.org/CodeSystem/hl7TermMaintInfra"
+* #TAX ^designation.use = http://terminology.hl7.org/CodeSystem/hl7TermMaintInfra#preferredForLanguage
+* #TAX ^designation.value = "Steueridentifikationsnummer"
+* #TAX ^property[0].code = #status
+* #TAX ^property[=].valueCode = #A
+* #TN "Treaty Number/ (Canada)" "A number assigned to a member of an indigenous group in Canada."
+* #TN ^id = "2089"
+* #TN ^property[0].code = #v2-concComment
+* #TN ^property[=].valueString = "Use Case: First Nation."
+* #TN ^property[+].code = #v2-concCommentAsPub
+* #TN ^property[=].valueString = "A number assigned to a member of an indigenous group in Canada.<p>Use Case: First Nation."
+* #TN ^property[+].code = #status
+* #TN ^property[=].valueCode = #A
+* #TPR "Temporary Permanent Resident (Canada)" "A number associated with a document identifying a person's temporary permanent resident status."
+* #TPR ^id = "2090"
+* #TPR ^property[0].code = #v2-concCommentAsPub
+* #TPR ^property[=].valueString = "A number associated with a document identifying a person's temporary permanent resident status."
+* #TPR ^property[+].code = #status
+* #TPR ^property[=].valueCode = #A
+* #TRL "Training License Number" "The license number used during training."
+* #TRL ^id = "2091"
+* #TRL ^property[0].code = #status
+* #TRL ^property[=].valueCode = #N
+* #U "Unspecified identifier" "Unspecified identifier"
+* #U ^id = "2092"
+* #U ^property[0].code = #status
+* #U ^property[=].valueCode = #A
+* #UDI "Universal Device Identifier" "An identifier assigned to a device using the Unique Device Identification framework as defined by IMDRF (http://imdrf.org)."
+* #UDI ^id = "2093"
+* #UDI ^property[0].code = #status
+* #UDI ^property[=].valueCode = #A
+* #UPIN "Medicare/CMS (formerly HCFA)'s Universal Physician Identification numbers" "An identifier for a provider within the CMS/Medicare program.  A globally unique identifier for the provider in the Medicare program."
+* #UPIN ^id = "2094"
+* #UPIN ^property[0].code = #v2-concComment
+* #UPIN ^property[=].valueString = "Class: Insurance"
+* #UPIN ^property[+].code = #v2-concCommentAsPub
+* #UPIN ^property[=].valueString = "Class: Insurance<p>An identifier for a provider within the CMS/Medicare program.  A globally unique identifier for the provider in the Medicare program."
+* #UPIN ^property[+].code = #status
+* #UPIN ^property[=].valueCode = #A
+* #USID "Unique Specimen ID" "A unique identifier for a specimen."
+* #USID ^id = "2095"
+* #USID ^property[0].code = #v2-concCommentAsPub
+* #USID ^property[=].valueString = "A unique identifier for a specimen."
+* #USID ^property[+].code = #status
+* #USID ^property[=].valueCode = #A
+* #VN "Visit number" "Visit number"
+* #VN ^id = "2096"
+* #VN ^designation.language = #de
+* #VN ^designation.use.system = "http://terminology.hl7.org/CodeSystem/hl7TermMaintInfra"
+* #VN ^designation.use = http://terminology.hl7.org/CodeSystem/hl7TermMaintInfra#preferredForLanguage
+* #VN ^designation.value = "Fallnummer"
+* #VN ^property[0].code = #status
+* #VN ^property[=].valueCode = #A
+* #VP "Visitor Permit" "A number associated with a document identifying a person as a visitor of a jurisdiction or country."
+* #VP ^id = "2097"
+* #VP ^designation.language = #de
+* #VP ^designation.use.system = "http://terminology.hl7.org/CodeSystem/hl7TermMaintInfra"
+* #VP ^designation.use = http://terminology.hl7.org/CodeSystem/hl7TermMaintInfra#preferredForLanguage
+* #VP ^designation.value = "Besucherkennung"
+* #VP ^property[0].code = #v2-concCommentAsPub
+* #VP ^property[=].valueString = "A number associated with a document identifying a person as a visitor of a jurisdiction or country."
+* #VP ^property[+].code = #status
+* #VP ^property[=].valueCode = #A
+* #VS "VISA" "VISA"
+* #VS ^id = "2098"
+* #VS ^designation.language = #de
+* #VS ^designation.use.system = "http://terminology.hl7.org/CodeSystem/hl7TermMaintInfra"
+* #VS ^designation.use = http://terminology.hl7.org/CodeSystem/hl7TermMaintInfra#preferredForLanguage
+* #VS ^designation.value = "VISA"
+* #VS ^property[0].code = #v2-concComment
+* #VS ^property[=].valueString = "Deprecated and replaced by BC in v 2.5."
+* #VS ^property[+].code = #v2-concCommentAsPub
+* #VS ^property[=].valueString = "Deprecated and replaced by BC in v 2.5."
+* #VS ^property[+].code = #status
+* #VS ^property[=].valueCode = #A
+* #WC "WIC identifier" "WIC identifier"
+* #WC ^id = "2099"
+* #WC ^property[0].code = #status
+* #WC ^property[=].valueCode = #A
+* #WCN "Workers' Comp Number" "Workers' Comp Number"
+* #WCN ^id = "2100"
+* #WCN ^property[0].code = #status
+* #WCN ^property[=].valueCode = #A
+* #WP "Work Permit" "A number associated with a permit for a person who is granted permission to work in a country for a specified time period."
+* #WP ^id = "2101"
+* #WP ^property[0].code = #v2-concCommentAsPub
+* #WP ^property[=].valueString = "A number associated with a permit for a person who is granted permission to work in a country for a specified time period."
+* #WP ^property[+].code = #status
+* #WP ^property[=].valueCode = #A
+* #XV "Health Plan Identifier" "National unique health plan identifier required by the US Department of Health and Human Services, Centers for Medicare and Medicaid Services (CMS) in the US Realm."
+* #XV ^id = "2102"
+* #XV ^property[0].code = #v2-concComment
+* #XV ^property[=].valueString = "Also referred to as HPID (Health Plan Identifier)."
+* #XV ^property[+].code = #HL7usageNotes
+* #XV ^property[=].valueString = "The code value ‘XV’ is used in CMS mandated Health Insurance Portability and Accountability Act (HIPAA) transactions."
+* #XV ^property[+].code = #status
+* #XV ^property[=].valueCode = #N
+* #XX "Organization identifier" "Organization identifier"
+* #XX ^id = "2103"
+* #XX ^designation.language = #de
+* #XX ^designation.use.system = "http://terminology.hl7.org/CodeSystem/hl7TermMaintInfra"
+* #XX ^designation.use = http://terminology.hl7.org/CodeSystem/hl7TermMaintInfra#preferredForLanguage
+* #XX ^designation.value = "Organisations-ID"
+* #XX ^property[0].code = #status
+* #XX ^property[=].valueCode = #A
+
 CodeSystem: OrganizationType
 Id: organization-type
 Title: "Organization type"
@@ -3114,1269 +4114,6 @@ Usage: #definition
 * compose.include.concept[=].designation[+].language = #da
 * compose.include.concept[=].designation[=].use = http://terminology.hl7.org/CodeSystem/designation-usage#display
 * compose.include.concept[=].designation[=].value = "Kinesisk (Taiwan)"
-
-CodeSystem: V2_0203
-Id: v2-0203
-Title: "v2 Identifier Type"
-Description: "FHIR Value set/code system definition for HL7 v2 table 0203 ( Identifier Type)"
-* ^meta.versionId = "1"
-* ^meta.lastUpdated = "2022-02-15T08:17:27.194+03:00"
-* ^meta.source = "#qM5Ix2L4E0neUWFx"
-* ^meta.profile = "http://hl7.org/fhir/StructureDefinition/shareablecodesystem"
-* ^language = #en
-* ^extension[0].url = "http://hl7.org/fhir/StructureDefinition/structuredefinition-standards-status"
-* ^extension[=].valueCode = #normative
-* ^extension[+].url = "http://hl7.org/fhir/StructureDefinition/structuredefinition-fmm"
-* ^extension[=].valueInteger = 5
-* ^extension[+].url = "http://hl7.org/fhir/StructureDefinition/structuredefinition-wg"
-* ^extension[=].valueCode = #fhir
-* ^extension[+].url = "http://hl7.org/fhir/StructureDefinition/structuredefinition-normative-version"
-* ^extension[=].valueCode = #4.0.0
-* ^url = "http://terminology.hl7.org/CodeSystem/v2-0203"
-* ^identifier.system = "urn:ietf:rfc:3986"
-* ^identifier.value = "urn:oid:2.16.840.1.113883.18.108"
-* ^version = "2.9"
-* ^status = #active
-* ^experimental = false
-* ^publisher = "HL7, Inc"
-* ^contact.telecom.system = #url
-* ^contact.telecom.value = "http://hl7.org"
-* ^content = #complete
-* #AC "Accreditation/Certification Identifier"
-* #ACSN "Accession ID"
-* #ACSN ^extension[0].url = "http://hl7.org/fhir/StructureDefinition/codesystem-concept-comments"
-* #ACSN ^extension[=].valueString = "Accession Identifier"
-* #ACSN ^extension[=].valueString.extension[0].url = "http://hl7.org/fhir/StructureDefinition/translation"
-* #ACSN ^extension[=].valueString.extension[0].extension[0].url = "lang"
-* #ACSN ^extension[=].valueString.extension[0].extension[=].valueCode = #nl
-* #ACSN ^extension[=].valueString.extension[0].extension[+].url = "content"
-* #ACSN ^extension[=].valueString.extension[0].extension[=].valueString = "Accession identificatie"
-* #ACSN ^designation[0].language = #nl
-* #ACSN ^designation[=].use = http://terminology.hl7.org/CodeSystem/designation-usage#display
-* #ACSN ^designation[=].value = "Accession ID"
-* #AM "American Express"
-* #AM ^extension[0].url = "http://hl7.org/fhir/StructureDefinition/codesystem-concept-comments"
-* #AM ^extension[=].valueString = "Deprecated and replaced by BC in v 2.5."
-* #AM ^extension[=].valueString.extension[0].url = "http://hl7.org/fhir/StructureDefinition/translation"
-* #AM ^extension[=].valueString.extension[0].extension[0].url = "lang"
-* #AM ^extension[=].valueString.extension[0].extension[=].valueCode = #nl
-* #AM ^extension[=].valueString.extension[0].extension[+].url = "content"
-* #AM ^extension[=].valueString.extension[0].extension[=].valueString = "Vervangen door BC vanaf v2.5"
-* #AM ^designation[0].language = #de
-* #AM ^designation[=].use.system = "http://terminology.hl7.org/CodeSystem/designation-usage"
-* #AM ^designation[=].use = http://terminology.hl7.org/CodeSystem/designation-usage#display
-* #AM ^designation[=].value = "American Express"
-* #AM ^designation[+].language = #nl
-* #AM ^designation[=].use = http://terminology.hl7.org/CodeSystem/designation-usage#display
-* #AM ^designation[=].value = "American Express"
-* #AMA "American Medical Association Number"
-* #AMA ^extension[0].url = "http://hl7.org/fhir/StructureDefinition/codesystem-concept-comments"
-* #AMA ^extension[=].valueString = "A physician identifier assigned by the AMA."
-* #AMA ^extension[=].valueString.extension[0].url = "http://hl7.org/fhir/StructureDefinition/translation"
-* #AMA ^extension[=].valueString.extension[0].extension[0].url = "lang"
-* #AMA ^extension[=].valueString.extension[0].extension[=].valueCode = #nl
-* #AMA ^extension[=].valueString.extension[0].extension[+].url = "content"
-* #AMA ^extension[=].valueString.extension[0].extension[=].valueString = "Een zorgverleneridentificatie toegekend door de AMA"
-* #AMA ^designation[0].language = #nl
-* #AMA ^designation[=].use.system = "http://terminology.hl7.org/CodeSystem/designation-usage"
-* #AMA ^designation[=].use = http://terminology.hl7.org/CodeSystem/designation-usage#display
-* #AMA ^designation[=].value = "American Medical Association nummer"
-* #AN "Account number"
-* #AN ^extension[0].url = "http://hl7.org/fhir/StructureDefinition/codesystem-concept-comments"
-* #AN ^extension[=].valueString = "An identifier that is unique to an account."
-* #AN ^extension[=].valueString.extension[0].url = "http://hl7.org/fhir/StructureDefinition/translation"
-* #AN ^extension[=].valueString.extension[0].extension[0].url = "lang"
-* #AN ^extension[=].valueString.extension[0].extension[=].valueCode = #nl
-* #AN ^extension[=].valueString.extension[0].extension[+].url = "content"
-* #AN ^extension[=].valueString.extension[0].extension[=].valueString = "Een unieke identificatie van het account"
-* #AN ^designation[0].language = #de
-* #AN ^designation[=].use.system = "http://terminology.hl7.org/CodeSystem/designation-usage"
-* #AN ^designation[=].use = http://terminology.hl7.org/CodeSystem/designation-usage#display
-* #AN ^designation[=].value = "Kontonummer"
-* #AN ^designation[+].language = #nl
-* #AN ^designation[=].use.system = "http://terminology.hl7.org/CodeSystem/designation-usage"
-* #AN ^designation[=].use = http://terminology.hl7.org/CodeSystem/designation-usage#display
-* #AN ^designation[=].value = "Accountnummer"
-* #ANC "Account number Creditor"
-* #ANC ^extension[0].url = "http://hl7.org/fhir/StructureDefinition/codesystem-concept-comments"
-* #ANC ^extension[=].valueString = "Class: Financial A more precise definition of an account number: sometimes two distinct account numbers must be transmitted in the same message, one as the creditor, the other as the debitor. Kreditorenkontonummer"
-* #ANC ^extension[=].valueString.extension[0].url = "http://hl7.org/fhir/StructureDefinition/translation"
-* #ANC ^extension[=].valueString.extension[0].extension[0].url = "lang"
-* #ANC ^extension[=].valueString.extension[0].extension[=].valueCode = #nl
-* #ANC ^extension[=].valueString.extension[0].extension[+].url = "content"
-* #ANC ^extension[=].valueString.extension[0].extension[=].valueString = "Klasse: financieel. Een preciesere definitie van een accountnummer: soms moeten 2 verschillende accountnummers moeten worden doorgegeven in hetzelfde bericht, een als crediteur, de andere als debiteur. Crediteuraccountnummer."
-* #ANC ^designation[0].language = #nl
-* #ANC ^designation[=].use.system = "http://terminology.hl7.org/CodeSystem/designation-usage"
-* #ANC ^designation[=].use = http://terminology.hl7.org/CodeSystem/designation-usage#display
-* #ANC ^designation[=].value = "Accountnummer crediteur"
-* #AND "Account number debitor"
-* #AND ^extension[0].url = "http://hl7.org/fhir/StructureDefinition/codesystem-concept-comments"
-* #AND ^extension[=].valueString = "Class: Financial A more precise definition of an account number: sometimes two distinct account numbers must be transmitted in the same message, one as the creditor, the other as the debitor. Debitorenkontonummer"
-* #AND ^extension[=].valueString.extension[0].url = "http://hl7.org/fhir/StructureDefinition/translation"
-* #AND ^extension[=].valueString.extension[0].extension[0].url = "lang"
-* #AND ^extension[=].valueString.extension[0].extension[=].valueCode = #nl
-* #AND ^extension[=].valueString.extension[0].extension[+].url = "content"
-* #AND ^extension[=].valueString.extension[0].extension[=].valueString = "Klasse: financieel. Een preciesere definitie van een accountnummer: soms moeten 2 verschillende accountnummers moeten worden doorgegeven in hetzelfde bericht, een als crediteur, de andere als debiteur. Debiteuraccountnummer."
-* #AND ^designation[0].language = #nl
-* #AND ^designation[=].use.system = "http://terminology.hl7.org/CodeSystem/designation-usage"
-* #AND ^designation[=].use = http://terminology.hl7.org/CodeSystem/designation-usage#display
-* #AND ^designation[=].value = "Accountnummer debiteur"
-* #ANON "Anonymous identifier"
-* #ANON ^extension[0].url = "http://hl7.org/fhir/StructureDefinition/codesystem-concept-comments"
-* #ANON ^extension[=].valueString = "An identifier for a living subject whose real identity is protected or suppressed Justification: For public health reporting purposes, anonymous identifiers are occasionally used for protecting patient identity in reporting certain results. For instance, a state health department may choose to use a scheme for generating an anonymous identifier for reporting a patient that has had a positive human immunodeficiency virus antibody test. Anonymous identifiers can be used in PID 3 by replacing the medical record number or other non-anonymous identifier. The assigning authority for an anonymous identifier would be the state/local health department."
-* #ANON ^extension[=].valueString.extension[0].url = "http://hl7.org/fhir/StructureDefinition/translation"
-* #ANON ^extension[=].valueString.extension[0].extension[0].url = "lang"
-* #ANON ^extension[=].valueString.extension[0].extension[=].valueCode = #nl
-* #ANON ^extension[=].valueString.extension[0].extension[+].url = "content"
-* #ANON ^extension[=].valueString.extension[0].extension[=].valueString = "Verklaring: t.b.v. volksgezondheid-doeleinden worden anonieme identificaties soms gebruikt voor bescherming van de identiteit van de patiënt bij melden van bepaalde resultaten. Zo kan een gezondheidsafdeling van een overheid voor een algoritme voor het genereren van nummers kiezen bij patiënten met een positieve HIV-antilichamentest. Anonieme identificaties kunnen worden gebruikt in PID-3 door het medisch dossiernummer of ander niet-anonieme identificatie te vervangen. De toekennende autoriteit voor de anonieme identificatie is dan de betreffende overheidsafdeling."
-* #ANON ^designation[0].language = #nl
-* #ANON ^designation[=].use.system = "http://terminology.hl7.org/CodeSystem/designation-usage"
-* #ANON ^designation[=].use = http://terminology.hl7.org/CodeSystem/designation-usage#display
-* #ANON ^designation[=].value = "Anonieme identificatie"
-* #ANT "Temporary Account Number"
-* #ANT ^extension[0].url = "http://hl7.org/fhir/StructureDefinition/codesystem-concept-comments"
-* #ANT ^extension[=].valueString = "Class: Financial Temporary version of an Account Number. Use Case: An ancillary system that does not normally assign account numbers is the first time to register a patient. This ancillary system will generate a temporary account number that will only be used until an official account number is assigned."
-* #ANT ^extension[=].valueString.extension[0].url = "http://hl7.org/fhir/StructureDefinition/translation"
-* #ANT ^extension[=].valueString.extension[0].extension[0].url = "lang"
-* #ANT ^extension[=].valueString.extension[0].extension[=].valueCode = #nl
-* #ANT ^extension[=].valueString.extension[0].extension[+].url = "content"
-* #ANT ^extension[=].valueString.extension[0].extension[=].valueString = "Klasse: financieel. Tijdelijke versie van een accountnummer. Use case: een satellietsysteem dat normaal geen accountnummers toekent, is de eerste plaats waar een patiënt wordt geregistreerd. Dit satellietsysteem zal een tijdelijk accountnummer genereren dat wordt gebruikt totdat een officieel accountnummer wordt toegekend."
-* #ANT ^designation[0].language = #nl
-* #ANT ^designation[=].use.system = "http://terminology.hl7.org/CodeSystem/designation-usage"
-* #ANT ^designation[=].use = http://terminology.hl7.org/CodeSystem/designation-usage#display
-* #ANT ^designation[=].value = "Tijdelijk accountnummer"
-* #APRN "Advanced Practice Registered Nurse number"
-* #APRN ^extension[0].url = "http://hl7.org/fhir/StructureDefinition/codesystem-concept-comments"
-* #APRN ^extension[=].valueString = "An identifier that is unique to an advanced practice registered nurse within the jurisdiction of a certifying board"
-* #ASID "Ancestor Specimen ID"
-* #ASID ^extension[0].url = "http://hl7.org/fhir/StructureDefinition/codesystem-concept-comments"
-* #ASID ^extension[=].valueString = "A unique identifier for the ancestor specimen. All child, grandchild, etc. specimens of the ancestor specimen share the same Ancestor Specimen ID."
-* #ASID ^extension[=].valueString.extension[0].url = "http://hl7.org/fhir/StructureDefinition/translation"
-* #ASID ^extension[=].valueString.extension[0].extension[0].url = "lang"
-* #ASID ^extension[=].valueString.extension[0].extension[=].valueCode = #nl
-* #ASID ^extension[=].valueString.extension[0].extension[+].url = "content"
-* #ASID ^extension[=].valueString.extension[0].extension[=].valueString = "Een unieke identificatie voor het oorspronkelijke monster. Alle afgeleide (kind, kleinkind, etc.) monsters van het oorspronkelijke monster delen hetzelfde Oorspronkelijke monster ID"
-* #ASID ^designation[0].language = #nl
-* #ASID ^designation[=].use.system = "http://terminology.hl7.org/CodeSystem/designation-usage"
-* #ASID ^designation[=].use = http://terminology.hl7.org/CodeSystem/designation-usage#display
-* #ASID ^designation[=].value = "Oorspronkelijk monster ID"
-* #BA "Bank Account Number"
-* #BA ^extension[0].url = "http://hl7.org/fhir/StructureDefinition/codesystem-concept-comments"
-* #BA ^extension[=].valueString = "Class: Financial"
-* #BA ^extension[=].valueString.extension[0].url = "http://hl7.org/fhir/StructureDefinition/translation"
-* #BA ^extension[=].valueString.extension[0].extension[0].url = "lang"
-* #BA ^extension[=].valueString.extension[0].extension[=].valueCode = #nl
-* #BA ^extension[=].valueString.extension[0].extension[+].url = "content"
-* #BA ^extension[=].valueString.extension[0].extension[=].valueString = "Klasse: financieel"
-* #BA ^designation[0].language = #de
-* #BA ^designation[=].use.system = "http://terminology.hl7.org/CodeSystem/designation-usage"
-* #BA ^designation[=].use = http://terminology.hl7.org/CodeSystem/designation-usage#display
-* #BA ^designation[=].value = "Bank Kontonummer"
-* #BA ^designation[+].language = #nl
-* #BA ^designation[=].use.system = "http://terminology.hl7.org/CodeSystem/designation-usage"
-* #BA ^designation[=].use = http://terminology.hl7.org/CodeSystem/designation-usage#display
-* #BA ^designation[=].value = "Bankrekeningnummer"
-* #BC "Bank Card Number"
-* #BC ^extension[0].url = "http://hl7.org/fhir/StructureDefinition/codesystem-concept-comments"
-* #BC ^extension[=].valueString = "Class: Financial An identifier that is unique to a person's bank card. Replaces AM, DI, DS, MS, and VS beginning in v 2.5."
-* #BC ^extension[=].valueString.extension[0].url = "http://hl7.org/fhir/StructureDefinition/translation"
-* #BC ^extension[=].valueString.extension[0].extension[0].url = "lang"
-* #BC ^extension[=].valueString.extension[0].extension[=].valueCode = #nl
-* #BC ^extension[=].valueString.extension[0].extension[+].url = "content"
-* #BC ^extension[=].valueString.extension[0].extension[=].valueString = "Klasse: financieel. Een identificatie die uniek is voor iemand's bankpas. Vervangt AM, DI, DS, MS en VS vanaf v2.5"
-* #BC ^designation[0].language = #nl
-* #BC ^designation[=].use.system = "http://terminology.hl7.org/CodeSystem/designation-usage"
-* #BC ^designation[=].use = http://terminology.hl7.org/CodeSystem/designation-usage#display
-* #BC ^designation[=].value = "Bankrekeningnummer"
-* #BCFN "Birth Certificate File Number"
-* #BCT "Birth Certificate"
-* #BCT ^extension[0].url = "http://hl7.org/fhir/StructureDefinition/codesystem-concept-comments"
-* #BCT ^extension[=].valueString = "A number associated with a document identifying the event of a person's birth."
-* #BCT ^extension[=].valueString.extension[0].url = "http://hl7.org/fhir/StructureDefinition/translation"
-* #BCT ^extension[=].valueString.extension[0].extension[0].url = "lang"
-* #BCT ^extension[=].valueString.extension[0].extension[=].valueCode = #nl
-* #BCT ^extension[=].valueString.extension[0].extension[+].url = "content"
-* #BCT ^extension[=].valueString.extension[0].extension[=].valueString = "Een nummer gekoppeld aan een document die de geboorte van een persoon documenteert."
-* #BCT ^designation[0].language = #nl
-* #BCT ^designation[=].use.system = "http://terminology.hl7.org/CodeSystem/designation-usage"
-* #BCT ^designation[=].use = http://terminology.hl7.org/CodeSystem/designation-usage#display
-* #BCT ^designation[=].value = "Geboortecertificaat"
-* #BR "Birth registry number"
-* #BR ^extension[0].url = "http://hl7.org/fhir/StructureDefinition/codesystem-concept-comments"
-* #BR ^extension[=].valueString = "An identifier unique within the Assigning Authority that is the official legal record of a person's birth."
-* #BR ^extension[=].valueString.extension[0].url = "http://hl7.org/fhir/StructureDefinition/translation"
-* #BR ^extension[=].valueString.extension[0].extension[0].url = "lang"
-* #BR ^extension[=].valueString.extension[0].extension[=].valueCode = #nl
-* #BR ^extension[=].valueString.extension[0].extension[+].url = "content"
-* #BR ^extension[=].valueString.extension[0].extension[=].valueString = "Een nummer gekoppeld aan de toekennende autoriteit die het officieel wettelijk afschrift van de geboorte van een persoon bijhoudt."
-* #BR ^designation[0].language = #de
-* #BR ^designation[=].use.system = "http://terminology.hl7.org/CodeSystem/designation-usage"
-* #BR ^designation[=].use = http://terminology.hl7.org/CodeSystem/designation-usage#display
-* #BR ^designation[=].value = "Geburtsregisternummer"
-* #BR ^designation[+].language = #nl
-* #BR ^designation[=].use.system = "http://terminology.hl7.org/CodeSystem/designation-usage"
-* #BR ^designation[=].use = http://terminology.hl7.org/CodeSystem/designation-usage#display
-* #BR ^designation[=].value = "Geboorteregister-nummer"
-* #BRN "Breed Registry Number"
-* #BRN ^designation[0].language = #nl
-* #BRN ^designation[=].use.system = "http://terminology.hl7.org/CodeSystem/designation-usage"
-* #BRN ^designation[=].use = http://terminology.hl7.org/CodeSystem/designation-usage#display
-* #BRN ^designation[=].value = "Dierenras-registernummer"
-* #BSNR "Primary physician office number"
-* #BSNR ^extension[0].url = "http://hl7.org/fhir/StructureDefinition/codesystem-concept-comments"
-* #BSNR ^extension[=].valueString = "Betriebsstättennummer - for use in the German realm."
-* #BSNR ^extension[=].valueString.extension[0].url = "http://hl7.org/fhir/StructureDefinition/translation"
-* #BSNR ^extension[=].valueString.extension[0].extension[0].url = "lang"
-* #BSNR ^extension[=].valueString.extension[0].extension[=].valueCode = #nl
-* #BSNR ^extension[=].valueString.extension[0].extension[+].url = "content"
-* #BSNR ^extension[=].valueString.extension[0].extension[=].valueString = "Betriebsstättennummer - voor gebruik in Duitse context."
-* #BSNR ^designation[0].language = #nl
-* #BSNR ^designation[=].use.system = "http://terminology.hl7.org/CodeSystem/designation-usage"
-* #BSNR ^designation[=].use = http://terminology.hl7.org/CodeSystem/designation-usage#display
-* #BSNR ^designation[=].value = "Primair zorgverlenerpraktijknummer"
-* #CC "Cost Center number"
-* #CC ^extension[0].url = "http://hl7.org/fhir/StructureDefinition/codesystem-concept-comments"
-* #CC ^extension[=].valueString = "Class: Financial Use Case: needed especially for transmitting information about invoices."
-* #CC ^extension[=].valueString.extension[0].url = "http://hl7.org/fhir/StructureDefinition/translation"
-* #CC ^extension[=].valueString.extension[0].extension[0].url = "lang"
-* #CC ^extension[=].valueString.extension[0].extension[=].valueCode = #nl
-* #CC ^extension[=].valueString.extension[0].extension[+].url = "content"
-* #CC ^extension[=].valueString.extension[0].extension[=].valueString = "Klasse: financieel. Use case: specifiek nodig voor doorgeven van informatie over facturen."
-* #CC ^designation[0].language = #nl
-* #CC ^designation[=].use.system = "http://terminology.hl7.org/CodeSystem/designation-usage"
-* #CC ^designation[=].use = http://terminology.hl7.org/CodeSystem/designation-usage#display
-* #CC ^designation[=].value = "Kostenplaatsnummer"
-* #CONM "Change of Name Document"
-* #CONM ^extension[0].url = "http://hl7.org/fhir/StructureDefinition/codesystem-concept-comments"
-* #CONM ^extension[=].valueString = "A number associated with a document identifying a person's legal change of name."
-* #CONM ^extension[=].valueString.extension[0].url = "http://hl7.org/fhir/StructureDefinition/translation"
-* #CONM ^extension[=].valueString.extension[0].extension[0].url = "lang"
-* #CONM ^extension[=].valueString.extension[0].extension[=].valueCode = #nl
-* #CONM ^extension[=].valueString.extension[0].extension[+].url = "content"
-* #CONM ^extension[=].valueString.extension[0].extension[=].valueString = "Een identificatie gekoppeld aan een document met daarop de officiële wijziging van persoonsnaam."
-* #CONM ^designation[0].language = #nl
-* #CONM ^designation[=].use.system = "http://terminology.hl7.org/CodeSystem/designation-usage"
-* #CONM ^designation[=].use = http://terminology.hl7.org/CodeSystem/designation-usage#display
-* #CONM ^designation[=].value = "Naamswijzigingdocument"
-* #CY "County number"
-* #CY ^designation[0].language = #nl
-* #CY ^designation[=].use.system = "http://terminology.hl7.org/CodeSystem/designation-usage"
-* #CY ^designation[=].use = http://terminology.hl7.org/CodeSystem/designation-usage#display
-* #CY ^designation[=].value = "County-nummer"
-* #CZ "Citizenship Card"
-* #CZ ^extension[0].url = "http://hl7.org/fhir/StructureDefinition/codesystem-concept-comments"
-* #CZ ^extension[=].valueString = "A number assigned by a person's country of residence to identify a person's citizenship."
-* #CZ ^extension[=].valueString.extension[0].url = "http://hl7.org/fhir/StructureDefinition/translation"
-* #CZ ^extension[=].valueString.extension[0].extension[0].url = "lang"
-* #CZ ^extension[=].valueString.extension[0].extension[=].valueCode = #nl
-* #CZ ^extension[=].valueString.extension[0].extension[+].url = "content"
-* #CZ ^extension[=].valueString.extension[0].extension[=].valueString = "Een identificatie gekoppeld aan het land van inwonerschap van een persoon om iemand staatsburgerschap aan te duiden."
-* #CZ ^designation[0].language = #nl
-* #CZ ^designation[=].use.system = "http://terminology.hl7.org/CodeSystem/designation-usage"
-* #CZ ^designation[=].use = http://terminology.hl7.org/CodeSystem/designation-usage#display
-* #CZ ^designation[=].value = "Staatsburgerschapkaart"
-* #DC "Death Certificate ID"
-* #DCFN "Death Certificate File Number"
-* #DDS "Dentist license number"
-* #DDS ^extension[0].url = "http://hl7.org/fhir/StructureDefinition/codesystem-concept-comments"
-* #DDS ^extension[=].valueString = "An identifier that is unique to a dentist within the jurisdiction of the licensing board"
-* #DDS ^extension[=].valueString.extension[0].url = "http://hl7.org/fhir/StructureDefinition/translation"
-* #DDS ^extension[=].valueString.extension[0].extension[0].url = "lang"
-* #DDS ^extension[=].valueString.extension[0].extension[=].valueCode = #nl
-* #DDS ^extension[=].valueString.extension[0].extension[+].url = "content"
-* #DDS ^extension[=].valueString.extension[0].extension[=].valueString = "Een identificatie die uniek is voor een tandarts binnen het rechtsgebied van de licentiegever."
-* #DDS ^designation[0].language = #nl
-* #DDS ^designation[=].use.system = "http://terminology.hl7.org/CodeSystem/designation-usage"
-* #DDS ^designation[=].use = http://terminology.hl7.org/CodeSystem/designation-usage#display
-* #DDS ^designation[=].value = "Tandarts licentienummer"
-* #DEA "Drug Enforcement Administration registration number"
-* #DEA ^extension[0].url = "http://hl7.org/fhir/StructureDefinition/codesystem-concept-comments"
-* #DEA ^extension[=].valueString = "An identifier for an individual or organization relative to controlled substance regulation and transactions. Use case: This is a registration number that identifies an individual or organization relative to controlled substance regulation and transactions.  A DEA number has a very precise and widely accepted meaning within the United States. Surprisingly, the US Drug Enforcement Administration does not solely assign DEA numbers in the United States. Hospitals have the authority to issue DEA numbers to their medical residents. These DEA numbers are based upon the hospital’s DEA number, but the authority rests with the hospital on the assignment to the residents. Thus, DEA as an Identifier Type is necessary in addition to DEA as an Assigning Authority."
-* #DEA ^extension[=].valueString.extension[0].url = "http://hl7.org/fhir/StructureDefinition/translation"
-* #DEA ^extension[=].valueString.extension[0].extension[0].url = "lang"
-* #DEA ^extension[=].valueString.extension[0].extension[=].valueCode = #nl
-* #DEA ^extension[=].valueString.extension[0].extension[+].url = "content"
-* #DEA ^extension[=].valueString.extension[0].extension[=].valueString = "Use case: dit is een registratienummer die een persoon of organisatie aanduidt, gerelateerd aan gereguleerde substantie-wetgeving en transacties."
-* #DEA ^designation[0].language = #nl
-* #DEA ^designation[=].use.system = "http://terminology.hl7.org/CodeSystem/designation-usage"
-* #DEA ^designation[=].use = http://terminology.hl7.org/CodeSystem/designation-usage#display
-* #DEA ^designation[=].value = "Amerikaanse Drug Enforcement Administration registratienummer"
-* #DFN "Drug Furnishing or prescriptive authority Number"
-* #DFN ^extension[0].url = "http://hl7.org/fhir/StructureDefinition/codesystem-concept-comments"
-* #DFN ^extension[=].valueString = "An identifier issued to a health care provider authorizing the person to write drug orders Use Case: A nurse practitioner has authorization to furnish or prescribe pharmaceutical substances; this identifier is in component 1."
-* #DFN ^extension[=].valueString.extension[0].url = "http://hl7.org/fhir/StructureDefinition/translation"
-* #DFN ^extension[=].valueString.extension[0].extension[0].url = "lang"
-* #DFN ^extension[=].valueString.extension[0].extension[=].valueCode = #nl
-* #DFN ^extension[=].valueString.extension[0].extension[+].url = "content"
-* #DFN ^extension[=].valueString.extension[0].extension[=].valueString = "Een identificatie uitgegeven aan een zorgverlener die de persoon autoriseert om medicatie voor te schrijven. Use case: een nurse practitioner heeft toestemming om farmaceutische substanties te verstrekken of voor te schrijven; deze identificatie staat in component 1."
-* #DFN ^designation[0].language = #nl
-* #DFN ^designation[=].use.system = "http://terminology.hl7.org/CodeSystem/designation-usage"
-* #DFN ^designation[=].use = http://terminology.hl7.org/CodeSystem/designation-usage#display
-* #DFN ^designation[=].value = "Medicatieverstrekker of voorschrijver autoriteitnummer"
-* #DI "Diner's Club card"
-* #DI ^extension[0].url = "http://hl7.org/fhir/StructureDefinition/codesystem-concept-comments"
-* #DI ^extension[=].valueString = "Deprecated and replaced by BC in v 2.5."
-* #DI ^extension[=].valueString.extension[0].url = "http://hl7.org/fhir/StructureDefinition/translation"
-* #DI ^extension[=].valueString.extension[0].extension[0].url = "lang"
-* #DI ^extension[=].valueString.extension[0].extension[=].valueCode = #nl
-* #DI ^extension[=].valueString.extension[0].extension[+].url = "content"
-* #DI ^extension[=].valueString.extension[0].extension[=].valueString = "Vervangen door BC vanaf v2.5"
-* #DI ^designation[0].language = #de
-* #DI ^designation[=].use.system = "http://terminology.hl7.org/CodeSystem/designation-usage"
-* #DI ^designation[=].use = http://terminology.hl7.org/CodeSystem/designation-usage#display
-* #DI ^designation[=].value = "Diners Club"
-* #DI ^designation[+].language = #nl
-* #DI ^designation[=].use.system = "http://terminology.hl7.org/CodeSystem/designation-usage"
-* #DI ^designation[=].use = http://terminology.hl7.org/CodeSystem/designation-usage#display
-* #DI ^designation[=].value = "Diner's Club"
-* #DL "Driver's license number"
-* #DL ^designation[0].language = #de
-* #DL ^designation[=].use.system = "http://terminology.hl7.org/CodeSystem/designation-usage"
-* #DL ^designation[=].use = http://terminology.hl7.org/CodeSystem/designation-usage#display
-* #DL ^designation[=].value = "Führerscheinnummer"
-* #DL ^designation[+].language = #nl
-* #DL ^designation[=].use.system = "http://terminology.hl7.org/CodeSystem/designation-usage"
-* #DL ^designation[=].use = http://terminology.hl7.org/CodeSystem/designation-usage#display
-* #DL ^designation[=].value = "Rijbewijsnummer"
-* #DN "Doctor number"
-* #DN ^designation[0].language = #de
-* #DN ^designation[=].use.system = "http://terminology.hl7.org/CodeSystem/designation-usage"
-* #DN ^designation[=].use = http://terminology.hl7.org/CodeSystem/designation-usage#display
-* #DN ^designation[=].value = "Arztnummer"
-* #DN ^designation[+].language = #nl
-* #DN ^designation[=].use.system = "http://terminology.hl7.org/CodeSystem/designation-usage"
-* #DN ^designation[=].use = http://terminology.hl7.org/CodeSystem/designation-usage#display
-* #DN ^designation[=].value = "Artsnummer"
-* #DO "Osteopathic License number"
-* #DO ^extension[0].url = "http://hl7.org/fhir/StructureDefinition/codesystem-concept-comments"
-* #DO ^extension[=].valueString = "An identifier that is unique to an osteopath within the jurisdiction of a licensing board."
-* #DO ^extension[=].valueString.extension[0].url = "http://hl7.org/fhir/StructureDefinition/translation"
-* #DO ^extension[=].valueString.extension[0].extension[0].url = "lang"
-* #DO ^extension[=].valueString.extension[0].extension[=].valueCode = #nl
-* #DO ^extension[=].valueString.extension[0].extension[+].url = "content"
-* #DO ^extension[=].valueString.extension[0].extension[=].valueString = "Een identificatie die uniek is voor een osteopaat binnen het rechtsgebied van de licentiegever."
-* #DO ^designation[0].language = #nl
-* #DO ^designation[=].use.system = "http://terminology.hl7.org/CodeSystem/designation-usage"
-* #DO ^designation[=].use = http://terminology.hl7.org/CodeSystem/designation-usage#display
-* #DO ^designation[=].value = "Osteopatisch licentienummer"
-* #DP "Diplomatic Passport"
-* #DP ^extension[0].url = "http://hl7.org/fhir/StructureDefinition/codesystem-concept-comments"
-* #DP ^extension[=].valueString = "A number assigned to a diplomatic passport."
-* #DP ^extension[=].valueString.extension[0].url = "http://hl7.org/fhir/StructureDefinition/translation"
-* #DP ^extension[=].valueString.extension[0].extension[0].url = "lang"
-* #DP ^extension[=].valueString.extension[0].extension[=].valueCode = #nl
-* #DP ^extension[=].valueString.extension[0].extension[+].url = "content"
-* #DP ^extension[=].valueString.extension[0].extension[=].valueString = "Een identificatie van een diplomatiek paspoort."
-* #DP ^designation[0].language = #nl
-* #DP ^designation[=].use.system = "http://terminology.hl7.org/CodeSystem/designation-usage"
-* #DP ^designation[=].use = http://terminology.hl7.org/CodeSystem/designation-usage#display
-* #DP ^designation[=].value = "Diplomatiek paspoort"
-* #DPM "Podiatrist license number"
-* #DPM ^extension[0].url = "http://hl7.org/fhir/StructureDefinition/codesystem-concept-comments"
-* #DPM ^extension[=].valueString = "An identifier that is unique to a podiatrist within the jurisdiction of the licensing board."
-* #DPM ^extension[=].valueString.extension[0].url = "http://hl7.org/fhir/StructureDefinition/translation"
-* #DPM ^extension[=].valueString.extension[0].extension[0].url = "lang"
-* #DPM ^extension[=].valueString.extension[0].extension[=].valueCode = #nl
-* #DPM ^extension[=].valueString.extension[0].extension[+].url = "content"
-* #DPM ^extension[=].valueString.extension[0].extension[=].valueString = "Een identificatie die uniek is voor een podoloog binnen het rechtsgebied van de licentiegever."
-* #DPM ^designation[0].language = #nl
-* #DPM ^designation[=].use.system = "http://terminology.hl7.org/CodeSystem/designation-usage"
-* #DPM ^designation[=].use = http://terminology.hl7.org/CodeSystem/designation-usage#display
-* #DPM ^designation[=].value = "Podoloog licentienummer"
-* #DR "Donor Registration Number"
-* #DR ^designation[0].language = #nl
-* #DR ^designation[=].use.system = "http://terminology.hl7.org/CodeSystem/designation-usage"
-* #DR ^designation[=].use = http://terminology.hl7.org/CodeSystem/designation-usage#display
-* #DR ^designation[=].value = "Donorregistratienummer"
-* #DS "Discover Card"
-* #DS ^extension[0].url = "http://hl7.org/fhir/StructureDefinition/codesystem-concept-comments"
-* #DS ^extension[=].valueString = "Deprecated and replaced by BC in v 2.5."
-* #DS ^extension[=].valueString.extension[0].url = "http://hl7.org/fhir/StructureDefinition/translation"
-* #DS ^extension[=].valueString.extension[0].extension[0].url = "lang"
-* #DS ^extension[=].valueString.extension[0].extension[=].valueCode = #nl
-* #DS ^extension[=].valueString.extension[0].extension[+].url = "content"
-* #DS ^extension[=].valueString.extension[0].extension[=].valueString = "Vervangen door BC vanaf v2.5"
-* #DS ^designation[0].language = #de
-* #DS ^designation[=].use.system = "http://terminology.hl7.org/CodeSystem/designation-usage"
-* #DS ^designation[=].use = http://terminology.hl7.org/CodeSystem/designation-usage#display
-* #DS ^designation[=].value = "Discover Card"
-* #DS ^designation[+].language = #nl
-* #DS ^designation[=].use.system = "http://terminology.hl7.org/CodeSystem/designation-usage"
-* #DS ^designation[=].use = http://terminology.hl7.org/CodeSystem/designation-usage#display
-* #DS ^designation[=].value = "Discover kaart"
-* #EI "Employee number"
-* #EI ^extension[0].url = "http://hl7.org/fhir/StructureDefinition/codesystem-concept-comments"
-* #EI ^extension[=].valueString = "A number that uniquely identifies an employee to an employer."
-* #EI ^extension[=].valueString.extension[0].url = "http://hl7.org/fhir/StructureDefinition/translation"
-* #EI ^extension[=].valueString.extension[0].extension[0].url = "lang"
-* #EI ^extension[=].valueString.extension[0].extension[=].valueCode = #nl
-* #EI ^extension[=].valueString.extension[0].extension[+].url = "content"
-* #EI ^extension[=].valueString.extension[0].extension[=].valueString = "Een aanduiding die een werknemer uniek identificeert ten opzichte van een werkgever"
-* #EI ^designation[0].language = #de
-* #EI ^designation[=].use.system = "http://terminology.hl7.org/CodeSystem/designation-usage"
-* #EI ^designation[=].use = http://terminology.hl7.org/CodeSystem/designation-usage#display
-* #EI ^designation[=].value = "Arbeitnehmernummer"
-* #EI ^designation[+].language = #nl
-* #EI ^designation[=].use.system = "http://terminology.hl7.org/CodeSystem/designation-usage"
-* #EI ^designation[=].use = http://terminology.hl7.org/CodeSystem/designation-usage#display
-* #EI ^designation[=].value = "Werknemernummer"
-* #EN "Employer number"
-* #EN ^designation[0].language = #de
-* #EN ^designation[=].use.system = "http://terminology.hl7.org/CodeSystem/designation-usage"
-* #EN ^designation[=].use = http://terminology.hl7.org/CodeSystem/designation-usage#display
-* #EN ^designation[=].value = "Arbeitgebernummer"
-* #EN ^designation[+].language = #nl
-* #EN ^designation[=].use.system = "http://terminology.hl7.org/CodeSystem/designation-usage"
-* #EN ^designation[=].use = http://terminology.hl7.org/CodeSystem/designation-usage#display
-* #EN ^designation[=].value = "Werkgevernummer"
-* #ESN "Staff Enterprise Number"
-* #ESN ^extension[0].url = "http://hl7.org/fhir/StructureDefinition/codesystem-concept-comments"
-* #ESN ^extension[=].valueString = "An identifier that is unique to a staff member within an enterprise (as identified by the Assigning Authority)."
-* #ESN ^extension[=].valueString.extension[0].url = "http://hl7.org/fhir/StructureDefinition/translation"
-* #ESN ^extension[=].valueString.extension[0].extension[0].url = "lang"
-* #ESN ^extension[=].valueString.extension[0].extension[=].valueCode = #nl
-* #ESN ^extension[=].valueString.extension[0].extension[+].url = "content"
-* #ESN ^extension[=].valueString.extension[0].extension[=].valueString = "Een aanduiding die een medewerker uniek identificeert binnen een bedrijf (zoals geïdentificeerd door de toekennende autoriteit)"
-* #ESN ^designation[0].language = #nl
-* #ESN ^designation[=].use.system = "http://terminology.hl7.org/CodeSystem/designation-usage"
-* #ESN ^designation[=].use = http://terminology.hl7.org/CodeSystem/designation-usage#display
-* #ESN ^designation[=].value = "Medewerker bedrijfsnummer"
-* #FDR "Fetal Death Report ID"
-* #FDRFN "Fetal Death Report File Number"
-* #FI "Facility ID"
-* #FI ^designation[0].language = #nl
-* #FI ^designation[=].use.system = "http://terminology.hl7.org/CodeSystem/designation-usage"
-* #FI ^designation[=].use = http://terminology.hl7.org/CodeSystem/designation-usage#display
-* #FI ^designation[=].value = "Afdeling-ID"
-* #FILL "Filler Identifier"
-* #GI "Guarantor internal identifier"
-* #GI ^extension[0].url = "http://hl7.org/fhir/StructureDefinition/codesystem-concept-comments"
-* #GI ^extension[=].valueString = "Class: Financial"
-* #GI ^extension[=].valueString.extension[0].url = "http://hl7.org/fhir/StructureDefinition/translation"
-* #GI ^extension[=].valueString.extension[0].extension[0].url = "lang"
-* #GI ^extension[=].valueString.extension[0].extension[=].valueCode = #nl
-* #GI ^extension[=].valueString.extension[0].extension[+].url = "content"
-* #GI ^extension[=].valueString.extension[0].extension[=].valueString = "Klasse: financieel"
-* #GI ^designation[0].language = #de
-* #GI ^designation[=].use.system = "http://terminology.hl7.org/CodeSystem/designation-usage"
-* #GI ^designation[=].use = http://terminology.hl7.org/CodeSystem/designation-usage#display
-* #GI ^designation[=].value = "interne ID des Zahlungspflichtigen"
-* #GI ^designation[+].language = #nl
-* #GI ^designation[=].use.system = "http://terminology.hl7.org/CodeSystem/designation-usage"
-* #GI ^designation[=].use = http://terminology.hl7.org/CodeSystem/designation-usage#display
-* #GI ^designation[=].value = "Interne garantsteller identificatie"
-* #GL "General ledger number"
-* #GL ^extension[0].url = "http://hl7.org/fhir/StructureDefinition/codesystem-concept-comments"
-* #GL ^extension[=].valueString = "Class: Financial"
-* #GL ^extension[=].valueString.extension[0].url = "http://hl7.org/fhir/StructureDefinition/translation"
-* #GL ^extension[=].valueString.extension[0].extension[0].url = "lang"
-* #GL ^extension[=].valueString.extension[0].extension[=].valueCode = #nl
-* #GL ^extension[=].valueString.extension[0].extension[+].url = "content"
-* #GL ^extension[=].valueString.extension[0].extension[=].valueString = "Klasse: financieel"
-* #GL ^designation[0].language = #nl
-* #GL ^designation[=].use.system = "http://terminology.hl7.org/CodeSystem/designation-usage"
-* #GL ^designation[=].use = http://terminology.hl7.org/CodeSystem/designation-usage#display
-* #GL ^designation[=].value = "Grootboeknummer"
-* #GN "Guarantor external  identifier"
-* #GN ^extension[0].url = "http://hl7.org/fhir/StructureDefinition/codesystem-concept-comments"
-* #GN ^extension[=].valueString = "Class: Financial"
-* #GN ^extension[=].valueString.extension[0].url = "http://hl7.org/fhir/StructureDefinition/translation"
-* #GN ^extension[=].valueString.extension[0].extension[0].url = "lang"
-* #GN ^extension[=].valueString.extension[0].extension[=].valueCode = #nl
-* #GN ^extension[=].valueString.extension[0].extension[+].url = "content"
-* #GN ^extension[=].valueString.extension[0].extension[=].valueString = "Klasse: financieel"
-* #GN ^designation[0].language = #de
-* #GN ^designation[=].use.system = "http://terminology.hl7.org/CodeSystem/designation-usage"
-* #GN ^designation[=].use = http://terminology.hl7.org/CodeSystem/designation-usage#display
-* #GN ^designation[=].value = "externe ID des Zahlungspflichtigen"
-* #GN ^designation[+].language = #nl
-* #GN ^designation[=].use.system = "http://terminology.hl7.org/CodeSystem/designation-usage"
-* #GN ^designation[=].use = http://terminology.hl7.org/CodeSystem/designation-usage#display
-* #GN ^designation[=].value = "Externe garantsteller identificatie"
-* #HC "Health Card Number"
-* #HC ^designation[0].language = #nl
-* #HC ^designation[=].use.system = "http://terminology.hl7.org/CodeSystem/designation-usage"
-* #HC ^designation[=].use = http://terminology.hl7.org/CodeSystem/designation-usage#display
-* #HC ^designation[=].value = "Gezondheidskaartnummer"
-* #IND "Indigenous/Aboriginal"
-* #IND ^extension[0].url = "http://hl7.org/fhir/StructureDefinition/codesystem-concept-comments"
-* #IND ^extension[=].valueString = "A number assigned to a member of an indigenous or aboriginal group outside of Canada."
-* #IND ^extension[=].valueString.extension[0].url = "http://hl7.org/fhir/StructureDefinition/translation"
-* #IND ^extension[=].valueString.extension[0].extension[0].url = "lang"
-* #IND ^extension[=].valueString.extension[0].extension[=].valueCode = #nl
-* #IND ^extension[=].valueString.extension[0].extension[+].url = "content"
-* #IND ^extension[=].valueString.extension[0].extension[=].valueString = "Een nummer toegekend aan een lid van een inheemse of aboriginal groep buiten Canada."
-* #IND ^designation[0].language = #nl
-* #IND ^designation[=].use.system = "http://terminology.hl7.org/CodeSystem/designation-usage"
-* #IND ^designation[=].use = http://terminology.hl7.org/CodeSystem/designation-usage#display
-* #IND ^designation[=].value = "Inheems/Aboriginal"
-* #JHN "Jurisdictional health number (Canada)"
-* #JHN ^extension[0].url = "http://hl7.org/fhir/StructureDefinition/codesystem-concept-comments"
-* #JHN ^extension[=].valueString = "Class: Insurance 2 uses: a) UK jurisdictional CHI number; b) Canadian provincial health card number:"
-* #JHN ^extension[=].valueString.extension[0].url = "http://hl7.org/fhir/StructureDefinition/translation"
-* #JHN ^extension[=].valueString.extension[0].extension[0].url = "lang"
-* #JHN ^extension[=].valueString.extension[0].extension[=].valueCode = #nl
-* #JHN ^extension[=].valueString.extension[0].extension[+].url = "content"
-* #JHN ^extension[=].valueString.extension[0].extension[=].valueString = "2 use cases: a) CHI-nummer van rechtsgebied in Verenigd Koninkrijk; b) Canadees provinciaal gezondheidskaartnummer:"
-* #JHN ^designation[0].language = #nl
-* #JHN ^designation[=].use.system = "http://terminology.hl7.org/CodeSystem/designation-usage"
-* #JHN ^designation[=].use = http://terminology.hl7.org/CodeSystem/designation-usage#display
-* #JHN ^designation[=].value = "Rechtsgebied gezondheidsnummer (Canada)"
-* #LACSN "Laboratory Accession ID"
-* #LACSN ^extension[0].url = "http://hl7.org/fhir/StructureDefinition/codesystem-concept-comments"
-* #LACSN ^extension[=].valueString = "A laboratory accession id is used in the laboratory domain. The concept of accession is used in other domains such as radiology, so the LACSN is used to distinguish a lab accession id from an radiology accession id"
-* #LACSN ^extension[=].valueString.extension[0].url = "http://hl7.org/fhir/StructureDefinition/translation"
-* #LACSN ^extension[=].valueString.extension[0].extension[0].url = "lang"
-* #LACSN ^extension[=].valueString.extension[0].extension[=].valueCode = #nl
-* #LACSN ^extension[=].valueString.extension[0].extension[+].url = "content"
-* #LACSN ^extension[=].valueString.extension[0].extension[=].valueString = "Een laboratorium accessie ID wordt gebruikt in het laboratoriumdomein. Het concept accessie wordt ook in andere domeinen gebruikt zoals radiologie, dus de LACSN wordt gebruikt om onderscheid te maken tussen een lab accessie ID en een radiologie accessie ID."
-* #LACSN ^designation[0].language = #nl
-* #LACSN ^designation[=].use.system = "http://terminology.hl7.org/CodeSystem/designation-usage"
-* #LACSN ^designation[=].use = http://terminology.hl7.org/CodeSystem/designation-usage#display
-* #LACSN ^designation[=].value = "Laboratorium Accessie ID"
-* #LANR "Lifelong physician number"
-* #LANR ^extension[0].url = "http://hl7.org/fhir/StructureDefinition/codesystem-concept-comments"
-* #LANR ^extension[=].valueString = "Lebenslange Arztnummer - for use in German realm."
-* #LANR ^extension[=].valueString.extension[0].url = "http://hl7.org/fhir/StructureDefinition/translation"
-* #LANR ^extension[=].valueString.extension[0].extension[0].url = "lang"
-* #LANR ^extension[=].valueString.extension[0].extension[=].valueCode = #nl
-* #LANR ^extension[=].valueString.extension[0].extension[+].url = "content"
-* #LANR ^extension[=].valueString.extension[0].extension[=].valueString = "Lebenslange Artznummer - voor gebruik in Duitse context."
-* #LANR ^designation[0].language = #nl
-* #LANR ^designation[=].use.system = "http://terminology.hl7.org/CodeSystem/designation-usage"
-* #LANR ^designation[=].use = http://terminology.hl7.org/CodeSystem/designation-usage#display
-* #LANR ^designation[=].value = "Levenslang zorgverlenernummer"
-* #LI "Labor and industries number"
-* #LI ^designation[0].language = #nl
-* #LI ^designation[=].use.system = "http://terminology.hl7.org/CodeSystem/designation-usage"
-* #LI ^designation[=].use = http://terminology.hl7.org/CodeSystem/designation-usage#display
-* #LI ^designation[=].value = "Arbeid en industrienummer"
-* #LN "License number"
-* #LN ^designation[0].language = #nl
-* #LN ^designation[=].use.system = "http://terminology.hl7.org/CodeSystem/designation-usage"
-* #LN ^designation[=].use = http://terminology.hl7.org/CodeSystem/designation-usage#display
-* #LN ^designation[=].value = "Licentienummer"
-* #LR "Local Registry ID"
-* #LR ^designation[0].language = #nl
-* #LR ^designation[=].use.system = "http://terminology.hl7.org/CodeSystem/designation-usage"
-* #LR ^designation[=].use = http://terminology.hl7.org/CodeSystem/designation-usage#display
-* #LR ^designation[=].value = "Lokaal register ID"
-* #MA "Patient Medicaid number"
-* #MA ^extension[0].url = "http://hl7.org/fhir/StructureDefinition/codesystem-concept-comments"
-* #MA ^extension[=].valueString = "Class: Insurance"
-* #MA ^extension[=].valueString.extension[0].url = "http://hl7.org/fhir/StructureDefinition/translation"
-* #MA ^extension[=].valueString.extension[0].extension[0].url = "lang"
-* #MA ^extension[=].valueString.extension[0].extension[=].valueCode = #nl
-* #MA ^extension[=].valueString.extension[0].extension[+].url = "content"
-* #MA ^extension[=].valueString.extension[0].extension[=].valueString = "Klasse: verzekering"
-* #MA ^designation[0].language = #de
-* #MA ^designation[=].use.system = "http://terminology.hl7.org/CodeSystem/designation-usage"
-* #MA ^designation[=].use = http://terminology.hl7.org/CodeSystem/designation-usage#display
-* #MA ^designation[=].value = "Armennummer"
-* #MA ^designation[+].language = #nl
-* #MA ^designation[=].use.system = "http://terminology.hl7.org/CodeSystem/designation-usage"
-* #MA ^designation[=].use = http://terminology.hl7.org/CodeSystem/designation-usage#display
-* #MA ^designation[=].value = "Medicaid patiëntnummer"
-* #MB "Member Number"
-* #MB ^extension[0].url = "http://hl7.org/fhir/StructureDefinition/codesystem-concept-comments"
-* #MB ^extension[=].valueString = "An identifier for the insured of an insurance policy (this insured always has a subscriber), usually assigned by the insurance carrier. Use Case: Person is covered by an insurance policy. This person may or may not be the subscriber of the policy."
-* #MB ^extension[=].valueString.extension[0].url = "http://hl7.org/fhir/StructureDefinition/translation"
-* #MB ^extension[=].valueString.extension[0].extension[0].url = "lang"
-* #MB ^extension[=].valueString.extension[0].extension[=].valueCode = #nl
-* #MB ^extension[=].valueString.extension[0].extension[+].url = "content"
-* #MB ^extension[=].valueString.extension[0].extension[=].valueString = "Use case: persoon is gedekt door verzekeringspolis. Deze persoon is mogelijk tevens hoofdpolishouder."
-* #MB ^designation[0].language = #nl
-* #MB ^designation[=].use.system = "http://terminology.hl7.org/CodeSystem/designation-usage"
-* #MB ^designation[=].use = http://terminology.hl7.org/CodeSystem/designation-usage#display
-* #MB ^designation[=].value = "Lidnummer"
-* #MC "Patient's Medicare number"
-* #MC ^extension[0].url = "http://hl7.org/fhir/StructureDefinition/codesystem-concept-comments"
-* #MC ^extension[=].valueString = "Class: Insurance"
-* #MC ^extension[=].valueString.extension[0].url = "http://hl7.org/fhir/StructureDefinition/translation"
-* #MC ^extension[=].valueString.extension[0].extension[0].url = "lang"
-* #MC ^extension[=].valueString.extension[0].extension[=].valueCode = #nl
-* #MC ^extension[=].valueString.extension[0].extension[+].url = "content"
-* #MC ^extension[=].valueString.extension[0].extension[=].valueString = "Klasse: verzekering"
-* #MC ^designation[0].language = #de
-* #MC ^designation[=].use.system = "http://terminology.hl7.org/CodeSystem/designation-usage"
-* #MC ^designation[=].use = http://terminology.hl7.org/CodeSystem/designation-usage#display
-* #MC ^designation[=].value = "Rentnernummer"
-* #MC ^designation[+].language = #nl
-* #MC ^designation[=].use.system = "http://terminology.hl7.org/CodeSystem/designation-usage"
-* #MC ^designation[=].use = http://terminology.hl7.org/CodeSystem/designation-usage#display
-* #MC ^designation[=].value = "Medicare patiëntnummer"
-* #MCD "Practitioner Medicaid number"
-* #MCD ^extension[0].url = "http://hl7.org/fhir/StructureDefinition/codesystem-concept-comments"
-* #MCD ^extension[=].valueString = "Class: Insurance"
-* #MCD ^extension[=].valueString.extension[0].url = "http://hl7.org/fhir/StructureDefinition/translation"
-* #MCD ^extension[=].valueString.extension[0].extension[0].url = "lang"
-* #MCD ^extension[=].valueString.extension[0].extension[=].valueCode = #nl
-* #MCD ^extension[=].valueString.extension[0].extension[+].url = "content"
-* #MCD ^extension[=].valueString.extension[0].extension[=].valueString = "Klasse: verzekering"
-* #MCD ^designation[0].language = #nl
-* #MCD ^designation[=].use.system = "http://terminology.hl7.org/CodeSystem/designation-usage"
-* #MCD ^designation[=].use = http://terminology.hl7.org/CodeSystem/designation-usage#display
-* #MCD ^designation[=].value = "Medicaid zorgverlenernummer"
-* #MCN "Microchip Number"
-* #MCN ^designation[0].language = #nl
-* #MCN ^designation[=].use.system = "http://terminology.hl7.org/CodeSystem/designation-usage"
-* #MCN ^designation[=].use = http://terminology.hl7.org/CodeSystem/designation-usage#display
-* #MCN ^designation[=].value = "Microchip-nummer"
-* #MCR "Practitioner Medicare number"
-* #MCR ^extension[0].url = "http://hl7.org/fhir/StructureDefinition/codesystem-concept-comments"
-* #MCR ^extension[=].valueString = "Class: Insurance"
-* #MCR ^extension[=].valueString.extension[0].url = "http://hl7.org/fhir/StructureDefinition/translation"
-* #MCR ^extension[=].valueString.extension[0].extension[0].url = "lang"
-* #MCR ^extension[=].valueString.extension[0].extension[=].valueCode = #nl
-* #MCR ^extension[=].valueString.extension[0].extension[+].url = "content"
-* #MCR ^extension[=].valueString.extension[0].extension[=].valueString = "Klasse: verzekering"
-* #MCR ^designation[0].language = #nl
-* #MCR ^designation[=].use.system = "http://terminology.hl7.org/CodeSystem/designation-usage"
-* #MCR ^designation[=].use = http://terminology.hl7.org/CodeSystem/designation-usage#display
-* #MCR ^designation[=].value = "Medicare zorgverlenernummer"
-* #MCT "Marriage Certificate"
-* #MCT ^extension[0].url = "http://hl7.org/fhir/StructureDefinition/codesystem-concept-comments"
-* #MCT ^extension[=].valueString = "A number associated with a document identifying the event of a person's marriage."
-* #MCT ^extension[=].valueString.extension[0].url = "http://hl7.org/fhir/StructureDefinition/translation"
-* #MCT ^extension[=].valueString.extension[0].extension[0].url = "lang"
-* #MCT ^extension[=].valueString.extension[0].extension[=].valueCode = #nl
-* #MCT ^extension[=].valueString.extension[0].extension[+].url = "content"
-* #MCT ^extension[=].valueString.extension[0].extension[=].valueString = "Een identificatie gekoppeld aan een document dat het huwelijk van een persoon aantoont."
-* #MCT ^designation[0].language = #nl
-* #MCT ^designation[=].use.system = "http://terminology.hl7.org/CodeSystem/designation-usage"
-* #MCT ^designation[=].use = http://terminology.hl7.org/CodeSystem/designation-usage#display
-* #MCT ^designation[=].value = "Huwelijkscertificaat"
-* #MD "Medical License number"
-* #MD ^extension[0].url = "http://hl7.org/fhir/StructureDefinition/codesystem-concept-comments"
-* #MD ^extension[=].valueString = "An identifier that is unique to a medical doctor within the jurisdiction of a licensing board. Use Case: These license numbers are sometimes used as identifiers. In some states, the same authority issues all three identifiers, e.g., medical, osteopathic, and physician assistant licenses all issued by one state medical board. For this case, the CX data type requires distinct identifier types to accurately interpret component 1. Additionally, the distinction among these license types is critical in most health care settings (this is not to convey full licensing information, which requires a segment to support all related attributes)."
-* #MD ^extension[=].valueString.extension[0].url = "http://hl7.org/fhir/StructureDefinition/translation"
-* #MD ^extension[=].valueString.extension[0].extension[0].url = "lang"
-* #MD ^extension[=].valueString.extension[0].extension[=].valueCode = #nl
-* #MD ^extension[=].valueString.extension[0].extension[+].url = "content"
-* #MD ^extension[=].valueString.extension[0].extension[=].valueString = "Een identificatie die unieke is voor een arts binnen het rechtsgebied van een licentiegever. Use case: deze licentienummers worden soms gebruikt ter identificatie. In sommige staten, geeft dezelfde autoriteit alle drie identificaties uit, bijv. medisch, osteopathisch, en arts-assistent licenties die alle worden uitgegeven door één overheidsinstantie. Voor dit geval vereist het CX datatype afzonderlijke identificatietypen om component 1 te kunnen interpreteren. Daarnaast is onderscheid tussen deze licentietypen essentieel in de meeste zorgsituaties (niet om volledige licentie-informatie door te geven, waarvoor een segment voor alle gerelateerde attributen nodig zou zijn)."
-* #MD ^designation[0].language = #nl
-* #MD ^designation[=].use.system = "http://terminology.hl7.org/CodeSystem/designation-usage"
-* #MD ^designation[=].use = http://terminology.hl7.org/CodeSystem/designation-usage#display
-* #MD ^designation[=].value = "Geneeskundig licentienummer"
-* #MI "Military ID number"
-* #MI ^extension[0].url = "http://hl7.org/fhir/StructureDefinition/codesystem-concept-comments"
-* #MI ^extension[=].valueString = "A number assigned to an individual who has had military duty, but is not currently on active duty. The number is assigned by the DOD or Veterans' Affairs (VA)."
-* #MI ^extension[=].valueString.extension[0].url = "http://hl7.org/fhir/StructureDefinition/translation"
-* #MI ^extension[=].valueString.extension[0].extension[0].url = "lang"
-* #MI ^extension[=].valueString.extension[0].extension[=].valueCode = #nl
-* #MI ^extension[=].valueString.extension[0].extension[+].url = "content"
-* #MI ^extension[=].valueString.extension[0].extension[=].valueString = "Een identificatie toegekend aan een persoon die in militaire dienst is geweest, maar op dit moment niet in actieve dienst. Het nummer wordt toegekend door de Amerikaanse Department of Defense (DOD) of Veteran's Affairs (VA)."
-* #MI ^designation[0].language = #nl
-* #MI ^designation[=].use.system = "http://terminology.hl7.org/CodeSystem/designation-usage"
-* #MI ^designation[=].use = http://terminology.hl7.org/CodeSystem/designation-usage#display
-* #MI ^designation[=].value = "Militaire identificatie"
-* #MR "Medical record number"
-* #MR ^extension[0].url = "http://hl7.org/fhir/StructureDefinition/codesystem-concept-comments"
-* #MR ^extension[=].valueString = "An identifier that is unique to a patient within a set of medical records, not necessarily unique within an application."
-* #MR ^extension[=].valueString.extension[0].url = "http://hl7.org/fhir/StructureDefinition/translation"
-* #MR ^extension[=].valueString.extension[0].extension[0].url = "lang"
-* #MR ^extension[=].valueString.extension[0].extension[=].valueCode = #nl
-* #MR ^extension[=].valueString.extension[0].extension[+].url = "content"
-* #MR ^extension[=].valueString.extension[0].extension[=].valueString = "Een identificatie gekoppeld aan een patiënt binnen een set van medische dossiers, niet noodzakelijk uniek binnen een applicatie."
-* #MR ^designation[0].language = #de
-* #MR ^designation[=].use.system = "http://terminology.hl7.org/CodeSystem/designation-usage"
-* #MR ^designation[=].use = http://terminology.hl7.org/CodeSystem/designation-usage#display
-* #MR ^designation[=].value = "Krankenaktennummer"
-* #MR ^designation[+].language = #nl
-* #MR ^designation[=].use.system = "http://terminology.hl7.org/CodeSystem/designation-usage"
-* #MR ^designation[=].use = http://terminology.hl7.org/CodeSystem/designation-usage#display
-* #MR ^designation[=].value = "Medisch dossiernummer"
-* #MRT "Temporary Medical Record Number"
-* #MRT ^extension[0].url = "http://hl7.org/fhir/StructureDefinition/codesystem-concept-comments"
-* #MRT ^extension[=].valueString = "Temporary version of a Medical Record Number Use Case: An ancillary system that does not normally assign medical record numbers is the first time to register a patient. This ancillary system will generate a temporary medical record number that will only be used until an official medical record number is assigned."
-* #MRT ^extension[=].valueString.extension[0].url = "http://hl7.org/fhir/StructureDefinition/translation"
-* #MRT ^extension[=].valueString.extension[0].extension[0].url = "lang"
-* #MRT ^extension[=].valueString.extension[0].extension[=].valueCode = #nl
-* #MRT ^extension[=].valueString.extension[0].extension[+].url = "content"
-* #MRT ^extension[=].valueString.extension[0].extension[=].valueString = "Use case: een satellietsysteem dat normaal geen medische dossiernummer toekent is het eerste systeem waar een patiënt wordt geregistreerd. Dit satellietsysteem geeft een tijdelijk medisch dossiernummer uit dat alleen wordt gebruikt totdat het officiële medisch dossiernummer wordt toegekend."
-* #MRT ^designation[0].language = #nl
-* #MRT ^designation[=].use.system = "http://terminology.hl7.org/CodeSystem/designation-usage"
-* #MRT ^designation[=].use = http://terminology.hl7.org/CodeSystem/designation-usage#display
-* #MRT ^designation[=].value = "Tijdelijke medisch dossiernummer"
-* #MS "MasterCard"
-* #MS ^extension[0].url = "http://hl7.org/fhir/StructureDefinition/codesystem-concept-comments"
-* #MS ^extension[=].valueString = "Deprecated and replaced by BC in v 2.5."
-* #MS ^extension[=].valueString.extension[0].url = "http://hl7.org/fhir/StructureDefinition/translation"
-* #MS ^extension[=].valueString.extension[0].extension[0].url = "lang"
-* #MS ^extension[=].valueString.extension[0].extension[=].valueCode = #nl
-* #MS ^extension[=].valueString.extension[0].extension[+].url = "content"
-* #MS ^extension[=].valueString.extension[0].extension[=].valueString = "Vervangen door BC vanaf v2.5"
-* #MS ^designation[0].language = #de
-* #MS ^designation[=].use.system = "http://terminology.hl7.org/CodeSystem/designation-usage"
-* #MS ^designation[=].use = http://terminology.hl7.org/CodeSystem/designation-usage#display
-* #MS ^designation[=].value = "MasterCard"
-* #MS ^designation[+].language = #nl
-* #MS ^designation[=].use.system = "http://terminology.hl7.org/CodeSystem/designation-usage"
-* #MS ^designation[=].use = http://terminology.hl7.org/CodeSystem/designation-usage#display
-* #MS ^designation[=].value = "MasterCard"
-* #NBSNR "Secondary physician office number"
-* #NBSNR ^extension[0].url = "http://hl7.org/fhir/StructureDefinition/codesystem-concept-comments"
-* #NBSNR ^extension[=].valueString = "Nebenbetriebsstättennummer - for use in the German realm."
-* #NBSNR ^extension[=].valueString.extension[0].url = "http://hl7.org/fhir/StructureDefinition/translation"
-* #NBSNR ^extension[=].valueString.extension[0].extension[0].url = "lang"
-* #NBSNR ^extension[=].valueString.extension[0].extension[=].valueCode = #nl
-* #NBSNR ^extension[=].valueString.extension[0].extension[+].url = "content"
-* #NBSNR ^extension[=].valueString.extension[0].extension[=].valueString = "Nebenbetriebsstättennummer - voor gebruik in Duitse context."
-* #NBSNR ^designation[0].language = #nl
-* #NBSNR ^designation[=].use.system = "http://terminology.hl7.org/CodeSystem/designation-usage"
-* #NBSNR ^designation[=].use = http://terminology.hl7.org/CodeSystem/designation-usage#display
-* #NBSNR ^designation[=].value = "Secundaire zorgverlenerpraktijknummer"
-* #NCT "Naturalization Certificate"
-* #NCT ^extension[0].url = "http://hl7.org/fhir/StructureDefinition/codesystem-concept-comments"
-* #NCT ^extension[=].valueString = "A number associated with a document identifying a person's retention of citizenship in a particular country."
-* #NCT ^extension[=].valueString.extension[0].url = "http://hl7.org/fhir/StructureDefinition/translation"
-* #NCT ^extension[=].valueString.extension[0].extension[0].url = "lang"
-* #NCT ^extension[=].valueString.extension[0].extension[=].valueCode = #nl
-* #NCT ^extension[=].valueString.extension[0].extension[+].url = "content"
-* #NCT ^extension[=].valueString.extension[0].extension[=].valueString = "Een identificatie gekoppeld aan een document dat het verwerven van staatburgerschap in een bepaald land aantoont."
-* #NCT ^designation[0].language = #nl
-* #NCT ^designation[=].use.system = "http://terminology.hl7.org/CodeSystem/designation-usage"
-* #NCT ^designation[=].use = http://terminology.hl7.org/CodeSystem/designation-usage#display
-* #NCT ^designation[=].value = "Naturalisatiecertificaat"
-* #NE "National employer identifier"
-* #NE ^extension[0].url = "http://hl7.org/fhir/StructureDefinition/codesystem-concept-comments"
-* #NE ^extension[=].valueString = "In the US, the Assigning Authority for this value is typically CMS, but it may be used by all providers and insurance companies in HIPAA related transactions."
-* #NE ^extension[=].valueString.extension[0].url = "http://hl7.org/fhir/StructureDefinition/translation"
-* #NE ^extension[=].valueString.extension[0].extension[0].url = "lang"
-* #NE ^extension[=].valueString.extension[0].extension[=].valueCode = #nl
-* #NE ^extension[=].valueString.extension[0].extension[+].url = "content"
-* #NE ^extension[=].valueString.extension[0].extension[=].valueString = "In de VS is de toekennende autoriteit voor deze waarde meestal CMS, maar het kan worden gebruikt voor alle zorgaanbieders/zorverleners en verzekeraars in HIPAA gerelateerde transacties."
-* #NE ^designation[0].language = #nl
-* #NE ^designation[=].use.system = "http://terminology.hl7.org/CodeSystem/designation-usage"
-* #NE ^designation[=].use = http://terminology.hl7.org/CodeSystem/designation-usage#display
-* #NE ^designation[=].value = "Nationale werkgeveridentificatie"
-* #NH "National Health Plan Identifier"
-* #NH ^extension[0].url = "http://hl7.org/fhir/StructureDefinition/codesystem-concept-comments"
-* #NH ^extension[=].valueString = "Class: Insurance Used for the UK NHS national identifier. In the US, the Assigning Authority for this value is typically CMS, but it may be used by all providers and insurance companies in HIPAA related transactions."
-* #NH ^extension[=].valueString.extension[0].url = "http://hl7.org/fhir/StructureDefinition/translation"
-* #NH ^extension[=].valueString.extension[0].extension[0].url = "lang"
-* #NH ^extension[=].valueString.extension[0].extension[=].valueCode = #nl
-* #NH ^extension[=].valueString.extension[0].extension[+].url = "content"
-* #NH ^extension[=].valueString.extension[0].extension[=].valueString = "Ten behoeve de NHS nationale identificatie in het Verenigd Koninkrijk"
-* #NH ^designation[0].language = #nl
-* #NH ^designation[=].use.system = "http://terminology.hl7.org/CodeSystem/designation-usage"
-* #NH ^designation[=].use = http://terminology.hl7.org/CodeSystem/designation-usage#display
-* #NH ^designation[=].value = "Nationaal zorgverzekeringsnummer"
-* #NI "National unique individual identifier"
-* #NI ^extension[0].url = "http://hl7.org/fhir/StructureDefinition/codesystem-concept-comments"
-* #NI ^extension[=].valueString = "Class: Insurance In the US, the Assigning Authority for this value is typically CMS, but it may be used by all providers and insurance companies in HIPAA related transactions."
-* #NI ^extension[=].valueString.extension[0].url = "http://hl7.org/fhir/StructureDefinition/translation"
-* #NI ^extension[=].valueString.extension[0].extension[0].url = "lang"
-* #NI ^extension[=].valueString.extension[0].extension[=].valueCode = #nl
-* #NI ^extension[=].valueString.extension[0].extension[+].url = "content"
-* #NI ^extension[=].valueString.extension[0].extension[=].valueString = "In de VS is de toekennende autoriteit voor deze waarde normalerwijs CMS, maar het kan door alle zorgaanbieders en verzekeraars worden gebruikt in HIPAA-gerelateerde transacties."
-* #NI ^designation[0].language = #nl
-* #NI ^designation[=].use.system = "http://terminology.hl7.org/CodeSystem/designation-usage"
-* #NI ^designation[=].use = http://terminology.hl7.org/CodeSystem/designation-usage#display
-* #NI ^designation[=].value = "Nationale unieke identificatie persoon"
-* #NII "National Insurance Organization Identifier"
-* #NII ^extension[0].url = "http://hl7.org/fhir/StructureDefinition/codesystem-concept-comments"
-* #NII ^extension[=].valueString = "Class: Insurance In Germany a national identifier for an insurance company. It is printed on the insurance card (health card). It is not to be confused with the health card number itself. Krankenkassen-ID der KV-Karte"
-* #NII ^extension[=].valueString.extension[0].url = "http://hl7.org/fhir/StructureDefinition/translation"
-* #NII ^extension[=].valueString.extension[0].extension[0].url = "lang"
-* #NII ^extension[=].valueString.extension[0].extension[=].valueCode = #nl
-* #NII ^extension[=].valueString.extension[0].extension[+].url = "content"
-* #NII ^extension[=].valueString.extension[0].extension[=].valueString = "Klasse: verzekering. In Duitsland is dit een nationale identificatie voor een verzekeraar. Deze staat op de verzekeringskaart. De identificatie moet niet worden verward met het kaartnummer zelf. Krankenkassen-ID der KV-Karte"
-* #NII ^designation[0].language = #de
-* #NII ^designation[=].use.system = "http://terminology.hl7.org/CodeSystem/designation-usage"
-* #NII ^designation[=].use = http://terminology.hl7.org/CodeSystem/designation-usage#display
-* #NII ^designation[=].value = "Institutskennzeichen der Krankenkasse"
-* #NII ^designation[+].language = #nl
-* #NII ^designation[=].use.system = "http://terminology.hl7.org/CodeSystem/designation-usage"
-* #NII ^designation[=].use = http://terminology.hl7.org/CodeSystem/designation-usage#display
-* #NII ^designation[=].value = "Nationale verzekeraar identificatie"
-* #NIIP "National Insurance Payor Identifier (Payor)"
-* #NIIP ^extension[0].url = "http://hl7.org/fhir/StructureDefinition/codesystem-concept-comments"
-* #NIIP ^extension[=].valueString = "Class: Insurance In Germany the insurance identifier addressed as the payor. Krankenkassen-ID des Rechnungsempfängers Use case: a subdivision issues the card with their identifier, but the main division is going to pay the invoices."
-* #NIIP ^extension[=].valueString.extension[0].url = "http://hl7.org/fhir/StructureDefinition/translation"
-* #NIIP ^extension[=].valueString.extension[0].extension[0].url = "lang"
-* #NIIP ^extension[=].valueString.extension[0].extension[=].valueCode = #nl
-* #NIIP ^extension[=].valueString.extension[0].extension[+].url = "content"
-* #NIIP ^extension[=].valueString.extension[0].extension[=].valueString = "Klasse: verzekering. In Duitsland is dit een nationale identificatie voor een betaler. Krankenkassen-ID des Rechnungsempfängers. Use case: een subdivisie geeft een kaart af met deze identificatie, maar de hoofddivisie betaalt de facturen."
-* #NIIP ^designation[0].language = #de
-* #NIIP ^designation[=].use.system = "http://terminology.hl7.org/CodeSystem/designation-usage"
-* #NIIP ^designation[=].use = http://terminology.hl7.org/CodeSystem/designation-usage#display
-* #NIIP ^designation[=].value = "Vertragskassennummer (VKNR)"
-* #NIIP ^designation[+].language = #nl
-* #NIIP ^designation[=].use.system = "http://terminology.hl7.org/CodeSystem/designation-usage"
-* #NIIP ^designation[=].use = http://terminology.hl7.org/CodeSystem/designation-usage#display
-* #NIIP ^designation[=].value = "Nationale verzekeraar betaler identificatie (Betaler)"
-* #NNxxx "National Person Identifier where the xxx is the ISO table 3166 3-character (alphabetic) country code"
-* #NNxxx ^designation[0].language = #nl
-* #NNxxx ^designation[=].use.system = "http://terminology.hl7.org/CodeSystem/designation-usage"
-* #NNxxx ^designation[=].use = http://terminology.hl7.org/CodeSystem/designation-usage#display
-* #NNxxx ^designation[=].value = "Nationale persoonsidentificatie waarbij xxx de ISO-tabel 3166 3-tekens (alfabetisch) landcode is"
-* #NP "Nurse practitioner number"
-* #NP ^extension[0].url = "http://hl7.org/fhir/StructureDefinition/codesystem-concept-comments"
-* #NP ^extension[=].valueString = "An identifier that is unique to a nurse practitioner within the jurisdiction of a certifying board."
-* #NP ^extension[=].valueString.extension[0].url = "http://hl7.org/fhir/StructureDefinition/translation"
-* #NP ^extension[=].valueString.extension[0].extension[0].url = "lang"
-* #NP ^extension[=].valueString.extension[0].extension[=].valueCode = #nl
-* #NP ^extension[=].valueString.extension[0].extension[+].url = "content"
-* #NP ^extension[=].valueString.extension[0].extension[=].valueString = "Een identificatie die uniek is voor een nurse practitioner binnen het rechtsgebied van een certificeringsinstantie"
-* #NP ^designation[0].language = #nl
-* #NP ^designation[=].use.system = "http://terminology.hl7.org/CodeSystem/designation-usage"
-* #NP ^designation[=].use = http://terminology.hl7.org/CodeSystem/designation-usage#display
-* #NP ^designation[=].value = "Nurse practitioner nummer"
-* #NPI "National provider identifier"
-* #NPI ^extension[0].url = "http://hl7.org/fhir/StructureDefinition/codesystem-concept-comments"
-* #NPI ^extension[=].valueString = "Class: Insurance In the US, the Assigning Authority for this value is typically CMS, but it may be used by all providers and insurance companies in HIPAA related transactions."
-* #NPI ^extension[=].valueString.extension[0].url = "http://hl7.org/fhir/StructureDefinition/translation"
-* #NPI ^extension[=].valueString.extension[0].extension[0].url = "lang"
-* #NPI ^extension[=].valueString.extension[0].extension[=].valueCode = #nl
-* #NPI ^extension[=].valueString.extension[0].extension[+].url = "content"
-* #NPI ^extension[=].valueString.extension[0].extension[=].valueString = "Klasse: verzekering. UZI-nummer."
-* #NPI ^designation[0].language = #nl
-* #NPI ^designation[=].use.system = "http://terminology.hl7.org/CodeSystem/designation-usage"
-* #NPI ^designation[=].use = http://terminology.hl7.org/CodeSystem/designation-usage#display
-* #NPI ^designation[=].value = "Nationale zorgaanbieder/zorgverlener identificatie"
-* #OBI "Observation Instance Identifier"
-* #OD "Optometrist license number"
-* #OD ^extension[0].url = "http://hl7.org/fhir/StructureDefinition/codesystem-concept-comments"
-* #OD ^extension[=].valueString = "A number that is unique to an individual optometrist within the jurisdiction of the licensing board."
-* #OD ^extension[=].valueString.extension[0].url = "http://hl7.org/fhir/StructureDefinition/translation"
-* #OD ^extension[=].valueString.extension[0].extension[0].url = "lang"
-* #OD ^extension[=].valueString.extension[0].extension[=].valueCode = #nl
-* #OD ^extension[=].valueString.extension[0].extension[+].url = "content"
-* #OD ^extension[=].valueString.extension[0].extension[=].valueString = "Een identificatie die uniek is voor een optometrist binnen het rechtsgebied van een certificeringsinstantie"
-* #OD ^designation[0].language = #nl
-* #OD ^designation[=].use.system = "http://terminology.hl7.org/CodeSystem/designation-usage"
-* #OD ^designation[=].use = http://terminology.hl7.org/CodeSystem/designation-usage#display
-* #OD ^designation[=].value = "Optometrist nummer"
-* #PA "Physician Assistant number"
-* #PA ^extension[0].url = "http://hl7.org/fhir/StructureDefinition/codesystem-concept-comments"
-* #PA ^extension[=].valueString = "An identifier that is unique to a physician assistant within the jurisdiction of a licensing board"
-* #PA ^extension[=].valueString.extension[0].url = "http://hl7.org/fhir/StructureDefinition/translation"
-* #PA ^extension[=].valueString.extension[0].extension[0].url = "lang"
-* #PA ^extension[=].valueString.extension[0].extension[=].valueCode = #nl
-* #PA ^extension[=].valueString.extension[0].extension[+].url = "content"
-* #PA ^extension[=].valueString.extension[0].extension[=].valueString = "Een identificatie die uniek is voor een zorgverlener binnen het rechtsgebied van een certificeringsinstantie"
-* #PA ^designation[0].language = #de
-* #PA ^designation[=].use.system = "http://terminology.hl7.org/CodeSystem/designation-usage"
-* #PA ^designation[=].use = http://terminology.hl7.org/CodeSystem/designation-usage#display
-* #PA ^designation[=].value = "Assistenzarztnummer"
-* #PA ^designation[+].language = #nl
-* #PA ^designation[=].use.system = "http://terminology.hl7.org/CodeSystem/designation-usage"
-* #PA ^designation[=].use = http://terminology.hl7.org/CodeSystem/designation-usage#display
-* #PA ^designation[=].value = "Zorgverlener nummer"
-* #PC "Parole Card"
-* #PC ^extension[0].url = "http://hl7.org/fhir/StructureDefinition/codesystem-concept-comments"
-* #PC ^extension[=].valueString = "A number identifying a person on parole."
-* #PC ^extension[=].valueString.extension[0].url = "http://hl7.org/fhir/StructureDefinition/translation"
-* #PC ^extension[=].valueString.extension[0].extension[0].url = "lang"
-* #PC ^extension[=].valueString.extension[0].extension[=].valueCode = #nl
-* #PC ^extension[=].valueString.extension[0].extension[+].url = "content"
-* #PC ^extension[=].valueString.extension[0].extension[=].valueString = "Een identificatie van een persoon die subject is van reclassering"
-* #PC ^designation[0].language = #nl
-* #PC ^designation[=].use.system = "http://terminology.hl7.org/CodeSystem/designation-usage"
-* #PC ^designation[=].use = http://terminology.hl7.org/CodeSystem/designation-usage#display
-* #PC ^designation[=].value = "Reclasseringskaart"
-* #PCN "Penitentiary/correctional institution Number"
-* #PCN ^extension[0].url = "http://hl7.org/fhir/StructureDefinition/codesystem-concept-comments"
-* #PCN ^extension[=].valueString = "A number assigned to individual who is incarcerated."
-* #PCN ^extension[=].valueString.extension[0].url = "http://hl7.org/fhir/StructureDefinition/translation"
-* #PCN ^extension[=].valueString.extension[0].extension[0].url = "lang"
-* #PCN ^extension[=].valueString.extension[0].extension[=].valueCode = #nl
-* #PCN ^extension[=].valueString.extension[0].extension[+].url = "content"
-* #PCN ^extension[=].valueString.extension[0].extension[=].valueString = "Een identificatie toegekend aan een persoon die inbewaringgesteld/gevangengezet is"
-* #PCN ^designation[0].language = #nl
-* #PCN ^designation[=].use.system = "http://terminology.hl7.org/CodeSystem/designation-usage"
-* #PCN ^designation[=].use = http://terminology.hl7.org/CodeSystem/designation-usage#display
-* #PCN ^designation[=].value = "Penitentiaire instellings-nummer"
-* #PE "Living Subject Enterprise Number"
-* #PE ^extension[0].url = "http://hl7.org/fhir/StructureDefinition/codesystem-concept-comments"
-* #PE ^extension[=].valueString = "An identifier that is unique to a living subject within an enterprise (as identified by the Assigning Authority)."
-* #PE ^extension[=].valueString.extension[0].url = "http://hl7.org/fhir/StructureDefinition/translation"
-* #PE ^extension[=].valueString.extension[0].extension[0].url = "lang"
-* #PE ^extension[=].valueString.extension[0].extension[=].valueCode = #nl
-* #PE ^extension[=].valueString.extension[0].extension[+].url = "content"
-* #PE ^extension[=].valueString.extension[0].extension[=].valueString = "Een identificatie die uniek is voor een levend wezen binnen een bedrijf (zoals geïdentificeerd door de toekennende autoriteit)."
-* #PE ^designation[0].language = #nl
-* #PE ^designation[=].use.system = "http://terminology.hl7.org/CodeSystem/designation-usage"
-* #PE ^designation[=].use = http://terminology.hl7.org/CodeSystem/designation-usage#display
-* #PE ^designation[=].value = "Levend wezen bedrijfs-nummer"
-* #PEN "Pension Number"
-* #PEN ^designation[0].language = #nl
-* #PEN ^designation[=].use.system = "http://terminology.hl7.org/CodeSystem/designation-usage"
-* #PEN ^designation[=].use = http://terminology.hl7.org/CodeSystem/designation-usage#display
-* #PEN ^designation[=].value = "Pensioennummer"
-* #PHC "Public Health Case Identifier"
-* #PHE "Public Health Event Identifier"
-* #PHO "Public Health Official ID"
-* #PI "Patient internal identifier"
-* #PI ^extension[0].url = "http://hl7.org/fhir/StructureDefinition/codesystem-concept-comments"
-* #PI ^extension[=].valueString = "A number that is unique to a patient within an Assigning Authority."
-* #PI ^extension[=].valueString.extension[0].url = "http://hl7.org/fhir/StructureDefinition/translation"
-* #PI ^extension[=].valueString.extension[0].extension[0].url = "lang"
-* #PI ^extension[=].valueString.extension[0].extension[=].valueCode = #nl
-* #PI ^extension[=].valueString.extension[0].extension[+].url = "content"
-* #PI ^extension[=].valueString.extension[0].extension[=].valueString = "Een identificatie die uniek is voor een patiënt binnen een toekennende autoriteit."
-* #PI ^designation[0].language = #de
-* #PI ^designation[=].use.system = "http://terminology.hl7.org/CodeSystem/designation-usage"
-* #PI ^designation[=].use = http://terminology.hl7.org/CodeSystem/designation-usage#display
-* #PI ^designation[=].value = "interne Patienten-ID"
-* #PI ^designation[+].language = #nl
-* #PI ^designation[=].use.system = "http://terminology.hl7.org/CodeSystem/designation-usage"
-* #PI ^designation[=].use = http://terminology.hl7.org/CodeSystem/designation-usage#display
-* #PI ^designation[=].value = "Intern patiëntnummer"
-* #PLAC "Placer Identifier"
-* #PN "Person number"
-* #PN ^extension[0].url = "http://hl7.org/fhir/StructureDefinition/codesystem-concept-comments"
-* #PN ^extension[=].valueString = "A number that is unique to a living subject within an Assigning Authority."
-* #PN ^extension[=].valueString.extension[0].url = "http://hl7.org/fhir/StructureDefinition/translation"
-* #PN ^extension[=].valueString.extension[0].extension[0].url = "lang"
-* #PN ^extension[=].valueString.extension[0].extension[=].valueCode = #nl
-* #PN ^extension[=].valueString.extension[0].extension[+].url = "content"
-* #PN ^extension[=].valueString.extension[0].extension[=].valueString = "Een identificatie die uniek is voor een levend wezen binnen een toekennende autoriteit."
-* #PN ^designation[0].language = #de
-* #PN ^designation[=].use.system = "http://terminology.hl7.org/CodeSystem/designation-usage"
-* #PN ^designation[=].use = http://terminology.hl7.org/CodeSystem/designation-usage#display
-* #PN ^designation[=].value = "Personen-ID"
-* #PN ^designation[+].language = #nl
-* #PN ^designation[=].use.system = "http://terminology.hl7.org/CodeSystem/designation-usage"
-* #PN ^designation[=].use = http://terminology.hl7.org/CodeSystem/designation-usage#display
-* #PN ^designation[=].value = "Persoonsnummer"
-* #PNT "Temporary Living Subject Number"
-* #PNT ^extension[0].url = "http://hl7.org/fhir/StructureDefinition/codesystem-concept-comments"
-* #PNT ^extension[=].valueString = "Temporary version of a Lining Subject Number."
-* #PNT ^extension[=].valueString.extension[0].url = "http://hl7.org/fhir/StructureDefinition/translation"
-* #PNT ^extension[=].valueString.extension[0].extension[0].url = "lang"
-* #PNT ^extension[=].valueString.extension[0].extension[=].valueCode = #nl
-* #PNT ^extension[=].valueString.extension[0].extension[+].url = "content"
-* #PNT ^extension[=].valueString.extension[0].extension[=].valueString = "Tijdelijke versie van een Levend wezen nummer"
-* #PNT ^designation[0].language = #nl
-* #PNT ^designation[=].use.system = "http://terminology.hl7.org/CodeSystem/designation-usage"
-* #PNT ^designation[=].use = http://terminology.hl7.org/CodeSystem/designation-usage#display
-* #PNT ^designation[=].value = "Tijdelijk levend wezen nummer"
-* #PPIN "Medicare/CMS Performing Provider Identification Number"
-* #PPIN ^extension[0].url = "http://hl7.org/fhir/StructureDefinition/codesystem-concept-comments"
-* #PPIN ^extension[=].valueString = "Class:  Insurance"
-* #PPIN ^extension[=].valueString.extension[0].url = "http://hl7.org/fhir/StructureDefinition/translation"
-* #PPIN ^extension[=].valueString.extension[0].extension[0].url = "lang"
-* #PPIN ^extension[=].valueString.extension[0].extension[=].valueCode = #nl
-* #PPIN ^extension[=].valueString.extension[0].extension[+].url = "content"
-* #PPIN ^extension[=].valueString.extension[0].extension[=].valueString = "Klasse: verzekering"
-* #PPIN ^designation[0].language = #nl
-* #PPIN ^designation[=].use.system = "http://terminology.hl7.org/CodeSystem/designation-usage"
-* #PPIN ^designation[=].use = http://terminology.hl7.org/CodeSystem/designation-usage#display
-* #PPIN ^designation[=].value = "Medicare/CMS Uitvoerende zorgaanbieder/zorgverlener identificatienummer"
-* #PPN "Passport number"
-* #PPN ^extension[0].url = "http://hl7.org/fhir/StructureDefinition/codesystem-concept-comments"
-* #PPN ^extension[=].valueString = "A unique number assigned to the document affirming that a person is a citizen of the country. In the US this number is issued only by the State Department."
-* #PPN ^extension[=].valueString.extension[0].url = "http://hl7.org/fhir/StructureDefinition/translation"
-* #PPN ^extension[=].valueString.extension[0].extension[0].url = "lang"
-* #PPN ^extension[=].valueString.extension[0].extension[=].valueCode = #nl
-* #PPN ^extension[=].valueString.extension[0].extension[+].url = "content"
-* #PPN ^extension[=].valueString.extension[0].extension[=].valueString = "Een identificatie die uniek is voor een wettig document dat bevestigt dat een persoon een staatsburger van het land is."
-* #PPN ^designation[0].language = #de
-* #PPN ^designation[=].use.system = "http://terminology.hl7.org/CodeSystem/designation-usage"
-* #PPN ^designation[=].use = http://terminology.hl7.org/CodeSystem/designation-usage#display
-* #PPN ^designation[=].value = "Passnummer"
-* #PPN ^designation[+].language = #nl
-* #PPN ^designation[=].use.system = "http://terminology.hl7.org/CodeSystem/designation-usage"
-* #PPN ^designation[=].use = http://terminology.hl7.org/CodeSystem/designation-usage#display
-* #PPN ^designation[=].value = "Paspoortnummer"
-* #PRC "Permanent Resident Card Number"
-* #PRC ^designation[0].language = #nl
-* #PRC ^designation[=].use.system = "http://terminology.hl7.org/CodeSystem/designation-usage"
-* #PRC ^designation[=].use = http://terminology.hl7.org/CodeSystem/designation-usage#display
-* #PRC ^designation[=].value = "Permanente verblijfsvergunning-nummer"
-* #PRN "Provider number"
-* #PRN ^extension[0].url = "http://hl7.org/fhir/StructureDefinition/codesystem-concept-comments"
-* #PRN ^extension[=].valueString = "A number that is unique to an individual provider, a provider group or an organization within an Assigning Authority. Use case: This allows PRN to represent either an individual (a nurse) or a group/organization (orthopedic surgery team)."
-* #PRN ^extension[=].valueString.extension[0].url = "http://hl7.org/fhir/StructureDefinition/translation"
-* #PRN ^extension[=].valueString.extension[0].extension[0].url = "lang"
-* #PRN ^extension[=].valueString.extension[0].extension[=].valueCode = #nl
-* #PRN ^extension[=].valueString.extension[0].extension[+].url = "content"
-* #PRN ^extension[=].valueString.extension[0].extension[=].valueString = "Use case: hiermee wordt een persoon (zoals een verpleegkundige) of een groep/organisatie (orthopedisch chirurgisch team) aangeduid."
-* #PRN ^designation[0].language = #nl
-* #PRN ^designation[=].use.system = "http://terminology.hl7.org/CodeSystem/designation-usage"
-* #PRN ^designation[=].use = http://terminology.hl7.org/CodeSystem/designation-usage#display
-* #PRN ^designation[=].value = "Zorgaanbieder/zorgverlener-nummer"
-* #PT "Patient external identifier"
-* #PT ^designation[0].language = #de
-* #PT ^designation[=].use.system = "http://terminology.hl7.org/CodeSystem/designation-usage"
-* #PT ^designation[=].use = http://terminology.hl7.org/CodeSystem/designation-usage#display
-* #PT ^designation[=].value = "externe Patienten-ID"
-* #PT ^designation[+].language = #nl
-* #PT ^designation[=].use.system = "http://terminology.hl7.org/CodeSystem/designation-usage"
-* #PT ^designation[=].use = http://terminology.hl7.org/CodeSystem/designation-usage#display
-* #PT ^designation[=].value = "Extern patiëntnummer"
-* #QA "QA number"
-* #QA ^designation[0].language = #nl
-* #QA ^designation[=].use.system = "http://terminology.hl7.org/CodeSystem/designation-usage"
-* #QA ^designation[=].use = http://terminology.hl7.org/CodeSystem/designation-usage#display
-* #QA ^designation[=].value = "Quality Assurance-nummer"
-* #RI "Resource identifier"
-* #RI ^extension[0].url = "http://hl7.org/fhir/StructureDefinition/codesystem-concept-comments"
-* #RI ^extension[=].valueString = "A generalized resource identifier. Use Case: An identifier type is needed to accommodate what are commonly known as resources. The resources can include human (e.g. a respiratory therapist), non-human (e.g., a companion animal), inanimate object (e.g., an exam room), organization (e.g., diabetic education class) or any other physical or logical entity."
-* #RI ^extension[=].valueString.extension[0].url = "http://hl7.org/fhir/StructureDefinition/translation"
-* #RI ^extension[=].valueString.extension[0].extension[0].url = "lang"
-* #RI ^extension[=].valueString.extension[0].extension[=].valueCode = #nl
-* #RI ^extension[=].valueString.extension[0].extension[+].url = "content"
-* #RI ^extension[=].valueString.extension[0].extension[=].valueString = "Use case: een identificatietype is nodig voor wat algemeen 'resources' heten. Hieronder vallen menselijke resources (bijv. een respiratoir therapeut), niet-menselijke resources (bijv., een begeleidend dier), niet-levende entiteiten (bijv. een onderzoeksruimte), organisaties (bijv. diabetesonderwijsklas) of andere fysieke of logische entiteiten."
-* #RI ^designation[0].language = #nl
-* #RI ^designation[=].use.system = "http://terminology.hl7.org/CodeSystem/designation-usage"
-* #RI ^designation[=].use = http://terminology.hl7.org/CodeSystem/designation-usage#display
-* #RI ^designation[=].value = "Resource identicatie"
-* #RN "Registered Nurse Number"
-* #RN ^extension[0].url = "http://hl7.org/fhir/StructureDefinition/codesystem-concept-comments"
-* #RN ^extension[=].valueString = "An identifier that is unique to a registered nurse within the jurisdiction of the licensing board."
-* #RN ^extension[=].valueString.extension[0].url = "http://hl7.org/fhir/StructureDefinition/translation"
-* #RN ^extension[=].valueString.extension[0].extension[0].url = "lang"
-* #RN ^extension[=].valueString.extension[0].extension[=].valueCode = #nl
-* #RN ^extension[=].valueString.extension[0].extension[+].url = "content"
-* #RN ^extension[=].valueString.extension[0].extension[=].valueString = "Een identificatie die uniek is voor een geregistreerde verpleegkundige binnen het rechtsgebied van een licenserende instantie."
-* #RN ^designation[0].language = #nl
-* #RN ^designation[=].use.system = "http://terminology.hl7.org/CodeSystem/designation-usage"
-* #RN ^designation[=].use = http://terminology.hl7.org/CodeSystem/designation-usage#display
-* #RN ^designation[=].value = "Verpleegkundige registratienummer"
-* #RPH "Pharmacist license number"
-* #RPH ^extension[0].url = "http://hl7.org/fhir/StructureDefinition/codesystem-concept-comments"
-* #RPH ^extension[=].valueString = "An identifier that is unique to a pharmacist within the jurisdiction of the licensing board."
-* #RPH ^extension[=].valueString.extension[0].url = "http://hl7.org/fhir/StructureDefinition/translation"
-* #RPH ^extension[=].valueString.extension[0].extension[0].url = "lang"
-* #RPH ^extension[=].valueString.extension[0].extension[=].valueCode = #nl
-* #RPH ^extension[=].valueString.extension[0].extension[+].url = "content"
-* #RPH ^extension[=].valueString.extension[0].extension[=].valueString = "Een identificatie die uniek is voor een apotheek binnen het rechtsgebied van een licenserende instantie."
-* #RPH ^designation[0].language = #nl
-* #RPH ^designation[=].use.system = "http://terminology.hl7.org/CodeSystem/designation-usage"
-* #RPH ^designation[=].use = http://terminology.hl7.org/CodeSystem/designation-usage#display
-* #RPH ^designation[=].value = "Apotheek licentienummer"
-* #RR "Railroad Retirement number"
-* #RR ^extension[0].url = "http://hl7.org/fhir/StructureDefinition/codesystem-concept-comments"
-* #RR ^extension[=].valueString = "An identifier for an individual enrolled with the Railroad Retirement Administration.  Analogous to, but distinct from, a Social Security Number"
-* #RR ^extension[=].valueString.extension[0].url = "http://hl7.org/fhir/StructureDefinition/translation"
-* #RR ^extension[=].valueString.extension[0].extension[0].url = "lang"
-* #RR ^extension[=].valueString.extension[0].extension[=].valueCode = #nl
-* #RR ^extension[=].valueString.extension[0].extension[+].url = "content"
-* #RR ^extension[=].valueString.extension[0].extension[=].valueString = "Een identificatie die uniek is voor een persoon binnen de Railroad Retirement Administration. Aanaloog aan, maar anders dan een SOFI-nummer."
-* #RR ^designation[0].language = #de
-* #RR ^designation[=].use.system = "http://terminology.hl7.org/CodeSystem/designation-usage"
-* #RR ^designation[=].use = http://terminology.hl7.org/CodeSystem/designation-usage#display
-* #RR ^designation[=].value = "Seniorenkartennummer"
-* #RR ^designation[+].language = #nl
-* #RR ^designation[=].use.system = "http://terminology.hl7.org/CodeSystem/designation-usage"
-* #RR ^designation[=].use = http://terminology.hl7.org/CodeSystem/designation-usage#display
-* #RR ^designation[=].value = "Spoorwegen pensioneringsnummer"
-* #RRI "Regional registry ID"
-* #RRI ^designation[0].language = #nl
-* #RRI ^designation[=].use.system = "http://terminology.hl7.org/CodeSystem/designation-usage"
-* #RRI ^designation[=].use = http://terminology.hl7.org/CodeSystem/designation-usage#display
-* #RRI ^designation[=].value = "Regionaal register-ID"
-* #RRP "Railroad Retirement Provider"
-* #RRP ^extension[0].url = "http://hl7.org/fhir/StructureDefinition/codesystem-concept-comments"
-* #RRP ^extension[=].valueString = "Class:  Insurance"
-* #RRP ^extension[=].valueString.extension[0].url = "http://hl7.org/fhir/StructureDefinition/translation"
-* #RRP ^extension[=].valueString.extension[0].extension[0].url = "lang"
-* #RRP ^extension[=].valueString.extension[0].extension[=].valueCode = #nl
-* #RRP ^extension[=].valueString.extension[0].extension[+].url = "content"
-* #RRP ^extension[=].valueString.extension[0].extension[=].valueString = "Klasse: verzekering."
-* #RRP ^designation[0].language = #nl
-* #RRP ^designation[=].use.system = "http://terminology.hl7.org/CodeSystem/designation-usage"
-* #RRP ^designation[=].use = http://terminology.hl7.org/CodeSystem/designation-usage#display
-* #RRP ^designation[=].value = "Spoorwegen pensioenaanbieder"
-* #SB "Social Beneficiary Identifier"
-* #SID "Specimen ID"
-* #SID ^extension[0].url = "http://hl7.org/fhir/StructureDefinition/codesystem-concept-comments"
-* #SID ^extension[=].valueString = "Identifier for a specimen. Used when it is not known if the specimen ID is a unique specimen ID (USID) or an ancestor ID (ASID)."
-* #SID ^extension[=].valueString.extension[0].url = "http://hl7.org/fhir/StructureDefinition/translation"
-* #SID ^extension[=].valueString.extension[0].extension[0].url = "lang"
-* #SID ^extension[=].valueString.extension[0].extension[=].valueCode = #nl
-* #SID ^extension[=].valueString.extension[0].extension[+].url = "content"
-* #SID ^extension[=].valueString.extension[0].extension[=].valueString = "Een identificatie die uniek is voor een monster. Gebruikt wanneer onbekend is of het monsternummer een Uniek monsternummer (USID) of een Oorspronkelijk monsternummer (ASID) is."
-* #SID ^designation[0].language = #nl
-* #SID ^designation[=].use.system = "http://terminology.hl7.org/CodeSystem/designation-usage"
-* #SID ^designation[=].use = http://terminology.hl7.org/CodeSystem/designation-usage#display
-* #SID ^designation[=].value = "Monsternummer"
-* #SL "State license"
-* #SL ^designation[0].language = #nl
-* #SL ^designation[=].use.system = "http://terminology.hl7.org/CodeSystem/designation-usage"
-* #SL ^designation[=].use = http://terminology.hl7.org/CodeSystem/designation-usage#display
-* #SL ^designation[=].value = "Staat-licentie"
-* #SN "Subscriber Number"
-* #SN ^extension[0].url = "http://hl7.org/fhir/StructureDefinition/codesystem-concept-comments"
-* #SN ^extension[=].valueString = "Class: Insurance An identifier for a subscriber of an insurance policy which is unique for, and usually assigned by, the insurance carrier. Use Case: A person is the subscriber of an insurance policy. The person’s family may be plan members, but are not the subscriber."
-* #SN ^extension[=].valueString.extension[0].url = "http://hl7.org/fhir/StructureDefinition/translation"
-* #SN ^extension[=].valueString.extension[0].extension[0].url = "lang"
-* #SN ^extension[=].valueString.extension[0].extension[=].valueCode = #nl
-* #SN ^extension[=].valueString.extension[0].extension[+].url = "content"
-* #SN ^extension[=].valueString.extension[0].extension[=].valueString = "Een identificatie voor een hoofdverzekerde onder een verzekeringspolis die uniek is voor, en normaal wordt toegekend door, een verzekeraar."
-* #SN ^designation[0].language = #nl
-* #SN ^designation[=].use.system = "http://terminology.hl7.org/CodeSystem/designation-usage"
-* #SN ^designation[=].use = http://terminology.hl7.org/CodeSystem/designation-usage#display
-* #SN ^designation[=].value = "Hoofdverzekerdenummer"
-* #SNBSN "State assigned NDBS card Identifier"
-* #SNO "Serial Number"
-* #SP "Study Permit"
-* #SP ^extension[0].url = "http://hl7.org/fhir/StructureDefinition/codesystem-concept-comments"
-* #SP ^extension[=].valueString = "A number associated with a permit identifying a person who is a resident of a jurisdiction for the purpose of education."
-* #SP ^extension[=].valueString.extension[0].url = "http://hl7.org/fhir/StructureDefinition/translation"
-* #SP ^extension[=].valueString.extension[0].extension[0].url = "lang"
-* #SP ^extension[=].valueString.extension[0].extension[=].valueCode = #nl
-* #SP ^extension[=].valueString.extension[0].extension[+].url = "content"
-* #SP ^extension[=].valueString.extension[0].extension[=].valueString = "Een identificatie die uniek is voor een visum voor een persoon die inwoner van rechtsgebied is ten behoeve van een opleiding."
-* #SP ^designation[0].language = #nl
-* #SP ^designation[=].use.system = "http://terminology.hl7.org/CodeSystem/designation-usage"
-* #SP ^designation[=].use = http://terminology.hl7.org/CodeSystem/designation-usage#display
-* #SP ^designation[=].value = "Opleidingsvisum"
-* #SR "State registry ID"
-* #SR ^designation[0].language = #nl
-* #SR ^designation[=].use.system = "http://terminology.hl7.org/CodeSystem/designation-usage"
-* #SR ^designation[=].use = http://terminology.hl7.org/CodeSystem/designation-usage#display
-* #SR ^designation[=].value = "Staat register-ID"
-* #SS "Social Security number"
-* #SS ^designation[0].language = #de
-* #SS ^designation[=].use.system = "http://terminology.hl7.org/CodeSystem/designation-usage"
-* #SS ^designation[=].use = http://terminology.hl7.org/CodeSystem/designation-usage#display
-* #SS ^designation[=].value = "Sozialversicherungsnummer"
-* #SS ^designation[+].language = #nl
-* #SS ^designation[=].use.system = "http://terminology.hl7.org/CodeSystem/designation-usage"
-* #SS ^designation[=].use = http://terminology.hl7.org/CodeSystem/designation-usage#display
-* #SS ^designation[=].value = "SOFI-nummer"
-* #STN "Shipment Tracking Number"
-* #TAX "Tax ID number"
-* #TAX ^designation[0].language = #de
-* #TAX ^designation[=].use.system = "http://terminology.hl7.org/CodeSystem/designation-usage"
-* #TAX ^designation[=].use = http://terminology.hl7.org/CodeSystem/designation-usage#display
-* #TAX ^designation[=].value = "Steueridentifikationsnummer"
-* #TAX ^designation[+].language = #nl
-* #TAX ^designation[=].use.system = "http://terminology.hl7.org/CodeSystem/designation-usage"
-* #TAX ^designation[=].use = http://terminology.hl7.org/CodeSystem/designation-usage#display
-* #TAX ^designation[=].value = "Belasting identificatie"
-* #TN "Treaty Number/ (Canada)"
-* #TN ^extension[0].url = "http://hl7.org/fhir/StructureDefinition/codesystem-concept-comments"
-* #TN ^extension[=].valueString = "A number assigned to a member of an indigenous group in Canada. Use Case: First Nation."
-* #TN ^extension[=].valueString.extension[0].url = "http://hl7.org/fhir/StructureDefinition/translation"
-* #TN ^extension[=].valueString.extension[0].extension[0].url = "lang"
-* #TN ^extension[=].valueString.extension[0].extension[=].valueCode = #nl
-* #TN ^extension[=].valueString.extension[0].extension[+].url = "content"
-* #TN ^extension[=].valueString.extension[0].extension[=].valueString = "Use case: First Nation."
-* #TN ^designation[0].language = #nl
-* #TN ^designation[=].use.system = "http://terminology.hl7.org/CodeSystem/designation-usage"
-* #TN ^designation[=].use = http://terminology.hl7.org/CodeSystem/designation-usage#display
-* #TN ^designation[=].value = "Verdragnummer/ (Canada)"
-* #TPR "Temporary Permanent Resident (Canada)"
-* #TPR ^extension[0].url = "http://hl7.org/fhir/StructureDefinition/codesystem-concept-comments"
-* #TPR ^extension[=].valueString = "A number associated with a document identifying a person's temporary permanent resident status."
-* #TPR ^extension[=].valueString.extension[0].url = "http://hl7.org/fhir/StructureDefinition/translation"
-* #TPR ^extension[=].valueString.extension[0].extension[0].url = "lang"
-* #TPR ^extension[=].valueString.extension[0].extension[=].valueCode = #nl
-* #TPR ^extension[=].valueString.extension[0].extension[+].url = "content"
-* #TPR ^extension[=].valueString.extension[0].extension[=].valueString = "Een identificatie die uniek is voor een apotheek binnen het rechtsgebied van een licenserende instantie."
-* #TPR ^designation[0].language = #nl
-* #TPR ^designation[=].use.system = "http://terminology.hl7.org/CodeSystem/designation-usage"
-* #TPR ^designation[=].use = http://terminology.hl7.org/CodeSystem/designation-usage#display
-* #TPR ^designation[=].value = "Tijdelijk permanente inwoner (Canada)"
-* #TRL "Training License Number"
-* #U "Unspecified identifier"
-* #U ^designation[0].language = #nl
-* #U ^designation[=].use.system = "http://terminology.hl7.org/CodeSystem/designation-usage"
-* #U ^designation[=].use = http://terminology.hl7.org/CodeSystem/designation-usage#display
-* #U ^designation[=].value = "Niet-gspecificeerde identificatie"
-* #UDI "Universal Device Identifier"
-* #UPIN "Medicare/CMS (formerly HCFA)'s Universal Physician Identification numbers"
-* #UPIN ^extension[0].url = "http://hl7.org/fhir/StructureDefinition/codesystem-concept-comments"
-* #UPIN ^extension[=].valueString = "Class: Insurance An identifier for a provider within the CMS/Medicare program.  A globally unique identifier for the provider in the Medicare program."
-* #UPIN ^extension[=].valueString.extension[0].url = "http://hl7.org/fhir/StructureDefinition/translation"
-* #UPIN ^extension[=].valueString.extension[0].extension[0].url = "lang"
-* #UPIN ^extension[=].valueString.extension[0].extension[=].valueCode = #nl
-* #UPIN ^extension[=].valueString.extension[0].extension[+].url = "content"
-* #UPIN ^extension[=].valueString.extension[0].extension[=].valueString = "Klasse: verzekering. Een identificatie van een zorgverlener/zorgaanbieder binnen het CMS/Medicare programma. Een wereldwij unieke identificatie voor de zorgverlener/zorgaanbieder in het Medicare programma."
-* #UPIN ^designation[0].language = #nl
-* #UPIN ^designation[=].use.system = "http://terminology.hl7.org/CodeSystem/designation-usage"
-* #UPIN ^designation[=].use = http://terminology.hl7.org/CodeSystem/designation-usage#display
-* #UPIN ^designation[=].value = "Medicare/HCFA's Universele Zorgverlener Identificatie Nummers"
-* #USID "Unique Specimen ID"
-* #USID ^extension[0].url = "http://hl7.org/fhir/StructureDefinition/codesystem-concept-comments"
-* #USID ^extension[=].valueString = "A unique identifier for a specimen."
-* #USID ^extension[=].valueString.extension[0].url = "http://hl7.org/fhir/StructureDefinition/translation"
-* #USID ^extension[=].valueString.extension[0].extension[0].url = "lang"
-* #USID ^extension[=].valueString.extension[0].extension[=].valueCode = #nl
-* #USID ^extension[=].valueString.extension[0].extension[+].url = "content"
-* #USID ^extension[=].valueString.extension[0].extension[=].valueString = "Een unieke identificatie voor een monster."
-* #USID ^designation[0].language = #nl
-* #USID ^designation[=].use.system = "http://terminology.hl7.org/CodeSystem/designation-usage"
-* #USID ^designation[=].use = http://terminology.hl7.org/CodeSystem/designation-usage#display
-* #USID ^designation[=].value = "Uniek monsternummer"
-* #VN "Visit number"
-* #VN ^designation[0].language = #de
-* #VN ^designation[=].use.system = "http://terminology.hl7.org/CodeSystem/designation-usage"
-* #VN ^designation[=].use = http://terminology.hl7.org/CodeSystem/designation-usage#display
-* #VN ^designation[=].value = "Fallnummer"
-* #VN ^designation[+].language = #nl
-* #VN ^designation[=].use.system = "http://terminology.hl7.org/CodeSystem/designation-usage"
-* #VN ^designation[=].use = http://terminology.hl7.org/CodeSystem/designation-usage#display
-* #VN ^designation[=].value = "Bezoeknummer"
-* #VP "Visitor Permit"
-* #VP ^extension[0].url = "http://hl7.org/fhir/StructureDefinition/codesystem-concept-comments"
-* #VP ^extension[=].valueString = "A number associated with a document identifying a person as a visitor of a jurisdiction or country."
-* #VP ^extension[=].valueString.extension[0].url = "http://hl7.org/fhir/StructureDefinition/translation"
-* #VP ^extension[=].valueString.extension[0].extension[0].url = "lang"
-* #VP ^extension[=].valueString.extension[0].extension[=].valueCode = #nl
-* #VP ^extension[=].valueString.extension[0].extension[+].url = "content"
-* #VP ^extension[=].valueString.extension[0].extension[=].valueString = "Een identificatie gekoppeld aan een visum voor een persoon als toerist in een bepaald rechtsgebied of land."
-* #VP ^designation[0].language = #de
-* #VP ^designation[=].use.system = "http://terminology.hl7.org/CodeSystem/designation-usage"
-* #VP ^designation[=].use = http://terminology.hl7.org/CodeSystem/designation-usage#display
-* #VP ^designation[=].value = "Besucherkennung"
-* #VP ^designation[+].language = #nl
-* #VP ^designation[=].use.system = "http://terminology.hl7.org/CodeSystem/designation-usage"
-* #VP ^designation[=].use = http://terminology.hl7.org/CodeSystem/designation-usage#display
-* #VP ^designation[=].value = "Toeristenvisum"
-* #VS "VISA"
-* #VS ^extension[0].url = "http://hl7.org/fhir/StructureDefinition/codesystem-concept-comments"
-* #VS ^extension[=].valueString = "Deprecated and replaced by BC in v 2.5."
-* #VS ^extension[=].valueString.extension[0].url = "http://hl7.org/fhir/StructureDefinition/translation"
-* #VS ^extension[=].valueString.extension[0].extension[0].url = "lang"
-* #VS ^extension[=].valueString.extension[0].extension[=].valueCode = #nl
-* #VS ^extension[=].valueString.extension[0].extension[+].url = "content"
-* #VS ^extension[=].valueString.extension[0].extension[=].valueString = "Vervangen door BC vanaf v2.5"
-* #VS ^designation[0].language = #de
-* #VS ^designation[=].use.system = "http://terminology.hl7.org/CodeSystem/designation-usage"
-* #VS ^designation[=].use = http://terminology.hl7.org/CodeSystem/designation-usage#display
-* #VS ^designation[=].value = "VISA"
-* #VS ^designation[+].language = #nl
-* #VS ^designation[=].use.system = "http://terminology.hl7.org/CodeSystem/designation-usage"
-* #VS ^designation[=].use = http://terminology.hl7.org/CodeSystem/designation-usage#display
-* #VS ^designation[=].value = "VISA"
-* #WC "WIC identifier"
-* #WC ^designation[0].language = #nl
-* #WC ^designation[=].use.system = "http://terminology.hl7.org/CodeSystem/designation-usage"
-* #WC ^designation[=].use = http://terminology.hl7.org/CodeSystem/designation-usage#display
-* #WC ^designation[=].value = "WIC identificatie"
-* #WCN "Workers' Comp Number"
-* #WCN ^designation[0].language = #nl
-* #WCN ^designation[=].use.system = "http://terminology.hl7.org/CodeSystem/designation-usage"
-* #WCN ^designation[=].use = http://terminology.hl7.org/CodeSystem/designation-usage#display
-* #WCN ^designation[=].value = "Werknemerscompensatie-nummer"
-* #WP "Work Permit"
-* #WP ^extension[0].url = "http://hl7.org/fhir/StructureDefinition/codesystem-concept-comments"
-* #WP ^extension[=].valueString = "A number associated with a permit for a person who is granted permission to work in a country for a specified time period."
-* #WP ^extension[=].valueString.extension[0].url = "http://hl7.org/fhir/StructureDefinition/translation"
-* #WP ^extension[=].valueString.extension[0].extension[0].url = "lang"
-* #WP ^extension[=].valueString.extension[0].extension[=].valueCode = #nl
-* #WP ^extension[=].valueString.extension[0].extension[+].url = "content"
-* #WP ^extension[=].valueString.extension[0].extension[=].valueString = "Een identificatie gekoppeld aan een visum voor een persoon die voor een bepaalde periode in een land mag werken."
-* #WP ^designation[0].language = #nl
-* #WP ^designation[=].use.system = "http://terminology.hl7.org/CodeSystem/designation-usage"
-* #WP ^designation[=].use = http://terminology.hl7.org/CodeSystem/designation-usage#display
-* #WP ^designation[=].value = "Werkvisum"
-* #XV "Health Plan Identifier"
-* #XX "Organization identifier"
-* #XX ^designation[0].language = #de
-* #XX ^designation[=].use.system = "http://terminology.hl7.org/CodeSystem/designation-usage"
-* #XX ^designation[=].use = http://terminology.hl7.org/CodeSystem/designation-usage#display
-* #XX ^designation[=].value = "Organisations-ID"
-* #XX ^designation[+].language = #nl
-* #XX ^designation[=].use.system = "http://terminology.hl7.org/CodeSystem/designation-usage"
-* #XX ^designation[=].use = http://terminology.hl7.org/CodeSystem/designation-usage#display
-* #XX ^designation[=].value = "Organisatie identificatie"
 
 CodeSystem: V3_RoleCode
 Id: v3-RoleCode
