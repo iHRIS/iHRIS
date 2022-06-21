@@ -1,0 +1,175 @@
+{
+  "resourceType": "Basic",
+  "id": "ihris-page-user",
+  "meta": {
+    "profile": [
+      "http://ihris.org/fhir/StructureDefinition/ihris-page"
+    ]
+  },
+  "code": {
+    "coding": [
+      {
+        "code": "page",
+        "system": "http://ihris.org/fhir/CodeSystem/ihris-resource-codesystem"
+      }
+    ]
+  },
+  "extension": [
+    {
+      "url": "http://ihris.org/fhir/StructureDefinition/ihris-page-display",
+      "extension": [
+        {
+          "url": "resource",
+          "valueReference": {
+            "reference": "StructureDefinition/ihris-person-user"
+          }
+        },
+        {
+          "url": "search",
+          "valueString": "User|Person.name.where(use='official').text"
+        },
+        {
+          "extension": [
+            {
+              "url": "field",
+              "valueString": "Person.id"
+            },
+            {
+              "url": "url",
+              "valueUrl": "/resource/view/user/FIELD"
+            },
+            {
+              "url": "text",
+              "valueString": "View User"
+            },
+            {
+              "url": "button",
+              "valueBoolean": true
+            },
+            {
+              "url": "icon",
+              "valueString": "mdi-account-arrow-right"
+            }
+          ],
+          "url": "link"
+        },
+        {
+          "extension": [
+            {
+              "url": "field",
+              "valueString": ""
+            },
+            {
+              "url": "url",
+              "valueUrl": "/questionnaire/ihris-user/user"
+            },
+            {
+              "url": "text",
+              "valueString": "Add Another User"
+            },
+            {
+              "url": "button",
+              "valueBoolean": true
+            },
+            {
+              "url": "icon",
+              "valueString": "mdi-account-arrow-right"
+            }
+          ],
+          "url": "link"
+        },
+        {
+          "url": "search",
+          "valueString": "Username/Email|Person.telecom.where(system='email').value"
+        },
+        {
+          "url": "search",
+          "valueString": "Role|Person.extension.where(url='http://ihris.org/fhir/StructureDefinition/ihris-assign-role').valueReference.reference"
+        },
+        {
+          "url": "search",
+          "valueString": "Location|Person.extension.where(url='http://ihris.org/fhir/StructureDefinition/ihris-user-location').valueReference.reference"
+        },
+        {
+          "url": "filter",
+          "valueString": "User|name:contains"
+        },
+        {
+          "extension": [
+            {
+              "url": "path",
+              "valueString": "Person.extension:password.extension:password.value[x]:valueString"
+            },
+            {
+              "url": "type",
+              "valueString": "password"
+            },
+            {
+              "url": "readOnlyIfSet",
+              "valueBoolean": true
+            }
+          ],
+          "url": "field"
+        },
+        {
+          "extension": [
+            {
+              "url": "url",
+              "valueUrl": "/questionnaire/ihris-user/user"
+            },
+            {
+              "url": "icon",
+              "valueString": "mdi-account-plus"
+            },
+            {
+              "url": "class",
+              "valueString": "accent"
+            }
+          ],
+          "url": "add"
+        }
+      ]
+    },
+    {
+      "extension": [
+        {
+          "url": "title",
+          "valueString": "Person"
+        },
+        {
+          "url": "description",
+          "valueString": "System User details"
+        },
+        {
+          "url": "name",
+          "valueString": "Person"
+        },
+        {
+          "url": "field",
+          "valueString": "Person.name"
+        },
+        {
+          "url": "field",
+          "valueString": "Person.telecom"
+        },
+        {
+          "url": "field",
+          "valueString": "Person.extension:role.value[x]:valueReference"
+        },
+        {
+          "url": "field",
+          "valueString": "Person.extension:location.value[x]:valueReference"
+        },
+        {
+          "url": "field",
+          "valueString": "Person.extension:practitioner.value[x]:valueReference"
+        },
+        {
+          "url": "field",
+          "valueString": "Person.extension:password.extension:password.value[x]:valueString"
+        }
+      ],
+      "url": "http://ihris.org/fhir/StructureDefinition/ihris-page-section"
+    }
+  ]
+}

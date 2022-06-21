@@ -1,0 +1,153 @@
+{
+  "resourceType": "Basic",
+  "id": "ihris-role-self",
+  "meta": {
+    "profile": [
+      "http://ihris.org/fhir/StructureDefinition/ihris-role"
+    ]
+  },
+  "code": {
+    "coding": [
+      {
+        "code": "role",
+        "system": "http://ihris.org/fhir/CodeSystem/ihris-resource-codesystem"
+      }
+    ]
+  },
+  "extension": [
+    {
+      "url": "http://ihris.org/fhir/StructureDefinition/ihris-basic-name",
+      "valueString": "Self Service Role"
+    },
+    {
+      "url": "http://ihris.org/fhir/StructureDefinition/ihris-role-primary",
+      "valueBoolean": false
+    },
+    {
+      "url": "http://ihris.org/fhir/StructureDefinition/ihris-assign-task",
+      "valueReference": {
+        "reference": "Basic/ihris-task-read-questionnaire-resource"
+      }
+    },
+    {
+      "url": "http://ihris.org/fhir/StructureDefinition/ihris-assign-task",
+      "valueReference": {
+        "reference": "Basic/ihris-task-navigation-profile"
+      }
+    },
+    {
+      "url": "http://ihris.org/fhir/StructureDefinition/ihris-assign-task",
+      "valueReference": {
+        "reference": "Basic/ihris-task-navigation-leave"
+      }
+    },
+    {
+      "url": "http://ihris.org/fhir/StructureDefinition/ihris-assign-task",
+      "valueReference": {
+        "reference": "Basic/ihris-task-navigation-password"
+      }
+    },
+    {
+      "url": "http://ihris.org/fhir/StructureDefinition/ihris-assign-task",
+      "valueReference": {
+        "reference": "Basic/ihris-task-read-ihris-page-practitioner"
+      }
+    },
+    {
+      "url": "http://ihris.org/fhir/StructureDefinition/ihris-assign-task",
+      "valueReference": {
+        "reference": "Basic/ihris-task-read-ihris-page-practitioner-role"
+      }
+    },
+    {
+      "url": "http://ihris.org/fhir/StructureDefinition/ihris-assign-task",
+      "valueReference": {
+        "reference": "Basic/ihris-task-read-code-system"
+      }
+    },
+    {
+      "url": "http://ihris.org/fhir/StructureDefinition/ihris-assign-task",
+      "valueReference": {
+        "reference": "Basic/ihris-task-read-value-set"
+      }
+    },
+    {
+      "url": "http://ihris.org/fhir/StructureDefinition/ihris-assign-task",
+      "valueReference": {
+        "reference": "Basic/ihris-task-read-location-resource"
+      }
+    },
+    {
+      "url": "http://ihris.org/fhir/StructureDefinition/ihris-assign-task",
+      "valueReference": {
+        "reference": "Basic/ihris-task-read-practitioner-resource"
+      }
+    },
+    {
+      "url": "http://ihris.org/fhir/StructureDefinition/ihris-assign-task",
+      "valueReference": {
+        "reference": "Basic/ihris-task-read-practitioner-role-resource"
+      }
+    },
+    {
+      "url": "http://ihris.org/fhir/StructureDefinition/ihris-assign-task",
+      "valueReference": {
+        "reference": "Basic/ihris-task-write-practitioner-resource"
+      }
+    },
+    {
+      "url": "http://ihris.org/fhir/StructureDefinition/ihris-assign-task",
+      "valueReference": {
+        "reference": "Basic/ihris-task-read-questionnaire-response-resource"
+      }
+    },
+    {
+      "url": "http://ihris.org/fhir/StructureDefinition/ihris-assign-task",
+      "valueReference": {
+        "reference": "Basic/ihris-task-read-basic-resource"
+      }
+    },
+    {
+      "url": "http://ihris.org/fhir/StructureDefinition/ihris-assign-task",
+      "valueReference": {
+        "reference": "Basic/ihris-task-write-questionnaire-response-resource"
+      }
+    },
+    {
+      "url": "http://ihris.org/fhir/StructureDefinition/ihris-assign-task",
+      "valueReference": {
+        "reference": "Basic/ihris-task-write-questionnaire-resource"
+      }
+    },
+    {
+      "url": "http://ihris.org/fhir/StructureDefinition/ihris-assign-task",
+      "valueReference": {
+        "reference": "Basic/ihris-task-read-questionnaire-leave"
+      }
+    },
+    {
+      "url": "http://ihris.org/fhir/StructureDefinition/ihris-assign-task",
+      "valueReference": {
+        "reference": "Basic/ihris-task-write-questionnaire-leave"
+      }
+    },
+    {
+      "url": "http://ihris.org/fhir/StructureDefinition/ihris-assign-task",
+      "valueReference": {
+        "reference": "Basic/ihris-task-write-basic-resource"
+      }
+    },
+    {
+      "url": "http://ihris.org/fhir/StructureDefinition/ihris-assign-task",
+      "valueReference": {
+        "reference": "Basic/ihris-task-write-questionnaire-change-password"
+      }
+    },
+    {
+      "url": "http://ihris.org/fhir/StructureDefinition/ihris-assign-task",
+      "valueReference": {
+        "reference": "Basic/ihris-task-write-person-resource"
+      }
+    }
+  ]
+}

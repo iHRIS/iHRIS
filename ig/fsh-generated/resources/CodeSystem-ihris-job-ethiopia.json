@@ -1,0 +1,373 @@
+{
+  "resourceType": "CodeSystem",
+  "status": "active",
+  "content": "complete",
+  "name": "IhrisJobEthiopiaCodeSystem",
+  "id": "ihris-job-ethiopia",
+  "title": "iHRIS Job Title Code System for Ethiopia",
+  "version": "0.1.0",
+  "url": "http://ihris.org/fhir/CodeSystem/ihris-job-ethiopia",
+  "concept": [
+    {
+      "designation": [
+        {
+          "language": "urn:ietf:bcp:47#am",
+          "value": "ደረጃ 3 ፕሮስቴቲክ ኦርቶቲክ ቴክኒሻን I"
+        }
+      ],
+      "display": "Level 3: Prosthetic Orthotic Technique I",
+      "code": "POTI3"
+    },
+    {
+      "designation": [
+        {
+          "language": "urn:ietf:bcp:47#am",
+          "value": "ደረጃ 3 ፕሮስቴቲክ ኦርቶቲክ ቴክኒሻን II"
+        }
+      ],
+      "display": "Level 3: Prosthetic Orthotic Technique II",
+      "code": "POTII3"
+    },
+    {
+      "designation": [
+        {
+          "language": "urn:ietf:bcp:47#am",
+          "value": "ደረጃ 3 ፕሮስቴቲክ ኦርቶቲክ ቴክኒሻን III"
+        }
+      ],
+      "display": "Level 3: Prosthetic Orthotic Technique III",
+      "code": "POTIII3"
+    },
+    {
+      "designation": [
+        {
+          "language": "urn:ietf:bcp:47#am",
+          "value": "ደረጃ 3 ፕሮስቴቲክ ኦርቶቲክ ቴክኒሻን IV"
+        }
+      ],
+      "display": "Level 3: Prosthetic Orthotic Technique IV",
+      "code": "POTIV3"
+    },
+    {
+      "designation": [
+        {
+          "language": "urn:ietf:bcp:47#am",
+          "value": "ደረጃ 4ፕሮስቴቲክ ኦርቶቲክ ቴክኒሻን I"
+        }
+      ],
+      "display": "Level 4: Prosthetic Orthotic Technique I",
+      "code": "POTI4"
+    },
+    {
+      "designation": [
+        {
+          "language": "urn:ietf:bcp:47#am",
+          "value": "ደረጃ 4ፕሮስቴቲክ ኦርቶቲክ ቴክኒሻን II"
+        }
+      ],
+      "display": "Level 4: Prosthetic Orthotic Technique II",
+      "code": "POTII4"
+    },
+    {
+      "designation": [
+        {
+          "language": "urn:ietf:bcp:47#am",
+          "value": "ደረጃ 4ፕሮስቴቲክ ኦርቶቲክ ቴክኒሻን III"
+        }
+      ],
+      "display": "Level 4: Prosthetic Orthotic Technique III",
+      "code": "POTIII4"
+    },
+    {
+      "designation": [
+        {
+          "language": "urn:ietf:bcp:47#am",
+          "value": "ደረጃ 4ፕሮስቴቲክ ኦርቶቲክ ቴክኒሻን IV"
+        }
+      ],
+      "display": "Level 4: Prosthetic Orthotic Technique IV",
+      "code": "POTIV4"
+    },
+    {
+      "designation": [
+        {
+          "language": "urn:ietf:bcp:47#am",
+          "value": "ደረጃ 5 ፕሮስቴቲክ ኦርቶቲክ ቴክኒሻን I"
+        }
+      ],
+      "display": "Level 5: Prosthetic Orthotic Technique I",
+      "code": "POTI5"
+    },
+    {
+      "designation": [
+        {
+          "language": "urn:ietf:bcp:47#am",
+          "value": "ደረጃ 5 ፕሮስቴቲክ ኦርቶቲክ ቴክኒሻን II"
+        }
+      ],
+      "display": "Level 5: Prosthetic Orthotic Technique II",
+      "code": "POTII5"
+    },
+    {
+      "designation": [
+        {
+          "language": "urn:ietf:bcp:47#am",
+          "value": "ደረጃ 5 ፕሮስቴቲክ ኦርቶቲክ ቴክኒሻን III"
+        }
+      ],
+      "display": "Level 5: Prosthetic Orthotic Technique III",
+      "code": "POTIII5"
+    },
+    {
+      "designation": [
+        {
+          "language": "urn:ietf:bcp:47#am",
+          "value": "ደረጃ 5 ፕሮስቴቲክ ኦርቶቲክ ቴክኒሻን IV"
+        }
+      ],
+      "display": "Level 5: Prosthetic Orthotic Technique IV",
+      "code": "POTIV5"
+    },
+    {
+      "designation": [
+        {
+          "language": "urn:ietf:bcp:47#am",
+          "value": "ደረጃ 4 ሚድዋይፈሪ I"
+        }
+      ],
+      "display": "Level 4 Midwifery I",
+      "code": "LMI"
+    },
+    {
+      "designation": [
+        {
+          "language": "urn:ietf:bcp:47#am",
+          "value": "ደረጃ 4 ሚድዋይፈሪ II"
+        }
+      ],
+      "display": "Level 4 Midwife II",
+      "code": "LMII."
+    },
+    {
+      "designation": [
+        {
+          "language": "urn:ietf:bcp:47#am",
+          "value": "ደረጃ 4 ሚድዋይፈሪ III"
+        }
+      ],
+      "display": "Level 4 Midwife III",
+      "code": "LMIII"
+    },
+    {
+      "designation": [
+        {
+          "language": "urn:ietf:bcp:47#am",
+          "value": "ደረጃ 4 ሚድዋይፈሪ IV"
+        }
+      ],
+      "display": "Level 4 Midwife IV",
+      "code": "LMIV"
+    },
+    {
+      "designation": [
+        {
+          "language": "urn:ietf:bcp:47#am",
+          "value": "ደረጃ 4 አካባቢ ጤና አጠባበቅ ቴክኒሽያን I"
+        }
+      ],
+      "display": "Level 4 Environmental Health Technician I",
+      "code": "EHTI4"
+    },
+    {
+      "designation": [
+        {
+          "language": "urn:ietf:bcp:47#am",
+          "value": "ደረጃ 4 አካባቢ ጤና አጠባበቅ ቴክኒሽያን II"
+        }
+      ],
+      "display": "Level 4 Environmental Health Technician II",
+      "code": "EHTII4"
+    },
+    {
+      "designation": [
+        {
+          "language": "urn:ietf:bcp:47#am",
+          "value": "ደረጃ 4 አካባቢ ጤና አጠባበቅ ቴክኒሽያን III"
+        }
+      ],
+      "display": "Level 4 Environmental Health Technician III",
+      "code": "EHTIII4"
+    },
+    {
+      "designation": [
+        {
+          "language": "urn:ietf:bcp:47#am",
+          "value": "ደረጃ 4 አካባቢ ጤና አጠባበቅ ቴክኒሽያን IV"
+        }
+      ],
+      "display": "Level 4 Environmental Health Technician IV",
+      "code": "EHTIV4"
+    },
+    {
+      "designation": [
+        {
+          "language": "urn:ietf:bcp:47#am",
+          "value": "ደረጃ 4 ጤና ኤክስቴንሽን I"
+        }
+      ],
+      "display": "Level 4 Health Extension I",
+      "code": "LHEI4"
+    },
+    {
+      "designation": [
+        {
+          "language": "urn:ietf:bcp:47#am",
+          "value": "ደረጃ 4 ጤና ኤክስቴንሽን II"
+        }
+      ],
+      "display": "Level 4 Health Extension II",
+      "code": "LHEII4"
+    },
+    {
+      "designation": [
+        {
+          "language": "urn:ietf:bcp:47#am",
+          "value": "ደረጃ 4 ጤና ኤክስቴንሽን III"
+        }
+      ],
+      "display": "Level 4 Health Extension III",
+      "code": "LHEIII4"
+    },
+    {
+      "designation": [
+        {
+          "language": "urn:ietf:bcp:47#am",
+          "value": "ደረጃ 4 ጤና ኤክስቴንሽን IV"
+        }
+      ],
+      "display": "Level 4 Health Extension IV",
+      "code": "LHEIV4"
+    },
+    {
+      "designation": [
+        {
+          "language": "urn:ietf:bcp:47#am",
+          "value": "ደረጃ 3 ጤና ኤክስቴሽን ሰራተኛ I"
+        }
+      ],
+      "display": "Level 3 Health Extension Worker I",
+      "code": "LHEWI3"
+    },
+    {
+      "designation": [
+        {
+          "language": "urn:ietf:bcp:47#am",
+          "value": "ደረጃ 3 ጤና ኤክስቴሽን ሰራተኛII"
+        }
+      ],
+      "display": "Level 3 Health Extension Worker II",
+      "code": "LHEWII3"
+    },
+    {
+      "designation": [
+        {
+          "language": "urn:ietf:bcp:47#am",
+          "value": "ደረጃ 3 ጤና ኤክስቴሽን ሰራተኛ III"
+        }
+      ],
+      "display": "Level 3 Health Extension Worker III",
+      "code": "LHEWIII3"
+    },
+    {
+      "designation": [
+        {
+          "language": "urn:ietf:bcp:47#am",
+          "value": "ደረጃ 3 ጤና ኤክስቴሽን ሰራተኛ IV"
+        }
+      ],
+      "display": "Level 3 Health Extension Worker IV",
+      "code": "LHEWIV3"
+    },
+    {
+      "designation": [
+        {
+          "language": "urn:ietf:bcp:47#am",
+          "value": "ህብረተሰብ ጤና አጠባበቅ (HO) I"
+        }
+      ],
+      "display": "Community Health Organization (HO) I",
+      "code": "CHOI"
+    },
+    {
+      "designation": [
+        {
+          "language": "urn:ietf:bcp:47#am",
+          "value": "ህብረተሰብ ጤና አጠባበቅ (HO) II"
+        }
+      ],
+      "display": "Community Health Organization (HO) II",
+      "code": "CHOII"
+    },
+    {
+      "designation": [
+        {
+          "language": "urn:ietf:bcp:47#am",
+          "value": "ህብረተሰብ ጤና አጠባበቅ (HO) III"
+        }
+      ],
+      "display": "Community Health Organization (HO) III",
+      "code": "CHOIII"
+    },
+    {
+      "designation": [
+        {
+          "language": "urn:ietf:bcp:47#am",
+          "value": "ህብረተሰብ ጤና አጠባበቅ (HO) IV"
+        }
+      ],
+      "display": "Community Health Organization (HO) IV",
+      "code": "CHOIV"
+    },
+    {
+      "designation": [
+        {
+          "language": "urn:ietf:bcp:47#am",
+          "value": "ፐብሊክ ሄልዝ ፕሮፌሽናል ስፔሻሊሰት I"
+        }
+      ],
+      "display": "Public Health Professional Specialist I",
+      "code": "PHPSI."
+    },
+    {
+      "designation": [
+        {
+          "language": "urn:ietf:bcp:47#am",
+          "value": "ፐብሊክ ሄልዝ ፕሮፌሽናል ስፔሻሊሰት II"
+        }
+      ],
+      "display": "Public Health Professional Specialist II",
+      "code": "PHPSII"
+    },
+    {
+      "designation": [
+        {
+          "language": "urn:ietf:bcp:47#am",
+          "value": "ፐብሊክ ሄልዝ ፕሮፌሽናል ስፔሻሊሰት III"
+        }
+      ],
+      "display": "Public Health Professional Specialist III",
+      "code": "PHPSIII"
+    },
+    {
+      "designation": [
+        {
+          "language": "urn:ietf:bcp:47#am",
+          "value": "ፐብሊክ ሄልዝ ፕሮፌሽናል ስፔሻሊሰት IV"
+        }
+      ],
+      "display": "Public Health Professional Specialist IV",
+      "code": "PHPSIV"
+    }
+  ],
+  "count": 36
+}

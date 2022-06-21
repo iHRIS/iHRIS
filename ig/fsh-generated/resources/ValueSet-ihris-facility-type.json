@@ -1,0 +1,17 @@
+{
+  "resourceType": "ValueSet",
+  "status": "active",
+  "name": "IhrisFacilityTypeValueSet",
+  "id": "ihris-facility-type",
+  "title": "iHRIS Facility Type ValueSet",
+  "version": "0.9.0",
+  "url": "http://ihris.org/fhir/ValueSet/ihris-facility-type",
+  "date": "2022-02-25T08:41:04.362Z",
+  "compose": {
+    "include": [
+      {
+        "system": "http://ihris.org/fhir/CodeSystem/ihris-facility-type"
+      }
+    ]
+  }
+}

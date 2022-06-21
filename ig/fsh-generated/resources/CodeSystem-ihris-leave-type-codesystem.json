@@ -1,0 +1,63 @@
+{
+  "resourceType": "CodeSystem",
+  "status": "active",
+  "content": "complete",
+  "name": "IhrisLeaveTypeCodeSystem",
+  "id": "ihris-leave-type-codesystem",
+  "title": "Leave Type",
+  "version": "0.2.0",
+  "url": "http://ihris.org/fhir/CodeSystem/ihris-leave-type-codesystem",
+  "concept": [
+    {
+      "code": "annual",
+      "display": "Annual Leave",
+      "definition": "Annual Leave"
+    },
+    {
+      "code": "maternity",
+      "display": "Maternity Leave",
+      "definition": "Maternity Leave"
+    },
+    {
+      "code": "paternity",
+      "display": "Paternity Leave",
+      "definition": "Paternity Leave"
+    },
+    {
+      "code": "sick",
+      "display": "Sick Leave",
+      "definition": "Sick Leave"
+    },
+    {
+      "code": "special",
+      "display": "Special Leave",
+      "definition": "Special Leave"
+    },
+    {
+      "code": "forced",
+      "display": "Forced Leave",
+      "definition": "Forced Leave"
+    },
+    {
+      "code": "educational",
+      "display": "Educational Leave",
+      "definition": "Educational Leave"
+    },
+    {
+      "code": "prenatal",
+      "display": "Prenatal Leave",
+      "definition": "Prenatal Leave"
+    },
+    {
+      "code": "postnatal",
+      "display": "Postnatal Leave",
+      "definition": "Postnatal Leave"
+    },
+    {
+      "code": "medical",
+      "display": "Medical Leave",
+      "definition": "Medical Leave"
+    }
+  ],
+  "count": 10
+}

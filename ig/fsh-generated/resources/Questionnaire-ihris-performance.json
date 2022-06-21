@@ -1,0 +1,49 @@
+{
+  "resourceType": "Questionnaire",
+  "id": "ihris-performance",
+  "url": "http://ihris.org/fhir/Questionnaire/ihris-performance",
+  "title": "iHRIS Performance Workflow",
+  "description": "iHRIS workflow to record a Performance",
+  "name": "ihris-performance",
+  "status": "active",
+  "date": "2020-09-02",
+  "purpose": "Workflow page for recording a Performance information.",
+  "item": [
+    {
+      "linkId": "Basic",
+      "text": "Performance",
+      "type": "group",
+      "item": [
+        {
+          "linkId": "Basic.extension[0].extension[0]",
+          "text": "Evaluator's Name",
+          "type": "string",
+          "required": true,
+          "repeats": false
+        },
+        {
+          "linkId": "Basic.extension[0].extension[1]",
+          "text": "Evaluation Period Start Date",
+          "type": "date",
+          "required": true,
+          "repeats": false
+        },
+        {
+          "linkId": "Basic.extension[0].extension[2]",
+          "text": "Evaluation Period End Date",
+          "type": "date",
+          "required": true,
+          "repeats": false
+        },
+        {
+          "linkId": "Basic.extension[0].extension[3]",
+          "text": "Score Attained",
+          "type": "choice",
+          "answerValueSet": "http://ihris.org/fhir/ValueSet/ihris-performance-score-valueset",
+          "required": true,
+          "repeats": false
+        }
+      ]
+    }
+  ]
+}

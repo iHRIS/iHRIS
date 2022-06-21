@@ -1,0 +1,51 @@
+{
+  "resourceType": "Basic",
+  "id": "ihris-role-open",
+  "meta": {
+    "profile": [
+      "http://ihris.org/fhir/StructureDefinition/ihris-role"
+    ]
+  },
+  "code": {
+    "coding": [
+      {
+        "code": "role",
+        "system": "http://ihris.org/fhir/CodeSystem/ihris-resource-codesystem"
+      }
+    ]
+  },
+  "extension": [
+    {
+      "url": "http://ihris.org/fhir/StructureDefinition/ihris-basic-name",
+      "valueString": "Open Role"
+    },
+    {
+      "url": "http://ihris.org/fhir/StructureDefinition/ihris-role-primary",
+      "valueBoolean": true
+    },
+    {
+      "url": "http://ihris.org/fhir/StructureDefinition/ihris-assign-task",
+      "valueReference": {
+        "reference": "Basic/ihris-task-read-structure-definition"
+      }
+    },
+    {
+      "url": "http://ihris.org/fhir/StructureDefinition/ihris-assign-task",
+      "valueReference": {
+        "reference": "Basic/ihris-task-read-code-system"
+      }
+    },
+    {
+      "url": "http://ihris.org/fhir/StructureDefinition/ihris-assign-task",
+      "valueReference": {
+        "reference": "Basic/ihris-task-read-value-set"
+      }
+    },
+    {
+      "url": "http://ihris.org/fhir/StructureDefinition/ihris-assign-task",
+      "valueReference": {
+        "reference": "Basic/ihris-task-read-document-reference"
+      }
+    }
+  ]
+}

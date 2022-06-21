@@ -1,0 +1,120 @@
+{
+  "resourceType": "Basic",
+  "id": "ihris-page-leave",
+  "meta": {
+    "profile": [
+      "http://ihris.org/fhir/StructureDefinition/ihris-page"
+    ]
+  },
+  "code": {
+    "coding": [
+      {
+        "code": "page",
+        "system": "http://ihris.org/fhir/CodeSystem/ihris-resource-codesystem"
+      }
+    ]
+  },
+  "extension": [
+    {
+      "url": "http://ihris.org/fhir/StructureDefinition/ihris-page-display",
+      "extension": [
+        {
+          "url": "resource",
+          "valueReference": {
+            "reference": "StructureDefinition/ihris-basic-leave"
+          }
+        },
+        {
+          "url": "search",
+          "valueString": "Leave Type|extension.where(url='http://ihris.org/fhir/StructureDefinition/ihris-leave').extension.where(url='leave-type').valueCoding"
+        },
+        {
+          "extension": [
+            {
+              "url": "field",
+              "valueString": "Basic.extension.where(url='http://ihris.org/fhir/StructureDefinition/ihris-practitioner-reference').valueReference.reference"
+            },
+            {
+              "url": "url",
+              "valueUrl": "/resource/view/practitioner/FIELD"
+            },
+            {
+              "url": "text",
+              "valueString": "View Health Worker"
+            },
+            {
+              "url": "button",
+              "valueBoolean": true
+            },
+            {
+              "url": "icon",
+              "valueString": "mdi-account-arrow-right"
+            }
+          ],
+          "url": "link"
+        },
+        {
+          "url": "search",
+          "valueString": "Start Date|extension.where(url='http://ihris.org/fhir/StructureDefinition/ihris-leave').extension.where(url='period').valuePeriod.start"
+        },
+        {
+          "url": "search",
+          "valueString": "End Date|extension.where(url='http://ihris.org/fhir/StructureDefinition/ihris-leave').extension.where(url='period').valuePeriod.end"
+        },
+        {
+          "url": "search",
+          "valueString": "Practitioner|extension.where(url='http://ihris.org/fhir/StructureDefinition/ihris-practitioner-reference').valueReference.reference"
+        },
+        {
+          "url": "search",
+          "valueString": "Days Requested|extension.where(url='http://ihris.org/fhir/StructureDefinition/ihris-leave').extension.where(url='daysRequested').valuePositiveInt"
+        },
+        {
+          "url": "search",
+          "valueString": "Date Requested|extension.where(url='http://ihris.org/fhir/StructureDefinition/ihris-leave').extension.where(url='dateRequested').valueDate"
+        },
+        {
+          "url": "filter",
+          "valueString": "Leave Type|code|http://ihris.org/fhir/ValueSet/ihris-leave-type-valueset"
+        }
+      ]
+    },
+    {
+      "extension": [
+        {
+          "url": "title",
+          "valueString": "Leave"
+        },
+        {
+          "url": "description",
+          "valueString": "Leave details"
+        },
+        {
+          "url": "name",
+          "valueString": "Basic"
+        },
+        {
+          "url": "field",
+          "valueString": "Basic.extension:practitioner"
+        },
+        {
+          "url": "field",
+          "valueString": "Basic.extension:leave.extension:leave-type.value[x]:valueCoding"
+        },
+        {
+          "url": "field",
+          "valueString": "Basic.extension:leave.extension:daysRequested.value[x]:valueInteger"
+        },
+        {
+          "url": "field",
+          "valueString": "Basic.extension:leave.extension:period.value[x]:valuePeriod"
+        },
+        {
+          "url": "field",
+          "valueString": "Basic.extension:leave.extension:dateRequested.value[x]:valueDate"
+        }
+      ],
+      "url": "http://ihris.org/fhir/StructureDefinition/ihris-page-section"
+    }
+  ]
+}

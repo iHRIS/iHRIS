@@ -1,0 +1,2932 @@
+{
+  "resourceType": "ValueSet",
+  "id": "languages",
+  "meta": {
+    "versionId": "1",
+    "lastUpdated": "2022-02-15T08:15:57.573+03:00",
+    "source": "#CnS3ajMd14M2CL4m",
+    "profile": [
+      "http://hl7.org/fhir/StructureDefinition/shareablevalueset"
+    ]
+  },
+  "url": "http://hl7.org/fhir/ValueSet/languages",
+  "extension": [
+    {
+      "url": "http://hl7.org/fhir/StructureDefinition/structuredefinition-wg",
+      "valueCode": "fhir"
+    },
+    {
+      "url": "http://hl7.org/fhir/StructureDefinition/structuredefinition-standards-status",
+      "valueCode": "trial-use"
+    },
+    {
+      "url": "http://hl7.org/fhir/StructureDefinition/structuredefinition-fmm",
+      "valueInteger": 3
+    }
+  ],
+  "identifier": [
+    {
+      "system": "urn:ietf:rfc:3986",
+      "value": "urn:oid:2.16.840.1.113883.4.642.3.20"
+    }
+  ],
+  "version": "4.0.1",
+  "name": "CommonLanguages",
+  "title": "Common Languages",
+  "status": "draft",
+  "experimental": true,
+  "date": "2016-08-22T09:53:05+00:00",
+  "publisher": "HL7 International - FHIR-Infrastructure",
+  "contact": [
+    {
+      "telecom": [
+        {
+          "system": "url",
+          "value": "http://hl7.org/fhir"
+        }
+      ]
+    }
+  ],
+  "description": "This value set includes common codes from BCP-47 (http://tools.ietf.org/html/bcp47)",
+  "compose": {
+    "include": [
+      {
+        "system": "urn:ietf:bcp:47",
+        "concept": [
+          {
+            "code": "ar",
+            "display": "Arabic",
+            "designation": [
+              {
+                "language": "da",
+                "use": {
+                  "code": "display",
+                  "system": "http://terminology.hl7.org/CodeSystem/designation-usage"
+                },
+                "value": "Arabisk"
+              },
+              {
+                "language": "en",
+                "use": {
+                  "code": "display",
+                  "system": "http://terminology.hl7.org/CodeSystem/designation-usage"
+                },
+                "value": "Arabic"
+              },
+              {
+                "language": "nl",
+                "use": {
+                  "code": "display",
+                  "system": "http://terminology.hl7.org/CodeSystem/designation-usage"
+                },
+                "value": "Arabisch"
+              }
+            ]
+          },
+          {
+            "code": "bn",
+            "display": "Bengali",
+            "designation": [
+              {
+                "language": "en",
+                "use": {
+                  "code": "display",
+                  "system": "http://terminology.hl7.org/CodeSystem/designation-usage"
+                },
+                "value": "Bengali"
+              },
+              {
+                "language": "nl",
+                "use": {
+                  "code": "display",
+                  "system": "http://terminology.hl7.org/CodeSystem/designation-usage"
+                },
+                "value": "Bengaals"
+              },
+              {
+                "language": "ru",
+                "use": {
+                  "code": "display",
+                  "system": "http://terminology.hl7.org/CodeSystem/designation-usage"
+                },
+                "value": "Бенгальский"
+              },
+              {
+                "language": "zh",
+                "use": {
+                  "code": "display",
+                  "system": "http://terminology.hl7.org/CodeSystem/designation-usage"
+                },
+                "value": "孟加拉语"
+              },
+              {
+                "language": "de",
+                "use": {
+                  "code": "display",
+                  "system": "http://terminology.hl7.org/CodeSystem/designation-usage"
+                },
+                "value": "Bengalisch"
+              },
+              {
+                "language": "da",
+                "use": {
+                  "code": "display",
+                  "system": "http://terminology.hl7.org/CodeSystem/designation-usage"
+                },
+                "value": "Bengalsk"
+              }
+            ]
+          },
+          {
+            "code": "cs",
+            "display": "Czech",
+            "designation": [
+              {
+                "language": "en",
+                "use": {
+                  "code": "display",
+                  "system": "http://terminology.hl7.org/CodeSystem/designation-usage"
+                },
+                "value": "Czech"
+              },
+              {
+                "language": "nl",
+                "use": {
+                  "code": "display",
+                  "system": "http://terminology.hl7.org/CodeSystem/designation-usage"
+                },
+                "value": "Tsjechisch"
+              },
+              {
+                "language": "ru",
+                "use": {
+                  "code": "display",
+                  "system": "http://terminology.hl7.org/CodeSystem/designation-usage"
+                },
+                "value": "Чешский"
+              },
+              {
+                "language": "zh",
+                "use": {
+                  "code": "display",
+                  "system": "http://terminology.hl7.org/CodeSystem/designation-usage"
+                },
+                "value": "捷克语"
+              },
+              {
+                "language": "de",
+                "use": {
+                  "code": "display",
+                  "system": "http://terminology.hl7.org/CodeSystem/designation-usage"
+                },
+                "value": "Tschechisch"
+              },
+              {
+                "language": "da",
+                "use": {
+                  "code": "display",
+                  "system": "http://terminology.hl7.org/CodeSystem/designation-usage"
+                },
+                "value": "Tjekkisk"
+              }
+            ]
+          },
+          {
+            "code": "da",
+            "display": "Danish",
+            "designation": [
+              {
+                "language": "en",
+                "use": {
+                  "code": "display",
+                  "system": "http://terminology.hl7.org/CodeSystem/designation-usage"
+                },
+                "value": "Danish"
+              },
+              {
+                "language": "nl",
+                "use": {
+                  "code": "display",
+                  "system": "http://terminology.hl7.org/CodeSystem/designation-usage"
+                },
+                "value": "Deens"
+              },
+              {
+                "language": "ru",
+                "use": {
+                  "code": "display",
+                  "system": "http://terminology.hl7.org/CodeSystem/designation-usage"
+                },
+                "value": "Датский"
+              },
+              {
+                "language": "zh",
+                "use": {
+                  "code": "display",
+                  "system": "http://terminology.hl7.org/CodeSystem/designation-usage"
+                },
+                "value": "丹麦语"
+              },
+              {
+                "language": "de",
+                "use": {
+                  "code": "display",
+                  "system": "http://terminology.hl7.org/CodeSystem/designation-usage"
+                },
+                "value": "Dänisch"
+              },
+              {
+                "language": "da",
+                "use": {
+                  "code": "display",
+                  "system": "http://terminology.hl7.org/CodeSystem/designation-usage"
+                },
+                "value": "Dansk"
+              }
+            ]
+          },
+          {
+            "code": "de",
+            "display": "German",
+            "designation": [
+              {
+                "language": "en",
+                "use": {
+                  "code": "display",
+                  "system": "http://terminology.hl7.org/CodeSystem/designation-usage"
+                },
+                "value": "German"
+              },
+              {
+                "language": "nl",
+                "use": {
+                  "code": "display",
+                  "system": "http://terminology.hl7.org/CodeSystem/designation-usage"
+                },
+                "value": "Duits"
+              },
+              {
+                "language": "ru",
+                "use": {
+                  "code": "display",
+                  "system": "http://terminology.hl7.org/CodeSystem/designation-usage"
+                },
+                "value": "Немецкий"
+              },
+              {
+                "language": "zh",
+                "use": {
+                  "code": "display",
+                  "system": "http://terminology.hl7.org/CodeSystem/designation-usage"
+                },
+                "value": "德语"
+              },
+              {
+                "language": "de",
+                "use": {
+                  "code": "display",
+                  "system": "http://terminology.hl7.org/CodeSystem/designation-usage"
+                },
+                "value": "Deutsch"
+              },
+              {
+                "language": "da",
+                "use": {
+                  "code": "display",
+                  "system": "http://terminology.hl7.org/CodeSystem/designation-usage"
+                },
+                "value": "Tysk"
+              }
+            ]
+          },
+          {
+            "code": "de-AT",
+            "display": "German (Austria)",
+            "designation": [
+              {
+                "language": "en",
+                "use": {
+                  "code": "display",
+                  "system": "http://terminology.hl7.org/CodeSystem/designation-usage"
+                },
+                "value": "German (Austria)"
+              },
+              {
+                "language": "nl",
+                "use": {
+                  "code": "display",
+                  "system": "http://terminology.hl7.org/CodeSystem/designation-usage"
+                },
+                "value": "Duits (Oostenrijk)"
+              },
+              {
+                "language": "ru",
+                "use": {
+                  "code": "display",
+                  "system": "http://terminology.hl7.org/CodeSystem/designation-usage"
+                },
+                "value": "Немецкий (Австрия)"
+              },
+              {
+                "language": "zh",
+                "use": {
+                  "code": "display",
+                  "system": "http://terminology.hl7.org/CodeSystem/designation-usage"
+                },
+                "value": "德语 （奥地利）"
+              },
+              {
+                "language": "de",
+                "use": {
+                  "code": "display",
+                  "system": "http://terminology.hl7.org/CodeSystem/designation-usage"
+                },
+                "value": "Deutsch (Österreich)"
+              },
+              {
+                "language": "da",
+                "use": {
+                  "code": "display",
+                  "system": "http://terminology.hl7.org/CodeSystem/designation-usage"
+                },
+                "value": "Tysk (Østrig"
+              }
+            ]
+          },
+          {
+            "code": "de-CH",
+            "display": "German (Switzerland)",
+            "designation": [
+              {
+                "language": "en",
+                "use": {
+                  "code": "display",
+                  "system": "http://terminology.hl7.org/CodeSystem/designation-usage"
+                },
+                "value": "German (Switzerland)"
+              },
+              {
+                "language": "nl",
+                "use": {
+                  "code": "display",
+                  "system": "http://terminology.hl7.org/CodeSystem/designation-usage"
+                },
+                "value": "Duits (Zwitserland)"
+              },
+              {
+                "language": "ru",
+                "use": {
+                  "code": "display",
+                  "system": "http://terminology.hl7.org/CodeSystem/designation-usage"
+                },
+                "value": "Немецкий (Швейцария)"
+              },
+              {
+                "language": "zh",
+                "use": {
+                  "code": "display",
+                  "system": "http://terminology.hl7.org/CodeSystem/designation-usage"
+                },
+                "value": "德语 （瑞士）"
+              },
+              {
+                "language": "de",
+                "use": {
+                  "code": "display",
+                  "system": "http://terminology.hl7.org/CodeSystem/designation-usage"
+                },
+                "value": "Deutsch (Schweiz)"
+              },
+              {
+                "language": "da",
+                "use": {
+                  "code": "display",
+                  "system": "http://terminology.hl7.org/CodeSystem/designation-usage"
+                },
+                "value": "Tysk (Schweiz)"
+              }
+            ]
+          },
+          {
+            "code": "de-DE",
+            "display": "German (Germany)",
+            "designation": [
+              {
+                "language": "en",
+                "use": {
+                  "code": "display",
+                  "system": "http://terminology.hl7.org/CodeSystem/designation-usage"
+                },
+                "value": "German (Germany)"
+              },
+              {
+                "language": "nl",
+                "use": {
+                  "code": "display",
+                  "system": "http://terminology.hl7.org/CodeSystem/designation-usage"
+                },
+                "value": "Duits (Duitsland)"
+              },
+              {
+                "language": "ru",
+                "use": {
+                  "code": "display",
+                  "system": "http://terminology.hl7.org/CodeSystem/designation-usage"
+                },
+                "value": "Немецкий (Германия)"
+              },
+              {
+                "language": "zh",
+                "use": {
+                  "code": "display",
+                  "system": "http://terminology.hl7.org/CodeSystem/designation-usage"
+                },
+                "value": "德语 （德国）"
+              },
+              {
+                "language": "de",
+                "use": {
+                  "code": "display",
+                  "system": "http://terminology.hl7.org/CodeSystem/designation-usage"
+                },
+                "value": "Deutsch (Deutschland)"
+              },
+              {
+                "language": "da",
+                "use": {
+                  "code": "display",
+                  "system": "http://terminology.hl7.org/CodeSystem/designation-usage"
+                },
+                "value": "Tysk (Tyskland)"
+              }
+            ]
+          },
+          {
+            "code": "el",
+            "display": "Greek",
+            "designation": [
+              {
+                "language": "en",
+                "use": {
+                  "code": "display",
+                  "system": "http://terminology.hl7.org/CodeSystem/designation-usage"
+                },
+                "value": "Greek"
+              },
+              {
+                "language": "nl",
+                "use": {
+                  "code": "display",
+                  "system": "http://terminology.hl7.org/CodeSystem/designation-usage"
+                },
+                "value": "Grieks"
+              },
+              {
+                "language": "ru",
+                "use": {
+                  "code": "display",
+                  "system": "http://terminology.hl7.org/CodeSystem/designation-usage"
+                },
+                "value": "Греческий"
+              },
+              {
+                "language": "zh",
+                "use": {
+                  "code": "display",
+                  "system": "http://terminology.hl7.org/CodeSystem/designation-usage"
+                },
+                "value": "希腊语"
+              },
+              {
+                "language": "de",
+                "use": {
+                  "code": "display",
+                  "system": "http://terminology.hl7.org/CodeSystem/designation-usage"
+                },
+                "value": "Griechisch"
+              },
+              {
+                "language": "da",
+                "use": {
+                  "code": "display",
+                  "system": "http://terminology.hl7.org/CodeSystem/designation-usage"
+                },
+                "value": "Græsk"
+              }
+            ]
+          },
+          {
+            "code": "en",
+            "display": "English",
+            "designation": [
+              {
+                "language": "en",
+                "use": {
+                  "code": "display",
+                  "system": "http://terminology.hl7.org/CodeSystem/designation-usage"
+                },
+                "value": "English"
+              },
+              {
+                "language": "nl",
+                "use": {
+                  "code": "display",
+                  "system": "http://terminology.hl7.org/CodeSystem/designation-usage"
+                },
+                "value": "Engels"
+              },
+              {
+                "language": "ru",
+                "use": {
+                  "code": "display",
+                  "system": "http://terminology.hl7.org/CodeSystem/designation-usage"
+                },
+                "value": "Английский"
+              },
+              {
+                "language": "zh",
+                "use": {
+                  "code": "display",
+                  "system": "http://terminology.hl7.org/CodeSystem/designation-usage"
+                },
+                "value": "英语"
+              },
+              {
+                "language": "de",
+                "use": {
+                  "code": "display",
+                  "system": "http://terminology.hl7.org/CodeSystem/designation-usage"
+                },
+                "value": "Englisch"
+              },
+              {
+                "language": "da",
+                "use": {
+                  "code": "display",
+                  "system": "http://terminology.hl7.org/CodeSystem/designation-usage"
+                },
+                "value": "Engelsk"
+              }
+            ]
+          },
+          {
+            "code": "en-AU",
+            "display": "English (Australia)",
+            "designation": [
+              {
+                "language": "en",
+                "use": {
+                  "code": "display",
+                  "system": "http://terminology.hl7.org/CodeSystem/designation-usage"
+                },
+                "value": "English (Australia)"
+              },
+              {
+                "language": "nl",
+                "use": {
+                  "code": "display",
+                  "system": "http://terminology.hl7.org/CodeSystem/designation-usage"
+                },
+                "value": "Engels (Australië)"
+              },
+              {
+                "language": "ru",
+                "use": {
+                  "code": "display",
+                  "system": "http://terminology.hl7.org/CodeSystem/designation-usage"
+                },
+                "value": "Английский (Австралия)"
+              },
+              {
+                "language": "zh",
+                "use": {
+                  "code": "display",
+                  "system": "http://terminology.hl7.org/CodeSystem/designation-usage"
+                },
+                "value": "英语 （澳大利亚）"
+              },
+              {
+                "language": "de",
+                "use": {
+                  "code": "display",
+                  "system": "http://terminology.hl7.org/CodeSystem/designation-usage"
+                },
+                "value": "Englisch (Australien)"
+              },
+              {
+                "language": "da",
+                "use": {
+                  "code": "display",
+                  "system": "http://terminology.hl7.org/CodeSystem/designation-usage"
+                },
+                "value": "Engelsk (Australien)"
+              }
+            ]
+          },
+          {
+            "code": "en-CA",
+            "display": "English (Canada)",
+            "designation": [
+              {
+                "language": "en",
+                "use": {
+                  "code": "display",
+                  "system": "http://terminology.hl7.org/CodeSystem/designation-usage"
+                },
+                "value": "English (Canada)"
+              },
+              {
+                "language": "nl",
+                "use": {
+                  "code": "display",
+                  "system": "http://terminology.hl7.org/CodeSystem/designation-usage"
+                },
+                "value": "Engels (Canada)"
+              },
+              {
+                "language": "ru",
+                "use": {
+                  "code": "display",
+                  "system": "http://terminology.hl7.org/CodeSystem/designation-usage"
+                },
+                "value": "Английский (Канада)"
+              },
+              {
+                "language": "zh",
+                "use": {
+                  "code": "display",
+                  "system": "http://terminology.hl7.org/CodeSystem/designation-usage"
+                },
+                "value": "英语 （加拿大）"
+              },
+              {
+                "language": "de",
+                "use": {
+                  "code": "display",
+                  "system": "http://terminology.hl7.org/CodeSystem/designation-usage"
+                },
+                "value": "Englisch (Kanada)"
+              },
+              {
+                "language": "da",
+                "use": {
+                  "code": "display",
+                  "system": "http://terminology.hl7.org/CodeSystem/designation-usage"
+                },
+                "value": "Engelsk (Canada)"
+              }
+            ]
+          },
+          {
+            "code": "en-GB",
+            "display": "English (Great Britain)",
+            "designation": [
+              {
+                "language": "en",
+                "use": {
+                  "code": "display",
+                  "system": "http://terminology.hl7.org/CodeSystem/designation-usage"
+                },
+                "value": "English (Great Britain)"
+              },
+              {
+                "language": "nl",
+                "use": {
+                  "code": "display",
+                  "system": "http://terminology.hl7.org/CodeSystem/designation-usage"
+                },
+                "value": "Engels (Groot Brittannië)"
+              },
+              {
+                "language": "ru",
+                "use": {
+                  "code": "display",
+                  "system": "http://terminology.hl7.org/CodeSystem/designation-usage"
+                },
+                "value": "Английский (Великобритания)"
+              },
+              {
+                "language": "zh",
+                "use": {
+                  "code": "display",
+                  "system": "http://terminology.hl7.org/CodeSystem/designation-usage"
+                },
+                "value": "英语 （英国）"
+              },
+              {
+                "language": "de",
+                "use": {
+                  "code": "display",
+                  "system": "http://terminology.hl7.org/CodeSystem/designation-usage"
+                },
+                "value": "Englisch (Großbritannien)"
+              },
+              {
+                "language": "da",
+                "use": {
+                  "code": "display",
+                  "system": "http://terminology.hl7.org/CodeSystem/designation-usage"
+                },
+                "value": "Engelsk (Storbritannien)"
+              }
+            ]
+          },
+          {
+            "code": "en-IN",
+            "display": "English (India)",
+            "designation": [
+              {
+                "language": "en",
+                "use": {
+                  "code": "display",
+                  "system": "http://terminology.hl7.org/CodeSystem/designation-usage"
+                },
+                "value": "English (India)"
+              },
+              {
+                "language": "nl",
+                "use": {
+                  "code": "display",
+                  "system": "http://terminology.hl7.org/CodeSystem/designation-usage"
+                },
+                "value": "Engels (India)"
+              },
+              {
+                "language": "ru",
+                "use": {
+                  "code": "display",
+                  "system": "http://terminology.hl7.org/CodeSystem/designation-usage"
+                },
+                "value": "Английский (Индия)"
+              },
+              {
+                "language": "zh",
+                "use": {
+                  "code": "display",
+                  "system": "http://terminology.hl7.org/CodeSystem/designation-usage"
+                },
+                "value": "英语 （印度）"
+              },
+              {
+                "language": "de",
+                "use": {
+                  "code": "display",
+                  "system": "http://terminology.hl7.org/CodeSystem/designation-usage"
+                },
+                "value": "Englisch (Indien)"
+              },
+              {
+                "language": "da",
+                "use": {
+                  "code": "display",
+                  "system": "http://terminology.hl7.org/CodeSystem/designation-usage"
+                },
+                "value": "Engelsk (Indien)"
+              }
+            ]
+          },
+          {
+            "code": "en-NZ",
+            "display": "English (New Zeland)",
+            "designation": [
+              {
+                "language": "en",
+                "use": {
+                  "code": "display",
+                  "system": "http://terminology.hl7.org/CodeSystem/designation-usage"
+                },
+                "value": "English (New Zeland)"
+              },
+              {
+                "language": "nl",
+                "use": {
+                  "code": "display",
+                  "system": "http://terminology.hl7.org/CodeSystem/designation-usage"
+                },
+                "value": "Engels (Nieuw Zeeland)"
+              },
+              {
+                "language": "ru",
+                "use": {
+                  "code": "display",
+                  "system": "http://terminology.hl7.org/CodeSystem/designation-usage"
+                },
+                "value": "Английский (Новая Зеландия)"
+              },
+              {
+                "language": "zh",
+                "use": {
+                  "code": "display",
+                  "system": "http://terminology.hl7.org/CodeSystem/designation-usage"
+                },
+                "value": "英语 （新西兰）"
+              },
+              {
+                "language": "de",
+                "use": {
+                  "code": "display",
+                  "system": "http://terminology.hl7.org/CodeSystem/designation-usage"
+                },
+                "value": "Englisch (Neuseeland)"
+              },
+              {
+                "language": "da",
+                "use": {
+                  "code": "display",
+                  "system": "http://terminology.hl7.org/CodeSystem/designation-usage"
+                },
+                "value": "Engelsk (New Zeeland)"
+              }
+            ]
+          },
+          {
+            "code": "en-SG",
+            "display": "English (Singapore)",
+            "designation": [
+              {
+                "language": "en",
+                "use": {
+                  "code": "display",
+                  "system": "http://terminology.hl7.org/CodeSystem/designation-usage"
+                },
+                "value": "English (Singapore)"
+              },
+              {
+                "language": "nl",
+                "use": {
+                  "code": "display",
+                  "system": "http://terminology.hl7.org/CodeSystem/designation-usage"
+                },
+                "value": "Engels (Singapore)"
+              },
+              {
+                "language": "ru",
+                "use": {
+                  "code": "display",
+                  "system": "http://terminology.hl7.org/CodeSystem/designation-usage"
+                },
+                "value": "Английский (Сингапур)"
+              },
+              {
+                "language": "zh",
+                "use": {
+                  "code": "display",
+                  "system": "http://terminology.hl7.org/CodeSystem/designation-usage"
+                },
+                "value": "英语 （新加坡）"
+              },
+              {
+                "language": "de",
+                "use": {
+                  "code": "display",
+                  "system": "http://terminology.hl7.org/CodeSystem/designation-usage"
+                },
+                "value": "Englisch (Singapur)"
+              },
+              {
+                "language": "da",
+                "use": {
+                  "code": "display",
+                  "system": "http://terminology.hl7.org/CodeSystem/designation-usage"
+                },
+                "value": "Engelsk (Singapore)"
+              }
+            ]
+          },
+          {
+            "code": "en-US",
+            "display": "English (United States)",
+            "designation": [
+              {
+                "language": "en",
+                "use": {
+                  "code": "display",
+                  "system": "http://terminology.hl7.org/CodeSystem/designation-usage"
+                },
+                "value": "English (United States)"
+              },
+              {
+                "language": "nl",
+                "use": {
+                  "code": "display",
+                  "system": "http://terminology.hl7.org/CodeSystem/designation-usage"
+                },
+                "value": "Engels (Verenigde Staten)"
+              },
+              {
+                "language": "ru",
+                "use": {
+                  "code": "display",
+                  "system": "http://terminology.hl7.org/CodeSystem/designation-usage"
+                },
+                "value": "Английский (США)"
+              },
+              {
+                "language": "zh",
+                "use": {
+                  "code": "display",
+                  "system": "http://terminology.hl7.org/CodeSystem/designation-usage"
+                },
+                "value": "英语 （美国）"
+              },
+              {
+                "language": "de",
+                "use": {
+                  "code": "display",
+                  "system": "http://terminology.hl7.org/CodeSystem/designation-usage"
+                },
+                "value": "Englisch (USA)"
+              },
+              {
+                "language": "da",
+                "use": {
+                  "code": "display",
+                  "system": "http://terminology.hl7.org/CodeSystem/designation-usage"
+                },
+                "value": "Engelsk (Amerikansk)"
+              }
+            ]
+          },
+          {
+            "code": "es",
+            "display": "Spanish",
+            "designation": [
+              {
+                "language": "en",
+                "use": {
+                  "code": "display",
+                  "system": "http://terminology.hl7.org/CodeSystem/designation-usage"
+                },
+                "value": "Spanish"
+              },
+              {
+                "language": "nl",
+                "use": {
+                  "code": "display",
+                  "system": "http://terminology.hl7.org/CodeSystem/designation-usage"
+                },
+                "value": "Spaans"
+              },
+              {
+                "language": "ru",
+                "use": {
+                  "code": "display",
+                  "system": "http://terminology.hl7.org/CodeSystem/designation-usage"
+                },
+                "value": "Испанский"
+              },
+              {
+                "language": "zh",
+                "use": {
+                  "code": "display",
+                  "system": "http://terminology.hl7.org/CodeSystem/designation-usage"
+                },
+                "value": "西班牙语"
+              },
+              {
+                "language": "de",
+                "use": {
+                  "code": "display",
+                  "system": "http://terminology.hl7.org/CodeSystem/designation-usage"
+                },
+                "value": "Spanisch"
+              },
+              {
+                "language": "da",
+                "use": {
+                  "code": "display",
+                  "system": "http://terminology.hl7.org/CodeSystem/designation-usage"
+                },
+                "value": "Spansk"
+              }
+            ]
+          },
+          {
+            "code": "es-AR",
+            "display": "Spanish (Argentina)",
+            "designation": [
+              {
+                "language": "en",
+                "use": {
+                  "code": "display",
+                  "system": "http://terminology.hl7.org/CodeSystem/designation-usage"
+                },
+                "value": "Spanish (Argentina)"
+              },
+              {
+                "language": "nl",
+                "use": {
+                  "code": "display",
+                  "system": "http://terminology.hl7.org/CodeSystem/designation-usage"
+                },
+                "value": "Spaans (Argentinië)"
+              },
+              {
+                "language": "ru",
+                "use": {
+                  "code": "display",
+                  "system": "http://terminology.hl7.org/CodeSystem/designation-usage"
+                },
+                "value": "Испанский (Аргентина)"
+              },
+              {
+                "language": "zh",
+                "use": {
+                  "code": "display",
+                  "system": "http://terminology.hl7.org/CodeSystem/designation-usage"
+                },
+                "value": "西班牙语 （阿根廷）"
+              },
+              {
+                "language": "de",
+                "use": {
+                  "code": "display",
+                  "system": "http://terminology.hl7.org/CodeSystem/designation-usage"
+                },
+                "value": "Spanisch (Argentinien)"
+              },
+              {
+                "language": "da",
+                "use": {
+                  "code": "display",
+                  "system": "http://terminology.hl7.org/CodeSystem/designation-usage"
+                },
+                "value": "Spansk (Argentina)"
+              }
+            ]
+          },
+          {
+            "code": "es-ES",
+            "display": "Spanish (Spain)",
+            "designation": [
+              {
+                "language": "en",
+                "use": {
+                  "code": "display",
+                  "system": "http://terminology.hl7.org/CodeSystem/designation-usage"
+                },
+                "value": "Spanish (Spain)"
+              },
+              {
+                "language": "nl",
+                "use": {
+                  "code": "display",
+                  "system": "http://terminology.hl7.org/CodeSystem/designation-usage"
+                },
+                "value": "Spaans (Spanje)"
+              },
+              {
+                "language": "ru",
+                "use": {
+                  "code": "display",
+                  "system": "http://terminology.hl7.org/CodeSystem/designation-usage"
+                },
+                "value": "Испанский (Испания)"
+              },
+              {
+                "language": "zh",
+                "use": {
+                  "code": "display",
+                  "system": "http://terminology.hl7.org/CodeSystem/designation-usage"
+                },
+                "value": "西班牙语 （西班牙）"
+              },
+              {
+                "language": "de",
+                "use": {
+                  "code": "display",
+                  "system": "http://terminology.hl7.org/CodeSystem/designation-usage"
+                },
+                "value": "Spanisch (Spanien)"
+              },
+              {
+                "language": "da",
+                "use": {
+                  "code": "display",
+                  "system": "http://terminology.hl7.org/CodeSystem/designation-usage"
+                },
+                "value": "Spansk (Spanien)"
+              }
+            ]
+          },
+          {
+            "code": "es-UY",
+            "display": "Spanish (Uruguay)",
+            "designation": [
+              {
+                "language": "en",
+                "use": {
+                  "code": "display",
+                  "system": "http://terminology.hl7.org/CodeSystem/designation-usage"
+                },
+                "value": "Spanish (Uruguay)"
+              },
+              {
+                "language": "nl",
+                "use": {
+                  "code": "display",
+                  "system": "http://terminology.hl7.org/CodeSystem/designation-usage"
+                },
+                "value": "Spaans (Uruguay)"
+              },
+              {
+                "language": "ru",
+                "use": {
+                  "code": "display",
+                  "system": "http://terminology.hl7.org/CodeSystem/designation-usage"
+                },
+                "value": "Испанский (Уругвай)"
+              },
+              {
+                "language": "zh",
+                "use": {
+                  "code": "display",
+                  "system": "http://terminology.hl7.org/CodeSystem/designation-usage"
+                },
+                "value": "西班牙语 （乌拉圭）"
+              },
+              {
+                "language": "de",
+                "use": {
+                  "code": "display",
+                  "system": "http://terminology.hl7.org/CodeSystem/designation-usage"
+                },
+                "value": "Spanisch (Uruguay)"
+              },
+              {
+                "language": "da",
+                "use": {
+                  "code": "display",
+                  "system": "http://terminology.hl7.org/CodeSystem/designation-usage"
+                },
+                "value": "Spansk (Uruguay)"
+              }
+            ]
+          },
+          {
+            "code": "fi",
+            "display": "Finnish",
+            "designation": [
+              {
+                "language": "en",
+                "use": {
+                  "code": "display",
+                  "system": "http://terminology.hl7.org/CodeSystem/designation-usage"
+                },
+                "value": "Finnish"
+              },
+              {
+                "language": "nl",
+                "use": {
+                  "code": "display",
+                  "system": "http://terminology.hl7.org/CodeSystem/designation-usage"
+                },
+                "value": "Fins"
+              },
+              {
+                "language": "ru",
+                "use": {
+                  "code": "display",
+                  "system": "http://terminology.hl7.org/CodeSystem/designation-usage"
+                },
+                "value": "Финский"
+              },
+              {
+                "language": "zh",
+                "use": {
+                  "code": "display",
+                  "system": "http://terminology.hl7.org/CodeSystem/designation-usage"
+                },
+                "value": "芬兰语"
+              },
+              {
+                "language": "de",
+                "use": {
+                  "code": "display",
+                  "system": "http://terminology.hl7.org/CodeSystem/designation-usage"
+                },
+                "value": "Finnisch"
+              },
+              {
+                "language": "da",
+                "use": {
+                  "code": "display",
+                  "system": "http://terminology.hl7.org/CodeSystem/designation-usage"
+                },
+                "value": "Finsk"
+              }
+            ]
+          },
+          {
+            "code": "fr",
+            "display": "French",
+            "designation": [
+              {
+                "language": "en",
+                "use": {
+                  "code": "display",
+                  "system": "http://terminology.hl7.org/CodeSystem/designation-usage"
+                },
+                "value": "French"
+              },
+              {
+                "language": "nl",
+                "use": {
+                  "code": "display",
+                  "system": "http://terminology.hl7.org/CodeSystem/designation-usage"
+                },
+                "value": "Frans"
+              },
+              {
+                "language": "ru",
+                "use": {
+                  "code": "display",
+                  "system": "http://terminology.hl7.org/CodeSystem/designation-usage"
+                },
+                "value": "Французский"
+              },
+              {
+                "language": "zh",
+                "use": {
+                  "code": "display",
+                  "system": "http://terminology.hl7.org/CodeSystem/designation-usage"
+                },
+                "value": "法语"
+              },
+              {
+                "language": "de",
+                "use": {
+                  "code": "display",
+                  "system": "http://terminology.hl7.org/CodeSystem/designation-usage"
+                },
+                "value": "Französisch"
+              },
+              {
+                "language": "da",
+                "use": {
+                  "code": "display",
+                  "system": "http://terminology.hl7.org/CodeSystem/designation-usage"
+                },
+                "value": "Fransk"
+              }
+            ]
+          },
+          {
+            "code": "fr-BE",
+            "display": "French (Belgium)",
+            "designation": [
+              {
+                "language": "en",
+                "use": {
+                  "code": "display",
+                  "system": "http://terminology.hl7.org/CodeSystem/designation-usage"
+                },
+                "value": "French (Belgium)"
+              },
+              {
+                "language": "nl",
+                "use": {
+                  "code": "display",
+                  "system": "http://terminology.hl7.org/CodeSystem/designation-usage"
+                },
+                "value": "Frans (België)"
+              },
+              {
+                "language": "de",
+                "use": {
+                  "code": "display",
+                  "system": "http://terminology.hl7.org/CodeSystem/designation-usage"
+                },
+                "value": "Französisch (Belgien)"
+              },
+              {
+                "language": "da",
+                "use": {
+                  "code": "display",
+                  "system": "http://terminology.hl7.org/CodeSystem/designation-usage"
+                },
+                "value": "Finsk (Belgien)"
+              }
+            ]
+          },
+          {
+            "code": "fr-CH",
+            "display": "French (Switzerland)",
+            "designation": [
+              {
+                "language": "en",
+                "use": {
+                  "code": "display",
+                  "system": "http://terminology.hl7.org/CodeSystem/designation-usage"
+                },
+                "value": "French (Switzerland)"
+              },
+              {
+                "language": "nl",
+                "use": {
+                  "code": "display",
+                  "system": "http://terminology.hl7.org/CodeSystem/designation-usage"
+                },
+                "value": "Frans (Zwitserland)"
+              },
+              {
+                "language": "ru",
+                "use": {
+                  "code": "display",
+                  "system": "http://terminology.hl7.org/CodeSystem/designation-usage"
+                },
+                "value": "Французский (Швейцария)"
+              },
+              {
+                "language": "zh",
+                "use": {
+                  "code": "display",
+                  "system": "http://terminology.hl7.org/CodeSystem/designation-usage"
+                },
+                "value": "法语 （比利时）"
+              },
+              {
+                "language": "de",
+                "use": {
+                  "code": "display",
+                  "system": "http://terminology.hl7.org/CodeSystem/designation-usage"
+                },
+                "value": "Französisch (Schweiz)"
+              },
+              {
+                "language": "da",
+                "use": {
+                  "code": "display",
+                  "system": "http://terminology.hl7.org/CodeSystem/designation-usage"
+                },
+                "value": "Fransk (Schweiz)"
+              }
+            ]
+          },
+          {
+            "code": "fr-FR",
+            "display": "French (France)",
+            "designation": [
+              {
+                "language": "en",
+                "use": {
+                  "code": "display",
+                  "system": "http://terminology.hl7.org/CodeSystem/designation-usage"
+                },
+                "value": "French (France)"
+              },
+              {
+                "language": "nl",
+                "use": {
+                  "code": "display",
+                  "system": "http://terminology.hl7.org/CodeSystem/designation-usage"
+                },
+                "value": "Frans (Frankrijk)"
+              },
+              {
+                "language": "ru",
+                "use": {
+                  "code": "display",
+                  "system": "http://terminology.hl7.org/CodeSystem/designation-usage"
+                },
+                "value": "Французский (Франция)"
+              },
+              {
+                "language": "zh",
+                "use": {
+                  "code": "display",
+                  "system": "http://terminology.hl7.org/CodeSystem/designation-usage"
+                },
+                "value": "法语 （瑞士）"
+              },
+              {
+                "language": "de",
+                "use": {
+                  "code": "display",
+                  "system": "http://terminology.hl7.org/CodeSystem/designation-usage"
+                },
+                "value": "Französisch (Frankreich)"
+              },
+              {
+                "language": "da",
+                "use": {
+                  "code": "display",
+                  "system": "http://terminology.hl7.org/CodeSystem/designation-usage"
+                },
+                "value": "Fransk (Frankrig)"
+              }
+            ]
+          },
+          {
+            "code": "fy",
+            "display": "Frysian",
+            "designation": [
+              {
+                "language": "en",
+                "use": {
+                  "code": "display",
+                  "system": "http://terminology.hl7.org/CodeSystem/designation-usage"
+                },
+                "value": "Frysian"
+              },
+              {
+                "language": "nl",
+                "use": {
+                  "code": "display",
+                  "system": "http://terminology.hl7.org/CodeSystem/designation-usage"
+                },
+                "value": "Fries"
+              },
+              {
+                "language": "zh",
+                "use": {
+                  "code": "display",
+                  "system": "http://terminology.hl7.org/CodeSystem/designation-usage"
+                },
+                "value": "弗里士兰语"
+              },
+              {
+                "language": "de",
+                "use": {
+                  "code": "display",
+                  "system": "http://terminology.hl7.org/CodeSystem/designation-usage"
+                },
+                "value": "Friesisch"
+              },
+              {
+                "language": "da",
+                "use": {
+                  "code": "display",
+                  "system": "http://terminology.hl7.org/CodeSystem/designation-usage"
+                },
+                "value": "Frisisk"
+              }
+            ]
+          },
+          {
+            "code": "fy-NL",
+            "display": "Frysian (Netherlands)",
+            "designation": [
+              {
+                "language": "en",
+                "use": {
+                  "code": "display",
+                  "system": "http://terminology.hl7.org/CodeSystem/designation-usage"
+                },
+                "value": "Frysian (Netherlands)"
+              },
+              {
+                "language": "nl",
+                "use": {
+                  "code": "display",
+                  "system": "http://terminology.hl7.org/CodeSystem/designation-usage"
+                },
+                "value": "Fries (Nederland)"
+              },
+              {
+                "language": "zh",
+                "use": {
+                  "code": "display",
+                  "system": "http://terminology.hl7.org/CodeSystem/designation-usage"
+                },
+                "value": "弗里士兰语（荷兰）"
+              },
+              {
+                "language": "de",
+                "use": {
+                  "code": "display",
+                  "system": "http://terminology.hl7.org/CodeSystem/designation-usage"
+                },
+                "value": "Friesisch (Niederlande)"
+              },
+              {
+                "language": "da",
+                "use": {
+                  "code": "display",
+                  "system": "http://terminology.hl7.org/CodeSystem/designation-usage"
+                },
+                "value": "Frisisk (Holland)"
+              }
+            ]
+          },
+          {
+            "code": "hi",
+            "display": "Hindi",
+            "designation": [
+              {
+                "language": "da",
+                "use": {
+                  "code": "display",
+                  "system": "http://terminology.hl7.org/CodeSystem/designation-usage"
+                },
+                "value": "Hindi"
+              },
+              {
+                "language": "en",
+                "use": {
+                  "code": "display",
+                  "system": "http://terminology.hl7.org/CodeSystem/designation-usage"
+                },
+                "value": "Hindi"
+              },
+              {
+                "language": "nl",
+                "use": {
+                  "code": "display",
+                  "system": "http://terminology.hl7.org/CodeSystem/designation-usage"
+                },
+                "value": "Hindi"
+              }
+            ]
+          },
+          {
+            "code": "hr",
+            "display": "Croatian",
+            "designation": [
+              {
+                "language": "en",
+                "use": {
+                  "code": "display",
+                  "system": "http://terminology.hl7.org/CodeSystem/designation-usage"
+                },
+                "value": "Croatian"
+              },
+              {
+                "language": "nl",
+                "use": {
+                  "code": "display",
+                  "system": "http://terminology.hl7.org/CodeSystem/designation-usage"
+                },
+                "value": "Kroatisch"
+              },
+              {
+                "language": "ru",
+                "use": {
+                  "code": "display",
+                  "system": "http://terminology.hl7.org/CodeSystem/designation-usage"
+                },
+                "value": "Хорватский"
+              },
+              {
+                "language": "zh",
+                "use": {
+                  "code": "display",
+                  "system": "http://terminology.hl7.org/CodeSystem/designation-usage"
+                },
+                "value": "克罗地亚语"
+              },
+              {
+                "language": "de",
+                "use": {
+                  "code": "display",
+                  "system": "http://terminology.hl7.org/CodeSystem/designation-usage"
+                },
+                "value": "Kroatisch"
+              },
+              {
+                "language": "da",
+                "use": {
+                  "code": "display",
+                  "system": "http://terminology.hl7.org/CodeSystem/designation-usage"
+                },
+                "value": "Kroatisk"
+              }
+            ]
+          },
+          {
+            "code": "it",
+            "display": "Italian",
+            "designation": [
+              {
+                "language": "en",
+                "use": {
+                  "code": "display",
+                  "system": "http://terminology.hl7.org/CodeSystem/designation-usage"
+                },
+                "value": "Italian"
+              },
+              {
+                "language": "nl",
+                "use": {
+                  "code": "display",
+                  "system": "http://terminology.hl7.org/CodeSystem/designation-usage"
+                },
+                "value": "Italiaans"
+              },
+              {
+                "language": "ru",
+                "use": {
+                  "code": "display",
+                  "system": "http://terminology.hl7.org/CodeSystem/designation-usage"
+                },
+                "value": "Итальянский"
+              },
+              {
+                "language": "zh",
+                "use": {
+                  "code": "display",
+                  "system": "http://terminology.hl7.org/CodeSystem/designation-usage"
+                },
+                "value": "意大利语"
+              },
+              {
+                "language": "de",
+                "use": {
+                  "code": "display",
+                  "system": "http://terminology.hl7.org/CodeSystem/designation-usage"
+                },
+                "value": "Italienisch"
+              },
+              {
+                "language": "da",
+                "use": {
+                  "code": "display",
+                  "system": "http://terminology.hl7.org/CodeSystem/designation-usage"
+                },
+                "value": "Italiensk"
+              }
+            ]
+          },
+          {
+            "code": "it-CH",
+            "display": "Italian (Switzerland)",
+            "designation": [
+              {
+                "language": "en",
+                "use": {
+                  "code": "display",
+                  "system": "http://terminology.hl7.org/CodeSystem/designation-usage"
+                },
+                "value": "Italian (Switzerland)"
+              },
+              {
+                "language": "nl",
+                "use": {
+                  "code": "display",
+                  "system": "http://terminology.hl7.org/CodeSystem/designation-usage"
+                },
+                "value": "Italiaans (Zwitserland)"
+              },
+              {
+                "language": "ru",
+                "use": {
+                  "code": "display",
+                  "system": "http://terminology.hl7.org/CodeSystem/designation-usage"
+                },
+                "value": "Итальянский (Швейцария)"
+              },
+              {
+                "language": "zh",
+                "use": {
+                  "code": "display",
+                  "system": "http://terminology.hl7.org/CodeSystem/designation-usage"
+                },
+                "value": "意大利语 （瑞士）"
+              },
+              {
+                "language": "de",
+                "use": {
+                  "code": "display",
+                  "system": "http://terminology.hl7.org/CodeSystem/designation-usage"
+                },
+                "value": "Italienisch (Schweiz)"
+              },
+              {
+                "language": "da",
+                "use": {
+                  "code": "display",
+                  "system": "http://terminology.hl7.org/CodeSystem/designation-usage"
+                },
+                "value": "Italiensk (Schweiz)"
+              }
+            ]
+          },
+          {
+            "code": "it-IT",
+            "display": "Italian (Italy)",
+            "designation": [
+              {
+                "language": "en",
+                "use": {
+                  "code": "display",
+                  "system": "http://terminology.hl7.org/CodeSystem/designation-usage"
+                },
+                "value": "Italian (Italy)"
+              },
+              {
+                "language": "nl",
+                "use": {
+                  "code": "display",
+                  "system": "http://terminology.hl7.org/CodeSystem/designation-usage"
+                },
+                "value": "Italiaans (Italië)"
+              },
+              {
+                "language": "ru",
+                "use": {
+                  "code": "display",
+                  "system": "http://terminology.hl7.org/CodeSystem/designation-usage"
+                },
+                "value": "Итальянский (Италия)"
+              },
+              {
+                "language": "zh",
+                "use": {
+                  "code": "display",
+                  "system": "http://terminology.hl7.org/CodeSystem/designation-usage"
+                },
+                "value": "意大利语 （意大利）"
+              },
+              {
+                "language": "de",
+                "use": {
+                  "code": "display",
+                  "system": "http://terminology.hl7.org/CodeSystem/designation-usage"
+                },
+                "value": "Italienisch (Italien)"
+              },
+              {
+                "language": "da",
+                "use": {
+                  "code": "display",
+                  "system": "http://terminology.hl7.org/CodeSystem/designation-usage"
+                },
+                "value": "Italiensk (Italien)"
+              }
+            ]
+          },
+          {
+            "code": "ja",
+            "display": "Japanese",
+            "designation": [
+              {
+                "language": "en",
+                "use": {
+                  "code": "display",
+                  "system": "http://terminology.hl7.org/CodeSystem/designation-usage"
+                },
+                "value": "Japanese"
+              },
+              {
+                "language": "nl",
+                "use": {
+                  "code": "display",
+                  "system": "http://terminology.hl7.org/CodeSystem/designation-usage"
+                },
+                "value": "Japans"
+              },
+              {
+                "language": "ru",
+                "use": {
+                  "code": "display",
+                  "system": "http://terminology.hl7.org/CodeSystem/designation-usage"
+                },
+                "value": "Японский"
+              },
+              {
+                "language": "zh",
+                "use": {
+                  "code": "display",
+                  "system": "http://terminology.hl7.org/CodeSystem/designation-usage"
+                },
+                "value": "日语"
+              },
+              {
+                "language": "de",
+                "use": {
+                  "code": "display",
+                  "system": "http://terminology.hl7.org/CodeSystem/designation-usage"
+                },
+                "value": "Japanisch"
+              },
+              {
+                "language": "da",
+                "use": {
+                  "code": "display",
+                  "system": "http://terminology.hl7.org/CodeSystem/designation-usage"
+                },
+                "value": "Japansk"
+              }
+            ]
+          },
+          {
+            "code": "ko",
+            "display": "Korean",
+            "designation": [
+              {
+                "language": "en",
+                "use": {
+                  "code": "display",
+                  "system": "http://terminology.hl7.org/CodeSystem/designation-usage"
+                },
+                "value": "Korean"
+              },
+              {
+                "language": "nl",
+                "use": {
+                  "code": "display",
+                  "system": "http://terminology.hl7.org/CodeSystem/designation-usage"
+                },
+                "value": "Koreaans"
+              },
+              {
+                "language": "ru",
+                "use": {
+                  "code": "display",
+                  "system": "http://terminology.hl7.org/CodeSystem/designation-usage"
+                },
+                "value": "Корейский"
+              },
+              {
+                "language": "zh",
+                "use": {
+                  "code": "display",
+                  "system": "http://terminology.hl7.org/CodeSystem/designation-usage"
+                },
+                "value": "朝鲜语"
+              },
+              {
+                "language": "de",
+                "use": {
+                  "code": "display",
+                  "system": "http://terminology.hl7.org/CodeSystem/designation-usage"
+                },
+                "value": "Koreanisch"
+              },
+              {
+                "language": "da",
+                "use": {
+                  "code": "display",
+                  "system": "http://terminology.hl7.org/CodeSystem/designation-usage"
+                },
+                "value": "Koreansk"
+              }
+            ]
+          },
+          {
+            "code": "nl",
+            "display": "Dutch",
+            "designation": [
+              {
+                "language": "en",
+                "use": {
+                  "code": "display",
+                  "system": "http://terminology.hl7.org/CodeSystem/designation-usage"
+                },
+                "value": "Dutch"
+              },
+              {
+                "language": "nl",
+                "use": {
+                  "code": "display",
+                  "system": "http://terminology.hl7.org/CodeSystem/designation-usage"
+                },
+                "value": "Nederlands"
+              },
+              {
+                "language": "ru",
+                "use": {
+                  "code": "display",
+                  "system": "http://terminology.hl7.org/CodeSystem/designation-usage"
+                },
+                "value": "Нидерландский"
+              },
+              {
+                "language": "zh",
+                "use": {
+                  "code": "display",
+                  "system": "http://terminology.hl7.org/CodeSystem/designation-usage"
+                },
+                "value": "荷兰语"
+              },
+              {
+                "language": "de",
+                "use": {
+                  "code": "display",
+                  "system": "http://terminology.hl7.org/CodeSystem/designation-usage"
+                },
+                "value": "Niederländisch"
+              },
+              {
+                "language": "da",
+                "use": {
+                  "code": "display",
+                  "system": "http://terminology.hl7.org/CodeSystem/designation-usage"
+                },
+                "value": "Hollandsk"
+              }
+            ]
+          },
+          {
+            "code": "nl-BE",
+            "display": "Dutch (Belgium)",
+            "designation": [
+              {
+                "language": "en",
+                "use": {
+                  "code": "display",
+                  "system": "http://terminology.hl7.org/CodeSystem/designation-usage"
+                },
+                "value": "Dutch (Belgium)"
+              },
+              {
+                "language": "nl",
+                "use": {
+                  "code": "display",
+                  "system": "http://terminology.hl7.org/CodeSystem/designation-usage"
+                },
+                "value": "Nederlands (België)"
+              },
+              {
+                "language": "zh",
+                "use": {
+                  "code": "display",
+                  "system": "http://terminology.hl7.org/CodeSystem/designation-usage"
+                },
+                "value": "荷兰语 （比利时）"
+              },
+              {
+                "language": "de",
+                "use": {
+                  "code": "display",
+                  "system": "http://terminology.hl7.org/CodeSystem/designation-usage"
+                },
+                "value": "Niederländisch (Belgien)"
+              },
+              {
+                "language": "da",
+                "use": {
+                  "code": "display",
+                  "system": "http://terminology.hl7.org/CodeSystem/designation-usage"
+                },
+                "value": "Hollandsk (Belgien)"
+              }
+            ]
+          },
+          {
+            "code": "nl-NL",
+            "display": "Dutch (Netherlands)",
+            "designation": [
+              {
+                "language": "en",
+                "use": {
+                  "code": "display",
+                  "system": "http://terminology.hl7.org/CodeSystem/designation-usage"
+                },
+                "value": "Dutch (Netherlands)"
+              },
+              {
+                "language": "nl",
+                "use": {
+                  "code": "display",
+                  "system": "http://terminology.hl7.org/CodeSystem/designation-usage"
+                },
+                "value": "Nederlands (Nederland)"
+              },
+              {
+                "language": "ru",
+                "use": {
+                  "code": "display",
+                  "system": "http://terminology.hl7.org/CodeSystem/designation-usage"
+                },
+                "value": "Нидерландский (Нидерланды)"
+              },
+              {
+                "language": "zh",
+                "use": {
+                  "code": "display",
+                  "system": "http://terminology.hl7.org/CodeSystem/designation-usage"
+                },
+                "value": "荷兰语 （荷兰）"
+              },
+              {
+                "language": "de",
+                "use": {
+                  "code": "display",
+                  "system": "http://terminology.hl7.org/CodeSystem/designation-usage"
+                },
+                "value": "Niederländisch (Niederlande)"
+              },
+              {
+                "language": "da",
+                "use": {
+                  "code": "display",
+                  "system": "http://terminology.hl7.org/CodeSystem/designation-usage"
+                },
+                "value": "Hollandsk (Holland)"
+              }
+            ]
+          },
+          {
+            "code": "no",
+            "display": "Norwegian",
+            "designation": [
+              {
+                "language": "en",
+                "use": {
+                  "code": "display",
+                  "system": "http://terminology.hl7.org/CodeSystem/designation-usage"
+                },
+                "value": "Norwegian"
+              },
+              {
+                "language": "nl",
+                "use": {
+                  "code": "display",
+                  "system": "http://terminology.hl7.org/CodeSystem/designation-usage"
+                },
+                "value": "Noors"
+              },
+              {
+                "language": "ru",
+                "use": {
+                  "code": "display",
+                  "system": "http://terminology.hl7.org/CodeSystem/designation-usage"
+                },
+                "value": "Норвежский"
+              },
+              {
+                "language": "zh",
+                "use": {
+                  "code": "display",
+                  "system": "http://terminology.hl7.org/CodeSystem/designation-usage"
+                },
+                "value": "挪威语"
+              },
+              {
+                "language": "de",
+                "use": {
+                  "code": "display",
+                  "system": "http://terminology.hl7.org/CodeSystem/designation-usage"
+                },
+                "value": "Norwegisch"
+              },
+              {
+                "language": "da",
+                "use": {
+                  "code": "display",
+                  "system": "http://terminology.hl7.org/CodeSystem/designation-usage"
+                },
+                "value": "Norsk"
+              }
+            ]
+          },
+          {
+            "code": "no-NO",
+            "display": "Norwegian (Norway)",
+            "designation": [
+              {
+                "language": "en",
+                "use": {
+                  "code": "display",
+                  "system": "http://terminology.hl7.org/CodeSystem/designation-usage"
+                },
+                "value": "Norwegian (Norway)"
+              },
+              {
+                "language": "nl",
+                "use": {
+                  "code": "display",
+                  "system": "http://terminology.hl7.org/CodeSystem/designation-usage"
+                },
+                "value": "Noors (Noorwegen)"
+              },
+              {
+                "language": "ru",
+                "use": {
+                  "code": "display",
+                  "system": "http://terminology.hl7.org/CodeSystem/designation-usage"
+                },
+                "value": "Норвежский (Норвегия)"
+              },
+              {
+                "language": "zh",
+                "use": {
+                  "code": "display",
+                  "system": "http://terminology.hl7.org/CodeSystem/designation-usage"
+                },
+                "value": "挪威语 （挪威）"
+              },
+              {
+                "language": "de",
+                "use": {
+                  "code": "display",
+                  "system": "http://terminology.hl7.org/CodeSystem/designation-usage"
+                },
+                "value": "Norwegisch (Norwegen)"
+              },
+              {
+                "language": "da",
+                "use": {
+                  "code": "display",
+                  "system": "http://terminology.hl7.org/CodeSystem/designation-usage"
+                },
+                "value": "Norsk (Norge)"
+              }
+            ]
+          },
+          {
+            "code": "pa",
+            "display": "Punjabi",
+            "designation": [
+              {
+                "language": "da",
+                "use": {
+                  "code": "display",
+                  "system": "http://terminology.hl7.org/CodeSystem/designation-usage"
+                },
+                "value": "Punjabi"
+              },
+              {
+                "language": "en",
+                "use": {
+                  "code": "display",
+                  "system": "http://terminology.hl7.org/CodeSystem/designation-usage"
+                },
+                "value": "Punjabi"
+              },
+              {
+                "language": "nl",
+                "use": {
+                  "code": "display",
+                  "system": "http://terminology.hl7.org/CodeSystem/designation-usage"
+                },
+                "value": "Punjabi"
+              }
+            ]
+          },
+          {
+            "code": "pl",
+            "display": "Polish",
+            "designation": [
+              {
+                "language": "pl",
+                "use": {
+                  "code": "display",
+                  "system": "http://terminology.hl7.org/CodeSystem/designation-usage"
+                },
+                "value": "Polskie"
+              }
+            ]
+          },
+          {
+            "code": "pt",
+            "display": "Portuguese",
+            "designation": [
+              {
+                "language": "en",
+                "use": {
+                  "code": "display",
+                  "system": "http://terminology.hl7.org/CodeSystem/designation-usage"
+                },
+                "value": "Portuguese"
+              },
+              {
+                "language": "nl",
+                "use": {
+                  "code": "display",
+                  "system": "http://terminology.hl7.org/CodeSystem/designation-usage"
+                },
+                "value": "Portugees"
+              },
+              {
+                "language": "ru",
+                "use": {
+                  "code": "display",
+                  "system": "http://terminology.hl7.org/CodeSystem/designation-usage"
+                },
+                "value": "Португальский"
+              },
+              {
+                "language": "zh",
+                "use": {
+                  "code": "display",
+                  "system": "http://terminology.hl7.org/CodeSystem/designation-usage"
+                },
+                "value": "葡萄牙语"
+              },
+              {
+                "language": "de",
+                "use": {
+                  "code": "display",
+                  "system": "http://terminology.hl7.org/CodeSystem/designation-usage"
+                },
+                "value": "Portugiesisch"
+              },
+              {
+                "language": "da",
+                "use": {
+                  "code": "display",
+                  "system": "http://terminology.hl7.org/CodeSystem/designation-usage"
+                },
+                "value": "Portugisisk"
+              }
+            ]
+          },
+          {
+            "code": "pt-BR",
+            "display": "Portuguese (Brazil)",
+            "designation": [
+              {
+                "language": "en",
+                "use": {
+                  "code": "display",
+                  "system": "http://terminology.hl7.org/CodeSystem/designation-usage"
+                },
+                "value": "Portuguese (Brazil)"
+              },
+              {
+                "language": "nl",
+                "use": {
+                  "code": "display",
+                  "system": "http://terminology.hl7.org/CodeSystem/designation-usage"
+                },
+                "value": "Portugees (Brazilië)"
+              },
+              {
+                "language": "ru",
+                "use": {
+                  "code": "display",
+                  "system": "http://terminology.hl7.org/CodeSystem/designation-usage"
+                },
+                "value": "Португальский (Бразилия)"
+              },
+              {
+                "language": "zh",
+                "use": {
+                  "code": "display",
+                  "system": "http://terminology.hl7.org/CodeSystem/designation-usage"
+                },
+                "value": "葡萄牙语 （巴西）"
+              },
+              {
+                "language": "de",
+                "use": {
+                  "code": "display",
+                  "system": "http://terminology.hl7.org/CodeSystem/designation-usage"
+                },
+                "value": "Portugiesisch (Brasilien)"
+              },
+              {
+                "language": "da",
+                "use": {
+                  "code": "display",
+                  "system": "http://terminology.hl7.org/CodeSystem/designation-usage"
+                },
+                "value": "Portugisisk (Brasilien)"
+              }
+            ]
+          },
+          {
+            "code": "ru",
+            "display": "Russian",
+            "designation": [
+              {
+                "language": "en",
+                "use": {
+                  "code": "display",
+                  "system": "http://terminology.hl7.org/CodeSystem/designation-usage"
+                },
+                "value": "Russian"
+              },
+              {
+                "language": "nl",
+                "use": {
+                  "code": "display",
+                  "system": "http://terminology.hl7.org/CodeSystem/designation-usage"
+                },
+                "value": "Russisch"
+              },
+              {
+                "language": "ru",
+                "use": {
+                  "code": "display",
+                  "system": "http://terminology.hl7.org/CodeSystem/designation-usage"
+                },
+                "value": "Русский"
+              },
+              {
+                "language": "zh",
+                "use": {
+                  "code": "display",
+                  "system": "http://terminology.hl7.org/CodeSystem/designation-usage"
+                },
+                "value": "俄语"
+              },
+              {
+                "language": "de",
+                "use": {
+                  "code": "display",
+                  "system": "http://terminology.hl7.org/CodeSystem/designation-usage"
+                },
+                "value": "Russisch"
+              },
+              {
+                "language": "da",
+                "use": {
+                  "code": "display",
+                  "system": "http://terminology.hl7.org/CodeSystem/designation-usage"
+                },
+                "value": "Russisk"
+              }
+            ]
+          },
+          {
+            "code": "ru-RU",
+            "display": "Russian (Russia)",
+            "designation": [
+              {
+                "language": "en",
+                "use": {
+                  "code": "display",
+                  "system": "http://terminology.hl7.org/CodeSystem/designation-usage"
+                },
+                "value": "Russian (Russia)"
+              },
+              {
+                "language": "nl",
+                "use": {
+                  "code": "display",
+                  "system": "http://terminology.hl7.org/CodeSystem/designation-usage"
+                },
+                "value": "Russisch (Rusland)"
+              },
+              {
+                "language": "ru",
+                "use": {
+                  "code": "display",
+                  "system": "http://terminology.hl7.org/CodeSystem/designation-usage"
+                },
+                "value": "Русский (Россия)"
+              },
+              {
+                "language": "zh",
+                "use": {
+                  "code": "display",
+                  "system": "http://terminology.hl7.org/CodeSystem/designation-usage"
+                },
+                "value": "俄语 （俄罗斯）"
+              },
+              {
+                "language": "de",
+                "use": {
+                  "code": "display",
+                  "system": "http://terminology.hl7.org/CodeSystem/designation-usage"
+                },
+                "value": "Russisch (Russland)"
+              },
+              {
+                "language": "da",
+                "use": {
+                  "code": "display",
+                  "system": "http://terminology.hl7.org/CodeSystem/designation-usage"
+                },
+                "value": "Russisk (Rusland)"
+              }
+            ]
+          },
+          {
+            "code": "sr",
+            "display": "Serbian",
+            "designation": [
+              {
+                "language": "en",
+                "use": {
+                  "code": "display",
+                  "system": "http://terminology.hl7.org/CodeSystem/designation-usage"
+                },
+                "value": "Serbian"
+              },
+              {
+                "language": "nl",
+                "use": {
+                  "code": "display",
+                  "system": "http://terminology.hl7.org/CodeSystem/designation-usage"
+                },
+                "value": "Servisch"
+              },
+              {
+                "language": "ru",
+                "use": {
+                  "code": "display",
+                  "system": "http://terminology.hl7.org/CodeSystem/designation-usage"
+                },
+                "value": "Сербский"
+              },
+              {
+                "language": "zh",
+                "use": {
+                  "code": "display",
+                  "system": "http://terminology.hl7.org/CodeSystem/designation-usage"
+                },
+                "value": "塞尔维亚语"
+              },
+              {
+                "language": "de",
+                "use": {
+                  "code": "display",
+                  "system": "http://terminology.hl7.org/CodeSystem/designation-usage"
+                },
+                "value": "Serbisch"
+              },
+              {
+                "language": "da",
+                "use": {
+                  "code": "display",
+                  "system": "http://terminology.hl7.org/CodeSystem/designation-usage"
+                },
+                "value": "Serbisk"
+              }
+            ]
+          },
+          {
+            "code": "sr-RS",
+            "display": "Serbian (Serbia)",
+            "designation": [
+              {
+                "language": "en",
+                "use": {
+                  "code": "display",
+                  "system": "http://terminology.hl7.org/CodeSystem/designation-usage"
+                },
+                "value": "Serbian (Serbia)"
+              },
+              {
+                "language": "nl",
+                "use": {
+                  "code": "display",
+                  "system": "http://terminology.hl7.org/CodeSystem/designation-usage"
+                },
+                "value": "Servisch (Servië)"
+              },
+              {
+                "language": "ru",
+                "use": {
+                  "code": "display",
+                  "system": "http://terminology.hl7.org/CodeSystem/designation-usage"
+                },
+                "value": "Сербский (Сербия)"
+              },
+              {
+                "language": "zh",
+                "use": {
+                  "code": "display",
+                  "system": "http://terminology.hl7.org/CodeSystem/designation-usage"
+                },
+                "value": "塞尔维亚语 （塞尔维亚）"
+              },
+              {
+                "language": "de",
+                "use": {
+                  "code": "display",
+                  "system": "http://terminology.hl7.org/CodeSystem/designation-usage"
+                },
+                "value": "Serbisch (Serbien)"
+              },
+              {
+                "language": "da",
+                "use": {
+                  "code": "display",
+                  "system": "http://terminology.hl7.org/CodeSystem/designation-usage"
+                },
+                "value": "Serbisk (Serbien)"
+              }
+            ]
+          },
+          {
+            "code": "sv",
+            "display": "Swedish",
+            "designation": [
+              {
+                "language": "en",
+                "use": {
+                  "code": "display",
+                  "system": "http://terminology.hl7.org/CodeSystem/designation-usage"
+                },
+                "value": "Swedish"
+              },
+              {
+                "language": "nl",
+                "use": {
+                  "code": "display",
+                  "system": "http://terminology.hl7.org/CodeSystem/designation-usage"
+                },
+                "value": "Zweeds"
+              },
+              {
+                "language": "ru",
+                "use": {
+                  "code": "display",
+                  "system": "http://terminology.hl7.org/CodeSystem/designation-usage"
+                },
+                "value": "Шведский"
+              },
+              {
+                "language": "zh",
+                "use": {
+                  "code": "display",
+                  "system": "http://terminology.hl7.org/CodeSystem/designation-usage"
+                },
+                "value": "瑞典语"
+              },
+              {
+                "language": "de",
+                "use": {
+                  "code": "display",
+                  "system": "http://terminology.hl7.org/CodeSystem/designation-usage"
+                },
+                "value": "Schwedisch"
+              },
+              {
+                "language": "da",
+                "use": {
+                  "code": "display",
+                  "system": "http://terminology.hl7.org/CodeSystem/designation-usage"
+                },
+                "value": "Svensk"
+              }
+            ]
+          },
+          {
+            "code": "sv-SE",
+            "display": "Swedish (Sweden)",
+            "designation": [
+              {
+                "language": "en",
+                "use": {
+                  "code": "display",
+                  "system": "http://terminology.hl7.org/CodeSystem/designation-usage"
+                },
+                "value": "Swedish (Sweden)"
+              },
+              {
+                "language": "nl",
+                "use": {
+                  "code": "display",
+                  "system": "http://terminology.hl7.org/CodeSystem/designation-usage"
+                },
+                "value": "Zweeds (Zweden)"
+              },
+              {
+                "language": "ru",
+                "use": {
+                  "code": "display",
+                  "system": "http://terminology.hl7.org/CodeSystem/designation-usage"
+                },
+                "value": "Шведский (Швеция)"
+              },
+              {
+                "language": "zh",
+                "use": {
+                  "code": "display",
+                  "system": "http://terminology.hl7.org/CodeSystem/designation-usage"
+                },
+                "value": "瑞典语 （瑞典）"
+              },
+              {
+                "language": "de",
+                "use": {
+                  "code": "display",
+                  "system": "http://terminology.hl7.org/CodeSystem/designation-usage"
+                },
+                "value": "Schwedisch (Schweden)"
+              },
+              {
+                "language": "da",
+                "use": {
+                  "code": "display",
+                  "system": "http://terminology.hl7.org/CodeSystem/designation-usage"
+                },
+                "value": "Svensk (Sverige)"
+              }
+            ]
+          },
+          {
+            "code": "te",
+            "display": "Telegu",
+            "designation": [
+              {
+                "language": "en",
+                "use": {
+                  "code": "display",
+                  "system": "http://terminology.hl7.org/CodeSystem/designation-usage"
+                },
+                "value": "Telegu"
+              },
+              {
+                "language": "nl",
+                "use": {
+                  "code": "display",
+                  "system": "http://terminology.hl7.org/CodeSystem/designation-usage"
+                },
+                "value": "Teloegoe"
+              },
+              {
+                "language": "ru",
+                "use": {
+                  "code": "display",
+                  "system": "http://terminology.hl7.org/CodeSystem/designation-usage"
+                },
+                "value": "Телугу"
+              },
+              {
+                "language": "zh",
+                "use": {
+                  "code": "display",
+                  "system": "http://terminology.hl7.org/CodeSystem/designation-usage"
+                },
+                "value": "泰卢固语"
+              },
+              {
+                "language": "de",
+                "use": {
+                  "code": "display",
+                  "system": "http://terminology.hl7.org/CodeSystem/designation-usage"
+                },
+                "value": "Telugu"
+              },
+              {
+                "language": "da",
+                "use": {
+                  "code": "display",
+                  "system": "http://terminology.hl7.org/CodeSystem/designation-usage"
+                },
+                "value": "Telugu"
+              }
+            ]
+          },
+          {
+            "code": "zh",
+            "display": "Chinese",
+            "designation": [
+              {
+                "language": "en",
+                "use": {
+                  "code": "display",
+                  "system": "http://terminology.hl7.org/CodeSystem/designation-usage"
+                },
+                "value": "Chinese"
+              },
+              {
+                "language": "nl",
+                "use": {
+                  "code": "display",
+                  "system": "http://terminology.hl7.org/CodeSystem/designation-usage"
+                },
+                "value": "Chinees"
+              },
+              {
+                "language": "ru",
+                "use": {
+                  "code": "display",
+                  "system": "http://terminology.hl7.org/CodeSystem/designation-usage"
+                },
+                "value": "Kитайский"
+              },
+              {
+                "language": "zh",
+                "use": {
+                  "code": "display",
+                  "system": "http://terminology.hl7.org/CodeSystem/designation-usage"
+                },
+                "value": "中文"
+              },
+              {
+                "language": "de",
+                "use": {
+                  "code": "display",
+                  "system": "http://terminology.hl7.org/CodeSystem/designation-usage"
+                },
+                "value": "Chinesisch"
+              },
+              {
+                "language": "da",
+                "use": {
+                  "code": "display",
+                  "system": "http://terminology.hl7.org/CodeSystem/designation-usage"
+                },
+                "value": "Kinesisk"
+              }
+            ]
+          },
+          {
+            "code": "zh-CN",
+            "display": "Chinese (China)",
+            "designation": [
+              {
+                "language": "en",
+                "use": {
+                  "code": "display",
+                  "system": "http://terminology.hl7.org/CodeSystem/designation-usage"
+                },
+                "value": "Chinese (China)"
+              },
+              {
+                "language": "nl",
+                "use": {
+                  "code": "display",
+                  "system": "http://terminology.hl7.org/CodeSystem/designation-usage"
+                },
+                "value": "Chinees (China)"
+              },
+              {
+                "language": "ru",
+                "use": {
+                  "code": "display",
+                  "system": "http://terminology.hl7.org/CodeSystem/designation-usage"
+                },
+                "value": "Kитайский (Китай)"
+              },
+              {
+                "language": "zh",
+                "use": {
+                  "code": "display",
+                  "system": "http://terminology.hl7.org/CodeSystem/designation-usage"
+                },
+                "value": "中文 （中国）"
+              },
+              {
+                "language": "de",
+                "use": {
+                  "code": "display",
+                  "system": "http://terminology.hl7.org/CodeSystem/designation-usage"
+                },
+                "value": "Chinesisch (China)"
+              },
+              {
+                "language": "da",
+                "use": {
+                  "code": "display",
+                  "system": "http://terminology.hl7.org/CodeSystem/designation-usage"
+                },
+                "value": "Kinesisk (Kina)"
+              }
+            ]
+          },
+          {
+            "code": "zh-HK",
+            "display": "Chinese (Hong Kong)",
+            "designation": [
+              {
+                "language": "en",
+                "use": {
+                  "code": "display",
+                  "system": "http://terminology.hl7.org/CodeSystem/designation-usage"
+                },
+                "value": "Chinese (Hong Kong)"
+              },
+              {
+                "language": "nl",
+                "use": {
+                  "code": "display",
+                  "system": "http://terminology.hl7.org/CodeSystem/designation-usage"
+                },
+                "value": "Chinees (Hong Kong)"
+              },
+              {
+                "language": "ru",
+                "use": {
+                  "code": "display",
+                  "system": "http://terminology.hl7.org/CodeSystem/designation-usage"
+                },
+                "value": "Kитайский (Гонконг)"
+              },
+              {
+                "language": "zh",
+                "use": {
+                  "code": "display",
+                  "system": "http://terminology.hl7.org/CodeSystem/designation-usage"
+                },
+                "value": "中文 （香港特别行政区）"
+              },
+              {
+                "language": "de",
+                "use": {
+                  "code": "display",
+                  "system": "http://terminology.hl7.org/CodeSystem/designation-usage"
+                },
+                "value": "Chinesisch (Hong Kong)"
+              },
+              {
+                "language": "da",
+                "use": {
+                  "code": "display",
+                  "system": "http://terminology.hl7.org/CodeSystem/designation-usage"
+                },
+                "value": "Kinesisk (Hong Kong)"
+              }
+            ]
+          },
+          {
+            "code": "zh-SG",
+            "display": "Chinese (Singapore)",
+            "designation": [
+              {
+                "language": "en",
+                "use": {
+                  "code": "display",
+                  "system": "http://terminology.hl7.org/CodeSystem/designation-usage"
+                },
+                "value": "Chinese (Singapore)"
+              },
+              {
+                "language": "nl",
+                "use": {
+                  "code": "display",
+                  "system": "http://terminology.hl7.org/CodeSystem/designation-usage"
+                },
+                "value": "Chinees (Singapore)"
+              },
+              {
+                "language": "ru",
+                "use": {
+                  "code": "display",
+                  "system": "http://terminology.hl7.org/CodeSystem/designation-usage"
+                },
+                "value": "Kитайский (Сингапур)"
+              },
+              {
+                "language": "zh",
+                "use": {
+                  "code": "display",
+                  "system": "http://terminology.hl7.org/CodeSystem/designation-usage"
+                },
+                "value": "中文 （新加坡）"
+              },
+              {
+                "language": "de",
+                "use": {
+                  "code": "display",
+                  "system": "http://terminology.hl7.org/CodeSystem/designation-usage"
+                },
+                "value": "Chinesisch (Singapur)"
+              },
+              {
+                "language": "da",
+                "use": {
+                  "code": "display",
+                  "system": "http://terminology.hl7.org/CodeSystem/designation-usage"
+                },
+                "value": "Kinesisk (Singapore)"
+              }
+            ]
+          },
+          {
+            "code": "zh-TW",
+            "display": "Chinese (Taiwan)",
+            "designation": [
+              {
+                "language": "en",
+                "use": {
+                  "code": "display",
+                  "system": "http://terminology.hl7.org/CodeSystem/designation-usage"
+                },
+                "value": "Chinese (Taiwan)"
+              },
+              {
+                "language": "nl",
+                "use": {
+                  "code": "display",
+                  "system": "http://terminology.hl7.org/CodeSystem/designation-usage"
+                },
+                "value": "Chinees (Taiwan)"
+              },
+              {
+                "language": "ru",
+                "use": {
+                  "code": "display",
+                  "system": "http://terminology.hl7.org/CodeSystem/designation-usage"
+                },
+                "value": "Kитайский (Тайвань)"
+              },
+              {
+                "language": "zh",
+                "use": {
+                  "code": "display",
+                  "system": "http://terminology.hl7.org/CodeSystem/designation-usage"
+                },
+                "value": "中文 （台湾）"
+              },
+              {
+                "language": "de",
+                "use": {
+                  "code": "display",
+                  "system": "http://terminology.hl7.org/CodeSystem/designation-usage"
+                },
+                "value": "Chinesisch (Taiwan)"
+              },
+              {
+                "language": "da",
+                "use": {
+                  "code": "display",
+                  "system": "http://terminology.hl7.org/CodeSystem/designation-usage"
+                },
+                "value": "Kinesisk (Taiwan)"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

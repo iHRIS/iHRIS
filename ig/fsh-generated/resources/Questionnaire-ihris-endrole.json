@@ -1,0 +1,57 @@
+{
+  "resourceType": "Questionnaire",
+  "id": "ihris-endrole",
+  "meta": {
+    "profile": [
+      "http://ihris.org/fhir/StructureDefinition/ihris-questionnaire"
+    ]
+  },
+  "url": "http://ihris.org/fhir/Questionnaire/ihris-endrole",
+  "title": "iHRIS End Role Workflow",
+  "description": "iHRIS workflow to end a current role/job",
+  "name": "ihris-endrole",
+  "status": "active",
+  "date": "2020-08-09",
+  "purpose": "Workflow page for ending a role/job.",
+  "item": [
+    {
+      "linkId": "PractitionerRole",
+      "text": "Job End Date",
+      "type": "group",
+      "item": [
+        {
+          "linkId": "period.end",
+          "text": "End Date",
+          "type": "date",
+          "required": true,
+          "repeats": false
+        },
+        {
+          "linkId": "departure",
+          "text": "Reason For Departure",
+          "type": "choice",
+          "answerValueSet": "http://ihris.org/fhir/ValueSet/ihris-reason-departure-valueset",
+          "required": true,
+          "repeats": false
+        },
+        {
+          "linkId": "status",
+          "text": "Position Status",
+          "type": "choice",
+          "required": true,
+          "repeats": false,
+          "readOnly": true,
+          "answerOption": [
+            {
+              "valueCoding": {
+                "code": "closed",
+                "system": "http://ihris.org/fhir/CodeSystem/ihris-position-status"
+              },
+              "initialSelected": true
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
