@@ -270,3 +270,29 @@ Usage: #definition
 * type = #string
 * expression = "PractitionerRole.extension('http://ihris.org/fhir/StructureDefinition/ihris-related-group').extension('practitioner')"
 * xpathUsage = #normal
+
+Instance: facility-location-search-parameter
+InstanceOf: SearchParameter
+Usage: #definition
+* url = "http://ihris.org/fhir/SearchParameter/facility-location-search-parameter"
+* name = "Search Parameter for Facility location for Location"
+* base = #Location
+* description = "Search Facility by Location"
+* status = #active
+* code = #facility-location
+* type = #reference
+* expression = "Location.extension('http://ihris.org/fhir/StructureDefinition/ihris-facility-location')"
+* xpathUsage = #normal
+
+Instance: practitioner-medicalLicenseNumber
+InstanceOf: SearchParameter
+Usage: #definition
+* url = "http://ihris.org/fhir/SearchParameter/practitioner-medicalLicenseNumber"
+* name = "Search Parameter on Medical License Number for practitioner"
+* status = #active
+* description = "Search by medical license number for a practitioner resource."
+* code = #medicalLicenseNumber
+* base = #Practitioner
+* type = #string
+* expression = "Practitioner.identifier.where(type.coding.code='MD').value"
+* xpathUsage = #normal

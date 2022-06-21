@@ -108,7 +108,6 @@ Description:    "iHRIS user Practitioner extension for local users."
 * valueReference.reference 0..1 MS
 * valueReference.reference ^label = "Self Service Practitioner"
 
-Instance:       ihris-user-admin
 /*Instance:       ihris-user-admin
 InstanceOf:     IhrisPersonUser
 Title:          "iHRIS Admin User"
@@ -124,7 +123,7 @@ Usage:          #example
 * extension[role][0].valueReference = Reference(Basic/ihris-role-admin)*/
 
 Instance: ihris-user-admin
-InstanceOf: Person
+InstanceOf: IhrisPersonUser
 Usage: #example
 * meta.profile = "http://ihris.org/fhir/StructureDefinition/ihris-person-user"
 * extension[0].url = "http://ihris.org/fhir/StructureDefinition/ihris-password"
