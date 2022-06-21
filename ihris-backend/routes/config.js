@@ -12,6 +12,7 @@ const path = require("path")
 const bulkRegistration = require("../modules/bulkRegistration")
 const employeeId = require("../modules/employeeIdPrintout");
 const employeeCv = require("../modules/employeeCvPrintout");
+const winston = require("winston");
 
 const getUKey = () => {
   return Math.random().toString(36).replace(/^[^a-z]+/,'') + Math.random().toString(36).substring(2,15)
@@ -173,6 +174,26 @@ const getDefinition = ( resource ) => {
   return fhirAxios.read( structureDef[0], structureDef[1] )
 }
 const profileResources = {}
+
+const getLocationByRef = async (reference) => {
+  return new Promise((resolve) => {
+    if (reference && reference !== "") {
+      let urlObj = reference.split("/");
+      fhirAxios
+          .read(urlObj[0], urlObj.pop())
+          .then(async (resource) => {
+            resolve(resource.name);
+          })
+          .catch((err) => {
+            winston.error(err.message);
+            let outcome = { ...outcomes.ERROR };
+            outcome.issue[0].diagnostics = err.message;
+            resolve("");
+          });
+    }
+  });
+};
+
 const getProfileResource = ( profile ) => {
   return new Promise( (resolve, reject) => {
     let id = profile.substring( profile.lastIndexOf('/')+1 )
