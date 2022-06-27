@@ -628,6 +628,11 @@ router.get('/page/:page/:type?', function(req, res) {
           }
           return output
         }
+        vueOutput +=
+            '<div><ihris-practitioner-intro :position="position" :slotProps="slotProps" :isQuestionnaire="false">\n' +
+            "</ihris-practitioner-intro></div>\n" +
+            '<div class="ihris-intro-float"></div>\n';
+
         for ( let name of sectionKeys ) {
           vueOutput += "<ihris-section :slotProps=\"slotProps\" :edit=\"isEdit\" name=\""+name+"\" title=\""+sections[name].title+"\" description=\""+sections[name].description+"\" :secondary=\""+!!sections[name].resource+"\">\n<template #default=\"slotProps\">\n"
           if ( sections[name].resource ) {
@@ -1553,53 +1558,25 @@ router.get("/employeeId/:id", (req, res) => {
       let userData = {};
       userData.id = req.params.id;
 
-      let userPhone = user.extension.find(
-          (obj) =>
-              obj.url ===
-              "http://ihris.org/fhir/StructureDefinition/ihris-personal-information-phone"
-      );
+      userData.fullName=`${user.name[0].prefix[0]} ${user.name[0].given[0]} ${user.name[0].family}`
 
-      userData.phone = userPhone ? userPhone.valueString : "";
+      userData.gender = user.gender;
 
-      // let employeeIdNo = user.identifier.find(
-      //     (obj) => obj.type.coding[0].code === "employeeId"
-      // );
+      userData.photo = user.photo;
 
-      // userData.employeeId = employeeIdNo ? employeeIdNo.value : "";
-      userData.employeeId = "12345";
+      userData.phone =user.telecom.find(x=> x.system === "phone")?.value;
 
-      let location = user.extension.find(
-          (obj) =>
-              obj.url ===
-              "http://ihris.org/fhir/StructureDefinition/ihris-practitioner-residence"
-      );
+      userData.employeeId = user.identifier.find(x=>x.type.coding[0].code = "EN")?.value;
 
-      let locationId = location ? location.valueReference.reference : "";
+      userData.residence = user.address[0]?.city;
 
-      if (locationId) {
-        let residence = await fhirAxios.search(locationId);
+      userData.nationality = user.address[0]?.country;
 
-        userData.residence = residence.name ? residence.name : "";
-      } else {
-        userData.residence = "";
-      }
-      let nationality = user.extension.find(
-          (obj) =>
-              obj.url ===
-              "http://ihris.org/fhir/StructureDefinition/ihris-practitioner-nationality"
-      );
+      userData.email = user.telecom.find(x=> x.system === "email")?.value
 
-      userData.nationality = nationality ? nationality.valueCoding.display : "";
-
-      let userEmail = user.extension.find(
-          (obj) =>
-              obj.url ===
-              "http://ihris.org/fhir/StructureDefinition/ihris-personal-information-email"
-      );
-      userData.email = userEmail ? userEmail.valueString : "";
       let data = await fhirAxios.search("PractitionerRole", {
         _profile:
-            "http://ihris.org/fhir/StructureDefinition/ihris-job-description",
+            "http://ihris.org/fhir/StructureDefinition/ihris-practitioner-role",
         practitioner: req.params.id,
       });
       let organizationLocation =
@@ -1611,54 +1588,26 @@ router.get("/employeeId/:id", (req, res) => {
             organizationLocation[0],
             organizationLocation[1]
         );
-        userData.logo =
-            organizationData &&
-            organizationData.extension &&
-            organizationData.extension[0] &&
-            organizationData.extension[0].extension.length > 0 &&
-            organizationData.extension[0].extension[0] &&
-            organizationData.extension[0].extension[0].valueAttachment
-                ? organizationData.extension[0].extension[0].valueAttachment
-                : null;
-        userData.signature =
-            organizationData &&
-            organizationData.extension &&
-            organizationData.extension[0] &&
-            organizationData.extension[0].extension.length &&
-            organizationData.extension[0].extension[2] &&
-            organizationData.extension[0].extension[2].valueAttachment
-                ? organizationData.extension[0].extension[2].valueAttachment
-                : null;
-        userData.stamp =
-            organizationData &&
-            organizationData.extension &&
-            organizationData.extension[0] &&
-            organizationData.extension[0].extension.length &&
-            organizationData.extension[0].extension[1] &&
-            organizationData.extension[0].extension[1].valueAttachment
-                ? organizationData.extension[0].extension[1].valueAttachment
-                : null;
+
+        let organizationInformation = organizationData?.extension?.find(x => x.url === "http://ihris.org/fhir/StructureDefinition/ihris-facility-information-details")
+
+        let logo = organizationInformation?.extension?.find(x =>x.url === "logo")?.valueAttachment
+
+        let stamp = organizationInformation?.extension?.find(x =>x.url === "stamp")?.valueAttachment
+
+        let signature = organizationInformation?.extension?.find(x =>x.url === "signature")?.valueAttachment
+
+        userData.logo = logo;
+
+        userData.signature = signature;
+
+        userData.stamp = stamp;
       }
       let role = data.entry
           ? data.entry[0].resource.code[0].coding[0].display
           : "";
       userData.position = role ? role : "";
 
-      let prefix =
-          user.name[0] &&
-          user.name[0].extension &&
-          user.name[0].extension.length > 0 &&
-          user.name[0].extension[0] &&
-          user.name[0].extension[0].valueCoding
-              ? user.name[0].extension[0].valueCoding.display
-              : "";
-      userData.fullName="Muluken Boagle"
-      // userData.fullName = `${prefix ? prefix : ""} ${user.name[0].given[0]} ${
-      //     user.extension[0].extension[0].valueString
-      // } ${user.extension[0].extension[2].valueString}`;
-      userData.gender = user.gender;
-      userData.photo = user.photo;
-      // userData.position = user.extension[9] ? user.extension[9].valueCoding.display : ''
       let fileName = `${userData.id}_id.png`;
       let p = path.join(__dirname, "../employee_ids_generated/", fileName);
       employeeId(userData).then((_) => {
@@ -1675,7 +1624,6 @@ router.get("/employeeCv/:id", async (req, res) => {
     const educationData = [];
     const workExperiences = [];
     const languages = [];
-    const skills = [];
     try {
       const data = await fhirAxios.search(`/Basic`, {
         practitioner: req.params.id,
@@ -1684,21 +1632,12 @@ router.get("/employeeCv/:id", async (req, res) => {
       });
       if (data && data.entry && data.entry.length > 0) {
         data.entry.map((expr) => {
-          // console.log(JSON.stringify(expr, null, 2));
+          let employmentHistory = expr.resource.extension.find(x => x.url === "http://ihris.org/fhir/StructureDefinition/ihris-employment-history")
           let workExperience = {};
-          workExperience.organization = expr.resource.extension[1].extension[0]
-              ? expr.resource.extension[1].extension[0].valueString
-              : "";
-          workExperience.address = expr.resource.extension[1].extension[1]
-              ? expr.resource.extension[1].extension[1].valueString
-              : "";
-          workExperience.startingPosition = expr.resource.extension[1]
-              .extension[2]
-              ? expr.resource.extension[1].extension[2].valueString
-              : "";
-          workExperience.period = expr.resource.extension[1].extension[3]
-              ? expr.resource.extension[1].extension[3].valuePeriod
-              : "";
+          workExperience.organization = employmentHistory.extension.find(x => x.url ==="organization")?.valueString
+          workExperience.address = employmentHistory.extension.find(x => x.url ==="address")?.valueString
+          workExperience.startingPosition = employmentHistory.extension.find(x => x.url ==="startingPosition")?.valueString
+          workExperience.period = employmentHistory.extension.find(x => x.url ==="period")?.valuePeriod
           workExperiences.push(workExperience);
         });
       }
@@ -1709,7 +1648,7 @@ router.get("/employeeCv/:id", async (req, res) => {
     try {
       let data = await fhirAxios.search("PractitionerRole", {
         _profile:
-            "http://ihris.org/fhir/StructureDefinition/ihris-job-description",
+            "http://ihris.org/fhir/StructureDefinition/ihris-practitioner-role",
         practitioner: req.params.id,
       });
 
@@ -1729,20 +1668,11 @@ router.get("/employeeCv/:id", async (req, res) => {
       if (data && data.entry && data.entry.length > 0) {
         data.entry.map((data) => {
           let educationInfo = {};
-          educationInfo.institution = data.resource.extension[1].extension[0]
-              .valueCoding
-              ? data.resource.extension[1].extension[0].valueCoding.display
-              : "";
-          educationInfo.level = data.resource.extension[1].extension[1]
-              ? data.resource.extension[1].extension[1].valueCoding.display
-              : "";
-          educationInfo.educationalMajor = data.resource.extension[1]
-              .extension[2]
-              ? data.resource.extension[1].extension[2].valueCoding.display
-              : "";
-          educationInfo.year = data.resource.extension[1].extension[3]
-              ? data.resource.extension[1].extension[3].valueDate
-              : "";
+          let educationHistory = data.resource.extension.find(x => x.url === "http://ihris.org/fhir/StructureDefinition/ihris-education-history")
+          educationInfo.institution = educationHistory.extension.find(x => x.url === "institution")?.valueCoding?.display;
+          educationInfo.level = educationHistory.extension.find(x => x.url === "level")?.valueCoding?.display
+          educationInfo.educationalMajor = educationHistory.extension.find(x => x.url === "educationalMajor")?.valueCoding?.display
+          educationInfo.year = educationHistory.extension.find(x => x.url === "year")?.valueDate
           educationData.push(educationInfo);
         });
       }
@@ -1751,21 +1681,13 @@ router.get("/employeeCv/:id", async (req, res) => {
     }
     try {
       const user = await fhirAxios.read("/Practitioner", req.params.id);
-      userData.fullName = `muluken Bogale`;
-      // userData.fullName = `${user.name[0].given[0]} ${user.extension[0].extension[0].valueString} ${user.extension[0].extension[2].valueString}`;
-      userData.gender = user.gender;
-      userData.photo = user.photo;
-      userData.phone = user.extension.find(
-          (obj) =>
-              obj.url ===
-              "http://ihris.org/fhir/StructureDefinition/ihris-personal-information-phone"
-      ).valueString;
+      userData.fullName = `${user.name[0].prefix[0]} ${user.name[0].given[0]} ${user.name[0].family}`
+      console.log(JSON.stringify(user,null,2))
 
-      userData.email = user.extension.find(
-          (obj) =>
-              obj.url ===
-              "http://ihris.org/fhir/StructureDefinition/ihris-personal-information-email"
-      ).valueString;
+       userData.gender = user.gender;
+      userData.photo = user.photo;
+      userData.phone =user.telecom.find(x=> x.system === "phone")?.value;
+      userData.email = user.telecom.find(x=> x.system === "email")?.value
 
       userData.education = educationData;
 
@@ -1789,6 +1711,7 @@ router.get("/employeeCv/:id", async (req, res) => {
         .catch((e) => console.log(e));
   }
 });
+
 router.post("/facilityInformation", async (req, res) => {
   const getAge = (birthdate, ageRange) => {
     let birthYear = new Date(birthdate).getFullYear();
@@ -1818,7 +1741,7 @@ router.post("/facilityInformation", async (req, res) => {
     let response = {};
     let facilityInformation = [];
     try {
-      let locationData = await fhirAxios.read("Location", req.body.id.split("/").pop());
+      let locationData = await fhirAxios.read("Location", req.body?.id?.split("/").pop());
       if (locationData) {
         if (locationData.partOf) {
           let facilityData = await fhirAxios.read("Location", locationData.partOf.reference.split("/").pop());
@@ -1870,11 +1793,11 @@ router.post("/facilityInformation", async (req, res) => {
     response.facilityInformation = facilityInformation;
     if (req.body.partOf) {
       let data = await fhirAxios.search("PractitionerRole", {
-        _profile: "http://ihris.org/fhir/StructureDefinition/ihris-job-description",
+        _profile: "http://ihris.org/fhir/StructureDefinition/ihris-practitioner-role",
         "related-location:exact": req.body.id,
-        active: "true",
+        // active: "true",
         "_include:iterate": "PractitionerRole:practitioner",
-      });
+      })
       response.total = data.total;
       let gender = {
         male: 0, female: 0,
@@ -1882,10 +1805,6 @@ router.post("/facilityInformation", async (req, res) => {
 
       let ageRange = {
         "20to35": 0, "36to45": 0, "46to55": 0, "56to65": 0, gt65: 0,
-      };
-
-      let professionCategory = {
-        professional: 0, administrative: 0, academic: 0,
       };
 
       if (data.total > 0) {
@@ -1897,33 +1816,20 @@ router.post("/facilityInformation", async (req, res) => {
               gender.female += 1;
             }
             getAge(data.resource.birthDate, ageRange);
-
-            let profession = data.resource.extension.find((x) => x.url === "http://ihris.org/fhir/StructureDefinition/ihris-personal-Information-category");
-            if (profession && profession.valueCoding) {
-              if (profession.valueCoding.code === "professional") {
-                professionCategory.professional += 1;
-              }
-              if (profession.valueCoding.code === "administrative") {
-                professionCategory.administrative += 1;
-              }
-              if (profession.valueCoding.code === "academic") {
-                professionCategory.academic += 1;
-              }
-            }
           }
         });
       }
       response.gender = gender;
       response.ageRange = ageRange;
-      response.professionCategory = professionCategory;
     } else {
       try {
         let data = await fhirAxios.search("PractitionerRole", {
-          _profile: "http://ihris.org/fhir/StructureDefinition/ihris-job-description",
+          _profile: "http://ihris.org/fhir/StructureDefinition/ihris-practitioner-role",
           location: req.body.id.split("/").pop(),
-          active: "true",
+          // active: "true",
           "_include:iterate": "PractitionerRole:practitioner",
         });
+        console.log("*********************",JSON.stringify(data,null,2));
         response.total = data.total;
         let gender = {
           male: 0, female: 0,
@@ -1933,9 +1839,6 @@ router.post("/facilityInformation", async (req, res) => {
           "20to35": 0, "36to45": 0, "46to55": 0, "56to65": 0, gt65: 0,
         };
 
-        let professionCategory = {
-          professional: 0, administrative: 0, academic: 0,
-        };
 
         if (data.total > 0) {
           data.entry.map((data) => {
@@ -1946,25 +1849,11 @@ router.post("/facilityInformation", async (req, res) => {
                 gender.female += 1;
               }
               getAge(data.resource.birthDate, ageRange);
-
-              let profession = data.resource.extension.find((x) => x.url === "http://ihris.org/fhir/StructureDefinition/ihris-personal-Information-category");
-              if (profession && profession.valueCoding) {
-                if (profession.valueCoding.code === "professional") {
-                  professionCategory.professional += 1;
-                }
-                if (profession.valueCoding.code === "administrative") {
-                  professionCategory.administrative += 1;
-                }
-                if (profession.valueCoding.code === "academic") {
-                  professionCategory.academic += 1;
-                }
-              }
             }
           });
         }
         response.gender = gender;
         response.ageRange = ageRange;
-        response.professionCategory = professionCategory;
       } catch (err) {
         console.log(err);
       }

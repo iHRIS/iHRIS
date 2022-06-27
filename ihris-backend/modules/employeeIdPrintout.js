@@ -1,6 +1,5 @@
 const pify = require("pify");
 const imageSizeOf = require("image-size");
-
 const {
     createCanvas,
     loadImage,
@@ -30,7 +29,7 @@ module.exports = create = async (userData) => {
 
     ctx.textBaseline = "middle";
     ctx.textAlign = "center";
-    ctx.font = `${22}px `;
+    ctx.font = `${14}px `;
 
     if (userData.logo && userData.logo.data && userData.logo.contentType) {
         let dataURL =
@@ -53,17 +52,17 @@ module.exports = create = async (userData) => {
         }
     }
 
-    ctx.font = `${28}px `;
+    ctx.font = `${14}px `;
 
     ctx.fillText(userData.fullName, 360, 160);
-    ctx.font = `${16}px `;
+    ctx.font = `${14}px `;
     ctx.fillText(userData.position, 390, 200);
-    ctx.font = `${18}px `;
+    ctx.font = `${14}px `;
     ctx.fillText(userData.email, 332, 295);
     ctx.fillText(userData.phone, 290, 340);
-    ctx.font = `${16}px `;
+    ctx.font = `${14}px `;
     ctx.fillText(userData.employeeId, 580, 412);
-    ctx.font = `${18}px `;
+    ctx.font = `${14}px `;
     ctx.fillText(userData.nationality, 500, 295);
 
     ctx.fillText(userData.residence, 490, 340);
