@@ -701,6 +701,10 @@
           "valueString": "tree"
         },
         {
+          "name": "defaults:fields:PractitionerRole.location:initialValue",
+          "valueString": "Location/federal-ministry-of-health"
+        },
+        {
           "name": "defaults:fields:PractitionerRole.location:user_filter:regex",
           "valueString": "related-location=(.+)"
         },

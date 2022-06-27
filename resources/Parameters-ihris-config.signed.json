@@ -16,11 +16,11 @@
             "code": "1.2.840.10065.1.12.1.14"
           }
         ],
-        "when": "2022-06-21T09:31:16.469Z",
+        "when": "2022-06-22T11:52:04.796Z",
         "who": {
           "reference": "http://ihris.org/fhir/Organization/ihris"
         },
-        "data": "V870cwmayGw0tOXXdiUn7/MNEaPt/KzRCk7H2t6IvqxmhshwxLxAYve8yNEdkhj/WhybFokLXR5rhtqU4VKE9EiN/dL1fHVbdu0rk/WrcFy2vPqYPUxepFAAAWQXIQV7gsVSMFEbUOTiYaQ42dt7gddrmJYq8p+6RFLAMDkxpzU="
+        "data": "rMAfwJ5dVjgD4gag/U4qaPaSClJRafiKOsBBMAZiKDgSQC//kJfjX5s17BwNGq45GphAq6NQ+vwCVWiJe9C1tAv5JRfo2fu/ggh1MHBdIDLyrRYzTwxvg1+xj4sLIDm2jwJD2GBI14ajOyty5/O9VT8azGgy8nMurBmSoU6CRY8="
       }
     },
     {
@@ -697,6 +697,10 @@
         {
           "name": "defaults:fields:PractitionerRole.location:type",
           "valueString": "tree"
+        },
+        {
+          "name": "defaults:fields:PractitionerRole.location:initialValue",
+          "valueString": "Location/federal-ministry-of-health"
         },
         {
           "name": "defaults:fields:PractitionerRole.location:user_filter:regex",
