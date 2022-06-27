@@ -106,6 +106,12 @@ import axios from "axios";
 const querystring = require("querystring");
 export default {
   name: "ihris-questionnaire",
+  components: {
+    "ihris-practitioner-intro": () =>
+        import(
+            /* webpackChunkName: "fhir-primary" */ "@/components/ihris/ihris-practitioner-intro"
+            ),
+  },
   props: [
     "id",
     "url",
@@ -146,8 +152,10 @@ export default {
             response
                 .json()
                 .then((data) => {
-                  let role = data.entry[0].resource.code[0].coding[0].display;
-
+                  let role = data.entry
+                      ? data.entry[0].resource.code[0].coding[0].display
+                      : "";
+                  this.position = role ? role : "";
                   this.position = role ? role : "";
                 })
                 .catch((err) => {
