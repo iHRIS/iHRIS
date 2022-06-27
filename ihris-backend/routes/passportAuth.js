@@ -187,7 +187,8 @@ router.post("/signup", (req, res) => {
           return res.status(409).send("User already exists");
         } else {
           fhirAxios.search('Practitioner', {
-            medicalLicenseNumber: req.body.medicalLicenseNumber,
+            birthDate: req.body.birthDate,
+            medicalLicenseNumber: req.body.medicalLicenseNumber
           }).then((usersRes) => {
             if (!usersRes.entry || (usersRes.entry && usersRes.entry.length === 0)) {
               res.status(404).json({ok: false, name: req.body.name})
@@ -316,48 +317,48 @@ router.post("/login", passport.authenticate('local', {}), (req, res) => {
           }
         })
         name = req.user.resource.name[0].text
-
-        user
-            .lookupByEmail(req.user.resource.telecom[0].value)
-            .then((userObj) => {
-              if (userObj) {
-                let codeDetails = userObj.resource.extension
-                    .find(
-                        (ext) =>
-                            ext.url ===
-                            "http://ihris.org/fhir/StructureDefinition/ihris-user-otp"
-                    )
-                    .extension.find((ext) => ext.url === "code");
-
-                if (codeDetails) {
-                  userObj.resource.extension
-                      .find(
-                          (ext) =>
-                              ext.url ===
-                              "http://ihris.org/fhir/StructureDefinition/ihris-user-otp"
-                      )
-                      .extension.find((ext) => ext.url === "code").valueString = otp;
-
-                  userObj
-                      .update()
-                      .then((response) => {
-                        res
-                            .status(200)
-                            .json({ok: true, name: name, user: response});
-                      })
-                      .catch((err) => {
-                        logger.error(err.message);
-                        res
-                            .status(400)
-                            .json({ok: false, message: "failed to user object otp"});
-                      });
-                }
-              }
-            })
-            .catch((err) => {
-              logger.error(err.message);
-              res.status(400).json({ok: false, message: err.message});
-            });
+        // OTP logic implementation
+        // user
+        //     .lookupByEmail(req.user.resource.telecom[0].value)
+        //     .then((userObj) => {
+        //       if (userObj) {
+        //         let codeDetails = userObj.resource.extension
+        //             .find(
+        //                 (ext) =>
+        //                     ext.url ===
+        //                     "http://ihris.org/fhir/StructureDefinition/ihris-user-otp"
+        //             )
+        //             .extension.find((ext) => ext.url === "code");
+        //         if (codeDetails) {
+        //           userObj.resource.extension
+        //               .find(
+        //                   (ext) =>
+        //                       ext.url ===
+        //                       "http://ihris.org/fhir/StructureDefinition/ihris-user-otp"
+        //               )
+        //               .extension.find((ext) => ext.url === "code").valueString = otp;
+        //
+        //           userObj
+        //               .update()
+        //               .then((response) => {
+        //                 res
+        //                     .status(200)
+        //                     .json({ok: true, name: name, user: response});
+        //               })
+        //               .catch((err) => {
+        //                 logger.error(err.message);
+        //                 res
+        //                     .status(400)
+        //                     .json({ok: false, message: "failed to user object otp"});
+        //               });
+        //         }
+        //       }
+        //     })
+        //     .catch((err) => {
+        //       console.log("))))))))))",JSON.stringify(err.message,null,2))
+        //       logger.error(err.message);
+        //       res.status(400).json({ok: false, message: err.message});
+        //     });
       } catch (err) {
         console.error("Error ", err)
       }
@@ -377,6 +378,18 @@ router.post("/password-reset-request", async (req, res) => {
       if (userObj) {
         let resetToken = crypto.randomBytes(64).toString('hex')
         let hash = crypto.pbkdf2Sync(userObj.resource.id, resetToken, 1000, 64, 'sha512').toString('hex')
+        if(userObj.resource.extension.find(ext => ext.url === "http://ihris.org/fhir/StructureDefinition/ihris-password").extension.find(ext => ext.url === "resetPasswordToken") === undefined){
+          userObj.resource.extension.find(ext => ext.url === "http://ihris.org/fhir/StructureDefinition/ihris-password").extension.push({
+            "url": "resetPasswordToken",
+            "valueString": ""
+          })
+        }
+        if(userObj.resource.extension.find(ext => ext.url === "http://ihris.org/fhir/StructureDefinition/ihris-password").extension.find(ext => ext.url === "resetPasswordExpiry") === undefined){
+          userObj.resource.extension.find(ext => ext.url === "http://ihris.org/fhir/StructureDefinition/ihris-password").extension.push({
+            "url": "resetPasswordExpiry",
+            "valueString": ""
+          })
+        }
         userObj.resource.extension.find(ext => ext.url === "http://ihris.org/fhir/StructureDefinition/ihris-password").extension.find(ext => ext.url === "resetPasswordToken").valueString = hash
         userObj.resource.extension.find(ext => ext.url === "http://ihris.org/fhir/StructureDefinition/ihris-password").extension.find(ext => ext.url === "resetPasswordExpiry").valueString = new Date(Date.now() + (60 * 60 * 1000))
         userObj.update().then((response) => {
