@@ -1,0 +1,154 @@
+{
+  "resourceType": "Basic",
+  "id": "ihris-page-employment-history",
+  "meta": {
+    "profile": [
+      "http://ihris.org/fhir/StructureDefinition/ihris-page"
+    ]
+  },
+  "code": {
+    "coding": [
+      {
+        "code": "page",
+        "system": "http://ihris.org/fhir/CodeSystem/ihris-resource-codesystem"
+      }
+    ]
+  },
+  "extension": [
+    {
+      "url": "http://ihris.org/fhir/StructureDefinition/ihris-page-display",
+      "extension": [
+        {
+          "url": "resource",
+          "valueReference": {
+            "reference": "StructureDefinition/ihris-basic-employment-history"
+          }
+        },
+        {
+          "url": "search",
+          "valueString": "Organization|extension.where(url='http://ihris.org/fhir/StructureDefinition/ihris-employment-history').extension.where(url='organization').valueString"
+        },
+        {
+          "extension": [
+            {
+              "url": "field",
+              "valueString": "Basic.extension.where(url='http://ihris.org/fhir/StructureDefinition/ihris-practitioner-reference').valueReference.reference"
+            },
+            {
+              "url": "url",
+              "valueUrl": "/resource/view/practitioner/FIELD"
+            },
+            {
+              "url": "text",
+              "valueString": "View Health Worker"
+            },
+            {
+              "url": "button",
+              "valueBoolean": true
+            },
+            {
+              "url": "icon",
+              "valueString": "mdi-account-arrow-right"
+            }
+          ],
+          "url": "link"
+        },
+        {
+          "extension": [
+            {
+              "url": "field",
+              "valueString": "Basic.extension.where(url='http://ihris.org/fhir/StructureDefinition/ihris-practitioner-reference').valueReference.reference"
+            },
+            {
+              "url": "url",
+              "valueUrl": "/questionnaire/ihris-employment-history/employment-history?practitioner=FIELD"
+            },
+            {
+              "url": "text",
+              "valueString": "Add Another"
+            },
+            {
+              "url": "button",
+              "valueBoolean": true
+            },
+            {
+              "url": "icon",
+              "valueString": "mdi-account-arrow-right"
+            }
+          ],
+          "url": "link"
+        },
+        {
+          "url": "search",
+          "valueString": "Starting Position|extension.where(url='http://ihris.org/fhir/StructureDefinition/ihris-employment-history').extension.where(url='startingPosition').valueString"
+        },
+        {
+          "extension": [
+            {
+              "url": "path",
+              "valueString": "Basic.extension:practitioner.value[x]:valueReference"
+            },
+            {
+              "url": "readOnlyIfSet",
+              "valueBoolean": true
+            }
+          ],
+          "url": "field"
+        }
+      ]
+    },
+    {
+      "extension": [
+        {
+          "url": "title",
+          "valueString": "Work Experience"
+        },
+        {
+          "url": "description",
+          "valueString": "Work Experience details"
+        },
+        {
+          "url": "name",
+          "valueString": "Basic"
+        },
+        {
+          "url": "field",
+          "valueString": "Basic.extension:practitioner"
+        },
+        {
+          "url": "field",
+          "valueString": "Basic.extension:employmentHistory.extension:organization.value[x]:valueString"
+        },
+        {
+          "url": "field",
+          "valueString": "Basic.extension:employmentHistory.extension:address.value[x]:valueString"
+        },
+        {
+          "url": "field",
+          "valueString": "Basic.extension:employmentHistory.extension:telephone.value[x]:valueString"
+        },
+        {
+          "url": "field",
+          "valueString": "Basic.extension:employmentHistory.extension:startingPosition.value[x]:valueString"
+        },
+        {
+          "url": "field",
+          "valueString": "Basic.extension:employmentHistory.extension:startingSalary.value[x]:valueMoney"
+        },
+        {
+          "url": "field",
+          "valueString": "Basic.extension:employmentHistory.extension:period.value[x]:valuePeriod"
+        },
+        {
+          "url": "field",
+          "valueString": "Basic.extension:employmentHistory.extension:responsibilities.value[x]:valueString"
+        },
+        {
+          "url": "field",
+          "valueString": "Basic.extension:employmentHistory.extension:reasonLeaving.value[x]:valueString"
+        }
+      ],
+      "url": "http://ihris.org/fhir/StructureDefinition/ihris-page-section"
+    }
+  ]
+}

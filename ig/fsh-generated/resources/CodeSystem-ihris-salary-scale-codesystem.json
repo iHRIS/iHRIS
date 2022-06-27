@@ -1,0 +1,11 @@
+{
+  "resourceType": "CodeSystem",
+  "status": "active",
+  "content": "complete",
+  "name": "IhrisSalaryScaleCodeSystem",
+  "id": "ihris-salary-scale-codesystem",
+  "title": "Salary Scale",
+  "version": "0.3.0",
+  "url": "http://ihris.org/fhir/CodeSystem/ihris-salary-scale-codesystem",
+  "date": "2020-09-29T08:41:04.362Z"
+}

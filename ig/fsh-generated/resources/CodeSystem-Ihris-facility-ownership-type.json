@@ -1,0 +1,26 @@
+{
+  "resourceType": "CodeSystem",
+  "status": "active",
+  "content": "complete",
+  "name": "IhrisFacilityOwnershipTypeCodeSystem",
+  "id": "Ihris-facility-ownership-type",
+  "title": "Facility Ownership Type",
+  "version": "0.4.0",
+  "url": "http://ihris.org/fhir/CodeSystem/Ihris-facility-ownership-type",
+  "concept": [
+    {
+      "code": "private",
+      "display": "Private"
+    },
+    {
+      "code": "government",
+      "display": "Government"
+    },
+    {
+      "code": "NGO",
+      "display": "NGO's"
+    }
+  ],
+  "date": "2022-02-23T08:41:04.362Z",
+  "count": 3
+}

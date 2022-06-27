@@ -1,0 +1,16 @@
+{
+  "resourceType": "ValueSet",
+  "status": "active",
+  "name": "IhrisLeaveTypeValueSet",
+  "id": "ihris-leave-type-valueset",
+  "title": "iHRIS leave Type ValueSet",
+  "version": "0.2.0",
+  "url": "http://ihris.org/fhir/ValueSet/ihris-leave-type-valueset",
+  "compose": {
+    "include": [
+      {
+        "system": "http://ihris.org/fhir/CodeSystem/ihris-leave-type-codesystem"
+      }
+    ]
+  }
+}

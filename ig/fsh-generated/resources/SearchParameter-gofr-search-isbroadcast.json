@@ -1,0 +1,16 @@
+{
+  "resourceType": "SearchParameter",
+  "id": "gofr-search-isbroadcast",
+  "url": "http://gofr.org/fhir/SearchParameter/gofr-search-isbroadcast",
+  "description": "search parameter for broadcasted messages",
+  "name": "search parameter for broadcasted messages",
+  "status": "active",
+  "experimental": false,
+  "code": "isbroadcast",
+  "base": [
+    "CommunicationRequest"
+  ],
+  "type": "token",
+  "expression": "CommunicationRequest.extension('http://mhero.org/fhir/StructureDefinition/mhero-comm-req-broadcast-starts').exists()",
+  "xpath": "f:CommunicationRequest/f:extension[@url='http://mhero.org/fhir/StructureDefinition/mhero-comm-req-broadcast-starts']/f:exists"
+}

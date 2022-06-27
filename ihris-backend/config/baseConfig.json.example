@@ -16,6 +16,10 @@
       "valueString": "false"
     },
     {
+      "name": "app:Parameters",
+      "valueString": "../resources/Parameters-ihris-config.signed.json"
+    },
+    {
       "name": "builtFSHFIles",
       "valueString": "../ig/fsh-generated/resources"
     },

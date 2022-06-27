@@ -1,0 +1,157 @@
+{
+  "resourceType": "Basic",
+  "id": "ihris-page-emergency",
+  "meta": {
+    "profile": [
+      "http://ihris.org/fhir/StructureDefinition/ihris-page"
+    ]
+  },
+  "code": {
+    "coding": [
+      {
+        "code": "page",
+        "system": "http://ihris.org/fhir/CodeSystem/ihris-resource-codesystem"
+      }
+    ]
+  },
+  "extension": [
+    {
+      "url": "http://ihris.org/fhir/StructureDefinition/ihris-page-display",
+      "extension": [
+        {
+          "url": "resource",
+          "valueReference": {
+            "reference": "StructureDefinition/ihris-basic-emergency"
+          }
+        },
+        {
+          "url": "search",
+          "valueString": "Emergency|extension.where(url='http://ihris.org/fhir/StructureDefinition/ihris-emergency').extension.where(url='name').valueString"
+        },
+        {
+          "extension": [
+            {
+              "url": "field",
+              "valueString": "Basic.extension.where(url='http://ihris.org/fhir/StructureDefinition/ihris-practitioner-reference').valueReference.reference"
+            },
+            {
+              "url": "url",
+              "valueUrl": "/resource/view/practitioner/FIELD"
+            },
+            {
+              "url": "text",
+              "valueString": "View Health Worker"
+            },
+            {
+              "url": "button",
+              "valueBoolean": true
+            },
+            {
+              "url": "icon",
+              "valueString": "mdi-account-arrow-right"
+            }
+          ],
+          "url": "link"
+        },
+        {
+          "extension": [
+            {
+              "url": "path",
+              "valueString": "Basic.extension:practitioner.value[x]:valueReference"
+            },
+            {
+              "url": "readOnlyIfSet",
+              "valueBoolean": true
+            }
+          ],
+          "url": "field"
+        }
+      ]
+    },
+    {
+      "extension": [
+        {
+          "url": "title",
+          "valueString": "Emergency Contact"
+        },
+        {
+          "url": "description",
+          "valueString": "Emergency Contact details"
+        },
+        {
+          "url": "name",
+          "valueString": "Basic"
+        },
+        {
+          "url": "field",
+          "valueString": "Basic.extension:practitioner"
+        },
+        {
+          "url": "field",
+          "valueString": "Basic.extension:emergency.extension:name.value[x]:valueString"
+        },
+        {
+          "url": "field",
+          "valueString": "Basic.extension:emergency.extension:altlangName.value[x]:valueString"
+        },
+        {
+          "url": "field",
+          "valueString": "Basic.extension:emergency.extension:relation.value[x]:valueCoding"
+        },
+        {
+          "url": "field",
+          "valueString": "Basic.extension:emergency.extension:phone.value[x]:valueString"
+        },
+        {
+          "url": "field",
+          "valueString": "Basic.extension:emergency.extension:mobile.value[x]:valueString"
+        },
+        {
+          "url": "field",
+          "valueString": "Basic.extension:emergency.extension:workPhone.value[x]:valueString"
+        },
+        {
+          "url": "field",
+          "valueString": "Basic.extension:emergency.extension:otherPhone.value[x]:valueString"
+        },
+        {
+          "url": "field",
+          "valueString": "Basic.extension:emergency.extension:workEmail.value[x]:valueString"
+        },
+        {
+          "url": "field",
+          "valueString": "Basic.extension:emergency.extension:otherEmail.value[x]:valueString"
+        },
+        {
+          "url": "field",
+          "valueString": "Basic.extension:emergency.extension:location.value[x]:valueReference"
+        },
+        {
+          "url": "field",
+          "valueString": "Basic.extension:emergency.extension:city.value[x]:valueString"
+        },
+        {
+          "url": "field",
+          "valueString": "Basic.extension:emergency.extension:kebele.value[x]:valueString"
+        },
+        {
+          "url": "field",
+          "valueString": "Basic.extension:emergency.extension:houseNumber.value[x]:valueString"
+        },
+        {
+          "url": "field",
+          "valueString": "Basic.extension:emergency.extension:address.value[x]:valueAddress"
+        },
+        {
+          "url": "field",
+          "valueString": "Basic.extension:emergency.extension:remark.value[x]:valueString"
+        },
+        {
+          "url": "field",
+          "valueString": "Basic.extension:emergency.extension:attachment.value[x]:valueAttachment"
+        }
+      ],
+      "url": "http://ihris.org/fhir/StructureDefinition/ihris-page-section"
+    }
+  ]
+}

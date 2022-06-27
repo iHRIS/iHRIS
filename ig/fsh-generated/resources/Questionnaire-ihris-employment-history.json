@@ -1,0 +1,157 @@
+{
+  "resourceType": "Questionnaire",
+  "id": "ihris-employment-history",
+  "meta": {
+    "profile": [
+      "http://ihris.org/fhir/StructureDefinition/ihris-questionnaire"
+    ]
+  },
+  "url": "http://ihris.org/fhir/Questionnaire/ihris-employment-history",
+  "item": [
+    {
+      "extension": [
+        {
+          "extension": [
+            {
+              "url": "key",
+              "valueId": "ihris-start-end-date"
+            },
+            {
+              "url": "severity",
+              "valueCode": "error"
+            },
+            {
+              "url": "expression",
+              "valueString": "where(linkId='Basic.extension[0].extension[6]').answer.first().valueDateTime.empty() or where(linkId='Basic.extension[0].extension[6]').answer.first().valueDateTime >= where(linkId='Basic.extension[0].extension[5]').answer.first().valueDateTime"
+            },
+            {
+              "url": "human",
+              "valueString": "The end date must be after the start date."
+            }
+          ],
+          "url": "http://hl7.org/fhir/StructureDefinition/questionnaire-constraint"
+        }
+      ],
+      "item": [
+        {
+          "linkId": "Basic.extension[0].extension[0]",
+          "text": "Organization Name",
+          "type": "string",
+          "required": true,
+          "repeats": false
+        },
+        {
+          "linkId": "Basic.extension[0].extension[1]",
+          "text": "Organization Address",
+          "type": "text",
+          "required": false,
+          "repeats": false
+        },
+        {
+          "linkId": "Basic.extension[0].extension[2]",
+          "text": "Organization Telephone",
+          "type": "string",
+          "required": false,
+          "repeats": false
+        },
+        {
+          "linkId": "Basic.extension[0].extension[3]",
+          "text": "Position",
+          "type": "string",
+          "required": true,
+          "repeats": false
+        },
+        {
+          "linkId": "Basic.extension[0].extension[4]",
+          "text": "Salary",
+          "type": "string",
+          "required": false,
+          "repeats": false
+        },
+        {
+          "extension": [
+            {
+              "extension": [
+                {
+                  "url": "key",
+                  "valueId": "ihris-date-lessthantoday-check"
+                },
+                {
+                  "url": "severity",
+                  "valueCode": "error"
+                },
+                {
+                  "url": "expression",
+                  "valueString": "$this < today() + 1 day"
+                },
+                {
+                  "url": "human",
+                  "valueString": "Start Date must not be in the future."
+                }
+              ],
+              "url": "http://hl7.org/fhir/StructureDefinition/questionnaire-constraint"
+            }
+          ],
+          "linkId": "Basic.extension[0].extension[5]",
+          "text": "Date Started",
+          "type": "dateTime",
+          "required": true,
+          "repeats": false
+        },
+        {
+          "extension": [
+            {
+              "extension": [
+                {
+                  "url": "key",
+                  "valueId": "ihris-date-lessthantoday-check"
+                },
+                {
+                  "url": "severity",
+                  "valueCode": "error"
+                },
+                {
+                  "url": "expression",
+                  "valueString": "$this < today() + 1 day"
+                },
+                {
+                  "url": "human",
+                  "valueString": "ENd Date must not be in the future."
+                }
+              ],
+              "url": "http://hl7.org/fhir/StructureDefinition/questionnaire-constraint"
+            }
+          ],
+          "linkId": "Basic.extension[0].extension[6]",
+          "text": "Date Ended",
+          "type": "dateTime",
+          "required": true,
+          "repeats": false
+        },
+        {
+          "linkId": "Basic.extension[0].extension[7]",
+          "text": "Job Description",
+          "type": "text",
+          "required": false,
+          "repeats": false
+        },
+        {
+          "linkId": "Basic.extension[0].extension[8]",
+          "text": "Reason For Leaving",
+          "type": "string",
+          "required": false,
+          "repeats": false
+        }
+      ],
+      "linkId": "Basic",
+      "text": "Work Experience",
+      "type": "group"
+    }
+  ],
+  "title": "iHRIS Work Experience Workflow",
+  "description": "iHRIS workflow to record a Work Experience",
+  "name": "ihris-employment-history",
+  "status": "active",
+  "date": "2020-08-27",
+  "purpose": "Workflow page for recording a Work Experience information."
+}

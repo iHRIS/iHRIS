@@ -1,0 +1,16 @@
+{
+  "resourceType": "ValueSet",
+  "status": "active",
+  "name": "IhrisPerformanceScoreValueSet",
+  "id": "ihris-performance-score-valueset",
+  "title": "iHRIS Performance Score ValueSet",
+  "version": "0.2.0",
+  "url": "http://ihris.org/fhir/ValueSet/ihris-performance-score-valueset",
+  "compose": {
+    "include": [
+      {
+        "system": "http://ihris.org/fhir/CodeSystem/ihris-performance-score"
+      }
+    ]
+  }
+}

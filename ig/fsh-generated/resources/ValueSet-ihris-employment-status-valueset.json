@@ -1,0 +1,16 @@
+{
+  "resourceType": "ValueSet",
+  "status": "active",
+  "name": "IhrisEmploymentStatusValueSet",
+  "id": "ihris-employment-status-valueset",
+  "title": "iHRIS Employment Status ValueSet",
+  "version": "0.1.0",
+  "url": "http://ihris.org/fhir/ValueSet/ihris-employment-status-valueset",
+  "compose": {
+    "include": [
+      {
+        "system": "http://ihris.org/fhir/CodeSystem/ihris-employment-status-codesystem"
+      }
+    ]
+  }
+}

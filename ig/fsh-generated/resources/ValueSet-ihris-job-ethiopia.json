@@ -1,0 +1,17 @@
+{
+  "resourceType": "ValueSet",
+  "status": "active",
+  "name": "IhrisJobEthiopiaValueset",
+  "id": "ihris-job-ethiopia",
+  "title": "iHRIS Job Title Value Set",
+  "description": "iHRIS ValueSet for: iHRISJobEthiopia",
+  "version": "0.1.0",
+  "url": "http://ihris.org/fhir/ValueSet/ihris-job-ethiopia",
+  "compose": {
+    "include": [
+      {
+        "system": "http://ihris.org/fhir/CodeSystem/ihris-job-ethiopia"
+      }
+    ]
+  }
+}

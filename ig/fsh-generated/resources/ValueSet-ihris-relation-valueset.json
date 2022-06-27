@@ -1,0 +1,17 @@
+{
+  "resourceType": "ValueSet",
+  "status": "active",
+  "name": "IhrisRelationValueSet",
+  "id": "ihris-relation-valueset",
+  "title": "iHRIS Relationship ValueSet",
+  "version": "0.2.0",
+  "url": "http://ihris.org/fhir/ValueSet/ihris-relation-valueset",
+  "date": "2020-10-29T08:41:04.362Z",
+  "compose": {
+    "include": [
+      {
+        "system": "http://ihris.org/fhir/CodeSystem/ihris-relation-codesystem"
+      }
+    ]
+  }
+}

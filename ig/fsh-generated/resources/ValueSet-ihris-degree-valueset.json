@@ -1,0 +1,17 @@
+{
+  "resourceType": "ValueSet",
+  "status": "active",
+  "name": "IhrisDegreeValueSet",
+  "id": "ihris-degree-valueset",
+  "title": "iHRIS Degree ValueSet",
+  "version": "0.3.0",
+  "url": "http://ihris.org/fhir/ValueSet/ihris-degree-valueset",
+  "date": "2020-11-10T08:41:04.362Z",
+  "compose": {
+    "include": [
+      {
+        "system": "http://ihris.org/fhir/CodeSystem/ihris-degree"
+      }
+    ]
+  }
+}

@@ -1,0 +1,44 @@
+{
+  "resourceType": "CodeSystem",
+  "status": "active",
+  "content": "complete",
+  "name": "IhrisEducationLevel",
+  "id": "ihris-education-level",
+  "title": "Education Level",
+  "version": "0.1.0",
+  "url": "http://ihris.org/fhir/CodeSystem/ihris-education-level",
+  "concept": [
+    {
+      "code": "Cerifiticate",
+      "display": "Cerifiticate",
+      "definition": "Cerifiticate"
+    },
+    {
+      "code": "Diploma",
+      "display": "Diploma",
+      "definition": "Diploma"
+    },
+    {
+      "code": "Degree",
+      "display": "Degree",
+      "definition": "Degree"
+    },
+    {
+      "code": "Masters",
+      "display": "Masters",
+      "definition": "Masters"
+    },
+    {
+      "code": "PHD",
+      "display": "PHD",
+      "definition": "PHD"
+    },
+    {
+      "code": "Others",
+      "display": "Others",
+      "definition": "Others"
+    }
+  ],
+  "date": "2020-09-29T08:41:04.362Z",
+  "count": 6
+}

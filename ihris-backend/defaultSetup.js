@@ -75,27 +75,32 @@ const loadKeycloakData = () => new Promise((resolve, reject) => {
   });
 });
  
-/*const loadDefaultConfig = () => new Promise((resolve, reject) => {
+/**
+ * Loading Parameters and Other default files in resources 
+ */
+
+const loadDefaultConfig = () => new Promise((resolve, reject) => {
   const installed = nconf.get('app:installed');
-  if (installed) {
+  if (installed === "true" ) {
     return resolve();
   }
-  const resource = {
-    resourceType: 'Parameters',
-    id: 'gofr-general-config',
-    parameter: [{
-      name: 'config',
-      valueString: '{}',
-    }],
-  };
-  fhirAxios.update(resource, 'DEFAULT').then(() => {
-    console.info('General Config Saved');
-    return resolve();
-  }).catch((err) => {
-    console.error(err);
-    reject();
+  const parameters = nconf.get('app:Parameters');
+  let fullpath = `${__dirname}/${parameters}`;
+    fs.readFile(fullpath, { encoding: 'utf8', flag: 'r' }, (err, data) => {
+          if (err) {
+            console.error(err);
+            errorOccured = true;
+          }
+    const fhirParameters = JSON.parse(data);
+    fhirAxios.update(fhirParameters).then(() => {
+      console.info('General Config Saved');
+      return resolve();
+    }).catch((err) => {
+      console.error(err);
+      reject();
+    });
   });
-});*/
+});
  
 const loadFSHFiles = () => new Promise(async (resolvePar, rejectPar) => {
   const installed = nconf.get('app:installed');
@@ -170,6 +175,9 @@ const loadFSHFiles = () => new Promise(async (resolvePar, rejectPar) => {
     return resolvePar();
   });
 });
+
+
+
  
 module.exports = {
   initialize: () => new Promise((resolve, reject) => {
@@ -183,7 +191,7 @@ module.exports = {
         });
       },
       (callback) => {
-        Promise.all([loadFSHFiles()]).then(() => {
+        Promise.all([loadDefaultConfig(), loadFSHFiles()]).then(() => {
           const idp = nconf.get('app:idp');
           if (idp === 'keycloak') {
             const kcadmin = require('./modules/keycloakAdminClient');
