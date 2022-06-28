@@ -56,17 +56,21 @@
               >Employer number : <strong>{{ intro.employeeID }}</strong></span
             ><br />
             <span
+            >Email : <strong>{{ intro.email }}</strong></span
+            ><br />
+            <span
+            >Phone : <strong>{{ intro.phone }}</strong></span
+            ><br />
+            <span
               >Gender : <strong>{{ intro.gender }}</strong></span
             ><br />
             <span
-              >Date of Birth : <strong>{{ intro.birthDate }}</strong></span
+              >Date of Birth : <strong>{{intro.birthDate}}</strong></span
             ><br />
-            <span
-              >Email : <strong>{{ intro.email }}</strong></span
+            <span>
+              Age : <strong>{{ Math.floor((new Date() - new Date(intro.birthDate))/(1000*3600*24*365)) }}</strong></span
             ><br />
-            <span
-              >Phone : <strong>{{ intro.phone }}</strong></span
-            ><br />
+
           </v-card-text>
         </v-card>
       </div>
