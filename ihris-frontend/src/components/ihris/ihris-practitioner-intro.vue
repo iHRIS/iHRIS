@@ -50,25 +50,25 @@
           >
           <v-card-text>
             <span
-              >Job Tittle : <strong>{{ intro.jobTitle }}</strong></span
+              >{{ $t(`App.intro.Job_Title`)}}: <strong>{{ intro.jobTitle }}</strong></span
             ><br />
             <span
-              >Employer number : <strong>{{ intro.employeeID }}</strong></span
+              >{{ $t(`App.intro.employer_number`)}}: <strong>{{ intro.employeeID }}</strong></span
             ><br />
             <span
-            >Email : <strong>{{ intro.email }}</strong></span
+            >{{ $t(`App.intro.email`)}}: <strong>{{ intro.email }}</strong></span
             ><br />
             <span
-            >Phone : <strong>{{ intro.phone }}</strong></span
+            >{{ $t(`App.intro.phone`)}} : <strong>{{ intro.phone }}</strong></span
             ><br />
             <span
-              >Gender : <strong>{{ intro.gender }}</strong></span
+              >{{ $t(`App.intro.gender`)}} : <strong>{{ intro.gender }}</strong></span
             ><br />
             <span
-              >Date of Birth : <strong>{{intro.birthDate}}</strong></span
+              >{{ $t(`App.intro.date-of-birth`)}} : <strong>{{intro.birthDate}}</strong></span
             ><br />
             <span>
-              Age : <strong>{{ Math.floor((new Date() - new Date(intro.birthDate))/(1000*3600*24*365)) }}</strong></span
+              {{ $t(`App.intro.age`)}} : <strong>{{ Math.floor((new Date() - new Date(intro.birthDate))/(1000*3600*24*365)) }}</strong></span
             ><br />
 
           </v-card-text>
