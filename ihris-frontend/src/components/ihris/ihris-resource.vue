@@ -5,13 +5,11 @@
 </style>
 <template>
   <v-container class="my-3">
-
     <v-form
         ref="form"
         v-model="valid"
     >
-
-      <slot :source="source"></slot>
+      <slot :position="position" :source="source"></slot>
       <v-overlay :value="overlay">
         <v-progress-circular
             color="primary"
@@ -84,7 +82,7 @@
             <template v-if="edit">
               <v-btn v-if="valid" :disabled="!valid" class="success darken-1" dark @click="processFHIR()">
                 <v-icon light>mdi-content-save</v-icon>
-                <span></span>
+                <span>{{ $t(`App.ihris-resource.Save`) }}</span>
               </v-btn>
               <v-btn v-else class="warning" dark @click="$refs.form.validate()">
                 <v-icon light>mdi-content-save</v-icon>
@@ -140,6 +138,7 @@ export default {
       overlay: false,
       isEdit: false,
       linktext: [],
+      position: "",
       advancedValid: true,
       loadingId: false,
       loadingCv: false,
@@ -158,6 +157,25 @@ export default {
   created: function () {
     if (this.fhirId) {
       this.loading = true
+      fetch(
+          `/fhir/PractitionerRole?_practitioner=${this.fhirId}`
+      )
+          .then((response) => {
+            response
+                .json()
+                .then((data) => {
+                  if (data.entry) {
+                    let role = data.entry[0].resource.code[0].coding[0].display;
+                    this.position = role? role : "";
+                  }
+                })
+                .catch((err) => {
+                  console.log(this.field, this.fhirId, err);
+                });
+          })
+          .catch((err) => {
+            console.log(this.field, this.fhirId, err);
+          });
       //console.log("getting",this.field,this.fhirId)
       fetch("/fhir/" + this.field + "/" + this.fhirId).then(response => {
         response.json().then(data => {

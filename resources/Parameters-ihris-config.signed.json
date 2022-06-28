@@ -16,11 +16,11 @@
             "code": "1.2.840.10065.1.12.1.14"
           }
         ],
-        "when": "2022-06-17T17:04:17.400Z",
+        "when": "2022-06-28T10:02:06.325Z",
         "who": {
           "reference": "http://ihris.org/fhir/Organization/ihris"
         },
-        "data": "jceQ3XcSdp6iRMZda8AoE3iolyuSNZPARh3r+Y3/uFmcDqErRwvOGPR4I0GF/TKczUTYXrHZDCq0Be9PaFJi26o0yq8NgyId/J3Fa2hW+eaPk1bHfkiygjvn6BeHKuzQJ+PY6Pk5jaJ5amOkIEqVHwDyEKyEJlX4MpPa/ppWB2o="
+        "data": "2/qNjsQDiFvm6qqsgxY/L3AFqGhEfooPmZ2y+i5j3aqcQJXI3n97FcBkR99uDuiBYwpUfBuYSf3OT+ZrdScy47ZFX7HguQwCBY+WIIMfVMwgvge2+GDzucqqewrjq8zHaAChsG7FthqD03LxrkkDh+IosD7chBhND39LmAH1x5Q="
       }
     },
     {
@@ -536,7 +536,7 @@
         },
         {
           "name": "site:nav:menu:database:menu:salarysource:order",
-          "valueString": "14"
+          "valueString": "15"
         },
         {
           "name": "site:nav:menu:database:menu:identifier:text",
@@ -548,7 +548,7 @@
         },
         {
           "name": "site:nav:menu:database:menu:identifier:order",
-          "valueString": "15"
+          "valueString": "16"
         },
         {
           "name": "site:nav:menu:database:menu:frequency:text",
@@ -560,7 +560,7 @@
         },
         {
           "name": "site:nav:menu:database:menu:frequency:order",
-          "valueString": "16"
+          "valueString": "17"
         },
         {
           "name": "site:nav:menu:reports:text",
@@ -709,6 +709,10 @@
         {
           "name": "defaults:fields:PractitionerRole.location:type",
           "valueString": "tree"
+        },
+        {
+          "name": "defaults:fields:PractitionerRole.location:initialValue",
+          "valueString": "Location/federal-ministry-of-health"
         },
         {
           "name": "defaults:fields:PractitionerRole.location:user_filter:regex",

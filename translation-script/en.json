@@ -16,7 +16,8 @@
       "resetPassword": "Reset Password",
       "emailAddress": "Email Address",
       "register": "Register",
-      "medicalLicenseNumber": "Medical License Number"
+      "medicalLicenseNumber": "Medical License Number",
+      "birthDate": "Birthday date"
     },
     "menu": {
       "Dashboard": "Dashboard",
@@ -65,6 +66,15 @@
       "Admin Unit": "Admin Unit",
       "By Location": "By Location",
       "By Reporting": "By Reporting"
+    },
+    "intro": {
+      "Job_Title": "Job Title",
+      "employer_number": "Employer number",
+      "email": "Email",
+      "phone": "Phone",
+      "gender": "Gender",
+      "date-of-birth": "Date of Birth",
+      "age": "Age"
     },
     "footer": {
       "About iHRIS": "About iHRIS",
@@ -262,7 +272,8 @@
       "Name": "Name",
       "Email": "Email",
       "Co-ordinates": "Co-ordinates",
-      "Leave Period": "Leave Period"
+      "Leave Period": "Leave Period",
+      "Period": "Period"
     },
     "ihris-secondary": {
       "Position": "Position",
@@ -399,7 +410,9 @@
       "Display": "Display",
       "Code": "Code",
       "Definition": "Definition",
-      "Medical License Number": "Medical License Number"
+      "Medical License Number": "Medical License Number",
+      "Organization Address": "Organization Address",
+      "Job Description": "Job Description"
     },
     "fhir-date": {
       "Date of Birth": "Date of Birth",
@@ -441,7 +454,11 @@
       "Ownership": "Ownership",
       "Type (1)": "Type (1)",
       "Type (2)": "Type (2)",
-      "Type (3)": "Type (3)"
+      "Type (3)": "Type (3)",
+      "Institution": "Institution",
+      "Education Level": "Education Level",
+      "Educational Background/Carrier": "Educational Background/Carrier",
+      "Educational Major": "Educational Major"
     },
     "fhir-reference": {
       "Residence": "Residence",
@@ -479,8 +496,8 @@
       "Photo": "Photo",
       "Facility Logo": "Facility Logo",
       "Facility Stamp": "Facility Stamp",
-      "Facility Signature": "Facility Signature"
-
+      "Facility Signature": "Facility Signature",
+      "Attachment": "Attachment"
     },
     "fhir-choice": {
       "Leave Type": "Leave Type",

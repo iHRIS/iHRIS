@@ -1,0 +1,1812 @@
+{
+  "resourceType": "Bundle",
+  "type": "transaction",
+  "entry": [
+    {
+      "resource": {
+        "resourceType": "Location",
+        "meta": {
+          "profile": [
+            "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location",
+            "http://ihris.org/fhir/StructureDefinition/ihris-jurisdiction"
+          ]
+        },
+        "id": "ET",
+        "name": "Tender Ptolemy",
+        "status": "active",
+        "identifier": [
+          {
+            "use": "official",
+            "system": "urn:iso:std:iso:3166",
+            "value": "ET"
+          }
+        ],
+        "type": [
+          {
+            "coding": [
+              {
+                "system": "http://ihris.org/fhir/CodeSystem/ihris-jurisdiction-type",
+                "code": "country"
+              }
+            ],
+            "text": "Country"
+          }
+        ],
+        "physicalType": {
+          "coding": [
+            {
+              "system": "http://hl7.org/fhir/codesystem-location-physical-type.html",
+              "code": "jdn"
+            }
+          ],
+          "text": "Jurisdiction"
+        }
+      },
+      "request": {
+        "method": "PUT",
+        "url": "Location/ET"
+      }
+    },
+    {
+      "resource": {
+        "resourceType": "Location",
+        "meta": {
+          "profile": [
+            "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location",
+            "http://ihris.org/fhir/StructureDefinition/ihris-jurisdiction"
+          ]
+        },
+        "id": "ET.R1-MFR-1",
+        "name": "Backstabbing Saha",
+        "status": "active",
+        "partOf": {
+          "reference": "Location/ET"
+        },
+        "type": [
+          {
+            "coding": [
+              {
+                "system": "http://ihris.org/fhir/CodeSystem/ihris-jurisdiction-type",
+                "code": "region"
+              }
+            ],
+            "text": "Region"
+          }
+        ],
+        "physicalType": {
+          "coding": [
+            {
+              "system": "http://hl7.org/fhir/codesystem-location-physical-type.html",
+              "code": "jdn"
+            }
+          ],
+          "text": "Jurisdiction"
+        }
+      },
+      "request": {
+        "method": "PUT",
+        "url": "Location/ET.R1-MFR-1"
+      }
+    },
+    {
+      "resource": {
+        "resourceType": "Location",
+        "meta": {
+          "profile": [
+            "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location",
+            "http://ihris.org/fhir/StructureDefinition/ihris-jurisdiction"
+          ]
+        },
+        "id": "ET.R8-MFR-8",
+        "name": "Romantic Hamilton",
+        "status": "active",
+        "partOf": {
+          "reference": "Location/ET"
+        },
+        "type": [
+          {
+            "coding": [
+              {
+                "system": "http://ihris.org/fhir/CodeSystem/ihris-jurisdiction-type",
+                "code": "region"
+              }
+            ],
+            "text": "Region"
+          }
+        ],
+        "physicalType": {
+          "coding": [
+            {
+              "system": "http://hl7.org/fhir/codesystem-location-physical-type.html",
+              "code": "jdn"
+            }
+          ],
+          "text": "Jurisdiction"
+        }
+      },
+      "request": {
+        "method": "PUT",
+        "url": "Location/ET.R8-MFR-8"
+      }
+    },
+    {
+      "resource": {
+        "resourceType": "Location",
+        "meta": {
+          "profile": [
+            "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location",
+            "http://ihris.org/fhir/StructureDefinition/ihris-jurisdiction"
+          ]
+        },
+        "id": "ET.R8.Z3-MFR-58",
+        "name": "Sad Pasteur",
+        "status": "active",
+        "partOf": {
+          "reference": "Location/ET.R8-MFR-8"
+        },
+        "type": [
+          {
+            "coding": [
+              {
+                "system": "http://ihris.org/fhir/CodeSystem/ihris-jurisdiction-type",
+                "code": "zone"
+              }
+            ],
+            "text": "Zone"
+          }
+        ],
+        "physicalType": {
+          "coding": [
+            {
+              "system": "http://hl7.org/fhir/codesystem-location-physical-type.html",
+              "code": "jdn"
+            }
+          ],
+          "text": "Jurisdiction"
+        }
+      },
+      "request": {
+        "method": "PUT",
+        "url": "Location/ET.R8.Z3-MFR-58"
+      }
+    },
+    {
+      "resource": {
+        "resourceType": "Location",
+        "meta": {
+          "profile": [
+            "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location",
+            "http://ihris.org/fhir/StructureDefinition/ihris-jurisdiction"
+          ]
+        },
+        "id": "ET.R8.Z14-MFR-60",
+        "name": "Happy Lamarr",
+        "status": "active",
+        "partOf": {
+          "reference": "Location/ET.R8-MFR-8"
+        },
+        "type": [
+          {
+            "coding": [
+              {
+                "system": "http://ihris.org/fhir/CodeSystem/ihris-jurisdiction-type",
+                "code": "zone"
+              }
+            ],
+            "text": "Zone"
+          }
+        ],
+        "physicalType": {
+          "coding": [
+            {
+              "system": "http://hl7.org/fhir/codesystem-location-physical-type.html",
+              "code": "jdn"
+            }
+          ],
+          "text": "Jurisdiction"
+        }
+      },
+      "request": {
+        "method": "PUT",
+        "url": "Location/ET.R8.Z14-MFR-60"
+      }
+    },
+    {
+      "resource": {
+        "resourceType": "Location",
+        "meta": {
+          "profile": [
+            "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location",
+            "http://ihris.org/fhir/StructureDefinition/ihris-jurisdiction"
+          ]
+        },
+        "id": "ET.R1.Z5-MFR-1",
+        "name": "Small Wing",
+        "status": "active",
+        "partOf": {
+          "reference": "Location/ET.R1-MFR-1"
+        },
+        "type": [
+          {
+            "coding": [
+              {
+                "system": "http://ihris.org/fhir/CodeSystem/ihris-jurisdiction-type",
+                "code": "zone"
+              }
+            ],
+            "text": "Zone"
+          }
+        ],
+        "physicalType": {
+          "coding": [
+            {
+              "system": "http://hl7.org/fhir/codesystem-location-physical-type.html",
+              "code": "jdn"
+            }
+          ],
+          "text": "Jurisdiction"
+        }
+      },
+      "request": {
+        "method": "PUT",
+        "url": "Location/ET.R1.Z5-MFR-1"
+      }
+    },
+    {
+      "resource": {
+        "resourceType": "Location",
+        "meta": {
+          "profile": [
+            "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location",
+            "http://ihris.org/fhir/StructureDefinition/ihris-jurisdiction"
+          ]
+        },
+        "id": "ET.R1.Z8-MFR-2",
+        "name": "Pedantic Easley",
+        "status": "active",
+        "partOf": {
+          "reference": "Location/ET.R1-MFR-1"
+        },
+        "type": [
+          {
+            "coding": [
+              {
+                "system": "http://ihris.org/fhir/CodeSystem/ihris-jurisdiction-type",
+                "code": "zone"
+              }
+            ],
+            "text": "Zone"
+          }
+        ],
+        "physicalType": {
+          "coding": [
+            {
+              "system": "http://hl7.org/fhir/codesystem-location-physical-type.html",
+              "code": "jdn"
+            }
+          ],
+          "text": "Jurisdiction"
+        }
+      },
+      "request": {
+        "method": "PUT",
+        "url": "Location/ET.R1.Z8-MFR-2"
+      }
+    },
+    {
+      "resource": {
+        "resourceType": "Location",
+        "meta": {
+          "profile": [
+            "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location",
+            "http://ihris.org/fhir/StructureDefinition/ihris-jurisdiction"
+          ]
+        },
+        "id": "ET.R8.Z14.W67-MFR-346",
+        "name": "Nauseous Yalow",
+        "status": "active",
+        "partOf": {
+          "reference": "Location/ET.R8.Z14-MFR-60"
+        },
+        "type": [
+          {
+            "coding": [
+              {
+                "system": "http://ihris.org/fhir/CodeSystem/ihris-jurisdiction-type",
+                "code": "woreda"
+              }
+            ],
+            "text": "Woreda"
+          }
+        ],
+        "physicalType": {
+          "coding": [
+            {
+              "system": "http://hl7.org/fhir/codesystem-location-physical-type.html",
+              "code": "jdn"
+            }
+          ],
+          "text": "Jurisdiction"
+        }
+      },
+      "request": {
+        "method": "PUT",
+        "url": "Location/ET.R8.Z14.W67-MFR-346"
+      }
+    },
+    {
+      "resource": {
+        "resourceType": "Location",
+        "meta": {
+          "profile": [
+            "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location",
+            "http://ihris.org/fhir/StructureDefinition/ihris-jurisdiction"
+          ]
+        },
+        "id": "ET.R8.Z14.W103-MFR-347",
+        "name": "Angry Bartik",
+        "status": "active",
+        "partOf": {
+          "reference": "Location/ET.R8.Z14-MFR-60"
+        },
+        "type": [
+          {
+            "coding": [
+              {
+                "system": "http://ihris.org/fhir/CodeSystem/ihris-jurisdiction-type",
+                "code": "woreda"
+              }
+            ],
+            "text": "Woreda"
+          }
+        ],
+        "physicalType": {
+          "coding": [
+            {
+              "system": "http://hl7.org/fhir/codesystem-location-physical-type.html",
+              "code": "jdn"
+            }
+          ],
+          "text": "Jurisdiction"
+        }
+      },
+      "request": {
+        "method": "PUT",
+        "url": "Location/ET.R8.Z14.W103-MFR-347"
+      }
+    },
+    {
+      "resource": {
+        "resourceType": "Location",
+        "meta": {
+          "profile": [
+            "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location",
+            "http://ihris.org/fhir/StructureDefinition/ihris-jurisdiction"
+          ]
+        },
+        "id": "ET.R8.Z3.W20-MFR-344",
+        "name": "Jovial Jennings",
+        "status": "active",
+        "partOf": {
+          "reference": "Location/ET.R8.Z3-MFR-58"
+        },
+        "type": [
+          {
+            "coding": [
+              {
+                "system": "http://ihris.org/fhir/CodeSystem/ihris-jurisdiction-type",
+                "code": "woreda"
+              }
+            ],
+            "text": "Woreda"
+          }
+        ],
+        "physicalType": {
+          "coding": [
+            {
+              "system": "http://hl7.org/fhir/codesystem-location-physical-type.html",
+              "code": "jdn"
+            }
+          ],
+          "text": "Jurisdiction"
+        }
+      },
+      "request": {
+        "method": "PUT",
+        "url": "Location/ET.R8.Z3.W20-MFR-344"
+      }
+    },
+    {
+      "resource": {
+        "resourceType": "Location",
+        "meta": {
+          "profile": [
+            "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location",
+            "http://ihris.org/fhir/StructureDefinition/ihris-jurisdiction"
+          ]
+        },
+        "id": "ET.R1.Z5.W1159-MFR-4",
+        "name": "Reverent Aryabhata",
+        "status": "active",
+        "partOf": {
+          "reference": "Location/ET.R1.Z5-MFR-1"
+        },
+        "type": [
+          {
+            "coding": [
+              {
+                "system": "http://ihris.org/fhir/CodeSystem/ihris-jurisdiction-type",
+                "code": "woreda"
+              }
+            ],
+            "text": "Woreda"
+          }
+        ],
+        "physicalType": {
+          "coding": [
+            {
+              "system": "http://hl7.org/fhir/codesystem-location-physical-type.html",
+              "code": "jdn"
+            }
+          ],
+          "text": "Jurisdiction"
+        }
+      },
+      "request": {
+        "method": "PUT",
+        "url": "Location/ET.R1.Z5.W1159-MFR-4"
+      }
+    },
+    {
+      "resource": {
+        "resourceType": "Location",
+        "meta": {
+          "profile": [
+            "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location",
+            "http://ihris.org/fhir/StructureDefinition/ihris-jurisdiction"
+          ]
+        },
+        "id": "ET.R1.Z5.W1201-MFR-8",
+        "name": "Jolly Austin",
+        "status": "active",
+        "partOf": {
+          "reference": "Location/ET.R1.Z5-MFR-1"
+        },
+        "type": [
+          {
+            "coding": [
+              {
+                "system": "http://ihris.org/fhir/CodeSystem/ihris-jurisdiction-type",
+                "code": "woreda"
+              }
+            ],
+            "text": "Woreda"
+          }
+        ],
+        "physicalType": {
+          "coding": [
+            {
+              "system": "http://hl7.org/fhir/codesystem-location-physical-type.html",
+              "code": "jdn"
+            }
+          ],
+          "text": "Jurisdiction"
+        }
+      },
+      "request": {
+        "method": "PUT",
+        "url": "Location/ET.R1.Z5.W1201-MFR-8"
+      }
+    },
+    {
+      "resource": {
+        "resourceType": "Location",
+        "meta": {
+          "profile": [
+            "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location",
+            "http://ihris.org/fhir/StructureDefinition/ihris-jurisdiction"
+          ]
+        },
+        "id": "ET.R1.Z8.W1204-MFR-18",
+        "name": "Sleepy Dubinsky",
+        "status": "active",
+        "partOf": {
+          "reference": "Location/ET.R1.Z8-MFR-2"
+        },
+        "type": [
+          {
+            "coding": [
+              {
+                "system": "http://ihris.org/fhir/CodeSystem/ihris-jurisdiction-type",
+                "code": "woreda"
+              }
+            ],
+            "text": "Woreda"
+          }
+        ],
+        "physicalType": {
+          "coding": [
+            {
+              "system": "http://hl7.org/fhir/codesystem-location-physical-type.html",
+              "code": "jdn"
+            }
+          ],
+          "text": "Jurisdiction"
+        }
+      },
+      "request": {
+        "method": "PUT",
+        "url": "Location/ET.R1.Z8.W1204-MFR-18"
+      }
+    },
+    {
+      "resource": {
+        "resourceType": "Location",
+        "meta": {
+          "profile": [
+            "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location",
+            "http://ihris.org/fhir/StructureDefinition/ihris-jurisdiction"
+          ]
+        },
+        "id": "ET.R1.Z8.W1217-MFR-19",
+        "name": "Agitated Poincare",
+        "status": "active",
+        "partOf": {
+          "reference": "Location/ET.R1.Z8-MFR-2"
+        },
+        "type": [
+          {
+            "coding": [
+              {
+                "system": "http://ihris.org/fhir/CodeSystem/ihris-jurisdiction-type",
+                "code": "woreda"
+              }
+            ],
+            "text": "Woreda"
+          }
+        ],
+        "physicalType": {
+          "coding": [
+            {
+              "system": "http://hl7.org/fhir/codesystem-location-physical-type.html",
+              "code": "jdn"
+            }
+          ],
+          "text": "Jurisdiction"
+        }
+      },
+      "request": {
+        "method": "PUT",
+        "url": "Location/ET.R1.Z8.W1217-MFR-19"
+      }
+    },
+    {
+      "resource": {
+        "resourceType": "Location",
+        "id": "federal-ministry-of-health",
+        "status": "active",
+        "meta": {
+          "profile": [
+            "http://ihris.org/fhir/StructureDefinition/ihris-facility"
+          ]
+        },
+        "extension": [
+          {
+            "url": "http://ihris.org/fhir/StructureDefinition/ihris-facility-ownership-prefix",
+            "valueCoding": {
+              "system": "http://ihris.org/fhir/CodeSystem/Ihris-facilty-ownership-type",
+              "code": "government",
+              "display": "Government"
+            }
+          },
+          {
+            "url": "http://ihris.org/fhir/StructureDefinition/ihris-facility-location",
+            "valueReference": {
+              "reference": ""
+            }
+          },
+          {
+            "url": "http://ihris.org/fhir/StructureDefinition/ihris-facility-information-details",
+            "extension": [
+              {
+                "url": "logo"
+              },
+              {
+                "url": "stamp"
+              },
+              {
+                "url": "signature"
+              }
+            ]
+          },
+          {
+            "url": "http://ihris.org/fhir/StructureDefinition/ihris-related-group",
+            "extension": [
+              {
+                "url": "location",
+                "valueString": "Location/federal-ministry-of-health"
+              }
+            ]
+          }
+        ],
+        "identifier": [
+          {
+            "type": {
+              "coding": [
+                {
+                  "system": "http://ihris.org/fhir/CodeSystem/ihris-Facility-identifier",
+                  "code": "dhis2Id",
+                  "display": "DHIS2 ID"
+                }
+              ]
+            },
+            "value": "b3aCK1PTn5S"
+          }
+        ],
+        "name": "Grave Shockley",
+        "type": [
+          {
+            "coding": [
+              {
+                "system": "http://ihris.org/fhir/CodeSystem/ihris-facility-type",
+                "code": "FMH",
+                "display": "Federal Ministry of Health"
+              }
+            ]
+          }
+        ],
+        "physicalType": {
+          "coding": [
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/location-physical-type",
+              "code": "jdn",
+              "display": "Jurisdiction"
+            }
+          ]
+        },
+        "position": {
+          "longitude": "",
+          "latitude": ""
+        },
+        "partOf": {
+          "reference": ""
+        }
+      },
+      "request": {
+        "method": "PUT",
+        "url": "Location/federal-ministry-of-health"
+      }
+    },
+    {
+      "resource": {
+        "resourceType": "Location",
+        "id": "addis-ababa-regional-health-bureau",
+        "meta": {
+          "profile": [
+            "http://ihris.org/fhir/StructureDefinition/ihris-facility"
+          ]
+        },
+        "extension": [
+          {
+            "url": "http://ihris.org/fhir/StructureDefinition/ihris-facility-ownership-prefix",
+            "valueCoding": {
+              "system": "http://ihris.org/fhir/CodeSystem/Ihris-facilty-ownership-type",
+              "code": "government",
+              "display": "Government"
+            }
+          },
+          {
+            "url": "http://ihris.org/fhir/StructureDefinition/ihris-facility-location",
+            "valueReference": {
+              "reference": ""
+            }
+          },
+          {
+            "url": "http://ihris.org/fhir/StructureDefinition/ihris-facility-information-details",
+            "extension": [
+              {
+                "url": "logo"
+              },
+              {
+                "url": "stamp"
+              },
+              {
+                "url": "signature"
+              }
+            ]
+          },
+          {
+            "url": "http://ihris.org/fhir/StructureDefinition/ihris-related-group",
+            "extension": [
+              {
+                "url": "location",
+                "valueString": "Location/federal-ministry-of-health"
+              },
+              {
+                "url": "location",
+                "valueString": "Location/addis-ababa-regional-health-bureau"
+              }
+            ]
+          }
+        ],
+        "identifier": [
+          {
+            "type": {
+              "coding": [
+                {
+                  "system": "http://ihris.org/fhir/CodeSystem/ihris-Facility-identifier",
+                  "code": "dhis2Id",
+                  "display": "DHIS2 ID"
+                }
+              ]
+            },
+            "value": "yY9BLUUegel"
+          }
+        ],
+        "status": "active",
+        "name": "Tender Thompson",
+        "type": [
+          {
+            "coding": [
+              {
+                "system": "http://ihris.org/fhir/CodeSystem/ihris-facility-type",
+                "code": "RHO",
+                "display": "Regional Health Office"
+              }
+            ]
+          }
+        ],
+        "physicalType": {
+          "coding": [
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/location-physical-type",
+              "code": "jdn",
+              "display": "Jurisdiction"
+            }
+          ]
+        },
+        "position": {
+          "longitude": 38.7782,
+          "latitude": 9.0937
+        },
+        "partOf": {
+          "reference": "Location/federal-ministry-of-health"
+        }
+      },
+      "request": {
+        "method": "PUT",
+        "url": "Location/addis-ababa-regional-health-bureau"
+      }
+    },
+    {
+      "resource": {
+        "resourceType": "Location",
+        "id": "oromiya-regional-health-bureau",
+        "meta": {
+          "profile": [
+            "http://ihris.org/fhir/StructureDefinition/ihris-facility"
+          ]
+        },
+        "extension": [
+          {
+            "url": "http://ihris.org/fhir/StructureDefinition/ihris-facility-ownership-prefix",
+            "valueCoding": {
+              "system": "http://ihris.org/fhir/CodeSystem/Ihris-facilty-ownership-type",
+              "code": "government",
+              "display": "Government"
+            }
+          },
+          {
+            "url": "http://ihris.org/fhir/StructureDefinition/ihris-facility-location",
+            "valueReference": {
+              "reference": ""
+            }
+          },
+          {
+            "url": "http://ihris.org/fhir/StructureDefinition/ihris-facility-information-details",
+            "extension": [
+              {
+                "url": "logo"
+              },
+              {
+                "url": "stamp"
+              },
+              {
+                "url": "signature"
+              }
+            ]
+          },
+          {
+            "url": "http://ihris.org/fhir/StructureDefinition/ihris-related-group",
+            "extension": [
+              {
+                "url": "location",
+                "valueString": "Location/federal-ministry-of-health"
+              },
+              {
+                "url": "location",
+                "valueString": "Location/oromiya-regional-health-bureau"
+              }
+            ]
+          }
+        ],
+        "identifier": [
+          {
+            "type": {
+              "coding": [
+                {
+                  "system": "http://ihris.org/fhir/CodeSystem/ihris-Facility-identifier",
+                  "code": "dhis2Id",
+                  "display": "DHIS2 ID"
+                }
+              ]
+            },
+            "value": "XU2wpLlX4Vk"
+          }
+        ],
+        "status": "active",
+        "name": "Trusting Turing",
+        "type": [
+          {
+            "coding": [
+              {
+                "system": "http://ihris.org/fhir/CodeSystem/ihris-facility-type",
+                "code": "RHO",
+                "display": "Regional Health Office"
+              }
+            ]
+          }
+        ],
+        "physicalType": {
+          "coding": [
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/location-physical-type",
+              "code": "jdn",
+              "display": "Jurisdiction"
+            }
+          ]
+        },
+        "position": {
+          "longitude": 38.7529,
+          "latitude": 10.3796
+        },
+        "partOf": {
+          "reference": "Location/federal-ministry-of-health"
+        }
+      },
+      "request": {
+        "method": "PUT",
+        "url": "Location/oromiya-regional-health-bureau"
+      }
+    },
+    {
+      "resource": {
+        "resourceType": "Location",
+        "id": "agencies-31",
+        "meta": {
+          "profile": [
+            "http://ihris.org/fhir/StructureDefinition/ihris-facility"
+          ]
+        },
+        "extension": [
+          {
+            "url": "http://ihris.org/fhir/StructureDefinition/ihris-facility-ownership-prefix",
+            "valueCoding": {
+              "system": "http://ihris.org/fhir/CodeSystem/Ihris-facilty-ownership-type",
+              "code": "",
+              "display": ""
+            }
+          },
+          {
+            "url": "http://ihris.org/fhir/StructureDefinition/ihris-facility-location",
+            "valueReference": {
+              "reference": ""
+            }
+          },
+          {
+            "url": "http://ihris.org/fhir/StructureDefinition/ihris-facility-information-details",
+            "extension": [
+              {
+                "url": "logo"
+              },
+              {
+                "url": "stamp"
+              },
+              {
+                "url": "signature"
+              }
+            ]
+          },
+          {
+            "url": "http://ihris.org/fhir/StructureDefinition/ihris-related-group",
+            "extension": [
+              {
+                "url": "location",
+                "valueString": "Location/federal-ministry-of-health"
+              },
+              {
+                "url": "location",
+                "valueString": "Location/federal-ministry-of-health"
+              },
+              {
+                "url": "location",
+                "valueString": "Location/agencies-31"
+              }
+            ]
+          }
+        ],
+        "identifier": [
+          {
+            "type": {
+              "coding": [
+                {
+                  "system": "http://ihris.org/fhir/CodeSystem/ihris-Facility-identifier",
+                  "code": "dhis2Id",
+                  "display": "DHIS2 ID"
+                }
+              ]
+            },
+            "value": ""
+          }
+        ],
+        "status": "active",
+        "name": "Silly Joliot",
+        "type": [
+          {
+            "coding": [
+              {
+                "system": "http://ihris.org/fhir/CodeSystem/ihris-facility-type",
+                "code": "AGN",
+                "display": "Agencies"
+              }
+            ]
+          }
+        ],
+        "physicalType": {
+          "coding": [
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/location-physical-type",
+              "code": "",
+              "display": ""
+            }
+          ]
+        },
+        "position": {
+          "longitude": "",
+          "latitude": ""
+        },
+        "partOf": {
+          "reference": "Location/federal-ministry-of-health"
+        }
+      },
+      "request": {
+        "method": "PUT",
+        "url": "Location/agencies-31"
+      }
+    },
+    {
+      "resource": {
+        "resourceType": "Location",
+        "id": "association-1",
+        "meta": {
+          "profile": [
+            "http://ihris.org/fhir/StructureDefinition/ihris-facility"
+          ]
+        },
+        "extension": [
+          {
+            "url": "http://ihris.org/fhir/StructureDefinition/ihris-facility-ownership-prefix",
+            "valueCoding": {
+              "system": "http://ihris.org/fhir/CodeSystem/Ihris-facilty-ownership-type",
+              "code": "",
+              "display": ""
+            }
+          },
+          {
+            "url": "http://ihris.org/fhir/StructureDefinition/ihris-facility-location",
+            "valueReference": {
+              "reference": ""
+            }
+          },
+          {
+            "url": "http://ihris.org/fhir/StructureDefinition/ihris-facility-information-details",
+            "extension": [
+              {
+                "url": "logo"
+              },
+              {
+                "url": "stamp"
+              },
+              {
+                "url": "signature"
+              }
+            ]
+          },
+          {
+            "url": "http://ihris.org/fhir/StructureDefinition/ihris-related-group",
+            "extension": [
+              {
+                "url": "location",
+                "valueString": "Location/federal-ministry-of-health"
+              },
+              {
+                "url": "location",
+                "valueString": "Location/association-1"
+              }
+            ]
+          }
+        ],
+        "identifier": [
+          {
+            "type": {
+              "coding": [
+                {
+                  "system": "http://ihris.org/fhir/CodeSystem/ihris-Facility-identifier",
+                  "code": "dhis2Id",
+                  "display": "DHIS2 ID"
+                }
+              ]
+            },
+            "value": ""
+          }
+        ],
+        "status": "active",
+        "name": "Reverent Boyd",
+        "type": [
+          {
+            "coding": [
+              {
+                "system": "http://ihris.org/fhir/CodeSystem/ihris-facility-type",
+                "code": "ASSO",
+                "display": "Association"
+              }
+            ]
+          }
+        ],
+        "physicalType": {
+          "coding": [
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/location-physical-type",
+              "code": "",
+              "display": ""
+            }
+          ]
+        },
+        "position": {
+          "longitude": "",
+          "latitude": ""
+        },
+        "partOf": {
+          "reference": "Location/federal-ministry-of-health"
+        }
+      },
+      "request": {
+        "method": "PUT",
+        "url": "Location/association-1"
+      }
+    },
+    {
+      "resource": {
+        "resourceType": "Location",
+        "id": "federal-hospital-1",
+        "meta": {
+          "profile": [
+            "http://ihris.org/fhir/StructureDefinition/ihris-facility"
+          ]
+        },
+        "extension": [
+          {
+            "url": "http://ihris.org/fhir/StructureDefinition/ihris-facility-ownership-prefix",
+            "valueCoding": {
+              "system": "http://ihris.org/fhir/CodeSystem/Ihris-facilty-ownership-type",
+              "code": "",
+              "display": ""
+            }
+          },
+          {
+            "url": "http://ihris.org/fhir/StructureDefinition/ihris-facility-location",
+            "valueReference": {
+              "reference": ""
+            }
+          },
+          {
+            "url": "http://ihris.org/fhir/StructureDefinition/ihris-facility-information-details",
+            "extension": [
+              {
+                "url": "logo"
+              },
+              {
+                "url": "stamp"
+              },
+              {
+                "url": "signature"
+              }
+            ]
+          },
+          {
+            "url": "http://ihris.org/fhir/StructureDefinition/ihris-related-group",
+            "extension": [
+              {
+                "url": "location",
+                "valueString": "Location/federal-ministry-of-health"
+              },
+              {
+                "url": "location",
+                "valueString": "Location/federal-hospital-1"
+              }
+            ]
+          }
+        ],
+        "identifier": [
+          {
+            "type": {
+              "coding": [
+                {
+                  "system": "http://ihris.org/fhir/CodeSystem/ihris-Facility-identifier",
+                  "code": "dhis2Id",
+                  "display": "DHIS2 ID"
+                }
+              ]
+            },
+            "value": ""
+          }
+        ],
+        "status": "active",
+        "name": "Kickass Bell",
+        "type": [
+          {
+            "coding": [
+              {
+                "system": "http://ihris.org/fhir/CodeSystem/ihris-facility-type",
+                "code": "FH",
+                "display": "Federal Hospitals"
+              }
+            ]
+          }
+        ],
+        "physicalType": {
+          "coding": [
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/location-physical-type",
+              "code": "",
+              "display": ""
+            }
+          ]
+        },
+        "position": {
+          "longitude": "",
+          "latitude": ""
+        },
+        "partOf": {
+          "reference": "Location/federal-ministry-of-health"
+        }
+      },
+      "request": {
+        "method": "PUT",
+        "url": "Location/federal-hospital-1"
+      }
+    },
+    {
+      "resource": {
+        "resourceType": "Location",
+        "id": "health-science-5",
+        "meta": {
+          "profile": [
+            "http://ihris.org/fhir/StructureDefinition/ihris-facility"
+          ]
+        },
+        "extension": [
+          {
+            "url": "http://ihris.org/fhir/StructureDefinition/ihris-facility-ownership-prefix",
+            "valueCoding": {
+              "system": "http://ihris.org/fhir/CodeSystem/Ihris-facilty-ownership-type",
+              "code": "",
+              "display": ""
+            }
+          },
+          {
+            "url": "http://ihris.org/fhir/StructureDefinition/ihris-facility-location",
+            "valueReference": {
+              "reference": ""
+            }
+          },
+          {
+            "url": "http://ihris.org/fhir/StructureDefinition/ihris-facility-information-details",
+            "extension": [
+              {
+                "url": "logo"
+              },
+              {
+                "url": "stamp"
+              },
+              {
+                "url": "signature"
+              }
+            ]
+          },
+          {
+            "url": "http://ihris.org/fhir/StructureDefinition/ihris-related-group",
+            "extension": [
+              {
+                "url": "location",
+                "valueString": "Location/federal-ministry-of-health"
+              },
+              {
+                "url": "location",
+                "valueString": "Location/health-science-5"
+              }
+            ]
+          }
+        ],
+        "identifier": [
+          {
+            "type": {
+              "coding": [
+                {
+                  "system": "http://ihris.org/fhir/CodeSystem/ihris-Facility-identifier",
+                  "code": "dhis2Id",
+                  "display": "DHIS2 ID"
+                }
+              ]
+            },
+            "value": ""
+          }
+        ],
+        "status": "active",
+        "name": "Naughty Lovelace",
+        "type": [
+          {
+            "coding": [
+              {
+                "system": "http://ihris.org/fhir/CodeSystem/ihris-facility-type",
+                "code": "HSC",
+                "display": "Health Science College"
+              }
+            ]
+          }
+        ],
+        "physicalType": {
+          "coding": [
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/location-physical-type",
+              "code": "",
+              "display": ""
+            }
+          ]
+        },
+        "position": {
+          "longitude": "",
+          "latitude": ""
+        },
+        "partOf": {
+          "reference": "Location/federal-ministry-of-health"
+        }
+      },
+      "request": {
+        "method": "PUT",
+        "url": "Location/health-science-5"
+      }
+    },
+    {
+      "resource": {
+        "resourceType": "Location",
+        "id": "outside-agencies-1",
+        "meta": {
+          "profile": [
+            "http://ihris.org/fhir/StructureDefinition/ihris-facility"
+          ]
+        },
+        "extension": [
+          {
+            "url": "http://ihris.org/fhir/StructureDefinition/ihris-facility-ownership-prefix",
+            "valueCoding": {
+              "system": "http://ihris.org/fhir/CodeSystem/Ihris-facilty-ownership-type",
+              "code": "",
+              "display": ""
+            }
+          },
+          {
+            "url": "http://ihris.org/fhir/StructureDefinition/ihris-facility-location",
+            "valueReference": {
+              "reference": ""
+            }
+          },
+          {
+            "url": "http://ihris.org/fhir/StructureDefinition/ihris-facility-information-details",
+            "extension": [
+              {
+                "url": "logo"
+              },
+              {
+                "url": "stamp"
+              },
+              {
+                "url": "signature"
+              }
+            ]
+          },
+          {
+            "url": "http://ihris.org/fhir/StructureDefinition/ihris-related-group",
+            "extension": [
+              {
+                "url": "location",
+                "valueString": "Location/federal-ministry-of-health"
+              },
+              {
+                "url": "location",
+                "valueString": "Location/outside-agencies-1"
+              }
+            ]
+          }
+        ],
+        "identifier": [
+          {
+            "type": {
+              "coding": [
+                {
+                  "system": "http://ihris.org/fhir/CodeSystem/ihris-Facility-identifier",
+                  "code": "dhis2Id",
+                  "display": "DHIS2 ID"
+                }
+              ]
+            },
+            "value": ""
+          }
+        ],
+        "status": "active",
+        "name": "Nostalgic Lamport",
+        "type": [
+          {
+            "coding": [
+              {
+                "system": "http://ihris.org/fhir/CodeSystem/ihris-facility-type",
+                "code": "NGOs",
+                "display": "NGOs"
+              }
+            ]
+          }
+        ],
+        "physicalType": {
+          "coding": [
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/location-physical-type",
+              "code": "",
+              "display": ""
+            }
+          ]
+        },
+        "position": {
+          "longitude": "",
+          "latitude": ""
+        },
+        "partOf": {
+          "reference": "Location/federal-ministry-of-health"
+        }
+      },
+      "request": {
+        "method": "PUT",
+        "url": "Location/outside-agencies-1"
+      }
+    },
+    {
+      "resource": {
+        "resourceType": "Location",
+        "id": "DHIS2-U6EEjiVB1df",
+        "meta": {
+          "profile": [
+            "http://ihris.org/fhir/StructureDefinition/ihris-facility"
+          ]
+        },
+        "extension": [
+          {
+            "url": "http://ihris.org/fhir/StructureDefinition/ihris-facility-ownership-prefix",
+            "valueCoding": {
+              "system": "http://ihris.org/fhir/CodeSystem/Ihris-facilty-ownership-type",
+              "code": "",
+              "display": ""
+            }
+          },
+          {
+            "url": "http://ihris.org/fhir/StructureDefinition/ihris-facility-location",
+            "valueReference": {
+              "reference": ""
+            }
+          },
+          {
+            "url": "http://ihris.org/fhir/StructureDefinition/ihris-facility-information-details",
+            "extension": [
+              {
+                "url": "logo"
+              },
+              {
+                "url": "stamp"
+              },
+              {
+                "url": "signature"
+              }
+            ]
+          },
+          {
+            "url": "http://ihris.org/fhir/StructureDefinition/ihris-related-group",
+            "extension": [
+              {
+                "url": "location",
+                "valueString": "Location/DHIS2-U6EEjiVB1df"
+              },
+              {
+                "url": "location",
+                "valueString": "Location/federal-ministry-of-health"
+              },
+              {
+                "url": "location",
+                "valueString": "Location/oromiya-regional-health-bureau"
+              }
+            ]
+          }
+        ],
+        "identifier": [
+          {
+            "type": {
+              "coding": [
+                {
+                  "system": "http://ihris.org/fhir/CodeSystem/ihris-Facility-identifier",
+                  "code": "dhis2Id",
+                  "display": "DHIS2 ID"
+                }
+              ]
+            },
+            "value": "U6EEjiVB1df"
+          }
+        ],
+        "status": "active",
+        "name": "Clever Agnesi",
+        "type": [
+          {
+            "coding": [
+              {
+                "system": "http://ihris.org/fhir/CodeSystem/ihris-facility-type",
+                "code": "",
+                "display": ""
+              }
+            ]
+          }
+        ],
+        "physicalType": {
+          "coding": [
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/location-physical-type",
+              "code": "",
+              "display": ""
+            }
+          ]
+        },
+        "position": {
+          "longitude": "",
+          "latitude": ""
+        },
+        "partOf": {
+          "reference": "Location/oromiya-regional-health-bureau"
+        }
+      },
+      "request": {
+        "method": "PUT",
+        "url": "Location/DHIS2-U6EEjiVB1df"
+      }
+    },
+    {
+      "resource": {
+        "resourceType": "Location",
+        "id": "DHIS2-DeRcF32xDs2",
+        "meta": {
+          "profile": [
+            "http://ihris.org/fhir/StructureDefinition/ihris-facility"
+          ]
+        },
+        "extension": [
+          {
+            "url": "http://ihris.org/fhir/StructureDefinition/ihris-facility-ownership-prefix",
+            "valueCoding": {
+              "system": "http://ihris.org/fhir/CodeSystem/Ihris-facilty-ownership-type",
+              "code": "",
+              "display": ""
+            }
+          },
+          {
+            "url": "http://ihris.org/fhir/StructureDefinition/ihris-facility-location",
+            "valueReference": {
+              "reference": ""
+            }
+          },
+          {
+            "url": "http://ihris.org/fhir/StructureDefinition/ihris-facility-information-details",
+            "extension": [
+              {
+                "url": "logo"
+              },
+              {
+                "url": "stamp"
+              },
+              {
+                "url": "signature"
+              }
+            ]
+          },
+          {
+            "url": "http://ihris.org/fhir/StructureDefinition/ihris-related-group",
+            "extension": [
+              {
+                "url": "location",
+                "valueString": "Location/DHIS2-DeRcF32xDs2"
+              },
+              {
+                "url": "location",
+                "valueString": "Location/federal-ministry-of-health"
+              },
+              {
+                "url": "location",
+                "valueString": "Location/oromiya-regional-health-bureau"
+              }
+            ]
+          }
+        ],
+        "identifier": [
+          {
+            "type": {
+              "coding": [
+                {
+                  "system": "http://ihris.org/fhir/CodeSystem/ihris-Facility-identifier",
+                  "code": "dhis2Id",
+                  "display": "DHIS2 ID"
+                }
+              ]
+            },
+            "value": "DeRcF32xDs2"
+          }
+        ],
+        "status": "active",
+        "name": "Admiring Jennings",
+        "type": [
+          {
+            "coding": [
+              {
+                "system": "http://ihris.org/fhir/CodeSystem/ihris-facility-type",
+                "code": "",
+                "display": ""
+              }
+            ]
+          }
+        ],
+        "physicalType": {
+          "coding": [
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/location-physical-type",
+              "code": "",
+              "display": ""
+            }
+          ]
+        },
+        "position": {
+          "longitude": 41.3948,
+          "latitude": 8.1331
+        },
+        "partOf": {
+          "reference": "Location/oromiya-regional-health-bureau"
+        }
+      },
+      "request": {
+        "method": "PUT",
+        "url": "Location/DHIS2-DeRcF32xDs2"
+      }
+    },
+    {
+      "resource": {
+        "resourceType": "Location",
+        "id": "DHIS2-JgBKioqJo5h",
+        "meta": {
+          "profile": [
+            "http://ihris.org/fhir/StructureDefinition/ihris-facility"
+          ]
+        },
+        "extension": [
+          {
+            "url": "http://ihris.org/fhir/StructureDefinition/ihris-facility-ownership-prefix",
+            "valueCoding": {
+              "system": "http://ihris.org/fhir/CodeSystem/Ihris-facilty-ownership-type",
+              "code": "",
+              "display": ""
+            }
+          },
+          {
+            "url": "http://ihris.org/fhir/StructureDefinition/ihris-facility-location",
+            "valueReference": {
+              "reference": ""
+            }
+          },
+          {
+            "url": "http://ihris.org/fhir/StructureDefinition/ihris-facility-information-details",
+            "extension": [
+              {
+                "url": "logo"
+              },
+              {
+                "url": "stamp"
+              },
+              {
+                "url": "signature"
+              }
+            ]
+          },
+          {
+            "url": "http://ihris.org/fhir/StructureDefinition/ihris-related-group",
+            "extension": [
+              {
+                "url": "location",
+                "valueString": "Location/DHIS2-JgBKioqJo5h"
+              },
+              {
+                "url": "location",
+                "valueString": "Location/federal-ministry-of-health"
+              },
+              {
+                "url": "location",
+                "valueString": "Location/addis-ababa-regional-health-bureau"
+              }
+            ]
+          }
+        ],
+        "identifier": [
+          {
+            "type": {
+              "coding": [
+                {
+                  "system": "http://ihris.org/fhir/CodeSystem/ihris-Facility-identifier",
+                  "code": "dhis2Id",
+                  "display": "DHIS2 ID"
+                }
+              ]
+            },
+            "value": "JgBKioqJo5h"
+          }
+        ],
+        "status": "active",
+        "name": "Tender Einstein",
+        "type": [
+          {
+            "coding": [
+              {
+                "system": "http://ihris.org/fhir/CodeSystem/ihris-facility-type",
+                "code": "",
+                "display": ""
+              }
+            ]
+          }
+        ],
+        "physicalType": {
+          "coding": [
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/location-physical-type",
+              "code": "",
+              "display": ""
+            }
+          ]
+        },
+        "position": {
+          "longitude": 38.735,
+          "latitude": 9.0475
+        },
+        "partOf": {
+          "reference": "Location/addis-ababa-regional-health-bureau"
+        }
+      },
+      "request": {
+        "method": "PUT",
+        "url": "Location/DHIS2-JgBKioqJo5h"
+      }
+    },
+    {
+      "resource": {
+        "resourceType": "Location",
+        "id": "DHIS2-zAq6X665PeH",
+        "meta": {
+          "profile": [
+            "http://ihris.org/fhir/StructureDefinition/ihris-facility"
+          ]
+        },
+        "extension": [
+          {
+            "url": "http://ihris.org/fhir/StructureDefinition/ihris-facility-ownership-prefix",
+            "valueCoding": {
+              "system": "http://ihris.org/fhir/CodeSystem/Ihris-facilty-ownership-type",
+              "code": "government",
+              "display": "Government"
+            }
+          },
+          {
+            "url": "http://ihris.org/fhir/StructureDefinition/ihris-facility-location",
+            "valueReference": {
+              "reference": ""
+            }
+          },
+          {
+            "url": "http://ihris.org/fhir/StructureDefinition/ihris-facility-information-details",
+            "extension": [
+              {
+                "url": "logo"
+              },
+              {
+                "url": "stamp"
+              },
+              {
+                "url": "signature"
+              }
+            ]
+          },
+          {
+            "url": "http://ihris.org/fhir/StructureDefinition/ihris-related-group",
+            "extension": [
+              {
+                "url": "location",
+                "valueString": "Location/DHIS2-zAq6X665PeH"
+              },
+              {
+                "url": "location",
+                "valueString": "Location/federal-ministry-of-health"
+              },
+              {
+                "url": "location",
+                "valueString": "Location/addis-ababa-regional-health-bureau"
+              }
+            ]
+          }
+        ],
+        "identifier": [
+          {
+            "type": {
+              "coding": [
+                {
+                  "system": "http://ihris.org/fhir/CodeSystem/ihris-Facility-identifier",
+                  "code": "dhis2Id",
+                  "display": "DHIS2 ID"
+                }
+              ]
+            },
+            "value": "zAq6X665PeH"
+          }
+        ],
+        "status": "active",
+        "name": "High Lovelace",
+        "type": [
+          {
+            "coding": [
+              {
+                "system": "http://ihris.org/fhir/CodeSystem/ihris-facility-type",
+                "code": "hospital",
+                "display": "Hospital"
+              }
+            ]
+          }
+        ],
+        "physicalType": {
+          "coding": [
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/location-physical-type",
+              "code": "",
+              "display": ""
+            }
+          ]
+        },
+        "position": {
+          "longitude": "",
+          "latitude": ""
+        },
+        "partOf": {
+          "reference": "Location/addis-ababa-regional-health-bureau"
+        }
+      },
+      "request": {
+        "method": "PUT",
+        "url": "Location/DHIS2-zAq6X665PeH"
+      }
+    }
+  ]
+}
