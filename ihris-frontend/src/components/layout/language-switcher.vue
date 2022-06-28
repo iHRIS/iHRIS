@@ -28,8 +28,19 @@ export default {
         {code:'en', title: 'English', flag: 'en' },
         {code:'fr',  title: 'French', flag: 'fr' },
         {code:'es', title: 'Spanish', flag: 'es' },
-        {code:'it',  title: 'Italian', flag: 'it' }
-      ],
+        {code:'it',  title: 'Italian', flag: 'it' },
+        {code:'pt',  title: 'Portuguese', flag: 'pt' },
+        {code:'sw',  title: 'Swahili', flag: 'tz' },
+        {code:'ar',  title: 'عربي', flag: 'eg' },
+      ].sort((a, b) => {
+        if (a.title < b.title) {
+          return -1;
+        }
+        if (a.title > b.title) {
+          return 1;
+        }
+        return 0;
+      }),
       activeLang: 'English',
       activeFlag: 'en',
       dialog: false,

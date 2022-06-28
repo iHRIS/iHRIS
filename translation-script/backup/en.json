@@ -16,7 +16,8 @@
             "resetPassword": "Reset Password",
             "emailAddress": "Email Address",
             "register": "Register",
-            "medicalLicenseNumber": "Medical License Number"
+            "medicalLicenseNumber": "Medical License Number",
+            "birthDate": "Birthday date"
         },
         "menu": {
             "Dashboard": "Dashboard",
@@ -61,7 +62,19 @@
             "Audit Logs": "Audit Logs",
             "My Profile": "My Profile",
             "Leave request": "Leave request",
-            "Performance Evaluation": "Performance Evaluation"
+            "Performance Evaluation": "Performance Evaluation",
+            "Admin Unit": "Admin Unit",
+            "By Location": "By Location",
+            "By Reporting": "By Reporting"
+        },
+        "intro": {
+            "Job_Title": "Job Title",
+            "employer_number": "Employer number",
+            "email": "Email",
+            "phone": "Phone",
+            "gender": "Gender",
+            "date-of-birth": "Date of Birth",
+            "age": "Age"
         },
         "footer": {
             "About iHRIS": "About iHRIS",
@@ -102,7 +115,8 @@
             "iHRIS Role": "iHRIS Role",
             "Id": "Id",
             "Role Reference": "Role Reference",
-            "iHRIS Task": "iHRIS Task"
+            "iHRIS Task": "iHRIS Task",
+            "Report To": "Report To"
         },
         "ihris-resource": {
             "Cancel": "Cancel",
@@ -134,7 +148,9 @@
             "Work Experience for the Person": "Work Experience for the Person",
             "Emergency Contact for the Person": "Emergency Contact for the Person",
             "Employee Discipline for the Person": "Employee Discipline for the Person",
-            "Employee Salary Information for the Person": "Employee Salary Information for the Person"
+            "Employee Salary Information for the Person": "Employee Salary Information for the Person",
+            "GenerateId": "Generate ID card",
+            "GenerateCv": " Generate Resume"
         },
         "ihris-search-term": {
             "Gender": "Gender",
@@ -234,7 +250,9 @@
             "Tasks": "Tasks",
             "Roles": "Roles",
             "Composite/Linked Tasks": "Composite/Linked Tasks",
-            "Facilty Service Type": "Facilty Service Type"
+            "Facilty Service Type": "Facilty Service Type",
+            "Type": "Type",
+            "Facility Service Type": "Facility Service Type"
         },
         "ihris-complex-card": {
             "Period of Employment": "Period of Employment",
@@ -254,7 +272,8 @@
             "Name": "Name",
             "Email": "Email",
             "Co-ordinates": "Co-ordinates",
-            "Leave Period": "Leave Period"
+            "Leave Period": "Leave Period",
+            "Period": "Period"
         },
         "ihris-secondary": {
             "Position": "Position",
@@ -305,7 +324,10 @@
         "ihris-attachment": {
             "Photo": "Photo",
             "Attachement": "Attachement",
-            "Attachment": "Attachment"
+            "Attachment": "Attachment",
+            "Facility Logo": "Facility Logo",
+            "Facility Stamp": "Facility Stamp",
+            "Facility Signature": "Facility Signature"
         },
         "ihris-search-code": {
             "iHRIS Cadre": "iHRIS Cadre",
@@ -388,7 +410,9 @@
             "Display": "Display",
             "Code": "Code",
             "Definition": "Definition",
-            "Medical License Number": "Medical License Number"
+            "Medical License Number": "Medical License Number",
+            "Organization Address": "Organization Address",
+            "Job Description": "Job Description"
         },
         "fhir-date": {
             "Date of Birth": "Date of Birth",
@@ -424,7 +448,17 @@
             "Language": "Language",
             "Proficiency Type": "Proficiency Type",
             "Facilty Service Type": "Facilty Service Type",
-            "Leave Type": "Leave Type"
+            "Leave Type": "Leave Type",
+            "Facility Physical Type": "Facility Physical Type",
+            "Facility Service Type": "Facility Service Type",
+            "Ownership": "Ownership",
+            "Type (1)": "Type (1)",
+            "Type (2)": "Type (2)",
+            "Type (3)": "Type (3)",
+            "Institution": "Institution",
+            "Education Level": "Education Level",
+            "Educational Background/Carrier": "Educational Background/Carrier",
+            "Educational Major": "Educational Major"
         },
         "fhir-reference": {
             "Residence": "Residence",
@@ -435,7 +469,9 @@
             "Location/Facility": "Location/Facility",
             "Tasks": "Tasks",
             "Roles": "Roles",
-            "Self Service Practitioner": "Self Service Practitioner"
+            "Self Service Practitioner": "Self Service Practitioner",
+            "Report to": "Report to",
+            "Facility Location": "Facility Location"
         },
         "fhir-boolean": {
             "Active": "Active",
@@ -457,7 +493,11 @@
             "System": "System"
         },
         "fhir-attachment": {
-            "Photo": "Photo"
+            "Photo": "Photo",
+            "Facility Logo": "Facility Logo",
+            "Facility Stamp": "Facility Stamp",
+            "Facility Signature": "Facility Signature",
+            "Attachment": "Attachment"
         },
         "fhir-choice": {
             "Leave Type": "Leave Type",
@@ -480,11 +520,7 @@
         "fhir-text": {
             "Organization Address": "Organization Address",
             "Job Description": "Job Description",
-            "P": {
-                "O": {
-                    "BOX": ""
-                }
-            },
+            "PO BOX": "PO BOX",
             "Remark": "Remark",
             "Reason": "Reason"
         }

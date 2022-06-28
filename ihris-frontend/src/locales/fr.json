@@ -16,7 +16,8 @@
             "resetPassword": "réinitialiser le mot de passe",
             "emailAddress": "Adresse e-mail",
             "register": "S'inscrire",
-            "medicalLicenseNumber": "Numéro de licence médicale"
+            "medicalLicenseNumber": "Numéro de licence médicale",
+            "birthDate": "Date d'anniversaire"
         },
         "menu": {
             "Dashboard": "Tableau de bord",
@@ -37,7 +38,7 @@
             "Database": "Base de données",
             "Cadres": "Cadres",
             "Classifications": "Classements",
-            "Salary Grades": "Niveaux de salaire",
+            "Salary Grades": "Échelons de salaire",
             "Job Titles": "Titres de poste",
             "Job Type": "Type d'emploi",
             "Leave Types": "Types de congé",
@@ -61,7 +62,19 @@
             "Audit Logs": "Journaux d'audit",
             "My Profile": "Mon profil",
             "Leave request": "Demande de congé",
-            "Performance Evaluation": "Évaluation des performances"
+            "Performance Evaluation": "Évaluation des performances",
+            "Admin Unit": "Unité administrative",
+            "By Location": "Par emplacement",
+            "By Reporting": "Par signalement"
+        },
+        "intro": {
+            "Job_Title": "Titre d'emploi",
+            "employer_number": "Numéro d'employeur",
+            "email": "E-mail",
+            "phone": "Téléphoner",
+            "gender": "Le genre",
+            "date-of-birth": "Date de naissance",
+            "age": "Âge"
         },
         "footer": {
             "About iHRIS": "À propos d'iHRIS",
@@ -102,7 +115,8 @@
             "iHRIS Role": "Rôle iHRIS",
             "Id": "Identifiant",
             "Role Reference": "Référence de rôle",
-            "iHRIS Task": "Tâche iHRIS"
+            "iHRIS Task": "Tâche iHRIS",
+            "Report To": "Reporte a"
         },
         "ihris-resource": {
             "Cancel": "Annuler",
@@ -134,7 +148,9 @@
             "Work Experience for the Person": "Expérience de travail pour la personne",
             "Emergency Contact for the Person": "Contact d'urgence pour la personne",
             "Employee Discipline for the Person": "Discipline des employés pour la personne",
-            "Employee Salary Information for the Person": "Informations sur le salaire de l'employé pour la personne"
+            "Employee Salary Information for the Person": "Informations sur le salaire de l'employé pour la personne",
+            "GenerateId": "Générer une carte d'identité",
+            "GenerateCv": "Générer un CV"
         },
         "ihris-search-term": {
             "Gender": "Le genre",
@@ -234,7 +250,9 @@
             "Tasks": "Tâches",
             "Roles": "Les rôles",
             "Composite/Linked Tasks": "Tâches composites/liées",
-            "Facilty Service Type": "Type de service de l'établissement"
+            "Facilty Service Type": "Type de service de l'établissement",
+            "Type": "Taper",
+            "Facility Service Type": "Type de service de l'établissement"
         },
         "ihris-complex-card": {
             "Period of Employment": "Période d'emploi",
@@ -254,7 +272,8 @@
             "Name": "Nom",
             "Email": "E-mail",
             "Co-ordinates": "Coordonnées",
-            "Leave Period": "Période de congé"
+            "Leave Period": "Période de congé",
+            "Period": "Période"
         },
         "ihris-secondary": {
             "Position": "Position",
@@ -305,7 +324,10 @@
         "ihris-attachment": {
             "Photo": "Photo",
             "Attachement": "Pièce jointe",
-            "Attachment": "Attachement"
+            "Attachment": "Attachement",
+            "Facility Logo": "Logo de l'établissement",
+            "Facility Stamp": "Timbre de l'établissement",
+            "Facility Signature": "Signature de l'établissement"
         },
         "ihris-search-code": {
             "iHRIS Cadre": "Cadre iHRIS",
@@ -388,7 +410,9 @@
             "Display": "Affichage",
             "Code": "Code",
             "Definition": "Définition",
-            "Medical License Number": "Numéro de licence médicale"
+            "Medical License Number": "Numéro de licence médicale",
+            "Organization Address": "Adresse de l'organisation",
+            "Job Description": "Description de l'emploi"
         },
         "fhir-date": {
             "Date of Birth": "Date de naissance",
@@ -424,7 +448,17 @@
             "Language": "Langue",
             "Proficiency Type": "Type de compétence",
             "Facilty Service Type": "Type de service de l'établissement",
-            "Leave Type": "Type de congé"
+            "Leave Type": "Type de congé",
+            "Facility Physical Type": "Type physique de l'installation",
+            "Facility Service Type": "Type de service de l'établissement",
+            "Ownership": "La possession",
+            "Type (1)": "Type 1)",
+            "Type (2)": "Type 2)",
+            "Type (3)": "Genre (3)",
+            "Institution": "Institution",
+            "Education Level": "niveau d'éducation",
+            "Educational Background/Carrier": "Formation / Transporteur",
+            "Educational Major": "Majeure en éducation"
         },
         "fhir-reference": {
             "Residence": "Résidence",
@@ -435,7 +469,9 @@
             "Location/Facility": "Emplacement/Installation",
             "Tasks": "Tâches",
             "Roles": "Les rôles",
-            "Self Service Practitioner": "Praticien en libre service"
+            "Self Service Practitioner": "Praticienne en libre service",
+            "Report to": "Reporte a",
+            "Facility Location": "Emplacement de l'installation"
         },
         "fhir-boolean": {
             "Active": "Actif",
@@ -457,7 +493,11 @@
             "System": "Système"
         },
         "fhir-attachment": {
-            "Photo": "Photo"
+            "Photo": "Photo",
+            "Facility Logo": "Logo de l'établissement",
+            "Facility Stamp": "Timbre de l'établissement",
+            "Facility Signature": "Signature de l'établissement",
+            "Attachment": "Attachement"
         },
         "fhir-choice": {
             "Leave Type": "Type de congé",
@@ -474,17 +514,13 @@
             "Permission": "Autorisation",
             "Resource": "Ressource",
             "Gender": "Le genre",
-            "Job Title": "Titre Jon",
+            "Job Title": "Titre d'emploi",
             "ID Type": "Type d'identification"
         },
         "fhir-text": {
             "Organization Address": "Adresse de l'organisation",
             "Job Description": "Description de l'emploi",
-            "P": {
-                "O": {
-                    "BOX": ""
-                }
-            },
+            "PO BOX": "BOÎTE POSTALE",
             "Remark": "Remarque",
             "Reason": "Raison"
         }
