@@ -65,7 +65,8 @@
             "Performance Evaluation": "Performance Evaluation",
             "Admin Unit": "Admin Unit",
             "By Location": "By Location",
-            "By Reporting": "By Reporting"
+            "By Reporting": "By Reporting",
+            "Identifier Types": "Identifier Types"
         },
         "intro": {
             "Job_Title": "Job Title",
@@ -231,7 +232,9 @@
             "Reason for Departure": "Reason for departure",
             "Educational Major": "Educational Major",
             "Facility": "Facility",
-            "Leave": "Leave"
+            "Leave": "Leave",
+            "Identifier Type": "Identifier Type",
+            "Job Type": "Job Type"
         },
         "ihris-array": {
             "Given Name(s)": "Given Name(s)",
@@ -350,7 +353,9 @@
             "Educational Major": "Educational Major",
             "status": "Status",
             "disable": "Disable",
-            "enable": "Enable"
+            "enable": "Enable",
+            "identifierType": "identifierType",
+            "iHRIS Job Type CodeSystem": "iHRIS Job Type CodeSystem"
         },
         "ihris-codesystem": {
             "section": "Section"
@@ -412,7 +417,10 @@
             "Definition": "Definition",
             "Medical License Number": "Medical License Number",
             "Organization Address": "Organization Address",
-            "Job Description": "Job Description"
+            "Job Description": "Job Description",
+            "V2 Concept Comment": "V2 Concept Comment",
+            "V2 Concept Comment As Published": "V2 Concept Comment As Published",
+            "HL7 Concept Usage Notes": "HL7 Concept Usage Notes"
         },
         "fhir-date": {
             "Date of Birth": "Date of Birth",
@@ -487,7 +495,9 @@
             "Gender": "Gender",
             "Type": "Type",
             "Line": "Line",
-            "Contact Type": "Contact Type"
+            "Contact Type": "Contact Type",
+            "Status of the concept": "Status of the concept",
+            "Version of HL7 in which the code was deprecated": "Version of HL7 in which the code was deprecated"
         },
         "fhir-uri": {
             "System": "System"
@@ -514,7 +524,7 @@
             "Permission": "Permission",
             "Resource": "Resource",
             "Gender": "Gender",
-            "Job Title": "Jon Title",
+            "Job Title": "Job Title",
             "ID Type": "ID Type"
         },
         "fhir-text": {

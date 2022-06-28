@@ -65,7 +65,8 @@
             "Performance Evaluation": "تقييم الأداء",
             "Admin Unit": "وحدة الإدارة",
             "By Location": "حسب الموقع",
-            "By Reporting": "عن طريق الإبلاغ"
+            "By Reporting": "عن طريق الإبلاغ",
+            "Identifier Types": "أنواع المعرفات"
         },
         "intro": {
             "Job_Title": "مسمى وظيفي",
@@ -231,7 +232,9 @@
             "Reason for Departure": "سبب المغادرة",
             "Educational Major": "التخصص التربوي",
             "Facility": "منشأة",
-            "Leave": "غادر"
+            "Leave": "غادر",
+            "Identifier Type": "نوع المعرف",
+            "Job Type": "نوع الوظيفة"
         },
         "ihris-array": {
             "Given Name(s)": "أسماء مسماه)",
@@ -350,7 +353,9 @@
             "Educational Major": "التخصص التربوي",
             "status": "حالة",
             "disable": "تعطيل",
-            "enable": "يُمكَِن"
+            "enable": "يُمكَِن",
+            "identifierType": "المعرف",
+            "iHRIS Job Type CodeSystem": "نظام كود نوع الوظيفة iHRIS"
         },
         "ihris-codesystem": {
             "section": "الجزء"
@@ -412,7 +417,10 @@
             "Definition": "تعريف",
             "Medical License Number": "رقم الترخيص الطبي",
             "Organization Address": "عنوان المنظمة",
-            "Job Description": "المسمى الوظيفي"
+            "Job Description": "المسمى الوظيفي",
+            "V2 Concept Comment": "تعليق مفهوم V2",
+            "V2 Concept Comment As Published": "تعليق مفهوم V2 كما تم نشره",
+            "HL7 Concept Usage Notes": "ملاحظات استخدام مفهوم HL7"
         },
         "fhir-date": {
             "Date of Birth": "تاريخ الولادة",
@@ -487,7 +495,9 @@
             "Gender": "جنس",
             "Type": "يكتب",
             "Line": "خط",
-            "Contact Type": "نوع الاتصال"
+            "Contact Type": "نوع الاتصال",
+            "Status of the concept": "مكانة المفهوم",
+            "Version of HL7 in which the code was deprecated": "إصدار HL7 الذي تم فيه إهمال الرمز"
         },
         "fhir-uri": {
             "System": "نظام"

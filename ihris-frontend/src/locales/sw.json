@@ -65,7 +65,8 @@
             "Performance Evaluation": "Tathmini ya utendaji",
             "Admin Unit": "Kitengo cha Usimamizi",
             "By Location": "Kwa Mahali",
-            "By Reporting": "Kwa Kuripoti"
+            "By Reporting": "Kwa Kuripoti",
+            "Identifier Types": "Aina za Vitambulisho"
         },
         "intro": {
             "Job_Title": "Jina la kazi",
@@ -231,7 +232,9 @@
             "Reason for Departure": "Sababu ya kuondoka",
             "Educational Major": "Mkuu wa Elimu",
             "Facility": "Kituo",
-            "Leave": "Ondoka"
+            "Leave": "Ondoka",
+            "Identifier Type": "Aina ya Kitambulisho",
+            "Job Type": "Aina ya Kazi"
         },
         "ihris-array": {
             "Given Name(s)": "Majina Aliyopewa",
@@ -350,7 +353,9 @@
             "Educational Major": "Mkuu wa Elimu",
             "status": "Hali",
             "disable": "Zima",
-            "enable": "Washa"
+            "enable": "Washa",
+            "identifierType": "kitambulishoAina",
+            "iHRIS Job Type CodeSystem": "iHRIS Job Type CodeSystem"
         },
         "ihris-codesystem": {
             "section": "Sehemu"
@@ -412,7 +417,10 @@
             "Definition": "Ufafanuzi",
             "Medical License Number": "Nambari ya Leseni ya Matibabu",
             "Organization Address": "Anwani ya Shirika",
-            "Job Description": "Maelezo ya Kazi"
+            "Job Description": "Maelezo ya Kazi",
+            "V2 Concept Comment": "Maoni ya Dhana ya V2",
+            "V2 Concept Comment As Published": "Maoni ya Dhana ya V2 Kama Imechapishwa",
+            "HL7 Concept Usage Notes": "Vidokezo vya Matumizi ya Dhana ya HL7"
         },
         "fhir-date": {
             "Date of Birth": "Tarehe ya kuzaliwa",
@@ -487,7 +495,9 @@
             "Gender": "Jinsia",
             "Type": "Aina",
             "Line": "Mstari",
-            "Contact Type": "Aina ya Mawasiliano"
+            "Contact Type": "Aina ya Mawasiliano",
+            "Status of the concept": "Hali ya dhana",
+            "Version of HL7 in which the code was deprecated": "Toleo la HL7 ambalo msimbo uliacha kutumika"
         },
         "fhir-uri": {
             "System": "Mfumo"

@@ -65,7 +65,8 @@
             "Performance Evaluation": "Evaluación del desempeño",
             "Admin Unit": "Unidad de administración",
             "By Location": "Por localizacion",
-            "By Reporting": "Al informar"
+            "By Reporting": "Al informar",
+            "Identifier Types": "Tipos de identificadores"
         },
         "intro": {
             "Job_Title": "Título profesional",
@@ -231,7 +232,9 @@
             "Reason for Departure": "Motivo de la salida",
             "Educational Major": "Especialidad Educativa",
             "Facility": "Instalaciones",
-            "Leave": "Abandonar"
+            "Leave": "Abandonar",
+            "Identifier Type": "Tipo de identificador",
+            "Job Type": "Tipo de trabajo"
         },
         "ihris-array": {
             "Given Name(s)": "Nombres dados)",
@@ -350,7 +353,9 @@
             "Educational Major": "Especialidad Educativa",
             "status": "Estado",
             "disable": "Deshabilitar",
-            "enable": "Habilitar"
+            "enable": "Habilitar",
+            "identifierType": "tipo de identificador",
+            "iHRIS Job Type CodeSystem": "Sistema de código de tipo de trabajo iHRIS"
         },
         "ihris-codesystem": {
             "section": "Sección"
@@ -412,7 +417,10 @@
             "Definition": "Definición",
             "Medical License Number": "Número de licencia médica",
             "Organization Address": "Dirección de la organización",
-            "Job Description": "Descripción del trabajo"
+            "Job Description": "Descripción del trabajo",
+            "V2 Concept Comment": "Comentario del concepto V2",
+            "V2 Concept Comment As Published": "Comentario del concepto V2 tal como se publicó",
+            "HL7 Concept Usage Notes": "Notas de uso del concepto HL7"
         },
         "fhir-date": {
             "Date of Birth": "Fecha de nacimiento",
@@ -487,7 +495,9 @@
             "Gender": "Género",
             "Type": "Escribe",
             "Line": "Línea",
-            "Contact Type": "Tipo de Contacto"
+            "Contact Type": "Tipo de Contacto",
+            "Status of the concept": "Estado del concepto",
+            "Version of HL7 in which the code was deprecated": "Versión de HL7 en la que el código quedó obsoleto"
         },
         "fhir-uri": {
             "System": "Sistema"
