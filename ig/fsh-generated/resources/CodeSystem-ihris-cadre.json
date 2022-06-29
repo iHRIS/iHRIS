@@ -2,10 +2,10 @@
   "resourceType": "CodeSystem",
   "status": "active",
   "content": "complete",
-  "name": "iHRISCadre",
+  "name": "IhrisCadre",
   "id": "ihris-cadre",
   "title": "iHRIS Cadre",
-  "description": "Sample iHRIS CodeSystem for: iHRISCadre",
+  "description": "Sample iHRIS CodeSystem for: IhrisCadre",
   "version": "5",
   "url": "http://ihris.org/fhir/CodeSystem/ihris-cadre",
   "concept": [

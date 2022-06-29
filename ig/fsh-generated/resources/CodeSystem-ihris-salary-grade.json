@@ -2,7 +2,7 @@
   "resourceType": "CodeSystem",
   "status": "active",
   "content": "complete",
-  "name": "iHRISSalaryGrade",
+  "name": "IhrisSalaryGrade",
   "id": "ihris-salary-grade",
   "title": "iHRIS Salary Grade",
   "description": "Sample iHRIS CodeSystem for: iHRISSalaryGrade",
@@ -20,12 +20,12 @@
       "definition": "Professional first grade."
     },
     {
-      "code": "prof-mid-level",
-      "display": "Professional Mid-Level/Managerial"
+      "code": "profmid-level",
+      "display": "Professional Mid-Level or Managerial"
     },
     {
       "code": "director",
-      "display": "Specialist/Director"
+      "display": "Specialist ornDirector"
     },
     {
       "code": "specialist",

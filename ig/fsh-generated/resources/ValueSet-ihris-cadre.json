@@ -1,10 +1,10 @@
 {
   "resourceType": "ValueSet",
   "status": "active",
-  "name": "iHRISCadre",
+  "name": "IhrisCadre",
   "id": "ihris-cadre",
   "title": "iHRIS Cadre",
-  "description": "Sample iHRIS ValueSet for: iHRISCadre",
+  "description": "Sample iHRIS ValueSet for: IhrisCadre",
   "version": "0.1.0",
   "url": "http://ihris.org/fhir/ValueSet/ihris-cadre",
   "experimental": false,

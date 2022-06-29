@@ -2,7 +2,7 @@
   "resourceType": "CodeSystem",
   "status": "active",
   "content": "complete",
-  "name": "currencies",
+  "name": "Currencies",
   "id": "currencies",
   "title": "Code System for Currencies.",
   "version": "4.0.1",

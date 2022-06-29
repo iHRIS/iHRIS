@@ -2,10 +2,10 @@
   "resourceType": "CodeSystem",
   "status": "active",
   "content": "complete",
-  "name": "iHRISJob",
+  "name": "IhrisJob",
   "id": "ihris-job",
   "title": "iHRIS Job",
-  "description": "Sample iHRIS CodeSystem for: iHRISJob",
+  "description": "Sample iHRIS CodeSystem for: IhrisJob",
   "version": "0.1.0",
   "url": "http://ihris.org/fhir/CodeSystem/ihris-job",
   "concept": [
