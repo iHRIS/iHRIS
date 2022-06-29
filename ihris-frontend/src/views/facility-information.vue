@@ -53,13 +53,6 @@
         ></apexchart>
       </v-col>
       <v-col>
-        <apexchart
-            ref="professionChart"
-            :options="professionCategoryOptions"
-            :series="professionCategorySeries"
-            type="pie"
-            width="400"
-        ></apexchart>
       </v-col>
     </v-row>
   </v-card>
@@ -128,34 +121,6 @@ export default {
           }
         }]
       },
-      professionCategoryOptions: {
-        chart: {
-          width: 380,
-          type: 'pie',
-        },
-        labels: ['Professional', 'Administrative', 'Academics'],
-        title: {
-          text: 'By Profession Category',
-          align: 'center',
-          style: {
-            fontSize: '14px',
-            fontWeight: 'bold',
-            fontFamily: undefined,
-            color: '#263238'
-          },
-        },
-        responsive: [{
-          breakpoint: 480,
-          options: {
-            chart: {
-              width: 200
-            },
-            legend: {
-              position: 'bottom'
-            }
-          }
-        }]
-      },
       headers: [
         {
           text: 'Name',
@@ -183,12 +148,10 @@ export default {
        this.id = undefined;
        this.series= [];
        this.genderSeries= [0,0];
-       this.professionCategorySeries= [0,0,0];
      }else{
        this.response=undefined;
        this.series= [];
        this.genderSeries= [0,0];
-       this.professionCategorySeries= [0,0,0];
        this.setupData();
      }
     },
@@ -196,7 +159,6 @@ export default {
   methods: {
     setupData() {
       axios.post(`/config/facilityInformation`, {id: this.id, partOf: this.partOf}).then(res => {
-        // this.genderSeries = Object.values(res.data.gender)
         this.desserts = res.data.facilityInformation;
         this.response = res.data
         console.log("response inside setupData",this.response)
@@ -257,7 +219,6 @@ export default {
       const seriesTotals = config.globals.stackedSeriesTotals;
       vm.$refs.genderChart.clearAnnotations();
       this.genderSeries = this.response?Object.values(this.response.gender):[0,0];
-      this.professionCategorySeries =this.response? Object.values(this.response.professionCategory):[0,0,0]
       vm.totalAll = 0;
       if (seriesTotals.length > 0) {
         vm.$refs.chart.clearAnnotations();

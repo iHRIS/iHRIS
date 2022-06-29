@@ -16,7 +16,8 @@
             "resetPassword": "Restablecer la contraseña",
             "emailAddress": "Dirección de correo electrónico",
             "register": "Registro",
-            "medicalLicenseNumber": "Número de licencia médica"
+            "medicalLicenseNumber": "Número de licencia médica",
+            "birthDate": "Fecha de cumpleaños"
         },
         "menu": {
             "Dashboard": "Tablero",
@@ -61,7 +62,20 @@
             "Audit Logs": "Registros de auditoría",
             "My Profile": "Mi perfil",
             "Leave request": "Dejar petición",
-            "Performance Evaluation": "Evaluación del desempeño"
+            "Performance Evaluation": "Evaluación del desempeño",
+            "Admin Unit": "Unidad de administración",
+            "By Location": "Por localizacion",
+            "By Reporting": "Al informar",
+            "Identifier Types": "Tipos de identificadores"
+        },
+        "intro": {
+            "Job_Title": "Título profesional",
+            "employer_number": "número de empleador",
+            "email": "Correo electrónico",
+            "phone": "Teléfono",
+            "gender": "Género",
+            "date-of-birth": "Fecha de nacimiento",
+            "age": "Años"
         },
         "footer": {
             "About iHRIS": "Acerca de iHRIS",
@@ -102,7 +116,8 @@
             "iHRIS Role": "Rol de iHRIS",
             "Id": "Identificación",
             "Role Reference": "Referencia de rol",
-            "iHRIS Task": "Tarea iHRIS"
+            "iHRIS Task": "Tarea iHRIS",
+            "Report To": "Reportar a"
         },
         "ihris-resource": {
             "Cancel": "Cancelar",
@@ -134,7 +149,9 @@
             "Work Experience for the Person": "Experiencia Laboral para la Persona",
             "Emergency Contact for the Person": "Contacto de emergencia para la persona",
             "Employee Discipline for the Person": "Disciplina del empleado para la persona",
-            "Employee Salary Information for the Person": "Información del salario del empleado para la persona"
+            "Employee Salary Information for the Person": "Información del salario del empleado para la persona",
+            "GenerateId": "Generar tarjeta de identificación",
+            "GenerateCv": "Generar currículum"
         },
         "ihris-search-term": {
             "Gender": "Género",
@@ -215,7 +232,9 @@
             "Reason for Departure": "Motivo de la salida",
             "Educational Major": "Especialidad Educativa",
             "Facility": "Instalaciones",
-            "Leave": "Abandonar"
+            "Leave": "Abandonar",
+            "Identifier Type": "Tipo de identificador",
+            "Job Type": "Tipo de trabajo"
         },
         "ihris-array": {
             "Given Name(s)": "Nombres dados)",
@@ -234,7 +253,9 @@
             "Tasks": "Tareas",
             "Roles": "roles",
             "Composite/Linked Tasks": "Tareas compuestas/vinculadas",
-            "Facilty Service Type": "Tipo de servicio de la instalación"
+            "Facilty Service Type": "Tipo de servicio de la instalación",
+            "Type": "Escribe",
+            "Facility Service Type": "Tipo de servicio de la instalación"
         },
         "ihris-complex-card": {
             "Period of Employment": "Periodo de empleo",
@@ -249,12 +270,13 @@
             "Address (2)": "Dirección 2)",
             "Address (3)": "Dirección (3)",
             "Telecom (1)": "Telecomunicaciones (1)",
-            "Telecom (2)": "Telecomunicaciones (2)",
-            "Telecom (3)": "Telecomunicaciones (3)",
+            "Telecom (2)": "telecomunicaciones (2)",
+            "Telecom (3)": "telecomunicaciones (3)",
             "Name": "Nombre",
             "Email": "Correo electrónico",
             "Co-ordinates": "coordenadas",
-            "Leave Period": "Período de licencia"
+            "Leave Period": "Período de licencia",
+            "Period": "Período"
         },
         "ihris-secondary": {
             "Position": "Posición",
@@ -305,7 +327,10 @@
         "ihris-attachment": {
             "Photo": "Foto",
             "Attachement": "Adjunto",
-            "Attachment": "Archivo adjunto"
+            "Attachment": "Archivo adjunto",
+            "Facility Logo": "Logotipo de la instalación",
+            "Facility Stamp": "Sello de la instalación",
+            "Facility Signature": "Firma de la instalación"
         },
         "ihris-search-code": {
             "iHRIS Cadre": "Cuadro iHRIS",
@@ -328,7 +353,9 @@
             "Educational Major": "Especialidad Educativa",
             "status": "Estado",
             "disable": "Deshabilitar",
-            "enable": "Habilitar"
+            "enable": "Habilitar",
+            "identifierType": "tipo de identificador",
+            "iHRIS Job Type CodeSystem": "Sistema de código de tipo de trabajo iHRIS"
         },
         "ihris-codesystem": {
             "section": "Sección"
@@ -355,7 +382,7 @@
             "Given Name (2)": "Nombre de pila (2)",
             "Given Name (3)": "Nombre de pila (3)",
             "Prefix (1)": "Prefijo (1)",
-            "Prefix (2)": "prefijo (2)",
+            "Prefix (2)": "Prefijo (2)",
             "Prefix (3)": "Prefijo (3)",
             "Suffix (1)": "Sufijo (1)",
             "Suffix (2)": "Sufijo (2)",
@@ -388,7 +415,12 @@
             "Display": "Monitor",
             "Code": "Código",
             "Definition": "Definición",
-            "Medical License Number": "Número de licencia médica"
+            "Medical License Number": "Número de licencia médica",
+            "Organization Address": "Dirección de la organización",
+            "Job Description": "Descripción del trabajo",
+            "V2 Concept Comment": "Comentario del concepto V2",
+            "V2 Concept Comment As Published": "Comentario del concepto V2 tal como se publicó",
+            "HL7 Concept Usage Notes": "Notas de uso del concepto HL7"
         },
         "fhir-date": {
             "Date of Birth": "Fecha de nacimiento",
@@ -424,7 +456,17 @@
             "Language": "Idioma",
             "Proficiency Type": "Tipo de competencia",
             "Facilty Service Type": "Tipo de servicio de la instalación",
-            "Leave Type": "Tipo de licencia"
+            "Leave Type": "Tipo de licencia",
+            "Facility Physical Type": "Tipo de instalación física",
+            "Facility Service Type": "Tipo de servicio de la instalación",
+            "Ownership": "Propiedad",
+            "Type (1)": "Tipo 1)",
+            "Type (2)": "Tipo 2)",
+            "Type (3)": "Tipo (3)",
+            "Institution": "Institución",
+            "Education Level": "Nivel de Educación",
+            "Educational Background/Carrier": "Antecedentes educativos/Portador",
+            "Educational Major": "Especialidad Educativa"
         },
         "fhir-reference": {
             "Residence": "Residencia",
@@ -435,7 +477,9 @@
             "Location/Facility": "Ubicación/Instalación",
             "Tasks": "Tareas",
             "Roles": "roles",
-            "Self Service Practitioner": "Practicante de autoservicio"
+            "Self Service Practitioner": "Practicante de autoservicio",
+            "Report to": "Reportar a",
+            "Facility Location": "Ubicación de las instalaciones"
         },
         "fhir-boolean": {
             "Active": "Activo",
@@ -451,13 +495,19 @@
             "Gender": "Género",
             "Type": "Escribe",
             "Line": "Línea",
-            "Contact Type": "Tipo de Contacto"
+            "Contact Type": "Tipo de Contacto",
+            "Status of the concept": "Estado del concepto",
+            "Version of HL7 in which the code was deprecated": "Versión de HL7 en la que el código quedó obsoleto"
         },
         "fhir-uri": {
             "System": "Sistema"
         },
         "fhir-attachment": {
-            "Photo": "Foto"
+            "Photo": "Foto",
+            "Facility Logo": "Logotipo de la instalación",
+            "Facility Stamp": "Sello de la instalación",
+            "Facility Signature": "Firma de la instalación",
+            "Attachment": "Archivo adjunto"
         },
         "fhir-choice": {
             "Leave Type": "Tipo de licencia",
@@ -474,17 +524,13 @@
             "Permission": "Permiso",
             "Resource": "Recurso",
             "Gender": "Género",
-            "Job Title": "jon titulo",
+            "Job Title": "Título profesional",
             "ID Type": "tipo de identificación"
         },
         "fhir-text": {
             "Organization Address": "Dirección de la organización",
             "Job Description": "Descripción del trabajo",
-            "P": {
-                "O": {
-                    "BOX": ""
-                }
-            },
+            "PO BOX": "Apartado postal",
             "Remark": "Observación",
             "Reason": "Razón"
         }

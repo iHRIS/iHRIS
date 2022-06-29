@@ -19,6 +19,33 @@
                 required
                 prepend-icon="mdi-email"
             ></v-text-field>
+            <v-menu
+                ref="menu"
+                v-model="menu"
+                :close-on-content-click="false"
+                transition="scale-transition"
+                offset-y
+                min-width="auto"
+            >
+              <template v-slot:activator="{ on, attrs }">
+                <v-text-field
+                    outlined
+                    dense
+                    v-model="birthDate"
+                    :label="$t('App.home.birthDate')"
+                    prepend-icon="mdi-calendar"
+                    readonly
+                    v-bind="attrs"
+                    v-on="on"
+                ></v-text-field>
+              </template>
+              <v-date-picker
+                  v-model="birthDate"
+                  :max="(new Date(Date.now() - (new Date()).getTimezoneOffset() * 60000)).toISOString().substr(0, 10)"
+                  min="1910-01-01"
+                  @change="saveDate"
+              ></v-date-picker>
+            </v-menu>
             <v-text-field
                 outlined
                 dense
@@ -204,6 +231,8 @@ export default {
       auth: {},
       dialog: false,
       email: "",
+      birthDate: null,
+      menu: false,
       medicalLicenseNumber:"",
       registering: false,
       resetPasswordDialog: false,
@@ -211,6 +240,9 @@ export default {
     }
   },
   methods:{
+    saveDate (date) {
+      this.$refs.menu.save(date)
+    },
     submit() {
       this.loggingin = true
       let formData = new URLSearchParams()
@@ -301,7 +333,8 @@ export default {
       let formData = new URLSearchParams()
       formData.append("username", this.email)
       formData.append("medicalLicenseNumber", this.medicalLicenseNumber)
-      if (this.email === "" ||  this.medicalLicenseNumber === "") {
+      formData.append("birthDate", this.birthDate)
+      if (this.email === "" ||  this.medicalLicenseNumber === "" || this.birthDate === "") {
         this.message = "Please fill in all fields"
         this.snackbarRegister = true
         this.signingin = false

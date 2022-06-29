@@ -40,10 +40,10 @@ const createCV = async (userData) => {
         }
     }
 
-    page.drawText(userData.fullName.toUpperCase(), {
+    page.drawText(userData.fullName, {
         x: 130,
         y: 760,
-        size: 16,
+        size: 12,
     });
     if (userData.position) {
         let position =
@@ -57,7 +57,6 @@ const createCV = async (userData) => {
         });
     }
     if (userData.email) {
-        // console.log(userData.email);
         page.drawText(userData.email, {
             x: 395,
             y: 728,
@@ -76,7 +75,7 @@ const createCV = async (userData) => {
             page.drawText("Education Institute", {
                 x: 60,
                 y: 605 - index * 180,
-                size: 16,
+                size: 12,
             });
             if (education.institution) {
                 let institution =
@@ -86,43 +85,24 @@ const createCV = async (userData) => {
                 page.drawText(institution, {
                     x: 60,
                     y: 585 - index * 180,
-                    size: 16,
+                    size: 12,
                 });
             }
-            page.drawText(`Education Level`, {
+            page.drawText(`Education Level: ${education.level}`, {
                 x: 60,
                 y: 565 - index * 180,
-                size: 16,
+                size: 12,
             });
-            if (education.level) {
-                page.drawText(education.level, {
-                    x: 60,
-                    y: 540 - index * 180,
-                    size: 16,
-                });
-            }
-            page.drawText(`Major`, {
+            page.drawText(`Major: ${education.educationalMajor}`, {
                 x: 60,
-                y: 525 - index * 180,
-                size: 16,
+                y: 545 - index * 180,
+                size: 12,
             });
-            if (education.educationalMajor) {
-                page.drawText(education.educationalMajor, {
-                    x: 60,
-                    y: 505 - index * 180,
-                    size: 16,
-                });
-            }
             if (education.year) {
-                page.drawText("Completion Year", {
+                page.drawText(`Completion Year: ${education.year}`, {
                     x: 60,
-                    y: 485 - index * 180,
-                    size: 16,
-                });
-                page.drawText(education.year, {
-                    x: 60,
-                    y: 465 - index * 180,
-                    size: 16,
+                    y: 525 - index * 180,
+                    size: 12,
                 });
             }
         });
@@ -132,49 +112,49 @@ const createCV = async (userData) => {
             page.drawText(`Organization`, {
                 x: 345,
                 y: 605 - index * 180,
-                size: 16,
+                size: 12,
             });
             if (expriance.organization) {
                 page.drawText(expriance.organization, {
                     x: 345,
                     y: 585 - index * 180,
-                    size: 16,
+                    size: 12,
                 });
             }
             page.drawText(`Address`, {
                 x: 345,
                 y: 565 - index * 180,
-                size: 16,
+                size: 12,
             });
             if (expriance.address) {
                 page.drawText(expriance.address, {
                     x: 345,
                     y: 545 - index * 180,
-                    size: 16,
+                    size: 12,
                 });
             }
             page.drawText(`Position`, {
                 x: 345,
                 y: 525 - index * 180,
-                size: 16,
+                size: 12,
             });
             if (expriance.startingPosition) {
                 page.drawText(expriance.startingPosition, {
                     x: 345,
                     y: 505 - index * 180,
-                    size: 16,
+                    size: 12,
                 });
             }
             page.drawText(`Period`, {
                 x: 345,
                 y: 485 - index * 180,
-                size: 16,
+                size: 12,
             });
             if (expriance.period) {
                 page.drawText(`${expriance.period.start} - ${expriance.period.end}`, {
                     x: 345,
                     y: 465 - index * 180,
-                    size: 16,
+                    size: 12,
                 });
             }
         });

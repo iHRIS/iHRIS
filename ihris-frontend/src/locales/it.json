@@ -16,7 +16,8 @@
             "resetPassword": "Resetta la password",
             "emailAddress": "Indirizzo e-mail",
             "register": "Registrati",
-            "medicalLicenseNumber": "Numero di licenza medica"
+            "medicalLicenseNumber": "Numero di licenza medica",
+            "birthDate": "Data di nascita"
         },
         "menu": {
             "Dashboard": "Pannello di controllo",
@@ -61,7 +62,20 @@
             "Audit Logs": "Registri di controllo",
             "My Profile": "Il mio profilo",
             "Leave request": "Lascia una richiesta",
-            "Performance Evaluation": "Valutazione delle prestazioni"
+            "Performance Evaluation": "Valutazione delle prestazioni",
+            "Admin Unit": "Unità amministrativa",
+            "By Location": "Per posizione",
+            "By Reporting": "Segnalando",
+            "Identifier Types": "Tipi di identificatori"
+        },
+        "intro": {
+            "Job_Title": "Titolo di lavoro",
+            "employer_number": "Numero del datore di lavoro",
+            "email": "E-mail",
+            "phone": "Telefono",
+            "gender": "Genere",
+            "date-of-birth": "Data di nascita",
+            "age": "Età"
         },
         "footer": {
             "About iHRIS": "Informazioni su iHRIS",
@@ -102,7 +116,8 @@
             "iHRIS Role": "Ruolo iHRIS",
             "Id": "Id",
             "Role Reference": "Riferimento ruolo",
-            "iHRIS Task": "attività iHRIS"
+            "iHRIS Task": "attività iHRIS",
+            "Report To": "Segnala a"
         },
         "ihris-resource": {
             "Cancel": "Annulla",
@@ -134,7 +149,9 @@
             "Work Experience for the Person": "Esperienza di lavoro per la persona",
             "Emergency Contact for the Person": "Contatto di emergenza per la persona",
             "Employee Discipline for the Person": "Disciplina dei dipendenti per la persona",
-            "Employee Salary Information for the Person": "Informazioni sulla retribuzione dei dipendenti per la persona"
+            "Employee Salary Information for the Person": "Informazioni sulla retribuzione dei dipendenti per la persona",
+            "GenerateId": "Genera carta d'identità",
+            "GenerateCv": "Genera curriculum"
         },
         "ihris-search-term": {
             "Gender": "Genere",
@@ -215,7 +232,9 @@
             "Reason for Departure": "Motivo della partenza",
             "Educational Major": "Maggiore Educativo",
             "Facility": "Facilità",
-            "Leave": "Lasciare"
+            "Leave": "Lasciare",
+            "Identifier Type": "Tipo di identificatore",
+            "Job Type": "Tipo di lavoro"
         },
         "ihris-array": {
             "Given Name(s)": "Nomi di battesimo)",
@@ -234,7 +253,9 @@
             "Tasks": "Compiti",
             "Roles": "Ruoli",
             "Composite/Linked Tasks": "Compiti compositi/collegati",
-            "Facilty Service Type": "Tipo di servizio della struttura"
+            "Facilty Service Type": "Tipo di servizio della struttura",
+            "Type": "Tipo",
+            "Facility Service Type": "Tipo di servizio della struttura"
         },
         "ihris-complex-card": {
             "Period of Employment": "Periodo di impiego",
@@ -248,13 +269,14 @@
             "Address (1)": "Indirizzo 1)",
             "Address (2)": "Indirizzo 2)",
             "Address (3)": "Indirizzo (3)",
-            "Telecom (1)": "Telecomunicazioni (1)",
+            "Telecom (1)": "Telecom (1)",
             "Telecom (2)": "Telecom (2)",
-            "Telecom (3)": "Telecomunicazioni (3)",
+            "Telecom (3)": "Telecom (3)",
             "Name": "Nome",
             "Email": "E-mail",
             "Co-ordinates": "Coordinate",
-            "Leave Period": "Periodo di congedo"
+            "Leave Period": "Periodo di congedo",
+            "Period": "Periodo"
         },
         "ihris-secondary": {
             "Position": "Posizione",
@@ -305,7 +327,10 @@
         "ihris-attachment": {
             "Photo": "Foto",
             "Attachement": "Attaccamento",
-            "Attachment": "Allegato"
+            "Attachment": "Allegato",
+            "Facility Logo": "Logo della struttura",
+            "Facility Stamp": "Timbro della struttura",
+            "Facility Signature": "Firma della struttura"
         },
         "ihris-search-code": {
             "iHRIS Cadre": "Quadri iHRIS",
@@ -328,7 +353,9 @@
             "Educational Major": "Maggiore Educativo",
             "status": "Stato",
             "disable": "disattivare",
-            "enable": "Abilitare"
+            "enable": "Abilitare",
+            "identifierType": "identificatoreType",
+            "iHRIS Job Type CodeSystem": "iHRIS Job Type CodeSystem"
         },
         "ihris-codesystem": {
             "section": "Sezione"
@@ -388,7 +415,12 @@
             "Display": "Schermo",
             "Code": "Codice",
             "Definition": "Definizione",
-            "Medical License Number": "Numero di licenza medica"
+            "Medical License Number": "Numero di licenza medica",
+            "Organization Address": "Indirizzo dell'organizzazione",
+            "Job Description": "Descrizione del lavoro",
+            "V2 Concept Comment": "Commento sul concetto V2",
+            "V2 Concept Comment As Published": "Commento sul concetto V2 come pubblicato",
+            "HL7 Concept Usage Notes": "Note sull'utilizzo del concetto HL7"
         },
         "fhir-date": {
             "Date of Birth": "Data di nascita",
@@ -424,7 +456,17 @@
             "Language": "Lingua",
             "Proficiency Type": "Tipo di competenza",
             "Facilty Service Type": "Tipo di servizio della struttura",
-            "Leave Type": "Tipo di uscita"
+            "Leave Type": "Tipo di uscita",
+            "Facility Physical Type": "Tipo fisico della struttura",
+            "Facility Service Type": "Tipo di servizio della struttura",
+            "Ownership": "Proprietà",
+            "Type (1)": "Tipo 1)",
+            "Type (2)": "Tipo (2)",
+            "Type (3)": "Tipo (3)",
+            "Institution": "Istituzione",
+            "Education Level": "Livello scolastico",
+            "Educational Background/Carrier": "Background educativo/portatore",
+            "Educational Major": "Maggiore Educativo"
         },
         "fhir-reference": {
             "Residence": "Residenza",
@@ -435,7 +477,9 @@
             "Location/Facility": "Posizione/struttura",
             "Tasks": "Compiti",
             "Roles": "Ruoli",
-            "Self Service Practitioner": "Operatore self-service"
+            "Self Service Practitioner": "Operatore self-service",
+            "Report to": "Segnala a",
+            "Facility Location": "Posizione della struttura"
         },
         "fhir-boolean": {
             "Active": "Attivo",
@@ -451,13 +495,19 @@
             "Gender": "Genere",
             "Type": "Tipo",
             "Line": "Linea",
-            "Contact Type": "Tipo di contatto"
+            "Contact Type": "Tipo di contatto",
+            "Status of the concept": "Stato del concetto",
+            "Version of HL7 in which the code was deprecated": "Versione di HL7 in cui il codice era deprecato"
         },
         "fhir-uri": {
             "System": "Sistema"
         },
         "fhir-attachment": {
-            "Photo": "Foto"
+            "Photo": "Foto",
+            "Facility Logo": "Logo della struttura",
+            "Facility Stamp": "Timbro della struttura",
+            "Facility Signature": "Firma della struttura",
+            "Attachment": "Allegato"
         },
         "fhir-choice": {
             "Leave Type": "Tipo di uscita",
@@ -474,17 +524,13 @@
             "Permission": "Autorizzazione",
             "Resource": "Risorsa",
             "Gender": "Genere",
-            "Job Title": "Titolo Jon",
+            "Job Title": "Titolo di lavoro",
             "ID Type": "Tipo di ID"
         },
         "fhir-text": {
             "Organization Address": "Indirizzo dell'organizzazione",
             "Job Description": "Descrizione del lavoro",
-            "P": {
-                "O": {
-                    "BOX": ""
-                }
-            },
+            "PO BOX": "Casella postale",
             "Remark": "Nota",
             "Reason": "Motivo"
         }

@@ -45,4 +45,4 @@ Description:    "iHRIS profile of Practitioner Role."
 * specialty.coding ^label = "Specialty"
 * location 1..1 MS 
 * location ^label = "Facility"
-* location only Reference(IhrisJurisdiction)
+* location only Reference(IhrisFacility)

@@ -538,7 +538,19 @@
         },
         {
           "name": "site:nav:menu:database:menu:salarysource:order",
-          "valueString": "14"
+          "valueString": "15"
+        },
+        {
+          "name": "site:nav:menu:database:menu:identifier:text",
+          "valueString": "Identifier Types"
+        },
+        {
+          "name": "site:nav:menu:database:menu:identifier:url",
+          "valueString": "/resource/search/identifier"
+        },
+        {
+          "name": "site:nav:menu:database:menu:identifier:order",
+          "valueString": "16"
         },
         {
           "name": "site:nav:menu:database:menu:frequency:text",
@@ -550,7 +562,7 @@
         },
         {
           "name": "site:nav:menu:database:menu:frequency:order",
-          "valueString": "16"
+          "valueString": "17"
         },
         {
           "name": "site:nav:menu:reports:text",
@@ -699,6 +711,10 @@
         {
           "name": "defaults:fields:PractitionerRole.location:type",
           "valueString": "tree"
+        },
+        {
+          "name": "defaults:fields:PractitionerRole.location:initialValue",
+          "valueString": "Location/federal-ministry-of-health"
         },
         {
           "name": "defaults:fields:PractitionerRole.location:user_filter:regex",

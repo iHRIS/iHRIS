@@ -271,17 +271,17 @@ Usage: #definition
 * expression = "PractitionerRole.extension('http://ihris.org/fhir/StructureDefinition/ihris-related-group').extension('practitioner')"
 * xpathUsage = #normal
 
-Instance: facility-location-search-parameter
+Instance: practitioner-birthdate
 InstanceOf: SearchParameter
 Usage: #definition
-* url = "http://ihris.org/fhir/SearchParameter/facility-location-search-parameter"
-* name = "Search Parameter for Facility location for Location"
-* base = #Location
-* description = "Search Facility by Location"
+* url = "http://ihris.org/fhir/SearchParameter/practitioner-birthdate"
+* name = "Search Parameter on birthdate resources for practioner"
 * status = #active
-* code = #facility-location
-* type = #reference
-* expression = "Location.extension('http://ihris.org/fhir/StructureDefinition/ihris-facility-location')"
+* description = "Search by birthdate for a Practitioner resource."
+* code = #birthDate
+* base = #Practitioner
+* type = #date
+* expression = "Practitioner.birthDate"
 * xpathUsage = #normal
 
 Instance: practitioner-medicalLicenseNumber
@@ -295,4 +295,16 @@ Usage: #definition
 * base = #Practitioner
 * type = #string
 * expression = "Practitioner.identifier.where(type.coding.code='MD').value"
+* xpathUsage = #normal
+
+Instance: facility-location-search-parameter
+InstanceOf: SearchParameter
+Usage: #definition
+* base = #Location
+* name = "Search Facility by Location"
+* description = "Search Facility by Location"
+* status = #active
+* code = #facility-location
+* type = #reference
+* expression = "Location.extension('http://ihris.org/fhir/StructureDefinition/ihris-facility-location')"
 * xpathUsage = #normal
