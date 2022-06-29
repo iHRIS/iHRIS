@@ -7,16 +7,16 @@
       <v-divider></v-divider>
     </div>
     <v-container v-else>
-      <v-card>
+      <v-card
+      elevation="0">
         <v-system-bar
-          color="secondary"
-          dark
+          class="pa-4 py-6 black--text font-weight-bold"
           v-if="edit"
           >
           {{ $t(`App.ihris-array.${label}`) }}
           <v-spacer></v-spacer>
-          <v-btn v-if="subAvailable" icon @click="removeRow()"><v-icon class="font-weight-bold">mdi-minus</v-icon></v-btn>
-          <v-btn v-if="addAvailable" icon @click="addRow()"><v-icon>mdi-plus</v-icon></v-btn>
+          <v-btn v-if="subAvailable" icon @click="removeRow()"><v-icon>mdi-minus-circle</v-icon></v-btn>
+          <v-btn v-if="addAvailable" icon @click="addRow()"><v-icon color="green">mdi-plus-circle</v-icon></v-btn>
         </v-system-bar>
         <slot v-for="input in inputs" :input="input" :source="input.source"></slot>
       </v-card>

@@ -27,7 +27,7 @@
         <v-list class="white--text">
           <v-list-item>
             <v-btn class="secondary" dark @click="$router.go(-1)">
-              <v-icon light>mdi-pencil-off</v-icon>
+              <v-icon light>mdi-close-circle-outline</v-icon>
               <span>{{ $t("App.ihris-questionnaire.Cancel") }}</span>
             </v-btn>
             <v-spacer></v-spacer>
@@ -41,7 +41,7 @@
               <v-icon light>mdi-content-save</v-icon>
               <span>{{ $t("App.ihris-questionnaire.Save") }}</span>
             </v-btn>
-            <v-btn v-else class="warning" dark @click="$refs.form.validate()">
+            <v-btn v-else class="green" dark @click="$refs.form.validate()">
               <v-icon light>mdi-content-save</v-icon>
               <span>{{ $t("App.ihris-questionnaire.Save") }}</span>
             </v-btn>

@@ -75,7 +75,7 @@
               <span>{{ $t(`App.ihris-resource.Edit`) }}</span>
             </v-btn>
             <v-btn v-else class="secondary" dark @click="$router.go(0)">
-              <v-icon light>mdi-pencil-off</v-icon>
+              <v-icon light>mdi-close-circle-outline</v-icon>
               <span>{{ $t(`App.ihris-resource.Cancel`) }}</span>
             </v-btn>
             <v-spacer></v-spacer>

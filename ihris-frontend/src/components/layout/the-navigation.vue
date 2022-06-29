@@ -1,5 +1,7 @@
 <template>
   <v-navigation-drawer
+    v-model="drawer"
+    :mini-variant.sync="mini"
     app
     clipped
     permanent
@@ -7,22 +9,35 @@
     style="z-index: 3;"
     v-if="$store.state.user.loggedin"
   >
+    <v-list-item class="px-2 py-2">
+      <v-list-item-avatar>
+        <v-icon size="48" class="white--text">mdi-account-circle</v-icon>
+      </v-list-item-avatar>
+      <v-list-item-content>
+      <v-list-item-title class="white--text">{{ $store.state.user.name }}</v-list-item-title>
+      <v-list-item-subtitle class="white--text">{{ $store.state.user.role }}</v-list-item-subtitle>
+      </v-list-item-content>
+      <v-btn
+          icon
+          @click.stop="mini = !mini"
+      >
+        <v-icon class="white--text">mdi-chevron-left</v-icon>
+      </v-btn>
+    </v-list-item>
+    <v-divider class="grey"></v-divider>
     <v-list
       nav
       dark
       dense v-if="$store.state.user.loggedin">
-
       <template v-for="item in menu">
-
         <template v-if="item.menu">
-
           <v-list-group
             :key="item.id"
             :prepend-icon="item.icon"
             color="white--text"
             :value="item.active"
             v-model="item.active"
-            :class="(item.active ? 'primary pa-2' : '')"
+            :class="(item.active&&!mini ? 'primary pa-3' : item.active&&mini ? 'primary':'')"
             no-action
             style="border-radius: 20px;"
             >
@@ -40,20 +55,17 @@
                 <v-list-item-title>{{$t(`App.menu.${sub.text}`)}}</v-list-item-title>
                 <v-icon>mdi-chevron-right</v-icon>
               </v-list-item>
-
           </v-list-group>
         </template>
         <template v-else>
           <v-list-item :to="item.url" :key="item.id">
-            <v-list-item-icon>
+            <v-list-item-icon class="mr-3">
               <v-icon>{{item.icon}}</v-icon>
             </v-list-item-icon>
             <v-list-item-title class="subtitle-1 font-weight-bold text-uppercase">{{$t(`App.menu.${item.text}`)}}</v-list-item-title>
           </v-list-item>
-
         </template>
       </template>
-
     </v-list>
     <v-list
       nav
@@ -90,11 +102,13 @@ export default {
         this.updateMenu()
       },
       deep: true
-    }
+    },
   },
   data: function() {
     return {
-      menu: []
+      menu: [],
+      mini: false,
+      drawer: true,
     }
   },
   methods: {
@@ -134,7 +148,7 @@ export default {
 
       this.menu.sort( (a,b) => Number(a.order) === Number(b.order) ? 0 : ( Number(a.order) < Number(b.order) ? -1 : 1 ) )
     }
-  }
+  },
 }
 </script>
 <style scoped>

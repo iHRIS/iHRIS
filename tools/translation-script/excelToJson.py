@@ -1,7 +1,9 @@
+import os
 import json
 import pandas as pd
 
-file = '/home/pc/Documents/Intrahealth/translation/output/translations.xlsx'
+dirname = os.path.dirname(__file__)
+file = os.path.join(dirname, 'output/translations.xlsx')
 
 xl = pd.ExcelFile(file)
 df = xl.parse().fillna('')
@@ -36,7 +38,7 @@ for index, row in df.iterrows():
                 lang_trans[steps[-1]] = row[lang].rstrip()
 
 for lang in languages:
-    out_file = open(f"/home/pc/Documents/Intrahealth/translation/output/{lang}.json", 'w')
+    out_file = open(f"{dirname}/output/{lang}.json", 'w')
     json.dump(lang_translations[lang], out_file, indent=4, ensure_ascii=False)
     out_file.close()
 
