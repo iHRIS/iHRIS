@@ -665,6 +665,22 @@
       "display": "Gold (one troy ounce)"
     },
     {
+      "code": "XBA",
+      "display": "European Composite Unit (EURCO) (bond market unit)"
+    },
+    {
+      "code": "XBB",
+      "display": "European Monetary Unit (E.M.U.-6) (bond market unit)"
+    },
+    {
+      "code": "XBC",
+      "display": "European Unit of Account 9 (E.U.A.-9) (bond market unit)"
+    },
+    {
+      "code": "XBD",
+      "display": "European Unit of Account 17 (E.U.A.-17) (bond market unit)"
+    },
+    {
       "code": "XCD",
       "display": "East Caribbean dollar"
     },
@@ -722,5 +738,5 @@
     }
   ],
   "date": "2020-09-25T20:48:33.646Z",
-  "count": 178
+  "count": 182
 }
