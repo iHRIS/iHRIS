@@ -12,7 +12,7 @@
       This should only be done during development.
     </div>
     <v-spacer></v-spacer>
-    <div>{{$t("App.wellCome")}} <span v-if="$store.state.user.loggedin">, {{ $store.state.user.name }}</span></div>
+<!--    <div>{{$t("App.wellCome")}} <span v-if="$store.state.user.loggedin">, {{ $store.state.user.name }}</span></div>-->
     <v-spacer></v-spacer>
     <v-progress-circular
       indeterminate
@@ -29,7 +29,7 @@
       <language-switcher />
     </div>
     <template v-if="$store.state.user.loggedin">
-      <v-btn color="warning" small fab dark @click="logout" title="Logout" :loading="loading" :disabled="loading">
+      <v-btn  small fab dark @click="logout" title="Logout" :loading="loading" :disabled="loading">
         <v-icon>mdi-logout</v-icon>
       </v-btn>
     </template>

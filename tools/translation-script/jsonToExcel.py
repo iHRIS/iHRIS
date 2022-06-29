@@ -5,6 +5,8 @@ from googletrans import Translator
 
 translator = Translator()
 
+dirname = os.path.dirname(__file__)
+
 
 def loop_object(base_key, lang_data):
     for key, value in lang_data.items():
@@ -55,7 +57,7 @@ output = []
 data_by_lang = {}
 
 for lang in langs:
-    inFile = open('/home/pc/Documents/Intrahealth/translation/en.json', 'r')
+    inFile = open(f'{dirname}/en.json', 'r')
     json_data = inFile.read()
 
     data_by_lang[lang] = json.loads(json_data)
