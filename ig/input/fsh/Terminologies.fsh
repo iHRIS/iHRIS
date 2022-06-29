@@ -2939,11 +2939,9 @@ Description: "This is the code representing the clinical specialty of the clinic
 * SNOMED_CT#394605001 "Surgery-Dental-Oral surgery"
 * SNOMED_CT#394608004 "Surgery-Dental-Orthodontics"
 * SNOMED_CT#408461007 "Surgery-Dental-Periodontal surgery"
-* SNOMED_CT#408460008 "Surgery-Dental-Prosthetic dentistry (Prosthodontics)"
-* SNOMED_CT#408460008 "Surgery-Dental-surgical-Prosthodontics"
+* SNOMED_CT#408460008 "Surgery-Dental-Prosthetic Dentistry (Prosthodontics)"
 * SNOMED_CT#394606000 "Surgery-Dentistry-Restorative dentistry"
-* SNOMED_CT#408449004 "Surgery-Dentistry--surgical"
-* SNOMED_CT#394608004 "Surgery-Dentistry-surgical-Orthodontics"
+* SNOMED_CT#408449004 "Surgery-Dentistry-surgical"
 * SNOMED_CT#418018006 "Surgery-Dermatologic surgery"
 * SNOMED_CT#394604002 "Surgery-Ear, nose and throat surgery"
 * SNOMED_CT#394609007 "Surgery-general"
@@ -5702,7 +5700,7 @@ Description: "Currency codes from ISO 4217 (see https://www.iso.org/iso-4217-cur
 * urn:iso:std:iso:4217#ZMW "Zambian kwacha"
 * urn:iso:std:iso:4217#ZWL "Zimbabwean dollar "
 
-CodeSystem: currencies
+CodeSystem: Currencies
 Id: currencies
 Title: "Code System for Currencies."
 * ^status = #active
@@ -5891,10 +5889,10 @@ Title: "Code System for Currencies."
 
 Alias: $ihris-cadre = http://ihris.org/fhir/CodeSystem/ihris-cadre
 
-ValueSet: iHRISCadre
+ValueSet: IhrisCadre
 Id: ihris-cadre
 Title: "iHRIS Cadre"
-Description: "Sample iHRIS ValueSet for: iHRISCadre"
+Description: "Sample iHRIS ValueSet for: IhrisCadre"
 * ^url = "http://ihris.org/fhir/ValueSet/ihris-cadre"
 * ^status = #active
 * ^experimental = false
@@ -5904,10 +5902,10 @@ Description: "Sample iHRIS ValueSet for: iHRISCadre"
 * ^contact.telecom.value = "http://ihris.org"
 * include codes from system $ihris-cadre
 
-CodeSystem: iHRISCadre
+CodeSystem: IhrisCadre
 Id: ihris-cadre
 Title: "iHRIS Cadre"
-Description: "Sample iHRIS CodeSystem for: iHRISCadre"
+Description: "Sample iHRIS CodeSystem for: IhrisCadre"
 * ^url = "http://ihris.org/fhir/CodeSystem/ihris-cadre"
 * ^version = "5"
 * ^date = "2020-09-25T20:48:33.646Z"
@@ -5922,10 +5920,10 @@ Description: "Sample iHRIS CodeSystem for: iHRISCadre"
 
 Alias: $ihris-classification = http://ihris.org/fhir/CodeSystem/ihris-classification
 
-ValueSet: iHRISClassification
+ValueSet: IhrisClassification
 Id: ihris-classification
 Title: "iHRIS Classification"
-Description: "Sample iHRIS ValueSet for: iHRISClassification"
+Description: "Sample iHRIS ValueSet for: IhrisClassification"
 * ^url = "http://ihris.org/fhir/ValueSet/ihris-classification"
 * ^status = #active
 * ^experimental = false
@@ -5935,10 +5933,10 @@ Description: "Sample iHRIS ValueSet for: iHRISClassification"
 * ^contact.telecom.value = "http://ihris.org"
 * include codes from system $ihris-classification
 
-CodeSystem: iHRISClassification
+CodeSystem: IhrisClassification
 Id: ihris-classification
 Title: "iHRIS Classification"
-Description: "Sample iHRIS CodeSystem for: iHRISClassification"
+Description: "Sample iHRIS CodeSystem for: IhrisClassification"
 * ^url = "http://ihris.org/fhir/CodeSystem/ihris-classification"
 * ^date = "2020-09-25T20:48:33.646Z"
 * ^publisher = "iHRIS Foundation"
@@ -5954,10 +5952,10 @@ Description: "Sample iHRIS CodeSystem for: iHRISClassification"
 
 Alias: $ihris-job = http://ihris.org/fhir/CodeSystem/ihris-job
 
-ValueSet: iHRISJob
+ValueSet: IhrisJob
 Id: ihris-job
 Title: "iHRIS Job"
-Description: "Sample iHRIS ValueSet for: iHRISJob"
+Description: "Sample iHRIS ValueSet for: IhrisJob"
 * ^url = "http://ihris.org/fhir/ValueSet/ihris-job"
 * ^status = #active
 * ^version = "1.0.0"
@@ -5968,10 +5966,10 @@ Description: "Sample iHRIS ValueSet for: iHRISJob"
 * ^contact.telecom.value = "http://ihris.org"
 * include codes from system $ihris-job
 
-CodeSystem: iHRISJob
+CodeSystem: IhrisJob
 Id: ihris-job
 Title: "iHRIS Job"
-Description: "Sample iHRIS CodeSystem for: iHRISJob"
+Description: "Sample iHRIS CodeSystem for: IhrisJob"
 * ^url = "http://ihris.org/fhir/CodeSystem/ihris-job"
 * ^date = "2020-09-25T20:48:33.646Z"
 * ^publisher = "iHRIS Foundation"
@@ -6455,7 +6453,7 @@ Description: "Sample iHRIS CodeSystem for: iHRISJob"
 
 Alias: $ihris-salary-grade = http://ihris.org/fhir/CodeSystem/ihris-salary-grade
 
-ValueSet: iHRISSalaryGrade
+ValueSet: IhrisSalaryGrade
 Id: ihris-salary-grade
 Title: "iHRIS Salary Grade"
 Description: "Sample iHRIS ValueSet for: iHRISSalaryGrade"
@@ -6468,7 +6466,7 @@ Description: "Sample iHRIS ValueSet for: iHRISSalaryGrade"
 * ^contact.telecom.value = "http://ihris.org"
 * include codes from system $ihris-salary-grade
 
-CodeSystem: iHRISSalaryGrade
+CodeSystem: IhrisSalaryGrade
 Id: ihris-salary-grade
 Title: "iHRIS Salary Grade"
 Description: "Sample iHRIS CodeSystem for: iHRISSalaryGrade"
@@ -6492,6 +6490,6 @@ Description: "Sample iHRIS CodeSystem for: iHRISSalaryGrade"
 * ^property[=].type = #Coding
 * #entry-level "Entry-Level" "Entry-level and support positions."
 * #prof-entry-level "Professional Entry-Level" "Professional first grade."
-* #prof-mid-level "Professional Mid-Level/Managerial"
-* #director "Specialist/Director"
+* #profmid-level "Professional Mid-Level or Managerial"
+* #director "Specialist ornDirector"
 * #specialist "Technical Specialist" "Not included in any standard salary grades."

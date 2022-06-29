@@ -685,6 +685,22 @@
       },
       {
         "reference": {
+          "reference": "ValueSet/ihris-cadre"
+        },
+        "name": "iHRIS Cadre",
+        "description": "Sample iHRIS ValueSet for: IhrisCadre",
+        "exampleBoolean": false
+      },
+      {
+        "reference": {
+          "reference": "ValueSet/ihris-classification"
+        },
+        "name": "iHRIS Classification",
+        "description": "Sample iHRIS ValueSet for: IhrisClassification",
+        "exampleBoolean": false
+      },
+      {
+        "reference": {
           "reference": "ValueSet/ihris-degree-valueset"
         },
         "name": "iHRIS Degree ValueSet",
@@ -762,6 +778,14 @@
       },
       {
         "reference": {
+          "reference": "ValueSet/ihris-job"
+        },
+        "name": "iHRIS Job",
+        "description": "Sample iHRIS ValueSet for: IhrisJob",
+        "exampleBoolean": false
+      },
+      {
+        "reference": {
           "reference": "ValueSet/ihris-job-ethiopia"
         },
         "name": "iHRIS Job Title Value Set",
@@ -822,6 +846,14 @@
           "reference": "ValueSet/ihris-resource-valueset"
         },
         "name": "Value Set for iHRIS Basic Resources.",
+        "exampleBoolean": false
+      },
+      {
+        "reference": {
+          "reference": "ValueSet/ihris-salary-grade"
+        },
+        "name": "iHRIS Salary Grade",
+        "description": "Sample iHRIS ValueSet for: iHRISSalaryGrade",
         "exampleBoolean": false
       },
       {
@@ -941,38 +973,6 @@
       },
       {
         "reference": {
-          "reference": "ValueSet/ihris-cadre"
-        },
-        "name": "iHRIS Cadre",
-        "description": "Sample iHRIS ValueSet for: iHRISCadre",
-        "exampleBoolean": false
-      },
-      {
-        "reference": {
-          "reference": "ValueSet/ihris-classification"
-        },
-        "name": "iHRIS Classification",
-        "description": "Sample iHRIS ValueSet for: iHRISClassification",
-        "exampleBoolean": false
-      },
-      {
-        "reference": {
-          "reference": "ValueSet/ihris-job"
-        },
-        "name": "iHRIS Job",
-        "description": "Sample iHRIS ValueSet for: iHRISJob",
-        "exampleBoolean": false
-      },
-      {
-        "reference": {
-          "reference": "ValueSet/ihris-salary-grade"
-        },
-        "name": "iHRIS Salary Grade",
-        "description": "Sample iHRIS ValueSet for: iHRISSalaryGrade",
-        "exampleBoolean": false
-      },
-      {
-        "reference": {
           "reference": "CodeSystem/address-type"
         },
         "name": "AddressType",
@@ -1021,6 +1021,13 @@
       },
       {
         "reference": {
+          "reference": "CodeSystem/currencies"
+        },
+        "name": "Code System for Currencies.",
+        "exampleBoolean": false
+      },
+      {
+        "reference": {
           "reference": "CodeSystem/days-of-week"
         },
         "name": "DaysOfWeek",
@@ -1049,6 +1056,22 @@
         },
         "name": "IdentifierUse",
         "description": "Identifies the purpose for this identifier, if known .",
+        "exampleBoolean": false
+      },
+      {
+        "reference": {
+          "reference": "CodeSystem/ihris-cadre"
+        },
+        "name": "iHRIS Cadre",
+        "description": "Sample iHRIS CodeSystem for: IhrisCadre",
+        "exampleBoolean": false
+      },
+      {
+        "reference": {
+          "reference": "CodeSystem/ihris-classification"
+        },
+        "name": "iHRIS Classification",
+        "description": "Sample iHRIS CodeSystem for: IhrisClassification",
         "exampleBoolean": false
       },
       {
@@ -1130,6 +1153,14 @@
       },
       {
         "reference": {
+          "reference": "CodeSystem/ihris-job"
+        },
+        "name": "iHRIS Job",
+        "description": "Sample iHRIS CodeSystem for: IhrisJob",
+        "exampleBoolean": false
+      },
+      {
+        "reference": {
           "reference": "CodeSystem/ihris-job-ethiopia"
         },
         "name": "iHRIS Job Title Code System for Ethiopia",
@@ -1189,6 +1220,14 @@
           "reference": "CodeSystem/ihris-resource-codesystem"
         },
         "name": "Code System for iHRIS Basic Resources.",
+        "exampleBoolean": false
+      },
+      {
+        "reference": {
+          "reference": "CodeSystem/ihris-salary-grade"
+        },
+        "name": "iHRIS Salary Grade",
+        "description": "Sample iHRIS CodeSystem for: iHRISSalaryGrade",
         "exampleBoolean": false
       },
       {
@@ -1311,45 +1350,6 @@
         },
         "name": "v3 Code System RoleCode",
         "description": " A set of codes further specifying the kind of Role; specific classification codes for further qualifying RoleClass codes.",
-        "exampleBoolean": false
-      },
-      {
-        "reference": {
-          "reference": "CodeSystem/currencies"
-        },
-        "name": "Code System for Currencies.",
-        "exampleBoolean": false
-      },
-      {
-        "reference": {
-          "reference": "CodeSystem/ihris-cadre"
-        },
-        "name": "iHRIS Cadre",
-        "description": "Sample iHRIS CodeSystem for: iHRISCadre",
-        "exampleBoolean": false
-      },
-      {
-        "reference": {
-          "reference": "CodeSystem/ihris-classification"
-        },
-        "name": "iHRIS Classification",
-        "description": "Sample iHRIS CodeSystem for: iHRISClassification",
-        "exampleBoolean": false
-      },
-      {
-        "reference": {
-          "reference": "CodeSystem/ihris-job"
-        },
-        "name": "iHRIS Job",
-        "description": "Sample iHRIS CodeSystem for: iHRISJob",
-        "exampleBoolean": false
-      },
-      {
-        "reference": {
-          "reference": "CodeSystem/ihris-salary-grade"
-        },
-        "name": "iHRIS Salary Grade",
-        "description": "Sample iHRIS CodeSystem for: iHRISSalaryGrade",
         "exampleBoolean": false
       },
       {
@@ -1811,7 +1811,7 @@
         "reference": {
           "reference": "Basic/ihris-role-admin"
         },
-        "name": "ihris-role-admin",
+        "name": "iHRIS Admin Role",
         "exampleCanonical": "http://ihris.org/fhir/StructureDefinition/ihris-role"
       },
       {
@@ -2176,6 +2176,13 @@
           "reference": "SearchParameter/position-status-search"
         },
         "name": "position-status-search",
+        "exampleBoolean": false
+      },
+      {
+        "reference": {
+          "reference": "SearchParameter/practitioner-birthdate"
+        },
+        "name": "practitioner-birthdate",
         "exampleBoolean": false
       },
       {

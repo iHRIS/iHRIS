@@ -16,11 +16,11 @@
             "system": "urn:iso-astm:E1762-95:2013"
           }
         ],
-        "when": "2022-06-17T17:04:17.400Z",
+        "when": "2022-06-21T09:31:16.469Z",
         "who": {
           "reference": "http://ihris.org/fhir/Organization/ihris"
         },
-        "data": "jceQ3XcSdp6iRMZda8AoE3iolyuSNZPARh3r+Y3/uFmcDqErRwvOGPR4I0GF/TKczUTYXrHZDCq0Be9PaFJi26o0yq8NgyId/J3Fa2hW+eaPk1bHfkiygjvn6BeHKuzQJ+PY6Pk5jaJ5amOkIEqVHwDyEKyEJlX4MpPa/ppWB2o="
+        "data": "V870cwmayGw0tOXXdiUn7/MNEaPt/KzRCk7H2t6IvqxmhshwxLxAYve8yNEdkhj/WhybFokLXR5rhtqU4VKE9EiN/dL1fHVbdu0rk/WrcFy2vPqYPUxepFAAAWQXIQV7gsVSMFEbUOTiYaQ42dt7gddrmJYq8p+6RFLAMDkxpzU="
       }
     },
     {
@@ -83,12 +83,100 @@
           "valueString": "http://ihris.org/"
         },
         {
+          "name": "site:nav:menu:profile:text",
+          "valueString": "My Profile"
+        },
+        {
+          "name": "site:nav:menu:profile:order",
+          "valueString": "0"
+        },
+        {
+          "name": "site:nav:menu:profile:icon",
+          "valueString": "mdi-account-multiple"
+        },
+        {
+          "name": "site:nav:menu:profile:url",
+          "valueString": "/resource/view"
+        },
+        {
+          "name": "site:nav:menu:profile:selfService",
+          "valueString": "true"
+        },
+        {
+          "name": "site:nav:menu:profile:exclusive",
+          "valueString": "true"
+        },
+        {
+          "name": "site:nav:menu:leaveRequest:text",
+          "valueString": "Leave request"
+        },
+        {
+          "name": "site:nav:menu:leaveRequest:order",
+          "valueString": "1"
+        },
+        {
+          "name": "site:nav:menu:leaveRequest:icon",
+          "valueString": "mdi-account-arrow-right"
+        },
+        {
+          "name": "site:nav:menu:leaveRequest:url",
+          "valueString": "/questionnaire/ihris-leave/leave?practitioner="
+        },
+        {
+          "name": "site:nav:menu:leaveRequest:selfService",
+          "valueString": "true"
+        },
+        {
+          "name": "site:nav:menu:leaveRequest:exclusive",
+          "valueString": "true"
+        },
+        {
+          "name": "workflow:questionnaire:leaveRequest:url",
+          "valueString": "http://ihris.org/fhir/Questionnaire/ihris-leave"
+        },
+        {
+          "name": "workflow:processor:leaveRequest:file",
+          "valueString": "../modules/workflowLeave"
+        },
+        {
+          "name": "site:nav:menu:evaluation:text",
+          "valueString": "Performance Evaluation"
+        },
+        {
+          "name": "site:nav:menu:evaluation:order",
+          "valueString": "2"
+        },
+        {
+          "name": "site:nav:menu:evaluation:icon",
+          "valueString": "mdi-chart-areaspline"
+        },
+        {
+          "name": "site:nav:menu:evaluation:url",
+          "valueString": "/questionnaire/ihris-leave/leave?practitioner="
+        },
+        {
+          "name": "site:nav:menu:evaluation:selfService",
+          "valueString": "true"
+        },
+        {
+          "name": "site:nav:menu:evaluation:exclusive",
+          "valueString": "true"
+        },
+        {
+          "name": "workflow:questionnaire:evaluation:url",
+          "valueString": "http://ihris.org/fhir/Questionnaire/ihris-leave"
+        },
+        {
+          "name": "workflow:processor:evaluation:file",
+          "valueString": "../modules/workflowLeaveEthiopia"
+        },
+        {
           "name": "site:nav:menu:dashboard:text",
           "valueString": "Dashboard"
         },
         {
           "name": "site:nav:menu:dashboard:order",
-          "valueString": "0"
+          "valueString": "3"
         },
         {
           "name": "site:nav:menu:dashboard:icon",
@@ -108,7 +196,7 @@
         },
         {
           "name": "site:nav:menu:person:order",
-          "valueString": "1"
+          "valueString": "4"
         },
         {
           "name": "site:nav:menu:person:icon",
@@ -136,7 +224,7 @@
         },
         {
           "name": "site:nav:menu:position:order",
-          "valueString": "2"
+          "valueString": "5"
         },
         {
           "name": "site:nav:menu:position:icon",
@@ -164,7 +252,7 @@
         },
         {
           "name": "site:nav:menu:location:order",
-          "valueString": "3"
+          "valueString": "6"
         },
         {
           "name": "site:nav:menu:location:icon",
@@ -187,8 +275,36 @@
           "valueString": "/resource/search/facility"
         },
         {
+          "name": "site:nav:menu:adminUnit:text",
+          "valueString": "Admin Unit"
+        },
+        {
+          "name": "site:nav:menu:adminUnit:order",
+          "valueString": "7"
+        },
+        {
+          "name": "site:nav:menu:adminUnit:icon",
+          "valueString": "mdi-family-tree"
+        },
+        {
+          "name": "site:nav:menu:adminUnit:menu:byLocation:text",
+          "valueString": "By Location"
+        },
+        {
+          "name": "site:nav:menu:adminUnit:menu:byLocation:url",
+          "valueString": "/adminUnit/by-location"
+        },
+        {
+          "name": "site:nav:menu:adminUnit:menu:byReporting:text",
+          "valueString": "By Reporting"
+        },
+        {
+          "name": "site:nav:menu:adminUnit:menu:byReporting:url",
+          "valueString": "/adminUnit/by-reporting"
+        },
+        {
           "name": "site:nav:menu:mhero:order",
-          "valueString": "5"
+          "valueString": "8"
         },
         {
           "name": "site:nav:menu:mhero:text",
@@ -236,7 +352,7 @@
         },
         {
           "name": "site:nav:menu:database:order",
-          "valueString": "4"
+          "valueString": "9"
         },
         {
           "name": "site:nav:menu:database:icon",
@@ -420,7 +536,7 @@
         },
         {
           "name": "site:nav:menu:database:menu:salarysource:order",
-          "valueString": "14"
+          "valueString": "15"
         },
         {
           "name": "site:nav:menu:database:menu:identifier:text",
@@ -432,7 +548,7 @@
         },
         {
           "name": "site:nav:menu:database:menu:identifier:order",
-          "valueString": "15"
+          "valueString": "16"
         },
         {
           "name": "site:nav:menu:database:menu:frequency:text",
@@ -444,7 +560,7 @@
         },
         {
           "name": "site:nav:menu:database:menu:frequency:order",
-          "valueString": "16"
+          "valueString": "17"
         },
         {
           "name": "site:nav:menu:reports:text",
@@ -452,7 +568,7 @@
         },
         {
           "name": "site:nav:menu:reports:order",
-          "valueString": "6"
+          "valueString": "10"
         },
         {
           "name": "site:nav:menu:reports:icon",
@@ -476,7 +592,7 @@
         },
         {
           "name": "site:nav:menu:users:order",
-          "valueString": "8"
+          "valueString": "11"
         },
         {
           "name": "site:nav:menu:users:icon",
@@ -512,7 +628,7 @@
         },
         {
           "name": "site:nav:menu:audit:order",
-          "valueString": "7"
+          "valueString": "12"
         },
         {
           "name": "site:nav:menu:audit:icon",
@@ -528,7 +644,7 @@
         },
         {
           "name": "site:nav:menu:password:order",
-          "valueString": "9"
+          "valueString": "13"
         },
         {
           "name": "site:nav:menu:password:icon",
@@ -609,6 +725,18 @@
         {
           "name": "defaults:fields:Location.partOf:type",
           "valueString": "tree"
+        },
+        {
+          "name": "defaults:fields:Location.extension:facilityLocation.value[x]:valueReference:type",
+          "valueString": "tree"
+        },
+        {
+          "name": "defaults:fields:Location.extension:facilityLocation.value[x]:valueReference:initialValue",
+          "valueString": "Location/ET"
+        },
+        {
+          "name": "defaults:fields:Location.partOf:initialValue",
+          "valueString": "Location/federal-ministry-of-health"
         },
         {
           "name": "defaults:fields:Location.partOf:user_filter:regex",
@@ -737,6 +865,14 @@
         {
           "name": "defaults:components:date:maxValueDate",
           "valueString": "2030-01-01"
+        },
+        {
+          "name": "workflow:processor:password:file",
+          "valueString": "../modules/workflowChangePassword"
+        },
+        {
+          "name": "workflow:questionnaire:password:url",
+          "valueString": "http://ihris.org/fhir/Questionnaire/ihris-change-password"
         }
       ]
     }

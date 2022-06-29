@@ -1984,7 +1984,7 @@
           {
             "code": "Reference",
             "targetProfile": [
-              "http://ihris.org/fhir/StructureDefinition/ihris-jurisdiction"
+              "http://ihris.org/fhir/StructureDefinition/ihris-facility"
             ]
           }
         ],
@@ -2879,7 +2879,7 @@
           {
             "code": "Reference",
             "targetProfile": [
-              "http://ihris.org/fhir/StructureDefinition/ihris-jurisdiction"
+              "http://ihris.org/fhir/StructureDefinition/ihris-facility"
             ]
           }
         ],

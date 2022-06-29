@@ -1,7 +1,7 @@
 {
   "resourceType": "ValueSet",
   "status": "active",
-  "name": "iHRISSalaryGrade",
+  "name": "IhrisSalaryGrade",
   "id": "ihris-salary-grade",
   "title": "iHRIS Salary Grade",
   "description": "Sample iHRIS ValueSet for: iHRISSalaryGrade",
