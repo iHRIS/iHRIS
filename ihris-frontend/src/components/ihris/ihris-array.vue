@@ -10,7 +10,9 @@
       <v-card
       elevation="0">
         <v-system-bar
-          class="pa-4 py-6 black--text font-weight-bold"
+            color="secondary"
+            dark
+          class="pa-4 white--text font-weight-bold"
           v-if="edit"
           >
           {{ $t(`App.ihris-array.${label}`) }}

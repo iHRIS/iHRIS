@@ -187,8 +187,8 @@ router.post("/signup", (req, res) => {
           return res.status(409).send("User already exists");
         } else {
           fhirAxios.search('Practitioner', {
-            birthDate: req.body.birthDate,
-            medicalLicenseNumber: req.body.medicalLicenseNumber
+            "birthDate:exact" : req.body.birthDate,
+            "employeeNumber:exact": req.body.employeeNumber
           }).then((usersRes) => {
             if (!usersRes.entry || (usersRes.entry && usersRes.entry.length === 0)) {
               res.status(404).json({ok: false, name: req.body.name})

@@ -382,7 +382,7 @@
         {
           "linkId": "Practitioner.identifier[0]",
           "definition": "http://ihris.org/fhir/StructureDefinition/ihris-practitioner#Practitioner.identifier",
-          "text": "Medical License Number",
+          "text": "Employee Number",
           "type": "group",
           "repeats": false,
           "required": true,
@@ -398,7 +398,7 @@
             {
               "linkId": "Practitioner.identifier[0].value",
               "definition": "http://ihris.org/fhir/StructureDefinition/ihris-practitioner#Practitioner.identifier.value",
-              "text": "Medical License Number",
+              "text": "Employee Number",
               "type": "string",
               "repeats": false,
               "required": true
