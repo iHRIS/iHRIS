@@ -312,14 +312,6 @@
       },
       {
         "reference": {
-          "reference": "StructureDefinition/ihris-facility-location"
-        },
-        "name": "IHRIS facility location",
-        "description": "iHRIS facility Location",
-        "exampleBoolean": false
-      },
-      {
-        "reference": {
           "reference": "StructureDefinition/ihris-facility-ownership-prefix"
         },
         "name": "iHRIS facility ownership type",
@@ -1403,13 +1395,6 @@
       },
       {
         "reference": {
-          "reference": "SearchParameter/facility-location-search-parameter"
-        },
-        "name": "facility-location-search-parameter",
-        "exampleBoolean": false
-      },
-      {
-        "reference": {
           "reference": "SearchParameter/gofr-search-isbroadcast"
         },
         "name": "gofr-search-isbroadcast",
@@ -2187,9 +2172,9 @@
       },
       {
         "reference": {
-          "reference": "SearchParameter/practitioner-medicalLicenseNumber"
+          "reference": "SearchParameter/practitioner-employeeNumber"
         },
-        "name": "practitioner-medicalLicenseNumber",
+        "name": "practitioner-employeeNumber",
         "exampleBoolean": false
       },
       {

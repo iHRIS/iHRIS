@@ -49,8 +49,8 @@
             <v-text-field
                 outlined
                 dense
-                v-model="medicalLicenseNumber"
-                :label="$t(`App.home.medicalLicenseNumber`)"
+                v-model="employeeNumber"
+                :label="$t(`App.home.employeeNumber`)"
                 required
                 prepend-icon="mdi-account-key"
             ></v-text-field>
@@ -233,7 +233,7 @@ export default {
       email: "",
       birthDate: null,
       menu: false,
-      medicalLicenseNumber:"",
+      employeeNumber:"",
       registering: false,
       resetPasswordDialog: false,
       resetPasswordEmail: "",
@@ -332,9 +332,9 @@ export default {
       this.signingin = true
       let formData = new URLSearchParams()
       formData.append("username", this.email)
-      formData.append("medicalLicenseNumber", this.medicalLicenseNumber)
+      formData.append("employeeNumber", this.employeeNumber)
       formData.append("birthDate", this.birthDate)
-      if (this.email === "" ||  this.medicalLicenseNumber === "" || this.birthDate === "") {
+      if (this.email === "" ||  this.employeeNumber === "" || this.birthDate === "") {
         this.message = "Please fill in all fields"
         this.snackbarRegister = true
         this.signingin = false

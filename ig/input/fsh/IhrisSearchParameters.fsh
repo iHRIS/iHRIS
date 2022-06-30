@@ -284,27 +284,15 @@ Usage: #definition
 * expression = "Practitioner.birthDate"
 * xpathUsage = #normal
 
-Instance: practitioner-medicalLicenseNumber
+Instance: practitioner-employeeNumber
 InstanceOf: SearchParameter
 Usage: #definition
-* url = "http://ihris.org/fhir/SearchParameter/practitioner-medicalLicenseNumber"
-* name = "Search Parameter on Medical License Number for practitioner"
+* url = "http://ihris.org/fhir/SearchParameter/practitioner-employeeNumber"
+* name = "Search Parameter on employee Number for practitioner"
 * status = #active
-* description = "Search by medical license number for a practitioner resource."
-* code = #medicalLicenseNumber
+* description = "Search by employee number for a practitioner resource."
+* code = #employeeNumber
 * base = #Practitioner
 * type = #string
-* expression = "Practitioner.identifier.where(type.coding.code='MD').value"
-* xpathUsage = #normal
-
-Instance: facility-location-search-parameter
-InstanceOf: SearchParameter
-Usage: #definition
-* base = #Location
-* name = "Search Facility by Location"
-* description = "Search Facility by Location"
-* status = #active
-* code = #facility-location
-* type = #reference
-* expression = "Location.extension('http://ihris.org/fhir/StructureDefinition/ihris-facility-location')"
+* expression = "Practitioner.identifier.where(type.coding.code='EN').value"
 * xpathUsage = #normal

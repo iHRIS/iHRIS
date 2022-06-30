@@ -16,7 +16,7 @@
             "resetPassword": "Reset Password",
             "emailAddress": "Email Address",
             "register": "Register",
-            "medicalLicenseNumber": "Medical License Number",
+            "employeeNumber": "Employee Number",
             "birthDate": "Birthday date"
         },
         "menu": {
@@ -198,7 +198,7 @@
             "Identifier": "Identifier",
             "Task Attributes": "Task Attributes",
             "Composite/Linked Tasks": "Composite/Linked Tasks",
-            "Medical License Number": "Medical License Number"
+            "Employee Number": "Employee Number"
         },
         "ihris-section": {
             "Position": "Position",
@@ -415,7 +415,7 @@
             "Display": "Display",
             "Code": "Code",
             "Definition": "Definition",
-            "Medical License Number": "Medical License Number",
+            "Employee Number": "Employee Number",
             "Organization Address": "Organization Address",
             "Job Description": "Job Description",
             "V2 Concept Comment": "V2 Concept Comment",

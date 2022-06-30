@@ -5,10 +5,10 @@
     :class="[hasScrolled || this.isQuestionnaire ? 'show' : 'hide']"
   >
     <v-snackbar
-        color="white"
+      color="white"
       v-model="snackbar"
       :bottom="bottom"
-      :left="left"
+      :right="right"
       :timeout="timeout"
        width="320"
     >
@@ -99,7 +99,7 @@ export default {
       snackbar: true,
       timeout: 0,
       bottom: true,
-      left: true,
+      right: true,
     };
   },
   components: {},
