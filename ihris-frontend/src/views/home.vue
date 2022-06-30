@@ -197,7 +197,7 @@
                       {{$t(`App.home.forgotPassword`)}}</v-btn
                     >
                     <v-spacer></v-spacer>
-                    <v-btn @click="()=>{this.dialog=true}" class="mx-2 text--white"
+                    <v-btn v-if="this.$store.state.allowSelfSignup === 'true' " @click="()=>{this.dialog=true}" class="mx-2 text--white"
                            outlined
                            color="primary" style="text-transform: none" text >
                       {{$t(`App.home.noAccount`)}}
@@ -238,6 +238,15 @@ export default {
       resetPasswordDialog: false,
       resetPasswordEmail: "",
     }
+  },
+  created:function(){
+    fetch("/config/site").then(response => {
+      response.json().then(data => {
+        if (data.hasOwnProperty("canSelfSignup")) {
+          this.$store.commit('setAllowSelfSignup', data.canSelfSignup);
+        }
+      })
+    })
   },
   methods:{
     saveDate (date) {
