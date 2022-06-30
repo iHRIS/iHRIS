@@ -16,11 +16,11 @@
             "code": "1.2.840.10065.1.12.1.14"
           }
         ],
-        "when": "2022-06-28T10:02:06.325Z",
+        "when": "2022-06-30T08:39:23.731Z",
         "who": {
           "reference": "http://ihris.org/fhir/Organization/ihris"
         },
-        "data": "2/qNjsQDiFvm6qqsgxY/L3AFqGhEfooPmZ2y+i5j3aqcQJXI3n97FcBkR99uDuiBYwpUfBuYSf3OT+ZrdScy47ZFX7HguQwCBY+WIIMfVMwgvge2+GDzucqqewrjq8zHaAChsG7FthqD03LxrkkDh+IosD7chBhND39LmAH1x5Q="
+        "data": "wlVZO/ajH0+cW5m0QO2CUl7bUYJqRpdutVmLIIO3NlnesXX4ubHFWkbtZoOdU9zLb3lFp20+fhWHOlJtD6u1xn8HmUjmHqpA16vBkP3OSqrxCbQZHtIqu6Y/AAbQjjcNURDo9J2fMweL3850tnDwdDuE5Rir2KHMmVEz5QL9T5U="
       }
     },
     {
@@ -171,22 +171,6 @@
           "valueString": "../modules/workflowLeaveEthiopia"
         },
         {
-          "name": "site:nav:menu:dashboard:text",
-          "valueString": "Dashboard"
-        },
-        {
-          "name": "site:nav:menu:dashboard:order",
-          "valueString": "3"
-        },
-        {
-          "name": "site:nav:menu:dashboard:icon",
-          "valueString": "mdi-chart-arc"
-        },
-        {
-          "name": "site:nav:menu:dashboard:url",
-          "valueString": "/dashboard"
-        },
-        {
           "name": "site:nav:active",
           "valueString": "person"
         },
@@ -196,7 +180,7 @@
         },
         {
           "name": "site:nav:menu:person:order",
-          "valueString": "4"
+          "valueString": "3"
         },
         {
           "name": "site:nav:menu:person:icon",
@@ -224,7 +208,7 @@
         },
         {
           "name": "site:nav:menu:position:order",
-          "valueString": "5"
+          "valueString": "4"
         },
         {
           "name": "site:nav:menu:position:icon",
@@ -252,7 +236,7 @@
         },
         {
           "name": "site:nav:menu:location:order",
-          "valueString": "6"
+          "valueString": "5"
         },
         {
           "name": "site:nav:menu:location:icon",
@@ -275,36 +259,8 @@
           "valueString": "/resource/search/facility"
         },
         {
-          "name": "site:nav:menu:adminUnit:text",
-          "valueString": "Admin Unit"
-        },
-        {
-          "name": "site:nav:menu:adminUnit:order",
-          "valueString": "7"
-        },
-        {
-          "name": "site:nav:menu:adminUnit:icon",
-          "valueString": "mdi-family-tree"
-        },
-        {
-          "name": "site:nav:menu:adminUnit:menu:byLocation:text",
-          "valueString": "By Location"
-        },
-        {
-          "name": "site:nav:menu:adminUnit:menu:byLocation:url",
-          "valueString": "/adminUnit/by-location"
-        },
-        {
-          "name": "site:nav:menu:adminUnit:menu:byReporting:text",
-          "valueString": "By Reporting"
-        },
-        {
-          "name": "site:nav:menu:adminUnit:menu:byReporting:url",
-          "valueString": "/adminUnit/by-reporting"
-        },
-        {
           "name": "site:nav:menu:mhero:order",
-          "valueString": "8"
+          "valueString": "6"
         },
         {
           "name": "site:nav:menu:mhero:text",
@@ -352,7 +308,7 @@
         },
         {
           "name": "site:nav:menu:database:order",
-          "valueString": "9"
+          "valueString": "7"
         },
         {
           "name": "site:nav:menu:database:icon",
@@ -563,12 +519,28 @@
           "valueString": "17"
         },
         {
+          "name": "site:nav:menu:dashboard:text",
+          "valueString": "Dashboard"
+        },
+        {
+          "name": "site:nav:menu:dashboard:order",
+          "valueString": "8"
+        },
+        {
+          "name": "site:nav:menu:dashboard:icon",
+          "valueString": "mdi-chart-arc"
+        },
+        {
+          "name": "site:nav:menu:dashboard:url",
+          "valueString": "/dashboard"
+        },
+        {
           "name": "site:nav:menu:reports:text",
           "valueString": "Reports"
         },
         {
           "name": "site:nav:menu:reports:order",
-          "valueString": "10"
+          "valueString": "9"
         },
         {
           "name": "site:nav:menu:reports:icon",
@@ -592,7 +564,7 @@
         },
         {
           "name": "site:nav:menu:users:order",
-          "valueString": "11"
+          "valueString": "10"
         },
         {
           "name": "site:nav:menu:users:icon",
@@ -623,6 +595,22 @@
           "valueString": "/resource/search/task"
         },
         {
+          "name": "site:nav:menu:password:text",
+          "valueString": "Change Password"
+        },
+        {
+          "name": "site:nav:menu:password:order",
+          "valueString": "11"
+        },
+        {
+          "name": "site:nav:menu:password:icon",
+          "valueString": "mdi-lock-reset"
+        },
+        {
+          "name": "site:nav:menu:password:url",
+          "valueString": "/questionnaire/ihris-change-password/person"
+        },
+        {
           "name": "site:nav:menu:audit:text",
           "valueString": "Audit Logs"
         },
@@ -637,22 +625,6 @@
         {
           "name": "site:nav:menu:audit:url",
           "valueString": "/resource/view/auditevent"
-        },
-        {
-          "name": "site:nav:menu:password:text",
-          "valueString": "Change Password"
-        },
-        {
-          "name": "site:nav:menu:password:order",
-          "valueString": "13"
-        },
-        {
-          "name": "site:nav:menu:password:icon",
-          "valueString": "mdi-lock-reset"
-        },
-        {
-          "name": "site:nav:menu:password:url",
-          "valueString": "/questionnaire/ihris-change-password/person"
         },
         {
           "name": "shortname:Practitioner:format",
@@ -712,7 +684,7 @@
         },
         {
           "name": "defaults:fields:PractitionerRole.location:initialValue",
-          "valueString": "Location/federal-ministry-of-health"
+          "valueString": "Location/ET"
         },
         {
           "name": "defaults:fields:PractitionerRole.location:user_filter:regex",
@@ -740,7 +712,7 @@
         },
         {
           "name": "defaults:fields:Location.partOf:initialValue",
-          "valueString": "Location/federal-ministry-of-health"
+          "valueString": "Location/ET"
         },
         {
           "name": "defaults:fields:Location.partOf:user_filter:regex",

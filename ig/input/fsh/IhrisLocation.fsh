@@ -47,11 +47,9 @@ Description:    "iHRIS Profile of Locations to manage facilities."
 * identifier.type from IhrisFacilityIdentifierValueSet
 * extension contains
         IhrisFacilityOwnership named ownership 1..1 MS and
-        IhrisFacilityLocation named facilityLocation 1..1 MS and
         IhrisFacilityInformationDetails named facilityInformationDetails 1..1 MS
 * extension[ownership].valueCoding MS
 * extension[ownership] ^label = "Ownership"
-* extension[facilityLocation].valueReference.reference MS
 * extension[facilityInformationDetails].extension[logo].valueAttachment ^label = "Facility Logo"
 * extension[facilityInformationDetails].extension[logo].valueAttachment MS
 * extension[facilityInformationDetails].extension[stamp].valueAttachment ^label = "Facility Stamp"
@@ -68,9 +66,9 @@ Description:    "iHRIS Profile of Locations to manage facilities."
 * position.longitude ^label = "Longitude"
 * position.latitude 1..1 MS
 * position.latitude ^label = "Latitude"
-* partOf 1..1 MS
-* partOf only Reference(IhrisFacility)
-* partOf ^label = "Report to"
+* partOf 1..1 MS 
+* partOf only Reference(IhrisJurisdiction)
+* partOf ^label = "Part Of(Country/Region/District/County)"
 
 ValueSet:         IhrisFacilityIdentifierValueSet
 Id:               ihris-Facility-identifier-valueset
@@ -179,26 +177,6 @@ Description:    "iHRIS extension for Personal Prefix."
 * valueCoding 1..1 MS
 * valueCoding ^label = "Ownership"
 * valueCoding from IhrisFacilityOwnershipValueSet (required)
-
-Extension:      IhrisFacilityLocation
-Id:             ihris-facility-location
-Title:          "IHRIS facility location"
-Description:    "iHRIS facility Location"
-* ^context.type = #element
-* ^context.expression = "Location"
-* value[x] only Reference
-* valueReference 1..1 MS
-* valueReference ^label = "Facility Location"
-* valueReference ^constraint[0].key = "ihris-facility-location"
-* valueReference ^constraint[0].severity = #warning
-* valueReference ^constraint[0].expression = "reference.matches('^Location/')"
-* valueReference ^constraint[0].human = "Must be a location"
-* valueReference only Reference(IhrisJurisdiction)
-* valueReference.reference 1..1 MS
-* valueReference.reference ^label = "Location"
-* valueReference.type 0..0
-* valueReference.identifier 0..0
-* valueReference.display 0..0
 
 
 Instance:       ihris-page-facility

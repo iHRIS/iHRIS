@@ -477,7 +477,7 @@ Usage:          #definition
 
 * item[3].item[0].linkId = "Practitioner.identifier[0]"
 * item[3].item[0].definition = "http://ihris.org/fhir/StructureDefinition/ihris-practitioner#Practitioner.identifier"
-* item[3].item[0].text = "Medical License Number"
+* item[3].item[0].text = "Employee Number"
 * item[3].item[0].type = #group
 * item[3].item[0].repeats = false
 * item[3].item[0].required = true
@@ -491,7 +491,7 @@ Usage:          #definition
 
 * item[3].item[0].item[1].linkId = "Practitioner.identifier[0].value"
 * item[3].item[0].item[1].definition = "http://ihris.org/fhir/StructureDefinition/ihris-practitioner#Practitioner.identifier.value"
-* item[3].item[0].item[1].text = "Medical License Number"
+* item[3].item[0].item[1].text = "Employee Number"
 * item[3].item[0].item[1].type = #string
 * item[3].item[0].item[1].repeats = false
 * item[3].item[0].item[1].required = true

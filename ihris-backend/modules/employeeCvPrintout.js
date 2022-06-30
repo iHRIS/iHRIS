@@ -1,6 +1,7 @@
-const { PDFDocument, rgb } = require("pdf-lib");
+const {PDFDocument, rgb} = require("pdf-lib");
 const fs = require("fs");
 const path = require("path");
+const dir = './tmp';
 
 const createCV = async (userData) => {
     const templatePath = path.join(__dirname, "../", "file/ResumeTemplate.pdf");
@@ -171,11 +172,13 @@ const createCV = async (userData) => {
     }
     const pdfBytes = await pdfDoc.save();
     let fileName = `${userData.id}_cv.pdf`;
-    fs.writeFileSync(`employee_cvs_generated/${fileName}`, pdfBytes);
-    setTimeout(() => {
-        fs.unlinkSync(`employee_cvs_generated/${fileName}`);
-    }, 240000);
-    //   return fs.readFileSync(`./${fileName}`);
+    if (!fs.existsSync(dir)) {
+        fs.mkdirSync(dir);
+        fs.writeFileSync(`tmp/${fileName}`, pdfBytes);
+        setTimeout(() => {
+            fs.unlinkSync(`tmp/${fileName}`);
+        }, 240000);
+    }
 };
 
 module.exports = createCV;

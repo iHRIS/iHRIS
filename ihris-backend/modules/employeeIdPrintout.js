@@ -8,6 +8,7 @@ const {
 } = require("canvas");
 const fs = require("fs");
 const path = require("path");
+const dir = './tmp';
 
 const imageSizeOfP = pify(imageSizeOf);
 
@@ -18,8 +19,8 @@ module.exports = create = async (userData) => {
 
     let fontPath = path.join(__dirname, "../", "fonts/Roboto-Regular.ttf");
 
-    const { width, height } = await imageSizeOfP(templatePath);
-    registerFont(fontPath, { family: "Roboto" });
+    const {width, height} = await imageSizeOfP(templatePath);
+    registerFont(fontPath, {family: "Roboto"});
     const canvas = createCanvas(width, height);
 
     const ctx = canvas.getContext("2d");
@@ -36,7 +37,8 @@ module.exports = create = async (userData) => {
             "data:" + userData.logo.contentType + ";base64," + userData.logo.data;
         const logoImage = await new Image();
         logoImage.src = dataURL;
-        logoImage.onload = function () {};
+        logoImage.onload = function () {
+        };
         ctx.drawImage(logoImage, 10, 380, 100, 80);
 
         if (userData.logo.contentType === "image/png") {
@@ -82,7 +84,8 @@ module.exports = create = async (userData) => {
             userData.photo[0].data;
         const profileImage = await new Image();
         profileImage.src = dataURL;
-        profileImage.onload = function () {};
+        profileImage.onload = function () {
+        };
         ctx.drawImage(profileImage, 40, 100, 150, 150);
     }
 
@@ -91,7 +94,8 @@ module.exports = create = async (userData) => {
             "data:" + userData.stamp.contentType + ";base64," + userData.stamp.data;
         const stampImage = await new Image();
         stampImage.src = dataURL;
-        stampImage.onload = function () {};
+        stampImage.onload = function () {
+        };
         ctx.drawImage(stampImage, 420, 650, 140, 140);
     }
 
@@ -107,13 +111,17 @@ module.exports = create = async (userData) => {
             userData.signature.data;
         const signatureImage = await new Image();
         signatureImage.src = dataURL;
-        signatureImage.onload = function () {};
+        signatureImage.onload = function () {
+        };
         ctx.drawImage(signatureImage, 80, 810, 90, 50);
     }
 
     let buffer = canvas.toBuffer();
-    fs.writeFileSync(`employee_ids_generated/${fileName}`, buffer);
-    setTimeout(() => {
-        fs.unlinkSync(`employee_ids_generated/${fileName}`);
-    }, 240000);
+    if (!fs.existsSync(dir)) {
+        fs.mkdirSync(dir);
+        fs.writeFileSync(`tmp/${fileName}`, buffer);
+        setTimeout(() => {
+            fs.unlinkSync(`tmp/${fileName}`);
+        }, 240000);
+    }
 };

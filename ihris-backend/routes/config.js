@@ -1609,7 +1609,7 @@ router.get("/employeeId/:id", (req, res) => {
       userData.position = role ? role : "";
 
       let fileName = `${userData.id}_id.png`;
-      let p = path.join(__dirname, "../employee_ids_generated/", fileName);
+      let p = path.join(__dirname, "../tmp/", fileName);
       employeeId(userData).then((_) => {
         res.download(p);
       });
@@ -1703,163 +1703,12 @@ router.get("/employeeCv/:id", async (req, res) => {
       console.log(e);
     }
     let fileName = `${userData.id}_cv.pdf`;
-    let p = path.join(__dirname, "../employee_cvs_generated/", fileName);
+    let p = path.join(__dirname, "../tmp/", fileName);
     employeeCv(userData)
         .then((_) => {
           res.download(p);
         })
         .catch((e) => console.log(e));
-  }
-});
-
-router.post("/facilityInformation", async (req, res) => {
-  const getAge = (birthdate, ageRange) => {
-    let birthYear = new Date(birthdate).getFullYear();
-    let currentDate = new Date();
-    let currentYear = currentDate.getFullYear();
-    let age = currentYear - birthYear;
-    if (age >= 20 && age <= 35) {
-      ageRange["20to35"] += 1;
-    }
-    if (age >= 36 && age <= 45) {
-      ageRange["36to45"] += 1;
-    }
-    if (age >= 46 && age <= 55) {
-      ageRange["46to55"] += 1;
-    }
-    if (age >= 56 && age <= 65) {
-      ageRange["56to65"] += 1;
-    }
-    if (age >= 66) {
-      ageRange["gt65"] += 1;
-    }
-  };
-
-  if (!req.body) {
-    return res.status(400).end();
-  } else {
-    let response = {};
-    let facilityInformation = [];
-    try {
-      let locationData = await fhirAxios.read("Location", req.body?.id?.split("/").pop());
-      if (locationData) {
-        if (locationData.partOf) {
-          let facilityData = await fhirAxios.read("Location", locationData.partOf.reference.split("/").pop());
-          if (facilityData) {
-            facilityInformation.push({
-              name: "Report To", value: facilityData.name,
-            });
-          }
-        }
-        facilityInformation.push({
-          name: "Status", value: locationData.status,
-        });
-        let ownership = locationData.extension.find((x) => x.url === "http://ihris.org/fhir/StructureDefinition/ihris-facility-ownership-prefix");
-        let region = locationData.extension.find((x) => x.url === "http://ihris.org/fhir/StructureDefinition/ihris-facility-location");
-        if (region) {
-          let data = await fhirAxios.search("Location", {
-            _id: region.valueReference.reference.split("/").pop(), "_include:iterate": "Location:partof",
-          });
-          if (data && data.entry.length > 0) {
-            data.entry.map((d) => {
-              if (d.resource.type && d.resource.type.length > 0 && d.resource.type[0].coding && d.resource.type[0].coding.length > 0 && d.resource.type[0].coding[0].code !== "country") {
-                facilityInformation.push({
-                  name: d.resource.type[0].text, value: d.resource.name,
-                });
-              }
-            });
-          }
-        }
-        if (ownership && ownership.valueCoding) {
-          facilityInformation.push({
-            name: "Ownership", value: ownership.valueCoding.display,
-          });
-        }
-        if (locationData.type && locationData.type.length > 0) {
-          facilityInformation.push({
-            name: "Type", value: locationData.type[0].coding[0].display,
-          });
-        }
-        if (locationData.physicalType) {
-          facilityInformation.push({
-            name: "Physical type", value: locationData.physicalType.coding[0].display,
-          });
-        }
-      }
-    } catch (err) {
-      console.log(err);
-      logger.error(err.message);
-    }
-    response.facilityInformation = facilityInformation;
-    if (req.body.partOf) {
-      let data = await fhirAxios.search("PractitionerRole", {
-        _profile: "http://ihris.org/fhir/StructureDefinition/ihris-practitioner-role",
-        "related-location:exact": req.body.id,
-        // active: "true",
-        "_include:iterate": "PractitionerRole:practitioner",
-      })
-      response.total = data.total;
-      let gender = {
-        male: 0, female: 0,
-      };
-
-      let ageRange = {
-        "20to35": 0, "36to45": 0, "46to55": 0, "56to65": 0, gt65: 0,
-      };
-
-      if (data.total > 0) {
-        data.entry.map((data) => {
-          if (data.resource.resourceType === "Practitioner") {
-            if (data.resource.gender === "male") {
-              gender.male += 1;
-            } else {
-              gender.female += 1;
-            }
-            getAge(data.resource.birthDate, ageRange);
-          }
-        });
-      }
-      response.gender = gender;
-      response.ageRange = ageRange;
-    } else {
-      try {
-        let data = await fhirAxios.search("PractitionerRole", {
-          _profile: "http://ihris.org/fhir/StructureDefinition/ihris-practitioner-role",
-          location: req.body.id.split("/").pop(),
-          // active: "true",
-          "_include:iterate": "PractitionerRole:practitioner",
-        });
-        console.log("*********************",JSON.stringify(data,null,2));
-        response.total = data.total;
-        let gender = {
-          male: 0, female: 0,
-        };
-
-        let ageRange = {
-          "20to35": 0, "36to45": 0, "46to55": 0, "56to65": 0, gt65: 0,
-        };
-
-
-        if (data.total > 0) {
-          data.entry.map((data) => {
-            if (data.resource.resourceType === "Practitioner") {
-              if (data.resource.gender === "male") {
-                gender.male += 1;
-              } else {
-                gender.female += 1;
-              }
-              getAge(data.resource.birthDate, ageRange);
-            }
-          });
-        }
-        response.gender = gender;
-        response.ageRange = ageRange;
-      } catch (err) {
-        console.log(err);
-      }
-    }
-    console.log(response);
-    res.send(response);
   }
 });
 
