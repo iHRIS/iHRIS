@@ -282,7 +282,7 @@
             <v-icon left>
               mdi-plus-circle
             </v-icon>
-            Add Language
+            {{$t('App.language.add') }}
           </v-btn>
           <v-btn
               :disabled="tableData.length === 0"
@@ -296,7 +296,7 @@
             <v-icon left>
               mdi-circle-edit-outline
             </v-icon>
-            Edit Language
+            {{$t('App.language.selectAndEdit') }}
           </v-btn>
         </template>
       </v-row>
