@@ -9,7 +9,7 @@ xl = pd.ExcelFile(file)
 df = xl.parse().fillna('')
 data = df.values.tolist()
 
-languages = ['en','fr','it','es']
+languages = ["en", "fr", "it", "es", 'pt', 'sw', 'ar']
 
 
 lang_translations = {}

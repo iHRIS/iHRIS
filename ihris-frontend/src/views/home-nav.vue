@@ -26,7 +26,7 @@
                   :key="sub.id"
                   :to="sub.url"
                 >
-                  <v-list-item-title class="text-h2">{{$t(`App.menu.${sub.text}`)}}</v-list-item-title>
+                  <v-list-item-title class="font-weight-bold" >{{$t(`App.menu.${sub.text}`)}}</v-list-item-title>
                 </v-list-item>
               </v-list>
               <v-list v-else>
@@ -34,7 +34,7 @@
                   :to="item.url"
                   :key="item.id"
                 >
-                  <v-list-item-title class="text-h2">{{$t(`App.menu.${item.text}`)}}</v-list-item-title>
+                  <v-list-item-title class="font-weight-bold" >{{$t(`App.menu.${item.text}`)}}</v-list-item-title>
                 </v-list-item>
               </v-list>
             </v-card-text>

@@ -12,6 +12,10 @@
       "valueString": "ihris"
     },
     {
+      "name": "app:canSelfSignup",
+      "valueString": "true"
+    },
+    {
       "name": "app:installed",
       "valueString": "false"
     },

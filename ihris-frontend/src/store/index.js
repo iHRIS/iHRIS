@@ -9,6 +9,7 @@ export default new Vuex.Store({
       loggedin: false,
       name: ""
     },
+    allowSelfSignup:"",
     idp: 'ihris',
     security_off: false,
     message: {
@@ -46,6 +47,9 @@ export default new Vuex.Store({
     },
     securityOff( state, data ) {
       state.security_off = data
+    },
+    setAllowSelfSignup( state, data ) {
+      state.allowSelfSignup = data
     },
     closeMessage( state ) {
       state.message.active = false

@@ -13,7 +13,7 @@
        width="320"
     >
       <div>
-        <v-card height="400" elevation="0" width="320">
+        <v-card height="400" elevation="0" color="white" width="320">
           <template slot="progress">
             <v-progress-linear
               color="deep-purple"
@@ -46,9 +46,9 @@
             </v-avatar>
           </v-card-title>
           <v-card-title class="justify-center py-0"
-            ><span>{{ intro.fullName }}</span></v-card-title
+            ><span class="black--text">{{ intro.fullName }}</span></v-card-title
           >
-          <v-card-text>
+          <v-card-text class="black--text">
             <span
               >{{ $t(`App.intro.Job_Title`)}}: <strong>{{ intro.jobTitle }}</strong></span
             ><br />
@@ -97,7 +97,7 @@ export default {
       },
       hasScrolled: false,
       snackbar: true,
-      timeout: 0,
+      timeout: -1,
       bottom: true,
       right: true,
     };
