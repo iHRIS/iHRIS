@@ -1,12 +1,12 @@
 <template>
   <v-container>
     <v-row justify="center">
-      <v-dialog v-model="dialog" persistent max-width="680px">
+      <v-dialog v-model="dialog" max-width="680px" persistent>
         <v-card class="px-6 py-4">
           <v-card-title class="justify-center">
             <span class="text-h6"
-            ><v-icon large color="primary" class="mr-2">mdi-translate</v-icon
-            >Add New Language</span
+            ><v-icon class="mr-2" color="primary" large>mdi-translate</v-icon
+            >{{ $t('App.language.add') }}</span
             >
           </v-card-title>
           <v-card-text>
@@ -14,14 +14,14 @@
               <v-row>
                 <v-col cols="12">
                   <v-autocomplete
-                      dense
-                      :items="languageList"
-                      label="Language"
-                      :filter="customFilter"
-                      required
-                      outlined
                       v-model="selectedLanguage"
+                      :filter="customFilter"
+                      :items="languageList"
+                      dense
                       item-text="display"
+                      :label="$t('App.language.language')"
+                      outlined
+                      required
                       return-object
                   >
                     <template v-slot:item="data">
@@ -34,18 +34,18 @@
                   </v-autocomplete>
                 </v-col>
                 <v-row
-                    class="mx-2"
                     v-for="(proficiencyData, index) in proficiencyInput"
                     :key="index"
+                    class="mx-2"
                 >
                   <v-col cols="5">
                     <v-autocomplete
-                        dense
-                        label="proficiency Type"
-                        :items="proficiencyType"
-                        outlined
                         v-model="proficiencyData.extension[1].valueCoding"
+                        :items="proficiencyType"
+                        dense
                         item-text="display"
+                        :label="$t('App.language.proficiencyType')"
+                        outlined
                         return-object
                     >
                       <template v-slot:item="data">
@@ -59,12 +59,12 @@
                   </v-col>
                   <v-col cols="5">
                     <v-autocomplete
-                        dense
-                        :items="proficiency"
-                        label="Proficiency"
-                        outlined
                         v-model="proficiencyData.extension[0].valueCoding"
+                        :items="proficiency"
+                        dense
                         item-text="display"
+                        :label="$t('App.language.proficiency')"
+                        outlined
                         return-object
                     >
                       <template v-slot:item="data">
@@ -76,15 +76,15 @@
                       </template>
                     </v-autocomplete>
                   </v-col>
-                  <v-cols cols="2" v-if="index === proficiencyInput.length - 1">
+                  <v-cols v-if="index === proficiencyInput.length - 1" cols="2">
                     <v-row class="mt-4 ml-2">
                       <v-btn
+                          :disabled="proficiencyInput.length >= skillsList.length"
+                          color="primary"
+                          flat
+                          icon
                           rounded
                           small
-                          icon
-                          flat
-                          color="primary"
-                          :disabled="proficiencyInput.length >= 4"
                           @click="addProficiency"
                       >
                         <v-icon left>
@@ -92,12 +92,12 @@
                         </v-icon>
                       </v-btn>
                       <v-btn
+                          :disabled="proficiencyInput.length <= 1"
+                          color="primary"
+                          flat
+                          icon
                           rounded
                           small
-                          icon
-                          flat
-                          color="primary"
-                          :disabled="proficiencyInput.length <= 1"
                           @click="reSet()"
                       >
                         <v-icon left>
@@ -122,22 +122,22 @@
                 }
               "
             >
-              Close
+              {{ $t('App.language.close') }}
             </v-btn>
             <v-btn color="blue darken-1" text @click="onSave">
-              Save
+              {{ $t('App.language.save') }}
             </v-btn>
           </v-card-actions>
         </v-card>
       </v-dialog>
     </v-row>
     <v-row justify="center">
-      <v-dialog v-model="editDialog" persistent max-width="680px">
+      <v-dialog v-model="editDialog" max-width="680px" persistent>
         <v-card class="px-6 py-4">
           <v-card-title class="justify-center">
             <span class="text-h6"
-            ><v-icon large color="primary" class="mr-2">mdi-translate</v-icon
-            >Select and Edit Language</span
+            ><v-icon class="mr-2" color="primary" large>mdi-translate</v-icon
+            >{{ $t('App.language.selectAndEdit') }}</span
             >
           </v-card-title>
           <v-card-text>
@@ -145,14 +145,14 @@
               <v-row>
                 <v-col cols="12">
                   <v-autocomplete
-                      dense
-                      :items="allAvailableLanguages.map((lan) => lan.coding[0])"
-                      label="select the Language to edit"
-                      :filter="customFilter"
-                      required
-                      outlined
                       v-model="selectedLanguageToEdit"
+                      :filter="customFilter"
+                      :items="allAvailableLanguages.map((lan) => lan.coding[0])"
+                      dense
                       item-text="display"
+                      :label="$t('App.language.selectAndEdit')"
+                      outlined
+                      required
                       return-object
                   >
                     <template v-slot:item="data">
@@ -165,18 +165,18 @@
                   </v-autocomplete>
                 </v-col>
                 <v-row
-                    class="mx-2"
                     v-for="(proficiencyData, index) in proficiencySelected"
                     :key="index"
+                    class="mx-2"
                 >
                   <v-col cols="5">
                     <v-autocomplete
-                        dense
-                        label="proficiency Type"
-                        :items="proficiencyType"
-                        outlined
                         v-model="proficiencyData.extension[1].valueCoding"
+                        :items="proficiencyType"
+                        dense
                         item-text="display"
+                        :label="$t('App.language.proficiencyType')"
+                        outlined
                         return-object
                     >
                       <template v-slot:item="data">
@@ -190,12 +190,12 @@
                   </v-col>
                   <v-col cols="5">
                     <v-autocomplete
-                        dense
-                        :items="proficiency"
-                        label="Proficiency"
-                        outlined
                         v-model="proficiencyData.extension[0].valueCoding"
+                        :items="proficiency"
+                        dense
                         item-text="display"
+                        :label="$t('App.language.proficiency')"
+                        outlined
                         return-object
                     >
                       <template v-slot:item="data">
@@ -208,17 +208,17 @@
                     </v-autocomplete>
                   </v-col>
                   <v-cols
-                      cols="2"
                       v-if="index === proficiencySelected.length - 1"
+                      cols="2"
                   >
                     <v-row class="mt-4 ml-2">
                       <v-btn
+                          :disabled="proficiencySelected.length >=skillsList.length"
+                          color="primary"
+                          flat
+                          icon
                           rounded
                           small
-                          icon
-                          flat
-                          color="primary"
-                          :disabled="proficiencySelected.length >= 6"
                           @click="addProficiencySelected"
                       >
                         <v-icon left>
@@ -226,12 +226,12 @@
                         </v-icon>
                       </v-btn>
                       <v-btn
+                          :disabled="proficiencySelected.length <= 1"
+                          color="primary"
+                          flat
+                          icon
                           rounded
                           small
-                          icon
-                          flat
-                          color="primary"
-                          :disabled="proficiencySelected.length <= 1"
                           @click="reSet()"
                       >
                         <v-icon left>
@@ -256,18 +256,18 @@
               "
             >
               <v-icon left>mdi-close-box-multiple</v-icon>
-              Close
+              {{ $t('App.language.close') }}
             </v-btn>
             <v-btn color="primary" @click="onUpdate">
               <v-icon left>mdi-content-save-check-outline</v-icon>
-              Save
+              {{ $t('App.language.save') }}
             </v-btn>
           </v-card-actions>
         </v-card>
       </v-dialog>
     </v-row>
     <v-card>
-      <v-row justify="end" class="ma-2 pt-3">
+      <v-row class="ma-2 pt-3" justify="end">
         <template>
           <v-btn
               class="mr-3"
@@ -285,8 +285,8 @@
             Add Language
           </v-btn>
           <v-btn
-              color="primary"
               :disabled="tableData.length === 0"
+              color="primary"
               @click="
               () => {
                 this.editDialog = true;
@@ -311,125 +311,35 @@
               <th class="text-left">
                 Skill
               </th>
-              <th class="text-left">
-                Excellent
-              </th>
-              <th class="text-left">
-                Good
-              </th>
-              <th class="text-left">
-                Fair
-              </th>
-              <th class="text-left">
-                Poor
-              </th>
+              <template v-for="lev in level">
+                <th :key="lev" class="text-left">
+                  {{ lev }}
+                </th>
+              </template>
             </tr>
             </thead>
             <tbody v-for="item in tableData" :key="item.name">
-            <tr>
-              <th rowspan="6" scope="rowgroup">{{ item.name }}</th>
-              <th scope="row">Expressed signed</th>
-              <td v-for="i in [0, 1, 2, 3]" :key="i">
-                  <span v-for="j in [0, 1, 2, 3,4,5]" :key="j">
-                    <v-icon
-                        v-if="
-                        item.skills[j] &&
-                          item.skills[j].type === 'Expressed signed' &&
-                          item.skills[j].level === level[i]
-                      "
-                        color="green"
-                    >mdi-checkbox-marked-circle-outline</v-icon
-                    ><v-icon v-else></v-icon>
-                  </span>
-              </td>
-            </tr>
-            <tr>
-              <th scope="row">Expressed spoken</th>
-              <td v-for="i in [0, 1, 2, 3]" :key="i">
-                  <span v-for="j in [0, 1, 2, 3,4,5]" :key="j">
-                    <v-icon
-                        v-if="
-                        item.skills[j] &&
-                          item.skills[j].type === 'Expressed spoken' &&
-                          item.skills[j].level === level[i]
-                      "
-                        color="green"
-                    >mdi-checkbox-marked-circle-outline</v-icon
-                    ><v-icon v-else></v-icon>
-                  </span>
-              </td>
-            </tr>
-            <tr>
-              <th scope="row">Expressed written</th>
-              <td v-for="i in [0, 1, 2, 3]" :key="i">
-                  <span v-for="j in [0, 1, 2, 3,4,5]" :key="j">
-                    <v-icon
-                        v-if="
-                        item.skills[j] &&
-                          item.skills[j].type === 'Expressed written' &&
-                          item.skills[j].level === level[i]
-                      "
-                        color="green"
-                    >mdi-checkbox-marked-circle-outline</v-icon
-                    ><v-icon v-else></v-icon>
-                  </span>
-              </td>
-            </tr>
-            <tr>
-              <th scope="row">Received signed</th>
-              <td v-for="i in [0, 1, 2, 3]" :key="i">
-                  <span v-for="j in [0, 1, 2, 3,4,5]" :key="j">
-                    <v-icon
-                        v-if="
-                        item.skills[j] &&
-                          item.skills[j].type === 'Received signed' &&
-                          item.skills[j].level === level[i]
-                      "
-                        color="green"
-                        div               >mdi-checkbox-marked-circle-outline</v-icon
-                    ><v-icon v-else></v-icon>
-                  </span>
-              </td>
-            </tr>
-            <tr>
-              <th scope="row">Received written</th>
-              <td v-for="i in [0, 1, 2, 3]" :key="i">
-                  <span v-for="j in [0, 1, 2, 3,4,5]" :key="j">
-                    <v-icon
-                        v-if="
-                        item.skills[j] &&
-                          item.skills[j].type === 'Received written' &&
-                          item.skills[j].level === level[i]
-                      "
-                        color="green"
-                        div               >mdi-checkbox-marked-circle-outline</v-icon
-                    ><v-icon v-else></v-icon>
-                  </span>
-              </td>
-            </tr>
-            <tr>
-              <th scope="row">Received spoken</th>
-              <td v-for="i in [0, 1, 2, 3]" :key="i">
-                  <span v-for="j in [0, 1, 2, 3,4,5]" :key="j">
-                    <v-icon
-                        v-if="
-                        item.skills[j] &&
-                          item.skills[j].type === 'Received spoken' &&
-                          item.skills[j].level === level[i]
-                      "
-                        color="green"
-                        div               >mdi-checkbox-marked-circle-outline</v-icon
-                    ><v-icon v-else></v-icon>
-                  </span>
-              </td>
-            </tr>
+            <tr v-for="skill in skillsList" :key="skill">
+              <th v-if="skill===skillsList[0]" :rowspan="skillsList.length" scope="rowgroup">{{ item.name }}</th>
+              <template>
+                <th scope="row">{{skill}}</th>
+                <td v-for="i in level" :key="i">
+                    <span v-for="j in Array(skillsList.length).keys()" :key="j">
+                     <v-icon
+                         v-if="item.skills[j] && item.skills[j].type === skill && item.skills[j].level === i"
+                         color="green"
+                     >mdi-checkbox-marked-circle-outline</v-icon
+                     ><v-icon v-else></v-icon>
+                     </span>
+                </td>
+              </template>
             <tr></tr>
             </tbody>
           </template>
         </v-simple-table>
-        <v-card-title class="justify-center" v-else>
+        <v-card-title v-else class="justify-center">
        <span class="text-h6"
-       ><v-icon large color="primary" class="mr-2">mdi-translate</v-icon
+       ><v-icon class="mr-2" color="primary" large>mdi-translate</v-icon
        >No language data is available please add one </span
        >
         </v-card-title>
@@ -448,8 +358,8 @@ export default {
       skillCount: 1,
       select: null,
       dialog: false,
-      skillsList: ["Received signed", "Expressed signed", "Expressed written", "Received written","Expressed spoken","Received spoken"],
-      level: ["Excellent", "Good", "Fair", "Poor"],
+      skillsList: [],
+      level: [],
       tableData: [],
       languageList: [],
       filledLanguage: [],
@@ -490,7 +400,6 @@ export default {
           ],
         }
       ],
-      // selected to edit
       allAvailableLanguages: [],
       selectedLanguageToEdit: null,
       editDialog: false,
@@ -591,7 +500,7 @@ export default {
       this.dialog = false;
       axios
           .get(`/fhir/Practitioner/${this.$router.history.current.params.id}`)
-          .then(({ data }) => {
+          .then(({data}) => {
             if (data.communication === undefined) {
               data.communication = [];
             }
@@ -617,7 +526,7 @@ export default {
       this.editDialog = false;
       axios
           .get(`/fhir/Practitioner/${this.$router.history.current.params.id}`)
-          .then(({ data }) => {
+          .then(({data}) => {
             data.communication.find(
                 (lan) => lan.coding[0].code === this.selectedLanguageToEdit.code
             ).extension = this.proficiencySelected;
@@ -682,11 +591,17 @@ export default {
         });
     axios
         .get("/fhir/ValueSet/v3-LanguageAbilityMode/$expand")
-        .then((res) => (this.proficiencyType = res.data.expansion.contains))
+        .then((res) => {
+          this.proficiencyType = res.data.expansion.contains
+          this.skillsList = res.data.expansion.contains.map(x=> (x.display))
+        })
         .catch((e) => console.log(e));
     axios
         .get("/fhir/ValueSet/v3-LanguageAbilityProficiency/$expand")
-        .then((res) => (this.proficiency = res.data.expansion.contains))
+        .then((res) => {
+          this.proficiency = res.data.expansion.contains
+          this.level = res.data.expansion.contains.map(x=> (x.display))
+        })
         .catch((e) => console.log(e));
   },
 };
@@ -698,13 +613,16 @@ th,
 td {
   border: 1px dotted rgb(221, 221, 226);
 }
+
 .v-data-table > .v-data-table__wrapper > table > tbody > tr > th {
   font-size: 14px !important;
 }
+
 .v-data-table > .v-data-table__wrapper > table > thead > tr > th,
 .v-data-table > .v-data-table__wrapper > table > tfoot > tr > th {
   font-size: 16px !important;
 }
+
 box {
   border: 2px dashed #bbb;
   width: 96%;
