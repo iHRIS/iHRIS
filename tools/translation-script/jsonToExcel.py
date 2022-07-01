@@ -39,7 +39,7 @@ PrimaryLanguage = "en"
 input_dir = "./"
 output_file = 'output/translations.xlsx'
 name = 'translations.xlsx'
-translateTo = 'en,fr,it'
+translateTo = 'en,fr,it,es,pt,sw,ar'
 
 cwd = os.getcwd()
 os.chdir(input_dir)
@@ -51,7 +51,7 @@ for locale in locales:
         validFiles.append(f"{locale}.json")
         files = validFiles
 
-langs = ["en", "fr", "it", "es"]
+langs = ["en", "fr", "it", "es", 'pt', 'sw', 'ar']
 
 output = []
 data_by_lang = {}

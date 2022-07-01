@@ -16,7 +16,7 @@
             "resetPassword": "إعادة تعيين كلمة المرور",
             "emailAddress": "عنوان البريد الالكترونى",
             "register": "يسجل",
-            "medicalLicenseNumber": "رقم الترخيص الطبي",
+            "employeeNumber": "رقم الموظف",
             "birthDate": "تاريخ الميلاد"
         },
         "menu": {
@@ -198,7 +198,7 @@
             "Identifier": "المعرف",
             "Task Attributes": "سمات المهمة",
             "Composite/Linked Tasks": "المهام المركبة / المرتبطة",
-            "Medical License Number": "رقم الترخيص الطبي"
+            "Employee Number": "رقم الموظف"
         },
         "ihris-section": {
             "Position": "موقع",
@@ -415,7 +415,7 @@
             "Display": "عرض",
             "Code": "شفرة",
             "Definition": "تعريف",
-            "Medical License Number": "رقم الترخيص الطبي",
+            "Employee Number": "رقم الموظف",
             "Organization Address": "عنوان المنظمة",
             "Job Description": "المسمى الوظيفي",
             "V2 Concept Comment": "تعليق مفهوم V2",
@@ -533,6 +533,15 @@
             "PO BOX": "صندوق البريد",
             "Remark": "ملاحظة",
             "Reason": "سبب"
+        },
+        "language": {
+            "add": "أضف لغة جديدة",
+            "close": "قريب",
+            "save": "يحفظ",
+            "selectAndEdit": "حدد اللغة وقم بتحريرها",
+            "language": "لغة",
+            "proficiencyType": "نوع الكفاءة",
+            "proficiency": "الكفاءة"
         }
     }
 }

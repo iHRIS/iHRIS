@@ -16,7 +16,7 @@
             "resetPassword": "Redefinir senha",
             "emailAddress": "Endereço de email",
             "register": "Registro",
-            "medicalLicenseNumber": "Número da licença médica",
+            "employeeNumber": "Número de empregado",
             "birthDate": "Data de nascimento"
         },
         "menu": {
@@ -198,7 +198,7 @@
             "Identifier": "Identificador",
             "Task Attributes": "Atributos da tarefa",
             "Composite/Linked Tasks": "Tarefas compostas/vinculadas",
-            "Medical License Number": "Número da licença médica"
+            "Employee Number": "Número de empregado"
         },
         "ihris-section": {
             "Position": "Posição",
@@ -378,7 +378,7 @@
             "Value": "Valor",
             "Name": "Nome",
             "Family": "Família",
-            "Given Name (1)": "Nome próprio (1)",
+            "Given Name (1)": "Nome (1)",
             "Given Name (2)": "Nome (2)",
             "Given Name (3)": "Nome (3)",
             "Prefix (1)": "Prefixo (1)",
@@ -415,7 +415,7 @@
             "Display": "Exibição",
             "Code": "Código",
             "Definition": "Definição",
-            "Medical License Number": "Número da licença médica",
+            "Employee Number": "Número de empregado",
             "Organization Address": "Endereço da organização",
             "Job Description": "Descrição do trabalho",
             "V2 Concept Comment": "Comentário do Conceito V2",
@@ -533,6 +533,15 @@
             "PO BOX": "CAIXA POSTAL",
             "Remark": "Observação",
             "Reason": "Razão"
+        },
+        "language": {
+            "add": "Adicionar novo idioma",
+            "close": "Perto",
+            "save": "Salvar",
+            "selectAndEdit": "Selecione e edite o idioma",
+            "language": "Linguagem",
+            "proficiencyType": "Tipo de proficiência",
+            "proficiency": "Competência"
         }
     }
 }

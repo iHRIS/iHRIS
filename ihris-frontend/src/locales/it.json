@@ -16,7 +16,7 @@
             "resetPassword": "Resetta la password",
             "emailAddress": "Indirizzo e-mail",
             "register": "Registrati",
-            "medicalLicenseNumber": "Numero di licenza medica",
+            "employeeNumber": "Impiegato numero",
             "birthDate": "Data di nascita"
         },
         "menu": {
@@ -86,7 +86,7 @@
             "search": "Ricerca",
             "add": "Aggiungere",
             "iHRIS Practitioner": "Operatore iHRIS",
-            "iHRIS Practitioner Role": "Ruolo di professionista iHRIS",
+            "iHRIS Practitioner Role": "Ruolo dell'operatore iHRIS",
             "Gender": "Genere",
             "Birth Date": "Data di nascita",
             "Given Name(s)": "Nomi di battesimo",
@@ -198,7 +198,7 @@
             "Identifier": "Identificatore",
             "Task Attributes": "Attributi delle attività",
             "Composite/Linked Tasks": "Compiti compositi/collegati",
-            "Medical License Number": "Numero di licenza medica"
+            "Employee Number": "Impiegato numero"
         },
         "ihris-section": {
             "Position": "Posizione",
@@ -415,7 +415,7 @@
             "Display": "Schermo",
             "Code": "Codice",
             "Definition": "Definizione",
-            "Medical License Number": "Numero di licenza medica",
+            "Employee Number": "Impiegato numero",
             "Organization Address": "Indirizzo dell'organizzazione",
             "Job Description": "Descrizione del lavoro",
             "V2 Concept Comment": "Commento sul concetto V2",
@@ -533,6 +533,15 @@
             "PO BOX": "Casella postale",
             "Remark": "Nota",
             "Reason": "Motivo"
+        },
+        "language": {
+            "add": "Aggiungi nuova lingua",
+            "close": "Chiudere",
+            "save": "Salva",
+            "selectAndEdit": "Seleziona e Modifica lingua",
+            "language": "Lingua",
+            "proficiencyType": "Tipo di competenza",
+            "proficiency": "Competenza"
         }
     }
 }

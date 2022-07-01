@@ -533,6 +533,15 @@
             "PO BOX": "PO BOX",
             "Remark": "Remark",
             "Reason": "Reason"
+        },
+        "language": {
+            "add": "Add New Language",
+            "close": "Close",
+            "save": "Save",
+            "selectAndEdit": "Select and Edit Language",
+            "language": "Language",
+            "proficiencyType": "Proficiency Type",
+            "proficiency": "Proficiency"
         }
     }
 }
