@@ -16,7 +16,7 @@
             "resetPassword": "Weka upya Nenosiri",
             "emailAddress": "Barua pepe",
             "register": "Sajili",
-            "medicalLicenseNumber": "Nambari ya Leseni ya Matibabu",
+            "employeeNumber": "Nambari ya Mfanyakazi",
             "birthDate": "Tarehe ya kuzaliwa"
         },
         "menu": {
@@ -198,7 +198,7 @@
             "Identifier": "Kitambulisho",
             "Task Attributes": "Sifa za Kazi",
             "Composite/Linked Tasks": "Kazi za Mchanganyiko/Zilizounganishwa",
-            "Medical License Number": "Nambari ya Leseni ya Matibabu"
+            "Employee Number": "Nambari ya Mfanyakazi"
         },
         "ihris-section": {
             "Position": "Nafasi",
@@ -303,7 +303,7 @@
                 "Leave Type": "Acha Aina",
                 "Days Requested": "Siku Zilizoombwa",
                 "Requested Date": "Tarehe Iliyoomba",
-                "Evaluator's Name": "Jina la Mtathmini",
+                "Evaluator's Name": "Jina la Mtathimini",
                 "Score": "Alama",
                 "Education Institution": "Taasisi ya Elimu",
                 "level": "kiwango",
@@ -388,7 +388,7 @@
             "Suffix (2)": "Kiambishi tamati (2)",
             "Suffix (3)": "Kiambishi tamati (3)",
             "Line": "Mstari",
-            "Evaluator's Name": "Jina la Mtathmini",
+            "Evaluator's Name": "Jina la Mtathimini",
             "Organization Name": "Jina la shirika",
             "Organization Telephone": "Simu ya shirika",
             "Position": "Nafasi",
@@ -415,7 +415,7 @@
             "Display": "Onyesho",
             "Code": "Kanuni",
             "Definition": "Ufafanuzi",
-            "Medical License Number": "Nambari ya Leseni ya Matibabu",
+            "Employee Number": "Nambari ya Mfanyakazi",
             "Organization Address": "Anwani ya Shirika",
             "Job Description": "Maelezo ya Kazi",
             "V2 Concept Comment": "Maoni ya Dhana ya V2",
@@ -533,6 +533,15 @@
             "PO BOX": "SANDUKU LA POSTA",
             "Remark": "Toa maoni",
             "Reason": "Sababu"
+        },
+        "language": {
+            "add": "Ongeza Lugha Mpya",
+            "close": "Funga",
+            "save": "Hifadhi",
+            "selectAndEdit": "Chagua na Uhariri Lugha",
+            "language": "Lugha",
+            "proficiencyType": "Aina ya Ustadi",
+            "proficiency": "Umahiri"
         }
     }
 }

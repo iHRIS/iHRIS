@@ -16,7 +16,7 @@
             "resetPassword": "Restablecer la contraseña",
             "emailAddress": "Dirección de correo electrónico",
             "register": "Registro",
-            "medicalLicenseNumber": "Número de licencia médica",
+            "employeeNumber": "Número de empleado",
             "birthDate": "Fecha de cumpleaños"
         },
         "menu": {
@@ -198,7 +198,7 @@
             "Identifier": "identificador",
             "Task Attributes": "Atributos de tareas",
             "Composite/Linked Tasks": "Tareas compuestas/vinculadas",
-            "Medical License Number": "Número de licencia médica"
+            "Employee Number": "Número de empleado"
         },
         "ihris-section": {
             "Position": "Posición",
@@ -270,7 +270,7 @@
             "Address (2)": "Dirección 2)",
             "Address (3)": "Dirección (3)",
             "Telecom (1)": "Telecomunicaciones (1)",
-            "Telecom (2)": "telecomunicaciones (2)",
+            "Telecom (2)": "Telecomunicaciones (2)",
             "Telecom (3)": "telecomunicaciones (3)",
             "Name": "Nombre",
             "Email": "Correo electrónico",
@@ -415,7 +415,7 @@
             "Display": "Monitor",
             "Code": "Código",
             "Definition": "Definición",
-            "Medical License Number": "Número de licencia médica",
+            "Employee Number": "Número de empleado",
             "Organization Address": "Dirección de la organización",
             "Job Description": "Descripción del trabajo",
             "V2 Concept Comment": "Comentario del concepto V2",
@@ -533,6 +533,15 @@
             "PO BOX": "Apartado postal",
             "Remark": "Observación",
             "Reason": "Razón"
+        },
+        "language": {
+            "add": "Agregar nuevo idioma",
+            "close": "Cerca",
+            "save": "Ahorrar",
+            "selectAndEdit": "Seleccionar y editar idioma",
+            "language": "Idioma",
+            "proficiencyType": "Tipo de competencia",
+            "proficiency": "Competencia"
         }
     }
 }

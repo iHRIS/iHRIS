@@ -11,7 +11,6 @@
     "i18n:report": "vue-cli-service i18n:report --src \"./src/**/*.?(js|vue)\" --locales \"./src/locales/**/*.json\""
   },
   "dependencies": {
-    "apexcharts": "^3.35.3",
     "core-js": "^3.6.5",
     "ethiopic-calendar": "^2.0.0",
     "fetch-defaults": "^1.0.0",
@@ -20,11 +19,9 @@
     "keycloak-js": "^15.0.2",
     "node-polyfill-webpack-plugin": "^1.1.4",
     "vue": "^2.6.11",
-    "vue-apexcharts": "^1.6.2",
     "vue-cookies": "^1.7.4",
     "vue-cron-editor-buefy": "^0.2.13",
     "vue-i18n": "^8.26.3",
-    "vue-i18n-bridge": "^9.2.0-beta.10",
     "vue-loader": "^15.9.7",
     "vue-moment": "^4.1.0",
     "vue-router": "^3.2.0",

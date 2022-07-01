@@ -16,7 +16,7 @@
             "resetPassword": "réinitialiser le mot de passe",
             "emailAddress": "Adresse e-mail",
             "register": "S'inscrire",
-            "medicalLicenseNumber": "Numéro de licence médicale",
+            "employeeNumber": "Numéro d'employé",
             "birthDate": "Date d'anniversaire"
         },
         "menu": {
@@ -198,7 +198,7 @@
             "Identifier": "Identifiant",
             "Task Attributes": "Attributs de tâche",
             "Composite/Linked Tasks": "Tâches composites/liées",
-            "Medical License Number": "Numéro de licence médicale"
+            "Employee Number": "Numéro d'employé"
         },
         "ihris-section": {
             "Position": "Position",
@@ -415,7 +415,7 @@
             "Display": "Affichage",
             "Code": "Code",
             "Definition": "Définition",
-            "Medical License Number": "Numéro de licence médicale",
+            "Employee Number": "Numéro d'employé",
             "Organization Address": "Adresse de l'organisation",
             "Job Description": "Description de l'emploi",
             "V2 Concept Comment": "Commentaire sur le concept V2",
@@ -533,6 +533,15 @@
             "PO BOX": "BOÎTE POSTALE",
             "Remark": "Remarque",
             "Reason": "Raison"
+        },
+        "language": {
+            "add": "Ajouter une nouvelle langue",
+            "close": "proche",
+            "save": "sauvegarder",
+            "selectAndEdit": "Sélectionner et modifier la langue",
+            "language": "Langue",
+            "proficiencyType": "Type de compétence",
+            "proficiency": "Compétence"
         }
     }
 }
