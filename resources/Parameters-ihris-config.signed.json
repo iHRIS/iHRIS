@@ -16,11 +16,11 @@
             "code": "1.2.840.10065.1.12.1.14"
           }
         ],
-        "when": "2022-06-30T08:39:23.731Z",
+        "when": "2022-07-04T06:05:38.100Z",
         "who": {
           "reference": "http://ihris.org/fhir/Organization/ihris"
         },
-        "data": "wlVZO/ajH0+cW5m0QO2CUl7bUYJqRpdutVmLIIO3NlnesXX4ubHFWkbtZoOdU9zLb3lFp20+fhWHOlJtD6u1xn8HmUjmHqpA16vBkP3OSqrxCbQZHtIqu6Y/AAbQjjcNURDo9J2fMweL3850tnDwdDuE5Rir2KHMmVEz5QL9T5U="
+        "data": "ySB3xY433jR5tuN2Oih+gxEcqfYEwM+ARspR3Tr/vD/S/QJ2V0NYdUQjrIicE6PkbnsD2kqWtBcZXZOC6cnfjFCZQIG/pkp+nxrVmAE/osc0/ffi35wRFo0Dq0hLOkABMaXORpjWYEfZWjGw4Arcn9UUnVRy2MBTOCAks2zeX1Y="
       }
     },
     {
@@ -683,10 +683,6 @@
           "valueString": "tree"
         },
         {
-          "name": "defaults:fields:PractitionerRole.location:initialValue",
-          "valueString": "Location/ET"
-        },
-        {
           "name": "defaults:fields:PractitionerRole.location:user_filter:regex",
           "valueString": "related-location=(.+)"
         },
@@ -705,14 +701,6 @@
         {
           "name": "defaults:fields:Location.extension:facilityLocation.value[x]:valueReference:type",
           "valueString": "tree"
-        },
-        {
-          "name": "defaults:fields:Location.extension:facilityLocation.value[x]:valueReference:initialValue",
-          "valueString": "Location/ET"
-        },
-        {
-          "name": "defaults:fields:Location.partOf:initialValue",
-          "valueString": "Location/ET"
         },
         {
           "name": "defaults:fields:Location.partOf:user_filter:regex",
