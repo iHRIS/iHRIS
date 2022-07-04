@@ -5,7 +5,7 @@
       max-width="700"
       outlined
       >
-      <v-card-title class=" justify-center text-uppercase font-weight-bold">{{ $t(`App.ihris-section.${title}`) }}
+      <v-card-title class="primary darken-1 white--text justify-center text-uppercase font-weight-bold">{{ $t(`App.ihris-section.${title}`) }}
       </v-card-title>
       <v-card-text class="my-3" v-if="name!=='language'">
         <slot :source="slotProps.source"></slot>
