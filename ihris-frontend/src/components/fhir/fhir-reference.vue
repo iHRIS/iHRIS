@@ -39,12 +39,6 @@
             :loading="loading"
             >
             <template slot="label" slot-scope="{ item }">
-              <v-icon v-if="item.isFacility" class="pr-2" color="teal darken-2">
-                mdi-domain
-              </v-icon>
-              <v-icon v-else class="pr-2" color="teal darken-2">
-                mdi-map-marker
-              </v-icon>
            {{ item.name }}
             </template>
           </v-treeview>
@@ -198,8 +192,6 @@ export default {
         } else {
           params = { "partof": treetop }
         } 
-      } else {
-        params = { "partof": "ET" }
       }
       params._count = 500
       let url = "/fhir/"+this.resource+"?"+querystring.stringify( params )
@@ -269,7 +261,6 @@ export default {
                   id: entry.resource.resourceType+"/"+entry.resource.id,
                   name: entry.resource.name,
                   locked: locked,
-                  isFacility: this.targetProfile === "http://ihris.org/fhir/StructureDefinition/ihris-facility",
                 }
                 await this.checkChildren( item )
                 this.treeLookup[ item.id ] = item.name
@@ -291,7 +282,6 @@ export default {
             this.loading = false
           } )
         } else {
-          console.log("//////////////////////////////")
           console.log("Failed to add items for",url,response.status)
           this.loading = false
         }
