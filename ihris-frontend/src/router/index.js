@@ -126,6 +126,21 @@ const routes = [{
     component: () => import( /* webpackChunkName: "questionnaire" */ "../views/fhir-page-questionnaire.vue")
   },
   {
+    path: "/custom/:path/:component",
+    name: "custom_components",
+    component: () => import("../views/custom.vue")
+  },
+  {
+    path: "/apps",
+    name: "apps",
+    component: () => import("../views/apps.vue")
+  },
+  {
+    path: "/install-app",
+    name: "install-app",
+    component: () => import("../components/ihris/install-app.vue")
+  },
+  {
     path: "/dashboard/:id",
     name: "dashboard",
     // route level code-splitting

@@ -1,4 +1,5 @@
 const express = require('express')
+const fileUpload = require('express-fileupload');
 const redis = require('redis')
 const session = require('express-session')
 const path = require('path')
@@ -20,6 +21,9 @@ const cors = require('cors')
 const RedisStore = require('connect-redis')(session)
 
 const app = express()
+app.use(fileUpload({
+  createParentPath: true
+}));
 
 app.use(cors())
 app.use(function(req, res, next) {
@@ -168,6 +172,7 @@ async function startUp() {
   const esRouter = require('./routes/es')
   const questionnaireRouter = require('./routes/questionnaire')
   const fhirRouter = require('./routes/fhir')
+  const ihrisApps = require('./routes/apps')
   const mheroRouter = require('./routes/mhero')
 
   const limit = nconf.get("express:limit") || "50mb"
@@ -211,6 +216,7 @@ async function startUp() {
 
     app.use('/fhir', questionnaireRouter)
     app.use('/fhir', fhirRouter)
+    app.use('/apps', ihrisApps)
     app.use('/es', esRouter)
 
     const loadModules = nconf.get("modules")
@@ -252,6 +258,9 @@ module.exports = router
   // Fallback for the vue router using history mode
   // If this causes issues, would need to either
   // server the ui from a subdirectory or change to hash mode
+
+  app.use('/apps', express.static('apps'))
+
   app.use( (req,res) => {
     res.sendFile(path.join(__dirname, 'public/index.html'))
   } )

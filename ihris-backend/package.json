@@ -9,6 +9,7 @@
   },
   "dependencies": {
     "@keycloak/keycloak-admin-client": "^15.0.2",
+    "adm-zip": "^0.5.9",
     "async": "^3.2.0",
     "axios": "^0.21.1",
     "canvas": "^2.9.1",
@@ -19,7 +20,7 @@
     "debug": "~2.6.9",
     "dompurify": "^2.2.9",
     "express": "~4.16.1",
-    "express-fileupload": "^1.2.1",
+    "express-fileupload": "^1.4.0",
     "express-session": "^1.17.2",
     "fhir2es": "^4.0.2",
     "fhirpath": "^2.9.0",

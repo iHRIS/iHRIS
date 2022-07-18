@@ -16,11 +16,11 @@
             "code": "1.2.840.10065.1.12.1.14"
           }
         ],
-        "when": "2022-06-30T08:39:23.731Z",
+        "when": "2022-07-18T16:55:46.047Z",
         "who": {
           "reference": "http://ihris.org/fhir/Organization/ihris"
         },
-        "data": "wlVZO/ajH0+cW5m0QO2CUl7bUYJqRpdutVmLIIO3NlnesXX4ubHFWkbtZoOdU9zLb3lFp20+fhWHOlJtD6u1xn8HmUjmHqpA16vBkP3OSqrxCbQZHtIqu6Y/AAbQjjcNURDo9J2fMweL3850tnDwdDuE5Rir2KHMmVEz5QL9T5U="
+        "data": "tSpmEbY0EIzdDawqBjcZnEf9/YYhx2WKWLsXZV9jFMo+dmq1EN67iSs6yWQxz9Uq1H3uZm2uHnTwiUg6vEa6Xu78lW/0kafPR06Zij5rEKIKzQ1bmR9H/xLpZd4Ii/LOXLhZu4wy5FuxejYJgh4mATjNDiw+0RM3dI65QFI+86E="
       }
     },
     {
@@ -625,6 +625,22 @@
         {
           "name": "site:nav:menu:audit:url",
           "valueString": "/resource/view/auditevent"
+        },
+        {
+          "name": "site:nav:menu:apps:text",
+          "valueString": "Apps"
+        },
+        {
+          "name": "site:nav:menu:apps:order",
+          "valueString": "13"
+        },
+        {
+          "name": "site:nav:menu:apps:icon",
+          "valueString": "mdi-apps"
+        },
+        {
+          "name": "site:nav:menu:apps:url",
+          "valueString": "/apps"
         },
         {
           "name": "shortname:Practitioner:format",

@@ -8,6 +8,7 @@ yarn-debug.log*
 yarn-error.log*
 /.idea
 tools/translation-script/.idea
+ihris-frontend/site
 # Runtime data
 pids
 *.pid

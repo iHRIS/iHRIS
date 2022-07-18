@@ -203,7 +203,6 @@
           "name": "site:nav:menu:person:menu:person_add:url",
           "valueString": "/questionnaire/ihris-practitioner/practitioner"
         },
-
         {
           "name": "site:nav:menu:position:text",
           "valueString": "Positions"
@@ -627,6 +626,22 @@
         {
           "name": "site:nav:menu:audit:url",
           "valueString": "/resource/view/auditevent"
+        },
+        {
+          "name": "site:nav:menu:apps:text",
+          "valueString": "Apps"
+        },
+        {
+          "name": "site:nav:menu:apps:order",
+          "valueString": "13"
+        },
+        {
+          "name": "site:nav:menu:apps:icon",
+          "valueString": "mdi-apps"
+        },
+        {
+          "name": "site:nav:menu:apps:url",
+          "valueString": "/apps"
         },
         {
           "name": "shortname:Practitioner:format",
