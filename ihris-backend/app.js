@@ -259,7 +259,7 @@ module.exports = router
   // If this causes issues, would need to either
   // server the ui from a subdirectory or change to hash mode
 
-  app.use('/apps', express.static('apps'))
+  app.use('/ihrisapp', express.static('apps'))
 
   app.use( (req,res) => {
     res.sendFile(path.join(__dirname, 'public/index.html'))

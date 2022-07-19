@@ -141,6 +141,11 @@ const routes = [{
     component: () => import("../components/ihris/install-app.vue")
   },
   {
+    path: "/uninstall-app",
+    name: "uninstall-app",
+    component: () => import("../components/ihris/uninstall-app.vue")
+  },
+  {
     path: "/dashboard/:id",
     name: "dashboard",
     // route level code-splitting

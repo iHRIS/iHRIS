@@ -35,6 +35,10 @@ module.exports = {
         target: 'http://localhost:3000/',
         logLevel: 'debug'
       },
+      '^/ihrisapp': {
+        target: 'http://localhost:3000/',
+        logLevel: 'debug'
+      },
       '^/tmp': {
         target: 'http://localhost:3000/',
         logLevel: 'debug'

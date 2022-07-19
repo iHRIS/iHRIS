@@ -55,11 +55,10 @@ export default {
           this.percentUpload = p.loaded*100/p.total;
         }
       }).then(() => {
-        this.percentUpload = 0
         this.app = ""
         this.$store.state.message.active = true
         this.$store.state.message.type = "success"
-        this.$store.state.message.text = "App installed Successfully"
+        this.$store.state.message.text = "App Installed Successfully"
       }).catch((err) => {
         if(err.response && err.response.data) {
           this.$store.state.message.text = err.response.data
