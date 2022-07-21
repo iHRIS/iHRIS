@@ -1,56 +1,63 @@
 # Project information
-site_name: "iHRIS v5 Technical Documentation"
-site_description: "Technical documentation for iHRIS v5"
-site_author: "IntraHealth International"
-site_url: "https://github.com/iHRIS/iHRIS"
+site_name: 'iHRIS v5 Technical Documentation'
+site_description: 'Technical documentation for iHRIS v5'
+site_author: 'IntraHealth International'
+site_url: 'https://github.com/iHRIS/iHRIS'
 
 # Repository
-repo_name: "iHRIS"
-repo_url: "https://github.com/iHRIS/iHRIS"
+repo_name: 'iHRIS'
+repo_url: 'https://github.com/iHRIS/iHRIS'
 
 # Copyright
-copyright: "Copyright &copy; 2020 IntraHealth International"
+copyright: 'Copyright &copy; 2020 IntraHealth International'
 
 # Theme
 theme:
-  name: "material"
+  name: 'material'
   palette:
-    primary: "blue grey"
-    accent: "indigo"
-  language: "en"
+    primary: 'blue grey'
+    accent: 'indigo'
+  language: 'en'
   font:
-    text: "Roboto"
-    code: "Roboto Mono"
+    text: 'Roboto'
+    code: 'Roboto Mono'
   features:
     - navigation.tabs
   # - navigation.expand
 
 nav:
   - Home:
-    - 'index.md'
+      - 'index.md'
   # - User:
   # - Implementer:
   - Developer:
-    - dev/fhir_http.md
-    - dev/modules.md
-    - dev/questionnaire.md
-    - dev/roles_and_tasks.md
-    - dev/short_name.md
-    - dev/task_resolution.md
-    - dev/todo.md
+      - dev/fhir_http.md
+      - dev/modules.md
+      - dev/questionnaire.md
+      - dev/roles_and_tasks.md
+      - dev/short_name.md
+      - dev/task_resolution.md
+      - dev/todo.md
   - Sysadmin:
-    - admin/docker.md
-    - admin/install.md
-    - admin/config.md
+      - admin/docker.md
+      - admin/install.md
+      - admin/config.md
+  - User:
+      - user/people.md
+      - user/positions.md
+      - user/locations.md
+      - user/admin.md
+      - user/reports.md
+      - user/system_users.md
 
 markdown_extensions:
   - admonition
   - codehilite:
       guess_lang: false
   - toc:
-      toc_depth : "3"
+      toc_depth: '3'
   - footnotes
-  
+
 # https://github.com/zhaoterryy/mkdocs-pdf-export-plugin not working
 plugins:
   - search
@@ -63,8 +70,6 @@ extra:
   social:
     - icon: fontawesome/brands/github
       link: https://github.com/iHRIS/iHRIS
-
-
 # theme:
 # logo: 'images/logo.png' must be 128x128
 # logo:
