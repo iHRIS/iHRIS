@@ -1,4 +1,4 @@
-# Configuration options
+# ADMIN
 Configuration will have base information in config/baseConfig.js.
 This should only need to have the FHIR server information and the 
 public keys that are accepted by this server.

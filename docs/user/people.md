@@ -1,4 +1,4 @@
-# Getting Started with Docker
+# PEOPLE
 
 !!! note 
     Time to complete: 20 minutes

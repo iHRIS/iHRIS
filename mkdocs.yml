@@ -15,8 +15,8 @@ copyright: 'Copyright &copy; 2020 IntraHealth International'
 theme:
   name: 'material'
   palette:
-    primary: 'blue grey'
-    accent: 'indigo'
+    primary: 'indigo'
+    accent: 'blue'
   language: 'en'
   font:
     text: 'Roboto'
@@ -43,6 +43,7 @@ nav:
       - admin/install.md
       - admin/config.md
   - User:
+      - user/introduction.md
       - user/people.md
       - user/positions.md
       - user/locations.md
