@@ -1,6 +1,6 @@
 const { defineFeature, loadFeature } = require( "jest-cucumber" )
 
-const fhirSecurity = require('../modules/fhirSecurity')
+const fhirSecurity = require('../modules/fhir/fhirSecurity')
 
 const feature = loadFeature("features/security-add-practitioner.feature")
 

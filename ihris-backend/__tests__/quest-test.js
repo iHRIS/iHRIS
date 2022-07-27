@@ -5,7 +5,7 @@ jest.mock('axios')
 
 const DEFAULT_URL = "http://localhost:8080/hapi/fhir/"
 
-const questionnaire = require('../modules/fhirQuestionnaire')
+const questionnaire = require('../modules/fhir/fhirQuestionnaire')
 const axios = require('axios')
 const nconf = require('../modules/config')
 

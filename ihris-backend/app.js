@@ -8,16 +8,17 @@ const cookieParser = require('cookie-parser')
 const jwt = require('jsonwebtoken')
 const morgan = require('morgan')
 const logger = require('./winston')
+const winston = require('winston')
 const fs = require('fs')
 const user = require('./modules/user');
 const generalMixin = require('./mixin/generalMixin')
 const defaultSetups = require('./defaultSetup.js');
 const nconf = require('./modules/config')
 const requireFromString = require('require-from-string')
-const fhirModules = require('./modules/fhirModules')
-const fhirReports = require('./modules/fhirReports')
+const fhirModules = require('./modules/fhir/fhirModules')
+const fhirReports = require('./modules/fhir/fhirReports')
 const { createProxyMiddleware } = require('http-proxy-middleware')
-const cors = require('cors')
+const cors = require('cors');
 const RedisStore = require('connect-redis')(session)
 
 const app = express()
@@ -205,6 +206,26 @@ async function startUp() {
       app.use(authRouter.passport.session())
     }
     app.use(isLoggedIn);
+
+    // mounting site routes
+    let siteRoutes = nconf.get("app:site:routes")
+    for(let route in siteRoutes) {
+      let routePath = path.join(global.ihrissitepath, "routes/" + siteRoutes[route].path)
+      let mountPoint = "/" + siteRoutes[route].mount
+      mountPoint = mountPoint.replace("//", "/")
+      if(fs.existsSync(routePath)) {
+        let siteRoute = require(routePath)
+        try {
+          app.use(mountPoint, siteRoute)
+        } catch (error) {
+          console.log(error);
+        }
+      } else {
+        winston.error("Route file defined with mount point " + mountPoint + " was not found");
+      }
+    }
+    // end of mounting site routes
+
     app.use('/config', configRouter)
     app.use('/mhero', mheroRouter)
     app.use("/tmp", express.static("tmp"));
@@ -258,12 +279,9 @@ module.exports = router
   // Fallback for the vue router using history mode
   // If this causes issues, would need to either
   // server the ui from a subdirectory or change to hash mode
+  app.use('/ihrisapp', express.static(path.join(__dirname, 'apps')))
 
-  app.use('/ihrisapp', express.static('apps'))
-
-  app.use( (req,res) => {
-    res.sendFile(path.join(__dirname, 'public/index.html'))
-  } )
+  app.use('/', express.static(path.join(global.ihrissitepath, 'public')))
 
   configLoaded = true
 }

@@ -5,7 +5,7 @@ jest.mock('axios')
 
 const DEFAULT_URL = "http://localhost:8080/hapi/fhir/"
 
-const def = require('../modules/fhirDefinition')
+const def = require('../modules/fhir/fhirDefinition')
 const axios = require('axios')
 
 describe( 'Test FHIR StructureDefinition processing', () => {

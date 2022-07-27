@@ -6,14 +6,15 @@ const axios = require("axios");
 const lodash = require("lodash")
 const URI = require("urijs");
 const { v4: uuidv4 } = require('uuid')
+const ihrissmartrequire = require('ihrissmartrequire')
 const es = require("../modules/es")
 const nconf = require('../modules/config')
-const fhirReports = require('../modules/fhirReports')
-const fhirAudit = require('../modules/fhirAudit')
+const fhirReports = require('../modules/fhir/fhirReports')
+const fhirAudit = require('../modules/fhir/fhirAudit')
 const logger = require('../winston')
 const fhirAxios = nconf.fhirAxios
 
-const outcomes = require('../config/operationOutcomes')
+const outcomes = ihrissmartrequire('config/operationOutcomes')
 
 /**
  * Send message

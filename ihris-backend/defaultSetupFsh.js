@@ -4,10 +4,9 @@ const exec = require('child_process').exec;
 const axios = require('axios');
 const URI = require('urijs');
 const async = require('async');
-const moment = require('moment');
 const nconf = require('./modules/config')
 const mixin = require('./mixin/generalMixin');
-const fhirAxios = require('./modules/fhirAxios');
+const fhirAxios = require('./modules/fhir/fhirAxios');
 const { sushiClient } = require('fsh-sushi')
  
 const server = nconf.get("fhir:base")

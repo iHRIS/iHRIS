@@ -5,7 +5,7 @@ const axios = require('axios')
 
 const DEFAULT_URL = "http://localhost:8080/hapi/fhir/"
 
-const fhirSecurity = require('../modules/fhirSecurity')
+const fhirSecurity = require('../modules/fhir/fhirSecurity')
 
 const feature = loadFeature("features/security-add-location.feature")
 

@@ -1,5 +1,6 @@
 const nconf = require('nconf')
-const fhirConfig = require('./fhirConfig')
+const fhirConfig = require('./fhir/fhirConfig')
+const ihrissmartrequire = require('ihrissmartrequire')
 
 nconf.argv().env( {
   separator: '__',
@@ -15,10 +16,10 @@ nconf.argv().env( {
   }
 } )
 
-let baseConfig = fhirConfig.parseFile( './config/baseConfig.json' )
+let baseConfig = fhirConfig.parseFile( ihrissmartrequire.path('baseConfig.json' ))
 nconf.add('base', { type: 'literal', store: baseConfig } )
 
-const fhirAxios = require('./fhirAxios')
+const fhirAxios = require('./fhir/fhirAxios')
 
 fhirAxios.setOptions( {
   base: nconf.get("fhir:base"),

@@ -1,6 +1,6 @@
 const fs = require('fs')
 const crypto = require('crypto')
-const logger = require('../winston')
+const logger = require('../../winston')
 
 // Don't allow any settings to these values from a remote config
 const invalidRemoteKeys = [ 'fhir', 'config', 'session', 'keys',

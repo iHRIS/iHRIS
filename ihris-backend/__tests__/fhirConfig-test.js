@@ -82,7 +82,7 @@ describe( 'converts a FHIR Parameters resource into configuration data', () => {
     ]
   }
 
-  const fhirConfig = require('../modules/fhirConfig')
+  const fhirConfig = require('../modules/fhir/fhirConfig')
 
 
   test( 'parses a FHIR Parameters resource from a file', () => {

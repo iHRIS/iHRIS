@@ -1,10 +1,4 @@
-const nconf = require('./config')
-const user = require('./user')
 const winston = require('winston')
-const crypto = require('crypto')
-const fhirQuestionnaire = require('./fhirQuestionnaire')
-const { response } = require('express')
-const fhirAxios = nconf.fhirAxios
 
 const workflowUserRole = {
     process: (req) => {

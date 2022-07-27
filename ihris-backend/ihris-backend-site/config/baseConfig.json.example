@@ -24,6 +24,14 @@
       "valueString": "../resources/Parameters-ihris-config.signed.json"
     },
     {
+      "name": "app:site:path",
+      "valueString": "/var/lib/iHRIS/ihris-backend/site"
+    },
+    {
+      "name": "app:core:path",
+      "valueString": "/var/lib/iHRIS/ihris-backend"
+    },
+    {
       "name": "builtFSHFIles",
       "valueString": "../ig/fsh-generated/resources"
     },

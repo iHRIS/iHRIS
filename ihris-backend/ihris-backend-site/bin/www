@@ -3,13 +3,18 @@
 /**
  * Module dependencies.
  */
+const configParser = require('../configParser');
 
+let siteConfig = configParser(`${__dirname}/../config/siteConfig.json`)
+global.ihrissitepath = siteConfig.app.site.path
+global.ihriscorepath = siteConfig.app.core.path
+const ihrissmartrequire = require('ihrissmartrequire')
 
-var app = require('../app');
+var app = ihrissmartrequire('app');
 var debug = require('debug')('ihris-backend:server');
 var http = require('http');
 
-const fhirAudit = require('../modules/fhirAudit')
+const fhirAudit = ihrissmartrequire('fhirAudit.js');
 /**
  * Get port from environment and store in Express.
  */

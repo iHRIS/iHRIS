@@ -1,7 +1,7 @@
-const nconf = require('./config')
+const nconf = require('../config')
 const axios = require('axios')
 const { CacheFhirToES } = require('fhir2es')
-const logger = require('../winston')
+const logger = require('../../winston')
 
 const DEFAULT_DELAY = 900000
 const DEFAULT_SHORT_DELAY = 5000

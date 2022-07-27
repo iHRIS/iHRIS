@@ -196,7 +196,7 @@ describe( 'interacts with FHIR server using axios', () => {
   }
   
 
-  const fhirAxios = require('../modules/fhirAxios')
+  const fhirAxios = require('../modules/fhir/fhirAxios')
   fhirAxios.setOptions()
   const axios = require('axios')
 

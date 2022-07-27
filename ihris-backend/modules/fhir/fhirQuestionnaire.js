@@ -1,8 +1,8 @@
-const nconf = require('./config')
+const nconf = require('../config')
 const fhirAxios = nconf.fhirAxios
 const structureDef = require('./fhirDefinition')
 const { v5: uuidv5 } = require('uuid')
-const logger = require('../winston')
+const logger = require('../../winston')
 
 
 const fhirQuestionnaire = {

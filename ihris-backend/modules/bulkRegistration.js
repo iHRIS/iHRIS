@@ -1,11 +1,5 @@
-const fs = require("fs");
-const util = require("util");
 const isEmpty = require("is-empty");
-const fhirSecurity = require("./fhirSecurity");
-const winston = require("winston");
-const fhirAxios = require("./fhirAxios");
 const { v4: uuidv4 } = require("uuid");
-const { Console } = require("console");
 
 const userDataIsValidation = (userData) => {
   const validation = {

@@ -1,5 +1,5 @@
-const nconf = require('./config')
-const logger = require('../winston')
+const nconf = require('../config')
+const logger = require('../../winston')
 const fhirAxios = require('./fhirAxios')
 
 const AUDIT_TEMPLATE = {

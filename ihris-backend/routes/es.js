@@ -6,10 +6,11 @@ const fs = require('fs')
 const { nanoid } = require('nanoid')
 const express = require('express')
 const router = express.Router()
+const ihrissmartrequire = require('ihrissmartrequire')
 const logger = require('../winston')
 const es = require('../modules/es')
 const nconf = require('../modules/config')
-const outcomes = require('../config/operationOutcomes')
+const outcomes = ihrissmartrequire('config/operationOutcomes')
 
 router.post("/export/:format/:index", (req, res) => {
   let searchQry = req.body.query;

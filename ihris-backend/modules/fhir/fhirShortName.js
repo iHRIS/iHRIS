@@ -1,8 +1,8 @@
-const nconf = require('./config')
+const nconf = require('../config')
 const fhirAxios = nconf.fhirAxios
 const fhirpath = require('fhirpath')
 const util = require('util')
-const logger = require('../winston')
+const logger = require('../../winston')
 
 const DEFAULT_DETAILS = { fhirpath: "name" }
 const INPROGRESS_DELAY = 300

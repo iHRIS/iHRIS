@@ -2,11 +2,12 @@ const express = require('express')
 const router = express.Router()
 const nconf = require('../modules/config')
 const fhirAxios = nconf.fhirAxios
-const fhirFilter = require('../modules/fhirFilter')
-const fhirSecurity = require('../modules/fhirSecurity')
-const fhirQuestionnaire = require('../modules/fhirQuestionnaire')
-const fhirModules = require('../modules/fhirModules')
-const outcomes = require('../config/operationOutcomes')
+const ihrissmartrequire = require('ihrissmartrequire')
+const fhirFilter = require('../modules/fhir/fhirFilter')
+const fhirSecurity = require('../modules/fhir/fhirSecurity')
+const fhirQuestionnaire = require('../modules/fhir/fhirQuestionnaire')
+const fhirModules = require('../modules/fhir/fhirModules')
+const outcomes = ihrissmartrequire('config/operationOutcomes')
 const logger = require('../winston')
 
 /**
@@ -46,7 +47,6 @@ router.post("/QuestionnaireResponse", (req, res, next) => {
             outcome.issue[0].diagnostics = "Unable to find processor for this questionnaire: " + req.body.questionnaire + " (" + processor + ")"
             return res.status(500).json(outcome)
         }
-        console.log("******************",workflow,details.library, details.file,JSON.stringify(details,null,2))
         fhirModules.requireWorkflow(workflow, details.library, details.file).then((module) => {
             module.process(req).then((bundle) => {
                 fhirSecurity.preProcess(bundle).then((uuid) => {

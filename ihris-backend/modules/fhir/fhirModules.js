@@ -2,9 +2,10 @@ const crypto = require('crypto')
 const fs = require('fs')
 const path = require('path')
 const requireFromString = require('require-from-string')
-const nconf = require('./config')
+const nconf = require('../config')
 const fhirAxios = nconf.fhirAxios
-const logger = require('../winston')
+const logger = require('../../winston')
+const ihrissmartrequire = require('ihrissmartrequire')
 
 let _workflowModules = {}
 
@@ -58,9 +59,8 @@ const fhirModules = {
         resolve( _workflowModules[workflow] )
       } else {
         if ( file ) {
-          let fullPath = path.join(__dirname,file)
-          if ( fs.existsSync( fullPath ) || fs.existsSync( fullPath+".js" ) ) {
-            const module = require( file )
+          if ( ihrissmartrequire.path(file) ) {
+            const module = ihrissmartrequire( file )
             if ( module.hasOwnProperty("process") ) {
               _workflowModules[workflow] = module
               resolve( _workflowModules[workflow] )

@@ -2,11 +2,6 @@
   "name": "ihris-backend",
   "version": "0.0.0",
   "private": true,
-  "scripts": {
-    "start": "NODE_ENV=production node ./bin/www",
-    "dev": "NODE_ENV=development node ./bin/www",
-    "test": "NODE_ENV=test jest"
-  },
   "dependencies": {
     "@keycloak/keycloak-admin-client": "^15.0.2",
     "adm-zip": "^0.5.9",
@@ -28,6 +23,7 @@
     "googleapis": "^101.0.0",
     "handlebars": "^4.7.7",
     "http-proxy-middleware": "^1.3.1",
+    "ihrissmartrequire": "^1.0.0",
     "image-size": "^1.0.1",
     "is-empty": "^1.2.0",
     "jest-cucumber": "^3.0.1",

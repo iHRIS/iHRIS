@@ -137,7 +137,7 @@ describe( 'Load modules from FHIR server', () => {
 
 
   test( 'load a module from FHIR', () => {
-    const fhirModules = require('../modules/fhirModules')
+    const fhirModules = require('../modules/fhir/fhirModules')
     require('axios').__setFhirResults( DEFAULT_URL + "Library/test-module", null, MOCK_FHIR_OBJ )
     return fhirModules.require( "test-module" ).then( (requiredModule) => {
       expect( requiredModule.loaded ).toBeTruthy()
@@ -146,7 +146,7 @@ describe( 'Load modules from FHIR server', () => {
   } )
 
   test( 'load a workflow from a file', () => {
-    const fhirModules = require('../modules/fhirModules')
+    const fhirModules = require('../modules/fhir/fhirModules')
     return fhirModules.requireWorkflow( 'test-file', undefined, '../__tests__/resources/test-workflow' ).then( (module) => {
       module.process( {} ).then( (bundle) => {
         expect( bundle.type ).toEqual( "transaction" )
@@ -157,7 +157,7 @@ describe( 'Load modules from FHIR server', () => {
   } )
 
   test( 'load a workflow from a library', () => {
-    const fhirModules = require('../modules/fhirModules')
+    const fhirModules = require('../modules/fhir/fhirModules')
     require('axios').__setFhirResults( DEFAULT_URL + "Library/test-workflow", null, MOCK_WORKFLOW )
     return fhirModules.requireWorkflow( 'test-file', 'test-workflow' ).then( (module) => {
       module.process( {} ).then( (bundle) => {

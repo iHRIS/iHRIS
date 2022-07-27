@@ -1,7 +1,7 @@
 const nconf = require('./config')
 const fhirAxios = nconf.fhirAxios
 const crypto = require('crypto')
-const fhirFilter = require('./fhirFilter')
+const fhirFilter = require('./fhir/fhirFilter')
 const winston = require('winston')
 const logger = require("fhir2es/winston");
 

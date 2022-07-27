@@ -56,7 +56,7 @@ describe( 'Lookup short names for resources or codes', () => {
     ]
   }
 
-  const fhirShortName = require('../modules/fhirShortName')
+  const fhirShortName = require('../modules/fhir/fhirShortName')
 
   test( 'Lookup a codesystem value that exists', () => {
     require('axios').__setFhirResults( DEFAULT_URL + "CodeSystem/$lookup?system=test-system&code=test", null, MOCK_CODE_LOOKUP )

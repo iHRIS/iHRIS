@@ -1,6 +1,6 @@
-const nconf = require('./config')
+const nconf = require('../config')
 const fhirAxios = nconf.fhirAxios
-const logger = require('../winston')
+const logger = require('../../winston')
 const { v5: uuidv5 } = require('uuid')
 
 const FHIR_UPDATE_NAMESPACE = nconf.get("fhir:uuid:namespace") || "e91c9519-eccb-48a8-a506-6659b8c22518"

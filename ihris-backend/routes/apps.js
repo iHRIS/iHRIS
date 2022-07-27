@@ -2,25 +2,26 @@ const express = require('express')
 const router = express.Router()
 const AdmZip = require("adm-zip");
 const fs = require("fs")
+const appsBasePath = __dirname + "/../apps/"
 
 router.post("/install", async(req, res) => {
-  await req.files.app.mv("./apps/" + req.files.app.name)
-  const zip = new AdmZip("./apps/" + req.files.app.name)
+  await req.files.app.mv(appsBasePath + req.files.app.name)
+  const zip = new AdmZip(appsBasePath + req.files.app.name)
   const appName = req.files.app.name.split('.zip')[0]
-  zip.extractAllToAsync("./apps/" + appName, true, true, (err) => {
+  zip.extractAllToAsync(appsBasePath + appName, true, true, (err) => {
     if(err) {
       console.log(err);
       return res.status(500).send("Error occured while extracting your iHRIS App")
     }
-    fs.unlinkSync("./apps/" + req.files.app.name)
+    fs.unlinkSync(appsBasePath + req.files.app.name)
     getAppMetadata(appName).then((manifest) => {
       if(!manifest.name) {
-        fs.unlinkSync("./apps/" + appName)  
+        fs.unlinkSync(appsBasePath + appName)  
         return res.status(400).send("Your manifest.webapp has no name")
       }
       return res.json(manifest)
     }).catch(() => {
-      fs.rmSync("./apps/" + appName, { recursive: true, force: true });
+      fs.rmSync(appsBasePath + appName, { recursive: true, force: true });
       return res.status(400).send("Invalid App")
     })
   });
@@ -28,10 +29,11 @@ router.post("/install", async(req, res) => {
 
 router.get("/installed", (req, res) => {
   let apps = []
-  fs.readdir(("./apps"), {
+  fs.readdir((appsBasePath), {
     withFileTypes: true
   }, (err, folders) => {
   if(err) {
+    console.log(err);
     return res.status(500).send()
   }
   const appsDirs = folders.reduce((a, c) => {
@@ -46,7 +48,7 @@ router.get("/installed", (req, res) => {
     promises.push(new Promise((resolve, reject) => {
       getAppMetadata(dir).then((manifest) => {
         if(manifest.icons && manifest.icons["48"]) {
-          fs.readFile("./apps/" + dir + "/" + manifest.icons["48"], 'base64', (err, data) => {
+          fs.readFile(appsBasePath + dir + "/" + manifest.icons["48"], 'base64', (err, data) => {
             manifest.iconBase64 = "data:image;base64," + data
             apps.push(manifest)
             return resolve()
@@ -70,7 +72,7 @@ router.get("/installed", (req, res) => {
 
 router.delete("/uninstall/:name", (req, res) => {
   let name = req.params.name
-  fs.rm("./apps/" + name, { recursive: true, force: true }, (err) => {
+  fs.rm(appsBasePath + name, { recursive: true, force: true }, (err) => {
     if(err) {
       return res.status(500).json()
     }
@@ -79,9 +81,8 @@ router.delete("/uninstall/:name", (req, res) => {
 })
 
 function getAppMetadata(app) {
-  console.log("Getting metadata for iHRIS app " + app);
   return new Promise((resolve, reject) => {
-    fs.readFile("./apps/" + app + "/manifest.webapp", (err, data) => {
+    fs.readFile(appsBasePath + app + "/manifest.webapp", (err, data) => {
       if(err) {
         console.log(err);
         return reject()
