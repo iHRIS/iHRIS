@@ -1,0 +1,15 @@
+{
+  "name": "ihris-google-translator",
+  "version": "1.0.0",
+  "description": "Translate FHIR resources",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "FHIR",
+    "Translation"
+  ],
+  "author": "Ally Shaban",
+  "license": "ISC"
+}

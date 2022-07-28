@@ -1,6 +1,5 @@
 const fs = require('fs')
 const crypto = require('crypto')
-const logger = require('../../winston')
 
 // Don't allow any settings to these values from a remote config
 const invalidRemoteKeys = [ 'fhir', 'config', 'session', 'keys',
@@ -51,7 +50,7 @@ const fhirConfig = {
         }
       }
     } else {
-      logger.warn( "Invalid profile for configuration file: " + file )
+      console.warn( "Invalid profile for configuration file: " + file )
     }
     return defaults
   },
@@ -65,7 +64,7 @@ const fhirConfig = {
       let addconf = config.parameter.find( param => param.name === "config" )
 
       if ( skipSignature ) {
-        logger.warn("SKIPPING SECURITY CHECK ON REMOTE CONFIG:",config.id,". This should only be done in development.")
+        console.warn("SKIPPING SECURITY CHECK ON REMOTE CONFIG:",config.id,". This should only be done in development.")
         configAccepted = true
       } else {
         let sig = config.parameter.find( param => param.name === "signature" )
@@ -86,7 +85,7 @@ const fhirConfig = {
           if( param.hasOwnProperty("valueString") ) {
             let split = param.name.split(':')
             if ( invalidRemoteKeys.includes( split[0] ) ) {
-              logger.warn("Can't override "+split[0]+" from remote config file.")
+              console.warn("Can't override "+split[0]+" from remote config file.")
               continue
             }
             let last = split.pop()
@@ -101,10 +100,10 @@ const fhirConfig = {
           }
         }
       } else {
-        logger.warn( "No valid key set for configuration Parameters " + config.id )
+        console.warn( "No valid key set for configuration Parameters " + config.id )
       }
     } else {
-      logger.warn( "Invalid profile for remote configuration parameters for " + config.id )
+      console.warn( "Invalid profile for remote configuration parameters for " + config.id )
     }
 
     return defaults
