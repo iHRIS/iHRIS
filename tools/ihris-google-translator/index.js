@@ -130,12 +130,27 @@ function extractTextFromQuestionnaire(resource) {
 
 function processQuestionnaireItems(qitem) {
   for(let item of qitem.item) {
+    if(item.repeats && !item.readOnly) {
+      if(!keys.App["ihris-array"]) {
+        keys.App["ihris-array"] = {}
+      }
+      keys.App["ihris-array"][item.text] = item.text
+    }
     if(item.type === "group") {
       let labels = item.text.split('|',2)
       for(let label of labels) {
         keys.App["ihris-questionnaire-group"][label] = label
       }
       processQuestionnaireItems(item)
+    } else {
+      let trans_type = "fhir-" + item.type
+      if(item.type === "dateTime") {
+        trans_type = "fhir-date-time"
+      }
+      if(!keys.App[trans_type]) {
+        keys.App[trans_type] = {}
+      }
+      keys.App[trans_type][item.text] = item.text
     }
   }
 }
@@ -266,11 +281,6 @@ const createSearchTemplate = async (resource, pageDisplay) => {
 }
 
 const createTemplate = async (resource, structure, pageSections) => {
-  // return new Promise((resolve, reject) => {
-
-  // })
-
-
   let sections = {}
   let sectionMap = {}
   for (let section of pageSections) {
