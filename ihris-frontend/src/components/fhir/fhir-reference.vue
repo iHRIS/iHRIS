@@ -199,7 +199,7 @@ export default {
           params = { "partof": treetop }
         } 
       } else {
-        params = { "partof": "ET" }
+        params = { "partof:missing": true }
       }
       params._count = 500
       let url = "/fhir/"+this.resource+"?"+querystring.stringify( params )
