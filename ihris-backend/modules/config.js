@@ -16,8 +16,8 @@ nconf.argv().env( {
   }
 } )
 
-let baseConfig = fhirConfig.parseFile( ihrissmartrequire.path('baseConfig.json' ))
-nconf.add('base', { type: 'literal', store: baseConfig } )
+let baseConfig = fhirConfig.parseFile(ihrissmartrequire.path('config/baseConfig.json'))
+nconf.add('base', { type: 'literal', store: baseConfig })
 
 const fhirAxios = require('./fhir/fhirAxios')
 
