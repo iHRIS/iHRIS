@@ -1,59 +1,64 @@
 const fs = require("fs")
+const async = require("async")
 const configParser = require('../../ihris-backend/site/configParser');
 
 let siteConfig = configParser(`${__dirname}/../../ihris-backend/site/config/baseConfig.json`)
 global.ihrissitepath = siteConfig.app.site.path
 global.ihriscorepath = siteConfig.app.core.path
-const builtResources = "../../ig/fsh-generated/resources"
+const builtResources = ["../../ig/fsh-generated/resources", "../../ihris-backend/site/ig/fsh-generated/resources"]
 const nconf = require('../../ihris-backend/modules/config')
 const fhirAxios = nconf.fhirAxios
 const fhirDefinition = require('../../ihris-backend/modules/fhir/fhirDefinition');
 let keys = require("./en_startup.json", )
 
-getFiles().then(async(resources) => {
-  const promises = []
-  for(let resource of resources) {
-    promises.push(new Promise(async(resolve, reject) => {
-      if(resource.resourceType === "Basic" && resource.meta && resource.meta.profile && resource.meta.profile.includes("http://ihris.org/fhir/StructureDefinition/ihris-page")) {
-        extractFromPage(resource.id, ["resource"]).then(() => {
+async.eachSeries(builtResources, (builtResource, nxtRes) => {
+  getFiles(builtResource).then(async(resources) => {
+    const promises = []
+    for(let resource of resources) {
+      promises.push(new Promise(async(resolve, reject) => {
+        if(resource.resourceType === "Basic" && resource.meta && resource.meta.profile && resource.meta.profile.includes("http://ihris.org/fhir/StructureDefinition/ihris-page")) {
+          extractFromPage(resource.id, ["resource"]).then(() => {
+            resolve()
+          }).catch(() => {
+            resolve()
+          })
+        } else if(resource.resourceType === "Questionnaire") {
+          extractTextFromQuestionnaire(resource)
           resolve()
-        }).catch(() => {
+        } else if(resource.id === "ihris-config") {
+          await nconf.loadRemote()
+          let site = JSON.parse(JSON.stringify(nconf.get("site") || {}))
+          if(site.title) {
+            keys.App.title = site.title
+          }
+          if(site.site) {
+            keys.App.site = site.site
+          }
+          if(site.nav && site.nav.menu) {
+            extractMenus(site.nav.menu)
+          }
           resolve()
-        })
-      } else if(resource.resourceType === "Questionnaire") {
-        extractTextFromQuestionnaire(resource)
-        resolve()
-      } else if(resource.id === "ihris-config") {
-        await nconf.loadRemote()
-        let site = JSON.parse(JSON.stringify(nconf.get("site") || {}))
-        if(site.title) {
-          keys.App.title = site.title
+        } else {
+          resolve()
         }
-        if(site.site) {
-          keys.App.site = site.site
-        }
-        if(site.nav && site.nav.menu) {
-          extractMenus(site.nav.menu)
-        }
-        resolve()
-      } else {
-        resolve()
-      }
-    }))
-  }
-  Promise.all(promises).then(async () => {
-    try {
-      await fs.writeFileSync("./en.json", JSON.stringify(keys, 0, 2))
-    } catch (error) {
-      console.log(error);
+      }))
     }
-    console.log("Done, Output is inside en.json file");
+    Promise.all(promises).then(async () => {
+      nxtRes()
+    })
   })
+}, async() => {
+  try {
+    await fs.writeFileSync("./en.json", JSON.stringify(keys, 0, 2))
+  } catch (error) {
+    console.log(error);
+  }
+  console.log("Done, Output is inside en.json file");
 })
 
-function getFiles() {
+function getFiles(builtResource) {
   return new Promise(async(resolve, reject) => {
-    const dirs = await fs.readdirSync(`${__dirname}/${builtResources}`);
+    const dirs = await fs.readdirSync(`${__dirname}/${builtResource}`);
     let errorOccured = false;
     let resources = []
     const promises1 = []
@@ -65,7 +70,7 @@ function getFiles() {
           dir = null;
         } else {
           try {
-            files = fs.readdirSync(`${__dirname}/${builtResources}/${dir}`);
+            files = fs.readdirSync(`${__dirname}/${builtResource}/${dir}`);
           } catch (error) {
             console.error(error);
             errorOccured = true;
@@ -77,9 +82,9 @@ function getFiles() {
           promises2.push(new Promise((resolve2) => {
             let fullpath;
             if (dir) {
-              fullpath = `${__dirname}/${builtResources}/${dir}/${file}`;
+              fullpath = `${__dirname}/${builtResource}/${dir}/${file}`;
             } else {
-              fullpath = `${__dirname}/${builtResources}/${file}`;
+              fullpath = `${__dirname}/${builtResource}/${file}`;
             }
             fs.readFile(fullpath, { encoding: 'utf8', flag: 'r' }, (err, data) => {
               resources.push(JSON.parse(data))
