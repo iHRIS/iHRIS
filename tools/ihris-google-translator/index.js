@@ -211,12 +211,12 @@ function extractFromPage(page_id, type) {
           createTemplate(resource, structure, pageSections)
           return resolve()
           if (type.includes("search")) {
-            createSearchTemplate(resource, pageDisplay)
+            
+            return resolve()
           } 
           if(type.includes("resource")) {
-            createTemplate(resource, structure, pageSections)
+            
           }
-          return resolve()
   
         }).catch((err) => {
           console.error(err.message)
@@ -284,232 +284,256 @@ const createSearchTemplate = async (resource, pageDisplay) => {
 }
 
 const createTemplate = async (resource, structure, pageSections) => {
-  let sections = {}
-  let sectionMap = {}
-  for (let section of pageSections) {
-    let title, description, name, resourceExt, resource, linkfield, searchfield
-    let fields = []
-    let columns = []
-    let actions = []
-    try {
-        title = section.extension.find(ext => ext.url === "title").valueString
-    } catch (err) {
-    }
-    try {
-        description = section.extension.find(ext => ext.url === "description").valueString
-    } catch (err) {
-    }
-    try {
-        name = section.extension.find(ext => ext.url === "name").valueString
-    } catch (err) {
-    }
-    try {
-        fields = section.extension.filter(ext => ext.url === "field").map(ext => ext.valueString)
-    } catch (err) {
-    }
-    try {
-      resourceExt = section.extension.find(ext => ext.url === "resource").extension
+  return new Promise((resolve) => {
+    let sections = {}
+    let sectionMap = {}
+    for (let section of pageSections) {
+      let title, description, name, resourceExt, resource, linkfield, searchfield
+      let fields = []
+      let columns = []
+      let actions = []
+      try {
+          title = section.extension.find(ext => ext.url === "title").valueString
+      } catch (err) {
+      }
+      try {
+          description = section.extension.find(ext => ext.url === "description").valueString
+      } catch (err) {
+      }
+      try {
+          name = section.extension.find(ext => ext.url === "name").valueString
+      } catch (err) {
+      }
+      try {
+          fields = section.extension.filter(ext => ext.url === "field").map(ext => ext.valueString)
+      } catch (err) {
+      }
+      try {
+        resourceExt = section.extension.find(ext => ext.url === "resource").extension
 
-      resource = resourceExt.find(ext => ext.url === "resource").valueReference.reference
-      if (resource) {
-        linkfield = resourceExt.find(ext => ext.url === "linkfield").valueString
-        try {
-          searchfield = resourceExt.find(ext => ext.url === "searchfield").valueString
-        } catch (err) {
-        }
-        let columnsExt = resourceExt.filter(ext => ext.url === "column")
-        for (let column of columnsExt) {
+        resource = resourceExt.find(ext => ext.url === "resource").valueReference.reference
+        if (resource) {
+          linkfield = resourceExt.find(ext => ext.url === "linkfield").valueString
           try {
-            let header = column.extension.find(ext => ext.url === "header").valueString
-            let field = column.extension.find(ext => ext.url === "field").valueString
-            if (header && field) {
-              columns.push({text: header, value: field})
-            }
+            searchfield = resourceExt.find(ext => ext.url === "searchfield").valueString
           } catch (err) {
           }
-        }
-        let actionsExt = resourceExt.filter(ext => ext.url === "action")
-        for (let action of actionsExt) {
-          try {
-            let link = action.extension.find(ext => ext.url === "link").valueString
-            let text = action.extension.find(ext => ext.url === "text").valueString
-            if (link && text) {
-              actions.push({
-                link: link, text: text
-              })
+          let columnsExt = resourceExt.filter(ext => ext.url === "column")
+          for (let column of columnsExt) {
+            try {
+              let header = column.extension.find(ext => ext.url === "header").valueString
+              let field = column.extension.find(ext => ext.url === "field").valueString
+              if (header && field) {
+                columns.push({text: header, value: field})
+              }
+            } catch (err) {
             }
-          } catch (err) {
           }
+          let actionsExt = resourceExt.filter(ext => ext.url === "action")
+          for (let action of actionsExt) {
+            try {
+              let link = action.extension.find(ext => ext.url === "link").valueString
+              let text = action.extension.find(ext => ext.url === "text").valueString
+              if (link && text) {
+                actions.push({
+                  link: link, text: text
+                })
+              }
+            } catch (err) {
+            }
+          }
+
         }
 
+      } catch (err) {
       }
 
-    } catch (err) {
-    }
-
-    let sectionOrder = {}
-    for (let field of fields) {
-      sectionMap[field] = name
-    }
-    sections[name] = {
-      title: title,
-      description: description,
-      fields: fields,
-      order: sectionOrder,
-      resource: resource,
-      linkfield: linkfield,
-      searchfield: searchfield,
-      columns: columns,
-      actions: actions,
-      elements: {}
-    }
-  }
-  const getSortFunc = (sortArr) => {
-    return (a, b) => {
-      idxA = sortArr.indexOf(a)
-      idxB = sortArr.indexOf(b)
-      if (idxA === idxB) {
-          return 0
-      } else if (idxA === -1) {
-          return 1
-      } else if (idxB === -1) {
-          return -1
-      } else if (idxA < idxB) {
-          return -1
-      } else {
-          return 1
+      let sectionOrder = {}
+      for (let field of fields) {
+        sectionMap[field] = name
       }
-    }
-  }
-
-  let structureKeys = Object.keys(structure)
-  let sectionMenu
-
-  for (let fhir of structureKeys) {
-    if (!sections.hasOwnProperty(fhir)) {
-      sections[fhir] = {
-        title: fhir,
-        description: "",
-        fields: [],
-        order: {},
-        resource: undefined,
-        linkfield: undefined,
-        searchfield: undefined,
-        columns: [],
-        actions: [],
+      sections[name] = {
+        title: title,
+        description: description,
+        fields: fields,
+        order: sectionOrder,
+        resource: resource,
+        linkfield: linkfield,
+        searchfield: searchfield,
+        columns: columns,
+        actions: actions,
         elements: {}
       }
     }
-    let sectionKeys = Object.keys(sections)
-    let resourceElement = "ihris-resource"
-    if (resource.resourceType === "CodeSystem") {
-      resourceElement = "ihris-codesystem"
-    }
-
-    if (sectionKeys.length > 1) {
-      sectionMenu = sectionKeys.map(name => {
-        return {
-          name: name,
-          title: sections[name].title,
-          desc: sections[name].description,
-          secondary: !!sections[name].resource
-        }
-      })
-    }
-    if (structure[fhir].hasOwnProperty("fields")) {
-      let fieldKeys = Object.keys(structure[fhir].fields)
-      for (let field of fieldKeys) {
-        if (sectionMap.hasOwnProperty(structure[fhir].fields[field].id)) {
-          sections[sectionMap[structure[fhir].fields[field].id]].elements[field] = structure[fhir].fields[field]
+    const getSortFunc = (sortArr) => {
+      return (a, b) => {
+        idxA = sortArr.indexOf(a)
+        idxB = sortArr.indexOf(b)
+        if (idxA === idxB) {
+            return 0
+        } else if (idxA === -1) {
+            return 1
+        } else if (idxB === -1) {
+            return -1
+        } else if (idxA < idxB) {
+            return -1
         } else {
-          sections[fhir].elements[field] = structure[fhir].fields[field]
+            return 1
         }
       }
     }
-    const processFields = async (fields, base, order) => {
-      let fieldKeys = Object.keys(fields)
-      if (order[base]) {
-          fieldKeys.sort(getSortFunc(order[base]))
-      }
-      for (let field of fieldKeys) {
-        if (fields[field]["max"] === "0") {
-          continue
-        }
-        if (!fields[field].code) {
-          console.info("No datatype for " + base + " " + field + " so skipping", base, field)
-          continue
-        }
-        let eleName = fhirDefinition.camelToKebab(fields[field].code)
 
-        if (fields[field]["max"] !== "1") {
-          if(fields[field].label) {
-            keys.App["ihris-array"][fields[field].label] = fields[field].label
+    let structureKeys = Object.keys(structure)
+    let sectionMenu
+
+    const promises1 = []
+    for (let fhir of structureKeys) {
+      promises1.push(new Promise((resolve1) => {
+        if (!sections.hasOwnProperty(fhir)) {
+          sections[fhir] = {
+            title: fhir,
+            description: "",
+            fields: [],
+            order: {},
+            resource: undefined,
+            linkfield: undefined,
+            searchfield: undefined,
+            columns: [],
+            actions: [],
+            elements: {}
           }
         }
-        if(!keys.App["fhir-" + eleName]) {
-          keys.App["fhir-" + eleName] = {}
+        let sectionKeys = Object.keys(sections)
+        let resourceElement = "ihris-resource"
+        if (resource.resourceType === "CodeSystem") {
+          resourceElement = "ihris-codesystem"
         }
-        if(fields[field].label) {
-          keys.App["fhir-" + eleName][fields[field].label] = fields[field].label
+  
+        if (sectionKeys.length > 1) {
+          sectionMenu = sectionKeys.map(name => {
+            return {
+              name: name,
+              title: sections[name].title,
+              desc: sections[name].description,
+              secondary: !!sections[name].resource
+            }
+          })
         }
-        let subFields
-        if (eleName === "reference" && fields[field].hasOwnProperty("fields")) {
-          let refFields = fields[field].fields
-          subFields = {}
-          let subAttrs = ["id", "path", "label", "min", "max", "base-min", "base-max", "code"]
-          for (let refField of Object.keys(refFields)) {
-            subFields[refField] = {}
-            for (let attr of subAttrs) {
-              if (refFields[refField].hasOwnProperty(attr)) {
-                if ((attr === "id" || attr === "path") && fields[field].hasOwnProperty(attr)) {
-                  subFields[refField][attr] = refFields[refField][attr].replace(fields[field][attr] + ".", "")
-                } else {
-                  subFields[refField][attr] = refFields[refField][attr]
-                }
-              }
+        if (structure[fhir].hasOwnProperty("fields")) {
+          let fieldKeys = Object.keys(structure[fhir].fields)
+          for (let field of fieldKeys) {
+            if (sectionMap.hasOwnProperty(structure[fhir].fields[field].id)) {
+              sections[sectionMap[structure[fhir].fields[field].id]].elements[field] = structure[fhir].fields[field]
+            } else {
+              sections[fhir].elements[field] = structure[fhir].fields[field]
             }
           }
         }
-
-        if (!subFields && fields[field].hasOwnProperty("fields")) {
-          await processFields(fields[field].fields, base + "." + fields[field], order)
+        const processFields = (fields, base, order) => {
+          return new Promise(async (resolve3) => {
+            let fieldKeys = Object.keys(fields)
+            if (order[base]) {
+                fieldKeys.sort(getSortFunc(order[base]))
+            }
+            const promises4 = []
+            for (let field of fieldKeys) {
+              return new Promise(async(resolve4) => {
+                if (fields[field]["max"] === "0") {
+                  return resolve4()
+                }
+                if (!fields[field].code) {
+                  console.info("No datatype for " + base + " " + field + " so skipping", base, field)
+                  return resolve4()
+                }
+                let eleName = fhirDefinition.camelToKebab(fields[field].code)
+    
+                if (fields[field]["max"] !== "1") {
+                  if(fields[field].label) {
+                    keys.App["ihris-array"][fields[field].label] = fields[field].label
+                  }
+                }
+                if(!keys.App["fhir-" + eleName]) {
+                  keys.App["fhir-" + eleName] = {}
+                }
+                if(fields[field].label) {
+                  keys.App["fhir-" + eleName][fields[field].label] = fields[field].label
+                }
+                let subFields
+                if (eleName === "reference" && fields[field].hasOwnProperty("fields")) {
+                  let refFields = fields[field].fields
+                  subFields = {}
+                  let subAttrs = ["id", "path", "label", "min", "max", "base-min", "base-max", "code"]
+                  for (let refField of Object.keys(refFields)) {
+                    subFields[refField] = {}
+                    for (let attr of subAttrs) {
+                      if (refFields[refField].hasOwnProperty(attr)) {
+                        if ((attr === "id" || attr === "path") && fields[field].hasOwnProperty(attr)) {
+                          subFields[refField][attr] = refFields[refField][attr].replace(fields[field][attr] + ".", "")
+                        } else {
+                          subFields[refField][attr] = refFields[refField][attr]
+                        }
+                      }
+                    }
+                  }
+                }
+    
+                if (!subFields && fields[field].hasOwnProperty("fields")) {
+                  await processFields(fields[field].fields, base + "." + fields[field], order)
+                  return resolve4()
+                }
+                return resolve4()
+              })
+            }
+            Promise.all(promises4).then(() => {
+              return resolve3()
+            })
+          })
         }
-      }
-      return
+        const promises2 = []
+        for (let name of sectionKeys) {
+          promises2.push(new Promise(async(resolve2) => {
+            if(!keys.App["ihris-section"]) {
+              keys.App["ihris-section"] = {}
+            }
+            if(!keys.App["ihris-resource"]) {
+              keys.App["ihris-resource"] = {}
+            }
+            if(sections[name].title) {
+              keys.App["ihris-section"][sections[name].title] = sections[name].title
+              keys.App["ihris-resource"][sections[name].title] = sections[name].title
+            }
+            if([sections[name].description]) {
+              keys.App["ihris-section"][sections[name].description] = sections[name].description
+              keys.App["ihris-resource"][sections[name].description] = sections[name].description
+            }
+            if (sections[name].resource) {
+              if(!keys.App["ihris-secondary"]) {
+                keys.App["ihris-secondary"] = {
+                  table: {}
+                }
+              }
+              if(sections[name].title) {
+                keys.App["ihris-secondary"][sections[name].title] = sections[name].title
+              }
+              for(let action of sections[name].actions) {
+                keys.App["ihris-secondary"][action.text] = action.text
+              }
+              for(let column of sections[name].columns) {
+                keys.App["ihris-secondary"].table[column.text] = column.text
+              }
+            } else {
+              await processFields(sections[name].elements, fhir, sections[name].order)
+            }
+            return resolve2()
+          }))
+        }
+        Promise.all(promises2).then(() => {
+          return resolve1()
+        })
+      }))
     }
-    for (let name of sectionKeys) {
-      if(!keys.App["ihris-section"]) {
-        keys.App["ihris-section"] = {}
-      }
-      if(!keys.App["ihris-resource"]) {
-        keys.App["ihris-resource"] = {}
-      }
-      if(sections[name].title) {
-        keys.App["ihris-section"][sections[name].title] = sections[name].title
-        keys.App["ihris-resource"][sections[name].title] = sections[name].title
-      }
-      if([sections[name].description]) {
-        keys.App["ihris-section"][sections[name].description] = sections[name].description
-        keys.App["ihris-resource"][sections[name].description] = sections[name].description
-      }
-      if (sections[name].resource) {
-        if(!keys.App["ihris-secondary"]) {
-          keys.App["ihris-secondary"] = {
-            table: {}
-          }
-        }
-        if(sections[name].title) {
-          keys.App["ihris-secondary"][sections[name].title] = sections[name].title
-        }
-        for(let action of sections[name].actions) {
-          keys.App["ihris-secondary"][action.text] = action.text
-        }
-        for(let column of sections[name].columns) {
-          keys.App["ihris-secondary"].table[column.text] = column.text
-        }
-      } else {
-        await processFields(sections[name].elements, fhir, sections[name].order)
-      }
-    }
-  }
+    Promise.all(promises1).then(() => {
+      return resolve()
+    })
+  })
 }

@@ -87,9 +87,6 @@ export default {
                 setEdit: function(val) {
                   this.isEdit = val
                 }
-              },
-              created() {
-                console.log(data.template);
               }
             } )
           }
