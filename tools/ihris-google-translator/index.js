@@ -9,7 +9,7 @@ const builtResources = ["../../ig/fsh-generated/resources", "../../ihris-backend
 const nconf = require('../../ihris-backend/modules/config')
 const fhirAxios = nconf.fhirAxios
 const fhirDefinition = require('../../ihris-backend/modules/fhir/fhirDefinition');
-let keys = require("./en_startup.json", )
+let keys = require("./en_startup.json", );
 
 async.eachSeries(builtResources, (builtResource, nxtRes) => {
   getFiles(builtResource).then(async(resources) => {
@@ -59,7 +59,6 @@ async.eachSeries(builtResources, (builtResource, nxtRes) => {
 function getFiles(builtResource) {
   return new Promise(async(resolve, reject) => {
     const dirs = await fs.readdirSync(`${__dirname}/${builtResource}`);
-    let errorOccured = false;
     let resources = []
     const promises1 = []
     for(let dir of dirs) {
@@ -135,6 +134,7 @@ function processQuestionnaireItems(qitem) {
         keys.App["ihris-array"] = {}
       }
       keys.App["ihris-array"][item.text] = item.text
+      keys.App["ihris-complex-card"][item.text] = item.text
     }
     if(item.type === "group") {
       let labels = item.text.split('|',2)
@@ -437,7 +437,7 @@ const createTemplate = async (resource, structure, pageSections) => {
             }
             const promises4 = []
             for (let field of fieldKeys) {
-              return new Promise(async(resolve4) => {
+              promises4.push(new Promise(async(resolve4) => {
                 if (fields[field]["max"] === "0") {
                   return resolve4()
                 }
@@ -446,10 +446,10 @@ const createTemplate = async (resource, structure, pageSections) => {
                   return resolve4()
                 }
                 let eleName = fhirDefinition.camelToKebab(fields[field].code)
-    
                 if (fields[field]["max"] !== "1") {
                   if(fields[field].label) {
                     keys.App["ihris-array"][fields[field].label] = fields[field].label
+                    keys.App["ihris-complex-card"][fields[field].label] = fields[field].label
                   }
                 }
                 if(!keys.App["fhir-" + eleName]) {
@@ -482,7 +482,7 @@ const createTemplate = async (resource, structure, pageSections) => {
                   return resolve4()
                 }
                 return resolve4()
-              })
+              }))
             }
             Promise.all(promises4).then(() => {
               return resolve3()
@@ -522,6 +522,9 @@ const createTemplate = async (resource, structure, pageSections) => {
                 keys.App["ihris-secondary"].table[column.text] = column.text
               }
             } else {
+              // if(!Object.keys(sections[name].elements).includes("extension:secularEducationHistory")) {
+              //   return resolve2()
+              // }
               await processFields(sections[name].elements, fhir, sections[name].order)
             }
             return resolve2()

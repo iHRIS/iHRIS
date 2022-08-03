@@ -20,7 +20,7 @@
           <v-btn v-if="subAvailable" icon @click="removeRow()"><v-icon>mdi-minus-circle</v-icon></v-btn>
           <v-btn v-if="addAvailable" icon @click="addRow()"><v-icon color="green">mdi-plus-circle</v-icon></v-btn>
         </v-system-bar>
-        <slot v-for="input in inputs" :input="input" :source="input.source"></slot>
+        <slot v-for="(input, index) in inputs" :count="index" :input="input" :source="input.source"></slot>
       </v-card>
     </v-container>
   </div>
