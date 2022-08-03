@@ -17,7 +17,7 @@ async.eachSeries(builtResources, (builtResource, nxtRes) => {
     for(let resource of resources) {
       promises.push(new Promise(async(resolve, reject) => {
         if(resource.resourceType === "Basic" && resource.meta && resource.meta.profile && resource.meta.profile.includes("http://ihris.org/fhir/StructureDefinition/ihris-page")) {
-          extractFromPage(resource.id, ["resource"]).then(() => {
+          extractFromPage(resource.id, ["resource", "search"]).then(() => {
             resolve()
           }).catch(() => {
             resolve()
@@ -207,13 +207,16 @@ function extractFromPage(page_id, type) {
             return resolve()
           }
           const structure = fhirDefinition.parseStructureDefinition(resource)
+          createSearchTemplate(resource, pageDisplay)
+          createTemplate(resource, structure, pageSections)
+          return resolve()
           if (type.includes("search")) {
             createSearchTemplate(resource, pageDisplay)
-            return resolve()
-          } else if(type.includes("resource")) {
+          } 
+          if(type.includes("resource")) {
             createTemplate(resource, structure, pageSections)
-            return resolve()
           }
+          return resolve()
   
         }).catch((err) => {
           console.error(err.message)
