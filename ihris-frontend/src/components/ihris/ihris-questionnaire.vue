@@ -250,7 +250,6 @@ export default {
             next.push(section);
             next = section.item;
           } else if (child.qField) {
-            //console.log("PROCESS",path,child.qField,child.value)
             let item;
             if (itemMap.hasOwnProperty(child.path)) {
               item = itemMap[child.path];
@@ -316,7 +315,6 @@ export default {
         status: "completed",
         item: [],
       };
-
       try {
         await processChildren(this.fhir.item, this.$children);
       } catch (err) {
@@ -342,7 +340,6 @@ export default {
           comm.item[0].linkId = `Practitioner.communication[${index}]`;
         });
       }
-      console.log("SAVE", this.fhir);
       fetch(
           "/fhir/QuestionnaireResponse?" +
           querystring.stringify(this.$route.query),
@@ -356,8 +353,6 @@ export default {
           }
       )
           .then((response) => {
-            //console.log(response)
-            //console.log(response.headers)
             if (response.status === 201) {
               response.json().then((data) => {
                 this.overlay = false;
@@ -395,7 +390,6 @@ export default {
                 if (!subject) {
                   this.$router.push({name: "home"});
                 }
-                //console.log(data)
               });
               this.$store.commit("setMessage", {
                 type: "success",
@@ -443,12 +437,6 @@ export default {
               text: "Failed to update data.",
             });
           });
-      //console.log(this.fhir)
-
-      /*
-      console.log(this.$scopedSlots.default())
-      processSlots( this.field, this.$scopedSlots.default() )
-      */
     },
   },
 

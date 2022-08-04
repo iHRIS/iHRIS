@@ -101,16 +101,10 @@
           </template>
           <v-subheader v-if="sectionMenu" class="white--text"><h2>{{ $t(`App.ihris-resource.Sections`) }}</h2>
           </v-subheader>
-          <v-list-item v-for="section in sectionMenu"
-                       :key="section.name"
-                       :class="'#section-' + section.name === path ? 'highlighted' : ''"
-                       :href="'#section-'+section.name"
-          >
-            <v-list-item-content v-if="!edit || !section.secondary" class="white--text">
-              <v-list-item-title class="text-uppercase"><h4>{{ $t(`App.ihris-resource.${section.title}`) }}</h4>
-              </v-list-item-title>
-              <v-list-item-subtitle class="white--text">{{ $t(`App.ihris-resource.${section.desc}`) }}
-              </v-list-item-subtitle>
+          <v-list-item v-for="section in sectionMenu" :href="'#section-'+section.name" :key="section.name">
+            <v-list-item-content class="white--text" v-if="!edit || !section.secondary">
+              <v-list-item-title class="text-uppercase"><h4>{{ $t(`App.ihris-resource.${section.title}`) }}</h4></v-list-item-title>
+              <v-list-item-subtitle class="white--text">{{ $t(`App.ihris-resource.${section.desc}`) }}</v-list-item-subtitle>
             </v-list-item-content>
           </v-list-item>
         </v-list>

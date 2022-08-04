@@ -1,7 +1,17 @@
 <template>
   <ihris-element :edit="edit" :loading="false">
     <template #form>
-      <v-text-field :error-messages="errors" @change="errors = []" :label="display" :disabled="disabled" :name="field" v-model.number="value" outlined hide-details="auto" :rules="rules" dense>
+      <v-text-field 
+        :error-messages="errors" 
+        @change="errors = []" 
+        :label="display" 
+        :disabled="disabled" 
+        :name="field" 
+        v-model.number="value" 
+        outlined hide-details="auto" 
+        :rules="rules" 
+        dense
+      >
         <template #label>{{display}} <span v-if="required" class="red--text font-weight-bold">*</span></template>
       </v-text-field>
     </template>
@@ -28,6 +38,7 @@ export default {
     return {
       source: { path: "", data: {} },
       value: "",
+      qField: "valueInteger",
       disabled: false,
       errors: [],
       lockWatch: false
