@@ -36,6 +36,14 @@ sudo cp -r ihris-backend-site your_site_name
 Change **your_site_name** to the name of your preference, it is recommended your_site_name to be on the directory /var/lib/iHRIS/ihris-backend so that you can easily reuse iHRIS npm packages. This site will be used to run the iHRIS backend and customizing iHRIS backend based with your needs. Customization is covered on a separate section.
 If you already have your_site_name on github, clone it instead of copying ihris-backend-site
 
+### create configuration file
+iHRIS comes with default configuration file that you can copy and customize based on your needs, run below commands to copy the default configuration.
+```bash
+cd your_site_name
+cp config/baseConfig.json.example config/baseConfig.json
+```
+Now you may open config/baseConfig.json and change configurations based on your setup, espeially the hapi fhir server base url
+
 ### create your frontend site
 This is only needed if you intend to customize the frontend by adding new components
 ```bash
