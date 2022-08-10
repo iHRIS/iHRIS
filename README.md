@@ -42,7 +42,7 @@ iHRIS comes with default configuration file that you can copy and customize base
 cd your_site_name
 cp config/baseConfig.json.example config/baseConfig.json
 ```
-Now you may open config/baseConfig.json and change configurations based on your setup, espeially the hapi fhir server base url
+Now you may open config/baseConfig.json and change configurations based on your setup, espeially the hapi fhir server base url (fhir:base), path to your iHRIS site (app:site:path) and path to your iHRIS Core (app:core:path)
 
 ### create your frontend site
 This is only needed if you intend to customize the frontend by adding new components
