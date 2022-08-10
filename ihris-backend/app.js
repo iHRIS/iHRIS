@@ -104,8 +104,8 @@ async function startUp() {
   }
 
   const isLoggedIn = (req, res, next) => {
-    let unauthenticatedRoutes = ["/config/app", "/auth", "/fhir/DocumentReference/page-home/$html", "/config/site"]
-    if(unauthenticatedRoutes.includes(req.path)){
+    let unauthenticatedRoutes = ["/", "favicon.ico", "/config/app", "/auth", "/fhir/DocumentReference/page-home/$html", "/config/site"]
+    if(unauthenticatedRoutes.includes(req.path) || req.path.startsWith("/css") || req.path.startsWith("/js")){
       return next()
     }
     if (nconf.get('app:idp') === 'keycloak') {
@@ -193,7 +193,7 @@ async function startUp() {
     saveUninitialized: false
   }))
 
-    app.use(express.static(path.join(__dirname, 'public')))
+    // app.use(express.static(path.join(__dirname, 'public')))
 
 
     //app.use('/', indexRouter)

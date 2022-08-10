@@ -38,6 +38,9 @@ async.eachSeries(builtResources, (builtResource, nxtRes) => {
             extractMenus(site.nav.menu)
           }
           resolve()
+        } else if(resource.resourceType === "CodeSystem") {
+          // extractTextFromCodeSystem(resource)
+          resolve()
         } else {
           resolve()
         }
@@ -127,6 +130,19 @@ function extractTextFromQuestionnaire(resource) {
   }
 }
 
+function extractTextFromCodeSystem(resource) {
+  _processConcept(resource.concept)
+
+  function _processConcept(concepts) {
+    for(let concept of concepts) {
+      if(concept.concept) {
+        return _processConcept(concept.concept)
+      }
+      // keys.App["fhir-string"]["Display"] = 
+    }
+  }
+}
+
 function processQuestionnaireItems(qitem) {
   for(let item of qitem.item) {
     if(item.repeats && !item.readOnly) {
@@ -187,6 +203,9 @@ function extractFromPage(page_id, type) {
           }
           resource = resource.entry[0].resource
           const structure = fhirDefinition.parseCodeSystem(resource)
+          createSearchTemplate(resource, pageDisplay)
+          createTemplate(resource, structure, pageSections)
+          return resolve()
           if (type.includes("search")) {
             createSearchTemplate(resource, pageDisplay)
             return resolve()
@@ -268,7 +287,7 @@ const createSearchTemplate = async (resource, pageDisplay) => {
 
   let searchElement = "ihris-search"
   if (resource.resourceType === "CodeSystem") {
-      searchElement += "-code"
+    searchElement += "-code"
   }
   let label = (resource.title || resource.name)
   if(label) {
@@ -522,9 +541,6 @@ const createTemplate = async (resource, structure, pageSections) => {
                 keys.App["ihris-secondary"].table[column.text] = column.text
               }
             } else {
-              // if(!Object.keys(sections[name].elements).includes("extension:secularEducationHistory")) {
-              //   return resolve2()
-              // }
               await processFields(sections[name].elements, fhir, sections[name].order)
             }
             return resolve2()

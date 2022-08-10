@@ -81,7 +81,7 @@
 <script>
 export default {
   name: "ihris-practitioner-intro",
-  props: ["slotProps", "isQuestionnaire", "position"],
+  props: ["slotProps", "isQuestionnaire"],
   data: function () {
     return {
       intro: {
