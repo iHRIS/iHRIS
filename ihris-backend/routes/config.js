@@ -659,7 +659,7 @@ router.get('/page/:page/:type?', function (req, res) {
                     return output
                 }
                 vueOutput +=
-                    '<div><ihris-practitioner-intro :position="position" :slotProps="slotProps" :isQuestionnaire="false">\n' +
+                    '<div><ihris-practitioner-intro :slotProps="slotProps" :isQuestionnaire="false">\n' +
                     "</ihris-practitioner-intro></div>\n" +
                     '<div class="ihris-intro-float"></div>\n';
 
