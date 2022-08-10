@@ -104,7 +104,7 @@ async function startUp() {
   }
 
   const isLoggedIn = (req, res, next) => {
-    let unauthenticatedRoutes = ["/", "favicon.ico", "/config/app", "/auth", "/fhir/DocumentReference/page-home/$html", "/config/site"]
+    let unauthenticatedRoutes = ["/", "favicon.ico", "/flag_en.svg", "/config/app", "/auth", "/fhir/DocumentReference/page-home/$html", "/config/site"]
     if(unauthenticatedRoutes.includes(req.path) || req.path.startsWith("/css") || req.path.startsWith("/js")){
       return next()
     }
