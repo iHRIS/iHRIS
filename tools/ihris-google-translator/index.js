@@ -1,63 +1,114 @@
 const fs = require("fs")
 const async = require("async")
-const configParser = require('../../ihris-backend/site/configParser');
+const axios = require("axios")
+const configParser = require('../../ihris-backend/test_site/configParser');
 
-let siteConfig = configParser(`${__dirname}/../../ihris-backend/site/config/baseConfig.json`)
+let siteConfig = configParser(`${__dirname}/../../ihris-backend/test_site/config/baseConfig.json`)
 global.ihrissitepath = siteConfig.app.site.path
 global.ihriscorepath = siteConfig.app.core.path
-const builtResources = ["../../ig/fsh-generated/resources", "../../ihris-backend/site/ig/fsh-generated/resources"]
+let resourcesData = []
 const nconf = require('../../ihris-backend/modules/config')
 const fhirAxios = nconf.fhirAxios
 const fhirDefinition = require('../../ihris-backend/modules/fhir/fhirDefinition');
 let keys = require("./en_startup.json", );
 
-async.eachSeries(builtResources, (builtResource, nxtRes) => {
-  getFiles(builtResource).then(async(resources) => {
+let nxturl = true
+getResources().then(() => {
+  const promises = []
+  for(let resource of resourcesData) {
+    resource = resource.resource
+    promises.push(new Promise(async(resolve, reject) => {
+      if(resource.resourceType === "Basic" && resource.meta && resource.meta.profile && resource.meta.profile.includes("http://ihris.org/fhir/StructureDefinition/ihris-page")) {
+        extractFromPage(resource.id, ["resource", "search"]).then(() => {
+          resolve()
+        }).catch(() => {
+          resolve()
+        })
+      } else if(resource.resourceType === "Questionnaire") {
+        extractTextFromQuestionnaire(resource)
+        resolve()
+      } else if(resource.id === "ihris-config") {
+        await nconf.loadRemote()
+        let site = JSON.parse(JSON.stringify(nconf.get("site") || {}))
+        if(site.title) {
+          keys.App.title = site.title
+        }
+        if(site.site) {
+          keys.App.site = site.site
+        }
+        if(site.nav && site.nav.menu) {
+          extractMenus(site.nav.menu)
+        }
+        resolve()
+      } else if(resource.resourceType === "CodeSystem") {
+        // extractTextFromCodeSystem(resource)
+        resolve()
+      } else {
+        resolve()
+      }
+    }))
+  }
+  Promise.all(promises).then(async () => {
+    try {
+      await fs.writeFileSync("./en.json", JSON.stringify(keys, 0, 2))
+    } catch (error) {
+      console.log(error);
+    }
+    console.log("Done, Output is inside en.json file");
+  })
+}).catch((err) => {
+  console.log(err);
+})
+
+function getResources() {
+  return new Promise((resolve) => {
+    let resources = ["Basic", "Questionnaire"]
     const promises = []
     for(let resource of resources) {
-      promises.push(new Promise(async(resolve, reject) => {
-        if(resource.resourceType === "Basic" && resource.meta && resource.meta.profile && resource.meta.profile.includes("http://ihris.org/fhir/StructureDefinition/ihris-page")) {
-          extractFromPage(resource.id, ["resource", "search"]).then(() => {
-            resolve()
-          }).catch(() => {
-            resolve()
-          })
-        } else if(resource.resourceType === "Questionnaire") {
-          extractTextFromQuestionnaire(resource)
-          resolve()
-        } else if(resource.id === "ihris-config") {
-          await nconf.loadRemote()
-          let site = JSON.parse(JSON.stringify(nconf.get("site") || {}))
-          if(site.title) {
-            keys.App.title = site.title
-          }
-          if(site.site) {
-            keys.App.site = site.site
-          }
-          if(site.nav && site.nav.menu) {
-            extractMenus(site.nav.menu)
-          }
-          resolve()
-        } else if(resource.resourceType === "CodeSystem") {
-          // extractTextFromCodeSystem(resource)
-          resolve()
-        } else {
-          resolve()
-        }
+      promises.push(new Promise((resolve1) => {
+        let params = {}
+        async.whilst(
+          (callback) => {
+            return callback(null, nxturl !== false)
+          },
+          (callback) => {
+            if(Object.keys(params).length > 0) {
+              resource = ""
+            }
+            search(resource, params).then((response) => {
+              const next = response.link && response.link.find(link => link.relation === 'next');
+              if(response.entry) {
+                resourcesData = resourcesData.concat(response.entry)
+              }
+              params = {};
+              nxturl = false
+              if (next) {
+                let paramsList = next.url.split("?")[1]
+                paramsList = paramsList.split("&")
+                for(let param of paramsList) {
+                  params[param.split("=")[0]] = param.split("=")[1]
+                }
+                nxturl = true
+              } else {
+                nxturl = false
+              }
+              return callback(null, params);
+            }).catch((err) => {
+              console.log(err);
+              return callback(err)
+            })
+          },
+          (err) => {
+            return resolve1()
+          },
+        );
       }))
     }
-    Promise.all(promises).then(async () => {
-      nxtRes()
+    Promise.all(promises).then(() => {
+      return resolve()
     })
   })
-}, async() => {
-  try {
-    await fs.writeFileSync("./en.json", JSON.stringify(keys, 0, 2))
-  } catch (error) {
-    console.log(error);
-  }
-  console.log("Done, Output is inside en.json file");
-})
+}
 
 function getFiles(builtResource) {
   return new Promise(async(resolve, reject) => {
@@ -555,4 +606,22 @@ const createTemplate = async (resource, structure, pageSections) => {
       return resolve()
     })
   })
+}
+
+function search( resource, params ) {
+  return new Promise( (resolve, reject) => {
+    let url = new URL(fhirAxios.baseUrl.href)
+    if ( resource ) {
+      url.pathname += resource
+    }
+    let auth = fhirAxios.__getAuth()
+
+    //axios.get( url.href, { auth, params } ).then( (response) => {
+    axios.get( url.href, { auth, params, headers: { 'Cache-Control': 'no-cache'} } ).then( (response) => {
+      resolve( response.data )
+    } ).catch( (err) => {
+      reject( err )
+    } )
+
+  } )
 }
