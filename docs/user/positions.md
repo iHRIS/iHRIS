@@ -1,243 +1,95 @@
 # POSITIONS
-This was done on a clean Ubuntu 20.4 server.
 
-## Node JS LTS
-```bash
-curl -sL https://deb.nodesource.com/setup_12.x | sudo -E bash -
-sudo apt-get install -y nodejs
-sudo npm install -g npm
-```
-## Redis
-**This must be secured or people will be able to do bad things.**
-```bash
-sudo apt install redis
-```
-## Tomcat
-```bash
-sudo apt install tomcat9
-```
-## PostgreSQL
-**This must be secured or people will be able to do bad things.**
-```bash
-sudo apt install postgresql
-```
-## HAPI FHIR
-**This must be secured or people will be able to do bad things.**
-### Create Database and User
-```bash
-sudo -u postgres psql
-create database hapi;
-create user hapi with encrypted password 'PASS';
-grant all privileges on database hapi to hapi;
-\q
-```
-### Install Maven
-```bash
-sudo apt install maven
-```
-### Compile HAPI
-```bash
-git clone https://github.com/hapifhir/hapi-fhir-jpaserver-starter.git
-cd hapi-fhir-jpaserver-starter
-```
-Edit ```pom.xml``` and change the following line from hapi-fhir-jpaserver or ROOT (starting with version 5.1.0):
-```xml
-    <finalName>hapi</finalName>
-```
+## Add Positions
 
-#### For versions starting with 5.2.0 to the latest
-Things were streamlined a bit so the values to edit are simpler.
-Edit ```src/main/resources/application.yaml``` and update the following values:
+## Search Positions
 
-```
-spring:
-  datasource:
-    url: 'jdbc:postgresql://localhost:5432/hapi'
-    username: hapi
-    password: PASS
-    driveClassName: org.postgresql.Driver
-  jpa:
-    properties:
-        hibernate.search.enabled: true
+This module enables a user to set up and manage positions in the database. It is the primary place to add new positions, search positions in the system, and make changes to existing positions.
+5.1	Add Position 
+On this page you can create a new Position record by adding information to the associated fields. To create a new position:
+1.	Click on "Add Position" on the left side navigation bar.
 
-hapi:
-  fhir:
-    fhir_version: R4
-    enable_index_missing_fields: true
-    tester:
-       home:
-        name: iHRIS
-        server_address: http://localhost:8080/hapi/fhir/
-        refuse_to_fetch_third_party_urls: false
-        fhir_version: R4
-```
+a. You can also add a new position from the Search Position page. At the top of the table displaying positions, click on the button in the right corner that says "Add Position".
+ 
+2.	Add information to the new Position. 
+a.	Here are a few tips:
+•	Fields that are required are indicated with a red asterisk.
+•	Unless noted you should type the information directly into the space provided for each field.
+•	Dropdown lists are available for some fields and are noted in the list below.
+•	With dropdown lists you can start typing the word that you wish to enter and you will be taken to it in the list, rather than scrolling through the whole list.
+•	For other fields you will type the information directly into the space provided, or you will select the date on a calendar. See the steps for using the calendar selector in the Navigation section.
+ 
+Note: you can create a position without associating it with a person.
+b.	The following information can be entered on the Position page:
+●	Job title (required, select from dropdown list)
+●	Health Worker (start typing name to select from dropdown list)
+●	Facility/Place of work (required, start typing name to select from dropdown list)
+●	Department/Case Team (start typing name to select from dropdown list)
+●	Hired date (required, select from calendar)
+○	This is the date the employee signs the employment contract
+●	End date (select from calendar)
+●	Currency (Salary) (select from dropdown list)
+●	Salary
+●	Employment status (select from dropdown list)
+●	Position Status (required, select from dropdown list)
+●	Job type (required, select from dropdown list)
+●	First employment date (select from calendar)
+○	This is the employee's first day of work (used to calculate pension)
+●	Job information remark
+●	Reason for Change/Departure (select from dropdown list)
+●	Reason for Change (select from dropdown list)
+●	Salary scale (select from dropdown list)
+●	Status (click to select between true or false)
+3.	When you are done making changes, click the "Save" button at the top of the right sidebar. If you have not entered all of the required fields indicated with a red asterisk, you will not be able to save the record. Review the form by scrolling to determine which required fields still need to be completed. You can leave your entry without saving it by clicking the "Cancel" button in the top of the right corner.
+ 
+5.2	Search Positions 
+This feature allows you to search existing Positions to access the records for viewing or editing.
+1.	From the left side navigation bar, click “Search Position” to search for an existing position.
+•	On this page you can search for positions by job, facility, department/case team, employment status or position status. To search by job, employee status, or position status select from the corresponding drop-down list. To search by facility or department/case team by typing part or all of the facility or department/case team into the corresponding fields . 
+•	When searching by these filters, you must hit the "Enter" or "Return" key on your keyboard to start the search. You can search by multiple fields or multiple entries within the same field (i.e. by one job and one facility, or by two different jobs).
+ 
+•	Records matching your search will be pulled from the database.
+To search by Job:
+a.	Scroll through the dropdown list to select the job to search by. The table will update to show all employees in that position and job. You can also select more than one job.
+ 
+b.	Click on a row to view a position record, which may be associated with a specific employee.
+By Facility:
+a.	Select a facility from the dropdown list. The table will update to show all positions and employees in that facility.
+b.	Click on a row to view a position record, which may be associated with a specific employee.
+By Department/Case Team:
+a.	Scroll through the dropdown list to select the Department/Case Team to search by. The table will update to show all positions within that Department/Case Team and the associated employees. You can also select more than one department.
+By Employee Status:
+a.	Select the employee status to use as a filter. The table will update to show all positions with that status and the associated employees. You can also select more than one employee status.
+b.	Click on a row to view a position record, which may be associated with a specific employee.
+By Position Status:
+a.	Select the position status to use as a filter. The table will update to show all positions with that status and the associated employees. You can also select more than one position status.
+b.	Click on a row to view a position record, which may be associated with a specific employee.
 
-#### For versions starting with 5.1.0 
-Edit ```src/main/resources/application.yaml``` and update the following values:
-
-```
-spring:
-  datasource:
-    url: 'jdbc:postgresql://localhost:5432/hapi'
-    username: hapi
-    password: PASS
-    driveClassName: org.postgresql.Driver
-  jpa:
-    properties:
-      hibernate.dialect: org.hibernate.dialect.PostgreSQL95Dialect
-      hibernate.search.default.indexBase=/var/lib/tomcat9/target/lucenefiles
-hapi:
-  fhir:
-    tester:
-      id: home
-      name: iHRIS
-      server_address: http://localhost:8080/hapi/fhir/
-      refuse_to_fetch_third_party_urls: false
-      fhir_version: R4
-```
-
-#### Create war file
-
-```bash
-sudo apt install default-jdk
-mvn clean install -DskipTests
-sudo mkdir -p /var/lib/tomcat9/target/lucenefiles
-sudo chown -R tomcat:tomcat /var/lib/tomcat9/target
-sudo cp target/hapi.war /var/lib/tomcat9/webapps
-```
-
-#### Set paths in startup file
-Edit ```/etc/systemd/system/multi-user.target.wants/tomcat9.service```
-
-In the security section add the following directory with a ReadWritePath
-
-```
-ReadWritePaths=/var/lib/tomcat9/target/
-```
-#### Access Hapi-fhir server
-Test the [hapi-fhir server](http://localhost:8080/hapi) to make sure it's running
-```
-http://localhost:8080/hapi
-```
-
-## SUSHI
-```bash
-sudo npm install -g fsh-sushi
-```
-
-You can make customizations for your own configurations in the ig/ 
-directory.  To get the default data, you can compile the FSH files with:
-```bash
-cd ig/
-sushi -s .
-```
-
-Any time you make changes to the FSH files you should rebuild them 
-this way.  The FSH files are in ig/input/fsh/.
-
-## Loading Resources
-
-There is a script in the tools/ directory to load some sample configuration
-files as well as the FHIR resources created by SUSHI.  The first time
-you will need to run npm install:
-
-```bash
-cd tools/
-npm install
-```
-
-**All the following commands should be run from the tools/ directory, 
-replacing the server with the correct location for your installation.**
-
-After that, you can use the load.js script to load FHIR resources into
-your FHIR server with:
-```bash
-node load.js --server http://localhost:8080/hapi/fhir PATH/TO/FHIR.json
-```
-
-After building the FSH files, you can import them with the following:
-```bash
-node load.js --server http://localhost:8080/hapi/fhir ../ig/fsh-generated/resources/*.json
-```
-
-Then to load the starter resources run the command bellow
-```bash
-node load.js --server http://localhost:8080/hapi/fhir ../resources/*.json
-```
-
-## ElasticSearch
-
-Ubuntu install instructions:
-https://www.elastic.co/guide/en/elasticsearch/reference/current/deb.html
-
-Make sure to install ElasticSearch and Kibana:
-```bash
-sudo apt install elasticsearch kibana
-```
-
-After installing, edit /etc/kibana/kibana.yml and set server.basePath
-```yaml
-server.basePath: "/kibana"
-```
-
-# Back end server
-
-## Before starting
-
-You'll need to run npm install when additional node modules are installed or updated
-and also before starting the first time.
-
-```bash
-cd ihris-backend/
-npm install
-```
-
-## Development mode
-Run the following to start the server in development mode.
-```bash
-cd ihris-backend/
-npm run dev
-```
-## Production mode
-Run the following to start the server in production mode.
-```bash
-cd ihris-backend/
-npm run start
-```
-TODO: Convert this to a systemd script for startup and shutdown
-
-# Front end Development
-
-Built with vue cli 4.4.1
-```bash
-sudo npm install -g @vue/cli
-```
-
-## To run in development mode
-
-You may need to edit the proxy settings in ihris-frontend/vue.config.js
-depending on where you started the backend.
-
-
-```bash
-cd ihris-frontend/
-npm run serve
-```
-
-The output will give you a URL to access the frontend.
-
-## Production
-
-The frontend will be built and saved to the backend server public 
-files (ihris-backend/public/) to be served or you can run them from any 
-static web server.
-
-```bash
-cd ihris-frontend/
-npm run build
-```
-
-The files in ihris-frontend/dist/ can be served statically from your
-web server.  Releases will be compiled to the ihris-backend/public/
-directory so you will only need to do this if you want to make changes
-to the frontend software.
+5.3	Edit Position 
+This feature allows you to add or update information in an existing position record.
+1.	From the Search Positions page, locate the position that you wish to modify and click on it to open the record. At the top of the right sidebar click on the "Edit" button.
+ 
+2.	You can then add or modify the information in the record by selecting information from dropdown lists, selecting dates from calendars, and/or typing information directly into the record in any section and field. Fields that are required are indicated with a red asterisk. (See instructions for using the calendar selector in the Navigation section)
+Note: the record only contains information related to the position so clicking “Edit” will not display all of the employee's demographic information, contact information, education, etc. If you wish to view the full record of the associated employee, click on the blue "View Health Worker" button on the right-side navigation bar.
+ 
+The following information can be edited on the Edit Position page: 
+●	Job title (required, select from dropdown list)
+●	Health Worker (start typing name to select from dropdown list)
+●	Facility/Place of work (start typing name to select from dropdown list)
+●	Department/Case Team (start typing name to select from dropdown list)
+●	Hired date (required, select from calendar)
+●	This is the date the employee signs the employment contract
+●	End date (select from calendar)
+●	Currency (Salary) (select from dropdown list)
+●	Salary
+●	Employment status (select from dropdown list)
+●	Position Status (required, select from dropdown list)
+●	Job type (required, select from dropdown list)
+●	First employment date (select from calendar)
+	○	This is the employee's first day of work (used to calculate pension)
+●	Job information remark
+●	Reason for Change/Departure (select from dropdown list)
+●	Reason for Change (select from dropdown list)
+●	Salary scale (select from dropdown list)
+●	Status (click to select between true or false)
+3.	When you are done making changes, click the "Save" button at the top of the right sidebar. If you have not entered all of the required fields indicated with a red asterisk, you will not be able to save the record. Review the form by scrolling to determine which required fields still need to be completed. You can leave your changes without saving them by clicking the "Cancel" button in the top of the right sidebar.
