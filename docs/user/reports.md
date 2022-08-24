@@ -1,243 +1,176 @@
 # REPORTS
-This was done on a clean Ubuntu 20.4 server.
 
-## Node JS LTS
-```bash
-curl -sL https://deb.nodesource.com/setup_12.x | sudo -E bash -
-sudo apt-get install -y nodejs
-sudo npm install -g npm
-```
-## Redis
-**This must be secured or people will be able to do bad things.**
-```bash
-sudo apt install redis
-```
-## Tomcat
-```bash
-sudo apt install tomcat9
-```
-## PostgreSQL
-**This must be secured or people will be able to do bad things.**
-```bash
-sudo apt install postgresql
-```
-## HAPI FHIR
-**This must be secured or people will be able to do bad things.**
-### Create Database and User
-```bash
-sudo -u postgres psql
-create database hapi;
-create user hapi with encrypted password 'PASS';
-grant all privileges on database hapi to hapi;
-\q
-```
-### Install Maven
-```bash
-sudo apt install maven
-```
-### Compile HAPI
-```bash
-git clone https://github.com/hapifhir/hapi-fhir-jpaserver-starter.git
-cd hapi-fhir-jpaserver-starter
-```
-Edit ```pom.xml``` and change the following line from hapi-fhir-jpaserver or ROOT (starting with version 5.1.0):
-```xml
-    <finalName>hapi</finalName>
-```
+The report in iHRIS provides summaries of the HR data in the system related to different themes and in various display formats. In iHRIS, users can analyze and display data in both tabular and graphical. The graphical reports are mainly displayed via the iHRIS dashboard. The tabular reports empower users to access data in a summary format by choosing specific data sets, display data in specific arrangement, relating different datasets, or even generating statistics from data. The reports can be viewed in the system or exported for external use in different formats include pdf, csv, etc. Custom reports are accessed by clicking on “Reports” in the left hand navigation bar. 
 
-#### For versions starting with 5.2.0 to the latest
-Things were streamlined a bit so the values to edit are simpler.
-Edit ```src/main/resources/application.yaml``` and update the following values:
+8.1	Employee Contract Report 
+The Employee Contract Report allows you to view and search information related to employee contracts, using different filters. The Employee Contract Report shows Employee ID, First Name, Father’s Name, Grandfather’s Name, Gender, Nationality, Ethnicity, Job Position, Department/Directorate, Start Date, End Date, Employment Status, Job Type, and Facility.
+ 
+1.	By typing search terms or selecting different filter options from the dropdown lists, records that match your search will be pulled from the database and displayed. You can tailor your search using the following search filters:
+•	Employee ID
+•	First Name
+•	Father’s Name
+•	Grandfather’s Name
+•	Gender (select from dropdown list)
+•	Job Position (select from dropdown list)
+•	Department/Directorate (select from dropdown list)
+•	Start Date
+•	End Date
+•	Employment Status (select from dropdown list)
+•	Job Type (select from dropdown list)
+•	Facility (select from dropdown list)
 
-```
-spring:
-  datasource:
-    url: 'jdbc:postgresql://localhost:5432/hapi'
-    username: hapi
-    password: PASS
-    driveClassName: org.postgresql.Driver
-  jpa:
-    properties:
-        hibernate.search.enabled: true
+2.	When filtering from a dropdown list, you can select more than one option by clicking the box next to that option, and you can select to include or exclude multiple options (but it is not possible to include one option and exclude another).
+ 
+3.	Once you have selected the filter options, you can Export the results into an Excel spreadsheet  by clicking the blue “Export” button.
+ 
+8.2	Performance Report
 
-hapi:
-  fhir:
-    fhir_version: R4
-    enable_index_missing_fields: true
-    tester:
-       home:
-        name: iHRIS
-        server_address: http://localhost:8080/hapi/fhir/
-        refuse_to_fetch_third_party_urls: false
-        fhir_version: R4
-```
+The Performance Report allows you to view and search information related to employee performance appraisals, using different filters. The Performance Report shows Employee ID, First Name, Father’s Name, Grandfather’s Name, Gender, Job Title, Department/Directorate, Start Date, Employment Status, Facility, Performance Type, Evaluator’s Name, Score, Evaluation Start Date, Evaluation End Date.
 
-#### For versions starting with 5.1.0 
-Edit ```src/main/resources/application.yaml``` and update the following values:
+ 
 
-```
-spring:
-  datasource:
-    url: 'jdbc:postgresql://localhost:5432/hapi'
-    username: hapi
-    password: PASS
-    driveClassName: org.postgresql.Driver
-  jpa:
-    properties:
-      hibernate.dialect: org.hibernate.dialect.PostgreSQL95Dialect
-      hibernate.search.default.indexBase=/var/lib/tomcat9/target/lucenefiles
-hapi:
-  fhir:
-    tester:
-      id: home
-      name: iHRIS
-      server_address: http://localhost:8080/hapi/fhir/
-      refuse_to_fetch_third_party_urls: false
-      fhir_version: R4
-```
+1.	By typing search terms or selecting different filter options from the dropdown lists, records that match your search will be pulled from the database and displayed. You can tailor your search using the following search filters:
+●	Employee ID
+●	First Name
+●	Father’s Name
+●	Grandfather’s Name
+●	Gender (select from dropdown list)
+●	Job Title (select from dropdown list)
+●	Department/Directorate (select from dropdown list)
+●	Employment Status (select from dropdown list)
+●	Facility (select from dropdown list)
+●	Performance Type (select from dropdown list)
+●	Evaluator’s Name
+●	Score (select from dropdown list)
+●	Evaluation Start Date (select from calendar)
+●	Evaluation End Date (select from calendar)
 
-#### Create war file
+2.	When filtering from a dropdown list, you can select more than one option by clicking the box next to that option, and you can select to include or exclude multiple options (but it is not possible to include one option and exclude another).
 
-```bash
-sudo apt install default-jdk
-mvn clean install -DskipTests
-sudo mkdir -p /var/lib/tomcat9/target/lucenefiles
-sudo chown -R tomcat:tomcat /var/lib/tomcat9/target
-sudo cp target/hapi.war /var/lib/tomcat9/webapps
-```
+ 
 
-#### Set paths in startup file
-Edit ```/etc/systemd/system/multi-user.target.wants/tomcat9.service```
+3.	Once you have selected the filter options, you can Export the results into an Excel spreadsheet  by clicking the blue “Export” button.
 
-In the security section add the following directory with a ReadWritePath
+ 
 
-```
-ReadWritePaths=/var/lib/tomcat9/target/
-```
-#### Access Hapi-fhir server
-Test the [hapi-fhir server](http://localhost:8080/hapi) to make sure it's running
-```
-http://localhost:8080/hapi
-```
+8.3	Retiring Employee Report 
 
-## SUSHI
-```bash
-sudo npm install -g fsh-sushi
-```
+The Retiring Employee report allows you to view and search retirement information about staff, using different filters. The Retiring Employee report shows Employee ID, First Name, Father’s Name, Grandfather’s Name, Gender, Job Position, Department/Directorate, Start Date, End Date, Employment Status, Reason for Change, Facility, Education Level Category, Education Level Sub Category, Professional Category Type, Profession Category
+ 
 
-You can make customizations for your own configurations in the ig/ 
-directory.  To get the default data, you can compile the FSH files with:
-```bash
-cd ig/
-sushi -s .
-```
+1.	By typing search terms or selecting different filter options from the dropdown lists, records that match your search will be pulled from the database and displayed. You can tailor your search using the following search filters:
+●	Employee ID
+●	First Name
+●	Father’s Name
+●	Grandfather’s Name
+●	Gender (select from dropdown list)
+●	Job Position (select from dropdown list)
+●	Department/Directorate (select from dropdown list)
+●	Start Date (select from calendar)
+●	End Date (select from calendar)
+●	Employment Status (select from dropdown list)
+●	Reason for Change (select from dropdown list)
+●	Facility (select from dropdown list)
+●	Education Level Category (select from dropdown list)
+●	Education Level Sub Category (select from dropdown list)
+●	Professional Category Type (select from dropdown list)
+●	Profession Category
 
-Any time you make changes to the FSH files you should rebuild them 
-this way.  The FSH files are in ig/input/fsh/.
+2.	When filtering from a dropdown list, you can select more than one option by clicking the box next to that option, and you can select to include or exclude multiple options (but it is not possible to include one option and exclude another).
+ 
 
-## Loading Resources
+3.	Once you have selected the filter options, you can Export the results into an Excel spreadsheet  by clicking the blue “Export” button.
+ 
 
-There is a script in the tools/ directory to load some sample configuration
-files as well as the FHIR resources created by SUSHI.  The first time
-you will need to run npm install:
+8.4	Separated Employee Report
 
-```bash
-cd tools/
-npm install
-```
+The Separated Employee report allows you to view and search information about staff who have left, using different filters. The Separated Employee report shows Employee ID, First Name, Father’s Name, Grandfather’s Name, Gender, Job Position, Department/Directorate, Start Date, Separation Date, Final Salary, Employment Status, Reason for Change, Facility
 
-**All the following commands should be run from the tools/ directory, 
-replacing the server with the correct location for your installation.**
+ 
 
-After that, you can use the load.js script to load FHIR resources into
-your FHIR server with:
-```bash
-node load.js --server http://localhost:8080/hapi/fhir PATH/TO/FHIR.json
-```
+1.	By typing search terms or selecting different filter options for the dropdown lists, records that match your search will be pulled from the database and displayed. You can tailor your search using the following search filters:
+●	Employee ID
+●	First Name
+●	Father’s Name
+●	Grandfather’s Name
+●	Gender (select from dropdown list)
+●	Job Position (select from dropdown list)
+●	Department/Directorate (select from dropdown list)
+●	Start Date (select from calendar)
+●	Separation Date (select from calendar)
+●	Final Salary
+●	Employment Status (select from dropdown list) 
+●		Reason for Change (select from dropdown list)
+●	Facility (select from dropdown list)
 
-After building the FSH files, you can import them with the following:
-```bash
-node load.js --server http://localhost:8080/hapi/fhir ../ig/fsh-generated/resources/*.json
-```
+2.	When filtering from a dropdown list, you can select more than one option by clicking the box next to that option, and you can select to include or exclude multiple options (but it is not possible to include one option and exclude another).
 
-Then to load the starter resources run the command bellow
-```bash
-node load.js --server http://localhost:8080/hapi/fhir ../resources/*.json
-```
+ 
 
-## ElasticSearch
+3.	Once you have selected the filter options, you can Export the results into an Excel spreadsheet  by clicking the blue “Export” button.
+ 
 
-Ubuntu install instructions:
-https://www.elastic.co/guide/en/elasticsearch/reference/current/deb.html
+8.5	Staff Report
 
-Make sure to install ElasticSearch and Kibana:
-```bash
-sudo apt install elasticsearch kibana
-```
+The Staff Report allows you to view and search information about staff, using different filters. The Staff Report shows Employee ID, First Name, Father’s Name, Grandfather’s Name, Gender, Birth Date, Phone Number, Nationality, Ethnicity, Job Title, Department/Directorate, First Employment Date, Start Date, End Date, Employment Status, Case Team, Job Type, Facility/Place of Work
+ 
 
-After installing, edit /etc/kibana/kibana.yml and set server.basePath
-```yaml
-server.basePath: "/kibana"
-```
+1.	By typing search terms or selecting different filter options for the dropdown lists, records that match your search will be pulled from the database and displayed. You can tailor your search using the following search filters:
+●	Employee ID 
+●	First Name 
+●	Father’s Name 
+●	Grand Father’s Name 
+●	Gender (select from dropdown list)
+●	Birth Date (select from calendar)
+●	Nationality (select from dropdown list)
+●	Ethnicity (select from dropdown list)
+●	Job Title (select from dropdown list)
+●	Directorate/Department (select from dropdown list)
+●	Employment Status (select from dropdown list)
+●	Case Team (select from dropdown list)
+●	Job Type (select from dropdown list)
+●	Facility/Place of Work (select from dropdown list)
 
-# Back end server
+2.	When filtering from a dropdown list, you can select more than one option by clicking the box next to that option, and you can select to include or exclude multiple options (but it is not possible to include one option and exclude another).
+ 
 
-## Before starting
-
-You'll need to run npm install when additional node modules are installed or updated
-and also before starting the first time.
-
-```bash
-cd ihris-backend/
-npm install
-```
-
-## Development mode
-Run the following to start the server in development mode.
-```bash
-cd ihris-backend/
-npm run dev
-```
-## Production mode
-Run the following to start the server in production mode.
-```bash
-cd ihris-backend/
-npm run start
-```
-TODO: Convert this to a systemd script for startup and shutdown
-
-# Front end Development
-
-Built with vue cli 4.4.1
-```bash
-sudo npm install -g @vue/cli
-```
-
-## To run in development mode
-
-You may need to edit the proxy settings in ihris-frontend/vue.config.js
-depending on where you started the backend.
+3.	Once you have selected the filter options, you can Export the results into an Excel spreadsheet  by clicking the blue “Export” button.
 
 
-```bash
-cd ihris-frontend/
-npm run serve
-```
+8.6	Report Navigation and Analysis
 
-The output will give you a URL to access the frontend.
+Here are a few tips that will help you understand and analyze all reports in the system:
 
-## Production
+8.6.1	Records displayed
 
-The frontend will be built and saved to the backend server public 
-files (ihris-backend/public/) to be served or you can run them from any 
-static web server.
+At the bottom of a report, you are able to see the number of records displayed on the page and the total records (those that match search/filter criteria or all records if no search/filter criteria have been applied).
 
-```bash
-cd ihris-frontend/
-npm run build
-```
+ 
 
-The files in ihris-frontend/dist/ can be served statically from your
-web server.  Releases will be compiled to the ihris-backend/public/
-directory so you will only need to do this if you want to make changes
-to the frontend software.
+In the screenshot below of a report, you can see that 10 records are being displayed. The total records in the report are 68. In this example no search or filter criteria were applied but when you have searched or applied a filter, the total records will be the count of all records that match the search/filter criteria.
+
+ 
+
+Clicking on the < or > in the bottom right-hand corner of a report, you are able to navigate to next page of records.
+
+ 
+
+You can change the number of records that are displayed on each page by clicking the downward arrow to the right of the number of rows per page. 
+
+ 
+
+
+Clicking on the arrow will open a list of the options for the number of rows (5, 10, 20, 50) per page to display.
+
+  
+
+
+8.6.2	Sorting Records
+
+Hovering over any column name in the report displays an arrow (see screenshot below) next to or below the column title . By clicking on it, you are able to display the table contents in ascending order based on this column; clicking on it again you get the table contents descending order based on this column.; and clicking on it a third time will return the table contents to the default order.
+
+ 
+
+8.6.3	Exporting data
+
+By clicking on the export button, you are able to export all the content of a report according to the filters applied.
