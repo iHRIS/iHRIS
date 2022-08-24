@@ -45,9 +45,9 @@ nav:
   - User:
       - user/introduction.md
       - user/people.md
+      - user/mhero.md
       - user/positions.md
       - user/locations.md
-      - user/admin.md
       - user/reports.md
       - user/system_users.md
 

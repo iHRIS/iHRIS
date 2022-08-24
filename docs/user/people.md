@@ -8,8 +8,6 @@ Note: before adding any new health workers into HRIS, first search to establish 
 
 All records in iHRIS have to be populated before any reports can be generated. Health workers details are entered via “Add Person” under “PEOPLE” module.
 
- 
-
 To create a new employee record, click “Add People” on the left side navigation bar. You will then add information to the fields of the record which will be explained in the next few sections of the manual.
 You can also add a new employee record from the Search People page. At the top of the table displaying employee records, click on the button in the right corner that says "Add Health Worker Information".
  
@@ -26,14 +24,8 @@ Here are some tips to help users through the process of adding information to re
 5.	With most of the dropdown lists you can start typing the word that you wish to enter and you will be taken to it in the list, rather than having to scroll through the whole list.
 6.	There may be date fields that require you to select the date on a calendar (see 3.5.3 for steps to select a date using the calendar tool).
 7.	There may also be an option to include more than one entry for a single record component. For example, an employee may speak multiple languages or may have more than one dependent. If you see a dark gray bar at the top of a field with a plus sign at the right corner of the bar, this denotes a field that can have multiple entries.
-
  
-
-To add another entry, click on the plus sign and a second field (or set of fields) will appear. You can continue adding entries by clicking several times on the plus sign, or if you have added too many entries you can delete the last entry you added by clicking the minus sign that appears next to the plus sign.
-
- 
-
-8.	When selecting a location you will work through a series of dropdown menus. 
+8. When selecting a location you will work through a series of dropdown menus. 
 •	Click on the Region to select it, or, click on the arrow beside the Region to see the corresponding Zones, then
 •	Click on the Zone to select it, or click on the small grey arrow beside the Zone to see the corresponding Woredas, then 
 •	Select the Woreda (if available)
@@ -41,19 +33,20 @@ To add another entry, click on the plus sign and a second field (or set of field
 
 ###	Person Information
 
-1.	Adding information to the person record
+#### Adding information to the person record
 The following information can be entered on a health worker’s person record:
 
-Name
-•	Prefix
-•	First name (required)
-•	First name alternative language
-•	Father’s name (required)
-•	Father’s name alternative language
-•	Grandfather’s last name (required)
-•	Grandfather’s last name alternative language
-•	Mother’s Full name (required)
-•	Mother's name alternative language
+**Name** 
+
+* • Prefix
+* • First name (required)
+* • First name alternative language
+* • Father’s name (required)
+* • Father’s name alternative language
+* • Grandfather’s last name (required)
+* • Grandfather’s last name alternative language
+* • Mother’s Full name (required)
+* • Mother's name alternative language
 
 Demographic Information
 •	Date of birth (required, select date from calendar)
