@@ -15,11 +15,15 @@ RUN npm install
 
 WORKDIR /src/ihris-backend
 RUN npm install
+# necessary
+RUN mv ihris-backend-site site
 
 # RUN cp /src/server/config/config_docker_template.json /src/server/config/config_docker.json
 # RUN cp /src/server/config/config_cicd_template.json /src/server/config/config_cicd.json
 
-RUN cp /src/ihris-backend/config/baseConfig.json.example /src/ihris-backend/config/baseConfig.json
+WORKDIR /src/ihris-backend/site
+RUN npm install
+RUN cp config/baseConfig.json.example config/baseConfig.json
 
 # ARG NODE_ENV=docker
 ARG NODE_ENV=production
@@ -42,6 +46,8 @@ ENV IHRIS_ELASTICSEARCH__BASE=$IHRIS_ELASTICSEARCH__BASE
 
 ARG IHRIS_KIBANA__BASE=http://localhost:5601
 ENV IHRIS_KIBANA__BASE=$IHRIS_KIBANA__BASE
+
+WORKDIR /src/ihris-backend/site
 
 EXPOSE 3000
 CMD ["npm", "run", "start"]
