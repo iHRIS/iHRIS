@@ -1,68 +1,72 @@
 const fs = require("fs")
 const async = require("async")
 const axios = require("axios")
-const configParser = require('../../ihris-backend/test_site/configParser');
-
-let siteConfig = configParser(`${__dirname}/../../ihris-backend/test_site/config/baseConfig.json`)
-global.ihrissitepath = siteConfig.app.site.path
-global.ihriscorepath = siteConfig.app.core.path
+const ihrissmartrequire = require("ihrissmartrequire")
 let resourcesData = []
-const nconf = require('../../ihris-backend/modules/config')
+const nconf = ihrissmartrequire('modules/config')
 const fhirAxios = nconf.fhirAxios
-const fhirDefinition = require('../../ihris-backend/modules/fhir/fhirDefinition');
-let keys = require("./en_startup.json", );
+const fhirDefinition = ihrissmartrequire('modules/fhir/fhirDefinition');
+let keys = ihrissmartrequire("locales/en_startup.json", );
 
 let nxturl = true
-getResources().then(() => {
-  const promises = []
-  for(let resource of resourcesData) {
-    resource = resource.resource
-    promises.push(new Promise(async(resolve, reject) => {
-      if(resource.resourceType === "Basic" && resource.meta && resource.meta.profile && resource.meta.profile.includes("http://ihris.org/fhir/StructureDefinition/ihris-page")) {
-        extractFromPage(resource.id, ["resource", "search"]).then(() => {
-          resolve()
-        }).catch(() => {
-          resolve()
-        })
-      } else if(resource.resourceType === "Questionnaire") {
-        extractTextFromQuestionnaire(resource)
-        resolve()
-      } else if(resource.id === "ihris-config") {
-        await nconf.loadRemote()
-        let site = JSON.parse(JSON.stringify(nconf.get("site") || {}))
-        if(site.title) {
-          keys.App.title = site.title
-        }
-        if(site.site) {
-          keys.App.site = site.site
-        }
-        if(site.nav && site.nav.menu) {
-          extractMenus(site.nav.menu)
-        }
-        resolve()
-      } else if(resource.resourceType === "CodeSystem") {
-        // extractTextFromCodeSystem(resource)
-        resolve()
-      } else {
-        resolve()
+function run() {
+  return new Promise((resolve, reject) => {
+    getResources().then(() => {
+      const promises = []
+      for(let resource of resourcesData) {
+        resource = resource.resource
+        promises.push(new Promise(async(resolve1, reject1) => {
+          if(resource.resourceType === "Basic" && resource.meta && resource.meta.profile && resource.meta.profile.includes("http://ihris.org/fhir/StructureDefinition/ihris-page")) {
+            extractFromPage(resource.id, ["resource", "search"]).then(() => {
+              resolve1()
+            }).catch(() => {
+              resolve1()
+            })
+          } else if(resource.resourceType === "Questionnaire") {
+            extractTextFromQuestionnaire(resource)
+            resolve1()
+          } else if(resource.id === "ihris-config") {
+            let site = JSON.parse(JSON.stringify(nconf.get("site") || {}))
+            if(site.title) {
+              keys.App.title = site.title
+            }
+            if(site.site) {
+              keys.App.site = site.site
+            }
+            if(site.nav && site.nav.menu) {
+              extractMenus(site.nav.menu)
+            }
+            resolve1()
+          } else if(resource.resourceType === "CodeSystem") {
+            // extractTextFromCodeSystem(resource)
+            resolve1()
+          } else {
+            resolve1()
+          }
+        }))
       }
-    }))
-  }
-  Promise.all(promises).then(async () => {
-    try {
-      await fs.writeFileSync("./en.json", JSON.stringify(keys, 0, 2))
-    } catch (error) {
-      console.log(error);
-    }
-    console.log("Done, Output is inside en.json file");
+      Promise.all(promises).then(async () => {
+        try {
+          let locales = ihrissmartrequire.path("locales/en_startup.json")
+          locales = locales.split("/")
+          locales.pop()
+          locales = locales.join("/")
+          await fs.writeFileSync(locales + "/en.json", JSON.stringify(keys, 0, 2))
+          return resolve()
+        } catch (error) {
+          console.log(error);
+          return reject()
+        }
+      })
+    }).catch((err) => {
+      console.log(err);
+    })
   })
-}).catch((err) => {
-  console.log(err);
-})
+}
 
 function getResources() {
   return new Promise((resolve) => {
-    let resources = ["Basic", "Questionnaire"]
+    let resources = ["Basic", "Questionnaire", "Parameters"]
     const promises = []
     for(let resource of resources) {
       promises.push(new Promise((resolve1) => {
@@ -625,3 +629,5 @@ function search( resource, params ) {
 
   } )
 }
+
+module.exports = run

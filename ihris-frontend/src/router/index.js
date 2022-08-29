@@ -22,12 +22,12 @@ const routes = [{
   {
     path: '/reset-password',
     name: 'reset-password',
-    component: () => import('../views/auth/reset-password.vue'),
+    component: () => import( /* webpackChunkName: "reset-password" */ '../views/auth/reset-password.vue'),
   },
   {
     path: '/change-password',
     name: 'change-password',
-    component: () => import('../views/auth/change-password.vue')
+    component: () => import( /* webpackChunkName: "change-password" */ '../views/auth/change-password.vue')
   },
   {
     path: '/page/blockContacts',
@@ -128,22 +128,22 @@ const routes = [{
   {
     path: "/custom/:path/:component",
     name: "custom_components",
-    component: () => import("../views/custom.vue")
+    component: () => import( /* webpackChunkName: "custom" */ "../views/custom.vue")
   },
   {
     path: "/apps",
     name: "apps",
-    component: () => import("../views/apps.vue")
+    component: () => import( /* webpackChunkName: "apps" */ "../views/apps.vue")
   },
   {
     path: "/install-app",
     name: "install-app",
-    component: () => import("../components/ihris/install-app.vue")
+    component: () => import( /* webpackChunkName: "install-app" */ "../components/ihris/install-app.vue")
   },
   {
     path: "/uninstall-app",
     name: "uninstall-app",
-    component: () => import("../components/ihris/uninstall-app.vue")
+    component: () => import( /* webpackChunkName: "uninstall-app" */ "../components/ihris/uninstall-app.vue")
   },
   {
     path: "/dashboard/:id",
