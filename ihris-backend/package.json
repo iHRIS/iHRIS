@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "@keycloak/keycloak-admin-client": "^15.0.2",
+    "@vitalets/google-translate-api": "^8.0.0",
     "adm-zip": "^0.5.9",
     "async": "^3.2.0",
     "axios": "^0.21.1",
@@ -27,6 +28,7 @@
     "image-size": "^1.0.1",
     "is-empty": "^1.2.0",
     "jest-cucumber": "^3.0.1",
+    "json-as-xlsx": "^2.4.2",
     "jsonwebtoken": "^8.5.1",
     "jwt-decode": "^3.1.2",
     "keycloak-connect": "^15.0.2",

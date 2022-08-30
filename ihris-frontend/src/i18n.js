@@ -23,6 +23,13 @@ function loadLocaleMessages () {
   return messages
 }
 
+// function test() {
+//   fetch( "/dictionary/getLocales" ).then( response => {
+//     response.json().then( bundle => {
+//       console.log(bundle);
+//     })
+// })
+// }
 export default new VueI18n({
   locale: process.env.VUE_APP_I18N_LOCALE || 'en',
   fallbackLocale: process.env.VUE_APP_I18N_FALLBACK_LOCALE || 'en',

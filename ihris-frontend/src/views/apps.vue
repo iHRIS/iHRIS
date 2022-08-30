@@ -64,7 +64,8 @@ export default {
   data() {
     return {
       apps: [],
-      loadingApps: false
+      loadingApps: false,
+      baseURL: ''
     }
   },
   methods: {
@@ -80,11 +81,18 @@ export default {
   },
   filters: {
     createAppURL(app) {
-      return "/ihrisapp/" + app.app_short_name + "/" + app.launch_path
+      let baseURL = location.href.split('/')
+      baseURL.pop()
+      baseURL = baseURL.join('/')
+      return "/ihrisapp/" + app.app_short_name + "/" + app.launch_path + "?baseURL=" + baseURL 
     }
   },
   created() {
     this.getApps()
+    let url = location.href.split('/')
+    url.pop()
+    url = url.join('/')
+    this.baseURL = url
   }
 }
 </script>

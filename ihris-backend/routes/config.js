@@ -964,7 +964,21 @@ router.get('/questionnaire/:questionnaire', function (req, res) {
                     }
                     vueOutput += "></ihris-hidden>\n"
                 } else {
-                    vueOutput += "<fhir-" + itemType + " :edit=\"isEdit\" path=\"" + item.linkId + "\""
+                    let displayCondition = ''
+                    if(item.enableWhen) {
+                        for(let when of item.enableWhen) {
+                        displayCondition = ''
+                        condKeys = Object.keys(when)
+                        let answKeyInd = condKeys.findIndex((cond) => {
+                            return cond.startsWith('answer')
+                        })
+                        if(displayCondition) {
+                            displayCondition += '+='
+                        }
+                        displayCondition += when.question + '|' + when.operator + '|' + when[condKeys[answKeyInd]]
+                        }
+                    }
+                    vueOutput += "<fhir-" + itemType + " :edit=\"isEdit\" path=\"" + item.linkId + "\"" + "displayCondition=\"" + displayCondition + "\""
 
                     let field
                     const minmax = ["Date", "DateTime", "Instant", "Time", "Decimal", "Integer", "PositiveInt",
