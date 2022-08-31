@@ -47,9 +47,12 @@ nav:
       - user/people.md
       - user/mhero.md
       - user/positions.md
+      - user/dashboard.md
       - user/locations.md
+      - user/audit_logs.md
       - user/reports.md
       - user/system_users.md
+      - user/ihris_apps.md
 
 markdown_extensions:
   - admonition
