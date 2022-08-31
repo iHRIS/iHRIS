@@ -103,7 +103,7 @@ const loadDefaultConfig = () => new Promise((resolve, reject) => {
  
 const loadFSHFiles = () => new Promise(async (resolvePar, rejectPar) => {
   const installed = nconf.get('app:installed');
-  if (installed === "true" ) {
+  if (installed == "true" ) {
     return resolvePar();
   }
   const fshDir = nconf.get('builtFSHFIles');
@@ -159,8 +159,10 @@ const loadFSHFiles = () => new Promise(async (resolvePar, rejectPar) => {
             console.info(res.headers['content-location']);
             return nxtFile();
           }).catch((err) => {
-            errorOccured = true;
-            console.log(err.response);
+            if(fhir.resourceType !== 'ImplementationGuide') {
+              errorOccured = true;
+              console.log(err.response);
+            }
             //console.error(`fullpath ${JSON.stringify(err.response, null, 2)}`);
             return nxtFile();
           });
