@@ -6,39 +6,43 @@ This module enables a user to set up and manage positions in the database. It is
 
 On this page you can create a new Position record by adding information to the associated fields. To create a new position:
 
-1. 1. Click on "Add Position" on the left side navigation bar.
+1. Click on "Add Position" on the left side navigation bar.
 
-a. You can also add a new position from the Search Position page. At the top of the table displaying positions, click on the button in the right corner that says "Add Position".
+You can also add a new position from the Search Position page. At the top of the table displaying positions, click on the button in the right corner that says "Add Position".
 
-2. 2. Add information to the new Position.
-a. Here are a few tips:
-• Fields that are required are indicated with a red asterisk.
-• Unless noted you should type the information directly into the space provided for each field.
-• Dropdown lists are available for some fields and are noted in the list below.
-• With dropdown lists you can start typing the word that you wish to enter and you will be taken to it in the list, rather than scrolling through the whole list.
-• For other fields you will type the information directly into the space provided, or you will select the date on a calendar. See the steps for using the calendar selector in the Navigation section.
+2. Add information to the new Position.
+
+Here are a few tips:
+
+* Fields that are required are indicated with a red asterisk.
+* Unless noted you should type the information directly into the space provided for each field.
+* Dropdown lists are available for some fields and are noted in the list below.
+* With dropdown lists you can start typing the word that you wish to enter and you will be taken to it in the list, rather than scrolling through the whole list.
+* For other fields you will type the information directly into the space provided, or you will select the date on a calendar. See the steps for using the calendar selector in the Navigation section.
 
 Note: you can create a position without associating it with a person.
-b. The following information can be entered on the Position page:
-● Job title (required, select from dropdown list)
-● Health Worker (start typing name to select from dropdown list)
-● Facility/Place of work (required, start typing name to select from dropdown list)
-● Department/Case Team (start typing name to select from dropdown list)
-● Hired date (required, select from calendar)
-○ This is the date the employee signs the employment contract
-● End date (select from calendar)
-● Currency (Salary) (select from dropdown list)
-● Salary
-● Employment status (select from dropdown list)
-● Position Status (required, select from dropdown list)
-● Job type (required, select from dropdown list)
-● First employment date (select from calendar)
-○ This is the employee's first day of work (used to calculate pension)
-● Job information remark
-● Reason for Change/Departure (select from dropdown list)
-● Reason for Change (select from dropdown list)
-● Salary scale (select from dropdown list)
-● Status (click to select between true or false)
+
+ The following information can be entered on the Position page:
+
+1. ● Job title (required, select from dropdown list)
+2. ● Health Worker (start typing name to select from dropdown list)
+3. ● Facility/Place of work (required, start typing name to select from dropdown list)
+4. ● Department/Case Team (start typing name to select from dropdown list)
+5. ● Hired date (required, select from calendar)
+6. ○ This is the date the employee signs the employment contract
+7. ● End date (select from calendar)
+8. ● Currency (Salary) (select from dropdown list)
+9. ● Salary
+10. ● Employment status (select from dropdown list)
+11. ● Position Status (required, select from dropdown list)
+12. ● Job type (required, select from dropdown list)
+13. ● First employment date (select from calendar)
+14. ○ This is the employee's first day of work (used to calculate pension)
+15. ● Job information remark
+16. ● Reason for Change/Departure (select from dropdown list)
+17. ● Reason for Change (select from dropdown list)
+18. ● Salary scale (select from dropdown list)
+19. ● Status (click to select between true or false)
 3. When you are done making changes, click the "Save" button at the top of the right sidebar. If you have not entered all of the required fields indicated with a red asterisk, you will not be able to save the record. Review the form by scrolling to determine which required fields still need to be completed. You can leave your entry without saving it by clicking the "Cancel" button in the top of the right corner.
 
 ## Search Positions
@@ -75,23 +79,6 @@ This feature allows you to add or update information in an existing position rec
 Note: the record only contains information related to the position so clicking “Edit” will not display all of the employee's demographic information, contact information, education, etc. If you wish to view the full record of the associated employee, click on the blue "View Health Worker" button on the right-side navigation bar.
 
 The following information can be edited on the Edit Position page:
-● Job title (required, select from dropdown list)
-● Health Worker (start typing name to select from dropdown list)
-● Facility/Place of work (start typing name to select from dropdown list)
-● Department/Case Team (start typing name to select from dropdown list)
-● Hired date (required, select from calendar)
-● This is the date the employee signs the employment contract
-● End date (select from calendar)
-● Currency (Salary) (select from dropdown list)
-● Salary
-● Employment status (select from dropdown list)
-● Position Status (required, select from dropdown list)
-● Job type (required, select from dropdown list)
-● First employment date (select from calendar)
- ○ This is the employee's first day of work (used to calculate pension)
-● Job information remark
-● Reason for Change/Departure (select from dropdown list)
-● Reason for Change (select from dropdown list)
-● Salary scale (select from dropdown list)
-● Status (click to select between true or false)
-3. When you are done making changes, click the "Save" button at the top of the right sidebar. If you have not entered all of the required fields indicated with a red asterisk, you will not be able to save the record. Review the form by scrolling to determine which required fields still need to be completed. You can leave your changes without saving them by clicking the "Cancel" button in the top of the right sidebar.
+y5
+
+When you are done making changes, click the "Save" button at the top of the right sidebar. If you have not entered all of the required fields indicated with a red asterisk, you will not be able to save the record. Review the form by scrolling to determine which required fields still need to be completed. You can leave your changes without saving them by clicking the "Cancel" button in the top of the right sidebar.
