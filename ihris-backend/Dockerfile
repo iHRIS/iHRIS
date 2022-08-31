@@ -1,7 +1,7 @@
 FROM node:erbium-slim
 
 ARG branch=master
-RUN apt-get -qq update && apt-get install -y -qq git
+RUN apt-get -qq update && apt-get install -y -qq git && apt-get install -y --no-install-recommends wget
 RUN git clone --branch ${branch} https://github.com/iHRIS/iHRIS /src/
 
 
@@ -55,5 +55,11 @@ ENV IHRIS_APP__CORE__PATH=$IHRIS_APP__CORE__PATH
 
 WORKDIR /src/ihris-backend/site
 
+ENV DOCKERIZE_VERSION v0.6.1
+RUN wget https://github.com/jwilder/dockerize/releases/download/$DOCKERIZE_VERSION/dockerize-linux-amd64-$DOCKERIZE_VERSION.tar.gz \
+    && tar -C /usr/local/bin -xzvf dockerize-linux-amd64-$DOCKERIZE_VERSION.tar.gz \
+    && rm dockerize-linux-amd64-$DOCKERIZE_VERSION.tar.gz
+
 EXPOSE 3000
-CMD ["npm", "run", "start"]
+ENTRYPOINT dockerize -wait-retry-interval 5s -timeout 120s -wait ${IHRIS_FHIR__BASE}/metadata npm start
+# CMD ["npm", "run", "start"]
