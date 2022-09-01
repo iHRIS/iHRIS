@@ -1,7 +1,11 @@
-FROM node:erbium-slim
+# FROM node:18
+FROM node:18-slim
 
 ARG branch=master
 RUN apt-get -qq update && apt-get install -y -qq git && apt-get install -y --no-install-recommends wget
+RUN apt-get install -y build-essential python3 pkg-config libpixman-1-dev libcairo2-dev libpango1.0-dev
+# RUN apt-get install -y libpango1.0-dev
+
 RUN git clone --branch ${branch} https://github.com/iHRIS/iHRIS /src/
 
 

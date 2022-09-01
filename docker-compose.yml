@@ -41,7 +41,7 @@ services:
 
   es:
     container_name: es
-    image: elasticsearch:7.9.2
+    image: elasticsearch:7.17.6
     environment:
       node.name: es01
       discovery.type: single-node
@@ -58,9 +58,8 @@ services:
 
 
   kibana:
-    # image: docker.elastic.co/kibana/kibana:7.9.2
-    image: kibana:8.4.0
     container_name: kibana
+    image: kibana:7.17.6
     ports:
       - 5601:5601
     environment:
@@ -87,8 +86,6 @@ services:
     restart: on-failure
     environment:
       IHRIS_FHIR__BASE: http://fhir:8080/fhir
-      # do not use any longer
-      # AUTOLOAD_RESOURCE_DIR: ../resources
       IHRIS_REDIS__URL: redis://redis
       IHRIS_ELASTICSEARCH__BASE: http://es:9200
       IHRIS_KIBANA__BASE: http://kibana:5601
