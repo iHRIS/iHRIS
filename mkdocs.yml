@@ -31,6 +31,7 @@ nav:
   # - User:
   # - Implementer:
   - Developer:
+      - dev/customization.md
       - dev/fhir_http.md
       - dev/modules.md
       - dev/questionnaire.md
