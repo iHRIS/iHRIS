@@ -103,17 +103,33 @@ Once the app is developed, it should be zipped. The app, the icons, the files sh
 
 !!! important "To zip properly, open the app, select the files and zip the files. This way, the files are on the parent level of the zip file, no folder is created on level 1."
 
-_Avoid zipping the folder and having the contents in the 2nd level,as it will not run._
+ Note: _Avoid zipping the folder and having the contents in the 2nd level,as it will not run._
 
-2. Define the meta-data for the app.
+### `Install the app`
 
-Once the app is developed, then install the app. To install,
-Under iHRIS apps, on iHRIS, Browse for the folder containing the app.
-Select the file to be uploaded and click on ‘Upload’
+Once the app is developed,install the app.
+
+To install,click on iHRIS apps, on iHRIS, Browse for the folder containing the app.
+
+![Alt text](../img/browse_ihirs_app.JPG 'Customizing Manifest')
+
+Select the file to be uploaded and click ‘Upload’
+
 Once installed, the app is available for use by iHRIS users
 
-Uninstalling an app.
+## `Uninstalling an iHRIS app`
+
+To uninstall an existing iHRIS app:
+
+Click on iHRIS apps
+
+![Alt text](../img/uninstall_app.JPG 'Customizing Manifest')
+
 Click the minus sign, select the app to be removed and click on it.
+
+![Alt text](../img/uninstall_app_2.JPG 'Uninstall App')
+
+## Using FHIR
 
 Customizations can be used with FHIR Shorthand to define resources.
 
