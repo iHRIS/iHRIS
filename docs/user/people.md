@@ -38,9 +38,9 @@ Here are some tips to help users through the process of adding information to re
 7. There may also be an option to include more than one entry for a single record component. For example, an employee may speak multiple languages or may have more than one dependent. If you see a dark gray bar at the top of a field with a plus sign at the right corner of the bar, this denotes a field that can have multiple entries.
 
 8. When selecting a location you will work through a series of dropdown menus.
-9. • Click on the Region to select it, or, click on the arrow beside the Region to see the corresponding Zones, and so on.
+9. Click on the Region to select it, or, click on the arrow beside the Region to see the corresponding Zones, and so on.
 
-### Person Information
+### Basic Information
 
 #### Adding information to the person record
 
@@ -48,41 +48,45 @@ The following information can be entered on a health worker’s person record:
 
 **Name**
 
-* • Prefix
-* • First name (required)
-* • First name alternative language
-* • Father’s name (required)
-* • Father’s name alternative language
-* • Grandfather’s last name (required)
-* • Grandfather’s last name alternative language
-* • Mother’s Full name (required)
-* • Mother's name alternative language
+* Prefix
+* First name (required)
+* First name alternative language
+* Father’s name (required)
+* Father’s name alternative language
+* Grandfather’s last name (required)
+* Grandfather’s last name alternative language
+* Mother’s Full name (required)
+* Mother's name alternative language
 
-Demographic Information
-• Date of birth (required, select date from calendar)
-• Gender (required, select from dropdown)
-• Marital status (select from dropdown)
-• Nationality (Ethiopian is default, otherwise select from dropdown)
-• Ethnicity (select from dropdown)
+**Demographic Information**
 
-Identifiers (identification numbers)
-● Employee ID (required)
-● Pension number
-● TIN number
-● Civil service ID
-● License ID
-● File number (required)
-● Driving License
- Driving License Type (select from dropdown)
- Driving License ID
+* Date of birth (required, select date from calendar)
+* Gender (required, select from dropdown)
+* Marital status (select from dropdown)
+* Nationality (Ethiopian is default, otherwise select from dropdown)
+* Ethnicity (select from dropdown)
 
-Contacts
-● Mobile phone
-● Work Phone
-● Work email
-● Residence (required)
+**Identifiers (Identification numbers)**
 
-Language Details
+* Employee ID (required)
+* Pension number
+* TIN number
+* Civil service ID
+* License ID
+* File number (required)
+* Driving License
+* Driving License Type (select from dropdown)
+* Driving License ID
+
+**Contacts**
+
+* Mobile phone
+* Work Phone
+* Work email
+* Residence (required)
+
+**Language Details**
+
 Select the plus sign to add a language
 • Language (select from dropdown list)
 • Proficiency (select the plus sign to add proficiency, select from drop down): Select Excellent, Good, Poor, Very Good
