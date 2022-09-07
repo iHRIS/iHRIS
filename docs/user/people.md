@@ -20,25 +20,25 @@ Fill in the employee information in the fields provided
 
 !!! important "You can also add a new employee record from the Search People page. "
 
-At the top of the table displaying employee records, click on the button in the right corner that says "Add Health Worker Information".
+On the Search People page :
+
+Click on the button "Add Health Worker Information" to add a nee wmployee record.
 
 ### Tips for Adding Information
 
 Here are some tips to help users through the process of adding information to records:
 
-1. The entry page is broken into multiple sections. You can scroll down to go to a different section, or click on a section from the right sidebar to skip directly to that section.
+1. The form is divided into multiple sections. You can scroll down to go to a different section, or click on a section from the right sidebar to skip directly to that section.
 
-2. Fields that are required are indicated with a red asterisk.
-3. Unless otherwise noted you should type the information directly into the space provided.
+2. Required fields are indicated with a red asterisk.
+3. Key in  the employee information details directly into the space provided.
 4. Dropdown lists are available for some fields and are noted in the lockup lists.
 5. With most of the dropdown lists you can start typing the word that you wish to enter and you will be taken to it in the list, rather than having to scroll through the whole list.
 6. There may be date fields that require you to select the date on a calendar (see 3.5.3 for steps to select a date using the calendar tool).
 7. There may also be an option to include more than one entry for a single record component. For example, an employee may speak multiple languages or may have more than one dependent. If you see a dark gray bar at the top of a field with a plus sign at the right corner of the bar, this denotes a field that can have multiple entries.
 
 8. When selecting a location you will work through a series of dropdown menus.
-• Click on the Region to select it, or, click on the arrow beside the Region to see the corresponding Zones, then
-• Click on the Zone to select it, or click on the small grey arrow beside the Zone to see the corresponding Woredas, then
-• Select the Woreda (if available)
+9. • Click on the Region to select it, or, click on the arrow beside the Region to see the corresponding Zones, and so on.
 
 ### Person Information
 
