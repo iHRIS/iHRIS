@@ -127,7 +127,7 @@ Click on iHRIS apps
 
 Click the minus sign, select the app to be removed and click on it.
 
-![Alt text](../img/uninstall_app_2.JPG 'Uninstall App')
+![Alt text](../img/uninstall_app_2.JPG 'Uninstall App')**
 
 ## Using FHIR
 
