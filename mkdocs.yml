@@ -46,8 +46,9 @@ nav:
   - User:
       - user/introduction.md
       - user/people.md
-      - user/mhero.md
       - user/positions.md
+      - user/mhero.md
+      - user/database.md
       - user/dashboard.md
       - user/locations.md
       - user/audit_logs.md
