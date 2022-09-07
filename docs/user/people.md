@@ -155,14 +155,17 @@ To add or update information in an existing employee record:
 ● For the fields you wish to edit you can select item(s) from dropdown list(s) or type information directly into the record in any section and field.
 ● Fields that are required are indicated with a red asterisk. Note: there are additional required fields when editing a record than when initially creating a record.
 ● Remember that for some fields it will be possible to include more than one entry.
+
 4. The following fields from the Add Person module can be edited after clicking the “Edit” button
-● Photo
-● Names (Basic Information)
-● Demographic Details
-● Identifiers
-● Contact Details
-● Language Details
-● Remarks
+
+1. ● Photo
+2. ● Names (Basic Information)
+3. ● Demographic Details
+4. ● Identifiers
+5. ● Contact Details
+6. ● Language Details
+7. ● Remarks
+
 5. You can also add or edit additional fields from here, including whether the employee is active, Disability information, Dependent Details, Training Details, and attachment documents.
 Disability Details
 ● Select from the dropdown menu
@@ -192,15 +195,16 @@ There is supplemental information about an employee that can be added to a Perso
 2. From here you can either click on a section title in the right sidebar to skip directly to that section or you can scroll down in the record to find the section you want to edit.
 
 The supplemental sections include:
-● Current Job Positions
-● Leave Stock Information
-● Leave Information
-● Education History Information
-● Performance Evaluation Information
-● Employment History
-● Professional License Category
-● Emergency Contact
-● Collateral
-● Employee Discipline Information
-● Employee Salary Information
-● Employee Award Information
+
+1. ● Current Job Positions
+2. ● Leave Stock Information
+3. ● Leave Information
+4. ● Education History Information
+5. ● Performance Evaluation Information
+6. ● Employment History
+7. ● Professional License Category
+8. ● Emergency Contact
+9. ● Collateral
+10. ● Employee Discipline Information
+11. ● Employee Salary Information
+12. ● Employee Award Information
