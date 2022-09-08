@@ -6,8 +6,8 @@
 const configParser = require('../configParser');
 
 let siteConfig = configParser(`${__dirname}/../config/baseConfig.json`)
-global.ihrissitepath = siteConfig.app.site.path
-global.ihriscorepath = siteConfig.app.core.path
+global.ihrissitepath = process.env.IHRIS_APP__SITE__PATH || siteConfig.app.site.path
+global.ihriscorepath = process.env.IHRIS_APP__CORE__PATH || siteConfig.app.core.path
 const ihrissmartrequire = require('ihrissmartrequire')
 
 var app = ihrissmartrequire('app');
