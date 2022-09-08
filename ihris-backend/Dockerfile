@@ -66,8 +66,8 @@ RUN wget https://github.com/jwilder/dockerize/releases/download/$DOCKERIZE_VERSI
 
 EXPOSE 3000
 ENTRYPOINT dockerize -wait-retry-interval 5s -timeout 120s -wait ${IHRIS_FHIR__BASE}/metadata \
-    && node ../../tools/signConfig.js --key ../../tools/rsa_1024_priv.pem --config ../../ig/fsh-generated/resources/Parameters-ihris-config.json > Parameters-ihris-config.json \
-    && node ../../tools/load.js --server ${IHRIS_FHIR__BASE} Parameters-ihris-config.json \
+    && node ../../tools/signConfig.js --key ../../tools/rsa_1024_priv.pem --config ../../ig/fsh-generated/resources/Parameters-ihris-config.json > ../../ig/fsh-generated/resources/Parameters-ihris-config-tmp.json \
+    && mv ../../ig/fsh-generated/resources/Parameters-ihris-config-tmp.json ../../ig/fsh-generated/resources/Parameters-ihris-config.json \
     && npm start
 
 # CMD ["npm", "run", "start"]
