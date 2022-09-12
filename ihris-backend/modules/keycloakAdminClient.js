@@ -1,4 +1,5 @@
 const fs = require('fs');
+const https = require('https');
 const jwtDecode = require('jwt-decode');
 const KcAdminClient = require('@keycloak/keycloak-admin-client').default;
 
@@ -13,6 +14,11 @@ const ASSIGN_ROLE_EXTENSION = `${nconf.get('profileBaseUrl')}/StructureDefinitio
 const kcAdminClient = new KcAdminClient({
   realmName: nconf.get('keycloak:realm'),
   baseUrl: nconf.get('keycloak:baseURL'),
+  requestConfig: {
+    httpsAgent: new https.Agent({
+      rejectUnauthorized: false,
+    }),
+  },
 });
 const credentials = {
   username: nconf.get('keycloak:RESTClientUser'),
@@ -21,6 +27,7 @@ const credentials = {
   clientId: nconf.get('keycloak:UIClientId'),
 };
 kcAdminClient.auth(credentials).catch((err) => {
+  logger.error('Failed to initialize keycloak');
   logger.error(err);
 });
 setInterval(() => {
@@ -30,8 +37,13 @@ setInterval(() => {
 }, 58000);
 
 const loadTasksToKeycloak = () => new Promise(async (resolve, reject) => {
+  const installed = nconf.get('app:installed');
+  if (installed) {
+    return resolve();
+  }
   const fshDir = nconf.get('builtFSHFIles');
   if(!fshDir) {
+    logger.error('FSH dir not specified, cant load tasks');
     return resolve()
   }
   const clients = await kcAdminClient.clients.find();
@@ -177,12 +189,12 @@ const loadTasksToKeycloak = () => new Promise(async (resolve, reject) => {
       });
     });
   }).catch((err) => {
-    reject()
+    reject(err)
   });
 });
 
 const loadRolesToKeycloak = () => new Promise(async (resolve, reject) => {
-  const fshDir = '../../ig/input/fsh/build/input'//nconf.get('builtFSHFIles');
+  const fshDir = nconf.get('builtFSHFIles');
   const clients = await kcAdminClient.clients.find();
   const client = clients.find(clt => clt.clientId === nconf.get('keycloak:UIClientId'));
   if (!client) {
@@ -515,7 +527,3 @@ module.exports = {
   populateRoleTasks,
   loadTasksToKeycloak,
 };
-
-setTimeout(() => {
-  loadTasksToKeycloak();
-}, 500);

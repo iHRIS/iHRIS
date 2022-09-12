@@ -35,7 +35,6 @@ fetch("/config/app").then((response)=> {
         url: data.keycloak.baseURL,
         onLoad: 'login-required'
       }
-
       let keycloak = Keycloak(initOptions);
       const Plugin = {
         install(Vue) {

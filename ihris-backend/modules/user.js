@@ -6,7 +6,7 @@ const winston = require('winston')
 const logger = require("fhir2es/winston");
 
 const ROLE_EXTENSION = "http://ihris.org/fhir/StructureDefinition/ihris-assign-role"
-const TASK_EXTENSION = "http://ihris.org/fhir/StructureDefinition/ihris-assign-task"
+const TASK_EXTENSION = "http://ihris.org/fhir/StructureDefinition/ihris-task"
 
 const isObject = (obj) => {
     return (!!obj) && (obj.constructor === Object)
@@ -61,7 +61,7 @@ const user = {
             })
         })
     },
-    createUserInstance: (userResource, roleResource) => new Promise(async (resolve, reject) => {
+    createUserInstance: (userResource, roleResource) => new Promise((resolve, reject) => {
         const userObj = new User(userResource);
         userObj.updatePermissions([roleResource]).then(() => {
             resolve(userObj);
@@ -144,45 +144,24 @@ const user = {
                     let id = undefined
                     let constraint = undefined
                     let field = undefined
-                    let taskObj = undefined
-                    let permissionObj = undefined
-                    let elt = task.valueReference.reference.split("/")
-                    await fhirAxios.read(elt[0], elt[1]).then(async (response) => {
-                        taskObj = response
-                    }).catch((err) => {
-                        winston.error(err.message)
-                    });
                     try {
-                        permissionObj = taskObj.extension.find(ext => ext.url === "http://ihris.org/fhir/StructureDefinition/task-attributes")
-                    } catch (err) {
-                        console.error("No Task attribute found. Don't know what to do.")
-                        continue
-                    }
-                    try {
-                        permission = permissionObj.extension.find(ext => ext.url === "permission").valueCode
-                    } catch (err) {
-                        console.error("No permission given for task.  Don't know what to do.")
-                        continue
-                    }
-                    try {
-                        resource = permissionObj.extension.find(ext => ext.url === "resource").valueCode
-                    } catch (err) {
-                        console.error("No resource given for task.  Don't know what to do.")
-                        continue
-                    }
-                    try {
-                        id = permissionObj.extension.find(ext => ext.url === "instance").valueId
-                    } catch (err) {
-                        // id takes precedence and only one can be set
-                        try {
-                            constraint = permissionObj.extension.find(ext => ext.url === "constraint").valueString
-                        } catch (err) {
-                        }
-                    }
-                    try {
-                        field = permissionObj.extension.find(ext => ext.url === "field").valueString
-                    } catch (err) {
-                    }
+											permission = task.extension.find(ext => ext.url === 'permission').valueCode;
+										} catch (err) {
+											console.error("No permission given for task.  Don't know what to do.");
+											continue;
+										}
+										try {
+											resource = task.extension.find(ext => ext.url === 'resource').valueCode;
+										} catch (err) {
+											console.error("No resource given for task.  Don't know what to do.");
+											continue;
+										}
+										id = task.extension.find(ext => ext.url === 'instance')?.valueId;
+										if(!id) {
+											// id takes precedence and only one can be set
+											constraint = task.extension.find(ext => ext.url === 'constraint')?.valueString;
+										}
+										field = task.extension.find(ext => ext.url === 'field')?.valueString;
                     user.addPermission(permissions, permission, resource, id, constraint, field)
 
                 }
@@ -506,4 +485,5 @@ User.prototype.update = function () {
 }
 
 
-module.exports = {user, User}
+// module.exports = {user, User}
+module.exports = user

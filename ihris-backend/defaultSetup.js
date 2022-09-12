@@ -185,7 +185,9 @@ module.exports = {
     let errorOccured = false;
     async.series([
       (callback) => {
-        loadKeycloakData().then(() => callback(null)).catch((err) => {
+        loadKeycloakData().then(() => {
+          callback(null)
+        }).catch((err) => {
           errorOccured = true;
           console.error(err);
           return callback(null);
