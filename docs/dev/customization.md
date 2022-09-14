@@ -4,130 +4,16 @@ iHRIS is a **customizable** system, which provides various ways for developers a
 
 There are 3 ways of customizing iHRIS:
 
-1. Editing fsh files
-2. Creating custom iHRIS components- Used to add entire menus in iHRIS
-3. iHRIS Apps- This is used  for complex use cases, more specifically for enhancing iHRIS/ adding plugins.
+1. Editing FSH files
+2. [Creating custom iHRIS components](custom_components.md)
+3. [iHRIS Apps](ihris_apps.md)
+4. Creating and editing Menu
+5. Creating custom nodeJS routes --- pending
+6. Creating custom nodeJS modules --- pending
 
 ## `Editing fsh files`
 
 When using this option for customization, developers need to edit the fsh files and upload them onto hapi server.
-
-## ` Creating custom components `
-
-This option of customization allows developers to create their own logic for all the changes to be included. This can be used to add an entire menu/menus on the iHRIS menu page. The process is as follows:
-
-#### `Open the iHRIS resources folder.`
-
-![Alt text](../img/ihris_components_folder_1.JPG 'iHRIS Components Folder')
-
-#### `Open the Parameters-ihris-config.json file in the resources folder`
-
-![Alt text](../img/config_file_edit.JPG 'iHRIS Components Folder')
-
->'Parameters-ihris-config.json' file defines all menus in iHRIS, including the title, site logo etc.
-
-The file contains various parameters as shown below:
-
-![Alt text](../img/component_menu_code.JPG 'Component Menu Code')
-
-> Each menu has text, url and icon to be defined.
-
-!!! important "The **required** parameters are **text**, and **url**"
-
-#### `To add a component under the existing menu`
-
-Copy paste the exisitng code and edit the name, url and icon.
-Each menu has text, url and icon parameter to be defined.
-
-* The 'name' parameter refers to the name which will be displayed on the UI
-* The 'order' parameter refers to the position given on the menu. i.e. if order is 1, it will be on the top of the menu 2, second , 3 third and so on.
-* The icon parameter defines the icon to be used for the menu item.
-
-There’s a specific syntax for the url to be input on the component customization page.
-**ALL** custom components must be stored in the site folder under iHRIS components.
-
-![Alt text](../img/component_menu_code.JPG 'Component Menu Code')
-
-#### `Add a folder containing the components to be added`
-
-Create a folder containing the added components.
-
-The url structure of the folder should be:
-
-```
-/custom/name of the folder within the site folder/name of the file
-
-```
-
-For example, _Create a folder called components, and define the component file called ‘Performance Management.vue’_
-
-![Alt text](../img/adding_component.JPG 'Adding Components')
-
-!!! important "Do not specify 'site', it will be added automatically. Also, do not specify the extension (e.g..vue) it is added automatically."
-
-The path must be specified relative to iHRIS site.
-
-#### `Upload into hapi`
-
-Once customized, upload to hapi fhir, and the menu will be added.The logic of the changes can then be added in the component file created.
-
-## `Using iHRIS Apps`
-
-This method is used for enhancing iHRIS/ adding plugins.It allows the development of iHRIS  web applications in the developer's preferred programming language .
-
-Example- Dictionary app- Pulls all text in the system, and allows users to add translation for the text.
-
-Any programming language can be used, with the standards being observed.
-
-### `Prerequisites for an iHRIS App.`
-
-#### Customize the _'manifest.webapp_' and define the metadata for the app
-
-The file manifest.webapp, in the 'ihris app' folder should be customized as shown below:
-
-![Alt text](../img/manifest.JPG 'Customizing Manifest')
-
-This is an example of the details of a 'Dictionary' iHRIS app.
-
-* Define the name of the app,
-* Define the launch path of the app
-* Define the icons to be used for the app.
-
-Note: Developer details are optional.
-
-### `Zip the App`
-
-Once the app is developed, it should be zipped. The app, the icons, the files should be at the top level of the folder for the app to run.
-
-![Alt text](../img/zipped_app_contents.JPG 'Customizing Manifest')
-
-!!! important "To zip properly, open the app, select the files and zip the files. This way, the files are on the parent level of the zip file, no folder is created on level 1."
-
- Note: _Avoid zipping the folder and having the contents in the 2nd level,as it will not run._
-
-### `Install the app`
-
-Once the app is developed,install the app.
-
-To install,click on iHRIS apps, on iHRIS, Browse for the folder containing the app.
-
-![Alt text](../img/browse_ihirs_app.JPG 'Customizing Manifest')
-
-Select the file to be uploaded and click ‘Upload’
-
-Once installed, the app is available for use by iHRIS users
-
-## `Uninstalling an iHRIS app`
-
-To uninstall an existing iHRIS app:
-
-Click on iHRIS apps
-
-![Alt text](../img/uninstall_app.JPG 'Customizing Manifest')
-
-Click the minus sign, select the app to be removed and click on it.
-
-![Alt text](../img/uninstall_app_2.JPG 'Uninstall App')**
 
 ## Using FHIR
 
