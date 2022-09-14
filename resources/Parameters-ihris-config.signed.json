@@ -699,10 +699,6 @@
           "valueString": "tree"
         },
         {
-          "name": "defaults:fields:PractitionerRole.location:initialValue",
-          "valueString": "Location/ET"
-        },
-        {
           "name": "defaults:fields:PractitionerRole.location:user_filter:regex",
           "valueString": "related-location=(.+)"
         },
@@ -721,14 +717,6 @@
         {
           "name": "defaults:fields:Location.extension:facilityLocation.value[x]:valueReference:type",
           "valueString": "tree"
-        },
-        {
-          "name": "defaults:fields:Location.extension:facilityLocation.value[x]:valueReference:initialValue",
-          "valueString": "Location/ET"
-        },
-        {
-          "name": "defaults:fields:Location.partOf:initialValue",
-          "valueString": "Location/ET"
         },
         {
           "name": "defaults:fields:Location.partOf:user_filter:regex",

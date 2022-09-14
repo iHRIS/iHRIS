@@ -38,7 +38,7 @@ const loadKeycloakData = () => new Promise((resolve, reject) => {
           console.info(stderr);
         }
  
-        exec(`sh ${kcadm} create realms -f ${__dirname}/../../resources/keycloak/realm.json`, (err, stdout, stderr) => {
+        exec(`sh ${kcadm} create realms -f ${__dirname}/../resources/keycloak/realm.json`, (err, stdout, stderr) => {
           if (err) {
             return callback(err);
           }
@@ -53,7 +53,7 @@ const loadKeycloakData = () => new Promise((resolve, reject) => {
       });
     },
     theme: (callback) => {
-      exec(`cp -r ${__dirname}/../../resources/keycloak/themes/ihris ${keycloakInstalledLocation}themes`, (err, stdout, stderr) => {
+      exec(`cp -r ${__dirname}/../resources/keycloak/themes/ihris ${keycloakInstalledLocation}themes`, (err, stdout, stderr) => {
         if (err) {
           return callback(err);
         }
@@ -85,11 +85,11 @@ const loadDefaultConfig = () => new Promise((resolve, reject) => {
   }
   const parameters = nconf.get('app:Parameters');
   let fullpath = `${__dirname}/${parameters}`;
-    fs.readFile(fullpath, { encoding: 'utf8', flag: 'r' }, (err, data) => {
-          if (err) {
-            console.error(err);
-            errorOccured = true;
-          }
+  fs.readFile(fullpath, { encoding: 'utf8', flag: 'r' }, (err, data) => {
+    // if (err) {
+    //   console.error(err);
+    //   errorOccured = true;
+    // }
     const fhirParameters = JSON.parse(data);
     fhirAxios.update(fhirParameters).then(() => {
       console.info('General Config Saved');
