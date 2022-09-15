@@ -2,13 +2,13 @@
 
 iHRIS is a **customizable** system, which provides various ways for developers and implementers to customize the product for their specific use cases.
 
-There are 3 ways of customizing iHRIS:
+Below are various ways you may use to customize iHRIS based on your needs
 
 1. Editing FSH files
 2. [Creating custom iHRIS components](custom_components.md)
 3. [iHRIS Apps](ihris_apps.md)
 4. Creating and editing Menu
-5. Creating custom nodeJS routes --- pending
+5. [Creating custom nodeJS routes](custom_routes.md)
 6. Creating custom nodeJS modules --- pending
 
 ## `Editing fsh files`
