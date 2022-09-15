@@ -16,7 +16,7 @@
             "code": "1.2.840.10065.1.12.1.14"
           }
         ],
-        "when": "2022-07-18T16:55:46.047Z",
+        "when": "2022-09-09T03:44:58.249Z",
         "who": {
           "reference": "http://ihris.org/fhir/Organization/ihris"
         },
@@ -699,10 +699,6 @@
           "valueString": "tree"
         },
         {
-          "name": "defaults:fields:PractitionerRole.location:initialValue",
-          "valueString": "Location/ET"
-        },
-        {
           "name": "defaults:fields:PractitionerRole.location:user_filter:regex",
           "valueString": "related-location=(.+)"
         },
@@ -721,14 +717,6 @@
         {
           "name": "defaults:fields:Location.extension:facilityLocation.value[x]:valueReference:type",
           "valueString": "tree"
-        },
-        {
-          "name": "defaults:fields:Location.extension:facilityLocation.value[x]:valueReference:initialValue",
-          "valueString": "Location/ET"
-        },
-        {
-          "name": "defaults:fields:Location.partOf:initialValue",
-          "valueString": "Location/ET"
         },
         {
           "name": "defaults:fields:Location.partOf:user_filter:regex",
