@@ -1,52 +1,50 @@
 # iHRIS Apps
-There are some usecases where you need to create multiple components to perform a specific common task. iHRIS allows you to create an app to address such a usecase. iHRIS apps are expected to be webapps and can be created in any programming language.
 
-## `Prerequisites for an iHRIS App.`
+There are some usecases where you need to create multiple components to perform a specific common task. iHRIS allows you to create an app to address such a usecase. iHRIS apps are expected to be webapps and can be created in any programming language. Below are the steps to create an iHRIS apps.
 
-### Customize the _'manifest.webapp'_ and define the metadata for the app
+* Pick a language of choice (recommended VueJS) and start building the app. If you are a VueJS developer then you are lucky, you dont need to start everything from scratch, clone the ihris app template repo from [https://github.com/iHRIS/ihris-core-apps.git](https://github.com/iHRIS/ihris-core-apps.git) that comes with many supporting resources to help you quickly build an app.
 
-The file manifest.webapp, in the 'ihris app' folder should be customized as shown below:
+* At this stage you should get ready your app for production deployment. Depending with the language/framework you have used, some frameworks like Angular, react, Vue requires code to built for production deployment, this is the right stage to do so.
 
-![Alt text](../img/manifest.JPG 'Customizing Manifest')
+* Add metadata about your app. iHRIS uses manifest file to properly handle your app. Create manifest.webapp file and place it at the root directory of your built source code in step 2. The manifest.webapp should be in JSON format and must have below details \n
 
-This is an example of the details of a 'Dictionary' iHRIS app.
+    + version (required) - This specifies the version of your app
+    + name (required) - This is the name of your app that will be displayed under list of installed iHRIS apps
+    + description (optional) - This is a description of your app
+    + launch_path (required) - This is the file on your app that iHRIS will lauch when users run your app
+    + icons (required) - This is an icon that iHRIS will use together with name to display on the list of installed apps.
+  Below is an example of manifest.webapp
+  
+```json
+  {
+    "version": "1.0.1",
+    "appType": "APP",
+    "name": "Dictionary",
+    "description": "Translation of iHRIS texts into multiple languages",
+    "launch_path": "index.html",
+    "icons": {
+        "16": "dictionary.jpeg",
+        "48": "dictionary.jpeg",
+        "128": "dictionary.jpeg"
+    },
+    "developer": {
+        "name": "Intrahealth - Digital Health Team",
+        "url": "http://digitalhealth.intrahealth.org"
+    }
+  }
+```
 
-* Define the name of the app,
-* Define the launch path of the app
-* Define the icons to be used for the app.
+* Now its time to zip your built files ready for installation into iHRIS. Your app files must be at the top level of the zip.
 
-Note: Developer details are optional.
+    ![Alt text](../img/zipping_app.gif 'Zipping App')
+!!! important "To zip properly, open the folder that has your built files, select all the files and zip them. This way, the files are on the parent level of the zip file"
 
-## `Zip the App`
+* Now its time to install the app into iHRIS. To install your app, open iHRIS and click iHRIS apps. A page that lists all installed apps will open, click the plus (+) icon, then browse to your zipped app, select it and click the install button.
 
-Once the app is developed, it should be zipped. The app, the icons, the files should be at the top level of the folder for the app to run.
-
-![Alt text](../img/zipped_app_contents.JPG 'Customizing Manifest')
-
-!!! important "To zip properly, open the app, select the files and zip the files. This way, the files are on the parent level of the zip file, no folder is created on level 1."
-
- Note: _Avoid zipping the folder and having the contents in the 2nd level,as it will not run._
-
-## `Install the app`
-
-Once the app is developed,install the app.
-
-To install,click on iHRIS apps, on iHRIS, Browse for the folder containing the app.
-
-![Alt text](../img/browse_ihirs_app.JPG 'Customizing Manifest')
-
-Select the file to be uploaded and click ‘Upload’
-
-Once installed, the app is available for use by iHRIS users
+  ![Alt text](../img/install_app.gif 'Install App')
 
 ## `Uninstalling an iHRIS app`
 
-To uninstall an existing iHRIS app:
+To uninstall an existing iHRIS app, open iHRIS and click iHRIS apps. A page that lists all installed apps will open, click the minus(-) icon, then click the minus(-) icon of the app you want to uninstall.
 
-Click on iHRIS apps
-
-![Alt text](../img/uninstall_app.JPG 'Customizing Manifest')
-
-Click the minus sign, select the app to be removed and click on it.
-
-![Alt text](../img/uninstall_app_2.JPG 'Uninstall App')**
+  ![Alt text](../img/uninstall_app.gif 'UnInstall App')

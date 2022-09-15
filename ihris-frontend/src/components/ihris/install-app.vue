@@ -23,7 +23,10 @@
             </v-col>
             <v-spacer></v-spacer>
             <v-col>
-              <v-btn color="primary" :disabled="!app" @click="doUpload">Upload</v-btn>
+              <v-btn small color="primary" :disabled="!app" @click="doUpload">
+                <v-icon left>mdi-file-upload</v-icon>
+                Install
+              </v-btn>
             </v-col>
           </v-row>
         </v-card-actions>

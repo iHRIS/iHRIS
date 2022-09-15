@@ -104,7 +104,7 @@ async function startUp() {
 
   const isLoggedIn = (req, res, next) => {
     if (nconf.get('app:idp') === 'keycloak') {
-      const unauthenticatedRoutes = ['/config/app'];
+      const unauthenticatedRoutes = ['/config/app', '/apps/install'];
       if (unauthenticatedRoutes.includes(req.path)) {
         return next();
       }
