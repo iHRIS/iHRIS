@@ -4,8 +4,8 @@ This was done on a clean Ubuntu 20.4 server.
 ## Node JS LTS
 ```bash
 curl -sL https://deb.nodesource.com/setup_12.x | sudo -E bash -
-sudo apt-get install -y nodejs
-sudo npm install -g npm
+sudo apt install -y nodejs
+sudo apt install -g npm
 ```
 ## Redis
 **This must be secured or people will be able to do bad things.**
