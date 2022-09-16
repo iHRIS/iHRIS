@@ -138,6 +138,7 @@ const user = {
                 await resolveTasks(roleResource);
                 await user.loadTaskList()
                 let tasks = roleResource.extension.filter(ext => ext.url === TASK_EXTENSION)
+                console.log(tasks);
                 for (let task of tasks) {
                     let permission = undefined
                     let resource = undefined
@@ -145,23 +146,23 @@ const user = {
                     let constraint = undefined
                     let field = undefined
                     try {
-											permission = task.extension.find(ext => ext.url === 'permission').valueCode;
-										} catch (err) {
-											console.error("No permission given for task.  Don't know what to do.");
-											continue;
-										}
-										try {
-											resource = task.extension.find(ext => ext.url === 'resource').valueCode;
-										} catch (err) {
-											console.error("No resource given for task.  Don't know what to do.");
-											continue;
-										}
-										id = task.extension.find(ext => ext.url === 'instance')?.valueId;
-										if(!id) {
-											// id takes precedence and only one can be set
-											constraint = task.extension.find(ext => ext.url === 'constraint')?.valueString;
-										}
-										field = task.extension.find(ext => ext.url === 'field')?.valueString;
+                            permission = task.extension.find(ext => ext.url === 'permission').valueCode;
+                        } catch (err) {
+                            console.error("No permission given for task.  Don't know what to do.");
+                            continue;
+                        }
+                        try {
+                            resource = task.extension.find(ext => ext.url === 'resource').valueCode;
+                        } catch (err) {
+                            console.error("No resource given for task.  Don't know what to do.");
+                            continue;
+                        }
+                        id = task.extension.find(ext => ext.url === 'instance')?.valueId;
+                        if(!id) {
+                            // id takes precedence and only one can be set
+                            constraint = task.extension.find(ext => ext.url === 'constraint')?.valueString;
+                        }
+                        field = task.extension.find(ext => ext.url === 'field')?.valueString;
                     user.addPermission(permissions, permission, resource, id, constraint, field)
 
                 }
@@ -183,7 +184,7 @@ const user = {
                                     return resolve();
                                 }
                                 const id = extension.valueReference.reference.split('/')[1];
-                                fhirAxios.read('Basic', id, '').then((task) => {
+                                fhirAxios.read('Basic', id).then((task) => {
                                     const taskExt = task.extension && task.extension.find(ext => ext.url === `${nconf.get('profileBaseUrl')}/StructureDefinition/task-attributes`);
                                     if (taskExt) {
                                         role.extension[index] = {};

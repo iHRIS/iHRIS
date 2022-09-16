@@ -104,7 +104,8 @@ fetch("/config/app").then((response)=> {
             keycloak.updateToken(70)
           }, 60000)
         }
-      }).catch(() => {
+      }).catch((err) => {
+        console.log(err);
         alert("Keycloak access failed")
       });
     } else {
