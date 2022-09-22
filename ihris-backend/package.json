@@ -7,7 +7,7 @@
     "@vitalets/google-translate-api": "^8.0.0",
     "adm-zip": "^0.5.9",
     "async": "^3.2.0",
-    "axios": "^0.21.1",
+    "axios": "^0.21.2",
     "canvas": "^2.10.1",
     "connect-redis": "^4.0.4",
     "cookie-parser": "~1.4.4",
