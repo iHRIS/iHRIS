@@ -28,7 +28,7 @@ sudo apt install tomcat9
 sudo apt install postgresql
 ```
 ## HAPI FHIR
-**This must be secured or people will be able to do bad things.**
+!!! This must be secured or people will be able to do bad things.
 ### Create Database and User
 ```bash
 sudo -u postgres psql
@@ -50,7 +50,7 @@ Edit ```pom.xml``` and change the following line from hapi-fhir-jpaserver or ROO
 ```xml
     <finalName>hapi</finalName>
 ```
-**The most recently tested hapi version for iHRIS is 6.1.0**
+!!! The most recently tested hapi version for iHRIS is 6.1.0
 #### For versions starting with 5.7.0 to the latest
 Edit ```src/main/resources/application.yaml``` and update the following values as bellow:
 ```
