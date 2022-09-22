@@ -3,9 +3,15 @@ This was done on a clean Ubuntu 20.4 server.
 
 ## Node JS LTS
 ```bash
-curl -sL https://deb.nodesource.com/setup_12.x | sudo -E bash -
+curl -sL https://deb.nodesource.com/setup_16.x | sudo -E bash -
 sudo apt install -y nodejs
 sudo apt install -g npm
+```
+### On ARM
+On ARM64 machines there is an issues with installing the canvas node module. Run the following commands or there equivalent in MacOSX
+```
+sudo apt install pkg-config
+sudo apt install libpixman-1-dev libcairo2-dev libpango1.0-dev libjpeg8-dev libgif-dev
 ```
 ## Redis
 **This must be secured or people will be able to do bad things.**
@@ -44,7 +50,6 @@ Edit ```pom.xml``` and change the following line from hapi-fhir-jpaserver or ROO
 ```xml
     <finalName>hapi</finalName>
 ```
-
 #### For versions starting with 5.2.0 to the latest
 Things were streamlined a bit so the values to edit are simpler.
 Edit ```src/main/resources/application.yaml``` and update the following values:
