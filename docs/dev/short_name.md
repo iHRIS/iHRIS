@@ -1,4 +1,4 @@
-# $short-name Endpoint
+# Short-name Endpoint
 
 ## Access
 Any read access will give access to the $short-name.  
