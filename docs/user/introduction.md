@@ -4,13 +4,17 @@
 
 The **Integrated Human Resource Information System** (iHRIS) is a **free open-source** software a **web based computerized Human Resources management tool** consisting of electronic databases for storing, analyzing and reporting data on Human Resources for Health (HRH) for evidence-based decisions on planning, managing, budgeting and policy shift in the health sector to improve access to services.
 
-iHRIS is designed using Low/ Middle Income Countries (LMIC) use cases, highly customizable, Standards compliant, Global technical support community, Global Good, and Adheres to Digital Development Principles. 
+iHRIS is designed using Low/ Middle Income Countries (LMIC) use cases, highly customizable, Standards compliant, Global technical support community, Global Good, and Adheres to Digital Development Principles.
 
 iHRIS was designed with Interoperability with other systems in mind basing on OpenHIE Architecture and FHIR Compliancy at its core. It was developed so that it can work with other components of Health Information System (HIS) including OpenMRS, facility registries, DHIS2, and it is part of mHero.
 
+## iHRIS Architechture
+
+![Alt text](../img/architechture.jpg 'iHRIS Architechture')
+
 ## iHRIS Framework
 
-iHRIS is built on a **flexible framework** that allows ministries of health, professional councils, health training institutions, and health service delivery organizations to customize and adapt applications to meet a wide variety of needs for managing health workforce information. 
+iHRIS is built on a **flexible framework** that allows ministries of health, professional councils, health training institutions, and health service delivery organizations to customize and adapt applications to meet a wide variety of needs for managing health workforce information.
 
 Developed by IntraHealth International inc. in collaboration with national stakeholders beginning in 2005, with support from United States Agency for International Development (USAID), iHRIS is used in more than 20 countries to manage over a million health worker records at a potential cost savings of over $275 million when compared to commercial software.
 
@@ -36,6 +40,5 @@ HRIS’s primary role is to manage workers employed through the FMOH at the mini
 The iHRIS is an easy to use system that runs in clear roles for the HR managers and what users are expected to get from the system as illustrated below:
 
 ![Alt text](../img/ihris_usage_framework.svg 'iHRIS Usage Framework')
-
 
 From the iHRIS use framework, all HRH records – health workers biodata, training information, registration and licensure details, deployment and employment history, health workforce planning and retention data, and health facilities details are kept in iHRIS. HRH managers update database with HRH data and all users including policy and decision makers make varying requests to get health workers profiles, reports and charts.
