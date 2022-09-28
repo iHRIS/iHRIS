@@ -46,8 +46,8 @@ Description:    "iHRIS Profile of Locations to manage facilities."
 * identifier.type.coding from IhrisFacilityIdentifierValueSet
 * identifier.type from IhrisFacilityIdentifierValueSet
 * extension contains
-        IhrisFacilityOwnership named ownership 1..1 MS and
-        IhrisFacilityInformationDetails named facilityInformationDetails 1..1 MS
+        IhrisFacilityOwnership named ownership 0..1 MS and
+        IhrisFacilityInformationDetails named facilityInformationDetails 0..1 MS
 * extension[ownership].valueCoding MS
 * extension[ownership] ^label = "Ownership"
 * extension[facilityInformationDetails].extension[logo].valueAttachment ^label = "Facility Logo"
@@ -62,9 +62,9 @@ Description:    "iHRIS Profile of Locations to manage facilities."
 * status ^label = "Status"
 * position 0..1 MS
 * position ^label = "Co-ordinates"
-* position.longitude 1..1 MS
+* position.longitude 0..1 MS
 * position.longitude ^label = "Longitude"
-* position.latitude 1..1 MS
+* position.latitude 0..1 MS
 * position.latitude ^label = "Latitude"
 * partOf 1..1 MS 
 * partOf only Reference(IhrisJurisdiction)
