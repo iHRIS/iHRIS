@@ -16,7 +16,11 @@ The iHRIS roadmap outlines the features planned for inclusion in future releases
 
 7. UI for audit trail
 
+An audit trail logging events in iHRIS is already maintained by the system. The inclusion of a User Interface for this feature will allow users to view and query session events as may be required.
+
 8. Translations of new documentation
+
+The current technical documentation of iHRIS is maintained in English. Translation into other languages 
 
 9. WISN lite workforce pressure calculator (iHRIS Plan)
 
