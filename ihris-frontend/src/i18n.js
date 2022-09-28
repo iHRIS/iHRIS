@@ -1,37 +1,22 @@
 import Vue from 'vue'
 import VueI18n from 'vue-i18n'
+import axios from 'axios'
+import store from './store'
 
 Vue.use(VueI18n)
 
-
-function loadLocaleMessages () {
-  let locales
-  try {
-    locales = require.context('../site/locales', true, /[A-Za-z0-9-_,\s]+\.json$/i)
-  } catch (error) {
-    console.log(error);
-    locales = require.context('./locales', true, /[A-Za-z0-9-_,\s]+\.json$/i)
-  }
-  const messages = {}
-  locales.keys().forEach(key => {
-    const matched = key.match(/([A-Za-z0-9-_]+)\./i)
-    if (matched && matched.length > 1) {
-      const locale = matched[1]
-      messages[locale] = locales(key)
-    }
-  })
-  return messages
-}
-
-// function test() {
-//   fetch( "/dictionary/getLocales" ).then( response => {
-//     response.json().then( bundle => {
-//       console.log(bundle);
-//     })
-// })
-// }
-export default new VueI18n({
-  locale: process.env.VUE_APP_I18N_LOCALE || 'en',
-  fallbackLocale: process.env.VUE_APP_I18N_FALLBACK_LOCALE || 'en',
-  messages: loadLocaleMessages()
+export const i18n = new VueI18n({
+  locale: 'en', // set locale
+  fallbackLocale: 'en',
+  messages: {} // set locale messages
 })
+
+export function loadLanguage(lang) {
+  store.state.initializingApp = true
+  axios.get( `/translator/getLocale/${lang}` ).then(response => {
+    store.state.initializingApp = false
+    i18n.setLocaleMessage(lang, response.data)
+    i18n.locale = lang
+  })
+  // if we want to implement lazzy loading then refer to https://kazupon.github.io/vue-i18n/guide/lazy-loading.html
+}

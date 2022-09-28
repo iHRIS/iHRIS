@@ -3,7 +3,7 @@
     <v-card width="500">
       <v-card-text>
         <v-card-title primary-title>
-          Install New iHRIS App
+          {{ $t(`App.hardcoded-texts.Install New iHRIS App`) }}
         </v-card-title>
         <v-card-text>
           <v-file-input
@@ -25,7 +25,7 @@
             <v-col>
               <v-btn small color="primary" :disabled="!app" @click="doUpload">
                 <v-icon left>mdi-file-upload</v-icon>
-                Install
+                {{ $t(`App.hardcoded-texts.Install`) }}
               </v-btn>
             </v-col>
           </v-row>

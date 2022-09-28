@@ -2,6 +2,7 @@ const express = require('express')
 const router = express.Router()
 const translate = require('@vitalets/google-translate-api');
 const ihrissmartrequire = require("ihrissmartrequire")
+const outcomes = ihrissmartrequire('config/operationOutcomes')
 const async = require("async")
 const fs = require("fs")
 
@@ -23,6 +24,9 @@ router.get("/languages", (req, res) => {
 })
 
 router.post("/addLanguage/:locale", async(req, res) => {
+  if(req.user.resource && req.user.resource.id === 'ihris-user-loggedout') {
+    return res.status(401).json(outcomes.NOTLOGGEDIN);
+  }
   let locale = req.params.locale
   let localesPath = getLocalePath()
   let enTrans = await fs.readFileSync(localesPath + "en.json", 'utf8')
@@ -34,6 +38,9 @@ router.post("/addLanguage/:locale", async(req, res) => {
 })
 
 router.get("/translate/:from/:to/:type?", async(req, res) => {
+  if(req.user.resource && req.user.resource.id === 'ihris-user-loggedout') {
+    return res.status(401).json(outcomes.NOTLOGGEDIN);
+  }
   let localesPath = getLocalePath()
   let from = ihrissmartrequire("locales/" + req.params.from + ".json")
   let translations = {}
@@ -101,11 +108,12 @@ router.get("/getTranslatedLanguages", async(req, res) => {
 })
 
 router.get("/extractTexts/:locale", async(req, res) => {
+  if(req.user.resource && req.user.resource.id === 'ihris-user-loggedout') {
+    return res.status(401).json(outcomes.NOTLOGGEDIN);
+  }
   if(req.params.locale === 'en') {
     extractTexts().then(() => {
-      setTimeout(() => {
-        return res.status(200).send()
-      }, 2000);
+      return res.status(200).send()
     }).catch(() => {
       return res.status(500).send()
     })
@@ -121,9 +129,7 @@ router.get("/extractTexts/:locale", async(req, res) => {
     enTrans = JSON.parse(enTrans)
     build(enTrans, "")
     await fs.writeFileSync(localesPath + req.params.locale + ".json", JSON.stringify(translations, 0, 2))
-    setTimeout(() => {
-      return res.status(200).json()
-    }, 2000);
+    return res.status(200).json()
     
     function build(source, keys) {
       for(let key in source) {
@@ -158,6 +164,16 @@ router.get("/extractTexts/:locale", async(req, res) => {
       }
     }
   }
+})
+
+router.get("/getLocale/:locale", async(req, res) => {
+  let localesPath = getLocalePath()
+  if(!translate.languages.isSupported(req.params.locale)) {
+    return res.status(400).send()
+  }
+  let translations = await fs.readFileSync(localesPath + req.params.locale + ".json", 'utf8')
+  translations = JSON.parse(translations)
+  return res.json(translations)
 })
 
 router.get("/getLocales", async(req, res) => {
@@ -225,6 +241,9 @@ router.get("/getTranslations/:locale", async(req, res) => {
 })
 
 router.put("/update", async(req, res) => {
+  if(req.user.resource && req.user.resource.id === 'ihris-user-loggedout') {
+    return res.status(401).json(outcomes.NOTLOGGEDIN);
+  }
   let localesPath = getLocalePath()
   let translations = await fs.readFileSync(localesPath + req.body.locale + ".json", 'utf8')
   translations = JSON.parse(translations)
@@ -252,6 +271,9 @@ router.put("/update", async(req, res) => {
 })
 
 router.get("/export/:locale", async(req, res) => {
+  if(req.user.resource && req.user.resource.id === 'ihris-user-loggedout') {
+    return res.status(401).json(outcomes.NOTLOGGEDIN);
+  }
   let xlsx = require("json-as-xlsx")
   let localesPath = getLocalePath()
   let translations = await fs.readFileSync(localesPath + req.params.locale + ".json", 'utf8')
@@ -314,6 +336,9 @@ router.get("/export/:locale", async(req, res) => {
 })
 
 router.post('/import/:locale', async(req, res) => {
+  if(req.user.resource && req.user.resource.id === 'ihris-user-loggedout') {
+    return res.status(401).json(outcomes.NOTLOGGEDIN);
+  }
   const XLSX = require("xlsx")
   let workbook = XLSX.read(req.files.translation.data)
   let sheetname

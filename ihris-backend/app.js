@@ -179,7 +179,7 @@ async function startUp() {
   const fhirRouter = require('./routes/fhir');
   const ihrisApps = require('./routes/apps');
   const mheroRouter = require('./routes/mhero');
-  const dictionaryRouter = require('./routes/core-apps/ihris-google-translator/index');
+  const translatorRouter = require('./routes/core-apps/ihris-google-translator/index');
 
   const limit = nconf.get('express:limit') || '50mb';
   app.use(express.json({
@@ -214,7 +214,7 @@ async function startUp() {
   // mounting site routes
   const siteRoutes = nconf.get('app:site:routes');
   for (const route in siteRoutes) {
-    const routePath = path.join(global.ihrissitepath, `routes/${siteRoutes[route].path}`);
+    const routePath = path.join(nconf.get('app:site:path'), `routes/${siteRoutes[route].path}`);
     let mountPoint = `/${siteRoutes[route].mount}`;
     mountPoint = mountPoint.replace('//', '/');
     if (fs.existsSync(routePath)) {
@@ -232,7 +232,7 @@ async function startUp() {
 
   app.use('/config', configRouter);
   app.use('/mhero', mheroRouter);
-  app.use('/dictionary', dictionaryRouter);
+  app.use('/translator', translatorRouter);
   app.use('/tmp', express.static('tmp'));
   app.get('/test', (req, res) => {
     res.status(200).json({

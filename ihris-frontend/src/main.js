@@ -10,7 +10,7 @@ import vuetify from "./plugins/vuetify"
 import 'whatwg-fetch'
 import fhirpath from "fhirpath"
 import fhirutils from "./plugins/fhirutils"
-import i18n from './i18n'
+import { i18n } from './i18n'
 
 Vue.config.productionTip = false
 

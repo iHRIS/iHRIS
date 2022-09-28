@@ -3,7 +3,7 @@
     <center>
       <v-card min-height="200" max-width="500" rounded shaped>
         <v-card-title primary-title>
-          {{apps.length}} Installed Apps
+          {{apps.length}} {{ $t(`App.hardcoded-texts.Installed Apps`) }}
           <v-spacer></v-spacer>
           <v-tooltip top v-if="apps.length > 0">
             <template v-slot:activator="{ on, attrs }">
@@ -18,7 +18,7 @@
                 <v-icon>mdi-minus</v-icon>
               </v-btn>
             </template>
-            <span>Uninstall Apps</span>
+            <span>{{ $t(`App.hardcoded-texts.Uninstall Apps`) }}</span>
           </v-tooltip>
           <v-tooltip top>
             <template v-slot:activator="{ on, attrs }">
@@ -33,7 +33,7 @@
                 <v-icon>mdi-plus</v-icon>
               </v-btn>
             </template>
-            <span>Install New App</span>
+            <span>{{ $t(`App.hardcoded-texts.Install New App`) }}</span>
           </v-tooltip>
         </v-card-title>
         <v-card-text v-if="!loadingApps">
