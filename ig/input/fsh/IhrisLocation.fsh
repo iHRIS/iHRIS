@@ -62,9 +62,9 @@ Description:    "iHRIS Profile of Locations to manage facilities."
 * status ^label = "Status"
 * position 0..1 MS
 * position ^label = "Co-ordinates"
-* position.longitude 0..1 MS
+* position.longitude 1..1 MS
 * position.longitude ^label = "Longitude"
-* position.latitude 0..1 MS
+* position.latitude 1..1 MS
 * position.latitude ^label = "Latitude"
 * partOf 1..1 MS 
 * partOf only Reference(IhrisJurisdiction)

@@ -348,7 +348,7 @@
           "extensions",
           "user content"
         ],
-        "min": 2,
+        "min": 0,
         "max": "*",
         "base": {
           "path": "DomainResource.extension",
@@ -399,7 +399,7 @@
           "extensions",
           "user content"
         ],
-        "min": 1,
+        "min": 0,
         "max": "1",
         "base": {
           "path": "DomainResource.extension",
@@ -673,7 +673,7 @@
           "extensions",
           "user content"
         ],
-        "min": 1,
+        "min": 0,
         "max": "1",
         "base": {
           "path": "DomainResource.extension",
@@ -4157,15 +4157,14 @@
           ],
           "ordered": false,
           "rules": "open"
-        },
-        "min": 2
+        }
       },
       {
         "id": "Location.extension:ownership",
         "path": "Location.extension",
         "sliceName": "ownership",
         "label": "Ownership",
-        "min": 1,
+        "min": 0,
         "max": "1",
         "type": [
           {
@@ -4181,7 +4180,7 @@
         "id": "Location.extension:facilityInformationDetails",
         "path": "Location.extension",
         "sliceName": "facilityInformationDetails",
-        "min": 1,
+        "min": 0,
         "max": "1",
         "type": [
           {
