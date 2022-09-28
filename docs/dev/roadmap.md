@@ -20,7 +20,7 @@ An audit trail logging events in iHRIS is already maintained by the system. The 
 
 8. Translations of new documentation
 
-The current technical documentation of iHRIS is maintained in English. Translation into other languages 
+The current technical documentation of iHRIS is maintained in English. We're looking into translating the same into other languages
 
 9. WISN lite workforce pressure calculator (iHRIS Plan)
 
@@ -28,4 +28,5 @@ The current technical documentation of iHRIS is maintained in English. Translati
 
 11. Mobile app
 
+Developing an iHRIS mobile application
 12. API endpoint for ADX - out the box DHIS2 interoperability
