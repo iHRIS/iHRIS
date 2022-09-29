@@ -1,4 +1,4 @@
-Instance: undefined
+Instance: Country
 InstanceOf: Bundle
 Usage: #example
 * type = #transaction
@@ -747,7 +747,8 @@ Usage: #example
 Instance: AD
 InstanceOf: Location
 Usage: #inline
-* meta.profile = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[0] = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[+] = "http://ihris.org/fhir/StructureDefinition/ihris-jurisdiction"
 * name = "Andorra"
 * status = #active
 * identifier.use = #official
@@ -761,7 +762,8 @@ Usage: #inline
 Instance: AE
 InstanceOf: Location
 Usage: #inline
-* meta.profile = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[0] = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[+] = "http://ihris.org/fhir/StructureDefinition/ihris-jurisdiction"
 * name = "United Arab Emirates"
 * status = #active
 * identifier.use = #official
@@ -775,7 +777,8 @@ Usage: #inline
 Instance: AF
 InstanceOf: Location
 Usage: #inline
-* meta.profile = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[0] = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[+] = "http://ihris.org/fhir/StructureDefinition/ihris-jurisdiction"
 * name = "Afghanistan"
 * status = #active
 * identifier.use = #official
@@ -789,7 +792,8 @@ Usage: #inline
 Instance: AG
 InstanceOf: Location
 Usage: #inline
-* meta.profile = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[0] = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[+] = "http://ihris.org/fhir/StructureDefinition/ihris-jurisdiction"
 * name = "Antigua And Barbuda"
 * status = #active
 * identifier.use = #official
@@ -803,7 +807,8 @@ Usage: #inline
 Instance: AI
 InstanceOf: Location
 Usage: #inline
-* meta.profile = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[0] = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[+] = "http://ihris.org/fhir/StructureDefinition/ihris-jurisdiction"
 * name = "Anguilla"
 * status = #active
 * identifier.use = #official
@@ -817,7 +822,8 @@ Usage: #inline
 Instance: AL
 InstanceOf: Location
 Usage: #inline
-* meta.profile = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[0] = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[+] = "http://ihris.org/fhir/StructureDefinition/ihris-jurisdiction"
 * name = "Albania"
 * status = #active
 * identifier.use = #official
@@ -831,7 +837,8 @@ Usage: #inline
 Instance: AM
 InstanceOf: Location
 Usage: #inline
-* meta.profile = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[0] = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[+] = "http://ihris.org/fhir/StructureDefinition/ihris-jurisdiction"
 * name = "Armenia"
 * status = #active
 * identifier.use = #official
@@ -845,7 +852,8 @@ Usage: #inline
 Instance: AN
 InstanceOf: Location
 Usage: #inline
-* meta.profile = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[0] = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[+] = "http://ihris.org/fhir/StructureDefinition/ihris-jurisdiction"
 * name = "Netherlands Antilles"
 * status = #active
 * identifier.use = #official
@@ -859,7 +867,8 @@ Usage: #inline
 Instance: AO
 InstanceOf: Location
 Usage: #inline
-* meta.profile = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[0] = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[+] = "http://ihris.org/fhir/StructureDefinition/ihris-jurisdiction"
 * name = "Angola"
 * status = #active
 * identifier.use = #official
@@ -873,7 +882,8 @@ Usage: #inline
 Instance: AQ
 InstanceOf: Location
 Usage: #inline
-* meta.profile = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[0] = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[+] = "http://ihris.org/fhir/StructureDefinition/ihris-jurisdiction"
 * name = "Antarctica"
 * status = #active
 * identifier.use = #official
@@ -887,7 +897,8 @@ Usage: #inline
 Instance: AR
 InstanceOf: Location
 Usage: #inline
-* meta.profile = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[0] = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[+] = "http://ihris.org/fhir/StructureDefinition/ihris-jurisdiction"
 * name = "Argentina"
 * status = #active
 * identifier.use = #official
@@ -901,7 +912,8 @@ Usage: #inline
 Instance: AS
 InstanceOf: Location
 Usage: #inline
-* meta.profile = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[0] = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[+] = "http://ihris.org/fhir/StructureDefinition/ihris-jurisdiction"
 * name = "American Samoa"
 * status = #active
 * identifier.use = #official
@@ -915,7 +927,8 @@ Usage: #inline
 Instance: AT
 InstanceOf: Location
 Usage: #inline
-* meta.profile = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[0] = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[+] = "http://ihris.org/fhir/StructureDefinition/ihris-jurisdiction"
 * name = "Austria"
 * status = #active
 * identifier.use = #official
@@ -929,7 +942,8 @@ Usage: #inline
 Instance: AU
 InstanceOf: Location
 Usage: #inline
-* meta.profile = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[0] = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[+] = "http://ihris.org/fhir/StructureDefinition/ihris-jurisdiction"
 * name = "Australia"
 * status = #active
 * identifier.use = #official
@@ -943,7 +957,8 @@ Usage: #inline
 Instance: AW
 InstanceOf: Location
 Usage: #inline
-* meta.profile = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[0] = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[+] = "http://ihris.org/fhir/StructureDefinition/ihris-jurisdiction"
 * name = "Aruba"
 * status = #active
 * identifier.use = #official
@@ -957,7 +972,8 @@ Usage: #inline
 Instance: AX
 InstanceOf: Location
 Usage: #inline
-* meta.profile = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[0] = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[+] = "http://ihris.org/fhir/StructureDefinition/ihris-jurisdiction"
 * name = "Åland Islands"
 * status = #active
 * identifier.use = #official
@@ -971,7 +987,8 @@ Usage: #inline
 Instance: AZ
 InstanceOf: Location
 Usage: #inline
-* meta.profile = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[0] = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[+] = "http://ihris.org/fhir/StructureDefinition/ihris-jurisdiction"
 * name = "Azerbaijan"
 * status = #active
 * identifier.use = #official
@@ -985,7 +1002,8 @@ Usage: #inline
 Instance: BA
 InstanceOf: Location
 Usage: #inline
-* meta.profile = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[0] = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[+] = "http://ihris.org/fhir/StructureDefinition/ihris-jurisdiction"
 * name = "Bosnia And Herzegovina"
 * status = #active
 * identifier.use = #official
@@ -999,7 +1017,8 @@ Usage: #inline
 Instance: BB
 InstanceOf: Location
 Usage: #inline
-* meta.profile = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[0] = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[+] = "http://ihris.org/fhir/StructureDefinition/ihris-jurisdiction"
 * name = "Barbados"
 * status = #active
 * identifier.use = #official
@@ -1013,7 +1032,8 @@ Usage: #inline
 Instance: BD
 InstanceOf: Location
 Usage: #inline
-* meta.profile = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[0] = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[+] = "http://ihris.org/fhir/StructureDefinition/ihris-jurisdiction"
 * name = "Bangladesh"
 * status = #active
 * identifier.use = #official
@@ -1027,7 +1047,8 @@ Usage: #inline
 Instance: BE
 InstanceOf: Location
 Usage: #inline
-* meta.profile = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[0] = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[+] = "http://ihris.org/fhir/StructureDefinition/ihris-jurisdiction"
 * name = "Belgium"
 * status = #active
 * identifier.use = #official
@@ -1041,7 +1062,8 @@ Usage: #inline
 Instance: BF
 InstanceOf: Location
 Usage: #inline
-* meta.profile = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[0] = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[+] = "http://ihris.org/fhir/StructureDefinition/ihris-jurisdiction"
 * name = "Burkina Faso"
 * status = #active
 * identifier.use = #official
@@ -1055,7 +1077,8 @@ Usage: #inline
 Instance: BG
 InstanceOf: Location
 Usage: #inline
-* meta.profile = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[0] = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[+] = "http://ihris.org/fhir/StructureDefinition/ihris-jurisdiction"
 * name = "Bulgaria"
 * status = #active
 * identifier.use = #official
@@ -1069,7 +1092,8 @@ Usage: #inline
 Instance: BH
 InstanceOf: Location
 Usage: #inline
-* meta.profile = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[0] = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[+] = "http://ihris.org/fhir/StructureDefinition/ihris-jurisdiction"
 * name = "Bahrain"
 * status = #active
 * identifier.use = #official
@@ -1083,7 +1107,8 @@ Usage: #inline
 Instance: BI
 InstanceOf: Location
 Usage: #inline
-* meta.profile = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[0] = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[+] = "http://ihris.org/fhir/StructureDefinition/ihris-jurisdiction"
 * name = "Burundi"
 * status = #active
 * identifier.use = #official
@@ -1097,7 +1122,8 @@ Usage: #inline
 Instance: BJ
 InstanceOf: Location
 Usage: #inline
-* meta.profile = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[0] = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[+] = "http://ihris.org/fhir/StructureDefinition/ihris-jurisdiction"
 * name = "Benin"
 * status = #active
 * identifier.use = #official
@@ -1111,7 +1137,8 @@ Usage: #inline
 Instance: BL
 InstanceOf: Location
 Usage: #inline
-* meta.profile = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[0] = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[+] = "http://ihris.org/fhir/StructureDefinition/ihris-jurisdiction"
 * name = "Saint BarthÉlemy"
 * status = #active
 * identifier.use = #official
@@ -1125,7 +1152,8 @@ Usage: #inline
 Instance: BM
 InstanceOf: Location
 Usage: #inline
-* meta.profile = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[0] = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[+] = "http://ihris.org/fhir/StructureDefinition/ihris-jurisdiction"
 * name = "Bermuda"
 * status = #active
 * identifier.use = #official
@@ -1139,7 +1167,8 @@ Usage: #inline
 Instance: BN
 InstanceOf: Location
 Usage: #inline
-* meta.profile = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[0] = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[+] = "http://ihris.org/fhir/StructureDefinition/ihris-jurisdiction"
 * name = "Brunei Darussalam"
 * status = #active
 * identifier.use = #official
@@ -1153,7 +1182,8 @@ Usage: #inline
 Instance: BO
 InstanceOf: Location
 Usage: #inline
-* meta.profile = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[0] = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[+] = "http://ihris.org/fhir/StructureDefinition/ihris-jurisdiction"
 * name = "Bolivia"
 * status = #active
 * identifier.use = #official
@@ -1167,7 +1197,8 @@ Usage: #inline
 Instance: BR
 InstanceOf: Location
 Usage: #inline
-* meta.profile = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[0] = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[+] = "http://ihris.org/fhir/StructureDefinition/ihris-jurisdiction"
 * name = "Brazil"
 * status = #active
 * identifier.use = #official
@@ -1181,7 +1212,8 @@ Usage: #inline
 Instance: BS
 InstanceOf: Location
 Usage: #inline
-* meta.profile = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[0] = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[+] = "http://ihris.org/fhir/StructureDefinition/ihris-jurisdiction"
 * name = "Bahamas"
 * status = #active
 * identifier.use = #official
@@ -1195,7 +1227,8 @@ Usage: #inline
 Instance: BT
 InstanceOf: Location
 Usage: #inline
-* meta.profile = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[0] = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[+] = "http://ihris.org/fhir/StructureDefinition/ihris-jurisdiction"
 * name = "Bhutan"
 * status = #active
 * identifier.use = #official
@@ -1209,7 +1242,8 @@ Usage: #inline
 Instance: BV
 InstanceOf: Location
 Usage: #inline
-* meta.profile = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[0] = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[+] = "http://ihris.org/fhir/StructureDefinition/ihris-jurisdiction"
 * name = "Bouvet Island"
 * status = #active
 * identifier.use = #official
@@ -1223,7 +1257,8 @@ Usage: #inline
 Instance: BW
 InstanceOf: Location
 Usage: #inline
-* meta.profile = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[0] = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[+] = "http://ihris.org/fhir/StructureDefinition/ihris-jurisdiction"
 * name = "Botswana"
 * status = #active
 * identifier.use = #official
@@ -1237,7 +1272,8 @@ Usage: #inline
 Instance: BY
 InstanceOf: Location
 Usage: #inline
-* meta.profile = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[0] = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[+] = "http://ihris.org/fhir/StructureDefinition/ihris-jurisdiction"
 * name = "Belarus"
 * status = #active
 * identifier.use = #official
@@ -1251,7 +1287,8 @@ Usage: #inline
 Instance: BZ
 InstanceOf: Location
 Usage: #inline
-* meta.profile = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[0] = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[+] = "http://ihris.org/fhir/StructureDefinition/ihris-jurisdiction"
 * name = "Belize"
 * status = #active
 * identifier.use = #official
@@ -1265,7 +1302,8 @@ Usage: #inline
 Instance: CA
 InstanceOf: Location
 Usage: #inline
-* meta.profile = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[0] = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[+] = "http://ihris.org/fhir/StructureDefinition/ihris-jurisdiction"
 * name = "Canada"
 * status = #active
 * identifier.use = #official
@@ -1279,7 +1317,8 @@ Usage: #inline
 Instance: CC
 InstanceOf: Location
 Usage: #inline
-* meta.profile = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[0] = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[+] = "http://ihris.org/fhir/StructureDefinition/ihris-jurisdiction"
 * name = "Cocos (keeling) Islands"
 * status = #active
 * identifier.use = #official
@@ -1293,7 +1332,8 @@ Usage: #inline
 Instance: CD
 InstanceOf: Location
 Usage: #inline
-* meta.profile = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[0] = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[+] = "http://ihris.org/fhir/StructureDefinition/ihris-jurisdiction"
 * name = "Congo, The Democratic Republic Of The"
 * status = #active
 * identifier.use = #official
@@ -1307,7 +1347,8 @@ Usage: #inline
 Instance: CF
 InstanceOf: Location
 Usage: #inline
-* meta.profile = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[0] = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[+] = "http://ihris.org/fhir/StructureDefinition/ihris-jurisdiction"
 * name = "Central African Republic"
 * status = #active
 * identifier.use = #official
@@ -1321,7 +1362,8 @@ Usage: #inline
 Instance: CG
 InstanceOf: Location
 Usage: #inline
-* meta.profile = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[0] = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[+] = "http://ihris.org/fhir/StructureDefinition/ihris-jurisdiction"
 * name = "Congo"
 * status = #active
 * identifier.use = #official
@@ -1335,7 +1377,8 @@ Usage: #inline
 Instance: CH
 InstanceOf: Location
 Usage: #inline
-* meta.profile = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[0] = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[+] = "http://ihris.org/fhir/StructureDefinition/ihris-jurisdiction"
 * name = "Switzerland"
 * status = #active
 * identifier.use = #official
@@ -1349,7 +1392,8 @@ Usage: #inline
 Instance: CI
 InstanceOf: Location
 Usage: #inline
-* meta.profile = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[0] = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[+] = "http://ihris.org/fhir/StructureDefinition/ihris-jurisdiction"
 * name = "CÔte D'ivoire"
 * status = #active
 * identifier.use = #official
@@ -1363,7 +1407,8 @@ Usage: #inline
 Instance: CK
 InstanceOf: Location
 Usage: #inline
-* meta.profile = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[0] = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[+] = "http://ihris.org/fhir/StructureDefinition/ihris-jurisdiction"
 * name = "Cook Islands"
 * status = #active
 * identifier.use = #official
@@ -1377,7 +1422,8 @@ Usage: #inline
 Instance: CL
 InstanceOf: Location
 Usage: #inline
-* meta.profile = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[0] = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[+] = "http://ihris.org/fhir/StructureDefinition/ihris-jurisdiction"
 * name = "Chile"
 * status = #active
 * identifier.use = #official
@@ -1391,7 +1437,8 @@ Usage: #inline
 Instance: CM
 InstanceOf: Location
 Usage: #inline
-* meta.profile = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[0] = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[+] = "http://ihris.org/fhir/StructureDefinition/ihris-jurisdiction"
 * name = "Cameroon"
 * status = #active
 * identifier.use = #official
@@ -1405,7 +1452,8 @@ Usage: #inline
 Instance: CN
 InstanceOf: Location
 Usage: #inline
-* meta.profile = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[0] = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[+] = "http://ihris.org/fhir/StructureDefinition/ihris-jurisdiction"
 * name = "China"
 * status = #active
 * identifier.use = #official
@@ -1419,7 +1467,8 @@ Usage: #inline
 Instance: CO
 InstanceOf: Location
 Usage: #inline
-* meta.profile = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[0] = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[+] = "http://ihris.org/fhir/StructureDefinition/ihris-jurisdiction"
 * name = "Colombia"
 * status = #active
 * identifier.use = #official
@@ -1433,7 +1482,8 @@ Usage: #inline
 Instance: CR
 InstanceOf: Location
 Usage: #inline
-* meta.profile = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[0] = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[+] = "http://ihris.org/fhir/StructureDefinition/ihris-jurisdiction"
 * name = "Costa Rica"
 * status = #active
 * identifier.use = #official
@@ -1447,7 +1497,8 @@ Usage: #inline
 Instance: CU
 InstanceOf: Location
 Usage: #inline
-* meta.profile = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[0] = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[+] = "http://ihris.org/fhir/StructureDefinition/ihris-jurisdiction"
 * name = "Cuba"
 * status = #active
 * identifier.use = #official
@@ -1461,7 +1512,8 @@ Usage: #inline
 Instance: CV
 InstanceOf: Location
 Usage: #inline
-* meta.profile = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[0] = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[+] = "http://ihris.org/fhir/StructureDefinition/ihris-jurisdiction"
 * name = "Cape Verde"
 * status = #active
 * identifier.use = #official
@@ -1475,7 +1527,8 @@ Usage: #inline
 Instance: CX
 InstanceOf: Location
 Usage: #inline
-* meta.profile = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[0] = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[+] = "http://ihris.org/fhir/StructureDefinition/ihris-jurisdiction"
 * name = "Christmas Island"
 * status = #active
 * identifier.use = #official
@@ -1489,7 +1542,8 @@ Usage: #inline
 Instance: CY
 InstanceOf: Location
 Usage: #inline
-* meta.profile = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[0] = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[+] = "http://ihris.org/fhir/StructureDefinition/ihris-jurisdiction"
 * name = "Cyprus"
 * status = #active
 * identifier.use = #official
@@ -1503,7 +1557,8 @@ Usage: #inline
 Instance: CZ
 InstanceOf: Location
 Usage: #inline
-* meta.profile = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[0] = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[+] = "http://ihris.org/fhir/StructureDefinition/ihris-jurisdiction"
 * name = "Czech Republic"
 * status = #active
 * identifier.use = #official
@@ -1517,7 +1572,8 @@ Usage: #inline
 Instance: DE
 InstanceOf: Location
 Usage: #inline
-* meta.profile = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[0] = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[+] = "http://ihris.org/fhir/StructureDefinition/ihris-jurisdiction"
 * name = "Germany"
 * status = #active
 * identifier.use = #official
@@ -1531,7 +1587,8 @@ Usage: #inline
 Instance: DJ
 InstanceOf: Location
 Usage: #inline
-* meta.profile = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[0] = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[+] = "http://ihris.org/fhir/StructureDefinition/ihris-jurisdiction"
 * name = "Djibouti"
 * status = #active
 * identifier.use = #official
@@ -1545,7 +1602,8 @@ Usage: #inline
 Instance: DK
 InstanceOf: Location
 Usage: #inline
-* meta.profile = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[0] = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[+] = "http://ihris.org/fhir/StructureDefinition/ihris-jurisdiction"
 * name = "Denmark"
 * status = #active
 * identifier.use = #official
@@ -1559,7 +1617,8 @@ Usage: #inline
 Instance: DM
 InstanceOf: Location
 Usage: #inline
-* meta.profile = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[0] = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[+] = "http://ihris.org/fhir/StructureDefinition/ihris-jurisdiction"
 * name = "Dominica"
 * status = #active
 * identifier.use = #official
@@ -1573,7 +1632,8 @@ Usage: #inline
 Instance: DO
 InstanceOf: Location
 Usage: #inline
-* meta.profile = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[0] = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[+] = "http://ihris.org/fhir/StructureDefinition/ihris-jurisdiction"
 * name = "Dominican Republic"
 * status = #active
 * identifier.use = #official
@@ -1587,7 +1647,8 @@ Usage: #inline
 Instance: DZ
 InstanceOf: Location
 Usage: #inline
-* meta.profile = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[0] = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[+] = "http://ihris.org/fhir/StructureDefinition/ihris-jurisdiction"
 * name = "Algeria"
 * status = #active
 * identifier.use = #official
@@ -1601,7 +1662,8 @@ Usage: #inline
 Instance: EC
 InstanceOf: Location
 Usage: #inline
-* meta.profile = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[0] = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[+] = "http://ihris.org/fhir/StructureDefinition/ihris-jurisdiction"
 * name = "Ecuador"
 * status = #active
 * identifier.use = #official
@@ -1615,7 +1677,8 @@ Usage: #inline
 Instance: EE
 InstanceOf: Location
 Usage: #inline
-* meta.profile = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[0] = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[+] = "http://ihris.org/fhir/StructureDefinition/ihris-jurisdiction"
 * name = "Estonia"
 * status = #active
 * identifier.use = #official
@@ -1629,7 +1692,8 @@ Usage: #inline
 Instance: EG
 InstanceOf: Location
 Usage: #inline
-* meta.profile = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[0] = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[+] = "http://ihris.org/fhir/StructureDefinition/ihris-jurisdiction"
 * name = "Egypt"
 * status = #active
 * identifier.use = #official
@@ -1643,7 +1707,8 @@ Usage: #inline
 Instance: EH
 InstanceOf: Location
 Usage: #inline
-* meta.profile = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[0] = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[+] = "http://ihris.org/fhir/StructureDefinition/ihris-jurisdiction"
 * name = "Western Sahara"
 * status = #active
 * identifier.use = #official
@@ -1657,7 +1722,8 @@ Usage: #inline
 Instance: ER
 InstanceOf: Location
 Usage: #inline
-* meta.profile = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[0] = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[+] = "http://ihris.org/fhir/StructureDefinition/ihris-jurisdiction"
 * name = "Eritrea"
 * status = #active
 * identifier.use = #official
@@ -1671,7 +1737,8 @@ Usage: #inline
 Instance: ES
 InstanceOf: Location
 Usage: #inline
-* meta.profile = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[0] = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[+] = "http://ihris.org/fhir/StructureDefinition/ihris-jurisdiction"
 * name = "Spain"
 * status = #active
 * identifier.use = #official
@@ -1685,7 +1752,8 @@ Usage: #inline
 Instance: ET
 InstanceOf: Location
 Usage: #inline
-* meta.profile = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[0] = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[+] = "http://ihris.org/fhir/StructureDefinition/ihris-jurisdiction"
 * name = "Ethiopia"
 * status = #active
 * identifier.use = #official
@@ -1699,7 +1767,8 @@ Usage: #inline
 Instance: FI
 InstanceOf: Location
 Usage: #inline
-* meta.profile = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[0] = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[+] = "http://ihris.org/fhir/StructureDefinition/ihris-jurisdiction"
 * name = "Finland"
 * status = #active
 * identifier.use = #official
@@ -1713,7 +1782,8 @@ Usage: #inline
 Instance: FJ
 InstanceOf: Location
 Usage: #inline
-* meta.profile = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[0] = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[+] = "http://ihris.org/fhir/StructureDefinition/ihris-jurisdiction"
 * name = "Fiji"
 * status = #active
 * identifier.use = #official
@@ -1727,7 +1797,8 @@ Usage: #inline
 Instance: FK
 InstanceOf: Location
 Usage: #inline
-* meta.profile = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[0] = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[+] = "http://ihris.org/fhir/StructureDefinition/ihris-jurisdiction"
 * name = "Falkland Islands (malvinas)"
 * status = #active
 * identifier.use = #official
@@ -1741,7 +1812,8 @@ Usage: #inline
 Instance: FM
 InstanceOf: Location
 Usage: #inline
-* meta.profile = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[0] = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[+] = "http://ihris.org/fhir/StructureDefinition/ihris-jurisdiction"
 * name = "Micronesia, Federated States Of"
 * status = #active
 * identifier.use = #official
@@ -1755,7 +1827,8 @@ Usage: #inline
 Instance: FO
 InstanceOf: Location
 Usage: #inline
-* meta.profile = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[0] = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[+] = "http://ihris.org/fhir/StructureDefinition/ihris-jurisdiction"
 * name = "Faroe Islands"
 * status = #active
 * identifier.use = #official
@@ -1769,7 +1842,8 @@ Usage: #inline
 Instance: FR
 InstanceOf: Location
 Usage: #inline
-* meta.profile = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[0] = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[+] = "http://ihris.org/fhir/StructureDefinition/ihris-jurisdiction"
 * name = "France"
 * status = #active
 * identifier.use = #official
@@ -1783,7 +1857,8 @@ Usage: #inline
 Instance: GA
 InstanceOf: Location
 Usage: #inline
-* meta.profile = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[0] = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[+] = "http://ihris.org/fhir/StructureDefinition/ihris-jurisdiction"
 * name = "Gabon"
 * status = #active
 * identifier.use = #official
@@ -1797,7 +1872,8 @@ Usage: #inline
 Instance: GB
 InstanceOf: Location
 Usage: #inline
-* meta.profile = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[0] = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[+] = "http://ihris.org/fhir/StructureDefinition/ihris-jurisdiction"
 * name = "United Kingdom"
 * status = #active
 * identifier.use = #official
@@ -1811,7 +1887,8 @@ Usage: #inline
 Instance: GD
 InstanceOf: Location
 Usage: #inline
-* meta.profile = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[0] = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[+] = "http://ihris.org/fhir/StructureDefinition/ihris-jurisdiction"
 * name = "Grenada"
 * status = #active
 * identifier.use = #official
@@ -1825,7 +1902,8 @@ Usage: #inline
 Instance: GE
 InstanceOf: Location
 Usage: #inline
-* meta.profile = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[0] = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[+] = "http://ihris.org/fhir/StructureDefinition/ihris-jurisdiction"
 * name = "Georgia"
 * status = #active
 * identifier.use = #official
@@ -1839,7 +1917,8 @@ Usage: #inline
 Instance: GF
 InstanceOf: Location
 Usage: #inline
-* meta.profile = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[0] = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[+] = "http://ihris.org/fhir/StructureDefinition/ihris-jurisdiction"
 * name = "French Guiana"
 * status = #active
 * identifier.use = #official
@@ -1853,7 +1932,8 @@ Usage: #inline
 Instance: GG
 InstanceOf: Location
 Usage: #inline
-* meta.profile = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[0] = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[+] = "http://ihris.org/fhir/StructureDefinition/ihris-jurisdiction"
 * name = "Guernsey"
 * status = #active
 * identifier.use = #official
@@ -1867,7 +1947,8 @@ Usage: #inline
 Instance: GH
 InstanceOf: Location
 Usage: #inline
-* meta.profile = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[0] = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[+] = "http://ihris.org/fhir/StructureDefinition/ihris-jurisdiction"
 * name = "Ghana"
 * status = #active
 * identifier.use = #official
@@ -1881,7 +1962,8 @@ Usage: #inline
 Instance: GI
 InstanceOf: Location
 Usage: #inline
-* meta.profile = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[0] = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[+] = "http://ihris.org/fhir/StructureDefinition/ihris-jurisdiction"
 * name = "Gibraltar"
 * status = #active
 * identifier.use = #official
@@ -1895,7 +1977,8 @@ Usage: #inline
 Instance: GL
 InstanceOf: Location
 Usage: #inline
-* meta.profile = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[0] = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[+] = "http://ihris.org/fhir/StructureDefinition/ihris-jurisdiction"
 * name = "Greenland"
 * status = #active
 * identifier.use = #official
@@ -1909,7 +1992,8 @@ Usage: #inline
 Instance: GM
 InstanceOf: Location
 Usage: #inline
-* meta.profile = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[0] = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[+] = "http://ihris.org/fhir/StructureDefinition/ihris-jurisdiction"
 * name = "Gambia"
 * status = #active
 * identifier.use = #official
@@ -1923,7 +2007,8 @@ Usage: #inline
 Instance: GN
 InstanceOf: Location
 Usage: #inline
-* meta.profile = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[0] = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[+] = "http://ihris.org/fhir/StructureDefinition/ihris-jurisdiction"
 * name = "Guinea"
 * status = #active
 * identifier.use = #official
@@ -1937,7 +2022,8 @@ Usage: #inline
 Instance: GP
 InstanceOf: Location
 Usage: #inline
-* meta.profile = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[0] = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[+] = "http://ihris.org/fhir/StructureDefinition/ihris-jurisdiction"
 * name = "Guadeloupe"
 * status = #active
 * identifier.use = #official
@@ -1951,7 +2037,8 @@ Usage: #inline
 Instance: GQ
 InstanceOf: Location
 Usage: #inline
-* meta.profile = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[0] = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[+] = "http://ihris.org/fhir/StructureDefinition/ihris-jurisdiction"
 * name = "Equatorial Guinea"
 * status = #active
 * identifier.use = #official
@@ -1965,7 +2052,8 @@ Usage: #inline
 Instance: GR
 InstanceOf: Location
 Usage: #inline
-* meta.profile = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[0] = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[+] = "http://ihris.org/fhir/StructureDefinition/ihris-jurisdiction"
 * name = "Greece"
 * status = #active
 * identifier.use = #official
@@ -1979,7 +2067,8 @@ Usage: #inline
 Instance: GS
 InstanceOf: Location
 Usage: #inline
-* meta.profile = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[0] = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[+] = "http://ihris.org/fhir/StructureDefinition/ihris-jurisdiction"
 * name = "South Georgia And The South Sandwich Islands"
 * status = #active
 * identifier.use = #official
@@ -1993,7 +2082,8 @@ Usage: #inline
 Instance: GT
 InstanceOf: Location
 Usage: #inline
-* meta.profile = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[0] = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[+] = "http://ihris.org/fhir/StructureDefinition/ihris-jurisdiction"
 * name = "Guatemala"
 * status = #active
 * identifier.use = #official
@@ -2007,7 +2097,8 @@ Usage: #inline
 Instance: GU
 InstanceOf: Location
 Usage: #inline
-* meta.profile = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[0] = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[+] = "http://ihris.org/fhir/StructureDefinition/ihris-jurisdiction"
 * name = "Guam"
 * status = #active
 * identifier.use = #official
@@ -2021,7 +2112,8 @@ Usage: #inline
 Instance: GW
 InstanceOf: Location
 Usage: #inline
-* meta.profile = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[0] = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[+] = "http://ihris.org/fhir/StructureDefinition/ihris-jurisdiction"
 * name = "Guinea-bissau"
 * status = #active
 * identifier.use = #official
@@ -2035,7 +2127,8 @@ Usage: #inline
 Instance: GY
 InstanceOf: Location
 Usage: #inline
-* meta.profile = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[0] = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[+] = "http://ihris.org/fhir/StructureDefinition/ihris-jurisdiction"
 * name = "Guyana"
 * status = #active
 * identifier.use = #official
@@ -2049,7 +2142,8 @@ Usage: #inline
 Instance: HK
 InstanceOf: Location
 Usage: #inline
-* meta.profile = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[0] = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[+] = "http://ihris.org/fhir/StructureDefinition/ihris-jurisdiction"
 * name = "Hong Kong"
 * status = #active
 * identifier.use = #official
@@ -2063,7 +2157,8 @@ Usage: #inline
 Instance: HM
 InstanceOf: Location
 Usage: #inline
-* meta.profile = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[0] = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[+] = "http://ihris.org/fhir/StructureDefinition/ihris-jurisdiction"
 * name = "Heard Island And Mcdonald Islands"
 * status = #active
 * identifier.use = #official
@@ -2077,7 +2172,8 @@ Usage: #inline
 Instance: HN
 InstanceOf: Location
 Usage: #inline
-* meta.profile = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[0] = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[+] = "http://ihris.org/fhir/StructureDefinition/ihris-jurisdiction"
 * name = "Honduras"
 * status = #active
 * identifier.use = #official
@@ -2091,7 +2187,8 @@ Usage: #inline
 Instance: HR
 InstanceOf: Location
 Usage: #inline
-* meta.profile = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[0] = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[+] = "http://ihris.org/fhir/StructureDefinition/ihris-jurisdiction"
 * name = "Croatia"
 * status = #active
 * identifier.use = #official
@@ -2105,7 +2202,8 @@ Usage: #inline
 Instance: HT
 InstanceOf: Location
 Usage: #inline
-* meta.profile = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[0] = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[+] = "http://ihris.org/fhir/StructureDefinition/ihris-jurisdiction"
 * name = "Haiti"
 * status = #active
 * identifier.use = #official
@@ -2119,7 +2217,8 @@ Usage: #inline
 Instance: HU
 InstanceOf: Location
 Usage: #inline
-* meta.profile = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[0] = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[+] = "http://ihris.org/fhir/StructureDefinition/ihris-jurisdiction"
 * name = "Hungary"
 * status = #active
 * identifier.use = #official
@@ -2133,7 +2232,8 @@ Usage: #inline
 Instance: ID
 InstanceOf: Location
 Usage: #inline
-* meta.profile = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[0] = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[+] = "http://ihris.org/fhir/StructureDefinition/ihris-jurisdiction"
 * name = "Indonesia"
 * status = #active
 * identifier.use = #official
@@ -2147,7 +2247,8 @@ Usage: #inline
 Instance: IE
 InstanceOf: Location
 Usage: #inline
-* meta.profile = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[0] = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[+] = "http://ihris.org/fhir/StructureDefinition/ihris-jurisdiction"
 * name = "Ireland"
 * status = #active
 * identifier.use = #official
@@ -2161,7 +2262,8 @@ Usage: #inline
 Instance: IL
 InstanceOf: Location
 Usage: #inline
-* meta.profile = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[0] = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[+] = "http://ihris.org/fhir/StructureDefinition/ihris-jurisdiction"
 * name = "Israel"
 * status = #active
 * identifier.use = #official
@@ -2175,7 +2277,8 @@ Usage: #inline
 Instance: IM
 InstanceOf: Location
 Usage: #inline
-* meta.profile = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[0] = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[+] = "http://ihris.org/fhir/StructureDefinition/ihris-jurisdiction"
 * name = "Isle Of Man"
 * status = #active
 * identifier.use = #official
@@ -2189,7 +2292,8 @@ Usage: #inline
 Instance: IN
 InstanceOf: Location
 Usage: #inline
-* meta.profile = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[0] = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[+] = "http://ihris.org/fhir/StructureDefinition/ihris-jurisdiction"
 * name = "India"
 * status = #active
 * identifier.use = #official
@@ -2203,7 +2307,8 @@ Usage: #inline
 Instance: IO
 InstanceOf: Location
 Usage: #inline
-* meta.profile = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[0] = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[+] = "http://ihris.org/fhir/StructureDefinition/ihris-jurisdiction"
 * name = "British Indian Ocean Territory"
 * status = #active
 * identifier.use = #official
@@ -2217,7 +2322,8 @@ Usage: #inline
 Instance: IQ
 InstanceOf: Location
 Usage: #inline
-* meta.profile = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[0] = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[+] = "http://ihris.org/fhir/StructureDefinition/ihris-jurisdiction"
 * name = "Iraq"
 * status = #active
 * identifier.use = #official
@@ -2231,7 +2337,8 @@ Usage: #inline
 Instance: IR
 InstanceOf: Location
 Usage: #inline
-* meta.profile = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[0] = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[+] = "http://ihris.org/fhir/StructureDefinition/ihris-jurisdiction"
 * name = "Iran, Islamic Republic Of"
 * status = #active
 * identifier.use = #official
@@ -2245,7 +2352,8 @@ Usage: #inline
 Instance: IS
 InstanceOf: Location
 Usage: #inline
-* meta.profile = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[0] = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[+] = "http://ihris.org/fhir/StructureDefinition/ihris-jurisdiction"
 * name = "Iceland"
 * status = #active
 * identifier.use = #official
@@ -2259,7 +2367,8 @@ Usage: #inline
 Instance: IT
 InstanceOf: Location
 Usage: #inline
-* meta.profile = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[0] = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[+] = "http://ihris.org/fhir/StructureDefinition/ihris-jurisdiction"
 * name = "Italy"
 * status = #active
 * identifier.use = #official
@@ -2273,7 +2382,8 @@ Usage: #inline
 Instance: JE
 InstanceOf: Location
 Usage: #inline
-* meta.profile = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[0] = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[+] = "http://ihris.org/fhir/StructureDefinition/ihris-jurisdiction"
 * name = "Jersey"
 * status = #active
 * identifier.use = #official
@@ -2287,7 +2397,8 @@ Usage: #inline
 Instance: JM
 InstanceOf: Location
 Usage: #inline
-* meta.profile = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[0] = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[+] = "http://ihris.org/fhir/StructureDefinition/ihris-jurisdiction"
 * name = "Jamaica"
 * status = #active
 * identifier.use = #official
@@ -2301,7 +2412,8 @@ Usage: #inline
 Instance: JO
 InstanceOf: Location
 Usage: #inline
-* meta.profile = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[0] = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[+] = "http://ihris.org/fhir/StructureDefinition/ihris-jurisdiction"
 * name = "Jordan"
 * status = #active
 * identifier.use = #official
@@ -2315,7 +2427,8 @@ Usage: #inline
 Instance: JP
 InstanceOf: Location
 Usage: #inline
-* meta.profile = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[0] = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[+] = "http://ihris.org/fhir/StructureDefinition/ihris-jurisdiction"
 * name = "Japan"
 * status = #active
 * identifier.use = #official
@@ -2329,7 +2442,8 @@ Usage: #inline
 Instance: KE
 InstanceOf: Location
 Usage: #inline
-* meta.profile = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[0] = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[+] = "http://ihris.org/fhir/StructureDefinition/ihris-jurisdiction"
 * name = "Kenya"
 * status = #active
 * identifier.use = #official
@@ -2343,7 +2457,8 @@ Usage: #inline
 Instance: KG
 InstanceOf: Location
 Usage: #inline
-* meta.profile = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[0] = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[+] = "http://ihris.org/fhir/StructureDefinition/ihris-jurisdiction"
 * name = "Kyrgyzstan"
 * status = #active
 * identifier.use = #official
@@ -2357,7 +2472,8 @@ Usage: #inline
 Instance: KH
 InstanceOf: Location
 Usage: #inline
-* meta.profile = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[0] = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[+] = "http://ihris.org/fhir/StructureDefinition/ihris-jurisdiction"
 * name = "Cambodia"
 * status = #active
 * identifier.use = #official
@@ -2371,7 +2487,8 @@ Usage: #inline
 Instance: KI
 InstanceOf: Location
 Usage: #inline
-* meta.profile = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[0] = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[+] = "http://ihris.org/fhir/StructureDefinition/ihris-jurisdiction"
 * name = "Kiribati"
 * status = #active
 * identifier.use = #official
@@ -2385,7 +2502,8 @@ Usage: #inline
 Instance: KM
 InstanceOf: Location
 Usage: #inline
-* meta.profile = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[0] = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[+] = "http://ihris.org/fhir/StructureDefinition/ihris-jurisdiction"
 * name = "Comoros"
 * status = #active
 * identifier.use = #official
@@ -2399,7 +2517,8 @@ Usage: #inline
 Instance: KN
 InstanceOf: Location
 Usage: #inline
-* meta.profile = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[0] = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[+] = "http://ihris.org/fhir/StructureDefinition/ihris-jurisdiction"
 * name = "Saint Kitts And Nevis"
 * status = #active
 * identifier.use = #official
@@ -2413,7 +2532,8 @@ Usage: #inline
 Instance: KP
 InstanceOf: Location
 Usage: #inline
-* meta.profile = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[0] = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[+] = "http://ihris.org/fhir/StructureDefinition/ihris-jurisdiction"
 * name = "Korea, Democratic People's Republic Of"
 * status = #active
 * identifier.use = #official
@@ -2427,7 +2547,8 @@ Usage: #inline
 Instance: KR
 InstanceOf: Location
 Usage: #inline
-* meta.profile = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[0] = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[+] = "http://ihris.org/fhir/StructureDefinition/ihris-jurisdiction"
 * name = "Korea, Republic Of"
 * status = #active
 * identifier.use = #official
@@ -2441,7 +2562,8 @@ Usage: #inline
 Instance: KW
 InstanceOf: Location
 Usage: #inline
-* meta.profile = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[0] = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[+] = "http://ihris.org/fhir/StructureDefinition/ihris-jurisdiction"
 * name = "Kuwait"
 * status = #active
 * identifier.use = #official
@@ -2455,7 +2577,8 @@ Usage: #inline
 Instance: KY
 InstanceOf: Location
 Usage: #inline
-* meta.profile = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[0] = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[+] = "http://ihris.org/fhir/StructureDefinition/ihris-jurisdiction"
 * name = "Cayman Islands"
 * status = #active
 * identifier.use = #official
@@ -2469,7 +2592,8 @@ Usage: #inline
 Instance: KZ
 InstanceOf: Location
 Usage: #inline
-* meta.profile = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[0] = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[+] = "http://ihris.org/fhir/StructureDefinition/ihris-jurisdiction"
 * name = "Kazakhstan"
 * status = #active
 * identifier.use = #official
@@ -2483,7 +2607,8 @@ Usage: #inline
 Instance: LA
 InstanceOf: Location
 Usage: #inline
-* meta.profile = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[0] = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[+] = "http://ihris.org/fhir/StructureDefinition/ihris-jurisdiction"
 * name = "Lao People's Democratic Republic"
 * status = #active
 * identifier.use = #official
@@ -2497,7 +2622,8 @@ Usage: #inline
 Instance: LB
 InstanceOf: Location
 Usage: #inline
-* meta.profile = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[0] = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[+] = "http://ihris.org/fhir/StructureDefinition/ihris-jurisdiction"
 * name = "Lebanon"
 * status = #active
 * identifier.use = #official
@@ -2511,7 +2637,8 @@ Usage: #inline
 Instance: LC
 InstanceOf: Location
 Usage: #inline
-* meta.profile = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[0] = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[+] = "http://ihris.org/fhir/StructureDefinition/ihris-jurisdiction"
 * name = "Saint Lucia"
 * status = #active
 * identifier.use = #official
@@ -2525,7 +2652,8 @@ Usage: #inline
 Instance: LI
 InstanceOf: Location
 Usage: #inline
-* meta.profile = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[0] = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[+] = "http://ihris.org/fhir/StructureDefinition/ihris-jurisdiction"
 * name = "Liechtenstein"
 * status = #active
 * identifier.use = #official
@@ -2539,7 +2667,8 @@ Usage: #inline
 Instance: LK
 InstanceOf: Location
 Usage: #inline
-* meta.profile = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[0] = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[+] = "http://ihris.org/fhir/StructureDefinition/ihris-jurisdiction"
 * name = "Sri Lanka"
 * status = #active
 * identifier.use = #official
@@ -2553,7 +2682,8 @@ Usage: #inline
 Instance: LR
 InstanceOf: Location
 Usage: #inline
-* meta.profile = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[0] = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[+] = "http://ihris.org/fhir/StructureDefinition/ihris-jurisdiction"
 * name = "Liberia"
 * status = #active
 * identifier.use = #official
@@ -2567,7 +2697,8 @@ Usage: #inline
 Instance: LS
 InstanceOf: Location
 Usage: #inline
-* meta.profile = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[0] = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[+] = "http://ihris.org/fhir/StructureDefinition/ihris-jurisdiction"
 * name = "Lesotho"
 * status = #active
 * identifier.use = #official
@@ -2581,7 +2712,8 @@ Usage: #inline
 Instance: LT
 InstanceOf: Location
 Usage: #inline
-* meta.profile = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[0] = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[+] = "http://ihris.org/fhir/StructureDefinition/ihris-jurisdiction"
 * name = "Lithuania"
 * status = #active
 * identifier.use = #official
@@ -2595,7 +2727,8 @@ Usage: #inline
 Instance: LU
 InstanceOf: Location
 Usage: #inline
-* meta.profile = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[0] = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[+] = "http://ihris.org/fhir/StructureDefinition/ihris-jurisdiction"
 * name = "Luxembourg"
 * status = #active
 * identifier.use = #official
@@ -2609,7 +2742,8 @@ Usage: #inline
 Instance: LV
 InstanceOf: Location
 Usage: #inline
-* meta.profile = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[0] = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[+] = "http://ihris.org/fhir/StructureDefinition/ihris-jurisdiction"
 * name = "Latvia"
 * status = #active
 * identifier.use = #official
@@ -2623,7 +2757,8 @@ Usage: #inline
 Instance: LY
 InstanceOf: Location
 Usage: #inline
-* meta.profile = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[0] = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[+] = "http://ihris.org/fhir/StructureDefinition/ihris-jurisdiction"
 * name = "Libyan Arab Jamahiriya"
 * status = #active
 * identifier.use = #official
@@ -2637,7 +2772,8 @@ Usage: #inline
 Instance: MA
 InstanceOf: Location
 Usage: #inline
-* meta.profile = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[0] = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[+] = "http://ihris.org/fhir/StructureDefinition/ihris-jurisdiction"
 * name = "Morocco"
 * status = #active
 * identifier.use = #official
@@ -2651,7 +2787,8 @@ Usage: #inline
 Instance: MC
 InstanceOf: Location
 Usage: #inline
-* meta.profile = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[0] = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[+] = "http://ihris.org/fhir/StructureDefinition/ihris-jurisdiction"
 * name = "Monaco"
 * status = #active
 * identifier.use = #official
@@ -2665,7 +2802,8 @@ Usage: #inline
 Instance: MD
 InstanceOf: Location
 Usage: #inline
-* meta.profile = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[0] = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[+] = "http://ihris.org/fhir/StructureDefinition/ihris-jurisdiction"
 * name = "Moldova, Republic Of"
 * status = #active
 * identifier.use = #official
@@ -2679,7 +2817,8 @@ Usage: #inline
 Instance: ME
 InstanceOf: Location
 Usage: #inline
-* meta.profile = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[0] = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[+] = "http://ihris.org/fhir/StructureDefinition/ihris-jurisdiction"
 * name = "Montenegro"
 * status = #active
 * identifier.use = #official
@@ -2693,7 +2832,8 @@ Usage: #inline
 Instance: MF
 InstanceOf: Location
 Usage: #inline
-* meta.profile = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[0] = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[+] = "http://ihris.org/fhir/StructureDefinition/ihris-jurisdiction"
 * name = "Saint Martin"
 * status = #active
 * identifier.use = #official
@@ -2707,7 +2847,8 @@ Usage: #inline
 Instance: MG
 InstanceOf: Location
 Usage: #inline
-* meta.profile = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[0] = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[+] = "http://ihris.org/fhir/StructureDefinition/ihris-jurisdiction"
 * name = "Madagascar"
 * status = #active
 * identifier.use = #official
@@ -2721,7 +2862,8 @@ Usage: #inline
 Instance: MH
 InstanceOf: Location
 Usage: #inline
-* meta.profile = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[0] = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[+] = "http://ihris.org/fhir/StructureDefinition/ihris-jurisdiction"
 * name = "Marshall Islands"
 * status = #active
 * identifier.use = #official
@@ -2735,7 +2877,8 @@ Usage: #inline
 Instance: MK
 InstanceOf: Location
 Usage: #inline
-* meta.profile = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[0] = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[+] = "http://ihris.org/fhir/StructureDefinition/ihris-jurisdiction"
 * name = "Macedonia, The Former Yugoslav Republic Of"
 * status = #active
 * identifier.use = #official
@@ -2749,7 +2892,8 @@ Usage: #inline
 Instance: ML
 InstanceOf: Location
 Usage: #inline
-* meta.profile = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[0] = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[+] = "http://ihris.org/fhir/StructureDefinition/ihris-jurisdiction"
 * name = "Mali"
 * status = #active
 * identifier.use = #official
@@ -2763,7 +2907,8 @@ Usage: #inline
 Instance: MM
 InstanceOf: Location
 Usage: #inline
-* meta.profile = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[0] = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[+] = "http://ihris.org/fhir/StructureDefinition/ihris-jurisdiction"
 * name = "Myanmar"
 * status = #active
 * identifier.use = #official
@@ -2777,7 +2922,8 @@ Usage: #inline
 Instance: MN
 InstanceOf: Location
 Usage: #inline
-* meta.profile = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[0] = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[+] = "http://ihris.org/fhir/StructureDefinition/ihris-jurisdiction"
 * name = "Mongolia"
 * status = #active
 * identifier.use = #official
@@ -2791,7 +2937,8 @@ Usage: #inline
 Instance: MO
 InstanceOf: Location
 Usage: #inline
-* meta.profile = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[0] = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[+] = "http://ihris.org/fhir/StructureDefinition/ihris-jurisdiction"
 * name = "Macao"
 * status = #active
 * identifier.use = #official
@@ -2805,7 +2952,8 @@ Usage: #inline
 Instance: MP
 InstanceOf: Location
 Usage: #inline
-* meta.profile = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[0] = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[+] = "http://ihris.org/fhir/StructureDefinition/ihris-jurisdiction"
 * name = "Northern Mariana Islands"
 * status = #active
 * identifier.use = #official
@@ -2819,7 +2967,8 @@ Usage: #inline
 Instance: MQ
 InstanceOf: Location
 Usage: #inline
-* meta.profile = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[0] = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[+] = "http://ihris.org/fhir/StructureDefinition/ihris-jurisdiction"
 * name = "Martinique"
 * status = #active
 * identifier.use = #official
@@ -2833,7 +2982,8 @@ Usage: #inline
 Instance: MR
 InstanceOf: Location
 Usage: #inline
-* meta.profile = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[0] = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[+] = "http://ihris.org/fhir/StructureDefinition/ihris-jurisdiction"
 * name = "Mauritania"
 * status = #active
 * identifier.use = #official
@@ -2847,7 +2997,8 @@ Usage: #inline
 Instance: MS
 InstanceOf: Location
 Usage: #inline
-* meta.profile = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[0] = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[+] = "http://ihris.org/fhir/StructureDefinition/ihris-jurisdiction"
 * name = "Montserrat"
 * status = #active
 * identifier.use = #official
@@ -2861,7 +3012,8 @@ Usage: #inline
 Instance: MT
 InstanceOf: Location
 Usage: #inline
-* meta.profile = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[0] = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[+] = "http://ihris.org/fhir/StructureDefinition/ihris-jurisdiction"
 * name = "Malta"
 * status = #active
 * identifier.use = #official
@@ -2875,7 +3027,8 @@ Usage: #inline
 Instance: MU
 InstanceOf: Location
 Usage: #inline
-* meta.profile = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[0] = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[+] = "http://ihris.org/fhir/StructureDefinition/ihris-jurisdiction"
 * name = "Mauritius"
 * status = #active
 * identifier.use = #official
@@ -2889,7 +3042,8 @@ Usage: #inline
 Instance: MV
 InstanceOf: Location
 Usage: #inline
-* meta.profile = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[0] = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[+] = "http://ihris.org/fhir/StructureDefinition/ihris-jurisdiction"
 * name = "Maldives"
 * status = #active
 * identifier.use = #official
@@ -2903,7 +3057,8 @@ Usage: #inline
 Instance: MW
 InstanceOf: Location
 Usage: #inline
-* meta.profile = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[0] = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[+] = "http://ihris.org/fhir/StructureDefinition/ihris-jurisdiction"
 * name = "Malawi"
 * status = #active
 * identifier.use = #official
@@ -2917,7 +3072,8 @@ Usage: #inline
 Instance: MX
 InstanceOf: Location
 Usage: #inline
-* meta.profile = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[0] = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[+] = "http://ihris.org/fhir/StructureDefinition/ihris-jurisdiction"
 * name = "Mexico"
 * status = #active
 * identifier.use = #official
@@ -2931,7 +3087,8 @@ Usage: #inline
 Instance: MY
 InstanceOf: Location
 Usage: #inline
-* meta.profile = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[0] = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[+] = "http://ihris.org/fhir/StructureDefinition/ihris-jurisdiction"
 * name = "Malaysia"
 * status = #active
 * identifier.use = #official
@@ -2945,7 +3102,8 @@ Usage: #inline
 Instance: MZ
 InstanceOf: Location
 Usage: #inline
-* meta.profile = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[0] = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[+] = "http://ihris.org/fhir/StructureDefinition/ihris-jurisdiction"
 * name = "Mozambique"
 * status = #active
 * identifier.use = #official
@@ -2959,7 +3117,8 @@ Usage: #inline
 Instance: NA
 InstanceOf: Location
 Usage: #inline
-* meta.profile = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[0] = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[+] = "http://ihris.org/fhir/StructureDefinition/ihris-jurisdiction"
 * name = "Namibia"
 * status = #active
 * identifier.use = #official
@@ -2973,7 +3132,8 @@ Usage: #inline
 Instance: NC
 InstanceOf: Location
 Usage: #inline
-* meta.profile = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[0] = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[+] = "http://ihris.org/fhir/StructureDefinition/ihris-jurisdiction"
 * name = "New Caledonia"
 * status = #active
 * identifier.use = #official
@@ -2987,7 +3147,8 @@ Usage: #inline
 Instance: NE
 InstanceOf: Location
 Usage: #inline
-* meta.profile = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[0] = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[+] = "http://ihris.org/fhir/StructureDefinition/ihris-jurisdiction"
 * name = "Niger"
 * status = #active
 * identifier.use = #official
@@ -3001,7 +3162,8 @@ Usage: #inline
 Instance: NF
 InstanceOf: Location
 Usage: #inline
-* meta.profile = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[0] = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[+] = "http://ihris.org/fhir/StructureDefinition/ihris-jurisdiction"
 * name = "Norfolk Island"
 * status = #active
 * identifier.use = #official
@@ -3015,7 +3177,8 @@ Usage: #inline
 Instance: NG
 InstanceOf: Location
 Usage: #inline
-* meta.profile = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[0] = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[+] = "http://ihris.org/fhir/StructureDefinition/ihris-jurisdiction"
 * name = "Nigeria"
 * status = #active
 * identifier.use = #official
@@ -3029,7 +3192,8 @@ Usage: #inline
 Instance: NI
 InstanceOf: Location
 Usage: #inline
-* meta.profile = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[0] = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[+] = "http://ihris.org/fhir/StructureDefinition/ihris-jurisdiction"
 * name = "Nicaragua"
 * status = #active
 * identifier.use = #official
@@ -3043,7 +3207,8 @@ Usage: #inline
 Instance: NL
 InstanceOf: Location
 Usage: #inline
-* meta.profile = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[0] = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[+] = "http://ihris.org/fhir/StructureDefinition/ihris-jurisdiction"
 * name = "Netherlands"
 * status = #active
 * identifier.use = #official
@@ -3057,7 +3222,8 @@ Usage: #inline
 Instance: NO
 InstanceOf: Location
 Usage: #inline
-* meta.profile = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[0] = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[+] = "http://ihris.org/fhir/StructureDefinition/ihris-jurisdiction"
 * name = "Norway"
 * status = #active
 * identifier.use = #official
@@ -3071,7 +3237,8 @@ Usage: #inline
 Instance: NP
 InstanceOf: Location
 Usage: #inline
-* meta.profile = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[0] = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[+] = "http://ihris.org/fhir/StructureDefinition/ihris-jurisdiction"
 * name = "Nepal"
 * status = #active
 * identifier.use = #official
@@ -3085,7 +3252,8 @@ Usage: #inline
 Instance: NR
 InstanceOf: Location
 Usage: #inline
-* meta.profile = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[0] = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[+] = "http://ihris.org/fhir/StructureDefinition/ihris-jurisdiction"
 * name = "Nauru"
 * status = #active
 * identifier.use = #official
@@ -3099,7 +3267,8 @@ Usage: #inline
 Instance: NU
 InstanceOf: Location
 Usage: #inline
-* meta.profile = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[0] = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[+] = "http://ihris.org/fhir/StructureDefinition/ihris-jurisdiction"
 * name = "Niue"
 * status = #active
 * identifier.use = #official
@@ -3113,7 +3282,8 @@ Usage: #inline
 Instance: NZ
 InstanceOf: Location
 Usage: #inline
-* meta.profile = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[0] = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[+] = "http://ihris.org/fhir/StructureDefinition/ihris-jurisdiction"
 * name = "New Zealand"
 * status = #active
 * identifier.use = #official
@@ -3127,7 +3297,8 @@ Usage: #inline
 Instance: OM
 InstanceOf: Location
 Usage: #inline
-* meta.profile = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[0] = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[+] = "http://ihris.org/fhir/StructureDefinition/ihris-jurisdiction"
 * name = "Oman"
 * status = #active
 * identifier.use = #official
@@ -3141,7 +3312,8 @@ Usage: #inline
 Instance: PA
 InstanceOf: Location
 Usage: #inline
-* meta.profile = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[0] = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[+] = "http://ihris.org/fhir/StructureDefinition/ihris-jurisdiction"
 * name = "Panama"
 * status = #active
 * identifier.use = #official
@@ -3155,7 +3327,8 @@ Usage: #inline
 Instance: PE
 InstanceOf: Location
 Usage: #inline
-* meta.profile = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[0] = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[+] = "http://ihris.org/fhir/StructureDefinition/ihris-jurisdiction"
 * name = "Peru"
 * status = #active
 * identifier.use = #official
@@ -3169,7 +3342,8 @@ Usage: #inline
 Instance: PF
 InstanceOf: Location
 Usage: #inline
-* meta.profile = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[0] = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[+] = "http://ihris.org/fhir/StructureDefinition/ihris-jurisdiction"
 * name = "French Polynesia"
 * status = #active
 * identifier.use = #official
@@ -3183,7 +3357,8 @@ Usage: #inline
 Instance: PG
 InstanceOf: Location
 Usage: #inline
-* meta.profile = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[0] = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[+] = "http://ihris.org/fhir/StructureDefinition/ihris-jurisdiction"
 * name = "Papua New Guinea"
 * status = #active
 * identifier.use = #official
@@ -3197,7 +3372,8 @@ Usage: #inline
 Instance: PH
 InstanceOf: Location
 Usage: #inline
-* meta.profile = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[0] = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[+] = "http://ihris.org/fhir/StructureDefinition/ihris-jurisdiction"
 * name = "Philippines"
 * status = #active
 * identifier.use = #official
@@ -3211,7 +3387,8 @@ Usage: #inline
 Instance: PK
 InstanceOf: Location
 Usage: #inline
-* meta.profile = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[0] = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[+] = "http://ihris.org/fhir/StructureDefinition/ihris-jurisdiction"
 * name = "Pakistan"
 * status = #active
 * identifier.use = #official
@@ -3225,7 +3402,8 @@ Usage: #inline
 Instance: PL
 InstanceOf: Location
 Usage: #inline
-* meta.profile = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[0] = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[+] = "http://ihris.org/fhir/StructureDefinition/ihris-jurisdiction"
 * name = "Poland"
 * status = #active
 * identifier.use = #official
@@ -3239,7 +3417,8 @@ Usage: #inline
 Instance: PM
 InstanceOf: Location
 Usage: #inline
-* meta.profile = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[0] = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[+] = "http://ihris.org/fhir/StructureDefinition/ihris-jurisdiction"
 * name = "Saint Pierre And Miquelon"
 * status = #active
 * identifier.use = #official
@@ -3253,7 +3432,8 @@ Usage: #inline
 Instance: PN
 InstanceOf: Location
 Usage: #inline
-* meta.profile = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[0] = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[+] = "http://ihris.org/fhir/StructureDefinition/ihris-jurisdiction"
 * name = "Pitcairn"
 * status = #active
 * identifier.use = #official
@@ -3267,7 +3447,8 @@ Usage: #inline
 Instance: PR
 InstanceOf: Location
 Usage: #inline
-* meta.profile = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[0] = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[+] = "http://ihris.org/fhir/StructureDefinition/ihris-jurisdiction"
 * name = "Puerto Rico"
 * status = #active
 * identifier.use = #official
@@ -3281,7 +3462,8 @@ Usage: #inline
 Instance: PS
 InstanceOf: Location
 Usage: #inline
-* meta.profile = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[0] = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[+] = "http://ihris.org/fhir/StructureDefinition/ihris-jurisdiction"
 * name = "Palestinian Territory, Occupied"
 * status = #active
 * identifier.use = #official
@@ -3295,7 +3477,8 @@ Usage: #inline
 Instance: PT
 InstanceOf: Location
 Usage: #inline
-* meta.profile = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[0] = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[+] = "http://ihris.org/fhir/StructureDefinition/ihris-jurisdiction"
 * name = "Portugal"
 * status = #active
 * identifier.use = #official
@@ -3309,7 +3492,8 @@ Usage: #inline
 Instance: PW
 InstanceOf: Location
 Usage: #inline
-* meta.profile = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[0] = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[+] = "http://ihris.org/fhir/StructureDefinition/ihris-jurisdiction"
 * name = "Palau"
 * status = #active
 * identifier.use = #official
@@ -3323,7 +3507,8 @@ Usage: #inline
 Instance: PY
 InstanceOf: Location
 Usage: #inline
-* meta.profile = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[0] = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[+] = "http://ihris.org/fhir/StructureDefinition/ihris-jurisdiction"
 * name = "Paraguay"
 * status = #active
 * identifier.use = #official
@@ -3337,7 +3522,8 @@ Usage: #inline
 Instance: QA
 InstanceOf: Location
 Usage: #inline
-* meta.profile = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[0] = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[+] = "http://ihris.org/fhir/StructureDefinition/ihris-jurisdiction"
 * name = "Qatar"
 * status = #active
 * identifier.use = #official
@@ -3351,7 +3537,8 @@ Usage: #inline
 Instance: RE
 InstanceOf: Location
 Usage: #inline
-* meta.profile = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[0] = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[+] = "http://ihris.org/fhir/StructureDefinition/ihris-jurisdiction"
 * name = "RÉunion"
 * status = #active
 * identifier.use = #official
@@ -3365,7 +3552,8 @@ Usage: #inline
 Instance: RO
 InstanceOf: Location
 Usage: #inline
-* meta.profile = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[0] = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[+] = "http://ihris.org/fhir/StructureDefinition/ihris-jurisdiction"
 * name = "Romania"
 * status = #active
 * identifier.use = #official
@@ -3379,7 +3567,8 @@ Usage: #inline
 Instance: RS
 InstanceOf: Location
 Usage: #inline
-* meta.profile = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[0] = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[+] = "http://ihris.org/fhir/StructureDefinition/ihris-jurisdiction"
 * name = "Serbia"
 * status = #active
 * identifier.use = #official
@@ -3393,7 +3582,8 @@ Usage: #inline
 Instance: RU
 InstanceOf: Location
 Usage: #inline
-* meta.profile = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[0] = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[+] = "http://ihris.org/fhir/StructureDefinition/ihris-jurisdiction"
 * name = "Russian Federation"
 * status = #active
 * identifier.use = #official
@@ -3407,7 +3597,8 @@ Usage: #inline
 Instance: RW
 InstanceOf: Location
 Usage: #inline
-* meta.profile = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[0] = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[+] = "http://ihris.org/fhir/StructureDefinition/ihris-jurisdiction"
 * name = "Rwanda"
 * status = #active
 * identifier.use = #official
@@ -3421,7 +3612,8 @@ Usage: #inline
 Instance: SA
 InstanceOf: Location
 Usage: #inline
-* meta.profile = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[0] = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[+] = "http://ihris.org/fhir/StructureDefinition/ihris-jurisdiction"
 * name = "Saudi Arabia"
 * status = #active
 * identifier.use = #official
@@ -3435,7 +3627,8 @@ Usage: #inline
 Instance: SB
 InstanceOf: Location
 Usage: #inline
-* meta.profile = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[0] = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[+] = "http://ihris.org/fhir/StructureDefinition/ihris-jurisdiction"
 * name = "Solomon Islands"
 * status = #active
 * identifier.use = #official
@@ -3449,7 +3642,8 @@ Usage: #inline
 Instance: SC
 InstanceOf: Location
 Usage: #inline
-* meta.profile = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[0] = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[+] = "http://ihris.org/fhir/StructureDefinition/ihris-jurisdiction"
 * name = "Seychelles"
 * status = #active
 * identifier.use = #official
@@ -3463,7 +3657,8 @@ Usage: #inline
 Instance: SD
 InstanceOf: Location
 Usage: #inline
-* meta.profile = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[0] = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[+] = "http://ihris.org/fhir/StructureDefinition/ihris-jurisdiction"
 * name = "Sudan"
 * status = #active
 * identifier.use = #official
@@ -3477,7 +3672,8 @@ Usage: #inline
 Instance: SDN
 InstanceOf: Location
 Usage: #inline
-* meta.profile = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[0] = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[+] = "http://ihris.org/fhir/StructureDefinition/ihris-jurisdiction"
 * name = "Sudan"
 * status = #active
 * identifier.use = #official
@@ -3491,7 +3687,8 @@ Usage: #inline
 Instance: SE
 InstanceOf: Location
 Usage: #inline
-* meta.profile = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[0] = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[+] = "http://ihris.org/fhir/StructureDefinition/ihris-jurisdiction"
 * name = "Sweden"
 * status = #active
 * identifier.use = #official
@@ -3505,7 +3702,8 @@ Usage: #inline
 Instance: SG
 InstanceOf: Location
 Usage: #inline
-* meta.profile = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[0] = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[+] = "http://ihris.org/fhir/StructureDefinition/ihris-jurisdiction"
 * name = "Singapore"
 * status = #active
 * identifier.use = #official
@@ -3519,7 +3717,8 @@ Usage: #inline
 Instance: SH
 InstanceOf: Location
 Usage: #inline
-* meta.profile = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[0] = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[+] = "http://ihris.org/fhir/StructureDefinition/ihris-jurisdiction"
 * name = "Saint Helena, Ascension And Tristan Da Cunha"
 * status = #active
 * identifier.use = #official
@@ -3533,7 +3732,8 @@ Usage: #inline
 Instance: SI
 InstanceOf: Location
 Usage: #inline
-* meta.profile = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[0] = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[+] = "http://ihris.org/fhir/StructureDefinition/ihris-jurisdiction"
 * name = "Slovenia"
 * status = #active
 * identifier.use = #official
@@ -3547,7 +3747,8 @@ Usage: #inline
 Instance: SJ
 InstanceOf: Location
 Usage: #inline
-* meta.profile = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[0] = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[+] = "http://ihris.org/fhir/StructureDefinition/ihris-jurisdiction"
 * name = "Svalbard And Jan Mayen"
 * status = #active
 * identifier.use = #official
@@ -3561,7 +3762,8 @@ Usage: #inline
 Instance: SK
 InstanceOf: Location
 Usage: #inline
-* meta.profile = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[0] = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[+] = "http://ihris.org/fhir/StructureDefinition/ihris-jurisdiction"
 * name = "Slovakia"
 * status = #active
 * identifier.use = #official
@@ -3575,7 +3777,8 @@ Usage: #inline
 Instance: SL
 InstanceOf: Location
 Usage: #inline
-* meta.profile = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[0] = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[+] = "http://ihris.org/fhir/StructureDefinition/ihris-jurisdiction"
 * name = "Sierra Leone"
 * status = #active
 * identifier.use = #official
@@ -3589,7 +3792,8 @@ Usage: #inline
 Instance: SM
 InstanceOf: Location
 Usage: #inline
-* meta.profile = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[0] = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[+] = "http://ihris.org/fhir/StructureDefinition/ihris-jurisdiction"
 * name = "San Marino"
 * status = #active
 * identifier.use = #official
@@ -3603,7 +3807,8 @@ Usage: #inline
 Instance: SN
 InstanceOf: Location
 Usage: #inline
-* meta.profile = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[0] = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[+] = "http://ihris.org/fhir/StructureDefinition/ihris-jurisdiction"
 * name = "Senegal"
 * status = #active
 * identifier.use = #official
@@ -3617,7 +3822,8 @@ Usage: #inline
 Instance: SO
 InstanceOf: Location
 Usage: #inline
-* meta.profile = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[0] = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[+] = "http://ihris.org/fhir/StructureDefinition/ihris-jurisdiction"
 * name = "Somalia"
 * status = #active
 * identifier.use = #official
@@ -3631,7 +3837,8 @@ Usage: #inline
 Instance: SR
 InstanceOf: Location
 Usage: #inline
-* meta.profile = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[0] = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[+] = "http://ihris.org/fhir/StructureDefinition/ihris-jurisdiction"
 * name = "Suriname"
 * status = #active
 * identifier.use = #official
@@ -3645,7 +3852,8 @@ Usage: #inline
 Instance: ST
 InstanceOf: Location
 Usage: #inline
-* meta.profile = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[0] = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[+] = "http://ihris.org/fhir/StructureDefinition/ihris-jurisdiction"
 * name = "São Tome And Principe"
 * status = #active
 * identifier.use = #official
@@ -3659,7 +3867,8 @@ Usage: #inline
 Instance: SV
 InstanceOf: Location
 Usage: #inline
-* meta.profile = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[0] = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[+] = "http://ihris.org/fhir/StructureDefinition/ihris-jurisdiction"
 * name = "El Salvador"
 * status = #active
 * identifier.use = #official
@@ -3673,7 +3882,8 @@ Usage: #inline
 Instance: SY
 InstanceOf: Location
 Usage: #inline
-* meta.profile = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[0] = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[+] = "http://ihris.org/fhir/StructureDefinition/ihris-jurisdiction"
 * name = "Syrian Arab Republic"
 * status = #active
 * identifier.use = #official
@@ -3687,7 +3897,8 @@ Usage: #inline
 Instance: SZ
 InstanceOf: Location
 Usage: #inline
-* meta.profile = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[0] = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[+] = "http://ihris.org/fhir/StructureDefinition/ihris-jurisdiction"
 * name = "Swaziland"
 * status = #active
 * identifier.use = #official
@@ -3701,7 +3912,8 @@ Usage: #inline
 Instance: TC
 InstanceOf: Location
 Usage: #inline
-* meta.profile = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[0] = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[+] = "http://ihris.org/fhir/StructureDefinition/ihris-jurisdiction"
 * name = "Turks And Caicos Islands"
 * status = #active
 * identifier.use = #official
@@ -3715,7 +3927,8 @@ Usage: #inline
 Instance: TD
 InstanceOf: Location
 Usage: #inline
-* meta.profile = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[0] = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[+] = "http://ihris.org/fhir/StructureDefinition/ihris-jurisdiction"
 * name = "Chad"
 * status = #active
 * identifier.use = #official
@@ -3729,7 +3942,8 @@ Usage: #inline
 Instance: TF
 InstanceOf: Location
 Usage: #inline
-* meta.profile = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[0] = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[+] = "http://ihris.org/fhir/StructureDefinition/ihris-jurisdiction"
 * name = "Taifafeki"
 * status = #active
 * identifier.use = #official
@@ -3743,7 +3957,8 @@ Usage: #inline
 Instance: TG
 InstanceOf: Location
 Usage: #inline
-* meta.profile = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[0] = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[+] = "http://ihris.org/fhir/StructureDefinition/ihris-jurisdiction"
 * name = "Togo"
 * status = #active
 * identifier.use = #official
@@ -3757,7 +3972,8 @@ Usage: #inline
 Instance: TH
 InstanceOf: Location
 Usage: #inline
-* meta.profile = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[0] = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[+] = "http://ihris.org/fhir/StructureDefinition/ihris-jurisdiction"
 * name = "Thailand"
 * status = #active
 * identifier.use = #official
@@ -3771,7 +3987,8 @@ Usage: #inline
 Instance: TJ
 InstanceOf: Location
 Usage: #inline
-* meta.profile = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[0] = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[+] = "http://ihris.org/fhir/StructureDefinition/ihris-jurisdiction"
 * name = "Tajikistan"
 * status = #active
 * identifier.use = #official
@@ -3785,7 +4002,8 @@ Usage: #inline
 Instance: TK
 InstanceOf: Location
 Usage: #inline
-* meta.profile = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[0] = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[+] = "http://ihris.org/fhir/StructureDefinition/ihris-jurisdiction"
 * name = "Tokelau"
 * status = #active
 * identifier.use = #official
@@ -3799,7 +4017,8 @@ Usage: #inline
 Instance: TL
 InstanceOf: Location
 Usage: #inline
-* meta.profile = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[0] = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[+] = "http://ihris.org/fhir/StructureDefinition/ihris-jurisdiction"
 * name = "Timor-leste"
 * status = #active
 * identifier.use = #official
@@ -3813,7 +4032,8 @@ Usage: #inline
 Instance: TM
 InstanceOf: Location
 Usage: #inline
-* meta.profile = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[0] = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[+] = "http://ihris.org/fhir/StructureDefinition/ihris-jurisdiction"
 * name = "Turkmenistan"
 * status = #active
 * identifier.use = #official
@@ -3827,7 +4047,8 @@ Usage: #inline
 Instance: TN
 InstanceOf: Location
 Usage: #inline
-* meta.profile = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[0] = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[+] = "http://ihris.org/fhir/StructureDefinition/ihris-jurisdiction"
 * name = "Tunisia"
 * status = #active
 * identifier.use = #official
@@ -3841,7 +4062,8 @@ Usage: #inline
 Instance: TO
 InstanceOf: Location
 Usage: #inline
-* meta.profile = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[0] = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[+] = "http://ihris.org/fhir/StructureDefinition/ihris-jurisdiction"
 * name = "Tonga"
 * status = #active
 * identifier.use = #official
@@ -3855,7 +4077,8 @@ Usage: #inline
 Instance: TR
 InstanceOf: Location
 Usage: #inline
-* meta.profile = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[0] = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[+] = "http://ihris.org/fhir/StructureDefinition/ihris-jurisdiction"
 * name = "Turkey"
 * status = #active
 * identifier.use = #official
@@ -3869,7 +4092,8 @@ Usage: #inline
 Instance: TT
 InstanceOf: Location
 Usage: #inline
-* meta.profile = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[0] = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[+] = "http://ihris.org/fhir/StructureDefinition/ihris-jurisdiction"
 * name = "Trinidad And Tobago"
 * status = #active
 * identifier.use = #official
@@ -3883,7 +4107,8 @@ Usage: #inline
 Instance: TV
 InstanceOf: Location
 Usage: #inline
-* meta.profile = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[0] = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[+] = "http://ihris.org/fhir/StructureDefinition/ihris-jurisdiction"
 * name = "Tuvalu"
 * status = #active
 * identifier.use = #official
@@ -3897,7 +4122,8 @@ Usage: #inline
 Instance: TW
 InstanceOf: Location
 Usage: #inline
-* meta.profile = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[0] = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[+] = "http://ihris.org/fhir/StructureDefinition/ihris-jurisdiction"
 * name = "Taiwan, Province Of China"
 * status = #active
 * identifier.use = #official
@@ -3911,7 +4137,8 @@ Usage: #inline
 Instance: TZ
 InstanceOf: Location
 Usage: #inline
-* meta.profile = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[0] = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[+] = "http://ihris.org/fhir/StructureDefinition/ihris-jurisdiction"
 * name = "Tanzania, United Republic Of"
 * status = #active
 * identifier.use = #official
@@ -3925,7 +4152,8 @@ Usage: #inline
 Instance: UA
 InstanceOf: Location
 Usage: #inline
-* meta.profile = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[0] = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[+] = "http://ihris.org/fhir/StructureDefinition/ihris-jurisdiction"
 * name = "Ukraine"
 * status = #active
 * identifier.use = #official
@@ -3939,7 +4167,8 @@ Usage: #inline
 Instance: UG
 InstanceOf: Location
 Usage: #inline
-* meta.profile = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[0] = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[+] = "http://ihris.org/fhir/StructureDefinition/ihris-jurisdiction"
 * name = "Uganda"
 * status = #active
 * identifier.use = #official
@@ -3953,7 +4182,8 @@ Usage: #inline
 Instance: UM
 InstanceOf: Location
 Usage: #inline
-* meta.profile = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[0] = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[+] = "http://ihris.org/fhir/StructureDefinition/ihris-jurisdiction"
 * name = "United States Minor Outlying Islands"
 * status = #active
 * identifier.use = #official
@@ -3967,7 +4197,8 @@ Usage: #inline
 Instance: US
 InstanceOf: Location
 Usage: #inline
-* meta.profile = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[0] = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[+] = "http://ihris.org/fhir/StructureDefinition/ihris-jurisdiction"
 * name = "United States"
 * status = #active
 * identifier.use = #official
@@ -3981,7 +4212,8 @@ Usage: #inline
 Instance: UY
 InstanceOf: Location
 Usage: #inline
-* meta.profile = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[0] = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[+] = "http://ihris.org/fhir/StructureDefinition/ihris-jurisdiction"
 * name = "Uruguay"
 * status = #active
 * identifier.use = #official
@@ -3995,7 +4227,8 @@ Usage: #inline
 Instance: UZ
 InstanceOf: Location
 Usage: #inline
-* meta.profile = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[0] = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[+] = "http://ihris.org/fhir/StructureDefinition/ihris-jurisdiction"
 * name = "Uzbekistan"
 * status = #active
 * identifier.use = #official
@@ -4009,7 +4242,8 @@ Usage: #inline
 Instance: VA
 InstanceOf: Location
 Usage: #inline
-* meta.profile = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[0] = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[+] = "http://ihris.org/fhir/StructureDefinition/ihris-jurisdiction"
 * name = "Holy See (vatican City State)"
 * status = #active
 * identifier.use = #official
@@ -4023,7 +4257,8 @@ Usage: #inline
 Instance: VC
 InstanceOf: Location
 Usage: #inline
-* meta.profile = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[0] = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[+] = "http://ihris.org/fhir/StructureDefinition/ihris-jurisdiction"
 * name = "Saint Vincent And The Grenadines"
 * status = #active
 * identifier.use = #official
@@ -4037,7 +4272,8 @@ Usage: #inline
 Instance: VE
 InstanceOf: Location
 Usage: #inline
-* meta.profile = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[0] = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[+] = "http://ihris.org/fhir/StructureDefinition/ihris-jurisdiction"
 * name = "Venezuela"
 * status = #active
 * identifier.use = #official
@@ -4051,7 +4287,8 @@ Usage: #inline
 Instance: VG
 InstanceOf: Location
 Usage: #inline
-* meta.profile = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[0] = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[+] = "http://ihris.org/fhir/StructureDefinition/ihris-jurisdiction"
 * name = "Virgin Islands, British"
 * status = #active
 * identifier.use = #official
@@ -4065,7 +4302,8 @@ Usage: #inline
 Instance: VI
 InstanceOf: Location
 Usage: #inline
-* meta.profile = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[0] = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[+] = "http://ihris.org/fhir/StructureDefinition/ihris-jurisdiction"
 * name = "Virgin Islands, U.s."
 * status = #active
 * identifier.use = #official
@@ -4079,7 +4317,8 @@ Usage: #inline
 Instance: VN
 InstanceOf: Location
 Usage: #inline
-* meta.profile = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[0] = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[+] = "http://ihris.org/fhir/StructureDefinition/ihris-jurisdiction"
 * name = "Viet Nam"
 * status = #active
 * identifier.use = #official
@@ -4093,7 +4332,8 @@ Usage: #inline
 Instance: VU
 InstanceOf: Location
 Usage: #inline
-* meta.profile = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[0] = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[+] = "http://ihris.org/fhir/StructureDefinition/ihris-jurisdiction"
 * name = "Vanuatu"
 * status = #active
 * identifier.use = #official
@@ -4107,7 +4347,8 @@ Usage: #inline
 Instance: WF
 InstanceOf: Location
 Usage: #inline
-* meta.profile = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[0] = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[+] = "http://ihris.org/fhir/StructureDefinition/ihris-jurisdiction"
 * name = "Wallis And Futuna"
 * status = #active
 * identifier.use = #official
@@ -4121,7 +4362,8 @@ Usage: #inline
 Instance: WS
 InstanceOf: Location
 Usage: #inline
-* meta.profile = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[0] = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[+] = "http://ihris.org/fhir/StructureDefinition/ihris-jurisdiction"
 * name = "Samoa"
 * status = #active
 * identifier.use = #official
@@ -4135,7 +4377,8 @@ Usage: #inline
 Instance: YE
 InstanceOf: Location
 Usage: #inline
-* meta.profile = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[0] = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[+] = "http://ihris.org/fhir/StructureDefinition/ihris-jurisdiction"
 * name = "Yemen"
 * status = #active
 * identifier.use = #official
@@ -4149,7 +4392,8 @@ Usage: #inline
 Instance: YT
 InstanceOf: Location
 Usage: #inline
-* meta.profile = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[0] = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[+] = "http://ihris.org/fhir/StructureDefinition/ihris-jurisdiction"
 * name = "Mayotte"
 * status = #active
 * identifier.use = #official
@@ -4163,7 +4407,8 @@ Usage: #inline
 Instance: ZA
 InstanceOf: Location
 Usage: #inline
-* meta.profile = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[0] = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[+] = "http://ihris.org/fhir/StructureDefinition/ihris-jurisdiction"
 * name = "South Africa"
 * status = #active
 * identifier.use = #official
@@ -4177,7 +4422,8 @@ Usage: #inline
 Instance: ZM
 InstanceOf: Location
 Usage: #inline
-* meta.profile = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[0] = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[+] = "http://ihris.org/fhir/StructureDefinition/ihris-jurisdiction"
 * name = "Zambia"
 * status = #active
 * identifier.use = #official
@@ -4191,7 +4437,8 @@ Usage: #inline
 Instance: ZW
 InstanceOf: Location
 Usage: #inline
-* meta.profile = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[0] = "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
+* meta.profile[+] = "http://ihris.org/fhir/StructureDefinition/ihris-jurisdiction"
 * name = "Zimbabwe"
 * status = #active
 * identifier.use = #official

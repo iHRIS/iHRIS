@@ -7,8 +7,9 @@
         "resourceType": "Location",
         "meta": {
           "profile": [
-            "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
-          ]
+    "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location",
+    "http://ihris.org/fhir/StructureDefinition/ihris-jurisdiction"
+  ]
         },
         "id": "TF.W",
         "name": "West",
@@ -47,8 +48,9 @@
         "resourceType": "Location",
         "meta": {
           "profile": [
-            "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
-          ]
+    "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location",
+    "http://ihris.org/fhir/StructureDefinition/ihris-jurisdiction"
+  ]
         },
         "id": "TF.S",
         "name": "South",
@@ -87,8 +89,9 @@
         "resourceType": "Location",
         "meta": {
           "profile": [
-            "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
-          ]
+    "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location",
+    "http://ihris.org/fhir/StructureDefinition/ihris-jurisdiction"
+  ]
         },
         "id": "TF.CC",
         "name": "Capital City",
@@ -127,8 +130,9 @@
         "resourceType": "Location",
         "meta": {
           "profile": [
-            "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
-          ]
+    "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location",
+    "http://ihris.org/fhir/StructureDefinition/ihris-jurisdiction"
+  ]
         },
         "id": "TF.E",
         "name": "East",
@@ -167,8 +171,9 @@
         "resourceType": "Location",
         "meta": {
           "profile": [
-            "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
-          ]
+    "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location",
+    "http://ihris.org/fhir/StructureDefinition/ihris-jurisdiction"
+  ]
         },
         "id": "TF.N",
         "name": "North",
