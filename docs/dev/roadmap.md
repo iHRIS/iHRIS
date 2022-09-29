@@ -16,11 +16,11 @@ The iHRIS roadmap outlines the features planned for inclusion in future releases
 
 7. UI for audit trail
 
-An audit trail logging events in iHRIS is already maintained by the system. The inclusion of a User Interface for this feature will allow users to view and query session events as may be required.
+    An audit trail logging events in iHRIS is already maintained by the system. The inclusion of a User Interface for this feature will allow users to view and query session events as may be required.
 
 8. Translations of new documentation
 
-The current technical documentation of iHRIS is maintained in English. Part of the plan involves translating the same into other languages
+    The current technical documentation of iHRIS is maintained in English. Part of the plan involves translating the same into other languages
 
 9. WISN lite workforce pressure calculator (iHRIS Plan)
 
@@ -28,5 +28,8 @@ The current technical documentation of iHRIS is maintained in English. Part of t
 
 11. Mobile app
 
-Developing an iHRIS mobile application
-12. API endpoint for ADX - out the box DHIS2 interoperability
+    Developing an iHRIS mobile application
+
+12. API endpoint for ADX 
+    
+    This is to help add out the box DHIS2 interoperability
