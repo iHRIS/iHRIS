@@ -168,7 +168,7 @@
         },
         {
           "name": "workflow:processor:evaluation:file",
-          "valueString": "../modules/workflowLeaveEthiopia"
+          "valueString": "../modules/workflowLeave"
         },
         {
           "name": "site:nav:active",
