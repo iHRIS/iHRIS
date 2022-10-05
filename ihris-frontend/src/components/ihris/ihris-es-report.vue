@@ -196,6 +196,18 @@ export default {
     },
   },
   created: function () {
+    //sorting columns
+    if(this.reportData && this.reportData.fieldsDetails) {
+      this.reportData.fieldsDetails.sort((a, b) => {
+        if((a[2] != null && b[2] == null) || (a[2] != null && b[2] != null && a[2] < b[2])) {
+          return -1
+        } else if((b[2] != null && a[2] == null) || (a[2] != null && b[2] != null && a[2] > b[2])) {
+          return 1
+        } else {
+          return -1
+        }
+      })
+    }
     for (let field of this.reportData.fieldsDetails) {
       this.headers.push({ text: field[0], value: field[1] });
       this.allHeaders.push({ text: field[0], value: field[1] });

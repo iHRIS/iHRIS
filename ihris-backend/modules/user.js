@@ -138,7 +138,6 @@ const user = {
                 await resolveTasks(roleResource);
                 await user.loadTaskList()
                 let tasks = roleResource.extension.filter(ext => ext.url === TASK_EXTENSION)
-                console.log(tasks);
                 for (let task of tasks) {
                     let permission = undefined
                     let resource = undefined

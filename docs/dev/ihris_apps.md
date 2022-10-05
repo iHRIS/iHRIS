@@ -2,7 +2,10 @@
 
 There are some usecases where you need to create multiple components to perform a specific common task. iHRIS allows you to create an app to address such a usecase. iHRIS apps are expected to be webapps and can be created in any programming language. Below are the steps to create an iHRIS apps.
 
-* Pick a language of choice (recommended VueJS) and start building the app. If you are a VueJS developer then you are lucky, you dont need to start everything from scratch, clone the ihris app template repo from [https://github.com/iHRIS/ihris-core-apps.git](https://github.com/iHRIS/ihris-core-apps.git) that comes with many supporting resources to help you quickly build an app.
+* Pick a language of choice (recommended VueJS) and start building the app. If you are a VueJS developer then you are lucky, you dont need to start everything from scratch, clone the ihris app template repo from [https://github.com/iHRIS/ihris-core-apps.git](https://github.com/iHRIS/ihris-core-apps.git) that comes with many supporting resources to help you quickly build an app. The template can be cloned with command
+```bash
+git clone --single-branch --branch startup-template https://github.com/iHRIS/ihris-core-apps.git startup-template
+```
 
 * At this stage you should get ready your app for production deployment. Depending with the language/framework you have used, some frameworks like Angular, react, Vue requires code to built for production deployment, this is the right stage to do so.
 

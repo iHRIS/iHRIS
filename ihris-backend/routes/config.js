@@ -1189,12 +1189,15 @@ router.get('/report/es/:report', (req, res) => {
                 return ext.url === "http://ihris.org/fhir/StructureDefinition/iHRISReportElement"
             })
             for (let element of reportElements) {
-                let displayName, esField
+                let displayName, esField, fieldOrder
                 let label = element.extension.find((ext) => {
                     return ext.url === 'label'
                 })
                 let display = element.extension.find((ext) => {
                     return ext.url === 'display'
+                })
+                let order = element.extension.find((ext) => {
+                    return ext.url === 'order'
                 })
                 if (!display) {
                     continue;
@@ -1218,7 +1221,10 @@ router.get('/report/es/:report', (req, res) => {
                 }
                 esField = label.valueString
                 displayName = display.valueString
-                reportData.fieldsDetails.push([displayName, esField])
+                if(order) {
+                    fieldOrder = order.valueInteger
+                }
+                reportData.fieldsDetails.push([displayName, esField, fieldOrder])
             }
         }
         // populate data type of filters

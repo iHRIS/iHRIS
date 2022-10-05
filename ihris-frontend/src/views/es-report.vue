@@ -81,11 +81,11 @@ export default {
                 components: {
                   "ihris-es-report": () =>
                     import(
-                      /* webpackChunkName: "fhir-search" */ "@/components/ihris/ihris-es-report"
+                      /* webpackChunkName: "ihris-es-report" */ "@/components/ihris/ihris-es-report"
                     ),
                   "ihris-es-search-term": () =>
                     import(
-                      /* webpackChunkName: "fhir-search" */ "@/components/ihris/ihris-es-search-term"
+                      /* webpackChunkName: "ihris-es-search-term" */ "@/components/ihris/ihris-es-search-term"
                     )
                 },
                 template: data.reportTemplate,
