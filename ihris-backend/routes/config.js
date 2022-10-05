@@ -1621,15 +1621,15 @@ router.get("/employeeId/:id", (req, res) => {
 
             userData.photo = user.photo;
 
-            userData.phone = user.telecom.find(x => x.system === "phone")?.value;
+            userData.phone = user.telecom?.find(x => x.system === "phone")?.value;
 
-            userData.employeeId = user.identifier.find(x => x.type.coding[0].code = "EN")?.value;
+            userData.employeeId = user.identifier?.find(x => x.type.coding[0].code = "EN")?.value;
 
             userData.residence = user.address[0]?.city;
 
             userData.nationality = user.address[0]?.country;
 
-            userData.email = user.telecom.find(x => x.system === "email")?.value
+            userData.email = user.telecom?.find(x => x.system === "email")?.value
 
             let data = await fhirAxios.search("PractitionerRole", {
                 _profile:
