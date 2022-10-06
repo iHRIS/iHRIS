@@ -16,11 +16,11 @@
             "code": "1.2.840.10065.1.12.1.14"
           }
         ],
-        "when": "2022-10-05T12:11:17.754Z",
+        "when": "2022-10-06T10:05:19.410Z",
         "who": {
           "reference": "http://ihris.org/fhir/Organization/ihris"
         },
-        "data": "YWIfi4Rvd/1KUGzfO71EypZCQEI0wgt3CLMJAudNYXvHfYFhaQiRVqqdYSARTPaKAm/FlNwg42tdMrWDNYKO2G9E9XY/V5jZdvw52p9Fl24Jz6jbzBLuvn32xkamp3/w83Yy5QWsOWMVE0Pr3VuJPWQcqnQ67Yga7ZyFg0wj044="
+        "data": "gd/5io6bJHk2Sbo+nqkCgkJIX1eUROHRIS7K99BgjDitj43x5LZLyEQXM5tC4zOfADbWUDT2DhlencRJkW7ig+oxWG7UNyFHzRqqP7L23WjrfBJiAcyW8MqpGvdKzcNX8Y8v91Or6WxZNYTLTy833Ui4Nm8yhKT7PhniKBNthNM="
       }
     },
     {
@@ -645,6 +645,22 @@
         {
           "name": "site:nav:menu:password:url",
           "valueString": "/questionnaire/ihris-change-password/person"
+        },
+        {
+          "name": "site:nav:menu:apps:text",
+          "valueString": "Apps"
+        },
+        {
+          "name": "site:nav:menu:apps:order",
+          "valueString": "14"
+        },
+        {
+          "name": "site:nav:menu:apps:icon",
+          "valueString": "mdi-apps"
+        },
+        {
+          "name": "site:nav:menu:apps:url",
+          "valueString": "/apps"
         },
         {
           "name": "shortname:Practitioner:format",
