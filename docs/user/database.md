@@ -1,4 +1,4 @@
-# DATABASE
+# Database
 
 Health workers details are managed via module “PEOPLE”; which includes the option to add health workers and search health worker records in the system. It is the primary registration page to add new employees, search/view records, and make changes to existing employee records.
 

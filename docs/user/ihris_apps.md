@@ -1,4 +1,4 @@
-# iHRIS APPS
+# iHRIS Apps
 
 This feature is used for enhancing iHRIS/ adding plugins.It allows the development of iHRIS  web applications in the developer's preferred programming language .
 

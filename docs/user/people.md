@@ -1,4 +1,4 @@
-# PEOPLE
+# People
 
 Health workers details are managed in the  module “PEOPLE”; which includes the option to add health workers and search health worker records in the system. It is the primary registration page to :
 
