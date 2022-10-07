@@ -1,8 +1,25 @@
-# Customization
+# iHRIS Customization
+
+iHRIS is a **customizable** system, which provides various ways for developers and implementers to customize the product for their specific use cases.
+
+Below are various ways you may use to customize iHRIS based on your needs
+
+1. Editing FSH files
+2. [Creating custom iHRIS components](custom_components.md)
+3. [iHRIS Apps](ihris_apps.md)
+4. Creating and editing Menu
+5. [Creating custom nodeJS routes](custom_routes.md)
+6. Creating custom nodeJS modules --- pending
+
+## `Editing fsh files`
+
+When using this option for customization, developers need to edit the fsh files and upload them onto hapi server.
+
+## Using FHIR
 
 Customizations can be used with FHIR Shorthand to define resources.
 
-https://build.fhir.org/ig/HL7/fhir-shorthand/
+<https://build.fhir.org/ig/HL7/fhir-shorthand/>
 
 This will be better defined in the future, but for now, you can create the files
 in the fsh/ directory of the repository.  You should use the same prefix for your
@@ -10,7 +27,7 @@ files and various names that won't conflict with default iHRIS configurations.
 
 ## Create a Profile / Structure Definition
 
-You can profile existing FHIR resources and create extensions for to add fields.  Any fields 
+You can profile existing FHIR resources and create extensions for to add fields.  Any fields
 you want to show up on the default iHRIS page for the resource need the must support flag set.
 
 You can also set the label to display for the field as well as define validation constraints and
@@ -55,7 +72,7 @@ Description:  "Example Practitioner for iHRIS"
 ## Creating pages
 
 Pages define how a resource is displayed by default and how it is edited.  You can control
-the sections displayed as well as the order of fields.  Any fields that are defined in 
+the sections displayed as well as the order of fields.  Any fields that are defined in
 the profile as "must support" will appear in the first section if not included elsewhere.
 
 The page defines the search terms that can be used on a search page for the resource.
@@ -63,8 +80,7 @@ The page defines the search terms that can be used on a search page for the reso
 The page defines any secondary resources that are linked to this resource and you can display
 those in a table on the page.  You can include links to modify or create these secondary resources.
 
-https://github.com/iHRIS/iHRIS/blob/master/fsh/IhrisPage.fsh
-
+<https://github.com/iHRIS/iHRIS/blob/master/fsh/IhrisPage.fsh>
 
 ## Creating single data entry pages
 
@@ -72,7 +88,7 @@ Single data entry pages can be created using a FHIR Questionnaire.  The linkId m
 to a path in a FHIR resource where the field will be populated and the definition
 should refer to the field in your customized StructureDefinition.
 
-See https://github.com/iHRIS/iHRIS/blob/master/fsh/IhrisPractitioner.fsh#L187
+See <https://github.com/iHRIS/iHRIS/blob/master/fsh/IhrisPractitioner.fsh#L187>
 
 ## Creating a workflow
 
@@ -81,8 +97,8 @@ for custom workflows where you want to update multiple resources.
 
 The workflow is custom Node JS code stored in a FHIR Library.  The library must be signed to be sure
 that the code is allowed to be run by the server.  For example, promoting
-a practitioner is done with a workflow.  An example Library is 
-here:  https://github.com/iHRIS/iHRIS/blob/master/resources/Library-ihris-workflow-promotion.json
+a practitioner is done with a workflow.  An example Library is
+here:  <https://github.com/iHRIS/iHRIS/blob/master/resources/Library-ihris-workflow-promotion.json>
 
-The code was created using the createModule.js tool from this source 
-code:  https://github.com/iHRIS/iHRIS/blob/master/resources/moduleCode/workflowPromotion.js
+The code was created using the createModule.js tool from this source
+code:  <https://github.com/iHRIS/iHRIS/blob/master/resources/moduleCode/workflowPromotion.js>

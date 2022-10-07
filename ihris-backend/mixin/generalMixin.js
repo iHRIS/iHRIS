@@ -31,6 +31,10 @@ const getFilesFromDir = (searchDir) => {
     }
     const dirsPromises = [];
     dirs.forEach((dir) => {
+      if (!fs.lstatSync(`${searchDir}/${dir}`).isDirectory()) {
+        filesPath.push(`${searchDir}/${dir}`);
+        return
+      }
       dirsPromises.push(new Promise((dresolve, dreject) => {
         fs.readdir(`${searchDir}/${dir}`, (err, files) => {
           if (err) {

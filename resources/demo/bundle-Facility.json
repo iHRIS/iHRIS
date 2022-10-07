@@ -45,9 +45,10 @@
         "resourceType": "Location",
         "meta": {
           "profile": [
-            "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location",
-            "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.FacilityLocation"
-          ]
+    "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location",
+    "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.FacilityLocation",
+    "http://ihris.org/fhir/StructureDefinition/ihris-facility"
+  ]
         },
         "id": "TF.W.RSH.1",
         "name": "Rushonga Hospital",
@@ -134,9 +135,10 @@
         "resourceType": "Location",
         "meta": {
           "profile": [
-            "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location",
-            "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.FacilityLocation"
-          ]
+    "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location",
+    "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.FacilityLocation",
+    "http://ihris.org/fhir/StructureDefinition/ihris-facility"
+  ]
         },
         "id": "TF.W.NYG.10",
         "name": "Nyagano Health Center",
@@ -223,9 +225,10 @@
         "resourceType": "Location",
         "meta": {
           "profile": [
-            "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location",
-            "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.FacilityLocation"
-          ]
+    "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location",
+    "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.FacilityLocation",
+    "http://ihris.org/fhir/StructureDefinition/ihris-facility"
+  ]
         },
         "id": "TF.S.NYS.11",
         "name": "Nyusa Clinic",
@@ -312,9 +315,10 @@
         "resourceType": "Location",
         "meta": {
           "profile": [
-            "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location",
-            "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.FacilityLocation"
-          ]
+    "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location",
+    "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.FacilityLocation",
+    "http://ihris.org/fhir/StructureDefinition/ihris-facility"
+  ]
         },
         "id": "TF.CC.CAP.12",
         "name": "Capital City Clinic",
@@ -401,9 +405,10 @@
         "resourceType": "Location",
         "meta": {
           "profile": [
-            "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location",
-            "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.FacilityLocation"
-          ]
+    "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location",
+    "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.FacilityLocation",
+    "http://ihris.org/fhir/StructureDefinition/ihris-facility"
+  ]
         },
         "id": "TF.S.HGM.13",
         "name": "Hugoma Dispensary",
@@ -490,9 +495,10 @@
         "resourceType": "Location",
         "meta": {
           "profile": [
-            "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location",
-            "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.FacilityLocation"
-          ]
+    "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location",
+    "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.FacilityLocation",
+    "http://ihris.org/fhir/StructureDefinition/ihris-facility"
+  ]
         },
         "id": "TF.N.BRB.14",
         "name": "Example Clinic",
@@ -579,9 +585,10 @@
         "resourceType": "Location",
         "meta": {
           "profile": [
-            "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location",
-            "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.FacilityLocation"
-          ]
+    "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location",
+    "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.FacilityLocation",
+    "http://ihris.org/fhir/StructureDefinition/ihris-facility"
+  ]
         },
         "id": "TF.N.BRB.17",
         "name": "Test Facility",
@@ -668,9 +675,10 @@
         "resourceType": "Location",
         "meta": {
           "profile": [
-            "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location",
-            "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.FacilityLocation"
-          ]
+    "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location",
+    "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.FacilityLocation",
+    "http://ihris.org/fhir/StructureDefinition/ihris-facility"
+  ]
         },
         "id": "TF.CC.CAP.2",
         "name": "Capital City Hospital",
@@ -757,9 +765,10 @@
         "resourceType": "Location",
         "meta": {
           "profile": [
-            "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location",
-            "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.FacilityLocation"
-          ]
+    "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location",
+    "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.FacilityLocation",
+    "http://ihris.org/fhir/StructureDefinition/ihris-facility"
+  ]
         },
         "id": "TF.N.MSZ.3",
         "name": "Musoza Hospital",
@@ -846,9 +855,10 @@
         "resourceType": "Location",
         "meta": {
           "profile": [
-            "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location",
-            "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.FacilityLocation"
-          ]
+    "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location",
+    "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.FacilityLocation",
+    "http://ihris.org/fhir/StructureDefinition/ihris-facility"
+  ]
         },
         "id": "TF.S.GIS.4",
         "name": "Gisamba Hospital",
@@ -935,9 +945,10 @@
         "resourceType": "Location",
         "meta": {
           "profile": [
-            "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location",
-            "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.FacilityLocation"
-          ]
+    "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location",
+    "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.FacilityLocation",
+    "http://ihris.org/fhir/StructureDefinition/ihris-facility"
+  ]
         },
         "id": "TF.E.RWB.5",
         "name": "Rwabira Hospital",
@@ -1024,9 +1035,10 @@
         "resourceType": "Location",
         "meta": {
           "profile": [
-            "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location",
-            "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.FacilityLocation"
-          ]
+    "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location",
+    "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.FacilityLocation",
+    "http://ihris.org/fhir/StructureDefinition/ihris-facility"
+  ]
         },
         "id": "TF.E.KAH.6",
         "name": "Kahini Medical Center",
@@ -1113,9 +1125,10 @@
         "resourceType": "Location",
         "meta": {
           "profile": [
-            "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location",
-            "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.FacilityLocation"
-          ]
+    "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location",
+    "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.FacilityLocation",
+    "http://ihris.org/fhir/StructureDefinition/ihris-facility"
+  ]
         },
         "id": "TF.N.GYU.7",
         "name": "Gyumba Medical Center",
@@ -1202,9 +1215,10 @@
         "resourceType": "Location",
         "meta": {
           "profile": [
-            "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location",
-            "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.FacilityLocation"
-          ]
+    "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location",
+    "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.FacilityLocation",
+    "http://ihris.org/fhir/StructureDefinition/ihris-facility"
+  ]
         },
         "id": "TF.E.GAT.8",
         "name": "Gatarama Health Center",
@@ -1291,9 +1305,10 @@
         "resourceType": "Location",
         "meta": {
           "profile": [
-            "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location",
-            "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.FacilityLocation"
-          ]
+    "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location",
+    "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.FacilityLocation",
+    "http://ihris.org/fhir/StructureDefinition/ihris-facility"
+  ]
         },
         "id": "TF.W.KAR.9",
         "name": "Karita Health Center",

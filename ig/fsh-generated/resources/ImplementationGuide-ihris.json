@@ -1353,6 +1353,13 @@
       },
       {
         "reference": {
+          "reference": "Bundle/Country"
+        },
+        "name": "Country",
+        "exampleBoolean": true
+      },
+      {
+        "reference": {
           "reference": "SearchParameter/basic-location-constraint"
         },
         "name": "basic-location-constraint",
@@ -2218,13 +2225,6 @@
         },
         "name": "practitionerrole-related-practitioner",
         "exampleBoolean": false
-      },
-      {
-        "reference": {
-          "reference": "Bundle/undefined"
-        },
-        "name": "undefined",
-        "exampleBoolean": true
       },
       {
         "reference": {

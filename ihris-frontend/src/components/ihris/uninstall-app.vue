@@ -3,7 +3,7 @@
     <center>
       <v-card min-height="200" max-width="500" rounded shaped>
         <v-card-title primary-title>
-          Select App to Uninstall
+          {{ $t(`App.hardcoded-texts.Select App to Uninstall`) }}
         </v-card-title>
         <v-card-text v-if="!loadingApps">
           <v-layout row wrap>
@@ -23,7 +23,7 @@
                         <v-icon>mdi-minus</v-icon>
                       </v-btn>
                     </template>
-                    <span>Uninstall {{app.app_short_name}}</span>
+                    <span>{{ $t(`App.hardcoded-texts.Uninstall`) }} {{app.app_short_name}}</span>
                   </v-tooltip>
                   <v-avatar color="primary" size="90">
                     <v-img :src="app.iconBase64"></v-img>

@@ -10,7 +10,7 @@ import vuetify from "./plugins/vuetify"
 import 'whatwg-fetch'
 import fhirpath from "fhirpath"
 import fhirutils from "./plugins/fhirutils"
-import i18n from './i18n'
+import { i18n } from './i18n'
 
 Vue.config.productionTip = false
 
@@ -35,7 +35,6 @@ fetch("/config/app").then((response)=> {
         url: data.keycloak.baseURL,
         onLoad: 'login-required'
       }
-
       let keycloak = Keycloak(initOptions);
       const Plugin = {
         install(Vue) {
@@ -105,7 +104,8 @@ fetch("/config/app").then((response)=> {
             keycloak.updateToken(70)
           }, 60000)
         }
-      }).catch(() => {
+      }).catch((err) => {
+        console.log(err);
         alert("Keycloak access failed")
       });
     } else {

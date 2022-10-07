@@ -1,21 +1,18 @@
 const express = require('express')
 const router = express.Router()
 const nconf = require('../modules/config')
-const user = require('../modules/user').user
-const User = require('../modules/user').User
+const user = require('../modules/user')
 const winston = require('winston')
 const jwt = require('jsonwebtoken');
 const crypto = require('crypto')
 const fhirAxios = nconf.fhirAxios
 const fhirAudit = require('../modules/fhir/fhirAudit')
 const sendEmail = require('../modules/sendEmail')
-const admin = require('../../resources/Person-ihris-user-admin.json')
 const clientUrl = nconf.get('auth:CLIENT_URL')
 
 const passport = require('passport')
 const logger = require("fhir2es/winston");
 const {v4: uuidv4} = require("uuid");
-const nodemailer = require("nodemailer");
 const GoogleStrategy = require('passport-google-oauth20').Strategy
 const LocalStrategy = require('passport-local').Strategy
 const CustomStrategy = require('passport-custom').Strategy
@@ -69,48 +66,23 @@ passport.use(new GoogleStrategy(
 
 passport.use('local', new LocalStrategy({passReqToCallback: true},
     (req, email, password, done) => {
-      if (email === "admin@ihris.org") {
-        const getAdminUser = async (admin, password) => {
-          let userObj = new User(admin)
-          await fhirAxios.read('Basic', 'ihris-role-admin').then(async (response) => {
-            await userObj.updatePermissions([response])
-          }).catch((err) => {
-            winston.error(err.message)
-          });
+      user.lookupByEmail(email).then((userObj) => {
+        if (!userObj) {
+          fhirAudit.login(userObj, req.ip, false, email)
+          done(null, false)
+        } else {
           if (userObj.checkPassword(password)) {
-            return (userObj)
-          } else {
-            return (false)
-          }
-        }
-        getAdminUser(admin, password).then(userObj => {
-          if (userObj) {
             fhirAudit.login(userObj, req.ip, true, email)
             done(null, userObj)
           } else {
             fhirAudit.login(userObj, req.ip, false, email)
             done(null, false)
           }
-        })
-      } else {
-        user.lookupByEmail(email).then((userObj) => {
-          if (!userObj) {
-            fhirAudit.login(userObj, req.ip, false, email)
-            done(null, false)
-          } else {
-            if (userObj.checkPassword(password)) {
-              fhirAudit.login(userObj, req.ip, true, email)
-              done(null, userObj)
-            } else {
-              fhirAudit.login(userObj, req.ip, false, email)
-              done(null, false)
-            }
-          }
-        }).catch((err) => {
-          fhirAudit.login({}, req.ip, false, email)
-          done(err)
-        })
-      }
+        }
+      }).catch((err) => {
+        fhirAudit.login({}, req.ip, false, email)
+        done(err)
+      })
     }
 ))
 
@@ -317,48 +289,6 @@ router.post("/login", passport.authenticate('local', {}), (req, res) => {
           }
         })
         name = req.user.resource.name[0].text
-        // OTP logic implementation
-        // user
-        //     .lookupByEmail(req.user.resource.telecom[0].value)
-        //     .then((userObj) => {
-        //       if (userObj) {
-        //         let codeDetails = userObj.resource.extension
-        //             .find(
-        //                 (ext) =>
-        //                     ext.url ===
-        //                     "http://ihris.org/fhir/StructureDefinition/ihris-user-otp"
-        //             )
-        //             .extension.find((ext) => ext.url === "code");
-        //         if (codeDetails) {
-        //           userObj.resource.extension
-        //               .find(
-        //                   (ext) =>
-        //                       ext.url ===
-        //                       "http://ihris.org/fhir/StructureDefinition/ihris-user-otp"
-        //               )
-        //               .extension.find((ext) => ext.url === "code").valueString = otp;
-        //
-        //           userObj
-        //               .update()
-        //               .then((response) => {
-        //                 res
-        //                     .status(200)
-        //                     .json({ok: true, name: name, user: response});
-        //               })
-        //               .catch((err) => {
-        //                 logger.error(err.message);
-        //                 res
-        //                     .status(400)
-        //                     .json({ok: false, message: "failed to user object otp"});
-        //               });
-        //         }
-        //       }
-        //     })
-        //     .catch((err) => {
-        //       console.log("))))))))))",JSON.stringify(err.message,null,2))
-        //       logger.error(err.message);
-        //       res.status(400).json({ok: false, message: err.message});
-        //     });
       } catch (err) {
         console.error("Error ", err)
       }

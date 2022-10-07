@@ -964,7 +964,21 @@ router.get('/questionnaire/:questionnaire', function (req, res) {
                     }
                     vueOutput += "></ihris-hidden>\n"
                 } else {
-                    vueOutput += "<fhir-" + itemType + " :edit=\"isEdit\" path=\"" + item.linkId + "\""
+                    let displayCondition = ''
+                    if(item.enableWhen) {
+                        for(let when of item.enableWhen) {
+                        displayCondition = ''
+                        condKeys = Object.keys(when)
+                        let answKeyInd = condKeys.findIndex((cond) => {
+                            return cond.startsWith('answer')
+                        })
+                        if(displayCondition) {
+                            displayCondition += '+='
+                        }
+                        displayCondition += when.question + '|' + when.operator + '|' + when[condKeys[answKeyInd]]
+                        }
+                    }
+                    vueOutput += "<fhir-" + itemType + " :edit=\"isEdit\" path=\"" + item.linkId + "\"" + "displayCondition=\"" + displayCondition + "\""
 
                     let field
                     const minmax = ["Date", "DateTime", "Instant", "Time", "Decimal", "Integer", "PositiveInt",
@@ -1175,12 +1189,15 @@ router.get('/report/es/:report', (req, res) => {
                 return ext.url === "http://ihris.org/fhir/StructureDefinition/iHRISReportElement"
             })
             for (let element of reportElements) {
-                let displayName, esField
+                let displayName, esField, fieldOrder
                 let label = element.extension.find((ext) => {
                     return ext.url === 'label'
                 })
                 let display = element.extension.find((ext) => {
                     return ext.url === 'display'
+                })
+                let order = element.extension.find((ext) => {
+                    return ext.url === 'order'
                 })
                 if (!display) {
                     continue;
@@ -1204,7 +1221,10 @@ router.get('/report/es/:report', (req, res) => {
                 }
                 esField = label.valueString
                 displayName = display.valueString
-                reportData.fieldsDetails.push([displayName, esField])
+                if(order) {
+                    fieldOrder = order.valueInteger
+                }
+                reportData.fieldsDetails.push([displayName, esField, fieldOrder])
             }
         }
         // populate data type of filters
@@ -1601,15 +1621,15 @@ router.get("/employeeId/:id", (req, res) => {
 
             userData.photo = user.photo;
 
-            userData.phone = user.telecom.find(x => x.system === "phone")?.value;
+            userData.phone = user.telecom?.find(x => x.system === "phone")?.value;
 
-            userData.employeeId = user.identifier.find(x => x.type.coding[0].code = "EN")?.value;
+            userData.employeeId = user.identifier?.find(x => x.type.coding[0].code = "EN")?.value;
 
             userData.residence = user.address[0]?.city;
 
             userData.nationality = user.address[0]?.country;
 
-            userData.email = user.telecom.find(x => x.system === "email")?.value
+            userData.email = user.telecom?.find(x => x.system === "email")?.value
 
             let data = await fhirAxios.search("PractitionerRole", {
                 _profile:

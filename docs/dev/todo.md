@@ -2,11 +2,6 @@
 
 * Create tests for fhirAxios:lookup and route/fhir CodeSystem/$lookup
 * setup reference lookup to be configurable (in fhir-reference.vue, hard coded to name)
-* Create audit module and tests
- * Save audit messages for activity
-  * login/logout
-  * save/update resource
-* Internationalization
 * add additional fields to resource display
  * defaultValue[x]
  * fixed[x]
@@ -22,13 +17,10 @@
 * fix issue with valuesets selecting first item
  * autocomplete?
 * questionnaire data entry
-* add form validation and required fields
 * add required fields
-* allow readonly fields (like code for codesystem edit, but not add)
 * change $short-name operation to allow searches and results of the shortname and update fhir-reference component to use that
 * set up all components to work like fhir-reference for presets (disable element on add page when preset)
 * set up "static" FHIR resource (documentreference?) for images (logos, etc.)
-* create fhir-attachment component
 * make end point to reload a remote config file (Parameters)
 
 # Notes

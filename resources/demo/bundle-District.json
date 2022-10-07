@@ -7,8 +7,9 @@
         "resourceType": "Location",
         "meta": {
           "profile": [
-            "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
-          ]
+    "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location",
+    "http://ihris.org/fhir/StructureDefinition/ihris-jurisdiction"
+  ]
         },
         "id": "TF.CC.CAP",
         "name": "Capital",
@@ -47,8 +48,9 @@
         "resourceType": "Location",
         "meta": {
           "profile": [
-            "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
-          ]
+    "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location",
+    "http://ihris.org/fhir/StructureDefinition/ihris-jurisdiction"
+  ]
         },
         "id": "TF.E.KAH",
         "name": "Kahini",
@@ -87,8 +89,9 @@
         "resourceType": "Location",
         "meta": {
           "profile": [
-            "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
-          ]
+    "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location",
+    "http://ihris.org/fhir/StructureDefinition/ihris-jurisdiction"
+  ]
         },
         "id": "TF.W.RSN",
         "name": "Rusenyi",
@@ -127,8 +130,9 @@
         "resourceType": "Location",
         "meta": {
           "profile": [
-            "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
-          ]
+    "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location",
+    "http://ihris.org/fhir/StructureDefinition/ihris-jurisdiction"
+  ]
         },
         "id": "TF.S.NYS",
         "name": "Nyusa",
@@ -167,8 +171,9 @@
         "resourceType": "Location",
         "meta": {
           "profile": [
-            "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
-          ]
+    "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location",
+    "http://ihris.org/fhir/StructureDefinition/ihris-jurisdiction"
+  ]
         },
         "id": "TF.S.HGM",
         "name": "Hugoma",
@@ -207,8 +212,9 @@
         "resourceType": "Location",
         "meta": {
           "profile": [
-            "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
-          ]
+    "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location",
+    "http://ihris.org/fhir/StructureDefinition/ihris-jurisdiction"
+  ]
         },
         "id": "TF.E.BWO",
         "name": "Bwogo",
@@ -247,8 +253,9 @@
         "resourceType": "Location",
         "meta": {
           "profile": [
-            "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
-          ]
+    "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location",
+    "http://ihris.org/fhir/StructureDefinition/ihris-jurisdiction"
+  ]
         },
         "id": "TF.N.GAN",
         "name": "Ganemba",
@@ -287,8 +294,9 @@
         "resourceType": "Location",
         "meta": {
           "profile": [
-            "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
-          ]
+    "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location",
+    "http://ihris.org/fhir/StructureDefinition/ihris-jurisdiction"
+  ]
         },
         "id": "TF.W.RUT",
         "name": "Rutunda",
@@ -327,8 +335,9 @@
         "resourceType": "Location",
         "meta": {
           "profile": [
-            "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
-          ]
+    "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location",
+    "http://ihris.org/fhir/StructureDefinition/ihris-jurisdiction"
+  ]
         },
         "id": "TF.S.KAK",
         "name": "Kakoma",
@@ -367,8 +376,9 @@
         "resourceType": "Location",
         "meta": {
           "profile": [
-            "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
-          ]
+    "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location",
+    "http://ihris.org/fhir/StructureDefinition/ihris-jurisdiction"
+  ]
         },
         "id": "TF.E.NYT",
         "name": "Nyatimba",
@@ -407,8 +417,9 @@
         "resourceType": "Location",
         "meta": {
           "profile": [
-            "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
-          ]
+    "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location",
+    "http://ihris.org/fhir/StructureDefinition/ihris-jurisdiction"
+  ]
         },
         "id": "TF.N.BRB",
         "name": "Buraba",
@@ -447,8 +458,9 @@
         "resourceType": "Location",
         "meta": {
           "profile": [
-            "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
-          ]
+    "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location",
+    "http://ihris.org/fhir/StructureDefinition/ihris-jurisdiction"
+  ]
         },
         "id": "TF.E.NGU",
         "name": "Ngungo",
@@ -487,8 +499,9 @@
         "resourceType": "Location",
         "meta": {
           "profile": [
-            "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
-          ]
+    "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location",
+    "http://ihris.org/fhir/StructureDefinition/ihris-jurisdiction"
+  ]
         },
         "id": "TF.S.NYR",
         "name": "Nyaramba",
@@ -527,8 +540,9 @@
         "resourceType": "Location",
         "meta": {
           "profile": [
-            "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
-          ]
+    "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location",
+    "http://ihris.org/fhir/StructureDefinition/ihris-jurisdiction"
+  ]
         },
         "id": "TF.W.NGT",
         "name": "Ngotumba",
@@ -567,8 +581,9 @@
         "resourceType": "Location",
         "meta": {
           "profile": [
-            "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
-          ]
+    "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location",
+    "http://ihris.org/fhir/StructureDefinition/ihris-jurisdiction"
+  ]
         },
         "id": "TF.E.RWB",
         "name": "Rwabiro",
@@ -607,8 +622,9 @@
         "resourceType": "Location",
         "meta": {
           "profile": [
-            "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
-          ]
+    "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location",
+    "http://ihris.org/fhir/StructureDefinition/ihris-jurisdiction"
+  ]
         },
         "id": "TF.N.GTB",
         "name": "Gataba",
@@ -647,8 +663,9 @@
         "resourceType": "Location",
         "meta": {
           "profile": [
-            "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
-          ]
+    "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location",
+    "http://ihris.org/fhir/StructureDefinition/ihris-jurisdiction"
+  ]
         },
         "id": "TF.S.RWN",
         "name": "Ruwendo",
@@ -687,8 +704,9 @@
         "resourceType": "Location",
         "meta": {
           "profile": [
-            "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
-          ]
+    "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location",
+    "http://ihris.org/fhir/StructureDefinition/ihris-jurisdiction"
+  ]
         },
         "id": "TF.W.KAR",
         "name": "Karita",
@@ -727,8 +745,9 @@
         "resourceType": "Location",
         "meta": {
           "profile": [
-            "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
-          ]
+    "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location",
+    "http://ihris.org/fhir/StructureDefinition/ihris-jurisdiction"
+  ]
         },
         "id": "TF.E.KIR",
         "name": "Kirasho",
@@ -767,8 +786,9 @@
         "resourceType": "Location",
         "meta": {
           "profile": [
-            "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
-          ]
+    "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location",
+    "http://ihris.org/fhir/StructureDefinition/ihris-jurisdiction"
+  ]
         },
         "id": "TF.W.NYI",
         "name": "Nyira",
@@ -807,8 +827,9 @@
         "resourceType": "Location",
         "meta": {
           "profile": [
-            "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
-          ]
+    "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location",
+    "http://ihris.org/fhir/StructureDefinition/ihris-jurisdiction"
+  ]
         },
         "id": "TF.S.MUB",
         "name": "Mubuye",
@@ -847,8 +868,9 @@
         "resourceType": "Location",
         "meta": {
           "profile": [
-            "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
-          ]
+    "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location",
+    "http://ihris.org/fhir/StructureDefinition/ihris-jurisdiction"
+  ]
         },
         "id": "TF.S.NYD",
         "name": "Nyaduha",
@@ -887,8 +909,9 @@
         "resourceType": "Location",
         "meta": {
           "profile": [
-            "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
-          ]
+    "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location",
+    "http://ihris.org/fhir/StructureDefinition/ihris-jurisdiction"
+  ]
         },
         "id": "TF.N.GYU",
         "name": "Gyumba",
@@ -927,8 +950,9 @@
         "resourceType": "Location",
         "meta": {
           "profile": [
-            "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
-          ]
+    "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location",
+    "http://ihris.org/fhir/StructureDefinition/ihris-jurisdiction"
+  ]
         },
         "id": "TF.W.GAS",
         "name": "Gasunga",
@@ -967,8 +991,9 @@
         "resourceType": "Location",
         "meta": {
           "profile": [
-            "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
-          ]
+    "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location",
+    "http://ihris.org/fhir/StructureDefinition/ihris-jurisdiction"
+  ]
         },
         "id": "TF.S.GIS",
         "name": "Gisamba",
@@ -1007,8 +1032,9 @@
         "resourceType": "Location",
         "meta": {
           "profile": [
-            "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
-          ]
+    "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location",
+    "http://ihris.org/fhir/StructureDefinition/ihris-jurisdiction"
+  ]
         },
         "id": "TF.W.NYG",
         "name": "Nyagano",
@@ -1047,8 +1073,9 @@
         "resourceType": "Location",
         "meta": {
           "profile": [
-            "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
-          ]
+    "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location",
+    "http://ihris.org/fhir/StructureDefinition/ihris-jurisdiction"
+  ]
         },
         "id": "TF.W.RSH",
         "name": "Rushonga",
@@ -1087,8 +1114,9 @@
         "resourceType": "Location",
         "meta": {
           "profile": [
-            "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
-          ]
+    "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location",
+    "http://ihris.org/fhir/StructureDefinition/ihris-jurisdiction"
+  ]
         },
         "id": "TF.N.MSZ",
         "name": "Musoza",
@@ -1127,8 +1155,9 @@
         "resourceType": "Location",
         "meta": {
           "profile": [
-            "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
-          ]
+    "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location",
+    "http://ihris.org/fhir/StructureDefinition/ihris-jurisdiction"
+  ]
         },
         "id": "TF.N.RUS",
         "name": "Rusoro",
@@ -1167,8 +1196,9 @@
         "resourceType": "Location",
         "meta": {
           "profile": [
-            "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location"
-          ]
+    "http://ihe.net/fhir/StructureDefinition/IHE.mCSD.Location",
+    "http://ihris.org/fhir/StructureDefinition/ihris-jurisdiction"
+  ]
         },
         "id": "TF.E.GAT",
         "name": "Gatarama",

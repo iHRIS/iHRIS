@@ -4,6 +4,7 @@
   "description": "",
   "main": "createModule.js",
   "dependencies": {
+    "async": "^3.2.4",
     "axios": "^0.21.1",
     "fhir": "^4.7.8",
     "nconf": "^0.10.0",

@@ -25,6 +25,7 @@ const itemSort = (a,b) => {
   return (a.display === b.display ? (a.code === b.code ? 0 : (a.code < b.code ? -1: 1)) : (a.display < b.display ? -1 : 1) )
 }
 */
+import { eventBus } from "@/main";
 export default {
   name: "fhir-coding",
   props: ["label", "path", "binding", "edit", "min", "max","constraints"],
@@ -47,6 +48,7 @@ export default {
       if ( this.items ) {
         this.value = this.items.find( item => item.code === this.valueCode )
       }
+      eventBus.$emit(this.path, this.value.code)
     }
   },
   methods: {

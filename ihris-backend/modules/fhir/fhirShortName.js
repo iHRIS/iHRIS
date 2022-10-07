@@ -56,8 +56,8 @@ const fhirShortName = {
    */
   _resourceLookup: (reference) => {
     return new Promise( (resolve) => {
-      let refData = reference.split('/')
-      if ( refData.length !== 2 ) {
+      let refData = reference?.split('/')
+      if ( refData?.length !== 2 ) {
         resolve( fhirShortName._setCache( reference, "Invalid Reference" ) )
       } else {
         fhirAxios.read( refData[0], refData[1] ).then( (resource) => {

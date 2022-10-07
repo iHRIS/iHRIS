@@ -10,58 +10,62 @@
       </v-btn>
     </template>
     <v-list dense>
-      <v-list-item v-for="(lang, index) in langs" :key="index" @click="handleMenuItemClick(lang)">
+      <v-list-item v-for="(lang, index) in languages" :key="index" @click="handleMenuItemClick(lang)">
         <v-list-item-avatar size="24">
           <v-img :src="`/flag_${lang.flag}.svg`"></v-img>
         </v-list-item-avatar>
-        <v-list-item-title>{{ lang.title }}</v-list-item-title>
+        <v-list-item-title>{{ lang.language }}</v-list-item-title>
       </v-list-item>
     </v-list>
   </v-menu>
 </template>
 
 <script>
+import {loadLanguage} from '../../i18n'
+import axios from 'axios'
 export default {
   data() {
     return {
-      langs: [
-        {code:'en', title: 'English', flag: 'en' },
-        {code:'fr',  title: 'French', flag: 'fr' },
-        {code:'es', title: 'Spanish', flag: 'es' },
-        {code:'it',  title: 'Italian', flag: 'it' },
-        {code:'pt',  title: 'Portuguese', flag: 'pt' },
-        {code:'sw',  title: 'Swahili', flag: 'tz' },
-        {code:'ar',  title: 'عربي', flag: 'eg' },
-      ].sort((a, b) => {
-        if (a.title < b.title) {
-          return -1;
-        }
-        if (a.title > b.title) {
-          return 1;
-        }
-        return 0;
-      }),
+      languages: [],
       activeLang: 'English',
       activeFlag: 'en',
       dialog: false,
       languageMenu: false,
     }
   },
-created() {
-   // this.$i18n.availableLocales.map((lang) => (this.langs.push({code:lang, title: lang, flag: 'en' })))
-  this.activeLang = localStorage.getItem('activeLang')
-  this.activeFlag = localStorage.getItem('activeFlag')
-  this.$i18n.locale = localStorage.getItem('activeCode')
-},
+  created() {
+    this.getLanguageList()
+  },
   methods: {
     handleMenuItemClick (lang) {
-      localStorage.setItem('activeLang', lang.title)
+      loadLanguage(lang.locale)
+      localStorage.setItem('activeLang', lang.language)
       localStorage.setItem('activeFlag', lang.flag)
-      localStorage.setItem('activeCode', lang.code)
-      this.$i18n.locale = lang.code
-      this.activeLang = lang.title;
+      localStorage.setItem('activeLocale', lang.locale)
+      this.activeLang = lang.language;
       this.activeFlag = lang.flag
     },
+    getLanguageList() {
+      axios.get("/translator/getTranslatedLanguages").then((response) => {
+        this.languages = response.data
+        this.languages.sort((a, b) => {
+          if (a.language < b.language) {
+            return -1;
+          }
+          if (a.language > b.language) {
+            return 1;
+          }
+          return 0;
+        })
+        let activeLocale = localStorage.getItem('activeLocale') || this.$i18n.locale || "en"
+        let activeLanguage = this.languages.find((lang) => {
+          return lang.locale === activeLocale
+        })
+        this.$i18n.locale = activeLanguage.locale
+        this.activeLang = activeLanguage.language
+        loadLanguage(activeLanguage.locale || "en")
+      })
+    }
   }
 }
 </script>

@@ -1,11 +1,17 @@
-# Installation
+# Installation Of Supporting software
 This was done on a clean Ubuntu 20.4 server.
 
 ## Node JS LTS
 ```bash
-curl -sL https://deb.nodesource.com/setup_12.x | sudo -E bash -
-sudo apt-get install -y nodejs
-sudo npm install -g npm
+curl -sL https://deb.nodesource.com/setup_16.x | sudo -E bash -
+sudo apt install -y nodejs
+sudo apt install -g npm
+```
+### On ARM
+On ARM64 machines there is an issues with installing the canvas node module. Run the following commands or there equivalent in MacOSX
+```
+sudo apt install pkg-config
+sudo apt install libpixman-1-dev libcairo2-dev libpango1.0-dev libjpeg8-dev libgif-dev
 ```
 ## Redis
 **This must be secured or people will be able to do bad things.**
@@ -22,7 +28,7 @@ sudo apt install tomcat9
 sudo apt install postgresql
 ```
 ## HAPI FHIR
-**This must be secured or people will be able to do bad things.**
+!!! This must be secured or people will be able to do bad things.
 ### Create Database and User
 ```bash
 sudo -u postgres psql
@@ -44,8 +50,38 @@ Edit ```pom.xml``` and change the following line from hapi-fhir-jpaserver or ROO
 ```xml
     <finalName>hapi</finalName>
 ```
+!!! The most recently tested hapi version for iHRIS is 6.1.0
+#### For versions starting with 5.7.0 to the latest
+Edit ```src/main/resources/application.yaml``` and update the following values as bellow:
+```
+spring:
+  datasource:
+    url: 'jdbc:postgresql://localhost:5432/hapi'
+    username: hapi
+    password: PASS
+    driveClassName: org.postgresql.Driver
+  jpa:
+    properties:
+      hibernate.dialect: ca.uhn.fhir.jpa.model.dialect.HapiFhirPostgres94Dialect
+      hibernate.search.enabled: true
+      hibernate.search.backend.type: lucene
+      hibernate.search.backend.analysis.configurer: ca.uhn.fhir.jpa.search.HapiHSearchAnalysisConfigurers$HapiLuceneAnalysisConfigurer
+      hibernate.search.backend.directory.type: local-filesystem
+      hibernate.search.backend.directory.root: target/lucenefiles
+      hibernate.search.backend.lucene_version: lucene_current
+hapi:
+  fhir:
+    fhir_version: R4
+    enable_index_missing_fields: true
+    tester:
+       home:
+        name: iHRIS
+        server_address: http://localhost:8080/hapi/fhir/
+        refuse_to_fetch_third_party_urls: false
+        fhir_version: R4
+```
 
-#### For versions starting with 5.2.0 to the latest
+#### For versions starting with 5.2.0
 Things were streamlined a bit so the values to edit are simpler.
 Edit ```src/main/resources/application.yaml``` and update the following values:
 
@@ -179,65 +215,3 @@ After installing, edit /etc/kibana/kibana.yml and set server.basePath
 ```yaml
 server.basePath: "/kibana"
 ```
-
-# Back end server
-
-## Before starting
-
-You'll need to run npm install when additional node modules are installed or updated
-and also before starting the first time.
-
-```bash
-cd ihris-backend/
-npm install
-```
-
-## Development mode
-Run the following to start the server in development mode.
-```bash
-cd ihris-backend/
-npm run dev
-```
-## Production mode
-Run the following to start the server in production mode.
-```bash
-cd ihris-backend/
-npm run start
-```
-TODO: Convert this to a systemd script for startup and shutdown
-
-# Front end Development
-
-Built with vue cli 4.4.1
-```bash
-sudo npm install -g @vue/cli
-```
-
-## To run in development mode
-
-You may need to edit the proxy settings in ihris-frontend/vue.config.js
-depending on where you started the backend.
-
-
-```bash
-cd ihris-frontend/
-npm run serve
-```
-
-The output will give you a URL to access the frontend.
-
-## Production
-
-The frontend will be built and saved to the backend server public 
-files (ihris-backend/public/) to be served or you can run them from any 
-static web server.
-
-```bash
-cd ihris-frontend/
-npm run build
-```
-
-The files in ihris-frontend/dist/ can be served statically from your
-web server.  Releases will be compiled to the ihris-backend/public/
-directory so you will only need to do this if you want to make changes
-to the frontend software.

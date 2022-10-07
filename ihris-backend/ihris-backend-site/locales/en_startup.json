@@ -1,0 +1,80 @@
+{
+  "App": {
+    "title": "Manage",
+    "site": "Demo",
+    "wellCome": "WelCome",
+    "home": {
+      "well-come": " Welcome to iHRIS!",
+      "description": "iHRIS is IntraHealth International's free, open source software that helps countries around the world track and manage their health workforce data to improve access to services. Countries use it to capture and maintain high-quality information for health workforce planning, management, regulation, and training.",
+      "signin": "Sign in",
+      "username": "Username/Email",
+      "password": "Password",
+      "required": "Both Username and password are required",
+      "incorrect": "Username or password is incorrect!",
+      "forgotPassword": "Forgot Password?",
+      "noAccount": "No account? Sign Up",
+      "resetPassword": "Reset Password",
+      "emailAddress": "Email Address",
+      "register": "Register",
+      "employeeNumber": "Employee Number",
+      "birthDate": "Birthday date"
+    },
+    "intro": {
+      "Job_Title": "Job Title",
+      "employer_number": "Employer number",
+      "email": "Email",
+      "phone": "Phone",
+      "gender": "Gender",
+      "date-of-birth": "Date of Birth",
+      "age": "Age"
+    },
+    "footer": {
+      "About iHRIS": "About iHRIS",
+      "Feedback": "Feedback",
+      "iHRIS Website": "iHRIS Website"
+    },
+    "menu": {},
+    "ihris-codesystem": {
+      "section": "Section"
+    },
+    "ihris-search": {
+      "search": "Search",
+      "add": "Add",
+      "tableText": "Rows per page"
+    },
+    "ihris-search-term": {},
+    "ihris-search-code": {
+      "search": "Search",
+      "add": "Add"
+    },
+    "ihris-array": {},
+    "ihris-complex-card": {},
+    "ihris-questionnaire": {
+      "Cancel": "Cancel",
+      "Save": "Save",
+      "uploadCSV": "Upload CSV/Excel",
+      "getCSVTemplate": "Get CSV Template",
+      "Section": "Section"
+    },
+    "ihris-questionnaire-section": {},
+    "ihris-questionnaire-group": {},
+    "ihris-resource": {
+      "Cancel": "Cancel",
+      "Save": "Save",
+      "Edit": "Edit",
+      "Sections": "Sections"
+    },
+    "fhir-string": {
+      "Display": "Display",
+      "Code": "Code",
+      "Definition": "Definition"
+    },
+    "hardcoded-texts": {
+      "Installed Apps": "Installed Apps",
+      "Install": "Install",
+      "Install New iHRIS App": "Install New iHRIS App",
+      "Select App to Uninstall": "Select App to Uninstall",
+      "Welcome": "Welcome"
+    }
+  }
+}
