@@ -1,4 +1,4 @@
-# INTRODUCTION
+# Introduction
 
 !!! important "What is iHRIS?"
 

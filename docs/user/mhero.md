@@ -1,4 +1,4 @@
-# MHERO
+# mHero
 
 ## Assumptions
 

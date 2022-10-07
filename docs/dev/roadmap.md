@@ -14,6 +14,8 @@ The iHRIS roadmap outlines the features planned for inclusion in future releases
 
 6. Job posting and application process
 
+` Developing an iHRIS App store
+
 7. UI for audit trail
 
     An audit trail logging events in iHRIS is already maintained by the system. The inclusion of a User Interface for this feature will allow users to view and query session events as may be required.
