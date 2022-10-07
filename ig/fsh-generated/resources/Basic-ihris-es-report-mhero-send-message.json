@@ -15,12 +15,12 @@
           "valueString": "mheropractitioner"
         },
         {
-          "url": "resource",
-          "valueString": "Practitioner"
-        },
-        {
           "url": "label",
           "valueString": "Employee List"
+        },
+        {
+          "url": "resource",
+          "valueString": "Practitioner"
         },
         {
           "url": "query",

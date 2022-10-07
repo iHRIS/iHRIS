@@ -137,7 +137,7 @@
           "extensions",
           "user content"
         ],
-        "min": 2,
+        "min": 3,
         "max": "*",
         "base": {
           "path": "Element.extension",
@@ -453,7 +453,7 @@
           "extensions",
           "user content"
         ],
-        "min": 0,
+        "min": 1,
         "max": "1",
         "base": {
           "path": "Element.extension",
@@ -2325,7 +2325,7 @@
       {
         "id": "Extension.extension",
         "path": "Extension.extension",
-        "min": 2
+        "min": 3
       },
       {
         "id": "Extension.extension:name",
@@ -2376,7 +2376,7 @@
         "id": "Extension.extension:label",
         "path": "Extension.extension",
         "sliceName": "label",
-        "min": 0,
+        "min": 1,
         "max": "1",
         "mustSupport": true
       },
