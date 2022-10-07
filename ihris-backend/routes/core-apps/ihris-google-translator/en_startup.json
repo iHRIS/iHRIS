@@ -34,40 +34,57 @@
       "iHRIS Website": "iHRIS Website"
     },
     "menu": {},
-    "ihris-codesystem": {
-      "section": "Section"
-    },
-    "ihris-search": {
-      "search": "Search",
-      "add": "Add",
-      "tableText": "Rows per page"
-    },
+    "ihris-codesystem": {},
+    "ihris-search": {},
     "ihris-search-term": {},
-    "ihris-search-code": {
-      "search": "Search",
-      "add": "Add"
-    },
+    "ihris-search-code": {},
     "ihris-array": {},
     "ihris-complex-card": {},
-    "ihris-questionnaire": {
-      "Cancel": "Cancel",
-      "Save": "Save",
-      "uploadCSV": "Upload CSV/Excel",
-      "getCSVTemplate": "Get CSV Template",
-      "Section": "Section"
-    },
+    "ihris-questionnaire": {},
     "ihris-questionnaire-section": {},
     "ihris-questionnaire-group": {},
-    "ihris-resource": {
-      "Cancel": "Cancel",
-      "Save": "Save",
-      "Edit": "Edit",
-      "Sections": "Sections"
-    },
+    "ihris-resource": {},
     "fhir-string": {
       "Display": "Display",
       "Code": "Code",
       "Definition": "Definition"
+    },
+    "hardcoded-texts": {
+      "Installed Apps": "Installed Apps",
+      "Install": "Install",
+      "Install New iHRIS App": "Install New iHRIS App",
+      "Select App to Uninstall": "Select App to Uninstall",
+      "Welcome": "Welcome",
+      "add" : "Add",
+      "search": "Search",
+      "Cancel": "Cancel",
+      "Browse": "Browse",
+      "Save": "Save",
+      "Edit": "Edit",
+      "Login" : "Login",
+      "disable" : "Disable",
+      "enable" : "Enable",
+      "Sections": "Sections",
+      "tableText": "Rows per page",
+      "uploadCSV": "Upload CSV/Excel",
+      "getCSVTemplate": "Get CSV Template",
+      "GenerateCv": "Generate CV" ,
+      "GenerateId": "Generate ID",
+      "selectFeild" : "Select a Field You want on the report",
+      "Reset": "Reset",
+      "Close": "Close",
+      "Apply": "Apply Changes",
+      "Security has been disabled for remote configuration and modules!": "Security has been disabled for remote configuration and modules!",
+      "This should only be done during development." : "This should only be done during development.",
+      "Idle - Auto Logout": "Idle - Auto Logout",
+      "You have been idle too long and will be logged out in": "You have been idle too long and will be logged out in",
+      "seconds.": "seconds.",
+      "Start typing for selection": "Start typing for selection",
+      "Currency": "Currency",
+      "Select Your file": "Select Your file",
+      "Drop excel file here or": "Drop excel file here or",
+      "Done Uploading Health Workers' Information": "Done Uploading Health Workers' Information",
+      "Uploading": "Uploading"
     }
   }
 }
