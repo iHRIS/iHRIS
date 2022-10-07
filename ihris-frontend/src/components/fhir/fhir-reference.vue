@@ -57,7 +57,7 @@
         :label="display"
         outlined
         dense
-        placeholder="Start typing for selection"
+        placeholder="$t(`App.hardcoded-texts.Start typing for selection`)"
         :rules="rules"
         :disabled="(disabled) || (preset && $route.name === 'resource_add')"
         :error-messages="errors"

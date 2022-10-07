@@ -8,7 +8,7 @@
         <v-text-field
           v-model="search"
           append-icon="mdi-magnify"
-          :label="$t(`App.ihris-search-code.search`)"
+          :label="$t(`App.hardcoded-texts.search`)"
           single-line
           hide-details
         >
@@ -20,7 +20,7 @@
         >
           <v-icon v-if="addLink && addLink.icon">{{ addLink.icon }}</v-icon>
           <v-icon v-else>mdi-database-plus</v-icon>
-          {{ $t(`App.ihris-search-code.add`) }}
+          {{ $t(`App.hardcoded-texts.add`) }}
           {{ $t(`App.ihris-search-code.${label}`) }}
         </v-btn>
       </v-card-title>
@@ -35,7 +35,7 @@
         :search="search"
         :options.sync="options"
         :footer-props="{
-          'items-per-page-text': $t('App.ihris-search.tableText'),
+          'items-per-page-text': $t('App.hardcoded-texts.tableText'),
           'items-per-page-options': [5, 10, 20, 50],
         }"
         :loading="loading"
@@ -51,7 +51,7 @@
             @click.stop="changeStatus(item)"
           >
             <v-icon right dark class="mr-2"> mdi-close-octagon-outline </v-icon>
-            {{ $t(`App.ihris-search-code.disable`) }}
+            {{ $t(`App.hardcoded-texts.disable`) }}
           </v-btn>
           <v-btn
             v-else
@@ -63,7 +63,7 @@
             <v-icon right dark class="mr-2">
               mdi-checkbox-marked-circle-outline
             </v-icon>
-            {{ $t(`App.ihris-search-code.enable`) }}
+            {{ $t(`App.hardcoded-texts.enable`) }}
           </v-btn>
         </template>
       </v-data-table>

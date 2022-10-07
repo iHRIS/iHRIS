@@ -11,7 +11,7 @@
       </template>
       <v-form>
         <v-card>
-          <v-card-title class="headline info white--text" dark primary-title>Login</v-card-title>
+          <v-card-title class="headline info white--text" dark primary-title>{{ $t('App.hardcoded-texts.Login') }}</v-card-title>
           <v-card-text>
             <v-text-field 
               v-model="username" 
@@ -34,10 +34,10 @@
           <v-card-actions>
             <v-snackbar v-model="snackbar" :absolute="absolute" color="secondary">
               {{ message }}
-              <v-btn color="warning" text @click="snackbar = false">Close</v-btn>
+              <v-btn color="warning" text @click="snackbar = false">{{ $t('App.hardcoded-texts.Close') }}</v-btn>
             </v-snackbar>
             <v-spacer></v-spacer>
-            <v-btn color="success" :loading="loggingin" :disabled="loggingin" @click="submit">Login</v-btn>
+            <v-btn color="success" :loading="loggingin" :disabled="loggingin" @click="submit">{{ $t('App.hardcoded-texts.Login') }}</v-btn>
           </v-card-actions>
         </v-card>
       </v-form>

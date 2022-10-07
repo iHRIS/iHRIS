@@ -6,7 +6,7 @@
           <v-card-title class="justify-center">
             <span class="text-h6"
             ><v-icon class="mr-2" color="primary" large>mdi-translate</v-icon
-            >{{ $t('App.language.add') }}</span
+            >{{ $t('App.hardcoded-texts.add') }}</span
             >
           </v-card-title>
           <v-card-text>
@@ -122,7 +122,7 @@
                 }
               "
             >
-              {{ $t('App.language.close') }}
+              {{ $t('App.hardcoded-texts.close') }}
             </v-btn>
             <v-btn color="blue darken-1" text @click="onSave">
               {{ $t('App.language.save') }}
@@ -260,7 +260,7 @@
             </v-btn>
             <v-btn color="primary" @click="onUpdate">
               <v-icon left>mdi-content-save-check-outline</v-icon>
-              {{ $t('App.language.save') }}
+              {{ $t('App.hardcoded-texts.save') }}
             </v-btn>
           </v-card-actions>
         </v-card>
@@ -282,7 +282,7 @@
             <v-icon left>
               mdi-plus-circle
             </v-icon>
-            {{$t('App.language.add') }}
+            {{$t('App.hardcoded-texts.add') }}
           </v-btn>
           <v-btn
               :disabled="tableData.length === 0"
