@@ -87,7 +87,7 @@ export default {
               this.dialog = false
               //this.absolute=false
               this.snackbar=true
-              this.message="Login successful"
+              this.message=this.$t("App.hardcoded-texts.Login successfull")
               this.$emit("loggedin", data.name)
             }).catch(err => {
               this.loggingin = false
@@ -96,7 +96,7 @@ export default {
             })
           } else {
             //this.absolute=true
-            this.message="Username or password are incorrect"
+            this.message=this.$t("App.hardcoded-texts.Username or password is incorrect!")
             this.snackbar=true
             this.loggingin = false
           }
@@ -105,7 +105,7 @@ export default {
         //this.absolute=true
         this.loggingin = false
         this.snackbar=true
-        this.message="Login failed: "+err.message
+        this.message=this.$t("App.hardcoded-texts.Login failed: ") + err.message
       } )
     }
   }

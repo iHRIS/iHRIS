@@ -17,6 +17,7 @@
             >
               <v-icon left>mdi-chart-box-plus-outline</v-icon>
               Customize Report
+              {{ $t("App.hardcoded-texts.Customize Report") }}
             </v-btn>
             <v-btn color="info" @click="reportExport('csv')">
               <v-progress-circular
@@ -25,7 +26,7 @@
                 indeterminate
               ></v-progress-circular>
               <v-icon v-else left>mdi-microsoft-excel</v-icon>
-              Export
+              {{ $t("App.hardcoded-texts.Export") }}
             </v-btn>
           </v-row>
         </v-layout>

@@ -50,25 +50,25 @@
           >
           <v-card-text class="black--text">
             <span
-              >{{ $t(`App.intro.Job_Title`)}}: <strong>{{ intro.jobTitle }}</strong></span
+              >{{ $t(`App.hardcoded-texts.Job Title`)}}: <strong>{{ intro.jobTitle }}</strong></span
             ><br />
             <span
-              >{{ $t(`App.intro.employer_number`)}}: <strong>{{ intro.employeeID }}</strong></span
+              >{{ $t(`App.hardcoded-texts.Employer Number`)}}: <strong>{{ intro.employeeID }}</strong></span
             ><br />
             <span
-            >{{ $t(`App.intro.email`)}}: <strong>{{ intro.email }}</strong></span
+            >{{ $t(`App.hardcoded-texts.Email`)}}: <strong>{{ intro.email }}</strong></span
             ><br />
             <span
-            >{{ $t(`App.intro.phone`)}} : <strong>{{ intro.phone }}</strong></span
+            >{{ $t(`App.hardcoded-texts.Phone`)}} : <strong>{{ intro.phone }}</strong></span
             ><br />
             <span
-              >{{ $t(`App.intro.gender`)}} : <strong>{{ intro.gender }}</strong></span
+              >{{ $t(`App.hardcoded-texts.Gender`)}} : <strong>{{ intro.gender }}</strong></span
             ><br />
             <span
-              >{{ $t(`App.intro.date-of-birth`)}} : <strong>{{intro.birthDate}}</strong></span
+              >{{ $t(`App.hardcoded-texts.Birth Date`)}} : <strong>{{intro.birthDate}}</strong></span
             ><br />
             <span>
-              {{ $t(`App.intro.age`)}} : <strong>{{ Math.floor((new Date() - new Date(intro.birthDate))/(1000*3600*24*365)) }}</strong></span
+              {{ $t(`App.hardcoded-texts.Age`)}} : <strong>{{ Math.floor((new Date() - new Date(intro.birthDate))/(1000*3600*24*365)) }}</strong></span
             ><br />
 
           </v-card-text>

@@ -2,7 +2,7 @@
   <v-container class="py-5">
     <v-card>
       <v-card-title>
-        {{ $t(`App.ihris-search-code.${label}`) }}
+        {{ $t(`App.fhir-resources-texts.${label}`) }}
         <v-spacer></v-spacer>
         <slot></slot>
         <v-text-field
@@ -21,7 +21,7 @@
           <v-icon v-if="addLink && addLink.icon">{{ addLink.icon }}</v-icon>
           <v-icon v-else>mdi-database-plus</v-icon>
           {{ $t(`App.hardcoded-texts.add`) }}
-          {{ $t(`App.ihris-search-code.${label}`) }}
+          {{ $t(`App.fhir-resources-texts.${label}`) }}
         </v-btn>
       </v-card-title>
       <v-card-subtitle v-if="error_message" class="white--text error">{{
@@ -114,11 +114,11 @@ export default {
   created: function () {
     for (let field of this.fields) {
       this.headers.push({
-        text: this.$t(`App.ihris-search-code.${field[0]}`),
+        text: this.$t(`App.fhir-resources-texts.${field[0]}`),
         value: field[1],
       });
     }
-    this.headers.push({ text: this.$t(`App.ihris-search-code.status`), value: "isActive" });
+    this.headers.push({ text: this.$t(`App.fhir-resources-texts.status`), value: "isActive" });
   },
   mounted: function () {
     this.getData();

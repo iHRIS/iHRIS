@@ -8,12 +8,12 @@
       :loading="loading"
       class="elevation-1"
       dense
-      :footer-props="{ 'items-per-page-text':$t('App.ihris-search.tableText'), 'items-per-page-options': [5,10,20,50] }"
+      :footer-props="{ 'items-per-page-text':$t('App.fhir-resources-texts.tableText'), 'items-per-page-options': [5,10,20,50] }"
     >
       <template v-slot:top>
         <v-toolbar flat color="white">
           <v-toolbar-title>
-            {{ $t(`App.ihris-secondary.${title}`) }}
+            {{ $t(`App.fhir-resources-texts.${title}`) }}
           </v-toolbar-title>
           <v-spacer></v-spacer>
           <v-btn
@@ -23,7 +23,7 @@
             :key="action.text"
             small
             >
-            {{ $t(`App.ihris-secondary.${action.text}`) }}
+            {{ $t(`App.fhir-resources-texts.${action.text}`) }}
           </v-btn>
         </v-toolbar>
       </template>
@@ -78,7 +78,7 @@ export default {
   methods: {
     setupData: function() {
       this.translatedHeader =  this.columns.map((x)=> ({
-        text: this.$t(`App.ihris-secondary.table.${x.text}`),
+        text: this.$t(`App.fhir-resources-texts.table.${x.text}`),
         value: x.value
       }))
       /*

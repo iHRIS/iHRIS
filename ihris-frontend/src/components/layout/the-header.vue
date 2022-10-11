@@ -91,9 +91,9 @@ export default {
           //this.$store.commit('logout')
           this.$emit('loggedout')
           if ( force ) {
-            this.$store.commit('setMessage', { type: 'warning', text: 'You have been logged out due to inactivity.', timeout: 3600000 } )
+            this.$store.commit('setMessage', { type: 'warning', text: this.$t('App.hardcoded-texts.You have been logged out due to inactivity.'), timeout: 3600000 } )
           } else {
-            this.$store.commit('setMessage', { type: 'success', text: 'You have logged out.' } )
+            this.$store.commit('setMessage', { type: 'success', text: this.$t('App.hardcoded-texts.You have logged out.') } )
           }
           this.$router.push( {path: "/" } )
         })

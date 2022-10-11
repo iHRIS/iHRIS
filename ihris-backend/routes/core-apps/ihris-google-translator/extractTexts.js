@@ -178,7 +178,11 @@ function extractTextFromQuestionnaire(resource) {
     if(item.type === "group") {
       let labels = item.text.split('|',2)
       for(let label of labels) {
+      /*
+      lets avoid grouping texts by component
         keys.App["ihris-questionnaire-section"][label] = label
+      */
+        keys.App["fhir-resources-texts"][label] = label
       }
       processQuestionnaireItems(item)
     }
@@ -201,19 +205,28 @@ function extractTextFromCodeSystem(resource) {
 function processQuestionnaireItems(qitem) {
   for(let item of qitem.item) {
     if(item.repeats && !item.readOnly) {
+      /*
+      lets avoid grouping texts by component
       if(!keys.App["ihris-array"]) {
         keys.App["ihris-array"] = {}
       }
       keys.App["ihris-array"][item.text] = item.text
       keys.App["ihris-complex-card"][item.text] = item.text
+      */
+      keys.App["fhir-resources-texts"][item.text] = item.text
     }
     if(item.type === "group") {
       let labels = item.text.split('|',2)
       for(let label of labels) {
+      /*
+      lets avoid grouping texts by component
         keys.App["ihris-questionnaire-group"][label] = label
+      */
+        keys.App["fhir-resources-texts"][label] = label
       }
       processQuestionnaireItems(item)
     } else {
+      /*
       let trans_type = "fhir-" + item.type
       if(item.type === "dateTime") {
         trans_type = "fhir-date-time"
@@ -222,6 +235,8 @@ function processQuestionnaireItems(qitem) {
         keys.App[trans_type] = {}
       }
       keys.App[trans_type][item.text] = item.text
+      */
+      keys.App["fhir-resources-texts"][item.text] = item.text
     }
   }
 }
@@ -330,7 +345,11 @@ const createSearchTemplate = async (resource, pageDisplay) => {
   } catch (err) {
   }
   for(let field of fields) {
-    keys.App["ihris-search"][field[0]] = field[0]
+     /*
+    lets avoid grouping texts by component
+    keys.App["gofr-search"][field[0]] = field[0]
+    */
+    keys.App["fhir-resources-texts"][field[0]] = field[0]
   }
   let filters = []
   try {
@@ -346,13 +365,25 @@ const createSearchTemplate = async (resource, pageDisplay) => {
   }
   let label = (resource.title || resource.name)
   if(label) {
+    /*
+    lets avoid grouping texts by component
     keys.App[searchElement][label] = label
+    */
+    keys.App["fhir-resources-texts"][label] = label
   }
   for (let filter of filters) {
+    /*
+      lets avoid grouping texts by component
       if (filter[1]) {
-        keys.App["ihris-search-term"][filter[0]] = filter[0]
+        keys.App["gofr-search-term"][filter[0]] = filter[0]
       } else {
-        keys.App["ihris-search-term"]["Search"] = "Search"
+        keys.App["gofr-search-term"]["Search"] = "Search"
+      }
+      */
+      if (filter[1]) {
+        keys.App["fhir-resources-texts"][filter[0]] = filter[0]
+      } else {
+        keys.App["fhir-resources-texts"]["Search"] = "Search"
       }
   }
 }
@@ -521,16 +552,27 @@ const createTemplate = async (resource, structure, pageSections) => {
                 }
                 let eleName = fhirDefinition.camelToKebab(fields[field].code)
                 if (fields[field]["max"] !== "1") {
+                  /*
                   if(fields[field].label) {
                     keys.App["ihris-array"][fields[field].label] = fields[field].label
                     keys.App["ihris-complex-card"][fields[field].label] = fields[field].label
                   }
+                  */
+                  if(fields[field].label) {
+                    keys.App["fhir-resources-texts"][fields[field].label] = fields[field].label
+                    keys.App["fhir-resources-texts"][fields[field].label] = fields[field].label
+                  }
                 }
+                /*
                 if(!keys.App["fhir-" + eleName]) {
                   keys.App["fhir-" + eleName] = {}
                 }
                 if(fields[field].label) {
                   keys.App["fhir-" + eleName][fields[field].label] = fields[field].label
+                }
+                */
+                if(fields[field].label) {
+                  keys.App["fhir-resources-texts"][fields[field].label] = fields[field].label
                 }
                 let subFields
                 if (eleName === "reference" && fields[field].hasOwnProperty("fields")) {
@@ -566,6 +608,7 @@ const createTemplate = async (resource, structure, pageSections) => {
         const promises2 = []
         for (let name of sectionKeys) {
           promises2.push(new Promise(async(resolve2) => {
+            /*
             if(!keys.App["ihris-section"]) {
               keys.App["ihris-section"] = {}
             }
@@ -580,7 +623,15 @@ const createTemplate = async (resource, structure, pageSections) => {
               keys.App["ihris-section"][sections[name].description] = sections[name].description
               keys.App["ihris-resource"][sections[name].description] = sections[name].description
             }
+            */
+            if(sections[name].title) {
+              keys.App["fhir-resources-texts"][sections[name].title] = sections[name].title
+            }
+            if([sections[name].description]) {
+              keys.App["fhir-resources-texts"][sections[name].description] = sections[name].description
+            }
             if (sections[name].resource) {
+              /*
               if(!keys.App["ihris-secondary"]) {
                 keys.App["ihris-secondary"] = {
                   table: {}
@@ -594,6 +645,16 @@ const createTemplate = async (resource, structure, pageSections) => {
               }
               for(let column of sections[name].columns) {
                 keys.App["ihris-secondary"].table[column.text] = column.text
+              }
+              */
+              if(sections[name].title) {
+                keys.App["fhir-resources-texts"][sections[name].title] = sections[name].title
+              }
+              for(let action of sections[name].actions) {
+                keys.App["fhir-resources-texts"][action.text] = action.text
+              }
+              for(let column of sections[name].columns) {
+                keys.App["fhir-resources-texts"][column.text] = column.text
               }
             } else {
               await processFields(sections[name].elements, fhir, sections[name].order)

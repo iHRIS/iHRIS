@@ -85,11 +85,11 @@
             <v-list-item-content class="white--text">
               <v-list-item-title class="text-uppercase"
               >
-                <h4>{{ $t(`App.ihris-questionnaire-section.${section.title}`) }}</h4>
+                <h4>{{ $t(`App.fhir-resources-texts.${section.title}`) }}</h4>
               </v-list-item-title
               >
               <v-list-item-subtitle class="white--text">{{
-                  $t(`App.ihris-questionnaire-section.${section.desc}`)
+                  $t(`App.fhir-resources-texts.${section.desc}`)
                 }}
               </v-list-item-subtitle>
             </v-list-item-content>

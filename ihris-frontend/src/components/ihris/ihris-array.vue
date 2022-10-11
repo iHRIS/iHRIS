@@ -2,7 +2,7 @@
   <div>
     <div v-if="simpleDisplay">
       <v-row dense>
-        <v-col :cols="$store.state.cols.header" class="font-weight-bold">{{$t(`App.ihris-array.${label}`)}}</v-col><v-col :cols="$store.state.cols.header">{{simpleValue}}</v-col>
+        <v-col :cols="$store.state.cols.header" class="font-weight-bold">{{$t(`App.fhir-resources-texts.${label}`)}}</v-col><v-col :cols="$store.state.cols.header">{{simpleValue}}</v-col>
       </v-row>
       <v-divider></v-divider>
     </div>
@@ -15,7 +15,7 @@
           class="pa-4 white--text font-weight-bold"
           v-if="edit"
           >
-          {{ $t(`App.ihris-array.${label}`) }}
+          {{ $t(`App.fhir-resources-texts.${label}`) }}
           <v-spacer></v-spacer>
           <v-btn v-if="subAvailable" icon @click="removeRow()"><v-icon>mdi-minus-circle</v-icon></v-btn>
           <v-btn v-if="addAvailable" icon @click="addRow()"><v-icon color="green">mdi-plus-circle</v-icon></v-btn>
