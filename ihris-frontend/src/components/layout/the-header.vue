@@ -8,8 +8,8 @@
     </v-toolbar-title>
     <v-spacer v-if=$store.state.security_off></v-spacer>
     <div class="error font-weight-bold white--text" dark v-if="$store.state.security_off">
-      Security has been disabled for remote configuration and modules!  <br />
-      This should only be done during development.
+      {{ $t('App.hardcoded-texts.Security has been disabled for remote configuration and modules!') }}  <br />
+      {{ $t('App.hardcoded-texts.This should only be done during development.') }}
     </div>
     <v-spacer></v-spacer>
 <!--    <div>{{$t("App.wellCome")}} <span v-if="$store.state.user.loggedin">, {{ $store.state.user.name }}</span></div>-->
@@ -36,8 +36,8 @@
   </v-app-bar>
     <v-overlay :value="idle_countdown">
       <v-card class="secondary lighten-1">
-        <v-card-title class="headline warning white--text" primary-title>Idle - Auto Logout</v-card-title>
-        <v-card-text class="black--text">You have been idle too long and will be logged out in {{ idle_logout }} seconds.</v-card-text>
+        <v-card-title class="headline warning white--text" primary-title>{{ $t('App.hardcoded-texts.Idle - Auto Logout') }}</v-card-title>
+        <v-card-text class="black--text">{{ $t('App.hardcoded-texts.You have been idle too long and will be logged out in') }} {{ idle_logout }} {{ $t('App.hardcoded-texts.seconds.') }}</v-card-text>
       </v-card>
     </v-overlay>
   </div>
@@ -91,9 +91,9 @@ export default {
           //this.$store.commit('logout')
           this.$emit('loggedout')
           if ( force ) {
-            this.$store.commit('setMessage', { type: 'warning', text: 'You have been logged out due to inactivity.', timeout: 3600000 } )
+            this.$store.commit('setMessage', { type: 'warning', text: this.$t('App.hardcoded-texts.You have been logged out due to inactivity.'), timeout: 3600000 } )
           } else {
-            this.$store.commit('setMessage', { type: 'success', text: 'You have logged out.' } )
+            this.$store.commit('setMessage', { type: 'success', text: this.$t('App.hardcoded-texts.You have logged out.') } )
           }
           this.$router.push( {path: "/" } )
         })

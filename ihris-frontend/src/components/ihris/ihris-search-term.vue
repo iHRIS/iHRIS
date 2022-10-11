@@ -2,7 +2,7 @@
   <v-select
     v-if="binding"
     :loading="loading"
-    :label="$t(`App.ihris-search-term.${label}`)"
+    :label="$t(`App.fhir-resources-texts.${label}`)"
     v-model="value"
     :items="items.filter(x => !x.code.includes('(deactivated)'))"
     outlined
@@ -19,7 +19,7 @@
     item-text="display"
     item-value="code">
   </v-select>
-  <v-text-field v-else :label="$t(`App.ihris-search-term.${label}`)" class="ma-2" v-model="value" dense outlined hide-details  clearable @change="updateSearch()" @click:clear="clearSearch()">
+  <v-text-field v-else :label="$t(`App.fhir-resources-texts.${label}`)" class="ma-2" v-model="value" dense outlined hide-details  clearable @change="updateSearch()" @click:clear="clearSearch()">
   </v-text-field>
 </template>
 

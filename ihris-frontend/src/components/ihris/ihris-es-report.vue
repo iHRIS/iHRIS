@@ -17,6 +17,7 @@
             >
               <v-icon left>mdi-chart-box-plus-outline</v-icon>
               Customize Report
+              {{ $t("App.hardcoded-texts.Customize Report") }}
             </v-btn>
             <v-btn color="info" @click="reportExport('csv')">
               <v-progress-circular
@@ -25,7 +26,7 @@
                 indeterminate
               ></v-progress-circular>
               <v-icon v-else left>mdi-microsoft-excel</v-icon>
-              Export
+              {{ $t("App.hardcoded-texts.Export") }}
             </v-btn>
           </v-row>
         </v-layout>
@@ -59,7 +60,7 @@
             <span class="text-h6"
             ><v-icon class="mr-2" color="primary" large
             >mdi-table-check</v-icon
-            >Select a Field You want on the report</span
+            >{{ $t("App.hardcoded-texts.selectFeild") }}</span
             >
           </v-card-title>
           <v-card-text>
@@ -95,15 +96,15 @@
               "
             >
               <v-icon left>mdi-close-box-multiple</v-icon>
-              Close
+              {{ $t("App.hardcoded-texts.Close") }}
             </v-btn>
             <v-btn color="warning" @click="reset">
               <v-icon left>mdi-close-box-multiple</v-icon>
-              Reset
+              {{ $t("App.hardcoded-texts.Reset") }}
             </v-btn>
             <v-btn color="primary" @click="onFilter">
               <v-icon left>mdi-content-save-check-outline</v-icon>
-              Apply Changes
+              {{ $t("App.hardcoded-texts.Apply") }}
             </v-btn>
           </v-card-actions>
         </v-card>

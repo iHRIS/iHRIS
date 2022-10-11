@@ -7,7 +7,7 @@
     >
       <v-card class="pt-4 pb-8">
         <v-card-title class="justify-center mb-4">
-          <span v-if="!loading" class="text-h5 ">Select Your file</span>
+          <span v-if="!loading" class="text-h5 ">{{ $t('App.hardcoded-texts.Select Your file') }}</span>
         </v-card-title>
         <v-card-text v-if="!loading" :disabled="loading">
           <input
@@ -18,7 +18,7 @@
               @change="handleClick"
           />
           <div class="drop" @dragenter="handleDragover" @dragover="handleDragover" @drop="handleDrop">
-            Drop excel file here or
+            {{ $t('App.hardcoded-texts.Drop excel file here or') }}
           </div>
         </v-card-text>
         <v-card-text v-if="!hasError&&loading" :disabled="loading" align="center">
@@ -33,8 +33,8 @@
           >
             {{ progress }}
           </v-progress-circular>
-          <h1 v-if="progress===100">Done Uploading Health Workers' Information</h1>
-          <h1 v-else>uploading...</h1>
+          <h1 v-if="progress===100">{{ $t(`App.hardcoded-texts.Done Uploading Health Workers' Information`) }}</h1>
+          <h1 v-else>{{ $t('App.hardcoded-texts.Uploading') }}...</h1>
         </v-card-text>
         <v-card-text v-if="hasError" :disabled="loading">
           <v-col style="text-align-last: center">
@@ -61,7 +61,7 @@
             <v-icon class="pr-2" dark>
               mdi-close
             </v-icon>
-            Cancel
+            {{ $t('App.hardcoded-texts.Cancel') }}
           </v-btn>
           <v-btn v-if="!loading"
                  color="primary"
@@ -71,7 +71,7 @@
             <v-icon class="pr-2" dark>
               mdi-folder
             </v-icon>
-            Browse
+            {{ $t('App.hardcoded-texts.Browse') }}
           </v-btn>
         </v-card-actions>
       </v-card>

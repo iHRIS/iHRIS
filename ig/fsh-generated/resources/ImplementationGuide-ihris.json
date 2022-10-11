@@ -1430,6 +1430,13 @@
       },
       {
         "reference": {
+          "reference": "Parameters/ihris-dashboard"
+        },
+        "name": "ihris-dashboard",
+        "exampleCanonical": "http://ihris.org/fhir/StructureDefinition/ihris-parameters-remote-config"
+      },
+      {
+        "reference": {
           "reference": "Questionnaire/ihris-discipline"
         },
         "name": "IhrisPractitionerWorkflowDiscipline",

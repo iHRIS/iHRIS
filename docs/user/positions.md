@@ -1,4 +1,4 @@
-# POSITIONS
+# Positions
 
 This module enables a user to set up and manage positions in the database. It is the primary place to add new positions, search positions in the system, and make changes to existing positions.
 

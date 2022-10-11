@@ -2,13 +2,13 @@
   <v-container class="py-5">
     <v-card>
       <v-card-title>
-        {{ $t(`App.ihris-search-code.${label}`) }}
+        {{ $t(`App.fhir-resources-texts.${label}`) }}
         <v-spacer></v-spacer>
         <slot></slot>
         <v-text-field
           v-model="search"
           append-icon="mdi-magnify"
-          :label="$t(`App.ihris-search-code.search`)"
+          :label="$t(`App.hardcoded-texts.search`)"
           single-line
           hide-details
         >
@@ -20,8 +20,8 @@
         >
           <v-icon v-if="addLink && addLink.icon">{{ addLink.icon }}</v-icon>
           <v-icon v-else>mdi-database-plus</v-icon>
-          {{ $t(`App.ihris-search-code.add`) }}
-          {{ $t(`App.ihris-search-code.${label}`) }}
+          {{ $t(`App.hardcoded-texts.add`) }}
+          {{ $t(`App.fhir-resources-texts.${label}`) }}
         </v-btn>
       </v-card-title>
       <v-card-subtitle v-if="error_message" class="white--text error">{{
@@ -35,7 +35,7 @@
         :search="search"
         :options.sync="options"
         :footer-props="{
-          'items-per-page-text': $t('App.ihris-search.tableText'),
+          'items-per-page-text': $t('App.hardcoded-texts.tableText'),
           'items-per-page-options': [5, 10, 20, 50],
         }"
         :loading="loading"
@@ -51,7 +51,7 @@
             @click.stop="changeStatus(item)"
           >
             <v-icon right dark class="mr-2"> mdi-close-octagon-outline </v-icon>
-            {{ $t(`App.ihris-search-code.disable`) }}
+            {{ $t(`App.hardcoded-texts.disable`) }}
           </v-btn>
           <v-btn
             v-else
@@ -63,7 +63,7 @@
             <v-icon right dark class="mr-2">
               mdi-checkbox-marked-circle-outline
             </v-icon>
-            {{ $t(`App.ihris-search-code.enable`) }}
+            {{ $t(`App.hardcoded-texts.enable`) }}
           </v-btn>
         </template>
       </v-data-table>
@@ -114,11 +114,11 @@ export default {
   created: function () {
     for (let field of this.fields) {
       this.headers.push({
-        text: this.$t(`App.ihris-search-code.${field[0]}`),
+        text: this.$t(`App.fhir-resources-texts.${field[0]}`),
         value: field[1],
       });
     }
-    this.headers.push({ text: this.$t(`App.ihris-search-code.status`), value: "isActive" });
+    this.headers.push({ text: this.$t(`App.fhir-resources-texts.status`), value: "isActive" });
   },
   mounted: function () {
     this.getData();

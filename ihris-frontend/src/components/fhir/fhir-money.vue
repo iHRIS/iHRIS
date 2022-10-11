@@ -3,7 +3,7 @@
     <template #form>
       <v-select 
         :loading="loading" 
-        :label="'Currency ('+display+')'" 
+        :label="'$t(`App.hardcoded-texts.Currency`) ('+display+')'" 
         v-model="valueCurrency" 
         :items="items.filter(x => !x.code.includes('(deactivated)'))"
         outlined 
@@ -15,7 +15,7 @@
         :rules="rules"
         dense
       >
-        <template #label>Currency ({{display}}) <span v-if="required" class="red--text font-weight-bold">*</span></template>
+        <template #label>{{$t('App.hardcoded-texts.Currency')}} ({{display}}) <span v-if="required" class="red--text font-weight-bold">*</span></template>
       </v-select>
       <v-text-field :error-messages="errors" @change="errors = []" :label="display" :disabled="disabled" v-model="value.value" outlined hide-details="auto" :rules="rules_val" dense>
         <template #label>{{display}} <span v-if="required" class="red--text font-weight-bold">*</span></template>

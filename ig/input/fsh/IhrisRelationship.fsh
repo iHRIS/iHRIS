@@ -16,7 +16,7 @@ Description:    "Defines the primary resource of the relationship"
 * ^context.expression = "Basic"
 * extension contains
       name 1..1 MS and
-      label 0..1 MS and
+      label 1..1 MS and
       resource 1..1 MS and
       query 0..1 MS and
       cachingDisabled 0..1 MS and
@@ -89,7 +89,8 @@ Description:    "Lists fields of a resource to be displayed/cached"
       name 1..1 MS and
       display 0..1 MS and
       filter 0..1 MS and
-      dropDownFilter 0..1 MS
+      dropDownFilter 0..1 MS and
+      order 0..1 MS
 * extension[label].value[x] only string
 * extension[label].valueString 1..1
 * extension[label].valueString ^label = "Name of the field unique to the relationship"
@@ -105,6 +106,9 @@ Description:    "Lists fields of a resource to be displayed/cached"
 * extension[dropDownFilter].value[x] only boolean
 * extension[dropDownFilter].valueBoolean 1..1
 * extension[dropDownFilter].valueBoolean ^label = "Display as a dropdown filter"
+* extension[order].value[x] only integer
+* extension[order].valueInteger 1..1
+* extension[order].valueInteger ^label = "Order of the Field"
 
 
 Instance:       ihris-es-report-mhero-send-message

@@ -6,7 +6,7 @@ export default {
   props: ["path", "component"],
   data() {
     return {
-        currentComponent: () => import(`../../site/${this.$route.params.path}/${this.$route.params.component}.vue`)
+        currentComponent: () => import(`@/ihris-frontend-site/${this.$route.params.path}/${this.$route.params.component}.vue`)
     }
   }
 }

@@ -2,12 +2,12 @@
   <v-container class="py-5">
     <v-card>
       <v-card-title>
-        {{ $t("App.ihris-search.search") }} {{$t(`App.ihris-search.${label}`)}}
+        {{ $t("App.hardcoded-texts.search") }} {{$t(`App.ihris-search.${label}`)}}
         <v-spacer></v-spacer>
         <v-btn :class="addLink ? addLink.class || 'primary' : 'primary'" :to="addLink ? addLink.url : '/resource/add/'+page">
           <v-icon v-if="addLink && addLink.icon">{{ addLink.icon }}</v-icon>
           <v-icon v-else>mdi-database-plus</v-icon>
-          {{ $t("App.ihris-search.add") }} {{$t(`App.ihris-search.${label}`)}}
+          {{ $t("App.hardcoded-texts.add") }} {{$t(`App.ihris-search.${label}`)}}
         </v-btn>
       </v-card-title>
       <v-card-title>
@@ -27,7 +27,7 @@
           item-key="id"
           :options.sync="options"
           :server-items-length="total"
-          :footer-props="{ 'items-per-page-text':$t('App.ihris-search.tableText'), 'items-per-page-options': [5,10,20,50] }"
+          :footer-props="{ 'items-per-page-text':$t('App.hardcoded-texts.tableText'), 'items-per-page-options': [5,10,20,50] }"
           :loading="loading"
           class="elevation-1"
           @click:row="clickIt"

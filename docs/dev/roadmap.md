@@ -14,6 +14,8 @@ The iHRIS roadmap outlines the features planned for inclusion in future releases
 
 6. Job posting and application process
 
+` Developing an iHRIS App store
+
 7. UI for audit trail
 
     An audit trail logging events in iHRIS is already maintained by the system. The inclusion of a User Interface for this feature will allow users to view and query session events as may be required.
@@ -33,3 +35,15 @@ The iHRIS roadmap outlines the features planned for inclusion in future releases
 12. API endpoint for ADX 
     
     This is to help add out the box DHIS2 interoperability
+
+13. Visualization using Apache Echarts
+
+    Intergrate the use of Echarts to replace the current Visualization tool (Kibana)
+
+14. UI Interface to build report relationships
+
+15. Limiting access to individuial resource fiedls i.e user not having access to Practitioner.birthdate based on his role and tasks
+
+16. Ability to create aggregate reports
+
+17. Ability to create reports functions

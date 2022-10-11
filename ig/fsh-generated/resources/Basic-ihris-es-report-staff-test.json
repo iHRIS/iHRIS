@@ -15,12 +15,12 @@
           "valueString": "employee"
         },
         {
-          "url": "resource",
-          "valueString": "Practitioner"
-        },
-        {
           "url": "label",
           "valueString": "Staff Report"
+        },
+        {
+          "url": "resource",
+          "valueString": "Practitioner"
         },
         {
           "url": "displayCheckbox",
