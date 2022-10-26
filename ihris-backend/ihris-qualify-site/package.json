@@ -1,0 +1,12 @@
+{
+  "scripts": {
+    "start": "NODE_ENV=production node ./bin/www",
+    "dev": "NODE_ENV=development node ./bin/www",
+    "test": "NODE_ENV=test jest"
+  },
+  "dependencies": {
+    "debug": "^4.3.3",
+    "http": "^0.0.1-security",
+    "underscore": "^1.13.4"
+  }
+}
