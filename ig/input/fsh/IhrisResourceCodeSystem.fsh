@@ -5,6 +5,7 @@ Title:          "Code System for iHRIS Basic Resources."
 * #task         "iHRIS Task"        "Role tasks that are available to be assigned to roles"
 * #page         "iHRIS Page"        "Page definitions for viewing and editing resources."
 * #practitioner-link         "iHRIS Practitioner Link"        "Basic resource for customization that links to a Practitioner."
+* #training-link "iHRIS Training Link"        "Basic resource for customization that links to a Qualify training."
 
 ValueSet:       IhrisResourceValueSet
 Id:             ihris-resource-valueset
