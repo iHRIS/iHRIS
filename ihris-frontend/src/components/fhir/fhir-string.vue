@@ -5,7 +5,7 @@
         :error-messages="errors" 
         @change="errors = []" 
         :disabled="disabled"
-        :label="$t(`App.fhir-string.${display}`)"
+        :label="$t(`App.fhir-resources-texts.${display}`)"
         v-model="value" 
         outlined 
         hide-details="auto" 
@@ -15,11 +15,11 @@
         @click:append="showPassword = !showPassword"
         dense
       >
-      <template #label>{{$t(`App.fhir-string.${display}`)}}<span v-if="required" class="red--text font-weight-bold">*</span></template>
+      <template #label>{{$t(`App.fhir-resources-texts.${display}`)}}<span v-if="required" class="red--text font-weight-bold">*</span></template>
       </v-text-field>
     </template>
     <template #header>
-      {{$t(`App.fhir-string.${display}`)}}
+      {{$t(`App.fhir-resources-texts.${display}`)}}
     </template>
     <template #value>
       {{value}}

@@ -3,7 +3,7 @@
     <template #form>
       <v-select 
         :loading="loading" 
-        :label="$t(`App.fhir-code.${display}`)"
+        :label="$t(`App.fhir-resources-texts.${display}`)"
         v-model="value" 
         :items="items.filter(x => !x.code.includes('(deactivated)'))"
         outlined 
@@ -16,11 +16,11 @@
         dense
         @change="errors = []"
       >
-        <template #label>{{$t(`App.fhir-code.${display}`)}} <span v-if="required" class="red--text font-weight-bold">*</span></template>
+        <template #label>{{$t(`App.fhir-resources-texts.${display}`)}} <span v-if="required" class="red--text font-weight-bold">*</span></template>
       </v-select>
     </template>
     <template #header>
-      {{$t(`App.fhir-code.${display}`)}}
+      {{$t(`App.fhir-resources-texts.${display}`)}}
     </template>
     <template #value>
       {{displayValue}}

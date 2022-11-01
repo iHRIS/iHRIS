@@ -10,11 +10,11 @@
         :error-messages="errors"
         @change="errors = []"
       >
-      <template #label>{{$t(`App.fhir-boolean.${display}`)}}: {{$t(`App.fhir-boolean.${value.toString()}`)}} <span v-if="required" class="red--text font-weight-bold">*</span></template>
+      <template #label>{{$t(`App.fhir-resources-texts.${display}`)}}: {{$t(`App.fhir-resources-texts.${value.toString()}`)}} <span v-if="required" class="red--text font-weight-bold">*</span></template>
       </v-switch>
     </template>
     <template #header>
-      {{$t(`App.fhir-boolean.${display}`)}}
+      {{$t(`App.fhir-resources-texts.${display}`)}}
     </template>
     <template #value>
       {{value}}

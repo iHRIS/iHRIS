@@ -129,7 +129,7 @@
                     </h1>
                     <br/>
                     <p  class="pt-8 subtitle-1 text--primary font-weight-medium text-lg-justify">
-                      {{$t(`App.hardcoded-texts.iHRIS is IntraHealth International's free, open source software that helps countries around the world track and manage their health workforce data to improve access to services. Countries use it to capture and maintain high-quality information for health workforce planning, management, regulation, and training.`)}}
+                      {{$t("App.hardcoded-texts.iHRIS is IntraHealth International's free, open source software that helps countries around the world track and manage their health workforce data to improve access to services. Countries use it to capture and maintain high-quality information for health workforce planning, management, regulation, and training.")}}
                     </p>
                   </v-card-text>
                 </v-card>
@@ -344,7 +344,7 @@ export default {
       formData.append("employeeNumber", this.employeeNumber)
       formData.append("birthDate", this.birthDate)
       if (this.email === "" ||  this.employeeNumber === "" || this.birthDate === "") {
-        this.message = "Please fill in all fields"
+        this.message = this.$t("App.hardcoded-texts.Please fill in all fields")
         this.snackbarRegister = true
         this.signingin = false
       }
