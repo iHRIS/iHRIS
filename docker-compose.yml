@@ -15,7 +15,6 @@ services:
       spring.datasource.driverClassName: org.postgresql.Driver
       spring.jpa.properties.hibernate.search.enabled: 'true'
       spring.jpa.properties.hibernate.search.backend.type: lucene
-      spring.jpa.properties.hibernate.search.backend.analysis.configurer: ca.uhn.fhir.jpa.search.HapiHSearchAnalysisConfigurer
       spring.jpa.properties.hibernate.search.backend.directory.type: local-filesystem
       spring.jpa.properties.hibernate.search.backend.directory.root: target/lucenefiles
       spring.jpa.properties.hibernate.search.backend.lucene_version: lucene_current
