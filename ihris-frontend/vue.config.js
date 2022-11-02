@@ -15,7 +15,7 @@ module.exports = {
         target: 'http://localhost:3000/',
         logLevel: 'debug'
       },
-      '^/kibana': {
+      '^/dashboards': {
         target: 'http://localhost:3000/',
         logLevel: 'debug'
       },
