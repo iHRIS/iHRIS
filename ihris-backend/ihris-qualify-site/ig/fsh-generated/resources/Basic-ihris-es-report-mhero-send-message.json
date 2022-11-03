@@ -1,0 +1,135 @@
+{
+  "resourceType": "Basic",
+  "id": "ihris-es-report-mhero-send-message",
+  "meta": {
+    "profile": [
+      "http://ihris.org/fhir/StructureDefinition/iHRISRelationship"
+    ]
+  },
+  "extension": [
+    {
+      "url": "http://ihris.org/fhir/StructureDefinition/iHRISReportDetails",
+      "extension": [
+        {
+          "url": "name",
+          "valueString": "mheropractitioner"
+        },
+        {
+          "url": "label",
+          "valueString": "Employee List"
+        },
+        {
+          "url": "resource",
+          "valueString": "Practitioner"
+        },
+        {
+          "url": "query",
+          "valueString": "identifier.system=http://app.rapidpro.io/contact-uuid"
+        },
+        {
+          "url": "displayCheckbox",
+          "valueBoolean": true
+        },
+        {
+          "extension": [
+            {
+              "url": "label",
+              "valueString": "fullname"
+            },
+            {
+              "url": "name",
+              "valueString": "name.where(use='official').last().text"
+            },
+            {
+              "url": "display",
+              "valueString": "Fullname"
+            },
+            {
+              "url": "filter",
+              "valueBoolean": true
+            },
+            {
+              "url": "dropDownFilter",
+              "valueBoolean": false
+            }
+          ],
+          "url": "http://ihris.org/fhir/StructureDefinition/iHRISReportElement"
+        },
+        {
+          "extension": [
+            {
+              "url": "label",
+              "valueString": "phone"
+            },
+            {
+              "url": "name",
+              "valueString": "telecom.where(system='phone').value"
+            },
+            {
+              "url": "display",
+              "valueString": "Phone Number"
+            }
+          ],
+          "url": "http://ihris.org/fhir/StructureDefinition/iHRISReportElement"
+        }
+      ]
+    },
+    {
+      "extension": [
+        {
+          "url": "name",
+          "valueString": "facility"
+        },
+        {
+          "url": "resource",
+          "valueString": "Location"
+        },
+        {
+          "url": "linkElement",
+          "valueString": "Location.id"
+        },
+        {
+          "url": "linkTo",
+          "valueString": "role.location"
+        },
+        {
+          "url": "linkElementSearchParameter",
+          "valueString": "practitioner"
+        },
+        {
+          "url": "multiple",
+          "valueBoolean": false
+        },
+        {
+          "extension": [
+            {
+              "url": "label",
+              "valueString": "facilityName"
+            },
+            {
+              "url": "name",
+              "valueString": "name"
+            },
+            {
+              "url": "display",
+              "valueString": "Facility"
+            },
+            {
+              "url": "filter",
+              "valueBoolean": true
+            },
+            {
+              "url": "dropDownFilter",
+              "valueBoolean": true
+            }
+          ],
+          "url": "http://ihris.org/fhir/StructureDefinition/iHRISReportElement"
+        }
+      ],
+      "url": "http://ihris.org/fhir/StructureDefinition/iHRISReportLink"
+    }
+  ],
+  "code": {
+    "text": "iHRIS Relationship"
+  }
+}

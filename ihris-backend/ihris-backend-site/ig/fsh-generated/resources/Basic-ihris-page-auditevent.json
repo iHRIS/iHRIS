@@ -1,0 +1,95 @@
+{
+  "resourceType": "Basic",
+  "id": "ihris-page-auditevent",
+  "meta": {
+    "profile": [
+      "http://ihris.org/fhir/StructureDefinition/ihris-page"
+    ]
+  },
+  "code": {
+    "coding": [
+      {
+        "code": "page",
+        "system": "http://ihris.org/fhir/CodeSystem/ihris-resource-codesystem"
+      }
+    ]
+  },
+  "extension": [
+    {
+      "url": "http://ihris.org/fhir/StructureDefinition/ihris-page-display",
+      "extension": [
+        {
+          "url": "resource",
+          "valueReference": {
+            "reference": "StructureDefinition/ihris-auditevent"
+          }
+        },
+        {
+          "url": "search",
+          "valueString": "Id|AuditEvent.id"
+        },
+        {
+          "url": "search",
+          "valueString": "User|AuditEvent.agent.name"
+        },
+        {
+          "url": "search",
+          "valueString": "Action|AuditEvent.subtype.display"
+        },
+        {
+          "url": "search",
+          "valueString": "Resource|AuditEvent.entity.what.reference"
+        },
+        {
+          "url": "search",
+          "valueString": "Outcome|AuditEvent.outcome"
+        },
+        {
+          "url": "search",
+          "valueString": "Resource(If Error)|AuditEvent.entity.detail.where(type='resource').valueString"
+        },
+        {
+          "url": "search",
+          "valueString": "Error|AuditEvent.entity.detail.where(type='error').valueString"
+        },
+        {
+          "url": "search",
+          "valueString": "Time/Date|AuditEvent.recorded"
+        },
+        {
+          "url": "filter",
+          "valueString": "Action|subtype|http://dicom.nema.org/resources/ontology/DCM"
+        },
+        {
+          "url": "filter",
+          "valueString": "Date|date"
+        },
+        {
+          "url": "filter",
+          "valueString": "User|agent-name:contains"
+        }
+      ]
+    },
+    {
+      "extension": [
+        {
+          "url": "title",
+          "valueString": "Audit Events/Logs"
+        },
+        {
+          "url": "description",
+          "valueString": "System Logs details"
+        },
+        {
+          "url": "name",
+          "valueString": "AuditEvent"
+        },
+        {
+          "url": "field",
+          "valueString": "AuditEvent.id"
+        }
+      ],
+      "url": "http://ihris.org/fhir/StructureDefinition/ihris-page-section"
+    }
+  ]
+}

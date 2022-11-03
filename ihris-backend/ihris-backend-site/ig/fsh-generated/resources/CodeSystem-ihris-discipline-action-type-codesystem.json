@@ -1,0 +1,26 @@
+{
+  "resourceType": "CodeSystem",
+  "status": "active",
+  "content": "complete",
+  "name": "IhrisDisciplinaryActionType",
+  "id": "ihris-discipline-action-type-codesystem",
+  "title": "Disciplinary Action Type",
+  "version": "0.3.0",
+  "url": "http://ihris.org/fhir/CodeSystem/ihris-discipline-action-type-codesystem",
+  "concept": [
+    {
+      "code": "judicial",
+      "display": "Judicial"
+    },
+    {
+      "code": "administrative",
+      "display": "Administrative"
+    },
+    {
+      "code": "demotion",
+      "display": "Demotion"
+    }
+  ],
+  "date": "2020-11-10T08:41:04.362Z",
+  "count": 3
+}

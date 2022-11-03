@@ -1,0 +1,120 @@
+{
+  "resourceType": "Basic",
+  "id": "ihris-page-practitionerrole",
+  "meta": {
+    "profile": [
+      "http://ihris.org/fhir/StructureDefinition/ihris-page"
+    ]
+  },
+  "code": {
+    "coding": [
+      {
+        "code": "page",
+        "system": "http://ihris.org/fhir/CodeSystem/ihris-resource-codesystem"
+      }
+    ]
+  },
+  "extension": [
+    {
+      "url": "http://ihris.org/fhir/StructureDefinition/ihris-page-display",
+      "extension": [
+        {
+          "url": "resource",
+          "valueReference": {
+            "reference": "StructureDefinition/ihris-practitioner-role"
+          }
+        },
+        {
+          "url": "search",
+          "valueString": "Job|PractitionerRole.code[0].coding[0]"
+        },
+        {
+          "extension": [
+            {
+              "url": "field",
+              "valueString": "PractitionerRole.practitioner.reference"
+            },
+            {
+              "url": "url",
+              "valueUrl": "/resource/view/practitioner/FIELD"
+            },
+            {
+              "url": "text",
+              "valueString": "View Practitioner"
+            },
+            {
+              "url": "button",
+              "valueBoolean": true
+            },
+            {
+              "url": "icon",
+              "valueString": "mdi-account-arrow-right"
+            }
+          ],
+          "url": "link"
+        },
+        {
+          "url": "search",
+          "valueString": "Start Date|PractitionerRole.period.start"
+        },
+        {
+          "url": "search",
+          "valueString": "Practitioner|PractitionerRole.practitioner"
+        },
+        {
+          "url": "search",
+          "valueString": "Facility|PractitionerRole.location"
+        },
+        {
+          "url": "search",
+          "valueString": "Specialty|PractitionerRole.specialty"
+        },
+        {
+          "url": "filter",
+          "valueString": "Job|role|http://ihris.org/fhir/ValueSet/ihris-job"
+        }
+      ]
+    },
+    {
+      "extension": [
+        {
+          "url": "title",
+          "valueString": "Position"
+        },
+        {
+          "url": "description",
+          "valueString": "Position details"
+        },
+        {
+          "url": "name",
+          "valueString": "PractitionerRole"
+        },
+        {
+          "url": "field",
+          "valueString": "PractitionerRole.code"
+        },
+        {
+          "url": "field",
+          "valueString": "PractitionerRole.practitioner"
+        },
+        {
+          "url": "field",
+          "valueString": "PractitionerRole.location"
+        },
+        {
+          "url": "field",
+          "valueString": "PractitionerRole.period"
+        },
+        {
+          "url": "field",
+          "valueString": "PractitionerRole.specialty"
+        },
+        {
+          "url": "field",
+          "valueString": "PractitionerRole.identifier"
+        }
+      ],
+      "url": "http://ihris.org/fhir/StructureDefinition/ihris-page-section"
+    }
+  ]
+}

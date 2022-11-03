@@ -1,0 +1,17 @@
+{
+  "resourceType": "ValueSet",
+  "status": "active",
+  "name": "IhrisFacilityOwnershipValueSet",
+  "id": "Ihris-facility-ownership",
+  "title": "iHRIS Facility Ownership ValueSet",
+  "version": "0.4.0",
+  "url": "http://ihris.org/fhir/ValueSet/Ihris-facility-ownership",
+  "date": "2022-02-23T08:41:04.362Z",
+  "compose": {
+    "include": [
+      {
+        "system": "http://ihris.org/fhir/CodeSystem/Ihris-facility-ownership-type"
+      }
+    ]
+  }
+}

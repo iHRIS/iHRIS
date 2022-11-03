@@ -1,0 +1,16 @@
+{
+  "resourceType": "SearchParameter",
+  "id": "leavetype-search",
+  "url": "http://ihris.org/fhir/SearchParameter/leavetype-search",
+  "name": "Search Parameter for a practitioner's Leave Type",
+  "status": "active",
+  "description": "Search for a practitioner's Leave Type.",
+  "code": "leavetype",
+  "base": [
+    "Basic"
+  ],
+  "type": "token",
+  "expression": "Basic.extension.where(url='http://ihris.org/fhir/StructureDefinition/ihris-ethiopia-leavea').extension.where(url='leave-type')",
+  "xpath": "f:Basic/f:extension[@url='http://ihris.org/fhir/StructureDefinition/ihris-ethiopia-leave']/f:extension[@url='leave-type']",
+  "xpathUsage": "normal"
+}

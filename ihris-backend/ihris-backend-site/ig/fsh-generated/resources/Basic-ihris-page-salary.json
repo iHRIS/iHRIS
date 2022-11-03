@@ -1,0 +1,145 @@
+{
+  "resourceType": "Basic",
+  "id": "ihris-page-salary",
+  "meta": {
+    "profile": [
+      "http://ihris.org/fhir/StructureDefinition/ihris-page"
+    ]
+  },
+  "code": {
+    "coding": [
+      {
+        "code": "page",
+        "system": "http://ihris.org/fhir/CodeSystem/ihris-resource-codesystem"
+      }
+    ]
+  },
+  "extension": [
+    {
+      "url": "http://ihris.org/fhir/StructureDefinition/ihris-page-display",
+      "extension": [
+        {
+          "url": "resource",
+          "valueReference": {
+            "reference": "StructureDefinition/ihris-basic-salary"
+          }
+        },
+        {
+          "url": "search",
+          "valueString": "Salary|extension.where(url='http://ihris.org/fhir/StructureDefinition/ihris-salary').extension.where(url='bsalary').valueString"
+        },
+        {
+          "extension": [
+            {
+              "url": "field",
+              "valueString": "Basic.extension.where(url='http://ihris.org/fhir/StructureDefinition/ihris-practitioner-reference').valueReference.reference"
+            },
+            {
+              "url": "url",
+              "valueUrl": "/resource/view/practitioner/FIELD"
+            },
+            {
+              "url": "text",
+              "valueString": "View Health Worker"
+            },
+            {
+              "url": "button",
+              "valueBoolean": true
+            },
+            {
+              "url": "icon",
+              "valueString": "mdi-account-arrow-right"
+            }
+          ],
+          "url": "link"
+        },
+        {
+          "extension": [
+            {
+              "url": "path",
+              "valueString": "Basic.extension:practitioner.value[x]:valueReference"
+            },
+            {
+              "url": "readOnlyIfSet",
+              "valueBoolean": true
+            }
+          ],
+          "url": "field"
+        }
+      ]
+    },
+    {
+      "extension": [
+        {
+          "url": "title",
+          "valueString": "Employee Salary Information"
+        },
+        {
+          "url": "description",
+          "valueString": "Employee Salary details"
+        },
+        {
+          "url": "name",
+          "valueString": "Basic"
+        },
+        {
+          "url": "field",
+          "valueString": "Basic.extension:practitioner"
+        },
+        {
+          "url": "field",
+          "valueString": "Basic.extension:salary.extension:salaryladder.value[x]:valueCoding"
+        },
+        {
+          "url": "field",
+          "valueString": "Basic.extension:salary.extension:salaryScale.value[x]:valueCoding"
+        },
+        {
+          "url": "field",
+          "valueString": "Basic.extension:salary.extension:salaryStep.value[x]:valueCoding"
+        },
+        {
+          "url": "field",
+          "valueString": "Basic.extension:salary.extension:bsalary.value[x]:valueString"
+        },
+        {
+          "url": "field",
+          "valueString": "Basic.extension:salary.extension:allowance.value[x]:valueString"
+        },
+        {
+          "url": "field",
+          "valueString": "Basic.extension:salary.extension:benefits.value[x]:valueString"
+        },
+        {
+          "url": "field",
+          "valueString": "Basic.extension:salary.extension:total.value[x]:valueString"
+        },
+        {
+          "url": "field",
+          "valueString": "Basic.extension:salary.extension:period.value[x]:valuePeriod"
+        },
+        {
+          "url": "field",
+          "valueString": "Basic.extension:salary.extension:reviewed.value[x]:valueBoolean"
+        },
+        {
+          "url": "field",
+          "valueString": "Basic.extension:salary.extension:remark.value[x]:valueString"
+        },
+        {
+          "url": "field",
+          "valueString": "Basic.extension:salary.extension:salarySource.value[x]:valueCoding"
+        },
+        {
+          "url": "field",
+          "valueString": "Basic.extension:salary.extension:frequency.value[x]:valueCoding"
+        },
+        {
+          "url": "field",
+          "valueString": "Basic.extension:salary.extension:current.value[x]:valueBoolean"
+        }
+      ],
+      "url": "http://ihris.org/fhir/StructureDefinition/ihris-page-section"
+    }
+  ]
+}

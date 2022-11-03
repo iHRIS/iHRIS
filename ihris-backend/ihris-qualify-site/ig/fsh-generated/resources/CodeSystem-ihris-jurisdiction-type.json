@@ -1,0 +1,34 @@
+{
+  "resourceType": "CodeSystem",
+  "status": "active",
+  "content": "complete",
+  "name": "IhrisJurisdictionType",
+  "id": "ihris-jurisdiction-type",
+  "title": "Jurisdiction Type",
+  "version": "0.4.0",
+  "url": "http://ihris.org/fhir/CodeSystem/ihris-jurisdiction-type",
+  "concept": [
+    {
+      "code": "country",
+      "display": "Country",
+      "definition": "Country"
+    },
+    {
+      "code": "region",
+      "display": "Region",
+      "definition": "Region"
+    },
+    {
+      "code": "district",
+      "display": "District",
+      "definition": "District"
+    },
+    {
+      "code": "county",
+      "display": "County",
+      "definition": "County"
+    }
+  ],
+  "date": "2020-11-12T08:41:04.362Z",
+  "count": 4
+}

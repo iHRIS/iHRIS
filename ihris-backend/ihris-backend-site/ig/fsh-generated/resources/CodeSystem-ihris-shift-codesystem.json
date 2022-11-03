@@ -1,0 +1,23 @@
+{
+  "resourceType": "CodeSystem",
+  "status": "active",
+  "content": "complete",
+  "name": "IhrisShiftCodeSystem",
+  "id": "ihris-shift-codesystem",
+  "title": "iHRIS Shift Code System",
+  "version": "0.1.0",
+  "url": "http://ihris.org/fhir/CodeSystem/ihris-shift-codesystem",
+  "concept": [
+    {
+      "code": "duty",
+      "display": "Duty",
+      "definition": "Duty"
+    },
+    {
+      "code": "work",
+      "display": "Work",
+      "definition": "Work"
+    }
+  ],
+  "count": 2
+}

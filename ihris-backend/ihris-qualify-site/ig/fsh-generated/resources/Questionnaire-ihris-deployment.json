@@ -1,0 +1,42 @@
+{
+  "resourceType": "Questionnaire",
+  "id": "ihris-deployment",
+  "url": "http://ihris.org/fhir/Questionnaire/ihris-deployment",
+  "title": "iHRIS Deployment Workflow",
+  "description": "iHRIS workflow to record a Deployment",
+  "name": "ihris-deployment",
+  "status": "active",
+  "date": "2020-08-27",
+  "purpose": "Workflow page for recording a Deployment Information.",
+  "item": [
+    {
+      "linkId": "Basic",
+      "text": "Deployment Information",
+      "type": "group",
+      "item": [
+        {
+          "linkId": "Basic.extension[0].extension[0]",
+          "text": "Health Facility",
+          "type": "reference",
+          "required": true,
+          "repeats": false
+        },
+        {
+          "linkId": "Basic.extension[0].extension[1]",
+          "text": "Date",
+          "type": "date",
+          "required": true,
+          "repeats": false
+        },
+        {
+          "linkId": "Basic.extension[0].extension[2]",
+          "text": "Job Title",
+          "type": "choice",
+          "answerValueSet": "http://ihris.org/fhir/ValueSet/ihris-job",
+          "required": false,
+          "repeats": false
+        }
+      ]
+    }
+  ]
+}

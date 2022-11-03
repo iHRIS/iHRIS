@@ -1,0 +1,16 @@
+{
+  "resourceType": "ValueSet",
+  "status": "active",
+  "name": "IhrisDocumentCategoryValueSet",
+  "id": "ihris-document-category",
+  "title": "Code system for document categories.",
+  "version": "0.1.0",
+  "url": "http://ihris.org/fhir/ValueSet/ihris-document-category",
+  "compose": {
+    "include": [
+      {
+        "system": "http://ihris.org/fhir/CodeSystem/ihris-document-category"
+      }
+    ]
+  }
+}

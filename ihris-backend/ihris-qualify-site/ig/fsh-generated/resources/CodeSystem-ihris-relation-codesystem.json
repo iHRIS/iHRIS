@@ -1,0 +1,44 @@
+{
+  "resourceType": "CodeSystem",
+  "status": "active",
+  "content": "complete",
+  "name": "IhrisRelationCodesystem",
+  "id": "ihris-relation-codesystem",
+  "title": "Relationship",
+  "version": "0.2.0",
+  "url": "http://ihris.org/fhir/CodeSystem/ihris-relation-codesystem",
+  "concept": [
+    {
+      "code": "spouse",
+      "display": "Spouse",
+      "definition": "Spouse"
+    },
+    {
+      "code": "mother",
+      "display": "Mother",
+      "definition": "Mother"
+    },
+    {
+      "code": "father",
+      "display": "Father",
+      "definition": "Father"
+    },
+    {
+      "code": "adoptedchild",
+      "display": "Adopted Child",
+      "definition": "Adopted Child"
+    },
+    {
+      "code": "bilogicalChild",
+      "display": "Biological Child",
+      "definition": "Biological Child"
+    },
+    {
+      "code": "other",
+      "display": "other",
+      "definition": "other"
+    }
+  ],
+  "date": "2020-10-29T08:41:04.362Z",
+  "count": 6
+}

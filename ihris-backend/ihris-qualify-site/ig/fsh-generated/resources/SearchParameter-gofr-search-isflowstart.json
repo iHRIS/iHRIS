@@ -1,0 +1,16 @@
+{
+  "resourceType": "SearchParameter",
+  "id": "gofr-search-isflowstart",
+  "url": "http://gofr.org/fhir/SearchParameter/gofr-search-isflowstart",
+  "description": "search parameter for flow starts",
+  "name": "search parameter for flow starts",
+  "status": "active",
+  "experimental": false,
+  "code": "isflowstart",
+  "base": [
+    "CommunicationRequest"
+  ],
+  "type": "token",
+  "expression": "CommunicationRequest.extension('http://mhero.org/fhir/StructureDefinition/mhero-comm-req-flow-starts').exists()",
+  "xpath": "f:CommunicationRequest/f:extension[@url='http://mhero.org/fhir/StructureDefinition/mhero-comm-req-flow-starts']/f:exists"
+}

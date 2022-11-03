@@ -1,0 +1,15 @@
+{
+  "resourceType": "SearchParameter",
+  "id": "practitioner-related-location",
+  "url": "http://ihris.org/fhir/SearchParameter/practitioner-related-location",
+  "name": "Search Parameter on related location resources for security",
+  "status": "active",
+  "description": "Search by related location for a Practitioner resource.",
+  "code": "related-location",
+  "base": [
+    "Practitioner"
+  ],
+  "type": "string",
+  "expression": "Practitioner.extension('http://ihris.org/fhir/StructureDefinition/ihris-related-group').extension('location')",
+  "xpathUsage": "normal"
+}

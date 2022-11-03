@@ -1,0 +1,53 @@
+{
+  "resourceType": "Questionnaire",
+  "id": "ihris-discipline",
+  "meta": {
+    "profile": [
+      "http://ihris.org/fhir/StructureDefinition/ihris-questionnaire"
+    ]
+  },
+  "url": "http://ihris.org/fhir/Questionnaire/ihris-discipline",
+  "title": "iHRIS Discipline Workflow",
+  "description": "iHRIS workflow to record a Discipline",
+  "name": "ihris-discipline",
+  "status": "active",
+  "date": "2020-09-02",
+  "purpose": "Workflow page for recording a Discipline information.",
+  "item": [
+    {
+      "linkId": "Basic",
+      "text": "Disciplinary Notice",
+      "type": "group",
+      "item": [
+        {
+          "linkId": "Basic.extension[0].extension[0]",
+          "text": "Diciplinary Action Date",
+          "type": "dateTime",
+          "required": true,
+          "repeats": false
+        },
+        {
+          "linkId": "Basic.extension[0].extension[1]",
+          "text": "Reason",
+          "type": "text",
+          "required": true,
+          "repeats": false
+        },
+        {
+          "linkId": "Basic.extension[0].extension[2]",
+          "text": "Remark",
+          "type": "text",
+          "required": false,
+          "repeats": false
+        },
+        {
+          "linkId": "Basic.extension[0].extension[3]",
+          "text": "Suspend?",
+          "type": "boolean",
+          "required": true,
+          "repeats": false
+        }
+      ]
+    }
+  ]
+}

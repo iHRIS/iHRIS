@@ -1,0 +1,73 @@
+{
+  "resourceType": "Questionnaire",
+  "id": "ihris-education-history",
+  "url": "http://ihris.org/fhir/Questionnaire/ihris-education-history",
+  "title": "iHRIS Education History Workflow",
+  "description": "iHRIS workflow to record a Education History",
+  "name": "ihris-education-history",
+  "status": "active",
+  "date": "2020-08-27",
+  "purpose": "Workflow page for recording a Education History information.",
+  "item": [
+    {
+      "linkId": "Basic",
+      "text": "Education History",
+      "type": "group",
+      "item": [
+        {
+          "linkId": "Basic.extension[0].extension[0]",
+          "answerValueSet": "http://ihris.org/fhir/ValueSet/ihris-institution-valueset",
+          "text": "Education Institution",
+          "type": "choice",
+          "required": true,
+          "repeats": false
+        },
+        {
+          "linkId": "Basic.extension[0].extension[1]",
+          "text": "Education Level",
+          "type": "choice",
+          "answerValueSet": "http://ihris.org/fhir/ValueSet/ihris-education-level-valueset",
+          "required": true,
+          "repeats": false
+        },
+        {
+          "linkId": "Basic.extension[0].extension[2]",
+          "text": "Degree",
+          "type": "choice",
+          "answerValueSet": "http://ihris.org/fhir/ValueSet/ihris-degree-valueset",
+          "required": true,
+          "repeats": false
+        },
+        {
+          "linkId": "Basic.extension[0].extension[3]",
+          "text": "Education Major",
+          "type": "choice",
+          "answerValueSet": "http://ihris.org/fhir/ValueSet/ihris-educational-major-valueset",
+          "required": false,
+          "repeats": false
+        },
+        {
+          "linkId": "Basic.extension[0].extension[4]#year",
+          "text": "Year Of Graduation",
+          "type": "date",
+          "required": false,
+          "repeats": false
+        },
+        {
+          "linkId": "Basic.extension[0].extension[5]",
+          "text": "Is Current?",
+          "type": "boolean",
+          "required": false,
+          "repeats": false
+        },
+        {
+          "linkId": "Basic.extension[0].extension[6]",
+          "text": "Attachement",
+          "type": "attachment",
+          "required": false,
+          "repeats": false
+        }
+      ]
+    }
+  ]
+}

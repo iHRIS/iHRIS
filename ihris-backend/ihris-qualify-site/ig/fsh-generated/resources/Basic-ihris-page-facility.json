@@ -1,0 +1,111 @@
+{
+  "resourceType": "Basic",
+  "id": "ihris-page-facility",
+  "meta": {
+    "profile": [
+      "http://ihris.org/fhir/StructureDefinition/ihris-page"
+    ]
+  },
+  "code": {
+    "coding": [
+      {
+        "code": "page",
+        "system": "http://ihris.org/fhir/CodeSystem/ihris-resource-codesystem"
+      }
+    ]
+  },
+  "extension": [
+    {
+      "url": "http://ihris.org/fhir/StructureDefinition/ihris-page-display",
+      "extension": [
+        {
+          "url": "resource",
+          "valueReference": {
+            "reference": "StructureDefinition/ihris-facility"
+          }
+        },
+        {
+          "url": "search",
+          "valueString": "Facility Name|name"
+        },
+        {
+          "url": "search",
+          "valueString": "Facility Type|type.coding.display"
+        },
+        {
+          "url": "search",
+          "valueString": "Facility Physical Type|physicalType.coding.display"
+        },
+        {
+          "url": "search",
+          "valueString": "Report To|partOf.reference"
+        },
+        {
+          "url": "search",
+          "valueString": "Status|status"
+        },
+        {
+          "url": "search",
+          "valueString": "Longitute|position.longitude"
+        },
+        {
+          "url": "search",
+          "valueString": "Latitude|position.latitude"
+        },
+        {
+          "url": "filter",
+          "valueString": "Name|name:contains"
+        },
+        {
+          "url": "filter",
+          "valueString": "Type|type|http://ihris.org/fhir/ValueSet/ihris-facility-type"
+        },
+        {
+          "url": "filter",
+          "valueString": "Physical Type|physicalType|http://hl7.org/fhir/ValueSet/location-physical-type"
+        }
+      ]
+    },
+    {
+      "extension": [
+        {
+          "url": "title",
+          "valueString": "Facility"
+        },
+        {
+          "url": "description",
+          "valueString": "Facility/Duty Post details"
+        },
+        {
+          "url": "name",
+          "valueString": "Location"
+        },
+        {
+          "url": "field",
+          "valueString": "Location.name"
+        },
+        {
+          "url": "field",
+          "valueString": "Location.physicalType"
+        },
+        {
+          "url": "field",
+          "valueString": "Location.type"
+        },
+        {
+          "url": "field",
+          "valueString": "Location.partOf"
+        },
+        {
+          "url": "field",
+          "valueString": "Location.status"
+        },
+        {
+          "url": "field",
+          "valueString": "Location.position"
+        }
+      ],
+      "url": "http://ihris.org/fhir/StructureDefinition/ihris-page-section"
+    }
+  ]
+}

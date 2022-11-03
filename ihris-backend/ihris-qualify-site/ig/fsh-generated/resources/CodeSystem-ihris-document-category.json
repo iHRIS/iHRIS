@@ -1,0 +1,23 @@
+{
+  "resourceType": "CodeSystem",
+  "status": "active",
+  "content": "complete",
+  "name": "IhrisDocumentCategoryCodeSystem",
+  "id": "ihris-document-category",
+  "title": "Code system for document categories.",
+  "version": "0.1.0",
+  "url": "http://ihris.org/fhir/CodeSystem/ihris-document-category",
+  "concept": [
+    {
+      "code": "open",
+      "display": "Open",
+      "definition": "Any one can access."
+    },
+    {
+      "code": "restricted",
+      "display": "Restricted",
+      "definition": "Only certain users can view."
+    }
+  ],
+  "count": 2
+}

@@ -1,0 +1,38 @@
+{
+  "resourceType": "CodeSystem",
+  "status": "active",
+  "content": "complete",
+  "name": "IhrisFrequency",
+  "id": "ihris-frequency-codesystem",
+  "title": "Frequency",
+  "version": "0.1.0",
+  "url": "http://ihris.org/fhir/CodeSystem/ihris-frequency-codesystem",
+  "concept": [
+    {
+      "code": "daily",
+      "display": "Daily"
+    },
+    {
+      "code": "weekly",
+      "display": "Weekly"
+    },
+    {
+      "code": "monthly",
+      "display": "Monthly"
+    },
+    {
+      "code": "quaterly",
+      "display": "Quaterly"
+    },
+    {
+      "code": "biannually",
+      "display": "Bi-Annually"
+    },
+    {
+      "code": "annualy",
+      "display": "Annually/Yearly"
+    }
+  ],
+  "date": "2020-10-20T08:41:04.362Z",
+  "count": 6
+}

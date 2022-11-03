@@ -1,0 +1,17 @@
+{
+  "resourceType": "ValueSet",
+  "status": "active",
+  "name": "IhrisInstitutionValueSet",
+  "id": "ihris-institution-valueset",
+  "title": "iHRIS Institution Value Set",
+  "version": "0.3.0",
+  "url": "http://ihris.org/fhir/ValueSet/ihris-institution-valueset",
+  "date": "2020-11-10T08:41:04.362Z",
+  "compose": {
+    "include": [
+      {
+        "system": "http://ihris.org/fhir/CodeSystem/ihris-institution"
+      }
+    ]
+  }
+}

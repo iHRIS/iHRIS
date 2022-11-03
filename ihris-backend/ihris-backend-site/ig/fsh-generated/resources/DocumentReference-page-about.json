@@ -1,0 +1,32 @@
+{
+  "resourceType": "DocumentReference",
+  "id": "page-about",
+  "meta": {
+    "profile": [
+      "http://ihris.org/fhir/StructureDefinition/ihris-document"
+    ]
+  },
+  "status": "current",
+  "docStatus": "final",
+  "date": "2020-06-07T14:54:00Z",
+  "category": [
+    {
+      "coding": [
+        {
+          "code": "open",
+          "system": "http://ihris.org/fhir/CodeSystem/ihris-document-category",
+          "display": "Open Access"
+        }
+      ]
+    }
+  ],
+  "content": [
+    {
+      "attachment": {
+        "contentType": "text/markdown",
+        "title": "About iHRIS",
+        "data": "IyBBYm91dCBpSFJJUwoKVGhpcyBpcyBhIHRlc3RpbmcgYWJvdXQgcGFnZS4K"
+      }
+    }
+  ]
+}

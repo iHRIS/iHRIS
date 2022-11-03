@@ -1,0 +1,17 @@
+{
+  "resourceType": "ValueSet",
+  "status": "active",
+  "name": "IhrisSalarySourceValueSet",
+  "id": "ihris-salary-source-valueset",
+  "title": "iHRIS Salary Source ValueSet",
+  "version": "0.2.0",
+  "url": "http://ihris.org/fhir/ValueSet/ihris-salary-source-valueset",
+  "date": "2020-10-20T08:41:04.362Z",
+  "compose": {
+    "include": [
+      {
+        "system": "http://ihris.org/fhir/CodeSystem/ihris-salary-source-codesystem"
+      }
+    ]
+  }
+}

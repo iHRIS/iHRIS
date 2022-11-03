@@ -1,0 +1,54 @@
+{
+  "resourceType": "CodeSystem",
+  "status": "active",
+  "content": "complete",
+  "name": "IhrisReasonDepartureCodeSystem",
+  "id": "ihris-reason-departure-codesystem",
+  "title": "Reason For Change/Departure",
+  "version": "0.3.0",
+  "url": "http://ihris.org/fhir/CodeSystem/ihris-reason-departure-codesystem",
+  "concept": [
+    {
+      "code": "transfer",
+      "display": "Transfer",
+      "definition": "Transfer"
+    },
+    {
+      "code": "death",
+      "display": "Death",
+      "definition": "death"
+    },
+    {
+      "code": "redeployment",
+      "display": "Redeployment",
+      "definition": "Redeployment"
+    },
+    {
+      "code": "earlyRetirement",
+      "display": "Early Retirement",
+      "definition": "Early Retirement"
+    },
+    {
+      "code": "mandatoryRetirement",
+      "display": "Mandatory Retirement",
+      "definition": "Mandatory Retirement"
+    },
+    {
+      "code": "resignation",
+      "display": "Resignation",
+      "definition": "Resignation"
+    },
+    {
+      "code": "health",
+      "display": "Health Related",
+      "definition": "Health Related"
+    },
+    {
+      "code": "quit",
+      "display": "Quit",
+      "definition": "Quit"
+    }
+  ],
+  "date": "2020-11-14T08:41:04.362Z",
+  "count": 8
+}

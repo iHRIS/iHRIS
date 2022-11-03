@@ -1,0 +1,42 @@
+{
+  "resourceType": "Person",
+  "id": "ihris-user-admin",
+  "meta": {
+    "profile": [
+      "http://ihris.org/fhir/StructureDefinition/ihris-person-user"
+    ]
+  },
+  "extension": [
+    {
+      "url": "http://ihris.org/fhir/StructureDefinition/ihris-password",
+      "extension": [
+        {
+          "url": "password",
+          "valueString": "0da67ef3726a1e0adfbd3c3880c00f33167daeab1f8c728e10b547d382c2b91a96402958209d6af3c947ae9ab53d879dddb79ad046454ade2b12257fe792f8fa"
+        },
+        {
+          "url": "salt",
+          "valueString": "239cfeb1222bfb394549125b234e668e"
+        }
+      ]
+    },
+    {
+      "url": "http://ihris.org/fhir/StructureDefinition/ihris-assign-role",
+      "valueReference": {
+        "reference": "Basic/ihris-role-admin"
+      }
+    }
+  ],
+  "name": [
+    {
+      "use": "official",
+      "text": "iHRIS Admin"
+    }
+  ],
+  "telecom": [
+    {
+      "system": "email",
+      "value": "admin@ihris.org"
+    }
+  ]
+}

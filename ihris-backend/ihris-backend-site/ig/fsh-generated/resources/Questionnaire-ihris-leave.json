@@ -1,0 +1,54 @@
+{
+  "resourceType": "Questionnaire",
+  "id": "ihris-leave",
+  "meta": {
+    "profile": [
+      "http://ihris.org/fhir/StructureDefinition/ihris-questionnaire"
+    ]
+  },
+  "url": "http://ihris.org/fhir/Questionnaire/ihris-leave",
+  "title": "iHRIS Leave Workflow",
+  "description": "iHRIS workflow to record a leave",
+  "name": "ihris-leave",
+  "status": "active",
+  "date": "2020-08-20",
+  "purpose": "Workflow page for recording a leave information.",
+  "item": [
+    {
+      "linkId": "Basic",
+      "text": "Leave Details",
+      "type": "group",
+      "item": [
+        {
+          "linkId": "Basic.extension[0].extension[0]",
+          "text": "Leave Type",
+          "type": "choice",
+          "answerValueSet": "http://ihris.org/fhir/ValueSet/ihris-leave-type-valueset",
+          "required": true,
+          "repeats": false
+        },
+        {
+          "linkId": "Basic.extension[0].extension[1]",
+          "text": "Start Date",
+          "type": "dateTime",
+          "required": true,
+          "repeats": false
+        },
+        {
+          "linkId": "Basic.extension[0].extension[2]",
+          "text": "End Date",
+          "type": "dateTime",
+          "required": true,
+          "repeats": false
+        },
+        {
+          "linkId": "Basic.extension[0].extension[3]",
+          "text": "Date Requested",
+          "type": "date",
+          "required": true,
+          "repeats": false
+        }
+      ]
+    }
+  ]
+}

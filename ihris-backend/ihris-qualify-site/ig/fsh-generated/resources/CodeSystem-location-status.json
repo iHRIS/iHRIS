@@ -1,0 +1,73 @@
+{
+  "resourceType": "CodeSystem",
+  "status": "draft",
+  "content": "complete",
+  "name": "LocationStatus",
+  "id": "location-status",
+  "title": "LocationStatus",
+  "description": "Indicates whether the location is still in use.",
+  "version": "4.0.1",
+  "url": "http://hl7.org/fhir/location-status",
+  "concept": [
+    {
+      "code": "active",
+      "display": "Active",
+      "definition": "The location is operational."
+    },
+    {
+      "code": "suspended",
+      "display": "Suspended",
+      "definition": "The location is temporarily closed."
+    },
+    {
+      "code": "inactive",
+      "display": "Inactive",
+      "definition": "The location is no longer used."
+    }
+  ],
+  "meta": {
+    "versionId": "1",
+    "lastUpdated": "2022-02-15T08:14:24.960+03:00",
+    "source": "#ofZ1t0pi6T7bA09X"
+  },
+  "extension": [
+    {
+      "url": "http://hl7.org/fhir/StructureDefinition/structuredefinition-wg",
+      "valueCode": "pa"
+    },
+    {
+      "url": "http://hl7.org/fhir/StructureDefinition/structuredefinition-standards-status",
+      "valueCode": "trial-use"
+    },
+    {
+      "url": "http://hl7.org/fhir/StructureDefinition/structuredefinition-fmm",
+      "valueInteger": 3
+    }
+  ],
+  "identifier": [
+    {
+      "system": "urn:ietf:rfc:3986",
+      "value": "urn:oid:2.16.840.1.113883.4.642.4.333"
+    }
+  ],
+  "experimental": false,
+  "date": "2019-11-01T09:29:23+11:00",
+  "publisher": "HL7 (FHIR Project)",
+  "contact": [
+    {
+      "telecom": [
+        {
+          "system": "url",
+          "value": "http://hl7.org/fhir"
+        },
+        {
+          "system": "email",
+          "value": "fhir@lists.hl7.org"
+        }
+      ]
+    }
+  ],
+  "caseSensitive": true,
+  "valueSet": "http://hl7.org/fhir/ValueSet/location-status",
+  "count": 3
+}

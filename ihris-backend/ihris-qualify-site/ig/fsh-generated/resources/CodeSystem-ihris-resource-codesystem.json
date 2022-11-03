@@ -1,0 +1,38 @@
+{
+  "resourceType": "CodeSystem",
+  "status": "active",
+  "content": "complete",
+  "name": "IhrisResourceCodeSystem",
+  "id": "ihris-resource-codesystem",
+  "title": "Code System for iHRIS Basic Resources.",
+  "version": "0.1.0",
+  "url": "http://ihris.org/fhir/CodeSystem/ihris-resource-codesystem",
+  "concept": [
+    {
+      "code": "role",
+      "display": "iHRIS Role",
+      "definition": "User roles that are available to be assigned to users."
+    },
+    {
+      "code": "task",
+      "display": "iHRIS Task",
+      "definition": "Role tasks that are available to be assigned to roles"
+    },
+    {
+      "code": "page",
+      "display": "iHRIS Page",
+      "definition": "Page definitions for viewing and editing resources."
+    },
+    {
+      "code": "practitioner-link",
+      "display": "iHRIS Practitioner Link",
+      "definition": "Basic resource for customization that links to a Practitioner."
+    },
+    {
+      "code": "training-link",
+      "display": "iHRIS Training Link",
+      "definition": "Basic resource for customization that links to a Qualify training."
+    }
+  ],
+  "count": 5
+}

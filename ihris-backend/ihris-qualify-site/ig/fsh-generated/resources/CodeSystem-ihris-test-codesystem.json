@@ -1,0 +1,36 @@
+{
+  "resourceType": "CodeSystem",
+  "status": "active",
+  "content": "complete",
+  "name": "IhrisTestCodeSystem",
+  "id": "ihris-test-codesystem",
+  "title": "iHRIS Test CodeSystem",
+  "version": "0.1.0",
+  "url": "http://ihris.org/fhir/CodeSystem/ihris-test-codesystem",
+  "concept": [
+    {
+      "code": "one",
+      "display": "One",
+      "definition": "First one"
+    },
+    {
+      "code": "two",
+      "display": "Two",
+      "definition": "Second one"
+    }
+  ],
+  "property": [
+    {
+      "code": "prop1",
+      "description": "First Property",
+      "type": "string"
+    },
+    {
+      "code": "prop2",
+      "uri": "http://ihris.org/fhir/ValueSet/test",
+      "description": "Second Property",
+      "type": "Coding"
+    }
+  ],
+  "count": 2
+}

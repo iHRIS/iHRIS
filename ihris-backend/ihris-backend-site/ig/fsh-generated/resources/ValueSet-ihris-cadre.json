@@ -1,0 +1,30 @@
+{
+  "resourceType": "ValueSet",
+  "status": "active",
+  "name": "IhrisCadre",
+  "id": "ihris-cadre",
+  "title": "iHRIS Cadre",
+  "description": "Sample iHRIS ValueSet for: IhrisCadre",
+  "version": "0.1.0",
+  "url": "http://ihris.org/fhir/ValueSet/ihris-cadre",
+  "experimental": false,
+  "date": "2020-09-25T21:03:12.952Z",
+  "publisher": "iHRIS Foundation",
+  "contact": [
+    {
+      "telecom": [
+        {
+          "system": "url",
+          "value": "http://ihris.org"
+        }
+      ]
+    }
+  ],
+  "compose": {
+    "include": [
+      {
+        "system": "http://ihris.org/fhir/CodeSystem/ihris-cadre"
+      }
+    ]
+  }
+}

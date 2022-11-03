@@ -1,0 +1,16 @@
+{
+  "resourceType": "SearchParameter",
+  "id": "basic-name",
+  "url": "http://ihris.org/fhir/SearchParameter/basic-name",
+  "name": "Search Parameter on a name extension on Basic resources",
+  "status": "active",
+  "description": "Search by name for a Basic resource.",
+  "code": "name",
+  "base": [
+    "Basic"
+  ],
+  "type": "string",
+  "expression": "Basic.extension('http://ihris.org/fhir/StructureDefinition/ihris-basic-name')",
+  "xpath": "f:Basic/f:extension[@url='http://ihris.org/fhir/StructureDefinition/ihris-basic-name']",
+  "xpathUsage": "normal"
+}

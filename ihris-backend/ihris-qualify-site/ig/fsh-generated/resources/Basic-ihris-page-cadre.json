@@ -1,0 +1,67 @@
+{
+  "resourceType": "Basic",
+  "id": "ihris-page-cadre",
+  "meta": {
+    "profile": [
+      "http://ihris.org/fhir/StructureDefinition/ihris-page"
+    ]
+  },
+  "code": {
+    "coding": [
+      {
+        "code": "page",
+        "system": "http://ihris.org/fhir/CodeSystem/ihris-resource-codesystem"
+      }
+    ]
+  },
+  "extension": [
+    {
+      "url": "http://ihris.org/fhir/StructureDefinition/ihris-page-display",
+      "extension": [
+        {
+          "url": "resource",
+          "valueReference": {
+            "reference": "CodeSystem/ihris-cadre"
+          }
+        },
+        {
+          "url": "search",
+          "valueString": "Code|code"
+        },
+        {
+          "url": "search",
+          "valueString": "Display|display"
+        }
+      ]
+    },
+    {
+      "extension": [
+        {
+          "url": "title",
+          "valueString": "Cadre"
+        },
+        {
+          "url": "description",
+          "valueString": "Cadre"
+        },
+        {
+          "url": "name",
+          "valueString": "CodeSystem"
+        },
+        {
+          "url": "field",
+          "valueString": "CodeSystem.display"
+        },
+        {
+          "url": "field",
+          "valueString": "CodeSystem.code"
+        },
+        {
+          "url": "field",
+          "valueString": "CodeSystem.definition"
+        }
+      ],
+      "url": "http://ihris.org/fhir/StructureDefinition/ihris-page-section"
+    }
+  ]
+}

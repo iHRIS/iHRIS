@@ -1,0 +1,146 @@
+{
+  "resourceType": "Basic",
+  "id": "ihris-page-discipline",
+  "meta": {
+    "profile": [
+      "http://ihris.org/fhir/StructureDefinition/ihris-page"
+    ]
+  },
+  "code": {
+    "coding": [
+      {
+        "code": "page",
+        "system": "http://ihris.org/fhir/CodeSystem/ihris-resource-codesystem"
+      }
+    ]
+  },
+  "extension": [
+    {
+      "url": "http://ihris.org/fhir/StructureDefinition/ihris-page-display",
+      "extension": [
+        {
+          "url": "resource",
+          "valueReference": {
+            "reference": "StructureDefinition/ihris-basic-discipline"
+          }
+        },
+        {
+          "url": "search",
+          "valueString": "Discipline|extension.where(url='http://ihris.org/fhir/StructureDefinition/ihris-discipline').extension.where(url='actionType').valueString"
+        },
+        {
+          "extension": [
+            {
+              "url": "field",
+              "valueString": "Basic.extension.where(url='http://ihris.org/fhir/StructureDefinition/ihris-practitioner-reference').valueReference.reference"
+            },
+            {
+              "url": "url",
+              "valueUrl": "/resource/view/practitioner/FIELD"
+            },
+            {
+              "url": "text",
+              "valueString": "View Health Worker"
+            },
+            {
+              "url": "button",
+              "valueBoolean": true
+            },
+            {
+              "url": "icon",
+              "valueString": "mdi-account-arrow-right"
+            }
+          ],
+          "url": "link"
+        },
+        {
+          "extension": [
+            {
+              "url": "field",
+              "valueString": "Basic.extension.where(url='http://ihris.org/fhir/StructureDefinition/ihris-practitioner-reference').valueReference.reference"
+            },
+            {
+              "url": "url",
+              "valueUrl": "/questionnaire/ihris-discipline/discipline?practitioner=FIELD"
+            },
+            {
+              "url": "text",
+              "valueString": "Add Another"
+            },
+            {
+              "url": "button",
+              "valueBoolean": true
+            },
+            {
+              "url": "icon",
+              "valueString": "mdi-account-arrow-right"
+            }
+          ],
+          "url": "link"
+        },
+        {
+          "extension": [
+            {
+              "url": "path",
+              "valueString": "Basic.extension:practitioner.value[x]:valueReference"
+            },
+            {
+              "url": "readOnlyIfSet",
+              "valueBoolean": true
+            }
+          ],
+          "url": "field"
+        }
+      ]
+    },
+    {
+      "extension": [
+        {
+          "url": "title",
+          "valueString": "Employee Discipline"
+        },
+        {
+          "url": "description",
+          "valueString": "Employee Discipline details"
+        },
+        {
+          "url": "name",
+          "valueString": "Basic"
+        },
+        {
+          "url": "field",
+          "valueString": "Basic.extension:practitioner"
+        },
+        {
+          "url": "field",
+          "valueString": "Basic.extension:discipline.extension:actionType.value[x]:valueCoding"
+        },
+        {
+          "url": "field",
+          "valueString": "Basic.extension:discipline.extension:givenDate.value[x]:valueDate"
+        },
+        {
+          "url": "field",
+          "valueString": "Basic.extension:discipline.extension:givenBy.value[x]:valueString"
+        },
+        {
+          "url": "field",
+          "valueString": "Basic.extension:discipline.extension:actionTaken.value[x]:valueString"
+        },
+        {
+          "url": "field",
+          "valueString": "Basic.extension:discipline.extension:period.value[x]:valuePeriod"
+        },
+        {
+          "url": "field",
+          "valueString": "Basic.extension:discipline.extension:reason.value[x]:valueString"
+        },
+        {
+          "url": "field",
+          "valueString": "Basic.extension:discipline.extension:remark.value[x]:valueString"
+        }
+      ],
+      "url": "http://ihris.org/fhir/StructureDefinition/ihris-page-section"
+    }
+  ]
+}

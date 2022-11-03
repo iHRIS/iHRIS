@@ -1,0 +1,17 @@
+{
+  "resourceType": "ValueSet",
+  "status": "active",
+  "name": "IhrisEthiopiaDisciplinaryActionTypeValueSet",
+  "id": "ihris-discipline-action-type-valueset",
+  "title": "iHRIS Disciplinary Action Type ValueSet",
+  "version": "0.3.0",
+  "url": "http://ihris.org/fhir/ValueSet/ihris-discipline-action-type-valueset",
+  "date": "2020-11-10T08:41:04.362Z",
+  "compose": {
+    "include": [
+      {
+        "system": "http://ihris.org/fhir/CodeSystem/ihris-discipline-action-type-codesystem"
+      }
+    ]
+  }
+}
