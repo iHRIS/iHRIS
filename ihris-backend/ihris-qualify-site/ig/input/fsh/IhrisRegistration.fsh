@@ -22,6 +22,7 @@ Title:          "Registration details"
 * extension contains
    registrationNumber 1..1 MS and
    registrationDate 1..1 MS and
+   cadre 1..1 MS and
    endDate 1..1 MS and
    serialNumber 0..1 MS
 * extension[registrationNumber].value[x] only string
@@ -33,6 +34,7 @@ Title:          "Registration details"
 * extension[cadre].value[x] only Coding
 * extension[cadre].valueCoding 1..1 MS
 * extension[cadre].valueCoding ^label = "Cadre" 
+* extension[cadre].valueCoding from IhrisCadre (required)
 * extension[serialNumber].value[x] only string
 * extension[serialNumber].valueString 0..1 MS
 * extension[serialNumber].valueString ^label = "Serial Number"

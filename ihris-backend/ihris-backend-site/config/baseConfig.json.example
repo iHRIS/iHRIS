@@ -21,7 +21,7 @@
     },
     {
       "name": "app:Parameters",
-      "valueString": "../ig/fsh-generated/resources/Parameters-ihris-config.json"
+      "valueString": "ig/fsh-generated/resources/Parameters-ihris-config.json"
     },
     {
       "name": "app:site:path",
@@ -33,7 +33,7 @@
     },
     {
       "name": "builtFSHFIles",
-      "valueString": "../ig/fsh-generated/resources"
+      "valueString": "ig/fsh-generated/resources"
     },
     {
       "name": "profileBaseUrl",

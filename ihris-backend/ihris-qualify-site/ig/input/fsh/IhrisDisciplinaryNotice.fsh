@@ -85,6 +85,10 @@ Usage:          #example
 * extension[display].extension[link][0].extension[button].valueBoolean = true
 * extension[display].extension[link][0].extension[icon].valueString = "mdi-account-arrow-right"
 * extension[display].extension[link][0].extension[url].valueUrl = "/resource/view/practitioner/FIELD"
+* extension[display].extension[search][0].valueString = "Practitioner|Basic.extension:practitioner"
+* extension[display].extension[search][1].valueString = "Action Date|Basic.extension:discipline.extension:actionDate.value[x]:valueDate"
+* extension[display].extension[search][2].valueString = "Suspended|Basic.extension:discipline.extension:suspend.value[x]:valueBoolean"
+* extension[display].extension[search][3].valueString = "Reason|Basic.extension:discipline.extension:reason.value[x]:valueString"
 * extension[display].extension[field][0].extension[path].valueString = "Basic.extension:practitioner.value[x]:valueReference"
 * extension[display].extension[field][0].extension[readOnlyIfSet].valueBoolean = true
 * extension[section][0].extension[title].valueString = "Disciplinary Notice"

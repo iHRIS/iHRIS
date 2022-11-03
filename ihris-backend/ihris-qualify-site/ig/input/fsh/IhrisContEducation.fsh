@@ -34,7 +34,7 @@ Title:          "Continuing Education details"
 * extension[courseName].value[x] only string
 * extension[courseName].valueString 0..1 MS
 * extension[courseName].valueString ^label = "Continuing Education Course Name"
-* extension[credits].value[x] only int
+* extension[credits].value[x] only integer
 * extension[credits].valueInteger 0..1 MS
 * extension[credits].valueInteger ^label = "Credits" 
 * extension[startDate].value[x] only date

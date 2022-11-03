@@ -22,7 +22,7 @@ Title:          "License details"
 * extension contains
    licenseNumber 1..1 MS and
    startDate 1..1 MS and
-   endDate 1..1 MS and
+   endDate 0..1 MS and
    serialNumber 0..1 MS
 * extension[licenseNumber].value[x] only string
 * extension[licenseNumber].valueString 1..1 MS
@@ -31,7 +31,7 @@ Title:          "License details"
 * extension[startDate].valueDate 1..1 MS
 * extension[startDate].valueDate ^label = "Start Date" 
 * extension[endDate].value[x] only date
-* extension[endDate].valueDate 1..1 MS
+* extension[endDate].valueDate 0..1 MS
 * extension[endDate].valueDate ^label = "End Date" 
 * extension[serialNumber].value[x] only string
 * extension[serialNumber].valueString 0..1 MS

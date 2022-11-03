@@ -44,6 +44,11 @@ Usage:          #example
 * extension[display].extension[link][0].extension[button].valueBoolean = true
 * extension[display].extension[link][0].extension[icon].valueString = "mdi-account-arrow-right"
 * extension[display].extension[link][0].extension[url].valueUrl = "/resource/view/practitioner/FIELD"
+* extension[display].extension[search][0].valueString = "Practitioner|Basic.extension:practitioner"
+* extension[display].extension[search][1].valueString = "Job Title|Basic.extension:deployment.extension.jobTitle.value[x]:valueCoding"
+* extension[display].extension[search][2].valueString = "Practitioner|PractitionerRole.practitioner"
+* extension[display].extension[search][3].valueString = "Facility|Basic.extension:deployment.extension:healthFacility.value[x]:valueReference"
+* extension[display].extension[search][4].valueString = "Start Date|Basic.extension:deployment.extension:date.value[x]:valueDate"
 * extension[display].extension[field][0].extension[path].valueString = "Basic.extension:practitioner.value[x]:valueReference"
 * extension[display].extension[field][0].extension[readOnlyIfSet].valueBoolean = true
 * extension[section][0].extension[title].valueString = "Deployment"
@@ -52,7 +57,7 @@ Usage:          #example
 * extension[section][0].extension[field][0].valueString = "Basic.extension:practitioner"
 * extension[section][0].extension[field][1].valueString = "Basic.extension:deployment.extension:healthFacility.value[x]:valueReference"
 * extension[section][0].extension[field][2].valueString = "Basic.extension:deployment.extension:date.value[x]:valueDate"
-* extension[section][0].extension[field][43.valueString = "Basic.extension:deployment.extension.jobTitle.value[x]:valueCoding"
+* extension[section][0].extension[field][3].valueString = "Basic.extension:deployment.extension.jobTitle.value[x]:valueCoding"
 
 Instance:       IhrisPractitionerWorkflowDeployment
 InstanceOf:      Questionnaire

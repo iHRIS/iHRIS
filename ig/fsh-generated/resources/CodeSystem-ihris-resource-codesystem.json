@@ -27,7 +27,12 @@
       "code": "practitioner-link",
       "display": "iHRIS Practitioner Link",
       "definition": "Basic resource for customization that links to a Practitioner."
+    },
+    {
+      "code": "training-link",
+      "display": "iHRIS Training Link",
+      "definition": "Basic resource for customization that links to a Qualify training."
     }
   ],
-  "count": 4
+  "count": 5
 }
