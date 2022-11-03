@@ -8,12 +8,6 @@ RUN apt-get -qq update && apt-get install -y -qq git && apt-get install -y --no-
 
 RUN git clone --branch ${branch} https://github.com/iHRIS/iHRIS /src/
 
-
-# generate fsh files
-WORKDIR /src/ig
-RUN npm install -g fsh-sushi
-RUN sushi -s .
-
 WORKDIR /src/tools
 RUN npm install
 
@@ -28,6 +22,11 @@ RUN mv ihris-backend-site site
 WORKDIR /src/ihris-backend/site
 RUN npm install
 RUN cp config/baseConfig.json.example config/baseConfig.json
+
+# generate fsh files
+WORKDIR /src/ihris-backend/site/ig
+RUN npm install -g fsh-sushi
+RUN sushi -s .
 
 # ARG NODE_ENV=docker
 ARG NODE_ENV=production
@@ -66,8 +65,8 @@ RUN wget https://github.com/jwilder/dockerize/releases/download/$DOCKERIZE_VERSI
 
 EXPOSE 3000
 ENTRYPOINT dockerize -wait-retry-interval 5s -timeout 120s -wait ${IHRIS_FHIR__BASE}/metadata \
-    && node ../../tools/signConfig.js --key ../../tools/rsa_1024_priv.pem --config ../../ig/fsh-generated/resources/Parameters-ihris-config.json > ../../ig/fsh-generated/resources/Parameters-ihris-config-tmp.json \
-    && mv ../../ig/fsh-generated/resources/Parameters-ihris-config-tmp.json ../../ig/fsh-generated/resources/Parameters-ihris-config.json \
+    && node ../../tools/signConfig.js --key ../../tools/rsa_1024_priv.pem --config ./ig/fsh-generated/resources/Parameters-ihris-config.json > ./ig/fsh-generated/resources/Parameters-ihris-config-tmp.json \
+    && mv ./ig/fsh-generated/resources/Parameters-ihris-config-tmp.json ./ig/fsh-generated/resources/Parameters-ihris-config.json \
     && npm start
 
 # CMD ["npm", "run", "start"]
