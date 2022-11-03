@@ -21,7 +21,7 @@
     },
     {
       "name": "app:Parameters",
-      "valueString": "../resources/Parameters-ihris-config.signed.json"
+      "valueString": "../ig/fsh-generated/resources/Parameters-ihris-config.json"
     },
     {
       "name": "app:site:path",

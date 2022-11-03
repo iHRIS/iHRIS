@@ -218,5 +218,5 @@ server.basePath: "/dashboards"
 
 server.rewriteBasePath: true
 ```
-**Note**
-There is also a docker installation here https://opensearch.org/docs/latest/opensearch/install/docker/
+!!! Note
+    There is also a docker installation here https://opensearch.org/docs/latest/opensearch/install/docker/
