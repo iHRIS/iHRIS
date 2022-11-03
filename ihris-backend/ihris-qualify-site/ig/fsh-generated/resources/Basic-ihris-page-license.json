@@ -1,0 +1,109 @@
+{
+  "resourceType": "Basic",
+  "id": "ihris-page-license",
+  "meta": {
+    "profile": [
+      "http://ihris.org/fhir/StructureDefinition/ihris-page"
+    ]
+  },
+  "code": {
+    "coding": [
+      {
+        "code": "page",
+        "system": "http://ihris.org/fhir/CodeSystem/ihris-resource-codesystem"
+      }
+    ]
+  },
+  "extension": [
+    {
+      "url": "http://ihris.org/fhir/StructureDefinition/ihris-page-display",
+      "extension": [
+        {
+          "url": "resource",
+          "valueReference": {
+            "reference": "StructureDefinition/ihris-basic-license"
+          }
+        },
+        {
+          "url": "search",
+          "valueString": "License Number|Basic.extension.where(url='http://ihris.org/fhir/StructureDefinition/ihris-license').extension.where(url='licenseNumber').valueString"
+        },
+        {
+          "extension": [
+            {
+              "url": "field",
+              "valueString": "Basic.extension.where(url='http://ihris.org/fhir/StructureDefinition/ihris-practitioner-reference').valueReference.reference"
+            },
+            {
+              "url": "url",
+              "valueUrl": "/resource/view/practitioner/FIELD"
+            },
+            {
+              "url": "text",
+              "valueString": "View Licensed Staff"
+            },
+            {
+              "url": "button",
+              "valueBoolean": true
+            },
+            {
+              "url": "icon",
+              "valueString": "mdi-account-arrow-right"
+            }
+          ],
+          "url": "link"
+        },
+        {
+          "extension": [
+            {
+              "url": "path",
+              "valueString": "Basic.extension:practitioner.value[x]:valueReference"
+            },
+            {
+              "url": "readOnlyIfSet",
+              "valueBoolean": true
+            }
+          ],
+          "url": "field"
+        }
+      ]
+    },
+    {
+      "extension": [
+        {
+          "url": "title",
+          "valueString": "License"
+        },
+        {
+          "url": "description",
+          "valueString": "License details"
+        },
+        {
+          "url": "name",
+          "valueString": "Basic"
+        },
+        {
+          "url": "field",
+          "valueString": "Basic.extension:practitioner"
+        },
+        {
+          "url": "field",
+          "valueString": "Basic.extension:license.extension:licenseNumber.value[x]:valueString"
+        },
+        {
+          "url": "field",
+          "valueString": "Basic.extension:license.extension:startDate.value[x]:valueDate"
+        },
+        {
+          "url": "field",
+          "valueString": "Basic.extension:license.extension:endDate.value[x]:valueDate"
+        },
+        {
+          "url": "field",
+          "valueString": "Basic.extension:license.extension.serialNumber.value[x]:valueString"
+        }
+      ],
+      "url": "http://ihris.org/fhir/StructureDefinition/ihris-page-section"
+    }
+  ]
+}

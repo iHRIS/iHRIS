@@ -1,0 +1,42 @@
+{
+  "resourceType": "CodeSystem",
+  "status": "active",
+  "content": "complete",
+  "name": "IhrisCadre",
+  "id": "ihris-cadre",
+  "title": "iHRIS Cadre",
+  "description": "Sample iHRIS CodeSystem for: IhrisCadre",
+  "version": "5",
+  "url": "http://ihris.org/fhir/CodeSystem/ihris-cadre",
+  "concept": [
+    {
+      "code": "doctor",
+      "display": "Medical Doctor"
+    },
+    {
+      "code": "nurse",
+      "display": "Nurse"
+    },
+    {
+      "code": "allied-health",
+      "display": "Allied Health Professional"
+    },
+    {
+      "code": "pharmacist",
+      "display": "Pharmacist"
+    }
+  ],
+  "date": "2020-09-25T20:48:33.646Z",
+  "publisher": "iHRIS Foundation",
+  "contact": [
+    {
+      "telecom": [
+        {
+          "system": "url",
+          "value": "http://ihris.org"
+        }
+      ]
+    }
+  ],
+  "count": 4
+}

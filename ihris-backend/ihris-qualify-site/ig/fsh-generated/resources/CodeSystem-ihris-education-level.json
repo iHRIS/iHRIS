@@ -1,0 +1,34 @@
+{
+  "resourceType": "CodeSystem",
+  "status": "active",
+  "content": "complete",
+  "name": "IhrisEducationLevel",
+  "id": "ihris-education-level",
+  "title": "Education Level",
+  "version": "0.1.0",
+  "url": "http://ihris.org/fhir/CodeSystem/ihris-education-level",
+  "concept": [
+    {
+      "code": "Primary",
+      "display": "Primary School",
+      "definition": "Primary School"
+    },
+    {
+      "code": "Secondary",
+      "display": "Secondary School",
+      "definition": "Secondary School"
+    },
+    {
+      "code": "Cerifiticate",
+      "display": "Cerifiticate",
+      "definition": "Cerifiticate"
+    },
+    {
+      "code": "Others",
+      "display": "Others",
+      "definition": "Others"
+    }
+  ],
+  "date": "2020-09-29T08:41:04.362Z",
+  "count": 4
+}

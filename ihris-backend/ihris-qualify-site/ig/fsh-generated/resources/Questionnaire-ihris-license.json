@@ -1,0 +1,48 @@
+{
+  "resourceType": "Questionnaire",
+  "id": "ihris-license",
+  "url": "http://ihris.org/fhir/Questionnaire/ihris-license",
+  "title": "iHRIS License Workflow",
+  "description": "iHRIS workflow to record a License",
+  "name": "ihris-license",
+  "status": "active",
+  "date": "2020-08-27",
+  "purpose": "Workflow page for recording a License Information.",
+  "item": [
+    {
+      "linkId": "Basic",
+      "text": "License Information",
+      "type": "group",
+      "item": [
+        {
+          "linkId": "Basic.extension[0].extension[0]",
+          "text": "License Number",
+          "type": "string",
+          "required": true,
+          "repeats": false
+        },
+        {
+          "linkId": "Basic.extension[0].extension[1]",
+          "text": "Start Date",
+          "type": "date",
+          "required": true,
+          "repeats": false
+        },
+        {
+          "linkId": "Basic.extension[0].extension[2]",
+          "text": "End date",
+          "type": "date",
+          "required": false,
+          "repeats": false
+        },
+        {
+          "linkId": "Basic.extension[0].extension[3]",
+          "text": "Serial Number",
+          "type": "string",
+          "required": false,
+          "repeats": false
+        }
+      ]
+    }
+  ]
+}

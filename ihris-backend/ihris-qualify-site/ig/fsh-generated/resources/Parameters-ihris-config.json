@@ -1,0 +1,648 @@
+{
+  "resourceType": "Parameters",
+  "id": "ihris-config",
+  "meta": {
+    "profile": [
+      "http://ihris.org/fhir/StructureDefinition/ihris-parameters-remote-config"
+    ]
+  },
+  "parameter": [
+    {
+      "name": "signature",
+      "valueSignature": {
+        "type": [
+          {
+            "code": "1.2.840.10065.1.12.1.14",
+            "system": "urn:iso-astm:E1762-95:2013"
+          }
+        ],
+        "when": "2022-06-21T09:31:16.469Z",
+        "who": {
+          "reference": "http://ihris.org/fhir/Organization/ihris"
+        },
+        "data": "V870cwmayGw0tOXXdiUn7/MNEaPt/KzRCk7H2t6IvqxmhshwxLxAYve8yNEdkhj/WhybFokLXR5rhtqU4VKE9EiN/dL1fHVbdu0rk/WrcFy2vPqYPUxepFAAAWQXIQV7gsVSMFEbUOTiYaQ42dt7gddrmJYq8p+6RFLAMDkxpzU="
+      }
+    },
+    {
+      "name": "config",
+      "part": [
+        {
+          "name": "site:title",
+          "valueString": "Qualify"
+        },
+        {
+          "name": "site:site",
+          "valueString": "Demo"
+        },
+        {
+          "name": "site:logo",
+          "valueString": "iHRISQualify_logo.png"
+        },
+        {
+          "name": "site:auth:local:method",
+          "valueString": "post"
+        },
+        {
+          "name": "site:auth:local:link",
+          "valueString": "/auth/login"
+        },
+        {
+          "name": "site:auth:local:btn:image",
+          "valueString": "btn_ihris_signin.png"
+        },
+        {
+          "name": "site:auth:local:btn:image2x",
+          "valueString": "btn_ihris_signin_dark.png"
+        },
+        {
+          "name": "site:auth:local:btn:text",
+          "valueString": "Sign in with iHRIS"
+        },
+        {
+          "name": "site:footer:links:about:text",
+          "valueString": "About iHRIS"
+        },
+        {
+          "name": "site:footer:links:about:to",
+          "valueString": "/static/page-about"
+        },
+        {
+          "name": "site:footer:links:feedback:text",
+          "valueString": "Feedback"
+        },
+        {
+          "name": "site:footer:links:feedback:href",
+          "valueString": "https://forms.gle/jQJ7N3nDBSxSNne58"
+        },
+        {
+          "name": "site:footer:links:ihris:text",
+          "valueString": "iHRIS Website"
+        },
+        {
+          "name": "site:footer:links:ihris:href",
+          "valueString": "http://ihris.org/"
+        },
+        {
+          "name": "site:nav:menu:profile:text",
+          "valueString": "My Profile"
+        },
+        {
+          "name": "site:nav:menu:profile:order",
+          "valueString": "0"
+        },
+        {
+          "name": "site:nav:menu:profile:icon",
+          "valueString": "mdi-account-multiple"
+        },
+        {
+          "name": "site:nav:menu:profile:url",
+          "valueString": "/resource/view"
+        },
+        {
+          "name": "site:nav:menu:profile:selfService",
+          "valueString": "true"
+        },
+        {
+          "name": "site:nav:menu:profile:exclusive",
+          "valueString": "true"
+        },
+        {
+          "name": "site:nav:menu:dashboard:text",
+          "valueString": "Dashboard"
+        },
+        {
+          "name": "site:nav:menu:dashboard:order",
+          "valueString": "3"
+        },
+        {
+          "name": "site:nav:menu:dashboard:icon",
+          "valueString": "mdi-chart-arc"
+        },
+        {
+          "name": "site:nav:menu:dashboard:url",
+          "valueString": "/dashboard"
+        },
+        {
+          "name": "site:nav:active",
+          "valueString": "person"
+        },
+        {
+          "name": "site:nav:menu:person:text",
+          "valueString": "People"
+        },
+        {
+          "name": "site:nav:menu:person:order",
+          "valueString": "4"
+        },
+        {
+          "name": "site:nav:menu:person:icon",
+          "valueString": "mdi-account-multiple"
+        },
+        {
+          "name": "site:nav:menu:person:menu:person_search:text",
+          "valueString": "Search People"
+        },
+        {
+          "name": "site:nav:menu:person:menu:person_search:url",
+          "valueString": "/resource/search/practitioner"
+        },
+        {
+          "name": "site:nav:menu:person:menu:person_add:text",
+          "valueString": "Add Person"
+        },
+        {
+          "name": "site:nav:menu:person:menu:person_add:url",
+          "valueString": "/questionnaire/ihris-practitioner/practitioner"
+        },
+        {
+          "name": "site:nav:menu:location:text",
+          "valueString": "Locations and Facilities"
+        },
+        {
+          "name": "site:nav:menu:location:order",
+          "valueString": "6"
+        },
+        {
+          "name": "site:nav:menu:location:icon",
+          "valueString": "mdi-map-marker-multiple"
+        },
+        {
+          "name": "site:nav:menu:location:menu:location_search:text",
+          "valueString": "Locations"
+        },
+        {
+          "name": "site:nav:menu:location:menu:location_search:url",
+          "valueString": "/resource/search/location"
+        },
+        {
+          "name": "site:nav:menu:location:menu:facility_search:text",
+          "valueString": "Facilities"
+        },
+        {
+          "name": "site:nav:menu:location:menu:facility_search:url",
+          "valueString": "/resource/search/facility"
+        },
+        {
+          "name": "site:nav:menu:mhero:order",
+          "valueString": "8"
+        },
+        {
+          "name": "site:nav:menu:mhero:text",
+          "valueString": "mHero"
+        },
+        {
+          "name": "site:nav:menu:mhero:icon",
+          "valueString": "mdi-cellphone-basic"
+        },
+        {
+          "name": "site:nav:menu:mhero:menu:message:text",
+          "valueString": "Send Messages"
+        },
+        {
+          "name": "site:nav:menu:mhero:menu:message:url",
+          "valueString": "/page/mhero"
+        },
+        {
+          "name": "site:nav:menu:mhero:menu:scheduledcommunications:text",
+          "valueString": "Scheduled Messages"
+        },
+        {
+          "name": "site:nav:menu:mhero:menu:scheduledcommunications:url",
+          "valueString": "/page/mhero-scheduled-message"
+        },
+        {
+          "name": "site:nav:menu:mhero:menu:groups:text",
+          "valueString": "Contact Groups"
+        },
+        {
+          "name": "site:nav:menu:mhero:menu:groups:url",
+          "valueString": "/page/contact-groups"
+        },
+        {
+          "name": "site:nav:menu:mhero:menu:reports:text",
+          "valueString": "Reports"
+        },
+        {
+          "name": "site:nav:menu:mhero:menu:reports:url",
+          "valueString": "/page/mhero-reports"
+        },
+        {
+          "name": "site:nav:menu:database:text",
+          "valueString": "Database"
+        },
+        {
+          "name": "site:nav:menu:database:order",
+          "valueString": "9"
+        },
+        {
+          "name": "site:nav:menu:database:icon",
+          "valueString": "mdi-database"
+        },
+        {
+          "name": "site:nav:menu:database:menu:cadre:text",
+          "valueString": "Cadres"
+        },
+        {
+          "name": "site:nav:menu:database:menu:cadre:url",
+          "valueString": "/resource/search/cadre"
+        },
+        {
+          "name": "site:nav:menu:database:menu:cadre:order",
+          "valueString": "1"
+        },
+        {
+          "name": "site:nav:menu:database:menu:classification:text",
+          "valueString": "Classifications"
+        },
+        {
+          "name": "site:nav:menu:database:menu:classification:url",
+          "valueString": "/resource/search/classification"
+        },
+        {
+          "name": "site:nav:menu:database:menu:classification:order",
+          "valueString": "2"
+        },
+        {
+          "name": "site:nav:menu:database:menu:salary-grade:text",
+          "valueString": "Salary Grades"
+        },
+        {
+          "name": "site:nav:menu:database:menu:salary-grade:url",
+          "valueString": "/resource/search/salary-grade"
+        },
+        {
+          "name": "site:nav:menu:database:menu:salary-grade:order",
+          "valueString": "3"
+        },
+        {
+          "name": "site:nav:menu:database:menu:job:text",
+          "valueString": "Job Titles"
+        },
+        {
+          "name": "site:nav:menu:database:menu:job:url",
+          "valueString": "/resource/search/job"
+        },
+        {
+          "name": "site:nav:menu:database:menu:job:order",
+          "valueString": "4"
+        },
+        {
+          "name": "site:nav:menu:database:menu:education-level:text",
+          "valueString": "Academic/Education Level"
+        },
+        {
+          "name": "site:nav:menu:database:menu:education-level:url",
+          "valueString": "/resource/search/education-level"
+        },
+        {
+          "name": "site:nav:menu:database:menu:education-level:order",
+          "valueString": "5"
+        },
+        {
+          "name": "site:nav:menu:database:menu:degree:text",
+          "valueString": "Degree/Course"
+        },
+        {
+          "name": "site:nav:menu:database:menu:degree:url",
+          "valueString": "/resource/search/degree"
+        },
+        {
+          "name": "site:nav:menu:database:menu:degree:order",
+          "valueString": "6"
+        },
+        {
+          "name": "site:nav:menu:database:menu:institution:text",
+          "valueString": "Basic Education Institution"
+        },
+        {
+          "name": "site:nav:menu:database:menu:institution:url",
+          "valueString": "/resource/search/institution"
+        },
+        {
+          "name": "site:nav:menu:database:menu:institution:order",
+          "valueString": "7"
+        },
+        {
+          "name": "site:nav:menu:database:menu:traininginstitution:text",
+          "valueString": "Training Institution"
+        },
+        {
+          "name": "site:nav:menu:database:menu:traininginstitution:url",
+          "valueString": "/resource/search/training-institution"
+        },
+        {
+          "name": "site:nav:menu:database:menu:traininginstitution:order",
+          "valueString": "8"
+        },
+        {
+          "name": "site:nav:menu:database:menu:identifier:text",
+          "valueString": "Identifier Types"
+        },
+        {
+          "name": "site:nav:menu:database:menu:identifier:url",
+          "valueString": "/resource/search/identifier"
+        },
+        {
+          "name": "site:nav:menu:database:menu:identifier:order",
+          "valueString": "9"
+        },
+        {
+          "name": "site:nav:menu:reports:text",
+          "valueString": "Reports"
+        },
+        {
+          "name": "site:nav:menu:reports:order",
+          "valueString": "10"
+        },
+        {
+          "name": "site:nav:menu:reports:icon",
+          "valueString": "mdi-chart-bar"
+        },
+        {
+          "name": "site:nav:menu:reports:menu:practitioner:text",
+          "valueString": "Health Worker Report"
+        },
+        {
+          "name": "site:nav:menu:reports:menu:practitioner:url",
+          "valueString": "/report/ihris-es-report-practitioner"
+        },
+        {
+          "name": "site:nav:menu:reports:menu:practitioner:order",
+          "valueString": "1"
+        },
+        {
+          "name": "site:nav:menu:users:text",
+          "valueString": "System Users"
+        },
+        {
+          "name": "site:nav:menu:users:order",
+          "valueString": "11"
+        },
+        {
+          "name": "site:nav:menu:users:icon",
+          "valueString": "mdi-account-box-outline"
+        },
+        {
+          "name": "site:nav:menu:users:menu:users_search:text",
+          "valueString": "Search Users"
+        },
+        {
+          "name": "site:nav:menu:users:menu:users_search:url",
+          "valueString": "/resource/search/user"
+        },
+        {
+          "name": "site:nav:menu:users:menu:users_role:text",
+          "valueString": "User Roles"
+        },
+        {
+          "name": "site:nav:menu:users:menu:users_role:url",
+          "valueString": "/resource/search/role"
+        },
+        {
+          "name": "site:nav:menu:users:menu:role_tasks:text",
+          "valueString": "User Role Tasks"
+        },
+        {
+          "name": "site:nav:menu:users:menu:role_tasks:url",
+          "valueString": "/resource/search/task"
+        },
+        {
+          "name": "site:nav:menu:audit:text",
+          "valueString": "Audit Logs"
+        },
+        {
+          "name": "site:nav:menu:audit:order",
+          "valueString": "12"
+        },
+        {
+          "name": "site:nav:menu:audit:icon",
+          "valueString": "mdi-lock-reset"
+        },
+        {
+          "name": "site:nav:menu:audit:url",
+          "valueString": "/resource/view/auditevent"
+        },
+        {
+          "name": "site:nav:menu:password:text",
+          "valueString": "Change Password"
+        },
+        {
+          "name": "site:nav:menu:password:order",
+          "valueString": "13"
+        },
+        {
+          "name": "site:nav:menu:password:icon",
+          "valueString": "mdi-lock-reset"
+        },
+        {
+          "name": "site:nav:menu:password:url",
+          "valueString": "/questionnaire/ihris-change-password/person"
+        },
+        {
+          "name": "site:nav:menu:apps:text",
+          "valueString": "Apps"
+        },
+        {
+          "name": "site:nav:menu:apps:order",
+          "valueString": "14"
+        },
+        {
+          "name": "site:nav:menu:apps:icon",
+          "valueString": "mdi-apps"
+        },
+        {
+          "name": "site:nav:menu:apps:url",
+          "valueString": "/apps"
+        },
+        {
+          "name": "shortname:Practitioner:format",
+          "valueString": "%s, %s"
+        },
+        {
+          "name": "shortname:Practitioner:order",
+          "valueString": "family,given"
+        },
+        {
+          "name": "shortname:Practitioner:paths:family:fhirpath",
+          "valueString": "name.where(use='official').first().family"
+        },
+        {
+          "name": "shortname:Practitioner:paths:given:fhirpath",
+          "valueString": "name.where(use='official').first().given"
+        },
+        {
+          "name": "shortname:Location:format",
+          "valueString": "%s"
+        },
+        {
+          "name": "shortname:Location:order",
+          "valueString": "name"
+        },
+        {
+          "name": "shortname:Location:paths:name:fhirpath",
+          "valueString": "name"
+        },
+        {
+          "name": "shortname:Basic:format",
+          "valueString": "%s"
+        },
+        {
+          "name": "shortname:Basic:order",
+          "valueString": "name"
+        },
+        {
+          "name": "shortname:Basic:paths:name:fhirpath",
+          "valueString": "extension.where(url='http://ihris.org/fhir/StructureDefinition/ihris-basic-name').valueString"
+        },
+        {
+          "name": "shortname:CodeSystem:format",
+          "valueString": "%s"
+        },
+        {
+          "name": "shortname:CodeSystem:order",
+          "valueString": "name"
+        },
+        {
+          "name": "shortname:CodeSystem:paths:name:fhirpath",
+          "valueString": "CodeSystem.where(id='ihris-job').display"
+        },
+        {
+          "name": "defaults:fields:Basic.extension:training.value[x]:valueReference:type",
+          "valueString": "tree"
+        },
+        {
+          "name": "defaults:fields:Practitioner.extension:residence.value[x]:valueReference:type",
+          "valueString": "tree"
+        },
+        {
+          "name": "defaults:fields:Location.partOf:type",
+          "valueString": "tree"
+        },
+        {
+          "name": "defaults:fields:Location.extension:facilityLocation.value[x]:valueReference:type",
+          "valueString": "tree"
+        },
+        {
+          "name": "defaults:fields:Location.partOf:user_filter:regex",
+          "valueString": "related-location=(.+)"
+        },
+        {
+          "name": "defaults:fields:Location.partOf:user_filter:replace",
+          "valueString": "$1"
+        },
+        {
+          "name": "workflow:processor:education:file",
+          "valueString": "../modules/workflows/workflowEducation"
+        },
+        {
+          "name": "workflow:questionnaire:education:url",
+          "valueString": "http://ihris.org/fhir/Questionnaire/ihris-education"
+        },
+        {
+          "name": "workflow:processor:license:file",
+          "valueString": "../modules/workflows/workflowLicense"
+        },
+        {
+          "name": "workflow:questionnaire:license:url",
+          "valueString": "http://ihris.org/fhir/Questionnaire/ihris-license"
+        },
+        {
+          "name": "workflow:processor:renewlicense:file",
+          "valueString": "../modules/workflows/workflowLicenseRenew"
+        },
+        {
+          "name": "workflow:questionnaire:renewlicense:url",
+          "valueString": "http://ihris.org/fhir/Questionnaire/ihris-license-renew"
+        },
+        {
+          "name": "workflow:processor:deployment:file",
+          "valueString": "../modules/workflows/workflowDeployment"
+        },
+        {
+          "name": "workflow:questionnaire:deployment:url",
+          "valueString": "http://ihris.org/fhir/Questionnaire/ihris-deployment"
+        },
+        {
+          "name": "workflow:processor:registration:file",
+          "valueString": "../modules/workflows/workflowRegistration"
+        },
+        {
+          "name": "workflow:questionnaire:registration:url",
+          "valueString": "http://ihris.org/fhir/Questionnaire/ihris-registration"
+        },
+        {
+          "name": "workflow:processor:conteducation:file",
+          "valueString": "../modules/workflows/workflowContEducation"
+        },
+        {
+          "name": "workflow:questionnaire:conteducation:url",
+          "valueString": "http://ihris.org/fhir/Questionnaire/ihris-conteducation"
+        },
+        {
+          "name": "workflow:processor:discipline:file",
+          "valueString": "../modules/workflows/workflowDiscipline"
+        },
+        {
+          "name": "workflow:questionnaire:discipline:url",
+          "valueString": "http://ihris.org/fhir/Questionnaire/ihris-discipline"
+        },
+        {
+          "name": "workflow:processor:training:file",
+          "valueString": "../modules/workflows/workflowTraining"
+        },
+        {
+          "name": "workflow:questionnaire:training:url",
+          "valueString": "http://ihris.org/fhir/Questionnaire/ihris-training"
+        },
+        {
+          "name": "workflow:processor:user:file",
+          "valueString": "../modules/workflows/workflowUser"
+        },
+        {
+          "name": "workflow:questionnaire:user:url",
+          "valueString": "http://ihris.org/fhir/Questionnaire/ihris-user"
+        },
+        {
+          "name": "workflow:processor:role:file",
+          "valueString": "../modules/workflows/workflowUserRole"
+        },
+        {
+          "name": "workflow:questionnaire:role:url",
+          "valueString": "http://ihris.org/fhir/Questionnaire/ihris-role"
+        },
+        {
+          "name": "workflow:processor:task:file",
+          "valueString": "../modules/workflows/workflowTask"
+        },
+        {
+          "name": "workflow:questionnaire:task:url",
+          "valueString": "http://ihris.org/fhir/Questionnaire/ihris-task"
+        },
+        {
+          "name": "workflow:processor:password:file",
+          "valueString": "../modules/workflows/workflowChangePassword"
+        },
+        {
+          "name": "workflow:questionnaire:password:url",
+          "valueString": "http://ihris.org/fhir/Questionnaire/ihris-change-password"
+        },
+        {
+          "name": "defaults:components:date-time:minValueDateTime",
+          "valueString": "1920-01-01"
+        },
+        {
+          "name": "defaults:components:date-time:maxValueDateTime",
+          "valueString": "2030-01-01"
+        },
+        {
+          "name": "defaults:components:date:minValueDate",
+          "valueString": "1920-01-01"
+        },
+        {
+          "name": "defaults:components:date:maxValueDate",
+          "valueString": "2030-01-01"
+        }
+      ]
+    }
+  ]
+}

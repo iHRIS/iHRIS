@@ -1,0 +1,43 @@
+{
+  "resourceType": "Questionnaire",
+  "id": "ihris-education",
+  "url": "http://ihris.org/fhir/Questionnaire/ihris-education",
+  "title": "iHRIS Education History Workflow",
+  "description": "iHRIS workflow to record a Education History",
+  "name": "ihris-education",
+  "status": "active",
+  "date": "2020-08-27",
+  "purpose": "Workflow page for recording a Education Information.",
+  "item": [
+    {
+      "linkId": "Basic",
+      "text": "Education Information",
+      "type": "group",
+      "item": [
+        {
+          "linkId": "Basic.extension[0].extension[0]",
+          "answerValueSet": "http://ihris.org/fhir/ValueSet/ihris-institution-valueset",
+          "text": "Institution",
+          "type": "choice",
+          "required": true,
+          "repeats": false
+        },
+        {
+          "linkId": "Basic.extension[0].extension[1]",
+          "text": "Academic Level",
+          "type": "choice",
+          "answerValueSet": "http://ihris.org/fhir/ValueSet/ihris-education-level-valueset",
+          "required": true,
+          "repeats": false
+        },
+        {
+          "linkId": "Basic.extension[0].extension[3]#year",
+          "text": "Year",
+          "type": "date",
+          "required": false,
+          "repeats": false
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,2264 @@
+{
+  "resourceType": "ImplementationGuide",
+  "id": "ihris",
+  "url": "http://ihris.org/fhir/ImplementationGuide/ihris",
+  "version": "0.1.0",
+  "name": "iHRISManageImplementationGuide",
+  "title": "iHRIS Manage Implementation Guide",
+  "status": "active",
+  "publisher": "Nobert Mijumbi",
+  "contact": [
+    {
+      "name": "Nobert Mijumbi",
+      "telecom": [
+        {
+          "system": "email",
+          "value": "nmijumbi@intrahealth.org"
+        }
+      ]
+    }
+  ],
+  "description": "Conformance resources that define the base installation of iHRIS Manage 5",
+  "packageId": "ihris",
+  "license": "CC0-1.0",
+  "fhirVersion": [
+    "4.0.1"
+  ],
+  "definition": {
+    "resource": [
+      {
+        "reference": {
+          "reference": "StructureDefinition/ihris-auditevent"
+        },
+        "name": "iHRIS Audit Event",
+        "description": "iHRIS profile for AuditEvent",
+        "exampleBoolean": false
+      },
+      {
+        "reference": {
+          "reference": "StructureDefinition/ihris-basic-discipline"
+        },
+        "name": "Discipline Information",
+        "description": "iHRIS Profile of the Basic resource for Discipline.",
+        "exampleBoolean": false
+      },
+      {
+        "reference": {
+          "reference": "StructureDefinition/ihris-basic-education-history"
+        },
+        "name": "Education History Information",
+        "description": "iHRIS Profile of the Basic resource for Education History.",
+        "exampleBoolean": false
+      },
+      {
+        "reference": {
+          "reference": "StructureDefinition/ihris-basic-emergency"
+        },
+        "name": "Emergency Information",
+        "description": "iHRIS Profile of the Basic resource for Emergency.",
+        "exampleBoolean": false
+      },
+      {
+        "reference": {
+          "reference": "StructureDefinition/ihris-basic-employment-history"
+        },
+        "name": "Work Experience Information",
+        "description": "iHRIS Profile of the Basic resource for Work Experience.",
+        "exampleBoolean": false
+      },
+      {
+        "reference": {
+          "reference": "StructureDefinition/ihris-basic-leave"
+        },
+        "name": "Leave Information",
+        "description": "iHRIS Profile of the Basic resource for Leave.",
+        "exampleBoolean": false
+      },
+      {
+        "reference": {
+          "reference": "StructureDefinition/ihris-basic-performance"
+        },
+        "name": "Performance Information",
+        "description": "iHRIS Profile of the Basic resource for Performance.",
+        "exampleBoolean": false
+      },
+      {
+        "reference": {
+          "reference": "StructureDefinition/ihris-basic-salary"
+        },
+        "name": "Salary Information",
+        "description": "iHRIS Profile of the Basic resource for Salary.",
+        "exampleBoolean": false
+      },
+      {
+        "reference": {
+          "reference": "StructureDefinition/ihris-document"
+        },
+        "name": "iHRIS Document",
+        "description": "iHRIS Profile of the DocumentReference resource to manage static documents.",
+        "exampleBoolean": false
+      },
+      {
+        "reference": {
+          "reference": "StructureDefinition/ihris-facility"
+        },
+        "name": "iHRIS Facility",
+        "description": "iHRIS Profile of Locations to manage facilities.",
+        "exampleBoolean": false
+      },
+      {
+        "reference": {
+          "reference": "StructureDefinition/ihris-job-description"
+        },
+        "name": "iHRIS Job Description",
+        "description": "iHRIS profile of Practitioner.",
+        "exampleBoolean": false
+      },
+      {
+        "reference": {
+          "reference": "StructureDefinition/ihris-jurisdiction"
+        },
+        "name": "Jurisdiction",
+        "description": "iHRIS Profile of Locations to manage jurisdictions.",
+        "exampleBoolean": false
+      },
+      {
+        "reference": {
+          "reference": "StructureDefinition/ihris-module"
+        },
+        "name": "iHRIS Module",
+        "description": "iHRIS profile of Library resource to manage modules.",
+        "exampleBoolean": false
+      },
+      {
+        "reference": {
+          "reference": "StructureDefinition/ihris-page"
+        },
+        "name": "iHRIS Page",
+        "description": "iHRIS Profile of the Basic resource to manage pages.",
+        "exampleBoolean": false
+      },
+      {
+        "reference": {
+          "reference": "StructureDefinition/ihris-parameters-local-config"
+        },
+        "name": "iHRIS Parameters Local Config",
+        "description": "Configuration Parameters to be loaded from a local file for iHRIS.",
+        "exampleBoolean": false
+      },
+      {
+        "reference": {
+          "reference": "StructureDefinition/ihris-parameters-remote-config"
+        },
+        "name": "iHRIS Parameters Remote Config",
+        "description": "Configuration Parameters to be loaded from a remote file for iHRIS.",
+        "exampleBoolean": false
+      },
+      {
+        "reference": {
+          "reference": "StructureDefinition/ihris-person-user"
+        },
+        "name": "System User",
+        "description": "iHRIS profile of the Person resource to manage user access.",
+        "exampleBoolean": false
+      },
+      {
+        "reference": {
+          "reference": "StructureDefinition/ihris-practitioner"
+        },
+        "name": "iHRIS Practitioner",
+        "description": "iHRIS profile of Practitioner.",
+        "exampleBoolean": false
+      },
+      {
+        "reference": {
+          "reference": "StructureDefinition/ihris-practitioner-basic"
+        },
+        "name": "iHRIS Practitioner Basic",
+        "description": "iHRIS Profile of the Basic resource to refer to a Practitioner.",
+        "exampleBoolean": false
+      },
+      {
+        "reference": {
+          "reference": "StructureDefinition/ihris-practitioner-role"
+        },
+        "name": "iHRIS Practitioner Role",
+        "description": "iHRIS profile of Practitioner Role.",
+        "exampleBoolean": false
+      },
+      {
+        "reference": {
+          "reference": "StructureDefinition/ihris-questionnaire"
+        },
+        "name": "iHRIS Questionnaire",
+        "description": "iHRIS Profile of the Questionnaire resource for data entry and validation.",
+        "exampleBoolean": false
+      },
+      {
+        "reference": {
+          "reference": "StructureDefinition/iHRISRelationship"
+        },
+        "name": "iHRIS Resources Relationship Profile",
+        "description": "iHRIS Resources Relationship Profile",
+        "exampleBoolean": false
+      },
+      {
+        "reference": {
+          "reference": "StructureDefinition/ihris-report"
+        },
+        "name": "iHRIS Report",
+        "description": "iHRIS Profile of the Basic resource to manage reports.",
+        "exampleBoolean": false
+      },
+      {
+        "reference": {
+          "reference": "StructureDefinition/ihris-role"
+        },
+        "name": "iHRIS Role",
+        "description": "iHRIS Profile of the Basic resource to manage roles.",
+        "exampleBoolean": false
+      },
+      {
+        "reference": {
+          "reference": "StructureDefinition/ihris-task"
+        },
+        "name": "iHRIS Task",
+        "description": "iHRIS Profile of the Basic resource to manage tasks.",
+        "exampleBoolean": false
+      },
+      {
+        "reference": {
+          "reference": "StructureDefinition/ihris-test-practitioner"
+        },
+        "name": "IhrisTestPractitioner",
+        "description": "iHRIS profile of Practitioner for tests.",
+        "exampleBoolean": false
+      },
+      {
+        "reference": {
+          "reference": "StructureDefinition/ihris-test-practitioner-role"
+        },
+        "name": "iHRIS Test Practitioner Role",
+        "description": "iHRIS Test profile of Practitioner Role.",
+        "exampleBoolean": false
+      },
+      {
+        "reference": {
+          "reference": "StructureDefinition/composite-task"
+        },
+        "name": "Composite Task",
+        "description": "Tasks Inheritance",
+        "exampleBoolean": false
+      },
+      {
+        "reference": {
+          "reference": "StructureDefinition/ihris-assign-role"
+        },
+        "name": "iHRIS Assign Role",
+        "description": "iHRIS Assign Role to a user or other role.",
+        "exampleBoolean": false
+      },
+      {
+        "reference": {
+          "reference": "StructureDefinition/ihris-assign-task"
+        },
+        "name": "iHRIS Assign Task",
+        "description": "iHRIS Assign Task to a user or other task.",
+        "exampleBoolean": false
+      },
+      {
+        "reference": {
+          "reference": "StructureDefinition/ihris-basic-name"
+        },
+        "name": "iHRIS Basic Name",
+        "description": "iHRIS name field for basic resources.",
+        "exampleBoolean": false
+      },
+      {
+        "reference": {
+          "reference": "StructureDefinition/ihris-discipline"
+        },
+        "name": "Discipline details",
+        "exampleBoolean": false
+      },
+      {
+        "reference": {
+          "reference": "StructureDefinition/ihris-education-history"
+        },
+        "name": "Education History details",
+        "exampleBoolean": false
+      },
+      {
+        "reference": {
+          "reference": "StructureDefinition/ihris-emergency"
+        },
+        "name": "Emergency details",
+        "exampleBoolean": false
+      },
+      {
+        "reference": {
+          "reference": "StructureDefinition/ihris-employment-history"
+        },
+        "name": "Work Experience details",
+        "exampleBoolean": false
+      },
+      {
+        "reference": {
+          "reference": "StructureDefinition/ihris-facility-information-details"
+        },
+        "name": "Ihris Facility Information Details",
+        "description": "Defines the primary resource of the facility information ",
+        "exampleBoolean": false
+      },
+      {
+        "reference": {
+          "reference": "StructureDefinition/ihris-facility-ownership-prefix"
+        },
+        "name": "iHRIS facility ownership type",
+        "description": "iHRIS extension for Personal Prefix.",
+        "exampleBoolean": false
+      },
+      {
+        "reference": {
+          "reference": "StructureDefinition/ihris-first-time-login"
+        },
+        "name": "Ihris first time login",
+        "description": "iHRIS first time login extension",
+        "exampleBoolean": false
+      },
+      {
+        "reference": {
+          "reference": "StructureDefinition/ihris-leave"
+        },
+        "name": "Leave details",
+        "exampleBoolean": false
+      },
+      {
+        "reference": {
+          "reference": "StructureDefinition/ihris-page-display"
+        },
+        "name": "iHRIS Page Display",
+        "description": "iHRIS Page Display details.",
+        "exampleBoolean": false
+      },
+      {
+        "reference": {
+          "reference": "StructureDefinition/ihris-page-section"
+        },
+        "name": "iHRIS Page Section",
+        "description": "iHRIS Page Section information.",
+        "exampleBoolean": false
+      },
+      {
+        "reference": {
+          "reference": "StructureDefinition/ihris-password"
+        },
+        "name": "iHRIS Password",
+        "description": "iHRIS password extension for local users.",
+        "exampleBoolean": false
+      },
+      {
+        "reference": {
+          "reference": "StructureDefinition/ihris-performance"
+        },
+        "name": "Performance details",
+        "exampleBoolean": false
+      },
+      {
+        "reference": {
+          "reference": "StructureDefinition/ihris-practitioner-dependent-detail"
+        },
+        "name": "iHRIS Practitioner Dependent Detail",
+        "description": "iHRIS extension for Practitioner Dependent Detail.",
+        "exampleBoolean": false
+      },
+      {
+        "reference": {
+          "reference": "StructureDefinition/ihris-practitioner-dependents"
+        },
+        "name": "iHRIS Practitioner Dependents",
+        "description": "iHRIS extension for Practitioner number of dependents.",
+        "exampleBoolean": false
+      },
+      {
+        "reference": {
+          "reference": "StructureDefinition/ihris-practitioner-language-proficiency"
+        },
+        "name": "iHRIS Practitioner Language Proficiency",
+        "description": "iHRIS extension for Practitioner Language Proficiency.",
+        "exampleBoolean": false
+      },
+      {
+        "reference": {
+          "reference": "StructureDefinition/ihris-practitioner-marital-status"
+        },
+        "name": "iHRIS Practitioner Marital Status",
+        "description": "iHRIS extension for Practitioner marital status.",
+        "exampleBoolean": false
+      },
+      {
+        "reference": {
+          "reference": "StructureDefinition/ihris-practitioner-nationality"
+        },
+        "name": "iHRIS Practitioner Nationality",
+        "description": "iHRIS extension for Practitioner nationality.",
+        "exampleBoolean": false
+      },
+      {
+        "reference": {
+          "reference": "StructureDefinition/ihris-practitioner-reference"
+        },
+        "name": "iHRIS Practitioner Reference",
+        "description": "iHRIS Practitioner Reference to link Basic resource to a Practitioner.",
+        "exampleBoolean": false
+      },
+      {
+        "reference": {
+          "reference": "StructureDefinition/ihris-practitioner-residence"
+        },
+        "name": "iHRIS Practitioner Residence",
+        "description": "iHRIS extension for Practitioner residence.",
+        "exampleBoolean": false
+      },
+      {
+        "reference": {
+          "reference": "StructureDefinition/ihris-practitionerrole-employment-status"
+        },
+        "name": "iHRIS Job Description Employment Status",
+        "description": "iHRIS extension for Job Description Employment Status.",
+        "exampleBoolean": false
+      },
+      {
+        "reference": {
+          "reference": "StructureDefinition/ihris-practitionerrole-first-employment-date"
+        },
+        "name": "iHRIS Job Description First Employment Date",
+        "description": "iHRIS extension for First Employment Date.",
+        "exampleBoolean": false
+      },
+      {
+        "reference": {
+          "reference": "StructureDefinition/ihris-practitionerrole-job-information-remark"
+        },
+        "name": "iHRIS Job Description Job Information Remark",
+        "description": "iHRIS extension for Job Information Remark.",
+        "exampleBoolean": false
+      },
+      {
+        "reference": {
+          "reference": "StructureDefinition/ihris-practitionerrole-job-type"
+        },
+        "name": "iHRIS Job Description Job Type",
+        "description": "iHRIS extension for Job Description Job Type.",
+        "exampleBoolean": false
+      },
+      {
+        "reference": {
+          "reference": "StructureDefinition/ihris-practitionerrole-position-status"
+        },
+        "name": "iHRIS Job Description Position Status",
+        "description": "iHRIS extension for Job Description Position Status.",
+        "exampleBoolean": false
+      },
+      {
+        "reference": {
+          "reference": "StructureDefinition/ihris-practitionerrole-reason-departure"
+        },
+        "name": "iHRIS Job Description Reason for Departure",
+        "description": "iHRIS extension for Job Description Reason for Departure.",
+        "exampleBoolean": false
+      },
+      {
+        "reference": {
+          "reference": "StructureDefinition/ihris-practitionerrole-salary"
+        },
+        "name": "iHRIS Job Description salary",
+        "description": "iHRIS extension for Job Information Salary.",
+        "exampleBoolean": false
+      },
+      {
+        "reference": {
+          "reference": "StructureDefinition/ihris-practitionerrole-salary-scale"
+        },
+        "name": "iHRIS Salary Scale",
+        "description": "iHRIS extension for Job Description Salary Scale.",
+        "exampleBoolean": false
+      },
+      {
+        "reference": {
+          "reference": "StructureDefinition/ihris-practitionerrole-shift"
+        },
+        "name": "iHRIS Job Description Shift",
+        "description": "iHRIS extension for Job Description Shift.",
+        "exampleBoolean": false
+      },
+      {
+        "reference": {
+          "reference": "StructureDefinition/iHRISReportDetails"
+        },
+        "name": "Details of a report",
+        "description": "Defines the primary resource of the relationship",
+        "exampleBoolean": false
+      },
+      {
+        "reference": {
+          "reference": "StructureDefinition/iHRISReportElement"
+        },
+        "name": "Resource Fields",
+        "description": "Lists fields of a resource to be displayed/cached",
+        "exampleBoolean": false
+      },
+      {
+        "reference": {
+          "reference": "StructureDefinition/iHRISReportLink"
+        },
+        "name": "Links to the primary resource",
+        "description": "Links to the primary resource",
+        "exampleBoolean": false
+      },
+      {
+        "reference": {
+          "reference": "StructureDefinition/ihris-resource-relationships"
+        },
+        "name": "iHRIS Resource Relationships",
+        "description": "iHRIS Resource Relationships",
+        "exampleBoolean": false
+      },
+      {
+        "reference": {
+          "reference": "StructureDefinition/ihris-role-primary"
+        },
+        "name": "iHRIS Role Primary",
+        "description": "iHRIS flag for roles to indicate a primary role for assignment to users.",
+        "exampleBoolean": false
+      },
+      {
+        "reference": {
+          "reference": "StructureDefinition/ihris-salary"
+        },
+        "name": "Salary details",
+        "exampleBoolean": false
+      },
+      {
+        "reference": {
+          "reference": "StructureDefinition/ihris-test-dependent"
+        },
+        "name": "iHRIS Practitioner Dependent Detail",
+        "description": "iHRIS Test extension for Practitioner Dependent Detail.",
+        "exampleBoolean": false
+      },
+      {
+        "reference": {
+          "reference": "StructureDefinition/ihris-test-residence"
+        },
+        "name": "iHRIS Practitioner Residence",
+        "description": "iHRIS Test extension for Practitioner residence.",
+        "exampleBoolean": false
+      },
+      {
+        "reference": {
+          "reference": "StructureDefinition/ihris-user-location"
+        },
+        "name": "iHRIS User Location",
+        "description": "iHRIS user Location extension for local users.",
+        "exampleBoolean": false
+      },
+      {
+        "reference": {
+          "reference": "StructureDefinition/ihris-user-otp"
+        },
+        "name": "Ihris User Otp",
+        "description": "iHRIS user otp extension",
+        "exampleBoolean": false
+      },
+      {
+        "reference": {
+          "reference": "StructureDefinition/ihris-user-practitioner"
+        },
+        "name": "iHRIS User Practitioner",
+        "description": "iHRIS user Practitioner extension for local users.",
+        "exampleBoolean": false
+      },
+      {
+        "reference": {
+          "reference": "StructureDefinition/task-attributes"
+        },
+        "name": "Task Attributes",
+        "description": "Task attributes.",
+        "exampleBoolean": false
+      },
+      {
+        "reference": {
+          "reference": "ValueSet/address-type"
+        },
+        "name": "AddressType",
+        "description": "The type of an address (physical / postal).",
+        "exampleBoolean": false
+      },
+      {
+        "reference": {
+          "reference": "ValueSet/address-use"
+        },
+        "name": "AddressUse",
+        "description": "The use of an address.",
+        "exampleBoolean": false
+      },
+      {
+        "reference": {
+          "reference": "ValueSet/administrative-gender"
+        },
+        "name": "AdministrativeGender",
+        "description": "The gender of a person used for administrative purposes.",
+        "exampleBoolean": false
+      },
+      {
+        "reference": {
+          "reference": "ValueSet/contactentity-type"
+        },
+        "name": "Contact entity type",
+        "description": "This example value set defines a set of codes that can be used to indicate the purpose for which you would contact a contact party.",
+        "exampleBoolean": false
+      },
+      {
+        "reference": {
+          "reference": "ValueSet/contact-point-system"
+        },
+        "name": "ContactPointSystem",
+        "description": "Telecommunications form for contact point.",
+        "exampleBoolean": false
+      },
+      {
+        "reference": {
+          "reference": "ValueSet/contact-point-use"
+        },
+        "name": "ContactPointUse",
+        "description": "Use of contact point.",
+        "exampleBoolean": false
+      },
+      {
+        "reference": {
+          "reference": "ValueSet/currencies"
+        },
+        "name": "CurrencyCode",
+        "description": "Currency codes from ISO 4217 (see https://www.iso.org/iso-4217-currency-codes.html)",
+        "exampleBoolean": false
+      },
+      {
+        "reference": {
+          "reference": "ValueSet/days-of-week"
+        },
+        "name": "DaysOfWeek",
+        "description": "The days of the week.",
+        "exampleBoolean": false
+      },
+      {
+        "reference": {
+          "reference": "ValueSet/v2-0360"
+        },
+        "name": "hl7VS-degreeLicenseCertificate",
+        "description": "Concepts specifying an educational degree (e.g., MD).  Used in the CNN datatype (names and identifiers of clinicians) in Version 2 messaging.  Used in Version 2 messaging; note that in releases of HL7 prior to 2.3.1, was also used in person names (XPN), but this use was deprecated, then withdrawn in 2.7.",
+        "exampleBoolean": false
+      },
+      {
+        "reference": {
+          "reference": "ValueSet/identifier-type"
+        },
+        "name": "IdentifierType",
+        "description": "A coded type for an identifier that can be used to determine which identifier to use for a specific purpose.",
+        "exampleBoolean": false
+      },
+      {
+        "reference": {
+          "reference": "ValueSet/identifier-use"
+        },
+        "name": "IdentifierUse",
+        "description": "Identifies the purpose for this identifier, if known .",
+        "exampleBoolean": false
+      },
+      {
+        "reference": {
+          "reference": "ValueSet/ihris-cadre"
+        },
+        "name": "iHRIS Cadre",
+        "description": "Sample iHRIS ValueSet for: IhrisCadre",
+        "exampleBoolean": false
+      },
+      {
+        "reference": {
+          "reference": "ValueSet/ihris-classification"
+        },
+        "name": "iHRIS Classification",
+        "description": "Sample iHRIS ValueSet for: IhrisClassification",
+        "exampleBoolean": false
+      },
+      {
+        "reference": {
+          "reference": "ValueSet/ihris-degree-valueset"
+        },
+        "name": "iHRIS Degree ValueSet",
+        "exampleBoolean": false
+      },
+      {
+        "reference": {
+          "reference": "ValueSet/ihris-document-category"
+        },
+        "name": "Code system for document categories.",
+        "exampleBoolean": false
+      },
+      {
+        "reference": {
+          "reference": "ValueSet/ihris-education-level-valueset"
+        },
+        "name": "iHRIS Education Level ValueSet",
+        "exampleBoolean": false
+      },
+      {
+        "reference": {
+          "reference": "ValueSet/ihris-educational-major-valueset"
+        },
+        "name": "iHRIS Educational Major ValueSet",
+        "exampleBoolean": false
+      },
+      {
+        "reference": {
+          "reference": "ValueSet/ihris-employment-status-valueset"
+        },
+        "name": "iHRIS Employment Status ValueSet",
+        "exampleBoolean": false
+      },
+      {
+        "reference": {
+          "reference": "ValueSet/ihris-discipline-action-type-valueset"
+        },
+        "name": "iHRIS Disciplinary Action Type ValueSet",
+        "exampleBoolean": false
+      },
+      {
+        "reference": {
+          "reference": "ValueSet/ihris-Facility-identifier-valueset"
+        },
+        "name": "iHRIS facility Identifier ValueSet",
+        "exampleBoolean": false
+      },
+      {
+        "reference": {
+          "reference": "ValueSet/Ihris-facility-ownership"
+        },
+        "name": "iHRIS Facility Ownership ValueSet",
+        "exampleBoolean": false
+      },
+      {
+        "reference": {
+          "reference": "ValueSet/ihris-facility-type"
+        },
+        "name": "iHRIS Facility Type ValueSet",
+        "exampleBoolean": false
+      },
+      {
+        "reference": {
+          "reference": "ValueSet/ihris-frequency-valueset"
+        },
+        "name": "iHRIS Frequency ValueSet",
+        "exampleBoolean": false
+      },
+      {
+        "reference": {
+          "reference": "ValueSet/ihris-institution-valueset"
+        },
+        "name": "iHRIS Institution Value Set",
+        "exampleBoolean": false
+      },
+      {
+        "reference": {
+          "reference": "ValueSet/ihris-job"
+        },
+        "name": "iHRIS Job",
+        "description": "Sample iHRIS ValueSet for: IhrisJob",
+        "exampleBoolean": false
+      },
+      {
+        "reference": {
+          "reference": "ValueSet/ihris-job-ethiopia"
+        },
+        "name": "iHRIS Job Title Value Set",
+        "description": "iHRIS ValueSet for: iHRISJobEthiopia",
+        "exampleBoolean": false
+      },
+      {
+        "reference": {
+          "reference": "ValueSet/ihris-job-type-valueset"
+        },
+        "name": "iHRIS Job Type ValueSet",
+        "exampleBoolean": false
+      },
+      {
+        "reference": {
+          "reference": "ValueSet/ihris-jurisdiction-type"
+        },
+        "name": "iHRIS Jurisdiction Type ValueSet",
+        "exampleBoolean": false
+      },
+      {
+        "reference": {
+          "reference": "ValueSet/ihris-leave-type-valueset"
+        },
+        "name": "iHRIS leave Type ValueSet",
+        "exampleBoolean": false
+      },
+      {
+        "reference": {
+          "reference": "ValueSet/ihris-performance-score-valueset"
+        },
+        "name": "iHRIS Performance Score ValueSet",
+        "exampleBoolean": false
+      },
+      {
+        "reference": {
+          "reference": "ValueSet/ihris-position-status"
+        },
+        "name": "iHRIS position Status",
+        "exampleBoolean": false
+      },
+      {
+        "reference": {
+          "reference": "ValueSet/ihris-reason-departure-valueset"
+        },
+        "name": "iHRIS Reason Departure ValueSet",
+        "exampleBoolean": false
+      },
+      {
+        "reference": {
+          "reference": "ValueSet/ihris-relation-valueset"
+        },
+        "name": "iHRIS Relationship ValueSet",
+        "exampleBoolean": false
+      },
+      {
+        "reference": {
+          "reference": "ValueSet/ihris-resource-valueset"
+        },
+        "name": "Value Set for iHRIS Basic Resources.",
+        "exampleBoolean": false
+      },
+      {
+        "reference": {
+          "reference": "ValueSet/ihris-salary-grade"
+        },
+        "name": "iHRIS Salary Grade",
+        "description": "Sample iHRIS ValueSet for: iHRISSalaryGrade",
+        "exampleBoolean": false
+      },
+      {
+        "reference": {
+          "reference": "ValueSet/ihris-salary-scale-valueset"
+        },
+        "name": "iHRIS Salary Scale ValueSet",
+        "exampleBoolean": false
+      },
+      {
+        "reference": {
+          "reference": "ValueSet/ihris-salary-source-valueset"
+        },
+        "name": "iHRIS Salary Source ValueSet",
+        "exampleBoolean": false
+      },
+      {
+        "reference": {
+          "reference": "ValueSet/ihris-shift-valueset"
+        },
+        "name": "iHRIS Shift Value Set",
+        "exampleBoolean": false
+      },
+      {
+        "reference": {
+          "reference": "ValueSet/ihris-task-permission"
+        },
+        "name": "Code system for task permissions.",
+        "exampleBoolean": false
+      },
+      {
+        "reference": {
+          "reference": "ValueSet/ihris-task-resource"
+        },
+        "name": "Code system for task permissions.",
+        "exampleBoolean": false
+      },
+      {
+        "reference": {
+          "reference": "ValueSet/location-mode"
+        },
+        "name": "LocationMode",
+        "description": "Indicates whether a resource instance represents a specific location or a class of locations.",
+        "exampleBoolean": false
+      },
+      {
+        "reference": {
+          "reference": "ValueSet/location-status"
+        },
+        "name": "LocationStatus",
+        "description": "Indicates whether the location is still in use.",
+        "exampleBoolean": false
+      },
+      {
+        "reference": {
+          "reference": "ValueSet/location-physical-type"
+        },
+        "name": "Location type",
+        "description": "This example value set defines a set of codes that can be used to indicate the physical form of the Location.",
+        "exampleBoolean": false
+      },
+      {
+        "reference": {
+          "reference": "ValueSet/name-use"
+        },
+        "name": "NameUse",
+        "description": "The use of a human name.",
+        "exampleBoolean": false
+      },
+      {
+        "reference": {
+          "reference": "ValueSet/organization-type"
+        },
+        "name": "Organization type",
+        "description": "This example value set defines a set of codes that can be used to indicate a type of organization.",
+        "exampleBoolean": false
+      },
+      {
+        "reference": {
+          "reference": "ValueSet/c80-practice-codes"
+        },
+        "name": "Practice Setting Code Value Set",
+        "description": "This is the code representing the clinical specialty of the clinician or provider who interacted with, treated, or provided a service to/for the patient. The value set used for clinical specialty has been limited by HITSP to the value set reproduced from HITSP C80 Table 2-149 Clinical Specialty Value Set Definition.",
+        "exampleBoolean": false
+      },
+      {
+        "reference": {
+          "reference": "ValueSet/service-category"
+        },
+        "name": "Service category",
+        "description": "This value set defines an example set of codes that can be used to classify groupings of service-types/specialties.",
+        "exampleBoolean": false
+      },
+      {
+        "reference": {
+          "reference": "ValueSet/service-provision-conditions"
+        },
+        "name": "ServiceProvisionConditions",
+        "description": "The code(s) that detail the conditions under which the healthcare service is available/offered.",
+        "exampleBoolean": false
+      },
+      {
+        "reference": {
+          "reference": "ValueSet/service-type"
+        },
+        "name": "Service type",
+        "description": "This value set defines an example set of codes of service-types.",
+        "exampleBoolean": false
+      },
+      {
+        "reference": {
+          "reference": "ValueSet/v3-ServiceDeliveryLocationRoleType"
+        },
+        "name": "V3 Value SetServiceDeliveryLocationRoleType",
+        "description": " A role of a place that further classifies the setting (e.g., accident site, road side, work site, community location) in which services are delivered.",
+        "exampleBoolean": false
+      },
+      {
+        "reference": {
+          "reference": "CodeSystem/address-type"
+        },
+        "name": "AddressType",
+        "description": "The type of an address (physical / postal).",
+        "exampleBoolean": false
+      },
+      {
+        "reference": {
+          "reference": "CodeSystem/address-use"
+        },
+        "name": "AddressUse",
+        "description": "The use of an address.",
+        "exampleBoolean": false
+      },
+      {
+        "reference": {
+          "reference": "CodeSystem/administrative-gender"
+        },
+        "name": "AdministrativeGender",
+        "description": "The gender of a person used for administrative purposes.",
+        "exampleBoolean": false
+      },
+      {
+        "reference": {
+          "reference": "CodeSystem/contactentity-type"
+        },
+        "name": "Contact entity type",
+        "description": "This example value set defines a set of codes that can be used to indicate the purpose for which you would contact a contact party.",
+        "exampleBoolean": false
+      },
+      {
+        "reference": {
+          "reference": "CodeSystem/contact-point-system"
+        },
+        "name": "ContactPointSystem",
+        "description": "Telecommunications form for contact point.",
+        "exampleBoolean": false
+      },
+      {
+        "reference": {
+          "reference": "CodeSystem/contact-point-use"
+        },
+        "name": "ContactPointUse",
+        "description": "Use of contact point.",
+        "exampleBoolean": false
+      },
+      {
+        "reference": {
+          "reference": "CodeSystem/currencies"
+        },
+        "name": "Code System for Currencies.",
+        "exampleBoolean": false
+      },
+      {
+        "reference": {
+          "reference": "CodeSystem/days-of-week"
+        },
+        "name": "DaysOfWeek",
+        "description": "The days of the week.",
+        "exampleBoolean": false
+      },
+      {
+        "reference": {
+          "reference": "CodeSystem/v2-0360"
+        },
+        "name": "degreeLicenseCertificate",
+        "description": "Code system of concepts specifying an educational degree (e.g., MD).  Used in the CNN datatype (names and identifiers of clinicians) in Version 2 messaging.  Used in HL7 Version 2.x messaging in the CNN segment; note that in releases of HL7 prior to 2.3.1, was also used in person names (XPN), but this use was deprecated, then withdrawn in 2.7.",
+        "exampleBoolean": false
+      },
+      {
+        "reference": {
+          "reference": "CodeSystem/v2-0203"
+        },
+        "name": "identifierType",
+        "description": "HL7-defined code system of concepts specifying type of identifier. Used in HL7 Version 2.x messaging data types CX, PLN, PPN, XCN and XON.",
+        "exampleBoolean": false
+      },
+      {
+        "reference": {
+          "reference": "CodeSystem/identifier-use"
+        },
+        "name": "IdentifierUse",
+        "description": "Identifies the purpose for this identifier, if known .",
+        "exampleBoolean": false
+      },
+      {
+        "reference": {
+          "reference": "CodeSystem/ihris-cadre"
+        },
+        "name": "iHRIS Cadre",
+        "description": "Sample iHRIS CodeSystem for: IhrisCadre",
+        "exampleBoolean": false
+      },
+      {
+        "reference": {
+          "reference": "CodeSystem/ihris-classification"
+        },
+        "name": "iHRIS Classification",
+        "description": "Sample iHRIS CodeSystem for: IhrisClassification",
+        "exampleBoolean": false
+      },
+      {
+        "reference": {
+          "reference": "CodeSystem/ihris-degree"
+        },
+        "name": "Degree",
+        "exampleBoolean": false
+      },
+      {
+        "reference": {
+          "reference": "CodeSystem/ihris-discipline-action-type-codesystem"
+        },
+        "name": "Disciplinary Action Type",
+        "exampleBoolean": false
+      },
+      {
+        "reference": {
+          "reference": "CodeSystem/ihris-document-category"
+        },
+        "name": "Code system for document categories.",
+        "exampleBoolean": false
+      },
+      {
+        "reference": {
+          "reference": "CodeSystem/ihris-education-level"
+        },
+        "name": "Education Level",
+        "exampleBoolean": false
+      },
+      {
+        "reference": {
+          "reference": "CodeSystem/ihris-educational-major-codesystem"
+        },
+        "name": "Educational Major",
+        "exampleBoolean": false
+      },
+      {
+        "reference": {
+          "reference": "CodeSystem/ihris-employment-status-codesystem"
+        },
+        "name": "iHRIS Employment Status CodeSystem",
+        "exampleBoolean": false
+      },
+      {
+        "reference": {
+          "reference": "CodeSystem/ihris-Facility-identifier"
+        },
+        "name": "Identifier Type",
+        "exampleBoolean": false
+      },
+      {
+        "reference": {
+          "reference": "CodeSystem/Ihris-facility-ownership-type"
+        },
+        "name": "Facility Ownership Type",
+        "exampleBoolean": false
+      },
+      {
+        "reference": {
+          "reference": "CodeSystem/ihris-facility-type"
+        },
+        "name": "Facility Type",
+        "exampleBoolean": false
+      },
+      {
+        "reference": {
+          "reference": "CodeSystem/ihris-frequency-codesystem"
+        },
+        "name": "Frequency",
+        "exampleBoolean": false
+      },
+      {
+        "reference": {
+          "reference": "CodeSystem/ihris-institution"
+        },
+        "name": "Institution",
+        "exampleBoolean": false
+      },
+      {
+        "reference": {
+          "reference": "CodeSystem/ihris-job"
+        },
+        "name": "iHRIS Job",
+        "description": "Sample iHRIS CodeSystem for: IhrisJob",
+        "exampleBoolean": false
+      },
+      {
+        "reference": {
+          "reference": "CodeSystem/ihris-job-ethiopia"
+        },
+        "name": "iHRIS Job Title Code System for Ethiopia",
+        "exampleBoolean": false
+      },
+      {
+        "reference": {
+          "reference": "CodeSystem/ihris-job-type-codesystem"
+        },
+        "name": "iHRIS Job Type CodeSystem",
+        "exampleBoolean": false
+      },
+      {
+        "reference": {
+          "reference": "CodeSystem/ihris-jurisdiction-type"
+        },
+        "name": "Jurisdiction Type",
+        "exampleBoolean": false
+      },
+      {
+        "reference": {
+          "reference": "CodeSystem/ihris-leave-type-codesystem"
+        },
+        "name": "Leave Type",
+        "exampleBoolean": false
+      },
+      {
+        "reference": {
+          "reference": "CodeSystem/ihris-performance-score"
+        },
+        "name": "Performance Score",
+        "exampleBoolean": false
+      },
+      {
+        "reference": {
+          "reference": "CodeSystem/ihris-position-status"
+        },
+        "name": "Position Status",
+        "exampleBoolean": false
+      },
+      {
+        "reference": {
+          "reference": "CodeSystem/ihris-reason-departure-codesystem"
+        },
+        "name": "Reason For Change/Departure",
+        "exampleBoolean": false
+      },
+      {
+        "reference": {
+          "reference": "CodeSystem/ihris-relation-codesystem"
+        },
+        "name": "Relationship",
+        "exampleBoolean": false
+      },
+      {
+        "reference": {
+          "reference": "CodeSystem/ihris-resource-codesystem"
+        },
+        "name": "Code System for iHRIS Basic Resources.",
+        "exampleBoolean": false
+      },
+      {
+        "reference": {
+          "reference": "CodeSystem/ihris-salary-grade"
+        },
+        "name": "iHRIS Salary Grade",
+        "description": "Sample iHRIS CodeSystem for: iHRISSalaryGrade",
+        "exampleBoolean": false
+      },
+      {
+        "reference": {
+          "reference": "CodeSystem/ihris-salary-scale-codesystem"
+        },
+        "name": "Salary Scale",
+        "exampleBoolean": false
+      },
+      {
+        "reference": {
+          "reference": "CodeSystem/ihris-salary-source-codesystem"
+        },
+        "name": "Salary Source",
+        "exampleBoolean": false
+      },
+      {
+        "reference": {
+          "reference": "CodeSystem/ihris-shift-codesystem"
+        },
+        "name": "iHRIS Shift Code System",
+        "exampleBoolean": false
+      },
+      {
+        "reference": {
+          "reference": "CodeSystem/ihris-task-permission"
+        },
+        "name": "Code system for task permissions.",
+        "exampleBoolean": false
+      },
+      {
+        "reference": {
+          "reference": "CodeSystem/ihris-task-resource"
+        },
+        "name": "Code system for task permissions.",
+        "exampleBoolean": false
+      },
+      {
+        "reference": {
+          "reference": "CodeSystem/ihris-test-codesystem"
+        },
+        "name": "iHRIS Test CodeSystem",
+        "exampleBoolean": false
+      },
+      {
+        "reference": {
+          "reference": "CodeSystem/location-mode"
+        },
+        "name": "LocationMode",
+        "description": "Indicates whether a resource instance represents a specific location or a class of locations.",
+        "exampleBoolean": false
+      },
+      {
+        "reference": {
+          "reference": "CodeSystem/location-status"
+        },
+        "name": "LocationStatus",
+        "description": "Indicates whether the location is still in use.",
+        "exampleBoolean": false
+      },
+      {
+        "reference": {
+          "reference": "CodeSystem/location-physical-type"
+        },
+        "name": "Location type",
+        "description": "This example value set defines a set of codes that can be used to indicate the physical form of the Location.",
+        "exampleBoolean": false
+      },
+      {
+        "reference": {
+          "reference": "CodeSystem/name-use"
+        },
+        "name": "NameUse",
+        "description": "The use of a human name.",
+        "exampleBoolean": false
+      },
+      {
+        "reference": {
+          "reference": "CodeSystem/organization-type"
+        },
+        "name": "Organization type",
+        "description": "This example value set defines a set of codes that can be used to indicate a type of organization.",
+        "exampleBoolean": false
+      },
+      {
+        "reference": {
+          "reference": "CodeSystem/snomedct"
+        },
+        "name": "SNOMED CT (all versions)",
+        "description": "SNOMED CT is the most comprehensive and precise clinical health terminology product in the world, owned and distributed around the world by The International Health Terminology Standards Development Organisation (IHTSDO).",
+        "exampleBoolean": false
+      },
+      {
+        "reference": {
+          "reference": "CodeSystem/service-category"
+        },
+        "name": "Service category",
+        "description": "This value set defines an example set of codes that can be used to classify groupings of service-types/specialties.",
+        "exampleBoolean": false
+      },
+      {
+        "reference": {
+          "reference": "CodeSystem/service-provision-conditions"
+        },
+        "name": "ServiceProvisionConditions",
+        "description": "The code(s) that detail the conditions under which the healthcare service is available/offered.",
+        "exampleBoolean": false
+      },
+      {
+        "reference": {
+          "reference": "CodeSystem/service-type"
+        },
+        "name": "Service type",
+        "description": "This value set defines an example set of codes of service-types.",
+        "exampleBoolean": false
+      },
+      {
+        "reference": {
+          "reference": "CodeSystem/v3-RoleCode"
+        },
+        "name": "v3 Code System RoleCode",
+        "description": " A set of codes further specifying the kind of Role; specific classification codes for further qualifying RoleClass codes.",
+        "exampleBoolean": false
+      },
+      {
+        "reference": {
+          "reference": "StructureDefinition/ContactPoint"
+        },
+        "name": "ContactPoint",
+        "exampleBoolean": false
+      },
+      {
+        "reference": {
+          "reference": "Bundle/Country"
+        },
+        "name": "Country",
+        "exampleBoolean": true
+      },
+      {
+        "reference": {
+          "reference": "SearchParameter/basic-location-constraint"
+        },
+        "name": "basic-location-constraint",
+        "exampleBoolean": false
+      },
+      {
+        "reference": {
+          "reference": "SearchParameter/basic-name"
+        },
+        "name": "basic-name",
+        "exampleBoolean": false
+      },
+      {
+        "reference": {
+          "reference": "SearchParameter/basic-practitioner"
+        },
+        "name": "basic-practitioner",
+        "exampleBoolean": false
+      },
+      {
+        "reference": {
+          "reference": "SearchParameter/basic-related-location"
+        },
+        "name": "basic-related-location",
+        "exampleBoolean": false
+      },
+      {
+        "reference": {
+          "reference": "SearchParameter/basic-related-practitioner"
+        },
+        "name": "basic-related-practitioner",
+        "exampleBoolean": false
+      },
+      {
+        "reference": {
+          "reference": "SearchParameter/employment-status-search"
+        },
+        "name": "employment-status-search",
+        "exampleBoolean": false
+      },
+      {
+        "reference": {
+          "reference": "SearchParameter/gofr-search-isbroadcast"
+        },
+        "name": "gofr-search-isbroadcast",
+        "exampleBoolean": false
+      },
+      {
+        "reference": {
+          "reference": "SearchParameter/gofr-search-isflowstart"
+        },
+        "name": "gofr-search-isflowstart",
+        "exampleBoolean": false
+      },
+      {
+        "reference": {
+          "reference": "Questionnaire/ihris-change-password"
+        },
+        "name": "IhrisChangePassword",
+        "exampleBoolean": false
+      },
+      {
+        "reference": {
+          "reference": "Parameters/ihris-config"
+        },
+        "name": "ihris-config",
+        "exampleCanonical": "http://ihris.org/fhir/StructureDefinition/ihris-parameters-remote-config"
+      },
+      {
+        "reference": {
+          "reference": "Parameters/ihris-dashboard"
+        },
+        "name": "ihris-dashboard",
+        "exampleCanonical": "http://ihris.org/fhir/StructureDefinition/ihris-parameters-remote-config"
+      },
+      {
+        "reference": {
+          "reference": "Questionnaire/ihris-discipline"
+        },
+        "name": "IhrisPractitionerWorkflowDiscipline",
+        "exampleBoolean": false
+      },
+      {
+        "reference": {
+          "reference": "Questionnaire/ihris-education-history"
+        },
+        "name": "IhrisPractitionerWorkflowEducationHistory",
+        "exampleBoolean": false
+      },
+      {
+        "reference": {
+          "reference": "Questionnaire/ihris-emergency"
+        },
+        "name": "IhrisPractitionerWorkflowEmergency",
+        "exampleBoolean": false
+      },
+      {
+        "reference": {
+          "reference": "Questionnaire/ihris-employment-history"
+        },
+        "name": "IhrisPractitionerWorkflowEmploymentHistory",
+        "exampleBoolean": false
+      },
+      {
+        "reference": {
+          "reference": "Questionnaire/ihris-endrole"
+        },
+        "name": "IhrisPractitionerWorkflowEndRole",
+        "exampleBoolean": false
+      },
+      {
+        "reference": {
+          "reference": "Basic/ihris-es-report-mhero-send-message"
+        },
+        "name": "iHRIS Relationship Example",
+        "exampleCanonical": "http://ihris.org/fhir/StructureDefinition/iHRISRelationship"
+      },
+      {
+        "reference": {
+          "reference": "Basic/ihris-es-report-staff"
+        },
+        "name": "Staff Relationship",
+        "exampleCanonical": "http://ihris.org/fhir/StructureDefinition/iHRISRelationship"
+      },
+      {
+        "reference": {
+          "reference": "Basic/ihris-es-report-staff-test"
+        },
+        "name": "Staff Relationship Test",
+        "exampleCanonical": "http://ihris.org/fhir/StructureDefinition/iHRISRelationship"
+      },
+      {
+        "reference": {
+          "reference": "Questionnaire/ihris-leave"
+        },
+        "name": "IhrisPractitionerWorkflowLeave",
+        "exampleBoolean": false
+      },
+      {
+        "reference": {
+          "reference": "Library/ihris-module-example"
+        },
+        "name": "iHRIS Module Example",
+        "exampleCanonical": "http://ihris.org/fhir/StructureDefinition/ihris-module"
+      },
+      {
+        "reference": {
+          "reference": "Basic/ihris-page-auditevent"
+        },
+        "name": "AuditEvent",
+        "exampleCanonical": "http://ihris.org/fhir/StructureDefinition/ihris-page"
+      },
+      {
+        "reference": {
+          "reference": "Basic/ihris-page-basic-education-history"
+        },
+        "name": "Education History",
+        "exampleCanonical": "http://ihris.org/fhir/StructureDefinition/ihris-page"
+      },
+      {
+        "reference": {
+          "reference": "Basic/ihris-page-cadre"
+        },
+        "name": "iHRIS Cadre CodeSystem Page",
+        "exampleCanonical": "http://ihris.org/fhir/StructureDefinition/ihris-page"
+      },
+      {
+        "reference": {
+          "reference": "Basic/ihris-page-classification"
+        },
+        "name": "iHRIS Classification CodeSystem Page",
+        "exampleCanonical": "http://ihris.org/fhir/StructureDefinition/ihris-page"
+      },
+      {
+        "reference": {
+          "reference": "Basic/ihris-page-degree"
+        },
+        "name": "iHRIS Degree CodeSystem Page",
+        "exampleCanonical": "http://ihris.org/fhir/StructureDefinition/ihris-page"
+      },
+      {
+        "reference": {
+          "reference": "Basic/ihris-page-discipline"
+        },
+        "name": "iHRIS Basic Discipline Page",
+        "exampleCanonical": "http://ihris.org/fhir/StructureDefinition/ihris-page"
+      },
+      {
+        "reference": {
+          "reference": "Basic/ihris-page-discipline-action-type"
+        },
+        "name": "iHRIS Discipline Action Type CodeSystem Page",
+        "exampleCanonical": "http://ihris.org/fhir/StructureDefinition/ihris-page"
+      },
+      {
+        "reference": {
+          "reference": "Basic/ihris-page-education-level"
+        },
+        "name": "iHRIS Education Level CodeSystem Page",
+        "exampleCanonical": "http://ihris.org/fhir/StructureDefinition/ihris-page"
+      },
+      {
+        "reference": {
+          "reference": "Basic/ihris-page-educational-major"
+        },
+        "name": "iHRIS Educational Major CodeSystem Page",
+        "exampleCanonical": "http://ihris.org/fhir/StructureDefinition/ihris-page"
+      },
+      {
+        "reference": {
+          "reference": "Basic/ihris-page-emergency"
+        },
+        "name": "iHRIS Basic Emergency Page",
+        "exampleCanonical": "http://ihris.org/fhir/StructureDefinition/ihris-page"
+      },
+      {
+        "reference": {
+          "reference": "Basic/ihris-page-employment-history"
+        },
+        "name": "iHRIS Basic Work Experience Page",
+        "exampleCanonical": "http://ihris.org/fhir/StructureDefinition/ihris-page"
+      },
+      {
+        "reference": {
+          "reference": "Basic/ihris-page-employment-status"
+        },
+        "name": "iHRIS Employment Status CodeSystem Page",
+        "exampleCanonical": "http://ihris.org/fhir/StructureDefinition/ihris-page"
+      },
+      {
+        "reference": {
+          "reference": "Basic/ihris-page-facility"
+        },
+        "name": "iHRIS Facility Page",
+        "exampleCanonical": "http://ihris.org/fhir/StructureDefinition/ihris-page"
+      },
+      {
+        "reference": {
+          "reference": "Basic/ihris-page-frequency"
+        },
+        "name": "iHRIS Pay Frequency CodeSystem Page",
+        "exampleCanonical": "http://ihris.org/fhir/StructureDefinition/ihris-page"
+      },
+      {
+        "reference": {
+          "reference": "Basic/ihris-page-identifier"
+        },
+        "name": "iHRIS Identifier type CodeSystem Page",
+        "exampleCanonical": "http://ihris.org/fhir/StructureDefinition/ihris-page"
+      },
+      {
+        "reference": {
+          "reference": "Basic/ihris-page-institution"
+        },
+        "name": "iHRIS Institution CodeSystem Page",
+        "exampleCanonical": "http://ihris.org/fhir/StructureDefinition/ihris-page"
+      },
+      {
+        "reference": {
+          "reference": "Basic/ihris-page-institution-type"
+        },
+        "name": "iHRIS Institution Type CodeSystem Page",
+        "exampleCanonical": "http://ihris.org/fhir/StructureDefinition/ihris-page"
+      },
+      {
+        "reference": {
+          "reference": "Basic/ihris-page-job"
+        },
+        "name": "iHRIS Job CodeSystem Page",
+        "exampleCanonical": "http://ihris.org/fhir/StructureDefinition/ihris-page"
+      },
+      {
+        "reference": {
+          "reference": "Basic/ihris-page-job-type"
+        },
+        "name": "iHRIS Job Type CodeSystem Page",
+        "exampleCanonical": "http://ihris.org/fhir/StructureDefinition/ihris-page"
+      },
+      {
+        "reference": {
+          "reference": "Basic/ihris-page-leave"
+        },
+        "name": "iHRIS Basic Leave Page",
+        "exampleCanonical": "http://ihris.org/fhir/StructureDefinition/ihris-page"
+      },
+      {
+        "reference": {
+          "reference": "Basic/ihris-page-leave-type"
+        },
+        "name": "iHRIS Leave Type CodeSystem Page",
+        "exampleCanonical": "http://ihris.org/fhir/StructureDefinition/ihris-page"
+      },
+      {
+        "reference": {
+          "reference": "Basic/ihris-page-location"
+        },
+        "name": "iHRIS Location Page",
+        "exampleCanonical": "http://ihris.org/fhir/StructureDefinition/ihris-page"
+      },
+      {
+        "reference": {
+          "reference": "Basic/ihris-page-performance"
+        },
+        "name": "iHRIS Basic Performance Page",
+        "exampleCanonical": "http://ihris.org/fhir/StructureDefinition/ihris-page"
+      },
+      {
+        "reference": {
+          "reference": "Basic/ihris-page-practitioner"
+        },
+        "name": "Practitioner",
+        "exampleCanonical": "http://ihris.org/fhir/StructureDefinition/ihris-page"
+      },
+      {
+        "reference": {
+          "reference": "Basic/ihris-page-practitionerrole"
+        },
+        "name": "iHRIS PractitionerRole Page",
+        "exampleCanonical": "http://ihris.org/fhir/StructureDefinition/ihris-page"
+      },
+      {
+        "reference": {
+          "reference": "Basic/ihris-page-reason-departure"
+        },
+        "name": "iHRIS Reason for Departure CodeSystem Page",
+        "exampleCanonical": "http://ihris.org/fhir/StructureDefinition/ihris-page"
+      },
+      {
+        "reference": {
+          "reference": "Basic/ihris-page-relation"
+        },
+        "name": "iHRIS relationship type CodeSystem Page",
+        "exampleCanonical": "http://ihris.org/fhir/StructureDefinition/ihris-page"
+      },
+      {
+        "reference": {
+          "reference": "Basic/ihris-page-role"
+        },
+        "name": "NHWR Roles",
+        "exampleCanonical": "http://ihris.org/fhir/StructureDefinition/ihris-page"
+      },
+      {
+        "reference": {
+          "reference": "Basic/ihris-page-salary"
+        },
+        "name": "iHRIS Basic Salary Page",
+        "exampleCanonical": "http://ihris.org/fhir/StructureDefinition/ihris-page"
+      },
+      {
+        "reference": {
+          "reference": "Basic/ihris-page-salary-grade"
+        },
+        "name": "iHRIS Salary Scale CodeSystem Page",
+        "exampleCanonical": "http://ihris.org/fhir/StructureDefinition/ihris-page"
+      },
+      {
+        "reference": {
+          "reference": "Basic/ihris-page-salary-ladder"
+        },
+        "name": "iHRIS Salary Ladder CodeSystem Page",
+        "exampleCanonical": "http://ihris.org/fhir/StructureDefinition/ihris-page"
+      },
+      {
+        "reference": {
+          "reference": "Basic/ihris-page-salary-scale"
+        },
+        "name": "iHRIS Salary Scale CodeSystem Page",
+        "exampleCanonical": "http://ihris.org/fhir/StructureDefinition/ihris-page"
+      },
+      {
+        "reference": {
+          "reference": "Basic/ihris-page-salary-source"
+        },
+        "name": "iHRIS Salary source CodeSystem Page",
+        "exampleCanonical": "http://ihris.org/fhir/StructureDefinition/ihris-page"
+      },
+      {
+        "reference": {
+          "reference": "Basic/ihris-page-salary-step"
+        },
+        "name": "iHRIS Salary Step CodeSystem Page",
+        "exampleCanonical": "http://ihris.org/fhir/StructureDefinition/ihris-page"
+      },
+      {
+        "reference": {
+          "reference": "Basic/ihris-page-shift"
+        },
+        "name": "iHRIS Shift CodeSystem Page",
+        "exampleCanonical": "http://ihris.org/fhir/StructureDefinition/ihris-page"
+      },
+      {
+        "reference": {
+          "reference": "Basic/ihris-page-task"
+        },
+        "name": "iHRIS Tasks",
+        "exampleCanonical": "http://ihris.org/fhir/StructureDefinition/ihris-page"
+      },
+      {
+        "reference": {
+          "reference": "Basic/ihris-page-test-codesystem"
+        },
+        "name": "iHRIS Test CodeSystem Page",
+        "exampleCanonical": "http://ihris.org/fhir/StructureDefinition/ihris-page"
+      },
+      {
+        "reference": {
+          "reference": "Basic/ihris-page-test-practitioner"
+        },
+        "name": "iHRIS Test Practitioner Page",
+        "exampleCanonical": "http://ihris.org/fhir/StructureDefinition/ihris-page"
+      },
+      {
+        "reference": {
+          "reference": "Basic/ihris-page-user"
+        },
+        "name": "User",
+        "exampleCanonical": "http://ihris.org/fhir/StructureDefinition/ihris-page"
+      },
+      {
+        "reference": {
+          "reference": "Questionnaire/ihris-performance"
+        },
+        "name": "IhrisPractitionerWorkflowPerformance",
+        "exampleBoolean": false
+      },
+      {
+        "reference": {
+          "reference": "Questionnaire/ihris-practitioner"
+        },
+        "name": "IhrisPractitionerQuestionnaire",
+        "exampleBoolean": false
+      },
+      {
+        "reference": {
+          "reference": "Questionnaire/ihris-promotion"
+        },
+        "name": "IhrisPractitionerWorkflowPromotion",
+        "exampleBoolean": false
+      },
+      {
+        "reference": {
+          "reference": "Questionnaire/ihris-role"
+        },
+        "name": "IhrisRole",
+        "exampleBoolean": false
+      },
+      {
+        "reference": {
+          "reference": "Basic/ihris-role-admin"
+        },
+        "name": "iHRIS Admin Role",
+        "exampleCanonical": "http://ihris.org/fhir/StructureDefinition/ihris-role"
+      },
+      {
+        "reference": {
+          "reference": "Basic/ihris-role-open"
+        },
+        "name": "iHRIS Open Role",
+        "exampleCanonical": "http://ihris.org/fhir/StructureDefinition/ihris-role"
+      },
+      {
+        "reference": {
+          "reference": "Basic/ihris-role-self"
+        },
+        "name": "iHRIS Self Service Role",
+        "exampleCanonical": "http://ihris.org/fhir/StructureDefinition/ihris-role"
+      },
+      {
+        "reference": {
+          "reference": "Questionnaire/ihris-salary"
+        },
+        "name": "IhrisPractitionerWorkflowSalary",
+        "exampleBoolean": false
+      },
+      {
+        "reference": {
+          "reference": "Questionnaire/ihris-task"
+        },
+        "name": "IhrisTask",
+        "exampleBoolean": false
+      },
+      {
+        "reference": {
+          "reference": "Basic/ihris-task-all-permissions-to-everything"
+        },
+        "name": "iHRIS Task With All Permissions To Everything",
+        "exampleCanonical": "http://ihris.org/fhir/StructureDefinition/ihris-task"
+      },
+      {
+        "reference": {
+          "reference": "Basic/ihris-task-navigation-evaluation"
+        },
+        "name": "iHRIS Task To Navigate to evaluation",
+        "exampleCanonical": "http://ihris.org/fhir/StructureDefinition/ihris-task"
+      },
+      {
+        "reference": {
+          "reference": "Basic/ihris-task-navigation-leave"
+        },
+        "name": "iHRIS Task To Navigate to Leave",
+        "exampleCanonical": "http://ihris.org/fhir/StructureDefinition/ihris-task"
+      },
+      {
+        "reference": {
+          "reference": "Basic/ihris-task-navigation-password"
+        },
+        "name": "iHRIS Task To Navigate to password",
+        "exampleCanonical": "http://ihris.org/fhir/StructureDefinition/ihris-task"
+      },
+      {
+        "reference": {
+          "reference": "Basic/ihris-task-navigation-profile"
+        },
+        "name": "iHRIS Task To Navigate to Profile",
+        "exampleCanonical": "http://ihris.org/fhir/StructureDefinition/ihris-task"
+      },
+      {
+        "reference": {
+          "reference": "Basic/ihris-task-read-basic-resource"
+        },
+        "name": "iHRIS Task To Read Basic resource",
+        "exampleCanonical": "http://ihris.org/fhir/StructureDefinition/ihris-task"
+      },
+      {
+        "reference": {
+          "reference": "Basic/ihris-task-read-code-system"
+        },
+        "name": "iHRIS Task To Read CodeSystem resource",
+        "exampleCanonical": "http://ihris.org/fhir/StructureDefinition/ihris-task"
+      },
+      {
+        "reference": {
+          "reference": "Basic/ihris-task-read-document-reference"
+        },
+        "name": "iHRIS Task To Read DocumentReference",
+        "exampleCanonical": "http://ihris.org/fhir/StructureDefinition/ihris-task"
+      },
+      {
+        "reference": {
+          "reference": "Basic/ihris-task-read-ihris-page-practitioner"
+        },
+        "name": "iHRIS Task To Read Practitioner Page",
+        "exampleCanonical": "http://ihris.org/fhir/StructureDefinition/ihris-task"
+      },
+      {
+        "reference": {
+          "reference": "Basic/ihris-task-read-ihris-page-practitioner-role"
+        },
+        "name": "iHRIS Task To Read PractitionerRole Page",
+        "exampleCanonical": "http://ihris.org/fhir/StructureDefinition/ihris-task"
+      },
+      {
+        "reference": {
+          "reference": "Basic/ihris-task-read-location-resource"
+        },
+        "name": "iHRIS Task To Read Location resource",
+        "exampleCanonical": "http://ihris.org/fhir/StructureDefinition/ihris-task"
+      },
+      {
+        "reference": {
+          "reference": "Basic/ihris-task-read-organization-resource"
+        },
+        "name": "iHRIS Task To Read Organization resource",
+        "exampleCanonical": "http://ihris.org/fhir/StructureDefinition/ihris-task"
+      },
+      {
+        "reference": {
+          "reference": "Basic/ihris-task-read-person-resource"
+        },
+        "name": "iHRIS Task To Read Person resource",
+        "exampleCanonical": "http://ihris.org/fhir/StructureDefinition/ihris-task"
+      },
+      {
+        "reference": {
+          "reference": "Basic/ihris-task-read-practitioner-resource"
+        },
+        "name": "iHRIS Task To Read Practitioner resource",
+        "exampleCanonical": "http://ihris.org/fhir/StructureDefinition/ihris-task"
+      },
+      {
+        "reference": {
+          "reference": "Basic/ihris-task-read-practitioner-role-resource"
+        },
+        "name": "iHRIS Task To Read PractitionerRole resource",
+        "exampleCanonical": "http://ihris.org/fhir/StructureDefinition/ihris-task"
+      },
+      {
+        "reference": {
+          "reference": "Basic/ihris-task-read-questionnaire-leave"
+        },
+        "name": "iHRIS Task To Read Questionnaire ihris-leave",
+        "exampleCanonical": "http://ihris.org/fhir/StructureDefinition/ihris-task"
+      },
+      {
+        "reference": {
+          "reference": "Basic/ihris-task-read-questionnaire-resource"
+        },
+        "name": "iHRIS Task To Read Questionnaire resource",
+        "exampleCanonical": "http://ihris.org/fhir/StructureDefinition/ihris-task"
+      },
+      {
+        "reference": {
+          "reference": "Basic/ihris-task-read-questionnaire-response-resource"
+        },
+        "name": "iHRIS Task To Read Questionnaire Response resource",
+        "exampleCanonical": "http://ihris.org/fhir/StructureDefinition/ihris-task"
+      },
+      {
+        "reference": {
+          "reference": "Basic/ihris-task-read-structure-definition"
+        },
+        "name": "iHRIS Task To Read StructureDefinition Resource",
+        "exampleCanonical": "http://ihris.org/fhir/StructureDefinition/ihris-task"
+      },
+      {
+        "reference": {
+          "reference": "Basic/ihris-task-read-value-set"
+        },
+        "name": "iHRIS Task To Read Valueset Resource",
+        "exampleCanonical": "http://ihris.org/fhir/StructureDefinition/ihris-task"
+      },
+      {
+        "reference": {
+          "reference": "Basic/ihris-task-write-basic-resource"
+        },
+        "name": "iHRIS Task To Write Basic resource",
+        "exampleCanonical": "http://ihris.org/fhir/StructureDefinition/ihris-task"
+      },
+      {
+        "reference": {
+          "reference": "Basic/ihris-task-write-code-system"
+        },
+        "name": "iHRIS Task To Write CodeSystem resource",
+        "exampleCanonical": "http://ihris.org/fhir/StructureDefinition/ihris-task"
+      },
+      {
+        "reference": {
+          "reference": "Basic/ihris-task-write-document-reference"
+        },
+        "name": "iHRIS Task To Write DocumentReference",
+        "exampleCanonical": "http://ihris.org/fhir/StructureDefinition/ihris-task"
+      },
+      {
+        "reference": {
+          "reference": "Basic/ihris-task-write-location-resource"
+        },
+        "name": "iHRIS Task To Write Location resource",
+        "exampleCanonical": "http://ihris.org/fhir/StructureDefinition/ihris-task"
+      },
+      {
+        "reference": {
+          "reference": "Basic/ihris-task-write-organization-resource"
+        },
+        "name": "iHRIS Task To Write Organization resource",
+        "exampleCanonical": "http://ihris.org/fhir/StructureDefinition/ihris-task"
+      },
+      {
+        "reference": {
+          "reference": "Basic/ihris-task-write-person-resource"
+        },
+        "name": "iHRIS Task To Write Person resource",
+        "exampleCanonical": "http://ihris.org/fhir/StructureDefinition/ihris-task"
+      },
+      {
+        "reference": {
+          "reference": "Basic/ihris-task-write-practitioner-resource"
+        },
+        "name": "iHRIS Task To Write Practitioner resource",
+        "exampleCanonical": "http://ihris.org/fhir/StructureDefinition/ihris-task"
+      },
+      {
+        "reference": {
+          "reference": "Basic/ihris-task-write-practitioner-role-resource"
+        },
+        "name": "iHRIS Task To Write PractitionerRole resource",
+        "exampleCanonical": "http://ihris.org/fhir/StructureDefinition/ihris-task"
+      },
+      {
+        "reference": {
+          "reference": "Basic/ihris-task-write-questionnaire-change-password"
+        },
+        "name": "iHRIS Task To Write Questionnaire ihris-password",
+        "exampleCanonical": "http://ihris.org/fhir/StructureDefinition/ihris-task"
+      },
+      {
+        "reference": {
+          "reference": "Basic/ihris-task-write-questionnaire-leave"
+        },
+        "name": "iHRIS Task To Write Questionnaire ihris-leave",
+        "exampleCanonical": "http://ihris.org/fhir/StructureDefinition/ihris-task"
+      },
+      {
+        "reference": {
+          "reference": "Basic/ihris-task-write-questionnaire-resource"
+        },
+        "name": "iHRIS Task To Write Questionnaire resource",
+        "exampleCanonical": "http://ihris.org/fhir/StructureDefinition/ihris-task"
+      },
+      {
+        "reference": {
+          "reference": "Basic/ihris-task-write-questionnaire-response-resource"
+        },
+        "name": "iHRIS Task To Write Questionnaire Response resource",
+        "exampleCanonical": "http://ihris.org/fhir/StructureDefinition/ihris-task"
+      },
+      {
+        "reference": {
+          "reference": "Basic/ihris-task-write-structure-definition"
+        },
+        "name": "iHRIS Task To Write StructureDefinition Resource",
+        "exampleCanonical": "http://ihris.org/fhir/StructureDefinition/ihris-task"
+      },
+      {
+        "reference": {
+          "reference": "Basic/ihris-task-write-value-set"
+        },
+        "name": "iHRIS Task To Write Valueset Resource",
+        "exampleCanonical": "http://ihris.org/fhir/StructureDefinition/ihris-task"
+      },
+      {
+        "reference": {
+          "reference": "Questionnaire/ihris-test"
+        },
+        "name": "IhrisTestQuestionnaire",
+        "exampleBoolean": false
+      },
+      {
+        "reference": {
+          "reference": "Questionnaire/ihris-user"
+        },
+        "name": "IhrisUser",
+        "exampleBoolean": false
+      },
+      {
+        "reference": {
+          "reference": "Person/ihris-user-admin"
+        },
+        "name": "ihris-user-admin",
+        "exampleCanonical": "http://ihris.org/fhir/StructureDefinition/ihris-person-user"
+      },
+      {
+        "reference": {
+          "reference": "Person/ihris-user-demo"
+        },
+        "name": "ihris-user-demo",
+        "exampleCanonical": "http://ihris.org/fhir/StructureDefinition/ihris-person-user"
+      },
+      {
+        "reference": {
+          "reference": "Person/ihris-user-loggedout"
+        },
+        "name": "ihris-user-loggedout",
+        "exampleCanonical": "http://ihris.org/fhir/StructureDefinition/ihris-person-user"
+      },
+      {
+        "reference": {
+          "reference": "SearchParameter/job-search"
+        },
+        "name": "job-search",
+        "exampleBoolean": false
+      },
+      {
+        "reference": {
+          "reference": "ValueSet/languages"
+        },
+        "name": "languages",
+        "exampleBoolean": false
+      },
+      {
+        "reference": {
+          "reference": "SearchParameter/leaveperiod-search"
+        },
+        "name": "leaveperiod-search",
+        "exampleBoolean": false
+      },
+      {
+        "reference": {
+          "reference": "SearchParameter/leavetype-search"
+        },
+        "name": "leavetype-search",
+        "exampleBoolean": false
+      },
+      {
+        "reference": {
+          "reference": "SearchParameter/location-related-location"
+        },
+        "name": "location-related-location",
+        "exampleBoolean": false
+      },
+      {
+        "reference": {
+          "reference": "DocumentReference/page-about"
+        },
+        "name": "iHRIS About Page",
+        "exampleCanonical": "http://ihris.org/fhir/StructureDefinition/ihris-document"
+      },
+      {
+        "reference": {
+          "reference": "DocumentReference/page-home"
+        },
+        "name": "page-home",
+        "exampleCanonical": "http://ihris.org/fhir/StructureDefinition/ihris-document"
+      },
+      {
+        "reference": {
+          "reference": "SearchParameter/performanceperiod-search"
+        },
+        "name": "performanceperiod-search",
+        "exampleBoolean": false
+      },
+      {
+        "reference": {
+          "reference": "SearchParameter/position-status-search"
+        },
+        "name": "position-status-search",
+        "exampleBoolean": false
+      },
+      {
+        "reference": {
+          "reference": "SearchParameter/practitioner-birthdate"
+        },
+        "name": "practitioner-birthdate",
+        "exampleBoolean": false
+      },
+      {
+        "reference": {
+          "reference": "SearchParameter/practitioner-employeeNumber"
+        },
+        "name": "practitioner-employeeNumber",
+        "exampleBoolean": false
+      },
+      {
+        "reference": {
+          "reference": "SearchParameter/practitioner-phone"
+        },
+        "name": "practitioner-phone",
+        "exampleBoolean": false
+      },
+      {
+        "reference": {
+          "reference": "SearchParameter/practitioner-related-location"
+        },
+        "name": "practitioner-related-location",
+        "exampleBoolean": false
+      },
+      {
+        "reference": {
+          "reference": "SearchParameter/practitioner-related-practitioner"
+        },
+        "name": "practitioner-related-practitioner",
+        "exampleBoolean": false
+      },
+      {
+        "reference": {
+          "reference": "SearchParameter/practitioner-renewrole"
+        },
+        "name": "practitioner-renewrole",
+        "exampleBoolean": false
+      },
+      {
+        "reference": {
+          "reference": "SearchParameter/practitionerrole-related-location"
+        },
+        "name": "practitionerrole-related-location",
+        "exampleBoolean": false
+      },
+      {
+        "reference": {
+          "reference": "SearchParameter/practitionerrole-related-practitioner"
+        },
+        "name": "practitionerrole-related-practitioner",
+        "exampleBoolean": false
+      }
+    ],
+    "page": {
+      "nameUrl": "toc.html",
+      "title": "Table of Contents",
+      "generation": "html",
+      "page": [
+        {
+          "nameUrl": "index.html",
+          "title": "Home",
+          "generation": "markdown"
+        }
+      ]
+    },
+    "parameter": [
+      {
+        "code": "copyrightyear",
+        "value": "2020+"
+      },
+      {
+        "code": "releaselabel",
+        "value": "CI Build"
+      },
+      {
+        "code": "show-inherited-invariants",
+        "value": "false"
+      }
+    ]
+  }
+}

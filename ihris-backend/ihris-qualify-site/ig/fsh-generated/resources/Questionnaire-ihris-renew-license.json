@@ -1,0 +1,46 @@
+{
+  "resourceType": "Questionnaire",
+  "id": "ihris-renew-license",
+  "meta": {
+    "profile": [
+      "http://ihris.org/fhir/StructureDefinition/ihris-questionnaire"
+    ]
+  },
+  "url": "http://ihris.org/fhir/Questionnaire/ihris-renew-license",
+  "title": "Renew License Workflow",
+  "description": "workflow to renew a license",
+  "name": "ihris-renew-license",
+  "status": "active",
+  "date": "2020-08-09",
+  "purpose": "Workflow page for renewing a license",
+  "item": [
+    {
+      "linkId": "Basic",
+      "text": "Renew License",
+      "type": "group",
+      "item": [
+        {
+          "linkId": "startDate",
+          "text": "Start Date",
+          "type": "date",
+          "required": true,
+          "repeats": false
+        },
+        {
+          "linkId": "endDate",
+          "text": "End Date",
+          "type": "date",
+          "required": true,
+          "repeats": false
+        },
+        {
+          "linkId": "serialNumber",
+          "text": "Serial Number",
+          "type": "string",
+          "required": false,
+          "repeats": false
+        }
+      ]
+    }
+  ]
+}

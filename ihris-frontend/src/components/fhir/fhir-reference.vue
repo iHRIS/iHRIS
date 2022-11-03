@@ -14,7 +14,7 @@
         <template v-slot:activator="{ on }">
           <v-text-field
             v-model="displayValue"
-            :label="$t(`App.fhir-reference.${display}`)"
+            :label="$t(`App.fhir-resources-texts.${display}`)"
             readonly
             v-on="on"
             outlined
@@ -23,7 +23,7 @@
             :error-messages="errors"
             :loading="loading"
             dense>
-            <template #label>{{$t(`App.fhir-reference.${display}`)}} <span v-if="required" class="red--text font-weight-bold">*</span></template>
+            <template #label>{{$t(`App.fhir-resources-texts.${display}`)}} <span v-if="required" class="red--text font-weight-bold">*</span></template>
           </v-text-field>
         </template>
         <v-card v-if="!((disabled) || (preset && $route.name === 'resource_add'))">
@@ -63,11 +63,11 @@
         :error-messages="errors"
         @change="errors = []"
       >
-        <template #label>{{$t(`App.fhir-reference.${display}`)}} <span v-if="required" class="red--text font-weight-bold">*</span></template>
+        <template #label>{{$t(`App.fhir-resources-texts.${display}`)}} <span v-if="required" class="red--text font-weight-bold">*</span></template>
       </v-autocomplete>
     </template>
     <template #header>
-      {{$t(`App.fhir-reference.${display}`)}}
+      {{$t(`App.fhir-resources-texts.${display}`)}}
     </template>
     <template #value>
       {{displayValue}}

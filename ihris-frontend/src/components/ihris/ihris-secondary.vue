@@ -78,7 +78,7 @@ export default {
   methods: {
     setupData: function() {
       this.translatedHeader =  this.columns.map((x)=> ({
-        text: this.$t(`App.fhir-resources-texts.table.${x.text}`),
+        text: this.$t(`App.fhir-resources-texts.${x.text}`),
         value: x.value
       }))
       /*

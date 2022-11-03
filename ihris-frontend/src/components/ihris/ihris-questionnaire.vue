@@ -74,7 +74,7 @@
           </v-list-item>
           <v-divider color="white"></v-divider>
           <v-subheader v-if="sectionMenu" class="white--text"
-          ><h2>{{ $t("App.hardcoded-texts.Section") }}</h2></v-subheader
+          ><h2>{{ $t("App.hardcoded-texts.Sections") }}</h2></v-subheader
           >
           <v-list-item
               v-for="section in sectionMenu"

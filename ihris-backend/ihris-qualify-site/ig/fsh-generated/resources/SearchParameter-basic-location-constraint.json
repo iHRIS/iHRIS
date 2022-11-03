@@ -1,0 +1,15 @@
+{
+  "resourceType": "SearchParameter",
+  "id": "basic-location-constraint",
+  "url": "http://ihris.org/fhir/SearchParameter/basic-related-location",
+  "name": "Search Parameter on related location constraint resources for role",
+  "status": "active",
+  "description": "Search by related location for a Basic resource Role.",
+  "code": "locationconstraint",
+  "base": [
+    "Basic"
+  ],
+  "type": "string",
+  "expression": "Basic.extension('http://ihris.org/fhir/StructureDefinition/ihris-task').extension('constraint')",
+  "xpathUsage": "normal"
+}

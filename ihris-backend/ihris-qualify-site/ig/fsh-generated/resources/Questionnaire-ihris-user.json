@@ -1,0 +1,158 @@
+{
+  "resourceType": "Questionnaire",
+  "id": "ihris-user",
+  "meta": {
+    "profile": [
+      "http://ihris.org/fhir/StructureDefinition/ihris-questionnaire"
+    ]
+  },
+  "url": "http://ihris.org/fhir/Questionnaire/ihris-user",
+  "item": [
+    {
+      "extension": [
+        {
+          "extension": [
+            {
+              "url": "key",
+              "valueId": "ihris-password-check"
+            },
+            {
+              "url": "severity",
+              "valueCode": "error"
+            },
+            {
+              "url": "expression",
+              "valueString": "where(linkId='password').answer.first().valueString = where(linkId='confrimpassword').answer.first().valueString"
+            },
+            {
+              "url": "human",
+              "valueString": "Please make sure Password and Confrim Password Match."
+            }
+          ],
+          "url": "http://hl7.org/fhir/StructureDefinition/questionnaire-constraint"
+        }
+      ],
+      "item": [
+        {
+          "extension": [
+            {
+              "extension": [
+                {
+                  "url": "key",
+                  "valueId": "ihris-name-check"
+                },
+                {
+                  "url": "severity",
+                  "valueCode": "error"
+                },
+                {
+                  "url": "expression",
+                  "valueString": "matches('^[A-Za-z ]*$')"
+                },
+                {
+                  "url": "human",
+                  "valueString": "Name must be only text."
+                }
+              ],
+              "url": "http://hl7.org/fhir/StructureDefinition/questionnaire-constraint"
+            }
+          ],
+          "linkId": "Person.name[0].text",
+          "text": "Name",
+          "type": "string",
+          "required": true,
+          "repeats": false
+        },
+        {
+          "linkId": "Person.name[0].use",
+          "text": "Use",
+          "type": "choice",
+          "required": true,
+          "repeats": false,
+          "readOnly": true,
+          "answerOption": [
+            {
+              "valueCoding": {
+                "code": "official",
+                "system": "http://hl7.org/fhir/name-use"
+              },
+              "initialSelected": true
+            }
+          ]
+        },
+        {
+          "linkId": "Person.telecom[0].system",
+          "text": "Telecom System",
+          "type": "choice",
+          "required": true,
+          "repeats": false,
+          "readOnly": true,
+          "answerOption": [
+            {
+              "valueCoding": {
+                "code": "email",
+                "system": "http://hl7.org/fhir/contact-point-system"
+              },
+              "initialSelected": true
+            }
+          ]
+        },
+        {
+          "extension": [
+            {
+              "extension": [
+                {
+                  "url": "key",
+                  "valueId": "ihris-email-check"
+                },
+                {
+                  "url": "severity",
+                  "valueCode": "error"
+                },
+                {
+                  "url": "expression",
+                  "valueString": "matches('^[0-9a-zA-Z_.]+@([0-9a-zA-Z]+[.])+[a-zA-Z]{2,4}$')"
+                },
+                {
+                  "url": "human",
+                  "valueString": "Email Address is not properly formatted."
+                }
+              ],
+              "url": "http://hl7.org/fhir/StructureDefinition/questionnaire-constraint"
+            }
+          ],
+          "linkId": "Person.telecom[0].value",
+          "text": "Email",
+          "type": "string",
+          "required": true,
+          "repeats": false
+        },
+        {
+          "linkId": "role",
+          "definition": "http://ihris.org/fhir/StructureDefinition/ihris-person-user#Person.extension:role.value[x]:valueReference",
+          "text": "Role",
+          "type": "reference",
+          "required": true,
+          "repeats": false
+        },
+        {
+          "linkId": "location",
+          "definition": "http://ihris.org/fhir/StructureDefinition/ihris-person-user#Person.extension:location.value[x]:valueReference",
+          "text": "Facility",
+          "type": "reference",
+          "required": true,
+          "repeats": false
+        }
+      ],
+      "linkId": "Person",
+      "text": "User",
+      "type": "group"
+    }
+  ],
+  "title": "iHRIS Users Workflow",
+  "description": "iHRIS workflow to record a Users",
+  "name": "ihris-user",
+  "status": "active",
+  "date": "2020-12-08",
+  "purpose": "Workflow page for recording a user's information."
+}

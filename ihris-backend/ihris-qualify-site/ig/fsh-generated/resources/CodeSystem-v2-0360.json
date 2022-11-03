@@ -1,0 +1,796 @@
+{
+  "resourceType": "CodeSystem",
+  "status": "active",
+  "content": "complete",
+  "name": "DegreeLicenseCertificate",
+  "id": "v2-0360",
+  "title": "degreeLicenseCertificate",
+  "description": "Code system of concepts specifying an educational degree (e.g., MD).  Used in the CNN datatype (names and identifiers of clinicians) in Version 2 messaging.  Used in HL7 Version 2.x messaging in the CNN segment; note that in releases of HL7 prior to 2.3.1, was also used in person names (XPN), but this use was deprecated, then withdrawn in 2.7.",
+  "version": "2.1.0",
+  "url": "http://terminology.hl7.org/CodeSystem/v2-0360",
+  "concept": [
+    {
+      "code": "PN",
+      "display": "Advanced Practice Nurse",
+      "definition": "Advanced Practice Nurse",
+      "id": "3594",
+      "property": [
+        {
+          "code": "status",
+          "valueCode": "A"
+        }
+      ]
+    },
+    {
+      "code": "AAS",
+      "display": "Associate of Applied Science",
+      "definition": "Associate of Applied Science",
+      "id": "3595",
+      "property": [
+        {
+          "code": "status",
+          "valueCode": "A"
+        }
+      ]
+    },
+    {
+      "code": "AA",
+      "display": "Associate of Arts",
+      "definition": "Associate of Arts",
+      "id": "3596",
+      "property": [
+        {
+          "code": "status",
+          "valueCode": "A"
+        }
+      ]
+    },
+    {
+      "code": "ABA",
+      "display": "Associate of Business Administration",
+      "definition": "Associate of Business Administration",
+      "id": "3597",
+      "property": [
+        {
+          "code": "status",
+          "valueCode": "A"
+        }
+      ]
+    },
+    {
+      "code": "AE",
+      "display": "Associate of Engineering",
+      "definition": "Associate of Engineering",
+      "id": "3598",
+      "property": [
+        {
+          "code": "status",
+          "valueCode": "A"
+        }
+      ]
+    },
+    {
+      "code": "AS",
+      "display": "Associate of Science",
+      "definition": "Associate of Science",
+      "id": "3599",
+      "property": [
+        {
+          "code": "status",
+          "valueCode": "A"
+        }
+      ]
+    },
+    {
+      "code": "BA",
+      "display": "Bachelor of Arts",
+      "definition": "Bachelor of Arts",
+      "id": "3600",
+      "property": [
+        {
+          "code": "status",
+          "valueCode": "A"
+        }
+      ]
+    },
+    {
+      "code": "BBA",
+      "display": "Bachelor of Business Administration",
+      "definition": "Bachelor of Business Administration",
+      "id": "3601",
+      "property": [
+        {
+          "code": "status",
+          "valueCode": "A"
+        }
+      ]
+    },
+    {
+      "code": "BE",
+      "display": "Bachelor or Engineering",
+      "definition": "Bachelor or Engineering",
+      "id": "3602",
+      "property": [
+        {
+          "code": "status",
+          "valueCode": "A"
+        }
+      ]
+    },
+    {
+      "code": "BFA",
+      "display": "Bachelor of Fine Arts",
+      "definition": "Bachelor of Fine Arts",
+      "id": "3603",
+      "property": [
+        {
+          "code": "status",
+          "valueCode": "A"
+        }
+      ]
+    },
+    {
+      "code": "BN",
+      "display": "Bachelor of Nursing",
+      "definition": "Bachelor of Nursing",
+      "id": "3604",
+      "property": [
+        {
+          "code": "status",
+          "valueCode": "A"
+        }
+      ]
+    },
+    {
+      "code": "BS",
+      "display": "Bachelor of Science",
+      "definition": "Bachelor of Science",
+      "id": "3605",
+      "property": [
+        {
+          "code": "status",
+          "valueCode": "A"
+        }
+      ]
+    },
+    {
+      "code": "BSL",
+      "display": "Bachelor of Science - Law",
+      "definition": "Bachelor of Science - Law",
+      "id": "3606",
+      "property": [
+        {
+          "code": "status",
+          "valueCode": "A"
+        }
+      ]
+    },
+    {
+      "code": "BSN",
+      "display": "Bachelor on Science - Nursing",
+      "definition": "Bachelor on Science - Nursing",
+      "id": "3607",
+      "property": [
+        {
+          "code": "status",
+          "valueCode": "A"
+        }
+      ]
+    },
+    {
+      "code": "BT",
+      "display": "Bachelor of Theology",
+      "definition": "Bachelor of Theology",
+      "id": "3608",
+      "property": [
+        {
+          "code": "status",
+          "valueCode": "A"
+        }
+      ]
+    },
+    {
+      "code": "CER",
+      "display": "Certificate",
+      "definition": "Certificate",
+      "id": "3609",
+      "property": [
+        {
+          "code": "status",
+          "valueCode": "A"
+        }
+      ]
+    },
+    {
+      "code": "CANP",
+      "display": "Certified Adult Nurse Practitioner",
+      "definition": "Certified Adult Nurse Practitioner",
+      "id": "3610",
+      "property": [
+        {
+          "code": "status",
+          "valueCode": "A"
+        }
+      ]
+    },
+    {
+      "code": "CMA",
+      "display": "Certified Medical Assistant",
+      "definition": "Certified Medical Assistant",
+      "id": "3611",
+      "property": [
+        {
+          "code": "status",
+          "valueCode": "A"
+        }
+      ]
+    },
+    {
+      "code": "CNP",
+      "display": "Certified Nurse Practitioner",
+      "definition": "Certified Nurse Practitioner",
+      "id": "3612",
+      "property": [
+        {
+          "code": "status",
+          "valueCode": "A"
+        }
+      ]
+    },
+    {
+      "code": "CNM",
+      "display": "Certified Nurse Midwife",
+      "definition": "Certified Nurse Midwife",
+      "id": "3613",
+      "property": [
+        {
+          "code": "status",
+          "valueCode": "A"
+        }
+      ]
+    },
+    {
+      "code": "CRN",
+      "display": "Certified Registered Nurse",
+      "definition": "Certified Registered Nurse",
+      "id": "3614",
+      "property": [
+        {
+          "code": "status",
+          "valueCode": "A"
+        }
+      ]
+    },
+    {
+      "code": "CNS",
+      "display": "Certified Nurse Specialist",
+      "definition": "Certified Nurse Specialist",
+      "id": "3615",
+      "property": [
+        {
+          "code": "status",
+          "valueCode": "A"
+        }
+      ]
+    },
+    {
+      "code": "CPNP",
+      "display": "Certified Pediatric Nurse Practitioner",
+      "definition": "Certified Pediatric Nurse Practitioner",
+      "id": "3616",
+      "property": [
+        {
+          "code": "status",
+          "valueCode": "A"
+        }
+      ]
+    },
+    {
+      "code": "CTR",
+      "display": "Certified Tumor Registrar",
+      "definition": "Certified Tumor Registrar",
+      "id": "3617",
+      "property": [
+        {
+          "code": "status",
+          "valueCode": "A"
+        }
+      ]
+    },
+    {
+      "code": "DIP",
+      "display": "Diploma",
+      "definition": "Diploma",
+      "id": "3618",
+      "property": [
+        {
+          "code": "status",
+          "valueCode": "A"
+        }
+      ]
+    },
+    {
+      "code": "DBA",
+      "display": "Doctor of Business Administration",
+      "definition": "Doctor of Business Administration",
+      "id": "3619",
+      "property": [
+        {
+          "code": "status",
+          "valueCode": "A"
+        }
+      ]
+    },
+    {
+      "code": "DED",
+      "display": "Doctor of Education",
+      "definition": "Doctor of Education",
+      "id": "3620",
+      "property": [
+        {
+          "code": "status",
+          "valueCode": "A"
+        }
+      ]
+    },
+    {
+      "code": "PharmD",
+      "display": "Doctor of Pharmacy",
+      "definition": "Doctor of Pharmacy",
+      "id": "3621",
+      "property": [
+        {
+          "code": "status",
+          "valueCode": "A"
+        }
+      ]
+    },
+    {
+      "code": "PHE",
+      "display": "Doctor of Engineering",
+      "definition": "Doctor of Engineering",
+      "id": "3622",
+      "property": [
+        {
+          "code": "status",
+          "valueCode": "A"
+        }
+      ]
+    },
+    {
+      "code": "PHD",
+      "display": "Doctor of Philosophy",
+      "definition": "Doctor of Philosophy",
+      "id": "3623",
+      "property": [
+        {
+          "code": "status",
+          "valueCode": "A"
+        }
+      ]
+    },
+    {
+      "code": "PHS",
+      "display": "Doctor of Science",
+      "definition": "Doctor of Science",
+      "id": "3624",
+      "property": [
+        {
+          "code": "status",
+          "valueCode": "A"
+        }
+      ]
+    },
+    {
+      "code": "MD",
+      "display": "Doctor of Medicine",
+      "definition": "Doctor of Medicine",
+      "id": "3625",
+      "property": [
+        {
+          "code": "status",
+          "valueCode": "A"
+        }
+      ]
+    },
+    {
+      "code": "DO",
+      "display": "Doctor of Osteopathy",
+      "definition": "Doctor of Osteopathy",
+      "id": "3626",
+      "property": [
+        {
+          "code": "status",
+          "valueCode": "A"
+        }
+      ]
+    },
+    {
+      "code": "EMT",
+      "display": "Emergency Medical Technician",
+      "definition": "Emergency Medical Technician",
+      "id": "3627",
+      "property": [
+        {
+          "code": "status",
+          "valueCode": "A"
+        }
+      ]
+    },
+    {
+      "code": "EMTP",
+      "display": "Emergency Medical Technician - Paramedic",
+      "definition": "Emergency Medical Technician - Paramedic",
+      "id": "3628",
+      "property": [
+        {
+          "code": "status",
+          "valueCode": "A"
+        }
+      ]
+    },
+    {
+      "code": "FPNP",
+      "display": "Family Practice Nurse Practitioner",
+      "definition": "Family Practice Nurse Practitioner",
+      "id": "3629",
+      "property": [
+        {
+          "code": "status",
+          "valueCode": "A"
+        }
+      ]
+    },
+    {
+      "code": "HS",
+      "display": "High School Graduate",
+      "definition": "High School Graduate",
+      "id": "3630",
+      "property": [
+        {
+          "code": "status",
+          "valueCode": "A"
+        }
+      ]
+    },
+    {
+      "code": "JD",
+      "display": "Juris Doctor",
+      "definition": "Juris Doctor",
+      "id": "3631",
+      "property": [
+        {
+          "code": "status",
+          "valueCode": "A"
+        }
+      ]
+    },
+    {
+      "code": "MA",
+      "display": "Master of Arts",
+      "definition": "Master of Arts",
+      "id": "3632",
+      "property": [
+        {
+          "code": "status",
+          "valueCode": "A"
+        }
+      ]
+    },
+    {
+      "code": "MBA",
+      "display": "Master of Business Administration",
+      "definition": "Master of Business Administration",
+      "id": "3633",
+      "property": [
+        {
+          "code": "status",
+          "valueCode": "A"
+        }
+      ]
+    },
+    {
+      "code": "MCE",
+      "display": "Master of Civil Engineering",
+      "definition": "Master of Civil Engineering",
+      "id": "3634",
+      "property": [
+        {
+          "code": "status",
+          "valueCode": "A"
+        }
+      ]
+    },
+    {
+      "code": "MDI",
+      "display": "Master of Divinity",
+      "definition": "Master of Divinity",
+      "id": "3635",
+      "property": [
+        {
+          "code": "status",
+          "valueCode": "A"
+        }
+      ]
+    },
+    {
+      "code": "MED",
+      "display": "Master of Education",
+      "definition": "Master of Education",
+      "id": "3636",
+      "property": [
+        {
+          "code": "status",
+          "valueCode": "A"
+        }
+      ]
+    },
+    {
+      "code": "MEE",
+      "display": "Master of Electrical Engineering",
+      "definition": "Master of Electrical Engineering",
+      "id": "3637",
+      "property": [
+        {
+          "code": "status",
+          "valueCode": "A"
+        }
+      ]
+    },
+    {
+      "code": "ME",
+      "display": "Master of Engineering",
+      "definition": "Master of Engineering",
+      "id": "3638",
+      "property": [
+        {
+          "code": "status",
+          "valueCode": "A"
+        }
+      ]
+    },
+    {
+      "code": "MFA",
+      "display": "Master of Fine Arts",
+      "definition": "Master of Fine Arts",
+      "id": "3639",
+      "property": [
+        {
+          "code": "status",
+          "valueCode": "A"
+        }
+      ]
+    },
+    {
+      "code": "MME",
+      "display": "Master of Mechanical Engineering",
+      "definition": "Master of Mechanical Engineering",
+      "id": "3640",
+      "property": [
+        {
+          "code": "status",
+          "valueCode": "A"
+        }
+      ]
+    },
+    {
+      "code": "MS",
+      "display": "Master of Science",
+      "definition": "Master of Science",
+      "id": "3641",
+      "property": [
+        {
+          "code": "status",
+          "valueCode": "A"
+        }
+      ]
+    },
+    {
+      "code": "MSL",
+      "display": "Master of Science - Law",
+      "definition": "Master of Science - Law",
+      "id": "3642",
+      "property": [
+        {
+          "code": "status",
+          "valueCode": "A"
+        }
+      ]
+    },
+    {
+      "code": "MSN",
+      "display": "Master of Science - Nursing",
+      "definition": "Master of Science - Nursing",
+      "id": "3643",
+      "property": [
+        {
+          "code": "status",
+          "valueCode": "A"
+        }
+      ]
+    },
+    {
+      "code": "MTH",
+      "display": "Master of Theology",
+      "definition": "Master of Theology",
+      "id": "3644",
+      "property": [
+        {
+          "code": "status",
+          "valueCode": "A"
+        }
+      ]
+    },
+    {
+      "code": "MDA",
+      "display": "Medical Assistant",
+      "definition": "Medical Assistant",
+      "id": "3645",
+      "property": [
+        {
+          "code": "status",
+          "valueCode": "A"
+        }
+      ]
+    },
+    {
+      "code": "MT",
+      "display": "Medical Technician",
+      "definition": "Medical Technician",
+      "id": "3646",
+      "property": [
+        {
+          "code": "status",
+          "valueCode": "A"
+        }
+      ]
+    },
+    {
+      "code": "NG",
+      "display": "Non-Graduate",
+      "definition": "Non-Graduate",
+      "id": "3647",
+      "property": [
+        {
+          "code": "status",
+          "valueCode": "A"
+        }
+      ]
+    },
+    {
+      "code": "NP",
+      "display": "Nurse Practitioner",
+      "definition": "Nurse Practitioner",
+      "id": "3648",
+      "property": [
+        {
+          "code": "status",
+          "valueCode": "A"
+        }
+      ]
+    },
+    {
+      "code": "PA",
+      "display": "Physician Assistant",
+      "definition": "Physician Assistant",
+      "id": "3649",
+      "property": [
+        {
+          "code": "status",
+          "valueCode": "A"
+        }
+      ]
+    },
+    {
+      "code": "RMA",
+      "display": "Registered Medical Assistant",
+      "definition": "Registered Medical Assistant",
+      "id": "3650",
+      "property": [
+        {
+          "code": "status",
+          "valueCode": "A"
+        }
+      ]
+    },
+    {
+      "code": "RN",
+      "display": "Registered Nurse",
+      "definition": "Registered Nurse",
+      "id": "3651",
+      "property": [
+        {
+          "code": "status",
+          "valueCode": "A"
+        }
+      ]
+    },
+    {
+      "code": "RPH",
+      "display": "Registered Pharmacist",
+      "definition": "Registered Pharmacist",
+      "id": "3652",
+      "property": [
+        {
+          "code": "status",
+          "valueCode": "A"
+        }
+      ]
+    },
+    {
+      "code": "SEC",
+      "display": "Secretarial Certificate",
+      "definition": "Secretarial Certificate",
+      "id": "3653",
+      "property": [
+        {
+          "code": "status",
+          "valueCode": "A"
+        }
+      ]
+    },
+    {
+      "code": "TS",
+      "display": "Trade School Graduate",
+      "definition": "Trade School Graduate",
+      "id": "3654",
+      "property": [
+        {
+          "code": "status",
+          "valueCode": "A"
+        }
+      ]
+    }
+  ],
+  "extension": [
+    {
+      "url": "http://hl7.org/fhir/StructureDefinition/structuredefinition-wg",
+      "valueCode": "inm"
+    },
+    {
+      "url": "http://hl7.org/fhir/StructureDefinition/structuredefinition-wg",
+      "valueCode": "oo"
+    }
+  ],
+  "identifier": [
+    {
+      "system": "urn:ietf:rfc:3986",
+      "value": "urn:oid:2.16.840.1.113883.18.220"
+    }
+  ],
+  "experimental": false,
+  "date": "2019-12-01",
+  "publisher": "HL7, Inc",
+  "contact": [
+    {
+      "telecom": [
+        {
+          "system": "url",
+          "value": "http://www.hl7.org/"
+        }
+      ]
+    }
+  ],
+  "purpose": "Underlying Master Code System for V2 table 0360 (Degree/License/Certificate)",
+  "copyright": "Copyright HL7. Licensed under creative commons public domain",
+  "caseSensitive": true,
+  "valueSet": "http://terminology.hl7.org/ValueSet/v2-0360",
+  "hierarchyMeaning": "is-a",
+  "compositional": false,
+  "versionNeeded": false,
+  "property": [
+    {
+      "code": "status",
+      "uri": "http://terminology.hl7.org/CodeSystem/utg-concept-properties#status",
+      "description": "Status of the concept",
+      "type": "code"
+    },
+    {
+      "code": "deprecated",
+      "uri": "http://terminology.hl7.org/CodeSystem/utg-concept-properties#v2-table-deprecated",
+      "description": "Version of HL7 in which the code was deprecated",
+      "type": "code"
+    }
+  ],
+  "count": 61
+}

@@ -1,0 +1,113 @@
+{
+  "resourceType": "Basic",
+  "id": "ihris-page-cont-education",
+  "meta": {
+    "profile": [
+      "http://ihris.org/fhir/StructureDefinition/ihris-page"
+    ]
+  },
+  "code": {
+    "coding": [
+      {
+        "code": "page",
+        "system": "http://ihris.org/fhir/CodeSystem/ihris-resource-codesystem"
+      }
+    ]
+  },
+  "extension": [
+    {
+      "url": "http://ihris.org/fhir/StructureDefinition/ihris-page-display",
+      "extension": [
+        {
+          "url": "resource",
+          "valueReference": {
+            "reference": "StructureDefinition/ihris-basic-cont-education"
+          }
+        },
+        {
+          "url": "search",
+          "valueString": "Course Name|extension.where(url='http://ihris.org/fhir/StructureDefinition/ihris-cont-education').extension.where(url='courseName').valueString"
+        },
+        {
+          "extension": [
+            {
+              "url": "field",
+              "valueString": "Basic.extension.where(url='http://ihris.org/fhir/StructureDefinition/ihris-training-reference').valueReference.reference"
+            },
+            {
+              "url": "url",
+              "valueUrl": "/resource/view/training/FIELD"
+            },
+            {
+              "url": "text",
+              "valueString": "View Training"
+            },
+            {
+              "url": "button",
+              "valueBoolean": true
+            },
+            {
+              "url": "icon",
+              "valueString": "mdi-account-arrow-right"
+            }
+          ],
+          "url": "link"
+        },
+        {
+          "extension": [
+            {
+              "url": "path",
+              "valueString": "Basic.extension:training.value[x]:valueReference"
+            },
+            {
+              "url": "readOnlyIfSet",
+              "valueBoolean": true
+            }
+          ],
+          "url": "field"
+        }
+      ]
+    },
+    {
+      "extension": [
+        {
+          "url": "title",
+          "valueString": "Continuing Education"
+        },
+        {
+          "url": "description",
+          "valueString": "Continuing Education details"
+        },
+        {
+          "url": "name",
+          "valueString": "Basic"
+        },
+        {
+          "url": "field",
+          "valueString": "Basic.extension:training"
+        },
+        {
+          "url": "field",
+          "valueString": "Basic.extension:conteducation.extension:provider.value[x]:valueString"
+        },
+        {
+          "url": "field",
+          "valueString": "Basic.extension:conteducation.extension:courseName.value[x]:valueString"
+        },
+        {
+          "url": "field",
+          "valueString": "Basic.extension:conteducation.extension:credits.value[x]:valueInterger"
+        },
+        {
+          "url": "field",
+          "valueString": "Basic.extension:conteducation.extension:startDate.value[x]:valueDate"
+        },
+        {
+          "url": "field",
+          "valueString": "Basic.extension:conteducation.extension:endDate.value[x]:valueDate"
+        }
+      ],
+      "url": "http://ihris.org/fhir/StructureDefinition/ihris-page-section"
+    }
+  ]
+}

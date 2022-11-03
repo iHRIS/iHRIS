@@ -1,0 +1,121 @@
+{
+  "resourceType": "Basic",
+  "id": "ihris-page-discipline",
+  "meta": {
+    "profile": [
+      "http://ihris.org/fhir/StructureDefinition/ihris-page"
+    ]
+  },
+  "code": {
+    "coding": [
+      {
+        "code": "page",
+        "system": "http://ihris.org/fhir/CodeSystem/ihris-resource-codesystem"
+      }
+    ]
+  },
+  "extension": [
+    {
+      "url": "http://ihris.org/fhir/StructureDefinition/ihris-page-display",
+      "extension": [
+        {
+          "url": "resource",
+          "valueReference": {
+            "reference": "StructureDefinition/ihris-basic-discipline"
+          }
+        },
+        {
+          "url": "search",
+          "valueString": "Practitioner|Basic.extension:practitioner"
+        },
+        {
+          "extension": [
+            {
+              "url": "field",
+              "valueString": "Basic.extension.where(url='http://ihris.org/fhir/StructureDefinition/ihris-practitioner-reference').valueReference.reference"
+            },
+            {
+              "url": "url",
+              "valueUrl": "/resource/view/practitioner/FIELD"
+            },
+            {
+              "url": "text",
+              "valueString": "View Health Worker"
+            },
+            {
+              "url": "button",
+              "valueBoolean": true
+            },
+            {
+              "url": "icon",
+              "valueString": "mdi-account-arrow-right"
+            }
+          ],
+          "url": "link"
+        },
+        {
+          "url": "search",
+          "valueString": "Action Date|Basic.extension:discipline.extension:actionDate.value[x]:valueDate"
+        },
+        {
+          "url": "search",
+          "valueString": "Suspended|Basic.extension:discipline.extension:suspend.value[x]:valueBoolean"
+        },
+        {
+          "url": "search",
+          "valueString": "Reason|Basic.extension:discipline.extension:reason.value[x]:valueString"
+        },
+        {
+          "extension": [
+            {
+              "url": "path",
+              "valueString": "Basic.extension:practitioner.value[x]:valueReference"
+            },
+            {
+              "url": "readOnlyIfSet",
+              "valueBoolean": true
+            }
+          ],
+          "url": "field"
+        }
+      ]
+    },
+    {
+      "extension": [
+        {
+          "url": "title",
+          "valueString": "Disciplinary Notice"
+        },
+        {
+          "url": "description",
+          "valueString": "Disciplinary Notice details"
+        },
+        {
+          "url": "name",
+          "valueString": "Basic"
+        },
+        {
+          "url": "field",
+          "valueString": "Basic.extension:practitioner"
+        },
+        {
+          "url": "field",
+          "valueString": "Basic.extension:discipline.extension:actionDate.value[x]:valueDate"
+        },
+        {
+          "url": "field",
+          "valueString": "Basic.extension:discipline.extension:reason.value[x]:valueString"
+        },
+        {
+          "url": "field",
+          "valueString": "Basic.extension:discipline.extension:remark.value[x]:valueString"
+        },
+        {
+          "url": "field",
+          "valueString": "Basic.extension:discipline.extension:suspend.value[x]:valueBoolean"
+        }
+      ],
+      "url": "http://ihris.org/fhir/StructureDefinition/ihris-page-section"
+    }
+  ]
+}

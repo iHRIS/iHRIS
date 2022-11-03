@@ -16,11 +16,11 @@
         dense
         @change="errors = []"
       >
-        <template #label>{{$t(`App.fhir-coding.${label}`)}} <span v-if="required" class="red--text font-weight-bold">*</span></template>
+        <template #label>{{$t(`App.fhir-resources-texts.${label}`)}} <span v-if="required" class="red--text font-weight-bold">*</span></template>
       </v-select>
     </template>
     <template #header>
-      {{$t(`App.fhir-coding.${display}`)}}
+      {{$t(`App.fhir-resources-texts.${display}`)}}
     </template>
     <template #value>
       {{valueDisplay || value.display || ""}}

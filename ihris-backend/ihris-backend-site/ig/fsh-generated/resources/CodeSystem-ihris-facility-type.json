@@ -1,0 +1,70 @@
+{
+  "resourceType": "CodeSystem",
+  "status": "active",
+  "content": "complete",
+  "name": "IhrisFacilityType",
+  "id": "ihris-facility-type",
+  "title": "Facility Type",
+  "version": "0.9.0",
+  "url": "http://ihris.org/fhir/CodeSystem/ihris-facility-type",
+  "concept": [
+    {
+      "code": "hospital",
+      "display": "Hospital"
+    },
+    {
+      "code": "HC",
+      "display": "Health Center"
+    },
+    {
+      "code": "HP",
+      "display": "Health Post"
+    },
+    {
+      "code": "LAB",
+      "display": "Laboratory"
+    },
+    {
+      "code": "IC",
+      "display": "Imaging Center"
+    },
+    {
+      "code": "SC",
+      "display": "Specaility Clinic"
+    },
+    {
+      "code": "CLC",
+      "display": "Clinic"
+    },
+    {
+      "code": "SPC",
+      "display": "Speciality Center"
+    },
+    {
+      "code": "PHARM",
+      "display": "Pharmacy"
+    },
+    {
+      "code": "HI",
+      "display": "Health Institution"
+    },
+    {
+      "code": "HSC",
+      "display": "Health Science College"
+    },
+    {
+      "code": "AGN",
+      "display": "Agencies"
+    },
+    {
+      "code": "NGOs",
+      "display": "NGOs"
+    },
+    {
+      "code": "ASSO",
+      "display": "Association"
+    }
+  ],
+  "date": "2022-02-25T08:41:04.362Z",
+  "count": 14
+}

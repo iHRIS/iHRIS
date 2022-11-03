@@ -1,0 +1,55 @@
+{
+  "resourceType": "Questionnaire",
+  "id": "ihris-conteducation",
+  "url": "http://ihris.org/fhir/Questionnaire/ihris-conteducation",
+  "title": "iHRIS Continuing Education Workflow",
+  "description": "iHRIS workflow to record a Continuing Education",
+  "name": "ihris-conteducation",
+  "status": "active",
+  "date": "2020-08-27",
+  "purpose": "Workflow page for recording a Continuing Education Information.",
+  "item": [
+    {
+      "linkId": "Basic",
+      "text": "Continuing Education Information",
+      "type": "group",
+      "item": [
+        {
+          "linkId": "Basic.extension[0].extension[0]",
+          "text": "Provider",
+          "type": "string",
+          "required": true,
+          "repeats": false
+        },
+        {
+          "linkId": "Basic.extension[0].extension[1]",
+          "text": "Course Name",
+          "type": "string",
+          "required": true,
+          "repeats": false
+        },
+        {
+          "linkId": "Basic.extension[0].extension[1]",
+          "text": "Credits",
+          "type": "integer",
+          "required": false,
+          "repeats": false
+        },
+        {
+          "linkId": "Basic.extension[0].extension[2]",
+          "text": "Start Date",
+          "type": "date",
+          "required": true,
+          "repeats": false
+        },
+        {
+          "linkId": "Basic.extension[0].extension[3]",
+          "text": "End Date",
+          "type": "date",
+          "required": true,
+          "repeats": false
+        }
+      ]
+    }
+  ]
+}

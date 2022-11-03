@@ -1,0 +1,38 @@
+{
+  "resourceType": "ValueSet",
+  "status": "active",
+  "name": "Hl7VSDegreeLicenseCertificate",
+  "id": "v2-0360",
+  "title": "hl7VS-degreeLicenseCertificate",
+  "description": "Concepts specifying an educational degree (e.g., MD).  Used in the CNN datatype (names and identifiers of clinicians) in Version 2 messaging.  Used in Version 2 messaging; note that in releases of HL7 prior to 2.3.1, was also used in person names (XPN), but this use was deprecated, then withdrawn in 2.7.",
+  "version": "2.0.0",
+  "url": "http://terminology.hl7.org/ValueSet/v2-0360",
+  "identifier": [
+    {
+      "system": "urn:ietf:rfc:3986",
+      "value": "urn:oid:2.16.840.1.113883.21.236"
+    }
+  ],
+  "experimental": false,
+  "date": "2019-12-01",
+  "publisher": "HL7, Inc",
+  "contact": [
+    {
+      "telecom": [
+        {
+          "system": "url",
+          "value": "https://github.com/HL7/UTG"
+        }
+      ]
+    }
+  ],
+  "copyright": "Copyright HL7. Licensed under creative commons public domain",
+  "compose": {
+    "include": [
+      {
+        "system": "http://terminology.hl7.org/CodeSystem/v2-0360",
+        "version": "2.1.0"
+      }
+    ]
+  }
+}

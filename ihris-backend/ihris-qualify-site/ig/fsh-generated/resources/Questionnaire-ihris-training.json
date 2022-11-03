@@ -1,0 +1,49 @@
+{
+  "resourceType": "Questionnaire",
+  "id": "ihris-training",
+  "url": "http://ihris.org/fhir/Questionnaire/ihris-training",
+  "title": "iHRIS Training History Workflow",
+  "description": "iHRIS workflow to record a Training History",
+  "name": "ihris-training",
+  "status": "active",
+  "date": "2020-08-27",
+  "purpose": "Workflow page for recording a Training Information.",
+  "item": [
+    {
+      "linkId": "Basic",
+      "text": "Training Information",
+      "type": "group",
+      "item": [
+        {
+          "linkId": "Basic.extension[0].extension[0]",
+          "answerValueSet": "http://ihris.org/fhir/ValueSet/ihris-training-institution-valueset",
+          "text": "Institution",
+          "type": "choice",
+          "required": true,
+          "repeats": false
+        },
+        {
+          "linkId": "Basic.extension[0].extension[1]",
+          "text": "Index number",
+          "type": "string",
+          "required": true,
+          "repeats": false
+        },
+        {
+          "linkId": "Basic.extension[0].extension[2]",
+          "text": "Intake Date",
+          "type": "date",
+          "required": true,
+          "repeats": false
+        },
+        {
+          "linkId": "Basic.extension[0].extension[3]",
+          "text": "Graduation Date",
+          "type": "date",
+          "required": true,
+          "repeats": false
+        }
+      ]
+    }
+  ]
+}

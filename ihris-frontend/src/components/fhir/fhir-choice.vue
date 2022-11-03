@@ -14,7 +14,7 @@
       dense
       @change="errors = []"
       >
-      <template #label>{{$t(`App.fhir-choice.${label}`)}} <span v-if="required" class="red--text font-weight-bold">*</span></template>
+      <template #label>{{$t(`App.fhir-resources-texts.${label}`)}} <span v-if="required" class="red--text font-weight-bold">*</span></template>
     </v-select>
   </v-container>
 </template>

@@ -1,0 +1,466 @@
+{
+  "resourceType": "Basic",
+  "id": "ihris-page-training",
+  "meta": {
+    "profile": [
+      "http://ihris.org/fhir/StructureDefinition/ihris-page"
+    ]
+  },
+  "code": {
+    "coding": [
+      {
+        "code": "page",
+        "system": "http://ihris.org/fhir/CodeSystem/ihris-resource-codesystem"
+      }
+    ]
+  },
+  "extension": [
+    {
+      "url": "http://ihris.org/fhir/StructureDefinition/ihris-page-display",
+      "extension": [
+        {
+          "url": "resource",
+          "valueReference": {
+            "reference": "StructureDefinition/ihris-basic-training"
+          }
+        },
+        {
+          "url": "search",
+          "valueString": "Institution|extension.where(url='http://ihris.org/fhir/StructureDefinition/ihris-training').extension.where(url='institution').valueReference.reference"
+        },
+        {
+          "extension": [
+            {
+              "url": "field",
+              "valueString": "Basic.extension.where(url='http://ihris.org/fhir/StructureDefinition/ihris-practitioner-reference').valueReference.reference"
+            },
+            {
+              "url": "url",
+              "valueUrl": "/resource/view/practitioner/FIELD"
+            },
+            {
+              "url": "text",
+              "valueString": "View Health Worker"
+            },
+            {
+              "url": "button",
+              "valueBoolean": true
+            },
+            {
+              "url": "icon",
+              "valueString": "mdi-account-arrow-right"
+            }
+          ],
+          "url": "link"
+        },
+        {
+          "extension": [
+            {
+              "url": "field",
+              "valueString": "Basic.extension.where(url='http://ihris.org/fhir/StructureDefinition/ihris-practitioner-reference').valueReference.reference"
+            },
+            {
+              "url": "url",
+              "valueUrl": "/questionnaire/ihris-training/basic-training?practitioner=FIELD"
+            },
+            {
+              "url": "text",
+              "valueString": "Add Another"
+            },
+            {
+              "url": "button",
+              "valueBoolean": true
+            },
+            {
+              "url": "icon",
+              "valueString": "mdi-account-arrow-right"
+            }
+          ],
+          "url": "link"
+        },
+        {
+          "url": "search",
+          "valueString": "Academic Level|extension.where(url='http://ihris.org/fhir/StructureDefinition/ihris-training').extension.where(url='academicLevel').valueCoding.display"
+        },
+        {
+          "url": "search",
+          "valueString": "Year|extension.where(url='http://ihris.org/fhir/StructureDefinition/ihris-training').extension.where(url='year').valueDate"
+        },
+        {
+          "extension": [
+            {
+              "url": "path",
+              "valueString": "Basic.extension:practitioner.value[x]:valueReference"
+            },
+            {
+              "url": "readOnlyIfSet",
+              "valueBoolean": true
+            }
+          ],
+          "url": "field"
+        },
+        {
+          "extension": [
+            {
+              "url": "path",
+              "valueString": "Basic.extension:training.extension:year.value[x]:valueDate"
+            },
+            {
+              "url": "type",
+              "valueString": "year"
+            }
+          ],
+          "url": "field"
+        }
+      ]
+    },
+    {
+      "extension": [
+        {
+          "url": "title",
+          "valueString": "Training Information"
+        },
+        {
+          "url": "description",
+          "valueString": "Training Information details"
+        },
+        {
+          "url": "name",
+          "valueString": "Basic"
+        },
+        {
+          "url": "field",
+          "valueString": "Basic.extension:practitioner"
+        },
+        {
+          "url": "field",
+          "valueString": "Basic.extension:training.extension:institution.value[x]:valueCoding"
+        },
+        {
+          "url": "field",
+          "valueString": "Basic.extension:training.extension:indexNumber.value[x]:valueString"
+        },
+        {
+          "url": "field",
+          "valueString": "Basic.extension:training.extension:intakeDate.value[x]:valueDate"
+        },
+        {
+          "url": "field",
+          "valueString": "Basic.extension:training.extension:gradDate.value[x]:valueDate"
+        }
+      ],
+      "url": "http://ihris.org/fhir/StructureDefinition/ihris-page-section"
+    },
+    {
+      "extension": [
+        {
+          "url": "title",
+          "valueString": "Registration"
+        },
+        {
+          "url": "description",
+          "valueString": "Registration for this training"
+        },
+        {
+          "url": "name",
+          "valueString": "registration"
+        },
+        {
+          "extension": [
+            {
+              "url": "resource",
+              "valueReference": {
+                "reference": "StructureDefinition/ihris-basic-registration"
+              }
+            },
+            {
+              "url": "linkfield",
+              "valueString": "Basic.extension.where(url='http://ihris.org/fhir/StructureDefinition/ihris-training-reference').valueReference.reference"
+            },
+            {
+              "url": "column",
+              "extension": [
+                {
+                  "url": "header",
+                  "valueString": "Registration Number"
+                },
+                {
+                  "url": "field",
+                  "valueString": "extension.where(url='http://ihris.org/fhir/StructureDefinition/ihris-registraion').extension.where(url='registrationNumber').valueString"
+                }
+              ]
+            },
+            {
+              "url": "searchfield",
+              "valueString": "training"
+            },
+            {
+              "extension": [
+                {
+                  "url": "header",
+                  "valueString": "Cadre"
+                },
+                {
+                  "url": "field",
+                  "valueString": "extension.where(url='http://ihris.org/fhir/StructureDefinition/ihris-registraion').extension.where(url='cadre').valueCoding.display"
+                }
+              ],
+              "url": "column"
+            },
+            {
+              "extension": [
+                {
+                  "url": "header",
+                  "valueString": "Registration Date"
+                },
+                {
+                  "url": "field",
+                  "valueString": "extension.where(url='http://ihris.org/fhir/StructureDefinition/ihris-registraion').extension.where(url='registrationDate').valueDate"
+                }
+              ],
+              "url": "column"
+            },
+            {
+              "extension": [
+                {
+                  "url": "header",
+                  "valueString": "Serial Number"
+                },
+                {
+                  "url": "field",
+                  "valueString": "extension.where(url='http://ihris.org/fhir/StructureDefinition/ihris-registraion').extension.where(url='serialNumber').valueString"
+                }
+              ],
+              "url": "column"
+            },
+            {
+              "extension": [
+                {
+                  "url": "header",
+                  "valueString": "Actions"
+                },
+                {
+                  "url": "field",
+                  "valueString": "_action"
+                }
+              ],
+              "url": "column"
+            },
+            {
+              "extension": [
+                {
+                  "url": "link",
+                  "valueString": "/questionnaire/ihris-registration/registration?training=FHIRID"
+                },
+                {
+                  "url": "text",
+                  "valueString": "Add Registration"
+                },
+                {
+                  "url": "row",
+                  "valueBoolean": false
+                },
+                {
+                  "url": "emptyDisplay",
+                  "valueBoolean": true
+                },
+                {
+                  "url": "condition",
+                  "valueString": "Basic.extension.where(url='http://ihris.org/fhir/StructureDefinition/ihris-registraion').extension.where(url='registrationNumber').valueString.exists()"
+                },
+                {
+                  "url": "class",
+                  "valueString": "primary"
+                }
+              ],
+              "url": "action"
+            },
+            {
+              "extension": [
+                {
+                  "url": "link",
+                  "valueString": "/resource/view/registration/ITEMID"
+                },
+                {
+                  "url": "text",
+                  "valueString": "View"
+                },
+                {
+                  "url": "row",
+                  "valueBoolean": true
+                },
+                {
+                  "url": "class",
+                  "valueString": "primary"
+                }
+              ],
+              "url": "action"
+            }
+          ],
+          "url": "resource"
+        }
+      ],
+      "url": "http://ihris.org/fhir/StructureDefinition/ihris-page-section"
+    },
+    {
+      "extension": [
+        {
+          "url": "title",
+          "valueString": "Continuing Education"
+        },
+        {
+          "url": "description",
+          "valueString": "Continuing Education for this training"
+        },
+        {
+          "url": "name",
+          "valueString": "conteducation"
+        },
+        {
+          "extension": [
+            {
+              "url": "resource",
+              "valueReference": {
+                "reference": "StructureDefinition/ihris-basic-cont-education"
+              }
+            },
+            {
+              "url": "linkfield",
+              "valueString": "Basic.extension.where(url='http://ihris.org/fhir/StructureDefinition/ihris-training-reference').valueReference.reference"
+            },
+            {
+              "url": "column",
+              "extension": [
+                {
+                  "url": "header",
+                  "valueString": "Provider"
+                },
+                {
+                  "url": "field",
+                  "valueString": "extension.where(url='http://ihris.org/fhir/StructureDefinition/ihris-cont-education').extension.where(url='provider').valueString"
+                }
+              ]
+            },
+            {
+              "url": "searchfield",
+              "valueString": "training"
+            },
+            {
+              "extension": [
+                {
+                  "url": "header",
+                  "valueString": "Course"
+                },
+                {
+                  "url": "field",
+                  "valueString": "extension.where(url='http://ihris.org/fhir/StructureDefinition/ihris-cont-education').extension.where(url='courseName').valueString"
+                }
+              ],
+              "url": "column"
+            },
+            {
+              "extension": [
+                {
+                  "url": "header",
+                  "valueString": "Start Date"
+                },
+                {
+                  "url": "field",
+                  "valueString": "extension.where(url='http://ihris.org/fhir/StructureDefinition/ihris-cont-education').extension.where(url='startDate').valueDate"
+                }
+              ],
+              "url": "column"
+            },
+            {
+              "extension": [
+                {
+                  "url": "header",
+                  "valueString": "End Date"
+                },
+                {
+                  "url": "field",
+                  "valueString": "extension.where(url='http://ihris.org/fhir/StructureDefinition/ihris-cont-education').extension.where(url='endDate').valueDate"
+                }
+              ],
+              "url": "column"
+            },
+            {
+              "extension": [
+                {
+                  "url": "header",
+                  "valueString": "Credits"
+                },
+                {
+                  "url": "field",
+                  "valueString": "extension.where(url='http://ihris.org/fhir/StructureDefinition/ihris-cont-education').extension.where(url='credits').valueInteger"
+                }
+              ],
+              "url": "column"
+            },
+            {
+              "extension": [
+                {
+                  "url": "header",
+                  "valueString": "Actions"
+                },
+                {
+                  "url": "field",
+                  "valueString": "_action"
+                }
+              ],
+              "url": "column"
+            },
+            {
+              "extension": [
+                {
+                  "url": "link",
+                  "valueString": "/questionnaire/ihris-conteducation/cont-education?training=FHIRID"
+                },
+                {
+                  "url": "text",
+                  "valueString": "Add Continuing Education"
+                },
+                {
+                  "url": "row",
+                  "valueBoolean": false
+                },
+                {
+                  "url": "emptyDisplay",
+                  "valueBoolean": true
+                },
+                {
+                  "url": "class",
+                  "valueString": "primary"
+                }
+              ],
+              "url": "action"
+            },
+            {
+              "extension": [
+                {
+                  "url": "link",
+                  "valueString": "/resource/view/cont-education/ITEMID"
+                },
+                {
+                  "url": "text",
+                  "valueString": "View"
+                },
+                {
+                  "url": "row",
+                  "valueBoolean": true
+                },
+                {
+                  "url": "class",
+                  "valueString": "primary"
+                }
+              ],
+              "url": "action"
+            }
+          ],
+          "url": "resource"
+        }
+      ],
+      "url": "http://ihris.org/fhir/StructureDefinition/ihris-page-section"
+    }
+  ]
+}

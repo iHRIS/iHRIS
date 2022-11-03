@@ -27,7 +27,7 @@ Title:          "Training Information"
 * extension[institution].value[x] only Coding
 * extension[institution].valueCoding from IhrisTrainingInstitutionValueSet
 * extension[institution].valueCoding ^label = "Training Institution"
-* extension[indexNumber].value[x] only Coding
+* extension[indexNumber].value[x] only string
 * extension[indexNumber].valueString ^label = "Index Number"
 * extension[indexNumber].valueString 1..1 MS
 * extension[intakeDate].value[x] only date

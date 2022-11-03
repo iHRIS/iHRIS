@@ -1,0 +1,15 @@
+{
+  "resourceType": "SearchParameter",
+  "id": "practitioner-birthdate",
+  "url": "http://ihris.org/fhir/SearchParameter/practitioner-birthdate",
+  "name": "Search Parameter on birthdate resources for practioner",
+  "status": "active",
+  "description": "Search by birthdate for a Practitioner resource.",
+  "code": "birthDate",
+  "base": [
+    "Practitioner"
+  ],
+  "type": "date",
+  "expression": "Practitioner.birthDate",
+  "xpathUsage": "normal"
+}

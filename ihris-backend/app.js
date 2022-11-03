@@ -163,7 +163,7 @@ async function startUp() {
   app.use(morgan('dev'));
 
   // This has to be before the body parser or it won't proxy a POST body
-  app.use('/kibana', createProxyMiddleware({
+  app.use('/dashboards', createProxyMiddleware({
     target: nconf.get('kibana:base') || 'http://localhost:5601',
     // headers: { 'kbn-xsrf': true },
     // changeOrigin: true,

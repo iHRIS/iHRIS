@@ -1,0 +1,11 @@
+{
+  "resourceType": "CodeSystem",
+  "status": "active",
+  "content": "complete",
+  "name": "IhrisTrainingInstitution",
+  "id": "ihris-training-institution",
+  "title": "Institution",
+  "version": "0.3.0",
+  "url": "http://ihris.org/fhir/CodeSystem/ihris-training-institution",
+  "date": "2020-11-10T08:41:04.362Z"
+}

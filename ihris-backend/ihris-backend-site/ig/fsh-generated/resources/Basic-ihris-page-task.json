@@ -1,0 +1,113 @@
+{
+  "resourceType": "Basic",
+  "id": "ihris-page-task",
+  "meta": {
+    "profile": [
+      "http://ihris.org/fhir/StructureDefinition/ihris-page"
+    ]
+  },
+  "code": {
+    "coding": [
+      {
+        "code": "page",
+        "system": "http://ihris.org/fhir/CodeSystem/ihris-resource-codesystem"
+      }
+    ]
+  },
+  "extension": [
+    {
+      "url": "http://ihris.org/fhir/StructureDefinition/ihris-page-display",
+      "extension": [
+        {
+          "url": "resource",
+          "valueReference": {
+            "reference": "StructureDefinition/ihris-task"
+          }
+        },
+        {
+          "url": "search",
+          "valueString": "Id|Basic.id"
+        },
+        {
+          "extension": [
+            {
+              "url": "field",
+              "valueString": ""
+            },
+            {
+              "url": "url",
+              "valueUrl": "/resource/view/basic"
+            },
+            {
+              "url": "text",
+              "valueString": "View Other Tasks"
+            },
+            {
+              "url": "button",
+              "valueBoolean": true
+            },
+            {
+              "url": "icon",
+              "valueString": "mdi-account-arrow-right"
+            }
+          ],
+          "url": "link"
+        },
+        {
+          "extension": [
+            {
+              "url": "url",
+              "valueUrl": "/questionnaire/ihris-task/task"
+            },
+            {
+              "url": "icon",
+              "valueString": "mdi-account-plus"
+            },
+            {
+              "url": "class",
+              "valueString": "accent"
+            }
+          ],
+          "url": "add"
+        },
+        {
+          "url": "search",
+          "valueString": "Name|Basic.extension.where(url='http://ihris.org/fhir/StructureDefinition/ihris-basic-name').valueString"
+        },
+        {
+          "url": "filter",
+          "valueString": "Task|Basic.extension:id:contains"
+        }
+      ]
+    },
+    {
+      "extension": [
+        {
+          "url": "title",
+          "valueString": "Task"
+        },
+        {
+          "url": "description",
+          "valueString": "iHRIS User task details"
+        },
+        {
+          "url": "name",
+          "valueString": "Basic"
+        },
+        {
+          "url": "field",
+          "valueString": "Basic.extension:name.value[x]:valueString"
+        },
+        {
+          "url": "field",
+          "valueString": "Basic.extension:attributes"
+        },
+        {
+          "url": "field",
+          "valueString": "Basic.extension:compositeTask.value[x]:valueReference"
+        }
+      ],
+      "url": "http://ihris.org/fhir/StructureDefinition/ihris-page-section"
+    }
+  ]
+}

@@ -1,0 +1,17 @@
+{
+  "resourceType": "ValueSet",
+  "status": "active",
+  "name": "IhrisJurisdictionType",
+  "id": "ihris-jurisdiction-type",
+  "title": "iHRIS Jurisdiction Type ValueSet",
+  "version": "0.4.0",
+  "url": "http://ihris.org/fhir/ValueSet/ihris-jurisdiction-type",
+  "date": "2020-11-12T08:41:04.362Z",
+  "compose": {
+    "include": [
+      {
+        "system": "http://ihris.org/fhir/CodeSystem/ihris-jurisdiction-type"
+      }
+    ]
+  }
+}

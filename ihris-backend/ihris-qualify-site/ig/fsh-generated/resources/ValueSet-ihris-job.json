@@ -1,0 +1,30 @@
+{
+  "resourceType": "ValueSet",
+  "status": "active",
+  "name": "IhrisJob",
+  "id": "ihris-job",
+  "title": "iHRIS Job",
+  "description": "Sample iHRIS ValueSet for: IhrisJob",
+  "version": "1.0.0",
+  "url": "http://ihris.org/fhir/ValueSet/ihris-job",
+  "experimental": false,
+  "date": "2022-01-18T20:48:33.646Z",
+  "publisher": "iHRIS Foundation",
+  "contact": [
+    {
+      "telecom": [
+        {
+          "system": "url",
+          "value": "http://ihris.org"
+        }
+      ]
+    }
+  ],
+  "compose": {
+    "include": [
+      {
+        "system": "http://ihris.org/fhir/CodeSystem/ihris-job"
+      }
+    ]
+  }
+}

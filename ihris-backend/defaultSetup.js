@@ -7,7 +7,8 @@ const async = require('async');
 const nconf = require('./modules/config')
 const mixin = require('./mixin/generalMixin');
 const fhirAxios = require('./modules/fhir/fhirAxios');
- 
+
+const site_path = nconf.get("app:site:path");
 const server = nconf.get("fhir:base")
 const loadKeycloakData = () => new Promise((resolve, reject) => {
   const installed = nconf.get('app:installed');
@@ -84,7 +85,7 @@ const loadDefaultConfig = () => new Promise((resolve, reject) => {
     return resolve();
   }
   const parameters = nconf.get('app:Parameters');
-  let fullpath = `${__dirname}/${parameters}`;
+  let fullpath = `${site_path}/${parameters}`;
   fs.readFile(fullpath, { encoding: 'utf8', flag: 'r' }, (err, data) => {
     // if (err) {
     //   console.error(err);
@@ -107,7 +108,7 @@ const loadFSHFiles = () => new Promise(async (resolvePar, rejectPar) => {
     return resolvePar();
   }
   const fshDir = nconf.get('builtFSHFIles');
-  const dirs = await fs.readdirSync(`${__dirname}/${fshDir}`);
+  const dirs = await fs.readdirSync(`${site_path}/${fshDir}`);
   let errorOccured = false;
   async.eachSeries(dirs, (dir, nxtDir) => {
     let files = [];
@@ -116,7 +117,7 @@ const loadFSHFiles = () => new Promise(async (resolvePar, rejectPar) => {
       dir = null;
     } else {
       try {
-        files = fs.readdirSync(`${__dirname}/${fshDir}/${dir}`);
+        files = fs.readdirSync(`${site_path}/${fshDir}/${dir}`);
       } catch (error) {
         console.error(error);
         errorOccured = true;
@@ -126,9 +127,9 @@ const loadFSHFiles = () => new Promise(async (resolvePar, rejectPar) => {
     async.eachSeries(files, (file, nxtFile) => {
       let fullpath;
       if (dir) {
-        fullpath = `${__dirname}/${fshDir}/${dir}/${file}`;
+        fullpath = `${site_path}/${fshDir}/${dir}/${file}`;
       } else {
-        fullpath = `${__dirname}/${fshDir}/${file}`;
+        fullpath = `${site_path}/${fshDir}/${file}`;
       }
       fs.readFile(fullpath, { encoding: 'utf8', flag: 'r' }, (err, data) => {
         if (err) {
@@ -176,9 +177,6 @@ const loadFSHFiles = () => new Promise(async (resolvePar, rejectPar) => {
     return resolvePar();
   });
 });
-
-
-
  
 module.exports = {
   initialize: () => new Promise((resolve, reject) => {

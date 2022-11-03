@@ -201,17 +201,22 @@ Then to load the starter resources run the command bellow
 node load.js --server http://localhost:8080/hapi/fhir ../resources/*.json
 ```
 
-## ElasticSearch
+## OpenSearch and OpenSearch-dashboard
 
 Ubuntu install instructions:
-https://www.elastic.co/guide/en/elasticsearch/reference/current/deb.html
 
-Make sure to install ElasticSearch and Kibana:
-```bash
-sudo apt install elasticsearch kibana
-```
+### OpenSearch
+https://opensearch.org/docs/latest/opensearch/install/tar/
 
-After installing, edit /etc/kibana/kibana.yml and set server.basePath
+### OpenSearch-dashboards
+https://opensearch.org/docs/latest/dashboards/install/tar/
+
+For OpenSearch-dashboards make sure you edit ```/path/to/opensearch-dashboards-2.3.0/config/opensearch_dashboards.yml``` and set ```server.basePath``` and ```server.rewriteBasePath```
+
 ```yaml
-server.basePath: "/kibana"
+server.basePath: "/dashboards"
+
+server.rewriteBasePath: true
 ```
+!!! Note
+    There is also a docker installation here https://opensearch.org/docs/latest/opensearch/install/docker/

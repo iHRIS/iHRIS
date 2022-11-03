@@ -1,0 +1,87 @@
+{
+  "resourceType": "CodeSystem",
+  "status": "active",
+  "content": "complete",
+  "name": "AddressUse",
+  "id": "address-use",
+  "title": "AddressUse",
+  "description": "The use of an address.",
+  "version": "4.0.1",
+  "url": "http://hl7.org/fhir/address-use",
+  "concept": [
+    {
+      "code": "home",
+      "display": "Home",
+      "definition": "A communication address at a home."
+    },
+    {
+      "code": "work",
+      "display": "Work",
+      "definition": "An office address. First choice for business related contacts during business hours."
+    },
+    {
+      "code": "temp",
+      "display": "Temporary",
+      "definition": "A temporary address. The period can provide more detailed information."
+    },
+    {
+      "code": "old",
+      "display": "Old / Incorrect",
+      "definition": "This address is no longer in use (or was never correct but retained for records)."
+    },
+    {
+      "code": "billing",
+      "display": "Billing",
+      "definition": "An address to be used to send bills, invoices, receipts etc."
+    }
+  ],
+  "meta": {
+    "versionId": "1",
+    "lastUpdated": "2022-02-15T08:14:19.131+03:00",
+    "source": "#p6zFoi9Jny2q0yPE"
+  },
+  "extension": [
+    {
+      "url": "http://hl7.org/fhir/StructureDefinition/structuredefinition-wg",
+      "valueCode": "fhir"
+    },
+    {
+      "url": "http://hl7.org/fhir/StructureDefinition/structuredefinition-standards-status",
+      "valueCode": "normative"
+    },
+    {
+      "url": "http://hl7.org/fhir/StructureDefinition/structuredefinition-normative-version",
+      "valueCode": "4.0.0"
+    },
+    {
+      "url": "http://hl7.org/fhir/StructureDefinition/structuredefinition-fmm",
+      "valueInteger": 5
+    }
+  ],
+  "identifier": [
+    {
+      "system": "urn:ietf:rfc:3986",
+      "value": "urn:oid:2.16.840.1.113883.4.642.4.68"
+    }
+  ],
+  "experimental": false,
+  "date": "2019-11-01T09:29:23+11:00",
+  "publisher": "HL7 (FHIR Project)",
+  "contact": [
+    {
+      "telecom": [
+        {
+          "system": "url",
+          "value": "http://hl7.org/fhir"
+        },
+        {
+          "system": "email",
+          "value": "fhir@lists.hl7.org"
+        }
+      ]
+    }
+  ],
+  "caseSensitive": true,
+  "valueSet": "http://hl7.org/fhir/ValueSet/address-use",
+  "count": 5
+}

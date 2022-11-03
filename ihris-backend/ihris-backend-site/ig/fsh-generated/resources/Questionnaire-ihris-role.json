@@ -1,0 +1,55 @@
+{
+  "resourceType": "Questionnaire",
+  "id": "ihris-role",
+  "meta": {
+    "profile": [
+      "http://ihris.org/fhir/StructureDefinition/ihris-questionnaire"
+    ]
+  },
+  "url": "http://ihris.org/fhir/Questionnaire/ihris-role",
+  "title": "iHRIS AddRole Workflow",
+  "description": "iHRIS workflow to record a Role",
+  "name": "ihris-role",
+  "status": "active",
+  "date": "2022-02-20",
+  "purpose": "Workflow page for recording a user role information.",
+  "item": [
+    {
+      "linkId": "Role",
+      "text": "Add Role",
+      "type": "group",
+      "item": [
+        {
+          "linkId": "rolename",
+          "text": "Role Name",
+          "type": "string",
+          "required": false,
+          "repeats": false
+        },
+        {
+          "linkId": "tasks",
+          "definition": "http://ihris.org/fhir/StructureDefinition/ihris-role#Basic.extension:task.value[x]:valueReference",
+          "text": "Tasks",
+          "type": "reference",
+          "required": false,
+          "repeats": true
+        },
+        {
+          "linkId": "roles",
+          "definition": "http://ihris.org/fhir/StructureDefinition/ihris-role#Basic.extension:role.value[x]:valueReference",
+          "text": "Roles",
+          "type": "reference",
+          "required": false,
+          "repeats": true
+        },
+        {
+          "linkId": "primary",
+          "text": "Is Role Primary",
+          "type": "boolean",
+          "required": true,
+          "repeats": false
+        }
+      ]
+    }
+  ]
+}

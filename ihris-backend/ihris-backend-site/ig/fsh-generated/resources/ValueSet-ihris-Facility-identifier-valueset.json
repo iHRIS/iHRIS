@@ -1,0 +1,17 @@
+{
+  "resourceType": "ValueSet",
+  "status": "active",
+  "name": "IhrisFacilityIdentifierValueSet",
+  "id": "ihris-Facility-identifier-valueset",
+  "title": "iHRIS facility Identifier ValueSet",
+  "version": "0.4.0",
+  "url": "http://ihris.org/fhir/ValueSet/ihris-Facility-identifier-valueset",
+  "date": "2022-02-13T08:41:04.362Z",
+  "compose": {
+    "include": [
+      {
+        "system": "http://ihris.org/fhir/CodeSystem/ihris-Facility-identifier"
+      }
+    ]
+  }
+}

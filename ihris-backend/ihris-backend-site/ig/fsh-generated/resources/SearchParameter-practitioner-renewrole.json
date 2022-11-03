@@ -1,0 +1,15 @@
+{
+  "resourceType": "SearchParameter",
+  "id": "practitioner-renewrole",
+  "url": "http://ihris.org/fhir/SearchParameter/practitioner-renewrole",
+  "name": "Search Parameter on  employee id for practitioner",
+  "status": "active",
+  "description": "Search by employee ID for a practitioner resource.",
+  "code": "renewrole",
+  "base": [
+    "Practitioner"
+  ],
+  "type": "string",
+  "expression": "Practitioner.identifier.where(type.coding.code='PractitionerRole.period.start').value",
+  "xpathUsage": "normal"
+}

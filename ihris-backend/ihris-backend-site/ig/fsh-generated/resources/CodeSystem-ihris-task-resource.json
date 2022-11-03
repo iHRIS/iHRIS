@@ -1,0 +1,70 @@
+{
+  "resourceType": "CodeSystem",
+  "status": "active",
+  "content": "complete",
+  "name": "IhrisTaskResourceCodeSystem",
+  "id": "ihris-task-resource",
+  "title": "Code system for task permissions.",
+  "version": "0.3.0",
+  "url": "http://ihris.org/fhir/CodeSystem/ihris-task-resource",
+  "concept": [
+    {
+      "code": "*",
+      "display": "All"
+    },
+    {
+      "code": "Practitioner",
+      "display": "Practitioner"
+    },
+    {
+      "code": "StructureDefinition",
+      "display": "StructureDefinition"
+    },
+    {
+      "code": "ValueSet",
+      "display": "ValueSet"
+    },
+    {
+      "code": "CodeSystem",
+      "display": "CodeSystem"
+    },
+    {
+      "code": "Basic",
+      "display": "Basic"
+    },
+    {
+      "code": "DocumentReference",
+      "display": "DocumentReference"
+    },
+    {
+      "code": "Organization",
+      "display": "Organization"
+    },
+    {
+      "code": "Questionnaire",
+      "display": "Questionnaire"
+    },
+    {
+      "code": "QuestionnaireResponse",
+      "display": "QuestionnaireResponse"
+    },
+    {
+      "code": "PractitionerRole",
+      "display": "PractitionerRole"
+    },
+    {
+      "code": "Location",
+      "display": "Location"
+    },
+    {
+      "code": "Person",
+      "display": "Person"
+    },
+    {
+      "code": "navigation",
+      "display": "Navigation"
+    }
+  ],
+  "date": "2021-03-26T09:25:04.362Z",
+  "count": 14
+}
