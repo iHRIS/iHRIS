@@ -580,8 +580,6 @@ export default {
             response
                 .json()
                 .then((data) => {
-                  console.log({v:this.version})
-                  console.log("333", data)
                   // this.$store.commit('setCurrentResource', data)
                   this.orig = data;
                   this.source = {data: data, path: this.field};
