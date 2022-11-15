@@ -33,7 +33,7 @@ const workflowEducation = {
                 complexExt.push({ url: "institution",
                 valueCoding: req.body.item[0].item[0].answer[0].valueCoding })
             }
-            if ( req.body.item[0].item[2].linkId === "Basic.extension[0].extension[2]" 
+            if ( req.body.item[0].item[2].linkId === "Basic.extension[0].extension[1]" 
                 && req.body.item[0].item[2].answer 
                 && req.body.item[0].item[2].answer[0] 
                 && req.body.item[0].item[2].answer[0].valueCoding){
