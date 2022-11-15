@@ -158,7 +158,7 @@ Usage:          #definition
 * item[0].item[1].required = true
 * item[0].item[1].repeats = false
 
-* item[0].item[2].linkId = "Basic.extension[0].extension[3]#year"
+* item[0].item[2].linkId = "Basic.extension[0].extension[2]#year"
 * item[0].item[2].text = "Year"
 * item[0].item[2].type = #date
 * item[0].item[2].required = false
