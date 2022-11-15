@@ -16,7 +16,7 @@
   "name": "IhrisTrainingBasic",
   "title": "iHRIS Training Basic",
   "status": "active",
-  "description": "iHRIS Profile of the Basic resource to refer to a Training.",
+  "description": "iHRIS Profile of the Basic resource to refer to a Practitioner.",
   "fhirVersion": "4.0.1",
   "mapping": [
     {
@@ -393,9 +393,9 @@
         ]
       },
       {
-        "id": "Basic.extension:training",
+        "id": "Basic.extension:training-basic",
         "path": "Basic.extension",
-        "sliceName": "training",
+        "sliceName": "training-basic",
         "short": "Additional content defined by implementations",
         "definition": "May be used to represent additional information that is not part of the basic definition of the resource. To make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.",
         "comment": "There can be no stigma associated with the use of extensions by any application, project, or standard - regardless of the institution or jurisdiction that uses or defines the extensions.  The use of extensions is what allows the FHIR specification to retain a core level of simplicity for everyone.",
@@ -559,7 +559,7 @@
         "patternCodeableConcept": {
           "coding": [
             {
-              "code": "training-link",
+              "code": "practitioner-link",
               "system": "http://ihris.org/fhir/CodeSystem/ihris-resource-codesystem"
             }
           ]
@@ -757,9 +757,9 @@
         "min": 1
       },
       {
-        "id": "Basic.extension:training",
+        "id": "Basic.extension:training-basic",
         "path": "Basic.extension",
-        "sliceName": "training",
+        "sliceName": "training-basic",
         "min": 1,
         "max": "1",
         "type": [
@@ -778,7 +778,7 @@
         "patternCodeableConcept": {
           "coding": [
             {
-              "code": "training-link",
+              "code": "practitioner-link",
               "system": "http://ihris.org/fhir/CodeSystem/ihris-resource-codesystem"
             }
           ]

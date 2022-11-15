@@ -1,10 +1,10 @@
 Profile:        IhrisBasicRegistration
-Parent:         IhrisPractitionerBasic
+Parent:         IhrisTrainingBasic
 Id:             ihris-basic-registration
 Title:          "iHRIS Registration"
 Description:    "iHRIS Profile of the Basic resource for a Registration to the practioner."
-* extension[training].valueReference 0..1 MS
-* extension[training].valueReference ^label = "Training"
+* extension[training-basic].valueReference 1..1 MS
+* extension[training-basic].valueReference ^label = "Training"
 * extension contains
     IhrisRegistration named registration 0..1 MS 
 * extension[registration].extension[registrationNumber].valueString 1..1 MS

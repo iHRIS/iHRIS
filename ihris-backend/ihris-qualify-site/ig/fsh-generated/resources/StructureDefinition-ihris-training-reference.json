@@ -228,7 +228,7 @@
         },
         "short": "Value of extension",
         "definition": "Value of extension - must be one of a constrained set of the data types (see [Extensibility](extensibility.html) for a list).",
-        "min": 0,
+        "min": 1,
         "max": "1",
         "base": {
           "path": "Extension.value[x]",
@@ -266,7 +266,7 @@
         "label": "Training",
         "short": "Value of extension",
         "definition": "Value of extension - must be one of a constrained set of the data types (see [Extensibility](extensibility.html) for a list).",
-        "min": 0,
+        "min": 1,
         "max": "1",
         "base": {
           "path": "Extension.value[x]",
@@ -291,6 +291,7 @@
             "source": "http://hl7.org/fhir/StructureDefinition/Element"
           }
         ],
+        "mustSupport": true,
         "isModifier": false,
         "isSummary": false,
         "mapping": [
@@ -333,6 +334,7 @@
           "ordered": false,
           "rules": "open"
         },
+        "min": 1,
         "type": [
           {
             "code": "Reference"
@@ -343,7 +345,7 @@
         "id": "Extension.valueReference",
         "path": "Extension.valueReference",
         "label": "Training",
-        "min": 0,
+        "min": 1,
         "max": "1",
         "type": [
           {
@@ -352,7 +354,8 @@
               "http://ihris.org/fhir/StructureDefinition/ihris-basic-training"
             ]
           }
-        ]
+        ],
+        "mustSupport": true
       }
     ]
   }

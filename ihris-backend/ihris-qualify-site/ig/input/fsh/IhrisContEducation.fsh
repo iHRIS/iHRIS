@@ -3,8 +3,8 @@ Parent:         IhrisTrainingBasic
 Id:             ihris-basic-cont-education
 Title:          "iHRIS Continuing Education"
 Description:    "iHRIS Profile of the Basic resource for a Continuing Education."
-* extension[training].valueReference 0..1 MS
-* extension[training].valueReference ^label = "Training"
+* extension[training-basic].valueReference 1..1 MS
+* extension[training-basic].valueReference ^label = "Training"
 * extension contains
     IhrisContEducation named conteducation 0..1 MS
 * extension[conteducation].extension[provider].valueString 0..1 MS

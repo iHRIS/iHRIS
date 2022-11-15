@@ -231,7 +231,7 @@
           "reference": "StructureDefinition/ihris-training-basic"
         },
         "name": "iHRIS Training Basic",
-        "description": "iHRIS Profile of the Basic resource to refer to a Training.",
+        "description": "iHRIS Profile of the Basic resource to refer to a Practitioner.",
         "exampleBoolean": false
       },
       {

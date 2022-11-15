@@ -143,7 +143,7 @@ Usage:          #example
 * extension[section][1].extension[name].valueString = "registration"
 * extension[section][1].extension[resource].extension[resource].valueReference = Reference(StructureDefinition/ihris-basic-registration)
 * extension[section][1].extension[resource].extension[searchfield].valueString = "training"
-* extension[section][1].extension[resource].extension[linkfield].valueString = "Basic.extension.where(url='http://ihris.org/fhir/StructureDefinition/ihris-training-reference').valueReference.reference"
+* extension[section][1].extension[resource].extension[linkfield].valueString = "Basic.extension.where(url='http://ihris.org/fhir/StructureDefinition/ihris-training-basic').valueReference.reference"
 * extension[section][1].extension[resource].extension[column][0].extension[header].valueString = "Registration Number"
 * extension[section][1].extension[resource].extension[column][0].extension[field].valueString = "extension.where(url='http://ihris.org/fhir/StructureDefinition/ihris-registraion').extension.where(url='registrationNumber').valueString"
 * extension[section][1].extension[resource].extension[column][1].extension[header].valueString = "Cadre"
@@ -169,7 +169,7 @@ Usage:          #example
 * extension[section][2].extension[name].valueString = "conteducation"
 * extension[section][2].extension[resource].extension[resource].valueReference = Reference(StructureDefinition/ihris-basic-cont-education)
 * extension[section][2].extension[resource].extension[searchfield].valueString = "training"
-* extension[section][2].extension[resource].extension[linkfield].valueString = "Basic.extension.where(url='http://ihris.org/fhir/StructureDefinition/ihris-training-reference').valueReference.reference"
+* extension[section][2].extension[resource].extension[linkfield].valueString = "Basic.extension.where(url='http://ihris.org/fhir/StructureDefinition/ihris-training-basic').valueReference.reference"
 * extension[section][2].extension[resource].extension[column][0].extension[header].valueString = "Provider"
 * extension[section][2].extension[resource].extension[column][0].extension[field].valueString = "extension.where(url='http://ihris.org/fhir/StructureDefinition/ihris-cont-education').extension.where(url='provider').valueString"
 * extension[section][2].extension[resource].extension[column][1].extension[header].valueString = "Course"

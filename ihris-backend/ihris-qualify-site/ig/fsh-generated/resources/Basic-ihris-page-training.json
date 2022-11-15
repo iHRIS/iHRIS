@@ -175,7 +175,7 @@
             },
             {
               "url": "linkfield",
-              "valueString": "Basic.extension.where(url='http://ihris.org/fhir/StructureDefinition/ihris-training-reference').valueReference.reference"
+              "valueString": "Basic.extension.where(url='http://ihris.org/fhir/StructureDefinition/ihris-training-basic').valueReference.reference"
             },
             {
               "url": "column",
@@ -326,7 +326,7 @@
             },
             {
               "url": "linkfield",
-              "valueString": "Basic.extension.where(url='http://ihris.org/fhir/StructureDefinition/ihris-training-reference').valueReference.reference"
+              "valueString": "Basic.extension.where(url='http://ihris.org/fhir/StructureDefinition/ihris-training-basic').valueReference.reference"
             },
             {
               "url": "column",
