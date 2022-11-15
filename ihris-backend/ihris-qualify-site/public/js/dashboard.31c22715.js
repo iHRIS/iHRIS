@@ -1,2 +1,0 @@
-"use strict";(self["webpackChunkiHRIS_v5"]=self["webpackChunkiHRIS_v5"]||[]).push([[966],{6462:function(a,e,r){r.r(e),r.d(e,{default:function(){return d}});var n=function(){var a=this,e=a.$createElement,r=a._self._c||e;return r("iframe",{attrs:{src:"/kibana/app/kibana#/dashboard/"+a.$route.params.id+"?embed=true",width:"100%",height:"100%"}})},t=[],i={name:"kibana-dashboard",props:["id"]},u=i,s=r(3736),l=(0,s.Z)(u,n,t,!1,null,null,null),d=l.exports}}]);
-//# sourceMappingURL=dashboard.31c22715.js.map

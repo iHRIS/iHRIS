@@ -2,7 +2,7 @@ const nconf = require('./config')
 const winston = require('winston')
 const fhirAxios = nconf.fhirAxios
 
-const workflowDiscipline = {
+const workflowDisciplinary = {
   process: ( req ) => {
     return new Promise( (resolve, reject) => {
       let bundle = {
@@ -80,7 +80,7 @@ const workflowDiscipline = {
           resolve( bundle )
         } else {
           //reject("Invalid input")
-          resolve(workflowDiscipline.outcome("Disciplinary Action Type not provided"))
+          resolve(workflowDisciplinary.outcome("Disciplinary Action Type not provided"))
         }
       } )
     } )
@@ -122,4 +122,4 @@ const workflowDiscipline = {
   }
 }
  
-module.exports = workflowDiscipline
+module.exports = workflowDisciplinary
