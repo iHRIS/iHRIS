@@ -63,3 +63,5 @@ typings/
 
 # config
 config/baseConfig.json
+ihris-backend-site/config/baseConfig.json
+
