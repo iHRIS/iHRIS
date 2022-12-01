@@ -110,6 +110,64 @@
         </v-list>
 
       </v-navigation-drawer>
+      <v-card v-if="!this.edit"
+              class="mx-auto mb-4 rounded-lg"
+              max-width="700"
+              outlined
+      >
+        <v-card-title class="primary font-weight-bold caption pa-2 white--text justify-center ">Record History
+        </v-card-title>
+        <v-card-text class="my-3">
+          <v-row class="justify-space-between">
+            <v-col cols="4"><span class="font-weight-bold">Record Id:</span></v-col>
+            <v-col cols="8">{{ this.$data.orig.id }}</v-col>
+          </v-row>
+          <v-divider/>
+          <v-row class="justify-space-between">
+            <v-col cols="4"><span class="font-weight-bold">Last Updated:</span></v-col>
+            <v-col cols="8">{{ new Date(this.$data.orig.meta.lastUpdated) }}</v-col>
+          </v-row>
+          <v-divider/>
+          <v-row class="justify-space-between">
+            <v-col cols="4"><span class="font-weight-bold">Version:</span></v-col>
+            <v-col cols="8">{{ this.$data.orig.meta.versionId }} of {{ max }}</v-col>
+          </v-row>
+          <v-divider/>
+          <v-row class="justify-space-between">
+            <v-col cols="4"><span class="font-weight-bold">See older version:</span></v-col>
+            <v-col cols="8">
+              <v-row>
+                <v-col class="px-4" cols="2">
+                  <v-text-field
+                      v-model.number="version"
+                      :max="max"
+                      :rules="[rules.min, rules.max]"
+                      :value="this.$data.orig.meta.versionId"
+                      class="mt-0 pt-0"
+                      hide-details
+                      min="1"
+                      single-line
+                      style="width: 40px;"
+                      type="number"
+                  ></v-text-field>
+                </v-col>
+                <v-col class="px-4">
+                  <v-btn
+                      :disabled="version>max || version<1"
+                      color="primary"
+                      icon
+                      small
+                      @click="changeVersion"
+                  >
+                    <v-icon>mdi-eye</v-icon>
+                  </v-btn>
+                </v-col>
+              </v-row>
+            </v-col>
+          </v-row>
+          <v-divider/>
+        </v-card-text>
+      </v-card>
     </v-form>
   </v-container>
 
@@ -136,6 +194,13 @@ export default {
       advancedValid: true,
       loadingId: false,
       loadingCv: false,
+      version: 1,
+      max: 1,
+      pageKey: 0,
+      rules: {
+        min: v => v >= 1 || `The Min is 1`,
+        max: v => v <= this.max || `The Max is ${this.max}`
+      },
     }
   },
   mounted() {
@@ -174,6 +239,7 @@ export default {
       fetch("/fhir/" + this.field + "/" + this.fhirId).then(response => {
         response.json().then(data => {
           //this.$store.commit('setCurrentResource', data)
+          this.max = data.meta.versionId
           this.orig = data
           this.source = {data: data, path: this.field}
           this.setLinkText()
@@ -508,6 +574,29 @@ export default {
             this.loadingCv = false;
           });
     },
+    changeVersion() {
+      fetch("/fhir/vRead" + "/" + this.field + "/" + this.fhirId + "/" + this.version)
+          .then((response) => {
+            response
+                .json()
+                .then((data) => {
+                  // this.$store.commit('setCurrentResource', data)
+                  this.orig = data;
+                  this.source = {data: data, path: this.field};
+                  // this.orig = data;
+                  // this.source = {data: data, path: this.field};
+                  this.setLinkText();
+                  this.loading = false;
+                  this.pageKey += 1;
+                })
+                .catch((err) => {
+                  console.log(this.field, this.fhirId, err);
+                });
+          })
+          .catch((err) => {
+            console.log(this.field, this.fhirId, err);
+          });
+    }
   }
 }
 

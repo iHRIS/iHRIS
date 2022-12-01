@@ -97,6 +97,87 @@ router.get("/:resource/:id?", (req, res, next) => {
   }
 } )
 
+router.get("/vRead/:resource/:id/:version", (req, res, next) => {
+  if ( req.params.resource.startsWith('$') || ( req.params.id && req.params.id.startsWith('$') ) ) {
+    return next()
+  }
+  if ( !req.user ) {
+    return res.status(401).json( outcomes.NOTLOGGEDIN)
+  }
+  let allowed = false
+  if ( req.params.id ) {
+    allowed = req.user.hasPermissionByName( "read", req.params.resource, req.params.id )
+  } else {
+    allowed = req.user.hasPermissionByName( "read", req.params.resource )
+  }
+  if ( !allowed ) {
+    return res.status(401).json( outcomes.DENIED )
+  }
+  if ( req.params.id ) {
+    fhirAxios.read( req.params.resource, req.params.id,req.params.version ).then( (resource) => {
+      if ( allowed === true ) {
+        return res.status(200).json(resource)
+      } else {
+        // Check permissions against the specific resource and return list
+        // of allowed fields
+        let fieldList = req.user.hasPermissionByObject( "read", resource )
+        if ( fieldList === true ) {
+          return res.status(200).json(resource)
+        } else if ( !fieldList ) {
+          return res.status(401).json( outcomes.DENIED )
+        } else {
+          return res.status(200).json( fhirFilter.filter( resource, fieldList ) )
+        }
+      }
+    } ).catch( (err) => {
+      /* return response from FHIR server */
+      //return res.status( err.response.status ).json( err.response.data )
+      /* for custom responses */
+      logger.error(err.message)
+      let outcome = { ...outcomes.ERROR }
+      outcome.issue[0].diagnostics = err.message
+      return res.status(500).json( outcome )
+    } )
+  } else {
+    let userFilters = req.user.getFilter( req.params.resource )
+    if ( userFilters ) {
+      for( let filter of userFilters ) {
+        let keyVal = filter.split('=',2)
+        if ( keyVal.length === 2 ) {
+          req.query[keyVal[0]] = keyVal[1]
+        } else {
+          logger.error("Unable to process filter constraing for "+req.params.resource+" "+filter)
+        }
+      }
+    }
+    fhirAxios.search( req.params.resource, req.query ).then( (resource) => {
+      // Need to do deeper checking due to possibility of includes
+      if ( resource && resource.entry && resource.entry.length > 0 ) {
+        fhirFilter.filterBundle( "read", resource, req.user )
+      }
+      return res.status(200).json(resource)
+
+      // DELETE THE FOLLOWING, ALL NEED TO BE FILTERED
+      /*
+      if ( allowed === true ) {
+        return res.status(200).json(resource)
+      } else {
+        return res.status(200).json({"msg":"more to do filtering object from search"})
+      }
+      */
+    } ).catch( (err) => {
+      /* return response from FHIR server */
+      //return res.status( err.response.status ).json( err.response.data )
+      /* for custom responses */
+      logger.error(err.message)
+      let outcome = { ...outcomes.ERROR }
+      outcome.issue[0].diagnostics = err.message
+      return res.status(500).json( outcome )
+    } )
+  }
+} )
+
+
 router.post("/:resource", (req, res) => {
   if ( !req.user ) {
     return res.status(401).json( outcomes.NOTLOGGEDIN )
