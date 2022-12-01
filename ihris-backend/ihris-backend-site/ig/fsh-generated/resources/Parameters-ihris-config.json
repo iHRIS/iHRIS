@@ -275,28 +275,8 @@
           "valueString": "/resource/search/facility"
         },
         {
-          "name": "site:nav:menu:adminUnit:text",
-          "valueString": "Admin Unit"
-        },
-        {
-          "name": "site:nav:menu:adminUnit:order",
-          "valueString": "7"
-        },
-        {
-          "name": "site:nav:menu:adminUnit:icon",
-          "valueString": "mdi-family-tree"
-        },
-        {
-          "name": "site:nav:menu:adminUnit:menu:byLocation:text",
-          "valueString": "By Location"
-        },
-        {
-          "name": "site:nav:menu:adminUnit:menu:byLocation:url",
-          "valueString": "/adminUnit/by-location"
-        },
-        {
           "name": "site:nav:menu:mhero:order",
-          "valueString": "8"
+          "valueString": "7"
         },
         {
           "name": "site:nav:menu:mhero:text",
@@ -344,7 +324,7 @@
         },
         {
           "name": "site:nav:menu:database:order",
-          "valueString": "9"
+          "valueString": "8"
         },
         {
           "name": "site:nav:menu:database:icon",
@@ -560,7 +540,7 @@
         },
         {
           "name": "site:nav:menu:reports:order",
-          "valueString": "10"
+          "valueString": "9"
         },
         {
           "name": "site:nav:menu:reports:icon",
@@ -584,7 +564,7 @@
         },
         {
           "name": "site:nav:menu:users:order",
-          "valueString": "11"
+          "valueString": "10"
         },
         {
           "name": "site:nav:menu:users:icon",
@@ -620,7 +600,7 @@
         },
         {
           "name": "site:nav:menu:audit:order",
-          "valueString": "12"
+          "valueString": "11"
         },
         {
           "name": "site:nav:menu:audit:icon",
@@ -636,7 +616,7 @@
         },
         {
           "name": "site:nav:menu:password:order",
-          "valueString": "13"
+          "valueString": "12"
         },
         {
           "name": "site:nav:menu:password:icon",
@@ -652,7 +632,7 @@
         },
         {
           "name": "site:nav:menu:apps:order",
-          "valueString": "14"
+          "valueString": "13"
         },
         {
           "name": "site:nav:menu:apps:icon",
