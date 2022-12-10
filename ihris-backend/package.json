@@ -15,7 +15,7 @@
     "date-fns": "^2.28.0",
     "debug": "~2.6.9",
     "dompurify": "^2.2.9",
-    "express": "~4.16.1",
+    "express": "~4.17.3",
     "express-fileupload": "^1.4.0",
     "express-session": "^1.17.2",
     "fhir2es": "^4.0.2",
