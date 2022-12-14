@@ -29,21 +29,21 @@
           "repeats": false
         },
         {
-          "linkId": "Basic.extension[0].extension[1]",
+          "linkId": "Basic.extension[0].extension[2]",
           "text": "Credits",
           "type": "integer",
           "required": false,
           "repeats": false
         },
         {
-          "linkId": "Basic.extension[0].extension[2]",
+          "linkId": "Basic.extension[0].extension[3]",
           "text": "Start Date",
           "type": "date",
           "required": true,
           "repeats": false
         },
         {
-          "linkId": "Basic.extension[0].extension[3]",
+          "linkId": "Basic.extension[0].extension[4]",
           "text": "End Date",
           "type": "date",
           "required": true,

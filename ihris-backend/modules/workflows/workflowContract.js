@@ -1,4 +1,4 @@
-const nconf = require('./config')
+const nconf = require('../config')
 const winston = require('winston')
 const parseISO = require('date-fns/parseISO')
 const isSunday = require('date-fns/isSunday')

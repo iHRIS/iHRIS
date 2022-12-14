@@ -1,4 +1,4 @@
-const nconf = require('./config')
+const nconf = require('../config')
 const user = require('./user')
 const winston = require('winston')
 const crypto = require('crypto')

@@ -1,5 +1,5 @@
-const nconf = require('./config')
-const user = require('./user')
+const nconf = require('../config')
+const user = require('../user')
 const winston = require('winston')
 const crypto = require('crypto')
 const fhirAxios = nconf.fhirAxios

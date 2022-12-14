@@ -6,6 +6,7 @@ const nconf = require('../config')
 const fhirAxios = nconf.fhirAxios
 const logger = require('../../winston')
 const ihrissmartrequire = require('ihrissmartrequire')
+const { Console } = require('console')
 
 let _workflowModules = {}
 

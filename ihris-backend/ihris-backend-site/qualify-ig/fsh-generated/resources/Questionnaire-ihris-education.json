@@ -31,7 +31,7 @@
           "repeats": false
         },
         {
-          "linkId": "Basic.extension[0].extension[3]#year",
+          "linkId": "Basic.extension[0].extension[2]#year",
           "text": "Year",
           "type": "date",
           "required": false,

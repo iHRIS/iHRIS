@@ -1,4 +1,4 @@
-const nconf = require('./config')
+const nconf = require('../config')
 const logger = require('../winston')
 const fhirQuestionnaire = require('./fhirQuestionnaire')
 const fhirAxios = nconf.fhirAxios
