@@ -286,9 +286,9 @@ module.exports = router
   // server the ui from a subdirectory or change to hash mode
   app.use('/ihrisapp', express.static(path.join(__dirname, 'apps')));
 
-  app.use(express.static(path.join(global.ihrissitepath, 'public')));
+  app.use(express.static(path.join(global.appsitepath, 'public')));
   app.use((req, res) => {
-    res.sendFile(path.join(global.ihrissitepath, 'public/index.html'));
+    res.sendFile(path.join(global.appsitepath, 'public/index.html'));
   });
   configLoaded = true;
 }
