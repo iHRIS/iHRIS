@@ -23,6 +23,9 @@ const nconf = require('./modules/config');
 const fhirModules = require('./modules/fhir/fhirModules');
 const fhirReports = require('./modules/fhir/fhirReports');
 
+const appsitepath =  global["appsitepath" + process.pid]
+//const appcorepath =  global["appcorepath" + process.pid]
+
 const app = express();
 app.use(fileUpload({
   createParentPath: true,
@@ -285,10 +288,10 @@ module.exports = router
   // If this causes issues, would need to either
   // server the ui from a subdirectory or change to hash mode
   app.use('/ihrisapp', express.static(path.join(__dirname, 'apps')));
-
-  app.use(express.static(path.join(global.appsitepath, 'public')));
+ 
+  app.use(express.static(path.join(appsitepath, 'public')));
   app.use((req, res) => {
-    res.sendFile(path.join(global.appsitepath, 'public/index.html'));
+    res.sendFile(path.join(appsitepath, 'public/index.html'));
   });
   configLoaded = true;
 }
