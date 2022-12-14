@@ -7,10 +7,182 @@ const { nanoid } = require('nanoid')
 const express = require('express')
 const router = express.Router()
 const ihrissmartrequire = require('ihrissmartrequire')
+const mixin = require('../mixin/generalMixin')
 const logger = require('../winston')
 const es = require('../modules/es')
 const nconf = require('../modules/config')
+const fhirAxios = require('../modules/fhir/fhirAxios')
 const outcomes = ihrissmartrequire('config/operationOutcomes')
+
+router.get('/indices', (req, res) => {
+  let relationships = []
+  searchRels().then(() => {
+    let indices = []
+    let promises = []
+    for(let rel of relationships) {
+      promises.push(new Promise((resolve) => {
+        let details = rel.resource.extension.find(ext => ext.url === 'http://ihris.org/fhir/StructureDefinition/iHRISReportDetails');
+        let display = details.extension && details.extension.find((ext) => {
+          return ext.url === 'label'
+        })?.valueString
+        let index = details.extension && details.extension.find((ext) => {
+          return ext.url === 'name'
+        })?.valueString
+        if(index) {
+          let url = URI(nconf.get('elasticsearch:base')).segment(index)
+          url = url.toString()
+          axios({
+            method: 'GET',
+            url,
+            auth: {
+              username: nconf.get('elasticsearch:username'),
+              password: nconf.get('elasticsearch:password'),
+            }
+          }).then(() => {
+            indices.push({
+              name: index,
+              display,
+              id: rel.resource.id
+            })
+            resolve()
+          })
+        } else {
+          resolve()
+        }
+      }))
+    }
+    Promise.all(promises).then(() => {
+      return res.json(indices)
+    }).catch(() => {
+      res.status(500).send()
+    })
+  }).catch(() => {
+    return res.status(500).send()
+  })
+
+  function searchRels() {
+    return new Promise((resolve, reject) => {
+      fhirAxios.search('Basic', {code: 'iHRISRelationship'}).then((rels) => {
+        relationships = relationships.concat(rels.entry)
+        if(rels.link) {
+          let next = rels.link.find((link) => {
+            return link.relation === 'next'
+          })
+          if(next) {
+            followLinks(next.url).then(() => {
+              return resolve()
+            }).catch(() => {
+              return reject()
+            })
+          } else {
+            return resolve()
+          }
+        } else {
+          return resolve()
+        }
+      }).catch((err) => {
+        console.log(err);
+        return reject()
+      })
+    })
+  }
+
+  function followLinks(link) {
+    return new Promise((resolve, reject) => {
+      let params = link.split('?')[1]
+      let url = fhirAxios.baseUrl.href
+      url += '?' + params
+      fhirAxios.searchLink(url).then((rels) => {
+        relationships = relationships.concat(rels.entry)
+        if(rels.link) {
+          let next = rels.link.find((link) => {
+            return link.relation === 'next'
+          })
+          if(next) {
+            followLinks(next.url).then(() => {
+              return resolve()
+            }).catch((err) => {
+              console.log(err);
+              return reject()
+            })
+          } else {
+            return resolve()
+          }
+        } else {
+          return resolve()
+        }
+      }).catch((err) => {
+        console.log(err);
+        return reject()
+      })
+    })
+  }
+})
+
+router.get('/listFields/:index', (req, res) => {
+  let id = req.query.id
+  let index = req.params.index
+  let relationship = {}
+  let mappings = {}
+  let fields = []
+  async.parallel({
+    rel: (callback) => {
+      fhirAxios.read('Basic', id).then((response) => {
+        relationship = response
+        return callback(null)
+      }).catch(() => {
+        return callback(true)
+      })
+    },
+    es: (callback) => {
+      es.mappings(index).then((response) => {
+        mappings = response
+        return callback(null)
+      }).catch(() => {
+        return callback(true)
+      })
+    }
+  }, (err) => {
+    if(err) {
+      return res.status(500).send()
+    }
+    let details = relationship.extension.find(ext => ext.url === 'http://ihris.org/fhir/StructureDefinition/iHRISReportDetails');
+    let links = relationship.extension.filter(ext => ext.url === 'http://ihris.org/fhir/StructureDefinition/iHRISReportLink');
+    details = mixin.flattenComplex(details.extension)
+    let elements = details['http://ihris.org/fhir/StructureDefinition/iHRISReportElement']
+    if(links.length > 0) {
+      for(let link of links) {
+        let flattenedLink = mixin.flattenComplex(link.extension);
+        if(flattenedLink['http://ihris.org/fhir/StructureDefinition/iHRISReportElement']) {
+          elements = elements.concat(flattenedLink['http://ihris.org/fhir/StructureDefinition/iHRISReportElement'])
+        }
+      }
+    }
+    if(elements.length > 0) {
+      for(let element of elements) {
+        let name = element.find((el) => {
+          return el.url === 'label'
+        })?.valueString
+        let display = element.find((el) => {
+          return el.url === 'display'
+        })?.valueString
+        if(!display || !name) {
+          continue
+        }
+        for(let mapping in mappings) {
+          if(mapping === name) {
+            fields.push({
+              name,
+              display,
+              type: mappings[mapping].type
+            })
+          }
+        }
+      }
+    }
+    return res.json(fields)
+  })
+})
 
 router.post("/export/:format/:index", (req, res) => {
   let searchQry = req.body.query;
@@ -177,17 +349,14 @@ router.post('/:index/:operation?', (req, res) => {
       }
     }
   }
-  let from = req.query.from
-  let size = req.query.size
   let url = URI(nconf.get('elasticsearch:base')).segment(indexName)
   if(operation) {
     url = url.segment(operation)
   }
-  if(from) {
-    url = url.addQuery('from', from)
-  }
-  if(size) {
-    url = url.addQuery('size', size)
+  if(req.query) {
+    for (let query in req.query) {
+      url = url.addQuery(query, req.query[query])
+    }
   }
   url = url.toString()
   axios({
@@ -209,73 +378,74 @@ router.post('/:index/:operation?', (req, res) => {
 router.get('/populateFilter/:index/:field', (req, res) => {
   let indexName = req.params.index
   let field = req.params.field
+  const dataType = req.query.dataType
 
-  //get filter data type
-  let url = URI(nconf.get('elasticsearch:base')).segment(indexName).segment('_mapping').toString()
-  const options = {
-    method: 'GET',
-    url,
-    auth: {
-      username: nconf.get('elasticsearch:username'),
-      password: nconf.get('elasticsearch:password'),
-    }
-  };
-  axios(options).then((mappings) => {
-    let dataType = mappings.data[indexName].mappings.properties[field].type
-    if(dataType === 'text') {
-      field = `${field}.keyword`
-    }
-    let body = {
-      size: 0,
-      aggs: {
-        uniq_values: {
-          composite: {
-            sources: [
-              { value: { terms: { field: field } } }
-            ]
-          }
+  if(dataType === 'text') {
+    field = `${field}.keyword`
+  }
+  let body = {
+    size: 0,
+    aggs: {
+      uniq_values: {
+        composite: {
+          sources: [
+            { value: { terms: { field: field } } }
+          ]
         }
       }
     }
-    let url = URI(nconf.get('elasticsearch:base')).segment(indexName).segment('_search').toString()
-    let next = true
-    let buckets = []
-    async.whilst(
-      callback1 => {
-        return callback1(null, next !== false);
-      },
-      callback => {
-        let options = {
-          method: 'GET',
-          url,
-          auth: {
-            username: nconf.get('elasticsearch:username'),
-            password: nconf.get('elasticsearch:password'),
-          },
-          data: body
-        };
-        next = false;
-        axios(options).then((response) => {
-          buckets = buckets.concat(response.data.aggregations.uniq_values.buckets)
-          if(response.data.aggregations.uniq_values.buckets.length > 0) {
-            body.aggs.uniq_values.composite.after = {}
-            body.aggs.uniq_values.composite.after.value = response.data.aggregations.uniq_values.after_key.value
-            next = true
-          }
-          return callback(null, next);
-        }).catch((err) => {
-          logger.error(err.message);
-          return res.status(500).send()
-        })
-      }, () => {
-        return res.status(200).json(buckets)
-      }
-    );
-  }).catch((err) => {
-    logger.error(err.message);
-    return res.status(500).send()
-  })
-
-
+  }
+  let url = URI(nconf.get('elasticsearch:base')).segment(indexName).segment('_search').toString()
+  let next = true
+  let buckets = []
+  async.whilst(
+    callback1 => {
+      return callback1(null, next !== false);
+    },
+    callback => {
+      let options = {
+        method: 'GET',
+        url,
+        auth: {
+          username: nconf.get('elasticsearch:username'),
+          password: nconf.get('elasticsearch:password'),
+        },
+        data: body
+      };
+      next = false;
+      axios(options).then((response) => {
+        buckets = buckets.concat(response.data.aggregations.uniq_values.buckets)
+        if(response.data.aggregations.uniq_values.buckets.length > 0) {
+          body.aggs.uniq_values.composite.after = {}
+          body.aggs.uniq_values.composite.after.value = response.data.aggregations.uniq_values.after_key.value
+          next = true
+        }
+        return callback(null, next);
+      }).catch((err) => {
+        logger.error(err.message);
+        return res.status(500).send()
+      })
+    }, () => {
+      return res.status(200).json(buckets)
+    }
+  );
+  // //get filter data type
+  // let url = URI(nconf.get('elasticsearch:base')).segment(indexName).segment('_mapping').toString()
+  // const options = {
+  //   method: 'GET',
+  //   url,
+  //   auth: {
+  //     username: nconf.get('elasticsearch:username'),
+  //     password: nconf.get('elasticsearch:password'),
+  //   }
+  // };
+  // axios(options).then((mappings) => {
+  //   let dataType = mappings.data[indexName].mappings.properties[field].type
+    
+  // }).catch((err) => {
+  //   logger.error(err.message);
+  //   return res.status(500).send()
+  // })
 })
+
 module.exports = router

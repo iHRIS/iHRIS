@@ -50,7 +50,6 @@
         class="elevation-1 mt-3"
         item-key="id"
         style="cursor: pointer"
-
       ></v-data-table>
     </v-card>
     <v-row justify="center">

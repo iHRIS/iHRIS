@@ -2,6 +2,32 @@ const fs = require('fs');
 const nconf = require('../modules/config')
 const ihrissmartrequire = require('ihrissmartrequire')
 
+const flattenComplex = (extension) => {
+  let results = {};
+  for (let ext of extension) {
+    let value = '';
+    for (let key of Object.keys(ext)) {
+      if (key !== 'url') {
+        value = ext[key];
+      }
+    }
+    if (results[ext.url]) {
+      if (Array.isArray(results[ext.url])) {
+        results[ext.url].push(value);
+      } else {
+        results[ext.url] = [results[ext.url], value];
+      }
+    } else {
+      if (Array.isArray(value)) {
+        results[ext.url] = [value];
+      } else {
+        results[ext.url] = value;
+      }
+    }
+  }
+  return results;
+}
+
 const removeDir = function(path) {
   if (fs.existsSync(path)) {
     const files = fs.readdirSync(path);
@@ -74,5 +100,6 @@ const updateConfigFile = function (path, newValue, callback) {
 module.exports = {
   removeDir,
   getFilesFromDir,
-  updateConfigFile
+  updateConfigFile,
+  flattenComplex
 }

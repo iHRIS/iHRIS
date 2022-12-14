@@ -56,6 +56,26 @@ const getData = ({indexName, searchQuery}, callback) => {
   )
 }
 
+const mappings = (index) => {
+  return new Promise((resolve, reject) => {
+    let url = URI(nconf.get('elasticsearch:base')).segment(index).segment('_mapping').toString()
+    axios({
+      method: 'GET',
+      url,
+      auth: {
+        username: nconf.get('elasticsearch:username'),
+        password: nconf.get('elasticsearch:password'),
+      }
+    }).then((mappings) => {
+      resolve(mappings.data[index]?.mappings?.properties)
+    }).catch((err) => {
+      console.log(err);
+      reject(err)
+    })
+  })
+}
+
 module.exports = {
-  getData
+  getData,
+  mappings
 }

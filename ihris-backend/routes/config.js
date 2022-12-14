@@ -1239,7 +1239,7 @@ router.get('/report/es/:report', (req, res) => {
         };
         axios(options).then((mappings) => {
             reportData.mappings = mappings.data[indexName]
-            for (index in reportData.filters) {
+            for (let index in reportData.filters) {
                 let field = reportData.filters[index].field
                 if (!mappings.data[indexName].mappings.properties[field]) {
                     logger.error('Field ' + field + 'not found on elasticsearch mapping')

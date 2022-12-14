@@ -98,10 +98,9 @@ const fhirAxios = {
   },
   searchLink: ( url ) => {
     return new Promise( (resolve, reject) => {
-      let url = new URL(next.url)
       let auth = fhirAxios.__getAuth()
 
-      axios.get( url.href, { auth: auth, params: params } ).then( (response) => {
+      axios.get( url, { auth: auth } ).then( (response) => {
         resolve( response.data )
       } ).catch( (err) => {
         reject( err )
