@@ -5,7 +5,7 @@ Technical documentation has been started and is hosted at: [https://iHRIS.github
 ## Installation
 Follow instructions in here to install dependents
 See the notes/ directory for additional installation instructions for development.  
-Installation instructions for supporting software is [here](notes/install.md).
+Installation instructions for supporting software is [here](admin/install.md).
 A docker version for simpler installation will be created soon.
 
 iHRIS is built with a VueJS frontend and a NodeJS backend, both of which are included 
