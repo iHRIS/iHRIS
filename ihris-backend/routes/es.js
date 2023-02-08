@@ -15,6 +15,9 @@ const fhirAxios = require('../modules/fhir/fhirAxios')
 const outcomes = ihrissmartrequire('config/operationOutcomes')
 
 router.get('/indices', (req, res) => {
+  if ( !req.user ) {
+    return res.status(401).json( outcomes.NOTLOGGEDIN)
+  }
   let relationships = []
   searchRels().then(() => {
     let indices = []
@@ -120,6 +123,9 @@ router.get('/indices', (req, res) => {
 })
 
 router.get('/listFields/:index', (req, res) => {
+  if ( !req.user ) {
+    return res.status(401).json( outcomes.NOTLOGGEDIN)
+  }
   let id = req.query.id
   let index = req.params.index
   let relationship = {}
@@ -185,6 +191,9 @@ router.get('/listFields/:index', (req, res) => {
 })
 
 router.post("/export/:format/:index", (req, res) => {
+  if ( !req.user ) {
+    return res.status(401).json( outcomes.NOTLOGGEDIN)
+  }
   let searchQry = req.body.query;
   let headers = req.body.headers;
   let label = req.body.label;
@@ -292,6 +301,9 @@ router.post("/export/:format/:index", (req, res) => {
 });
 
 router.get('/:index/:operation?', (req, res) => {
+  if ( !req.user ) {
+    return res.status(401).json( outcomes.NOTLOGGEDIN)
+  }
   let indexName = req.params.index
   let operation = req.params.operation
   let from = req.query.from
@@ -376,6 +388,9 @@ router.post('/:index/:operation?', (req, res) => {
 })
 
 router.get('/populateFilter/:index/:field', (req, res) => {
+  if ( !req.user ) {
+    return res.status(401).json( outcomes.NOTLOGGEDIN)
+  }
   let indexName = req.params.index
   let field = req.params.field
   const dataType = req.query.dataType
