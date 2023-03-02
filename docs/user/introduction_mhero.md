@@ -39,4 +39,4 @@ Browse to the upper right corner on any page, click Log Out.
 
 ![Alt text](../img/log_out.JPG 'MHERO Log Out Page')
 
-The Welcome page appears. You will have to re-enter your username and password to regain access to the system.
+The Welcome page appears. You will have to re-enter your username and password to regain access to the mHero system.
