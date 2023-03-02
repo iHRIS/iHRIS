@@ -125,11 +125,12 @@ Using the search filters, you can search by
 ● Mother’s Name
 ● Employee ID, or
 ● PIN ID
+
 For example, type part or all of a name or ID number into the corresponding fields. Remember that you must hit the "Enter" or "Return" key on your keyboard to start the search.
 
 When you search, records matching your search will be pulled from the database. You can then select a search result to view the full record - this is done by clicking anywhere in the row of the record you want to view.
 
-4.2.1 Tips for Searching
+**Tips for Searching**
 
 1. When you enter a search term, it will only search the field in which you type the search term – not any other fields even if there is a match in another field. The example below shows searching using only first name “Ismail”
 
@@ -141,9 +142,12 @@ Searching using Grand Father’s Names “Ismail” also gives different results
 
 3. Remember that to remove search filter, you should click on the X that is at the right side of the search field. You will need to do this for every field individually if you desire to remove other search terms/filters.
 
-4.3 Edit Person
+### Edit Person
+
 There are two types of information that can be edited in a Person record: the basic information that is included in the initial “Add Person” form when a new record is created, and additional information that is added once a new employee has started work.
-4.3.1 Basic Employee Information
+
+##### Basic Employee Information
+
 To add or update information in an existing employee record:
 
 1. Following the process described previously to search for a record, locate the existing employee record that you wish to modify and click on it to open the record.
@@ -158,26 +162,33 @@ To add or update information in an existing employee record:
 
 4. The following fields from the Add Person module can be edited after clicking the “Edit” button
 
-1. ● Photo
-2. ● Names (Basic Information)
-3. ● Demographic Details
-4. ● Identifiers
-5. ● Contact Details
-6. ● Language Details
-7. ● Remarks
+1. Photo
+2. Names (Basic Information)
+3. Demographic Details
+4. Identifiers
+5. Contact Details
+6. Language Details
+7. Remarks
 
 5. You can also add or edit additional fields from here, including whether the employee is active, Disability information, Dependent Details, Training Details, and attachment documents.
-Disability Details
+
+
+**Disability Details**
+
 ● Select from the dropdown menu
 ● Dropdown options include: Hearing impaired, mentally impaired, mobility impaired, Requires crib, requires crutches, requires gurney, requires walker, requires wheelchair, speech impaired, and vision impaired.
-Dependent Details
+
+**Dependent Details**
+
 ● Type dependent name into the field
 ● Add additional dependents by clicking the plus sign - See "Search People" for information on adding multiple entries for one field
 ● Dependent’s name
 ● Dependent’s Date of Birth (select from calendar)
 ● Relationship (select from dropdown menu)
 ● Dependent’s Gender (select from dropdown menu)
-Training Details
+
+**Training Details**
+
 ● Click the plus sign if you want to enter training information, then type in the training title in the space that appears.
 ● Indicate the category of the training by selecting an option from the dropdown.
  ■ Academic (less than Grade 12 education level)
@@ -185,10 +196,11 @@ Training Details
  ■ Health Professional)
 ● Add additional training by clicking the plus sign - see tips on adding multiple entries for one field/section under “Tips for adding information”.
 Attachment – search your computer to add a document as an attachment to the record (add possible reasons or examples of attachments)
-6. When you are done making changes, click the "Save" button at the top of the right sidebar. If you have not entered all of the required fields indicated with a red asterisk, you will not be able to save the record. Review the form by scrolling to determine which required fields still need to be completed.
 
+6. When you are done making changes, click the "Save" button at the top of the right sidebar. If you have not entered all of the required fields indicated with a red asterisk, you will not be able to save the record. Review the form by scrolling to determine which required fields still need to be completed.
 You can leave your changes without saving them by clicking the "Cancel" button in the top of the right sidebar.
-4.3.2 Supplemental Employee Information
+
+## Supplemental Employee Information
 There is supplemental information about an employee that can be added to a Person record after it has been created, but it is not accessible when you are in edit mode (making changes after clicking "Edit" at the top of a record). If you are in edit mode you should Save or Cancel. Then you will see the record again and can view the additional information.
 
 1. In the list of section located in the right sidebar, scroll down until you see the sections after "Remarks".
@@ -196,15 +208,15 @@ There is supplemental information about an employee that can be added to a Perso
 
 The supplemental sections include:
 
-1. ● Current Job Positions
-2. ● Leave Stock Information
-3. ● Leave Information
-4. ● Education History Information
-5. ● Performance Evaluation Information
-6. ● Employment History
-7. ● Professional License Category
-8. ● Emergency Contact
-9. ● Collateral
-10. ● Employee Discipline Information
-11. ● Employee Salary Information
-12. ● Employee Award Information
+1. Current Job Positions
+2. Leave Stock Information
+3. Leave Information
+4. Education History Information
+5. Performance Evaluation Information
+6. Employment History
+7. Professional License Category
+8. Emergency Contact
+9. Collateral
+10. Employee Discipline Information
+11. Employee Salary Information
+12. Employee Award Information
