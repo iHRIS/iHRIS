@@ -131,18 +131,18 @@ const routes = [{
     component: () => import( /* webpackChunkName: "custom" */ "../views/custom.vue")
   },
   {
-    path: "/apps",
-    name: "apps",
+    path: "/ihris-apps-list",
+    name: "ihris-apps-list",
     component: () => import( /* webpackChunkName: "apps" */ "../views/apps.vue")
   },
   {
-    path: "/install-app",
-    name: "install-app",
+    path: "/ihris-apps-install",
+    name: "ihris-apps-install",
     component: () => import( /* webpackChunkName: "install-app" */ "../components/ihris/install-app.vue")
   },
   {
-    path: "/uninstall-app",
-    name: "uninstall-app",
+    path: "/ihris-apps-uninstall",
+    name: "ihris-apps-uninstall",
     component: () => import( /* webpackChunkName: "uninstall-app" */ "../components/ihris/uninstall-app.vue")
   },
   {

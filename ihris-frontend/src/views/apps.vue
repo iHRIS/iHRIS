@@ -81,18 +81,11 @@ export default {
   },
   filters: {
     createAppURL(app) {
-      let baseURL = location.href.split('/')
-      baseURL.pop()
-      baseURL = baseURL.join('/')
-      return "/ihrisapp/" + app.app_short_name + "/" + app.launch_path + "?baseURL=" + baseURL 
+      return "/ihrisapp/" + app.app_short_name + "/" + app.launch_path
     }
   },
   created() {
     this.getApps()
-    let url = location.href.split('/')
-    url.pop()
-    url = url.join('/')
-    this.baseURL = url
   }
 }
 </script>

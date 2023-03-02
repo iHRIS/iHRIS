@@ -1739,7 +1739,6 @@ router.get("/employeeCv/:id", async (req, res) => {
         try {
             const user = await fhirAxios.read("/Practitioner", req.params.id);
             userData.fullName = `${user.name[0].prefix[0]} ${user.name[0].given[0]} ${user.name[0].family}`
-            console.log(JSON.stringify(user, null, 2))
 
             userData.gender = user.gender;
             userData.photo = user.photo;
