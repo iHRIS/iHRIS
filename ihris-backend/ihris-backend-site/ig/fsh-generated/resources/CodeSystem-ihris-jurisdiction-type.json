@@ -14,19 +14,19 @@
       "definition": "Country"
     },
     {
-      "code": "region",
-      "display": "Region",
-      "definition": "Region"
+      "code": "municipality",
+      "display": "Municipality",
+      "definition": "Municipality"
     },
     {
-      "code": "district",
-      "display": "District",
-      "definition": "District"
+      "code": "subdistrict",
+      "display": "Sub District",
+      "definition": "Sub District"
     },
     {
-      "code": "county",
-      "display": "County",
-      "definition": "County"
+      "code": "village",
+      "display": "Village",
+      "definition": "Village"
     }
   ],
   "date": "2020-11-12T08:41:04.362Z",

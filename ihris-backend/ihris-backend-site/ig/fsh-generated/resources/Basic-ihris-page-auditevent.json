@@ -30,6 +30,10 @@
         },
         {
           "url": "search",
+          "valueString": "UserID|AuditEvent.agent.altId"
+        },
+        {
+          "url": "search",
           "valueString": "User|AuditEvent.agent.name"
         },
         {
@@ -62,11 +66,15 @@
         },
         {
           "url": "filter",
-          "valueString": "Date|date"
+          "valueString": "UserID|altid"
         },
         {
           "url": "filter",
           "valueString": "User|agent-name:contains"
+        },
+        {
+          "url": "filter",
+          "valueString": "Date|date"
         }
       ]
     },
@@ -86,7 +94,27 @@
         },
         {
           "url": "field",
-          "valueString": "AuditEvent.id"
+          "valueString": "AuditEvent.agent.altIdd"
+        },
+        {
+          "url": "field",
+          "valueString": "AuditEvent.agent.name"
+        },
+        {
+          "url": "field",
+          "valueString": "AuditEvent.subtype.display"
+        },
+        {
+          "url": "field",
+          "valueString": "AuditEvent.entity.what.reference"
+        },
+        {
+          "url": "field",
+          "valueString": "AuditEvent.outcome"
+        },
+        {
+          "url": "field",
+          "valueString": "AuditEvent.recorded"
         }
       ],
       "url": "http://ihris.org/fhir/StructureDefinition/ihris-page-section"

@@ -136,9 +136,9 @@ Title:           "Jurisdiction Type"
 * ^date = "2020-11-12T08:41:04.362Z"
 * ^version = "0.4.0"
 * #country "Country" "Country"
-* #region "Region" "Region"
-* #district "District" "District"
-* #county "County" "County"
+* #municipality "Municipality" "Municipality"
+* #subdistrict "Sub District" "Sub District"
+* #village "Village" "Village"
 
 ValueSet:         IhrisFacilityTypeValueSet
 Id:               ihris-facility-type

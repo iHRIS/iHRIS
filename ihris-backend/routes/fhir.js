@@ -502,4 +502,21 @@ router.get("/\\$short-name", (req, res) => {
 
 } )
 
+router.delete("/:resource/:id", (req, res) => {
+  if ( !req.user ) {
+    return res.status(401).json( outcomes.NOTLOGGEDIN )
+  }
+  let allowed = req.user.hasPermissionByName( "delete", req.params.resource, req.params.id )
+  if ( !allowed ) {
+    return res.status(401).json( outcomes.DENIED )
+  }
+  fhirAxios.delete(req.params.resource, req.params.id).then((response) => {
+    return res.status(200).json(response)
+  }).catch((err) => {
+    let outcome = { ...outcomes.ERROR }
+    outcome.issue[0].diagnostics = err.message
+    return res.status(500).json( outcome )
+  })
+})
+
 module.exports = router
