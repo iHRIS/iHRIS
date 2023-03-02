@@ -16,8 +16,11 @@ c. To add a department or case team, at the top of the table displaying departme
 2. Enter the information about the new location, facility, or department/case team to its record. Here are a few tips:
 
 ● Fields in the blank form that are required are indicated with a red asterisk.
+
 ● Dropdown lists are available for some fields and are noted in the list below.
+
 ● With dropdown lists you can start typing the word that you wish to enter and you will be taken to it in the list, rather than scrolling through the whole list.
+
 ● For the other fields you will type the information directly into the space provided.
 
 ### The following information can be entered on the Location form:
@@ -29,6 +32,7 @@ c. To add a department or case team, at the top of the table displaying departme
 ● Location Type (required, select from the dropdown list)
 
 ● Part of (Country/Region/Zone/Woreda) (required, select from dropdown menus)
+
 ● Status (select from dropdown list)
 
 ###  The following information can be entered on the Facility form:
@@ -36,20 +40,30 @@ c. To add a department or case team, at the top of the table displaying departme
 **Facility**
 
 ● Name (required)
+
 ● Facility Service Type (required, select from the dropdown list)
+
 ● Facility Physical Type (required, select from the dropdown list)
+
 ● Part of (Country/Region/Zone/Woreda) (required, select from dropdown menus)
+
 ● Status (required, select from the dropdown list)
+
 ● Co-ordinates – longitude and latitude
+
 
 ### The following information can be entered on the Department/CaseTeam form:
 
 **Department/CaseTeam **
 
 ● Name (required)
+
 ● Organization Type (required, select from the dropdown list)
+
 ● Part Of (Department/CaseTeam)
+
 ● Status (required, choose true or false)
+
 
 When you are done making changes, click the "Save" button at the top of the right sidebar. If you have not entered all of the required fields indicated with a red asterisk, you will not be able to save the record. Review the form by scrolling to determine which required fields still need to be completed. You can leave your entry without saving it by clicking the "Cancel" button in the top of the right corner.
 
