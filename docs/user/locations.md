@@ -25,7 +25,9 @@ c. To add a department or case team, at the top of the table displaying departme
 **Geographical Location**
 
 ● Name (required)
+
 ● Location Type (required, select from the dropdown list)
+
 ● Part of (Country/Region/Zone/Woreda) (required, select from dropdown menus)
 ● Status (select from dropdown list)
 
