@@ -1,6 +1,6 @@
 # iHRIS Apps
 
-This feature is used for enhancing iHRIS/ adding plugins.It allows the development of iHRIS  web applications in the developer's preferred programming language .
+This feature is used for enhancing iHRIS/ adding plugins. It allows the development of iHRIS  web applications in the developer's preferred programming language .
 
 Example- Dictionary app- Pulls all text in the system, and allows users to add translation for the text.
 
