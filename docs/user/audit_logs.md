@@ -1,3 +1,3 @@
 # Audit Logs
 
-This module enables a user to
+This document describes the audit logs element of the system.
