@@ -299,7 +299,7 @@ Usage: #example
 * parameter[=].part[+].name = "site:nav:menu:audit:icon"
 * parameter[=].part[=].valueString = "mdi-lock-reset"
 * parameter[=].part[+].name = "site:nav:menu:audit:url"
-* parameter[=].part[=].valueString = "/resource/view/auditevent"
+* parameter[=].part[=].valueString = "/resource/search/auditevent"
 * parameter[=].part[+].name = "site:nav:menu:password:text"
 * parameter[=].part[=].valueString = "Change Password"
 * parameter[=].part[+].name = "site:nav:menu:password:order"
