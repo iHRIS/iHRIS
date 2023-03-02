@@ -88,10 +88,15 @@ The following information can be entered on a health worker’s person record:
 **Language Details**
 
 Select the plus sign to add a language
+
 • Language (select from dropdown list)
+
 • Proficiency (select the plus sign to add proficiency, select from drop down): Select Excellent, Good, Poor, Very Good
+
 • Proficiency Type (select the plus sign to add proficiency, select from drop down): Select Listening, Reading, Speaking, Writing
+
 • Click the plus sign if you want to enter a second proficiency or additional proficiency types (if this is applicable).
+
 •  Click the minus sign to remove a proficiency or proficiency type
 
 To enter a second language, click the plus sign next to Language. Repeat the above steps to Proficiency and Proficiency types for each additional language.
@@ -119,11 +124,17 @@ After a new record is saved, it is possible to edit or add additional informatio
 Existing health workers records can be accessed via “Search people” under the module “PEOPLE”. From the left side navigation bar, Click “Search People” to search for an employee.
 
 Using the search filters, you can search by
+
 ● First name
+
 ● Father’s Name
+
 ● Grand Father’s Name
+
 ● Mother’s Name
+
 ● Employee ID, or
+
 ● PIN ID
 
 For example, type part or all of a name or ID number into the corresponding fields. Remember that you must hit the "Enter" or "Return" key on your keyboard to start the search.
@@ -154,10 +165,14 @@ To add or update information in an existing employee record:
 2. At the top of the right sidebar click on the "Edit" button.
 
 3. Add information to the record. Here are a few tips:
+
+
 ● The record page is broken into multiple sections. You can scroll down to access a different section, or you can click on a section from the right sidebar to skip directly to that section.
 
 ● For the fields you wish to edit you can select item(s) from dropdown list(s) or type information directly into the record in any section and field.
+
 ● Fields that are required are indicated with a red asterisk. Note: there are additional required fields when editing a record than when initially creating a record.
+
 ● Remember that for some fields it will be possible to include more than one entry.
 
 4. The following fields from the Add Person module can be edited after clicking the “Edit” button
@@ -176,24 +191,32 @@ To add or update information in an existing employee record:
 **Disability Details**
 
 ● Select from the dropdown menu
+
 ● Dropdown options include: Hearing impaired, mentally impaired, mobility impaired, Requires crib, requires crutches, requires gurney, requires walker, requires wheelchair, speech impaired, and vision impaired.
 
 **Dependent Details**
 
 ● Type dependent name into the field
+
 ● Add additional dependents by clicking the plus sign - See "Search People" for information on adding multiple entries for one field
+
 ● Dependent’s name
+
 ● Dependent’s Date of Birth (select from calendar)
+
 ● Relationship (select from dropdown menu)
+
 ● Dependent’s Gender (select from dropdown menu)
 
 **Training Details**
 
 ● Click the plus sign if you want to enter training information, then type in the training title in the space that appears.
 ● Indicate the category of the training by selecting an option from the dropdown.
+
  ■ Academic (less than Grade 12 education level)
  ■ Administrative
  ■ Health Professional)
+ 
 ● Add additional training by clicking the plus sign - see tips on adding multiple entries for one field/section under “Tips for adding information”.
 Attachment – search your computer to add a document as an attachment to the record (add possible reasons or examples of attachments)
 
