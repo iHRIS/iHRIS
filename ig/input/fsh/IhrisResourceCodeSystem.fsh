@@ -6,6 +6,8 @@ Title:          "Code System for iHRIS Basic Resources."
 * #page         "iHRIS Page"        "Page definitions for viewing and editing resources."
 * #practitioner-link         "iHRIS Practitioner Link"        "Basic resource for customization that links to a Practitioner."
 * #training-link "iHRIS Training Link"        "Basic resource for customization that links to a Qualify training."
+* #visualization "iHRIS Data Visualization" "iHRIS Data Visualization"
+* #dashboard "iHRIS Dashboard" "iHRIS Dashboard"
 
 ValueSet:       IhrisResourceValueSet
 Id:             ihris-resource-valueset

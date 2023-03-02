@@ -58,7 +58,7 @@
           </v-list-group>
         </template>
         <template v-else>
-          <v-list-item :to="item.url" :key="item.id">
+          <v-list-item :to="item | getInternalURL" :href="item | getExternalURL" :key="item.id">
             <v-list-item-icon class="mr-3">
               <v-icon>{{item.icon}}</v-icon>
             </v-list-item-icon>
@@ -104,6 +104,20 @@ export default {
       deep: true
     },
   },
+  filters: {
+    getInternalURL(item) {
+      if(item.external === "true") {
+        return ""
+      }
+      return item.url
+    },
+    getExternalURL(item) {
+      if(item.external === "true") {
+        return item.url
+      }
+      return ""
+    }
+  },
   data: function() {
     return {
       menu: [],
@@ -134,7 +148,8 @@ export default {
               id: sub_id,
               text: this.nav.menu[menu_id].menu[sub_id].text,
               url: this.nav.menu[menu_id].menu[sub_id].url,
-              order: this.nav.menu[menu_id].menu[sub_id].order
+              order: this.nav.menu[menu_id].menu[sub_id].order,
+              external: this.nav.menu[menu_id].external
             }
             entry.menu.push( sub )
             entry.menu.sort( (a,b) => a.text === b.text ? 0 : ( a.text < b.text ? -1 : 1 ) )
@@ -142,6 +157,7 @@ export default {
           }
         } else if ( this.nav.menu[menu_id].url ) {
           entry.url = this.nav.menu[menu_id].url
+          entry.external = this.nav.menu[menu_id].external
         }
         this.menu.push( entry )
       }
