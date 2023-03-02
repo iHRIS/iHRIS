@@ -54,7 +54,7 @@ c. To add a department or case team, at the top of the table displaying departme
 
 ### The following information can be entered on the Department/CaseTeam form:
 
-**Department/CaseTeam **
+**Department/CaseTeam**
 
 ● Name (required)
 
