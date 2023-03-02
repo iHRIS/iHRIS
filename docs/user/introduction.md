@@ -29,6 +29,7 @@ Using iHRIS, HR professionals are able create a centralized information base on 
 ## iHRIS Use Framework
 
 HRIS’s primary role is to manage workers employed through the FMOH at the ministry, regional, hospital, zonal, and woreda level. A decision maker within the organization is able analyze this data to answer key human resource management and policy questions, such as:
+
 • Are employees deployed in positions that match their qualifications and education?
 • Are employees optimally deployed in locations to meet needs?
 • Are pay rates equitable across similar jobs?
