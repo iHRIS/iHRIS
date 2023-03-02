@@ -24,10 +24,10 @@ Here are some tips to help users through the process of adding information to re
 6. There may be date fields that require you to select the date on a calendar (see 3.5.3 for steps to select a date using the calendar tool).
 7. There may also be an option to include more than one entry for a single record component. For example, an employee may speak multiple languages or may have more than one dependent. If you see a dark gray bar at the top of a field with a plus sign at the right corner of the bar, this denotes a field that can have multiple entries.
 
-8. When selecting a location you will work through a series of dropdown menus.
-• Click on the Region to select it, or, click on the arrow beside the Region to see the corresponding Zones, then
-• Click on the Zone to select it, or click on the small grey arrow beside the Zone to see the corresponding Woredas, then
-• Select the Woreda (if available)
+8. When selecting a location you will work through a series of dropdown menus:
+      • Click on the Region to select it, or, click on the arrow beside the Region to see the corresponding Zones, then
+      • Click on the Zone to select it, or click on the small grey arrow beside the Zone to see the corresponding _Woredas, then
+      • Select the _Woreda (if available)
 
 ### Person Information
 
@@ -47,14 +47,16 @@ The following information can be entered on a health worker’s person record:
 * Mother’s Full name (required)
 * Mother's name alternative language
 
-Demographic Information
+**Demographic Information**
+
 • Date of birth (required, select date from calendar)
 • Gender (required, select from dropdown)
 • Marital status (select from dropdown)
 • Nationality (Ethiopian is default, otherwise select from dropdown)
 • Ethnicity (select from dropdown)
 
-Identifiers (identification numbers)
+**Identifiers (identification numbers)**
+
 ● Employee ID (required)
 ● Pension number
 ● TIN number
@@ -65,33 +67,37 @@ Identifiers (identification numbers)
  Driving License Type (select from dropdown)
  Driving License ID
 
-Contacts
+**Contacts**
+
 ● Mobile phone
 ● Work Phone
 ● Work email
 ● Residence (required)
 
-Language Details
+**Language Details**
+
 Select the plus sign to add a language
+
 • Language (select from dropdown list)
 • Proficiency (select the plus sign to add proficiency, select from drop down): Select Excellent, Good, Poor, Very Good
 • Proficiency Type (select the plus sign to add proficiency, select from drop down): Select Listening, Reading, Speaking, Writing
 • Click the plus sign if you want to enter a second proficiency or additional proficiency types (if this is applicable).
-•  Click the minus sign to remove a proficiency or proficiency type
+• Click the minus sign to remove a proficiency or proficiency type
 
-To enter a second language, click the plus sign next to Language. Repeat the above steps to Proficiency and Proficiency types for each additional language.
+To enter a second language, **Click the plus sign next to Language**. Repeat the above steps to Proficiency and Proficiency types for each additional language.
 
-Category
+**Category**
+
 For category, select from dropdown list
 ● Select Academic (less than Grade 12 education level, Administrative, Health Professional
 
-Remarks
+***Remarks***
 If you have any general remarks about the employee to record, click on the plus sign then type any special remarks regarding the employee into the text box
 
-Photo
+***Photo***
 Upload a photo of the employee by clicking in the blank field. From the pop-up window, select a file on your computer that you would like to upload as the picture of the employee.
 
-Note: There are additional employee record fields that can only be filled in through editing an existing position which will be explained under edit person record.
+Important Note: There are additional employee record fields that can only be filled in through editing an existing position which will be explained under edit person record.
 
 2. Saving New Record
 When you are finished adding information or making changes, click the "Save" button at the top of the right sidebar. If you have not entered information in all the required fields indicated with a red asterisk, you will not be able to save the record. Review the form by scrolling to determine which required fields still need to be completed.
@@ -110,6 +116,7 @@ Using the search filters, you can search by
 ● Mother’s Name
 ● Employee ID, or
 ● PIN ID
+
 For example, type part or all of a name or ID number into the corresponding fields. Remember that you must hit the "Enter" or "Return" key on your keyboard to start the search.
 
 When you search, records matching your search will be pulled from the database. You can then select a search result to view the full record - this is done by clicking anywhere in the row of the record you want to view.
