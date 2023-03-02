@@ -29,7 +29,7 @@
     "is-empty": "^1.2.0",
     "jest-cucumber": "^3.0.1",
     "json-as-xlsx": "^2.4.2",
-    "jsonwebtoken": "^8.5.1",
+    "jsonwebtoken": "^9.0.0",
     "jwt-decode": "^3.1.2",
     "keycloak-connect": "^15.0.2",
     "lodash": ">=4.17.21",
