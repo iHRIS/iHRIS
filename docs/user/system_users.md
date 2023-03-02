@@ -25,4 +25,4 @@ To search, type the name of the person in the “User” field and hit enter to 
 2. Enter your old password and the new password twice
 3. Click the “Save” button to change your password.
 
-Note: if you have forgotten the password or user email, get in touch with FMOH system administrator.
+Note: if you have forgotten the password or user email, get in touch with iHRIS system administrator.
