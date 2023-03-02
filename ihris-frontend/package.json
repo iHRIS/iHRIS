@@ -36,7 +36,7 @@
   "devDependencies": {
     "@intlify/vue-i18n-loader": "^3.2.0",
     "@vue/cli-plugin-babel": "^5.0.6",
-    "@vue/cli-plugin-e2e-nightwatch": "~4.4.0",
+    "@vue/cli-plugin-e2e-nightwatch": "~5.0.8",
     "@vue/cli-plugin-eslint": "^5.0.6",
     "@vue/cli-plugin-router": "~4.4.0",
     "@vue/cli-plugin-unit-jest": "^5.0.6",
