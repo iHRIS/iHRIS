@@ -37,15 +37,15 @@ The following information can be entered on a health worker’s person record:
 
 **Name**
 
-* • Prefix
-* • First name (required)
-* • First name alternative language
-* • Father’s name (required)
-* • Father’s name alternative language
-* • Grandfather’s last name (required)
-* • Grandfather’s last name alternative language
-* • Mother’s Full name (required)
-* • Mother's name alternative language
+* Prefix
+* First name (required)
+* First name alternative language
+* Father’s name (required)
+* Father’s name alternative language
+* Grandfather’s last name (required)
+* Grandfather’s last name alternative language
+* Mother’s Full name (required)
+* Mother's name alternative language
 
 Demographic Information
 • Date of birth (required, select date from calendar)
