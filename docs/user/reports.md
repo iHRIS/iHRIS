@@ -6,12 +6,20 @@ The report in iHRIS provides summaries of the HR data in the system related to d
 The Employee Contract Report allows you to view and search information related to employee contracts, using different filters. The Employee Contract Report shows Employee ID, First Name, Father’s Name, Grandfather’s Name, Gender, Nationality, Ethnicity, Job Position, Department/Directorate, Start Date, End Date, Employment Status, Job Type, and Facility.
 
 1. By typing search terms or selecting different filter options from the dropdown lists, records that match your search will be pulled from the database and displayed. You can tailor your search using the following search filters:
+
+
 • Employee ID
+
 • First Name
+
 • Father’s Name
+
 • Grandfather’s Name
+
 • Gender (select from dropdown list)
+
 • Job Position (select from dropdown list)
+
 • Department/Directorate (select from dropdown list)
 • Start Date
 • End Date
