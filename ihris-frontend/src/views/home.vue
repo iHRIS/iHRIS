@@ -129,7 +129,7 @@
                     </h1>
                     <br/>
                     <p  class="pt-8 subtitle-1 text--primary font-weight-medium text-lg-justify">
-                      {{$t("App.hardcoded-texts.iHRIS is IntraHealth International's free, open source software that helps countries around the world track and manage their health workforce data to improve access to services. Countries use it to capture and maintain high-quality information for health workforce planning, management, regulation, and training.")}}
+                      {{$t("App.hardcoded-texts.what_is_ihris")}}
                     </p>
                   </v-card-text>
                 </v-card>

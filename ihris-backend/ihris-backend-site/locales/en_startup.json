@@ -94,7 +94,8 @@
       "You have been logged out due to inactivity": "You have been logged out due to inactivity",
       "Export" : "Export",
       "Customize Report" : "Customize Report",
-      "Please fill in all fields" : "Please fill in all fields"
+      "Please fill in all fields" : "Please fill in all fields",
+      "what_is_ihris": "iHRIS is IntraHealth International's free, open source software that helps countries around the world track and manage their health workforce data to improve access to services. Countries use it to capture and maintain high-quality information for health workforce planning, management, regulation, and training."
     }
   }
 }
