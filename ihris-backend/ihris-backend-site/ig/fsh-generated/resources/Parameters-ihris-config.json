@@ -16,11 +16,11 @@
             "code": "1.2.840.10065.1.12.1.14"
           }
         ],
-        "when": "2023-03-02T11:29:28.371Z",
+        "when": "2023-03-14T12:02:53.582Z",
         "who": {
           "reference": "http://ihris.org/fhir/Organization/ihris"
         },
-        "data": "aphKqX8Zk4TcaLzUCU4CWqKFHovb+4P/wGL0KQsPVgSEdNqcZi961feZ4xpPpQr8h5Mh1v2BkxjyzDsjacCyDLordO9IfcPULWaLRQCd9HM9PW8PknQWly9+vwDA1maqnowvzzGmfZqVdxT/8vLeS4f3TdGMxBI5aH9cOfOsgwg="
+        "data": "U3vAlgV19qVoJSaNIShnHSVRzn0IrXaDCWx9PgXbsTTY4lDNpQNl7saua4lsYHQSwSwFVqkjIhdChbQgWj+JWECgASZo595KkutA1Mgkw5oN037iH1LPwcdsfsLvF9tPOY1IMFa8MgwyGoUNI/jpXSLsboPliQKXuyPmlKMtBVA="
       }
     },
     {
@@ -184,7 +184,11 @@
         },
         {
           "name": "site:nav:menu:dashboard:url",
-          "valueString": "/dashboard"
+          "valueString": "/ihrisapp/ihris-dashboard/index.html#/dashBuilder"
+        },
+        {
+          "name": "site:nav:menu:dashboard:external",
+          "valueString": "true"
         },
         {
           "name": "site:nav:active",
@@ -535,6 +539,18 @@
           "valueString": "17"
         },
         {
+          "name": "site:nav:menu:database:menu:training:text",
+          "valueString": "In-Service Training Type/Category"
+        },
+        {
+          "name": "site:nav:menu:database:menu:training:url",
+          "valueString": "/resource/search/training"
+        },
+        {
+          "name": "site:nav:menu:database:menu:training:order",
+          "valueString": "18"
+        },
+        {
           "name": "site:nav:menu:reports:text",
           "valueString": "Reports"
         },
@@ -627,20 +643,20 @@
           "valueString": "/questionnaire/ihris-change-password/person"
         },
         {
-          "name": "site:nav:menu:apps:text",
+          "name": "site:nav:menu:ihris-apps-list:text",
           "valueString": "Apps"
         },
         {
-          "name": "site:nav:menu:apps:order",
+          "name": "site:nav:menu:ihris-apps-list:order",
           "valueString": "13"
         },
         {
-          "name": "site:nav:menu:apps:icon",
+          "name": "site:nav:menu:ihris-apps-list:icon",
           "valueString": "mdi-apps"
         },
         {
-          "name": "site:nav:menu:apps:url",
-          "valueString": "/apps"
+          "name": "site:nav:menu:ihris-apps-list:url",
+          "valueString": "/ihris-apps-list"
         },
         {
           "name": "shortname:Practitioner:format",

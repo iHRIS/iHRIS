@@ -254,3 +254,32 @@ Usage:          #example
 * extension[section][11].extension[resource].extension[action][1].extension[text].valueString = "View"
 * extension[section][11].extension[resource].extension[action][1].extension[row].valueBoolean = true
 * extension[section][11].extension[resource].extension[action][1].extension[class].valueString = "primary"
+* extension[section][12].extension[title].valueString = "In-Service Training Information"
+* extension[section][12].extension[description].valueString = "In-Service Training Information for the Person"
+* extension[section][12].extension[name].valueString = "In-Service Training Information"
+* extension[section][12].extension[resource].extension[resource].valueReference = Reference(StructureDefinition/ihris-basic-inservice-training)
+* extension[section][12].extension[resource].extension[searchfield].valueString = "practitioner"
+* extension[section][12].extension[resource].extension[linkfield].valueString = "Basic.extension.where(url='http://ihris.org/fhir/StructureDefinition/ihris-practitioner-reference').valueReference.reference"
+* extension[section][12].extension[resource].extension[column][0].extension[header].valueString = "Training Provider"
+* extension[section][12].extension[resource].extension[column][0].extension[field].valueString = "extension.where(url='http://ihris.org/fhir/StructureDefinition/ihris-inservice-training').extension.where(url='provider').valueString"
+* extension[section][12].extension[resource].extension[column][1].extension[header].valueString = "Training Type/Category"
+* extension[section][12].extension[resource].extension[column][1].extension[field].valueString = "extension.where(url='http://ihris.org/fhir/StructureDefinition/ihris-inservice-training').extension.where(url='training').valueCoding.display"
+* extension[section][12].extension[resource].extension[column][2].extension[header].valueString = "Course Name"
+* extension[section][12].extension[resource].extension[column][2].extension[field].valueString = "extension.where(url='http://ihris.org/fhir/StructureDefinition/ihris-inservice-training').extension.where(url='courseName').valueString"
+* extension[section][12].extension[resource].extension[column][3].extension[header].valueString = "Credits"
+* extension[section][12].extension[resource].extension[column][3].extension[field].valueString = "extension.where(url='http://ihris.org/fhir/StructureDefinition/ihris-inservice-training').extension.where(url='credits').valueInteger"
+* extension[section][12].extension[resource].extension[column][4].extension[header].valueString = "Start Date"
+* extension[section][12].extension[resource].extension[column][4].extension[field].valueString = "extension.where(url='http://ihris.org/fhir/StructureDefinition/ihris-inservice-training').extension.where(url='startDate').valueDate"
+* extension[section][12].extension[resource].extension[column][5].extension[header].valueString = "End Date"
+* extension[section][12].extension[resource].extension[column][5].extension[field].valueString = "extension.where(url='http://ihris.org/fhir/StructureDefinition/ihris-inservice-training').extension.where(url='endDate').valueDate"
+* extension[section][12].extension[resource].extension[column][6].extension[header].valueString = "Actions"
+* extension[section][12].extension[resource].extension[column][6].extension[field].valueString = "_action"
+* extension[section][12].extension[resource].extension[action][0].extension[link].valueString = "/questionnaire/ihris-inservice-training/inservice-training?practitioner=FHIRID"
+* extension[section][12].extension[resource].extension[action][0].extension[text].valueString = "Add In-Service Training Info"
+* extension[section][12].extension[resource].extension[action][0].extension[row].valueBoolean = false
+* extension[section][12].extension[resource].extension[action][0].extension[emptyDisplay].valueBoolean = true
+* extension[section][12].extension[resource].extension[action][0].extension[class].valueString = "primary"
+* extension[section][12].extension[resource].extension[action][1].extension[link].valueString = "/resource/view/inservice-training/ITEMID"
+* extension[section][12].extension[resource].extension[action][1].extension[text].valueString = "View"
+* extension[section][12].extension[resource].extension[action][1].extension[row].valueBoolean = true
+* extension[section][12].extension[resource].extension[action][1].extension[class].valueString = "primary"

@@ -1,0 +1,16 @@
+{
+  "resourceType": "ValueSet",
+  "status": "active",
+  "name": "IhrisTrainingValueSet",
+  "id": "ihris-training-valueset",
+  "title": "iHRIS In-Service Training ValueSet",
+  "version": "0.2.0",
+  "url": "http://ihris.org/fhir/ValueSet/ihris-training-valueset",
+  "compose": {
+    "include": [
+      {
+        "system": "http://ihris.org/fhir/CodeSystem/ihris-training-codesystem"
+      }
+    ]
+  }
+}

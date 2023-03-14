@@ -68,6 +68,14 @@
       },
       {
         "reference": {
+          "reference": "StructureDefinition/ihris-basic-inservice-training"
+        },
+        "name": "iHRIS In-Service Training",
+        "description": "iHRIS Profile of the Basic resource for a In-Service Training.",
+        "exampleBoolean": false
+      },
+      {
+        "reference": {
           "reference": "StructureDefinition/ihris-basic-leave"
         },
         "name": "Leave Information",
@@ -88,6 +96,22 @@
         },
         "name": "Salary Information",
         "description": "iHRIS Profile of the Basic resource for Salary.",
+        "exampleBoolean": false
+      },
+      {
+        "reference": {
+          "reference": "StructureDefinition/ihris-dashboard"
+        },
+        "name": "iHRIS Dashboard",
+        "description": "iHRIS Profile of the Basic resource to manage dashboards.",
+        "exampleBoolean": false
+      },
+      {
+        "reference": {
+          "reference": "StructureDefinition/ihris-data-visualization"
+        },
+        "name": "iHRIS Data Visualizer",
+        "description": "iHRIS Profile of the Basic resource to manage visualizations.",
         "exampleBoolean": false
       },
       {
@@ -276,6 +300,14 @@
       },
       {
         "reference": {
+          "reference": "StructureDefinition/ihris-dashboard-visualization"
+        },
+        "name": "iHRIS Dashboard Visualization",
+        "description": "iHRIS Dashboard Visualization",
+        "exampleBoolean": false
+      },
+      {
+        "reference": {
           "reference": "StructureDefinition/ihris-discipline"
         },
         "name": "Discipline details",
@@ -324,6 +356,13 @@
         },
         "name": "Ihris first time login",
         "description": "iHRIS first time login extension",
+        "exampleBoolean": false
+      },
+      {
+        "reference": {
+          "reference": "StructureDefinition/ihris-inservice-training"
+        },
+        "name": "In-Service Training details",
         "exampleBoolean": false
       },
       {
@@ -577,6 +616,54 @@
         },
         "name": "iHRIS User Practitioner",
         "description": "iHRIS user Practitioner extension for local users.",
+        "exampleBoolean": false
+      },
+      {
+        "reference": {
+          "reference": "StructureDefinition/ihris-visualization-categories"
+        },
+        "name": "iHRIS Visualization Categories",
+        "description": "iHRIS visualization categories",
+        "exampleBoolean": false
+      },
+      {
+        "reference": {
+          "reference": "StructureDefinition/ihris-visualization-dataset"
+        },
+        "name": "iHRIS Visualization Dataset",
+        "description": "iHRIS visualization dataset",
+        "exampleBoolean": false
+      },
+      {
+        "reference": {
+          "reference": "StructureDefinition/ihris-visualization-filters"
+        },
+        "name": "iHRIS Visualization Filters",
+        "description": "iHRIS visualization filters",
+        "exampleBoolean": false
+      },
+      {
+        "reference": {
+          "reference": "StructureDefinition/ihris-visualization-permissions"
+        },
+        "name": "iHRIS Visualization Permissions",
+        "description": "iHRIS Visualization Permissions",
+        "exampleBoolean": false
+      },
+      {
+        "reference": {
+          "reference": "StructureDefinition/ihris-visualization-series"
+        },
+        "name": "iHRIS Visualization Series",
+        "description": "iHRIS visualization series",
+        "exampleBoolean": false
+      },
+      {
+        "reference": {
+          "reference": "StructureDefinition/ihris-visualization-settings"
+        },
+        "name": "iHRIS Visualization Settings",
+        "description": "iHRIS visualization settings for the data visualizer",
         "exampleBoolean": false
       },
       {
@@ -881,6 +968,13 @@
           "reference": "ValueSet/ihris-task-resource"
         },
         "name": "Code system for task permissions.",
+        "exampleBoolean": false
+      },
+      {
+        "reference": {
+          "reference": "ValueSet/ihris-training-valueset"
+        },
+        "name": "iHRIS In-Service Training ValueSet",
         "exampleBoolean": false
       },
       {
@@ -1266,6 +1360,13 @@
       },
       {
         "reference": {
+          "reference": "CodeSystem/ihris-training-codesystem"
+        },
+        "name": "In-Service Training",
+        "exampleBoolean": false
+      },
+      {
+        "reference": {
           "reference": "CodeSystem/location-mode"
         },
         "name": "LocationMode",
@@ -1493,6 +1594,13 @@
       },
       {
         "reference": {
+          "reference": "Questionnaire/ihris-inservice-training"
+        },
+        "name": "IhrisPractitionerWorkflowInServiceTraining",
+        "exampleBoolean": false
+      },
+      {
+        "reference": {
           "reference": "Questionnaire/ihris-leave"
         },
         "name": "IhrisPractitionerWorkflowLeave",
@@ -1608,6 +1716,13 @@
           "reference": "Basic/ihris-page-identifier"
         },
         "name": "iHRIS Identifier type CodeSystem Page",
+        "exampleCanonical": "http://ihris.org/fhir/StructureDefinition/ihris-page"
+      },
+      {
+        "reference": {
+          "reference": "Basic/ihris-page-inservice-training"
+        },
+        "name": "iHRIS Basic In-Service Training Page",
         "exampleCanonical": "http://ihris.org/fhir/StructureDefinition/ihris-page"
       },
       {
@@ -1769,6 +1884,13 @@
           "reference": "Basic/ihris-page-test-practitioner"
         },
         "name": "iHRIS Test Practitioner Page",
+        "exampleCanonical": "http://ihris.org/fhir/StructureDefinition/ihris-page"
+      },
+      {
+        "reference": {
+          "reference": "Basic/ihris-page-training"
+        },
+        "name": "iHRIS Training CodeSystem Page",
         "exampleCanonical": "http://ihris.org/fhir/StructureDefinition/ihris-page"
       },
       {
