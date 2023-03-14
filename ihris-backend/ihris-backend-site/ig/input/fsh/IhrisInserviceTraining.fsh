@@ -132,7 +132,7 @@ Usage:          #definition
 * item[0].item[1].linkId = "Basic.extension[0].extension[1]"
 * item[0].item[1].text = "In-Service Training Type/Category"
 * item[0].item[1].type = #choice
-* item[0].item[1].answerValueSet = "http://ihris.org/fhir/ValueSet/ihris-leave-type-valueset"
+* item[0].item[1].answerValueSet = "http://ihris.org/fhir/ValueSet/ihris-training-valueset"
 * item[0].item[1].required = true
 * item[0].item[1].repeats = false
 

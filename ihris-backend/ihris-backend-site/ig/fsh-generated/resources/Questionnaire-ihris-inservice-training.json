@@ -25,7 +25,7 @@
           "linkId": "Basic.extension[0].extension[1]",
           "text": "In-Service Training Type/Category",
           "type": "choice",
-          "answerValueSet": "http://ihris.org/fhir/ValueSet/ihris-leave-type-valueset",
+          "answerValueSet": "http://ihris.org/fhir/ValueSet/ihris-training-valueset",
           "required": true,
           "repeats": false
         },
