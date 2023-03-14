@@ -16,34 +16,42 @@
       "item": [
         {
           "linkId": "Basic.extension[0].extension[0]",
-          "text": "Provider",
+          "text": "In-Service Training Provider",
           "type": "string",
           "required": true,
           "repeats": false
         },
         {
           "linkId": "Basic.extension[0].extension[1]",
-          "text": "Course Name",
-          "type": "string",
+          "text": "In-Service Training Type/Category",
+          "type": "choice",
+          "answerValueSet": "http://ihris.org/fhir/ValueSet/ihris-leave-type-valueset",
           "required": true,
           "repeats": false
         },
         {
           "linkId": "Basic.extension[0].extension[2]",
+          "text": "In-Service Training Course Name",
+          "type": "string",
+          "required": true,
+          "repeats": false
+        },
+        {
+          "linkId": "Basic.extension[0].extension[3]",
           "text": "Credits",
           "type": "integer",
           "required": false,
           "repeats": false
         },
         {
-          "linkId": "Basic.extension[0].extension[3]",
+          "linkId": "Basic.extension[0].extension[4]",
           "text": "Start Date",
           "type": "date",
           "required": true,
           "repeats": false
         },
         {
-          "linkId": "Basic.extension[0].extension[4]",
+          "linkId": "Basic.extension[0].extension[5]",
           "text": "End Date",
           "type": "date",
           "required": true,

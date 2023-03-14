@@ -124,31 +124,38 @@ Usage:          #definition
 * item[0].type = #group
 
 * item[0].item[0].linkId = "Basic.extension[0].extension[0]"
-* item[0].item[0].text = "Provider"
+* item[0].item[0].text = "In-Service Training Provider"
 * item[0].item[0].type = #string
 * item[0].item[0].required = true
 * item[0].item[0].repeats = false
 
 * item[0].item[1].linkId = "Basic.extension[0].extension[1]"
-* item[0].item[1].text = "Course Name"
-* item[0].item[1].type = #string
+* item[0].item[1].text = "In-Service Training Type/Category"
+* item[0].item[1].type = #choice
+* item[0].item[1].answerValueSet = "http://ihris.org/fhir/ValueSet/ihris-leave-type-valueset"
 * item[0].item[1].required = true
 * item[0].item[1].repeats = false
 
 * item[0].item[2].linkId = "Basic.extension[0].extension[2]"
-* item[0].item[2].text = "Credits"
-* item[0].item[2].type = #integer
-* item[0].item[2].required = false
+* item[0].item[2].text = "In-Service Training Course Name"
+* item[0].item[2].type = #string
+* item[0].item[2].required = true
 * item[0].item[2].repeats = false
 
 * item[0].item[3].linkId = "Basic.extension[0].extension[3]"
-* item[0].item[3].text = "Start Date"
-* item[0].item[3].type = #date
-* item[0].item[3].required = true
+* item[0].item[3].text = "Credits"
+* item[0].item[3].type = #integer
+* item[0].item[3].required = false
 * item[0].item[3].repeats = false
 
 * item[0].item[4].linkId = "Basic.extension[0].extension[4]"
-* item[0].item[4].text = "End Date"
+* item[0].item[4].text = "Start Date"
 * item[0].item[4].type = #date
 * item[0].item[4].required = true
 * item[0].item[4].repeats = false
+
+* item[0].item[5].linkId = "Basic.extension[0].extension[5]"
+* item[0].item[5].text = "End Date"
+* item[0].item[5].type = #date
+* item[0].item[5].required = true
+* item[0].item[5].repeats = false

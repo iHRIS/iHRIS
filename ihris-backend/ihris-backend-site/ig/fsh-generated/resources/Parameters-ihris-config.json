@@ -16,11 +16,11 @@
             "code": "1.2.840.10065.1.12.1.14"
           }
         ],
-        "when": "2023-03-14T12:02:53.582Z",
+        "when": "2023-03-14T17:37:33.104Z",
         "who": {
           "reference": "http://ihris.org/fhir/Organization/ihris"
         },
-        "data": "U3vAlgV19qVoJSaNIShnHSVRzn0IrXaDCWx9PgXbsTTY4lDNpQNl7saua4lsYHQSwSwFVqkjIhdChbQgWj+JWECgASZo595KkutA1Mgkw5oN037iH1LPwcdsfsLvF9tPOY1IMFa8MgwyGoUNI/jpXSLsboPliQKXuyPmlKMtBVA="
+        "data": "1inPa/TkLBz1lhrUmXDqN047wLHo0+Ua236eoZLRqy1/7mWVoCgSqKuIL9lJ40HQInkjWTf2H94HXPYYzA8lHhu06nJkJkynsXc5MeOaI8t42mvtJoHnJUSSE/9gvT0jyjnj5gTjwUsFaOBsaglE54RnunSx3yL1EcsBN++Q3WY="
       }
     },
     {
@@ -793,6 +793,14 @@
         {
           "name": "workflow:questionnaire:education:url",
           "valueString": "http://ihris.org/fhir/Questionnaire/ihris-education-history"
+        },
+        {
+          "name": "workflow:processor:training:file",
+          "valueString": "workflowInServiceTraining"
+        },
+        {
+          "name": "workflow:questionnaire:training:url",
+          "valueString": "http://ihris.org/fhir/Questionnaire/ihris-inservice-training"
         },
         {
           "name": "workflow:processor:employment:file",
