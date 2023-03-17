@@ -48,6 +48,8 @@ router.get('/indices', (req, res) => {
               id: rel.resource.id
             })
             resolve()
+          }).catch(() => {
+            resolve()
           })
         } else {
           resolve()
