@@ -61,6 +61,9 @@ Title:          "Emergency details"
 * extension[address].value[x] only string
 * extension[address].valueString 0..1 MS
 * extension[address].valueString ^label = "PO BOX"
+* extension[remark].value[x] only string
+* extension[remark].valueString 0..1 MS
+* extension[remark].valueString ^label = "Remark"
 * extension[attachment].value[x] only Attachment
 * extension[attachment].valueAttachment 0..1 MS
 * extension[attachment].valueAttachment ^label = "Attachment"
@@ -78,10 +81,12 @@ Usage:          #definition
 * purpose = "Workflow page for recording a Emergency information."
 
 * item[0].linkId = "Basic"
+* item[0].definition = "http://ihris.org/fhir/StructureDefinition/ihris-basic-emergency"
 * item[0].text = "Emergency"
 * item[0].type = #group
 
 * item[0].item[0].linkId = "Basic.extension[0].extension[0]"
+* item[0].item[0].definition = "http://ihris.org/fhir/StructureDefinition/ihris-basic-emergency#Basic.extension:emergency.extension:name.value[x]:valueString"
 * item[0].item[0].text = "Full Name"
 * item[0].item[0].type = #string
 * item[0].item[0].required = true
@@ -92,6 +97,7 @@ Usage:          #definition
 * item[0].item[0].extension[constraint].extension[human].valueString = "Name must be only text."
 
 * item[0].item[1].linkId = "Basic.extension[0].extension[1]"
+* item[0].item[1].definition = "http://ihris.org/fhir/StructureDefinition/ihris-basic-emergency#Basic.extension:emergency.extension:relation.value[x]:valueCoding"
 * item[0].item[1].text = "Relation"
 * item[0].item[1].type = #choice
 * item[0].item[1].answerValueSet = "http://ihris.org/fhir/ValueSet/ihris-relation-valueset"
@@ -99,36 +105,28 @@ Usage:          #definition
 * item[0].item[1].repeats = false
 
 * item[0].item[2].linkId = "Basic.extension[0].extension[2]"
+* item[0].item[2].definition = "http://ihris.org/fhir/StructureDefinition/ihris-basic-emergency#Basic.extension:emergency.extension:phone.value[x]:valueString"
 * item[0].item[2].text = "Home Phone"
 * item[0].item[2].type = #string
 * item[0].item[2].required = false
 * item[0].item[2].repeats = false
-/* item[0].item[2].extension[constraint].extension[key].valueId = "ihris-home-phone-check"
-* item[0].item[2].extension[constraint].extension[severity].valueCode = #error
-* item[0].item[2].extension[constraint].extension[expression].valueString = "matches('^(([+][2][5][1][1-9][0-9]{8})|([0][1-9][0-9]{8})|$)')"
-* item[0].item[2].extension[constraint].extension[human].valueString = "Phone Number is not properly formatted."*/
 
 * item[0].item[3].linkId = "Basic.extension[0].extension[3]"
+* item[0].item[3].definition = "http://ihris.org/fhir/StructureDefinition/ihris-basic-emergency#Basic.extension:emergency.extension:mobile.value[x]:valueString"
 * item[0].item[3].text = "Mobile Phone"
 * item[0].item[3].type = #string
 * item[0].item[3].required = false
 * item[0].item[3].repeats = false
-/* item[0].item[3].extension[constraint].extension[key].valueId = "ihris-mobile-phone-check"
-* item[0].item[3].extension[constraint].extension[severity].valueCode = #error
-* item[0].item[3].extension[constraint].extension[expression].valueString = "matches('^(([+][2][5][1][1-9][0-9]{8})|([0][1-9][0-9]{8})|$)')"
-* item[0].item[3].extension[constraint].extension[human].valueString = "Phone Number is not properly formatted."*/
 
 * item[0].item[4].linkId = "Basic.extension[0].extension[4]"
+* item[0].item[4].definition = "http://ihris.org/fhir/StructureDefinition/ihris-basic-emergency#Basic.extension:emergency.extension:workPhone.value[x]:valueString"
 * item[0].item[4].text = "Work Phone"
 * item[0].item[4].type = #string
 * item[0].item[4].required = false
 * item[0].item[4].repeats = false
-/* item[0].item[4].extension[constraint].extension[key].valueId = "ihris-work-phone-check"
-* item[0].item[4].extension[constraint].extension[severity].valueCode = #error
-* item[0].item[4].extension[constraint].extension[expression].valueString = "matches('^(([+][2][5][1][1-9][0-9]{8})|([0][1-9][0-9]{8})|$)')"
-* item[0].item[4].extension[constraint].extension[human].valueString = "Phone Number is not properly formatted."*/
 
 * item[0].item[5].linkId = "Basic.extension[0].extension[5]"
+* item[0].item[5].definition = "http://ihris.org/fhir/StructureDefinition/ihris-basic-emergency#Basic.extension:emergency.extension:workEmail.value[x]:valueString"
 * item[0].item[5].text = "Work Email"
 * item[0].item[5].type = #string
 * item[0].item[5].required = false
@@ -139,6 +137,7 @@ Usage:          #definition
 * item[0].item[5].extension[constraint].extension[human].valueString = "Email Address is not properly formatted."
 
 * item[0].item[6].linkId = "Basic.extension[0].extension[6]"
+* item[0].item[6].definition = "http://ihris.org/fhir/StructureDefinition/ihris-basic-emergency#Basic.extension:emergency.extension:otherEmail.value[x]:valueString"
 * item[0].item[6].text = "Other Email"
 * item[0].item[6].type = #string
 * item[0].item[6].required = false
@@ -149,18 +148,21 @@ Usage:          #definition
 * item[0].item[6].extension[constraint].extension[human].valueString = "Email Address is not properly formatted."
 
 * item[0].item[7].linkId = "Basic.extension[0].extension[7]"
+* item[0].item[7].definition = "http://ihris.org/fhir/StructureDefinition/ihris-basic-emergency#Basic.extension:emergency.extension:address.value[x]:valueString"
 * item[0].item[7].text = "PO BOX"
-* item[0].item[7].type = #text
+* item[0].item[7].type = #string
 * item[0].item[7].required = false
 * item[0].item[7].repeats = false
 
 * item[0].item[8].linkId = "Basic.extension[0].extension[8]"
+* item[0].item[8].definition = "http://ihris.org/fhir/StructureDefinition/ihris-basic-emergency#Basic.extension:emergency.extension:remark.value[x]:valueString"
 * item[0].item[8].text = "Remark"
-* item[0].item[8].type = #text
+* item[0].item[8].type = #string
 * item[0].item[8].required = false
 * item[0].item[8].repeats = false
 
 * item[0].item[9].linkId = "Basic.extension[0].extension[9]"
+* item[0].item[9].definition = "http://ihris.org/fhir/StructureDefinition/ihris-basic-emergency#Basic.extension:emergency.extension:attachment.value[x]:valueAttachment"
 * item[0].item[9].text = "Attachment"
 * item[0].item[9].type = #attachment
 * item[0].item[9].required = false
@@ -176,7 +178,7 @@ Usage:          #example
 * extension[display].extension[link][0].extension[text].valueString = "View Health Worker"
 * extension[display].extension[link][0].extension[button].valueBoolean = true
 * extension[display].extension[link][0].extension[icon].valueString = "mdi-account-arrow-right"
-* extension[display].extension[link][0].extension[url].valueUrl = "/resource/view/practitioner/FIELD"
+* extension[display].extension[link][0].extension[url].valueUrl = "/resource/view/bhpc/FIELD"
 * extension[display].extension[search][0].valueString = "Emergency|extension.where(url='http://ihris.org/fhir/StructureDefinition/ihris-emergency').extension.where(url='name').valueString"
 * extension[display].extension[field][0].extension[path].valueString = "Basic.extension:practitioner.value[x]:valueReference"
 * extension[display].extension[field][0].extension[readOnlyIfSet].valueBoolean = true
@@ -185,18 +187,13 @@ Usage:          #example
 * extension[section][0].extension[name].valueString = "Basic"
 * extension[section][0].extension[field][0].valueString = "Basic.extension:practitioner"
 * extension[section][0].extension[field][1].valueString = "Basic.extension:emergency.extension:name.value[x]:valueString"
-* extension[section][0].extension[field][2].valueString = "Basic.extension:emergency.extension:altlangName.value[x]:valueString"
-* extension[section][0].extension[field][3].valueString = "Basic.extension:emergency.extension:relation.value[x]:valueCoding"
-* extension[section][0].extension[field][4].valueString = "Basic.extension:emergency.extension:phone.value[x]:valueString"
-* extension[section][0].extension[field][5].valueString = "Basic.extension:emergency.extension:mobile.value[x]:valueString"
-* extension[section][0].extension[field][6].valueString = "Basic.extension:emergency.extension:workPhone.value[x]:valueString"
-* extension[section][0].extension[field][7].valueString = "Basic.extension:emergency.extension:otherPhone.value[x]:valueString"
-* extension[section][0].extension[field][8].valueString = "Basic.extension:emergency.extension:workEmail.value[x]:valueString"
-* extension[section][0].extension[field][9].valueString = "Basic.extension:emergency.extension:otherEmail.value[x]:valueString"
-* extension[section][0].extension[field][10].valueString = "Basic.extension:emergency.extension:location.value[x]:valueReference"
-* extension[section][0].extension[field][11].valueString = "Basic.extension:emergency.extension:city.value[x]:valueString"
-* extension[section][0].extension[field][12].valueString = "Basic.extension:emergency.extension:kebele.value[x]:valueString"
-* extension[section][0].extension[field][13].valueString = "Basic.extension:emergency.extension:houseNumber.value[x]:valueString"
-* extension[section][0].extension[field][14].valueString = "Basic.extension:emergency.extension:address.value[x]:valueAddress"
-* extension[section][0].extension[field][15].valueString = "Basic.extension:emergency.extension:remark.value[x]:valueString"
-* extension[section][0].extension[field][16].valueString = "Basic.extension:emergency.extension:attachment.value[x]:valueAttachment"
+* extension[section][0].extension[field][2].valueString = "Basic.extension:emergency.extension:relation.value[x]:valueCoding"
+* extension[section][0].extension[field][3].valueString = "Basic.extension:emergency.extension:phone.value[x]:valueString"
+* extension[section][0].extension[field][4].valueString = "Basic.extension:emergency.extension:mobile.value[x]:valueString"
+* extension[section][0].extension[field][5].valueString = "Basic.extension:emergency.extension:workPhone.value[x]:valueString"
+* extension[section][0].extension[field][6].valueString = "Basic.extension:emergency.extension:otherPhone.value[x]:valueString"
+* extension[section][0].extension[field][7].valueString = "Basic.extension:emergency.extension:workEmail.value[x]:valueString"
+* extension[section][0].extension[field][8].valueString = "Basic.extension:emergency.extension:otherEmail.value[x]:valueString"
+* extension[section][0].extension[field][9].valueString = "Basic.extension:emergency.extension:address.value[x]:valueString"
+* extension[section][0].extension[field][10].valueString = "Basic.extension:emergency.extension:remark.value[x]:valueString"
+* extension[section][0].extension[field][11].valueString = "Basic.extension:emergency.extension:attachment.value[x]:valueAttachment"
