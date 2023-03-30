@@ -11,7 +11,7 @@ const workflowEmergency = {
         entry: []
       }
       //winston.info(JSON.stringify( req.body,null,2))
-      fhirAxios.read( "Practitioner", req.query.practitioner ).then( (resource) => {
+      fhirAxios.read( "Practitioner", req.query.practitioner ).then( async (resource) => {
         if ( req.body && req.body.item 
           && req.body.item && req.body.item[0].linkId === "Basic"
           && req.body.item[0].item && req.body.item[0].item[0].linkId === "Basic.extension[0].extension[0]" 

@@ -318,7 +318,7 @@ router.get('/page/:page/:type?', function (req, res) {
             let sections = {}
             let sectionMap = {}
             for (let section of pageSections) {
-                let title, description, name, resourceExt, resource, linkfield, searchfield
+                let title, description, name, resourceExt, resource, linkfield, searchfield, searchfieldtarget
                 let fields = []
                 let columns = []
                 let actions = []
@@ -346,6 +346,7 @@ router.get('/page/:page/:type?', function (req, res) {
                         linkfield = resourceExt.find(ext => ext.url === "linkfield").valueString
                         try {
                             searchfield = resourceExt.find(ext => ext.url === "searchfield").valueString
+                            searchfieldtarget = resourceExt.find(ext => ext.url === "searchfieldtarget").valueString
                         } catch (err) {
                         }
                         let columnsExt = resourceExt.filter(ext => ext.url === "column")
@@ -423,6 +424,7 @@ router.get('/page/:page/:type?', function (req, res) {
                     resource: resource,
                     linkfield: linkfield,
                     searchfield: searchfield,
+                    searchfieldtarget: searchfieldtarget,
                     columns: columns,
                     actions: actions,
                     elements: {}
@@ -465,6 +467,7 @@ router.get('/page/:page/:type?', function (req, res) {
                         resource: undefined,
                         linkfield: undefined,
                         searchfield: undefined,
+                        searchfieldtarget: undefined,
                         columns: [],
                         actions: [],
                         elements: {}
@@ -685,6 +688,7 @@ router.get('/page/:page/:type?', function (req, res) {
                                 + '" title="' + sections[name].title
                                 + '" link-field="' + sections[name].linkfield
                                 + '" search-field="' + (sections[name].searchfield || "")
+                                + '" search-field-target="' + (sections[name].searchfieldtarget || "")
                                 + '" :columns=\'columns.' + sectionKey
                                 + '\' :actions=\'actions.' + sectionKey
                                 + '\'><template #default="slotProps">' + "\n"
@@ -869,9 +873,7 @@ router.get('/questionnaire/:questionnaire', function (req, res) {
         return res.status(401).json(outcomes.DENIED)
     }
 
-
     fhirAxios.read("Questionnaire", req.params.questionnaire).then(async (resource) => {
-
 
         let vueOutput = '<ihris-questionnaire :edit=\"isEdit\" :view-page="viewPage" :constraints="constraints" url="' + resource.url + '" id="' + resource.id
             + '" title="' + resource.title

@@ -114,6 +114,7 @@ Description:    "iHRIS Page Section information."
       resource 1..1 MS and
       linkfield 1..1 MS and
       searchfield 0..1 MS and
+      searchfieldtarget 0..1 MS and
       column 1..* MS and
       action 0..* MS
 * extension[resource].extension[resource].value[x] only Reference
@@ -126,6 +127,9 @@ Description:    "iHRIS Page Section information."
 * extension[resource].extension[searchfield].value[x] only string
 * extension[resource].extension[searchfield].valueString MS
 * extension[resource].extension[searchfield].valueString ^label = "Secondary Resource Search Field (if different from the link field)"
+* extension[resource].extension[searchfieldtarget].value[x] only string
+* extension[resource].extension[searchfieldtarget].valueString MS
+* extension[resource].extension[searchfieldtarget].valueString ^label = "Target Resource of the Secondary Resource Search Field"
 * extension[resource].extension[column].extension contains
       header 1..1 MS and
       field 1..1 MS
