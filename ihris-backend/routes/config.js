@@ -969,15 +969,21 @@ router.get('/questionnaire/:questionnaire', function (req, res) {
                     let displayCondition = ''
                     if(item.enableWhen) {
                         for(let when of item.enableWhen) {
-                        displayCondition = ''
-                        condKeys = Object.keys(when)
-                        let answKeyInd = condKeys.findIndex((cond) => {
-                            return cond.startsWith('answer')
-                        })
-                        if(displayCondition) {
-                            displayCondition += '+='
-                        }
-                        displayCondition += when.question + '|' + when.operator + '|' + when[condKeys[answKeyInd]]
+                            displayCondition = ''
+                            const condKeys = Object.keys(when)
+                            let answKeyInd = condKeys.findIndex((cond) => {
+                                return cond.startsWith('answer')
+                            })
+                            if(displayCondition) {
+                                displayCondition += '+='
+                            }
+                            let answer = ""
+                            if(condKeys[answKeyInd] === "answerReference") {
+                                answer = when[condKeys[answKeyInd]].reference
+                            } else {
+                                answer = when[condKeys[answKeyInd]]
+                            }
+                            displayCondition += when.question + '|' + when.operator + '|' + answer
                         }
                     }
                     vueOutput += "<fhir-" + itemType + " :edit=\"isEdit\" path=\"" + item.linkId + "\"" + "displayCondition=\"" + displayCondition + "\""

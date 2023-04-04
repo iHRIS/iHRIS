@@ -1,5 +1,5 @@
 <template>
-  <v-container>
+  <v-container v-if="!hide">
     <v-select 
       :loading="loading" 
       :label="label" 
@@ -26,9 +26,11 @@ const itemSort = (a,b) => {
 }
 */
 import { eventBus } from "@/main";
+import { dataDisplay } from "@/mixins/dataDisplay"
 export default {
   name: "fhir-coding",
-  props: ["label", "path", "binding", "edit", "min", "max","constraints"],
+  props: ["label", "path", "binding", "edit", "min", "max","constraints", "displayCondition"],
+  mixins: [dataDisplay],
   data: function() {
     return {
       value: { system: "", code: "", display: "" },
@@ -41,6 +43,8 @@ export default {
     }
   },
   created: function() {
+    //this function is defined under dataDisplay mixin 
+    this.hideShowField(this.displayCondition)
     this.setupData()
   },
   watch: {

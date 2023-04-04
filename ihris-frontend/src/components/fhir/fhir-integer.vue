@@ -1,5 +1,5 @@
 <template>
-  <ihris-element :edit="edit" :loading="false">
+  <ihris-element :edit="edit" :loading="false" v-if="!hide">
     <template #form>
       <v-text-field 
         :error-messages="errors" 
@@ -26,14 +26,17 @@
 
 <script>
 import IhrisElement from "../ihris/ihris-element.vue"
+import { eventBus } from "@/main";
+import { dataDisplay } from "@/mixins/dataDisplay"
 
 export default {
   name: "fhir-integer",
   props: ["field", "label", "min", "max", "id", "path", "slotProps", "sliceName","base-min","base-max", "edit", "readOnlyIfSet",
-    "constraints"],
+    "constraints", "displayCondition"],
   components: {
     IhrisElement
   },
+  mixins: [dataDisplay],
   data: function() {
     return {
       source: { path: "", data: {} },
@@ -45,7 +48,8 @@ export default {
     }
   },
   created: function() {
-    //console.log("CREATE INTEGER",this.field,this.slotProps)
+    //this function is defined under dataDisplay mixin
+    this.hideShowField(this.displayCondition)
     this.setupData()
   },
   watch: {
@@ -57,6 +61,9 @@ export default {
         }
       },
       deep: true
+    },
+    value(val) {
+      eventBus.$emit(this.path, val)
     }
   },
   methods: {
