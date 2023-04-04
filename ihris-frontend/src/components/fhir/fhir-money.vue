@@ -1,7 +1,7 @@
 <template>
   <ihris-element :edit="edit" :loading="loading" v-if="!hide">
     <template #form>
-      <v-select 
+      <v-autocomplete 
         :loading="loading" 
         :label="'$t(`App.hardcoded-texts.Currency`) ('+display+')'" 
         v-model="valueCurrency" 
@@ -16,7 +16,7 @@
         dense
       >
         <template #label>{{$t('App.hardcoded-texts.Currency')}} ({{display}}) <span v-if="required" class="red--text font-weight-bold">*</span></template>
-      </v-select>
+      </v-autocomplete>
       <v-text-field :error-messages="errors" @change="errors = []" :label="display" :disabled="disabled" v-model="value.value" outlined hide-details="auto" :rules="rules_val" dense>
         <template #label>{{display}} <span v-if="required" class="red--text font-weight-bold">*</span></template>
       </v-text-field>

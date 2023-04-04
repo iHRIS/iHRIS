@@ -1,6 +1,6 @@
 <template>
   <v-container v-if="!hide">
-    <v-select 
+    <v-autocomplete 
       :loading="loading" 
       :label="label" 
       v-model="valueCode" 
@@ -15,7 +15,7 @@
       @change="errors = []"
       >
       <template #label>{{$t(`App.fhir-resources-texts.${label}`)}} <span v-if="required" class="red--text font-weight-bold">*</span></template>
-    </v-select>
+    </v-autocomplete>
   </v-container>
 </template>
 

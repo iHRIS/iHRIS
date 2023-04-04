@@ -1,7 +1,7 @@
 <template>
   <ihris-element :edit="edit" :loading="loading" v-if="!hide">
     <template #form>
-      <v-select 
+      <v-autocomplete 
         :loading="loading" 
         :label="display" 
         v-model="valueCode" 
@@ -17,7 +17,7 @@
         @change="errors = []"
       >
         <template #label>{{$t(`App.fhir-resources-texts.${label}`)}} <span v-if="required" class="red--text font-weight-bold">*</span></template>
-      </v-select>
+      </v-autocomplete>
     </template>
     <template #header>
       {{$t(`App.fhir-resources-texts.${display}`)}}
