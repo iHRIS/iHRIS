@@ -1,9 +1,8 @@
-const nconf = require("./config");
-const user = require("./user").user;
+const nconf = require("../config");
+const user = require("../user");
 const winston = require("winston");
 const crypto = require("crypto");
-const outcomes = require("../config/operationOutcomes");
-const sendEmail = require("./sendEmail");
+const sendEmail = require("../sendEmail");
 const fhirAxios = nconf.fhirAxios;
 const {v4: uuidv4} = require("uuid");
 const clientUrl = nconf.get('auth:CLIENT_URL')
