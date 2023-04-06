@@ -91,7 +91,7 @@ Description:    "iHRIS user Location extension for local users."
 * value[x] only Reference
 * valueReference 1..1 MS
 * valueReference ^label = "Location/Facility"
-* valueReference only Reference(Location)
+* valueReference only Reference(IhrisFacility)
 * valueReference.reference 1..1 MS
 * valueReference.reference ^label = "Location/Facility"
 
@@ -282,21 +282,21 @@ Usage:          #definition
 // * item[0].item[6].repeats = false
 
 
-// * item[0].item[6].linkId = "password#password"
-// * item[0].item[6].text = "Password"
-// * item[0].item[6].type = #string
-// * item[0].item[6].required = true
-// * item[0].item[6].repeats = false
-// * item[0].item[6].extension[constraint].extension[key].valueId = "ihris-password-strength-check"
-// * item[0].item[6].extension[constraint].extension[severity].valueCode = #error
-// * item[0].item[6].extension[constraint].extension[expression].valueString = "matches('^(?=.*\\\\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$')"
-// * item[0].item[6].extension[constraint].extension[human].valueString = "Password Should be Minimum eight characters, at least one uppercase letter, one lowercase letter, one number and one special character"
+* item[0].item[6].linkId = "password#password"
+* item[0].item[6].text = "Password"
+* item[0].item[6].type = #string
+* item[0].item[6].required = true
+* item[0].item[6].repeats = false
+* item[0].item[6].extension[constraint].extension[key].valueId = "ihris-password-strength-check"
+* item[0].item[6].extension[constraint].extension[severity].valueCode = #error
+* item[0].item[6].extension[constraint].extension[expression].valueString = "matches('^(?=.*\\\\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$')"
+* item[0].item[6].extension[constraint].extension[human].valueString = "Password Should be Minimum eight characters, at least one uppercase letter, one lowercase letter, one number and one special character"
 
-// * item[0].item[7].linkId = "confrimpassword#password"
-// * item[0].item[7].text = "Confirm Password"
-// * item[0].item[7].type = #string
-// * item[0].item[7].required = true
-// * item[0].item[7].repeats = false
+* item[0].item[7].linkId = "confrimpassword#password"
+* item[0].item[7].text = "Confirm Password"
+* item[0].item[7].type = #string
+* item[0].item[7].required = true
+* item[0].item[7].repeats = false
 
 Instance:       IhrisChangePassword
 InstanceOf:     IhrisQuestionnaire
