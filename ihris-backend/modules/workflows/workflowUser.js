@@ -2,6 +2,8 @@ const nconf = require("../config");
 const user = require("../user");
 const winston = require("winston");
 const crypto = require("crypto");
+const ihrissmartrequire = require("ihrissmartrequire")
+const outcomes = ihrissmartrequire('config/operationOutcomes')
 const sendEmail = require("../sendEmail");
 const fhirAxios = nconf.fhirAxios;
 const {v4: uuidv4} = require("uuid");
@@ -49,11 +51,8 @@ const workflowUser = {
           && req.body.item[0].item[3].answer[0].valueString) {*/
         let userEmail = req.body.item[0].item[3].answer[0].valueString;
         let userRoles = undefined;
-        let constraint = undefined;
-        let hasLocation = false;
         let userRoleId = undefined;
         let extensions = [];
-        let resetToken = crypto.randomBytes(64).toString('hex')
         let userId = uuidv4()
         user
             .lookupByEmail(userEmail)
@@ -138,16 +137,29 @@ const workflowUser = {
                     valueReference: {reference: practitioner.answer[0].valueReference.reference}
                   })
                 }
-                let password = uuidv4();
-                let passwordExtension = hashPassword(password, userId, resetToken)
-                extensions.push(passwordExtension)
-                extensions.push({
-                  url: "http://ihris.org/fhir/StructureDefinition/ihris-user-otp", extension: [{
-                    url: "code", valueString: "12345678"
-                  }, {
-                    url: "expiresIn", valueString: "10s"
-                  }]
-                });
+                let password = req.body.item[0].item.find(x => x.linkId === "password")?.answer[0]?.valueString
+                if(password){
+                  try {
+                    let passwordExt = []
+                    let salt = crypto.randomBytes(16).toString('hex')
+                    let hash = crypto.pbkdf2Sync( password, salt, 1000, 64, 'sha512' ).toString('hex')
+                    passwordExt.push({ url:"password",
+                              valueString: hash
+                              })
+                    passwordExt.push({ url:"salt",
+                              valueString: salt
+                              })
+                    extensions.push({ url: "http://ihris.org/fhir/StructureDefinition/ihris-password",
+                              extension : passwordExt
+                            })
+                  } catch (err) {
+                      winston.error("Error setting Password ")
+                      reject(err)
+                  }
+                }else {
+                  winston.info("NO PASSWORD SET ")
+                  resolve(await workflowUser.outcome("No Password set for this User")) 
+                }
                 extensions.push({
                   "url": "http://ihris.org/fhir/StructureDefinition/ihris-first-time-login",
                   "valueBoolean": true
@@ -179,17 +191,7 @@ const workflowUser = {
                 resolve(await workflowUser.outcome("User " + req.body.item[0].item[3].answer[0].valueString + " Exist"));
                 //reject(err.message)
               }
-              let name = req.body.item[0].item.find(x => x.linkId === "Person.name[0].text").answer[0].valueString
-              let subject = `New Account for ${name}!`
-              let link = `${clientUrl}/change-password?token=${resetToken}&userId=${userId}`;
-              sendEmail(userEmail, subject, {
-                name: name, link: link
-              }, "../emailTemplate/createAccount.handlebars").then((res) => {
-                //winston.info("Bundle")
-                //winston.info(JSON.stringify( bundle,null,2))
-                resolve(bundle);
-                // console.log(JSON.stringify(bundle, null, 2))
-              })
+              resolve(bundle);
             })
             .catch((err) => {
               console.log("ERROR", err)
