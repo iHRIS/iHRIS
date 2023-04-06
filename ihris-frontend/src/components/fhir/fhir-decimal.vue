@@ -31,6 +31,7 @@ export default {
     return {
       source: { path: "", data: {} },
       value: "",
+      qField: "valueDecimal",
       disabled: false,
       errors: [],
       lockWatch: false
