@@ -4,7 +4,7 @@
 }
 </style>
 <template>
-  <v-container class="my-3">
+  <v-container :key="pageKey" class="my-3">
     <v-form
         ref="form"
         v-model="valid"
@@ -580,6 +580,7 @@ export default {
             response
                 .json()
                 .then((data) => {
+                  console.log("the new vertion",data)
                   // this.$store.commit('setCurrentResource', data)
                   this.orig = data;
                   this.source = {data: data, path: this.field};
