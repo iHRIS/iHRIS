@@ -1,0 +1,1278 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Technical documentation for iHRIS V5">
+      
+      
+        <meta name="author" content="IntraHealth International">
+      
+      
+        <link rel="canonical" href="https://github.com/iHRIS/iHRIS/user/mhero/">
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.3.1, mkdocs-material-8.5.0">
+    
+    
+      
+        <title>mHero - iHRIS V5 Technical Documentation</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.2e8b5541.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.cbb835fc.min.css">
+        
+          
+          
+          <meta name="theme-color" content="#4051b5">
+        
+      
+      
+
+    
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="" data-md-color-primary="indigo" data-md-color-accent="blue">
+  
+    
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#mhero" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="iHRIS V5 Technical Documentation" class="md-header__button md-logo" aria-label="iHRIS V5 Technical Documentation" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            iHRIS V5 Technical Documentation
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              mHero
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/iHRIS" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    iHRIS
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-tabs__inner md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../.." class="md-tabs__link">
+        Home
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../dev/roadmap/" class="md-tabs__link">
+        Developer
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../admin/docker/" class="md-tabs__link">
+        Sysadmin
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+    
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../introduction/" class="md-tabs__link md-tabs__link--active">
+        User
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="iHRIS V5 Technical Documentation" class="md-nav__button md-logo" aria-label="iHRIS V5 Technical Documentation" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    iHRIS V5 Technical Documentation
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/iHRIS" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    iHRIS
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_1" type="checkbox" id="__nav_1" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_1">
+          Home
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Home" data-md-level="1">
+        <label class="md-nav__title" for="__nav_1">
+          <span class="md-nav__icon md-icon"></span>
+          Home
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        iHRIS Documentation
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2" type="checkbox" id="__nav_2" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2">
+          Developer
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Developer" data-md-level="1">
+        <label class="md-nav__title" for="__nav_2">
+          <span class="md-nav__icon md-icon"></span>
+          Developer
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../dev/roadmap/" class="md-nav__link">
+        iHRIS Product Roadmap
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../dev/customization/" class="md-nav__link">
+        iHRIS Customization
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../dev/fhir_http/" class="md-nav__link">
+        FHIR HTTP Endpoints
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../dev/modules/" class="md-nav__link">
+        Library modules
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../dev/questionnaire/" class="md-nav__link">
+        Questionnaires
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../dev/roles_and_tasks/" class="md-nav__link">
+        Permissions
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../dev/short_name/" class="md-nav__link">
+        Short-name Endpoint
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../dev/task_resolution/" class="md-nav__link">
+        Task Resolution
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../dev/todo/" class="md-nav__link">
+        ToDo
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3" type="checkbox" id="__nav_3" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_3">
+          Sysadmin
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Sysadmin" data-md-level="1">
+        <label class="md-nav__title" for="__nav_3">
+          <span class="md-nav__icon md-icon"></span>
+          Sysadmin
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../admin/docker/" class="md-nav__link">
+        Getting Started with Docker
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../admin/install/" class="md-nav__link">
+        Installation Of Supporting software
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../admin/config/" class="md-nav__link">
+        Configuration options
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_4" type="checkbox" id="__nav_4" checked>
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_4">
+          User
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="User" data-md-level="1">
+        <label class="md-nav__title" for="__nav_4">
+          <span class="md-nav__icon md-icon"></span>
+          User
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../introduction/" class="md-nav__link">
+        Introduction
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../people/" class="md-nav__link">
+        People
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../positions/" class="md-nav__link">
+        Positions
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          mHero
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        mHero
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#assumptions" class="md-nav__link">
+    Assumptions
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#sending-messages-with-mhero" class="md-nav__link">
+    Sending Messages with mHero
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#log-in" class="md-nav__link">
+    Log In
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#reset-password" class="md-nav__link">
+    Reset Password
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#dashboard" class="md-nav__link">
+    Dashboard
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#logging-out" class="md-nav__link">
+    Logging Out
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#view-and-searchfilter-contacts" class="md-nav__link">
+    View and search/filter contacts
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../database/" class="md-nav__link">
+        Database
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../dashboard/" class="md-nav__link">
+        Dashboard
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../locations/" class="md-nav__link">
+        Locations
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../audit_logs/" class="md-nav__link">
+        Audit Logs
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../reports/" class="md-nav__link">
+        Reports
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../system_users/" class="md-nav__link">
+        System Users
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ihris_apps/" class="md-nav__link">
+        iHRIS Apps
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#assumptions" class="md-nav__link">
+    Assumptions
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#sending-messages-with-mhero" class="md-nav__link">
+    Sending Messages with mHero
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#log-in" class="md-nav__link">
+    Log In
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#reset-password" class="md-nav__link">
+    Reset Password
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#dashboard" class="md-nav__link">
+    Dashboard
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#logging-out" class="md-nav__link">
+    Logging Out
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#view-and-searchfilter-contacts" class="md-nav__link">
+    View and search/filter contacts
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+  <a href="https://github.com/iHRIS/edit/master/docs/user/mhero.md" title="Edit this page" class="md-content__button md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25Z"/></svg>
+  </a>
+
+
+<h1 id="mhero">mHero</h1>
+<h2 id="assumptions">Assumptions</h2>
+<div class="admonition important">
+<p class="admonition-title">What are some of the assumptions on mHero?</p>
+</div>
+<ul>
+<li>iHRIS is installed or can be installed</li>
+<li>
+<p>It is necessary to have iHRIS v5 or v4.3.</p>
+</li>
+<li>
+<p>The health worker contact information is complete and up-to-date.</p>
+<div class="codehilite"><pre><span></span><code>The essential health worker information for mHero includes:
+
+- name
+- phone number
+</code></pre></div>
+
+</li>
+</ul>
+<p>By default mHero also displays facility, job title, and cadre, but these fields can be customized. You may also want to include other fields such as organizational affiliation.</p>
+<p>There are several approaches to cleaning data depending on what needs to be corrected in the data.</p>
+<p>Scripts can be run on iHRIS and mHero to identify issues with records such as phone numbers with invalid formats (i.e. too many or too few digits, inappropriate characters, etc.), records that share the same phone number, records without phone numbers, and more.</p>
+<p>Some records may be easily updated, for example if the country code is included but should not be then that can be simply deleted.</p>
+<p>To confirm whether the name associated with a phone number is correct, a simple workflow can be sent through mHero.</p>
+<p>However, updating records where there is information missing is a manual process. For this reason, we recommend conducting regular data cleaning on an ongoing basis.</p>
+<ul>
+<li>A communication platform has been identified based on the channels that health workers frequently and easily use and the platform has been configured to send out messages.</li>
+</ul>
+<p>The communication platform should be one that is accessible by the largest number of health workers. For example, if most health workers in the capital area prefer WhatsApp but in the other regions of the country most health workers have only basic mobile phones, a SMS platform is a better fit than WhatsApp. mHero initially used RapidPro as the communication platform since it offers a simple interface for building flows and can be easily connected to SMS channels.</p>
+<p>In addition to the communication platform being identified, it is essential to have the platform configured to send out messages. This may include obtaining a short code for sending out SMS messages, setting up a WhatsApp Business Account, or phone numbers/accounts set up for other platforms and channels. This step can take a significant amount of time so it is recommended to explore the possibility of leveraging existing channels.</p>
+<p>● There is a plan for developing the content of messages and message flows</p>
+<p>Whether there is existing content or the content needs to be developed, there are key content creation considerations for different digital platforms. For example, with SMS it is necessary to limit the number of characters to 160, or the way people communicate via Facebook Messenger may be less formal. For more guidance see the Message Development Tip Sheet.</p>
+<p>● There is a plan for introducing mHero to health workers.</p>
+<p>It is recommended to introduce mHero to health workers prior to sending out the first message. You should inform them about:</p>
+<ul>
+<li>■ what mHero is</li>
+<li>■ how it will be used</li>
+<li>■ who the messages are coming from and who will review and respond</li>
+<li>■ how often they can expect messages</li>
+<li>■ whether they will be expected to respond or initiate communication (if they will be expected to initiate communication then you need to explain how they will do this)</li>
+<li>■ the costs (if any) to the health workers when they send messages</li>
+<li>■ any option for them to opt out of receiving messages (this may be required in some countries)</li>
+</ul>
+<p>As you can see, this is too much information to send via SMS when the first message goes out so it will need to be communicated in a different way - email, memo, during training or other gathering, etc. If you are unsure about some of those details when initially deploying mHero (for example, perhaps initially the health workers will not be expected or required to respond or initiate communication but that may change later), you don't need to include that information at the outset but should provide clear instructions when there are changes.</p>
+<ul>
+<li>
+<p>There is a plan for analyzing the data and taking action based on results</p>
+</li>
+<li>
+<p>When asking health workers to send information related to their work activities, facility conditions, or other information, it is necessary to acknowledge their contributions and make use of the responses and data collected. This may look like generating reports that can demonstrate the need for additional funding, preparing a plan to provide supplies or other support to a facility facing unexpected needs, or countless other responses. When health workers know that the information they provide will serve some purpose, they will be more willing to respond to future requests.</p>
+</li>
+</ul>
+<p>Architecture</p>
+<p>mHero 2.1 is basically made up of three parts: a database of health worker information, a communication platform, and the mHero Connector which links the two other components. This connection is made by using global interoperability standards for health information exchange, specifically Fast Healthcare Interoperability Resources (FHIR) and Mobile Alert Communication Management (mACM).</p>
+<p>The configuration that has so far been tested and deployed links iHRIS, the IntraHealth-developed health workforce information systems software, and RapidPro, UNICEF's communication platform that enables communication via text messages, interactive voice response (IVR), as well as other messaging tools such as Facebook Messenger, WhatsApp, Viber, and Telegram. Information from health worker records is sourced from iHRIS, including: phone or other contact details, names, cadres, facility names, locations. This information is used to contact health workers, both broadly and targeted. Message flows or message campaigns created in RapidPro are pulled into the mHero module which also uses the communication channels set up there to send out messages.</p>
+<p>The architecture is flexible to connect different platforms and channels on both ends. Using FHIR standards makes it possible to connect any health information software that also uses FHIR, such as DHIS2, OpenMRS, and more. One possible use case with another software connected is pulling client phone numbers from OpenMRS to send reminders about upcoming appointments.</p>
+<p>While mHero has to-date only delivered text-based messages via SMS, there are many communications channels that can be utilized to connect with health workers via locally popular channels. Through Facebook Messenger or WhatsApp it would be possible to send and receive multimedia content. mHero can also be connected with a traditional call center, where curated messages can enable trained staff to respond with speed and effectiveness. Finally, it is possible to incorporate natural language processing, permitting frontline health workers to ask questions using normal speech and the system can respond with the appropriate government-approved messages.</p>
+<h2 id="sending-messages-with-mhero">Sending Messages with mHero</h2>
+<div class="admonition important">
+<p class="admonition-title">What is MHERO?</p>
+</div>
+<p>MHERO is acronym for the Global Open Facility Registry.
+MHERO is a shared repository for facility information. The information in the repository can vary and may include:</p>
+<ul>
+<li>Facilities</li>
+<li>Jurisdictions such as districts, regions, county, country , with the highest in the hierarchy being a country and the lowest being a facility.</li>
+<li>Services offered by facilities. This may include services such as malaria testing, HIV care, clinical information like vaccination</li>
+<li>Organizations that manage facilities</li>
+</ul>
+<h2 id="log-in">Log In</h2>
+<p>In order to access mHero, type the mHero url (web address) into the address bar of any browser A sample login screen is shown in the figure below.</p>
+<p><img alt="Alt text" src="../img/mHerologin.JPG" title="MHERO Login Page" /></p>
+<p>The email address plus the user password is required to login to the system. On clicking the Login button, the details entered are validated and one is allowed access if the details are correct. Otherwise, access is denied.</p>
+<h2 id="reset-password">Reset Password</h2>
+<p>To reset your password, Click &gt;Forgot Password &gt; Submit
+A reset password link will be sent via the email address to reset your password.</p>
+<p><img alt="Alt text" src="../img/forgot_password.jpg" title="MHERO Forgot Password Page" /></p>
+<p>Click the link to Back to login and log in as normal</p>
+<h2 id="dashboard">Dashboard</h2>
+<p>Once you successfully log in to the system, the dashboard appears:</p>
+<p><img alt="Alt text" src="../img/dashboard.JPG" title="MHERO Dashboard Page" /></p>
+<h2 id="logging-out">Logging Out</h2>
+<p>To log out of the MHERO system:
+Browse to the upper right corner on any page, click Log Out.</p>
+<p><img alt="Alt text" src="../img/log_out.JPG" title="MHERO Log Out Page" /></p>
+<p>The Welcome page appears. You will have to re-enter your username and password to regain access to the system.</p>
+<h2 id="view-and-searchfilter-contacts">View and search/filter contacts</h2>
+<p>The table of contacts is used for many of the tasks you will do within mHero so it merits an explanation before explaining how to use the platform. Note: there are two tables of contacts - one within the mHero module, used for selecting contacts to send messages/flows to; and one within the People module, used for viewing records in the system.</p>
+<p>The table of contacts contains records for all health workers who have records in iHRIS, RapidPro, or mHero (or other connected registry). Each row contains information for one health worker. By default you will see 10 rows of results per page. In the bottom right corner of the table you will see some information about the results that are displayed. It tells you the number of rows being displayed per page followed by which results within the full set that are displayed (for example, "1-10 of 68" means the first 10 results within the set of 68 are being displayed).</p>
+<p>You can use the backward and forward pointing arrows to navigate through the pages of records.</p>
+<p>You can change the number of records displayed per page in the table by clicking the drop down menu next to "Rows per page" at the bottom right corner of the table. You can choose to display 5, 10, 20, or 50 records. The table will update once you have made your selection. Note: if there are more than 10,000 health worker records you will not have the option to display all on the same page due to the time it would take to pull up all of that data and browser capacity. You will have to select the option to see 10,000 records per page and view or select records in batches of 10,000.</p>
+<p>To search by name type all or part of their given name or surname in the space that looks like a tab and is labeled "Fullname". This is next to the table title ("Employee List"). You can search by a partial name and will see results that contain those letters. You must hit Enter or Return in order to run the search. If you wish to remove the name search filter, delete what you have typed and hit Enter or Return again.</p>
+<p>To search/filter by other fields (contact group/facility/job title/cadre) you click on the word in the field you wish to search. You can either type in a search word or scroll through the list to select a filter. To search, start typing what you want to search for and the list of options for that field will automatically filter to display matches; you can then select which match(es) you wish to use to filter the table. Alternatively you can scroll through the list to select the groups/facilities/job titles/cadres you wish to apply as filters. You can apply more than one filter including across more than one record field/column (i.e. two different groups or one facility plus one cadre).</p>
+<p>To remove or clear a filter you can either click on the X that is at the end of the field "tab" and that will clear all of the filters, or to clear a single filter at a time you can click on the search/filter term and touch the "Delete" key on your keyboard.</p>
+<p>Add a contact
+If the iHRIS instance has not been updated to v5, adding contact records should be done in the iHRIS instance that is already in use, not in the iHRIS v5 shell. Contacts created in iHRIS v5 shell will not be synced to the primary iHRIS instance.</p>
+<p>Adding a contact in the iHRIS v5 shell where the mHero module is found will create a contact that can be sent a message/flow via mHero, but it will not add the contact to the main iHRIS instance. For this reason the data fields in the contact record are not the complete set that exist in iHRIS. To illustrate, you will be able to enter information such as name, contact details, job title, etc., but you will not be able to enter information such as from which institution the health worker received their degree, previous job positions, trainings they participated in, languages they speak, etc.</p>
+<ol>
+<li>
+<p>To add a new contact to your mHero instance, click on "Add Person" either in the dashboard on the home page or in the left side navigation bar.</p>
+</li>
+<li>
+<p>Enter the information about the contact to the form. You can include identifiers and basic demographic information, contact information and also information about the health worker's position. You can either scroll down the page or click on a section in the right side navigation panel to jump to that section.</p>
+</li>
+</ol>
+<p>Note the required fields which are indicated by red asterisks. The required fields vary by country.</p>
+<ol>
+<li>When you are finished adding information to the contact's record, click on the "SAVE" button in the top right corner of the page.</li>
+</ol>
+<p>If you try to save the record without putting text in all of the required fields you will not be able to save the record. In that case, you can scroll down the page to see the uncompleted required fields highlighted with a red frame.</p>
+<p>Add multiple contacts (bulk upload)
+If the iHRIS instance has not been updated to v5, adding contact records should be done in the iHRIS instance that is already in use, not in the iHRIS v5 shell. Contacts created in iHRIS v5 shell will not be synced to the primary iHRIS instance.</p>
+<p>Modify contact information
+If the iHRIS instance has not been updated to v5, modifying contact records should be done in the iHRIS instance that is already in use, not in the iHRIS v5 shell. Contacts modified in the iHRIS v5 shell will not be synced to the primary iHRIS instance.</p>
+<p>The only existing contacts that you will be able to modify are those that are stored in the iHRIS v5 shell. To modify contacts stored in the main iHRIS instance you must do so within the main iHRIS instance.</p>
+<ol>
+<li>
+<p>To modify the record of an existing contact, click on "Search People" either in the dashboard on the home page or in the left side navigation bar.</p>
+</li>
+<li>
+<p>Locate the contact whose record you want to modify. You can do this by scrolling down through the table of contacts (including increasing the number of rows displayed per page) and by searching or applying filters. You can find guidance related to viewing and searching contacts here.</p>
+</li>
+</ol>
+<p>When you have identified the contact whose record you want to modify, select it by clicking anywhere in the row in the table of contacts.</p>
+<ol>
+<li>
+<p>The next page will display the fields included in each contact record and any associated information saved to that record. To edit any of the record fields click on the "EDIT" button at the top right corner of the page.</p>
+</li>
+<li>
+<p>You can then modify any of the information saved to the contact record or you can add information where information has not previously been added. Once you have finished making changes and additions click the "SAVE" button in the top right corner of the page.</p>
+</li>
+</ol>
+<p>Note that there may be additional required fields than what was required when adding a new record. Ensure that you provide information for all required fields (which are indicated with a red asterisk).</p>
+<p>If you do not wish to save your changes you can click on the "CANCEL" button which is next to the "SAVE" button.</p>
+<p>Manually opt out a contact from receiving messages
+In addition to contacts opting out of messaging by sending a trigger word, it is also possible for system users to manually opt out individual contacts through the mHero interface.</p>
+<ol>
+<li>
+<p>To manually opt out a contact from receiving messages, click on "MHERO" on the left side navigation panel, then click on "Block Contact".</p>
+</li>
+<li>
+<p>Search for the contact. To do so follow the instructions in the above section "View and search/filter contacts".</p>
+</li>
+<li>
+<p>Select the contact(s) whom you would like to opt out from receiving messages by ticking the box to the left of their name in the table. Then click on "BLOCK [n] SELECTED", which is at the bottom right corner of the table, to opt the contact(s) out of future messaging.</p>
+</li>
+</ol>
+<p>Note that the button may be only partially visible, as shown here:</p>
+<p>View contact groups of a contact
+Many health workers will belong to multiple contact groups, however only one contact group will be visible in the Employee List table.</p>
+<ol>
+<li>
+<p>To view all contact groups that a particular health worker belongs to, click on "MHERO" on the left side navigation panel, then click on "Contact Groups".</p>
+</li>
+<li>
+<p>Search for the contact. To do so follow the instructions in the above section "View and search/filter contacts".</p>
+</li>
+<li>
+<p>Select the contact whose contact group(s) you would like to view by ticking the box to the left of their name in the table. Then click on "UNSUBSCRIBE" below the table in the left corner to see all contact groups that the contact is in (and which you can unsubscribe the contact from).</p>
+</li>
+</ol>
+<p>Note that the button may be only partially visible, as shown here:</p>
+<ol>
+<li>You will see the groups that the health worker belongs to in the "Group Lists" table. You can search and scroll through pages for health workers that belong to many groups.</li>
+</ol>
+<p>When you are done looking at the list of contact groups, click the X in the top right corner to not go through with unsubscribing the health worker from any of their contact groups.</p>
+<p>Make changes to a contact group (subscribe or unsubscribe contacts)
+On the "Contact Groups" page within the mHero module:</p>
+<ol>
+<li>Select the contacts that you would like to subscribe or unsubscribe from a contact group by ticking the boxes to the left of the names in the table. Note that you can only subscribe or unsubscribe at once so if you have contacts to subscribe and unsubscribe you will have to do those separately.</li>
+</ol>
+<p>The following are some tips for making your selection:
+1.1. You can select all contacts on a page by clicking on the box farthest to the left in the table header row. Note that this will not select all contacts on all pages, only for the page you are viewing when you click to select all.</p>
+<p>1.2. You may want to make selections on multiple pages so will want to navigate between pages of records or change the number of rows displayed per page. Follow the instructions in the above section "View and search/filter contacts".</p>
+<p>1.3. You may want to search through all records and apply filters to make your selection. To do so follow the instructions in Follow the instructions in the above section "View and search/filter contacts".</p>
+<ol>
+<li>Subscribe or unsubscribe the contacts from a contact group</li>
+</ol>
+<p>2.1. Once you have completed selecting contacts, click on the button at the bottom of the page that corresponds to what you would like to do: the red UNSUBSCRIBE button is in the left corner and the blue SUBSCRIBE button is in the below the table in the middle.</p>
+<p>Note that the buttons may be only partially visible, as shown here:</p>
+<p>2.2. In the pop-up window, below the word "Group List" you will see a list of the possible contact groups from which you can subscribe or unsubscribe contacts.</p>
+<p>2.3. You can either scroll through this list to select the desired contact group or you can use the search function in the "tab" at the top of the list. If you wish to search by typing the group name you can type a partial group name and you will see all contact groups that match what you typed. After you have typed the full or partial group name, you need to hit the "Enter" or "Return" button to trigger the search.</p>
+<p>2.4. Select the contact group(s) by clicking in the box to the left of the group name.</p>
+<p>2.5. You can review the contacts that you are subscribing/unsubscribing in the table at the bottom of the pop-up window. If you see an error in this list you can click on the X in the top right corner of the pop-up window and you can revise your selection.</p>
+<p>2.6. If you are finished selecting the contact group and reviewing the contacts you would like to subscribe/unsubscribe from that group, click on the green "+ SAVE" button (if subscribing) or the green "UNSUBSCRIBE" button (if unsubscribing).</p>
+<p>You should see a new pop-up with a confirmation of the change.</p>
+<p>Create a new contact group
+On the "Contact Groups" page within the mHero module:</p>
+<ol>
+<li>Click on the button in the bottom right corner (below the table) that says "Add New Group".</li>
+</ol>
+<p>Note that the button may be only partially visible, as shown here:</p>
+<ol>
+<li>
+<p>In the pop-up box click where you see the word "Name" and type the name of the new contact group.</p>
+</li>
+<li>
+<p>To create the new contact group click the button in the bottom right corner of the pop up box that says "+ SAVE".</p>
+</li>
+</ol>
+<p>You should see a new pop-up box that confirms the creation of a new group, saying "Success: Group Added Successfully"; click on the button that says "OK" to finish.</p>
+<h1 id="accessing-reports-in-mhero">Accessing Reports in mHero</h1>
+<div class="admonition important">
+<p class="admonition-title">What is MHERO?</p>
+</div>
+<p>MHERO is acronym for the Global Open Facility Registry.
+MHERO is a shared repository for facility information. The information in the repository can vary and may include:</p>
+<ul>
+<li>Facilities</li>
+<li>Jurisdictions such as districts, regions, county, country , with the highest in the hierarchy being a country and the lowest being a facility.</li>
+<li>Services offered by facilities. This may include services such as malaria testing, HIV care, clinical information like vaccination</li>
+<li>Organizations that manage facilities</li>
+</ul>
+<h2 id="log-in_1">Log In</h2>
+<p>In order to access mHero, type the mHero url (web address) into the address bar of any browser A sample login screen is shown in the figure below.</p>
+<p><img alt="Alt text" src="../img/mHerologin.JPG" title="MHERO Login Page" /></p>
+<p>The email address plus the user password is required to login to the system. On clicking the Login button, the details entered are validated and one is allowed access if the details are correct. Otherwise, access is denied.</p>
+<h2 id="reset-password_1">Reset Password</h2>
+<p>To reset your password, Click &gt;Forgot Password &gt; Submit
+A reset password link will be sent via the email address to reset your password.</p>
+<p><img alt="Alt text" src="../img/forgot_password.jpg" title="MHERO Forgot Password Page" /></p>
+<p>Click the link to Back to login and log in as normal</p>
+<h2 id="dashboard_1">Dashboard</h2>
+<p>Once you successfully log in to the system, the dashboard appears:</p>
+<p><img alt="Alt text" src="../img/dashboard.JPG" title="MHERO Dashboard Page" /></p>
+<h2 id="logging-out_1">Logging Out</h2>
+<p>To log out of the MHERO system:
+Browse to the upper right corner on any page, click Log Out.</p>
+<p><img alt="Alt text" src="../img/log_out.JPG" title="MHERO Log Out Page" /></p>
+<p>The Welcome page appears. You will have to re-enter your username and password to regain access to the system.</p>
+
+  <hr>
+<div class="md-source-file">
+  <small>
+    
+      Last update:
+      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date">October 6, 2022</span>
+      
+    
+  </small>
+</div>
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+    <nav class="md-footer__inner md-grid" aria-label="Footer" >
+      
+        
+        <a href="../positions/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Positions" rel="prev">
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+          </div>
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              Positions
+            </div>
+          </div>
+        </a>
+      
+      
+        
+        <a href="../database/" class="md-footer__link md-footer__link--next" aria-label="Next: Database" rel="next">
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              Database
+            </div>
+          </div>
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4Z"/></svg>
+          </div>
+        </a>
+      
+    </nav>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Copyright &copy; 2020 IntraHealth International
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+        <div class="md-social">
+  
+    
+    
+      
+      
+    
+    <a href="https://github.com/iHRIS/iHRIS" target="_blank" rel="noopener" title="github.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg>
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.tabs"], "search": "../../assets/javascripts/workers/search.ecf98df9.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version.title": "Select version"}}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.48f2be22.min.js"></script>
+      
+    
+  </body>
+</html>
