@@ -333,6 +333,7 @@ const fhirQuestionnaire = {
                         } else {
                           parentUrl = parentExt.sliceName
                         }
+                        console.log(parentUrl);
                         fields.push( {linkId: parentPath, definition: parentDataDef, url: parentUrl} )
                       }
                     }
@@ -458,7 +459,6 @@ const fhirQuestionnaire = {
                   }
                   fields.push(data)
                 } else {
-                  console.log("uuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuu")
                   logger.error(`ERROR: questionnaire doesn't handle questions of type  ${
                       question && question.type ? question.type : ""
                   }  yet`)

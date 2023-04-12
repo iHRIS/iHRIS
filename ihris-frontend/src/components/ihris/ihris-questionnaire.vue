@@ -410,6 +410,8 @@ export default {
                       } catch (err) {
                         console.log("Unable to retrieve errors from ", data);
                       }
+                    } else if(data.message) {
+                      errors = data.message
                     } else {
                       errors = "Unknown";
                     }

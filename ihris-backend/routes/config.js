@@ -338,6 +338,10 @@ router.get('/page/:page/:type?', function (req, res) {
                     fields = section.extension.filter(ext => ext.url === "field").map(ext => ext.valueString)
                 } catch (err) {
                 }
+                let allowed = req.user.hasPermissionByName("special", "section", name)
+                if(!allowed) {
+                    continue
+                }
                 try {
                     resourceExt = section.extension.find(ext => ext.url === "resource").extension
 

@@ -126,7 +126,7 @@ const routes = [{
     component: () => import( /* webpackChunkName: "questionnaire" */ "../views/fhir-page-questionnaire.vue")
   },
   {
-    path: "/custom/:path/:component",
+    path: "/custom/:component",
     name: "custom_components",
     component: () => import( /* webpackChunkName: "custom" */ "../views/custom.vue")
   },
