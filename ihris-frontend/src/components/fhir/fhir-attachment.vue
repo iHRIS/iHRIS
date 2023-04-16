@@ -64,6 +64,7 @@
 </template>
 
 <script>
+import { Buffer } from 'buffer';
 import IhrisElement from "../ihris/ihris-element.vue"
 import { eventBus } from "@/main";
 import { dataDisplay } from "@/mixins/dataDisplay"
