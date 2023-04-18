@@ -10,7 +10,7 @@ const workflowInServiceTraining = {
         type: "transaction",
         entry: []
       }
-      fhirAxios.read( "Basic", req.query.practitioner ).then( (resource) => {
+      fhirAxios.read( "Practitioner", req.query.practitioner ).then( (resource) => {
         if ( req.body && req.body.item 
           && req.body.item && req.body.item[0].linkId === "Basic"
           && req.body.item[0].item && req.body.item[0].item[0].linkId === "Basic.extension[0].extension[0]" 

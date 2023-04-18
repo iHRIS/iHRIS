@@ -1500,85 +1500,249 @@ const getReferences = (resourceType, resource) => {
     })
 }
 
-const setUserdata = async (usersData) => {
-    let data = []
-    if (usersData.length > 0) {
-        for (let i = 0; i < usersData.length; i++) {
-            await getCodeSystem(usersData[i]["Nationality"], "iso3166-1-2").then(response => {
-                usersData[i].nationalityCoding = response
-            }).catch((err) => {
-                console.log(err)
-                logger.error(err.message);
-            })
-            await getCodeSystem(usersData[i]["Prefix"], "ihris-prefix-valueset").then(response => {
-                usersData[i].prefixCoding = response
-            }).catch((err) => {
-                console.log(err)
-                logger.error(err.message);
-            })
-            await getCodeSystem(usersData[i]["EmploymentTerms"], "ihris-employment-terms-value-set").then(response => {
-                usersData[i].empTermsCoding = response
-            }).catch((err) => {
-                console.log(err)
-                logger.error(err.message);
-            })
-            await getCodeSystem(usersData[i]["PositionType"], "ihris-position-type-valueset").then(response => {
-                usersData[i].postTypeCoding = response
-            }).catch((err) => {
-                console.log(err)
-                logger.error(err.message);
-            })
-            await getCodeSystem(usersData[i]["Duties"], "ihris-position-duty-valueset").then(response => {
-                usersData[i].positionFunctionCoding = response
-            }).catch((err) => {
-                console.log(err)
-                logger.error(err.message);
-            })
-            await getCodeSystem(usersData[i]["JobTitle"], "ihris-job").then(response => {
-                usersData[i].jobCoding = response
-            }).catch((err) => {
-                console.log(err)
-                logger.error(err.message)
-            })
-            await getReferences("Location", usersData[i]["FacilityName"]).then(response => {
-                usersData[i].locationID = response
-            }).catch((err) => {
-                console.log(err)
-                logger.error(err.message)
-            })
-            await getReferences("Organization", usersData[i]["Organization"]).then(response => {
-                usersData[i].organizationID = response;
-            }).catch((err) => {
-                console.log(err)
-                logger.error(err.message)
-            })
-            await getCodeSystem(usersData[i]["PayGrade"], "ihris-salary-grade").then(response => {
-                usersData[i].payGradeCoding = response
-            }).catch((err) => {
-                console.log(err)
-                logger.error(err.message)
-            })
-            await getCodeSystem(usersData[i]["HighestTrainingLevel"], "ihris-training-level-valueset").then(response => {
-                usersData[i].trainingCoding = response
-            }).catch((err) => {
-                console.log(err)
-                logger.error(err.message);
-            })
-            data.push(usersData[i]);
-        }
-        return data
-    } else {
-        return "No data found"
-    }
+const getRelatedLocation = (id) => {
+    return new Promise((resolve, reject) => {
+      let partOf = [];
+      let params = {
+        _id: id,
+        status: "active",
+        "_include:iterate": "Location:partof",
+      };
+  
+      fhirAxios
+        .search("Location", params)
+        .then((result) => {
+          try {
+            if (result.entry.length > 0) {
+              for (let entry of result.entry) {
+                partOf.push({
+                  url: "location",
+                  valueString: `Location/${entry.resource.id}`,
+                });
+              }
+              resolve(partOf);
+            } else {
+              resolve(partOf);
+            }
+          } catch (error) {
+            logger.error(error);
+            reject(error);
+          }
+        })
+        .catch((err) => {
+          logger.error(err.message);
+          reject(err);
+        });
+    });
+  }
+
+const trimObjValues = (obj) => {
+    return Object.keys(obj).reduce((acc, curr) => {
+      acc[curr] = typeof obj[curr] == "string" ? obj[curr].trim() : obj[curr];
+      return acc;
+    }, {});
 }
+ 
+const setUserdata = async (req) => {
+    let usersInput = req.body;
+    const usersData = usersInput.map((obj) => trimObjValues(obj));
+    let userLocation = ""
+    if (req.user.resource.id == "ihris-user-admin") {
+        userLocation = ""
+    } else {
+        userLocation = req.user.resource.extension.find(
+        (x) =>
+            x.url === "http://ihris.org/fhir/StructureDefinition/ihris-user-location"
+        ).valueReference.reference
+    }
+    let data = [];
+    try {
+      if (usersData.length > 0) {
+        for (let i = 0; i < usersData.length; i++) {
+          
+          await getCodeSystem(usersData[i]["Qualification of Public Health"], "ihris-public-health-valueset")
+            .then((response) => {
+              usersData[i].qualificationCoding = response;
+            })
+            .catch((err) => {
+              console.log(err);
+              logger.error(err.message);
+            });
+          if (usersData[i]["Sex"]) {
+            await getCodeSystem(
+              usersData[i]["Sex"].charAt(0).toUpperCase() +
+                usersData[i]["Sex"].slice(1),
+              "administrative-gender"
+            )
+              .then((response) => {
+                usersData[i].genderCoding = response;
+              })
+              .catch((err) => {
+                console.log(err);
+                logger.error(err.message);
+              });
+          }
+  
+          await getCodeSystem(
+            usersData[i]["Education Background"],
+            "ihris-educational-background-valueset"
+          )
+            .then((response) => {
+              usersData[i].educationalbackgroundCoding = response;
+            })
+            .catch((err) => {
+              console.log(err);
+              logger.error(err.message);
+            });
+          
+          await getCodeSystem(
+            usersData[i]["Profession"],
+            "ihris-profession-valueset"
+          )
+            .then((response) => {
+              usersData[i].professionCoding = response;
+            })
+            .catch((err) => {
+              console.log(err);
+              logger.error(err.message);
+            });
+  
+          await getCodeSystem(
+            usersData[i]["Profession by PENSS"],
+            "ihris-profession-valueset"
+          )
+            .then((response) => {
+              usersData[i].professionByPENSSCoding = response;
+            })
+            .catch((err) => {
+              console.log(err);
+              logger.error(err.message);
+            });
+  
+          await getCodeSystem(
+              usersData[i]["Profession by KSP"],
+              "ihris-profession-valueset"
+            ).then((response) => {
+                usersData[i].professionByKSPCoding = response;
+          }).catch((err) => {
+              console.log(err);
+              logger.error(err.message);
+          });
+  
+          await getCodeSystem(
+              usersData[i]["Std KSP Municipality"],
+              "ihris-profession-valueset"
+              ).then((response) => {
+                  usersData[i].stdKSPPHCMCoding = response;
+          }).catch((err) => {
+              console.log(err);
+              logger.error(err.message);
+          });
+  
+          await getCodeSystem(
+              usersData[i]["Std KSP Hospital"],
+              "ihris-profession-valueset"
+          )
+          .then((response) => {
+              usersData[i].stdKSPPHCHCoding = response;
+          })
+          .catch((err) => {
+              console.log(err);
+              logger.error(err.message);
+          });
+  
+          await getCodeSystem(
+              usersData[i]["Compound Allies"],
+              "ihris-profession-valueset"
+          )
+          .then((response) => {
+              usersData[i].compoundAlliesCoding = response;
+          })
+          .catch((err) => {
+              console.log(err);
+              logger.error(err.message);
+          });
+  
+          await getCodeSystem(
+            usersData[i]["Special Regime  General Regime"],
+            "ihris-regime-valueset"
+          )
+            .then((response) => {
+              usersData[i].regimeCoding = response;
+            })
+            .catch((err) => {
+              console.log(err);
+              logger.error(err.message);
+            });
+  
+            await getCodeSystem(
+              usersData[i]["Regime Grade"],
+              "ihris-regime-grade-valueset"
+            )
+              .then((response) => {
+                usersData[i].regimeGradeCoding = response;
+              })
+              .catch((err) => {
+                console.log(err);
+                logger.error(err.message);
+              });
+  
+          await getCodeSystem(usersData[i]["Position"], "ihris-job-Timor")
+            .then((response) => {
+              usersData[i].positionCoding = response;
+            })
+            .catch((err) => {
+              console.log(err);
+              logger.error(err.message);
+            });
+          
+
+          if ((usersData[i]["Workplace"] != null)) {
+            await getReferences("Location",usersData[i]["Workplace"])
+              .then(async (response) => {
+                usersData[i].facilityId = response;
+                if (response !== undefined) {
+                  await getRelatedLocation(response).then((data) => {
+                    usersData[i].relatedGroup = data;
+                  });
+                } else {
+                  await getRelatedLocation(userLocation.split("/").pop()).then(
+                    (data) => {
+                      usersData[i].relatedGroup = data;
+                    }
+                  );
+                }
+              })
+              .catch((err) => {
+                console.log(err);
+                logger.error(err.message);
+              });
+          } else {
+            await getRelatedLocation(userLocation.split("/").pop()).then(
+              (data) => {
+                usersData[i].relatedGroup = data;
+              }
+            );
+          }
+          data.push(usersData[i]);
+        }
+        return data;
+      } else {
+        return "No data found";
+      }
+    } catch (e) {
+      console.log("ERROR", e);
+    }
+};
 
 router.post("/bulkRegistration", async (req, res) => {
     if (!req.body) {
         return res.status(400).end();
     } else {
-        await setUserdata(req.body).then(async (userResults) => {
+        await setUserdata(req).then(async (userResults) => {
             if (userResults.length > 0) {
                 await bulkRegistration(userResults).then(async response => {
+                    console.log(JSON.stringify(response,null,2))
                     if (response.isValid) {
                         console.log(JSON.stringify(response.data.bundle, null, 2))
                         await fhirAxios.create(response.data.bundle)
@@ -1589,6 +1753,7 @@ router.post("/bulkRegistration", async (req, res) => {
                                 return res.status(500).json(err);
                             })
                     } else {
+                        console.log("BULK IS NOT VALID")
                         return res.json(response);
                     }
                 }).catch(err => {
