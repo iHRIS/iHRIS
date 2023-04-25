@@ -49,7 +49,7 @@ const filterNavigation = (user, nav, prefix) => {
             if (instance === "profile") {
                 nav.menu[key].url += `/${reference}`;
             }
-            if (instance === "leaveRequest" || instance === "evaluation") {
+            if (instance != "profile" && nav.menu[key].selfService ){
                 nav.menu[key].url += `${reference.split('/').pop()}`;
             }
             if (!user.hasPermissionByName("special", "navigation", instance)) {
@@ -1687,7 +1687,7 @@ const setUserdata = async (req) => {
                 logger.error(err.message);
               });
   
-          await getCodeSystem(usersData[i]["Position"], "ihris-job-Timor")
+          await getCodeSystem(usersData[i]["Position"], "ihris-job-timor")
             .then((response) => {
               usersData[i].positionCoding = response;
             })
