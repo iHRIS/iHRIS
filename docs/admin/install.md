@@ -206,7 +206,62 @@ node load.js --server http://localhost:8080/hapi/fhir ../resources/*.json
 Ubuntu install instructions:
 
 ### OpenSearch
-https://opensearch.org/docs/latest/opensearch/install/tar/
+https://opensearch.org/docs/latest/install-and-configure/install-opensearch/debian/
+
+Import the public GPG key. This key is used to verify that the APT repository is signed.
+
+```bash
+ curl -o- https://artifacts.opensearch.org/publickeys/opensearch.pgp | sudo apt-key add -
+```
+
+Create an APT repository for OpenSearch:
+
+```bash
+echo "deb https://artifacts.opensearch.org/releases/bundle/opensearch/2.x/apt stable main" | sudo tee -a /etc/apt/sources.list.d/opensearch-2.x.list
+```
+
+Verify that the repository was created successfully.
+
+```bash
+ sudo apt-get update
+```
+
+With the repository information added, list all available versions of OpenSearch:
+
+```bash
+sudo apt list -a opensearch
+```
+
+Choose the version of OpenSearch you want to install:
+Unless otherwise indicated, the latest available version of OpenSearch is installed.
+
+```bash
+sudo apt-get install opensearch
+```
+
+During installation, the installer will present you with the GPG key fingerprint. Verify that the information matches the following:
+
+```bash
+Fingerprint: c5b7 4989 65ef d1c2 924b a9d5 39d3 1987 9310 d3fc
+```
+
+Once complete, enable OpenSearch.
+
+```bash
+ sudo systemctl enable opensearch
+```
+
+Start OpenSearch.
+
+```bash
+ sudo systemctl start opensearch
+```
+
+Verify that OpenSearch launched correctly.
+
+```bash
+ sudo systemctl status opensearch
+ ```
 
 ### OpenSearch-dashboards
 https://opensearch.org/docs/latest/dashboards/install/tar/
