@@ -215,7 +215,7 @@ export default {
     },
     getCsvTemplate() {
       axios({
-        url: "/fhir/csvTemplate",
+        url: "/config/csvTemplate",
         method: "GET",
         responseType: "blob",
       }).then((response) => {
