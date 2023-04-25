@@ -167,7 +167,7 @@ export default {
           console.log("loading progress" + this.progress)
           const workbook = XLSX.read(data, {type: "array", cellDates: true, dateNF: 'yyyy/mm/dd;@'});
           const finalData = Object.keys(workbook.Sheets).map((name) => ({data: XLSX.utils.sheet_to_json(workbook.Sheets[name])}))
-          axios.post(`/utils/bulkRegistration`, finalData[0].data).then((response) => {
+          axios.post(`/config/bulkRegistration`, finalData[0].data).then((response) => {
             if (response.status === 201) {
               this.message = "Users created Successfully!"
               this.snackbar = true
@@ -193,7 +193,7 @@ export default {
             else {
               this.hasError = true
               this.loading = false
-              this.$router.push('/questionnaire/ihris-practitioner/practitioner')
+              this.$router.push('/resource/search/practitioner')
             }
           }).catch(e => console.log(e))
           resolve();
@@ -207,7 +207,7 @@ export default {
     },
     cancelSelect() {
       this.dialog = false;
-      this.$router.push({path: "/questionnaire/ihris-practitioner/practitioner"})
+      this.$router.push({path: "/resource/search/practitioner"})
     }
   },
 };
