@@ -1417,4 +1417,13 @@ router.get('/app', (req, res) => {
     res.status(200).json(otherConfig);
 });
 
+router.get("/getUserManual", (req, res) => {
+    let p = path.join(
+      __dirname,
+      "../",
+      "file/iHRIS User Manual.pdf"
+    );
+    res.download(p);
+  });
+
 module.exports = router;
