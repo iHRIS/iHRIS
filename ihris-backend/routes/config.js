@@ -979,6 +979,8 @@ router.get('/questionnaire/:questionnaire', function (req, res) {
                             let answer = ""
                             if(condKeys[answKeyInd] === "answerReference") {
                                 answer = when[condKeys[answKeyInd]].reference
+                            } else if(condKeys[answKeyInd] === "answerCoding") {
+                                answer = when[condKeys[answKeyInd]].system + "#" + when[condKeys[answKeyInd]].code
                             } else {
                                 answer = when[condKeys[answKeyInd]]
                             }

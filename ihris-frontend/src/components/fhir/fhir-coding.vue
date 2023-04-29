@@ -87,7 +87,7 @@ export default {
           this.valueDisplay = display
         } )
       }
-      eventBus.$emit(this.path, this.value.code)
+      eventBus.$emit(this.path, this.value.system + "#" + this.value.code)
     }
   },
   methods: {

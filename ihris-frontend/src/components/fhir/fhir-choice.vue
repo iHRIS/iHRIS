@@ -52,7 +52,7 @@ export default {
       if ( this.items ) {
         this.value = this.items.find( item => item.code === this.valueCode )
       }
-      eventBus.$emit(this.path, this.value.code)
+      eventBus.$emit(this.path, this.value.system + "#" + this.value.code)
     }
   },
   methods: {
