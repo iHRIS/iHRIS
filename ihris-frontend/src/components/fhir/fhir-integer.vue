@@ -108,7 +108,9 @@ export default {
       }
       let rules = [ num_check ]
       if ( this.required ) {
-        rules.push ( v => !!v || this.display+" is required" )
+        rules.push((v) => {
+          return v === 0 || !!v || this.display+" is required"
+        })
       }
       return rules
     }
