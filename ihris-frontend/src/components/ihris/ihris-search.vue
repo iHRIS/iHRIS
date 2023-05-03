@@ -18,8 +18,6 @@
         class="white--text error"
       >{{ error_message }}</v-card-subtitle>
       <v-card-text>
-        <v-container>
-        </v-container>
         <v-data-table
           style="cursor: pointer"
           :headers="headers"

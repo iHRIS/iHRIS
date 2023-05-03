@@ -114,6 +114,21 @@
             </v-card>
           </v-row>
         </v-container>
+        <v-card min-width="400px" v-else-if="isIslamic">
+          <v-hijri-date-picker
+            width="490px"
+            ref="picker"
+            color="secondary"
+            :landscape="$vuetify.breakpoint.smAndUp"
+            v-model="value"
+            :max="dateValueMax"
+            :min="dateValueMin"
+            :type="pickerType"
+            :disabled="disabled"
+            @change="save"
+            locale="en" 
+          />
+        </v-card>
         <v-card min-width="300px" v-else-if="pickerType==='year'" >
           <v-card-text>
             <br />
@@ -160,6 +175,7 @@
 import IhrisElement from "../ihris/ihris-element.vue"
 import VEthiopianDatePicker from "vuetify-ethiopian-calendar"
 import ethiopic from "ethiopic-calendar"
+import VHijriDatePicker from 'vuetify-umalqura'
 import { eventBus } from "@/main";
 import { dataDisplay } from "@/mixins/dataDisplay"
 
@@ -170,7 +186,8 @@ export default {
     "constraints", "displayCondition"],
   components: {
     IhrisElement,
-    VEthiopianDatePicker
+    VEthiopianDatePicker,
+    VHijriDatePicker
   },
   mixins: [dataDisplay],
   data: function() {
@@ -230,6 +247,9 @@ export default {
     },
     isEthiopian: function() {
       return this.calendar === "Ethiopian"
+    },
+    isIslamic: function() {
+      return this.calendar === "Islamic"
     },
     minValueETDateTime: function() {
       if ( this.dateValueMin ) {

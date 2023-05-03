@@ -1062,7 +1062,10 @@ router.get('/questionnaire/:questionnaire', function (req, res) {
                     }
                     const def_attrs = ["calendar"]
                     for (let attr of def_attrs) {
-                        if (nconf.get("defaults:components:" + itemType + ":" + attr)) {
+                        if (nconf.get("defaults:fields:" + field.id + ":" + attr)) {
+                            vueOutput += " " + attr + "=\""
+                                + nconf.get("defaults:fields:" + field.id + ":" + attr) + "\""
+                        } else if (nconf.get("defaults:components:" + itemType + ":" + attr)) {
                             vueOutput += " " + attr + "=\""
                                 + nconf.get("defaults:components:" + itemType + ":" + attr) + "\""
                         }
