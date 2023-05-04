@@ -11,10 +11,11 @@
     "i18n:report": "vue-cli-service i18n:report --src \"./src/**/*.?(js|vue)\" --locales \"./src/locales/**/*.json\""
   },
   "dependencies": {
+    "antlr4": "^4.12.0",
     "core-js": "^3.6.5",
     "ethiopic-calendar": "^2.0.0",
     "fetch-defaults": "^1.0.0",
-    "fhirpath": "^2.2.2",
+    "fhirpath": "^3.3.1",
     "idle-vue": "^2.0.5",
     "keycloak-js": "^15.0.2",
     "node-polyfill-webpack-plugin": "^1.1.4",
@@ -27,6 +28,7 @@
     "vue-router": "^3.2.0",
     "vuetify": "^2.6.6",
     "vuetify-ethiopian-calendar": "^1.0.2",
+    "vuetify-umalqura": "^0.0.6",
     "vuex": "^3.4.0",
     "webpack": "^5.73.0",
     "webpack-ruleset": "^0.1.8",

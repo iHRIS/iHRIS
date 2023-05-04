@@ -47,7 +47,7 @@ Usage:          #example
 * code = IhrisResourceCodeSystem#page
 * extension[display].extension[resource].valueReference = Reference(StructureDefinition/ihris-auditevent)
 * extension[display].extension[search][0].valueString = "Id|AuditEvent.id"
-* extension[display].extension[search][1].valueString = "UserID|AuditEvent.agent.altId"
+* extension[display].extension[search][1].valueString = "User AltId|AuditEvent.agent.altId"
 * extension[display].extension[search][2].valueString = "User|AuditEvent.agent.name"
 * extension[display].extension[search][3].valueString = "Action|AuditEvent.subtype.display"
 * extension[display].extension[search][4].valueString = "Resource|AuditEvent.entity.what.reference"
@@ -56,7 +56,7 @@ Usage:          #example
 * extension[display].extension[search][7].valueString = "Error|AuditEvent.entity.detail.where(type='error').valueString"
 * extension[display].extension[search][8].valueString = "Time/Date|AuditEvent.recorded"
 * extension[display].extension[filter][0].valueString = "Action|subtype|http://dicom.nema.org/resources/ontology/DCM"
-* extension[display].extension[filter][1].valueString = "UserID|altid"
+* extension[display].extension[filter][1].valueString = "User AltId|altid"
 * extension[display].extension[filter][2].valueString = "User|agent-name:contains"
 * extension[display].extension[filter][3].valueString = "Date|date"
 * extension[section][0].extension[title].valueString = "Audit Events/Logs"

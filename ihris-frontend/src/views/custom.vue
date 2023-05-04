@@ -1,13 +1,33 @@
 <template>
-    <component :is="currentComponent"></component>
+  <component 
+    :is="currentComponent" 
+    :queries="this.$route.query" 
+  />
 </template>
 <script>
 export default {
-  props: ["path", "component"],
+  props: ["component"],
   data() {
     return {
-        currentComponent: () => import(`@/ihris-frontend-site/${this.$route.params.path}/${this.$route.params.component}.vue`)
+        currentComponent: ""
     }
+  },
+  created() {
+    let componentPath = ""
+    if(this.$route.query.path) {
+      let actualPath = this.$route.query.path.split('/')
+      for(let path of actualPath) {
+        if(!path) {
+          continue
+        }
+        componentPath += "/" + path
+      }
+    }
+    componentPath += "/" + this.$route.params.component
+    if(!componentPath.endsWith(".vue")) {
+      componentPath += ".vue"
+    }
+    this.currentComponent = () => import(`@/site${componentPath}`)
   }
 }
-</script>>
+</script>

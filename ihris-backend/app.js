@@ -107,7 +107,7 @@ async function startUp() {
 
   const isLoggedIn = (req, res, next) => {
     if (nconf.get('app:idp') === 'keycloak') {
-      const unauthenticatedRoutes = ['/config/app', '/apps/install'];
+      const unauthenticatedRoutes = ['/config/app', '/apps/install', '/translator/getTranslatedLanguages', '/translator/getLocale/en'];
       if (unauthenticatedRoutes.includes(req.path)) {
         return next();
       }
@@ -135,7 +135,7 @@ async function startUp() {
         return res.status(401).json()
       }
     } else if (nconf.get('app:idp') === 'ihris') {
-      const unauthenticatedRoutes = ['/', 'favicon.ico', '/flag_en.svg', '/config/app', '/auth', '/fhir/DocumentReference/page-home/$html', '/config/site'];
+      const unauthenticatedRoutes = ['/', 'favicon.ico', '/flag_en.svg', '/config/app', '/auth', '/fhir/DocumentReference/page-home/$html', '/config/site', '/translator/getTranslatedLanguages'];
       if (unauthenticatedRoutes.includes(req.path) || req.path.startsWith('/css') || req.path.startsWith('/js')) {
         return next();
       }

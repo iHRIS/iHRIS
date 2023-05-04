@@ -53,7 +53,7 @@
               >{{ $t(`App.hardcoded-texts.Job Title`)}}: <strong>{{ intro.jobTitle }}</strong></span
             ><br />
             <span
-              >{{ $t(`App.hardcoded-texts.Employer Number`)}}: <strong>{{ intro.employeeID }}</strong></span
+              >{{ $t(`App.hardcoded-texts.Employee Number`)}}: <strong>{{ intro.employeeID }}</strong></span
             ><br />
             <span
             >{{ $t(`App.hardcoded-texts.Email`)}}: <strong>{{ intro.email }}</strong></span
@@ -135,7 +135,7 @@ export default {
         if(practitioner&&practitioner.name[0]?.prefix&&practitioner.name[0]?.prefix.length){
           title = practitioner.name[0].prefix[0]
         }
-        this.intro.fullName = `${title} ${practitioner?.name[0]?.given[0]} ${practitioner?.name[0]?.family}`;
+        this.intro.fullName = `${title} ${practitioner?.name[0]?.family} ${practitioner?.name[0]?.given[0]}`;
         this.intro.email = practitioner?.telecom?.find(
           (x) => x.system === "email"
         )?.value;

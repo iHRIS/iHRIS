@@ -6,7 +6,8 @@ This option can be used to create a custom page that implements logics that cant
 + Now open your component file and add logics about your component. You may refer on the section that explains how to add a custom route/end-point or module in case you want to add a nodeJS route/end-point or module.
 + Now create a menu that points to your custom component.
   Below are the main hints on creating a menu of a custom component
-    + The url must start with /custom followed by path to your custom component, the path must be relative to the root directory of custom components directory (iHRIS/ihris-frontend/site). i.e if your custom component file is named performance.vue and is located inside iHRIS/ihris-frontend/site/components then the url for the component will be /custom/components/performance.
+    + The url must start with /custom followed by the name of your custom component.If your component is nested in subfolders within your site directory then append the path query into the url, and the path must be relative to the root directory of custom components directory (iHRIS/ihris-frontend/site). i.e if your custom component file is named performance.vue and is located inside iHRIS/ihris-frontend/site/components/evaluation then the url for the component will be /custom/performance?path=components/evaluation.
+    + You can use query parameters to send any data to your component i.e if you want to include an id then the url would look like /custom/performance?path=components/evaluation&id=23
   Below is a full example for how a menu of a custom component can be created, this assumes that the menu is a sub-menu of Person
 
 ```json
@@ -16,7 +17,7 @@ This option can be used to create a custom page that implements logics that cant
       },
       {
         "name": "site:nav:menu:person:menu:performance:url",
-        "valueString": "/custom/components/performance"
+        "valueString": "/custom/performance?path=components/evaluation"
       }
 ```
 

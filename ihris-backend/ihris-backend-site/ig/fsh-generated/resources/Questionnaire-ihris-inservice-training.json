@@ -1,0 +1,63 @@
+{
+  "resourceType": "Questionnaire",
+  "id": "ihris-inservice-training",
+  "url": "http://ihris.org/fhir/Questionnaire/ihris-inservice-training",
+  "title": "iHRIS In-Service Training Workflow",
+  "description": "iHRIS workflow to record a In-Service Training",
+  "name": "ihris-inservice-training",
+  "status": "active",
+  "date": "2020-08-27",
+  "purpose": "Workflow page for recording a In-Service Training Information.",
+  "item": [
+    {
+      "linkId": "Basic",
+      "text": "In-Service Training Information",
+      "type": "group",
+      "item": [
+        {
+          "linkId": "Basic.extension[0].extension[0]",
+          "text": "In-Service Training Provider",
+          "type": "string",
+          "required": true,
+          "repeats": false
+        },
+        {
+          "linkId": "Basic.extension[0].extension[1]",
+          "text": "In-Service Training Type/Category",
+          "type": "choice",
+          "answerValueSet": "http://ihris.org/fhir/ValueSet/ihris-training-valueset",
+          "required": true,
+          "repeats": false
+        },
+        {
+          "linkId": "Basic.extension[0].extension[2]",
+          "text": "In-Service Training Course Name",
+          "type": "string",
+          "required": true,
+          "repeats": false
+        },
+        {
+          "linkId": "Basic.extension[0].extension[3]",
+          "text": "Credits",
+          "type": "integer",
+          "required": false,
+          "repeats": false
+        },
+        {
+          "linkId": "Basic.extension[0].extension[4]",
+          "text": "Start Date",
+          "type": "date",
+          "required": true,
+          "repeats": false
+        },
+        {
+          "linkId": "Basic.extension[0].extension[5]",
+          "text": "End Date",
+          "type": "date",
+          "required": true,
+          "repeats": false
+        }
+      ]
+    }
+  ]
+}

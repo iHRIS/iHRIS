@@ -1,7 +1,7 @@
 <template>
-  <ihris-element :edit="edit" :loading="loading">
+  <ihris-element :edit="edit" :loading="loading" v-if="!hide">
     <template #form>
-      <v-select 
+      <v-autocomplete 
         :loading="loading" 
         :label="$t(`App.fhir-resources-texts.${display}`)"
         v-model="value" 
@@ -17,7 +17,7 @@
         @change="errors = []"
       >
         <template #label>{{$t(`App.fhir-resources-texts.${display}`)}} <span v-if="required" class="red--text font-weight-bold">*</span></template>
-      </v-select>
+      </v-autocomplete>
     </template>
     <template #header>
       {{$t(`App.fhir-resources-texts.${display}`)}}
@@ -30,6 +30,8 @@
 
 <script>
 import IhrisElement from "../ihris/ihris-element.vue"
+import { eventBus } from "@/main";
+import { dataDisplay } from "@/mixins/dataDisplay"
 
 /*
 const itemSort = (a,b) => {
@@ -38,10 +40,11 @@ const itemSort = (a,b) => {
 */
 export default {
   name: "fhir-code",
-  props: ["field","min","max","base-min","base-max","label","binding","slotProps","path","edit","sliceName","readOnlyIfSet","constraints"],
+  props: ["field","min","max","base-min","base-max","label","binding","slotProps","path","edit","sliceName","readOnlyIfSet","constraints", "displayCondition"],
   components: {
     IhrisElement
   },
+  mixins: [dataDisplay],
   data: function() {
     return {
       value: "",
@@ -55,6 +58,8 @@ export default {
     }
   },
   created: function() {
+    //this function is defined under dataDisplay mixin
+    this.hideShowField(this.displayCondition)
     this.setupData()
   },
   watch: {
@@ -66,6 +71,9 @@ export default {
         }
       },
       deep: true
+    },
+    value(val) {
+      eventBus.$emit(this.path, val)
     }
   },
   methods: {

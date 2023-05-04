@@ -84,6 +84,14 @@ export default {
   },
   methods: {
     updateMenu: function() {
+      if ( this.$store.state.user.loggedin && this.nav.home ) {
+        if(this.nav.home.external === "true") {
+          window.location = this.nav.home.url
+        } else {
+          this.$router.push(this.nav.home.url)
+        }
+        return
+      }
       this.menu = []
       for( let menu_id of Object.keys(this.nav.menu) ) {
         let entry ={}

@@ -7,9 +7,10 @@ Below are various ways you may use to customize iHRIS based on your needs
 1. Editing FSH files
 2. [Creating custom iHRIS components](custom_components.md)
 3. [iHRIS Apps](ihris_apps.md)
-4. Creating and editing Menu
-5. [Creating custom nodeJS routes](custom_routes.md)
-6. Creating custom nodeJS modules --- pending
+4. [Tasks And Roles](tasks_roles.md)
+5. Creating and editing Menu
+6. [Creating custom nodeJS routes](custom_routes.md)
+7. Creating custom nodeJS modules --- pending
 
 ## `Editing fsh files`
 

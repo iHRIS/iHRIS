@@ -8,7 +8,7 @@
       :loading="loading"
       class="elevation-1"
       dense
-      :footer-props="{ 'items-per-page-text':$t('App.fhir-resources-texts.tableText'), 'items-per-page-options': [5,10,20,50] }"
+      :footer-props="{ 'items-per-page-text':$t('App.hardcoded-texts.tableText'), 'items-per-page-options': [5,10,20,50] }"
     >
       <template v-slot:top>
         <v-toolbar flat color="white">
@@ -51,7 +51,7 @@ const isObject = (obj) => {
 export default {
   name: "ihris-secondary",
   props: ["title", "field", "profile", "slotProps", "link-id", "link-field",
-    "search-field", "edit", "columns", "actions"],
+    "search-field", "search-field-target", "edit", "columns", "actions"],
   data: function() {
     return {
       source: { data: {}, path: this.field },
@@ -103,10 +103,15 @@ export default {
         if ( this.profile ) {
           queryStr.push( "_profile="+this.profile )
         }
+        let filterValue = ""
+        if(this.searchFieldTarget) {
+          filterValue = this.searchFieldTarget + "/"
+        }
+        filterValue += this.linkId
         if ( this.searchField ) {
-          queryStr.push( this.searchField+"="+this.linkId )
+          queryStr.push( this.searchField+"="+filterValue )
         } else {
-          queryStr.push( this.linkField.substring( this.linkField.indexOf('.') +1 ) +"="+this.linkId )
+          queryStr.push( this.linkField.substring( this.linkField.indexOf('.') +1 ) +"="+filterValue )
         }
         url += "?" + queryStr.join("&")
       }

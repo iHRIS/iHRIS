@@ -1,0 +1,10 @@
+{
+  "resourceType": "CodeSystem",
+  "status": "active",
+  "content": "complete",
+  "name": "IhrisTrainingCodeSystem",
+  "id": "ihris-training-codesystem",
+  "title": "In-Service Training",
+  "version": "0.2.0",
+  "url": "http://ihris.org/fhir/CodeSystem/ihris-training-codesystem"
+}

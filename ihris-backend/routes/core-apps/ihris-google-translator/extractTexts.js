@@ -276,14 +276,7 @@ function extractFromPage(page_id, type) {
           createSearchTemplate(resource, pageDisplay)
           createTemplate(resource, structure, pageSections)
           return resolve()
-          if (type.includes("search")) {
-            createSearchTemplate(resource, pageDisplay)
-            return resolve()
-          } else if(type.includes("resource")) {
-            createTemplate(resource, structure, pageSections)
-            return resolve()
-          }
-  
+
         }).catch(err => {
           console.error(err.message)
           console.error(err.stack)
@@ -299,13 +292,6 @@ function extractFromPage(page_id, type) {
           createSearchTemplate(resource, pageDisplay)
           createTemplate(resource, structure, pageSections)
           return resolve()
-          if (type.includes("search")) {
-            
-            return resolve()
-          } 
-          if(type.includes("resource")) {
-            
-          }
   
         }).catch((err) => {
           console.error(err.message)

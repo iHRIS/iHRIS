@@ -1,6 +1,6 @@
 <template>
-  <v-container>
-    <v-select 
+  <v-container v-if="!hide">
+    <v-autocomplete 
       :loading="loading" 
       :label="label" 
       v-model="valueCode" 
@@ -15,7 +15,7 @@
       @change="errors = []"
       >
       <template #label>{{$t(`App.fhir-resources-texts.${label}`)}} <span v-if="required" class="red--text font-weight-bold">*</span></template>
-    </v-select>
+    </v-autocomplete>
   </v-container>
 </template>
 
@@ -26,9 +26,11 @@ const itemSort = (a,b) => {
 }
 */
 import { eventBus } from "@/main";
+import { dataDisplay } from "@/mixins/dataDisplay"
 export default {
   name: "fhir-coding",
-  props: ["label", "path", "binding", "edit", "min", "max","constraints"],
+  props: ["label", "path", "binding", "edit", "min", "max","constraints", "displayCondition"],
+  mixins: [dataDisplay],
   data: function() {
     return {
       value: { system: "", code: "", display: "" },
@@ -41,6 +43,8 @@ export default {
     }
   },
   created: function() {
+    //this function is defined under dataDisplay mixin 
+    this.hideShowField(this.displayCondition)
     this.setupData()
   },
   watch: {
@@ -48,7 +52,7 @@ export default {
       if ( this.items ) {
         this.value = this.items.find( item => item.code === this.valueCode )
       }
-      eventBus.$emit(this.path, this.value.code)
+      eventBus.$emit(this.path, this.value.system + "#" + this.value.code)
     }
   },
   methods: {

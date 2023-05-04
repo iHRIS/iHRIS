@@ -1,7 +1,7 @@
 <template>
-  <ihris-element :edit="edit" :loading="loading">
+  <ihris-element :edit="edit" :loading="loading" v-if="!hide">
     <template #form>
-      <v-select 
+      <v-autocomplete 
         :loading="loading" 
         :label="display" 
         v-model="valueCode" 
@@ -17,7 +17,7 @@
         @change="errors = []"
       >
         <template #label>{{$t(`App.fhir-resources-texts.${label}`)}} <span v-if="required" class="red--text font-weight-bold">*</span></template>
-      </v-select>
+      </v-autocomplete>
     </template>
     <template #header>
       {{$t(`App.fhir-resources-texts.${display}`)}}
@@ -30,6 +30,8 @@
 
 <script>
 import IhrisElement from "../ihris/ihris-element.vue"
+import { eventBus } from "@/main";
+import { dataDisplay } from "@/mixins/dataDisplay"
 
 /*
 const itemSort = (a,b) => {
@@ -39,10 +41,11 @@ const itemSort = (a,b) => {
 export default {
   name: "fhir-coding",
   props: ["field","label","sliceName","targetprofile","min","max","base-min","base-max","slotProps","path","binding","edit","readOnlyIfSet",
-    "constraints"],
+    "constraints", "displayCondition"],
   components: {
     IhrisElement
   },
+  mixins: [dataDisplay],
   data: function() {
     return {
       value: { system: "", code: "", display: "" },
@@ -58,6 +61,8 @@ export default {
     }
   },
   created: function() {
+    //this function is defined under dataDisplay mixin
+    this.hideShowField(this.displayCondition)
     this.setupData()
   },
   watch: {
@@ -82,6 +87,7 @@ export default {
           this.valueDisplay = display
         } )
       }
+      eventBus.$emit(this.path, this.value.system + "#" + this.value.code)
     }
   },
   methods: {

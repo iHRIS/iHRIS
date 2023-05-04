@@ -1,5 +1,5 @@
 <template>
-  <ihris-element :edit="edit" :loading="loading">
+  <ihris-element :edit="edit" :loading="loading" v-if="!hide">
     <template #form>
       <v-menu 
         v-if="displayType == 'tree'"
@@ -80,15 +80,21 @@ import IhrisElement from "../ihris/ihris-element.vue"
 
 const querystring = require('querystring')
 const fhirurl = "http://hl7.org/fhir/StructureDefinition/"
+import { eventBus } from "@/main";
+import { dataDisplay } from "@/mixins/dataDisplay"
+
 export default {
   name: "fhir-reference",
   props: ["field","label","sliceName","targetProfile","targetResource","min","max","base-min","base-max",
-    "slotProps","path","sub-fields","edit","readOnlyIfSet","constraints", "displayType", "initialValue", "overrideValue"],
+    "slotProps","path","sub-fields","edit","readOnlyIfSet","constraints", "displayType", 
+    "initialValue", "overrideValue", "displayCondition"],
   components: {
     IhrisElement
   },
+  mixins: [dataDisplay],
   data: function() {
     return {
+      hide: false,
       source: { path: "", data: {} },
       value: { reference: "" },
       qField: "valueReference",
@@ -107,10 +113,13 @@ export default {
       active: [],
       open: [],
       treeLookup: {},
-      allAllowed: true
+      allAllowed: true,
+      pathes: {}
     }
   },
   created: function() {
+    //this function is defined under dataDisplay mixin
+    this.hideShowField(this.displayCondition)
     this.setupData()
   },
   watch: {
@@ -135,6 +144,7 @@ export default {
     select: function(val) {
       this.value.reference = val
       this.getDisplay()
+      eventBus.$emit(this.path, val)
     },
     active: function() {
       if ( this.active.length ) {

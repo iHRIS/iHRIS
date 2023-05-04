@@ -13,7 +13,7 @@
                 x-large 
                 v-bind="attrs" 
                 v-on="on"
-                to="uninstall-app"
+                to="ihris-apps-uninstall"
               >
                 <v-icon>mdi-minus</v-icon>
               </v-btn>
@@ -28,7 +28,7 @@
                 x-large 
                 v-bind="attrs" 
                 v-on="on"
-                to="install-app"
+                to="ihris-apps-install"
               >
                 <v-icon>mdi-plus</v-icon>
               </v-btn>

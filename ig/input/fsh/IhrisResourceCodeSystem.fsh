@@ -8,6 +8,7 @@ Title:          "Code System for iHRIS Basic Resources."
 * #training-link "iHRIS Training Link"        "Basic resource for customization that links to a Qualify training."
 * #visualization "iHRIS Data Visualization" "iHRIS Data Visualization"
 * #dashboard "iHRIS Dashboard" "iHRIS Dashboard"
+* #resourcedata "Resource Data" "Resource Data"
 
 ValueSet:       IhrisResourceValueSet
 Id:             ihris-resource-valueset

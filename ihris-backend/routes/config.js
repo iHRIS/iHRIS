@@ -9,17 +9,12 @@ const outcomes = ihrissmartrequire('config/operationOutcomes')
 const fhirDefinition = require('../modules/fhir/fhirDefinition')
 const crypto = require('crypto')
 const logger = require('../winston')
-const path = require("path")
-const bulkRegistration = require("../modules/bulkRegistration")
-const employeeId = require("../modules/employeeIdPrintout");
-const employeeCv = require("../modules/employeeCvPrintout");
 const winston = require("winston");
 
 const getUKey = () => {
     return Math.random().toString(36).replace(/^[^a-z]+/, '') + Math.random().toString(36).substring(2, 15)
 }
 const filterNavigation = (user, nav, prefix) => {
-    let email = user.resource.telecom[0].value;
     let roleObj = user.resource.extension.filter(
         (ext) =>
             ext.url === "http://ihris.org/fhir/StructureDefinition/ihris-assign-role"
@@ -42,14 +37,14 @@ const filterNavigation = (user, nav, prefix) => {
         for (let key of Object.keys(nav.menu)) {
             let instance;
             if (prefix) {
-                instance = prefix + "-" + key;
+                instance = prefix + ":" + key;
             } else {
                 instance = key;
             }
             if (instance === "profile") {
                 nav.menu[key].url += `/${reference}`;
             }
-            if (instance === "leaveRequest" || instance === "evaluation") {
+            if (instance != "profile" && nav.menu[key].selfService ){
                 nav.menu[key].url += `${reference.split('/').pop()}`;
             }
             if (!user.hasPermissionByName("special", "navigation", instance)) {
@@ -60,7 +55,7 @@ const filterNavigation = (user, nav, prefix) => {
         for (let key of Object.keys(nav.menu)) {
             let instance;
             if (prefix) {
-                instance = prefix + "-" + key;
+                instance = prefix + ":" + key;
             } else {
                 instance = key;
             }
@@ -318,7 +313,7 @@ router.get('/page/:page/:type?', function (req, res) {
             let sections = {}
             let sectionMap = {}
             for (let section of pageSections) {
-                let title, description, name, resourceExt, resource, linkfield, searchfield
+                let title, description, name, resourceExt, resource, linkfield, searchfield, searchfieldtarget
                 let fields = []
                 let columns = []
                 let actions = []
@@ -338,6 +333,10 @@ router.get('/page/:page/:type?', function (req, res) {
                     fields = section.extension.filter(ext => ext.url === "field").map(ext => ext.valueString)
                 } catch (err) {
                 }
+                let allowed = req.user.hasPermissionByName("special", "section", name)
+                if(!allowed) {
+                    continue
+                }
                 try {
                     resourceExt = section.extension.find(ext => ext.url === "resource").extension
 
@@ -346,6 +345,7 @@ router.get('/page/:page/:type?', function (req, res) {
                         linkfield = resourceExt.find(ext => ext.url === "linkfield").valueString
                         try {
                             searchfield = resourceExt.find(ext => ext.url === "searchfield").valueString
+                            searchfieldtarget = resourceExt.find(ext => ext.url === "searchfieldtarget").valueString
                         } catch (err) {
                         }
                         let columnsExt = resourceExt.filter(ext => ext.url === "column")
@@ -423,6 +423,7 @@ router.get('/page/:page/:type?', function (req, res) {
                     resource: resource,
                     linkfield: linkfield,
                     searchfield: searchfield,
+                    searchfieldtarget: searchfieldtarget,
                     columns: columns,
                     actions: actions,
                     elements: {}
@@ -465,6 +466,7 @@ router.get('/page/:page/:type?', function (req, res) {
                         resource: undefined,
                         linkfield: undefined,
                         searchfield: undefined,
+                        searchfieldtarget: undefined,
                         columns: [],
                         actions: [],
                         elements: {}
@@ -685,6 +687,7 @@ router.get('/page/:page/:type?', function (req, res) {
                                 + '" title="' + sections[name].title
                                 + '" link-field="' + sections[name].linkfield
                                 + '" search-field="' + (sections[name].searchfield || "")
+                                + '" search-field-target="' + (sections[name].searchfieldtarget || "")
                                 + '" :columns=\'columns.' + sectionKey
                                 + '\' :actions=\'actions.' + sectionKey
                                 + '\'><template #default="slotProps">' + "\n"
@@ -869,9 +872,7 @@ router.get('/questionnaire/:questionnaire', function (req, res) {
         return res.status(401).json(outcomes.DENIED)
     }
 
-
     fhirAxios.read("Questionnaire", req.params.questionnaire).then(async (resource) => {
-
 
         let vueOutput = '<ihris-questionnaire :edit=\"isEdit\" :view-page="viewPage" :constraints="constraints" url="' + resource.url + '" id="' + resource.id
             + '" title="' + resource.title
@@ -967,15 +968,23 @@ router.get('/questionnaire/:questionnaire', function (req, res) {
                     let displayCondition = ''
                     if(item.enableWhen) {
                         for(let when of item.enableWhen) {
-                        displayCondition = ''
-                        condKeys = Object.keys(when)
-                        let answKeyInd = condKeys.findIndex((cond) => {
-                            return cond.startsWith('answer')
-                        })
-                        if(displayCondition) {
-                            displayCondition += '+='
-                        }
-                        displayCondition += when.question + '|' + when.operator + '|' + when[condKeys[answKeyInd]]
+                            displayCondition = ''
+                            const condKeys = Object.keys(when)
+                            let answKeyInd = condKeys.findIndex((cond) => {
+                                return cond.startsWith('answer')
+                            })
+                            if(displayCondition) {
+                                displayCondition += '+='
+                            }
+                            let answer = ""
+                            if(condKeys[answKeyInd] === "answerReference") {
+                                answer = when[condKeys[answKeyInd]].reference
+                            } else if(condKeys[answKeyInd] === "answerCoding") {
+                                answer = when[condKeys[answKeyInd]].system + "#" + when[condKeys[answKeyInd]].code
+                            } else {
+                                answer = when[condKeys[answKeyInd]]
+                            }
+                            displayCondition += when.question + '|' + when.operator + '|' + answer
                         }
                     }
                     vueOutput += "<fhir-" + itemType + " :edit=\"isEdit\" path=\"" + item.linkId + "\"" + "displayCondition=\"" + displayCondition + "\""
@@ -1053,7 +1062,10 @@ router.get('/questionnaire/:questionnaire', function (req, res) {
                     }
                     const def_attrs = ["calendar"]
                     for (let attr of def_attrs) {
-                        if (nconf.get("defaults:components:" + itemType + ":" + attr)) {
+                        if (nconf.get("defaults:fields:" + field.id + ":" + attr)) {
+                            vueOutput += " " + attr + "=\""
+                                + nconf.get("defaults:fields:" + field.id + ":" + attr) + "\""
+                        } else if (nconf.get("defaults:components:" + itemType + ":" + attr)) {
                             vueOutput += " " + attr + "=\""
                                 + nconf.get("defaults:components:" + itemType + ":" + attr) + "\""
                         }
@@ -1396,206 +1408,7 @@ router.get('/report/:report', function (req, res) {
         })
     })
 })
-
-const searchLocationReference = async (province, district, subdistrict) => {
-    let location = "Location/ZA";
-    let partOfLocation = [];
-    partOfLocation.push(location);
-    if (province) {
-        let provinceBundle = await fhirAxios.search("Location", {
-            name: region.trim(),
-            partof: "ZA",
-        });
-
-        if (provinceBundle && provinceBundle.entry && provinceBundle.entry.length > 0) {
-            partOfLocation.push(`Location/${provinceBundle.entry[0].resource.id}`);
-            location = `Location/${provinceBundle.entry[0].resource.id}`;
-            if (district) {
-                let districtBundle = await fhirAxios.search("Location", {
-                    name: district.trim(),
-                    partof: `${provinceBundle.entry[0].resource.id}`,
-                });
-                if (districtBundle && districtBundle.entry && districtBundle.entry.length > 0) {
-                    partOfLocation.push(`Location/${districtBundle.entry[0].resource.id}`);
-                    location = `Location/${districtBundle.entry[0].resource.id}`;
-                    if (subdistrict) {
-                        let subdistrictBundle = await fhirAxios.search("Location", {
-                            name: subdistrict.trim(),
-                            partof: `${districtBundle.entry[0].resource.id}`,
-                        });
-                        if (
-                            subdistrictBundle &&
-                            subdistrictBundle.entry &&
-                            subdistrictBundle.entry.length > 0
-                        ) {
-                            partOfLocation.push(
-                                `Location/${subdistrictBundle.entry[0].resource.id}`
-                            );
-                            location = `Location/${subdistrictBundle.entry[0].resource.id}`;
-                        } else {
-                            location = `Location/${districtBundle.entry[0].resource.id}`;
-                        }
-                    } else {
-                        location = `Location/${districtBundle.entry[0].resource.id}`;
-                    }
-                }
-            } else {
-                location = `Location/${provinceBundle.entry[0].resource.id}`;
-            }
-        }
-    }
-
-    return {location, partOfLocation};
-};
-
-const getCodeSystem = (value, valueSet) => {
-    return new Promise((resolve, reject) => {
-        let valuecoding = {}
-        fhirAxios.expand(valueSet, true, true).then((expansion) => {
-            try {
-                valuecoding = expansion.expansion.contains.find(element => element.display === value)
-                resolve(valuecoding)
-            } catch (error) {
-                console.log(error)
-                logger.error(error)
-                reject(error)
-            }
-        }).catch((err) => {
-            console.log(err)
-            logger.error(err.message);
-            reject(err);
-        })
-    })
-}
-
-const getReferences = (resourceType, resource) => {
-    return new Promise((resolve, reject) => {
-        let params = {'name:contains': resource}
-        fhirAxios.search(resourceType, params).then(result => {
-            try {
-                let references = result.entry.map(entry => entry.resource.id)
-                resolve(references[0])
-            } catch (error) {
-                console.log(error)
-                logger.error(error)
-                reject(error)
-            }
-        }).catch((err) => {
-            console.log(err)
-            logger.error(err.message);
-            reject(err);
-        })
-    })
-}
-
-const setUserdata = async (usersData) => {
-    let data = []
-    if (usersData.length > 0) {
-        for (let i = 0; i < usersData.length; i++) {
-            await getCodeSystem(usersData[i]["Nationality"], "iso3166-1-2").then(response => {
-                usersData[i].nationalityCoding = response
-            }).catch((err) => {
-                console.log(err)
-                logger.error(err.message);
-            })
-            await getCodeSystem(usersData[i]["Prefix"], "ihris-prefix-valueset").then(response => {
-                usersData[i].prefixCoding = response
-            }).catch((err) => {
-                console.log(err)
-                logger.error(err.message);
-            })
-            await getCodeSystem(usersData[i]["EmploymentTerms"], "ihris-employment-terms-value-set").then(response => {
-                usersData[i].empTermsCoding = response
-            }).catch((err) => {
-                console.log(err)
-                logger.error(err.message);
-            })
-            await getCodeSystem(usersData[i]["PositionType"], "ihris-position-type-valueset").then(response => {
-                usersData[i].postTypeCoding = response
-            }).catch((err) => {
-                console.log(err)
-                logger.error(err.message);
-            })
-            await getCodeSystem(usersData[i]["Duties"], "ihris-position-duty-valueset").then(response => {
-                usersData[i].positionFunctionCoding = response
-            }).catch((err) => {
-                console.log(err)
-                logger.error(err.message);
-            })
-            await getCodeSystem(usersData[i]["JobTitle"], "ihris-job").then(response => {
-                usersData[i].jobCoding = response
-            }).catch((err) => {
-                console.log(err)
-                logger.error(err.message)
-            })
-            await getReferences("Location", usersData[i]["FacilityName"]).then(response => {
-                usersData[i].locationID = response
-            }).catch((err) => {
-                console.log(err)
-                logger.error(err.message)
-            })
-            await getReferences("Organization", usersData[i]["Organization"]).then(response => {
-                usersData[i].organizationID = response;
-            }).catch((err) => {
-                console.log(err)
-                logger.error(err.message)
-            })
-            await getCodeSystem(usersData[i]["PayGrade"], "ihris-salary-grade").then(response => {
-                usersData[i].payGradeCoding = response
-            }).catch((err) => {
-                console.log(err)
-                logger.error(err.message)
-            })
-            await getCodeSystem(usersData[i]["HighestTrainingLevel"], "ihris-training-level-valueset").then(response => {
-                usersData[i].trainingCoding = response
-            }).catch((err) => {
-                console.log(err)
-                logger.error(err.message);
-            })
-            data.push(usersData[i]);
-        }
-        return data
-    } else {
-        return "No data found"
-    }
-}
-
-router.post("/bulkRegistration", async (req, res) => {
-    if (!req.body) {
-        return res.status(400).end();
-    } else {
-        await setUserdata(req.body).then(async (userResults) => {
-            if (userResults.length > 0) {
-                await bulkRegistration(userResults).then(async response => {
-                    if (response.isValid) {
-                        console.log(JSON.stringify(response.data.bundle, null, 2))
-                        await fhirAxios.create(response.data.bundle)
-                            .then((results) => {
-                                return res.status(201).json(results);
-                            }).catch((err) => {
-                                logger.error(err);
-                                return res.status(500).json(err);
-                            })
-                    } else {
-                        return res.json(response);
-                    }
-                }).catch(err => {
-                    console.log(err)
-                    logger.error(err.message)
-                })
-            }
-        }).catch((err) => {
-            console.log(err)
-            logger.error(err.message)
-        })
-    }
-});
-
-router.get("/csvTemplate", (req, res) => {
-    let p = path.join(__dirname, "../", "file/sampleInput.xlsx");
-    res.download(p);
-});
-
+ 
 router.get('/app', (req, res) => {
     logger.info('Received a request to get general configuration');
     const otherConfig = {
@@ -1609,163 +1422,13 @@ router.get('/app', (req, res) => {
     res.status(200).json(otherConfig);
 });
 
-router.get("/employeeId/:id", (req, res) => {
-    if (req.params.id) {
-        fhirAxios.read("/Practitioner", req.params.id).then(async (user) => {
-            let userData = {};
-            userData.id = req.params.id;
-
-            userData.fullName = `${user.name[0].prefix[0]} ${user.name[0].given[0]} ${user.name[0].family}`
-
-            userData.gender = user.gender;
-
-            userData.photo = user.photo;
-
-            userData.phone = user.telecom?.find(x => x.system === "phone")?.value;
-
-            userData.employeeId = user.identifier?.find(x => x.type.coding[0].code = "EN")?.value;
-
-            userData.residence = user.address[0]?.city;
-
-            userData.nationality = user.address[0]?.country;
-
-            userData.email = user.telecom?.find(x => x.system === "email")?.value
-
-            let data = await fhirAxios.search("PractitionerRole", {
-                _profile:
-                    "http://ihris.org/fhir/StructureDefinition/ihris-practitioner-role",
-                practitioner: req.params.id,
-            });
-            let organizationLocation =
-                data.entry && data.entry.length > 0
-                    ? data.entry[0].resource.location[0].reference.split("/")
-                    : null;
-            if (organizationLocation != null) {
-                let organizationData = await fhirAxios.read(
-                    organizationLocation[0],
-                    organizationLocation[1]
-                );
-
-                let organizationInformation = organizationData?.extension?.find(x => x.url === "http://ihris.org/fhir/StructureDefinition/ihris-facility-information-details")
-
-                let logo = organizationInformation?.extension?.find(x => x.url === "logo")?.valueAttachment
-
-                let stamp = organizationInformation?.extension?.find(x => x.url === "stamp")?.valueAttachment
-
-                let signature = organizationInformation?.extension?.find(x => x.url === "signature")?.valueAttachment
-
-                userData.logo = logo;
-
-                userData.signature = signature;
-
-                userData.stamp = stamp;
-            }
-            let role = data.entry
-                ? data.entry[0].resource.code[0].coding[0].display
-                : "";
-            userData.position = role ? role : "";
-
-            let fileName = `${userData.id}_id.png`;
-            let p = path.join(__dirname, "../tmp/", fileName);
-            employeeId(userData).then((_) => {
-                res.download(p);
-            });
-        });
-    }
-});
-
-router.get("/employeeCv/:id", async (req, res) => {
-    if (req.params.id) {
-        const userData = {};
-        userData.id = req.params.id;
-        const educationData = [];
-        const workExperiences = [];
-        const languages = [];
-        try {
-            const data = await fhirAxios.search(`/Basic`, {
-                practitioner: req.params.id,
-                _profile:
-                    "http://ihris.org/fhir/StructureDefinition/ihris-basic-employment-history",
-            });
-            if (data && data.entry && data.entry.length > 0) {
-                data.entry.map((expr) => {
-                    let employmentHistory = expr.resource.extension.find(x => x.url === "http://ihris.org/fhir/StructureDefinition/ihris-employment-history")
-                    let workExperience = {};
-                    workExperience.organization = employmentHistory.extension.find(x => x.url === "organization")?.valueString
-                    workExperience.address = employmentHistory.extension.find(x => x.url === "address")?.valueString
-                    workExperience.startingPosition = employmentHistory.extension.find(x => x.url === "startingPosition")?.valueString
-                    workExperience.period = employmentHistory.extension.find(x => x.url === "period")?.valuePeriod
-                    workExperiences.push(workExperience);
-                });
-            }
-        } catch (e) {
-            console.log(e);
-        }
-
-        try {
-            let data = await fhirAxios.search("PractitionerRole", {
-                _profile:
-                    "http://ihris.org/fhir/StructureDefinition/ihris-practitioner-role",
-                practitioner: req.params.id,
-            });
-
-            let role = data.entry
-                ? data.entry[0].resource.code[0].coding[0].display
-                : "";
-            userData.position = role ? role : "";
-        } catch (e) {
-            console.log(e);
-        }
-        try {
-            const data = await fhirAxios.search(`/Basic`, {
-                practitioner: req.params.id,
-                _profile:
-                    "http://ihris.org/fhir/StructureDefinition/ihris-basic-education-history",
-            });
-            if (data && data.entry && data.entry.length > 0) {
-                data.entry.map((data) => {
-                    let educationInfo = {};
-                    let educationHistory = data.resource.extension.find(x => x.url === "http://ihris.org/fhir/StructureDefinition/ihris-education-history")
-                    educationInfo.institution = educationHistory.extension.find(x => x.url === "institution")?.valueCoding?.display;
-                    educationInfo.level = educationHistory.extension.find(x => x.url === "level")?.valueCoding?.display
-                    educationInfo.educationalMajor = educationHistory.extension.find(x => x.url === "educationalMajor")?.valueCoding?.display
-                    educationInfo.year = educationHistory.extension.find(x => x.url === "year")?.valueDate
-                    educationData.push(educationInfo);
-                });
-            }
-        } catch (e) {
-            console.log(e);
-        }
-        try {
-            const user = await fhirAxios.read("/Practitioner", req.params.id);
-            userData.fullName = `${user.name[0].prefix[0]} ${user.name[0].given[0]} ${user.name[0].family}`
-
-            userData.gender = user.gender;
-            userData.photo = user.photo;
-            userData.phone = user.telecom.find(x => x.system === "phone")?.value;
-            userData.email = user.telecom.find(x => x.system === "email")?.value
-
-            userData.education = educationData;
-
-            if (user.communication && user.communication.length > 0) {
-                user.communication.map((lang) => {
-
-                    languages.push(lang.coding[0].display);
-                });
-            }
-            userData.languages = languages;
-            userData.workExperiences = workExperiences;
-        } catch (e) {
-            console.log(e);
-        }
-        let fileName = `${userData.id}_cv.pdf`;
-        let p = path.join(__dirname, "../tmp/", fileName);
-        employeeCv(userData)
-            .then((_) => {
-                res.download(p);
-            })
-            .catch((e) => console.log(e));
-    }
-});
+router.get("/getUserManual", (req, res) => {
+    let p = path.join(
+      __dirname,
+      "../",
+      "file/iHRIS User Manual.pdf"
+    );
+    res.download(p);
+  });
 
 module.exports = router;

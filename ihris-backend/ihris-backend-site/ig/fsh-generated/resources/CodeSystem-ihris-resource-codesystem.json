@@ -32,7 +32,17 @@
       "code": "training-link",
       "display": "iHRIS Training Link",
       "definition": "Basic resource for customization that links to a Qualify training."
+    },
+    {
+      "code": "visualization",
+      "display": "iHRIS Data Visualization",
+      "definition": "iHRIS Data Visualization"
+    },
+    {
+      "code": "dashboard",
+      "display": "iHRIS Dashboard",
+      "definition": "iHRIS Dashboard"
     }
   ],
-  "count": 5
+  "count": 7
 }

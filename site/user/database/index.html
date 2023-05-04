@@ -1,0 +1,1199 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Technical documentation for iHRIS V5">
+      
+      
+        <meta name="author" content="IntraHealth International">
+      
+      
+        <link rel="canonical" href="https://github.com/iHRIS/iHRIS/user/database/">
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.3.1, mkdocs-material-8.5.0">
+    
+    
+      
+        <title>Database - iHRIS V5 Technical Documentation</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.2e8b5541.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.cbb835fc.min.css">
+        
+          
+          
+          <meta name="theme-color" content="#4051b5">
+        
+      
+      
+
+    
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="" data-md-color-primary="indigo" data-md-color-accent="blue">
+  
+    
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#database" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="iHRIS V5 Technical Documentation" class="md-header__button md-logo" aria-label="iHRIS V5 Technical Documentation" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            iHRIS V5 Technical Documentation
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Database
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/iHRIS" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    iHRIS
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-tabs__inner md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../.." class="md-tabs__link">
+        Home
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../dev/roadmap/" class="md-tabs__link">
+        Developer
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../admin/docker/" class="md-tabs__link">
+        Sysadmin
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+    
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../introduction/" class="md-tabs__link md-tabs__link--active">
+        User
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="iHRIS V5 Technical Documentation" class="md-nav__button md-logo" aria-label="iHRIS V5 Technical Documentation" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    iHRIS V5 Technical Documentation
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/iHRIS" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    iHRIS
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_1" type="checkbox" id="__nav_1" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_1">
+          Home
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Home" data-md-level="1">
+        <label class="md-nav__title" for="__nav_1">
+          <span class="md-nav__icon md-icon"></span>
+          Home
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        iHRIS Documentation
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2" type="checkbox" id="__nav_2" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2">
+          Developer
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Developer" data-md-level="1">
+        <label class="md-nav__title" for="__nav_2">
+          <span class="md-nav__icon md-icon"></span>
+          Developer
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../dev/roadmap/" class="md-nav__link">
+        iHRIS Product Roadmap
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../dev/customization/" class="md-nav__link">
+        iHRIS Customization
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../dev/fhir_http/" class="md-nav__link">
+        FHIR HTTP Endpoints
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../dev/modules/" class="md-nav__link">
+        Library modules
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../dev/questionnaire/" class="md-nav__link">
+        Questionnaires
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../dev/roles_and_tasks/" class="md-nav__link">
+        Permissions
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../dev/short_name/" class="md-nav__link">
+        Short-name Endpoint
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../dev/task_resolution/" class="md-nav__link">
+        Task Resolution
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../dev/todo/" class="md-nav__link">
+        ToDo
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3" type="checkbox" id="__nav_3" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_3">
+          Sysadmin
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Sysadmin" data-md-level="1">
+        <label class="md-nav__title" for="__nav_3">
+          <span class="md-nav__icon md-icon"></span>
+          Sysadmin
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../admin/docker/" class="md-nav__link">
+        Getting Started with Docker
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../admin/install/" class="md-nav__link">
+        Installation Of Supporting software
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../admin/config/" class="md-nav__link">
+        Configuration options
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_4" type="checkbox" id="__nav_4" checked>
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_4">
+          User
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="User" data-md-level="1">
+        <label class="md-nav__title" for="__nav_4">
+          <span class="md-nav__icon md-icon"></span>
+          User
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../introduction/" class="md-nav__link">
+        Introduction
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../people/" class="md-nav__link">
+        People
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../positions/" class="md-nav__link">
+        Positions
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../mhero/" class="md-nav__link">
+        mHero
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          Database
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        Database
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#add-person" class="md-nav__link">
+    Add Person
+  </a>
+  
+    <nav class="md-nav" aria-label="Add Person">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#tips-for-adding-information" class="md-nav__link">
+    Tips for Adding Information
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#person-information" class="md-nav__link">
+    Person Information
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#search-records" class="md-nav__link">
+    Search Records
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../dashboard/" class="md-nav__link">
+        Dashboard
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../locations/" class="md-nav__link">
+        Locations
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../audit_logs/" class="md-nav__link">
+        Audit Logs
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../reports/" class="md-nav__link">
+        Reports
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../system_users/" class="md-nav__link">
+        System Users
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ihris_apps/" class="md-nav__link">
+        iHRIS Apps
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#add-person" class="md-nav__link">
+    Add Person
+  </a>
+  
+    <nav class="md-nav" aria-label="Add Person">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#tips-for-adding-information" class="md-nav__link">
+    Tips for Adding Information
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#person-information" class="md-nav__link">
+    Person Information
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#search-records" class="md-nav__link">
+    Search Records
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+  <a href="https://github.com/iHRIS/edit/master/docs/user/database.md" title="Edit this page" class="md-content__button md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25Z"/></svg>
+  </a>
+
+
+<h1 id="database">Database</h1>
+<p>Health workers details are managed via module “PEOPLE”; which includes the option to add health workers and search health worker records in the system. It is the primary registration page to add new employees, search/view records, and make changes to existing employee records.</p>
+<p>Note: before adding any new health workers into HRIS, first search to establish in that health worker does not already exist in the system.</p>
+<h2 id="add-person">Add Person</h2>
+<p>All records in iHRIS have to be populated before any reports can be generated. Health workers details are entered via “Add Person” under “PEOPLE” module.</p>
+<p>To create a new employee record, click “Add People” on the left side navigation bar. You will then add information to the fields of the record which will be explained in the next few sections of the manual.
+You can also add a new employee record from the Search People page. At the top of the table displaying employee records, click on the button in the right corner that says "Add Health Worker Information".</p>
+<h3 id="tips-for-adding-information">Tips for Adding Information</h3>
+<p>Here are some tips to help users through the process of adding information to records:</p>
+<ol>
+<li>
+<p>The entry page is broken into multiple sections. You can scroll down to go to a different section, or click on a section from the right sidebar to skip directly to that section.</p>
+</li>
+<li>
+<p>Fields that are required are indicated with a red asterisk.</p>
+</li>
+<li>Unless otherwise noted you should type the information directly into the space provided.</li>
+<li>Dropdown lists are available for some fields and are noted in the lockup lists.</li>
+<li>With most of the dropdown lists you can start typing the word that you wish to enter and you will be taken to it in the list, rather than having to scroll through the whole list.</li>
+<li>There may be date fields that require you to select the date on a calendar (see 3.5.3 for steps to select a date using the calendar tool).</li>
+<li>
+<p>There may also be an option to include more than one entry for a single record component. For example, an employee may speak multiple languages or may have more than one dependent. If you see a dark gray bar at the top of a field with a plus sign at the right corner of the bar, this denotes a field that can have multiple entries.</p>
+</li>
+<li>
+<p>When selecting a location you will work through a series of dropdown menus.
+• Click on the Region to select it, or, click on the arrow beside the Region to see the corresponding Zones, then
+• Click on the Zone to select it, or click on the small grey arrow beside the Zone to see the corresponding Woredas, then
+• Select the Woreda (if available)</p>
+</li>
+</ol>
+<h3 id="person-information">Person Information</h3>
+<h4 id="adding-information-to-the-person-record">Adding information to the person record</h4>
+<p>The following information can be entered on a health worker’s person record:</p>
+<p><strong>Name</strong></p>
+<ul>
+<li>• Prefix</li>
+<li>• First name (required)</li>
+<li>• First name alternative language</li>
+<li>• Father’s name (required)</li>
+<li>• Father’s name alternative language</li>
+<li>• Grandfather’s last name (required)</li>
+<li>• Grandfather’s last name alternative language</li>
+<li>• Mother’s Full name (required)</li>
+<li>• Mother's name alternative language</li>
+</ul>
+<p>Demographic Information
+• Date of birth (required, select date from calendar)
+• Gender (required, select from dropdown)
+• Marital status (select from dropdown)
+• Nationality (Ethiopian is default, otherwise select from dropdown)
+• Ethnicity (select from dropdown)</p>
+<p>Identifiers (identification numbers)
+● Employee ID (required)
+● Pension number
+● TIN number
+● Civil service ID
+● License ID
+● File number (required)
+● Driving License
+ Driving License Type (select from dropdown)
+ Driving License ID</p>
+<p>Contacts
+● Mobile phone
+● Work Phone
+● Work email
+● Residence (required)</p>
+<p>Language Details
+Select the plus sign to add a language
+• Language (select from dropdown list)
+• Proficiency (select the plus sign to add proficiency, select from drop down): Select Excellent, Good, Poor, Very Good
+• Proficiency Type (select the plus sign to add proficiency, select from drop down): Select Listening, Reading, Speaking, Writing
+• Click the plus sign if you want to enter a second proficiency or additional proficiency types (if this is applicable).
+•  Click the minus sign to remove a proficiency or proficiency type</p>
+<p>To enter a second language, click the plus sign next to Language. Repeat the above steps to Proficiency and Proficiency types for each additional language.</p>
+<p>Category
+For category, select from dropdown list
+● Select Academic (less than Grade 12 education level, Administrative, Health Professional</p>
+<p>Remarks
+If you have any general remarks about the employee to record, click on the plus sign then type any special remarks regarding the employee into the text box</p>
+<p>Photo
+Upload a photo of the employee by clicking in the blank field. From the pop-up window, select a file on your computer that you would like to upload as the picture of the employee.</p>
+<p>Note: There are additional employee record fields that can only be filled in through editing an existing position which will be explained under edit person record.</p>
+<ol>
+<li>
+<p>Saving New Record
+When you are finished adding information or making changes, click the "Save" button at the top of the right sidebar. If you have not entered information in all the required fields indicated with a red asterisk, you will not be able to save the record. Review the form by scrolling to determine which required fields still need to be completed.</p>
+</li>
+<li>
+<p>Saving and editing later
+After a new record is saved, it is possible to edit or add additional information at any time. This is done by searching for the employee record as explained in the next section. After searching, select the desired record and click “Edit” in the top right corner. You can then add additional data to the record or modify the data already in the record.</p>
+</li>
+</ol>
+<h2 id="search-records">Search Records</h2>
+<p>Existing health workers records can be accessed via “Search people” under the module “PEOPLE”. From the left side navigation bar, Click “Search People” to search for an employee.</p>
+<p>Using the search filters, you can search by
+● First name
+● Father’s Name
+● Grand Father’s Name
+● Mother’s Name
+● Employee ID, or
+● PIN ID
+For example, type part or all of a name or ID number into the corresponding fields. Remember that you must hit the "Enter" or "Return" key on your keyboard to start the search.</p>
+<p>When you search, records matching your search will be pulled from the database. You can then select a search result to view the full record - this is done by clicking anywhere in the row of the record you want to view.</p>
+<p>4.2.1 Tips for Searching</p>
+<ol>
+<li>When you enter a search term, it will only search the field in which you type the search term – not any other fields even if there is a match in another field. The example below shows searching using only first name “Ismail”</li>
+</ol>
+<p>Searching using Father’s name “Ismail” gives different results</p>
+<p>Searching using Grand Father’s Names “Ismail” also gives different results</p>
+<ol>
+<li>
+<p>It is possible to search across two or more fields. This is done by conducting one search. Once the records have been filtered and you see the results of the first search, simply type in the next search term into the corresponding field. Once you hit “Enter” you will see the results with both filters applied. You can continue this process in each search field.</p>
+</li>
+<li>
+<p>Remember that to remove search filter, you should click on the X that is at the right side of the search field. You will need to do this for every field individually if you desire to remove other search terms/filters.</p>
+</li>
+</ol>
+<p>4.3 Edit Person
+There are two types of information that can be edited in a Person record: the basic information that is included in the initial “Add Person” form when a new record is created, and additional information that is added once a new employee has started work.
+4.3.1 Basic Employee Information
+To add or update information in an existing employee record:</p>
+<ol>
+<li>Following the process described previously to search for a record, locate the existing employee record that you wish to modify and click on it to open the record.</li>
+<li>
+<p>At the top of the right sidebar click on the "Edit" button.</p>
+</li>
+<li>
+<p>Add information to the record. Here are a few tips:
+● The record page is broken into multiple sections. You can scroll down to access a different section, or you can click on a section from the right sidebar to skip directly to that section.</p>
+</li>
+</ol>
+<p>● For the fields you wish to edit you can select item(s) from dropdown list(s) or type information directly into the record in any section and field.
+● Fields that are required are indicated with a red asterisk. Note: there are additional required fields when editing a record than when initially creating a record.
+● Remember that for some fields it will be possible to include more than one entry.
+4. The following fields from the Add Person module can be edited after clicking the “Edit” button
+● Photo
+● Names (Basic Information)
+● Demographic Details
+● Identifiers
+● Contact Details
+● Language Details
+● Remarks
+5. You can also add or edit additional fields from here, including whether the employee is active, Disability information, Dependent Details, Training Details, and attachment documents.
+Disability Details
+● Select from the dropdown menu
+● Dropdown options include: Hearing impaired, mentally impaired, mobility impaired, Requires crib, requires crutches, requires gurney, requires walker, requires wheelchair, speech impaired, and vision impaired.
+Dependent Details
+● Type dependent name into the field
+● Add additional dependents by clicking the plus sign - See "Search People" for information on adding multiple entries for one field
+● Dependent’s name
+● Dependent’s Date of Birth (select from calendar)
+● Relationship (select from dropdown menu)
+● Dependent’s Gender (select from dropdown menu)
+Training Details
+● Click the plus sign if you want to enter training information, then type in the training title in the space that appears.
+● Indicate the category of the training by selecting an option from the dropdown.
+ ■ Academic (less than Grade 12 education level)
+ ■ Administrative
+ ■ Health Professional)
+● Add additional training by clicking the plus sign - see tips on adding multiple entries for one field/section under “Tips for adding information”.
+Attachment – search your computer to add a document as an attachment to the record (add possible reasons or examples of attachments)
+6. When you are done making changes, click the "Save" button at the top of the right sidebar. If you have not entered all of the required fields indicated with a red asterisk, you will not be able to save the record. Review the form by scrolling to determine which required fields still need to be completed.</p>
+<p>You can leave your changes without saving them by clicking the "Cancel" button in the top of the right sidebar.
+4.3.2 Supplemental Employee Information
+There is supplemental information about an employee that can be added to a Person record after it has been created, but it is not accessible when you are in edit mode (making changes after clicking "Edit" at the top of a record). If you are in edit mode you should Save or Cancel. Then you will see the record again and can view the additional information.</p>
+<ol>
+<li>In the list of section located in the right sidebar, scroll down until you see the sections after "Remarks".</li>
+<li>From here you can either click on a section title in the right sidebar to skip directly to that section or you can scroll down in the record to find the section you want to edit.</li>
+</ol>
+<p>The supplemental sections include:
+● Current Job Positions
+● Leave Stock Information
+● Leave Information
+● Education History Information
+● Performance Evaluation Information
+● Employment History
+● Professional License Category
+● Emergency Contact
+● Collateral
+● Employee Discipline Information
+● Employee Salary Information
+● Employee Award Information</p>
+
+  <hr>
+<div class="md-source-file">
+  <small>
+    
+      Last update:
+      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date">October 6, 2022</span>
+      
+    
+  </small>
+</div>
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+    <nav class="md-footer__inner md-grid" aria-label="Footer" >
+      
+        
+        <a href="../mhero/" class="md-footer__link md-footer__link--prev" aria-label="Previous: mHero" rel="prev">
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+          </div>
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              mHero
+            </div>
+          </div>
+        </a>
+      
+      
+        
+        <a href="../dashboard/" class="md-footer__link md-footer__link--next" aria-label="Next: Dashboard" rel="next">
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              Dashboard
+            </div>
+          </div>
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4Z"/></svg>
+          </div>
+        </a>
+      
+    </nav>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Copyright &copy; 2020 IntraHealth International
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+        <div class="md-social">
+  
+    
+    
+      
+      
+    
+    <a href="https://github.com/iHRIS/iHRIS" target="_blank" rel="noopener" title="github.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg>
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.tabs"], "search": "../../assets/javascripts/workers/search.ecf98df9.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version.title": "Select version"}}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.48f2be22.min.js"></script>
+      
+    
+  </body>
+</html>

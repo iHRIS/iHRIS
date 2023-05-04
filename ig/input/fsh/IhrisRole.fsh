@@ -159,6 +159,7 @@ Title:          "Code system for task permissions."
 * #Location             "Location"
 * #Person               "Person"
 * #navigation           "Navigation"
+* #section           "Page Section"
 
 ValueSet:       IhrisTaskResourceValueSet
 Id:             ihris-task-resource

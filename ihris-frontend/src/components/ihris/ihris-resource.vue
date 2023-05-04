@@ -4,7 +4,7 @@
 }
 </style>
 <template>
-  <v-container class="my-3">
+  <v-container :key="pageKey" class="my-3">
     <v-form
         ref="form"
         v-model="valid"
@@ -82,7 +82,7 @@
             <template v-if="edit">
               <v-btn v-if="valid" :disabled="!valid" class="success darken-1" dark @click="processFHIR()">
                 <v-icon light>mdi-content-save</v-icon>
-                <span>{{ $t(`App.ihardcoded-texts.Save`) }}</span>
+                <span>{{ $t(`App.hardcoded-texts.Save`) }}</span>
               </v-btn>
               <v-btn v-else class="warning" dark @click="$refs.form.validate()">
                 <v-icon light>mdi-content-save</v-icon>
@@ -580,6 +580,7 @@ export default {
             response
                 .json()
                 .then((data) => {
+                  console.log("the new vertion",data)
                   // this.$store.commit('setCurrentResource', data)
                   this.orig = data;
                   this.source = {data: data, path: this.field};

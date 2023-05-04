@@ -1,5 +1,5 @@
 <template>
-  <ihris-element :edit="edit" :loading="false">
+  <ihris-element :edit="edit" :loading="false" v-if="!hide">
     <template #form>
      <v-menu 
         ref="menu" 
@@ -114,6 +114,21 @@
             </v-card>
           </v-row>
         </v-container>
+        <v-card min-width="400px" v-else-if="isIslamic">
+          <v-hijri-date-picker
+            width="490px"
+            ref="picker"
+            color="secondary"
+            :landscape="$vuetify.breakpoint.smAndUp"
+            v-model="value"
+            :max="dateValueMax"
+            :min="dateValueMin"
+            :type="pickerType"
+            :disabled="disabled"
+            @change="save"
+            locale="en" 
+          />
+        </v-card>
         <v-card min-width="300px" v-else-if="pickerType==='year'" >
           <v-card-text>
             <br />
@@ -160,16 +175,21 @@
 import IhrisElement from "../ihris/ihris-element.vue"
 import VEthiopianDatePicker from "vuetify-ethiopian-calendar"
 import ethiopic from "ethiopic-calendar"
+import VHijriDatePicker from 'vuetify-umalqura'
+import { eventBus } from "@/main";
+import { dataDisplay } from "@/mixins/dataDisplay"
 
 export default {
   name: "fhir-date-time",
   props: ["field","min","max","base-min","base-max", "label", "slotProps", "path", "edit","sliceName", 
     "minValueDateTime", "maxValueDateTime", "minValueQuantity", "maxValueQuantity", "displayType","readOnlyIfSet", "calendar",
-    "constraints"],
+    "constraints", "displayCondition"],
   components: {
     IhrisElement,
-    VEthiopianDatePicker
+    VEthiopianDatePicker,
+    VHijriDatePicker
   },
+  mixins: [dataDisplay],
   data: function() {
     return {
       value: null,
@@ -185,7 +205,8 @@ export default {
     }
   },
   created: function() {
-    //console.log("CREATE DATETIME",this.field,this.slotProps)
+    //this function is defined under dataDisplay mixin
+    this.hideShowField(this.displayCondition)
     this.setupData()
   },
   computed: {
@@ -226,6 +247,9 @@ export default {
     },
     isEthiopian: function() {
       return this.calendar === "Ethiopian"
+    },
+    isIslamic: function() {
+      return this.calendar === "Islamic"
     },
     minValueETDateTime: function() {
       if ( this.dateValueMin ) {
@@ -293,6 +317,7 @@ export default {
        } else {
         this.etValue = this.convertGE( val )
       }
+      eventBus.$emit(this.path, val)
     },
     etValue (val) {
       if ( !val ) {

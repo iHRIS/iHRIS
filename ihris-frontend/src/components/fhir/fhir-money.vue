@@ -1,7 +1,7 @@
 <template>
-  <ihris-element :edit="edit" :loading="loading">
+  <ihris-element :edit="edit" :loading="loading" v-if="!hide">
     <template #form>
-      <v-select 
+      <v-autocomplete 
         :loading="loading" 
         :label="'$t(`App.hardcoded-texts.Currency`) ('+display+')'" 
         v-model="valueCurrency" 
@@ -16,7 +16,7 @@
         dense
       >
         <template #label>{{$t('App.hardcoded-texts.Currency')}} ({{display}}) <span v-if="required" class="red--text font-weight-bold">*</span></template>
-      </v-select>
+      </v-autocomplete>
       <v-text-field :error-messages="errors" @change="errors = []" :label="display" :disabled="disabled" v-model="value.value" outlined hide-details="auto" :rules="rules_val" dense>
         <template #label>{{display}} <span v-if="required" class="red--text font-weight-bold">*</span></template>
       </v-text-field>
@@ -32,6 +32,8 @@
 
 <script>
 import IhrisElement from "../ihris/ihris-element.vue"
+import { eventBus } from "@/main";
+import { dataDisplay } from "@/mixins/dataDisplay"
 
 /*
 const itemSort = (a,b) => {
@@ -41,10 +43,11 @@ const itemSort = (a,b) => {
 export default {
   name: "fhir-coding",
   props: ["field","label","sliceName","targetprofile","min","max","base-min","base-max","slotProps","path","binding","edit","readOnlyIfSet",
-    "constraints"],
+    "constraints", "displayCondition"],
   components: {
     IhrisElement
   },
+  mixins: [dataDisplay],
   data: function() {
     return {
       value: { value: "", currency: "" },
@@ -63,6 +66,8 @@ export default {
     }
   },
   created: function() {
+    //this function is defined under dataDisplay mixin
+    this.hideShowField(this.displayCondition)
     this.setupData()
   },
   watch: {
@@ -90,6 +95,7 @@ export default {
           this.valueDisplay = display
         } )
       }
+      eventBus.$emit(this.path, this.value.value)
     }
   },
   methods: {
