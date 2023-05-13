@@ -376,6 +376,21 @@ router.get('/page/:page/:type?', function (req, res) {
                             try {
                                 let link = action.extension.find(ext => ext.url === "link").valueString
                                 let text = action.extension.find(ext => ext.url === "text").valueString
+                                let roles = action.extension.filter(ext => ext.url === "role")
+                                if(roles.length > 0) {
+                                    let userRole = req.user.resource.extension.find((ext) => {
+                                        return ext.url === 'http://ihris.org/fhir/StructureDefinition/ihris-assign-role'
+                                    })
+                                    if(userRole) {
+                                        userRole = userRole.valueReference.reference.split("/")[1]
+                                        let exist = roles.find((role) => {
+                                            return role.valueId === userRole
+                                        })
+                                        if(!exist) {
+                                            continue
+                                        }
+                                    }
+                                }
                                 let row, condition, emptyDisplay
                                 let eleClass = "primary"
                                 try {

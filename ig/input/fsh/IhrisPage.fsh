@@ -145,7 +145,8 @@ Description:    "iHRIS Page Section information."
       row 0..1 MS and
       condition 0..1 MS and
       emptyDisplay 0..1 MS and
-      class 0..1 MS 
+      class 0..1 MS and
+      role 0..* MS
 * extension[resource].extension[action].extension[link].value[x] only string
 * extension[resource].extension[action].extension[link].valueString MS
 * extension[resource].extension[action].extension[link].valueString ^label = "Action Link"
@@ -164,6 +165,9 @@ Description:    "iHRIS Page Section information."
 * extension[resource].extension[action].extension[class].value[x] only string
 * extension[resource].extension[action].extension[class].valueString MS
 * extension[resource].extension[action].extension[class].valueString ^label = "Element Class for the Action"
+* extension[resource].extension[action].extension[role].value[x] only id
+* extension[resource].extension[action].extension[role].valueId MS
+* extension[resource].extension[action].extension[role].valueId ^label = "Element Class for the Role"
 
 Instance:       ihris-page-classification
 InstanceOf:     IhrisPage
