@@ -37,7 +37,7 @@ const filterNavigation = (user, nav, prefix) => {
         for (let key of Object.keys(nav.menu)) {
             let instance;
             if (prefix) {
-                instance = prefix + ":" + key;
+                instance = prefix + "." + key;
             } else {
                 instance = key;
             }
@@ -55,7 +55,7 @@ const filterNavigation = (user, nav, prefix) => {
         for (let key of Object.keys(nav.menu)) {
             let instance;
             if (prefix) {
-                instance = prefix + ":" + key;
+                instance = prefix + "." + key;
             } else {
                 instance = key;
             }
