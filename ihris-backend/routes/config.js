@@ -762,7 +762,25 @@ router.get('/page/:page/:type?', function (req, res) {
                     eleClass = add.extension.find(ext => ext.url === "class").valueString
                 } catch (err) {
                 }
-                addLink = {url: url, icon: icon, class: eleClass}
+                let roles = add.extension.filter(ext => ext.url === "role")
+                let hasPermission
+                if(roles.length > 0) {
+                    let userRole = req.user.resource.extension.find((ext) => {
+                        return ext.url === 'http://ihris.org/fhir/StructureDefinition/ihris-assign-role'
+                    })
+                    if(userRole) {
+                        userRole = userRole.valueReference.reference.split("/")[1]
+                        hasPermission = roles.find((role) => {
+                            return role.valueId === userRole
+                        })
+                    }
+                }
+                if(hasPermission || roles.length == 0) {
+                    addLink = {url: url, icon: icon, class: eleClass}
+                } else if(roles.length > 0) {
+                    //hide if roles specified but user has no that role
+                    addLink = {url: url, icon: icon, class: eleClass, hide: true}
+                }
             } catch (err) {
             }
 
