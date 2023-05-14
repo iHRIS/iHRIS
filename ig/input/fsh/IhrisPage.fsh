@@ -38,7 +38,8 @@ Description:    "iHRIS Page Display details."
 * extension[add].extension contains
       url 1..1 MS and
       icon 0..1 MS and
-      class 0..1 MS
+      class 0..1 MS and
+      role 0..* MS
 * extension[add].extension[url].value[x] only url
 * extension[add].extension[url].valueUrl MS
 * extension[add].extension[url].valueUrl ^label = "Add Link URL"
@@ -48,6 +49,9 @@ Description:    "iHRIS Page Display details."
 * extension[add].extension[class].value[x] only string
 * extension[add].extension[class].valueString MS
 * extension[add].extension[class].valueString ^label = "Add Link Class"
+* extension[add].extension[role].value[x] only id
+* extension[add].extension[role].valueId MS
+* extension[add].extension[role].valueId ^label = "Roles that has access to this button"
 
 * extension[link].extension contains
       field 0..1 MS and
