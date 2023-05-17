@@ -71,41 +71,11 @@ function getResources() {
     for(let resource of resources) {
       promises.push(new Promise((resolve1) => {
         let params = {}
-        async.whilst(
-          (callback) => {
-            return callback(null, nxturl !== false)
-          },
-          (callback) => {
-            if(Object.keys(params).length > 0) {
-              resource = ""
-            }
-            search(resource, params).then((response) => {
-              const next = response.link && response.link.find(link => link.relation === 'next');
-              if(response.entry) {
-                resourcesData = resourcesData.concat(response.entry)
-              }
-              params = {};
-              nxturl = false
-              if (next) {
-                let paramsList = next.url.split("?")[1]
-                paramsList = paramsList.split("&")
-                for(let param of paramsList) {
-                  params[param.split("=")[0]] = param.split("=")[1]
-                }
-                nxturl = true
-              } else {
-                nxturl = false
-              }
-              return callback(null, params);
-            }).catch((err) => {
-              console.log(err);
-              return callback(err)
-            })
-          },
-          (err) => {
-            return resolve1()
-          },
-        );
+        search(resource, params).then(() => {
+          resolve1()
+        }).catch(() => {
+          resolve1()
+        })
       }))
     }
     Promise.all(promises).then(() => {
@@ -662,14 +632,35 @@ const createTemplate = async (resource, structure, pageSections) => {
 function search( resource, params ) {
   return new Promise( (resolve, reject) => {
     let url = new URL(fhirAxios.baseUrl.href)
-    if ( resource ) {
+    if ( resource  && !params["_getpages"]) {
       url.pathname += resource
+      if(resource === 'Basic') {
+        params['_profile'] = 'http://ihris.org/fhir/StructureDefinition/ihris-page'
+      }
     }
     let auth = fhirAxios.__getAuth()
-
     //axios.get( url.href, { auth, params } ).then( (response) => {
     axios.get( url.href, { auth, params, headers: { 'Cache-Control': 'no-cache'} } ).then( (response) => {
-      resolve( response.data )
+      const next = response.data.link && response.data.link.find(link => link.relation === 'next');
+      if(response.data.entry) {
+        resourcesData = resourcesData.concat(response.data.entry)
+      }
+      params = {};
+      if (next) {
+        let paramsList = next.url.split("?")[1]
+        paramsList = paramsList.split("&")
+        for(let param of paramsList) {
+          params[param.split("=")[0]] = param.split("=")[1]
+        }
+        search(resource, params).then(() => {
+          return resolve()
+        }).catch((err) => {
+          console.log(err);
+          return reject()
+        })
+      } else {
+        return resolve()
+      }
     } ).catch( (err) => {
       reject( err )
     } )
