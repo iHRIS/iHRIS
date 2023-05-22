@@ -125,12 +125,14 @@
           <v-divider/>
           <v-row class="justify-space-between">
             <v-col cols="4"><span class="font-weight-bold">Last Updated:</span></v-col>
-            <v-col cols="8">{{ new Date(this.$data.orig.meta.lastUpdated) }}</v-col>
+            <v-col cols="8" v-if="$data.orig && $data.orig.meta">
+              {{ new Date(this.$data.orig.meta.lastUpdated) }}
+            </v-col>
           </v-row>
           <v-divider/>
           <v-row class="justify-space-between">
             <v-col cols="4"><span class="font-weight-bold">Version:</span></v-col>
-            <v-col cols="8">{{ this.$data.orig.meta.versionId }} of {{ max }}</v-col>
+            <v-col cols="8" v-if="$data.orig && $data.orig.meta">{{ $data.orig.meta.versionId }} of {{ max }}</v-col>
           </v-row>
           <v-divider/>
           <v-row class="justify-space-between">
@@ -139,10 +141,11 @@
               <v-row>
                 <v-col class="px-4" cols="2">
                   <v-text-field
+                      v-if="$data.orig.meta"
                       v-model.number="version"
                       :max="max"
                       :rules="[rules.min, rules.max]"
-                      :value="this.$data.orig.meta.versionId"
+                      :value="$data.orig.meta.versionId"
                       class="mt-0 pt-0"
                       hide-details
                       min="1"

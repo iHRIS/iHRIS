@@ -895,7 +895,8 @@ router.get('/page/:page/:type?', function (req, res) {
 
 })
 
-router.get('/questionnaire/:questionnaire', function (req, res) {
+router.get('/questionnaire/:questionnaire/:page', async function (req, res) {
+    let page = "ihris-page-" + req.params.page
     if (!req.user) {
         return res.status(401).json(outcomes.NOTLOGGEDIN)
     }
@@ -904,13 +905,105 @@ router.get('/questionnaire/:questionnaire', function (req, res) {
     if (allowed !== true) {
         return res.status(401).json(outcomes.DENIED)
     }
+    let primaryResourceType = ""
+    let primaryResourceProfile = ""
+    let primaryResourceDef = ""
+    let sections = {}
+    await fhirAxios.read("Basic", page).then(async(resource) => {
+        let pageDisplay = resource.extension.find(ext => ext.url === "http://ihris.org/fhir/StructureDefinition/ihris-page-display")
 
+        let pageResource = pageDisplay.extension.find(ext => ext.url === "resource").valueReference.reference
+        primaryResourceDef = pageResource
+        if (pageResource.startsWith("CodeSystem")) {
+
+            await getProperties(pageResource).then((resource) => {
+                if (resource.total !== 1) {
+                    let outcome = {...outcomes.ERROR}
+                    outcome.issue[0].diagnostics = "Unable to find codesystem: " + pageResource + "."
+                    return res.status(400).json(outcome)
+                }
+                resource = resource.entry[0].resource
+
+                const structure = fhirDefinition.parseCodeSystem(resource)
+                let structureKeys = Object.keys(structure)
+                primaryResourceType = structureKeys[0]
+                primaryResourceProfile = resource.url
+            }).catch(err => {
+                logger.error(err.message)
+                logger.error(err.stack)
+                return res.status(err.response.status).json(err.response.data)
+            })
+
+        } else if (pageResource.startsWith("StructureDefinition")) {
+
+            await getDefinition(pageResource).then((resource) => {
+                if (allowed !== true) {
+                    // Can't think of a reason to have this level of permissions for
+                    // StructureDefinitions, but just in case...
+                    let objAllowed = req.user.hasPermissionByObject("read", resource)
+                    if (objAllowed !== true) {
+                        // But don't allow field level restrictions.  It will complicated the requirements
+                        return res.status(401).json(outcomes.DENIED)
+                    }
+                }
+
+                if (!resource.hasOwnProperty("snapshot")) {
+                    let outcome = {...outcomes.ERROR}
+                    outcome.issue[0].diagnostics = "StructureDefinitions must be saved with a snapshot."
+                    return res.status(404).json(outcome)
+                }
+                const structure = fhirDefinition.parseStructureDefinition(resource)
+                let structureKeys = Object.keys(structure)
+                primaryResourceType = structureKeys[0]
+                primaryResourceProfile = resource.url
+
+            }).catch((err) => {
+                logger.error(err.message)
+                logger.error(err.stack)
+                //return res.status( err.response.status ).json( err.response.data )
+                return res.status(500).json({error: err.message})
+            })
+
+        } else {
+
+            let outcome = {...outcomes.ERROR}
+            outcome.issue[0].diagnostics = "Unknown resource type for page: " + pageResource + "."
+            return res.status(400).json(outcome)
+
+        }
+        let pageSections = resource.extension.filter(ext => ext.url === "http://ihris.org/fhir/StructureDefinition/ihris-page-section")
+        for (let section of pageSections) {
+            let resourceExt, resource, linkfield, searchfield, searchfieldtarget
+            let name = section.extension.find(ext => ext.url === "name")?.valueString
+            try {
+                resourceExt = section.extension.find(ext => ext.url === "resource").extension
+
+                resource = resourceExt.find(ext => ext.url === "resource").valueReference.reference
+                if (resource) {
+                    linkfield = resourceExt.find(ext => ext.url === "linkfield").valueString
+                    try {
+                        searchfield = resourceExt.find(ext => ext.url === "searchfield").valueString
+                        searchfieldtarget = resourceExt.find(ext => ext.url === "searchfieldtarget").valueString
+                    } catch (err) {
+                    }
+                }
+
+            } catch (err) {
+            }
+
+            sections[name] = {
+                resource: resource,
+                linkfield: linkfield,
+                searchfield: searchfield,
+                searchfieldtarget: searchfieldtarget
+            }
+        }
+    })
     fhirAxios.read("Questionnaire", req.params.questionnaire).then(async (resource) => {
-
-        let vueOutput = '<ihris-questionnaire :edit=\"isEdit\" :view-page="viewPage" :constraints="constraints" url="' + resource.url + '" id="' + resource.id
+        let vueOutput = '<ihris-questionnaire :fhir-id="fhirId" field="' + primaryResourceType + '" profile="' + primaryResourceProfile + '" :edit=\"isEdit\" :view-page="viewPage" :constraints="constraints" url="' + resource.url + '" id="' + resource.id
             + '" title="' + resource.title
             + '" description="' + resource.description + '" purpose="' + resource.purpose
-            + '"__SECTIONMENU__>' + "\n"
+            + '"__SECTIONMENU__>' + "\n<template #default=\"slotProps\">\n"
 
 
         let sectionMenu = []
@@ -952,23 +1045,36 @@ router.get('/questionnaire/:questionnaire', function (req, res) {
                 return null
             }
         }
-        const processQuestionnaireItems = async (items) => {
+        const processQuestionnaireItems = async (items, group) => {
             let vueOutput = ""
             for (let item of items) {
                 let displayType
-                if (item.linkId.includes('#')) {
+                if (item.linkId.includes('#') && item.type !== 'group') {
                     let linkDetails = item.linkId.split('#')
                     item.linkId = linkDetails[0]
                     displayType = linkDetails[1]
                 }
-                if (item.repeats && !item.readOnly) {
-                    vueOutput += "<ihris-array :edit=\"isEdit\" path=\"" + item.linkId + "\" label=\""
-                        + item.text + "\" max=\"*\" min=\"" + (item.required ? "1" : "0") + "\"><template #default=\"slotProps\">\n"
+                let limit = ""
+                let isLimitSet = false
+                if(item.type === 'group' && item.linkId && item.linkId.includes("#") && item.linkId.split("#").length === 2) {
+                    limit = item.linkId.split("#")[1]
+                    item.linkId = item.linkId.split("#")[0]
                 }
                 let itemType = fhirDefinition.camelToKebab(item.type)
+                if (item.repeats && !item.readOnly) {
+                    let fieldPath = item.definition.split("#")[1]
+                    let fieldPathSlices = fieldPath.split(".")
+                    vueOutput += `<ihris-array limit="${limit}" field="${fieldPathSlices[fieldPathSlices.length-1]}" fieldType="${itemType}" :edit="isEdit" :slotProps="slotProps" path="${item.linkId}" 
+                    label="${item.text}" max="*" min="${(item.required ? "1" : "0")}"><template #default="slotProps">\n`
+                    isLimitSet = true
+                }
                 if (itemType === "group") {
                     let label = item.text.split('|', 2)
-                    vueOutput += '<ihris-questionnaire-group :edit=\"isEdit\" path="' + item.linkId + '" label="' + label[0] + '"'
+                    vueOutput += '<ihris-questionnaire-group :slotProps="slotProps" :edit=\"isEdit\" path="' + item.linkId + '" label="' + label[0] + '"'
+                    if(!isLimitSet) {
+                        vueOutput += ' limit="' + limit + '"'
+                        isLimitSet = true
+                    }
                     if (label.length === 2) {
                         vueOutput += ' description="' + label[1] + '"'
                     }
@@ -978,9 +1084,74 @@ router.get('/questionnaire/:questionnaire', function (req, res) {
                             vueOutput += ' constraints="' + constraintList + '"'
                         }
                     }
-                    vueOutput += ">\n\n"
-                    vueOutput += await processQuestionnaireItems(item.item)
-                    vueOutput += "</ihris-questionnaire-group>\n"
+                    let fieldDef = await fhirDefinition.getFieldDefinition(item.definition)
+                    if(item.definition.includes("#")) {
+                        let extension = fieldDef.type.find((type) => {
+                            return type.code === 'Extension'
+                        })
+                        if(extension && extension.profile && extension.profile.length > 0) {
+                            let idSlices = fieldDef.id.split(".")
+                            let field
+                            for(let slice of idSlices) {
+                                if(slice.includes("extension:")) {
+                                    field = slice
+                                }
+                            }
+                            vueOutput += ' profile="' + extension.profile[0] + '"'
+                            vueOutput += ' sliceName="' + fieldDef.sliceName + '"'
+                            vueOutput += ' field="' + field + '"'
+                        } else {
+                            let fieldDefSlices = fieldDef.id.split(".")
+                            vueOutput += ` field="${fieldDefSlices[fieldDefSlices.length-1]}"`
+                        }
+                    }
+                    vueOutput += ">\n\n<template #default=\"slotProps\">\n"
+                    let fieldType = fieldDef.type.find((type) => {
+                        return type.code
+                    })?.code
+                    let fieldPath = item.definition.split("#")[1]
+                    let fieldPathSlices = fieldPath.split(".")
+                    let itemFieldPath = fieldPathSlices.pop()
+                    if(fieldType === 'HumanName') {
+                        vueOutput += `<fhir-human-name :slotProps="slotProps" field="${itemFieldPath}" min="${fieldDef.min}" max="${fieldDef.max}" base-min="${fieldDef.base.min}" base-max="${fieldDef.base.max}" label="${fieldDef.label}" path="${fieldDef.path}">
+                        \n<template #default="slotProps">`
+                    } else if(fieldType === 'CodeableConcept') {
+                        vueOutput += `<fhir-codeable-concept :slotProps="slotProps" field="${itemFieldPath}" min="${fieldDef.min}" max="${fieldDef.max}" base-min="${fieldDef.base.min}" base-max="${fieldDef.base.max}" label="${fieldDef.label}" path="${fieldDef.path}" id="${fieldDef.id}" binding="${fieldDef.binding.valueSet}">
+                        \n<template #default="slotProps">`
+                        itemFieldPath = 'coding'
+                    } else if(fieldType === 'ContactPoint') {
+                        vueOutput += `<fhir-contact-point :slotProps="slotProps" field="${itemFieldPath}" min="${fieldDef.min}" max="${fieldDef.max}" base-min="${fieldDef.base.min}" base-max="${fieldDef.base.max}" label="${fieldDef.label}" path="${item.linkId}">
+                        \n<template #default="slotProps">`
+                    } else if(fieldType === 'Period') {
+                        vueOutput += `<fhir-period :slotProps="slotProps" field="${itemFieldPath}" min="${fieldDef.min}" max="${fieldDef.max}" base-min="${fieldDef.base.min}" base-max="${fieldDef.base.max}" label="${fieldDef.label}" path="${fieldDef.path}">
+                        \n<template #default="slotProps">`
+                    } else if(fieldType === 'Address') {
+                        vueOutput += `<fhir-address :slotProps="slotProps" field="${itemFieldPath}" min="${fieldDef.min}" max="${fieldDef.max}" base-min="${fieldDef.base.min}" base-max="${fieldDef.base.max}" label="${fieldDef.label}" path="${fieldDef.path}">
+                        \n<template #default="slotProps">`
+                    } else if(fieldType === 'BackboneElement') {
+                        vueOutput += `<fhir-backbone-element :slotProps="slotProps" field="${itemFieldPath}" min="${fieldDef.min}" max="${fieldDef.max}" base-min="${fieldDef.base.min}" base-max="${fieldDef.base.max}" label="${fieldDef.label}" path="${fieldDef.path}">
+                        \n<template #default="slotProps">`
+                    } else if(fieldType === 'Identifier') {
+                        vueOutput += `<fhir-identifier :slotProps="slotProps" field="${itemFieldPath}" min="${fieldDef.min}" max="${fieldDef.max}" base-min="${fieldDef.base.min}" base-max="${fieldDef.base.max}" label="${fieldDef.label}" path="${fieldDef.path}">
+                        \n<template #default="slotProps">`
+                    }
+                    vueOutput += await processQuestionnaireItems(item.item, fieldPath)
+                    if(fieldType === 'CodeableConcept') {
+                        vueOutput += "\n</template></fhir-codeable-concept>\n"
+                    } else if(fieldType === 'HumanName') {
+                        vueOutput += "\n</template></fhir-human-name>\n"
+                    } else if(fieldType === 'ContactPoint') {
+                        vueOutput += "\n</template></fhir-contact-point>\n"
+                    } else if(fieldType === 'Period') {
+                        vueOutput += "\n</template></fhir-period>\n"
+                    } else if(fieldType === 'Address') {
+                        vueOutput += "\n</template></fhir-address>\n"
+                    } else if(fieldType === 'BackboneElement') {
+                        vueOutput += "\n</template></fhir-backbone-element>\n"
+                    } else if(fieldType === 'Identifier') {
+                        vueOutput += "\n</template></fhir-identifier>\n"
+                    }
+                    vueOutput += "</template>\n</ihris-questionnaire-group>\n"
                 } else if (item.readOnly) {
                     vueOutput += "<ihris-hidden path=\"" + item.linkId + "\" label=\""
                         + item.text + "\""
@@ -1020,13 +1191,80 @@ router.get('/questionnaire/:questionnaire', function (req, res) {
                             displayCondition += when.question + '|' + when.operator + '|' + answer
                         }
                     }
-                    vueOutput += "<fhir-" + itemType + " :edit=\"isEdit\" path=\"" + item.linkId + "\"" + "displayCondition=\"" + displayCondition + "\""
+                    let fieldPath = item.definition.split("#")[1]
+                    let baseProfile = item.definition.split("#")[0]
+                    let idSlices = fieldPath.split(".")
+                    let itemFieldPath = idSlices.pop()
+                    let fieldDef = await fhirDefinition.getFieldDefinition(item.definition)
+                    let fieldType = fieldDef.type.find((type) => {
+                        return type.code
+                    })?.code
+                    if(fieldPath.includes("extension:")) {
+                        let fieldDef = await fhirDefinition.getFieldDefinition(baseProfile + '#' + idSlices.join("."))
+                        vueOutput += "<fhir-extension :slotProps=\"slotProps\" id=\"" + idSlices.join(".") + "\" field=\"" + idSlices[idSlices.length-1] + "\""
+                        let extension = fieldDef.type.find((type) => {
+                            return type.code === 'Extension'
+                        })
+                        vueOutput += ' sliceName="' + fieldDef.sliceName + '"'
+                        if(extension && extension.profile && extension.profile.length > 0) {
+                            vueOutput += ' profile="' + extension.profile[0] + '"'
+                        }
+                        vueOutput += "><template #default=\"slotProps\">\n\n"
+                    } else if(fieldType === 'CodeableConcept') {
+                        vueOutput += `<fhir-codeable-concept :slotProps="slotProps" id="${fieldDef.id}" field="${itemFieldPath}" min="${fieldDef.min}" max="${fieldDef.max}" base-min="${fieldDef.base.min}" base-max="${fieldDef.base.max}" label="${fieldDef.label}" path="${fieldDef.path}" binding="${fieldDef.binding.valueSet}">
+                        \n<template #default="slotProps">`
+                        itemFieldPath = 'coding'
+                    } else if(fieldType === 'HumanName') {
+                        vueOutput += `<fhir-human-name :slotProps="slotProps" field="${itemFieldPath}" min="${fieldDef.min}" max="${fieldDef.max}" base-min="${fieldDef.base.min}" base-max="${fieldDef.base.max}" label="${fieldDef.label}" path="${fieldDef.path}">
+                        \n<template #default="slotProps">`
+                    } else if(fieldType === 'ContactPoint') {
+                        vueOutput += `<fhir-contact-point :slotProps="slotProps" field="${itemFieldPath}" min="${fieldDef.min}" max="${fieldDef.max}" base-min="${fieldDef.base.min}" base-max="${fieldDef.base.max}" label="${fieldDef.label}" path="${fieldDef.path}">
+                        \n<template #default="slotProps">`
+                    } else if(fieldType === 'Period') {
+                        vueOutput += `<fhir-period :slotProps="slotProps" field="${itemFieldPath}" min="${fieldDef.min}" max="${fieldDef.max}" base-min="${fieldDef.base.min}" base-max="${fieldDef.base.max}" label="${fieldDef.label}" path="${fieldDef.path}">
+                        \n<template #default="slotProps">`
+                    } else if(fieldType === 'Address') {
+                        vueOutput += `<fhir-address :slotProps="slotProps" field="${itemFieldPath}" min="${fieldDef.min}" max="${fieldDef.max}" base-min="${fieldDef.base.min}" base-max="${fieldDef.base.max}" label="${fieldDef.label}" path="${fieldDef.path}">
+                        \n<template #default="slotProps">`
+                    } else if(fieldType === 'BackboneElement') {
+                        vueOutput += `<fhir-backbone-element :slotProps="slotProps" field="${itemFieldPath}" min="${fieldDef.min}" max="${fieldDef.max}" base-min="${fieldDef.base.min}" base-max="${fieldDef.base.max}" label="${fieldDef.label}" path="${fieldDef.path}">
+                        \n<template #default="slotProps">`
+                    } else if(fieldType === 'Identifier') {
+                        vueOutput += `<fhir-identifier :slotProps="slotProps" field="${itemFieldPath}" min="${fieldDef.min}" max="${fieldDef.max}" base-min="${fieldDef.base.min}" base-max="${fieldDef.base.max}" label="${fieldDef.label}" path="${fieldDef.path}">
+                        \n<template #default="slotProps">`
+                    } else {
+                        if(!fieldPath.includes("extension:") && idSlices.length > 1) {
+                            let parentPath = idSlices.join(".")
+                            if(group !== parentPath) {
+                                let fieldDef = await fhirDefinition.getFieldDefinition(baseProfile + '#' + parentPath)
+                                let fieldType = fieldDef.type.find((type) => {
+                                    return type.code
+                                })?.code
+                                if(fieldType) {
+                                    let eleName = fhirDefinition.camelToKebab(fieldType)
+                                    let attrs = ["field", "sliceName", "targetProfile", "targetResource", "profile", "min", "max", "base-min",
+                                        "base-max", "label", "path", "binding", "calendar", "initialValue"]
+                                    const minmax = ["Date", "DateTime", "Instant", "Time", "Decimal", "Integer", "PositiveInt", "UnsignedInt", "Quantity"]
+                                    for (let mm of minmax) {
+                                        for (let type of ["min", "max"]) {
+                                            attrs.push(type + "Value" + mm)
+                                        }
+                                    }
+                                    vueOutput += `<fhir-${eleName} sliceName="${idSlices[idSlices.length-1]}" :slotProps="slotProps" field="${idSlices[idSlices.length-1]}" min="${fieldDef.min}" max="${fieldDef.max}" base-min="${fieldDef.base.min}" base-max="${fieldDef.base.max}" label="${fieldDef.label}" path="${fieldDef.path}">
+                                    \n<template #default="slotProps">`
+                                }
+                            }
+                        }
+                    }
+                    vueOutput += "<fhir-" + itemType + " field=\"" + itemFieldPath + "\"" + " :slotProps=\"slotProps\" :edit=\"isEdit\" path=\"" + item.linkId + "\"" + "displayCondition=\"" + displayCondition + "\""
 
                     let field
                     const minmax = ["Date", "DateTime", "Instant", "Time", "Decimal", "Integer", "PositiveInt",
                         "UnsignedInt", "Quantity"]
                     if (item.definition) {
                         field = await fhirDefinition.getFieldDefinition(item.definition)
+                        vueOutput += " id=\"" + field.id + "\""
+                        vueOutput += " definition=\"" + item.definition + "\""
                         if (itemType === "reference" && field && field.type && field.type[0] && field.type[0].targetProfile) {
                             vueOutput += " targetProfile=\"" + field.type[0].targetProfile[0] + "\""
                             let targetResource = await getProfileResource(field.type[0].targetProfile[0])
@@ -1139,6 +1377,37 @@ router.get('/questionnaire/:questionnaire', function (req, res) {
                     }
                     */
                     vueOutput += "></fhir-" + itemType + ">\n"
+                    if(fieldPath.includes("extension:")) {
+                        vueOutput += "\n</template></fhir-extension>\n"
+                    } else if(fieldType === 'CodeableConcept') {
+                        vueOutput += "\n</template></fhir-codeable-concept>\n"
+                    } else if(fieldType === 'HumanName') {
+                        vueOutput += "\n</template></fhir-human-name>\n"
+                    } else if(fieldType === 'ContactPoint') {
+                        vueOutput += "\n</template></fhir-contact-point>\n"
+                    } else if(fieldType === 'Period') {
+                        vueOutput += "\n</template></fhir-period>\n"
+                    } else if(fieldType === 'Address') {
+                        vueOutput += "\n</template></fhir-address>\n"
+                    } else if(fieldType === 'BackboneElement') {
+                        vueOutput += "\n</template></fhir-backbone-element>\n"
+                    } else if(fieldType === 'Identifier') {
+                        vueOutput += "\n</template></fhir-identifier>\n"
+                    } else {
+                        if(!fieldPath.includes("extension:") && idSlices.length > 1) {
+                            let parentPath = idSlices.join(".")
+                            if(group !== parentPath) {
+                                let fieldDef = await fhirDefinition.getFieldDefinition(baseProfile + '#' + parentPath)
+                                let fieldType = fieldDef.type.find((type) => {
+                                    return type.code
+                                })?.code
+                                if(fieldType) {
+                                    let eleName = fhirDefinition.camelToKebab(fieldType)
+                                    vueOutput += `\n</template></fhir-${eleName}>\n`
+                                }
+                            }
+                        }
+                    }
 
                 }
                 if (item.repeats && !item.readOnly) {
@@ -1154,11 +1423,61 @@ router.get('/questionnaire/:questionnaire', function (req, res) {
                 md5sum.update(item.text)
                 md5sum.update(Math.random().toString(36).substring(2))
                 let sectionId = md5sum.digest('hex')
-
+                let limit = ""
+                if(item.definition && item.definition.includes("#") && item.definition.split("#").length === 3) {
+                    limit = item.definition.split("#")[2]
+                }
                 let label = item.text.split('|', 2)
-                vueOutput += '<ihris-questionnaire-section id="' + sectionId + '" path="' + item.linkId + '" label="' + label[0] + '"'
+                vueOutput += '<ihris-questionnaire-section :slotProps="slotProps" id="' + sectionId + '" path="' + item.linkId + '" label="' + label[0] + '"'
                 if (label.length === 2) {
                     vueOutput += ' description="' + label[1] + '"'
+                }
+                if (limit) {
+                    vueOutput += ' limit="' + limit + '"'
+                }
+                //handle editing of secondary resources
+                if(!item.definition.includes("#")) {
+                    let thisdef = item.definition.split("/")
+                    thisdef = "StructureDefinition/" + thisdef[thisdef.length-1]
+                    if(thisdef !== primaryResourceDef) {
+                        let section = {}
+                        for(let sect in sections) {
+                            if(sections[sect].resource && sections[sect].resource === thisdef) {
+                                section = sections[sect]
+                                break
+                            }
+                        }
+                        let secondary = await getDefinition(section.resource)
+                        const secondaryStructure = fhirDefinition.parseStructureDefinition(secondary)
+                        let secondaryKeys = Object.keys(secondaryStructure)
+                        vueOutput += ' profile="' + secondary.url + '"'
+                        vueOutput += ' field="' + secondaryKeys[0] + '"'
+                        vueOutput += ' link-field="' + section.linkfield + '"'
+                        vueOutput += ' search-field="' + section.searchfield + '"'
+                        vueOutput += ' search-field-target="' + section.searchfieldtarget + '"'
+                        vueOutput += ' :link-id="fhirId"'
+                    }
+                }
+                let sectionPath = ""
+                if(item.definition.includes("#")) {
+                    sectionPath = item.definition.split("#")[1]
+                    let fieldDef = await fhirDefinition.getFieldDefinition(item.definition)
+                    
+                    let extension = fieldDef.type.find((type) => {
+                        return type.code === 'Extension'
+                    })
+                    if(extension && extension.profile && extension.profile.length > 0) {
+                        let idSlices = fieldDef.id.split(".")
+                        let field
+                        for(let slice of idSlices) {
+                            if(slice.includes("extension:")) {
+                                field = slice
+                            }
+                        }
+                        vueOutput += ' profile="' + extension.profile[0] + '"'
+                        vueOutput += ' sliceName="' + fieldDef.sliceName + '"'
+                        vueOutput += ' field="' + field + '"'
+                    }
                 }
                 if (item.extension) {
                     let constraintList = processConstraints(item.extension)
@@ -1167,9 +1486,9 @@ router.get('/questionnaire/:questionnaire', function (req, res) {
                     }
                 }
                 sectionMenu.push({title: label[0], desc: label[1] || "", id: sectionId})
-                vueOutput += ">\n"
-                vueOutput += await processQuestionnaireItems(item.item)
-                vueOutput += "</ihris-questionnaire-section>\n"
+                vueOutput += ">\n<template #default=\"slotProps\">\n"
+                vueOutput += await processQuestionnaireItems(item.item, sectionPath)
+                vueOutput += "</template></ihris-questionnaire-section>\n"
             } else {
                 logger.warn("Invalid entry for questionnaire.  All top level items must be type group.")
             }
@@ -1181,7 +1500,7 @@ router.get('/questionnaire/:questionnaire', function (req, res) {
             vueOutput = vueOutput.replace("__SECTIONMENU__", " :section-menu='sectionMenu'")
             templateData.sectionMenu = sectionMenu
         }
-        vueOutput += "</ihris-questionnaire>\n"
+        vueOutput += "</template></ihris-questionnaire>\n"
 
         logger.debug(vueOutput)
         return res.status(200).json({template: vueOutput, data: templateData})

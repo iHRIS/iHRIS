@@ -30,6 +30,25 @@ router.post("/QuestionnaireResponse", (req, res, next) => {
         return false
     }
 
+    const setResourceIds = (bundle) => {
+        if(!bundle.entry || bundle.entry <= 0) {
+            return
+        }
+        let editingResources = JSON.parse(req.query.editingResources)
+        for(let entry of bundle.entry) {
+            let edit = editingResources.find((editingResource) => {
+                return entry.resource.meta.profile.includes(editingResource.profile)
+            })
+            if(edit) {
+                entry.resource.id = edit.id
+                entry.request = {
+                    method: "PUT",
+                    url: entry.resource.resourceType + '/' + edit.id
+                }
+            }
+        }
+    }
+
     let workflowQuestionnaires = nconf.get("workflow:questionnaire")
     let workflow = Object.keys(workflowQuestionnaires).find(wf => workflowQuestionnaires[wf].url === req.body.questionnaire)
 
@@ -49,6 +68,7 @@ router.post("/QuestionnaireResponse", (req, res, next) => {
         }
         fhirModules.requireWorkflow(workflow, details.library, details.file).then((module) => {
             module.process(req).then((bundle) => {
+                setResourceIds(bundle)
                 fhirSecurity.preProcess(bundle).then((uuid) => {
                     fhirFilter.filterBundle("write", bundle, req.user)
                     let errorCheck = checkBundleForError(bundle)
@@ -103,6 +123,7 @@ router.post("/QuestionnaireResponse", (req, res, next) => {
 
     } else {
         fhirQuestionnaire.processQuestionnaire(req.body).then((bundle) => {
+            setResourceIds(bundle)
             logger.debug(JSON.stringify(bundle, null, 2))
             fhirSecurity.preProcess(bundle).then((uuid) => {
                 fhirFilter.filterBundle("write", bundle, req.user)
