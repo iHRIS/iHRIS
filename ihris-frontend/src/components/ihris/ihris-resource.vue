@@ -27,48 +27,6 @@
           style="z-index: 3;"
       >
         <v-list class="white--text">
-          <v-list-item
-              v-if="
-              $router.history.current.path ===
-                `/resource/view/practitioner/${this.fhirId}`
-            "
-          >
-            <v-btn
-                :loading="loadingId"
-                class="primary"
-                @click="printEmployeeId"
-            >
-              <v-icon class="mr-2" right>
-                mdi-card-account-details-outline
-              </v-icon>
-              {{$t(`App.hardcoded-texts.GenerateId`)}}
-              <template v-slot:loader>
-                <span class="custom-loader">
-                  <v-icon light>mdi-cached</v-icon>
-                </span>
-              </template>
-            </v-btn>
-          </v-list-item>
-          <v-list-item
-              v-if="
-              $router.history.current.path ===
-              `/resource/view/practitioner/${this.fhirId}`
-            "
-          >
-            <v-btn
-                :loading="loadingCv"
-                class="primary"
-                @click="printEmployeeCv"
-            >
-              <v-icon class="mr-2" dark right> mdi-file-pdf-box</v-icon>
-              {{$t(`App.hardcoded-texts.GenerateCv`)}}
-              <template v-slot:loader>
-                <span class="custom-loader">
-                  <v-icon light>mdi-cached</v-icon>
-                </span>
-              </template>
-            </v-btn>
-          </v-list-item>
           <v-list-item v-if="edit">
             <v-btn v-if="edit" class="secondary" dark @click="$router.go(-1)">
               <v-icon light>mdi-close-circle-outline</v-icon>
@@ -524,52 +482,6 @@ export default {
           })
         }
       })
-      //console.log(this.fhir)
-
-      /*
-      console.log(this.$scopedSlots.default())
-      processSlots( this.field, this.$scopedSlots.default() )
-      */
-    },
-    printEmployeeId() {
-      this.loadingId = true;
-      axios({
-        url: `/config/employeeId/${this.fhirId}`,
-        method: "GET",
-        responseType: "blob",
-      })
-          .then((response) => {
-            let blob = new Blob([response.data], { type: "application/png" });
-            let link = document.createElement("a");
-            link.href = window.URL.createObjectURL(blob);
-            link.download = `employee_identification_card_${this.fhirId}.png`;
-            link.click();
-            this.loadingId = false;
-          })
-          .catch((e) => {
-            console.log(e);
-            this.loadingId = false;
-          });
-    },
-    printEmployeeCv() {
-      this.loadingCv = true;
-      axios({
-        url: `/config/employeeCv/${this.fhirId}`,
-        method: "GET",
-        responseType: "blob",
-      })
-          .then((response) => {
-            let blob = new Blob([response.data], { type: "application/pdf" });
-            let link = document.createElement("a");
-            link.href = window.URL.createObjectURL(blob);
-            link.download = `employee_resume_${this.fhirId}.pdf`;
-            link.click();
-            this.loadingCv = false;
-          })
-          .catch((e) => {
-            console.log(e);
-            this.loadingCv = false;
-          });
     },
     changeVersion() {
       fetch("/fhir/vRead" + "/" + this.field + "/" + this.fhirId + "/" + this.version)
@@ -577,12 +489,8 @@ export default {
             response
                 .json()
                 .then((data) => {
-                  console.log("the new vertion",data)
-                  // this.$store.commit('setCurrentResource', data)
                   this.orig = data;
                   this.source = {data: data, path: this.field};
-                  // this.orig = data;
-                  // this.source = {data: data, path: this.field};
                   this.setLinkText();
                   this.loading = false;
                   this.pageKey += 1;
