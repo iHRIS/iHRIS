@@ -69,12 +69,8 @@
               </template>
             </v-btn>
           </v-list-item>
-          <v-list-item>
-            <v-btn v-if="!edit" class="secondary" dark @click="$emit('set-edit', !edit)">
-              <v-icon light>mdi-pencil</v-icon>
-              <span>{{ $t(`App.hardcoded-texts.Edit`) }}</span>
-            </v-btn>
-            <v-btn v-else class="secondary" dark @click="$router.go(0)">
+          <v-list-item v-if="edit">
+            <v-btn v-if="edit" class="secondary" dark @click="$router.go(-1)">
               <v-icon light>mdi-close-circle-outline</v-icon>
               <span>{{ $t(`App.hardcoded-texts.Cancel`) }}</span>
             </v-btn>
@@ -93,12 +89,13 @@
           <v-divider color="white"></v-divider>
           <template v-if="!edit && links && links.length">
             <v-list-item v-for="(link,idx) in links" :key="link.url">
-              <v-btn :key="link.url" :text="!link.button" :to="getLinkUrl(link)" class="primary">
+              <v-btn :key="link.url" :text="!link.button" :to="getLinkUrl(link)" :class="link.linkclass">
                 <v-icon v-if="link.icon" light>{{ link.icon }}</v-icon>
                 {{ linktext[idx] }}
               </v-btn>
             </v-list-item>
           </template>
+          <v-divider color="white"></v-divider>
           <v-subheader v-if="sectionMenu" class="white--text"><h2>{{ $t(`App.hardcoded-texts.Sections`) }}</h2>
           </v-subheader>
           <v-list-item v-for="section in sectionMenu" :href="'#section-'+section.name" :key="section.name">

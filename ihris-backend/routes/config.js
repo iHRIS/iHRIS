@@ -281,8 +281,22 @@ router.get('/page/:page/:type?', function (req, res) {
                 let linkExts = pageDisplay.extension.filter(ext => ext.url === "link")
 
                 for (let linkExt of linkExts) {
-                    let field, text, button, icon
-
+                    let field, text, button, icon, linkclass
+                    let roles = linkExt.extension.filter(ext => ext.url === "role")
+                    if(roles.length > 0) {
+                        let userRole = req.user.resource.extension.find((ext) => {
+                            return ext.url === 'http://ihris.org/fhir/StructureDefinition/ihris-assign-role'
+                        })
+                        if(userRole) {
+                            userRole = userRole.valueReference.reference.split("/")[1]
+                            let exist = roles.find((role) => {
+                                return role.valueId === userRole
+                            })
+                            if(!exist) {
+                                continue
+                            }
+                        }
+                    }
                     let url = linkExt.extension.find(ext => ext.url === "url").valueUrl
 
                     try {
@@ -301,8 +315,12 @@ router.get('/page/:page/:type?', function (req, res) {
                         icon = linkExt.extension.find(ext => ext.url === "icon").valueString
                     } catch (err) {
                     }
+                    try {
+                        linkclass = linkExt.extension.find(ext => ext.url === "class").valueString
+                    } catch (err) {
+                    }
 
-                    links.push({url: url, field: field, text: text, button: button, icon: icon})
+                    links.push({url: url, field: field, text: text, button: button, icon: icon, linkclass: linkclass})
 
                 }
 

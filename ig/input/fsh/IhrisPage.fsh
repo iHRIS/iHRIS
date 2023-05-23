@@ -58,7 +58,9 @@ Description:    "iHRIS Page Display details."
       text 0..1 MS and
       button 0..1 MS and
       icon 0..1 MS and
-      url 1..1 MS
+      url 1..1 MS and
+      class 0..1 MS and
+      role 0..* MS
 * extension[link].extension[field].value[x] only string
 * extension[link].extension[field].valueString MS
 * extension[link].extension[field].valueString ^label = "FHIRPath for field in resource"
@@ -74,6 +76,12 @@ Description:    "iHRIS Page Display details."
 * extension[link].extension[url].value[x] only url
 * extension[link].extension[url].valueUrl MS
 * extension[link].extension[url].valueUrl ^label = "URL to go to"
+* extension[link].extension[class].value[x] only string
+* extension[link].extension[class].valueString MS
+* extension[link].extension[class].valueString ^label = "Class of the link"
+* extension[link].extension[role].value[x] only id
+* extension[link].extension[role].valueId MS
+* extension[link].extension[role].valueId ^label = "Roles that has access to this button"
 
 * extension[field].extension contains
       path 1..1 MS and
