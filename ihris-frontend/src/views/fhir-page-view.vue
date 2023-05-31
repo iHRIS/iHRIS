@@ -105,8 +105,6 @@ export default {
       })
     }
   },
-  components: {
-  },
   beforeCreate: function() {
     pageId = this.$route.params.id
     page = this.$route.params.page

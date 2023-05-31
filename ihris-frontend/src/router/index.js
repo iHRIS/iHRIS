@@ -118,7 +118,7 @@ const routes = [{
     component: () => import( /* webpackChunkName: "resource-add" */ "../views/fhir-page-add.vue")
   },
   {
-    path: "/questionnaire/:questionnaire/:page",
+    path: "/questionnaire/:questionnaire/:page/:id?",
     name: "questionnaire",
     // route level code-splitting
     // this generates a separate chunk (about.[hash].js) for this route
