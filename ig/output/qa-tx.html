@@ -1,0 +1,59 @@
+<html><head><title>Terminology Server Log</title></head><body><h2>Terminology Server Log</h2>
+
+--- 1 -----------------
+Request: 
+
+POST http://tx.fhir.org/r4/ValueSet/$validate-code? HTTP/1.0
+User-Agent: hapi-fhir-tooling-client
+Accept-Charset: UTF-8
+Accept: application/fhir+json
+Content-Type: application/fhir+json;charset=UTF-8
+
+{"resourceType":"Parameters","parameter":[{"name":"coding","valueCoding":{"system":"http://loinc.org","code":"5792-7"}},{"name":"valueSetMode","valueString":"CHECK_MEMERSHIP_ONLY"},{"name":"default-to-latest-version","valueBoolean":true},{"name":"url","valueUri":"http://ihris.org/fhir/ValueSet/ihris-job"},{"name":"cache-id","valueId":"520d4ad0-4eda-4bf0-9773-9a3d98146063"},{"name":"profile","resource":{"resourceType":"Parameters","parameter":[{"name":"x-system-cache-id","valueString":"dc8fd4bc-091a-424a-8a3b-6198ef146891"}]}}]}
+
+
+Response: 
+
+422
+access-control-allow-methods:GET, POST, PUT, PATCH, DELETE
+access-control-allow-origin:*
+access-control-expose-headers:Content-Location, Location
+connection:keep-alive
+content-length:369
+content-type:application/fhir+json
+date:Mon, 05 Jun 2023 12:57:37 GMT
+server:nginx
+x-request-id:18-120914
+
+{"resourceType" : "OperationOutcome","text" : {"status" : "generated","div" : "<div xmlns=\"http://www.w3.org/1999/xhtml\"><p>Unable to resolve value set \"http://ihris.org/fhir/ValueSet/ihris-job\"</p></div>"},"issue" : [{"severity" : "error","code" : "not-supported","details" : {"text" : "Unable to resolve value set \"http://ihris.org/fhir/ValueSet/ihris-job\""}}]}
+
+--- 2 -----------------
+Request: 
+
+POST http://tx.fhir.org/r4/CodeSystem/$validate-code? HTTP/1.0
+User-Agent: hapi-fhir-tooling-client
+Accept-Charset: UTF-8
+Accept: application/fhir+json
+Content-Type: application/fhir+json;charset=UTF-8
+
+{"resourceType":"Parameters","parameter":[{"name":"coding","valueCoding":{"system":"http://ihris.org/fhir/CodeSystem/ihris-position-status","code":"closed"}},{"name":"displayLanguage","valueString":"en-US"},{"name":"displayLanguage","valueString":"en"},{"name":"default-to-latest-version","valueBoolean":true},{"name":"profile","resource":{"resourceType":"Parameters","parameter":[{"name":"x-system-cache-id","valueString":"dc8fd4bc-091a-424a-8a3b-6198ef146891"}]}}]}
+
+
+Response: 
+
+200
+access-control-allow-methods:GET, POST, PUT, PATCH, DELETE
+access-control-allow-origin:*
+access-control-expose-headers:Content-Location, Location
+cache-control:public, max-age=600
+connection:keep-alive
+content-length:584
+content-type:application/fhir+json
+date:Mon, 05 Jun 2023 12:58:32 GMT
+last-modified:Mon, 05 Jun 2023 12:58:32 GMT
+pragma:no-cache
+server:nginx
+x-request-id:18-120962
+
+{"resourceType" : "Parameters","parameter" : [{"name" : "result","valueBoolean" : false},{"name" : "x-caused-by-unknown-system","valueUri" : "http://ihris.org/fhir/CodeSystem/ihris-position-status"},{"name" : "message","valueString" : "The CodeSystem http://ihris.org/fhir/CodeSystem/ihris-position-status is unknown"},{"name" : "issues","resource" : {"resourceType" : "OperationOutcome","issue" : [{"severity" : "error","code" : "not-found","details" : {"text" : "The CodeSystem http://ihris.org/fhir/CodeSystem/ihris-position-status is unknown"},"location" : ["Coding.system"]}]}}]}
+</head></html>

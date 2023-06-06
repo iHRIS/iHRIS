@@ -36,6 +36,22 @@
       },
       {
         "reference": {
+          "reference": "StructureDefinition/ihris-dashboard"
+        },
+        "name": "iHRIS Dashboard",
+        "description": "iHRIS Profile of the Basic resource to manage dashboards.",
+        "exampleBoolean": false
+      },
+      {
+        "reference": {
+          "reference": "StructureDefinition/ihris-data-visualization"
+        },
+        "name": "iHRIS Data Visualizer",
+        "description": "iHRIS Profile of the Basic resource to manage visualizations.",
+        "exampleBoolean": false
+      },
+      {
+        "reference": {
           "reference": "StructureDefinition/ihris-document"
         },
         "name": "iHRIS Document",
@@ -180,6 +196,14 @@
       },
       {
         "reference": {
+          "reference": "StructureDefinition/ihris-dashboard-visualization"
+        },
+        "name": "iHRIS Dashboard Visualization",
+        "description": "iHRIS Dashboard Visualization",
+        "exampleBoolean": false
+      },
+      {
+        "reference": {
           "reference": "StructureDefinition/ihris-facility-information-details"
         },
         "name": "Ihris Facility Information Details",
@@ -264,6 +288,54 @@
         },
         "name": "iHRIS Practitioner Residence",
         "description": "iHRIS Test extension for Practitioner residence.",
+        "exampleBoolean": false
+      },
+      {
+        "reference": {
+          "reference": "StructureDefinition/ihris-visualization-categories"
+        },
+        "name": "iHRIS Visualization Categories",
+        "description": "iHRIS visualization categories",
+        "exampleBoolean": false
+      },
+      {
+        "reference": {
+          "reference": "StructureDefinition/ihris-visualization-dataset"
+        },
+        "name": "iHRIS Visualization Dataset",
+        "description": "iHRIS visualization dataset",
+        "exampleBoolean": false
+      },
+      {
+        "reference": {
+          "reference": "StructureDefinition/ihris-visualization-filters"
+        },
+        "name": "iHRIS Visualization Filters",
+        "description": "iHRIS visualization filters",
+        "exampleBoolean": false
+      },
+      {
+        "reference": {
+          "reference": "StructureDefinition/ihris-visualization-permissions"
+        },
+        "name": "iHRIS Visualization Permissions",
+        "description": "iHRIS Visualization Permissions",
+        "exampleBoolean": false
+      },
+      {
+        "reference": {
+          "reference": "StructureDefinition/ihris-visualization-series"
+        },
+        "name": "iHRIS Visualization Series",
+        "description": "iHRIS visualization series",
+        "exampleBoolean": false
+      },
+      {
+        "reference": {
+          "reference": "StructureDefinition/ihris-visualization-settings"
+        },
+        "name": "iHRIS Visualization Settings",
+        "description": "iHRIS visualization settings for the data visualizer",
         "exampleBoolean": false
       },
       {
@@ -909,13 +981,6 @@
           "reference": "Basic/ihris-page-facility"
         },
         "name": "iHRIS Facility Page",
-        "exampleCanonical": "http://ihris.org/fhir/StructureDefinition/ihris-page"
-      },
-      {
-        "reference": {
-          "reference": "Basic/ihris-page-identifier"
-        },
-        "name": "iHRIS Identifier type CodeSystem Page",
         "exampleCanonical": "http://ihris.org/fhir/StructureDefinition/ihris-page"
       },
       {

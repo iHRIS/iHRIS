@@ -1,0 +1,32 @@
+{
+  "resourceType" : "CodeSystem",
+  "id" : "ihris-Facility-identifier",
+  "text" : {
+    "status" : "generated",
+    "div" : "<div xmlns=\"http://www.w3.org/1999/xhtml\"><p>This code system <code>http://ihris.org/fhir/CodeSystem/ihris-Facility-identifier</code> defines the following codes:</p><table class=\"codes\"><tr><td style=\"white-space:nowrap\"><b>Code</b></td><td><b>Display</b></td></tr><tr><td style=\"white-space:nowrap\">dhis2Id<a name=\"ihris-Facility-identifier-dhis2Id\"> </a></td><td>DHIS2 ID</td></tr><tr><td style=\"white-space:nowrap\">mfrId<a name=\"ihris-Facility-identifier-mfrId\"> </a></td><td>MFR ID</td></tr></table></div>"
+  },
+  "url" : "http://ihris.org/fhir/CodeSystem/ihris-Facility-identifier",
+  "version" : "0.1.0",
+  "name" : "IhrisFacilityIdentifierCodeSystem",
+  "title" : "Identifier Type",
+  "status" : "active",
+  "date" : "2022-02-13T08:41:04.362Z",
+  "publisher" : "Luke Duncan",
+  "contact" : [{
+    "name" : "Luke Duncan",
+    "telecom" : [{
+      "system" : "email",
+      "value" : "lduncan@intrahealth.org"
+    }]
+  }],
+  "content" : "complete",
+  "count" : 2,
+  "concept" : [{
+    "code" : "dhis2Id",
+    "display" : "DHIS2 ID"
+  },
+  {
+    "code" : "mfrId",
+    "display" : "MFR ID"
+  }]
+}

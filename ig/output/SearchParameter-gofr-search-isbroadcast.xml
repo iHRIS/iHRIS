@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<SearchParameter xmlns="http://hl7.org/fhir">
+  <id value="gofr-search-isbroadcast"/>
+  <text>
+    <status value="generated"/><div xmlns="http://www.w3.org/1999/xhtml"><h2>search parameter for broadcasted messages</h2><p>Parameter <code>isbroadcast</code>:<code>token</code></p><div><p>search parameter for broadcasted messages</p>
+</div><table class="grid"><tr><td>Resource</td><td><a href="http://hl7.org/fhir/R4/communicationrequest.html">CommunicationRequest</a></td></tr><tr><td>Expression</td><td><code>CommunicationRequest.extension('http://mhero.org/fhir/StructureDefinition/mhero-comm-req-broadcast-starts').exists()</code></td></tr><tr><td>Multiples</td><td>The parameter cannot repeat or have multiple values</td></tr></table></div>
+  </text>
+  <url value="http://gofr.org/fhir/SearchParameter/gofr-search-isbroadcast"/>
+  <version value="0.1.0"/>
+  <name value="search parameter for broadcasted messages"/>
+  <status value="active"/>
+  <experimental value="false"/>
+  <date value="2023-06-05T15:57:19+03:00"/>
+  <publisher value="Luke Duncan"/>
+  <contact>
+    <name value="Luke Duncan"/>
+    <telecom>
+      <system value="email"/>
+      <value value="lduncan@intrahealth.org"/>
+    </telecom>
+  </contact>
+  <description value="search parameter for broadcasted messages"/>
+  <code value="isbroadcast"/>
+  <base value="CommunicationRequest"/>
+  <type value="token"/>
+  <expression value="CommunicationRequest.extension('http://mhero.org/fhir/StructureDefinition/mhero-comm-req-broadcast-starts').exists()"/>
+</SearchParameter>

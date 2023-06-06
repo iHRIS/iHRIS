@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<Basic xmlns="http://hl7.org/fhir">
+  <id value="ihris-page-practitionerrole"/>
+  <meta>
+    <profile value="http://ihris.org/fhir/StructureDefinition/ihris-page"/>
+  </meta>
+  <text>
+    <status value="extensions"/><div xmlns="http://www.w3.org/1999/xhtml"><p><b>Generated Narrative: Basic</b><a name="ihris-page-practitionerrole"> </a></p><div style="display: inline-block; background-color: #d9e0e7; padding: 6px; margin: 4px; border: 1px solid #8da1b4; border-radius: 5px; line-height: 60%"><p style="margin-bottom: 0px">Resource Basic &quot;ihris-page-practitionerrole&quot; </p><p style="margin-bottom: 0px">Profile: <a href="StructureDefinition-ihris-page.html">iHRIS Page</a></p></div><blockquote><p><b>iHRIS Page Display</b></p><blockquote><p><b>url</b></p><code>resource</code></blockquote><p><b>value</b>: <a href="StructureDefinition-ihris-practitioner-role.html">StructureDefinition/ihris-practitioner-role</a> &quot;IhrisPractitionerRole&quot;</p><blockquote><p><b>url</b></p><code>search</code></blockquote><p><b>value</b>: Job|PractitionerRole.code[0].coding[0]</p><p><b>url</b>: <code>/resource/view/practitioner/FIELD</code></p><blockquote><p><b>url</b></p><code>link</code></blockquote><blockquote><p><b>url</b></p><code>search</code></blockquote><p><b>value</b>: Start Date|PractitionerRole.period.start</p><blockquote><p><b>url</b></p><code>search</code></blockquote><p><b>value</b>: Practitioner|PractitionerRole.practitioner</p><blockquote><p><b>url</b></p><code>search</code></blockquote><p><b>value</b>: Facility|PractitionerRole.location</p><blockquote><p><b>url</b></p><code>search</code></blockquote><p><b>value</b>: Specialty|PractitionerRole.specialty</p><blockquote><p><b>url</b></p><code>filter</code></blockquote><p><b>value</b>: Job|role|http://ihris.org/fhir/ValueSet/ihris-job</p></blockquote><blockquote><p><b>iHRIS Page Section</b></p><blockquote><p><b>url</b></p><code>title</code></blockquote><p><b>value</b>: Position</p><blockquote><p><b>url</b></p><code>description</code></blockquote><p><b>value</b>: Position details</p><blockquote><p><b>url</b></p><code>name</code></blockquote><p><b>value</b>: PractitionerRole</p><blockquote><p><b>url</b></p><code>field</code></blockquote><p><b>value</b>: PractitionerRole.code</p><blockquote><p><b>url</b></p><code>field</code></blockquote><p><b>value</b>: PractitionerRole.practitioner</p><blockquote><p><b>url</b></p><code>field</code></blockquote><p><b>value</b>: PractitionerRole.location</p><blockquote><p><b>url</b></p><code>field</code></blockquote><p><b>value</b>: PractitionerRole.period</p><blockquote><p><b>url</b></p><code>field</code></blockquote><p><b>value</b>: PractitionerRole.specialty</p><blockquote><p><b>url</b></p><code>field</code></blockquote><p><b>value</b>: PractitionerRole.identifier</p></blockquote><p><b>code</b>: iHRIS Page <span style="background: LightGoldenRodYellow; margin: 4px; border: 1px solid khaki"> (<a href="CodeSystem-ihris-resource-codesystem.html">Code System for iHRIS Basic Resources.</a>#page)</span></p></div>
+  </text>
+  <extension url="http://ihris.org/fhir/StructureDefinition/ihris-page-display">
+    <extension url="resource">
+      <valueReference>
+        <reference value="StructureDefinition/ihris-practitioner-role"/>
+      </valueReference>
+    </extension>
+    <extension url="search">
+      <valueString value="Job|PractitionerRole.code[0].coding[0]"/>
+    </extension>
+    <extension url="link">
+      <extension url="field">
+        <valueString value="PractitionerRole.practitioner.reference"/>
+      </extension>
+      <extension url="url">
+        <valueUrl value="/resource/view/practitioner/FIELD"/>
+      </extension>
+      <extension url="text">
+        <valueString value="View Practitioner"/>
+      </extension>
+      <extension url="button">
+        <valueBoolean value="true"/>
+      </extension>
+      <extension url="icon">
+        <valueString value="mdi-account-arrow-right"/>
+      </extension>
+    </extension>
+    <extension url="search">
+      <valueString value="Start Date|PractitionerRole.period.start"/>
+    </extension>
+    <extension url="search">
+      <valueString value="Practitioner|PractitionerRole.practitioner"/>
+    </extension>
+    <extension url="search">
+      <valueString value="Facility|PractitionerRole.location"/>
+    </extension>
+    <extension url="search">
+      <valueString value="Specialty|PractitionerRole.specialty"/>
+    </extension>
+    <extension url="filter">
+      <valueString value="Job|role|http://ihris.org/fhir/ValueSet/ihris-job"/>
+    </extension>
+  </extension>
+  <extension url="http://ihris.org/fhir/StructureDefinition/ihris-page-section">
+    <extension url="title">
+      <valueString value="Position"/>
+    </extension>
+    <extension url="description">
+      <valueString value="Position details"/>
+    </extension>
+    <extension url="name">
+      <valueString value="PractitionerRole"/>
+    </extension>
+    <extension url="field">
+      <valueString value="PractitionerRole.code"/>
+    </extension>
+    <extension url="field">
+      <valueString value="PractitionerRole.practitioner"/>
+    </extension>
+    <extension url="field">
+      <valueString value="PractitionerRole.location"/>
+    </extension>
+    <extension url="field">
+      <valueString value="PractitionerRole.period"/>
+    </extension>
+    <extension url="field">
+      <valueString value="PractitionerRole.specialty"/>
+    </extension>
+    <extension url="field">
+      <valueString value="PractitionerRole.identifier"/>
+    </extension>
+  </extension>
+  <code>
+    <coding>
+      <system value="http://ihris.org/fhir/CodeSystem/ihris-resource-codesystem"/>
+      <code value="page"/>
+    </coding>
+  </code>
+</Basic>

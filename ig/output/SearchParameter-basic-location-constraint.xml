@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<SearchParameter xmlns="http://hl7.org/fhir">
+  <id value="basic-location-constraint"/>
+  <text>
+    <status value="generated"/><div xmlns="http://www.w3.org/1999/xhtml"><h2>Search Parameter on related location constraint resources for role</h2><p>Parameter <code>locationconstraint</code>:<code>string</code></p><div><p>Search by related location for a Basic resource Role.</p>
+</div><table class="grid"><tr><td>Resource</td><td><a href="http://hl7.org/fhir/R4/basic.html">Basic</a></td></tr><tr><td>Expression</td><td><code>Basic.extension('http://ihris.org/fhir/StructureDefinition/ihris-task').extension('constraint')</code></td></tr><tr><td>Processing Mode</td><td>Normal</td></tr><tr><td>Multiples</td><td>The parameter cannot repeat or have multiple values</td></tr></table></div>
+  </text>
+  <url value="http://ihris.org/fhir/SearchParameter/basic-related-location"/>
+  <version value="0.1.0"/>
+  <name value="Search Parameter on related location constraint resources for role"/>
+  <status value="active"/>
+  <date value="2023-06-05T15:57:19+03:00"/>
+  <publisher value="Luke Duncan"/>
+  <contact>
+    <name value="Luke Duncan"/>
+    <telecom>
+      <system value="email"/>
+      <value value="lduncan@intrahealth.org"/>
+    </telecom>
+  </contact>
+  <description value="Search by related location for a Basic resource Role."/>
+  <code value="locationconstraint"/>
+  <base value="Basic"/>
+  <type value="string"/>
+  <expression value="Basic.extension('http://ihris.org/fhir/StructureDefinition/ihris-task').extension('constraint')"/>
+  <xpathUsage value="normal"/>
+</SearchParameter>

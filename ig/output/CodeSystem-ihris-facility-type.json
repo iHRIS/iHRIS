@@ -1,0 +1,80 @@
+{
+  "resourceType" : "CodeSystem",
+  "id" : "ihris-facility-type",
+  "text" : {
+    "status" : "generated",
+    "div" : "<div xmlns=\"http://www.w3.org/1999/xhtml\"><p>This code system <code>http://ihris.org/fhir/CodeSystem/ihris-facility-type</code> defines the following codes:</p><table class=\"codes\"><tr><td style=\"white-space:nowrap\"><b>Code</b></td><td><b>Display</b></td></tr><tr><td style=\"white-space:nowrap\">hospital<a name=\"ihris-facility-type-hospital\"> </a></td><td>Hospital</td></tr><tr><td style=\"white-space:nowrap\">HC<a name=\"ihris-facility-type-HC\"> </a></td><td>Health Center</td></tr><tr><td style=\"white-space:nowrap\">HP<a name=\"ihris-facility-type-HP\"> </a></td><td>Health Post</td></tr><tr><td style=\"white-space:nowrap\">LAB<a name=\"ihris-facility-type-LAB\"> </a></td><td>Laboratory</td></tr><tr><td style=\"white-space:nowrap\">IC<a name=\"ihris-facility-type-IC\"> </a></td><td>Imaging Center</td></tr><tr><td style=\"white-space:nowrap\">SC<a name=\"ihris-facility-type-SC\"> </a></td><td>Specaility Clinic</td></tr><tr><td style=\"white-space:nowrap\">CLC<a name=\"ihris-facility-type-CLC\"> </a></td><td>Clinic</td></tr><tr><td style=\"white-space:nowrap\">SPC<a name=\"ihris-facility-type-SPC\"> </a></td><td>Speciality Center</td></tr><tr><td style=\"white-space:nowrap\">PHARM<a name=\"ihris-facility-type-PHARM\"> </a></td><td>Pharmacy</td></tr><tr><td style=\"white-space:nowrap\">HI<a name=\"ihris-facility-type-HI\"> </a></td><td>Health Institution</td></tr><tr><td style=\"white-space:nowrap\">HSC<a name=\"ihris-facility-type-HSC\"> </a></td><td>Health Science College</td></tr><tr><td style=\"white-space:nowrap\">AGN<a name=\"ihris-facility-type-AGN\"> </a></td><td>Agencies</td></tr><tr><td style=\"white-space:nowrap\">NGOs<a name=\"ihris-facility-type-NGOs\"> </a></td><td>NGOs</td></tr><tr><td style=\"white-space:nowrap\">ASSO<a name=\"ihris-facility-type-ASSO\"> </a></td><td>Association</td></tr></table></div>"
+  },
+  "url" : "http://ihris.org/fhir/CodeSystem/ihris-facility-type",
+  "version" : "0.1.0",
+  "name" : "IhrisFacilityType",
+  "title" : "Facility Type",
+  "status" : "active",
+  "date" : "2022-02-25T08:41:04.362Z",
+  "publisher" : "Luke Duncan",
+  "contact" : [{
+    "name" : "Luke Duncan",
+    "telecom" : [{
+      "system" : "email",
+      "value" : "lduncan@intrahealth.org"
+    }]
+  }],
+  "content" : "complete",
+  "count" : 14,
+  "concept" : [{
+    "code" : "hospital",
+    "display" : "Hospital"
+  },
+  {
+    "code" : "HC",
+    "display" : "Health Center"
+  },
+  {
+    "code" : "HP",
+    "display" : "Health Post"
+  },
+  {
+    "code" : "LAB",
+    "display" : "Laboratory"
+  },
+  {
+    "code" : "IC",
+    "display" : "Imaging Center"
+  },
+  {
+    "code" : "SC",
+    "display" : "Specaility Clinic"
+  },
+  {
+    "code" : "CLC",
+    "display" : "Clinic"
+  },
+  {
+    "code" : "SPC",
+    "display" : "Speciality Center"
+  },
+  {
+    "code" : "PHARM",
+    "display" : "Pharmacy"
+  },
+  {
+    "code" : "HI",
+    "display" : "Health Institution"
+  },
+  {
+    "code" : "HSC",
+    "display" : "Health Science College"
+  },
+  {
+    "code" : "AGN",
+    "display" : "Agencies"
+  },
+  {
+    "code" : "NGOs",
+    "display" : "NGOs"
+  },
+  {
+    "code" : "ASSO",
+    "display" : "Association"
+  }]
+}

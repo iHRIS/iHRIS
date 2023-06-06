@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<SearchParameter xmlns="http://hl7.org/fhir">
+  <id value="practitioner-renewrole"/>
+  <text>
+    <status value="generated"/><div xmlns="http://www.w3.org/1999/xhtml"><h2>Search Parameter on  employee id for practitioner</h2><p>Parameter <code>renewrole</code>:<code>string</code></p><div><p>Search by employee ID for a practitioner resource.</p>
+</div><table class="grid"><tr><td>Resource</td><td><a href="http://hl7.org/fhir/R4/practitioner.html">Practitioner</a></td></tr><tr><td>Expression</td><td><code>Practitioner.identifier.where(type.coding.code='PractitionerRole.period.start').value</code></td></tr><tr><td>Processing Mode</td><td>Normal</td></tr><tr><td>Multiples</td><td>The parameter cannot repeat or have multiple values</td></tr></table></div>
+  </text>
+  <url value="http://ihris.org/fhir/SearchParameter/practitioner-renewrole"/>
+  <version value="0.1.0"/>
+  <name value="Search Parameter on  employee id for practitioner"/>
+  <status value="active"/>
+  <date value="2023-06-05T15:57:19+03:00"/>
+  <publisher value="Luke Duncan"/>
+  <contact>
+    <name value="Luke Duncan"/>
+    <telecom>
+      <system value="email"/>
+      <value value="lduncan@intrahealth.org"/>
+    </telecom>
+  </contact>
+  <description value="Search by employee ID for a practitioner resource."/>
+  <code value="renewrole"/>
+  <base value="Practitioner"/>
+  <type value="string"/>
+  <expression value="Practitioner.identifier.where(type.coding.code='PractitionerRole.period.start').value"/>
+  <xpathUsage value="normal"/>
+</SearchParameter>

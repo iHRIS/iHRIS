@@ -1,0 +1,6129 @@
+{
+  "date" : "Mon, 05 Jun, 2023 15:57:19 +0300",
+  "doco" : "For each file: start is seconds after start activity occurred. Length = milliseconds activity took",
+  "files" : [
+    {
+      "name" : "/fsh-generated/resources/ImplementationGuide-ihris.json",
+      "size" : 35758,
+      "processes" : [
+        {
+          "activity" : "load",
+          "start" : 42,
+          "length" : 128
+        },
+        {
+          "activity" : "checkR4R4B",
+          "start" : 47,
+          "length" : 6
+        },
+        {
+          "activity" : "generateNarratives",
+          "start" : 48,
+          "length" : 202
+        },
+        {
+          "activity" : "validate",
+          "start" : 65,
+          "length" : 735
+        },
+        {
+          "activity" : "scanForUsageStats",
+          "start" : 66,
+          "length" : 2
+        },
+        {
+          "activity" : "generate1",
+          "start" : 72,
+          "length" : 237
+        },
+        {
+          "activity" : "generate2",
+          "start" : 87,
+          "length" : 156
+        },
+        {
+          "activity" : "generateValidationPack",
+          "start" : 154,
+          "length" : 10
+        },
+        {
+          "activity" : "scanExamplesForR5",
+          "start" : 196,
+          "length" : 3
+        }
+      ]
+    },
+    {
+      "name" : "fsh-generated/resources/DocumentReference-page-about.json",
+      "size" : 683,
+      "processes" : [
+        {
+          "activity" : "loadResources",
+          "start" : 40,
+          "length" : 5
+        },
+        {
+          "activity" : "generateNarratives",
+          "start" : 48,
+          "length" : 24
+        },
+        {
+          "activity" : "validate",
+          "start" : 66,
+          "length" : 5
+        },
+        {
+          "activity" : "generate1",
+          "start" : 72,
+          "length" : 10
+        },
+        {
+          "activity" : "generate2",
+          "start" : 87,
+          "length" : 14
+        }
+      ]
+    },
+    {
+      "name" : "fsh-generated/resources/Basic-ihris-task-write-organization-resource.json",
+      "size" : 972,
+      "processes" : [
+        {
+          "activity" : "loadResources",
+          "start" : 40,
+          "length" : 3
+        },
+        {
+          "activity" : "generateNarratives",
+          "start" : 48,
+          "length" : 64
+        },
+        {
+          "activity" : "validate",
+          "start" : 66,
+          "length" : 42
+        },
+        {
+          "activity" : "generate1",
+          "start" : 72,
+          "length" : 10
+        },
+        {
+          "activity" : "generate2",
+          "start" : 87,
+          "length" : 10
+        }
+      ]
+    },
+    {
+      "name" : "fsh-generated/resources/StructureDefinition-ihris-facility-ownership-prefix.json",
+      "size" : 2025,
+      "processes" : [
+        {
+          "activity" : "loadResources",
+          "start" : 40,
+          "length" : 6
+        },
+        {
+          "activity" : "load",
+          "start" : 41,
+          "length" : 19
+        },
+        {
+          "activity" : "generateSnapshots",
+          "start" : 42,
+          "length" : 26
+        },
+        {
+          "activity" : "checkR4R4B",
+          "start" : 47,
+          "length" : 1
+        },
+        {
+          "activity" : "generateNarratives",
+          "start" : 48,
+          "length" : 47
+        },
+        {
+          "activity" : "validate",
+          "start" : 54,
+          "length" : 355
+        },
+        {
+          "activity" : "generate1",
+          "start" : 72,
+          "length" : 45
+        },
+        {
+          "activity" : "generate2",
+          "start" : 87,
+          "length" : 1135
+        },
+        {
+          "activity" : "generateValidationPack",
+          "start" : 154,
+          "length" : 2
+        },
+        {
+          "activity" : "scanProfilesForR5",
+          "start" : 196,
+          "length" : 1
+        }
+      ]
+    },
+    {
+      "name" : "fsh-generated/resources/StructureDefinition-ihris-parameters-local-config.json",
+      "size" : 11358,
+      "processes" : [
+        {
+          "activity" : "loadResources",
+          "start" : 40,
+          "length" : 30
+        },
+        {
+          "activity" : "load",
+          "start" : 41,
+          "length" : 47
+        },
+        {
+          "activity" : "generateSnapshots",
+          "start" : 42,
+          "length" : 292
+        },
+        {
+          "activity" : "generateNarratives",
+          "start" : 48,
+          "length" : 344
+        },
+        {
+          "activity" : "validate",
+          "start" : 54,
+          "length" : 779
+        },
+        {
+          "activity" : "checkConformanceResources",
+          "start" : 66,
+          "length" : 1
+        },
+        {
+          "activity" : "scanForUsageStats",
+          "start" : 66,
+          "length" : 3
+        },
+        {
+          "activity" : "generate1",
+          "start" : 72,
+          "length" : 479
+        },
+        {
+          "activity" : "generate2",
+          "start" : 88,
+          "length" : 2187
+        },
+        {
+          "activity" : "generateValidationPack",
+          "start" : 154,
+          "length" : 14
+        },
+        {
+          "activity" : "scanExamplesForR5",
+          "start" : 196,
+          "length" : 3
+        }
+      ]
+    },
+    {
+      "name" : "fsh-generated/resources/Basic-ihris-page-practitioner.json",
+      "size" : 48187,
+      "processes" : [
+        {
+          "activity" : "loadResources",
+          "start" : 40,
+          "length" : 68
+        },
+        {
+          "activity" : "checkR4R4B",
+          "start" : 47,
+          "length" : 3
+        },
+        {
+          "activity" : "generateNarratives",
+          "start" : 48,
+          "length" : 94
+        },
+        {
+          "activity" : "validate",
+          "start" : 66,
+          "length" : 2555
+        },
+        {
+          "activity" : "generate1",
+          "start" : 72,
+          "length" : 118
+        },
+        {
+          "activity" : "generate2",
+          "start" : 90,
+          "length" : 129
+        },
+        {
+          "activity" : "scanExamplesForR5",
+          "start" : 196,
+          "length" : 2
+        }
+      ]
+    },
+    {
+      "name" : "fsh-generated/resources/CodeSystem-ihris-facility-type.json",
+      "size" : 1258,
+      "processes" : [
+        {
+          "activity" : "loadResources",
+          "start" : 40,
+          "length" : 5
+        },
+        {
+          "activity" : "scan",
+          "start" : 41,
+          "length" : 1
+        },
+        {
+          "activity" : "load",
+          "start" : 41,
+          "length" : 12
+        },
+        {
+          "activity" : "generateNarratives",
+          "start" : 48,
+          "length" : 12
+        },
+        {
+          "activity" : "validate",
+          "start" : 54,
+          "length" : 28
+        },
+        {
+          "activity" : "generate1",
+          "start" : 72,
+          "length" : 11
+        },
+        {
+          "activity" : "generate2",
+          "start" : 90,
+          "length" : 1314
+        }
+      ]
+    },
+    {
+      "name" : "fsh-generated/resources/Basic-ihris-task-read-person-resource.json",
+      "size" : 764,
+      "processes" : [
+        {
+          "activity" : "loadResources",
+          "start" : 40,
+          "length" : 3
+        },
+        {
+          "activity" : "generateNarratives",
+          "start" : 48,
+          "length" : 6
+        },
+        {
+          "activity" : "validate",
+          "start" : 69,
+          "length" : 21
+        },
+        {
+          "activity" : "generate1",
+          "start" : 72,
+          "length" : 6
+        },
+        {
+          "activity" : "generate2",
+          "start" : 92,
+          "length" : 8
+        }
+      ]
+    },
+    {
+      "name" : "fsh-generated/resources/StructureDefinition-ihris-role-primary.json",
+      "size" : 1897,
+      "processes" : [
+        {
+          "activity" : "loadResources",
+          "start" : 40,
+          "length" : 6
+        },
+        {
+          "activity" : "load",
+          "start" : 41,
+          "length" : 10
+        },
+        {
+          "activity" : "generateSnapshots",
+          "start" : 43,
+          "length" : 29
+        },
+        {
+          "activity" : "checkR4R4B",
+          "start" : 47,
+          "length" : 1
+        },
+        {
+          "activity" : "generateNarratives",
+          "start" : 48,
+          "length" : 35
+        },
+        {
+          "activity" : "validate",
+          "start" : 55,
+          "length" : 43
+        },
+        {
+          "activity" : "generate1",
+          "start" : 72,
+          "length" : 46
+        },
+        {
+          "activity" : "generate2",
+          "start" : 92,
+          "length" : 202
+        },
+        {
+          "activity" : "generateValidationPack",
+          "start" : 154,
+          "length" : 2
+        }
+      ]
+    },
+    {
+      "name" : "fsh-generated/resources/Basic-ihris-task-read-questionnaire-resource.json",
+      "size" : 785,
+      "processes" : [
+        {
+          "activity" : "loadResources",
+          "start" : 40,
+          "length" : 3
+        },
+        {
+          "activity" : "generateNarratives",
+          "start" : 48,
+          "length" : 7
+        },
+        {
+          "activity" : "validate",
+          "start" : 69,
+          "length" : 24
+        },
+        {
+          "activity" : "generate1",
+          "start" : 73,
+          "length" : 7
+        },
+        {
+          "activity" : "generate2",
+          "start" : 92,
+          "length" : 8
+        }
+      ]
+    },
+    {
+      "name" : "fsh-generated/resources/SearchParameter-basic-practitioner.json",
+      "size" : 668,
+      "processes" : [
+        {
+          "activity" : "loadResources",
+          "start" : 40,
+          "length" : 2
+        },
+        {
+          "activity" : "load",
+          "start" : 42,
+          "length" : 9
+        },
+        {
+          "activity" : "load",
+          "start" : 42,
+          "length" : 3
+        },
+        {
+          "activity" : "generateNarratives",
+          "start" : 48,
+          "length" : 6
+        },
+        {
+          "activity" : "validate",
+          "start" : 65,
+          "length" : 5
+        },
+        {
+          "activity" : "generate1",
+          "start" : 73,
+          "length" : 6
+        },
+        {
+          "activity" : "generate2",
+          "start" : 92,
+          "length" : 10
+        }
+      ]
+    },
+    {
+      "name" : "fsh-generated/resources/CodeSystem-ihris-Facility-identifier.json",
+      "size" : 488,
+      "processes" : [
+        {
+          "activity" : "loadResources",
+          "start" : 40,
+          "length" : 2
+        },
+        {
+          "activity" : "load",
+          "start" : 41,
+          "length" : 4
+        },
+        {
+          "activity" : "generateNarratives",
+          "start" : 48,
+          "length" : 5
+        },
+        {
+          "activity" : "validate",
+          "start" : 54,
+          "length" : 6
+        },
+        {
+          "activity" : "generate1",
+          "start" : 73,
+          "length" : 5
+        },
+        {
+          "activity" : "generate2",
+          "start" : 92,
+          "length" : 28
+        }
+      ]
+    },
+    {
+      "name" : "fsh-generated/resources/StructureDefinition-ihris-visualization-filters.json",
+      "size" : 1860,
+      "processes" : [
+        {
+          "activity" : "loadResources",
+          "start" : 40,
+          "length" : 5
+        },
+        {
+          "activity" : "load-configure",
+          "start" : 41,
+          "length" : 1
+        },
+        {
+          "activity" : "load",
+          "start" : 41,
+          "length" : 9
+        },
+        {
+          "activity" : "generateSnapshots",
+          "start" : 43,
+          "length" : 27
+        },
+        {
+          "activity" : "generateNarratives",
+          "start" : 48,
+          "length" : 29
+        },
+        {
+          "activity" : "validate",
+          "start" : 55,
+          "length" : 46
+        },
+        {
+          "activity" : "generate1",
+          "start" : 73,
+          "length" : 51
+        },
+        {
+          "activity" : "generate2",
+          "start" : 92,
+          "length" : 199
+        },
+        {
+          "activity" : "generateValidationPack",
+          "start" : 154,
+          "length" : 2
+        },
+        {
+          "activity" : "scanExamplesForR5",
+          "start" : 196,
+          "length" : 3
+        }
+      ]
+    },
+    {
+      "name" : "fsh-generated/resources/Basic-ihris-page-practitionerrole.json",
+      "size" : 2960,
+      "processes" : [
+        {
+          "activity" : "loadResources",
+          "start" : 40,
+          "length" : 7
+        },
+        {
+          "activity" : "generateNarratives",
+          "start" : 48,
+          "length" : 24
+        },
+        {
+          "activity" : "validate",
+          "start" : 69,
+          "length" : 115
+        },
+        {
+          "activity" : "generate1",
+          "start" : 73,
+          "length" : 16
+        },
+        {
+          "activity" : "generate2",
+          "start" : 92,
+          "length" : 11
+        }
+      ]
+    },
+    {
+      "name" : "fsh-generated/resources/Basic-ihris-task-navigation-evaluation.json",
+      "size" : 857,
+      "processes" : [
+        {
+          "activity" : "loadResources",
+          "start" : 40,
+          "length" : 2
+        },
+        {
+          "activity" : "generateNarratives",
+          "start" : 48,
+          "length" : 7
+        },
+        {
+          "activity" : "validate",
+          "start" : 69,
+          "length" : 33
+        },
+        {
+          "activity" : "generate1",
+          "start" : 73,
+          "length" : 8
+        },
+        {
+          "activity" : "generate2",
+          "start" : 92,
+          "length" : 9
+        }
+      ]
+    },
+    {
+      "name" : "fsh-generated/resources/Basic-ihris-task-read-questionnaire-response-resource.json",
+      "size" : 811,
+      "processes" : [
+        {
+          "activity" : "loadResources",
+          "start" : 40,
+          "length" : 3
+        },
+        {
+          "activity" : "generateNarratives",
+          "start" : 48,
+          "length" : 5
+        },
+        {
+          "activity" : "validate",
+          "start" : 69,
+          "length" : 24
+        },
+        {
+          "activity" : "generate1",
+          "start" : 73,
+          "length" : 9
+        },
+        {
+          "activity" : "generate2",
+          "start" : 92,
+          "length" : 7
+        }
+      ]
+    },
+    {
+      "name" : "fsh-generated/resources/SearchParameter-basic-related-location.json",
+      "size" : 538,
+      "processes" : [
+        {
+          "activity" : "loadResources",
+          "start" : 40,
+          "length" : 2
+        },
+        {
+          "activity" : "load",
+          "start" : 42,
+          "length" : 3
+        },
+        {
+          "activity" : "load",
+          "start" : 42,
+          "length" : 4
+        },
+        {
+          "activity" : "generateNarratives",
+          "start" : 48,
+          "length" : 5
+        },
+        {
+          "activity" : "validate",
+          "start" : 65,
+          "length" : 2
+        },
+        {
+          "activity" : "generate1",
+          "start" : 73,
+          "length" : 9
+        },
+        {
+          "activity" : "generate2",
+          "start" : 92,
+          "length" : 11
+        }
+      ]
+    },
+    {
+      "name" : "fsh-generated/resources/ValueSet-ihris-document-category.json",
+      "size" : 409,
+      "processes" : [
+        {
+          "activity" : "loadResources",
+          "start" : 40,
+          "length" : 2
+        },
+        {
+          "activity" : "load",
+          "start" : 41,
+          "length" : 6
+        },
+        {
+          "activity" : "generateNarratives",
+          "start" : 48,
+          "length" : 102
+        },
+        {
+          "activity" : "validate",
+          "start" : 54,
+          "length" : 6
+        },
+        {
+          "activity" : "generate1",
+          "start" : 73,
+          "length" : 8
+        },
+        {
+          "activity" : "generate2",
+          "start" : 92,
+          "length" : 6267
+        }
+      ]
+    },
+    {
+      "name" : "fsh-generated/resources/StructureDefinition-composite-task.json",
+      "size" : 2103,
+      "processes" : [
+        {
+          "activity" : "loadResources",
+          "start" : 40,
+          "length" : 6
+        },
+        {
+          "activity" : "load",
+          "start" : 41,
+          "length" : 10
+        },
+        {
+          "activity" : "generateSnapshots",
+          "start" : 43,
+          "length" : 56
+        },
+        {
+          "activity" : "generateNarratives",
+          "start" : 49,
+          "length" : 81
+        },
+        {
+          "activity" : "validate",
+          "start" : 55,
+          "length" : 91
+        },
+        {
+          "activity" : "scanForUsageStats",
+          "start" : 66,
+          "length" : 1
+        },
+        {
+          "activity" : "generate1",
+          "start" : 73,
+          "length" : 90
+        },
+        {
+          "activity" : "generate2",
+          "start" : 99,
+          "length" : 373
+        },
+        {
+          "activity" : "generateValidationPack",
+          "start" : 154,
+          "length" : 3
+        }
+      ]
+    },
+    {
+      "name" : "fsh-generated/resources/StructureDefinition-ihris-practitioner-dependents.json",
+      "size" : 1944,
+      "processes" : [
+        {
+          "activity" : "loadResources",
+          "start" : 40,
+          "length" : 6
+        },
+        {
+          "activity" : "load",
+          "start" : 41,
+          "length" : 8
+        },
+        {
+          "activity" : "generateSnapshots",
+          "start" : 43,
+          "length" : 39
+        },
+        {
+          "activity" : "generateNarratives",
+          "start" : 49,
+          "length" : 42
+        },
+        {
+          "activity" : "validate",
+          "start" : 55,
+          "length" : 44
+        },
+        {
+          "activity" : "generate1",
+          "start" : 73,
+          "length" : 45
+        },
+        {
+          "activity" : "generate2",
+          "start" : 99,
+          "length" : 267
+        },
+        {
+          "activity" : "generateValidationPack",
+          "start" : 154,
+          "length" : 2
+        }
+      ]
+    },
+    {
+      "name" : "fsh-generated/resources/Basic-ihris-task-read-ihris-page-practitioner.json",
+      "size" : 1424,
+      "processes" : [
+        {
+          "activity" : "loadResources",
+          "start" : 40,
+          "length" : 3
+        },
+        {
+          "activity" : "generateNarratives",
+          "start" : 49,
+          "length" : 23
+        },
+        {
+          "activity" : "validate",
+          "start" : 69,
+          "length" : 41
+        },
+        {
+          "activity" : "generate1",
+          "start" : 73,
+          "length" : 10
+        },
+        {
+          "activity" : "generate2",
+          "start" : 99,
+          "length" : 14
+        }
+      ]
+    },
+    {
+      "name" : "fsh-generated/resources/ValueSet-ihris-relation-valueset.json",
+      "size" : 432,
+      "processes" : [
+        {
+          "activity" : "loadResources",
+          "start" : 40,
+          "length" : 3
+        },
+        {
+          "activity" : "load",
+          "start" : 41,
+          "length" : 6
+        },
+        {
+          "activity" : "checkR4R4B",
+          "start" : 47,
+          "length" : 1
+        },
+        {
+          "activity" : "generateNarratives",
+          "start" : 49,
+          "length" : 7
+        },
+        {
+          "activity" : "validate",
+          "start" : 54,
+          "length" : 4
+        },
+        {
+          "activity" : "generate1",
+          "start" : 73,
+          "length" : 6
+        },
+        {
+          "activity" : "generate2",
+          "start" : 99,
+          "length" : 51
+        }
+      ]
+    },
+    {
+      "name" : "fsh-generated/resources/Basic-ihris-task-write-basic-resource.json",
+      "size" : 944,
+      "processes" : [
+        {
+          "activity" : "loadResources",
+          "start" : 40,
+          "length" : 3
+        },
+        {
+          "activity" : "generateNarratives",
+          "start" : 49,
+          "length" : 7
+        },
+        {
+          "activity" : "validate",
+          "start" : 69,
+          "length" : 29
+        },
+        {
+          "activity" : "generate1",
+          "start" : 73,
+          "length" : 8
+        },
+        {
+          "activity" : "generate2",
+          "start" : 99,
+          "length" : 8
+        }
+      ]
+    },
+    {
+      "name" : "fsh-generated/resources/CodeSystem-Ihris-facility-ownership-type.json",
+      "size" : 574,
+      "processes" : [
+        {
+          "activity" : "loadResources",
+          "start" : 40,
+          "length" : 2
+        },
+        {
+          "activity" : "load",
+          "start" : 41,
+          "length" : 4
+        },
+        {
+          "activity" : "generateNarratives",
+          "start" : 49,
+          "length" : 6
+        },
+        {
+          "activity" : "validate",
+          "start" : 54,
+          "length" : 6
+        },
+        {
+          "activity" : "generate1",
+          "start" : 73,
+          "length" : 7
+        },
+        {
+          "activity" : "generate2",
+          "start" : 99,
+          "length" : 23
+        }
+      ]
+    },
+    {
+      "name" : "fsh-generated/resources/StructureDefinition-ihris-page.json",
+      "size" : 2471,
+      "processes" : [
+        {
+          "activity" : "loadResources",
+          "start" : 40,
+          "length" : 7
+        },
+        {
+          "activity" : "load",
+          "start" : 41,
+          "length" : 11
+        },
+        {
+          "activity" : "generateSnapshots",
+          "start" : 43,
+          "length" : 125
+        },
+        {
+          "activity" : "generateNarratives",
+          "start" : 49,
+          "length" : 64
+        },
+        {
+          "activity" : "validate",
+          "start" : 55,
+          "length" : 115
+        },
+        {
+          "activity" : "generate1",
+          "start" : 73,
+          "length" : 94
+        },
+        {
+          "activity" : "generate2",
+          "start" : 99,
+          "length" : 495
+        },
+        {
+          "activity" : "generateValidationPack",
+          "start" : 154,
+          "length" : 4
+        },
+        {
+          "activity" : "scanExamplesForR5",
+          "start" : 196,
+          "length" : 1
+        }
+      ]
+    },
+    {
+      "name" : "fsh-generated/resources/ValueSet-Ihris-facility-ownership.json",
+      "size" : 453,
+      "processes" : [
+        {
+          "activity" : "loadResources",
+          "start" : 40,
+          "length" : 2
+        },
+        {
+          "activity" : "load",
+          "start" : 41,
+          "length" : 4
+        },
+        {
+          "activity" : "generateNarratives",
+          "start" : 49,
+          "length" : 4
+        },
+        {
+          "activity" : "validate",
+          "start" : 54,
+          "length" : 3
+        },
+        {
+          "activity" : "generate1",
+          "start" : 73,
+          "length" : 3
+        },
+        {
+          "activity" : "generate2",
+          "start" : 100,
+          "length" : 34
+        }
+      ]
+    },
+    {
+      "name" : "fsh-generated/resources/StructureDefinition-ihris-basic-name.json",
+      "size" : 1794,
+      "processes" : [
+        {
+          "activity" : "loadResources",
+          "start" : 40,
+          "length" : 6
+        },
+        {
+          "activity" : "load",
+          "start" : 41,
+          "length" : 8
+        },
+        {
+          "activity" : "generateSnapshots",
+          "start" : 43,
+          "length" : 32
+        },
+        {
+          "activity" : "generateNarratives",
+          "start" : 49,
+          "length" : 43
+        },
+        {
+          "activity" : "validate",
+          "start" : 56,
+          "length" : 43
+        },
+        {
+          "activity" : "generate1",
+          "start" : 73,
+          "length" : 41
+        },
+        {
+          "activity" : "generate2",
+          "start" : 100,
+          "length" : 183
+        },
+        {
+          "activity" : "generateValidationPack",
+          "start" : 154,
+          "length" : 2
+        },
+        {
+          "activity" : "scanProfilesForR5",
+          "start" : 196,
+          "length" : 1
+        }
+      ]
+    },
+    {
+      "name" : "fsh-generated/resources/CodeSystem-ihris-relation-codesystem.json",
+      "size" : 950,
+      "processes" : [
+        {
+          "activity" : "loadResources",
+          "start" : 40,
+          "length" : 4
+        },
+        {
+          "activity" : "load",
+          "start" : 41,
+          "length" : 7
+        },
+        {
+          "activity" : "generateNarratives",
+          "start" : 49,
+          "length" : 7
+        },
+        {
+          "activity" : "validate",
+          "start" : 54,
+          "length" : 7
+        },
+        {
+          "activity" : "generate1",
+          "start" : 73,
+          "length" : 6
+        },
+        {
+          "activity" : "generate2",
+          "start" : 100,
+          "length" : 25
+        }
+      ]
+    },
+    {
+      "name" : "fsh-generated/resources/Basic-ihris-page-auditevent.json",
+      "size" : 3040,
+      "processes" : [
+        {
+          "activity" : "loadResources",
+          "start" : 40,
+          "length" : 7
+        },
+        {
+          "activity" : "generateNarratives",
+          "start" : 49,
+          "length" : 22
+        },
+        {
+          "activity" : "validate",
+          "start" : 69,
+          "length" : 92
+        },
+        {
+          "activity" : "generate1",
+          "start" : 73,
+          "length" : 14
+        },
+        {
+          "activity" : "generate2",
+          "start" : 100,
+          "length" : 13
+        }
+      ]
+    },
+    {
+      "name" : "fsh-generated/resources/SearchParameter-location-related-location.json",
+      "size" : 553,
+      "processes" : [
+        {
+          "activity" : "loadResources",
+          "start" : 40,
+          "length" : 2
+        },
+        {
+          "activity" : "load",
+          "start" : 42,
+          "length" : 4
+        },
+        {
+          "activity" : "load",
+          "start" : 42,
+          "length" : 3
+        },
+        {
+          "activity" : "generateNarratives",
+          "start" : 49,
+          "length" : 5
+        },
+        {
+          "activity" : "validate",
+          "start" : 65,
+          "length" : 3
+        },
+        {
+          "activity" : "generate1",
+          "start" : 73,
+          "length" : 4
+        },
+        {
+          "activity" : "generate2",
+          "start" : 100,
+          "length" : 12
+        },
+        {
+          "activity" : "generateValidationPack",
+          "start" : 154,
+          "length" : 1
+        }
+      ]
+    },
+    {
+      "name" : "fsh-generated/resources/Basic-ihris-task-read-ihris-page-practitioner-role.json",
+      "size" : 1455,
+      "processes" : [
+        {
+          "activity" : "loadResources",
+          "start" : 40,
+          "length" : 4
+        },
+        {
+          "activity" : "generateNarratives",
+          "start" : 49,
+          "length" : 9
+        },
+        {
+          "activity" : "validate",
+          "start" : 69,
+          "length" : 35
+        },
+        {
+          "activity" : "generate1",
+          "start" : 73,
+          "length" : 7
+        },
+        {
+          "activity" : "generate2",
+          "start" : 100,
+          "length" : 10
+        }
+      ]
+    },
+    {
+      "name" : "fsh-generated/resources/Basic-ihris-page-role.json",
+      "size" : 3032,
+      "processes" : [
+        {
+          "activity" : "loadResources",
+          "start" : 40,
+          "length" : 7
+        },
+        {
+          "activity" : "checkR4R4B",
+          "start" : 47,
+          "length" : 1
+        },
+        {
+          "activity" : "generateNarratives",
+          "start" : 49,
+          "length" : 17
+        },
+        {
+          "activity" : "validate",
+          "start" : 69,
+          "length" : 110
+        },
+        {
+          "activity" : "generate1",
+          "start" : 73,
+          "length" : 12
+        },
+        {
+          "activity" : "generate2",
+          "start" : 100,
+          "length" : 13
+        }
+      ]
+    },
+    {
+      "name" : "fsh-generated/resources/Basic-ihris-task-read-organization-resource.json",
+      "size" : 782,
+      "processes" : [
+        {
+          "activity" : "loadResources",
+          "start" : 40,
+          "length" : 3
+        },
+        {
+          "activity" : "generateNarratives",
+          "start" : 49,
+          "length" : 4
+        },
+        {
+          "activity" : "validate",
+          "start" : 69,
+          "length" : 23
+        },
+        {
+          "activity" : "generate1",
+          "start" : 73,
+          "length" : 6
+        },
+        {
+          "activity" : "generate2",
+          "start" : 100,
+          "length" : 8
+        }
+      ]
+    },
+    {
+      "name" : "fsh-generated/resources/StructureDefinition-ihris-visualization-series.json",
+      "size" : 7225,
+      "processes" : [
+        {
+          "activity" : "loadResources",
+          "start" : 40,
+          "length" : 19
+        },
+        {
+          "activity" : "load-configure",
+          "start" : 41,
+          "length" : 1
+        },
+        {
+          "activity" : "load",
+          "start" : 41,
+          "length" : 33
+        },
+        {
+          "activity" : "generateSnapshots",
+          "start" : 43,
+          "length" : 127
+        },
+        {
+          "activity" : "generateNarratives",
+          "start" : 49,
+          "length" : 136
+        },
+        {
+          "activity" : "validate",
+          "start" : 56,
+          "length" : 280
+        },
+        {
+          "activity" : "scanForUsageStats",
+          "start" : 66,
+          "length" : 1
+        },
+        {
+          "activity" : "generate1",
+          "start" : 73,
+          "length" : 190
+        },
+        {
+          "activity" : "generate2",
+          "start" : 100,
+          "length" : 648
+        },
+        {
+          "activity" : "generateValidationPack",
+          "start" : 154,
+          "length" : 6
+        }
+      ]
+    },
+    {
+      "name" : "fsh-generated/resources/StructureDefinition-ihris-practitioner-dependent-detail.json",
+      "size" : 3730,
+      "processes" : [
+        {
+          "activity" : "loadResources",
+          "start" : 40,
+          "length" : 10
+        },
+        {
+          "activity" : "load",
+          "start" : 41,
+          "length" : 23
+        },
+        {
+          "activity" : "generateSnapshots",
+          "start" : 43,
+          "length" : 72
+        },
+        {
+          "activity" : "generateNarratives",
+          "start" : 49,
+          "length" : 57
+        },
+        {
+          "activity" : "validate",
+          "start" : 56,
+          "length" : 219
+        },
+        {
+          "activity" : "generate1",
+          "start" : 73,
+          "length" : 102
+        },
+        {
+          "activity" : "generate2",
+          "start" : 101,
+          "length" : 395
+        },
+        {
+          "activity" : "generateValidationPack",
+          "start" : 154,
+          "length" : 3
+        },
+        {
+          "activity" : "scanExamplesForR5",
+          "start" : 196,
+          "length" : 1
+        }
+      ]
+    },
+    {
+      "name" : "fsh-generated/resources/ValueSet-ihris-Facility-identifier-valueset.json",
+      "size" : 471,
+      "processes" : [
+        {
+          "activity" : "loadResources",
+          "start" : 40,
+          "length" : 2
+        },
+        {
+          "activity" : "load",
+          "start" : 41,
+          "length" : 4
+        },
+        {
+          "activity" : "generateNarratives",
+          "start" : 49,
+          "length" : 3
+        },
+        {
+          "activity" : "validate",
+          "start" : 54,
+          "length" : 3
+        },
+        {
+          "activity" : "generate1",
+          "start" : 73,
+          "length" : 4
+        },
+        {
+          "activity" : "generate2",
+          "start" : 101,
+          "length" : 30
+        },
+        {
+          "activity" : "generateValidationPack",
+          "start" : 154,
+          "length" : 1
+        }
+      ]
+    },
+    {
+      "name" : "fsh-generated/resources/SearchParameter-basic-location-constraint.json",
+      "size" : 548,
+      "processes" : [
+        {
+          "activity" : "loadResources",
+          "start" : 40,
+          "length" : 2
+        },
+        {
+          "activity" : "load",
+          "start" : 42,
+          "length" : 4
+        },
+        {
+          "activity" : "load",
+          "start" : 42,
+          "length" : 3
+        },
+        {
+          "activity" : "generateNarratives",
+          "start" : 49,
+          "length" : 4
+        },
+        {
+          "activity" : "validate",
+          "start" : 65,
+          "length" : 2
+        },
+        {
+          "activity" : "checkURLsUnique",
+          "start" : 66,
+          "length" : 1
+        },
+        {
+          "activity" : "generate1",
+          "start" : 73,
+          "length" : 4
+        },
+        {
+          "activity" : "generate2",
+          "start" : 101,
+          "length" : 12
+        }
+      ]
+    },
+    {
+      "name" : "fsh-generated/resources/SearchParameter-practitionerrole-related-practitioner.json",
+      "size" : 617,
+      "processes" : [
+        {
+          "activity" : "loadResources",
+          "start" : 40,
+          "length" : 1
+        },
+        {
+          "activity" : "load",
+          "start" : 42,
+          "length" : 3
+        },
+        {
+          "activity" : "load",
+          "start" : 42,
+          "length" : 3
+        },
+        {
+          "activity" : "generateNarratives",
+          "start" : 49,
+          "length" : 3
+        },
+        {
+          "activity" : "validate",
+          "start" : 65,
+          "length" : 3
+        },
+        {
+          "activity" : "generate1",
+          "start" : 73,
+          "length" : 5
+        },
+        {
+          "activity" : "generate2",
+          "start" : 101,
+          "length" : 12
+        }
+      ]
+    },
+    {
+      "name" : "fsh-generated/resources/Basic-ihris-task-navigation-profile.json",
+      "size" : 848,
+      "processes" : [
+        {
+          "activity" : "loadResources",
+          "start" : 40,
+          "length" : 3
+        },
+        {
+          "activity" : "generateNarratives",
+          "start" : 49,
+          "length" : 4
+        },
+        {
+          "activity" : "validate",
+          "start" : 69,
+          "length" : 30
+        },
+        {
+          "activity" : "generate1",
+          "start" : 73,
+          "length" : 7
+        },
+        {
+          "activity" : "generate2",
+          "start" : 101,
+          "length" : 11
+        }
+      ]
+    },
+    {
+      "name" : "fsh-generated/resources/CodeSystem-ihris-jurisdiction-type.json",
+      "size" : 759,
+      "processes" : [
+        {
+          "activity" : "loadResources",
+          "start" : 40,
+          "length" : 3
+        },
+        {
+          "activity" : "load",
+          "start" : 41,
+          "length" : 6
+        },
+        {
+          "activity" : "generateNarratives",
+          "start" : 49,
+          "length" : 5
+        },
+        {
+          "activity" : "validate",
+          "start" : 54,
+          "length" : 5
+        },
+        {
+          "activity" : "generate1",
+          "start" : 73,
+          "length" : 9
+        },
+        {
+          "activity" : "generate2",
+          "start" : 101,
+          "length" : 23
+        },
+        {
+          "activity" : "generateValidationPack",
+          "start" : 154,
+          "length" : 1
+        }
+      ]
+    },
+    {
+      "name" : "fsh-generated/resources/StructureDefinition-ihris-task.json",
+      "size" : 5524,
+      "processes" : [
+        {
+          "activity" : "loadResources",
+          "start" : 40,
+          "length" : 13
+        },
+        {
+          "activity" : "load",
+          "start" : 41,
+          "length" : 29
+        },
+        {
+          "activity" : "generateSnapshots",
+          "start" : 43,
+          "length" : 192
+        },
+        {
+          "activity" : "generateNarratives",
+          "start" : 49,
+          "length" : 150
+        },
+        {
+          "activity" : "validate",
+          "start" : 56,
+          "length" : 453
+        },
+        {
+          "activity" : "scanForUsageStats",
+          "start" : 66,
+          "length" : 1
+        },
+        {
+          "activity" : "generate1",
+          "start" : 73,
+          "length" : 245
+        },
+        {
+          "activity" : "generate2",
+          "start" : 101,
+          "length" : 998
+        },
+        {
+          "activity" : "generateValidationPack",
+          "start" : 154,
+          "length" : 8
+        }
+      ]
+    },
+    {
+      "name" : "fsh-generated/resources/Basic-ihris-task-read-value-set.json",
+      "size" : 754,
+      "processes" : [
+        {
+          "activity" : "loadResources",
+          "start" : 40,
+          "length" : 2
+        },
+        {
+          "activity" : "generateNarratives",
+          "start" : 49,
+          "length" : 3
+        },
+        {
+          "activity" : "validate",
+          "start" : 69,
+          "length" : 24
+        },
+        {
+          "activity" : "generate1",
+          "start" : 74,
+          "length" : 5
+        },
+        {
+          "activity" : "generate2",
+          "start" : 102,
+          "length" : 11
+        }
+      ]
+    },
+    {
+      "name" : "fsh-generated/resources/Basic-ihris-page-task.json",
+      "size" : 2698,
+      "processes" : [
+        {
+          "activity" : "loadResources",
+          "start" : 40,
+          "length" : 6
+        },
+        {
+          "activity" : "generateNarratives",
+          "start" : 49,
+          "length" : 10
+        },
+        {
+          "activity" : "validate",
+          "start" : 69,
+          "length" : 96
+        },
+        {
+          "activity" : "generate1",
+          "start" : 74,
+          "length" : 11
+        },
+        {
+          "activity" : "generate2",
+          "start" : 102,
+          "length" : 11
+        },
+        {
+          "activity" : "scanExamplesForR5",
+          "start" : 196,
+          "length" : 1
+        }
+      ]
+    },
+    {
+      "name" : "fsh-generated/resources/Basic-ihris-task-write-location-resource.json",
+      "size" : 956,
+      "processes" : [
+        {
+          "activity" : "loadResources",
+          "start" : 40,
+          "length" : 3
+        },
+        {
+          "activity" : "generateNarratives",
+          "start" : 49,
+          "length" : 4
+        },
+        {
+          "activity" : "validate",
+          "start" : 69,
+          "length" : 23
+        },
+        {
+          "activity" : "generate1",
+          "start" : 74,
+          "length" : 5
+        },
+        {
+          "activity" : "generate2",
+          "start" : 102,
+          "length" : 8
+        }
+      ]
+    },
+    {
+      "name" : "fsh-generated/resources/Basic-ihris-task-write-practitioner-resource.json",
+      "size" : 972,
+      "processes" : [
+        {
+          "activity" : "loadResources",
+          "start" : 40,
+          "length" : 3
+        },
+        {
+          "activity" : "checkR4R4B",
+          "start" : 47,
+          "length" : 1
+        },
+        {
+          "activity" : "generateNarratives",
+          "start" : 49,
+          "length" : 5
+        },
+        {
+          "activity" : "validate",
+          "start" : 69,
+          "length" : 25
+        },
+        {
+          "activity" : "generate1",
+          "start" : 74,
+          "length" : 6
+        },
+        {
+          "activity" : "generate2",
+          "start" : 102,
+          "length" : 7
+        }
+      ]
+    },
+    {
+      "name" : "fsh-generated/resources/SearchParameter-leaveperiod-search.json",
+      "size" : 657,
+      "processes" : [
+        {
+          "activity" : "loadResources",
+          "start" : 40,
+          "length" : 2
+        },
+        {
+          "activity" : "load",
+          "start" : 42,
+          "length" : 3
+        },
+        {
+          "activity" : "load",
+          "start" : 42,
+          "length" : 3
+        },
+        {
+          "activity" : "generateNarratives",
+          "start" : 49,
+          "length" : 5
+        },
+        {
+          "activity" : "validate",
+          "start" : 65,
+          "length" : 2
+        },
+        {
+          "activity" : "generate1",
+          "start" : 74,
+          "length" : 4
+        },
+        {
+          "activity" : "generate2",
+          "start" : 102,
+          "length" : 10
+        },
+        {
+          "activity" : "generateValidationPack",
+          "start" : 154,
+          "length" : 1
+        }
+      ]
+    },
+    {
+      "name" : "fsh-generated/resources/SearchParameter-practitioner-renewrole.json",
+      "size" : 513,
+      "processes" : [
+        {
+          "activity" : "loadResources",
+          "start" : 40,
+          "length" : 1
+        },
+        {
+          "activity" : "load-configure",
+          "start" : 41,
+          "length" : 1
+        },
+        {
+          "activity" : "load",
+          "start" : 42,
+          "length" : 3
+        },
+        {
+          "activity" : "load",
+          "start" : 42,
+          "length" : 3
+        },
+        {
+          "activity" : "generateNarratives",
+          "start" : 49,
+          "length" : 5
+        },
+        {
+          "activity" : "validate",
+          "start" : 65,
+          "length" : 2
+        },
+        {
+          "activity" : "generate1",
+          "start" : 74,
+          "length" : 4
+        },
+        {
+          "activity" : "generate2",
+          "start" : 102,
+          "length" : 10
+        }
+      ]
+    },
+    {
+      "name" : "fsh-generated/resources/StructureDefinition-ihris-resource-relationships.json",
+      "size" : 6102,
+      "processes" : [
+        {
+          "activity" : "loadResources",
+          "start" : 40,
+          "length" : 16
+        },
+        {
+          "activity" : "load",
+          "start" : 41,
+          "length" : 20
+        },
+        {
+          "activity" : "generateSnapshots",
+          "start" : 43,
+          "length" : 109
+        },
+        {
+          "activity" : "generateNarratives",
+          "start" : 49,
+          "length" : 95
+        },
+        {
+          "activity" : "validate",
+          "start" : 57,
+          "length" : 222
+        },
+        {
+          "activity" : "checkConformanceResources",
+          "start" : 66,
+          "length" : 1
+        },
+        {
+          "activity" : "generate1",
+          "start" : 74,
+          "length" : 182
+        },
+        {
+          "activity" : "generate2",
+          "start" : 102,
+          "length" : 531
+        },
+        {
+          "activity" : "generateValidationPack",
+          "start" : 154,
+          "length" : 5
+        }
+      ]
+    },
+    {
+      "name" : "fsh-generated/resources/StructureDefinition-ihris-visualization-dataset.json",
+      "size" : 3585,
+      "processes" : [
+        {
+          "activity" : "loadResources",
+          "start" : 40,
+          "length" : 10
+        },
+        {
+          "activity" : "load",
+          "start" : 41,
+          "length" : 14
+        },
+        {
+          "activity" : "generateSnapshots",
+          "start" : 43,
+          "length" : 68
+        },
+        {
+          "activity" : "generateNarratives",
+          "start" : 49,
+          "length" : 55
+        },
+        {
+          "activity" : "validate",
+          "start" : 57,
+          "length" : 136
+        },
+        {
+          "activity" : "scanForUsageStats",
+          "start" : 66,
+          "length" : 1
+        },
+        {
+          "activity" : "generate1",
+          "start" : 74,
+          "length" : 99
+        },
+        {
+          "activity" : "generate2",
+          "start" : 103,
+          "length" : 314
+        },
+        {
+          "activity" : "generateValidationPack",
+          "start" : 154,
+          "length" : 4
+        }
+      ]
+    },
+    {
+      "name" : "fsh-generated/resources/StructureDefinition-ihris-practitioner-marital-status.json",
+      "size" : 2068,
+      "processes" : [
+        {
+          "activity" : "loadResources",
+          "start" : 40,
+          "length" : 5
+        },
+        {
+          "activity" : "load",
+          "start" : 41,
+          "length" : 13
+        },
+        {
+          "activity" : "generateSnapshots",
+          "start" : 43,
+          "length" : 20
+        },
+        {
+          "activity" : "generateNarratives",
+          "start" : 49,
+          "length" : 21
+        },
+        {
+          "activity" : "validate",
+          "start" : 57,
+          "length" : 47
+        },
+        {
+          "activity" : "generate1",
+          "start" : 74,
+          "length" : 41
+        },
+        {
+          "activity" : "generate2",
+          "start" : 103,
+          "length" : 154
+        },
+        {
+          "activity" : "generateValidationPack",
+          "start" : 154,
+          "length" : 1
+        }
+      ]
+    },
+    {
+      "name" : "fsh-generated/resources/Parameters-ihris-dashboard.json",
+      "size" : 1409,
+      "processes" : [
+        {
+          "activity" : "loadResources",
+          "start" : 40,
+          "length" : 3
+        },
+        {
+          "activity" : "validate",
+          "start" : 70,
+          "length" : 14
+        },
+        {
+          "activity" : "generate1",
+          "start" : 74,
+          "length" : 4
+        },
+        {
+          "activity" : "generate2",
+          "start" : 103,
+          "length" : 10
+        }
+      ]
+    },
+    {
+      "name" : "fsh-generated/resources/Basic-ihris-page-facility.json",
+      "size" : 2657,
+      "processes" : [
+        {
+          "activity" : "loadResources",
+          "start" : 40,
+          "length" : 6
+        },
+        {
+          "activity" : "generateNarratives",
+          "start" : 49,
+          "length" : 17
+        },
+        {
+          "activity" : "validate",
+          "start" : 70,
+          "length" : 85
+        },
+        {
+          "activity" : "generate1",
+          "start" : 74,
+          "length" : 12
+        },
+        {
+          "activity" : "generate2",
+          "start" : 103,
+          "length" : 11
+        }
+      ]
+    },
+    {
+      "name" : "fsh-generated/resources/StructureDefinition-ihris-practitioner-nationality.json",
+      "size" : 2039,
+      "processes" : [
+        {
+          "activity" : "loadResources",
+          "start" : 40,
+          "length" : 5
+        },
+        {
+          "activity" : "load",
+          "start" : 41,
+          "length" : 12
+        },
+        {
+          "activity" : "generateSnapshots",
+          "start" : 43,
+          "length" : 22
+        },
+        {
+          "activity" : "generateNarratives",
+          "start" : 49,
+          "length" : 25
+        },
+        {
+          "activity" : "validate",
+          "start" : 57,
+          "length" : 45
+        },
+        {
+          "activity" : "generate1",
+          "start" : 74,
+          "length" : 40
+        },
+        {
+          "activity" : "generate2",
+          "start" : 103,
+          "length" : 174
+        },
+        {
+          "activity" : "generateValidationPack",
+          "start" : 154,
+          "length" : 3
+        }
+      ]
+    },
+    {
+      "name" : "fsh-generated/resources/SearchParameter-basic-related-practitioner.json",
+      "size" : 562,
+      "processes" : [
+        {
+          "activity" : "loadResources",
+          "start" : 40,
+          "length" : 2
+        },
+        {
+          "activity" : "load",
+          "start" : 42,
+          "length" : 5
+        },
+        {
+          "activity" : "load",
+          "start" : 42,
+          "length" : 3
+        },
+        {
+          "activity" : "generateNarratives",
+          "start" : 49,
+          "length" : 5
+        },
+        {
+          "activity" : "validate",
+          "start" : 65,
+          "length" : 2
+        },
+        {
+          "activity" : "generate1",
+          "start" : 74,
+          "length" : 4
+        },
+        {
+          "activity" : "generate2",
+          "start" : 103,
+          "length" : 10
+        }
+      ]
+    },
+    {
+      "name" : "fsh-generated/resources/Basic-ihris-role-open.json",
+      "size" : 1309,
+      "processes" : [
+        {
+          "activity" : "loadResources",
+          "start" : 40,
+          "length" : 3
+        },
+        {
+          "activity" : "generateNarratives",
+          "start" : 49,
+          "length" : 7
+        },
+        {
+          "activity" : "validate",
+          "start" : 70,
+          "length" : 14
+        },
+        {
+          "activity" : "generate1",
+          "start" : 74,
+          "length" : 6
+        },
+        {
+          "activity" : "generate2",
+          "start" : 103,
+          "length" : 8
+        }
+      ]
+    },
+    {
+      "name" : "fsh-generated/resources/StructureDefinition-ihris-dashboard.json",
+      "size" : 2516,
+      "processes" : [
+        {
+          "activity" : "loadResources",
+          "start" : 40,
+          "length" : 6
+        },
+        {
+          "activity" : "load",
+          "start" : 41,
+          "length" : 9
+        },
+        {
+          "activity" : "generateSnapshots",
+          "start" : 43,
+          "length" : 54
+        },
+        {
+          "activity" : "generateNarratives",
+          "start" : 49,
+          "length" : 64
+        },
+        {
+          "activity" : "validate",
+          "start" : 57,
+          "length" : 90
+        },
+        {
+          "activity" : "generate1",
+          "start" : 74,
+          "length" : 85
+        },
+        {
+          "activity" : "generate2",
+          "start" : 103,
+          "length" : 537
+        },
+        {
+          "activity" : "generateValidationPack",
+          "start" : 154,
+          "length" : 4
+        },
+        {
+          "activity" : "scanProfilesForR5",
+          "start" : 196,
+          "length" : 1
+        },
+        {
+          "activity" : "scanExamplesForR5",
+          "start" : 196,
+          "length" : 1
+        }
+      ]
+    },
+    {
+      "name" : "fsh-generated/resources/Basic-ihris-task-read-structure-definition.json",
+      "size" : 787,
+      "processes" : [
+        {
+          "activity" : "loadResources",
+          "start" : 40,
+          "length" : 3
+        },
+        {
+          "activity" : "generateNarratives",
+          "start" : 50,
+          "length" : 5
+        },
+        {
+          "activity" : "validate",
+          "start" : 70,
+          "length" : 22
+        },
+        {
+          "activity" : "generate1",
+          "start" : 74,
+          "length" : 5
+        },
+        {
+          "activity" : "generate2",
+          "start" : 104,
+          "length" : 8
+        }
+      ]
+    },
+    {
+      "name" : "fsh-generated/resources/Basic-ihris-task-all-permissions-to-everything.json",
+      "size" : 774,
+      "processes" : [
+        {
+          "activity" : "loadResources",
+          "start" : 40,
+          "length" : 3
+        },
+        {
+          "activity" : "load-configure",
+          "start" : 41,
+          "length" : 1
+        },
+        {
+          "activity" : "generateNarratives",
+          "start" : 50,
+          "length" : 5
+        },
+        {
+          "activity" : "validate",
+          "start" : 70,
+          "length" : 27
+        },
+        {
+          "activity" : "generate1",
+          "start" : 74,
+          "length" : 5
+        },
+        {
+          "activity" : "generate2",
+          "start" : 104,
+          "length" : 7
+        }
+      ]
+    },
+    {
+      "name" : "fsh-generated/resources/Basic-ihris-page-location.json",
+      "size" : 2211,
+      "processes" : [
+        {
+          "activity" : "loadResources",
+          "start" : 40,
+          "length" : 5
+        },
+        {
+          "activity" : "checkR4R4B",
+          "start" : 47,
+          "length" : 1
+        },
+        {
+          "activity" : "generateNarratives",
+          "start" : 50,
+          "length" : 16
+        },
+        {
+          "activity" : "validate",
+          "start" : 70,
+          "length" : 89
+        },
+        {
+          "activity" : "generate1",
+          "start" : 74,
+          "length" : 10
+        },
+        {
+          "activity" : "generate2",
+          "start" : 104,
+          "length" : 10
+        },
+        {
+          "activity" : "generateExampleZip",
+          "start" : 152,
+          "length" : 1
+        }
+      ]
+    },
+    {
+      "name" : "fsh-generated/resources/Basic-ihris-task-navigation-leave.json",
+      "size" : 849,
+      "processes" : [
+        {
+          "activity" : "loadResources",
+          "start" : 40,
+          "length" : 2
+        },
+        {
+          "activity" : "generateNarratives",
+          "start" : 50,
+          "length" : 6
+        },
+        {
+          "activity" : "validate",
+          "start" : 70,
+          "length" : 35
+        },
+        {
+          "activity" : "generate1",
+          "start" : 74,
+          "length" : 5
+        },
+        {
+          "activity" : "generate2",
+          "start" : 104,
+          "length" : 7
+        }
+      ]
+    },
+    {
+      "name" : "fsh-generated/resources/Questionnaire-ihris-task.json",
+      "size" : 3142,
+      "processes" : [
+        {
+          "activity" : "loadResources",
+          "start" : 40,
+          "length" : 5
+        },
+        {
+          "activity" : "load",
+          "start" : 42,
+          "length" : 13
+        },
+        {
+          "activity" : "generateNarratives",
+          "start" : 50,
+          "length" : 14
+        },
+        {
+          "activity" : "validate",
+          "start" : 66,
+          "length" : 13
+        },
+        {
+          "activity" : "generate1",
+          "start" : 74,
+          "length" : 40
+        },
+        {
+          "activity" : "generate2",
+          "start" : 104,
+          "length" : 21
+        },
+        {
+          "activity" : "generateValidationPack",
+          "start" : 154,
+          "length" : 1
+        }
+      ]
+    },
+    {
+      "name" : "fsh-generated/resources/StructureDefinition-ihris-page-section.json",
+      "size" : 25933,
+      "processes" : [
+        {
+          "activity" : "loadResources",
+          "start" : 40,
+          "length" : 56
+        },
+        {
+          "activity" : "load",
+          "start" : 41,
+          "length" : 136
+        },
+        {
+          "activity" : "generateSnapshots",
+          "start" : 44,
+          "length" : 373
+        },
+        {
+          "activity" : "generateNarratives",
+          "start" : 50,
+          "length" : 455
+        },
+        {
+          "activity" : "validate",
+          "start" : 57,
+          "length" : 771
+        },
+        {
+          "activity" : "scanForUsageStats",
+          "start" : 66,
+          "length" : 2
+        },
+        {
+          "activity" : "generate1",
+          "start" : 74,
+          "length" : 708
+        },
+        {
+          "activity" : "generate2",
+          "start" : 104,
+          "length" : 1892
+        },
+        {
+          "activity" : "generateValidationPack",
+          "start" : 154,
+          "length" : 22
+        },
+        {
+          "activity" : "scanExamplesForR5",
+          "start" : 196,
+          "length" : 1
+        }
+      ]
+    },
+    {
+      "name" : "fsh-generated/resources/SearchParameter-performanceperiod-search.json",
+      "size" : 681,
+      "processes" : [
+        {
+          "activity" : "loadResources",
+          "start" : 40,
+          "length" : 9
+        },
+        {
+          "activity" : "load",
+          "start" : 42,
+          "length" : 5
+        },
+        {
+          "activity" : "load",
+          "start" : 42,
+          "length" : 3
+        },
+        {
+          "activity" : "generateNarratives",
+          "start" : 50,
+          "length" : 4
+        },
+        {
+          "activity" : "validate",
+          "start" : 65,
+          "length" : 2
+        },
+        {
+          "activity" : "generate1",
+          "start" : 75,
+          "length" : 4
+        },
+        {
+          "activity" : "generate2",
+          "start" : 106,
+          "length" : 8
+        },
+        {
+          "activity" : "generateValidationPack",
+          "start" : 154,
+          "length" : 1
+        }
+      ]
+    },
+    {
+      "name" : "fsh-generated/resources/SearchParameter-practitionerrole-related-location.json",
+      "size" : 593,
+      "processes" : [
+        {
+          "activity" : "loadResources",
+          "start" : 40,
+          "length" : 2
+        },
+        {
+          "activity" : "load",
+          "start" : 42,
+          "length" : 3
+        },
+        {
+          "activity" : "load",
+          "start" : 42,
+          "length" : 3
+        },
+        {
+          "activity" : "generateNarratives",
+          "start" : 50,
+          "length" : 4
+        },
+        {
+          "activity" : "validate",
+          "start" : 65,
+          "length" : 1
+        },
+        {
+          "activity" : "generate1",
+          "start" : 75,
+          "length" : 5
+        },
+        {
+          "activity" : "generate2",
+          "start" : 106,
+          "length" : 9
+        }
+      ]
+    },
+    {
+      "name" : "fsh-generated/resources/CodeSystem-ihris-document-category.json",
+      "size" : 562,
+      "processes" : [
+        {
+          "activity" : "loadResources",
+          "start" : 40,
+          "length" : 2
+        },
+        {
+          "activity" : "load",
+          "start" : 41,
+          "length" : 4
+        },
+        {
+          "activity" : "generateNarratives",
+          "start" : 50,
+          "length" : 3
+        },
+        {
+          "activity" : "validate",
+          "start" : 54,
+          "length" : 5
+        },
+        {
+          "activity" : "generate1",
+          "start" : 75,
+          "length" : 4
+        },
+        {
+          "activity" : "generate2",
+          "start" : 106,
+          "length" : 17
+        },
+        {
+          "activity" : "generateExampleZip",
+          "start" : 152,
+          "length" : 1
+        }
+      ]
+    },
+    {
+      "name" : "fsh-generated/resources/Basic-ihris-task-read-practitioner-role-resource.json",
+      "size" : 796,
+      "processes" : [
+        {
+          "activity" : "loadResources",
+          "start" : 40,
+          "length" : 3
+        },
+        {
+          "activity" : "generateNarratives",
+          "start" : 50,
+          "length" : 4
+        },
+        {
+          "activity" : "validate",
+          "start" : 70,
+          "length" : 28
+        },
+        {
+          "activity" : "generate1",
+          "start" : 75,
+          "length" : 5
+        },
+        {
+          "activity" : "generate2",
+          "start" : 106,
+          "length" : 7
+        }
+      ]
+    },
+    {
+      "name" : "fsh-generated/resources/Basic-ihris-task-read-practitioner-resource.json",
+      "size" : 782,
+      "processes" : [
+        {
+          "activity" : "loadResources",
+          "start" : 40,
+          "length" : 2
+        },
+        {
+          "activity" : "checkR4R4B",
+          "start" : 47,
+          "length" : 1
+        },
+        {
+          "activity" : "generateNarratives",
+          "start" : 50,
+          "length" : 4
+        },
+        {
+          "activity" : "validate",
+          "start" : 70,
+          "length" : 26
+        },
+        {
+          "activity" : "generate1",
+          "start" : 75,
+          "length" : 5
+        },
+        {
+          "activity" : "generate2",
+          "start" : 106,
+          "length" : 6
+        }
+      ]
+    },
+    {
+      "name" : "fsh-generated/resources/Basic-ihris-task-write-person-resource.json",
+      "size" : 948,
+      "processes" : [
+        {
+          "activity" : "loadResources",
+          "start" : 40,
+          "length" : 3
+        },
+        {
+          "activity" : "generateNarratives",
+          "start" : 50,
+          "length" : 5
+        },
+        {
+          "activity" : "validate",
+          "start" : 70,
+          "length" : 31
+        },
+        {
+          "activity" : "generate1",
+          "start" : 75,
+          "length" : 6
+        },
+        {
+          "activity" : "generate2",
+          "start" : 106,
+          "length" : 6
+        }
+      ]
+    },
+    {
+      "name" : "fsh-generated/resources/SearchParameter-position-status-search.json",
+      "size" : 692,
+      "processes" : [
+        {
+          "activity" : "loadResources",
+          "start" : 40,
+          "length" : 2
+        },
+        {
+          "activity" : "load",
+          "start" : 42,
+          "length" : 3
+        },
+        {
+          "activity" : "load",
+          "start" : 42,
+          "length" : 3
+        },
+        {
+          "activity" : "generateNarratives",
+          "start" : 50,
+          "length" : 4
+        },
+        {
+          "activity" : "validate",
+          "start" : 65,
+          "length" : 2
+        },
+        {
+          "activity" : "generate1",
+          "start" : 75,
+          "length" : 4
+        },
+        {
+          "activity" : "generate2",
+          "start" : 106,
+          "length" : 10
+        },
+        {
+          "activity" : "generateValidationPack",
+          "start" : 154,
+          "length" : 1
+        }
+      ]
+    },
+    {
+      "name" : "fsh-generated/resources/Basic-ihris-page-job.json",
+      "size" : 1801,
+      "processes" : [
+        {
+          "activity" : "loadResources",
+          "start" : 40,
+          "length" : 4
+        },
+        {
+          "activity" : "generateNarratives",
+          "start" : 50,
+          "length" : 12
+        },
+        {
+          "activity" : "validate",
+          "start" : 70,
+          "length" : 63
+        },
+        {
+          "activity" : "generate1",
+          "start" : 75,
+          "length" : 9
+        },
+        {
+          "activity" : "generate2",
+          "start" : 106,
+          "length" : 9
+        }
+      ]
+    },
+    {
+      "name" : "fsh-generated/resources/StructureDefinition-ihris-assign-task.json",
+      "size" : 2170,
+      "processes" : [
+        {
+          "activity" : "loadResources",
+          "start" : 40,
+          "length" : 6
+        },
+        {
+          "activity" : "load",
+          "start" : 41,
+          "length" : 9
+        },
+        {
+          "activity" : "generateSnapshots",
+          "start" : 44,
+          "length" : 34
+        },
+        {
+          "activity" : "generateNarratives",
+          "start" : 50,
+          "length" : 40
+        },
+        {
+          "activity" : "validate",
+          "start" : 58,
+          "length" : 58
+        },
+        {
+          "activity" : "generate1",
+          "start" : 75,
+          "length" : 67
+        },
+        {
+          "activity" : "generate2",
+          "start" : 106,
+          "length" : 202
+        },
+        {
+          "activity" : "generateValidationPack",
+          "start" : 154,
+          "length" : 2
+        }
+      ]
+    },
+    {
+      "name" : "fsh-generated/resources/StructureDefinition-ihris-module.json",
+      "size" : 3925,
+      "processes" : [
+        {
+          "activity" : "loadResources",
+          "start" : 40,
+          "length" : 10
+        },
+        {
+          "activity" : "load",
+          "start" : 41,
+          "length" : 15
+        },
+        {
+          "activity" : "generateSnapshots",
+          "start" : 44,
+          "length" : 149
+        },
+        {
+          "activity" : "generateNarratives",
+          "start" : 50,
+          "length" : 159
+        },
+        {
+          "activity" : "validate",
+          "start" : 58,
+          "length" : 242
+        },
+        {
+          "activity" : "scanForUsageStats",
+          "start" : 66,
+          "length" : 1
+        },
+        {
+          "activity" : "generate1",
+          "start" : 75,
+          "length" : 257
+        },
+        {
+          "activity" : "generate2",
+          "start" : 106,
+          "length" : 1007
+        },
+        {
+          "activity" : "generateValidationPack",
+          "start" : 154,
+          "length" : 7
+        },
+        {
+          "activity" : "scanExamplesForR5",
+          "start" : 196,
+          "length" : 1
+        }
+      ]
+    },
+    {
+      "name" : "fsh-generated/resources/CodeSystem-ihris-resource-codesystem.json",
+      "size" : 1473,
+      "processes" : [
+        {
+          "activity" : "loadResources",
+          "start" : 40,
+          "length" : 4
+        },
+        {
+          "activity" : "load",
+          "start" : 41,
+          "length" : 7
+        },
+        {
+          "activity" : "generateNarratives",
+          "start" : 50,
+          "length" : 5
+        },
+        {
+          "activity" : "validate",
+          "start" : 54,
+          "length" : 8
+        },
+        {
+          "activity" : "validate",
+          "start" : 58,
+          "length" : 1
+        },
+        {
+          "activity" : "generate1",
+          "start" : 75,
+          "length" : 8
+        },
+        {
+          "activity" : "generate2",
+          "start" : 107,
+          "length" : 18
+        },
+        {
+          "activity" : "generateValidationPack",
+          "start" : 154,
+          "length" : 1
+        }
+      ]
+    },
+    {
+      "name" : "fsh-generated/resources/StructureDefinition-ihris-report.json",
+      "size" : 1802,
+      "processes" : [
+        {
+          "activity" : "loadResources",
+          "start" : 40,
+          "length" : 4
+        },
+        {
+          "activity" : "load",
+          "start" : 41,
+          "length" : 7
+        },
+        {
+          "activity" : "generateSnapshots",
+          "start" : 44,
+          "length" : 65
+        },
+        {
+          "activity" : "generateNarratives",
+          "start" : 50,
+          "length" : 41
+        },
+        {
+          "activity" : "validate",
+          "start" : 58,
+          "length" : 54
+        },
+        {
+          "activity" : "generate1",
+          "start" : 75,
+          "length" : 69
+        },
+        {
+          "activity" : "generate2",
+          "start" : 107,
+          "length" : 299
+        },
+        {
+          "activity" : "generateValidationPack",
+          "start" : 154,
+          "length" : 2
+        }
+      ]
+    },
+    {
+      "name" : "fsh-generated/resources/Basic-ihris-page-salary-grade.json",
+      "size" : 1449,
+      "processes" : [
+        {
+          "activity" : "loadResources",
+          "start" : 40,
+          "length" : 4
+        },
+        {
+          "activity" : "generateNarratives",
+          "start" : 50,
+          "length" : 11
+        },
+        {
+          "activity" : "validate",
+          "start" : 70,
+          "length" : 34
+        },
+        {
+          "activity" : "generate1",
+          "start" : 75,
+          "length" : 7
+        },
+        {
+          "activity" : "generate2",
+          "start" : 108,
+          "length" : 9
+        }
+      ]
+    },
+    {
+      "name" : "fsh-generated/resources/Basic-ihris-page-cadre.json",
+      "size" : 1421,
+      "processes" : [
+        {
+          "activity" : "loadResources",
+          "start" : 40,
+          "length" : 4
+        },
+        {
+          "activity" : "generateNarratives",
+          "start" : 50,
+          "length" : 9
+        },
+        {
+          "activity" : "validate",
+          "start" : 70,
+          "length" : 34
+        },
+        {
+          "activity" : "generate1",
+          "start" : 75,
+          "length" : 8
+        },
+        {
+          "activity" : "generate2",
+          "start" : 108,
+          "length" : 8
+        }
+      ]
+    },
+    {
+      "name" : "fsh-generated/resources/Basic-ihris-role-admin.json",
+      "size" : 938,
+      "processes" : [
+        {
+          "activity" : "loadResources",
+          "start" : 40,
+          "length" : 3
+        },
+        {
+          "activity" : "generateNarratives",
+          "start" : 50,
+          "length" : 5
+        },
+        {
+          "activity" : "validate",
+          "start" : 70,
+          "length" : 7
+        },
+        {
+          "activity" : "generate1",
+          "start" : 75,
+          "length" : 7
+        },
+        {
+          "activity" : "generate2",
+          "start" : 108,
+          "length" : 6
+        }
+      ]
+    },
+    {
+      "name" : "fsh-generated/resources/SearchParameter-practitioner-employeeNumber.json",
+      "size" : 508,
+      "processes" : [
+        {
+          "activity" : "loadResources",
+          "start" : 40,
+          "length" : 2
+        },
+        {
+          "activity" : "load-configure",
+          "start" : 41,
+          "length" : 1
+        },
+        {
+          "activity" : "load",
+          "start" : 42,
+          "length" : 3
+        },
+        {
+          "activity" : "load",
+          "start" : 42,
+          "length" : 3
+        },
+        {
+          "activity" : "checkR4R4B",
+          "start" : 47,
+          "length" : 1
+        },
+        {
+          "activity" : "generateNarratives",
+          "start" : 50,
+          "length" : 4
+        },
+        {
+          "activity" : "validate",
+          "start" : 65,
+          "length" : 3
+        },
+        {
+          "activity" : "generate1",
+          "start" : 75,
+          "length" : 4
+        },
+        {
+          "activity" : "generate2",
+          "start" : 108,
+          "length" : 11
+        }
+      ]
+    },
+    {
+      "name" : "fsh-generated/resources/StructureDefinition-ihris-facility-information-details.json",
+      "size" : 4733,
+      "processes" : [
+        {
+          "activity" : "loadResources",
+          "start" : 40,
+          "length" : 14
+        },
+        {
+          "activity" : "load",
+          "start" : 41,
+          "length" : 16
+        },
+        {
+          "activity" : "generateSnapshots",
+          "start" : 44,
+          "length" : 69
+        },
+        {
+          "activity" : "generateNarratives",
+          "start" : 50,
+          "length" : 78
+        },
+        {
+          "activity" : "validate",
+          "start" : 58,
+          "length" : 113
+        },
+        {
+          "activity" : "generate1",
+          "start" : 75,
+          "length" : 152
+        },
+        {
+          "activity" : "generate2",
+          "start" : 108,
+          "length" : 394
+        },
+        {
+          "activity" : "generateValidationPack",
+          "start" : 154,
+          "length" : 4
+        },
+        {
+          "activity" : "scanProfilesForR5",
+          "start" : 196,
+          "length" : 1
+        },
+        {
+          "activity" : "scanExamplesForR5",
+          "start" : 196,
+          "length" : 1
+        }
+      ]
+    },
+    {
+      "name" : "fsh-generated/resources/Basic-ihris-task-write-code-system.json",
+      "size" : 940,
+      "processes" : [
+        {
+          "activity" : "loadResources",
+          "start" : 40,
+          "length" : 3
+        },
+        {
+          "activity" : "generateNarratives",
+          "start" : 50,
+          "length" : 4
+        },
+        {
+          "activity" : "validate",
+          "start" : 70,
+          "length" : 20
+        },
+        {
+          "activity" : "generate1",
+          "start" : 75,
+          "length" : 8
+        },
+        {
+          "activity" : "generate2",
+          "start" : 108,
+          "length" : 8
+        }
+      ]
+    },
+    {
+      "name" : "fsh-generated/resources/StructureDefinition-ihris-practitioner.json",
+      "size" : 10791,
+      "processes" : [
+        {
+          "activity" : "loadResources",
+          "start" : 40,
+          "length" : 25
+        },
+        {
+          "activity" : "load",
+          "start" : 41,
+          "length" : 39
+        },
+        {
+          "activity" : "generateSnapshots",
+          "start" : 44,
+          "length" : 263
+        },
+        {
+          "activity" : "generateNarratives",
+          "start" : 50,
+          "length" : 245
+        },
+        {
+          "activity" : "validate",
+          "start" : 58,
+          "length" : 377
+        },
+        {
+          "activity" : "scanForUsageStats",
+          "start" : 66,
+          "length" : 1
+        },
+        {
+          "activity" : "generate1",
+          "start" : 75,
+          "length" : 443
+        },
+        {
+          "activity" : "generate2",
+          "start" : 108,
+          "length" : 1518
+        },
+        {
+          "activity" : "generateValidationPack",
+          "start" : 154,
+          "length" : 11
+        },
+        {
+          "activity" : "scanExamplesForR5",
+          "start" : 196,
+          "length" : 1
+        }
+      ]
+    },
+    {
+      "name" : "fsh-generated/resources/CodeSystem-ihris-task-permission.json",
+      "size" : 1038,
+      "processes" : [
+        {
+          "activity" : "loadResources",
+          "start" : 40,
+          "length" : 3
+        },
+        {
+          "activity" : "load",
+          "start" : 41,
+          "length" : 5
+        },
+        {
+          "activity" : "generateNarratives",
+          "start" : 51,
+          "length" : 8
+        },
+        {
+          "activity" : "validate",
+          "start" : 54,
+          "length" : 7
+        },
+        {
+          "activity" : "generate1",
+          "start" : 76,
+          "length" : 7
+        },
+        {
+          "activity" : "generate2",
+          "start" : 109,
+          "length" : 15
+        },
+        {
+          "activity" : "generateValidationPack",
+          "start" : 154,
+          "length" : 1
+        }
+      ]
+    },
+    {
+      "name" : "fsh-generated/resources/StructureDefinition-ihris-practitioner-language-proficiency.json",
+      "size" : 3928,
+      "processes" : [
+        {
+          "activity" : "loadResources",
+          "start" : 40,
+          "length" : 10
+        },
+        {
+          "activity" : "load",
+          "start" : 41,
+          "length" : 16
+        },
+        {
+          "activity" : "generateSnapshots",
+          "start" : 44,
+          "length" : 66
+        },
+        {
+          "activity" : "generateNarratives",
+          "start" : 51,
+          "length" : 62
+        },
+        {
+          "activity" : "validate",
+          "start" : 59,
+          "length" : 184
+        },
+        {
+          "activity" : "scanForUsageStats",
+          "start" : 66,
+          "length" : 1
+        },
+        {
+          "activity" : "generate1",
+          "start" : 76,
+          "length" : 113
+        },
+        {
+          "activity" : "generate2",
+          "start" : 110,
+          "length" : 309
+        },
+        {
+          "activity" : "generateValidationPack",
+          "start" : 154,
+          "length" : 3
+        }
+      ]
+    },
+    {
+      "name" : "fsh-generated/resources/StructureDefinition-ihris-questionnaire.json",
+      "size" : 6323,
+      "processes" : [
+        {
+          "activity" : "loadResources",
+          "start" : 40,
+          "length" : 12
+        },
+        {
+          "activity" : "load",
+          "start" : 41,
+          "length" : 21
+        },
+        {
+          "activity" : "generateSnapshots",
+          "start" : 45,
+          "length" : 568
+        },
+        {
+          "activity" : "generateNarratives",
+          "start" : 51,
+          "length" : 476
+        },
+        {
+          "activity" : "validate",
+          "start" : 59,
+          "length" : 1279
+        },
+        {
+          "activity" : "checkConformanceResources",
+          "start" : 66,
+          "length" : 1
+        },
+        {
+          "activity" : "scanForUsageStats",
+          "start" : 66,
+          "length" : 2
+        },
+        {
+          "activity" : "generate1",
+          "start" : 76,
+          "length" : 817
+        },
+        {
+          "activity" : "generate2",
+          "start" : 110,
+          "length" : 4408
+        },
+        {
+          "activity" : "generateValidationPack",
+          "start" : 154,
+          "length" : 26
+        },
+        {
+          "activity" : "scanExamplesForR5",
+          "start" : 196,
+          "length" : 1
+        }
+      ]
+    },
+    {
+      "name" : "fsh-generated/resources/CodeSystem-ihris-task-resource.json",
+      "size" : 1463,
+      "processes" : [
+        {
+          "activity" : "loadResources",
+          "start" : 40,
+          "length" : 5
+        },
+        {
+          "activity" : "load",
+          "start" : 41,
+          "length" : 9
+        },
+        {
+          "activity" : "generateNarratives",
+          "start" : 51,
+          "length" : 7
+        },
+        {
+          "activity" : "validate",
+          "start" : 54,
+          "length" : 8
+        },
+        {
+          "activity" : "generate1",
+          "start" : 77,
+          "length" : 12
+        },
+        {
+          "activity" : "generate2",
+          "start" : 114,
+          "length" : 16
+        },
+        {
+          "activity" : "generateValidationPack",
+          "start" : 154,
+          "length" : 1
+        }
+      ]
+    },
+    {
+      "name" : "fsh-generated/resources/StructureDefinition-ihris-assign-role.json",
+      "size" : 2237,
+      "processes" : [
+        {
+          "activity" : "loadResources",
+          "start" : 40,
+          "length" : 6
+        },
+        {
+          "activity" : "load",
+          "start" : 41,
+          "length" : 10
+        },
+        {
+          "activity" : "generateSnapshots",
+          "start" : 45,
+          "length" : 35
+        },
+        {
+          "activity" : "generateNarratives",
+          "start" : 51,
+          "length" : 34
+        },
+        {
+          "activity" : "validate",
+          "start" : 60,
+          "length" : 65
+        },
+        {
+          "activity" : "generate1",
+          "start" : 77,
+          "length" : 83
+        },
+        {
+          "activity" : "generate2",
+          "start" : 114,
+          "length" : 211
+        },
+        {
+          "activity" : "generateValidationPack",
+          "start" : 154,
+          "length" : 3
+        },
+        {
+          "activity" : "scanExamplesForR5",
+          "start" : 196,
+          "length" : 1
+        }
+      ]
+    },
+    {
+      "name" : "fsh-generated/resources/StructureDefinition-ihris-jurisdiction.json",
+      "size" : 3424,
+      "processes" : [
+        {
+          "activity" : "loadResources",
+          "start" : 40,
+          "length" : 8
+        },
+        {
+          "activity" : "load",
+          "start" : 41,
+          "length" : 13
+        },
+        {
+          "activity" : "generateSnapshots",
+          "start" : 45,
+          "length" : 107
+        },
+        {
+          "activity" : "generateNarratives",
+          "start" : 51,
+          "length" : 116
+        },
+        {
+          "activity" : "validate",
+          "start" : 60,
+          "length" : 208
+        },
+        {
+          "activity" : "scanForUsageStats",
+          "start" : 66,
+          "length" : 1
+        },
+        {
+          "activity" : "generate1",
+          "start" : 77,
+          "length" : 177
+        },
+        {
+          "activity" : "generate2",
+          "start" : 114,
+          "length" : 703
+        },
+        {
+          "activity" : "generateValidationPack",
+          "start" : 154,
+          "length" : 9
+        },
+        {
+          "activity" : "scanProfilesForR5",
+          "start" : 196,
+          "length" : 1
+        }
+      ]
+    },
+    {
+      "name" : "fsh-generated/resources/StructureDefinition-ihris-dashboard-visualization.json",
+      "size" : 10634,
+      "processes" : [
+        {
+          "activity" : "loadResources",
+          "start" : 40,
+          "length" : 26
+        },
+        {
+          "activity" : "load",
+          "start" : 41,
+          "length" : 35
+        },
+        {
+          "activity" : "generateSnapshots",
+          "start" : 45,
+          "length" : 178
+        },
+        {
+          "activity" : "generateNarratives",
+          "start" : 51,
+          "length" : 151
+        },
+        {
+          "activity" : "validate",
+          "start" : 60,
+          "length" : 254
+        },
+        {
+          "activity" : "scanForUsageStats",
+          "start" : 66,
+          "length" : 1
+        },
+        {
+          "activity" : "generate1",
+          "start" : 77,
+          "length" : 295
+        },
+        {
+          "activity" : "generate2",
+          "start" : 115,
+          "length" : 725
+        },
+        {
+          "activity" : "generateValidationPack",
+          "start" : 154,
+          "length" : 12
+        },
+        {
+          "activity" : "scanExamplesForR5",
+          "start" : 196,
+          "length" : 1
+        }
+      ]
+    },
+    {
+      "name" : "fsh-generated/resources/StructureDefinition-iHRISReportDetails.json",
+      "size" : 9921,
+      "processes" : [
+        {
+          "activity" : "loadResources",
+          "start" : 40,
+          "length" : 23
+        },
+        {
+          "activity" : "load",
+          "start" : 42,
+          "length" : 31
+        },
+        {
+          "activity" : "generateSnapshots",
+          "start" : 45,
+          "length" : 138
+        },
+        {
+          "activity" : "generateNarratives",
+          "start" : 52,
+          "length" : 159
+        },
+        {
+          "activity" : "validate",
+          "start" : 61,
+          "length" : 173
+        },
+        {
+          "activity" : "generate1",
+          "start" : 77,
+          "length" : 282
+        },
+        {
+          "activity" : "generate2",
+          "start" : 116,
+          "length" : 618
+        },
+        {
+          "activity" : "generateValidationPack",
+          "start" : 154,
+          "length" : 13
+        }
+      ]
+    },
+    {
+      "name" : "fsh-generated/resources/StructureDefinition-ihris-practitioner-role.json",
+      "size" : 5174,
+      "processes" : [
+        {
+          "activity" : "loadResources",
+          "start" : 40,
+          "length" : 12
+        },
+        {
+          "activity" : "load",
+          "start" : 42,
+          "length" : 15
+        },
+        {
+          "activity" : "generateSnapshots",
+          "start" : 46,
+          "length" : 206
+        },
+        {
+          "activity" : "generateNarratives",
+          "start" : 52,
+          "length" : 156
+        },
+        {
+          "activity" : "validate",
+          "start" : 61,
+          "length" : 2056
+        },
+        {
+          "activity" : "scanForUsageStats",
+          "start" : 66,
+          "length" : 1
+        },
+        {
+          "activity" : "generate1",
+          "start" : 78,
+          "length" : 266
+        },
+        {
+          "activity" : "generate2",
+          "start" : 116,
+          "length" : 988
+        },
+        {
+          "activity" : "generateValidationPack",
+          "start" : 154,
+          "length" : 12
+        },
+        {
+          "activity" : "scanExamplesForR5",
+          "start" : 196,
+          "length" : 1
+        }
+      ]
+    },
+    {
+      "name" : "fsh-generated/resources/Questionnaire-ihris-endrole.json",
+      "size" : 1511,
+      "processes" : [
+        {
+          "activity" : "loadResources",
+          "start" : 40,
+          "length" : 3
+        },
+        {
+          "activity" : "load",
+          "start" : 42,
+          "length" : 5
+        },
+        {
+          "activity" : "generateNarratives",
+          "start" : 52,
+          "length" : 7
+        },
+        {
+          "activity" : "validate",
+          "start" : 66,
+          "length" : 8
+        },
+        {
+          "activity" : "generate1",
+          "start" : 78,
+          "length" : 27
+        },
+        {
+          "activity" : "generate2",
+          "start" : 117,
+          "length" : 489
+        },
+        {
+          "activity" : "generateValidationPack",
+          "start" : 154,
+          "length" : 2
+        }
+      ]
+    },
+    {
+      "name" : "fsh-generated/resources/Basic-ihris-task-write-questionnaire-leave.json",
+      "size" : 1049,
+      "processes" : [
+        {
+          "activity" : "loadResources",
+          "start" : 40,
+          "length" : 3
+        },
+        {
+          "activity" : "checkR4R4B",
+          "start" : 47,
+          "length" : 1
+        },
+        {
+          "activity" : "generateNarratives",
+          "start" : 52,
+          "length" : 5
+        },
+        {
+          "activity" : "validate",
+          "start" : 70,
+          "length" : 26
+        },
+        {
+          "activity" : "generate1",
+          "start" : 78,
+          "length" : 7
+        },
+        {
+          "activity" : "generate2",
+          "start" : 118,
+          "length" : 22
+        }
+      ]
+    },
+    {
+      "name" : "fsh-generated/resources/ValueSet-ihris-facility-type.json",
+      "size" : 423,
+      "processes" : [
+        {
+          "activity" : "loadResources",
+          "start" : 40,
+          "length" : 2
+        },
+        {
+          "activity" : "load",
+          "start" : 41,
+          "length" : 4
+        },
+        {
+          "activity" : "generateNarratives",
+          "start" : 52,
+          "length" : 3
+        },
+        {
+          "activity" : "validate",
+          "start" : 54,
+          "length" : 3
+        },
+        {
+          "activity" : "generate1",
+          "start" : 78,
+          "length" : 3
+        },
+        {
+          "activity" : "generate2",
+          "start" : 118,
+          "length" : 29
+        }
+      ]
+    },
+    {
+      "name" : "fsh-generated/resources/SearchParameter-leavetype-search.json",
+      "size" : 658,
+      "processes" : [
+        {
+          "activity" : "loadResources",
+          "start" : 40,
+          "length" : 2
+        },
+        {
+          "activity" : "load-configure",
+          "start" : 41,
+          "length" : 1
+        },
+        {
+          "activity" : "load",
+          "start" : 42,
+          "length" : 3
+        },
+        {
+          "activity" : "load",
+          "start" : 42,
+          "length" : 3
+        },
+        {
+          "activity" : "generateNarratives",
+          "start" : 52,
+          "length" : 4
+        },
+        {
+          "activity" : "validate",
+          "start" : 65,
+          "length" : 1
+        },
+        {
+          "activity" : "generate1",
+          "start" : 78,
+          "length" : 4
+        },
+        {
+          "activity" : "generate2",
+          "start" : 118,
+          "length" : 10
+        }
+      ]
+    },
+    {
+      "name" : "fsh-generated/resources/Basic-ihris-task-read-questionnaire-leave.json",
+      "size" : 1046,
+      "processes" : [
+        {
+          "activity" : "loadResources",
+          "start" : 40,
+          "length" : 3
+        },
+        {
+          "activity" : "generateNarratives",
+          "start" : 52,
+          "length" : 5
+        },
+        {
+          "activity" : "validate",
+          "start" : 70,
+          "length" : 27
+        },
+        {
+          "activity" : "generate1",
+          "start" : 78,
+          "length" : 6
+        },
+        {
+          "activity" : "generate2",
+          "start" : 118,
+          "length" : 7
+        }
+      ]
+    },
+    {
+      "name" : "fsh-generated/resources/ValueSet-ihris-resource-valueset.json",
+      "size" : 403,
+      "processes" : [
+        {
+          "activity" : "loadResources",
+          "start" : 40,
+          "length" : 2
+        },
+        {
+          "activity" : "load",
+          "start" : 41,
+          "length" : 3
+        },
+        {
+          "activity" : "generateNarratives",
+          "start" : 52,
+          "length" : 3
+        },
+        {
+          "activity" : "validate",
+          "start" : 54,
+          "length" : 4
+        },
+        {
+          "activity" : "generate1",
+          "start" : 78,
+          "length" : 3
+        },
+        {
+          "activity" : "generate2",
+          "start" : 118,
+          "length" : 26
+        },
+        {
+          "activity" : "generateValidationPack",
+          "start" : 154,
+          "length" : 1
+        }
+      ]
+    },
+    {
+      "name" : "fsh-generated/resources/StructureDefinition-iHRISReportLink.json",
+      "size" : 9083,
+      "processes" : [
+        {
+          "activity" : "loadResources",
+          "start" : 40,
+          "length" : 22
+        },
+        {
+          "activity" : "load",
+          "start" : 42,
+          "length" : 26
+        },
+        {
+          "activity" : "generateSnapshots",
+          "start" : 46,
+          "length" : 130
+        },
+        {
+          "activity" : "generateNarratives",
+          "start" : 52,
+          "length" : 146
+        },
+        {
+          "activity" : "validate",
+          "start" : 63,
+          "length" : 188
+        },
+        {
+          "activity" : "scanForUsageStats",
+          "start" : 66,
+          "length" : 1
+        },
+        {
+          "activity" : "generate1",
+          "start" : 78,
+          "length" : 261
+        },
+        {
+          "activity" : "generate2",
+          "start" : 118,
+          "length" : 772
+        },
+        {
+          "activity" : "generateValidationPack",
+          "start" : 154,
+          "length" : 6
+        }
+      ]
+    },
+    {
+      "name" : "fsh-generated/resources/Basic-ihris-task-write-questionnaire-resource.json",
+      "size" : 976,
+      "processes" : [
+        {
+          "activity" : "loadResources",
+          "start" : 40,
+          "length" : 3
+        },
+        {
+          "activity" : "generateNarratives",
+          "start" : 52,
+          "length" : 4
+        },
+        {
+          "activity" : "validate",
+          "start" : 70,
+          "length" : 22
+        },
+        {
+          "activity" : "generate1",
+          "start" : 78,
+          "length" : 6
+        },
+        {
+          "activity" : "generate2",
+          "start" : 119,
+          "length" : 7
+        }
+      ]
+    },
+    {
+      "name" : "fsh-generated/resources/StructureDefinition-iHRISRelationship.json",
+      "size" : 2220,
+      "processes" : [
+        {
+          "activity" : "loadResources",
+          "start" : 40,
+          "length" : 6
+        },
+        {
+          "activity" : "load",
+          "start" : 42,
+          "length" : 11
+        },
+        {
+          "activity" : "generateSnapshots",
+          "start" : 46,
+          "length" : 44
+        },
+        {
+          "activity" : "generateNarratives",
+          "start" : 52,
+          "length" : 43
+        },
+        {
+          "activity" : "validate",
+          "start" : 63,
+          "length" : 57
+        },
+        {
+          "activity" : "generate1",
+          "start" : 78,
+          "length" : 77
+        },
+        {
+          "activity" : "generate2",
+          "start" : 119,
+          "length" : 273
+        },
+        {
+          "activity" : "generateValidationPack",
+          "start" : 154,
+          "length" : 2
+        },
+        {
+          "activity" : "scanProfilesForR5",
+          "start" : 196,
+          "length" : 1
+        }
+      ]
+    },
+    {
+      "name" : "fsh-generated/resources/SearchParameter-practitioner-birthdate.json",
+      "size" : 451,
+      "processes" : [
+        {
+          "activity" : "loadResources",
+          "start" : 40,
+          "length" : 2
+        },
+        {
+          "activity" : "scan",
+          "start" : 41,
+          "length" : 1
+        },
+        {
+          "activity" : "load",
+          "start" : 42,
+          "length" : 3
+        },
+        {
+          "activity" : "load",
+          "start" : 42,
+          "length" : 2
+        },
+        {
+          "activity" : "generateNarratives",
+          "start" : 52,
+          "length" : 4
+        },
+        {
+          "activity" : "validate",
+          "start" : 65,
+          "length" : 2
+        },
+        {
+          "activity" : "generate1",
+          "start" : 78,
+          "length" : 4
+        },
+        {
+          "activity" : "generate2",
+          "start" : 119,
+          "length" : 9
+        },
+        {
+          "activity" : "generateValidationPack",
+          "start" : 154,
+          "length" : 1
+        }
+      ]
+    },
+    {
+      "name" : "fsh-generated/resources/Basic-ihris-task-read-document-reference.json",
+      "size" : 906,
+      "processes" : [
+        {
+          "activity" : "loadResources",
+          "start" : 40,
+          "length" : 4
+        },
+        {
+          "activity" : "generateNarratives",
+          "start" : 52,
+          "length" : 4
+        },
+        {
+          "activity" : "validate",
+          "start" : 70,
+          "length" : 24
+        },
+        {
+          "activity" : "generate1",
+          "start" : 78,
+          "length" : 6
+        },
+        {
+          "activity" : "generate2",
+          "start" : 119,
+          "length" : 6
+        }
+      ]
+    },
+    {
+      "name" : "fsh-generated/resources/StructureDefinition-ihris-visualization-categories.json",
+      "size" : 6136,
+      "processes" : [
+        {
+          "activity" : "loadResources",
+          "start" : 40,
+          "length" : 16
+        },
+        {
+          "activity" : "load",
+          "start" : 42,
+          "length" : 34
+        },
+        {
+          "activity" : "generateSnapshots",
+          "start" : 46,
+          "length" : 79
+        },
+        {
+          "activity" : "generateNarratives",
+          "start" : 52,
+          "length" : 87
+        },
+        {
+          "activity" : "validate",
+          "start" : 63,
+          "length" : 125
+        },
+        {
+          "activity" : "generate1",
+          "start" : 78,
+          "length" : 166
+        },
+        {
+          "activity" : "generate2",
+          "start" : 119,
+          "length" : 403
+        },
+        {
+          "activity" : "generateExampleZip",
+          "start" : 153,
+          "length" : 1
+        },
+        {
+          "activity" : "generateValidationPack",
+          "start" : 154,
+          "length" : 4
+        },
+        {
+          "activity" : "scanExamplesForR5",
+          "start" : 196,
+          "length" : 1
+        }
+      ]
+    },
+    {
+      "name" : "fsh-generated/resources/SearchParameter-employment-status-search.json",
+      "size" : 706,
+      "processes" : [
+        {
+          "activity" : "loadResources",
+          "start" : 41,
+          "length" : 2
+        },
+        {
+          "activity" : "load",
+          "start" : 42,
+          "length" : 3
+        },
+        {
+          "activity" : "load",
+          "start" : 42,
+          "length" : 3
+        },
+        {
+          "activity" : "generateNarratives",
+          "start" : 52,
+          "length" : 4
+        },
+        {
+          "activity" : "validate",
+          "start" : 65,
+          "length" : 2
+        },
+        {
+          "activity" : "generate1",
+          "start" : 79,
+          "length" : 5
+        },
+        {
+          "activity" : "generate2",
+          "start" : 120,
+          "length" : 8
+        },
+        {
+          "activity" : "generateValidationPack",
+          "start" : 154,
+          "length" : 1
+        }
+      ]
+    },
+    {
+      "name" : "fsh-generated/resources/Basic-ihris-task-read-location-resource.json",
+      "size" : 770,
+      "processes" : [
+        {
+          "activity" : "loadResources",
+          "start" : 41,
+          "length" : 2
+        },
+        {
+          "activity" : "generateNarratives",
+          "start" : 52,
+          "length" : 4
+        },
+        {
+          "activity" : "validate",
+          "start" : 70,
+          "length" : 23
+        },
+        {
+          "activity" : "generate1",
+          "start" : 79,
+          "length" : 5
+        },
+        {
+          "activity" : "generate2",
+          "start" : 120,
+          "length" : 6
+        }
+      ]
+    },
+    {
+      "name" : "fsh-generated/resources/StructureDefinition-ihris-facility.json",
+      "size" : 6065,
+      "processes" : [
+        {
+          "activity" : "loadResources",
+          "start" : 41,
+          "length" : 14
+        },
+        {
+          "activity" : "load",
+          "start" : 42,
+          "length" : 38
+        },
+        {
+          "activity" : "generateSnapshots",
+          "start" : 46,
+          "length" : 199
+        },
+        {
+          "activity" : "generateNarratives",
+          "start" : 52,
+          "length" : 205
+        },
+        {
+          "activity" : "validate",
+          "start" : 63,
+          "length" : 280
+        },
+        {
+          "activity" : "scanForUsageStats",
+          "start" : 66,
+          "length" : 1
+        },
+        {
+          "activity" : "generate1",
+          "start" : 79,
+          "length" : 369
+        },
+        {
+          "activity" : "generate2",
+          "start" : 120,
+          "length" : 1564
+        },
+        {
+          "activity" : "generateValidationPack",
+          "start" : 154,
+          "length" : 9
+        }
+      ]
+    },
+    {
+      "name" : "fsh-generated/resources/Basic-ihris-page-shift.json",
+      "size" : 1722,
+      "processes" : [
+        {
+          "activity" : "loadResources",
+          "start" : 41,
+          "length" : 4
+        },
+        {
+          "activity" : "checkR4R4B",
+          "start" : 47,
+          "length" : 1
+        },
+        {
+          "activity" : "generateNarratives",
+          "start" : 52,
+          "length" : 8
+        },
+        {
+          "activity" : "validate",
+          "start" : 70,
+          "length" : 58
+        },
+        {
+          "activity" : "generate1",
+          "start" : 79,
+          "length" : 9
+        },
+        {
+          "activity" : "generate2",
+          "start" : 121,
+          "length" : 7
+        }
+      ]
+    },
+    {
+      "name" : "fsh-generated/resources/StructureDefinition-iHRISReportElement.json",
+      "size" : 8109,
+      "processes" : [
+        {
+          "activity" : "loadResources",
+          "start" : 41,
+          "length" : 21
+        },
+        {
+          "activity" : "load",
+          "start" : 42,
+          "length" : 34
+        },
+        {
+          "activity" : "generateSnapshots",
+          "start" : 46,
+          "length" : 113
+        },
+        {
+          "activity" : "generateNarratives",
+          "start" : 52,
+          "length" : 134
+        },
+        {
+          "activity" : "validate",
+          "start" : 64,
+          "length" : 184
+        },
+        {
+          "activity" : "scanForUsageStats",
+          "start" : 66,
+          "length" : 1
+        },
+        {
+          "activity" : "generate1",
+          "start" : 79,
+          "length" : 238
+        },
+        {
+          "activity" : "generate2",
+          "start" : 121,
+          "length" : 520
+        },
+        {
+          "activity" : "generateValidationPack",
+          "start" : 154,
+          "length" : 6
+        },
+        {
+          "activity" : "scanExamplesForR5",
+          "start" : 196,
+          "length" : 1
+        }
+      ]
+    },
+    {
+      "name" : "fsh-generated/resources/SearchParameter-gofr-search-isbroadcast.json",
+      "size" : 676,
+      "processes" : [
+        {
+          "activity" : "loadResources",
+          "start" : 41,
+          "length" : 1
+        },
+        {
+          "activity" : "load",
+          "start" : 42,
+          "length" : 5
+        },
+        {
+          "activity" : "load",
+          "start" : 42,
+          "length" : 3
+        },
+        {
+          "activity" : "generateNarratives",
+          "start" : 53,
+          "length" : 4
+        },
+        {
+          "activity" : "validate",
+          "start" : 65,
+          "length" : 1
+        },
+        {
+          "activity" : "generate1",
+          "start" : 79,
+          "length" : 4
+        },
+        {
+          "activity" : "generate2",
+          "start" : 122,
+          "length" : 9
+        }
+      ]
+    },
+    {
+      "name" : "fsh-generated/resources/ValueSet-ihris-task-resource.json",
+      "size" : 428,
+      "processes" : [
+        {
+          "activity" : "loadResources",
+          "start" : 41,
+          "length" : 2
+        },
+        {
+          "activity" : "load",
+          "start" : 41,
+          "length" : 6
+        },
+        {
+          "activity" : "generateNarratives",
+          "start" : 53,
+          "length" : 3
+        },
+        {
+          "activity" : "validate",
+          "start" : 54,
+          "length" : 3
+        },
+        {
+          "activity" : "generate1",
+          "start" : 79,
+          "length" : 4
+        },
+        {
+          "activity" : "generate2",
+          "start" : 122,
+          "length" : 35
+        }
+      ]
+    },
+    {
+      "name" : "fsh-generated/resources/Basic-ihris-task-write-document-reference.json",
+      "size" : 1093,
+      "processes" : [
+        {
+          "activity" : "loadResources",
+          "start" : 41,
+          "length" : 3
+        },
+        {
+          "activity" : "generateNarratives",
+          "start" : 53,
+          "length" : 6
+        },
+        {
+          "activity" : "validate",
+          "start" : 70,
+          "length" : 29
+        },
+        {
+          "activity" : "generate1",
+          "start" : 79,
+          "length" : 6
+        },
+        {
+          "activity" : "generate2",
+          "start" : 122,
+          "length" : 12
+        }
+      ]
+    },
+    {
+      "name" : "fsh-generated/resources/SearchParameter-practitioner-related-practitioner.json",
+      "size" : 597,
+      "processes" : [
+        {
+          "activity" : "loadResources",
+          "start" : 41,
+          "length" : 2
+        },
+        {
+          "activity" : "load-configure",
+          "start" : 41,
+          "length" : 1
+        },
+        {
+          "activity" : "load",
+          "start" : 42,
+          "length" : 5
+        },
+        {
+          "activity" : "load",
+          "start" : 42,
+          "length" : 3
+        },
+        {
+          "activity" : "generateNarratives",
+          "start" : 53,
+          "length" : 4
+        },
+        {
+          "activity" : "validate",
+          "start" : 65,
+          "length" : 1
+        },
+        {
+          "activity" : "generate1",
+          "start" : 79,
+          "length" : 5
+        },
+        {
+          "activity" : "generate2",
+          "start" : 122,
+          "length" : 14
+        },
+        {
+          "activity" : "generateValidationPack",
+          "start" : 154,
+          "length" : 1
+        }
+      ]
+    },
+    {
+      "name" : "fsh-generated/resources/Basic-ihris-page-job-type.json",
+      "size" : 1734,
+      "processes" : [
+        {
+          "activity" : "loadResources",
+          "start" : 41,
+          "length" : 4
+        },
+        {
+          "activity" : "generateNarratives",
+          "start" : 53,
+          "length" : 10
+        },
+        {
+          "activity" : "validate",
+          "start" : 70,
+          "length" : 49
+        },
+        {
+          "activity" : "generate1",
+          "start" : 79,
+          "length" : 8
+        },
+        {
+          "activity" : "generate2",
+          "start" : 122,
+          "length" : 11
+        }
+      ]
+    },
+    {
+      "name" : "fsh-generated/resources/Basic-ihris-page-reason-departure.json",
+      "size" : 1774,
+      "processes" : [
+        {
+          "activity" : "loadResources",
+          "start" : 41,
+          "length" : 4
+        },
+        {
+          "activity" : "generateNarratives",
+          "start" : 53,
+          "length" : 8
+        },
+        {
+          "activity" : "validate",
+          "start" : 70,
+          "length" : 43
+        },
+        {
+          "activity" : "generate1",
+          "start" : 79,
+          "length" : 9
+        },
+        {
+          "activity" : "generate2",
+          "start" : 122,
+          "length" : 9
+        }
+      ]
+    },
+    {
+      "name" : "fsh-generated/resources/Basic-ihris-task-navigation-password.json",
+      "size" : 851,
+      "processes" : [
+        {
+          "activity" : "loadResources",
+          "start" : 41,
+          "length" : 3
+        },
+        {
+          "activity" : "generateNarratives",
+          "start" : 53,
+          "length" : 6
+        },
+        {
+          "activity" : "validate",
+          "start" : 70,
+          "length" : 22
+        },
+        {
+          "activity" : "generate1",
+          "start" : 79,
+          "length" : 6
+        },
+        {
+          "activity" : "generate2",
+          "start" : 122,
+          "length" : 7
+        }
+      ]
+    },
+    {
+      "name" : "fsh-generated/resources/SearchParameter-gofr-search-isflowstart.json",
+      "size" : 648,
+      "processes" : [
+        {
+          "activity" : "loadResources",
+          "start" : 41,
+          "length" : 2
+        },
+        {
+          "activity" : "load",
+          "start" : 42,
+          "length" : 4
+        },
+        {
+          "activity" : "load",
+          "start" : 42,
+          "length" : 2
+        },
+        {
+          "activity" : "generateNarratives",
+          "start" : 53,
+          "length" : 5
+        },
+        {
+          "activity" : "validate",
+          "start" : 65,
+          "length" : 1
+        },
+        {
+          "activity" : "generate1",
+          "start" : 79,
+          "length" : 4
+        },
+        {
+          "activity" : "generate2",
+          "start" : 122,
+          "length" : 9
+        }
+      ]
+    },
+    {
+      "name" : "fsh-generated/resources/StructureDefinition-ihris-document.json",
+      "size" : 3116,
+      "processes" : [
+        {
+          "activity" : "loadResources",
+          "start" : 41,
+          "length" : 8
+        },
+        {
+          "activity" : "load",
+          "start" : 42,
+          "length" : 12
+        },
+        {
+          "activity" : "generateSnapshots",
+          "start" : 46,
+          "length" : 159
+        },
+        {
+          "activity" : "generateNarratives",
+          "start" : 53,
+          "length" : 192
+        },
+        {
+          "activity" : "validate",
+          "start" : 64,
+          "length" : 237
+        },
+        {
+          "activity" : "scanForUsageStats",
+          "start" : 66,
+          "length" : 1
+        },
+        {
+          "activity" : "generate1",
+          "start" : 79,
+          "length" : 247
+        },
+        {
+          "activity" : "generate2",
+          "start" : 122,
+          "length" : 811
+        },
+        {
+          "activity" : "generateValidationPack",
+          "start" : 154,
+          "length" : 7
+        }
+      ]
+    },
+    {
+      "name" : "fsh-generated/resources/Basic-ihris-es-report-mhero-send-message.json",
+      "size" : 3275,
+      "processes" : [
+        {
+          "activity" : "loadResources",
+          "start" : 41,
+          "length" : 6
+        },
+        {
+          "activity" : "checkR4R4B",
+          "start" : 47,
+          "length" : 1
+        },
+        {
+          "activity" : "generateNarratives",
+          "start" : 53,
+          "length" : 9
+        },
+        {
+          "activity" : "validate",
+          "start" : 70,
+          "length" : 183
+        },
+        {
+          "activity" : "generate1",
+          "start" : 79,
+          "length" : 12
+        },
+        {
+          "activity" : "generate2",
+          "start" : 123,
+          "length" : 11
+        }
+      ]
+    },
+    {
+      "name" : "fsh-generated/resources/StructureDefinition-ihris-page-display.json",
+      "size" : 24082,
+      "processes" : [
+        {
+          "activity" : "loadResources",
+          "start" : 41,
+          "length" : 75
+        },
+        {
+          "activity" : "load",
+          "start" : 42,
+          "length" : 64
+        },
+        {
+          "activity" : "generateSnapshots",
+          "start" : 46,
+          "length" : 342
+        },
+        {
+          "activity" : "generateNarratives",
+          "start" : 53,
+          "length" : 360
+        },
+        {
+          "activity" : "validate",
+          "start" : 64,
+          "length" : 465
+        },
+        {
+          "activity" : "checkConformanceResources",
+          "start" : 66,
+          "length" : 1
+        },
+        {
+          "activity" : "scanForUsageStats",
+          "start" : 66,
+          "length" : 1
+        },
+        {
+          "activity" : "generate1",
+          "start" : 79,
+          "length" : 738
+        },
+        {
+          "activity" : "generate2",
+          "start" : 123,
+          "length" : 1592
+        },
+        {
+          "activity" : "makeDependencies",
+          "start" : 130,
+          "length" : 1
+        },
+        {
+          "activity" : "generateValidationPack",
+          "start" : 154,
+          "length" : 17
+        },
+        {
+          "activity" : "scanProfilesForR5",
+          "start" : 196,
+          "length" : 1
+        },
+        {
+          "activity" : "scanExamplesForR5",
+          "start" : 196,
+          "length" : 1
+        }
+      ]
+    },
+    {
+      "name" : "fsh-generated/resources/SearchParameter-job-search.json",
+      "size" : 440,
+      "processes" : [
+        {
+          "activity" : "loadResources",
+          "start" : 41,
+          "length" : 3
+        },
+        {
+          "activity" : "load",
+          "start" : 42,
+          "length" : 5
+        },
+        {
+          "activity" : "load",
+          "start" : 42,
+          "length" : 3
+        },
+        {
+          "activity" : "generateNarratives",
+          "start" : 53,
+          "length" : 4
+        },
+        {
+          "activity" : "validate",
+          "start" : 65,
+          "length" : 1
+        },
+        {
+          "activity" : "generate1",
+          "start" : 80,
+          "length" : 4
+        },
+        {
+          "activity" : "generate2",
+          "start" : 124,
+          "length" : 7
+        },
+        {
+          "activity" : "generateValidationPack",
+          "start" : 154,
+          "length" : 1
+        }
+      ]
+    },
+    {
+      "name" : "fsh-generated/resources/Basic-ihris-page-salary-scale.json",
+      "size" : 1739,
+      "processes" : [
+        {
+          "activity" : "loadResources",
+          "start" : 41,
+          "length" : 6
+        },
+        {
+          "activity" : "generateNarratives",
+          "start" : 53,
+          "length" : 7
+        },
+        {
+          "activity" : "validate",
+          "start" : 71,
+          "length" : 39
+        },
+        {
+          "activity" : "generate1",
+          "start" : 80,
+          "length" : 9
+        },
+        {
+          "activity" : "generate2",
+          "start" : 124,
+          "length" : 8
+        }
+      ]
+    },
+    {
+      "name" : "fsh-generated/resources/StructureDefinition-ihris-parameters-remote-config.json",
+      "size" : 5153,
+      "processes" : [
+        {
+          "activity" : "loadResources",
+          "start" : 41,
+          "length" : 18
+        },
+        {
+          "activity" : "load",
+          "start" : 42,
+          "length" : 15
+        },
+        {
+          "activity" : "generateSnapshots",
+          "start" : 47,
+          "length" : 132
+        },
+        {
+          "activity" : "generateNarratives",
+          "start" : 53,
+          "length" : 128
+        },
+        {
+          "activity" : "validate",
+          "start" : 64,
+          "length" : 138
+        },
+        {
+          "activity" : "validate",
+          "start" : 65,
+          "length" : 1
+        },
+        {
+          "activity" : "scanForUsageStats",
+          "start" : 66,
+          "length" : 1
+        },
+        {
+          "activity" : "generate1",
+          "start" : 80,
+          "length" : 246
+        },
+        {
+          "activity" : "generate2",
+          "start" : 124,
+          "length" : 767
+        },
+        {
+          "activity" : "generateValidationPack",
+          "start" : 154,
+          "length" : 7
+        },
+        {
+          "activity" : "scanExamplesForR5",
+          "start" : 196,
+          "length" : 1
+        }
+      ]
+    },
+    {
+      "name" : "fsh-generated/resources/Basic-ihris-role-self.json",
+      "size" : 4550,
+      "processes" : [
+        {
+          "activity" : "loadResources",
+          "start" : 41,
+          "length" : 9
+        },
+        {
+          "activity" : "generateNarratives",
+          "start" : 53,
+          "length" : 22
+        },
+        {
+          "activity" : "validate",
+          "start" : 71,
+          "length" : 52
+        },
+        {
+          "activity" : "generate1",
+          "start" : 80,
+          "length" : 18
+        },
+        {
+          "activity" : "generate2",
+          "start" : 125,
+          "length" : 10
+        }
+      ]
+    },
+    {
+      "name" : "fsh-generated/resources/StructureDefinition-ihris-visualization-settings.json",
+      "size" : 1935,
+      "processes" : [
+        {
+          "activity" : "loadResources",
+          "start" : 41,
+          "length" : 6
+        },
+        {
+          "activity" : "load",
+          "start" : 42,
+          "length" : 7
+        },
+        {
+          "activity" : "generateSnapshots",
+          "start" : 47,
+          "length" : 18
+        },
+        {
+          "activity" : "generateNarratives",
+          "start" : 53,
+          "length" : 25
+        },
+        {
+          "activity" : "validate",
+          "start" : 65,
+          "length" : 20
+        },
+        {
+          "activity" : "generate1",
+          "start" : 80,
+          "length" : 44
+        },
+        {
+          "activity" : "generate2",
+          "start" : 125,
+          "length" : 131
+        },
+        {
+          "activity" : "generateValidationPack",
+          "start" : 154,
+          "length" : 2
+        }
+      ]
+    },
+    {
+      "name" : "fsh-generated/resources/Basic-ihris-task-write-practitioner-role-resource.json",
+      "size" : 991,
+      "processes" : [
+        {
+          "activity" : "loadResources",
+          "start" : 41,
+          "length" : 4
+        },
+        {
+          "activity" : "generateNarratives",
+          "start" : 53,
+          "length" : 4
+        },
+        {
+          "activity" : "validate",
+          "start" : 71,
+          "length" : 38
+        },
+        {
+          "activity" : "generate1",
+          "start" : 81,
+          "length" : 6
+        },
+        {
+          "activity" : "generate2",
+          "start" : 125,
+          "length" : 7
+        }
+      ]
+    },
+    {
+      "name" : "fsh-generated/resources/StructureDefinition-ihris-visualization-permissions.json",
+      "size" : 2544,
+      "processes" : [
+        {
+          "activity" : "loadResources",
+          "start" : 41,
+          "length" : 8
+        },
+        {
+          "activity" : "load-configure",
+          "start" : 41,
+          "length" : 1
+        },
+        {
+          "activity" : "load",
+          "start" : 42,
+          "length" : 9
+        },
+        {
+          "activity" : "generateSnapshots",
+          "start" : 47,
+          "length" : 36
+        },
+        {
+          "activity" : "generateNarratives",
+          "start" : 53,
+          "length" : 46
+        },
+        {
+          "activity" : "validate",
+          "start" : 65,
+          "length" : 57
+        },
+        {
+          "activity" : "generate1",
+          "start" : 81,
+          "length" : 74
+        },
+        {
+          "activity" : "generate2",
+          "start" : 125,
+          "length" : 197
+        },
+        {
+          "activity" : "generateValidationPack",
+          "start" : 154,
+          "length" : 2
+        }
+      ]
+    },
+    {
+      "name" : "fsh-generated/resources/SearchParameter-basic-name.json",
+      "size" : 562,
+      "processes" : [
+        {
+          "activity" : "loadResources",
+          "start" : 41,
+          "length" : 2
+        },
+        {
+          "activity" : "load",
+          "start" : 42,
+          "length" : 5
+        },
+        {
+          "activity" : "load",
+          "start" : 42,
+          "length" : 3
+        },
+        {
+          "activity" : "generateNarratives",
+          "start" : 53,
+          "length" : 3
+        },
+        {
+          "activity" : "validate",
+          "start" : 65,
+          "length" : 1
+        },
+        {
+          "activity" : "generate1",
+          "start" : 81,
+          "length" : 4
+        },
+        {
+          "activity" : "generate2",
+          "start" : 125,
+          "length" : 10
+        }
+      ]
+    },
+    {
+      "name" : "fsh-generated/resources/Questionnaire-ihris-role.json",
+      "size" : 1499,
+      "processes" : [
+        {
+          "activity" : "loadResources",
+          "start" : 41,
+          "length" : 4
+        },
+        {
+          "activity" : "load",
+          "start" : 42,
+          "length" : 6
+        },
+        {
+          "activity" : "generateNarratives",
+          "start" : 53,
+          "length" : 7
+        },
+        {
+          "activity" : "validate",
+          "start" : 66,
+          "length" : 6
+        },
+        {
+          "activity" : "generate1",
+          "start" : 81,
+          "length" : 32
+        },
+        {
+          "activity" : "generate2",
+          "start" : 125,
+          "length" : 13
+        },
+        {
+          "activity" : "generateValidationPack",
+          "start" : 154,
+          "length" : 1
+        }
+      ]
+    },
+    {
+      "name" : "fsh-generated/resources/StructureDefinition-ihris-auditevent.json",
+      "size" : 4445,
+      "processes" : [
+        {
+          "activity" : "loadResources",
+          "start" : 41,
+          "length" : 12
+        },
+        {
+          "activity" : "load",
+          "start" : 42,
+          "length" : 14
+        },
+        {
+          "activity" : "generateSnapshots",
+          "start" : 47,
+          "length" : 168
+        },
+        {
+          "activity" : "generateNarratives",
+          "start" : 53,
+          "length" : 161
+        },
+        {
+          "activity" : "validate",
+          "start" : 65,
+          "length" : 199
+        },
+        {
+          "activity" : "scanForUsageStats",
+          "start" : 66,
+          "length" : 1
+        },
+        {
+          "activity" : "generate1",
+          "start" : 81,
+          "length" : 347
+        },
+        {
+          "activity" : "generate2",
+          "start" : 125,
+          "length" : 1280
+        },
+        {
+          "activity" : "generateValidationPack",
+          "start" : 154,
+          "length" : 9
+        },
+        {
+          "activity" : "scanExamplesForR5",
+          "start" : 196,
+          "length" : 1
+        }
+      ]
+    },
+    {
+      "name" : "fsh-generated/resources/Basic-ihris-task-write-questionnaire-change-password.json",
+      "size" : 881,
+      "processes" : [
+        {
+          "activity" : "loadResources",
+          "start" : 41,
+          "length" : 3
+        },
+        {
+          "activity" : "generateNarratives",
+          "start" : 54,
+          "length" : 4
+        },
+        {
+          "activity" : "validate",
+          "start" : 71,
+          "length" : 34
+        },
+        {
+          "activity" : "generate1",
+          "start" : 81,
+          "length" : 6
+        },
+        {
+          "activity" : "generate2",
+          "start" : 127,
+          "length" : 6
+        }
+      ]
+    },
+    {
+      "name" : "fsh-generated/resources/Questionnaire-ihris-promotion.json",
+      "size" : 5083,
+      "processes" : [
+        {
+          "activity" : "loadResources",
+          "start" : 41,
+          "length" : 6
+        },
+        {
+          "activity" : "load",
+          "start" : 42,
+          "length" : 9
+        },
+        {
+          "activity" : "generateNarratives",
+          "start" : 54,
+          "length" : 12
+        },
+        {
+          "activity" : "validate",
+          "start" : 66,
+          "length" : 22
+        },
+        {
+          "activity" : "generate1",
+          "start" : 81,
+          "length" : 65
+        },
+        {
+          "activity" : "generate2",
+          "start" : 127,
+          "length" : 14
+        },
+        {
+          "activity" : "generateValidationPack",
+          "start" : 154,
+          "length" : 2
+        }
+      ]
+    },
+    {
+      "name" : "fsh-generated/resources/Basic-ihris-page-relation.json",
+      "size" : 1752,
+      "processes" : [
+        {
+          "activity" : "loadResources",
+          "start" : 41,
+          "length" : 5
+        },
+        {
+          "activity" : "checkR4R4B",
+          "start" : 47,
+          "length" : 1
+        },
+        {
+          "activity" : "generateNarratives",
+          "start" : 54,
+          "length" : 9
+        },
+        {
+          "activity" : "validate",
+          "start" : 71,
+          "length" : 55
+        },
+        {
+          "activity" : "generate1",
+          "start" : 81,
+          "length" : 9
+        },
+        {
+          "activity" : "generate2",
+          "start" : 127,
+          "length" : 7
+        }
+      ]
+    },
+    {
+      "name" : "fsh-generated/resources/ValueSet-ihris-task-permission.json",
+      "size" : 436,
+      "processes" : [
+        {
+          "activity" : "loadResources",
+          "start" : 41,
+          "length" : 1
+        },
+        {
+          "activity" : "load",
+          "start" : 41,
+          "length" : 5
+        },
+        {
+          "activity" : "generateNarratives",
+          "start" : 54,
+          "length" : 4
+        },
+        {
+          "activity" : "validate",
+          "start" : 54,
+          "length" : 4
+        },
+        {
+          "activity" : "generate1",
+          "start" : 81,
+          "length" : 3
+        },
+        {
+          "activity" : "generate2",
+          "start" : 127,
+          "length" : 22
+        }
+      ]
+    },
+    {
+      "name" : "fsh-generated/resources/ValueSet-ihris-jurisdiction-type.json",
+      "size" : 435,
+      "processes" : [
+        {
+          "activity" : "loadResources",
+          "start" : 41,
+          "length" : 3
+        },
+        {
+          "activity" : "load",
+          "start" : 41,
+          "length" : 6
+        },
+        {
+          "activity" : "generateNarratives",
+          "start" : 54,
+          "length" : 3
+        },
+        {
+          "activity" : "validate",
+          "start" : 54,
+          "length" : 3
+        },
+        {
+          "activity" : "generate1",
+          "start" : 81,
+          "length" : 3
+        },
+        {
+          "activity" : "generate2",
+          "start" : 127,
+          "length" : 35
+        }
+      ]
+    },
+    {
+      "name" : "fsh-generated/resources/Basic-ihris-page-classification.json",
+      "size" : 1457,
+      "processes" : [
+        {
+          "activity" : "loadResources",
+          "start" : 41,
+          "length" : 3
+        },
+        {
+          "activity" : "generateNarratives",
+          "start" : 54,
+          "length" : 8
+        },
+        {
+          "activity" : "validate",
+          "start" : 71,
+          "length" : 41
+        },
+        {
+          "activity" : "generate1",
+          "start" : 81,
+          "length" : 8
+        },
+        {
+          "activity" : "generate2",
+          "start" : 127,
+          "length" : 13
+        }
+      ]
+    },
+    {
+      "name" : "fsh-generated/resources/DocumentReference-page-home.json",
+      "size" : 661,
+      "processes" : [
+        {
+          "activity" : "loadResources",
+          "start" : 41,
+          "length" : 3
+        },
+        {
+          "activity" : "generateNarratives",
+          "start" : 54,
+          "length" : 3
+        },
+        {
+          "activity" : "validate",
+          "start" : 71,
+          "length" : 2
+        },
+        {
+          "activity" : "generate1",
+          "start" : 81,
+          "length" : 6
+        },
+        {
+          "activity" : "generate2",
+          "start" : 127,
+          "length" : 10
+        }
+      ]
+    },
+    {
+      "name" : "fsh-generated/resources/Basic-ihris-task-read-code-system.json",
+      "size" : 760,
+      "processes" : [
+        {
+          "activity" : "loadResources",
+          "start" : 41,
+          "length" : 2
+        },
+        {
+          "activity" : "generateNarratives",
+          "start" : 54,
+          "length" : 4
+        },
+        {
+          "activity" : "validate",
+          "start" : 71,
+          "length" : 46
+        },
+        {
+          "activity" : "generate1",
+          "start" : 81,
+          "length" : 5
+        },
+        {
+          "activity" : "generate2",
+          "start" : 127,
+          "length" : 9
+        }
+      ]
+    },
+    {
+      "name" : "fsh-generated/resources/StructureDefinition-ihris-role.json",
+      "size" : 3762,
+      "processes" : [
+        {
+          "activity" : "loadResources",
+          "start" : 41,
+          "length" : 8
+        },
+        {
+          "activity" : "load",
+          "start" : 42,
+          "length" : 11
+        },
+        {
+          "activity" : "generateSnapshots",
+          "start" : 47,
+          "length" : 106
+        },
+        {
+          "activity" : "generateNarratives",
+          "start" : 54,
+          "length" : 142
+        },
+        {
+          "activity" : "validate",
+          "start" : 65,
+          "length" : 132
+        },
+        {
+          "activity" : "scanForUsageStats",
+          "start" : 66,
+          "length" : 1
+        },
+        {
+          "activity" : "generate1",
+          "start" : 81,
+          "length" : 179
+        },
+        {
+          "activity" : "generate2",
+          "start" : 127,
+          "length" : 568
+        },
+        {
+          "activity" : "generateValidationPack",
+          "start" : 154,
+          "length" : 6
+        }
+      ]
+    },
+    {
+      "name" : "fsh-generated/resources/Basic-ihris-page-employment-status.json",
+      "size" : 1770,
+      "processes" : [
+        {
+          "activity" : "loadResources",
+          "start" : 41,
+          "length" : 4
+        },
+        {
+          "activity" : "generateNarratives",
+          "start" : 54,
+          "length" : 8
+        },
+        {
+          "activity" : "validate",
+          "start" : 71,
+          "length" : 57
+        },
+        {
+          "activity" : "generate1",
+          "start" : 81,
+          "length" : 8
+        },
+        {
+          "activity" : "generate2",
+          "start" : 127,
+          "length" : 7
+        }
+      ]
+    },
+    {
+      "name" : "fsh-generated/resources/Basic-ihris-task-write-value-set.json",
+      "size" : 932,
+      "processes" : [
+        {
+          "activity" : "loadResources",
+          "start" : 41,
+          "length" : 3
+        },
+        {
+          "activity" : "generateNarratives",
+          "start" : 54,
+          "length" : 4
+        },
+        {
+          "activity" : "validate",
+          "start" : 71,
+          "length" : 28
+        },
+        {
+          "activity" : "generate1",
+          "start" : 81,
+          "length" : 6
+        },
+        {
+          "activity" : "generate2",
+          "start" : 127,
+          "length" : 5
+        }
+      ]
+    },
+    {
+      "name" : "fsh-generated/resources/SearchParameter-practitioner-phone.json",
+      "size" : 570,
+      "processes" : [
+        {
+          "activity" : "loadResources",
+          "start" : 41,
+          "length" : 2
+        },
+        {
+          "activity" : "load",
+          "start" : 42,
+          "length" : 3
+        },
+        {
+          "activity" : "load",
+          "start" : 42,
+          "length" : 3
+        },
+        {
+          "activity" : "generateNarratives",
+          "start" : 54,
+          "length" : 5
+        },
+        {
+          "activity" : "validate",
+          "start" : 65,
+          "length" : 1
+        },
+        {
+          "activity" : "generate1",
+          "start" : 81,
+          "length" : 4
+        },
+        {
+          "activity" : "generate2",
+          "start" : 127,
+          "length" : 8
+        }
+      ]
+    },
+    {
+      "name" : "fsh-generated/resources/Basic-ihris-task-write-structure-definition.json",
+      "size" : 976,
+      "processes" : [
+        {
+          "activity" : "loadResources",
+          "start" : 41,
+          "length" : 2
+        },
+        {
+          "activity" : "generateNarratives",
+          "start" : 54,
+          "length" : 5
+        },
+        {
+          "activity" : "validate",
+          "start" : 71,
+          "length" : 26
+        },
+        {
+          "activity" : "generate1",
+          "start" : 81,
+          "length" : 6
+        },
+        {
+          "activity" : "generate2",
+          "start" : 127,
+          "length" : 6
+        }
+      ]
+    },
+    {
+      "name" : "fsh-generated/resources/StructureDefinition-ihris-practitioner-residence.json",
+      "size" : 3077,
+      "processes" : [
+        {
+          "activity" : "loadResources",
+          "start" : 41,
+          "length" : 8
+        },
+        {
+          "activity" : "load",
+          "start" : 42,
+          "length" : 10
+        },
+        {
+          "activity" : "generateSnapshots",
+          "start" : 47,
+          "length" : 36
+        },
+        {
+          "activity" : "generateNarratives",
+          "start" : 54,
+          "length" : 39
+        },
+        {
+          "activity" : "validate",
+          "start" : 65,
+          "length" : 42
+        },
+        {
+          "activity" : "generate1",
+          "start" : 81,
+          "length" : 81
+        },
+        {
+          "activity" : "generate2",
+          "start" : 127,
+          "length" : 235
+        },
+        {
+          "activity" : "generateValidationPack",
+          "start" : 154,
+          "length" : 3
+        },
+        {
+          "activity" : "scanProfilesForR5",
+          "start" : 196,
+          "length" : 1
+        }
+      ]
+    },
+    {
+      "name" : "fsh-generated/resources/Basic-ihris-task-write-questionnaire-response-resource.json",
+      "size" : 1011,
+      "processes" : [
+        {
+          "activity" : "loadResources",
+          "start" : 41,
+          "length" : 3
+        },
+        {
+          "activity" : "generateNarratives",
+          "start" : 54,
+          "length" : 4
+        },
+        {
+          "activity" : "validate",
+          "start" : 71,
+          "length" : 29
+        },
+        {
+          "activity" : "generate1",
+          "start" : 81,
+          "length" : 6
+        },
+        {
+          "activity" : "generate2",
+          "start" : 128,
+          "length" : 7
+        }
+      ]
+    },
+    {
+      "name" : "fsh-generated/resources/StructureDefinition-task-attributes.json",
+      "size" : 6278,
+      "processes" : [
+        {
+          "activity" : "loadResources",
+          "start" : 41,
+          "length" : 15
+        },
+        {
+          "activity" : "load-configure",
+          "start" : 41,
+          "length" : 1
+        },
+        {
+          "activity" : "load",
+          "start" : 42,
+          "length" : 18
+        },
+        {
+          "activity" : "generateSnapshots",
+          "start" : 47,
+          "length" : 91
+        },
+        {
+          "activity" : "generateNarratives",
+          "start" : 54,
+          "length" : 88
+        },
+        {
+          "activity" : "validate",
+          "start" : 65,
+          "length" : 128
+        },
+        {
+          "activity" : "generate1",
+          "start" : 81,
+          "length" : 182
+        },
+        {
+          "activity" : "generate2",
+          "start" : 128,
+          "length" : 488
+        },
+        {
+          "activity" : "generateValidationPack",
+          "start" : 154,
+          "length" : 5
+        }
+      ]
+    },
+    {
+      "name" : "fsh-generated/resources/StructureDefinition-ihris-data-visualization.json",
+      "size" : 4573,
+      "processes" : [
+        {
+          "activity" : "loadResources",
+          "start" : 41,
+          "length" : 9
+        },
+        {
+          "activity" : "load",
+          "start" : 42,
+          "length" : 13
+        },
+        {
+          "activity" : "generateSnapshots",
+          "start" : 47,
+          "length" : 62
+        },
+        {
+          "activity" : "generateNarratives",
+          "start" : 54,
+          "length" : 58
+        },
+        {
+          "activity" : "validate",
+          "start" : 65,
+          "length" : 79
+        },
+        {
+          "activity" : "scanForUsageStats",
+          "start" : 66,
+          "length" : 1
+        },
+        {
+          "activity" : "generate1",
+          "start" : 82,
+          "length" : 143
+        },
+        {
+          "activity" : "generate2",
+          "start" : 128,
+          "length" : 363
+        },
+        {
+          "activity" : "generateValidationPack",
+          "start" : 154,
+          "length" : 3
+        },
+        {
+          "activity" : "scanExamplesForR5",
+          "start" : 196,
+          "length" : 1
+        }
+      ]
+    },
+    {
+      "name" : "fsh-generated/resources/SearchParameter-practitioner-related-location.json",
+      "size" : 573,
+      "processes" : [
+        {
+          "activity" : "loadResources",
+          "start" : 41,
+          "length" : 2
+        },
+        {
+          "activity" : "load",
+          "start" : 42,
+          "length" : 3
+        },
+        {
+          "activity" : "load",
+          "start" : 42,
+          "length" : 3
+        },
+        {
+          "activity" : "generateNarratives",
+          "start" : 54,
+          "length" : 3
+        },
+        {
+          "activity" : "validate",
+          "start" : 65,
+          "length" : 1
+        },
+        {
+          "activity" : "generate1",
+          "start" : 82,
+          "length" : 5
+        },
+        {
+          "activity" : "generate2",
+          "start" : 128,
+          "length" : 9
+        },
+        {
+          "activity" : "generateValidationPack",
+          "start" : 154,
+          "length" : 1
+        }
+      ]
+    },
+    {
+      "name" : "fsh-generated/resources/Library-ihris-module-example.json",
+      "size" : 744,
+      "processes" : [
+        {
+          "activity" : "loadResources",
+          "start" : 41,
+          "length" : 3
+        },
+        {
+          "activity" : "load",
+          "start" : 42,
+          "length" : 12
+        },
+        {
+          "activity" : "generateNarratives",
+          "start" : 54,
+          "length" : 2
+        },
+        {
+          "activity" : "validate",
+          "start" : 66,
+          "length" : 55
+        },
+        {
+          "activity" : "generate1",
+          "start" : 82,
+          "length" : 5
+        },
+        {
+          "activity" : "generate2",
+          "start" : 128,
+          "length" : 5
+        }
+      ]
+    },
+    {
+      "name" : "fsh-generated/resources/Basic-ihris-task-read-basic-resource.json",
+      "size" : 761,
+      "processes" : [
+        {
+          "activity" : "loadResources",
+          "start" : 41,
+          "length" : 2
+        },
+        {
+          "activity" : "generateNarratives",
+          "start" : 54,
+          "length" : 4
+        },
+        {
+          "activity" : "validate",
+          "start" : 71,
+          "length" : 23
+        },
+        {
+          "activity" : "generate1",
+          "start" : 82,
+          "length" : 6
+        },
+        {
+          "activity" : "generate2",
+          "start" : 128,
+          "length" : 6
+        }
+      ]
+    }
+  ]
+}

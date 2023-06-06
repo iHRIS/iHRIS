@@ -1,0 +1,114 @@
+@prefix fhir: <http://hl7.org/fhir/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+# - resource -------------------------------------------------------------------
+
+<http://ihris.org/fhir/Basic/ihris-es-report-mhero-send-message> a fhir:Basic ;
+  fhir:nodeRole fhir:treeRoot ;
+  fhir:id [ fhir:v "ihris-es-report-mhero-send-message"] ; # 
+  fhir:meta [
+     fhir:profile ( [
+       fhir:v "http://ihris.org/fhir/StructureDefinition/iHRISRelationship"^^xsd:anyURI ;
+       fhir:link <http://ihris.org/fhir/StructureDefinition/iHRISRelationship>
+     ] )
+  ] ; # 
+  fhir:text [
+     fhir:status [ fhir:v "extensions" ] ;
+     fhir:div "<div xmlns=\"http://www.w3.org/1999/xhtml\"><p><b>Generated Narrative: Basic</b><a name=\"ihris-es-report-mhero-send-message\"> </a></p><div style=\"display: inline-block; background-color: #d9e0e7; padding: 6px; margin: 4px; border: 1px solid #8da1b4; border-radius: 5px; line-height: 60%\"><p style=\"margin-bottom: 0px\">Resource Basic &quot;ihris-es-report-mhero-send-message&quot; </p><p style=\"margin-bottom: 0px\">Profile: <a href=\"StructureDefinition-iHRISRelationship.html\">iHRIS Resources Relationship Profile</a></p></div><blockquote><p><b>Details of a report</b></p><blockquote><p><b>url</b></p><code>name</code></blockquote><p><b>value</b>: mheropractitioner</p><blockquote><p><b>url</b></p><code>label</code></blockquote><p><b>value</b>: Employee List</p><blockquote><p><b>url</b></p><code>resource</code></blockquote><p><b>value</b>: Practitioner</p><blockquote><p><b>url</b></p><code>query</code></blockquote><p><b>value</b>: identifier.system=http://app.rapidpro.io/contact-uuid</p><blockquote><p><b>url</b></p><code>displayCheckbox</code></blockquote><p><b>value</b>: true</p><p><b>Display Name</b>: Fullname</p><blockquote><p><b>url</b></p><a href=\"StructureDefinition-iHRISReportElement.html\">Resource Fields</a></blockquote><p><b>Display Name</b>: Phone Number</p><blockquote><p><b>url</b></p><a href=\"StructureDefinition-iHRISReportElement.html\">Resource Fields</a></blockquote></blockquote><blockquote><p><b>Links to the primary resource</b></p><blockquote><p><b>url</b></p><code>name</code></blockquote><p><b>value</b>: facility</p><blockquote><p><b>url</b></p><code>resource</code></blockquote><p><b>value</b>: Location</p><blockquote><p><b>url</b></p><code>linkElement</code></blockquote><p><b>value</b>: Location.id</p><blockquote><p><b>url</b></p><code>linkTo</code></blockquote><p><b>value</b>: role.location</p><blockquote><p><b>url</b></p><code>linkElementSearchParameter</code></blockquote><p><b>value</b>: practitioner</p><blockquote><p><b>url</b></p><code>multiple</code></blockquote><p><b>value</b>: false</p><p><b>Display Name</b>: Facility</p><blockquote><p><b>url</b></p><a href=\"StructureDefinition-iHRISReportElement.html\">Resource Fields</a></blockquote></blockquote><p><b>code</b>: iHRIS Relationship <span style=\"background: LightGoldenRodYellow; margin: 4px; border: 1px solid khaki\"> ()</span></p></div>"
+  ] ; # 
+  fhir:extension ( [
+     fhir:extension ( [
+       fhir:url [ fhir:v "name"^^xsd:anyURI ] ;
+       fhir:value [ fhir:v "mheropractitioner" ]
+     ] [
+       fhir:url [ fhir:v "label"^^xsd:anyURI ] ;
+       fhir:value [ fhir:v "Employee List" ]
+     ] [
+       fhir:url [ fhir:v "resource"^^xsd:anyURI ] ;
+       fhir:value [ fhir:v "Practitioner" ]
+     ] [
+       fhir:url [ fhir:v "query"^^xsd:anyURI ] ;
+       fhir:value [ fhir:v "identifier.system=http://app.rapidpro.io/contact-uuid" ]
+     ] [
+       fhir:url [ fhir:v "displayCheckbox"^^xsd:anyURI ] ;
+       fhir:value [ fhir:v "true"^^xsd:boolean ]
+     ] [
+       fhir:extension ( [
+         fhir:url [ fhir:v "label"^^xsd:anyURI ] ;
+         fhir:value [ fhir:v "fullname" ]
+       ] [
+         fhir:url [ fhir:v "name"^^xsd:anyURI ] ;
+         fhir:value [ fhir:v "name.where(use='official').last().text" ]
+       ] [
+         fhir:url [ fhir:v "display"^^xsd:anyURI ] ;
+         fhir:value [ fhir:v "Fullname" ]
+       ] [
+         fhir:url [ fhir:v "filter"^^xsd:anyURI ] ;
+         fhir:value [ fhir:v "true"^^xsd:boolean ]
+       ] [
+         fhir:url [ fhir:v "dropDownFilter"^^xsd:anyURI ] ;
+         fhir:value [ fhir:v "false"^^xsd:boolean ]
+       ] ) ;
+       fhir:url [ fhir:v "http://ihris.org/fhir/StructureDefinition/iHRISReportElement"^^xsd:anyURI ]
+     ] [
+       fhir:extension ( [
+         fhir:url [ fhir:v "label"^^xsd:anyURI ] ;
+         fhir:value [ fhir:v "phone" ]
+       ] [
+         fhir:url [ fhir:v "name"^^xsd:anyURI ] ;
+         fhir:value [ fhir:v "telecom.where(system='phone').value" ]
+       ] [
+         fhir:url [ fhir:v "display"^^xsd:anyURI ] ;
+         fhir:value [ fhir:v "Phone Number" ]
+       ] ) ;
+       fhir:url [ fhir:v "http://ihris.org/fhir/StructureDefinition/iHRISReportElement"^^xsd:anyURI ]
+     ] ) ;
+     fhir:url [ fhir:v "http://ihris.org/fhir/StructureDefinition/iHRISReportDetails"^^xsd:anyURI ]
+  ] [
+     fhir:extension ( [
+       fhir:url [ fhir:v "name"^^xsd:anyURI ] ;
+       fhir:value [ fhir:v "facility" ]
+     ] [
+       fhir:url [ fhir:v "resource"^^xsd:anyURI ] ;
+       fhir:value [ fhir:v "Location" ]
+     ] [
+       fhir:url [ fhir:v "linkElement"^^xsd:anyURI ] ;
+       fhir:value [ fhir:v "Location.id" ]
+     ] [
+       fhir:url [ fhir:v "linkTo"^^xsd:anyURI ] ;
+       fhir:value [ fhir:v "role.location" ]
+     ] [
+       fhir:url [ fhir:v "linkElementSearchParameter"^^xsd:anyURI ] ;
+       fhir:value [ fhir:v "practitioner" ]
+     ] [
+       fhir:url [ fhir:v "multiple"^^xsd:anyURI ] ;
+       fhir:value [ fhir:v "false"^^xsd:boolean ]
+     ] [
+       fhir:extension ( [
+         fhir:url [ fhir:v "label"^^xsd:anyURI ] ;
+         fhir:value [ fhir:v "facilityName" ]
+       ] [
+         fhir:url [ fhir:v "name"^^xsd:anyURI ] ;
+         fhir:value [ fhir:v "name" ]
+       ] [
+         fhir:url [ fhir:v "display"^^xsd:anyURI ] ;
+         fhir:value [ fhir:v "Facility" ]
+       ] [
+         fhir:url [ fhir:v "filter"^^xsd:anyURI ] ;
+         fhir:value [ fhir:v "true"^^xsd:boolean ]
+       ] [
+         fhir:url [ fhir:v "dropDownFilter"^^xsd:anyURI ] ;
+         fhir:value [ fhir:v "true"^^xsd:boolean ]
+       ] ) ;
+       fhir:url [ fhir:v "http://ihris.org/fhir/StructureDefinition/iHRISReportElement"^^xsd:anyURI ]
+     ] ) ;
+     fhir:url [ fhir:v "http://ihris.org/fhir/StructureDefinition/iHRISReportLink"^^xsd:anyURI ]
+  ] ) ; # 
+  fhir:code [
+     fhir:text [ fhir:v "iHRIS Relationship" ]
+  ] . # 
+
+# -------------------------------------------------------------------------------------
+

@@ -1,0 +1,40 @@
+@prefix fhir: <http://hl7.org/fhir/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+# - resource -------------------------------------------------------------------
+
+<http://ihris.org/fhir/DocumentReference/page-home> a fhir:DocumentReference ;
+  fhir:nodeRole fhir:treeRoot ;
+  fhir:id [ fhir:v "page-home"] ; # 
+  fhir:meta [
+     fhir:profile ( [
+       fhir:v "http://ihris.org/fhir/StructureDefinition/ihris-document"^^xsd:anyURI ;
+       fhir:link <http://ihris.org/fhir/StructureDefinition/ihris-document>
+     ] )
+  ] ; # 
+  fhir:text [
+     fhir:status [ fhir:v "generated" ] ;
+     fhir:div "<div xmlns=\"http://www.w3.org/1999/xhtml\"><p><b>Generated Narrative: DocumentReference</b><a name=\"page-home\"> </a></p><div style=\"display: inline-block; background-color: #d9e0e7; padding: 6px; margin: 4px; border: 1px solid #8da1b4; border-radius: 5px; line-height: 60%\"><p style=\"margin-bottom: 0px\">Resource DocumentReference &quot;page-home&quot; </p><p style=\"margin-bottom: 0px\">Profile: <a href=\"StructureDefinition-ihris-document.html\">iHRIS Document</a></p></div><p><b>status</b>: current</p><p><b>docStatus</b>: final</p><p><b>category</b>: Open Access <span style=\"background: LightGoldenRodYellow; margin: 4px; border: 1px solid khaki\"> (<a href=\"CodeSystem-ihris-document-category.html\">Code system for document categories.</a>#open)</span></p><p><b>date</b>: Aug 19, 2020, 5:54:00 PM</p><blockquote><p><b>content</b></p><h3>Attachments</h3><table class=\"grid\"><tr><td>-</td><td><b>ContentType</b></td><td><b>Data</b></td><td><b>Title</b></td></tr><tr><td>*</td><td>text/markdown</td><td>KipXZWxjb21lIHRvIHRoZSBpSFJJUyBEZW1vKioK</td><td>iHRIS Demo</td></tr></table></blockquote></div>"
+  ] ; # 
+  fhir:status [ fhir:v "current"] ; # 
+  fhir:docStatus [ fhir:v "final"] ; # 
+  fhir:category ( [
+     fhir:coding ( [
+       fhir:system [ fhir:v "http://ihris.org/fhir/CodeSystem/ihris-document-category"^^xsd:anyURI ] ;
+       fhir:code [ fhir:v "open" ] ;
+       fhir:display [ fhir:v "Open Access" ]
+     ] )
+  ] ) ; # 
+  fhir:date [ fhir:v "2020-08-19T14:54:00Z"^^xsd:dateTime] ; # 
+  fhir:content ( [
+     fhir:attachment [
+       fhir:contentType [ fhir:v "text/markdown" ] ;
+       fhir:data [ fhir:v "KipXZWxjb21lIHRvIHRoZSBpSFJJUyBEZW1vKioK"^^xsd:base64Binary ] ;
+       fhir:title [ fhir:v "iHRIS Demo" ]
+     ]
+  ] ) . # 
+
+# -------------------------------------------------------------------------------------
+

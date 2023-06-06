@@ -1,0 +1,106 @@
+@prefix fhir: <http://hl7.org/fhir/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+# - resource -------------------------------------------------------------------
+
+<http://ihris.org/fhir/Basic/ihris-page-role> a fhir:Basic ;
+  fhir:nodeRole fhir:treeRoot ;
+  fhir:id [ fhir:v "ihris-page-role"] ; # 
+  fhir:meta [
+     fhir:profile ( [
+       fhir:v "http://ihris.org/fhir/StructureDefinition/ihris-page"^^xsd:anyURI ;
+       fhir:link <http://ihris.org/fhir/StructureDefinition/ihris-page>
+     ] )
+  ] ; # 
+  fhir:text [
+     fhir:status [ fhir:v "extensions" ] ;
+     fhir:div "<div xmlns=\"http://www.w3.org/1999/xhtml\"><p><b>Generated Narrative: Basic</b><a name=\"ihris-page-role\"> </a></p><div style=\"display: inline-block; background-color: #d9e0e7; padding: 6px; margin: 4px; border: 1px solid #8da1b4; border-radius: 5px; line-height: 60%\"><p style=\"margin-bottom: 0px\">Resource Basic &quot;ihris-page-role&quot; </p><p style=\"margin-bottom: 0px\">Profile: <a href=\"StructureDefinition-ihris-page.html\">iHRIS Page</a></p></div><blockquote><p><b>iHRIS Page Display</b></p><blockquote><p><b>url</b></p><code>resource</code></blockquote><p><b>value</b>: <a href=\"StructureDefinition-ihris-role.html\">StructureDefinition/ihris-role</a> &quot;IhrisRole&quot;</p><blockquote><p><b>url</b></p><code>search</code></blockquote><p><b>value</b>: Id|Basic.id</p><p><b>url</b>: <code>/resource/view/basic</code></p><blockquote><p><b>url</b></p><code>link</code></blockquote><p><b>url</b>: <code>/questionnaire/ihris-role/role</code></p><blockquote><p><b>url</b></p><code>add</code></blockquote><blockquote><p><b>url</b></p><code>search</code></blockquote><p><b>value</b>: Name|Basic.extension.where(url='http://ihris.org/fhir/StructureDefinition/ihris-basic-name').valueString</p><blockquote><p><b>url</b></p><code>search</code></blockquote><p><b>value</b>: Role Reference|Basic.extension.where(url='http://ihris.org/fhir/StructureDefinition/ihris-assign-role').valueReference.reference</p><blockquote><p><b>url</b></p><code>filter</code></blockquote><p><b>value</b>: Role|Basic.extension:id:contains</p></blockquote><blockquote><p><b>iHRIS Page Section</b></p><blockquote><p><b>url</b></p><code>title</code></blockquote><p><b>value</b>: Role</p><blockquote><p><b>url</b></p><code>description</code></blockquote><p><b>value</b>: System User Role details</p><blockquote><p><b>url</b></p><code>name</code></blockquote><p><b>value</b>: Basic</p><blockquote><p><b>url</b></p><code>field</code></blockquote><p><b>value</b>: Basic.extension:name.value[x]:valueString</p><blockquote><p><b>url</b></p><code>field</code></blockquote><p><b>value</b>: Basic.extension:role.value[x]:valueReference</p><blockquote><p><b>url</b></p><code>field</code></blockquote><p><b>value</b>: Basic.extension:task.value[x]:valueReference</p><blockquote><p><b>url</b></p><code>field</code></blockquote><p><b>value</b>: Basic.extension:primary.value[x]:valueBoolean</p></blockquote><p><b>code</b>: iHRIS Page <span style=\"background: LightGoldenRodYellow; margin: 4px; border: 1px solid khaki\"> (<a href=\"CodeSystem-ihris-resource-codesystem.html\">Code System for iHRIS Basic Resources.</a>#page)</span></p></div>"
+  ] ; # 
+  fhir:extension ( [
+     fhir:extension ( [
+       fhir:url [ fhir:v "resource"^^xsd:anyURI ] ;
+       fhir:value [
+         a fhir:Reference ;
+         fhir:link <http://ihris.org/fhir/StructureDefinition/ihris-role> ;
+         fhir:reference [ fhir:v "StructureDefinition/ihris-role" ]
+       ]
+     ] [
+       fhir:url [ fhir:v "search"^^xsd:anyURI ] ;
+       fhir:value [ fhir:v "Id|Basic.id" ]
+     ] [
+       fhir:extension ( [
+         fhir:url [ fhir:v "field"^^xsd:anyURI ] ;
+         fhir:value [ fhir:v "" ]
+       ] [
+         fhir:url [ fhir:v "url"^^xsd:anyURI ] ;
+         fhir:value [ fhir:v "/resource/view/basic"^^xsd:anyURI ]
+       ] [
+         fhir:url [ fhir:v "text"^^xsd:anyURI ] ;
+         fhir:value [ fhir:v "View Other Roles" ]
+       ] [
+         fhir:url [ fhir:v "button"^^xsd:anyURI ] ;
+         fhir:value [ fhir:v "true"^^xsd:boolean ]
+       ] [
+         fhir:url [ fhir:v "icon"^^xsd:anyURI ] ;
+         fhir:value [ fhir:v "mdi-account-arrow-right" ]
+       ] ) ;
+       fhir:url [ fhir:v "link"^^xsd:anyURI ]
+     ] [
+       fhir:extension ( [
+         fhir:url [ fhir:v "url"^^xsd:anyURI ] ;
+         fhir:value [ fhir:v "/questionnaire/ihris-role/role"^^xsd:anyURI ]
+       ] [
+         fhir:url [ fhir:v "icon"^^xsd:anyURI ] ;
+         fhir:value [ fhir:v "mdi-account-plus" ]
+       ] [
+         fhir:url [ fhir:v "class"^^xsd:anyURI ] ;
+         fhir:value [ fhir:v "accent" ]
+       ] ) ;
+       fhir:url [ fhir:v "add"^^xsd:anyURI ]
+     ] [
+       fhir:url [ fhir:v "search"^^xsd:anyURI ] ;
+       fhir:value [ fhir:v "Name|Basic.extension.where(url='http://ihris.org/fhir/StructureDefinition/ihris-basic-name').valueString" ]
+     ] [
+       fhir:url [ fhir:v "search"^^xsd:anyURI ] ;
+       fhir:value [ fhir:v "Role Reference|Basic.extension.where(url='http://ihris.org/fhir/StructureDefinition/ihris-assign-role').valueReference.reference" ]
+     ] [
+       fhir:url [ fhir:v "filter"^^xsd:anyURI ] ;
+       fhir:value [ fhir:v "Role|Basic.extension:id:contains" ]
+     ] ) ;
+     fhir:url [ fhir:v "http://ihris.org/fhir/StructureDefinition/ihris-page-display"^^xsd:anyURI ]
+  ] [
+     fhir:extension ( [
+       fhir:url [ fhir:v "title"^^xsd:anyURI ] ;
+       fhir:value [ fhir:v "Role" ]
+     ] [
+       fhir:url [ fhir:v "description"^^xsd:anyURI ] ;
+       fhir:value [ fhir:v "System User Role details" ]
+     ] [
+       fhir:url [ fhir:v "name"^^xsd:anyURI ] ;
+       fhir:value [ fhir:v "Basic" ]
+     ] [
+       fhir:url [ fhir:v "field"^^xsd:anyURI ] ;
+       fhir:value [ fhir:v "Basic.extension:name.value[x]:valueString" ]
+     ] [
+       fhir:url [ fhir:v "field"^^xsd:anyURI ] ;
+       fhir:value [ fhir:v "Basic.extension:role.value[x]:valueReference" ]
+     ] [
+       fhir:url [ fhir:v "field"^^xsd:anyURI ] ;
+       fhir:value [ fhir:v "Basic.extension:task.value[x]:valueReference" ]
+     ] [
+       fhir:url [ fhir:v "field"^^xsd:anyURI ] ;
+       fhir:value [ fhir:v "Basic.extension:primary.value[x]:valueBoolean" ]
+     ] ) ;
+     fhir:url [ fhir:v "http://ihris.org/fhir/StructureDefinition/ihris-page-section"^^xsd:anyURI ]
+  ] ) ; # 
+  fhir:code [
+     fhir:coding ( [
+       fhir:system [ fhir:v "http://ihris.org/fhir/CodeSystem/ihris-resource-codesystem"^^xsd:anyURI ] ;
+       fhir:code [ fhir:v "page" ]
+     ] )
+  ] . # 
+
+# -------------------------------------------------------------------------------------
+

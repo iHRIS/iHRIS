@@ -1,0 +1,76 @@
+@prefix fhir: <http://hl7.org/fhir/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+# - resource -------------------------------------------------------------------
+
+<http://ihris.org/fhir/Basic/ihris-page-relation> a fhir:Basic ;
+  fhir:nodeRole fhir:treeRoot ;
+  fhir:id [ fhir:v "ihris-page-relation"] ; # 
+  fhir:meta [
+     fhir:profile ( [
+       fhir:v "http://ihris.org/fhir/StructureDefinition/ihris-page"^^xsd:anyURI ;
+       fhir:link <http://ihris.org/fhir/StructureDefinition/ihris-page>
+     ] )
+  ] ; # 
+  fhir:text [
+     fhir:status [ fhir:v "extensions" ] ;
+     fhir:div "<div xmlns=\"http://www.w3.org/1999/xhtml\"><p><b>Generated Narrative: Basic</b><a name=\"ihris-page-relation\"> </a></p><div style=\"display: inline-block; background-color: #d9e0e7; padding: 6px; margin: 4px; border: 1px solid #8da1b4; border-radius: 5px; line-height: 60%\"><p style=\"margin-bottom: 0px\">Resource Basic &quot;ihris-page-relation&quot; </p><p style=\"margin-bottom: 0px\">Profile: <a href=\"StructureDefinition-ihris-page.html\">iHRIS Page</a></p></div><blockquote><p><b>iHRIS Page Display</b></p><blockquote><p><b>url</b></p><code>resource</code></blockquote><p><b>value</b>: <a href=\"CodeSystem-ihris-relation-codesystem.html\">CodeSystem/ihris-relation-codesystem</a> &quot;IhrisRelationCodesystem&quot;</p><blockquote><p><b>url</b></p><code>search</code></blockquote><p><b>value</b>: Code|code</p><blockquote><p><b>url</b></p><code>search</code></blockquote><p><b>value</b>: Display|display</p><blockquote><p><b>url</b></p><code>field</code></blockquote></blockquote><blockquote><p><b>iHRIS Page Section</b></p><blockquote><p><b>url</b></p><code>title</code></blockquote><p><b>value</b>: Relationship Type</p><blockquote><p><b>url</b></p><code>description</code></blockquote><p><b>value</b>: Relationship Type</p><blockquote><p><b>url</b></p><code>name</code></blockquote><p><b>value</b>: CodeSystem</p><blockquote><p><b>url</b></p><code>field</code></blockquote><p><b>value</b>: CodeSystem.display</p><blockquote><p><b>url</b></p><code>field</code></blockquote><p><b>value</b>: CodeSystem.code</p><blockquote><p><b>url</b></p><code>field</code></blockquote><p><b>value</b>: CodeSystem.definition</p></blockquote><p><b>code</b>: iHRIS Page <span style=\"background: LightGoldenRodYellow; margin: 4px; border: 1px solid khaki\"> (<a href=\"CodeSystem-ihris-resource-codesystem.html\">Code System for iHRIS Basic Resources.</a>#page)</span></p></div>"
+  ] ; # 
+  fhir:extension ( [
+     fhir:extension ( [
+       fhir:url [ fhir:v "resource"^^xsd:anyURI ] ;
+       fhir:value [
+         a fhir:Reference ;
+         fhir:link <http://ihris.org/fhir/CodeSystem/ihris-relation-codesystem> ;
+         fhir:reference [ fhir:v "CodeSystem/ihris-relation-codesystem" ]
+       ]
+     ] [
+       fhir:url [ fhir:v "search"^^xsd:anyURI ] ;
+       fhir:value [ fhir:v "Code|code" ]
+     ] [
+       fhir:url [ fhir:v "search"^^xsd:anyURI ] ;
+       fhir:value [ fhir:v "Display|display" ]
+     ] [
+       fhir:extension ( [
+         fhir:url [ fhir:v "path"^^xsd:anyURI ] ;
+         fhir:value [ fhir:v "CodeSystem.code" ]
+       ] [
+         fhir:url [ fhir:v "readOnlyIfSet"^^xsd:anyURI ] ;
+         fhir:value [ fhir:v "true"^^xsd:boolean ]
+       ] ) ;
+       fhir:url [ fhir:v "field"^^xsd:anyURI ]
+     ] ) ;
+     fhir:url [ fhir:v "http://ihris.org/fhir/StructureDefinition/ihris-page-display"^^xsd:anyURI ]
+  ] [
+     fhir:extension ( [
+       fhir:url [ fhir:v "title"^^xsd:anyURI ] ;
+       fhir:value [ fhir:v "Relationship Type" ]
+     ] [
+       fhir:url [ fhir:v "description"^^xsd:anyURI ] ;
+       fhir:value [ fhir:v "Relationship Type" ]
+     ] [
+       fhir:url [ fhir:v "name"^^xsd:anyURI ] ;
+       fhir:value [ fhir:v "CodeSystem" ]
+     ] [
+       fhir:url [ fhir:v "field"^^xsd:anyURI ] ;
+       fhir:value [ fhir:v "CodeSystem.display" ]
+     ] [
+       fhir:url [ fhir:v "field"^^xsd:anyURI ] ;
+       fhir:value [ fhir:v "CodeSystem.code" ]
+     ] [
+       fhir:url [ fhir:v "field"^^xsd:anyURI ] ;
+       fhir:value [ fhir:v "CodeSystem.definition" ]
+     ] ) ;
+     fhir:url [ fhir:v "http://ihris.org/fhir/StructureDefinition/ihris-page-section"^^xsd:anyURI ]
+  ] ) ; # 
+  fhir:code [
+     fhir:coding ( [
+       fhir:system [ fhir:v "http://ihris.org/fhir/CodeSystem/ihris-resource-codesystem"^^xsd:anyURI ] ;
+       fhir:code [ fhir:v "page" ]
+     ] )
+  ] . # 
+
+# -------------------------------------------------------------------------------------
+

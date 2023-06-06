@@ -1,0 +1,2456 @@
+@prefix fhir: <http://hl7.org/fhir/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+# - resource -------------------------------------------------------------------
+
+<http://ihris.org/fhir/ImplementationGuide/ihris> a fhir:ImplementationGuide ;
+  fhir:nodeRole fhir:treeRoot ;
+  fhir:id [ fhir:v "ihris"] ; # 
+  fhir:text [
+     fhir:status [ fhir:v "extensions" ] ;
+     fhir:div "<div xmlns=\"http://www.w3.org/1999/xhtml\"><h2>iHRIS</h2><p>The official URL for this implementation guide is: </p><pre>http://ihris.org/fhir/ImplementationGuide/ihris</pre><div><p>Conformance resources that define the base installation of iHRIS 5</p>\n</div></div>"
+  ] ; # 
+  fhir:url [ fhir:v "http://ihris.org/fhir/ImplementationGuide/ihris"^^xsd:anyURI] ; # 
+  fhir:version [ fhir:v "0.1.0"] ; # 
+  fhir:name [ fhir:v "iHRIS"] ; # 
+  fhir:status [ fhir:v "active"] ; # 
+  fhir:date [ fhir:v "2023-06-05T15:57:19+03:00"^^xsd:dateTime] ; # 
+  fhir:publisher [ fhir:v "Luke Duncan"] ; # 
+  fhir:contact ( [
+     fhir:name [ fhir:v "Luke Duncan" ] ;
+     fhir:telecom ( [
+       fhir:system [ fhir:v "email" ] ;
+       fhir:value [ fhir:v "lduncan@intrahealth.org" ]
+     ] )
+  ] ) ; # 
+  fhir:description [ fhir:v "Conformance resources that define the base installation of iHRIS 5"] ; # 
+  fhir:packageId [ fhir:v "ihris"] ; # 
+  fhir:license [ fhir:v "CC0-1.0"] ; # 
+  fhir:fhirVersion ( [ fhir:v "4.0.1"] ) ; # 
+  fhir:dependsOn ( [
+     fhir:id [ fhir:v "hl7tx" ] ;
+     fhir:extension ( [
+       fhir:url [ fhir:v "http://hl7.org/fhir/tools/StructureDefinition/implementationguide-dependency-comment"^^xsd:anyURI ] ;
+       fhir:value [ fhir:v "Automatically added as a dependency - all IGs depend on HL7 Terminology" ]
+     ] ) ;
+     fhir:uri [
+       fhir:v "http://terminology.hl7.org/ImplementationGuide/hl7.terminology"^^xsd:anyURI ;
+       fhir:link <http://terminology.hl7.org/ImplementationGuide/hl7.terminology>
+     ] ;
+     fhir:packageId [ fhir:v "hl7.terminology.r4" ] ;
+     fhir:version [ fhir:v "5.0.0" ]
+  ] [
+     fhir:id [ fhir:v "hl7ext" ] ;
+     fhir:extension ( [
+       fhir:url [ fhir:v "http://hl7.org/fhir/tools/StructureDefinition/implementationguide-dependency-comment"^^xsd:anyURI ] ;
+       fhir:value [ fhir:v "Automatically added as a dependency - all IGs depend on the HL7 Extension Pack" ]
+     ] ) ;
+     fhir:uri [
+       fhir:v "http://hl7.org/fhir/extensions/ImplementationGuide/hl7.fhir.uv.extensions"^^xsd:anyURI ;
+       fhir:link <http://hl7.org/fhir/extensions/ImplementationGuide/hl7.fhir.uv.extensions>
+     ] ;
+     fhir:packageId [ fhir:v "hl7.fhir.uv.extensions.r4" ] ;
+     fhir:version [ fhir:v "1.0.0" ]
+  ] ) ; # 
+  fhir:definition [
+     fhir:extension ( [
+       fhir:extension ( [
+         fhir:url [ fhir:v "code"^^xsd:anyURI ] ;
+         fhir:value [ fhir:v "copyrightyear" ]
+       ] [
+         fhir:url [ fhir:v "value"^^xsd:anyURI ] ;
+         fhir:value [ fhir:v "2020+" ]
+       ] ) ;
+       fhir:url [ fhir:v "http://hl7.org/fhir/tools/StructureDefinition/ig-parameter"^^xsd:anyURI ]
+     ] [
+       fhir:extension ( [
+         fhir:url [ fhir:v "code"^^xsd:anyURI ] ;
+         fhir:value [ fhir:v "releaselabel" ]
+       ] [
+         fhir:url [ fhir:v "value"^^xsd:anyURI ] ;
+         fhir:value [ fhir:v "ci-build" ]
+       ] ) ;
+       fhir:url [ fhir:v "http://hl7.org/fhir/tools/StructureDefinition/ig-parameter"^^xsd:anyURI ]
+     ] [
+       fhir:extension ( [
+         fhir:url [ fhir:v "code"^^xsd:anyURI ] ;
+         fhir:value [ fhir:v "show-inherited-invariants" ]
+       ] [
+         fhir:url [ fhir:v "value"^^xsd:anyURI ] ;
+         fhir:value [ fhir:v "false" ]
+       ] ) ;
+       fhir:url [ fhir:v "http://hl7.org/fhir/tools/StructureDefinition/ig-parameter"^^xsd:anyURI ]
+     ] [
+       fhir:extension ( [
+         fhir:url [ fhir:v "code"^^xsd:anyURI ] ;
+         fhir:value [ fhir:v "autoload-resources" ]
+       ] [
+         fhir:url [ fhir:v "value"^^xsd:anyURI ] ;
+         fhir:value [ fhir:v "true" ]
+       ] ) ;
+       fhir:url [ fhir:v "http://hl7.org/fhir/tools/StructureDefinition/ig-parameter"^^xsd:anyURI ]
+     ] [
+       fhir:extension ( [
+         fhir:url [ fhir:v "code"^^xsd:anyURI ] ;
+         fhir:value [ fhir:v "path-liquid" ]
+       ] [
+         fhir:url [ fhir:v "value"^^xsd:anyURI ] ;
+         fhir:value [ fhir:v "template/liquid" ]
+       ] ) ;
+       fhir:url [ fhir:v "http://hl7.org/fhir/tools/StructureDefinition/ig-parameter"^^xsd:anyURI ]
+     ] [
+       fhir:extension ( [
+         fhir:url [ fhir:v "code"^^xsd:anyURI ] ;
+         fhir:value [ fhir:v "path-liquid" ]
+       ] [
+         fhir:url [ fhir:v "value"^^xsd:anyURI ] ;
+         fhir:value [ fhir:v "input/liquid" ]
+       ] ) ;
+       fhir:url [ fhir:v "http://hl7.org/fhir/tools/StructureDefinition/ig-parameter"^^xsd:anyURI ]
+     ] [
+       fhir:extension ( [
+         fhir:url [ fhir:v "code"^^xsd:anyURI ] ;
+         fhir:value [ fhir:v "path-qa" ]
+       ] [
+         fhir:url [ fhir:v "value"^^xsd:anyURI ] ;
+         fhir:value [ fhir:v "temp/qa" ]
+       ] ) ;
+       fhir:url [ fhir:v "http://hl7.org/fhir/tools/StructureDefinition/ig-parameter"^^xsd:anyURI ]
+     ] [
+       fhir:extension ( [
+         fhir:url [ fhir:v "code"^^xsd:anyURI ] ;
+         fhir:value [ fhir:v "path-temp" ]
+       ] [
+         fhir:url [ fhir:v "value"^^xsd:anyURI ] ;
+         fhir:value [ fhir:v "temp/pages" ]
+       ] ) ;
+       fhir:url [ fhir:v "http://hl7.org/fhir/tools/StructureDefinition/ig-parameter"^^xsd:anyURI ]
+     ] [
+       fhir:extension ( [
+         fhir:url [ fhir:v "code"^^xsd:anyURI ] ;
+         fhir:value [ fhir:v "path-output" ]
+       ] [
+         fhir:url [ fhir:v "value"^^xsd:anyURI ] ;
+         fhir:value [ fhir:v "output" ]
+       ] ) ;
+       fhir:url [ fhir:v "http://hl7.org/fhir/tools/StructureDefinition/ig-parameter"^^xsd:anyURI ]
+     ] [
+       fhir:extension ( [
+         fhir:url [ fhir:v "code"^^xsd:anyURI ] ;
+         fhir:value [ fhir:v "path-suppressed-warnings" ]
+       ] [
+         fhir:url [ fhir:v "value"^^xsd:anyURI ] ;
+         fhir:value [ fhir:v "input/ignoreWarnings.txt" ]
+       ] ) ;
+       fhir:url [ fhir:v "http://hl7.org/fhir/tools/StructureDefinition/ig-parameter"^^xsd:anyURI ]
+     ] [
+       fhir:extension ( [
+         fhir:url [ fhir:v "code"^^xsd:anyURI ] ;
+         fhir:value [ fhir:v "path-history" ]
+       ] [
+         fhir:url [ fhir:v "value"^^xsd:anyURI ] ;
+         fhir:value [ fhir:v "http://ihris.org/fhir/history.html" ]
+       ] ) ;
+       fhir:url [ fhir:v "http://hl7.org/fhir/tools/StructureDefinition/ig-parameter"^^xsd:anyURI ]
+     ] [
+       fhir:extension ( [
+         fhir:url [ fhir:v "code"^^xsd:anyURI ] ;
+         fhir:value [ fhir:v "template-html" ]
+       ] [
+         fhir:url [ fhir:v "value"^^xsd:anyURI ] ;
+         fhir:value [ fhir:v "template-page.html" ]
+       ] ) ;
+       fhir:url [ fhir:v "http://hl7.org/fhir/tools/StructureDefinition/ig-parameter"^^xsd:anyURI ]
+     ] [
+       fhir:extension ( [
+         fhir:url [ fhir:v "code"^^xsd:anyURI ] ;
+         fhir:value [ fhir:v "template-md" ]
+       ] [
+         fhir:url [ fhir:v "value"^^xsd:anyURI ] ;
+         fhir:value [ fhir:v "template-page-md.html" ]
+       ] ) ;
+       fhir:url [ fhir:v "http://hl7.org/fhir/tools/StructureDefinition/ig-parameter"^^xsd:anyURI ]
+     ] [
+       fhir:extension ( [
+         fhir:url [ fhir:v "code"^^xsd:anyURI ] ;
+         fhir:value [ fhir:v "apply-contact" ]
+       ] [
+         fhir:url [ fhir:v "value"^^xsd:anyURI ] ;
+         fhir:value [ fhir:v "true" ]
+       ] ) ;
+       fhir:url [ fhir:v "http://hl7.org/fhir/tools/StructureDefinition/ig-parameter"^^xsd:anyURI ]
+     ] [
+       fhir:extension ( [
+         fhir:url [ fhir:v "code"^^xsd:anyURI ] ;
+         fhir:value [ fhir:v "apply-context" ]
+       ] [
+         fhir:url [ fhir:v "value"^^xsd:anyURI ] ;
+         fhir:value [ fhir:v "true" ]
+       ] ) ;
+       fhir:url [ fhir:v "http://hl7.org/fhir/tools/StructureDefinition/ig-parameter"^^xsd:anyURI ]
+     ] [
+       fhir:extension ( [
+         fhir:url [ fhir:v "code"^^xsd:anyURI ] ;
+         fhir:value [ fhir:v "apply-copyright" ]
+       ] [
+         fhir:url [ fhir:v "value"^^xsd:anyURI ] ;
+         fhir:value [ fhir:v "true" ]
+       ] ) ;
+       fhir:url [ fhir:v "http://hl7.org/fhir/tools/StructureDefinition/ig-parameter"^^xsd:anyURI ]
+     ] [
+       fhir:extension ( [
+         fhir:url [ fhir:v "code"^^xsd:anyURI ] ;
+         fhir:value [ fhir:v "apply-jurisdiction" ]
+       ] [
+         fhir:url [ fhir:v "value"^^xsd:anyURI ] ;
+         fhir:value [ fhir:v "true" ]
+       ] ) ;
+       fhir:url [ fhir:v "http://hl7.org/fhir/tools/StructureDefinition/ig-parameter"^^xsd:anyURI ]
+     ] [
+       fhir:extension ( [
+         fhir:url [ fhir:v "code"^^xsd:anyURI ] ;
+         fhir:value [ fhir:v "apply-license" ]
+       ] [
+         fhir:url [ fhir:v "value"^^xsd:anyURI ] ;
+         fhir:value [ fhir:v "true" ]
+       ] ) ;
+       fhir:url [ fhir:v "http://hl7.org/fhir/tools/StructureDefinition/ig-parameter"^^xsd:anyURI ]
+     ] [
+       fhir:extension ( [
+         fhir:url [ fhir:v "code"^^xsd:anyURI ] ;
+         fhir:value [ fhir:v "apply-publisher" ]
+       ] [
+         fhir:url [ fhir:v "value"^^xsd:anyURI ] ;
+         fhir:value [ fhir:v "true" ]
+       ] ) ;
+       fhir:url [ fhir:v "http://hl7.org/fhir/tools/StructureDefinition/ig-parameter"^^xsd:anyURI ]
+     ] [
+       fhir:extension ( [
+         fhir:url [ fhir:v "code"^^xsd:anyURI ] ;
+         fhir:value [ fhir:v "apply-version" ]
+       ] [
+         fhir:url [ fhir:v "value"^^xsd:anyURI ] ;
+         fhir:value [ fhir:v "true" ]
+       ] ) ;
+       fhir:url [ fhir:v "http://hl7.org/fhir/tools/StructureDefinition/ig-parameter"^^xsd:anyURI ]
+     ] [
+       fhir:extension ( [
+         fhir:url [ fhir:v "code"^^xsd:anyURI ] ;
+         fhir:value [ fhir:v "active-tables" ]
+       ] [
+         fhir:url [ fhir:v "value"^^xsd:anyURI ] ;
+         fhir:value [ fhir:v "true" ]
+       ] ) ;
+       fhir:url [ fhir:v "http://hl7.org/fhir/tools/StructureDefinition/ig-parameter"^^xsd:anyURI ]
+     ] [
+       fhir:extension ( [
+         fhir:url [ fhir:v "code"^^xsd:anyURI ] ;
+         fhir:value [ fhir:v "fmm-definition" ]
+       ] [
+         fhir:url [ fhir:v "value"^^xsd:anyURI ] ;
+         fhir:value [ fhir:v "http://hl7.org/fhir/versions.html#maturity" ]
+       ] ) ;
+       fhir:url [ fhir:v "http://hl7.org/fhir/tools/StructureDefinition/ig-parameter"^^xsd:anyURI ]
+     ] [
+       fhir:extension ( [
+         fhir:url [ fhir:v "code"^^xsd:anyURI ] ;
+         fhir:value [ fhir:v "propagate-status" ]
+       ] [
+         fhir:url [ fhir:v "value"^^xsd:anyURI ] ;
+         fhir:value [ fhir:v "true" ]
+       ] ) ;
+       fhir:url [ fhir:v "http://hl7.org/fhir/tools/StructureDefinition/ig-parameter"^^xsd:anyURI ]
+     ] [
+       fhir:extension ( [
+         fhir:url [ fhir:v "code"^^xsd:anyURI ] ;
+         fhir:value [ fhir:v "excludelogbinaryformat" ]
+       ] [
+         fhir:url [ fhir:v "value"^^xsd:anyURI ] ;
+         fhir:value [ fhir:v "true" ]
+       ] ) ;
+       fhir:url [ fhir:v "http://hl7.org/fhir/tools/StructureDefinition/ig-parameter"^^xsd:anyURI ]
+     ] [
+       fhir:extension ( [
+         fhir:url [ fhir:v "code"^^xsd:anyURI ] ;
+         fhir:value [ fhir:v "tabbed-snapshots" ]
+       ] [
+         fhir:url [ fhir:v "value"^^xsd:anyURI ] ;
+         fhir:value [ fhir:v "true" ]
+       ] ) ;
+       fhir:url [ fhir:v "http://hl7.org/fhir/tools/StructureDefinition/ig-parameter"^^xsd:anyURI ]
+     ] [
+       fhir:url [ fhir:v "http://hl7.org/fhir/tools/StructureDefinition/ig-internal-dependency"^^xsd:anyURI ] ;
+       fhir:value [ fhir:v "hl7.fhir.uv.tools#current" ]
+     ] [
+       fhir:extension ( [
+         fhir:url [ fhir:v "code"^^xsd:anyURI ] ;
+         fhir:value [ fhir:v "copyrightyear" ]
+       ] [
+         fhir:url [ fhir:v "value"^^xsd:anyURI ] ;
+         fhir:value [ fhir:v "2020+" ]
+       ] ) ;
+       fhir:url [ fhir:v "http://hl7.org/fhir/tools/StructureDefinition/ig-parameter"^^xsd:anyURI ]
+     ] [
+       fhir:extension ( [
+         fhir:url [ fhir:v "code"^^xsd:anyURI ] ;
+         fhir:value [ fhir:v "releaselabel" ]
+       ] [
+         fhir:url [ fhir:v "value"^^xsd:anyURI ] ;
+         fhir:value [ fhir:v "ci-build" ]
+       ] ) ;
+       fhir:url [ fhir:v "http://hl7.org/fhir/tools/StructureDefinition/ig-parameter"^^xsd:anyURI ]
+     ] [
+       fhir:extension ( [
+         fhir:url [ fhir:v "code"^^xsd:anyURI ] ;
+         fhir:value [ fhir:v "show-inherited-invariants" ]
+       ] [
+         fhir:url [ fhir:v "value"^^xsd:anyURI ] ;
+         fhir:value [ fhir:v "false" ]
+       ] ) ;
+       fhir:url [ fhir:v "http://hl7.org/fhir/tools/StructureDefinition/ig-parameter"^^xsd:anyURI ]
+     ] [
+       fhir:extension ( [
+         fhir:url [ fhir:v "code"^^xsd:anyURI ] ;
+         fhir:value [ fhir:v "autoload-resources" ]
+       ] [
+         fhir:url [ fhir:v "value"^^xsd:anyURI ] ;
+         fhir:value [ fhir:v "true" ]
+       ] ) ;
+       fhir:url [ fhir:v "http://hl7.org/fhir/tools/StructureDefinition/ig-parameter"^^xsd:anyURI ]
+     ] [
+       fhir:extension ( [
+         fhir:url [ fhir:v "code"^^xsd:anyURI ] ;
+         fhir:value [ fhir:v "path-liquid" ]
+       ] [
+         fhir:url [ fhir:v "value"^^xsd:anyURI ] ;
+         fhir:value [ fhir:v "template/liquid" ]
+       ] ) ;
+       fhir:url [ fhir:v "http://hl7.org/fhir/tools/StructureDefinition/ig-parameter"^^xsd:anyURI ]
+     ] [
+       fhir:extension ( [
+         fhir:url [ fhir:v "code"^^xsd:anyURI ] ;
+         fhir:value [ fhir:v "path-liquid" ]
+       ] [
+         fhir:url [ fhir:v "value"^^xsd:anyURI ] ;
+         fhir:value [ fhir:v "input/liquid" ]
+       ] ) ;
+       fhir:url [ fhir:v "http://hl7.org/fhir/tools/StructureDefinition/ig-parameter"^^xsd:anyURI ]
+     ] [
+       fhir:extension ( [
+         fhir:url [ fhir:v "code"^^xsd:anyURI ] ;
+         fhir:value [ fhir:v "path-qa" ]
+       ] [
+         fhir:url [ fhir:v "value"^^xsd:anyURI ] ;
+         fhir:value [ fhir:v "temp/qa" ]
+       ] ) ;
+       fhir:url [ fhir:v "http://hl7.org/fhir/tools/StructureDefinition/ig-parameter"^^xsd:anyURI ]
+     ] [
+       fhir:extension ( [
+         fhir:url [ fhir:v "code"^^xsd:anyURI ] ;
+         fhir:value [ fhir:v "path-temp" ]
+       ] [
+         fhir:url [ fhir:v "value"^^xsd:anyURI ] ;
+         fhir:value [ fhir:v "temp/pages" ]
+       ] ) ;
+       fhir:url [ fhir:v "http://hl7.org/fhir/tools/StructureDefinition/ig-parameter"^^xsd:anyURI ]
+     ] [
+       fhir:extension ( [
+         fhir:url [ fhir:v "code"^^xsd:anyURI ] ;
+         fhir:value [ fhir:v "path-output" ]
+       ] [
+         fhir:url [ fhir:v "value"^^xsd:anyURI ] ;
+         fhir:value [ fhir:v "output" ]
+       ] ) ;
+       fhir:url [ fhir:v "http://hl7.org/fhir/tools/StructureDefinition/ig-parameter"^^xsd:anyURI ]
+     ] [
+       fhir:extension ( [
+         fhir:url [ fhir:v "code"^^xsd:anyURI ] ;
+         fhir:value [ fhir:v "path-suppressed-warnings" ]
+       ] [
+         fhir:url [ fhir:v "value"^^xsd:anyURI ] ;
+         fhir:value [ fhir:v "input/ignoreWarnings.txt" ]
+       ] ) ;
+       fhir:url [ fhir:v "http://hl7.org/fhir/tools/StructureDefinition/ig-parameter"^^xsd:anyURI ]
+     ] [
+       fhir:extension ( [
+         fhir:url [ fhir:v "code"^^xsd:anyURI ] ;
+         fhir:value [ fhir:v "path-history" ]
+       ] [
+         fhir:url [ fhir:v "value"^^xsd:anyURI ] ;
+         fhir:value [ fhir:v "http://ihris.org/fhir/history.html" ]
+       ] ) ;
+       fhir:url [ fhir:v "http://hl7.org/fhir/tools/StructureDefinition/ig-parameter"^^xsd:anyURI ]
+     ] [
+       fhir:extension ( [
+         fhir:url [ fhir:v "code"^^xsd:anyURI ] ;
+         fhir:value [ fhir:v "template-html" ]
+       ] [
+         fhir:url [ fhir:v "value"^^xsd:anyURI ] ;
+         fhir:value [ fhir:v "template-page.html" ]
+       ] ) ;
+       fhir:url [ fhir:v "http://hl7.org/fhir/tools/StructureDefinition/ig-parameter"^^xsd:anyURI ]
+     ] [
+       fhir:extension ( [
+         fhir:url [ fhir:v "code"^^xsd:anyURI ] ;
+         fhir:value [ fhir:v "template-md" ]
+       ] [
+         fhir:url [ fhir:v "value"^^xsd:anyURI ] ;
+         fhir:value [ fhir:v "template-page-md.html" ]
+       ] ) ;
+       fhir:url [ fhir:v "http://hl7.org/fhir/tools/StructureDefinition/ig-parameter"^^xsd:anyURI ]
+     ] [
+       fhir:extension ( [
+         fhir:url [ fhir:v "code"^^xsd:anyURI ] ;
+         fhir:value [ fhir:v "apply-contact" ]
+       ] [
+         fhir:url [ fhir:v "value"^^xsd:anyURI ] ;
+         fhir:value [ fhir:v "true" ]
+       ] ) ;
+       fhir:url [ fhir:v "http://hl7.org/fhir/tools/StructureDefinition/ig-parameter"^^xsd:anyURI ]
+     ] [
+       fhir:extension ( [
+         fhir:url [ fhir:v "code"^^xsd:anyURI ] ;
+         fhir:value [ fhir:v "apply-context" ]
+       ] [
+         fhir:url [ fhir:v "value"^^xsd:anyURI ] ;
+         fhir:value [ fhir:v "true" ]
+       ] ) ;
+       fhir:url [ fhir:v "http://hl7.org/fhir/tools/StructureDefinition/ig-parameter"^^xsd:anyURI ]
+     ] [
+       fhir:extension ( [
+         fhir:url [ fhir:v "code"^^xsd:anyURI ] ;
+         fhir:value [ fhir:v "apply-copyright" ]
+       ] [
+         fhir:url [ fhir:v "value"^^xsd:anyURI ] ;
+         fhir:value [ fhir:v "true" ]
+       ] ) ;
+       fhir:url [ fhir:v "http://hl7.org/fhir/tools/StructureDefinition/ig-parameter"^^xsd:anyURI ]
+     ] [
+       fhir:extension ( [
+         fhir:url [ fhir:v "code"^^xsd:anyURI ] ;
+         fhir:value [ fhir:v "apply-jurisdiction" ]
+       ] [
+         fhir:url [ fhir:v "value"^^xsd:anyURI ] ;
+         fhir:value [ fhir:v "true" ]
+       ] ) ;
+       fhir:url [ fhir:v "http://hl7.org/fhir/tools/StructureDefinition/ig-parameter"^^xsd:anyURI ]
+     ] [
+       fhir:extension ( [
+         fhir:url [ fhir:v "code"^^xsd:anyURI ] ;
+         fhir:value [ fhir:v "apply-license" ]
+       ] [
+         fhir:url [ fhir:v "value"^^xsd:anyURI ] ;
+         fhir:value [ fhir:v "true" ]
+       ] ) ;
+       fhir:url [ fhir:v "http://hl7.org/fhir/tools/StructureDefinition/ig-parameter"^^xsd:anyURI ]
+     ] [
+       fhir:extension ( [
+         fhir:url [ fhir:v "code"^^xsd:anyURI ] ;
+         fhir:value [ fhir:v "apply-publisher" ]
+       ] [
+         fhir:url [ fhir:v "value"^^xsd:anyURI ] ;
+         fhir:value [ fhir:v "true" ]
+       ] ) ;
+       fhir:url [ fhir:v "http://hl7.org/fhir/tools/StructureDefinition/ig-parameter"^^xsd:anyURI ]
+     ] [
+       fhir:extension ( [
+         fhir:url [ fhir:v "code"^^xsd:anyURI ] ;
+         fhir:value [ fhir:v "apply-version" ]
+       ] [
+         fhir:url [ fhir:v "value"^^xsd:anyURI ] ;
+         fhir:value [ fhir:v "true" ]
+       ] ) ;
+       fhir:url [ fhir:v "http://hl7.org/fhir/tools/StructureDefinition/ig-parameter"^^xsd:anyURI ]
+     ] [
+       fhir:extension ( [
+         fhir:url [ fhir:v "code"^^xsd:anyURI ] ;
+         fhir:value [ fhir:v "active-tables" ]
+       ] [
+         fhir:url [ fhir:v "value"^^xsd:anyURI ] ;
+         fhir:value [ fhir:v "true" ]
+       ] ) ;
+       fhir:url [ fhir:v "http://hl7.org/fhir/tools/StructureDefinition/ig-parameter"^^xsd:anyURI ]
+     ] [
+       fhir:extension ( [
+         fhir:url [ fhir:v "code"^^xsd:anyURI ] ;
+         fhir:value [ fhir:v "fmm-definition" ]
+       ] [
+         fhir:url [ fhir:v "value"^^xsd:anyURI ] ;
+         fhir:value [ fhir:v "http://hl7.org/fhir/versions.html#maturity" ]
+       ] ) ;
+       fhir:url [ fhir:v "http://hl7.org/fhir/tools/StructureDefinition/ig-parameter"^^xsd:anyURI ]
+     ] [
+       fhir:extension ( [
+         fhir:url [ fhir:v "code"^^xsd:anyURI ] ;
+         fhir:value [ fhir:v "propagate-status" ]
+       ] [
+         fhir:url [ fhir:v "value"^^xsd:anyURI ] ;
+         fhir:value [ fhir:v "true" ]
+       ] ) ;
+       fhir:url [ fhir:v "http://hl7.org/fhir/tools/StructureDefinition/ig-parameter"^^xsd:anyURI ]
+     ] [
+       fhir:extension ( [
+         fhir:url [ fhir:v "code"^^xsd:anyURI ] ;
+         fhir:value [ fhir:v "excludelogbinaryformat" ]
+       ] [
+         fhir:url [ fhir:v "value"^^xsd:anyURI ] ;
+         fhir:value [ fhir:v "true" ]
+       ] ) ;
+       fhir:url [ fhir:v "http://hl7.org/fhir/tools/StructureDefinition/ig-parameter"^^xsd:anyURI ]
+     ] [
+       fhir:extension ( [
+         fhir:url [ fhir:v "code"^^xsd:anyURI ] ;
+         fhir:value [ fhir:v "tabbed-snapshots" ]
+       ] [
+         fhir:url [ fhir:v "value"^^xsd:anyURI ] ;
+         fhir:value [ fhir:v "true" ]
+       ] ) ;
+       fhir:url [ fhir:v "http://hl7.org/fhir/tools/StructureDefinition/ig-parameter"^^xsd:anyURI ]
+     ] ) ;
+     fhir:resource ( [
+       fhir:extension ( [
+         fhir:url [ fhir:v "http://hl7.org/fhir/tools/StructureDefinition/resource-information"^^xsd:anyURI ] ;
+         fhir:value [ fhir:v "StructureDefinition:resource" ]
+       ] ) ;
+       fhir:reference [
+         fhir:link <http://ihris.org/fhir/StructureDefinition/ihris-auditevent> ;
+         fhir:reference [ fhir:v "StructureDefinition/ihris-auditevent" ]
+       ] ;
+       fhir:name [ fhir:v "iHRIS Audit Event" ] ;
+       fhir:description [ fhir:v "iHRIS profile for AuditEvent" ] ;
+       fhir:example [ fhir:v "false"^^xsd:boolean ]
+     ] [
+       fhir:extension ( [
+         fhir:url [ fhir:v "http://hl7.org/fhir/tools/StructureDefinition/resource-information"^^xsd:anyURI ] ;
+         fhir:value [ fhir:v "StructureDefinition:resource" ]
+       ] ) ;
+       fhir:reference [
+         fhir:link <http://ihris.org/fhir/StructureDefinition/ihris-dashboard> ;
+         fhir:reference [ fhir:v "StructureDefinition/ihris-dashboard" ]
+       ] ;
+       fhir:name [ fhir:v "iHRIS Dashboard" ] ;
+       fhir:description [ fhir:v "iHRIS Profile of the Basic resource to manage dashboards." ] ;
+       fhir:example [ fhir:v "false"^^xsd:boolean ]
+     ] [
+       fhir:extension ( [
+         fhir:url [ fhir:v "http://hl7.org/fhir/tools/StructureDefinition/resource-information"^^xsd:anyURI ] ;
+         fhir:value [ fhir:v "StructureDefinition:resource" ]
+       ] ) ;
+       fhir:reference [
+         fhir:link <http://ihris.org/fhir/StructureDefinition/ihris-data-visualization> ;
+         fhir:reference [ fhir:v "StructureDefinition/ihris-data-visualization" ]
+       ] ;
+       fhir:name [ fhir:v "iHRIS Data Visualizer" ] ;
+       fhir:description [ fhir:v "iHRIS Profile of the Basic resource to manage visualizations." ] ;
+       fhir:example [ fhir:v "false"^^xsd:boolean ]
+     ] [
+       fhir:extension ( [
+         fhir:url [ fhir:v "http://hl7.org/fhir/tools/StructureDefinition/resource-information"^^xsd:anyURI ] ;
+         fhir:value [ fhir:v "StructureDefinition:resource" ]
+       ] ) ;
+       fhir:reference [
+         fhir:link <http://ihris.org/fhir/StructureDefinition/ihris-document> ;
+         fhir:reference [ fhir:v "StructureDefinition/ihris-document" ]
+       ] ;
+       fhir:name [ fhir:v "iHRIS Document" ] ;
+       fhir:description [ fhir:v "iHRIS Profile of the DocumentReference resource to manage static documents." ] ;
+       fhir:example [ fhir:v "false"^^xsd:boolean ]
+     ] [
+       fhir:extension ( [
+         fhir:url [ fhir:v "http://hl7.org/fhir/tools/StructureDefinition/resource-information"^^xsd:anyURI ] ;
+         fhir:value [ fhir:v "StructureDefinition:resource" ]
+       ] ) ;
+       fhir:reference [
+         fhir:link <http://ihris.org/fhir/StructureDefinition/ihris-facility> ;
+         fhir:reference [ fhir:v "StructureDefinition/ihris-facility" ]
+       ] ;
+       fhir:name [ fhir:v "iHRIS Facility" ] ;
+       fhir:description [ fhir:v "iHRIS Profile of Locations to manage facilities." ] ;
+       fhir:example [ fhir:v "false"^^xsd:boolean ]
+     ] [
+       fhir:extension ( [
+         fhir:url [ fhir:v "http://hl7.org/fhir/tools/StructureDefinition/resource-information"^^xsd:anyURI ] ;
+         fhir:value [ fhir:v "StructureDefinition:resource" ]
+       ] ) ;
+       fhir:reference [
+         fhir:link <http://ihris.org/fhir/StructureDefinition/ihris-jurisdiction> ;
+         fhir:reference [ fhir:v "StructureDefinition/ihris-jurisdiction" ]
+       ] ;
+       fhir:name [ fhir:v "Jurisdiction" ] ;
+       fhir:description [ fhir:v "iHRIS Profile of Locations to manage jurisdictions." ] ;
+       fhir:example [ fhir:v "false"^^xsd:boolean ]
+     ] [
+       fhir:extension ( [
+         fhir:url [ fhir:v "http://hl7.org/fhir/tools/StructureDefinition/resource-information"^^xsd:anyURI ] ;
+         fhir:value [ fhir:v "StructureDefinition:resource" ]
+       ] ) ;
+       fhir:reference [
+         fhir:link <http://ihris.org/fhir/StructureDefinition/ihris-module> ;
+         fhir:reference [ fhir:v "StructureDefinition/ihris-module" ]
+       ] ;
+       fhir:name [ fhir:v "iHRIS Module" ] ;
+       fhir:description [ fhir:v "iHRIS profile of Library resource to manage modules." ] ;
+       fhir:example [ fhir:v "false"^^xsd:boolean ]
+     ] [
+       fhir:extension ( [
+         fhir:url [ fhir:v "http://hl7.org/fhir/tools/StructureDefinition/resource-information"^^xsd:anyURI ] ;
+         fhir:value [ fhir:v "StructureDefinition:resource" ]
+       ] ) ;
+       fhir:reference [
+         fhir:link <http://ihris.org/fhir/StructureDefinition/ihris-page> ;
+         fhir:reference [ fhir:v "StructureDefinition/ihris-page" ]
+       ] ;
+       fhir:name [ fhir:v "iHRIS Page" ] ;
+       fhir:description [ fhir:v "iHRIS Profile of the Basic resource to manage pages." ] ;
+       fhir:example [ fhir:v "false"^^xsd:boolean ]
+     ] [
+       fhir:extension ( [
+         fhir:url [ fhir:v "http://hl7.org/fhir/tools/StructureDefinition/resource-information"^^xsd:anyURI ] ;
+         fhir:value [ fhir:v "StructureDefinition:resource" ]
+       ] ) ;
+       fhir:reference [
+         fhir:link <http://ihris.org/fhir/StructureDefinition/ihris-parameters-local-config> ;
+         fhir:reference [ fhir:v "StructureDefinition/ihris-parameters-local-config" ]
+       ] ;
+       fhir:name [ fhir:v "iHRIS Parameters Local Config" ] ;
+       fhir:description [ fhir:v "Configuration Parameters to be loaded from a local file for iHRIS." ] ;
+       fhir:example [ fhir:v "false"^^xsd:boolean ]
+     ] [
+       fhir:extension ( [
+         fhir:url [ fhir:v "http://hl7.org/fhir/tools/StructureDefinition/resource-information"^^xsd:anyURI ] ;
+         fhir:value [ fhir:v "StructureDefinition:resource" ]
+       ] ) ;
+       fhir:reference [
+         fhir:link <http://ihris.org/fhir/StructureDefinition/ihris-parameters-remote-config> ;
+         fhir:reference [ fhir:v "StructureDefinition/ihris-parameters-remote-config" ]
+       ] ;
+       fhir:name [ fhir:v "iHRIS Parameters Remote Config" ] ;
+       fhir:description [ fhir:v "Configuration Parameters to be loaded from a remote file for iHRIS." ] ;
+       fhir:example [ fhir:v "false"^^xsd:boolean ]
+     ] [
+       fhir:extension ( [
+         fhir:url [ fhir:v "http://hl7.org/fhir/tools/StructureDefinition/resource-information"^^xsd:anyURI ] ;
+         fhir:value [ fhir:v "StructureDefinition:resource" ]
+       ] ) ;
+       fhir:reference [
+         fhir:link <http://ihris.org/fhir/StructureDefinition/ihris-practitioner> ;
+         fhir:reference [ fhir:v "StructureDefinition/ihris-practitioner" ]
+       ] ;
+       fhir:name [ fhir:v "iHRIS Practitioner" ] ;
+       fhir:description [ fhir:v "iHRIS profile of Practitioner." ] ;
+       fhir:example [ fhir:v "false"^^xsd:boolean ]
+     ] [
+       fhir:extension ( [
+         fhir:url [ fhir:v "http://hl7.org/fhir/tools/StructureDefinition/resource-information"^^xsd:anyURI ] ;
+         fhir:value [ fhir:v "StructureDefinition:resource" ]
+       ] ) ;
+       fhir:reference [
+         fhir:link <http://ihris.org/fhir/StructureDefinition/ihris-practitioner-role> ;
+         fhir:reference [ fhir:v "StructureDefinition/ihris-practitioner-role" ]
+       ] ;
+       fhir:name [ fhir:v "iHRIS Practitioner Role" ] ;
+       fhir:description [ fhir:v "iHRIS profile of Practitioner Role." ] ;
+       fhir:example [ fhir:v "false"^^xsd:boolean ]
+     ] [
+       fhir:extension ( [
+         fhir:url [ fhir:v "http://hl7.org/fhir/tools/StructureDefinition/resource-information"^^xsd:anyURI ] ;
+         fhir:value [ fhir:v "StructureDefinition:resource" ]
+       ] ) ;
+       fhir:reference [
+         fhir:link <http://ihris.org/fhir/StructureDefinition/ihris-questionnaire> ;
+         fhir:reference [ fhir:v "StructureDefinition/ihris-questionnaire" ]
+       ] ;
+       fhir:name [ fhir:v "iHRIS Questionnaire" ] ;
+       fhir:description [ fhir:v "iHRIS Profile of the Questionnaire resource for data entry and validation." ] ;
+       fhir:example [ fhir:v "false"^^xsd:boolean ]
+     ] [
+       fhir:extension ( [
+         fhir:url [ fhir:v "http://hl7.org/fhir/tools/StructureDefinition/resource-information"^^xsd:anyURI ] ;
+         fhir:value [ fhir:v "StructureDefinition:resource" ]
+       ] ) ;
+       fhir:reference [
+         fhir:link <http://ihris.org/fhir/StructureDefinition/iHRISRelationship> ;
+         fhir:reference [ fhir:v "StructureDefinition/iHRISRelationship" ]
+       ] ;
+       fhir:name [ fhir:v "iHRIS Resources Relationship Profile" ] ;
+       fhir:description [ fhir:v "iHRIS Resources Relationship Profile" ] ;
+       fhir:example [ fhir:v "false"^^xsd:boolean ]
+     ] [
+       fhir:extension ( [
+         fhir:url [ fhir:v "http://hl7.org/fhir/tools/StructureDefinition/resource-information"^^xsd:anyURI ] ;
+         fhir:value [ fhir:v "StructureDefinition:resource" ]
+       ] ) ;
+       fhir:reference [
+         fhir:link <http://ihris.org/fhir/StructureDefinition/ihris-report> ;
+         fhir:reference [ fhir:v "StructureDefinition/ihris-report" ]
+       ] ;
+       fhir:name [ fhir:v "iHRIS Report" ] ;
+       fhir:description [ fhir:v "iHRIS Profile of the Basic resource to manage reports." ] ;
+       fhir:example [ fhir:v "false"^^xsd:boolean ]
+     ] [
+       fhir:extension ( [
+         fhir:url [ fhir:v "http://hl7.org/fhir/tools/StructureDefinition/resource-information"^^xsd:anyURI ] ;
+         fhir:value [ fhir:v "StructureDefinition:resource" ]
+       ] ) ;
+       fhir:reference [
+         fhir:link <http://ihris.org/fhir/StructureDefinition/ihris-role> ;
+         fhir:reference [ fhir:v "StructureDefinition/ihris-role" ]
+       ] ;
+       fhir:name [ fhir:v "iHRIS Role" ] ;
+       fhir:description [ fhir:v "iHRIS Profile of the Basic resource to manage roles." ] ;
+       fhir:example [ fhir:v "false"^^xsd:boolean ]
+     ] [
+       fhir:extension ( [
+         fhir:url [ fhir:v "http://hl7.org/fhir/tools/StructureDefinition/resource-information"^^xsd:anyURI ] ;
+         fhir:value [ fhir:v "StructureDefinition:resource" ]
+       ] ) ;
+       fhir:reference [
+         fhir:link <http://ihris.org/fhir/StructureDefinition/ihris-task> ;
+         fhir:reference [ fhir:v "StructureDefinition/ihris-task" ]
+       ] ;
+       fhir:name [ fhir:v "iHRIS Task" ] ;
+       fhir:description [ fhir:v "iHRIS Profile of the Basic resource to manage tasks." ] ;
+       fhir:example [ fhir:v "false"^^xsd:boolean ]
+     ] [
+       fhir:extension ( [
+         fhir:url [ fhir:v "http://hl7.org/fhir/tools/StructureDefinition/resource-information"^^xsd:anyURI ] ;
+         fhir:value [ fhir:v "StructureDefinition:extension" ]
+       ] ) ;
+       fhir:reference [
+         fhir:link <http://ihris.org/fhir/StructureDefinition/composite-task> ;
+         fhir:reference [ fhir:v "StructureDefinition/composite-task" ]
+       ] ;
+       fhir:name [ fhir:v "Composite Task" ] ;
+       fhir:description [ fhir:v "Tasks Inheritance" ] ;
+       fhir:example [ fhir:v "false"^^xsd:boolean ]
+     ] [
+       fhir:extension ( [
+         fhir:url [ fhir:v "http://hl7.org/fhir/tools/StructureDefinition/resource-information"^^xsd:anyURI ] ;
+         fhir:value [ fhir:v "StructureDefinition:extension" ]
+       ] ) ;
+       fhir:reference [
+         fhir:link <http://ihris.org/fhir/StructureDefinition/ihris-assign-role> ;
+         fhir:reference [ fhir:v "StructureDefinition/ihris-assign-role" ]
+       ] ;
+       fhir:name [ fhir:v "iHRIS Assign Role" ] ;
+       fhir:description [ fhir:v "iHRIS Assign Role to a user or other role." ] ;
+       fhir:example [ fhir:v "false"^^xsd:boolean ]
+     ] [
+       fhir:extension ( [
+         fhir:url [ fhir:v "http://hl7.org/fhir/tools/StructureDefinition/resource-information"^^xsd:anyURI ] ;
+         fhir:value [ fhir:v "StructureDefinition:extension" ]
+       ] ) ;
+       fhir:reference [
+         fhir:link <http://ihris.org/fhir/StructureDefinition/ihris-assign-task> ;
+         fhir:reference [ fhir:v "StructureDefinition/ihris-assign-task" ]
+       ] ;
+       fhir:name [ fhir:v "iHRIS Assign Task" ] ;
+       fhir:description [ fhir:v "iHRIS Assign Task to a user or other task." ] ;
+       fhir:example [ fhir:v "false"^^xsd:boolean ]
+     ] [
+       fhir:extension ( [
+         fhir:url [ fhir:v "http://hl7.org/fhir/tools/StructureDefinition/resource-information"^^xsd:anyURI ] ;
+         fhir:value [ fhir:v "StructureDefinition:extension" ]
+       ] ) ;
+       fhir:reference [
+         fhir:link <http://ihris.org/fhir/StructureDefinition/ihris-basic-name> ;
+         fhir:reference [ fhir:v "StructureDefinition/ihris-basic-name" ]
+       ] ;
+       fhir:name [ fhir:v "iHRIS Basic Name" ] ;
+       fhir:description [ fhir:v "iHRIS name field for basic resources." ] ;
+       fhir:example [ fhir:v "false"^^xsd:boolean ]
+     ] [
+       fhir:extension ( [
+         fhir:url [ fhir:v "http://hl7.org/fhir/tools/StructureDefinition/resource-information"^^xsd:anyURI ] ;
+         fhir:value [ fhir:v "StructureDefinition:extension" ]
+       ] ) ;
+       fhir:reference [
+         fhir:link <http://ihris.org/fhir/StructureDefinition/ihris-dashboard-visualization> ;
+         fhir:reference [ fhir:v "StructureDefinition/ihris-dashboard-visualization" ]
+       ] ;
+       fhir:name [ fhir:v "iHRIS Dashboard Visualization" ] ;
+       fhir:description [ fhir:v "iHRIS Dashboard Visualization" ] ;
+       fhir:example [ fhir:v "false"^^xsd:boolean ]
+     ] [
+       fhir:extension ( [
+         fhir:url [ fhir:v "http://hl7.org/fhir/tools/StructureDefinition/resource-information"^^xsd:anyURI ] ;
+         fhir:value [ fhir:v "StructureDefinition:extension" ]
+       ] ) ;
+       fhir:reference [
+         fhir:link <http://ihris.org/fhir/StructureDefinition/ihris-facility-information-details> ;
+         fhir:reference [ fhir:v "StructureDefinition/ihris-facility-information-details" ]
+       ] ;
+       fhir:name [ fhir:v "Ihris Facility Information Details" ] ;
+       fhir:description [ fhir:v "Defines the primary resource of the facility information " ] ;
+       fhir:example [ fhir:v "false"^^xsd:boolean ]
+     ] [
+       fhir:extension ( [
+         fhir:url [ fhir:v "http://hl7.org/fhir/tools/StructureDefinition/resource-information"^^xsd:anyURI ] ;
+         fhir:value [ fhir:v "StructureDefinition:extension" ]
+       ] ) ;
+       fhir:reference [
+         fhir:link <http://ihris.org/fhir/StructureDefinition/ihris-facility-ownership-prefix> ;
+         fhir:reference [ fhir:v "StructureDefinition/ihris-facility-ownership-prefix" ]
+       ] ;
+       fhir:name [ fhir:v "iHRIS facility ownership type" ] ;
+       fhir:description [ fhir:v "iHRIS extension for Personal Prefix." ] ;
+       fhir:example [ fhir:v "false"^^xsd:boolean ]
+     ] [
+       fhir:extension ( [
+         fhir:url [ fhir:v "http://hl7.org/fhir/tools/StructureDefinition/resource-information"^^xsd:anyURI ] ;
+         fhir:value [ fhir:v "StructureDefinition:extension" ]
+       ] ) ;
+       fhir:reference [
+         fhir:link <http://ihris.org/fhir/StructureDefinition/ihris-page-display> ;
+         fhir:reference [ fhir:v "StructureDefinition/ihris-page-display" ]
+       ] ;
+       fhir:name [ fhir:v "iHRIS Page Display" ] ;
+       fhir:description [ fhir:v "iHRIS Page Display details." ] ;
+       fhir:example [ fhir:v "false"^^xsd:boolean ]
+     ] [
+       fhir:extension ( [
+         fhir:url [ fhir:v "http://hl7.org/fhir/tools/StructureDefinition/resource-information"^^xsd:anyURI ] ;
+         fhir:value [ fhir:v "StructureDefinition:extension" ]
+       ] ) ;
+       fhir:reference [
+         fhir:link <http://ihris.org/fhir/StructureDefinition/ihris-page-section> ;
+         fhir:reference [ fhir:v "StructureDefinition/ihris-page-section" ]
+       ] ;
+       fhir:name [ fhir:v "iHRIS Page Section" ] ;
+       fhir:description [ fhir:v "iHRIS Page Section information." ] ;
+       fhir:example [ fhir:v "false"^^xsd:boolean ]
+     ] [
+       fhir:extension ( [
+         fhir:url [ fhir:v "http://hl7.org/fhir/tools/StructureDefinition/resource-information"^^xsd:anyURI ] ;
+         fhir:value [ fhir:v "StructureDefinition:extension" ]
+       ] ) ;
+       fhir:reference [
+         fhir:link <http://ihris.org/fhir/StructureDefinition/ihris-practitioner-dependent-detail> ;
+         fhir:reference [ fhir:v "StructureDefinition/ihris-practitioner-dependent-detail" ]
+       ] ;
+       fhir:name [ fhir:v "iHRIS Practitioner Dependent Detail" ] ;
+       fhir:description [ fhir:v "iHRIS extension for Practitioner Dependent Detail." ] ;
+       fhir:example [ fhir:v "false"^^xsd:boolean ]
+     ] [
+       fhir:extension ( [
+         fhir:url [ fhir:v "http://hl7.org/fhir/tools/StructureDefinition/resource-information"^^xsd:anyURI ] ;
+         fhir:value [ fhir:v "StructureDefinition:extension" ]
+       ] ) ;
+       fhir:reference [
+         fhir:link <http://ihris.org/fhir/StructureDefinition/ihris-practitioner-dependents> ;
+         fhir:reference [ fhir:v "StructureDefinition/ihris-practitioner-dependents" ]
+       ] ;
+       fhir:name [ fhir:v "iHRIS Practitioner Dependents" ] ;
+       fhir:description [ fhir:v "iHRIS extension for Practitioner number of dependents." ] ;
+       fhir:example [ fhir:v "false"^^xsd:boolean ]
+     ] [
+       fhir:extension ( [
+         fhir:url [ fhir:v "http://hl7.org/fhir/tools/StructureDefinition/resource-information"^^xsd:anyURI ] ;
+         fhir:value [ fhir:v "StructureDefinition:extension" ]
+       ] ) ;
+       fhir:reference [
+         fhir:link <http://ihris.org/fhir/StructureDefinition/ihris-practitioner-language-proficiency> ;
+         fhir:reference [ fhir:v "StructureDefinition/ihris-practitioner-language-proficiency" ]
+       ] ;
+       fhir:name [ fhir:v "iHRIS Practitioner Language Proficiency" ] ;
+       fhir:description [ fhir:v "iHRIS extension for Practitioner Language Proficiency." ] ;
+       fhir:example [ fhir:v "false"^^xsd:boolean ]
+     ] [
+       fhir:extension ( [
+         fhir:url [ fhir:v "http://hl7.org/fhir/tools/StructureDefinition/resource-information"^^xsd:anyURI ] ;
+         fhir:value [ fhir:v "StructureDefinition:extension" ]
+       ] ) ;
+       fhir:reference [
+         fhir:link <http://ihris.org/fhir/StructureDefinition/ihris-practitioner-marital-status> ;
+         fhir:reference [ fhir:v "StructureDefinition/ihris-practitioner-marital-status" ]
+       ] ;
+       fhir:name [ fhir:v "iHRIS Practitioner Marital Status" ] ;
+       fhir:description [ fhir:v "iHRIS extension for Practitioner marital status." ] ;
+       fhir:example [ fhir:v "false"^^xsd:boolean ]
+     ] [
+       fhir:extension ( [
+         fhir:url [ fhir:v "http://hl7.org/fhir/tools/StructureDefinition/resource-information"^^xsd:anyURI ] ;
+         fhir:value [ fhir:v "StructureDefinition:extension" ]
+       ] ) ;
+       fhir:reference [
+         fhir:link <http://ihris.org/fhir/StructureDefinition/ihris-practitioner-nationality> ;
+         fhir:reference [ fhir:v "StructureDefinition/ihris-practitioner-nationality" ]
+       ] ;
+       fhir:name [ fhir:v "iHRIS Practitioner Nationality" ] ;
+       fhir:description [ fhir:v "iHRIS extension for Practitioner nationality." ] ;
+       fhir:example [ fhir:v "false"^^xsd:boolean ]
+     ] [
+       fhir:extension ( [
+         fhir:url [ fhir:v "http://hl7.org/fhir/tools/StructureDefinition/resource-information"^^xsd:anyURI ] ;
+         fhir:value [ fhir:v "StructureDefinition:extension" ]
+       ] ) ;
+       fhir:reference [
+         fhir:link <http://ihris.org/fhir/StructureDefinition/ihris-practitioner-residence> ;
+         fhir:reference [ fhir:v "StructureDefinition/ihris-practitioner-residence" ]
+       ] ;
+       fhir:name [ fhir:v "iHRIS Practitioner Residence" ] ;
+       fhir:description [ fhir:v "iHRIS extension for Practitioner residence." ] ;
+       fhir:example [ fhir:v "false"^^xsd:boolean ]
+     ] [
+       fhir:extension ( [
+         fhir:url [ fhir:v "http://hl7.org/fhir/tools/StructureDefinition/resource-information"^^xsd:anyURI ] ;
+         fhir:value [ fhir:v "StructureDefinition:extension" ]
+       ] ) ;
+       fhir:reference [
+         fhir:link <http://ihris.org/fhir/StructureDefinition/iHRISReportDetails> ;
+         fhir:reference [ fhir:v "StructureDefinition/iHRISReportDetails" ]
+       ] ;
+       fhir:name [ fhir:v "Details of a report" ] ;
+       fhir:description [ fhir:v "Defines the primary resource of the relationship" ] ;
+       fhir:example [ fhir:v "false"^^xsd:boolean ]
+     ] [
+       fhir:extension ( [
+         fhir:url [ fhir:v "http://hl7.org/fhir/tools/StructureDefinition/resource-information"^^xsd:anyURI ] ;
+         fhir:value [ fhir:v "StructureDefinition:extension" ]
+       ] ) ;
+       fhir:reference [
+         fhir:link <http://ihris.org/fhir/StructureDefinition/iHRISReportElement> ;
+         fhir:reference [ fhir:v "StructureDefinition/iHRISReportElement" ]
+       ] ;
+       fhir:name [ fhir:v "Resource Fields" ] ;
+       fhir:description [ fhir:v "Lists fields of a resource to be displayed/cached" ] ;
+       fhir:example [ fhir:v "false"^^xsd:boolean ]
+     ] [
+       fhir:extension ( [
+         fhir:url [ fhir:v "http://hl7.org/fhir/tools/StructureDefinition/resource-information"^^xsd:anyURI ] ;
+         fhir:value [ fhir:v "StructureDefinition:extension" ]
+       ] ) ;
+       fhir:reference [
+         fhir:link <http://ihris.org/fhir/StructureDefinition/iHRISReportLink> ;
+         fhir:reference [ fhir:v "StructureDefinition/iHRISReportLink" ]
+       ] ;
+       fhir:name [ fhir:v "Links to the primary resource" ] ;
+       fhir:description [ fhir:v "Links to the primary resource" ] ;
+       fhir:example [ fhir:v "false"^^xsd:boolean ]
+     ] [
+       fhir:extension ( [
+         fhir:url [ fhir:v "http://hl7.org/fhir/tools/StructureDefinition/resource-information"^^xsd:anyURI ] ;
+         fhir:value [ fhir:v "StructureDefinition:extension" ]
+       ] ) ;
+       fhir:reference [
+         fhir:link <http://ihris.org/fhir/StructureDefinition/ihris-resource-relationships> ;
+         fhir:reference [ fhir:v "StructureDefinition/ihris-resource-relationships" ]
+       ] ;
+       fhir:name [ fhir:v "iHRIS Resource Relationships" ] ;
+       fhir:description [ fhir:v "iHRIS Resource Relationships" ] ;
+       fhir:example [ fhir:v "false"^^xsd:boolean ]
+     ] [
+       fhir:extension ( [
+         fhir:url [ fhir:v "http://hl7.org/fhir/tools/StructureDefinition/resource-information"^^xsd:anyURI ] ;
+         fhir:value [ fhir:v "StructureDefinition:extension" ]
+       ] ) ;
+       fhir:reference [
+         fhir:link <http://ihris.org/fhir/StructureDefinition/ihris-role-primary> ;
+         fhir:reference [ fhir:v "StructureDefinition/ihris-role-primary" ]
+       ] ;
+       fhir:name [ fhir:v "iHRIS Role Primary" ] ;
+       fhir:description [ fhir:v "iHRIS flag for roles to indicate a primary role for assignment to users." ] ;
+       fhir:example [ fhir:v "false"^^xsd:boolean ]
+     ] [
+       fhir:extension ( [
+         fhir:url [ fhir:v "http://hl7.org/fhir/tools/StructureDefinition/resource-information"^^xsd:anyURI ] ;
+         fhir:value [ fhir:v "StructureDefinition:extension" ]
+       ] ) ;
+       fhir:reference [
+         fhir:link <http://ihris.org/fhir/StructureDefinition/ihris-visualization-categories> ;
+         fhir:reference [ fhir:v "StructureDefinition/ihris-visualization-categories" ]
+       ] ;
+       fhir:name [ fhir:v "iHRIS Visualization Categories" ] ;
+       fhir:description [ fhir:v "iHRIS visualization categories" ] ;
+       fhir:example [ fhir:v "false"^^xsd:boolean ]
+     ] [
+       fhir:extension ( [
+         fhir:url [ fhir:v "http://hl7.org/fhir/tools/StructureDefinition/resource-information"^^xsd:anyURI ] ;
+         fhir:value [ fhir:v "StructureDefinition:extension" ]
+       ] ) ;
+       fhir:reference [
+         fhir:link <http://ihris.org/fhir/StructureDefinition/ihris-visualization-dataset> ;
+         fhir:reference [ fhir:v "StructureDefinition/ihris-visualization-dataset" ]
+       ] ;
+       fhir:name [ fhir:v "iHRIS Visualization Dataset" ] ;
+       fhir:description [ fhir:v "iHRIS visualization dataset" ] ;
+       fhir:example [ fhir:v "false"^^xsd:boolean ]
+     ] [
+       fhir:extension ( [
+         fhir:url [ fhir:v "http://hl7.org/fhir/tools/StructureDefinition/resource-information"^^xsd:anyURI ] ;
+         fhir:value [ fhir:v "StructureDefinition:extension" ]
+       ] ) ;
+       fhir:reference [
+         fhir:link <http://ihris.org/fhir/StructureDefinition/ihris-visualization-filters> ;
+         fhir:reference [ fhir:v "StructureDefinition/ihris-visualization-filters" ]
+       ] ;
+       fhir:name [ fhir:v "iHRIS Visualization Filters" ] ;
+       fhir:description [ fhir:v "iHRIS visualization filters" ] ;
+       fhir:example [ fhir:v "false"^^xsd:boolean ]
+     ] [
+       fhir:extension ( [
+         fhir:url [ fhir:v "http://hl7.org/fhir/tools/StructureDefinition/resource-information"^^xsd:anyURI ] ;
+         fhir:value [ fhir:v "StructureDefinition:extension" ]
+       ] ) ;
+       fhir:reference [
+         fhir:link <http://ihris.org/fhir/StructureDefinition/ihris-visualization-permissions> ;
+         fhir:reference [ fhir:v "StructureDefinition/ihris-visualization-permissions" ]
+       ] ;
+       fhir:name [ fhir:v "iHRIS Visualization Permissions" ] ;
+       fhir:description [ fhir:v "iHRIS Visualization Permissions" ] ;
+       fhir:example [ fhir:v "false"^^xsd:boolean ]
+     ] [
+       fhir:extension ( [
+         fhir:url [ fhir:v "http://hl7.org/fhir/tools/StructureDefinition/resource-information"^^xsd:anyURI ] ;
+         fhir:value [ fhir:v "StructureDefinition:extension" ]
+       ] ) ;
+       fhir:reference [
+         fhir:link <http://ihris.org/fhir/StructureDefinition/ihris-visualization-series> ;
+         fhir:reference [ fhir:v "StructureDefinition/ihris-visualization-series" ]
+       ] ;
+       fhir:name [ fhir:v "iHRIS Visualization Series" ] ;
+       fhir:description [ fhir:v "iHRIS visualization series" ] ;
+       fhir:example [ fhir:v "false"^^xsd:boolean ]
+     ] [
+       fhir:extension ( [
+         fhir:url [ fhir:v "http://hl7.org/fhir/tools/StructureDefinition/resource-information"^^xsd:anyURI ] ;
+         fhir:value [ fhir:v "StructureDefinition:extension" ]
+       ] ) ;
+       fhir:reference [
+         fhir:link <http://ihris.org/fhir/StructureDefinition/ihris-visualization-settings> ;
+         fhir:reference [ fhir:v "StructureDefinition/ihris-visualization-settings" ]
+       ] ;
+       fhir:name [ fhir:v "iHRIS Visualization Settings" ] ;
+       fhir:description [ fhir:v "iHRIS visualization settings for the data visualizer" ] ;
+       fhir:example [ fhir:v "false"^^xsd:boolean ]
+     ] [
+       fhir:extension ( [
+         fhir:url [ fhir:v "http://hl7.org/fhir/tools/StructureDefinition/resource-information"^^xsd:anyURI ] ;
+         fhir:value [ fhir:v "StructureDefinition:extension" ]
+       ] ) ;
+       fhir:reference [
+         fhir:link <http://ihris.org/fhir/StructureDefinition/task-attributes> ;
+         fhir:reference [ fhir:v "StructureDefinition/task-attributes" ]
+       ] ;
+       fhir:name [ fhir:v "Task Attributes" ] ;
+       fhir:description [ fhir:v "Task attributes." ] ;
+       fhir:example [ fhir:v "false"^^xsd:boolean ]
+     ] [
+       fhir:extension ( [
+         fhir:url [ fhir:v "http://hl7.org/fhir/tools/StructureDefinition/resource-information"^^xsd:anyURI ] ;
+         fhir:value [ fhir:v "ValueSet" ]
+       ] ) ;
+       fhir:reference [
+         fhir:link <http://ihris.org/fhir/ValueSet/ihris-document-category> ;
+         fhir:reference [ fhir:v "ValueSet/ihris-document-category" ]
+       ] ;
+       fhir:name [ fhir:v "Code system for document categories." ] ;
+       fhir:example [ fhir:v "false"^^xsd:boolean ]
+     ] [
+       fhir:extension ( [
+         fhir:url [ fhir:v "http://hl7.org/fhir/tools/StructureDefinition/resource-information"^^xsd:anyURI ] ;
+         fhir:value [ fhir:v "ValueSet" ]
+       ] ) ;
+       fhir:reference [
+         fhir:link <http://ihris.org/fhir/ValueSet/ihris-Facility-identifier-valueset> ;
+         fhir:reference [ fhir:v "ValueSet/ihris-Facility-identifier-valueset" ]
+       ] ;
+       fhir:name [ fhir:v "iHRIS facility Identifier ValueSet" ] ;
+       fhir:example [ fhir:v "false"^^xsd:boolean ]
+     ] [
+       fhir:extension ( [
+         fhir:url [ fhir:v "http://hl7.org/fhir/tools/StructureDefinition/resource-information"^^xsd:anyURI ] ;
+         fhir:value [ fhir:v "ValueSet" ]
+       ] ) ;
+       fhir:reference [
+         fhir:link <http://ihris.org/fhir/ValueSet/Ihris-facility-ownership> ;
+         fhir:reference [ fhir:v "ValueSet/Ihris-facility-ownership" ]
+       ] ;
+       fhir:name [ fhir:v "iHRIS Facility Ownership ValueSet" ] ;
+       fhir:example [ fhir:v "false"^^xsd:boolean ]
+     ] [
+       fhir:extension ( [
+         fhir:url [ fhir:v "http://hl7.org/fhir/tools/StructureDefinition/resource-information"^^xsd:anyURI ] ;
+         fhir:value [ fhir:v "ValueSet" ]
+       ] ) ;
+       fhir:reference [
+         fhir:link <http://ihris.org/fhir/ValueSet/ihris-facility-type> ;
+         fhir:reference [ fhir:v "ValueSet/ihris-facility-type" ]
+       ] ;
+       fhir:name [ fhir:v "iHRIS Facility Type ValueSet" ] ;
+       fhir:example [ fhir:v "false"^^xsd:boolean ]
+     ] [
+       fhir:extension ( [
+         fhir:url [ fhir:v "http://hl7.org/fhir/tools/StructureDefinition/resource-information"^^xsd:anyURI ] ;
+         fhir:value [ fhir:v "ValueSet" ]
+       ] ) ;
+       fhir:reference [
+         fhir:link <http://ihris.org/fhir/ValueSet/ihris-jurisdiction-type> ;
+         fhir:reference [ fhir:v "ValueSet/ihris-jurisdiction-type" ]
+       ] ;
+       fhir:name [ fhir:v "iHRIS Jurisdiction Type ValueSet" ] ;
+       fhir:example [ fhir:v "false"^^xsd:boolean ]
+     ] [
+       fhir:extension ( [
+         fhir:url [ fhir:v "http://hl7.org/fhir/tools/StructureDefinition/resource-information"^^xsd:anyURI ] ;
+         fhir:value [ fhir:v "ValueSet" ]
+       ] ) ;
+       fhir:reference [
+         fhir:link <http://ihris.org/fhir/ValueSet/ihris-relation-valueset> ;
+         fhir:reference [ fhir:v "ValueSet/ihris-relation-valueset" ]
+       ] ;
+       fhir:name [ fhir:v "iHRIS Relationship ValueSet" ] ;
+       fhir:example [ fhir:v "false"^^xsd:boolean ]
+     ] [
+       fhir:extension ( [
+         fhir:url [ fhir:v "http://hl7.org/fhir/tools/StructureDefinition/resource-information"^^xsd:anyURI ] ;
+         fhir:value [ fhir:v "ValueSet" ]
+       ] ) ;
+       fhir:reference [
+         fhir:link <http://ihris.org/fhir/ValueSet/ihris-resource-valueset> ;
+         fhir:reference [ fhir:v "ValueSet/ihris-resource-valueset" ]
+       ] ;
+       fhir:name [ fhir:v "Value Set for iHRIS Basic Resources." ] ;
+       fhir:example [ fhir:v "false"^^xsd:boolean ]
+     ] [
+       fhir:extension ( [
+         fhir:url [ fhir:v "http://hl7.org/fhir/tools/StructureDefinition/resource-information"^^xsd:anyURI ] ;
+         fhir:value [ fhir:v "ValueSet" ]
+       ] ) ;
+       fhir:reference [
+         fhir:link <http://ihris.org/fhir/ValueSet/ihris-task-permission> ;
+         fhir:reference [ fhir:v "ValueSet/ihris-task-permission" ]
+       ] ;
+       fhir:name [ fhir:v "Code system for task permissions." ] ;
+       fhir:example [ fhir:v "false"^^xsd:boolean ]
+     ] [
+       fhir:extension ( [
+         fhir:url [ fhir:v "http://hl7.org/fhir/tools/StructureDefinition/resource-information"^^xsd:anyURI ] ;
+         fhir:value [ fhir:v "ValueSet" ]
+       ] ) ;
+       fhir:reference [
+         fhir:link <http://ihris.org/fhir/ValueSet/ihris-task-resource> ;
+         fhir:reference [ fhir:v "ValueSet/ihris-task-resource" ]
+       ] ;
+       fhir:name [ fhir:v "Code system for task permissions." ] ;
+       fhir:example [ fhir:v "false"^^xsd:boolean ]
+     ] [
+       fhir:extension ( [
+         fhir:url [ fhir:v "http://hl7.org/fhir/tools/StructureDefinition/resource-information"^^xsd:anyURI ] ;
+         fhir:value [ fhir:v "CodeSystem" ]
+       ] ) ;
+       fhir:reference [
+         fhir:link <http://ihris.org/fhir/CodeSystem/ihris-document-category> ;
+         fhir:reference [ fhir:v "CodeSystem/ihris-document-category" ]
+       ] ;
+       fhir:name [ fhir:v "Code system for document categories." ] ;
+       fhir:example [ fhir:v "false"^^xsd:boolean ]
+     ] [
+       fhir:extension ( [
+         fhir:url [ fhir:v "http://hl7.org/fhir/tools/StructureDefinition/resource-information"^^xsd:anyURI ] ;
+         fhir:value [ fhir:v "CodeSystem" ]
+       ] ) ;
+       fhir:reference [
+         fhir:link <http://ihris.org/fhir/CodeSystem/ihris-Facility-identifier> ;
+         fhir:reference [ fhir:v "CodeSystem/ihris-Facility-identifier" ]
+       ] ;
+       fhir:name [ fhir:v "Identifier Type" ] ;
+       fhir:example [ fhir:v "false"^^xsd:boolean ]
+     ] [
+       fhir:extension ( [
+         fhir:url [ fhir:v "http://hl7.org/fhir/tools/StructureDefinition/resource-information"^^xsd:anyURI ] ;
+         fhir:value [ fhir:v "CodeSystem" ]
+       ] ) ;
+       fhir:reference [
+         fhir:link <http://ihris.org/fhir/CodeSystem/Ihris-facility-ownership-type> ;
+         fhir:reference [ fhir:v "CodeSystem/Ihris-facility-ownership-type" ]
+       ] ;
+       fhir:name [ fhir:v "Facility Ownership Type" ] ;
+       fhir:example [ fhir:v "false"^^xsd:boolean ]
+     ] [
+       fhir:extension ( [
+         fhir:url [ fhir:v "http://hl7.org/fhir/tools/StructureDefinition/resource-information"^^xsd:anyURI ] ;
+         fhir:value [ fhir:v "CodeSystem" ]
+       ] ) ;
+       fhir:reference [
+         fhir:link <http://ihris.org/fhir/CodeSystem/ihris-facility-type> ;
+         fhir:reference [ fhir:v "CodeSystem/ihris-facility-type" ]
+       ] ;
+       fhir:name [ fhir:v "Facility Type" ] ;
+       fhir:example [ fhir:v "false"^^xsd:boolean ]
+     ] [
+       fhir:extension ( [
+         fhir:url [ fhir:v "http://hl7.org/fhir/tools/StructureDefinition/resource-information"^^xsd:anyURI ] ;
+         fhir:value [ fhir:v "CodeSystem" ]
+       ] ) ;
+       fhir:reference [
+         fhir:link <http://ihris.org/fhir/CodeSystem/ihris-jurisdiction-type> ;
+         fhir:reference [ fhir:v "CodeSystem/ihris-jurisdiction-type" ]
+       ] ;
+       fhir:name [ fhir:v "Jurisdiction Type" ] ;
+       fhir:example [ fhir:v "false"^^xsd:boolean ]
+     ] [
+       fhir:extension ( [
+         fhir:url [ fhir:v "http://hl7.org/fhir/tools/StructureDefinition/resource-information"^^xsd:anyURI ] ;
+         fhir:value [ fhir:v "CodeSystem" ]
+       ] ) ;
+       fhir:reference [
+         fhir:link <http://ihris.org/fhir/CodeSystem/ihris-relation-codesystem> ;
+         fhir:reference [ fhir:v "CodeSystem/ihris-relation-codesystem" ]
+       ] ;
+       fhir:name [ fhir:v "Relationship" ] ;
+       fhir:example [ fhir:v "false"^^xsd:boolean ]
+     ] [
+       fhir:extension ( [
+         fhir:url [ fhir:v "http://hl7.org/fhir/tools/StructureDefinition/resource-information"^^xsd:anyURI ] ;
+         fhir:value [ fhir:v "CodeSystem" ]
+       ] ) ;
+       fhir:reference [
+         fhir:link <http://ihris.org/fhir/CodeSystem/ihris-resource-codesystem> ;
+         fhir:reference [ fhir:v "CodeSystem/ihris-resource-codesystem" ]
+       ] ;
+       fhir:name [ fhir:v "Code System for iHRIS Basic Resources." ] ;
+       fhir:example [ fhir:v "false"^^xsd:boolean ]
+     ] [
+       fhir:extension ( [
+         fhir:url [ fhir:v "http://hl7.org/fhir/tools/StructureDefinition/resource-information"^^xsd:anyURI ] ;
+         fhir:value [ fhir:v "CodeSystem" ]
+       ] ) ;
+       fhir:reference [
+         fhir:link <http://ihris.org/fhir/CodeSystem/ihris-task-permission> ;
+         fhir:reference [ fhir:v "CodeSystem/ihris-task-permission" ]
+       ] ;
+       fhir:name [ fhir:v "Code system for task permissions." ] ;
+       fhir:example [ fhir:v "false"^^xsd:boolean ]
+     ] [
+       fhir:extension ( [
+         fhir:url [ fhir:v "http://hl7.org/fhir/tools/StructureDefinition/resource-information"^^xsd:anyURI ] ;
+         fhir:value [ fhir:v "CodeSystem" ]
+       ] ) ;
+       fhir:reference [
+         fhir:link <http://ihris.org/fhir/CodeSystem/ihris-task-resource> ;
+         fhir:reference [ fhir:v "CodeSystem/ihris-task-resource" ]
+       ] ;
+       fhir:name [ fhir:v "Code system for task permissions." ] ;
+       fhir:example [ fhir:v "false"^^xsd:boolean ]
+     ] [
+       fhir:extension ( [
+         fhir:url [ fhir:v "http://hl7.org/fhir/tools/StructureDefinition/resource-information"^^xsd:anyURI ] ;
+         fhir:value [ fhir:v "SearchParameter" ]
+       ] ) ;
+       fhir:reference [
+         fhir:link <http://ihris.org/fhir/SearchParameter/basic-location-constraint> ;
+         fhir:reference [ fhir:v "SearchParameter/basic-location-constraint" ]
+       ] ;
+       fhir:name [ fhir:v "basic-location-constraint" ] ;
+       fhir:description [ fhir:v "Search by related location for a Basic resource Role." ] ;
+       fhir:example [ fhir:v "false"^^xsd:boolean ]
+     ] [
+       fhir:extension ( [
+         fhir:url [ fhir:v "http://hl7.org/fhir/tools/StructureDefinition/resource-information"^^xsd:anyURI ] ;
+         fhir:value [ fhir:v "SearchParameter" ]
+       ] ) ;
+       fhir:reference [
+         fhir:link <http://ihris.org/fhir/SearchParameter/basic-name> ;
+         fhir:reference [ fhir:v "SearchParameter/basic-name" ]
+       ] ;
+       fhir:name [ fhir:v "basic-name" ] ;
+       fhir:description [ fhir:v "Search by name for a Basic resource." ] ;
+       fhir:example [ fhir:v "false"^^xsd:boolean ]
+     ] [
+       fhir:extension ( [
+         fhir:url [ fhir:v "http://hl7.org/fhir/tools/StructureDefinition/resource-information"^^xsd:anyURI ] ;
+         fhir:value [ fhir:v "SearchParameter" ]
+       ] ) ;
+       fhir:reference [
+         fhir:link <http://ihris.org/fhir/SearchParameter/basic-practitioner> ;
+         fhir:reference [ fhir:v "SearchParameter/basic-practitioner" ]
+       ] ;
+       fhir:name [ fhir:v "basic-practitioner" ] ;
+       fhir:description [ fhir:v "Search by practitioner for a Basic resource." ] ;
+       fhir:example [ fhir:v "false"^^xsd:boolean ]
+     ] [
+       fhir:extension ( [
+         fhir:url [ fhir:v "http://hl7.org/fhir/tools/StructureDefinition/resource-information"^^xsd:anyURI ] ;
+         fhir:value [ fhir:v "SearchParameter" ]
+       ] ) ;
+       fhir:reference [
+         fhir:link <http://ihris.org/fhir/SearchParameter/basic-related-location> ;
+         fhir:reference [ fhir:v "SearchParameter/basic-related-location" ]
+       ] ;
+       fhir:name [ fhir:v "basic-related-location" ] ;
+       fhir:description [ fhir:v "Search by related location for a Basic resource." ] ;
+       fhir:example [ fhir:v "false"^^xsd:boolean ]
+     ] [
+       fhir:extension ( [
+         fhir:url [ fhir:v "http://hl7.org/fhir/tools/StructureDefinition/resource-information"^^xsd:anyURI ] ;
+         fhir:value [ fhir:v "SearchParameter" ]
+       ] ) ;
+       fhir:reference [
+         fhir:link <http://ihris.org/fhir/SearchParameter/basic-related-practitioner> ;
+         fhir:reference [ fhir:v "SearchParameter/basic-related-practitioner" ]
+       ] ;
+       fhir:name [ fhir:v "basic-related-practitioner" ] ;
+       fhir:description [ fhir:v "Search by related practitioner for a Basic resource." ] ;
+       fhir:example [ fhir:v "false"^^xsd:boolean ]
+     ] [
+       fhir:extension ( [
+         fhir:url [ fhir:v "http://hl7.org/fhir/tools/StructureDefinition/resource-information"^^xsd:anyURI ] ;
+         fhir:value [ fhir:v "SearchParameter" ]
+       ] ) ;
+       fhir:reference [
+         fhir:link <http://ihris.org/fhir/SearchParameter/employment-status-search> ;
+         fhir:reference [ fhir:v "SearchParameter/employment-status-search" ]
+       ] ;
+       fhir:name [ fhir:v "employment-status-search" ] ;
+       fhir:description [ fhir:v "Search for a practitionerRole employment-status." ] ;
+       fhir:example [ fhir:v "false"^^xsd:boolean ]
+     ] [
+       fhir:extension ( [
+         fhir:url [ fhir:v "http://hl7.org/fhir/tools/StructureDefinition/resource-information"^^xsd:anyURI ] ;
+         fhir:value [ fhir:v "SearchParameter" ]
+       ] ) ;
+       fhir:reference [
+         fhir:link <http://ihris.org/fhir/SearchParameter/gofr-search-isbroadcast> ;
+         fhir:reference [ fhir:v "SearchParameter/gofr-search-isbroadcast" ]
+       ] ;
+       fhir:name [ fhir:v "gofr-search-isbroadcast" ] ;
+       fhir:description [ fhir:v "search parameter for broadcasted messages" ] ;
+       fhir:example [ fhir:v "false"^^xsd:boolean ]
+     ] [
+       fhir:extension ( [
+         fhir:url [ fhir:v "http://hl7.org/fhir/tools/StructureDefinition/resource-information"^^xsd:anyURI ] ;
+         fhir:value [ fhir:v "SearchParameter" ]
+       ] ) ;
+       fhir:reference [
+         fhir:link <http://ihris.org/fhir/SearchParameter/gofr-search-isflowstart> ;
+         fhir:reference [ fhir:v "SearchParameter/gofr-search-isflowstart" ]
+       ] ;
+       fhir:name [ fhir:v "gofr-search-isflowstart" ] ;
+       fhir:description [ fhir:v "search parameter for flow starts" ] ;
+       fhir:example [ fhir:v "false"^^xsd:boolean ]
+     ] [
+       fhir:extension ( [
+         fhir:url [ fhir:v "http://hl7.org/fhir/tools/StructureDefinition/resource-information"^^xsd:anyURI ] ;
+         fhir:value [ fhir:v "Parameters" ]
+       ] ) ;
+       fhir:reference [
+         fhir:link <http://ihris.org/fhir/Parameters/ihris-dashboard> ;
+         fhir:reference [ fhir:v "Parameters/ihris-dashboard" ]
+       ] ;
+       fhir:name [ fhir:v "ihris-dashboard" ] ;
+       fhir:example [
+         fhir:v "http://ihris.org/fhir/StructureDefinition/ihris-parameters-remote-config"^^xsd:anyURI ;
+         fhir:link <http://ihris.org/fhir/StructureDefinition/ihris-parameters-remote-config>
+       ]
+     ] [
+       fhir:extension ( [
+         fhir:url [ fhir:v "http://hl7.org/fhir/tools/StructureDefinition/resource-information"^^xsd:anyURI ] ;
+         fhir:value [ fhir:v "Questionnaire" ]
+       ] ) ;
+       fhir:reference [
+         fhir:link <http://ihris.org/fhir/Questionnaire/ihris-endrole> ;
+         fhir:reference [ fhir:v "Questionnaire/ihris-endrole" ]
+       ] ;
+       fhir:name [ fhir:v "IhrisPractitionerWorkflowEndRole" ] ;
+       fhir:description [ fhir:v "iHRIS workflow to end a current role/job" ] ;
+       fhir:example [
+         fhir:v "http://ihris.org/fhir/StructureDefinition/ihris-questionnaire"^^xsd:anyURI ;
+         fhir:link <http://ihris.org/fhir/StructureDefinition/ihris-questionnaire>
+       ]
+     ] [
+       fhir:extension ( [
+         fhir:url [ fhir:v "http://hl7.org/fhir/tools/StructureDefinition/resource-information"^^xsd:anyURI ] ;
+         fhir:value [ fhir:v "Basic" ]
+       ] ) ;
+       fhir:reference [
+         fhir:link <http://ihris.org/fhir/Basic/ihris-es-report-mhero-send-message> ;
+         fhir:reference [ fhir:v "Basic/ihris-es-report-mhero-send-message" ]
+       ] ;
+       fhir:name [ fhir:v "iHRIS Relationship Example" ] ;
+       fhir:example [
+         fhir:v "http://ihris.org/fhir/StructureDefinition/iHRISRelationship"^^xsd:anyURI ;
+         fhir:link <http://ihris.org/fhir/StructureDefinition/iHRISRelationship>
+       ]
+     ] [
+       fhir:extension ( [
+         fhir:url [ fhir:v "http://hl7.org/fhir/tools/StructureDefinition/resource-information"^^xsd:anyURI ] ;
+         fhir:value [ fhir:v "Library" ]
+       ] ) ;
+       fhir:reference [
+         fhir:link <http://ihris.org/fhir/Library/ihris-module-example> ;
+         fhir:reference [ fhir:v "Library/ihris-module-example" ]
+       ] ;
+       fhir:name [ fhir:v "iHRIS Module Example" ] ;
+       fhir:example [
+         fhir:v "http://ihris.org/fhir/StructureDefinition/ihris-module"^^xsd:anyURI ;
+         fhir:link <http://ihris.org/fhir/StructureDefinition/ihris-module>
+       ]
+     ] [
+       fhir:extension ( [
+         fhir:url [ fhir:v "http://hl7.org/fhir/tools/StructureDefinition/resource-information"^^xsd:anyURI ] ;
+         fhir:value [ fhir:v "Basic" ]
+       ] ) ;
+       fhir:reference [
+         fhir:link <http://ihris.org/fhir/Basic/ihris-page-auditevent> ;
+         fhir:reference [ fhir:v "Basic/ihris-page-auditevent" ]
+       ] ;
+       fhir:name [ fhir:v "AuditEvent" ] ;
+       fhir:example [
+         fhir:v "http://ihris.org/fhir/StructureDefinition/ihris-page"^^xsd:anyURI ;
+         fhir:link <http://ihris.org/fhir/StructureDefinition/ihris-page>
+       ]
+     ] [
+       fhir:extension ( [
+         fhir:url [ fhir:v "http://hl7.org/fhir/tools/StructureDefinition/resource-information"^^xsd:anyURI ] ;
+         fhir:value [ fhir:v "Basic" ]
+       ] ) ;
+       fhir:reference [
+         fhir:link <http://ihris.org/fhir/Basic/ihris-page-cadre> ;
+         fhir:reference [ fhir:v "Basic/ihris-page-cadre" ]
+       ] ;
+       fhir:name [ fhir:v "iHRIS Cadre CodeSystem Page" ] ;
+       fhir:example [
+         fhir:v "http://ihris.org/fhir/StructureDefinition/ihris-page"^^xsd:anyURI ;
+         fhir:link <http://ihris.org/fhir/StructureDefinition/ihris-page>
+       ]
+     ] [
+       fhir:extension ( [
+         fhir:url [ fhir:v "http://hl7.org/fhir/tools/StructureDefinition/resource-information"^^xsd:anyURI ] ;
+         fhir:value [ fhir:v "Basic" ]
+       ] ) ;
+       fhir:reference [
+         fhir:link <http://ihris.org/fhir/Basic/ihris-page-classification> ;
+         fhir:reference [ fhir:v "Basic/ihris-page-classification" ]
+       ] ;
+       fhir:name [ fhir:v "iHRIS Classification CodeSystem Page" ] ;
+       fhir:example [
+         fhir:v "http://ihris.org/fhir/StructureDefinition/ihris-page"^^xsd:anyURI ;
+         fhir:link <http://ihris.org/fhir/StructureDefinition/ihris-page>
+       ]
+     ] [
+       fhir:extension ( [
+         fhir:url [ fhir:v "http://hl7.org/fhir/tools/StructureDefinition/resource-information"^^xsd:anyURI ] ;
+         fhir:value [ fhir:v "Basic" ]
+       ] ) ;
+       fhir:reference [
+         fhir:link <http://ihris.org/fhir/Basic/ihris-page-employment-status> ;
+         fhir:reference [ fhir:v "Basic/ihris-page-employment-status" ]
+       ] ;
+       fhir:name [ fhir:v "iHRIS Employment Status CodeSystem Page" ] ;
+       fhir:example [
+         fhir:v "http://ihris.org/fhir/StructureDefinition/ihris-page"^^xsd:anyURI ;
+         fhir:link <http://ihris.org/fhir/StructureDefinition/ihris-page>
+       ]
+     ] [
+       fhir:extension ( [
+         fhir:url [ fhir:v "http://hl7.org/fhir/tools/StructureDefinition/resource-information"^^xsd:anyURI ] ;
+         fhir:value [ fhir:v "Basic" ]
+       ] ) ;
+       fhir:reference [
+         fhir:link <http://ihris.org/fhir/Basic/ihris-page-facility> ;
+         fhir:reference [ fhir:v "Basic/ihris-page-facility" ]
+       ] ;
+       fhir:name [ fhir:v "iHRIS Facility Page" ] ;
+       fhir:example [
+         fhir:v "http://ihris.org/fhir/StructureDefinition/ihris-page"^^xsd:anyURI ;
+         fhir:link <http://ihris.org/fhir/StructureDefinition/ihris-page>
+       ]
+     ] [
+       fhir:extension ( [
+         fhir:url [ fhir:v "http://hl7.org/fhir/tools/StructureDefinition/resource-information"^^xsd:anyURI ] ;
+         fhir:value [ fhir:v "Basic" ]
+       ] ) ;
+       fhir:reference [
+         fhir:link <http://ihris.org/fhir/Basic/ihris-page-job> ;
+         fhir:reference [ fhir:v "Basic/ihris-page-job" ]
+       ] ;
+       fhir:name [ fhir:v "iHRIS Job CodeSystem Page" ] ;
+       fhir:example [
+         fhir:v "http://ihris.org/fhir/StructureDefinition/ihris-page"^^xsd:anyURI ;
+         fhir:link <http://ihris.org/fhir/StructureDefinition/ihris-page>
+       ]
+     ] [
+       fhir:extension ( [
+         fhir:url [ fhir:v "http://hl7.org/fhir/tools/StructureDefinition/resource-information"^^xsd:anyURI ] ;
+         fhir:value [ fhir:v "Basic" ]
+       ] ) ;
+       fhir:reference [
+         fhir:link <http://ihris.org/fhir/Basic/ihris-page-job-type> ;
+         fhir:reference [ fhir:v "Basic/ihris-page-job-type" ]
+       ] ;
+       fhir:name [ fhir:v "iHRIS Job Type CodeSystem Page" ] ;
+       fhir:example [
+         fhir:v "http://ihris.org/fhir/StructureDefinition/ihris-page"^^xsd:anyURI ;
+         fhir:link <http://ihris.org/fhir/StructureDefinition/ihris-page>
+       ]
+     ] [
+       fhir:extension ( [
+         fhir:url [ fhir:v "http://hl7.org/fhir/tools/StructureDefinition/resource-information"^^xsd:anyURI ] ;
+         fhir:value [ fhir:v "Basic" ]
+       ] ) ;
+       fhir:reference [
+         fhir:link <http://ihris.org/fhir/Basic/ihris-page-location> ;
+         fhir:reference [ fhir:v "Basic/ihris-page-location" ]
+       ] ;
+       fhir:name [ fhir:v "iHRIS Location Page" ] ;
+       fhir:example [
+         fhir:v "http://ihris.org/fhir/StructureDefinition/ihris-page"^^xsd:anyURI ;
+         fhir:link <http://ihris.org/fhir/StructureDefinition/ihris-page>
+       ]
+     ] [
+       fhir:extension ( [
+         fhir:url [ fhir:v "http://hl7.org/fhir/tools/StructureDefinition/resource-information"^^xsd:anyURI ] ;
+         fhir:value [ fhir:v "Basic" ]
+       ] ) ;
+       fhir:reference [
+         fhir:link <http://ihris.org/fhir/Basic/ihris-page-practitioner> ;
+         fhir:reference [ fhir:v "Basic/ihris-page-practitioner" ]
+       ] ;
+       fhir:name [ fhir:v "Practitioner" ] ;
+       fhir:example [
+         fhir:v "http://ihris.org/fhir/StructureDefinition/ihris-page"^^xsd:anyURI ;
+         fhir:link <http://ihris.org/fhir/StructureDefinition/ihris-page>
+       ]
+     ] [
+       fhir:extension ( [
+         fhir:url [ fhir:v "http://hl7.org/fhir/tools/StructureDefinition/resource-information"^^xsd:anyURI ] ;
+         fhir:value [ fhir:v "Basic" ]
+       ] ) ;
+       fhir:reference [
+         fhir:link <http://ihris.org/fhir/Basic/ihris-page-practitionerrole> ;
+         fhir:reference [ fhir:v "Basic/ihris-page-practitionerrole" ]
+       ] ;
+       fhir:name [ fhir:v "iHRIS PractitionerRole Page" ] ;
+       fhir:example [
+         fhir:v "http://ihris.org/fhir/StructureDefinition/ihris-page"^^xsd:anyURI ;
+         fhir:link <http://ihris.org/fhir/StructureDefinition/ihris-page>
+       ]
+     ] [
+       fhir:extension ( [
+         fhir:url [ fhir:v "http://hl7.org/fhir/tools/StructureDefinition/resource-information"^^xsd:anyURI ] ;
+         fhir:value [ fhir:v "Basic" ]
+       ] ) ;
+       fhir:reference [
+         fhir:link <http://ihris.org/fhir/Basic/ihris-page-reason-departure> ;
+         fhir:reference [ fhir:v "Basic/ihris-page-reason-departure" ]
+       ] ;
+       fhir:name [ fhir:v "iHRIS Reason for Departure CodeSystem Page" ] ;
+       fhir:example [
+         fhir:v "http://ihris.org/fhir/StructureDefinition/ihris-page"^^xsd:anyURI ;
+         fhir:link <http://ihris.org/fhir/StructureDefinition/ihris-page>
+       ]
+     ] [
+       fhir:extension ( [
+         fhir:url [ fhir:v "http://hl7.org/fhir/tools/StructureDefinition/resource-information"^^xsd:anyURI ] ;
+         fhir:value [ fhir:v "Basic" ]
+       ] ) ;
+       fhir:reference [
+         fhir:link <http://ihris.org/fhir/Basic/ihris-page-relation> ;
+         fhir:reference [ fhir:v "Basic/ihris-page-relation" ]
+       ] ;
+       fhir:name [ fhir:v "iHRIS relationship type CodeSystem Page" ] ;
+       fhir:example [
+         fhir:v "http://ihris.org/fhir/StructureDefinition/ihris-page"^^xsd:anyURI ;
+         fhir:link <http://ihris.org/fhir/StructureDefinition/ihris-page>
+       ]
+     ] [
+       fhir:extension ( [
+         fhir:url [ fhir:v "http://hl7.org/fhir/tools/StructureDefinition/resource-information"^^xsd:anyURI ] ;
+         fhir:value [ fhir:v "Basic" ]
+       ] ) ;
+       fhir:reference [
+         fhir:link <http://ihris.org/fhir/Basic/ihris-page-role> ;
+         fhir:reference [ fhir:v "Basic/ihris-page-role" ]
+       ] ;
+       fhir:name [ fhir:v "NHWR Roles" ] ;
+       fhir:example [
+         fhir:v "http://ihris.org/fhir/StructureDefinition/ihris-page"^^xsd:anyURI ;
+         fhir:link <http://ihris.org/fhir/StructureDefinition/ihris-page>
+       ]
+     ] [
+       fhir:extension ( [
+         fhir:url [ fhir:v "http://hl7.org/fhir/tools/StructureDefinition/resource-information"^^xsd:anyURI ] ;
+         fhir:value [ fhir:v "Basic" ]
+       ] ) ;
+       fhir:reference [
+         fhir:link <http://ihris.org/fhir/Basic/ihris-page-salary-grade> ;
+         fhir:reference [ fhir:v "Basic/ihris-page-salary-grade" ]
+       ] ;
+       fhir:name [ fhir:v "iHRIS Salary Scale CodeSystem Page" ] ;
+       fhir:example [
+         fhir:v "http://ihris.org/fhir/StructureDefinition/ihris-page"^^xsd:anyURI ;
+         fhir:link <http://ihris.org/fhir/StructureDefinition/ihris-page>
+       ]
+     ] [
+       fhir:extension ( [
+         fhir:url [ fhir:v "http://hl7.org/fhir/tools/StructureDefinition/resource-information"^^xsd:anyURI ] ;
+         fhir:value [ fhir:v "Basic" ]
+       ] ) ;
+       fhir:reference [
+         fhir:link <http://ihris.org/fhir/Basic/ihris-page-salary-scale> ;
+         fhir:reference [ fhir:v "Basic/ihris-page-salary-scale" ]
+       ] ;
+       fhir:name [ fhir:v "iHRIS Salary Scale CodeSystem Page" ] ;
+       fhir:example [
+         fhir:v "http://ihris.org/fhir/StructureDefinition/ihris-page"^^xsd:anyURI ;
+         fhir:link <http://ihris.org/fhir/StructureDefinition/ihris-page>
+       ]
+     ] [
+       fhir:extension ( [
+         fhir:url [ fhir:v "http://hl7.org/fhir/tools/StructureDefinition/resource-information"^^xsd:anyURI ] ;
+         fhir:value [ fhir:v "Basic" ]
+       ] ) ;
+       fhir:reference [
+         fhir:link <http://ihris.org/fhir/Basic/ihris-page-shift> ;
+         fhir:reference [ fhir:v "Basic/ihris-page-shift" ]
+       ] ;
+       fhir:name [ fhir:v "iHRIS Shift CodeSystem Page" ] ;
+       fhir:example [
+         fhir:v "http://ihris.org/fhir/StructureDefinition/ihris-page"^^xsd:anyURI ;
+         fhir:link <http://ihris.org/fhir/StructureDefinition/ihris-page>
+       ]
+     ] [
+       fhir:extension ( [
+         fhir:url [ fhir:v "http://hl7.org/fhir/tools/StructureDefinition/resource-information"^^xsd:anyURI ] ;
+         fhir:value [ fhir:v "Basic" ]
+       ] ) ;
+       fhir:reference [
+         fhir:link <http://ihris.org/fhir/Basic/ihris-page-task> ;
+         fhir:reference [ fhir:v "Basic/ihris-page-task" ]
+       ] ;
+       fhir:name [ fhir:v "iHRIS Tasks" ] ;
+       fhir:example [
+         fhir:v "http://ihris.org/fhir/StructureDefinition/ihris-page"^^xsd:anyURI ;
+         fhir:link <http://ihris.org/fhir/StructureDefinition/ihris-page>
+       ]
+     ] [
+       fhir:extension ( [
+         fhir:url [ fhir:v "http://hl7.org/fhir/tools/StructureDefinition/resource-information"^^xsd:anyURI ] ;
+         fhir:value [ fhir:v "Questionnaire" ]
+       ] ) ;
+       fhir:reference [
+         fhir:link <http://ihris.org/fhir/Questionnaire/ihris-promotion> ;
+         fhir:reference [ fhir:v "Questionnaire/ihris-promotion" ]
+       ] ;
+       fhir:name [ fhir:v "IhrisPractitionerWorkflowPromotion" ] ;
+       fhir:description [ fhir:v "iHRIS workflow to record a promotion" ] ;
+       fhir:example [
+         fhir:v "http://ihris.org/fhir/StructureDefinition/ihris-questionnaire"^^xsd:anyURI ;
+         fhir:link <http://ihris.org/fhir/StructureDefinition/ihris-questionnaire>
+       ]
+     ] [
+       fhir:extension ( [
+         fhir:url [ fhir:v "http://hl7.org/fhir/tools/StructureDefinition/resource-information"^^xsd:anyURI ] ;
+         fhir:value [ fhir:v "Questionnaire" ]
+       ] ) ;
+       fhir:reference [
+         fhir:link <http://ihris.org/fhir/Questionnaire/ihris-role> ;
+         fhir:reference [ fhir:v "Questionnaire/ihris-role" ]
+       ] ;
+       fhir:name [ fhir:v "IhrisRole" ] ;
+       fhir:description [ fhir:v "iHRIS workflow to record a Role" ] ;
+       fhir:example [
+         fhir:v "http://ihris.org/fhir/StructureDefinition/ihris-questionnaire"^^xsd:anyURI ;
+         fhir:link <http://ihris.org/fhir/StructureDefinition/ihris-questionnaire>
+       ]
+     ] [
+       fhir:extension ( [
+         fhir:url [ fhir:v "http://hl7.org/fhir/tools/StructureDefinition/resource-information"^^xsd:anyURI ] ;
+         fhir:value [ fhir:v "Basic" ]
+       ] ) ;
+       fhir:reference [
+         fhir:link <http://ihris.org/fhir/Basic/ihris-role-admin> ;
+         fhir:reference [ fhir:v "Basic/ihris-role-admin" ]
+       ] ;
+       fhir:name [ fhir:v "iHRIS Admin Role" ] ;
+       fhir:example [
+         fhir:v "http://ihris.org/fhir/StructureDefinition/ihris-role"^^xsd:anyURI ;
+         fhir:link <http://ihris.org/fhir/StructureDefinition/ihris-role>
+       ]
+     ] [
+       fhir:extension ( [
+         fhir:url [ fhir:v "http://hl7.org/fhir/tools/StructureDefinition/resource-information"^^xsd:anyURI ] ;
+         fhir:value [ fhir:v "Basic" ]
+       ] ) ;
+       fhir:reference [
+         fhir:link <http://ihris.org/fhir/Basic/ihris-role-open> ;
+         fhir:reference [ fhir:v "Basic/ihris-role-open" ]
+       ] ;
+       fhir:name [ fhir:v "iHRIS Open Role" ] ;
+       fhir:example [
+         fhir:v "http://ihris.org/fhir/StructureDefinition/ihris-role"^^xsd:anyURI ;
+         fhir:link <http://ihris.org/fhir/StructureDefinition/ihris-role>
+       ]
+     ] [
+       fhir:extension ( [
+         fhir:url [ fhir:v "http://hl7.org/fhir/tools/StructureDefinition/resource-information"^^xsd:anyURI ] ;
+         fhir:value [ fhir:v "Basic" ]
+       ] ) ;
+       fhir:reference [
+         fhir:link <http://ihris.org/fhir/Basic/ihris-role-self> ;
+         fhir:reference [ fhir:v "Basic/ihris-role-self" ]
+       ] ;
+       fhir:name [ fhir:v "iHRIS Self Service Role" ] ;
+       fhir:example [
+         fhir:v "http://ihris.org/fhir/StructureDefinition/ihris-role"^^xsd:anyURI ;
+         fhir:link <http://ihris.org/fhir/StructureDefinition/ihris-role>
+       ]
+     ] [
+       fhir:extension ( [
+         fhir:url [ fhir:v "http://hl7.org/fhir/tools/StructureDefinition/resource-information"^^xsd:anyURI ] ;
+         fhir:value [ fhir:v "Questionnaire" ]
+       ] ) ;
+       fhir:reference [
+         fhir:link <http://ihris.org/fhir/Questionnaire/ihris-task> ;
+         fhir:reference [ fhir:v "Questionnaire/ihris-task" ]
+       ] ;
+       fhir:name [ fhir:v "IhrisTask" ] ;
+       fhir:description [ fhir:v "iHRIS workflow to record a Role" ] ;
+       fhir:example [
+         fhir:v "http://ihris.org/fhir/StructureDefinition/ihris-questionnaire"^^xsd:anyURI ;
+         fhir:link <http://ihris.org/fhir/StructureDefinition/ihris-questionnaire>
+       ]
+     ] [
+       fhir:extension ( [
+         fhir:url [ fhir:v "http://hl7.org/fhir/tools/StructureDefinition/resource-information"^^xsd:anyURI ] ;
+         fhir:value [ fhir:v "Basic" ]
+       ] ) ;
+       fhir:reference [
+         fhir:link <http://ihris.org/fhir/Basic/ihris-task-all-permissions-to-everything> ;
+         fhir:reference [ fhir:v "Basic/ihris-task-all-permissions-to-everything" ]
+       ] ;
+       fhir:name [ fhir:v "iHRIS Task With All Permissions To Everything" ] ;
+       fhir:example [
+         fhir:v "http://ihris.org/fhir/StructureDefinition/ihris-task"^^xsd:anyURI ;
+         fhir:link <http://ihris.org/fhir/StructureDefinition/ihris-task>
+       ]
+     ] [
+       fhir:extension ( [
+         fhir:url [ fhir:v "http://hl7.org/fhir/tools/StructureDefinition/resource-information"^^xsd:anyURI ] ;
+         fhir:value [ fhir:v "Basic" ]
+       ] ) ;
+       fhir:reference [
+         fhir:link <http://ihris.org/fhir/Basic/ihris-task-navigation-evaluation> ;
+         fhir:reference [ fhir:v "Basic/ihris-task-navigation-evaluation" ]
+       ] ;
+       fhir:name [ fhir:v "iHRIS Task To Navigate to evaluation" ] ;
+       fhir:example [
+         fhir:v "http://ihris.org/fhir/StructureDefinition/ihris-task"^^xsd:anyURI ;
+         fhir:link <http://ihris.org/fhir/StructureDefinition/ihris-task>
+       ]
+     ] [
+       fhir:extension ( [
+         fhir:url [ fhir:v "http://hl7.org/fhir/tools/StructureDefinition/resource-information"^^xsd:anyURI ] ;
+         fhir:value [ fhir:v "Basic" ]
+       ] ) ;
+       fhir:reference [
+         fhir:link <http://ihris.org/fhir/Basic/ihris-task-navigation-leave> ;
+         fhir:reference [ fhir:v "Basic/ihris-task-navigation-leave" ]
+       ] ;
+       fhir:name [ fhir:v "iHRIS Task To Navigate to Leave" ] ;
+       fhir:example [
+         fhir:v "http://ihris.org/fhir/StructureDefinition/ihris-task"^^xsd:anyURI ;
+         fhir:link <http://ihris.org/fhir/StructureDefinition/ihris-task>
+       ]
+     ] [
+       fhir:extension ( [
+         fhir:url [ fhir:v "http://hl7.org/fhir/tools/StructureDefinition/resource-information"^^xsd:anyURI ] ;
+         fhir:value [ fhir:v "Basic" ]
+       ] ) ;
+       fhir:reference [
+         fhir:link <http://ihris.org/fhir/Basic/ihris-task-navigation-password> ;
+         fhir:reference [ fhir:v "Basic/ihris-task-navigation-password" ]
+       ] ;
+       fhir:name [ fhir:v "iHRIS Task To Navigate to password" ] ;
+       fhir:example [
+         fhir:v "http://ihris.org/fhir/StructureDefinition/ihris-task"^^xsd:anyURI ;
+         fhir:link <http://ihris.org/fhir/StructureDefinition/ihris-task>
+       ]
+     ] [
+       fhir:extension ( [
+         fhir:url [ fhir:v "http://hl7.org/fhir/tools/StructureDefinition/resource-information"^^xsd:anyURI ] ;
+         fhir:value [ fhir:v "Basic" ]
+       ] ) ;
+       fhir:reference [
+         fhir:link <http://ihris.org/fhir/Basic/ihris-task-navigation-profile> ;
+         fhir:reference [ fhir:v "Basic/ihris-task-navigation-profile" ]
+       ] ;
+       fhir:name [ fhir:v "iHRIS Task To Navigate to Profile" ] ;
+       fhir:example [
+         fhir:v "http://ihris.org/fhir/StructureDefinition/ihris-task"^^xsd:anyURI ;
+         fhir:link <http://ihris.org/fhir/StructureDefinition/ihris-task>
+       ]
+     ] [
+       fhir:extension ( [
+         fhir:url [ fhir:v "http://hl7.org/fhir/tools/StructureDefinition/resource-information"^^xsd:anyURI ] ;
+         fhir:value [ fhir:v "Basic" ]
+       ] ) ;
+       fhir:reference [
+         fhir:link <http://ihris.org/fhir/Basic/ihris-task-read-basic-resource> ;
+         fhir:reference [ fhir:v "Basic/ihris-task-read-basic-resource" ]
+       ] ;
+       fhir:name [ fhir:v "iHRIS Task To Read Basic resource" ] ;
+       fhir:example [
+         fhir:v "http://ihris.org/fhir/StructureDefinition/ihris-task"^^xsd:anyURI ;
+         fhir:link <http://ihris.org/fhir/StructureDefinition/ihris-task>
+       ]
+     ] [
+       fhir:extension ( [
+         fhir:url [ fhir:v "http://hl7.org/fhir/tools/StructureDefinition/resource-information"^^xsd:anyURI ] ;
+         fhir:value [ fhir:v "Basic" ]
+       ] ) ;
+       fhir:reference [
+         fhir:link <http://ihris.org/fhir/Basic/ihris-task-read-code-system> ;
+         fhir:reference [ fhir:v "Basic/ihris-task-read-code-system" ]
+       ] ;
+       fhir:name [ fhir:v "iHRIS Task To Read CodeSystem resource" ] ;
+       fhir:example [
+         fhir:v "http://ihris.org/fhir/StructureDefinition/ihris-task"^^xsd:anyURI ;
+         fhir:link <http://ihris.org/fhir/StructureDefinition/ihris-task>
+       ]
+     ] [
+       fhir:extension ( [
+         fhir:url [ fhir:v "http://hl7.org/fhir/tools/StructureDefinition/resource-information"^^xsd:anyURI ] ;
+         fhir:value [ fhir:v "Basic" ]
+       ] ) ;
+       fhir:reference [
+         fhir:link <http://ihris.org/fhir/Basic/ihris-task-read-document-reference> ;
+         fhir:reference [ fhir:v "Basic/ihris-task-read-document-reference" ]
+       ] ;
+       fhir:name [ fhir:v "iHRIS Task To Read DocumentReference" ] ;
+       fhir:example [
+         fhir:v "http://ihris.org/fhir/StructureDefinition/ihris-task"^^xsd:anyURI ;
+         fhir:link <http://ihris.org/fhir/StructureDefinition/ihris-task>
+       ]
+     ] [
+       fhir:extension ( [
+         fhir:url [ fhir:v "http://hl7.org/fhir/tools/StructureDefinition/resource-information"^^xsd:anyURI ] ;
+         fhir:value [ fhir:v "Basic" ]
+       ] ) ;
+       fhir:reference [
+         fhir:link <http://ihris.org/fhir/Basic/ihris-task-read-ihris-page-practitioner> ;
+         fhir:reference [ fhir:v "Basic/ihris-task-read-ihris-page-practitioner" ]
+       ] ;
+       fhir:name [ fhir:v "iHRIS Task To Read Practitioner Page" ] ;
+       fhir:example [
+         fhir:v "http://ihris.org/fhir/StructureDefinition/ihris-task"^^xsd:anyURI ;
+         fhir:link <http://ihris.org/fhir/StructureDefinition/ihris-task>
+       ]
+     ] [
+       fhir:extension ( [
+         fhir:url [ fhir:v "http://hl7.org/fhir/tools/StructureDefinition/resource-information"^^xsd:anyURI ] ;
+         fhir:value [ fhir:v "Basic" ]
+       ] ) ;
+       fhir:reference [
+         fhir:link <http://ihris.org/fhir/Basic/ihris-task-read-ihris-page-practitioner-role> ;
+         fhir:reference [ fhir:v "Basic/ihris-task-read-ihris-page-practitioner-role" ]
+       ] ;
+       fhir:name [ fhir:v "iHRIS Task To Read PractitionerRole Page" ] ;
+       fhir:example [
+         fhir:v "http://ihris.org/fhir/StructureDefinition/ihris-task"^^xsd:anyURI ;
+         fhir:link <http://ihris.org/fhir/StructureDefinition/ihris-task>
+       ]
+     ] [
+       fhir:extension ( [
+         fhir:url [ fhir:v "http://hl7.org/fhir/tools/StructureDefinition/resource-information"^^xsd:anyURI ] ;
+         fhir:value [ fhir:v "Basic" ]
+       ] ) ;
+       fhir:reference [
+         fhir:link <http://ihris.org/fhir/Basic/ihris-task-read-location-resource> ;
+         fhir:reference [ fhir:v "Basic/ihris-task-read-location-resource" ]
+       ] ;
+       fhir:name [ fhir:v "iHRIS Task To Read Location resource" ] ;
+       fhir:example [
+         fhir:v "http://ihris.org/fhir/StructureDefinition/ihris-task"^^xsd:anyURI ;
+         fhir:link <http://ihris.org/fhir/StructureDefinition/ihris-task>
+       ]
+     ] [
+       fhir:extension ( [
+         fhir:url [ fhir:v "http://hl7.org/fhir/tools/StructureDefinition/resource-information"^^xsd:anyURI ] ;
+         fhir:value [ fhir:v "Basic" ]
+       ] ) ;
+       fhir:reference [
+         fhir:link <http://ihris.org/fhir/Basic/ihris-task-read-organization-resource> ;
+         fhir:reference [ fhir:v "Basic/ihris-task-read-organization-resource" ]
+       ] ;
+       fhir:name [ fhir:v "iHRIS Task To Read Organization resource" ] ;
+       fhir:example [
+         fhir:v "http://ihris.org/fhir/StructureDefinition/ihris-task"^^xsd:anyURI ;
+         fhir:link <http://ihris.org/fhir/StructureDefinition/ihris-task>
+       ]
+     ] [
+       fhir:extension ( [
+         fhir:url [ fhir:v "http://hl7.org/fhir/tools/StructureDefinition/resource-information"^^xsd:anyURI ] ;
+         fhir:value [ fhir:v "Basic" ]
+       ] ) ;
+       fhir:reference [
+         fhir:link <http://ihris.org/fhir/Basic/ihris-task-read-person-resource> ;
+         fhir:reference [ fhir:v "Basic/ihris-task-read-person-resource" ]
+       ] ;
+       fhir:name [ fhir:v "iHRIS Task To Read Person resource" ] ;
+       fhir:example [
+         fhir:v "http://ihris.org/fhir/StructureDefinition/ihris-task"^^xsd:anyURI ;
+         fhir:link <http://ihris.org/fhir/StructureDefinition/ihris-task>
+       ]
+     ] [
+       fhir:extension ( [
+         fhir:url [ fhir:v "http://hl7.org/fhir/tools/StructureDefinition/resource-information"^^xsd:anyURI ] ;
+         fhir:value [ fhir:v "Basic" ]
+       ] ) ;
+       fhir:reference [
+         fhir:link <http://ihris.org/fhir/Basic/ihris-task-read-practitioner-resource> ;
+         fhir:reference [ fhir:v "Basic/ihris-task-read-practitioner-resource" ]
+       ] ;
+       fhir:name [ fhir:v "iHRIS Task To Read Practitioner resource" ] ;
+       fhir:example [
+         fhir:v "http://ihris.org/fhir/StructureDefinition/ihris-task"^^xsd:anyURI ;
+         fhir:link <http://ihris.org/fhir/StructureDefinition/ihris-task>
+       ]
+     ] [
+       fhir:extension ( [
+         fhir:url [ fhir:v "http://hl7.org/fhir/tools/StructureDefinition/resource-information"^^xsd:anyURI ] ;
+         fhir:value [ fhir:v "Basic" ]
+       ] ) ;
+       fhir:reference [
+         fhir:link <http://ihris.org/fhir/Basic/ihris-task-read-practitioner-role-resource> ;
+         fhir:reference [ fhir:v "Basic/ihris-task-read-practitioner-role-resource" ]
+       ] ;
+       fhir:name [ fhir:v "iHRIS Task To Read PractitionerRole resource" ] ;
+       fhir:example [
+         fhir:v "http://ihris.org/fhir/StructureDefinition/ihris-task"^^xsd:anyURI ;
+         fhir:link <http://ihris.org/fhir/StructureDefinition/ihris-task>
+       ]
+     ] [
+       fhir:extension ( [
+         fhir:url [ fhir:v "http://hl7.org/fhir/tools/StructureDefinition/resource-information"^^xsd:anyURI ] ;
+         fhir:value [ fhir:v "Basic" ]
+       ] ) ;
+       fhir:reference [
+         fhir:link <http://ihris.org/fhir/Basic/ihris-task-read-questionnaire-leave> ;
+         fhir:reference [ fhir:v "Basic/ihris-task-read-questionnaire-leave" ]
+       ] ;
+       fhir:name [ fhir:v "iHRIS Task To Read Questionnaire ihris-leave" ] ;
+       fhir:example [
+         fhir:v "http://ihris.org/fhir/StructureDefinition/ihris-task"^^xsd:anyURI ;
+         fhir:link <http://ihris.org/fhir/StructureDefinition/ihris-task>
+       ]
+     ] [
+       fhir:extension ( [
+         fhir:url [ fhir:v "http://hl7.org/fhir/tools/StructureDefinition/resource-information"^^xsd:anyURI ] ;
+         fhir:value [ fhir:v "Basic" ]
+       ] ) ;
+       fhir:reference [
+         fhir:link <http://ihris.org/fhir/Basic/ihris-task-read-questionnaire-resource> ;
+         fhir:reference [ fhir:v "Basic/ihris-task-read-questionnaire-resource" ]
+       ] ;
+       fhir:name [ fhir:v "iHRIS Task To Read Questionnaire resource" ] ;
+       fhir:example [
+         fhir:v "http://ihris.org/fhir/StructureDefinition/ihris-task"^^xsd:anyURI ;
+         fhir:link <http://ihris.org/fhir/StructureDefinition/ihris-task>
+       ]
+     ] [
+       fhir:extension ( [
+         fhir:url [ fhir:v "http://hl7.org/fhir/tools/StructureDefinition/resource-information"^^xsd:anyURI ] ;
+         fhir:value [ fhir:v "Basic" ]
+       ] ) ;
+       fhir:reference [
+         fhir:link <http://ihris.org/fhir/Basic/ihris-task-read-questionnaire-response-resource> ;
+         fhir:reference [ fhir:v "Basic/ihris-task-read-questionnaire-response-resource" ]
+       ] ;
+       fhir:name [ fhir:v "iHRIS Task To Read Questionnaire Response resource" ] ;
+       fhir:example [
+         fhir:v "http://ihris.org/fhir/StructureDefinition/ihris-task"^^xsd:anyURI ;
+         fhir:link <http://ihris.org/fhir/StructureDefinition/ihris-task>
+       ]
+     ] [
+       fhir:extension ( [
+         fhir:url [ fhir:v "http://hl7.org/fhir/tools/StructureDefinition/resource-information"^^xsd:anyURI ] ;
+         fhir:value [ fhir:v "Basic" ]
+       ] ) ;
+       fhir:reference [
+         fhir:link <http://ihris.org/fhir/Basic/ihris-task-read-structure-definition> ;
+         fhir:reference [ fhir:v "Basic/ihris-task-read-structure-definition" ]
+       ] ;
+       fhir:name [ fhir:v "iHRIS Task To Read StructureDefinition Resource" ] ;
+       fhir:example [
+         fhir:v "http://ihris.org/fhir/StructureDefinition/ihris-task"^^xsd:anyURI ;
+         fhir:link <http://ihris.org/fhir/StructureDefinition/ihris-task>
+       ]
+     ] [
+       fhir:extension ( [
+         fhir:url [ fhir:v "http://hl7.org/fhir/tools/StructureDefinition/resource-information"^^xsd:anyURI ] ;
+         fhir:value [ fhir:v "Basic" ]
+       ] ) ;
+       fhir:reference [
+         fhir:link <http://ihris.org/fhir/Basic/ihris-task-read-value-set> ;
+         fhir:reference [ fhir:v "Basic/ihris-task-read-value-set" ]
+       ] ;
+       fhir:name [ fhir:v "iHRIS Task To Read Valueset Resource" ] ;
+       fhir:example [
+         fhir:v "http://ihris.org/fhir/StructureDefinition/ihris-task"^^xsd:anyURI ;
+         fhir:link <http://ihris.org/fhir/StructureDefinition/ihris-task>
+       ]
+     ] [
+       fhir:extension ( [
+         fhir:url [ fhir:v "http://hl7.org/fhir/tools/StructureDefinition/resource-information"^^xsd:anyURI ] ;
+         fhir:value [ fhir:v "Basic" ]
+       ] ) ;
+       fhir:reference [
+         fhir:link <http://ihris.org/fhir/Basic/ihris-task-write-basic-resource> ;
+         fhir:reference [ fhir:v "Basic/ihris-task-write-basic-resource" ]
+       ] ;
+       fhir:name [ fhir:v "iHRIS Task To Write Basic resource" ] ;
+       fhir:example [
+         fhir:v "http://ihris.org/fhir/StructureDefinition/ihris-task"^^xsd:anyURI ;
+         fhir:link <http://ihris.org/fhir/StructureDefinition/ihris-task>
+       ]
+     ] [
+       fhir:extension ( [
+         fhir:url [ fhir:v "http://hl7.org/fhir/tools/StructureDefinition/resource-information"^^xsd:anyURI ] ;
+         fhir:value [ fhir:v "Basic" ]
+       ] ) ;
+       fhir:reference [
+         fhir:link <http://ihris.org/fhir/Basic/ihris-task-write-code-system> ;
+         fhir:reference [ fhir:v "Basic/ihris-task-write-code-system" ]
+       ] ;
+       fhir:name [ fhir:v "iHRIS Task To Write CodeSystem resource" ] ;
+       fhir:example [
+         fhir:v "http://ihris.org/fhir/StructureDefinition/ihris-task"^^xsd:anyURI ;
+         fhir:link <http://ihris.org/fhir/StructureDefinition/ihris-task>
+       ]
+     ] [
+       fhir:extension ( [
+         fhir:url [ fhir:v "http://hl7.org/fhir/tools/StructureDefinition/resource-information"^^xsd:anyURI ] ;
+         fhir:value [ fhir:v "Basic" ]
+       ] ) ;
+       fhir:reference [
+         fhir:link <http://ihris.org/fhir/Basic/ihris-task-write-document-reference> ;
+         fhir:reference [ fhir:v "Basic/ihris-task-write-document-reference" ]
+       ] ;
+       fhir:name [ fhir:v "iHRIS Task To Write DocumentReference" ] ;
+       fhir:example [
+         fhir:v "http://ihris.org/fhir/StructureDefinition/ihris-task"^^xsd:anyURI ;
+         fhir:link <http://ihris.org/fhir/StructureDefinition/ihris-task>
+       ]
+     ] [
+       fhir:extension ( [
+         fhir:url [ fhir:v "http://hl7.org/fhir/tools/StructureDefinition/resource-information"^^xsd:anyURI ] ;
+         fhir:value [ fhir:v "Basic" ]
+       ] ) ;
+       fhir:reference [
+         fhir:link <http://ihris.org/fhir/Basic/ihris-task-write-location-resource> ;
+         fhir:reference [ fhir:v "Basic/ihris-task-write-location-resource" ]
+       ] ;
+       fhir:name [ fhir:v "iHRIS Task To Write Location resource" ] ;
+       fhir:example [
+         fhir:v "http://ihris.org/fhir/StructureDefinition/ihris-task"^^xsd:anyURI ;
+         fhir:link <http://ihris.org/fhir/StructureDefinition/ihris-task>
+       ]
+     ] [
+       fhir:extension ( [
+         fhir:url [ fhir:v "http://hl7.org/fhir/tools/StructureDefinition/resource-information"^^xsd:anyURI ] ;
+         fhir:value [ fhir:v "Basic" ]
+       ] ) ;
+       fhir:reference [
+         fhir:link <http://ihris.org/fhir/Basic/ihris-task-write-organization-resource> ;
+         fhir:reference [ fhir:v "Basic/ihris-task-write-organization-resource" ]
+       ] ;
+       fhir:name [ fhir:v "iHRIS Task To Write Organization resource" ] ;
+       fhir:example [
+         fhir:v "http://ihris.org/fhir/StructureDefinition/ihris-task"^^xsd:anyURI ;
+         fhir:link <http://ihris.org/fhir/StructureDefinition/ihris-task>
+       ]
+     ] [
+       fhir:extension ( [
+         fhir:url [ fhir:v "http://hl7.org/fhir/tools/StructureDefinition/resource-information"^^xsd:anyURI ] ;
+         fhir:value [ fhir:v "Basic" ]
+       ] ) ;
+       fhir:reference [
+         fhir:link <http://ihris.org/fhir/Basic/ihris-task-write-person-resource> ;
+         fhir:reference [ fhir:v "Basic/ihris-task-write-person-resource" ]
+       ] ;
+       fhir:name [ fhir:v "iHRIS Task To Write Person resource" ] ;
+       fhir:example [
+         fhir:v "http://ihris.org/fhir/StructureDefinition/ihris-task"^^xsd:anyURI ;
+         fhir:link <http://ihris.org/fhir/StructureDefinition/ihris-task>
+       ]
+     ] [
+       fhir:extension ( [
+         fhir:url [ fhir:v "http://hl7.org/fhir/tools/StructureDefinition/resource-information"^^xsd:anyURI ] ;
+         fhir:value [ fhir:v "Basic" ]
+       ] ) ;
+       fhir:reference [
+         fhir:link <http://ihris.org/fhir/Basic/ihris-task-write-practitioner-resource> ;
+         fhir:reference [ fhir:v "Basic/ihris-task-write-practitioner-resource" ]
+       ] ;
+       fhir:name [ fhir:v "iHRIS Task To Write Practitioner resource" ] ;
+       fhir:example [
+         fhir:v "http://ihris.org/fhir/StructureDefinition/ihris-task"^^xsd:anyURI ;
+         fhir:link <http://ihris.org/fhir/StructureDefinition/ihris-task>
+       ]
+     ] [
+       fhir:extension ( [
+         fhir:url [ fhir:v "http://hl7.org/fhir/tools/StructureDefinition/resource-information"^^xsd:anyURI ] ;
+         fhir:value [ fhir:v "Basic" ]
+       ] ) ;
+       fhir:reference [
+         fhir:link <http://ihris.org/fhir/Basic/ihris-task-write-practitioner-role-resource> ;
+         fhir:reference [ fhir:v "Basic/ihris-task-write-practitioner-role-resource" ]
+       ] ;
+       fhir:name [ fhir:v "iHRIS Task To Write PractitionerRole resource" ] ;
+       fhir:example [
+         fhir:v "http://ihris.org/fhir/StructureDefinition/ihris-task"^^xsd:anyURI ;
+         fhir:link <http://ihris.org/fhir/StructureDefinition/ihris-task>
+       ]
+     ] [
+       fhir:extension ( [
+         fhir:url [ fhir:v "http://hl7.org/fhir/tools/StructureDefinition/resource-information"^^xsd:anyURI ] ;
+         fhir:value [ fhir:v "Basic" ]
+       ] ) ;
+       fhir:reference [
+         fhir:link <http://ihris.org/fhir/Basic/ihris-task-write-questionnaire-change-password> ;
+         fhir:reference [ fhir:v "Basic/ihris-task-write-questionnaire-change-password" ]
+       ] ;
+       fhir:name [ fhir:v "iHRIS Task To Write Questionnaire ihris-password" ] ;
+       fhir:example [
+         fhir:v "http://ihris.org/fhir/StructureDefinition/ihris-task"^^xsd:anyURI ;
+         fhir:link <http://ihris.org/fhir/StructureDefinition/ihris-task>
+       ]
+     ] [
+       fhir:extension ( [
+         fhir:url [ fhir:v "http://hl7.org/fhir/tools/StructureDefinition/resource-information"^^xsd:anyURI ] ;
+         fhir:value [ fhir:v "Basic" ]
+       ] ) ;
+       fhir:reference [
+         fhir:link <http://ihris.org/fhir/Basic/ihris-task-write-questionnaire-leave> ;
+         fhir:reference [ fhir:v "Basic/ihris-task-write-questionnaire-leave" ]
+       ] ;
+       fhir:name [ fhir:v "iHRIS Task To Write Questionnaire ihris-leave" ] ;
+       fhir:example [
+         fhir:v "http://ihris.org/fhir/StructureDefinition/ihris-task"^^xsd:anyURI ;
+         fhir:link <http://ihris.org/fhir/StructureDefinition/ihris-task>
+       ]
+     ] [
+       fhir:extension ( [
+         fhir:url [ fhir:v "http://hl7.org/fhir/tools/StructureDefinition/resource-information"^^xsd:anyURI ] ;
+         fhir:value [ fhir:v "Basic" ]
+       ] ) ;
+       fhir:reference [
+         fhir:link <http://ihris.org/fhir/Basic/ihris-task-write-questionnaire-resource> ;
+         fhir:reference [ fhir:v "Basic/ihris-task-write-questionnaire-resource" ]
+       ] ;
+       fhir:name [ fhir:v "iHRIS Task To Write Questionnaire resource" ] ;
+       fhir:example [
+         fhir:v "http://ihris.org/fhir/StructureDefinition/ihris-task"^^xsd:anyURI ;
+         fhir:link <http://ihris.org/fhir/StructureDefinition/ihris-task>
+       ]
+     ] [
+       fhir:extension ( [
+         fhir:url [ fhir:v "http://hl7.org/fhir/tools/StructureDefinition/resource-information"^^xsd:anyURI ] ;
+         fhir:value [ fhir:v "Basic" ]
+       ] ) ;
+       fhir:reference [
+         fhir:link <http://ihris.org/fhir/Basic/ihris-task-write-questionnaire-response-resource> ;
+         fhir:reference [ fhir:v "Basic/ihris-task-write-questionnaire-response-resource" ]
+       ] ;
+       fhir:name [ fhir:v "iHRIS Task To Write Questionnaire Response resource" ] ;
+       fhir:example [
+         fhir:v "http://ihris.org/fhir/StructureDefinition/ihris-task"^^xsd:anyURI ;
+         fhir:link <http://ihris.org/fhir/StructureDefinition/ihris-task>
+       ]
+     ] [
+       fhir:extension ( [
+         fhir:url [ fhir:v "http://hl7.org/fhir/tools/StructureDefinition/resource-information"^^xsd:anyURI ] ;
+         fhir:value [ fhir:v "Basic" ]
+       ] ) ;
+       fhir:reference [
+         fhir:link <http://ihris.org/fhir/Basic/ihris-task-write-structure-definition> ;
+         fhir:reference [ fhir:v "Basic/ihris-task-write-structure-definition" ]
+       ] ;
+       fhir:name [ fhir:v "iHRIS Task To Write StructureDefinition Resource" ] ;
+       fhir:example [
+         fhir:v "http://ihris.org/fhir/StructureDefinition/ihris-task"^^xsd:anyURI ;
+         fhir:link <http://ihris.org/fhir/StructureDefinition/ihris-task>
+       ]
+     ] [
+       fhir:extension ( [
+         fhir:url [ fhir:v "http://hl7.org/fhir/tools/StructureDefinition/resource-information"^^xsd:anyURI ] ;
+         fhir:value [ fhir:v "Basic" ]
+       ] ) ;
+       fhir:reference [
+         fhir:link <http://ihris.org/fhir/Basic/ihris-task-write-value-set> ;
+         fhir:reference [ fhir:v "Basic/ihris-task-write-value-set" ]
+       ] ;
+       fhir:name [ fhir:v "iHRIS Task To Write Valueset Resource" ] ;
+       fhir:example [
+         fhir:v "http://ihris.org/fhir/StructureDefinition/ihris-task"^^xsd:anyURI ;
+         fhir:link <http://ihris.org/fhir/StructureDefinition/ihris-task>
+       ]
+     ] [
+       fhir:extension ( [
+         fhir:url [ fhir:v "http://hl7.org/fhir/tools/StructureDefinition/resource-information"^^xsd:anyURI ] ;
+         fhir:value [ fhir:v "SearchParameter" ]
+       ] ) ;
+       fhir:reference [
+         fhir:link <http://ihris.org/fhir/SearchParameter/job-search> ;
+         fhir:reference [ fhir:v "SearchParameter/job-search" ]
+       ] ;
+       fhir:name [ fhir:v "job-search" ] ;
+       fhir:description [ fhir:v "Search for a practitionerRole job." ] ;
+       fhir:example [ fhir:v "false"^^xsd:boolean ]
+     ] [
+       fhir:extension ( [
+         fhir:url [ fhir:v "http://hl7.org/fhir/tools/StructureDefinition/resource-information"^^xsd:anyURI ] ;
+         fhir:value [ fhir:v "SearchParameter" ]
+       ] ) ;
+       fhir:reference [
+         fhir:link <http://ihris.org/fhir/SearchParameter/leaveperiod-search> ;
+         fhir:reference [ fhir:v "SearchParameter/leaveperiod-search" ]
+       ] ;
+       fhir:name [ fhir:v "leaveperiod-search" ] ;
+       fhir:description [ fhir:v "Search for a practitioner's Leave Period" ] ;
+       fhir:example [ fhir:v "false"^^xsd:boolean ]
+     ] [
+       fhir:extension ( [
+         fhir:url [ fhir:v "http://hl7.org/fhir/tools/StructureDefinition/resource-information"^^xsd:anyURI ] ;
+         fhir:value [ fhir:v "SearchParameter" ]
+       ] ) ;
+       fhir:reference [
+         fhir:link <http://ihris.org/fhir/SearchParameter/leavetype-search> ;
+         fhir:reference [ fhir:v "SearchParameter/leavetype-search" ]
+       ] ;
+       fhir:name [ fhir:v "leavetype-search" ] ;
+       fhir:description [ fhir:v "Search for a practitioner's Leave Type." ] ;
+       fhir:example [ fhir:v "false"^^xsd:boolean ]
+     ] [
+       fhir:extension ( [
+         fhir:url [ fhir:v "http://hl7.org/fhir/tools/StructureDefinition/resource-information"^^xsd:anyURI ] ;
+         fhir:value [ fhir:v "SearchParameter" ]
+       ] ) ;
+       fhir:reference [
+         fhir:link <http://ihris.org/fhir/SearchParameter/location-related-location> ;
+         fhir:reference [ fhir:v "SearchParameter/location-related-location" ]
+       ] ;
+       fhir:name [ fhir:v "location-related-location" ] ;
+       fhir:description [ fhir:v "Search by related location for a Location resource." ] ;
+       fhir:example [ fhir:v "false"^^xsd:boolean ]
+     ] [
+       fhir:extension ( [
+         fhir:url [ fhir:v "http://hl7.org/fhir/tools/StructureDefinition/resource-information"^^xsd:anyURI ] ;
+         fhir:value [ fhir:v "DocumentReference" ]
+       ] ) ;
+       fhir:reference [
+         fhir:link <http://ihris.org/fhir/DocumentReference/page-about> ;
+         fhir:reference [ fhir:v "DocumentReference/page-about" ]
+       ] ;
+       fhir:name [ fhir:v "iHRIS About Page" ] ;
+       fhir:example [
+         fhir:v "http://ihris.org/fhir/StructureDefinition/ihris-document"^^xsd:anyURI ;
+         fhir:link <http://ihris.org/fhir/StructureDefinition/ihris-document>
+       ]
+     ] [
+       fhir:extension ( [
+         fhir:url [ fhir:v "http://hl7.org/fhir/tools/StructureDefinition/resource-information"^^xsd:anyURI ] ;
+         fhir:value [ fhir:v "DocumentReference" ]
+       ] ) ;
+       fhir:reference [
+         fhir:link <http://ihris.org/fhir/DocumentReference/page-home> ;
+         fhir:reference [ fhir:v "DocumentReference/page-home" ]
+       ] ;
+       fhir:name [ fhir:v "page-home" ] ;
+       fhir:example [
+         fhir:v "http://ihris.org/fhir/StructureDefinition/ihris-document"^^xsd:anyURI ;
+         fhir:link <http://ihris.org/fhir/StructureDefinition/ihris-document>
+       ]
+     ] [
+       fhir:extension ( [
+         fhir:url [ fhir:v "http://hl7.org/fhir/tools/StructureDefinition/resource-information"^^xsd:anyURI ] ;
+         fhir:value [ fhir:v "SearchParameter" ]
+       ] ) ;
+       fhir:reference [
+         fhir:link <http://ihris.org/fhir/SearchParameter/performanceperiod-search> ;
+         fhir:reference [ fhir:v "SearchParameter/performanceperiod-search" ]
+       ] ;
+       fhir:name [ fhir:v "performanceperiod-search" ] ;
+       fhir:description [ fhir:v "Search for a practitioner's Performance Period" ] ;
+       fhir:example [ fhir:v "false"^^xsd:boolean ]
+     ] [
+       fhir:extension ( [
+         fhir:url [ fhir:v "http://hl7.org/fhir/tools/StructureDefinition/resource-information"^^xsd:anyURI ] ;
+         fhir:value [ fhir:v "SearchParameter" ]
+       ] ) ;
+       fhir:reference [
+         fhir:link <http://ihris.org/fhir/SearchParameter/position-status-search> ;
+         fhir:reference [ fhir:v "SearchParameter/position-status-search" ]
+       ] ;
+       fhir:name [ fhir:v "position-status-search" ] ;
+       fhir:description [ fhir:v "Search for a practitionerRole position status." ] ;
+       fhir:example [ fhir:v "false"^^xsd:boolean ]
+     ] [
+       fhir:extension ( [
+         fhir:url [ fhir:v "http://hl7.org/fhir/tools/StructureDefinition/resource-information"^^xsd:anyURI ] ;
+         fhir:value [ fhir:v "SearchParameter" ]
+       ] ) ;
+       fhir:reference [
+         fhir:link <http://ihris.org/fhir/SearchParameter/practitioner-birthdate> ;
+         fhir:reference [ fhir:v "SearchParameter/practitioner-birthdate" ]
+       ] ;
+       fhir:name [ fhir:v "practitioner-birthdate" ] ;
+       fhir:description [ fhir:v "Search by birthdate for a Practitioner resource." ] ;
+       fhir:example [ fhir:v "false"^^xsd:boolean ]
+     ] [
+       fhir:extension ( [
+         fhir:url [ fhir:v "http://hl7.org/fhir/tools/StructureDefinition/resource-information"^^xsd:anyURI ] ;
+         fhir:value [ fhir:v "SearchParameter" ]
+       ] ) ;
+       fhir:reference [
+         fhir:link <http://ihris.org/fhir/SearchParameter/practitioner-employeeNumber> ;
+         fhir:reference [ fhir:v "SearchParameter/practitioner-employeeNumber" ]
+       ] ;
+       fhir:name [ fhir:v "practitioner-employeeNumber" ] ;
+       fhir:description [ fhir:v "Search by employee number for a practitioner resource." ] ;
+       fhir:example [ fhir:v "false"^^xsd:boolean ]
+     ] [
+       fhir:extension ( [
+         fhir:url [ fhir:v "http://hl7.org/fhir/tools/StructureDefinition/resource-information"^^xsd:anyURI ] ;
+         fhir:value [ fhir:v "SearchParameter" ]
+       ] ) ;
+       fhir:reference [
+         fhir:link <http://ihris.org/fhir/SearchParameter/practitioner-phone> ;
+         fhir:reference [ fhir:v "SearchParameter/practitioner-phone" ]
+       ] ;
+       fhir:name [ fhir:v "practitioner-phone" ] ;
+       fhir:description [ fhir:v "Search by phone for a Practitioner resource." ] ;
+       fhir:example [ fhir:v "false"^^xsd:boolean ]
+     ] [
+       fhir:extension ( [
+         fhir:url [ fhir:v "http://hl7.org/fhir/tools/StructureDefinition/resource-information"^^xsd:anyURI ] ;
+         fhir:value [ fhir:v "SearchParameter" ]
+       ] ) ;
+       fhir:reference [
+         fhir:link <http://ihris.org/fhir/SearchParameter/practitioner-related-location> ;
+         fhir:reference [ fhir:v "SearchParameter/practitioner-related-location" ]
+       ] ;
+       fhir:name [ fhir:v "practitioner-related-location" ] ;
+       fhir:description [ fhir:v "Search by related location for a Practitioner resource." ] ;
+       fhir:example [ fhir:v "false"^^xsd:boolean ]
+     ] [
+       fhir:extension ( [
+         fhir:url [ fhir:v "http://hl7.org/fhir/tools/StructureDefinition/resource-information"^^xsd:anyURI ] ;
+         fhir:value [ fhir:v "SearchParameter" ]
+       ] ) ;
+       fhir:reference [
+         fhir:link <http://ihris.org/fhir/SearchParameter/practitioner-related-practitioner> ;
+         fhir:reference [ fhir:v "SearchParameter/practitioner-related-practitioner" ]
+       ] ;
+       fhir:name [ fhir:v "practitioner-related-practitioner" ] ;
+       fhir:description [ fhir:v "Search by related practitioner for a Practitioner resource." ] ;
+       fhir:example [ fhir:v "false"^^xsd:boolean ]
+     ] [
+       fhir:extension ( [
+         fhir:url [ fhir:v "http://hl7.org/fhir/tools/StructureDefinition/resource-information"^^xsd:anyURI ] ;
+         fhir:value [ fhir:v "SearchParameter" ]
+       ] ) ;
+       fhir:reference [
+         fhir:link <http://ihris.org/fhir/SearchParameter/practitioner-renewrole> ;
+         fhir:reference [ fhir:v "SearchParameter/practitioner-renewrole" ]
+       ] ;
+       fhir:name [ fhir:v "practitioner-renewrole" ] ;
+       fhir:description [ fhir:v "Search by employee ID for a practitioner resource." ] ;
+       fhir:example [ fhir:v "false"^^xsd:boolean ]
+     ] [
+       fhir:extension ( [
+         fhir:url [ fhir:v "http://hl7.org/fhir/tools/StructureDefinition/resource-information"^^xsd:anyURI ] ;
+         fhir:value [ fhir:v "SearchParameter" ]
+       ] ) ;
+       fhir:reference [
+         fhir:link <http://ihris.org/fhir/SearchParameter/practitionerrole-related-location> ;
+         fhir:reference [ fhir:v "SearchParameter/practitionerrole-related-location" ]
+       ] ;
+       fhir:name [ fhir:v "practitionerrole-related-location" ] ;
+       fhir:description [ fhir:v "Search by related location for a PractitionerRole resource." ] ;
+       fhir:example [ fhir:v "false"^^xsd:boolean ]
+     ] [
+       fhir:extension ( [
+         fhir:url [ fhir:v "http://hl7.org/fhir/tools/StructureDefinition/resource-information"^^xsd:anyURI ] ;
+         fhir:value [ fhir:v "SearchParameter" ]
+       ] ) ;
+       fhir:reference [
+         fhir:link <http://ihris.org/fhir/SearchParameter/practitionerrole-related-practitioner> ;
+         fhir:reference [ fhir:v "SearchParameter/practitionerrole-related-practitioner" ]
+       ] ;
+       fhir:name [ fhir:v "practitionerrole-related-practitioner" ] ;
+       fhir:description [ fhir:v "Search by related practitioner for a PractitionerRole resource." ] ;
+       fhir:example [ fhir:v "false"^^xsd:boolean ]
+     ] ) ;
+     fhir:page [
+       fhir:extension ( [
+         fhir:url [ fhir:v "http://hl7.org/fhir/tools/StructureDefinition/ig-page-name"^^xsd:anyURI ] ;
+         fhir:value [ fhir:v "toc.html"^^xsd:anyURI ]
+       ] ) ;
+       fhir:name [ fhir:v "toc.html"^^xsd:anyURI ] ;
+       fhir:title [ fhir:v "Table of Contents" ] ;
+       fhir:generation [ fhir:v "html" ] ;
+       fhir:page ( [
+         fhir:extension ( [
+           fhir:url [ fhir:v "http://hl7.org/fhir/tools/StructureDefinition/ig-page-name"^^xsd:anyURI ] ;
+           fhir:value [ fhir:v "index.html"^^xsd:anyURI ]
+         ] ) ;
+         fhir:name [ fhir:v "index.html"^^xsd:anyURI ] ;
+         fhir:title [ fhir:v "Home" ] ;
+         fhir:generation [ fhir:v "markdown" ]
+       ] )
+     ] ;
+     fhir:parameter ( [
+       fhir:code [ fhir:v "path-resource" ] ;
+       fhir:value [ fhir:v "input/capabilities" ]
+     ] [
+       fhir:code [ fhir:v "path-resource" ] ;
+       fhir:value [ fhir:v "input/examples" ]
+     ] [
+       fhir:code [ fhir:v "path-resource" ] ;
+       fhir:value [ fhir:v "input/extensions" ]
+     ] [
+       fhir:code [ fhir:v "path-resource" ] ;
+       fhir:value [ fhir:v "input/models" ]
+     ] [
+       fhir:code [ fhir:v "path-resource" ] ;
+       fhir:value [ fhir:v "input/operations" ]
+     ] [
+       fhir:code [ fhir:v "path-resource" ] ;
+       fhir:value [ fhir:v "input/profiles" ]
+     ] [
+       fhir:code [ fhir:v "path-resource" ] ;
+       fhir:value [ fhir:v "input/resources" ]
+     ] [
+       fhir:code [ fhir:v "path-resource" ] ;
+       fhir:value [ fhir:v "input/vocabulary" ]
+     ] [
+       fhir:code [ fhir:v "path-resource" ] ;
+       fhir:value [ fhir:v "input/maps" ]
+     ] [
+       fhir:code [ fhir:v "path-resource" ] ;
+       fhir:value [ fhir:v "input/testing" ]
+     ] [
+       fhir:code [ fhir:v "path-resource" ] ;
+       fhir:value [ fhir:v "input/history" ]
+     ] [
+       fhir:code [ fhir:v "path-resource" ] ;
+       fhir:value [ fhir:v "fsh-generated/resources" ]
+     ] [
+       fhir:code [ fhir:v "path-pages" ] ;
+       fhir:value [ fhir:v "template/config" ]
+     ] [
+       fhir:code [ fhir:v "path-pages" ] ;
+       fhir:value [ fhir:v "input/images" ]
+     ] [
+       fhir:code [ fhir:v "path-tx-cache" ] ;
+       fhir:value [ fhir:v "input-cache/txcache" ]
+     ] )
+  ] . # 
+
+# -------------------------------------------------------------------------------------
+

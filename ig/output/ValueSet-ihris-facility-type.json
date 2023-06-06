@@ -1,0 +1,27 @@
+{
+  "resourceType" : "ValueSet",
+  "id" : "ihris-facility-type",
+  "text" : {
+    "status" : "generated",
+    "div" : "<div xmlns=\"http://www.w3.org/1999/xhtml\"><ul><li>Include all codes defined in <a href=\"CodeSystem-ihris-facility-type.html\"><code>http://ihris.org/fhir/CodeSystem/ihris-facility-type</code></a></li></ul></div>"
+  },
+  "url" : "http://ihris.org/fhir/ValueSet/ihris-facility-type",
+  "version" : "0.1.0",
+  "name" : "IhrisFacilityTypeValueSet",
+  "title" : "iHRIS Facility Type ValueSet",
+  "status" : "active",
+  "date" : "2022-02-25T08:41:04.362Z",
+  "publisher" : "Luke Duncan",
+  "contact" : [{
+    "name" : "Luke Duncan",
+    "telecom" : [{
+      "system" : "email",
+      "value" : "lduncan@intrahealth.org"
+    }]
+  }],
+  "compose" : {
+    "include" : [{
+      "system" : "http://ihris.org/fhir/CodeSystem/ihris-facility-type"
+    }]
+  }
+}

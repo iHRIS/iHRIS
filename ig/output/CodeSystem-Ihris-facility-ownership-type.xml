@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<CodeSystem xmlns="http://hl7.org/fhir">
+  <id value="Ihris-facility-ownership-type"/>
+  <text>
+    <status value="generated"/><div xmlns="http://www.w3.org/1999/xhtml"><p>This code system <code>http://ihris.org/fhir/CodeSystem/Ihris-facility-ownership-type</code> defines the following codes:</p><table class="codes"><tr><td style="white-space:nowrap"><b>Code</b></td><td><b>Display</b></td></tr><tr><td style="white-space:nowrap">private<a name="Ihris-facility-ownership-type-private"> </a></td><td>Private</td></tr><tr><td style="white-space:nowrap">government<a name="Ihris-facility-ownership-type-government"> </a></td><td>Government</td></tr><tr><td style="white-space:nowrap">NGO<a name="Ihris-facility-ownership-type-NGO"> </a></td><td>NGO's</td></tr></table></div>
+  </text>
+  <url value="http://ihris.org/fhir/CodeSystem/Ihris-facility-ownership-type"/>
+  <version value="0.1.0"/>
+  <name value="IhrisFacilityOwnershipTypeCodeSystem"/>
+  <title value="Facility Ownership Type"/>
+  <status value="active"/>
+  <date value="2022-02-23T08:41:04.362Z"/>
+  <publisher value="Luke Duncan"/>
+  <contact>
+    <name value="Luke Duncan"/>
+    <telecom>
+      <system value="email"/>
+      <value value="lduncan@intrahealth.org"/>
+    </telecom>
+  </contact>
+  <content value="complete"/>
+  <count value="3"/>
+  <concept>
+    <code value="private"/>
+    <display value="Private"/>
+  </concept>
+  <concept>
+    <code value="government"/>
+    <display value="Government"/>
+  </concept>
+  <concept>
+    <code value="NGO"/>
+    <display value="NGO's"/>
+  </concept>
+</CodeSystem>

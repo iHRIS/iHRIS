@@ -1,0 +1,72 @@
+{
+  "resourceType" : "Basic",
+  "id" : "ihris-page-employment-status",
+  "meta" : {
+    "profile" : ["http://ihris.org/fhir/StructureDefinition/ihris-page"]
+  },
+  "text" : {
+    "status" : "extensions",
+    "div" : "<div xmlns=\"http://www.w3.org/1999/xhtml\"><p><b>Generated Narrative: Basic</b><a name=\"ihris-page-employment-status\"> </a></p><div style=\"display: inline-block; background-color: #d9e0e7; padding: 6px; margin: 4px; border: 1px solid #8da1b4; border-radius: 5px; line-height: 60%\"><p style=\"margin-bottom: 0px\">Resource Basic &quot;ihris-page-employment-status&quot; </p><p style=\"margin-bottom: 0px\">Profile: <a href=\"StructureDefinition-ihris-page.html\">iHRIS Page</a></p></div><blockquote><p><b>iHRIS Page Display</b></p><blockquote><p><b>url</b></p><code>resource</code></blockquote><p><b>value</b>: <a href=\"CodeSystem/ihris-employment-status-codesystem\">CodeSystem/ihris-employment-status-codesystem</a></p><blockquote><p><b>url</b></p><code>search</code></blockquote><p><b>value</b>: Code|code</p><blockquote><p><b>url</b></p><code>search</code></blockquote><p><b>value</b>: Display|display</p><blockquote><p><b>url</b></p><code>field</code></blockquote></blockquote><blockquote><p><b>iHRIS Page Section</b></p><blockquote><p><b>url</b></p><code>title</code></blockquote><p><b>value</b>: Employment Status</p><blockquote><p><b>url</b></p><code>description</code></blockquote><p><b>value</b>: Employment Status</p><blockquote><p><b>url</b></p><code>name</code></blockquote><p><b>value</b>: CodeSystem</p><blockquote><p><b>url</b></p><code>field</code></blockquote><p><b>value</b>: CodeSystem.display</p><blockquote><p><b>url</b></p><code>field</code></blockquote><p><b>value</b>: CodeSystem.code</p><blockquote><p><b>url</b></p><code>field</code></blockquote><p><b>value</b>: CodeSystem.definition</p></blockquote><p><b>code</b>: iHRIS Page <span style=\"background: LightGoldenRodYellow; margin: 4px; border: 1px solid khaki\"> (<a href=\"CodeSystem-ihris-resource-codesystem.html\">Code System for iHRIS Basic Resources.</a>#page)</span></p></div>"
+  },
+  "extension" : [{
+    "extension" : [{
+      "url" : "resource",
+      "valueReference" : {
+        "reference" : "CodeSystem/ihris-employment-status-codesystem"
+      }
+    },
+    {
+      "url" : "search",
+      "valueString" : "Code|code"
+    },
+    {
+      "url" : "search",
+      "valueString" : "Display|display"
+    },
+    {
+      "extension" : [{
+        "url" : "path",
+        "valueString" : "CodeSystem.code"
+      },
+      {
+        "url" : "readOnlyIfSet",
+        "valueBoolean" : true
+      }],
+      "url" : "field"
+    }],
+    "url" : "http://ihris.org/fhir/StructureDefinition/ihris-page-display"
+  },
+  {
+    "extension" : [{
+      "url" : "title",
+      "valueString" : "Employment Status"
+    },
+    {
+      "url" : "description",
+      "valueString" : "Employment Status"
+    },
+    {
+      "url" : "name",
+      "valueString" : "CodeSystem"
+    },
+    {
+      "url" : "field",
+      "valueString" : "CodeSystem.display"
+    },
+    {
+      "url" : "field",
+      "valueString" : "CodeSystem.code"
+    },
+    {
+      "url" : "field",
+      "valueString" : "CodeSystem.definition"
+    }],
+    "url" : "http://ihris.org/fhir/StructureDefinition/ihris-page-section"
+  }],
+  "code" : {
+    "coding" : [{
+      "system" : "http://ihris.org/fhir/CodeSystem/ihris-resource-codesystem",
+      "code" : "page"
+    }]
+  }
+}

@@ -1,0 +1,66 @@
+@prefix fhir: <http://hl7.org/fhir/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+# - resource -------------------------------------------------------------------
+
+<http://ihris.org/fhir/CodeSystem/ihris-resource-codesystem> a fhir:CodeSystem ;
+  fhir:nodeRole fhir:treeRoot ;
+  fhir:id [ fhir:v "ihris-resource-codesystem"] ; # 
+  fhir:text [
+     fhir:status [ fhir:v "generated" ] ;
+     fhir:div "<div xmlns=\"http://www.w3.org/1999/xhtml\"><p>This code system <code>http://ihris.org/fhir/CodeSystem/ihris-resource-codesystem</code> defines the following codes:</p><table class=\"codes\"><tr><td style=\"white-space:nowrap\"><b>Code</b></td><td><b>Display</b></td><td><b>Definition</b></td></tr><tr><td style=\"white-space:nowrap\">role<a name=\"ihris-resource-codesystem-role\"> </a></td><td>iHRIS Role</td><td>User roles that are available to be assigned to users.</td></tr><tr><td style=\"white-space:nowrap\">task<a name=\"ihris-resource-codesystem-task\"> </a></td><td>iHRIS Task</td><td>Role tasks that are available to be assigned to roles</td></tr><tr><td style=\"white-space:nowrap\">page<a name=\"ihris-resource-codesystem-page\"> </a></td><td>iHRIS Page</td><td>Page definitions for viewing and editing resources.</td></tr><tr><td style=\"white-space:nowrap\">practitioner-link<a name=\"ihris-resource-codesystem-practitioner-link\"> </a></td><td>iHRIS Practitioner Link</td><td>Basic resource for customization that links to a Practitioner.</td></tr><tr><td style=\"white-space:nowrap\">training-link<a name=\"ihris-resource-codesystem-training-link\"> </a></td><td>iHRIS Training Link</td><td>Basic resource for customization that links to a Qualify training.</td></tr><tr><td style=\"white-space:nowrap\">visualization<a name=\"ihris-resource-codesystem-visualization\"> </a></td><td>iHRIS Data Visualization</td><td>iHRIS Data Visualization</td></tr><tr><td style=\"white-space:nowrap\">dashboard<a name=\"ihris-resource-codesystem-dashboard\"> </a></td><td>iHRIS Dashboard</td><td>iHRIS Dashboard</td></tr><tr><td style=\"white-space:nowrap\">resourcedata<a name=\"ihris-resource-codesystem-resourcedata\"> </a></td><td>Resource Data</td><td>Resource Data</td></tr></table></div>"
+  ] ; # 
+  fhir:url [ fhir:v "http://ihris.org/fhir/CodeSystem/ihris-resource-codesystem"^^xsd:anyURI] ; # 
+  fhir:version [ fhir:v "0.1.0"] ; # 
+  fhir:name [ fhir:v "IhrisResourceCodeSystem"] ; # 
+  fhir:title [ fhir:v "Code System for iHRIS Basic Resources."] ; # 
+  fhir:status [ fhir:v "active"] ; # 
+  fhir:date [ fhir:v "2023-06-05T15:57:19+03:00"^^xsd:dateTime] ; # 
+  fhir:publisher [ fhir:v "Luke Duncan"] ; # 
+  fhir:contact ( [
+     fhir:name [ fhir:v "Luke Duncan" ] ;
+     fhir:telecom ( [
+       fhir:system [ fhir:v "email" ] ;
+       fhir:value [ fhir:v "lduncan@intrahealth.org" ]
+     ] )
+  ] ) ; # 
+  fhir:content [ fhir:v "complete"] ; # 
+  fhir:count [ fhir:v "8"^^xsd:nonNegativeInteger] ; # 
+  fhir:concept ( [
+     fhir:code [ fhir:v "role" ] ;
+     fhir:display [ fhir:v "iHRIS Role" ] ;
+     fhir:definition [ fhir:v "User roles that are available to be assigned to users." ]
+  ] [
+     fhir:code [ fhir:v "task" ] ;
+     fhir:display [ fhir:v "iHRIS Task" ] ;
+     fhir:definition [ fhir:v "Role tasks that are available to be assigned to roles" ]
+  ] [
+     fhir:code [ fhir:v "page" ] ;
+     fhir:display [ fhir:v "iHRIS Page" ] ;
+     fhir:definition [ fhir:v "Page definitions for viewing and editing resources." ]
+  ] [
+     fhir:code [ fhir:v "practitioner-link" ] ;
+     fhir:display [ fhir:v "iHRIS Practitioner Link" ] ;
+     fhir:definition [ fhir:v "Basic resource for customization that links to a Practitioner." ]
+  ] [
+     fhir:code [ fhir:v "training-link" ] ;
+     fhir:display [ fhir:v "iHRIS Training Link" ] ;
+     fhir:definition [ fhir:v "Basic resource for customization that links to a Qualify training." ]
+  ] [
+     fhir:code [ fhir:v "visualization" ] ;
+     fhir:display [ fhir:v "iHRIS Data Visualization" ] ;
+     fhir:definition [ fhir:v "iHRIS Data Visualization" ]
+  ] [
+     fhir:code [ fhir:v "dashboard" ] ;
+     fhir:display [ fhir:v "iHRIS Dashboard" ] ;
+     fhir:definition [ fhir:v "iHRIS Dashboard" ]
+  ] [
+     fhir:code [ fhir:v "resourcedata" ] ;
+     fhir:display [ fhir:v "Resource Data" ] ;
+     fhir:definition [ fhir:v "Resource Data" ]
+  ] ) . # 
+
+# -------------------------------------------------------------------------------------
+

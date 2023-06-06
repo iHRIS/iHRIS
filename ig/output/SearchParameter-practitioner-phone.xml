@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<SearchParameter xmlns="http://hl7.org/fhir">
+  <id value="practitioner-phone"/>
+  <text>
+    <status value="generated"/><div xmlns="http://www.w3.org/1999/xhtml"><h2>Search Parameter on a name extension on Basic resources</h2><p>Parameter <code>phonenumber</code>:<code>string</code></p><div><p>Search by phone for a Practitioner resource.</p>
+</div><table class="grid"><tr><td>Resource</td><td><a href="http://hl7.org/fhir/R4/practitioner.html">Practitioner</a></td></tr><tr><td>Expression</td><td><code>Practitioner.telecom.where(system='phone').value</code></td></tr><tr><td>Processing Mode</td><td>Normal</td></tr><tr><td>Target Resources</td><td><a href="http://hl7.org/fhir/R4/practitioner.html">Practitioner</a></td></tr><tr><td>Multiples</td><td>The parameter cannot repeat or have multiple values</td></tr></table></div>
+  </text>
+  <url value="http://ihris.org/fhir/SearchParameter/practitioner-phone"/>
+  <version value="0.1.0"/>
+  <name value="Search Parameter on a name extension on Basic resources"/>
+  <status value="active"/>
+  <date value="2023-06-05T15:57:19+03:00"/>
+  <publisher value="Luke Duncan"/>
+  <contact>
+    <name value="Luke Duncan"/>
+    <telecom>
+      <system value="email"/>
+      <value value="lduncan@intrahealth.org"/>
+    </telecom>
+  </contact>
+  <description value="Search by phone for a Practitioner resource."/>
+  <code value="phonenumber"/>
+  <base value="Practitioner"/>
+  <type value="string"/>
+  <expression value="Practitioner.telecom.where(system='phone').value"/>
+  <xpathUsage value="normal"/>
+  <target value="Practitioner"/>
+</SearchParameter>

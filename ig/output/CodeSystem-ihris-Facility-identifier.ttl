@@ -1,0 +1,40 @@
+@prefix fhir: <http://hl7.org/fhir/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+# - resource -------------------------------------------------------------------
+
+<http://ihris.org/fhir/CodeSystem/ihris-Facility-identifier> a fhir:CodeSystem ;
+  fhir:nodeRole fhir:treeRoot ;
+  fhir:id [ fhir:v "ihris-Facility-identifier"] ; # 
+  fhir:text [
+     fhir:status [ fhir:v "generated" ] ;
+     fhir:div "<div xmlns=\"http://www.w3.org/1999/xhtml\"><p>This code system <code>http://ihris.org/fhir/CodeSystem/ihris-Facility-identifier</code> defines the following codes:</p><table class=\"codes\"><tr><td style=\"white-space:nowrap\"><b>Code</b></td><td><b>Display</b></td></tr><tr><td style=\"white-space:nowrap\">dhis2Id<a name=\"ihris-Facility-identifier-dhis2Id\"> </a></td><td>DHIS2 ID</td></tr><tr><td style=\"white-space:nowrap\">mfrId<a name=\"ihris-Facility-identifier-mfrId\"> </a></td><td>MFR ID</td></tr></table></div>"
+  ] ; # 
+  fhir:url [ fhir:v "http://ihris.org/fhir/CodeSystem/ihris-Facility-identifier"^^xsd:anyURI] ; # 
+  fhir:version [ fhir:v "0.1.0"] ; # 
+  fhir:name [ fhir:v "IhrisFacilityIdentifierCodeSystem"] ; # 
+  fhir:title [ fhir:v "Identifier Type"] ; # 
+  fhir:status [ fhir:v "active"] ; # 
+  fhir:date [ fhir:v "2022-02-13T08:41:04.362Z"^^xsd:dateTime] ; # 
+  fhir:publisher [ fhir:v "Luke Duncan"] ; # 
+  fhir:contact ( [
+     fhir:name [ fhir:v "Luke Duncan" ] ;
+     fhir:telecom ( [
+       fhir:system [ fhir:v "email" ] ;
+       fhir:value [ fhir:v "lduncan@intrahealth.org" ]
+     ] )
+  ] ) ; # 
+  fhir:content [ fhir:v "complete"] ; # 
+  fhir:count [ fhir:v "2"^^xsd:nonNegativeInteger] ; # 
+  fhir:concept ( [
+     fhir:code [ fhir:v "dhis2Id" ] ;
+     fhir:display [ fhir:v "DHIS2 ID" ]
+  ] [
+     fhir:code [ fhir:v "mfrId" ] ;
+     fhir:display [ fhir:v "MFR ID" ]
+  ] ) . # 
+
+# -------------------------------------------------------------------------------------
+

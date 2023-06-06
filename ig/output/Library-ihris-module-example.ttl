@@ -1,0 +1,58 @@
+@prefix fhir: <http://hl7.org/fhir/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+# - resource -------------------------------------------------------------------
+
+<http://ihris.org/fhir/Library/ihris-module-example> a fhir:Library ;
+  fhir:nodeRole fhir:treeRoot ;
+  fhir:id [ fhir:v "ihris-module-example"] ; # 
+  fhir:meta [
+     fhir:profile ( [
+       fhir:v "http://ihris.org/fhir/StructureDefinition/ihris-module"^^xsd:anyURI ;
+       fhir:link <http://ihris.org/fhir/StructureDefinition/ihris-module>
+     ] )
+  ] ; # 
+  fhir:text [
+     fhir:status [ fhir:v "generated" ] ;
+     fhir:div "<div xmlns=\"http://www.w3.org/1999/xhtml\"><h2>Participants</h2><table class=\"grid\"><tr><td>Author</td><td>Test Author</td><td><a href=\"mailto:test@ihris.org\">test@ihris.org</a></td></tr></table><h2>Contents</h2><p>module-signature: (<code>text/x-sig</code>)</p><pre><code>LD�</code></pre><p>module-code: (<code>application/javascript</code>)</p><pre><code>LD�</code></pre></div>"
+  ] ; # 
+  fhir:url [ fhir:v "http://ihris.org/fhir/Library/ihris-module-example"^^xsd:anyURI] ; # 
+  fhir:version [ fhir:v "0.1.0"] ; # 
+  fhir:name [ fhir:v "ihris-example"] ; # 
+  fhir:title [ fhir:v "iHRIS Example Module"] ; # 
+  fhir:status [ fhir:v "active"] ; # 
+  fhir:type [
+     fhir:coding ( [
+       fhir:code [ fhir:v "logic-library" ]
+     ] )
+  ] ; # 
+  fhir:date [ fhir:v "2023-06-05T15:57:19+03:00"^^xsd:dateTime] ; # 
+  fhir:publisher [ fhir:v "Luke Duncan"] ; # 
+  fhir:contact ( [
+     fhir:name [ fhir:v "Luke Duncan" ] ;
+     fhir:telecom ( [
+       fhir:system [ fhir:v "email" ] ;
+       fhir:value [ fhir:v "lduncan@intrahealth.org" ]
+     ] )
+  ] ) ; # 
+  fhir:author ( [
+     fhir:name [ fhir:v "Test Author" ] ;
+     fhir:telecom ( [
+       fhir:system [ fhir:v "email" ] ;
+       fhir:value [ fhir:v "test@ihris.org" ]
+     ] )
+  ] ) ; # 
+  fhir:content ( [
+     fhir:contentType [ fhir:v "text/x-sig" ] ;
+     fhir:data [ fhir:v "TEST"^^xsd:base64Binary ] ;
+     fhir:title [ fhir:v "module-signature" ]
+  ] [
+     fhir:contentType [ fhir:v "application/javascript" ] ;
+     fhir:data [ fhir:v "TEST"^^xsd:base64Binary ] ;
+     fhir:title [ fhir:v "module-code" ]
+  ] ) . # 
+
+# -------------------------------------------------------------------------------------
+

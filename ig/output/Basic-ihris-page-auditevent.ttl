@@ -1,0 +1,109 @@
+@prefix fhir: <http://hl7.org/fhir/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+# - resource -------------------------------------------------------------------
+
+<http://ihris.org/fhir/Basic/ihris-page-auditevent> a fhir:Basic ;
+  fhir:nodeRole fhir:treeRoot ;
+  fhir:id [ fhir:v "ihris-page-auditevent"] ; # 
+  fhir:meta [
+     fhir:profile ( [
+       fhir:v "http://ihris.org/fhir/StructureDefinition/ihris-page"^^xsd:anyURI ;
+       fhir:link <http://ihris.org/fhir/StructureDefinition/ihris-page>
+     ] )
+  ] ; # 
+  fhir:text [
+     fhir:status [ fhir:v "extensions" ] ;
+     fhir:div "<div xmlns=\"http://www.w3.org/1999/xhtml\"><p><b>Generated Narrative: Basic</b><a name=\"ihris-page-auditevent\"> </a></p><div style=\"display: inline-block; background-color: #d9e0e7; padding: 6px; margin: 4px; border: 1px solid #8da1b4; border-radius: 5px; line-height: 60%\"><p style=\"margin-bottom: 0px\">Resource Basic &quot;ihris-page-auditevent&quot; </p><p style=\"margin-bottom: 0px\">Profile: <a href=\"StructureDefinition-ihris-page.html\">iHRIS Page</a></p></div><blockquote><p><b>iHRIS Page Display</b></p><blockquote><p><b>url</b></p><code>resource</code></blockquote><p><b>value</b>: <a href=\"StructureDefinition-ihris-auditevent.html\">StructureDefinition/ihris-auditevent</a> &quot;IhrisAuditEvent&quot;</p><blockquote><p><b>url</b></p><code>search</code></blockquote><p><b>value</b>: Id|AuditEvent.id</p><blockquote><p><b>url</b></p><code>search</code></blockquote><p><b>value</b>: User AltId|AuditEvent.agent.altId</p><blockquote><p><b>url</b></p><code>search</code></blockquote><p><b>value</b>: User|AuditEvent.agent.name</p><blockquote><p><b>url</b></p><code>search</code></blockquote><p><b>value</b>: Action|AuditEvent.subtype.display</p><blockquote><p><b>url</b></p><code>search</code></blockquote><p><b>value</b>: Resource|AuditEvent.entity.what.reference</p><blockquote><p><b>url</b></p><code>search</code></blockquote><p><b>value</b>: Outcome|AuditEvent.outcome</p><blockquote><p><b>url</b></p><code>search</code></blockquote><p><b>value</b>: Resource(If Error)|AuditEvent.entity.detail.where(type='resource').valueString</p><blockquote><p><b>url</b></p><code>search</code></blockquote><p><b>value</b>: Error|AuditEvent.entity.detail.where(type='error').valueString</p><blockquote><p><b>url</b></p><code>search</code></blockquote><p><b>value</b>: Time/Date|AuditEvent.recorded</p><blockquote><p><b>url</b></p><code>filter</code></blockquote><p><b>value</b>: Action|subtype|http://dicom.nema.org/resources/ontology/DCM</p><blockquote><p><b>url</b></p><code>filter</code></blockquote><p><b>value</b>: User AltId|altid</p><blockquote><p><b>url</b></p><code>filter</code></blockquote><p><b>value</b>: User|agent-name:contains</p><blockquote><p><b>url</b></p><code>filter</code></blockquote><p><b>value</b>: Date|date</p></blockquote><blockquote><p><b>iHRIS Page Section</b></p><blockquote><p><b>url</b></p><code>title</code></blockquote><p><b>value</b>: Audit Events/Logs</p><blockquote><p><b>url</b></p><code>description</code></blockquote><p><b>value</b>: System Logs details</p><blockquote><p><b>url</b></p><code>name</code></blockquote><p><b>value</b>: AuditEvent</p><blockquote><p><b>url</b></p><code>field</code></blockquote><p><b>value</b>: AuditEvent.agent.altIdd</p><blockquote><p><b>url</b></p><code>field</code></blockquote><p><b>value</b>: AuditEvent.agent.name</p><blockquote><p><b>url</b></p><code>field</code></blockquote><p><b>value</b>: AuditEvent.subtype.display</p><blockquote><p><b>url</b></p><code>field</code></blockquote><p><b>value</b>: AuditEvent.entity.what.reference</p><blockquote><p><b>url</b></p><code>field</code></blockquote><p><b>value</b>: AuditEvent.outcome</p><blockquote><p><b>url</b></p><code>field</code></blockquote><p><b>value</b>: AuditEvent.recorded</p></blockquote><p><b>code</b>: iHRIS Page <span style=\"background: LightGoldenRodYellow; margin: 4px; border: 1px solid khaki\"> (<a href=\"CodeSystem-ihris-resource-codesystem.html\">Code System for iHRIS Basic Resources.</a>#page)</span></p></div>"
+  ] ; # 
+  fhir:extension ( [
+     fhir:extension ( [
+       fhir:url [ fhir:v "resource"^^xsd:anyURI ] ;
+       fhir:value [
+         a fhir:Reference ;
+         fhir:link <http://ihris.org/fhir/StructureDefinition/ihris-auditevent> ;
+         fhir:reference [ fhir:v "StructureDefinition/ihris-auditevent" ]
+       ]
+     ] [
+       fhir:url [ fhir:v "search"^^xsd:anyURI ] ;
+       fhir:value [ fhir:v "Id|AuditEvent.id" ]
+     ] [
+       fhir:url [ fhir:v "search"^^xsd:anyURI ] ;
+       fhir:value [ fhir:v "User AltId|AuditEvent.agent.altId" ]
+     ] [
+       fhir:url [ fhir:v "search"^^xsd:anyURI ] ;
+       fhir:value [ fhir:v "User|AuditEvent.agent.name" ]
+     ] [
+       fhir:url [ fhir:v "search"^^xsd:anyURI ] ;
+       fhir:value [ fhir:v "Action|AuditEvent.subtype.display" ]
+     ] [
+       fhir:url [ fhir:v "search"^^xsd:anyURI ] ;
+       fhir:value [ fhir:v "Resource|AuditEvent.entity.what.reference" ]
+     ] [
+       fhir:url [ fhir:v "search"^^xsd:anyURI ] ;
+       fhir:value [ fhir:v "Outcome|AuditEvent.outcome" ]
+     ] [
+       fhir:url [ fhir:v "search"^^xsd:anyURI ] ;
+       fhir:value [ fhir:v "Resource(If Error)|AuditEvent.entity.detail.where(type='resource').valueString" ]
+     ] [
+       fhir:url [ fhir:v "search"^^xsd:anyURI ] ;
+       fhir:value [ fhir:v "Error|AuditEvent.entity.detail.where(type='error').valueString" ]
+     ] [
+       fhir:url [ fhir:v "search"^^xsd:anyURI ] ;
+       fhir:value [ fhir:v "Time/Date|AuditEvent.recorded" ]
+     ] [
+       fhir:url [ fhir:v "filter"^^xsd:anyURI ] ;
+       fhir:value [ fhir:v "Action|subtype|http://dicom.nema.org/resources/ontology/DCM" ]
+     ] [
+       fhir:url [ fhir:v "filter"^^xsd:anyURI ] ;
+       fhir:value [ fhir:v "User AltId|altid" ]
+     ] [
+       fhir:url [ fhir:v "filter"^^xsd:anyURI ] ;
+       fhir:value [ fhir:v "User|agent-name:contains" ]
+     ] [
+       fhir:url [ fhir:v "filter"^^xsd:anyURI ] ;
+       fhir:value [ fhir:v "Date|date" ]
+     ] ) ;
+     fhir:url [ fhir:v "http://ihris.org/fhir/StructureDefinition/ihris-page-display"^^xsd:anyURI ]
+  ] [
+     fhir:extension ( [
+       fhir:url [ fhir:v "title"^^xsd:anyURI ] ;
+       fhir:value [ fhir:v "Audit Events/Logs" ]
+     ] [
+       fhir:url [ fhir:v "description"^^xsd:anyURI ] ;
+       fhir:value [ fhir:v "System Logs details" ]
+     ] [
+       fhir:url [ fhir:v "name"^^xsd:anyURI ] ;
+       fhir:value [ fhir:v "AuditEvent" ]
+     ] [
+       fhir:url [ fhir:v "field"^^xsd:anyURI ] ;
+       fhir:value [ fhir:v "AuditEvent.agent.altIdd" ]
+     ] [
+       fhir:url [ fhir:v "field"^^xsd:anyURI ] ;
+       fhir:value [ fhir:v "AuditEvent.agent.name" ]
+     ] [
+       fhir:url [ fhir:v "field"^^xsd:anyURI ] ;
+       fhir:value [ fhir:v "AuditEvent.subtype.display" ]
+     ] [
+       fhir:url [ fhir:v "field"^^xsd:anyURI ] ;
+       fhir:value [ fhir:v "AuditEvent.entity.what.reference" ]
+     ] [
+       fhir:url [ fhir:v "field"^^xsd:anyURI ] ;
+       fhir:value [ fhir:v "AuditEvent.outcome" ]
+     ] [
+       fhir:url [ fhir:v "field"^^xsd:anyURI ] ;
+       fhir:value [ fhir:v "AuditEvent.recorded" ]
+     ] ) ;
+     fhir:url [ fhir:v "http://ihris.org/fhir/StructureDefinition/ihris-page-section"^^xsd:anyURI ]
+  ] ) ; # 
+  fhir:code [
+     fhir:coding ( [
+       fhir:system [ fhir:v "http://ihris.org/fhir/CodeSystem/ihris-resource-codesystem"^^xsd:anyURI ] ;
+       fhir:code [ fhir:v "page" ]
+     ] )
+  ] . # 
+
+# -------------------------------------------------------------------------------------
+

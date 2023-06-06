@@ -1,0 +1,1063 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<Basic xmlns="http://hl7.org/fhir">
+  <id value="ihris-page-practitioner"/>
+  <meta>
+    <profile value="http://ihris.org/fhir/StructureDefinition/ihris-page"/>
+  </meta>
+  <text>
+    <status value="extensions"/><div xmlns="http://www.w3.org/1999/xhtml"><p><b>Generated Narrative: Basic</b><a name="ihris-page-practitioner"> </a></p><div style="display: inline-block; background-color: #d9e0e7; padding: 6px; margin: 4px; border: 1px solid #8da1b4; border-radius: 5px; line-height: 60%"><p style="margin-bottom: 0px">Resource Basic &quot;ihris-page-practitioner&quot; </p><p style="margin-bottom: 0px">Profile: <a href="StructureDefinition-ihris-page.html">iHRIS Page</a></p></div><blockquote><p><b>iHRIS Page Display</b></p><blockquote><p><b>url</b></p><code>resource</code></blockquote><p><b>value</b>: <a href="StructureDefinition-ihris-practitioner.html">StructureDefinition/ihris-practitioner</a> &quot;IhrisPractitioner&quot;</p><blockquote><p><b>url</b></p><code>search</code></blockquote><p><b>value</b>: Surname|Practitioner.name.where(use='official').family</p><blockquote><p><b>url</b></p><code>filter</code></blockquote><p><b>value</b>: Name|name:contains</p><p><b>url</b>: <code>/questionnaire/ihris-practitioner/practitioner</code></p><blockquote><p><b>url</b></p><code>add</code></blockquote><p><b>url</b>: <code>/resource/view/practitioner/FIELD?edit=true</code></p><blockquote><p><b>url</b></p><code>link</code></blockquote></blockquote><blockquote><p><b>iHRIS Page Section</b></p><blockquote><p><b>url</b></p><code>title</code></blockquote><p><b>value</b>: Health Worker</p><blockquote><p><b>url</b></p><code>description</code></blockquote><p><b>value</b>: Primary demographic details</p><blockquote><p><b>url</b></p><code>name</code></blockquote><p><b>value</b>: Practitioner</p><blockquote><p><b>url</b></p><code>field</code></blockquote><p><b>value</b>: Practitioner.name</p><blockquote><p><b>url</b></p><code>field</code></blockquote><p><b>value</b>: Practitioner.name.given</p><blockquote><p><b>url</b></p><code>field</code></blockquote><p><b>value</b>: Practitioner.name.family</p><blockquote><p><b>url</b></p><code>field</code></blockquote><p><b>value</b>: Practitioner.birthDate</p><blockquote><p><b>url</b></p><code>field</code></blockquote><p><b>value</b>: Practitioner.gender</p><blockquote><p><b>url</b></p><code>field</code></blockquote><p><b>value</b>: Practitioner.extension:residence</p></blockquote><blockquote><p><b>iHRIS Page Section</b></p><blockquote><p><b>url</b></p><code>title</code></blockquote><p><b>value</b>: Identifiers</p><blockquote><p><b>url</b></p><code>description</code></blockquote><p><b>value</b>: Personal identifiers</p><blockquote><p><b>url</b></p><code>name</code></blockquote><p><b>value</b>: identifiers</p><blockquote><p><b>url</b></p><code>field</code></blockquote><p><b>value</b>: Practitioner.identifier</p><blockquote><p><b>url</b></p><code>field</code></blockquote><p><b>value</b>: Practitioner.identifier.use</p><blockquote><p><b>url</b></p><code>field</code></blockquote><p><b>value</b>: Practitioner.identifier.type</p><blockquote><p><b>url</b></p><code>field</code></blockquote><p><b>value</b>: Practitioner.identifier.value</p><blockquote><p><b>url</b></p><code>field</code></blockquote><p><b>value</b>: Practitioner.identifier.system</p></blockquote><blockquote><p><b>iHRIS Page Section</b></p><blockquote><p><b>url</b></p><code>title</code></blockquote><p><b>value</b>: Contact Details</p><blockquote><p><b>url</b></p><code>description</code></blockquote><p><b>value</b>: Address, email, phone numbers</p><blockquote><p><b>url</b></p><code>name</code></blockquote><p><b>value</b>: contact</p><blockquote><p><b>url</b></p><code>field</code></blockquote><p><b>value</b>: Practitioner.address</p><blockquote><p><b>url</b></p><code>field</code></blockquote><p><b>value</b>: Practitioner.telecom</p></blockquote><blockquote><p><b>iHRIS Page Section</b></p><blockquote><p><b>url</b></p><code>title</code></blockquote><p><b>value</b>: Language Details</p><blockquote><p><b>url</b></p><code>description</code></blockquote><p><b>value</b>: Languages spoken</p><blockquote><p><b>url</b></p><code>name</code></blockquote><p><b>value</b>: language</p><blockquote><p><b>url</b></p><code>field</code></blockquote><p><b>value</b>: Practitioner.communication</p></blockquote><blockquote><p><b>iHRIS Page Section</b></p><blockquote><p><b>url</b></p><code>title</code></blockquote><p><b>value</b>: Position</p><blockquote><p><b>url</b></p><code>description</code></blockquote><p><b>value</b>: Position the person holds</p><blockquote><p><b>url</b></p><code>name</code></blockquote><p><b>value</b>: position</p><blockquote><p><b>url</b></p><code>field</code></blockquote><p><b>value</b>: PractitionerRole.code</p><blockquote><p><b>url</b></p><code>resource</code></blockquote></blockquote><blockquote><p><b>iHRIS Page Section</b></p><blockquote><p><b>url</b></p><code>title</code></blockquote><p><b>value</b>: Leave Information</p><blockquote><p><b>url</b></p><code>description</code></blockquote><p><b>value</b>: Leave Details for the Person</p><blockquote><p><b>url</b></p><code>name</code></blockquote><p><b>value</b>: leave</p><blockquote><p><b>url</b></p><code>resource</code></blockquote></blockquote><blockquote><p><b>iHRIS Page Section</b></p><blockquote><p><b>url</b></p><code>title</code></blockquote><p><b>value</b>: Performance Evaluation Information</p><blockquote><p><b>url</b></p><code>description</code></blockquote><p><b>value</b>: Performance Evaluation for the Person</p><blockquote><p><b>url</b></p><code>name</code></blockquote><p><b>value</b>: performance</p><blockquote><p><b>url</b></p><code>resource</code></blockquote></blockquote><blockquote><p><b>iHRIS Page Section</b></p><blockquote><p><b>url</b></p><code>title</code></blockquote><p><b>value</b>: Education History</p><blockquote><p><b>url</b></p><code>description</code></blockquote><p><b>value</b>: Education History Details for the Person</p><blockquote><p><b>url</b></p><code>name</code></blockquote><p><b>value</b>: education-history</p><blockquote><p><b>url</b></p><code>resource</code></blockquote></blockquote><blockquote><p><b>iHRIS Page Section</b></p><blockquote><p><b>url</b></p><code>title</code></blockquote><p><b>value</b>: Work Experience</p><blockquote><p><b>url</b></p><code>description</code></blockquote><p><b>value</b>: Work Experience for the Person</p><blockquote><p><b>url</b></p><code>name</code></blockquote><p><b>value</b>: employment-history</p><blockquote><p><b>url</b></p><code>resource</code></blockquote></blockquote><blockquote><p><b>iHRIS Page Section</b></p><blockquote><p><b>url</b></p><code>title</code></blockquote><p><b>value</b>: Emergency Contact</p><blockquote><p><b>url</b></p><code>description</code></blockquote><p><b>value</b>: Emergency Contact for the Person</p><blockquote><p><b>url</b></p><code>name</code></blockquote><p><b>value</b>: emergency</p><blockquote><p><b>url</b></p><code>resource</code></blockquote></blockquote><blockquote><p><b>iHRIS Page Section</b></p><blockquote><p><b>url</b></p><code>title</code></blockquote><p><b>value</b>: Employee Disciplinary Information</p><blockquote><p><b>url</b></p><code>description</code></blockquote><p><b>value</b>: Employee Discipline for the Person</p><blockquote><p><b>url</b></p><code>name</code></blockquote><p><b>value</b>: Employee Discipline</p><blockquote><p><b>url</b></p><code>resource</code></blockquote></blockquote><blockquote><p><b>iHRIS Page Section</b></p><blockquote><p><b>url</b></p><code>title</code></blockquote><p><b>value</b>: Employee Salary Information</p><blockquote><p><b>url</b></p><code>description</code></blockquote><p><b>value</b>: Employee Salary Information for the Person</p><blockquote><p><b>url</b></p><code>name</code></blockquote><p><b>value</b>: Employee Salary Information</p><blockquote><p><b>url</b></p><code>resource</code></blockquote></blockquote><blockquote><p><b>iHRIS Page Section</b></p><blockquote><p><b>url</b></p><code>title</code></blockquote><p><b>value</b>: In-Service Training Information</p><blockquote><p><b>url</b></p><code>description</code></blockquote><p><b>value</b>: In-Service Training Information for the Person</p><blockquote><p><b>url</b></p><code>name</code></blockquote><p><b>value</b>: In-Service Training Information</p><blockquote><p><b>url</b></p><code>resource</code></blockquote></blockquote><p><b>code</b>: iHRIS Page <span style="background: LightGoldenRodYellow; margin: 4px; border: 1px solid khaki"> (<a href="CodeSystem-ihris-resource-codesystem.html">Code System for iHRIS Basic Resources.</a>#page)</span></p></div>
+  </text>
+  <extension url="http://ihris.org/fhir/StructureDefinition/ihris-page-display">
+    <extension url="resource">
+      <valueReference>
+        <reference value="StructureDefinition/ihris-practitioner"/>
+      </valueReference>
+    </extension>
+    <extension url="search">
+      <valueString value="Surname|Practitioner.name.where(use='official').family"/>
+    </extension>
+    <extension url="filter">
+      <valueString value="Name|name:contains"/>
+    </extension>
+    <extension url="add">
+      <extension url="url">
+        <valueUrl value="/questionnaire/ihris-practitioner/practitioner"/>
+      </extension>
+      <extension url="icon">
+        <valueString value="mdi-account-plus"/>
+      </extension>
+      <extension url="class">
+        <valueString value="accent"/>
+      </extension>
+    </extension>
+    <extension url="link">
+      <extension url="url">
+        <valueUrl value="/resource/view/practitioner/FIELD?edit=true"/>
+      </extension>
+      <extension url="field">
+        <valueString value="Practitioner.id"/>
+      </extension>
+      <extension url="text">
+        <valueString value="Edit"/>
+      </extension>
+      <extension url="button">
+        <valueBoolean value="true"/>
+      </extension>
+      <extension url="icon">
+        <valueString value="mdi-pencil"/>
+      </extension>
+      <extension url="class">
+        <valueString value="secondary"/>
+      </extension>
+    </extension>
+  </extension>
+  <extension url="http://ihris.org/fhir/StructureDefinition/ihris-page-section">
+    <extension url="title">
+      <valueString value="Health Worker"/>
+    </extension>
+    <extension url="description">
+      <valueString value="Primary demographic details"/>
+    </extension>
+    <extension url="name">
+      <valueString value="Practitioner"/>
+    </extension>
+    <extension url="field">
+      <valueString value="Practitioner.name"/>
+    </extension>
+    <extension url="field">
+      <valueString value="Practitioner.name.given"/>
+    </extension>
+    <extension url="field">
+      <valueString value="Practitioner.name.family"/>
+    </extension>
+    <extension url="field">
+      <valueString value="Practitioner.birthDate"/>
+    </extension>
+    <extension url="field">
+      <valueString value="Practitioner.gender"/>
+    </extension>
+    <extension url="field">
+      <valueString value="Practitioner.extension:residence"/>
+    </extension>
+  </extension>
+  <extension url="http://ihris.org/fhir/StructureDefinition/ihris-page-section">
+    <extension url="title">
+      <valueString value="Identifiers"/>
+    </extension>
+    <extension url="description">
+      <valueString value="Personal identifiers"/>
+    </extension>
+    <extension url="name">
+      <valueString value="identifiers"/>
+    </extension>
+    <extension url="field">
+      <valueString value="Practitioner.identifier"/>
+    </extension>
+    <extension url="field">
+      <valueString value="Practitioner.identifier.use"/>
+    </extension>
+    <extension url="field">
+      <valueString value="Practitioner.identifier.type"/>
+    </extension>
+    <extension url="field">
+      <valueString value="Practitioner.identifier.value"/>
+    </extension>
+    <extension url="field">
+      <valueString value="Practitioner.identifier.system"/>
+    </extension>
+  </extension>
+  <extension url="http://ihris.org/fhir/StructureDefinition/ihris-page-section">
+    <extension url="title">
+      <valueString value="Contact Details"/>
+    </extension>
+    <extension url="description">
+      <valueString value="Address, email, phone numbers"/>
+    </extension>
+    <extension url="name">
+      <valueString value="contact"/>
+    </extension>
+    <extension url="field">
+      <valueString value="Practitioner.address"/>
+    </extension>
+    <extension url="field">
+      <valueString value="Practitioner.telecom"/>
+    </extension>
+  </extension>
+  <extension url="http://ihris.org/fhir/StructureDefinition/ihris-page-section">
+    <extension url="title">
+      <valueString value="Language Details"/>
+    </extension>
+    <extension url="description">
+      <valueString value="Languages spoken"/>
+    </extension>
+    <extension url="name">
+      <valueString value="language"/>
+    </extension>
+    <extension url="field">
+      <valueString value="Practitioner.communication"/>
+    </extension>
+  </extension>
+  <extension url="http://ihris.org/fhir/StructureDefinition/ihris-page-section">
+    <extension url="title">
+      <valueString value="Position"/>
+    </extension>
+    <extension url="description">
+      <valueString value="Position the person holds"/>
+    </extension>
+    <extension url="name">
+      <valueString value="position"/>
+    </extension>
+    <extension url="field">
+      <valueString value="PractitionerRole.code"/>
+    </extension>
+    <extension url="resource">
+      <extension url="resource">
+        <valueReference>
+          <reference value="StructureDefinition/ihris-practitioner-role"/>
+        </valueReference>
+      </extension>
+      <extension url="linkfield">
+        <valueString value="PractitionerRole.practitioner"/>
+      </extension>
+      <extension url="column">
+        <extension url="header">
+          <valueString value="Job"/>
+        </extension>
+        <extension url="field">
+          <valueString value="PractitionerRole.code.coding[0]"/>
+        </extension>
+      </extension>
+      <extension url="column">
+        <extension url="header">
+          <valueString value="Start Date"/>
+        </extension>
+        <extension url="field">
+          <valueString value="PractitionerRole.period.start"/>
+        </extension>
+      </extension>
+      <extension url="column">
+        <extension url="header">
+          <valueString value="End Date"/>
+        </extension>
+        <extension url="field">
+          <valueString value="PractitionerRole.period.end"/>
+        </extension>
+      </extension>
+      <extension url="column">
+        <extension url="header">
+          <valueString value="Actions"/>
+        </extension>
+        <extension url="field">
+          <valueString value="_action"/>
+        </extension>
+      </extension>
+      <extension url="action">
+        <extension url="link">
+          <valueString value="/resource/add/practitionerrole?PractitionerRole.practitioner.reference=Practitioner/FHIRID"/>
+        </extension>
+        <extension url="text">
+          <valueString value="Assign Job"/>
+        </extension>
+        <extension url="row">
+          <valueBoolean value="false"/>
+        </extension>
+        <extension url="emptyDisplay">
+          <valueBoolean value="true"/>
+        </extension>
+        <extension url="condition">
+          <valueString value="PractitionerRole.period.end.exists()"/>
+        </extension>
+        <extension url="class">
+          <valueString value="primary"/>
+        </extension>
+      </extension>
+      <extension url="action">
+        <extension url="link">
+          <valueString value="/resource/view/practitionerrole/ITEMID"/>
+        </extension>
+        <extension url="text">
+          <valueString value="View"/>
+        </extension>
+        <extension url="row">
+          <valueBoolean value="true"/>
+        </extension>
+        <extension url="class">
+          <valueString value="primary"/>
+        </extension>
+      </extension>
+      <extension url="action">
+        <extension url="link">
+          <valueString value="/questionnaire/ihris-endrole/practitioner?practitionerrole=ITEMID"/>
+        </extension>
+        <extension url="text">
+          <valueString value="End Job"/>
+        </extension>
+        <extension url="row">
+          <valueBoolean value="true"/>
+        </extension>
+        <extension url="condition">
+          <valueString value="PractitionerRole.period.end.empty()"/>
+        </extension>
+        <extension url="class">
+          <valueString value="warning"/>
+        </extension>
+      </extension>
+      <extension url="action">
+        <extension url="link">
+          <valueString value="/questionnaire/ihris-promotion/practitioner?practitionerrole=ITEMID"/>
+        </extension>
+        <extension url="text">
+          <valueString value="Enter Promotion"/>
+        </extension>
+        <extension url="row">
+          <valueBoolean value="true"/>
+        </extension>
+        <extension url="condition">
+          <valueString value="PractitionerRole.period.end.empty()"/>
+        </extension>
+        <extension url="class">
+          <valueString value="accent"/>
+        </extension>
+      </extension>
+    </extension>
+  </extension>
+  <extension url="http://ihris.org/fhir/StructureDefinition/ihris-page-section">
+    <extension url="title">
+      <valueString value="Leave Information"/>
+    </extension>
+    <extension url="description">
+      <valueString value="Leave Details for the Person"/>
+    </extension>
+    <extension url="name">
+      <valueString value="leave"/>
+    </extension>
+    <extension url="resource">
+      <extension url="resource">
+        <valueReference>
+          <reference value="StructureDefinition/ihris-basic-leave"/>
+        </valueReference>
+      </extension>
+      <extension url="linkfield">
+        <valueString value="Basic.extension.where(url='http://ihris.org/fhir/StructureDefinition/ihris-practitioner-reference').valueReference.reference"/>
+      </extension>
+      <extension url="column">
+        <extension url="header">
+          <valueString value="Leave Type"/>
+        </extension>
+        <extension url="field">
+          <valueString value="extension.where(url='http://ihris.org/fhir/StructureDefinition/ihris-leave').extension.where(url='leave-type').valueCoding"/>
+        </extension>
+      </extension>
+      <extension url="searchfield">
+        <valueString value="practitioner"/>
+      </extension>
+      <extension url="column">
+        <extension url="header">
+          <valueString value="Days Requested"/>
+        </extension>
+        <extension url="field">
+          <valueString value="extension.where(url='http://ihris.org/fhir/StructureDefinition/ihris-leave').extension.where(url='daysRequested').valueInteger"/>
+        </extension>
+      </extension>
+      <extension url="column">
+        <extension url="header">
+          <valueString value="Requested Date"/>
+        </extension>
+        <extension url="field">
+          <valueString value="extension.where(url='http://ihris.org/fhir/StructureDefinition/ihris-leave').extension.where(url='dateRequested').valueDate"/>
+        </extension>
+      </extension>
+      <extension url="column">
+        <extension url="header">
+          <valueString value="Start Date"/>
+        </extension>
+        <extension url="field">
+          <valueString value="extension.where(url='http://ihris.org/fhir/StructureDefinition/ihris-leave').extension.where(url='period').valuePeriod.start"/>
+        </extension>
+      </extension>
+      <extension url="column">
+        <extension url="header">
+          <valueString value="End Date"/>
+        </extension>
+        <extension url="field">
+          <valueString value="extension.where(url='http://ihris.org/fhir/StructureDefinition/ihris-leave').extension.where(url='period').valuePeriod.end"/>
+        </extension>
+      </extension>
+      <extension url="column">
+        <extension url="header">
+          <valueString value="Actions"/>
+        </extension>
+        <extension url="field">
+          <valueString value="_action"/>
+        </extension>
+      </extension>
+      <extension url="action">
+        <extension url="link">
+          <valueString value="/questionnaire/ihris-leave/leave?practitioner=FHIRID"/>
+        </extension>
+        <extension url="text">
+          <valueString value="Add Leave"/>
+        </extension>
+        <extension url="row">
+          <valueBoolean value="false"/>
+        </extension>
+        <extension url="emptyDisplay">
+          <valueBoolean value="true"/>
+        </extension>
+        <extension url="class">
+          <valueString value="primary"/>
+        </extension>
+      </extension>
+      <extension url="action">
+        <extension url="link">
+          <valueString value="/resource/view/leave/ITEMID"/>
+        </extension>
+        <extension url="text">
+          <valueString value="View"/>
+        </extension>
+        <extension url="row">
+          <valueBoolean value="true"/>
+        </extension>
+        <extension url="class">
+          <valueString value="primary"/>
+        </extension>
+      </extension>
+    </extension>
+  </extension>
+  <extension url="http://ihris.org/fhir/StructureDefinition/ihris-page-section">
+    <extension url="title">
+      <valueString value="Performance Evaluation Information"/>
+    </extension>
+    <extension url="description">
+      <valueString value="Performance Evaluation for the Person"/>
+    </extension>
+    <extension url="name">
+      <valueString value="performance"/>
+    </extension>
+    <extension url="resource">
+      <extension url="resource">
+        <valueReference>
+          <reference value="StructureDefinition/ihris-basic-performance"/>
+        </valueReference>
+      </extension>
+      <extension url="linkfield">
+        <valueString value="Basic.extension.where(url='http://ihris.org/fhir/StructureDefinition/ihris-practitioner-reference').valueReference.reference"/>
+      </extension>
+      <extension url="column">
+        <extension url="header">
+          <valueString value="Evaluator's Name"/>
+        </extension>
+        <extension url="field">
+          <valueString value="extension.where(url='http://ihris.org/fhir/StructureDefinition/ihris-performance').extension.where(url='evaluator').valueString"/>
+        </extension>
+      </extension>
+      <extension url="searchfield">
+        <valueString value="practitioner"/>
+      </extension>
+      <extension url="column">
+        <extension url="header">
+          <valueString value="Score"/>
+        </extension>
+        <extension url="field">
+          <valueString value="extension.where(url='http://ihris.org/fhir/StructureDefinition/ihris-performance').extension.where(url='score').valueCoding.display"/>
+        </extension>
+      </extension>
+      <extension url="column">
+        <extension url="header">
+          <valueString value="Start Date"/>
+        </extension>
+        <extension url="field">
+          <valueString value="extension.where(url='http://ihris.org/fhir/StructureDefinition/ihris-performance').extension.where(url='period').valuePeriod.start"/>
+        </extension>
+      </extension>
+      <extension url="column">
+        <extension url="header">
+          <valueString value="End Date"/>
+        </extension>
+        <extension url="field">
+          <valueString value="extension.where(url='http://ihris.org/fhir/StructureDefinition/ihris-performance').extension.where(url='period').valuePeriod.end"/>
+        </extension>
+      </extension>
+      <extension url="column">
+        <extension url="header">
+          <valueString value="Actions"/>
+        </extension>
+        <extension url="field">
+          <valueString value="_action"/>
+        </extension>
+      </extension>
+      <extension url="action">
+        <extension url="link">
+          <valueString value="/questionnaire/ihris-performance/performance?practitioner=FHIRID"/>
+        </extension>
+        <extension url="text">
+          <valueString value="Add Perfromamce Evaluation"/>
+        </extension>
+        <extension url="row">
+          <valueBoolean value="false"/>
+        </extension>
+        <extension url="emptyDisplay">
+          <valueBoolean value="true"/>
+        </extension>
+        <extension url="class">
+          <valueString value="primary"/>
+        </extension>
+      </extension>
+      <extension url="action">
+        <extension url="link">
+          <valueString value="/resource/view/performance/ITEMID"/>
+        </extension>
+        <extension url="text">
+          <valueString value="View"/>
+        </extension>
+        <extension url="row">
+          <valueBoolean value="true"/>
+        </extension>
+        <extension url="class">
+          <valueString value="primary"/>
+        </extension>
+      </extension>
+    </extension>
+  </extension>
+  <extension url="http://ihris.org/fhir/StructureDefinition/ihris-page-section">
+    <extension url="title">
+      <valueString value="Education History"/>
+    </extension>
+    <extension url="description">
+      <valueString value="Education History Details for the Person"/>
+    </extension>
+    <extension url="name">
+      <valueString value="education-history"/>
+    </extension>
+    <extension url="resource">
+      <extension url="resource">
+        <valueReference>
+          <reference value="StructureDefinition/ihris-basic-education-history"/>
+        </valueReference>
+      </extension>
+      <extension url="linkfield">
+        <valueString value="Basic.extension.where(url='http://ihris.org/fhir/StructureDefinition/ihris-practitioner-reference').valueReference.reference"/>
+      </extension>
+      <extension url="column">
+        <extension url="header">
+          <valueString value="Education Institution"/>
+        </extension>
+        <extension url="field">
+          <valueString value="extension.where(url='http://ihris.org/fhir/StructureDefinition/ihris-education-history').extension.where(url='institution').valueCoding"/>
+        </extension>
+      </extension>
+      <extension url="searchfield">
+        <valueString value="practitioner"/>
+      </extension>
+      <extension url="column">
+        <extension url="header">
+          <valueString value="level"/>
+        </extension>
+        <extension url="field">
+          <valueString value="extension.where(url='http://ihris.org/fhir/StructureDefinition/ihris-education-history').extension.where(url='level').valueCoding"/>
+        </extension>
+      </extension>
+      <extension url="column">
+        <extension url="header">
+          <valueString value="Educational Major"/>
+        </extension>
+        <extension url="field">
+          <valueString value="extension.where(url='http://ihris.org/fhir/StructureDefinition/ihris-education-history').extension.where(url='educationalMajor').valueCoding"/>
+        </extension>
+      </extension>
+      <extension url="column">
+        <extension url="header">
+          <valueString value="Year"/>
+        </extension>
+        <extension url="field">
+          <valueString value="extension.where(url='http://ihris.org/fhir/StructureDefinition/ihris-education-history').extension.where(url='year').valueDate"/>
+        </extension>
+      </extension>
+      <extension url="column">
+        <extension url="header">
+          <valueString value="Actions"/>
+        </extension>
+        <extension url="field">
+          <valueString value="_action"/>
+        </extension>
+      </extension>
+      <extension url="action">
+        <extension url="link">
+          <valueString value="/questionnaire/ihris-education-history/basic-education-history?practitioner=FHIRID"/>
+        </extension>
+        <extension url="text">
+          <valueString value="Add Education History"/>
+        </extension>
+        <extension url="row">
+          <valueBoolean value="false"/>
+        </extension>
+        <extension url="emptyDisplay">
+          <valueBoolean value="true"/>
+        </extension>
+        <extension url="class">
+          <valueString value="primary"/>
+        </extension>
+      </extension>
+      <extension url="action">
+        <extension url="link">
+          <valueString value="/resource/view/basic-education-history/ITEMID"/>
+        </extension>
+        <extension url="text">
+          <valueString value="View"/>
+        </extension>
+        <extension url="row">
+          <valueBoolean value="true"/>
+        </extension>
+        <extension url="class">
+          <valueString value="primary"/>
+        </extension>
+      </extension>
+    </extension>
+  </extension>
+  <extension url="http://ihris.org/fhir/StructureDefinition/ihris-page-section">
+    <extension url="title">
+      <valueString value="Work Experience"/>
+    </extension>
+    <extension url="description">
+      <valueString value="Work Experience for the Person"/>
+    </extension>
+    <extension url="name">
+      <valueString value="employment-history"/>
+    </extension>
+    <extension url="resource">
+      <extension url="resource">
+        <valueReference>
+          <reference value="StructureDefinition/ihris-basic-employment-history"/>
+        </valueReference>
+      </extension>
+      <extension url="linkfield">
+        <valueString value="Basic.extension.where(url='http://ihris.org/fhir/StructureDefinition/ihris-practitioner-reference').valueReference.reference"/>
+      </extension>
+      <extension url="column">
+        <extension url="header">
+          <valueString value="Organization Name"/>
+        </extension>
+        <extension url="field">
+          <valueString value="extension.where(url='http://ihris.org/fhir/StructureDefinition/ihris-employment-history').extension.where(url='organization').valueString"/>
+        </extension>
+      </extension>
+      <extension url="searchfield">
+        <valueString value="practitioner"/>
+      </extension>
+      <extension url="column">
+        <extension url="header">
+          <valueString value="Position"/>
+        </extension>
+        <extension url="field">
+          <valueString value="extension.where(url='http://ihris.org/fhir/StructureDefinition/ihris-employment-history').extension.where(url='startingPosition').valueString"/>
+        </extension>
+      </extension>
+      <extension url="column">
+        <extension url="header">
+          <valueString value="Date Started"/>
+        </extension>
+        <extension url="field">
+          <valueString value="extension.where(url='http://ihris.org/fhir/StructureDefinition/ihris-employment-history').extension.where(url='period').valuePeriod.start"/>
+        </extension>
+      </extension>
+      <extension url="column">
+        <extension url="header">
+          <valueString value="Date Ended"/>
+        </extension>
+        <extension url="field">
+          <valueString value="extension.where(url='http://ihris.org/fhir/StructureDefinition/ihris-employment-history').extension.where(url='period').valuePeriod.end"/>
+        </extension>
+      </extension>
+      <extension url="column">
+        <extension url="header">
+          <valueString value="Actions"/>
+        </extension>
+        <extension url="field">
+          <valueString value="_action"/>
+        </extension>
+      </extension>
+      <extension url="action">
+        <extension url="link">
+          <valueString value="/questionnaire/ihris-employment-history/employment-history?practitioner=FHIRID"/>
+        </extension>
+        <extension url="text">
+          <valueString value="Add Work Experience"/>
+        </extension>
+        <extension url="row">
+          <valueBoolean value="false"/>
+        </extension>
+        <extension url="emptyDisplay">
+          <valueBoolean value="true"/>
+        </extension>
+        <extension url="class">
+          <valueString value="primary"/>
+        </extension>
+      </extension>
+      <extension url="action">
+        <extension url="link">
+          <valueString value="/resource/view/employment-history/ITEMID"/>
+        </extension>
+        <extension url="text">
+          <valueString value="View"/>
+        </extension>
+        <extension url="row">
+          <valueBoolean value="true"/>
+        </extension>
+        <extension url="class">
+          <valueString value="primary"/>
+        </extension>
+      </extension>
+    </extension>
+  </extension>
+  <extension url="http://ihris.org/fhir/StructureDefinition/ihris-page-section">
+    <extension url="title">
+      <valueString value="Emergency Contact"/>
+    </extension>
+    <extension url="description">
+      <valueString value="Emergency Contact for the Person"/>
+    </extension>
+    <extension url="name">
+      <valueString value="emergency"/>
+    </extension>
+    <extension url="resource">
+      <extension url="resource">
+        <valueReference>
+          <reference value="StructureDefinition/ihris-basic-emergency"/>
+        </valueReference>
+      </extension>
+      <extension url="linkfield">
+        <valueString value="Basic.extension.where(url='http://ihris.org/fhir/StructureDefinition/ihris-practitioner-reference').valueReference.reference"/>
+      </extension>
+      <extension url="column">
+        <extension url="header">
+          <valueString value="Name"/>
+        </extension>
+        <extension url="field">
+          <valueString value="extension.where(url='http://ihris.org/fhir/StructureDefinition/ihris-emergency').extension.where(url='name').valueString"/>
+        </extension>
+      </extension>
+      <extension url="searchfield">
+        <valueString value="practitioner"/>
+      </extension>
+      <extension url="column">
+        <extension url="header">
+          <valueString value="Relationship"/>
+        </extension>
+        <extension url="field">
+          <valueString value="extension.where(url='http://ihris.org/fhir/StructureDefinition/ihris-emergency').extension.where(url='relation').valueCoding.display"/>
+        </extension>
+      </extension>
+      <extension url="column">
+        <extension url="header">
+          <valueString value="Mobile Phone"/>
+        </extension>
+        <extension url="field">
+          <valueString value="extension.where(url='http://ihris.org/fhir/StructureDefinition/ihris-emergency').extension.where(url='mobile').valueString"/>
+        </extension>
+      </extension>
+      <extension url="column">
+        <extension url="header">
+          <valueString value="Actions"/>
+        </extension>
+        <extension url="field">
+          <valueString value="_action"/>
+        </extension>
+      </extension>
+      <extension url="action">
+        <extension url="link">
+          <valueString value="/questionnaire/ihris-emergency/emergency?practitioner=FHIRID"/>
+        </extension>
+        <extension url="text">
+          <valueString value="Add Emergency Contact"/>
+        </extension>
+        <extension url="row">
+          <valueBoolean value="false"/>
+        </extension>
+        <extension url="emptyDisplay">
+          <valueBoolean value="true"/>
+        </extension>
+        <extension url="class">
+          <valueString value="primary"/>
+        </extension>
+      </extension>
+      <extension url="action">
+        <extension url="link">
+          <valueString value="/resource/view/emergency/ITEMID"/>
+        </extension>
+        <extension url="text">
+          <valueString value="View"/>
+        </extension>
+        <extension url="row">
+          <valueBoolean value="true"/>
+        </extension>
+        <extension url="class">
+          <valueString value="primary"/>
+        </extension>
+      </extension>
+    </extension>
+  </extension>
+  <extension url="http://ihris.org/fhir/StructureDefinition/ihris-page-section">
+    <extension url="title">
+      <valueString value="Employee Disciplinary Information"/>
+    </extension>
+    <extension url="description">
+      <valueString value="Employee Discipline for the Person"/>
+    </extension>
+    <extension url="name">
+      <valueString value="Employee Discipline"/>
+    </extension>
+    <extension url="resource">
+      <extension url="resource">
+        <valueReference>
+          <reference value="StructureDefinition/ihris-basic-discipline"/>
+        </valueReference>
+      </extension>
+      <extension url="linkfield">
+        <valueString value="Basic.extension.where(url='http://ihris.org/fhir/StructureDefinition/ihris-practitioner-reference').valueReference.reference"/>
+      </extension>
+      <extension url="column">
+        <extension url="header">
+          <valueString value="Discipline Action Type"/>
+        </extension>
+        <extension url="field">
+          <valueString value="extension.where(url='http://ihris.org/fhir/StructureDefinition/ihris-discipline').extension.where(url='actionType').valueCoding.display"/>
+        </extension>
+      </extension>
+      <extension url="searchfield">
+        <valueString value="practitioner"/>
+      </extension>
+      <extension url="column">
+        <extension url="header">
+          <valueString value="Action Taken"/>
+        </extension>
+        <extension url="field">
+          <valueString value="extension.where(url='http://ihris.org/fhir/StructureDefinition/ihris-discipline').extension.where(url='actionTaken').valueString"/>
+        </extension>
+      </extension>
+      <extension url="column">
+        <extension url="header">
+          <valueString value="Start Date"/>
+        </extension>
+        <extension url="field">
+          <valueString value="extension.where(url='http://ihris.org/fhir/StructureDefinition/ihris-discipline').extension.where(url='period').valuePeriod.start"/>
+        </extension>
+      </extension>
+      <extension url="column">
+        <extension url="header">
+          <valueString value="End Date"/>
+        </extension>
+        <extension url="field">
+          <valueString value="extension.where(url='http://ihris.org/fhir/StructureDefinition/ihris-discipline').extension.where(url='period').valuePeriod.end"/>
+        </extension>
+      </extension>
+      <extension url="column">
+        <extension url="header">
+          <valueString value="Actions"/>
+        </extension>
+        <extension url="field">
+          <valueString value="_action"/>
+        </extension>
+      </extension>
+      <extension url="action">
+        <extension url="link">
+          <valueString value="/questionnaire/ihris-discipline/discipline?practitioner=FHIRID"/>
+        </extension>
+        <extension url="text">
+          <valueString value="Add Disciplinary Action"/>
+        </extension>
+        <extension url="row">
+          <valueBoolean value="false"/>
+        </extension>
+        <extension url="emptyDisplay">
+          <valueBoolean value="true"/>
+        </extension>
+        <extension url="class">
+          <valueString value="primary"/>
+        </extension>
+      </extension>
+      <extension url="action">
+        <extension url="link">
+          <valueString value="/resource/view/discipline/ITEMID"/>
+        </extension>
+        <extension url="text">
+          <valueString value="View"/>
+        </extension>
+        <extension url="row">
+          <valueBoolean value="true"/>
+        </extension>
+        <extension url="class">
+          <valueString value="primary"/>
+        </extension>
+      </extension>
+    </extension>
+  </extension>
+  <extension url="http://ihris.org/fhir/StructureDefinition/ihris-page-section">
+    <extension url="title">
+      <valueString value="Employee Salary Information"/>
+    </extension>
+    <extension url="description">
+      <valueString value="Employee Salary Information for the Person"/>
+    </extension>
+    <extension url="name">
+      <valueString value="Employee Salary Information"/>
+    </extension>
+    <extension url="resource">
+      <extension url="resource">
+        <valueReference>
+          <reference value="StructureDefinition/ihris-basic-salary"/>
+        </valueReference>
+      </extension>
+      <extension url="linkfield">
+        <valueString value="Basic.extension.where(url='http://ihris.org/fhir/StructureDefinition/ihris-practitioner-reference').valueReference.reference"/>
+      </extension>
+      <extension url="column">
+        <extension url="header">
+          <valueString value="Pay Grade"/>
+        </extension>
+        <extension url="field">
+          <valueString value="extension.where(url='http://ihris.org/fhir/StructureDefinition/ihris-salary').extension.where(url='salaryScale').valueCoding.display"/>
+        </extension>
+      </extension>
+      <extension url="searchfield">
+        <valueString value="practitioner"/>
+      </extension>
+      <extension url="column">
+        <extension url="header">
+          <valueString value="Basic Salary"/>
+        </extension>
+        <extension url="field">
+          <valueString value="extension.where(url='http://ihris.org/fhir/StructureDefinition/ihris-salary').extension.where(url='bsalary').valueString"/>
+        </extension>
+      </extension>
+      <extension url="column">
+        <extension url="header">
+          <valueString value="Allowances"/>
+        </extension>
+        <extension url="field">
+          <valueString value="extension.where(url='http://ihris.org/fhir/StructureDefinition/ihris-salary').extension.where(url='allowance').valueString"/>
+        </extension>
+      </extension>
+      <extension url="column">
+        <extension url="header">
+          <valueString value="Benefits"/>
+        </extension>
+        <extension url="field">
+          <valueString value="extension.where(url='http://ihris.org/fhir/StructureDefinition/ihris-salary').extension.where(url='benefits').valueString"/>
+        </extension>
+      </extension>
+      <extension url="column">
+        <extension url="header">
+          <valueString value="Start Date"/>
+        </extension>
+        <extension url="field">
+          <valueString value="extension.where(url='http://ihris.org/fhir/StructureDefinition/ihris-salary').extension.where(url='period').valuePeriod.start"/>
+        </extension>
+      </extension>
+      <extension url="column">
+        <extension url="header">
+          <valueString value="End Date"/>
+        </extension>
+        <extension url="field">
+          <valueString value="extension.where(url='http://ihris.org/fhir/StructureDefinition/ihris-salary').extension.where(url='period').valuePeriod.end"/>
+        </extension>
+      </extension>
+      <extension url="column">
+        <extension url="header">
+          <valueString value="Actions"/>
+        </extension>
+        <extension url="field">
+          <valueString value="_action"/>
+        </extension>
+      </extension>
+      <extension url="action">
+        <extension url="link">
+          <valueString value="/questionnaire/ihris-salary/salary?practitioner=FHIRID"/>
+        </extension>
+        <extension url="text">
+          <valueString value="Add Salary Info"/>
+        </extension>
+        <extension url="row">
+          <valueBoolean value="false"/>
+        </extension>
+        <extension url="emptyDisplay">
+          <valueBoolean value="true"/>
+        </extension>
+        <extension url="class">
+          <valueString value="primary"/>
+        </extension>
+      </extension>
+      <extension url="action">
+        <extension url="link">
+          <valueString value="/resource/view/salary/ITEMID"/>
+        </extension>
+        <extension url="text">
+          <valueString value="View"/>
+        </extension>
+        <extension url="row">
+          <valueBoolean value="true"/>
+        </extension>
+        <extension url="class">
+          <valueString value="primary"/>
+        </extension>
+      </extension>
+    </extension>
+  </extension>
+  <extension url="http://ihris.org/fhir/StructureDefinition/ihris-page-section">
+    <extension url="title">
+      <valueString value="In-Service Training Information"/>
+    </extension>
+    <extension url="description">
+      <valueString value="In-Service Training Information for the Person"/>
+    </extension>
+    <extension url="name">
+      <valueString value="In-Service Training Information"/>
+    </extension>
+    <extension url="resource">
+      <extension url="resource">
+        <valueReference>
+          <reference value="StructureDefinition/ihris-basic-inservice-training"/>
+        </valueReference>
+      </extension>
+      <extension url="linkfield">
+        <valueString value="Basic.extension.where(url='http://ihris.org/fhir/StructureDefinition/ihris-practitioner-reference').valueReference.reference"/>
+      </extension>
+      <extension url="column">
+        <extension url="header">
+          <valueString value="Training Provider"/>
+        </extension>
+        <extension url="field">
+          <valueString value="extension.where(url='http://ihris.org/fhir/StructureDefinition/ihris-inservice-training').extension.where(url='provider').valueString"/>
+        </extension>
+      </extension>
+      <extension url="searchfield">
+        <valueString value="practitioner"/>
+      </extension>
+      <extension url="column">
+        <extension url="header">
+          <valueString value="Training Type/Category"/>
+        </extension>
+        <extension url="field">
+          <valueString value="extension.where(url='http://ihris.org/fhir/StructureDefinition/ihris-inservice-training').extension.where(url='training').valueCoding.display"/>
+        </extension>
+      </extension>
+      <extension url="column">
+        <extension url="header">
+          <valueString value="Course Name"/>
+        </extension>
+        <extension url="field">
+          <valueString value="extension.where(url='http://ihris.org/fhir/StructureDefinition/ihris-inservice-training').extension.where(url='courseName').valueString"/>
+        </extension>
+      </extension>
+      <extension url="column">
+        <extension url="header">
+          <valueString value="Credits"/>
+        </extension>
+        <extension url="field">
+          <valueString value="extension.where(url='http://ihris.org/fhir/StructureDefinition/ihris-inservice-training').extension.where(url='credits').valueInteger"/>
+        </extension>
+      </extension>
+      <extension url="column">
+        <extension url="header">
+          <valueString value="Start Date"/>
+        </extension>
+        <extension url="field">
+          <valueString value="extension.where(url='http://ihris.org/fhir/StructureDefinition/ihris-inservice-training').extension.where(url='startDate').valueDate"/>
+        </extension>
+      </extension>
+      <extension url="column">
+        <extension url="header">
+          <valueString value="End Date"/>
+        </extension>
+        <extension url="field">
+          <valueString value="extension.where(url='http://ihris.org/fhir/StructureDefinition/ihris-inservice-training').extension.where(url='endDate').valueDate"/>
+        </extension>
+      </extension>
+      <extension url="column">
+        <extension url="header">
+          <valueString value="Actions"/>
+        </extension>
+        <extension url="field">
+          <valueString value="_action"/>
+        </extension>
+      </extension>
+      <extension url="action">
+        <extension url="link">
+          <valueString value="/questionnaire/ihris-inservice-training/inservice-training?practitioner=FHIRID"/>
+        </extension>
+        <extension url="text">
+          <valueString value="Add In-Service Training Info"/>
+        </extension>
+        <extension url="row">
+          <valueBoolean value="false"/>
+        </extension>
+        <extension url="emptyDisplay">
+          <valueBoolean value="true"/>
+        </extension>
+        <extension url="class">
+          <valueString value="primary"/>
+        </extension>
+      </extension>
+      <extension url="action">
+        <extension url="link">
+          <valueString value="/resource/view/inservice-training/ITEMID"/>
+        </extension>
+        <extension url="text">
+          <valueString value="View"/>
+        </extension>
+        <extension url="row">
+          <valueBoolean value="true"/>
+        </extension>
+        <extension url="class">
+          <valueString value="primary"/>
+        </extension>
+      </extension>
+    </extension>
+  </extension>
+  <code>
+    <coding>
+      <system value="http://ihris.org/fhir/CodeSystem/ihris-resource-codesystem"/>
+      <code value="page"/>
+    </coding>
+  </code>
+</Basic>

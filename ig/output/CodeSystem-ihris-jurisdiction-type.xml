@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<CodeSystem xmlns="http://hl7.org/fhir">
+  <id value="ihris-jurisdiction-type"/>
+  <text>
+    <status value="generated"/><div xmlns="http://www.w3.org/1999/xhtml"><p>This code system <code>http://ihris.org/fhir/CodeSystem/ihris-jurisdiction-type</code> defines the following codes:</p><table class="codes"><tr><td style="white-space:nowrap"><b>Code</b></td><td><b>Display</b></td><td><b>Definition</b></td></tr><tr><td style="white-space:nowrap">country<a name="ihris-jurisdiction-type-country"> </a></td><td>Country</td><td>Country</td></tr><tr><td style="white-space:nowrap">municipality<a name="ihris-jurisdiction-type-municipality"> </a></td><td>Municipality</td><td>Municipality</td></tr><tr><td style="white-space:nowrap">subdistrict<a name="ihris-jurisdiction-type-subdistrict"> </a></td><td>Sub District</td><td>Sub District</td></tr><tr><td style="white-space:nowrap">village<a name="ihris-jurisdiction-type-village"> </a></td><td>Village</td><td>Village</td></tr></table></div>
+  </text>
+  <url value="http://ihris.org/fhir/CodeSystem/ihris-jurisdiction-type"/>
+  <version value="0.1.0"/>
+  <name value="IhrisJurisdictionType"/>
+  <title value="Jurisdiction Type"/>
+  <status value="active"/>
+  <date value="2020-11-12T08:41:04.362Z"/>
+  <publisher value="Luke Duncan"/>
+  <contact>
+    <name value="Luke Duncan"/>
+    <telecom>
+      <system value="email"/>
+      <value value="lduncan@intrahealth.org"/>
+    </telecom>
+  </contact>
+  <content value="complete"/>
+  <count value="4"/>
+  <concept>
+    <code value="country"/>
+    <display value="Country"/>
+    <definition value="Country"/>
+  </concept>
+  <concept>
+    <code value="municipality"/>
+    <display value="Municipality"/>
+    <definition value="Municipality"/>
+  </concept>
+  <concept>
+    <code value="subdistrict"/>
+    <display value="Sub District"/>
+    <definition value="Sub District"/>
+  </concept>
+  <concept>
+    <code value="village"/>
+    <display value="Village"/>
+    <definition value="Village"/>
+  </concept>
+</CodeSystem>

@@ -1,0 +1,42 @@
+@prefix fhir: <http://hl7.org/fhir/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+# - resource -------------------------------------------------------------------
+
+<http://ihris.org/fhir/CodeSystem/ihris-document-category> a fhir:CodeSystem ;
+  fhir:nodeRole fhir:treeRoot ;
+  fhir:id [ fhir:v "ihris-document-category"] ; # 
+  fhir:text [
+     fhir:status [ fhir:v "generated" ] ;
+     fhir:div "<div xmlns=\"http://www.w3.org/1999/xhtml\"><p>This code system <code>http://ihris.org/fhir/CodeSystem/ihris-document-category</code> defines the following codes:</p><table class=\"codes\"><tr><td style=\"white-space:nowrap\"><b>Code</b></td><td><b>Display</b></td><td><b>Definition</b></td></tr><tr><td style=\"white-space:nowrap\">open<a name=\"ihris-document-category-open\"> </a></td><td>Open</td><td>Any one can access.</td></tr><tr><td style=\"white-space:nowrap\">restricted<a name=\"ihris-document-category-restricted\"> </a></td><td>Restricted</td><td>Only certain users can view.</td></tr></table></div>"
+  ] ; # 
+  fhir:url [ fhir:v "http://ihris.org/fhir/CodeSystem/ihris-document-category"^^xsd:anyURI] ; # 
+  fhir:version [ fhir:v "0.1.0"] ; # 
+  fhir:name [ fhir:v "IhrisDocumentCategoryCodeSystem"] ; # 
+  fhir:title [ fhir:v "Code system for document categories."] ; # 
+  fhir:status [ fhir:v "active"] ; # 
+  fhir:date [ fhir:v "2023-06-05T15:57:19+03:00"^^xsd:dateTime] ; # 
+  fhir:publisher [ fhir:v "Luke Duncan"] ; # 
+  fhir:contact ( [
+     fhir:name [ fhir:v "Luke Duncan" ] ;
+     fhir:telecom ( [
+       fhir:system [ fhir:v "email" ] ;
+       fhir:value [ fhir:v "lduncan@intrahealth.org" ]
+     ] )
+  ] ) ; # 
+  fhir:content [ fhir:v "complete"] ; # 
+  fhir:count [ fhir:v "2"^^xsd:nonNegativeInteger] ; # 
+  fhir:concept ( [
+     fhir:code [ fhir:v "open" ] ;
+     fhir:display [ fhir:v "Open" ] ;
+     fhir:definition [ fhir:v "Any one can access." ]
+  ] [
+     fhir:code [ fhir:v "restricted" ] ;
+     fhir:display [ fhir:v "Restricted" ] ;
+     fhir:definition [ fhir:v "Only certain users can view." ]
+  ] ) . # 
+
+# -------------------------------------------------------------------------------------
+

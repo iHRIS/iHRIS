@@ -1,0 +1,37 @@
+{
+  "resourceType" : "Basic",
+  "id" : "ihris-role-admin",
+  "meta" : {
+    "profile" : ["http://ihris.org/fhir/StructureDefinition/ihris-role"]
+  },
+  "text" : {
+    "status" : "extensions",
+    "div" : "<div xmlns=\"http://www.w3.org/1999/xhtml\"><p><b>Generated Narrative: Basic</b><a name=\"ihris-role-admin\"> </a></p><div style=\"display: inline-block; background-color: #d9e0e7; padding: 6px; margin: 4px; border: 1px solid #8da1b4; border-radius: 5px; line-height: 60%\"><p style=\"margin-bottom: 0px\">Resource Basic &quot;ihris-role-admin&quot; </p><p style=\"margin-bottom: 0px\">Profile: <a href=\"StructureDefinition-ihris-role.html\">iHRIS Role</a></p></div><p><b>iHRIS Basic Name</b>: Admin Role</p><p><b>iHRIS Role Primary</b>: true</p><p><b>iHRIS Assign Task</b>: <a href=\"Basic-ihris-task-all-permissions-to-everything.html\">Basic/ihris-task-all-permissions-to-everything</a></p><p><b>iHRIS Assign Role</b>: <a href=\"Basic-ihris-role-open.html\">Basic/ihris-role-open</a></p><p><b>code</b>: iHRIS Role <span style=\"background: LightGoldenRodYellow; margin: 4px; border: 1px solid khaki\"> (<a href=\"CodeSystem-ihris-resource-codesystem.html\">Code System for iHRIS Basic Resources.</a>#role)</span></p></div>"
+  },
+  "extension" : [{
+    "url" : "http://ihris.org/fhir/StructureDefinition/ihris-basic-name",
+    "valueString" : "Admin Role"
+  },
+  {
+    "url" : "http://ihris.org/fhir/StructureDefinition/ihris-role-primary",
+    "valueBoolean" : true
+  },
+  {
+    "url" : "http://ihris.org/fhir/StructureDefinition/ihris-assign-task",
+    "valueReference" : {
+      "reference" : "Basic/ihris-task-all-permissions-to-everything"
+    }
+  },
+  {
+    "url" : "http://ihris.org/fhir/StructureDefinition/ihris-assign-role",
+    "valueReference" : {
+      "reference" : "Basic/ihris-role-open"
+    }
+  }],
+  "code" : {
+    "coding" : [{
+      "system" : "http://ihris.org/fhir/CodeSystem/ihris-resource-codesystem",
+      "code" : "role"
+    }]
+  }
+}

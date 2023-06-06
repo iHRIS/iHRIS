@@ -1,0 +1,50 @@
+@prefix fhir: <http://hl7.org/fhir/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+# - resource -------------------------------------------------------------------
+
+<http://ihris.org/fhir/CodeSystem/ihris-jurisdiction-type> a fhir:CodeSystem ;
+  fhir:nodeRole fhir:treeRoot ;
+  fhir:id [ fhir:v "ihris-jurisdiction-type"] ; # 
+  fhir:text [
+     fhir:status [ fhir:v "generated" ] ;
+     fhir:div "<div xmlns=\"http://www.w3.org/1999/xhtml\"><p>This code system <code>http://ihris.org/fhir/CodeSystem/ihris-jurisdiction-type</code> defines the following codes:</p><table class=\"codes\"><tr><td style=\"white-space:nowrap\"><b>Code</b></td><td><b>Display</b></td><td><b>Definition</b></td></tr><tr><td style=\"white-space:nowrap\">country<a name=\"ihris-jurisdiction-type-country\"> </a></td><td>Country</td><td>Country</td></tr><tr><td style=\"white-space:nowrap\">municipality<a name=\"ihris-jurisdiction-type-municipality\"> </a></td><td>Municipality</td><td>Municipality</td></tr><tr><td style=\"white-space:nowrap\">subdistrict<a name=\"ihris-jurisdiction-type-subdistrict\"> </a></td><td>Sub District</td><td>Sub District</td></tr><tr><td style=\"white-space:nowrap\">village<a name=\"ihris-jurisdiction-type-village\"> </a></td><td>Village</td><td>Village</td></tr></table></div>"
+  ] ; # 
+  fhir:url [ fhir:v "http://ihris.org/fhir/CodeSystem/ihris-jurisdiction-type"^^xsd:anyURI] ; # 
+  fhir:version [ fhir:v "0.1.0"] ; # 
+  fhir:name [ fhir:v "IhrisJurisdictionType"] ; # 
+  fhir:title [ fhir:v "Jurisdiction Type"] ; # 
+  fhir:status [ fhir:v "active"] ; # 
+  fhir:date [ fhir:v "2020-11-12T08:41:04.362Z"^^xsd:dateTime] ; # 
+  fhir:publisher [ fhir:v "Luke Duncan"] ; # 
+  fhir:contact ( [
+     fhir:name [ fhir:v "Luke Duncan" ] ;
+     fhir:telecom ( [
+       fhir:system [ fhir:v "email" ] ;
+       fhir:value [ fhir:v "lduncan@intrahealth.org" ]
+     ] )
+  ] ) ; # 
+  fhir:content [ fhir:v "complete"] ; # 
+  fhir:count [ fhir:v "4"^^xsd:nonNegativeInteger] ; # 
+  fhir:concept ( [
+     fhir:code [ fhir:v "country" ] ;
+     fhir:display [ fhir:v "Country" ] ;
+     fhir:definition [ fhir:v "Country" ]
+  ] [
+     fhir:code [ fhir:v "municipality" ] ;
+     fhir:display [ fhir:v "Municipality" ] ;
+     fhir:definition [ fhir:v "Municipality" ]
+  ] [
+     fhir:code [ fhir:v "subdistrict" ] ;
+     fhir:display [ fhir:v "Sub District" ] ;
+     fhir:definition [ fhir:v "Sub District" ]
+  ] [
+     fhir:code [ fhir:v "village" ] ;
+     fhir:display [ fhir:v "Village" ] ;
+     fhir:definition [ fhir:v "Village" ]
+  ] ) . # 
+
+# -------------------------------------------------------------------------------------
+
