@@ -193,7 +193,7 @@ export default {
             else {
               this.hasError = true
               this.loading = false
-              this.$router.push('/questionnaire/ihris-practitioner/practitioner')
+              this.$router.push('/resource/search/practitioner')
             }
           }).catch(e => console.log(e))
           resolve();
@@ -207,7 +207,7 @@ export default {
     },
     cancelSelect() {
       this.dialog = false;
-      this.$router.push({path: "/questionnaire/ihris-practitioner/practitioner"})
+      this.$router.push({path: "/resource/search/practitioner"})
     }
   },
 };

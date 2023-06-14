@@ -9,17 +9,12 @@ const outcomes = ihrissmartrequire('config/operationOutcomes')
 const fhirDefinition = require('../modules/fhir/fhirDefinition')
 const crypto = require('crypto')
 const logger = require('../winston')
-const path = require("path")
-const bulkRegistration = require("../modules/bulkRegistration")
-const employeeId = require("../modules/employeeIdPrintout");
-const employeeCv = require("../modules/employeeCvPrintout");
 const winston = require("winston");
 
 const getUKey = () => {
     return Math.random().toString(36).replace(/^[^a-z]+/, '') + Math.random().toString(36).substring(2, 15)
 }
 const filterNavigation = (user, nav, prefix) => {
-    let email = user.resource.telecom[0].value;
     let roleObj = user.resource.extension.filter(
         (ext) =>
             ext.url === "http://ihris.org/fhir/StructureDefinition/ihris-assign-role"
@@ -42,14 +37,14 @@ const filterNavigation = (user, nav, prefix) => {
         for (let key of Object.keys(nav.menu)) {
             let instance;
             if (prefix) {
-                instance = prefix + ":" + key;
+                instance = prefix + "." + key;
             } else {
                 instance = key;
             }
             if (instance === "profile") {
                 nav.menu[key].url += `/${reference}`;
             }
-            if (instance === "leaveRequest" || instance === "evaluation") {
+            if (instance != "profile" && nav.menu[key].selfService ){
                 nav.menu[key].url += `${reference.split('/').pop()}`;
             }
             if (!user.hasPermissionByName("special", "navigation", instance)) {
@@ -60,7 +55,7 @@ const filterNavigation = (user, nav, prefix) => {
         for (let key of Object.keys(nav.menu)) {
             let instance;
             if (prefix) {
-                instance = prefix + ":" + key;
+                instance = prefix + "." + key;
             } else {
                 instance = key;
             }
@@ -286,8 +281,22 @@ router.get('/page/:page/:type?', function (req, res) {
                 let linkExts = pageDisplay.extension.filter(ext => ext.url === "link")
 
                 for (let linkExt of linkExts) {
-                    let field, text, button, icon
-
+                    let field, text, button, icon, linkclass
+                    let roles = linkExt.extension.filter(ext => ext.url === "role")
+                    if(roles.length > 0) {
+                        let userRole = req.user.resource.extension.find((ext) => {
+                            return ext.url === 'http://ihris.org/fhir/StructureDefinition/ihris-assign-role'
+                        })
+                        if(userRole) {
+                            userRole = userRole.valueReference.reference.split("/")[1]
+                            let exist = roles.find((role) => {
+                                return role.valueId === userRole
+                            })
+                            if(!exist) {
+                                continue
+                            }
+                        }
+                    }
                     let url = linkExt.extension.find(ext => ext.url === "url").valueUrl
 
                     try {
@@ -306,8 +315,12 @@ router.get('/page/:page/:type?', function (req, res) {
                         icon = linkExt.extension.find(ext => ext.url === "icon").valueString
                     } catch (err) {
                     }
+                    try {
+                        linkclass = linkExt.extension.find(ext => ext.url === "class").valueString
+                    } catch (err) {
+                    }
 
-                    links.push({url: url, field: field, text: text, button: button, icon: icon})
+                    links.push({url: url, field: field, text: text, button: button, icon: icon, linkclass: linkclass})
 
                 }
 
@@ -337,6 +350,10 @@ router.get('/page/:page/:type?', function (req, res) {
                 try {
                     fields = section.extension.filter(ext => ext.url === "field").map(ext => ext.valueString)
                 } catch (err) {
+                }
+                let allowed = req.user.hasPermissionByName("special", "section", name)
+                if(!allowed) {
+                    continue
                 }
                 try {
                     resourceExt = section.extension.find(ext => ext.url === "resource").extension
@@ -377,6 +394,21 @@ router.get('/page/:page/:type?', function (req, res) {
                             try {
                                 let link = action.extension.find(ext => ext.url === "link").valueString
                                 let text = action.extension.find(ext => ext.url === "text").valueString
+                                let roles = action.extension.filter(ext => ext.url === "role")
+                                if(roles.length > 0) {
+                                    let userRole = req.user.resource.extension.find((ext) => {
+                                        return ext.url === 'http://ihris.org/fhir/StructureDefinition/ihris-assign-role'
+                                    })
+                                    if(userRole) {
+                                        userRole = userRole.valueReference.reference.split("/")[1]
+                                        let exist = roles.find((role) => {
+                                            return role.valueId === userRole
+                                        })
+                                        if(!exist) {
+                                            continue
+                                        }
+                                    }
+                                }
                                 let row, condition, emptyDisplay
                                 let eleClass = "primary"
                                 try {
@@ -748,7 +780,25 @@ router.get('/page/:page/:type?', function (req, res) {
                     eleClass = add.extension.find(ext => ext.url === "class").valueString
                 } catch (err) {
                 }
-                addLink = {url: url, icon: icon, class: eleClass}
+                let roles = add.extension.filter(ext => ext.url === "role")
+                let hasPermission
+                if(roles.length > 0) {
+                    let userRole = req.user.resource.extension.find((ext) => {
+                        return ext.url === 'http://ihris.org/fhir/StructureDefinition/ihris-assign-role'
+                    })
+                    if(userRole) {
+                        userRole = userRole.valueReference.reference.split("/")[1]
+                        hasPermission = roles.find((role) => {
+                            return role.valueId === userRole
+                        })
+                    }
+                }
+                if(hasPermission || roles.length == 0) {
+                    addLink = {url: url, icon: icon, class: eleClass}
+                } else if(roles.length > 0) {
+                    //hide if roles specified but user has no that role
+                    addLink = {url: url, icon: icon, class: eleClass, hide: true}
+                }
             } catch (err) {
             }
 
@@ -863,7 +913,8 @@ router.get('/page/:page/:type?', function (req, res) {
 
 })
 
-router.get('/questionnaire/:questionnaire', function (req, res) {
+router.get('/questionnaire/:questionnaire/:page', async function (req, res) {
+    let page = "ihris-page-" + req.params.page
     if (!req.user) {
         return res.status(401).json(outcomes.NOTLOGGEDIN)
     }
@@ -872,13 +923,105 @@ router.get('/questionnaire/:questionnaire', function (req, res) {
     if (allowed !== true) {
         return res.status(401).json(outcomes.DENIED)
     }
+    let primaryResourceType = ""
+    let primaryResourceProfile = ""
+    let primaryResourceDef = ""
+    let sections = {}
+    await fhirAxios.read("Basic", page).then(async(resource) => {
+        let pageDisplay = resource.extension.find(ext => ext.url === "http://ihris.org/fhir/StructureDefinition/ihris-page-display")
 
+        let pageResource = pageDisplay.extension.find(ext => ext.url === "resource").valueReference.reference
+        primaryResourceDef = pageResource
+        if (pageResource.startsWith("CodeSystem")) {
+
+            await getProperties(pageResource).then((resource) => {
+                if (resource.total !== 1) {
+                    let outcome = {...outcomes.ERROR}
+                    outcome.issue[0].diagnostics = "Unable to find codesystem: " + pageResource + "."
+                    return res.status(400).json(outcome)
+                }
+                resource = resource.entry[0].resource
+
+                const structure = fhirDefinition.parseCodeSystem(resource)
+                let structureKeys = Object.keys(structure)
+                primaryResourceType = structureKeys[0]
+                primaryResourceProfile = resource.url
+            }).catch(err => {
+                logger.error(err.message)
+                logger.error(err.stack)
+                return res.status(err.response.status).json(err.response.data)
+            })
+
+        } else if (pageResource.startsWith("StructureDefinition")) {
+
+            await getDefinition(pageResource).then((resource) => {
+                if (allowed !== true) {
+                    // Can't think of a reason to have this level of permissions for
+                    // StructureDefinitions, but just in case...
+                    let objAllowed = req.user.hasPermissionByObject("read", resource)
+                    if (objAllowed !== true) {
+                        // But don't allow field level restrictions.  It will complicated the requirements
+                        return res.status(401).json(outcomes.DENIED)
+                    }
+                }
+
+                if (!resource.hasOwnProperty("snapshot")) {
+                    let outcome = {...outcomes.ERROR}
+                    outcome.issue[0].diagnostics = "StructureDefinitions must be saved with a snapshot."
+                    return res.status(404).json(outcome)
+                }
+                const structure = fhirDefinition.parseStructureDefinition(resource)
+                let structureKeys = Object.keys(structure)
+                primaryResourceType = structureKeys[0]
+                primaryResourceProfile = resource.url
+
+            }).catch((err) => {
+                logger.error(err.message)
+                logger.error(err.stack)
+                //return res.status( err.response.status ).json( err.response.data )
+                return res.status(500).json({error: err.message})
+            })
+
+        } else {
+
+            let outcome = {...outcomes.ERROR}
+            outcome.issue[0].diagnostics = "Unknown resource type for page: " + pageResource + "."
+            return res.status(400).json(outcome)
+
+        }
+        let pageSections = resource.extension.filter(ext => ext.url === "http://ihris.org/fhir/StructureDefinition/ihris-page-section")
+        for (let section of pageSections) {
+            let resourceExt, resource, linkfield, searchfield, searchfieldtarget
+            let name = section.extension.find(ext => ext.url === "name")?.valueString
+            try {
+                resourceExt = section.extension.find(ext => ext.url === "resource").extension
+
+                resource = resourceExt.find(ext => ext.url === "resource").valueReference.reference
+                if (resource) {
+                    linkfield = resourceExt.find(ext => ext.url === "linkfield").valueString
+                    try {
+                        searchfield = resourceExt.find(ext => ext.url === "searchfield").valueString
+                        searchfieldtarget = resourceExt.find(ext => ext.url === "searchfieldtarget").valueString
+                    } catch (err) {
+                    }
+                }
+
+            } catch (err) {
+            }
+
+            sections[name] = {
+                resource: resource,
+                linkfield: linkfield,
+                searchfield: searchfield,
+                searchfieldtarget: searchfieldtarget
+            }
+        }
+    })
     fhirAxios.read("Questionnaire", req.params.questionnaire).then(async (resource) => {
-
-        let vueOutput = '<ihris-questionnaire :edit=\"isEdit\" :view-page="viewPage" :constraints="constraints" url="' + resource.url + '" id="' + resource.id
+        let vueOutput = '<ihris-questionnaire :fhir-id="fhirId" field="' + primaryResourceType + '" profile="' + primaryResourceProfile + '" :edit=\"isEdit\" :view-page="viewPage" :constraints="constraints" url="' + resource.url + '" id="' + resource.id
             + '" title="' + resource.title
             + '" description="' + resource.description + '" purpose="' + resource.purpose
-            + '"__SECTIONMENU__>' + "\n"
+            + '"__SECTIONMENU__>' + "\n<template #default=\"slotProps\">\n"
 
 
         let sectionMenu = []
@@ -920,23 +1063,36 @@ router.get('/questionnaire/:questionnaire', function (req, res) {
                 return null
             }
         }
-        const processQuestionnaireItems = async (items) => {
+        const processQuestionnaireItems = async (items, group) => {
             let vueOutput = ""
             for (let item of items) {
                 let displayType
-                if (item.linkId.includes('#')) {
+                if (item.linkId.includes('#') && item.type !== 'group') {
                     let linkDetails = item.linkId.split('#')
                     item.linkId = linkDetails[0]
                     displayType = linkDetails[1]
                 }
-                if (item.repeats && !item.readOnly) {
-                    vueOutput += "<ihris-array :edit=\"isEdit\" path=\"" + item.linkId + "\" label=\""
-                        + item.text + "\" max=\"*\" min=\"" + (item.required ? "1" : "0") + "\"><template #default=\"slotProps\">\n"
+                let limit = ""
+                let isLimitSet = false
+                if(item.type === 'group' && item.linkId && item.linkId.includes("#") && item.linkId.split("#").length === 2) {
+                    limit = item.linkId.split("#")[1]
+                    item.linkId = item.linkId.split("#")[0]
                 }
                 let itemType = fhirDefinition.camelToKebab(item.type)
+                if (item.repeats && !item.readOnly) {
+                    let fieldPath = item.definition.split("#")[1]
+                    let fieldPathSlices = fieldPath.split(".")
+                    vueOutput += `<ihris-array limit="${limit}" field="${fieldPathSlices[fieldPathSlices.length-1]}" fieldType="${itemType}" :edit="isEdit" :slotProps="slotProps" path="${item.linkId}" 
+                    label="${item.text}" max="*" min="${(item.required ? "1" : "0")}"><template #default="slotProps">\n`
+                    isLimitSet = true
+                }
                 if (itemType === "group") {
                     let label = item.text.split('|', 2)
-                    vueOutput += '<ihris-questionnaire-group :edit=\"isEdit\" path="' + item.linkId + '" label="' + label[0] + '"'
+                    vueOutput += '<ihris-questionnaire-group :slotProps="slotProps" :edit=\"isEdit\" path="' + item.linkId + '" label="' + label[0] + '"'
+                    if(!isLimitSet) {
+                        vueOutput += ' limit="' + limit + '"'
+                        isLimitSet = true
+                    }
                     if (label.length === 2) {
                         vueOutput += ' description="' + label[1] + '"'
                     }
@@ -946,9 +1102,74 @@ router.get('/questionnaire/:questionnaire', function (req, res) {
                             vueOutput += ' constraints="' + constraintList + '"'
                         }
                     }
-                    vueOutput += ">\n\n"
-                    vueOutput += await processQuestionnaireItems(item.item)
-                    vueOutput += "</ihris-questionnaire-group>\n"
+                    let fieldDef = await fhirDefinition.getFieldDefinition(item.definition)
+                    if(item.definition.includes("#")) {
+                        let extension = fieldDef.type.find((type) => {
+                            return type.code === 'Extension'
+                        })
+                        if(extension && extension.profile && extension.profile.length > 0) {
+                            let idSlices = fieldDef.id.split(".")
+                            let field
+                            for(let slice of idSlices) {
+                                if(slice.includes("extension:")) {
+                                    field = slice
+                                }
+                            }
+                            vueOutput += ' profile="' + extension.profile[0] + '"'
+                            vueOutput += ' sliceName="' + fieldDef.sliceName + '"'
+                            vueOutput += ' field="' + field + '"'
+                        } else {
+                            let fieldDefSlices = fieldDef.id.split(".")
+                            vueOutput += ` field="${fieldDefSlices[fieldDefSlices.length-1]}"`
+                        }
+                    }
+                    vueOutput += ">\n\n<template #default=\"slotProps\">\n"
+                    let fieldType = fieldDef.type.find((type) => {
+                        return type.code
+                    })?.code
+                    let fieldPath = item.definition.split("#")[1]
+                    let fieldPathSlices = fieldPath.split(".")
+                    let itemFieldPath = fieldPathSlices.pop()
+                    if(fieldType === 'HumanName') {
+                        vueOutput += `<fhir-human-name :slotProps="slotProps" field="${itemFieldPath}" min="${fieldDef.min}" max="${fieldDef.max}" base-min="${fieldDef.base.min}" base-max="${fieldDef.base.max}" label="${fieldDef.label}" path="${fieldDef.path}">
+                        \n<template #default="slotProps">`
+                    } else if(fieldType === 'CodeableConcept') {
+                        vueOutput += `<fhir-codeable-concept :slotProps="slotProps" field="${itemFieldPath}" min="${fieldDef.min}" max="${fieldDef.max}" base-min="${fieldDef.base.min}" base-max="${fieldDef.base.max}" label="${fieldDef.label}" path="${fieldDef.path}" id="${fieldDef.id}" binding="${fieldDef.binding.valueSet}">
+                        \n<template #default="slotProps">`
+                        itemFieldPath = 'coding'
+                    } else if(fieldType === 'ContactPoint') {
+                        vueOutput += `<fhir-contact-point :slotProps="slotProps" field="${itemFieldPath}" min="${fieldDef.min}" max="${fieldDef.max}" base-min="${fieldDef.base.min}" base-max="${fieldDef.base.max}" label="${fieldDef.label}" path="${item.linkId}">
+                        \n<template #default="slotProps">`
+                    } else if(fieldType === 'Period') {
+                        vueOutput += `<fhir-period :slotProps="slotProps" field="${itemFieldPath}" min="${fieldDef.min}" max="${fieldDef.max}" base-min="${fieldDef.base.min}" base-max="${fieldDef.base.max}" label="${fieldDef.label}" path="${fieldDef.path}">
+                        \n<template #default="slotProps">`
+                    } else if(fieldType === 'Address') {
+                        vueOutput += `<fhir-address :slotProps="slotProps" field="${itemFieldPath}" min="${fieldDef.min}" max="${fieldDef.max}" base-min="${fieldDef.base.min}" base-max="${fieldDef.base.max}" label="${fieldDef.label}" path="${fieldDef.path}">
+                        \n<template #default="slotProps">`
+                    } else if(fieldType === 'BackboneElement') {
+                        vueOutput += `<fhir-backbone-element :slotProps="slotProps" field="${itemFieldPath}" min="${fieldDef.min}" max="${fieldDef.max}" base-min="${fieldDef.base.min}" base-max="${fieldDef.base.max}" label="${fieldDef.label}" path="${fieldDef.path}">
+                        \n<template #default="slotProps">`
+                    } else if(fieldType === 'Identifier') {
+                        vueOutput += `<fhir-identifier :slotProps="slotProps" field="${itemFieldPath}" min="${fieldDef.min}" max="${fieldDef.max}" base-min="${fieldDef.base.min}" base-max="${fieldDef.base.max}" label="${fieldDef.label}" path="${fieldDef.path}">
+                        \n<template #default="slotProps">`
+                    }
+                    vueOutput += await processQuestionnaireItems(item.item, fieldPath)
+                    if(fieldType === 'CodeableConcept') {
+                        vueOutput += "\n</template></fhir-codeable-concept>\n"
+                    } else if(fieldType === 'HumanName') {
+                        vueOutput += "\n</template></fhir-human-name>\n"
+                    } else if(fieldType === 'ContactPoint') {
+                        vueOutput += "\n</template></fhir-contact-point>\n"
+                    } else if(fieldType === 'Period') {
+                        vueOutput += "\n</template></fhir-period>\n"
+                    } else if(fieldType === 'Address') {
+                        vueOutput += "\n</template></fhir-address>\n"
+                    } else if(fieldType === 'BackboneElement') {
+                        vueOutput += "\n</template></fhir-backbone-element>\n"
+                    } else if(fieldType === 'Identifier') {
+                        vueOutput += "\n</template></fhir-identifier>\n"
+                    }
+                    vueOutput += "</template>\n</ihris-questionnaire-group>\n"
                 } else if (item.readOnly) {
                     vueOutput += "<ihris-hidden path=\"" + item.linkId + "\" label=\""
                         + item.text + "\""
@@ -980,19 +1201,88 @@ router.get('/questionnaire/:questionnaire', function (req, res) {
                             let answer = ""
                             if(condKeys[answKeyInd] === "answerReference") {
                                 answer = when[condKeys[answKeyInd]].reference
+                            } else if(condKeys[answKeyInd] === "answerCoding") {
+                                answer = when[condKeys[answKeyInd]].system + "#" + when[condKeys[answKeyInd]].code
                             } else {
                                 answer = when[condKeys[answKeyInd]]
                             }
                             displayCondition += when.question + '|' + when.operator + '|' + answer
                         }
                     }
-                    vueOutput += "<fhir-" + itemType + " :edit=\"isEdit\" path=\"" + item.linkId + "\"" + "displayCondition=\"" + displayCondition + "\""
+                    let fieldPath = item.definition.split("#")[1]
+                    let baseProfile = item.definition.split("#")[0]
+                    let idSlices = fieldPath.split(".")
+                    let itemFieldPath = idSlices.pop()
+                    let fieldDef = await fhirDefinition.getFieldDefinition(item.definition)
+                    let fieldType = fieldDef.type.find((type) => {
+                        return type.code
+                    })?.code
+                    if(fieldPath.includes("extension:")) {
+                        let fieldDef = await fhirDefinition.getFieldDefinition(baseProfile + '#' + idSlices.join("."))
+                        vueOutput += "<fhir-extension :slotProps=\"slotProps\" id=\"" + idSlices.join(".") + "\" field=\"" + idSlices[idSlices.length-1] + "\""
+                        let extension = fieldDef.type.find((type) => {
+                            return type.code === 'Extension'
+                        })
+                        vueOutput += ' sliceName="' + fieldDef.sliceName + '"'
+                        if(extension && extension.profile && extension.profile.length > 0) {
+                            vueOutput += ' profile="' + extension.profile[0] + '"'
+                        }
+                        vueOutput += "><template #default=\"slotProps\">\n\n"
+                    } else if(fieldType === 'CodeableConcept') {
+                        vueOutput += `<fhir-codeable-concept :slotProps="slotProps" id="${fieldDef.id}" field="${itemFieldPath}" min="${fieldDef.min}" max="${fieldDef.max}" base-min="${fieldDef.base.min}" base-max="${fieldDef.base.max}" label="${fieldDef.label}" path="${fieldDef.path}" binding="${fieldDef.binding.valueSet}">
+                        \n<template #default="slotProps">`
+                        itemFieldPath = 'coding'
+                    } else if(fieldType === 'HumanName') {
+                        vueOutput += `<fhir-human-name :slotProps="slotProps" field="${itemFieldPath}" min="${fieldDef.min}" max="${fieldDef.max}" base-min="${fieldDef.base.min}" base-max="${fieldDef.base.max}" label="${fieldDef.label}" path="${fieldDef.path}">
+                        \n<template #default="slotProps">`
+                    } else if(fieldType === 'ContactPoint') {
+                        vueOutput += `<fhir-contact-point :slotProps="slotProps" field="${itemFieldPath}" min="${fieldDef.min}" max="${fieldDef.max}" base-min="${fieldDef.base.min}" base-max="${fieldDef.base.max}" label="${fieldDef.label}" path="${fieldDef.path}">
+                        \n<template #default="slotProps">`
+                    } else if(fieldType === 'Period') {
+                        vueOutput += `<fhir-period :slotProps="slotProps" field="${itemFieldPath}" min="${fieldDef.min}" max="${fieldDef.max}" base-min="${fieldDef.base.min}" base-max="${fieldDef.base.max}" label="${fieldDef.label}" path="${fieldDef.path}">
+                        \n<template #default="slotProps">`
+                    } else if(fieldType === 'Address') {
+                        vueOutput += `<fhir-address :slotProps="slotProps" field="${itemFieldPath}" min="${fieldDef.min}" max="${fieldDef.max}" base-min="${fieldDef.base.min}" base-max="${fieldDef.base.max}" label="${fieldDef.label}" path="${fieldDef.path}">
+                        \n<template #default="slotProps">`
+                    } else if(fieldType === 'BackboneElement') {
+                        vueOutput += `<fhir-backbone-element :slotProps="slotProps" field="${itemFieldPath}" min="${fieldDef.min}" max="${fieldDef.max}" base-min="${fieldDef.base.min}" base-max="${fieldDef.base.max}" label="${fieldDef.label}" path="${fieldDef.path}">
+                        \n<template #default="slotProps">`
+                    } else if(fieldType === 'Identifier') {
+                        vueOutput += `<fhir-identifier :slotProps="slotProps" field="${itemFieldPath}" min="${fieldDef.min}" max="${fieldDef.max}" base-min="${fieldDef.base.min}" base-max="${fieldDef.base.max}" label="${fieldDef.label}" path="${fieldDef.path}">
+                        \n<template #default="slotProps">`
+                    } else {
+                        if(!fieldPath.includes("extension:") && idSlices.length > 1) {
+                            let parentPath = idSlices.join(".")
+                            if(group !== parentPath) {
+                                let fieldDef = await fhirDefinition.getFieldDefinition(baseProfile + '#' + parentPath)
+                                let fieldType = fieldDef.type.find((type) => {
+                                    return type.code
+                                })?.code
+                                if(fieldType) {
+                                    let eleName = fhirDefinition.camelToKebab(fieldType)
+                                    let attrs = ["field", "sliceName", "targetProfile", "targetResource", "profile", "min", "max", "base-min",
+                                        "base-max", "label", "path", "binding", "calendar", "initialValue"]
+                                    const minmax = ["Date", "DateTime", "Instant", "Time", "Decimal", "Integer", "PositiveInt", "UnsignedInt", "Quantity"]
+                                    for (let mm of minmax) {
+                                        for (let type of ["min", "max"]) {
+                                            attrs.push(type + "Value" + mm)
+                                        }
+                                    }
+                                    vueOutput += `<fhir-${eleName} sliceName="${idSlices[idSlices.length-1]}" :slotProps="slotProps" field="${idSlices[idSlices.length-1]}" min="${fieldDef.min}" max="${fieldDef.max}" base-min="${fieldDef.base.min}" base-max="${fieldDef.base.max}" label="${fieldDef.label}" path="${fieldDef.path}">
+                                    \n<template #default="slotProps">`
+                                }
+                            }
+                        }
+                    }
+                    vueOutput += "<fhir-" + itemType + " field=\"" + itemFieldPath + "\"" + " :slotProps=\"slotProps\" :edit=\"isEdit\" path=\"" + item.linkId + "\"" + "displayCondition=\"" + displayCondition + "\""
 
                     let field
                     const minmax = ["Date", "DateTime", "Instant", "Time", "Decimal", "Integer", "PositiveInt",
                         "UnsignedInt", "Quantity"]
                     if (item.definition) {
                         field = await fhirDefinition.getFieldDefinition(item.definition)
+                        vueOutput += " id=\"" + field.id + "\""
+                        vueOutput += " definition=\"" + item.definition + "\""
                         if (itemType === "reference" && field && field.type && field.type[0] && field.type[0].targetProfile) {
                             vueOutput += " targetProfile=\"" + field.type[0].targetProfile[0] + "\""
                             let targetResource = await getProfileResource(field.type[0].targetProfile[0])
@@ -1061,7 +1351,10 @@ router.get('/questionnaire/:questionnaire', function (req, res) {
                     }
                     const def_attrs = ["calendar"]
                     for (let attr of def_attrs) {
-                        if (nconf.get("defaults:components:" + itemType + ":" + attr)) {
+                        if (nconf.get("defaults:fields:" + field.id + ":" + attr)) {
+                            vueOutput += " " + attr + "=\""
+                                + nconf.get("defaults:fields:" + field.id + ":" + attr) + "\""
+                        } else if (nconf.get("defaults:components:" + itemType + ":" + attr)) {
                             vueOutput += " " + attr + "=\""
                                 + nconf.get("defaults:components:" + itemType + ":" + attr) + "\""
                         }
@@ -1102,6 +1395,37 @@ router.get('/questionnaire/:questionnaire', function (req, res) {
                     }
                     */
                     vueOutput += "></fhir-" + itemType + ">\n"
+                    if(fieldPath.includes("extension:")) {
+                        vueOutput += "\n</template></fhir-extension>\n"
+                    } else if(fieldType === 'CodeableConcept') {
+                        vueOutput += "\n</template></fhir-codeable-concept>\n"
+                    } else if(fieldType === 'HumanName') {
+                        vueOutput += "\n</template></fhir-human-name>\n"
+                    } else if(fieldType === 'ContactPoint') {
+                        vueOutput += "\n</template></fhir-contact-point>\n"
+                    } else if(fieldType === 'Period') {
+                        vueOutput += "\n</template></fhir-period>\n"
+                    } else if(fieldType === 'Address') {
+                        vueOutput += "\n</template></fhir-address>\n"
+                    } else if(fieldType === 'BackboneElement') {
+                        vueOutput += "\n</template></fhir-backbone-element>\n"
+                    } else if(fieldType === 'Identifier') {
+                        vueOutput += "\n</template></fhir-identifier>\n"
+                    } else {
+                        if(!fieldPath.includes("extension:") && idSlices.length > 1) {
+                            let parentPath = idSlices.join(".")
+                            if(group !== parentPath) {
+                                let fieldDef = await fhirDefinition.getFieldDefinition(baseProfile + '#' + parentPath)
+                                let fieldType = fieldDef.type.find((type) => {
+                                    return type.code
+                                })?.code
+                                if(fieldType) {
+                                    let eleName = fhirDefinition.camelToKebab(fieldType)
+                                    vueOutput += `\n</template></fhir-${eleName}>\n`
+                                }
+                            }
+                        }
+                    }
 
                 }
                 if (item.repeats && !item.readOnly) {
@@ -1117,11 +1441,61 @@ router.get('/questionnaire/:questionnaire', function (req, res) {
                 md5sum.update(item.text)
                 md5sum.update(Math.random().toString(36).substring(2))
                 let sectionId = md5sum.digest('hex')
-
+                let limit = ""
+                if(item.definition && item.definition.includes("#") && item.definition.split("#").length === 3) {
+                    limit = item.definition.split("#")[2]
+                }
                 let label = item.text.split('|', 2)
-                vueOutput += '<ihris-questionnaire-section id="' + sectionId + '" path="' + item.linkId + '" label="' + label[0] + '"'
+                vueOutput += '<ihris-questionnaire-section :slotProps="slotProps" id="' + sectionId + '" path="' + item.linkId + '" label="' + label[0] + '"'
                 if (label.length === 2) {
                     vueOutput += ' description="' + label[1] + '"'
+                }
+                if (limit) {
+                    vueOutput += ' limit="' + limit + '"'
+                }
+                //handle editing of secondary resources
+                if(!item.definition.includes("#")) {
+                    let thisdef = item.definition.split("/")
+                    thisdef = "StructureDefinition/" + thisdef[thisdef.length-1]
+                    if(thisdef !== primaryResourceDef) {
+                        let section = {}
+                        for(let sect in sections) {
+                            if(sections[sect].resource && sections[sect].resource === thisdef) {
+                                section = sections[sect]
+                                break
+                            }
+                        }
+                        let secondary = await getDefinition(section.resource)
+                        const secondaryStructure = fhirDefinition.parseStructureDefinition(secondary)
+                        let secondaryKeys = Object.keys(secondaryStructure)
+                        vueOutput += ' profile="' + secondary.url + '"'
+                        vueOutput += ' field="' + secondaryKeys[0] + '"'
+                        vueOutput += ' link-field="' + section.linkfield + '"'
+                        vueOutput += ' search-field="' + section.searchfield + '"'
+                        vueOutput += ' search-field-target="' + section.searchfieldtarget + '"'
+                        vueOutput += ' :link-id="fhirId"'
+                    }
+                }
+                let sectionPath = ""
+                if(item.definition.includes("#")) {
+                    sectionPath = item.definition.split("#")[1]
+                    let fieldDef = await fhirDefinition.getFieldDefinition(item.definition)
+                    
+                    let extension = fieldDef.type.find((type) => {
+                        return type.code === 'Extension'
+                    })
+                    if(extension && extension.profile && extension.profile.length > 0) {
+                        let idSlices = fieldDef.id.split(".")
+                        let field
+                        for(let slice of idSlices) {
+                            if(slice.includes("extension:")) {
+                                field = slice
+                            }
+                        }
+                        vueOutput += ' profile="' + extension.profile[0] + '"'
+                        vueOutput += ' sliceName="' + fieldDef.sliceName + '"'
+                        vueOutput += ' field="' + field + '"'
+                    }
                 }
                 if (item.extension) {
                     let constraintList = processConstraints(item.extension)
@@ -1130,9 +1504,9 @@ router.get('/questionnaire/:questionnaire', function (req, res) {
                     }
                 }
                 sectionMenu.push({title: label[0], desc: label[1] || "", id: sectionId})
-                vueOutput += ">\n"
-                vueOutput += await processQuestionnaireItems(item.item)
-                vueOutput += "</ihris-questionnaire-section>\n"
+                vueOutput += ">\n<template #default=\"slotProps\">\n"
+                vueOutput += await processQuestionnaireItems(item.item, sectionPath)
+                vueOutput += "</template></ihris-questionnaire-section>\n"
             } else {
                 logger.warn("Invalid entry for questionnaire.  All top level items must be type group.")
             }
@@ -1144,7 +1518,7 @@ router.get('/questionnaire/:questionnaire', function (req, res) {
             vueOutput = vueOutput.replace("__SECTIONMENU__", " :section-menu='sectionMenu'")
             templateData.sectionMenu = sectionMenu
         }
-        vueOutput += "</ihris-questionnaire>\n"
+        vueOutput += "</template></ihris-questionnaire>\n"
 
         logger.debug(vueOutput)
         return res.status(200).json({template: vueOutput, data: templateData})
@@ -1404,206 +1778,7 @@ router.get('/report/:report', function (req, res) {
         })
     })
 })
-
-const searchLocationReference = async (province, district, subdistrict) => {
-    let location = "Location/ZA";
-    let partOfLocation = [];
-    partOfLocation.push(location);
-    if (province) {
-        let provinceBundle = await fhirAxios.search("Location", {
-            name: region.trim(),
-            partof: "ZA",
-        });
-
-        if (provinceBundle && provinceBundle.entry && provinceBundle.entry.length > 0) {
-            partOfLocation.push(`Location/${provinceBundle.entry[0].resource.id}`);
-            location = `Location/${provinceBundle.entry[0].resource.id}`;
-            if (district) {
-                let districtBundle = await fhirAxios.search("Location", {
-                    name: district.trim(),
-                    partof: `${provinceBundle.entry[0].resource.id}`,
-                });
-                if (districtBundle && districtBundle.entry && districtBundle.entry.length > 0) {
-                    partOfLocation.push(`Location/${districtBundle.entry[0].resource.id}`);
-                    location = `Location/${districtBundle.entry[0].resource.id}`;
-                    if (subdistrict) {
-                        let subdistrictBundle = await fhirAxios.search("Location", {
-                            name: subdistrict.trim(),
-                            partof: `${districtBundle.entry[0].resource.id}`,
-                        });
-                        if (
-                            subdistrictBundle &&
-                            subdistrictBundle.entry &&
-                            subdistrictBundle.entry.length > 0
-                        ) {
-                            partOfLocation.push(
-                                `Location/${subdistrictBundle.entry[0].resource.id}`
-                            );
-                            location = `Location/${subdistrictBundle.entry[0].resource.id}`;
-                        } else {
-                            location = `Location/${districtBundle.entry[0].resource.id}`;
-                        }
-                    } else {
-                        location = `Location/${districtBundle.entry[0].resource.id}`;
-                    }
-                }
-            } else {
-                location = `Location/${provinceBundle.entry[0].resource.id}`;
-            }
-        }
-    }
-
-    return {location, partOfLocation};
-};
-
-const getCodeSystem = (value, valueSet) => {
-    return new Promise((resolve, reject) => {
-        let valuecoding = {}
-        fhirAxios.expand(valueSet, true, true).then((expansion) => {
-            try {
-                valuecoding = expansion.expansion.contains.find(element => element.display === value)
-                resolve(valuecoding)
-            } catch (error) {
-                console.log(error)
-                logger.error(error)
-                reject(error)
-            }
-        }).catch((err) => {
-            console.log(err)
-            logger.error(err.message);
-            reject(err);
-        })
-    })
-}
-
-const getReferences = (resourceType, resource) => {
-    return new Promise((resolve, reject) => {
-        let params = {'name:contains': resource}
-        fhirAxios.search(resourceType, params).then(result => {
-            try {
-                let references = result.entry.map(entry => entry.resource.id)
-                resolve(references[0])
-            } catch (error) {
-                console.log(error)
-                logger.error(error)
-                reject(error)
-            }
-        }).catch((err) => {
-            console.log(err)
-            logger.error(err.message);
-            reject(err);
-        })
-    })
-}
-
-const setUserdata = async (usersData) => {
-    let data = []
-    if (usersData.length > 0) {
-        for (let i = 0; i < usersData.length; i++) {
-            await getCodeSystem(usersData[i]["Nationality"], "iso3166-1-2").then(response => {
-                usersData[i].nationalityCoding = response
-            }).catch((err) => {
-                console.log(err)
-                logger.error(err.message);
-            })
-            await getCodeSystem(usersData[i]["Prefix"], "ihris-prefix-valueset").then(response => {
-                usersData[i].prefixCoding = response
-            }).catch((err) => {
-                console.log(err)
-                logger.error(err.message);
-            })
-            await getCodeSystem(usersData[i]["EmploymentTerms"], "ihris-employment-terms-value-set").then(response => {
-                usersData[i].empTermsCoding = response
-            }).catch((err) => {
-                console.log(err)
-                logger.error(err.message);
-            })
-            await getCodeSystem(usersData[i]["PositionType"], "ihris-position-type-valueset").then(response => {
-                usersData[i].postTypeCoding = response
-            }).catch((err) => {
-                console.log(err)
-                logger.error(err.message);
-            })
-            await getCodeSystem(usersData[i]["Duties"], "ihris-position-duty-valueset").then(response => {
-                usersData[i].positionFunctionCoding = response
-            }).catch((err) => {
-                console.log(err)
-                logger.error(err.message);
-            })
-            await getCodeSystem(usersData[i]["JobTitle"], "ihris-job").then(response => {
-                usersData[i].jobCoding = response
-            }).catch((err) => {
-                console.log(err)
-                logger.error(err.message)
-            })
-            await getReferences("Location", usersData[i]["FacilityName"]).then(response => {
-                usersData[i].locationID = response
-            }).catch((err) => {
-                console.log(err)
-                logger.error(err.message)
-            })
-            await getReferences("Organization", usersData[i]["Organization"]).then(response => {
-                usersData[i].organizationID = response;
-            }).catch((err) => {
-                console.log(err)
-                logger.error(err.message)
-            })
-            await getCodeSystem(usersData[i]["PayGrade"], "ihris-salary-grade").then(response => {
-                usersData[i].payGradeCoding = response
-            }).catch((err) => {
-                console.log(err)
-                logger.error(err.message)
-            })
-            await getCodeSystem(usersData[i]["HighestTrainingLevel"], "ihris-training-level-valueset").then(response => {
-                usersData[i].trainingCoding = response
-            }).catch((err) => {
-                console.log(err)
-                logger.error(err.message);
-            })
-            data.push(usersData[i]);
-        }
-        return data
-    } else {
-        return "No data found"
-    }
-}
-
-router.post("/bulkRegistration", async (req, res) => {
-    if (!req.body) {
-        return res.status(400).end();
-    } else {
-        await setUserdata(req.body).then(async (userResults) => {
-            if (userResults.length > 0) {
-                await bulkRegistration(userResults).then(async response => {
-                    if (response.isValid) {
-                        console.log(JSON.stringify(response.data.bundle, null, 2))
-                        await fhirAxios.create(response.data.bundle)
-                            .then((results) => {
-                                return res.status(201).json(results);
-                            }).catch((err) => {
-                                logger.error(err);
-                                return res.status(500).json(err);
-                            })
-                    } else {
-                        return res.json(response);
-                    }
-                }).catch(err => {
-                    console.log(err)
-                    logger.error(err.message)
-                })
-            }
-        }).catch((err) => {
-            console.log(err)
-            logger.error(err.message)
-        })
-    }
-});
-
-router.get("/csvTemplate", (req, res) => {
-    let p = path.join(__dirname, "../", "file/sampleInput.xlsx");
-    res.download(p);
-});
-
+ 
 router.get('/app', (req, res) => {
     logger.info('Received a request to get general configuration');
     const otherConfig = {
@@ -1617,163 +1792,13 @@ router.get('/app', (req, res) => {
     res.status(200).json(otherConfig);
 });
 
-router.get("/employeeId/:id", (req, res) => {
-    if (req.params.id) {
-        fhirAxios.read("/Practitioner", req.params.id).then(async (user) => {
-            let userData = {};
-            userData.id = req.params.id;
-
-            userData.fullName = `${user.name[0].prefix[0]} ${user.name[0].given[0]} ${user.name[0].family}`
-
-            userData.gender = user.gender;
-
-            userData.photo = user.photo;
-
-            userData.phone = user.telecom?.find(x => x.system === "phone")?.value;
-
-            userData.employeeId = user.identifier?.find(x => x.type.coding[0].code = "EN")?.value;
-
-            userData.residence = user.address[0]?.city;
-
-            userData.nationality = user.address[0]?.country;
-
-            userData.email = user.telecom?.find(x => x.system === "email")?.value
-
-            let data = await fhirAxios.search("PractitionerRole", {
-                _profile:
-                    "http://ihris.org/fhir/StructureDefinition/ihris-practitioner-role",
-                practitioner: req.params.id,
-            });
-            let organizationLocation =
-                data.entry && data.entry.length > 0
-                    ? data.entry[0].resource.location[0].reference.split("/")
-                    : null;
-            if (organizationLocation != null) {
-                let organizationData = await fhirAxios.read(
-                    organizationLocation[0],
-                    organizationLocation[1]
-                );
-
-                let organizationInformation = organizationData?.extension?.find(x => x.url === "http://ihris.org/fhir/StructureDefinition/ihris-facility-information-details")
-
-                let logo = organizationInformation?.extension?.find(x => x.url === "logo")?.valueAttachment
-
-                let stamp = organizationInformation?.extension?.find(x => x.url === "stamp")?.valueAttachment
-
-                let signature = organizationInformation?.extension?.find(x => x.url === "signature")?.valueAttachment
-
-                userData.logo = logo;
-
-                userData.signature = signature;
-
-                userData.stamp = stamp;
-            }
-            let role = data.entry
-                ? data.entry[0].resource.code[0].coding[0].display
-                : "";
-            userData.position = role ? role : "";
-
-            let fileName = `${userData.id}_id.png`;
-            let p = path.join(__dirname, "../tmp/", fileName);
-            employeeId(userData).then((_) => {
-                res.download(p);
-            });
-        });
-    }
-});
-
-router.get("/employeeCv/:id", async (req, res) => {
-    if (req.params.id) {
-        const userData = {};
-        userData.id = req.params.id;
-        const educationData = [];
-        const workExperiences = [];
-        const languages = [];
-        try {
-            const data = await fhirAxios.search(`/Basic`, {
-                practitioner: req.params.id,
-                _profile:
-                    "http://ihris.org/fhir/StructureDefinition/ihris-basic-employment-history",
-            });
-            if (data && data.entry && data.entry.length > 0) {
-                data.entry.map((expr) => {
-                    let employmentHistory = expr.resource.extension.find(x => x.url === "http://ihris.org/fhir/StructureDefinition/ihris-employment-history")
-                    let workExperience = {};
-                    workExperience.organization = employmentHistory.extension.find(x => x.url === "organization")?.valueString
-                    workExperience.address = employmentHistory.extension.find(x => x.url === "address")?.valueString
-                    workExperience.startingPosition = employmentHistory.extension.find(x => x.url === "startingPosition")?.valueString
-                    workExperience.period = employmentHistory.extension.find(x => x.url === "period")?.valuePeriod
-                    workExperiences.push(workExperience);
-                });
-            }
-        } catch (e) {
-            console.log(e);
-        }
-
-        try {
-            let data = await fhirAxios.search("PractitionerRole", {
-                _profile:
-                    "http://ihris.org/fhir/StructureDefinition/ihris-practitioner-role",
-                practitioner: req.params.id,
-            });
-
-            let role = data.entry
-                ? data.entry[0].resource.code[0].coding[0].display
-                : "";
-            userData.position = role ? role : "";
-        } catch (e) {
-            console.log(e);
-        }
-        try {
-            const data = await fhirAxios.search(`/Basic`, {
-                practitioner: req.params.id,
-                _profile:
-                    "http://ihris.org/fhir/StructureDefinition/ihris-basic-education-history",
-            });
-            if (data && data.entry && data.entry.length > 0) {
-                data.entry.map((data) => {
-                    let educationInfo = {};
-                    let educationHistory = data.resource.extension.find(x => x.url === "http://ihris.org/fhir/StructureDefinition/ihris-education-history")
-                    educationInfo.institution = educationHistory.extension.find(x => x.url === "institution")?.valueCoding?.display;
-                    educationInfo.level = educationHistory.extension.find(x => x.url === "level")?.valueCoding?.display
-                    educationInfo.educationalMajor = educationHistory.extension.find(x => x.url === "educationalMajor")?.valueCoding?.display
-                    educationInfo.year = educationHistory.extension.find(x => x.url === "year")?.valueDate
-                    educationData.push(educationInfo);
-                });
-            }
-        } catch (e) {
-            console.log(e);
-        }
-        try {
-            const user = await fhirAxios.read("/Practitioner", req.params.id);
-            userData.fullName = `${user.name[0].prefix[0]} ${user.name[0].given[0]} ${user.name[0].family}`
-
-            userData.gender = user.gender;
-            userData.photo = user.photo;
-            userData.phone = user.telecom.find(x => x.system === "phone")?.value;
-            userData.email = user.telecom.find(x => x.system === "email")?.value
-
-            userData.education = educationData;
-
-            if (user.communication && user.communication.length > 0) {
-                user.communication.map((lang) => {
-
-                    languages.push(lang.coding[0].display);
-                });
-            }
-            userData.languages = languages;
-            userData.workExperiences = workExperiences;
-        } catch (e) {
-            console.log(e);
-        }
-        let fileName = `${userData.id}_cv.pdf`;
-        let p = path.join(__dirname, "../tmp/", fileName);
-        employeeCv(userData)
-            .then((_) => {
-                res.download(p);
-            })
-            .catch((e) => console.log(e));
-    }
-});
+router.get("/getUserManual", (req, res) => {
+    let p = path.join(
+      __dirname,
+      "../",
+      "file/iHRIS User Manual.pdf"
+    );
+    res.download(p);
+  });
 
 module.exports = router;

@@ -31,6 +31,10 @@ module.exports = {
         target: 'http://localhost:3000/',
         logLevel: 'debug'
       },
+      '^/site': {
+        target: 'http://localhost:3000/',
+        logLevel: 'debug'
+      },
       '^/apps': {
         target: 'http://localhost:3000/',
         logLevel: 'debug'

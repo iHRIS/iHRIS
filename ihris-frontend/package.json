@@ -28,6 +28,7 @@
     "vue-router": "^3.2.0",
     "vuetify": "^2.6.6",
     "vuetify-ethiopian-calendar": "^1.0.2",
+    "vuetify-umalqura": "^0.0.6",
     "vuex": "^3.4.0",
     "webpack": "^5.73.0",
     "webpack-ruleset": "^0.1.8",
@@ -36,6 +37,7 @@
   },
   "devDependencies": {
     "@intlify/vue-i18n-loader": "^3.2.0",
+    "@mdi/font": "^7.2.96",
     "@vue/cli-plugin-babel": "^5.0.6",
     "@vue/cli-plugin-e2e-nightwatch": "~4.4.0",
     "@vue/cli-plugin-eslint": "^5.0.6",

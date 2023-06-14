@@ -43,7 +43,7 @@ Description:    "iHRIS Profile of the Basic resource to manage tasks."
 * extension[attributes].extension[constraint] ^label = "Constraint"
 * extension[attributes].extension[constraint].valueString 0..1 MS
 * extension[attributes].extension[constraint].valueString ^label = "Constraint"
-* extension[compositeTask].value[x] only Reference(Basic)
+* extension[compositeTask].value[x] only Reference(IhrisTask)
 * extension[compositeTask].valueReference 1..1 MS
 * extension[compositeTask].valueReference ^label = "Composite Task"
 
@@ -159,6 +159,7 @@ Title:          "Code system for task permissions."
 * #Location             "Location"
 * #Person               "Person"
 * #navigation           "Navigation"
+* #section           "Page Section"
 
 ValueSet:       IhrisTaskResourceValueSet
 Id:             ihris-task-resource

@@ -27,54 +27,8 @@
           style="z-index: 3;"
       >
         <v-list class="white--text">
-          <v-list-item
-              v-if="
-              $router.history.current.path ===
-                `/resource/view/practitioner/${this.fhirId}`
-            "
-          >
-            <v-btn
-                :loading="loadingId"
-                class="primary"
-                @click="printEmployeeId"
-            >
-              <v-icon class="mr-2" right>
-                mdi-card-account-details-outline
-              </v-icon>
-              {{$t(`App.hardcoded-texts.GenerateId`)}}
-              <template v-slot:loader>
-                <span class="custom-loader">
-                  <v-icon light>mdi-cached</v-icon>
-                </span>
-              </template>
-            </v-btn>
-          </v-list-item>
-          <v-list-item
-              v-if="
-              $router.history.current.path ===
-              `/resource/view/practitioner/${this.fhirId}`
-            "
-          >
-            <v-btn
-                :loading="loadingCv"
-                class="primary"
-                @click="printEmployeeCv"
-            >
-              <v-icon class="mr-2" dark right> mdi-file-pdf-box</v-icon>
-              {{$t(`App.hardcoded-texts.GenerateCv`)}}
-              <template v-slot:loader>
-                <span class="custom-loader">
-                  <v-icon light>mdi-cached</v-icon>
-                </span>
-              </template>
-            </v-btn>
-          </v-list-item>
-          <v-list-item>
-            <v-btn v-if="!edit" class="secondary" dark @click="$emit('set-edit', !edit)">
-              <v-icon light>mdi-pencil</v-icon>
-              <span>{{ $t(`App.hardcoded-texts.Edit`) }}</span>
-            </v-btn>
-            <v-btn v-else class="secondary" dark @click="$router.go(0)">
+          <v-list-item v-if="edit">
+            <v-btn v-if="edit" class="secondary" dark @click="$router.go(-1)">
               <v-icon light>mdi-close-circle-outline</v-icon>
               <span>{{ $t(`App.hardcoded-texts.Cancel`) }}</span>
             </v-btn>
@@ -93,12 +47,13 @@
           <v-divider color="white"></v-divider>
           <template v-if="!edit && links && links.length">
             <v-list-item v-for="(link,idx) in links" :key="link.url">
-              <v-btn :key="link.url" :text="!link.button" :to="getLinkUrl(link)" class="primary">
+              <v-btn :key="link.url" :text="!link.button" :to="getLinkUrl(link)" :class="link.linkclass">
                 <v-icon v-if="link.icon" light>{{ link.icon }}</v-icon>
                 {{ linktext[idx] }}
               </v-btn>
             </v-list-item>
           </template>
+          <v-divider color="white"></v-divider>
           <v-subheader v-if="sectionMenu" class="white--text"><h2>{{ $t(`App.hardcoded-texts.Sections`) }}</h2>
           </v-subheader>
           <v-list-item v-for="section in sectionMenu" :href="'#section-'+section.name" :key="section.name">
@@ -125,12 +80,14 @@
           <v-divider/>
           <v-row class="justify-space-between">
             <v-col cols="4"><span class="font-weight-bold">Last Updated:</span></v-col>
-            <v-col cols="8">{{ new Date(this.$data.orig.meta.lastUpdated) }}</v-col>
+            <v-col cols="8" v-if="$data.orig && $data.orig.meta">
+              {{ new Date(this.$data.orig.meta.lastUpdated) }}
+            </v-col>
           </v-row>
           <v-divider/>
           <v-row class="justify-space-between">
             <v-col cols="4"><span class="font-weight-bold">Version:</span></v-col>
-            <v-col cols="8">{{ this.$data.orig.meta.versionId }} of {{ max }}</v-col>
+            <v-col cols="8" v-if="$data.orig && $data.orig.meta">{{ $data.orig.meta.versionId }} of {{ max }}</v-col>
           </v-row>
           <v-divider/>
           <v-row class="justify-space-between">
@@ -139,10 +96,11 @@
               <v-row>
                 <v-col class="px-4" cols="2">
                   <v-text-field
+                      v-if="$data.orig.meta"
                       v-model.number="version"
                       :max="max"
                       :rules="[rules.min, rules.max]"
-                      :value="this.$data.orig.meta.versionId"
+                      :value="$data.orig.meta.versionId"
                       class="mt-0 pt-0"
                       hide-details
                       min="1"
@@ -174,7 +132,6 @@
 </template>
 
 <script>
-import axios from "axios";
 
 export default {
   name: "ihris-resource",
@@ -527,52 +484,6 @@ export default {
           })
         }
       })
-      //console.log(this.fhir)
-
-      /*
-      console.log(this.$scopedSlots.default())
-      processSlots( this.field, this.$scopedSlots.default() )
-      */
-    },
-    printEmployeeId() {
-      this.loadingId = true;
-      axios({
-        url: `/config/employeeId/${this.fhirId}`,
-        method: "GET",
-        responseType: "blob",
-      })
-          .then((response) => {
-            let blob = new Blob([response.data], { type: "application/png" });
-            let link = document.createElement("a");
-            link.href = window.URL.createObjectURL(blob);
-            link.download = `employee_identification_card_${this.fhirId}.png`;
-            link.click();
-            this.loadingId = false;
-          })
-          .catch((e) => {
-            console.log(e);
-            this.loadingId = false;
-          });
-    },
-    printEmployeeCv() {
-      this.loadingCv = true;
-      axios({
-        url: `/config/employeeCv/${this.fhirId}`,
-        method: "GET",
-        responseType: "blob",
-      })
-          .then((response) => {
-            let blob = new Blob([response.data], { type: "application/pdf" });
-            let link = document.createElement("a");
-            link.href = window.URL.createObjectURL(blob);
-            link.download = `employee_resume_${this.fhirId}.pdf`;
-            link.click();
-            this.loadingCv = false;
-          })
-          .catch((e) => {
-            console.log(e);
-            this.loadingCv = false;
-          });
     },
     changeVersion() {
       fetch("/fhir/vRead" + "/" + this.field + "/" + this.fhirId + "/" + this.version)
@@ -580,12 +491,8 @@ export default {
             response
                 .json()
                 .then((data) => {
-                  console.log("the new vertion",data)
-                  // this.$store.commit('setCurrentResource', data)
                   this.orig = data;
                   this.source = {data: data, path: this.field};
-                  // this.orig = data;
-                  // this.source = {data: data, path: this.field};
                   this.setLinkText();
                   this.loading = false;
                   this.pageKey += 1;

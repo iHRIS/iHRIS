@@ -114,6 +114,21 @@
             </v-card>
           </v-row>
         </v-container>
+        <v-card min-width="400px" v-else-if="isIslamic">
+          <v-hijri-date-picker
+            width="490px"
+            ref="picker"
+            color="secondary"
+            :landscape="$vuetify.breakpoint.smAndUp"
+            v-model="value"
+            :max="dateValueMax"
+            :min="dateValueMin"
+            :type="pickerType"
+            :disabled="disabled"
+            @change="save"
+            locale="en" 
+          />
+        </v-card>
         <v-card min-width="300px" v-else-if="pickerType==='year'" >
           <v-card-text>
             <br />
@@ -160,6 +175,7 @@
 import IhrisElement from "../ihris/ihris-element.vue"
 import VEthiopianDatePicker from "vuetify-ethiopian-calendar"
 import ethiopic from "ethiopic-calendar"
+import VHijriDatePicker from 'vuetify-umalqura'
 import { eventBus } from "@/main";
 import { dataDisplay } from "@/mixins/dataDisplay"
 
@@ -170,7 +186,8 @@ export default {
     "constraints", "displayCondition"],
   components: {
     IhrisElement,
-    VEthiopianDatePicker
+    VEthiopianDatePicker,
+    VHijriDatePicker
   },
   mixins: [dataDisplay],
   data: function() {
@@ -230,6 +247,9 @@ export default {
     },
     isEthiopian: function() {
       return this.calendar === "Ethiopian"
+    },
+    isIslamic: function() {
+      return this.calendar === "Islamic"
     },
     minValueETDateTime: function() {
       if ( this.dateValueMin ) {
@@ -374,8 +394,25 @@ export default {
           let expression = this.$fhirutils.pathFieldExpression( this.field )
           this.source.data = this.$fhirpath.evaluate( this.slotProps.source.data, expression )
           //console.log("STR FHIRPATH", this.slotProps.source.data, this.field)
+          let value = null
           if ( this.source.data.length == 1 ) {
-            this.value = this.source.data[0]
+            value = this.source.data[0]
+          } else {
+            //check if the path is an array and use path index to get value
+            let pathSlices = this.path.split("[")
+            let index
+            for(let slice of pathSlices) {
+              let slices = slice.split("]")
+              if(Number.isInteger(parseInt(slices[0]))) {
+                index = slices[0]
+              }
+            }
+            if(index || index == 0) {
+              value = this.source.data[index]
+            }
+          }
+          if ( value != null ) {
+            this.value = value
             this.lockWatch = true
           }
         }

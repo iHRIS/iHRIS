@@ -38,7 +38,8 @@ Description:    "iHRIS Page Display details."
 * extension[add].extension contains
       url 1..1 MS and
       icon 0..1 MS and
-      class 0..1 MS
+      class 0..1 MS and
+      role 0..* MS
 * extension[add].extension[url].value[x] only url
 * extension[add].extension[url].valueUrl MS
 * extension[add].extension[url].valueUrl ^label = "Add Link URL"
@@ -48,13 +49,18 @@ Description:    "iHRIS Page Display details."
 * extension[add].extension[class].value[x] only string
 * extension[add].extension[class].valueString MS
 * extension[add].extension[class].valueString ^label = "Add Link Class"
+* extension[add].extension[role].value[x] only id
+* extension[add].extension[role].valueId MS
+* extension[add].extension[role].valueId ^label = "Roles that has access to this button"
 
 * extension[link].extension contains
       field 0..1 MS and
       text 0..1 MS and
       button 0..1 MS and
       icon 0..1 MS and
-      url 1..1 MS
+      url 1..1 MS and
+      class 0..1 MS and
+      role 0..* MS
 * extension[link].extension[field].value[x] only string
 * extension[link].extension[field].valueString MS
 * extension[link].extension[field].valueString ^label = "FHIRPath for field in resource"
@@ -70,6 +76,12 @@ Description:    "iHRIS Page Display details."
 * extension[link].extension[url].value[x] only url
 * extension[link].extension[url].valueUrl MS
 * extension[link].extension[url].valueUrl ^label = "URL to go to"
+* extension[link].extension[class].value[x] only string
+* extension[link].extension[class].valueString MS
+* extension[link].extension[class].valueString ^label = "Class of the link"
+* extension[link].extension[role].value[x] only id
+* extension[link].extension[role].valueId MS
+* extension[link].extension[role].valueId ^label = "Roles that has access to this button"
 
 * extension[field].extension contains
       path 1..1 MS and
@@ -145,7 +157,8 @@ Description:    "iHRIS Page Section information."
       row 0..1 MS and
       condition 0..1 MS and
       emptyDisplay 0..1 MS and
-      class 0..1 MS 
+      class 0..1 MS and
+      role 0..* MS
 * extension[resource].extension[action].extension[link].value[x] only string
 * extension[resource].extension[action].extension[link].valueString MS
 * extension[resource].extension[action].extension[link].valueString ^label = "Action Link"
@@ -164,6 +177,9 @@ Description:    "iHRIS Page Section information."
 * extension[resource].extension[action].extension[class].value[x] only string
 * extension[resource].extension[action].extension[class].valueString MS
 * extension[resource].extension[action].extension[class].valueString ^label = "Element Class for the Action"
+* extension[resource].extension[action].extension[role].value[x] only id
+* extension[resource].extension[action].extension[role].valueId MS
+* extension[resource].extension[action].extension[role].valueId ^label = "Element Class for the Role"
 
 Instance:       ihris-page-classification
 InstanceOf:     IhrisPage
@@ -190,23 +206,6 @@ Usage:          #example
 * extension[display].extension[search][1].valueString = "Display|display"
 * extension[section][0].extension[title].valueString = "Cadre"
 * extension[section][0].extension[description].valueString = "Cadre"
-* extension[section][0].extension[name].valueString = "CodeSystem"
-* extension[section][0].extension[field][0].valueString = "CodeSystem.display"
-* extension[section][0].extension[field][1].valueString = "CodeSystem.code"
-* extension[section][0].extension[field][2].valueString = "CodeSystem.definition"
-
-Instance:       ihris-page-identifier
-InstanceOf:     IhrisPage
-Title:          "iHRIS Identifier type CodeSystem Page"
-Usage:          #example
-* code = IhrisResourceCodeSystem#page
-* extension[display].extension[resource].valueReference = Reference(CodeSystem/v2-0203)
-* extension[display].extension[search][0].valueString = "Code|code"
-* extension[display].extension[search][1].valueString = "Display|display"
-* extension[display].extension[field][0].extension[path].valueString = "CodeSystem.code"
-* extension[display].extension[field][0].extension[readOnlyIfSet].valueBoolean = true
-* extension[section][0].extension[title].valueString = "Identifier Type"
-* extension[section][0].extension[description].valueString = "Identifier Type"
 * extension[section][0].extension[name].valueString = "CodeSystem"
 * extension[section][0].extension[field][0].valueString = "CodeSystem.display"
 * extension[section][0].extension[field][1].valueString = "CodeSystem.code"

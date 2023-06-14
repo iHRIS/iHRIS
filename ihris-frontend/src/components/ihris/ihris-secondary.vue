@@ -8,7 +8,7 @@
       :loading="loading"
       class="elevation-1"
       dense
-      :footer-props="{ 'items-per-page-text':$t('App.fhir-resources-texts.tableText'), 'items-per-page-options': [5,10,20,50] }"
+      :footer-props="{ 'items-per-page-text':$t('App.hardcoded-texts.tableText'), 'items-per-page-options': [5,10,20,50] }"
     >
       <template v-slot:top>
         <v-toolbar flat color="white">
@@ -115,6 +115,7 @@ export default {
         }
         url += "?" + queryStr.join("&")
       }
+      url += '&_sort=-_id'
       this.items = []
       this.loading = true
       this.addItems( url )

@@ -458,7 +458,6 @@ const fhirQuestionnaire = {
                   }
                   fields.push(data)
                 } else {
-                  console.log("uuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuu")
                   logger.error(`ERROR: questionnaire doesn't handle questions of type  ${
                       question && question.type ? question.type : ""
                   }  yet`)
