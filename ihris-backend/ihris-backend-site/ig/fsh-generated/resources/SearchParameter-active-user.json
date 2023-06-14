@@ -1,0 +1,16 @@
+{
+  "resourceType": "SearchParameter",
+  "id": "active-user",
+  "url": "http://ihris.org/fhir/SearchParameter/active-user",
+  "name": "Search Parameter on active person resources for security",
+  "status": "active",
+  "description": "Search by active status for a Person resource.",
+  "code": "active",
+  "base": [
+    "Person"
+  ],
+  "type": "token",
+  "expression": "Person.active",
+  "xpath": "f:Person/f:active",
+  "xpathUsage": "normal"
+}

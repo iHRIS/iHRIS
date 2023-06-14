@@ -3,6 +3,8 @@ Parent:         Person
 Id:             ihris-person-user
 Title:          "System User"
 Description:    "iHRIS profile of the Person resource to manage user access."
+* active 1..1 MS
+* active ^label = "User Status"
 * name 1..1 MS
 * name ^label = "Name"
 * name ^slicing.discriminator.type = #pattern
@@ -137,6 +139,7 @@ Usage: #example
 * name.text = "iHRIS Admin"
 * telecom.system = #email
 * telecom.value = "admin@ihris.org"
+* active = true
 
 Instance: ihris-user-loggedout
 InstanceOf: Person
@@ -281,22 +284,32 @@ Usage:          #definition
 // * item[0].item[6].required = false
 // * item[0].item[6].repeats = false
 
-
-* item[0].item[6].linkId = "password#password"
-* item[0].item[6].text = "Password"
-* item[0].item[6].type = #string
+* item[0].item[6].linkId = "Person.active"
+* item[0].item[6].definition = "http://ihris.org/fhir/StructureDefinition/ihris-person-user#Person.active"
+* item[0].item[6].text = "Active?"
+* item[0].item[6].type = #boolean
 * item[0].item[6].required = true
 * item[0].item[6].repeats = false
-* item[0].item[6].extension[constraint].extension[key].valueId = "ihris-password-strength-check"
-* item[0].item[6].extension[constraint].extension[severity].valueCode = #error
-* item[0].item[6].extension[constraint].extension[expression].valueString = "matches('^(?=.*\\\\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$')"
-* item[0].item[6].extension[constraint].extension[human].valueString = "Password Should be Minimum eight characters, at least one uppercase letter, one lowercase letter, one number and one special character"
+* item[0].item[6].readOnly = true
+* item[0].item[6].answerOption.valueString = "true"
+* item[0].item[6].answerOption.initialSelected = true
 
-* item[0].item[7].linkId = "confrimpassword#password"
-* item[0].item[7].text = "Confirm Password"
+
+* item[0].item[7].linkId = "password#password"
+* item[0].item[7].text = "Password"
 * item[0].item[7].type = #string
 * item[0].item[7].required = true
 * item[0].item[7].repeats = false
+* item[0].item[7].extension[constraint].extension[key].valueId = "ihris-password-strength-check"
+* item[0].item[7].extension[constraint].extension[severity].valueCode = #error
+* item[0].item[7].extension[constraint].extension[expression].valueString = "matches('^(?=.*\\\\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$')"
+* item[0].item[7].extension[constraint].extension[human].valueString = "Password Should be Minimum eight characters, at least one uppercase letter, one lowercase letter, one number and one special character"
+
+* item[0].item[8].linkId = "confrimpassword#password"
+* item[0].item[8].text = "Confirm Password"
+* item[0].item[8].type = #string
+* item[0].item[8].required = true
+* item[0].item[8].repeats = false
 
 Instance:       IhrisChangePassword
 InstanceOf:     IhrisQuestionnaire

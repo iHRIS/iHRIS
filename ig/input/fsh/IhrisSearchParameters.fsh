@@ -296,3 +296,17 @@ Usage: #definition
 * type = #string
 * expression = "Practitioner.identifier.where(type.coding.code='EN').value"
 * xpathUsage = #normal
+
+Instance: active-user
+InstanceOf: SearchParameter
+Usage: #definition
+* url = "http://ihris.org/fhir/SearchParameter/active-user"
+* name = "Search Parameter on active person resources for security"
+* status = #active
+* description = "Search by active status for a Person resource."
+* code = #active
+* base = #Person
+* type = #token
+* expression = "Person.active"
+* xpath = "f:Person/f:active"
+* xpathUsage = #normal
