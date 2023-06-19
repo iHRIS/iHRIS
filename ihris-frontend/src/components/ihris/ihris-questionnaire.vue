@@ -1,7 +1,11 @@
 <template>
   <v-container class="my-3">
+    <ihris-practitioner-intro
+        :isQuestionnaire="true"
+        :slotProps="source"
+    ></ihris-practitioner-intro>
     <v-form id="app" ref="form" v-model="valid">
-      <slot :source="source"></slot>
+      <slot></slot>
       <v-overlay :value="overlay">
         <v-progress-circular
             color="primary"
@@ -102,6 +106,12 @@ import axios from "axios";
 const querystring = require("querystring");
 export default {
   name: "ihris-questionnaire",
+  components: {
+    "ihris-practitioner-intro": () =>
+        import(
+            /* webpackChunkName: "fhir-primary" */ "@/components/ihris/ihris-practitioner-intro"
+            ),
+  },
   props: [
     "id",
     "url",
@@ -112,9 +122,6 @@ export default {
     "view-page",
     "edit",
     "constraints",
-    "field",
-    "profile",
-    "fhir-id"
   ],
   data: function () {
     return {
@@ -126,7 +133,6 @@ export default {
       advancedValid: true,
       position: "",
       source: {path: "", data: {}},
-      introSource: {path: "", data: {}},
       path: "",
     };
   },
@@ -136,63 +142,56 @@ export default {
     },
   },
   created: function () {
-    if ( this.fhirId ) {
-      this.loading = true
-      //console.log("getting",this.field,this.fhirId)
-      fetch( "/fhir/" + this.field + "/"+this.fhirId ).then(response => {
-        response.json().then(data => {
-          //this.$store.commit('setCurrentResource', data)
-          this.orig = data
-          this.source = { data: data, path: this.field }
-          this.setLinkText()
-          this.loading = false
-        }).catch(err=> {
-          console.log(this.field,this.fhirId,err)
-        })
-      }).catch(err=> {
-        console.log(this.field,this.fhirId,err)
-      })
+    let params = this.$route.query;
+
+    let fhirId = params.practitioner;
+
+    if (fhirId) {
+      fetch(`/fhir/PractitionerRole?_practitioner=${this.fhirId}`)
+          .then((response) => {
+            response
+                .json()
+                .then((data) => {
+                  let role = data.entry
+                      ? data.entry[0].resource.code[0].coding[0].display
+                      : "";
+                  this.position = role ? role : "";
+                  this.position = role ? role : "";
+                })
+                .catch((err) => {
+                  console.log(this.field, this.fhirId, err);
+                });
+          })
+          .catch((err) => {
+            console.log(this.field, this.fhirId, err);
+          });
+      fetch("/fhir/Practitioner/" + fhirId)
+          .then((response) => {
+            response
+                .json()
+                .then((data) => {
+                  this.source = {source: {data: data, path: "Practitioner"}};
+                })
+                .catch((err) => {
+                  console.log(err);
+                });
+          })
+          .catch((err) => {
+            console.log(err);
+          });
     }
   },
+  mounted() {
+    if (!this.isQuestionnaire) {
+      window.addEventListener("scroll", this.handleScroll);
+    } else {
+      window.removeEventListener("scroll", this.handleScroll);
+    }
+  },
+  beforeDestroy() {
+    window.removeEventListener("scroll", this.handleScroll);
+  },
   methods: {
-    getLinkField: function(field) {
-      let content = this.$fhirpath.evaluate( this.source.data, field )
-      if ( content ) {
-        return content[0]
-      } else {
-        return false
-      }
-    },
-    getLinkUrl: function(link) {
-      let field
-      if ( link.field ) {
-        field = this.getLinkField(link.field)
-      }
-      if ( field ) {
-        if ( field.includes('/') ) {
-          let ref = field.split('/')
-          field = ref[1]
-        }
-        return link.url.replace("FIELD",field)
-      } else {
-        return link.url 
-      }
-    },
-    setLinkText: function() {
-      for ( let idx in this.links ) {
-        let link = this.links[idx]
-        if ( link.text ) {
-          this.linktext[idx] = link.text
-        } else if ( link.field ) {
-          let field = this.getLinkField(link.field)
-          if ( field ) {
-            this.$fhirutils.lookup(field).then( display => {
-              this.$set( this.linktext, idx, display )
-            } )
-          }
-        }
-      }
-    },
     logout() {
       this.loading = true
       fetch("/auth/logout").then(() => {
@@ -235,13 +234,6 @@ export default {
       this.advancedValid = true;
       this.overlay = true;
       this.loading = true;
-      let editingResources = []
-      if(this.fhirId) {
-        editingResources.push({
-          profile: this.profile,
-          id: this.fhirId
-        })
-      }
 
       const processChildren = async (obj, children, itemMap) => {
         if (!itemMap) itemMap = {};
@@ -253,12 +245,6 @@ export default {
           if (child.isArray) {
             //console.log("ARRAY", child.path)
           } else if (child.isQuestionnaireGroup) {
-            if(child.resourceId) {
-              editingResources.push({
-                profile: child.profile,
-                id: child.resourceId
-              })
-            }
             //console.log("GROUP", child.path)
             let section = {linkId: child.path, text: child.label, item: []};
             next.push(section);
@@ -354,13 +340,8 @@ export default {
           comm.item[0].linkId = `Practitioner.communication[${index}]`;
         });
       }
-      this.$route.query.editing = false
-      if(editingResources.length > 0) {
-        this.$route.query.editingResources = JSON.stringify(editingResources)
-        this.$route.query.editing = true
-      }
       fetch(
-        "/fhir/QuestionnaireResponse?" +
+          "/fhir/QuestionnaireResponse?" +
           querystring.stringify(this.$route.query),
           {
             method: "POST",

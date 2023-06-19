@@ -173,6 +173,7 @@ async function startUp() {
     // ws: true,
     // followRedirects: true
   }));
+
   // const indexRouter = require('./routes/index')
   const configRouter = require('./routes/config');
   const authRouter = require('./routes/auth');

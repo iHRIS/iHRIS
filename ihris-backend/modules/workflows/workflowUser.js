@@ -52,11 +52,10 @@ const workflowUser = {
         let userEmail = req.body.item[0].item[3].answer[0].valueString;
         let userRoles = undefined;
         let userRoleId = undefined;
-        let status = true;
         let extensions = [];
         let userId = uuidv4()
         user
-            .lookupByEmail(userEmail,false)
+            .lookupByEmail(userEmail)
             .then(async (userObj) => {
               if (!userObj) {
                 if (req.body.item[0].item[5].linkId === "location" && req.body.item[0].item[5].answer && req.body.item[0].item[5].answer[0] && req.body.item[0].item[5].answer[0].valueReference.reference !== "") {
@@ -172,9 +171,6 @@ const workflowUser = {
                   winston.info("NO NAME ");
                   resolve(await workflowUser.outcome("No Name for this User"));
                 }
-                if (req.body.item[0].item.find(x => x.linkId === "Person.active")) {
-                  status = req.body.item[0].item.find(x => x.linkId === "Person.active")?.answer[0].valueString
-                }
                 let newUser = {
                   resourceType: "Person", id: userId, meta: {
                     profile: ["http://ihris.org/fhir/StructureDefinition/ihris-person-user",],
@@ -183,7 +179,6 @@ const workflowUser = {
                   },], telecom: [{
                     system: "email", value: userEmail,
                   },],
-                  "active": status
                 };
                 let url = `Person/${userId}`;
                 bundle.entry.push({

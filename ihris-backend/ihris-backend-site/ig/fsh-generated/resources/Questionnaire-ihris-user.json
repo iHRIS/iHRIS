@@ -140,58 +140,6 @@
           "definition": "http://ihris.org/fhir/StructureDefinition/ihris-person-user#Person.extension:location.value[x]:valueReference",
           "text": "Facility",
           "type": "reference",
-          "required": false,
-          "repeats": false
-        },
-        {
-          "linkId": "Person.active",
-          "definition": "http://ihris.org/fhir/StructureDefinition/ihris-person-user#Person.active",
-          "text": "Active?",
-          "type": "boolean",
-          "required": true,
-          "repeats": false,
-          "readOnly": true,
-          "answerOption": [
-            {
-              "valueString": "true",
-              "initialSelected": true
-            }
-          ]
-        },
-        {
-          "extension": [
-            {
-              "extension": [
-                {
-                  "url": "key",
-                  "valueId": "ihris-password-strength-check"
-                },
-                {
-                  "url": "severity",
-                  "valueCode": "error"
-                },
-                {
-                  "url": "expression",
-                  "valueString": "matches('^(?=.*\\\\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$')"
-                },
-                {
-                  "url": "human",
-                  "valueString": "Password Should be Minimum eight characters, at least one uppercase letter, one lowercase letter, one number and one special character"
-                }
-              ],
-              "url": "http://hl7.org/fhir/StructureDefinition/questionnaire-constraint"
-            }
-          ],
-          "linkId": "password#password",
-          "text": "Password",
-          "type": "string",
-          "required": true,
-          "repeats": false
-        },
-        {
-          "linkId": "confrimpassword#password",
-          "text": "Confirm Password",
-          "type": "string",
           "required": true,
           "repeats": false
         }

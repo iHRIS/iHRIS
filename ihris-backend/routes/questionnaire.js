@@ -15,7 +15,6 @@ const logger = require('../winston')
  * it into the underlying resources and save them.
  */
 router.post("/QuestionnaireResponse", (req, res, next) => {
-    req.query.editing = JSON.parse(req.query.editing)
     if (!req.user) {
         return res.status(401).json(outcomes.NOTLOGGEDIN)
     }
@@ -29,25 +28,6 @@ router.post("/QuestionnaireResponse", (req, res, next) => {
             }
         }
         return false
-    }
-
-    const setResourceIds = (bundle) => {
-        if(!bundle.entry || bundle.entry <= 0) {
-            return
-        }
-        let editingResources = JSON.parse(req.query.editingResources)
-        for(let entry of bundle.entry) {
-            let edit = editingResources.find((editingResource) => {
-                return entry.resource.meta.profile.includes(editingResource.profile)
-            })
-            if(edit) {
-                entry.resource.id = edit.id
-                entry.request = {
-                    method: "PUT",
-                    url: entry.resource.resourceType + '/' + edit.id
-                }
-            }
-        }
     }
 
     let workflowQuestionnaires = nconf.get("workflow:questionnaire")
@@ -69,9 +49,6 @@ router.post("/QuestionnaireResponse", (req, res, next) => {
         }
         fhirModules.requireWorkflow(workflow, details.library, details.file).then((module) => {
             module.process(req).then((bundle) => {
-                if(req.query.editing) {
-                    setResourceIds(bundle)
-                }
                 fhirSecurity.preProcess(bundle).then((uuid) => {
                     fhirFilter.filterBundle("write", bundle, req.user)
                     let errorCheck = checkBundleForError(bundle)
@@ -126,7 +103,6 @@ router.post("/QuestionnaireResponse", (req, res, next) => {
 
     } else {
         fhirQuestionnaire.processQuestionnaire(req.body).then((bundle) => {
-            setResourceIds(bundle)
             logger.debug(JSON.stringify(bundle, null, 2))
             fhirSecurity.preProcess(bundle).then((uuid) => {
                 fhirFilter.filterBundle("write", bundle, req.user)

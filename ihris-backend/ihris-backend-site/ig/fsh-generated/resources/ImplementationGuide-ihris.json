@@ -1461,13 +1461,6 @@
       },
       {
         "reference": {
-          "reference": "SearchParameter/active-user"
-        },
-        "name": "active-user",
-        "exampleBoolean": false
-      },
-      {
-        "reference": {
           "reference": "SearchParameter/basic-location-constraint"
         },
         "name": "basic-location-constraint",
