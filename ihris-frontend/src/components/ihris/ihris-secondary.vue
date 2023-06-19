@@ -115,6 +115,7 @@ export default {
         }
         url += "?" + queryStr.join("&")
       }
+      url += '&_sort=-_id'
       this.items = []
       this.loading = true
       this.addItems( url )

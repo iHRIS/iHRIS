@@ -679,13 +679,6 @@
   
 </li>
         
-          <li class="md-nav__item">
-  <a href="#opensearch-dashboards" class="md-nav__link">
-    OpenSearch-dashboards
-  </a>
-  
-</li>
-        
       </ul>
     </nav>
   
@@ -1038,13 +1031,6 @@
   
 </li>
         
-          <li class="md-nav__item">
-  <a href="#opensearch-dashboards" class="md-nav__link">
-    OpenSearch-dashboards
-  </a>
-  
-</li>
-        
       </ul>
     </nav>
   
@@ -1255,13 +1241,53 @@ your FHIR server with:</p>
 <h2 id="opensearch-and-opensearch-dashboard">OpenSearch and OpenSearch-dashboard</h2>
 <p>Ubuntu install instructions:</p>
 <h3 id="opensearch">OpenSearch</h3>
-<p>https://opensearch.org/docs/latest/opensearch/install/tar/</p>
-<h3 id="opensearch-dashboards">OpenSearch-dashboards</h3>
-<p>https://opensearch.org/docs/latest/dashboards/install/tar/</p>
-<p>For OpenSearch-dashboards make sure you edit <code>/path/to/opensearch-dashboards-2.3.0/config/opensearch_dashboards.yml</code> and set <code>server.basePath</code> and <code>server.rewriteBasePath</code></p>
-<div class="codehilite"><pre><span></span><code><span class="nt">server.basePath</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;/dashboards&quot;</span><span class="w"></span>
+<p>https://opensearch.org/docs/latest/install-and-configure/install-opensearch/debian/</p>
+<p>Import the public GPG key. This key is used to verify that the APT repository is signed.</p>
+<div class="codehilite"><pre><span></span><code> curl -o- https://artifacts.opensearch.org/publickeys/opensearch.pgp <span class="p">|</span> sudo apt-key add -
+</code></pre></div>
 
-<span class="nt">server.rewriteBasePath</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span><span class="w"></span>
+<p>Create an APT repository for OpenSearch:</p>
+<div class="codehilite"><pre><span></span><code><span class="nb">echo</span> <span class="s2">&quot;deb https://artifacts.opensearch.org/releases/bundle/opensearch/2.x/apt stable main&quot;</span> <span class="p">|</span> sudo tee -a /etc/apt/sources.list.d/opensearch-2.x.list
+</code></pre></div>
+
+<p>Verify that the repository was created successfully.</p>
+<div class="codehilite"><pre><span></span><code> sudo apt-get update
+</code></pre></div>
+
+<p>With the repository information added, list all available versions of OpenSearch:</p>
+<div class="codehilite"><pre><span></span><code>sudo apt list -a opensearch
+</code></pre></div>
+
+<p>Choose the version of OpenSearch you want to install:
+Unless otherwise indicated, the latest available version of OpenSearch is installed.</p>
+<div class="codehilite"><pre><span></span><code>sudo apt-get install opensearch
+</code></pre></div>
+
+<p>During installation, the installer will present you with the GPG key fingerprint. Verify that the information matches the following:</p>
+<div class="codehilite"><pre><span></span><code>Fingerprint: c5b7 <span class="m">4989</span> 65ef d1c2 924b a9d5 39d3 <span class="m">1987</span> <span class="m">9310</span> d3fc
+</code></pre></div>
+
+<p>Once complete, enable OpenSearch.</p>
+<div class="codehilite"><pre><span></span><code> sudo systemctl <span class="nb">enable</span> opensearch
+</code></pre></div>
+
+<p>Start OpenSearch.</p>
+<div class="codehilite"><pre><span></span><code> sudo systemctl start opensearch
+</code></pre></div>
+
+<p>Verify that OpenSearch launched correctly.</p>
+<div class="codehilite"><pre><span></span><code> sudo systemctl status opensearch
+ <span class="sb">```</span>
+
+<span class="c1">### OpenSearch-dashboards</span>
+https://opensearch.org/docs/latest/dashboards/install/tar/
+
+For OpenSearch-dashboards make sure you edit <span class="sb">```</span>/path/to/opensearch-dashboards-2.3.0/config/opensearch_dashboards.yml<span class="sb">```</span> and <span class="nb">set</span> <span class="sb">```</span>server.basePath<span class="sb">```</span> and <span class="sb">```</span>server.rewriteBasePath<span class="sb">```</span>
+
+<span class="sb">```</span>yaml
+server.basePath: <span class="s2">&quot;/dashboards&quot;</span>
+
+server.rewriteBasePath: <span class="nb">true</span>
 </code></pre></div>
 
 <div class="admonition note">
@@ -1274,7 +1300,7 @@ your FHIR server with:</p>
   <small>
     
       Last update:
-      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date">November 3, 2022</span>
+      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date">April 20, 2023</span>
       
     
   </small>

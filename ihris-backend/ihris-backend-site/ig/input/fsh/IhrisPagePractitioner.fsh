@@ -13,6 +13,12 @@ Usage:          #example
 * extension[display].extension[add].extension[url].valueUrl = "/questionnaire/ihris-practitioner/practitioner"
 * extension[display].extension[add].extension[icon].valueString = "mdi-account-plus"
 * extension[display].extension[add].extension[class].valueString = "accent"
+* extension[display].extension[link][0].extension[url].valueUrl = "/resource/view/practitioner/FIELD?edit=true"
+* extension[display].extension[link][0].extension[field].valueString = "Practitioner.id"
+* extension[display].extension[link][0].extension[text].valueString = "Edit"
+* extension[display].extension[link][0].extension[button].valueBoolean = true
+* extension[display].extension[link][0].extension[icon].valueString = "mdi-pencil"
+* extension[display].extension[link][0].extension[class].valueString = "secondary"
 * extension[section][0].extension[title].valueString = "Health Worker"
 * extension[section][0].extension[description].valueString = "Primary demographic details"
 * extension[section][0].extension[name].valueString = "Practitioner"

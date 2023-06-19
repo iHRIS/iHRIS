@@ -89,8 +89,25 @@ export default {
           let expression = this.$fhirutils.pathFieldExpression( this.field )
           this.source.data = this.$fhirpath.evaluate( this.slotProps.source.data, expression )
           //console.log("STR FHIRPATH", this.slotProps.source.data, this.field)
+          let value = null
           if ( this.source.data.length == 1 ) {
-            this.value = this.source.data[0]
+            value = this.source.data[0]
+          } else {
+            //check if the path is an array and use path index to get value
+            let pathSlices = this.path.split("[")
+            let index
+            for(let slice of pathSlices) {
+              let slices = slice.split("]")
+              if(Number.isInteger(parseInt(slices[0]))) {
+                index = slices[0]
+              }
+            }
+            if(index || index == 0) {
+              value = this.source.data[index]
+            }
+          }
+          if ( value != null ) {
+            this.value = value
             this.lockWatch = true
           }
         }

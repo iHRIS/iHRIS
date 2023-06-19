@@ -178,7 +178,7 @@ Usage:          #example
 * extension[display].extension[link][0].extension[text].valueString = "View Health Worker"
 * extension[display].extension[link][0].extension[button].valueBoolean = true
 * extension[display].extension[link][0].extension[icon].valueString = "mdi-account-arrow-right"
-* extension[display].extension[link][0].extension[url].valueUrl = "/resource/view/bhpc/FIELD"
+* extension[display].extension[link][0].extension[url].valueUrl = "/resource/view/practitioner/FIELD"
 * extension[display].extension[search][0].valueString = "Emergency|extension.where(url='http://ihris.org/fhir/StructureDefinition/ihris-emergency').extension.where(url='name').valueString"
 * extension[display].extension[field][0].extension[path].valueString = "Basic.extension:practitioner.value[x]:valueReference"
 * extension[display].extension[field][0].extension[readOnlyIfSet].valueBoolean = true
