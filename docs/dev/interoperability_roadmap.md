@@ -27,7 +27,7 @@ Compliant**. As such, every element of iHRIS is based on FHIR, from
 defining system configurations to data structures and even how the front
 end is designed and rendered.
 
-![Alt text](../img/interoperability_.JPG 'Interoperability Roadmap'){width="6.268055555555556in"
+![Alt text](../img/interoperability.png 'Interoperability Roadmap'){width="6.268055555555556in"
 height="4.106944444444444in"}
 
 **Data Exchange Standards Supported by iHRIS:**
