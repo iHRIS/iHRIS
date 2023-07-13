@@ -1,14 +1,37 @@
 # People
 
+## Health Worker Information
 Health workers details are managed in the  module “PEOPLE”; which includes the option to add health workers and search health worker records in the system. It is the primary registration page to :
 
 * Add new employees
+
 * Search/view records
 * Make changes to existing employee records
 
+![Alt text](../img/mHerologin.JPG 'MHERO Login Page')
+
 Note: before adding any new health workers into iHRIS, first search to establish in that health worker does not already exist in the system.
 
-## Add Person
+## Primary Details
+## Contact Details
+## Language Details
+## Position
+## Leave Information
+## Cadres 
+## Performance Evaluation
+## Education
+## Work Experience
+## Emergency Details
+## Disciplinary Details
+## Salary details
+## In Service  Training
+## Generate ID
+## Generate CV
+
+
+#### Health Worker Information 
+
+Add Person
 
 All records in iHRIS have to be populated before any reports can be generated. Health workers details are entered under “Add Person” in the “PEOPLE” module.
 
@@ -78,7 +101,7 @@ The following information can be entered on a health worker’s person record:
 * Driving License Type (select from dropdown)
 * Driving License ID
 
-**Contacts**
+**Contact Details**
 
 * Mobile phone
 * Work Phone
@@ -208,6 +231,20 @@ To add or update information in an existing employee record:
 
 ● Dependent’s Gender (select from dropdown menu)
 
+**Leave Information**
+
+
+**Performance Evaluation**
+
+**Education**
+
+**Emergency**
+
+**Disciplinary**
+
+**In service Training**
+
+
 **Training Details**
 
 ● Click the plus sign if you want to enter training information, then type in the training title in the space that appears.
@@ -222,6 +259,11 @@ Attachment – search your computer to add a document as an attachment to the re
 
 6. When you are done making changes, click the "Save" button at the top of the right sidebar. If you have not entered all of the required fields indicated with a red asterisk, you will not be able to save the record. Review the form by scrolling to determine which required fields still need to be completed.
 You can leave your changes without saving them by clicking the "Cancel" button in the top of the right sidebar.
+
+**Generate ID**
+
+
+**Generate CV**
 
 ## Supplemental Employee Information
 There is supplemental information about an employee that can be added to a Person record after it has been created, but it is not accessible when you are in edit mode (making changes after clicking "Edit" at the top of a record). If you are in edit mode you should Save or Cancel. Then you will see the record again and can view the additional information.
@@ -243,3 +285,4 @@ The supplemental sections include:
 10. Employee Discipline Information
 11. Employee Salary Information
 12. Employee Award Information
+
