@@ -26,3 +26,9 @@ To search, type the name of the person in the “User” field and hit enter to 
 3. Click the “Save” button to change your password.
 
 Note: if you have forgotten the password or user email, get in touch with iHRIS system administrator.
+
+## User Roles
+
+
+## User Role Tasks
+

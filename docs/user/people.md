@@ -13,20 +13,127 @@ Health workers details are managed in the  module “PEOPLE”; which includes t
 Note: before adding any new health workers into iHRIS, first search to establish in that health worker does not already exist in the system.
 
 ## Primary Details
+
+### Basic Employee Information
+
+To add or update information in an existing employee record:
+
+1. Following the process described previously to search for a record, locate the existing employee record that you wish to modify and click on it to open the record.
+2. At the top of the right sidebar click on the "Edit" button.
+
+3. Add information to the record. Here are a few tips:
+
+
+● The record page is broken into multiple sections. You can scroll down to access a different section, or you can click on a section from the right sidebar to skip directly to that section.
+
+● For the fields you wish to edit you can select item(s) from dropdown list(s) or type information directly into the record in any section and field.
+
+● Fields that are required are indicated with a red asterisk. Note: there are additional required fields when editing a record than when initially creating a record.
+
+● Remember that for some fields it will be possible to include more than one entry.
+
+4. The following fields from the Add Person module can be edited after clicking the “Edit” button
+
+1. Photo
+2. Names (Basic Information)
+3. Demographic Details
+4. Identifiers
+5. Contact Details
+6. Language Details
+7. Remarks
+
+5. You can also add or edit additional fields from here, including whether the employee is active, Disability information, Dependent Details, Training Details, and attachment documents.
+ Basic Employee Information
+
+To add or update information in an existing employee record:
+
+1. Following the process described previously to search for a record, locate the existing employee record that you wish to modify and click on it to open the record.
+2. At the top of the right sidebar click on the "Edit" button.
+
+3. Add information to the record. Here are a few tips:
+
+
+● The record page is broken into multiple sections. You can scroll down to access a different section, or you can click on a section from the right sidebar to skip directly to that section.
+
+● For the fields you wish to edit you can select item(s) from dropdown list(s) or type information directly into the record in any section and field.
+
+● Fields that are required are indicated with a red asterisk. Note: there are additional required fields when editing a record than when initially creating a record.
+
+● Remember that for some fields it will be possible to include more than one entry.
+
+4. The following fields from the Add Person module can be edited after clicking the “Edit” button
+
+1. Photo
+2. Names (Basic Information)
+3. Demographic Details
+4. Identifiers
+5. Contact Details
+6. Language Details
+7. Remarks
+
+5. You can also add or edit additional fields from here, including whether the employee is active, Disability information, Dependent Details, Training Details, and attachment documents.
+
+
+
 ## Contact Details
+
+
+
 ## Language Details
+
+
+
 ## Position
+
+
+
 ## Leave Information
+
+
+
 ## Cadres 
+
+
+
 ## Performance Evaluation
+
+
+
 ## Education
+
+
+
 ## Work Experience
+
+
+
 ## Emergency Details
+
+
+
 ## Disciplinary Details
+
+
+
 ## Salary details
+
+
+
 ## In Service  Training
+
+
+
+
 ## Generate ID
+
+
+
+
+
 ## Generate CV
+
+
+
 
 
 #### Health Worker Information 
@@ -180,35 +287,6 @@ Searching using Grand Father’s Names “Ismail” also gives different results
 
 There are two types of information that can be edited in a Person record: the basic information that is included in the initial “Add Person” form when a new record is created, and additional information that is added once a new employee has started work.
 
-##### Basic Employee Information
-
-To add or update information in an existing employee record:
-
-1. Following the process described previously to search for a record, locate the existing employee record that you wish to modify and click on it to open the record.
-2. At the top of the right sidebar click on the "Edit" button.
-
-3. Add information to the record. Here are a few tips:
-
-
-● The record page is broken into multiple sections. You can scroll down to access a different section, or you can click on a section from the right sidebar to skip directly to that section.
-
-● For the fields you wish to edit you can select item(s) from dropdown list(s) or type information directly into the record in any section and field.
-
-● Fields that are required are indicated with a red asterisk. Note: there are additional required fields when editing a record than when initially creating a record.
-
-● Remember that for some fields it will be possible to include more than one entry.
-
-4. The following fields from the Add Person module can be edited after clicking the “Edit” button
-
-1. Photo
-2. Names (Basic Information)
-3. Demographic Details
-4. Identifiers
-5. Contact Details
-6. Language Details
-7. Remarks
-
-5. You can also add or edit additional fields from here, including whether the employee is active, Disability information, Dependent Details, Training Details, and attachment documents.
 
 
 **Disability Details**
@@ -216,6 +294,20 @@ To add or update information in an existing employee record:
 ● Select from the dropdown menu
 
 ● Dropdown options include: Hearing impaired, mentally impaired, mobility impaired, Requires crib, requires crutches, requires gurney, requires walker, requires wheelchair, speech impaired, and vision impaired.
+
+● Click the plus sign if you want to enter training information, then type in the training title in the space that appears.
+● Indicate the category of the training by selecting an option from the dropdown.
+
+ ■ Academic (less than Grade 12 education level)
+ ■ Administrative
+ ■ Health Professional)
+ 
+● Add additional training by clicking the plus sign - see tips on adding multiple entries for one field/section under “Tips for adding information”.
+Attachment – search your computer to add a document as an attachment to the record (add possible reasons or examples of attachments)
+
+6. When you are done making changes, click the "Save" button at the top of the right sidebar. If you have not entered all of the required fields indicated with a red asterisk, you will not be able to save the record. Review the form by scrolling to determine which required fields still need to be completed.
+You can leave your changes without saving them by clicking the "Cancel" button in the top of the right sidebar.
+
 
 **Dependent Details**
 
@@ -231,39 +323,7 @@ To add or update information in an existing employee record:
 
 ● Dependent’s Gender (select from dropdown menu)
 
-**Leave Information**
 
-
-**Performance Evaluation**
-
-**Education**
-
-**Emergency**
-
-**Disciplinary**
-
-**In service Training**
-
-
-**Training Details**
-
-● Click the plus sign if you want to enter training information, then type in the training title in the space that appears.
-● Indicate the category of the training by selecting an option from the dropdown.
-
- ■ Academic (less than Grade 12 education level)
- ■ Administrative
- ■ Health Professional)
- 
-● Add additional training by clicking the plus sign - see tips on adding multiple entries for one field/section under “Tips for adding information”.
-Attachment – search your computer to add a document as an attachment to the record (add possible reasons or examples of attachments)
-
-6. When you are done making changes, click the "Save" button at the top of the right sidebar. If you have not entered all of the required fields indicated with a red asterisk, you will not be able to save the record. Review the form by scrolling to determine which required fields still need to be completed.
-You can leave your changes without saving them by clicking the "Cancel" button in the top of the right sidebar.
-
-**Generate ID**
-
-
-**Generate CV**
 
 ## Supplemental Employee Information
 There is supplemental information about an employee that can be added to a Person record after it has been created, but it is not accessible when you are in edit mode (making changes after clicking "Edit" at the top of a record). If you are in edit mode you should Save or Cancel. Then you will see the record again and can view the additional information.
