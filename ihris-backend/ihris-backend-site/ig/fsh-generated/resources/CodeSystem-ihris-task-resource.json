@@ -63,8 +63,12 @@
     {
       "code": "navigation",
       "display": "Navigation"
+    },
+    {
+      "code": "section",
+      "display": "Page Section"
     }
   ],
   "date": "2021-03-26T09:25:04.362Z",
-  "count": 14
+  "count": 15
 }

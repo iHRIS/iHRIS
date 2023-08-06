@@ -528,7 +528,6 @@ router.get('/page/:page/:type?', function (req, res) {
                     vueOutput += " :links='links'"
                 }
                 vueOutput += '><template #default=\"slotProps\">' + "\n"
-
                 if (structure[fhir].hasOwnProperty("fields")) {
                     let fieldKeys = Object.keys(structure[fhir].fields)
                     for (let field of fieldKeys) {
@@ -699,6 +698,9 @@ router.get('/page/:page/:type?', function (req, res) {
                     '<div class="ihris-intro-float"></div>\n';
 
                 for (let name of sectionKeys) {
+                    if(Object.keys(sections[name].elements).length === 0 && sections[name].columns.length === 0 && sections[name].fields.length === 0) {
+                        continue
+                    }
                     vueOutput += "<ihris-section :slotProps=\"slotProps\" :edit=\"isEdit\" name=\"" + name + "\" title=\"" + sections[name].title + "\" description=\"" + sections[name].description + "\" :secondary=\"" + !!sections[name].resource + "\">\n<template #default=\"slotProps\">\n"
                     if (sections[name].resource) {
                         let secondary = await getDefinition(sections[name].resource)
@@ -927,11 +929,28 @@ router.get('/questionnaire/:questionnaire/:page', async function (req, res) {
     let primaryResourceProfile = ""
     let primaryResourceDef = ""
     let sections = {}
+    let pageFields = {}
     await fhirAxios.read("Basic", page).then(async(resource) => {
         let pageDisplay = resource.extension.find(ext => ext.url === "http://ihris.org/fhir/StructureDefinition/ihris-page-display")
 
         let pageResource = pageDisplay.extension.find(ext => ext.url === "resource").valueReference.reference
         primaryResourceDef = pageResource
+        try {
+            pageDisplay.extension.filter(ext => ext.url === "field").map(ext => {
+                let path = ext.extension.find(subext => subext.url === "path").valueString
+                let type, readOnlyIfSet
+                try {
+                    type = ext.extension.find(subext => subext.url === "type").valueString
+                } catch (err) {
+                }
+                try {
+                    readOnlyIfSet = ext.extension.find(subext => subext.url === "readOnlyIfSet").valueBoolean
+                } catch (err) {
+                }
+                pageFields[path] = {type: type, readOnlyIfSet: readOnlyIfSet}
+            })
+        } catch (err) {
+        }
         if (pageResource.startsWith("CodeSystem")) {
 
             await getProperties(pageResource).then((resource) => {
@@ -1211,6 +1230,10 @@ router.get('/questionnaire/:questionnaire/:page', async function (req, res) {
                     }
                     let fieldPath = item.definition.split("#")[1]
                     let baseProfile = item.definition.split("#")[0]
+                    let readOnlyIfSet = false
+                    if(pageFields[fieldPath]) {
+                        readOnlyIfSet = pageFields[fieldPath].readOnlyIfSet
+                    }
                     let idSlices = fieldPath.split(".")
                     let itemFieldPath = idSlices.pop()
                     let fieldDef = await fhirDefinition.getFieldDefinition(item.definition)
@@ -1275,7 +1298,9 @@ router.get('/questionnaire/:questionnaire/:page', async function (req, res) {
                         }
                     }
                     vueOutput += "<fhir-" + itemType + " field=\"" + itemFieldPath + "\"" + " :slotProps=\"slotProps\" :edit=\"isEdit\" path=\"" + item.linkId + "\"" + "displayCondition=\"" + displayCondition + "\""
-
+                    if(readOnlyIfSet) {
+                        vueOutput += " :readOnlyIfSet=\"true\""
+                    }
                     let field
                     const minmax = ["Date", "DateTime", "Instant", "Time", "Decimal", "Integer", "PositiveInt",
                         "UnsignedInt", "Quantity"]
@@ -1465,15 +1490,17 @@ router.get('/questionnaire/:questionnaire/:page', async function (req, res) {
                                 break
                             }
                         }
-                        let secondary = await getDefinition(section.resource)
-                        const secondaryStructure = fhirDefinition.parseStructureDefinition(secondary)
-                        let secondaryKeys = Object.keys(secondaryStructure)
-                        vueOutput += ' profile="' + secondary.url + '"'
-                        vueOutput += ' field="' + secondaryKeys[0] + '"'
-                        vueOutput += ' link-field="' + section.linkfield + '"'
-                        vueOutput += ' search-field="' + section.searchfield + '"'
-                        vueOutput += ' search-field-target="' + section.searchfieldtarget + '"'
-                        vueOutput += ' :link-id="fhirId"'
+                        if(section.resource) {
+                            let secondary = await getDefinition(section.resource)
+                            const secondaryStructure = fhirDefinition.parseStructureDefinition(secondary)
+                            let secondaryKeys = Object.keys(secondaryStructure)
+                            vueOutput += ' profile="' + secondary.url + '"'
+                            vueOutput += ' field="' + secondaryKeys[0] + '"'
+                            vueOutput += ' link-field="' + section.linkfield + '"'
+                            vueOutput += ' search-field="' + section.searchfield + '"'
+                            vueOutput += ' search-field-target="' + section.searchfieldtarget + '"'
+                            vueOutput += ' :link-id="fhirId"'
+                        }
                     }
                 }
                 let sectionPath = ""
@@ -1573,7 +1600,7 @@ router.get('/report/es/:report', (req, res) => {
             for (let element of reportElements) {
                 let displayName, esField, fieldOrder
                 let label = element.extension.find((ext) => {
-                    return ext.url === 'label'
+                    return ext.url === 'name'
                 })
                 let display = element.extension.find((ext) => {
                     return ext.url === 'display'

@@ -169,7 +169,7 @@ router.get('/listFields/:index', (req, res) => {
     if(elements.length > 0) {
       for(let element of elements) {
         let name = element.find((el) => {
-          return el.url === 'label'
+          return el.url === 'name'
         })?.valueString
         let display = element.find((el) => {
           return el.url === 'display'

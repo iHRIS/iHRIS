@@ -92,10 +92,6 @@
         },
         {
           "url": "field",
-          "valueString": "Basic.extension:emergency.extension:altlangName.value[x]:valueString"
-        },
-        {
-          "url": "field",
           "valueString": "Basic.extension:emergency.extension:relation.value[x]:valueCoding"
         },
         {
@@ -124,23 +120,7 @@
         },
         {
           "url": "field",
-          "valueString": "Basic.extension:emergency.extension:location.value[x]:valueReference"
-        },
-        {
-          "url": "field",
-          "valueString": "Basic.extension:emergency.extension:city.value[x]:valueString"
-        },
-        {
-          "url": "field",
-          "valueString": "Basic.extension:emergency.extension:kebele.value[x]:valueString"
-        },
-        {
-          "url": "field",
-          "valueString": "Basic.extension:emergency.extension:houseNumber.value[x]:valueString"
-        },
-        {
-          "url": "field",
-          "valueString": "Basic.extension:emergency.extension:address.value[x]:valueAddress"
+          "valueString": "Basic.extension:emergency.extension:address.value[x]:valueString"
         },
         {
           "url": "field",

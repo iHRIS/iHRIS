@@ -3160,154 +3160,7 @@
         },
         "type": [
           {
-            "code": "base64Binary"
-          },
-          {
-            "code": "boolean"
-          },
-          {
-            "code": "canonical"
-          },
-          {
-            "code": "code"
-          },
-          {
-            "code": "date"
-          },
-          {
-            "code": "dateTime"
-          },
-          {
-            "code": "decimal"
-          },
-          {
-            "code": "id"
-          },
-          {
-            "code": "instant"
-          },
-          {
-            "code": "integer"
-          },
-          {
-            "code": "markdown"
-          },
-          {
-            "code": "oid"
-          },
-          {
-            "code": "positiveInt"
-          },
-          {
             "code": "string"
-          },
-          {
-            "code": "time"
-          },
-          {
-            "code": "unsignedInt"
-          },
-          {
-            "code": "uri"
-          },
-          {
-            "code": "url"
-          },
-          {
-            "code": "uuid"
-          },
-          {
-            "code": "Address"
-          },
-          {
-            "code": "Age"
-          },
-          {
-            "code": "Annotation"
-          },
-          {
-            "code": "Attachment"
-          },
-          {
-            "code": "CodeableConcept"
-          },
-          {
-            "code": "Coding"
-          },
-          {
-            "code": "ContactPoint"
-          },
-          {
-            "code": "Count"
-          },
-          {
-            "code": "Distance"
-          },
-          {
-            "code": "Duration"
-          },
-          {
-            "code": "HumanName"
-          },
-          {
-            "code": "Identifier"
-          },
-          {
-            "code": "Money"
-          },
-          {
-            "code": "Period"
-          },
-          {
-            "code": "Quantity"
-          },
-          {
-            "code": "Range"
-          },
-          {
-            "code": "Ratio"
-          },
-          {
-            "code": "Reference"
-          },
-          {
-            "code": "SampledData"
-          },
-          {
-            "code": "Signature"
-          },
-          {
-            "code": "Timing"
-          },
-          {
-            "code": "ContactDetail"
-          },
-          {
-            "code": "Contributor"
-          },
-          {
-            "code": "DataRequirement"
-          },
-          {
-            "code": "Expression"
-          },
-          {
-            "code": "ParameterDefinition"
-          },
-          {
-            "code": "RelatedArtifact"
-          },
-          {
-            "code": "TriggerDefinition"
-          },
-          {
-            "code": "UsageContext"
-          },
-          {
-            "code": "Dosage"
-          },
-          {
-            "code": "Meta"
           }
         ],
         "constraint": [
@@ -3333,6 +3186,7 @@
         "id": "Basic.extension:emergency.extension:remark.value[x]:valueString",
         "path": "Basic.extension.extension.value[x]",
         "sliceName": "valueString",
+        "label": "Remark",
         "short": "Value of extension",
         "definition": "Value of extension - must be one of a constrained set of the data types (see [Extensibility](extensibility.html) for a list).",
         "min": 0,
@@ -4184,28 +4038,6 @@
             "profile": [
               "http://ihris.org/fhir/StructureDefinition/ihris-emergency"
             ]
-          }
-        ],
-        "mustSupport": true
-      },
-      {
-        "id": "Basic.extension:emergency.extension:remark",
-        "path": "Basic.extension.extension",
-        "sliceName": "remark"
-      },
-      {
-        "id": "Basic.extension:emergency.extension:remark.extension",
-        "path": "Basic.extension.extension.extension",
-        "max": "0"
-      },
-      {
-        "id": "Basic.extension:emergency.extension:remark.valueString",
-        "path": "Basic.extension.extension.valueString",
-        "min": 0,
-        "max": "1",
-        "type": [
-          {
-            "code": "string"
           }
         ],
         "mustSupport": true

@@ -340,6 +340,14 @@
       },
       {
         "reference": {
+          "reference": "StructureDefinition/location-boundary-geojson"
+        },
+        "name": "Location Boundary (GeoJSON)",
+        "description": "A boundary shape that represents the outside edge of the location (in GeoJSON format) This shape may have holes, and disconnected shapes.",
+        "exampleBoolean": false
+      },
+      {
+        "reference": {
           "reference": "StructureDefinition/task-attributes"
         },
         "name": "Task Attributes",
@@ -877,6 +885,13 @@
         },
         "name": "Country",
         "exampleBoolean": true
+      },
+      {
+        "reference": {
+          "reference": "SearchParameter/active-user"
+        },
+        "name": "active-user",
+        "exampleBoolean": false
       },
       {
         "reference": {
