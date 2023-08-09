@@ -5,7 +5,7 @@ const ihrissmartrequire = require('ihrissmartrequire')
 const fhirAxios = ihrissmartrequire("modules/fhirAxios");
 const logger = require('../../winston')
 const outcomes = ihrissmartrequire('config/operationOutcomes')
-const employeeId = ihrissmartrequire("mployeeIdPrintout");
+const employeeId = ihrissmartrequire("employeeIdPrintout");
 
 router.get("/employeeId/:id", (req, res) => {
   if (req.params.id) {

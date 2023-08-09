@@ -2,22 +2,11 @@ const express = require("express");
 const router = express.Router();
 const path = require("path");
 const { v4: uuidv4 } = require("uuid");
-const XLSX = require("xlsx");
 const ihrissmartrequire = require('ihrissmartrequire')
 const fhirAxios = ihrissmartrequire("modules/fhirAxios");
 const logger = require('../../winston')
-const outcomes = ihrissmartrequire('config/operationOutcomes')
 const bulkRegistration = ihrissmartrequire("bulkRegistration")
 const utils = ihrissmartrequire("utils")
-const fs = require("fs");
-const { nanoid } = require("nanoid");
-
-const trimObjValues = (obj) => {
-  return Object.keys(obj).reduce((acc, curr) => {
-    acc[curr] = typeof obj[curr] == "string" ? obj[curr].trim() : obj[curr];
-    return acc;
-  }, {});
-};
 
 router.get("/csvTemplate", (req, res) => {
   let p = path.join(__dirname, "../", "file/sampleInput.xlsx");

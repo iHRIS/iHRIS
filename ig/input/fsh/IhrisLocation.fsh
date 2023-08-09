@@ -23,13 +23,13 @@ Description:    "iHRIS Profile of Locations to manage jurisdictions."
 * position.latitude ^label = "Latitude"
 * position.longitude MS
 * position.longitude ^label = "Longitude"
-* extension contains http://hl7.org/fhir/StructureDefinition/location-boundary-geojson named boundary 0..1 MS
-* extension[boundary] MS
+* extension contains http://ihris.org/fhir/StructureDefinition/location-boundary-geojson named boundary 0..1 MS
+* extension[boundary] 0..1 MS
 * extension[boundary] ^label = "Location Boundary (GeoJSON)"
-* extension[boundary].valueAttachment 1..1 MS
+* extension[boundary].valueAttachment 0..1 MS
 * extension[boundary].valueAttachment ^label = "Location Boundary (GeoJSON)"
 * extension[boundary].valueAttachment.contentType = #application/geo+json
-* extension[boundary].valueAttachment.data 1..1 MS
+* extension[boundary].valueAttachment.data MS
 
 Alias: $m49.htm = http://unstats.un.org/unsd/methods/m49/m49.htm
 
@@ -58,13 +58,13 @@ Description: "A boundary shape that represents the outside edge of the location 
 * . ^short = "A boundary shape that represents the outside edge of the location (in GeoJSON format)"
 * . ^definition = "A boundary shape that represents the outside edge of the location (in GeoJSON format) This shape may have holes, and disconnected shapes."
 * . ^comment = "The format of the content is GeoJSON in both the JSON and XML formats. It will be stored in the resource using the .data property, and externally referenced via the URL property. The mimetype to be used will be 'application/geo+json'."
-* value[x] 1..
+* value[x] 0..1
 * value[x] only Attachment
 
 Profile:        IhrisFacility
 Parent:         Location
 Id:             ihris-facility
-Title:          "iHRIS Facility"
+Title:          "Facility"
 Description:    "iHRIS Profile of Locations to manage facilities."
 * type 1..* MS
 * type ^label = "Facility Service Type"
@@ -167,18 +167,21 @@ Title:           "Facility Ownership Type"
 ValueSet:         IhrisJurisdictionType
 Id:               ihris-jurisdiction-type
 Title:            "iHRIS Jurisdiction Type ValueSet"
-* ^date = "2020-11-12T08:41:04.362Z"
-* ^version = "0.4.0"
+* ^date = "2023-06-12T08:41:04.362Z"
+* ^version = "0.5.0"
 * codes from system IhrisJurisdictionType
 
 CodeSystem:      IhrisJurisdictionType
 Id:              ihris-jurisdiction-type
 Title:           "Jurisdiction Type"
-* ^date = "2020-11-12T08:41:04.362Z"
-* ^version = "0.4.0"
+* ^date = "2023-06-12T08:41:04.362Z"
+* ^version = "0.5.0"
 * #country "Country" "Country"
+* #region "region" "region"
+* #district "District" "District"
+* #subcounty "Sub-County" "Sub-County"
 * #municipality "Municipality" "Municipality"
-* #subdistrict "Sub District" "Sub District"
+* #parish "Parish" "Parish"
 * #village "Village" "Village"
 
 ValueSet:         IhrisFacilityTypeValueSet
@@ -222,7 +225,7 @@ Description:    "iHRIS extension for Personal Prefix."
 
 Instance:       ihris-page-facility
 InstanceOf:     IhrisPage
-Title:          "iHRIS Facility Page"
+Title:          "Facility"
 Usage:          #example
 * code = IhrisResourceCodeSystem#page
 * extension[display].extension[resource].valueReference = Reference(StructureDefinition/ihris-facility)

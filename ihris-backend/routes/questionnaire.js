@@ -126,8 +126,9 @@ router.post("/QuestionnaireResponse", (req, res, next) => {
 
     } else {
         fhirQuestionnaire.processQuestionnaire(req.body).then((bundle) => {
-            setResourceIds(bundle)
-            logger.debug(JSON.stringify(bundle, null, 2))
+            if(req.query.editing) {
+                setResourceIds(bundle)
+            }
             fhirSecurity.preProcess(bundle).then((uuid) => {
                 fhirFilter.filterBundle("write", bundle, req.user)
                 let errorCheck = checkBundleForError(bundle)
@@ -136,6 +137,7 @@ router.post("/QuestionnaireResponse", (req, res, next) => {
                 }
 
                 fhirAxios.create(bundle).then((results) => {
+                    console.log(JSON.stringify(results,null,2))
                     if (results.entry && results.entry.length > 0 && results.entry[0].response.location) {
                         req.body.subject = {reference: results.entry[0].response.location}
                     }

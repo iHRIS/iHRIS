@@ -257,7 +257,7 @@ Usage:          #definition
 * item[2].item[4].definition = "http://ihris.org/fhir/StructureDefinition/ihris-practitioner-role#PractitionerRole.location"
 * item[2].item[4].text = "Facility"
 * item[2].item[4].type = #reference
-* item[2].item[4].required = true
+* item[2].item[4].required = false
 * item[2].item[4].repeats = false
 
 * item[3].linkId = "Practitioner.identifier"

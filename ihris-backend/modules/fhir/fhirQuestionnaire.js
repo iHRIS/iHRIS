@@ -264,12 +264,9 @@ const fhirQuestionnaire = {
   },
   processQuestionnaire: (response) => {
     return new Promise( (resolve,reject) => {
-
       fhirQuestionnaire.setQuestionnairePaths(response)
-
       let qId = response.questionnaire.substring( response.questionnaire.lastIndexOf('/')+1 )
       fhirAxios.read("Questionnaire", qId).then( async (questionnaire) => {
-
         let questionnaireRef = {}
         const flattenItems = ( items, questionnaireRef ) => {
           for( let item of items ) {
@@ -280,7 +277,6 @@ const fhirQuestionnaire = {
           }
         }
         flattenItems( questionnaire.item, questionnaireRef )
-
         let fields = []
         const capitalize = (str) => {
           return str[0].toUpperCase() + str.slice(1)
@@ -476,6 +472,7 @@ const fhirQuestionnaire = {
         resolve(bundle)
 
       } ).catch( (err) => {
+        console.log("ERROR: ", err)
         reject( err )
       } )
     } )
