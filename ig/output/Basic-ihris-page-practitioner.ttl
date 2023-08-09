@@ -1,0 +1,1189 @@
+@prefix fhir: <http://hl7.org/fhir/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+# - resource -------------------------------------------------------------------
+
+<http://ihris.org/fhir/Basic/ihris-page-practitioner> a fhir:Basic ;
+  fhir:nodeRole fhir:treeRoot ;
+  fhir:id [ fhir:v "ihris-page-practitioner"] ; # 
+  fhir:meta [
+     fhir:profile ( [
+       fhir:v "http://ihris.org/fhir/StructureDefinition/ihris-page"^^xsd:anyURI ;
+       fhir:link <http://ihris.org/fhir/StructureDefinition/ihris-page>
+     ] )
+  ] ; # 
+  fhir:text [
+     fhir:status [ fhir:v "extensions" ] ;
+     fhir:div "<div xmlns=\"http://www.w3.org/1999/xhtml\"><p><b>Generated Narrative: Basic</b><a name=\"ihris-page-practitioner\"> </a></p><div style=\"display: inline-block; background-color: #d9e0e7; padding: 6px; margin: 4px; border: 1px solid #8da1b4; border-radius: 5px; line-height: 60%\"><p style=\"margin-bottom: 0px\">Resource Basic &quot;ihris-page-practitioner&quot; </p><p style=\"margin-bottom: 0px\">Profile: <a href=\"StructureDefinition-ihris-page.html\">iHRIS Page</a></p></div><blockquote><p><b>iHRIS Page Display</b></p><blockquote><p><b>url</b></p><code>resource</code></blockquote><p><b>value</b>: <a href=\"StructureDefinition-ihris-practitioner.html\">StructureDefinition/ihris-practitioner</a> &quot;IhrisPractitioner&quot;</p><blockquote><p><b>url</b></p><code>search</code></blockquote><p><b>value</b>: Surname|Practitioner.name.where(use='official').family</p><blockquote><p><b>url</b></p><code>filter</code></blockquote><p><b>value</b>: Name|name:contains</p><p><b>url</b>: <code>/questionnaire/ihris-practitioner/practitioner</code></p><blockquote><p><b>url</b></p><code>add</code></blockquote><p><b>url</b>: <code>/resource/view/practitioner/FIELD?edit=true</code></p><blockquote><p><b>url</b></p><code>link</code></blockquote></blockquote><blockquote><p><b>iHRIS Page Section</b></p><blockquote><p><b>url</b></p><code>title</code></blockquote><p><b>value</b>: Health Worker</p><blockquote><p><b>url</b></p><code>description</code></blockquote><p><b>value</b>: Primary demographic details</p><blockquote><p><b>url</b></p><code>name</code></blockquote><p><b>value</b>: Practitioner</p><blockquote><p><b>url</b></p><code>field</code></blockquote><p><b>value</b>: Practitioner.name</p><blockquote><p><b>url</b></p><code>field</code></blockquote><p><b>value</b>: Practitioner.name.given</p><blockquote><p><b>url</b></p><code>field</code></blockquote><p><b>value</b>: Practitioner.name.family</p><blockquote><p><b>url</b></p><code>field</code></blockquote><p><b>value</b>: Practitioner.birthDate</p><blockquote><p><b>url</b></p><code>field</code></blockquote><p><b>value</b>: Practitioner.gender</p><blockquote><p><b>url</b></p><code>field</code></blockquote><p><b>value</b>: Practitioner.extension:residence</p></blockquote><blockquote><p><b>iHRIS Page Section</b></p><blockquote><p><b>url</b></p><code>title</code></blockquote><p><b>value</b>: Identifiers</p><blockquote><p><b>url</b></p><code>description</code></blockquote><p><b>value</b>: Personal identifiers</p><blockquote><p><b>url</b></p><code>name</code></blockquote><p><b>value</b>: identifiers</p><blockquote><p><b>url</b></p><code>field</code></blockquote><p><b>value</b>: Practitioner.identifier</p><blockquote><p><b>url</b></p><code>field</code></blockquote><p><b>value</b>: Practitioner.identifier.use</p><blockquote><p><b>url</b></p><code>field</code></blockquote><p><b>value</b>: Practitioner.identifier.type</p><blockquote><p><b>url</b></p><code>field</code></blockquote><p><b>value</b>: Practitioner.identifier.value</p><blockquote><p><b>url</b></p><code>field</code></blockquote><p><b>value</b>: Practitioner.identifier.system</p></blockquote><blockquote><p><b>iHRIS Page Section</b></p><blockquote><p><b>url</b></p><code>title</code></blockquote><p><b>value</b>: Contact Details</p><blockquote><p><b>url</b></p><code>description</code></blockquote><p><b>value</b>: Address, email, phone numbers</p><blockquote><p><b>url</b></p><code>name</code></blockquote><p><b>value</b>: contact</p><blockquote><p><b>url</b></p><code>field</code></blockquote><p><b>value</b>: Practitioner.address</p><blockquote><p><b>url</b></p><code>field</code></blockquote><p><b>value</b>: Practitioner.telecom</p></blockquote><blockquote><p><b>iHRIS Page Section</b></p><blockquote><p><b>url</b></p><code>title</code></blockquote><p><b>value</b>: Language Details</p><blockquote><p><b>url</b></p><code>description</code></blockquote><p><b>value</b>: Languages spoken</p><blockquote><p><b>url</b></p><code>name</code></blockquote><p><b>value</b>: language</p><blockquote><p><b>url</b></p><code>field</code></blockquote><p><b>value</b>: Practitioner.communication</p></blockquote><blockquote><p><b>iHRIS Page Section</b></p><blockquote><p><b>url</b></p><code>title</code></blockquote><p><b>value</b>: Position</p><blockquote><p><b>url</b></p><code>description</code></blockquote><p><b>value</b>: Position the person holds</p><blockquote><p><b>url</b></p><code>name</code></blockquote><p><b>value</b>: position</p><blockquote><p><b>url</b></p><code>field</code></blockquote><p><b>value</b>: PractitionerRole.code</p><blockquote><p><b>url</b></p><code>resource</code></blockquote></blockquote><blockquote><p><b>iHRIS Page Section</b></p><blockquote><p><b>url</b></p><code>title</code></blockquote><p><b>value</b>: Leave Information</p><blockquote><p><b>url</b></p><code>description</code></blockquote><p><b>value</b>: Leave Details for the Person</p><blockquote><p><b>url</b></p><code>name</code></blockquote><p><b>value</b>: leave</p><blockquote><p><b>url</b></p><code>resource</code></blockquote></blockquote><blockquote><p><b>iHRIS Page Section</b></p><blockquote><p><b>url</b></p><code>title</code></blockquote><p><b>value</b>: Performance Evaluation Information</p><blockquote><p><b>url</b></p><code>description</code></blockquote><p><b>value</b>: Performance Evaluation for the Person</p><blockquote><p><b>url</b></p><code>name</code></blockquote><p><b>value</b>: performance</p><blockquote><p><b>url</b></p><code>resource</code></blockquote></blockquote><blockquote><p><b>iHRIS Page Section</b></p><blockquote><p><b>url</b></p><code>title</code></blockquote><p><b>value</b>: Education History</p><blockquote><p><b>url</b></p><code>description</code></blockquote><p><b>value</b>: Education History Details for the Person</p><blockquote><p><b>url</b></p><code>name</code></blockquote><p><b>value</b>: education-history</p><blockquote><p><b>url</b></p><code>resource</code></blockquote></blockquote><blockquote><p><b>iHRIS Page Section</b></p><blockquote><p><b>url</b></p><code>title</code></blockquote><p><b>value</b>: Work Experience</p><blockquote><p><b>url</b></p><code>description</code></blockquote><p><b>value</b>: Work Experience for the Person</p><blockquote><p><b>url</b></p><code>name</code></blockquote><p><b>value</b>: employment-history</p><blockquote><p><b>url</b></p><code>resource</code></blockquote></blockquote><blockquote><p><b>iHRIS Page Section</b></p><blockquote><p><b>url</b></p><code>title</code></blockquote><p><b>value</b>: Emergency Contact</p><blockquote><p><b>url</b></p><code>description</code></blockquote><p><b>value</b>: Emergency Contact for the Person</p><blockquote><p><b>url</b></p><code>name</code></blockquote><p><b>value</b>: emergency</p><blockquote><p><b>url</b></p><code>resource</code></blockquote></blockquote><blockquote><p><b>iHRIS Page Section</b></p><blockquote><p><b>url</b></p><code>title</code></blockquote><p><b>value</b>: Employee Disciplinary Information</p><blockquote><p><b>url</b></p><code>description</code></blockquote><p><b>value</b>: Employee Discipline for the Person</p><blockquote><p><b>url</b></p><code>name</code></blockquote><p><b>value</b>: Employee Discipline</p><blockquote><p><b>url</b></p><code>resource</code></blockquote></blockquote><blockquote><p><b>iHRIS Page Section</b></p><blockquote><p><b>url</b></p><code>title</code></blockquote><p><b>value</b>: Employee Salary Information</p><blockquote><p><b>url</b></p><code>description</code></blockquote><p><b>value</b>: Employee Salary Information for the Person</p><blockquote><p><b>url</b></p><code>name</code></blockquote><p><b>value</b>: Employee Salary Information</p><blockquote><p><b>url</b></p><code>resource</code></blockquote></blockquote><blockquote><p><b>iHRIS Page Section</b></p><blockquote><p><b>url</b></p><code>title</code></blockquote><p><b>value</b>: In-Service Training Information</p><blockquote><p><b>url</b></p><code>description</code></blockquote><p><b>value</b>: In-Service Training Information for the Person</p><blockquote><p><b>url</b></p><code>name</code></blockquote><p><b>value</b>: In-Service Training Information</p><blockquote><p><b>url</b></p><code>resource</code></blockquote></blockquote><p><b>code</b>: iHRIS Page <span style=\"background: LightGoldenRodYellow; margin: 4px; border: 1px solid khaki\"> (<a href=\"CodeSystem-ihris-resource-codesystem.html\">Code System for iHRIS Basic Resources.</a>#page)</span></p></div>"
+  ] ; # 
+  fhir:extension ( [
+     fhir:extension ( [
+       fhir:url [ fhir:v "resource"^^xsd:anyURI ] ;
+       fhir:value [
+         a fhir:Reference ;
+         fhir:link <http://ihris.org/fhir/StructureDefinition/ihris-practitioner> ;
+         fhir:reference [ fhir:v "StructureDefinition/ihris-practitioner" ]
+       ]
+     ] [
+       fhir:url [ fhir:v "search"^^xsd:anyURI ] ;
+       fhir:value [ fhir:v "Surname|Practitioner.name.where(use='official').family" ]
+     ] [
+       fhir:url [ fhir:v "filter"^^xsd:anyURI ] ;
+       fhir:value [ fhir:v "Name|name:contains" ]
+     ] [
+       fhir:extension ( [
+         fhir:url [ fhir:v "url"^^xsd:anyURI ] ;
+         fhir:value [ fhir:v "/questionnaire/ihris-practitioner/practitioner"^^xsd:anyURI ]
+       ] [
+         fhir:url [ fhir:v "icon"^^xsd:anyURI ] ;
+         fhir:value [ fhir:v "mdi-account-plus" ]
+       ] [
+         fhir:url [ fhir:v "class"^^xsd:anyURI ] ;
+         fhir:value [ fhir:v "accent" ]
+       ] ) ;
+       fhir:url [ fhir:v "add"^^xsd:anyURI ]
+     ] [
+       fhir:extension ( [
+         fhir:url [ fhir:v "url"^^xsd:anyURI ] ;
+         fhir:value [ fhir:v "/resource/view/practitioner/FIELD?edit=true"^^xsd:anyURI ]
+       ] [
+         fhir:url [ fhir:v "field"^^xsd:anyURI ] ;
+         fhir:value [ fhir:v "Practitioner.id" ]
+       ] [
+         fhir:url [ fhir:v "text"^^xsd:anyURI ] ;
+         fhir:value [ fhir:v "Edit" ]
+       ] [
+         fhir:url [ fhir:v "button"^^xsd:anyURI ] ;
+         fhir:value [ fhir:v "true"^^xsd:boolean ]
+       ] [
+         fhir:url [ fhir:v "icon"^^xsd:anyURI ] ;
+         fhir:value [ fhir:v "mdi-pencil" ]
+       ] [
+         fhir:url [ fhir:v "class"^^xsd:anyURI ] ;
+         fhir:value [ fhir:v "secondary" ]
+       ] ) ;
+       fhir:url [ fhir:v "link"^^xsd:anyURI ]
+     ] ) ;
+     fhir:url [ fhir:v "http://ihris.org/fhir/StructureDefinition/ihris-page-display"^^xsd:anyURI ]
+  ] [
+     fhir:extension ( [
+       fhir:url [ fhir:v "title"^^xsd:anyURI ] ;
+       fhir:value [ fhir:v "Health Worker" ]
+     ] [
+       fhir:url [ fhir:v "description"^^xsd:anyURI ] ;
+       fhir:value [ fhir:v "Primary demographic details" ]
+     ] [
+       fhir:url [ fhir:v "name"^^xsd:anyURI ] ;
+       fhir:value [ fhir:v "Practitioner" ]
+     ] [
+       fhir:url [ fhir:v "field"^^xsd:anyURI ] ;
+       fhir:value [ fhir:v "Practitioner.name" ]
+     ] [
+       fhir:url [ fhir:v "field"^^xsd:anyURI ] ;
+       fhir:value [ fhir:v "Practitioner.name.given" ]
+     ] [
+       fhir:url [ fhir:v "field"^^xsd:anyURI ] ;
+       fhir:value [ fhir:v "Practitioner.name.family" ]
+     ] [
+       fhir:url [ fhir:v "field"^^xsd:anyURI ] ;
+       fhir:value [ fhir:v "Practitioner.birthDate" ]
+     ] [
+       fhir:url [ fhir:v "field"^^xsd:anyURI ] ;
+       fhir:value [ fhir:v "Practitioner.gender" ]
+     ] [
+       fhir:url [ fhir:v "field"^^xsd:anyURI ] ;
+       fhir:value [ fhir:v "Practitioner.extension:residence" ]
+     ] ) ;
+     fhir:url [ fhir:v "http://ihris.org/fhir/StructureDefinition/ihris-page-section"^^xsd:anyURI ]
+  ] [
+     fhir:extension ( [
+       fhir:url [ fhir:v "title"^^xsd:anyURI ] ;
+       fhir:value [ fhir:v "Identifiers" ]
+     ] [
+       fhir:url [ fhir:v "description"^^xsd:anyURI ] ;
+       fhir:value [ fhir:v "Personal identifiers" ]
+     ] [
+       fhir:url [ fhir:v "name"^^xsd:anyURI ] ;
+       fhir:value [ fhir:v "identifiers" ]
+     ] [
+       fhir:url [ fhir:v "field"^^xsd:anyURI ] ;
+       fhir:value [ fhir:v "Practitioner.identifier" ]
+     ] [
+       fhir:url [ fhir:v "field"^^xsd:anyURI ] ;
+       fhir:value [ fhir:v "Practitioner.identifier.use" ]
+     ] [
+       fhir:url [ fhir:v "field"^^xsd:anyURI ] ;
+       fhir:value [ fhir:v "Practitioner.identifier.type" ]
+     ] [
+       fhir:url [ fhir:v "field"^^xsd:anyURI ] ;
+       fhir:value [ fhir:v "Practitioner.identifier.value" ]
+     ] [
+       fhir:url [ fhir:v "field"^^xsd:anyURI ] ;
+       fhir:value [ fhir:v "Practitioner.identifier.system" ]
+     ] ) ;
+     fhir:url [ fhir:v "http://ihris.org/fhir/StructureDefinition/ihris-page-section"^^xsd:anyURI ]
+  ] [
+     fhir:extension ( [
+       fhir:url [ fhir:v "title"^^xsd:anyURI ] ;
+       fhir:value [ fhir:v "Contact Details" ]
+     ] [
+       fhir:url [ fhir:v "description"^^xsd:anyURI ] ;
+       fhir:value [ fhir:v "Address, email, phone numbers" ]
+     ] [
+       fhir:url [ fhir:v "name"^^xsd:anyURI ] ;
+       fhir:value [ fhir:v "contact" ]
+     ] [
+       fhir:url [ fhir:v "field"^^xsd:anyURI ] ;
+       fhir:value [ fhir:v "Practitioner.address" ]
+     ] [
+       fhir:url [ fhir:v "field"^^xsd:anyURI ] ;
+       fhir:value [ fhir:v "Practitioner.telecom" ]
+     ] ) ;
+     fhir:url [ fhir:v "http://ihris.org/fhir/StructureDefinition/ihris-page-section"^^xsd:anyURI ]
+  ] [
+     fhir:extension ( [
+       fhir:url [ fhir:v "title"^^xsd:anyURI ] ;
+       fhir:value [ fhir:v "Language Details" ]
+     ] [
+       fhir:url [ fhir:v "description"^^xsd:anyURI ] ;
+       fhir:value [ fhir:v "Languages spoken" ]
+     ] [
+       fhir:url [ fhir:v "name"^^xsd:anyURI ] ;
+       fhir:value [ fhir:v "language" ]
+     ] [
+       fhir:url [ fhir:v "field"^^xsd:anyURI ] ;
+       fhir:value [ fhir:v "Practitioner.communication" ]
+     ] ) ;
+     fhir:url [ fhir:v "http://ihris.org/fhir/StructureDefinition/ihris-page-section"^^xsd:anyURI ]
+  ] [
+     fhir:extension ( [
+       fhir:url [ fhir:v "title"^^xsd:anyURI ] ;
+       fhir:value [ fhir:v "Position" ]
+     ] [
+       fhir:url [ fhir:v "description"^^xsd:anyURI ] ;
+       fhir:value [ fhir:v "Position the person holds" ]
+     ] [
+       fhir:url [ fhir:v "name"^^xsd:anyURI ] ;
+       fhir:value [ fhir:v "position" ]
+     ] [
+       fhir:url [ fhir:v "field"^^xsd:anyURI ] ;
+       fhir:value [ fhir:v "PractitionerRole.code" ]
+     ] [
+       fhir:extension ( [
+         fhir:url [ fhir:v "resource"^^xsd:anyURI ] ;
+         fhir:value [
+           a fhir:Reference ;
+           fhir:link <http://ihris.org/fhir/StructureDefinition/ihris-practitioner-role> ;
+           fhir:reference [ fhir:v "StructureDefinition/ihris-practitioner-role" ]
+         ]
+       ] [
+         fhir:url [ fhir:v "linkfield"^^xsd:anyURI ] ;
+         fhir:value [ fhir:v "PractitionerRole.practitioner" ]
+       ] [
+         fhir:extension ( [
+           fhir:url [ fhir:v "header"^^xsd:anyURI ] ;
+           fhir:value [ fhir:v "Job" ]
+         ] [
+           fhir:url [ fhir:v "field"^^xsd:anyURI ] ;
+           fhir:value [ fhir:v "PractitionerRole.code.coding[0]" ]
+         ] ) ;
+         fhir:url [ fhir:v "column"^^xsd:anyURI ]
+       ] [
+         fhir:extension ( [
+           fhir:url [ fhir:v "header"^^xsd:anyURI ] ;
+           fhir:value [ fhir:v "Start Date" ]
+         ] [
+           fhir:url [ fhir:v "field"^^xsd:anyURI ] ;
+           fhir:value [ fhir:v "PractitionerRole.period.start" ]
+         ] ) ;
+         fhir:url [ fhir:v "column"^^xsd:anyURI ]
+       ] [
+         fhir:extension ( [
+           fhir:url [ fhir:v "header"^^xsd:anyURI ] ;
+           fhir:value [ fhir:v "End Date" ]
+         ] [
+           fhir:url [ fhir:v "field"^^xsd:anyURI ] ;
+           fhir:value [ fhir:v "PractitionerRole.period.end" ]
+         ] ) ;
+         fhir:url [ fhir:v "column"^^xsd:anyURI ]
+       ] [
+         fhir:extension ( [
+           fhir:url [ fhir:v "header"^^xsd:anyURI ] ;
+           fhir:value [ fhir:v "Actions" ]
+         ] [
+           fhir:url [ fhir:v "field"^^xsd:anyURI ] ;
+           fhir:value [ fhir:v "_action" ]
+         ] ) ;
+         fhir:url [ fhir:v "column"^^xsd:anyURI ]
+       ] [
+         fhir:extension ( [
+           fhir:url [ fhir:v "link"^^xsd:anyURI ] ;
+           fhir:value [ fhir:v "/resource/add/practitionerrole?PractitionerRole.practitioner.reference=Practitioner/FHIRID" ]
+         ] [
+           fhir:url [ fhir:v "text"^^xsd:anyURI ] ;
+           fhir:value [ fhir:v "Assign Job" ]
+         ] [
+           fhir:url [ fhir:v "row"^^xsd:anyURI ] ;
+           fhir:value [ fhir:v "false"^^xsd:boolean ]
+         ] [
+           fhir:url [ fhir:v "emptyDisplay"^^xsd:anyURI ] ;
+           fhir:value [ fhir:v "true"^^xsd:boolean ]
+         ] [
+           fhir:url [ fhir:v "condition"^^xsd:anyURI ] ;
+           fhir:value [ fhir:v "PractitionerRole.period.end.exists()" ]
+         ] [
+           fhir:url [ fhir:v "class"^^xsd:anyURI ] ;
+           fhir:value [ fhir:v "primary" ]
+         ] ) ;
+         fhir:url [ fhir:v "action"^^xsd:anyURI ]
+       ] [
+         fhir:extension ( [
+           fhir:url [ fhir:v "link"^^xsd:anyURI ] ;
+           fhir:value [ fhir:v "/resource/view/practitionerrole/ITEMID" ]
+         ] [
+           fhir:url [ fhir:v "text"^^xsd:anyURI ] ;
+           fhir:value [ fhir:v "View" ]
+         ] [
+           fhir:url [ fhir:v "row"^^xsd:anyURI ] ;
+           fhir:value [ fhir:v "true"^^xsd:boolean ]
+         ] [
+           fhir:url [ fhir:v "class"^^xsd:anyURI ] ;
+           fhir:value [ fhir:v "primary" ]
+         ] ) ;
+         fhir:url [ fhir:v "action"^^xsd:anyURI ]
+       ] [
+         fhir:extension ( [
+           fhir:url [ fhir:v "link"^^xsd:anyURI ] ;
+           fhir:value [ fhir:v "/questionnaire/ihris-endrole/practitioner?practitionerrole=ITEMID" ]
+         ] [
+           fhir:url [ fhir:v "text"^^xsd:anyURI ] ;
+           fhir:value [ fhir:v "End Job" ]
+         ] [
+           fhir:url [ fhir:v "row"^^xsd:anyURI ] ;
+           fhir:value [ fhir:v "true"^^xsd:boolean ]
+         ] [
+           fhir:url [ fhir:v "condition"^^xsd:anyURI ] ;
+           fhir:value [ fhir:v "PractitionerRole.period.end.empty()" ]
+         ] [
+           fhir:url [ fhir:v "class"^^xsd:anyURI ] ;
+           fhir:value [ fhir:v "warning" ]
+         ] ) ;
+         fhir:url [ fhir:v "action"^^xsd:anyURI ]
+       ] [
+         fhir:extension ( [
+           fhir:url [ fhir:v "link"^^xsd:anyURI ] ;
+           fhir:value [ fhir:v "/questionnaire/ihris-promotion/practitioner?practitionerrole=ITEMID" ]
+         ] [
+           fhir:url [ fhir:v "text"^^xsd:anyURI ] ;
+           fhir:value [ fhir:v "Enter Promotion" ]
+         ] [
+           fhir:url [ fhir:v "row"^^xsd:anyURI ] ;
+           fhir:value [ fhir:v "true"^^xsd:boolean ]
+         ] [
+           fhir:url [ fhir:v "condition"^^xsd:anyURI ] ;
+           fhir:value [ fhir:v "PractitionerRole.period.end.empty()" ]
+         ] [
+           fhir:url [ fhir:v "class"^^xsd:anyURI ] ;
+           fhir:value [ fhir:v "accent" ]
+         ] ) ;
+         fhir:url [ fhir:v "action"^^xsd:anyURI ]
+       ] ) ;
+       fhir:url [ fhir:v "resource"^^xsd:anyURI ]
+     ] ) ;
+     fhir:url [ fhir:v "http://ihris.org/fhir/StructureDefinition/ihris-page-section"^^xsd:anyURI ]
+  ] [
+     fhir:extension ( [
+       fhir:url [ fhir:v "title"^^xsd:anyURI ] ;
+       fhir:value [ fhir:v "Leave Information" ]
+     ] [
+       fhir:url [ fhir:v "description"^^xsd:anyURI ] ;
+       fhir:value [ fhir:v "Leave Details for the Person" ]
+     ] [
+       fhir:url [ fhir:v "name"^^xsd:anyURI ] ;
+       fhir:value [ fhir:v "leave" ]
+     ] [
+       fhir:extension ( [
+         fhir:url [ fhir:v "resource"^^xsd:anyURI ] ;
+         fhir:value [
+           a fhir:Reference ;
+           fhir:link <http://ihris.org/fhir/StructureDefinition/ihris-basic-leave> ;
+           fhir:reference [ fhir:v "StructureDefinition/ihris-basic-leave" ]
+         ]
+       ] [
+         fhir:url [ fhir:v "linkfield"^^xsd:anyURI ] ;
+         fhir:value [ fhir:v "Basic.extension.where(url='http://ihris.org/fhir/StructureDefinition/ihris-practitioner-reference').valueReference.reference" ]
+       ] [
+         fhir:extension ( [
+           fhir:url [ fhir:v "header"^^xsd:anyURI ] ;
+           fhir:value [ fhir:v "Leave Type" ]
+         ] [
+           fhir:url [ fhir:v "field"^^xsd:anyURI ] ;
+           fhir:value [ fhir:v "extension.where(url='http://ihris.org/fhir/StructureDefinition/ihris-leave').extension.where(url='leave-type').valueCoding" ]
+         ] ) ;
+         fhir:url [ fhir:v "column"^^xsd:anyURI ]
+       ] [
+         fhir:url [ fhir:v "searchfield"^^xsd:anyURI ] ;
+         fhir:value [ fhir:v "practitioner" ]
+       ] [
+         fhir:extension ( [
+           fhir:url [ fhir:v "header"^^xsd:anyURI ] ;
+           fhir:value [ fhir:v "Days Requested" ]
+         ] [
+           fhir:url [ fhir:v "field"^^xsd:anyURI ] ;
+           fhir:value [ fhir:v "extension.where(url='http://ihris.org/fhir/StructureDefinition/ihris-leave').extension.where(url='daysRequested').valueInteger" ]
+         ] ) ;
+         fhir:url [ fhir:v "column"^^xsd:anyURI ]
+       ] [
+         fhir:extension ( [
+           fhir:url [ fhir:v "header"^^xsd:anyURI ] ;
+           fhir:value [ fhir:v "Requested Date" ]
+         ] [
+           fhir:url [ fhir:v "field"^^xsd:anyURI ] ;
+           fhir:value [ fhir:v "extension.where(url='http://ihris.org/fhir/StructureDefinition/ihris-leave').extension.where(url='dateRequested').valueDate" ]
+         ] ) ;
+         fhir:url [ fhir:v "column"^^xsd:anyURI ]
+       ] [
+         fhir:extension ( [
+           fhir:url [ fhir:v "header"^^xsd:anyURI ] ;
+           fhir:value [ fhir:v "Start Date" ]
+         ] [
+           fhir:url [ fhir:v "field"^^xsd:anyURI ] ;
+           fhir:value [ fhir:v "extension.where(url='http://ihris.org/fhir/StructureDefinition/ihris-leave').extension.where(url='period').valuePeriod.start" ]
+         ] ) ;
+         fhir:url [ fhir:v "column"^^xsd:anyURI ]
+       ] [
+         fhir:extension ( [
+           fhir:url [ fhir:v "header"^^xsd:anyURI ] ;
+           fhir:value [ fhir:v "End Date" ]
+         ] [
+           fhir:url [ fhir:v "field"^^xsd:anyURI ] ;
+           fhir:value [ fhir:v "extension.where(url='http://ihris.org/fhir/StructureDefinition/ihris-leave').extension.where(url='period').valuePeriod.end" ]
+         ] ) ;
+         fhir:url [ fhir:v "column"^^xsd:anyURI ]
+       ] [
+         fhir:extension ( [
+           fhir:url [ fhir:v "header"^^xsd:anyURI ] ;
+           fhir:value [ fhir:v "Actions" ]
+         ] [
+           fhir:url [ fhir:v "field"^^xsd:anyURI ] ;
+           fhir:value [ fhir:v "_action" ]
+         ] ) ;
+         fhir:url [ fhir:v "column"^^xsd:anyURI ]
+       ] [
+         fhir:extension ( [
+           fhir:url [ fhir:v "link"^^xsd:anyURI ] ;
+           fhir:value [ fhir:v "/questionnaire/ihris-leave/leave?practitioner=FHIRID" ]
+         ] [
+           fhir:url [ fhir:v "text"^^xsd:anyURI ] ;
+           fhir:value [ fhir:v "Add Leave" ]
+         ] [
+           fhir:url [ fhir:v "row"^^xsd:anyURI ] ;
+           fhir:value [ fhir:v "false"^^xsd:boolean ]
+         ] [
+           fhir:url [ fhir:v "emptyDisplay"^^xsd:anyURI ] ;
+           fhir:value [ fhir:v "true"^^xsd:boolean ]
+         ] [
+           fhir:url [ fhir:v "class"^^xsd:anyURI ] ;
+           fhir:value [ fhir:v "primary" ]
+         ] ) ;
+         fhir:url [ fhir:v "action"^^xsd:anyURI ]
+       ] [
+         fhir:extension ( [
+           fhir:url [ fhir:v "link"^^xsd:anyURI ] ;
+           fhir:value [ fhir:v "/resource/view/leave/ITEMID" ]
+         ] [
+           fhir:url [ fhir:v "text"^^xsd:anyURI ] ;
+           fhir:value [ fhir:v "View" ]
+         ] [
+           fhir:url [ fhir:v "row"^^xsd:anyURI ] ;
+           fhir:value [ fhir:v "true"^^xsd:boolean ]
+         ] [
+           fhir:url [ fhir:v "class"^^xsd:anyURI ] ;
+           fhir:value [ fhir:v "primary" ]
+         ] ) ;
+         fhir:url [ fhir:v "action"^^xsd:anyURI ]
+       ] ) ;
+       fhir:url [ fhir:v "resource"^^xsd:anyURI ]
+     ] ) ;
+     fhir:url [ fhir:v "http://ihris.org/fhir/StructureDefinition/ihris-page-section"^^xsd:anyURI ]
+  ] [
+     fhir:extension ( [
+       fhir:url [ fhir:v "title"^^xsd:anyURI ] ;
+       fhir:value [ fhir:v "Performance Evaluation Information" ]
+     ] [
+       fhir:url [ fhir:v "description"^^xsd:anyURI ] ;
+       fhir:value [ fhir:v "Performance Evaluation for the Person" ]
+     ] [
+       fhir:url [ fhir:v "name"^^xsd:anyURI ] ;
+       fhir:value [ fhir:v "performance" ]
+     ] [
+       fhir:extension ( [
+         fhir:url [ fhir:v "resource"^^xsd:anyURI ] ;
+         fhir:value [
+           a fhir:Reference ;
+           fhir:link <http://ihris.org/fhir/StructureDefinition/ihris-basic-performance> ;
+           fhir:reference [ fhir:v "StructureDefinition/ihris-basic-performance" ]
+         ]
+       ] [
+         fhir:url [ fhir:v "linkfield"^^xsd:anyURI ] ;
+         fhir:value [ fhir:v "Basic.extension.where(url='http://ihris.org/fhir/StructureDefinition/ihris-practitioner-reference').valueReference.reference" ]
+       ] [
+         fhir:extension ( [
+           fhir:url [ fhir:v "header"^^xsd:anyURI ] ;
+           fhir:value [ fhir:v "Evaluator's Name" ]
+         ] [
+           fhir:url [ fhir:v "field"^^xsd:anyURI ] ;
+           fhir:value [ fhir:v "extension.where(url='http://ihris.org/fhir/StructureDefinition/ihris-performance').extension.where(url='evaluator').valueString" ]
+         ] ) ;
+         fhir:url [ fhir:v "column"^^xsd:anyURI ]
+       ] [
+         fhir:url [ fhir:v "searchfield"^^xsd:anyURI ] ;
+         fhir:value [ fhir:v "practitioner" ]
+       ] [
+         fhir:extension ( [
+           fhir:url [ fhir:v "header"^^xsd:anyURI ] ;
+           fhir:value [ fhir:v "Score" ]
+         ] [
+           fhir:url [ fhir:v "field"^^xsd:anyURI ] ;
+           fhir:value [ fhir:v "extension.where(url='http://ihris.org/fhir/StructureDefinition/ihris-performance').extension.where(url='score').valueCoding.display" ]
+         ] ) ;
+         fhir:url [ fhir:v "column"^^xsd:anyURI ]
+       ] [
+         fhir:extension ( [
+           fhir:url [ fhir:v "header"^^xsd:anyURI ] ;
+           fhir:value [ fhir:v "Start Date" ]
+         ] [
+           fhir:url [ fhir:v "field"^^xsd:anyURI ] ;
+           fhir:value [ fhir:v "extension.where(url='http://ihris.org/fhir/StructureDefinition/ihris-performance').extension.where(url='period').valuePeriod.start" ]
+         ] ) ;
+         fhir:url [ fhir:v "column"^^xsd:anyURI ]
+       ] [
+         fhir:extension ( [
+           fhir:url [ fhir:v "header"^^xsd:anyURI ] ;
+           fhir:value [ fhir:v "End Date" ]
+         ] [
+           fhir:url [ fhir:v "field"^^xsd:anyURI ] ;
+           fhir:value [ fhir:v "extension.where(url='http://ihris.org/fhir/StructureDefinition/ihris-performance').extension.where(url='period').valuePeriod.end" ]
+         ] ) ;
+         fhir:url [ fhir:v "column"^^xsd:anyURI ]
+       ] [
+         fhir:extension ( [
+           fhir:url [ fhir:v "header"^^xsd:anyURI ] ;
+           fhir:value [ fhir:v "Actions" ]
+         ] [
+           fhir:url [ fhir:v "field"^^xsd:anyURI ] ;
+           fhir:value [ fhir:v "_action" ]
+         ] ) ;
+         fhir:url [ fhir:v "column"^^xsd:anyURI ]
+       ] [
+         fhir:extension ( [
+           fhir:url [ fhir:v "link"^^xsd:anyURI ] ;
+           fhir:value [ fhir:v "/questionnaire/ihris-performance/performance?practitioner=FHIRID" ]
+         ] [
+           fhir:url [ fhir:v "text"^^xsd:anyURI ] ;
+           fhir:value [ fhir:v "Add Perfromamce Evaluation" ]
+         ] [
+           fhir:url [ fhir:v "row"^^xsd:anyURI ] ;
+           fhir:value [ fhir:v "false"^^xsd:boolean ]
+         ] [
+           fhir:url [ fhir:v "emptyDisplay"^^xsd:anyURI ] ;
+           fhir:value [ fhir:v "true"^^xsd:boolean ]
+         ] [
+           fhir:url [ fhir:v "class"^^xsd:anyURI ] ;
+           fhir:value [ fhir:v "primary" ]
+         ] ) ;
+         fhir:url [ fhir:v "action"^^xsd:anyURI ]
+       ] [
+         fhir:extension ( [
+           fhir:url [ fhir:v "link"^^xsd:anyURI ] ;
+           fhir:value [ fhir:v "/resource/view/performance/ITEMID" ]
+         ] [
+           fhir:url [ fhir:v "text"^^xsd:anyURI ] ;
+           fhir:value [ fhir:v "View" ]
+         ] [
+           fhir:url [ fhir:v "row"^^xsd:anyURI ] ;
+           fhir:value [ fhir:v "true"^^xsd:boolean ]
+         ] [
+           fhir:url [ fhir:v "class"^^xsd:anyURI ] ;
+           fhir:value [ fhir:v "primary" ]
+         ] ) ;
+         fhir:url [ fhir:v "action"^^xsd:anyURI ]
+       ] ) ;
+       fhir:url [ fhir:v "resource"^^xsd:anyURI ]
+     ] ) ;
+     fhir:url [ fhir:v "http://ihris.org/fhir/StructureDefinition/ihris-page-section"^^xsd:anyURI ]
+  ] [
+     fhir:extension ( [
+       fhir:url [ fhir:v "title"^^xsd:anyURI ] ;
+       fhir:value [ fhir:v "Education History" ]
+     ] [
+       fhir:url [ fhir:v "description"^^xsd:anyURI ] ;
+       fhir:value [ fhir:v "Education History Details for the Person" ]
+     ] [
+       fhir:url [ fhir:v "name"^^xsd:anyURI ] ;
+       fhir:value [ fhir:v "education-history" ]
+     ] [
+       fhir:extension ( [
+         fhir:url [ fhir:v "resource"^^xsd:anyURI ] ;
+         fhir:value [
+           a fhir:Reference ;
+           fhir:link <http://ihris.org/fhir/StructureDefinition/ihris-basic-education-history> ;
+           fhir:reference [ fhir:v "StructureDefinition/ihris-basic-education-history" ]
+         ]
+       ] [
+         fhir:url [ fhir:v "linkfield"^^xsd:anyURI ] ;
+         fhir:value [ fhir:v "Basic.extension.where(url='http://ihris.org/fhir/StructureDefinition/ihris-practitioner-reference').valueReference.reference" ]
+       ] [
+         fhir:extension ( [
+           fhir:url [ fhir:v "header"^^xsd:anyURI ] ;
+           fhir:value [ fhir:v "Education Institution" ]
+         ] [
+           fhir:url [ fhir:v "field"^^xsd:anyURI ] ;
+           fhir:value [ fhir:v "extension.where(url='http://ihris.org/fhir/StructureDefinition/ihris-education-history').extension.where(url='institution').valueCoding" ]
+         ] ) ;
+         fhir:url [ fhir:v "column"^^xsd:anyURI ]
+       ] [
+         fhir:url [ fhir:v "searchfield"^^xsd:anyURI ] ;
+         fhir:value [ fhir:v "practitioner" ]
+       ] [
+         fhir:extension ( [
+           fhir:url [ fhir:v "header"^^xsd:anyURI ] ;
+           fhir:value [ fhir:v "level" ]
+         ] [
+           fhir:url [ fhir:v "field"^^xsd:anyURI ] ;
+           fhir:value [ fhir:v "extension.where(url='http://ihris.org/fhir/StructureDefinition/ihris-education-history').extension.where(url='level').valueCoding" ]
+         ] ) ;
+         fhir:url [ fhir:v "column"^^xsd:anyURI ]
+       ] [
+         fhir:extension ( [
+           fhir:url [ fhir:v "header"^^xsd:anyURI ] ;
+           fhir:value [ fhir:v "Educational Major" ]
+         ] [
+           fhir:url [ fhir:v "field"^^xsd:anyURI ] ;
+           fhir:value [ fhir:v "extension.where(url='http://ihris.org/fhir/StructureDefinition/ihris-education-history').extension.where(url='educationalMajor').valueCoding" ]
+         ] ) ;
+         fhir:url [ fhir:v "column"^^xsd:anyURI ]
+       ] [
+         fhir:extension ( [
+           fhir:url [ fhir:v "header"^^xsd:anyURI ] ;
+           fhir:value [ fhir:v "Year" ]
+         ] [
+           fhir:url [ fhir:v "field"^^xsd:anyURI ] ;
+           fhir:value [ fhir:v "extension.where(url='http://ihris.org/fhir/StructureDefinition/ihris-education-history').extension.where(url='year').valueDate" ]
+         ] ) ;
+         fhir:url [ fhir:v "column"^^xsd:anyURI ]
+       ] [
+         fhir:extension ( [
+           fhir:url [ fhir:v "header"^^xsd:anyURI ] ;
+           fhir:value [ fhir:v "Actions" ]
+         ] [
+           fhir:url [ fhir:v "field"^^xsd:anyURI ] ;
+           fhir:value [ fhir:v "_action" ]
+         ] ) ;
+         fhir:url [ fhir:v "column"^^xsd:anyURI ]
+       ] [
+         fhir:extension ( [
+           fhir:url [ fhir:v "link"^^xsd:anyURI ] ;
+           fhir:value [ fhir:v "/questionnaire/ihris-education-history/basic-education-history?practitioner=FHIRID" ]
+         ] [
+           fhir:url [ fhir:v "text"^^xsd:anyURI ] ;
+           fhir:value [ fhir:v "Add Education History" ]
+         ] [
+           fhir:url [ fhir:v "row"^^xsd:anyURI ] ;
+           fhir:value [ fhir:v "false"^^xsd:boolean ]
+         ] [
+           fhir:url [ fhir:v "emptyDisplay"^^xsd:anyURI ] ;
+           fhir:value [ fhir:v "true"^^xsd:boolean ]
+         ] [
+           fhir:url [ fhir:v "class"^^xsd:anyURI ] ;
+           fhir:value [ fhir:v "primary" ]
+         ] ) ;
+         fhir:url [ fhir:v "action"^^xsd:anyURI ]
+       ] [
+         fhir:extension ( [
+           fhir:url [ fhir:v "link"^^xsd:anyURI ] ;
+           fhir:value [ fhir:v "/resource/view/basic-education-history/ITEMID" ]
+         ] [
+           fhir:url [ fhir:v "text"^^xsd:anyURI ] ;
+           fhir:value [ fhir:v "View" ]
+         ] [
+           fhir:url [ fhir:v "row"^^xsd:anyURI ] ;
+           fhir:value [ fhir:v "true"^^xsd:boolean ]
+         ] [
+           fhir:url [ fhir:v "class"^^xsd:anyURI ] ;
+           fhir:value [ fhir:v "primary" ]
+         ] ) ;
+         fhir:url [ fhir:v "action"^^xsd:anyURI ]
+       ] ) ;
+       fhir:url [ fhir:v "resource"^^xsd:anyURI ]
+     ] ) ;
+     fhir:url [ fhir:v "http://ihris.org/fhir/StructureDefinition/ihris-page-section"^^xsd:anyURI ]
+  ] [
+     fhir:extension ( [
+       fhir:url [ fhir:v "title"^^xsd:anyURI ] ;
+       fhir:value [ fhir:v "Work Experience" ]
+     ] [
+       fhir:url [ fhir:v "description"^^xsd:anyURI ] ;
+       fhir:value [ fhir:v "Work Experience for the Person" ]
+     ] [
+       fhir:url [ fhir:v "name"^^xsd:anyURI ] ;
+       fhir:value [ fhir:v "employment-history" ]
+     ] [
+       fhir:extension ( [
+         fhir:url [ fhir:v "resource"^^xsd:anyURI ] ;
+         fhir:value [
+           a fhir:Reference ;
+           fhir:link <http://ihris.org/fhir/StructureDefinition/ihris-basic-employment-history> ;
+           fhir:reference [ fhir:v "StructureDefinition/ihris-basic-employment-history" ]
+         ]
+       ] [
+         fhir:url [ fhir:v "linkfield"^^xsd:anyURI ] ;
+         fhir:value [ fhir:v "Basic.extension.where(url='http://ihris.org/fhir/StructureDefinition/ihris-practitioner-reference').valueReference.reference" ]
+       ] [
+         fhir:extension ( [
+           fhir:url [ fhir:v "header"^^xsd:anyURI ] ;
+           fhir:value [ fhir:v "Organization Name" ]
+         ] [
+           fhir:url [ fhir:v "field"^^xsd:anyURI ] ;
+           fhir:value [ fhir:v "extension.where(url='http://ihris.org/fhir/StructureDefinition/ihris-employment-history').extension.where(url='organization').valueString" ]
+         ] ) ;
+         fhir:url [ fhir:v "column"^^xsd:anyURI ]
+       ] [
+         fhir:url [ fhir:v "searchfield"^^xsd:anyURI ] ;
+         fhir:value [ fhir:v "practitioner" ]
+       ] [
+         fhir:extension ( [
+           fhir:url [ fhir:v "header"^^xsd:anyURI ] ;
+           fhir:value [ fhir:v "Position" ]
+         ] [
+           fhir:url [ fhir:v "field"^^xsd:anyURI ] ;
+           fhir:value [ fhir:v "extension.where(url='http://ihris.org/fhir/StructureDefinition/ihris-employment-history').extension.where(url='startingPosition').valueString" ]
+         ] ) ;
+         fhir:url [ fhir:v "column"^^xsd:anyURI ]
+       ] [
+         fhir:extension ( [
+           fhir:url [ fhir:v "header"^^xsd:anyURI ] ;
+           fhir:value [ fhir:v "Date Started" ]
+         ] [
+           fhir:url [ fhir:v "field"^^xsd:anyURI ] ;
+           fhir:value [ fhir:v "extension.where(url='http://ihris.org/fhir/StructureDefinition/ihris-employment-history').extension.where(url='period').valuePeriod.start" ]
+         ] ) ;
+         fhir:url [ fhir:v "column"^^xsd:anyURI ]
+       ] [
+         fhir:extension ( [
+           fhir:url [ fhir:v "header"^^xsd:anyURI ] ;
+           fhir:value [ fhir:v "Date Ended" ]
+         ] [
+           fhir:url [ fhir:v "field"^^xsd:anyURI ] ;
+           fhir:value [ fhir:v "extension.where(url='http://ihris.org/fhir/StructureDefinition/ihris-employment-history').extension.where(url='period').valuePeriod.end" ]
+         ] ) ;
+         fhir:url [ fhir:v "column"^^xsd:anyURI ]
+       ] [
+         fhir:extension ( [
+           fhir:url [ fhir:v "header"^^xsd:anyURI ] ;
+           fhir:value [ fhir:v "Actions" ]
+         ] [
+           fhir:url [ fhir:v "field"^^xsd:anyURI ] ;
+           fhir:value [ fhir:v "_action" ]
+         ] ) ;
+         fhir:url [ fhir:v "column"^^xsd:anyURI ]
+       ] [
+         fhir:extension ( [
+           fhir:url [ fhir:v "link"^^xsd:anyURI ] ;
+           fhir:value [ fhir:v "/questionnaire/ihris-employment-history/employment-history?practitioner=FHIRID" ]
+         ] [
+           fhir:url [ fhir:v "text"^^xsd:anyURI ] ;
+           fhir:value [ fhir:v "Add Work Experience" ]
+         ] [
+           fhir:url [ fhir:v "row"^^xsd:anyURI ] ;
+           fhir:value [ fhir:v "false"^^xsd:boolean ]
+         ] [
+           fhir:url [ fhir:v "emptyDisplay"^^xsd:anyURI ] ;
+           fhir:value [ fhir:v "true"^^xsd:boolean ]
+         ] [
+           fhir:url [ fhir:v "class"^^xsd:anyURI ] ;
+           fhir:value [ fhir:v "primary" ]
+         ] ) ;
+         fhir:url [ fhir:v "action"^^xsd:anyURI ]
+       ] [
+         fhir:extension ( [
+           fhir:url [ fhir:v "link"^^xsd:anyURI ] ;
+           fhir:value [ fhir:v "/resource/view/employment-history/ITEMID" ]
+         ] [
+           fhir:url [ fhir:v "text"^^xsd:anyURI ] ;
+           fhir:value [ fhir:v "View" ]
+         ] [
+           fhir:url [ fhir:v "row"^^xsd:anyURI ] ;
+           fhir:value [ fhir:v "true"^^xsd:boolean ]
+         ] [
+           fhir:url [ fhir:v "class"^^xsd:anyURI ] ;
+           fhir:value [ fhir:v "primary" ]
+         ] ) ;
+         fhir:url [ fhir:v "action"^^xsd:anyURI ]
+       ] ) ;
+       fhir:url [ fhir:v "resource"^^xsd:anyURI ]
+     ] ) ;
+     fhir:url [ fhir:v "http://ihris.org/fhir/StructureDefinition/ihris-page-section"^^xsd:anyURI ]
+  ] [
+     fhir:extension ( [
+       fhir:url [ fhir:v "title"^^xsd:anyURI ] ;
+       fhir:value [ fhir:v "Emergency Contact" ]
+     ] [
+       fhir:url [ fhir:v "description"^^xsd:anyURI ] ;
+       fhir:value [ fhir:v "Emergency Contact for the Person" ]
+     ] [
+       fhir:url [ fhir:v "name"^^xsd:anyURI ] ;
+       fhir:value [ fhir:v "emergency" ]
+     ] [
+       fhir:extension ( [
+         fhir:url [ fhir:v "resource"^^xsd:anyURI ] ;
+         fhir:value [
+           a fhir:Reference ;
+           fhir:link <http://ihris.org/fhir/StructureDefinition/ihris-basic-emergency> ;
+           fhir:reference [ fhir:v "StructureDefinition/ihris-basic-emergency" ]
+         ]
+       ] [
+         fhir:url [ fhir:v "linkfield"^^xsd:anyURI ] ;
+         fhir:value [ fhir:v "Basic.extension.where(url='http://ihris.org/fhir/StructureDefinition/ihris-practitioner-reference').valueReference.reference" ]
+       ] [
+         fhir:extension ( [
+           fhir:url [ fhir:v "header"^^xsd:anyURI ] ;
+           fhir:value [ fhir:v "Name" ]
+         ] [
+           fhir:url [ fhir:v "field"^^xsd:anyURI ] ;
+           fhir:value [ fhir:v "extension.where(url='http://ihris.org/fhir/StructureDefinition/ihris-emergency').extension.where(url='name').valueString" ]
+         ] ) ;
+         fhir:url [ fhir:v "column"^^xsd:anyURI ]
+       ] [
+         fhir:url [ fhir:v "searchfield"^^xsd:anyURI ] ;
+         fhir:value [ fhir:v "practitioner" ]
+       ] [
+         fhir:extension ( [
+           fhir:url [ fhir:v "header"^^xsd:anyURI ] ;
+           fhir:value [ fhir:v "Relationship" ]
+         ] [
+           fhir:url [ fhir:v "field"^^xsd:anyURI ] ;
+           fhir:value [ fhir:v "extension.where(url='http://ihris.org/fhir/StructureDefinition/ihris-emergency').extension.where(url='relation').valueCoding.display" ]
+         ] ) ;
+         fhir:url [ fhir:v "column"^^xsd:anyURI ]
+       ] [
+         fhir:extension ( [
+           fhir:url [ fhir:v "header"^^xsd:anyURI ] ;
+           fhir:value [ fhir:v "Mobile Phone" ]
+         ] [
+           fhir:url [ fhir:v "field"^^xsd:anyURI ] ;
+           fhir:value [ fhir:v "extension.where(url='http://ihris.org/fhir/StructureDefinition/ihris-emergency').extension.where(url='mobile').valueString" ]
+         ] ) ;
+         fhir:url [ fhir:v "column"^^xsd:anyURI ]
+       ] [
+         fhir:extension ( [
+           fhir:url [ fhir:v "header"^^xsd:anyURI ] ;
+           fhir:value [ fhir:v "Actions" ]
+         ] [
+           fhir:url [ fhir:v "field"^^xsd:anyURI ] ;
+           fhir:value [ fhir:v "_action" ]
+         ] ) ;
+         fhir:url [ fhir:v "column"^^xsd:anyURI ]
+       ] [
+         fhir:extension ( [
+           fhir:url [ fhir:v "link"^^xsd:anyURI ] ;
+           fhir:value [ fhir:v "/questionnaire/ihris-emergency/emergency?practitioner=FHIRID" ]
+         ] [
+           fhir:url [ fhir:v "text"^^xsd:anyURI ] ;
+           fhir:value [ fhir:v "Add Emergency Contact" ]
+         ] [
+           fhir:url [ fhir:v "row"^^xsd:anyURI ] ;
+           fhir:value [ fhir:v "false"^^xsd:boolean ]
+         ] [
+           fhir:url [ fhir:v "emptyDisplay"^^xsd:anyURI ] ;
+           fhir:value [ fhir:v "true"^^xsd:boolean ]
+         ] [
+           fhir:url [ fhir:v "class"^^xsd:anyURI ] ;
+           fhir:value [ fhir:v "primary" ]
+         ] ) ;
+         fhir:url [ fhir:v "action"^^xsd:anyURI ]
+       ] [
+         fhir:extension ( [
+           fhir:url [ fhir:v "link"^^xsd:anyURI ] ;
+           fhir:value [ fhir:v "/resource/view/emergency/ITEMID" ]
+         ] [
+           fhir:url [ fhir:v "text"^^xsd:anyURI ] ;
+           fhir:value [ fhir:v "View" ]
+         ] [
+           fhir:url [ fhir:v "row"^^xsd:anyURI ] ;
+           fhir:value [ fhir:v "true"^^xsd:boolean ]
+         ] [
+           fhir:url [ fhir:v "class"^^xsd:anyURI ] ;
+           fhir:value [ fhir:v "primary" ]
+         ] ) ;
+         fhir:url [ fhir:v "action"^^xsd:anyURI ]
+       ] ) ;
+       fhir:url [ fhir:v "resource"^^xsd:anyURI ]
+     ] ) ;
+     fhir:url [ fhir:v "http://ihris.org/fhir/StructureDefinition/ihris-page-section"^^xsd:anyURI ]
+  ] [
+     fhir:extension ( [
+       fhir:url [ fhir:v "title"^^xsd:anyURI ] ;
+       fhir:value [ fhir:v "Employee Disciplinary Information" ]
+     ] [
+       fhir:url [ fhir:v "description"^^xsd:anyURI ] ;
+       fhir:value [ fhir:v "Employee Discipline for the Person" ]
+     ] [
+       fhir:url [ fhir:v "name"^^xsd:anyURI ] ;
+       fhir:value [ fhir:v "Employee Discipline" ]
+     ] [
+       fhir:extension ( [
+         fhir:url [ fhir:v "resource"^^xsd:anyURI ] ;
+         fhir:value [
+           a fhir:Reference ;
+           fhir:link <http://ihris.org/fhir/StructureDefinition/ihris-basic-discipline> ;
+           fhir:reference [ fhir:v "StructureDefinition/ihris-basic-discipline" ]
+         ]
+       ] [
+         fhir:url [ fhir:v "linkfield"^^xsd:anyURI ] ;
+         fhir:value [ fhir:v "Basic.extension.where(url='http://ihris.org/fhir/StructureDefinition/ihris-practitioner-reference').valueReference.reference" ]
+       ] [
+         fhir:extension ( [
+           fhir:url [ fhir:v "header"^^xsd:anyURI ] ;
+           fhir:value [ fhir:v "Discipline Action Type" ]
+         ] [
+           fhir:url [ fhir:v "field"^^xsd:anyURI ] ;
+           fhir:value [ fhir:v "extension.where(url='http://ihris.org/fhir/StructureDefinition/ihris-discipline').extension.where(url='actionType').valueCoding.display" ]
+         ] ) ;
+         fhir:url [ fhir:v "column"^^xsd:anyURI ]
+       ] [
+         fhir:url [ fhir:v "searchfield"^^xsd:anyURI ] ;
+         fhir:value [ fhir:v "practitioner" ]
+       ] [
+         fhir:extension ( [
+           fhir:url [ fhir:v "header"^^xsd:anyURI ] ;
+           fhir:value [ fhir:v "Action Taken" ]
+         ] [
+           fhir:url [ fhir:v "field"^^xsd:anyURI ] ;
+           fhir:value [ fhir:v "extension.where(url='http://ihris.org/fhir/StructureDefinition/ihris-discipline').extension.where(url='actionTaken').valueString" ]
+         ] ) ;
+         fhir:url [ fhir:v "column"^^xsd:anyURI ]
+       ] [
+         fhir:extension ( [
+           fhir:url [ fhir:v "header"^^xsd:anyURI ] ;
+           fhir:value [ fhir:v "Start Date" ]
+         ] [
+           fhir:url [ fhir:v "field"^^xsd:anyURI ] ;
+           fhir:value [ fhir:v "extension.where(url='http://ihris.org/fhir/StructureDefinition/ihris-discipline').extension.where(url='period').valuePeriod.start" ]
+         ] ) ;
+         fhir:url [ fhir:v "column"^^xsd:anyURI ]
+       ] [
+         fhir:extension ( [
+           fhir:url [ fhir:v "header"^^xsd:anyURI ] ;
+           fhir:value [ fhir:v "End Date" ]
+         ] [
+           fhir:url [ fhir:v "field"^^xsd:anyURI ] ;
+           fhir:value [ fhir:v "extension.where(url='http://ihris.org/fhir/StructureDefinition/ihris-discipline').extension.where(url='period').valuePeriod.end" ]
+         ] ) ;
+         fhir:url [ fhir:v "column"^^xsd:anyURI ]
+       ] [
+         fhir:extension ( [
+           fhir:url [ fhir:v "header"^^xsd:anyURI ] ;
+           fhir:value [ fhir:v "Actions" ]
+         ] [
+           fhir:url [ fhir:v "field"^^xsd:anyURI ] ;
+           fhir:value [ fhir:v "_action" ]
+         ] ) ;
+         fhir:url [ fhir:v "column"^^xsd:anyURI ]
+       ] [
+         fhir:extension ( [
+           fhir:url [ fhir:v "link"^^xsd:anyURI ] ;
+           fhir:value [ fhir:v "/questionnaire/ihris-discipline/discipline?practitioner=FHIRID" ]
+         ] [
+           fhir:url [ fhir:v "text"^^xsd:anyURI ] ;
+           fhir:value [ fhir:v "Add Disciplinary Action" ]
+         ] [
+           fhir:url [ fhir:v "row"^^xsd:anyURI ] ;
+           fhir:value [ fhir:v "false"^^xsd:boolean ]
+         ] [
+           fhir:url [ fhir:v "emptyDisplay"^^xsd:anyURI ] ;
+           fhir:value [ fhir:v "true"^^xsd:boolean ]
+         ] [
+           fhir:url [ fhir:v "class"^^xsd:anyURI ] ;
+           fhir:value [ fhir:v "primary" ]
+         ] ) ;
+         fhir:url [ fhir:v "action"^^xsd:anyURI ]
+       ] [
+         fhir:extension ( [
+           fhir:url [ fhir:v "link"^^xsd:anyURI ] ;
+           fhir:value [ fhir:v "/resource/view/discipline/ITEMID" ]
+         ] [
+           fhir:url [ fhir:v "text"^^xsd:anyURI ] ;
+           fhir:value [ fhir:v "View" ]
+         ] [
+           fhir:url [ fhir:v "row"^^xsd:anyURI ] ;
+           fhir:value [ fhir:v "true"^^xsd:boolean ]
+         ] [
+           fhir:url [ fhir:v "class"^^xsd:anyURI ] ;
+           fhir:value [ fhir:v "primary" ]
+         ] ) ;
+         fhir:url [ fhir:v "action"^^xsd:anyURI ]
+       ] ) ;
+       fhir:url [ fhir:v "resource"^^xsd:anyURI ]
+     ] ) ;
+     fhir:url [ fhir:v "http://ihris.org/fhir/StructureDefinition/ihris-page-section"^^xsd:anyURI ]
+  ] [
+     fhir:extension ( [
+       fhir:url [ fhir:v "title"^^xsd:anyURI ] ;
+       fhir:value [ fhir:v "Employee Salary Information" ]
+     ] [
+       fhir:url [ fhir:v "description"^^xsd:anyURI ] ;
+       fhir:value [ fhir:v "Employee Salary Information for the Person" ]
+     ] [
+       fhir:url [ fhir:v "name"^^xsd:anyURI ] ;
+       fhir:value [ fhir:v "Employee Salary Information" ]
+     ] [
+       fhir:extension ( [
+         fhir:url [ fhir:v "resource"^^xsd:anyURI ] ;
+         fhir:value [
+           a fhir:Reference ;
+           fhir:link <http://ihris.org/fhir/StructureDefinition/ihris-basic-salary> ;
+           fhir:reference [ fhir:v "StructureDefinition/ihris-basic-salary" ]
+         ]
+       ] [
+         fhir:url [ fhir:v "linkfield"^^xsd:anyURI ] ;
+         fhir:value [ fhir:v "Basic.extension.where(url='http://ihris.org/fhir/StructureDefinition/ihris-practitioner-reference').valueReference.reference" ]
+       ] [
+         fhir:extension ( [
+           fhir:url [ fhir:v "header"^^xsd:anyURI ] ;
+           fhir:value [ fhir:v "Pay Grade" ]
+         ] [
+           fhir:url [ fhir:v "field"^^xsd:anyURI ] ;
+           fhir:value [ fhir:v "extension.where(url='http://ihris.org/fhir/StructureDefinition/ihris-salary').extension.where(url='salaryScale').valueCoding.display" ]
+         ] ) ;
+         fhir:url [ fhir:v "column"^^xsd:anyURI ]
+       ] [
+         fhir:url [ fhir:v "searchfield"^^xsd:anyURI ] ;
+         fhir:value [ fhir:v "practitioner" ]
+       ] [
+         fhir:extension ( [
+           fhir:url [ fhir:v "header"^^xsd:anyURI ] ;
+           fhir:value [ fhir:v "Basic Salary" ]
+         ] [
+           fhir:url [ fhir:v "field"^^xsd:anyURI ] ;
+           fhir:value [ fhir:v "extension.where(url='http://ihris.org/fhir/StructureDefinition/ihris-salary').extension.where(url='bsalary').valueString" ]
+         ] ) ;
+         fhir:url [ fhir:v "column"^^xsd:anyURI ]
+       ] [
+         fhir:extension ( [
+           fhir:url [ fhir:v "header"^^xsd:anyURI ] ;
+           fhir:value [ fhir:v "Allowances" ]
+         ] [
+           fhir:url [ fhir:v "field"^^xsd:anyURI ] ;
+           fhir:value [ fhir:v "extension.where(url='http://ihris.org/fhir/StructureDefinition/ihris-salary').extension.where(url='allowance').valueString" ]
+         ] ) ;
+         fhir:url [ fhir:v "column"^^xsd:anyURI ]
+       ] [
+         fhir:extension ( [
+           fhir:url [ fhir:v "header"^^xsd:anyURI ] ;
+           fhir:value [ fhir:v "Benefits" ]
+         ] [
+           fhir:url [ fhir:v "field"^^xsd:anyURI ] ;
+           fhir:value [ fhir:v "extension.where(url='http://ihris.org/fhir/StructureDefinition/ihris-salary').extension.where(url='benefits').valueString" ]
+         ] ) ;
+         fhir:url [ fhir:v "column"^^xsd:anyURI ]
+       ] [
+         fhir:extension ( [
+           fhir:url [ fhir:v "header"^^xsd:anyURI ] ;
+           fhir:value [ fhir:v "Start Date" ]
+         ] [
+           fhir:url [ fhir:v "field"^^xsd:anyURI ] ;
+           fhir:value [ fhir:v "extension.where(url='http://ihris.org/fhir/StructureDefinition/ihris-salary').extension.where(url='period').valuePeriod.start" ]
+         ] ) ;
+         fhir:url [ fhir:v "column"^^xsd:anyURI ]
+       ] [
+         fhir:extension ( [
+           fhir:url [ fhir:v "header"^^xsd:anyURI ] ;
+           fhir:value [ fhir:v "End Date" ]
+         ] [
+           fhir:url [ fhir:v "field"^^xsd:anyURI ] ;
+           fhir:value [ fhir:v "extension.where(url='http://ihris.org/fhir/StructureDefinition/ihris-salary').extension.where(url='period').valuePeriod.end" ]
+         ] ) ;
+         fhir:url [ fhir:v "column"^^xsd:anyURI ]
+       ] [
+         fhir:extension ( [
+           fhir:url [ fhir:v "header"^^xsd:anyURI ] ;
+           fhir:value [ fhir:v "Actions" ]
+         ] [
+           fhir:url [ fhir:v "field"^^xsd:anyURI ] ;
+           fhir:value [ fhir:v "_action" ]
+         ] ) ;
+         fhir:url [ fhir:v "column"^^xsd:anyURI ]
+       ] [
+         fhir:extension ( [
+           fhir:url [ fhir:v "link"^^xsd:anyURI ] ;
+           fhir:value [ fhir:v "/questionnaire/ihris-salary/salary?practitioner=FHIRID" ]
+         ] [
+           fhir:url [ fhir:v "text"^^xsd:anyURI ] ;
+           fhir:value [ fhir:v "Add Salary Info" ]
+         ] [
+           fhir:url [ fhir:v "row"^^xsd:anyURI ] ;
+           fhir:value [ fhir:v "false"^^xsd:boolean ]
+         ] [
+           fhir:url [ fhir:v "emptyDisplay"^^xsd:anyURI ] ;
+           fhir:value [ fhir:v "true"^^xsd:boolean ]
+         ] [
+           fhir:url [ fhir:v "class"^^xsd:anyURI ] ;
+           fhir:value [ fhir:v "primary" ]
+         ] ) ;
+         fhir:url [ fhir:v "action"^^xsd:anyURI ]
+       ] [
+         fhir:extension ( [
+           fhir:url [ fhir:v "link"^^xsd:anyURI ] ;
+           fhir:value [ fhir:v "/resource/view/salary/ITEMID" ]
+         ] [
+           fhir:url [ fhir:v "text"^^xsd:anyURI ] ;
+           fhir:value [ fhir:v "View" ]
+         ] [
+           fhir:url [ fhir:v "row"^^xsd:anyURI ] ;
+           fhir:value [ fhir:v "true"^^xsd:boolean ]
+         ] [
+           fhir:url [ fhir:v "class"^^xsd:anyURI ] ;
+           fhir:value [ fhir:v "primary" ]
+         ] ) ;
+         fhir:url [ fhir:v "action"^^xsd:anyURI ]
+       ] ) ;
+       fhir:url [ fhir:v "resource"^^xsd:anyURI ]
+     ] ) ;
+     fhir:url [ fhir:v "http://ihris.org/fhir/StructureDefinition/ihris-page-section"^^xsd:anyURI ]
+  ] [
+     fhir:extension ( [
+       fhir:url [ fhir:v "title"^^xsd:anyURI ] ;
+       fhir:value [ fhir:v "In-Service Training Information" ]
+     ] [
+       fhir:url [ fhir:v "description"^^xsd:anyURI ] ;
+       fhir:value [ fhir:v "In-Service Training Information for the Person" ]
+     ] [
+       fhir:url [ fhir:v "name"^^xsd:anyURI ] ;
+       fhir:value [ fhir:v "In-Service Training Information" ]
+     ] [
+       fhir:extension ( [
+         fhir:url [ fhir:v "resource"^^xsd:anyURI ] ;
+         fhir:value [
+           a fhir:Reference ;
+           fhir:link <http://ihris.org/fhir/StructureDefinition/ihris-basic-inservice-training> ;
+           fhir:reference [ fhir:v "StructureDefinition/ihris-basic-inservice-training" ]
+         ]
+       ] [
+         fhir:url [ fhir:v "linkfield"^^xsd:anyURI ] ;
+         fhir:value [ fhir:v "Basic.extension.where(url='http://ihris.org/fhir/StructureDefinition/ihris-practitioner-reference').valueReference.reference" ]
+       ] [
+         fhir:extension ( [
+           fhir:url [ fhir:v "header"^^xsd:anyURI ] ;
+           fhir:value [ fhir:v "Training Provider" ]
+         ] [
+           fhir:url [ fhir:v "field"^^xsd:anyURI ] ;
+           fhir:value [ fhir:v "extension.where(url='http://ihris.org/fhir/StructureDefinition/ihris-inservice-training').extension.where(url='provider').valueString" ]
+         ] ) ;
+         fhir:url [ fhir:v "column"^^xsd:anyURI ]
+       ] [
+         fhir:url [ fhir:v "searchfield"^^xsd:anyURI ] ;
+         fhir:value [ fhir:v "practitioner" ]
+       ] [
+         fhir:extension ( [
+           fhir:url [ fhir:v "header"^^xsd:anyURI ] ;
+           fhir:value [ fhir:v "Training Type/Category" ]
+         ] [
+           fhir:url [ fhir:v "field"^^xsd:anyURI ] ;
+           fhir:value [ fhir:v "extension.where(url='http://ihris.org/fhir/StructureDefinition/ihris-inservice-training').extension.where(url='training').valueCoding.display" ]
+         ] ) ;
+         fhir:url [ fhir:v "column"^^xsd:anyURI ]
+       ] [
+         fhir:extension ( [
+           fhir:url [ fhir:v "header"^^xsd:anyURI ] ;
+           fhir:value [ fhir:v "Course Name" ]
+         ] [
+           fhir:url [ fhir:v "field"^^xsd:anyURI ] ;
+           fhir:value [ fhir:v "extension.where(url='http://ihris.org/fhir/StructureDefinition/ihris-inservice-training').extension.where(url='courseName').valueString" ]
+         ] ) ;
+         fhir:url [ fhir:v "column"^^xsd:anyURI ]
+       ] [
+         fhir:extension ( [
+           fhir:url [ fhir:v "header"^^xsd:anyURI ] ;
+           fhir:value [ fhir:v "Credits" ]
+         ] [
+           fhir:url [ fhir:v "field"^^xsd:anyURI ] ;
+           fhir:value [ fhir:v "extension.where(url='http://ihris.org/fhir/StructureDefinition/ihris-inservice-training').extension.where(url='credits').valueInteger" ]
+         ] ) ;
+         fhir:url [ fhir:v "column"^^xsd:anyURI ]
+       ] [
+         fhir:extension ( [
+           fhir:url [ fhir:v "header"^^xsd:anyURI ] ;
+           fhir:value [ fhir:v "Start Date" ]
+         ] [
+           fhir:url [ fhir:v "field"^^xsd:anyURI ] ;
+           fhir:value [ fhir:v "extension.where(url='http://ihris.org/fhir/StructureDefinition/ihris-inservice-training').extension.where(url='startDate').valueDate" ]
+         ] ) ;
+         fhir:url [ fhir:v "column"^^xsd:anyURI ]
+       ] [
+         fhir:extension ( [
+           fhir:url [ fhir:v "header"^^xsd:anyURI ] ;
+           fhir:value [ fhir:v "End Date" ]
+         ] [
+           fhir:url [ fhir:v "field"^^xsd:anyURI ] ;
+           fhir:value [ fhir:v "extension.where(url='http://ihris.org/fhir/StructureDefinition/ihris-inservice-training').extension.where(url='endDate').valueDate" ]
+         ] ) ;
+         fhir:url [ fhir:v "column"^^xsd:anyURI ]
+       ] [
+         fhir:extension ( [
+           fhir:url [ fhir:v "header"^^xsd:anyURI ] ;
+           fhir:value [ fhir:v "Actions" ]
+         ] [
+           fhir:url [ fhir:v "field"^^xsd:anyURI ] ;
+           fhir:value [ fhir:v "_action" ]
+         ] ) ;
+         fhir:url [ fhir:v "column"^^xsd:anyURI ]
+       ] [
+         fhir:extension ( [
+           fhir:url [ fhir:v "link"^^xsd:anyURI ] ;
+           fhir:value [ fhir:v "/questionnaire/ihris-inservice-training/inservice-training?practitioner=FHIRID" ]
+         ] [
+           fhir:url [ fhir:v "text"^^xsd:anyURI ] ;
+           fhir:value [ fhir:v "Add In-Service Training Info" ]
+         ] [
+           fhir:url [ fhir:v "row"^^xsd:anyURI ] ;
+           fhir:value [ fhir:v "false"^^xsd:boolean ]
+         ] [
+           fhir:url [ fhir:v "emptyDisplay"^^xsd:anyURI ] ;
+           fhir:value [ fhir:v "true"^^xsd:boolean ]
+         ] [
+           fhir:url [ fhir:v "class"^^xsd:anyURI ] ;
+           fhir:value [ fhir:v "primary" ]
+         ] ) ;
+         fhir:url [ fhir:v "action"^^xsd:anyURI ]
+       ] [
+         fhir:extension ( [
+           fhir:url [ fhir:v "link"^^xsd:anyURI ] ;
+           fhir:value [ fhir:v "/resource/view/inservice-training/ITEMID" ]
+         ] [
+           fhir:url [ fhir:v "text"^^xsd:anyURI ] ;
+           fhir:value [ fhir:v "View" ]
+         ] [
+           fhir:url [ fhir:v "row"^^xsd:anyURI ] ;
+           fhir:value [ fhir:v "true"^^xsd:boolean ]
+         ] [
+           fhir:url [ fhir:v "class"^^xsd:anyURI ] ;
+           fhir:value [ fhir:v "primary" ]
+         ] ) ;
+         fhir:url [ fhir:v "action"^^xsd:anyURI ]
+       ] ) ;
+       fhir:url [ fhir:v "resource"^^xsd:anyURI ]
+     ] ) ;
+     fhir:url [ fhir:v "http://ihris.org/fhir/StructureDefinition/ihris-page-section"^^xsd:anyURI ]
+  ] ) ; # 
+  fhir:code [
+     fhir:coding ( [
+       fhir:system [ fhir:v "http://ihris.org/fhir/CodeSystem/ihris-resource-codesystem"^^xsd:anyURI ] ;
+       fhir:code [ fhir:v "page" ]
+     ] )
+  ] . # 
+
+# -------------------------------------------------------------------------------------
+

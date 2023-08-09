@@ -35,6 +35,7 @@
             }
           ],
           "linkId": "Basic.extension[0].extension[0]",
+          "definition": "http://ihris.org/fhir/StructureDefinition/ihris-basic-emergency#Basic.extension:emergency.extension:name.value[x]:valueString",
           "text": "Full Name",
           "type": "string",
           "required": true,
@@ -42,6 +43,7 @@
         },
         {
           "linkId": "Basic.extension[0].extension[1]",
+          "definition": "http://ihris.org/fhir/StructureDefinition/ihris-basic-emergency#Basic.extension:emergency.extension:relation.value[x]:valueCoding",
           "text": "Relation",
           "type": "choice",
           "answerValueSet": "http://ihris.org/fhir/ValueSet/ihris-relation-valueset",
@@ -50,6 +52,7 @@
         },
         {
           "linkId": "Basic.extension[0].extension[2]",
+          "definition": "http://ihris.org/fhir/StructureDefinition/ihris-basic-emergency#Basic.extension:emergency.extension:phone.value[x]:valueString",
           "text": "Home Phone",
           "type": "string",
           "required": false,
@@ -57,6 +60,7 @@
         },
         {
           "linkId": "Basic.extension[0].extension[3]",
+          "definition": "http://ihris.org/fhir/StructureDefinition/ihris-basic-emergency#Basic.extension:emergency.extension:mobile.value[x]:valueString",
           "text": "Mobile Phone",
           "type": "string",
           "required": false,
@@ -64,6 +68,7 @@
         },
         {
           "linkId": "Basic.extension[0].extension[4]",
+          "definition": "http://ihris.org/fhir/StructureDefinition/ihris-basic-emergency#Basic.extension:emergency.extension:workPhone.value[x]:valueString",
           "text": "Work Phone",
           "type": "string",
           "required": false,
@@ -94,6 +99,7 @@
             }
           ],
           "linkId": "Basic.extension[0].extension[5]",
+          "definition": "http://ihris.org/fhir/StructureDefinition/ihris-basic-emergency#Basic.extension:emergency.extension:workEmail.value[x]:valueString",
           "text": "Work Email",
           "type": "string",
           "required": false,
@@ -124,6 +130,7 @@
             }
           ],
           "linkId": "Basic.extension[0].extension[6]",
+          "definition": "http://ihris.org/fhir/StructureDefinition/ihris-basic-emergency#Basic.extension:emergency.extension:otherEmail.value[x]:valueString",
           "text": "Other Email",
           "type": "string",
           "required": false,
@@ -131,20 +138,23 @@
         },
         {
           "linkId": "Basic.extension[0].extension[7]",
+          "definition": "http://ihris.org/fhir/StructureDefinition/ihris-basic-emergency#Basic.extension:emergency.extension:address.value[x]:valueString",
           "text": "PO BOX",
-          "type": "text",
+          "type": "string",
           "required": false,
           "repeats": false
         },
         {
           "linkId": "Basic.extension[0].extension[8]",
+          "definition": "http://ihris.org/fhir/StructureDefinition/ihris-basic-emergency#Basic.extension:emergency.extension:remark.value[x]:valueString",
           "text": "Remark",
-          "type": "text",
+          "type": "string",
           "required": false,
           "repeats": false
         },
         {
           "linkId": "Basic.extension[0].extension[9]",
+          "definition": "http://ihris.org/fhir/StructureDefinition/ihris-basic-emergency#Basic.extension:emergency.extension:attachment.value[x]:valueAttachment",
           "text": "Attachment",
           "type": "attachment",
           "required": false,
@@ -152,6 +162,7 @@
         }
       ],
       "linkId": "Basic",
+      "definition": "http://ihris.org/fhir/StructureDefinition/ihris-basic-emergency",
       "text": "Emergency",
       "type": "group"
     }

@@ -119,6 +119,7 @@ export default {
         if(this.profile){
           url = url + '&_profile=' + this.profile
         }
+        console.log(url);
       }
       if (url === "") {
         let count = this.options.itemsPerPage || 10;

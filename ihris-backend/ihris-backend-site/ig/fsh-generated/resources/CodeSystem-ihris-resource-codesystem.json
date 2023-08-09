@@ -42,7 +42,12 @@
       "code": "dashboard",
       "display": "iHRIS Dashboard",
       "definition": "iHRIS Dashboard"
+    },
+    {
+      "code": "resourcedata",
+      "display": "Resource Data",
+      "definition": "Resource Data"
     }
   ],
-  "count": 7
+  "count": 8
 }

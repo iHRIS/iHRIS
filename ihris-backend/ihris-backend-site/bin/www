@@ -8,7 +8,7 @@
  let siteConfig = configParser(`${__dirname}/../config/baseConfig.json`)
  global["appsitepath" + process.pid] = process.env.IHRIS_APP__SITE__PATH || siteConfig.app.site.path
  global["appcorepath" + process.pid] = process.env.IHRIS_APP__CORE__PATH || siteConfig.app.core.path
- const ihrissmartrequire = require('ihrissmartrequire')
+ const ihrissmartrequire = require('ihrissmartrequire').ignore("node_modules")
  
  var app = ihrissmartrequire('app');
  var debug = require('debug')('ihris-backend:server');

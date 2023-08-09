@@ -277,7 +277,7 @@
           {
             "code": "Reference",
             "targetProfile": [
-              "http://hl7.org/fhir/StructureDefinition/Location"
+              "http://ihris.org/fhir/StructureDefinition/ihris-facility"
             ]
           }
         ],
@@ -615,7 +615,7 @@
           {
             "code": "Reference",
             "targetProfile": [
-              "http://hl7.org/fhir/StructureDefinition/Location"
+              "http://ihris.org/fhir/StructureDefinition/ihris-facility"
             ]
           }
         ],

@@ -1,0 +1,28 @@
+{
+  "resourceType" : "SearchParameter",
+  "id" : "basic-practitioner",
+  "text" : {
+    "status" : "generated",
+    "div" : "<div xmlns=\"http://www.w3.org/1999/xhtml\"><h2>Search Parameter on an practitioner extension on Basic resources</h2><p>Parameter <code>practitioner</code>:<code>reference</code></p><div><p>Search by practitioner for a Basic resource.</p>\n</div><table class=\"grid\"><tr><td>Resource</td><td><a href=\"http://hl7.org/fhir/R4/basic.html\">Basic</a></td></tr><tr><td>Expression</td><td><code>Basic.extension('http://ihris.org/fhir/StructureDefinition/ihris-practitioner-reference')</code></td></tr><tr><td>Processing Mode</td><td>Normal</td></tr><tr><td>Target Resources</td><td><a href=\"http://hl7.org/fhir/R4/practitioner.html\">Practitioner</a></td></tr><tr><td>Multiples</td><td>The parameter cannot repeat or have multiple values</td></tr></table></div>"
+  },
+  "url" : "http://ihris.org/fhir/SearchParameter/basic-practitioner",
+  "version" : "0.1.0",
+  "name" : "Search Parameter on an practitioner extension on Basic resources",
+  "status" : "active",
+  "date" : "2023-06-05T15:57:19+03:00",
+  "publisher" : "Luke Duncan",
+  "contact" : [{
+    "name" : "Luke Duncan",
+    "telecom" : [{
+      "system" : "email",
+      "value" : "lduncan@intrahealth.org"
+    }]
+  }],
+  "description" : "Search by practitioner for a Basic resource.",
+  "code" : "practitioner",
+  "base" : ["Basic"],
+  "type" : "reference",
+  "expression" : "Basic.extension('http://ihris.org/fhir/StructureDefinition/ihris-practitioner-reference')",
+  "xpathUsage" : "normal",
+  "target" : ["Practitioner"]
+}

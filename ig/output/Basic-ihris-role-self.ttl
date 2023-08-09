@@ -1,0 +1,183 @@
+@prefix fhir: <http://hl7.org/fhir/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+# - resource -------------------------------------------------------------------
+
+<http://ihris.org/fhir/Basic/ihris-role-self> a fhir:Basic ;
+  fhir:nodeRole fhir:treeRoot ;
+  fhir:id [ fhir:v "ihris-role-self"] ; # 
+  fhir:meta [
+     fhir:profile ( [
+       fhir:v "http://ihris.org/fhir/StructureDefinition/ihris-role"^^xsd:anyURI ;
+       fhir:link <http://ihris.org/fhir/StructureDefinition/ihris-role>
+     ] )
+  ] ; # 
+  fhir:text [
+     fhir:status [ fhir:v "extensions" ] ;
+     fhir:div "<div xmlns=\"http://www.w3.org/1999/xhtml\"><p><b>Generated Narrative: Basic</b><a name=\"ihris-role-self\"> </a></p><div style=\"display: inline-block; background-color: #d9e0e7; padding: 6px; margin: 4px; border: 1px solid #8da1b4; border-radius: 5px; line-height: 60%\"><p style=\"margin-bottom: 0px\">Resource Basic &quot;ihris-role-self&quot; </p><p style=\"margin-bottom: 0px\">Profile: <a href=\"StructureDefinition-ihris-role.html\">iHRIS Role</a></p></div><p><b>iHRIS Basic Name</b>: Self Service Role</p><p><b>iHRIS Role Primary</b>: false</p><p><b>iHRIS Assign Task</b>: <a href=\"Basic-ihris-task-read-questionnaire-resource.html\">Basic/ihris-task-read-questionnaire-resource</a></p><p><b>iHRIS Assign Task</b>: <a href=\"Basic-ihris-task-navigation-profile.html\">Basic/ihris-task-navigation-profile</a></p><p><b>iHRIS Assign Task</b>: <a href=\"Basic-ihris-task-navigation-leave.html\">Basic/ihris-task-navigation-leave</a></p><p><b>iHRIS Assign Task</b>: <a href=\"Basic-ihris-task-navigation-password.html\">Basic/ihris-task-navigation-password</a></p><p><b>iHRIS Assign Task</b>: <a href=\"Basic-ihris-task-read-ihris-page-practitioner.html\">Basic/ihris-task-read-ihris-page-practitioner</a></p><p><b>iHRIS Assign Task</b>: <a href=\"Basic-ihris-task-read-ihris-page-practitioner-role.html\">Basic/ihris-task-read-ihris-page-practitioner-role</a></p><p><b>iHRIS Assign Task</b>: <a href=\"Basic-ihris-task-read-code-system.html\">Basic/ihris-task-read-code-system</a></p><p><b>iHRIS Assign Task</b>: <a href=\"Basic-ihris-task-read-value-set.html\">Basic/ihris-task-read-value-set</a></p><p><b>iHRIS Assign Task</b>: <a href=\"Basic-ihris-task-read-location-resource.html\">Basic/ihris-task-read-location-resource</a></p><p><b>iHRIS Assign Task</b>: <a href=\"Basic-ihris-task-read-practitioner-resource.html\">Basic/ihris-task-read-practitioner-resource</a></p><p><b>iHRIS Assign Task</b>: <a href=\"Basic-ihris-task-read-practitioner-role-resource.html\">Basic/ihris-task-read-practitioner-role-resource</a></p><p><b>iHRIS Assign Task</b>: <a href=\"Basic-ihris-task-write-practitioner-resource.html\">Basic/ihris-task-write-practitioner-resource</a></p><p><b>iHRIS Assign Task</b>: <a href=\"Basic-ihris-task-read-questionnaire-response-resource.html\">Basic/ihris-task-read-questionnaire-response-resource</a></p><p><b>iHRIS Assign Task</b>: <a href=\"Basic-ihris-task-read-basic-resource.html\">Basic/ihris-task-read-basic-resource</a></p><p><b>iHRIS Assign Task</b>: <a href=\"Basic-ihris-task-write-questionnaire-response-resource.html\">Basic/ihris-task-write-questionnaire-response-resource</a></p><p><b>iHRIS Assign Task</b>: <a href=\"Basic-ihris-task-write-questionnaire-resource.html\">Basic/ihris-task-write-questionnaire-resource</a></p><p><b>iHRIS Assign Task</b>: <a href=\"Basic-ihris-task-read-questionnaire-leave.html\">Basic/ihris-task-read-questionnaire-leave</a></p><p><b>iHRIS Assign Task</b>: <a href=\"Basic-ihris-task-write-questionnaire-leave.html\">Basic/ihris-task-write-questionnaire-leave</a></p><p><b>iHRIS Assign Task</b>: <a href=\"Basic-ihris-task-write-basic-resource.html\">Basic/ihris-task-write-basic-resource</a></p><p><b>iHRIS Assign Task</b>: <a href=\"Basic-ihris-task-write-questionnaire-change-password.html\">Basic/ihris-task-write-questionnaire-change-password</a></p><p><b>iHRIS Assign Task</b>: <a href=\"Basic-ihris-task-write-person-resource.html\">Basic/ihris-task-write-person-resource</a></p><p><b>code</b>: iHRIS Role <span style=\"background: LightGoldenRodYellow; margin: 4px; border: 1px solid khaki\"> (<a href=\"CodeSystem-ihris-resource-codesystem.html\">Code System for iHRIS Basic Resources.</a>#role)</span></p></div>"
+  ] ; # 
+  fhir:extension ( [
+     fhir:url [ fhir:v "http://ihris.org/fhir/StructureDefinition/ihris-basic-name"^^xsd:anyURI ] ;
+     fhir:value [ fhir:v "Self Service Role" ]
+  ] [
+     fhir:url [ fhir:v "http://ihris.org/fhir/StructureDefinition/ihris-role-primary"^^xsd:anyURI ] ;
+     fhir:value [ fhir:v "false"^^xsd:boolean ]
+  ] [
+     fhir:url [ fhir:v "http://ihris.org/fhir/StructureDefinition/ihris-assign-task"^^xsd:anyURI ] ;
+     fhir:value [
+       a fhir:Reference ;
+       fhir:link <http://ihris.org/fhir/Basic/ihris-task-read-questionnaire-resource> ;
+       fhir:reference [ fhir:v "Basic/ihris-task-read-questionnaire-resource" ]
+     ]
+  ] [
+     fhir:url [ fhir:v "http://ihris.org/fhir/StructureDefinition/ihris-assign-task"^^xsd:anyURI ] ;
+     fhir:value [
+       a fhir:Reference ;
+       fhir:link <http://ihris.org/fhir/Basic/ihris-task-navigation-profile> ;
+       fhir:reference [ fhir:v "Basic/ihris-task-navigation-profile" ]
+     ]
+  ] [
+     fhir:url [ fhir:v "http://ihris.org/fhir/StructureDefinition/ihris-assign-task"^^xsd:anyURI ] ;
+     fhir:value [
+       a fhir:Reference ;
+       fhir:link <http://ihris.org/fhir/Basic/ihris-task-navigation-leave> ;
+       fhir:reference [ fhir:v "Basic/ihris-task-navigation-leave" ]
+     ]
+  ] [
+     fhir:url [ fhir:v "http://ihris.org/fhir/StructureDefinition/ihris-assign-task"^^xsd:anyURI ] ;
+     fhir:value [
+       a fhir:Reference ;
+       fhir:link <http://ihris.org/fhir/Basic/ihris-task-navigation-password> ;
+       fhir:reference [ fhir:v "Basic/ihris-task-navigation-password" ]
+     ]
+  ] [
+     fhir:url [ fhir:v "http://ihris.org/fhir/StructureDefinition/ihris-assign-task"^^xsd:anyURI ] ;
+     fhir:value [
+       a fhir:Reference ;
+       fhir:link <http://ihris.org/fhir/Basic/ihris-task-read-ihris-page-practitioner> ;
+       fhir:reference [ fhir:v "Basic/ihris-task-read-ihris-page-practitioner" ]
+     ]
+  ] [
+     fhir:url [ fhir:v "http://ihris.org/fhir/StructureDefinition/ihris-assign-task"^^xsd:anyURI ] ;
+     fhir:value [
+       a fhir:Reference ;
+       fhir:link <http://ihris.org/fhir/Basic/ihris-task-read-ihris-page-practitioner-role> ;
+       fhir:reference [ fhir:v "Basic/ihris-task-read-ihris-page-practitioner-role" ]
+     ]
+  ] [
+     fhir:url [ fhir:v "http://ihris.org/fhir/StructureDefinition/ihris-assign-task"^^xsd:anyURI ] ;
+     fhir:value [
+       a fhir:Reference ;
+       fhir:link <http://ihris.org/fhir/Basic/ihris-task-read-code-system> ;
+       fhir:reference [ fhir:v "Basic/ihris-task-read-code-system" ]
+     ]
+  ] [
+     fhir:url [ fhir:v "http://ihris.org/fhir/StructureDefinition/ihris-assign-task"^^xsd:anyURI ] ;
+     fhir:value [
+       a fhir:Reference ;
+       fhir:link <http://ihris.org/fhir/Basic/ihris-task-read-value-set> ;
+       fhir:reference [ fhir:v "Basic/ihris-task-read-value-set" ]
+     ]
+  ] [
+     fhir:url [ fhir:v "http://ihris.org/fhir/StructureDefinition/ihris-assign-task"^^xsd:anyURI ] ;
+     fhir:value [
+       a fhir:Reference ;
+       fhir:link <http://ihris.org/fhir/Basic/ihris-task-read-location-resource> ;
+       fhir:reference [ fhir:v "Basic/ihris-task-read-location-resource" ]
+     ]
+  ] [
+     fhir:url [ fhir:v "http://ihris.org/fhir/StructureDefinition/ihris-assign-task"^^xsd:anyURI ] ;
+     fhir:value [
+       a fhir:Reference ;
+       fhir:link <http://ihris.org/fhir/Basic/ihris-task-read-practitioner-resource> ;
+       fhir:reference [ fhir:v "Basic/ihris-task-read-practitioner-resource" ]
+     ]
+  ] [
+     fhir:url [ fhir:v "http://ihris.org/fhir/StructureDefinition/ihris-assign-task"^^xsd:anyURI ] ;
+     fhir:value [
+       a fhir:Reference ;
+       fhir:link <http://ihris.org/fhir/Basic/ihris-task-read-practitioner-role-resource> ;
+       fhir:reference [ fhir:v "Basic/ihris-task-read-practitioner-role-resource" ]
+     ]
+  ] [
+     fhir:url [ fhir:v "http://ihris.org/fhir/StructureDefinition/ihris-assign-task"^^xsd:anyURI ] ;
+     fhir:value [
+       a fhir:Reference ;
+       fhir:link <http://ihris.org/fhir/Basic/ihris-task-write-practitioner-resource> ;
+       fhir:reference [ fhir:v "Basic/ihris-task-write-practitioner-resource" ]
+     ]
+  ] [
+     fhir:url [ fhir:v "http://ihris.org/fhir/StructureDefinition/ihris-assign-task"^^xsd:anyURI ] ;
+     fhir:value [
+       a fhir:Reference ;
+       fhir:link <http://ihris.org/fhir/Basic/ihris-task-read-questionnaire-response-resource> ;
+       fhir:reference [ fhir:v "Basic/ihris-task-read-questionnaire-response-resource" ]
+     ]
+  ] [
+     fhir:url [ fhir:v "http://ihris.org/fhir/StructureDefinition/ihris-assign-task"^^xsd:anyURI ] ;
+     fhir:value [
+       a fhir:Reference ;
+       fhir:link <http://ihris.org/fhir/Basic/ihris-task-read-basic-resource> ;
+       fhir:reference [ fhir:v "Basic/ihris-task-read-basic-resource" ]
+     ]
+  ] [
+     fhir:url [ fhir:v "http://ihris.org/fhir/StructureDefinition/ihris-assign-task"^^xsd:anyURI ] ;
+     fhir:value [
+       a fhir:Reference ;
+       fhir:link <http://ihris.org/fhir/Basic/ihris-task-write-questionnaire-response-resource> ;
+       fhir:reference [ fhir:v "Basic/ihris-task-write-questionnaire-response-resource" ]
+     ]
+  ] [
+     fhir:url [ fhir:v "http://ihris.org/fhir/StructureDefinition/ihris-assign-task"^^xsd:anyURI ] ;
+     fhir:value [
+       a fhir:Reference ;
+       fhir:link <http://ihris.org/fhir/Basic/ihris-task-write-questionnaire-resource> ;
+       fhir:reference [ fhir:v "Basic/ihris-task-write-questionnaire-resource" ]
+     ]
+  ] [
+     fhir:url [ fhir:v "http://ihris.org/fhir/StructureDefinition/ihris-assign-task"^^xsd:anyURI ] ;
+     fhir:value [
+       a fhir:Reference ;
+       fhir:link <http://ihris.org/fhir/Basic/ihris-task-read-questionnaire-leave> ;
+       fhir:reference [ fhir:v "Basic/ihris-task-read-questionnaire-leave" ]
+     ]
+  ] [
+     fhir:url [ fhir:v "http://ihris.org/fhir/StructureDefinition/ihris-assign-task"^^xsd:anyURI ] ;
+     fhir:value [
+       a fhir:Reference ;
+       fhir:link <http://ihris.org/fhir/Basic/ihris-task-write-questionnaire-leave> ;
+       fhir:reference [ fhir:v "Basic/ihris-task-write-questionnaire-leave" ]
+     ]
+  ] [
+     fhir:url [ fhir:v "http://ihris.org/fhir/StructureDefinition/ihris-assign-task"^^xsd:anyURI ] ;
+     fhir:value [
+       a fhir:Reference ;
+       fhir:link <http://ihris.org/fhir/Basic/ihris-task-write-basic-resource> ;
+       fhir:reference [ fhir:v "Basic/ihris-task-write-basic-resource" ]
+     ]
+  ] [
+     fhir:url [ fhir:v "http://ihris.org/fhir/StructureDefinition/ihris-assign-task"^^xsd:anyURI ] ;
+     fhir:value [
+       a fhir:Reference ;
+       fhir:link <http://ihris.org/fhir/Basic/ihris-task-write-questionnaire-change-password> ;
+       fhir:reference [ fhir:v "Basic/ihris-task-write-questionnaire-change-password" ]
+     ]
+  ] [
+     fhir:url [ fhir:v "http://ihris.org/fhir/StructureDefinition/ihris-assign-task"^^xsd:anyURI ] ;
+     fhir:value [
+       a fhir:Reference ;
+       fhir:link <http://ihris.org/fhir/Basic/ihris-task-write-person-resource> ;
+       fhir:reference [ fhir:v "Basic/ihris-task-write-person-resource" ]
+     ]
+  ] ) ; # 
+  fhir:code [
+     fhir:coding ( [
+       fhir:system [ fhir:v "http://ihris.org/fhir/CodeSystem/ihris-resource-codesystem"^^xsd:anyURI ] ;
+       fhir:code [ fhir:v "role" ]
+     ] )
+  ] . # 
+
+# -------------------------------------------------------------------------------------
+

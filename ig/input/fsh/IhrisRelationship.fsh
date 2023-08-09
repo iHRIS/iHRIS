@@ -85,18 +85,18 @@ Id:             iHRISReportElement
 Title:          "Resource Fields"
 Description:    "Lists fields of a resource to be displayed/cached"
 * extension contains
-      label 1..1 MS and
+      fhirpath 1..1 MS and
       name 1..1 MS and
       display 0..1 MS and
       filter 0..1 MS and
       dropDownFilter 0..1 MS and
       order 0..1 MS
-* extension[label].value[x] only string
-* extension[label].valueString 1..1
-* extension[label].valueString ^label = "Name of the field unique to the relationship"
+* extension[fhirpath].value[x] only string
+* extension[fhirpath].valueString 1..1
+* extension[fhirpath].valueString ^label = "FHIR path to the field"
 * extension[name].value[x] only string
 * extension[name].valueString 1..1
-* extension[name].valueString ^label = "FHIR path to the field"
+* extension[name].valueString ^label = "Name of the field unique to the relationship"
 * extension[display].value[x] only string
 * extension[display].valueString 1..1
 * extension[display].valueString ^label = "Human readable name if the relation is to be displayed on the UI"

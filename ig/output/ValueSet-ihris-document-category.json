@@ -1,0 +1,27 @@
+{
+  "resourceType" : "ValueSet",
+  "id" : "ihris-document-category",
+  "text" : {
+    "status" : "generated",
+    "div" : "<div xmlns=\"http://www.w3.org/1999/xhtml\"><ul><li>Include all codes defined in <a href=\"CodeSystem-ihris-document-category.html\"><code>http://ihris.org/fhir/CodeSystem/ihris-document-category</code></a></li></ul></div>"
+  },
+  "url" : "http://ihris.org/fhir/ValueSet/ihris-document-category",
+  "version" : "0.1.0",
+  "name" : "IhrisDocumentCategoryValueSet",
+  "title" : "Code system for document categories.",
+  "status" : "active",
+  "date" : "2023-06-05T15:57:19+03:00",
+  "publisher" : "Luke Duncan",
+  "contact" : [{
+    "name" : "Luke Duncan",
+    "telecom" : [{
+      "system" : "email",
+      "value" : "lduncan@intrahealth.org"
+    }]
+  }],
+  "compose" : {
+    "include" : [{
+      "system" : "http://ihris.org/fhir/CodeSystem/ihris-document-category"
+    }]
+  }
+}

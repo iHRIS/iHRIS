@@ -1,0 +1,105 @@
+{
+  "resourceType" : "Basic",
+  "id" : "ihris-page-facility",
+  "meta" : {
+    "profile" : ["http://ihris.org/fhir/StructureDefinition/ihris-page"]
+  },
+  "text" : {
+    "status" : "extensions",
+    "div" : "<div xmlns=\"http://www.w3.org/1999/xhtml\"><p><b>Generated Narrative: Basic</b><a name=\"ihris-page-facility\"> </a></p><div style=\"display: inline-block; background-color: #d9e0e7; padding: 6px; margin: 4px; border: 1px solid #8da1b4; border-radius: 5px; line-height: 60%\"><p style=\"margin-bottom: 0px\">Resource Basic &quot;ihris-page-facility&quot; </p><p style=\"margin-bottom: 0px\">Profile: <a href=\"StructureDefinition-ihris-page.html\">iHRIS Page</a></p></div><blockquote><p><b>iHRIS Page Display</b></p><blockquote><p><b>url</b></p><code>resource</code></blockquote><p><b>value</b>: <a href=\"StructureDefinition-ihris-facility.html\">StructureDefinition/ihris-facility</a> &quot;IhrisFacility&quot;</p><blockquote><p><b>url</b></p><code>search</code></blockquote><p><b>value</b>: Facility Name|name</p><blockquote><p><b>url</b></p><code>search</code></blockquote><p><b>value</b>: Facility Type|type.coding.display</p><blockquote><p><b>url</b></p><code>search</code></blockquote><p><b>value</b>: Facility Physical Type|physicalType.coding.display</p><blockquote><p><b>url</b></p><code>search</code></blockquote><p><b>value</b>: Report To|partOf.reference</p><blockquote><p><b>url</b></p><code>search</code></blockquote><p><b>value</b>: Status|status</p><blockquote><p><b>url</b></p><code>search</code></blockquote><p><b>value</b>: Longitute|position.longitude</p><blockquote><p><b>url</b></p><code>search</code></blockquote><p><b>value</b>: Latitude|position.latitude</p><blockquote><p><b>url</b></p><code>filter</code></blockquote><p><b>value</b>: Name|name:contains</p><blockquote><p><b>url</b></p><code>filter</code></blockquote><p><b>value</b>: Type|type|http://ihris.org/fhir/ValueSet/ihris-facility-type</p><blockquote><p><b>url</b></p><code>filter</code></blockquote><p><b>value</b>: Physical Type|physicalType|http://hl7.org/fhir/ValueSet/location-physical-type</p></blockquote><blockquote><p><b>iHRIS Page Section</b></p><blockquote><p><b>url</b></p><code>title</code></blockquote><p><b>value</b>: Facility</p><blockquote><p><b>url</b></p><code>description</code></blockquote><p><b>value</b>: Facility/Duty Post details</p><blockquote><p><b>url</b></p><code>name</code></blockquote><p><b>value</b>: Location</p><blockquote><p><b>url</b></p><code>field</code></blockquote><p><b>value</b>: Location.name</p><blockquote><p><b>url</b></p><code>field</code></blockquote><p><b>value</b>: Location.physicalType</p><blockquote><p><b>url</b></p><code>field</code></blockquote><p><b>value</b>: Location.type</p><blockquote><p><b>url</b></p><code>field</code></blockquote><p><b>value</b>: Location.partOf</p><blockquote><p><b>url</b></p><code>field</code></blockquote><p><b>value</b>: Location.status</p><blockquote><p><b>url</b></p><code>field</code></blockquote><p><b>value</b>: Location.position</p></blockquote><p><b>code</b>: iHRIS Page <span style=\"background: LightGoldenRodYellow; margin: 4px; border: 1px solid khaki\"> (<a href=\"CodeSystem-ihris-resource-codesystem.html\">Code System for iHRIS Basic Resources.</a>#page)</span></p></div>"
+  },
+  "extension" : [{
+    "extension" : [{
+      "url" : "resource",
+      "valueReference" : {
+        "reference" : "StructureDefinition/ihris-facility"
+      }
+    },
+    {
+      "url" : "search",
+      "valueString" : "Facility Name|name"
+    },
+    {
+      "url" : "search",
+      "valueString" : "Facility Type|type.coding.display"
+    },
+    {
+      "url" : "search",
+      "valueString" : "Facility Physical Type|physicalType.coding.display"
+    },
+    {
+      "url" : "search",
+      "valueString" : "Report To|partOf.reference"
+    },
+    {
+      "url" : "search",
+      "valueString" : "Status|status"
+    },
+    {
+      "url" : "search",
+      "valueString" : "Longitute|position.longitude"
+    },
+    {
+      "url" : "search",
+      "valueString" : "Latitude|position.latitude"
+    },
+    {
+      "url" : "filter",
+      "valueString" : "Name|name:contains"
+    },
+    {
+      "url" : "filter",
+      "valueString" : "Type|type|http://ihris.org/fhir/ValueSet/ihris-facility-type"
+    },
+    {
+      "url" : "filter",
+      "valueString" : "Physical Type|physicalType|http://hl7.org/fhir/ValueSet/location-physical-type"
+    }],
+    "url" : "http://ihris.org/fhir/StructureDefinition/ihris-page-display"
+  },
+  {
+    "extension" : [{
+      "url" : "title",
+      "valueString" : "Facility"
+    },
+    {
+      "url" : "description",
+      "valueString" : "Facility/Duty Post details"
+    },
+    {
+      "url" : "name",
+      "valueString" : "Location"
+    },
+    {
+      "url" : "field",
+      "valueString" : "Location.name"
+    },
+    {
+      "url" : "field",
+      "valueString" : "Location.physicalType"
+    },
+    {
+      "url" : "field",
+      "valueString" : "Location.type"
+    },
+    {
+      "url" : "field",
+      "valueString" : "Location.partOf"
+    },
+    {
+      "url" : "field",
+      "valueString" : "Location.status"
+    },
+    {
+      "url" : "field",
+      "valueString" : "Location.position"
+    }],
+    "url" : "http://ihris.org/fhir/StructureDefinition/ihris-page-section"
+  }],
+  "code" : {
+    "coding" : [{
+      "system" : "http://ihris.org/fhir/CodeSystem/ihris-resource-codesystem",
+      "code" : "page"
+    }]
+  }
+}

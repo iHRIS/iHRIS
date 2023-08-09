@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<ValueSet xmlns="http://hl7.org/fhir">
+  <id value="ihris-relation-valueset"/>
+  <text>
+    <status value="generated"/><div xmlns="http://www.w3.org/1999/xhtml"><ul><li>Include all codes defined in <a href="CodeSystem-ihris-relation-codesystem.html"><code>http://ihris.org/fhir/CodeSystem/ihris-relation-codesystem</code></a></li></ul></div>
+  </text>
+  <url value="http://ihris.org/fhir/ValueSet/ihris-relation-valueset"/>
+  <version value="0.1.0"/>
+  <name value="IhrisRelationValueSet"/>
+  <title value="iHRIS Relationship ValueSet"/>
+  <status value="active"/>
+  <date value="2020-10-29T08:41:04.362Z"/>
+  <publisher value="Luke Duncan"/>
+  <contact>
+    <name value="Luke Duncan"/>
+    <telecom>
+      <system value="email"/>
+      <value value="lduncan@intrahealth.org"/>
+    </telecom>
+  </contact>
+  <compose>
+    <include>
+      <system value="http://ihris.org/fhir/CodeSystem/ihris-relation-codesystem"/>
+    </include>
+  </compose>
+</ValueSet>

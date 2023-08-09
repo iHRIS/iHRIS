@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<CodeSystem xmlns="http://hl7.org/fhir">
+  <id value="ihris-resource-codesystem"/>
+  <text>
+    <status value="generated"/><div xmlns="http://www.w3.org/1999/xhtml"><p>This code system <code>http://ihris.org/fhir/CodeSystem/ihris-resource-codesystem</code> defines the following codes:</p><table class="codes"><tr><td style="white-space:nowrap"><b>Code</b></td><td><b>Display</b></td><td><b>Definition</b></td></tr><tr><td style="white-space:nowrap">role<a name="ihris-resource-codesystem-role"> </a></td><td>iHRIS Role</td><td>User roles that are available to be assigned to users.</td></tr><tr><td style="white-space:nowrap">task<a name="ihris-resource-codesystem-task"> </a></td><td>iHRIS Task</td><td>Role tasks that are available to be assigned to roles</td></tr><tr><td style="white-space:nowrap">page<a name="ihris-resource-codesystem-page"> </a></td><td>iHRIS Page</td><td>Page definitions for viewing and editing resources.</td></tr><tr><td style="white-space:nowrap">practitioner-link<a name="ihris-resource-codesystem-practitioner-link"> </a></td><td>iHRIS Practitioner Link</td><td>Basic resource for customization that links to a Practitioner.</td></tr><tr><td style="white-space:nowrap">training-link<a name="ihris-resource-codesystem-training-link"> </a></td><td>iHRIS Training Link</td><td>Basic resource for customization that links to a Qualify training.</td></tr><tr><td style="white-space:nowrap">visualization<a name="ihris-resource-codesystem-visualization"> </a></td><td>iHRIS Data Visualization</td><td>iHRIS Data Visualization</td></tr><tr><td style="white-space:nowrap">dashboard<a name="ihris-resource-codesystem-dashboard"> </a></td><td>iHRIS Dashboard</td><td>iHRIS Dashboard</td></tr><tr><td style="white-space:nowrap">resourcedata<a name="ihris-resource-codesystem-resourcedata"> </a></td><td>Resource Data</td><td>Resource Data</td></tr></table></div>
+  </text>
+  <url value="http://ihris.org/fhir/CodeSystem/ihris-resource-codesystem"/>
+  <version value="0.1.0"/>
+  <name value="IhrisResourceCodeSystem"/>
+  <title value="Code System for iHRIS Basic Resources."/>
+  <status value="active"/>
+  <date value="2023-06-05T15:57:19+03:00"/>
+  <publisher value="Luke Duncan"/>
+  <contact>
+    <name value="Luke Duncan"/>
+    <telecom>
+      <system value="email"/>
+      <value value="lduncan@intrahealth.org"/>
+    </telecom>
+  </contact>
+  <content value="complete"/>
+  <count value="8"/>
+  <concept>
+    <code value="role"/>
+    <display value="iHRIS Role"/>
+    <definition value="User roles that are available to be assigned to users."/>
+  </concept>
+  <concept>
+    <code value="task"/>
+    <display value="iHRIS Task"/>
+    <definition value="Role tasks that are available to be assigned to roles"/>
+  </concept>
+  <concept>
+    <code value="page"/>
+    <display value="iHRIS Page"/>
+    <definition value="Page definitions for viewing and editing resources."/>
+  </concept>
+  <concept>
+    <code value="practitioner-link"/>
+    <display value="iHRIS Practitioner Link"/>
+    <definition value="Basic resource for customization that links to a Practitioner."/>
+  </concept>
+  <concept>
+    <code value="training-link"/>
+    <display value="iHRIS Training Link"/>
+    <definition value="Basic resource for customization that links to a Qualify training."/>
+  </concept>
+  <concept>
+    <code value="visualization"/>
+    <display value="iHRIS Data Visualization"/>
+    <definition value="iHRIS Data Visualization"/>
+  </concept>
+  <concept>
+    <code value="dashboard"/>
+    <display value="iHRIS Dashboard"/>
+    <definition value="iHRIS Dashboard"/>
+  </concept>
+  <concept>
+    <code value="resourcedata"/>
+    <display value="Resource Data"/>
+    <definition value="Resource Data"/>
+  </concept>
+</CodeSystem>

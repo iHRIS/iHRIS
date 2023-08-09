@@ -1,0 +1,12 @@
+{
+  "url" : "http://ihris.org/fhir/ImplementationGuide/ihris",
+  "name" : "iHRIS",
+  "package-id" : "ihris",
+  "ig-ver" : "0.1.0",
+  "date" : "Mon, 05 Jun, 2023 15:57:19 +0300",
+  "errs" : 167,
+  "warnings" : 188,
+  "hints" : 13,
+  "version" : "4.0.1",
+  "tool" : "5.0.0 (3)"
+}

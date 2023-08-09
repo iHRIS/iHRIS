@@ -1,0 +1,27 @@
+{
+  "resourceType" : "ValueSet",
+  "id" : "Ihris-facility-ownership",
+  "text" : {
+    "status" : "generated",
+    "div" : "<div xmlns=\"http://www.w3.org/1999/xhtml\"><ul><li>Include all codes defined in <a href=\"CodeSystem-Ihris-facility-ownership-type.html\"><code>http://ihris.org/fhir/CodeSystem/Ihris-facility-ownership-type</code></a></li></ul></div>"
+  },
+  "url" : "http://ihris.org/fhir/ValueSet/Ihris-facility-ownership",
+  "version" : "0.1.0",
+  "name" : "IhrisFacilityOwnershipValueSet",
+  "title" : "iHRIS Facility Ownership ValueSet",
+  "status" : "active",
+  "date" : "2022-02-23T08:41:04.362Z",
+  "publisher" : "Luke Duncan",
+  "contact" : [{
+    "name" : "Luke Duncan",
+    "telecom" : [{
+      "system" : "email",
+      "value" : "lduncan@intrahealth.org"
+    }]
+  }],
+  "compose" : {
+    "include" : [{
+      "system" : "http://ihris.org/fhir/CodeSystem/Ihris-facility-ownership-type"
+    }]
+  }
+}

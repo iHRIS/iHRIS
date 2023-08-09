@@ -1,0 +1,53 @@
+@prefix fhir: <http://hl7.org/fhir/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+# - resource -------------------------------------------------------------------
+
+<http://ihris.org/fhir/Parameters/ihris-dashboard> a fhir:Parameters ;
+  fhir:nodeRole fhir:treeRoot ;
+  fhir:id [ fhir:v "ihris-dashboard"] ; # 
+  fhir:meta [
+     fhir:profile ( [
+       fhir:v "http://ihris.org/fhir/StructureDefinition/ihris-parameters-remote-config"^^xsd:anyURI ;
+       fhir:link <http://ihris.org/fhir/StructureDefinition/ihris-parameters-remote-config>
+     ] )
+  ] ; # 
+  fhir:parameter ( [
+     fhir:name [ fhir:v "signature" ] ;
+     fhir:value [
+       a fhir:Signature ;
+       fhir:type ( [
+         fhir:system [ fhir:v "urn:iso-astm:E1762-95:2013"^^xsd:anyURI ] ;
+         fhir:code [ fhir:v "1.2.840.10065.1.12.1.14" ]
+       ] ) ;
+       fhir:when [ fhir:v "2020-08-21T07:40:23.650Z"^^xsd:dateTime ] ;
+       fhir:who [
+         fhir:link <http://ihris.org/fhir/Organization/ihris> ;
+         fhir:reference [ fhir:v "http://ihris.org/fhir/Organization/ihris" ]
+       ] ;
+       fhir:data [ fhir:v "CsPT1RCVT1SWuH4Es/D2xCvqjsK4rry7VVl12rZAwHunaypOBgXbSmnBiFxk24h1VI3LLro6nlASS58eM8vdPW26QN2r+q9r4Ite212lxcqrLagK+2QFtJq+LrILUAL7aH1zke2NDCrnjXDv3oLMU1WNFKVvQ6bkPFeL0A3Iknk="^^xsd:base64Binary ]
+     ]
+  ] [
+     fhir:name [ fhir:v "config" ] ;
+     fhir:part ( [
+       fhir:name [ fhir:v "site:nav:menu:dashboard:text" ] ;
+       fhir:value [ fhir:v "Dashboard" ]
+     ] [
+       fhir:name [ fhir:v "site:nav:menu:dashboard:order" ] ;
+       fhir:value [ fhir:v "5" ]
+     ] [
+       fhir:name [ fhir:v "site:nav:menu:dashboard:icon" ] ;
+       fhir:value [ fhir:v "mdi-poll-box" ]
+     ] [
+       fhir:name [ fhir:v "site:nav:menu:dashboard:menu:staff:text" ] ;
+       fhir:value [ fhir:v "Staff" ]
+     ] [
+       fhir:name [ fhir:v "site:nav:menu:dashboard:menu:staff:url" ] ;
+       fhir:value [ fhir:v "/dashboard/02a830b0-682f-11ea-b869-59440bc44685" ]
+     ] )
+  ] ) . # 
+
+# -------------------------------------------------------------------------------------
+

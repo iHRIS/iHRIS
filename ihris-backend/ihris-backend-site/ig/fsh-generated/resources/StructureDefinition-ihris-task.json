@@ -2587,7 +2587,7 @@
           {
             "code": "Reference",
             "targetProfile": [
-              "http://hl7.org/fhir/StructureDefinition/Basic"
+              "http://ihris.org/fhir/StructureDefinition/ihris-task"
             ]
           }
         ],
@@ -3350,7 +3350,7 @@
           {
             "code": "Reference",
             "targetProfile": [
-              "http://hl7.org/fhir/StructureDefinition/Basic"
+              "http://ihris.org/fhir/StructureDefinition/ihris-task"
             ]
           }
         ]

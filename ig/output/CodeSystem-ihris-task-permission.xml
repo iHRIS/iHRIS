@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<CodeSystem xmlns="http://hl7.org/fhir">
+  <id value="ihris-task-permission"/>
+  <text>
+    <status value="generated"/><div xmlns="http://www.w3.org/1999/xhtml"><p>This code system <code>http://ihris.org/fhir/CodeSystem/ihris-task-permission</code> defines the following codes:</p><table class="codes"><tr><td style="white-space:nowrap"><b>Code</b></td><td><b>Display</b></td><td><b>Definition</b></td></tr><tr><td style="white-space:nowrap">*<a name="ihris-task-permission-.42"> </a></td><td>All</td><td>Can do any task.</td></tr><tr><td style="white-space:nowrap">read<a name="ihris-task-permission-read"> </a></td><td>Read</td><td>Can read the given resource.</td></tr><tr><td style="white-space:nowrap">write<a name="ihris-task-permission-write"> </a></td><td>Write</td><td>Can write the given resource.</td></tr><tr><td style="white-space:nowrap">delete<a name="ihris-task-permission-delete"> </a></td><td>Delete</td><td>Can delete the given resource.</td></tr><tr><td style="white-space:nowrap">filter<a name="ihris-task-permission-filter"> </a></td><td>Filter</td><td>Search filter constraints.</td></tr><tr><td style="white-space:nowrap">special<a name="ihris-task-permission-special"> </a></td><td>Special</td><td>Special non-resource permissions.</td></tr></table></div>
+  </text>
+  <url value="http://ihris.org/fhir/CodeSystem/ihris-task-permission"/>
+  <version value="0.1.0"/>
+  <name value="IhrisTaskPermissionCodeSystem"/>
+  <title value="Code system for task permissions."/>
+  <status value="active"/>
+  <date value="2021-03-26T09:25:04.362Z"/>
+  <publisher value="Luke Duncan"/>
+  <contact>
+    <name value="Luke Duncan"/>
+    <telecom>
+      <system value="email"/>
+      <value value="lduncan@intrahealth.org"/>
+    </telecom>
+  </contact>
+  <content value="complete"/>
+  <count value="6"/>
+  <concept>
+    <code value="*"/>
+    <display value="All"/>
+    <definition value="Can do any task."/>
+  </concept>
+  <concept>
+    <code value="read"/>
+    <display value="Read"/>
+    <definition value="Can read the given resource."/>
+  </concept>
+  <concept>
+    <code value="write"/>
+    <display value="Write"/>
+    <definition value="Can write the given resource."/>
+  </concept>
+  <concept>
+    <code value="delete"/>
+    <display value="Delete"/>
+    <definition value="Can delete the given resource."/>
+  </concept>
+  <concept>
+    <code value="filter"/>
+    <display value="Filter"/>
+    <definition value="Search filter constraints."/>
+  </concept>
+  <concept>
+    <code value="special"/>
+    <display value="Special"/>
+    <definition value="Special non-resource permissions."/>
+  </concept>
+</CodeSystem>

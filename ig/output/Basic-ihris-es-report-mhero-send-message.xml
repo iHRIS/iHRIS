@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<Basic xmlns="http://hl7.org/fhir">
+  <id value="ihris-es-report-mhero-send-message"/>
+  <meta>
+    <profile value="http://ihris.org/fhir/StructureDefinition/iHRISRelationship"/>
+  </meta>
+  <text>
+    <status value="extensions"/><div xmlns="http://www.w3.org/1999/xhtml"><p><b>Generated Narrative: Basic</b><a name="ihris-es-report-mhero-send-message"> </a></p><div style="display: inline-block; background-color: #d9e0e7; padding: 6px; margin: 4px; border: 1px solid #8da1b4; border-radius: 5px; line-height: 60%"><p style="margin-bottom: 0px">Resource Basic &quot;ihris-es-report-mhero-send-message&quot; </p><p style="margin-bottom: 0px">Profile: <a href="StructureDefinition-iHRISRelationship.html">iHRIS Resources Relationship Profile</a></p></div><blockquote><p><b>Details of a report</b></p><blockquote><p><b>url</b></p><code>name</code></blockquote><p><b>value</b>: mheropractitioner</p><blockquote><p><b>url</b></p><code>label</code></blockquote><p><b>value</b>: Employee List</p><blockquote><p><b>url</b></p><code>resource</code></blockquote><p><b>value</b>: Practitioner</p><blockquote><p><b>url</b></p><code>query</code></blockquote><p><b>value</b>: identifier.system=http://app.rapidpro.io/contact-uuid</p><blockquote><p><b>url</b></p><code>displayCheckbox</code></blockquote><p><b>value</b>: true</p><p><b>Display Name</b>: Fullname</p><blockquote><p><b>url</b></p><a href="StructureDefinition-iHRISReportElement.html">Resource Fields</a></blockquote><p><b>Display Name</b>: Phone Number</p><blockquote><p><b>url</b></p><a href="StructureDefinition-iHRISReportElement.html">Resource Fields</a></blockquote></blockquote><blockquote><p><b>Links to the primary resource</b></p><blockquote><p><b>url</b></p><code>name</code></blockquote><p><b>value</b>: facility</p><blockquote><p><b>url</b></p><code>resource</code></blockquote><p><b>value</b>: Location</p><blockquote><p><b>url</b></p><code>linkElement</code></blockquote><p><b>value</b>: Location.id</p><blockquote><p><b>url</b></p><code>linkTo</code></blockquote><p><b>value</b>: role.location</p><blockquote><p><b>url</b></p><code>linkElementSearchParameter</code></blockquote><p><b>value</b>: practitioner</p><blockquote><p><b>url</b></p><code>multiple</code></blockquote><p><b>value</b>: false</p><p><b>Display Name</b>: Facility</p><blockquote><p><b>url</b></p><a href="StructureDefinition-iHRISReportElement.html">Resource Fields</a></blockquote></blockquote><p><b>code</b>: iHRIS Relationship <span style="background: LightGoldenRodYellow; margin: 4px; border: 1px solid khaki"> ()</span></p></div>
+  </text>
+  <extension url="http://ihris.org/fhir/StructureDefinition/iHRISReportDetails">
+    <extension url="name">
+      <valueString value="mheropractitioner"/>
+    </extension>
+    <extension url="label">
+      <valueString value="Employee List"/>
+    </extension>
+    <extension url="resource">
+      <valueString value="Practitioner"/>
+    </extension>
+    <extension url="query">
+      <valueString value="identifier.system=http://app.rapidpro.io/contact-uuid"/>
+    </extension>
+    <extension url="displayCheckbox">
+      <valueBoolean value="true"/>
+    </extension>
+    <extension url="http://ihris.org/fhir/StructureDefinition/iHRISReportElement">
+      <extension url="label">
+        <valueString value="fullname"/>
+      </extension>
+      <extension url="name">
+        <valueString value="name.where(use='official').last().text"/>
+      </extension>
+      <extension url="display">
+        <valueString value="Fullname"/>
+      </extension>
+      <extension url="filter">
+        <valueBoolean value="true"/>
+      </extension>
+      <extension url="dropDownFilter">
+        <valueBoolean value="false"/>
+      </extension>
+    </extension>
+    <extension url="http://ihris.org/fhir/StructureDefinition/iHRISReportElement">
+      <extension url="label">
+        <valueString value="phone"/>
+      </extension>
+      <extension url="name">
+        <valueString value="telecom.where(system='phone').value"/>
+      </extension>
+      <extension url="display">
+        <valueString value="Phone Number"/>
+      </extension>
+    </extension>
+  </extension>
+  <extension url="http://ihris.org/fhir/StructureDefinition/iHRISReportLink">
+    <extension url="name">
+      <valueString value="facility"/>
+    </extension>
+    <extension url="resource">
+      <valueString value="Location"/>
+    </extension>
+    <extension url="linkElement">
+      <valueString value="Location.id"/>
+    </extension>
+    <extension url="linkTo">
+      <valueString value="role.location"/>
+    </extension>
+    <extension url="linkElementSearchParameter">
+      <valueString value="practitioner"/>
+    </extension>
+    <extension url="multiple">
+      <valueBoolean value="false"/>
+    </extension>
+    <extension url="http://ihris.org/fhir/StructureDefinition/iHRISReportElement">
+      <extension url="label">
+        <valueString value="facilityName"/>
+      </extension>
+      <extension url="name">
+        <valueString value="name"/>
+      </extension>
+      <extension url="display">
+        <valueString value="Facility"/>
+      </extension>
+      <extension url="filter">
+        <valueBoolean value="true"/>
+      </extension>
+      <extension url="dropDownFilter">
+        <valueBoolean value="true"/>
+      </extension>
+    </extension>
+  </extension>
+  <code>
+    <text value="iHRIS Relationship"/>
+  </code>
+</Basic>

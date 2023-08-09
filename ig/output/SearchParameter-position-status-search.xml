@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<SearchParameter xmlns="http://hl7.org/fhir">
+  <id value="position-status-search"/>
+  <text>
+    <status value="generated"/><div xmlns="http://www.w3.org/1999/xhtml"><h2>Search Parameter for a practitionerRole position status</h2><p>Parameter <code>positionstatus</code>:<code>token</code></p><div><p>Search for a practitionerRole position status.</p>
+</div><table class="grid"><tr><td>Resource</td><td><a href="http://hl7.org/fhir/R4/practitionerrole.html">PractitionerRole</a></td></tr><tr><td>Expression</td><td><code>PractitionerRole.extension.where(url='http://ihris.org/fhir/StructureDefinition/ihris-practitionerrole-position-status')</code></td></tr><tr><td>Processing Mode</td><td>Normal</td></tr><tr><td>Multiples</td><td>The parameter cannot repeat or have multiple values</td></tr></table></div>
+  </text>
+  <url value="http://ihris.org/fhir/SearchParameter/position-status-search"/>
+  <version value="0.1.0"/>
+  <name value="Search Parameter for a practitionerRole position status"/>
+  <status value="active"/>
+  <date value="2023-06-05T15:57:19+03:00"/>
+  <publisher value="Luke Duncan"/>
+  <contact>
+    <name value="Luke Duncan"/>
+    <telecom>
+      <system value="email"/>
+      <value value="lduncan@intrahealth.org"/>
+    </telecom>
+  </contact>
+  <description value="Search for a practitionerRole position status."/>
+  <code value="positionstatus"/>
+  <base value="PractitionerRole"/>
+  <type value="token"/>
+  <expression value="PractitionerRole.extension.where(url='http://ihris.org/fhir/StructureDefinition/ihris-practitionerrole-position-status')"/>
+  <xpathUsage value="normal"/>
+</SearchParameter>

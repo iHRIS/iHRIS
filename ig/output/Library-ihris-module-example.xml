@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<Library xmlns="http://hl7.org/fhir">
+  <id value="ihris-module-example"/>
+  <meta>
+    <profile value="http://ihris.org/fhir/StructureDefinition/ihris-module"/>
+  </meta>
+  <text>
+    <status value="generated"/><div xmlns="http://www.w3.org/1999/xhtml"><h2>Participants</h2><table class="grid"><tr><td>Author</td><td>Test Author</td><td><a href="mailto:test@ihris.org">test@ihris.org</a></td></tr></table><h2>Contents</h2><p>module-signature: (<code>text/x-sig</code>)</p><pre><code>LD�</code></pre><p>module-code: (<code>application/javascript</code>)</p><pre><code>LD�</code></pre></div>
+  </text>
+  <url value="http://ihris.org/fhir/Library/ihris-module-example"/>
+  <version value="0.1.0"/>
+  <name value="ihris-example"/>
+  <title value="iHRIS Example Module"/>
+  <status value="active"/>
+  <type>
+    <coding>
+      <code value="logic-library"/>
+    </coding>
+  </type>
+  <date value="2023-06-05T15:57:19+03:00"/>
+  <publisher value="Luke Duncan"/>
+  <contact>
+    <name value="Luke Duncan"/>
+    <telecom>
+      <system value="email"/>
+      <value value="lduncan@intrahealth.org"/>
+    </telecom>
+  </contact>
+  <author>
+    <name value="Test Author"/>
+    <telecom>
+      <system value="email"/>
+      <value value="test@ihris.org"/>
+    </telecom>
+  </author>
+  <content>
+    <contentType value="text/x-sig"/>
+    <data value="TEST"/>
+    <title value="module-signature"/>
+  </content>
+  <content>
+    <contentType value="application/javascript"/>
+    <data value="TEST"/>
+    <title value="module-code"/>
+  </content>
+</Library>

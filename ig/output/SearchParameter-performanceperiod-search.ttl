@@ -1,0 +1,36 @@
+@prefix fhir: <http://hl7.org/fhir/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+# - resource -------------------------------------------------------------------
+
+<http://ihris.org/fhir/SearchParameter/performanceperiod-search> a fhir:SearchParameter ;
+  fhir:nodeRole fhir:treeRoot ;
+  fhir:id [ fhir:v "performanceperiod-search"] ; # 
+  fhir:text [
+     fhir:status [ fhir:v "generated" ] ;
+     fhir:div "<div xmlns=\"http://www.w3.org/1999/xhtml\"><h2>Search Parameter for a practitioner's Performance Period</h2><p>Parameter <code>performanceperiod</code>:<code>date</code></p><div><p>Search for a practitioner's Performance Period</p>\n</div><table class=\"grid\"><tr><td>Resource</td><td><a href=\"http://hl7.org/fhir/R4/basic.html\">Basic</a></td></tr><tr><td>Expression</td><td><code>Basic.extension.where(url='http://ihris.org/fhir/StructureDefinition/ihris-performance').extension.where(url='period')</code></td></tr><tr><td>Processing Mode</td><td>Normal</td></tr><tr><td>Multiples</td><td>The parameter cannot repeat or have multiple values</td></tr></table></div>"
+  ] ; # 
+  fhir:url [ fhir:v "http://ihris.org/fhir/SearchParameter/performanceperiod-search"^^xsd:anyURI] ; # 
+  fhir:version [ fhir:v "0.1.0"] ; # 
+  fhir:name [ fhir:v "Search Parameter for a practitioner's Performance Period"] ; # 
+  fhir:status [ fhir:v "active"] ; # 
+  fhir:date [ fhir:v "2023-06-05T15:57:19+03:00"^^xsd:dateTime] ; # 
+  fhir:publisher [ fhir:v "Luke Duncan"] ; # 
+  fhir:contact ( [
+     fhir:name [ fhir:v "Luke Duncan" ] ;
+     fhir:telecom ( [
+       fhir:system [ fhir:v "email" ] ;
+       fhir:value [ fhir:v "lduncan@intrahealth.org" ]
+     ] )
+  ] ) ; # 
+  fhir:description [ fhir:v "Search for a practitioner's Performance Period"] ; # 
+  fhir:code [ fhir:v "performanceperiod"] ; # 
+  fhir:base ( [ fhir:v "Basic"] ) ; # 
+  fhir:type [ fhir:v "date"] ; # 
+  fhir:expression [ fhir:v "Basic.extension.where(url='http://ihris.org/fhir/StructureDefinition/ihris-performance').extension.where(url='period')"] ; # 
+  fhir:xpathUsage [ fhir:v "normal"] . # 
+
+# -------------------------------------------------------------------------------------
+

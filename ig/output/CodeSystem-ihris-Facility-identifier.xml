@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<CodeSystem xmlns="http://hl7.org/fhir">
+  <id value="ihris-Facility-identifier"/>
+  <text>
+    <status value="generated"/><div xmlns="http://www.w3.org/1999/xhtml"><p>This code system <code>http://ihris.org/fhir/CodeSystem/ihris-Facility-identifier</code> defines the following codes:</p><table class="codes"><tr><td style="white-space:nowrap"><b>Code</b></td><td><b>Display</b></td></tr><tr><td style="white-space:nowrap">dhis2Id<a name="ihris-Facility-identifier-dhis2Id"> </a></td><td>DHIS2 ID</td></tr><tr><td style="white-space:nowrap">mfrId<a name="ihris-Facility-identifier-mfrId"> </a></td><td>MFR ID</td></tr></table></div>
+  </text>
+  <url value="http://ihris.org/fhir/CodeSystem/ihris-Facility-identifier"/>
+  <version value="0.1.0"/>
+  <name value="IhrisFacilityIdentifierCodeSystem"/>
+  <title value="Identifier Type"/>
+  <status value="active"/>
+  <date value="2022-02-13T08:41:04.362Z"/>
+  <publisher value="Luke Duncan"/>
+  <contact>
+    <name value="Luke Duncan"/>
+    <telecom>
+      <system value="email"/>
+      <value value="lduncan@intrahealth.org"/>
+    </telecom>
+  </contact>
+  <content value="complete"/>
+  <count value="2"/>
+  <concept>
+    <code value="dhis2Id"/>
+    <display value="DHIS2 ID"/>
+  </concept>
+  <concept>
+    <code value="mfrId"/>
+    <display value="MFR ID"/>
+  </concept>
+</CodeSystem>

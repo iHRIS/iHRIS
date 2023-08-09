@@ -1,0 +1,47 @@
+{
+  "resourceType" : "Library",
+  "id" : "ihris-module-example",
+  "meta" : {
+    "profile" : ["http://ihris.org/fhir/StructureDefinition/ihris-module"]
+  },
+  "text" : {
+    "status" : "generated",
+    "div" : "<div xmlns=\"http://www.w3.org/1999/xhtml\"><h2>Participants</h2><table class=\"grid\"><tr><td>Author</td><td>Test Author</td><td><a href=\"mailto:test@ihris.org\">test@ihris.org</a></td></tr></table><h2>Contents</h2><p>module-signature: (<code>text/x-sig</code>)</p><pre><code>LD�</code></pre><p>module-code: (<code>application/javascript</code>)</p><pre><code>LD�</code></pre></div>"
+  },
+  "url" : "http://ihris.org/fhir/Library/ihris-module-example",
+  "version" : "0.1.0",
+  "name" : "ihris-example",
+  "title" : "iHRIS Example Module",
+  "status" : "active",
+  "type" : {
+    "coding" : [{
+      "code" : "logic-library"
+    }]
+  },
+  "date" : "2023-06-05T15:57:19+03:00",
+  "publisher" : "Luke Duncan",
+  "contact" : [{
+    "name" : "Luke Duncan",
+    "telecom" : [{
+      "system" : "email",
+      "value" : "lduncan@intrahealth.org"
+    }]
+  }],
+  "author" : [{
+    "name" : "Test Author",
+    "telecom" : [{
+      "system" : "email",
+      "value" : "test@ihris.org"
+    }]
+  }],
+  "content" : [{
+    "contentType" : "text/x-sig",
+    "data" : "TEST",
+    "title" : "module-signature"
+  },
+  {
+    "contentType" : "application/javascript",
+    "data" : "TEST",
+    "title" : "module-code"
+  }]
+}

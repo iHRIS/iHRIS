@@ -1,0 +1,89 @@
+{
+  "resourceType" : "Basic",
+  "id" : "ihris-page-location",
+  "meta" : {
+    "profile" : ["http://ihris.org/fhir/StructureDefinition/ihris-page"]
+  },
+  "text" : {
+    "status" : "extensions",
+    "div" : "<div xmlns=\"http://www.w3.org/1999/xhtml\"><p><b>Generated Narrative: Basic</b><a name=\"ihris-page-location\"> </a></p><div style=\"display: inline-block; background-color: #d9e0e7; padding: 6px; margin: 4px; border: 1px solid #8da1b4; border-radius: 5px; line-height: 60%\"><p style=\"margin-bottom: 0px\">Resource Basic &quot;ihris-page-location&quot; </p><p style=\"margin-bottom: 0px\">Profile: <a href=\"StructureDefinition-ihris-page.html\">iHRIS Page</a></p></div><blockquote><p><b>iHRIS Page Display</b></p><blockquote><p><b>url</b></p><code>resource</code></blockquote><p><b>value</b>: <a href=\"StructureDefinition-ihris-jurisdiction.html\">StructureDefinition/ihris-jurisdiction</a> &quot;IhrisJurisdiction&quot;</p><blockquote><p><b>url</b></p><code>search</code></blockquote><p><b>value</b>: Name|name</p><blockquote><p><b>url</b></p><code>search</code></blockquote><p><b>value</b>: Type|type.coding.code</p><blockquote><p><b>url</b></p><code>search</code></blockquote><p><b>value</b>: Physical Type|physicalType.text</p><blockquote><p><b>url</b></p><code>search</code></blockquote><p><b>value</b>: Jurisdiction|partOf.reference</p><blockquote><p><b>url</b></p><code>filter</code></blockquote><p><b>value</b>: Name|name:contains</p><blockquote><p><b>url</b></p><code>filter</code></blockquote><p><b>value</b>: Type|type|http://ihris.org/fhir/ValueSet/ihris-jurisdiction-type</p><blockquote><p><b>url</b></p><code>filter</code></blockquote><p><b>value</b>: Jurisdiction|partOf</p></blockquote><blockquote><p><b>iHRIS Page Section</b></p><blockquote><p><b>url</b></p><code>title</code></blockquote><p><b>value</b>: Geographical Location</p><blockquote><p><b>url</b></p><code>description</code></blockquote><p><b>value</b>: Geographical Location details</p><blockquote><p><b>url</b></p><code>name</code></blockquote><p><b>value</b>: Geographical Location</p><blockquote><p><b>url</b></p><code>field</code></blockquote><p><b>value</b>: Location.name</p><blockquote><p><b>url</b></p><code>field</code></blockquote><p><b>value</b>: Location.type</p><blockquote><p><b>url</b></p><code>field</code></blockquote><p><b>value</b>: Location.physicalType</p><blockquote><p><b>url</b></p><code>field</code></blockquote><p><b>value</b>: Location.partOf</p><blockquote><p><b>url</b></p><code>field</code></blockquote><p><b>value</b>: Location.status</p></blockquote><p><b>code</b>: iHRIS Page <span style=\"background: LightGoldenRodYellow; margin: 4px; border: 1px solid khaki\"> (<a href=\"CodeSystem-ihris-resource-codesystem.html\">Code System for iHRIS Basic Resources.</a>#page)</span></p></div>"
+  },
+  "extension" : [{
+    "extension" : [{
+      "url" : "resource",
+      "valueReference" : {
+        "reference" : "StructureDefinition/ihris-jurisdiction"
+      }
+    },
+    {
+      "url" : "search",
+      "valueString" : "Name|name"
+    },
+    {
+      "url" : "search",
+      "valueString" : "Type|type.coding.code"
+    },
+    {
+      "url" : "search",
+      "valueString" : "Physical Type|physicalType.text"
+    },
+    {
+      "url" : "search",
+      "valueString" : "Jurisdiction|partOf.reference"
+    },
+    {
+      "url" : "filter",
+      "valueString" : "Name|name:contains"
+    },
+    {
+      "url" : "filter",
+      "valueString" : "Type|type|http://ihris.org/fhir/ValueSet/ihris-jurisdiction-type"
+    },
+    {
+      "url" : "filter",
+      "valueString" : "Jurisdiction|partOf"
+    }],
+    "url" : "http://ihris.org/fhir/StructureDefinition/ihris-page-display"
+  },
+  {
+    "extension" : [{
+      "url" : "title",
+      "valueString" : "Geographical Location"
+    },
+    {
+      "url" : "description",
+      "valueString" : "Geographical Location details"
+    },
+    {
+      "url" : "name",
+      "valueString" : "Geographical Location"
+    },
+    {
+      "url" : "field",
+      "valueString" : "Location.name"
+    },
+    {
+      "url" : "field",
+      "valueString" : "Location.type"
+    },
+    {
+      "url" : "field",
+      "valueString" : "Location.physicalType"
+    },
+    {
+      "url" : "field",
+      "valueString" : "Location.partOf"
+    },
+    {
+      "url" : "field",
+      "valueString" : "Location.status"
+    }],
+    "url" : "http://ihris.org/fhir/StructureDefinition/ihris-page-section"
+  }],
+  "code" : {
+    "coding" : [{
+      "system" : "http://ihris.org/fhir/CodeSystem/ihris-resource-codesystem",
+      "code" : "page"
+    }]
+  }
+}

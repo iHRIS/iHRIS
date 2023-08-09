@@ -33,8 +33,11 @@
         {
           "extension": [
             {
-              "url": "label",
+              "url": "http://hl7.org/fhir/StructureDefinition/valueset-label",
               "valueString": "employeeId"
+            },
+            {
+              "url": "fhirpath"
             },
             {
               "url": "name",
@@ -58,8 +61,11 @@
         {
           "extension": [
             {
-              "url": "label",
+              "url": "http://hl7.org/fhir/StructureDefinition/valueset-label",
               "valueString": "prefix"
+            },
+            {
+              "url": "fhirpath"
             },
             {
               "url": "name",
@@ -83,8 +89,11 @@
         {
           "extension": [
             {
-              "url": "label",
+              "url": "http://hl7.org/fhir/StructureDefinition/valueset-label",
               "valueString": "given"
+            },
+            {
+              "url": "fhirpath"
             },
             {
               "url": "name",
@@ -108,8 +117,11 @@
         {
           "extension": [
             {
-              "url": "label",
+              "url": "http://hl7.org/fhir/StructureDefinition/valueset-label",
               "valueString": "family"
+            },
+            {
+              "url": "fhirpath"
             },
             {
               "url": "name",
@@ -133,8 +145,11 @@
         {
           "extension": [
             {
-              "url": "label",
+              "url": "http://hl7.org/fhir/StructureDefinition/valueset-label",
               "valueString": "given"
+            },
+            {
+              "url": "fhirpath"
             },
             {
               "url": "name",
@@ -158,8 +173,11 @@
         {
           "extension": [
             {
-              "url": "label",
+              "url": "http://hl7.org/fhir/StructureDefinition/valueset-label",
               "valueString": "gender"
+            },
+            {
+              "url": "fhirpath"
             },
             {
               "url": "name",
@@ -183,8 +201,11 @@
         {
           "extension": [
             {
-              "url": "label",
+              "url": "http://hl7.org/fhir/StructureDefinition/valueset-label",
               "valueString": "residence"
+            },
+            {
+              "url": "fhirpath"
             },
             {
               "url": "name",

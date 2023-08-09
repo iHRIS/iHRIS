@@ -1,0 +1,36 @@
+{
+  "resourceType" : "CodeSystem",
+  "id" : "Ihris-facility-ownership-type",
+  "text" : {
+    "status" : "generated",
+    "div" : "<div xmlns=\"http://www.w3.org/1999/xhtml\"><p>This code system <code>http://ihris.org/fhir/CodeSystem/Ihris-facility-ownership-type</code> defines the following codes:</p><table class=\"codes\"><tr><td style=\"white-space:nowrap\"><b>Code</b></td><td><b>Display</b></td></tr><tr><td style=\"white-space:nowrap\">private<a name=\"Ihris-facility-ownership-type-private\"> </a></td><td>Private</td></tr><tr><td style=\"white-space:nowrap\">government<a name=\"Ihris-facility-ownership-type-government\"> </a></td><td>Government</td></tr><tr><td style=\"white-space:nowrap\">NGO<a name=\"Ihris-facility-ownership-type-NGO\"> </a></td><td>NGO's</td></tr></table></div>"
+  },
+  "url" : "http://ihris.org/fhir/CodeSystem/Ihris-facility-ownership-type",
+  "version" : "0.1.0",
+  "name" : "IhrisFacilityOwnershipTypeCodeSystem",
+  "title" : "Facility Ownership Type",
+  "status" : "active",
+  "date" : "2022-02-23T08:41:04.362Z",
+  "publisher" : "Luke Duncan",
+  "contact" : [{
+    "name" : "Luke Duncan",
+    "telecom" : [{
+      "system" : "email",
+      "value" : "lduncan@intrahealth.org"
+    }]
+  }],
+  "content" : "complete",
+  "count" : 3,
+  "concept" : [{
+    "code" : "private",
+    "display" : "Private"
+  },
+  {
+    "code" : "government",
+    "display" : "Government"
+  },
+  {
+    "code" : "NGO",
+    "display" : "NGO's"
+  }]
+}

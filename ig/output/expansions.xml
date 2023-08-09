@@ -1,0 +1,1392 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<Bundle xmlns="http://hl7.org/fhir">
+  <id value="fce84d56-ecfb-4ae1-8388-05599ae8fcde"/>
+  <meta>
+    <lastUpdated value="2023-06-05T15:57:19.915+03:00"/>
+  </meta>
+  <type value="collection"/>
+  <entry>
+    <fullUrl value="http://ihris.org/fhir/ValueSet/ihris-document-category"/>
+    <resource>
+      <ValueSet>
+        <text>
+          <status value="generated"/>
+          <div xmlns="http://www.w3.org/1999/xhtml">
+            <p>This value set contains 2 concepts</p>
+            <p style="border: black 1px dotted; background-color: #EEEEEE; padding: 8px; margin-bottom: 8px">Expansion based on 
+              <a href="CodeSystem-ihris-document-category.html">Code system for document categories. v0.1.0 (CodeSystem)</a>
+            </p>
+            <table class="codes">
+              <tr>
+                <td style="white-space:nowrap">
+                  <b>Code</b>
+                </td>
+                <td>
+                  <b>System</b>
+                </td>
+                <td>
+                  <b>Display</b>
+                </td>
+                <td>
+                  <b>Definition</b>
+                </td>
+              </tr>
+              <tr>
+                <td style="white-space:nowrap">
+                  <a name="http---ihris.org-fhir-CodeSystem-ihris-document-category-open"> </a>  
+                  <a href="CodeSystem-ihris-document-category.html#ihris-document-category-open">open</a>
+                </td>
+                <td>http://ihris.org/fhir/CodeSystem/ihris-document-category</td>
+                <td>Open</td>
+                <td>
+                  <div>
+                    <p>Any one can access.</p>
+
+                  </div>
+                </td>
+              </tr>
+              <tr>
+                <td style="white-space:nowrap">
+                  <a name="http---ihris.org-fhir-CodeSystem-ihris-document-category-restricted"> </a>  
+                  <a href="CodeSystem-ihris-document-category.html#ihris-document-category-restricted">restricted</a>
+                </td>
+                <td>http://ihris.org/fhir/CodeSystem/ihris-document-category</td>
+                <td>Restricted</td>
+                <td>
+                  <div>
+                    <p>Only certain users can view.</p>
+
+                  </div>
+                </td>
+              </tr>
+            </table>
+          </div>
+        </text>
+        <url value="http://ihris.org/fhir/ValueSet/ihris-document-category"/>
+        <version value="0.1.0"/>
+        <name value="IhrisDocumentCategoryValueSet"/>
+        <title value="Code system for document categories."/>
+        <status value="active"/>
+        <date value="2023-06-05T15:57:19+03:00"/>
+        <expansion>
+          <identifier value="urn:uuid:d3f33c83-d7e8-4ee8-af58-279207c05a3b"/>
+          <timestamp value="2023-06-05T15:58:17+03:00"/>
+          <total value="2"/>
+          <parameter>
+            <name value="excludeNested"/>
+            <valueBoolean value="false"/>
+          </parameter>
+          <parameter>
+            <name value="version"/>
+            <valueUri value="http://ihris.org/fhir/CodeSystem/ihris-document-category|0.1.0"/>
+          </parameter>
+          <contains>
+            <system value="http://ihris.org/fhir/CodeSystem/ihris-document-category"/>
+            <code value="open"/>
+            <display value="Open"/>
+          </contains>
+          <contains>
+            <system value="http://ihris.org/fhir/CodeSystem/ihris-document-category"/>
+            <code value="restricted"/>
+            <display value="Restricted"/>
+          </contains>
+        </expansion>
+      </ValueSet>
+    </resource>
+  </entry>
+  <entry>
+    <fullUrl value="http://ihris.org/fhir/ValueSet/ihris-relation-valueset"/>
+    <resource>
+      <ValueSet>
+        <text>
+          <status value="generated"/>
+          <div xmlns="http://www.w3.org/1999/xhtml">
+            <p>This value set contains 6 concepts</p>
+            <p style="border: black 1px dotted; background-color: #EEEEEE; padding: 8px; margin-bottom: 8px">Expansion based on 
+              <a href="CodeSystem-ihris-relation-codesystem.html">Relationship v0.1.0 (CodeSystem)</a>
+            </p>
+            <table class="codes">
+              <tr>
+                <td style="white-space:nowrap">
+                  <b>Code</b>
+                </td>
+                <td>
+                  <b>System</b>
+                </td>
+                <td>
+                  <b>Display</b>
+                </td>
+                <td>
+                  <b>Definition</b>
+                </td>
+              </tr>
+              <tr>
+                <td style="white-space:nowrap">
+                  <a name="http---ihris.org-fhir-CodeSystem-ihris-relation-codesystem-spouse"> </a>  
+                  <a href="CodeSystem-ihris-relation-codesystem.html#ihris-relation-codesystem-spouse">spouse</a>
+                </td>
+                <td>http://ihris.org/fhir/CodeSystem/ihris-relation-codesystem</td>
+                <td>Spouse</td>
+                <td>
+                  <div>
+                    <p>Spouse</p>
+
+                  </div>
+                </td>
+              </tr>
+              <tr>
+                <td style="white-space:nowrap">
+                  <a name="http---ihris.org-fhir-CodeSystem-ihris-relation-codesystem-mother"> </a>  
+                  <a href="CodeSystem-ihris-relation-codesystem.html#ihris-relation-codesystem-mother">mother</a>
+                </td>
+                <td>http://ihris.org/fhir/CodeSystem/ihris-relation-codesystem</td>
+                <td>Mother</td>
+                <td>
+                  <div>
+                    <p>Mother</p>
+
+                  </div>
+                </td>
+              </tr>
+              <tr>
+                <td style="white-space:nowrap">
+                  <a name="http---ihris.org-fhir-CodeSystem-ihris-relation-codesystem-father"> </a>  
+                  <a href="CodeSystem-ihris-relation-codesystem.html#ihris-relation-codesystem-father">father</a>
+                </td>
+                <td>http://ihris.org/fhir/CodeSystem/ihris-relation-codesystem</td>
+                <td>Father</td>
+                <td>
+                  <div>
+                    <p>Father</p>
+
+                  </div>
+                </td>
+              </tr>
+              <tr>
+                <td style="white-space:nowrap">
+                  <a name="http---ihris.org-fhir-CodeSystem-ihris-relation-codesystem-adoptedchild"> </a>  
+                  <a href="CodeSystem-ihris-relation-codesystem.html#ihris-relation-codesystem-adoptedchild">adoptedchild</a>
+                </td>
+                <td>http://ihris.org/fhir/CodeSystem/ihris-relation-codesystem</td>
+                <td>Adopted Child</td>
+                <td>
+                  <div>
+                    <p>Adopted Child</p>
+
+                  </div>
+                </td>
+              </tr>
+              <tr>
+                <td style="white-space:nowrap">
+                  <a name="http---ihris.org-fhir-CodeSystem-ihris-relation-codesystem-bilogicalChild"> </a>  
+                  <a href="CodeSystem-ihris-relation-codesystem.html#ihris-relation-codesystem-bilogicalChild">bilogicalChild</a>
+                </td>
+                <td>http://ihris.org/fhir/CodeSystem/ihris-relation-codesystem</td>
+                <td>Biological Child</td>
+                <td>
+                  <div>
+                    <p>Biological Child</p>
+
+                  </div>
+                </td>
+              </tr>
+              <tr>
+                <td style="white-space:nowrap">
+                  <a name="http---ihris.org-fhir-CodeSystem-ihris-relation-codesystem-other"> </a>  
+                  <a href="CodeSystem-ihris-relation-codesystem.html#ihris-relation-codesystem-other">other</a>
+                </td>
+                <td>http://ihris.org/fhir/CodeSystem/ihris-relation-codesystem</td>
+                <td>other</td>
+                <td>
+                  <div>
+                    <p>other</p>
+
+                  </div>
+                </td>
+              </tr>
+            </table>
+          </div>
+        </text>
+        <url value="http://ihris.org/fhir/ValueSet/ihris-relation-valueset"/>
+        <version value="0.1.0"/>
+        <name value="IhrisRelationValueSet"/>
+        <title value="iHRIS Relationship ValueSet"/>
+        <status value="active"/>
+        <date value="2020-10-29T08:41:04.362Z"/>
+        <expansion>
+          <identifier value="urn:uuid:240b7217-a907-4b0f-a606-61873244fc91"/>
+          <timestamp value="2023-06-05T15:58:18+03:00"/>
+          <total value="6"/>
+          <parameter>
+            <name value="excludeNested"/>
+            <valueBoolean value="false"/>
+          </parameter>
+          <parameter>
+            <name value="version"/>
+            <valueUri value="http://ihris.org/fhir/CodeSystem/ihris-relation-codesystem|0.1.0"/>
+          </parameter>
+          <contains>
+            <system value="http://ihris.org/fhir/CodeSystem/ihris-relation-codesystem"/>
+            <code value="spouse"/>
+            <display value="Spouse"/>
+          </contains>
+          <contains>
+            <system value="http://ihris.org/fhir/CodeSystem/ihris-relation-codesystem"/>
+            <code value="mother"/>
+            <display value="Mother"/>
+          </contains>
+          <contains>
+            <system value="http://ihris.org/fhir/CodeSystem/ihris-relation-codesystem"/>
+            <code value="father"/>
+            <display value="Father"/>
+          </contains>
+          <contains>
+            <system value="http://ihris.org/fhir/CodeSystem/ihris-relation-codesystem"/>
+            <code value="adoptedchild"/>
+            <display value="Adopted Child"/>
+          </contains>
+          <contains>
+            <system value="http://ihris.org/fhir/CodeSystem/ihris-relation-codesystem"/>
+            <code value="bilogicalChild"/>
+            <display value="Biological Child"/>
+          </contains>
+          <contains>
+            <system value="http://ihris.org/fhir/CodeSystem/ihris-relation-codesystem"/>
+            <code value="other"/>
+            <display value="other"/>
+          </contains>
+        </expansion>
+      </ValueSet>
+    </resource>
+  </entry>
+  <entry>
+    <fullUrl value="http://ihris.org/fhir/ValueSet/Ihris-facility-ownership"/>
+    <resource>
+      <ValueSet>
+        <text>
+          <status value="generated"/>
+          <div xmlns="http://www.w3.org/1999/xhtml">
+            <p>This value set contains 3 concepts</p>
+            <p style="border: black 1px dotted; background-color: #EEEEEE; padding: 8px; margin-bottom: 8px">Expansion based on 
+              <a href="CodeSystem-Ihris-facility-ownership-type.html">Facility Ownership Type v0.1.0 (CodeSystem)</a>
+            </p>
+            <table class="codes">
+              <tr>
+                <td style="white-space:nowrap">
+                  <b>Code</b>
+                </td>
+                <td>
+                  <b>System</b>
+                </td>
+                <td>
+                  <b>Display</b>
+                </td>
+              </tr>
+              <tr>
+                <td style="white-space:nowrap">
+                  <a name="http---ihris.org-fhir-CodeSystem-Ihris-facility-ownership-type-private"> </a>  
+                  <a href="CodeSystem-Ihris-facility-ownership-type.html#Ihris-facility-ownership-type-private">private</a>
+                </td>
+                <td>http://ihris.org/fhir/CodeSystem/Ihris-facility-ownership-type</td>
+                <td>Private</td>
+              </tr>
+              <tr>
+                <td style="white-space:nowrap">
+                  <a name="http---ihris.org-fhir-CodeSystem-Ihris-facility-ownership-type-government"> </a>  
+                  <a href="CodeSystem-Ihris-facility-ownership-type.html#Ihris-facility-ownership-type-government">government</a>
+                </td>
+                <td>http://ihris.org/fhir/CodeSystem/Ihris-facility-ownership-type</td>
+                <td>Government</td>
+              </tr>
+              <tr>
+                <td style="white-space:nowrap">
+                  <a name="http---ihris.org-fhir-CodeSystem-Ihris-facility-ownership-type-NGO"> </a>  
+                  <a href="CodeSystem-Ihris-facility-ownership-type.html#Ihris-facility-ownership-type-NGO">NGO</a>
+                </td>
+                <td>http://ihris.org/fhir/CodeSystem/Ihris-facility-ownership-type</td>
+                <td>NGO's</td>
+              </tr>
+            </table>
+          </div>
+        </text>
+        <url value="http://ihris.org/fhir/ValueSet/Ihris-facility-ownership"/>
+        <version value="0.1.0"/>
+        <name value="IhrisFacilityOwnershipValueSet"/>
+        <title value="iHRIS Facility Ownership ValueSet"/>
+        <status value="active"/>
+        <date value="2022-02-23T08:41:04.362Z"/>
+        <expansion>
+          <identifier value="urn:uuid:4f374368-56c3-4c77-a3a6-42e45e1d013f"/>
+          <timestamp value="2023-06-05T15:58:18+03:00"/>
+          <total value="3"/>
+          <parameter>
+            <name value="excludeNested"/>
+            <valueBoolean value="false"/>
+          </parameter>
+          <parameter>
+            <name value="version"/>
+            <valueUri value="http://ihris.org/fhir/CodeSystem/Ihris-facility-ownership-type|0.1.0"/>
+          </parameter>
+          <contains>
+            <system value="http://ihris.org/fhir/CodeSystem/Ihris-facility-ownership-type"/>
+            <code value="private"/>
+            <display value="Private"/>
+          </contains>
+          <contains>
+            <system value="http://ihris.org/fhir/CodeSystem/Ihris-facility-ownership-type"/>
+            <code value="government"/>
+            <display value="Government"/>
+          </contains>
+          <contains>
+            <system value="http://ihris.org/fhir/CodeSystem/Ihris-facility-ownership-type"/>
+            <code value="NGO"/>
+            <display value="NGO's"/>
+          </contains>
+        </expansion>
+      </ValueSet>
+    </resource>
+  </entry>
+  <entry>
+    <fullUrl value="http://ihris.org/fhir/ValueSet/ihris-Facility-identifier-valueset"/>
+    <resource>
+      <ValueSet>
+        <text>
+          <status value="generated"/>
+          <div xmlns="http://www.w3.org/1999/xhtml">
+            <p>This value set contains 2 concepts</p>
+            <p style="border: black 1px dotted; background-color: #EEEEEE; padding: 8px; margin-bottom: 8px">Expansion based on 
+              <a href="CodeSystem-ihris-Facility-identifier.html">Identifier Type v0.1.0 (CodeSystem)</a>
+            </p>
+            <table class="codes">
+              <tr>
+                <td style="white-space:nowrap">
+                  <b>Code</b>
+                </td>
+                <td>
+                  <b>System</b>
+                </td>
+                <td>
+                  <b>Display</b>
+                </td>
+              </tr>
+              <tr>
+                <td style="white-space:nowrap">
+                  <a name="http---ihris.org-fhir-CodeSystem-ihris-Facility-identifier-dhis2Id"> </a>  
+                  <a href="CodeSystem-ihris-Facility-identifier.html#ihris-Facility-identifier-dhis2Id">dhis2Id</a>
+                </td>
+                <td>http://ihris.org/fhir/CodeSystem/ihris-Facility-identifier</td>
+                <td>DHIS2 ID</td>
+              </tr>
+              <tr>
+                <td style="white-space:nowrap">
+                  <a name="http---ihris.org-fhir-CodeSystem-ihris-Facility-identifier-mfrId"> </a>  
+                  <a href="CodeSystem-ihris-Facility-identifier.html#ihris-Facility-identifier-mfrId">mfrId</a>
+                </td>
+                <td>http://ihris.org/fhir/CodeSystem/ihris-Facility-identifier</td>
+                <td>MFR ID</td>
+              </tr>
+            </table>
+          </div>
+        </text>
+        <url value="http://ihris.org/fhir/ValueSet/ihris-Facility-identifier-valueset"/>
+        <version value="0.1.0"/>
+        <name value="IhrisFacilityIdentifierValueSet"/>
+        <title value="iHRIS facility Identifier ValueSet"/>
+        <status value="active"/>
+        <date value="2022-02-13T08:41:04.362Z"/>
+        <expansion>
+          <identifier value="urn:uuid:9f5a5c4c-74e8-470b-bccc-0f73a0beffe9"/>
+          <timestamp value="2023-06-05T15:58:20+03:00"/>
+          <total value="2"/>
+          <parameter>
+            <name value="excludeNested"/>
+            <valueBoolean value="false"/>
+          </parameter>
+          <parameter>
+            <name value="version"/>
+            <valueUri value="http://ihris.org/fhir/CodeSystem/ihris-Facility-identifier|0.1.0"/>
+          </parameter>
+          <contains>
+            <system value="http://ihris.org/fhir/CodeSystem/ihris-Facility-identifier"/>
+            <code value="dhis2Id"/>
+            <display value="DHIS2 ID"/>
+          </contains>
+          <contains>
+            <system value="http://ihris.org/fhir/CodeSystem/ihris-Facility-identifier"/>
+            <code value="mfrId"/>
+            <display value="MFR ID"/>
+          </contains>
+        </expansion>
+      </ValueSet>
+    </resource>
+  </entry>
+  <entry>
+    <fullUrl value="http://ihris.org/fhir/ValueSet/ihris-facility-type"/>
+    <resource>
+      <ValueSet>
+        <text>
+          <status value="generated"/>
+          <div xmlns="http://www.w3.org/1999/xhtml">
+            <p>This value set contains 14 concepts</p>
+            <p style="border: black 1px dotted; background-color: #EEEEEE; padding: 8px; margin-bottom: 8px">Expansion based on 
+              <a href="CodeSystem-ihris-facility-type.html">Facility Type v0.1.0 (CodeSystem)</a>
+            </p>
+            <table class="codes">
+              <tr>
+                <td style="white-space:nowrap">
+                  <b>Code</b>
+                </td>
+                <td>
+                  <b>System</b>
+                </td>
+                <td>
+                  <b>Display</b>
+                </td>
+              </tr>
+              <tr>
+                <td style="white-space:nowrap">
+                  <a name="http---ihris.org-fhir-CodeSystem-ihris-facility-type-hospital"> </a>  
+                  <a href="CodeSystem-ihris-facility-type.html#ihris-facility-type-hospital">hospital</a>
+                </td>
+                <td>http://ihris.org/fhir/CodeSystem/ihris-facility-type</td>
+                <td>Hospital</td>
+              </tr>
+              <tr>
+                <td style="white-space:nowrap">
+                  <a name="http---ihris.org-fhir-CodeSystem-ihris-facility-type-HC"> </a>  
+                  <a href="CodeSystem-ihris-facility-type.html#ihris-facility-type-HC">HC</a>
+                </td>
+                <td>http://ihris.org/fhir/CodeSystem/ihris-facility-type</td>
+                <td>Health Center</td>
+              </tr>
+              <tr>
+                <td style="white-space:nowrap">
+                  <a name="http---ihris.org-fhir-CodeSystem-ihris-facility-type-HP"> </a>  
+                  <a href="CodeSystem-ihris-facility-type.html#ihris-facility-type-HP">HP</a>
+                </td>
+                <td>http://ihris.org/fhir/CodeSystem/ihris-facility-type</td>
+                <td>Health Post</td>
+              </tr>
+              <tr>
+                <td style="white-space:nowrap">
+                  <a name="http---ihris.org-fhir-CodeSystem-ihris-facility-type-LAB"> </a>  
+                  <a href="CodeSystem-ihris-facility-type.html#ihris-facility-type-LAB">LAB</a>
+                </td>
+                <td>http://ihris.org/fhir/CodeSystem/ihris-facility-type</td>
+                <td>Laboratory</td>
+              </tr>
+              <tr>
+                <td style="white-space:nowrap">
+                  <a name="http---ihris.org-fhir-CodeSystem-ihris-facility-type-IC"> </a>  
+                  <a href="CodeSystem-ihris-facility-type.html#ihris-facility-type-IC">IC</a>
+                </td>
+                <td>http://ihris.org/fhir/CodeSystem/ihris-facility-type</td>
+                <td>Imaging Center</td>
+              </tr>
+              <tr>
+                <td style="white-space:nowrap">
+                  <a name="http---ihris.org-fhir-CodeSystem-ihris-facility-type-SC"> </a>  
+                  <a href="CodeSystem-ihris-facility-type.html#ihris-facility-type-SC">SC</a>
+                </td>
+                <td>http://ihris.org/fhir/CodeSystem/ihris-facility-type</td>
+                <td>Specaility Clinic</td>
+              </tr>
+              <tr>
+                <td style="white-space:nowrap">
+                  <a name="http---ihris.org-fhir-CodeSystem-ihris-facility-type-CLC"> </a>  
+                  <a href="CodeSystem-ihris-facility-type.html#ihris-facility-type-CLC">CLC</a>
+                </td>
+                <td>http://ihris.org/fhir/CodeSystem/ihris-facility-type</td>
+                <td>Clinic</td>
+              </tr>
+              <tr>
+                <td style="white-space:nowrap">
+                  <a name="http---ihris.org-fhir-CodeSystem-ihris-facility-type-SPC"> </a>  
+                  <a href="CodeSystem-ihris-facility-type.html#ihris-facility-type-SPC">SPC</a>
+                </td>
+                <td>http://ihris.org/fhir/CodeSystem/ihris-facility-type</td>
+                <td>Speciality Center</td>
+              </tr>
+              <tr>
+                <td style="white-space:nowrap">
+                  <a name="http---ihris.org-fhir-CodeSystem-ihris-facility-type-PHARM"> </a>  
+                  <a href="CodeSystem-ihris-facility-type.html#ihris-facility-type-PHARM">PHARM</a>
+                </td>
+                <td>http://ihris.org/fhir/CodeSystem/ihris-facility-type</td>
+                <td>Pharmacy</td>
+              </tr>
+              <tr>
+                <td style="white-space:nowrap">
+                  <a name="http---ihris.org-fhir-CodeSystem-ihris-facility-type-HI"> </a>  
+                  <a href="CodeSystem-ihris-facility-type.html#ihris-facility-type-HI">HI</a>
+                </td>
+                <td>http://ihris.org/fhir/CodeSystem/ihris-facility-type</td>
+                <td>Health Institution</td>
+              </tr>
+              <tr>
+                <td style="white-space:nowrap">
+                  <a name="http---ihris.org-fhir-CodeSystem-ihris-facility-type-HSC"> </a>  
+                  <a href="CodeSystem-ihris-facility-type.html#ihris-facility-type-HSC">HSC</a>
+                </td>
+                <td>http://ihris.org/fhir/CodeSystem/ihris-facility-type</td>
+                <td>Health Science College</td>
+              </tr>
+              <tr>
+                <td style="white-space:nowrap">
+                  <a name="http---ihris.org-fhir-CodeSystem-ihris-facility-type-AGN"> </a>  
+                  <a href="CodeSystem-ihris-facility-type.html#ihris-facility-type-AGN">AGN</a>
+                </td>
+                <td>http://ihris.org/fhir/CodeSystem/ihris-facility-type</td>
+                <td>Agencies</td>
+              </tr>
+              <tr>
+                <td style="white-space:nowrap">
+                  <a name="http---ihris.org-fhir-CodeSystem-ihris-facility-type-NGOs"> </a>  
+                  <a href="CodeSystem-ihris-facility-type.html#ihris-facility-type-NGOs">NGOs</a>
+                </td>
+                <td>http://ihris.org/fhir/CodeSystem/ihris-facility-type</td>
+                <td>NGOs</td>
+              </tr>
+              <tr>
+                <td style="white-space:nowrap">
+                  <a name="http---ihris.org-fhir-CodeSystem-ihris-facility-type-ASSO"> </a>  
+                  <a href="CodeSystem-ihris-facility-type.html#ihris-facility-type-ASSO">ASSO</a>
+                </td>
+                <td>http://ihris.org/fhir/CodeSystem/ihris-facility-type</td>
+                <td>Association</td>
+              </tr>
+            </table>
+          </div>
+        </text>
+        <url value="http://ihris.org/fhir/ValueSet/ihris-facility-type"/>
+        <version value="0.1.0"/>
+        <name value="IhrisFacilityTypeValueSet"/>
+        <title value="iHRIS Facility Type ValueSet"/>
+        <status value="active"/>
+        <date value="2022-02-25T08:41:04.362Z"/>
+        <expansion>
+          <identifier value="urn:uuid:e9958cdd-8762-4a78-8e29-1101131b756a"/>
+          <timestamp value="2023-06-05T15:58:37+03:00"/>
+          <total value="14"/>
+          <parameter>
+            <name value="excludeNested"/>
+            <valueBoolean value="false"/>
+          </parameter>
+          <parameter>
+            <name value="version"/>
+            <valueUri value="http://ihris.org/fhir/CodeSystem/ihris-facility-type|0.1.0"/>
+          </parameter>
+          <contains>
+            <system value="http://ihris.org/fhir/CodeSystem/ihris-facility-type"/>
+            <code value="hospital"/>
+            <display value="Hospital"/>
+          </contains>
+          <contains>
+            <system value="http://ihris.org/fhir/CodeSystem/ihris-facility-type"/>
+            <code value="HC"/>
+            <display value="Health Center"/>
+          </contains>
+          <contains>
+            <system value="http://ihris.org/fhir/CodeSystem/ihris-facility-type"/>
+            <code value="HP"/>
+            <display value="Health Post"/>
+          </contains>
+          <contains>
+            <system value="http://ihris.org/fhir/CodeSystem/ihris-facility-type"/>
+            <code value="LAB"/>
+            <display value="Laboratory"/>
+          </contains>
+          <contains>
+            <system value="http://ihris.org/fhir/CodeSystem/ihris-facility-type"/>
+            <code value="IC"/>
+            <display value="Imaging Center"/>
+          </contains>
+          <contains>
+            <system value="http://ihris.org/fhir/CodeSystem/ihris-facility-type"/>
+            <code value="SC"/>
+            <display value="Specaility Clinic"/>
+          </contains>
+          <contains>
+            <system value="http://ihris.org/fhir/CodeSystem/ihris-facility-type"/>
+            <code value="CLC"/>
+            <display value="Clinic"/>
+          </contains>
+          <contains>
+            <system value="http://ihris.org/fhir/CodeSystem/ihris-facility-type"/>
+            <code value="SPC"/>
+            <display value="Speciality Center"/>
+          </contains>
+          <contains>
+            <system value="http://ihris.org/fhir/CodeSystem/ihris-facility-type"/>
+            <code value="PHARM"/>
+            <display value="Pharmacy"/>
+          </contains>
+          <contains>
+            <system value="http://ihris.org/fhir/CodeSystem/ihris-facility-type"/>
+            <code value="HI"/>
+            <display value="Health Institution"/>
+          </contains>
+          <contains>
+            <system value="http://ihris.org/fhir/CodeSystem/ihris-facility-type"/>
+            <code value="HSC"/>
+            <display value="Health Science College"/>
+          </contains>
+          <contains>
+            <system value="http://ihris.org/fhir/CodeSystem/ihris-facility-type"/>
+            <code value="AGN"/>
+            <display value="Agencies"/>
+          </contains>
+          <contains>
+            <system value="http://ihris.org/fhir/CodeSystem/ihris-facility-type"/>
+            <code value="NGOs"/>
+            <display value="NGOs"/>
+          </contains>
+          <contains>
+            <system value="http://ihris.org/fhir/CodeSystem/ihris-facility-type"/>
+            <code value="ASSO"/>
+            <display value="Association"/>
+          </contains>
+        </expansion>
+      </ValueSet>
+    </resource>
+  </entry>
+  <entry>
+    <fullUrl value="http://ihris.org/fhir/ValueSet/ihris-resource-valueset"/>
+    <resource>
+      <ValueSet>
+        <text>
+          <status value="generated"/>
+          <div xmlns="http://www.w3.org/1999/xhtml">
+            <p>This value set contains 8 concepts</p>
+            <p style="border: black 1px dotted; background-color: #EEEEEE; padding: 8px; margin-bottom: 8px">Expansion based on 
+              <a href="CodeSystem-ihris-resource-codesystem.html">Code System for iHRIS Basic Resources. v0.1.0 (CodeSystem)</a>
+            </p>
+            <table class="codes">
+              <tr>
+                <td style="white-space:nowrap">
+                  <b>Code</b>
+                </td>
+                <td>
+                  <b>System</b>
+                </td>
+                <td>
+                  <b>Display</b>
+                </td>
+                <td>
+                  <b>Definition</b>
+                </td>
+              </tr>
+              <tr>
+                <td style="white-space:nowrap">
+                  <a name="http---ihris.org-fhir-CodeSystem-ihris-resource-codesystem-role"> </a>  
+                  <a href="CodeSystem-ihris-resource-codesystem.html#ihris-resource-codesystem-role">role</a>
+                </td>
+                <td>http://ihris.org/fhir/CodeSystem/ihris-resource-codesystem</td>
+                <td>iHRIS Role</td>
+                <td>
+                  <div>
+                    <p>User roles that are available to be assigned to users.</p>
+
+                  </div>
+                </td>
+              </tr>
+              <tr>
+                <td style="white-space:nowrap">
+                  <a name="http---ihris.org-fhir-CodeSystem-ihris-resource-codesystem-task"> </a>  
+                  <a href="CodeSystem-ihris-resource-codesystem.html#ihris-resource-codesystem-task">task</a>
+                </td>
+                <td>http://ihris.org/fhir/CodeSystem/ihris-resource-codesystem</td>
+                <td>iHRIS Task</td>
+                <td>
+                  <div>
+                    <p>Role tasks that are available to be assigned to roles</p>
+
+                  </div>
+                </td>
+              </tr>
+              <tr>
+                <td style="white-space:nowrap">
+                  <a name="http---ihris.org-fhir-CodeSystem-ihris-resource-codesystem-page"> </a>  
+                  <a href="CodeSystem-ihris-resource-codesystem.html#ihris-resource-codesystem-page">page</a>
+                </td>
+                <td>http://ihris.org/fhir/CodeSystem/ihris-resource-codesystem</td>
+                <td>iHRIS Page</td>
+                <td>
+                  <div>
+                    <p>Page definitions for viewing and editing resources.</p>
+
+                  </div>
+                </td>
+              </tr>
+              <tr>
+                <td style="white-space:nowrap">
+                  <a name="http---ihris.org-fhir-CodeSystem-ihris-resource-codesystem-practitioner-link"> </a>  
+                  <a href="CodeSystem-ihris-resource-codesystem.html#ihris-resource-codesystem-practitioner-link">practitioner-link</a>
+                </td>
+                <td>http://ihris.org/fhir/CodeSystem/ihris-resource-codesystem</td>
+                <td>iHRIS Practitioner Link</td>
+                <td>
+                  <div>
+                    <p>Basic resource for customization that links to a Practitioner.</p>
+
+                  </div>
+                </td>
+              </tr>
+              <tr>
+                <td style="white-space:nowrap">
+                  <a name="http---ihris.org-fhir-CodeSystem-ihris-resource-codesystem-training-link"> </a>  
+                  <a href="CodeSystem-ihris-resource-codesystem.html#ihris-resource-codesystem-training-link">training-link</a>
+                </td>
+                <td>http://ihris.org/fhir/CodeSystem/ihris-resource-codesystem</td>
+                <td>iHRIS Training Link</td>
+                <td>
+                  <div>
+                    <p>Basic resource for customization that links to a Qualify training.</p>
+
+                  </div>
+                </td>
+              </tr>
+              <tr>
+                <td style="white-space:nowrap">
+                  <a name="http---ihris.org-fhir-CodeSystem-ihris-resource-codesystem-visualization"> </a>  
+                  <a href="CodeSystem-ihris-resource-codesystem.html#ihris-resource-codesystem-visualization">visualization</a>
+                </td>
+                <td>http://ihris.org/fhir/CodeSystem/ihris-resource-codesystem</td>
+                <td>iHRIS Data Visualization</td>
+                <td>
+                  <div>
+                    <p>iHRIS Data Visualization</p>
+
+                  </div>
+                </td>
+              </tr>
+              <tr>
+                <td style="white-space:nowrap">
+                  <a name="http---ihris.org-fhir-CodeSystem-ihris-resource-codesystem-dashboard"> </a>  
+                  <a href="CodeSystem-ihris-resource-codesystem.html#ihris-resource-codesystem-dashboard">dashboard</a>
+                </td>
+                <td>http://ihris.org/fhir/CodeSystem/ihris-resource-codesystem</td>
+                <td>iHRIS Dashboard</td>
+                <td>
+                  <div>
+                    <p>iHRIS Dashboard</p>
+
+                  </div>
+                </td>
+              </tr>
+              <tr>
+                <td style="white-space:nowrap">
+                  <a name="http---ihris.org-fhir-CodeSystem-ihris-resource-codesystem-resourcedata"> </a>  
+                  <a href="CodeSystem-ihris-resource-codesystem.html#ihris-resource-codesystem-resourcedata">resourcedata</a>
+                </td>
+                <td>http://ihris.org/fhir/CodeSystem/ihris-resource-codesystem</td>
+                <td>Resource Data</td>
+                <td>
+                  <div>
+                    <p>Resource Data</p>
+
+                  </div>
+                </td>
+              </tr>
+            </table>
+          </div>
+        </text>
+        <url value="http://ihris.org/fhir/ValueSet/ihris-resource-valueset"/>
+        <version value="0.1.0"/>
+        <name value="IhrisResourceValueSet"/>
+        <title value="Value Set for iHRIS Basic Resources."/>
+        <status value="active"/>
+        <date value="2023-06-05T15:57:19+03:00"/>
+        <expansion>
+          <identifier value="urn:uuid:3b7edac5-d71a-4a28-9365-c7099bf326b8"/>
+          <timestamp value="2023-06-05T15:58:37+03:00"/>
+          <total value="8"/>
+          <parameter>
+            <name value="excludeNested"/>
+            <valueBoolean value="false"/>
+          </parameter>
+          <parameter>
+            <name value="version"/>
+            <valueUri value="http://ihris.org/fhir/CodeSystem/ihris-resource-codesystem|0.1.0"/>
+          </parameter>
+          <contains>
+            <system value="http://ihris.org/fhir/CodeSystem/ihris-resource-codesystem"/>
+            <code value="role"/>
+            <display value="iHRIS Role"/>
+          </contains>
+          <contains>
+            <system value="http://ihris.org/fhir/CodeSystem/ihris-resource-codesystem"/>
+            <code value="task"/>
+            <display value="iHRIS Task"/>
+          </contains>
+          <contains>
+            <system value="http://ihris.org/fhir/CodeSystem/ihris-resource-codesystem"/>
+            <code value="page"/>
+            <display value="iHRIS Page"/>
+          </contains>
+          <contains>
+            <system value="http://ihris.org/fhir/CodeSystem/ihris-resource-codesystem"/>
+            <code value="practitioner-link"/>
+            <display value="iHRIS Practitioner Link"/>
+          </contains>
+          <contains>
+            <system value="http://ihris.org/fhir/CodeSystem/ihris-resource-codesystem"/>
+            <code value="training-link"/>
+            <display value="iHRIS Training Link"/>
+          </contains>
+          <contains>
+            <system value="http://ihris.org/fhir/CodeSystem/ihris-resource-codesystem"/>
+            <code value="visualization"/>
+            <display value="iHRIS Data Visualization"/>
+          </contains>
+          <contains>
+            <system value="http://ihris.org/fhir/CodeSystem/ihris-resource-codesystem"/>
+            <code value="dashboard"/>
+            <display value="iHRIS Dashboard"/>
+          </contains>
+          <contains>
+            <system value="http://ihris.org/fhir/CodeSystem/ihris-resource-codesystem"/>
+            <code value="resourcedata"/>
+            <display value="Resource Data"/>
+          </contains>
+        </expansion>
+      </ValueSet>
+    </resource>
+  </entry>
+  <entry>
+    <fullUrl value="http://ihris.org/fhir/ValueSet/ihris-task-resource"/>
+    <resource>
+      <ValueSet>
+        <text>
+          <status value="generated"/>
+          <div xmlns="http://www.w3.org/1999/xhtml">
+            <p>This value set contains 15 concepts</p>
+            <p style="border: black 1px dotted; background-color: #EEEEEE; padding: 8px; margin-bottom: 8px">Expansion based on 
+              <a href="CodeSystem-ihris-task-resource.html">Code system for task permissions. v0.1.0 (CodeSystem)</a>
+            </p>
+            <table class="codes">
+              <tr>
+                <td style="white-space:nowrap">
+                  <b>Code</b>
+                </td>
+                <td>
+                  <b>System</b>
+                </td>
+                <td>
+                  <b>Display</b>
+                </td>
+              </tr>
+              <tr>
+                <td style="white-space:nowrap">
+                  <a name="http---ihris.org-fhir-CodeSystem-ihris-task-resource--"> </a>  
+                  <a href="CodeSystem-ihris-task-resource.html#ihris-task-resource-.42">*</a>
+                </td>
+                <td>http://ihris.org/fhir/CodeSystem/ihris-task-resource</td>
+                <td>All</td>
+              </tr>
+              <tr>
+                <td style="white-space:nowrap">
+                  <a name="http---ihris.org-fhir-CodeSystem-ihris-task-resource-Practitioner"> </a>  
+                  <a href="CodeSystem-ihris-task-resource.html#ihris-task-resource-Practitioner">Practitioner</a>
+                </td>
+                <td>http://ihris.org/fhir/CodeSystem/ihris-task-resource</td>
+                <td>Practitioner</td>
+              </tr>
+              <tr>
+                <td style="white-space:nowrap">
+                  <a name="http---ihris.org-fhir-CodeSystem-ihris-task-resource-StructureDefinition"> </a>  
+                  <a href="CodeSystem-ihris-task-resource.html#ihris-task-resource-StructureDefinition">StructureDefinition</a>
+                </td>
+                <td>http://ihris.org/fhir/CodeSystem/ihris-task-resource</td>
+                <td>StructureDefinition</td>
+              </tr>
+              <tr>
+                <td style="white-space:nowrap">
+                  <a name="http---ihris.org-fhir-CodeSystem-ihris-task-resource-ValueSet"> </a>  
+                  <a href="CodeSystem-ihris-task-resource.html#ihris-task-resource-ValueSet">ValueSet</a>
+                </td>
+                <td>http://ihris.org/fhir/CodeSystem/ihris-task-resource</td>
+                <td>ValueSet</td>
+              </tr>
+              <tr>
+                <td style="white-space:nowrap">
+                  <a name="http---ihris.org-fhir-CodeSystem-ihris-task-resource-CodeSystem"> </a>  
+                  <a href="CodeSystem-ihris-task-resource.html#ihris-task-resource-CodeSystem">CodeSystem</a>
+                </td>
+                <td>http://ihris.org/fhir/CodeSystem/ihris-task-resource</td>
+                <td>CodeSystem</td>
+              </tr>
+              <tr>
+                <td style="white-space:nowrap">
+                  <a name="http---ihris.org-fhir-CodeSystem-ihris-task-resource-Basic"> </a>  
+                  <a href="CodeSystem-ihris-task-resource.html#ihris-task-resource-Basic">Basic</a>
+                </td>
+                <td>http://ihris.org/fhir/CodeSystem/ihris-task-resource</td>
+                <td>Basic</td>
+              </tr>
+              <tr>
+                <td style="white-space:nowrap">
+                  <a name="http---ihris.org-fhir-CodeSystem-ihris-task-resource-DocumentReference"> </a>  
+                  <a href="CodeSystem-ihris-task-resource.html#ihris-task-resource-DocumentReference">DocumentReference</a>
+                </td>
+                <td>http://ihris.org/fhir/CodeSystem/ihris-task-resource</td>
+                <td>DocumentReference</td>
+              </tr>
+              <tr>
+                <td style="white-space:nowrap">
+                  <a name="http---ihris.org-fhir-CodeSystem-ihris-task-resource-Organization"> </a>  
+                  <a href="CodeSystem-ihris-task-resource.html#ihris-task-resource-Organization">Organization</a>
+                </td>
+                <td>http://ihris.org/fhir/CodeSystem/ihris-task-resource</td>
+                <td>Organization</td>
+              </tr>
+              <tr>
+                <td style="white-space:nowrap">
+                  <a name="http---ihris.org-fhir-CodeSystem-ihris-task-resource-Questionnaire"> </a>  
+                  <a href="CodeSystem-ihris-task-resource.html#ihris-task-resource-Questionnaire">Questionnaire</a>
+                </td>
+                <td>http://ihris.org/fhir/CodeSystem/ihris-task-resource</td>
+                <td>Questionnaire</td>
+              </tr>
+              <tr>
+                <td style="white-space:nowrap">
+                  <a name="http---ihris.org-fhir-CodeSystem-ihris-task-resource-QuestionnaireResponse"> </a>  
+                  <a href="CodeSystem-ihris-task-resource.html#ihris-task-resource-QuestionnaireResponse">QuestionnaireResponse</a>
+                </td>
+                <td>http://ihris.org/fhir/CodeSystem/ihris-task-resource</td>
+                <td>QuestionnaireResponse</td>
+              </tr>
+              <tr>
+                <td style="white-space:nowrap">
+                  <a name="http---ihris.org-fhir-CodeSystem-ihris-task-resource-PractitionerRole"> </a>  
+                  <a href="CodeSystem-ihris-task-resource.html#ihris-task-resource-PractitionerRole">PractitionerRole</a>
+                </td>
+                <td>http://ihris.org/fhir/CodeSystem/ihris-task-resource</td>
+                <td>PractitionerRole</td>
+              </tr>
+              <tr>
+                <td style="white-space:nowrap">
+                  <a name="http---ihris.org-fhir-CodeSystem-ihris-task-resource-Location"> </a>  
+                  <a href="CodeSystem-ihris-task-resource.html#ihris-task-resource-Location">Location</a>
+                </td>
+                <td>http://ihris.org/fhir/CodeSystem/ihris-task-resource</td>
+                <td>Location</td>
+              </tr>
+              <tr>
+                <td style="white-space:nowrap">
+                  <a name="http---ihris.org-fhir-CodeSystem-ihris-task-resource-Person"> </a>  
+                  <a href="CodeSystem-ihris-task-resource.html#ihris-task-resource-Person">Person</a>
+                </td>
+                <td>http://ihris.org/fhir/CodeSystem/ihris-task-resource</td>
+                <td>Person</td>
+              </tr>
+              <tr>
+                <td style="white-space:nowrap">
+                  <a name="http---ihris.org-fhir-CodeSystem-ihris-task-resource-navigation"> </a>  
+                  <a href="CodeSystem-ihris-task-resource.html#ihris-task-resource-navigation">navigation</a>
+                </td>
+                <td>http://ihris.org/fhir/CodeSystem/ihris-task-resource</td>
+                <td>Navigation</td>
+              </tr>
+              <tr>
+                <td style="white-space:nowrap">
+                  <a name="http---ihris.org-fhir-CodeSystem-ihris-task-resource-section"> </a>  
+                  <a href="CodeSystem-ihris-task-resource.html#ihris-task-resource-section">section</a>
+                </td>
+                <td>http://ihris.org/fhir/CodeSystem/ihris-task-resource</td>
+                <td>Page Section</td>
+              </tr>
+            </table>
+          </div>
+        </text>
+        <url value="http://ihris.org/fhir/ValueSet/ihris-task-resource"/>
+        <version value="0.1.0"/>
+        <name value="IhrisTaskResourceValueSet"/>
+        <title value="Code system for task permissions."/>
+        <status value="active"/>
+        <date value="2021-03-26T09:25:04.362Z"/>
+        <expansion>
+          <identifier value="urn:uuid:3730fdaa-15fe-43da-8867-f838e7ab7b3a"/>
+          <timestamp value="2023-06-05T15:58:40+03:00"/>
+          <total value="15"/>
+          <parameter>
+            <name value="excludeNested"/>
+            <valueBoolean value="false"/>
+          </parameter>
+          <parameter>
+            <name value="version"/>
+            <valueUri value="http://ihris.org/fhir/CodeSystem/ihris-task-resource|0.1.0"/>
+          </parameter>
+          <contains>
+            <system value="http://ihris.org/fhir/CodeSystem/ihris-task-resource"/>
+            <code value="*"/>
+            <display value="All"/>
+          </contains>
+          <contains>
+            <system value="http://ihris.org/fhir/CodeSystem/ihris-task-resource"/>
+            <code value="Practitioner"/>
+            <display value="Practitioner"/>
+          </contains>
+          <contains>
+            <system value="http://ihris.org/fhir/CodeSystem/ihris-task-resource"/>
+            <code value="StructureDefinition"/>
+            <display value="StructureDefinition"/>
+          </contains>
+          <contains>
+            <system value="http://ihris.org/fhir/CodeSystem/ihris-task-resource"/>
+            <code value="ValueSet"/>
+            <display value="ValueSet"/>
+          </contains>
+          <contains>
+            <system value="http://ihris.org/fhir/CodeSystem/ihris-task-resource"/>
+            <code value="CodeSystem"/>
+            <display value="CodeSystem"/>
+          </contains>
+          <contains>
+            <system value="http://ihris.org/fhir/CodeSystem/ihris-task-resource"/>
+            <code value="Basic"/>
+            <display value="Basic"/>
+          </contains>
+          <contains>
+            <system value="http://ihris.org/fhir/CodeSystem/ihris-task-resource"/>
+            <code value="DocumentReference"/>
+            <display value="DocumentReference"/>
+          </contains>
+          <contains>
+            <system value="http://ihris.org/fhir/CodeSystem/ihris-task-resource"/>
+            <code value="Organization"/>
+            <display value="Organization"/>
+          </contains>
+          <contains>
+            <system value="http://ihris.org/fhir/CodeSystem/ihris-task-resource"/>
+            <code value="Questionnaire"/>
+            <display value="Questionnaire"/>
+          </contains>
+          <contains>
+            <system value="http://ihris.org/fhir/CodeSystem/ihris-task-resource"/>
+            <code value="QuestionnaireResponse"/>
+            <display value="QuestionnaireResponse"/>
+          </contains>
+          <contains>
+            <system value="http://ihris.org/fhir/CodeSystem/ihris-task-resource"/>
+            <code value="PractitionerRole"/>
+            <display value="PractitionerRole"/>
+          </contains>
+          <contains>
+            <system value="http://ihris.org/fhir/CodeSystem/ihris-task-resource"/>
+            <code value="Location"/>
+            <display value="Location"/>
+          </contains>
+          <contains>
+            <system value="http://ihris.org/fhir/CodeSystem/ihris-task-resource"/>
+            <code value="Person"/>
+            <display value="Person"/>
+          </contains>
+          <contains>
+            <system value="http://ihris.org/fhir/CodeSystem/ihris-task-resource"/>
+            <code value="navigation"/>
+            <display value="Navigation"/>
+          </contains>
+          <contains>
+            <system value="http://ihris.org/fhir/CodeSystem/ihris-task-resource"/>
+            <code value="section"/>
+            <display value="Page Section"/>
+          </contains>
+        </expansion>
+      </ValueSet>
+    </resource>
+  </entry>
+  <entry>
+    <fullUrl value="http://ihris.org/fhir/ValueSet/ihris-task-permission"/>
+    <resource>
+      <ValueSet>
+        <text>
+          <status value="generated"/>
+          <div xmlns="http://www.w3.org/1999/xhtml">
+            <p>This value set contains 6 concepts</p>
+            <p style="border: black 1px dotted; background-color: #EEEEEE; padding: 8px; margin-bottom: 8px">Expansion based on 
+              <a href="CodeSystem-ihris-task-permission.html">Code system for task permissions. v0.1.0 (CodeSystem)</a>
+            </p>
+            <table class="codes">
+              <tr>
+                <td style="white-space:nowrap">
+                  <b>Code</b>
+                </td>
+                <td>
+                  <b>System</b>
+                </td>
+                <td>
+                  <b>Display</b>
+                </td>
+                <td>
+                  <b>Definition</b>
+                </td>
+              </tr>
+              <tr>
+                <td style="white-space:nowrap">
+                  <a name="http---ihris.org-fhir-CodeSystem-ihris-task-permission--"> </a>  
+                  <a href="CodeSystem-ihris-task-permission.html#ihris-task-permission-.42">*</a>
+                </td>
+                <td>http://ihris.org/fhir/CodeSystem/ihris-task-permission</td>
+                <td>All</td>
+                <td>
+                  <div>
+                    <p>Can do any task.</p>
+
+                  </div>
+                </td>
+              </tr>
+              <tr>
+                <td style="white-space:nowrap">
+                  <a name="http---ihris.org-fhir-CodeSystem-ihris-task-permission-read"> </a>  
+                  <a href="CodeSystem-ihris-task-permission.html#ihris-task-permission-read">read</a>
+                </td>
+                <td>http://ihris.org/fhir/CodeSystem/ihris-task-permission</td>
+                <td>Read</td>
+                <td>
+                  <div>
+                    <p>Can read the given resource.</p>
+
+                  </div>
+                </td>
+              </tr>
+              <tr>
+                <td style="white-space:nowrap">
+                  <a name="http---ihris.org-fhir-CodeSystem-ihris-task-permission-write"> </a>  
+                  <a href="CodeSystem-ihris-task-permission.html#ihris-task-permission-write">write</a>
+                </td>
+                <td>http://ihris.org/fhir/CodeSystem/ihris-task-permission</td>
+                <td>Write</td>
+                <td>
+                  <div>
+                    <p>Can write the given resource.</p>
+
+                  </div>
+                </td>
+              </tr>
+              <tr>
+                <td style="white-space:nowrap">
+                  <a name="http---ihris.org-fhir-CodeSystem-ihris-task-permission-delete"> </a>  
+                  <a href="CodeSystem-ihris-task-permission.html#ihris-task-permission-delete">delete</a>
+                </td>
+                <td>http://ihris.org/fhir/CodeSystem/ihris-task-permission</td>
+                <td>Delete</td>
+                <td>
+                  <div>
+                    <p>Can delete the given resource.</p>
+
+                  </div>
+                </td>
+              </tr>
+              <tr>
+                <td style="white-space:nowrap">
+                  <a name="http---ihris.org-fhir-CodeSystem-ihris-task-permission-filter"> </a>  
+                  <a href="CodeSystem-ihris-task-permission.html#ihris-task-permission-filter">filter</a>
+                </td>
+                <td>http://ihris.org/fhir/CodeSystem/ihris-task-permission</td>
+                <td>Filter</td>
+                <td>
+                  <div>
+                    <p>Search filter constraints.</p>
+
+                  </div>
+                </td>
+              </tr>
+              <tr>
+                <td style="white-space:nowrap">
+                  <a name="http---ihris.org-fhir-CodeSystem-ihris-task-permission-special"> </a>  
+                  <a href="CodeSystem-ihris-task-permission.html#ihris-task-permission-special">special</a>
+                </td>
+                <td>http://ihris.org/fhir/CodeSystem/ihris-task-permission</td>
+                <td>Special</td>
+                <td>
+                  <div>
+                    <p>Special non-resource permissions.</p>
+
+                  </div>
+                </td>
+              </tr>
+            </table>
+          </div>
+        </text>
+        <url value="http://ihris.org/fhir/ValueSet/ihris-task-permission"/>
+        <version value="0.1.0"/>
+        <name value="IhrisTaskPermissionValueSet"/>
+        <title value="Code system for task permissions."/>
+        <status value="active"/>
+        <date value="2021-03-26T09:25:04.362Z"/>
+        <expansion>
+          <identifier value="urn:uuid:9e1054c3-b491-46f4-8d7c-3f081eb9215c"/>
+          <timestamp value="2023-06-05T15:58:45+03:00"/>
+          <total value="6"/>
+          <parameter>
+            <name value="excludeNested"/>
+            <valueBoolean value="false"/>
+          </parameter>
+          <parameter>
+            <name value="version"/>
+            <valueUri value="http://ihris.org/fhir/CodeSystem/ihris-task-permission|0.1.0"/>
+          </parameter>
+          <contains>
+            <system value="http://ihris.org/fhir/CodeSystem/ihris-task-permission"/>
+            <code value="*"/>
+            <display value="All"/>
+          </contains>
+          <contains>
+            <system value="http://ihris.org/fhir/CodeSystem/ihris-task-permission"/>
+            <code value="read"/>
+            <display value="Read"/>
+          </contains>
+          <contains>
+            <system value="http://ihris.org/fhir/CodeSystem/ihris-task-permission"/>
+            <code value="write"/>
+            <display value="Write"/>
+          </contains>
+          <contains>
+            <system value="http://ihris.org/fhir/CodeSystem/ihris-task-permission"/>
+            <code value="delete"/>
+            <display value="Delete"/>
+          </contains>
+          <contains>
+            <system value="http://ihris.org/fhir/CodeSystem/ihris-task-permission"/>
+            <code value="filter"/>
+            <display value="Filter"/>
+          </contains>
+          <contains>
+            <system value="http://ihris.org/fhir/CodeSystem/ihris-task-permission"/>
+            <code value="special"/>
+            <display value="Special"/>
+          </contains>
+        </expansion>
+      </ValueSet>
+    </resource>
+  </entry>
+  <entry>
+    <fullUrl value="http://ihris.org/fhir/ValueSet/ihris-jurisdiction-type"/>
+    <resource>
+      <ValueSet>
+        <text>
+          <status value="generated"/>
+          <div xmlns="http://www.w3.org/1999/xhtml">
+            <p>This value set contains 4 concepts</p>
+            <p style="border: black 1px dotted; background-color: #EEEEEE; padding: 8px; margin-bottom: 8px">Expansion based on 
+              <a href="CodeSystem-ihris-jurisdiction-type.html">Jurisdiction Type v0.1.0 (CodeSystem)</a>
+            </p>
+            <table class="codes">
+              <tr>
+                <td style="white-space:nowrap">
+                  <b>Code</b>
+                </td>
+                <td>
+                  <b>System</b>
+                </td>
+                <td>
+                  <b>Display</b>
+                </td>
+                <td>
+                  <b>Definition</b>
+                </td>
+              </tr>
+              <tr>
+                <td style="white-space:nowrap">
+                  <a name="http---ihris.org-fhir-CodeSystem-ihris-jurisdiction-type-country"> </a>  
+                  <a href="CodeSystem-ihris-jurisdiction-type.html#ihris-jurisdiction-type-country">country</a>
+                </td>
+                <td>http://ihris.org/fhir/CodeSystem/ihris-jurisdiction-type</td>
+                <td>Country</td>
+                <td>
+                  <div>
+                    <p>Country</p>
+
+                  </div>
+                </td>
+              </tr>
+              <tr>
+                <td style="white-space:nowrap">
+                  <a name="http---ihris.org-fhir-CodeSystem-ihris-jurisdiction-type-municipality"> </a>  
+                  <a href="CodeSystem-ihris-jurisdiction-type.html#ihris-jurisdiction-type-municipality">municipality</a>
+                </td>
+                <td>http://ihris.org/fhir/CodeSystem/ihris-jurisdiction-type</td>
+                <td>Municipality</td>
+                <td>
+                  <div>
+                    <p>Municipality</p>
+
+                  </div>
+                </td>
+              </tr>
+              <tr>
+                <td style="white-space:nowrap">
+                  <a name="http---ihris.org-fhir-CodeSystem-ihris-jurisdiction-type-subdistrict"> </a>  
+                  <a href="CodeSystem-ihris-jurisdiction-type.html#ihris-jurisdiction-type-subdistrict">subdistrict</a>
+                </td>
+                <td>http://ihris.org/fhir/CodeSystem/ihris-jurisdiction-type</td>
+                <td>Sub District</td>
+                <td>
+                  <div>
+                    <p>Sub District</p>
+
+                  </div>
+                </td>
+              </tr>
+              <tr>
+                <td style="white-space:nowrap">
+                  <a name="http---ihris.org-fhir-CodeSystem-ihris-jurisdiction-type-village"> </a>  
+                  <a href="CodeSystem-ihris-jurisdiction-type.html#ihris-jurisdiction-type-village">village</a>
+                </td>
+                <td>http://ihris.org/fhir/CodeSystem/ihris-jurisdiction-type</td>
+                <td>Village</td>
+                <td>
+                  <div>
+                    <p>Village</p>
+
+                  </div>
+                </td>
+              </tr>
+            </table>
+          </div>
+        </text>
+        <url value="http://ihris.org/fhir/ValueSet/ihris-jurisdiction-type"/>
+        <version value="0.1.0"/>
+        <name value="IhrisJurisdictionType"/>
+        <title value="iHRIS Jurisdiction Type ValueSet"/>
+        <status value="active"/>
+        <date value="2020-11-12T08:41:04.362Z"/>
+        <expansion>
+          <identifier value="urn:uuid:91255851-95ba-4d71-846a-f69b385973b5"/>
+          <timestamp value="2023-06-05T15:58:45+03:00"/>
+          <total value="4"/>
+          <parameter>
+            <name value="excludeNested"/>
+            <valueBoolean value="false"/>
+          </parameter>
+          <parameter>
+            <name value="version"/>
+            <valueUri value="http://ihris.org/fhir/CodeSystem/ihris-jurisdiction-type|0.1.0"/>
+          </parameter>
+          <contains>
+            <system value="http://ihris.org/fhir/CodeSystem/ihris-jurisdiction-type"/>
+            <code value="country"/>
+            <display value="Country"/>
+          </contains>
+          <contains>
+            <system value="http://ihris.org/fhir/CodeSystem/ihris-jurisdiction-type"/>
+            <code value="municipality"/>
+            <display value="Municipality"/>
+          </contains>
+          <contains>
+            <system value="http://ihris.org/fhir/CodeSystem/ihris-jurisdiction-type"/>
+            <code value="subdistrict"/>
+            <display value="Sub District"/>
+          </contains>
+          <contains>
+            <system value="http://ihris.org/fhir/CodeSystem/ihris-jurisdiction-type"/>
+            <code value="village"/>
+            <display value="Village"/>
+          </contains>
+        </expansion>
+      </ValueSet>
+    </resource>
+  </entry>
+</Bundle>

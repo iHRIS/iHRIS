@@ -1,0 +1,27 @@
+{
+  "resourceType" : "SearchParameter",
+  "id" : "employment-status-search",
+  "text" : {
+    "status" : "generated",
+    "div" : "<div xmlns=\"http://www.w3.org/1999/xhtml\"><h2>Search Parameter for a practitionerRole employment-status</h2><p>Parameter <code>employmentstatus</code>:<code>token</code></p><div><p>Search for a practitionerRole employment-status.</p>\n</div><table class=\"grid\"><tr><td>Resource</td><td><a href=\"http://hl7.org/fhir/R4/practitionerrole.html\">PractitionerRole</a></td></tr><tr><td>Expression</td><td><code>PractitionerRole.extension.where(url='http://ihris.org/fhir/StructureDefinition/ihris-practitionerrole-employment-status')</code></td></tr><tr><td>Processing Mode</td><td>Normal</td></tr><tr><td>Multiples</td><td>The parameter cannot repeat or have multiple values</td></tr></table></div>"
+  },
+  "url" : "http://ihris.org/fhir/SearchParameter/employment-status-search",
+  "version" : "0.1.0",
+  "name" : "Search Parameter for a practitionerRole employment-status",
+  "status" : "active",
+  "date" : "2023-06-05T15:57:19+03:00",
+  "publisher" : "Luke Duncan",
+  "contact" : [{
+    "name" : "Luke Duncan",
+    "telecom" : [{
+      "system" : "email",
+      "value" : "lduncan@intrahealth.org"
+    }]
+  }],
+  "description" : "Search for a practitionerRole employment-status.",
+  "code" : "employmentstatus",
+  "base" : ["PractitionerRole"],
+  "type" : "token",
+  "expression" : "PractitionerRole.extension.where(url='http://ihris.org/fhir/StructureDefinition/ihris-practitionerrole-employment-status')",
+  "xpathUsage" : "normal"
+}

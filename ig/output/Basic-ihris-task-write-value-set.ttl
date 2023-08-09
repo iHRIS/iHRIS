@@ -1,0 +1,49 @@
+@prefix fhir: <http://hl7.org/fhir/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+# - resource -------------------------------------------------------------------
+
+<http://ihris.org/fhir/Basic/ihris-task-write-value-set> a fhir:Basic ;
+  fhir:nodeRole fhir:treeRoot ;
+  fhir:id [ fhir:v "ihris-task-write-value-set"] ; # 
+  fhir:meta [
+     fhir:profile ( [
+       fhir:v "http://ihris.org/fhir/StructureDefinition/ihris-task"^^xsd:anyURI ;
+       fhir:link <http://ihris.org/fhir/StructureDefinition/ihris-task>
+     ] )
+  ] ; # 
+  fhir:text [
+     fhir:status [ fhir:v "extensions" ] ;
+     fhir:div "<div xmlns=\"http://www.w3.org/1999/xhtml\"><p><b>Generated Narrative: Basic</b><a name=\"ihris-task-write-value-set\"> </a></p><div style=\"display: inline-block; background-color: #d9e0e7; padding: 6px; margin: 4px; border: 1px solid #8da1b4; border-radius: 5px; line-height: 60%\"><p style=\"margin-bottom: 0px\">Resource Basic &quot;ihris-task-write-value-set&quot; </p><p style=\"margin-bottom: 0px\">Profile: <a href=\"StructureDefinition-ihris-task.html\">iHRIS Task</a></p></div><p><b>iHRIS Basic Name</b>: write-value-set</p><blockquote><p><b>Task Attributes</b></p><blockquote><p><b>url</b></p><code>permission</code></blockquote><p><b>value</b>: write</p><blockquote><p><b>url</b></p><code>resource</code></blockquote><p><b>value</b>: ValueSet</p></blockquote><p><b>Composite Task</b>: <a href=\"Basic-ihris-task-read-value-set.html\">Basic/ihris-task-read-value-set</a></p><p><b>code</b>: iHRIS Task <span style=\"background: LightGoldenRodYellow; margin: 4px; border: 1px solid khaki\"> (<a href=\"CodeSystem-ihris-resource-codesystem.html\">Code System for iHRIS Basic Resources.</a>#task)</span></p></div>"
+  ] ; # 
+  fhir:extension ( [
+     fhir:url [ fhir:v "http://ihris.org/fhir/StructureDefinition/ihris-basic-name"^^xsd:anyURI ] ;
+     fhir:value [ fhir:v "write-value-set" ]
+  ] [
+     fhir:extension ( [
+       fhir:url [ fhir:v "permission"^^xsd:anyURI ] ;
+       fhir:value [ fhir:v "write" ]
+     ] [
+       fhir:url [ fhir:v "resource"^^xsd:anyURI ] ;
+       fhir:value [ fhir:v "ValueSet" ]
+     ] ) ;
+     fhir:url [ fhir:v "http://ihris.org/fhir/StructureDefinition/task-attributes"^^xsd:anyURI ]
+  ] [
+     fhir:url [ fhir:v "http://ihris.org/fhir/StructureDefinition/composite-task"^^xsd:anyURI ] ;
+     fhir:value [
+       a fhir:Reference ;
+       fhir:link <http://ihris.org/fhir/Basic/ihris-task-read-value-set> ;
+       fhir:reference [ fhir:v "Basic/ihris-task-read-value-set" ]
+     ]
+  ] ) ; # 
+  fhir:code [
+     fhir:coding ( [
+       fhir:system [ fhir:v "http://ihris.org/fhir/CodeSystem/ihris-resource-codesystem"^^xsd:anyURI ] ;
+       fhir:code [ fhir:v "task" ]
+     ] )
+  ] . # 
+
+# -------------------------------------------------------------------------------------
+

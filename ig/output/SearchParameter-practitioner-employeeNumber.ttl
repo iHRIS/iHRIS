@@ -1,0 +1,36 @@
+@prefix fhir: <http://hl7.org/fhir/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+# - resource -------------------------------------------------------------------
+
+<http://ihris.org/fhir/SearchParameter/practitioner-employeeNumber> a fhir:SearchParameter ;
+  fhir:nodeRole fhir:treeRoot ;
+  fhir:id [ fhir:v "practitioner-employeeNumber"] ; # 
+  fhir:text [
+     fhir:status [ fhir:v "generated" ] ;
+     fhir:div "<div xmlns=\"http://www.w3.org/1999/xhtml\"><h2>Search Parameter on employee Number for practitioner</h2><p>Parameter <code>employeeNumber</code>:<code>string</code></p><div><p>Search by employee number for a practitioner resource.</p>\n</div><table class=\"grid\"><tr><td>Resource</td><td><a href=\"http://hl7.org/fhir/R4/practitioner.html\">Practitioner</a></td></tr><tr><td>Expression</td><td><code>Practitioner.identifier.where(type.coding.code='EN').value</code></td></tr><tr><td>Processing Mode</td><td>Normal</td></tr><tr><td>Multiples</td><td>The parameter cannot repeat or have multiple values</td></tr></table></div>"
+  ] ; # 
+  fhir:url [ fhir:v "http://ihris.org/fhir/SearchParameter/practitioner-employeeNumber"^^xsd:anyURI] ; # 
+  fhir:version [ fhir:v "0.1.0"] ; # 
+  fhir:name [ fhir:v "Search Parameter on employee Number for practitioner"] ; # 
+  fhir:status [ fhir:v "active"] ; # 
+  fhir:date [ fhir:v "2023-06-05T15:57:19+03:00"^^xsd:dateTime] ; # 
+  fhir:publisher [ fhir:v "Luke Duncan"] ; # 
+  fhir:contact ( [
+     fhir:name [ fhir:v "Luke Duncan" ] ;
+     fhir:telecom ( [
+       fhir:system [ fhir:v "email" ] ;
+       fhir:value [ fhir:v "lduncan@intrahealth.org" ]
+     ] )
+  ] ) ; # 
+  fhir:description [ fhir:v "Search by employee number for a practitioner resource."] ; # 
+  fhir:code [ fhir:v "employeeNumber"] ; # 
+  fhir:base ( [ fhir:v "Practitioner"] ) ; # 
+  fhir:type [ fhir:v "string"] ; # 
+  fhir:expression [ fhir:v "Practitioner.identifier.where(type.coding.code='EN').value"] ; # 
+  fhir:xpathUsage [ fhir:v "normal"] . # 
+
+# -------------------------------------------------------------------------------------
+

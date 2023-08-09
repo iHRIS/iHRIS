@@ -1,0 +1,34 @@
+{
+  "resourceType" : "CodeSystem",
+  "id" : "ihris-document-category",
+  "text" : {
+    "status" : "generated",
+    "div" : "<div xmlns=\"http://www.w3.org/1999/xhtml\"><p>This code system <code>http://ihris.org/fhir/CodeSystem/ihris-document-category</code> defines the following codes:</p><table class=\"codes\"><tr><td style=\"white-space:nowrap\"><b>Code</b></td><td><b>Display</b></td><td><b>Definition</b></td></tr><tr><td style=\"white-space:nowrap\">open<a name=\"ihris-document-category-open\"> </a></td><td>Open</td><td>Any one can access.</td></tr><tr><td style=\"white-space:nowrap\">restricted<a name=\"ihris-document-category-restricted\"> </a></td><td>Restricted</td><td>Only certain users can view.</td></tr></table></div>"
+  },
+  "url" : "http://ihris.org/fhir/CodeSystem/ihris-document-category",
+  "version" : "0.1.0",
+  "name" : "IhrisDocumentCategoryCodeSystem",
+  "title" : "Code system for document categories.",
+  "status" : "active",
+  "date" : "2023-06-05T15:57:19+03:00",
+  "publisher" : "Luke Duncan",
+  "contact" : [{
+    "name" : "Luke Duncan",
+    "telecom" : [{
+      "system" : "email",
+      "value" : "lduncan@intrahealth.org"
+    }]
+  }],
+  "content" : "complete",
+  "count" : 2,
+  "concept" : [{
+    "code" : "open",
+    "display" : "Open",
+    "definition" : "Any one can access."
+  },
+  {
+    "code" : "restricted",
+    "display" : "Restricted",
+    "definition" : "Only certain users can view."
+  }]
+}

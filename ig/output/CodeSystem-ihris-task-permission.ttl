@@ -1,0 +1,58 @@
+@prefix fhir: <http://hl7.org/fhir/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+# - resource -------------------------------------------------------------------
+
+<http://ihris.org/fhir/CodeSystem/ihris-task-permission> a fhir:CodeSystem ;
+  fhir:nodeRole fhir:treeRoot ;
+  fhir:id [ fhir:v "ihris-task-permission"] ; # 
+  fhir:text [
+     fhir:status [ fhir:v "generated" ] ;
+     fhir:div "<div xmlns=\"http://www.w3.org/1999/xhtml\"><p>This code system <code>http://ihris.org/fhir/CodeSystem/ihris-task-permission</code> defines the following codes:</p><table class=\"codes\"><tr><td style=\"white-space:nowrap\"><b>Code</b></td><td><b>Display</b></td><td><b>Definition</b></td></tr><tr><td style=\"white-space:nowrap\">*<a name=\"ihris-task-permission-.42\"> </a></td><td>All</td><td>Can do any task.</td></tr><tr><td style=\"white-space:nowrap\">read<a name=\"ihris-task-permission-read\"> </a></td><td>Read</td><td>Can read the given resource.</td></tr><tr><td style=\"white-space:nowrap\">write<a name=\"ihris-task-permission-write\"> </a></td><td>Write</td><td>Can write the given resource.</td></tr><tr><td style=\"white-space:nowrap\">delete<a name=\"ihris-task-permission-delete\"> </a></td><td>Delete</td><td>Can delete the given resource.</td></tr><tr><td style=\"white-space:nowrap\">filter<a name=\"ihris-task-permission-filter\"> </a></td><td>Filter</td><td>Search filter constraints.</td></tr><tr><td style=\"white-space:nowrap\">special<a name=\"ihris-task-permission-special\"> </a></td><td>Special</td><td>Special non-resource permissions.</td></tr></table></div>"
+  ] ; # 
+  fhir:url [ fhir:v "http://ihris.org/fhir/CodeSystem/ihris-task-permission"^^xsd:anyURI] ; # 
+  fhir:version [ fhir:v "0.1.0"] ; # 
+  fhir:name [ fhir:v "IhrisTaskPermissionCodeSystem"] ; # 
+  fhir:title [ fhir:v "Code system for task permissions."] ; # 
+  fhir:status [ fhir:v "active"] ; # 
+  fhir:date [ fhir:v "2021-03-26T09:25:04.362Z"^^xsd:dateTime] ; # 
+  fhir:publisher [ fhir:v "Luke Duncan"] ; # 
+  fhir:contact ( [
+     fhir:name [ fhir:v "Luke Duncan" ] ;
+     fhir:telecom ( [
+       fhir:system [ fhir:v "email" ] ;
+       fhir:value [ fhir:v "lduncan@intrahealth.org" ]
+     ] )
+  ] ) ; # 
+  fhir:content [ fhir:v "complete"] ; # 
+  fhir:count [ fhir:v "6"^^xsd:nonNegativeInteger] ; # 
+  fhir:concept ( [
+     fhir:code [ fhir:v "*" ] ;
+     fhir:display [ fhir:v "All" ] ;
+     fhir:definition [ fhir:v "Can do any task." ]
+  ] [
+     fhir:code [ fhir:v "read" ] ;
+     fhir:display [ fhir:v "Read" ] ;
+     fhir:definition [ fhir:v "Can read the given resource." ]
+  ] [
+     fhir:code [ fhir:v "write" ] ;
+     fhir:display [ fhir:v "Write" ] ;
+     fhir:definition [ fhir:v "Can write the given resource." ]
+  ] [
+     fhir:code [ fhir:v "delete" ] ;
+     fhir:display [ fhir:v "Delete" ] ;
+     fhir:definition [ fhir:v "Can delete the given resource." ]
+  ] [
+     fhir:code [ fhir:v "filter" ] ;
+     fhir:display [ fhir:v "Filter" ] ;
+     fhir:definition [ fhir:v "Search filter constraints." ]
+  ] [
+     fhir:code [ fhir:v "special" ] ;
+     fhir:display [ fhir:v "Special" ] ;
+     fhir:definition [ fhir:v "Special non-resource permissions." ]
+  ] ) . # 
+
+# -------------------------------------------------------------------------------------
+

@@ -83,7 +83,6 @@ async function startUp() {
   await nconf.loadRemote();
 
   generalMixin.removeDir(`${__dirname}/tmp`);
-
   try {
     const reportsRunning = await fhirReports.setup();
     if (reportsRunning) {

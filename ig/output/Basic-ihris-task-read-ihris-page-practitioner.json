@@ -1,0 +1,54 @@
+{
+  "resourceType" : "Basic",
+  "id" : "ihris-task-read-ihris-page-practitioner",
+  "meta" : {
+    "profile" : ["http://ihris.org/fhir/StructureDefinition/ihris-task"]
+  },
+  "text" : {
+    "status" : "extensions",
+    "div" : "<div xmlns=\"http://www.w3.org/1999/xhtml\"><p><b>Generated Narrative: Basic</b><a name=\"ihris-task-read-ihris-page-practitioner\"> </a></p><div style=\"display: inline-block; background-color: #d9e0e7; padding: 6px; margin: 4px; border: 1px solid #8da1b4; border-radius: 5px; line-height: 60%\"><p style=\"margin-bottom: 0px\">Resource Basic &quot;ihris-task-read-ihris-page-practitioner&quot; </p><p style=\"margin-bottom: 0px\">Profile: <a href=\"StructureDefinition-ihris-task.html\">iHRIS Task</a></p></div><p><b>iHRIS Basic Name</b>: read-ihris-page-practitioner</p><blockquote><p><b>Task Attributes</b></p><blockquote><p><b>url</b></p><code>permission</code></blockquote><p><b>value</b>: read</p><blockquote><p><b>url</b></p><code>resource</code></blockquote><p><b>value</b>: Basic</p><blockquote><p><b>url</b></p><code>instance</code></blockquote><p><b>value</b>: ihris-page-practitioner</p></blockquote><p><b>Composite Task</b>: <a href=\"Basic-ihris-task-write-value-set.html\">Basic/ihris-task-write-value-set</a></p><p><b>Composite Task</b>: <a href=\"Basic-ihris-task-write-practitioner-resource.html\">Basic/ihris-task-write-practitioner-resource</a></p><p><b>Composite Task</b>: <a href=\"Basic-ihris-task-write-location-resource.html\">Basic/ihris-task-write-location-resource</a></p><p><b>code</b>: iHRIS Task <span style=\"background: LightGoldenRodYellow; margin: 4px; border: 1px solid khaki\"> (<a href=\"CodeSystem-ihris-resource-codesystem.html\">Code System for iHRIS Basic Resources.</a>#task)</span></p></div>"
+  },
+  "extension" : [{
+    "url" : "http://ihris.org/fhir/StructureDefinition/ihris-basic-name",
+    "valueString" : "read-ihris-page-practitioner"
+  },
+  {
+    "extension" : [{
+      "url" : "permission",
+      "valueCode" : "read"
+    },
+    {
+      "url" : "resource",
+      "valueCode" : "Basic"
+    },
+    {
+      "url" : "instance",
+      "valueId" : "ihris-page-practitioner"
+    }],
+    "url" : "http://ihris.org/fhir/StructureDefinition/task-attributes"
+  },
+  {
+    "url" : "http://ihris.org/fhir/StructureDefinition/composite-task",
+    "valueReference" : {
+      "reference" : "Basic/ihris-task-write-value-set"
+    }
+  },
+  {
+    "url" : "http://ihris.org/fhir/StructureDefinition/composite-task",
+    "valueReference" : {
+      "reference" : "Basic/ihris-task-write-practitioner-resource"
+    }
+  },
+  {
+    "url" : "http://ihris.org/fhir/StructureDefinition/composite-task",
+    "valueReference" : {
+      "reference" : "Basic/ihris-task-write-location-resource"
+    }
+  }],
+  "code" : {
+    "coding" : [{
+      "system" : "http://ihris.org/fhir/CodeSystem/ihris-resource-codesystem",
+      "code" : "task"
+    }]
+  }
+}

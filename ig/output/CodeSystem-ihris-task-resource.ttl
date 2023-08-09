@@ -1,0 +1,79 @@
+@prefix fhir: <http://hl7.org/fhir/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+# - resource -------------------------------------------------------------------
+
+<http://ihris.org/fhir/CodeSystem/ihris-task-resource> a fhir:CodeSystem ;
+  fhir:nodeRole fhir:treeRoot ;
+  fhir:id [ fhir:v "ihris-task-resource"] ; # 
+  fhir:text [
+     fhir:status [ fhir:v "generated" ] ;
+     fhir:div "<div xmlns=\"http://www.w3.org/1999/xhtml\"><p>This code system <code>http://ihris.org/fhir/CodeSystem/ihris-task-resource</code> defines the following codes:</p><table class=\"codes\"><tr><td style=\"white-space:nowrap\"><b>Code</b></td><td><b>Display</b></td></tr><tr><td style=\"white-space:nowrap\">*<a name=\"ihris-task-resource-.42\"> </a></td><td>All</td></tr><tr><td style=\"white-space:nowrap\">Practitioner<a name=\"ihris-task-resource-Practitioner\"> </a></td><td>Practitioner</td></tr><tr><td style=\"white-space:nowrap\">StructureDefinition<a name=\"ihris-task-resource-StructureDefinition\"> </a></td><td>StructureDefinition</td></tr><tr><td style=\"white-space:nowrap\">ValueSet<a name=\"ihris-task-resource-ValueSet\"> </a></td><td>ValueSet</td></tr><tr><td style=\"white-space:nowrap\">CodeSystem<a name=\"ihris-task-resource-CodeSystem\"> </a></td><td>CodeSystem</td></tr><tr><td style=\"white-space:nowrap\">Basic<a name=\"ihris-task-resource-Basic\"> </a></td><td>Basic</td></tr><tr><td style=\"white-space:nowrap\">DocumentReference<a name=\"ihris-task-resource-DocumentReference\"> </a></td><td>DocumentReference</td></tr><tr><td style=\"white-space:nowrap\">Organization<a name=\"ihris-task-resource-Organization\"> </a></td><td>Organization</td></tr><tr><td style=\"white-space:nowrap\">Questionnaire<a name=\"ihris-task-resource-Questionnaire\"> </a></td><td>Questionnaire</td></tr><tr><td style=\"white-space:nowrap\">QuestionnaireResponse<a name=\"ihris-task-resource-QuestionnaireResponse\"> </a></td><td>QuestionnaireResponse</td></tr><tr><td style=\"white-space:nowrap\">PractitionerRole<a name=\"ihris-task-resource-PractitionerRole\"> </a></td><td>PractitionerRole</td></tr><tr><td style=\"white-space:nowrap\">Location<a name=\"ihris-task-resource-Location\"> </a></td><td>Location</td></tr><tr><td style=\"white-space:nowrap\">Person<a name=\"ihris-task-resource-Person\"> </a></td><td>Person</td></tr><tr><td style=\"white-space:nowrap\">navigation<a name=\"ihris-task-resource-navigation\"> </a></td><td>Navigation</td></tr><tr><td style=\"white-space:nowrap\">section<a name=\"ihris-task-resource-section\"> </a></td><td>Page Section</td></tr></table></div>"
+  ] ; # 
+  fhir:url [ fhir:v "http://ihris.org/fhir/CodeSystem/ihris-task-resource"^^xsd:anyURI] ; # 
+  fhir:version [ fhir:v "0.1.0"] ; # 
+  fhir:name [ fhir:v "IhrisTaskResourceCodeSystem"] ; # 
+  fhir:title [ fhir:v "Code system for task permissions."] ; # 
+  fhir:status [ fhir:v "active"] ; # 
+  fhir:date [ fhir:v "2021-03-26T09:25:04.362Z"^^xsd:dateTime] ; # 
+  fhir:publisher [ fhir:v "Luke Duncan"] ; # 
+  fhir:contact ( [
+     fhir:name [ fhir:v "Luke Duncan" ] ;
+     fhir:telecom ( [
+       fhir:system [ fhir:v "email" ] ;
+       fhir:value [ fhir:v "lduncan@intrahealth.org" ]
+     ] )
+  ] ) ; # 
+  fhir:content [ fhir:v "complete"] ; # 
+  fhir:count [ fhir:v "15"^^xsd:nonNegativeInteger] ; # 
+  fhir:concept ( [
+     fhir:code [ fhir:v "*" ] ;
+     fhir:display [ fhir:v "All" ]
+  ] [
+     fhir:code [ fhir:v "Practitioner" ] ;
+     fhir:display [ fhir:v "Practitioner" ]
+  ] [
+     fhir:code [ fhir:v "StructureDefinition" ] ;
+     fhir:display [ fhir:v "StructureDefinition" ]
+  ] [
+     fhir:code [ fhir:v "ValueSet" ] ;
+     fhir:display [ fhir:v "ValueSet" ]
+  ] [
+     fhir:code [ fhir:v "CodeSystem" ] ;
+     fhir:display [ fhir:v "CodeSystem" ]
+  ] [
+     fhir:code [ fhir:v "Basic" ] ;
+     fhir:display [ fhir:v "Basic" ]
+  ] [
+     fhir:code [ fhir:v "DocumentReference" ] ;
+     fhir:display [ fhir:v "DocumentReference" ]
+  ] [
+     fhir:code [ fhir:v "Organization" ] ;
+     fhir:display [ fhir:v "Organization" ]
+  ] [
+     fhir:code [ fhir:v "Questionnaire" ] ;
+     fhir:display [ fhir:v "Questionnaire" ]
+  ] [
+     fhir:code [ fhir:v "QuestionnaireResponse" ] ;
+     fhir:display [ fhir:v "QuestionnaireResponse" ]
+  ] [
+     fhir:code [ fhir:v "PractitionerRole" ] ;
+     fhir:display [ fhir:v "PractitionerRole" ]
+  ] [
+     fhir:code [ fhir:v "Location" ] ;
+     fhir:display [ fhir:v "Location" ]
+  ] [
+     fhir:code [ fhir:v "Person" ] ;
+     fhir:display [ fhir:v "Person" ]
+  ] [
+     fhir:code [ fhir:v "navigation" ] ;
+     fhir:display [ fhir:v "Navigation" ]
+  ] [
+     fhir:code [ fhir:v "section" ] ;
+     fhir:display [ fhir:v "Page Section" ]
+  ] ) . # 
+
+# -------------------------------------------------------------------------------------
+

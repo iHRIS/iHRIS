@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<Basic xmlns="http://hl7.org/fhir">
+  <id value="ihris-task-read-practitioner-role-resource"/>
+  <meta>
+    <profile value="http://ihris.org/fhir/StructureDefinition/ihris-task"/>
+  </meta>
+  <text>
+    <status value="extensions"/><div xmlns="http://www.w3.org/1999/xhtml"><p><b>Generated Narrative: Basic</b><a name="ihris-task-read-practitioner-role-resource"> </a></p><div style="display: inline-block; background-color: #d9e0e7; padding: 6px; margin: 4px; border: 1px solid #8da1b4; border-radius: 5px; line-height: 60%"><p style="margin-bottom: 0px">Resource Basic &quot;ihris-task-read-practitioner-role-resource&quot; </p><p style="margin-bottom: 0px">Profile: <a href="StructureDefinition-ihris-task.html">iHRIS Task</a></p></div><p><b>iHRIS Basic Name</b>: read-practitioner-role-resource</p><blockquote><p><b>Task Attributes</b></p><blockquote><p><b>url</b></p><code>permission</code></blockquote><p><b>value</b>: read</p><blockquote><p><b>url</b></p><code>resource</code></blockquote><p><b>value</b>: PractitionerRole</p></blockquote><p><b>code</b>: iHRIS Task <span style="background: LightGoldenRodYellow; margin: 4px; border: 1px solid khaki"> (<a href="CodeSystem-ihris-resource-codesystem.html">Code System for iHRIS Basic Resources.</a>#task)</span></p></div>
+  </text>
+  <extension url="http://ihris.org/fhir/StructureDefinition/ihris-basic-name">
+    <valueString value="read-practitioner-role-resource"/>
+  </extension>
+  <extension url="http://ihris.org/fhir/StructureDefinition/task-attributes">
+    <extension url="permission">
+      <valueCode value="read"/>
+    </extension>
+    <extension url="resource">
+      <valueCode value="PractitionerRole"/>
+    </extension>
+  </extension>
+  <code>
+    <coding>
+      <system value="http://ihris.org/fhir/CodeSystem/ihris-resource-codesystem"/>
+      <code value="task"/>
+    </coding>
+  </code>
+</Basic>
