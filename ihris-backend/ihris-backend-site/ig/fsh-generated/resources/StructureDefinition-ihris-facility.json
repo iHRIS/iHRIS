@@ -14,7 +14,7 @@
   "url": "http://ihris.org/fhir/StructureDefinition/ihris-facility",
   "version": "0.1.0",
   "name": "IhrisFacility",
-  "title": "iHRIS Facility",
+  "title": "Facility",
   "status": "active",
   "description": "iHRIS Profile of Locations to manage facilities.",
   "fhirVersion": "4.0.1",

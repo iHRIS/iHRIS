@@ -368,7 +368,7 @@
           "definition": "http://ihris.org/fhir/StructureDefinition/ihris-practitioner-role#PractitionerRole.location",
           "text": "Facility",
           "type": "reference",
-          "required": true,
+          "required": false,
           "repeats": false
         }
       ]

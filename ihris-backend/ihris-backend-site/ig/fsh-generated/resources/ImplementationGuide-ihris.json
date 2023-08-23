@@ -126,7 +126,7 @@
         "reference": {
           "reference": "StructureDefinition/ihris-facility"
         },
-        "name": "iHRIS Facility",
+        "name": "Facility",
         "description": "iHRIS Profile of Locations to manage facilities.",
         "exampleBoolean": false
       },
@@ -1716,7 +1716,7 @@
         "reference": {
           "reference": "Basic/ihris-page-facility"
         },
-        "name": "iHRIS Facility Page",
+        "name": "Facility",
         "exampleCanonical": "http://ihris.org/fhir/StructureDefinition/ihris-page"
       },
       {

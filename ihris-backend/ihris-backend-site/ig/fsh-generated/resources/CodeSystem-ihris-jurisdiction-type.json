@@ -5,7 +5,7 @@
   "name": "IhrisJurisdictionType",
   "id": "ihris-jurisdiction-type",
   "title": "Jurisdiction Type",
-  "version": "0.4.0",
+  "version": "0.5.0",
   "url": "http://ihris.org/fhir/CodeSystem/ihris-jurisdiction-type",
   "concept": [
     {
@@ -14,14 +14,29 @@
       "definition": "Country"
     },
     {
+      "code": "region",
+      "display": "region",
+      "definition": "region"
+    },
+    {
+      "code": "district",
+      "display": "District",
+      "definition": "District"
+    },
+    {
+      "code": "subcounty",
+      "display": "Sub-County",
+      "definition": "Sub-County"
+    },
+    {
       "code": "municipality",
       "display": "Municipality",
       "definition": "Municipality"
     },
     {
-      "code": "subdistrict",
-      "display": "Sub District",
-      "definition": "Sub District"
+      "code": "parish",
+      "display": "Parish",
+      "definition": "Parish"
     },
     {
       "code": "village",
@@ -29,6 +44,6 @@
       "definition": "Village"
     }
   ],
-  "date": "2020-11-12T08:41:04.362Z",
-  "count": 4
+  "date": "2023-06-12T08:41:04.362Z",
+  "count": 7
 }

@@ -122,13 +122,13 @@ Usage:          #example
 * extension[reportdetails].extension[resource].valueString = "Practitioner"
 * extension[reportdetails].extension[query].valueString = "identifier.system=http://app.rapidpro.io/contact-uuid"
 * extension[reportdetails].extension[displayCheckbox].valueBoolean = true
-* extension[reportdetails].extension[reportelement][0].extension[label].valueString = "fullname"
-* extension[reportdetails].extension[reportelement][0].extension[name].valueString = "name.where(use='official').last().text"
+* extension[reportdetails].extension[reportelement][0].extension[name].valueString = "fullname"
+* extension[reportdetails].extension[reportelement][0].extension[fhirpath].valueString = "name.where(use='official').last().text"
 * extension[reportdetails].extension[reportelement][0].extension[display].valueString = "Fullname"
 * extension[reportdetails].extension[reportelement][0].extension[filter].valueBoolean = true
 * extension[reportdetails].extension[reportelement][0].extension[dropDownFilter].valueBoolean = false
-* extension[reportdetails].extension[reportelement][1].extension[label].valueString = "phone"
-* extension[reportdetails].extension[reportelement][1].extension[name].valueString = "telecom.where(system='phone').value"
+* extension[reportdetails].extension[reportelement][1].extension[name].valueString = "phone"
+* extension[reportdetails].extension[reportelement][1].extension[fhirpath].valueString = "telecom.where(system='phone').value"
 * extension[reportdetails].extension[reportelement][1].extension[display].valueString = "Phone Number"
 * extension[reportlink].extension[name].valueString = "group"
 * extension[reportlink].extension[resource].valueString = "Group"
@@ -136,8 +136,8 @@ Usage:          #example
 * extension[reportlink].extension[linkTo].valueString = "mheropractitioner"
 * extension[reportlink].extension[linkElementSearchParameter].valueString = "member"
 * extension[reportlink].extension[multiple].valueBoolean = true
-* extension[reportlink].extension[reportelement][0].extension[label].valueString = "groupname"
-* extension[reportlink].extension[reportelement][0].extension[name].valueString = "name"
+* extension[reportlink].extension[reportelement][0].extension[name].valueString = "groupname"
+* extension[reportlink].extension[reportelement][0].extension[fhirpath].valueString = "name"
 * extension[reportlink].extension[reportelement][0].extension[display].valueString = "Contact Group"
 * extension[reportlink].extension[reportelement][0].extension[filter].valueBoolean = true
 * extension[reportlink].extension[reportelement][0].extension[dropDownFilter].valueBoolean = true
@@ -152,8 +152,8 @@ Usage:          #example
 * extension[reportlink].extension[linkElement].valueString = "Location.id"
 * extension[reportlink].extension[linkTo].valueString = "role.location"
 * extension[reportlink].extension[multiple].valueBoolean = false
-* extension[reportlink].extension[reportelement][0].extension[label].valueString = "facilityName"
-* extension[reportlink].extension[reportelement][0].extension[name].valueString = "name"
+* extension[reportlink].extension[reportelement][0].extension[name].valueString = "facilityName"
+* extension[reportlink].extension[reportelement][0].extension[fhirpath].valueString = "name"
 * extension[reportlink].extension[reportelement][0].extension[display].valueString = "Facility"
 * extension[reportlink].extension[reportelement][0].extension[filter].valueBoolean = true
 * extension[reportlink].extension[reportelement][0].extension[dropDownFilter].valueBoolean = true
@@ -162,8 +162,8 @@ Usage:          #example
 * extension[reportlink].extension[linkElement].valueString = "Location.id"
 * extension[reportlink].extension[linkTo].valueString = "role.location"
 * extension[reportlink].extension[multiple].valueBoolean = false
-* extension[reportlink].extension[reportelement][0].extension[label].valueString = "facilityName"
-* extension[reportlink].extension[reportelement][0].extension[name].valueString = "name"
+* extension[reportlink].extension[reportelement][0].extension[name].valueString = "facilityName"
+* extension[reportlink].extension[reportelement][0].extension[fhirpath].valueString = "name"
 * extension[reportlink].extension[reportelement][0].extension[display].valueString = "Facility"
 * extension[reportlink].extension[reportelement][0].extension[filter].valueBoolean = true
 * extension[reportlink].extension[reportelement][0].extension[dropDownFilter].valueBoolean = true

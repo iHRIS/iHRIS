@@ -33,14 +33,11 @@
         {
           "extension": [
             {
-              "url": "http://hl7.org/fhir/StructureDefinition/valueset-label",
+              "url": "name",
               "valueString": "employeeId"
             },
             {
-              "url": "fhirpath"
-            },
-            {
-              "url": "name",
+              "url": "fhirpath",
               "valueString": "identifier.where(type.coding.where(code='employeeId')).value"
             },
             {
@@ -61,14 +58,11 @@
         {
           "extension": [
             {
-              "url": "http://hl7.org/fhir/StructureDefinition/valueset-label",
+              "url": "name",
               "valueString": "prefix"
             },
             {
-              "url": "fhirpath"
-            },
-            {
-              "url": "name",
+              "url": "fhirpath",
               "valueString": "name.prefix"
             },
             {
@@ -89,14 +83,11 @@
         {
           "extension": [
             {
-              "url": "http://hl7.org/fhir/StructureDefinition/valueset-label",
+              "url": "name",
               "valueString": "given"
             },
             {
-              "url": "fhirpath"
-            },
-            {
-              "url": "name",
+              "url": "fhirpath",
               "valueString": "name.where(use='official').first().given"
             },
             {
@@ -117,14 +108,11 @@
         {
           "extension": [
             {
-              "url": "http://hl7.org/fhir/StructureDefinition/valueset-label",
+              "url": "name",
               "valueString": "family"
             },
             {
-              "url": "fhirpath"
-            },
-            {
-              "url": "name",
+              "url": "fhirpath",
               "valueString": "name.where(use='official').family"
             },
             {
@@ -145,14 +133,11 @@
         {
           "extension": [
             {
-              "url": "http://hl7.org/fhir/StructureDefinition/valueset-label",
+              "url": "name",
               "valueString": "given"
             },
             {
-              "url": "fhirpath"
-            },
-            {
-              "url": "name",
+              "url": "fhirpath",
               "valueString": "name.where(use='official').first().given"
             },
             {
@@ -173,14 +158,11 @@
         {
           "extension": [
             {
-              "url": "http://hl7.org/fhir/StructureDefinition/valueset-label",
+              "url": "name",
               "valueString": "gender"
             },
             {
-              "url": "fhirpath"
-            },
-            {
-              "url": "name",
+              "url": "fhirpath",
               "valueString": "gender"
             },
             {
@@ -201,14 +183,11 @@
         {
           "extension": [
             {
-              "url": "http://hl7.org/fhir/StructureDefinition/valueset-label",
+              "url": "name",
               "valueString": "residence"
             },
             {
-              "url": "fhirpath"
-            },
-            {
-              "url": "name",
+              "url": "fhirpath",
               "valueString": "Practitioner.extension.where(url='http://ihris.org/fhir/StructureDefinition/ihris-practitioner-residence').valueReference.reference"
             },
             {
