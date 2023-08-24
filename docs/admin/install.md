@@ -147,14 +147,62 @@ Edit ```/etc/systemd/system/multi-user.target.wants/tomcat9.service```
 
 In the security section add the following directory with a ReadWritePath
 
-```
+```bash
 ReadWritePaths=/var/lib/tomcat9/target/
 ```
 #### Access Hapi-fhir server
 Test the [hapi-fhir server](http://localhost:8080/hapi) to make sure it's running
-```
+
+```bash
 http://localhost:8080/hapi
 ```
+## Installation of IHRIS
+
+#### Create the IHRIS site file in the ihris-backend directory
+
+```bash
+cd (your Path to iHRIS)/iHRIS/ihris-backend
+cp -r ihris-backend-site site
+```
+
+#### Configure the IHRIS site
+
+copy from existing example file.
+
+```bash
+cd ihris-backend/site
+cp config/baseConfig.json.example config/baseConfig.json
+```
+
+Update the configurations based on your setings by editing the baseConfig.json file.
+the main variables to look out for are the
+
+```bash
+"fhir:base"
+"app:core:path"
+"app:site:path"
+"elasticsearch:base"
+```
+
+#### Start the IHRIS System
+
+While in Site path run
+
+for production
+```bash
+npm run start
+```
+
+for Development
+```bash
+npm run dev
+```
+System can now be accesses at http://localhost:3000
+
+This Marks the end of the IHRIS System installation.
+
+
+# Other usefull things to know about the IHRIS System
 
 ## SUSHI
 ```bash
