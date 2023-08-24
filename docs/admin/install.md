@@ -186,6 +186,19 @@ the main variables to look out for are the
 
 #### Start the IHRIS System
 
+Install ihris-backend Packages
+
+```bash
+cd (your Path to iHRIS)/iHRIS/ihris-backen/
+npm install
+```
+
+Install site Packages
+```bash
+cd site
+npm install
+```
+
 While in Site path run
 
 for production
