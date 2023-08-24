@@ -29,6 +29,8 @@ Note: if you have forgotten the password or user email, get in touch with iHRIS 
 
 ## User Roles
 
+![Alt text](../img/ihris_role.PNG 'Audit Logs')
 
 ## User Role Tasks
 
+![Alt text](../img/ihris_task.PNG 'Audit Logs')
