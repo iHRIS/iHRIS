@@ -199,7 +199,7 @@ npm run dev
 ```
 System can now be accessed [here](http://localhost:3000)
 
-**This marks the end of the IHRIS System installation.
+**This marks the end of the IHRIS System installation.**
 
 
 # Other usefull things to know about the IHRIS System
