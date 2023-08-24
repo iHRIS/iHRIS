@@ -189,7 +189,7 @@ the main variables to look out for are the
 Install ihris-backend Packages
 
 ```bash
-cd (your Path to iHRIS)/iHRIS/ihris-backen/
+cd (your Path to iHRIS)/iHRIS/ihris-backend/
 npm install
 ```
 
