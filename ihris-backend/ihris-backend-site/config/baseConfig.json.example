@@ -12,10 +12,6 @@
       "valueString": "ihris"
     },
     {
-      "name": "app:canSelfSignup",
-      "valueString": "true"
-    },
-    {
       "name": "app:installed",
       "valueString": "false"
     },
@@ -124,6 +120,22 @@
       "valueString": "1//04g4zv4eigAloCgYIARAAGAQSNwF-L9IraRUj_1oAA4qKsNORz9Jb1LJAHuby9ShA0i0JtnzMGRXkd6cKBojLxXMUDigcnrHZgp0"
     },
     {
+      "name": "auth:secret",
+      "valueString": "C1Nz8Tfa4fzKCI8rS7sgO9vkwvPCTA4p1vesXeppCiTNMq3u6K2Z2VfXG8PCrV3"
+    },
+    {
+      "name": "auth:tokenDuration",
+      "valueString": "5400"
+    },
+    {
+      "name": "auth:signup:enabled",
+      "valueBoolean": true
+    },
+    {
+      "name": "auth:signup:page",
+      "valueString": "default"
+    },
+    {
       "name": "elasticsearch:base",
       "valueString": "http://localhost:9200"
     },
@@ -154,14 +166,6 @@
     {
       "name": "kibana:password",
       "valueString": ""
-    },
-    {
-      "name": "auth:secret",
-      "valueString": "C1Nz8Tfa4fzKCI8rS7sgO9vkwvPCTA4p1vesXeppCiTNMq3u6K2Z2VfXG8PCrV3"
-    },
-    {
-      "name": "auth:tokenDuration",
-      "valueString": "5400"
     },
     {
       "name": "logs",

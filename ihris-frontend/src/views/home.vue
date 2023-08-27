@@ -197,7 +197,7 @@
                       {{$t(`App.hardcoded-texts.Forgot Password`)}}</v-btn
                     >
                     <v-spacer></v-spacer>
-                    <v-btn v-if="this.$store.state.allowSelfSignup === 'true' " @click="()=>{this.dialog=true}" class="mx-2 text--white"
+                    <v-btn v-if="this.$store.state.allowSelfSignup === 'true' " @click="signupRedirect" class="mx-2 text--white"
                            outlined
                            color="primary" style="text-transform: none" text >
                       {{$t(`App.hardcoded-texts.No account? Sign Up`)}}
@@ -237,18 +237,27 @@ export default {
       registering: false,
       resetPasswordDialog: false,
       resetPasswordEmail: "",
+      signup: {}
     }
   },
   created:function(){
     fetch("/config/site").then(response => {
       response.json().then(data => {
-        if (data.hasOwnProperty("canSelfSignup")) {
-          this.$store.commit('setAllowSelfSignup', data.canSelfSignup);
+        if (data.auth && data.auth.signup) {
+          this.$store.commit('setAllowSelfSignup', data.auth.signup.enabled);
+          this.signup = data.auth.signup
         }
       })
     })
   },
   methods:{
+    signupRedirect() {
+      if(this.signup.page === 'default') {
+        this.dialog = true
+      } else {
+        this.$router.push(this.signup.page)
+      }
+    },
     saveDate (date) {
       this.$refs.menu.save(date)
     },

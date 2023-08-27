@@ -11,7 +11,7 @@ const crypto = require('crypto')
 const logger = require('../winston')
 const winston = require("winston");
 const bulkRegistration = ihrissmartrequire("bulkRegistration")
-const utils = ihrissmartrequire("utils")
+// const utils = ihrissmartrequire("utils")
 
 const getUKey = () => {
     return Math.random().toString(36).replace(/^[^a-z]+/, '') + Math.random().toString(36).substring(2, 15)
@@ -82,6 +82,10 @@ const filterNavigation = (user, nav, prefix) => {
 router.get("/site", async function (req, res) {
     const defaultUser = nconf.get("user:loggedout") || "ihris-user-loggedout";
     let site = JSON.parse(JSON.stringify(nconf.get("site") || {}));
+    if(!site.auth) {
+        site.auth = {}
+    }
+    site.auth.signup = {...nconf.get("auth:signup")}
     if (nconf.getBool("security:disabled")) {
         site.security = {disabled: true};
     }

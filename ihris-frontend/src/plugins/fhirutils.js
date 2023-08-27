@@ -10,7 +10,6 @@ const fhirutils = {
     return value
   },
   checkConstraints: ( constraintList, constraintDetails, element, errors, fhirId ) => {
-    console.log(constraintList);
     return new Promise( (resolve, reject) => {
       let constraints = constraintList.split(",")
       let promises = []

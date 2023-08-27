@@ -810,12 +810,17 @@ For our performance.js routes file, the registration will look as follows</p>
 <span class="p">{</span><span class="w"></span>
 <span class="w">  </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;app:site:routes:performance:path&quot;</span><span class="p">,</span><span class="w"></span>
 <span class="w">  </span><span class="nt">&quot;valueString&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;performance.js&quot;</span><span class="w"></span>
+<span class="p">},</span><span class="w"></span>
+<span class="p">{</span><span class="w"></span>
+<span class="w">  </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;app:site:routes:performance:authenticate&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">  </span><span class="nt">&quot;valueString&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;true&quot;</span><span class="w"></span>
 <span class="p">}</span><span class="w"></span>
 </code></pre></div>
 
 <p><strong>WHERE</strong> <br></p>
 <p><strong>mount</strong> is the unique name that differentiate your custom APIs from the rest. so if you have a route/API called addPerformance inside performance.js, this route will be accessed as performance/addPerformance <br></p>
 <p><strong>path</strong> is the path to your routes file relative to the routes directory of your site, for our case it should be relative to iHRIS/ihris-backend/sierraleone/routes</p>
+<p><strong>authenticate</strong> Whether the route is accessible to authenticated users only or not</p>
 
   <hr>
 <div class="md-source-file">
