@@ -19,6 +19,9 @@ To search, type the name of the person in the “User” field and hit enter to 
   
 3. Make any changes to the record and once completed, click the green “Save” button in the top right corner of the page.
 
+![Alt text](../img/search_system_user.PNG 'Search System User')
+
+
 ## Change Password
 
 1. To change your own password, click on “Change Password” on the lefthand navigation panel.
