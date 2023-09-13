@@ -315,7 +315,7 @@ Usage: #example
 * parameter[=].part[+].name = "site:nav:menu:password:icon"
 * parameter[=].part[=].valueString = "mdi-lock-reset"
 * parameter[=].part[+].name = "site:nav:menu:password:url"
-* parameter[=].part[=].valueString = "/questionnaire/ihris-change-password/person"
+* parameter[=].part[=].valueString = "/questionnaire/ihris-change-password/user"
 * parameter[=].part[+].name = "site:nav:menu:ihris-apps-list:text"
 * parameter[=].part[=].valueString = "Apps"
 * parameter[=].part[+].name = "site:nav:menu:ihris-apps-list:order"

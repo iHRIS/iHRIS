@@ -12,15 +12,15 @@
       "valueSignature": {
         "type": [
           {
-            "code": "1.2.840.10065.1.12.1.14",
-            "system": "urn:iso-astm:E1762-95:2013"
+            "system": "urn:iso-astm:E1762-95:2013",
+            "code": "1.2.840.10065.1.12.1.14"
           }
         ],
-        "when": "2022-06-21T09:31:16.469Z",
+        "when": "2023-09-13T13:17:10.006Z",
         "who": {
           "reference": "http://ihris.org/fhir/Organization/ihris"
         },
-        "data": "V870cwmayGw0tOXXdiUn7/MNEaPt/KzRCk7H2t6IvqxmhshwxLxAYve8yNEdkhj/WhybFokLXR5rhtqU4VKE9EiN/dL1fHVbdu0rk/WrcFy2vPqYPUxepFAAAWQXIQV7gsVSMFEbUOTiYaQ42dt7gddrmJYq8p+6RFLAMDkxpzU="
+        "data": "nzGXy2SG52qfuYqRFtfpPiQYEyeLg4AuWnyTx7Gn7i0leQoAYN/l1xaD8LgqWRQpa+y/C7pRnUq1dJcxO5YFnOmhIUFiXlF56B9fGb+pVx6b5tGgnzitkZ0fquAKV79nPXAF7tyVZHSgymbOj2coP3nWYspigablce5ATOjEOzI="
       }
     },
     {
@@ -640,7 +640,7 @@
         },
         {
           "name": "site:nav:menu:password:url",
-          "valueString": "/questionnaire/ihris-change-password/person"
+          "valueString": "/questionnaire/ihris-change-password/user"
         },
         {
           "name": "site:nav:menu:ihris-apps-list:text",
