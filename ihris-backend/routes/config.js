@@ -3,6 +3,7 @@ const router = express.Router()
 const axios = require('axios')
 const URI = require('urijs');
 const ihrissmartrequire = require('ihrissmartrequire')
+ihrissmartrequire.ignore("*node_modules")
 const nconf = require('../modules/config')
 const fhirAxios = nconf.fhirAxios
 const outcomes = ihrissmartrequire('config/operationOutcomes')
@@ -11,7 +12,7 @@ const crypto = require('crypto')
 const logger = require('../winston')
 const winston = require("winston");
 const bulkRegistration = ihrissmartrequire("bulkRegistration")
-// const utils = ihrissmartrequire("utils")
+const utils = ihrissmartrequire("utils")
 
 const getUKey = () => {
     return Math.random().toString(36).replace(/^[^a-z]+/, '') + Math.random().toString(36).substring(2, 15)
@@ -88,9 +89,6 @@ router.get("/site", async function (req, res) {
     site.auth.signup = {...nconf.get("auth:signup")}
     if (nconf.getBool("security:disabled")) {
         site.security = {disabled: true};
-    }
-    if (nconf.get("app:canSelfSignup")) {
-        site.canSelfSignup = nconf.get("app:canSelfSignup");
     }
     if (req.user) {
         site.user = {};
@@ -936,6 +934,31 @@ router.get('/questionnaire/:questionnaire/:page', async function (req, res) {
     let primaryResourceDef = ""
     let sections = {}
     let pageFields = {}
+    function getDisplayCondition(qItem) {
+        let displayCondition = ''
+        if(qItem.enableWhen) {
+            for(let when of qItem.enableWhen) {
+                displayCondition = ''
+                const condKeys = Object.keys(when)
+                let answKeyInd = condKeys.findIndex((cond) => {
+                    return cond.startsWith('answer')
+                })
+                if(displayCondition) {
+                    displayCondition += '+='
+                }
+                let answer = ""
+                if(condKeys[answKeyInd] === "answerReference") {
+                    answer = when[condKeys[answKeyInd]].reference
+                } else if(condKeys[answKeyInd] === "answerCoding") {
+                    answer = when[condKeys[answKeyInd]].system + "#" + when[condKeys[answKeyInd]].code
+                } else {
+                    answer = when[condKeys[answKeyInd]]
+                }
+                displayCondition += when.question + '|' + when.operator + '|' + answer
+            }
+        }
+        return displayCondition
+    }
     await fhirAxios.read("Basic", page).then(async(resource) => {
         let pageDisplay = resource.extension.find(ext => ext.url === "http://ihris.org/fhir/StructureDefinition/ihris-page-display")
 
@@ -1091,6 +1114,7 @@ router.get('/questionnaire/:questionnaire/:page', async function (req, res) {
         const processQuestionnaireItems = async (items, group) => {
             let vueOutput = ""
             for (let item of items) {
+                let displayCondition = getDisplayCondition(item)
                 let displayType
                 if (item.linkId.includes('#') && item.type !== 'group') {
                     let linkDetails = item.linkId.split('#')
@@ -1113,7 +1137,7 @@ router.get('/questionnaire/:questionnaire/:page', async function (req, res) {
                 }
                 if (itemType === "group") {
                     let label = item.text.split('|', 2)
-                    vueOutput += '<ihris-questionnaire-group :slotProps="slotProps" :edit=\"isEdit\" path="' + item.linkId + '" label="' + label[0] + '"'
+                    vueOutput += '<ihris-questionnaire-group :slotProps="slotProps" :edit=\"isEdit\" path="' + item.linkId + '" label="' + label[0] + '" displayCondition="' + displayCondition + '"'
                     if(!isLimitSet) {
                         vueOutput += ' limit="' + limit + '"'
                         isLimitSet = true
@@ -1212,28 +1236,6 @@ router.get('/questionnaire/:questionnaire/:page', async function (req, res) {
                     }
                     vueOutput += "></ihris-hidden>\n"
                 } else {
-                    let displayCondition = ''
-                    if(item.enableWhen) {
-                        for(let when of item.enableWhen) {
-                            displayCondition = ''
-                            const condKeys = Object.keys(when)
-                            let answKeyInd = condKeys.findIndex((cond) => {
-                                return cond.startsWith('answer')
-                            })
-                            if(displayCondition) {
-                                displayCondition += '+='
-                            }
-                            let answer = ""
-                            if(condKeys[answKeyInd] === "answerReference") {
-                                answer = when[condKeys[answKeyInd]].reference
-                            } else if(condKeys[answKeyInd] === "answerCoding") {
-                                answer = when[condKeys[answKeyInd]].system + "#" + when[condKeys[answKeyInd]].code
-                            } else {
-                                answer = when[condKeys[answKeyInd]]
-                            }
-                            displayCondition += when.question + '|' + when.operator + '|' + answer
-                        }
-                    }
                     let fieldPath = item.definition.split("#")[1]
                     let baseProfile = item.definition.split("#")[0]
                     let readOnlyIfSet = false
@@ -1468,6 +1470,7 @@ router.get('/questionnaire/:questionnaire/:page', async function (req, res) {
 
         for (let item of resource.item) {
             if (item.type === "group") {
+                let displayCondition = getDisplayCondition(item)
                 let md5sum = crypto.createHash('md5')
                 md5sum.update(item.text)
                 md5sum.update(Math.random().toString(36).substring(2))
@@ -1477,7 +1480,7 @@ router.get('/questionnaire/:questionnaire/:page', async function (req, res) {
                     limit = item.definition.split("#")[2]
                 }
                 let label = item.text.split('|', 2)
-                vueOutput += '<ihris-questionnaire-section :slotProps="slotProps" id="' + sectionId + '" path="' + item.linkId + '" label="' + label[0] + '"'
+                vueOutput += '<ihris-questionnaire-section :slotProps="slotProps" id="' + sectionId + '" path="' + item.linkId + '" label="' + label[0] + '" displayCondition="' + displayCondition + '"'
                 if (label.length === 2) {
                     vueOutput += ' description="' + label[1] + '"'
                 }
@@ -1552,7 +1555,6 @@ router.get('/questionnaire/:questionnaire/:page', async function (req, res) {
             templateData.sectionMenu = sectionMenu
         }
         vueOutput += "</template></ihris-questionnaire>\n"
-
         logger.debug(vueOutput)
         return res.status(200).json({template: vueOutput, data: templateData})
 
