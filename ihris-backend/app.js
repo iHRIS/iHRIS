@@ -181,6 +181,7 @@ async function startUp() {
   const ihrisApps = require('./routes/apps');
   const mheroRouter = require('./routes/mhero');
   const translatorRouter = require('./routes/core-apps/ihris-google-translator/index');
+  const taskAndRoleRouter = require('./routes/core-apps/ihris-task-and-role/index')
 
   const limit = nconf.get('express:limit') || '50mb';
   app.use(express.json({
@@ -234,6 +235,7 @@ async function startUp() {
   app.use('/config', configRouter);
   app.use('/mhero', mheroRouter);
   app.use('/translator', translatorRouter);
+  app.use('/taskAndRole', taskAndRoleRouter);
   app.use('/tmp', express.static('tmp'));
   app.get('/test', (req, res) => {
     res.status(200).json({
