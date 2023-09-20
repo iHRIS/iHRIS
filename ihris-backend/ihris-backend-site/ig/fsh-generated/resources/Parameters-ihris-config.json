@@ -16,11 +16,11 @@
             "code": "1.2.840.10065.1.12.1.14"
           }
         ],
-        "when": "2023-09-13T13:17:10.006Z",
+        "when": "2023-09-20T07:19:48.987Z",
         "who": {
           "reference": "http://ihris.org/fhir/Organization/ihris"
         },
-        "data": "nzGXy2SG52qfuYqRFtfpPiQYEyeLg4AuWnyTx7Gn7i0leQoAYN/l1xaD8LgqWRQpa+y/C7pRnUq1dJcxO5YFnOmhIUFiXlF56B9fGb+pVx6b5tGgnzitkZ0fquAKV79nPXAF7tyVZHSgymbOj2coP3nWYspigablce5ATOjEOzI="
+        "data": "SaCt/8rtHlWg/3A+fLKlrEnskN7UWoe7B9hK0XR//mbgPQ1l9SM+UxWZjfF83zkgAKxN/Tb1wrijKAF4HdxrZD//SKsYzOGM4LlsF0xnH3JrPNOOU5NuGPP/3DktbJxMV+f37nf5FsJp9WInB4Js/FkY+6DaDHjOSSxlgTKiQ1A="
       }
     },
     {
@@ -881,6 +881,18 @@
         {
           "name": "workflow:questionnaire:password:url",
           "valueString": "http://ihris.org/fhir/Questionnaire/ihris-change-password"
+        },
+        {
+          "name": "app:site:routes:upload:mount",
+          "valueString": "upload"
+        },
+        {
+          "name": "app:site:routes:upload:path",
+          "valueString": "upload.js"
+        },
+        {
+          "name": "app:site:routes:upload:authenticate",
+          "valueString": "true"
         }
       ]
     }
