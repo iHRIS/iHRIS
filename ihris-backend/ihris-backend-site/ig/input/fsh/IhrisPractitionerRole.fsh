@@ -109,6 +109,36 @@ Usage:          #example
 * extension[section][0].extension[field][1].valueString = "CodeSystem.code"
 * extension[section][0].extension[field][2].valueString = "CodeSystem.definition"
 
+Instance:       ihris-page-classification
+InstanceOf:     IhrisPage
+Title:          "iHRIS Classification CodeSystem Page"
+Usage:          #example
+* code = IhrisResourceCodeSystem#page
+* extension[display].extension[resource].valueReference = Reference(CodeSystem/ihris-classification)
+* extension[display].extension[search][0].valueString = "Code|code"
+* extension[display].extension[search][1].valueString = "Display|display"
+* extension[section][0].extension[title].valueString = "Classification"
+* extension[section][0].extension[description].valueString = "Classification"
+* extension[section][0].extension[name].valueString = "CodeSystem"
+* extension[section][0].extension[field][0].valueString = "CodeSystem.display"
+* extension[section][0].extension[field][1].valueString = "CodeSystem.code"
+* extension[section][0].extension[field][2].valueString = "CodeSystem.definition"
+
+Instance:       ihris-page-cadre
+InstanceOf:     IhrisPage
+Title:          "iHRIS Cadre CodeSystem Page"
+Usage:          #example
+* code = IhrisResourceCodeSystem#page
+* extension[display].extension[resource].valueReference = Reference(CodeSystem/ihris-cadre)
+* extension[display].extension[search][0].valueString = "Code|code"
+* extension[display].extension[search][1].valueString = "Display|display"
+* extension[section][0].extension[title].valueString = "Cadre"
+* extension[section][0].extension[description].valueString = "Cadre"
+* extension[section][0].extension[name].valueString = "CodeSystem"
+* extension[section][0].extension[field][0].valueString = "CodeSystem.display"
+* extension[section][0].extension[field][1].valueString = "CodeSystem.code"
+* extension[section][0].extension[field][2].valueString = "CodeSystem.definition"
+
 Instance:       ihris-page-employment-status
 InstanceOf:     IhrisPage
 Title:          "iHRIS Employment Status CodeSystem Page"
