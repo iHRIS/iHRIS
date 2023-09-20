@@ -9,6 +9,11 @@ const logger = require('../winston')
 const bulkRegistration = ihrissmartrequire("bulkRegistration")
 const utils = ihrissmartrequire("utils")
 
+router.get("/csvTemplate", (req, res) => {
+  let p = path.join(__dirname, "../", "file/sampleInput.xlsx");
+  res.download(p);
+});
+
 router.post("/bulkRegistration", async (req, res) => {
     if (!req.body) {
       return res.status(400).end();
@@ -47,3 +52,5 @@ router.post("/bulkRegistration", async (req, res) => {
       }
     }
   });
+
+module.exports = router
