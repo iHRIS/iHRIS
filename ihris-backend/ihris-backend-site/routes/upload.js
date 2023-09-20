@@ -2,10 +2,10 @@ const express = require('express')
 const router = express.Router()
 const ihrissmartrequire = require('ihrissmartrequire')
 ihrissmartrequire.ignore("*node_modules")
-const nconf = require('../modules/config')
+const nconf = ihrissmartrequire('modules/config')
 const fhirAxios = nconf.fhirAxios
 const outcomes = ihrissmartrequire('config/operationOutcomes')
-const logger = require('../winston')
+const logger = ihrissmartrequire('winston')
 const bulkRegistration = ihrissmartrequire("bulkRegistration")
 const utils = ihrissmartrequire("utils")
 
