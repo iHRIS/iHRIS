@@ -19,7 +19,7 @@ services:
       spring.jpa.properties.hibernate.search.backend.directory.root: target/lucenefiles
       spring.jpa.properties.hibernate.search.backend.lucene_version: lucene_current
       spring.jpa.properties.hibernate.dialect: ca.uhn.fhir.jpa.model.dialect.HapiFhirPostgres94Dialect
-      hapi.fhir.tester.home.server_address: "http://localhost:8080/fhir"
+      hapi.fhir.tester.home.server_address: "http://localhost:8080/hapi/fhir"
       hapi.fhir.enable_index_missing_fields: 'true'
 
     volumes:
@@ -68,28 +68,12 @@ services:
 
   redis:
     image: redis:alpine
+    ports:
+      - 6379:6379
     command: ["redis-server", "--appendonly", "yes"]
     hostname: redis
     volumes:
       - redis-data:/data
-
-  ihris:
-    container_name: ihris
-    image: ihris/ihris
-    #platform: linux/amd64
-    ports:
-      - "3000:3000"
-    depends_on:
-      - redis
-      - fhir
-      - es
-    restart: on-failure
-    environment:
-      IHRIS_FHIR__BASE: http://fhir:8080/fhir
-      IHRIS_REDIS__URL: redis://redis
-      IHRIS_ELASTICSEARCH__BASE: http://es:9200
-      IHRIS_KIBANA__BASE: http://kibana:5601
-
 
 volumes:
   redis-data:
