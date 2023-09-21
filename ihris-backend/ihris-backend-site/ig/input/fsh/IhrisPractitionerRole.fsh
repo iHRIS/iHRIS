@@ -34,6 +34,8 @@ Description:    "iHRIS profile of Practitioner Role."
 * period.end ^maxValueDateTime = "2030-01-01"
 * practitioner 0..1 MS
 * practitioner ^label = "Health Worker"
+* practitioner.reference ^label = "Health Worker"
+* practitioner only Reference(IhrisPractitioner)
 * code 1..1 MS
 * code ^label = "Job"
 * code from http://ihris.org/fhir/ValueSet/ihris-job
