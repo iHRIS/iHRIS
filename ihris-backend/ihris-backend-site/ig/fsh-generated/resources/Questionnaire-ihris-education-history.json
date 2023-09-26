@@ -69,7 +69,7 @@
         },
         {
           "linkId": "Basic.extension[0].extension[6]",
-          "definition": "http://ihris.org/fhir/StructureDefinition/ihris-basic-education-history#Basic.extension:educationHistory.extension:current.value[x]:valueAttachment",
+          "definition": "http://ihris.org/fhir/StructureDefinition/ihris-basic-education-history#Basic.extension:educationHistory.extension:attachment.value[x]:valueAttachment",
           "text": "Attachement",
           "type": "attachment",
           "required": false,

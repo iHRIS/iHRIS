@@ -251,7 +251,7 @@ Usage:          #definition
 * item[0].item[5].repeats = false
 
 * item[0].item[6].linkId = "Basic.extension[0].extension[6]"
-* item[0].item[6].definition = "http://ihris.org/fhir/StructureDefinition/ihris-basic-education-history#Basic.extension:educationHistory.extension:current.value[x]:valueAttachment"
+* item[0].item[6].definition = "http://ihris.org/fhir/StructureDefinition/ihris-basic-education-history#Basic.extension:educationHistory.extension:attachment.value[x]:valueAttachment"
 * item[0].item[6].text = "Attachement"
 * item[0].item[6].type = #attachment
 * item[0].item[6].required = false
