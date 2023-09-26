@@ -87,6 +87,7 @@ Usage:          #definition
 * purpose = "Workflow page for recording a Discipline information."
 
 * item[0].linkId = "Basic"
+* item[0].definition = "http://ihris.org/fhir/StructureDefinition/ihris-basic-discipline#Basic.id"
 * item[0].text = "Discipline"
 * item[0].type = #group
 * item[0].extension[constraint].extension[key].valueId = "ihris-start-end-date-discipline"
@@ -95,6 +96,7 @@ Usage:          #definition
 * item[0].extension[constraint].extension[human].valueString = "The end date must be after the start date."
 
 * item[0].item[0].linkId = "Basic.extension[0].extension[0]"
+* item[0].item[0].definition = "http://ihris.org/fhir/StructureDefinition/ihris-basic-discipline#Basic.extension:discipline.extension:actionType.value[x]:valueCoding"
 * item[0].item[0].text = "Discipline Action Type"
 * item[0].item[0].type = #choice
 * item[0].item[0].answerValueSet = "http://ihris.org/fhir/ValueSet/ihris-discipline-action-type-valueset"
@@ -102,42 +104,49 @@ Usage:          #definition
 * item[0].item[0].repeats = false
 
 * item[0].item[1].linkId = "Basic.extension[0].extension[1]"
+* item[0].item[1].definition = "http://ihris.org/fhir/StructureDefinition/ihris-basic-discipline#Basic.extension:discipline.extension:givenDate.value[x]:valueDate"
 * item[0].item[1].text = "Given Date"
 * item[0].item[1].type = #date
 * item[0].item[1].required = true
 * item[0].item[1].repeats = false
 
 * item[0].item[2].linkId = "Basic.extension[0].extension[2]"
+* item[0].item[2].definition = "http://ihris.org/fhir/StructureDefinition/ihris-basic-discipline#Basic.extension:discipline.extension:givenBy.value[x]:valueString"
 * item[0].item[2].text = "Given By"
 * item[0].item[2].type = #string
 * item[0].item[2].required = false
 * item[0].item[2].repeats = false
 
 * item[0].item[3].linkId = "Basic.extension[0].extension[3]"
+* item[0].item[3].definition = "http://ihris.org/fhir/StructureDefinition/ihris-basic-discipline#Basic.extension:discipline.extension:actionTaken.value[x]:valueString"
 * item[0].item[3].text = "Action Taken"
 * item[0].item[3].type = #string
 * item[0].item[3].required = false
 * item[0].item[3].repeats = false
 
 * item[0].item[4].linkId = "Basic.extension[0].extension4]"
+* item[0].item[4].definition = "http://ihris.org/fhir/StructureDefinition/ihris-basic-discipline#Basic.extension:discipline.extension:period.value[x]:valuePeriod.start"
 * item[0].item[4].text = "Effective Start date"
 * item[0].item[4].type = #dateTime
 * item[0].item[4].required = true
 * item[0].item[4].repeats = false
 
 * item[0].item[5].linkId = "Basic.extension[0].extension[5]"
+* item[0].item[5].definition = "http://ihris.org/fhir/StructureDefinition/ihris-basic-discipline#Basic.extension:discipline.extension:period.value[x]:valuePeriod.end"
 * item[0].item[5].text = "Effective End Date"
 * item[0].item[5].type = #dateTime
 * item[0].item[5].required = true
 * item[0].item[5].repeats = false
 
 * item[0].item[6].linkId = "Basic.extension[0].extension[6]"
+* item[0].item[6].definition = "http://ihris.org/fhir/StructureDefinition/ihris-basic-discipline#Basic.extension:discipline.extension:reason.value[x]:valueString"
 * item[0].item[6].text = "Reason"
 * item[0].item[6].type = #text
 * item[0].item[6].required = true
 * item[0].item[6].repeats = false
 
 * item[0].item[7].linkId = "Basic.extension[0].extension[7]"
+* item[0].item[7].definition = "http://ihris.org/fhir/StructureDefinition/ihris-basic-discipline#Basic.extension:discipline.extension:remark.value[x]:valueString"
 * item[0].item[7].text = "Remark"
 * item[0].item[7].type = #text
 * item[0].item[7].required = false

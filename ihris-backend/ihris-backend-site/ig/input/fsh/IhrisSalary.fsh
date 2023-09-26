@@ -115,6 +115,7 @@ Usage:          #definition
 
 * item[0].linkId = "Basic"
 * item[0].text = "Salary Information"
+* item[0].definition = "http://ihris.org/fhir/StructureDefinition/ihris-basic-salary#Basic.id"
 * item[0].type = #group
 * item[0].extension[constraint].extension[key].valueId = "ihris-start-end-date"
 * item[0].extension[constraint].extension[severity].valueCode = #error
@@ -122,6 +123,7 @@ Usage:          #definition
 * item[0].extension[constraint].extension[human].valueString = "The end date must be after the start date."
 
 * item[0].item[0].linkId = "Basic.extension[0].extension[0]"
+* item[0].item[0].definition = "http://ihris.org/fhir/StructureDefinition/ihris-basic-salary#Basic.extension:salary.extension:salaryScale.value[x]:valueCoding"
 * item[0].item[0].text = "Pay Grade"
 * item[0].item[0].type = #choice
 * item[0].item[0].answerValueSet = "http://ihris.org/fhir/ValueSet/ihris-salary-scale-valueset"
@@ -129,42 +131,49 @@ Usage:          #definition
 * item[0].item[0].repeats = false
 
 * item[0].item[1].linkId = "Basic.extension[0].extension[1]"
+* item[0].item[1].definition = "http://ihris.org/fhir/StructureDefinition/ihris-basic-salary#Basic.extension:salary.extension:bsalary.value[x]:valueString"
 * item[0].item[1].text = "Basic Salary"
 * item[0].item[1].type = #string
 * item[0].item[1].required = false
 * item[0].item[1].repeats = false
 
 * item[0].item[2].linkId = "Basic.extension[0].extension[2]"
+* item[0].item[2].definition = "http://ihris.org/fhir/StructureDefinition/ihris-basic-salary#Basic.extension:salary.extension:allowance.value[x]:valueString"
 * item[0].item[2].text = "Allowance"
 * item[0].item[2].type = #string
 * item[0].item[2].required = false
 * item[0].item[2].repeats = false
 
 * item[0].item[3].linkId = "Basic.extension[0].extension[3]"
+* item[0].item[3].definition = "http://ihris.org/fhir/StructureDefinition/ihris-basic-salary#Basic.extension:salary.extension:benefits.value[x]:valueString"
 * item[0].item[3].text = "Benefits"
 * item[0].item[3].type = #string
 * item[0].item[3].required = false
 * item[0].item[3].repeats = false
 
 * item[0].item[4].linkId = "Basic.extension[0].extension[4]"
+* item[0].item[4].definition = "http://ihris.org/fhir/StructureDefinition/ihris-basic-salary#Basic.extension:salary.extension:period.value[x]:valuePeriod.start"
 * item[0].item[4].text = "Effective Start date"
 * item[0].item[4].type = #date
 * item[0].item[4].required = true
 * item[0].item[4].repeats = false
 
 * item[0].item[5].linkId = "Basic.extension[0].extension[5]"
+* item[0].item[5].definition = "http://ihris.org/fhir/StructureDefinition/ihris-basic-salary#Basic.extension:salary.extension:period.value[x]:valuePeriod.end"
 * item[0].item[5].text = "End Date"
 * item[0].item[5].type = #date
 * item[0].item[5].required = false
 * item[0].item[5].repeats = false
 
 * item[0].item[6].linkId = "Basic.extension[0].extension[6]"
+* item[0].item[6].definition = "http://ihris.org/fhir/StructureDefinition/ihris-basic-salary#Basic.extension:salary.extension:remark.value[x]:valueString"
 * item[0].item[6].text = "Remark"
 * item[0].item[6].type = #text
 * item[0].item[6].required = false
 * item[0].item[6].repeats = false
 
 * item[0].item[7].linkId = "Basic.extension[0].extension[7]"
+* item[0].item[7].definition = "http://ihris.org/fhir/StructureDefinition/ihris-basic-salary#Basic.extension:salary.extension:salarySource.value[x]:valueCoding"
 * item[0].item[7].text = "Salary Source"
 * item[0].item[7].type = #choice
 * item[0].item[7].answerValueSet = "http://ihris.org/fhir/ValueSet/ihris-salary-source-valueset"
@@ -172,6 +181,7 @@ Usage:          #definition
 * item[0].item[7].repeats = false
 
 * item[0].item[8].linkId = "Basic.extension[0].extension[8]"
+* item[0].item[8].definition = "http://ihris.org/fhir/StructureDefinition/ihris-basic-salary#Basic.extension:salary.extension:frequency.value[x]:valueCoding"
 * item[0].item[8].text = "Pay Frequency"
 * item[0].item[8].type = #choice
 * item[0].item[8].answerValueSet = "http://ihris.org/fhir/ValueSet/ihris-frequency-valueset"
@@ -179,6 +189,7 @@ Usage:          #definition
 * item[0].item[8].repeats = false
 
 * item[0].item[9].linkId = "Basic.extension[0].extension[9]"
+* item[0].item[9].definition = "http://ihris.org/fhir/StructureDefinition/ihris-basic-salary#Basic.extension:salary.extension:current.value[x]:valueBoolean"
 * item[0].item[9].text = "Is Current"
 * item[0].item[9].type = #boolean
 * item[0].item[9].required = false

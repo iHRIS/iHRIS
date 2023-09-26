@@ -65,28 +65,33 @@ Usage:          #definition
 * purpose = "Workflow page for recording a Performance information."
 
 * item[0].linkId = "Basic"
+* item[0].definition = "http://ihris.org/fhir/StructureDefinition/ihris-basic-performance#Basic.id"
 * item[0].text = "Performance"
 * item[0].type = #group
 
 * item[0].item[0].linkId = "Basic.extension[0].extension[0]"
+* item[0].item[0].definition = "http://ihris.org/fhir/StructureDefinition/ihris-basic-performance#Basic.extension:performance.extension:evaluator.value[x]:valueString"
 * item[0].item[0].text = "Evaluator's Name"
 * item[0].item[0].type = #string
 * item[0].item[0].required = true
 * item[0].item[0].repeats = false
 
 * item[0].item[1].linkId = "Basic.extension[0].extension[1]"
+* item[0].item[1].definition = "http://ihris.org/fhir/StructureDefinition/ihris-basic-performance#Basic.extension:performance.extension:period.value[x]:valuePeriod.start"
 * item[0].item[1].text = "Evaluation Period Start Date"
 * item[0].item[1].type = #date
 * item[0].item[1].required = true
 * item[0].item[1].repeats = false
 
 * item[0].item[2].linkId = "Basic.extension[0].extension[2]"
+* item[0].item[2].definition = "http://ihris.org/fhir/StructureDefinition/ihris-basic-performance#Basic.extension:performance.extension:period.value[x]:valuePeriod.end"
 * item[0].item[2].text = "Evaluation Period End Date"
 * item[0].item[2].type = #date
 * item[0].item[2].required = true
 * item[0].item[2].repeats = false
 
 * item[0].item[3].linkId = "Basic.extension[0].extension[3]"
+* item[0].item[3].definition = "http://ihris.org/fhir/StructureDefinition/ihris-basic-performance#Basic.extension:performance.extension:score.value[x]:valueCoding"
 * item[0].item[3].text = "Score Attained"
 * item[0].item[3].type = #choice
 * item[0].item[3].answerValueSet = "http://ihris.org/fhir/ValueSet/ihris-performance-score-valueset"
