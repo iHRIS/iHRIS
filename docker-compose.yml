@@ -81,8 +81,8 @@ services:
       - "3000:3000"
     depends_on:
       - redis
-      - fhir
-      - es
+      #-fhir
+      #-es
     restart: on-failure
     environment:
       IHRIS_FHIR__BASE: http://fhir:8080/fhir
