@@ -133,7 +133,7 @@ The Staff Report allows you to view and search information about staff, using di
 
 8.6 Report Navigation and Analysis
 
-Here are a few tips that will help you understand and analyze all reports in the system:
+Here are a few tips that will help you understand terminaand analyze all reports in the system:
 
 8.6.1 Records displayed
 
