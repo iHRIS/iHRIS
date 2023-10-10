@@ -158,7 +158,11 @@ export default {
       }
       if ( this.value.data && this.value.contentType ) {
         let dataURL = "data:"+this.value.contentType+";base64,"+this.value.data
-        fetch(dataURL).then( res => res.blob() ).then( blob => this.objURL = URL.createObjectURL( blob ) ).catch( e => {
+        fetch(dataURL).then( res => res.blob() ).then( blob => {
+          this.upload = new File([blob], this.value.title, { type: this.value.contentType, lastModified: new Date().getTime() })
+          this.objURL = URL.createObjectURL( blob )
+          this.doUpload()
+        }).catch( e => {
           console.log("Failed to get data from base64.",e)
         } )
       }

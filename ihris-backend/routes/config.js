@@ -1131,8 +1131,17 @@ router.get('/questionnaire/:questionnaire/:page', async function (req, res) {
                 if (item.repeats && !item.readOnly) {
                     let fieldPath = item.definition.split("#")[1]
                     let fieldPathSlices = fieldPath.split(".")
+                    let fieldDef = await fhirDefinition.getFieldDefinition(item.definition)
+                    let extension = fieldDef.type.find((type) => {
+                        return type.code === 'Extension'
+                    })
                     vueOutput += `<ihris-array limit="${limit}" field="${fieldPathSlices[fieldPathSlices.length-1]}" fieldType="${itemType}" :edit="isEdit" :slotProps="slotProps" path="${item.linkId}" 
-                    label="${item.text}" max="*" min="${(item.required ? "1" : "0")}"><template #default="slotProps">\n`
+                    label="${item.text}" max="*" min="${(item.required ? "1" : "0")}"`
+                    if(extension && extension.profile && extension.profile.length > 0) {
+                        vueOutput += ' profile="' + extension.profile[0] + '"'
+                        vueOutput += ' sliceName="' + fieldDef.sliceName + '"'
+                    }
+                    vueOutput += `><template #default="slotProps">\n`
                     isLimitSet = true
                 }
                 if (itemType === "group") {

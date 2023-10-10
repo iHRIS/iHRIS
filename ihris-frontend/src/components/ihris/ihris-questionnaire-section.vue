@@ -70,7 +70,6 @@ export default {
           url += "?" + queryStr.join("&")
         }
         url += '&_sort=-_id&_count=1'
-        console.log(url);
         fetch( url ).then( response => {
           if ( response.status === 200 ) {
             response.json().then( async data => {

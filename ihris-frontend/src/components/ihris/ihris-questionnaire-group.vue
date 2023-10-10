@@ -68,6 +68,20 @@ export default {
           }
         }
         //console.log(this.source)
+        if(this.source.data.length > 1) {
+          //check if the path is an array and use path index to get value
+          let pathSlices = this.path.split("[")
+          let index
+          for(let slice of pathSlices) {
+            let slices = slice.split("]")
+            if(Number.isInteger(parseInt(slices[0]))) {
+              index = slices[0]
+            }
+          }
+          if(index || index == 0) {
+            this.source.data = this.source.data[index]
+          }
+        }
       }
     }
   }
