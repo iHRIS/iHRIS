@@ -11,11 +11,13 @@
   "item": [
     {
       "linkId": "Basic",
+      "definition": "http://ihris.org/fhir/StructureDefinition/ihris-basic-performance#Basic.id",
       "text": "Performance",
       "type": "group",
       "item": [
         {
           "linkId": "Basic.extension[0].extension[0]",
+          "definition": "http://ihris.org/fhir/StructureDefinition/ihris-basic-performance#Basic.extension:performance.extension:evaluator.value[x]:valueString",
           "text": "Evaluator's Name",
           "type": "string",
           "required": true,
@@ -23,6 +25,7 @@
         },
         {
           "linkId": "Basic.extension[0].extension[1]",
+          "definition": "http://ihris.org/fhir/StructureDefinition/ihris-basic-performance#Basic.extension:performance.extension:period.value[x]:valuePeriod.start",
           "text": "Evaluation Period Start Date",
           "type": "date",
           "required": true,
@@ -30,6 +33,7 @@
         },
         {
           "linkId": "Basic.extension[0].extension[2]",
+          "definition": "http://ihris.org/fhir/StructureDefinition/ihris-basic-performance#Basic.extension:performance.extension:period.value[x]:valuePeriod.end",
           "text": "Evaluation Period End Date",
           "type": "date",
           "required": true,
@@ -37,6 +41,7 @@
         },
         {
           "linkId": "Basic.extension[0].extension[3]",
+          "definition": "http://ihris.org/fhir/StructureDefinition/ihris-basic-performance#Basic.extension:performance.extension:score.value[x]:valueCoding",
           "text": "Score Attained",
           "type": "choice",
           "answerValueSet": "http://ihris.org/fhir/ValueSet/ihris-performance-score-valueset",

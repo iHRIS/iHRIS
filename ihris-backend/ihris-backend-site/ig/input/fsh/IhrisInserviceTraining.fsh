@@ -120,16 +120,19 @@ Usage:          #definition
 * purpose = "Workflow page for recording a In-Service Training Information."
 
 * item[0].linkId = "Basic"
+* item[0].definition = "http://ihris.org/fhir/StructureDefinition/ihris-basic-inservice-training#Basic.id"
 * item[0].text = "In-Service Training Information"
 * item[0].type = #group
 
 * item[0].item[0].linkId = "Basic.extension[0].extension[0]"
+* item[0].item[0].definition = "http://ihris.org/fhir/StructureDefinition/ihris-basic-inservice-training#Basic.extension:inservicetraining.extension:provider.value[x]:valueString"
 * item[0].item[0].text = "In-Service Training Provider"
 * item[0].item[0].type = #string
 * item[0].item[0].required = true
 * item[0].item[0].repeats = false
 
 * item[0].item[1].linkId = "Basic.extension[0].extension[1]"
+* item[0].item[1].definition = "http://ihris.org/fhir/StructureDefinition/ihris-basic-inservice-training#Basic.extension:inservicetraining.extension:training.value[x]:valueCoding"
 * item[0].item[1].text = "In-Service Training Type/Category"
 * item[0].item[1].type = #choice
 * item[0].item[1].answerValueSet = "http://ihris.org/fhir/ValueSet/ihris-training-valueset"
@@ -137,24 +140,28 @@ Usage:          #definition
 * item[0].item[1].repeats = false
 
 * item[0].item[2].linkId = "Basic.extension[0].extension[2]"
+* item[0].item[2].definition = "http://ihris.org/fhir/StructureDefinition/ihris-basic-inservice-training#Basic.extension:inservicetraining.extension:courseName.value[x]:valueString"
 * item[0].item[2].text = "In-Service Training Course Name"
 * item[0].item[2].type = #string
 * item[0].item[2].required = true
 * item[0].item[2].repeats = false
 
 * item[0].item[3].linkId = "Basic.extension[0].extension[3]"
+* item[0].item[3].definition = "http://ihris.org/fhir/StructureDefinition/ihris-basic-inservice-training#Basic.extension:inservicetraining.extension:credits.value[x]:valueInteger"
 * item[0].item[3].text = "Credits"
 * item[0].item[3].type = #integer
 * item[0].item[3].required = false
 * item[0].item[3].repeats = false
 
 * item[0].item[4].linkId = "Basic.extension[0].extension[4]"
+* item[0].item[4].definition = "http://ihris.org/fhir/StructureDefinition/ihris-basic-inservice-training#Basic.extension:inservicetraining.extension:startDate.value[x]:valueDate"
 * item[0].item[4].text = "Start Date"
 * item[0].item[4].type = #date
 * item[0].item[4].required = true
 * item[0].item[4].repeats = false
 
 * item[0].item[5].linkId = "Basic.extension[0].extension[5]"
+* item[0].item[5].definition = "http://ihris.org/fhir/StructureDefinition/ihris-basic-inservice-training#Basic.extension:inservicetraining.extension:endDate.value[x]:valueDate"
 * item[0].item[5].text = "End Date"
 * item[0].item[5].type = #date
 * item[0].item[5].required = true

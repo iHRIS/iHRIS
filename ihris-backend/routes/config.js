@@ -11,8 +11,7 @@ const fhirDefinition = require('../modules/fhir/fhirDefinition')
 const crypto = require('crypto')
 const logger = require('../winston')
 const winston = require("winston");
-const bulkRegistration = ihrissmartrequire("bulkRegistration")
-const utils = ihrissmartrequire("utils")
+
 
 const getUKey = () => {
     return Math.random().toString(36).replace(/^[^a-z]+/, '') + Math.random().toString(36).substring(2, 15)
@@ -1577,45 +1576,6 @@ router.get('/questionnaire/:questionnaire/:page', async function (req, res) {
     })
 
 })
-
-router.post("/bulkRegistration", async (req, res) => {
-    if (!req.body) {
-      return res.status(400).end();
-    } else {
-      try {
-        await utils.setUserdata(req).then(async (userResults) => {
-            if (userResults.length > 0) {
-              await bulkRegistration(userResults)
-                .then(async (response) => {
-                  if (response.isValid) {
-                    console.log("I have Valid Response")
-                    await fhirAxios.create(response.data.bundle).then((results) => {
-                        return res.status(201).json(results);
-                      })
-                      .catch((err) => {
-                        logger.error(err);
-                        // console.log(JSON.stringify(err,null,2))
-                        return res.status(500).json(err);
-                      });
-                  } else {
-                    console.log("I Don't have Valid Response")
-                    return res.json(response);
-                  }
-                })
-                .catch((err) => {
-                  logger.error(err.message);
-                });
-            }
-          })
-          .catch((err) => {
-            // console.log(JSON.stringify(err, null, 2));
-            logger.error(err);
-          });
-      } catch (e) {
-        console.log(e);
-      }
-    }
-  });
 
 router.get('/report/es/:report', (req, res) => {
     let report = req.params.report
