@@ -2,16 +2,26 @@
 
 The report in iHRIS provides summaries of the HR data in the system related to different themes and in various display formats. In iHRIS, users can analyze and display data in both tabular and graphical. The graphical reports are mainly displayed via the iHRIS dashboard. The tabular reports empower users to access data in a summary format by choosing specific data sets, display data in specific arrangement, relating different datasets, or even generating statistics from data. The reports can be viewed in the system or exported for external use in different formats include pdf, csv, etc. Custom reports are accessed by clicking on “Reports” in the left hand navigation bar.
 
-8.1 Employee Contract Report
+##  Staff Reports
+
+Employee Contract Report
 The Employee Contract Report allows you to view and search information related to employee contracts, using different filters. The Employee Contract Report shows Employee ID, First Name, Father’s Name, Grandfather’s Name, Gender, Nationality, Ethnicity, Job Position, Department/Directorate, Start Date, End Date, Employment Status, Job Type, and Facility.
 
-1. By typing search terms or selecting different filter options from the dropdown lists, records that match your search will be pulled from the database and displayed. You can tailor your search using the following search filters:
+ By typing search terms or selecting different filter options from the dropdown lists, records that match your search will be pulled from the database and displayed. You can tailor your search using the following search filters:
+
+
 • Employee ID
+
 • First Name
+
 • Father’s Name
+
 • Grandfather’s Name
+
 • Gender (select from dropdown list)
+
 • Job Position (select from dropdown list)
+
 • Department/Directorate (select from dropdown list)
 • Start Date
 • End Date
@@ -19,15 +29,16 @@ The Employee Contract Report allows you to view and search information related t
 • Job Type (select from dropdown list)
 • Facility (select from dropdown list)
 
-2. When filtering from a dropdown list, you can select more than one option by clicking the box next to that option, and you can select to include or exclude multiple options (but it is not possible to include one option and exclude another).
+When filtering from a dropdown list, you can select more than one option by clicking the box next to that option, and you can select to include or exclude multiple options (but it is not possible to include one option and exclude another).
 
-3. Once you have selected the filter options, you can Export the results into an Excel spreadsheet  by clicking the blue “Export” button.
+Once you have selected the filter options, you can Export the results into an Excel spreadsheet  by clicking the blue “Export” button.
 
-8.2 Performance Report
+Performance Report
 
 The Performance Report allows you to view and search information related to employee performance appraisals, using different filters. The Performance Report shows Employee ID, First Name, Father’s Name, Grandfather’s Name, Gender, Job Title, Department/Directorate, Start Date, Employment Status, Facility, Performance Type, Evaluator’s Name, Score, Evaluation Start Date, Evaluation End Date.
 
-1. By typing search terms or selecting different filter options from the dropdown lists, records that match your search will be pulled from the database and displayed. You can tailor your search using the following search filters:
+By typing search terms or selecting different filter options from the dropdown lists, records that match your search will be pulled from the database and displayed. You can tailor your search using the following search filters:
+
 ● Employee ID
 ● First Name
 ● Father’s Name
@@ -47,7 +58,7 @@ The Performance Report allows you to view and search information related to empl
 
 3. Once you have selected the filter options, you can Export the results into an Excel spreadsheet  by clicking the blue “Export” button.
 
-8.3 Retiring Employee Report
+Retiring Employee Report
 
 The Retiring Employee report allows you to view and search retirement information about staff, using different filters. The Retiring Employee report shows Employee ID, First Name, Father’s Name, Grandfather’s Name, Gender, Job Position, Department/Directorate, Start Date, End Date, Employment Status, Reason for Change, Facility, Education Level Category, Education Level Sub Category, Professional Category Type, Profession Category
 
@@ -122,7 +133,7 @@ The Staff Report allows you to view and search information about staff, using di
 
 8.6 Report Navigation and Analysis
 
-Here are a few tips that will help you understand and analyze all reports in the system:
+Here are a few tips that will help you understand terminaand analyze all reports in the system:
 
 8.6.1 Records displayed
 

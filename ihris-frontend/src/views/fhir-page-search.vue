@@ -56,6 +56,9 @@ export default {
                 searchData: function(expression, value) {
                   this.$set(this.terms, expression, value)
                 }
+              },
+              created() {
+                console.error(data.template, 0, 2);
               }
             })
           }

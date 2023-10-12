@@ -43,10 +43,7 @@ const user = {
             })
         })
     },
-    lookupByEmail: (email,activeOnly = true) => {
-        // if(activeOnly){
-        //     return user.lookup({telecom: "email|" + email,"active:exact": true})
-        // }
+    lookupByEmail: (email) => {
         return user.lookup({telecom: "email|" + email})
     },
     lookupByProvider: (provider, id) => {

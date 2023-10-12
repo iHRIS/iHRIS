@@ -349,7 +349,7 @@ router.post("/password-reset-request", async (req, res) => {
       } else {
         res.status(500).json({
           "ok": false,
-          "message": "No Account found with this email or your account is deactivated"
+          "message": "No Account found with this email"
         })
       }
     }).catch((err) => {

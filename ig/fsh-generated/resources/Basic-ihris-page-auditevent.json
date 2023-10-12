@@ -30,7 +30,7 @@
         },
         {
           "url": "search",
-          "valueString": "User AltId|AuditEvent.agent.altId"
+          "valueString": "UserID|AuditEvent.agent.altId"
         },
         {
           "url": "search",
@@ -66,7 +66,7 @@
         },
         {
           "url": "filter",
-          "valueString": "User AltId|altid"
+          "valueString": "UserID|altid"
         },
         {
           "url": "filter",

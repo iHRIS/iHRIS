@@ -38,8 +38,8 @@
           </v-card-text>
         </v-card>
       </v-dialog>
-      <router-view :key="$route.fullPath"></router-view>
-      <router-view v-if="$store.state.user.loggedin" name="homeNav" :nav="nav" :key="$route.fullPath"></router-view>
+      <router-view :key="$route.path"></router-view>
+      <router-view v-if="$store.state.user.loggedin" name="homeNav" :nav="nav"></router-view>
     </v-content>
 
     <the-footer :footer="footer" />

@@ -1,191 +1,372 @@
 # Database
+The database is the data setup for iHRIS v5.
 
-Health workers details are managed via module “PEOPLE”; which includes the option to add health workers and search health worker records in the system. It is the primary registration page to add new employees, search/view records, and make changes to existing employee records.
+It allows iHRIS users to generate various data settings which will be used globally in the system. 
 
-Note: before adding any new health workers into HRIS, first search to establish in that health worker does not already exist in the system.
+## Cadres
+A cadre refers to individuals who are typically organized and equipped to perform specific tasks or roles within the healthcare system. Examples of Cadres include: Community Health Staff, Pharmacists, Lab Technicians etc.
 
-## Add Person
+### Add cadre
 
-All records in iHRIS have to be populated before any reports can be generated. Health workers details are entered via “Add Person” under “PEOPLE” module.
+To add a cadre, click the blue button **Add Cadre **
 
-To create a new employee record, click “Add People” on the left side navigation bar. You will then add information to the fields of the record which will be explained in the next few sections of the manual.
-You can also add a new employee record from the Search People page. At the top of the table displaying employee records, click on the button in the right corner that says "Add Health Worker Information".
+Capture the name of the cadre to be displayed, assign a specific code and give a definition to the cadre, then save the details captured.
 
-### Tips for Adding Information
+![Alt text](../img/add_cadre.PNG 'Add Cadre')
 
-Here are some tips to help users through the process of adding information to records:
+### Search cadre
+You can search the various cadres captured in the system under this feature.
 
-1. The entry page is broken into multiple sections. You can scroll down to go to a different section, or click on a section from the right sidebar to skip directly to that section.
+You can search by **code** or by **display**
 
-2. Fields that are required are indicated with a red asterisk.
-3. Unless otherwise noted you should type the information directly into the space provided.
-4. Dropdown lists are available for some fields and are noted in the lockup lists.
-5. With most of the dropdown lists you can start typing the word that you wish to enter and you will be taken to it in the list, rather than having to scroll through the whole list.
-6. There may be date fields that require you to select the date on a calendar (see 3.5.3 for steps to select a date using the calendar tool).
-7. There may also be an option to include more than one entry for a single record component. For example, an employee may speak multiple languages or may have more than one dependent. If you see a dark gray bar at the top of a field with a plus sign at the right corner of the bar, this denotes a field that can have multiple entries.
+![Alt text](../img/cadre.PNG 'Search Cadre')
 
-8. When selecting a location you will work through a series of dropdown menus.
-• Click on the Region to select it, or, click on the arrow beside the Region to see the corresponding Zones, then
-• Click on the Zone to select it, or click on the small grey arrow beside the Zone to see the corresponding Woredas, then
-• Select the Woreda (if available)
+Your results shall be displayed as above
 
-### Person Information
+## Classification
+A classification refers to a category of the practitioners  with similar characteristics captured in the system. Classification can include categories such as support staff, technical staff etc. 
 
-#### Adding information to the person record
+### Add classification
 
-The following information can be entered on a health worker’s person record:
+To add a classification, click the blue button **Add Classification **
 
-**Name**
+Capture the name of the classification to be displayed, assign a specific code and give a definition to the classification.
 
-* • Prefix
-* • First name (required)
-* • First name alternative language
-* • Father’s name (required)
-* • Father’s name alternative language
-* • Grandfather’s last name (required)
-* • Grandfather’s last name alternative language
-* • Mother’s Full name (required)
-* • Mother's name alternative language
+![Alt text](../img/add_classification.PNG 'Add Classification')
 
-Demographic Information
-• Date of birth (required, select date from calendar)
-• Gender (required, select from dropdown)
-• Marital status (select from dropdown)
-• Nationality (Ethiopian is default, otherwise select from dropdown)
-• Ethnicity (select from dropdown)
+### Search classification
+You can search the various classifications captured in the system under this feature.
 
-Identifiers (identification numbers)
-● Employee ID (required)
-● Pension number
-● TIN number
-● Civil service ID
-● License ID
-● File number (required)
-● Driving License
- Driving License Type (select from dropdown)
- Driving License ID
+You can search by **code** or by **display**
 
-Contacts
-● Mobile phone
-● Work Phone
-● Work email
-● Residence (required)
+![Alt text](../img/classification.PNG 'Search Classification')
 
-Language Details
-Select the plus sign to add a language
-• Language (select from dropdown list)
-• Proficiency (select the plus sign to add proficiency, select from drop down): Select Excellent, Good, Poor, Very Good
-• Proficiency Type (select the plus sign to add proficiency, select from drop down): Select Listening, Reading, Speaking, Writing
-• Click the plus sign if you want to enter a second proficiency or additional proficiency types (if this is applicable).
-•  Click the minus sign to remove a proficiency or proficiency type
+Your results shall be displayed as above
 
-To enter a second language, click the plus sign next to Language. Repeat the above steps to Proficiency and Proficiency types for each additional language.
+## Degree/ Course
 
-Category
-For category, select from dropdown list
-● Select Academic (less than Grade 12 education level, Administrative, Health Professional
+In iHRIS a degree is an academic award conferred by an educational institution, such as a university or college, upon the completion of a program of study. It signifies the attainment of a certain level of knowledge, skills, and expertise in a specific field. Examples of academic degrees include Bachelor's, Master's, and Doctorate degrees.
 
-Remarks
-If you have any general remarks about the employee to record, click on the plus sign then type any special remarks regarding the employee into the text box
+### Add degree
 
-Photo
-Upload a photo of the employee by clicking in the blank field. From the pop-up window, select a file on your computer that you would like to upload as the picture of the employee.
+To add a degree, click the blue button **Add Degree **
 
-Note: There are additional employee record fields that can only be filled in through editing an existing position which will be explained under edit person record.
+Capture the name of the degree to be displayed, assign a specific code and give a definition to the degree, then save the details captured.
 
-2. Saving New Record
-When you are finished adding information or making changes, click the "Save" button at the top of the right sidebar. If you have not entered information in all the required fields indicated with a red asterisk, you will not be able to save the record. Review the form by scrolling to determine which required fields still need to be completed.
+![Alt text](../img/add_degree.PNG 'Add Degree')
 
-3. Saving and editing later
-After a new record is saved, it is possible to edit or add additional information at any time. This is done by searching for the employee record as explained in the next section. After searching, select the desired record and click “Edit” in the top right corner. You can then add additional data to the record or modify the data already in the record.
+### Search degree
+You can search the various degrees captured in the system under this feature.
 
-## Search Records
+You can search by **code** or by **display**
 
-Existing health workers records can be accessed via “Search people” under the module “PEOPLE”. From the left side navigation bar, Click “Search People” to search for an employee.
+![Alt text](../img/education_level.PNG 'Search Degree')
 
-Using the search filters, you can search by
-● First name
-● Father’s Name
-● Grand Father’s Name
-● Mother’s Name
-● Employee ID, or
-● PIN ID
-For example, type part or all of a name or ID number into the corresponding fields. Remember that you must hit the "Enter" or "Return" key on your keyboard to start the search.
+Your results shall be displayed as above
 
-When you search, records matching your search will be pulled from the database. You can then select a search result to view the full record - this is done by clicking anywhere in the row of the record you want to view.
 
-4.2.1 Tips for Searching
+## Disciplinary Action Type
+A disciplinary action type refers to various categories of actions an employee can face in the disciplinary process
 
-1. When you enter a search term, it will only search the field in which you type the search term – not any other fields even if there is a match in another field. The example below shows searching using only first name “Ismail”
+### Add disciplinary action type
 
-Searching using Father’s name “Ismail” gives different results
+To add a disciplinary action type, click the blue button **Add Disciplinary Action Type**
 
-Searching using Grand Father’s Names “Ismail” also gives different results
+Capture the name of the disciplinary action type to be displayed, assign a specific code and give a definition to the disciplinary action type, then save the details captured.
 
-2. It is possible to search across two or more fields. This is done by conducting one search. Once the records have been filtered and you see the results of the first search, simply type in the next search term into the corresponding field. Once you hit “Enter” you will see the results with both filters applied. You can continue this process in each search field.
+![Alt text](../img/disciplinary.PNG 'Add Disciplinary action type')
 
-3. Remember that to remove search filter, you should click on the X that is at the right side of the search field. You will need to do this for every field individually if you desire to remove other search terms/filters.
+![Alt text](../img/add_discipline.PNG 'Add Disciplinary action type')
 
-4.3 Edit Person
-There are two types of information that can be edited in a Person record: the basic information that is included in the initial “Add Person” form when a new record is created, and additional information that is added once a new employee has started work.
-4.3.1 Basic Employee Information
-To add or update information in an existing employee record:
+### Search disciplinary action type
+You can search the various disciplinary action types captured in the system under this feature.
 
-1. Following the process described previously to search for a record, locate the existing employee record that you wish to modify and click on it to open the record.
-2. At the top of the right sidebar click on the "Edit" button.
+You can search by **code** or by **display**
 
-3. Add information to the record. Here are a few tips:
-● The record page is broken into multiple sections. You can scroll down to access a different section, or you can click on a section from the right sidebar to skip directly to that section.
+![Alt text](../img/disciplinary_action.PNG 'Search Disciplinary action type')
 
-● For the fields you wish to edit you can select item(s) from dropdown list(s) or type information directly into the record in any section and field.
-● Fields that are required are indicated with a red asterisk. Note: there are additional required fields when editing a record than when initially creating a record.
-● Remember that for some fields it will be possible to include more than one entry.
-4. The following fields from the Add Person module can be edited after clicking the “Edit” button
-● Photo
-● Names (Basic Information)
-● Demographic Details
-● Identifiers
-● Contact Details
-● Language Details
-● Remarks
-5. You can also add or edit additional fields from here, including whether the employee is active, Disability information, Dependent Details, Training Details, and attachment documents.
-Disability Details
-● Select from the dropdown menu
-● Dropdown options include: Hearing impaired, mentally impaired, mobility impaired, Requires crib, requires crutches, requires gurney, requires walker, requires wheelchair, speech impaired, and vision impaired.
-Dependent Details
-● Type dependent name into the field
-● Add additional dependents by clicking the plus sign - See "Search People" for information on adding multiple entries for one field
-● Dependent’s name
-● Dependent’s Date of Birth (select from calendar)
-● Relationship (select from dropdown menu)
-● Dependent’s Gender (select from dropdown menu)
-Training Details
-● Click the plus sign if you want to enter training information, then type in the training title in the space that appears.
-● Indicate the category of the training by selecting an option from the dropdown.
- ■ Academic (less than Grade 12 education level)
- ■ Administrative
- ■ Health Professional)
-● Add additional training by clicking the plus sign - see tips on adding multiple entries for one field/section under “Tips for adding information”.
-Attachment – search your computer to add a document as an attachment to the record (add possible reasons or examples of attachments)
-6. When you are done making changes, click the "Save" button at the top of the right sidebar. If you have not entered all of the required fields indicated with a red asterisk, you will not be able to save the record. Review the form by scrolling to determine which required fields still need to be completed.
+Your results shall be displayed as above
 
-You can leave your changes without saving them by clicking the "Cancel" button in the top of the right sidebar.
-4.3.2 Supplemental Employee Information
-There is supplemental information about an employee that can be added to a Person record after it has been created, but it is not accessible when you are in edit mode (making changes after clicking "Edit" at the top of a record). If you are in edit mode you should Save or Cancel. Then you will see the record again and can view the additional information.
 
-1. In the list of section located in the right sidebar, scroll down until you see the sections after "Remarks".
-2. From here you can either click on a section title in the right sidebar to skip directly to that section or you can scroll down in the record to find the section you want to edit.
 
-The supplemental sections include:
-● Current Job Positions
-● Leave Stock Information
-● Leave Information
-● Education History Information
-● Performance Evaluation Information
-● Employment History
-● Professional License Category
-● Emergency Contact
-● Collateral
-● Employee Discipline Information
-● Employee Salary Information
-● Employee Award Information
+## Education Institution
+
+A Education Institution refers to an organization or establishment that provides education and training related to healthcare, medical sciences, and health-related fields. These institutions play a crucial role in preparing individuals to pursue careers in healthcare, acquire medical knowledge, and develop skills necessary for providing quality patient care. These invstitutions are specifically referred to in regards to providing in service training to health workers in iHRIS v5.
+
+### Add Education Institution
+
+To add a Education Institution, click the blue button **Add Institution **
+
+Capture the name of the Education Institution to be displayed, assign a specific code and give a definition to the Education Institution, then save the details captured.
+
+![Alt text](../img/add_institution.PNG 'Add Education Institution')
+
+### Search Education Institution
+You can search the various Education Institutions captured in the system under this feature.
+
+You can search by **code** or by **display**
+
+![Alt text](../img/institution.PNG 'Search Education Institution')
+
+Your results shall be displayed as above
+
+
+## Education Level
+A Education Level refers to the various categories of education qualifications. Examples are : Certificate, Diploma etc
+
+### Add Education Level
+
+To add a Education Level, click the blue button **Add Education Level **
+
+Capture the name of the Education Level to be displayed, assign a specific code and give a definition to the Education Level, then save the details captured.
+
+![Alt text](../img/add_level.PNG 'Add Education Level')
+
+### Search Education Level
+You can search the various Education Levels captured in the system under this feature.
+
+You can search by **code** or by **display**
+
+![Alt text](../img/education_level.PNG 'Search Education Level')
+
+Your results shall be displayed as above
+
+
+## Education Major
+
+A Education Major refers to various specialization undertaken by health workers in their specific career paths. 
+
+### Add Education Major
+
+To add a Education Major, click the blue button **Add Education Major **
+
+Capture the name of the Education Major to be displayed, assign a specific code and give a definition to the Education Major, then save the details captured.
+
+![Alt text](../img/add_major.PNG 'Add Education Major')
+
+### Search Education Major
+You can search the various Education Majors captured in the system under this feature.
+
+You can search by **code** or by **display**
+
+![Alt text](../img/education_major.PNG 'Search Education Major')
+
+Your results shall be displayed as above
+
+
+## Employment Status
+
+Employment Status refers to an employee's current emploeyment terms in relation to their work or job in the facility/ organizatione.g. full time, contract
+
+### Add Employment Status
+
+To add a Employment Status, click the blue button **Add Employment Status **
+
+Capture the name of the Employment Status to be displayed, assign a specific code and give a definition to the Employment Status, then save the details captured.
+
+![Alt text](../img/add_employment_status.PNG 'Add Employment Status')
+
+### Search Employment Status
+You can search the various Employment Statuss captured in the system under this feature.
+
+You can search by **code** or by **display**
+
+![Alt text](../img/employment_status.PNG 'Search Employment Status')
+
+Your results shall be displayed as above
+
+
+## Funds Source
+
+A Funds Source refers to the source of funds which are used to pay an employee in a facility or organization.
+
+### Add Funds Source
+
+To add a Funds Source, click the blue button **Add Funds Source **
+
+Capture the name of the Funds Source to be displayed, assign a specific code and give a definition to the Funds Source, then save the details captured.
+
+![Alt text](../img/add_source.PNG 'Add Funds Source')
+
+### Search Funds Source
+You can search the various Funds Sources captured in the system under this feature.
+
+You can search by **code** or by **display**
+
+![Alt text](../img/salary_source.PNG 'Search Funds Source')
+
+Your results shall be displayed as above
+
+
+## Identifier Types
+
+Identifier Types refer to various unique identifiers which can be used to uniquely identify an employee. Examples include: Driving lisence number, employee number, ID number, passport number etc.
+
+### Add Identifier Types
+
+To add Identifier Types, click the blue button **Add Identifier Types **
+
+Capture the name of the Identifier Types to be displayed, assign a specific code and give a definition to the Identifier Types, then save the details captured.
+
+![Alt text](../img/add_identifier.PNG 'Add Identifier Types')
+
+### Search Identifier Types
+You can search the various Identifier Typess captured in the system under this feature.
+
+You can search by **code** or by **display**
+
+![Alt text](../img/identifiers.PNG 'Search Identifier Types')
+
+Your results shall be displayed as above
+
+
+
+## In-Service Training
+
+In Service Training refers to training undertaken by employees during their employment. These may range from short term courses to full certifications which may be undertaken at any time during an employee's engagement period.
+
+### Add In Service Training
+
+To add In Service Training, click the blue button **Add In Service Training**
+
+Capture the name of the In Service Training to be displayed, assign a specific code and give a definition to the In Service Training, then save the details captured.
+
+![Alt text](../img/add_training.PNG 'Add In Service Training')
+
+### Search In Service Training
+You can search the various In Service Trainings captured in the system under this feature.
+
+You can search by **code** or by **display**
+
+![Alt text](../img/training.PNG 'Search In Service Training')
+
+Your results shall be displayed as above
+
+
+## Job Titles
+
+A Job Title refers to  a specific name or label given to a particular position or role within an organization that describes the nature of the work, responsibilities, and level of authority associated with that role. e.g. Registered Nurse I
+
+### Add Job Title
+
+To add a Job Title, click the blue button **Add Job Title**
+
+Capture the name of the Job Title to be displayed, assign a specific code and give a definition to the Job Title, then save the details captured.
+
+![Alt text](../img/add_job_title.PNG 'Add Job Title')
+
+### Search Job Title
+You can search the various Job Titles captured in the system under this feature.
+
+You can search by **code** or by **display**
+
+![Alt text](../img/job_titles.PNG 'Search Job Title')
+
+Your results shall be displayed as above
+
+## Job Types
+
+A Job Type refers to the different categories or classifications that describe the nature of changes or transitions that occur within an employee's role or position in an organization. These categories help categorize and communicate the reasons for changes in an employee's job status.
+
+### Add Job Type
+
+To add a Job Type, click the blue button **Add Job Type**
+
+Capture the name of the Job Type to be displayed, assign a specific code and give a definition to the Job Type, then save the details captured.
+
+![Alt text](../img/add_job_type.PNG 'Add Job Type')
+
+### Search Job Type
+You can search the various Job Types captured in the system under this feature.
+
+You can search by **code** or by **display**
+
+![Alt text](../img/job_code.PNG 'Search Job Type')
+
+Your results shall be displayed as above
+
+
+## Leave Types
+Leave types refer to the various categories of authorized time off that employees can take from work for specific reasons. Each type of leave is associated with different circumstances and policies, allowing employees to manage their work-life balance, attend to personal needs, and address health-related issues. Here are some examples of leave types: annual leave, sick leave, maternity leave
+
+### Add Leave Type
+
+To add a Leave Type, click the blue button **Add Leave Type**
+
+Capture the name of the Leave Type to be displayed, assign a specific code and give a definition to the Leave Type, then save the details captured.
+
+![Alt text](../img/add_leave_type.PNG 'Add Leave Type')
+
+### Search Leave Type
+You can search the various Leave Types captured in the system under this feature.
+
+You can search by **code** or by **display**
+
+![Alt text](../img/leave_types.PNG 'Search Leave Type')
+
+Your results shall be displayed as above
+
+
+## Pay Frequency
+
+Pay frequency, also known as pay period or payroll frequency, refers to the regular interval at which employees receive their compensation or salary from their employer. This interval is determined by the organization's payroll policies and can vary based on industry standards, company practices, and legal requirements.
+
+### Add Pay Frequency
+
+To add a Pay Frequency, click the blue button **Add Pay Frequency **
+
+Capture the name of the Pay Frequency to be displayed, assign a specific code and give a definition to the Pay Frequency, then save the details captured.
+
+![Alt text](../img/add_pay_frequency.PNG 'Add Pay Frequency')
+
+### Search Pay Frequency
+You can search the various Pay Frequencies captured in the system under this feature.
+
+You can search by **code** or by **display**
+
+![Alt text](../img/pay_frequency.PNG 'Search Pay Frequency')
+
+Your results shall be displayed as above
+
+## Reasons for Change/Departure
+
+A Reason for Change/Departure refers to the reason why the employee's record is ammended or changed.
+Examples of Reasons for Change/Departure  include: Transfer, Retirement.
+
+### Add Reason for Change/Departure
+
+To add a Reason for Change/Departure, click the blue button **Add Reason for Change/Departure **
+
+Capture the name of the Reason for Change/Departure to be displayed, assign a specific code and give a definition to the Reason for Change/Departure, then save the details captured.
+
+![Alt text](../img/add_departure_reason.PNG 'Add Reason for Change/Departure')
+
+### Search Reason for Change/Departure
+You can search the various Reason for Change/Departures captured in the system under this feature.
+
+You can search by **code** or by **display**
+
+![Alt text](../img/change_departure_reason.PNG 'Search Reason for Change/Departure')
+
+Your results shall be displayed as above
+
+## Salary Grades
+
+A salary grade, also known as a pay grade, is a system used by organizations to categorize and establish compensation levels for different jobs or positions within the company. Salary grades help streamline the process of determining salaries, making compensation structures more consistent and transparent.
+
+### Add Salary Grade
+
+To add a Salary Grade, click the blue button **Add Salary Grade **
+
+Capture the name of the Salary Grade to be displayed, assign a specific code and give a definition to the Salary Grade, then save the details captured.
+
+![Alt text](../img/add_salary_grade.PNG 'Add Salary Grade')
+
+### Search Salary Grade
+You can search the various Salary Grades captured in the system under this feature.
+
+You can search by **code** or by **display**
+
+![Alt text](../img/salary_grade.PNG 'Search Salary Grade')
+
+Your results shall be displayed as above

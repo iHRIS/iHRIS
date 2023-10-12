@@ -17,54 +17,13 @@ Description:    "iHRIS Profile of Locations to manage jurisdictions."
 * partOf 0..1 MS
 * partOf only Reference(IhrisJurisdiction)
 * partOf ^label = "Part Of(Country/Region/District/County)"
-* position 0..1 MS
-* position ^label = "Co-ordinates"
-* position.latitude MS
-* position.latitude ^label = "Latitude"
-* position.longitude MS
-* position.longitude ^label = "Longitude"
-* extension contains http://ihris.org/fhir/StructureDefinition/location-boundary-geojson named boundary 0..1 MS
-* extension[boundary] 0..1 MS
-* extension[boundary] ^label = "Location Boundary (GeoJSON)"
-* extension[boundary].valueAttachment 0..1 MS
-* extension[boundary].valueAttachment ^label = "Location Boundary (GeoJSON)"
-* extension[boundary].valueAttachment.contentType = #application/geo+json
-* extension[boundary].valueAttachment.data MS
-
-Alias: $m49.htm = http://unstats.un.org/unsd/methods/m49/m49.htm
-
-Extension: LocBoundaryGeojson
-Id: location-boundary-geojson
-Title: "Location Boundary (GeoJSON)"
-Description: "A boundary shape that represents the outside edge of the location (in GeoJSON format) This shape may have holes, and disconnected shapes."
-* ^extension[0].url = "http://hl7.org/fhir/StructureDefinition/structuredefinition-wg"
-* ^extension[=].valueCode = #pa
-* ^extension[+].url = "http://hl7.org/fhir/StructureDefinition/structuredefinition-fmm"
-* ^extension[=].valueInteger = 3
-* ^extension[+].url = "http://hl7.org/fhir/StructureDefinition/structuredefinition-standards-status"
-* ^extension[=].valueCode = #trial-use
-* ^identifier.system = "urn:ietf:rfc:3986"
-* ^identifier.value = "urn:oid:2.16.840.1.113883.4.642.5.1102"
-* ^version = "1.0.0"
-* ^experimental = false
-* ^date = "2020-12-28T16:55:11+11:00"
-* ^publisher = "HL7 International / FHIR Infrastructure"
-* ^contact.telecom.system = #url
-* ^contact.telecom.value = "http://hl7.org/Special/committees/fhir-i"
-* ^jurisdiction = $m49.htm#001
-* ^context.type = #element
-* ^context.expression = "Location"
-* . 0..1
-* . ^short = "A boundary shape that represents the outside edge of the location (in GeoJSON format)"
-* . ^definition = "A boundary shape that represents the outside edge of the location (in GeoJSON format) This shape may have holes, and disconnected shapes."
-* . ^comment = "The format of the content is GeoJSON in both the JSON and XML formats. It will be stored in the resource using the .data property, and externally referenced via the URL property. The mimetype to be used will be 'application/geo+json'."
-* value[x] 0..1
-* value[x] only Attachment
+* extension contains http://hl7.org/fhir/StructureDefinition/location-boundary-geojson named geojson 0..1
+* extension[geojson] ^label = "Location Boundary(Geojson)"
 
 Profile:        IhrisFacility
 Parent:         Location
 Id:             ihris-facility
-Title:          "Facility"
+Title:          "iHRIS Facility"
 Description:    "iHRIS Profile of Locations to manage facilities."
 * type 1..* MS
 * type ^label = "Facility Service Type"
@@ -167,21 +126,18 @@ Title:           "Facility Ownership Type"
 ValueSet:         IhrisJurisdictionType
 Id:               ihris-jurisdiction-type
 Title:            "iHRIS Jurisdiction Type ValueSet"
-* ^date = "2023-06-12T08:41:04.362Z"
-* ^version = "0.5.0"
+* ^date = "2020-11-12T08:41:04.362Z"
+* ^version = "0.4.0"
 * codes from system IhrisJurisdictionType
 
 CodeSystem:      IhrisJurisdictionType
 Id:              ihris-jurisdiction-type
 Title:           "Jurisdiction Type"
-* ^date = "2023-06-12T08:41:04.362Z"
-* ^version = "0.5.0"
+* ^date = "2020-11-12T08:41:04.362Z"
+* ^version = "0.4.0"
 * #country "Country" "Country"
-* #region "region" "region"
-* #district "District" "District"
-* #subcounty "Sub-County" "Sub-County"
 * #municipality "Municipality" "Municipality"
-* #parish "Parish" "Parish"
+* #subdistrict "Sub District" "Sub District"
 * #village "Village" "Village"
 
 ValueSet:         IhrisFacilityTypeValueSet
@@ -225,7 +181,7 @@ Description:    "iHRIS extension for Personal Prefix."
 
 Instance:       ihris-page-facility
 InstanceOf:     IhrisPage
-Title:          "Facility"
+Title:          "iHRIS Facility Page"
 Usage:          #example
 * code = IhrisResourceCodeSystem#page
 * extension[display].extension[resource].valueReference = Reference(StructureDefinition/ihris-facility)
@@ -249,7 +205,7 @@ Usage:          #example
 * extension[section][0].extension[field][4].valueString = "Location.status"
 * extension[section][0].extension[field][5].valueString = "Location.position"
 /* extension[section][1].extension[title].valueString = "Geographic location"
-* extension[section][1].extension[description].valueString = "Geo-Coordinates for this Location"
+* extension[section][1].extension[description].valueString = "Geo-Coordinates for this Locatio"
 * extension[section][1].extension[name].valueString = "coordinates"
 * extension[section][1].extension[field][0].valueString = "Location.position.longitude"
 * extension[section][1].extension[field][1].valueString = "Location.position.latitude"
@@ -277,11 +233,9 @@ Usage:          #example
 * extension[display].extension[filter][2].valueString = "Jurisdiction|partOf"
 * extension[section][0].extension[title].valueString = "Geographical Location"
 * extension[section][0].extension[description].valueString = "Geographical Location details"
-* extension[section][0].extension[name].valueString = "Location"
+* extension[section][0].extension[name].valueString = "Geographical Location"
 * extension[section][0].extension[field][0].valueString = "Location.name"
 * extension[section][0].extension[field][1].valueString = "Location.type"
 * extension[section][0].extension[field][2].valueString = "Location.physicalType"
 * extension[section][0].extension[field][3].valueString = "Location.partOf"
 * extension[section][0].extension[field][4].valueString = "Location.status"
-* extension[section][0].extension[field][5].valueString = "Location.position"
-* extension[section][0].extension[field][6].valueString = "Location.extension:boundary"

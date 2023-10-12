@@ -117,25 +117,8 @@ export default {
           this.source.data = this.$fhirpath.evaluate( this.slotProps.source.data, expression )
           //console.log("FPATH info",this.path,this.slotProps)
           //console.log("FPATH setting value to",this.field,this.source.data[0],expression,this.slotProps.source.data)
-          let value = null
-          if ( this.source.data.length == 1 ) {
-            value = this.source.data[0]
-          } else {
-            //check if the path is an array and use path index to get value
-            let pathSlices = this.path.split("[")
-            let index
-            for(let slice of pathSlices) {
-              let slices = slice.split("]")
-              if(Number.isInteger(parseInt(slices[0]))) {
-                index = slices[0]
-              }
-            }
-            if(index || index == 0) {
-              value = this.source.data[index]
-            }
-          }
-          if ( value != null ) {
-            this.value = value
+          if ( this.source.data[0] ) {
+            this.value = this.source.data[0]
             this.disabled = this.readOnlyIfSet && (!!this.value.value)
             this.valueCurrency = this.value.currency
             this.lockWatch = true

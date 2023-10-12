@@ -96,18 +96,7 @@ router.get("/getTranslatedLanguages", async(req, res) => {
   const files = await fs.readdirSync(localesPath);
   let translations = []
   for(let file of files) {
-    /*if(!translate.languages.isSupported(file.split(".")[0])) {
-      continue
-    }*/
     if(!translate.languages.isSupported(file.split(".")[0])) {
-      if(file.split(".")[0] == "" || file.split(".")[0] == "en_startup"){
-        continue
-      } else {
-        translations.push({
-          locale: file.split(".")[0],
-          language: file.split(".")[0]
-        })
-      }
       continue
     }
     translations.push({
@@ -207,23 +196,10 @@ router.get("/getLocales", async(req, res) => {
 
 router.get("/getTranslations/:locale", async(req, res) => {
   let localesPath = getLocalePath()
-  let otherLang
-  /*if(!translate.languages.isSupported(req.params.locale)) {
-    return res.status(400).send()
-  }*/
   if(!translate.languages.isSupported(req.params.locale)) {
-    await fs.access(localesPath + req.params.locale + ".json",(error) => {
-      if(error){
-        return res.status(400).send()
-      } else {
-        otherLang = req.params.locale
-      }
-
-    })
+    return res.status(400).send()
   }
-
   let flattranslations = []
-  let language = ""
   let translations = await fs.readFileSync(localesPath + req.params.locale + ".json", 'utf8')
   translations = JSON.parse(translations)
   let enTrans = await fs.readFileSync(localesPath + "en.json", 'utf8')
@@ -258,13 +234,8 @@ router.get("/getTranslations/:locale", async(req, res) => {
       }
     }
   }
-  if(otherLang){
-    language = otherLang
-  } else {
-    language = translate.languages[req.params.locale]
-  }  
   return res.json({
-    language: language,
+    language: translate.languages[req.params.locale], 
     translations: flattranslations
   })
 })

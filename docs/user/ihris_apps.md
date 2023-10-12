@@ -1,6 +1,6 @@
 # iHRIS Apps
 
-This feature is used for enhancing iHRIS/ adding plugins.It allows the development of iHRIS  web applications in the developer's preferred programming language .
+This feature is used for enhancing iHRIS/ adding plugins. It allows the development of iHRIS  web applications in the developer's preferred programming language .
 
 Example- Dictionary app- Pulls all text in the system, and allows users to add translation for the text.
 
@@ -55,3 +55,8 @@ Click on iHRIS apps
 Click the minus sign, select the app to be removed and click on it.
 
 ![Alt text](../img/uninstall_app_2.JPG 'Uninstall App')**
+
+
+## iHRIS Dashboard
+
+## iHRIS Translator

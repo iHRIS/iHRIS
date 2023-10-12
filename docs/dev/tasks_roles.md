@@ -72,16 +72,15 @@ instance: password <br>
 The instance is generated from the key used define the menu i.e site:nav:menu:<b>password</b>:text
 
 Lets a take a look at an example where a menu is nested <br>
-\* parameter[=].part[+].name = "site:nav:menu:person:menu:person-add:text"<br>
+\* parameter[=].part[+].name = "site:nav:menu:person:menu:person_add:text"<br>
 \* parameter[=].part[=].valueString = "Add Person"<br>
-\* parameter[=].part[+].name = "site:nav:menu:person:menu:person-add:url"<br>
+\* parameter[=].part[+].name = "site:nav:menu:person:menu:person_add:url"<br>
 \* parameter[=].part[=].valueString = "/questionnaire/ihris-practitioner/practitioner"<br>
 Task attributes to control access to this menu will look as below <br>
 resource: navigation <br>
 permission: special <br>
-instance: person.person-add <br>
-and the name of task will be View Add Person Menu. The word Add Person is extracted from the menu text site:nav:menu:person:menu:person-add:text
-!!! important "parameter name is limited to any combination of upper- or lower-case ASCII letters ('A'..'Z', and 'a'..'z', numerals ('0'..'9'), '-' and '.', with a length limit of 64 characters. Regex: [A-Za-z0-9\-\.]{1,64}"
+instance: person:person_add <br>
+and the name of task will be View Add Person Menu. The word Add Person is extracted from the menu text site:nav:menu:person:menu:person_add:text
 
 ### Page Viewing Tasks
 

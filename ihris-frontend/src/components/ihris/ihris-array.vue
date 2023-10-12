@@ -2,12 +2,7 @@
   <div>
     <div v-if="simpleDisplay">
       <v-row dense>
-        <v-col :cols="$store.state.cols.header" class="font-weight-bold">
-          {{$t(`App.fhir-resources-texts.${label}`)}}
-        </v-col>
-        <v-col :cols="$store.state.cols.header">
-          {{simpleValue}}
-        </v-col>
+        <v-col :cols="$store.state.cols.header" class="font-weight-bold">{{$t(`App.fhir-resources-texts.${label}`)}}</v-col><v-col :cols="$store.state.cols.header">{{simpleValue}}</v-col>
       </v-row>
       <v-divider></v-divider>
     </div>
@@ -34,7 +29,7 @@
 <script>
 export default {
   name: "ihris-array",
-  props: ["label", "min", "max", "id", "path", "slotProps", "field", "fieldType", "profile", "targetProfile", "sliceName", "edit", "limit" ],
+  props: ["label", "min", "max", "id", "path", "slotProps", "field", "fieldType", "profile", "targetProfile", "sliceName", "edit" ],
   data: function() {
     return {
       inputs: [],
@@ -68,9 +63,6 @@ export default {
           expression = this.field.replace(/([^:]+):(.+)/, "$1.where(url='"+this.profile+"')")
         }
         this.source.data = this.$fhirpath.evaluate( this.slotProps.source.data, expression)
-        if(this.limit) {
-          this.source.data = this.$fhirpath.evaluate( this.source.data, this.limit)
-        }
         if ( this.source.data.length > 0 ) {
           this.lockWatch = true
         }

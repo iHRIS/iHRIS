@@ -329,6 +329,7 @@ const fhirQuestionnaire = {
                         } else {
                           parentUrl = parentExt.sliceName
                         }
+                        console.log(parentUrl);
                         fields.push( {linkId: parentPath, definition: parentDataDef, url: parentUrl} )
                       }
                     }

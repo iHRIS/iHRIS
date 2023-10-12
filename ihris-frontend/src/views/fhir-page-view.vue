@@ -9,7 +9,6 @@
 
 var pageId
 var page
-var isEdit
 import Vue from 'vue'
 
 export default {
@@ -44,7 +43,7 @@ export default {
               data: function() {
                 return {
                   fhirId: pageId,
-                  isEdit: isEdit,
+                  isEdit: false,
                   sectionMenu: data.data.sectionMenu,
                   subFields: data.data.subFields,
                   columns: data.data.columns,
@@ -105,10 +104,11 @@ export default {
       })
     }
   },
+  components: {
+  },
   beforeCreate: function() {
     pageId = this.$route.params.id
     page = this.$route.params.page
-    isEdit = this.$route.query.edit
     Vue.component('ihris-template', { template: '<div>Loading...</div>' } )
   }
 }

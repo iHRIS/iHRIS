@@ -919,18 +919,15 @@ permission: special <br>
 instance: password <br>
 The instance is generated from the key used define the menu i.e site:nav:menu:<b>password</b>:text</p>
 <p>Lets a take a look at an example where a menu is nested <br>
-* parameter[=].part[+].name = "site:nav:menu:person:menu:person-add:text"<br>
+* parameter[=].part[+].name = "site:nav:menu:person:menu:person_add:text"<br>
 * parameter[=].part[=].valueString = "Add Person"<br>
-* parameter[=].part[+].name = "site:nav:menu:person:menu:person-add:url"<br>
+* parameter[=].part[+].name = "site:nav:menu:person:menu:person_add:url"<br>
 * parameter[=].part[=].valueString = "/questionnaire/ihris-practitioner/practitioner"<br>
 Task attributes to control access to this menu will look as below <br>
 resource: navigation <br>
 permission: special <br>
-instance: person.person-add <br>
-and the name of task will be View Add Person Menu. The word Add Person is extracted from the menu text site:nav:menu:person:menu:person-add:text</p>
-<div class="admonition important">
-<p class="admonition-title">parameter name is limited to any combination of upper- or lower-case ASCII letters ('A'..'Z', and 'a'..'z', numerals ('0'..'9'), '-' and '.', with a length limit of 64 characters. Regex: [A-Za-z0-9-.]{1,64}</p>
-</div>
+instance: person:person_add <br>
+and the name of task will be View Add Person Menu. The word Add Person is extracted from the menu text site:nav:menu:person:menu:person_add:text</p>
 <h3 id="page-viewing-tasks">Page Viewing Tasks</h3>
 <p>Access to a menu isn't enough to grant access to a page. If a role only has a task to view a menu but no task to view a page, then a use will see a menu but clicking the menu will results into access denied. So a role must have both tasks for viewing a menu and a page.
 Suppose you have a page defined with fsh as below <br>
@@ -977,7 +974,7 @@ As you may see above, the instance is the section name. The task title will be V
   <small>
     
       Last update:
-      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date">May 13, 2023</span>
+      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date">April 12, 2023</span>
       
     
   </small>
