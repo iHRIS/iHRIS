@@ -7,7 +7,9 @@ Description:    "iHRIS Profile of the Basic resource for Leave."
 * extension[practitioner].valueReference ^label = "Health Worker"
 * extension contains
     IhrisLeave named leave 1..1 MS
+* extension[leave].extension[leave-type] ^label = "Leave Type"
 * extension[leave].extension[leave-type].valueCoding MS
+* extension[leave].extension[period] ^label = "Leave Period"
 * extension[leave].extension[period].valuePeriod MS
 * extension[leave].extension[period].valuePeriod.start MS
 * extension[leave].extension[period].valuePeriod.start ^label = "Leave Start Date"
@@ -17,7 +19,9 @@ Description:    "iHRIS Profile of the Basic resource for Leave."
 * extension[leave].extension[period].valuePeriod.end ^label = "Leave End Date"
 * extension[leave].extension[period].valuePeriod.end ^minValueDateTime = "1950-01-01"
 * extension[leave].extension[period].valuePeriod.end ^maxValueDateTime = "2030-01-01"
+* extension[leave].extension[dateRequested] ^label = "Requested Date"
 * extension[leave].extension[dateRequested].valueDate MS
+* extension[leave].extension[daysRequested] ^label = "Days Requested"
 * extension[leave].extension[daysRequested].valueInteger MS
     
 Extension:      IhrisLeave

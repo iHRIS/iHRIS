@@ -61,8 +61,8 @@ router.post("/QuestionnaireResponse", (req, res, next) => {
         }
 
         let details = nconf.get('workflow:processor:' + processor)
-
-        if (!details || (!details.file && !details.library)) {
+        if (details.length === 0 || (details.file.length === 0 && details.library.length === 0)) {
+        //if (!details || (!details.file && !details.library)) {
             let outcome = {...outcomes.ERROR}
             outcome.issue[0].diagnostics = "Unable to find processor for this questionnaire: " + req.body.questionnaire + " (" + processor + ")"
             return res.status(500).json(outcome)
@@ -120,7 +120,7 @@ router.post("/QuestionnaireResponse", (req, res, next) => {
         }).catch((err) => {
             logger.error(err.message)
             let outcome = {...outcomes.ERROR}
-            outcome.issue[0].diagnostics = "Unable to find processor module for this questionnaire: " + req.body.questionnaire + " (" + processor + ")"
+            outcome.issue[0].diagnostics = "Error in module for this questionnaire: " + req.body.questionnaire + " (" + processor + ")"
             return res.status(500).json(outcome)
         })
 

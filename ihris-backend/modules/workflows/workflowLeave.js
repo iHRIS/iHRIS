@@ -1,5 +1,5 @@
-const nconf = require("./config");
-const logger = require("../winston");
+const nconf = require("../config");
+const logger = require("winston");
 const differenceInBusinessDays = require("date-fns/differenceInBusinessDays");
 const fhirAxios = nconf.fhirAxios;
 
