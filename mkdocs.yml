@@ -45,6 +45,7 @@ nav:
       - admin/install.md
       - admin/config.md
   - User:
+      - user/approach.md
       - user/introduction.md
       - user/people.md
       - user/positions.md
