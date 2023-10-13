@@ -7,18 +7,25 @@ Description:    "iHRIS Profile of the Basic resource for Education History."
 * extension[practitioner].valueReference ^label = "Health Worker"
 * extension contains
     IhrisEducationHistory named educationHistory 1..1 MS
+* extension[educationHistory].extension[institution] ^label = "Institution"
 * extension[educationHistory].extension[institution].valueCoding 1..1 MS
 * extension[educationHistory].extension[institution].valueCoding ^label = "Institution"
+* extension[educationHistory].extension[level] ^label = "Education Level"
 * extension[educationHistory].extension[level].valueCoding ^label = "Education Level"
 * extension[educationHistory].extension[level].valueCoding 1..1 MS
+* extension[educationHistory].extension[degree] ^label = "Educational Background/Carrier"
 * extension[educationHistory].extension[degree].valueCoding ^label = "Educational Background/Carrier"
 * extension[educationHistory].extension[degree].valueCoding 1..1 MS
+* extension[educationHistory].extension[educationalMajor] ^label = "Educational Major"
 * extension[educationHistory].extension[educationalMajor].valueCoding ^label = "Educational Major"
 * extension[educationHistory].extension[educationalMajor].valueCoding 0..1 MS
+* extension[educationHistory].extension[year] ^label = "Year Of Graduation"
 * extension[educationHistory].extension[year].valueDate ^label = "Year Of Graduation"
 * extension[educationHistory].extension[year].valueDate 0..1 MS
+* extension[educationHistory].extension[current] ^label = "Is Current?"
 * extension[educationHistory].extension[current].valueBoolean ^label = "Is Current?"
 * extension[educationHistory].extension[current].valueBoolean MS
+* extension[educationHistory].extension[attachment] ^label = "Attachment"
 * extension[educationHistory].extension[attachment].valueAttachment ^label = "Attachment"
 * extension[educationHistory].extension[attachment].valueAttachment MS
     

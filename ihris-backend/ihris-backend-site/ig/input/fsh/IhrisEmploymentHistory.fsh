@@ -17,6 +17,7 @@ Description:    "iHRIS Profile of the Basic resource for Work Experience."
 * extension[employmentHistory].extension[startingPosition] ^label = "Starting Position"
 * extension[employmentHistory].extension[startingSalary].valueMoney MS
 * extension[employmentHistory].extension[startingSalary] ^label = "Starting Salary"
+* extension[employmentHistory].extension[period] ^label = "Period"
 * extension[employmentHistory].extension[period].valuePeriod MS
 * extension[employmentHistory].extension[period].valuePeriod.start 1..1 MS
 * extension[employmentHistory].extension[period].valuePeriod.start ^label = "Date Started"

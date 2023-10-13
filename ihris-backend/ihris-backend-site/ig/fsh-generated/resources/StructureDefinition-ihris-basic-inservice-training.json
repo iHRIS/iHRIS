@@ -817,6 +817,7 @@
         "id": "Basic.extension:inservicetraining.extension:provider",
         "path": "Basic.extension.extension",
         "sliceName": "provider",
+        "label": "Provider",
         "short": "Additional content defined by implementations",
         "definition": "May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.",
         "comment": "There can be no stigma associated with the use of extensions by any application, project, or standard - regardless of the institution or jurisdiction that uses or defines the extensions.  The use of extensions is what allows the FHIR specification to retain a core level of simplicity for everyone.",
@@ -1084,6 +1085,7 @@
         "id": "Basic.extension:inservicetraining.extension:training",
         "path": "Basic.extension.extension",
         "sliceName": "training",
+        "label": "In-Service Training Type/Category",
         "short": "Additional content defined by implementations",
         "definition": "May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.",
         "comment": "There can be no stigma associated with the use of extensions by any application, project, or standard - regardless of the institution or jurisdiction that uses or defines the extensions.  The use of extensions is what allows the FHIR specification to retain a core level of simplicity for everyone.",
@@ -1355,6 +1357,7 @@
         "id": "Basic.extension:inservicetraining.extension:courseName",
         "path": "Basic.extension.extension",
         "sliceName": "courseName",
+        "label": "In-Service Training Course Name",
         "short": "Additional content defined by implementations",
         "definition": "May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.",
         "comment": "There can be no stigma associated with the use of extensions by any application, project, or standard - regardless of the institution or jurisdiction that uses or defines the extensions.  The use of extensions is what allows the FHIR specification to retain a core level of simplicity for everyone.",
@@ -1622,6 +1625,7 @@
         "id": "Basic.extension:inservicetraining.extension:credits",
         "path": "Basic.extension.extension",
         "sliceName": "credits",
+        "label": "Credits",
         "short": "Additional content defined by implementations",
         "definition": "May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.",
         "comment": "There can be no stigma associated with the use of extensions by any application, project, or standard - regardless of the institution or jurisdiction that uses or defines the extensions.  The use of extensions is what allows the FHIR specification to retain a core level of simplicity for everyone.",
@@ -1889,6 +1893,7 @@
         "id": "Basic.extension:inservicetraining.extension:startDate",
         "path": "Basic.extension.extension",
         "sliceName": "startDate",
+        "label": "Start Date",
         "short": "Additional content defined by implementations",
         "definition": "May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.",
         "comment": "There can be no stigma associated with the use of extensions by any application, project, or standard - regardless of the institution or jurisdiction that uses or defines the extensions.  The use of extensions is what allows the FHIR specification to retain a core level of simplicity for everyone.",
@@ -2156,6 +2161,7 @@
         "id": "Basic.extension:inservicetraining.extension:endDate",
         "path": "Basic.extension.extension",
         "sliceName": "endDate",
+        "label": "End Date",
         "short": "Additional content defined by implementations",
         "definition": "May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.",
         "comment": "There can be no stigma associated with the use of extensions by any application, project, or standard - regardless of the institution or jurisdiction that uses or defines the extensions.  The use of extensions is what allows the FHIR specification to retain a core level of simplicity for everyone.",
@@ -2968,9 +2974,22 @@
         "mustSupport": true
       },
       {
+        "id": "Basic.extension:inservicetraining.extension:provider",
+        "path": "Basic.extension.extension",
+        "sliceName": "provider",
+        "label": "Provider"
+      },
+      {
+        "id": "Basic.extension:inservicetraining.extension:training",
+        "path": "Basic.extension.extension",
+        "sliceName": "training",
+        "label": "In-Service Training Type/Category"
+      },
+      {
         "id": "Basic.extension:inservicetraining.extension:courseName",
         "path": "Basic.extension.extension",
-        "sliceName": "courseName"
+        "sliceName": "courseName",
+        "label": "In-Service Training Course Name"
       },
       {
         "id": "Basic.extension:inservicetraining.extension:courseName.value[x]",
@@ -2983,9 +3002,16 @@
         "min": 1
       },
       {
+        "id": "Basic.extension:inservicetraining.extension:credits",
+        "path": "Basic.extension.extension",
+        "sliceName": "credits",
+        "label": "Credits"
+      },
+      {
         "id": "Basic.extension:inservicetraining.extension:startDate",
         "path": "Basic.extension.extension",
-        "sliceName": "startDate"
+        "sliceName": "startDate",
+        "label": "Start Date"
       },
       {
         "id": "Basic.extension:inservicetraining.extension:startDate.value[x]",
@@ -2996,6 +3022,12 @@
         "id": "Basic.extension:inservicetraining.extension:startDate.valueDate",
         "path": "Basic.extension.extension.valueDate",
         "min": 1
+      },
+      {
+        "id": "Basic.extension:inservicetraining.extension:endDate",
+        "path": "Basic.extension.extension",
+        "sliceName": "endDate",
+        "label": "End Date"
       }
     ]
   }
