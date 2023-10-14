@@ -11,7 +11,8 @@ export default {
   data: function() {
     return {
       source: { path: "", data: [] },
-      errors: []
+      errors: [],
+      isExtension: true
     }
   },
   created: function() {

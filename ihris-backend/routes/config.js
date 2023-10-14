@@ -1130,14 +1130,25 @@ router.get('/questionnaire/:questionnaire/:page', async function (req, res) {
                 if (item.repeats && !item.readOnly) {
                     let fieldPath = item.definition.split("#")[1]
                     let fieldPathSlices = fieldPath.split(".")
-                    let fieldDef = await fhirDefinition.getFieldDefinition(item.definition)
+                    let field = fieldPathSlices[fieldPathSlices.length-1]
+                    let definition = item.definition
+                    if(field.startsWith("value[x]:value")) {
+                        definition = item.definition.replace("." + field, "")
+                    }
+                    let fieldDef = await fhirDefinition.getFieldDefinition(definition)
                     let extension = fieldDef.type.find((type) => {
                         return type.code === 'Extension'
                     })
-                    vueOutput += `<ihris-array limit="${limit}" field="${fieldPathSlices[fieldPathSlices.length-1]}" fieldType="${itemType}" :edit="isEdit" :slotProps="slotProps" path="${item.linkId}" 
+                    vueOutput += `<ihris-array limit="${limit}" field="${field}" fieldType="${itemType}" :edit="isEdit" :slotProps="slotProps" path="${item.linkId}" 
                     label="${item.text}" max="*" min="${(item.required ? "1" : "0")}"`
-                    if(extension && extension.profile && extension.profile.length > 0) {
-                        vueOutput += ' profile="' + extension.profile[0] + '"'
+                    if(extension) {
+                        let profile
+                        if(extension.profile && extension.profile.length > 0) {
+                            profile = extension.profile[0]
+                        } else {
+                            profile = fieldDef.sliceName
+                        }
+                        vueOutput += ' profile="' + profile + '"'
                         vueOutput += ' sliceName="' + fieldDef.sliceName + '"'
                     }
                     vueOutput += `><template #default="slotProps">\n`

@@ -243,13 +243,26 @@ export default {
         })
       }
 
+      const mergeArrayExtensionFields = (children) => {
+        let merged = []
+        for (let child of children) {
+          for (let child1 of child.$children) {
+            if(child1.isExtension) {
+              for (let child2 of child1.$children) {
+                merged.push(child2)
+              }
+            }
+          }
+        }
+        return merged
+      }
+
       const processChildren = async (obj, children, itemMap) => {
         if (!itemMap) itemMap = {};
 
         for (let child of children) {
           let next = obj;
           let myItemMap = {};
-
           if (child.isArray) {
             //console.log("ARRAY", child.path)
           } else if (child.isQuestionnaireGroup) {
@@ -297,6 +310,12 @@ export default {
           if (child.$children) {
             // console.log("PROCESSING CHILDREN OF",child.path)
             try {
+              if(child.isArray) {
+                let merged = mergeArrayExtensionFields(child.$children)
+                if(merged.length > 0) {
+                  child.$children = merged
+                }
+              }
               await processChildren(next, child.$children, myItemMap);
             } catch (err) {
               this.advancedValid = false;
@@ -322,7 +341,6 @@ export default {
           }
         }
       };
-
       this.fhir = {
         resourceType: "QuestionnaireResponse",
         questionnaire: this.url,
