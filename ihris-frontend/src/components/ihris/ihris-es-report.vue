@@ -3,7 +3,8 @@
     <v-card class="py-4 px-2">
       <v-card-title v-if="!hideLabel" class="ma-4">
         <v-layout row wrap>
-          {{ label }}
+          <v-icon class="mr-2" color="#0d3552">mdi-table-large</v-icon>
+          <h4 class="font-weight-bold" style="color: #0d3552">{{ label }}</h4>
           <v-spacer></v-spacer>
           <v-row align="center" class="pr-4" justify="end">
             <v-btn
@@ -32,9 +33,23 @@
         </v-layout>
       </v-card-title>
       <v-divider class="my-2"></v-divider>
-      <v-card-title v-if="!hideLabel" >
-        <slot></slot>
-      </v-card-title>
+      <v-expansion-panels hover class="elevation-0">
+        <v-expansion-panel>
+          <v-expansion-panel-header color="blue-grey darken-2">
+            <h3 class="font-weight-bold subtitle-2 white--text"><v-icon color="white" class="mr-2">mdi-filter-variant</v-icon>Filters</h3>
+            <template v-slot:actions>
+              <v-icon color="white">
+                $expand
+              </v-icon>
+            </template>
+          </v-expansion-panel-header>
+          <v-expansion-panel-content>
+            <v-card-title class="elevation-0" v-if="!hideLabel">
+              <slot></slot>
+            </v-card-title>
+          </v-expansion-panel-content>
+        </v-expansion-panel>
+      </v-expansion-panels>
       <v-card-subtitle v-if="error_message" class="white--text error"
       >{{ error_message }}
       </v-card-subtitle>
