@@ -11,11 +11,13 @@
   "item": [
     {
       "linkId": "Basic",
+      "definition": "http://ihris.org/fhir/StructureDefinition/ihris-basic-inservice-training#Basic.id",
       "text": "In-Service Training Information",
       "type": "group",
       "item": [
         {
           "linkId": "Basic.extension[0].extension[0]",
+          "definition": "http://ihris.org/fhir/StructureDefinition/ihris-basic-inservice-training#Basic.extension:inservicetraining.extension:provider.value[x]:valueString",
           "text": "In-Service Training Provider",
           "type": "string",
           "required": true,
@@ -23,6 +25,7 @@
         },
         {
           "linkId": "Basic.extension[0].extension[1]",
+          "definition": "http://ihris.org/fhir/StructureDefinition/ihris-basic-inservice-training#Basic.extension:inservicetraining.extension:training.value[x]:valueCoding",
           "text": "In-Service Training Type/Category",
           "type": "choice",
           "answerValueSet": "http://ihris.org/fhir/ValueSet/ihris-training-valueset",
@@ -31,6 +34,7 @@
         },
         {
           "linkId": "Basic.extension[0].extension[2]",
+          "definition": "http://ihris.org/fhir/StructureDefinition/ihris-basic-inservice-training#Basic.extension:inservicetraining.extension:courseName.value[x]:valueString",
           "text": "In-Service Training Course Name",
           "type": "string",
           "required": true,
@@ -38,6 +42,7 @@
         },
         {
           "linkId": "Basic.extension[0].extension[3]",
+          "definition": "http://ihris.org/fhir/StructureDefinition/ihris-basic-inservice-training#Basic.extension:inservicetraining.extension:credits.value[x]:valueInteger",
           "text": "Credits",
           "type": "integer",
           "required": false,
@@ -45,6 +50,7 @@
         },
         {
           "linkId": "Basic.extension[0].extension[4]",
+          "definition": "http://ihris.org/fhir/StructureDefinition/ihris-basic-inservice-training#Basic.extension:inservicetraining.extension:startDate.value[x]:valueDate",
           "text": "Start Date",
           "type": "date",
           "required": true,
@@ -52,6 +58,7 @@
         },
         {
           "linkId": "Basic.extension[0].extension[5]",
+          "definition": "http://ihris.org/fhir/StructureDefinition/ihris-basic-inservice-training#Basic.extension:inservicetraining.extension:endDate.value[x]:valueDate",
           "text": "End Date",
           "type": "date",
           "required": true,

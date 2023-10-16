@@ -46,7 +46,7 @@ export default {
     }
   },
   created: function() {
-    //this function is defined under dataDisplay mixin 
+    //this function is defined under dataDisplay mixin
     this.hideShowField(this.displayCondition)
     this.setupData()
   },

@@ -1,0 +1,86 @@
+version: '4'
+
+services:
+
+  fhir:
+    container_name: fhir
+    image: hapiproject/hapi:v6.8.0
+    ports:
+      - "8080:8080"
+    environment:
+      profiles.active: r4
+      spring.datasource.url: 'jdbc:postgresql://db:5432/hapi'
+      spring.datasource.username: admin
+      spring.datasource.password: admin
+      spring.datasource.driverClassName: org.postgresql.Driver
+      spring.jpa.properties.hibernate.search.enabled: 'true'
+      spring.jpa.properties.hibernate.search.backend.type: lucene
+      spring.jpa.properties.hibernate.search.backend.directory.type: local-filesystem
+      spring.jpa.properties.hibernate.search.backend.directory.root: target/lucenefiles
+      spring.jpa.properties.hibernate.search.backend.lucene_version: lucene_current
+      spring.jpa.properties.hibernate.dialect: ca.uhn.fhir.jpa.model.dialect.HapiFhirPostgres94Dialect
+      hapi.fhir.tester.home.server_address: "http://localhost:8080/hapi/fhir"
+      hapi.fhir.enable_index_missing_fields: 'true'
+
+    volumes:
+      - hapi-data:/data/hapi
+    depends_on:
+      - db
+
+  db:
+    image: postgres:bullseye
+    restart: always
+    environment:
+      POSTGRES_PASSWORD: admin
+      POSTGRES_USER: admin
+      POSTGRES_DB: hapi
+    # not needed for networking between containers but here for troubleshooting
+    ports:
+      - "5432:5432"
+
+  es:
+    container_name: es
+    image: elasticsearch:7.17.6
+    environment:
+      node.name: es01
+      discovery.type: single-node
+      bootstrap.memory_lock: "true"
+      ES_JAVA_OPTS: -Xms512m -Xmx512m
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+    volumes:
+      - data01:/usr/share/elasticsearch/data
+    ports:
+      - 9200:9200
+
+
+  kibana:
+    container_name: kibana
+    image: kibana:7.17.6
+    ports:
+      - 5601:5601
+    environment:
+      ELASTICSEARCH_URL: http://es:9200
+      ELASTICSEARCH_HOSTS: http://es:9200
+
+
+  redis:
+    image: redis:alpine
+    ports:
+      - 6379:6379
+    command: ["redis-server", "--appendonly", "yes"]
+    hostname: redis
+    volumes:
+      - redis-data:/data
+
+volumes:
+  redis-data:
+  data01:
+    # driver: local
+  hapi-data:
+    # external: true
+
+
+

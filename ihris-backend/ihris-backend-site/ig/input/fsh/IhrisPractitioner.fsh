@@ -99,7 +99,14 @@ Description:    "iHRIS profile of Practitioner."
     IhrisPractitionerNationality named nationality 0..1 and
     IhrisPractitionerMaritalStatus named maritalStatus 0..1 and
     IhrisPractitionerDependents named dependents 0..1
+* extension[residence] ^label = "Residence"
 * extension[residence].valueReference.reference MS
+* extension[nationality]  ^label = "Nationality"
+* extension[nationality].valueCoding MS
+* extension[maritalStatus]  ^label = "Marital Status"
+* extension[maritalStatus].valueCoding MS
+* extension[dependents]  ^label = "Number of Dependents"
+* extension[dependents].valuePositiveInt MS
 * active 1..1 MS
 * active ^label = "Active"
 

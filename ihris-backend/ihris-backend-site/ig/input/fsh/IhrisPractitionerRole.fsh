@@ -34,6 +34,8 @@ Description:    "iHRIS profile of Practitioner Role."
 * period.end ^maxValueDateTime = "2030-01-01"
 * practitioner 0..1 MS
 * practitioner ^label = "Health Worker"
+* practitioner.reference ^label = "Health Worker"
+* practitioner only Reference(IhrisPractitioner)
 * code 1..1 MS
 * code ^label = "Job"
 * code from http://ihris.org/fhir/ValueSet/ihris-job
@@ -104,6 +106,36 @@ Usage:          #example
 * extension[display].extension[search][1].valueString = "Display|display"
 * extension[section][0].extension[title].valueString = "Salary Grade"
 * extension[section][0].extension[description].valueString = "Salary Grade"
+* extension[section][0].extension[name].valueString = "CodeSystem"
+* extension[section][0].extension[field][0].valueString = "CodeSystem.display"
+* extension[section][0].extension[field][1].valueString = "CodeSystem.code"
+* extension[section][0].extension[field][2].valueString = "CodeSystem.definition"
+
+Instance:       ihris-page-classification
+InstanceOf:     IhrisPage
+Title:          "iHRIS Classification CodeSystem Page"
+Usage:          #example
+* code = IhrisResourceCodeSystem#page
+* extension[display].extension[resource].valueReference = Reference(CodeSystem/ihris-classification)
+* extension[display].extension[search][0].valueString = "Code|code"
+* extension[display].extension[search][1].valueString = "Display|display"
+* extension[section][0].extension[title].valueString = "Classification"
+* extension[section][0].extension[description].valueString = "Classification"
+* extension[section][0].extension[name].valueString = "CodeSystem"
+* extension[section][0].extension[field][0].valueString = "CodeSystem.display"
+* extension[section][0].extension[field][1].valueString = "CodeSystem.code"
+* extension[section][0].extension[field][2].valueString = "CodeSystem.definition"
+
+Instance:       ihris-page-cadre
+InstanceOf:     IhrisPage
+Title:          "iHRIS Cadre CodeSystem Page"
+Usage:          #example
+* code = IhrisResourceCodeSystem#page
+* extension[display].extension[resource].valueReference = Reference(CodeSystem/ihris-cadre)
+* extension[display].extension[search][0].valueString = "Code|code"
+* extension[display].extension[search][1].valueString = "Display|display"
+* extension[section][0].extension[title].valueString = "Cadre"
+* extension[section][0].extension[description].valueString = "Cadre"
 * extension[section][0].extension[name].valueString = "CodeSystem"
 * extension[section][0].extension[field][0].valueString = "CodeSystem.display"
 * extension[section][0].extension[field][1].valueString = "CodeSystem.code"

@@ -1,0 +1,17 @@
+{
+    "version": "1.0.1",
+    "appType": "APP",
+    "name": "iHRIS Dashboard",
+    "description": "Create Dashboard and Visualizations of Your Data",
+    "launch_path": "index.html",
+    "icons": {
+        "16": "dashboard.png",
+        "48": "dashboard.png",
+        "128": "dashboard.png"
+    },
+    "developer": {
+        "name": "Intrahealth - Digital Health Team",
+        "url": "http://digitalhealth.intrahealth.org"
+    },
+    "default_locale": "en"
+}

@@ -15,6 +15,10 @@ For our performance.js routes file, the registration will look as follows
 {
   "name": "app:site:routes:performance:path",
   "valueString": "performance.js"
+},
+{
+  "name": "app:site:routes:performance:authenticate",
+  "valueString": "true"
 }
 ```
 
@@ -23,3 +27,5 @@ For our performance.js routes file, the registration will look as follows
 **mount** is the unique name that differentiate your custom APIs from the rest. so if you have a route/API called addPerformance inside performance.js, this route will be accessed as performance/addPerformance <br>
 
 **path** is the path to your routes file relative to the routes directory of your site, for our case it should be relative to iHRIS/ihris-backend/sierraleone/routes
+
+**authenticate** Whether the route is accessible to authenticated users only or not

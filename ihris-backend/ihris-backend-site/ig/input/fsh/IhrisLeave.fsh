@@ -7,7 +7,9 @@ Description:    "iHRIS Profile of the Basic resource for Leave."
 * extension[practitioner].valueReference ^label = "Health Worker"
 * extension contains
     IhrisLeave named leave 1..1 MS
+* extension[leave].extension[leave-type] ^label = "Leave Type"
 * extension[leave].extension[leave-type].valueCoding MS
+* extension[leave].extension[period] ^label = "Leave Period"
 * extension[leave].extension[period].valuePeriod MS
 * extension[leave].extension[period].valuePeriod.start MS
 * extension[leave].extension[period].valuePeriod.start ^label = "Leave Start Date"
@@ -17,7 +19,9 @@ Description:    "iHRIS Profile of the Basic resource for Leave."
 * extension[leave].extension[period].valuePeriod.end ^label = "Leave End Date"
 * extension[leave].extension[period].valuePeriod.end ^minValueDateTime = "1950-01-01"
 * extension[leave].extension[period].valuePeriod.end ^maxValueDateTime = "2030-01-01"
+* extension[leave].extension[dateRequested] ^label = "Requested Date"
 * extension[leave].extension[dateRequested].valueDate MS
+* extension[leave].extension[daysRequested] ^label = "Days Requested"
 * extension[leave].extension[daysRequested].valueInteger MS
     
 Extension:      IhrisLeave
@@ -84,10 +88,12 @@ Usage:          #definition
 * purpose = "Workflow page for recording a leave information."
 
 * item[0].linkId = "Basic"
+* item[0].definition = "http://ihris.org/fhir/StructureDefinition/ihris-basic-leave#Basic.id"
 * item[0].text = "Leave Details"
 * item[0].type = #group
 
 * item[0].item[0].linkId = "Basic.extension[0].extension[0]"
+* item[0].item[0].definition = "http://ihris.org/fhir/StructureDefinition/ihris-basic-leave#Basic.extension:leave.extension:leave-type.value[x]:valueCoding"
 * item[0].item[0].text = "Leave Type"
 * item[0].item[0].type = #choice
 * item[0].item[0].answerValueSet = "http://ihris.org/fhir/ValueSet/ihris-leave-type-valueset"
@@ -95,18 +101,21 @@ Usage:          #definition
 * item[0].item[0].repeats = false
 
 * item[0].item[1].linkId = "Basic.extension[0].extension[1]"
+* item[0].item[1].definition = "http://ihris.org/fhir/StructureDefinition/ihris-basic-leave#Basic.extension:leave.extension:period.value[x]:valuePeriod.start"
 * item[0].item[1].text = "Start Date"
 * item[0].item[1].type = #dateTime
 * item[0].item[1].required = true
 * item[0].item[1].repeats = false
 
 * item[0].item[2].linkId = "Basic.extension[0].extension[2]"
+* item[0].item[2].definition = "http://ihris.org/fhir/StructureDefinition/ihris-basic-leave#Basic.extension:leave.extension:period.value[x]:valuePeriod.end"
 * item[0].item[2].text = "End Date"
 * item[0].item[2].type = #dateTime
 * item[0].item[2].required = true
 * item[0].item[2].repeats = false
 
 * item[0].item[3].linkId = "Basic.extension[0].extension[3]"
+* item[0].item[3].definition = "http://ihris.org/fhir/StructureDefinition/ihris-basic-leave#Basic.extension:leave.extension:dateRequested.value[x]:valueDate"
 * item[0].item[3].text = "Date Requested"
 * item[0].item[3].type = #date
 * item[0].item[3].required = true

@@ -4,6 +4,7 @@
       class="mx-auto"
       max-width="700"
       outlined
+      v-if="!hide"
     >
       <v-card-title class=" justify-center darken-1 primary white--text text-uppercase font-weight-bold">{{ $t(`App.fhir-resources-texts.${label}`) }}</v-card-title>
       <v-card-text v-for="(error,idx) in errors" :key="idx" class="error white--text font-weight-bold">{{error}}</v-card-text>
@@ -15,11 +16,13 @@
 </template>
 
 <script>
+import { dataDisplay } from "@/mixins/dataDisplay"
 export default {
   name: "ihris-questionnaire-section",
   props: ["id", "profile", "sliceName", "field", "slotProps", "label", 
           "description", "path", "constraints", "link-id", "link-field",
-    "search-field", "search-field-target",],
+    "search-field", "search-field-target", "displayCondition"],
+  mixins: [dataDisplay],
   data: function() {
     return {
       isQuestionnaireGroup: true,
@@ -29,6 +32,7 @@ export default {
     }
   },
   created: function() {
+    this.hideShowField(this.displayCondition)
     this.setupData()
   },
   watch: {
@@ -66,7 +70,6 @@ export default {
           url += "?" + queryStr.join("&")
         }
         url += '&_sort=-_id&_count=1'
-        console.log(url);
         fetch( url ).then( response => {
           if ( response.status === 200 ) {
             response.json().then( async data => {

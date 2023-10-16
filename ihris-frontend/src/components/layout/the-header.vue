@@ -3,8 +3,12 @@
   <v-app-bar color="white" app clipped-left clipped-right>
     <router-link to="/"><v-img :src="'/images/' + header.logo" contain max-height="36" max-width="106" /></router-link>
     <v-toolbar-title class="headline ml-2" bottom="true">
-      <span v-if="header.title" class="primary--text">{{ $t('App.title') }}</span>
-      <span class="secondary--text" v-if="header.site"> | {{ $t('App.site')}}</span>
+      <span v-if="header.title" class="primary--text">
+        {{ $t('App.title') }}
+      </span>
+      <span class="secondary--text" v-if="header.site"> | 
+        {{ $t('App.site')}}
+      </span>
     </v-toolbar-title>
     <v-spacer v-if=$store.state.security_off></v-spacer>
     <div class="error font-weight-bold white--text" dark v-if="$store.state.security_off">

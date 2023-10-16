@@ -1,0 +1,1 @@
+"use strict";(self["webpackChunkiHRIS_v5"]=self["webpackChunkiHRIS_v5"]||[]).push([[2062],{2062:function(e){e.exports=JSON.parse('{"name":"site","version":"1.0.0","description":"","main":"app.js","scripts":{"test":"echo \\"Error: no test specified\\" && exit 1"},"author":"Ally Shaban","license":"ISC"}')}}]);

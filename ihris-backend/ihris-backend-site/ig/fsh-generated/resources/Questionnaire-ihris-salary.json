@@ -34,10 +34,12 @@
       ],
       "linkId": "Basic",
       "text": "Salary Information",
+      "definition": "http://ihris.org/fhir/StructureDefinition/ihris-basic-salary#Basic.id",
       "type": "group",
       "item": [
         {
           "linkId": "Basic.extension[0].extension[0]",
+          "definition": "http://ihris.org/fhir/StructureDefinition/ihris-basic-salary#Basic.extension:salary.extension:salaryScale.value[x]:valueCoding",
           "text": "Pay Grade",
           "type": "choice",
           "answerValueSet": "http://ihris.org/fhir/ValueSet/ihris-salary-scale-valueset",
@@ -46,6 +48,7 @@
         },
         {
           "linkId": "Basic.extension[0].extension[1]",
+          "definition": "http://ihris.org/fhir/StructureDefinition/ihris-basic-salary#Basic.extension:salary.extension:bsalary.value[x]:valueString",
           "text": "Basic Salary",
           "type": "string",
           "required": false,
@@ -53,6 +56,7 @@
         },
         {
           "linkId": "Basic.extension[0].extension[2]",
+          "definition": "http://ihris.org/fhir/StructureDefinition/ihris-basic-salary#Basic.extension:salary.extension:allowance.value[x]:valueString",
           "text": "Allowance",
           "type": "string",
           "required": false,
@@ -60,6 +64,7 @@
         },
         {
           "linkId": "Basic.extension[0].extension[3]",
+          "definition": "http://ihris.org/fhir/StructureDefinition/ihris-basic-salary#Basic.extension:salary.extension:benefits.value[x]:valueString",
           "text": "Benefits",
           "type": "string",
           "required": false,
@@ -67,6 +72,7 @@
         },
         {
           "linkId": "Basic.extension[0].extension[4]",
+          "definition": "http://ihris.org/fhir/StructureDefinition/ihris-basic-salary#Basic.extension:salary.extension:period.value[x]:valuePeriod.start",
           "text": "Effective Start date",
           "type": "date",
           "required": true,
@@ -74,6 +80,7 @@
         },
         {
           "linkId": "Basic.extension[0].extension[5]",
+          "definition": "http://ihris.org/fhir/StructureDefinition/ihris-basic-salary#Basic.extension:salary.extension:period.value[x]:valuePeriod.end",
           "text": "End Date",
           "type": "date",
           "required": false,
@@ -81,6 +88,7 @@
         },
         {
           "linkId": "Basic.extension[0].extension[6]",
+          "definition": "http://ihris.org/fhir/StructureDefinition/ihris-basic-salary#Basic.extension:salary.extension:remark.value[x]:valueString",
           "text": "Remark",
           "type": "text",
           "required": false,
@@ -88,6 +96,7 @@
         },
         {
           "linkId": "Basic.extension[0].extension[7]",
+          "definition": "http://ihris.org/fhir/StructureDefinition/ihris-basic-salary#Basic.extension:salary.extension:salarySource.value[x]:valueCoding",
           "text": "Salary Source",
           "type": "choice",
           "answerValueSet": "http://ihris.org/fhir/ValueSet/ihris-salary-source-valueset",
@@ -96,6 +105,7 @@
         },
         {
           "linkId": "Basic.extension[0].extension[8]",
+          "definition": "http://ihris.org/fhir/StructureDefinition/ihris-basic-salary#Basic.extension:salary.extension:frequency.value[x]:valueCoding",
           "text": "Pay Frequency",
           "type": "choice",
           "answerValueSet": "http://ihris.org/fhir/ValueSet/ihris-frequency-valueset",
@@ -104,6 +114,7 @@
         },
         {
           "linkId": "Basic.extension[0].extension[9]",
+          "definition": "http://ihris.org/fhir/StructureDefinition/ihris-basic-salary#Basic.extension:salary.extension:current.value[x]:valueBoolean",
           "text": "Is Current",
           "type": "boolean",
           "required": false,

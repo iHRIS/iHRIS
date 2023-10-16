@@ -200,14 +200,14 @@ export default {
         params = { "partof:missing": true }
       }
       params._count = 500
-      let url = "/fhir/"+this.resource+"?"+querystring.stringify( params )
+      let url = "/fhir/"+this.resource+"?_sort=name&"+querystring.stringify( params )
       this.items = []
       this.addItems( url, this.items )
 
     },
     checkChildren: function(item) {
       let params = { "partof": item.id, "_summary": "count" }
-      let url = "/fhir/"+this.resource+"?"+querystring.stringify( params )
+      let url = "/fhir/"+this.resource+ "?_sort=name&"+querystring.stringify( params )
       return new Promise( resolve => {
         fetch( url ).then( response => {
           if ( response.ok ) {

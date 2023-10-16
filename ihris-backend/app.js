@@ -42,43 +42,6 @@ app.use((req, res, next) => {
 let configLoaded = false;
 
 async function startUp() {
-  /* if ( process.env.AUTOLOAD_RESOURCE_DIR ) {
-    const axios = require('axios')
-    const URI = require('urijs')
-    const path = require('path')
-
-    logger.info( "Loading Autoload resource directory: " + process.env.AUTOLOAD_RESOURCE_DIR )
-    let files = fs.readdirSync( process.env.AUTOLOAD_RESOURCE_DIR )
-    let server = nconf.get("fhir:base")
-    for ( let file of files ) {
-      if ( file.endsWith('.json') ) {
-        let fullFile = path.format( { dir: process.env.AUTOLOAD_RESOURCE_DIR, base: file } )
-        let data = fs.readFileSync( fullFile )
-        let fhir = JSON.parse( data )
-        if ( fhir.resourceType === "Bundle" &&
-          ( fhir.type === "transaction" || fhir.type === "batch" ) ) {
-          logger.info( "Saving " + fhir.type )
-          let dest = URI(server).toString()
-          axios.post( dest, fhir ).then( ( res ) => {
-            logger.info( dest+": "+ res.status )
-            logger.info( JSON.stringify( res.data, null, 2 ) )
-          } ).catch( (err) => {
-            logger.error(err.message)
-          } )
-        } else {
-          logger.info( "Saving " + fhir.resourceType +" - "+fhir.id )
-          let dest = URI(server).segment(fhir.resourceType).segment(fhir.id).toString()
-          axios.put( dest, fhir ).then( ( res ) => {
-            logger.info( dest+": "+ res.status )
-            logger.info( res.headers['content-location'] )
-          } ).catch( (err) => {
-            logger.error(err.message)
-            logger.error(JSON.stringify(err.response.data,null,2))
-          } )
-        }
-      }
-    }
-  } */
 
   await nconf.loadRemote();
 
@@ -181,6 +144,7 @@ async function startUp() {
   const ihrisApps = require('./routes/apps');
   const mheroRouter = require('./routes/mhero');
   const translatorRouter = require('./routes/core-apps/ihris-google-translator/index');
+  const taskAndRoleRouter = require('./routes/core-apps/ihris-task-and-role/index')
 
   const limit = nconf.get('express:limit') || '50mb';
   app.use(express.json({
@@ -210,30 +174,19 @@ async function startUp() {
     app.use(authRouter.passport.initialize());
     app.use(authRouter.passport.session());
   }
+  // mounting site routes that dont require authentication
+  mountCustomRoute("false")
+  // end of mounting site routes that dont require authentication
   app.use(isLoggedIn);
-
-  // mounting site routes
-  const siteRoutes = nconf.get('app:site:routes');
-  for (const route in siteRoutes) {
-    const routePath = path.join(nconf.get('app:site:path'), `routes/${siteRoutes[route].path}`);
-    let mountPoint = `/${siteRoutes[route].mount}`;
-    mountPoint = mountPoint.replace('//', '/');
-    if (fs.existsSync(routePath)) {
-      const siteRoute = require(routePath);
-      try {
-        app.use(mountPoint, siteRoute);
-      } catch (error) {
-        console.log(error);
-      }
-    } else {
-      winston.error(`Route file defined with mount point ${mountPoint} was not found`);
-    }
-  }
-  // end of mounting site routes
+console.log("DOne");
+  // mounting site routes that must be authenticated
+  mountCustomRoute("true")
+  // end of mounting site routes that must be authenticated
 
   app.use('/config', configRouter);
   app.use('/mhero', mheroRouter);
   app.use('/translator', translatorRouter);
+  app.use('/taskAndRole', taskAndRoleRouter);
   app.use('/tmp', express.static('tmp'));
   app.get('/test', (req, res) => {
     res.status(200).json({
@@ -258,6 +211,31 @@ async function startUp() {
         }
       } catch (err) {
         logger.error(`Failed to load module ${mod} (${loadModules[mod]})`, err);
+      }
+    }
+  }
+
+  function mountCustomRoute(authenticate) {
+    const siteRoutes = nconf.get('app:site:routes');
+    for (const route in siteRoutes) {
+      //this ensures that everything is authenticated unless the authenticate parameter is set and its values is false
+      if(siteRoutes[route].hasOwnProperty("authenticate") && siteRoutes[route].authenticate !== authenticate) {
+        continue
+      } else if(!siteRoutes[route].hasOwnProperty("authenticate") && authenticate === "false") {
+        continue
+      }
+      const routePath = path.join(nconf.get('app:site:path'), `routes/${siteRoutes[route].path}`);
+      let mountPoint = `/${siteRoutes[route].mount}`;
+      mountPoint = mountPoint.replace('//', '/');
+      if (fs.existsSync(routePath)) {
+        const siteRoute = require(routePath);
+        try {
+          app.use(mountPoint, siteRoute);
+        } catch (error) {
+          console.log(error);
+        }
+      } else {
+        winston.error(`Route file defined with mount point ${mountPoint} was not found`);
       }
     }
   }
