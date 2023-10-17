@@ -63,6 +63,35 @@
         {
           "url": "filter",
           "valueString": "Physical Type|physicalType|http://hl7.org/fhir/ValueSet/location-physical-type"
+        },
+        {
+          "extension": [
+            {
+              "url": "url",
+              "valueUrl": "/resource/view/facility/FIELD?edit=true"
+            },
+            {
+              "url": "field",
+              "valueString": "Location.id"
+            },
+            {
+              "url": "text",
+              "valueString": "Edit"
+            },
+            {
+              "url": "button",
+              "valueBoolean": true
+            },
+            {
+              "url": "icon",
+              "valueString": "mdi-pencil"
+            },
+            {
+              "url": "class",
+              "valueString": "secondary"
+            }
+          ],
+          "url": "link"
         }
       ]
     },
