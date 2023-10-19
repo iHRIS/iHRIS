@@ -1,4 +1,4 @@
-# Approach
+# User Interface Guide: Navigating and Interacting with iHRIS
 
 In designing this user documentation, we've opted for a strategic approach that emphasizes the fundamental methods and principles applied consistently throughout the system. Rather than delving into minute details of every window, button, or image, we believe in equipping you with a broader understanding of how the system operates, which can be seamlessly applied across its various components.
 
@@ -63,3 +63,42 @@ Description: Filtering records allows users to sort and display records based on
 Procedure: Access the filtering options within iHRIS. Choose the desired filter criteria (e.g., by department, by date). Apply the filter to display records meeting the selected criteria.
 
 These functions collectively ensure efficient management of various records within iHRIS, aiding users in maintaining organized and accurate databases for effective operations and decision-making.
+
+
+## Required Fields:
+In iHRIS, before you can save a record, you need to ensure that essential information is provided in certain fields known as "Required Fields." These fields are easily recognizable by their red outline, indicating that specific data must be entered for the record to be successfully saved. An example of a "Required Field" is the employee's first name.
+
+![Alt text](../img/required_fields.JPG 'Required Fields')
+
+## Adding a New Card:
+When you want to add a new card, whether it's a health worker's profile or certification, simply locate and click the "Add" button. This action initiates the card creation process in iHRIS.
+
+## Form Fields:
+When filling out forms in iHRIS, understand the function of each field. For instance, the "Training Date" field records the date of a health worker's training. Accurately enter this date to maintain comprehensive records.
+
+## Buttons and Actions:
+Take advantage of buttons like "Save" or "Submit" to preserve data or confirm actions. For instance, use the "Edit" button to make changes to existing records.
+
+## Validation Messages:
+Pay attention to validation messages in iHRIS. If you miss required information or make an error, iHRIS will display a warning message to guide you on what needs correction.
+
+## Navigation Elements:
+Easily navigate within iHRIS by using the menus, tabs, links, and buttons. For instance, the "Dashboard" tab takes you to your personalized home screen.
+
+## Help and Support Features:
+Access help resources and contact support as needed. In iHRIS, click the question mark icon to access a helpful user manual or contact our support team.
+
+## Contextual Menus:
+Use contextual menus effectively by right-clicking on items to reveal additional actions. For example, right-clicking on a health worker's name provides options for editing or viewing their profile.
+
+## Drag-and-Drop Functionality:
+To effortlessly move items, like documents or certifications, within iHRIS, click and drag the item to the desired location. This is especially useful for organizing your data.
+
+## Keyboard Shortcuts:
+Speed up your actions with keyboard shortcuts. For instance, press "Ctrl + S" to quickly save a record, or use "Ctrl + Z" to undo changes.
+
+## Wizards and Step-by-Step Processes:
+When adding a new health worker, follow the step-by-step process. For instance, start by entering the employee's personal details and move through each section as prompted.
+
+## Confirmation and Dialog Boxes:
+When prompted with a dialog box, make your selection or confirm actions. For example, if you choose to delete a record, you will receive a confirmation dialog to proceed.
