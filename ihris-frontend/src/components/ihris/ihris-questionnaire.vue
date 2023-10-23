@@ -310,13 +310,17 @@ export default {
           if (child.$children) {
             // console.log("PROCESSING CHILDREN OF",child.path)
             try {
+              let children = []
               if(child.isArray) {
                 let merged = mergeArrayExtensionFields(child.$children)
                 if(merged.length > 0) {
-                  child.$children = merged
+                  children = merged
                 }
               }
-              await processChildren(next, child.$children, myItemMap);
+              if(children.length === 0) {
+                children = child.$children
+              }
+              await processChildren(next, children, myItemMap);
             } catch (err) {
               this.advancedValid = false;
               console.log(err);
