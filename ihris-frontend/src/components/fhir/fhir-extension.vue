@@ -33,17 +33,18 @@ export default {
         this.source = { path: this.slotProps.source.path+"."+this.field, data: {} }
         if ( this.slotProps.source.fromArray ) {
           this.source.data = this.slotProps.source.data
-        } else {
-          let url
-          if ( this.profile ) {
-            url = this.profile
-          } else {
-            url = this.sliceName
-          }
-          let expression = this.field.replace(/([^:]+):(.+)/, "$1.where(url='"+url+"')")
-          this.source.data = this.$fhirpath.evaluate( this.slotProps.source.data, expression )
         }
-        //console.log(this.source)
+        let url
+        if ( this.profile ) {
+          url = this.profile
+        } else {
+          url = this.sliceName
+        }
+        let expression = this.field.replace(/([^:]+):(.+)/, "$1.where(url='"+url+"')")
+        if(expression.startsWith("extension.") && !this.slotProps.source.data.hasOwnProperty("extension")) {
+          expression = expression.replace("extension.", "")
+        }
+        this.source.data = this.$fhirpath.evaluate( this.slotProps.source.data, expression )
       }
     }
   }

@@ -66,6 +66,10 @@ export default {
         let expression = this.field
         if ( this.sliceName ) {
           expression = this.field.replace(/([^:]+):(.+)/, "$1.where(url='"+this.profile+"')")
+          // this is when a field is an extension and it has been set repeat true directly, repeat is not set to group
+          if(expression.startsWith("value[x]")) {
+            expression = expression.replace("value[x]", "extension")
+          }
         }
         this.source.data = this.$fhirpath.evaluate( this.slotProps.source.data, expression)
         if(this.limit) {
