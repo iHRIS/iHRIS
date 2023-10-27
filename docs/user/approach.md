@@ -14,7 +14,7 @@ In the upcoming sections, we'll delve into these core strategies and shed light 
 
 
 
-## Add a New Record:
+## Add a New Record
 
 Description: Adding a new record involves creating a fresh entry within iHRIS for an entity such as an employee, training program, or facility.
 Procedure: Click on the "Add New" button/icon. This action will open a new blank record form. Fill in the required details for the new record in the designated fields within the form. Once you've provided all necessary information, click "Save" to create and save the record.
@@ -28,22 +28,22 @@ Capture the name of the cadre to be displayed, assign a specific code and give a
 ![Alt text](../img/add_cadre.PNG 'Add Cadre')
 
 
-## Edit an Existing Record:
+## Edit an Existing Record
 
 Description: Editing an existing record involves modifying the information associated with a record that already exists in the system.
 Procedure: Locate and select the record you wish to edit. Click on the "Edit" or "Edit Record" button/icon. Make the necessary modifications in the record form. After making the changes, click "Save" to update the record with the new information.
 
-## Delete Record:
+## Delete Record
 
 Description: Deleting a record permanently removes it from the system.
 Procedure: To delete a record, locate and select the record you want to remove. Click on the "Delete" or "Delete Record" button/icon. Confirm the deletion in the prompted confirmation dialog. The record will be permanently deleted.
 
-## View Record:
+## View Record
 
 Description: Viewing a record allows users to access and review the details of a specific record without making any changes.
 Procedure: Locate and select the record you wish to view. Simply click on the "View" or "View Record" option. The record details will be displayed for review.
 
-## Search Records:
+## Search Records
 
 Description: Searching for records enables users to find specific records based on predefined criteria, keywords, or filters.
 Procedure: Access the search function within iHRIS. Enter relevant keywords, criteria, or select appropriate filters. Press "Search" to find matching records.
@@ -57,7 +57,7 @@ You can search by **code** or by **display**
 Your results shall be displayed as above
 
 
-## Filter Records:
+## Filter Records
 
 Description: Filtering records allows users to sort and display records based on specific attributes relevant to the record type.
 Procedure: Access the filtering options within iHRIS. Choose the desired filter criteria (e.g., by department, by date). Apply the filter to display records meeting the selected criteria.
@@ -65,40 +65,72 @@ Procedure: Access the filtering options within iHRIS. Choose the desired filter 
 These functions collectively ensure efficient management of various records within iHRIS, aiding users in maintaining organized and accurate databases for effective operations and decision-making.
 
 
-## Required Fields:
-In iHRIS, before you can save a record, you need to ensure that essential information is provided in certain fields known as "Required Fields." These fields are easily recognizable by their red outline, indicating that specific data must be entered for the record to be successfully saved. An example of a "Required Field" is the employee's first name.
+## Required Fields
 
-![Alt text](../img/required_fields.JPG 'Required Fields')
+In iHRIS, before you can save a record, you need to ensure that essential information is provided in certain fields known as *Required Fields*.  These fields are easily recognizable by their red outline, indicating that specific data must be entered for the record to be successfully saved. An example of a "Required Field" is the employee's first name or the employee number.
 
-## Adding a New Card:
-When you want to add a new card, whether it's a health worker's profile or certification, simply locate and click the "Add" button. This action initiates the card creation process in iHRIS.
+![Alt text](../img/required.JPG 'Required Fields')
 
-## Form Fields:
-When filling out forms in iHRIS, understand the function of each field. For instance, the "Training Date" field records the date of a health worker's training. Accurately enter this date to maintain comprehensive records.
+## Adding and Removing Cards
 
-## Buttons and Actions:
-Take advantage of buttons like "Save" or "Submit" to preserve data or confirm actions. For instance, use the "Edit" button to make changes to existing records.
+When you need to add additional cards, whether they're for health worker profiles or certifications, just find and click the green "+" button. This action allows you to initiate the card creation process in iHRIS for multiple entries. 
 
-## Validation Messages:
-Pay attention to validation messages in iHRIS. If you miss required information or make an error, iHRIS will display a warning message to guide you on what needs correction.
+![Alt text](../img/contact.JPG 'Required Fields')
 
-## Navigation Elements:
+
+To remove an entire card, click on the grey "-" button , and the entire card will be dropped.
+
+
+This is particularly useful when adding more contact information for an employee in iHRIS, which gives multiple options for *Address* and *Telecom*
+
+
+![Alt text](../img/telecom.JPG 'Required Fields')
+
+## Form Fields - Date
+
+When filling out forms in iHRIS, understand the function of each field. For the date, across the system, a date picker is used, which allows you to select the date you want to pick. 
+
+![Alt text](../img/date.JPG 'Required Fields')
+
+To select, click on the field, then select the year, followed by the month and finally, the day.
+
+
+ For instance, the "Training Date" field records the date of a health worker's training. Accurately enter this date to maintain comprehensive records.
+
+## Validation Messages
+If you miss required information or make an error, iHRIS will display a warning message to guide you on what needs correction or inform you that an action was successful. One such alert is 'Validation Successful'
+
+## Navigation Elements
+
 Easily navigate within iHRIS by using the menus, tabs, links, and buttons. For instance, the "Dashboard" tab takes you to your personalized home screen.
 
-## Help and Support Features:
-Access help resources and contact support as needed. In iHRIS, click the question mark icon to access a helpful user manual or contact our support team.
+![Alt text](../img/Navigation.JPG 'Required Fields')
 
-## Contextual Menus:
-Use contextual menus effectively by right-clicking on items to reveal additional actions. For example, right-clicking on a health worker's name provides options for editing or viewing their profile.
+You can easily navigate to specific menus by clicking on the menu on the left side of the screen
 
-## Drag-and-Drop Functionality:
-To effortlessly move items, like documents or certifications, within iHRIS, click and drag the item to the desired location. This is especially useful for organizing your data.
+## Help and Support Features
+Access help resources and contact support as needed. In iHRIS, click the question mark icon to access a helpful user manual/guide/FAQ.
 
-## Keyboard Shortcuts:
-Speed up your actions with keyboard shortcuts. For instance, press "Ctrl + S" to quickly save a record, or use "Ctrl + Z" to undo changes.
+## Contextual Menus
 
-## Wizards and Step-by-Step Processes:
+Use contextual menus effectively by double-clicking on items to reveal additional actions. For example, double-clicking on a health worker's name under the Search Records menu, provides options for editing or viewing their profile.
+
+
+## Wizards and Step-by-Step Processes
 When adding a new health worker, follow the step-by-step process. For instance, start by entering the employee's personal details and move through each section as prompted.
 
-## Confirmation and Dialog Boxes:
+## Confirmation and Dialog Boxes
 When prompted with a dialog box, make your selection or confirm actions. For example, if you choose to delete a record, you will receive a confirmation dialog to proceed.
+
+## Menu with a Dropdown 
+In the iHRIS application, a menu with a dropdown is a user interface element that allows for a hierarchical organization of options. When you click on a menu item, such as *Gender* it reveals options like "Male," "Female," or "Unknown" Dropdown menus in iHRIS make it convenient to access specific functions or subtasks related to the main category.
+
+Some drop down menu items allow users to select one item at a time,
+
+![Alt text](../img/telecom.JPG 'Required Fields')
+
+ Some other drop down menus allow for the selection of multiple items. Thesye usually have a checkboxes, of which you can select several at a time.
+
+![Alt text](../img/Search.JPG 'Required Fields')
+
+
