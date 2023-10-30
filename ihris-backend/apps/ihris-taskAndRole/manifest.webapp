@@ -1,0 +1,14 @@
+{
+    "version": "1.0.0",
+    "appType": "APP",
+    "name": "iHRIS Tasks and Roles Management",
+    "description": "Create Tasks and Roles of Your iHRIS Instance",
+    "launch_path": "index.html",
+    "icons": {
+    },
+    "developer": {
+        "name": "Intrahealth - Digital Health Team",
+        "url": "http://digitalhealth.intrahealth.org"
+    },
+    "default_locale": "en"
+}
