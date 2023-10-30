@@ -87,7 +87,7 @@ export default {
   name: "fhir-reference",
   props: ["field","label","sliceName","targetProfile","targetResource","min","max","base-min","base-max",
     "slotProps","path","sub-fields","edit","readOnlyIfSet","constraints", "displayType", 
-    "initialValue", "overrideValue", "displayCondition"],
+    "initialValue", "overrideValue", "displayCondition", "searchParameter"],
   components: {
     IhrisElement
   },
@@ -189,12 +189,15 @@ export default {
     },
     setupTreeItems: async function() {
       let treetop = this.initialValue
+      let searchparam = this.searchParameter
       if ( this.overrideValue ) {
         treetop = this.overrideValue
       }
       this.loading = true
-      let params = {} 
-      if ( treetop ) {
+      let params = {}
+      if ( treetop && searchparam ) {
+        params = { searchparam : treetop }
+      } else if ( !searchparam && treetop ) {
         params = { "partof": treetop }
       } else {
         params = { "partof:missing": true }

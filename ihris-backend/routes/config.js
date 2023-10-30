@@ -563,7 +563,7 @@ router.get('/page/:page/:type?', function (req, res) {
 
 
                         let attrs = ["field", "sliceName", "targetProfile", "targetResource", "profile", "min", "max", "base-min",
-                            "base-max", "label", "path", "binding", "calendar", "initialValue"]
+                            "base-max", "label", "path", "binding", "calendar", "initialValue", "searchParameter"]
                         const minmax = ["Date", "DateTime", "Instant", "Time", "Decimal", "Integer", "PositiveInt",
                             "UnsignedInt", "Quantity"]
                         for (let mm of minmax) {
@@ -586,7 +586,7 @@ router.get('/page/:page/:type?', function (req, res) {
                             attrs.unshift("id")
                         }
                         output += "<fhir-" + eleName + " :slotProps=\"slotProps\" :edit=\"isEdit\""
-                        let displayType, readOnlyIfSet
+                        let displayType, readOnlyIfSet , searchParameter
                         if (pageFields.hasOwnProperty(fields[field].id)) {
                             if (pageFields[fields[field].id].type) {
                                 //output += " displayType=\""+ pageFields[ fields[field].id ].type +"\""
@@ -609,6 +609,12 @@ router.get('/page/:page/:type?', function (req, res) {
                         }
                         if (displayType) {
                             output += " displayType=\"" + displayType + "\""
+                        }
+                        if (displayType && displayType == "tree" && !searchParameter) {
+                            if (nconf.get("defaults:fields:" + fields[field].id + ":searchParameter")) {
+                                searchParameter = nconf.get("defaults:fields:" + fields[field].id + ":searchParameter")
+                                output += " searchParameter=\"" + searchParameter + "\""
+                            }
                         }
                         if (nconf.get("defaults:fields:" + fields[field].id + ":user_filter")) {
                             let resource = fields[field].id.substring(0, fields[field].id.indexOf('.'))
@@ -1311,7 +1317,7 @@ router.get('/questionnaire/:questionnaire/:page', async function (req, res) {
                                 if(fieldType) {
                                     let eleName = fhirDefinition.camelToKebab(fieldType)
                                     let attrs = ["field", "sliceName", "targetProfile", "targetResource", "profile", "min", "max", "base-min",
-                                        "base-max", "label", "path", "binding", "calendar", "initialValue"]
+                                        "base-max", "label", "path", "binding", "calendar", "initialValue", "searchParameter"]
                                     const minmax = ["Date", "DateTime", "Instant", "Time", "Decimal", "Integer", "PositiveInt", "UnsignedInt", "Quantity"]
                                     for (let mm of minmax) {
                                         for (let type of ["min", "max"]) {
@@ -1382,7 +1388,7 @@ router.get('/questionnaire/:questionnaire/:page', async function (req, res) {
                             }
                         }
 
-                        const field_attrs = ["initialValue"]
+                        const field_attrs = ["initialValue", "searchParameter"]
                         for (let attr of field_attrs) {
                             if (nconf.get("defaults:fields:" + field.id + ":" + attr)) {
                                 vueOutput += " " + attr + "=\""
