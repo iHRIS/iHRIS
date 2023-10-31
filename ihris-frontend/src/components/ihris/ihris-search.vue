@@ -108,8 +108,8 @@ export default {
         }
         // Should make this smarter to keep the _getpages parameter,
         // but the issue is with tracking permissions on the resource
-        url = url.replace(/_getpages=[^&]*&*/, "").replace("/fhir?","/fhir/"+this.resource+"?")
-        url = url.substring(url.indexOf("/fhir/"));
+        //url = url.replace(/_getpages=[^&]*&*/, "").replace("/fhir?","/fhir/"+this.resource+"?")
+        //url = url.substring(url.indexOf("/fhir/"));
 
         //some of the hapi instances requires _total=accurate to always be available for them to return total resources
         if(url.indexOf('_total=accurate') === -1) {
