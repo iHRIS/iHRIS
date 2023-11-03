@@ -41,10 +41,11 @@ export default {
           url = this.sliceName
         }
         let expression = this.field.replace(/([^:]+):(.+)/, "$1.where(url='"+url+"')")
-        if(expression.startsWith("extension.") && !this.slotProps.source.data.hasOwnProperty("extension")) {
-          expression = expression.replace("extension.", "")
-        }
         this.source.data = this.$fhirpath.evaluate( this.slotProps.source.data, expression )
+        if(this.source.data.length === 0 && expression.startsWith("extension.") && !this.slotProps.source.data.hasOwnProperty("extension") && !this.slotProps.source.data.find(dt => dt.extension)) {
+          expression = expression.replace("extension.", "")
+          this.source.data = this.$fhirpath.evaluate( this.slotProps.source.data, expression )
+        }
       }
     }
   }
