@@ -178,7 +178,6 @@ async function startUp() {
   mountCustomRoute("false")
   // end of mounting site routes that dont require authentication
   app.use(isLoggedIn);
-console.log("DOne");
   // mounting site routes that must be authenticated
   mountCustomRoute("true")
   // end of mounting site routes that must be authenticated

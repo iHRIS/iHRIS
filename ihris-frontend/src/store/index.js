@@ -7,7 +7,8 @@ export default new Vuex.Store({
   state: {
     user: {
       loggedin: false,
-      name: ""
+      name: "",
+      obj: {}
     },
     allowSelfSignup:"",
     idp: 'ihris',
@@ -34,6 +35,7 @@ export default new Vuex.Store({
       state.user.reference = user.reference
       state.user.facilityId = user.facilityId
       state.user.physicalLocation = user.physicalLocation
+      state.user.obj = user.obj
     },
     logout( state ) {
       state.user.loggedin = false

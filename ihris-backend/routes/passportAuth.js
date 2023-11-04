@@ -269,30 +269,7 @@ router.post("/signup", (req, res) => {
 })
 
 router.post("/login", passport.authenticate('local', {}), (req, res) => {
-      let name = "Unknown"
-      let location = ""
-      let role = ""
-      let reference = ""
-      try {
-        req.user.resource.extension.forEach(ext => {
-          if (ext.url === "http://ihris.org/fhir/StructureDefinition/ihris-user-location") {
-            location = ext.valueReference.reference
-          }
-
-          if (ext.url === "http://ihris.org/fhir/StructureDefinition/ihris-user-practitioner") {
-            reference = ext.valueReference.reference
-          }
-
-          if (ext.url === "http://ihris.org/fhir/StructureDefinition/ihris-assign-role") {
-            let _role = ext.valueReference.reference.split("/")
-            role = _role.pop()
-          }
-        })
-        name = req.user.resource.name[0].text
-      } catch (err) {
-        console.error("Error ", err)
-      }
-      res.status(200).json({ok: true, user: {name: name, location: location, role: role, reference: reference}})
+      res.status(200).json({ ok: true, user: req.user })
     }
 )
 router.post("/password-reset-request", async (req, res) => {

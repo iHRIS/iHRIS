@@ -127,7 +127,8 @@ export default {
                   role: data.user.role,
                   reference: data.user.reference,
                   facilityId: data.user.facilityId,
-                  physicalLocation: data.user.physicalLocation
+                  physicalLocation: data.user.physicalLocation,
+                  obj: data.user.obj
                 };
                 this.$store.commit('login', user )
               } else {

@@ -152,6 +152,7 @@ router.get("/site", async function (req, res) {
                 }
             });
         }
+        site.user.obj = req.user
         filterNavigation(req.user, site.nav);
     } else {
         site.user = {loggedin: false};

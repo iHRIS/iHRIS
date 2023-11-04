@@ -21,6 +21,9 @@ const user = {
         if (obj.permissions) {
             userObj.restorePermissions(obj.permissions)
         }
+        if(obj.roles) {
+            userObj.restoreRoles(obj.roles)
+        }
         return userObj
     },
     lookup: (query) => {
@@ -117,7 +120,7 @@ const user = {
 
         })
     },
-    addRole: ({permissions = {}, roleRef, roleResource}) => {
+    addRole: ({permissions = {}, roles = [], roleRef, roleResource}) => {
         return new Promise((resolve, reject) => {
             const findRoleResource = new Promise((res, rej) => {
                 if (roleResource) {
@@ -169,8 +172,9 @@ const user = {
 
                 }
 
-                let roles = roleResource.extension.filter(ext => ext.url === ROLE_EXTENSION)
-                for (let role of roles) {
+                let userRoles = roleResource.extension.filter(ext => ext.url === ROLE_EXTENSION)
+                for (let role of userRoles) {
+                    roles.push(role.valueReference.reference.split("/")[1])
                     await user.addRole({permissions, roleRef: role.valueReference.reference});
                 }
                 resolve()
@@ -287,6 +291,7 @@ class User {
     constructor(resource) {
         this.resource = resource
         this.permissions = {}
+        this.roles = []
     }
 
 }
@@ -296,13 +301,19 @@ User.prototype.restorePermissions = function (permissions) {
     this.permissions = permissions
 }
 
+User.prototype.restoreRoles = function (roles) {
+    this.roles = roles
+}
+
 User.prototype.updatePermissions = async function (roleResources) {
     if (this.resource.hasOwnProperty("extension")) {
         let roles = this.resource.extension.filter(ext => ext.url === ROLE_EXTENSION)
         for (let role of roles) {
             try {
                 const roleResource = roleResources && roleResources.find(resource => resource.id === role.valueReference.reference.split('/')[1]);
+                this.roles.push(role.valueReference.reference.split("/")[1])
                 await user.addRole({
+                    roles: this.roles,
                     permissions: this.permissions,
                     roleRef: role.valueReference.reference,
                     roleResource

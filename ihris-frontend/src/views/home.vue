@@ -281,7 +281,32 @@ export default {
             response.json().then(data => {
               this.snackbar = true
               this.message = this.$t("App.hardcoded-texts.Login successfull")
-              this.$emit("loggedin", data.user)
+              let user = {}
+              user.obj = data.user
+              user.name = "Unknown"
+              if(data.user.resource) {
+                let locExt = data.user.resource.extension.find((ext) => {
+                  return ext.url === "http://ihris.org/fhir/StructureDefinition/ihris-user-location"
+                })
+                if(locExt) {
+                  user.location = locExt.valueReference.reference
+                }
+                let practExt = data.user.resource.extension.find((ext) => {
+                  return ext.url === "http://ihris.org/fhir/StructureDefinition/ihris-user-practitioner"
+                })
+                if(practExt) {
+                  user.reference = practExt.valueReference.reference
+                }
+                let roleExt = data.user.resource.extension.find((ext) => {
+                  return ext.url === "http://ihris.org/fhir/StructureDefinition/ihris-assign-role"
+                })
+                if(roleExt) {
+                  let role = roleExt.valueReference.reference.split("/")
+                  user.role = role.pop()
+                }
+                user.name = data.user.resource.name[0].text
+              }
+              this.$emit("loggedin", user)
               // this.$router.push( {path: "/" } )
               location.reload()
             }).catch(err => {
