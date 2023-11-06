@@ -158,8 +158,9 @@ Title:          "Code system for task permissions."
 * #PractitionerRole     "PractitionerRole"
 * #Location             "Location"
 * #Person               "Person"
-* #navigation           "Navigation"
-* #section           "Page Section"
+* #navigation           "Page Navigation"
+* #section              "Page Section"
+* #special              "Special"
 
 ValueSet:       IhrisTaskResourceValueSet
 Id:             ihris-task-resource

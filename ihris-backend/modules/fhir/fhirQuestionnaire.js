@@ -7,9 +7,8 @@ const logger = require('../../winston')
 
 const fhirQuestionnaire = {
   modifyQuestionnaireArrayPath: (response) => {
+    let previousIds = []
     const processChildren = (items, parentPath, originalParentPath) => {
-      let currentIndex = 0
-      let previousIds = []
       for( let item of items ) {
         let originalId = item.linkId
         let linkId = item.linkId
@@ -26,13 +25,14 @@ const fhirQuestionnaire = {
           if(previousIdIndex === -1) {
             linkId = linkId.replace( /\[\d+\]$/, "[0]" )
             previousIds.push(linkId)
-            currentIndex = 0
             item.definition = linkId
           } else {
+            let prevIndex = previousId.match( /\[\d+\]$/ )[0]
+            prevIndex = prevIndex.match( /\d+/ )[0]
             let id1 = previousId.replace( /\[\d+\]$/, "" )
             let id2 = linkId.replace( /\[\d+\]$/, "" )
             if(id1 === id2) {
-              linkId = linkId.replace( /\[\d+\]$/, "[" + ++currentIndex + "]" )
+              linkId = linkId.replace( /\[\d+\]$/, "[" + ++prevIndex + "]" )
             }
             previousIds[previousIdIndex] = linkId
             item.definition = linkId
