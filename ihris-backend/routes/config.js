@@ -252,7 +252,6 @@ router.get('/page/:page/:type?', function (req, res) {
     if (allowed !== true) {
         return res.status(401).json(outcomes.DENIED)
     }
-
     fhirAxios.read("Basic", page).then(async (resource) => {
         let pageDisplay = resource.extension.find(ext => ext.url === "http://ihris.org/fhir/StructureDefinition/ihris-page-display")
 
@@ -399,18 +398,24 @@ router.get('/page/:page/:type?', function (req, res) {
                                 let link = action.extension.find(ext => ext.url === "link").valueString
                                 let text = action.extension.find(ext => ext.url === "text").valueString
                                 let roles = action.extension.filter(ext => ext.url === "role")
-                                if(roles.length > 0) {
-                                    let userRole = req.user.resource.extension.find((ext) => {
-                                        return ext.url === 'http://ihris.org/fhir/StructureDefinition/ihris-assign-role'
+                                let tasks = action.extension.filter(ext => ext.url === "task")
+                                if(roles.length > 0 || tasks.length > 0) {
+                                    let hasRole = roles.find((role) => {
+                                        return req.user.roles.includes(role.valueId)
                                     })
-                                    if(userRole) {
-                                        userRole = userRole.valueReference.reference.split("/")[1]
-                                        let exist = roles.find((role) => {
-                                            return role.valueId === userRole
+                                    let hasTask
+                                    for(let task of tasks) {
+                                        await fhirAxios.read("Basic", task.valueId).then((taskResource) => {
+                                            let taskName = taskResource?.extension?.find((ext) => {
+                                                return ext.url === 'http://ihris.org/fhir/StructureDefinition/ihris-basic-name'
+                                            })?.valueString
+                                            if(req.user?.permissions?.special?.section?.id[taskName]) {
+                                                hasTask = true
+                                            }
                                         })
-                                        if(!exist) {
-                                            continue
-                                        }
+                                    }
+                                    if(!hasRole && !hasTask) {
+                                        continue
                                     }
                                 }
                                 let row, condition, emptyDisplay

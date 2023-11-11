@@ -39,7 +39,8 @@ Description:    "iHRIS Page Display details."
       url 1..1 MS and
       icon 0..1 MS and
       class 0..1 MS and
-      role 0..* MS
+      role 0..* MS and
+      task 0..* MS
 * extension[add].extension[url].value[x] only url
 * extension[add].extension[url].valueUrl MS
 * extension[add].extension[url].valueUrl ^label = "Add Link URL"
@@ -52,6 +53,9 @@ Description:    "iHRIS Page Display details."
 * extension[add].extension[role].value[x] only id
 * extension[add].extension[role].valueId MS
 * extension[add].extension[role].valueId ^label = "Roles that has access to this button"
+* extension[add].extension[task].value[x] only id
+* extension[add].extension[task].valueId MS
+* extension[add].extension[task].valueId ^label = "Tasks that has access to this button"
 
 * extension[link].extension contains
       field 0..1 MS and
@@ -60,7 +64,8 @@ Description:    "iHRIS Page Display details."
       icon 0..1 MS and
       url 1..1 MS and
       class 0..1 MS and
-      role 0..* MS
+      role 0..* MS and
+      task 0..* MS
 * extension[link].extension[field].value[x] only string
 * extension[link].extension[field].valueString MS
 * extension[link].extension[field].valueString ^label = "FHIRPath for field in resource"
@@ -82,6 +87,10 @@ Description:    "iHRIS Page Display details."
 * extension[link].extension[role].value[x] only id
 * extension[link].extension[role].valueId MS
 * extension[link].extension[role].valueId ^label = "Roles that has access to this button"
+
+* extension[link].extension[task].value[x] only id
+* extension[link].extension[task].valueId MS
+* extension[link].extension[task].valueId ^label = "Tasks that has access to this button"
 
 * extension[field].extension contains
       path 1..1 MS and
@@ -158,7 +167,8 @@ Description:    "iHRIS Page Section information."
       condition 0..1 MS and
       emptyDisplay 0..1 MS and
       class 0..1 MS and
-      role 0..* MS
+      role 0..* MS and
+      task 0..* MS
 * extension[resource].extension[action].extension[link].value[x] only string
 * extension[resource].extension[action].extension[link].valueString MS
 * extension[resource].extension[action].extension[link].valueString ^label = "Action Link"
@@ -179,4 +189,7 @@ Description:    "iHRIS Page Section information."
 * extension[resource].extension[action].extension[class].valueString ^label = "Element Class for the Action"
 * extension[resource].extension[action].extension[role].value[x] only id
 * extension[resource].extension[action].extension[role].valueId MS
-* extension[resource].extension[action].extension[role].valueId ^label = "Element Class for the Role"
+* extension[resource].extension[action].extension[role].valueId ^label = "Roles that has access to the action"
+* extension[resource].extension[action].extension[task].value[x] only id
+* extension[resource].extension[action].extension[task].valueId MS
+* extension[resource].extension[action].extension[task].valueId ^label = "Tasks that has access to the action"
