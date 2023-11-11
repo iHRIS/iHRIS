@@ -24,8 +24,8 @@
     <template #header>
       {{display}}
     </template>
-    <template #value>
-      {{valueDisplay}} {{value.value}}
+    <template #value v-if="value.currency">
+      {{value.currency}} {{value.value.toLocaleString()}}
     </template>
   </ihris-element>
 </template>
