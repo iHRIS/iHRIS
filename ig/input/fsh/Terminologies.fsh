@@ -6517,7 +6517,7 @@ Description: "ISO 3166-1 establishes codes that represent the current names of c
 * ^caseSensitive = true
 * ^content = #not-present
 
-ValueSet: Iso3166-1-2
+ValueSet: Iso3166_1_2
 Id: iso3166-1-2
 Title: "Iso 3166 Part 1: 2 Letter Codes"
 Description: "This value set defines the ISO 3166 Part 1 2-letter codes"
