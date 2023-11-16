@@ -9,6 +9,11 @@ Export Functionality: Reports can be exported in multiple formats, including PDF
 
 Staff Reports:
 
+## Staff Report:
+Offers a comprehensive view of staff information, including Employee ID, Gender, Birth Date, Job Title, Employment Status, and more.
+Users can filter data using criteria such as Employee ID, Gender, Birth Date, Nationality, Job Title, etc.
+Results can be exported into an Excel spreadsheet.
+
 ## Employee Contract Report:
 Displays information related to employee contracts, including Employee ID, First Name, Job Position, Start Date, End Date, and more.
 Users can filter data using various criteria such as Employee ID, Gender, Job Position, Facility, etc.
@@ -28,14 +33,8 @@ Results can be exported into an Excel spreadsheet.
 Provides information about staff who have left, including Employee ID, Gender, Job Position, Start Date, Separation Date, and more.
 Users can filter data based on criteria such as Employee ID, Gender, Job Position, Start Date, Separation Date, etc.
 Export functionality to Excel is available.
-
-## Staff Report:
-Offers a comprehensive view of staff information, including Employee ID, Gender, Birth Date, Job Title, Employment Status, and more.
-Users can filter data using criteria such as Employee ID, Gender, Birth Date, Nationality, Job Title, etc.
-Results can be exported into an Excel spreadsheet.
-
-
 Report Navigation and Analysis:
+
 Users can navigate through pages of records, adjust the number of records displayed per page, and sort records based on column criteria.
 Export functionality allows users to export all content of a report according to applied filters.
 The Reports module provides a versatile and user-friendly interface, enabling HR professionals to extract meaningful insights from the data stored in iHRIS.

@@ -1,39 +1,36 @@
 # System Users
 
-Before adding a user into the system, first search to ensure they do not already exist. 
+The System Users module in iHRIS serves as a comprehensive tool for managing user access, permissions, and security within the system. Here's an overview of its key features:
 
-To search, type the name of the person in the “User” field and hit enter to see any results.
-
-## Add new system user
-
-1. If the user does not exist - click the purple “Add user profile” button in the top right corner of the page.
-
-2. Add information about the user, ensuring to include details for all required fields (indicated with a red asterisk).
-
-3. Finalize adding the new system user by clicking the green “Save” button in the top right corner of the page.
-
-## Updating User Details
-
-1. To update existing system users or to recover system user password, search for the system user and click on their name in the search results to open their record.
-2.  Click “Edit” in the top right corner of the page.
-  
-3. Make any changes to the record and once completed, click the green “Save” button in the top right corner of the page.
+## Search and Verification:
+Enables users to search for existing profiles before adding new users.
+Verification by typing the name of the person in the "User" field.
 
 ![Alt text](../img/search_system_user.PNG 'Search System User')
 
+## Add New System User:
+Facilitates the addition of new users into the system.
+Requires the inclusion of detailed information, with specific attention to mandatory fields.
+Finalization through the "Save" button.
 
-## Change Password
+## Update User Details:
+Allows users to modify and update existing user details.
+Editing accessed through the user's profile, with changes saved using the "Save" button.
 
-1. To change your own password, click on “Change Password” on the lefthand navigation panel.
-2. Enter your old password and the new password twice
-3. Click the “Save” button to change your password.
+## Change Password:
+Self-service password change functionality.
+Users can update their passwords by entering the old and new passwords.
 
-Note: if you have forgotten the password or user email, get in touch with iHRIS system administrator.
 
-## User Roles
+## User Roles:
+Defines roles for users, specifying their access levels and permissions.
+Roles play a crucial role in determining the tasks and functionalities accessible to each user.
+
 
 ![Alt text](../img/ihris_role.PNG 'Audit Logs')
 
-## User Role Tasks
+## User Role Tasks:
+Utilizes audit logs to track user activities and changes made within the system.
+Assigns specific tasks to users based on their roles and responsibilities
 
 ![Alt text](../img/ihris_task.PNG 'Audit Logs')
