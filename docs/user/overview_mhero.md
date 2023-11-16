@@ -10,7 +10,7 @@
 - The health worker contact information is complete and up-to-date.
 
         The essential health worker information for mHero includes:
-
+        
         - name
         - phone number
 

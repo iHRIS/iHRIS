@@ -1,6 +1,6 @@
 # Reports
 
-The report in iHRIS provides summaries of the HR data in the system related to different themes and in various display formats. In iHRIS, users can analyze and display data in both tabular and graphical. The graphical reports are mainly displayed via the iHRIS dashboard. The tabular reports empower users to access data in a summary format by choosing specific data sets, display data in specific arrangement, relating different datasets, or even generating statistics from data. The reports can be viewed in the system or exported for external use in different formats include pdf, csv, etc. Custom reports are accessed by clicking on “Reports” in the left hand navigation bar.
+The reports in iHRIS provides summaries of the HR data in the system related to different themes and in various display formats. In iHRIS, users can analyze and display data in both tabular and graphical. The graphical reports are mainly displayed via the iHRIS dashboard. The tabular reports empower users to access data in a summary format by choosing specific data sets, display data in specific arrangement, relating different datasets, or even generating statistics from data. The reports can be viewed in the system or exported for external use in different formats include pdf, csv, etc. Custom reports are accessed by clicking on “Reports” in the left hand navigation bar.
 
 ##  Staff Reports
 

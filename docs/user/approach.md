@@ -12,8 +12,6 @@ We've structured this documentation to unveil these foundational techniques and 
 
 In the upcoming sections, we'll delve into these core strategies and shed light on how they shape your experience. Together, let's unravel the magic that makes this system a seamless and intuitive platform for achieving your goals. Let's embark on this journey of understanding and mastery.
 
-
-
 ## Add a New Record
 
 Description: Adding a new record involves creating a fresh entry within iHRIS for an entity such as an employee, training program, or facility.

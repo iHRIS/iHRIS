@@ -1,6 +1,7 @@
 # Introduction
 
 !!! important "What is mHero?"
+
 mHero is acronym for mobile health worker electronic resource o
 mHero is a shared repository for facility information. The information in the repository can vary and may include:
 

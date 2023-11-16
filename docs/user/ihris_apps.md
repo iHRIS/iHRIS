@@ -58,5 +58,6 @@ Click the minus sign, select the app to be removed and click on it.
 
 
 ## iHRIS Dashboard
+This is 
 
 ## iHRIS Translator

@@ -4,7 +4,7 @@
 
 The **Integrated Human Resource Information System** (iHRIS) is a **free open-source** software a **web based computerized Human Resources management tool** consisting of electronic databases for storing, analyzing and reporting data on Human Resources for Health (HRH) for evidence-based decisions on planning, managing, budgeting and policy shift in the health sector to improve access to services.
 
-iHRIS is designed using Low/ Middle Income Countries (LMIC) use cases, highly customizable, Standards compliant, Global technical support community, Global Good, and Adheres to Digital Development Principles.
+iHRIS is designed using Low/ Middle Income Countries (LMIC) use cases, highly customizable, Standards compliant, Global technical support community, Global Good, and adheres to Digital Development Principles.
 
 iHRIS was designed with Interoperability with other systems in mind basing on OpenHIE Architecture and FHIR Compliancy at its core. It was developed so that it can work with other components of Health Information System (HIS) including OpenMRS, facility registries, DHIS2, and it is part of mHero.
 
