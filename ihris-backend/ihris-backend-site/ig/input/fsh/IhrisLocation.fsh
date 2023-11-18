@@ -87,7 +87,7 @@ Description:    "iHRIS Profile of Locations to manage facilities."
 * identifier.type.coding from IhrisFacilityIdentifierValueSet
 * identifier.type from IhrisFacilityIdentifierValueSet
 * extension contains
-        IhrisFacilityOwnership named ownership 0..1 MS and
+        IhrisFacilityOwnership named ownership 0..1 MS /*and
         IhrisFacilityInformationDetails named facilityInformationDetails 0..1 MS
 * extension[ownership].valueCoding MS
 * extension[ownership] ^label = "Ownership"
@@ -96,7 +96,7 @@ Description:    "iHRIS Profile of Locations to manage facilities."
 * extension[facilityInformationDetails].extension[stamp].valueAttachment ^label = "Facility Stamp"
 * extension[facilityInformationDetails].extension[stamp].valueAttachment MS
 * extension[facilityInformationDetails].extension[signature].valueAttachment ^label = "Facility Signature"
-* extension[facilityInformationDetails].extension[signature].valueAttachment MS
+* extension[facilityInformationDetails].extension[signature].valueAttachment MS*/
 * name 1..1 MS
 * name ^label = "Name"
 * status 1..1 MS
@@ -126,9 +126,7 @@ Title:            "Identifier Type"
 * #dhis2Id "DHIS2 ID"
 * #mfrId "MFR ID"
 
-
-
-Extension: IhrisFacilityInformationDetails
+/*Extension: IhrisFacilityInformationDetails
 Id: ihris-facility-information-details
 Title: "Ihris Facility Information Details"
 Description: "Defines the primary resource of the facility information "
@@ -146,7 +144,7 @@ Description: "Defines the primary resource of the facility information "
 * extension[stamp].valueAttachment ^label = "Facility Stamp"
 * extension[signature].value[x] only Attachment
 * extension[signature].valueAttachment 0..1 MS
-* extension[signature].valueAttachment ^label = "Facility Authority Signature"
+* extension[signature].valueAttachment ^label = "Facility Authority Signature"*/
 
 ValueSet:         IhrisFacilityOwnershipValueSet
 Id:               Ihris-facility-ownership

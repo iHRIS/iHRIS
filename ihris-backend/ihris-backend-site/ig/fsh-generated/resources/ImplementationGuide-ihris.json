@@ -132,14 +132,6 @@
       },
       {
         "reference": {
-          "reference": "StructureDefinition/ihris-job-description"
-        },
-        "name": "iHRIS Job Description",
-        "description": "iHRIS profile of Practitioner.",
-        "exampleBoolean": false
-      },
-      {
-        "reference": {
           "reference": "StructureDefinition/ihris-jurisdiction"
         },
         "name": "Jurisdiction",
@@ -336,14 +328,6 @@
       },
       {
         "reference": {
-          "reference": "StructureDefinition/ihris-facility-information-details"
-        },
-        "name": "Ihris Facility Information Details",
-        "description": "Defines the primary resource of the facility information ",
-        "exampleBoolean": false
-      },
-      {
-        "reference": {
           "reference": "StructureDefinition/ihris-facility-ownership-prefix"
         },
         "name": "iHRIS facility ownership type",
@@ -477,14 +461,6 @@
       },
       {
         "reference": {
-          "reference": "StructureDefinition/ihris-practitionerrole-job-information-remark"
-        },
-        "name": "iHRIS Job Description Job Information Remark",
-        "description": "iHRIS extension for Job Information Remark.",
-        "exampleBoolean": false
-      },
-      {
-        "reference": {
           "reference": "StructureDefinition/ihris-practitionerrole-job-type"
         },
         "name": "iHRIS Job Description Job Type",
@@ -521,14 +497,6 @@
         },
         "name": "iHRIS Salary Scale",
         "description": "iHRIS extension for Job Description Salary Scale.",
-        "exampleBoolean": false
-      },
-      {
-        "reference": {
-          "reference": "StructureDefinition/ihris-practitionerrole-shift"
-        },
-        "name": "iHRIS Job Description Shift",
-        "description": "iHRIS extension for Job Description Shift.",
         "exampleBoolean": false
       },
       {
@@ -873,14 +841,6 @@
       },
       {
         "reference": {
-          "reference": "ValueSet/ihris-job-ethiopia"
-        },
-        "name": "iHRIS Job Title Value Set",
-        "description": "iHRIS ValueSet for: iHRISJobEthiopia",
-        "exampleBoolean": false
-      },
-      {
-        "reference": {
           "reference": "ValueSet/ihris-job-type-valueset"
         },
         "name": "iHRIS Job Type ValueSet",
@@ -955,13 +915,6 @@
           "reference": "ValueSet/ihris-salary-source-valueset"
         },
         "name": "iHRIS Salary Source ValueSet",
-        "exampleBoolean": false
-      },
-      {
-        "reference": {
-          "reference": "ValueSet/ihris-shift-valueset"
-        },
-        "name": "iHRIS Shift Value Set",
         "exampleBoolean": false
       },
       {
@@ -1255,13 +1208,6 @@
       },
       {
         "reference": {
-          "reference": "CodeSystem/ihris-job-ethiopia"
-        },
-        "name": "iHRIS Job Title Code System for Ethiopia",
-        "exampleBoolean": false
-      },
-      {
-        "reference": {
           "reference": "CodeSystem/ihris-job-type-codesystem"
         },
         "name": "iHRIS Job Type CodeSystem",
@@ -1336,13 +1282,6 @@
           "reference": "CodeSystem/ihris-salary-source-codesystem"
         },
         "name": "Salary Source",
-        "exampleBoolean": false
-      },
-      {
-        "reference": {
-          "reference": "CodeSystem/ihris-shift-codesystem"
-        },
-        "name": "iHRIS Shift Code System",
         "exampleBoolean": false
       },
       {
