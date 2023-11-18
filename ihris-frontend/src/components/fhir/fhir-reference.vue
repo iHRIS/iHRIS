@@ -87,7 +87,7 @@ export default {
   name: "fhir-reference",
   props: ["field","label","sliceName","targetProfile","targetResource","min","max","base-min","base-max",
     "slotProps","path","sub-fields","edit","readOnlyIfSet","constraints", "displayType", 
-    "initialValue", "overrideValue", "displayCondition", "searchParameter"],
+    "initialValue", "overrideValue", "displayCondition", "searchParameter", "initialProfile", "pageTargetProfile"],
   components: {
     IhrisElement
   },
@@ -159,8 +159,12 @@ export default {
   },
   methods: {
     setupData: function() {
-      if ( this.targetProfile && this.targetResource ) {
-        if ( this.targetProfile.replace( fhirurl, "" ) === this.targetResource ) {
+      let targetProfile = this.targetProfile
+      if(this.pageTargetProfile) {
+        targetProfile = this.pageTargetProfile
+      }
+      if ( targetProfile && this.targetResource ) {
+        if ( targetProfile.replace( fhirurl, "" ) === this.targetResource ) {
           this.allAllowed = true
         } else {
           this.allAllowed = false
@@ -187,6 +191,41 @@ export default {
       }
       this.disabled = this.readOnlyIfSet && this.preset
     },
+    // getProfileParameter(profile) {
+    //   let searchparams = this.searchParameter.split(":")
+    //   if(!profile) {
+    //     return searchparams[0].split("[")[0]
+    //   }
+    //   for(let searchparam of searchparams) {
+    //     if(searchparam.endsWith(profile + ']')) {
+    //       return searchparam.split("[")[0]
+    //     }
+    //   }
+    // },
+    // buildSearchParams(profile) {
+    //   let treetop = this.initialValue
+    //   let searchparam = this.searchParameter
+    //   let params = {}
+    //   if ( !this.searchParameter && treetop ) {
+    //     params = { "partof": treetop }
+    //   } else if(!this.searchParameter && !treetop) {
+    //     params = { "partof:missing": true }
+    //   } else if(this.searchParameter) {
+    //     let searchparams = this.searchParameter.split(":")
+    //     if(!profile) {
+    //       let searchparam = searchparams[0]
+    //       profile = searchparam.match(/\[(.*?)\]/)
+    //       params[searchparams[0] + ":missing"] = true
+    //       if(profile) {
+    //         params["_profile"] = profile[1]
+    //       }
+    //     } else {
+    //       for(let searchparam of searchparams) {
+
+    //       }
+    //     }
+    //   }
+    // },
     setupTreeItems: async function() {
       let treetop = this.initialValue
       let searchparam = this.searchParameter
@@ -195,12 +234,21 @@ export default {
       }
       this.loading = true
       let params = {}
-      if ( treetop && searchparam ) {
-        params = { searchparam : treetop }
-      } else if ( !searchparam && treetop ) {
-        params = { "partof": treetop }
+      if(searchparam) {
+        if ( treetop ) {
+          params = { searchparam : treetop }
+        } else if(!treetop) {
+          params[searchparam + ":missing"] = true
+          if(this.initialProfile) {
+            params['_profile'] = this.initialProfile
+          }
+        }
       } else {
-        params = { "partof:missing": true }
+        if (treetop ) {
+          params = { "partof": treetop }
+        } else {
+          params = { "partof:missing": true }
+        }
       }
       params._count = 500
       let url = "/fhir/"+this.resource+"?_sort=name&"+querystring.stringify( params )
@@ -209,7 +257,13 @@ export default {
 
     },
     checkChildren: function(item) {
-      let params = { "partof": item.id, "_summary": "count" }
+      let params = {}
+      if ( this.searchParameter ) {
+        params[this.searchParameter] = item.id
+      } else {
+        params = { "partof": item.id }
+      }
+      params["_summary"] = "count"
       let url = "/fhir/"+this.resource+ "?_sort=name&"+querystring.stringify( params )
       return new Promise( resolve => {
         fetch( url ).then( response => {
@@ -237,12 +291,27 @@ export default {
       fetch( url ).then( response => {
         if ( response.ok ) {
           response.json().then( async data => {
+            let targetProfile = this.targetProfile
+            if(this.pageTargetProfile) {
+              targetProfile = this.pageTargetProfile
+            }
             if ( data.entry && data.entry.length > 0 ) {
               for( let entry of data.entry ) {
-                let locked = this.allAllowed ? false : !entry.resource.meta.profile.includes( this.targetProfile )
-                let item = { 
+                let locked = this.allAllowed ? false : !entry.resource.meta.profile.includes( targetProfile )
+                let name = entry.resource.name
+                if(this.resource === 'Basic') {
+                  name = entry.resource.extension.find((ext) => {
+                    return ext.url === 'http://ihris.org/fhir/StructureDefinition/ihris-basic-name'
+                  }).valueString
+                }
+                let profile = []
+                if(entry.resource.meta && entry.resource.meta.profile) {
+                  profile = entry.resource.meta.profile
+                }
+                let item = {
+                  profile,
                   id: entry.resource.resourceType+"/"+entry.resource.id,
-                  name: entry.resource.name,
+                  name,
                   locked: locked
                 }
                 await this.checkChildren( item )
@@ -276,7 +345,12 @@ export default {
     },
     fetchChildren: function(item) {
       let params = {}
-      params = { "partof": item.id, _count: 500 }
+      if ( this.searchParameter ) {
+        params[this.searchParameter] = item.id
+        params["_count"] = 500
+      } else {
+        params = { "partof": item.id, _count: 500 }
+      }
       let url = "/fhir/"+this.resource+"?"+querystring.stringify( params )
       this.loading = true
       this.addItems( url, item.children )
@@ -295,8 +369,12 @@ export default {
     querySelections: function( val ) {
       this.loading = true
       let params = { "name:contains": val }
-      if ( !this.targetProfile.endsWith( this.resource ) ) {
-        params._profile = this.targetProfile
+      let targetProfile = this.targetProfile
+      if(this.pageTargetProfile) {
+        targetProfile = this.pageTargetProfile
+      }
+      if ( !targetProfile.endsWith( this.resource ) ) {
+        params._profile = targetProfile
       }
       let url = "/fhir/"+this.resource+"?"+querystring.stringify( params )
       fetch( url ).then( response => {
