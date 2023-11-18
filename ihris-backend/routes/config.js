@@ -620,8 +620,8 @@ router.get('/page/:page/:type?', function (req, res) {
                             if (nconf.get("defaults:fields:" + fields[field].id + ":searchParameter")) {
                                 searchParameter = nconf.get("defaults:fields:" + fields[field].id + ":searchParameter")
                                 output += " searchParameter=\"" + searchParameter + "\""
-                                if(nconf.get("defaults:page:" + req.params.page + ":fields:" + fields[field].id + ":initalProfile")) {
-                                    let initialProfile = nconf.get("defaults:page:" + req.params.page + ":fields:" + fields[field].id + ":initalProfile")
+                                if(nconf.get("defaults:page:" + req.params.page + ":fields:" + fields[field].id + ":initialProfile")) {
+                                    let initialProfile = nconf.get("defaults:page:" + req.params.page + ":fields:" + fields[field].id + ":initialProfile")
                                     output += " initialProfile=\"" + initialProfile + "\""
                                 }
                                 if(nconf.get("defaults:page:" + req.params.page + ":fields:" + fields[field].id + ":pageTargetProfile")) {

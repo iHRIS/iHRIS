@@ -191,41 +191,6 @@ export default {
       }
       this.disabled = this.readOnlyIfSet && this.preset
     },
-    // getProfileParameter(profile) {
-    //   let searchparams = this.searchParameter.split(":")
-    //   if(!profile) {
-    //     return searchparams[0].split("[")[0]
-    //   }
-    //   for(let searchparam of searchparams) {
-    //     if(searchparam.endsWith(profile + ']')) {
-    //       return searchparam.split("[")[0]
-    //     }
-    //   }
-    // },
-    // buildSearchParams(profile) {
-    //   let treetop = this.initialValue
-    //   let searchparam = this.searchParameter
-    //   let params = {}
-    //   if ( !this.searchParameter && treetop ) {
-    //     params = { "partof": treetop }
-    //   } else if(!this.searchParameter && !treetop) {
-    //     params = { "partof:missing": true }
-    //   } else if(this.searchParameter) {
-    //     let searchparams = this.searchParameter.split(":")
-    //     if(!profile) {
-    //       let searchparam = searchparams[0]
-    //       profile = searchparam.match(/\[(.*?)\]/)
-    //       params[searchparams[0] + ":missing"] = true
-    //       if(profile) {
-    //         params["_profile"] = profile[1]
-    //       }
-    //     } else {
-    //       for(let searchparam of searchparams) {
-
-    //       }
-    //     }
-    //   }
-    // },
     setupTreeItems: async function() {
       let treetop = this.initialValue
       let searchparam = this.searchParameter
