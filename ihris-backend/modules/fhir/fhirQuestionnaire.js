@@ -346,6 +346,14 @@ const fhirQuestionnaire = {
                 }
               } else {
                 let question = questionnaireRef[item.linkId]
+                if(!question) {
+                  // could be the linkId has # i.e Basic.extension[0].extension[2]#year
+                  let ids = Object.keys(questionnaireRef)
+                  let linkId = ids.find((id) => {
+                    return id.startsWith(item.linkId + "#")
+                  })
+                  question = questionnaireRef[linkId]
+                }
 
 
                 let simple = [ "date", "string", "dateTime", "text", "attachment", "integer", "decimal", "uri", "boolean" ]
