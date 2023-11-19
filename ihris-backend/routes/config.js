@@ -620,11 +620,17 @@ router.get('/page/:page/:type?', function (req, res) {
                             if (nconf.get("defaults:fields:" + fields[field].id + ":searchParameter")) {
                                 searchParameter = nconf.get("defaults:fields:" + fields[field].id + ":searchParameter")
                                 output += " searchParameter=\"" + searchParameter + "\""
-                                if(nconf.get("defaults:page:" + req.params.page + ":fields:" + fields[field].id + ":initialProfile")) {
+                                if(nconf.get("defaults:fields:" + fields[field].id + ":initialProfile")) {
+                                    let initialProfile = nconf.get("defaults:fields:" + fields[field].id + ":initialProfile")
+                                    output += " initialProfile=\"" + initialProfile + "\""
+                                } else if(nconf.get("defaults:page:" + req.params.page + ":fields:" + fields[field].id + ":initialProfile")) {
                                     let initialProfile = nconf.get("defaults:page:" + req.params.page + ":fields:" + fields[field].id + ":initialProfile")
                                     output += " initialProfile=\"" + initialProfile + "\""
                                 }
-                                if(nconf.get("defaults:page:" + req.params.page + ":fields:" + fields[field].id + ":pageTargetProfile")) {
+                                if(nconf.get("defaults:fields:" + fields[field].id + ":pageTargetProfile")) {
+                                    let pageTargetProfile = nconf.get("defaults:fields:" + fields[field].id + ":pageTargetProfile")
+                                    output += " pageTargetProfile=\"" + pageTargetProfile + "\""
+                                } else if(nconf.get("defaults:page:" + req.params.page + ":fields:" + fields[field].id + ":pageTargetProfile")) {
                                     let pageTargetProfile = nconf.get("defaults:page:" + req.params.page + ":fields:" + fields[field].id + ":pageTargetProfile")
                                     output += " pageTargetProfile=\"" + pageTargetProfile + "\""
                                 }
@@ -1380,6 +1386,26 @@ router.get('/questionnaire/:questionnaire/:page', async function (req, res) {
                         if (!displayType) {
                             if (nconf.get("defaults:fields:" + field.id + ":type")) {
                                 displayType = nconf.get("defaults:fields:" + field.id + ":type")
+                            }
+                        }
+                        if (displayType && displayType == "tree") {
+                            if (nconf.get("defaults:fields:" + field.id + ":searchParameter")) {
+                                let searchParameter = nconf.get("defaults:fields:" + field.id + ":searchParameter")
+                                vueOutput += " searchParameter=\"" + searchParameter + "\""
+                                if(nconf.get("defaults:fields:" + field.id + ":initialProfile")) {
+                                    let initialProfile = nconf.get("defaults:fields:" + field.id + ":initialProfile")
+                                    vueOutput += " initialProfile=\"" + initialProfile + "\""
+                                } else if(nconf.get("defaults:page:" + req.params.page + ":fields:" + field.id + ":initialProfile")) {
+                                    let initialProfile = nconf.get("defaults:page:" + req.params.page + ":fields:" + field.id + ":initialProfile")
+                                    vueOutput += " initialProfile=\"" + initialProfile + "\""
+                                }
+                                if(nconf.get("defaults:fields:" + field.id + ":pageTargetProfile")) {
+                                    let pageTargetProfile = nconf.get("defaults:fields:" + field.id + ":pageTargetProfile")
+                                    vueOutput += " pageTargetProfile=\"" + pageTargetProfile + "\""
+                                } else if(nconf.get("defaults:page:" + req.params.page + ":fields:" + field.id + ":pageTargetProfile")) {
+                                    let pageTargetProfile = nconf.get("defaults:page:" + req.params.page + ":fields:" + field.id + ":pageTargetProfile")
+                                    vueOutput += " pageTargetProfile=\"" + pageTargetProfile + "\""
+                                }
                             }
                         }
 
