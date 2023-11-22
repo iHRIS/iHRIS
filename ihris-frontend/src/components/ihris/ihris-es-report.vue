@@ -310,7 +310,7 @@ export default {
                     .type === "text"
                 ) {
                   query.wildcard = {};
-                  query.wildcard[esFieldName] = tm + "*";
+                  query.wildcard[esFieldName] = "*" + tm + "*";
                 } else {
                   query.term = {};
                   query.term[esFieldName] = tm;
