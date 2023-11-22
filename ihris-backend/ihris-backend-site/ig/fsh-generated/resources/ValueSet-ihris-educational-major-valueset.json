@@ -4,9 +4,9 @@
   "name": "IhrisEducationalMajorValueSet",
   "id": "ihris-educational-major-valueset",
   "title": "iHRIS Educational Major ValueSet",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "url": "http://ihris.org/fhir/ValueSet/ihris-educational-major-valueset",
-  "date": "2020-11-11T08:41:04.362Z",
+  "date": "2022-10-29T08:41:04.362Z",
   "compose": {
     "include": [
       {

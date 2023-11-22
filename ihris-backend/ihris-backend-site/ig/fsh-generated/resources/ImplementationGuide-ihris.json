@@ -940,6 +940,14 @@
       },
       {
         "reference": {
+          "reference": "ValueSet/iso3166-1-2"
+        },
+        "name": "Iso 3166 Part 1: 2 Letter Codes",
+        "description": "This value set defines the ISO 3166 Part 1 2-letter codes",
+        "exampleBoolean": false
+      },
+      {
+        "reference": {
           "reference": "ValueSet/location-mode"
         },
         "name": "LocationMode",
@@ -1087,6 +1095,14 @@
         },
         "name": "degreeLicenseCertificate",
         "description": "Code system of concepts specifying an educational degree (e.g., MD).  Used in the CNN datatype (names and identifiers of clinicians) in Version 2 messaging.  Used in HL7 Version 2.x messaging in the CNN segment; note that in releases of HL7 prior to 2.3.1, was also used in person names (XPN), but this use was deprecated, then withdrawn in 2.7.",
+        "exampleBoolean": false
+      },
+      {
+        "reference": {
+          "reference": "CodeSystem/ISO3166Part1"
+        },
+        "name": "ISO 3166-1 Codes for the representation of names of countries and their subdivisions — Part 1: Country code",
+        "description": "ISO 3166-1 establishes codes that represent the current names of countries, dependencies, and other areas of particular geopolitical interest, on the basis of country names obtained from the United Nations.",
         "exampleBoolean": false
       },
       {

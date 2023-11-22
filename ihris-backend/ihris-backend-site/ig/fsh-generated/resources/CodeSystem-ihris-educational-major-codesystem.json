@@ -5,7 +5,7 @@
   "name": "IhrisEducationalMajorCodeSystem",
   "id": "ihris-educational-major-codesystem",
   "title": "Educational Major",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "url": "http://ihris.org/fhir/CodeSystem/ihris-educational-major-codesystem",
   "concept": [
     {
@@ -42,8 +42,76 @@
       "code": "otherHealthProfessions",
       "display": "Other Health Professions",
       "definition": "Other Health Professions"
+    },
+    {
+      "code": "MAJ|01",
+      "display": "Global Health Education"
+    },
+    {
+      "code": "MAJ|02",
+      "display": "Community Health Education"
+    },
+    {
+      "code": "MAJ|03",
+      "display": "Health Behavior"
+    },
+    {
+      "code": "MAJ|04",
+      "display": "Nutrition and Health Education"
+    },
+    {
+      "code": "MAJ|05",
+      "display": "Exercise Science and Health Promotion"
+    },
+    {
+      "code": "MAJ|06",
+      "display": "School Health Education"
+    },
+    {
+      "code": "MAJ|07",
+      "display": "Health Policy and Management"
+    },
+    {
+      "code": "MAJ|08",
+      "display": "Health and Wellness"
+    },
+    {
+      "code": "MAJ|09",
+      "display": "Health Sciences"
+    },
+    {
+      "code": "MAJ|10",
+      "display": "Health Communication"
+    },
+    {
+      "code": "MAJ|11",
+      "display": "Health Promotion"
+    },
+    {
+      "code": "MAJ|12",
+      "display": "Epidemiology"
+    },
+    {
+      "code": "MAJ|13",
+      "display": "Environmental Health Education"
+    },
+    {
+      "code": "MAJ|14",
+      "display": "Health Counseling"
+    },
+    {
+      "code": "MAJ|15",
+      "display": "Healthcare Administration"
+    },
+    {
+      "code": "MAJ|16",
+      "display": "Health Education"
+    },
+    {
+      "code": "MAJ|17",
+      "display": "Public Health Education"
     }
   ],
-  "date": "2020-11-11T08:41:04.362Z",
-  "count": 7
+  "date": "2022-10-29T08:41:04.362Z",
+  "count": 24
 }

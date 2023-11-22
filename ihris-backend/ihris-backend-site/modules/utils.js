@@ -1,23 +1,15 @@
 const express = require("express");
 const router = express.Router();
-const path = require("path");
 const { v4: uuidv4 } = require("uuid");
-const XLSX = require("xlsx");
 const ihrissmartrequire = require('ihrissmartrequire')
-const fhirAxios = ihrissmartrequire("modules/fhirAxios");
+const fhirAxios = ihrissmartrequire("modules/fhir/fhirAxios");
 const logger = require('../../winston')
 const outcomes = ihrissmartrequire('config/operationOutcomes')
-const bulkRegistration = ihrissmartrequire("bulkRegistration")
-const employeeId = ihrissmartrequire("employeeIdPrintout");
-const employeeCv = ihrissmartrequire("employeeCvPrintout");
-const fs = require("fs");
-const { nanoid } = require("nanoid");
 
 const getCodeSystem = (value, valueSet) => {
   return new Promise((resolve, reject) => {
     let valuecoding = {};
-    fhirAxios
-      .expand(valueSet, true, true)
+    fhirAxios.expand(valueSet, true, true)
       .then((expansion) => {
         try {
           valuecoding = expansion.expansion.contains.find(
@@ -275,194 +267,6 @@ const trimObjValues = (obj) => {
     return acc;
   }, {});
 };
-/*
-const setUserdata = async (req) => {
-  let usersInput = req.body;
-  const usersData = usersInput.map((obj) => trimObjValues(obj));
-  let userLocation = req.user.resource.extension.find(
-    (x) =>
-      x.url === "http://ihris.org/fhir/StructureDefinition/ihris-user-location"
-  ).valueReference.reference;
-  let data = [];
-  try {
-    if (usersData.length > 0) {
-      for (let i = 0; i < usersData.length; i++) {
-        
-        await getCodeSystem(usersData[i]["Qualification of Public Health"], "ihris-public-health-valueset")
-          .then((response) => {
-            usersData[i].qualificationCoding = response;
-          })
-          .catch((err) => {
-            console.log(err);
-            logger.error(err.message);
-          });
-        if (usersData[i]["Sex"]) {
-          await getCodeSystem(
-            usersData[i]["Sex"].charAt(0).toUpperCase() +
-              usersData[i]["Sex"].slice(1),
-            "administrative-gender"
-          )
-            .then((response) => {
-              usersData[i].genderCoding = response;
-            })
-            .catch((err) => {
-              console.log(err);
-              logger.error(err.message);
-            });
-        }
-
-        await getCodeSystem(
-          usersData[i]["Education Background"],
-          "ihris-educational-background-valueset"
-        )
-          .then((response) => {
-            usersData[i].educationalbackgroundCoding = response;
-          })
-          .catch((err) => {
-            console.log(err);
-            logger.error(err.message);
-          });
-        
-        await getCodeSystem(
-          usersData[i]["Profession"],
-          "ihris-profession-valueset"
-        )
-          .then((response) => {
-            usersData[i].professionCoding = response;
-          })
-          .catch((err) => {
-            console.log(err);
-            logger.error(err.message);
-          });
-
-        await getCodeSystem(
-          usersData[i]["Profession by PENSS"],
-          "ihris-profession-valueset"
-        )
-          .then((response) => {
-            usersData[i].professionByPENSSCoding = response;
-          })
-          .catch((err) => {
-            console.log(err);
-            logger.error(err.message);
-          });
-
-        await getCodeSystem(
-            usersData[i]["Profession by KSP"],
-            "ihris-profession-valueset"
-          ).then((response) => {
-              usersData[i].professionByKSPCoding = response;
-        }).catch((err) => {
-            console.log(err);
-            logger.error(err.message);
-        });
-
-        await getCodeSystem(
-            usersData[i]["Std KSP"],
-            "ihris-profession-valueset"
-            ).then((response) => {
-                usersData[i].stdKSPPHCMCoding = response;
-        }).catch((err) => {
-            console.log(err);
-            logger.error(err.message);
-        });
-
-        await getCodeSystem(
-            usersData[i]["Std KSP Hospital"],
-            "ihris-profession-valueset"
-        )
-        .then((response) => {
-            usersData[i].stdKSPPHCHCoding = response;
-        })
-        .catch((err) => {
-            console.log(err);
-            logger.error(err.message);
-        });
-
-        await getCodeSystem(
-            usersData[i]["Compound Allies"],
-            "ihris-profession-valueset"
-        )
-        .then((response) => {
-            usersData[i].compoundAlliesCoding = response;
-        })
-        .catch((err) => {
-            console.log(err);
-            logger.error(err.message);
-        });
-
-        await getCodeSystem(
-          usersData[i]["Special Regime  General Regime"],
-          "ihris-regime-valueset"
-        )
-          .then((response) => {
-            usersData[i].regimeCoding = response;
-          })
-          .catch((err) => {
-            console.log(err);
-            logger.error(err.message);
-          });
-
-          await getCodeSystem(
-            usersData[i]["Special Regime Grade"],
-            "ihris-regime-grade-valueset"
-          )
-            .then((response) => {
-              usersData[i].regimeGradeCoding = response;
-            })
-            .catch((err) => {
-              console.log(err);
-              logger.error(err.message);
-            });
-
-        await getCodeSystem(usersData[i]["Position"], "ihris-job-Timor")
-          .then((response) => {
-            usersData[i].positionCoding = response;
-          })
-          .catch((err) => {
-            console.log(err);
-            logger.error(err.message);
-          });
-        
-        
-        
-        if (!isEmpty(usersData[i]["Workplace"])) {
-          await getReferences(usersData[i]["Workplace"])
-            .then(async (response) => {
-              usersData[i].facilityId = response;
-              if (response !== undefined) {
-                await getRelatedLocation(response).then((data) => {
-                  usersData[i].relatedGroup = data;
-                });
-              } else {
-                await getRelatedLocation(userLocation.split("/").pop()).then(
-                  (data) => {
-                    usersData[i].relatedGroup = data;
-                  }
-                );
-              }
-            })
-            .catch((err) => {
-              console.log(err);
-              logger.error(err.message);
-            });
-        } else {
-          await getRelatedLocation(userLocation.split("/").pop()).then(
-            (data) => {
-              usersData[i].relatedGroup = data;
-            }
-          );
-        }
-        data.push(usersData[i]);
-      }
-      return data;
-    } else {
-      return "No data found";
-    }
-  } catch (e) {
-    console.log("ERROR", e);
-  }
-};*/
 
 const setUserdata = async (req) => {
   let usersInput = req.body;
@@ -481,16 +285,53 @@ const setUserdata = async (req) => {
     if (usersData.length > 0) {
       for (let i = 0; i < usersData.length; i++) {
         
-        await getCodeSystem(usersData[i]["Qualification of Public Health"], "ihris-public-health-valueset")
+        await getCodeSystem(usersData[i]["EducationLevel"], "ihris-education-level-valueset")
           .then((response) => {
-            usersData[i].qualificationCoding = response;
+            usersData[i].educationCoding = response;
           })
           .catch((err) => {
             console.log(err);
             logger.error(err.message);
           });
-        if (usersData[i]["Sex"]) {
-          await getCodeSystem(usersData[i]["Sex"].charAt(0).toUpperCase() + usersData[i]["Sex"].slice(1),"administrative-gender")
+
+          await getCodeSystem(usersData[i]["EducationMajor"], "ihris-educational-major-valueset")
+          .then((response) => {
+            usersData[i].majorCoding = response;
+          })
+          .catch((err) => {
+            console.log(err);
+            logger.error(err.message);
+          });
+
+          await getCodeSystem(usersData[i]["Emergency_contact_relation"], "ihris-relation-valueset")
+          .then((response) => {
+            usersData[i].relationCoding = response;
+          })
+          .catch((err) => {
+            console.log(err);
+            logger.error(err.message);
+          });
+          
+          await getCodeSystem(usersData[i]["ScoreAttained"], "ihris-performance-score-valueset")
+          .then((response) => {
+            usersData[i].scoreCoding = response;
+          })
+          .catch((err) => {
+            console.log(err);
+            logger.error(err.message);
+          });
+
+          await getCodeSystem(usersData[i]["LeaveType"], "ihris-leave-type-valueset")
+          .then((response) => {
+            usersData[i].leaveCoding = response;
+          })
+          .catch((err) => {
+            console.log(err);
+            logger.error(err.message);
+          });
+
+        if (usersData[i]["Gender"]) {
+          await getCodeSystem(usersData[i]["Gender"].charAt(0).toUpperCase() + usersData[i]["Gender"].slice(1),"administrative-gender")
             .then((response) => {
               usersData[i].genderCoding = response;
             })
@@ -500,95 +341,53 @@ const setUserdata = async (req) => {
             });
         }
 
-        await getCodeSystem(usersData[i]["Education Background"],"ihris-educational-background-valueset")
+        await getCodeSystem(usersData[i]["Nationality"],"iso3166-1-2")
           .then((response) => {
-            usersData[i].educationalbackgroundCoding = response;
+            usersData[i].nationalityCoding = response;
+          })
+          .catch((err) => {
+            console.log(err);
+            logger.error(err.message);
+          });
+  
+        await getCodeSystem(usersData[i]["JobTitle"], "ihris-job-demo")
+          .then((response) => {
+            usersData[i].jobCoding = response;
+          })
+          .catch((err) => {
+            console.log(err);
+            logger.error(err.message);
+          });
+
+          await getCodeSystem(usersData[i]["EmploymentTerms"], "ihris-employment-status-valueset")
+          .then((response) => {
+            usersData[i].employmentCoding = response;
+          })
+          .catch((err) => {
+            console.log(err);
+            logger.error(err.message);
+          });
+
+          await getCodeSystem(usersData[i]["PayGrade"], "ihris-salary-grade")
+          .then((response) => {
+            usersData[i].gradeCoding = response;
           })
           .catch((err) => {
             console.log(err);
             logger.error(err.message);
           });
         
-        await getCodeSystem(usersData[i]["Profession"],"ihris-profession-valueset")
-          .then((response) => {
-            usersData[i].professionCoding = response;
-          })
-          .catch((err) => {
-            console.log(err);
-            logger.error(err.message);
-          });
-
-        await getCodeSystem(usersData[i]["Profession by PENSS"],"ihris-profession-valueset")
-          .then((response) => {
-            usersData[i].professionByPENSSCoding = response;
-          })
-          .catch((err) => {
-            console.log(err);
-            logger.error(err.message);
-          });
-
-        await getCodeSystem(usersData[i]["Profession by KSP"],"ihris-profession-valueset").then((response) => {
-              usersData[i].professionByKSPCoding = response;
-        }).catch((err) => {
-            console.log(err);
-            logger.error(err.message);
-        });
-
-        await getCodeSystem(usersData[i]["Std KSP Municipality"],"ihris-profession-valueset").then((response) => {
-                usersData[i].stdKSPPHCMCoding = response;
-        }).catch((err) => {
-            console.log(err);
-            logger.error(err.message);
-        });
-
-        await getCodeSystem(usersData[i]["Std KSP Hospital"],"ihris-profession-valueset")
-        .then((response) => {
-            usersData[i].stdKSPPHCHCoding = response;
-        })
-        .catch((err) => {
-            console.log(err);
-            logger.error(err.message);
-        });
-
-        await getCodeSystem(usersData[i]["Compound Allies"],"ihris-profession-valueset")
-        .then((response) => {
-            usersData[i].compoundAlliesCoding = response;
-        })
-        .catch((err) => {
-            console.log(err);
-            logger.error(err.message);
-        });
-
-        await getCodeSystem(usersData[i]["Special Regime  General Regime"],"ihris-regime-valueset")
-          .then((response) => {
-            usersData[i].regimeCoding = response;
-          })
-          .catch((err) => {
-            console.log(err);
-            logger.error(err.message);
-          });
-
-        await getCodeSystem(usersData[i]["Regime Grade"], "ihris-regime-grade-valueset")
-            .then((response) => {
-              usersData[i].regimeGradeCoding = response;
-            })
-            .catch((err) => {
-              console.log(err);
-              logger.error(err.message);
-            });
-
-        await getCodeSystem(usersData[i]["Position"], "ihris-job-timor")
-          .then((response) => {
-            usersData[i].positionCoding = response;
-          })
-          .catch((err) => {
-            console.log(err);
-            logger.error(err.message);
-          });
+          await getReferences("Location",usersData[i]["Nationality"])
+              .then(async (response) => {
+                  usersData[i].nationalityId = response;
+              })
+              .catch((err) => {
+                console.log(err);
+                logger.error(err.message);
+              });
         
-
-        if ((usersData[i]["Workplace"] != null)) {
-          await getReferences("Location",usersData[i]["Workplace"])
+        if ((usersData[i]["FacilityName"] != null)) {
+          await getReferences("Location",usersData[i]["FacilityName"])
             .then(async (response) => {
               usersData[i].facilityId = response;
               if (response !== undefined) {
