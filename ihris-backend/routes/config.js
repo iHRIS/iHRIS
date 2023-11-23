@@ -406,10 +406,13 @@ router.get('/page/:page/:type?', function (req, res) {
                                     let hasTask
                                     for(let task of tasks) {
                                         await fhirAxios.read("Basic", task.valueId).then((taskResource) => {
-                                            let taskName = taskResource?.extension?.find((ext) => {
-                                                return ext.url === 'http://ihris.org/fhir/StructureDefinition/ihris-basic-name'
-                                            })?.valueString
-                                            if(req.user?.permissions?.special?.section?.id[taskName]) {
+                                            let taskAttributes = taskResource?.extension?.find((ext) => {
+                                                return ext.url === 'http://ihris.org/fhir/StructureDefinition/task-attributes'
+                                            })
+                                            let taskName = taskAttributes?.extension?.find((ext) => {
+                                                return ext.url === 'instance'
+                                            })?.valueId
+                                            if(req.user?.permissions?.special?.special?.id[taskName] || req.user?.permissions?.special?.section?.id[taskName]) {
                                                 hasTask = true
                                             }
                                         })
