@@ -37,15 +37,15 @@
         {
           "code": "classification",
           "valueCoding": {
-            "code": "non-health",
-            "system": "http://ihris.org/fhir/CodeSystem/ihris-classification"
+            "system": "http://ihris.org/fhir/CodeSystem/ihris-classification",
+            "code": "non-health"
           }
         },
         {
           "code": "salary-grade",
           "valueCoding": {
-            "code": "entry-level",
-            "system": "http://ihris.org/fhir/CodeSystem/ihris-salary-grade"
+            "system": "http://ihris.org/fhir/CodeSystem/ihris-salary-grade",
+            "code": "entry-level"
           }
         }
       ]
@@ -58,15 +58,15 @@
         {
           "code": "cadre",
           "valueCoding": {
-            "code": "doctor",
-            "system": "http://ihris.org/fhir/CodeSystem/ihris-classification"
+            "system": "http://ihris.org/fhir/CodeSystem/ihris-classification",
+            "code": "doctor"
           }
         },
         {
           "code": "classification",
           "valueCoding": {
-            "code": "doctor",
-            "system": "http://ihris.org/fhir/CodeSystem/ihris-salary-grade"
+            "system": "http://ihris.org/fhir/CodeSystem/ihris-salary-grade",
+            "code": "doctor"
           }
         },
         {
@@ -86,22 +86,22 @@
         {
           "code": "cadre",
           "valueCoding": {
-            "code": "doctor",
-            "system": "http://ihris.org/fhir/CodeSystem/ihris-classification"
+            "system": "http://ihris.org/fhir/CodeSystem/ihris-classification",
+            "code": "doctor"
           }
         },
         {
           "code": "classification",
           "valueCoding": {
-            "code": "doctor",
-            "system": "http://ihris.org/fhir/CodeSystem/ihris-salary-grade"
+            "system": "http://ihris.org/fhir/CodeSystem/ihris-salary-grade",
+            "code": "doctor"
           }
         },
         {
           "code": "salary-grade",
           "valueCoding": {
-            "code": "director",
-            "system": "http://ihris.org/fhir/CodeSystem/ihris-salary-grade"
+            "system": "http://ihris.org/fhir/CodeSystem/ihris-salary-grade",
+            "code": "director"
           }
         }
       ]
@@ -114,22 +114,22 @@
         {
           "code": "cadre",
           "valueCoding": {
-            "code": "doctor",
-            "system": "http://ihris.org/fhir/CodeSystem/ihris-classification"
+            "system": "http://ihris.org/fhir/CodeSystem/ihris-classification",
+            "code": "doctor"
           }
         },
         {
           "code": "classification",
           "valueCoding": {
-            "code": "doctor",
-            "system": "http://ihris.org/fhir/CodeSystem/ihris-salary-grade"
+            "system": "http://ihris.org/fhir/CodeSystem/ihris-salary-grade",
+            "code": "doctor"
           }
         },
         {
           "code": "salary-grade",
           "valueCoding": {
-            "code": "director",
-            "system": "http://ihris.org/fhir/CodeSystem/ihris-salary-grade"
+            "system": "http://ihris.org/fhir/CodeSystem/ihris-salary-grade",
+            "code": "director"
           }
         }
       ]
@@ -142,22 +142,22 @@
         {
           "code": "cadre",
           "valueCoding": {
-            "code": "doctor",
-            "system": "http://ihris.org/fhir/CodeSystem/ihris-classification"
+            "system": "http://ihris.org/fhir/CodeSystem/ihris-classification",
+            "code": "doctor"
           }
         },
         {
           "code": "classification",
           "valueCoding": {
-            "code": "doctor",
-            "system": "http://ihris.org/fhir/CodeSystem/ihris-salary-grade"
+            "system": "http://ihris.org/fhir/CodeSystem/ihris-salary-grade",
+            "code": "doctor"
           }
         },
         {
           "code": "salary-grade",
           "valueCoding": {
-            "code": "director",
-            "system": "http://ihris.org/fhir/CodeSystem/ihris-salary-grade"
+            "system": "http://ihris.org/fhir/CodeSystem/ihris-salary-grade",
+            "code": "director"
           }
         }
       ]
@@ -170,22 +170,22 @@
         {
           "code": "cadre",
           "valueCoding": {
-            "code": "doctor",
-            "system": "http://ihris.org/fhir/CodeSystem/ihris-classification"
+            "system": "http://ihris.org/fhir/CodeSystem/ihris-classification",
+            "code": "doctor"
           }
         },
         {
           "code": "classification",
           "valueCoding": {
-            "code": "doctor",
-            "system": "http://ihris.org/fhir/CodeSystem/ihris-salary-grade"
+            "system": "http://ihris.org/fhir/CodeSystem/ihris-salary-grade",
+            "code": "doctor"
           }
         },
         {
           "code": "salary-grade",
           "valueCoding": {
-            "code": "director",
-            "system": "http://ihris.org/fhir/CodeSystem/ihris-salary-grade"
+            "system": "http://ihris.org/fhir/CodeSystem/ihris-salary-grade",
+            "code": "director"
           }
         }
       ]
@@ -198,22 +198,22 @@
         {
           "code": "cadre",
           "valueCoding": {
-            "code": "allied-health",
-            "system": "http://ihris.org/fhir/CodeSystem/ihris-classification"
+            "system": "http://ihris.org/fhir/CodeSystem/ihris-classification",
+            "code": "allied-health"
           }
         },
         {
           "code": "classification",
           "valueCoding": {
-            "code": "allied-health",
-            "system": "http://ihris.org/fhir/CodeSystem/ihris-salary-grade"
+            "system": "http://ihris.org/fhir/CodeSystem/ihris-salary-grade",
+            "code": "allied-health"
           }
         },
         {
           "code": "salary-grade",
           "valueCoding": {
-            "code": "director",
-            "system": "http://ihris.org/fhir/CodeSystem/ihris-salary-grade"
+            "system": "http://ihris.org/fhir/CodeSystem/ihris-salary-grade",
+            "code": "director"
           }
         }
       ]
@@ -226,22 +226,22 @@
         {
           "code": "cadre",
           "valueCoding": {
-            "code": "allied-health",
-            "system": "http://ihris.org/fhir/CodeSystem/ihris-classification"
+            "system": "http://ihris.org/fhir/CodeSystem/ihris-classification",
+            "code": "allied-health"
           }
         },
         {
           "code": "classification",
           "valueCoding": {
-            "code": "allied-health",
-            "system": "http://ihris.org/fhir/CodeSystem/ihris-salary-grade"
+            "system": "http://ihris.org/fhir/CodeSystem/ihris-salary-grade",
+            "code": "allied-health"
           }
         },
         {
           "code": "salary-grade",
           "valueCoding": {
-            "code": "director",
-            "system": "http://ihris.org/fhir/CodeSystem/ihris-salary-grade"
+            "system": "http://ihris.org/fhir/CodeSystem/ihris-salary-grade",
+            "code": "director"
           }
         }
       ]
@@ -254,22 +254,22 @@
         {
           "code": "cadre",
           "valueCoding": {
-            "code": "allied-health",
-            "system": "http://ihris.org/fhir/CodeSystem/ihris-classification"
+            "system": "http://ihris.org/fhir/CodeSystem/ihris-classification",
+            "code": "allied-health"
           }
         },
         {
           "code": "classification",
           "valueCoding": {
-            "code": "allied-health",
-            "system": "http://ihris.org/fhir/CodeSystem/ihris-salary-grade"
+            "system": "http://ihris.org/fhir/CodeSystem/ihris-salary-grade",
+            "code": "allied-health"
           }
         },
         {
           "code": "salary-grade",
           "valueCoding": {
-            "code": "prof-mid-level",
-            "system": "http://ihris.org/fhir/CodeSystem/ihris-salary-grade"
+            "system": "http://ihris.org/fhir/CodeSystem/ihris-salary-grade",
+            "code": "prof-mid-level"
           }
         }
       ]
@@ -282,22 +282,22 @@
         {
           "code": "cadre",
           "valueCoding": {
-            "code": "nurse",
-            "system": "http://ihris.org/fhir/CodeSystem/ihris-classification"
+            "system": "http://ihris.org/fhir/CodeSystem/ihris-classification",
+            "code": "nurse"
           }
         },
         {
           "code": "classification",
           "valueCoding": {
-            "code": "nurse",
-            "system": "http://ihris.org/fhir/CodeSystem/ihris-salary-grade"
+            "system": "http://ihris.org/fhir/CodeSystem/ihris-salary-grade",
+            "code": "nurse"
           }
         },
         {
           "code": "salary-grade",
           "valueCoding": {
-            "code": "prof-entry-level",
-            "system": "http://ihris.org/fhir/CodeSystem/ihris-salary-grade"
+            "system": "http://ihris.org/fhir/CodeSystem/ihris-salary-grade",
+            "code": "prof-entry-level"
           }
         }
       ]
@@ -310,22 +310,22 @@
         {
           "code": "cadre",
           "valueCoding": {
-            "code": "nurse",
-            "system": "http://ihris.org/fhir/CodeSystem/ihris-classification"
+            "system": "http://ihris.org/fhir/CodeSystem/ihris-classification",
+            "code": "nurse"
           }
         },
         {
           "code": "classification",
           "valueCoding": {
-            "code": "nurse",
-            "system": "http://ihris.org/fhir/CodeSystem/ihris-salary-grade"
+            "system": "http://ihris.org/fhir/CodeSystem/ihris-salary-grade",
+            "code": "nurse"
           }
         },
         {
           "code": "salary-grade",
           "valueCoding": {
-            "code": "prof-mid-level",
-            "system": "http://ihris.org/fhir/CodeSystem/ihris-salary-grade"
+            "system": "http://ihris.org/fhir/CodeSystem/ihris-salary-grade",
+            "code": "prof-mid-level"
           }
         }
       ]
@@ -338,22 +338,22 @@
         {
           "code": "cadre",
           "valueCoding": {
-            "code": "nurse",
-            "system": "http://ihris.org/fhir/CodeSystem/ihris-classification"
+            "system": "http://ihris.org/fhir/CodeSystem/ihris-classification",
+            "code": "nurse"
           }
         },
         {
           "code": "classification",
           "valueCoding": {
-            "code": "nurse",
-            "system": "http://ihris.org/fhir/CodeSystem/ihris-salary-grade"
+            "system": "http://ihris.org/fhir/CodeSystem/ihris-salary-grade",
+            "code": "nurse"
           }
         },
         {
           "code": "salary-grade",
           "valueCoding": {
-            "code": "director",
-            "system": "http://ihris.org/fhir/CodeSystem/ihris-salary-grade"
+            "system": "http://ihris.org/fhir/CodeSystem/ihris-salary-grade",
+            "code": "director"
           }
         }
       ]
@@ -366,22 +366,22 @@
         {
           "code": "cadre",
           "valueCoding": {
-            "code": "nurse",
-            "system": "http://ihris.org/fhir/CodeSystem/ihris-classification"
+            "system": "http://ihris.org/fhir/CodeSystem/ihris-classification",
+            "code": "nurse"
           }
         },
         {
           "code": "classification",
           "valueCoding": {
-            "code": "nurse",
-            "system": "http://ihris.org/fhir/CodeSystem/ihris-salary-grade"
+            "system": "http://ihris.org/fhir/CodeSystem/ihris-salary-grade",
+            "code": "nurse"
           }
         },
         {
           "code": "salary-grade",
           "valueCoding": {
-            "code": "prof-entry-level",
-            "system": "http://ihris.org/fhir/CodeSystem/ihris-salary-grade"
+            "system": "http://ihris.org/fhir/CodeSystem/ihris-salary-grade",
+            "code": "prof-entry-level"
           }
         }
       ]
@@ -394,15 +394,15 @@
         {
           "code": "classification",
           "valueCoding": {
-            "code": "non-health",
-            "system": "http://ihris.org/fhir/CodeSystem/ihris-classification"
+            "system": "http://ihris.org/fhir/CodeSystem/ihris-classification",
+            "code": "non-health"
           }
         },
         {
           "code": "salary-grade",
           "valueCoding": {
-            "code": "prof-entry-level",
-            "system": "http://ihris.org/fhir/CodeSystem/ihris-salary-grade"
+            "system": "http://ihris.org/fhir/CodeSystem/ihris-salary-grade",
+            "code": "prof-entry-level"
           }
         }
       ]
@@ -415,22 +415,22 @@
         {
           "code": "cadre",
           "valueCoding": {
-            "code": "allied-health",
-            "system": "http://ihris.org/fhir/CodeSystem/ihris-classification"
+            "system": "http://ihris.org/fhir/CodeSystem/ihris-classification",
+            "code": "allied-health"
           }
         },
         {
           "code": "classification",
           "valueCoding": {
-            "code": "allied-health",
-            "system": "http://ihris.org/fhir/CodeSystem/ihris-salary-grade"
+            "system": "http://ihris.org/fhir/CodeSystem/ihris-salary-grade",
+            "code": "allied-health"
           }
         },
         {
           "code": "salary-grade",
           "valueCoding": {
-            "code": "prof-entry-level",
-            "system": "http://ihris.org/fhir/CodeSystem/ihris-salary-grade"
+            "system": "http://ihris.org/fhir/CodeSystem/ihris-salary-grade",
+            "code": "prof-entry-level"
           }
         }
       ]
@@ -442,15 +442,15 @@
         {
           "code": "classification",
           "valueCoding": {
-            "code": "non-health",
-            "system": "http://ihris.org/fhir/CodeSystem/ihris-classification"
+            "system": "http://ihris.org/fhir/CodeSystem/ihris-classification",
+            "code": "non-health"
           }
         },
         {
           "code": "salary-grade",
           "valueCoding": {
-            "code": "prof-entry-level",
-            "system": "http://ihris.org/fhir/CodeSystem/ihris-salary-grade"
+            "system": "http://ihris.org/fhir/CodeSystem/ihris-salary-grade",
+            "code": "prof-entry-level"
           }
         }
       ]
@@ -463,22 +463,22 @@
         {
           "code": "cadre",
           "valueCoding": {
-            "code": "allied-health",
-            "system": "http://ihris.org/fhir/CodeSystem/ihris-classification"
+            "system": "http://ihris.org/fhir/CodeSystem/ihris-classification",
+            "code": "allied-health"
           }
         },
         {
           "code": "classification",
           "valueCoding": {
-            "code": "allied-health",
-            "system": "http://ihris.org/fhir/CodeSystem/ihris-salary-grade"
+            "system": "http://ihris.org/fhir/CodeSystem/ihris-salary-grade",
+            "code": "allied-health"
           }
         },
         {
           "code": "salary-grade",
           "valueCoding": {
-            "code": "prof-mid-level",
-            "system": "http://ihris.org/fhir/CodeSystem/ihris-salary-grade"
+            "system": "http://ihris.org/fhir/CodeSystem/ihris-salary-grade",
+            "code": "prof-mid-level"
           }
         }
       ]
@@ -491,22 +491,22 @@
         {
           "code": "cadre",
           "valueCoding": {
-            "code": "allied-health",
-            "system": "http://ihris.org/fhir/CodeSystem/ihris-classification"
+            "system": "http://ihris.org/fhir/CodeSystem/ihris-classification",
+            "code": "allied-health"
           }
         },
         {
           "code": "classification",
           "valueCoding": {
-            "code": "allied-health",
-            "system": "http://ihris.org/fhir/CodeSystem/ihris-salary-grade"
+            "system": "http://ihris.org/fhir/CodeSystem/ihris-salary-grade",
+            "code": "allied-health"
           }
         },
         {
           "code": "salary-grade",
           "valueCoding": {
-            "code": "prof-mid-level",
-            "system": "http://ihris.org/fhir/CodeSystem/ihris-salary-grade"
+            "system": "http://ihris.org/fhir/CodeSystem/ihris-salary-grade",
+            "code": "prof-mid-level"
           }
         }
       ]
@@ -519,22 +519,22 @@
         {
           "code": "cadre",
           "valueCoding": {
-            "code": "allied-health",
-            "system": "http://ihris.org/fhir/CodeSystem/ihris-classification"
+            "system": "http://ihris.org/fhir/CodeSystem/ihris-classification",
+            "code": "allied-health"
           }
         },
         {
           "code": "classification",
           "valueCoding": {
-            "code": "allied-health",
-            "system": "http://ihris.org/fhir/CodeSystem/ihris-salary-grade"
+            "system": "http://ihris.org/fhir/CodeSystem/ihris-salary-grade",
+            "code": "allied-health"
           }
         },
         {
           "code": "salary-grade",
           "valueCoding": {
-            "code": "entry-level",
-            "system": "http://ihris.org/fhir/CodeSystem/ihris-salary-grade"
+            "system": "http://ihris.org/fhir/CodeSystem/ihris-salary-grade",
+            "code": "entry-level"
           }
         }
       ]
@@ -547,22 +547,22 @@
         {
           "code": "cadre",
           "valueCoding": {
-            "code": "allied-health",
-            "system": "http://ihris.org/fhir/CodeSystem/ihris-classification"
+            "system": "http://ihris.org/fhir/CodeSystem/ihris-classification",
+            "code": "allied-health"
           }
         },
         {
           "code": "classification",
           "valueCoding": {
-            "code": "allied-health",
-            "system": "http://ihris.org/fhir/CodeSystem/ihris-salary-grade"
+            "system": "http://ihris.org/fhir/CodeSystem/ihris-salary-grade",
+            "code": "allied-health"
           }
         },
         {
           "code": "salary-grade",
           "valueCoding": {
-            "code": "prof-mid-level",
-            "system": "http://ihris.org/fhir/CodeSystem/ihris-salary-grade"
+            "system": "http://ihris.org/fhir/CodeSystem/ihris-salary-grade",
+            "code": "prof-mid-level"
           }
         }
       ]
@@ -575,22 +575,22 @@
         {
           "code": "cadre",
           "valueCoding": {
-            "code": "allied-health",
-            "system": "http://ihris.org/fhir/CodeSystem/ihris-classification"
+            "system": "http://ihris.org/fhir/CodeSystem/ihris-classification",
+            "code": "allied-health"
           }
         },
         {
           "code": "classification",
           "valueCoding": {
-            "code": "allied-health",
-            "system": "http://ihris.org/fhir/CodeSystem/ihris-salary-grade"
+            "system": "http://ihris.org/fhir/CodeSystem/ihris-salary-grade",
+            "code": "allied-health"
           }
         },
         {
           "code": "salary-grade",
           "valueCoding": {
-            "code": "entry-level",
-            "system": "http://ihris.org/fhir/CodeSystem/ihris-salary-grade"
+            "system": "http://ihris.org/fhir/CodeSystem/ihris-salary-grade",
+            "code": "entry-level"
           }
         }
       ]
@@ -603,22 +603,22 @@
         {
           "code": "cadre",
           "valueCoding": {
-            "code": "allied-health",
-            "system": "http://ihris.org/fhir/CodeSystem/ihris-classification"
+            "system": "http://ihris.org/fhir/CodeSystem/ihris-classification",
+            "code": "allied-health"
           }
         },
         {
           "code": "classification",
           "valueCoding": {
-            "code": "allied-health",
-            "system": "http://ihris.org/fhir/CodeSystem/ihris-salary-grade"
+            "system": "http://ihris.org/fhir/CodeSystem/ihris-salary-grade",
+            "code": "allied-health"
           }
         },
         {
           "code": "salary-grade",
           "valueCoding": {
-            "code": "prof-entry-level",
-            "system": "http://ihris.org/fhir/CodeSystem/ihris-salary-grade"
+            "system": "http://ihris.org/fhir/CodeSystem/ihris-salary-grade",
+            "code": "prof-entry-level"
           }
         }
       ]
@@ -631,22 +631,22 @@
         {
           "code": "cadre",
           "valueCoding": {
-            "code": "allied-health",
-            "system": "http://ihris.org/fhir/CodeSystem/ihris-classification"
+            "system": "http://ihris.org/fhir/CodeSystem/ihris-classification",
+            "code": "allied-health"
           }
         },
         {
           "code": "classification",
           "valueCoding": {
-            "code": "allied-health",
-            "system": "http://ihris.org/fhir/CodeSystem/ihris-salary-grade"
+            "system": "http://ihris.org/fhir/CodeSystem/ihris-salary-grade",
+            "code": "allied-health"
           }
         },
         {
           "code": "salary-grade",
           "valueCoding": {
-            "code": "prof-entry-level",
-            "system": "http://ihris.org/fhir/CodeSystem/ihris-salary-grade"
+            "system": "http://ihris.org/fhir/CodeSystem/ihris-salary-grade",
+            "code": "prof-entry-level"
           }
         }
       ]
@@ -659,22 +659,22 @@
         {
           "code": "cadre",
           "valueCoding": {
-            "code": "allied-health",
-            "system": "http://ihris.org/fhir/CodeSystem/ihris-classification"
+            "system": "http://ihris.org/fhir/CodeSystem/ihris-classification",
+            "code": "allied-health"
           }
         },
         {
           "code": "classification",
           "valueCoding": {
-            "code": "allied-health",
-            "system": "http://ihris.org/fhir/CodeSystem/ihris-salary-grade"
+            "system": "http://ihris.org/fhir/CodeSystem/ihris-salary-grade",
+            "code": "allied-health"
           }
         },
         {
           "code": "salary-grade",
           "valueCoding": {
-            "code": "prof-mid-level",
-            "system": "http://ihris.org/fhir/CodeSystem/ihris-salary-grade"
+            "system": "http://ihris.org/fhir/CodeSystem/ihris-salary-grade",
+            "code": "prof-mid-level"
           }
         }
       ]
@@ -687,22 +687,22 @@
         {
           "code": "cadre",
           "valueCoding": {
-            "code": "allied-health",
-            "system": "http://ihris.org/fhir/CodeSystem/ihris-classification"
+            "system": "http://ihris.org/fhir/CodeSystem/ihris-classification",
+            "code": "allied-health"
           }
         },
         {
           "code": "classification",
           "valueCoding": {
-            "code": "allied-health",
-            "system": "http://ihris.org/fhir/CodeSystem/ihris-salary-grade"
+            "system": "http://ihris.org/fhir/CodeSystem/ihris-salary-grade",
+            "code": "allied-health"
           }
         },
         {
           "code": "salary-grade",
           "valueCoding": {
-            "code": "prof-entry-level",
-            "system": "http://ihris.org/fhir/CodeSystem/ihris-salary-grade"
+            "system": "http://ihris.org/fhir/CodeSystem/ihris-salary-grade",
+            "code": "prof-entry-level"
           }
         }
       ]
@@ -715,22 +715,22 @@
         {
           "code": "cadre",
           "valueCoding": {
-            "code": "allied-health",
-            "system": "http://ihris.org/fhir/CodeSystem/ihris-classification"
+            "system": "http://ihris.org/fhir/CodeSystem/ihris-classification",
+            "code": "allied-health"
           }
         },
         {
           "code": "classification",
           "valueCoding": {
-            "code": "allied-health",
-            "system": "http://ihris.org/fhir/CodeSystem/ihris-salary-grade"
+            "system": "http://ihris.org/fhir/CodeSystem/ihris-salary-grade",
+            "code": "allied-health"
           }
         },
         {
           "code": "salary-grade",
           "valueCoding": {
-            "code": "entry-level",
-            "system": "http://ihris.org/fhir/CodeSystem/ihris-salary-grade"
+            "system": "http://ihris.org/fhir/CodeSystem/ihris-salary-grade",
+            "code": "entry-level"
           }
         }
       ]
@@ -743,22 +743,22 @@
         {
           "code": "cadre",
           "valueCoding": {
-            "code": "allied-health",
-            "system": "http://ihris.org/fhir/CodeSystem/ihris-classification"
+            "system": "http://ihris.org/fhir/CodeSystem/ihris-classification",
+            "code": "allied-health"
           }
         },
         {
           "code": "classification",
           "valueCoding": {
-            "code": "allied-health",
-            "system": "http://ihris.org/fhir/CodeSystem/ihris-salary-grade"
+            "system": "http://ihris.org/fhir/CodeSystem/ihris-salary-grade",
+            "code": "allied-health"
           }
         },
         {
           "code": "salary-grade",
           "valueCoding": {
-            "code": "prof-entry-level",
-            "system": "http://ihris.org/fhir/CodeSystem/ihris-salary-grade"
+            "system": "http://ihris.org/fhir/CodeSystem/ihris-salary-grade",
+            "code": "prof-entry-level"
           }
         }
       ]
@@ -771,22 +771,22 @@
         {
           "code": "cadre",
           "valueCoding": {
-            "code": "allied-health",
-            "system": "http://ihris.org/fhir/CodeSystem/ihris-classification"
+            "system": "http://ihris.org/fhir/CodeSystem/ihris-classification",
+            "code": "allied-health"
           }
         },
         {
           "code": "classification",
           "valueCoding": {
-            "code": "allied-health",
-            "system": "http://ihris.org/fhir/CodeSystem/ihris-salary-grade"
+            "system": "http://ihris.org/fhir/CodeSystem/ihris-salary-grade",
+            "code": "allied-health"
           }
         },
         {
           "code": "salary-grade",
           "valueCoding": {
-            "code": "prof-entry-level",
-            "system": "http://ihris.org/fhir/CodeSystem/ihris-salary-grade"
+            "system": "http://ihris.org/fhir/CodeSystem/ihris-salary-grade",
+            "code": "prof-entry-level"
           }
         }
       ]
@@ -799,22 +799,22 @@
         {
           "code": "cadre",
           "valueCoding": {
-            "code": "allied-health",
-            "system": "http://ihris.org/fhir/CodeSystem/ihris-classification"
+            "system": "http://ihris.org/fhir/CodeSystem/ihris-classification",
+            "code": "allied-health"
           }
         },
         {
           "code": "classification",
           "valueCoding": {
-            "code": "allied-health",
-            "system": "http://ihris.org/fhir/CodeSystem/ihris-salary-grade"
+            "system": "http://ihris.org/fhir/CodeSystem/ihris-salary-grade",
+            "code": "allied-health"
           }
         },
         {
           "code": "salary-grade",
           "valueCoding": {
-            "code": "prof-mid-level",
-            "system": "http://ihris.org/fhir/CodeSystem/ihris-salary-grade"
+            "system": "http://ihris.org/fhir/CodeSystem/ihris-salary-grade",
+            "code": "prof-mid-level"
           }
         }
       ]
@@ -827,22 +827,22 @@
         {
           "code": "cadre",
           "valueCoding": {
-            "code": "allied-health",
-            "system": "http://ihris.org/fhir/CodeSystem/ihris-classification"
+            "system": "http://ihris.org/fhir/CodeSystem/ihris-classification",
+            "code": "allied-health"
           }
         },
         {
           "code": "classification",
           "valueCoding": {
-            "code": "allied-health",
-            "system": "http://ihris.org/fhir/CodeSystem/ihris-salary-grade"
+            "system": "http://ihris.org/fhir/CodeSystem/ihris-salary-grade",
+            "code": "allied-health"
           }
         },
         {
           "code": "salary-grade",
           "valueCoding": {
-            "code": "entry-level",
-            "system": "http://ihris.org/fhir/CodeSystem/ihris-salary-grade"
+            "system": "http://ihris.org/fhir/CodeSystem/ihris-salary-grade",
+            "code": "entry-level"
           }
         }
       ]
@@ -855,22 +855,22 @@
         {
           "code": "cadre",
           "valueCoding": {
-            "code": "allied-health",
-            "system": "http://ihris.org/fhir/CodeSystem/ihris-classification"
+            "system": "http://ihris.org/fhir/CodeSystem/ihris-classification",
+            "code": "allied-health"
           }
         },
         {
           "code": "classification",
           "valueCoding": {
-            "code": "allied-health",
-            "system": "http://ihris.org/fhir/CodeSystem/ihris-salary-grade"
+            "system": "http://ihris.org/fhir/CodeSystem/ihris-salary-grade",
+            "code": "allied-health"
           }
         },
         {
           "code": "salary-grade",
           "valueCoding": {
-            "code": "prof-entry-level",
-            "system": "http://ihris.org/fhir/CodeSystem/ihris-salary-grade"
+            "system": "http://ihris.org/fhir/CodeSystem/ihris-salary-grade",
+            "code": "prof-entry-level"
           }
         }
       ]
@@ -883,22 +883,22 @@
         {
           "code": "cadre",
           "valueCoding": {
-            "code": "allied-health",
-            "system": "http://ihris.org/fhir/CodeSystem/ihris-classification"
+            "system": "http://ihris.org/fhir/CodeSystem/ihris-classification",
+            "code": "allied-health"
           }
         },
         {
           "code": "classification",
           "valueCoding": {
-            "code": "allied-health",
-            "system": "http://ihris.org/fhir/CodeSystem/ihris-salary-grade"
+            "system": "http://ihris.org/fhir/CodeSystem/ihris-salary-grade",
+            "code": "allied-health"
           }
         },
         {
           "code": "salary-grade",
           "valueCoding": {
-            "code": "entry-level",
-            "system": "http://ihris.org/fhir/CodeSystem/ihris-salary-grade"
+            "system": "http://ihris.org/fhir/CodeSystem/ihris-salary-grade",
+            "code": "entry-level"
           }
         }
       ]
@@ -911,22 +911,22 @@
         {
           "code": "cadre",
           "valueCoding": {
-            "code": "allied-health",
-            "system": "http://ihris.org/fhir/CodeSystem/ihris-classification"
+            "system": "http://ihris.org/fhir/CodeSystem/ihris-classification",
+            "code": "allied-health"
           }
         },
         {
           "code": "classification",
           "valueCoding": {
-            "code": "allied-health",
-            "system": "http://ihris.org/fhir/CodeSystem/ihris-salary-grade"
+            "system": "http://ihris.org/fhir/CodeSystem/ihris-salary-grade",
+            "code": "allied-health"
           }
         },
         {
           "code": "salary-grade",
           "valueCoding": {
-            "code": "prof-entry-level",
-            "system": "http://ihris.org/fhir/CodeSystem/ihris-salary-grade"
+            "system": "http://ihris.org/fhir/CodeSystem/ihris-salary-grade",
+            "code": "prof-entry-level"
           }
         }
       ]
@@ -939,22 +939,22 @@
         {
           "code": "cadre",
           "valueCoding": {
-            "code": "allied-health",
-            "system": "http://ihris.org/fhir/CodeSystem/ihris-classification"
+            "system": "http://ihris.org/fhir/CodeSystem/ihris-classification",
+            "code": "allied-health"
           }
         },
         {
           "code": "classification",
           "valueCoding": {
-            "code": "allied-health",
-            "system": "http://ihris.org/fhir/CodeSystem/ihris-salary-grade"
+            "system": "http://ihris.org/fhir/CodeSystem/ihris-salary-grade",
+            "code": "allied-health"
           }
         },
         {
           "code": "salary-grade",
           "valueCoding": {
-            "code": "prof-mid-level",
-            "system": "http://ihris.org/fhir/CodeSystem/ihris-salary-grade"
+            "system": "http://ihris.org/fhir/CodeSystem/ihris-salary-grade",
+            "code": "prof-mid-level"
           }
         }
       ]
@@ -966,22 +966,22 @@
         {
           "code": "cadre",
           "valueCoding": {
-            "code": "allied-health",
-            "system": "http://ihris.org/fhir/CodeSystem/ihris-classification"
+            "system": "http://ihris.org/fhir/CodeSystem/ihris-classification",
+            "code": "allied-health"
           }
         },
         {
           "code": "classification",
           "valueCoding": {
-            "code": "allied-health",
-            "system": "http://ihris.org/fhir/CodeSystem/ihris-salary-grade"
+            "system": "http://ihris.org/fhir/CodeSystem/ihris-salary-grade",
+            "code": "allied-health"
           }
         },
         {
           "code": "salary-grade",
           "valueCoding": {
-            "code": "entry-level",
-            "system": "http://ihris.org/fhir/CodeSystem/ihris-salary-grade"
+            "system": "http://ihris.org/fhir/CodeSystem/ihris-salary-grade",
+            "code": "entry-level"
           }
         }
       ]
@@ -994,22 +994,22 @@
         {
           "code": "cadre",
           "valueCoding": {
-            "code": "nurse",
-            "system": "http://ihris.org/fhir/CodeSystem/ihris-classification"
+            "system": "http://ihris.org/fhir/CodeSystem/ihris-classification",
+            "code": "nurse"
           }
         },
         {
           "code": "classification",
           "valueCoding": {
-            "code": "nurse",
-            "system": "http://ihris.org/fhir/CodeSystem/ihris-salary-grade"
+            "system": "http://ihris.org/fhir/CodeSystem/ihris-salary-grade",
+            "code": "nurse"
           }
         },
         {
           "code": "salary-grade",
           "valueCoding": {
-            "code": "entry-level",
-            "system": "http://ihris.org/fhir/CodeSystem/ihris-salary-grade"
+            "system": "http://ihris.org/fhir/CodeSystem/ihris-salary-grade",
+            "code": "entry-level"
           }
         }
       ]
@@ -1022,15 +1022,15 @@
         {
           "code": "classification",
           "valueCoding": {
-            "code": "non-health",
-            "system": "http://ihris.org/fhir/CodeSystem/ihris-classification"
+            "system": "http://ihris.org/fhir/CodeSystem/ihris-classification",
+            "code": "non-health"
           }
         },
         {
           "code": "salary-grade",
           "valueCoding": {
-            "code": "director",
-            "system": "http://ihris.org/fhir/CodeSystem/ihris-salary-grade"
+            "system": "http://ihris.org/fhir/CodeSystem/ihris-salary-grade",
+            "code": "director"
           }
         }
       ]
@@ -1043,22 +1043,22 @@
         {
           "code": "cadre",
           "valueCoding": {
-            "code": "allied-health",
-            "system": "http://ihris.org/fhir/CodeSystem/ihris-classification"
+            "system": "http://ihris.org/fhir/CodeSystem/ihris-classification",
+            "code": "allied-health"
           }
         },
         {
           "code": "classification",
           "valueCoding": {
-            "code": "allied-health",
-            "system": "http://ihris.org/fhir/CodeSystem/ihris-salary-grade"
+            "system": "http://ihris.org/fhir/CodeSystem/ihris-salary-grade",
+            "code": "allied-health"
           }
         },
         {
           "code": "salary-grade",
           "valueCoding": {
-            "code": "entry-level",
-            "system": "http://ihris.org/fhir/CodeSystem/ihris-salary-grade"
+            "system": "http://ihris.org/fhir/CodeSystem/ihris-salary-grade",
+            "code": "entry-level"
           }
         }
       ]
@@ -1071,15 +1071,15 @@
         {
           "code": "classification",
           "valueCoding": {
-            "code": "support",
-            "system": "http://ihris.org/fhir/CodeSystem/ihris-classification"
+            "system": "http://ihris.org/fhir/CodeSystem/ihris-classification",
+            "code": "support"
           }
         },
         {
           "code": "salary-grade",
           "valueCoding": {
-            "code": "entry-level",
-            "system": "http://ihris.org/fhir/CodeSystem/ihris-salary-grade"
+            "system": "http://ihris.org/fhir/CodeSystem/ihris-salary-grade",
+            "code": "entry-level"
           }
         }
       ]
@@ -1092,15 +1092,15 @@
         {
           "code": "classification",
           "valueCoding": {
-            "code": "support",
-            "system": "http://ihris.org/fhir/CodeSystem/ihris-classification"
+            "system": "http://ihris.org/fhir/CodeSystem/ihris-classification",
+            "code": "support"
           }
         },
         {
           "code": "salary-grade",
           "valueCoding": {
-            "code": "entry-level",
-            "system": "http://ihris.org/fhir/CodeSystem/ihris-salary-grade"
+            "system": "http://ihris.org/fhir/CodeSystem/ihris-salary-grade",
+            "code": "entry-level"
           }
         }
       ]
@@ -1113,15 +1113,15 @@
         {
           "code": "classification",
           "valueCoding": {
-            "code": "support",
-            "system": "http://ihris.org/fhir/CodeSystem/ihris-classification"
+            "system": "http://ihris.org/fhir/CodeSystem/ihris-classification",
+            "code": "support"
           }
         },
         {
           "code": "salary-grade",
           "valueCoding": {
-            "code": "entry-level",
-            "system": "http://ihris.org/fhir/CodeSystem/ihris-salary-grade"
+            "system": "http://ihris.org/fhir/CodeSystem/ihris-salary-grade",
+            "code": "entry-level"
           }
         }
       ]
@@ -1134,15 +1134,15 @@
         {
           "code": "classification",
           "valueCoding": {
-            "code": "support",
-            "system": "http://ihris.org/fhir/CodeSystem/ihris-classification"
+            "system": "http://ihris.org/fhir/CodeSystem/ihris-classification",
+            "code": "support"
           }
         },
         {
           "code": "salary-grade",
           "valueCoding": {
-            "code": "entry-level",
-            "system": "http://ihris.org/fhir/CodeSystem/ihris-salary-grade"
+            "system": "http://ihris.org/fhir/CodeSystem/ihris-salary-grade",
+            "code": "entry-level"
           }
         }
       ]
@@ -1155,22 +1155,22 @@
         {
           "code": "cadre",
           "valueCoding": {
-            "code": "nurse",
-            "system": "http://ihris.org/fhir/CodeSystem/ihris-classification"
+            "system": "http://ihris.org/fhir/CodeSystem/ihris-classification",
+            "code": "nurse"
           }
         },
         {
           "code": "classification",
           "valueCoding": {
-            "code": "nurse",
-            "system": "http://ihris.org/fhir/CodeSystem/ihris-salary-grade"
+            "system": "http://ihris.org/fhir/CodeSystem/ihris-salary-grade",
+            "code": "nurse"
           }
         },
         {
           "code": "salary-grade",
           "valueCoding": {
-            "code": "entry-level",
-            "system": "http://ihris.org/fhir/CodeSystem/ihris-salary-grade"
+            "system": "http://ihris.org/fhir/CodeSystem/ihris-salary-grade",
+            "code": "entry-level"
           }
         }
       ]
@@ -1183,15 +1183,15 @@
         {
           "code": "classification",
           "valueCoding": {
-            "code": "support",
-            "system": "http://ihris.org/fhir/CodeSystem/ihris-classification"
+            "system": "http://ihris.org/fhir/CodeSystem/ihris-classification",
+            "code": "support"
           }
         },
         {
           "code": "salary-grade",
           "valueCoding": {
-            "code": "entry-level",
-            "system": "http://ihris.org/fhir/CodeSystem/ihris-salary-grade"
+            "system": "http://ihris.org/fhir/CodeSystem/ihris-salary-grade",
+            "code": "entry-level"
           }
         }
       ]
@@ -1204,15 +1204,15 @@
         {
           "code": "classification",
           "valueCoding": {
-            "code": "support",
-            "system": "http://ihris.org/fhir/CodeSystem/ihris-classification"
+            "system": "http://ihris.org/fhir/CodeSystem/ihris-classification",
+            "code": "support"
           }
         },
         {
           "code": "salary-grade",
           "valueCoding": {
-            "code": "entry-level",
-            "system": "http://ihris.org/fhir/CodeSystem/ihris-salary-grade"
+            "system": "http://ihris.org/fhir/CodeSystem/ihris-salary-grade",
+            "code": "entry-level"
           }
         }
       ]
@@ -1225,15 +1225,15 @@
         {
           "code": "classification",
           "valueCoding": {
-            "code": "support",
-            "system": "http://ihris.org/fhir/CodeSystem/ihris-classification"
+            "system": "http://ihris.org/fhir/CodeSystem/ihris-classification",
+            "code": "support"
           }
         },
         {
           "code": "salary-grade",
           "valueCoding": {
-            "code": "prof-entry-level",
-            "system": "http://ihris.org/fhir/CodeSystem/ihris-salary-grade"
+            "system": "http://ihris.org/fhir/CodeSystem/ihris-salary-grade",
+            "code": "prof-entry-level"
           }
         }
       ]
@@ -1246,15 +1246,15 @@
         {
           "code": "classification",
           "valueCoding": {
-            "code": "support",
-            "system": "http://ihris.org/fhir/CodeSystem/ihris-classification"
+            "system": "http://ihris.org/fhir/CodeSystem/ihris-classification",
+            "code": "support"
           }
         },
         {
           "code": "salary-grade",
           "valueCoding": {
-            "code": "prof-entry-level",
-            "system": "http://ihris.org/fhir/CodeSystem/ihris-salary-grade"
+            "system": "http://ihris.org/fhir/CodeSystem/ihris-salary-grade",
+            "code": "prof-entry-level"
           }
         }
       ]
@@ -1267,15 +1267,15 @@
         {
           "code": "classification",
           "valueCoding": {
-            "code": "support",
-            "system": "http://ihris.org/fhir/CodeSystem/ihris-classification"
+            "system": "http://ihris.org/fhir/CodeSystem/ihris-classification",
+            "code": "support"
           }
         },
         {
           "code": "salary-grade",
           "valueCoding": {
-            "code": "entry-level",
-            "system": "http://ihris.org/fhir/CodeSystem/ihris-salary-grade"
+            "system": "http://ihris.org/fhir/CodeSystem/ihris-salary-grade",
+            "code": "entry-level"
           }
         }
       ]
@@ -1287,22 +1287,22 @@
         {
           "code": "cadre",
           "valueCoding": {
-            "code": "nurse",
-            "system": "http://ihris.org/fhir/CodeSystem/ihris-classification"
+            "system": "http://ihris.org/fhir/CodeSystem/ihris-classification",
+            "code": "nurse"
           }
         },
         {
           "code": "classification",
           "valueCoding": {
-            "code": "nurse",
-            "system": "http://ihris.org/fhir/CodeSystem/ihris-salary-grade"
+            "system": "http://ihris.org/fhir/CodeSystem/ihris-salary-grade",
+            "code": "nurse"
           }
         },
         {
           "code": "salary-grade",
           "valueCoding": {
-            "code": "prof-entry-level",
-            "system": "http://ihris.org/fhir/CodeSystem/ihris-salary-grade"
+            "system": "http://ihris.org/fhir/CodeSystem/ihris-salary-grade",
+            "code": "prof-entry-level"
           }
         }
       ]
@@ -1315,15 +1315,15 @@
         {
           "code": "classification",
           "valueCoding": {
-            "code": "support",
-            "system": "http://ihris.org/fhir/CodeSystem/ihris-classification"
+            "system": "http://ihris.org/fhir/CodeSystem/ihris-classification",
+            "code": "support"
           }
         },
         {
           "code": "salary-grade",
           "valueCoding": {
-            "code": "prof-entry-level",
-            "system": "http://ihris.org/fhir/CodeSystem/ihris-salary-grade"
+            "system": "http://ihris.org/fhir/CodeSystem/ihris-salary-grade",
+            "code": "prof-entry-level"
           }
         }
       ]

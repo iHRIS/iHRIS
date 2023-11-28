@@ -33,14 +33,11 @@
         {
           "extension": [
             {
-              "url": "http://hl7.org/fhir/StructureDefinition/valueset-label",
+              "url": "name",
               "valueString": "fullname"
             },
             {
-              "url": "fhirpath"
-            },
-            {
-              "url": "name",
+              "url": "fhirpath",
               "valueString": "name.where(use='official').last().text"
             },
             {
@@ -61,14 +58,11 @@
         {
           "extension": [
             {
-              "url": "http://hl7.org/fhir/StructureDefinition/valueset-label",
+              "url": "name",
               "valueString": "phone"
             },
             {
-              "url": "fhirpath"
-            },
-            {
-              "url": "name",
+              "url": "fhirpath",
               "valueString": "telecom.where(system='phone').value"
             },
             {
@@ -109,14 +103,11 @@
         {
           "extension": [
             {
-              "url": "http://hl7.org/fhir/StructureDefinition/valueset-label",
+              "url": "name",
               "valueString": "facilityName"
             },
             {
-              "url": "fhirpath"
-            },
-            {
-              "url": "name",
+              "url": "fhirpath",
               "valueString": "name"
             },
             {
