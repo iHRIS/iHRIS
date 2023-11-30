@@ -112,14 +112,6 @@ export default {
           this.selectedIcon = this.nav.menu[id].icon
           this.selectedTitle = this.nav.menu[id].text
           this.selectedNav = this.nav.menu[id].menu
-          if (this.$store.state.user.loggedin && this.nav.home) {
-            if (this.nav.home.external === "true") {
-              window.location = this.nav.home.url
-            } else {
-              this.$router.push(this.nav.home.url)
-            }
-            return
-          }
           this.menu = []
           for (let menu_id of Object.keys(this.selectedNav)) {
             if (this.selectedNav[menu_id].menu) {
