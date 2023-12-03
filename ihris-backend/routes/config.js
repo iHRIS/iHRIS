@@ -639,6 +639,30 @@ router.get('/page/:page/:type?', function (req, res) {
                                 }
                             }
                         }
+
+                        if (displayType && displayType == "reportSelect") {
+                            if(nconf.get("defaults:fields:" + fields[field].id + ":report")) {
+                                let report = nconf.get("defaults:fields:" + fields[field].id + ":report")
+                                output += " report=\"" + report + "\""
+                            } else if(nconf.get("defaults:page:" + req.params.page + ":fields:" + fields[field].id + ":report")) {
+                                let report = nconf.get("defaults:page:" + req.params.page + ":fields:" + fields[field].id + ":report")
+                                output += " report=\"" + report + "\""
+                            }
+                            if(nconf.get("defaults:fields:" + fields[field].id + ":reportReturnValue")) {
+                                let reportReturnValue = nconf.get("defaults:fields:" + fields[field].id + ":reportReturnValue")
+                                output += " reportReturnValue=\"" + reportReturnValue + "\""
+                            } else if(nconf.get("defaults:page:" + req.params.page + ":fields:" + fields[field].id + ":reportReturnValue")) {
+                                let reportReturnValue = nconf.get("defaults:page:" + req.params.page + ":fields:" + fields[field].id + ":reportReturnValue")
+                                output += " reportReturnValue=\"" + reportReturnValue + "\""
+                            }
+                            if(nconf.get("defaults:fields:" + fields[field].id + ":referenceDisplayPath")) {
+                                let referenceDisplayPath = nconf.get("defaults:fields:" + fields[field].id + ":referenceDisplayPath")
+                                output += " referenceDisplayPath=\"" + referenceDisplayPath + "\""
+                            } else if(nconf.get("defaults:page:" + req.params.page + ":fields:" + fields[field].id + ":referenceDisplayPath")) {
+                                let referenceDisplayPath = nconf.get("defaults:page:" + req.params.page + ":fields:" + fields[field].id + ":referenceDisplayPath")
+                                output += " referenceDisplayPath=\"" + referenceDisplayPath + "\""
+                            }
+                        }
                         if (nconf.get("defaults:fields:" + fields[field].id + ":user_filter")) {
                             let resource = fields[field].id.substring(0, fields[field].id.indexOf('.'))
                             let regex = "(.+)"
@@ -1412,6 +1436,31 @@ router.get('/questionnaire/:questionnaire/:page', async function (req, res) {
                             }
                         }
 
+                        if (displayType && displayType == "reportSelect") {
+                            if(nconf.get("defaults:fields:" + field.id + ":report")) {
+                                let report = nconf.get("defaults:fields:" + field.id + ":report")
+                                vueOutput += " report=\"" + report + "\""
+                            } else if(nconf.get("defaults:page:" + req.params.page + ":fields:" + field.id + ":report")) {
+                                let report = nconf.get("defaults:page:" + req.params.page + ":fields:" + field.id + ":report")
+                                vueOutput += " report=\"" + report + "\""
+                            }
+                            if(nconf.get("defaults:fields:" + field.id + ":reportReturnValue")) {
+                                let reportReturnValue = nconf.get("defaults:fields:" + field.id + ":reportReturnValue")
+                                vueOutput += " reportReturnValue=\"" + reportReturnValue + "\""
+                            } else if(nconf.get("defaults:page:" + req.params.page + ":fields:" + field.id + ":reportReturnValue")) {
+                                let reportReturnValue = nconf.get("defaults:page:" + req.params.page + ":fields:" + field.id + ":reportReturnValue")
+                                vueOutput += " reportReturnValue=\"" + reportReturnValue + "\""
+                            }
+                            if(nconf.get("defaults:fields:" + field.id + ":referenceDisplayPath")) {
+                                let referenceDisplayPath = nconf.get("defaults:fields:" + field.id + ":referenceDisplayPath")
+                                vueOutput += " referenceDisplayPath=\"" + referenceDisplayPath + "\""
+                            } else if(nconf.get("defaults:page:" + req.params.page + ":fields:" + field.id + ":referenceDisplayPath")) {
+                                let referenceDisplayPath = nconf.get("defaults:page:" + req.params.page + ":fields:" + field.id + ":referenceDisplayPath")
+                                vueOutput += " referenceDisplayPath=\"" + referenceDisplayPath + "\""
+                            }
+                        }
+
+
                         if (nconf.get("defaults:fields:" + field.id + ":user_filter")) {
                             let resource = field.id.substring(0, field.id.indexOf('.'))
                             let regex = "(.+)"
@@ -1733,7 +1782,7 @@ router.get('/report/es/:report', (req, res) => {
                 reportData.filters[index].dataType = dataType
             }
             reportData.indexName = indexName
-            let template = `<ihris-es-report :key="$route.params.report" page="${req.params.report}" label="${reportName}" :reportData="reportData" :terms="terms" :termsConditions="termsConditions" :hideCheckboxes="hideCheckboxes" :hideLabel="hideLabel" >`
+            let template = `<ihris-es-report @rowSelected='rowSelected' :key="$route.params.report" page="${req.params.report}" label="${reportName}" :reportData="reportData" :terms="terms" :termsConditions="termsConditions" :hideCheckboxes="hideCheckboxes" :hideLabel="hideLabel" :hideExport="hideExport" :hideReportCustomization="hideReportCustomization">`
             for (let filter of reportData.filters) {
                 if (filter.isDropDown) {
                     template += `<ihris-es-search-term v-on:termChange="searchData" label="${filter.display}" expression="${filter.field}" isDropDown="${filter.isDropDown}" :reportData="reportData" :hideFilters="hideFilters"></ihris-es-search-term>\n`

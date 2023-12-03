@@ -1,13 +1,14 @@
 <template>
   <v-container class="py-5">
     <v-card class="py-4 px-2">
-      <v-card-title v-if="!hideLabel" class="ma-4">
+      <v-card-title class="ma-4">
         <v-layout row wrap>
           <v-icon class="mr-2" color="#0d3552">mdi-table-large</v-icon>
-          <h4 class="font-weight-bold" style="color: #0d3552">{{ label }}</h4>
+          <h4 v-if="!hideLabel" class="font-weight-bold" style="color: #0d3552">{{ label }}</h4>
           <v-spacer></v-spacer>
           <v-row align="center" class="pr-4" justify="end">
             <v-btn
+              v-if="!hideReportCustomization"
               class="mr-2"
               color="primary"
               @click="
@@ -20,7 +21,7 @@
               Customize Report
               {{ $t("App.hardcoded-texts.Customize Report") }}
             </v-btn>
-            <v-btn color="info" @click="reportExport('csv')">
+            <v-btn color="info" @click="reportExport('csv')" v-if="!hideExport">
               <v-progress-circular
                 v-if="downloading"
                 color="amber"
@@ -65,6 +66,7 @@
         class="elevation-1 mt-3"
         item-key="id"
         style="cursor: pointer"
+        @click:row="rowClicked"
       ></v-data-table>
     </v-card>
     <v-row justify="center">
@@ -142,6 +144,8 @@ export default {
     "page",
     "hideCheckboxes",
     "hideLabel",
+    "hideExport",
+    "hideReportCustomization"
   ],
   data: function () {
     return {
@@ -238,6 +242,9 @@ export default {
     });
   },
   methods: {
+    rowClicked(row) {
+      this.$emit('rowSelected', row)
+    },
     reset() {
       this.headers = this.allHeaders;
       this.dialog = false;

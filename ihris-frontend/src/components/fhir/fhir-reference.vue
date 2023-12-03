@@ -44,6 +44,43 @@
           </v-treeview>
         </v-card>
       </v-menu>
+      <!-- <v-text-field
+        v-else-if="displayType === 'reportSelect'"
+        @click="reportDialog = true"
+        :error-messages="errors"
+        @change="errors = []" 
+        :disabled="disabled"
+        :readonly="true"
+        :label="$t(`App.fhir-resources-texts.${display}`)"
+        v-model="select"
+        outlined 
+        hide-details="auto" 
+        :rules="rules"
+        dense
+      >
+        <template #label>{{$t(`App.fhir-resources-texts.${display}`)}}<span v-if="required" class="red--text font-weight-bold">*</span></template>
+      </v-text-field> -->
+      <v-autocomplete
+        v-else-if="displayType === 'reportSelect'"
+        @click="reportDialog = true"
+        v-model="select"
+        :loading="loading"
+        :items="items"
+        cache-items
+        flat
+        hide-no-data
+        hide-details
+        :label="display"
+        outlined
+        dense
+        readonly
+        :rules="rules"
+        :disabled="(disabled) || (preset && $route.name === 'resource_add')"
+        :error-messages="errors"
+        @change="errors = []"
+      >
+        <template #label>{{$t(`App.fhir-resources-texts.${display}`)}} <span v-if="required" class="red--text font-weight-bold">*</span></template>
+      </v-autocomplete>
       <v-autocomplete
         v-else
         v-model="select"
@@ -63,8 +100,42 @@
         :error-messages="errors"
         @change="errors = []"
       >
-        <template #label>{{$t(`App.fhir-resources-texts.${display}`)}} <span v-if="required" class="red--text font-weight-bold">*</span></template>
+        <template #label>{{$t(`App.fhir-resources-texts.${display}`)}} {{ items }} <span v-if="required" class="red--text font-weight-bold">*</span></template>
       </v-autocomplete>
+      <v-dialog
+        transition="dialog-bottom-transition"
+        max-width="1000"
+        v-model="reportDialog"
+      >
+        <v-card>
+          <v-toolbar
+            color="primary"
+            dark
+          >Click row to select value</v-toolbar>
+          <v-progress-linear
+            color="secondary"
+            :indeterminate="loadingReportVal"
+            rounded
+            height="6"
+          />
+          <v-card-text v-if="!loadingReportVal">
+            <es-report
+              v-if="report"
+              :report="report"
+              :hideCheckboxes="true"
+              :hideExport="true"
+              :hideReportCustomization="true"
+              @rowSelected="reportRowSelected"
+            />
+          </v-card-text>
+          <v-card-actions class="justify-end">
+            <v-btn
+              text
+              @click="reportDialog = false"
+            >Close</v-btn>
+          </v-card-actions>
+        </v-card>
+      </v-dialog>
     </template>
     <template #header>
       {{$t(`App.fhir-resources-texts.${display}`)}}
@@ -87,14 +158,17 @@ export default {
   name: "fhir-reference",
   props: ["field","label","sliceName","targetProfile","targetResource","min","max","base-min","base-max",
     "slotProps","path","sub-fields","edit","readOnlyIfSet","constraints", "displayType", 
-    "initialValue", "overrideValue", "displayCondition", "searchParameter", "initialProfile", "pageTargetProfile"],
+    "initialValue", "overrideValue", "displayCondition", "searchParameter", "initialProfile", "pageTargetProfile", "report", "reportReturnValue", "referenceDisplayPath"],
   components: {
-    IhrisElement
+    IhrisElement,
+    "es-report": () => import(/* webpackChunkName: "fhir-questionnaire" */ "@/views/es-report" )
   },
   mixins: [dataDisplay],
   data: function() {
     return {
       hide: false,
+      reportDialog: false,
+      loadingReportVal: false,
       source: { path: "", data: {} },
       value: { reference: "" },
       qField: "valueReference",
@@ -158,6 +232,52 @@ export default {
     }
   },
   methods: {
+    reportRowSelected(row) {
+      this.loadingReportVal = true
+      let id
+      if(this.reportReturnValue && this.reportReturnValue.split(".").length > 1) {
+        let returnVal = this.reportReturnValue.split(".")[1]
+        id = row[returnVal]
+      } else {
+        id = row.id
+      }
+      if(id.split("/").length !== 2) {
+        for(let idx in row) {
+          let val = row[idx]
+          if(!val) {
+            continue
+          }
+          if(val.split("/").length > 1 && val.split("/")[1] == id) {
+            id = val
+          }
+        }
+      }
+      if(this.referenceDisplayPath) {
+        fetch("/fhir/" + id).then((response) => {
+          response.json().then((data) => {
+            let displayVal = this.$fhirpath.evaluate(data, this.referenceDisplayPath)
+            if(typeof displayVal === 'object') {
+              displayVal = displayVal.join(", ")
+            }
+            this.items = [{
+              value: id,
+              text: displayVal
+            }]
+            this.select = id
+            this.loadingReportVal = false
+            this.reportDialog = false
+          })
+        })
+      } else {
+        this.$fhirutils.resourceLookup( id ).then( display => {
+          this.displayValue = display
+          this.items.push( {text: display, value: id} )
+          this.select = id
+          this.loadingReportVal = false
+          this.reportDialog = false
+        } )
+      }
+    },
     setupData: function() {
       let targetProfile = this.targetProfile
       if(this.pageTargetProfile) {
@@ -365,13 +485,30 @@ export default {
     getDisplay: function() {
       if ( (!this.edit || this.preset) && this.value && this.value.reference ) {
         this.loading = true
-        this.$fhirutils.resourceLookup( this.value.reference ).then( display => {
-          this.displayValue = display
-          if ( this.displayType !== "tree" ) {
-            this.items.push( {text: display, value: this.value.reference} )
-          }
-          this.loading = false
-        } )
+        if(!this.referenceDisplayPath) {
+          this.$fhirutils.resourceLookup( this.value.reference ).then( display => {
+            this.displayValue = display
+            if ( this.displayType !== "tree" ) {
+              this.items.push( {text: display, value: this.value.reference} )
+            }
+            this.loading = false
+          } )
+        } else {
+          fetch("/fhir/" + this.value.reference).then((response) => {
+            response.json().then((data) => {
+              let displayVal = this.$fhirpath.evaluate(data, this.referenceDisplayPath)
+              if(typeof displayVal === 'object') {
+                displayVal = displayVal.join(", ")
+              }
+              this.items = [{
+                value: this.value.reference,
+                text: displayVal
+              }]
+              this.displayValue = displayVal
+              this.loading = false
+            })
+          })
+        }
       }
     }
   },
