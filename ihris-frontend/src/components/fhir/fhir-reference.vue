@@ -100,7 +100,7 @@
         :error-messages="errors"
         @change="errors = []"
       >
-        <template #label>{{$t(`App.fhir-resources-texts.${display}`)}} {{ items }} <span v-if="required" class="red--text font-weight-bold">*</span></template>
+        <template #label>{{$t(`App.fhir-resources-texts.${display}`)}} <span v-if="required" class="red--text font-weight-bold">*</span></template>
       </v-autocomplete>
       <v-dialog
         transition="dialog-bottom-transition"
