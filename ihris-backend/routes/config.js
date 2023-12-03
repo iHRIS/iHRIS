@@ -704,6 +704,9 @@ router.get('/page/:page/:type?', function (req, res) {
                             } else if (nconf.get("defaults:fields:" + fields[field].id + ":" + attr)) {
                                 output += " " + attr + "=\""
                                     + nconf.get("defaults:fields:" + fields[field].id + ":" + attr) + "\""
+                            } else if (nconf.get("defaults:page:" + req.params.page + ":fields:" +  fields[field].id + ":" + attr)) {
+                                output += " " + attr + "=\""
+                                    + nconf.get("defaults:page:" + req.params.page + ":fields:" +  fields[field].id + ":" + attr) + "\""
                             } else if (nconf.get("defaults:components:" + eleName + ":" + attr)) {
                                 output += " " + attr + "=\""
                                     + nconf.get("defaults:components:" + eleName + ":" + attr) + "\""
@@ -1485,6 +1488,9 @@ router.get('/questionnaire/:questionnaire/:page', async function (req, res) {
                             if (nconf.get("defaults:fields:" + field.id + ":" + attr)) {
                                 vueOutput += " " + attr + "=\""
                                     + nconf.get("defaults:fields:" + field.id + ":" + attr) + "\""
+                            } else if (nconf.get("defaults:page:" + req.params.page + ":fields:" + field.id + ":" + attr)) {
+                                vueOutput += " " + attr + "=\""
+                                    + nconf.get("defaults:page:" + req.params.page + ":fields:" + field.id + ":" + attr) + "\""
                             }
                         }
 
