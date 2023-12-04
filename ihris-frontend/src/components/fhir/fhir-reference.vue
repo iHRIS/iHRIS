@@ -94,7 +94,7 @@
         :label="display"
         outlined
         dense
-        placeholder="$t(`App.hardcoded-texts.Start typing for selection`)"
+        :placeholder="$t(`App.hardcoded-texts.Start typing for selection`)"
         :rules="rules"
         :disabled="(disabled) || (preset && $route.name === 'resource_add')"
         :error-messages="errors"
@@ -278,18 +278,34 @@ export default {
         } )
       }
     },
-    setupData: function() {
-      let targetProfile = this.targetProfile
+    targetResourceMatchProfile() {
+      let targetProfiles = this.targetProfile.split(",")
       if(this.pageTargetProfile) {
-        targetProfile = this.pageTargetProfile
+        targetProfiles = [this.pageTargetProfile]
       }
-      if ( targetProfile && this.targetResource ) {
-        if ( targetProfile.replace( fhirurl, "" ) === this.targetResource ) {
+      let targetResources = this.targetResource.split(",")
+      let same = false
+      for(let idx in targetProfiles) {
+        if(targetProfiles[idx].replace( fhirurl, "" ) === targetResources[idx]) {
+          same = true
+          break
+        }
+      }
+      return same
+    },
+    setupData: function() {
+      let targetProfile = this.targetProfile.split(",")
+      let targetResources = this.targetResource.split(",")
+      if(this.pageTargetProfile) {
+        targetProfile = [this.pageTargetProfile]
+      }
+      if ( targetProfile.length > 0 && targetResources.length > 0 ) {
+        if ( this.targetResourceMatchProfile() ) {
           this.allAllowed = true
         } else {
           this.allAllowed = false
         }
-        this.resource = this.targetResource
+        this.resource = targetResources[0]
       }
       if ( this.displayType === "tree" ) {
         this.setupTreeItems()
@@ -376,13 +392,13 @@ export default {
       fetch( url ).then( response => {
         if ( response.ok ) {
           response.json().then( async data => {
-            let targetProfile = this.targetProfile
+            let targetProfile = this.targetProfile.split(",")
             if(this.pageTargetProfile) {
-              targetProfile = this.pageTargetProfile
+              targetProfile = [this.pageTargetProfile]
             }
             if ( data.entry && data.entry.length > 0 ) {
               for( let entry of data.entry ) {
-                let locked = this.allAllowed ? false : !entry.resource.meta.profile.includes( targetProfile )
+                let locked = this.allAllowed ? false : !entry.resource.meta.profile.find(profile => targetProfile.includes(profile))
                 let name = entry.resource.name
                 if(this.resource === 'Basic') {
                   name = entry.resource.extension.find((ext) => {
@@ -454,11 +470,11 @@ export default {
     querySelections: function( val ) {
       this.loading = true
       let params = { "name:contains": val }
-      let targetProfile = this.targetProfile
+      let targetProfile = this.targetProfile.split(",")
       if(this.pageTargetProfile) {
-        targetProfile = this.pageTargetProfile
+        targetProfile = [this.pageTargetProfile]
       }
-      if ( !targetProfile.endsWith( this.resource ) ) {
+      if ( !targetProfile[0].endsWith( this.resource ) ) {
         params._profile = targetProfile
       }
       let url = "/fhir/"+this.resource+"?"+querystring.stringify( params )

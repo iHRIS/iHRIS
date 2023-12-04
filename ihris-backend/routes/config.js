@@ -1392,9 +1392,15 @@ router.get('/questionnaire/:questionnaire/:page', async function (req, res) {
                         vueOutput += " id=\"" + field.id + "\""
                         vueOutput += " definition=\"" + item.definition + "\""
                         if (itemType === "reference" && field && field.type && field.type[0] && field.type[0].targetProfile) {
-                            vueOutput += " targetProfile=\"" + field.type[0].targetProfile[0] + "\""
-                            let targetResource = await getProfileResource(field.type[0].targetProfile[0])
-                            vueOutput += " targetResource=\"" + targetResource + "\""
+                            let targetProfile = field.type[0].targetProfile.join(",")
+                            vueOutput += " targetProfile=\"" + targetProfile + "\""
+                            let targetResources = []
+                            for(let prof of field.type[0].targetProfile) {
+                                let targetResource = await getProfileResource(prof)
+                                targetResources.push(targetResource)
+                            }
+                            targetResources = targetResources.join(",")
+                            vueOutput += " targetResource=\"" + targetResources + "\""
                         }
                         for (let mm of minmax) {
                             for (let type of ["min", "max"]) {
@@ -1483,7 +1489,7 @@ router.get('/questionnaire/:questionnaire/:page', async function (req, res) {
                             }
                         }
 
-                        const field_attrs = ["initialValue", "searchParameter"]
+                        const field_attrs = ["initialValue"]
                         for (let attr of field_attrs) {
                             if (nconf.get("defaults:fields:" + field.id + ":" + attr)) {
                                 vueOutput += " " + attr + "=\""
