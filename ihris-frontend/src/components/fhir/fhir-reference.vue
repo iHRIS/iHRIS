@@ -279,7 +279,10 @@ export default {
       }
     },
     targetResourceMatchProfile() {
-      let targetProfiles = this.targetProfile.split(",")
+      let targetProfiles = []
+      if(this.targetProfile) {
+        targetProfiles = this.targetProfile.split(",")
+      }
       if(this.pageTargetProfile) {
         targetProfiles = [this.pageTargetProfile]
       }
@@ -294,8 +297,14 @@ export default {
       return same
     },
     setupData: function() {
-      let targetProfile = this.targetProfile.split(",")
-      let targetResources = this.targetResource.split(",")
+      let targetProfile = []
+      if(this.targetProfile) {
+        targetProfile = this.targetProfile.split(",")
+      }
+      let targetResources = []
+      if(this.targetResource) {
+        targetResources = this.targetResource.split(",")
+      }
       if(this.pageTargetProfile) {
         targetProfile = [this.pageTargetProfile]
       }
@@ -397,7 +406,10 @@ export default {
       fetch( url ).then( response => {
         if ( response.ok ) {
           response.json().then( async data => {
-            let targetProfile = this.targetProfile.split(",")
+            let targetProfile = []
+            if(this.targetProfile) {
+              targetProfile = this.targetProfile.split(",")
+            }
             if(this.pageTargetProfile) {
               targetProfile = [this.pageTargetProfile]
             }
@@ -481,7 +493,10 @@ export default {
     querySelections: function( val ) {
       this.loading = true
       let params = { "name:contains": val }
-      let targetProfile = this.targetProfile.split(",")
+      let targetProfile = []
+      if(this.targetProfile) {
+        targetProfile = this.targetProfile.split(",")
+      }
       if(this.pageTargetProfile) {
         targetProfile = [this.pageTargetProfile]
       }
