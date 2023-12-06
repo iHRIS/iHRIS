@@ -158,7 +158,7 @@ export default {
   name: "fhir-reference",
   props: ["field","label","sliceName","targetProfile","targetResource","min","max","base-min","base-max",
     "slotProps","path","sub-fields","edit","readOnlyIfSet","constraints", "displayType", 
-    "initialValue", "overrideValue", "displayCondition", "searchParameter", "initialProfile", "pageTargetProfile", "report", "reportReturnValue", "referenceDisplayPath"],
+    "initialValue", "overrideValue", "displayCondition", "searchParameter", "initialProfile", "allowedProfiles", "pageTargetProfile", "report", "reportReturnValue", "referenceDisplayPath"],
   components: {
     IhrisElement,
     "es-report": () => import(/* webpackChunkName: "fhir-questionnaire" */ "@/views/es-report" )
@@ -342,6 +342,8 @@ export default {
           params[searchparam + ":missing"] = true
           if(this.initialProfile) {
             params['_profile'] = this.initialProfile
+          } else if(this.allowedProfiles) {
+            params['_profile'] = this.allowedProfiles
           }
         }
       } else {
@@ -361,6 +363,9 @@ export default {
       let params = {}
       if ( this.searchParameter ) {
         params[this.searchParameter] = item.id
+        if(this.allowedProfiles) {
+          params['_profile'] = this.allowedProfiles
+        }
       } else {
         params = { "partof": item.id }
       }
@@ -403,7 +408,10 @@ export default {
                 if(this.resource === 'Basic') {
                   name = entry.resource.extension.find((ext) => {
                     return ext.url === 'http://ihris.org/fhir/StructureDefinition/ihris-basic-name'
-                  }).valueString
+                  })
+                  if(name) {
+                    name = name.valueString
+                  }
                 }
                 let profile = []
                 if(entry.resource.meta && entry.resource.meta.profile) {
@@ -448,6 +456,9 @@ export default {
       let params = {}
       if ( this.searchParameter ) {
         params[this.searchParameter] = item.id
+        if(this.allowedProfiles) {
+          params['_profile'] = this.allowedProfiles
+        }
         params["_count"] = 500
       } else {
         params = { "partof": item.id, _count: 500 }

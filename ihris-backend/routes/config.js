@@ -572,7 +572,8 @@ router.get('/page/:page/:type?', function (req, res) {
 
 
                         let attrs = ["field", "sliceName", "targetProfile", "targetResource", "profile", "min", "max", "base-min",
-                            "base-max", "label", "path", "binding", "calendar", "initialValue", "searchParameter"]
+                            "base-max", "label", "path", "binding", "calendar", "initialValue", "searchParameter", "report",
+                            "reportReturnValue", "referenceDisplayPath", "initialProfile", "allowedProfiles", "pageTargetProfile"]
                         const minmax = ["Date", "DateTime", "Instant", "Time", "Decimal", "Integer", "PositiveInt",
                             "UnsignedInt", "Quantity"]
                         for (let mm of minmax) {
@@ -618,50 +619,6 @@ router.get('/page/:page/:type?', function (req, res) {
                         }
                         if (displayType) {
                             output += " displayType=\"" + displayType + "\""
-                        }
-                        if (displayType && displayType == "tree" && !searchParameter) {
-                            if (nconf.get("defaults:fields:" + fields[field].id + ":searchParameter")) {
-                                searchParameter = nconf.get("defaults:fields:" + fields[field].id + ":searchParameter")
-                                output += " searchParameter=\"" + searchParameter + "\""
-                                if(nconf.get("defaults:fields:" + fields[field].id + ":initialProfile")) {
-                                    let initialProfile = nconf.get("defaults:fields:" + fields[field].id + ":initialProfile")
-                                    output += " initialProfile=\"" + initialProfile + "\""
-                                } else if(nconf.get("defaults:page:" + req.params.page + ":fields:" + fields[field].id + ":initialProfile")) {
-                                    let initialProfile = nconf.get("defaults:page:" + req.params.page + ":fields:" + fields[field].id + ":initialProfile")
-                                    output += " initialProfile=\"" + initialProfile + "\""
-                                }
-                                if(nconf.get("defaults:fields:" + fields[field].id + ":pageTargetProfile")) {
-                                    let pageTargetProfile = nconf.get("defaults:fields:" + fields[field].id + ":pageTargetProfile")
-                                    output += " pageTargetProfile=\"" + pageTargetProfile + "\""
-                                } else if(nconf.get("defaults:page:" + req.params.page + ":fields:" + fields[field].id + ":pageTargetProfile")) {
-                                    let pageTargetProfile = nconf.get("defaults:page:" + req.params.page + ":fields:" + fields[field].id + ":pageTargetProfile")
-                                    output += " pageTargetProfile=\"" + pageTargetProfile + "\""
-                                }
-                            }
-                        }
-
-                        if (displayType && displayType == "reportSelect") {
-                            if(nconf.get("defaults:fields:" + fields[field].id + ":report")) {
-                                let report = nconf.get("defaults:fields:" + fields[field].id + ":report")
-                                output += " report=\"" + report + "\""
-                            } else if(nconf.get("defaults:page:" + req.params.page + ":fields:" + fields[field].id + ":report")) {
-                                let report = nconf.get("defaults:page:" + req.params.page + ":fields:" + fields[field].id + ":report")
-                                output += " report=\"" + report + "\""
-                            }
-                            if(nconf.get("defaults:fields:" + fields[field].id + ":reportReturnValue")) {
-                                let reportReturnValue = nconf.get("defaults:fields:" + fields[field].id + ":reportReturnValue")
-                                output += " reportReturnValue=\"" + reportReturnValue + "\""
-                            } else if(nconf.get("defaults:page:" + req.params.page + ":fields:" + fields[field].id + ":reportReturnValue")) {
-                                let reportReturnValue = nconf.get("defaults:page:" + req.params.page + ":fields:" + fields[field].id + ":reportReturnValue")
-                                output += " reportReturnValue=\"" + reportReturnValue + "\""
-                            }
-                            if(nconf.get("defaults:fields:" + fields[field].id + ":referenceDisplayPath")) {
-                                let referenceDisplayPath = nconf.get("defaults:fields:" + fields[field].id + ":referenceDisplayPath")
-                                output += " referenceDisplayPath=\"" + referenceDisplayPath + "\""
-                            } else if(nconf.get("defaults:page:" + req.params.page + ":fields:" + fields[field].id + ":referenceDisplayPath")) {
-                                let referenceDisplayPath = nconf.get("defaults:page:" + req.params.page + ":fields:" + fields[field].id + ":referenceDisplayPath")
-                                output += " referenceDisplayPath=\"" + referenceDisplayPath + "\""
-                            }
                         }
                         if (nconf.get("defaults:fields:" + fields[field].id + ":user_filter")) {
                             let resource = fields[field].id.substring(0, fields[field].id.indexOf('.'))
@@ -1056,7 +1013,6 @@ router.get('/questionnaire/:questionnaire/:page', async function (req, res) {
             })
 
         } else if (pageResource.startsWith("StructureDefinition")) {
-
             await getDefinition(pageResource).then((resource) => {
                 if (allowed !== true) {
                     // Can't think of a reason to have this level of permissions for
@@ -1424,50 +1380,6 @@ router.get('/questionnaire/:questionnaire/:page', async function (req, res) {
                                 displayType = nconf.get("defaults:fields:" + field.id + ":type")
                             }
                         }
-                        if (displayType && displayType == "tree") {
-                            if (nconf.get("defaults:fields:" + field.id + ":searchParameter")) {
-                                let searchParameter = nconf.get("defaults:fields:" + field.id + ":searchParameter")
-                                vueOutput += " searchParameter=\"" + searchParameter + "\""
-                                if(nconf.get("defaults:fields:" + field.id + ":initialProfile")) {
-                                    let initialProfile = nconf.get("defaults:fields:" + field.id + ":initialProfile")
-                                    vueOutput += " initialProfile=\"" + initialProfile + "\""
-                                } else if(nconf.get("defaults:page:" + req.params.page + ":fields:" + field.id + ":initialProfile")) {
-                                    let initialProfile = nconf.get("defaults:page:" + req.params.page + ":fields:" + field.id + ":initialProfile")
-                                    vueOutput += " initialProfile=\"" + initialProfile + "\""
-                                }
-                                if(nconf.get("defaults:fields:" + field.id + ":pageTargetProfile")) {
-                                    let pageTargetProfile = nconf.get("defaults:fields:" + field.id + ":pageTargetProfile")
-                                    vueOutput += " pageTargetProfile=\"" + pageTargetProfile + "\""
-                                } else if(nconf.get("defaults:page:" + req.params.page + ":fields:" + field.id + ":pageTargetProfile")) {
-                                    let pageTargetProfile = nconf.get("defaults:page:" + req.params.page + ":fields:" + field.id + ":pageTargetProfile")
-                                    vueOutput += " pageTargetProfile=\"" + pageTargetProfile + "\""
-                                }
-                            }
-                        }
-
-                        if (displayType && displayType == "reportSelect") {
-                            if(nconf.get("defaults:fields:" + field.id + ":report")) {
-                                let report = nconf.get("defaults:fields:" + field.id + ":report")
-                                vueOutput += " report=\"" + report + "\""
-                            } else if(nconf.get("defaults:page:" + req.params.page + ":fields:" + field.id + ":report")) {
-                                let report = nconf.get("defaults:page:" + req.params.page + ":fields:" + field.id + ":report")
-                                vueOutput += " report=\"" + report + "\""
-                            }
-                            if(nconf.get("defaults:fields:" + field.id + ":reportReturnValue")) {
-                                let reportReturnValue = nconf.get("defaults:fields:" + field.id + ":reportReturnValue")
-                                vueOutput += " reportReturnValue=\"" + reportReturnValue + "\""
-                            } else if(nconf.get("defaults:page:" + req.params.page + ":fields:" + field.id + ":reportReturnValue")) {
-                                let reportReturnValue = nconf.get("defaults:page:" + req.params.page + ":fields:" + field.id + ":reportReturnValue")
-                                vueOutput += " reportReturnValue=\"" + reportReturnValue + "\""
-                            }
-                            if(nconf.get("defaults:fields:" + field.id + ":referenceDisplayPath")) {
-                                let referenceDisplayPath = nconf.get("defaults:fields:" + field.id + ":referenceDisplayPath")
-                                vueOutput += " referenceDisplayPath=\"" + referenceDisplayPath + "\""
-                            } else if(nconf.get("defaults:page:" + req.params.page + ":fields:" + field.id + ":referenceDisplayPath")) {
-                                let referenceDisplayPath = nconf.get("defaults:page:" + req.params.page + ":fields:" + field.id + ":referenceDisplayPath")
-                                vueOutput += " referenceDisplayPath=\"" + referenceDisplayPath + "\""
-                            }
-                        }
 
 
                         if (nconf.get("defaults:fields:" + field.id + ":user_filter")) {
@@ -1489,7 +1401,7 @@ router.get('/questionnaire/:questionnaire/:page', async function (req, res) {
                             }
                         }
 
-                        const field_attrs = ["initialValue"]
+                        const field_attrs = ["initialValue", "report", "reportReturnValue", "referenceDisplayPath", "searchParameter", "initialProfile", "allowedProfiles", "pageTargetProfile"]
                         for (let attr of field_attrs) {
                             if (nconf.get("defaults:fields:" + field.id + ":" + attr)) {
                                 vueOutput += " " + attr + "=\""
