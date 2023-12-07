@@ -169,6 +169,10 @@ router.get('/reload', function (req, res) {
     })
 })
 
+router.get('/getParameters', (req, res) => {
+    res.json(nconf.get(req.query.key))
+})
+
 const getDefinition = (resource) => {
     let structureDef = resource.split('/')
     return fhirAxios.read(structureDef[0], structureDef[1])
@@ -596,7 +600,7 @@ router.get('/page/:page/:type?', function (req, res) {
                             attrs.unshift("id")
                         }
                         output += "<fhir-" + eleName + " :slotProps=\"slotProps\" :edit=\"isEdit\""
-                        let displayType, readOnlyIfSet , searchParameter
+                        let displayType, readOnlyIfSet
                         if (pageFields.hasOwnProperty(fields[field].id)) {
                             if (pageFields[fields[field].id].type) {
                                 //output += " displayType=\""+ pageFields[ fields[field].id ].type +"\""

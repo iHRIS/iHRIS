@@ -188,11 +188,18 @@ export default {
       open: [],
       treeLookup: {},
       allAllowed: true,
-      pathes: {}
+      pathes: {},
+      shortnames: {}
     }
   },
   created: function() {
     //this function is defined under dataDisplay mixin
+    fetch('/config/getParameters?key=shortname:profile').then((response) => {
+      response.json().then((param) => {
+        this.shortnames = param
+        // this.shortname("http://ihris.org/fhir/StructureDefinition/na-salary-notch-profile")
+      })
+    })
     this.hideShowField(this.displayCondition)
     this.setupData()
   },
@@ -416,13 +423,16 @@ export default {
             if ( data.entry && data.entry.length > 0 ) {
               for( let entry of data.entry ) {
                 let locked = this.allAllowed ? false : !entry.resource.meta.profile.find(profile => targetProfile.includes(profile))
-                let name = entry.resource.name
-                if(this.resource === 'Basic') {
-                  name = entry.resource.extension.find((ext) => {
-                    return ext.url === 'http://ihris.org/fhir/StructureDefinition/ihris-basic-name'
-                  })
-                  if(name) {
-                    name = name.valueString
+                let name = await this.resourceDisplayName(entry.resource)
+                if(!name) {
+                  name = entry.resource.name
+                  if(!name) {
+                    name = entry.resource.extension && entry.resource.extension.find((ext) => {
+                      return ext.url === 'http://ihris.org/fhir/StructureDefinition/ihris-basic-name'
+                    })
+                    if(name) {
+                      name = name.valueString
+                    }
                   }
                 }
                 let profile = []
@@ -552,6 +562,66 @@ export default {
           })
         }
       }
+    },
+    resourceDisplayName(resource) {
+      return new Promise((resolve) => {
+        let profile = resource.meta.profile[0]
+        //this is because some profile url contains : i.e http://
+        let profilePortions = profile.split(":")
+        let details
+        for(let portion of profilePortions) {
+          if(!details) {
+            details = this.shortnames[portion]
+          } else {
+            details = details[portion]
+          }
+        }
+        if(!details) {
+          return resolve()
+        }
+        let format = details.format || "%s"
+        let output = []
+        let order = details.order ? details.order.split(',') : Object.keys( details.path )
+        if ( details.fhirpath ) {
+          output.push( this.$fhirpath.evaluate( resource, details.fhirpath ).join( details.join || " " ) )
+        } else if ( details.paths ) {
+          for ( let ord of order ) {
+            ord = ord.trim()
+            output.push( this.$fhirpath.evaluate( resource, details.paths[ ord ].fhirpath ).join( details.paths[ord].join || " " ) )
+          }
+        }
+        let promises = []
+        for(let val of output) {
+          promises.push(new Promise((resolve) => {
+            if(val.split("/").length === 2) {
+              fetch("/fhir/" + val).then((response) => {
+                response.json().then(async(resp) => {
+                  let val = await this.resourceDisplayName(resp)
+                  if(!val) {
+                    val = resp.name
+                    if(!val) {
+                      val = resp.extension && resp.extension.find((ext) => {
+                        return ext.url === 'http://ihris.org/fhir/StructureDefinition/ihris-basic-name'
+                      })
+                      if(val) {
+                        val = val.valueString
+                      }
+                    }
+                  }
+                  format = format.replace('%s', val)
+                  resolve()
+                })
+              })
+            } else {
+              format = format.replace('%s', val)
+              resolve()
+            }
+          }))
+        }
+        Promise.all(promises).then(() => {
+          return resolve(format)
+        })
+      })
     }
   },
   computed: {
