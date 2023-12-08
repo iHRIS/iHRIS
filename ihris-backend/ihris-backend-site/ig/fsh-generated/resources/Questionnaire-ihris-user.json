@@ -142,7 +142,15 @@
         {
           "linkId": "location",
           "definition": "http://ihris.org/fhir/StructureDefinition/ihris-person-user#Person.extension:location.value[x]:valueReference",
-          "text": "Facility",
+          "text": "Facility/Location",
+          "type": "reference",
+          "required": false,
+          "repeats": false
+        },
+        {
+          "linkId": "practitioner",
+          "definition": "http://ihris.org/fhir/StructureDefinition/ihris-person-user#Person.extension:practitioner.value[x]:valueReference",
+          "text": "Self Service Practitioner",
           "type": "reference",
           "required": false,
           "repeats": false

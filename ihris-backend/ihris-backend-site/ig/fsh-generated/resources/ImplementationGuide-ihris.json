@@ -1900,6 +1900,13 @@
       },
       {
         "reference": {
+          "reference": "Basic/ihris-role-hrmanager"
+        },
+        "name": "iHRIS HR Manager Role",
+        "exampleCanonical": "http://ihris.org/fhir/StructureDefinition/ihris-role"
+      },
+      {
+        "reference": {
           "reference": "Basic/ihris-role-open"
         },
         "name": "iHRIS Open Role",

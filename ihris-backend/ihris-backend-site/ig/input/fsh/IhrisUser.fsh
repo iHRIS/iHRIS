@@ -280,46 +280,45 @@ Usage:          #definition
 
 * item[0].item[5].linkId = "location"
 * item[0].item[5].definition = "http://ihris.org/fhir/StructureDefinition/ihris-person-user#Person.extension:location.value[x]:valueReference"
-* item[0].item[5].text = "Facility"
+* item[0].item[5].text = "Facility/Location"
 * item[0].item[5].type = #reference
 * item[0].item[5].required = false
 * item[0].item[5].repeats = false
 
-// * item[0].item[6].linkId = "practitioner"
-// * item[0].item[6].definition = "http://ihris.org/fhir/StructureDefinition/ihris-person-user#Person.extension:practitioner.value[x]:valueReference"
-// * item[0].item[6].text = "Self Service Practitioner"
-// * item[0].item[6].type = #reference
-// * item[0].item[6].required = false
-// * item[0].item[6].repeats = false
-
-* item[0].item[6].linkId = "Person.active"
-* item[0].item[6].definition = "http://ihris.org/fhir/StructureDefinition/ihris-person-user#Person.active"
-* item[0].item[6].text = "Active?"
-* item[0].item[6].type = #boolean
-* item[0].item[6].required = true
+* item[0].item[6].linkId = "practitioner"
+* item[0].item[6].definition = "http://ihris.org/fhir/StructureDefinition/ihris-person-user#Person.extension:practitioner.value[x]:valueReference"
+* item[0].item[6].text = "Self Service Practitioner"
+* item[0].item[6].type = #reference
+* item[0].item[6].required = false
 * item[0].item[6].repeats = false
-* item[0].item[6].readOnly = true
-* item[0].item[6].answerOption.valueString = "true"
-* item[0].item[6].answerOption.initialSelected = true
 
-
-* item[0].item[7].linkId = "password#password"
-* item[0].item[7].definition = "http://ihris.org/fhir/StructureDefinition/ihris-person-user#Person.extension:password.extension:password.value[x]:valueString"
-* item[0].item[7].text = "Password"
-* item[0].item[7].type = #string
+* item[0].item[7].linkId = "Person.active"
+* item[0].item[7].definition = "http://ihris.org/fhir/StructureDefinition/ihris-person-user#Person.active"
+* item[0].item[7].text = "Active?"
+* item[0].item[7].type = #boolean
 * item[0].item[7].required = true
 * item[0].item[7].repeats = false
-* item[0].item[7].extension[constraint].extension[key].valueId = "ihris-password-strength-check"
-* item[0].item[7].extension[constraint].extension[severity].valueCode = #error
-* item[0].item[7].extension[constraint].extension[expression].valueString = "matches('^(?=.*\\\\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$')"
-* item[0].item[7].extension[constraint].extension[human].valueString = "Password Should be Minimum eight characters, at least one uppercase letter, one lowercase letter, one number and one special character"
+* item[0].item[7].readOnly = true
+* item[0].item[7].answerOption.valueString = "true"
+* item[0].item[7].answerOption.initialSelected = true
 
-* item[0].item[8].linkId = "confrimpassword#password"
+* item[0].item[8].linkId = "password#password"
 * item[0].item[8].definition = "http://ihris.org/fhir/StructureDefinition/ihris-person-user#Person.extension:password.extension:password.value[x]:valueString"
-* item[0].item[8].text = "Confirm Password"
+* item[0].item[8].text = "Password"
 * item[0].item[8].type = #string
 * item[0].item[8].required = true
 * item[0].item[8].repeats = false
+* item[0].item[8].extension[constraint].extension[key].valueId = "ihris-password-strength-check"
+* item[0].item[8].extension[constraint].extension[severity].valueCode = #error
+* item[0].item[8].extension[constraint].extension[expression].valueString = "matches('^(?=.*\\\\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$')"
+* item[0].item[8].extension[constraint].extension[human].valueString = "Password Should be Minimum eight characters, at least one uppercase letter, one lowercase letter, one number and one special character"
+
+* item[0].item[9].linkId = "confrimpassword#password"
+* item[0].item[9].definition = "http://ihris.org/fhir/StructureDefinition/ihris-person-user#Person.extension:password.extension:password.value[x]:valueString"
+* item[0].item[9].text = "Confirm Password"
+* item[0].item[9].type = #string
+* item[0].item[9].required = true
+* item[0].item[9].repeats = false
 
 Instance:       IhrisChangePassword
 InstanceOf:     IhrisQuestionnaire

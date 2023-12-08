@@ -191,6 +191,30 @@ Usage:          #example
 * extension[task][0].valueReference = Reference(Basic/ihris-task-all-permissions-to-everything)
 * extension[role][0].valueReference = Reference(Basic/ihris-role-open)
 
+Instance:       ihris-role-hrmanager
+InstanceOf:     IhrisRole
+Title:          "iHRIS HR Manager Role"
+Usage:         #example
+* extension[name].valueString = "HR Manager Role"
+* extension[primary].valueBoolean = true
+* extension[role][0].valueReference = Reference(Basic/ihris-role-open)
+* extension[task][0].valueReference = Reference(Basic/ihris-task-navigation-profile)
+* extension[task][1].valueReference = Reference(Basic/ihris-task-read-questionnaire-resource)
+* extension[task][2].valueReference = Reference(Basic/ihris-task-navigation-profile)
+* extension[task][3].valueReference = Reference(Basic/ihris-task-navigation-password)
+* extension[task][4].valueReference = Reference(Basic/ihris-task-read-ihris-page-practitioner)
+* extension[task][5].valueReference = Reference(Basic/ihris-task-read-ihris-page-practitioner-role)
+* extension[task][6].valueReference = Reference(Basic/ihris-task-read-code-system)
+* extension[task][7].valueReference = Reference(Basic/ihris-task-read-value-set)
+* extension[task][8].valueReference = Reference(Basic/ihris-task-read-location-resource)
+* extension[task][9].valueReference = Reference(Basic/ihris-task-write-practitioner-resource)
+* extension[task][10].valueReference = Reference(Basic/ihris-task-write-questionnaire-response-resource)
+* extension[task][11].valueReference = Reference(Basic/ihris-task-write-questionnaire-resource)
+* extension[task][12].valueReference = Reference(Basic/ihris-task-write-basic-resource)
+* extension[task][13].valueReference = Reference(Basic/ihris-task-write-questionnaire-change-password)
+* extension[task][14].valueReference = Reference(Basic/ihris-task-write-person-resource)
+* extension[task][15].valueReference = Reference(Basic/ihris-task-write-document-reference)
+
 
 Instance:       ihris-task-navigation-profile
 InstanceOf:     IhrisTask
