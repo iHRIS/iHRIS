@@ -151,8 +151,9 @@ export default {
                       row.actions.push( action )
                     }
                   } else {
+                    //non row actions has to be tested against the latest resource
                     if ( action.condition ) {
-                      let meets = this.$fhirpath.evaluate( entry.resource, action.condition )
+                      let meets = this.$fhirpath.evaluate( data.entry[0].resource, action.condition )
                       if ( action.hasOwnProperty("meets") ) {
                         action.meets = action.meets && meets.every( meet => meet )
                       } else {

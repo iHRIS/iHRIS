@@ -424,17 +424,6 @@ export default {
               for( let entry of data.entry ) {
                 let locked = this.allAllowed ? false : !entry.resource.meta.profile.find(profile => targetProfile.includes(profile))
                 let name = await this.resourceDisplayName(entry.resource)
-                if(!name) {
-                  name = entry.resource.name
-                  if(!name) {
-                    name = entry.resource.extension && entry.resource.extension.find((ext) => {
-                      return ext.url === 'http://ihris.org/fhir/StructureDefinition/ihris-basic-name'
-                    })
-                    if(name) {
-                      name = name.valueString
-                    }
-                  }
-                }
                 let profile = []
                 if(entry.resource.meta && entry.resource.meta.profile) {
                   profile = entry.resource.meta.profile
@@ -565,19 +554,30 @@ export default {
     },
     resourceDisplayName(resource) {
       return new Promise((resolve) => {
-        let profile = resource.meta.profile[0]
-        //this is because some profile url contains : i.e http://
-        let profilePortions = profile.split(":")
         let details
-        for(let portion of profilePortions) {
-          if(!details) {
-            details = this.shortnames[portion]
-          } else {
-            details = details[portion]
+        if(resource.meta && resource.meta.profile) {
+          let profile = resource.meta.profile[0]
+          //this is because some profile url contains : i.e http://
+          let profilePortions = profile.split(":")
+          for(let portion of profilePortions) {
+            if(!details) {
+              details = this.shortnames[portion]
+            } else {
+              details = details[portion]
+            }
           }
         }
         if(!details) {
-          return resolve()
+          let name = resource.name
+          if(!name) {
+            name = resource.extension && resource.extension.find((ext) => {
+              return ext.url === 'http://ihris.org/fhir/StructureDefinition/ihris-basic-name'
+            })
+            if(name) {
+              name = name.valueString
+            }
+          }
+          return resolve(name)
         }
         let format = details.format || "%s"
         let output = []
@@ -597,17 +597,6 @@ export default {
               fetch("/fhir/" + val).then((response) => {
                 response.json().then(async(resp) => {
                   let val = await this.resourceDisplayName(resp)
-                  if(!val) {
-                    val = resp.name
-                    if(!val) {
-                      val = resp.extension && resp.extension.find((ext) => {
-                        return ext.url === 'http://ihris.org/fhir/StructureDefinition/ihris-basic-name'
-                      })
-                      if(val) {
-                        val = val.valueString
-                      }
-                    }
-                  }
                   format = format.replace('%s', val)
                   resolve()
                 })
