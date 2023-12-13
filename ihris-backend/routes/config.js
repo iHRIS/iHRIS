@@ -283,6 +283,22 @@ router.get('/page/:page/:type?', function (req, res) {
         const createTemplate = async (resource, structure) => {
             logger.silly(JSON.stringify(structure, null, 2))
 
+            let mounts = []
+            try {
+                let mountExts = pageDisplay.extension.filter(ext => ext.url === "mount")
+                for(let mountExt of mountExts) {
+                    let name = mountExt.extension.find(ext => ext.url === "name")?.valueString
+                    let fromref = mountExt.extension.find(ext => ext.url === "fromref")?.valueString
+                    if(name && fromref) {
+                        mounts.push({
+                            name,
+                            fromref
+                        })
+                    }
+                }
+            } catch (error) {
+                
+            }
             let links = []
             try {
                 let linkExts = pageDisplay.extension.filter(ext => ext.url === "link")
@@ -379,18 +395,6 @@ router.get('/page/:page/:type?', function (req, res) {
                                 let header = column.extension.find(ext => ext.url === "header").valueString
                                 let field = column.extension.find(ext => ext.url === "field").valueString
                                 if (header && field) {
-                                    /*
-                                  let definition = await fhirDefinition.getFieldDefinition( resource +"#"+ field )
-                                  let binding = ""
-                                  if ( definition.binding ) {
-                                    binding = details.binding
-                                  } else if ( details.type[0].code === "Coding" ) {
-                                    definition = await fhirDefinition.getFieldDefinition( resource +"#"+ field.substring( 0, field.lastIndexOf('.') ) )
-                                    if ( definition.binding ) {
-                                      binding = details.binding
-                                    }
-                                  }
-                                  */
                                     columns.push({text: header, value: field})
                                 }
                             } catch (err) {
@@ -542,6 +546,9 @@ router.get('/page/:page/:type?', function (req, res) {
                 }
                 if (links.length > 0) {
                     vueOutput += " :links='links'"
+                }
+                if (mounts.length > 0) {
+                    vueOutput += " :mounts='mounts'"
                 }
                 vueOutput += '><template #default=\"slotProps\">' + "\n"
                 if (structure[fhir].hasOwnProperty("fields")) {
@@ -767,6 +774,7 @@ router.get('/page/:page/:type?', function (req, res) {
                     columns: allColumns,
                     actions: allActions,
                     links: links,
+                    mounts: mounts,
                     constraints: constraints
                 }
             })

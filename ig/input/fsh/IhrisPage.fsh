@@ -20,7 +20,8 @@ Description:    "iHRIS Page Display details."
       filter 0..* MS and
       add 0..1 MS and
       field 0..* MS and
-      link 0..* MS 
+      link 0..* MS and
+      mount 0..* MS
 
 * extension[resource].value[x] only Reference
 * extension[resource].valueReference only Reference(StructureDefinition or CodeSystem)
@@ -56,6 +57,16 @@ Description:    "iHRIS Page Display details."
 * extension[add].extension[task].value[x] only id
 * extension[add].extension[task].valueId MS
 * extension[add].extension[task].valueId ^label = "Tasks that has access to this button"
+
+* extension[mount].extension contains
+      name 1..1 MS and
+      fromref 1..1 MS
+* extension[mount].extension[name].value[x] only string
+* extension[mount].extension[name].valueString MS
+* extension[mount].extension[name].valueString ^label = "Unique name of the resource to be mounted"
+* extension[mount].extension[fromref].value[x] only string
+* extension[mount].extension[fromref].valueString MS
+* extension[mount].extension[fromref].valueString ^label = "Mount resource from reference"
 
 * extension[link].extension contains
       field 0..1 MS and

@@ -50,6 +50,7 @@ export default {
                   columns: data.data.columns,
                   actions: data.data.actions,
                   links: data.data.links,
+                  mounts: data.data.mounts,
                   constraints: data.data.constraints
                 }
               },
