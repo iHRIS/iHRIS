@@ -57,7 +57,8 @@ nav:
       - user/reports.md
       - user/system_users.md
       - user/ihris_apps.md
-
+  - FAQs:
+      - faq/faq.md
 markdown_extensions:
   - admonition
   - codehilite:

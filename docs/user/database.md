@@ -41,7 +41,8 @@ You can search by **code** or by **display**
 
 ![Alt text](../img/classification.PNG 'Search Classification')
 
-Your results shall be displayed as above
+Your resu
+\lts shall be displayed as above
 
 ## Degree/ Course
 
