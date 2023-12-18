@@ -354,7 +354,7 @@ router.get('/page/:page/:type?', function (req, res) {
             let sections = {}
             let sectionMap = {}
             for (let section of pageSections) {
-                let title, description, name, resourceExt, resource, linkfield, searchfield, searchfieldtarget
+                let title, description, name, sectionEmptyDisplay, resourceExt, resource, linkfield, searchfield, searchfieldtarget
                 let fields = []
                 let columns = []
                 let actions = []
@@ -370,6 +370,7 @@ router.get('/page/:page/:type?', function (req, res) {
                     name = section.extension.find(ext => ext.url === "name").valueString
                 } catch (err) {
                 }
+                sectionEmptyDisplay = section.extension.find(ext => ext.url === "emptyDisplay")?.valueBoolean
                 try {
                     fields = section.extension.filter(ext => ext.url === "field").map(ext => ext.valueString)
                 } catch (err) {
@@ -471,6 +472,7 @@ router.get('/page/:page/:type?', function (req, res) {
                 sections[name] = {
                     title: title,
                     description: description,
+                    emptyDisplay: sectionEmptyDisplay,
                     fields: fields,
                     order: sectionOrder,
                     resource: resource,
@@ -514,6 +516,7 @@ router.get('/page/:page/:type?', function (req, res) {
                     sections[fhir] = {
                         title: fhir,
                         description: "",
+                        emptyDisplay: false,
                         fields: [],
                         order: {},
                         resource: undefined,
@@ -747,6 +750,7 @@ router.get('/page/:page/:type?', function (req, res) {
                             vueOutput += '<ihris-secondary :edit="isEdit" :link-id="fhirId" profile="' + secondary.url
                                 + '" field="' + second_fhir
                                 + '" title="' + sections[name].title
+                                + '" emptyDisplay="' + sections[name].emptyDisplay
                                 + '" link-field="' + sections[name].linkfield
                                 + '" search-field="' + (sections[name].searchfield || "")
                                 + '" search-field-target="' + (sections[name].searchfieldtarget || "")
@@ -1151,6 +1155,10 @@ router.get('/questionnaire/:questionnaire/:page', async function (req, res) {
                     item.linkId = item.linkId.split("#")[0]
                 }
                 let itemType = fhirDefinition.camelToKebab(item.type)
+                if(itemType === 'text') {
+                    displayType = 'text'
+                    itemType = 'string'
+                }
                 if (item.repeats && !item.readOnly) {
                     let fieldPath = item.definition.split("#")[1]
                     let fieldPathSlices = fieldPath.split(".")

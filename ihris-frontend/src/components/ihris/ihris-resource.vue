@@ -188,8 +188,11 @@ export default {
             response
                 .json()
                 .then((data) => {
-                  if (data.entry) {
-                    let role = data.entry[0].resource.code[0].coding[0].display;
+                  if (data.entry && data.entry.length) {
+                    let role
+                    if(data.entry[0].resource.code) {
+                      role = data.entry[0].resource.code[0].coding[0].display;
+                    }
                     this.position = role? role : "";
                   }
                 })

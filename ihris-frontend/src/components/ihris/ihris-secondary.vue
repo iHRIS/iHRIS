@@ -1,6 +1,7 @@
 <template>
   <v-container class="my-3" v-if="!edit">
     <v-data-table
+      v-if="emptyDisplay != 'false'"
       :headers="translatedHeader"
       :items="items"
       item-key="id"
@@ -51,7 +52,7 @@ const isObject = (obj) => {
 export default {
   name: "ihris-secondary",
   props: ["title", "field", "profile", "slotProps", "link-id", "link-field",
-    "search-field", "search-field-target", "edit", "columns", "actions"],
+    "search-field", "search-field-target", "edit", "columns", "actions", "empty-display"],
   data: function() {
     return {
       source: { data: {}, path: this.field },
@@ -63,6 +64,9 @@ export default {
     }
   },
   mounted: function() {
+    if(this.emptyDisplay == 'false') {
+      this.$emit("isEmpty", true)
+    }
     this.setupData()
   },
   watch: {
