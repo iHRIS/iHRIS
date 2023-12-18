@@ -1270,6 +1270,12 @@ router.get('/questionnaire/:questionnaire/:page', async function (req, res) {
                         vueOutput += "\n</template></fhir-identifier>\n"
                     }
                     vueOutput += "</template>\n</ihris-questionnaire-group>\n"
+                } else if(itemType === 'display') {
+                    vueOutput += "<ihris-display text='" + item.text + "'"
+                    if(displayType) {
+                        vueOutput +=  " type='" + displayType + "'"
+                    }
+                    vueOutput += "/>"
                 } else if (item.readOnly) {
                     vueOutput += "<ihris-hidden path=\"" + item.linkId + "\" label=\""
                         + item.text + "\""
