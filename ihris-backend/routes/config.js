@@ -1100,7 +1100,7 @@ router.get('/questionnaire/:questionnaire/:page', async function (req, res) {
 
 
         let sectionMenu = []
-        let templateData = {sectionMenu: {}, hidden: {}, constraints: {}}
+        let templateData = {sectionMenu: {}, hidden: {}, initials: {}, constraints: {}}
 
         const processConstraints = (extension, fieldDef) => {
             let constraintKeys = []
@@ -1363,6 +1363,15 @@ router.get('/questionnaire/:questionnaire/:page', async function (req, res) {
                         }
                     }
                     vueOutput += "<fhir-" + itemType + " field=\"" + itemFieldPath + "\"" + " :slotProps=\"slotProps\" :edit=\"isEdit\" path=\"" + item.linkId + "\"" + "displayCondition=\"" + displayCondition + "\""
+                    if(item.initial && item.initial.length) {
+                        let answVal = Object.keys(item.initial[0])[0]
+                        if(answVal) {
+                            console.log(item.initial[0][answVal]);
+                            let answerKey = getUKey()
+                            templateData.initials[answerKey] = item.initial[0][answVal]
+                            vueOutput += " :initial=\"initials." + answerKey + "\""
+                        }
+                    }
                     if(readOnlyIfSet) {
                         vueOutput += " :readOnlyIfSet=\"true\""
                     }

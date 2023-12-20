@@ -53,7 +53,7 @@ import { dataDisplay } from "@/mixins/dataDisplay"
 export default {
   name: "fhir-string",
   props: ["field", "label", "min", "max", "id", "path", "slotProps", "sliceName","base-min","base-max","edit","readOnlyIfSet",
-    "constraints", "displayType", "displayCondition"],
+    "constraints", "displayType", "displayCondition", "initial"],
   components: {
     IhrisElement
   },
@@ -70,6 +70,9 @@ export default {
     }
   },
   created: function() {
+    if(this.initial && !this.$route.params.id) {
+      this.value = this.initial
+    }
     //this function is defined under dataDisplay mixin
     this.hideShowField(this.displayCondition)
     this.setupData()

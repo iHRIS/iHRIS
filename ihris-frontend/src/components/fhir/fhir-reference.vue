@@ -158,7 +158,8 @@ export default {
   name: "fhir-reference",
   props: ["field","label","sliceName","targetProfile","targetResource","min","max","base-min","base-max",
     "slotProps","path","sub-fields","edit","readOnlyIfSet","constraints", "displayType", 
-    "initialValue", "overrideValue", "displayCondition", "searchParameter", "initialProfile", "allowedProfiles", "pageTargetProfile", "report", "reportReturnValue", "referenceDisplayPath"],
+    "initialValue", "overrideValue", "displayCondition", "searchParameter", "initialProfile", "allowedProfiles", "pageTargetProfile",
+    "report", "reportReturnValue", "referenceDisplayPath", "initial"],
   components: {
     IhrisElement,
     "es-report": () => import(/* webpackChunkName: "fhir-questionnaire" */ "@/views/es-report" )
@@ -192,14 +193,13 @@ export default {
       shortnames: {}
     }
   },
-  created: function() {
-    //this function is defined under dataDisplay mixin
+  created: async function() {
     fetch('/config/getParameters?key=shortname:profile').then((response) => {
       response.json().then((param) => {
         this.shortnames = param
-        // this.shortname("http://ihris.org/fhir/StructureDefinition/na-salary-notch-profile")
       })
     })
+    //this function is defined under dataDisplay mixin
     this.hideShowField(this.displayCondition)
     this.setupData()
   },
@@ -335,11 +335,17 @@ export default {
           let results = this.$fhirpath.evaluate( this.slotProps.source.data, expression )
           this.source.data = results[0]
         }
-        if( this.source.data ) {
-          this.preset = true
-          this.select = this.source.data.reference
-          this.lockWatch = true
+      }
+      if(this.initial && !this.$route.params.id) {
+        let reference = this.initial.reference.replace(/["']/g, "");
+        this.source.data = {
+          reference
         }
+      }
+      if( this.source.data ) {
+        this.preset = true
+        this.select = this.source.data.reference
+        this.lockWatch = true
       }
       this.disabled = this.readOnlyIfSet && this.preset
     },

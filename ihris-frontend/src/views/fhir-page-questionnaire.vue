@@ -48,6 +48,7 @@ export default {
                   fhirId: pageId,
                   sectionMenu: data.data.sectionMenu,
                   hidden: data.data.hidden,
+                  initials: data.data.initials,
                   constraints: data.data.constraints
                 }
               },
