@@ -104,6 +104,7 @@ export default {
       fetch("/auth").then(()=> {
         fetch("/config/site").then(response => {
           response.json().then(data => {
+            this.$store.state.version = data.version
             if (data.hasOwnProperty("security") && data.security.hasOwnProperty("disabled")) {
               this.$store.commit('securityOff', data.security.disabled)
             }
@@ -158,6 +159,7 @@ export default {
 
         fetch("/config/site").then(response => {
           response.json().then(data => {
+            this.$store.state.version = data.version
             if (data.hasOwnProperty("footer")) {
               if (data.footer.hasOwnProperty("links")) {
                 for(let id of Object.keys(data.footer.links)) {

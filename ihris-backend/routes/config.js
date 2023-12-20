@@ -11,7 +11,7 @@ const fhirDefinition = require('../modules/fhir/fhirDefinition')
 const crypto = require('crypto')
 const logger = require('../winston')
 const winston = require("winston");
-
+const package = require("../package.json")
 
 const getUKey = () => {
     return Math.random().toString(36).replace(/^[^a-z]+/, '') + Math.random().toString(36).substring(2, 15)
@@ -85,6 +85,7 @@ router.get("/site", async function (req, res) {
     if(!site.auth) {
         site.auth = {}
     }
+    site.version = package.version
     site.auth.signup = {...nconf.get("auth:signup")}
     if (nconf.getBool("security:disabled")) {
         site.security = {disabled: true};
@@ -1366,7 +1367,6 @@ router.get('/questionnaire/:questionnaire/:page', async function (req, res) {
                     if(item.initial && item.initial.length) {
                         let answVal = Object.keys(item.initial[0])[0]
                         if(answVal) {
-                            console.log(item.initial[0][answVal]);
                             let answerKey = getUKey()
                             templateData.initials[answerKey] = item.initial[0][answVal]
                             vueOutput += " :initial=\"initials." + answerKey + "\""

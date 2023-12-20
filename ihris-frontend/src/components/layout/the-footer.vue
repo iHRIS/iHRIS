@@ -1,5 +1,8 @@
 <template>
   <v-footer color="white" app>
+    <v-row justify="start">
+      iHRIS {{ $store.state.version }}
+    </v-row>
     <v-row justify="end">
       <v-btn
         v-for="link in footer.links"

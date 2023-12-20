@@ -5,6 +5,7 @@ Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
+    version: "5.0.0",
     user: {
       loggedin: false,
       name: "",
