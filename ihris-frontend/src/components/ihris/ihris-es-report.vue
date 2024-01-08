@@ -4,7 +4,9 @@
       <v-card-title class="ma-4">
         <v-layout row wrap>
           <v-icon class="mr-2" color="#0d3552">mdi-table-large</v-icon>
-          <h4 v-if="!hideLabel" class="font-weight-bold" style="color: #0d3552">{{ label }}</h4>
+          <h4 v-if="!hideLabel" class="font-weight-bold" style="color: #0d3552">
+            {{ label }}
+          </h4>
           <v-spacer></v-spacer>
           <v-row align="center" class="pr-4" justify="end">
             <v-btn
@@ -21,7 +23,7 @@
               Customize Report
               {{ $t("App.hardcoded-texts.Customize Report") }}
             </v-btn>
-            <v-btn color="info" @click="reportExport('csv')" v-if="!hideExport">
+            <v-btn v-if="!hideExport" color="info" @click="reportExport('csv')">
               <v-progress-circular
                 v-if="downloading"
                 color="amber"
@@ -34,25 +36,26 @@
         </v-layout>
       </v-card-title>
       <v-divider class="my-2"></v-divider>
-      <v-expansion-panels hover class="elevation-0">
+      <v-expansion-panels class="elevation-0" hover>
         <v-expansion-panel>
           <v-expansion-panel-header color="blue-grey darken-2">
-            <h3 class="font-weight-bold subtitle-2 white--text"><v-icon color="white" class="mr-2">mdi-filter-variant</v-icon>Filters</h3>
+            <h3 class="font-weight-bold subtitle-2 white--text">
+              <v-icon class="mr-2" color="white">mdi-filter-variant</v-icon>
+              Filters
+            </h3>
             <template v-slot:actions>
-              <v-icon color="white">
-                $expand
-              </v-icon>
+              <v-icon color="white"> $expand </v-icon>
             </template>
           </v-expansion-panel-header>
           <v-expansion-panel-content>
-            <v-card-title class="elevation-0" v-if="!hideLabel">
+            <v-card-title v-if="!hideLabel" class="elevation-0">
               <slot></slot>
             </v-card-title>
           </v-expansion-panel-content>
         </v-expansion-panel>
       </v-expansion-panels>
       <v-card-subtitle v-if="error_message" class="white--text error"
-      >{{ error_message }}
+        >{{ error_message }}
       </v-card-subtitle>
       <v-data-table
         v-model="selected"
@@ -74,9 +77,9 @@
         <v-card class="px-6 py-4">
           <v-card-title class="justify-center">
             <span class="text-h6"
-            ><v-icon class="mr-2" color="primary" large
-            >mdi-table-check</v-icon
-            >{{ $t("App.hardcoded-texts.selectFeild") }}</span
+              ><v-icon class="mr-2" color="primary" large
+                >mdi-table-check</v-icon
+              >{{ $t("App.hardcoded-texts.selectFeild") }}</span
             >
           </v-card-title>
           <v-card-text>
@@ -145,7 +148,7 @@ export default {
     "hideCheckboxes",
     "hideLabel",
     "hideExport",
-    "hideReportCustomization"
+    "hideReportCustomization",
   ],
   data: function () {
     return {
@@ -165,6 +168,7 @@ export default {
       selectAll: false,
       //custom report
       dialog: false,
+      resourcePage: "",
     };
   },
   watch: {
@@ -215,17 +219,24 @@ export default {
     },
   },
   created: function () {
+    this.getResourcePage();
     //sorting columns
-    if(this.reportData && this.reportData.fieldsDetails) {
+    if (this.reportData && this.reportData.fieldsDetails) {
       this.reportData.fieldsDetails.sort((a, b) => {
-        if((a[2] != null && b[2] == null) || (a[2] != null && b[2] != null && a[2] < b[2])) {
-          return -1
-        } else if((b[2] != null && a[2] == null) || (a[2] != null && b[2] != null && a[2] > b[2])) {
-          return 1
+        if (
+          (a[2] != null && b[2] == null) ||
+          (a[2] != null && b[2] != null && a[2] < b[2])
+        ) {
+          return -1;
+        } else if (
+          (b[2] != null && a[2] == null) ||
+          (a[2] != null && b[2] != null && a[2] > b[2])
+        ) {
+          return 1;
         } else {
-          return -1
+          return -1;
         }
-      })
+      });
     }
     for (let field of this.reportData.fieldsDetails) {
       this.headers.push({ text: field[0], value: field[1] });
@@ -243,7 +254,10 @@ export default {
   },
   methods: {
     rowClicked(row) {
-      this.$emit('rowSelected', row)
+      this.$router.push({
+        name: "resource_view",
+        params: { page: this.resourcePage, id: row.id },
+      });
     },
     reset() {
       this.headers = this.allHeaders;
@@ -511,11 +525,27 @@ export default {
         link.click();
       });
     },
+    getResourcePage() {
+      let url = `/fhir/Basic/${this.page}?_pretty=true`;
+      fetch(url).then((response) => {
+        response.json().then((data) => {
+          let extension = data.extension.find(
+            (x) =>
+              x.url ===
+              "http://ihris.org/fhir/StructureDefinition/iHRISReportDetails"
+          );
+          let resource = extension.extension.find(
+            (x) => x.url === "resourcePage"
+          )?.valueString;
+          this.resourcePage = resource;
+        });
+      });
+    },
   },
 };
 </script>
 <style>
 tbody tr:nth-of-type(even) {
-  background-color: #E0F2F1;
+  background-color: #e0f2f1;
 }
 </style>
