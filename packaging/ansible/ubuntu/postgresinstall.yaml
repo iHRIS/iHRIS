@@ -1,0 +1,58 @@
+---
+- name: Install PostgreSQL 9 or above
+  hosts: all
+  remote_user: root
+  become: yes
+
+  tasks:
+
+    - name: Install PostgreSQL
+      apt:
+        name: ['postgresql', 'postgresql-contrib']
+        state: present
+
+    - name: Start and enable PostgreSQL
+      systemd:
+        name: postgresql
+        enabled: yes
+        state: started
+    
+    - name: Gather PostgreSQL Information
+      become: true
+      become_user: postgres
+      community.postgresql.postgresql_info:
+      register: postgres_info
+
+    - name: Create a new database with name hapi
+      postgresql_db:
+        name: hapi
+      become: true
+      become_user: postgres
+
+    - name: Create hapi user, and grant access to hapi database
+      no_log: true
+      postgresql_user:
+        db: hapi
+        name: hapi
+        password: hapi
+        priv: ALL
+      become: true
+      become_user: postgres
+
+    - name: Allow md5 connection for the db user
+      postgresql_pg_hba:
+        dest: "/etc/postgresql/{{postgres_info.version.major}}/main/pg_hba.conf"
+        contype: host
+        databases: all
+        method: md5
+        users: hapi
+        create: true
+      become: yes
+      become_user: postgres
+      notify: restart postgresql
+
+  handlers:
+    - name: restart postgresql
+      systemd:
+        name: postgresql
+        state: restarted

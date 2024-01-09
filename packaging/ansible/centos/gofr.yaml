@@ -1,0 +1,95 @@
+---
+- name: GOFR Installation into /var/lib/gofr
+  hosts: all
+  # gather_facts: false
+  tasks:
+    - pause:
+        prompt: "Please enter the name of the site without space"
+      register: result
+      until: result.user_input is not search(' ')
+      retries: 3
+      delay: 0
+    - set_fact:
+        site: "{{ result.user_input }}"
+
+    - name: Clonning GOFR github repo
+      git:
+        repo: 'https://github.com/intrahealth/gofr.git'
+        dest: /var/lib/gofr
+        clone: yes
+        force: yes
+
+    - name: Creating GOFR backend site
+      file:
+        path: /var/lib/gofr/gofr-backend/{{site}}
+        state: directory
+
+    - name: Copying GOFR backend site
+      copy:
+        src: /var/lib/gofr/gofr-backend/lib/gofr-backend-site/
+        dest: /var/lib/gofr/gofr-backend/{{site}}
+
+    - name: Creating GOFR frontend site
+      file:
+        path: /var/lib/gofr/gofr-gui/src/site
+        state: directory
+
+    - name: Copying GOFR frontend site
+      copy:
+        src: /var/lib/gofr/gofr-gui/src/gofr-frontend-site/
+        dest: /var/lib/gofr/gofr-gui/src/site
+
+    - name: Installing npm packages into gofr-backend
+      shell: |
+        cd /var/lib/gofr/gofr-backend
+        npm install
+
+    - name: Installing npm packages into {{site}}
+      shell: |
+        cd /var/lib/gofr/gofr-backend/{{site}}
+        npm install
+
+    - name: Installing npm packages into gofr-gui
+      shell: |
+        cd /var/lib/gofr/gofr-gui
+        npm install
+    
+    - name: Installing configuration
+      copy:
+        src: /var/lib/gofr/gofr-backend/{{site}}/config/default.json.example
+        dest: /var/lib/gofr/gofr-backend/{{site}}/config/default.json
+
+    - name: Reading configuration file
+      ansible.builtin.set_fact:
+        configfile: "{{ lookup('file', '/var/lib/gofr/gofr-backend/{{site}}/config/default.json') }}"
+
+    - name: Updating configuration file
+      ansible.utils.update_fact:
+        updates:
+        - path: configfile.app.site.path
+          value: /var/lib/gofr/gofr-backend/{{site}}
+        - path: configfile.mCSD.server.basePath
+          value: fhir
+      register: updated
+    
+    - name: Saving configuration file
+      copy: content="{{ updated.configfile | to_nice_json }}" dest="/var/lib/gofr/gofr-backend/{{site}}/config/default.json"
+
+    - name: Getting path of node
+      command: which node
+      register: node_path
+      ignore_errors: yes
+
+    - name: Install systemd template for gofr service
+      template:
+        src: gofr.service.j2
+        dest: /etc/systemd/system/gofr.service
+        mode: 0755
+        force: yes
+
+    - name: Start and Enable GOFR on port 4000
+      service: 
+        name: gofr
+        state: started
+        enabled: yes
+        daemon_reload: yes

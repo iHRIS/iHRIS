@@ -1,0 +1,105 @@
+---
+- name: iHRIS Installation into /var/lib/iHRIS
+  hosts: all
+  # gather_facts: false
+  tasks:
+    - pause:
+        prompt: "Please enter the name of the site without space"
+      register: result
+      until: result.user_input is not search(' ')
+      retries: 3
+      delay: 0
+    - set_fact:
+        site: "{{ result.user_input }}"
+
+    - name: Clonning iHRIS github repo
+      git:
+        repo: 'https://github.com/iHRIS/iHRIS.git'
+        dest: /var/lib/iHRIS
+        clone: yes
+        force: yes
+
+    - name: Creating iHRIS backend site
+      file:
+        path: /var/lib/iHRIS/ihris-backend/{{site}}
+        state: directory
+
+    - name: Copying iHRIS backend site
+      copy:
+        src: /var/lib/iHRIS/ihris-backend/ihris-backend-site/
+        dest: /var/lib/iHRIS/ihris-backend/{{site}}
+
+    - name: Creating iHRIS frontend site
+      file:
+        path: /var/lib/iHRIS/ihris-frontend/src/site
+        state: directory
+
+    - name: Copying iHRIS frontend site
+      copy:
+        src: /var/lib/iHRIS/ihris-frontend/src/ihris-frontend-site/
+        dest: /var/lib/iHRIS/ihris-frontend/src/site
+
+    - name: Remove package-lock.json from ihris-backend
+      ansible.builtin.file:
+        path: "/var/lib/iHRIS/ihris-backend/package-lock.json"
+        state: absent
+
+    - name: Installing npm packages into ihris-backend
+      shell: |
+        cd /var/lib/iHRIS/ihris-backend
+        npm install
+
+    - name: Installing npm packages into {{site}}
+      shell: |
+        cd /var/lib/iHRIS/ihris-backend/{{site}}
+        npm install
+
+    - name: Remove package-lock.json from ihris-frontend
+      ansible.builtin.file:
+        path: "/var/lib/iHRIS/ihris-frontend/package-lock.json"
+        state: absent
+
+    - name: Installing npm packages into ihris-frontend
+      shell: |
+        cd /var/lib/iHRIS/ihris-frontend
+        npm install --legacy-peer-deps
+    
+    - name: Installing configuration
+      copy:
+        src: /var/lib/iHRIS/ihris-backend/{{site}}/config/baseConfig.json.example
+        dest: /var/lib/iHRIS/ihris-backend/{{site}}/config/baseConfig.json
+
+    - name: Reading configuration file
+      ansible.builtin.set_fact:
+        configfile: "{{ lookup('file', '/var/lib/iHRIS/ihris-backend/{{site}}/config/baseConfig.json') }}"
+
+    - name: Updating configuration file
+      ansible.utils.update_fact:
+        updates:
+        - path: configfile.app.site.path
+          value: /var/lib/iHRIS/ihris-backend/{{site}}
+        - path: configfile.mCSD.server.basePath
+          value: fhir
+      register: updated
+    
+    - name: Saving configuration file
+      copy: content="{{ updated.configfile | to_nice_json }}" dest="/var/lib/iHRIS/ihris-backend/{{site}}/config/baseConfig.json"
+
+    - name: Getting path of node
+      command: which node
+      register: node_path
+      ignore_errors: yes
+
+    - name: Install systemd template for ihris service
+      template:
+        src: ihris.service.j2
+        dest: /etc/systemd/system/ihris.service
+        mode: 0755
+        force: yes
+
+    - name: Start and Enable iHRIS
+      service: 
+        name: ihris
+        state: started
+        enabled: yes
+        daemon_reload: yes

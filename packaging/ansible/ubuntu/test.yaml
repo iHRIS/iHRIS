@@ -1,0 +1,14 @@
+---
+- name: iHRIS Installation into /var/lib/iHRIS
+  hosts: all
+  # gather_facts: false
+  tasks:
+
+    - name: Reading configuration file
+        ansible.builtin.set_fact:
+          configfile: "{{ lookup('file', '/home/ally/iHRIS/ihris-backend/namibia/config/baseConfig1.json') }}"
+        
+    - name: Display all server names
+      ansible.builtin.debug:
+        var: item
+      loop: "{{ domain_definition | community.general.json_query('configfile.parameter[?name=='app:site:path'].valueString') }}"
