@@ -24,10 +24,10 @@
         path: /var/lib/iHRIS/ihris-backend/{{site}}
         state: directory
 
-    # - name: Copying iHRIS backend site
-    #   copy:
-    #     src: /var/lib/iHRIS/ihris-backend/ihris-backend-site/
-    #     dest: /var/lib/iHRIS/ihris-backend/{{site}}
+    - name: Copying iHRIS backend site
+      copy:
+        src: /var/lib/iHRIS/ihris-backend/ihris-backend-site/
+        dest: /var/lib/iHRIS/ihris-backend/{{site}}
 
     - name: Creating iHRIS frontend site
       file:
