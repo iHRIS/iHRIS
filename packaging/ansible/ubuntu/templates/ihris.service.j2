@@ -5,8 +5,8 @@ After=network.target
 
 [Service]
 Type=simple
-WorkingDirectory=/var/lib/ihris/ihris-backend
-ExecStart={{node_path}} /var/lib/ihris/ihris-backend/{{site}}/bin/www
+WorkingDirectory=/var/lib/iHRIS/ihris-backend
+ExecStart={{node_path.stdout}} /var/lib/iHRIS/ihris-backend/{{site}}/bin/www
 Restart=always
 Environment=NODE_ENV=production
 

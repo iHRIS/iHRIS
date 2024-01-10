@@ -24,10 +24,10 @@
         path: /var/lib/iHRIS/ihris-backend/{{site}}
         state: directory
 
-    - name: Copying iHRIS backend site
-      copy:
-        src: /var/lib/iHRIS/ihris-backend/ihris-backend-site/
-        dest: /var/lib/iHRIS/ihris-backend/{{site}}
+    # - name: Copying iHRIS backend site
+    #   copy:
+    #     src: /var/lib/iHRIS/ihris-backend/ihris-backend-site/
+    #     dest: /var/lib/iHRIS/ihris-backend/{{site}}
 
     - name: Creating iHRIS frontend site
       file:
@@ -73,13 +73,21 @@
       ansible.builtin.set_fact:
         configfile: "{{ lookup('file', '/var/lib/iHRIS/ihris-backend/{{site}}/config/baseConfig.json') }}"
 
+    - name: Setting site path index
+      ansible.builtin.set_fact:
+        sitepathindex: "{{ configfile.parameter | ansible.utils.index_of('eq', 'app:site:path', 'name')}}"
+
+    - name: Setting fhir base index
+      ansible.builtin.set_fact:
+        fhirbaseindex: "{{ configfile.parameter | ansible.utils.index_of('eq', 'fhir:base', 'name')}}"
+
     - name: Updating configuration file
       ansible.utils.update_fact:
         updates:
-        - path: configfile.app.site.path
+        - path: configfile.parameter[{{sitepathindex}}].valueString
           value: /var/lib/iHRIS/ihris-backend/{{site}}
-        - path: configfile.mCSD.server.basePath
-          value: fhir
+        - path: configfile.parameter[{{fhirbaseindex}}].valueString
+          value: http://localhost:8080/fhir
       register: updated
     
     - name: Saving configuration file
