@@ -18,7 +18,6 @@ Description:    "Defines the primary resource of the relationship"
       name 1..1 MS and
       label 1..1 MS and
       resource 1..1 MS and
-      resourcePage 0..1 MS and
       initialFilter 0..1 MS and
       query 0..1 MS and
       cachingDisabled 0..1 MS and
@@ -34,9 +33,6 @@ Description:    "Defines the primary resource of the relationship"
 * extension[resource].value[x] only string
 * extension[resource].valueString 1..1
 * extension[resource].valueString ^label = "Resource type of the primary resource"
-* extension[resourcePage].value[x] only string
-* extension[resourcePage].valueString 0..1
-* extension[resourcePage].valueString ^label = "Resource Page of the primary resource to display the data on click"
 * extension[initialFilter].value[x] only string
 * extension[initialFilter].valueString 1..1
 * extension[initialFilter].valueString ^label = "Initial Profile filter to limit instances of this resource"
