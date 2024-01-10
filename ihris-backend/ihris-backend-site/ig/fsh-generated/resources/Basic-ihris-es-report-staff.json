@@ -23,6 +23,10 @@
           "valueString": "Practitioner"
         },
         {
+          "url": "resourcePage",
+          "valueString": "practitioner"
+        },
+        {
           "url": "query",
           "valueString": "active=true"
         },

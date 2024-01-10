@@ -9,6 +9,7 @@ Usage:          #example
 * extension[reportdetails].extension[name].valueString = "practitioner"
 * extension[reportdetails].extension[label].valueString = "Staff Report"
 * extension[reportdetails].extension[resource].valueString = "Practitioner"
+* extension[reportdetails].extension[resourcePage].valueString = "practitioner"
 * extension[reportdetails].extension[query].valueString = "active=true"
 * extension[reportdetails].extension[displayCheckbox].valueBoolean = true
 * extension[reportdetails].extension[locationBasedConstraint].valueBoolean = true
