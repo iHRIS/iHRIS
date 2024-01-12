@@ -13,7 +13,8 @@
       :rules="rules"
       dense
       @change="errors = []"
-      >
+      clearable
+    >
       <template #label>{{$t(`App.fhir-resources-texts.${label}`)}} <span v-if="required" class="red--text font-weight-bold">*</span></template>
     </v-autocomplete>
   </v-container>
