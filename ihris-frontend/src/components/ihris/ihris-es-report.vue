@@ -254,10 +254,13 @@ export default {
   },
   methods: {
     rowClicked(row) {
-      this.$router.push({
-        name: "resource_view",
-        params: { page: this.resourcePage, id: row.id },
-      });
+      this.$emit('rowSelected', row)
+      if(this.resourcePage) {
+        this.$router.push({
+          name: "resource_view",
+          params: { page: this.resourcePage, id: row.id },
+        });
+      }
     },
     reset() {
       this.headers = this.allHeaders;
