@@ -70,6 +70,7 @@
         item-key="id"
         style="cursor: pointer"
         @click:row="rowClicked"
+        dense
       ></v-data-table>
     </v-card>
     <v-row justify="center">

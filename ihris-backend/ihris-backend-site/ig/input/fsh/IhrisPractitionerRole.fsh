@@ -549,3 +549,13 @@ Usage:          #definition
 * item[0].item[1].item[5].readOnly = true
 * item[0].item[1].item[5].answerOption.valueCoding = http://ihris.org/fhir/CodeSystem/ihris-position-status#occupied
 * item[0].item[1].item[5].answerOption.initialSelected = true
+
+CodeSystem:     NAResourceCodeSystem
+Id:             na-resource-codesystem
+Title:          "Code System for iHRIS Basic Resources."
+* #standard-lists         "Standard Lists"
+
+ValueSet:       NAResourceValueSet
+Id:             na-resource-valueset
+Title:          "Value Set for iHRIS Namibia Basic Resources."
+* codes from system NAResourceCodeSystem

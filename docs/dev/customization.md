@@ -6,6 +6,7 @@ Below are various ways you may use to customize iHRIS based on your needs
 
 1. Editing FSH files
 2. [Creating data entry form with Questionnaire](questionnaire.md)
+2. [Creating data display page](page.md)
 2. [Creating custom iHRIS components](custom_components.md)
 3. [iHRIS Apps](ihris_apps.md)
 4. [Tasks And Roles](tasks_roles.md)
