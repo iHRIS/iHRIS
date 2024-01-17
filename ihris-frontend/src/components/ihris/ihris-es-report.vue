@@ -304,9 +304,8 @@ export default {
           if (!sTermDet.isDropDown) {
             this.terms[sTerm] = this.terms[sTerm].replace(/\s+/g, " ").trim();
           }
-
           let esFieldName;
-          if (sTermDet.isDropDown) {
+          if (sTermDet.isDropDown && sTermDet.dataType === "text") {
             esFieldName = sTerm + ".keyword";
           } else {
             esFieldName = sTerm;
