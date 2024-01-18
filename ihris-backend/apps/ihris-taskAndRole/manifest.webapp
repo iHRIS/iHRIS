@@ -5,6 +5,9 @@
     "description": "Create Tasks and Roles of Your iHRIS Instance",
     "launch_path": "index.html",
     "icons": {
+        "16": "logo-color.jpg",
+        "48": "logo-color.jpg",
+        "128": "logo-color.jpg"
     },
     "developer": {
         "name": "Intrahealth - Digital Health Team",
