@@ -96,7 +96,7 @@ Description:    "iHRIS user Location extension for local users."
 * value[x] only Reference
 * valueReference 1..1 MS
 * valueReference ^label = "Location/Facility"
-* valueReference only Reference(IhrisFacility)
+* valueReference only Reference(IhrisFacility or IhrisJurisdiction)
 * valueReference.reference 1..1 MS
 * valueReference.reference ^label = "Location/Facility"
 
