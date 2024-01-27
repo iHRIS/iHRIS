@@ -97,45 +97,6 @@ router.get("/site", async function (req, res) {
         } else {
             site.user.loggedin = true;
             site.user.name = req.user.resource.name[0].text;
-            let locReference = "";
-            let refObj = req.user.resource.extension.find(
-                (ext) =>
-                    ext.url ===
-                    "http://ihris.org/fhir/StructureDefinition/ihris-user-location"
-            );
-            let location = ""
-
-            if (refObj) {
-                // site.user.locationId =
-                locReference = refObj.valueReference.reference;
-                location = await getLocationByRef(locReference).then((loc) => {
-                    return loc;
-                });
-                let physicalLocation = await fhirAxios
-                    .read("Location", locReference.split("/").pop())
-                    .then((loc) => {
-                        return loc;
-                    });
-
-                let physicalLocationExtension = physicalLocation.extension.find(
-                    (ext) => ext.url ==="http://ihris.org/fhir/StructureDefinition/ihris-facility-location"
-                );
-
-                let physicalLocationName = "";
-
-                if (physicalLocationExtension) {
-                    let physicalLocationId = physicalLocationExtension.valueReference.reference;
-                    physicalLocationName = await fhirAxios
-                        .read("Location", physicalLocationId.split("/").pop())
-                        .then((loc) => {
-                            return loc.name;
-                        });
-                }
-                site.user.physicalLocation = physicalLocationName;
-                site.user.facilityId = locReference.split("/").pop();
-                if (location !== "") location = " - " + location;
-            }
-            site.user.location = location;
             req.user.resource.extension.forEach((ext) => {
                 if (
                     ext.url ===
@@ -153,7 +114,24 @@ router.get("/site", async function (req, res) {
                 }
             });
         }
-        site.user.obj = req.user
+        site.user.obj = JSON.parse(JSON.stringify(req.user, 0, 2))
+        let passwd = site.user.obj.resource.extension.find((ext) => {
+            return ext.url === "http://ihris.org/fhir/StructureDefinition/ihris-password"
+        })
+        if(passwd) {
+            let passwdExt = passwd.extension.findIndex((ext) => {
+                return ext.url === 'password'
+            })
+            if(passwdExt != -1) {
+                passwd.extension.splice(passwdExt, 1)
+            }
+            let saltExt = passwd.extension.findIndex((ext) => {
+                return ext.url === 'salt'
+            })
+            if(saltExt != -1) {
+                passwd.extension.splice(saltExt, 1)
+            }
+        }
         filterNavigation(req.user, site.nav);
     } else {
         site.user = {loggedin: false};

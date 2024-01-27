@@ -215,7 +215,7 @@
 
 <script>
 // @ is an alias to /src
-
+import { eventBus } from "@/main";
 export default {
   name: "Home",
   data(){
@@ -284,19 +284,8 @@ export default {
               let user = {}
               user.obj = data.user
               user.name = "Unknown"
+              let forcePasswordChange = false
               if(data.user.resource) {
-                let locExt = data.user.resource.extension.find((ext) => {
-                  return ext.url === "http://ihris.org/fhir/StructureDefinition/ihris-user-location"
-                })
-                if(locExt) {
-                  user.location = locExt.valueReference.reference
-                }
-                let practExt = data.user.resource.extension.find((ext) => {
-                  return ext.url === "http://ihris.org/fhir/StructureDefinition/ihris-user-practitioner"
-                })
-                if(practExt) {
-                  user.reference = practExt.valueReference.reference
-                }
                 let roleExt = data.user.resource.extension.find((ext) => {
                   return ext.url === "http://ihris.org/fhir/StructureDefinition/ihris-assign-role"
                 })
@@ -305,10 +294,24 @@ export default {
                   user.role = role.pop()
                 }
                 user.name = data.user.resource.name[0].text
+                let passwd = data.user.resource.extension.find((ext) => {
+                  return ext.url === "http://ihris.org/fhir/StructureDefinition/ihris-password"
+                })
+                if(passwd) {
+                  let passwdChanged = passwd.extension.find((ext) => {
+                    return ext.url === 'passwordChanged'
+                  })
+                  if(passwdChanged && !passwdChanged.valueBoolean) {
+                    forcePasswordChange = true
+                  }
+                }
               }
-              this.$emit("loggedin", user)
-              // this.$router.push( {path: "/" } )
-              location.reload()
+              eventBus.$emit("updateconfig")
+              if(forcePasswordChange) {
+                this.$router.push({path: "/questionnaire/ihris-change-password/user"})
+              } else {
+                location.reload()
+              }
             }).catch(err => {
               this.loggingin = false
               this.snackbar = true

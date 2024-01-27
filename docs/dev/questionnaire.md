@@ -88,6 +88,7 @@ Here is a list of all informers supported so far:
 
 - tree: Used to inform that the field should be displayed as a tree of items
 - text: Used to inform that the field should be displayed as a long text
+- password: Used to inform that the field should be displayed as a password, in a way that the texts being typed are hidden
 - year: Used to inform that the date field should only display year instead of a full date
 
 ### Questionnaire Example

@@ -16,31 +16,29 @@ const workflowChangePassword = {
           entry: []
         }
         let oldpassword = req.body.item[0].item[0].answer[0].valueString
+        let userResource = await fhirAxios.read("Person", req.user.resource.id)
         try {
-          let details = req.user.resource.extension.find( ext => 
+          let details = userResource.extension.find( ext => 
             ext.url === PASS_EXTENSION )
           if ( !details ) {
-            winston.error( "Password details don't exist in user "+req.user.resource.name.text )
-            resolve(await workflowChangePassword.outcome("Password details don't exist in user "+req.user.resource.name.text))
+            winston.error( "Password details don't exist in user "+userResource.name.text )
+            resolve(await workflowChangePassword.outcome("Password details don't exist in user "+userResource.name.text))
           }
           let hash = details.extension.find( ext => ext.url === "password" )
           let salt = details.extension.find( ext => ext.url === "salt" )
           if ( !hash || !hash.valueString || !salt || !salt.valueString ) {
-            winston.error( "Hash or salt doesn't exist in user "+req.user.resource.name.text )
-            resolve(await workflowChangePassword.outcome("Hash or salt doesn't exist in user "+req.user.resource.name.text))
+            winston.error( "Hash or salt doesn't exist in user "+userResource.name.text )
+            resolve(await workflowChangePassword.outcome("Hash or salt doesn't exist in user "+userResource.name.text))
           }
           let compare = await workflowChangePassword.hashPassword( oldpassword, salt.valueString )
           if ( compare.hash !== hash.valueString ) {
-            resolve(await workflowChangePassword.outcome("Old Password doesn't match password on record for user "+req.user.resource.name.text))
+            resolve(await workflowChangePassword.outcome("Old Password doesn't match password on record for user "+userResource.name.text))
           }
         } catch (err) {
           winston.error(err.message)
           resolve(await workflowChangePassword.outcome(err.message))
         }
         try {
-          //winston.error(JSON.stringify(req.user))
-          let userObj = req.user.resource
-          userResource = await fhirAxios.search("Person", { _id: userObj.id })
           if ( userResource.total === 0 ) {
             winston.error("Could not change password - No User Found" )
             resolve(await workflowChangePassword.outcome("Could not change password - No User Found"))
@@ -48,7 +46,6 @@ const workflowChangePassword = {
             winston.error("Too many users found" )
             resolve(await workflowChangePassword.outcome("Too many users found"))
           } else {
-            let userObj = userResource.entry[0].resource
             try {
               let passwordExt = []
               let password = req.body.item[0].item[1].answer[0].valueString
@@ -65,12 +62,12 @@ const workflowChangePassword = {
                                 extension : passwordExt
                               }
                               
-              let arrayIndex = userObj.extension.findIndex(ext => ext.url === PASS_EXTENSION)
-              userObj.extension.splice(arrayIndex,1, extension)
+              let arrayIndex = userResource.extension.findIndex(ext => ext.url === PASS_EXTENSION)
+              userResource.extension.splice(arrayIndex,1, extension)
               
-              let url = "Person/"+userObj.id
+              let url = "Person/"+userResource.id
               bundle.entry.push({
-                resource: userObj,
+                resource: userResource,
                 request: {
                   method: "PUT",
                   url: url
