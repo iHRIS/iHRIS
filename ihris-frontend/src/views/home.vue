@@ -207,6 +207,16 @@
               </v-col>
             </v-row>
           </v-card-text>
+          <template v-if="$store.state.login.links.length && !$store.state.user.loggedin">
+            <v-col v-for="(link) in $store.state.login.links" :key="link.url">
+              <v-row>
+                <v-btn text :key="link.url" :to="link.url" :color="link.color">
+                  <v-icon v-if="link.icon" light left>{{ link.icon }}</v-icon>
+                  {{ link.text }}
+                </v-btn>
+              </v-row>
+            </v-col>
+          </template>
         </v-container>
   </div>
 </template>
@@ -239,16 +249,6 @@ export default {
       resetPasswordEmail: "",
       signup: {}
     }
-  },
-  created:function(){
-    fetch("/config/site").then(response => {
-      response.json().then(data => {
-        if (data.auth && data.auth.signup) {
-          this.$store.commit('setAllowSelfSignup', data.auth.signup.enabled);
-          this.signup = data.auth.signup
-        }
-      })
-    })
   },
   methods:{
     signupRedirect() {

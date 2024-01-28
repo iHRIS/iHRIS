@@ -4,7 +4,7 @@ Id:             ihris-person-user
 Title:          "System User"
 Description:    "iHRIS profile of the Person resource to manage user access."
 * active 1..1 MS
-* active ^label = "User Status"
+* active ^label = "Active"
 * name 1..1 MS
 * name ^label = "Name"
 * name ^slicing.discriminator.type = #pattern
@@ -25,6 +25,7 @@ Description:    "iHRIS profile of the Person resource to manage user access."
       IhrisAssignRole named role 0..1 MS and
       IhrisPassword named password 0..1 MS and
       InitialPassword named initial-password 0..1 MS and
+      OldPassword named old-password 0..1 MS and
       ConfirmInitialPassword named confirm-initial-password 0..1 MS and
       IhrisUserLocation named location 0..* MS and
       IhrisUserPractitioner named practitioner 0..1 MS and
@@ -36,13 +37,12 @@ Description:    "iHRIS profile of the Person resource to manage user access."
 * extension[location].valueReference.reference MS
 * extension[practitioner] ^label = "Self Service Practitioner"
 * extension[practitioner].valueReference MS
-* extension[initial-password] ^label = "Password"
+* extension[old-password] ^label = "Old Password"
+* extension[old-password].valueString MS
+* extension[initial-password] ^label = "Initial Password"
 * extension[initial-password].valueString MS
 * extension[confirm-initial-password] ^label = "Confirm Password"
 * extension[confirm-initial-password].valueString MS
-* extension[password] ^label = "Password"
-* extension[password].extension[password] ^label = "Password"
-* extension[password].extension[password].valueString MS
 
 Extension: IhrisUserOtp
 Id: ihris-user-otp
@@ -96,6 +96,15 @@ Description:    "iHRIS password extension for local users."
 * extension[salt].value[x] only string
 * extension[salt].valueString ^label = "Salt"
 * extension[salt].valueString 1..1 MS
+
+Extension:      OldPassword
+Id: old-password
+Title: "Old Password"
+Description: "Old Password"
+* ^context.type = #element
+* ^context.expression = "Person"
+* value[x] only string
+* valueString 1..1
 
 Extension:      InitialPassword
 Id: initial-password
@@ -205,11 +214,10 @@ Usage:          #example
 * code = IhrisResourceCodeSystem#page
 * extension[display].extension[resource].valueReference = Reference(StructureDefinition/ihris-person-user)
 * extension[display].extension[link][0].extension[field].valueString = "Person.id"
-* extension[display].extension[link][0].extension[text].valueString = "View User"
+* extension[display].extension[link][0].extension[text].valueString = "Edit User"
 * extension[display].extension[link][0].extension[button].valueBoolean = true
 * extension[display].extension[link][0].extension[icon].valueString = "mdi-account-arrow-right"
-* extension[display].extension[link][0].extension[url].valueUrl = "/resource/view/user/FIELD"
-* extension[display].extension[link][1].extension[field].valueString = ""
+* extension[display].extension[link][0].extension[url].valueUrl = "/questionnaire/ihris-user/user/FIELD"
 * extension[display].extension[link][1].extension[text].valueString = "Add Another User"
 * extension[display].extension[link][1].extension[button].valueBoolean = true
 * extension[display].extension[link][1].extension[icon].valueString = "mdi-account-arrow-right"
@@ -333,6 +341,10 @@ Usage:          #definition
 * item[0].item[8].type = #string
 * item[0].item[8].required = true
 * item[0].item[8].repeats = false
+* item[0].item[8].extension[constraint].extension[key].valueId = "ihris-password-strength-check"
+* item[0].item[8].extension[constraint].extension[severity].valueCode = #error
+* item[0].item[8].extension[constraint].extension[expression].valueString = "matches('^(?=.*\\\\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$')"
+* item[0].item[8].extension[constraint].extension[human].valueString = "Password Should be Minimum eight characters, at least one uppercase letter, one lowercase letter, one number and one special character"
 
 * item[0].item[9].linkId = "Person.extension[3]#password"
 * item[0].item[9].definition = "http://ihris.org/fhir/StructureDefinition/ihris-person-user#Person.extension:confirm-initial-password.value[x]:valueString"
@@ -359,23 +371,23 @@ Usage:          #definition
 * item[0].type = #group
 * item[0].extension[constraint][0].extension[key].valueId = "ihris-password-check"
 * item[0].extension[constraint][0].extension[severity].valueCode = #error
-* item[0].extension[constraint][0].extension[expression].valueString = "where(linkId='newpassword').answer.first().valueString = where(linkId='confrimpassword').answer.first().valueString"
+* item[0].extension[constraint][0].extension[expression].valueString = "where(linkId='Person.extension[1]').answer.first().valueString = where(linkId='Person.extension[2]').answer.first().valueString"
 * item[0].extension[constraint][0].extension[human].valueString = "Please make sure New Password and Confrim Password Match."
 * item[0].extension[constraint][1].extension[key].valueId = "ihris-oldpassword-check"
 * item[0].extension[constraint][1].extension[severity].valueCode = #error
-* item[0].extension[constraint][1].extension[expression].valueString = "where(linkId='oldpassword').answer.first().valueString != where(linkId='newpassword').answer.first().valueString"
+* item[0].extension[constraint][1].extension[expression].valueString = "where(linkId='Person.extension[0]').answer.first().valueString != where(linkId='Person.extension[1]').answer.first().valueString"
 * item[0].extension[constraint][1].extension[human].valueString = "Please make sure New Password is not the Same as Old Password."
 
-* item[0].item[0].linkId = "oldpassword#password"
+* item[0].item[0].linkId = "Person.extension[0]#password"
 * item[0].item[0].text = "Old Password"
-* item[0].item[0].definition = "http://ihris.org/fhir/StructureDefinition/ihris-person-user#Person.extension:password.extension:password.value[x]:valueString"
+* item[0].item[0].definition = "http://ihris.org/fhir/StructureDefinition/ihris-person-user#Person.extension:old-password.value[x]:valueString"
 * item[0].item[0].type = #string
 * item[0].item[0].required = true
 * item[0].item[0].repeats = false
 
-* item[0].item[1].linkId = "newpassword#password"
+* item[0].item[1].linkId = "Person.extension[1]#password"
 * item[0].item[1].text = "Password"
-* item[0].item[1].definition = "http://ihris.org/fhir/StructureDefinition/ihris-person-user#Person.extension:password.extension:password.value[x]:valueString"
+* item[0].item[1].definition = "http://ihris.org/fhir/StructureDefinition/ihris-person-user#Person.extension:initial-password.value[x]:valueString"
 * item[0].item[1].type = #string
 * item[0].item[1].required = true
 * item[0].item[1].repeats = false
@@ -384,9 +396,9 @@ Usage:          #definition
 * item[0].item[1].extension[constraint].extension[expression].valueString = "matches('^(?=.*\\\\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$')"
 * item[0].item[1].extension[constraint].extension[human].valueString = "Password Should be Minimum eight characters, at least one uppercase letter, one lowercase letter, one number and one special character"
 
-* item[0].item[2].linkId = "confrimpassword#password"
+* item[0].item[2].linkId = "Person.extension[2]#password"
 * item[0].item[2].text = "Confirm Password"
-* item[0].item[2].definition = "http://ihris.org/fhir/StructureDefinition/ihris-person-user#Person.extension:password.extension:password.value[x]:valueString"
+* item[0].item[2].definition = "http://ihris.org/fhir/StructureDefinition/ihris-person-user#Person.extension:confirm-initial-password.value[x]:valueString"
 * item[0].item[2].type = #string
 * item[0].item[2].required = true
 * item[0].item[2].repeats = false

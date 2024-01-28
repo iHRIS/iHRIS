@@ -377,6 +377,8 @@ User.prototype.hasPermissionByName = function (permission, resource, id) {
             if (results.hasOwnProperty("id")) {
                 if (results.id.hasOwnProperty(id)) {
                     return results.id[id]
+                } else if(results.constraint) {
+                    return results
                 } else {
                     return false
                 }

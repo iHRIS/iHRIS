@@ -106,12 +106,25 @@ export default {
         fetch("/config/site").then(response => {
           response.json().then(data => {
             this.$store.state.version = data.version
-            if (data.hasOwnProperty("footer")) {
+            if (data.auth && data.auth.signup) {
+              this.$store.commit('setAllowSelfSignup', data.auth.signup.enabled);
+              this.signup = data.auth.signup
+            }
+            if(data.hasOwnProperty("footer")) {
               if (data.footer.hasOwnProperty("links")) {
                 this.footer.links = []
                 for(let id of Object.keys(data.footer.links)) {
                   data.footer.links[id].id = id
                   this.footer.links.push(data.footer.links[id])
+                }
+              }
+            }
+            if(data.hasOwnProperty("login")) {
+              if (data.login.hasOwnProperty("links")) {
+                this.$store.state.login.links = []
+                for(let id of Object.keys(data.login.links)) {
+                  data.login.links[id].id = id
+                  this.$store.state.login.links.push(data.login.links[id])
                 }
               }
             }

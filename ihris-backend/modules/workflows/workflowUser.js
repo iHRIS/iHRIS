@@ -23,7 +23,14 @@ const workflowUser = {
         }
         await user.lookupByEmail(userEmail).then((userObj) => {
           if(userObj) {
-            return reject({message: "User exists into the system"})
+            if(req.query.editing) {
+              let editingResources = JSON.parse(req.query.editingResources)
+              if(editingResources[0].id !== userObj.resource.id) {
+                return reject({message: "User exists into the system"})
+              }
+            } else {
+              return reject({message: "User exists into the system"})
+            }
           }
         })
         let salt = crypto.randomBytes(16).toString('hex')
@@ -31,7 +38,13 @@ const workflowUser = {
         if(!person.extension) {
           person.extension = []
         }
-        person.extension.push({
+        let passwdIndex = person.extension.findIndex((ext) => {
+          return ext.url === "http://ihris.org/fhir/StructureDefinition/ihris-password"
+        })
+        if(passwdIndex === -1) {
+          passwdIndex = person.extension.length
+        }
+        person.extension[passwdIndex] = {
           url: "http://ihris.org/fhir/StructureDefinition/ihris-password",
           extension: [{
             url: "password",
@@ -43,7 +56,7 @@ const workflowUser = {
             url: "passwordChanged",
             valueBoolean: false
           }]
-        })
+        }
         let iniPassInd = person.extension.findIndex((ext) => {
           return ext.url === 'http://ihris.org/fhir/StructureDefinition/initial-password'
         })

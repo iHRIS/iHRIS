@@ -11,6 +11,9 @@ export default new Vuex.Store({
       name: "",
       obj: {}
     },
+    login: {
+      links: []
+    },
     allowSelfSignup:"",
     idp: 'ihris',
     security_off: false,
