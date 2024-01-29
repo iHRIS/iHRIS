@@ -285,18 +285,27 @@ router.get('/page/:page/:type?', function (req, res) {
                 for (let linkExt of linkExts) {
                     let field, text, button, icon, linkclass
                     let roles = linkExt.extension.filter(ext => ext.url === "role")
-                    if(roles.length > 0) {
-                        let userRole = req.user.resource.extension.find((ext) => {
-                            return ext.url === 'http://ihris.org/fhir/StructureDefinition/ihris-assign-role'
+                    let tasks = linkExt.extension.filter(ext => ext.url === "task")
+                    if(roles.length > 0 || tasks.length > 0) {
+                        let hasRole = roles.find((role) => {
+                            return req.user.roles.includes(role.valueId)
                         })
-                        if(userRole) {
-                            userRole = userRole.valueReference.reference.split("/")[1]
-                            let exist = roles.find((role) => {
-                                return role.valueId === userRole
+                        let hasTask
+                        for(let task of tasks) {
+                            await fhirAxios.read("Basic", task.valueId).then((taskResource) => {
+                                let taskAttributes = taskResource?.extension?.find((ext) => {
+                                    return ext.url === 'http://ihris.org/fhir/StructureDefinition/task-attributes'
+                                })
+                                let taskName = taskAttributes?.extension?.find((ext) => {
+                                    return ext.url === 'instance'
+                                })?.valueId
+                                if(req.user?.permissions?.special?.special?.id[taskName] || req.user?.permissions?.special?.section?.id[taskName]) {
+                                    hasTask = true
+                                }
                             })
-                            if(!exist) {
-                                continue
-                            }
+                        }
+                        if(!hasRole && !hasTask) {
+                            continue
                         }
                     }
                     let url = linkExt.extension.find(ext => ext.url === "url").valueUrl
