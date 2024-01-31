@@ -28,7 +28,7 @@ Description:    "iHRIS profile of the Person resource to manage user access."
       OldPassword named old-password 0..1 MS and
       ConfirmInitialPassword named confirm-initial-password 0..1 MS and
       IhrisUserLocation named location 0..* MS and
-      IhrisUserPractitioner named practitioner 0..1 MS and
+      IhrisPractitionerReference named practitioner 0..1 MS and
       IhrisUserOtp named otp 0..1 MS and
       IhrisFirstTimeLogin named firstTimeLogin 1..1 MS
 * extension[role] ^label = "Role(s)"
@@ -136,19 +136,6 @@ Description:    "iHRIS user Location extension for local users."
 * valueReference.reference 1..1 MS
 * valueReference.reference ^label = "Location"
 
-Extension:      IhrisUserPractitioner
-Id:             ihris-user-practitioner
-Title:          "iHRIS User Practitioner"
-Description:    "iHRIS user Practitioner extension for local users."
-* ^context.type = #element
-* ^context.expression = "Person"
-* value[x] only Reference
-* valueReference 0..1 MS
-* valueReference ^label = "Self Service Practitioner"
-* valueReference only Reference(IhrisPractitioner)
-* valueReference.reference 0..1 MS
-* valueReference.reference ^label = "Self Service Practitioner"
-
 /*Instance:       ihris-user-admin
 InstanceOf:     IhrisPersonUser
 Title:          "iHRIS Admin User"
@@ -185,7 +172,7 @@ InstanceOf: Person
 Usage: #example
 * meta.profile = "http://ihris.org/fhir/StructureDefinition/ihris-person-user"
 * extension.url = "http://ihris.org/fhir/StructureDefinition/ihris-assign-role"
-* extension.valueReference = Reference(Basic/ihris-role-open)
+* extension.valueReference = Reference(Basic/ihris-role-public)
 * name.use = #official
 * name.text = "Logged Out"
 * telecom.system = #email
@@ -312,46 +299,53 @@ Usage:          #definition
 * item[0].item[4].required = true
 * item[0].item[4].repeats = false
 
-* item[0].item[5].linkId = "display1"
-* item[0].item[5].text = "If location is assigned to a user, a user will only have access to records of that respective location"
-* item[0].item[5].type = #display
-* item[0].item[5].required = true
+* item[0].item[5].linkId = "Person.extension[1]"
+* item[0].item[5].definition = "http://ihris.org/fhir/StructureDefinition/ihris-person-user#Person.extension:practitioner.value[x]:valueReference"
+* item[0].item[5].text = "Practitioner of this account"
+* item[0].item[5].type = #reference
+* item[0].item[5].required = false
 * item[0].item[5].repeats = false
 
-* item[0].item[6].linkId = "Person.extension[1]#tree"
-* item[0].item[6].definition = "http://ihris.org/fhir/StructureDefinition/ihris-person-user#Person.extension:location.value[x]:valueReference"
-* item[0].item[6].text = "Location"
-* item[0].item[6].type = #reference
-* item[0].item[6].required = false
+* item[0].item[6].linkId = "display1"
+* item[0].item[6].text = "If location is assigned to a user, a user will only have access to records of that respective location"
+* item[0].item[6].type = #display
+* item[0].item[6].required = true
 * item[0].item[6].repeats = false
 
-* item[0].item[7].linkId = "Person.active"
-* item[0].item[7].definition = "http://ihris.org/fhir/StructureDefinition/ihris-person-user#Person.active"
-* item[0].item[7].text = "Active?"
-* item[0].item[7].type = #boolean
-* item[0].item[7].required = true
+* item[0].item[7].linkId = "Person.extension[2]#tree"
+* item[0].item[7].definition = "http://ihris.org/fhir/StructureDefinition/ihris-person-user#Person.extension:location.value[x]:valueReference"
+* item[0].item[7].text = "Location"
+* item[0].item[7].type = #reference
+* item[0].item[7].required = false
 * item[0].item[7].repeats = false
-* item[0].item[7].readOnly = true
-* item[0].item[7].answerOption.valueString = "true"
-* item[0].item[7].answerOption.initialSelected = true
 
-* item[0].item[8].linkId = "Person.extension[2]#password"
-* item[0].item[8].definition = "http://ihris.org/fhir/StructureDefinition/ihris-person-user#Person.extension:initial-password.value[x]:valueString"
-* item[0].item[8].text = "Password"
-* item[0].item[8].type = #string
+* item[0].item[8].linkId = "Person.active"
+* item[0].item[8].definition = "http://ihris.org/fhir/StructureDefinition/ihris-person-user#Person.active"
+* item[0].item[8].text = "Active?"
+* item[0].item[8].type = #boolean
 * item[0].item[8].required = true
 * item[0].item[8].repeats = false
-* item[0].item[8].extension[constraint].extension[key].valueId = "ihris-password-strength-check"
-* item[0].item[8].extension[constraint].extension[severity].valueCode = #error
-* item[0].item[8].extension[constraint].extension[expression].valueString = "matches('^(?=.*\\\\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$')"
-* item[0].item[8].extension[constraint].extension[human].valueString = "Password Should be Minimum eight characters, at least one uppercase letter, one lowercase letter, one number and one special character"
+* item[0].item[8].readOnly = true
+* item[0].item[8].answerOption.valueString = "true"
+* item[0].item[8].answerOption.initialSelected = true
 
 * item[0].item[9].linkId = "Person.extension[3]#password"
-* item[0].item[9].definition = "http://ihris.org/fhir/StructureDefinition/ihris-person-user#Person.extension:confirm-initial-password.value[x]:valueString"
-* item[0].item[9].text = "Confirm Password"
+* item[0].item[9].definition = "http://ihris.org/fhir/StructureDefinition/ihris-person-user#Person.extension:initial-password.value[x]:valueString"
+* item[0].item[9].text = "Password"
 * item[0].item[9].type = #string
 * item[0].item[9].required = true
 * item[0].item[9].repeats = false
+* item[0].item[9].extension[constraint].extension[key].valueId = "ihris-password-strength-check"
+* item[0].item[9].extension[constraint].extension[severity].valueCode = #error
+* item[0].item[9].extension[constraint].extension[expression].valueString = "matches('^(?=.*\\\\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$')"
+* item[0].item[9].extension[constraint].extension[human].valueString = "Password Should be Minimum eight characters, at least one uppercase letter, one lowercase letter, one number and one special character"
+
+* item[0].item[10].linkId = "Person.extension[4]#password"
+* item[0].item[10].definition = "http://ihris.org/fhir/StructureDefinition/ihris-person-user#Person.extension:confirm-initial-password.value[x]:valueString"
+* item[0].item[10].text = "Confirm Password"
+* item[0].item[10].type = #string
+* item[0].item[10].required = true
+* item[0].item[10].repeats = false
 
 Instance:       IhrisChangePassword
 InstanceOf:     IhrisQuestionnaire

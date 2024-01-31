@@ -51,7 +51,8 @@ export default {
       prevPage: -1,
       link: [],
       error_message: null,
-      update_again: { rerun: false, restart: false }
+      update_again: { rerun: false, restart: false },
+      extraTerms: {}
     };
   },
   watch: {
@@ -69,6 +70,14 @@ export default {
     }
   },
   created: function() {
+    // if(this.$store.state.user && this.$store.state.user.obj && this.$store.state.user.obj.resource && this.$store.state.user.obj.resource.extension) {
+    //   let location = this.$store.state.user.obj.resource.extension.find((ext) => {
+    //     return ext.url === "http://ihris.org/fhir/StructureDefinition/ihris-user-location"
+    //   })
+    //   if(location) {
+    //     this.extraTerms["related-location"] = location.valueReference.reference
+    //   }
+    // }
     for (let field of this.fields) {
       this.headers.push({ text: this.$t(`App.fhir-resources-texts.${field[0]}`), value: field[1] });
     }
@@ -145,6 +154,16 @@ export default {
             }
           } else if ( this.terms[term] ) {
             url += "&" + term + "=" + this.terms[term];
+          }
+        }
+        sTerms = Object.keys(this.extraTerms);
+        for (let term of sTerms) {
+          if ( Array.isArray( this.extraTerms[term] ) ) {
+            if ( this.extraTerms[term].length > 0 ) {
+              url += "&" + term + "=" + this.extraTerms[term].join(',')
+            }
+          } else if ( this.extraTerms[term] ) {
+            url += "&" + term + "=" + this.extraTerms[term];
           }
         }
         this.debug = url;

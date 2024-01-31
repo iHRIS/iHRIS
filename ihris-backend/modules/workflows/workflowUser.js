@@ -7,7 +7,9 @@ const user = ihrissmartrequire('modules/user')
 const workflowUser = {
   process: ( req ) => {
     return new Promise( (resolve, reject) => {
+      console.log('here');
       fhirQuestionnaire.processQuestionnaire(req.body).then(async(bundle) => {
+        console.error(JSON.stringify(bundle, 0, 2));
         let person = bundle.entry[0].resource
         let userEmail = person.telecom.find((tel) => {
           return tel.system === 'email'

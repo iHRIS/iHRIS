@@ -150,6 +150,7 @@ export default {
     "hideLabel",
     "hideExport",
     "hideReportCustomization",
+    "disableOpenResourcePage"
   ],
   data: function () {
     return {
@@ -256,7 +257,7 @@ export default {
   methods: {
     rowClicked(row) {
       this.$emit('rowSelected', row)
-      if(this.resourcePage) {
+      if(this.resourcePage && !this.disableOpenResourcePage) {
         this.$router.push({
           name: "resource_view",
           params: { page: this.resourcePage, id: row.id },

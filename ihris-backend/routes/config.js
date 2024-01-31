@@ -17,62 +17,37 @@ const getUKey = () => {
     return Math.random().toString(36).replace(/^[^a-z]+/, '') + Math.random().toString(36).substring(2, 15)
 }
 const filterNavigation = (user, nav, prefix) => {
-    let roleObj = user.resource.extension.filter(
-        (ext) =>
-            ext.url === "http://ihris.org/fhir/StructureDefinition/ihris-assign-role"
-    );
-    let roles = [];
-    let reference = "";
-    roleObj.forEach((r) => {
-        let elt = r.valueReference.reference.split("/");
-        roles.push(elt.pop());
-    });
+    let practRef = user.resource.extension.find((ext) => {
+        return ext.url === 'http://ihris.org/fhir/StructureDefinition/ihris-practitioner-reference'
+    })
 
-    if (roles.includes("ihris-role-self")) {
-        let refObj = user.resource.extension.filter(
-            (ext) =>
-                ext.url ===
-                "http://ihris.org/fhir/StructureDefinition/ihris-user-practitioner"
-        );
-        reference = refObj[0].valueReference.reference.toLowerCase();
-
-        for (let key of Object.keys(nav.menu)) {
-            let instance;
-            if (prefix) {
-                instance = prefix + "." + key;
-            } else {
-                instance = key;
-            }
-            if (instance === "profile") {
-                nav.menu[key].url += `/${reference}`;
-            }
-            if (instance != "profile" && nav.menu[key].selfService ){
-                nav.menu[key].url += `${reference.split('/').pop()}`;
-            }
-            if (!user.hasPermissionByName("special", "navigation", instance)) {
+    for (let key of Object.keys(nav.menu)) {
+        let instance;
+        if (prefix) {
+            instance = prefix + "." + key;
+        } else {
+            instance = key;
+        }
+        if (nav.menu[key].menu) {
+            filterNavigation(user, nav.menu[key], instance);
+            if (Object.keys(nav.menu[key].menu).length === 0) {
                 delete nav.menu[key];
             }
-        }
-    } else {
-        for (let key of Object.keys(nav.menu)) {
-            let instance;
-            if (prefix) {
-                instance = prefix + "." + key;
+        } else if(instance === 'profile') {
+            if(practRef) {
+                if(!nav.menu[key].url.endsWith("/")) {
+                    nav.menu[key].url += "/"
+                }
+                nav.menu[key].url += practRef.valueReference?.reference?.split('/').pop();
             } else {
-                instance = key;
+                delete nav.menu[key];
             }
-            if (nav.menu[key].menu) {
-                filterNavigation(user, nav.menu[key], instance);
-                if (Object.keys(nav.menu[key].menu).length === 0) {
-                    delete nav.menu[key];
-                }
-            } else {
-                if (
-                    !user.hasPermissionByName("special", "navigation", instance) ||
-                    nav.menu[key].exclusive
-                ) {
-                    delete nav.menu[key];
-                }
+        } else {
+            if (
+                !user.hasPermissionByName("special", "navigation", instance) ||
+                (nav.menu[key].exclusive == "true" && !user?.permissions?.special?.navigation?.id[instance])
+            ) {
+                delete nav.menu[key];
             }
         }
     }
@@ -1728,7 +1703,7 @@ router.get('/report/es/:report', (req, res) => {
                 reportData.filters[index].dataType = dataType
             }
             reportData.indexName = indexName
-            let template = `<ihris-es-report @rowSelected='rowSelected' :key="$route.params.report" page="${req.params.report}" label="${reportName}" :reportData="reportData" :terms="terms" :termsConditions="termsConditions" :hideCheckboxes="hideCheckboxes" :hideLabel="hideLabel" :hideExport="hideExport" :hideReportCustomization="hideReportCustomization">`
+            let template = `<ihris-es-report @rowSelected='rowSelected' :key="$route.params.report" page="${req.params.report}" label="${reportName}" :reportData="reportData" :terms="terms" :termsConditions="termsConditions" :hideCheckboxes="hideCheckboxes" :hideLabel="hideLabel" :hideExport="hideExport" :hideReportCustomization="hideReportCustomization" :disableOpenResourcePage="disableOpenResourcePage">`
             for (let filter of reportData.filters) {
                 if (filter.isDropDown) {
                     template += `<ihris-es-search-term v-on:termChange="searchData" label="${filter.display}" expression="${filter.field}" isDropDown="${filter.isDropDown}" :reportData="reportData" :hideFilters="hideFilters"></ihris-es-search-term>\n`
@@ -1746,6 +1721,9 @@ router.get('/report/es/:report', (req, res) => {
             logger.error(err.stack);
             return res.status(500).send()
         })
+    }).catch((err) => {
+        console.log(err);
+        return res.status(404).send()
     })
 })
 

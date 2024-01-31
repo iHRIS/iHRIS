@@ -206,6 +206,33 @@ export default {
       //console.log("getting",this.field,this.fhirId)
       fetch("/fhir/" + this.field + "/" + this.fhirId).then(response => {
         response.json().then(async(data) => {
+          if(this.$store.state.user && this.$store.state.user.obj && this.$store.state.user.obj.resource && this.$store.state.user.obj.resource.extension) {
+            let location = this.$store.state.user.obj.resource.extension.find((ext) => {
+              return ext.url === "http://ihris.org/fhir/StructureDefinition/ihris-user-location"
+            })
+            if(location) {
+              this.extraTerms["related-location"] = location.valueReference.reference
+              let relatedGrp = data.extension.find((ext) => {
+                return ext.url === "http://ihris.org/fhir/StructureDefinition/ihris-related-group"
+              })
+              if(relatedGrp) {
+                let dataLocation = relatedGrp.extension.find((ext) => {
+                  return ext.url === "location"
+                })
+                if(dataLocation) {
+                  let canSee = relatedGrp.extension.find((ext) => {
+                    return ext.url === "location" && ext.valueString === location.valueReference.reference
+                  })
+                  if(!canSee) {
+                    this.$store.state.message.active = true
+                    this.$store.state.message.type = "error"
+                    this.$store.state.message.text = "You dont have access to view this record"
+                    this.$router.push({path: "/"})
+                  }
+                }
+              }
+            }
+          }
           //this.$store.commit('setCurrentResource', data)
           this.max = data.meta.versionId
           this.orig = data
