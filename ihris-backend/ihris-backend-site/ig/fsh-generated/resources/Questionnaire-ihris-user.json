@@ -132,7 +132,7 @@
           "repeats": false
         },
         {
-          "linkId": "role",
+          "linkId": "Person.extension[0]",
           "definition": "http://ihris.org/fhir/StructureDefinition/ihris-person-user#Person.extension:role.value[x]:valueReference",
           "text": "Role",
           "type": "reference",
@@ -140,17 +140,24 @@
           "repeats": false
         },
         {
-          "linkId": "location",
-          "definition": "http://ihris.org/fhir/StructureDefinition/ihris-person-user#Person.extension:location.value[x]:valueReference",
-          "text": "Facility/Location",
+          "linkId": "Person.extension[1]",
+          "definition": "http://ihris.org/fhir/StructureDefinition/ihris-person-user#Person.extension:practitioner.value[x]:valueReference",
+          "text": "Practitioner of this account",
           "type": "reference",
           "required": false,
           "repeats": false
         },
         {
-          "linkId": "practitioner",
-          "definition": "http://ihris.org/fhir/StructureDefinition/ihris-person-user#Person.extension:practitioner.value[x]:valueReference",
-          "text": "Self Service Practitioner",
+          "linkId": "display1",
+          "text": "If location is assigned to a user, a user will only have access to records of that respective location",
+          "type": "display",
+          "required": true,
+          "repeats": false
+        },
+        {
+          "linkId": "Person.extension[2]#tree",
+          "definition": "http://ihris.org/fhir/StructureDefinition/ihris-person-user#Person.extension:location.value[x]:valueReference",
+          "text": "Location",
           "type": "reference",
           "required": false,
           "repeats": false
@@ -194,16 +201,16 @@
               "url": "http://hl7.org/fhir/StructureDefinition/questionnaire-constraint"
             }
           ],
-          "linkId": "password#password",
-          "definition": "http://ihris.org/fhir/StructureDefinition/ihris-person-user#Person.extension:password.extension:password.value[x]:valueString",
+          "linkId": "Person.extension[3]#password",
+          "definition": "http://ihris.org/fhir/StructureDefinition/ihris-person-user#Person.extension:initial-password.value[x]:valueString",
           "text": "Password",
           "type": "string",
           "required": true,
           "repeats": false
         },
         {
-          "linkId": "confrimpassword#password",
-          "definition": "http://ihris.org/fhir/StructureDefinition/ihris-person-user#Person.extension:password.extension:password.value[x]:valueString",
+          "linkId": "Person.extension[4]#password",
+          "definition": "http://ihris.org/fhir/StructureDefinition/ihris-person-user#Person.extension:confirm-initial-password.value[x]:valueString",
           "text": "Confirm Password",
           "type": "string",
           "required": true,
@@ -211,7 +218,7 @@
         }
       ],
       "linkId": "Person",
-      "definition": "http://ihris.org/fhir/StructureDefinition/ihris-person-user#Person.id",
+      "definition": "http://ihris.org/fhir/StructureDefinition/ihris-person-user",
       "text": "User",
       "type": "group"
     }

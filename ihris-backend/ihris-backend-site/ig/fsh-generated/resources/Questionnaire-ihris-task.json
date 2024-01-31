@@ -15,17 +15,19 @@
   "purpose": "Workflow page for user role tasks information.",
   "item": [
     {
-      "linkId": "Task",
+      "linkId": "Basic",
       "text": "Add Task",
       "type": "group",
+      "definition": "http://ihris.org/fhir/StructureDefinition/ihris-task",
       "item": [
         {
-          "linkId": "TaskAttributes",
+          "linkId": "Basic.extension[0]",
           "text": "Task Attributes",
           "type": "group",
+          "definition": "http://ihris.org/fhir/StructureDefinition/ihris-task#Basic.extension:attributes",
           "item": [
             {
-              "linkId": "permission",
+              "linkId": "Basic.extension[0].extension[0]",
               "definition": "http://ihris.org/fhir/StructureDefinition/ihris-task#Basic.extension:attributes.extension:permission.value[x]:valueCode",
               "text": "Permission",
               "type": "choice",
@@ -34,16 +36,16 @@
               "repeats": false
             },
             {
-              "linkId": "resource",
+              "linkId": "Basic.extension[0].extension[1]",
               "definition": "http://ihris.org/fhir/StructureDefinition/ihris-task#Basic.extension:attributes.extension:resource.value[x]:valueCode",
               "text": "Resource",
               "type": "choice",
               "answerValueSet": "http://ihris.org/fhir/ValueSet/ihris-task-resource",
-              "required": false,
+              "required": true,
               "repeats": false
             },
             {
-              "linkId": "instance",
+              "linkId": "Basic.extension[0].extension[2]",
               "definition": "http://ihris.org/fhir/StructureDefinition/ihris-task#Basic.extension:attributes.extension:instance.value[x]:valueId",
               "text": "Instance",
               "type": "string",
@@ -51,7 +53,7 @@
               "repeats": false
             },
             {
-              "linkId": "constraint",
+              "linkId": "Basic.extension[0].extension[3]",
               "definition": "http://ihris.org/fhir/StructureDefinition/ihris-task#Basic.extension:attributes.extension:constraint.value[x]:valueString",
               "text": "Constraint",
               "type": "string",
@@ -59,7 +61,7 @@
               "repeats": false
             },
             {
-              "linkId": "field",
+              "linkId": "Basic.extension[0].extension[4]",
               "definition": "http://ihris.org/fhir/StructureDefinition/ihris-task#Basic.extension:attributes.extension:field.value[x]:valueString",
               "text": "Field",
               "type": "string",
@@ -72,6 +74,7 @@
           "linkId": "CompositeTasks",
           "text": "Composite/Linked Tasks",
           "type": "group",
+          "definition": "http://ihris.org/fhir/StructureDefinition/ihris-task#Basic.extension:compositeTask",
           "item": [
             {
               "linkId": "linkedtasks",
