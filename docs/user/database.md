@@ -14,6 +14,8 @@ Capture the name of the cadre to be displayed, assign a specific code and give a
 
 ![Alt text](../img/add_cadre.PNG 'Add Cadre')
 
+![Alt text](../img/add_cadre.mp4 'Add Cadre')
+
 ### Search cadre
 You can search the various cadres captured in the system under this feature.
 

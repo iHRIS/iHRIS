@@ -59,6 +59,8 @@ nav:
       - user/ihris_apps.md
   - FAQs:
       - faq/faq.md
+  - Video Tutorials:
+      - video/video.md    
 markdown_extensions:
   - admonition
   - codehilite:
@@ -71,6 +73,7 @@ markdown_extensions:
 plugins:
   - search
   - git-revision-date-localized
+  - mkdocs-video
   # - mknotebooks
   # - pdf-export:
   #     combined: true
