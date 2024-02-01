@@ -57,7 +57,7 @@ You can use dynamic filtering based on essential fields like gender, cadre, and 
 Yes, you can personalize your dashboard experience by editing visualizations to match your unique requirements, adjusting charts, graphs, and widgets.
 ## What types of charts are available in the iHRIS Dashboard?
 
-The dashboard offers various chart types, including bar charts, line charts, pie charts, scatter plots, and more. Each chart type has its strengths in representing different data relationships.
+The dashboard offers various chart types, including bar charts, line charts, pie charts, scatter plots, and more. Each chart type has its strengths in representing different data relationships. 
 ## How do I choose the right chart type for my data?
 
 Consider the nature of your data, analyze relationships, and understand your data characteristics to choose the most appropriate chart type for your analytical goals.
