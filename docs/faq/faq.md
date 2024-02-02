@@ -64,7 +64,7 @@ Consider the nature of your data, analyze relationships, and understand your dat
 
 ## Can I customize the appearance of visualizations on the iHRIS Dashboard?
 
-Yes, users can customize the appearance of visualizations based on their preferences, including style elements and specific style branding.
+Yes, users can customize the appearance of visualizations based on their preferences, including style elements and any specific style branding.
 
 ## How is iHRIS designed to work with other systems?
 

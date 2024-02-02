@@ -28,7 +28,7 @@
 
 ## Search People
 
-[type:video](../video/Search people.mp4) 
+[type:video](../video/Search People.mp4) 
 
 ## Search Facility
 
