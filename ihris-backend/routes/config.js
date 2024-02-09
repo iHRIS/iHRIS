@@ -256,7 +256,6 @@ router.get('/page/:page/:type?', function (req, res) {
             let links = []
             try {
                 let linkExts = pageDisplay.extension.filter(ext => ext.url === "link")
-
                 for (let linkExt of linkExts) {
                     let field, text, button, icon, linkclass
                     let roles = linkExt.extension.filter(ext => ext.url === "role")
@@ -274,7 +273,7 @@ router.get('/page/:page/:type?', function (req, res) {
                                 let taskName = taskAttributes?.extension?.find((ext) => {
                                     return ext.url === 'instance'
                                 })?.valueId
-                                if(req.user?.permissions?.special?.special?.id[taskName] || req.user?.permissions?.special?.section?.id[taskName]) {
+                                if(req.user?.permissions?.special?.special?.id[taskName] || req.user?.permissions?.special?.section?.id[taskName] || (req.user?.permissions["*"] && req.user?.permissions["*"]["*"])) {
                                     hasTask = true
                                 }
                             })
@@ -384,7 +383,7 @@ router.get('/page/:page/:type?', function (req, res) {
                                             let taskName = taskAttributes?.extension?.find((ext) => {
                                                 return ext.url === 'instance'
                                             })?.valueId
-                                            if(req.user?.permissions?.special?.special?.id[taskName] || req.user?.permissions?.special?.section?.id[taskName]) {
+                                            if(req.user?.permissions?.special?.special?.id[taskName] || req.user?.permissions?.special?.section?.id[taskName] || (req.user?.permissions["*"] && req.user?.permissions["*"]["*"])) {
                                                 hasTask = true
                                             }
                                         })

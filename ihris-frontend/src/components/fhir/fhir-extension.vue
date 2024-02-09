@@ -43,7 +43,7 @@ export default {
         let expression = this.field.replace(/([^:]+):(.+)/, "$1.where(url='"+url+"')")
         this.source.data = this.$fhirpath.evaluate( this.slotProps.source.data, expression )
         if(this.source.data.length === 0 && expression.startsWith("extension.") && 
-          ((!Array.isArray(this.slotProps.source.data) && !this.slotProps.source.data.hasOwnProperty("extension")) || Array.isArray(this.slotProps.source.data) && !this.slotProps.source.data.find(dt => dt.extension))) {
+          ((!Array.isArray(this.slotProps.source.data)) || Array.isArray(this.slotProps.source.data) && !this.slotProps.source.data.find(dt => dt.extension))) {
           expression = expression.replace("extension.", "")
           this.source.data = this.$fhirpath.evaluate( this.slotProps.source.data, expression )
         }

@@ -53,7 +53,9 @@
       "Search Users": "Search Users",
       "Audit Logs": "Audit Logs",
       "Change Password": "Change Password",
-      "Apps": "Apps"
+      "Apps": "Apps",
+      "Staff Directorate": "Staff Directorate",
+      "User Role Tasks": "User Role Tasks"
     },
     "ihris-codesystem": {},
     "ihris-search": {},
