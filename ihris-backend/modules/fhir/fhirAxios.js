@@ -131,6 +131,7 @@ const fhirAxios = {
       axios.post( url.href, resource, { auth: auth } ).then ( (response) => {
         resolve( response.data )
       } ).catch( (err) => {
+        console.error(JSON.stringify(err, 0, 2));
         reject( err )
       } )
 

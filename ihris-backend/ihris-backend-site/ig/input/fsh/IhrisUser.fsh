@@ -329,23 +329,25 @@ Usage:          #definition
 * item[0].item[8].answerOption.valueString = "true"
 * item[0].item[8].answerOption.initialSelected = true
 
-* item[0].item[9].linkId = "Person.extension[3]#password"
-* item[0].item[9].definition = "http://ihris.org/fhir/StructureDefinition/ihris-person-user#Person.extension:initial-password.value[x]:valueString"
-* item[0].item[9].text = "Password"
-* item[0].item[9].type = #string
+* item[0].item[9].linkId = "display2"
+* item[0].item[9].text = "If editing, leave blank to keep the same password. Password is required if not editing"
+* item[0].item[9].type = #display
 * item[0].item[9].required = true
 * item[0].item[9].repeats = false
-* item[0].item[9].extension[constraint].extension[key].valueId = "ihris-password-strength-check"
-* item[0].item[9].extension[constraint].extension[severity].valueCode = #error
-* item[0].item[9].extension[constraint].extension[expression].valueString = "matches('^(?=.*\\\\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$')"
-* item[0].item[9].extension[constraint].extension[human].valueString = "Password Should be Minimum eight characters, at least one uppercase letter, one lowercase letter, one number and one special character"
 
-* item[0].item[10].linkId = "Person.extension[4]#password"
-* item[0].item[10].definition = "http://ihris.org/fhir/StructureDefinition/ihris-person-user#Person.extension:confirm-initial-password.value[x]:valueString"
-* item[0].item[10].text = "Confirm Password"
+* item[0].item[10].linkId = "Person.extension[3]#password"
+* item[0].item[10].definition = "http://ihris.org/fhir/StructureDefinition/ihris-person-user#Person.extension:initial-password.value[x]:valueString"
+* item[0].item[10].text = "Password"
 * item[0].item[10].type = #string
-* item[0].item[10].required = true
+* item[0].item[10].required = false
 * item[0].item[10].repeats = false
+
+* item[0].item[11].linkId = "Person.extension[4]#password"
+* item[0].item[11].definition = "http://ihris.org/fhir/StructureDefinition/ihris-person-user#Person.extension:confirm-initial-password.value[x]:valueString"
+* item[0].item[11].text = "Confirm Password"
+* item[0].item[11].type = #string
+* item[0].item[11].required = false
+* item[0].item[11].repeats = false
 
 Instance:       IhrisChangePassword
 InstanceOf:     IhrisQuestionnaire

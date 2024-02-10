@@ -4,7 +4,6 @@
       <v-card elevation="1">
         <v-card-title class="primary darken-1 white--text font-weight-bold justify-center">
           <v-icon class="mr-2" color="white">{{ selectedIcon }}</v-icon>
-          {{ selectedTitle }}
           {{ $t(`App.menu.${selectedTitle}`) }}
         </v-card-title>
         <div class="pa-2 grid" >

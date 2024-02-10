@@ -7,9 +7,7 @@ const user = ihrissmartrequire('modules/user')
 const workflowUser = {
   process: ( req ) => {
     return new Promise( (resolve, reject) => {
-      console.log('here');
       fhirQuestionnaire.processQuestionnaire(req.body).then(async(bundle) => {
-        console.error(JSON.stringify(bundle, 0, 2));
         let person = bundle.entry[0].resource
         let userEmail = person.telecom.find((tel) => {
           return tel.system === 'email'
@@ -23,6 +21,11 @@ const workflowUser = {
         if(initialPassword && cInitialPassword && initialPassword.valueString !== cInitialPassword.valueString ) {
           return reject({message: "Password missmatch"})
         }
+        if(!req.query.editing && (!initialPassword?.valueString || !cInitialPassword?.valueString)) {
+          return reject({message: "Password is required"})
+        }
+        let salt
+        let hash
         await user.lookupByEmail(userEmail).then((userObj) => {
           if(userObj) {
             if(req.query.editing) {
@@ -30,13 +33,28 @@ const workflowUser = {
               if(editingResources[0].id !== userObj.resource.id) {
                 return reject({message: "User exists into the system"})
               }
+              if(!initialPassword || !initialPassword.valueString) {
+                let ihrisPasswd = userObj.resource.extension.find((ext) => {
+                  return ext.url === "http://ihris.org/fhir/StructureDefinition/ihris-password"
+                })
+                if(ihrisPasswd) {
+                  salt = ihrisPasswd.extension.find((ext) => {
+                    return ext.url === "salt"
+                  }).valueString
+                  hash = ihrisPasswd.extension.find((ext) => {
+                    return ext.url === "password"
+                  }).valueString
+                }
+              }
             } else {
               return reject({message: "User exists into the system"})
             }
           }
         })
-        let salt = crypto.randomBytes(16).toString('hex')
-        let hash = crypto.pbkdf2Sync( initialPassword.valueString, salt, 1000, 64, 'sha512' ).toString('hex')
+        if(initialPassword && initialPassword.valueString) {
+          salt = crypto.randomBytes(16).toString('hex')
+          hash = crypto.pbkdf2Sync( initialPassword.valueString, salt, 1000, 64, 'sha512' ).toString('hex')
+        }
         if(!person.extension) {
           person.extension = []
         }
