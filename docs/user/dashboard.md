@@ -1,5 +1,5 @@
-# Dashboards and Visualizations
-## Introduction to iHRIS Dashboard
+# Dashboard
+## Introduction to iHRIS Dashboards and Visualizations
 Welcome to the iHRIS Dashboard, the central hub for managing and monitoring your organization's human resources information. The iHRIS Dashboard is designed to provide a comprehensive overview of key metrics, enabling you to make informed decisions and streamline processes effectively.
 
 ![Alt text](../img/visualize_data.JPG 'Visualize Data')

@@ -1,38 +1,46 @@
 # Frequently Asked Questions
 
-## How do I add a new health worker in the iHRIS system?
+## Developer questions 
+
+### How do I install an iHRIS app?
+
+### How do I uninstall iHRIS app?
+
+## User Questions 
+
+### How do I add a new health worker in the iHRIS system?
 
 Navigate to the "PEOPLE" module and follow the process outlined in the documentation for adding new health workers.
 What is the primary purpose of the "PEOPLE" module in iHRIS?
 
-## Why should I search for a health worker before adding them to iHRIS?
+### Why should I search for a health worker before adding them to iHRIS?
 
 It is important to search first to ensure that the health worker does not already exist in the system, avoiding duplication of records.
 
-## How do I update information in an existing health worker record?
+### How do I update information in an existing health worker record?
 
 Follow the steps outlined in the documentation: search for the record, locate the existing employee record, and click on the "Edit" button at the top of the right sidebar.
 
-## What tips should I keep in mind when adding or updating information in a health worker record?
+### What tips should I keep in mind when adding or updating information in a health worker record?
 
 The record page is divided into multiple sections. You can scroll down or use the right sidebar to navigate between sections. Required fields are marked with a red asterisk, and additional required fields may apply when editing a record.
 
-## Which fields can be edited after clicking the "Edit" button in the "Add Person" module?
+### Which fields can be edited after clicking the "Edit" button in the "Add Person" module?
 
 Fields such as Photo, Names, Demographic Details, Identifiers, Contact Details, Language Details, and Remarks can be edited. Additional fields like whether the employee is active, Disability information, Dependent Details, Training Details, and attachment documents can also be added or edited.
-## Can I include more than one entry for certain fields in a health worker record?
+### Can I include more than one entry for certain fields in a health worker record?
 
 Yes, for some fields, it is possible to include more than one entry. Refer to the documentation for details on specific fields.
 
-## How can I update the Photo in a health worker record?
+### How can I update the Photo in a health worker record?
 
 After clicking the "Edit" button, navigate to the "Photo" section and follow the instructions in the documentation.
 
-## What demographic details can be edited for a health worker?
+### What demographic details can be edited for a health worker?
 
 Demographic details such as names, identifiers, contact details, language details, and remarks can be edited. Refer to the documentation for specific instructions.
 
-## What are the functionalities available under the "PEOPLE" module aside from adding and updating records?
+### What are the functionalities available under the "PEOPLE" module aside from adding and updating records?
 
 Additional functionalities include generating an ID, generating a CV, and accessing various details such as leave information, cadres, performance evaluation, education, work experience, emergency details, disciplinary details, salary details, and in-service training.
 
@@ -93,12 +101,6 @@ iHRIS helps answer questions such as optimal employee deployment, pay rate equit
 
 iHRIS keeps records of health worker biodata, training information, registration and licensure details, deployment and employment history, health workforce planning, retention data, and health facilities details.
 
-
-# Developer questions 
-
-## How do I install an iHRIS app?
-
-## How do I uninstall iHRIS app?
 
 
 
