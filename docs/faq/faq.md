@@ -1,5 +1,12 @@
 # Frequently Asked Questions
 
+# Developer questions 
+
+
+
+
+# User Questions 
+
 ## How do I add a new health worker in the iHRIS system?
 
 Navigate to the "PEOPLE" module and follow the process outlined in the documentation for adding new health workers.
