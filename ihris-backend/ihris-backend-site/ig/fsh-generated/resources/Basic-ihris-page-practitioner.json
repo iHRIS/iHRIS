@@ -132,6 +132,14 @@
         },
         {
           "url": "field",
+          "valueString": "Practitioner.extension:maritalStatus"
+        },
+        {
+          "url": "field",
+          "valueString": "Practitioner.extension:nationality"
+        },
+        {
+          "url": "field",
           "valueString": "Practitioner.extension:residence"
         }
       ],
@@ -750,7 +758,7 @@
                 },
                 {
                   "url": "field",
-                  "valueString": "extension.where(url='http://ihris.org/fhir/StructureDefinition/ihris-education-history').extension.where(url='institution').valueCoding"
+                  "valueString": "extension.where(url='http://ihris.org/fhir/StructureDefinition/ihris-education-history').extension.where(url='institution').valueString"
                 }
               ]
             },

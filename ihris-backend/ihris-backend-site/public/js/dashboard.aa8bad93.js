@@ -1,2 +1,0 @@
-"use strict";(self["webpackChunkiHRIS_v5"]=self["webpackChunkiHRIS_v5"]||[]).push([[966],{2562:function(e,r,a){a.r(r),a.d(r,{default:function(){return l}});var t=function(){var e=this,r=e.$createElement,a=e._self._c||r;return a("iframe",{attrs:{src:"/dashboards/app/dashboards#/view/"+e.$route.params.id+"?embed=true",width:"100%",height:"100%"}})},s=[],n={name:"dashboard",props:["id"]},u=n,i=a(3736),d=(0,i.Z)(u,t,s,!1,null,null,null),l=d.exports}}]);
-//# sourceMappingURL=dashboard.aa8bad93.js.map

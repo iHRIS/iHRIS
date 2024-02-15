@@ -3,6 +3,7 @@ import VueRouter from "vue-router"
 import Home from "../views/home.vue"
 import Static from "../views/static-page.vue"
 import HomeNav from "../views/home-nav.vue"
+import ShowInGrid from "@/views/custom-nav.vue";
 //import Test from "../views/test.vue"
 //import mhero from "../views/mhero/mhero.vue"
 //import contactGroups from "../views/mhero/contact-groups.vue"
@@ -18,6 +19,15 @@ const routes = [{
       homeNav: HomeNav
     },
     props: { default: { id: "page-home", blankOnErr: true } }
+  },
+  {
+    path: "/show-in-grid/:id",
+    name: "grid-view",
+    components: {
+      default: Home,
+      homeNav: ShowInGrid
+    },
+    props: { default: { id: "page-grid-view", blankOnErr: true } }
   },
   {
     path: '/reset-password',

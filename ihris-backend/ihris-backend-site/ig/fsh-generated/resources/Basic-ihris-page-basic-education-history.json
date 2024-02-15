@@ -142,7 +142,7 @@
         },
         {
           "url": "field",
-          "valueString": "extension:educationHistory.extension:institution.value[x]:valueCoding"
+          "valueString": "extension:educationHistory.extension:institution.value[x]:valueString"
         },
         {
           "url": "field",

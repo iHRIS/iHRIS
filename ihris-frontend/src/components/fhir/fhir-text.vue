@@ -1,7 +1,17 @@
 <template>
   <ihris-element :edit="edit" :loading="false" v-if="!hide">
     <template #form>
-      <v-textarea :error-messages="errors" @change="errors = []" :disabled="disabled" :label="display" v-model="value" outlined hide-details="auto" :rules="rules" dense>
+      <v-textarea
+        :error-messages="errors"
+        @change="errors = []"
+        :disabled="disabled"
+        :label="display"
+        v-model="value"
+        outlined
+        hide-details="auto"
+        :rules="rules"
+        dense
+      >
         <template #label>{{$t(`App.fhir-resources-texts.${display}`)}} <span v-if="required" class="red--text font-weight-bold">*</span></template>
       </v-textarea>
     </template>

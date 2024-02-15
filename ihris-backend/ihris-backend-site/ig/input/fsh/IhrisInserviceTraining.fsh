@@ -7,16 +7,22 @@ Description:    "iHRIS Profile of the Basic resource for a In-Service Training."
 * extension[practitioner].valueReference ^label = "Health Worker"
 * extension contains
     IhrisInServiceTraining named inservicetraining 0..1 MS
+* extension[inservicetraining].extension[provider] ^label = "Provider" 
 * extension[inservicetraining].extension[provider].valueString 0..1 MS
 * extension[inservicetraining].extension[provider].valueString ^label = "Provider" 
+* extension[inservicetraining].extension[training] ^label = "In-Service Training Type/Category"
 * extension[inservicetraining].extension[training].valueCoding 0..1 MS
 * extension[inservicetraining].extension[training].valueCoding ^label = "In-Service Training Type/Category"
+* extension[inservicetraining].extension[courseName] ^label = "In-Service Training Course Name"
 * extension[inservicetraining].extension[courseName].valueString 1..1 MS
 * extension[inservicetraining].extension[courseName].valueString ^label = "In-Service Training Course Name"
+* extension[inservicetraining].extension[credits] ^label = "Credits"
 * extension[inservicetraining].extension[credits].valueInteger 0..1 MS
 * extension[inservicetraining].extension[credits].valueInteger ^label = "Credits"
+* extension[inservicetraining].extension[startDate] ^label = "Start Date"
 * extension[inservicetraining].extension[startDate].valueDate 1..1 MS
 * extension[inservicetraining].extension[startDate].valueDate ^label = "Start Date"
+* extension[inservicetraining].extension[endDate] ^label = "End Date"
 * extension[inservicetraining].extension[endDate].valueDate 0..1 MS
 * extension[inservicetraining].extension[endDate].valueDate ^label = "End Date"
 

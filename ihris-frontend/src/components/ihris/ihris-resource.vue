@@ -91,7 +91,7 @@
             </template>
           </v-list-item>
           <v-divider color="white"></v-divider>
-          <template v-if="!edit && links && links.length">
+          <template v-if="!edit && links && links.length && linksready">
             <v-list-item v-for="(link,idx) in links" :key="link.url">
               <v-btn :key="link.url" :text="!link.button" :to="getLinkUrl(link)" class="primary">
                 <v-icon v-if="link.icon" light>{{ link.icon }}</v-icon>
@@ -101,7 +101,13 @@
           </template>
           <v-subheader v-if="sectionMenu" class="white--text"><h2>{{ $t(`App.hardcoded-texts.Sections`) }}</h2>
           </v-subheader>
-          <v-list-item v-for="section in sectionMenu" :href="'#section-'+section.name" :key="section.name">
+          <v-list-item
+              v-for="section in sectionMenu"
+              :id="'#section-' + section.name"
+              :key="section.name"
+              :class="'#section-' + section.name === path ? 'highlighted' : ''"
+              @click="scrollTo(section.name)"
+          >
             <v-list-item-content class="white--text" v-if="!edit || !section.secondary">
               <v-list-item-title class="text-uppercase"><h4>{{ $t(`App.fhir-resources-texts.${section.title}`) }}</h4></v-list-item-title>
               <v-list-item-subtitle class="white--text">{{ $t(`App.fhir-resources-texts.${section.desc}`) }}</v-list-item-subtitle>
@@ -178,18 +184,20 @@ import axios from "axios";
 
 export default {
   name: "ihris-resource",
-  props: ["title", "field", "fhir-id", "page", "profile", "section-menu", "edit", "links", "constraints"],
+  props: ["title", "field", "fhir-id", "page", "profile", "section-menu", "edit", "links", "mounts", "constraints"],
   data: function () {
     return {
       fhir: {},
       orig: {},
       valid: true,
       source: {data: {}, path: ""},
+      mountedSources: {},
       path: "",
       loading: false,
       overlay: false,
       isEdit: false,
       linktext: [],
+      linksready: false,
       position: "",
       advancedValid: true,
       loadingId: false,
@@ -223,8 +231,11 @@ export default {
             response
                 .json()
                 .then((data) => {
-                  if (data.entry) {
-                    let role = data.entry[0].resource.code[0].coding[0].display;
+                  if (data.entry && data.entry.length) {
+                    let role
+                    if(data.entry[0].resource.code) {
+                      role = data.entry[0].resource.code[0].coding[0].display;
+                    }
                     this.position = role? role : "";
                   }
                 })
@@ -237,12 +248,41 @@ export default {
           });
       //console.log("getting",this.field,this.fhirId)
       fetch("/fhir/" + this.field + "/" + this.fhirId).then(response => {
-        response.json().then(data => {
+        response.json().then(async(data) => {
+          if(this.$store.state.user && this.$store.state.user.obj && this.$store.state.user.obj.resource && this.$store.state.user.obj.resource.extension) {
+            let location = this.$store.state.user.obj.resource.extension.find((ext) => {
+              return ext.url === "http://ihris.org/fhir/StructureDefinition/ihris-user-location"
+            })
+            if(location) {
+              this.extraTerms["related-location"] = location.valueReference.reference
+              let relatedGrp = data.extension.find((ext) => {
+                return ext.url === "http://ihris.org/fhir/StructureDefinition/ihris-related-group"
+              })
+              if(relatedGrp) {
+                let dataLocation = relatedGrp.extension.find((ext) => {
+                  return ext.url === "location"
+                })
+                if(dataLocation) {
+                  let canSee = relatedGrp.extension.find((ext) => {
+                    return ext.url === "location" && ext.valueString === location.valueReference.reference
+                  })
+                  if(!canSee) {
+                    this.$store.state.message.active = true
+                    this.$store.state.message.type = "error"
+                    this.$store.state.message.text = "You dont have access to view this record"
+                    this.$router.push({path: "/"})
+                  }
+                }
+              }
+            }
+          }
           //this.$store.commit('setCurrentResource', data)
           this.max = data.meta.versionId
           this.orig = data
           this.source = {data: data, path: this.field}
+          await this.setMountedRefs(data)
           this.setLinkText()
+          this.linksready = true
           this.loading = false
         }).catch(err => {
           console.log(this.field, this.fhirId, err)
@@ -335,6 +375,9 @@ export default {
     */
   },
   methods: {
+    scrollTo(section) {
+      document.getElementById(`section-${section}`).scrollIntoView()
+    },
     handleScroll() {
       this.hasScrolled = window.top.scrollY >= 100;
       this.sectionMenu.map((data) => {
@@ -345,6 +388,38 @@ export default {
         }
       });
     },
+    setMountedRefs() {
+      return new Promise((resolve) => {
+        if(!this.mounts || this.mounts.length === 0) {
+          return resolve()
+        }
+        let mount = this.mounts.shift()
+        let first = mount.fromref.split(".")[0]
+        let resource
+        if(this.mountedSources[first]) {
+          resource = {}
+          resource[first] = this.mountedSources[first]
+        } else {
+          resource = this.source.data
+        }
+        let content = this.$fhirpath.evaluate(resource, mount.fromref)
+        if(content) {
+          fetch("/fhir/" + content[0].split("/")[0] + "/" + content[0].split("/")[1]).then((response) => {
+            response.json().then(async(data) => {
+              this.mountedSources[mount.name] = data
+              if(this.mounts.length > 0) {
+                await this.setMountedRefs(data)
+                resolve()
+              } else {
+                resolve()
+              }
+            })
+          })
+        } else {
+          resolve()
+        }
+      })
+    },
     getLinkField: function (field) {
       let content = this.$fhirpath.evaluate(this.source.data, field)
       if (content) {
@@ -353,7 +428,31 @@ export default {
         return false
       }
     },
+    getMountedLinkParameters(url) {
+      let urlPortions = url.split("{")
+      let params = []
+      for(let portion of urlPortions) {
+        if(portion.includes("}")) {
+         let param = portion.split("}")[0]
+         params.push(param)
+        }
+      }
+      return params
+    },
     getLinkUrl: function (link) {
+      let mountedParams = this.getMountedLinkParameters(link.url)
+      if(mountedParams.length > 0) {
+        for(let param of mountedParams) {
+          let val = this.$fhirpath.evaluate(this.mountedSources, param)
+          if(val) {
+            if (val[0].includes('/')) {
+              let ref = val[0].split('/')
+              val[0] = ref[1]
+            }
+            link.url = link.url.replace("{" + param + "}", val[0])
+          }
+        }
+      }
       let field
       if (link.field) {
         field = this.getLinkField(link.field)
@@ -372,7 +471,7 @@ export default {
       for (let idx in this.links) {
         let link = this.links[idx]
         if (link.text) {
-          this.linktext[idx] = link.text
+          this.$set(this.linktext, idx, link.text)
         } else if (link.field) {
           let field = this.getLinkField(link.field)
           if (field) {

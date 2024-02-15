@@ -22,7 +22,7 @@ import { dataDisplay } from "@/mixins/dataDisplay"
 export default {
   name: "fhir-decimal",
   props: ["field", "label", "min", "max", "id", "path", "slotProps", "sliceName","base-min","base-max", "edit", "readOnlyIfSet",
-    "constraints", "displayCondition"],
+    "constraints", "displayCondition", "initial"],
   components: {
     IhrisElement
   },
@@ -38,6 +38,9 @@ export default {
     }
   },
   created: function() {
+    if(this.initial && !this.$route.params.id) {
+      this.value = this.initial
+    }
     //this function is defined under dataDisplay mixin
     this.hideShowField(this.displayCondition)
     this.setupData()
@@ -94,7 +97,14 @@ export default {
     rules: function() {
       const num_check = v => {
         //let num = Number(v)
+<<<<<<< HEAD
         return (v != Math.floor(v)) || this.display+" must be an Decimal"
+=======
+        if(!v) {
+          return
+        }
+        return (!isNaN(v) && /^-?\d+(\.\d+)?$/.test(v)) || this.display+" must be a Decimal"
+>>>>>>> upstream/master
       }
       let rules = [ num_check ]
       if ( this.required ) {

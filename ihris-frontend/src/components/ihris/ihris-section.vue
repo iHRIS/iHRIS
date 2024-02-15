@@ -8,7 +8,7 @@
       <v-card-title class="primary darken-1 white--text text-uppercase font-weight-bold">{{ $t(`App.fhir-resources-texts.${title}`) }}
       </v-card-title>
       <v-card-text class="my-3">
-        <slot :source="slotProps.source"></slot>
+        <slot :source="slotProps.source" v-bind="{isEmpty}"></slot>
       </v-card-text>
     </v-card>
   </div>
@@ -38,6 +38,9 @@ export default {
     */
   },
   methods: {
+    isEmpty() {
+      console.log('empty');
+    }
     /*
     setupData: function() {
       if ( this.slotProps.source ) {

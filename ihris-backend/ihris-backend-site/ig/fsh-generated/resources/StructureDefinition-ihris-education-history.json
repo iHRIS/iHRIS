@@ -381,7 +381,7 @@
         },
         "type": [
           {
-            "code": "Coding"
+            "code": "string"
           }
         ],
         "constraint": [
@@ -404,9 +404,9 @@
         ]
       },
       {
-        "id": "Extension.extension:institution.value[x]:valueCoding",
+        "id": "Extension.extension:institution.value[x]:valueString",
         "path": "Extension.extension.value[x]",
-        "sliceName": "valueCoding",
+        "sliceName": "valueString",
         "label": "Institution",
         "short": "Value of extension",
         "definition": "Value of extension - must be one of a constrained set of the data types (see [Extensibility](extensibility.html) for a list).",
@@ -419,7 +419,7 @@
         },
         "type": [
           {
-            "code": "Coding"
+            "code": "string"
           }
         ],
         "constraint": [
@@ -434,10 +434,6 @@
         ],
         "isModifier": false,
         "isSummary": false,
-        "binding": {
-          "strength": "required",
-          "valueSet": "http://ihris.org/fhir/ValueSet/ihris-institution-valueset"
-        },
         "mapping": [
           {
             "identity": "rim",
@@ -2322,20 +2318,16 @@
         },
         "type": [
           {
-            "code": "Coding"
+            "code": "string"
           }
         ]
       },
       {
-        "id": "Extension.extension:institution.valueCoding",
-        "path": "Extension.extension.valueCoding",
+        "id": "Extension.extension:institution.valueString",
+        "path": "Extension.extension.valueString",
         "label": "Institution",
         "min": 0,
-        "max": "1",
-        "binding": {
-          "strength": "required",
-          "valueSet": "http://ihris.org/fhir/ValueSet/ihris-institution-valueset"
-        }
+        "max": "1"
       },
       {
         "id": "Extension.extension:level",

@@ -71,6 +71,7 @@
 </style>
 
 <script>
+import { eventBus } from "@/main";
 import TheHeader from "./components/layout/the-header"
 import TheNavigation from "./components/layout/the-navigation"
 import TheFooter from "./components/layout/the-footer"
@@ -104,6 +105,29 @@ export default {
       fetch("/auth").then(()=> {
         fetch("/config/site").then(response => {
           response.json().then(data => {
+            this.$store.state.version = data.version
+            if (data.auth && data.auth.signup) {
+              this.$store.commit('setAllowSelfSignup', data.auth.signup.enabled);
+              this.signup = data.auth.signup
+            }
+            if(data.hasOwnProperty("footer")) {
+              if (data.footer.hasOwnProperty("links")) {
+                this.footer.links = []
+                for(let id of Object.keys(data.footer.links)) {
+                  data.footer.links[id].id = id
+                  this.footer.links.push(data.footer.links[id])
+                }
+              }
+            }
+            if(data.hasOwnProperty("login")) {
+              if (data.login.hasOwnProperty("links")) {
+                this.$store.state.login.links = []
+                for(let id of Object.keys(data.login.links)) {
+                  data.login.links[id].id = id
+                  this.$store.state.login.links.push(data.login.links[id])
+                }
+              }
+            }
             if (data.hasOwnProperty("security") && data.security.hasOwnProperty("disabled")) {
               this.$store.commit('securityOff', data.security.disabled)
             }
@@ -123,11 +147,8 @@ export default {
               if ( data.user.loggedin ) {
                 let user = {
                   name: data.user.name,
-                  location: data.user.location,
                   role: data.user.role,
-                  reference: data.user.reference,
-                  facilityId: data.user.facilityId,
-                  physicalLocation: data.user.physicalLocation
+                  obj: data.user.obj
                 };
                 this.$store.commit('login', user )
               } else {
@@ -153,21 +174,10 @@ export default {
       localStorage.setItem('activeCode', "en")
     }
     this.updateConfig()
-    fetch("/auth").then(()=> {
-
-        fetch("/config/site").then(response => {
-          response.json().then(data => {
-            if (data.hasOwnProperty("footer")) {
-              if (data.footer.hasOwnProperty("links")) {
-                for(let id of Object.keys(data.footer.links)) {
-                  data.footer.links[id].id = id
-                  this.footer.links.push(data.footer.links[id])
-                }
-              }
-            }
-          })
-        })
-      })
+    eventBus.$on("updateconfig", () => {
+      console.log('here');
+      this.updateConfig()
+    })
   }
 }
 </script>

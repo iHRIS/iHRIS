@@ -44,6 +44,43 @@
           </v-treeview>
         </v-card>
       </v-menu>
+      <!-- <v-text-field
+        v-else-if="displayType === 'reportSelect'"
+        @click="reportDialog = true"
+        :error-messages="errors"
+        @change="errors = []" 
+        :disabled="disabled"
+        :readonly="true"
+        :label="$t(`App.fhir-resources-texts.${display}`)"
+        v-model="select"
+        outlined 
+        hide-details="auto" 
+        :rules="rules"
+        dense
+      >
+        <template #label>{{$t(`App.fhir-resources-texts.${display}`)}}<span v-if="required" class="red--text font-weight-bold">*</span></template>
+      </v-text-field> -->
+      <v-autocomplete
+        v-else-if="displayType === 'reportSelect'"
+        @click="reportDialog = true"
+        v-model="select"
+        :loading="loading"
+        :items="items"
+        cache-items
+        flat
+        hide-no-data
+        hide-details
+        :label="display"
+        outlined
+        dense
+        readonly
+        :rules="rules"
+        :disabled="(disabled) || (preset && $route.name === 'resource_add')"
+        :error-messages="errors"
+        @change="errors = []"
+      >
+        <template #label>{{$t(`App.fhir-resources-texts.${display}`)}} <span v-if="required" class="red--text font-weight-bold">*</span></template>
+      </v-autocomplete>
       <v-autocomplete
         v-else
         v-model="select"
@@ -57,7 +94,7 @@
         :label="display"
         outlined
         dense
-        placeholder="$t(`App.hardcoded-texts.Start typing for selection`)"
+        :placeholder="$t(`App.hardcoded-texts.Start typing for selection`)"
         :rules="rules"
         :disabled="(disabled) || (preset && $route.name === 'resource_add')"
         :error-messages="errors"
@@ -65,6 +102,41 @@
       >
         <template #label>{{$t(`App.fhir-resources-texts.${display}`)}} <span v-if="required" class="red--text font-weight-bold">*</span></template>
       </v-autocomplete>
+      <v-dialog
+        transition="dialog-bottom-transition"
+        max-width="1000"
+        v-model="reportDialog"
+      >
+        <v-card>
+          <v-toolbar
+            color="primary"
+            dark
+          >Click row to select value</v-toolbar>
+          <v-progress-linear
+            color="secondary"
+            :indeterminate="loadingReportVal"
+            rounded
+            height="6"
+          />
+          <v-card-text v-if="!loadingReportVal">
+            <es-report
+              v-if="report"
+              :report="report"
+              :hideCheckboxes="true"
+              :hideExport="true"
+              :hideReportCustomization="true"
+              :disableOpenResourcePage="true"
+              @rowSelected="reportRowSelected"
+            />
+          </v-card-text>
+          <v-card-actions class="justify-end">
+            <v-btn
+              text
+              @click="reportDialog = false"
+            >Close</v-btn>
+          </v-card-actions>
+        </v-card>
+      </v-dialog>
     </template>
     <template #header>
       {{$t(`App.fhir-resources-texts.${display}`)}}
@@ -87,14 +159,18 @@ export default {
   name: "fhir-reference",
   props: ["field","label","sliceName","targetProfile","targetResource","min","max","base-min","base-max",
     "slotProps","path","sub-fields","edit","readOnlyIfSet","constraints", "displayType", 
-    "initialValue", "overrideValue", "displayCondition"],
+    "initialValue", "overrideValue", "displayCondition", "searchParameter", "initialProfile", "allowedProfiles", "pageTargetProfile",
+    "report", "reportReturnValue", "referenceDisplayPath", "initial"],
   components: {
-    IhrisElement
+    IhrisElement,
+    "es-report": () => import(/* webpackChunkName: "fhir-questionnaire" */ "@/views/es-report" )
   },
   mixins: [dataDisplay],
   data: function() {
     return {
       hide: false,
+      reportDialog: false,
+      loadingReportVal: false,
       source: { path: "", data: {} },
       value: { reference: "" },
       qField: "valueReference",
@@ -114,10 +190,16 @@ export default {
       open: [],
       treeLookup: {},
       allAllowed: true,
-      pathes: {}
+      pathes: {},
+      shortnames: {}
     }
   },
-  created: function() {
+  created: async function() {
+    fetch('/config/getParameters?key=shortname:profile').then((response) => {
+      response.json().then((param) => {
+        this.shortnames = param
+      })
+    })
     //this function is defined under dataDisplay mixin
     this.hideShowField(this.displayCondition)
     this.setupData()
@@ -158,14 +240,89 @@ export default {
     }
   },
   methods: {
+    reportRowSelected(row) {
+      this.loadingReportVal = true
+      let id
+      if(this.reportReturnValue && this.reportReturnValue.split(".").length > 1) {
+        let returnVal = this.reportReturnValue.split(".")[1]
+        id = row[returnVal]
+      } else {
+        id = row.id
+      }
+      if(id.split("/").length !== 2) {
+        for(let idx in row) {
+          let val = row[idx]
+          if(!val) {
+            continue
+          }
+          if(val.split("/").length > 1 && val.split("/")[1] == id) {
+            id = val
+          }
+        }
+      }
+      if(this.referenceDisplayPath) {
+        fetch("/fhir/" + id).then((response) => {
+          response.json().then((data) => {
+            let displayVal = this.$fhirpath.evaluate(data, this.referenceDisplayPath)
+            if(typeof displayVal === 'object') {
+              displayVal = displayVal.join(", ")
+            }
+            this.items = [{
+              value: id,
+              text: displayVal
+            }]
+            this.select = id
+            this.loadingReportVal = false
+            this.reportDialog = false
+          })
+        })
+      } else {
+        this.$fhirutils.resourceLookup( id ).then( display => {
+          this.displayValue = display
+          this.items.push( {text: display, value: id} )
+          this.select = id
+          this.loadingReportVal = false
+          this.reportDialog = false
+        } )
+      }
+    },
+    targetResourceMatchProfile() {
+      let targetProfiles = []
+      if(this.targetProfile) {
+        targetProfiles = this.targetProfile.split(",")
+      }
+      if(this.pageTargetProfile) {
+        targetProfiles = [this.pageTargetProfile]
+      }
+      let targetResources = this.targetResource.split(",")
+      let same = false
+      for(let idx in targetProfiles) {
+        if(targetProfiles[idx].replace( fhirurl, "" ) === targetResources[idx]) {
+          same = true
+          break
+        }
+      }
+      return same
+    },
     setupData: function() {
-      if ( this.targetProfile && this.targetResource ) {
-        if ( this.targetProfile.replace( fhirurl, "" ) === this.targetResource ) {
+      let targetProfile = []
+      if(this.targetProfile) {
+        targetProfile = this.targetProfile.split(",")
+      }
+      let targetResources = []
+      if(this.targetResource) {
+        targetResources = this.targetResource.split(",")
+      }
+      if(this.pageTargetProfile) {
+        targetProfile = [this.pageTargetProfile]
+      }
+      if ( targetProfile.length > 0 && targetResources.length > 0 ) {
+        if ( this.targetResourceMatchProfile() ) {
           this.allAllowed = true
         } else {
           this.allAllowed = false
         }
-        this.resource = this.targetResource
+        this.resource = targetResources[0]
       }
       if ( this.displayType === "tree" ) {
         this.setupTreeItems()
@@ -179,35 +336,64 @@ export default {
           let results = this.$fhirpath.evaluate( this.slotProps.source.data, expression )
           this.source.data = results[0]
         }
-        if( this.source.data ) {
-          this.preset = true
-          this.select = this.source.data.reference
-          this.lockWatch = true
+      }
+      if(this.initial && !this.$route.params.id) {
+        let reference = this.initial.reference.replace(/["']/g, "");
+        this.source.data = {
+          reference
         }
+      }
+      if( this.source.data ) {
+        this.preset = true
+        this.select = this.source.data.reference
+        this.lockWatch = true
       }
       this.disabled = this.readOnlyIfSet && this.preset
     },
     setupTreeItems: async function() {
       let treetop = this.initialValue
+      let searchparam = this.searchParameter
       if ( this.overrideValue ) {
         treetop = this.overrideValue
       }
       this.loading = true
-      let params = {} 
-      if ( treetop ) {
-        params = { "partof": treetop }
+      let params = {}
+      if(searchparam) {
+        if ( treetop ) {
+          params = { searchparam : treetop }
+        } else if(!treetop) {
+          params[searchparam + ":missing"] = true
+          if(this.initialProfile) {
+            params['_profile'] = this.initialProfile
+          } else if(this.allowedProfiles) {
+            params['_profile'] = this.allowedProfiles
+          }
+        }
       } else {
-        params = { "partof:missing": true }
+        if (treetop ) {
+          params = { "partof": treetop }
+        } else {
+          params = { "partof:missing": true }
+        }
       }
       params._count = 500
-      let url = "/fhir/"+this.resource+"?"+querystring.stringify( params )
+      let url = "/fhir/"+this.resource+"?_sort=name&"+querystring.stringify( params )
       this.items = []
       this.addItems( url, this.items )
 
     },
     checkChildren: function(item) {
-      let params = { "partof": item.id, "_summary": "count" }
-      let url = "/fhir/"+this.resource+"?"+querystring.stringify( params )
+      let params = {}
+      if ( this.searchParameter ) {
+        params[this.searchParameter] = item.id
+        if(this.allowedProfiles) {
+          params['_profile'] = this.allowedProfiles
+        }
+      } else {
+        params = { "partof": item.id }
+      }
+      params["_summary"] = "count"
+      let url = "/fhir/"+this.resource+ "?_sort=name&"+querystring.stringify( params )
       return new Promise( resolve => {
         fetch( url ).then( response => {
           if ( response.ok ) {
@@ -234,12 +420,25 @@ export default {
       fetch( url ).then( response => {
         if ( response.ok ) {
           response.json().then( async data => {
+            let targetProfile = []
+            if(this.targetProfile) {
+              targetProfile = this.targetProfile.split(",")
+            }
+            if(this.pageTargetProfile) {
+              targetProfile = [this.pageTargetProfile]
+            }
             if ( data.entry && data.entry.length > 0 ) {
               for( let entry of data.entry ) {
-                let locked = this.allAllowed ? false : !entry.resource.meta.profile.includes( this.targetProfile )
-                let item = { 
+                let locked = this.allAllowed ? false : !entry.resource.meta.profile.find(profile => targetProfile.includes(profile))
+                let name = await this.resourceDisplayName(entry.resource)
+                let profile = []
+                if(entry.resource.meta && entry.resource.meta.profile) {
+                  profile = entry.resource.meta.profile
+                }
+                let item = {
+                  profile,
                   id: entry.resource.resourceType+"/"+entry.resource.id,
-                  name: entry.resource.name,
+                  name,
                   locked: locked
                 }
                 await this.checkChildren( item )
@@ -273,7 +472,15 @@ export default {
     },
     fetchChildren: function(item) {
       let params = {}
-      params = { "partof": item.id, _count: 500 }
+      if ( this.searchParameter ) {
+        params[this.searchParameter] = item.id
+        if(this.allowedProfiles) {
+          params['_profile'] = this.allowedProfiles
+        }
+        params["_count"] = 500
+      } else {
+        params = { "partof": item.id, _count: 500 }
+      }
       let url = "/fhir/"+this.resource+"?"+querystring.stringify( params )
       this.loading = true
       this.addItems( url, item.children )
@@ -292,8 +499,15 @@ export default {
     querySelections: function( val ) {
       this.loading = true
       let params = { "name:contains": val }
-      if ( !this.targetProfile.endsWith( this.resource ) ) {
-        params._profile = this.targetProfile
+      let targetProfile = []
+      if(this.targetProfile) {
+        targetProfile = this.targetProfile.split(",")
+      }
+      if(this.pageTargetProfile) {
+        targetProfile = [this.pageTargetProfile]
+      }
+      if ( !targetProfile[0].endsWith( this.resource ) ) {
+        params._profile = targetProfile
       }
       let url = "/fhir/"+this.resource+"?"+querystring.stringify( params )
       fetch( url ).then( response => {
@@ -319,14 +533,91 @@ export default {
     getDisplay: function() {
       if ( (!this.edit || this.preset) && this.value && this.value.reference ) {
         this.loading = true
-        this.$fhirutils.resourceLookup( this.value.reference ).then( display => {
-          this.displayValue = display
-          if ( this.displayType !== "tree" ) {
-            this.items.push( {text: display, value: this.value.reference} )
-          }
-          this.loading = false
-        } )
+        if(!this.referenceDisplayPath) {
+          this.$fhirutils.resourceLookup( this.value.reference ).then( display => {
+            this.displayValue = display
+            if ( this.displayType !== "tree" ) {
+              this.items.push( {text: display, value: this.value.reference} )
+            }
+            this.loading = false
+          } )
+        } else {
+          fetch("/fhir/" + this.value.reference).then((response) => {
+            response.json().then((data) => {
+              let displayVal = this.$fhirpath.evaluate(data, this.referenceDisplayPath)
+              if(typeof displayVal === 'object') {
+                displayVal = displayVal.join(", ")
+              }
+              this.items = [{
+                value: this.value.reference,
+                text: displayVal
+              }]
+              this.displayValue = displayVal
+              this.loading = false
+            })
+          })
+        }
       }
+    },
+    resourceDisplayName(resource) {
+      return new Promise((resolve) => {
+        let details
+        if(resource.meta && resource.meta.profile) {
+          let profile = resource.meta.profile[0]
+          //this is because some profile url contains : i.e http://
+          let profilePortions = profile.split(":")
+          for(let portion of profilePortions) {
+            if(!details) {
+              details = this.shortnames[portion]
+            } else {
+              details = details[portion]
+            }
+          }
+        }
+        if(!details) {
+          let name = resource.name
+          if(!name) {
+            name = resource.extension && resource.extension.find((ext) => {
+              return ext.url === 'http://ihris.org/fhir/StructureDefinition/ihris-basic-name'
+            })
+            if(name) {
+              name = name.valueString
+            }
+          }
+          return resolve(name)
+        }
+        let format = details.format || "%s"
+        let output = []
+        let order = details.order ? details.order.split(',') : Object.keys( details.path )
+        if ( details.fhirpath ) {
+          output.push( this.$fhirpath.evaluate( resource, details.fhirpath ).join( details.join || " " ) )
+        } else if ( details.paths ) {
+          for ( let ord of order ) {
+            ord = ord.trim()
+            output.push( this.$fhirpath.evaluate( resource, details.paths[ ord ].fhirpath ).join( details.paths[ord].join || " " ) )
+          }
+        }
+        let promises = []
+        for(let val of output) {
+          promises.push(new Promise((resolve) => {
+            if(val.split("/").length === 2) {
+              fetch("/fhir/" + val).then((response) => {
+                response.json().then(async(resp) => {
+                  let val = await this.resourceDisplayName(resp)
+                  format = format.replace('%s', val)
+                  resolve()
+                })
+              })
+            } else {
+              format = format.replace('%s', val)
+              resolve()
+            }
+          }))
+        }
+        Promise.all(promises).then(() => {
+          return resolve(format)
+        })
+      })
     }
   },
   computed: {

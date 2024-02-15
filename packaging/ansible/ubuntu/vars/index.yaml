@@ -1,0 +1,18 @@
+#JAVA
+JAVA_HOME: /usr/lib/jvm/jdk-17-oracle-x64
+java_ver: 17
+
+#tomcat
+tomcat_ver: 9.0.80                          # Tomcat version to install
+tomcat_v_num: 9                             # Tomcat version number
+ui_manager_user: manager                    # User who can access the UI manager section only
+ui_manager_pass: Str0ngManagerP@ssw3rd      # UI manager user password
+ui_admin_username: admin                    # User who can access bpth manager and admin UI sections
+ui_admin_pass: Str0ngAdminP@ssw3rd          # UI admin password
+
+#maven
+maven_ver: 3.9.4
+maven_v_num: 3
+
+#hapi
+hapi_ver: 6.10.1

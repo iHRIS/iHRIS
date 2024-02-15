@@ -29,26 +29,31 @@ const userDataValidation = (userData) => {
         }
 
         let reference = [
-            {Sex: "genderCoding"},
-            {Educational_Background: "educationalbackgroundCoding"},
-            {Regime: "regimeCoding"},
-            {Regime_Grade: "regimeGradeCoding"},
-            {Profession: "professionCoding"},
-            {Profession_by_PENSS: "professionByPENSSCoding"},
-            {Profession_by_KSP: "professionByKSPCoding"},
-            {Std_KSP_Municipality: "stdKSPPHCMCoding"},
-            {Std_KSP_Hospital: "stdKSPPHCHCoding"},
-            {Compound_Allies: "compoundAlliesCoding"},
-            {Workplace: "facilityId"},
-            {Position: "positionCoding"},
-            {Qualification_of_Public_Health: "qualificationCoding"}
-
+          {Gender: "genderCoding"},
+          {Nationality: "nationalityCoding"},
+          {JobTitle: "jobCoding"},
+          {EmploymentTerms: "employmentCoding"},
+          {PayGrade: "gradeCoding"},
+          {FacilityName: "facilityId"},
+          {EducationLevel: "educationCoding"},
+          {EducationMajor: "majorCoding"},
+          {Emergency_contact_relation: "relationCoding"},
+          {ScoreAttained: "scoreCoding"},
+          {LeaveType: "leaveCoding"}
         ];
 
         let dateType = [
-            "Date_of_Birth",
-            "Start_Work_Date",
-            "Investiture_Date",
+            "BirthDate",
+            "StartDate",
+            "EndDate",
+            "LeaveStartDate",
+            "LeaveEndDate",
+            "LeaveRequestDate",
+            "EvaluationStartDate",
+            "EvaluationEndDate",
+            "PreviousWorkStartDate",
+            "PreviousWorkEndDate",
+            "Year"
         ]
 
         dateType.forEach((key, index) => {
@@ -56,7 +61,7 @@ const userDataValidation = (userData) => {
             if (!validateDate(user[`${key}`])) {
               console.log(user[`${key}`])
               validation.isValid = false;
-              errors.push(`${key} is not a valid date please enter in MM/DD/YY format`);
+              errors.push(`${key} is not a valid date please enter in YYYY-MM-DD format`);
             } else {
                 user[`${key}`] = new Date(user[`${key}`])
                 user[`${key}`].setDate(user[`${key}`].getDate())
@@ -145,8 +150,8 @@ const template = async (users) => {
                     },
                     extension: [
                         {
-                          url: "http://ihris.org/fhir/StructureDefinition/ihris-practitioner-placeOfBirth",
-                          valueString: user["Place_of_Birth"]
+                          url: "http://ihris.org/fhir/StructureDefinition/ihris-practitioner-nationality",
+                          valueCoding: user["nationalityCoding"]
                         },
                         {
                             url: "http://ihris.org/fhir/StructureDefinition/ihris-related-group",
@@ -164,38 +169,73 @@ const template = async (users) => {
                             type: {
                                 coding: [
                                     {
-                                        system:
-                                            "http://ihris.org/fhir/CodeSystem/ihris-timor-identifier",
-                                        code: "PMIS",
+                                        system: "http://terminology.hl7.org/CodeSystem/v2-0203",
+                                        code: "PRN",
+                                        display: "Provider number"
                                     },
                                 ],
                             },
-                            value: user["PMIS"],
+                            value: user["NationalID"],
                         },
                         {
                             type: {
                                 coding: [
                                     {
-                                        system:
-                                            "http://ihris.org/fhir/CodeSystem/ihris-ethiopia-identifier",
-                                        code: "PAYROLL",
+                                        system: "http://terminology.hl7.org/CodeSystem/v2-0203",
+                                        code: "PPN",
+                                        display: "Passport number"
                                     },
                                 ],
                             },
-                            value: user["Payroll"],
+                            value: user["Passport"],
                         },
+                        {
+                          type: {
+                              coding: [
+                                  {
+                                      system: "http://terminology.hl7.org/CodeSystem/v2-0203",
+                                      code: "EN",
+                                      display: "Employer number"
+                                  },
+                              ],
+                          },
+                          value: user["EmployeeNumber"],
+                      }
+                    ],
+                    telecom: [
+                      {
+                          use: "work" ,
+                          system : "phone",
+                          value: "+" + user["PhoneNumber"],
+                      },
+                      {
+                        use: "work" ,
+                        system : "email",
+                        value: user["Email"],
+                      }, 
+                    ],
+                    address: [
+                      {
+                          use: "home" ,
+                          line : user["StreetAddress"],
+                          city: user["Town"],
+                          district: user["District"],
+                          state: user["Province"],
+                      },
                     ],
                     active: true,
                     name: [
                         {
                             use: "official",
-                            text: user["FirstName"] + " " + user["LastNames"],
-                            given: [user["LastNames"]],
-                            family: user["FirstName"],
-                        },
+                            text: user["GivenName"] + " " + user["Surname"] + " " + user["MaidenName"],
+                            given: [user["GivenName"], user["MaidenName"] ],
+                            family: user["Surname"],
+                            prefix: [user["Prefix"]],
+                            suffix: [user["Suffix"]]
+                        }
                     ],
                     gender: user["genderCoding"].code,
-                    birthDate: user["Date_of_Birth"],
+                    birthDate: user["BirthDate"],
                 },
                 request: {
                     method: "PUT",
@@ -212,37 +252,33 @@ const template = async (users) => {
                 },
                 extension: [
                   {
-                    url: "http://ihris.org/fhir/StructureDefinition/ihris-practitionerrole-regime",
-                    valueCoding: user["regimeCoding"]
+                    url: "http://ihris.org/fhir/StructureDefinition/ihris-practitionerrole-first-employment-date",
+                    valueDate: user["StartDate"]
                   },
                   {
-                    url: "http://ihris.org/fhir/StructureDefinition/ihris-practitionerrole-regime-grade",
-                    valueCoding: user["regimeGradeCoding"]
+                    url: "http://ihris.org/fhir/StructureDefinition/ihris-practitionerrole-employment-status",
+                    valueCoding: user["employmentCoding"]
+                  },
+                  {
+                    url: "http://ihris.org/fhir/StructureDefinition/ihris-practitionerrole-salary-scale",
+                    valueCoding: user["gradeCoding"]
                   },
                   {
                     url: "http://ihris.org/fhir/StructureDefinition/ihris-practitionerrole-salary",
                     valueMoney: { value : user["Salary"] , currency : "USD" }
                   },
                   {
-                    url: "http://ihris.org/fhir/StructureDefinition/ihris-practitionerrole-investiture-Date",
-                    valueDate: user["Investiture_Date"]
-                  },
-                  {
-                    url: "http://ihris.org/fhir/StructureDefinition/ihris-practitionerrole-scale",
-                    valueString: user["Scale"]
-                  },
-                  {
-                    url: "http://ihris.org/fhir/StructureDefinition/ihris-practitionerrole-grade",
-                    valueString: user["Grade"]
-                  },
-                  {
-                    url: "http://ihris.org/fhir/StructureDefinition/ihris-practitionerrole-job-information-remark",
-                    valueString: user["Observation"]
+                    url: "http://ihris.org/fhir/StructureDefinition/ihris-practitionerrole-position-status",
+                    valueCoding: {
+                      system: "http://ihris.org/fhir/CodeSystem/ihris-position-status",
+                      version: "0.2.0",
+                      code: "occupied",
+                      display: "Occupied"
+                    }
                   }
                 ],
                 period: {
-                  start: user["Start_Work_Date"],
-                  end: ""
+                  start: user["StartDate"]
                 },
                 practitioner: {
                   reference: `Practitioner/${userId}`
@@ -256,7 +292,7 @@ const template = async (users) => {
                 code: [
                   {
                     coding: [
-                      user["positionCoding"]
+                      user["jobCoding"]
                     ],
                   },
                 ],
@@ -286,15 +322,19 @@ const template = async (users) => {
                     extension: [
                       {
                         url: "level",
-                        valueCoding: user["educationalbackgroundCoding"]
+                        valueCoding: user["educationCoding"]
                       },
                       {
-                        url: "publicHealth",
-                        valueCoding: user["qualificationCoding"]
+                        url: "institution",
+                        valueString: user["EducationInstitution"]
                       },
                       {
-                        url: "literary",
-                        valueString: user["Qualification_of_Literary"]
+                        url: "educationalMajor",
+                        valueCoding: user["majorCoding"]
+                      },
+                      {
+                        url: "year",
+                        valueDate: user["Year"]
                       }
                     ],
                   },
@@ -310,7 +350,7 @@ const template = async (users) => {
                 resourceType: "Basic",
                 meta: {
                   profile: [
-                    "http://ihris.org/fhir/StructureDefinition/ihris-basic-profession",
+                    "http://ihris.org/fhir/StructureDefinition/ihris-basic-emergency",
                   ],
                 },
                 extension: [
@@ -321,35 +361,162 @@ const template = async (users) => {
                     },
                   },
                   {
-                    url: "http://ihris.org/fhir/StructureDefinition/ihris-profession",
+                    url: "http://ihris.org/fhir/StructureDefinition/ihris-emergency",
                     extension: [
                       {
-                        url: "profession",
-                        valueCoding: user["professionCoding"]
+                        url: "name",
+                        valueString: user["Emergency_contact_name"]
                       },
                       {
-                        url: "professionByPENSS",
-                        valueCoding: user["professionByPENSSCoding"]
+                        url: "mobile",
+                        valueString: user["Emergency_contact_mobile_phone"]
                       },
                       {
-                        url: "professionByKSP",
-                        valueCoding: user["professionByKSPCoding"]
+                        url: "relation",
+                        valueCoding: user["relationCoding"]
                       },
                       {
-                        url: "stdKSPPHCM",
-                        valueCoding: user["stdKSPPHCMCoding"]
-                      },
-                      {
-                        url: "stdKSPPHCH",
-                        valueCoding: user["stdKSPPHCHCoding"]
-                      },
-                      {
-                        url: "compoundAllies",
-                        valueString: user["compoundAlliesCoding"]
+                        url: "otherEmail",
+                        valueString: user["Emergency_contact_email"]
                       }
                     ],
                   },
                 ],
+              },
+              request: {
+                method: "POST",
+                url: "Basic",
+              }
+            },
+            {
+              resource: {
+                resourceType: "Basic",
+                meta: {
+                  profile: [
+                    "http://ihris.org/fhir/StructureDefinition/ihris-basic-performance",
+                  ],
+                },
+                extension: [
+                  {
+                    url: "http://ihris.org/fhir/StructureDefinition/ihris-practitioner-reference",
+                    valueReference: {
+                      reference: `Practitioner/${userId}`,
+                    },
+                  },
+                  {
+                    url: "http://ihris.org/fhir/StructureDefinition/ihris-performance",
+                    extension: [
+                      {
+                        url: "evaluator",
+                        valueString: user["EvaluatorName"]
+                      },
+                      {
+                        url: "period",
+                        valuePeriod: { start: user["EvaluationStartDate"] , end: user["EvaluationEndDate"]}
+                      },
+                      {
+                        url: "score",
+                        valueCoding: user["scoreCoding"]
+                      }
+                    ],
+                  },
+                ],
+              },
+              request: {
+                method: "POST",
+                url: "Basic",
+              }
+            },
+            {
+              resource: {
+                resourceType: "Basic",
+                meta: {
+                  profile: [
+                    "http://ihris.org/fhir/StructureDefinition/ihris-basic-leave",
+                  ],
+                },
+                extension: [
+                  {
+                    url: "http://ihris.org/fhir/StructureDefinition/ihris-practitioner-reference",
+                    valueReference: {
+                      reference: `Practitioner/${userId}`,
+                    },
+                  },
+                  {
+                    url: "http://ihris.org/fhir/StructureDefinition/ihris-leave",
+                    extension: [
+                      {
+                        url: "leave-type",
+                        valueCoding: user["leaveCoding"]
+                      },
+                      {
+                        url: "period",
+                        valuePeriod: { start: user["LeaveStartDate"],
+                                       end: user["LeaveEndDate"]
+                                     }
+                      },
+                      {
+                        url: "dateRequested",
+                        valueDate: user["LeaveRequestDate"]
+                      }
+                    ],
+                  },
+                ],
+              },
+              request: {
+                method: "POST",
+                url: "Basic",
+              }
+            },
+            {
+              resource: {
+                resourceType: "Basic",
+                meta: {
+                  profile: [
+                    "http://ihris.org/fhir/StructureDefinition/ihris-basic-employment-history",
+                  ],
+                },
+                extension: [
+                  {
+                    url: "http://ihris.org/fhir/StructureDefinition/ihris-practitioner-reference",
+                    valueReference: {
+                      reference: `Practitioner/${userId}`,
+                    },
+                  },
+                  {
+                    url: "http://ihris.org/fhir/StructureDefinition/ihris-employment-history",
+                    extension: [
+                      {
+                        url: "organization",
+                        valueString: user["OrganizationName"]
+                      },
+                      {
+                        url: "address",
+                        valueString: user["OrganizationAddress"]
+                      },
+                      {
+                        url: "startingPosition",
+                        valueString: user["Position"]
+                      },
+                      {
+                        url: "startingSalary",
+                        valueMoney:{ value : user["PPSalary"] , currency : "USD" }
+                      },
+                      {
+                        url: "period",
+                        valuePeriod: { start: user["PreviousWorkStartDate"], end: user["PreviousWorkEndDate"]}
+                      },
+                      {
+                        url: "responsibilities",
+                        valueString: user["Jobdescription"]
+                      },
+                      {
+                        url: "reasonLeaving",
+                        valueString: user["Reasonforleaving"]
+                      }
+                    ],
+                  }
+                ]
               },
               request: {
                 method: "POST",

@@ -17,10 +17,9 @@
       "item": [
         {
           "linkId": "Basic.extension[0].extension[0]",
-          "definition": "http://ihris.org/fhir/StructureDefinition/ihris-basic-education-history#Basic.extension:educationHistory.extension:institution.value[x]:valueCoding",
-          "answerValueSet": "http://ihris.org/fhir/ValueSet/ihris-institution-valueset",
+          "definition": "http://ihris.org/fhir/StructureDefinition/ihris-basic-education-history#Basic.extension:educationHistory.extension:institution.value[x]:valueString",
           "text": "Education Institution",
-          "type": "choice",
+          "type": "string",
           "required": true,
           "repeats": false
         },

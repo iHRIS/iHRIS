@@ -132,14 +132,6 @@
       },
       {
         "reference": {
-          "reference": "StructureDefinition/ihris-job-description"
-        },
-        "name": "iHRIS Job Description",
-        "description": "iHRIS profile of Practitioner.",
-        "exampleBoolean": false
-      },
-      {
-        "reference": {
           "reference": "StructureDefinition/ihris-jurisdiction"
         },
         "name": "Jurisdiction",
@@ -276,6 +268,14 @@
       },
       {
         "reference": {
+          "reference": "StructureDefinition/confirm-initial-password"
+        },
+        "name": "Confirm Password",
+        "description": "Confirm Password",
+        "exampleBoolean": false
+      },
+      {
+        "reference": {
           "reference": "StructureDefinition/ihris-assign-role"
         },
         "name": "iHRIS Assign Role",
@@ -332,14 +332,6 @@
           "reference": "StructureDefinition/ihris-employment-history"
         },
         "name": "Work Experience details",
-        "exampleBoolean": false
-      },
-      {
-        "reference": {
-          "reference": "StructureDefinition/ihris-facility-information-details"
-        },
-        "name": "Ihris Facility Information Details",
-        "description": "Defines the primary resource of the facility information ",
         "exampleBoolean": false
       },
       {
@@ -477,14 +469,6 @@
       },
       {
         "reference": {
-          "reference": "StructureDefinition/ihris-practitionerrole-job-information-remark"
-        },
-        "name": "iHRIS Job Description Job Information Remark",
-        "description": "iHRIS extension for Job Information Remark.",
-        "exampleBoolean": false
-      },
-      {
-        "reference": {
           "reference": "StructureDefinition/ihris-practitionerrole-job-type"
         },
         "name": "iHRIS Job Description Job Type",
@@ -521,14 +505,6 @@
         },
         "name": "iHRIS Salary Scale",
         "description": "iHRIS extension for Job Description Salary Scale.",
-        "exampleBoolean": false
-      },
-      {
-        "reference": {
-          "reference": "StructureDefinition/ihris-practitionerrole-shift"
-        },
-        "name": "iHRIS Job Description Shift",
-        "description": "iHRIS extension for Job Description Shift.",
         "exampleBoolean": false
       },
       {
@@ -612,14 +588,6 @@
       },
       {
         "reference": {
-          "reference": "StructureDefinition/ihris-user-practitioner"
-        },
-        "name": "iHRIS User Practitioner",
-        "description": "iHRIS user Practitioner extension for local users.",
-        "exampleBoolean": false
-      },
-      {
-        "reference": {
           "reference": "StructureDefinition/ihris-visualization-categories"
         },
         "name": "iHRIS Visualization Categories",
@@ -668,10 +636,26 @@
       },
       {
         "reference": {
+          "reference": "StructureDefinition/initial-password"
+        },
+        "name": "Password",
+        "description": "Password",
+        "exampleBoolean": false
+      },
+      {
+        "reference": {
           "reference": "StructureDefinition/location-boundary-geojson"
         },
         "name": "Location Boundary (GeoJSON)",
         "description": "A boundary shape that represents the outside edge of the location (in GeoJSON format) This shape may have holes, and disconnected shapes.",
+        "exampleBoolean": false
+      },
+      {
+        "reference": {
+          "reference": "StructureDefinition/old-password"
+        },
+        "name": "Old Password",
+        "description": "Old Password",
         "exampleBoolean": false
       },
       {
@@ -873,14 +857,6 @@
       },
       {
         "reference": {
-          "reference": "ValueSet/ihris-job-ethiopia"
-        },
-        "name": "iHRIS Job Title Value Set",
-        "description": "iHRIS ValueSet for: iHRISJobEthiopia",
-        "exampleBoolean": false
-      },
-      {
-        "reference": {
           "reference": "ValueSet/ihris-job-type-valueset"
         },
         "name": "iHRIS Job Type ValueSet",
@@ -959,13 +935,6 @@
       },
       {
         "reference": {
-          "reference": "ValueSet/ihris-shift-valueset"
-        },
-        "name": "iHRIS Shift Value Set",
-        "exampleBoolean": false
-      },
-      {
-        "reference": {
           "reference": "ValueSet/ihris-task-permission"
         },
         "name": "Code system for task permissions.",
@@ -983,6 +952,14 @@
           "reference": "ValueSet/ihris-training-valueset"
         },
         "name": "iHRIS In-Service Training ValueSet",
+        "exampleBoolean": false
+      },
+      {
+        "reference": {
+          "reference": "ValueSet/iso3166-1-2"
+        },
+        "name": "Iso 3166 Part 1: 2 Letter Codes",
+        "description": "This value set defines the ISO 3166 Part 1 2-letter codes",
         "exampleBoolean": false
       },
       {
@@ -1007,6 +984,13 @@
         },
         "name": "Location type",
         "description": "This example value set defines a set of codes that can be used to indicate the physical form of the Location.",
+        "exampleBoolean": false
+      },
+      {
+        "reference": {
+          "reference": "ValueSet/na-resource-valueset"
+        },
+        "name": "Value Set for iHRIS Namibia Basic Resources.",
         "exampleBoolean": false
       },
       {
@@ -1130,7 +1114,7 @@
       },
       {
         "reference": {
-          "reference": "CodeSystem/v2-0360"
+          "reference": "CodeSystem/3654"
         },
         "name": "degreeLicenseCertificate",
         "description": "Code system of concepts specifying an educational degree (e.g., MD).  Used in the CNN datatype (names and identifiers of clinicians) in Version 2 messaging.  Used in HL7 Version 2.x messaging in the CNN segment; note that in releases of HL7 prior to 2.3.1, was also used in person names (XPN), but this use was deprecated, then withdrawn in 2.7.",
@@ -1138,7 +1122,15 @@
       },
       {
         "reference": {
-          "reference": "CodeSystem/v2-0203"
+          "reference": "CodeSystem/ISO3166Part1"
+        },
+        "name": "ISO 3166-1 Codes for the representation of names of countries and their subdivisions — Part 1: Country code",
+        "description": "ISO 3166-1 establishes codes that represent the current names of countries, dependencies, and other areas of particular geopolitical interest, on the basis of country names obtained from the United Nations.",
+        "exampleBoolean": false
+      },
+      {
+        "reference": {
+          "reference": "CodeSystem/2103"
         },
         "name": "identifierType",
         "description": "HL7-defined code system of concepts specifying type of identifier. Used in HL7 Version 2.x messaging data types CX, PLN, PPN, XCN and XON.",
@@ -1255,13 +1247,6 @@
       },
       {
         "reference": {
-          "reference": "CodeSystem/ihris-job-ethiopia"
-        },
-        "name": "iHRIS Job Title Code System for Ethiopia",
-        "exampleBoolean": false
-      },
-      {
-        "reference": {
           "reference": "CodeSystem/ihris-job-type-codesystem"
         },
         "name": "iHRIS Job Type CodeSystem",
@@ -1340,13 +1325,6 @@
       },
       {
         "reference": {
-          "reference": "CodeSystem/ihris-shift-codesystem"
-        },
-        "name": "iHRIS Shift Code System",
-        "exampleBoolean": false
-      },
-      {
-        "reference": {
           "reference": "CodeSystem/ihris-task-permission"
         },
         "name": "Code system for task permissions.",
@@ -1395,6 +1373,13 @@
         },
         "name": "Location type",
         "description": "This example value set defines a set of codes that can be used to indicate the physical form of the Location.",
+        "exampleBoolean": false
+      },
+      {
+        "reference": {
+          "reference": "CodeSystem/na-resource-codesystem"
+        },
+        "name": "Code System for iHRIS Basic Resources.",
         "exampleBoolean": false
       },
       {
@@ -1595,10 +1580,10 @@
       },
       {
         "reference": {
-          "reference": "Basic/ihris-es-report-staff-test"
+          "reference": "Basic/ihris-es-report-staff-directorate"
         },
-        "name": "Staff Relationship Test",
-        "exampleCanonical": "http://ihris.org/fhir/StructureDefinition/iHRISRelationship"
+        "name": "ihris-es-report-staff-directorate",
+        "exampleBoolean": true
       },
       {
         "reference": {

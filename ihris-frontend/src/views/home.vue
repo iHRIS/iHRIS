@@ -207,6 +207,16 @@
               </v-col>
             </v-row>
           </v-card-text>
+          <template v-if="$store.state.login.links.length && !$store.state.user.loggedin">
+            <v-col v-for="(link) in $store.state.login.links" :key="link.url">
+              <v-row>
+                <v-btn text :key="link.url" :to="link.url" :color="link.color">
+                  <v-icon v-if="link.icon" light left>{{ link.icon }}</v-icon>
+                  {{ link.text }}
+                </v-btn>
+              </v-row>
+            </v-col>
+          </template>
         </v-container>
   </div>
 </template>
@@ -215,7 +225,7 @@
 
 <script>
 // @ is an alias to /src
-
+import { eventBus } from "@/main";
 export default {
   name: "Home",
   data(){
@@ -239,16 +249,6 @@ export default {
       resetPasswordEmail: "",
       signup: {}
     }
-  },
-  created:function(){
-    fetch("/config/site").then(response => {
-      response.json().then(data => {
-        if (data.auth && data.auth.signup) {
-          this.$store.commit('setAllowSelfSignup', data.auth.signup.enabled);
-          this.signup = data.auth.signup
-        }
-      })
-    })
   },
   methods:{
     signupRedirect() {
@@ -281,9 +281,37 @@ export default {
             response.json().then(data => {
               this.snackbar = true
               this.message = this.$t("App.hardcoded-texts.Login successfull")
-              this.$emit("loggedin", data.user)
-              // this.$router.push( {path: "/" } )
-              location.reload()
+              let user = {}
+              user.obj = data.user
+              user.name = "Unknown"
+              let forcePasswordChange = false
+              if(data.user.resource) {
+                let roleExt = data.user.resource.extension.find((ext) => {
+                  return ext.url === "http://ihris.org/fhir/StructureDefinition/ihris-assign-role"
+                })
+                if(roleExt) {
+                  let role = roleExt.valueReference.reference.split("/")
+                  user.role = role.pop()
+                }
+                user.name = data.user.resource.name[0].text
+                let passwd = data.user.resource.extension.find((ext) => {
+                  return ext.url === "http://ihris.org/fhir/StructureDefinition/ihris-password"
+                })
+                if(passwd) {
+                  let passwdChanged = passwd.extension.find((ext) => {
+                    return ext.url === 'passwordChanged'
+                  })
+                  if(passwdChanged && !passwdChanged.valueBoolean) {
+                    forcePasswordChange = true
+                  }
+                }
+              }
+              eventBus.$emit("updateconfig")
+              if(forcePasswordChange) {
+                this.$router.push({path: "/questionnaire/ihris-change-password/user"})
+              } else {
+                location.reload()
+              }
             }).catch(err => {
               this.loggingin = false
               this.snackbar = true

@@ -1,0 +1,123 @@
+---
+- name: HAPI FHIR Server
+  hosts: all
+  # become: true
+  tags: prep
+
+  tasks:
+
+  - name: Add the OS specific variables
+      include_vars:
+        file: index.yaml
+
+  - name: hapi folder exists
+    stat:
+      path: $HOME/hapi-fhir-jpaserver-starter
+    register: stat_result2
+
+
+  - name: git clone repo hapi-jpa-server-starter
+    git:
+      repo: 'https://github.com/hapifhir/hapi-fhir-jpaserver-starter.git'
+      dest: /tmp/hapi-fhir-jpaserver-starter
+      clone: yes
+      force: yes
+    when: stat_result2.stat.exists == False
+
+
+  - name: git pull if updated
+    git:
+      repo: 'https://github.com/hapifhir/hapi-fhir-jpaserver-starter.git'
+      dest: /tmp/hapi-fhir-jpaserver-starter
+      update: yes
+      force: yes
+
+
+  - name: git checkout v{{hapi_ver}}
+    shell: git checkout v{{hapi_ver}}
+    args:
+      chdir: /tmp/hapi-fhir-jpaserver-starter
+
+
+  - name: install application.yaml template for hapi jpa Server
+    template:
+      src: ../570-application.yaml
+      dest: /tmp/hapi-fhir-jpaserver-starter/src/main/resources/application.yaml
+      owner: "tomcat"
+      group: "tomcat"
+      mode: 0755
+      force: yes
+
+
+  - name: Building hapi-fhir
+    shell: /opt/maven/bin/mvn clean install --no-transfer-progress --batch-mode package -DskipTests
+    args:
+      chdir: /tmp/hapi-fhir-jpaserver-starter
+    environment:
+      MAVEN_OPTS: -Xmx2048m
+
+
+# stop tomcat
+  - name: stop tomcat
+    service: 
+      name: tomcat
+      state: stopped
+      enabled: yes
+    become: true
+
+  # pause to let tomcat stop
+  - pause:
+      seconds: 10
+
+
+# move default ROOT into ROOT-Closed
+  - name: move default ROOT into ROOT-Closed
+    file:
+      path: /opt/tomcat{{tomcat_v_num}}/webapps/ROOT
+      state: absent
+
+  - name: move war file to /opt/tomcat{{tomcat_v_num}}/webapps/
+    shell: cp ROOT.war /opt/tomcat{{tomcat_v_num}}/webapps/
+    args:
+      chdir: /tmp/hapi-fhir-jpaserver-starter/target/
+    become: true
+    
+
+  - name: create lucene target
+    ansible.builtin.file:
+      path: /opt/tomcat{{tomcat_v_num}}/target
+      state: directory
+      # needs broad perms
+      mode: '0777'
+      owner: tomcat
+      group: tomcat
+    become: true
+
+  - name: create lucenefiles
+    ansible.builtin.file:
+      path: /opt/tomcat{{tomcat_v_num}}/target/lucenefiles
+      state: directory
+      mode: '0777'
+      owner: tomcat
+      group: tomcat
+    become: true
+
+# kick tomcat
+  - name: restart tomcat
+    systemd:
+      name: tomcat
+      state: started
+
+
+# pause to let tomcat start and then check status
+  - pause:
+      seconds: 10
+
+# status
+  - name: status
+    command: systemctl status tomcat.service
+    register: status
+
+
+  - debug:
+      msg: "{{ status.stdout_lines }}"

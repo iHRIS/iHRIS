@@ -1,16 +1,6 @@
 {
   "resourceType": "StructureDefinition",
   "id": "ihris-basic-performance",
-  "extension": [
-    {
-      "url": "http://hl7.org/fhir/StructureDefinition/structuredefinition-category",
-      "valueString": "Foundation.Other"
-    },
-    {
-      "url": "http://hl7.org/fhir/StructureDefinition/structuredefinition-security-category",
-      "valueCode": "not-classified"
-    }
-  ],
   "url": "http://ihris.org/fhir/StructureDefinition/ihris-basic-performance",
   "version": "0.1.0",
   "name": "IhrisBasicPerformance",
@@ -817,6 +807,7 @@
         "id": "Basic.extension:performance.extension:evaluator",
         "path": "Basic.extension.extension",
         "sliceName": "evaluator",
+        "label": "Evaluator",
         "short": "Additional content defined by implementations",
         "definition": "May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.",
         "comment": "There can be no stigma associated with the use of extensions by any application, project, or standard - regardless of the institution or jurisdiction that uses or defines the extensions.  The use of extensions is what allows the FHIR specification to retain a core level of simplicity for everyone.",
@@ -1084,6 +1075,7 @@
         "id": "Basic.extension:performance.extension:period",
         "path": "Basic.extension.extension",
         "sliceName": "period",
+        "label": "Performance Period",
         "short": "Additional content defined by implementations",
         "definition": "May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.",
         "comment": "There can be no stigma associated with the use of extensions by any application, project, or standard - regardless of the institution or jurisdiction that uses or defines the extensions.  The use of extensions is what allows the FHIR specification to retain a core level of simplicity for everyone.",
@@ -1538,6 +1530,7 @@
         "id": "Basic.extension:performance.extension:score",
         "path": "Basic.extension.extension",
         "sliceName": "score",
+        "label": "Score",
         "short": "Additional content defined by implementations",
         "definition": "May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.",
         "comment": "There can be no stigma associated with the use of extensions by any application, project, or standard - regardless of the institution or jurisdiction that uses or defines the extensions.  The use of extensions is what allows the FHIR specification to retain a core level of simplicity for everyone.",
@@ -2361,7 +2354,8 @@
       {
         "id": "Basic.extension:performance.extension:evaluator",
         "path": "Basic.extension.extension",
-        "sliceName": "evaluator"
+        "sliceName": "evaluator",
+        "label": "Evaluator"
       },
       {
         "id": "Basic.extension:performance.extension:evaluator.valueString",
@@ -2371,7 +2365,8 @@
       {
         "id": "Basic.extension:performance.extension:period",
         "path": "Basic.extension.extension",
-        "sliceName": "period"
+        "sliceName": "period",
+        "label": "Performance Period"
       },
       {
         "id": "Basic.extension:performance.extension:period.valuePeriod",
@@ -2381,7 +2376,8 @@
       {
         "id": "Basic.extension:performance.extension:score",
         "path": "Basic.extension.extension",
-        "sliceName": "score"
+        "sliceName": "score",
+        "label": "Score"
       },
       {
         "id": "Basic.extension:performance.extension:score.valueCoding",

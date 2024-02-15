@@ -84,9 +84,10 @@ const fhirAxios = {
         reject( new InvalidRequestError( "resource must be defined" ) )
       }
       let url = new URL(fhirAxios.baseUrl.href)
-      url.pathname += resource
+      if(!params._getpages) {
+        url.pathname += resource
+      }
       let auth = fhirAxios.__getAuth()
-
       //axios.get( url.href, { auth, params } ).then( (response) => {
       axios.get( url.href, { auth, params, headers: { 'Cache-Control': 'no-cache'} } ).then( (response) => {
         resolve( response.data )

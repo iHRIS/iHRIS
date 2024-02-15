@@ -6,6 +6,46 @@ const logger = require('../../winston')
 
 
 const fhirQuestionnaire = {
+  modifyQuestionnaireArrayPath: (response) => {
+    let previousIds = []
+    const processChildren = (items, parentPath, originalParentPath) => {
+      for( let item of items ) {
+        let originalId = item.linkId
+        let linkId = item.linkId
+        if ( item.linkId.match( /\[\d+\]$/ )) {
+          if(parentPath) {
+            linkId = linkId.replace(originalParentPath, parentPath)
+          }
+          let id = linkId.replace( /\[\d+\]$/, "" )
+          let previousIdIndex = previousIds.findIndex((prev) => {
+            prev = prev.replace( /\[\d+\]$/, "" )
+            return prev === id
+          })
+          let previousId = previousIds[previousIdIndex]
+          if(previousIdIndex === -1) {
+            linkId = linkId.replace( /\[\d+\]$/, "[0]" )
+            previousIds.push(linkId)
+            item.definition = linkId
+          } else {
+            let prevIndex = previousId.match( /\[\d+\]$/ )[0]
+            prevIndex = prevIndex.match( /\d+/ )[0]
+            let id1 = previousId.replace( /\[\d+\]$/, "" )
+            let id2 = linkId.replace( /\[\d+\]$/, "" )
+            if(id1 === id2) {
+              linkId = linkId.replace( /\[\d+\]$/, "[" + ++prevIndex + "]" )
+            }
+            previousIds[previousIdIndex] = linkId
+            item.definition = linkId
+          }
+        }
+        if(item.item) {
+          processChildren(item.item, linkId, originalId)
+        }
+      }
+    }
+    processChildren(response.item)
+  },
+
   setQuestionnairePaths: (response) => {
     let replaceList = []
     let pathSeen = {}
@@ -35,12 +75,13 @@ const fhirQuestionnaire = {
             for( let remove of Object.keys(pathSeen).filter( rem => rem.startsWith(path) ) ) {
               pathSeen[remove] = false
             }
-
           }
           if ( path !== replaceList[0] ) {
             replaceList.unshift(path)
           }
-          item.definition = path
+          if(!item.definition) {
+            item.definition = path
+          }
           processChildren( item.item )
 
         } else {
@@ -78,7 +119,9 @@ const fhirQuestionnaire = {
               path = path.replace( replaceList[idx], currReplaceIdx[ replaceList[idx] ] )
             }
           }
-          item.definition = path
+          if(!item.definition) {
+            item.definition = path
+          }
 
         }
       }
@@ -146,6 +189,15 @@ const fhirQuestionnaire = {
             if ( arrayIdx !== false ) {
               if ( !current[element][arrayIdx] ) {
                 current[element][arrayIdx] = {}
+                if(element === 'extension') {
+                  let linkIdPaths = field.linkId.split(".")
+                  linkIdPaths.pop()
+                  linkIdPaths = linkIdPaths.join(".")
+                  let url = fields.find((fld) => {
+                    return fld.linkId === linkIdPaths
+                  })?.url
+                  current[element][arrayIdx].url = url
+                }
               }
               current = current[element][arrayIdx]
             } else {
@@ -160,7 +212,6 @@ const fhirQuestionnaire = {
         arrayIdx = false
       }
       if ( field.hasOwnProperty("url") ) {
-
         if ( !current.hasOwnProperty( lastElement ) ) {
           if ( arrayIdx !== false ) {
             current[lastElement] = []
@@ -168,7 +219,6 @@ const fhirQuestionnaire = {
             current[lastElement] = {}
           }
         }
-
         if ( arrayIdx !== false ) {
           if ( !current[lastElement][arrayIdx] ) {
             current[lastElement][arrayIdx] = {}
@@ -199,6 +249,9 @@ const fhirQuestionnaire = {
                 current[lastElement] = field.answer
               }
             } else {
+              if(current[lastElement][arrayIdx]) {
+                arrayIdx = current[lastElement].length
+              }
               current[lastElement][arrayIdx] = field.answer || ""
             }
           } else {
@@ -207,7 +260,6 @@ const fhirQuestionnaire = {
         }
       }
     }
-
     for (const field of fields) {
       const fieldPath = field.definition.split('.');
       let fieldResource = fieldPath.shift();
@@ -264,6 +316,7 @@ const fhirQuestionnaire = {
   },
   processQuestionnaire: (response) => {
     return new Promise( (resolve,reject) => {
+      fhirQuestionnaire.modifyQuestionnaireArrayPath(response)
       fhirQuestionnaire.setQuestionnairePaths(response)
       let qId = response.questionnaire.substring( response.questionnaire.lastIndexOf('/')+1 )
       fhirAxios.read("Questionnaire", qId).then( async (questionnaire) => {
@@ -293,12 +346,20 @@ const fhirQuestionnaire = {
                 }
               } else {
                 let question = questionnaireRef[item.linkId]
+                if(!question) {
+                  // could be the linkId has # i.e Basic.extension[0].extension[2]#year
+                  let ids = Object.keys(questionnaireRef)
+                  let linkId = ids.find((id) => {
+                    return id.startsWith(item.linkId + "#")
+                  })
+                  question = questionnaireRef[linkId]
+                }
 
 
-                let simple = [ "date", "string", "dateTime", "text", "attachment","integer", "decimal", "uri", "boolean" ]
+                let simple = [ "date", "string", "dateTime", "text", "attachment", "integer", "decimal", "uri", "boolean" ]
                 let data = { linkId: item.linkId, definition: item.definition, q: question && question.type ? question.type : null, }
 
-                if ( item.definition&&item.definition.includes("extension") ) {
+                if ( item.definition && item.definition.includes("extension") ) {
                   logger.silly("EXT",question,item)
                   // Check for multiple extensions so the URL can be set up.
                   let paths = item.linkId.split('.')

@@ -30,7 +30,8 @@ const fhirReports = {
             ESMaxScrollContext: nconf.get("elasticsearch:max_scroll_context") || "100000",
             FHIRBaseURL: nconf.get("fhir:base") || "http://localhost:8080/hapi/fhir",
             FHIRUsername: nconf.get("fhir:username"),
-            FHIRPassword: nconf.get("fhir:password")
+            FHIRPassword: nconf.get("fhir:password"),
+            ESModulesBasePath: nconf.get("app:site:path") + "/modules/es"
           } )
           resolve(true)
         } else {

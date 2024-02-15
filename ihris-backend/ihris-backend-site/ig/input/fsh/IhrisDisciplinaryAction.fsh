@@ -8,14 +8,21 @@ Description:    "iHRIS Profile of the Basic resource for Discipline."
 * extension contains
     IhrisDiscipline named discipline 1..1 MS
 * extension[discipline] ^label = "Discipline Information"
+* extension[discipline].extension[actionType] ^label = "Discipline Action Type"
 * extension[discipline].extension[actionType].valueCoding 1..1 MS
+* extension[discipline].extension[givenDate] ^label = "Given Date"
 * extension[discipline].extension[givenDate].valueDate 1..1 MS
+* extension[discipline].extension[givenBy] ^label = "Given By"
 * extension[discipline].extension[givenBy].valueString MS
+* extension[discipline].extension[actionTaken] ^label = "Action Taken"
 * extension[discipline].extension[actionTaken].valueString MS
+* extension[discipline].extension[period] ^label = "Evaluation Period"
 * extension[discipline].extension[period].valuePeriod MS
 * extension[discipline].extension[period].valuePeriod.start 1..1 MS 
 * extension[discipline].extension[period].valuePeriod.end 1..1 MS
+* extension[discipline].extension[reason] ^label = "Reason"
 * extension[discipline].extension[reason].valueString 1..1 MS
+* extension[discipline].extension[remark] ^label = "Remark"
 * extension[discipline].extension[remark].valueString MS
     
 Extension:      IhrisDiscipline

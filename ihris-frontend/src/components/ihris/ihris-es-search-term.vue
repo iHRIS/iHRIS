@@ -108,7 +108,7 @@ export default {
               this.loading = false;
               for(let bucket of data) {
                 this.items.push(
-                  bucket.key.value
+                  bucket.key.value.toString().replace(/\s+/g, ' ')
                 )
               }
             })

@@ -7,13 +7,16 @@ Description:    "iHRIS Profile of the Basic resource for Performance."
 * extension[practitioner].valueReference ^label = "Health Worker"
 * extension contains
     IhrisPerformance named performance 1..1 MS
+* extension[performance].extension[evaluator] ^label = "Evaluator"
 * extension[performance].extension[evaluator].valueString MS
 * extension[performance].extension[evaluator].valueString ^label = "Evaluator's Name"
+* extension[performance].extension[period] ^label = "Performance Period"
 * extension[performance].extension[period].valuePeriod MS
 * extension[performance].extension[period].valuePeriod.start MS
 * extension[performance].extension[period].valuePeriod.start ^label = "Evaluation Period Start Date"
 * extension[performance].extension[period].valuePeriod.end MS
 * extension[performance].extension[period].valuePeriod.end ^label = "Evaluation Period End Date"
+* extension[performance].extension[score] ^label = "Score"
 * extension[performance].extension[score].valueCoding ^label = "Score Attained"
 * extension[performance].extension[score].valueCoding MS
     

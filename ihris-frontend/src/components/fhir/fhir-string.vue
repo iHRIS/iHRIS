@@ -1,7 +1,8 @@
 <template>
   <ihris-element :edit="edit" :loading="false" v-if="!hide">
     <template #form>
-      <v-text-field 
+      <v-textarea
+        v-if="displayType === 'text'"
         :error-messages="errors" 
         @change="errors = []" 
         :disabled="disabled"
@@ -15,7 +16,24 @@
         @click:append="showPassword = !showPassword"
         dense
       >
-      <template #label>{{$t(`App.fhir-resources-texts.${display}`)}}<span v-if="required" class="red--text font-weight-bold">*</span></template>
+        <template #label>{{$t(`App.fhir-resources-texts.${display}`)}}<span v-if="required" class="red--text font-weight-bold">*</span></template>
+      </v-textarea>
+      <v-text-field
+        v-else
+        :error-messages="errors"
+        @change="errors = []" 
+        :disabled="disabled"
+        :label="$t(`App.fhir-resources-texts.${display}`)"
+        v-model="value" 
+        outlined 
+        hide-details="auto" 
+        :rules="rules" 
+        :type="isPassword ? (showPassword ? 'text' : 'password') : 'text'"
+        :append-icon="isPassword ? (showPassword ? 'mdi-eye' : 'mdi-eye-off') : ''"
+        @click:append="showPassword = !showPassword"
+        dense
+      >
+        <template #label>{{$t(`App.fhir-resources-texts.${display}`)}}<span v-if="required" class="red--text font-weight-bold">*</span></template>
       </v-text-field>
     </template>
     <template #header>
@@ -35,7 +53,7 @@ import { dataDisplay } from "@/mixins/dataDisplay"
 export default {
   name: "fhir-string",
   props: ["field", "label", "min", "max", "id", "path", "slotProps", "sliceName","base-min","base-max","edit","readOnlyIfSet",
-    "constraints", "displayType", "displayCondition"],
+    "constraints", "displayType", "displayCondition", "initial"],
   components: {
     IhrisElement
   },
@@ -52,6 +70,9 @@ export default {
     }
   },
   created: function() {
+    if(this.initial && !this.$route.params.id) {
+      this.value = this.initial
+    }
     //this function is defined under dataDisplay mixin
     this.hideShowField(this.displayCondition)
     this.setupData()

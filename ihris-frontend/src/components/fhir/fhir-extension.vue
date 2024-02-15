@@ -11,7 +11,8 @@ export default {
   data: function() {
     return {
       source: { path: "", data: [] },
-      errors: []
+      errors: [],
+      isExtension: true
     }
   },
   created: function() {
@@ -32,17 +33,20 @@ export default {
         this.source = { path: this.slotProps.source.path+"."+this.field, data: {} }
         if ( this.slotProps.source.fromArray ) {
           this.source.data = this.slotProps.source.data
+        }
+        let url
+        if ( this.profile ) {
+          url = this.profile
         } else {
-          let url
-          if ( this.profile ) {
-            url = this.profile
-          } else {
-            url = this.sliceName
-          }
-          let expression = this.field.replace(/([^:]+):(.+)/, "$1.where(url='"+url+"')")
+          url = this.sliceName
+        }
+        let expression = this.field.replace(/([^:]+):(.+)/, "$1.where(url='"+url+"')")
+        this.source.data = this.$fhirpath.evaluate( this.slotProps.source.data, expression )
+        if(this.source.data.length === 0 && expression.startsWith("extension.") && 
+          ((!Array.isArray(this.slotProps.source.data) && !this.slotProps.source.data.hasOwnProperty("extension")) || Array.isArray(this.slotProps.source.data) && !this.slotProps.source.data.find(dt => dt.extension))) {
+          expression = expression.replace("extension.", "")
           this.source.data = this.$fhirpath.evaluate( this.slotProps.source.data, expression )
         }
-        //console.log(this.source)
       }
     }
   }

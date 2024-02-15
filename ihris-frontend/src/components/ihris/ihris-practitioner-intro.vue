@@ -131,8 +131,11 @@ export default {
         this.slotProps.source.data
       ) {
         let practitioner = this.slotProps.source.data;
+        if(!practitioner || practitioner.resourceType !== 'Practitioner') {
+          return
+        }
         let title = ""
-        if(practitioner&&practitioner.name[0]?.prefix&&practitioner.name[0]?.prefix.length){
+        if(practitioner && practitioner.name && practitioner.name[0].prefix && practitioner.name[0].prefix && practitioner.name[0]?.prefix.length){
           title = practitioner.name[0].prefix[0]
         }
         this.intro.fullName = `${title} ${practitioner?.name[0]?.family} ${practitioner?.name[0]?.given[0]}`;

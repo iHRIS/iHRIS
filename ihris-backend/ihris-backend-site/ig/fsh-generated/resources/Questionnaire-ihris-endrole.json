@@ -16,18 +16,21 @@
   "item": [
     {
       "linkId": "PractitionerRole",
-      "text": "Job End Date",
+      "definition": "http://ihris.org/fhir/StructureDefinition/ihris-practitioner-role#PractitionerRole.id",
+      "text": "End Appointment",
       "type": "group",
       "item": [
         {
-          "linkId": "period.end",
+          "linkId": "PracitionerRole.period.end",
+          "definition": "http://ihris.org/fhir/StructureDefinition/ihris-practitioner-role#PracitionerRole.period.end",
           "text": "End Date",
           "type": "date",
           "required": true,
           "repeats": false
         },
         {
-          "linkId": "departure",
+          "linkId": "PracitionerRole.extension[0]",
+          "definition": "http://ihris.org/fhir/StructureDefinition/ihris-practitioner-role#PracitionerRole.extension:reasonForDepature.value[x]:valueCoding",
           "text": "Reason For Departure",
           "type": "choice",
           "answerValueSet": "http://ihris.org/fhir/ValueSet/ihris-reason-departure-valueset",
@@ -35,21 +38,12 @@
           "repeats": false
         },
         {
-          "linkId": "status",
-          "text": "Position Status",
-          "type": "choice",
+          "linkId": "PracitionerRole.active",
+          "definition": "http://ihris.org/fhir/StructureDefinition/ihris-practitioner-role#PracitionerRole.active",
+          "text": "Status",
+          "type": "boolean",
           "required": true,
-          "repeats": false,
-          "readOnly": true,
-          "answerOption": [
-            {
-              "valueCoding": {
-                "code": "closed",
-                "system": "http://ihris.org/fhir/CodeSystem/ihris-position-status"
-              },
-              "initialSelected": true
-            }
-          ]
+          "repeats": false
         }
       ]
     }

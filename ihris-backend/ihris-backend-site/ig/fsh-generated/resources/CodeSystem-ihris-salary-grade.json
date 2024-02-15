@@ -25,7 +25,8 @@
     },
     {
       "code": "director",
-      "display": "Specialist ornDirector"
+      "display": "Director",
+      "definition": "Director"
     },
     {
       "code": "specialist",

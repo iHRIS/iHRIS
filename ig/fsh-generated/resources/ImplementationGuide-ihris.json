@@ -44,22 +44,6 @@
       },
       {
         "reference": {
-          "reference": "StructureDefinition/ihris-facility"
-        },
-        "name": "iHRIS Facility",
-        "description": "iHRIS Profile of Locations to manage facilities.",
-        "exampleBoolean": false
-      },
-      {
-        "reference": {
-          "reference": "StructureDefinition/ihris-jurisdiction"
-        },
-        "name": "Jurisdiction",
-        "description": "iHRIS Profile of Locations to manage jurisdictions.",
-        "exampleBoolean": false
-      },
-      {
-        "reference": {
           "reference": "StructureDefinition/ihris-module"
         },
         "name": "iHRIS Module",
@@ -180,6 +164,7 @@
       },
       {
         "reference": {
+<<<<<<< HEAD
           "reference": "StructureDefinition/ihris-facility-information-details"
         },
         "name": "Ihris Facility Information Details",
@@ -192,6 +177,12 @@
         },
         "name": "iHRIS facility ownership type",
         "description": "iHRIS extension for Personal Prefix.",
+=======
+          "reference": "StructureDefinition/ihris-dashboard-visualization"
+        },
+        "name": "iHRIS Dashboard Visualization",
+        "description": "iHRIS Dashboard Visualization",
+>>>>>>> upstream/master
         "exampleBoolean": false
       },
       {
@@ -268,6 +259,57 @@
       },
       {
         "reference": {
+<<<<<<< HEAD
+=======
+          "reference": "StructureDefinition/ihris-visualization-categories"
+        },
+        "name": "iHRIS Visualization Categories",
+        "description": "iHRIS visualization categories",
+        "exampleBoolean": false
+      },
+      {
+        "reference": {
+          "reference": "StructureDefinition/ihris-visualization-dataset"
+        },
+        "name": "iHRIS Visualization Dataset",
+        "description": "iHRIS visualization dataset",
+        "exampleBoolean": false
+      },
+      {
+        "reference": {
+          "reference": "StructureDefinition/ihris-visualization-filters"
+        },
+        "name": "iHRIS Visualization Filters",
+        "description": "iHRIS visualization filters",
+        "exampleBoolean": false
+      },
+      {
+        "reference": {
+          "reference": "StructureDefinition/ihris-visualization-permissions"
+        },
+        "name": "iHRIS Visualization Permissions",
+        "description": "iHRIS Visualization Permissions",
+        "exampleBoolean": false
+      },
+      {
+        "reference": {
+          "reference": "StructureDefinition/ihris-visualization-series"
+        },
+        "name": "iHRIS Visualization Series",
+        "description": "iHRIS visualization series",
+        "exampleBoolean": false
+      },
+      {
+        "reference": {
+          "reference": "StructureDefinition/ihris-visualization-settings"
+        },
+        "name": "iHRIS Visualization Settings",
+        "description": "iHRIS visualization settings for the data visualizer",
+        "exampleBoolean": false
+      },
+      {
+        "reference": {
+>>>>>>> upstream/master
           "reference": "StructureDefinition/task-attributes"
         },
         "name": "Task Attributes",
@@ -387,38 +429,10 @@
       },
       {
         "reference": {
-          "reference": "ValueSet/ihris-Facility-identifier-valueset"
-        },
-        "name": "iHRIS facility Identifier ValueSet",
-        "exampleBoolean": false
-      },
-      {
-        "reference": {
-          "reference": "ValueSet/Ihris-facility-ownership"
-        },
-        "name": "iHRIS Facility Ownership ValueSet",
-        "exampleBoolean": false
-      },
-      {
-        "reference": {
-          "reference": "ValueSet/ihris-facility-type"
-        },
-        "name": "iHRIS Facility Type ValueSet",
-        "exampleBoolean": false
-      },
-      {
-        "reference": {
           "reference": "ValueSet/ihris-job"
         },
         "name": "iHRIS Job",
         "description": "Sample iHRIS ValueSet for: IhrisJob",
-        "exampleBoolean": false
-      },
-      {
-        "reference": {
-          "reference": "ValueSet/ihris-jurisdiction-type"
-        },
-        "name": "iHRIS Jurisdiction Type ValueSet",
         "exampleBoolean": false
       },
       {
@@ -595,7 +609,7 @@
       },
       {
         "reference": {
-          "reference": "CodeSystem/v2-0360"
+          "reference": "CodeSystem/3654"
         },
         "name": "degreeLicenseCertificate",
         "description": "Code system of concepts specifying an educational degree (e.g., MD).  Used in the CNN datatype (names and identifiers of clinicians) in Version 2 messaging.  Used in HL7 Version 2.x messaging in the CNN segment; note that in releases of HL7 prior to 2.3.1, was also used in person names (XPN), but this use was deprecated, then withdrawn in 2.7.",
@@ -603,7 +617,7 @@
       },
       {
         "reference": {
-          "reference": "CodeSystem/v2-0203"
+          "reference": "CodeSystem/2103"
         },
         "name": "identifierType",
         "description": "HL7-defined code system of concepts specifying type of identifier. Used in HL7 Version 2.x messaging data types CX, PLN, PPN, XCN and XON.",
@@ -642,38 +656,10 @@
       },
       {
         "reference": {
-          "reference": "CodeSystem/ihris-Facility-identifier"
-        },
-        "name": "Identifier Type",
-        "exampleBoolean": false
-      },
-      {
-        "reference": {
-          "reference": "CodeSystem/Ihris-facility-ownership-type"
-        },
-        "name": "Facility Ownership Type",
-        "exampleBoolean": false
-      },
-      {
-        "reference": {
-          "reference": "CodeSystem/ihris-facility-type"
-        },
-        "name": "Facility Type",
-        "exampleBoolean": false
-      },
-      {
-        "reference": {
           "reference": "CodeSystem/ihris-job"
         },
         "name": "iHRIS Job",
         "description": "Sample iHRIS CodeSystem for: IhrisJob",
-        "exampleBoolean": false
-      },
-      {
-        "reference": {
-          "reference": "CodeSystem/ihris-jurisdiction-type"
-        },
-        "name": "Jurisdiction Type",
         "exampleBoolean": false
       },
       {
@@ -899,6 +885,7 @@
       },
       {
         "reference": {
+<<<<<<< HEAD
           "reference": "Basic/ihris-page-cadre"
         },
         "name": "iHRIS Cadre CodeSystem Page",
@@ -934,6 +921,8 @@
       },
       {
         "reference": {
+=======
+>>>>>>> upstream/master
           "reference": "Basic/ihris-page-role"
         },
         "name": "NHWR Roles",

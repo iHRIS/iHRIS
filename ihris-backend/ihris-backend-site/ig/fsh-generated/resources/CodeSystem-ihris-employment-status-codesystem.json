@@ -24,9 +24,8 @@
       "definition": "Part-Time"
     },
     {
-      "code": "technicalAssistance",
-      "display": "Technical Assistance",
-      "definition": "Technical Assistance"
+      "code": "volunteer",
+      "display": "Volunteer"
     }
   ],
   "count": 4

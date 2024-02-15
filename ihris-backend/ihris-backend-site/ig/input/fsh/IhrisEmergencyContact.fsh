@@ -8,15 +8,25 @@ Description:    "iHRIS Profile of the Basic resource for Emergency."
 * extension contains
     IhrisEmergency named emergency 1..1 MS
 * extension[emergency] ^label = "Emergency"
+* extension[emergency].extension[name] ^label = "Full Name"
 * extension[emergency].extension[name].valueString 1..1 MS
+* extension[emergency].extension[relation] ^label = "Relationship"
 * extension[emergency].extension[relation].valueCoding 1..1 MS
+* extension[emergency].extension[phone] ^label = "Home Phone"
 * extension[emergency].extension[phone].valueString MS
+* extension[emergency].extension[mobile] ^label = "Mobile Phone"
 * extension[emergency].extension[mobile].valueString MS
+* extension[emergency].extension[workPhone] ^label = "Work Phone"
 * extension[emergency].extension[workPhone].valueString MS
+* extension[emergency].extension[workEmail] ^label = "Work Email"
 * extension[emergency].extension[workEmail].valueString MS
+* extension[emergency].extension[otherEmail] ^label = "Other Email"
 * extension[emergency].extension[otherEmail].valueString MS
+* extension[emergency].extension[address] ^label = "PO BOX"
 * extension[emergency].extension[address].valueString MS
+* extension[emergency].extension[remark] ^label = "Remark"
 * extension[emergency].extension[remark].valueString MS
+* extension[emergency].extension[attachment] ^label = "Attachment"
 * extension[emergency].extension[attachment].valueAttachment MS
     
 Extension:      IhrisEmergency

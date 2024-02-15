@@ -5,9 +5,14 @@ Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
+    version: "5.0.0",
     user: {
       loggedin: false,
-      name: ""
+      name: "",
+      obj: {}
+    },
+    login: {
+      links: []
     },
     allowSelfSignup:"",
     idp: 'ihris',
@@ -28,22 +33,14 @@ export default new Vuex.Store({
     login( state, user ) {
       state.user.loggedin = true
       state.user.name = user.name
-      state.user.location = user.location
       state.user.role = user.role
       state.user.userId = user.userId
-      state.user.reference = user.reference
-      state.user.facilityId = user.facilityId
-      state.user.physicalLocation = user.physicalLocation
+      state.user.obj = user.obj
     },
     logout( state ) {
       state.user.loggedin = false
-      state.user.name = "",
       state.user.name = ""
-      state.user.location = ""
       state.user.role = ""
-      state.user.reference = ""
-      state.user.facilityId = ""
-      state.user.physicalLocation = ""
     },
     securityOff( state, data ) {
       state.security_off = data

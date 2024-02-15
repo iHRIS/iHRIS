@@ -50,6 +50,10 @@ module.exports = {
       '^/tmp': {
         target: 'http://localhost:3000/',
         logLevel: 'debug'
+      },
+      '^/taskAndRole': {
+        target: 'http://localhost:3000/',
+        logLevel: 'debug'
       }
     }
   },

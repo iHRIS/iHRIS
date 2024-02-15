@@ -237,7 +237,10 @@
         },
         "type": [
           {
-            "code": "Reference"
+            "code": "Reference",
+            "targetProfile": [
+              "http://hl7.org/fhir/StructureDefinition/Location"
+            ]
           }
         ],
         "constraint": [
@@ -263,7 +266,7 @@
         "id": "Extension.value[x]:valueReference",
         "path": "Extension.value[x]",
         "sliceName": "valueReference",
-        "label": "Location/Facility",
+        "label": "Location",
         "short": "Value of extension",
         "definition": "Value of extension - must be one of a constrained set of the data types (see [Extensibility](extensibility.html) for a list).",
         "min": 1,
@@ -277,7 +280,7 @@
           {
             "code": "Reference",
             "targetProfile": [
-              "http://ihris.org/fhir/StructureDefinition/ihris-facility"
+              "http://hl7.org/fhir/StructureDefinition/Location"
             ]
           }
         ],
@@ -398,7 +401,7 @@
       {
         "id": "Extension.value[x]:valueReference.reference",
         "path": "Extension.value[x].reference",
-        "label": "Location/Facility",
+        "label": "Location",
         "short": "Literal reference, Relative, internal or absolute URL",
         "definition": "A reference to a location at which the other resource is found. The reference may be a relative reference, in which case it is relative to the service base URL, or an absolute URL that resolves to the location where the resource is found. The reference may be version specific or not. If the reference is not to a FHIR RESTful server, then it should be assumed to be version specific. Internal fragment references (start with '#') refer to contained resources.",
         "comment": "Using absolute URLs provides a stable scalable approach suitable for a cloud/web context, while using relative/logical references provides a flexible approach suitable for use when trading across closed eco-system boundaries.   Absolute URLs do not need to point to a FHIR RESTful server, though this is the preferred approach. If the URL conforms to the structure \"/[type]/[id]\" then it should be assumed that the reference is to a FHIR RESTful server.",
@@ -601,30 +604,25 @@
         "min": 1,
         "type": [
           {
-            "code": "Reference"
+            "code": "Reference",
+            "targetProfile": [
+              "http://hl7.org/fhir/StructureDefinition/Location"
+            ]
           }
         ]
       },
       {
         "id": "Extension.valueReference",
         "path": "Extension.valueReference",
-        "label": "Location/Facility",
+        "label": "Location",
         "min": 1,
         "max": "1",
-        "type": [
-          {
-            "code": "Reference",
-            "targetProfile": [
-              "http://ihris.org/fhir/StructureDefinition/ihris-facility"
-            ]
-          }
-        ],
         "mustSupport": true
       },
       {
         "id": "Extension.valueReference.reference",
         "path": "Extension.valueReference.reference",
-        "label": "Location/Facility",
+        "label": "Location",
         "min": 1,
         "mustSupport": true
       }

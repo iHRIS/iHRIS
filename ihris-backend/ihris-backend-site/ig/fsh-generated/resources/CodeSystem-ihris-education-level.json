@@ -5,7 +5,7 @@
   "name": "IhrisEducationLevel",
   "id": "ihris-education-level",
   "title": "Education Level",
-  "version": "0.1.0",
+  "version": "0.4.0",
   "url": "http://ihris.org/fhir/CodeSystem/ihris-education-level",
   "concept": [
     {
@@ -19,9 +19,14 @@
       "definition": "Diploma"
     },
     {
-      "code": "Degree",
-      "display": "Degree",
-      "definition": "Degree"
+      "code": "Undergrad",
+      "display": "Undergraduate",
+      "definition": "Undergraduate"
+    },
+    {
+      "code": "PGrad",
+      "display": "Post Graduate",
+      "definition": "Post Graduate"
     },
     {
       "code": "Masters",
@@ -39,6 +44,6 @@
       "definition": "Others"
     }
   ],
-  "date": "2020-09-29T08:41:04.362Z",
-  "count": 6
+  "date": "2022-10-29T08:41:04.362Z",
+  "count": 7
 }

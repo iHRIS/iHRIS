@@ -46,6 +46,7 @@ export default {
                   isEdit: true,
                   sectionMenu: data.data.sectionMenu,
                   hidden: data.data.hidden,
+                  initials: data.data.initials,
                   constraints: data.data.constraints
                 }
               },
@@ -53,6 +54,7 @@ export default {
                 "ihris-questionnaire": () => import(/* webpackChunkName: "fhir-questionnaire" */ "@/components/ihris/ihris-questionnaire" ),
                 "ihris-questionnaire-section": () => import(/* webpackChunkName: "fhir-questionnaire" */ "@/components/ihris/ihris-questionnaire-section" ),
                 "ihris-questionnaire-group": () => import(/* webpackChunkName: "fhir-questionnaire" */ "@/components/ihris/ihris-questionnaire-group" ),
+                "ihris-display": () => import(/* webpackChunkName: "fhir-questionnaire" */ "@/components/ihris/ihris-display" ),
                 "ihris-hidden": () => import(/* webpackChunkName: "fhir-questionnaire" */ "@/components/ihris/ihris-hidden" ),
                 "ihris-array": () => import(/* webpackChunkName: "fhir-main" */ "@/components/ihris/ihris-array" ),
                 "fhir-reference": () => import(/* webpackChunkName: "fhir-main" */ "@/components/fhir/fhir-reference" ),

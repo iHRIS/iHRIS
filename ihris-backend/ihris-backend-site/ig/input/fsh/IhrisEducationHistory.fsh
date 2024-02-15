@@ -7,18 +7,25 @@ Description:    "iHRIS Profile of the Basic resource for Education History."
 * extension[practitioner].valueReference ^label = "Health Worker"
 * extension contains
     IhrisEducationHistory named educationHistory 1..1 MS
-* extension[educationHistory].extension[institution].valueCoding 1..1 MS
-* extension[educationHistory].extension[institution].valueCoding ^label = "Institution"
+* extension[educationHistory].extension[institution] ^label = "Institution"
+* extension[educationHistory].extension[institution].valueString 1..1 MS
+* extension[educationHistory].extension[institution].valueString ^label = "Institution"
+* extension[educationHistory].extension[level] ^label = "Education Level"
 * extension[educationHistory].extension[level].valueCoding ^label = "Education Level"
 * extension[educationHistory].extension[level].valueCoding 1..1 MS
+* extension[educationHistory].extension[degree] ^label = "Educational Background/Carrier"
 * extension[educationHistory].extension[degree].valueCoding ^label = "Educational Background/Carrier"
 * extension[educationHistory].extension[degree].valueCoding 1..1 MS
+* extension[educationHistory].extension[educationalMajor] ^label = "Educational Major"
 * extension[educationHistory].extension[educationalMajor].valueCoding ^label = "Educational Major"
 * extension[educationHistory].extension[educationalMajor].valueCoding 0..1 MS
+* extension[educationHistory].extension[year] ^label = "Year Of Graduation"
 * extension[educationHistory].extension[year].valueDate ^label = "Year Of Graduation"
 * extension[educationHistory].extension[year].valueDate 0..1 MS
+* extension[educationHistory].extension[current] ^label = "Is Current?"
 * extension[educationHistory].extension[current].valueBoolean ^label = "Is Current?"
 * extension[educationHistory].extension[current].valueBoolean MS
+* extension[educationHistory].extension[attachment] ^label = "Attachment"
 * extension[educationHistory].extension[attachment].valueAttachment ^label = "Attachment"
 * extension[educationHistory].extension[attachment].valueAttachment MS
     
@@ -33,9 +40,9 @@ Title:          "Education History details"
       year 0..1 MS and
       current 0..1 MS and
       attachment 0..1 MS
-* extension[institution].value[x] only Coding
-* extension[institution].valueCoding from IhrisInstitutionValueSet
-* extension[institution].valueCoding ^label = "Institution"
+* extension[institution].value[x] only string
+//* extension[institution].valueCoding from IhrisInstitutionValueSet
+* extension[institution].valueString ^label = "Institution"
 * extension[level].value[x] only Coding
 * extension[level].valueCoding ^label = "Education Level"
 * extension[level].valueCoding from IhrisEducationLevelValueSet (required)
@@ -57,8 +64,8 @@ Title:          "Education History details"
 CodeSystem:      IhrisEducationalMajorCodeSystem
 Id:              ihris-educational-major-codesystem
 Title:           "Educational Major"
-* ^date = "2020-11-11T08:41:04.362Z"
-* ^version = "0.3.0"
+* ^date = "2022-10-29T08:41:04.362Z"
+* ^version = "0.4.0"
 * #emergencyMedicalTech "Emergency Medical Tech" "Emergency Medical Tech"
 * #medicalSurgicalAssistant "Medical/Surgical Assistant" "Medical/Surgical Assistant"
 * #medicalLabTech "Medical Lab/Tech" "Medical Lab/Tech"
@@ -66,12 +73,29 @@ Title:           "Educational Major"
 * #nursing "Nursing" "Nursing"
 * #pharmacy "Pharmacy" "Pharmacy"
 * #otherHealthProfessions "Other Health Professions" "Other Health Professions"
+* #MAJ|01 "Global Health Education"
+* #MAJ|02 "Community Health Education"
+* #MAJ|03 "Health Behavior"
+* #MAJ|04 "Nutrition and Health Education"
+* #MAJ|05 "Exercise Science and Health Promotion"
+* #MAJ|06 "School Health Education"
+* #MAJ|07 "Health Policy and Management"
+* #MAJ|08 "Health and Wellness"
+* #MAJ|09 "Health Sciences"
+* #MAJ|10 "Health Communication"
+* #MAJ|11 "Health Promotion"
+* #MAJ|12 "Epidemiology"
+* #MAJ|13 "Environmental Health Education"
+* #MAJ|14 "Health Counseling"
+* #MAJ|15 "Healthcare Administration"
+* #MAJ|16 "Health Education"
+* #MAJ|17 "Public Health Education"
 
 ValueSet:         IhrisEducationalMajorValueSet
 Id:               ihris-educational-major-valueset
 Title:            "iHRIS Educational Major ValueSet"
-* ^date = "2020-11-11T08:41:04.362Z"
-* ^version = "0.3.0"
+* ^date = "2022-10-29T08:41:04.362Z"
+* ^version = "0.4.0"
 * codes from system IhrisEducationalMajorCodeSystem
 
 CodeSystem:      IhrisDegree
@@ -90,10 +114,12 @@ Title:            "iHRIS Degree ValueSet"
 CodeSystem:      IhrisEducationLevel
 Id:              ihris-education-level
 Title:           "Education Level"
-* ^date = "2020-09-29T08:41:04.362Z"
+* ^date = "2022-10-29T08:41:04.362Z"
+* ^version = "0.4.0"
 * #Cerifiticate "Cerifiticate" "Cerifiticate"
 * #Diploma "Diploma" "Diploma"
-* #Degree "Degree" "Degree"
+* #Undergrad "Undergraduate" "Undergraduate"
+* #PGrad "Post Graduate" "Post Graduate"
 * #Masters "Masters" "Masters"
 * #PHD "PHD" "PHD"
 * #Others "Others" "Others"
@@ -101,8 +127,8 @@ Title:           "Education Level"
 ValueSet:         IhrisEducationLevelValueSet
 Id:               ihris-education-level-valueset
 Title:            "iHRIS Education Level ValueSet"
-* ^date = "2020-09-29T08:41:04.362Z"
-* ^version = "0.2.0"
+* ^date = "2022-10-29T08:41:04.362Z"
+* ^version = "0.3.0"
 * codes from system IhrisEducationLevel
 
 CodeSystem:      IhrisInstitution
@@ -205,10 +231,9 @@ Usage:          #definition
 * item[0].type = #group
 
 * item[0].item[0].linkId = "Basic.extension[0].extension[0]"
-* item[0].item[0].definition = "http://ihris.org/fhir/StructureDefinition/ihris-basic-education-history#Basic.extension:educationHistory.extension:institution.value[x]:valueCoding"
-* item[0].item[0].answerValueSet = "http://ihris.org/fhir/ValueSet/ihris-institution-valueset"
+* item[0].item[0].definition = "http://ihris.org/fhir/StructureDefinition/ihris-basic-education-history#Basic.extension:educationHistory.extension:institution.value[x]:valueString"
 * item[0].item[0].text = "Education Institution"
-* item[0].item[0].type = #choice
+* item[0].item[0].type = #string
 * item[0].item[0].required = true
 * item[0].item[0].repeats = false
 
@@ -287,7 +312,7 @@ Usage:          #example
 * extension[section][0].extension[description].valueString = "Education History details"
 * extension[section][0].extension[name].valueString = "Basic"
 * extension[section][0].extension[field][0].valueString = "extension:practitioner"
-* extension[section][0].extension[field][1].valueString = "extension:educationHistory.extension:institution.value[x]:valueCoding"
+* extension[section][0].extension[field][1].valueString = "extension:educationHistory.extension:institution.value[x]:valueString"
 * extension[section][0].extension[field][2].valueString = "extension:educationHistory.extension:level.value[x]:valueCoding"
 /* extension[section][0].extension[field][3].valueString = "extension:educationHistory.extension:degree.value[x]:valueCoding"*/
 * extension[section][0].extension[field][3].valueString = "extension:educationHistory.extension:educationalMajor.value[x]:valueCoding"

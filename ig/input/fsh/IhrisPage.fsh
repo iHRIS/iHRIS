@@ -20,7 +20,8 @@ Description:    "iHRIS Page Display details."
       filter 0..* MS and
       add 0..1 MS and
       field 0..* MS and
-      link 0..* MS 
+      link 0..* MS and
+      mount 0..* MS
 
 * extension[resource].value[x] only Reference
 * extension[resource].valueReference only Reference(StructureDefinition or CodeSystem)
@@ -38,7 +39,13 @@ Description:    "iHRIS Page Display details."
 * extension[add].extension contains
       url 1..1 MS and
       icon 0..1 MS and
+<<<<<<< HEAD
       class 0..1 MS
+=======
+      class 0..1 MS and
+      role 0..* MS and
+      task 0..* MS
+>>>>>>> upstream/master
 * extension[add].extension[url].value[x] only url
 * extension[add].extension[url].valueUrl MS
 * extension[add].extension[url].valueUrl ^label = "Add Link URL"
@@ -48,13 +55,39 @@ Description:    "iHRIS Page Display details."
 * extension[add].extension[class].value[x] only string
 * extension[add].extension[class].valueString MS
 * extension[add].extension[class].valueString ^label = "Add Link Class"
+<<<<<<< HEAD
+=======
+* extension[add].extension[role].value[x] only id
+* extension[add].extension[role].valueId MS
+* extension[add].extension[role].valueId ^label = "Roles that has access to this button"
+* extension[add].extension[task].value[x] only id
+* extension[add].extension[task].valueId MS
+* extension[add].extension[task].valueId ^label = "Tasks that has access to this button"
+
+* extension[mount].extension contains
+      name 1..1 MS and
+      fromref 1..1 MS
+* extension[mount].extension[name].value[x] only string
+* extension[mount].extension[name].valueString MS
+* extension[mount].extension[name].valueString ^label = "Unique name of the resource to be mounted"
+* extension[mount].extension[fromref].value[x] only string
+* extension[mount].extension[fromref].valueString MS
+* extension[mount].extension[fromref].valueString ^label = "Mount resource from reference"
+>>>>>>> upstream/master
 
 * extension[link].extension contains
       field 0..1 MS and
       text 0..1 MS and
       button 0..1 MS and
       icon 0..1 MS and
+<<<<<<< HEAD
       url 1..1 MS
+=======
+      url 1..1 MS and
+      class 0..1 MS and
+      role 0..* MS and
+      task 0..* MS
+>>>>>>> upstream/master
 * extension[link].extension[field].value[x] only string
 * extension[link].extension[field].valueString MS
 * extension[link].extension[field].valueString ^label = "FHIRPath for field in resource"
@@ -70,6 +103,10 @@ Description:    "iHRIS Page Display details."
 * extension[link].extension[url].value[x] only url
 * extension[link].extension[url].valueUrl MS
 * extension[link].extension[url].valueUrl ^label = "URL to go to"
+
+* extension[link].extension[task].value[x] only id
+* extension[link].extension[task].valueId MS
+* extension[link].extension[task].valueId ^label = "Tasks that has access to this button"
 
 * extension[field].extension contains
       path 1..1 MS and
@@ -145,7 +182,13 @@ Description:    "iHRIS Page Section information."
       row 0..1 MS and
       condition 0..1 MS and
       emptyDisplay 0..1 MS and
+<<<<<<< HEAD
       class 0..1 MS 
+=======
+      class 0..1 MS and
+      role 0..* MS and
+      task 0..* MS
+>>>>>>> upstream/master
 * extension[resource].extension[action].extension[link].value[x] only string
 * extension[resource].extension[action].extension[link].valueString MS
 * extension[resource].extension[action].extension[link].valueString ^label = "Action Link"
@@ -164,6 +207,7 @@ Description:    "iHRIS Page Section information."
 * extension[resource].extension[action].extension[class].value[x] only string
 * extension[resource].extension[action].extension[class].valueString MS
 * extension[resource].extension[action].extension[class].valueString ^label = "Element Class for the Action"
+<<<<<<< HEAD
 
 Instance:       ihris-page-classification
 InstanceOf:     IhrisPage
@@ -194,3 +238,11 @@ Usage:          #example
 * extension[section][0].extension[field][0].valueString = "CodeSystem.display"
 * extension[section][0].extension[field][1].valueString = "CodeSystem.code"
 * extension[section][0].extension[field][2].valueString = "CodeSystem.definition"
+=======
+* extension[resource].extension[action].extension[role].value[x] only id
+* extension[resource].extension[action].extension[role].valueId MS
+* extension[resource].extension[action].extension[role].valueId ^label = "Roles that has access to the action"
+* extension[resource].extension[action].extension[task].value[x] only id
+* extension[resource].extension[action].extension[task].valueId MS
+* extension[resource].extension[action].extension[task].valueId ^label = "Tasks that has access to the action"
+>>>>>>> upstream/master

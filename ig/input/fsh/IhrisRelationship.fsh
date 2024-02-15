@@ -18,6 +18,7 @@ Description:    "Defines the primary resource of the relationship"
       name 1..1 MS and
       label 1..1 MS and
       resource 1..1 MS and
+      resourcePage 0..1 MS and
       initialFilter 0..1 MS and
       query 0..1 MS and
       cachingDisabled 0..1 MS and
@@ -33,6 +34,9 @@ Description:    "Defines the primary resource of the relationship"
 * extension[resource].value[x] only string
 * extension[resource].valueString 1..1
 * extension[resource].valueString ^label = "Resource type of the primary resource"
+* extension[resourcePage].value[x] only string
+* extension[resourcePage].valueString 0..1
+* extension[resourcePage].valueString ^label = "Resource Page of the primary resource to display the data on click"
 * extension[initialFilter].value[x] only string
 * extension[initialFilter].valueString 1..1
 * extension[initialFilter].valueString ^label = "Initial Profile filter to limit instances of this resource"
@@ -59,6 +63,7 @@ Description:    "Links to the primary resource"
       name 1..1 MS and
       resource 1..1 MS and
       query 0..1 MS and
+      initialFilter 0..1 MS and
       linkElement 1..1 MS and
       linkTo 1..1 MS and
       linkElementSearchParameter 0..1 MS and
@@ -73,6 +78,9 @@ Description:    "Links to the primary resource"
 * extension[query].value[x] only string
 * extension[query].valueString 1..1
 * extension[query].valueString ^label = "FHIR path to limit instances of this resource"
+* extension[initialFilter].value[x] only string
+* extension[initialFilter].valueString 1..1
+* extension[initialFilter].valueString ^label = "Initial Profile filter to limit instances of this resource"
 * extension[linkElement].value[x] only string
 * extension[linkElement].valueString 1..1
 * extension[linkElement].valueString ^label = "FHIR path of the field this resource used to link to the relationship"
@@ -89,7 +97,8 @@ Id:             iHRISReportElement
 Title:          "Resource Fields"
 Description:    "Lists fields of a resource to be displayed/cached"
 * extension contains
-      fhirpath 1..1 MS and
+      fhirpath 0..1 MS and
+      function 0..1 MS and
       name 1..1 MS and
       display 0..1 MS and
       filter 0..1 MS and
@@ -98,6 +107,9 @@ Description:    "Lists fields of a resource to be displayed/cached"
 * extension[fhirpath].value[x] only string
 * extension[fhirpath].valueString 1..1
 * extension[fhirpath].valueString ^label = "FHIR path to the field"
+* extension[function].value[x] only string
+* extension[function].valueString 1..1
+* extension[function].valueString ^label = "External function to be called to calculate value"
 * extension[name].value[x] only string
 * extension[name].valueString 1..1
 * extension[name].valueString ^label = "Name of the field unique to the relationship"

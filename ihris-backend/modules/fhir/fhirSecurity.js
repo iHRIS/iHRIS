@@ -175,7 +175,7 @@ const fhirSecurityLocation = {
   postProcess: (uuid, resource) => {
     return new Promise( ( resolve, reject ) => {
       let securityExt = fhirSecurity.getSecurityExtension( resource )
-      if ( resource.meta.versionId === "1" ) {
+      if ( resource?.meta?.versionId === "1" ) {
 
         securityExt.extension.push( { url: fhirSecurityLocaiton.url, valueString: "Location/"+resource.id } )
         fhirAxios.update( resource ).then( (resource) => {
@@ -285,6 +285,43 @@ const fhirSecurityPractitioner = {
    * return list of location tags based on the practitioner
    * return array
    */
+  getResourcesReferencingPractitioner: (practitioner) => {
+    return new Promise((resolve, reject) => {
+      if(!practitioner) {
+        return resolve([])
+      }
+      const basic = new Promise((resolve, reject) => {
+        fhirAxios.search("Basic", {practitioner}).then((response) => {
+          return resolve(response)
+        }).catch((err) => {
+          console.log(err);
+          reject()
+        })
+      })
+      const pract = new Promise((resolve, reject) => {
+        fhirAxios.read(practitioner.split("/")[0], practitioner.split("/")[1]).then((response) => {
+          return resolve(response)
+        }).catch((err) => {
+          console.log(err);
+          reject()
+        })
+      })
+      Promise.all([basic, pract]).then((response) => {
+        let resources = []
+        if(response[0].entry) {
+          resources = resources.concat(response[0].entry)
+        }
+        if(response[1].resourceType) {
+          resources.push({
+            resource: response[1]
+          })
+        }
+        return resolve(resources)
+      }).catch(() => {
+        reject()
+      })
+    })
+  },
   getLocationsForPractitioner: (practitioner) => {
     return new Promise( (resolve, reject) => {
       if ( !practitioner ) resolve( [] )
@@ -476,11 +513,14 @@ const fhirSecurityPractitioner = {
           logger.error("Invalid location returned from response "+entry.response.location)
         } else {
           if ( fhirSecurityPractitioner.resourceTypes.includes( parts[0] ) ) {
-
             fhirAxios.read( parts[0], parts[1] ).then( async (resource) => {
               let practitioner = fhirSecurityPractitioner.getPractitionerReference( resource )
-              fhirSecurityPractitioner.resetPractitionerSecurityOnResource( resource )
-              /* Location was set on pre process so no need to re-add
+              let resources = []
+              try {
+                resources = await fhirSecurityPractitioner.getResourcesReferencingPractitioner(practitioner)
+              } catch (error) {
+                console.log(error);
+              }
               if ( !locationCache.hasOwnProperty( practitioner ) ) {
                 try {
                   locationCache[practitioner] = await fhirSecurityPractitioner.getLocationsForPractitioner(practitioner)
@@ -489,12 +529,20 @@ const fhirSecurityPractitioner = {
                   locationCache[practitioner] = []
                 }
               }
-              fhirSecurityLocation.resetLocationSecurityOnResource( resource, locationCache[practitioner] )
-              */
-              fhirAxios.update( resource ).catch( (err) => {
-                logger.error("Failed to update "+resource.resourceType+"/"+resource.id+" security for practitioner "
-                  +practitioner+" "+err.message)
-              } )
+              resources.push({
+                resource
+              })
+              for(let resource of resources) {
+                resource = resource.resource
+                fhirSecurityPractitioner.resetPractitionerSecurityOnResource( resource )
+                fhirSecurityLocation.resetLocationSecurityOnResource( resource, locationCache[practitioner] )
+                delete resource.meta.versionId
+                delete resource.meta.lastUpdated
+                fhirAxios.update( resource ).catch( (err) => {
+                  logger.error("Failed to update "+resource.resourceType+"/"+resource.id+" security for practitioner "
+                    +practitioner+" "+err.message)
+                } )
+              }
             } )
           }
         }
@@ -857,6 +905,8 @@ const fhirSecurity = {
           promises.push( module.postProcess( uuid, resource ) )
           delete fhirSecurity.updateRequiredCache[modName][uuid]
 
+        } else if(resource.resourceType === "Bundle" && modName === "fhirSecurityPractitioner") {
+          promises.push( module.postProcess( uuid, resource ) )
         }
       }
       Promise.all( promises ).then( (results) => {

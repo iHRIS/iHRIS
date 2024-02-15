@@ -8,16 +8,25 @@ Description:    "iHRIS Profile of the Basic resource for Salary."
 * extension contains
     IhrisSalary named salary 1..1 MS
 * extension[salary] ^label = "Salary Information"
+* extension[salary].extension[salaryScale] ^label = "Pay Grade"
 * extension[salary].extension[salaryScale].valueCoding MS
+* extension[salary].extension[bsalary] ^label = "Basic Salary"
 * extension[salary].extension[bsalary].valueString MS
+* extension[salary].extension[allowance] ^label = "Allowance"
 * extension[salary].extension[allowance].valueString MS
+* extension[salary].extension[benefits] ^label = "Benefits"
 * extension[salary].extension[benefits].valueString MS
+* extension[salary].extension[period] ^label = "Effective Period"
 * extension[salary].extension[period].valuePeriod MS
 * extension[salary].extension[period].valuePeriod.start MS
 * extension[salary].extension[period].valuePeriod.end MS
+* extension[salary].extension[remark] ^label = "Remark"
 * extension[salary].extension[remark].valueString MS
+* extension[salary].extension[salarySource] ^label = "Salary Source"
 * extension[salary].extension[salarySource].valueCoding MS
+* extension[salary].extension[frequency] ^label = "Pay Frequency"
 * extension[salary].extension[frequency].valueCoding MS
+* extension[salary].extension[current] ^label = "Is Current"
 * extension[salary].extension[current].valueBoolean MS
     
 Extension:      IhrisSalary

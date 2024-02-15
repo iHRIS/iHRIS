@@ -40,6 +40,18 @@ export default {
     hideLabel: {
       type: Boolean,
       default: false
+    },
+    hideExport: {
+      type: Boolean,
+      default: false
+    },
+    hideReportCustomization: {
+      type: Boolean,
+      default: false
+    },
+    disableOpenResourcePage: {
+      type: Boolean,
+      default: false
     }
   },
   data: function() {
@@ -65,6 +77,12 @@ export default {
               let hideFilters = this.hideFilters
               let hideCheckboxes = this.hideCheckboxes
               let hideLabel = this.hideLabel
+              let hideExport = this.hideExport
+              let hideReportCustomization = this.hideReportCustomization
+              let disableOpenResourcePage = this.disableOpenResourcePage
+              let rowSelected = (row) => {
+                this.$emit('rowSelected', row)
+              }
               Vue.component("ihris-template", {
                 name: "ihris-template",
                 data: function() {
@@ -75,7 +93,10 @@ export default {
                     termsConditions: termsConditions,
                     hideLabel,
                     hideFilters,
-                    hideCheckboxes
+                    hideCheckboxes,
+                    hideExport,
+                    hideReportCustomization,
+                    disableOpenResourcePage
                   };
                 },
                 components: {
@@ -90,6 +111,9 @@ export default {
                 },
                 template: data.reportTemplate,
                 methods: {
+                  rowSelected(row) {
+                    rowSelected(row)
+                  },
                   searchData: function(expression, value, filterType) {
                     this.$set(this.terms, expression, value);
                     if((this.terms[expression] && typeof this.terms[expression] === 'object' && this.terms[expression].length > 0) || (typeof this.terms[expression] === 'string' && this.terms[expression] !== '')) {

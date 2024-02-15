@@ -60,8 +60,24 @@ const fhirShortName = {
       if ( refData?.length !== 2 ) {
         resolve( fhirShortName._setCache( reference, "Invalid Reference" ) )
       } else {
-        fhirAxios.read( refData[0], refData[1] ).then( (resource) => {
-          let details = nconf.get("shortname:"+refData[0])
+        fhirAxios.read( refData[0], refData[1] ).then( async(resource) => {
+          let details
+          //check first profile based short name
+          let profile = resource?.meta?.profile[0]
+          //this is because some profile url contains : i.e http://
+          if(profile) {
+            let profilePortions = profile.split(":")
+            for(let portion of profilePortions) {
+              if(!details) {
+                details = nconf.get("shortname:profile:" + portion)
+              } else {
+                details = details[portion]
+              }
+            }
+          }
+          if(!details) {
+            details = nconf.get("shortname:"+refData[0])
+          }
           if ( !details ) {
             details = DEFAULT_DETAILS
           }
@@ -72,7 +88,14 @@ const fhirShortName = {
           } else if ( details.paths ) {
             let order = details.order ? details.order.split(',') : Object.keys( details.path )
             for ( let ord of order ) {
+              ord = ord.trim()
               output.push( fhirpath.evaluate( resource, details.paths[ ord ].fhirpath ).join( details.paths[ord].join || " " ) )
+            }
+          }
+          for(let idx in output) {
+            let val = output[idx]
+            if(val.split("/").length === 2) {
+              output[idx] = await fhirShortName._resourceLookup(output[idx])
             }
           }
           resolve( fhirShortName._setCache( reference, util.format( format, ...output ) ) )

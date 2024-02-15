@@ -13,7 +13,8 @@
       :rules="rules"
       dense
       @change="errors = []"
-      >
+      clearable
+    >
       <template #label>{{$t(`App.fhir-resources-texts.${label}`)}} <span v-if="required" class="red--text font-weight-bold">*</span></template>
     </v-autocomplete>
   </v-container>
@@ -29,7 +30,11 @@ import { eventBus } from "@/main";
 import { dataDisplay } from "@/mixins/dataDisplay"
 export default {
   name: "fhir-coding",
+<<<<<<< HEAD
   props: ["label", "path", "binding", "edit", "min", "max","constraints", "displayCondition"],
+=======
+  props: ["id", "field", "definition", "label", "path", "binding", "edit", "min", "max", "constraints", "displayCondition","slotProps", "initial"],
+>>>>>>> upstream/master
   mixins: [dataDisplay],
   data: function() {
     return {
@@ -46,6 +51,9 @@ export default {
     //this function is defined under dataDisplay mixin
     this.hideShowField(this.displayCondition)
     this.setupData()
+    if(this.initial && !this.$route.params.id) {
+      this.value = this.initial
+    }
   },
   watch: {
     valueCode: function() {
