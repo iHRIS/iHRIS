@@ -1,12 +1,5 @@
 # Frequently Asked Questions
 
-# Developer questions 
-
-
-
-
-# User Questions 
-
 ## How do I add a new health worker in the iHRIS system?
 
 Navigate to the "PEOPLE" module and follow the process outlined in the documentation for adding new health workers.
@@ -99,3 +92,13 @@ iHRIS helps answer questions such as optimal employee deployment, pay rate equit
 ## What records are kept in iHRIS?
 
 iHRIS keeps records of health worker biodata, training information, registration and licensure details, deployment and employment history, health workforce planning, retention data, and health facilities details.
+
+
+# Developer questions 
+
+## How do I install an iHRIS app?
+
+## How do I uninstall iHRIS app?
+
+
+
