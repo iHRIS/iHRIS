@@ -48,6 +48,10 @@ export default {
     hideReportCustomization: {
       type: Boolean,
       default: false
+    },
+    disableOpenResourcePage: {
+      type: Boolean,
+      default: false
     }
   },
   data: function() {
@@ -75,6 +79,7 @@ export default {
               let hideLabel = this.hideLabel
               let hideExport = this.hideExport
               let hideReportCustomization = this.hideReportCustomization
+              let disableOpenResourcePage = this.disableOpenResourcePage
               let rowSelected = (row) => {
                 this.$emit('rowSelected', row)
               }
@@ -90,7 +95,8 @@ export default {
                     hideFilters,
                     hideCheckboxes,
                     hideExport,
-                    hideReportCustomization
+                    hideReportCustomization,
+                    disableOpenResourcePage
                   };
                 },
                 components: {

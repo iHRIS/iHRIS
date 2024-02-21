@@ -1,0 +1,42 @@
+---
+- name: Install Apache Maven on CentOS
+  hosts: all
+
+  tasks:
+    - name: Add the OS specific variables
+      include_vars:
+        file: index.yaml
+        
+    - name: Download Apache Maven
+      get_url:
+        url: "https://archive.apache.org/dist/maven/maven-{{maven_v_num}}/{{maven_ver}}/binaries/apache-maven-{{maven_ver}}-bin.tar.gz"
+        dest: "/tmp/apache-maven-{{maven_ver}}-bin.tar.gz"
+        mode: '0644'
+
+    - name: Extract Apache Maven
+      ansible.builtin.unarchive:
+        src: "/tmp/apache-maven-{{maven_ver}}-bin.tar.gz"
+        dest: "/opt/"
+        remote_src: yes
+        creates: "/opt/apache-maven-{{maven_ver}}"
+
+    - name: Create Symbolic Link for Maven
+      ansible.builtin.file:
+        src: "/opt/apache-maven-{{maven_ver}}"
+        dest: "/opt/maven"
+        state: link
+
+    - name: Set Environment Variables for Maven
+      ansible.builtin.copy:
+        content: |
+          export M2_HOME=/opt/maven
+          export M2=$M2_HOME/bin
+          export PATH=$M2:$PATH
+        dest: "/etc/profile.d/maven.sh"
+      notify: Reload Environment Variables
+ 
+  handlers:
+    - name: Reload Environment Variables
+      shell: source /etc/profile.d/maven.sh
+      args:
+        executable: /bin/bash

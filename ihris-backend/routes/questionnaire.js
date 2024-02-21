@@ -137,7 +137,6 @@ router.post("/QuestionnaireResponse", (req, res, next) => {
                 }
 
                 fhirAxios.create(bundle).then((results) => {
-                    console.log(JSON.stringify(results,null,2))
                     if (results.entry && results.entry.length > 0 && results.entry[0].response.location) {
                         req.body.subject = {reference: results.entry[0].response.location}
                     }

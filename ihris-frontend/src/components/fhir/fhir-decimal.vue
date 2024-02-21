@@ -114,6 +114,9 @@ export default {
     rules: function() {
       const num_check = v => {
         //let num = Number(v)
+        if(!v) {
+          return
+        }
         return (!isNaN(v) && /^-?\d+(\.\d+)?$/.test(v)) || this.display+" must be a Decimal"
       }
       let rules = [ num_check ]

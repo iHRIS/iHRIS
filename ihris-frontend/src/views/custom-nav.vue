@@ -5,6 +5,7 @@
         <v-card-title class="primary darken-1 white--text font-weight-bold justify-center">
           <v-icon class="mr-2" color="white">{{ selectedIcon }}</v-icon>
           {{ selectedTitle }}
+          {{ $t(`App.menu.${selectedTitle}`) }}
         </v-card-title>
         <div class="pa-2 grid" >
           <v-layout wrap class="item" v-for="(data,index) in nestedNav " :key="index">
@@ -17,7 +18,7 @@
                     dark
                 >
                   <v-icon class="mr-2" dark>{{ data[Object.keys(data)[0]].icon }}</v-icon>
-                {{data[Object.keys(data)[0]].text}}
+                {{ $t(`App.menu.${data[Object.keys(data)[0]].text}`) }}
                 </v-card-title>
                 <div v-html="renderNestedList(data)"></div>
             </v-card>
@@ -42,11 +43,11 @@
                 </v-card-title>
                 <v-card-text v-if="item.description" align="justify"
                              class="text-subtitle-2 text--black font-weight-medium pa-2 ">
-                  {{ item.description }}
+                  {{ $t(`App.menu.${item.description}`) }}
                 </v-card-text>
                 <v-card-text v-else align="justify"
                              class="text-subtitle-2 text--black font-weight-medium pa-2 ">
-                  {{ item.text }}
+                             {{ $t(`App.menu.${item.text}`) }}
                 </v-card-text>
               </v-card>
             </v-flex>
@@ -157,9 +158,9 @@ export default {
         if (data.hasOwnProperty(key)) {
           if (!exclude.includes(key)) {
             if (data[key]?.url) {
-              result += `<i aria-hidden="true" class="v-icon notranslate mr-2 blue--text mdi mdi-link"></i><a style="text-decoration: none" @onclick="event.preventDefault();" href="${data[key].url}">${data[key]?.text}</a><br>`
+              result += `<i aria-hidden="true" class="v-icon notranslate mr-2 blue--text mdi mdi-link"></i><a style="text-decoration: none" @onclick="event.preventDefault();" href="${data[key].url}">` + this.$t(`App.menu.${data[key]?.text}`) + `</a><br>`
               } else {
-              result +='<li class=" text-subtitle-2 text--black font-weight-medium pa-0" style="list-style: none">' + `<i aria-hidden="true" class="v-icon teal--text notranslate mr-2 mdi ${data[key]?.icon}"></i>`  + data[key]?.text
+              result +='<li class=" text-subtitle-2 text--black font-weight-medium pa-0" style="list-style: none">' + `<i aria-hidden="true" class="v-icon teal--text notranslate mr-2 mdi ${data[key]?.icon}"></i>`  + this.$t(`App.menu.${data[key]?.text}`)
               if (typeof data[key] === 'object') {
                 result += this.renderNestedList(data[key]);
               }

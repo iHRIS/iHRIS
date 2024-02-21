@@ -1,16 +1,6 @@
 {
   "resourceType": "StructureDefinition",
   "id": "ihris-dashboard",
-  "extension": [
-    {
-      "url": "http://hl7.org/fhir/StructureDefinition/structuredefinition-category",
-      "valueString": "Foundation.Other"
-    },
-    {
-      "url": "http://hl7.org/fhir/StructureDefinition/structuredefinition-security-category",
-      "valueCode": "not-classified"
-    }
-  ],
   "url": "http://ihris.org/fhir/StructureDefinition/ihris-dashboard",
   "version": "0.1.0",
   "name": "IhrisDashboard",

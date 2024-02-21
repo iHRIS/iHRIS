@@ -1,7 +1,7 @@
 Instance: basic-location-constraint
 InstanceOf: SearchParameter
 Usage: #definition
-* url = "http://ihris.org/fhir/SearchParameter/basic-related-location"
+* url = "http://ihris.org/fhir/SearchParameter/basic-location-constraint"
 * name = "Search Parameter on related location constraint resources for role"
 * status = #active
 * description = "Search by related location for a Basic resource Role."

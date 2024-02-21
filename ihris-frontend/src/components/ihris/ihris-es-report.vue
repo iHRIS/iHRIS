@@ -70,6 +70,7 @@
         item-key="id"
         style="cursor: pointer"
         @click:row="rowClicked"
+        dense
       ></v-data-table>
     </v-card>
     <v-row justify="center">
@@ -149,6 +150,7 @@ export default {
     "hideLabel",
     "hideExport",
     "hideReportCustomization",
+    "disableOpenResourcePage"
   ],
   data: function () {
     return {
@@ -254,7 +256,8 @@ export default {
   },
   methods: {
     rowClicked(row) {
-      if(this.resourcePage) {
+      this.$emit('rowSelected', row)
+      if(this.resourcePage && !this.disableOpenResourcePage) {
         this.$router.push({
           name: "resource_view",
           params: {page: this.resourcePage, id: row[this.resourcePageId]},
@@ -305,9 +308,8 @@ export default {
           if (!sTermDet.isDropDown && !Array.isArray(this.terms[sTerm])) {
             this.terms[sTerm] = this.terms[sTerm].replace(/\s+/g, " ").trim();
           }
-
           let esFieldName;
-          if (sTermDet.isDropDown) {
+          if (sTermDet.isDropDown && sTermDet.dataType === "text") {
             esFieldName = sTerm + ".keyword";
           } else {
             esFieldName = sTerm;

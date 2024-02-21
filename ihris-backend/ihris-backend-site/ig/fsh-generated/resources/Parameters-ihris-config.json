@@ -12,15 +12,15 @@
       "valueSignature": {
         "type": [
           {
-            "system": "urn:iso-astm:E1762-95:2013",
-            "code": "1.2.840.10065.1.12.1.14"
+            "code": "1.2.840.10065.1.12.1.14",
+            "system": "urn:iso-astm:E1762-95:2013"
           }
         ],
-        "when": "2023-12-08T10:46:06.834Z",
+        "when": "2022-06-21T09:31:16.469Z",
         "who": {
           "reference": "http://ihris.org/fhir/Organization/ihris"
         },
-        "data": "HMsJbH3QN0JlQiALjXB9dtm3WdcUQXXZkRxYMLPS0zz9HNrAV40VnMOvanqx3T8x3/Z9J4oHtFpD05xVf80QA5myxNiVoKLCYlAC4qqhm++BmhKpgUT0e4GdCo4hTVnCFygW6NQCr/nyIk0MdvMydOr6gtyC6PCZ2aB0wbSvqbE="
+        "data": "QjTTAU58+gA54ah3sZb35QqgwG3a1RrMsEbhwJjQMGJBwaLeMYw1wbLu3JqiwwpUmiXD2SWLj+anq3bl6IHP1Xhf//gP/05se6Rgm7LUQeYdG0HqSNpqdHts0bXVJ2cqAex/Z2WL4d9frmjylTdOke6lrjgR2xTN7vET6YGXgmg="
       }
     },
     {
@@ -596,11 +596,11 @@
         },
         {
           "name": "site:nav:menu:reports:menu:staff:text",
-          "valueString": "Staff Report"
+          "valueString": "Staff Directorate"
         },
         {
           "name": "site:nav:menu:reports:menu:staff:url",
-          "valueString": "/report/ihris-es-report-staff"
+          "valueString": "/report/ihris-es-report-staff-directorate"
         },
         {
           "name": "site:nav:menu:reports:menu:staff:order",
@@ -608,7 +608,7 @@
         },
         {
           "name": "site:nav:menu:reports:menu:staff:description",
-          "valueString": "Basic default report showing all staff"
+          "valueString": "Staff Directorate"
         },
         {
           "name": "site:nav:menu:users:text",
@@ -629,6 +629,14 @@
         {
           "name": "site:nav:menu:users:menu:users_search:url",
           "valueString": "/resource/search/user"
+        },
+        {
+          "name": "site:nav:menu:users:menu:role_tasks:text",
+          "valueString": "User Role Tasks"
+        },
+        {
+          "name": "site:nav:menu:users:menu:role_tasks:url",
+          "valueString": "/resource/search/task"
         },
         {
           "name": "site:nav:menu:audit:text",
@@ -909,6 +917,22 @@
         {
           "name": "app:site:routes:upload:authenticate",
           "valueString": "true"
+        },
+        {
+          "name": "defaults:fields:Person.extension:practitioner.value[x]:valueReference:type",
+          "valueString": "reportSelect"
+        },
+        {
+          "name": "defaults:fields:Person.extension:practitioner.value[x]:valueReference:report",
+          "valueString": "ihris-es-report-staff-directorate"
+        },
+        {
+          "name": "defaults:fields:Person.extension:practitioner.value[x]:valueReference:reportReturnValue",
+          "valueString": "ihris-es-report-staff-directorate.id"
+        },
+        {
+          "name": "defaults:fields:Person.extension:practitioner.value[x]:valueReference:referenceDisplayPath",
+          "valueString": "name.where(use='official').given.first() + ' ' + name.where(use='official').family"
         }
       ]
     }

@@ -269,9 +269,26 @@ router.post("/signup", (req, res) => {
 })
 
 router.post("/login", passport.authenticate('local', {}), (req, res) => {
-      res.status(200).json({ ok: true, user: req.user })
+  let passwd = req.user.resource.extension.find((ext) => {
+    return ext.url === "http://ihris.org/fhir/StructureDefinition/ihris-password"
+  })
+  if(passwd) {
+    let passwdExt = passwd.extension.findIndex((ext) => {
+      return ext.url === 'password'
+    })
+    if(passwdExt != -1) {
+      passwd.extension.splice(passwdExt, 1)
     }
-)
+    let saltExt = passwd.extension.findIndex((ext) => {
+      return ext.url === 'salt'
+    })
+    if(saltExt != -1) {
+      passwd.extension.splice(saltExt, 1)
+    }
+  }
+  res.status(200).json({ ok: true, user: req.user })
+})
+
 router.post("/password-reset-request", async (req, res) => {
   let resetEmail = req.body.email
 

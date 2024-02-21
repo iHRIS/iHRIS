@@ -1,8 +1,18 @@
 # Creating data entry form with Questionnaire
 
-iHRIS uses the [Questionnaire](https://hl7.org/fhir/questionnaire.html) resource to create a data entry form
+Data entry forms in iHRIS have three building blocks, the questionnaire, questionnaire workflow and the page.<br>
 
-- *id* - iHRIS Questionnaire must have a unique id i.e ihris-practitioner
+1. The questionnaire: Used to create fields of the form
+2. The workflow: A nodejs module used to perform extra operations on a the questionnaire. The workflow is optional
+3. The Page: Used for displaying the saved form.
+
+## Questionnaire
+
+### Questionnaire Elements
+
+iHRIS uses the [Questionnaire](https://hl7.org/fhir/questionnaire.html) resource to create a data entry form. Below are the elements of the Questionnaire resource and how iHRIS uses them when defining fields of the data entry form:
+
+- *id* - This the unique id of the iHRIS Questionnaire i.e ihris-practitioner
 - *url* - iHRIS Questionnaire must have a unique url, the recommended format is <http://ihris.org/fhir/Questionnaire/questionnaire-id> replace questionnaire id with a respective questionnaire id i.e <http://ihris.org/fhir/Questionnaire/ihris-practitioner>
 - *name* - can be the same as id
 - *title* - This is a human readable name about the questionnaire
@@ -19,8 +29,8 @@ iHRIS uses the [Questionnaire](https://hl7.org/fhir/questionnaire.html) resource
   - *repeats* - This is when you want to collect more that one value for a field or you want a section to be repeated for multiple responses of section fields. It applies array fields/sections.
   - *readOnly* - set this to true if you need a field to be read only. readOnly fields won't be displayed. If needed to display, use a display questionnaire item
 
-- *answerOption* - This is used to set allowed value for the field, and it is normally used with readOnly since readOnly fields are hidden or cant be modified then you use answerOption to set their values. Refer [here](https://hl7.org/fhir/questionnaire.html) for more description
-  - An example could be
+- *answerOption* - This is used to set allowed value for the field, and it is normally used with readOnly since readOnly fields are hidden or cant be modified then you use answerOption to set their values. Refer [here](https://hl7.org/fhir/questionnaire.html) for more description<br>
+  An example could be:
 
 ```
   *item[0].item[0].item[0].readOnly = true
@@ -28,7 +38,8 @@ iHRIS uses the [Questionnaire](https://hl7.org/fhir/questionnaire.html) resource
   *item[0].item[0].item[0].answerOption.initialSelected = true
 ```
 
-- *answerValueSet* - Use this with choice item types. It is used to define choice list to be used. The value is a url to the valueSet that has choice list. If the field is marital status and you have a value set of marital status with id marital-status-valueset then the value for answerValueSet will be <http://ihris.org/fhir/ValueSet/marital-status-valueset>. Below is a simple example
+- *answerValueSet* - Use this with choice item types. It is used to define choice list to be used. The value is a url to the valueSet that has choice list. If the field is marital status and you have a value set of marital status with id marital-status-valueset then the value for answerValueSet will be <http://ihris.org/fhir/ValueSet/marital-status-valueset>.<br>
+Below is a simple example:
 
 ```
 *item[0].item[4].linkId = "Practitioner.extension[1]"
@@ -40,15 +51,16 @@ iHRIS uses the [Questionnaire](https://hl7.org/fhir/questionnaire.html) resource
 *item[0].item[4].repeats = false
 ```
 
-- *enableWhen*  - Is used to conditionally display fields based on the values of other fields. For example you may want to display the field are you pregnant if the gender value is female. Use linkId to refer to a question you want to use its value for condition. Below is a simple example
+- *enableWhen*  - Is used to conditionally display fields based on the values of other fields. For example you may want to display the field are you pregnant if the gender value is female. Use linkId to refer to a question you want to use its value for condition.<br>
+Below is a simple example:
 
-    ```
-    *item[0].item[4].enableWhen[0].question = "PractitionerRole.extension[2]"
-    *item[0].item[4].enableWhen[0].operator = #=
-    *item[0].item[4].enableWhen[0].answerCoding = yes-no-codesystem#yes
-    ```
+```
+*item[0].item[4].enableWhen[0].question = "PractitionerRole.extension[2]"
+*item[0].item[4].enableWhen[0].operator = #=
+*item[0].item[4].enableWhen[0].answerCoding = yes-no-codesystem#yes
+```
 
-    Refer to the [Questionnaire](https://hl7.org/fhir/questionnaire.html) documentation to get a list of all supported operators and answerType for enableWhen
+  Refer to the [Questionnaire](https://hl7.org/fhir/questionnaire.html) documentation to get a list of all supported operators and answerType for enableWhen
 
 - *initial* - Use this to define initial value to be set when the data entry form is displayed for the first time. below is an example
 
@@ -68,6 +80,18 @@ iHRIS uses the [Questionnaire](https://hl7.org/fhir/questionnaire.html) resource
 - **Other groups will be combined in a card and can allow repeats**
 - **use indexes when it is an array data type or when multiple resources would be created** i.e Basic[0].element[1].element or Practitioner.name[0].use
 - **Ensure that indexes are in the correct order of number** i.e if you start with linkId Basic.extension[0].extension[0] then the next linkId should be Basic.extension[0].extension[1]
+
+### Informers
+
+Informers are optional expressions appended to the linkId of the item using #. They are normally used to send some information about an item of the questionnaire. an example informer can be #tree i.e <br>```* item[0].item[0].item[4].linkId = "Basic.extension[3].extension[0]#tree"```<br>
+Here is a list of all informers supported so far:
+
+- tree: Used to inform that the field should be displayed as a tree of items
+- text: Used to inform that the field should be displayed as a long text
+- password: Used to inform that the field should be displayed as a password, in a way that the texts being typed are hidden
+- year: Used to inform that the date field should only display year instead of a full date
+
+### Questionnaire Example
 
 Below is an example that combines all above explanations
 
@@ -243,9 +267,9 @@ Usage:          #definition
 * item[3].item[0].required = true
 * item[3].item[0].repeats = false
 
-* item[3].item[1].linkId = "Basic[0].extension[1]"
+* item[3].item[1].linkId = "Basic[0].extension[1]#year"
 * item[3].item[1].definition = "http://ihris.org/fhir/StructureDefinition/grievance-profile#Basic.extension:grievance-submission-date.value[x]:valueDate"
-* item[3].item[1].text = "Submission Date to HR"
+* item[3].item[1].text = "Submission Year to HR"
 * item[3].item[1].type = #date
 * item[3].item[1].required = true
 * item[3].item[1].repeats = false
@@ -290,4 +314,161 @@ Usage:          #definition
 * item[4].item[3].type = #date
 * item[4].item[3].required = false
 * item[4].item[3].repeats = false
+```
+
+## Questionnaire Workflow
+
+A workflow is a javascript/nodejs module that can be written to perform any extra operations or data manipulation on questionnaire items. iHRIS has a predefined format for a workflow as described below:<br>
+
+1. A workflow must be a nodejs module in below format
+
+    <div style="background-color:#f2f2f2">
+      const employmentHistoryWorkflow = {<br>
+      <br>
+      }<br>
+      module.exports = employmentHistoryWorkflow
+    </div>
+
+2. The module must have two functions, process and postProcess. It may optionally contain the outcome function as well. Both of these functions must return a promise.
+
+    - process: Accepts one parameter, the request object. It is called before the questionnaire is saved into the database.
+      <div style="background-color:#f2f2f2">
+      process: (req) => {<br>
+        &nbsp;&nbsp;&nbsp;return new Promise((resolve, reject) => {<br>
+
+        &nbsp;&nbsp;&nbsp;})<br>
+      }
+      </div>
+
+    - postProcess: Accepts two parameters, the first parameter is the request object while the second parameter is response from fhir server after the questionnaire is saved. This function is called after the questionnaire is saved.
+      <div style="background-color:#f2f2f2">
+      postProcess: (req, results) => {<br>
+        &nbsp;&nbsp;&nbsp;return new Promise( (resolve, reject) => {<br>
+
+        &nbsp;&nbsp;&nbsp;})<br>
+      }
+      </div>
+
+    - outcome: Used for building error messages
+
+      <div style="background-color:#f2f2f2">
+      outcome: (message) => {<br>
+        &nbsp;&nbsp;&nbsp;return new Promise ((resolve, reject) => {<br>
+
+        })
+      }
+      </div>
+
+3. The module must resolve the questionnaire bundle under the process function
+
+```js
+process: (req) => {
+  return new Promise((resolve, reject) => {
+    fhirQuestionnaire.processQuestionnaire(req.body).then(async(bundle) => {
+      return resolve(bundle)
+    })
+  })
+}
+```
+
+**Finally**, you need to link the questionnaire and the workflow. This is done inside the IhrisParameters.fsh file by specifying the workflow file name and the questionnaire url as in below
+
+```bash
+* parameter[=].part[+].name = "workflow:processor:employment:file"
+* parameter[=].part[=].valueString = "employmentWorkflow"
+* parameter[=].part[+].name = "workflow:questionnaire:employment:url"
+* parameter[=].part[=].valueString = "http://ihris.org/fhir/Questionnaire/ihris-employment-history"
+```
+
+This assumes that the workflow file name is called employmentWorkflow.js and the questionnaire url is <http://ihris.org/fhir/Questionnaire/ihris-employment-history>
+
+!!! important
+    Remember to build your fsh files and sign the IhrisParameters.fsh output after making changes to the IhrisParameters.fsh
+
+!!! important
+    ***To convert a Questionnaire bundle to a respective resource, use processQuestionnaire function of the fhirQuestionnaire module i.e fhirQuestionnaire.processQuestionnaire(req.body). The method will return a bundle of respective resources***
+
+!!! important
+    ***When rejecting, you may send a message to the user by returning an object with a message element and the corresponding message as the value i.e<br>return reject({message: "Start date and End date mismatch"})***
+
+Here is a complete example of a workflow
+
+```js
+const winston = require('winston')
+const ihrissmartrequire = require("ihrissmartrequire")
+const fhirQuestionnaire = ihrissmartrequire('modules/fhir/fhirQuestionnaire')
+const moment = require("moment")
+
+const employmentHistoryWorkflow = {
+  process: (req) => {
+    return new Promise( (resolve, reject) => {
+      if(!req.query.practitioner) {
+        return reject({message: "Invalid request, no practitioner on the request"})
+      }
+      fhirQuestionnaire.processQuestionnaire(req.body).then(async(bundle) => {
+        bundle.entry[0].resource.extension.push({
+          url: 'http://ihris.org/fhir/StructureDefinition/ihris-practitioner-reference',
+          valueReference: {
+            reference: 'Practitioner/' + req.query.practitioner
+          }
+        })
+        let today = moment().format("YYYY-MM-DD")
+        let employment = bundle.entry[0].resource.extension.find((ext) => {
+          return ext.url === "http://ihris.org/fhir/StructureDefinition/ihris-employment-history"
+        })
+        let startDate = employment.extension.find((ext) => {
+          return ext.url === "startDate"
+        })
+        let endDate = employment.extension.find((ext) => {
+          return ext.url === "endDate"
+        })
+        if(moment(startDate.valueDate).isAfter(today)) {
+          return reject({message: "Start date must be before today"})
+        }
+        if(endDate && endDate.valueDate && moment(endDate.valueDate).isAfter(today)) {
+          return reject({message: "End date must be before today"})
+        }
+        if(endDate && endDate.valueDate && moment(startDate.valueDate).isAfter(endDate.valueDate)) {
+          return reject({message: "End date must be after start date"})
+        }
+        return resolve(bundle)
+      })
+    } )
+  },
+  postProcess: (req, results) => {
+    return new Promise((resolve, reject) => {
+      if (!req.body.meta) req.body.meta = {}
+      if (!req.body.meta.tag) req.body.meta.tag = []
+      req.body.meta.tag.push({system: "http://ihris.org/fhir/tags/resource", code: results.entry[0].response.location})
+      resolve(req)
+    })
+  },
+  outcome: (message) => {
+    return new Promise ((resolve, reject) => {
+      let outcomeBundle = {
+        resourceType: "Bundle",
+        type: "transaction",
+        entry: [{
+          resource:{
+            resourceType: "OperationOutcome",
+            issue: [
+            {
+              severity: "error",
+              code: "exception",
+              diagnostics: message
+            }]
+          },
+          request: {
+            method: "POST",
+            url: "OperationOutcome"
+          }
+        }]
+      }
+      winston.info(JSON.stringify(outcomeBundle,null,2))
+      resolve(outcomeBundle)
+    })
+  }
+}
+ 
+module.exports = employmentHistoryWorkflow
 ```

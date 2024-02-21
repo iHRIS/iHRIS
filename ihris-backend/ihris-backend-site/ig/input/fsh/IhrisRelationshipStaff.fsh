@@ -10,6 +10,13 @@ Usage:          #example
 * extension[reportdetails].extension[label].valueString = "Staff Report"
 * extension[reportdetails].extension[resource].valueString = "Practitioner"
 * extension[reportdetails].extension[resourcePage].valueString = "practitioner"
+
+* extension[reportdetails].extension[resourcePageID].valueString = "id"
+* extension[reportdetails].extension[parameters][0].extension[esFieldName].valueString = "ES_DATA_ID"
+* extension[reportdetails].extension[parameters][0].extension[parameter].valueString = "idParma"
+* extension[reportdetails].extension[parameters][1].extension[esFieldName].valueString = "ES_DATA_NAME"
+* extension[reportdetails].extension[parameters][1].extension[parameter].valueString = "nameParam"
+
 * extension[reportdetails].extension[query].valueString = "active=true"
 * extension[reportdetails].extension[displayCheckbox].valueBoolean = true
 * extension[reportdetails].extension[locationBasedConstraint].valueBoolean = true
@@ -79,6 +86,11 @@ Usage:          #example
 * extension[reportdetails].extension[reportelement][10].extension[filter].valueBoolean = false
 * extension[reportdetails].extension[reportelement][10].extension[dropDownFilter].valueBoolean = false
 
+* extension[reportdetails].extension[reportelement][11].extension[name].valueString = "res-id"
+* extension[reportdetails].extension[reportelement][11].extension[fhirpath].valueString = "Practitioner.id"
+* extension[reportdetails].extension[reportelement][11].extension[filter].valueBoolean = false
+* extension[reportdetails].extension[reportelement][11].extension[dropDownFilter].valueBoolean = false
+
 * extension[reportlink][0].extension[name].valueString = "role"
 * extension[reportlink][0].extension[resource].valueString = "PractitionerRole"
 * extension[reportlink][0].extension[linkElement].valueString = "PractitionerRole.practitioner.reference"
@@ -106,7 +118,7 @@ Usage:          #example
 
 * extension[reportlink][0].extension[reportelement][3].extension[name].valueString = "speciality"
 * extension[reportlink][0].extension[reportelement][3].extension[fhirpath].valueString = "speciality.coding.display"
-* extension[reportlink][0].extension[reportelement][3].extension[display].valueString = "`speciality"
+* extension[reportlink][0].extension[reportelement][3].extension[display].valueString = "speciality"
 * extension[reportlink][0].extension[reportelement][3].extension[filter].valueBoolean = true
 * extension[reportlink][0].extension[reportelement][3].extension[dropDownFilter].valueBoolean = true
 

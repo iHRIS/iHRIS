@@ -1,5 +1,11 @@
 <template>
   <v-container class="my-3">
+    <ihris-practitioner-intro
+        :isQuestionnaire="true"
+        :slotProps="source"
+        :practitionerRole="practitionerRole"
+        :practitioner-data="source.data"
+    ></ihris-practitioner-intro>
     <v-form id="app" ref="form" v-model="valid">
       <slot :source="source"></slot>
       <v-overlay :value="overlay">
@@ -114,7 +120,7 @@ export default {
     "constraints",
     "field",
     "profile",
-    "fhir-id"
+    "fhir-id",
   ],
   data: function () {
     return {
@@ -128,6 +134,7 @@ export default {
       source: {path: "", data: {}},
       introSource: {path: "", data: {}},
       path: "",
+      practitionerRole:""
     };
   },
   watch: {
@@ -136,59 +143,103 @@ export default {
     },
   },
   created: function () {
-    if ( this.fhirId ) {
+    console.log("created", this.field, this.fhirId);
+
+    if (this.fhirId) {
       this.loading = true
       //console.log("getting",this.field,this.fhirId)
-      fetch( "/fhir/" + this.field + "/"+this.fhirId ).then(response => {
+      fetch("/fhir/" + this.field + "/" + this.fhirId).then(response => {
         response.json().then(data => {
           //this.$store.commit('setCurrentResource', data)
           this.orig = data
-          this.source = { data: data, path: this.field }
+          this.source = {data: data, path: this.field}
+          console.log("final test",this.source)
           this.setLinkText()
           this.loading = false
-        }).catch(err=> {
-          console.log(this.field,this.fhirId,err)
+        }).catch(err => {
+          console.log(this.field, this.fhirId, err)
         })
-      }).catch(err=> {
-        console.log(this.field,this.fhirId,err)
+      }).catch(err => {
+        console.log(this.field, this.fhirId, err)
       })
+    }
+
+    let params = this.$route.query;
+
+    let practitionerId = params.practitioner;
+
+    if (practitionerId) {
+      fetch(`/fhir/PractitionerRole?_practitioner=${practitionerId}`)
+          .then((response) => {
+            response
+                .json()
+                .then((data) => {
+                 if (data.entry && data.entry.length) {
+                    let role
+                    if(data.entry[0].resource.code) {
+                      role = data.entry[0].resource;
+                    }
+                    this.practitionerRole = role? role : "";
+                  }
+                })
+                .catch((err) => {
+                  console.log(this.field, this.fhirId, err);
+                });
+          })
+          .catch((err) => {
+            console.log(this.field, this.fhirId, err);
+          });
+      fetch("/fhir/Practitioner/" + practitionerId)
+          .then((response) => {
+            response
+                .json()
+                .then((data) => {
+                  this.source = {source: {data: data, path: "Practitioner"}};
+                })
+                .catch((err) => {
+                  console.log(err);
+                });
+          })
+          .catch((err) => {
+            console.log(err);
+          });
     }
   },
   methods: {
-    getLinkField: function(field) {
-      let content = this.$fhirpath.evaluate( this.source.data, field )
-      if ( content ) {
+    getLinkField: function (field) {
+      let content = this.$fhirpath.evaluate(this.source.data, field)
+      if (content) {
         return content[0]
       } else {
         return false
       }
     },
-    getLinkUrl: function(link) {
+    getLinkUrl: function (link) {
       let field
-      if ( link.field ) {
+      if (link.field) {
         field = this.getLinkField(link.field)
       }
-      if ( field ) {
-        if ( field.includes('/') ) {
+      if (field) {
+        if (field.includes('/')) {
           let ref = field.split('/')
           field = ref[1]
         }
-        return link.url.replace("FIELD",field)
+        return link.url.replace("FIELD", field)
       } else {
-        return link.url 
+        return link.url
       }
     },
-    setLinkText: function() {
-      for ( let idx in this.links ) {
+    setLinkText: function () {
+      for (let idx in this.links) {
         let link = this.links[idx]
-        if ( link.text ) {
+        if (link.text) {
           this.linktext[idx] = link.text
-        } else if ( link.field ) {
+        } else if (link.field) {
           let field = this.getLinkField(link.field)
-          if ( field ) {
-            this.$fhirutils.lookup(field).then( display => {
-              this.$set( this.linktext, idx, display )
-            } )
+          if (field) {
+            this.$fhirutils.lookup(field).then(display => {
+              this.$set(this.linktext, idx, display)
+            })
           }
         }
       }
@@ -236,7 +287,7 @@ export default {
       this.overlay = true;
       this.loading = true;
       let editingResources = []
-      if(this.fhirId) {
+      if (this.fhirId) {
         editingResources.push({
           profile: this.profile,
           id: this.fhirId
@@ -247,7 +298,7 @@ export default {
         let merged = []
         for (let child of children) {
           for (let child1 of child.$children) {
-            if(child1.isExtension) {
+            if (child1.isExtension) {
               for (let child2 of child1.$children) {
                 merged.push(child2)
               }
@@ -266,7 +317,7 @@ export default {
           if (child.isArray) {
             //console.log("ARRAY", child.path)
           } else if (child.isQuestionnaireGroup) {
-            if(child.resourceId) {
+            if (child.resourceId) {
               editingResources.push({
                 profile: child.profile,
                 id: child.resourceId
@@ -311,13 +362,13 @@ export default {
             // console.log("PROCESSING CHILDREN OF",child.path)
             try {
               let children = []
-              if(child.isArray) {
+              if (child.isArray) {
                 let merged = mergeArrayExtensionFields(child.$children)
-                if(merged.length > 0) {
+                if (merged.length > 0) {
                   children = merged
                 }
               }
-              if(children.length === 0) {
+              if (children.length === 0) {
                 children = child.$children
               }
               await processChildren(next, children, myItemMap);
@@ -377,12 +428,12 @@ export default {
         });
       }
       this.$route.query.editing = false
-      if(editingResources.length > 0) {
+      if (editingResources.length > 0) {
         this.$route.query.editingResources = JSON.stringify(editingResources)
         this.$route.query.editing = true
       }
       fetch(
-        "/fhir/QuestionnaireResponse?" +
+          "/fhir/QuestionnaireResponse?" +
           querystring.stringify(this.$route.query),
           {
             method: "POST",
@@ -451,7 +502,7 @@ export default {
                       } catch (err) {
                         console.log("Unable to retrieve errors from ", data);
                       }
-                    } else if(data.message) {
+                    } else if (data.message) {
                       errors = data.message
                     } else {
                       errors = "Unknown";
@@ -481,6 +532,12 @@ export default {
             });
           });
     },
+  },
+  components: {
+    "ihris-practitioner-intro": () =>
+        import(
+            /* webpackChunkName: "fhir-primary" */ "@/components/ihris/ihris-practitioner-intro"
+            ),
   },
 
 };

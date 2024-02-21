@@ -125,6 +125,7 @@
               :hideCheckboxes="true"
               :hideExport="true"
               :hideReportCustomization="true"
+              :disableOpenResourcePage="true"
               @rowSelected="reportRowSelected"
             />
           </v-card-text>

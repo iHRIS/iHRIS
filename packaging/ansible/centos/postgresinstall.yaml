@@ -1,0 +1,86 @@
+---
+- name: Install PostgreSQL 9 or above
+  hosts: all
+  remote_user: root
+  become: yes
+
+  tasks:
+    - name: Update APT package cache (Debian/Ubuntu)
+      apt:
+        update_cache: yes
+      when: ansible_os_family == 'Debian'
+
+    # - name: Update YUM package cache (CentOS)
+    #   yum:
+    #     name: "*"
+    #     state: latest
+    #   when: ansible_os_family == 'RedHat'
+
+    - name: Install PostgreSQL on Debian/Ubuntu
+      apt:
+        name: postgresql
+        state: present
+      when: ansible_os_family == 'Debian'
+
+    - name: Install PostgreSQL 9 on CentOS
+      yum:
+        name: "{{ item }}"
+        state: present
+      loop:
+        - postgresql-server  # This will install the latest version
+        - postgresql-contrib
+      when: ansible_os_family == 'RedHat'
+
+    - name: Initialize PostgreSQL Database Cluster
+      command: postgresql-setup initdb
+      args:
+        creates: /var/lib/pgsql/data/postgresql.conf
+      register: initdb_result
+      when: ansible_os_family == 'RedHat'
+
+    - name: Start and enable PostgreSQL service on Debian/Ubuntu
+      systemd:
+        name: postgresql
+        enabled: yes
+        state: started
+      when: ansible_os_family == 'Debian'
+
+    - name: Start and enable PostgreSQL service on CentOS
+      systemd:
+        name: postgresql
+        enabled: yes
+        state: started
+      when: ansible_os_family == 'RedHat'
+
+    - name: Create a new database with name hapi
+      postgresql_db:
+        name: hapi
+      become: true
+      become_user: postgres
+
+    - name: Create hapi user, and grant access to hapi database
+      postgresql_user:
+        db: hapi
+        name: hapi
+        password: hapi
+        priv: ALL
+      become: true
+      become_user: postgres
+
+    - name: Allow md5 connection for the db user
+      postgresql_pg_hba:
+        dest: "~/data/pg_hba.conf"
+        contype: host
+        databases: all
+        method: md5
+        users: hapi
+        create: true
+      become: yes
+      become_user: postgres
+      notify: restart postgresql
+
+  handlers:
+    - name: restart postgresql
+      systemd:
+        name: postgresql
+        state: restarted

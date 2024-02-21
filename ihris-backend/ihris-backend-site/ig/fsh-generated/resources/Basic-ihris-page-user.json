@@ -36,11 +36,11 @@
             },
             {
               "url": "url",
-              "valueUrl": "/resource/view/user/FIELD"
+              "valueUrl": "/questionnaire/ihris-user/user/FIELD"
             },
             {
               "url": "text",
-              "valueString": "View User"
+              "valueString": "Edit User"
             },
             {
               "url": "button",
@@ -56,16 +56,12 @@
         {
           "extension": [
             {
-              "url": "field",
-              "valueString": ""
+              "url": "text",
+              "valueString": "Add Another User"
             },
             {
               "url": "url",
               "valueUrl": "/questionnaire/ihris-user/user"
-            },
-            {
-              "url": "text",
-              "valueString": "Add Another User"
             },
             {
               "url": "button",
@@ -163,10 +159,6 @@
         {
           "url": "field",
           "valueString": "Person.extension:practitioner.value[x]:valueReference"
-        },
-        {
-          "url": "field",
-          "valueString": "Person.extension:password.extension:password.value[x]:valueString"
         }
       ],
       "url": "http://ihris.org/fhir/StructureDefinition/ihris-page-section"

@@ -1,0 +1,64 @@
+---
+- name: Installing supporting packages
+  hosts: all
+  become: yes
+
+  tasks:
+    - name: Add Yarn Repository
+      get_url:
+        url: https://dl.yarnpkg.com/rpm/yarn.repo
+        dest: /etc/yum.repos.d/yarn.repo
+      # shell: curl -sL https://dl.yarnpkg.com/rpm/yarn.repo | tee /etc/yum.repos.d/yarn.repo
+      
+    - name: Install basic packages
+      yum:
+        name: ['epel-release','openssl-devel','python3-devel','postgresql-libs','postgresql-devel','python-psycopg2','make','gcc-c++','gcc','firewalld','wget','unzip','curl','git','dnf']
+        state: present
+
+    - name: Install Redis
+      yum:
+        name: redis
+        state: present
+    
+    - name: Start redis
+      service:
+        name: redis
+        state: started
+        enabled: yes
+
+    # - name: Install Node.js using NodeSource
+    #   shell: |
+    #     curl -sL https://rpm.nodesource.com/setup_18.x | bash -
+    #     dnf install -y nodejs
+    #   args:
+    #     executable: /bin/bash
+
+    - name: Download NodeSource setup script
+      get_url:
+        url: https://rpm.nodesource.com/setup_18.x
+        dest: /tmp/setup_node.sh
+
+    - name: Execute NodeSource setup script
+      command: /bin/bash /tmp/setup_node.sh
+      args:
+        creates: /etc/yum.repos.d/nodesource-el.repo
+
+    - name: Install Node.js
+      dnf:
+        name: nodejs
+        state: present
+      when: "'/etc/yum.repos.d/nodesource-el.repo' is file"
+
+    - name: Remove temporary setup script
+      file:
+        path: /tmp/setup_node.sh
+        state: absent
+
+    - name: Install npm
+      yum:
+        name: npm
+        state: present
+    
+    - name: Install fsh-sushi
+      shell: |
+        npm install -g fsh-sushi
