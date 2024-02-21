@@ -9,7 +9,7 @@
         ref="form"
         v-model="valid"
     >
-      <slot :position="position" :source="source"></slot>
+      <slot :practitionerRole="practitionerRole" :source="source"></slot>
       <v-overlay :value="overlay">
         <v-progress-circular
             color="primary"
@@ -155,7 +155,7 @@ export default {
       isEdit: false,
       linktext: [],
       linksready: false,
-      position: "",
+      practitionerRole: "",
       advancedValid: true,
       loadingId: false,
       loadingCv: false,
@@ -167,16 +167,6 @@ export default {
         max: v => v <= this.max || `The Max is ${this.max}`
       },
     }
-  },
-  mounted() {
-    if (!this.isQuestionnaire) {
-      window.addEventListener("scroll", this.handleScroll);
-    } else {
-      window.removeEventListener("scroll", this.handleScroll);
-    }
-  },
-  beforeDestroy() {
-    window.removeEventListener("scroll", this.handleScroll);
   },
   created: function () {
     if (this.fhirId) {
@@ -191,9 +181,9 @@ export default {
                   if (data.entry && data.entry.length) {
                     let role
                     if(data.entry[0].resource.code) {
-                      role = data.entry[0].resource.code[0].coding[0].display;
+                      role = data.entry[0].resource;
                     }
-                    this.position = role? role : "";
+                    this.practitionerRole = role? role : "";
                   }
                 })
                 .catch((err) => {
