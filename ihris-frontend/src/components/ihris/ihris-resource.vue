@@ -9,7 +9,7 @@
         ref="form"
         v-model="valid"
     >
-      <slot :practitionerRole="practitionerRole" :source="source"></slot>
+      <slot :position="position" :source="source"></slot>
       <v-overlay :value="overlay">
         <v-progress-circular
             color="primary"
@@ -155,7 +155,7 @@ export default {
       isEdit: false,
       linktext: [],
       linksready: false,
-      practitionerRole: "",
+      position: "",
       advancedValid: true,
       loadingId: false,
       loadingCv: false,
@@ -167,6 +167,16 @@ export default {
         max: v => v <= this.max || `The Max is ${this.max}`
       },
     }
+  },
+  mounted() {
+    if (!this.isQuestionnaire) {
+      window.addEventListener("scroll", this.handleScroll);
+    } else {
+      window.removeEventListener("scroll", this.handleScroll);
+    }
+  },
+  beforeDestroy() {
+    window.removeEventListener("scroll", this.handleScroll);
   },
   created: function () {
     if (this.fhirId) {
@@ -181,9 +191,9 @@ export default {
                   if (data.entry && data.entry.length) {
                     let role
                     if(data.entry[0].resource.code) {
-                      role = data.entry[0].resource;
+                      role = data.entry[0].resource.code[0].coding[0].display;
                     }
-                    this.practitionerRole = role? role : "";
+                    this.position = role? role : "";
                   }
                 })
                 .catch((err) => {
@@ -196,6 +206,33 @@ export default {
       //console.log("getting",this.field,this.fhirId)
       fetch("/fhir/" + this.field + "/" + this.fhirId).then(response => {
         response.json().then(async(data) => {
+          if(this.$store.state.user && this.$store.state.user.obj && this.$store.state.user.obj.resource && this.$store.state.user.obj.resource.extension) {
+            let location = this.$store.state.user.obj.resource.extension.find((ext) => {
+              return ext.url === "http://ihris.org/fhir/StructureDefinition/ihris-user-location"
+            })
+            if(location) {
+              this.extraTerms["related-location"] = location.valueReference.reference
+              let relatedGrp = data.extension.find((ext) => {
+                return ext.url === "http://ihris.org/fhir/StructureDefinition/ihris-related-group"
+              })
+              if(relatedGrp) {
+                let dataLocation = relatedGrp.extension.find((ext) => {
+                  return ext.url === "location"
+                })
+                if(dataLocation) {
+                  let canSee = relatedGrp.extension.find((ext) => {
+                    return ext.url === "location" && ext.valueString === location.valueReference.reference
+                  })
+                  if(!canSee) {
+                    this.$store.state.message.active = true
+                    this.$store.state.message.type = "error"
+                    this.$store.state.message.text = "You dont have access to view this record"
+                    this.$router.push({path: "/"})
+                  }
+                }
+              }
+            }
+          }
           //this.$store.commit('setCurrentResource', data)
           this.max = data.meta.versionId
           this.orig = data
