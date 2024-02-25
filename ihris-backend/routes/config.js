@@ -87,6 +87,11 @@ router.get("/site", async function (req, res) {
                     let _role = ext.valueReference.reference.split("/");
                     site.user.role = _role.pop();
                 }
+                if (ext.url === "http://ihris.org/fhir/StructureDefinition/ihris-user-location" ) {
+                    let _location = ext.valueReference.reference.split("/");
+                    site.user.location = _location.pop();
+                }
+
             });
         }
         site.user.obj = JSON.parse(JSON.stringify(req.user, 0, 2))
