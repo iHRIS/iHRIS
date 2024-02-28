@@ -1,11 +1,6 @@
 <template>
   <v-container class="my-3">
-    <ihris-practitioner-intro
-        :isQuestionnaire="true"
-        :slotProps="source"
-        :practitionerRole="practitionerRole"
-        :practitioner-data="source.data"
-    ></ihris-practitioner-intro>
+    <ihris-practitioner-intro/>
     <v-form id="app" ref="form" v-model="valid">
       <slot :source="source"></slot>
       <v-overlay :value="overlay">
@@ -134,7 +129,6 @@ export default {
       source: {path: "", data: {}},
       introSource: {path: "", data: {}},
       path: "",
-      practitionerRole:""
     };
   },
   watch: {
@@ -162,47 +156,6 @@ export default {
       }).catch(err => {
         console.log(this.field, this.fhirId, err)
       })
-    }
-
-    let params = this.$route.query;
-
-    let practitionerId = params.practitioner;
-
-    if (practitionerId) {
-      fetch(`/fhir/PractitionerRole?_practitioner=${practitionerId}`)
-          .then((response) => {
-            response
-                .json()
-                .then((data) => {
-                 if (data.entry && data.entry.length) {
-                    let role
-                    if(data.entry[0].resource.code) {
-                      role = data.entry[0].resource;
-                    }
-                    this.practitionerRole = role? role : "";
-                  }
-                })
-                .catch((err) => {
-                  console.log(this.field, this.fhirId, err);
-                });
-          })
-          .catch((err) => {
-            console.log(this.field, this.fhirId, err);
-          });
-      fetch("/fhir/Practitioner/" + practitionerId)
-          .then((response) => {
-            response
-                .json()
-                .then((data) => {
-                  this.source = {source: {data: data, path: "Practitioner"}};
-                })
-                .catch((err) => {
-                  console.log(err);
-                });
-          })
-          .catch((err) => {
-            console.log(err);
-          });
     }
   },
   methods: {

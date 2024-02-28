@@ -9,7 +9,7 @@
         ref="form"
         v-model="valid"
     >
-      <slot :position="position" :source="source"></slot>
+      <slot :source="source"></slot>
       <v-overlay :value="overlay">
         <v-progress-circular
             color="primary"
@@ -155,7 +155,6 @@ export default {
       isEdit: false,
       linktext: [],
       linksready: false,
-      position: "",
       advancedValid: true,
       loadingId: false,
       loadingCv: false,
@@ -168,41 +167,9 @@ export default {
       },
     }
   },
-  mounted() {
-    if (!this.isQuestionnaire) {
-      window.addEventListener("scroll", this.handleScroll);
-    } else {
-      window.removeEventListener("scroll", this.handleScroll);
-    }
-  },
-  beforeDestroy() {
-    window.removeEventListener("scroll", this.handleScroll);
-  },
   created: function () {
     if (this.fhirId) {
       this.loading = true
-      fetch(
-          `/fhir/PractitionerRole?_practitioner=${this.fhirId}`
-      )
-          .then((response) => {
-            response
-                .json()
-                .then((data) => {
-                  if (data.entry && data.entry.length) {
-                    let role
-                    if(data.entry[0].resource.code) {
-                      role = data.entry[0].resource.code[0].coding[0].display;
-                    }
-                    this.position = role? role : "";
-                  }
-                })
-                .catch((err) => {
-                  console.log(this.field, this.fhirId, err);
-                });
-          })
-          .catch((err) => {
-            console.log(this.field, this.fhirId, err);
-          });
       //console.log("getting",this.field,this.fhirId)
       fetch("/fhir/" + this.field + "/" + this.fhirId).then(response => {
         response.json().then(async(data) => {
