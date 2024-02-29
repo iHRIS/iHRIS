@@ -260,7 +260,8 @@ export default {
       if(this.resourcePage && !this.disableOpenResourcePage) {
         this.$router.push({
           name: "resource_view",
-          params: { page: this.resourcePage, id: row.id },
+          params: {page: this.resourcePage, id: row[this.resourcePageId]},
+          query: this.queryParams
         });
       }
     },
@@ -283,12 +284,14 @@ export default {
       });
     },
     buildTerms() {
+      let filter = this.termsConditions
       let body = {};
       body = {
         query: {
           bool: {
             must: [],
             must_not: [],
+            filter: [],
           },
         },
       };
@@ -302,7 +305,7 @@ export default {
             return filter.field === sTerm;
           });
 
-          if (!sTermDet.isDropDown) {
+          if (!sTermDet.isDropDown && !Array.isArray(this.terms[sTerm])) {
             this.terms[sTerm] = this.terms[sTerm].replace(/\s+/g, " ").trim();
           }
           let esFieldName;
@@ -330,9 +333,9 @@ export default {
               for (let tm of termArr) {
                 let query = {};
                 if (
-                  this.reportData.mappings.mappings.properties[esFieldName] &&
-                  this.reportData.mappings.mappings.properties[esFieldName]
-                    .type === "text"
+                    this.reportData.mappings.mappings.properties[esFieldName] &&
+                    this.reportData.mappings.mappings.properties[esFieldName]
+                        .type === "text"
                 ) {
                   query.wildcard = {};
                   query.wildcard[esFieldName] = "*" + tm + "*";
@@ -395,6 +398,51 @@ export default {
             },
           };
         }
+      }
+
+      if (sTermDet && sTermDet?.dataType === "date" && sTermDet.field) {
+        let date = this.terms
+        let filterDate = []
+        let c = sTermDet.field
+        if (filter[c] && filter[c] !== 'include') {
+          if (filter[c] === 'range') {
+            let sortedDate = date[c].sort()
+            let rangeOne = sortedDate[0]
+            let rangeTwo = sortedDate[1]
+            let filterWith = {
+              "gte": rangeOne,
+              "lte": rangeTwo
+            }
+            let a = {}
+            let b = {}
+            b[c] = filterWith
+            a['range'] = b
+            filterDate.push(a)
+            body.query.bool.must = body.query.bool.must.filter(p => {
+              if (p.terms) {
+                return !Object.keys(p.terms).includes(c)
+              }
+              return true
+            })
+          } else {
+            let filterWith = {}
+            let a = {}
+            let b = {}
+            filterWith[filter[c]] = date[c];
+            b[c] = filterWith
+            a['range'] = b
+            filterDate.push(a)
+            body.query.bool.must = body.query.bool.must.filter(p => {
+              if (p.term) {
+                return !Object.keys(p.term).includes(c)
+              }
+              return true
+            })
+          }
+
+        }
+
+        body.query.bool.filter = filterDate
       }
 
       eventBus.$emit("builtESTerms", body);
@@ -534,14 +582,33 @@ export default {
       fetch(url).then((response) => {
         response.json().then((data) => {
           let extension = data.extension.find(
-            (x) =>
-              x.url ===
-              "http://ihris.org/fhir/StructureDefinition/iHRISReportDetails"
+              (x) =>
+                  x.url ===
+                  "http://ihris.org/fhir/StructureDefinition/iHRISReportDetails"
           );
           let resource = extension.extension.find(
-            (x) => x.url === "resourcePage"
+              (x) => x.url === "resourcePage"
+          )?.valueString;
+          let resourcePageId = extension.extension.find(
+              (x) => x.url === "resourcePageID"
           )?.valueString;
           this.resourcePage = resource;
+          this.resourcePageId = resourcePageId;
+
+          let params = extension.extension.filter(x => x.url === "http://ihris.org/fhir/StructureDefinition/iHRISReportParameters")
+          params.map(x => {
+            let name;
+            let param;
+            x.extension.map(y => {
+              if (y.url === "esFieldName") {
+                name = y.valueString;
+              }
+              if (y.url === "parameter") {
+                param = y.valueString;
+              }
+            })
+            this.queryParams[name] = param;
+          })
         });
       });
     },

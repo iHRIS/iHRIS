@@ -40,6 +40,8 @@ app.use((req, res, next) => {
 });
 
 let configLoaded = false;
+// eslint-disable-next-line no-undef
+process.env['NODE_TLS_REJECT_UNAUTHORIZED'] = '0';
 
 async function startUp() {
 
@@ -263,7 +265,7 @@ module.exports = router
   // If this causes issues, would need to either
   // server the ui from a subdirectory or change to hash mode
   app.use('/ihrisapp', express.static(path.join(__dirname, 'apps')));
- 
+
   app.use(express.static(path.join(appsitepath, 'public')));
   app.use((req, res) => {
     res.sendFile(path.join(appsitepath, 'public/index.html'));

@@ -27,6 +27,36 @@
           "valueString": "practitioner"
         },
         {
+          "url": "resourcePageID",
+          "valueString": "id"
+        },
+        {
+          "extension": [
+            {
+              "url": "esFieldName",
+              "valueString": "ES_DATA_ID"
+            },
+            {
+              "url": "parameter",
+              "valueString": "idParma"
+            }
+          ],
+          "url": "http://ihris.org/fhir/StructureDefinition/iHRISReportParameters"
+        },
+        {
+          "extension": [
+            {
+              "url": "esFieldName",
+              "valueString": "ES_DATA_NAME"
+            },
+            {
+              "url": "parameter",
+              "valueString": "nameParam"
+            }
+          ],
+          "url": "http://ihris.org/fhir/StructureDefinition/iHRISReportParameters"
+        },
+        {
           "url": "query",
           "valueString": "active=true"
         },
@@ -308,6 +338,27 @@
             }
           ],
           "url": "http://ihris.org/fhir/StructureDefinition/iHRISReportElement"
+        },
+        {
+          "extension": [
+            {
+              "url": "name",
+              "valueString": "res-id"
+            },
+            {
+              "url": "fhirpath",
+              "valueString": "Practitioner.id"
+            },
+            {
+              "url": "filter",
+              "valueBoolean": false
+            },
+            {
+              "url": "dropDownFilter",
+              "valueBoolean": false
+            }
+          ],
+          "url": "http://ihris.org/fhir/StructureDefinition/iHRISReportElement"
         }
       ]
     },
@@ -424,7 +475,7 @@
             },
             {
               "url": "display",
-              "valueString": "`speciality"
+              "valueString": "speciality"
             },
             {
               "url": "filter",

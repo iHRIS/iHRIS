@@ -19,6 +19,8 @@ Description:    "Defines the primary resource of the relationship"
       label 1..1 MS and
       resource 1..1 MS and
       resourcePage 0..1 MS and
+      resourcePageID 0..1 MS and
+      IhrisReportParameters named parameters 0..* MS and
       initialFilter 0..1 MS and
       query 0..1 MS and
       cachingDisabled 0..1 MS and
@@ -36,7 +38,12 @@ Description:    "Defines the primary resource of the relationship"
 * extension[resource].valueString ^label = "Resource type of the primary resource"
 * extension[resourcePage].value[x] only string
 * extension[resourcePage].valueString 0..1
-* extension[resourcePage].valueString ^label = "Resource Page of the primary resource to display the data on click"
+* extension[resourcePage].valueString ^label = "Resource Page to display the data on click"
+
+* extension[resourcePageID].value[x] only string
+* extension[resourcePageID].valueString 0..1
+* extension[resourcePageID].valueString ^label = "Resource ID of the resource to display the data on click"
+
 * extension[initialFilter].value[x] only string
 * extension[initialFilter].valueString 1..1
 * extension[initialFilter].valueString ^label = "Initial Profile filter to limit instances of this resource"
@@ -53,7 +60,17 @@ Description:    "Defines the primary resource of the relationship"
 * extension[locationBasedConstraint].valueBoolean 1..1
 * extension[locationBasedConstraint].valueBoolean ^label = "Whether rows of the report are are limited by location or not"
 
-
+Extension:      IhrisReportParameters
+Id:             iHRISReportParameters
+Title:          "ihRIS Report parameters"
+Description:    "Lists parameters "
+* extension contains
+      esFieldName 1..1 MS and
+      parameter 1..1 MS
+* extension[esFieldName].value[x] only string
+* extension[esFieldName].valueString 1..1
+* extension[parameter].value[x] only string
+* extension[parameter].valueString 1..1
 
 Extension:      IhrisReportLink
 Id:             iHRISReportLink

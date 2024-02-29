@@ -1,120 +1,88 @@
 <template>
-  <div
-    v-if="!intro.closed && this.intro.fullName"
-    style="padding: 0"
-    :class="[hasScrolled || this.isQuestionnaire ? 'show' : 'hide']"
-  >
-    <v-snackbar
-      color="white"
+  <v-snackbar
       v-model="snackbar"
       :bottom="bottom"
-      :right="right"
+      :right="bottom"
       :timeout="timeout"
-       width="320"
-    >
-      <div>
-        <v-card height="400" elevation="0" color="white" width="320">
-          <template slot="progress">
-            <v-progress-linear
+      color="white"
+      width="320"
+  >
+    <div>
+      <v-card color="white" elevation="0" height="400" width="320">
+        <template slot="progress">
+          <v-progress-linear
               color="deep-purple"
               height="10"
               indeterminate
-            ></v-progress-linear>
-          </template>
-          <v-card-title
-            style="padding-top: 4px; padding-bottom: 4px"
-            class="justify-end"
-          >
-            <v-btn
-              color="deep-purple lighten-2"
+          ></v-progress-linear>
+        </template>
+        <v-card-title
+            class="pa-0 pb-2 pr-2"
+        >
+          <h4 class="black--text">{{ title }}</h4>
+          <v-spacer></v-spacer>
+          <v-btn
+              class="justify-end"
+              color="warning"
               icon
+              small
               @click="
                 () => {
-                  this.intro.closed = true;
+                  this.snackbar = false;
                 }
               "
-            >
-              <v-icon>mdi-close-circle-outline</v-icon>
-            </v-btn>
-          </v-card-title>
-          <v-card-title
-            style="padding-top: 4px; padding-bottom: 4px"
+          >
+            <v-icon>mdi-close-box-multiple-outline</v-icon>
+          </v-btn>
+        </v-card-title>
+        <hr class="dotted-divider"/>
+        <br>
+        <v-card-title
             class="justify-center"
-          >
-            <v-avatar size="120">
-              <img :alt="intro.fullName" :src="intro.photoURL?intro.photoURL:'/images/Blank-Avatar.jpg'" />
-            </v-avatar>
-          </v-card-title>
-          <v-card-title class="justify-center py-0"
-            ><span class="black--text">{{ intro.fullName }}</span></v-card-title
-          >
-          <v-card-text class="black--text">
-            <span
-              >{{ $t(`App.hardcoded-texts.Job Title`)}}: <strong>{{ intro.jobTitle }}</strong></span
-            ><br />
-            <span
-              >{{ $t(`App.hardcoded-texts.Employee Number`)}}: <strong>{{ intro.employeeID }}</strong></span
-            ><br />
-            <span
-            >{{ $t(`App.hardcoded-texts.Email`)}}: <strong>{{ intro.email }}</strong></span
-            ><br />
-            <span
-            >{{ $t(`App.hardcoded-texts.Phone`)}} : <strong>{{ intro.phone }}</strong></span
-            ><br />
-            <span
-              >{{ $t(`App.hardcoded-texts.Gender`)}} : <strong>{{ intro.gender }}</strong></span
-            ><br />
-            <span
-              >{{ $t(`App.hardcoded-texts.Birth Date`)}} : <strong>{{intro.birthDate}}</strong></span
-            ><br />
-            <span>
-              {{ $t(`App.hardcoded-texts.Age`)}} : <strong>{{ Math.floor((new Date() - new Date(intro.birthDate))/(1000*3600*24*365)) }}</strong></span
-            ><br />
-
-          </v-card-text>
-        </v-card>
-      </div>
-    </v-snackbar>
-  </div>
+            style="padding-top: 4px; padding-bottom: 4px"
+        >
+          <v-avatar v-if="showImage && photoURL" size="120" tile>
+            <img :src="photoURL" alt="photo"/>
+          </v-avatar>
+        </v-card-title>
+        <v-simple-table :height="showImage?250:'auto'" light>
+          <tbody>
+          <tr v-for="[keyName,value] in Object.entries(this.data)" :key="keyName">
+            <td class="body-1" style="text-align: left"><strong>{{ keyName }}:</strong></td>
+            <td class="subtitle-1">{{ value }}</td>
+          </tr>
+          </tbody>
+        </v-simple-table>
+      </v-card>
+    </div>
+  </v-snackbar>
 </template>
 
 <script>
 export default {
   name: "ihris-practitioner-intro",
-  props: ["slotProps", "isQuestionnaire"],
   data: function () {
     return {
-      intro: {
-        fullName: "",
-        jobTitle: "",
-        photoURL: "",
-        birthDate: "",
-        gender: "",
-        employeeID: "",
-        closed: false,
-        emil: "",
-        phone: "",
-      },
-      hasScrolled: false,
-      snackbar: true,
+      practitionerId: undefined,
+      practitioner: {},
+      practitionerRole: {},
+      title: "",
+      show: true,
+      snackbar: false,
       timeout: -1,
       bottom: true,
       right: true,
+      showImage: false,
+      photoURL: undefined,
+      data: {},
     };
   },
   components: {},
-  mounted() {
-    if (!this.isQuestionnaire) {
-      window.addEventListener("scroll", this.handleScroll);
-    } else {
-      window.removeEventListener("scroll", this.handleScroll);
-    }
-  },
-  beforeDestroy() {
-    window.removeEventListener("scroll", this.handleScroll);
-  },
   watch: {
     slotProps: {
+      practitionerId() {
+        this.setupData();
+      },
       handler() {
         if (!this.lockWatch) {
           this.setupData();
@@ -125,63 +93,136 @@ export default {
   },
   methods: {
     setupData() {
-      if (
-        this.slotProps &&
-        this.slotProps.source &&
-        this.slotProps.source.data
-      ) {
-        let practitioner = this.slotProps.source.data;
-        if(!practitioner || practitioner.resourceType !== 'Practitioner') {
-          return
-        }
-        let title = ""
-        if(practitioner && practitioner.name && practitioner.name[0].prefix && practitioner.name[0].prefix && practitioner.name[0]?.prefix.length){
-          title = practitioner.name[0].prefix[0]
-        }
-        this.intro.fullName = `${title} ${practitioner?.name[0]?.family} ${practitioner?.name[0]?.given[0]}`;
-        this.intro.email = practitioner?.telecom?.find(
-          (x) => x.system === "email"
-        )?.value;
-        this.intro.phone = practitioner?.telecom?.find(
-          (x) => x.system === "phone"
-        )?.value;
-        this.intro.jobTitle = this.slotProps.position;
-        this.intro.gender = practitioner?.gender;
-        this.intro.birthDate = practitioner?.birthDate;
-
-        this.intro.employeeID = practitioner?.identifier
-          ? practitioner?.identifier[0]?.value
-          : "";
-
-        let photo = "";
-        if (practitioner.photo) photo = practitioner?.photo[0];
-
-        if (photo.data && photo.contentType) {
-          let dataURL = "data:" + photo.contentType + ";base64," + photo.data;
-          fetch(dataURL)
-            .then((res) => res.blob())
-            .then((blob) => {
-              this.intro.photoURL = URL.createObjectURL(blob);
-              //URL.revokeObjectURL(this.photoURL)
+      if (this.practitionerId) {
+        fetch(`/fhir/PractitionerRole?_practitioner=${this.practitionerId}`)
+            .then((response) => {
+              response
+                  .json()
+                  .then((data) => {
+                    if (data.entry && data.entry.length) {
+                      let role
+                      if (data.entry[0].resource.code) {
+                        role = data.entry[0].resource;
+                      }
+                      this.practitionerRole = role ? role : "";
+                    }
+                  })
+                  .catch((err) => {
+                    console.log(this.field, this.fhirId, err);
+                  });
             })
-            .catch((e) => {
-              console.log("Failed to get data from base64.", e);
+            .catch((err) => {
+              console.log(this.field, this.fhirId, err);
             });
-        }
+        fetch("/fhir/Practitioner/" + this.practitionerId)
+            .then((response) => {
+              response
+                  .json()
+                  .then((data) => {
+                    this.practitioner = data;
+                  })
+                  .catch((err) => {
+                    console.log(err);
+                  });
+            })
+            .catch((err) => {
+              console.log(err);
+            });
       }
     },
-    handleScroll() {
-      this.hasScrolled = window.top.scrollY >= 100;
+    getParameter() {
+      if (this.$router.history.current.query) {
+        if (this.$router.history.current?.query["PractitionerRole.practitioner.reference"]) {
+          this.practitionerId = this.$router.history.current.query["PractitionerRole.practitioner.reference"].split("/").pop()
+        }
+        if (this.$router.history.current?.query["practitioner"]) {
+          this.practitionerId = this.$router.history.current.query["practitioner"]
+        }
+      }
+      if (this.$router.history.current.params?.id) {
+        this.practitionerId = this.$router.history.current.params.id
+      }
+      this.setupData()
+      fetch("/auth").then(() => {
+        fetch("/config/site").then(response => {
+          response.json().then(data => {
+            this.snackbar = !!this.practitionerId
+            let intro
+            if (data.hasOwnProperty("intro")) intro = data.intro
+            this.title = intro.title
+            let internalData = intro.data
+            let keys = Object.keys(internalData)
+            for (let key of keys) {
+              if (internalData[key]?.path && internalData[key]?.path.includes(",")) {
+                let paths = internalData[key].path.split(",")
+                let finalData = paths.map(path => {
+                  let pathData = this.practitioner
+                  if (path.startsWith("PractitionerRole")) {
+                    pathData = this.practitionerRole
+                  }
+                  return this.$fhirpath.evaluate(pathData, path)
+                })
+                this.data[internalData[key].text] = finalData.join(",")
+              } else {
+                let pathData = this.practitioner
+                if (internalData[key]?.path && internalData[key].path.startsWith("PractitionerRole")) {
+                  pathData = this.practitionerRole
+                }
+                let finalData = this.$fhirpath.evaluate(pathData, internalData[key].path)
+                if (internalData[key]?.type === "photo") {
+                  this.showImage = true
+                  if (finalData?.length > 0) {
+                    let photo = finalData[0]
+                    if (photo.data && photo.contentType) {
+                      let dataURL = "data:" + photo.contentType + ";base64," + photo.data;
+                      fetch(dataURL)
+                          .then((res) => res.blob())
+                          .then((blob) => {
+                            this.photoURL = URL.createObjectURL(blob);
+                          })
+                          .catch((e) => {
+                            console.log("Failed to get data from base64.", e);
+                          });
+                    }
+                  }
+                } else {
+                  if (typeof finalData === 'object') {
+                    this.data[internalData[key].text] = finalData.join(",")
+                  } else {
+                    this.data[internalData[key].text] = finalData
+                  }
+                }
+              }
+            }
+
+          })
+        })
+      })
+
     },
   },
-};
+  mounted() {
+    this.getParameter();
+  }
+}
 </script>
 
 <style scoped>
 .hide {
   opacity: 0;
 }
+
 .show {
   opacity: 1;
+}
+
+.v-snack__content {
+  padding: 0; /* Set padding to 0 to remove it */
+}
+
+.dotted-divider {
+  border: none;
+  border-top: 4px dotted green;
+  height: 2px;
 }
 </style>
