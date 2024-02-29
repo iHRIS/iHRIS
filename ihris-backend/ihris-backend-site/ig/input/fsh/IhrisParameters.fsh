@@ -463,3 +463,33 @@ Usage: #example
 * parameter[=].part[=].valueString = "ihris-es-report-staff-directorate.id"
 * parameter[=].part[+].name = "defaults:fields:Person.extension:practitioner.value[x]:valueReference:referenceDisplayPath"
 * parameter[=].part[=].valueString = "name.where(use='official').given.first() + ' ' + name.where(use='official').family"
+
+* parameter[=].part[+].name = "site:intro:title"
+* parameter[=].part[=].valueString = "Person Information"
+
+* parameter[=].part[+].name = "site:intro:data:fullName:text"
+* parameter[=].part[=].valueString = "Full Name"
+* parameter[=].part[+].name = "site:intro:data:fullName:path"
+* parameter[=].part[=].valueString = "Practitioner.name.family,Practitioner.name.given[0]"
+
+* parameter[=].part[+].name = "site:intro:data:title:text"
+* parameter[=].part[=].valueString = "Job"
+* parameter[=].part[+].name = "site:intro:data:title:path"
+* parameter[=].part[=].valueString = "PractitionerRole.code.coding.display"
+
+* parameter[=].part[+].name = "site:intro:data:dateOfBirth:text"
+* parameter[=].part[=].valueString = "Date Of Birth"
+* parameter[=].part[+].name = "site:intro:data:dateOfBirth:path"
+* parameter[=].part[=].valueString = "Practitioner.birthDate"
+
+* parameter[=].part[+].name = "site:intro:data:gender:text"
+* parameter[=].part[=].valueString = "Gender"
+* parameter[=].part[+].name = "site:intro:data:gender:path"
+* parameter[=].part[=].valueString = "Practitioner.gender"
+
+* parameter[=].part[+].name = "site:intro:data:profilePicture:text"
+* parameter[=].part[=].valueString = "Photo"
+* parameter[=].part[+].name = "site:intro:data:profilePicture:type"
+* parameter[=].part[=].valueString = "photo"
+* parameter[=].part[+].name = "site:intro:data:profilePicture:path"
+* parameter[=].part[=].valueString = "Practitioner.photo[0]"

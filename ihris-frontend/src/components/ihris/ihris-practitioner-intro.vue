@@ -8,7 +8,7 @@
       width="320"
   >
     <div>
-      <v-card color="white" elevation="0" height="400" width="320">
+      <v-card v-if="expand" color="white" elevation="0" height="400" width="320">
         <template slot="progress">
           <v-progress-linear
               color="deep-purple"
@@ -28,7 +28,7 @@
               small
               @click="
                 () => {
-                  this.snackbar = false;
+                  this.expand = false;
                 }
               "
           >
@@ -55,6 +55,18 @@
         </v-simple-table>
       </v-card>
     </div>
+    <h4 class="black--text">{{ title }}</h4>
+     <template v-slot:action="{ attrs }">
+        <v-btn
+            icon
+          small
+            color="green"
+          v-bind="attrs"
+          @click="expand = true"
+        >
+          <v-icon>mdi-arrow-expand</v-icon>
+        </v-btn>
+      </template>
   </v-snackbar>
 </template>
 
@@ -75,6 +87,7 @@ export default {
       showImage: false,
       photoURL: undefined,
       data: {},
+      expand: false,
     };
   },
   components: {},
@@ -94,7 +107,7 @@ export default {
   methods: {
     setupData() {
       if (this.practitionerId) {
-        fetch(`/fhir/PractitionerRole?_practitioner=${this.practitionerId}`)
+        fetch(`/fhir/PractitionerRole?practitioner=${this.practitionerId}`)
             .then((response) => {
               response
                   .json()
@@ -119,7 +132,11 @@ export default {
               response
                   .json()
                   .then((data) => {
-                    this.practitioner = data;
+                    if (data.resourceType === "Practitioner") {
+                      this.practitioner = data;
+                      this.snackbar = true;
+                    }
+
                   })
                   .catch((err) => {
                     console.log(err);
@@ -146,7 +163,6 @@ export default {
       fetch("/auth").then(() => {
         fetch("/config/site").then(response => {
           response.json().then(data => {
-            this.snackbar = !!this.practitionerId
             let intro
             if (data.hasOwnProperty("intro")) intro = data.intro
             this.title = intro.title
