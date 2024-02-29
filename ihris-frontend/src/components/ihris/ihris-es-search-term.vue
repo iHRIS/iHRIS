@@ -21,17 +21,17 @@
         @click:clear="clearSearch()">
       <template v-slot:prepend-item>
         <v-radio-group
-            v-model="filterType"
-            row
-            @change="updateSearch()"
+          v-model="filterType"
+          row
+          @change="updateSearch()"
         >
           <v-radio
-              label="Include"
-              value="include"
+            label="Include"
+            value="include"
           ></v-radio>
           <v-radio
-              label="Exclude"
-              value="exclude"
+            label="Exclude"
+            value="exclude"
           ></v-radio>
         </v-radio-group>
         <v-divider></v-divider>
@@ -41,60 +41,69 @@
       <template v-if="filterDataType == 'date'">
         <v-container>
           <v-menu
-              ref="menu"
-              v-model="dateMenu"
-              :close-on-content-click="false"
-              min-width="auto"
-              offset-y
-              transition="scale-transition"
+            ref="menu"
+            v-model="dateMenu"
+            :close-on-content-click="false"
+            min-width="auto"
+            offset-y
+            transition="scale-transition"
           >
             <template v-slot:activator="{ on, attrs }">
               <v-text-field
-                  v-model="value"
-                  :label="label"
-                  clearable
-                  class="internal-slot reverse-text"
-                  dense
-                  outlined
-                  hide-details
-                  readonly
-                  v-bind="attrs"
-                  @input="updateSearch"
-                  v-on="on"
+                v-model="value"
+                :label="label"
+                clearable
+                class="internal-slot reverse-text"
+                dense
+                outlined
+                hide-details
+                readonly
+                v-bind="attrs"
+                @input="updateSearch"
+                v-on="on"
               >
                 <template v-slot:prepend-inner>
                   <v-select
-                      v-model="filters"
-                      :items="comparisons"
-                      menu-props="auto"
-                      dense
-                      solo
-                      chips
-                      hide-details
-                      item-text="text"
-                      item-value="value"
-                      style="max-width: 80px;"
-                      @change="changeFilter"
-                      @input="updateSearch"
+                    v-model="filters"
+                    :items="comparisons"
+                    menu-props="auto"
+                    dense
+                    solo
+                    chips
+                    hide-details
+                    item-text="text"
+                    item-value="value"
+                    style="max-width: 80px;"
+                    @change="changeFilter"
+                    @input="updateSearch"
                   />
                 </template>
               </v-text-field>
             </template>
             <v-date-picker
-                ref="picker"
-                v-model="value"
-                :max="new Date().toISOString().substr(0, 10)"
-                :range="isRange"
-                min="1950-01-01"
-                @change="updateSearch"
+              ref="picker"
+              v-model="value"
+              :max="new Date().toISOString().substr(0, 10)"
+              :range="isRange"
+              min="1950-01-01"
+              @change="updateSearch"
             ></v-date-picker>
           </v-menu>
         </v-container>
 
       </template>
-      <v-text-field v-else v-model="value" :label="label" class="ma-1" clearable dense
-                    hide-details outlined prepend-inner-icon="mdi-filter-variant" @change="updateSearch()"
-                    @click:clear="clearSearch()"/>
+      <v-text-field v-else
+        v-model="value"
+        :label="label"
+        class="ma-1"
+        clearable
+        dense
+        hide-details
+        outlined
+        prepend-inner-icon="mdi-filter-variant"
+        @change="updateSearch()"
+        @click:clear="clearSearch()"
+      />
     </template>
   </label>
 </template>
@@ -136,26 +145,26 @@ export default {
         method: 'GET'
       }).then(response => {
         response
-            .json()
-            .then(data => {
-              this.loading = false;
-              for (let bucket of data) {
-                this.items.push(
-                  bucket.key.value.toString().replace(/\s+/g, ' ')
-                )
-              }
-            })
-            .catch(err => {
-              this.loading = false;
-              this.error_message = "Unable to load results.";
-              console.log(err);
-            });
-      })
+          .json()
+          .then(data => {
+            this.loading = false;
+            for (let bucket of data) {
+              this.items.push(
+                bucket.key.value.toString().replace(/\s+/g, ' ')
+              )
+            }
+          })
           .catch(err => {
             this.loading = false;
             this.error_message = "Unable to load results.";
             console.log(err);
           });
+      })
+        .catch(err => {
+          this.loading = false;
+          this.error_message = "Unable to load results.";
+          console.log(err);
+        });
     }
   },
   methods: {

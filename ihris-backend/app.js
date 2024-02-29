@@ -40,8 +40,6 @@ app.use((req, res, next) => {
 });
 
 let configLoaded = false;
-// eslint-disable-next-line no-undef
-process.env['NODE_TLS_REJECT_UNAUTHORIZED'] = '0';
 
 async function startUp() {
 
@@ -51,7 +49,7 @@ async function startUp() {
   try {
     const reportsRunning = await fhirReports.setup();
     if (reportsRunning) {
-      // fhirReports.runReports();
+      fhirReports.runReports();
     } else {
       logger.error('Failed to start up reports to ElasticSearch.');
     }

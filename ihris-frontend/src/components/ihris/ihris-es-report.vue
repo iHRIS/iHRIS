@@ -334,8 +334,7 @@ export default {
                 let query = {};
                 if (
                     this.reportData.mappings.mappings.properties[esFieldName] &&
-                    this.reportData.mappings.mappings.properties[esFieldName]
-                        .type === "text"
+                    this.reportData.mappings.mappings.properties[esFieldName].type === "text"
                 ) {
                   query.wildcard = {};
                   query.wildcard[esFieldName] = "*" + tm + "*";
@@ -439,9 +438,7 @@ export default {
               return true
             })
           }
-
         }
-
         body.query.bool.filter = filterDate
       }
 
@@ -582,18 +579,20 @@ export default {
       fetch(url).then((response) => {
         response.json().then((data) => {
           let extension = data.extension.find(
-              (x) =>
-                  x.url ===
-                  "http://ihris.org/fhir/StructureDefinition/iHRISReportDetails"
+            (x) =>
+                x.url === "http://ihris.org/fhir/StructureDefinition/iHRISReportDetails"
           );
           let resource = extension.extension.find(
-              (x) => x.url === "resourcePage"
+            (x) => x.url === "resourcePage"
           )?.valueString;
           let resourcePageId = extension.extension.find(
-              (x) => x.url === "resourcePageID"
+            (x) => x.url === "resourcePageID"
           )?.valueString;
           this.resourcePage = resource;
           this.resourcePageId = resourcePageId;
+          if(!this.resourcePageId) {
+            this.resourcePageId = "id"
+          }
 
           let params = extension.extension.filter(x => x.url === "http://ihris.org/fhir/StructureDefinition/iHRISReportParameters")
           params.map(x => {

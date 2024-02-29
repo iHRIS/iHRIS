@@ -14,12 +14,12 @@
         </v-btn>
       </v-overlay>
       <v-navigation-drawer
-          app
-          class="primary darken-1 white--text"
-          clipped
-          permanent
-          right
-          style="z-index: 3;"
+        app
+        class="primary darken-1 white--text"
+        clipped
+        permanent
+        right
+        style="z-index: 3;"
       >
         <v-list class="white--text">
           <v-list-item>
@@ -137,8 +137,6 @@ export default {
     },
   },
   created: function () {
-    console.log("created", this.field, this.fhirId);
-
     if (this.fhirId) {
       this.loading = true
       //console.log("getting",this.field,this.fhirId)
@@ -147,7 +145,6 @@ export default {
           //this.$store.commit('setCurrentResource', data)
           this.orig = data
           this.source = {data: data, path: this.field}
-          console.log("final test",this.source)
           this.setLinkText()
           this.loading = false
         }).catch(err => {

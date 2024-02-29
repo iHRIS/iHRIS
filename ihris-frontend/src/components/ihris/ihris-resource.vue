@@ -6,25 +6,25 @@
 <template>
   <v-container :key="pageKey" class="my-3">
     <v-form
-        ref="form"
-        v-model="valid"
+      ref="form"
+      v-model="valid"
     >
       <slot :source="source"></slot>
       <v-overlay :value="overlay">
         <v-progress-circular
-            color="primary"
-            indeterminate
-            size="50"
+          color="primary"
+          indeterminate
+          size="50"
         ></v-progress-circular>
       </v-overlay>
 
       <v-navigation-drawer
-          app
-          class="primary darken-1 white--text"
-          clipped
-          permanent
-          right
-          style="z-index: 3;"
+        app
+        class="primary darken-1 white--text"
+        clipped
+        permanent
+        right
+        style="z-index: 3;"
       >
         <v-list class="white--text">
           <v-list-item v-if="edit">
@@ -57,11 +57,11 @@
           <v-subheader v-if="sectionMenu" class="white--text"><h2>{{ $t(`App.hardcoded-texts.Sections`) }}</h2>
           </v-subheader>
           <v-list-item
-              v-for="section in sectionMenu"
-              :id="'#section-' + section.name"
-              :key="section.name"
-              :class="'#section-' + section.name === path ? 'highlighted' : ''"
-              @click="scrollTo(section.name)"
+            v-for="section in sectionMenu"
+            :id="'#section-' + section.name"
+            :key="section.name"
+            :class="'#section-' + section.name === path ? 'highlighted' : ''"
+            @click="scrollTo(section.name)"
           >
             <v-list-item-content class="white--text" v-if="!edit || !section.secondary">
               <v-list-item-title class="text-uppercase"><h4>{{ $t(`App.fhir-resources-texts.${section.title}`) }}</h4></v-list-item-title>
@@ -72,9 +72,9 @@
 
       </v-navigation-drawer>
       <v-card v-if="!this.edit"
-              class="mx-auto mb-4 rounded-lg"
-              max-width="700"
-              outlined
+        class="mx-auto mb-4 rounded-lg"
+        max-width="700"
+        outlined
       >
         <v-card-title class="primary font-weight-bold caption pa-2 white--text justify-center ">Record History
         </v-card-title>
@@ -102,26 +102,26 @@
               <v-row>
                 <v-col class="px-4" cols="2">
                   <v-text-field
-                      v-if="$data.orig.meta"
-                      v-model.number="version"
-                      :max="max"
-                      :rules="[rules.min, rules.max]"
-                      :value="$data.orig.meta.versionId"
-                      class="mt-0 pt-0"
-                      hide-details
-                      min="1"
-                      single-line
-                      style="width: 40px;"
-                      type="number"
+                    v-if="$data.orig.meta"
+                    v-model.number="version"
+                    :max="max"
+                    :rules="[rules.min, rules.max]"
+                    :value="$data.orig.meta.versionId"
+                    class="mt-0 pt-0"
+                    hide-details
+                    min="1"
+                    single-line
+                    style="width: 40px;"
+                    type="number"
                   ></v-text-field>
                 </v-col>
                 <v-col class="px-4">
                   <v-btn
-                      :disabled="version>max || version<1"
-                      color="primary"
-                      icon
-                      small
-                      @click="changeVersion"
+                    :disabled="version>max || version<1"
+                    color="primary"
+                    icon
+                    small
+                    @click="changeVersion"
                   >
                     <v-icon>mdi-eye</v-icon>
                   </v-btn>
