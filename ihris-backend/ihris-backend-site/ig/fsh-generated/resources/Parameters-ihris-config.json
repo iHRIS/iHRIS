@@ -20,7 +20,7 @@
         "who": {
           "reference": "http://ihris.org/fhir/Organization/ihris"
         },
-        "data": "QjTTAU58+gA54ah3sZb35QqgwG3a1RrMsEbhwJjQMGJBwaLeMYw1wbLu3JqiwwpUmiXD2SWLj+anq3bl6IHP1Xhf//gP/05se6Rgm7LUQeYdG0HqSNpqdHts0bXVJ2cqAex/Z2WL4d9frmjylTdOke6lrjgR2xTN7vET6YGXgmg="
+        "data": "V870cwmayGw0tOXXdiUn7/MNEaPt/KzRCk7H2t6IvqxmhshwxLxAYve8yNEdkhj/WhybFokLXR5rhtqU4VKE9EiN/dL1fHVbdu0rk/WrcFy2vPqYPUxepFAAAWQXIQV7gsVSMFEbUOTiYaQ42dt7gddrmJYq8p+6RFLAMDkxpzU="
       }
     },
     {
@@ -933,6 +933,54 @@
         {
           "name": "defaults:fields:Person.extension:practitioner.value[x]:valueReference:referenceDisplayPath",
           "valueString": "name.where(use='official').given.first() + ' ' + name.where(use='official').family"
+        },
+        {
+          "name": "site:intro:title",
+          "valueString": "Person Information"
+        },
+        {
+          "name": "site:intro:data:fullName:text",
+          "valueString": "Full Name"
+        },
+        {
+          "name": "site:intro:data:fullName:path",
+          "valueString": "Practitioner.name.family,Practitioner.name.given[0]"
+        },
+        {
+          "name": "site:intro:data:title:text",
+          "valueString": "Job"
+        },
+        {
+          "name": "site:intro:data:title:path",
+          "valueString": "PractitionerRole.code.coding.display"
+        },
+        {
+          "name": "site:intro:data:dateOfBirth:text",
+          "valueString": "Date Of Birth"
+        },
+        {
+          "name": "site:intro:data:dateOfBirth:path",
+          "valueString": "Practitioner.birthDate"
+        },
+        {
+          "name": "site:intro:data:gender:text",
+          "valueString": "Gender"
+        },
+        {
+          "name": "site:intro:data:gender:path",
+          "valueString": "Practitioner.gender"
+        },
+        {
+          "name": "site:intro:data:profilePicture:text",
+          "valueString": "Photo"
+        },
+        {
+          "name": "site:intro:data:profilePicture:type",
+          "valueString": "photo"
+        },
+        {
+          "name": "site:intro:data:profilePicture:path",
+          "valueString": "Practitioner.photo[0]"
         }
       ]
     }
