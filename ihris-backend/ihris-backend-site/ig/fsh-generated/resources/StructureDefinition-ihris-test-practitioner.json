@@ -1,6 +1,16 @@
 {
   "resourceType": "StructureDefinition",
   "id": "ihris-test-practitioner",
+  "extension": [
+    {
+      "url": "http://hl7.org/fhir/StructureDefinition/structuredefinition-category",
+      "valueString": "Base.Individuals"
+    },
+    {
+      "url": "http://hl7.org/fhir/StructureDefinition/structuredefinition-security-category",
+      "valueCode": "individual"
+    }
+  ],
   "url": "http://ihris.org/fhir/StructureDefinition/ihris-test-practitioner",
   "version": "0.1.0",
   "name": "IhrisTestPractitioner",

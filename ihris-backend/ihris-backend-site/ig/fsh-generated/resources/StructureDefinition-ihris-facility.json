@@ -1,6 +1,16 @@
 {
   "resourceType": "StructureDefinition",
   "id": "ihris-facility",
+  "extension": [
+    {
+      "url": "http://hl7.org/fhir/StructureDefinition/structuredefinition-category",
+      "valueString": "Base.Entities"
+    },
+    {
+      "url": "http://hl7.org/fhir/StructureDefinition/structuredefinition-security-category",
+      "valueCode": "business"
+    }
+  ],
   "url": "http://ihris.org/fhir/StructureDefinition/ihris-facility",
   "version": "0.1.0",
   "name": "IhrisFacility",

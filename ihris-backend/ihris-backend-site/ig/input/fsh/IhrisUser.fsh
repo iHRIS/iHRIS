@@ -171,8 +171,8 @@ Instance: ihris-user-loggedout
 InstanceOf: Person
 Usage: #example
 * meta.profile = "http://ihris.org/fhir/StructureDefinition/ihris-person-user"
-* extension.url = "http://ihris.org/fhir/StructureDefinition/ihris-assign-role"
-* extension.valueReference = Reference(Basic/ihris-role-public)
+// * extension.url = "http://ihris.org/fhir/StructureDefinition/ihris-assign-role"
+// * extension.valueReference = Reference(Basic/ihris-role-public)
 * name.use = #official
 * name.text = "Logged Out"
 * telecom.system = #email

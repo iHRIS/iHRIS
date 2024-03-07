@@ -112,8 +112,8 @@
         {
           "language": "de",
           "use": {
-            "code": "preferredForLanguage",
-            "system": "http://terminology.hl7.org/CodeSystem/hl7TermMaintInfra"
+            "system": "http://terminology.hl7.org/CodeSystem/hl7TermMaintInfra",
+            "code": "preferredForLanguage"
           },
           "value": "Kontonummer"
         }
@@ -322,8 +322,8 @@
         {
           "language": "de",
           "use": {
-            "code": "preferredForLanguage",
-            "system": "http://terminology.hl7.org/CodeSystem/hl7TermMaintInfra"
+            "system": "http://terminology.hl7.org/CodeSystem/hl7TermMaintInfra",
+            "code": "preferredForLanguage"
           },
           "value": "Geburtsregisternummer"
         }
@@ -540,8 +540,8 @@
         {
           "language": "de",
           "use": {
-            "code": "preferredForLanguage",
-            "system": "http://terminology.hl7.org/CodeSystem/hl7TermMaintInfra"
+            "system": "http://terminology.hl7.org/CodeSystem/hl7TermMaintInfra",
+            "code": "preferredForLanguage"
           },
           "value": "Diners Club"
         }
@@ -570,8 +570,8 @@
         {
           "language": "de",
           "use": {
-            "code": "preferredForLanguage",
-            "system": "http://terminology.hl7.org/CodeSystem/hl7TermMaintInfra"
+            "system": "http://terminology.hl7.org/CodeSystem/hl7TermMaintInfra",
+            "code": "preferredForLanguage"
           },
           "value": "Führerscheinnummer"
         }
@@ -592,8 +592,8 @@
         {
           "language": "de",
           "use": {
-            "code": "preferredForLanguage",
-            "system": "http://terminology.hl7.org/CodeSystem/hl7TermMaintInfra"
+            "system": "http://terminology.hl7.org/CodeSystem/hl7TermMaintInfra",
+            "code": "preferredForLanguage"
           },
           "value": "Arztnummer"
         }
@@ -674,8 +674,8 @@
         {
           "language": "de",
           "use": {
-            "code": "preferredForLanguage",
-            "system": "http://terminology.hl7.org/CodeSystem/hl7TermMaintInfra"
+            "system": "http://terminology.hl7.org/CodeSystem/hl7TermMaintInfra",
+            "code": "preferredForLanguage"
           },
           "value": "Discover Card"
         }
@@ -720,8 +720,8 @@
         {
           "language": "de",
           "use": {
-            "code": "preferredForLanguage",
-            "system": "http://terminology.hl7.org/CodeSystem/hl7TermMaintInfra"
+            "system": "http://terminology.hl7.org/CodeSystem/hl7TermMaintInfra",
+            "code": "preferredForLanguage"
           },
           "value": "Arbeitnehmernummer"
         }
@@ -746,8 +746,8 @@
         {
           "language": "de",
           "use": {
-            "code": "preferredForLanguage",
-            "system": "http://terminology.hl7.org/CodeSystem/hl7TermMaintInfra"
+            "system": "http://terminology.hl7.org/CodeSystem/hl7TermMaintInfra",
+            "code": "preferredForLanguage"
           },
           "value": "Arbeitgebernummer"
         }
@@ -848,8 +848,8 @@
         {
           "language": "de",
           "use": {
-            "code": "preferredForLanguage",
-            "system": "http://terminology.hl7.org/CodeSystem/hl7TermMaintInfra"
+            "system": "http://terminology.hl7.org/CodeSystem/hl7TermMaintInfra",
+            "code": "preferredForLanguage"
           },
           "value": "interne ID des Zahlungspflichtigen"
         }
@@ -914,8 +914,8 @@
         {
           "language": "de",
           "use": {
-            "code": "preferredForLanguage",
-            "system": "http://terminology.hl7.org/CodeSystem/hl7TermMaintInfra"
+            "system": "http://terminology.hl7.org/CodeSystem/hl7TermMaintInfra",
+            "code": "preferredForLanguage"
           },
           "value": "externe ID des Zahlungspflichtigen"
         }
@@ -1084,8 +1084,8 @@
         {
           "language": "de",
           "use": {
-            "code": "preferredForLanguage",
-            "system": "http://terminology.hl7.org/CodeSystem/hl7TermMaintInfra"
+            "system": "http://terminology.hl7.org/CodeSystem/hl7TermMaintInfra",
+            "code": "preferredForLanguage"
           },
           "value": "Armennummer"
         }
@@ -1134,8 +1134,8 @@
         {
           "language": "de",
           "use": {
-            "code": "preferredForLanguage",
-            "system": "http://terminology.hl7.org/CodeSystem/hl7TermMaintInfra"
+            "system": "http://terminology.hl7.org/CodeSystem/hl7TermMaintInfra",
+            "code": "preferredForLanguage"
           },
           "value": "Rentnernummer"
         }
@@ -1268,8 +1268,8 @@
         {
           "language": "de",
           "use": {
-            "code": "preferredForLanguage",
-            "system": "http://terminology.hl7.org/CodeSystem/hl7TermMaintInfra"
+            "system": "http://terminology.hl7.org/CodeSystem/hl7TermMaintInfra",
+            "code": "preferredForLanguage"
           },
           "value": "Krankenaktennummer"
         }
@@ -1314,8 +1314,8 @@
         {
           "language": "de",
           "use": {
-            "code": "preferredForLanguage",
-            "system": "http://terminology.hl7.org/CodeSystem/hl7TermMaintInfra"
+            "system": "http://terminology.hl7.org/CodeSystem/hl7TermMaintInfra",
+            "code": "preferredForLanguage"
           },
           "value": "MasterCard"
         }
@@ -1440,8 +1440,8 @@
         {
           "language": "de",
           "use": {
-            "code": "preferredForLanguage",
-            "system": "http://terminology.hl7.org/CodeSystem/hl7TermMaintInfra"
+            "system": "http://terminology.hl7.org/CodeSystem/hl7TermMaintInfra",
+            "code": "preferredForLanguage"
           },
           "value": "Institutskennzeichen der Krankenkasse"
         }
@@ -1470,8 +1470,8 @@
         {
           "language": "de",
           "use": {
-            "code": "preferredForLanguage",
-            "system": "http://terminology.hl7.org/CodeSystem/hl7TermMaintInfra"
+            "system": "http://terminology.hl7.org/CodeSystem/hl7TermMaintInfra",
+            "code": "preferredForLanguage"
           },
           "value": "Vertragskassennummer (VKNR)"
         }
@@ -1580,8 +1580,8 @@
         {
           "language": "de",
           "use": {
-            "code": "preferredForLanguage",
-            "system": "http://terminology.hl7.org/CodeSystem/hl7TermMaintInfra"
+            "system": "http://terminology.hl7.org/CodeSystem/hl7TermMaintInfra",
+            "code": "preferredForLanguage"
           },
           "value": "Assistenzarztnummer"
         }
@@ -1730,8 +1730,8 @@
         {
           "language": "de",
           "use": {
-            "code": "preferredForLanguage",
-            "system": "http://terminology.hl7.org/CodeSystem/hl7TermMaintInfra"
+            "system": "http://terminology.hl7.org/CodeSystem/hl7TermMaintInfra",
+            "code": "preferredForLanguage"
           },
           "value": "interne Patienten-ID"
         }
@@ -1784,8 +1784,8 @@
         {
           "language": "de",
           "use": {
-            "code": "preferredForLanguage",
-            "system": "http://terminology.hl7.org/CodeSystem/hl7TermMaintInfra"
+            "system": "http://terminology.hl7.org/CodeSystem/hl7TermMaintInfra",
+            "code": "preferredForLanguage"
           },
           "value": "Personen-ID"
         }
@@ -1850,8 +1850,8 @@
         {
           "language": "de",
           "use": {
-            "code": "preferredForLanguage",
-            "system": "http://terminology.hl7.org/CodeSystem/hl7TermMaintInfra"
+            "system": "http://terminology.hl7.org/CodeSystem/hl7TermMaintInfra",
+            "code": "preferredForLanguage"
           },
           "value": "Passnummer"
         }
@@ -1912,8 +1912,8 @@
         {
           "language": "de",
           "use": {
-            "code": "preferredForLanguage",
-            "system": "http://terminology.hl7.org/CodeSystem/hl7TermMaintInfra"
+            "system": "http://terminology.hl7.org/CodeSystem/hl7TermMaintInfra",
+            "code": "preferredForLanguage"
           },
           "value": "externe Patienten-ID"
         }
@@ -1998,8 +1998,8 @@
         {
           "language": "de",
           "use": {
-            "code": "preferredForLanguage",
-            "system": "http://terminology.hl7.org/CodeSystem/hl7TermMaintInfra"
+            "system": "http://terminology.hl7.org/CodeSystem/hl7TermMaintInfra",
+            "code": "preferredForLanguage"
           },
           "value": "Seniorenkartennummer"
         }
@@ -2208,8 +2208,8 @@
         {
           "language": "de",
           "use": {
-            "code": "preferredForLanguage",
-            "system": "http://terminology.hl7.org/CodeSystem/hl7TermMaintInfra"
+            "system": "http://terminology.hl7.org/CodeSystem/hl7TermMaintInfra",
+            "code": "preferredForLanguage"
           },
           "value": "Sozialversicherungsnummer"
         }
@@ -2246,8 +2246,8 @@
         {
           "language": "de",
           "use": {
-            "code": "preferredForLanguage",
-            "system": "http://terminology.hl7.org/CodeSystem/hl7TermMaintInfra"
+            "system": "http://terminology.hl7.org/CodeSystem/hl7TermMaintInfra",
+            "code": "preferredForLanguage"
           },
           "value": "Steueridentifikationsnummer"
         }
@@ -2376,8 +2376,8 @@
         {
           "language": "de",
           "use": {
-            "code": "preferredForLanguage",
-            "system": "http://terminology.hl7.org/CodeSystem/hl7TermMaintInfra"
+            "system": "http://terminology.hl7.org/CodeSystem/hl7TermMaintInfra",
+            "code": "preferredForLanguage"
           },
           "value": "Fallnummer"
         }
@@ -2398,8 +2398,8 @@
         {
           "language": "de",
           "use": {
-            "code": "preferredForLanguage",
-            "system": "http://terminology.hl7.org/CodeSystem/hl7TermMaintInfra"
+            "system": "http://terminology.hl7.org/CodeSystem/hl7TermMaintInfra",
+            "code": "preferredForLanguage"
           },
           "value": "Besucherkennung"
         }
@@ -2424,8 +2424,8 @@
         {
           "language": "de",
           "use": {
-            "code": "preferredForLanguage",
-            "system": "http://terminology.hl7.org/CodeSystem/hl7TermMaintInfra"
+            "system": "http://terminology.hl7.org/CodeSystem/hl7TermMaintInfra",
+            "code": "preferredForLanguage"
           },
           "value": "VISA"
         }
@@ -2514,8 +2514,8 @@
         {
           "language": "de",
           "use": {
-            "code": "preferredForLanguage",
-            "system": "http://terminology.hl7.org/CodeSystem/hl7TermMaintInfra"
+            "system": "http://terminology.hl7.org/CodeSystem/hl7TermMaintInfra",
+            "code": "preferredForLanguage"
           },
           "value": "Organisations-ID"
         }

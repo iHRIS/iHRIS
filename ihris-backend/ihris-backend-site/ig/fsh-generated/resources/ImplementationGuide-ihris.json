@@ -533,6 +533,14 @@
       },
       {
         "reference": {
+          "reference": "StructureDefinition/iHRISReportParameters"
+        },
+        "name": "ihRIS Report parameters",
+        "description": "Lists parameters ",
+        "exampleBoolean": false
+      },
+      {
+        "reference": {
           "reference": "StructureDefinition/ihris-resource-relationships"
         },
         "name": "iHRIS Resource Relationships",
@@ -988,13 +996,6 @@
       },
       {
         "reference": {
-          "reference": "ValueSet/na-resource-valueset"
-        },
-        "name": "Value Set for iHRIS Namibia Basic Resources.",
-        "exampleBoolean": false
-      },
-      {
-        "reference": {
           "reference": "ValueSet/name-use"
         },
         "name": "NameUse",
@@ -1114,7 +1115,7 @@
       },
       {
         "reference": {
-          "reference": "CodeSystem/3654"
+          "reference": "CodeSystem/v2-0360"
         },
         "name": "degreeLicenseCertificate",
         "description": "Code system of concepts specifying an educational degree (e.g., MD).  Used in the CNN datatype (names and identifiers of clinicians) in Version 2 messaging.  Used in HL7 Version 2.x messaging in the CNN segment; note that in releases of HL7 prior to 2.3.1, was also used in person names (XPN), but this use was deprecated, then withdrawn in 2.7.",
@@ -1130,7 +1131,7 @@
       },
       {
         "reference": {
-          "reference": "CodeSystem/2103"
+          "reference": "CodeSystem/v2-0203"
         },
         "name": "identifierType",
         "description": "HL7-defined code system of concepts specifying type of identifier. Used in HL7 Version 2.x messaging data types CX, PLN, PPN, XCN and XON.",
@@ -1373,13 +1374,6 @@
         },
         "name": "Location type",
         "description": "This example value set defines a set of codes that can be used to indicate the physical form of the Location.",
-        "exampleBoolean": false
-      },
-      {
-        "reference": {
-          "reference": "CodeSystem/na-resource-codesystem"
-        },
-        "name": "Code System for iHRIS Basic Resources.",
         "exampleBoolean": false
       },
       {
