@@ -39,11 +39,11 @@
               "valueString": "Fullname"
             },
             {
-              "url": "label",
+              "url": "name",
               "valueString": "fullname"
             },
             {
-              "url": "name",
+              "url": "fhirpath",
               "valueString": "concat(name.where(use='official').last().given,name.where(use='official').last().family)"
             },
             {
@@ -67,11 +67,11 @@
               "valueString": "Phone Number"
             },
             {
-              "url": "label",
+              "url": "name",
               "valueString": "phone"
             },
             {
-              "url": "name",
+              "url": "fhirpath",
               "valueString": "telecom.where(system='phone').value"
             }
           ]
@@ -79,10 +79,10 @@
         {
           "url": "http://ihris.org/fhir/StructureDefinition/iHRISReportElement",
           "extension": [{
-            "url": "label",
+            "url": "name",
             "valueString": "ihris-related-group"
           }, {
-            "url": "name",
+            "url": "fhirpath",
             "valueString": "extension.where(url='http://ihris.org/fhir/StructureDefinition/ihris-related-group').extension.where(url='location').valueString"
           }]
         }
@@ -121,11 +121,11 @@
               "valueString": "Contact Group"
             },
             {
-              "url": "label",
+              "url": "name",
               "valueString": "groupname"
             },
             {
-              "url": "name",
+              "url": "fhirpath",
               "valueString": "name"
             },
             {
@@ -197,11 +197,11 @@
               "valueString": "Facility"
             },
             {
-              "url": "label",
+              "url": "name",
               "valueString": "facilityName"
             },
             {
-              "url": "name",
+              "url": "fhirpath",
               "valueString": "name"
             },
             {
@@ -269,11 +269,11 @@
               "valueString": "County"
             },
             {
-              "url": "label",
+              "url": "name",
               "valueString": "regionName"
             },
             {
-              "url": "name",
+              "url": "fhirpath",
               "valueString": "name"
             },
             {
@@ -317,11 +317,11 @@
               "valueString": "Job Title"
             },
             {
-              "url": "label",
+              "url": "name",
               "valueString": "job"
             },
             {
-              "url": "name",
+              "url": "fhirpath",
               "valueString": "extension.where(url='http://ihris.org/fhir/StructureDefinition/iHIRSPositionDetails').extension.where(url='http://ihris.org/fhir/CodeSystem/ihris-job').extension.where(url='name').valueString"
             },
             {
@@ -341,11 +341,11 @@
               "valueString": "Cadre"
             },
             {
-              "url": "label",
+              "url": "name",
               "valueString": "cadre"
             },
             {
-              "url": "name",
+              "url": "fhirpath",
               "valueString": "extension.where(url='http://ihris.org/fhir/StructureDefinition/iHIRSPositionDetails').extension.where(url='http://ihris.org/fhir/CodeSystem/ihris-cadre').extension.where(url='name').valueString"
             },
             {

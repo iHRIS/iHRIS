@@ -1,0 +1,95 @@
+---
+- name: Installing Apache tomcat{{tomcat_v_num}}
+  hosts: all
+  tasks:
+    - name: Add the OS specific variables
+      include_vars:
+        file: index.yaml
+
+    - name: Download JDK 17
+      get_url:
+        url: "https://download.oracle.com/java/{{java_ver}}/latest/jdk-{{java_ver}}_linux-x64_bin.deb"
+        dest: "/tmp/jdk-{{java_ver}}.deb"
+
+    - name: Installing JDK {{java_ver}}
+      ansible.builtin.apt: deb="/tmp/jdk-{{java_ver}}.deb"
+
+    - name: Add tomcat group
+      group:
+        name: tomcat
+
+    - name: Add "tomcat" user
+      user:
+        name: tomcat
+        group: tomcat
+        home: /opt/tomcat{{tomcat_v_num}}
+        createhome: no
+        system: yes
+
+    - name: Create a Tomcat Directory
+      file:
+        path: /opt/tomcat{{tomcat_v_num}}
+        owner: tomcat
+        group: tomcat
+        mode: 755
+        recurse: yes
+
+    - name: download & unarchive tomcat{{tomcat_v_num}}
+      unarchive:
+        src: https://archive.apache.org/dist/tomcat/tomcat-{{tomcat_v_num}}/v{{tomcat_ver}}/bin/apache-tomcat-{{tomcat_ver}}.tar.gz
+        dest: /opt/tomcat{{tomcat_v_num}}
+        remote_src: yes
+        extra_opts: [--strip-components=1]
+
+    - name: Change ownership of tomcat directory
+      file:
+        path: /opt/tomcat{{tomcat_v_num}}
+        owner: tomcat
+        group: tomcat
+        mode: "u+rwx,g+rx,o=rx"
+        recurse: yes
+        state: directory
+
+    - name: Copy tomcat service file
+      template:
+        src: templates/tomcat.j2
+        dest: /etc/init.d/tomcat
+      when: ansible_service_mgr == "systemd"
+
+    - name: Create symlink to start/stop/restart tomcat
+      file:
+        src: /etc/init.d/tomcat
+        dest: /etc/rc2.d/S99tomcat
+        state: link
+
+    - name: Making tomcat service executable by users
+      file:
+        path: /etc/init.d/tomcat
+        mode: "ugo=x"
+
+    - name: Start tomcat
+      service:
+        name: tomcat
+        enabled: yes
+        state: started
+
+    - name: Set UI access credentials
+      template:
+        src: tomcat-users.xml.j2
+        dest: /opt/tomcat{{tomcat_v_num}}/conf/tomcat-users.xml
+      notify: restart tomcat
+
+    - name: Allow access to Manager and Host Manager apps from any IP
+      template:
+        src: context.xml.j2 
+        dest: "{{ item }}"
+      with_items:
+        - /opt/tomcat{{tomcat_v_num}}/webapps/host-manager/META-INF/context.xml
+        - /opt/tomcat{{tomcat_v_num}}/webapps/manager/META-INF/context.xml
+      notify: restart tomcat
+
+  handlers:
+    - name: restart tomcat
+      service:
+        name: tomcat
+        state: restarted

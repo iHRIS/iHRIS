@@ -1,0 +1,49 @@
+#!/bin/bash
+### BEGIN INIT INFO
+# Provides:          Tomcat
+# Required-Start:    $all
+# Required-Stop:
+# Default-Start:     2 3 4 5
+# Default-Stop:
+# Short-Description: Tomcat Server basic start/shutdown script
+### END INIT INFO
+
+TOMCAT_HOME=/opt/tomcat{{tomcat_v_num}}/bin
+START_TOMCAT=/opt/tomcat{{tomcat_v_num}}/bin/startup.sh
+STOP_TOMCAT=/opt/tomcat{{tomcat_v_num}}/bin/shutdown.sh
+
+start() {
+ echo -n "Starting tomcat: "
+ cd $TOMCAT_HOME
+ ${START_TOMCAT}
+ echo "done."
+}
+
+stop() {
+ echo -n "Shutting down tomcat: "
+ cd $TOMCAT_HOME
+ ${STOP_TOMCAT}
+ echo "done."
+}
+
+case "$1" in
+ 
+start)
+ start
+ ;;
+
+stop)
+ stop
+ ;;
+
+restart)
+ stop
+ sleep 10
+ start
+ ;;
+
+*)
+ echo "Usage: $0 {start|stop|restart}"
+
+esac
+exit 0

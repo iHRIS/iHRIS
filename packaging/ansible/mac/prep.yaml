@@ -1,0 +1,58 @@
+---
+- name: Installing supporting packages
+  hosts: all
+  become: yes
+
+  tasks:
+
+    - name: Install Homebrew
+      command: "/bin/bash -c \"$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)\""
+      args:
+        creates: "/usr/local/bin/brew"
+
+    - name: Updating apt cache
+      apt:
+        update_cache: yes
+
+    - name: Install basic packages
+      apt:
+        name: ['git', 'python3-psycopg2']
+        state: present
+
+    - name: Install Redis
+      homebrew:
+        name: redis
+        state: present
+
+    - name: Start redis
+      service:
+        name: redis
+        state: started
+        enabled: yes
+
+    - name: Download NodeSource setup script
+      get_url:
+        url: https://deb.nodesource.com/setup_18.x
+        dest: /tmp/setup_node.sh
+
+    - name: Execute NodeSource setup script
+      command: /bin/bash /tmp/setup_node.sh
+
+    - name: Install Node.js
+      apt:
+        name: nodejs
+        state: present
+
+    - name: Remove temporary setup script
+      file:
+        path: /tmp/setup_node.sh
+        state: absent
+
+    # - name: Install npm
+    #   apt:
+    #     name: npm
+    #     state: present
+
+    - name: Install fsh-sushi
+      shell: |
+        npm install -g fsh-sushi
