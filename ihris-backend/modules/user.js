@@ -190,14 +190,34 @@ const user = {
                                     return resolve();
                                 }
                                 const id = extension.valueReference.reference.split('/')[1];
-                                fhirAxios.read('Basic', id).then((task) => {
-                                    const taskExt = task.extension && task.extension.find(ext => ext.url === `${nconf.get('profileBaseUrl')}/StructureDefinition/task-attributes`);
-                                    if (taskExt) {
-                                        role.extension[index] = {};
-                                        role.extension[index].url = TASK_EXTENSION;
-                                        role.extension[index].extension = taskExt.extension;
+                                fhirAxios.read('Basic', id).then(async (task) => {
+                                  const taskExt = task.extension && task.extension.find(ext => ext.url === `${nconf.get('profileBaseUrl')}/StructureDefinition/task-attributes`);
+                                  const compositeTasks = task.extension && task.extension.filter(ext => ext.url === `${nconf.get('profileBaseUrl')}/StructureDefinition/composite-task`);
+                                  if (taskExt) {
+                                    role.extension[index] = {};
+                                    role.extension[index].url = TASK_EXTENSION;
+                                    role.extension[index].extension = taskExt.extension;
+                                  }
+                                  if (compositeTasks.length > 0) {
+                                    for (let compositeTask of compositeTasks) {
+                                      let id = compositeTask.valueReference.reference.split('/')[1];
+                                      try {
+                                        const res = await fhirAxios.read('Basic', id);
+                                        const subTaskExt = res.extension && res.extension.find(ext => ext.url === `${nconf.get('profileBaseUrl')}/StructureDefinition/task-attributes`);
+                                        if (subTaskExt) {
+                                          let subTask = {};
+                                          subTask.url = TASK_EXTENSION;
+                                          subTask.extension = subTaskExt.extension;
+                                          role.extension.push(subTask);
+                                        }
+                                        resolve();
+                                      } catch (err) {
+                                        winston.error(err);
+                                        reject();
+                                      }
                                     }
-                                    resolve();
+                                  }
+                                  resolve();
                                 }).catch((err) => {
                                     winston.error(err);
                                     return reject();

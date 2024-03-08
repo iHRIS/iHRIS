@@ -93,26 +93,26 @@ router.get("/site", async function (req, res) {
                 }
 
             });
-        }
-        site.user.obj = JSON.parse(JSON.stringify(req.user, 0, 2))
-        let passwd = site.user.obj.resource.extension.find((ext) => {
-            return ext.url === "http://ihris.org/fhir/StructureDefinition/ihris-password"
-        })
-        if(passwd) {
-            let passwdExt = passwd.extension.findIndex((ext) => {
-                return ext.url === 'password'
+            site.user.obj = JSON.parse(JSON.stringify(req.user, 0, 2))
+            let passwd = site.user.obj.resource.extension.find((ext) => {
+                return ext.url === "http://ihris.org/fhir/StructureDefinition/ihris-password"
             })
-            if(passwdExt != -1) {
-                passwd.extension.splice(passwdExt, 1)
+            if(passwd) {
+                let passwdExt = passwd.extension.findIndex((ext) => {
+                    return ext.url === 'password'
+                })
+                if(passwdExt != -1) {
+                    passwd.extension.splice(passwdExt, 1)
+                }
+                let saltExt = passwd.extension.findIndex((ext) => {
+                    return ext.url === 'salt'
+                })
+                if(saltExt != -1) {
+                    passwd.extension.splice(saltExt, 1)
+                }
             }
-            let saltExt = passwd.extension.findIndex((ext) => {
-                return ext.url === 'salt'
-            })
-            if(saltExt != -1) {
-                passwd.extension.splice(saltExt, 1)
-            }
+            filterNavigation(req.user, site.nav);
         }
-        filterNavigation(req.user, site.nav);
     } else {
         site.user = {loggedin: false};
         delete site.nav;

@@ -6,14 +6,6 @@
       "http://ihris.org/fhir/StructureDefinition/ihris-person-user"
     ]
   },
-  "extension": [
-    {
-      "url": "http://ihris.org/fhir/StructureDefinition/ihris-assign-role",
-      "valueReference": {
-        "reference": "Basic/ihris-role-public"
-      }
-    }
-  ],
   "name": [
     {
       "use": "official",

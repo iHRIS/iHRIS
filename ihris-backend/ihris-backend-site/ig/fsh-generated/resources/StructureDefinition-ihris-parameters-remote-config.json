@@ -1,6 +1,12 @@
 {
   "resourceType": "StructureDefinition",
   "id": "ihris-parameters-remote-config",
+  "extension": [
+    {
+      "url": "http://hl7.org/fhir/StructureDefinition/structuredefinition-category",
+      "valueString": "Foundation.Other"
+    }
+  ],
   "url": "http://ihris.org/fhir/StructureDefinition/ihris-parameters-remote-config",
   "version": "0.1.0",
   "name": "IhrisParametersRemoteConfig",

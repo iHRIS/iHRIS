@@ -178,34 +178,18 @@
           ]
         },
         {
-          "extension": [
-            {
-              "extension": [
-                {
-                  "url": "key",
-                  "valueId": "ihris-password-strength-check"
-                },
-                {
-                  "url": "severity",
-                  "valueCode": "error"
-                },
-                {
-                  "url": "expression",
-                  "valueString": "matches('^(?=.*\\\\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$')"
-                },
-                {
-                  "url": "human",
-                  "valueString": "Password Should be Minimum eight characters, at least one uppercase letter, one lowercase letter, one number and one special character"
-                }
-              ],
-              "url": "http://hl7.org/fhir/StructureDefinition/questionnaire-constraint"
-            }
-          ],
+          "linkId": "display2",
+          "text": "If editing, leave blank to keep the same password. Password is required if not editing",
+          "type": "display",
+          "required": true,
+          "repeats": false
+        },
+        {
           "linkId": "Person.extension[3]#password",
           "definition": "http://ihris.org/fhir/StructureDefinition/ihris-person-user#Person.extension:initial-password.value[x]:valueString",
           "text": "Password",
           "type": "string",
-          "required": true,
+          "required": false,
           "repeats": false
         },
         {
@@ -213,7 +197,7 @@
           "definition": "http://ihris.org/fhir/StructureDefinition/ihris-person-user#Person.extension:confirm-initial-password.value[x]:valueString",
           "text": "Confirm Password",
           "type": "string",
-          "required": true,
+          "required": false,
           "repeats": false
         }
       ],

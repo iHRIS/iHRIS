@@ -1,6 +1,16 @@
 {
   "resourceType": "StructureDefinition",
   "id": "ihris-basic-employment-history",
+  "extension": [
+    {
+      "url": "http://hl7.org/fhir/StructureDefinition/structuredefinition-category",
+      "valueString": "Foundation.Other"
+    },
+    {
+      "url": "http://hl7.org/fhir/StructureDefinition/structuredefinition-security-category",
+      "valueCode": "not-classified"
+    }
+  ],
   "url": "http://ihris.org/fhir/StructureDefinition/ihris-basic-employment-history",
   "version": "0.1.0",
   "name": "IhrisBasicEmploymentHistory",
