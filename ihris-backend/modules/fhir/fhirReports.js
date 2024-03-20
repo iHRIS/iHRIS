@@ -27,7 +27,7 @@ const fhirReports = {
               FHIRBaseURL: nconf.get("fhir:base") || "http://localhost:8080/hapi/fhir",
               FHIRUsername: nconf.get("fhir:username"),
               FHIRPassword: nconf.get("fhir:password"),
-              relationshipsIDs: ['ihris-es-report-grievance'],
+              relationshipsIDs: [],
               ESModulesBasePath: nconf.get("app:site:path") + "/modules/es",
               DBConnection: {
                 database: nconf.get("database:name"),
