@@ -19,6 +19,7 @@
     "express-fileupload": "^1.4.0",
     "express-session": "^1.17.2",
     "fhir2es": "^5.0.0",
+    "fhir2sql": "^1.0.0",
     "fhirpath": "^2.9.0",
     "fsh-sushi": "^2.5.0",
     "googleapis": "^101.0.0",
