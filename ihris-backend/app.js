@@ -139,6 +139,10 @@ async function startUp() {
   const configRouter = require('./routes/config');
   const authRouter = require('./routes/auth');
   const esRouter = require('./routes/es');
+  let fhir2sqlRouter
+  if(nconf.get("fhir:flattener") === "fhir2sql") {
+    fhir2sqlRouter = require('./routes/fhir2sql');
+  }
   const questionnaireRouter = require('./routes/questionnaire');
   const fhirRouter = require('./routes/fhir');
   const ihrisApps = require('./routes/apps');
@@ -197,6 +201,9 @@ async function startUp() {
   app.use('/fhir', fhirRouter);
   app.use('/apps', ihrisApps);
   app.use('/es', esRouter);
+  if(nconf.get("fhir:flattener") === "fhir2sql") {
+    app.use('/fhir2sql', fhir2sqlRouter);
+  }
 
   const loadModules = nconf.get('modules');
   if (loadModules) {

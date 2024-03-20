@@ -1651,6 +1651,9 @@ router.get('/report/es/:report', (req, res) => {
                 let label = element.extension.find((ext) => {
                     return ext.url === 'name'
                 })
+                let type = element.extension.find((ext) => {
+                    return ext.url === 'type'
+                })
                 let display = element.extension.find((ext) => {
                     return ext.url === 'display'
                 })
@@ -1671,11 +1674,17 @@ router.get('/report/es/:report', (req, res) => {
                     if (dropDownFilter) {
                         isDropDown = true
                     }
-                    reportData.filters.push({
+                    let filterParams = {
                         field: label.valueString,
                         display: display.valueString,
                         isDropDown: isDropDown
-                    })
+                    }
+                    if(type) {
+                        filterParams.dataType = type.valueString
+                    } else {
+                        filterParams.dataType = "string"
+                    }
+                    reportData.filters.push(filterParams)
                 }
                 esField = label.valueString
                 displayName = display.valueString
@@ -1695,35 +1704,43 @@ router.get('/report/es/:report', (req, res) => {
                 password: nconf.get('elasticsearch:password'),
             }
         };
-        axios(options).then((mappings) => {
-            reportData.mappings = mappings.data[indexName]
-            for (let index in reportData.filters) {
-                let field = reportData.filters[index].field
-                if (!mappings.data[indexName].mappings.properties[field]) {
-                    logger.error('Field ' + field + 'not found on elasticsearch mapping')
-                    continue
+        if(nconf.get("fhir:flattener") !== "fhir2sql") {
+            await axios(options).then((mappings) => {
+                reportData.mappings = mappings.data[indexName]
+                for (let index in reportData.filters) {
+                    let field = reportData.filters[index].field
+                    if (!mappings.data[indexName].mappings.properties[field]) {
+                        logger.error('Field ' + field + 'not found on elasticsearch mapping')
+                        continue
+                    }
+                    let dataType = mappings.data[indexName].mappings.properties[field].type
+                    reportData.filters[index].dataType = dataType
                 }
-                let dataType = mappings.data[indexName].mappings.properties[field].type
-                reportData.filters[index].dataType = dataType
-            }
-            reportData.indexName = indexName
-            let template = `<ihris-es-report @rowSelected='rowSelected' :key="$route.params.report" page="${req.params.report}" label="${reportName}" :reportData="reportData" :terms="terms" :termsConditions="termsConditions" :hideCheckboxes="hideCheckboxes" :hideLabel="hideLabel" :hideExport="hideExport" :hideReportCustomization="hideReportCustomization" :disableOpenResourcePage="disableOpenResourcePage">`
-            for (let filter of reportData.filters) {
-                if (filter.isDropDown) {
-                    template += `<ihris-es-search-term v-on:termChange="searchData" label="${filter.display}" expression="${filter.field}" isDropDown="${filter.isDropDown}" :reportData="reportData" :hideFilters="hideFilters"></ihris-es-search-term>\n`
-                } else {
-                    template += `<ihris-es-search-term v-on:termChange="searchData" label="${filter.display}" expression="${filter.field}" :reportData="reportData" :hideFilters="hideFilters"></ihris-es-search-term>\n`
-                }
-            }
-            template += `</ihris-es-report>`
-            return res.status(200).json({
-                reportTemplate: template,
-                reportData: reportData
+            }).catch((err) => {
+                logger.error(err.message);
+                logger.error(err.stack);
+                return res.status(500).send()
             })
-        }).catch((err) => {
-            logger.error(err.message);
-            logger.error(err.stack);
-            return res.status(500).send()
+        }
+        reportData.indexName = indexName
+        let reportComp = "ihris-es-report"
+        let searchTermComp = "ihris-es-search-term"
+        if(nconf.get("fhir:flattener") === "fhir2sql") {
+            reportComp = "ihris-sql-report"
+            searchTermComp = "ihris-sql-search-term"
+        }
+        let template = `<${reportComp} @rowSelected='rowSelected' :key="$route.params.report" page="${req.params.report}" label="${reportName}" :reportData="reportData" :terms="terms" :termsConditions="termsConditions" :hideCheckboxes="hideCheckboxes" :hideLabel="hideLabel" :hideExport="hideExport" :hideReportCustomization="hideReportCustomization" :disableOpenResourcePage="disableOpenResourcePage">`
+        for (let filter of reportData.filters) {
+            if (filter.isDropDown) {
+                template += `<${searchTermComp} v-on:termChange="searchData" label="${filter.display}" expression="${filter.field}" isDropDown="${filter.isDropDown}" :reportData="reportData" :hideFilters="hideFilters"></${searchTermComp}>\n`
+            } else {
+                template += `<${searchTermComp} v-on:termChange="searchData" label="${filter.display}" expression="${filter.field}" :reportData="reportData" :hideFilters="hideFilters"></${searchTermComp}>\n`
+            }
+        }
+        template += `</${reportComp}>`
+        return res.status(200).json({
+            reportTemplate: template,
+            reportData: reportData
         })
     }).catch((err) => {
         console.log(err);

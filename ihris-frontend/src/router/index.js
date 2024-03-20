@@ -71,8 +71,8 @@ const routes = [{
   },
   {
     path: '/report/:report',
-    name: 'mhero-reports',
-    component: () => import( /* webpackChunkName: "mhero" */ "../views/mhero/mhero-reports.vue")
+    name: 'reports',
+    component: () => import( /* webpackChunkName: "mhero" */ "../views/reports.vue")
   },
   /*
   {

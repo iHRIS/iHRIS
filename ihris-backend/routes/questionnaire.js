@@ -49,7 +49,6 @@ router.post("/QuestionnaireResponse", (req, res, next) => {
             }
         }
     }
-
     let workflowQuestionnaires = nconf.get("workflow:questionnaire")
     let workflow = Object.keys(workflowQuestionnaires).find(wf => workflowQuestionnaires[wf].url === req.body.questionnaire)
 

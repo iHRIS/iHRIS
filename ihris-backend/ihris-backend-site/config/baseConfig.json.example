@@ -76,6 +76,26 @@
       "valueString": "http://localhost:8080/hapi/fhir"
     },
     {
+      "name": "fhir:flattener",
+      "valueString": "fhir2es"
+    },
+    {
+      "name": "database:name",
+      "valueString": "hapi"
+    },
+    {
+      "name": "database:username",
+      "valueString": "hapi"
+    },
+    {
+      "name": "database:password",
+      "valueString": "hapi"
+    },
+    {
+      "name": "database:dialect",
+      "valueString": "postgres"
+    },
+    {
       "name": "emnutt:base",
       "valueString": "http://localhost:3002/emNutt/fhir"
     },

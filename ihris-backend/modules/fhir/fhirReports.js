@@ -1,6 +1,5 @@
 const nconf = require('../config')
 const axios = require('axios')
-const { CacheFhirToES } = require('fhir2es')
 const logger = require('../../winston')
 
 const DEFAULT_DELAY = 900000
@@ -22,17 +21,35 @@ const fhirReports = {
 
       axios.get( server, { auth: auth } ).then( (response) => {
         if ( response.status === 200 ) {
-          fhirReports._caching = new CacheFhirToES( {
-            ESBaseURL: server,
-            ESUsername: username,
-            ESPassword: password,
-            ESMaxCompilationRate: nconf.get("elasticsearch:max_compiliation_rate") || "100000/1m",
-            ESMaxScrollContext: nconf.get("elasticsearch:max_scroll_context") || "100000",
-            FHIRBaseURL: nconf.get("fhir:base") || "http://localhost:8080/hapi/fhir",
-            FHIRUsername: nconf.get("fhir:username"),
-            FHIRPassword: nconf.get("fhir:password"),
-            ESModulesBasePath: nconf.get("app:site:path") + "/modules/es"
-          } )
+          if(nconf.get("fhir:flattener") === "fhir2sql") {
+            const { CacheFhirToES } = require('fhir2sql')
+            fhirReports._caching = new CacheFhirToES( {
+              FHIRBaseURL: nconf.get("fhir:base") || "http://localhost:8080/hapi/fhir",
+              FHIRUsername: nconf.get("fhir:username"),
+              FHIRPassword: nconf.get("fhir:password"),
+              relationshipsIDs: ['ihris-es-report-grievance'],
+              ESModulesBasePath: nconf.get("app:site:path") + "/modules/es",
+              DBConnection: {
+                database: nconf.get("database:name"),
+                username: nconf.get("database:username"),
+                password: nconf.get("database:password"),
+                dialect: nconf.get("database:dialect") /* one of 'mysql' | 'postgres' | 'sqlite' | 'mariadb' | 'mssql' | 'db2' | 'snowflake' | 'oracle' */
+              }
+            } )
+          } else {
+            const { CacheFhirToES } = require('fhir2es')
+            fhirReports._caching = new CacheFhirToES( {
+              ESBaseURL: server,
+              ESUsername: username,
+              ESPassword: password,
+              ESMaxCompilationRate: nconf.get("elasticsearch:max_compiliation_rate") || "100000/1m",
+              ESMaxScrollContext: nconf.get("elasticsearch:max_scroll_context") || "100000",
+              FHIRBaseURL: nconf.get("fhir:base") || "http://localhost:8080/hapi/fhir",
+              FHIRUsername: nconf.get("fhir:username"),
+              FHIRPassword: nconf.get("fhir:password"),
+              ESModulesBasePath: nconf.get("app:site:path") + "/modules/es"
+            } )
+          }
           resolve(true)
         } else {
           reject(new Error("Couldn't connect to ElasticSearch: "+server))

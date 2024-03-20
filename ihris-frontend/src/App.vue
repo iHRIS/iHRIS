@@ -175,7 +175,6 @@ export default {
     }
     this.updateConfig()
     eventBus.$on("updateconfig", () => {
-      console.log('here');
       this.updateConfig()
     })
   }

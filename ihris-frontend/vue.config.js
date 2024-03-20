@@ -27,6 +27,10 @@ module.exports = {
         target: 'http://localhost:3000/',
         logLevel: 'debug'
       },
+      '^/fhir2sql': {
+        target: 'http://localhost:3000/',
+        logLevel: 'debug'
+      },
       '^/users': {
         target: 'http://localhost:3000/',
         logLevel: 'debug'

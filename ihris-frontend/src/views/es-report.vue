@@ -107,6 +107,14 @@ export default {
                   "ihris-es-search-term": () =>
                     import(
                       /* webpackChunkName: "ihris-es-search-term" */ "@/components/ihris/ihris-es-search-term"
+                    ),
+                    "ihris-sql-report": () =>
+                    import(
+                      /* webpackChunkName: "ihris-es-report" */ "@/components/ihris/ihris-sql-report"
+                    ),
+                  "ihris-sql-search-term": () =>
+                    import(
+                      /* webpackChunkName: "ihris-es-search-term" */ "@/components/ihris/ihris-sql-search-term"
                     )
                 },
                 template: data.reportTemplate,
