@@ -88,6 +88,7 @@ export default {
       photoURL: undefined,
       data: {},
       expand: false,
+      page:undefined
     };
   },
   components: {},
@@ -148,6 +149,9 @@ export default {
       }
     },
     getParameter() {
+      if(this.$router.history.current?.params?.page){
+        this.page = this.$router.history.current.params.page
+      }
       if (this.$router.history.current.query) {
         if (this.$router.history.current?.query["PractitionerRole.practitioner.reference"]) {
           this.practitionerId = this.$router.history.current.query["PractitionerRole.practitioner.reference"].split("/").pop()
@@ -164,7 +168,13 @@ export default {
         fetch("/config/site").then(response => {
           response.json().then(data => {
             let intro
-            if (data.hasOwnProperty("intro")) intro = data.intro
+            if (data.hasOwnProperty("intro")) {
+              if(data.intro.hasOwnProperty(this.page)){
+                intro = data.intro[this.page]
+              } else {
+                intro = data.intro.default
+              }
+            }
             this.title = intro.title
             let internalData = intro.data
             let keys = Object.keys(internalData)

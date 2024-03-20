@@ -181,6 +181,41 @@ const user = {
             }).catch(err => reject(err));
 
             function resolveTasks(role) {
+                function checkTaskInIt(array, target) {
+                  return array.some(obj => JSON.stringify(obj) === JSON.stringify(target));
+                }
+
+                async function resolveCompositeTasks(compositeTask, resolvedCompositeTasks, resolve, reject) {
+                    if (checkTaskInIt(resolvedCompositeTasks, compositeTask)) {
+                        return resolve();
+                    }
+                    resolvedCompositeTasks.push(compositeTask);
+                    let taskId = compositeTask.valueReference.reference
+                    let id = taskId.split('/')[1];
+                    try {
+                        const res = await fhirAxios.read('Basic', id);
+                        const subTaskExt = res.extension && res.extension.find(ext => ext.url === `${nconf.get('profileBaseUrl')}/StructureDefinition/task-attributes`);
+                        const compositeTasks = res.extension && res.extension.filter(ext => ext.url === `${nconf.get('profileBaseUrl')}/StructureDefinition/composite-task`);
+                        if (subTaskExt) {
+                            let subTask = {};
+                            subTask.url = TASK_EXTENSION;
+                            subTask.extension = subTaskExt.extension;
+                            if (!checkTaskInIt(role.extension, subTask)) {
+                                role.extension.push(subTask);
+                            }
+                        }
+                        if (compositeTasks.length > 0) {
+                            for (let compositeTask of compositeTasks) {
+                                await resolveCompositeTasks(compositeTask, resolvedCompositeTasks, resolve, reject);
+                            }
+                        }
+                        resolve();
+                    } catch (err) {
+                        winston.error(err);
+                        reject();
+                    }
+                }
+
                 return new Promise((resolve, reject) => {
                     if (Array.isArray(role.extension)) {
                         const promises = [];
@@ -190,6 +225,7 @@ const user = {
                                     return resolve();
                                 }
                                 const id = extension.valueReference.reference.split('/')[1];
+                                let resolvedCompositeTasks = [];
                                 fhirAxios.read('Basic', id).then(async (task) => {
                                   const taskExt = task.extension && task.extension.find(ext => ext.url === `${nconf.get('profileBaseUrl')}/StructureDefinition/task-attributes`);
                                   const compositeTasks = task.extension && task.extension.filter(ext => ext.url === `${nconf.get('profileBaseUrl')}/StructureDefinition/composite-task`);
@@ -199,25 +235,11 @@ const user = {
                                     role.extension[index].extension = taskExt.extension;
                                   }
                                   if (compositeTasks.length > 0) {
-                                    for (let compositeTask of compositeTasks) {
-                                      let id = compositeTask.valueReference.reference.split('/')[1];
-                                      try {
-                                        const res = await fhirAxios.read('Basic', id);
-                                        const subTaskExt = res.extension && res.extension.find(ext => ext.url === `${nconf.get('profileBaseUrl')}/StructureDefinition/task-attributes`);
-                                        if (subTaskExt) {
-                                          let subTask = {};
-                                          subTask.url = TASK_EXTENSION;
-                                          subTask.extension = subTaskExt.extension;
-                                          role.extension.push(subTask);
-                                        }
-                                        resolve();
-                                      } catch (err) {
-                                        winston.error(err);
-                                        reject();
+                                      for (let compositeTask of compositeTasks) {
+                                          await resolveCompositeTasks(compositeTask,resolvedCompositeTasks, resolve, reject);
                                       }
-                                    }
                                   }
-                                  resolve();
+                                    resolve();
                                 }).catch((err) => {
                                     winston.error(err);
                                     return reject();
