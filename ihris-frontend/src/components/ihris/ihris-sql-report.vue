@@ -466,7 +466,7 @@ export default {
     },
     reportExport(format) {
       this.downloading = true;
-      let url = `/es/export/${format}/${this.reportData.indexName}`;
+      let url = `/fhir2sql/export/${format}/${this.reportData.indexName}`;
       let body = {
         query: this.buildTerms(),
         headers: this.headers,

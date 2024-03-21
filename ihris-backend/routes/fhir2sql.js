@@ -192,7 +192,6 @@ router.post("/export/:format/:index", (req, res) => {
   if ( !req.user ) {
     return res.status(401).json( outcomes.NOTLOGGEDIN)
   }
-  let searchQry = req.body.query;
   let headers = req.body.headers;
   let label = req.body.label;
   let isSelected = req.body.selected;
@@ -240,61 +239,72 @@ router.post("/export/:format/:index", (req, res) => {
       // res.send(fileName.replace(`${__dirname}/..`, ""));
     }
   } else {
-    es.getData(
-        { indexName: req.params.index, searchQuery: searchQry },
-        (err, documents) => {
-          if (err) {
-            return res.status(500).send();
-          }
-          let rows = "";
-          for (let header of headers) {
-            if (!rows) {
-              rows = header.text;
-            } else {
-              rows += "," + header.text;
-            }
-          }
-          rows += os.EOL;
-          for (let doc of documents) {
-            let row;
-            for (let header of headers) {
-              if (row === undefined) {
-                if (
-                    doc._source[header.value] === null ||
-                    doc._source[header.value] === undefined
-                ) {
-                  row = " ";
-                } else {
-                  row = '"' + doc._source[header.value] + '"';
-                }
-              } else {
-                if (
-                    doc._source[header.value] === null ||
-                    doc._source[header.value] === undefined
-                ) {
-                  row += ",";
-                } else {
-                  row += "," + '"' + doc._source[header.value] + '"';
-                }
-              }
-            }
-            rows += row + os.EOL;
-          }
-          if (!fs.existsSync(`${__dirname}/../tmp`)) {
-            fs.mkdirSync(`${__dirname}/../tmp`);
-          }
-          let fileName = `${__dirname}/../tmp/${label}-${nanoid(10)}.csv`;
-          fs.writeFileSync(fileName, rows);
-          if (fs.existsSync(fileName)) {
-            res.download(fileName);
-            setTimeout(() => {
-              fs.unlinkSync(fileName);
-            }, 240000);
-            // res.send(fileName.replace(`${__dirname}/..`, ""));
-          }
-          //remove the file after 4 minutes
+    let sorts = req.body.sort
+    let sql = `select * from ${req.params.index}`
+    let where = buildFilters(req.body.query)
+    if(where) {
+      sql += ` where ${where}`
+    }
+    if(sorts && sorts.length) {
+      sql += ` ORDER BY`
+      for(let sort of sorts) {
+        let col = Object.keys(sort)[0]
+        sql += ` ${col} ${sort[col]}`
+      }
+    }
+    sequelize.query(sql, "SELECT").then((response) => {
+      let documents = response[0]
+      let rows = "";
+      for (let header of headers) {
+        if (!rows) {
+          rows = header.text;
+        } else {
+          rows += "," + header.text;
         }
-    );
+      }
+      rows += os.EOL;
+      for (let doc of documents) {
+        let row;
+        for (let header of headers) {
+          if (row === undefined) {
+            if (
+                doc[header.value] === null ||
+                doc[header.value] === undefined
+            ) {
+              row = " ";
+            } else {
+              row = '"' + doc[header.value] + '"';
+            }
+          } else {
+            if (
+                doc[header.value] === null ||
+                doc[header.value] === undefined
+            ) {
+              row += ",";
+            } else {
+              row += "," + '"' + doc[header.value] + '"';
+            }
+          }
+        }
+        rows += row + os.EOL;
+      }
+      if (!fs.existsSync(`${__dirname}/../tmp`)) {
+        fs.mkdirSync(`${__dirname}/../tmp`);
+      }
+      let fileName = `${__dirname}/../tmp/${label}-${nanoid(10)}.csv`;
+      fs.writeFileSync(fileName, rows);
+      if (fs.existsSync(fileName)) {
+        res.download(fileName);
+        setTimeout(() => {
+          fs.unlinkSync(fileName);
+        }, 240000);
+        // res.send(fileName.replace(`${__dirname}/..`, ""));
+      }
+      //remove the file after 4 minutes
+    }).catch((err) => {
+      logger.error(err);
+      return res.status(500).send()
+    })
   }
 });
 
