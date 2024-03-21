@@ -241,8 +241,8 @@ export default {
       });
     }
     for (let field of this.reportData.fieldsDetails) {
-      this.headers.push({ text: field[0], value: this.formatColumn(field[1]) });
-      this.allHeaders.push({ text: field[0], value: this.formatColumn(field[1]) });
+      this.headers.push({ text: field[0], value: field[1] });
+      this.allHeaders.push({ text: field[0], value: field[1] });
     }
     eventBus.$on("reload-report", () => {
       this.getTotalRecords();
@@ -319,13 +319,13 @@ export default {
                 "lte": rangeTwo
               }
               let b = {}
-              b[this.formatColumn(c)] = filterWith
+              b[c] = filterWith
               filterDate.push(b)
             } else {
               let filterWith = {}
               let b = {}
               filterWith[filter[c]] = date[c];
-              b[this.formatColumn(c)] = filterWith
+              b[c] = filterWith
               filterDate.push(b)
             }
             body.ranges = filterDate
@@ -335,9 +335,9 @@ export default {
             }
             if (Array.isArray(this.terms[sTerm])) {
               let terms = {};
-              terms[this.formatColumn(sTerm)] = [];
+              terms[sTerm] = [];
               for (let value of this.terms[sTerm]) {
-                terms[this.formatColumn(sTerm)].push(value);
+                terms[sTerm].push(value);
               }
               if (this.termsConditions[sTerm] === "exclude") {
                 body.must_not.push(terms);
@@ -347,12 +347,12 @@ export default {
             } else {
               if (!sTermDet.isDropDown) {
                 let query = {};
-                query[this.formatColumn(sTerm)] = this.terms[sTerm]
+                query[sTerm] = this.terms[sTerm]
                 query.type = dataType
                 body.must.push(query)
               } else {
                 let terms = {};
-                terms[this.formatColumn(sTerm)] = [this.terms[sTerm]];
+                terms[sTerm] = [this.terms[sTerm]];
                 if (this.termsConditions[sTerm] === "exclude") {
                   body.must_not.push(terms);
                 } else {
@@ -523,15 +523,6 @@ export default {
           })
         });
       });
-    },
-    formatColumn(name) {
-      if(name.startsWith('__') || name == 'id') {
-        return name
-      }
-      name = name.toLowerCase()
-      name = 'ihris_' + name
-      name = name.split("-").join("_")
-      return name
     }
   },
 };

@@ -2,12 +2,14 @@ const express = require('express')
 const router = express.Router()
 const axios = require('axios')
 const URI = require('urijs');
+const pluralize = require('pluralize')
 const ihrissmartrequire = require('ihrissmartrequire')
 ihrissmartrequire.ignore("*node_modules")
 const nconf = require('../modules/config')
 const fhirAxios = nconf.fhirAxios
 const outcomes = ihrissmartrequire('config/operationOutcomes')
 const fhirDefinition = require('../modules/fhir/fhirDefinition')
+const mixin = require('../mixin/generalMixin')
 const crypto = require('crypto')
 const logger = require('../winston')
 const winston = require("winston");
@@ -1680,6 +1682,9 @@ router.get('/report/es/:report', (req, res) => {
                         display: display.valueString,
                         isDropDown: isDropDown
                     }
+                    if(nconf.get("fhir:flattener") === "fhir2sql") {
+                        filterParams.field = mixin.formatSQLColumn(filterParams.field)
+                    }
                     if(type) {
                         filterParams.dataType = type.valueString
                     } else {
@@ -1688,6 +1693,9 @@ router.get('/report/es/:report', (req, res) => {
                     reportData.filters.push(filterParams)
                 }
                 esField = label.valueString
+                if(nconf.get("fhir:flattener") === "fhir2sql") {
+                    esField = mixin.formatSQLColumn(label.valueString)
+                }
                 displayName = display.valueString
                 if(order) {
                     fieldOrder = order.valueInteger
@@ -1729,6 +1737,7 @@ router.get('/report/es/:report', (req, res) => {
         if(nconf.get("fhir:flattener") === "fhir2sql") {
             reportComp = "ihris-sql-report"
             searchTermComp = "ihris-sql-search-term"
+            reportData.indexName = pluralize(indexName)
         }
         let template = `<${reportComp} @rowSelected='rowSelected' :key="$route.params.report" page="${req.params.report}" label="${reportName}" :reportData="reportData" :terms="terms" :termsConditions="termsConditions" :hideCheckboxes="hideCheckboxes" :hideLabel="hideLabel" :hideExport="hideExport" :hideReportCustomization="hideReportCustomization" :disableOpenResourcePage="disableOpenResourcePage">`
         for (let filter of reportData.filters) {

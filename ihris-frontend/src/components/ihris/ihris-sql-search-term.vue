@@ -140,7 +140,7 @@ export default {
     }).dataType
     if (this.isDropDown) {
       this.loading = true;
-      let column = this.formatColumn(this.expression)
+      let column = this.expression
       let url = `/fhir2sql/populateFilter/${this.reportData.indexName}/${column}`
       fetch(url, {
         method: 'GET'
@@ -181,15 +181,6 @@ export default {
     },
     clearSearch: function () {
       this.$emit('termChange', this.expression, [])
-    },
-    formatColumn(name) {
-      if(name.startsWith('__') || name == 'id') {
-        return name
-      }
-      name = name.toLowerCase()
-      name = 'ihris_' + name
-      name = name.split("-").join("_")
-      return name
     }
   },
   watch: {

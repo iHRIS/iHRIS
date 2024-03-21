@@ -2,6 +2,16 @@ const fs = require('fs');
 const nconf = require('../modules/config')
 const ihrissmartrequire = require('ihrissmartrequire')
 
+const formatSQLColumn = (name) => {
+  if(name.startsWith('__') || name == 'id') {
+    return name
+  }
+  name = name.toLowerCase()
+  name = 'ihris_' + name
+  name = name.split("-").join("_")
+  return name
+}
+
 const flattenComplex = (extension) => {
   let results = {};
   for (let ext of extension) {
@@ -101,5 +111,6 @@ module.exports = {
   removeDir,
   getFilesFromDir,
   updateConfigFile,
-  flattenComplex
+  flattenComplex,
+  formatSQLColumn
 }

@@ -20,6 +20,15 @@ const sequelize = new Sequelize(nconf.get("database:name"), nconf.get("database:
   dialect: nconf.get("database:dialect")
 });
 
+router.post('/run-sql', (req, res) => {
+  sequelize.query(req.body.query).then((response) => {
+    res.json(response[0])
+  }).catch((err) => {
+    logger.error(err);
+    return res.status(500).send()
+  })
+})
+
 router.get('/reports-list', (req, res) => {
   if ( !req.user ) {
     return res.status(401).json( outcomes.NOTLOGGEDIN)
@@ -49,7 +58,7 @@ router.get('/reports-list', (req, res) => {
             }
           }).then(() => {
             indices.push({
-              name: index,
+              name: pluralize(index),
               display,
               id: rel.resource.id
             })
@@ -165,6 +174,7 @@ router.get('/listFields/:index', (req, res) => {
         if(!display || !name) {
           continue
         }
+        name = mixin.formatSQLColumn(name)
         fields.push({
           name,
           display,
@@ -292,10 +302,9 @@ router.post('/reportData/:table/:operation?', (req, res) => {
   let limit = req.body.limit
   let offset = req.body.offset
   let sorts = req.body.sort
-  let table = pluralize(req.params.table)
-  let sql = `select * from ${table}`
+  let sql = `select * from ${req.params.table}`
   if(req.params.operation == "count") {
-    sql = `select count(*) from ${table}`
+    sql = `select count(*) from ${req.params.table}`
   }
   let where = buildFilters(req.body)
   if(where) {
