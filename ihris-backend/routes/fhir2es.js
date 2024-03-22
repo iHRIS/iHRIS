@@ -194,7 +194,7 @@ router.get('/listFields/:index', (req, res) => {
 
 router.post("/export/:format/:index", (req, res) => {
   if ( !req.user ) {
-    return res.status(401).json( outcomes.NOTLOGGEDIN)
+    return res.status(401).json(outcomes.NOTLOGGEDIN)
   }
   let searchQry = req.body.query;
   let headers = req.body.headers;

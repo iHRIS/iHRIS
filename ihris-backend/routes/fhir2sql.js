@@ -320,6 +320,20 @@ router.post('/reportData/:table/:operation?', (req, res) => {
   if(where) {
     sql += ` where ${where}`
   }
+  if(req.body.reportOptions && req.body.reportOptions.locationBasedConstraint) {
+    let userLocExt = req.user.resource.extension && req.user.resource.extension.find((ext) => {
+      return ext.url === 'http://ihris.org/fhir/StructureDefinition/ihris-user-location'
+    })
+    if(userLocExt) {
+      let userLoc = userLocExt.valueReference.reference
+      let locationRestriction = `(ihris_ihris_related_group like '%${userLoc},%' or ihris_ihris_related_group like '%${userLoc}')`
+      if(!where) {
+        sql += ` where ${locationRestriction}`
+      } else {
+        sql += ` and ${locationRestriction}`
+      }
+    }
+  }
   if(sorts && sorts.length) {
     sql += ` ORDER BY`
     for(let sort of sorts) {
