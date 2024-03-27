@@ -33,7 +33,7 @@
         @click:append="showPassword = !showPassword"
         dense
       >
-        <template #label>{{$t(`App.fhir-resources-texts.${display}`)}}<span v-if="required" class="red--text font-weight-bold">*</span></template>
+        <template #label>{{$t(`App.fhir-resources-texts.${display}`)}} {{ displayNumber }}<span v-if="required" class="red--text font-weight-bold">*</span></template>
       </v-text-field>
     </template>
     <template #header>
@@ -137,8 +137,13 @@ export default {
       else return undefined
     },
     display: function() {
-      if ( this.slotProps && this.slotProps.input) return this.slotProps.input.label
-      else return this.label
+      return this.label
+    },
+    displayNumber: function() {
+      if ( this.slotProps && this.slotProps.input) {
+        return " (" + (parseInt(this.slotProps.input.index) + 1) + ")"
+      }
+      return ""
     },
     required: function() {
       return (this.index || 0) < this.min 

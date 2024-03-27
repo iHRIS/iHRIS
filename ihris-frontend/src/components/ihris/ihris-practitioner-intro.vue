@@ -26,11 +26,7 @@
               color="warning"
               icon
               small
-              @click="
-                () => {
-                  this.expand = false;
-                }
-              "
+              @click="expand = false"
           >
             <v-icon>mdi-close-box-multiple-outline</v-icon>
           </v-btn>

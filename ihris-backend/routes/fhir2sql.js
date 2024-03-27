@@ -11,7 +11,6 @@ const pluralize = require('pluralize')
 const sqlstring = require('sqlstring');
 const mixin = require('../mixin/generalMixin')
 const logger = require('../winston')
-const es = require('../modules/es')
 const nconf = require('../modules/config')
 const fhirAxios = require('../modules/fhir/fhirAxios')
 const outcomes = ihrissmartrequire('config/operationOutcomes')
