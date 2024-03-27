@@ -12,11 +12,11 @@
         :rules="rules" 
         dense
       >
-        <template #label>{{display}} <span v-if="required" class="red--text font-weight-bold">*</span></template>
+        <template #label>{{$t(`App.fhir-resources-texts.${display}`)}} {{ displayNumber }} <span v-if="required" class="red--text font-weight-bold">*</span></template>
       </v-text-field>
     </template>
     <template #header>
-      {{display}}
+      {{$t(`App.fhir-resources-texts.${display}`)}}
     </template>
     <template #value>
       {{value}}

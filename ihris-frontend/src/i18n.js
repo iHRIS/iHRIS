@@ -15,6 +15,7 @@ export function loadLanguage(lang) {
   store.state.initializingApp = true
   axios.get( `/translator/getLocale/${lang}` ).then(response => {
     store.state.initializingApp = false
+    console.error(JSON.stringify(response.data, 0, 2));
     i18n.setLocaleMessage(lang, response.data)
     i18n.locale = lang
   })
