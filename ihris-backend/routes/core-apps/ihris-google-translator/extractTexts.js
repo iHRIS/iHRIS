@@ -36,6 +36,9 @@ function run() {
             if(site.nav && site.nav.menu) {
               extractMenus(site.nav.menu)
             }
+            if(site?.intro) {
+              extractIntros(site.intro)
+            }
             resolve1()
           } else if(resource.resourceType === "CodeSystem") {
             // extractTextFromCodeSystem(resource)
@@ -139,6 +142,16 @@ function extractMenus(nav) {
       if(nav[menu].menu) {
         extractMenus(nav[menu].menu)
       }
+    }
+  }
+}
+
+function extractIntros(obj) {
+  for (let key in obj) {
+    if ((key === "text" || key === "title") && typeof(obj[key]) === "string") {
+       keys.App.intro[obj[key]] = obj[key];
+    } else if (typeof obj[key] === "object") {
+      extractIntros(obj[key]);
     }
   }
 }
