@@ -42,19 +42,6 @@ This tutorial highlights the importance of completing required fields and how to
 
 ![type:video](https://www.youtube.com/embed/8n-bQWxKFw4) 
 
-## Log in to iHRIS
-
-This tutorial guides users through the process of securely logging in to the iHRIS platform. It covers accessing the login page, entering credentials, and emphasizes best practices for maintaining security. 
-![type:video](https://www.youtube.com/embed/8n-bQWxKFw4) 
-[type:video](../video/Login to iHRIS.mp4) 
-
-
-## Log out of iHRIS
-
-This tutorial provides simple instructions for logging out of the iHRIS platform securely. Users will learn how to locate the logout option, ensuring their session is terminated properly to maintain security and protect sensitive data.
-
-[type:video](../video/Log out of iHRIS.mp4) 
-
 
 ## Forgot Password
 This tutorial offers guidance for users who have forgotten their password for accessing the iHRIS platform. It outlines the steps to initiate the password recovery process, including accessing the "Forgot Password" link, verifying identity, and resetting the password securely. 
@@ -64,17 +51,59 @@ This tutorial offers guidance for users who have forgotten their password for ac
 
 
 ## Add Degree/Course
+This tutorial offers clear instructions for adding new degrees or courses to iHRIS.
 
 [type:video](../video/Add Degree or course.mp4) 
 ![type:video](https://www.youtube.com/embed/691qYgY7PKc) 
 
 ## Add Institution
-
-[type:video](../video/Add Education Institution.mp4) 
+This tutorial provides concise guidance on adding new institutions to iHRIS
+![type:video](https://www.youtube.com/embed/n8z7j8ruu4U)
 
 ## Add Education Level
+This tutorial offers clear instructions for adding new education levels to iHRIS.
 
-[type:video](../video/Add Education level.mp4) 
+![type:video](https://www.youtube.com/embed/xEUE2xYA8NU) 
+
+
+## Add Education Major
+This tutorial provides concise guidance on adding new education majors to iHRIS. Learn how to input essential details such as major name, description, and any associated codes, ensuring accurate and comprehensive records.
+
+![type:video](https://www.youtube.com/embed/oSDyeaFeVXk) 
+
+## Add Employee Status
+This tutorial offers clear instructions for adding new employee statuses to iHRIS. 
+
+![type:video](https://www.youtube.com/embed/uluFrOEpy8A) 
+
+
+## Add Salary Grade
+This tutorial provides concise guidance on adding new salary grades to iHRIS. Learn how to input essential details such as grade name, salary range, and any associated codes. 
+
+![type:video](https://www.youtube.com/embed/mOjR0ict2qw) 
+## Add Job Title
+
+![type:video](https://www.youtube.com/embed/g8g1qgQFU0k)
+
+
+## Add Cadre
+
+[type:video](../video/Add Cadre.mp4) 
+
+![type:video](https://www.youtube.com/embed/ygnpFfMEXq4)
+
+## Log in to iHRIS
+
+This tutorial guides users through the process of securely logging in to the iHRIS platform. It covers accessing the login page, entering credentials, and emphasizes best practices for maintaining security. 
+
+[type:video](../video/Login to iHRIS.mp4) 
+
+
+## Log out of iHRIS
+
+This tutorial provides simple instructions for logging out of the iHRIS platform securely. Users will learn how to locate the logout option, ensuring their session is terminated properly to maintain security and protect sensitive data.
+
+[type:video](../video/Log out of iHRIS.mp4) 
 
 ## Search People
 
@@ -83,25 +112,3 @@ This tutorial offers guidance for users who have forgotten their password for ac
 ## Search Facility
 
 [type:video](../video/Search facility.mp4) 
-
-## Add Education Major
-
-[type:video](../video/Add Education Major.mp4) 
-
-## Add Employee Status
-
-[type:video](../video/Add Employee Status.mp4) 
-
-## Add Salary Grade
-
-[type:video](../video/Add Salary Grade.mp4) 
-
-## Add Job Title
-
-[type:video](../video/Add Job title.mp4) 
-
-## Add Cadre
-
-[type:video](../video/Add Cadre.mp4) 
-
-![type:video](https://www.youtube.com/embed/ygnpFfMEXq4)
