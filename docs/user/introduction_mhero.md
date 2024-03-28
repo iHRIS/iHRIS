@@ -1,8 +1,9 @@
 # Introduction
 
-!!! important "What is MHERO?"
-MHERO is acronym for the Global Open Facility Registry.
-MHERO is a shared repository for facility information. The information in the repository can vary and may include:
+!!! important "What is mHero?"
+
+mHero is acronym for mobile health worker electronic resource o
+mHero is a shared repository for facility information. The information in the repository can vary and may include:
 
 - Facilities
 - Jurisdictions such as districts, regions, county, country , with the highest in the hierarchy being a country and the lowest being a facility.
@@ -39,4 +40,4 @@ Browse to the upper right corner on any page, click Log Out.
 
 ![Alt text](../img/log_out.JPG 'MHERO Log Out Page')
 
-The Welcome page appears. You will have to re-enter your username and password to regain access to the system.
+The Welcome page appears. You will have to re-enter your username and password to regain access to the mHero system.

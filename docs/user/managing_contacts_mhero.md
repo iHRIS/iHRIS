@@ -62,6 +62,7 @@ In addition to contacts opting out of messaging by sending a trigger word, it is
 Note that the button may be only partially visible, as shown here:
 
 View contact groups of a contact
+
 Many health workers will belong to multiple contact groups, however only one contact group will be visible in the Employee List table.
 
 1. To view all contact groups that a particular health worker belongs to, click on "MHERO" on the left side navigation panel, then click on "Contact Groups".
@@ -82,6 +83,7 @@ On the "Contact Groups" page within the mHero module:
 1. Select the contacts that you would like to subscribe or unsubscribe from a contact group by ticking the boxes to the left of the names in the table. Note that you can only subscribe or unsubscribe at once so if you have contacts to subscribe and unsubscribe you will have to do those separately.
 
 The following are some tips for making your selection:
+
 1.1. You can select all contacts on a page by clicking on the box farthest to the left in the table header row. Note that this will not select all contacts on all pages, only for the page you are viewing when you click to select all.
 
 1.2. You may want to make selections on multiple pages so will want to navigate between pages of records or change the number of rows displayed per page. Follow the instructions in the above section "View and search/filter contacts".
@@ -106,7 +108,8 @@ Note that the buttons may be only partially visible, as shown here:
 
 You should see a new pop-up with a confirmation of the change.
 
-Create a new contact group
+**Create a new contact group
+
 On the "Contact Groups" page within the mHero module:
 
 1. Click on the button in the bottom right corner (below the table) that says "Add New Group".
@@ -119,6 +122,6 @@ Note that the button may be only partially visible, as shown here:
 
 You should see a new pop-up box that confirms the creation of a new group, saying "Success: Group Added Successfully"; click on the button that says "OK" to finish.
 
-Delete a contact group
+**Delete a contact group
 
 

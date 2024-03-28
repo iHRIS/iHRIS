@@ -1,7 +1,7 @@
 # Accessing Dashboard with Reports in mHero
 
 !!! important "What is MHERO?"
-MHERO is acronym for the Global Open Facility Registry.
+
 MHERO is a shared repository for facility information. The information in the repository can vary and may include:
 
 - Facilities

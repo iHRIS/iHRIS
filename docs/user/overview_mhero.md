@@ -10,7 +10,7 @@
 - The health worker contact information is complete and up-to-date.
 
         The essential health worker information for mHero includes:
-
+        
         - name
         - phone number
 
@@ -40,13 +40,13 @@ Whether there is existing content or the content needs to be developed, there ar
 
 It is recommended to introduce mHero to health workers prior to sending out the first message. You should inform them about:
 
-- ■ what mHero is
-- ■ how it will be used
-- ■ who the messages are coming from and who will review and respond
-- ■ how often they can expect messages
-- ■ whether they will be expected to respond or initiate communication (if they will be expected to initiate communication then you need to explain how they will do this)
-- ■ the costs (if any) to the health workers when they send messages
-- ■ any option for them to opt out of receiving messages (this may be required in some countries)
+ ■ what mHero is
+ ■ how it will be used
+ ■ who the messages are coming from and who will review and respond
+ ■ how often they can expect messages
+ ■ whether they will be expected to respond or initiate communication (if they will be expected to initiate communication then you need to explain how they will do this)
+ ■ the costs (if any) to the health workers when they send messages
+ ■ any option for them to opt out of receiving messages (this may be required in some countries)
 
 As you can see, this is too much information to send via SMS when the first message goes out so it will need to be communicated in a different way - email, memo, during training or other gathering, etc. If you are unsure about some of those details when initially deploying mHero (for example, perhaps initially the health workers will not be expected or required to respond or initiate communication but that may change later), you don't need to include that information at the outset but should provide clear instructions when there are changes.
 
@@ -54,7 +54,7 @@ As you can see, this is too much information to send via SMS when the first mess
 
 - When asking health workers to send information related to their work activities, facility conditions, or other information, it is necessary to acknowledge their contributions and make use of the responses and data collected. This may look like generating reports that can demonstrate the need for additional funding, preparing a plan to provide supplies or other support to a facility facing unexpected needs, or countless other responses. When health workers know that the information they provide will serve some purpose, they will be more willing to respond to future requests.
 
-Architecture
+**Architecture**
 
 mHero 2.1 is basically made up of three parts: a database of health worker information, a communication platform, and the mHero Connector which links the two other components. This connection is made by using global interoperability standards for health information exchange, specifically Fast Healthcare Interoperability Resources (FHIR) and Mobile Alert Communication Management (mACM).
 
