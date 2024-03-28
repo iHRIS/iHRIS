@@ -19,7 +19,7 @@
         <v-card-title
             class="pa-0 pb-2 pr-2"
         >
-          <h4 class="black--text">{{ title }}</h4>
+          <h4 class="black--text">{{  $t(`App.intro.${title}`) }}</h4>
           <v-spacer></v-spacer>
           <v-btn
               class="justify-end"
@@ -44,14 +44,14 @@
         <v-simple-table :height="showImage?250:'auto'" light>
           <tbody>
           <tr v-for="[keyName,value] in Object.entries(this.data)" :key="keyName">
-            <td class="body-1" style="text-align: left"><strong>{{ keyName }}:</strong></td>
+            <td class="body-1" style="text-align: left"><strong>{{$t(`App.intro.${keyName}`)}}:</strong></td>
             <td class="subtitle-1">{{ value }}</td>
           </tr>
           </tbody>
         </v-simple-table>
       </v-card>
     </div>
-    <h4 class="black--text">{{ title }}</h4>
+    <h4 class="black--text">{{ $t(`App.intro.${title}`) }}</h4>
      <template v-slot:action="{ attrs }">
         <v-btn
             icon
