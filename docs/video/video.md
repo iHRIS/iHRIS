@@ -2,9 +2,7 @@
 
 This section captures iHRIS Video Tutorial Series, a meticulously crafted resource aimed at facilitating your proficiency in utilizing iHRIS. These tutorials are curated with the objective of empowering contributors of all levels to effectively manage workforce data, optimize HR processes, and leverage the full potential of the iHRIS platform.
 
-The iHRIS Video Tutorial Series is a comprehensive repository of clear, concise, and actionable tutorials covering various facets of iHRIS functionality. Each video is designed to equip you with the requisite knowledge and expertise necessary for proficient usage of the iHRIS platform.
-
-As contributors to this open-source project, you play a crucial role in shaping the development and utilization of iHRIS. We invite you to explore the tutorials at your own pace, leveraging them as a valuable resource to enhance your proficiency and contribute meaningfully to the project's success.
+As contributors to this open-source platform, you play a crucial role in shaping the development and utilization of iHRIS. We invite you to explore the tutorials at your own pace, leveraging them as a valuable resource to enhance your proficiency and contribute meaningfully to the platform's success.
 
 
 ## Changing Language Settings
