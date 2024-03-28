@@ -1,12 +1,17 @@
 # System Administration
 
-!!! important "What is MHERO?"
-MHERO is acronym for the Global Open Facility Registry.
-MHERO is a shared repository for facility information. The information in the repository can vary and may include:
+!!! important "What is mHero?"
+mHero is acronym for the Mobile Health worker Electronic surveillance
+mHero is a shared repository for facility information. The information in the repository can vary and may include:
 
 - Facilities
+
 - Jurisdictions such as districts, regions, county, country , with the highest in the hierarchy being a country and the lowest being a facility.
+
+
 - Services offered by facilities. This may include services such as malaria testing, HIV care, clinical information like vaccination
+
+
 - Organizations that manage facilities
 
 ## Log In
