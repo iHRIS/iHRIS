@@ -1,15 +1,64 @@
 # Video Tutorials
 
+This section captures iHRIS Video Tutorial Series, a meticulously crafted resource aimed at facilitating your proficiency in utilizing iHRIS. These tutorials are curated with the objective of empowering contributors of all levels to effectively manage workforce data, optimize HR processes, and leverage the full potential of the iHRIS platform.
+
+The iHRIS Video Tutorial Series is a comprehensive repository of clear, concise, and actionable tutorials covering various facets of iHRIS functionality. Each video is designed to equip you with the requisite knowledge and expertise necessary for proficient usage of the iHRIS platform.
+
+As contributors to this open-source project, you play a crucial role in shaping the development and utilization of iHRIS. We invite you to explore the tutorials at your own pace, leveraging them as a valuable resource to enhance your proficiency and contribute meaningfully to the project's success.
+
+
+## Changing Language Settings
+Learn how to customize the language settings in iHRIS to match your preferences. This tutorial guides you through the process of changing the language interface.
+
+![type:video](https://www.youtube.com/embed/xHuGcEhBvBY)
+
+## Adding Records in iHRIS
+This tutorial provides step-by-step instructions for adding records, ensuring accurate and comprehensive data entry.
+
+![type:video](https://www.youtube.com/embed/Za8ptsyeDbU) 
+
+## Updating Existing Records
+From editing employee profiles to updating certification details, learn how to make modifications to records while maintaining data integrity and accuracy.
+
+![type:video](https://www.youtube.com/embed/s4mmpYg-fsw) 
+
+## Deactivating/Archiving Records
+This tutorial demonstrates how to deactivate or archive records effectively, ensuring proper management of outdated or inactive data.
+
+![type:video](https://www.youtube.com/embed/oXR6ddlqI2w)  
+
+## Searching for Records
+Learn how to efficiently search for specific records using keywords, criteria, or filters, enabling quick access to relevant information within the system.
+
+![type:video](https://www.youtube.com/embed/BkWDp6taknU)  
+
+## Adding and Removing Cards
+This tutorial demonstrates how to add additional cards for various data entries and remove cards as needed, streamlining data management processes.
+
+![type:video](https://www.youtube.com/embed/eX8YsaxDENI)  
+
+## Required Fields
+This tutorial highlights the importance of completing required fields and how to identify them within the system interface.
+
+![type:video](https://www.youtube.com/embed/8n-bQWxKFw4) 
+
 ## Log in to iHRIS
 
+This tutorial guides users through the process of securely logging in to the iHRIS platform. It covers accessing the login page, entering credentials, and emphasizes best practices for maintaining security. 
+![type:video](https://www.youtube.com/embed/8n-bQWxKFw4) 
 [type:video](../video/Login to iHRIS.mp4) 
 
+
 ## Log out of iHRIS
+
+This tutorial provides simple instructions for logging out of the iHRIS platform securely. Users will learn how to locate the logout option, ensuring their session is terminated properly to maintain security and protect sensitive data.
 
 [type:video](../video/Log out of iHRIS.mp4) 
 
 
 ## Forgot Password
+This tutorial offers guidance for users who have forgotten their password for accessing the iHRIS platform. It outlines the steps to initiate the password recovery process, including accessing the "Forgot Password" link, verifying identity, and resetting the password securely. 
+
 ![type:video](https://www.youtube.com/embed/wAGqSLHxDX4)
 [type:video](../video/Forgot password.mp4) 
 
@@ -17,6 +66,7 @@
 ## Add Degree/Course
 
 [type:video](../video/Add Degree or course.mp4) 
+![type:video](https://www.youtube.com/embed/691qYgY7PKc) 
 
 ## Add Institution
 
