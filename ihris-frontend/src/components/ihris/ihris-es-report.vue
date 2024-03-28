@@ -5,25 +5,21 @@
         <v-layout row wrap>
           <v-icon class="mr-2" color="#0d3552">mdi-table-large</v-icon>
           <h4 v-if="!hideLabel" class="font-weight-bold" style="color: #0d3552">
-            {{ label }}
+            {{ $t(`App.reports.${label}`) }}
           </h4>
-          <v-spacer></v-spacer>
           <v-row align="center" class="pr-4" justify="end">
             <v-btn
               v-if="!hideReportCustomization"
               class="mr-2"
               color="primary"
-              @click="
-                () => {
-                  dialog = true;
-                }
-              "
+              small
+              @click="dialog = true"
             >
               <v-icon left>mdi-chart-box-plus-outline</v-icon>
               Customize Report
               {{ $t("App.hardcoded-texts.Customize Report") }}
             </v-btn>
-            <v-btn v-if="!hideExport" color="info" @click="reportExport('csv')">
+            <v-btn v-if="!hideExport" small color="info" @click="reportExport('csv')">
               <v-progress-circular
                 v-if="downloading"
                 color="amber"
@@ -241,8 +237,8 @@ export default {
       });
     }
     for (let field of this.reportData.fieldsDetails) {
-      this.headers.push({ text: field[0], value: field[1] });
-      this.allHeaders.push({ text: field[0], value: field[1] });
+      this.headers.push({ text: this.$t(`App.reports.${field[0]}`), value: field[1] });
+      this.allHeaders.push({ text: this.$t(`App.reports.${field[0]}`), value: field[1] });
     }
     eventBus.$on("reload-report", () => {
       this.getTotalRecords();
@@ -557,7 +553,7 @@ export default {
       let body = {
         query: this.buildTerms(),
         headers: this.headers,
-        label: this.label,
+        label: this.$t(`App.reports.${this.label}`),
         selected: this.selected,
       };
       axios({
@@ -570,7 +566,7 @@ export default {
         let blob = new Blob([response.data], { type: "text/csv" });
         let link = document.createElement("a");
         link.href = window.URL.createObjectURL(blob);
-        link.download = `${this.label}.${format}`;
+        link.download = this.$t(`App.reports.${this.label}`) + '.' + format;
         link.click();
       });
     },

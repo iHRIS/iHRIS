@@ -19,7 +19,15 @@ function run() {
           if(resource.resourceType === "Basic" && resource.meta && resource.meta.profile && resource.meta.profile.includes("http://ihris.org/fhir/StructureDefinition/ihris-page")) {
             extractFromPage(resource.id, ["resource", "search"]).then(() => {
               resolve1()
-            }).catch(() => {
+            }).catch((err) => {
+              console.log(err);
+              resolve1()
+            })
+          } else if(resource.resourceType === "Basic" && resource?.code?.coding?.find(coding => coding.code === "iHRISRelationship")) {
+            extractFromReport(resource).then(() => {
+              resolve1()
+            }).catch((err) => {
+              console.log(err);
               resolve1()
             })
           } else if(resource.resourceType === "Questionnaire") {
@@ -69,68 +77,31 @@ function run() {
 
 function getResources() {
   return new Promise((resolve) => {
-    let resources = ["Basic", "Questionnaire", "Parameters"]
+    let resources = [{
+      type: "Basic",
+      category: "page"
+     }, {
+      type: "Basic",
+      category: "report"
+     }, {
+      type: "Questionnaire"
+     }, {
+      type: "Parameters"
+     }]
     const promises = []
     for(let resource of resources) {
       promises.push(new Promise((resolve1) => {
         let params = {}
         search(resource, params).then(() => {
           resolve1()
-        }).catch(() => {
+        }).catch((err) => {
+          console.log(err);
           resolve1()
         })
       }))
     }
     Promise.all(promises).then(() => {
       return resolve()
-    })
-  })
-}
-
-function getFiles(builtResource) {
-  return new Promise(async(resolve, reject) => {
-    const dirs = await fs.readdirSync(`${__dirname}/${builtResource}`);
-    let resources = []
-    const promises1 = []
-    for(let dir of dirs) {
-      promises1.push(new Promise((resolve1, reject1) => {
-        let files = [];
-        if (dir.split('.').length >= 2 && dir.split('.')[dir.split('.').length - 1] === 'json') {
-          files.push(dir);
-          dir = null;
-        } else {
-          try {
-            files = fs.readdirSync(`${__dirname}/${builtResource}/${dir}`);
-          } catch (error) {
-            console.error(error);
-            errorOccured = true;
-            return reject1()
-          }
-        }
-        const promises2 = []
-        for(let file of files) {
-          promises2.push(new Promise((resolve2) => {
-            let fullpath;
-            if (dir) {
-              fullpath = `${__dirname}/${builtResource}/${dir}/${file}`;
-            } else {
-              fullpath = `${__dirname}/${builtResource}/${file}`;
-            }
-            fs.readFile(fullpath, { encoding: 'utf8', flag: 'r' }, (err, data) => {
-              resources.push(JSON.parse(data))
-              return resolve2()
-            })
-          }))
-        }
-        Promise.all(promises2).then(() => {
-          return resolve1()
-        })
-      }))
-    }
-    Promise.all(promises1).then(() => {
-      return resolve(resources)
-    }).catch(() => {
-      return reject(resources)
     })
   })
 }
@@ -147,6 +118,9 @@ function extractMenus(nav) {
 }
 
 function extractIntros(obj) {
+  if(!keys.App.intro) {
+    keys.App.intro = {}
+  }
   for (let key in obj) {
     if ((key === "text" || key === "title") && typeof(obj[key]) === "string") {
        keys.App.intro[obj[key]] = obj[key];
@@ -276,24 +250,80 @@ function extractFromPage(page_id, type) {
           createTemplate(resource, structure, pageSections)
           return resolve()
   
-        }).catch((err) => {
-          console.error(err.message)
-          console.error(err.stack)
+        }).catch(() => {
           return resolve()
         })
-  
       } else {
         return resolve()
       }
-    }).catch(() => {
+    }).catch((err) => {
+      console.log(err);
       return reject()
     })
   })
 }
 
+function extractFromReport(report) {
+  return new Promise((resolve, reject) => {
+    if(!keys.App.reports) {
+      keys.App.reports = {}
+    }
+    let reportDetails = report?.extension?.find((ext) => {
+      return ext.url === "http://ihris.org/fhir/StructureDefinition/iHRISReportDetails"
+    })
+    if(reportDetails) {
+      let title = reportDetails?.extension?.find((ext) => {
+        return ext.url === "label"
+      })?.valueString
+      if(title) {
+        keys.App.reports[title] = title
+      }
+      let reportElements = reportDetails?.extension?.filter((ext) => {
+        return ext.url === "http://ihris.org/fhir/StructureDefinition/iHRISReportElement"
+      })
+      if(reportElements && reportElements.length) {
+        for(let element of reportElements) {
+          let display = element?.extension?.find((ext) => {
+            return ext.url === "display"
+          })?.valueString
+          if(display) {
+            keys.App.reports[display] = display
+          }
+        }
+      }
+    }
+    let reportLinks = report?.extension?.filter((ext) => {
+      return ext.url === "http://ihris.org/fhir/StructureDefinition/iHRISReportLink"
+    })
+    if(reportLinks.length) {
+      let reportElements = reportLinks?.extension?.filter((ext) => {
+        return ext.url === "http://ihris.org/fhir/StructureDefinition/iHRISReportElement"
+      })
+      if(reportElements && reportElements.length) {
+        for(let element of reportElements) {
+          let display = element?.extension?.find((ext) => {
+            return ext.url === "display"
+          })?.valueString
+          if(display) {
+            keys.App.reports[display] = display
+          }
+        }
+      }
+    }
+    return resolve()
+  })
+}
+
 const getDefinition = (resource) => {
-  let structureDef = resource.split('/')
-  return fhirAxios.read(structureDef[0], structureDef[1])
+  return new Promise((resolve, reject) => {
+    let structureDef = resource.split('/')
+    return fhirAxios.read(structureDef[0], structureDef[1]).then((response) => {
+      return resolve(response)
+    }).catch((err) => {
+      console.error(JSON.stringify(err, 0, 2));
+      return reject(err)
+    })
+  })
 }
 
 const getProperties = (resource) => {
@@ -341,14 +371,6 @@ const createSearchTemplate = async (resource, pageDisplay) => {
     keys.App["fhir-resources-texts"][label] = label
   }
   for (let filter of filters) {
-    /*
-      lets avoid grouping texts by component
-      if (filter[1]) {
-        keys.App["gofr-search-term"][filter[0]] = filter[0]
-      } else {
-        keys.App["gofr-search-term"]["Search"] = "Search"
-      }
-      */
       if (filter[1]) {
         keys.App["fhir-resources-texts"][filter[0]] = filter[0]
       } else {
@@ -645,10 +667,12 @@ const createTemplate = async (resource, structure, pageSections) => {
 function search( resource, params ) {
   return new Promise( (resolve, reject) => {
     let url = new URL(fhirAxios.baseUrl.href)
-    if ( resource  && !params["_getpages"]) {
-      url.pathname += resource
-      if(resource === 'Basic') {
+    if ( resource.type  && !params["_getpages"]) {
+      url.pathname += resource.type
+      if(resource.type === 'Basic' && resource.category === "page") {
         params['_profile'] = 'http://ihris.org/fhir/StructureDefinition/ihris-page'
+      } else if(resource.type === 'Basic' && resource.category === "report") {
+        params['code'] = "iHRISRelationship"
       }
     }
     let auth = fhirAxios.__getAuth()
@@ -675,6 +699,7 @@ function search( resource, params ) {
         return resolve()
       }
     } ).catch( (err) => {
+      console.log(err);
       reject( err )
     } )
 

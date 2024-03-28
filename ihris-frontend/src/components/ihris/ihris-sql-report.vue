@@ -5,7 +5,7 @@
         <v-layout row wrap>
           <v-icon class="mr-2" color="#0d3552">mdi-table-large</v-icon>
           <h4 v-if="!hideLabel" class="font-weight-bold" style="color: #0d3552">
-            {{ label }}
+            {{ $t(`App.reports.${label}`) }}
           </h4>
           <v-spacer></v-spacer>
           <v-row align="center" class="pr-4" justify="end">
@@ -41,7 +41,7 @@
           <v-expansion-panel-header color="blue-grey darken-2">
             <h3 class="font-weight-bold subtitle-2 white--text">
               <v-icon class="mr-2" color="white">mdi-filter-variant</v-icon>
-              Filters
+              {{ $t(`App.hardcoded-texts.Filters`) }}
             </h3>
             <template v-slot:actions>
               <v-icon color="white"> $expand </v-icon>
@@ -241,8 +241,8 @@ export default {
       });
     }
     for (let field of this.reportData.fieldsDetails) {
-      this.headers.push({ text: field[0], value: field[1] });
-      this.allHeaders.push({ text: field[0], value: field[1] });
+      this.headers.push({ text: this.$t(`App.reports.${field[0]}`), value: field[1] });
+      this.allHeaders.push({ text: this.$t(`App.reports.${field[0]}`), value: field[1] });
     }
     eventBus.$on("reload-report", () => {
       this.getTotalRecords();
@@ -470,7 +470,7 @@ export default {
       let body = {
         query: this.buildTerms(),
         headers: this.headers,
-        label: this.label,
+        label: this.$t(`App.reports.${this.label}`),
         selected: this.selected,
       };
       axios({
@@ -483,7 +483,7 @@ export default {
         let blob = new Blob([response.data], { type: "text/csv" });
         let link = document.createElement("a");
         link.href = window.URL.createObjectURL(blob);
-        link.download = `${this.label}.${format}`;
+        link.download = this.$t(`App.reports.${this.label}`) + '.' + format;
         link.click();
       });
     },
