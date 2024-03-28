@@ -41,7 +41,7 @@
           <v-expansion-panel-header color="blue-grey darken-2">
             <h3 class="font-weight-bold subtitle-2 white--text">
               <v-icon class="mr-2" color="white">mdi-filter-variant</v-icon>
-              Filters
+              {{ $t(`App.hardcoded-texts.Filters`) }}
             </h3>
             <template v-slot:actions>
               <v-icon color="white"> $expand </v-icon>
