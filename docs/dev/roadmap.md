@@ -42,6 +42,4 @@ The iHRIS roadmap outlines the features planned for inclusion in future releases
 
 15. Limiting access to individuial resource fiedls i.e user not having access to Practitioner.birthdate based on his role and tasks
 
-16. (**In-progress**)   Developing an iHRIS App store
-
-17. Ability to create reports functions
+16. (**In-progress**)   Developing an iHRIS App store. 
