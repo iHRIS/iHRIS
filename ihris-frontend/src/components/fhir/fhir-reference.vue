@@ -44,22 +44,6 @@
           </v-treeview>
         </v-card>
       </v-menu>
-      <!-- <v-text-field
-        v-else-if="displayType === 'reportSelect'"
-        @click="reportDialog = true"
-        :error-messages="errors"
-        @change="errors = []" 
-        :disabled="disabled"
-        :readonly="true"
-        :label="$t(`App.fhir-resources-texts.${display}`)"
-        v-model="select"
-        outlined 
-        hide-details="auto" 
-        :rules="rules"
-        dense
-      >
-        <template #label>{{$t(`App.fhir-resources-texts.${display}`)}}<span v-if="required" class="red--text font-weight-bold">*</span></template>
-      </v-text-field> -->
       <v-autocomplete
         v-else-if="displayType === 'reportSelect'"
         @click="reportDialog = true"
@@ -94,7 +78,7 @@
         :label="display"
         outlined
         dense
-        :placeholder="$t(`App.hardcoded-texts.Start typing for selection`)"
+        :placeholder="placeholder"
         :rules="rules"
         :disabled="(disabled) || (preset && $route.name === 'resource_add')"
         :error-messages="errors"
@@ -203,6 +187,9 @@ export default {
     //this function is defined under dataDisplay mixin
     this.hideShowField(this.displayCondition)
     this.setupData()
+    if(this.displayType === "preloaded") {
+      this.querySelections()
+    }
   },
   watch: {
     slotProps: {
@@ -215,6 +202,9 @@ export default {
       deep: true
     },
     search: function (val) {
+      if(this.displayType === "preloaded") {
+        return
+      }
       if ( !this.awaitingSearch) {
         setTimeout( () => {
           val && val.length > 1 && this.querySelections( this.search )
@@ -508,24 +498,43 @@ export default {
         checkLoading()
       } )
     },
-    querySelections: function( val ) {
+    querySelections: function( val, url ) {
       this.loading = true
-      let params = { "name:contains": val }
-      let targetProfile = []
-      if(this.targetProfile) {
-        targetProfile = this.targetProfile.split(",")
+      if(!url) {
+        let params = { }
+        if(val) {
+          params["name:contains"] = val
+        }
+        params._count = 200
+        let targetProfile = []
+        if(this.targetProfile) {
+          targetProfile = this.targetProfile.split(",")
+        }
+        if(this.pageTargetProfile) {
+          targetProfile = [this.pageTargetProfile]
+        }
+        if ( !targetProfile[0].endsWith( this.resource ) ) {
+          params._profile = targetProfile
+        }
+        url = "/fhir/"+this.resource
+        if(Object.keys(params).length > 0) {
+          url += "?"+querystring.stringify( params )
+        }
       }
-      if(this.pageTargetProfile) {
-        targetProfile = [this.pageTargetProfile]
-      }
-      if ( !targetProfile[0].endsWith( this.resource ) ) {
-        params._profile = targetProfile
-      }
-      let url = "/fhir/"+this.resource+"?"+querystring.stringify( params )
       fetch( url ).then( response => {
         if ( response.ok ) {
+          url = ''
           response.json().then( async (data) => {
-            this.items = []
+            let next = data.link && data.link.find((link) => {
+              return link.relation === "next"
+            })
+            if(next) {
+              url = next.url.replace("/fhir?","/fhir/"+this.resource+"?")
+              url = url.substring(url.indexOf("/fhir/"));
+            }
+            if(!url) {
+              this.items = []
+            }
             if ( data.entry && data.entry.length ) {
               for( let entry of data.entry ) {
                 let ref = entry.resource.resourceType+"/"+entry.resource.id
@@ -534,7 +543,11 @@ export default {
                 this.items.push( item )
               }
             }
-            this.loading = false
+            if(url) {
+              this.querySelections(val, url)
+            } else {
+              this.loading = false
+            }
           } )
         } else {
           console.log("Failed to retrieve",this.resource)
@@ -633,6 +646,12 @@ export default {
     }
   },
   computed: {
+    placeholder: function() {
+      if(this.displayType === "preloaded") {
+        return ""
+      }
+      return this.$t(`App.hardcoded-texts.Start typing for selection`)
+    },
     index: function() {
       if ( this.slotProps ) return this.slotProps.input
       else return undefined
