@@ -90,6 +90,7 @@ Here is a list of all informers supported so far:
 - text: Used to inform that the field should be displayed as a long text
 - password: Used to inform that the field should be displayed as a password, in a way that the texts being typed are hidden
 - year: Used to inform that the date field should only display year instead of a full date
+- preloaded: This is used for reference fields. Normally with reference fields, values of a field are not loaded by default, they are loaded after a user type in the needed value. This can be changed by passing the <b>preloaded</b> informer to make all values available immediately after the page is loaded.
 
 ### Questionnaire Example
 
