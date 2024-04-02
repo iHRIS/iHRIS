@@ -27,7 +27,7 @@ const fhirReports = {
               FHIRBaseURL: nconf.get("fhir:base") || "http://localhost:8080/hapi/fhir",
               FHIRUsername: nconf.get("fhir:username"),
               FHIRPassword: nconf.get("fhir:password"),
-              relationshipsIDs: [],
+              relationshipsIDs: ["ihris-es-report-position-list"],
               ESModulesBasePath: nconf.get("app:site:path") + "/modules/es",
               DBConnection: {
                 database: nconf.get("database:name"),
@@ -42,6 +42,7 @@ const fhirReports = {
               ESBaseURL: server,
               ESUsername: username,
               ESPassword: password,
+              relationshipsIDs: [],
               ESMaxCompilationRate: nconf.get("elasticsearch:max_compiliation_rate") || "100000/1m",
               ESMaxScrollContext: nconf.get("elasticsearch:max_scroll_context") || "100000",
               FHIRBaseURL: nconf.get("fhir:base") || "http://localhost:8080/hapi/fhir",

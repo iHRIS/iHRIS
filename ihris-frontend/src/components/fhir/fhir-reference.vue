@@ -264,16 +264,28 @@ export default {
         fetch("/fhir/" + id).then((response) => {
           response.json().then((data) => {
             let displayVal = this.$fhirpath.evaluate(data, this.referenceDisplayPath)
-            if(typeof displayVal === 'object') {
+            if(Array.isArray(displayVal) && displayVal.length && typeof displayVal[0] === 'string') {
               displayVal = displayVal.join(", ")
+
+              this.items = [{
+                value: id,
+                text: displayVal
+              }]
+              this.select = id
+              this.loadingReportVal = false
+              this.reportDialog = false
+            } else if(Array.isArray(displayVal) && displayVal.length && typeof displayVal[0] === 'object') {
+              this.$fhirutils.resourceLookup( displayVal[0].reference ).then( display => {
+                this.items = [{
+                  value: id,
+                  text: display
+                }]
+                this.select = id
+                this.loadingReportVal = false
+                this.reportDialog = false
+              } )
             }
-            this.items = [{
-              value: id,
-              text: displayVal
-            }]
-            this.select = id
-            this.loadingReportVal = false
-            this.reportDialog = false
+            
           })
         })
       } else {
