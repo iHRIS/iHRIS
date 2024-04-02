@@ -255,7 +255,7 @@ export default {
           if(!val) {
             continue
           }
-          if(val.split("/").length > 1 && val.split("/")[1] == id) {
+          if(val.toString().split("/").length > 1 && val.toString().split("/")[1] == id) {
             id = val
           }
         }
