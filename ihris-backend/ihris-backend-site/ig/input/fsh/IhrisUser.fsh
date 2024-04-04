@@ -292,7 +292,7 @@ Usage:          #definition
 * item[0].item[3].extension[constraint].extension[expression].valueString = "matches('^[0-9a-zA-Z_.]+@([0-9a-zA-Z]+[.])+[a-zA-Z]{2,4}$')"
 * item[0].item[3].extension[constraint].extension[human].valueString = "Email Address is not properly formatted."
 
-* item[0].item[4].linkId = "Person.extension[0]"
+* item[0].item[4].linkId = "Person.extension[0]#preloaded"
 * item[0].item[4].definition = "http://ihris.org/fhir/StructureDefinition/ihris-person-user#Person.extension:role.value[x]:valueReference"
 * item[0].item[4].text = "Role"
 * item[0].item[4].type = #reference

@@ -28,18 +28,18 @@ The iHRIS roadmap outlines the features planned for inclusion in future releases
 
 11. Mobile app
 
-    Developing an iHRIS mobile application
+12. Developing an iHRIS mobile application
 
-12. API endpoint for ADX 
-    
+13. API endpoint for ADX
+
     This is to help add out the box DHIS2 interoperability
 
-13. (**In-progress**) Visualization using Apache Echarts
+14. (**In-progress**) Visualization using Apache Echarts
 
     Intergrate the use of Echarts to replace the current Visualization tool (Kibana)
 
-14. UI Interface to build report relationships
+15. UI Interface to build report relationships
 
-15. Limiting access to individuial resource fiedls i.e user not having access to Practitioner.birthdate based on his role and tasks
+16. Limiting access to individuial resource fiedls i.e user not having access to Practitioner.birthdate based on his role and tasks
 
-16. Developing an iHRIS App store. 
+17. Developing an iHRIS App store.
