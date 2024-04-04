@@ -756,7 +756,7 @@ router.get('/page/:page/:type?', function (req, res) {
 
         const createSearchTemplate = async (resource, structure) => {
             logger.silly(JSON.stringify(structure, null, 2))
-
+console.error(JSON.stringify(req.user?.permissions, 0, 2));
             let search = ['id']
             try {
                 search = pageDisplay.extension.filter(ext => ext.url === "search").map(ext =>
@@ -785,6 +785,7 @@ router.get('/page/:page/:type?', function (req, res) {
                 } catch (err) {
                 }
                 let roles = add.extension.filter(ext => ext.url === "role")
+                let tasks = add.extension.filter(ext => ext.url === "task")
                 let hasPermission
                 if(roles.length > 0) {
                     let userRole = req.user.resource.extension.find((ext) => {
@@ -797,9 +798,24 @@ router.get('/page/:page/:type?', function (req, res) {
                         })
                     }
                 }
+                if(!hasPermission && tasks.length > 0) {
+                    for(let task of tasks) {
+                        await fhirAxios.read("Basic", task.valueId).then((taskResource) => {
+                            let taskAttributes = taskResource?.extension?.find((ext) => {
+                                return ext.url === 'http://ihris.org/fhir/StructureDefinition/task-attributes'
+                            })
+                            let taskName = taskAttributes?.extension?.find((ext) => {
+                                return ext.url === 'instance'
+                            })?.valueId
+                            if(req.user?.permissions?.special?.special?.id[taskName] || req.user?.permissions?.special?.section?.id[taskName] || (req.user?.permissions["*"] && req.user?.permissions["*"]["*"])) {
+                                hasPermission = true
+                            }
+                        })
+                    }
+                }
                 if(hasPermission || roles.length == 0) {
                     addLink = {url: url, icon: icon, class: eleClass}
-                } else if(roles.length > 0) {
+                } else if(roles.length > 0 || tasks.length > 0) {
                     //hide if roles specified but user has no that role
                     addLink = {url: url, icon: icon, class: eleClass, hide: true}
                 }
