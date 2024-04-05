@@ -412,23 +412,23 @@ Usage:          #definition
 * item[0].text = "End Appointment"
 * item[0].type = #group
 
-* item[0].item[0].linkId = "PracitionerRole.period.end"
-* item[0].item[0].definition = "http://ihris.org/fhir/StructureDefinition/ihris-practitioner-role#PracitionerRole.period.end"
+* item[0].item[0].linkId = "PractitionerRole.period.end"
+* item[0].item[0].definition = "http://ihris.org/fhir/StructureDefinition/ihris-practitioner-role#PractitionerRole.period.end"
 * item[0].item[0].text = "End Date"
 * item[0].item[0].type = #date
 * item[0].item[0].required = true
 * item[0].item[0].repeats = false
 
-* item[0].item[1].linkId = "PracitionerRole.extension[0]"
-* item[0].item[1].definition = "http://ihris.org/fhir/StructureDefinition/ihris-practitioner-role#PracitionerRole.extension:reasonForDepature.value[x]:valueCoding"
+* item[0].item[1].linkId = "PractitionerRole.extension[0]"
+* item[0].item[1].definition = "http://ihris.org/fhir/StructureDefinition/ihris-practitioner-role#PractitionerRole.extension:reasonForDepature.value[x]:valueCoding"
 * item[0].item[1].text = "Reason For Departure"
 * item[0].item[1].type = #choice
 * item[0].item[1].answerValueSet = "http://ihris.org/fhir/ValueSet/ihris-reason-departure-valueset"
 * item[0].item[1].required = true
 * item[0].item[1].repeats = false
 
-* item[0].item[2].linkId = "PracitionerRole.active"
-* item[0].item[2].definition = "http://ihris.org/fhir/StructureDefinition/ihris-practitioner-role#PracitionerRole.active"
+* item[0].item[2].linkId = "PractitionerRole.active"
+* item[0].item[2].definition = "http://ihris.org/fhir/StructureDefinition/ihris-practitioner-role#PractitionerRole.active"
 * item[0].item[2].text = "Status"
 * item[0].item[2].type = #boolean
 * item[0].item[2].required = true
