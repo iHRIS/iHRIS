@@ -12,7 +12,7 @@ To manage this there are some properties needed to be set:
 * parameter[=].part[+].name = "site:nav:menu:reports:text"
 * parameter[=].part[=].valueString = "Reports"
 
-* parameter[=].part[+].name = "site:nav:menu:reports:showInGrid"
+* parameter[=].part[+].name = "site:nav:menu:reports:menuGridView"
 * parameter[=].part[=].valueString = "true"
 
 * parameter[=].part[+].name = "site:nav:menu:reports:order"
@@ -39,7 +39,7 @@ The above code will create a report menu with the name "Reports" and a submenu w
 | Properties    | Description      |
 |--------------|------------------|
 | ```site:nav:menu:reports:text``` | The name of the  menu to be displayed on the navigation. |
-| ```site:nav:menu:reports:showInGrid```|  is a boolean value that determines whether the menu will be displayed in the grid or not.    |
+| ```site:nav:menu:reports:menuGridView```|  is a boolean value that determines whether the menu will be displayed in the grid or not.    |
 | ```site:nav:menu:reports:order``` | is the order in which the menu will be displayed.     |
 | ```site:nav:menu:reports:icon``` | is the icon to be displayed on the menu.     |
 | ```site:nav:menu:reports:menu:staff:text``` | is the name of the submenu to be displayed on the navigation.     |
@@ -47,11 +47,11 @@ The above code will create a report menu with the name "Reports" and a submenu w
 | ```site:nav:menu:reports:menu:staff:order``` | is the order in which the submenu will be displayed.     |
 | ```site:nav:menu:reports:menu:staff:description``` | is the description of the submenu to be displayed on the navigation if it is displayed in a grid view mode.     |
 
-The showInGrid property is optional and if not set or the value is false, the menu will be displayed in a list view mode.
+The menuGridView property is optional and if not set or the value is false, the menu will be displayed in a list view mode.
 
 | Grid View Mode                                      | List View Mode                                         |
 |-----------------------------------------------------|--------------------------------------------------------|
-| ![Alt text](../img/showInGrid.png 'Grid View Mode') | ![Alt text](../img/notShowInGrid.png 'List View Mode') |
+| ![Alt text](../img/menuGridView.png 'Grid View Mode') | ![Alt text](../img/notMenuGridView.png 'List View Mode') |
 
 ## Creating Nested 
 

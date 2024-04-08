@@ -59,7 +59,7 @@
 <script>
 // @ is an alias to /src
 export default {
-  name: "ShowInGrid",
+  name: "menu-grid-view",
   props: ["nav"],
   mounted: function () {
      this.$nextTick(() => {

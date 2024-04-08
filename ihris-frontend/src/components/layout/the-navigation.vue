@@ -146,8 +146,8 @@ export default {
           if (this.nav.menu[menu_id].menu) {
             entry.menu = []
             for (let sub_id of Object.keys(this.nav.menu[menu_id].menu)) {
-              if(this.nav.menu[menu_id].menu[sub_id]?.menu || (this.nav.menu[menu_id]?.showInGrid === "true")){
-                entry.url = `/show-in-grid/${menu_id}`
+              if(this.nav.menu[menu_id].menu[sub_id]?.menu || (this.nav.menu[menu_id]?.menuGridView === "true")){
+                entry.url = `/menu-grid-view/${menu_id}`
                 delete entry.menu
                 break
               }
