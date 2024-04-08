@@ -3,7 +3,7 @@ import VueRouter from "vue-router"
 import Home from "../views/home.vue"
 import Static from "../views/static-page.vue"
 import HomeNav from "../views/home-nav.vue"
-import ShowInGrid from "@/views/custom-nav.vue";
+import menuGridView from "@/views/menu-grid-view.vue";
 //import Test from "../views/test.vue"
 //import mhero from "../views/mhero/mhero.vue"
 //import contactGroups from "../views/mhero/contact-groups.vue"
@@ -21,11 +21,11 @@ const routes = [{
     props: { default: { id: "page-home", blankOnErr: true } }
   },
   {
-    path: "/show-in-grid/:id",
-    name: "grid-view",
+    path: "/menu-grid-view/:id",
+    name: "menu-grid-view",
     components: {
       default: Home,
-      homeNav: ShowInGrid
+      homeNav: menuGridView
     },
     props: { default: { id: "page-grid-view", blankOnErr: true } }
   },
