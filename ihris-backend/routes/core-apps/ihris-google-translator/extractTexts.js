@@ -202,7 +202,17 @@ function extractFromPage(page_id, type) {
   return new Promise((resolve, reject) => {
     fhirAxios.read("Basic", page_id).then(async (resource) => {
       let pageDisplay = resource.extension.find(ext => ext.url === "http://ihris.org/fhir/StructureDefinition/ihris-page-display")
-  
+      let links = pageDisplay.extension.filter((displ) => {
+        return displ.url === 'link'
+      })
+      for(let link of links) {
+        let text = link.extension.find((ln) => {
+          return ln.url === 'text'
+        })
+        if(text) {
+          keys.App["fhir-resources-texts"][text.valueString] = text.valueString
+        }
+      }
       let pageResource = pageDisplay.extension.find(ext => ext.url === "resource").valueReference.reference
       let pageFields = {}
         try {

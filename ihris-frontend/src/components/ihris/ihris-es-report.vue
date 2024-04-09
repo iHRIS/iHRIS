@@ -16,7 +16,6 @@
               @click="dialog = true"
             >
               <v-icon left>mdi-chart-box-plus-outline</v-icon>
-              Customize Report
               {{ $t("App.hardcoded-texts.Customize Report") }}
             </v-btn>
             <v-btn v-if="!hideExport" small color="info" @click="reportExport('csv')">
