@@ -104,7 +104,7 @@ export default {
   methods: {
     setupData() {
       if (this.practitionerId) {
-        fetch(`/fhir/PractitionerRole?practitioner=${this.practitionerId}`)
+        fetch(`/fhir/PractitionerRole?practitioner=${this.practitionerId}&_sort=-date,-_id`)
             .then((response) => {
               response
                   .json()
