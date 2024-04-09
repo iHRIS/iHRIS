@@ -49,7 +49,7 @@
             <v-list-item v-for="(link,idx) in links" :key="link.url">
               <v-btn :key="link.url" :text="!link.button" :to="getLinkUrl(link)" :class="link.linkclass">
                 <v-icon v-if="link.icon" light>{{ link.icon }}</v-icon>
-                {{ linktext[idx] }}
+                {{ $t(`App.fhir-resources-texts.${linktext[idx]}`) }}
               </v-btn>
             </v-list-item>
           </template>
