@@ -1,3 +1,4 @@
+const async = require("async")
 const nconf = require('../config')
 const fhirAxios = nconf.fhirAxios
 const logger = require('../../winston')
@@ -532,19 +533,21 @@ const fhirSecurityPractitioner = {
               resources.push({
                 resource
               })
-              console.log("Total " + resources.length);
-              for(let resource of resources) {
+              async.eachSeries(resources, (resource, nxt) => {
                 resource = resource.resource
                 fhirSecurityPractitioner.resetPractitionerSecurityOnResource( resource )
                 fhirSecurityLocation.resetLocationSecurityOnResource( resource, locationCache[practitioner] )
                 delete resource.meta.versionId
                 delete resource.meta.lastUpdated
-                fhirAxios.update( resource ).catch( (err) => {
+                fhirAxios.update( resource ).then(() => {
+                  return nxt()
+                }).catch( (err) => {
                   // console.log(err);
                   logger.error("Failed to update "+resource.resourceType+"/"+resource.id+" security for practitioner "
                     +practitioner+" "+err.message)
+                    return nxt()
                 } )
-              }
+              })
             } )
           }
         }

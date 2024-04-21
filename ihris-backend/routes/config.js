@@ -756,7 +756,6 @@ router.get('/page/:page/:type?', function (req, res) {
 
         const createSearchTemplate = async (resource, structure) => {
             logger.silly(JSON.stringify(structure, null, 2))
-console.error(JSON.stringify(req.user?.permissions, 0, 2));
             let search = ['id']
             try {
                 search = pageDisplay.extension.filter(ext => ext.url === "search").map(ext =>
