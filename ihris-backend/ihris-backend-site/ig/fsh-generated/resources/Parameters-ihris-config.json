@@ -12,15 +12,15 @@
       "valueSignature": {
         "type": [
           {
-            "system": "urn:iso-astm:E1762-95:2013",
-            "code": "1.2.840.10065.1.12.1.14"
+            "code": "1.2.840.10065.1.12.1.14",
+            "system": "urn:iso-astm:E1762-95:2013"
           }
         ],
-        "when": "2024-03-07T09:38:13.558Z",
+        "when": "2022-06-21T09:31:16.469Z",
         "who": {
           "reference": "http://ihris.org/fhir/Organization/ihris"
         },
-        "data": "lz4fU6WVsdK9SHnbORMgj+QGqqISoqE1xEbXDGAoFLMbnL2yVMPzH6G5La5PK9gwNFoRynxdDjny/8iFR6IJva4RFNNfXElygHcR8bJq4Ee+MJVsPMRngPsmp7WQbs4jRQhlfnIpmP0yLIVCXKeYkv6iDYTYSmezuF03XMRA3z8="
+        "data": "V870cwmayGw0tOXXdiUn7/MNEaPt/KzRCk7H2t6IvqxmhshwxLxAYve8yNEdkhj/WhybFokLXR5rhtqU4VKE9EiN/dL1fHVbdu0rk/WrcFy2vPqYPUxepFAAAWQXIQV7gsVSMFEbUOTiYaQ42dt7gddrmJYq8p+6RFLAMDkxpzU="
       }
     },
     {
@@ -295,7 +295,7 @@
           "valueString": "mdi-database"
         },
         {
-          "name": "site:nav:menu:database:showInGrid",
+          "name": "site:nav:menu:database:menuGridView",
           "valueString": "true"
         },
         {
@@ -579,19 +579,35 @@
           "valueString": "4"
         },
         {
+          "name": "site:nav:menu:manage-report:text",
+          "valueString": "Manage Report"
+        },
+        {
+          "name": "site:nav:menu:manage-report:order",
+          "valueString": "9"
+        },
+        {
+          "name": "site:nav:menu:manage-report:icon",
+          "valueString": "mdi-cog-sync-outline"
+        },
+        {
+          "name": "site:nav:menu:manage-report:url",
+          "valueString": "/page/manage-report"
+        },
+        {
           "name": "site:nav:menu:reports:text",
           "valueString": "Reports"
         },
         {
           "name": "site:nav:menu:reports:order",
-          "valueString": "9"
+          "valueString": "10"
         },
         {
           "name": "site:nav:menu:reports:icon",
           "valueString": "mdi-chart-bar"
         },
         {
-          "name": "site:nav:menu:reports:showInGrid",
+          "name": "site:nav:menu:reports:menuGridView",
           "valueString": "true"
         },
         {
@@ -616,7 +632,7 @@
         },
         {
           "name": "site:nav:menu:users:order",
-          "valueString": "10"
+          "valueString": "11"
         },
         {
           "name": "site:nav:menu:users:icon",
@@ -644,7 +660,7 @@
         },
         {
           "name": "site:nav:menu:audit:order",
-          "valueString": "11"
+          "valueString": "12"
         },
         {
           "name": "site:nav:menu:audit:icon",
@@ -660,7 +676,7 @@
         },
         {
           "name": "site:nav:menu:password:order",
-          "valueString": "12"
+          "valueString": "13"
         },
         {
           "name": "site:nav:menu:password:icon",
@@ -676,7 +692,7 @@
         },
         {
           "name": "site:nav:menu:ihris-apps-list:order",
-          "valueString": "13"
+          "valueString": "14"
         },
         {
           "name": "site:nav:menu:ihris-apps-list:icon",
@@ -935,51 +951,99 @@
           "valueString": "name.where(use='official').given.first() + ' ' + name.where(use='official').family"
         },
         {
-          "name": "site:intro:title",
+          "name": "site:intro:default:title",
           "valueString": "Person Information"
         },
         {
-          "name": "site:intro:data:fullName:text",
-          "valueString": "Full Name"
+          "name": "site:intro:default:data:fullName:text",
+          "valueString": "Name"
         },
         {
-          "name": "site:intro:data:fullName:path",
-          "valueString": "Practitioner.name.family,Practitioner.name.given[0]"
+          "name": "site:intro:default:data:fullName:path",
+          "valueString": "Practitioner.name.where(use='official').given.first() + ' ' + Practitioner.name.where(use='official').family"
         },
         {
-          "name": "site:intro:data:title:text",
+          "name": "site:intro:default:data:title:text",
           "valueString": "Job"
         },
         {
-          "name": "site:intro:data:title:path",
+          "name": "site:intro:default:data:title:path",
           "valueString": "PractitionerRole.code.coding.display"
         },
         {
-          "name": "site:intro:data:dateOfBirth:text",
+          "name": "site:intro:default:data:dateOfBirth:text",
           "valueString": "Date Of Birth"
         },
         {
-          "name": "site:intro:data:dateOfBirth:path",
+          "name": "site:intro:default:data:dateOfBirth:path",
           "valueString": "Practitioner.birthDate"
         },
         {
-          "name": "site:intro:data:gender:text",
+          "name": "site:intro:default:data:gender:text",
           "valueString": "Gender"
         },
         {
-          "name": "site:intro:data:gender:path",
+          "name": "site:intro:default:data:gender:path",
           "valueString": "Practitioner.gender"
         },
         {
-          "name": "site:intro:data:profilePicture:text",
+          "name": "site:intro:default:data:profilePicture:text",
           "valueString": "Photo"
         },
         {
-          "name": "site:intro:data:profilePicture:type",
+          "name": "site:intro:default:data:profilePicture:type",
           "valueString": "photo"
         },
         {
-          "name": "site:intro:data:profilePicture:path",
+          "name": "site:intro:default:data:profilePicture:path",
+          "valueString": "Practitioner.photo[0]"
+        },
+        {
+          "name": "site:intro:practitionerrole:title",
+          "valueString": "Person Information"
+        },
+        {
+          "name": "site:intro:practitionerrole:data:fullName:text",
+          "valueString": "Name"
+        },
+        {
+          "name": "site:intro:practitionerrole:data:fullName:path",
+          "valueString": "Practitioner.name.where(use='official').given.first() + ' ' + Practitioner.name.where(use='official').family"
+        },
+        {
+          "name": "site:intro:practitionerrole:data:title:text",
+          "valueString": "Job"
+        },
+        {
+          "name": "site:intro:practitionerrole:data:title:path",
+          "valueString": "PractitionerRole.code.coding.display"
+        },
+        {
+          "name": "site:intro:practitionerrole:data:dateOfBirth:text",
+          "valueString": "Date Of Birth"
+        },
+        {
+          "name": "site:intro:practitionerrole:data:dateOfBirth:path",
+          "valueString": "Practitioner.birthDate"
+        },
+        {
+          "name": "site:intro:practitionerrole:data:gender:text",
+          "valueString": "Gender"
+        },
+        {
+          "name": "site:intro:practitionerrole:data:gender:path",
+          "valueString": "Practitioner.gender"
+        },
+        {
+          "name": "site:intro:practitionerrole:data:profilePicture:text",
+          "valueString": "Photo"
+        },
+        {
+          "name": "site:intro:practitionerrole:data:profilePicture:type",
+          "valueString": "photo"
+        },
+        {
+          "name": "site:intro:practitionerrole:data:profilePicture:path",
           "valueString": "Practitioner.photo[0]"
         }
       ]

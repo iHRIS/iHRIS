@@ -96,6 +96,11 @@ const routes = [{
   //component: () => import(/* webpackChunkName: "resource" */ "../views/fhir-page-resource.vue")
   //},
   {
+    path: '/page/manage-report',
+    name: 'manage-report',
+    component: () => import( /* webpackChunkName: "mhero" */ "../views/manage-report.vue")
+  },
+  {
     path: "/resource/view/:page/:id",
     name: "resource_view",
     // route level code-splitting
