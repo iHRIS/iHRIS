@@ -394,7 +394,7 @@ export default {
         }
       }
 
-      if (sTermDet && sTermDet?.dataType === "date" && sTermDet.field) {
+      if (sTermDet && (sTermDet?.dataType === "date" || sTermDet?.dataType === "long") && sTermDet.field) {
         let date = this.terms
         let filterDate = []
         let c = sTermDet.field

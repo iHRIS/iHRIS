@@ -1702,8 +1702,6 @@ router.get('/report/es/:report', (req, res) => {
                     }
                     if(type) {
                         filterParams.dataType = type.valueString
-                    } else {
-                        filterParams.dataType = "string"
                     }
                     reportData.filters.push(filterParams)
                 }
@@ -1738,7 +1736,9 @@ router.get('/report/es/:report', (req, res) => {
                         continue
                     }
                     let dataType = mappings.data[indexName].mappings.properties[field].type
-                    reportData.filters[index].dataType = dataType
+                    if(!reportData.filters[index].dataType) {
+                        reportData.filters[index].dataType = dataType
+                    }
                 }
             }).catch((err) => {
                 logger.error(err.message);

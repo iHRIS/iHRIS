@@ -92,6 +92,37 @@
         </v-container>
 
       </template>
+      <template v-else-if="filterDataType == 'long'">
+        <div>
+          <v-text-field
+            v-model="value"
+            :label="label"
+            clearable
+            class="internal-slot reverse-text"
+            dense
+            outlined
+            hide-details
+            @input="updateSearch"
+          >
+            <template v-slot:prepend-inner>
+              <v-select
+                v-model="filters"
+                :items="comparisons"
+                menu-props="auto"
+                dense
+                solo
+                chips
+                hide-details
+                item-text="text"
+                item-value="value"
+                style="max-width: 80px;"
+                @change="changeFilter"
+                @input="updateSearch"
+              />
+            </template>
+          </v-text-field>
+        </div>
+      </template>
       <v-text-field v-else
         v-model="value"
         :label="label"
@@ -135,7 +166,10 @@ export default {
     }
   },
   mounted: function () {
-    if (this.reportData.mappings.mappings.properties[this.expression]) {
+    this.filterDataType = this.reportData.filters && this.reportData.filters.find((filter) => {
+      return filter.field === this.expression
+    }).dataType
+    if (this.reportData.mappings.mappings.properties[this.expression] && !this.filterDataType) {
       this.filterDataType = this.reportData.mappings.mappings.properties[this.expression].type
     }
     if (this.isDropDown && this.filterDataType) {

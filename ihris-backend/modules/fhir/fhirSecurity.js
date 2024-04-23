@@ -542,7 +542,6 @@ const fhirSecurityPractitioner = {
                 fhirAxios.update( resource ).then(() => {
                   return nxt()
                 }).catch( (err) => {
-                  // console.log(err);
                   logger.error("Failed to update "+resource.resourceType+"/"+resource.id+" security for practitioner "
                     +practitioner+" "+err.message)
                     return nxt()
