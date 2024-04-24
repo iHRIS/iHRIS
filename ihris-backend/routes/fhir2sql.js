@@ -370,7 +370,7 @@ router.get('/populateFilter/:table/:field', (req, res) => {
 
 function buildFilters(data) {
   let where = ""
-  if(data.must.length) {
+  if(data?.must?.length) {
     for(let must of data.must) {
       let keys = Object.keys(must)
       let column = keys.find((ky) => {
@@ -399,7 +399,7 @@ function buildFilters(data) {
       where += thisWhere
     }
   }
-  if(data.must_not.length) {
+  if(data?.must_not?.length) {
     for(let must_not of data.must_not) {
       let column = Object.keys(must_not)[0]
       let value = must_not[column]
@@ -422,7 +422,7 @@ function buildFilters(data) {
     }
   }
 
-  if(data.ranges.length) {
+  if(data?.ranges?.length) {
     for(let range of data.ranges) {
       let thisWhere = ""
       if(where) {

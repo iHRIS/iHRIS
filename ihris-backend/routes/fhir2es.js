@@ -14,6 +14,63 @@ const nconf = require('../modules/config')
 const fhirAxios = require('../modules/fhir/fhirAxios')
 const outcomes = ihrissmartrequire('config/operationOutcomes')
 
+router.get('/cache/:index/:cacheTime?', async (req, res) => {
+  if (!req.user) {
+    return res.status(401).json(outcomes.NOTLOGGEDIN)
+  }
+  console.log(nconf.get("fhir:flattener"))
+  let indexName = req.params.index
+  let cacheTime = req.params.cacheTime || ""
+  let server = nconf.get('elasticsearch:base') || "http://localhost:9200"
+  let username = nconf.get("elasticsearch:username")
+  let password = nconf.get("elasticsearch:password")
+  if (nconf.get("fhir:flattener") === "fhir2es") {
+    const {CacheFhirToES} = require('fhir2es')
+    let cacheConfig = {
+      ESBaseURL: server,
+      ESUsername: username,
+      ESPassword: password,
+      ESMaxCompilationRate: nconf.get("elasticsearch:max_compiliation_rate") || "100000/1m",
+      ESMaxScrollContext: nconf.get("elasticsearch:max_scroll_context") || "100000",
+      FHIRBaseURL: nconf.get("fhir:base") || "http://localhost:8080/hapi/fhir",
+      FHIRUsername: nconf.get("fhir:username"),
+      FHIRPassword: nconf.get("fhir:password"),
+      relationshipsIDs: [indexName],
+      since: cacheTime,
+    }
+    let caching = new CacheFhirToES(cacheConfig)
+    caching.cache().then(() => {
+      return res.status(200).send()
+    }).catch((err) => {
+      console.log(err)
+      return res.status(500).send()
+    })
+  } else if (nconf.get("fhir:flattener") === "fhir2sql") {
+    const {CacheFhirToES} = require('fhir2sql')
+    let cacheConfig = {
+      FHIRBaseURL: nconf.get("fhir:base") || "http://localhost:8080/hapi/fhir",
+      FHIRUsername: nconf.get("fhir:username"),
+      FHIRPassword: nconf.get("fhir:password"),
+      relationshipsIDs: [indexName],
+      ESModulesBasePath: nconf.get("app:site:path") + "/modules/es",
+      DBConnection: {
+        database: nconf.get("database:name"),
+        username: nconf.get("database:username"),
+        password: nconf.get("database:password"),
+        dialect: nconf.get("database:dialect") /* one of 'mysql' | 'postgres' | 'sqlite' | 'mariadb' | 'mssql' | 'db2' | 'snowflake' | 'oracle' */
+      }
+    }
+    let caching = new CacheFhirToES(cacheConfig)
+    caching.cache().then(() => {
+      return res.status(200).send()
+    }).catch((err) => {
+      console.log(err)
+      return res.status(500).send()
+    })
+  }
+})
+
+
 router.get('/indices', (req, res) => {
   if ( !req.user ) {
     return res.status(401).json( outcomes.NOTLOGGEDIN)

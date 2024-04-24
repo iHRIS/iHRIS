@@ -55,7 +55,16 @@
       "Change Password": "Change Password",
       "Apps": "Apps",
       "Staff Directorate": "Staff Directorate",
-      "User Role Tasks": "User Role Tasks"
+      "User Role Tasks": "User Role Tasks",
+      "Manage Report": "Manage Report"
+    },
+    "intro": {
+      "Person Information": "Person Information",
+      "Name": "Name",
+      "Job": "Job",
+      "Date Of Birth": "Date Of Birth",
+      "Gender": "Gender",
+      "Photo": "Photo"
     },
     "ihris-codesystem": {},
     "ihris-search": {},
@@ -426,7 +435,19 @@
       "Location/Facility": "Location/Facility",
       "Self Service Practitioner": "Self Service Practitioner",
       "Fullname": "Fullname",
-      "User Status": "User Status"
+      "User Status": "User Status",
+      "Practitioner of this account": "Practitioner of this account",
+      "If location is assigned to a user, a user will only have access to records of that respective location": "If location is assigned to a user, a user will only have access to records of that respective location",
+      "If editing, leave blank to keep the same password. Password is required if not editing": "If editing, leave blank to keep the same password. Password is required if not editing",
+      "View Other Tasks": "View Other Tasks",
+      "View Health Worker": "View Health Worker",
+      "Add Another": "Add Another",
+      "Edit": "Edit",
+      "View Other Roles": "View Other Roles",
+      "Edit User": "Edit User",
+      "Add Another User": "Add Another User",
+      "View Practitioner": "View Practitioner",
+      "Initial Password": "Initial Password"
     },
     "hardcoded-texts": {
       "Installed Apps": "Installed Apps",
@@ -504,7 +525,37 @@
       "Export": "Export",
       "Customize Report": "Customize Report",
       "Please fill in all fields": "Please fill in all fields",
-      "what_is_ihris": "iHRIS is IntraHealth International's free, open source software that helps countries around the world track and manage their health workforce data to improve access to services. Countries use it to capture and maintain high-quality information for health workforce planning, management, regulation, and training."
+      "what_is_ihris": "iHRIS is IntraHealth International's free, open source software that helps countries around the world track and manage their health workforce data to improve access to services. Countries use it to capture and maintain high-quality information for health workforce planning, management, regulation, and training.",
+      "Filters": "Filters",
+      "Report": "Report",
+      "Configure": "Configure",
+      "Last Ended Indexing Time": "Last Ended Indexing Time",
+      "Last Began Indexing Time": "Last Began Indexing Time",
+      "Meta Data":"Meta Data",
+      "Index Name": "Index Name",
+      "FHIR Report Version": "FHIR Report Version",
+      "FHIR Report Name": "FHIR Report Name",
+      "FHIR Report Last Updated": "FHIR Report Last Updated",
+      "Reload": "Reload",
+      "This will cache the report from the last time it was cached.": "This will cache the report from the last time it was cached.",
+      "Fresh Load": "Fresh Load",
+      "This will cache the report afresh": "This will cache the report afresh"
+    },
+    "reports": {
+      "Staff Directorate": "Staff Directorate",
+      "Fullname": "Fullname",
+      "Gender": "Gender",
+      "Date of Birth": "Date of Birth",
+      "Phone Number": "Phone Number",
+      "Staff Report": "Staff Report",
+      "Identifier(NID/PP/EmpID)": "Identifier(NID/PP/EmpID)",
+      "Prefix": "Prefix",
+      "Given name": "Given name",
+      "Family name": "Family name",
+      "BirthDate": "BirthDate",
+      "Residence": "Residence",
+      "Citizenship": "Citizenship",
+      "Marital Status": "Marital Status"
     }
   }
 }

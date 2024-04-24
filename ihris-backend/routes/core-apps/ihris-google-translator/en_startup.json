@@ -95,7 +95,20 @@
       "You have been logged out due to inactivity": "You have been logged out due to inactivity",
       "Export" : "Export",
       "Customize Report" : "Customize Report",
-      "Please fill in all fields" : "Please fill in all fields"
+      "Please fill in all fields" : "Please fill in all fields",
+      "Report": "Report",
+      "Configure": "Configure",
+      "Last Ended Indexing Time": "Last Ended Indexing Time",
+      "Last Began Indexing Time": "Last Began Indexing Time",
+      "Meta Data":"Meta Data",
+      "Index Name": "Index Name",
+      "FHIR Report Version": "FHIR Report Version",
+      "FHIR Report Name": "FHIR Report Name",
+      "FHIR Report Last Updated": "FHIR Report Last Updated",
+      "Reload": "Reload",
+      "This will cache the report from the last time it was cached.": "This will cache the report from the last time it was cached.",
+      "Fresh Load": "Fresh Load",
+      "This will cache the report afresh": "This will cache the report afresh"
     }
   }
 }
