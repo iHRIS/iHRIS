@@ -59,10 +59,14 @@ const filterNavigation = (user, nav, prefix) => {
 router.get("/site", async function (req, res) {
     const defaultUser = nconf.get("user:loggedout") || "ihris-user-loggedout";
     let site = JSON.parse(JSON.stringify(nconf.get("site") || {}));
+    let defaultFormat = nconf.get("defaults:format");
     if(!site.auth) {
         site.auth = {}
     }
     site.version = package.version
+    if(defaultFormat){
+        site.defaultFormat = defaultFormat
+    }
     site.auth.signup = {...nconf.get("auth:signup")}
     site.fhirFlattener = nconf.get("fhir:flattener")
     if (nconf.getBool("security:disabled")) {

@@ -389,6 +389,8 @@ Usage: #example
 * parameter[=].part[=].valueString = "related-location=(.+)"
 * parameter[=].part[+].name = "defaults:fields:Location.partOf:user_filter:replace"
 * parameter[=].part[=].valueString = "$1"
+* parameter[=].part[+].name = "defaults:format:date"
+* parameter[=].part[=].valueString = "dddd, MMMM Do YYYY"
 * parameter[=].part[+].name = "workflow:processor:endrole:file"
 * parameter[=].part[=].valueString = "workflowEndRole"
 * parameter[=].part[+].name = "workflow:questionnaire:endrole:url"

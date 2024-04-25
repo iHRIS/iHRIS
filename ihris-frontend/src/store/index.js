@@ -27,6 +27,9 @@ export default new Vuex.Store({
     progress: {
       enabled: false,
       title: ''
+    },
+    format:{
+     dateFormat:"",
     }
   },
   mutations: {
@@ -63,6 +66,9 @@ export default new Vuex.Store({
         state.message.text = data.text
         state.message.active = true
       }
+    },
+    setDateFormat( state, data ) {
+      state.format.dateFormat = data
     }
   },
   actions: {},
