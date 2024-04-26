@@ -272,7 +272,11 @@ export default {
       if ( this.isEthiopian ) {
         return this.value && "Ethiopian: " + this.etValue + " Gregorian: " + this.value
       } else {
-        return this.value
+        if(this.value) {
+          return this.$moment(this.value).format(this.$store.state.format.dateFormat)
+        }else {
+          return this.value
+        }
       }
     },
     index: function() {

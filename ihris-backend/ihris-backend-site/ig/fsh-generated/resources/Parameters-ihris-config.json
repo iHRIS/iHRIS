@@ -787,6 +787,10 @@
           "valueString": "$1"
         },
         {
+          "name": "defaults:format:date",
+          "valueString": "dddd, MMMM Do YYYY"
+        },
+        {
           "name": "workflow:processor:endrole:file",
           "valueString": "workflowEndRole"
         },

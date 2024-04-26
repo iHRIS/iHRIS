@@ -179,7 +179,13 @@ export default {
               let result = { id: entry.resource.id };
               for (let field of this.fields) {
                 let fieldDisplay = this.$fhirpath.evaluate( entry.resource, field[1] );
-                result[field[1]] = await this.$fhirutils.lookup( fieldDisplay[0], field[2] )
+                 let data = await this.$fhirutils.lookup( fieldDisplay[0], field[2] )
+                const regex = /^\d{4}-\d{2}-\d{2}$/;
+                 if (regex.test(fieldDisplay[0])) {
+                   result[field[1]] = this.$moment(fieldDisplay[0]).format(this.$store.state.format.dateFormat)
+                 }else {
+                   result[field[1]] = data
+                 }
               }
               this.results.push(result);
             }
