@@ -52,7 +52,8 @@ export default {
       link: [],
       error_message: null,
       update_again: { rerun: false, restart: false },
-      extraTerms: {}
+      extraTerms: {},
+      elements: []
     };
   },
   watch: {
@@ -80,6 +81,18 @@ export default {
     // }
     for (let field of this.fields) {
       this.headers.push({ text: this.$t(`App.fhir-resources-texts.${field[0]}`), value: field[1] });
+      let element
+      if(field[1].startsWith(this.resource)) {
+        element = field[1].split(".")[1]
+      } else {
+        element = field[1].split(".")[0]
+      }
+      let exists = this.elements.find((el) => {
+        return el === element
+      })
+      if(!exists) {
+        this.elements.push(element)
+      }
     }
   },
   mounted: function() {
@@ -144,6 +157,7 @@ export default {
           this.resource +
           "?_count=" +
           count +
+          "&_elements=" + this.elements.join(",") +
           "&_total=accurate&_profile=" +
           this.profile;
         let sTerms = Object.keys(this.terms);

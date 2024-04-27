@@ -52,15 +52,19 @@ router.get("/translate/:from/:to/:type?", async(req, res) => {
     locale: req.params.to,
     type: req.params.type
   })
+  let interval
   translator(from, translations, req.params.from, req.params.to, req.params.type).then(async() => {
     let ind = onprogressTranslations.findIndex((loc) => {
       return loc.locale === req.params.to
     })
     onprogressTranslations.splice(ind, 1)
     let localesPath = getLocalePath()
+    console.log('Done');
     await fs.writeFileSync(localesPath + req.params.to + ".json", JSON.stringify(translations, 0, 2))
+    clearInterval(interval)
   })
-  setInterval(async() => {
+  interval = setInterval(async() => {
+    console.log('here');
     let localesPath = getLocalePath()
     await fs.writeFileSync(localesPath + req.params.to + ".json", JSON.stringify(translations, 0, 2))
   }, 1000);
