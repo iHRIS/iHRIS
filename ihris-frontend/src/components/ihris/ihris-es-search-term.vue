@@ -51,7 +51,7 @@
             <template v-slot:activator="{ on, attrs }">
               <v-text-field
                 v-model="value"
-                :label="label"
+                :label="$t(`App.reports.${label}`)"
                 clearable
                 class="internal-slot reverse-text"
                 dense
@@ -94,7 +94,7 @@
         <div>
           <v-text-field
             v-model="value"
-            :label="label"
+            :label="$t(`App.reports.${label}`)"
             clearable
             class="internal-slot reverse-text"
             dense
@@ -123,7 +123,7 @@
       </template>
       <v-text-field v-else
         v-model="value"
-        :label="label"
+        :label="$t(`App.reports.${label}`)"
         class="ma-1"
         clearable
         dense
