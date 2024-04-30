@@ -273,7 +273,10 @@ export default {
         return this.value && "Ethiopian: " + this.etValue + " Gregorian: " + this.value
       } else {
         if(this.value) {
-          return this.$moment(this.value).format(this.$store.state.format.dateFormat)
+          if(this.$store.state.format.dateFormat && !this.displayType === 'year') {
+            return this.$moment(this.value).format(this.$store.state.format.dateFormat)
+          }
+          return this.value
         }else {
           return this.value
         }

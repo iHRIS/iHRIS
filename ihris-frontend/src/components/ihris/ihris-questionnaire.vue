@@ -435,7 +435,7 @@ export default {
               });
               this.$store.commit("setMessage", {
                 type: "success",
-                text: "Added successfully.",
+                text: this.$t("App.hardcoded-texts.Added successfully"),
               });
             } else {
               this.overlay = false;

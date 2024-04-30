@@ -430,6 +430,7 @@
       "User Status": "User Status"
     },
     "hardcoded-texts": {
+      "Added successfully": "Added successfully.",
       "Installed Apps": "Installed Apps",
       "Install": "Install",
       "Install New iHRIS App": "Install New iHRIS App",

@@ -83,9 +83,7 @@
             <v-date-picker
               ref="picker"
               v-model="value"
-              :max="new Date().toISOString().substr(0, 10)"
               :range="isRange"
-              min="1950-01-01"
               @change="updateSearch"
             ></v-date-picker>
           </v-menu>

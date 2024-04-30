@@ -567,10 +567,14 @@ export default {
             this.loading = false
           } )
         } else {
-          fetch("/fhir/" + this.value.reference).then((response) => {
-            response.json().then((data) => {
+          fetch("/fhir/" + this.value.reference).then(async(response) => {
+            response.json().then(async (data) => {
               let displayVal = this.$fhirpath.evaluate(data, this.referenceDisplayPath)
-              if(typeof displayVal === 'object') {
+              if(Array.isArray(displayVal) && displayVal.length && typeof displayVal[0] === 'object') {
+                await this.$fhirutils.resourceLookup( displayVal[0].reference ).then( display => {
+                  displayVal = display
+                } )
+              } else if(Array.isArray(displayVal) && displayVal.length) {
                 displayVal = displayVal.join(", ")
               }
               this.items = [{
