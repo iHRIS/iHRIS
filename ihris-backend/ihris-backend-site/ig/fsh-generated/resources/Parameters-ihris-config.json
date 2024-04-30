@@ -16,11 +16,11 @@
             "code": "1.2.840.10065.1.12.1.14"
           }
         ],
-        "when": "2024-04-30T11:30:01.157Z",
+        "when": "2024-04-30T12:31:09.294Z",
         "who": {
           "reference": "http://ihris.org/fhir/Organization/ihris"
         },
-        "data": "ZTdSVsXWKOZH6zNq8t0TAJaAZMbDiRsbAljzsFZBnAfsXcm0yng2GSVk1dLYMcLGYm8FH0iuUnuXnNqy/3rBPN0WwY/jfytZSk5ot4bY1xo66TMHeDljBjK4lWgVEJVI8oQb5JQm5g6GI6AsJPO2vPANrdxIwi7uBeiSHbbb4EM="
+        "data": "k8uyc8iiDYssnjIXrg4autXhsSwbszw6Zgu1ZwYcUkDRs8e97JBIOnd5PHYTQb9BM80K8VrxYVdRsdKUeFpPlamKP176wzZ+vuExmDI/nf+sjeU3B1kLl7yJO9UjYdM1BqrdoH1JcqaX3zVJ1NooCykK4NGEMXFpkl/LLvxqSc8="
       }
     },
     {
@@ -919,6 +919,10 @@
           "valueString": "2030-01-01"
         },
         {
+          "name": "defaults:components:attachment:maxValueAttachment",
+          "valueString": "512KB"
+        },
+        {
           "name": "workflow:processor:password:file",
           "valueString": "workflowChangePassword"
         },
@@ -953,10 +957,6 @@
         {
           "name": "defaults:fields:Person.extension:practitioner.value[x]:valueReference:referenceDisplayPath",
           "valueString": "name.where(use='official').given.first() + ' ' + name.where(use='official').family"
-        },
-        {
-          "name": "defaults:limit:max-upload-size",
-          "valueString": "512KB"
         },
         {
           "name": "site:intro:default:title",

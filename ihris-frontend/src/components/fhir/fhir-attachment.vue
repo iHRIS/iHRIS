@@ -72,7 +72,7 @@ import { dataDisplay } from "@/mixins/dataDisplay"
 export default {
   name: "fhir-attachment",
   props: ["field", "label", "min", "max", "id", "path", "slotProps", "sliceName","base-min","base-max","edit","readOnlyIfSet",
-    "constraints", "displayCondition", "initial", "maxUploadSize"],
+    "constraints", "displayCondition", "initial", "maxValueAttachment"],
   components: {
     IhrisElement
   },
@@ -95,7 +95,7 @@ export default {
     if(this.initial && !this.$route.params.id) {
       this.value = this.initial
     }
-    this.maxUpload = this.humanReadableToBytes(this.maxUploadSize);
+    this.maxUpload = this.humanReadableToBytes(this.maxValueAttachment);
     //this function is defined under dataDisplay mixin
     this.hideShowField(this.displayCondition)
     this.setupData()
@@ -180,7 +180,7 @@ export default {
       } else {
         this.loading = true
         if ( this.upload.size > this.maxUpload ) {
-          this.errors.push(this.display+" is more than "+ this.maxUploadSize)
+          this.errors.push(this.display+" is more than "+ this.maxValueAttachment)
           this.loading = false
           return
         }
@@ -237,7 +237,7 @@ export default {
       if ( this.required ) {
         return [ v => !!v || this.display+" is required" ]
       } else {
-        return [ v => !v || !v.length || v[0].size < this.maxUpload || this.display+" is more than "+ this.maxUploadSize ]
+        return [ v => !v || !v.length || v[0].size < this.maxUpload || this.display+" is more than "+ this.maxValueAttachment ]
       }
     }
   }

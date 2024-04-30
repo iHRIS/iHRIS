@@ -558,12 +558,11 @@ router.get('/page/:page/:type?', function (req, res) {
                             fields[field].targetResource = await getProfileResource(fields[field].targetProfile)
                         }
 
-
                         let attrs = ["field", "sliceName", "targetProfile", "targetResource", "profile", "min", "max", "base-min",
                             "base-max", "label", "path", "binding", "calendar", "initialValue", "searchParameter", "report",
                             "reportReturnValue", "referenceDisplayPath", "initialProfile", "allowedProfiles", "pageTargetProfile"]
                         const minmax = ["Date", "DateTime", "Instant", "Time", "Decimal", "Integer", "PositiveInt",
-                            "UnsignedInt", "Quantity"]
+                            "UnsignedInt", "Quantity", "Attachment"]
                         for (let mm of minmax) {
                             for (let type of ["min", "max"]) {
                                 attrs.push(type + "Value" + mm)
@@ -656,10 +655,6 @@ router.get('/page/:page/:type?', function (req, res) {
                                 output += " " + attr + "=\""
                                     + nconf.get("defaults:components:" + eleName + ":" + attr) + "\""
                             }
-                        }
-
-                        if(eleName === "attachment" &&  nconf.get("defaults:limit:max-upload-size")) {
-                            output += " maxUploadSize=\"" + nconf.get("defaults:limit:max-upload-size") + "\""
                         }
 
                         let subFields
@@ -1343,7 +1338,7 @@ router.get('/questionnaire/:questionnaire/:page', async function (req, res) {
                                     let eleName = fhirDefinition.camelToKebab(fieldType)
                                     let attrs = ["field", "sliceName", "targetProfile", "targetResource", "profile", "min", "max", "base-min",
                                         "base-max", "label", "path", "binding", "calendar", "initialValue", "searchParameter"]
-                                    const minmax = ["Date", "DateTime", "Instant", "Time", "Decimal", "Integer", "PositiveInt", "UnsignedInt", "Quantity"]
+                                    const minmax = ["Date", "DateTime", "Instant", "Time", "Decimal", "Integer", "PositiveInt", "UnsignedInt", "Quantity","Attachment"]
                                     for (let mm of minmax) {
                                         for (let type of ["min", "max"]) {
                                             attrs.push(type + "Value" + mm)
@@ -1369,7 +1364,7 @@ router.get('/questionnaire/:questionnaire/:page', async function (req, res) {
                     }
                     let field
                     const minmax = ["Date", "DateTime", "Instant", "Time", "Decimal", "Integer", "PositiveInt",
-                        "UnsignedInt", "Quantity"]
+                        "UnsignedInt", "Quantity", "Attachment"]
                     if (item.definition) {
                         field = await fhirDefinition.getFieldDefinition(item.definition)
                         vueOutput += " id=\"" + field.id + "\""
@@ -1427,11 +1422,6 @@ router.get('/questionnaire/:questionnaire/:page', async function (req, res) {
                                 vueOutput += " overrideValue=\"" + overrideValue + "\""
                             }
                         }
-
-                        if(itemType ===  "attachment" &&  nconf.get("defaults:limit:max-upload-size")) {
-                            vueOutput += " maxUploadSize=\"" + nconf.get("defaults:limit:max-upload-size") + "\""
-                        }
-
                         const field_attrs = ["initialValue", "report", "reportReturnValue", "referenceDisplayPath", "searchParameter", "initialProfile", "allowedProfiles", "pageTargetProfile"]
                         for (let attr of field_attrs) {
                             if (nconf.get("defaults:fields:" + field.id + ":" + attr)) {
