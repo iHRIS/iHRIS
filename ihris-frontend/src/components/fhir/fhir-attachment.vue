@@ -72,7 +72,7 @@ import { dataDisplay } from "@/mixins/dataDisplay"
 export default {
   name: "fhir-attachment",
   props: ["field", "label", "min", "max", "id", "path", "slotProps", "sliceName","base-min","base-max","edit","readOnlyIfSet",
-    "constraints", "displayCondition", "initial"],
+    "constraints", "displayCondition", "initial", "maxUploadSize"],
   components: {
     IhrisElement
   },
@@ -95,6 +95,7 @@ export default {
     if(this.initial && !this.$route.params.id) {
       this.value = this.initial
     }
+    this.maxUpload = this.humanReadableToBytes(this.maxUploadSize);
     //this function is defined under dataDisplay mixin
     this.hideShowField(this.displayCondition)
     this.setupData()
@@ -178,6 +179,11 @@ export default {
         this.objURL = ""
       } else {
         this.loading = true
+        if ( this.upload.size > this.maxUpload ) {
+          this.errors.push(this.display+" is more than "+ this.maxUploadSize)
+          this.loading = false
+          return
+        }
         this.value.contentType = this.upload.type
         this.value.title = this.upload.name
         let reader = new FileReader()
@@ -189,6 +195,27 @@ export default {
           this.objURL = URL.createObjectURL( this.upload )
         }
       }
+    },
+    humanReadableToBytes(size) {
+    let units = {
+        B: 1,
+        KB: 1024,
+        MB: 1024 ** 2,
+        GB: 1024 ** 3
+    };
+    //let regex = /(\d+(?:\.\d+)?)([KMG]?)(i?b)/i;
+    let regex = /(\d+(?:\.\d+)?)\s*(B|KB|MB|GB)/i;
+
+    let match = regex.exec(size);
+    if (!match) {
+        return this.display+" Invalid default size format";
+    }
+    let value = parseFloat(match[1]);
+    let unit = match[2].toUpperCase();
+    if (!units[unit]) {
+      return this.display+" Invalid default size Unit " + unit;
+    }
+    return value * units[unit];
     }
   },
   computed: {
@@ -210,7 +237,7 @@ export default {
       if ( this.required ) {
         return [ v => !!v || this.display+" is required" ]
       } else {
-        return []
+        return [ v => !v || !v.length || v[0].size < this.maxUpload || this.display+" is more than "+ this.maxUploadSize ]
       }
     }
   }

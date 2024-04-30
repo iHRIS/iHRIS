@@ -16,11 +16,11 @@
             "code": "1.2.840.10065.1.12.1.14"
           }
         ],
-        "when": "2024-04-27T16:11:16.016Z",
+        "when": "2024-04-30T11:30:01.157Z",
         "who": {
           "reference": "http://ihris.org/fhir/Organization/ihris"
         },
-        "data": "eoSmrod45Gqz0GhSkR8q7OWNInxiCdudUOnG29u4niFiIgV7VyncDc6q02OCWmDWsFVy/VzI+5gGHAjqUhfBQt5QQvieoa1Afn3/K5kva1lD2d1wlXuqOzAKUWGAIpfWYH/A27wYalL2Ifn5EjgDDdDoDnlB3FIyjlHcMeDQMEQ="
+        "data": "ZTdSVsXWKOZH6zNq8t0TAJaAZMbDiRsbAljzsFZBnAfsXcm0yng2GSVk1dLYMcLGYm8FH0iuUnuXnNqy/3rBPN0WwY/jfytZSk5ot4bY1xo66TMHeDljBjK4lWgVEJVI8oQb5JQm5g6GI6AsJPO2vPANrdxIwi7uBeiSHbbb4EM="
       }
     },
     {
@@ -953,6 +953,10 @@
         {
           "name": "defaults:fields:Person.extension:practitioner.value[x]:valueReference:referenceDisplayPath",
           "valueString": "name.where(use='official').given.first() + ' ' + name.where(use='official').family"
+        },
+        {
+          "name": "defaults:limit:max-upload-size",
+          "valueString": "512KB"
         },
         {
           "name": "site:intro:default:title",

@@ -657,6 +657,11 @@ router.get('/page/:page/:type?', function (req, res) {
                                     + nconf.get("defaults:components:" + eleName + ":" + attr) + "\""
                             }
                         }
+
+                        if(eleName === "attachment" &&  nconf.get("defaults:limit:max-upload-size")) {
+                            output += " maxUploadSize=\"" + nconf.get("defaults:limit:max-upload-size") + "\""
+                        }
+
                         let subFields
                         if (eleName === "reference" && fields[field].hasOwnProperty("fields")) {
                             let refFields = fields[field].fields
@@ -688,7 +693,6 @@ router.get('/page/:page/:type?', function (req, res) {
                             output += await processFields(fields[field].fields, base + "." + fields[field], order)
                             output += "</template>\n"
                         }
-
                         output += "</fhir-" + eleName + ">\n"
                         if (isArray) {
                             output += "</template>\n</ihris-array>\n"
@@ -1422,6 +1426,10 @@ router.get('/questionnaire/:questionnaire/:page', async function (req, res) {
                             if (overrideValue) {
                                 vueOutput += " overrideValue=\"" + overrideValue + "\""
                             }
+                        }
+
+                        if(itemType ===  "attachment" &&  nconf.get("defaults:limit:max-upload-size")) {
+                            vueOutput += " maxUploadSize=\"" + nconf.get("defaults:limit:max-upload-size") + "\""
                         }
 
                         const field_attrs = ["initialValue", "report", "reportReturnValue", "referenceDisplayPath", "searchParameter", "initialProfile", "allowedProfiles", "pageTargetProfile"]

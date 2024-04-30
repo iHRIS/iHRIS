@@ -473,7 +473,8 @@ Usage: #example
 * parameter[=].part[=].valueString = "ihris-es-report-staff-directorate.id"
 * parameter[=].part[+].name = "defaults:fields:Person.extension:practitioner.value[x]:valueReference:referenceDisplayPath"
 * parameter[=].part[=].valueString = "name.where(use='official').given.first() + ' ' + name.where(use='official').family"
-
+* parameter[=].part[+].name = "defaults:limit:max-upload-size"
+* parameter[=].part[=].valueString = "512KB"
 * parameter[=].part[+].name = "site:intro:default:title"
 * parameter[=].part[=].valueString = "Person Information"
 * parameter[=].part[+].name = "site:intro:default:data:fullName:text"
