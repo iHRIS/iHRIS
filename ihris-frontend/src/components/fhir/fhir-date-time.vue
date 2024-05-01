@@ -181,9 +181,9 @@ import { dataDisplay } from "@/mixins/dataDisplay"
 
 export default {
   name: "fhir-date-time",
-  props: ["field","min","max","base-min","base-max", "label", "slotProps", "path", "edit","sliceName", 
+  props: ["field","min","max","base-min","base-max", "label", "slotProps", "path", "edit","sliceName",
     "minValueDateTime", "maxValueDateTime", "minValueQuantity", "maxValueQuantity", "displayType","readOnlyIfSet", "calendar",
-    "constraints", "displayCondition", "initial"],
+    "constraints", "displayCondition", "initial","format"],
   components: {
     IhrisElement,
     VEthiopianDatePicker,
@@ -219,7 +219,7 @@ export default {
         if ( maxDate ) {
           return maxDate
         }
-      } 
+      }
       if ( this.maxValueDate ) {
         return this.maxValueDate
       }
@@ -272,8 +272,8 @@ export default {
       if ( this.isEthiopian ) {
         return this.value && "Ethiopian: "+this.etValue + " Gregorian: " + this.value
       } else {
-        if(this.value) {
-          return this.$moment(this.value).format(this.$store.state.format.dateFormat)
+        if(this.value && this.format && this.displayType !== "year") {
+          return this.$moment(this.value).format(this.format)
         }else {
           return this.value
         }

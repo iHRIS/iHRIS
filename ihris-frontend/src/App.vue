@@ -162,9 +162,6 @@ export default {
                 this.nav.home = data.nav.home
               }
             }
-            if(data?.defaultFormat?.hasOwnProperty("date")) {
-               this.$store.commit('setDateFormat', data.defaultFormat.date);
-            }
           })
         })
       })

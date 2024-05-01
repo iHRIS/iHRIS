@@ -16,11 +16,11 @@
             "code": "1.2.840.10065.1.12.1.14"
           }
         ],
-        "when": "2024-04-30T12:31:09.294Z",
+        "when": "2024-05-01T10:30:30.577Z",
         "who": {
           "reference": "http://ihris.org/fhir/Organization/ihris"
         },
-        "data": "k8uyc8iiDYssnjIXrg4autXhsSwbszw6Zgu1ZwYcUkDRs8e97JBIOnd5PHYTQb9BM80K8VrxYVdRsdKUeFpPlamKP176wzZ+vuExmDI/nf+sjeU3B1kLl7yJO9UjYdM1BqrdoH1JcqaX3zVJ1NooCykK4NGEMXFpkl/LLvxqSc8="
+        "data": "2EKZYet7ZXpL4bL0qU70ms1G7bb0bdnavBZ9TSohwhwdr7tAejVFKTj/6x2wcZ6QgZr8/wjlpxqXPZDRBUijKSmhoEofZJLpJwk0pfnOocXKAGTSgg2MlpSLRLhndbNisnfC0CVhK+wluYBnLD/FTwaEksN1KG4/2bqvf7bZgsQ="
       }
     },
     {
@@ -787,10 +787,6 @@
           "valueString": "$1"
         },
         {
-          "name": "defaults:format:date",
-          "valueString": "dddd, MMMM Do YYYY"
-        },
-        {
           "name": "workflow:processor:endrole:file",
           "valueString": "workflowEndRole"
         },
@@ -921,6 +917,22 @@
         {
           "name": "defaults:components:attachment:maxValueAttachment",
           "valueString": "512KB"
+        },
+        {
+          "name": "defaults:components:date:format",
+          "valueString": "YYYY-MM-DD"
+        },
+        {
+          "name": "defaults:components:date-time:format",
+          "valueString": "YYYY-MM-DD"
+        },
+        {
+          "name": "defaults:components:ihris-search:format",
+          "valueString": "YYYY-MM-DD"
+        },
+        {
+          "name": "defaults:components:ihris-secondary:format",
+          "valueString": "YYYY-MM-DD"
         },
         {
           "name": "workflow:processor:password:file",

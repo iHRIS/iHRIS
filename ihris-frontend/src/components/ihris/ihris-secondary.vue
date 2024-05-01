@@ -52,7 +52,7 @@ const isObject = (obj) => {
 export default {
   name: "ihris-secondary",
   props: ["title", "field", "profile", "slotProps", "link-id", "link-field",
-    "search-field", "search-field-target", "edit", "columns", "actions", "empty-display"],
+    "search-field", "search-field-target", "edit", "columns", "actions", "empty-display","dateFormat"],
   data: function() {
     return {
       source: { data: {}, path: this.field },
@@ -167,6 +167,12 @@ export default {
                       action.meets = true
                     }
                   }
+                }
+                if(this.dateFormat){
+                  const dateRegex = /\d{4}-\d{2}-\d{2}/g;
+                  row = JSON.parse(JSON.stringify(row).replace(dateRegex,  match => {
+                  return this.$moment(match).format(this.dateFormat);
+                }));
                 }
                 this.items.push( row )
               }

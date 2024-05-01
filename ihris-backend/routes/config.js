@@ -59,14 +59,10 @@ const filterNavigation = (user, nav, prefix) => {
 router.get("/site", async function (req, res) {
     const defaultUser = nconf.get("user:loggedout") || "ihris-user-loggedout";
     let site = JSON.parse(JSON.stringify(nconf.get("site") || {}));
-    let defaultFormat = nconf.get("defaults:format");
     if(!site.auth) {
         site.auth = {}
     }
     site.version = package.version
-    if(defaultFormat){
-        site.defaultFormat = defaultFormat
-    }
     site.auth.signup = {...nconf.get("auth:signup")}
     site.fhirFlattener = nconf.get("fhir:flattener")
     if (nconf.getBool("security:disabled")) {
@@ -599,6 +595,11 @@ router.get('/page/:page/:type?', function (req, res) {
                         if (readOnlyIfSet) {
                             output += " :readOnlyIfSet=\"true\""
                         }
+
+                        if(nconf.get("defaults:components:" + eleName + ":format" )){
+                            output += " format=\"" + nconf.get("defaults:components:" + eleName + ":format") + "\""
+                        }
+
                         if (!displayType) {
                             if (nconf.get("defaults:fields:" + fields[field].id + ":type")) {
                                 displayType = nconf.get("defaults:fields:" + fields[field].id + ":type")
@@ -720,9 +721,11 @@ router.get('/page/:page/:type?', function (req, res) {
                             let sectionKey = getUKey()
                             allColumns[sectionKey] = sections[name].columns
                             allActions[sectionKey] = sections[name].actions
+                            let dateFormat = (nconf.get("defaults:components:ihris-secondary:format")) ? ' "dateFormat="' + nconf.get("defaults:components:ihris-secondary:format")  : ''
                             vueOutput += '<ihris-secondary :edit="isEdit" :link-id="fhirId" profile="' + secondary.url
                                 + '" field="' + second_fhir
                                 + '" title="' + sections[name].title
+                                + dateFormat
                                 + '" emptyDisplay="' + sections[name].emptyDisplay
                                 + '" link-field="' + sections[name].linkfield
                                 + '" search-field="' + (sections[name].searchfield || "")
@@ -835,6 +838,10 @@ router.get('/page/:page/:type?', function (req, res) {
             let searchTemplate = '<' + searchElement + ' :key="$route.params.page" page="' + req.params.page + '" label="' + (resource.title || resource.name) + '" :fields="fields" :terms="terms" resource="' + (resource.resourceType === "StructureDefinition" ? resource.type : resource.resourceType) + '" profile="' + resource.url + '"'
             if (addLink) {
                 searchTemplate += " :add-link='addLink'"
+            }
+
+            if(nconf.get("defaults:components:" + searchElement + ":format" )){
+                searchTemplate += " dateFormat=\"" + nconf.get("defaults:components:" + searchElement + ":format") + "\""
             }
             searchTemplate += '>' + "\n"
             for (let filter of filters) {
@@ -1397,6 +1404,10 @@ router.get('/questionnaire/:questionnaire/:page', async function (req, res) {
                             }
                         }
 
+                        if(nconf.get("defaults:components:" + itemType + ":format" )){
+                            vueOutput += " format=\"" + nconf.get("defaults:components:" + itemType + ":format") + "\""
+                        }
+
                         if (!displayType) {
                             if (nconf.get("defaults:fields:" + field.id + ":type")) {
                                 displayType = nconf.get("defaults:fields:" + field.id + ":type")
@@ -1578,7 +1589,6 @@ router.get('/questionnaire/:questionnaire/:page', async function (req, res) {
                 if(item.definition.includes("#")) {
                     sectionPath = item.definition.split("#")[1]
                     let fieldDef = await fhirDefinition.getFieldDefinition(item.definition)
-                    
                     let extension = fieldDef.type.find((type) => {
                         return type.code === 'Extension'
                     })
@@ -1901,7 +1911,6 @@ router.get('/report/:report', function (req, res) {
         })
     })
 })
- 
 router.get('/app', (req, res) => {
     logger.info('Received a request to get general configuration');
     const otherConfig = {
