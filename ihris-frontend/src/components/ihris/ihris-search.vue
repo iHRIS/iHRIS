@@ -39,7 +39,7 @@
 <script>
 export default {
   name: "ihris-search",
-  props: ["profile", "fields", "label", "terms", "page", "resource", "add-link"],
+  props: ["profile", "fields", "label", "terms", "page", "resource", "add-link","dateFormat"],
   data: function() {
     return {
       debug: "",
@@ -194,9 +194,9 @@ export default {
               for (let field of this.fields) {
                 let fieldDisplay = this.$fhirpath.evaluate( entry.resource, field[1] );
                  let data = await this.$fhirutils.lookup( fieldDisplay[0], field[2] )
-                const regex = /^\d{4}-\d{2}-\d{2}$/;
-                 if (regex.test(fieldDisplay[0])) {
-                   result[field[1]] = this.$moment(fieldDisplay[0]).format(this.$store.state.format.dateFormat)
+                 const regex = /^\d{4}-\d{2}-\d{2}$/;
+                 if (this.dateFormat&&regex.test(fieldDisplay[0])) {
+                   result[field[1]] = this.$moment(fieldDisplay[0]).format(this.dateFormat)
                  }else {
                    result[field[1]] = data
                  }

@@ -181,7 +181,7 @@ export default {
   name: "fhir-date",
   props: ["field","min","max","base-min","base-max", "label", "slotProps", "path", "edit","sliceName",
     "minValueDate", "maxValueDate", "minValueQuantity", "maxValueQuantity", "displayType","readOnlyIfSet", "calendar",
-    "constraints", "displayCondition", "initial" ],
+    "constraints", "displayCondition", "initial","format" ],
   components: {
     IhrisElement,
     VEthiopianDatePicker,
@@ -272,12 +272,9 @@ export default {
       if ( this.isEthiopian ) {
         return this.value && "Ethiopian: " + this.etValue + " Gregorian: " + this.value
       } else {
-        if(this.value) {
-          if(this.$store.state.format.dateFormat && !this.displayType === 'year') {
-            return this.$moment(this.value).format(this.$store.state.format.dateFormat)
-          }
-          return this.value
-        }else {
+        if (this.value && this.format && this.displayType !== "year") {
+          return this.$moment(this.value).format(this.format)
+        } else {
           return this.value
         }
       }

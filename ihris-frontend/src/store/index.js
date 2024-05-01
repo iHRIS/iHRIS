@@ -28,9 +28,6 @@ export default new Vuex.Store({
       enabled: false,
       title: ''
     },
-    format:{
-     dateFormat:"",
-    }
   },
   mutations: {
     login( state, user ) {
@@ -66,9 +63,6 @@ export default new Vuex.Store({
         state.message.text = data.text
         state.message.active = true
       }
-    },
-    setDateFormat( state, data ) {
-      state.format.dateFormat = data
     }
   },
   actions: {},
