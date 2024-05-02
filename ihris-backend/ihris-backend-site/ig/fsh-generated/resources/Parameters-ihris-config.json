@@ -16,11 +16,11 @@
             "code": "1.2.840.10065.1.12.1.14"
           }
         ],
-        "when": "2024-05-01T10:30:30.577Z",
+        "when": "2024-05-02T13:12:34.983Z",
         "who": {
           "reference": "http://ihris.org/fhir/Organization/ihris"
         },
-        "data": "2EKZYet7ZXpL4bL0qU70ms1G7bb0bdnavBZ9TSohwhwdr7tAejVFKTj/6x2wcZ6QgZr8/wjlpxqXPZDRBUijKSmhoEofZJLpJwk0pfnOocXKAGTSgg2MlpSLRLhndbNisnfC0CVhK+wluYBnLD/FTwaEksN1KG4/2bqvf7bZgsQ="
+        "data": "E2a28Qp8c2y0t+8x9WW+V6zfhHzcfuKDcgoTq3PyLog6KozhvumqMNE+OK2eS5AWI6ODusqyrXw4Mvt2hDAh7AVtMdO+CvkGjn1PHiLY4nfJQzAJg4uMoUrRWGWI4kId4b7cS4s55FdQqxzIAMLe1FwBKZDh48pfhJtVcWEgyAw="
       }
     },
     {
@@ -952,6 +952,18 @@
         },
         {
           "name": "app:site:routes:upload:authenticate",
+          "valueString": "true"
+        },
+        {
+          "name": "app:site:routes:adx:mount",
+          "valueString": "adx"
+        },
+        {
+          "name": "app:site:routes:adx:path",
+          "valueString": "adx.js"
+        },
+        {
+          "name": "app:site:routes:adx:authenticate",
           "valueString": "true"
         },
         {
