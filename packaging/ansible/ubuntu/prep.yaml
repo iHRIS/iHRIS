@@ -50,4 +50,4 @@
 
     - name: Install fsh-sushi
       shell: |
-        npm install -g fsh-sushi
+        npm install -g fsh-sushi@2.10.2

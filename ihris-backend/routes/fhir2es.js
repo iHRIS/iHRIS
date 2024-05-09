@@ -1,3 +1,4 @@
+const ExcelJS = require('exceljs');
 const axios = require('axios')
 const URI = require('urijs');
 const async = require('async')
@@ -18,7 +19,6 @@ router.get('/cache/:index/:cacheTime?', async (req, res) => {
   if (!req.user) {
     return res.status(401).json(outcomes.NOTLOGGEDIN)
   }
-  console.log(nconf.get("fhir:flattener"))
   let indexName = req.params.index
   let cacheTime = req.params.cacheTime || ""
   let server = nconf.get('elasticsearch:base') || "http://localhost:9200"
@@ -258,6 +258,9 @@ router.post("/export/:format/:index", (req, res) => {
   let label = req.body.label;
   let isSelected = req.body.selected;
 
+  if(req.params.format === 'xlx') {
+    excelExport(req)
+  }
   if (isSelected && isSelected.length > 0) {
     let rows = "";
     for (let header of headers) {
@@ -522,4 +525,69 @@ router.get('/populateFilter/:index/:field', (req, res) => {
   // })
 })
 
+function excelExport(req) {
+  return new Promise((resolve, reject) => {
+    let searchQry = req.body.query;
+    let headers = req.body.headers;
+    let label = req.body.label;
+    let isSelected = req.body.selected;
+
+    const workbook = new ExcelJS.Workbook();
+    const report = workbook.addWorksheet(label, {
+      headerFooter:{firstHeader: label, firstFooter: label}
+    });
+    for (let header of headers) {
+      report.columns.push({
+        header: header.text,
+        key: header.value
+      })
+    }
+    es.getData(
+      { indexName: req.params.index, searchQuery: searchQry },
+      (err, documents) => {
+        if (err) {
+          return res.status(500).send();
+        }
+        for (let doc of documents) {
+          let row;
+          for (let header of headers) {
+            if (row === undefined) {
+              if (
+                  doc._source[header.value] === null ||
+                  doc._source[header.value] === undefined
+              ) {
+                row = " ";
+              } else {
+                row = '"' + doc._source[header.value] + '"';
+              }
+            } else {
+              if (
+                  doc._source[header.value] === null ||
+                  doc._source[header.value] === undefined
+              ) {
+                row += ",";
+              } else {
+                row += "," + '"' + doc._source[header.value] + '"';
+              }
+            }
+          }
+          rows += row + os.EOL;
+        }
+        if (!fs.existsSync(`${__dirname}/../tmp`)) {
+          fs.mkdirSync(`${__dirname}/../tmp`);
+        }
+        let fileName = `${__dirname}/../tmp/${label}-${nanoid(10)}.csv`;
+        fs.writeFileSync(fileName, rows);
+        if (fs.existsSync(fileName)) {
+          res.download(fileName);
+          setTimeout(() => {
+            fs.unlinkSync(fileName);
+          }, 240000);
+          // res.send(fileName.replace(`${__dirname}/..`, ""));
+        }
+        //remove the file after 4 minutes
+      }
+    );
+  })
+}
 module.exports = router

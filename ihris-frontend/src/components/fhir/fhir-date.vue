@@ -21,6 +21,8 @@
             :rules="rules"
             :error-messages="errors"
             dense
+            clearable
+            @click:clear="clearValue"
           >
             <template #label>{{$t(`App.fhir-resources-texts.${label}`)}} <span v-if="required" class="red--text font-weight-bold">*</span></template>
           </v-text-field>
@@ -42,7 +44,6 @@
                 <br />
                 <v-text-field
                   v-model="etValue"
-                  clearable
                   type="number"
                   :disabled="disabled"
                   :label="label"
@@ -52,6 +53,8 @@
                   :error-messages="errors"
                   @change="errors = []"
                   dense
+                  clearable
+                  @click:clear="clearValue"
                 >
                 </v-text-field>
               </v-card-text>
@@ -85,7 +88,6 @@
                 <br />
                 <v-text-field
                   v-model="value"
-                  clearable
                   type="number"
                   :disabled="disabled"
                   :label="label"
@@ -95,6 +97,8 @@
                   :error-messages="errors"
                   @change="errors = []"
                   dense
+                  clearable
+                  @click:clear="clearValue"
                 >
                 </v-text-field>
               </v-card-text>
@@ -141,6 +145,8 @@
               :error-messages="errors"
               @change="errors = []"
               dense
+              clearable
+              @click:clear="clearValue"
             >
             </v-text-field>
           </v-card-text>
@@ -351,6 +357,9 @@ export default {
     }
   },
   methods: {
+    clearValue() {
+      this.value = ""
+    },
     convertQuantity(val, direction) {
       const unitsofmeasure = {
         'a': 'years',

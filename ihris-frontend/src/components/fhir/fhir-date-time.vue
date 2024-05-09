@@ -21,6 +21,8 @@
             :rules="rules"
             :error-messages="errors"
             dense
+            clearable
+            @click:clear="clearValue"
           >
             <template #label>{{$t(`App.fhir-resources-texts.${label}`)}} <span v-if="required" class="red--text font-weight-bold">*</span></template>
           </v-text-field>
@@ -42,8 +44,7 @@
               <v-card-text v-if="pickerType==='year'">
                 <br />
                 <v-text-field 
-                  v-model="etValue" 
-                  clearable
+                  v-model="etValue"
                   type="number" 
                   :disabled="disabled" 
                   :label="label" 
@@ -53,6 +54,8 @@
                   :error-messages="errors"
                   @change="errors = []"
                   dense
+                  clearable
+                  @click:clear="clearValue"
                 >
                 </v-text-field>
               </v-card-text>
@@ -85,8 +88,7 @@
               <v-card-text v-if="pickerType==='year'">
                 <br />
                 <v-text-field 
-                  v-model="value" 
-                  clearable
+                  v-model="value"
                   type="number" 
                   :disabled="disabled" 
                   :label="label" 
@@ -96,6 +98,8 @@
                   :error-messages="errors"
                   @change="errors = []"
                   dense
+                  clearable
+                  @click:clear="clearValue"
                 >
                 </v-text-field>
               </v-card-text>
@@ -143,6 +147,8 @@
               :error-messages="errors"
               @change="errors = []"
               dense
+              clearable
+              @click:clear="clearValue"
             >
             </v-text-field>
           </v-card-text>
