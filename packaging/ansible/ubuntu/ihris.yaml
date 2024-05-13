@@ -54,6 +54,16 @@
         cd /var/lib/iHRIS/ihris-backend/{{site}}
         npm install
 
+    - name: Remove package-lock.json from tools
+      ansible.builtin.file:
+        path: "/var/lib/iHRIS/tools/package-lock.json"
+        state: absent
+
+    - name: Installing npm packages into tools
+      shell: |
+        cd /var/lib/iHRIS/tools
+        npm install
+
     - name: Remove package-lock.json from ihris-frontend
       ansible.builtin.file:
         path: "/var/lib/iHRIS/ihris-frontend/package-lock.json"
