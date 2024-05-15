@@ -41,6 +41,7 @@ nav:
       - dev/task_resolution.md
       - dev/todo.md
   - Sysadmin:
+      - admin/ansible_installation.md
       - admin/docker.md
       - admin/install.md
       - admin/config.md
