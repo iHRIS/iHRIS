@@ -4,7 +4,7 @@ iHRIS is a **customizable** system, which provides various ways for developers a
 
 Below are various ways you may use to customize iHRIS based on your needs
 
-1. Editing FSH files
+1. [Fishing in iHRIS](fsh.md)
 2. [Creating data entry form with Questionnaire](questionnaire.md)
 2. [Creating data display page](page.md)
 2. [Creating custom iHRIS components](custom_components.md)

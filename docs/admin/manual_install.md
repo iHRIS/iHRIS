@@ -297,18 +297,18 @@ sudo npm install
 
 ```bash
 cd /var/lib/iHRIS/ihris-backend
-sudo cp -r ihris-backend-site your_site_name
+sudo cp -r ihris-backend-site your-site-name
 ```
 
-Change **your_site_name** to the name of your preference, it is recommended your_site_name to be on the directory /var/lib/iHRIS/ihris-backend so that you can easily reuse iHRIS npm packages. This site will be used to run the iHRIS backend and customizing iHRIS backend based with your needs. Customization is covered on a separate section.
-If you already have your_site_name on github, clone it instead of copying ihris-backend-site
+Change **your-site-name** to the name of your preference, it is recommended your-site-name to be on the directory /var/lib/iHRIS/ihris-backend so that you can easily reuse iHRIS npm packages. This site will be used to run the iHRIS backend and customizing iHRIS backend based with your needs. Customization is covered on a separate section.
+If you already have your-site-name on github, clone it instead of copying ihris-backend-site
 
 ### Create configuration file
 
 iHRIS comes with default configuration file that you can copy and customize based on your needs, run below commands to copy the default configuration.
 
 ```bash
-cd your_site_name
+cd your-site-name
 cp config/baseConfig.json.example config/baseConfig.json
 ```
 
@@ -325,7 +325,7 @@ the main variables to look out for are the
 
 ### Install dependencies for your site
 
-This assumes that you are still inside your_site_name directory
+This assumes that you are still inside your-site-name directory
 
 ```bash
 sudo npm install
@@ -352,20 +352,20 @@ sudo npm install
 #### Start the IHRIS System
 
 iHRIS is divided into two components, the frontend and the backend. To build the
-frontend, go to /var/lib/iHRIS/ihris-frontend and run `npm run build` then copy built files into /var/lib/iHRIS/ihris-backend/your_site_name/public.
+frontend, go to /var/lib/iHRIS/ihris-frontend and run `npm run build` then copy built files into /var/lib/iHRIS/ihris-backend/your-site-name/public.
 The backend can be started as below
 
 For production
 
 ```bash
-cd /var/lib/iHRIS/ihris-backend/your_site_name
+cd /var/lib/iHRIS/ihris-backend/your-site-name
 npm run start
 ```
 
 For development
 
 ```bash
-cd /var/lib/iHRIS/ihris-backend/your_site_name
+cd /var/lib/iHRIS/ihris-backend/your-site-name
 npm run dev
 ```
 
@@ -378,6 +378,6 @@ System can now be accessed [here](http://localhost:3000)
 When you start iHRIS for the first time, it will load the default customization that is located on your site under ig/fsh-generated/resources. In case these default customizations were not loaded, run below command to load them
 
 ```bash
-cd /var/lib/iHRIS/ihris-backend/your_site_name/ig
+cd /var/lib/iHRIS/ihris-backend/your-site-name/ig
 node ../../../tools/load.js --server http://localhost:8080/hapi/fhir fsh-generated/resources/*.json
 ```
