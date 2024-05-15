@@ -1,14 +1,14 @@
-# Getting Started with Docker
+# Running iHRIS with Docker
 
-!!! note 
+!!! note
     Time to complete: 20 minutes
-
 
 ## Requirements
 
 The Docker approach requires Docker for Mac, Linux, or Windows. On Linux, docker-compose must also be installed.
 
 Memory dedicated to Docker should be increased to 4GB or more. This is a snapshot of memory usage with demo records and no dashboards. iHRIS, Redis, and Postgres use very minimal RAM, compared to Kibana (552MiB), ElasticSearch (846MiB), and HAPI FHIR Server (821MiB).
+
 ```
 $ docker stats --no-stream
 CONTAINER ID        NAME                CPU %               MEM USAGE / LIMIT  
@@ -30,6 +30,7 @@ git clone https://github.com/iHRIS/iHRIS.git
 # git clone git@github.com:iHRIS/iHRIS.git
 cd iHRIS
 ```
+
 ## Launch iHRIS
 
 iHRIS and all it's supporting software, mentioned above, can be launched by using one docker-compose file. This should run everything you need without running any further commands
@@ -38,10 +39,11 @@ iHRIS and all it's supporting software, mentioned above, can be launched by usin
 docker-compose up -d
 # the -d backgrounds the server stdout
 ```
+
 !!! note
     The command above, good internet and some patience is all you need to run iHRIS.
-    
-Now open [http://localhost:3000](http://localhost:3000) and log in using username: admin@ihris.org and password: ihris
+
+Now open [http://localhost:3000](http://localhost:3000) and log in using username: <admin@ihris.org> and password: ihris
 
 There will be no dashboards by default.
 
@@ -50,6 +52,7 @@ Enjoy!
 ## Troubleshooting Notes
 
 Ensure that /resources are loaded, check the logs:
+
 ```log
 ihris     | [winston] Attempt to write logs with no transports {"message":"Loading Autoload resource directory: ../resources","level":"info"}
 ihris     | [winston] Attempt to write logs with no transports {"message":"Saving Basic - ihris-page-practitioner","level":"info"}
@@ -59,7 +62,9 @@ ihris     | [winston] Attempt to write logs with no transports {"message":"Savin
 ```
 
 How to build a container locally and immediately remove it. For example:
+
 ```
 docker run --rm -it --network ihris_default $(docker build -q -f Dockerfile.upload.definitions .)
 ```
+
 This uses the helpful hint from [here](https://stackoverflow.com/questions/45141402/build-and-run-dockerfile-with-one-command) to build and run an image then delete it.

@@ -43,7 +43,7 @@ nav:
   - Sysadmin:
       - admin/ansible_installation.md
       - admin/docker.md
-      - admin/install.md
+      - admin/manual_install.md
       - admin/config.md
   - User:
       - user/approach.md
