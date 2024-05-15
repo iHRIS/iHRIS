@@ -4,11 +4,11 @@ User and developer documentation is hosted at: [https://iHRIS.github.io/iHRIS](h
 
 ## Installation
 
-There are three ways for installing iHRIS as listed below
+There are three ways for installing iHRIS as listed below:
 
 1. Install iHRIS using [ansible](https://ihris.github.io/iHRIS/admin/ansible_installation/)
 2. Run iHRIS with [docker](https://ihris.github.io/iHRIS/admin/docker/)
-3. Install iHRIS manually [docker](https://ihris.github.io/iHRIS/admin/manual_install/)
+3. Install iHRIS [manually](https://ihris.github.io/iHRIS/admin/manual_install/)
 
 ## Customizing iHRIS
 
