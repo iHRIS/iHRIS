@@ -34,8 +34,6 @@ nav:
       - dev/roadmap.md
       - dev/customization.md
       - dev/fhir_http.md
-      - dev/modules.md
-      - dev/questionnaire.md
       - dev/roles_and_tasks.md
       - dev/short_name.md
       - dev/task_resolution.md
