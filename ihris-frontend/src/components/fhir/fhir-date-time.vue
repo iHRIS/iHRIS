@@ -345,6 +345,9 @@ export default {
     }
   },
   methods: {
+    clearValue() {
+      this.value = ""
+    },
     convertQuantity(val, direction) {
       const unitsofmeasure = {
         'a': 'years',
