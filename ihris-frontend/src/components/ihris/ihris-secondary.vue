@@ -1,15 +1,15 @@
 <template>
-  <v-container class="my-3" v-if="!edit">
+  <v-container :id="computedId" class="my-3" v-if="!edit">
     <v-data-table
       v-if="emptyDisplay != 'false'"
       :headers="translatedHeader"
       :items="items"
       item-key="id"
-      :items-per-page="5"
+      :items-per-page="itemsPerPage"
       :loading="loading"
       class="elevation-1"
       dense
-      :footer-props="{ 'items-per-page-text':$t('App.hardcoded-texts.tableText'), 'items-per-page-options': [5,10,20,50] }"
+      :footer-props="{ 'items-per-page-text':$t('App.hardcoded-texts.tableText'), 'items-per-page-options': itemsPerPageOptions }"
     >
       <template v-slot:top>
         <v-toolbar flat color="white">
@@ -22,6 +22,7 @@
             :to="setupLink( action.link, {} )"
             :color="action.class"
             :key="action.text"
+            id="elementToHide"
             small
             >
             {{ $t(`App.fhir-resources-texts.${action.text}`) }}
@@ -36,6 +37,7 @@
           :key="action.text"
           small
           rounded
+          id="elementToHide"
           >
           {{ action.text }}
         </v-btn>
@@ -57,6 +59,8 @@ export default {
     return {
       source: { data: {}, path: this.field },
       empty: true,
+      itemsPerPage: 5,
+      itemsPerPageOptions: [5,10,20,50,{ text: 'All', value: -1 }],
       items: [],
       loading: true,
       topActions: [],
@@ -64,10 +68,9 @@ export default {
     }
   },
   mounted: function() {
-    if(this.emptyDisplay == 'false') {
-      this.$emit("isEmpty", true)
-    }
     this.setupData()
+    this.$root.$on("printPage", this.setItemsPerPageForPrint)
+
   },
   watch: {
     /*
@@ -233,6 +236,14 @@ export default {
     },
     setupLink( link, item ) {
       return link.replace( "ITEMID", item.id ).replace( "FHIRID", this.linkId )
+    },
+    setItemsPerPageForPrint() {
+      this.itemsPerPage = -1
+    },
+  },
+  computed: {
+    computedId() {
+      return this.items.length > 0 ? "" : 'section-element-to-hide';
     }
   }
 }
@@ -243,4 +254,10 @@ export default {
 tbody tr:nth-of-type(even) {
   background-color: #E0F2F1;
 }
+
+@media print {
+    #elementToHide {
+      display: none;
+    }
+  }
 </style>

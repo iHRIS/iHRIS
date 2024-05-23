@@ -1,5 +1,6 @@
 <template>
   <v-snackbar
+      id="elementToHide"
       v-model="snackbar"
       :bottom="bottom"
       :right="bottom"
@@ -247,4 +248,10 @@ export default {
   border-top: 4px dotted green;
   height: 2px;
 }
+
+@media print {
+    #elementToHide {
+      display: none;
+    }
+  }
 </style>
