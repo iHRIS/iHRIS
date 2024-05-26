@@ -332,7 +332,10 @@ export default {
                     this.reportData.mappings.mappings.properties[esFieldName].type === "text"
                 ) {
                   query.wildcard = {};
-                  query.wildcard[esFieldName] = "*" + tm + "*";
+                  query.wildcard[esFieldName + '.keyword'] = {
+                    value: "*" + tm + "*",
+                    case_insensitive: true
+                  };
                 } else {
                   query.term = {};
                   query.term[esFieldName] = tm;
@@ -436,7 +439,6 @@ export default {
         }
         body.query.bool.filter = filterDate
       }
-
       eventBus.$emit("builtESTerms", body);
       return body;
     },

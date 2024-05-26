@@ -197,7 +197,7 @@
                       {{$t(`App.hardcoded-texts.Forgot Password`)}}</v-btn
                     >
                     <v-spacer></v-spacer>
-                    <v-btn v-if="this.$store.state.allowSelfSignup === 'true' " @click="signupRedirect" class="mx-2 text--white"
+                    <v-btn v-if="$store.state.signup.enabled" @click="signupRedirect" class="mx-2 text--white"
                            outlined
                            color="primary" style="text-transform: none" text >
                       {{$t(`App.hardcoded-texts.No account? Sign Up`)}}
@@ -246,16 +246,15 @@ export default {
       employeeNumber:"",
       registering: false,
       resetPasswordDialog: false,
-      resetPasswordEmail: "",
-      signup: {}
+      resetPasswordEmail: ""
     }
   },
   methods:{
     signupRedirect() {
-      if(this.signup.page === 'default') {
+      if(this.$store.state.signup.page === 'default') {
         this.dialog = true
       } else {
-        this.$router.push(this.signup.page)
+        this.$router.push(this.$store.state.signup.page)
       }
     },
     saveDate (date) {

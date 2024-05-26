@@ -231,11 +231,17 @@ router.get('/listFields/:index', (req, res) => {
         let display = element.find((el) => {
           return el.url === 'display'
         })?.valueString
+        let type = element.find((el) => {
+          return el.url === 'type'
+        })?.valueString
         if(!display || !name) {
           continue
         }
         for(let mapping in mappings) {
           if(mapping === name) {
+            if(type) {
+              mappings[mapping].type = type
+            }
             fields.push({
               name,
               display,

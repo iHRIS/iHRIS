@@ -107,8 +107,7 @@ export default {
           response.json().then(data => {
             this.$store.state.version = data.version
             if (data.auth && data.auth.signup) {
-              this.$store.commit('setAllowSelfSignup', data.auth.signup.enabled);
-              this.signup = data.auth.signup
+              this.$store.state.signup = data.auth.signup
             }
             if(data.hasOwnProperty("footer")) {
               if (data.footer.hasOwnProperty("links")) {
