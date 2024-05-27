@@ -6,9 +6,26 @@
 <template>
   <v-container :key="pageKey" class="my-3">
     <v-form
+      id="print"
       ref="form"
       v-model="valid"
     >
+      <div v-if="!this.edit"
+           class="print-section"
+      >
+        <v-btn
+            id="elementToHide"
+            color="primary"
+            icon
+            small
+            text
+            class="pr-12"
+            @click="printPage"
+        >
+          <v-icon>mdi-printer-outline</v-icon>
+            {{$t(`App.hardcoded-texts.Print`)}}
+        </v-btn>
+      </div>
       <slot :source="source"></slot>
       <v-overlay :value="overlay">
         <v-progress-circular
@@ -18,7 +35,7 @@
         ></v-progress-circular>
       </v-overlay>
 
-      <v-navigation-drawer
+      <v-navigation-drawer id="elementToHide"
         app
         class="primary darken-1 white--text"
         clipped
@@ -76,10 +93,10 @@
         max-width="700"
         outlined
       >
-        <v-card-title class="primary font-weight-bold caption pa-2 white--text justify-center ">Record History
+        <v-card-title id="elementToHide" class="primary font-weight-bold caption pa-2 white--text justify-center ">Record History
         </v-card-title>
-        <v-card-text class="my-3">
-          <v-row class="justify-space-between">
+        <v-card-text  class="my-3">
+          <v-row id="elementToHide" class="justify-space-between">
             <v-col cols="4"><span class="font-weight-bold">Record Id:</span></v-col>
             <v-col cols="8">{{ this.$data.orig.id }}</v-col>
           </v-row>
@@ -96,7 +113,7 @@
             <v-col cols="8" v-if="$data.orig && $data.orig.meta">{{ $data.orig.meta.versionId }} of {{ max }}</v-col>
           </v-row>
           <v-divider/>
-          <v-row class="justify-space-between">
+          <v-row id="elementToHide" class="justify-space-between">
             <v-col cols="4"><span class="font-weight-bold">See older version:</span></v-col>
             <v-col cols="8">
               <v-row>
@@ -570,8 +587,77 @@ export default {
           .catch((err) => {
             console.log(this.field, this.fhirId, err);
           });
+    },
+    printPage() {
+      this.$root.$emit("printPage", true);
+      this.$nextTick(() => {
+        let contents = document.getElementById("print").innerHTML;
+        let stylesHtml = '';
+        for (const node of [...document.querySelectorAll('link[rel="stylesheet"], style')]) {
+          stylesHtml += node.outerHTML;
+        }
+        let windowsFrame = document.createElement('iframe');
+
+        windowsFrame.name = "windowsFrame";
+        windowsFrame.style.position = "absolute";
+        windowsFrame.style.top = "-1000000px";
+        document.body.appendChild(windowsFrame);
+        let frameDoc = windowsFrame.contentWindow ? windowsFrame.contentWindow : windowsFrame.contentDocument.document ? windowsFrame.contentDocument.document : windowsFrame.contentDocument;
+        frameDoc.document.write(`<!DOCTYPE html>
+                  <html>
+                    <head>
+                      ${stylesHtml}
+                      <style>
+                </style>
+                    </head>
+                      ${contents}
+                    </body>
+                  </html>`);
+        const sectionLanguage = frameDoc.document.getElementById('section-language');
+        if (sectionLanguage) {
+          const headerElement = sectionLanguage.querySelector('.v-card__title');
+          if (sectionLanguage.textContent.trim().length === headerElement.textContent.trim().length) {
+            sectionLanguage.style.display = 'none';
+          }
+        }
+
+        const elementsToHide = frameDoc.document.querySelectorAll('#section-element-to-hide');
+        elementsToHide.forEach(element => {
+          const parentSection = element.closest('.ihris-section');
+          if (parentSection) {
+            parentSection.style.display = 'none';
+          }
+        });
+        frameDoc.document.close();
+        setTimeout(function () {
+          window.frames["windowsFrame"].focus();
+          window.frames["windowsFrame"].print();
+          document.body.removeChild(windowsFrame);
+        }, 500);
+        return false;
+      })
     }
   }
 }
 
 </script>
+<style scoped>
+.print-section {
+    max-width: 700px;
+    margin: 0 auto; /* Center align */
+    text-align: right; /* Align text to the right */
+}
+@media print {
+  #elementToHide {
+      display: none;
+    }
+  div, div * {
+    font-family: 'Roboto', sans-serif!important;
+    color: black!important;
+  }
+  button {
+      display: none;
+    }
+}
+
+</style>

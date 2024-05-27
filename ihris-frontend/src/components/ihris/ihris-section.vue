@@ -1,6 +1,6 @@
 <template>
-  <div :id="'section-'+name" class="ihris-section" v-if="!edit || !secondary" >
-    <v-card 
+  <div :id="'section-'+name" class="ihris-section mb-3" v-if="!edit || !secondary" >
+    <v-card
       class="mx-auto"
       max-width="700"
       outlined
