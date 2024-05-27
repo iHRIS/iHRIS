@@ -596,8 +596,8 @@ router.get('/page/:page/:type?', function (req, res) {
                             output += " :readOnlyIfSet=\"true\""
                         }
 
-                        if(nconf.get("defaults:components:" + eleName + ":format" )){
-                            output += " format=\"" + nconf.get("defaults:components:" + eleName + ":format") + "\""
+                        if(nconf.get("defaults:components:" + eleName + ":date-format" )){
+                            output += " format=\"" + nconf.get("defaults:components:" + eleName + ":date-format") + "\""
                         }
 
                         if (!displayType) {
@@ -721,7 +721,7 @@ router.get('/page/:page/:type?', function (req, res) {
                             let sectionKey = getUKey()
                             allColumns[sectionKey] = sections[name].columns
                             allActions[sectionKey] = sections[name].actions
-                            let dateFormat = (nconf.get("defaults:components:ihris-secondary:format")) ? ' "dateFormat="' + nconf.get("defaults:components:ihris-secondary:format")  : ''
+                            let dateFormat = (nconf.get("defaults:components:ihris-secondary:date-format")) ? ' "dateFormat="' + nconf.get("defaults:components:ihris-secondary:date-format")  : ''
                             vueOutput += '<ihris-secondary :edit="isEdit" :link-id="fhirId" profile="' + secondary.url
                                 + '" field="' + second_fhir
                                 + '" title="' + sections[name].title
@@ -840,8 +840,8 @@ router.get('/page/:page/:type?', function (req, res) {
                 searchTemplate += " :add-link='addLink'"
             }
 
-            if(nconf.get("defaults:components:" + searchElement + ":format" )){
-                searchTemplate += " dateFormat=\"" + nconf.get("defaults:components:" + searchElement + ":format") + "\""
+            if(nconf.get("defaults:components:" + searchElement + ":date-format" )){
+                searchTemplate += " dateFormat=\"" + nconf.get("defaults:components:" + searchElement + ":date-format") + "\""
             }
             searchTemplate += '>' + "\n"
             for (let filter of filters) {
@@ -1404,8 +1404,8 @@ router.get('/questionnaire/:questionnaire/:page', async function (req, res) {
                             }
                         }
 
-                        if(nconf.get("defaults:components:" + itemType + ":format" )){
-                            vueOutput += " format=\"" + nconf.get("defaults:components:" + itemType + ":format") + "\""
+                        if(nconf.get("defaults:components:" + itemType + ":date-format" )){
+                            vueOutput += " format=\"" + nconf.get("defaults:components:" + itemType + ":date-format") + "\""
                         }
 
                         if (!displayType) {
