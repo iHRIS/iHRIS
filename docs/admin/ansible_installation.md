@@ -3,7 +3,7 @@
 Update package list with below command:
 
 ```sh
-sudo apt install update
+sudo apt update
 ```
 
 Install git:
