@@ -170,9 +170,13 @@ export default {
     if (this.reportData.mappings.mappings.properties[this.expression] && !this.filterDataType) {
       this.filterDataType = this.reportData.mappings.mappings.properties[this.expression].type
     }
+    let hasKeyword
+    if (this.reportData.mappings.mappings.properties[this.expression].fields && this.reportData.mappings.mappings.properties[this.expression].fields.keyword) {
+      hasKeyword = true
+    }
     if (this.isDropDown && this.filterDataType) {
       this.loading = true;
-      let url = `/es/populateFilter/${this.reportData.indexName}/${this.expression}?dataType=${this.filterDataType}`
+      let url = `/es/populateFilter/${this.reportData.indexName}/${this.expression}?dataType=${this.filterDataType}&hasKeyword=${hasKeyword}`
       fetch(url, {
         method: 'GET'
       }).then(response => {

@@ -2,25 +2,25 @@
 
 Update package list with below command:
 
-```sh
+```bash
 sudo apt update
 ```
 
 Install git:
 
-```sh
+```bash
 sudo apt install git
 ```
 
 Install ansible:
 
-```sh
+```bash
 sudo apt install ansible
 ```
 
 Open file `/etc/ansible/hosts` with your favorite editor and add `127.0.0.1` at the end of the file. If the folder ansible is missing, then create the folder ansible with below command:
 
-```sh
+```bash
 sudo mkdir /etc/ansible
 ```
 
@@ -28,7 +28,7 @@ Then open the file `/etc/ansible/hosts` and continue with above editing.
 
 Install ansible modules that we will be using:
 
-```sh
+```bash
 sudo ansible-galaxy collection install ansible.utils
 ```
 
@@ -38,31 +38,31 @@ sudo ansible-galaxy collection install community.postgresql
 
 Clone iHRIS GitHub repository:
 
-```sh
+```bash
 git clone https://github.com/iHRIS/iHRIS.git
 ```
 
 Now run the iHRIS ansible installer:
 
-```sh
+```bash
 cd iHRIS/packaging/ansible/ubuntu
 ```
 
-```sh
+```bash
 sudo bash run.sh
 ```
 
 After the above command is done running, iHRIS will be installed under the directory `/var/lib/iHRIS`. Use the below commands to stop, start, and restart it:
 
-```sh
+```bash
 sudo service ihris stop
 ```
 
-```sh
+```bash
 sudo service ihris start
 ```
 
-```sh
+```bash
 sudo service ihris restart
 ```
 

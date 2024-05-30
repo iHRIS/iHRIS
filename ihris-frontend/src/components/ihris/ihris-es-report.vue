@@ -304,7 +304,7 @@ export default {
             this.terms[sTerm] = this.terms[sTerm].replace(/\s+/g, " ").trim();
           }
           let esFieldName;
-          if (sTermDet.isDropDown && sTermDet.dataType === "text") {
+          if (sTermDet.isDropDown && this.reportData.mappings.mappings.properties[sTerm].fields && this.reportData.mappings.mappings.properties[sTerm].fields.keyword) {
             esFieldName = sTerm + ".keyword";
           } else {
             esFieldName = sTerm;
@@ -328,8 +328,9 @@ export default {
               for (let tm of termArr) {
                 let query = {};
                 if (
-                    this.reportData.mappings.mappings.properties[esFieldName] &&
-                    this.reportData.mappings.mappings.properties[esFieldName].type === "text"
+                  this.reportData.mappings.mappings.properties[esFieldName] &&
+                  this.reportData.mappings.mappings.properties[esFieldName].fields &&
+                  this.reportData.mappings.mappings.properties[esFieldName].fields.keyword
                 ) {
                   query.wildcard = {};
                   query.wildcard[esFieldName + '.keyword'] = {
@@ -490,7 +491,8 @@ export default {
         let sortColESName;
         if (
           this.reportData.mappings.mappings.properties[sortCol] &&
-          this.reportData.mappings.mappings.properties[sortCol].type === "text"
+          this.reportData.mappings.mappings.properties[sortCol].fields &&
+          this.reportData.mappings.mappings.properties[sortCol].fields.keyword
         ) {
           sortColESName = sortCol + ".keyword";
         } else {
