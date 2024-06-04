@@ -318,9 +318,17 @@ export default {
               terms.terms[esFieldName].push(value);
             }
             if (this.termsConditions[sTerm] === "exclude") {
-              body.query.bool.must_not.push(terms);
+              if(sTermDet.dataType!=="date") {
+                body.query.bool.must_not.push(terms);
+              }else{
+                  this.formatDateFilter(sTermDet, filter, body);
+                }
             } else {
-              body.query.bool.must.push(terms);
+               if(sTermDet.dataType!=="date") {
+                  body.query.bool.must.push(terms);
+               }else{
+                  this.formatDateFilter(sTermDet, filter, body);
+                }
             }
           } else {
             if (!sTermDet.isDropDown) {
@@ -341,9 +349,17 @@ export default {
                   query.term[esFieldName] = tm;
                 }
                 if (this.termsConditions[sTerm] === "exclude") {
-                  body.query.bool.must_not.push(query);
+                  if(sTermDet.dataType!=="date") {
+                    body.query.bool.must_not.push(query);
+                  }else{
+                  this.formatDateFilter(sTermDet, filter, body);
+                }
                 } else {
-                  body.query.bool.must.push(query);
+                  if(sTermDet.dataType!=="date") {
+                    body.query.bool.must.push(query);
+                  }else{
+                  this.formatDateFilter(sTermDet, filter, body);
+                }
                 }
               }
             } else {
@@ -352,9 +368,97 @@ export default {
               };
               terms.terms[esFieldName] = [this.terms[sTerm]];
               if (this.termsConditions[sTerm] === "exclude") {
-                body.query.bool.must_not.push(terms);
+                if(sTermDet.dataType!=="date") {
+                  body.query.bool.must_not.push(terms);
+                }else{
+                  let date = this.terms
+                  let filterDate = []
+                  let c = sTermDet.field
+                  if (filter[c] && filter[c] !== 'include') {
+                    if (filter[c] === 'range') {
+                      let sortedDate = date[c].sort()
+                      let rangeOne = sortedDate[0]
+                      let rangeTwo = sortedDate[1]
+                      let filterWith = {
+                        "gte": rangeOne,
+                        "lte": rangeTwo
+                      }
+                      let a = {}
+                      let b = {}
+                      b[c] = filterWith
+                      a['range'] = b
+                      filterDate.push(a)
+                      body.query.bool.must = body.query.bool.must.filter(p => {
+                        if (p.terms) {
+                          return !Object.keys(p.terms).includes(c)
+                        }
+                        return true
+                      })
+                    }
+                    else {
+                      let filterWith = {}
+                      let a = {}
+                      let b = {}
+                      filterWith[filter[c]] = date[c];
+                      b[c] = filterWith
+                      a['range'] = b
+                      filterDate.push(a)
+                      body.query.bool.must = body.query.bool.must.filter(p => {
+                        if (p.term) {
+                          return !Object.keys(p.term).includes(c)
+                        }
+                        return true
+                      })
+                    }
+                  }
+                  body.query.bool.filter = filterDate
+                }
               } else {
-                body.query.bool.must.push(terms);
+                if(sTermDet.dataType!=="date") {
+                  body.query.bool.must.push(terms);
+                }else{
+                  let date = this.terms
+                  let filterDate = []
+                  let c = sTermDet.field
+                  if (filter[c] && filter[c] !== 'include') {
+                    if (filter[c] === 'range') {
+                      let sortedDate = date[c].sort()
+                      let rangeOne = sortedDate[0]
+                      let rangeTwo = sortedDate[1]
+                      let filterWith = {
+                        "gte": rangeOne,
+                        "lte": rangeTwo
+                      }
+                      let a = {}
+                      let b = {}
+                      b[c] = filterWith
+                      a['range'] = b
+                      filterDate.push(a)
+                      body.query.bool.must = body.query.bool.must.filter(p => {
+                        if (p.terms) {
+                          return !Object.keys(p.terms).includes(c)
+                        }
+                        return true
+                      })
+                    }
+                    else {
+                      let filterWith = {}
+                      let a = {}
+                      let b = {}
+                      filterWith[filter[c]] = date[c];
+                      b[c] = filterWith
+                      a['range'] = b
+                      filterDate.push(a)
+                      body.query.bool.must = body.query.bool.must.filter(p => {
+                        if (p.term) {
+                          return !Object.keys(p.term).includes(c)
+                        }
+                        return true
+                      })
+                    }
+                  }
+                  body.query.bool.filter = filterDate
+                }
               }
             }
           }
@@ -398,46 +502,7 @@ export default {
       }
 
       if (sTermDet && (sTermDet?.dataType === "date" || sTermDet?.dataType === "long") && sTermDet.field) {
-        let date = this.terms
-        let filterDate = []
-        let c = sTermDet.field
-        if (filter[c] && filter[c] !== 'include') {
-          if (filter[c] === 'range') {
-            let sortedDate = date[c].sort()
-            let rangeOne = sortedDate[0]
-            let rangeTwo = sortedDate[1]
-            let filterWith = {
-              "gte": rangeOne,
-              "lte": rangeTwo
-            }
-            let a = {}
-            let b = {}
-            b[c] = filterWith
-            a['range'] = b
-            filterDate.push(a)
-            body.query.bool.must = body.query.bool.must.filter(p => {
-              if (p.terms) {
-                return !Object.keys(p.terms).includes(c)
-              }
-              return true
-            })
-          } else {
-            let filterWith = {}
-            let a = {}
-            let b = {}
-            filterWith[filter[c]] = date[c];
-            b[c] = filterWith
-            a['range'] = b
-            filterDate.push(a)
-            body.query.bool.must = body.query.bool.must.filter(p => {
-              if (p.term) {
-                return !Object.keys(p.term).includes(c)
-              }
-              return true
-            })
-          }
-        }
-        body.query.bool.filter = filterDate
+        this.formatDateFilter(sTermDet, filter, body);
       }
       eventBus.$emit("builtESTerms", body);
       return body;
@@ -608,6 +673,48 @@ export default {
         });
       });
     },
+    formatDateFilter(sTermDet, filter, body) {
+      let date = this.terms
+      let filterDate = []
+      let c = sTermDet.field
+      if (filter[c] && filter[c] !== 'include') {
+        if (filter[c] === 'range') {
+          let sortedDate = [...date[c]].sort()
+          let rangeOne = sortedDate[0]
+          let rangeTwo = sortedDate[1]
+          let filterWith = {
+            "gte": rangeOne,
+            "lte": rangeTwo
+          }
+          let a = {}
+          let b = {}
+          b[c] = filterWith
+          a['range'] = b
+          filterDate.push(a)
+          body.query.bool.must = body.query.bool.must.filter(p => {
+            if (p.terms) {
+              return !Object.keys(p.terms).includes(c)
+            }
+            return true
+          })
+        } else {
+          let filterWith = {}
+          let a = {}
+          let b = {}
+          filterWith[filter[c]] = date[c];
+          b[c] = filterWith
+          a['range'] = b
+          filterDate.push(a)
+          body.query.bool.must = body.query.bool.must.filter(p => {
+            if (p.term) {
+              return !Object.keys(p.term).includes(c)
+            }
+            return true
+          })
+        }
+      }
+      body.query.bool.filter = filterDate
+    }
   },
 };
 </script>
