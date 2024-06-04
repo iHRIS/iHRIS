@@ -242,11 +242,15 @@ router.get('/listFields/:index', (req, res) => {
             if(type) {
               mappings[mapping].type = type
             }
-            fields.push({
+            let field = {
               name,
               display,
               type: mappings[mapping].type
-            })
+            }
+            if(mappings[mapping].fields && mappings[mapping].fields.keyword) {
+              field.hasKeyword = true
+            }
+            fields.push(field)
           }
         }
       }
@@ -462,8 +466,11 @@ router.get('/populateFilter/:index/:field', (req, res) => {
   let indexName = req.params.index
   let field = req.params.field
   const dataType = req.query.dataType
+  const hasKeyword = req.query.hasKeyword
+  console.log(typeof hasKeyword);
+  console.log(hasKeyword);
 
-  if(dataType === 'text') {
+  if(hasKeyword === 'true') {
     field = `${field}.keyword`
   }
   let body = {
