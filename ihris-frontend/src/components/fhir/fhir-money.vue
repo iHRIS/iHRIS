@@ -71,6 +71,11 @@ export default {
     this.setupData()
   },
   watch: {
+    hide(val) {
+      if(val) {
+        this.value = { value: "", currency: "" }
+      }
+    },
     slotProps: {
       handler() {
         //console.log("WATCH CODING",this.path,this.slotProps)

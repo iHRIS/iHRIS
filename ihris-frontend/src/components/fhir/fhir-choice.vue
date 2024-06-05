@@ -35,6 +35,7 @@ export default {
   data: function() {
     return {
       value: { system: "", code: "", display: "" },
+      hiddenVal: "",
       savedValueCode: "",
       valueCode: "",
       loading: true,
@@ -55,6 +56,15 @@ export default {
     }
   },
   watch: {
+    hide(val) {
+      if(val) {
+        this.hiddenVal = this.valueCode
+        this.valueCode = ""
+        this.value = { system: "", code: "", display: "" }
+      } else {
+        this.valueCode = this.hiddenVal
+      }
+    },
     slotProps: {
       handler() {
         if ( !this.lockWatch ) {

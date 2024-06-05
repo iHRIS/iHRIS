@@ -42,6 +42,11 @@ export default {
     this.setupData()
   },
   watch: {
+    hide(val) {
+      if(val) {
+        this.value = ""
+      }
+    },
     slotProps: {
       handler() {
         //console.log("WATCH UNSIGNED INT",this.field,this.path,this.slotProps)

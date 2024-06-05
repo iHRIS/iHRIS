@@ -62,6 +62,7 @@ export default {
     return {
       source: { path: "", data: {} },
       value: "",
+      hiddenVal: "",
       showPassword: false,
       qField: "valueString",
       disabled: false,
@@ -78,6 +79,14 @@ export default {
     this.setupData()
   },
   watch: {
+    hide(val) {
+      if(val) {
+        this.hiddenVal = this.value
+        this.value = ""
+      } else if(this.hiddenVal) {
+        this.value = this.hiddenVal
+      }
+    },
     slotProps: {
       handler() {
         //console.log("WATCH STRING",this.field,this.path,this.slotProps)

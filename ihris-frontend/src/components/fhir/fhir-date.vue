@@ -301,6 +301,11 @@ export default {
     }
   },
   watch: {
+    hide(val) {
+      if(val) {
+        this.value = ""
+      }
+    },
     menu (val) {
       if ( this.pickerType !== 'year' ) {
         if ( this.isEthiopian ) {

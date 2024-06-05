@@ -101,6 +101,11 @@ export default {
     this.setupData()
   },
   watch: {
+    hide(val) {
+      if(val) {
+        this.value = { contentType: "", data: "", title: "" }
+      }
+    },
     slotProps: {
       handler() {
         //console.log("WATCH ATTACH",this.field,this.path,this.slotProps)

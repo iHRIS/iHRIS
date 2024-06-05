@@ -301,6 +301,11 @@ export default {
     }
   },
   watch: {
+    hide(val) {
+      if(val) {
+        this.value = ""
+      }
+    },
     menu (val) {
       if ( this.isEthiopian ) {
         !this.value && val && setTimeout(() => (this.$refs.etPicker.activePicker = 'YEAR'))

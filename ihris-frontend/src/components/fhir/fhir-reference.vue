@@ -192,6 +192,12 @@ export default {
     }
   },
   watch: {
+    hide(val) {
+      if(val) {
+        this.value = { reference: "" }
+        this.select = ""
+      }
+    },
     slotProps: {
       handler() {
         //console.log("WATCH REFERENCE",this.path,this.slotProps)

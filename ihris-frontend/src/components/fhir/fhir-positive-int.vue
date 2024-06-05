@@ -1,7 +1,18 @@
 <template>
   <ihris-element :edit="edit" :loading="false" v-if="!hide">
     <template #form>
-      <v-text-field :error-messages="errors" @change="errors = []" :label="display" :disabled="disabled" :name="field" v-model.number="value" outlined hide-details="auto" :rules="rules" dense>
+      <v-text-field
+        :error-messages="errors"
+        @change="errors = []"
+        :label="display"
+        :disabled="disabled"
+        :name="field"
+        v-model.number="value"
+        outlined
+        hide-details="auto"
+        :rules="rules"
+        dense
+      >
         <template #label>{{display}} <span v-if="required" class="red--text font-weight-bold">*</span></template>
       </v-text-field>
     </template>
@@ -42,6 +53,11 @@ export default {
     this.setupData()
   },
   watch: {
+    hide(val) {
+      if(val) {
+        this.value = ""
+      }
+    },
     slotProps: {
       handler() {
         //console.log("WATCH POSITIVE INT",this.field,this.path,this.slotProps)

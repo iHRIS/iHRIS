@@ -41,6 +41,7 @@ export default {
     return {
       source: { path: "", data: {} },
       value: "",
+      hiddenVal: "",
       qField: "valueInteger",
       disabled: false,
       errors: [],
@@ -56,6 +57,14 @@ export default {
     this.setupData()
   },
   watch: {
+    hide(val) {
+      if(val) {
+        this.hiddenVal = this.value
+        this.value = ""
+      } else if(this.hiddenVal) {
+        this.value = this.hiddenVal
+      }
+    },
     slotProps: {
       handler() {
         //console.log("WATCH INTEGER",this.field,this.path,this.slotProps)
