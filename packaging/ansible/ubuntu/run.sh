@@ -8,4 +8,5 @@ ansible-playbook postgresinstall.yaml --connection=local
 ansible-playbook tomcat.yaml --connection=local
 ansible-playbook maven.yaml --connection=local
 ansible-playbook hapi.yaml --connection=local
+ansible-playbook elasticsearch.yaml --connection=local
 ansible-playbook ihris.yaml --connection=local
