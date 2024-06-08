@@ -961,7 +961,6 @@ router.get('/questionnaire/:questionnaire/:page', async function (req, res) {
         let displayCondition = ''
         if(qItem.enableWhen) {
             for(let when of qItem.enableWhen) {
-                displayCondition = ''
                 const condKeys = Object.keys(when)
                 let answKeyInd = condKeys.findIndex((cond) => {
                     return cond.startsWith('answer')

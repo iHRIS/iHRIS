@@ -10,6 +10,7 @@ export const dataDisplay = {
   },
   methods: {
     hideShowField(displayCondition) {
+      console.log(displayCondition);
       if(displayCondition) {
         this.hide = true
         let conditions = displayCondition.split('+=')
@@ -29,23 +30,27 @@ export const dataDisplay = {
           })
           eventBus.$on(path, (value) => {
             this.pathes[path].selectedVal = value
-            this.hide = true
+            this.hide = false
+            let hide = {}
             for(let path in this.pathes) {
+              hide[path] = true
               let selectedVal = this.pathes[path].selectedVal
               for(let pathData of this.pathes[path].data) {
                 let expectedVal = pathData.expectedVal
                 let operator = pathData.operator
                 if((operator === '=' && expectedVal == selectedVal) || (operator === '!=' && expectedVal != selectedVal)) {
-                  this.hide = false
+                  hide[path] = false
                 } else if(operator === 'exists' && selectedVal !== "") {
-                  this.hide = false
+                  hide[path] = false
                 } else if(
                   (operator === '>' && expectedVal > selectedVal) || 
                   (operator === '<' && expectedVal < selectedVal) ||
                   (operator === '<=' && expectedVal <= selectedVal) ||
                   (operator === '>=' && expectedVal >= selectedVal)
                 ) {
-                  this.hide = false
+                  hide[path] = false
+                } else {
+                  this.hide = true
                 }
               }
             }
