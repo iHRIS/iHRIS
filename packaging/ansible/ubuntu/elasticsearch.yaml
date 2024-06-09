@@ -1,0 +1,49 @@
+---
+- name: Install Elasticsearch
+  hosts: localhost
+  become: yes
+  tasks:
+    - name: Ensure wget is installed
+      apt:
+        name: wget
+        state: present
+
+    - name: Download and add Elasticsearch GPG key
+      ansible.builtin.shell: |
+        wget -qO - https://artifacts.elastic.co/GPG-KEY-elasticsearch | gpg --dearmor -o /usr/share/keyrings/elasticsearch-keyring.gpg
+      args:
+        creates: /usr/share/keyrings/elasticsearch-keyring.gpg
+
+    - name: Ensure apt-transport-https is installed
+      apt:
+        name: apt-transport-https
+        state: present
+
+    - name: Add Elasticsearch APT repository
+      ansible.builtin.shell: |
+        echo "deb [signed-by=/usr/share/keyrings/elasticsearch-keyring.gpg] https://artifacts.elastic.co/packages/8.x/apt stable main" | tee /etc/apt/sources.list.d/elastic-8.x.list
+      args:
+        creates: /etc/apt/sources.list.d/elastic-8.x.list
+
+    - name: Update APT package list
+      apt:
+        update_cache: yes
+
+    - name: Install Elasticsearch
+      apt:
+        name: elasticsearch
+        state: present
+
+    - name: Reload systemd manager configuration
+      ansible.builtin.systemd:
+        daemon_reload: yes
+
+    - name: Enable Elasticsearch service
+      ansible.builtin.systemd:
+        name: elasticsearch
+        enabled: yes
+
+    - name: Start Elasticsearch service
+      ansible.builtin.systemd:
+        name: elasticsearch
+        state: started

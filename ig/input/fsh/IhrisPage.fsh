@@ -129,6 +129,7 @@ Description:    "iHRIS Page Section information."
       description 1..1 MS and
       name 1..1 MS and
       field 0..* MS and
+      hide 0..* MS and
       resource 0..1 MS
 * extension[title].value[x] only string
 * extension[title].valueString MS
@@ -142,6 +143,9 @@ Description:    "iHRIS Page Section information."
 * extension[field].value[x] only string
 * extension[field].valueString 1..1 MS
 * extension[field].valueString ^label = "Field"
+* extension[hide].value[x] only string
+* extension[hide].valueString 1..1 MS
+* extension[hide].valueString ^label = "Hide"
 * extension[resource].extension contains
       resource 1..1 MS and
       linkfield 1..1 MS and

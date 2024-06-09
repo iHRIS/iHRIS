@@ -326,6 +326,7 @@ router.get('/page/:page/:type?', function (req, res) {
             for (let section of pageSections) {
                 let title, description, name, sectionEmptyDisplay, resourceExt, resource, linkfield, searchfield, searchfieldtarget
                 let fields = []
+                let hide = []
                 let columns = []
                 let actions = []
                 try {
@@ -343,6 +344,10 @@ router.get('/page/:page/:type?', function (req, res) {
                 sectionEmptyDisplay = section.extension.find(ext => ext.url === "emptyDisplay")?.valueBoolean
                 try {
                     fields = section.extension.filter(ext => ext.url === "field").map(ext => ext.valueString)
+                } catch (err) {
+                }
+                try {
+                    hide = section.extension.filter(ext => ext.url === "hide").map(ext => ext.valueString)
                 } catch (err) {
                 }
                 let allowed = req.user.hasPermissionByName("special", "section", name)
@@ -444,6 +449,7 @@ router.get('/page/:page/:type?', function (req, res) {
                     description: description,
                     emptyDisplay: sectionEmptyDisplay,
                     fields: fields,
+                    hide: hide,
                     order: sectionOrder,
                     resource: resource,
                     linkfield: linkfield,
@@ -488,6 +494,7 @@ router.get('/page/:page/:type?', function (req, res) {
                         description: "",
                         emptyDisplay: false,
                         fields: [],
+                        hide: [],
                         order: {},
                         resource: undefined,
                         linkfield: undefined,
@@ -534,13 +541,16 @@ router.get('/page/:page/:type?', function (req, res) {
                         }
                     }
                 }
-                const processFields = async (fields, base, order) => {
+                const processFields = async (fields, base, order, hide) => {
                     let output = ""
                     let fieldKeys = Object.keys(fields)
                     if (order[base]) {
                         fieldKeys.sort(getSortFunc(order[base]))
                     }
                     for (let field of fieldKeys) {
+                        if(fields[field].id && (hide.includes(fields[field].id))) {
+                            continue
+                        }
                         if (fields[field]["max"] === "0") {
                             continue
                         }
@@ -686,7 +696,7 @@ router.get('/page/:page/:type?', function (req, res) {
 
                         if (!subFields && fields[field].hasOwnProperty("fields")) {
                             output += "<template #default=\"slotProps\">\n"
-                            output += await processFields(fields[field].fields, base + "." + fields[field], order)
+                            output += await processFields(fields[field].fields, base + "." + fields[field], order, hide)
                             output += "</template>\n"
                         }
                         output += "</fhir-" + eleName + ">\n"
@@ -738,7 +748,7 @@ router.get('/page/:page/:type?', function (req, res) {
                         }
 
                     } else {
-                        vueOutput += await processFields(sections[name].elements, fhir, sections[name].order)
+                        vueOutput += await processFields(sections[name].elements, fhir, sections[name].order, sections[name].hide)
                     }
                     vueOutput += "</template></ihris-section>\n"
                 }

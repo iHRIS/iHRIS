@@ -25,6 +25,7 @@ export default {
     getTemplate: function() {
       fetch( "/config/page/"+page ).then(response => {
         response.json().then(data => {
+          console.log(data.template);
           if ( data.resourceType === "OperationOutcome" ) {
             Vue.component( 'ihris-template', {
               name: 'ihris-template',

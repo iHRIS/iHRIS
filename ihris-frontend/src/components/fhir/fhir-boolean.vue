@@ -18,6 +18,7 @@
     </template>
     <template #value>
       {{value}}
+      {{$t(`App.hardcoded-texts.${value}`)}}
     </template>
   </ihris-element>
 </template>

@@ -10,7 +10,6 @@ export const dataDisplay = {
   },
   methods: {
     hideShowField(displayCondition) {
-      console.log(displayCondition);
       if(displayCondition) {
         this.hide = true
         let conditions = displayCondition.split('+=')
