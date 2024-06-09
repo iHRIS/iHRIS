@@ -430,6 +430,8 @@
       "User Status": "User Status"
     },
     "hardcoded-texts": {
+      "true": "true",
+      "false": "false",
       "Added successfully": "Added successfully.",
       "Installed Apps": "Installed Apps",
       "Install": "Install",

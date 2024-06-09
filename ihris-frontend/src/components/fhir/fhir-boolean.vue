@@ -10,14 +10,13 @@
         :error-messages="errors"
         @change="errors = []"
       >
-      <template #label>{{$t(`App.fhir-resources-texts.${display}`)}}: {{value.toString()}} <span v-if="required" class="red--text font-weight-bold">*</span></template>
+      <template #label>{{$t(`App.fhir-resources-texts.${display}`)}}: {{$t(`App.hardcoded-texts.${value.toString()}`)}} <span v-if="required" class="red--text font-weight-bold">*</span></template>
       </v-switch>
     </template>
     <template #header>
       {{$t(`App.fhir-resources-texts.${display}`)}}
     </template>
-    <template #value>
-      {{value}}
+    <template #value v-if="$t(`App.hardcoded-texts.${value}`)">
       {{$t(`App.hardcoded-texts.${value}`)}}
     </template>
   </ihris-element>
