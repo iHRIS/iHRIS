@@ -16,7 +16,7 @@
     <template #header>
       {{$t(`App.fhir-resources-texts.${display}`)}}
     </template>
-    <template #value v-if="$t(`App.hardcoded-texts.${value}`)">
+    <template #value>
       {{$t(`App.hardcoded-texts.${value}`)}}
     </template>
   </ihris-element>

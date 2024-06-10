@@ -18,15 +18,43 @@
               <v-icon left>mdi-chart-box-plus-outline</v-icon>
               {{ $t("App.hardcoded-texts.Customize Report") }}
             </v-btn>
-            <v-btn v-if="!hideExport" small color="info" @click="reportExport('csv')">
-              <v-progress-circular
-                v-if="downloading"
-                color="amber"
-                indeterminate
-              ></v-progress-circular>
-              <v-icon v-else left>mdi-microsoft-excel</v-icon>
-              {{ $t("App.hardcoded-texts.Export") }}
-            </v-btn>
+            <div class="text-center">
+              <v-menu
+                open-on-hover
+                bottom
+                offset-y
+                rounded="lg"
+                transition="scale-transition"
+              >
+                <template v-slot:activator="{ on, attrs }">
+                  <v-btn
+                    v-if="!hideExport"
+                    small
+                    color="info"
+                    dark
+                    v-bind="attrs"
+                    v-on="on"
+                  >
+                  <v-progress-circular
+                    v-if="downloading"
+                    color="amber"
+                    indeterminate
+                  ></v-progress-circular>
+                  <v-icon v-else left>mdi-microsoft-excel</v-icon>
+                  {{ $t("App.hardcoded-texts.Export") }}
+                  </v-btn>
+                </template>
+
+                <v-list>
+                  <v-list-item style="cursor: pointer;">
+                    <v-list-item-title @click="reportExport('xlsx')">Excel</v-list-item-title>
+                  </v-list-item>
+                  <v-list-item style="cursor: pointer;">
+                    <v-list-item-title @click="reportExport('csv')">CSV</v-list-item-title>
+                  </v-list-item>
+                </v-list>
+              </v-menu>
+            </div>
           </v-row>
         </v-layout>
       </v-card-title>
@@ -566,7 +594,13 @@ export default {
         data: body,
       }).then((response) => {
         this.downloading = false;
-        let blob = new Blob([response.data], { type: "text/csv" });
+        let type
+        if(format === 'xlsx') {
+          type = { type: "application/vnd.ms-excel" }
+        } else if(format === 'csv') {
+          type = { type: "text/csv" }
+        }
+        let blob = new Blob([response.data], type);
         let link = document.createElement("a");
         link.href = window.URL.createObjectURL(blob);
         link.download = this.$t(`App.reports.${this.label}`) + '.' + format;

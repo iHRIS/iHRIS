@@ -432,6 +432,7 @@
     "hardcoded-texts": {
       "true": "true",
       "false": "false",
+      "print": "Print",
       "Added successfully": "Added successfully.",
       "Installed Apps": "Installed Apps",
       "Install": "Install",

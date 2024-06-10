@@ -263,112 +263,11 @@ router.post("/export/:format/:index", (req, res) => {
   if ( !req.user ) {
     return res.status(401).json(outcomes.NOTLOGGEDIN)
   }
-  let searchQry = req.body.query;
-  let headers = req.body.headers;
-  let label = req.body.label;
-  let isSelected = req.body.selected;
-
-  if(req.params.format === 'xlx') {
-    excelExport(req)
-  }
-  if (isSelected && isSelected.length > 0) {
-    let rows = "";
-    for (let header of headers) {
-      if (!rows) {
-        rows = header.text;
-      } else {
-        rows += "," + header.text;
-      }
-    }
-    rows += os.EOL;
-    for (let doc of isSelected) {
-      let row;
-      for (let header of headers) {
-        if (row === undefined) {
-          if (doc[header.value] === null || doc[header.value] === undefined) {
-            console.log("doc: ", doc, "header", header);
-            row = " ";
-          } else {
-            row = '"' + doc[header.value] + '"';
-          }
-        } else {
-          if (doc[header.value] === null || doc[header.value] === undefined) {
-            row += ",";
-          } else {
-            row += "," + '"' + doc[header.value] + '"';
-          }
-        }
-      }
-      rows += row + os.EOL;
-    }
-    if (!fs.existsSync(`${__dirname}/../tmp`)) {
-      fs.mkdirSync(`${__dirname}/../tmp`);
-    }
-    let fileName = `${__dirname}/../tmp/${label}-${nanoid(10)}.csv`;
-    fs.writeFileSync(fileName, rows);
-    if (fs.existsSync(fileName)) {
-      res.download(fileName);
-      setTimeout(() => {
-        fs.unlinkSync(fileName);
-      }, 240000);
-      // res.send(fileName.replace(`${__dirname}/..`, ""));
-    }
-  } else {
-    es.getData(
-        { indexName: req.params.index, searchQuery: searchQry },
-        (err, documents) => {
-          if (err) {
-            return res.status(500).send();
-          }
-          let rows = "";
-          for (let header of headers) {
-            if (!rows) {
-              rows = header.text;
-            } else {
-              rows += "," + header.text;
-            }
-          }
-          rows += os.EOL;
-          for (let doc of documents) {
-            let row;
-            for (let header of headers) {
-              if (row === undefined) {
-                if (
-                    doc._source[header.value] === null ||
-                    doc._source[header.value] === undefined
-                ) {
-                  row = " ";
-                } else {
-                  row = '"' + doc._source[header.value] + '"';
-                }
-              } else {
-                if (
-                    doc._source[header.value] === null ||
-                    doc._source[header.value] === undefined
-                ) {
-                  row += ",";
-                } else {
-                  row += "," + '"' + doc._source[header.value] + '"';
-                }
-              }
-            }
-            rows += row + os.EOL;
-          }
-          if (!fs.existsSync(`${__dirname}/../tmp`)) {
-            fs.mkdirSync(`${__dirname}/../tmp`);
-          }
-          let fileName = `${__dirname}/../tmp/${label}-${nanoid(10)}.csv`;
-          fs.writeFileSync(fileName, rows);
-          if (fs.existsSync(fileName)) {
-            res.download(fileName);
-            setTimeout(() => {
-              fs.unlinkSync(fileName);
-            }, 240000);
-            // res.send(fileName.replace(`${__dirname}/..`, ""));
-          }
-          //remove the file after 4 minutes
-        }
-    );
+  
+  if(req.params.format === 'xlsx') {
+    return excelExport(req, res)
+  } else if(req.params.format === 'csv') {
+    return csvExport(req, res)
   }
 });
 
@@ -538,69 +437,158 @@ router.get('/populateFilter/:index/:field', (req, res) => {
   // })
 })
 
-function excelExport(req) {
-  return new Promise((resolve, reject) => {
-    let searchQry = req.body.query;
-    let headers = req.body.headers;
-    let label = req.body.label;
-    let isSelected = req.body.selected;
-
-    const workbook = new ExcelJS.Workbook();
-    const report = workbook.addWorksheet(label, {
-      headerFooter:{firstHeader: label, firstFooter: label}
-    });
+function csvExport(req, res) {
+  let searchQry = req.body.query;
+  let headers = req.body.headers;
+  let label = req.body.label;
+  let isSelected = req.body.selected;
+  if (isSelected && isSelected.length > 0) {
+    let rows = "";
     for (let header of headers) {
-      report.columns.push({
-        header: header.text,
-        key: header.value
-      })
+      if (!rows) {
+        rows = header.text;
+      } else {
+        rows += "," + header.text;
+      }
     }
-    es.getData(
-      { indexName: req.params.index, searchQuery: searchQry },
-      (err, documents) => {
-        if (err) {
-          return res.status(500).send();
+    rows += os.EOL;
+    for (let doc of isSelected) {
+      let row;
+      for (let header of headers) {
+        if (row === undefined) {
+          if (doc[header.value] === null || doc[header.value] === undefined) {
+            console.log("doc: ", doc, "header", header);
+            row = " ";
+          } else {
+            row = '"' + doc[header.value] + '"';
+          }
+        } else {
+          if (doc[header.value] === null || doc[header.value] === undefined) {
+            row += ",";
+          } else {
+            row += "," + '"' + doc[header.value] + '"';
+          }
         }
-        for (let doc of documents) {
-          let row;
+      }
+      rows += row + os.EOL;
+    }
+    if (!fs.existsSync(`${__dirname}/../tmp`)) {
+      fs.mkdirSync(`${__dirname}/../tmp`);
+    }
+    let fileName = `${__dirname}/../tmp/${label}-${nanoid(10)}.csv`;
+    fs.writeFileSync(fileName, rows);
+    if (fs.existsSync(fileName)) {
+      res.download(fileName);
+      setTimeout(() => {
+        fs.unlinkSync(fileName);
+      }, 240000);
+      // res.send(fileName.replace(`${__dirname}/..`, ""));
+    }
+  } else {
+    es.getData(
+        { indexName: req.params.index, searchQuery: searchQry },
+        (err, documents) => {
+          if (err) {
+            return res.status(500).send();
+          }
+          let rows = "";
           for (let header of headers) {
-            if (row === undefined) {
-              if (
-                  doc._source[header.value] === null ||
-                  doc._source[header.value] === undefined
-              ) {
-                row = " ";
-              } else {
-                row = '"' + doc._source[header.value] + '"';
-              }
+            if (!rows) {
+              rows = header.text;
             } else {
-              if (
-                  doc._source[header.value] === null ||
-                  doc._source[header.value] === undefined
-              ) {
-                row += ",";
-              } else {
-                row += "," + '"' + doc._source[header.value] + '"';
-              }
+              rows += "," + header.text;
             }
           }
-          rows += row + os.EOL;
+          rows += os.EOL;
+          for (let doc of documents) {
+            let row;
+            for (let header of headers) {
+              if (row === undefined) {
+                if (
+                    doc._source[header.value] === null ||
+                    doc._source[header.value] === undefined
+                ) {
+                  row = " ";
+                } else {
+                  row = '"' + doc._source[header.value] + '"';
+                }
+              } else {
+                if (
+                    doc._source[header.value] === null ||
+                    doc._source[header.value] === undefined
+                ) {
+                  row += ",";
+                } else {
+                  row += "," + '"' + doc._source[header.value] + '"';
+                }
+              }
+            }
+            rows += row + os.EOL;
+          }
+          if (!fs.existsSync(`${__dirname}/../tmp`)) {
+            fs.mkdirSync(`${__dirname}/../tmp`);
+          }
+          let fileName = `${__dirname}/../tmp/${label}-${nanoid(10)}.csv`;
+          fs.writeFileSync(fileName, rows);
+          if (fs.existsSync(fileName)) {
+            res.download(fileName);
+            setTimeout(() => {
+              fs.unlinkSync(fileName);
+            }, 240000);
+            // res.send(fileName.replace(`${__dirname}/..`, ""));
+          }
+          //remove the file after 4 minutes
         }
-        if (!fs.existsSync(`${__dirname}/../tmp`)) {
-          fs.mkdirSync(`${__dirname}/../tmp`);
-        }
-        let fileName = `${__dirname}/../tmp/${label}-${nanoid(10)}.csv`;
-        fs.writeFileSync(fileName, rows);
-        if (fs.existsSync(fileName)) {
-          res.download(fileName);
-          setTimeout(() => {
-            fs.unlinkSync(fileName);
-          }, 240000);
-          // res.send(fileName.replace(`${__dirname}/..`, ""));
-        }
-        //remove the file after 4 minutes
-      }
     );
-  })
+  }
+}
+
+function excelExport(req, res) {
+  let searchQry = req.body.query;
+  let headers = req.body.headers;
+  let label = req.body.label;
+  let isSelected = req.body.selected;
+
+  const workbook = new ExcelJS.Workbook();
+  const report = workbook.addWorksheet(label, {
+    headerFooter:{firstHeader: label, firstFooter: label}
+  });
+  let sheetHeaders = []
+  for (let header of headers) {
+    sheetHeaders.push({
+      header: header.text,
+      key: header.value
+    })
+  }
+  report.columns = sheetHeaders
+  es.getData(
+    { indexName: req.params.index, searchQuery: searchQry },
+    (err, documents) => {
+      if (err) {
+        return res.status(500).send();
+      }
+      for (let doc of documents) {
+        let row = {};
+        for (let header of headers) {
+          if(!doc._source[header.value]) {
+            doc._source[header.value] = ""
+          }
+          row[header.value] = doc._source[header.value]
+        }
+        report.addRow(row);
+      }
+      if (!fs.existsSync(`${__dirname}/../tmp`)) {
+        fs.mkdirSync(`${__dirname}/../tmp`);
+      }
+      let fileName = `${__dirname}/../tmp/${label}-${nanoid(10)}.xlsx`;
+      workbook.xlsx.writeFile(fileName).then(() => {
+        res.download(fileName);
+        //delete the file after 4 minutes
+        setTimeout(() => {
+          fs.unlinkSync(fileName);
+        }, 240000);
+      });
+    }
+  );
 }
 module.exports = router
