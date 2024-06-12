@@ -5,7 +5,7 @@
         <v-card-title primary-title>
           {{apps.length}} {{ $t(`App.hardcoded-texts.Installed Apps`) }}
           <v-spacer></v-spacer>
-          <v-tooltip top v-if="apps.length > 0">
+          <v-tooltip top v-if="apps.length > 0 && $utils.hasTask('can-uninstall-apps')">
             <template v-slot:activator="{ on, attrs }">
               <v-btn 
                 icon 

@@ -10,6 +10,7 @@ import vuetify from "./plugins/vuetify"
 import 'whatwg-fetch'
 import fhirpath from "fhirpath"
 import fhirutils from "./plugins/fhirutils"
+import utils from "./plugins/utils"
 import { i18n } from './i18n'
 
 Vue.config.productionTip = false
@@ -19,6 +20,9 @@ Object.defineProperty(Vue.prototype, '$fhirpath', {
 })
 Object.defineProperty(Vue.prototype, '$fhirutils', {
   value: fhirutils
+})
+Object.defineProperty(Vue.prototype, '$utils', {
+  value: utils
 })
 
 Vue.use(require('vue-moment'));
