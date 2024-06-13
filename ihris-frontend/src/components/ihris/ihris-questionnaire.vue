@@ -30,7 +30,7 @@
             <v-spacer></v-spacer>
             <v-btn
                 v-if="valid"
-                :disabled="!valid"
+                :disabled="!valid || isSaveInProgress"
                 class="success darken-1"
                 dark
                 @click="processFHIR()"
@@ -129,6 +129,7 @@ export default {
       source: {path: "", data: {}},
       introSource: {path: "", data: {}},
       path: "",
+      isSaveInProgress: false,
     };
   },
   watch: {
@@ -233,6 +234,7 @@ export default {
     processFHIR: async function () {
       this.$refs.form.validate();
       if (!this.valid) return;
+      this.isSaveInProgress = true;
       this.advancedValid = true;
       this.overlay = true;
       this.loading = true;
@@ -476,6 +478,7 @@ export default {
             console.log(err);
             this.overlay = false;
             this.loading = false;
+            this.isSaveInProgress = false;
             this.$store.commit("setMessage", {
               type: "error",
               text: "Failed to update data.",
