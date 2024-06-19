@@ -32,24 +32,23 @@ export const dataDisplay = {
             this.hide = false
             let hide = {}
             for(let path in this.pathes) {
-              hide[path] = true
               let selectedVal = this.pathes[path].selectedVal
               for(let pathData of this.pathes[path].data) {
                 let expectedVal = pathData.expectedVal
                 let operator = pathData.operator
                 if((operator === '=' && expectedVal == selectedVal) || (operator === '!=' && expectedVal != selectedVal)) {
-                  hide[path] = false
+                  hide[path + '#' + expectedVal] = false
                 } else if(operator === 'exists' && selectedVal !== "") {
-                  hide[path] = false
+                  hide[path + '#' + expectedVal] = false
                 } else if(
                   (operator === '>' && expectedVal > selectedVal) || 
                   (operator === '<' && expectedVal < selectedVal) ||
                   (operator === '<=' && expectedVal <= selectedVal) ||
                   (operator === '>=' && expectedVal >= selectedVal)
                 ) {
-                  hide[path] = false
+                  hide[path + '#' + expectedVal] = false
                 } else {
-                  hide[path] = true
+                  hide[path + '#' + expectedVal] = true
                   if(!enableBehavior || enableBehavior === 'all') {
                     this.hide = true
                   }
