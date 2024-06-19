@@ -9,7 +9,7 @@ export const dataDisplay = {
     }
   },
   methods: {
-    hideShowField(displayCondition) {
+    hideShowField(displayCondition, enableBehavior) {
       if(displayCondition) {
         this.hide = true
         let conditions = displayCondition.split('+=')
@@ -49,8 +49,22 @@ export const dataDisplay = {
                 ) {
                   hide[path] = false
                 } else {
-                  this.hide = true
+                  hide[path] = true
+                  if(!enableBehavior || enableBehavior === 'all') {
+                    this.hide = true
+                  }
                 }
+              }
+            }
+            if(enableBehavior && enableBehavior === 'any') {
+              let canShow = false
+              for(let hd in hide) {
+                if(!hide[hd]) {
+                  canShow = true
+                }
+              }
+              if(!canShow) {
+                this.hide = true
               }
             }
           })

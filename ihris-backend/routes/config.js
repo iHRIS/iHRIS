@@ -1146,6 +1146,7 @@ router.get('/questionnaire/:questionnaire/:page', async function (req, res) {
             let vueOutput = ""
             for (let item of items) {
                 let displayCondition = getDisplayCondition(item)
+                let enableBehavior = item.enableBehavior
                 let displayType
                 if (item.linkId.includes('#') && item.type !== 'group') {
                     let linkDetails = item.linkId.split('#')
@@ -1193,6 +1194,9 @@ router.get('/questionnaire/:questionnaire/:page', async function (req, res) {
                 if (itemType === "group") {
                     let label = item.text.split('|', 2)
                     vueOutput += '<ihris-questionnaire-group :slotProps="slotProps" :edit=\"isEdit\" path="' + item.linkId + '" label="' + label[0] + '" displayCondition="' + displayCondition + '"'
+                    if(item.enableBehavior) {
+                        vueOutput += ' enableBehavior="' + item.enableBehavior + '"'
+                    }
                     if(!isLimitSet) {
                         vueOutput += ' limit="' + limit + '"'
                         isLimitSet = true
@@ -1367,6 +1371,9 @@ router.get('/questionnaire/:questionnaire/:page', async function (req, res) {
                         }
                     }
                     vueOutput += "<fhir-" + itemType + " field=\"" + itemFieldPath + "\"" + " :slotProps=\"slotProps\" :edit=\"isEdit\" path=\"" + item.linkId + "\"" + "displayCondition=\"" + displayCondition + "\""
+                    if(enableBehavior) {
+                        vueOutput += ' enableBehavior="' + enableBehavior + '"'
+                    }
                     if(item.initial && item.initial.length) {
                         let answVal = Object.keys(item.initial[0])[0]
                         if(answVal) {
@@ -1563,6 +1570,9 @@ router.get('/questionnaire/:questionnaire/:page', async function (req, res) {
                 }
                 let label = item.text.split('|', 2)
                 vueOutput += '<ihris-questionnaire-section :slotProps="slotProps" id="' + sectionId + '" path="' + item.linkId + '" label="' + label[0] + '" displayCondition="' + displayCondition + '"'
+                if(item.enableBehavior) {
+                    vueOutput += ' enableBehavior="' + item.enableBehavior + '"'
+                }
                 if (label.length === 2) {
                     vueOutput += ' description="' + label[1] + '"'
                 }

@@ -40,7 +40,7 @@ const itemSort = (a,b) => {
 */
 export default {
   name: "fhir-code",
-  props: ["field","min","max","base-min","base-max","label","binding","slotProps","path","edit","sliceName","readOnlyIfSet","constraints", "displayCondition"],
+  props: ["field","min","max","base-min","base-max","label","binding","slotProps","path","edit","sliceName","readOnlyIfSet","constraints", "displayCondition", "enableBehavior"],
   components: {
     IhrisElement
   },
@@ -59,7 +59,7 @@ export default {
   },
   created: function() {
     //this function is defined under dataDisplay mixin
-    this.hideShowField(this.displayCondition)
+    this.hideShowField(this.displayCondition, this.enableBehavior)
     this.setupData()
   },
   watch: {

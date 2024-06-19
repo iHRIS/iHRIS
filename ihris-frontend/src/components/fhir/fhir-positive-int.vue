@@ -33,7 +33,7 @@ import { dataDisplay } from "@/mixins/dataDisplay"
 export default {
   name: "fhir-positive-int",
   props: ["field", "label", "min", "max", "id", "path", "slotProps", "sliceName","base-min","base-max", "edit", "readOnlyIfSet",
-    "constraints", "displayCondition"],
+    "constraints", "displayCondition", "enableBehavior"],
   components: {
     IhrisElement
   },
@@ -49,7 +49,7 @@ export default {
   },
   created: function() {
     //this function is defined under dataDisplay mixin
-    this.hideShowField(this.displayCondition)
+    this.hideShowField(this.displayCondition, this.enableBehavior)
     this.setupData()
   },
   watch: {

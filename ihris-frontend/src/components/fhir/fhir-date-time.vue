@@ -189,7 +189,7 @@ export default {
   name: "fhir-date-time",
   props: ["field","min","max","base-min","base-max", "label", "slotProps", "path", "edit","sliceName",
     "minValueDateTime", "maxValueDateTime", "minValueQuantity", "maxValueQuantity", "displayType","readOnlyIfSet", "calendar",
-    "constraints", "displayCondition", "initial","format"],
+    "constraints", "displayCondition", "enableBehavior", "initial","format"],
   components: {
     IhrisElement,
     VEthiopianDatePicker,
@@ -215,7 +215,7 @@ export default {
       this.value = this.initial
     }
     //this function is defined under dataDisplay mixin
-    this.hideShowField(this.displayCondition)
+    this.hideShowField(this.displayCondition, this.enableBehavior)
     this.setupData()
   },
   computed: {

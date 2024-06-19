@@ -143,7 +143,7 @@ export default {
   name: "fhir-reference",
   props: ["field","label","sliceName","targetProfile","targetResource","min","max","base-min","base-max",
     "slotProps","path","sub-fields","edit","readOnlyIfSet","constraints", "displayType", 
-    "initialValue", "overrideValue", "displayCondition", "searchParameter", "initialProfile", "allowedProfiles", "pageTargetProfile",
+    "initialValue", "overrideValue", "displayCondition", "enableBehavior", "searchParameter", "initialProfile", "allowedProfiles", "pageTargetProfile",
     "report", "reportReturnValue", "referenceDisplayPath", "initial"],
   components: {
     IhrisElement,
@@ -185,7 +185,7 @@ export default {
       })
     })
     //this function is defined under dataDisplay mixin
-    this.hideShowField(this.displayCondition)
+    this.hideShowField(this.displayCondition, this.enableBehavior)
     this.setupData()
     if(this.displayType === "preloaded") {
       this.querySelections()

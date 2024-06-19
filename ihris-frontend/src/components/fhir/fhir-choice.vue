@@ -30,7 +30,7 @@ import { eventBus } from "@/main";
 import { dataDisplay } from "@/mixins/dataDisplay"
 export default {
   name: "fhir-coding",
-  props: ["id", "field", "definition", "label", "path", "binding", "edit", "min", "max", "constraints", "displayCondition","slotProps", "initial"],
+  props: ["id", "field", "definition", "label", "path", "binding", "edit", "min", "max", "constraints", "displayCondition", "enableBehavior", "slotProps", "initial"],
   mixins: [dataDisplay],
   data: function() {
     return {
@@ -49,7 +49,7 @@ export default {
   },
   created: function() {
     //this function is defined under dataDisplay mixin
-    this.hideShowField(this.displayCondition)
+    this.hideShowField(this.displayCondition, this.enableBehavior)
     this.setupData()
     if(this.initial && !this.$route.params.id) {
       this.value = this.initial
