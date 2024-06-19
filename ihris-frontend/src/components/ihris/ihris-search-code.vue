@@ -118,7 +118,7 @@ export default {
         value: field[1],
       });
     }
-    this.headers.push({ text: this.$t(`App.fhir-resources-texts.status`), value: "isActive" });
+    this.headers.push({ text: this.$t(`App.fhir-resources-texts.Status`), value: "isActive" });
   },
   mounted: function () {
     this.getData();

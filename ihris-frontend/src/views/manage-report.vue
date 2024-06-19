@@ -3,7 +3,7 @@
     <v-card>
       <v-card-title class="primary darken-1 white--text font-weight-bold justify-center">
         <v-icon class="mr-2" color="white">mdi-cog-sync-outline</v-icon>
-        {{ $t(`App.menu['Manage Report']`) }}
+        {{ $t(`App.menu.Manage Report`) }}
 
       </v-card-title>
       <v-card-text class="my-2">
@@ -30,11 +30,11 @@
                           style="width: 100%"
                       >
                         <v-col cols="6">
-                          <h5>{{ $t(`App.hardcoded-texts['Last Began Indexing Time']`) }}:
+                          <h5>{{ $t(`App.hardcoded-texts.Last Began Indexing Time`) }}:
                             {{ item.last_began_indexing_time }}</h5>
                         </v-col>
                         <v-col cols="6">
-                          <h5>{{ $t(`App.hardcoded-texts['Last Ended Indexing Time']`) }}:
+                          <h5>{{ $t(`App.hardcoded-texts.Last Ended Indexing Time`) }}:
                             {{ item.last_ended_indexing_time }}</h5>
                         </v-col>
                       </v-row>
@@ -58,14 +58,14 @@
                       <tbody>
                       <tr>
                         <td class="body-2" style="text-align: left">
-                          {{ $t(`App.hardcoded-texts['Last Ended Indexing Time']`) }}:
+                          {{ $t(`App.hardcoded-texts.Last Ended Indexing Time`) }}:
                           <strong>{{ item.last_ended_indexing_time }}</strong></td>
                       </tr>
                       <tr>
                         <v-expansion-panels>
                           <v-expansion-panel>
                             <v-expansion-panel-header>{{
-                                $t(`App.hardcoded-texts['Meta Data']`)
+                                $t(`App.hardcoded-texts.Meta Data`)
                               }}
                             </v-expansion-panel-header>
                             <v-expansion-panel-content>
@@ -76,22 +76,22 @@
                                     class="py-2"
                                     cols="12"
                                 >
-                                  {{ $t(`App.hardcoded-texts['Index Name']`) }}: <strong>{{
+                                  {{ $t(`App.hardcoded-texts.Index Name`) }}: <strong>{{
                                     item.indexName
                                   }}</strong>
                                 </v-col>
                                 <v-col v-if="flattener==='fhir2es'" class="py-2"
                                        cols="12"> {{
-                                    $t(`App.hardcoded-texts['Last Began Indexing Time']`)
+                                    $t(`App.hardcoded-texts.Last Began Indexing Time`)
                                   }}:<strong>{{ item.last_began_indexing_time }}</strong></v-col>
                                 <v-col class="py-2" cols="12">{{
-                                    $t(`App.hardcoded-texts['FHIR Report Version']`)
+                                    $t(`App.hardcoded-texts.FHIR Report Version`)
                                   }}:<strong>{{ item.reportFhirMeta.versionId }}</strong></v-col>
-                                <v-col class="py-2" cols="12">{{ $t(`App.hardcoded-texts['FHIR Report Name']`) }}:
+                                <v-col class="py-2" cols="12">{{ $t(`App.hardcoded-texts.FHIR Report Name`) }}:
                                   <strong>{{ item.reportFhirID }}</strong>
                                 </v-col>
                                 <v-col class="py-2" cols="12"> {{
-                                    $t(`App.hardcoded-texts['FHIR Report Last Updated']`)
+                                    $t(`App.hardcoded-texts.FHIR Report Last Updated`)
                                   }}:<strong>{{ item.reportFhirMeta.lastUpdated }}</strong></v-col>
                               </v-row>
                             </v-expansion-panel-content>
@@ -122,7 +122,7 @@
                           </v-btn>
                         </template>
                         <span>{{
-                            $t(`App.hardcoded-texts.['This will cache the report from the last time it was cached.']`)
+                            $t(`App.hardcoded-texts.This will cache the report from the last time it was cached.`)
                           }}</span>
                       </v-tooltip>
 
@@ -137,10 +137,10 @@
                               v-on="on"
                           >
                             <v-icon class="mr-2">mdi-reload</v-icon>
-                            {{ $t(`App.hardcoded-texts['Fresh Load']`) }}
+                            {{ $t(`App.hardcoded-texts.Fresh Load`) }}
                           </v-btn>
                         </template>
-                        <span>{{ $t(`App.hardcoded-texts['This will cache the report afresh']`) }}</span>
+                        <span>{{ $t(`App.hardcoded-texts.This will cache the report afresh`) }}</span>
                       </v-tooltip>
 
                     </v-row>
