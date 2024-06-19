@@ -370,8 +370,8 @@ export default {
         if ( treetop ) {
           params = { searchparam : treetop }
         } else if(!treetop) {
-          params[searchparam + ":missing"] = true
           if(this.initialProfile) {
+            console.log("initialProfile - ",this.initialProfile)
             params['_profile'] = this.initialProfile
           } else if(this.allowedProfiles) {
             params['_profile'] = this.allowedProfiles
