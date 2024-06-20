@@ -731,7 +731,7 @@ router.get('/page/:page/:type?', function (req, res) {
                             let sectionKey = getUKey()
                             allColumns[sectionKey] = sections[name].columns
                             allActions[sectionKey] = sections[name].actions
-                            let dateFormat = (nconf.get("defaults:components:ihris-secondary:date-format")) ? ' "dateFormat="' + nconf.get("defaults:components:ihris-secondary:date-format")  : ''
+                            let dateFormat = (nconf.get("defaults:components:ihris-secondary:date-format")) ? '" dateFormat="' + nconf.get("defaults:components:ihris-secondary:date-format")  : ''
                             vueOutput += '<ihris-secondary :edit="isEdit" :link-id="fhirId" profile="' + secondary.url
                                 + '" field="' + second_fhir
                                 + '" title="' + sections[name].title
