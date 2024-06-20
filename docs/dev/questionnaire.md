@@ -55,12 +55,14 @@ Below is a simple example:
 Below is a simple example:
 
 ```
+*item[0].item[4].enableBehavior = #any
 *item[0].item[4].enableWhen[0].question = "PractitionerRole.extension[2]"
 *item[0].item[4].enableWhen[0].operator = #=
 *item[0].item[4].enableWhen[0].answerCoding = yes-no-codesystem#yes
 ```
+  Ps: one can set multiple conditions for enableWhen
 
-  Refer to the [Questionnaire](https://hl7.org/fhir/questionnaire.html) documentation to get a list of all supported operators and answerType for enableWhen
+  Refer to the [Questionnaire](https://hl7.org/fhir/questionnaire.html) documentation to get a list of all supported operators and answerType for enableWhen and enableBehavior
 
 - *initial* - Use this to define initial value to be set when the data entry form is displayed for the first time. below is an example
 
@@ -90,7 +92,21 @@ Here is a list of all informers supported so far:
 - text: Used to inform that the field should be displayed as a long text
 - password: Used to inform that the field should be displayed as a password, in a way that the texts being typed are hidden
 - year: Used to inform that the date field should only display year instead of a full date
-- preloaded: This is used for reference fields. Normally with reference fields, values of a field are not loaded by default, they are loaded after a user type in the needed value. This can be changed by passing the <b>preloaded</b> informer to make all values available immediately after the page is loaded.
+- preloaded: This is used for reference fields. Normally with reference fields, values of a field are not loaded by default, they are loaded after a user type in the needed value. This can be changed by passing the <b>preloaded</b> informer to make all values 
+available immediately after the page is loaded.
+
+### Setting Attachment Types
+
+For attachments, you can set the attachment type as like this.
+
+```
+* item[0].item[4].code[0].system = "attachment-format"
+* item[0].item[4].code[0].code = #png
+* item[0].item[4].code[1].system = "attachment-format"
+* item[0].item[4].code[1].code = #jpeg
+* item[0].item[4].code[2].system = "attachment-format"
+* item[0].item[4].code[2].code = #docx
+```
 
 ### Questionnaire Example
 
