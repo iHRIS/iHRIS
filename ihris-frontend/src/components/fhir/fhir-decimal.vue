@@ -126,11 +126,11 @@ export default {
         if(!v) {
           return
         }
-        return (!isNaN(v) && /^-?\d+(\.\d+)?$/.test(v)) || this.display+" must be a Decimal"
+        return (!isNaN(v) && /^-?\d+(\.\d+)?$/.test(v)) || this.$t(`App.fhir-resources-texts.${this.display}`)+" " + this.$t(`App.hardcoded-texts.must be a Decimal`)
       }
       let rules = [ num_check ]
       if ( this.required ) {
-        rules.push ( v => !!v || this.display+" is required" )
+        rules.push ( v => !!v || this.$t(`App.fhir-resources-texts.${this.display}`)+" " + this.$t(`App.hardcoded-texts.is required`) )
       }
       return rules
     }

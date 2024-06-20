@@ -114,7 +114,7 @@ export default {
     rules: function() {
       let rules = [ v => /^\S*$/.test(v) || this.display+" must be a URI" ]
       if ( this.required ) {
-        rules.push( v => !!v || this.display+" is required" )
+        rules.push( v => !!v || this.$t(`App.fhir-resources-texts.${this.display}`)+" " + this.$t(`App.hardcoded-texts.is required`) )
       }
       return rules
     }

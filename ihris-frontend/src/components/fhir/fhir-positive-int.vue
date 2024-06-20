@@ -126,11 +126,11 @@ export default {
     rules: function() {
       const num_check = v => {
         let num = Number(v)
-        return (Number.isInteger(num) && num > 0) || this.display+" must be a positive integer"
+        return (Number.isInteger(num) && num > 0) || this.$t(`App.fhir-resources-texts.${this.display}`)+" " + this.$t(`App.hardcoded-texts.must be a positive integer`)
       }
       let rules = [ num_check ]
       if ( this.required ) {
-        rules.push ( v => !!v || this.display+" is required" )
+        rules.push ( v => !!v || this.$t(`App.fhir-resources-texts.${this.display}`)+" " + this.$t(`App.hardcoded-texts.is required`) )
       }
       return rules
     }

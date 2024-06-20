@@ -123,7 +123,7 @@ export default {
       return []
       /* for boolean false is ok so no validation required
       if ( this.required ) {
-        return [ v => !!v || this.display+" is required" ]
+        return [ v => !!v || this.$t(`App.fhir-resources-texts.${this.display}`)+" " + this.$t(`App.hardcoded-texts.is required`)" ]
       } else {
         return []
       }

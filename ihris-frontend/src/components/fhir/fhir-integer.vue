@@ -138,12 +138,12 @@ export default {
     rules: function() {
       const num_check = v => {
         let num = Number(v)
-        return (Number.isInteger(num)) || this.display+" must be an integer"
+        return (Number.isInteger(num)) || this.$t(`App.fhir-resources-texts.${this.display}`)+" " + this.$t(`App.hardcoded-texts.must be an integer`)
       }
       let rules = [ num_check ]
       if ( this.required ) {
         rules.push((v) => {
-          return v === 0 || !!v || this.display+" is required"
+          return v === 0 || !!v || this.$t(`App.fhir-resources-texts.${this.display}`)+" " + this.$t(`App.hardcoded-texts.is required`)
         })
       }
       return rules
