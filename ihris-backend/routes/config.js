@@ -991,6 +991,17 @@ router.get('/questionnaire/:questionnaire/:page', async function (req, res) {
         }
         return displayCondition
     }
+    function getContentTypes(qItem) {
+        let contentTypes = []
+        if(qItem.code) {
+            qItem.code.forEach(codeItem => {
+                if (codeItem.system === "attachment-format") {
+                    contentTypes.push(codeItem.code);
+                }
+              });
+              return contentTypes;
+        }
+    }
     await fhirAxios.read("Basic", page).then(async(resource) => {
         let pageDisplay = resource.extension.find(ext => ext.url === "http://ihris.org/fhir/StructureDefinition/ihris-page-display")
 
@@ -1146,6 +1157,7 @@ router.get('/questionnaire/:questionnaire/:page', async function (req, res) {
             let vueOutput = ""
             for (let item of items) {
                 let displayCondition = getDisplayCondition(item)
+                let contentTypes = getContentTypes(item)
                 let enableBehavior = item.enableBehavior
                 let displayType
                 if (item.linkId.includes('#') && item.type !== 'group') {
@@ -1373,6 +1385,9 @@ router.get('/questionnaire/:questionnaire/:page', async function (req, res) {
                     vueOutput += "<fhir-" + itemType + " field=\"" + itemFieldPath + "\"" + " :slotProps=\"slotProps\" :edit=\"isEdit\" path=\"" + item.linkId + "\"" + "displayCondition=\"" + displayCondition + "\""
                     if(enableBehavior) {
                         vueOutput += ' enableBehavior="' + enableBehavior + '"'
+                    }
+                    if(contentTypes.length > 0) {
+                        vueOutput += ' contentTypes="' + contentTypes.join(",") + '"'
                     }
                     if(item.initial && item.initial.length) {
                         let answVal = Object.keys(item.initial[0])[0]
