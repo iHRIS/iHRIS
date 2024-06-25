@@ -1386,7 +1386,8 @@ router.get('/questionnaire/:questionnaire/:page', async function (req, res) {
                     if(enableBehavior) {
                         vueOutput += ' enableBehavior="' + enableBehavior + '"'
                     }
-                    if(contentTypes.length > 0) {
+                    //if(contentTypes.length > 0) {
+                    if(contentTypes) {
                         vueOutput += ' contentTypes="' + contentTypes.join(",") + '"'
                     }
                     if(item.initial && item.initial.length) {
