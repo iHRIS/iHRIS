@@ -52,18 +52,15 @@ Enjoy!
 ## Installation of IHRIS
 Create the IHRIS site file in the ihris-backend directory
 
-```cd into (your Path to iHRIS)/iHRIS/ihris-backend
-```
+```cd into (your Path to iHRIS)/iHRIS/ihris-backend```
 
 Copy over the demo backend site into your ihris-backend. Feel free to name however you like
-```cp -r ihris-backend-site site
-```
+```cp -r ihris-backend-site site```
 
 # Configure the IHRIS site 
 
 Copy from existing example file.
-```cd ihris-backend/site
-```
+```cd ihris-backend/site```
 
 ```cp config/baseConfig.json.example config/baseConfig.json```
 
@@ -79,11 +76,13 @@ Update the configurations based on your setings by editing the baseConfig.json f
 Install ihris-backend Packages
 
 ```cd (your Path to iHRIS)/iHRIS/ihris-backend/```
+
 ```npm install```
 
 # Install site Packages
 
 ```cd site```
+
 ```npm install```
 
 While in Site path run:
