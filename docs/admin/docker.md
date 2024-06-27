@@ -49,15 +49,16 @@ There will be no dashboards by default.
 
 Enjoy!
 
-## Installation of IHRIS
+# Installation of IHRIS
 Create the IHRIS site file in the ihris-backend directory
 
 ```cd into (your Path to iHRIS)/iHRIS/ihris-backend```
 
 Copy over the demo backend site into your ihris-backend. Feel free to name however you like
+
 ```cp -r ihris-backend-site site```
 
-# Configure the IHRIS site 
+## Configure the IHRIS site 
 
 Copy from existing example file.
 ```cd ihris-backend/site```
@@ -71,7 +72,7 @@ Update the configurations based on your setings by editing the baseConfig.json f
 "app:site:path"
 "elasticsearch:base"
 
-# Start the IHRIS System
+## Start the IHRIS System
 
 Install ihris-backend Packages
 
@@ -79,7 +80,7 @@ Install ihris-backend Packages
 
 ```npm install```
 
-# Install site Packages
+## Install site Packages
 
 ```cd site```
 
