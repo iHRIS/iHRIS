@@ -367,6 +367,7 @@ export default {
           type: "error",
           text: "There were errors on the form.",
         });
+        this.isSaveInProgress = false;
         return;
       }
       if (
