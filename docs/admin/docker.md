@@ -49,7 +49,7 @@ There will be no dashboards by default.
 
 Enjoy!
 
-# Installation of IHRIS
+## Installation of IHRIS
 Create the IHRIS site file in the ihris-backend directory
 
 ```cd into (your Path to iHRIS)/iHRIS/ihris-backend```
@@ -61,6 +61,7 @@ Copy over the demo backend site into your ihris-backend. Feel free to name howev
 ## Configure the IHRIS site 
 
 Copy from existing example file.
+
 ```cd ihris-backend/site```
 
 ```cp config/baseConfig.json.example config/baseConfig.json```
