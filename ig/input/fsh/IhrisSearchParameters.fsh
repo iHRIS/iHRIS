@@ -50,7 +50,7 @@ Usage: #definition
 * code = #related-location
 * base = #Basic
 * type = #string
-* expression = "Basic.extension('http://ihris.org/fhir/StructureDefinition/ihris-related-group').extension('location')"
+* expression = "Basic.extension('http://ihris.org/fhir/StructureDefinition/ihris-related-group').extension('location') | Basic.extension('http://ihris.org/fhir/StructureDefinition/ihris-related-group').extension('location').empty()"
 * xpathUsage = #normal
 
 Instance: basic-related-practitioner
@@ -132,7 +132,7 @@ Usage: #definition
 * code = #related-location
 * base = #Location
 * type = #string
-* expression = "Location.extension('http://ihris.org/fhir/StructureDefinition/ihris-related-group').extension('location')"
+* expression = "Location.extension('http://ihris.org/fhir/StructureDefinition/ihris-related-group').extension('location') | Location.extension('http://ihris.org/fhir/StructureDefinition/ihris-related-group').extension('location').empty()"
 * xpathUsage = #normal
 
 Instance: performanceperiod-search
@@ -187,7 +187,7 @@ Usage: #definition
 * code = #related-location
 * base = #Practitioner
 * type = #string
-* expression = "Practitioner.extension('http://ihris.org/fhir/StructureDefinition/ihris-related-group').extension('location')"
+* expression = "Practitioner.extension('http://ihris.org/fhir/StructureDefinition/ihris-related-group').extension('location') | Practitioner.extension('http://ihris.org/fhir/StructureDefinition/ihris-related-group').extension('location').empty()"
 * xpathUsage = #normal
 
 Instance: practitioner-related-practitioner
@@ -255,7 +255,7 @@ Usage: #definition
 * code = #related-location
 * base = #PractitionerRole
 * type = #string
-* expression = "PractitionerRole.extension('http://ihris.org/fhir/StructureDefinition/ihris-related-group').extension('location')"
+* expression = "PractitionerRole.extension('http://ihris.org/fhir/StructureDefinition/ihris-related-group').extension('location') | PractitionerRole.extension('http://ihris.org/fhir/StructureDefinition/ihris-related-group').extension('location').empty()"
 * xpathUsage = #normal
 
 Instance: practitionerrole-related-practitioner
