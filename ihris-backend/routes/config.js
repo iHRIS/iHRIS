@@ -559,6 +559,9 @@ router.get('/page/:page/:type?', function (req, res) {
                             continue
                         }
                         let eleName = fhirDefinition.camelToKebab(fields[field].code)
+                        if(eleName === 'http://hl7.org/fhirpath/system.string') {
+                            eleName = "string"
+                        }
 
                         if (fields[field].hasOwnProperty("targetProfile") && fields[field].targetProfile) {
                             fields[field].targetResource = await getProfileResource(fields[field].targetProfile)
@@ -991,17 +994,6 @@ router.get('/questionnaire/:questionnaire/:page', async function (req, res) {
         }
         return displayCondition
     }
-    function getContentTypes(qItem) {
-        let contentTypes = []
-        if(qItem.code) {
-            qItem.code.forEach(codeItem => {
-                if (codeItem.system === "attachment-format") {
-                    contentTypes.push(codeItem.code);
-                }
-              });
-              return contentTypes;
-        }
-    }
     await fhirAxios.read("Basic", page).then(async(resource) => {
         let pageDisplay = resource.extension.find(ext => ext.url === "http://ihris.org/fhir/StructureDefinition/ihris-page-display")
 
@@ -1157,7 +1149,6 @@ router.get('/questionnaire/:questionnaire/:page', async function (req, res) {
             let vueOutput = ""
             for (let item of items) {
                 let displayCondition = getDisplayCondition(item)
-                let contentTypes = getContentTypes(item)
                 let enableBehavior = item.enableBehavior
                 let displayType
                 if (item.linkId.includes('#') && item.type !== 'group') {
@@ -1386,16 +1377,26 @@ router.get('/questionnaire/:questionnaire/:page', async function (req, res) {
                     if(enableBehavior) {
                         vueOutput += ' enableBehavior="' + enableBehavior + '"'
                     }
-                    //if(contentTypes.length > 0) {
-                    if(contentTypes) {
-                        vueOutput += ' contentTypes="' + contentTypes.join(",") + '"'
-                    }
                     if(item.initial && item.initial.length) {
                         let answVal = Object.keys(item.initial[0])[0]
                         if(answVal) {
                             let answerKey = getUKey()
                             templateData.initials[answerKey] = item.initial[0][answVal]
                             vueOutput += " :initial=\"initials." + answerKey + "\""
+                        }
+                    }
+                    if(item.code) {
+                        let codes = {}
+                        for(let code of item.code) {
+                            if(!codes[code.system]) {
+                                codes[code.system] = []
+                            }
+                            codes[code.system].push(code.code)
+                        }
+                        if(Object.keys(codes).length > 0) {
+                            for(let code in codes) {
+                                vueOutput += ` ${code}="${codes[code].join(",")}"`
+                            }
                         }
                     }
                     if(readOnlyIfSet) {

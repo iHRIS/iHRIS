@@ -72,7 +72,7 @@ import { dataDisplay } from "@/mixins/dataDisplay"
 export default {
   name: "fhir-attachment",
   props: ["field", "label", "min", "max", "id", "path", "slotProps", "sliceName","base-min","base-max","edit","readOnlyIfSet",
-    "constraints", "displayCondition", "enableBehavior", "initial", "maxValueAttachment", "contentTypes"],
+    "constraints", "displayCondition", "enableBehavior", "initial", "maxValueAttachment", "attachment-types"],
   components: {
     IhrisElement
   },
@@ -189,7 +189,7 @@ export default {
           this.loading = false
           return
         }
-        if ( this.contentTypes && !this.contentTypes.includes( this.upload.type ) ) {
+        if ( this.attachmentTypes && !this.attachmentTypes.includes( this.upload.type ) ) {
           this.errors.push(this.display+" is not of the correct type")
           this.loading = false
           return
