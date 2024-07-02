@@ -97,15 +97,23 @@ available immediately after the page is loaded.
 
 ### Setting Attachment Types
 
-For attachments, you can set the attachment type as like this.
+The types is a string that describes a type of file that may be selected by the user in an  element of type file. Each unique file type specifier may take one of the following forms:
+
+- A valid case-insensitive filename extension, starting with a period (".") character. For example: .jpg, .pdf, or .doc.
+- A valid MIME type string, with no extensions.
+- The string "audio/*"  meaning "any audio file".
+- The string "video/*" meaning "any video file".
+- The string "image/*" meaning "any image file".
+
+You can set the attachment type as like this in the questionnaire
 
 ```
-* item[0].item[4].code[0].system = "attachment-format"
-* item[0].item[4].code[0].code = #png
-* item[0].item[4].code[1].system = "attachment-format"
-* item[0].item[4].code[1].code = #jpeg
-* item[0].item[4].code[2].system = "attachment-format"
-* item[0].item[4].code[2].code = #docx
+* item[0].item[4].code[0].system = "attachment-types"
+* item[0].item[4].code[0].code = #.png
+* item[0].item[4].code[1].system = "attachment-types"
+* item[0].item[4].code[1].code = #.jpeg
+* item[0].item[4].code[2].system = "attachment-types"
+* item[0].item[4].code[2].code = #image/*
 ```
 
 ### Questionnaire Example
@@ -122,7 +130,11 @@ Usage:          #definition
 * url = "http://ihris.org/fhir/Questionnaire/ihris-practitioner"
 * name = "ihris-practitioner"
 * status = #active
-* date = 2020-06-22
+* date = 2020-06-22A valid case-insensitive filename extension, starting with a period (".") character. For example: .jpg, .pdf, or .doc.
+A valid MIME type string, with no extensions.
+The string audio/* meaning "any audio file".
+The string video/* meaning "any video file".
+The string image/* meaning "any image file".
 * purpose = "Data entry page for practitioners."
 
 * item[0].linkId = "Practitioner"
