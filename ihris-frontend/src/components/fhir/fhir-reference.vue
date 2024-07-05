@@ -371,7 +371,6 @@ export default {
           params = { searchparam : treetop }
         } else if(!treetop) {
           if(this.initialProfile) {
-            console.log("initialProfile - ",this.initialProfile)
             params['_profile'] = this.initialProfile
           } else if(this.allowedProfiles) {
             params['_profile'] = this.allowedProfiles
