@@ -10,6 +10,6 @@
     "Location"
   ],
   "type": "string",
-  "expression": "Location.extension('http://ihris.org/fhir/StructureDefinition/ihris-related-group').extension('location')",
+  "expression": "Location.extension('http://ihris.org/fhir/StructureDefinition/ihris-related-group').extension('location') | Location.extension('http://ihris.org/fhir/StructureDefinition/ihris-related-group').extension('location').empty()",
   "xpathUsage": "normal"
 }

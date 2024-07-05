@@ -1,16 +1,6 @@
 {
   "resourceType": "StructureDefinition",
   "id": "ihris-person-user",
-  "extension": [
-    {
-      "url": "http://hl7.org/fhir/StructureDefinition/structuredefinition-category",
-      "valueString": "Base.Individuals"
-    },
-    {
-      "url": "http://hl7.org/fhir/StructureDefinition/structuredefinition-security-category",
-      "valueCode": "patient"
-    }
-  ],
   "url": "http://ihris.org/fhir/StructureDefinition/ihris-person-user",
   "version": "0.1.0",
   "name": "IhrisPersonUser",

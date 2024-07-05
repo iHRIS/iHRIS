@@ -1,16 +1,6 @@
 {
   "resourceType": "StructureDefinition",
   "id": "ihris-practitioner",
-  "extension": [
-    {
-      "url": "http://hl7.org/fhir/StructureDefinition/structuredefinition-category",
-      "valueString": "Base.Individuals"
-    },
-    {
-      "url": "http://hl7.org/fhir/StructureDefinition/structuredefinition-security-category",
-      "valueCode": "individual"
-    }
-  ],
   "url": "http://ihris.org/fhir/StructureDefinition/ihris-practitioner",
   "version": "0.1.0",
   "name": "IhrisPractitioner",

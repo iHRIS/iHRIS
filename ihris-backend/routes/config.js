@@ -564,7 +564,14 @@ router.get('/page/:page/:type?', function (req, res) {
                         }
 
                         if (fields[field].hasOwnProperty("targetProfile") && fields[field].targetProfile) {
-                            fields[field].targetResource = await getProfileResource(fields[field].targetProfile)
+                            let targetResources = []
+                            for(let prof of fields[field].targetProfile) {
+                                let targetResource = await getProfileResource(prof)
+                                targetResources.push(targetResource)
+                            }
+                            targetResources = targetResources.join(",")
+                            fields[field].targetResource = targetResources
+                            fields[field].targetProfile = fields[field].targetProfile.join(",")
                         }
 
                         let attrs = ["field", "sliceName", "targetProfile", "targetResource", "profile", "min", "max", "base-min",
@@ -924,7 +931,6 @@ router.get('/page/:page/:type?', function (req, res) {
                     outcome.issue[0].diagnostics = "StructureDefinitions must be saved with a snapshot."
                     return res.status(404).json(outcome)
                 }
-
                 const structure = fhirDefinition.parseStructureDefinition(resource)
                 if (req.params.type === "search") {
                     return createSearchTemplate(resource, structure)

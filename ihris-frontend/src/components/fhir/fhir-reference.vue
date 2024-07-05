@@ -519,7 +519,7 @@ export default {
           targetProfile = [this.pageTargetProfile]
         }
         if ( !targetProfile[0].endsWith( this.resource ) ) {
-          params._profile = targetProfile
+          params._profile = targetProfile.join(",")
         }
         url = "/fhir/"+this.resource
         if(Object.keys(params).length > 0) {

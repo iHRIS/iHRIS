@@ -118,7 +118,11 @@ const fhirDefinition = {
       const types = ["profile", "targetProfile"]
       for( let type of types ) {
         if ( ele.type[0].hasOwnProperty(type) && ele.type[0][type][0] ) {
-          piece[type] = ele.type[0][type][0]
+          if(type === 'targetProfile') {
+            piece[type] = ele.type[0][type]
+          } else {
+            piece[type] = ele.type[0][type][0]
+          }
         }
       }
 

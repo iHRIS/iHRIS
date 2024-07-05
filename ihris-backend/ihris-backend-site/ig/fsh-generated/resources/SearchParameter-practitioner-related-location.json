@@ -10,6 +10,6 @@
     "Practitioner"
   ],
   "type": "string",
-  "expression": "Practitioner.extension('http://ihris.org/fhir/StructureDefinition/ihris-related-group').extension('location')",
+  "expression": "Practitioner.extension('http://ihris.org/fhir/StructureDefinition/ihris-related-group').extension('location') | Practitioner.extension('http://ihris.org/fhir/StructureDefinition/ihris-related-group').extension('location').empty()",
   "xpathUsage": "normal"
 }
