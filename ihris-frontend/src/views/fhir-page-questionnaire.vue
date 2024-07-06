@@ -14,11 +14,21 @@ import Vue from 'vue'
 
 export default {
   name: "fhir-page",
+  props: ["questionnaire", "page", "pageId"],
   data: function() {
     return {
     }
   },
   created: function() {
+    if(!questionnaire && this.questionnaire) {
+      questionnaire = this.questionnaire
+    }
+    if(!page && this.page) {
+      page = this.page
+    }
+    if(!pageId && this.pageId) {
+      pageId = this.pageId
+    }
     this.getTemplate()
   },
   methods: {
