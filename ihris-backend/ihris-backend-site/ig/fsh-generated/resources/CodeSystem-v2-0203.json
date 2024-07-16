@@ -3,7 +3,7 @@
   "status": "active",
   "content": "complete",
   "name": "IdentifierType",
-  "id": "2103",
+  "id": "v2-0203",
   "title": "identifierType",
   "description": "HL7-defined code system of concepts specifying type of identifier. Used in HL7 Version 2.x messaging data types CX, PLN, PPN, XCN and XON.",
   "version": "2.9.0",

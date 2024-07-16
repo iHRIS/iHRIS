@@ -6494,9 +6494,12 @@ Description: "Sample iHRIS CodeSystem for: iHRISSalaryGrade"
 * ^property[=].type = #Coding
 * #entry-level "Entry-Level" "Entry-level and support positions."
 * #prof-entry-level "Professional Entry-Level" "Professional first grade."
-* #profmid-level "Professional Mid-Level or Managerial"
+* #prof-mid-level "Professional Mid-Level or Managerial"
 * #director "Director" "Director"
 * #specialist "Technical Specialist" "Not included in any standard salary grades."
+* #nurse "Nurse" "Nurse"
+* #allied-health "Allied Health" "Allied Health Professionals"
+* #doctor "Doctor" "Doctor"
 
 CodeSystem: ISO3166Part1
 Id: ISO3166Part1
