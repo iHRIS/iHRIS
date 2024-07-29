@@ -21,7 +21,7 @@ export default {
   name: "ihris-questionnaire-section",
   props: ["id", "profile", "sliceName", "field", "slotProps", "label", 
           "description", "path", "constraints", "link-id", "link-field",
-    "search-field", "search-field-target", "displayCondition"],
+    "search-field", "search-field-target", "displayCondition", "enableBehavior"],
   mixins: [dataDisplay],
   data: function() {
     return {
@@ -32,7 +32,7 @@ export default {
     }
   },
   created: function() {
-    this.hideShowField(this.displayCondition)
+    this.hideShowField(this.displayCondition, this.enableBehavior)
     this.setupData()
   },
   watch: {

@@ -195,7 +195,6 @@ export default {
               return ext.url === "http://ihris.org/fhir/StructureDefinition/ihris-user-location"
             })
             if(location) {
-              this.extraTerms["related-location"] = location.valueReference.reference
               let relatedGrp = data.extension.find((ext) => {
                 return ext.url === "http://ihris.org/fhir/StructureDefinition/ihris-related-group"
               })

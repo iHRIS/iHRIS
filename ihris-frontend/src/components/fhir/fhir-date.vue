@@ -187,7 +187,7 @@ export default {
   name: "fhir-date",
   props: ["field","min","max","base-min","base-max", "label", "slotProps", "path", "edit","sliceName",
     "minValueDate", "maxValueDate", "minValueQuantity", "maxValueQuantity", "displayType","readOnlyIfSet", "calendar",
-    "constraints", "displayCondition", "initial","format" ],
+    "constraints", "displayCondition", "enableBehavior", "initial","format", "default-eval" ],
   components: {
     IhrisElement,
     VEthiopianDatePicker,
@@ -215,7 +215,7 @@ export default {
       this.value = this.initial
     }
     //this function is defined under dataDisplay mixin
-    this.hideShowField(this.displayCondition)
+    this.hideShowField(this.displayCondition, this.enableBehavior)
     this.setupData()
   },
   computed: {
@@ -294,7 +294,7 @@ export default {
     },
     rules: function() {
       if ( this.required ) {
-        return [ v => !!v || this.label+" is required" ]
+        return [ v => !!v || this.$t(`App.fhir-resources-texts.${this.label}`)+" " + this.$t(`App.hardcoded-texts.is required`) ]
       } else {
         return []
       }
@@ -450,6 +450,11 @@ export default {
           }
         }
         this.disabled = this.readOnlyIfSet && (!!this.value)
+        if(!this.value && this.defaultEval) {
+          if(this.defaultEval === "date.now") {
+            this.value = this.$moment().format("YYYY-MM-DD")
+          }
+        }
         //console.log(this.source)
       }
     },

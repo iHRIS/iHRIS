@@ -506,6 +506,7 @@ const fhirSecurityPractitioner = {
    * after creating resources
    */
   addPractitionerSecurityOnBundleResponse: (bundle) => {
+    let processed = []
     let locationCache = {}
     for( let entry of bundle.entry ) {
       if ( entry.response && entry.response.location ) {
@@ -535,6 +536,13 @@ const fhirSecurityPractitioner = {
               })
               async.eachSeries(resources, (resource, nxt) => {
                 resource = resource.resource
+                let exist = processed.find((proc) => {
+                  return proc === resource.id
+                })
+                if(exist) {
+                  return nxt()
+                }
+                processed.push(resource.id)
                 fhirSecurityPractitioner.resetPractitionerSecurityOnResource( resource )
                 fhirSecurityLocation.resetLocationSecurityOnResource( resource, locationCache[practitioner] )
                 delete resource.meta.versionId

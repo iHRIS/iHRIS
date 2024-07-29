@@ -132,7 +132,7 @@
           "repeats": false
         },
         {
-          "linkId": "Person.extension[0]",
+          "linkId": "Person.extension[0]#preloaded",
           "definition": "http://ihris.org/fhir/StructureDefinition/ihris-person-user#Person.extension:role.value[x]:valueReference",
           "text": "Role",
           "type": "reference",

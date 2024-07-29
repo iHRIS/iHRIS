@@ -71,14 +71,14 @@ export default {
     }
   },
   created: function() {
-    // if(this.$store.state.user && this.$store.state.user.obj && this.$store.state.user.obj.resource && this.$store.state.user.obj.resource.extension) {
-    //   let location = this.$store.state.user.obj.resource.extension.find((ext) => {
-    //     return ext.url === "http://ihris.org/fhir/StructureDefinition/ihris-user-location"
-    //   })
-    //   if(location) {
-    //     this.extraTerms["related-location"] = location.valueReference.reference
-    //   }
-    // }
+    if(this.$store.state.user && this.$store.state.user.obj && this.$store.state.user.obj.resource && this.$store.state.user.obj.resource.extension) {
+      let location = this.$store.state.user.obj.resource.extension.find((ext) => {
+        return ext.url === "http://ihris.org/fhir/StructureDefinition/ihris-user-location"
+      })
+      if(location) {
+        this.extraTerms["related-location"] = location.valueReference.reference + "," + true
+      }
+    }
     for (let field of this.fields) {
       this.headers.push({ text: this.$t(`App.fhir-resources-texts.${field[0]}`), value: field[1] });
       let element

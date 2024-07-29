@@ -43,7 +43,7 @@ const itemSort = (a,b) => {
 export default {
   name: "fhir-coding",
   props: ["field","label","sliceName","targetprofile","min","max","base-min","base-max","slotProps","path","binding","edit","readOnlyIfSet",
-    "constraints", "displayCondition"],
+    "constraints", "displayCondition", "enableBehavior"],
   components: {
     IhrisElement
   },
@@ -67,7 +67,7 @@ export default {
   },
   created: function() {
     //this function is defined under dataDisplay mixin
-    this.hideShowField(this.displayCondition)
+    this.hideShowField(this.displayCondition, this.enableBehavior)
     this.setupData()
   },
   watch: {
@@ -173,7 +173,7 @@ export default {
     },
     rules: function() {
       if ( this.required ) {
-        return [ v => !!v || this.display+" is required" ]
+        return [ v => !!v || this.$t(`App.fhir-resources-texts.${this.display}`)+" " + this.$t(`App.hardcoded-texts.is required`) ]
       } else {
         return []
       }
@@ -181,11 +181,11 @@ export default {
     rules_val: function() {
       const num_check = v => {
         let num = Number(v)
-        return !Number.isNaN(num) || this.display+" must be a number"
+        return !Number.isNaN(num) || this.$t(`App.fhir-resources-texts.${this.display}`)+" " + this.$t(`App.hardcoded-texts.must be a number`)
       }
       let rules = [ num_check ]
       if ( (this.index || 0) < this.min ) {
-        rules.push ( v => !!v || this.display+" is required" )
+        rules.push ( v => !!v || this.$t(`App.fhir-resources-texts.${this.display}`)+" " + this.$t(`App.hardcoded-texts.is required`) )
       }
       return rules
     }

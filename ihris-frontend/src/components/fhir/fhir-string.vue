@@ -53,7 +53,7 @@ import { dataDisplay } from "@/mixins/dataDisplay"
 export default {
   name: "fhir-string",
   props: ["field", "label", "min", "max", "id", "path", "slotProps", "sliceName","base-min","base-max","edit","readOnlyIfSet",
-    "constraints", "displayType", "displayCondition", "initial"],
+    "constraints", "displayType", "displayCondition", "enableBehavior", "initial"],
   components: {
     IhrisElement
   },
@@ -75,7 +75,7 @@ export default {
       this.value = this.initial
     }
     //this function is defined under dataDisplay mixin
-    this.hideShowField(this.displayCondition)
+    this.hideShowField(this.displayCondition, this.enableBehavior)
     this.setupData()
   },
   watch: {
@@ -159,7 +159,7 @@ export default {
     },
     rules: function() {
       if ( this.required ) {
-        return [ v => !!v || this.display+" is required" ]
+        return [ v => !!v || this.$t(`App.fhir-resources-texts.${this.display}`)+" " + this.$t(`App.hardcoded-texts.is required`) ]
       } else {
         return []
       }

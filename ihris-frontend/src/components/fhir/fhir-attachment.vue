@@ -11,6 +11,7 @@
         :rules="rules" 
         dense
         @change='doUpload'
+        :accept="attachmentTypes"
         :error-messages="errors"
       >
         <template #label>{{$t(`App.fhir-resources-texts.${display}`)}} <span v-if="required" class="red--text font-weight-bold">*</span></template>
@@ -72,7 +73,7 @@ import { dataDisplay } from "@/mixins/dataDisplay"
 export default {
   name: "fhir-attachment",
   props: ["field", "label", "min", "max", "id", "path", "slotProps", "sliceName","base-min","base-max","edit","readOnlyIfSet",
-    "constraints", "displayCondition", "initial", "maxValueAttachment"],
+    "constraints", "displayCondition", "enableBehavior", "initial", "maxValueAttachment", "attachment-types"],
   components: {
     IhrisElement
   },
@@ -97,7 +98,7 @@ export default {
     }
     this.maxUpload = this.humanReadableToBytes(this.maxValueAttachment);
     //this function is defined under dataDisplay mixin
-    this.hideShowField(this.displayCondition)
+    this.hideShowField(this.displayCondition, this.enableBehavior)
     this.setupData()
   },
   watch: {
@@ -240,9 +241,9 @@ export default {
     },
     rules: function() {
       if ( this.required ) {
-        return [ v => !!v || this.display+" is required" ]
+        return [ v => !!v || this.$t(`App.fhir-resources-texts.${this.display}`)+" " + this.$t(`App.hardcoded-texts.is required`) ]
       } else {
-        return [ v => !v || !v.length || v[0].size < this.maxUpload || this.display+" is more than "+ this.maxValueAttachment ]
+        return [ v => !v || !v.length || v[0].size < this.maxUpload || this.$t(`App.fhir-resources-texts.${this.display}`)+" " + this.$t(`App.hardcoded-texts.is more than`) + " " + this.maxValueAttachment ]
       }
     }
   }

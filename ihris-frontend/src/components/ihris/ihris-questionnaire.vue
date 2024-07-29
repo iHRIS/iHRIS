@@ -367,6 +367,7 @@ export default {
           type: "error",
           text: "There were errors on the form.",
         });
+        this.isSaveInProgress = false;
         return;
       }
       if (
@@ -397,6 +398,7 @@ export default {
           }
       )
           .then((response) => {
+            this.isSaveInProgress = false;
             if (response.status === 201) {
               response.json().then((data) => {
                 this.overlay = false;
@@ -475,6 +477,7 @@ export default {
             }
           })
           .catch((err) => {
+            this.isSaveInProgress = false;
             console.log(err);
             this.overlay = false;
             this.loading = false;

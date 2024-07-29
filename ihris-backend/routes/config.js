@@ -559,9 +559,19 @@ router.get('/page/:page/:type?', function (req, res) {
                             continue
                         }
                         let eleName = fhirDefinition.camelToKebab(fields[field].code)
+                        if(eleName === 'http://hl7.org/fhirpath/system.string') {
+                            eleName = "string"
+                        }
 
                         if (fields[field].hasOwnProperty("targetProfile") && fields[field].targetProfile) {
-                            fields[field].targetResource = await getProfileResource(fields[field].targetProfile)
+                            let targetResources = []
+                            for(let prof of fields[field].targetProfile) {
+                                let targetResource = await getProfileResource(prof)
+                                targetResources.push(targetResource)
+                            }
+                            targetResources = targetResources.join(",")
+                            fields[field].targetResource = targetResources
+                            fields[field].targetProfile = fields[field].targetProfile.join(",")
                         }
 
                         let attrs = ["field", "sliceName", "targetProfile", "targetResource", "profile", "min", "max", "base-min",
@@ -731,7 +741,7 @@ router.get('/page/:page/:type?', function (req, res) {
                             let sectionKey = getUKey()
                             allColumns[sectionKey] = sections[name].columns
                             allActions[sectionKey] = sections[name].actions
-                            let dateFormat = (nconf.get("defaults:components:ihris-secondary:date-format")) ? ' "dateFormat="' + nconf.get("defaults:components:ihris-secondary:date-format")  : ''
+                            let dateFormat = (nconf.get("defaults:components:ihris-secondary:date-format")) ? '" dateFormat="' + nconf.get("defaults:components:ihris-secondary:date-format")  : ''
                             vueOutput += '<ihris-secondary :edit="isEdit" :link-id="fhirId" profile="' + secondary.url
                                 + '" field="' + second_fhir
                                 + '" title="' + sections[name].title
@@ -921,7 +931,6 @@ router.get('/page/:page/:type?', function (req, res) {
                     outcome.issue[0].diagnostics = "StructureDefinitions must be saved with a snapshot."
                     return res.status(404).json(outcome)
                 }
-
                 const structure = fhirDefinition.parseStructureDefinition(resource)
                 if (req.params.type === "search") {
                     return createSearchTemplate(resource, structure)
@@ -1146,6 +1155,7 @@ router.get('/questionnaire/:questionnaire/:page', async function (req, res) {
             let vueOutput = ""
             for (let item of items) {
                 let displayCondition = getDisplayCondition(item)
+                let enableBehavior = item.enableBehavior
                 let displayType
                 if (item.linkId.includes('#') && item.type !== 'group') {
                     let linkDetails = item.linkId.split('#')
@@ -1193,6 +1203,9 @@ router.get('/questionnaire/:questionnaire/:page', async function (req, res) {
                 if (itemType === "group") {
                     let label = item.text.split('|', 2)
                     vueOutput += '<ihris-questionnaire-group :slotProps="slotProps" :edit=\"isEdit\" path="' + item.linkId + '" label="' + label[0] + '" displayCondition="' + displayCondition + '"'
+                    if(item.enableBehavior) {
+                        vueOutput += ' enableBehavior="' + item.enableBehavior + '"'
+                    }
                     if(!isLimitSet) {
                         vueOutput += ' limit="' + limit + '"'
                         isLimitSet = true
@@ -1367,12 +1380,29 @@ router.get('/questionnaire/:questionnaire/:page', async function (req, res) {
                         }
                     }
                     vueOutput += "<fhir-" + itemType + " field=\"" + itemFieldPath + "\"" + " :slotProps=\"slotProps\" :edit=\"isEdit\" path=\"" + item.linkId + "\"" + "displayCondition=\"" + displayCondition + "\""
+                    if(enableBehavior) {
+                        vueOutput += ' enableBehavior="' + enableBehavior + '"'
+                    }
                     if(item.initial && item.initial.length) {
                         let answVal = Object.keys(item.initial[0])[0]
                         if(answVal) {
                             let answerKey = getUKey()
                             templateData.initials[answerKey] = item.initial[0][answVal]
                             vueOutput += " :initial=\"initials." + answerKey + "\""
+                        }
+                    }
+                    if(item.code) {
+                        let codes = {}
+                        for(let code of item.code) {
+                            if(!codes[code.system]) {
+                                codes[code.system] = []
+                            }
+                            codes[code.system].push(code.code)
+                        }
+                        if(Object.keys(codes).length > 0) {
+                            for(let code in codes) {
+                                vueOutput += ` ${code}="${codes[code].join(",")}"`
+                            }
                         }
                     }
                     if(readOnlyIfSet) {
@@ -1563,6 +1593,9 @@ router.get('/questionnaire/:questionnaire/:page', async function (req, res) {
                 }
                 let label = item.text.split('|', 2)
                 vueOutput += '<ihris-questionnaire-section :slotProps="slotProps" id="' + sectionId + '" path="' + item.linkId + '" label="' + label[0] + '" displayCondition="' + displayCondition + '"'
+                if(item.enableBehavior) {
+                    vueOutput += ' enableBehavior="' + item.enableBehavior + '"'
+                }
                 if (label.length === 2) {
                     vueOutput += ' description="' + label[1] + '"'
                 }

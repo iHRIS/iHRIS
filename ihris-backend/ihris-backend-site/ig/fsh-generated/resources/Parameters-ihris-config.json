@@ -16,11 +16,11 @@
             "code": "1.2.840.10065.1.12.1.14"
           }
         ],
-        "when": "2024-05-02T13:12:34.983Z",
+        "when": "2024-07-16T09:41:55.767Z",
         "who": {
           "reference": "http://ihris.org/fhir/Organization/ihris"
         },
-        "data": "E2a28Qp8c2y0t+8x9WW+V6zfhHzcfuKDcgoTq3PyLog6KozhvumqMNE+OK2eS5AWI6ODusqyrXw4Mvt2hDAh7AVtMdO+CvkGjn1PHiLY4nfJQzAJg4uMoUrRWGWI4kId4b7cS4s55FdQqxzIAMLe1FwBKZDh48pfhJtVcWEgyAw="
+        "data": "laYkUaDdmRZgZff1kl1UwHCjG6qzlfvVFsAG5l25z8j2IBncD++rkuLtTkElZk+XjW31XuA4wHMZirH2maskIQ+XEq/dfqeV63HVhNDyV6M7VSzqsfFe/xIGlW1LYe/XIS8jj+MvZbNb0s4ZfdSUZOhSgtTk/tLoZzkcffJ7uiM="
       }
     },
     {
@@ -28,11 +28,11 @@
       "part": [
         {
           "name": "site:title",
-          "valueString": "Manage"
+          "valueString": "TCHAD Ministry of Health"
         },
         {
           "name": "site:site",
-          "valueString": "Demo"
+          "valueString": "Human Resource Information System"
         },
         {
           "name": "site:logo",
@@ -919,20 +919,20 @@
           "valueString": "512KB"
         },
         {
-          "name": "defaults:components:date:format",
-          "valueString": "YYYY-MM-DD"
+          "name": "defaults:components:date:date-format",
+          "valueString": "DD-MM-YYYY"
         },
         {
-          "name": "defaults:components:date-time:format",
-          "valueString": "YYYY-MM-DD"
+          "name": "defaults:components:date-time:date-format",
+          "valueString": "DD-MM-YYYY"
         },
         {
-          "name": "defaults:components:ihris-search:format",
-          "valueString": "YYYY-MM-DD"
+          "name": "defaults:components:ihris-search:date-format",
+          "valueString": "DD-MM-YYYY"
         },
         {
-          "name": "defaults:components:ihris-secondary:format",
-          "valueString": "YYYY-MM-DD"
+          "name": "defaults:components:ihris-secondary:date-format",
+          "valueString": "DD-MM-YYYY"
         },
         {
           "name": "workflow:processor:password:file",

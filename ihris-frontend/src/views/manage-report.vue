@@ -3,7 +3,7 @@
     <v-card>
       <v-card-title class="primary darken-1 white--text font-weight-bold justify-center">
         <v-icon class="mr-2" color="white">mdi-cog-sync-outline</v-icon>
-        {{ $t(`App.menu['Manage Report']`) }}
+        {{ $t(`App.menu.Manage Report`) }}
 
       </v-card-title>
       <v-card-text class="my-2">
@@ -13,7 +13,7 @@
               <v-expansion-panel-header v-slot="{ open }">
                 <v-row no-gutters>
                   <v-col cols="4">
-                    <h4>  {{ $t(`App.menu.${item.text}`) }} {{ $t(`App.hardcoded-texts.Report`) }}</h4>
+                    <h4> {{ $t(`App.menu.${item.text}`) }} {{ $t(`App.hardcoded-texts.Report`) }}</h4>
 
                   </v-col>
                   <v-col
@@ -21,18 +21,20 @@
                       cols="8"
                   >
                     <v-fade-transition leave-absolute>
-                      <span v-if="open">{{ $t(`App.hardcoded-texts.Configure`) }} {{ $t(`App.menu.${item.text}`) }} </span>
+                      <span v-if="open">{{ $t(`App.hardcoded-texts.Configure`) }} {{
+                          $t(`App.menu.${item.text}`)
+                        }} </span>
                       <v-row
                           v-else
                           no-gutters
                           style="width: 100%"
                       >
                         <v-col cols="6">
-                          <h5>{{ $t(`App.hardcoded-texts['Last Began Indexing Time']`) }}:
+                          <h5>{{ $t(`App.hardcoded-texts.Last Began Indexing Time`) }}:
                             {{ item.last_began_indexing_time }}</h5>
                         </v-col>
                         <v-col cols="6">
-                          <h5>{{ $t(`App.hardcoded-texts['Last Ended Indexing Time']`) }}:
+                          <h5>{{ $t(`App.hardcoded-texts.Last Ended Indexing Time`) }}:
                             {{ item.last_ended_indexing_time }}</h5>
                         </v-col>
                       </v-row>
@@ -55,13 +57,17 @@
                     <v-simple-table light>
                       <tbody>
                       <tr>
-                        <td class="body-2" style="text-align: left">{{ $t(`App.hardcoded-texts['Last Ended Indexing Time']`) }}:
+                        <td class="body-2" style="text-align: left">
+                          {{ $t(`App.hardcoded-texts.Last Ended Indexing Time`) }}:
                           <strong>{{ item.last_ended_indexing_time }}</strong></td>
                       </tr>
                       <tr>
                         <v-expansion-panels>
                           <v-expansion-panel>
-                            <v-expansion-panel-header>{{ $t(`App.hardcoded-texts['Meta Data']`) }}</v-expansion-panel-header>
+                            <v-expansion-panel-header>{{
+                                $t(`App.hardcoded-texts.Meta Data`)
+                              }}
+                            </v-expansion-panel-header>
                             <v-expansion-panel-content>
                               <v-row
                                   no-gutters
@@ -70,16 +76,23 @@
                                     class="py-2"
                                     cols="12"
                                 >
-                                  {{ $t(`App.hardcoded-texts['Index Name']`) }}: <strong>{{
+                                  {{ $t(`App.hardcoded-texts.Index Name`) }}: <strong>{{
                                     item.indexName
                                   }}</strong>
                                 </v-col>
                                 <v-col v-if="flattener==='fhir2es'" class="py-2"
-                                       cols="12"> {{ $t(`App.hardcoded-texts['Last Began Indexing Time']`) }}:<strong>{{ item.last_began_indexing_time }}</strong></v-col>
-                                <v-col class="py-2" cols="12">{{ $t(`App.hardcoded-texts['FHIR Report Version']`) }}:<strong>{{ item.reportFhirMeta.versionId }}</strong></v-col>
-                                <v-col class="py-2" cols="12">{{ $t(`App.hardcoded-texts['FHIR Report Name']`) }}: <strong>{{ item.reportFhirID }}</strong>
+                                       cols="12"> {{
+                                    $t(`App.hardcoded-texts.Last Began Indexing Time`)
+                                  }}:<strong>{{ item.last_began_indexing_time }}</strong></v-col>
+                                <v-col class="py-2" cols="12">{{
+                                    $t(`App.hardcoded-texts.FHIR Report Version`)
+                                  }}:<strong>{{ item.reportFhirMeta.versionId }}</strong></v-col>
+                                <v-col class="py-2" cols="12">{{ $t(`App.hardcoded-texts.FHIR Report Name`) }}:
+                                  <strong>{{ item.reportFhirID }}</strong>
                                 </v-col>
-                                <v-col class="py-2" cols="12"> {{ $t(`App.hardcoded-texts['FHIR Report Last Updated']`) }}:<strong>{{ item.reportFhirMeta.lastUpdated }}</strong></v-col>
+                                <v-col class="py-2" cols="12"> {{
+                                    $t(`App.hardcoded-texts.FHIR Report Last Updated`)
+                                  }}:<strong>{{ item.reportFhirMeta.lastUpdated }}</strong></v-col>
                               </v-row>
                             </v-expansion-panel-content>
                           </v-expansion-panel>
@@ -105,10 +118,12 @@
                               v-on="on"
                           >
                             <v-icon class="mr-2">mdi-reload</v-icon>
-                             {{ $t(`App.hardcoded-texts.Reload`) }}
+                            {{ $t(`App.hardcoded-texts.Reload`) }}
                           </v-btn>
                         </template>
-                        <span>{{ $t(`App.hardcoded-texts.['This will cache the report from the last time it was cached.']`) }}</span>
+                        <span>{{
+                            $t(`App.hardcoded-texts.This will cache the report from the last time it was cached.`)
+                          }}</span>
                       </v-tooltip>
 
                       <v-tooltip bottom color="secondary">
@@ -122,10 +137,10 @@
                               v-on="on"
                           >
                             <v-icon class="mr-2">mdi-reload</v-icon>
-                           {{ $t(`App.hardcoded-texts['Fresh Load']`) }}
+                            {{ $t(`App.hardcoded-texts.Fresh Load`) }}
                           </v-btn>
                         </template>
-                        <span>{{ $t(`App.hardcoded-texts['This will cache the report afresh']`) }}</span>
+                        <span>{{ $t(`App.hardcoded-texts.This will cache the report afresh`) }}</span>
                       </v-tooltip>
 
                     </v-row>
@@ -165,24 +180,50 @@ export default {
                     let reportMenu = site.nav.menu.reports.menu
                     let menuName = Object.keys(reportMenu)
                     for (const key of menuName) {
-                      let reportDetails = reportMenu[key]
-                      let url = `/fhir/Basic/${reportMenu[key].url.split("/").pop()}`
-                      fetch(url).then((response) => {
-                        response.json().then((data) => {
-                          reportDetails.reportFhirID = data.id
-                          reportDetails.reportFhirMeta = data.meta
-                          let indexName = data?.extension?.find(x => x.url === "http://ihris.org/fhir/StructureDefinition/iHRISReportDetails")?.extension.find(y => y.url === "name")?.valueString
-                          reportDetails["indexName"] = indexName
-                          if (syncData) {
-                            let data = syncData.hits.hits.find(x => x._id === indexName)
-                            if (data) {
-                              reportDetails["last_began_indexing_time"] = data["_source"].lastBeganIndexingTime
-                              reportDetails["last_ended_indexing_time"] = data["_source"].lastEndedIndexingTime
+                      if (reportMenu[key]?.menu) {
+                        let nestedMenuKeys = Object.keys(reportMenu[key].menu)
+                        for (const internalKey of nestedMenuKeys) {
+                          let reportDetails = reportMenu[key].menu[internalKey]
+                          let url = `/fhir/Basic/${reportMenu[key].menu[internalKey].url.split("/").pop()}`
+                          fetch(url).then((response) => {
+                            response.json().then((data) => {
+                              reportDetails.reportFhirID = data.id
+                              reportDetails.reportFhirMeta = data.meta
+                              let indexName = data?.extension?.find(x => x.url === "http://ihris.org/fhir/StructureDefinition/iHRISReportDetails")?.extension.find(y => y.url === "name")?.valueString
+                              reportDetails["indexName"] = indexName
+                              if (syncData) {
+                                let data = syncData.hits.hits.find(x => x._id === indexName)
+                                if (data) {
+                                  reportDetails["last_began_indexing_time"] = data["_source"].lastBeganIndexingTime
+                                  reportDetails["last_ended_indexing_time"] = data["_source"].lastEndedIndexingTime
+                                }
+                              }
+                              if (reportDetails?.reportFhirMeta) {
+                                this.reportData.push(reportDetails)
+                              }
+                            })
+                          })
+                        }
+                      } else {
+                        let reportDetails = reportMenu[key]
+                        let url = `/fhir/Basic/${reportMenu[key].url.split("/").pop()}`
+                        fetch(url).then((response) => {
+                          response.json().then((data) => {
+                            reportDetails.reportFhirID = data.id
+                            reportDetails.reportFhirMeta = data.meta
+                            let indexName = data?.extension?.find(x => x.url === "http://ihris.org/fhir/StructureDefinition/iHRISReportDetails")?.extension.find(y => y.url === "name")?.valueString
+                            reportDetails["indexName"] = indexName
+                            if (syncData) {
+                              let data = syncData.hits.hits.find(x => x._id === indexName)
+                              if (data) {
+                                reportDetails["last_began_indexing_time"] = data["_source"].lastBeganIndexingTime
+                                reportDetails["last_ended_indexing_time"] = data["_source"].lastEndedIndexingTime
+                              }
                             }
-                          }
-                          this.reportData.push(reportDetails)
+                            this.reportData.push(reportDetails)
+                          })
                         })
-                      })
+                      }
                     }
                   }
                 })
@@ -228,6 +269,7 @@ export default {
           }
       )
     })
+    console.log(this.reportData)
   },
   methods:
       {

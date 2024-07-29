@@ -41,7 +41,7 @@ const itemSort = (a,b) => {
 export default {
   name: "fhir-coding",
   props: ["field","label","sliceName","targetprofile","min","max","base-min","base-max","slotProps","path","binding","edit","readOnlyIfSet",
-    "constraints", "displayCondition"],
+    "constraints", "displayCondition", "enableBehavior"],
   components: {
     IhrisElement
   },
@@ -62,7 +62,7 @@ export default {
   },
   created: function() {
     //this function is defined under dataDisplay mixin
-    this.hideShowField(this.displayCondition)
+    this.hideShowField(this.displayCondition, this.enableBehavior)
     this.setupData()
   },
   watch: {
@@ -240,7 +240,7 @@ export default {
     },
     rules: function() {
       if ( this.required ) {
-        return [ v => !!v || this.display+" is required" ]
+        return [ v => !!v || this.$t(`App.fhir-resources-texts.${this.display}`)+" " + this.$t(`App.hardcoded-texts.is required`) ]
       } else {
         return []
       }

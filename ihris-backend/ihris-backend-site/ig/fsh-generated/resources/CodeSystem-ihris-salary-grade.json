@@ -20,7 +20,7 @@
       "definition": "Professional first grade."
     },
     {
-      "code": "profmid-level",
+      "code": "prof-mid-level",
       "display": "Professional Mid-Level or Managerial"
     },
     {
@@ -32,6 +32,21 @@
       "code": "specialist",
       "display": "Technical Specialist",
       "definition": "Not included in any standard salary grades."
+    },
+    {
+      "code": "nurse",
+      "display": "Nurse",
+      "definition": "Nurse"
+    },
+    {
+      "code": "allied-health",
+      "display": "Allied Health",
+      "definition": "Allied Health Professionals"
+    },
+    {
+      "code": "doctor",
+      "display": "Doctor",
+      "definition": "Doctor"
     }
   ],
   "date": "2020-09-25T20:48:33.646Z",
@@ -68,5 +83,5 @@
       "type": "Coding"
     }
   ],
-  "count": 5
+  "count": 8
 }
