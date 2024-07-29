@@ -30,6 +30,7 @@
       "add" : "Add",
       "search": "Search",
       "Cancel": "Cancel",
+      "confirm_delete_dashboard": "Are you sure you want to delete this Dashboard?",
       "Browse": "Browse",
       "Save": "Save",
       "Edit": "Edit",
@@ -110,7 +111,10 @@
       "Fresh Load": "Fresh Load",
       "This will cache the report afresh": "This will cache the report afresh",
       "Print": "Print",
-      "Added successfully": "Enregistré avec succès"
+      "No": "No",
+      "Values For": "Values For",
+      "Apply1": "Apply"
+      "Added successfully": "Added successfully"
     }
   }
 }

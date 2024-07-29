@@ -49,6 +49,53 @@ There will be no dashboards by default.
 
 Enjoy!
 
+## Installation of IHRIS
+Create the IHRIS site file in the ihris-backend directory
+
+```cd into (your Path to iHRIS)/iHRIS/ihris-backend```
+
+Copy over the demo backend site into your ihris-backend. Feel free to name however you like
+
+```cp -r ihris-backend-site site```
+
+## Configure the IHRIS site 
+
+Copy from existing example file.
+
+```cd ihris-backend/site```
+
+```cp config/baseConfig.json.example config/baseConfig.json```
+
+Update the configurations based on your setings by editing the baseConfig.json file. the main variables to look out for are the
+
+"fhir:base"
+"app:core:path"
+"app:site:path"
+"elasticsearch:base"
+
+## Start the IHRIS System
+
+Install ihris-backend Packages
+
+```cd (your Path to iHRIS)/iHRIS/ihris-backend/```
+
+```npm install```
+
+## Install site Packages
+
+```cd site```
+
+```npm install```
+
+While in Site path run:
+for production
+
+```npm run start```
+
+for Development
+
+```npm run dev```
+
 ## Troubleshooting Notes
 
 Ensure that /resources are loaded, check the logs:
