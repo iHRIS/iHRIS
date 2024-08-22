@@ -114,6 +114,7 @@
                 :type="pickerType"
                 :disabled="disabled"
                 @change="save"
+                :locale="currentLocale"
                 ></v-date-picker>
             </v-card>
           </v-row>
@@ -164,6 +165,7 @@
           :type="pickerType"
           :disabled="disabled"
           @change="save"
+          :locale="currentLocale"
         ></v-date-picker>
 
       </v-menu>
@@ -184,6 +186,7 @@ import ethiopic from "ethiopic-calendar"
 import VHijriDatePicker from 'vuetify-umalqura'
 import { eventBus } from "@/main";
 import { dataDisplay } from "@/mixins/dataDisplay"
+import i18n from "@/i18n";
 
 export default {
   name: "fhir-date-time",
@@ -298,7 +301,10 @@ export default {
       } else {
         return []
       }
-    }
+    },
+    currentLocale: function() {
+      return i18n.locale;
+    },
   },
   watch: {
     hide(val) {
