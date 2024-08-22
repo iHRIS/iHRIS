@@ -118,6 +118,7 @@ Description:    "Lists fields of a resource to be displayed/cached"
       function 0..1 MS and
       name 1..1 MS and
       display 0..1 MS and
+      displayformat 0..1 MS and
       filter 0..1 MS and
       dropDownFilter 0..1 MS and
       order 0..1 MS
