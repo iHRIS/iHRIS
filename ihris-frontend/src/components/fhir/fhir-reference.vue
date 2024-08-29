@@ -521,9 +521,9 @@ export default {
         if ( !targetProfile[0].endsWith( this.resource ) ) {
           params._profile = targetProfile.join(",")
         }
-        url = "/fhir/"+this.resource
+        url = "/fhir/"+this.resource + "?_sort=name"
         if(Object.keys(params).length > 0) {
-          url += "?"+querystring.stringify( params )
+          url += "&"+querystring.stringify( params )
         }
       }
       fetch( url ).then( response => {
