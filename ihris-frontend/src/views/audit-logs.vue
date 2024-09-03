@@ -149,7 +149,7 @@
                 {{ $t(`App.hardcoded-texts.View User`) }}
               </v-btn>
               <v-btn
-                  v-if="item.resource"
+                  v-if="item.resource&&item.resource.includes('_history')"
                   class="ma-1"
                   color="primary"
                   outlined
@@ -422,6 +422,16 @@ export default {
                 outcome: this.auditEventOutcome.find(x => x.code === entry.resource.outcome)?.display,
                 recorded: entry.resource.recorded,
                 resource: resource
+              }
+              if(resource && resource.startsWith("QuestionnaireResponse")){
+                let url = "/fhir/QuestionnaireResponse/" + resource.split("/")?.[1]
+                fetch(url).then(response => {
+                  response.json().then((data) => {
+                    auditData.resource = data.subject?.reference
+                  })
+                }).catch(error => {
+                  this.error_message = error.message
+                })
               }
               if (auditData.userEmail) {
                 let userUrl = `/fhir/Person?email=${auditData.userEmail}`
