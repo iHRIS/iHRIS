@@ -427,61 +427,72 @@ export default {
         response.json().then((data) => {
           newData = data
           fetch(oldUrl).then(response => {
-            response.json().then((data) => {
+            response.json().then(async (data) => {
               oldData = data
               if (oldData && newData) {
-                this.differnce = this.compareJSON(oldData, newData)
+                this.differnce = await this.compareJSON(oldData, newData)
               }
             })
           })
         })
       })
     },
-    compareJSON(json1, json2) {
+    compareObjects(obj1, obj2, path = '') {
+      const differences = [];
+
+      for (const key in obj1) {
+        const currentPath = path ? `${path}.${key}` : key;
+        if (!(key in obj2)) {
+          differences.push({
+            path: currentPath,
+            old: obj1[key],
+            new: null
+          });
+        } else if (typeof obj1[key] !== typeof obj2[key]) {
+          differences.push({
+            path: currentPath,
+            old: obj1[key],
+            new: obj2[key]
+          });
+        } else if (typeof obj1[key] === 'object' && obj1[key] !== null) {
+          differences.push(...this.compareObjects(obj1[key], obj2[key], currentPath));
+        } else if (obj1[key] !== obj2[key]) {
+          differences.push({
+            path: currentPath,
+            old: obj1[key],
+            new: obj2[key]
+          });
+        }
+      }
+      for (const key in obj2) {
+        const currentPath = path ? `${path}.${key}` : key;
+        if (!(key in obj1)) {
+          differences.push({
+            path: currentPath,
+            old: null,
+            new: obj2[key]
+          });
+        }
+      }
+      return differences;
+    },
+    async compareJSON(json1, json2) {
       const obj1 = typeof json1 === 'string' ? JSON.parse(json1) : json1;
       const obj2 = typeof json2 === 'string' ? JSON.parse(json2) : json2;
-
-      function compareObjects(obj1, obj2, path = '') {
-        const differences = [];
-
-        for (const key in obj1) {
-          const currentPath = path ? `${path}.${key}` : key;
-          if (!(key in obj2)) {
-            differences.push({
-              path: currentPath,
-              old: obj1[key],
-              new: null
-            });
-          } else if (typeof obj1[key] !== typeof obj2[key]) {
-            differences.push({
-              path: currentPath,
-              old: obj1[key],
-              new: obj2[key]
-            });
-          } else if (typeof obj1[key] === 'object' && obj1[key] !== null) {
-            differences.push(...compareObjects(obj1[key], obj2[key], currentPath));
-          } else if (obj1[key] !== obj2[key]) {
-            differences.push({
-              path: currentPath,
-              old: obj1[key],
-              new: obj2[key]
-            });
-          }
+      let structuralDefinition = json1?.meta?.profile?.find(x => x.includes("StructureDefinition")).split("/").pop();
+      let url = `/fhir/StructureDefinition/${structuralDefinition}`
+      const response = await fetch(url);
+      const data = await response.json();
+      structuralDefinition = data;
+      let difference = this.compareObjects(obj1, obj2);
+      difference.map(entity => {
+        let path = entity.path.split('.');
+        let label = structuralDefinition.differential.element.find(e => e.id === `${json1.resourceType}.${path[0]}`)?.label;
+        if (label) {
+          entity.path = label;
         }
-        for (const key in obj2) {
-          const currentPath = path ? `${path}.${key}` : key;
-          if (!(key in obj1)) {
-            differences.push({
-              path: currentPath,
-              old: null,
-              new: obj2[key]
-            });
-          }
-        }
-        return differences;
-      }
-
-      return compareObjects(obj1, obj2);
+      });
+      return difference;
     },
     formatValue(value) {
       if (value === null) return "_";
@@ -562,23 +573,20 @@ export default {
       },
       deep: true
     },
-    id() {
-      this.getData()
-    },
     startDate() {
-      this.getData()
+      this.getData(true)
     },
     dateTo() {
-      this.getData()
+      this.getData(true)
     },
     actionSubType() {
-      this.getData()
+      this.getData(true)
     },
     userEmail() {
-      this.getData()
+      this.getData(true)
     },
     operationOutcome() {
-      this.getData()
+      this.getData(true)
     }
   }
 }
