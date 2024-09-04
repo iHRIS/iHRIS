@@ -9,14 +9,6 @@
         <v-layout row wrap>
           <v-row>
             <v-col>
-              <v-text-field
-                  v-model="id"
-                  :label="$t(`App.hardcoded-texts.ID`)"
-                  dense
-                  outlined
-              />
-            </v-col>
-            <v-col>
               <v-autocomplete
                   v-model="actionSubType"
                   :items="auditEventSubType"
@@ -137,7 +129,7 @@
                      outlined x-small
                      @click="openPage(item)"
               >
-                {{ $t(`App.hardcoded-texts.View File`) }}
+                {{ $t(`App.hardcoded-texts.View Record`) }}
               </v-btn>
               <v-btn v-if="item.userId"
                      class="ma-1"
@@ -156,7 +148,7 @@
                   x-small
                   @click="viewDifference(item)"
               >
-                {{ $t(`App.hardcoded-texts.Compare The difference`) }}
+                {{ $t(`App.hardcoded-texts.View Changes`) }}
               </v-btn>
             </template>
           </v-data-table>
@@ -168,7 +160,7 @@
       >
         <v-card>
           <v-card-title class="text-h5 grey lighten-2 justify-center">
-            {{ $t(`App.hardcoded-texts.Changed fields`) }}
+            {{ $t(`App.hardcoded-texts.Changed Fields`) }}
           </v-card-title>
           <v-card-text>
             <template>
@@ -238,55 +230,6 @@ export default {
       link: [],
       startDate: null,
       dateTo: null,
-      auditLogHeader: [
-        {
-          text: 'ID',
-          align: 'start',
-          sortable: true,
-          value: 'id',
-        },
-        {
-          text: 'User Email',
-          align: 'start',
-          sortable: true,
-          value: 'userEmail',
-        },
-        {
-          text: 'Full Name',
-          align: 'start',
-          sortable: true,
-          value: 'fullName',
-        },
-        {
-          text: 'Resource',
-          align: 'start',
-          sortable: true,
-          value: 'resource',
-        },
-        {
-          text: 'Action',
-          align: 'start',
-          sortable: true,
-          value: 'action',
-        },
-        {
-          text: 'Recorded On',
-          align: 'start',
-          sortable: true,
-          value: 'recorded',
-        },
-        {
-          text: 'Operation Outcome',
-          align: 'start',
-          sortable: true,
-          value: 'outcome',
-        },
-        {
-          text: 'Actions',
-          value: 'actions',
-          sortable: false
-        },
-      ],
       startDateMenu: false,
       auditEventSubType: [],
       endDateMenu: false,
@@ -296,27 +239,6 @@ export default {
       resource: 'AuditEvent',
       actionSubType: null,
       profile: 'http://ihris.org/fhir/StructureDefinition/ihris-auditevent',
-      auditEventOutcome: [
-        {
-          "code": "0",
-          "display": "Success",
-          "definition": "The operation completed successfully (whether with warnings or not)."
-        },
-        {
-          "code": "4",
-          "display": "Minor failure",
-          "definition": "The action was not successful due to some kind of minor failure (often equivalent to an HTTP 400 response)."
-        },
-        {
-          "code": "8",
-          "display": "Serious failure",
-          "definition": "The action was not successful due to some kind of unexpected error (often equivalent to an HTTP 500 response)."
-        },
-        {
-          "code": "12",
-          "display": "Major failure",
-          "definition": "An error of such magnitude occurred that the system is no longer available for use (i.e. the system died)."
-        }],
       compareDialog: false,
       resourcePage: {},
       differnce: undefined
@@ -324,14 +246,6 @@ export default {
   },
   methods: {
     setUp() {
-      this.auditLogHeader = this.auditLogHeader.map((field) => {
-        field.text = this.$t(`App.hardcoded-texts.${field.text}`);
-        return field;
-      });
-      this.auditEventOutcome = this.auditEventOutcome.map((field) => {
-        field.display = this.$t(`App.hardcoded-texts.${field.display}`);
-        return field;
-      });
       let url = "/fhir/Basic?_count=200&_format=json&_pretty=true&_profile=http://ihris.org/fhir/StructureDefinition/ihris-page"
       fetch(url).then(response => {
         response.json().then((data) => {
@@ -427,7 +341,14 @@ export default {
                 let url = "/fhir/QuestionnaireResponse/" + resource.split("/")?.[1]
                 fetch(url).then(response => {
                   response.json().then((data) => {
-                    auditData.resource = data.subject?.reference
+                    let resourceTag = data.meta.tag.find((tag) => {
+                      return tag.system === "http://ihris.org/fhir/tags/resource"
+                    })
+                    if(data.subject && data.subject.reference) {
+                      auditData.resource = data.subject?.reference
+                    } else if(resourceTag && resourceTag.code) {
+                      auditData.resource = resourceTag.code
+                    }
                   })
                 }).catch(error => {
                   this.error_message = error.message
@@ -457,7 +378,9 @@ export default {
     fetchAuditEventSubType() {
       fetch("/fhir/ValueSet/audit-event-sub-type/$expand").then(response => {
         response.json().then((data) => {
-          this.auditEventSubType = data.expansion.contains
+          if(data.expansion.contains) {
+            this.auditEventSubType = data.expansion.contains
+          }
         })
       })
     },
@@ -572,6 +495,64 @@ export default {
     },
     itemsPerPage() {
       return [5, 10, 50, 100];
+    },
+    auditLogHeader() {
+      let headers = [{
+        text: this.$t(`App.hardcoded-texts.User Email`),
+        align: 'start',
+        sortable: true,
+        value: 'userEmail',
+      }, {
+        text: this.$t(`App.hardcoded-texts.Full Name`),
+        align: 'start',
+        sortable: true,
+        value: 'fullName',
+      }, {
+        text: this.$t(`App.hardcoded-texts.Resource`),
+        align: 'start',
+        sortable: true,
+        value: 'resource',
+      }, {
+        text: this.$t(`App.hardcoded-texts.Action`),
+        align: 'start',
+        sortable: true,
+        value: 'action',
+      }, {
+        text: this.$t(`App.hardcoded-texts.Recorded On`),
+        align: 'start',
+        sortable: true,
+        value: 'recorded',
+      }, {
+        text: this.$t(`App.hardcoded-texts.Operation Outcome`),
+        align: 'start',
+        sortable: true,
+        value: 'outcome',
+      }, {
+        text: this.$t(`App.hardcoded-texts.Action`),
+        value: 'actions',
+        sortable: false
+      }]
+      return headers
+    },
+    auditEventOutcome() {
+      let outcomes = [{
+        "code": "0",
+        "display": this.$t(`App.hardcoded-texts.Success`),
+        "definition": "The operation completed successfully (whether with warnings or not)."
+      }, {
+        "code": "4",
+        "display": this.$t(`App.hardcoded-texts.Minor failure`),
+        "definition": "The action was not successful due to some kind of minor failure (often equivalent to an HTTP 400 response)."
+      }, {
+        "code": "8",
+        "display": this.$t(`App.hardcoded-texts.Serious failure`),
+        "definition": "The action was not successful due to some kind of unexpected error (often equivalent to an HTTP 500 response)."
+      }, {
+        "code": "12",
+        "display": this.$t(`App.hardcoded-texts.Major failure`),
+        "definition": "An error of such magnitude occurred that the system is no longer available for use (i.e. the system died)."
+      }]
+      return outcomes
     }
   },
   watch: {
