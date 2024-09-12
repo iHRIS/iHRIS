@@ -139,6 +139,9 @@ export default {
         if(this.profile){
           url = url + '&_profile=' + this.profile
         }
+        if(url.indexOf('_sort=_lastUpdated') === -1) {
+          url = url + '&_sort=_lastUpdated'
+        }
       }
       if (url === "") {
         let count = this.options.itemsPerPage || 10;
@@ -159,7 +162,8 @@ export default {
           count +
           "&_elements=" + this.elements.join(",") +
           "&_total=accurate&_profile=" +
-          this.profile;
+          this.profile +
+          "&_sort=-_lastUpdated";
         let sTerms = Object.keys(this.terms);
         for (let term of sTerms) {
           if ( Array.isArray( this.terms[term] ) ) {
