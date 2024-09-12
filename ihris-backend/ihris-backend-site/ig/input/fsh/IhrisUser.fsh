@@ -130,7 +130,7 @@ Title:          "iHRIS User Location"
 Description:    "iHRIS user Location extension for local users."
 * ^context.type = #element
 * ^context.expression = "Person"
-* value[x] only Reference(Location)
+* value[x] only Reference(IhrisJurisdiction or IhrisFacility)
 * valueReference 1..1 MS
 * valueReference ^label = "Location"
 * valueReference.reference 1..1 MS
@@ -156,9 +156,9 @@ Usage: #example
 * meta.profile = "http://ihris.org/fhir/StructureDefinition/ihris-person-user"
 * extension[0].url = "http://ihris.org/fhir/StructureDefinition/ihris-password"
 * extension[=].extension[0].url = "password"
-* extension[=].extension[=].valueString = "0da67ef3726a1e0adfbd3c3880c00f33167daeab1f8c728e10b547d382c2b91a96402958209d6af3c947ae9ab53d879dddb79ad046454ade2b12257fe792f8fa"
+* extension[=].extension[=].valueString = "9e27891d5f37c795a446dc994683256e5a14c606293fab1a838da40c585201c9ee5f6ba31c958433cf7b4b194605ac488b500c39ffc9fdf159b1e12f7e1a4e3c"
 * extension[=].extension[+].url = "salt"
-* extension[=].extension[=].valueString = "239cfeb1222bfb394549125b234e668e"
+* extension[=].extension[=].valueString = "181856559337e1c956200f7b2452b213"
 * extension[+].url = "http://ihris.org/fhir/StructureDefinition/ihris-assign-role"
 * extension[=].valueReference = Reference(Basic/ihris-role-admin)
 * name.use = #official
