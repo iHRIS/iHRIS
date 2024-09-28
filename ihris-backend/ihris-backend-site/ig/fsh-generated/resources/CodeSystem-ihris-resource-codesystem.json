@@ -47,7 +47,12 @@
       "code": "resourcedata",
       "display": "Resource Data",
       "definition": "Resource Data"
+    },
+    {
+      "code": "standard-list",
+      "display": "Standard List",
+      "definition": "Standard List"
     }
   ],
-  "count": 8
+  "count": 9
 }
