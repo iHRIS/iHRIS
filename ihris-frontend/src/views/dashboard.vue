@@ -8,6 +8,16 @@
             Dashboard
           </h4>
         </v-col>
+        <v-col>
+          <v-select
+            :items="dashboards"
+            v-model="dashboard"
+            item-text="title"
+            item-value="id"
+            label="Other Dashboards"
+            @change="$router.push('/dashboard/' + dashboard)"
+          ></v-select>
+        </v-col>
         <v-col class="ml-2">
           <v-row justify="end">
             <!--<v-switch
@@ -74,6 +84,7 @@
   </v-card>
 </template>
 <script>
+import axios from "axios";
 import FhirReferenceDashboard from "@/components/fhir/fhir-reference-dashboard.vue";
 
 export default {
@@ -83,7 +94,9 @@ export default {
   data() {
     return {
       selectedFacility: '',
-      facilityName: ''
+      facilityName: '',
+      dashboards: [],
+      dashboard: ''
     }
   },
   methods: {
@@ -97,6 +110,53 @@ export default {
     getData() {
       return this.$store.state.user
     }
+  },
+  created() {
+    this.dashboard = this.$route.params.id
+    let body = {
+      type: "dashboard",
+      excludeExportDetails: true,
+      includeReferencesDeep: false
+    }
+    let options = {
+      method: "POST",
+      headers: {
+        "kbn-xsrf": true,
+        "Content-Type": "application/fhir+json",
+      },
+      redirect: "manual",
+      data: body
+    }
+    axios("/dashboards/api/saved_objects/_export", options).then((response) => {
+      let lines = response.data.split('\n');
+      for (let i = 0; i < lines.length - 1; i++) {
+        if (lines[i].trim()) {
+          try {
+            const dashboard = JSON.parse(lines[i]);
+            this.dashboards.push({
+              id: dashboard.id,
+              title: dashboard.attributes.title
+            })
+          } catch (error) {
+            console.error('Error parsing JSON:', error);
+          }
+        }
+      }
+      let buffer = lines[lines.length - 1];
+      if (buffer.trim()) {
+        try {
+          const dashboard = JSON.parse(buffer);
+          this.dashboards.push({
+            id: dashboard.id,
+            title: dashboard.attributes.title
+          })
+        } catch (error) {
+          console.error('Error parsing final JSON object:', error);
+        }
+      }
+    }).catch((err) => {
+      console.log(err);
+    })
   }
 }
 </script>

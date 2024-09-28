@@ -130,10 +130,21 @@ async function startUp() {
   // This has to be before the body parser or it won't proxy a POST body
   app.use('/dashboards', createProxyMiddleware({
     target: nconf.get('kibana:base') || 'http://localhost:5601',
-    // headers: { 'kbn-xsrf': true },
-    // changeOrigin: true,
-    // ws: true,
-    // followRedirects: true
+    on: {
+      proxyReq: () => {
+        console.log('req');
+      },
+      proxyRes: (proxyRes, req, res) => {
+        console.log('responded');
+      },
+      error: (err, req, res) => {
+        console.log(err);
+      }
+    },
+    headers: { 'kbn-xsrf': true },
+    changeOrigin: true, 
+    ws: true,
+    followRedirects: true
   }));
   // const indexRouter = require('./routes/index')
   const configRouter = require('./routes/config');

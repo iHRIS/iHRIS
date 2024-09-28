@@ -375,6 +375,7 @@ router.get('/populateFilter/:index/:field', (req, res) => {
     aggs: {
       uniq_values: {
         composite: {
+          size: 10000,
           sources: [
             { value: { terms: { field: field } } }
           ]
