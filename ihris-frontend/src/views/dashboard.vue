@@ -112,6 +112,7 @@ export default {
     }
   },
   created() {
+    this.$store.state.minidrawer = true
     this.dashboard = this.$route.params.id
     let body = {
       type: "dashboard",

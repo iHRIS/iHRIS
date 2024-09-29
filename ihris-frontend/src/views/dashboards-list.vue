@@ -4,6 +4,15 @@
       <v-card-title class="primary darken-1 white--text font-weight-bold justify-center">
         <!-- <v-icon class="mr-2" color="white">{{ selectedIcon }}</v-icon> -->
         Dashboards
+        <v-spacer></v-spacer>
+        <v-btn
+          class="ma-2"
+          outlined
+          color="white"
+          @click="$router.push('/build-dashboard')"
+        >
+          Build Dashboards
+        </v-btn>
       </v-card-title>
       <v-card-text>
         <v-text-field

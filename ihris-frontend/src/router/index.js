@@ -166,6 +166,11 @@ const routes = [{
     component: () => import( /* webpackChunkName: "uninstall-app" */ "../components/ihris/uninstall-app.vue")
   },
   {
+    path: "/build-dashboard",
+    name: "build-dashboard",
+    component: () => import( /* webpackChunkName: "dashboards" */ "../views/kibana-dashboard.vue")
+  },
+  {
     path: "/dashboard/:id",
     name: "dashboard",
     component: () => import( /* webpackChunkName: "dashboard" */ "../views/dashboard.vue")

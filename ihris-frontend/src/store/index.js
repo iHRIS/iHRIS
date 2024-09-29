@@ -28,6 +28,7 @@ export default new Vuex.Store({
       enabled: false,
       title: ''
     },
+    minidrawer: false
   },
   mutations: {
     login( state, user ) {
