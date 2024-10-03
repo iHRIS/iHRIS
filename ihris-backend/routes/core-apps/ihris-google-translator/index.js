@@ -5,8 +5,11 @@ const ihrissmartrequire = require("ihrissmartrequire")
 const outcomes = ihrissmartrequire('config/operationOutcomes')
 const async = require("async")
 const fs = require("fs")
+const nconf = ihrissmartrequire('modules/config')
+const fhirAxios = nconf.fhirAxios
 
 const extractTexts = require("./extractTexts")
+const logger = require("../../../winston");
 
 const onprogressTranslations = []
 
@@ -442,6 +445,54 @@ router.post('/import/:locale', async(req, res) => {
   }
 })
 
+router.get("/codeSystemTranslations/:locale/:id", async (req, res) => {
+  let locale = req.params.locale
+  let id = req.params.id
+  let codeSystem = await fhirAxios.read("CodeSystem", id)
+  codeSystem = await translatorCodeSystem(codeSystem, "en", locale)
+  fhirAxios.update(codeSystem).then(() => {
+     incrementValueSetVersion(codeSystem.url)
+    return res.status(200).json({'success': true});
+  }).catch((err) => {
+    return res.status(400).json({'success': true, 'error': err});
+  })
+})
+
+router.get("/translateAllCodeSystem/:locale", async (req, res) => {
+  let locale = req.params.locale
+  let codeSystems = await fhirAxios.search("CodeSystem", {_count: 200})
+  for (let codeSystem of codeSystems.entry) {
+    let translatedCodeSystem = await translatorCodeSystem(codeSystem.resource, "en", locale)
+    await fhirAxios.update(translatedCodeSystem).then((results) => {
+      incrementValueSetVersion(translatedCodeSystem.url)
+      return res.status(200).json(results);
+    })
+    .catch((err) => {
+      return res.status(500).json(err);
+    })
+
+  }
+  return res.status(200).json({'success': true});
+})
+
+router.put("/updateCodeSystem",(req,res)=> {
+  if(req.user.resource && req.user.resource.id === 'ihris-user-loggedout') {
+    return res.status(401).json(outcomes.NOTLOGGEDIN);
+  }
+  let body = req.body
+  if (!body) {
+    return res.status(400).end();
+  }else {
+    fhirAxios.update(body).then((results) => {
+      incrementValueSetVersion(body.url)
+      return res.status(200).json(results);
+    })
+    .catch((err) => {
+      return res.status(500).json(err);
+    });
+  }
+})
+
 function translator(texts, translations, from, to, type) {
   return new Promise((resolve, reject) => {
     let keys = Object.keys(texts)
@@ -513,5 +564,81 @@ function getLocalePath() {
   localesPath.pop()
   return localesPath.join("/") + "/"
 }
+
+function translatorCodeSystem(codeSystem, from, to) {
+  return new Promise((resolve, reject) => {
+    let errorOccured = false
+    async.eachSeries(codeSystem.concept, (concept, nxt) => {
+      translate(concept['display'], {from, to}).then(res => {
+        if (concept?.designation) {
+          let index = concept.designation.findIndex(designation => designation.language === to)
+          if (index === -1) {
+            concept.designation.push({
+              "language": to, "use": {
+                "system": "http://terminology.hl7.org/CodeSystem/designation-usage", "code": "display"
+              }, "value": res.text
+            })
+          } else {
+            concept.designation[index] = {
+              "language": to, "use": {
+                "system": "http://terminology.hl7.org/CodeSystem/designation-usage", "code": "display"
+              }, "value": res.text
+            }
+          }
+        } else {
+          concept.designation = [{
+            "language": to, "use": {
+              "system": "http://terminology.hl7.org/CodeSystem/designation-usage", "code": "display"
+            }, "value": res.text
+          }]
+        }
+        return nxt()
+      }).catch(err => {
+        errorOccured = true
+        console.error(err);
+        return nxt()
+      });
+    }, () => {
+      if (errorOccured) {
+        return reject()
+      }
+      return resolve(codeSystem)
+    })
+  })
+}
+
+const incrementValueSetVersion = ( codeSystem ) => {
+    const increment = (version) => {
+      if ( !version ) return "0.0.1"
+      try {
+        let parts = version.split(".")
+        if ( parts.length > 2 ) {
+          let last = Number(parts.pop())
+          parts.push( ++last )
+        } else if ( parts.length === 2 ) {
+          parts.push(1)
+        } else if ( parts.length === 1 ) {
+          parts.push(0)
+          parts.push(1)
+        }
+        return parts.join(".")
+      } catch (err) {
+        return version + ".1"
+      }
+    }
+    fhirAxios.search( "ValueSet", { reference: codeSystem, _count: "200" } ).then ( (bundle) => {
+      if ( bundle.entry ) {
+        for( let entry of bundle.entry ) {
+          if ( !entry.resource ) continue
+          entry.resource.version = increment( entry.resource.version )
+          fhirAxios.update( entry.resource ).catch( (err) => {
+            logger.error("Failed to update valueset to increment version: "+entry.resource.id)
+          } )
+        }
+      }
+    } ).catch( (err) => {
+      logger.error("Unable to find valuesets to increment for "+codeSystem+": "+err.message)
+    } )
+  }
 
 module.exports = router;
