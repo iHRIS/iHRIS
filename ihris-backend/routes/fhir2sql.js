@@ -15,7 +15,8 @@ const nconf = require('../modules/config')
 const fhirAxios = require('../modules/fhir/fhirAxios')
 const outcomes = ihrissmartrequire('config/operationOutcomes')
 const sequelize = new Sequelize(nconf.get("database:name"), nconf.get("database:username"), nconf.get("database:password"), {
-  host: 'localhost',
+  host: nconf.get("database:host") || 'localhost',
+  port: nconf.get("database:port") || 5432,
   dialect: nconf.get("database:dialect")
 });
 

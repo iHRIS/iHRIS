@@ -536,7 +536,7 @@
       "Data Vizualizer": "Data Vizualizer",
       "Open Another Visualization": "Open Another Visualization",
       "Home": "Home",
-      "Delete": "Delete", 
+      "Delete": "Delete",
       "Open": "Open",
       "Available Vizualizations": "Available Vizualizations",
       "Delete Vizualization Confirmation": "Are you sure you want to delete this visualization?",
@@ -598,8 +598,31 @@
       "Close translation dialog": "Close translation dialog",
       "WORD:": "WORD:",
       "TRANSLATION:": "TRANSLATION:",
-      "Full": "Full"
-      }
-      
+      "Full": "Full",
+      "Audit Logs": "Audit Logs",
+      "ID": "ID",
+      "Action Type": "Action Type",
+      "User Email": "User Email",
+      "Start From": "Start From",
+      "To": "To",
+      "Operation Outcome": "Operation Outcome",
+      "View File": "View File",
+      "View User": "View User",
+      "Compare The difference": "Compare The difference",
+      "Full Name": "Full Name",
+      "Resource": "Resource",
+      "Action": "Action",
+      "Recorded On": "Recorded On",
+      "Operation Outcome": "Operation Outcome",
+      "Actions": "Actions",
+      "Success": "Success",
+      "Minor failure": "Minor failure",
+      "Serious failure": "Serious failure",
+      "Major failure": "Major failure",
+      "Changes": "Changes",
+      "Changed fields": "Changed fields",
+      "New Value": "New Value",
+      "Old Value": "Old Value",
+      "Field": "Field"
     }
   }

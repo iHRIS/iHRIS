@@ -33,6 +33,7 @@ const fhirReports = {
                 database: nconf.get("database:name"),
                 username: nconf.get("database:username"),
                 password: nconf.get("database:password"),
+                port: nconf.get("database:port"),
                 dialect: nconf.get("database:dialect") /* one of 'mysql' | 'postgres' | 'sqlite' | 'mariadb' | 'mssql' | 'db2' | 'snowflake' | 'oracle' */
               }
             } )

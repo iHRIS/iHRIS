@@ -113,6 +113,14 @@ server.rewriteBasePath: true
 
 ## Tomcat
 
+Add an APT repository that has Tomcat9 if using Ubuntu 24.04 or newer, otherwise, skip this step.
+
+```bash
+sudo add-apt-repository -y -s "deb http://archive.ubuntu.com/ubuntu/ jammy main universe"
+```
+
+### Install Tomcat9
+
 ```bash
 sudo apt install tomcat9
 ```

@@ -35,6 +35,11 @@ const routes = [{
     component: () => import( /* webpackChunkName: "reset-password" */ '../views/auth/reset-password.vue'),
   },
   {
+    path: '/auditevent',
+    name: 'auditevent',
+    component: () => import( /* webpackChunkName: "reset-password" */ '../views/audit-logs.vue'),
+  },
+  {
     path: '/change-password',
     name: 'change-password',
     component: () => import( /* webpackChunkName: "change-password" */ '../views/auth/change-password.vue')
@@ -161,12 +166,19 @@ const routes = [{
     component: () => import( /* webpackChunkName: "uninstall-app" */ "../components/ihris/uninstall-app.vue")
   },
   {
+    path: "/build-dashboard",
+    name: "build-dashboard",
+    component: () => import( /* webpackChunkName: "dashboards" */ "../views/kibana-dashboard.vue")
+  },
+  {
     path: "/dashboard/:id",
     name: "dashboard",
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
     component: () => import( /* webpackChunkName: "dashboard" */ "../views/dashboard.vue")
+  },
+  {
+    path: "/list-dashboards",
+    name: "list-dashboards",
+    component: () => import( /* webpackChunkName: "dashboards" */ "../views/dashboards-list.vue")
   },
   {
     path: "/bulk-registration",

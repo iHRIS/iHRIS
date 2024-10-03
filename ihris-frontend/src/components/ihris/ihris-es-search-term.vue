@@ -6,7 +6,7 @@
         :error="error"
         :error-messages="err_messages"
         :items="items"
-        :label="label"
+        :label="$t(`App.reports.${label}`)"
         :loading="loading"
         class="ma-1"
         clearable

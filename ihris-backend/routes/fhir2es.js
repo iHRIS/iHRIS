@@ -366,8 +366,6 @@ router.get('/populateFilter/:index/:field', (req, res) => {
   let field = req.params.field
   const dataType = req.query.dataType
   const hasKeyword = req.query.hasKeyword
-  console.log(typeof hasKeyword);
-  console.log(hasKeyword);
 
   if(hasKeyword === 'true') {
     field = `${field}.keyword`
@@ -377,6 +375,7 @@ router.get('/populateFilter/:index/:field', (req, res) => {
     aggs: {
       uniq_values: {
         composite: {
+          size: 10000,
           sources: [
             { value: { terms: { field: field } } }
           ]

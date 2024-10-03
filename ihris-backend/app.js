@@ -49,7 +49,7 @@ async function startUp() {
   try {
     const reportsRunning = await fhirReports.setup();
     if (reportsRunning) {
-      // fhirReports.runReports();
+      fhirReports.runReports();
     } else {
       logger.error('Failed to start up reports to ElasticSearch.');
     }
@@ -130,8 +130,9 @@ async function startUp() {
   // This has to be before the body parser or it won't proxy a POST body
   app.use('/dashboards', createProxyMiddleware({
     target: nconf.get('kibana:base') || 'http://localhost:5601',
+    auth: `${nconf.get('elasticsearch:username')}:${nconf.get('elasticsearch:password')}`,
     // headers: { 'kbn-xsrf': true },
-    // changeOrigin: true,
+    // changeOrigin: true, 
     // ws: true,
     // followRedirects: true
   }));

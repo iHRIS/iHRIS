@@ -9,6 +9,7 @@ Title:          "Code System for iHRIS Basic Resources."
 * #visualization "iHRIS Data Visualization" "iHRIS Data Visualization"
 * #dashboard "iHRIS Dashboard" "iHRIS Dashboard"
 * #resourcedata "Resource Data" "Resource Data"
+* #standard-list "Standard List" "Standard List"
 
 ValueSet:       IhrisResourceValueSet
 Id:             ihris-resource-valueset

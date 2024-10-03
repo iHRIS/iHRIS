@@ -175,6 +175,7 @@ export default {
       }
       params._count = 500
       let url = "/fhir/"+this.resource+"?_sort=name&"+querystring.stringify( params )
+      console.log(url);
       this.items = []
       this.addItems( url, this.items )
     },

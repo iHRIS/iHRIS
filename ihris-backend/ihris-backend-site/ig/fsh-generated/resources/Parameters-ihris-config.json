@@ -16,11 +16,11 @@
             "code": "1.2.840.10065.1.12.1.14"
           }
         ],
-        "when": "2024-07-16T09:41:55.767Z",
+        "when": "2024-09-12T07:55:23.450Z",
         "who": {
           "reference": "http://ihris.org/fhir/Organization/ihris"
         },
-        "data": "laYkUaDdmRZgZff1kl1UwHCjG6qzlfvVFsAG5l25z8j2IBncD++rkuLtTkElZk+XjW31XuA4wHMZirH2maskIQ+XEq/dfqeV63HVhNDyV6M7VSzqsfFe/xIGlW1LYe/XIS8jj+MvZbNb0s4ZfdSUZOhSgtTk/tLoZzkcffJ7uiM="
+        "data": "QK+29A9W9Jfn0j5pBxjSwccB8Pu+xJWghVDw0yLvoAWZ6jVV2VxIfat2NWm5/UD9EmnrcqliUkIR6axiQTmL67qJgklmigojOotxc+jtQ8gJGWSqhUl02EjgEREp+45zy5faCKri7PMDcGe9TnnRHWLJEI3bkg+t4jEKqrMcTdU="
       }
     },
     {
@@ -28,11 +28,11 @@
       "part": [
         {
           "name": "site:title",
-          "valueString": "TCHAD Ministry of Health"
+          "valueString": "iHRIS Manage"
         },
         {
           "name": "site:site",
-          "valueString": "Human Resource Information System"
+          "valueString": "Demo"
         },
         {
           "name": "site:logo",
@@ -668,7 +668,7 @@
         },
         {
           "name": "site:nav:menu:audit:url",
-          "valueString": "/resource/search/auditevent"
+          "valueString": "/auditevent"
         },
         {
           "name": "site:nav:menu:password:text",

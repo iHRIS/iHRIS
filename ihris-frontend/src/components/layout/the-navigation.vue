@@ -2,7 +2,7 @@
   <v-navigation-drawer
       v-if="$store.state.user.loggedin"
       v-model="drawer"
-      :mini-variant.sync="mini"
+      :mini-variant.sync="$store.state.minidrawer"
       app
       class="primary darken-1 white--text font-weight-bold"
       clipped
@@ -19,7 +19,7 @@
       </v-list-item-content>
       <v-btn
           icon
-          @click.stop="mini = !mini"
+          @click.stop="$store.state.minidrawer = !$store.state.minidrawer"
       >
         <v-icon class="white--text">mdi-chevron-left</v-icon>
       </v-btn>
@@ -34,7 +34,7 @@
           <v-list-group
               :key="item.id"
               v-model="item.active"
-              :class="(item.active&&!mini ? 'primary pa-3' : item.active&&mini ? 'primary':'')"
+              :class="(item.active&&!$store.state.minidrawer ? 'primary pa-3' : item.active&&$store.state.minidrawer ? 'primary':'')"
               :prepend-icon="item.icon"
               :value="item.active"
               color="white--text"
@@ -123,7 +123,6 @@ export default {
   data: function () {
     return {
       menu: [],
-      mini: false,
       drawer: true,
     }
   },

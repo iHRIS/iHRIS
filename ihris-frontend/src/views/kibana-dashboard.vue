@@ -1,10 +1,17 @@
 <template>
-  <iframe :src="'/kibana/app/kibana#/dashboard/'+$route.params.id+'?embed=true'" width="100%" height="100%"></iframe>
+  <iframe
+      :src="'/dashboards/app/home#/'"
+      height="100%"
+      style="border: none;"
+      width="100%"
+  ></iframe>
 </template>
 
 <script>
 export default {
   name: "kibana-dashboard",
-  props: [ "id" ]
+  created() {
+    this.$store.state.minidrawer = true
+  }
 }
 </script>
