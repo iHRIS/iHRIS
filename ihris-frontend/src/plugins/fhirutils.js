@@ -164,7 +164,7 @@ const fhirutils = {
       return expression
     }
   },
-  expand: (valueset) => {
+  expand: (valueset,params) => {
     const itemSort = (a,b) => {
       return (a.display === b.display ? (a.code === b.code ? 0 : (a.code < b.code ? -1: 1)) : (a.display < b.display ? -1 : 1) )
     }
@@ -185,10 +185,24 @@ const fhirutils = {
       let lastPipe = valueset.lastIndexOf('|')
       let valueSetId = valueset.slice(lastSlash+1, (lastPipe !== -1 ? lastPipe : valueset.length ))
       let items = []
-
-      fetch("/fhir/ValueSet/"+valueSetId+"/$expand").then(response=> {
-        if( response.ok ) {
-          response.json().then(data=>{
+      let url = "/fhir/ValueSet/" + valueSetId + "/$expand"
+      if (params && params.language) {
+        url += `?displayLanguage=${params.language}`
+      }
+      fetch(url, {
+        method: 'GET', headers: {
+          'Cache-Control': 'no-cache, no-store', 'Content-Type': 'application/fhir+json',
+        }
+      }).then(response => {
+        if (response.ok) {
+          response.json().then(data => {
+            console.log({data})
+            data.expansion.contains.map((item) => {
+              let find = item?.designation?.find((designation) => designation?.language === params.language)
+              if (find) {
+                item.display = find.value
+              }
+            })
             try {
               if ( ( !data.expansion || data.expansion.total === 0 ) && data.compose.include ) {
                 populateItemsFromCompose( data, items )
