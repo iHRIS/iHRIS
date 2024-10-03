@@ -130,6 +130,7 @@ async function startUp() {
   // This has to be before the body parser or it won't proxy a POST body
   app.use('/dashboards', createProxyMiddleware({
     target: nconf.get('kibana:base') || 'http://localhost:5601',
+    auth: `${nconf.get('elasticsearch:username')}:${nconf.get('elasticsearch:password')}`,
     // headers: { 'kbn-xsrf': true },
     // changeOrigin: true, 
     // ws: true,
