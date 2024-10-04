@@ -115,8 +115,14 @@ export default {
         //console.log(this.source)
       }
       let binding = this.binding || this.slotProps.source.binding
-      this.$fhirutils.expand( binding ).then( items => {
-        this.items = items 
+      console.log("BINDING1",binding)
+      let params = undefined
+      let language = this.$i18n.locale
+      if(language){
+        params = { language }
+      }
+      this.$fhirutils.expand( binding,params ).then( items => {
+        this.items = items
         this.loading = false
       } ).catch( err => {
         console.log(err)

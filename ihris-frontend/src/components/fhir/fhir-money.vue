@@ -148,8 +148,13 @@ export default {
         }
       }
       let binding = this.currencyValueSet
-      this.$fhirutils.expand( binding ).then( items => {
-        this.items = items 
+      let params = undefined
+      let language = this.$i18n.locale
+      if(language){
+        params = { language }
+      }
+      this.$fhirutils.expand( binding,params ).then( items => {
+        this.items = items
         this.loading = false
       } ).catch( err => {
         console.log(err)

@@ -127,7 +127,12 @@ export default {
         this.disabled = this.readOnlyIfSet && (!!this.value)
       }
       let binding = this.binding || this.slotProps.source.binding
-      this.$fhirutils.expand( binding ).then( items => {
+      let params = {}
+      let language = this.$i18n.locale
+      if(language){
+        params = { language }
+      }
+      this.$fhirutils.expand( binding,params ).then( items => {
         this.items = items
         let item = this.items.find( item => this.savedValueCode && item.code === this.savedValueCode )
         if(item) {

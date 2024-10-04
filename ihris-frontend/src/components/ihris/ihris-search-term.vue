@@ -98,7 +98,12 @@ export default {
   },
   mounted: function() {
     this.loading = true
-    this.$fhirutils.expand( this.binding ).then( items => {
+    let params = undefined
+      let language = this.$i18n.locale
+      if(language){
+        params = { language }
+      }
+    this.$fhirutils.expand( this.binding,params ).then( items => {
       this.items = items
       this.loading = false
     } ).catch( err => {
