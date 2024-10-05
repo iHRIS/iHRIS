@@ -84,18 +84,18 @@
   </v-card>
 </template>
 <script>
-import axios from "axios";
 import FhirReferenceDashboard from "@/components/fhir/fhir-reference-dashboard.vue";
+import { kibana } from "@/mixins/kibana"
 
 export default {
   name: "dashboard",
   components: {FhirReferenceDashboard},
   props: [ "id" ],
+  mixins: [kibana],
   data() {
     return {
       selectedFacility: '',
       facilityName: '',
-      dashboards: [],
       dashboard: ''
     }
   },
@@ -103,7 +103,6 @@ export default {
     onSelectedFacility: function (value) {
       this.selectedFacility = value.id
       this.facilityName = value.name
-      console.log("Selected Location", this.selectedFacility, this.facilityName)
     }
   },
   computed: {
@@ -114,50 +113,6 @@ export default {
   created() {
     this.$store.state.minidrawer = true
     this.dashboard = this.$route.params.id
-    let body = {
-      type: "dashboard",
-      excludeExportDetails: true,
-      includeReferencesDeep: false
-    }
-    let options = {
-      method: "POST",
-      headers: {
-        "kbn-xsrf": true,
-        "Content-Type": "application/fhir+json",
-      },
-      redirect: "manual",
-      data: body
-    }
-    axios("/dashboards/api/saved_objects/_export", options).then((response) => {
-      let lines = response.data.split('\n');
-      for (let i = 0; i < lines.length - 1; i++) {
-        if (lines[i].trim()) {
-          try {
-            const dashboard = JSON.parse(lines[i]);
-            this.dashboards.push({
-              id: dashboard.id,
-              title: dashboard.attributes.title
-            })
-          } catch (error) {
-            console.error('Error parsing JSON:', error);
-          }
-        }
-      }
-      let buffer = lines[lines.length - 1];
-      if (buffer.trim()) {
-        try {
-          const dashboard = JSON.parse(buffer);
-          this.dashboards.push({
-            id: dashboard.id,
-            title: dashboard.attributes.title
-          })
-        } catch (error) {
-          console.error('Error parsing final JSON object:', error);
-        }
-      }
-    }).catch((err) => {
-      console.log(err);
-    })
   }
 }
 </script>

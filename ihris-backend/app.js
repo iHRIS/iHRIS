@@ -132,7 +132,7 @@ async function startUp() {
     target: nconf.get('kibana:base') || 'http://localhost:5601',
     auth: `${nconf.get('elasticsearch:username')}:${nconf.get('elasticsearch:password')}`,
     // headers: { 'kbn-xsrf': true },
-    // changeOrigin: true, 
+    // changeOrigin: true,
     // ws: true,
     // followRedirects: true
   }));
