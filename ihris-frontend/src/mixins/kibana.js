@@ -3,14 +3,14 @@ export const kibana = {
   data() {
     return {
       dashboards: [],
-      ignoreDashboards: ["testing", "test"],
+      ignoreDashboards: ["testing", "test", "Testing", "Test"],
       tags: []
     }
   },
   methods: {
     getTags(page) {
       return new Promise((resolve, reject) => {
-        let url = "/dashboards/api/saved_objects/_find?type=tag&per_page=3"
+        let url = "/dashboards/api/saved_objects/_find?type=tag&per_page=10000"
         if(page) {
           url += "&page=" + page
         }
