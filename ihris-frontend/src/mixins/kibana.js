@@ -54,12 +54,40 @@ export const kibana = {
           data: body
         }
         axios("/dashboards/api/saved_objects/_export", options).then((response) => {
-          let lines = response.data && response.data.split('\n');
-          let accept = true
-          for (let i = 0; i < lines.length - 1; i++) {
-            if (lines[i].trim()) {
+          if(typeof response.data === 'string') {
+            let lines = response.data && response.data.split('\n');
+            let accept = true
+            for (let i = 0; i < lines.length - 1; i++) {
+              if (lines[i].trim()) {
+                try {
+                  const dashboard = JSON.parse(lines[i]);
+                  for(let reference of dashboard.references) {
+                    if(reference.type !== 'tag') {
+                      continue
+                    }
+                    let tag = this.tags.find((tag) => {
+                      return tag.id === reference.id
+                    })
+                    if(this.ignoreDashboards.includes(tag.attributes.name)) {
+                      accept = false
+                      break
+                    }
+                  }
+                  if(accept) {
+                    this.dashboards.push({
+                      id: dashboard.id,
+                      title: dashboard.attributes.title
+                    })
+                  }
+                } catch (error) {
+                  console.error('Error parsing JSON:', error);
+                }
+              }
+            }
+            let buffer = lines[lines.length - 1];
+            if (buffer.trim()) {
               try {
-                const dashboard = JSON.parse(lines[i]);
+                const dashboard = JSON.parse(buffer);
                 for(let reference of dashboard.references) {
                   if(reference.type !== 'tag') {
                     continue
@@ -79,34 +107,28 @@ export const kibana = {
                   })
                 }
               } catch (error) {
-                console.error('Error parsing JSON:', error);
+                console.error('Error parsing final JSON object:', error);
               }
             }
-          }
-          let buffer = lines[lines.length - 1];
-          if (buffer.trim()) {
-            try {
-              const dashboard = JSON.parse(buffer);
-              for(let reference of dashboard.references) {
-                if(reference.type !== 'tag') {
-                  continue
-                }
-                let tag = this.tags.find((tag) => {
-                  return tag.id === reference.id
-                })
-                if(this.ignoreDashboards.includes(tag.attributes.name)) {
-                  accept = false
-                  break
-                }
+          } else if(typeof response.data === 'object') {
+            let accept = true
+            for(let reference of response.data.references) {
+              if(reference.type !== 'tag') {
+                continue
               }
-              if(accept) {
-                this.dashboards.push({
-                  id: dashboard.id,
-                  title: dashboard.attributes.title
-                })
+              let tag = this.tags.find((tag) => {
+                return tag.id === reference.id
+              })
+              if(this.ignoreDashboards.includes(tag.attributes.name)) {
+                accept = false
+                break
               }
-            } catch (error) {
-              console.error('Error parsing final JSON object:', error);
+            }
+            if(accept) {
+              this.dashboards.push({
+                id: response.data.id,
+                title: response.data.attributes.title
+              })
             }
           }
           resolve()
