@@ -98,7 +98,7 @@ async function startUp() {
       }
     } else if (nconf.get('app:idp') === 'ihris') {
       const unauthenticatedRoutes = ['/', 'favicon.ico', '/flag_en.svg', '/config/app', '/auth', '/fhir/DocumentReference/page-home/$html', '/config/site', '/translator/getTranslatedLanguages'];
-      if (unauthenticatedRoutes.includes(req.path) || req.path.startsWith('/css') || req.path.startsWith('/js')) {
+      if (unauthenticatedRoutes.includes(req.path) || req.path.startsWith('/css') || req.path.startsWith('/js') || req.path.startsWith('/translator/getLocale/')) {
         return next();
       }
       if (!req.user && req.headers.authorization && req.headers.authorization.split(' ').length === 2) {
@@ -114,8 +114,8 @@ async function startUp() {
           req.user = user.restoreUser(decoded.user);
         }
       }
-      if (!req.user) {
-        res.setHeader('Access-Control-Allow-Origin', req.headers.origin);
+      if (!req.user || req.user?.resource?.id === 'ihris-user-loggedout') {
+        res.setHeader('Access-Control-Allow-Origin', "*");
         res.set('Access-Control-Allow-Credentials', true);
         return res.status(401).json(outcomes.NOTLOGGEDIN);
       }
@@ -127,15 +127,6 @@ async function startUp() {
 
   app.use(morgan('dev'));
 
-  // This has to be before the body parser or it won't proxy a POST body
-  app.use('/dashboards', createProxyMiddleware({
-    target: nconf.get('kibana:base') || 'http://localhost:5601',
-    auth: `${nconf.get('elasticsearch:username')}:${nconf.get('elasticsearch:password')}`,
-    // headers: { 'kbn-xsrf': true },
-    // changeOrigin: true,
-    // ws: true,
-    // followRedirects: true
-  }));
   // const indexRouter = require('./routes/index')
   const configRouter = require('./routes/config');
   const authRouter = require('./routes/auth');
@@ -150,10 +141,15 @@ async function startUp() {
   const mheroRouter = require('./routes/mhero');
   const translatorRouter = require('./routes/core-apps/ihris-google-translator/index');
   const taskAndRoleRouter = require('./routes/core-apps/ihris-task-and-role/index')
-
   const limit = nconf.get('express:limit') || '50mb';
   app.use(express.json({
-    type: ['application/json', 'application/fhir+json'],
+    type: (req) => {
+      let contenttypes = ["application/json", "application/fhir+json"]
+      if(req.path.startsWith("/dashboards/") || !contenttypes.includes(req.headers['content-type'])) {
+        return false
+      }
+      return true
+    },
     limit,
   }));
   app.use(express.urlencoded({
@@ -179,6 +175,8 @@ async function startUp() {
     app.use(authRouter.passport.initialize());
     app.use(authRouter.passport.session());
   }
+
+  
   // mounting site routes that dont require authentication
   mountCustomRoute("false")
   // end of mounting site routes that dont require authentication
@@ -186,6 +184,16 @@ async function startUp() {
   // mounting site routes that must be authenticated
   mountCustomRoute("true")
   // end of mounting site routes that must be authenticated
+
+  // This has to be before the body parser or it won't proxy a POST body
+  app.use('/dashboards', createProxyMiddleware({
+    target: nconf.get('kibana:base') || 'http://localhost:5601',
+    auth: `${nconf.get('elasticsearch:username')}:${nconf.get('elasticsearch:password')}`,
+    // headers: { 'kbn-xsrf': true },
+    // changeOrigin: true,
+    // ws: true,
+    // followRedirects: true
+  }));
 
   app.use('/config', configRouter);
   app.use('/mhero', mheroRouter);

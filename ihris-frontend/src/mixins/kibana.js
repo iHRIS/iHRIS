@@ -48,7 +48,7 @@ export const kibana = {
           method: "POST",
           headers: {
             "kbn-xsrf": true,
-            "Content-Type": "application/fhir+json",
+            "Content-Type": "application/json",
           },
           redirect: "manual",
           data: body
