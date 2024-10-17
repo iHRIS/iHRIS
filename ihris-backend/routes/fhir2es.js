@@ -440,7 +440,27 @@ function csvExport(req, res) {
   let searchQry = req.body.query;
   let headers = req.body.headers;
   let label = req.body.label;
+  let reportOptions = req.body.reportOptions
   let isSelected = req.body.selected;
+
+  if(reportOptions.locationBasedConstraint) {
+    let userLocExt = req.user.resource.extension && req.user.resource.extension.find((ext) => {
+      return ext.url === 'http://ihris.org/fhir/StructureDefinition/ihris-user-location'
+    })
+    if(userLocExt) {
+      let userLoc = userLocExt.valueReference.reference
+      if(userLoc) {
+        searchQry.query.bool.must.push({
+          script: {
+            script: {
+              source: `if(doc['ihris-related-group.keyword'].size() != 0) {if(doc['ihris-related-group.keyword'].value.contains('${userLoc}')){return true}}`,
+              lang: "painless"
+            }
+          }
+        })
+      }
+    }
+  }
   if (isSelected && isSelected.length > 0) {
     let rows = "";
     for (let header of headers) {
@@ -546,7 +566,27 @@ function excelExport(req, res) {
   let searchQry = req.body.query;
   let headers = req.body.headers;
   let label = req.body.label;
+  let reportOptions = req.body.reportOptions
   let isSelected = req.body.selected;
+
+  if(reportOptions.locationBasedConstraint) {
+    let userLocExt = req.user.resource.extension && req.user.resource.extension.find((ext) => {
+      return ext.url === 'http://ihris.org/fhir/StructureDefinition/ihris-user-location'
+    })
+    if(userLocExt) {
+      let userLoc = userLocExt.valueReference.reference
+      if(userLoc) {
+        searchQry.query.bool.must.push({
+          script: {
+            script: {
+              source: `if(doc['ihris-related-group.keyword'].size() != 0) {if(doc['ihris-related-group.keyword'].value.contains('${userLoc}')){return true}}`,
+              lang: "painless"
+            }
+          }
+        })
+      }
+    }
+  }
 
   const workbook = new ExcelJS.Workbook();
   const report = workbook.addWorksheet(label, {

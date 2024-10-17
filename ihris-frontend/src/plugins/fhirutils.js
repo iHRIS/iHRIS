@@ -196,7 +196,6 @@ const fhirutils = {
       }).then(response => {
         if (response.ok) {
           response.json().then(data => {
-            console.log({data})
             data.expansion.contains.map((item) => {
               let find = item?.designation?.find((designation) => designation?.language === params.language)
               if (find) {

@@ -651,6 +651,9 @@ export default {
         headers: this.headers,
         label: this.$t(`App.reports.${this.label}`),
         selected: this.selected,
+        reportOptions: {
+          locationBasedConstraint: this.reportData.locationBasedConstraint,
+        }
       };
       axios({
         url: url,

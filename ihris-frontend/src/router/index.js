@@ -4,6 +4,7 @@ import Home from "../views/home.vue"
 import Static from "../views/static-page.vue"
 import HomeNav from "../views/home-nav.vue"
 import menuGridView from "@/views/menu-grid-view.vue";
+import store from '../store'
 //import Test from "../views/test.vue"
 //import mhero from "../views/mhero/mhero.vue"
 //import contactGroups from "../views/mhero/contact-groups.vue"
@@ -196,18 +197,18 @@ const router = new VueRouter({
   routes
 })
 
-// router.beforeEach((to, from, next) => {
-//     if (!store.state.user.loggedin) {
-//       if (to.path !== '/' && to.path !== '/reset-password' &&to.path !== '/change-password') {
-//         next({
-//           path: '/'
-//         })
-//       }else {
-//         next()
-//       }
-//     } else {
-//       next()
-//     }
-// })
+router.beforeEach((to, from, next) => {
+  if (store.state.user.obj.resource && store.state.user.obj.resource.id === 'ihris-user-loggedout') {
+    if (to.path !== '/') {
+      next({
+        path: '/'
+      })
+    } else {
+      return next()
+    }
+  } else {
+    next()
+  }
+})
 
 export default router

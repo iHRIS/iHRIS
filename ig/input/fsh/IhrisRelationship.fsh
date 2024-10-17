@@ -117,6 +117,7 @@ Description:    "Lists fields of a resource to be displayed/cached"
       fhirpath 0..1 MS and
       function 0..1 MS and
       name 1..1 MS and
+      type 0..1 MS and
       display 0..1 MS and
       displayformat 0..1 MS and
       filter 0..1 MS and
@@ -131,6 +132,9 @@ Description:    "Lists fields of a resource to be displayed/cached"
 * extension[name].value[x] only string
 * extension[name].valueString 1..1
 * extension[name].valueString ^label = "Name of the field unique to the relationship"
+* extension[type].value[x] only string
+* extension[type].valueString 1..1
+* extension[type].valueString ^label = "Data Type"
 * extension[display].value[x] only string
 * extension[display].valueString 1..1
 * extension[display].valueString ^label = "Human readable name if the relation is to be displayed on the UI"
