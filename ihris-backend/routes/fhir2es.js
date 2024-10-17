@@ -569,7 +569,7 @@ function excelExport(req, res) {
   let reportOptions = req.body.reportOptions
   let isSelected = req.body.selected;
 
-  if(reportOptions.locationBasedConstraint) {
+  if(reportOptions?.locationBasedConstraint) {
     let userLocExt = req.user.resource.extension && req.user.resource.extension.find((ext) => {
       return ext.url === 'http://ihris.org/fhir/StructureDefinition/ihris-user-location'
     })
