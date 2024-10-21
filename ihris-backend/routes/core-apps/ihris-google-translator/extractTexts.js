@@ -306,16 +306,18 @@ function extractFromReport(report) {
       return ext.url === "http://ihris.org/fhir/StructureDefinition/iHRISReportLink"
     })
     if(reportLinks.length) {
-      let reportElements = reportLinks?.extension?.filter((ext) => {
-        return ext.url === "http://ihris.org/fhir/StructureDefinition/iHRISReportElement"
-      })
-      if(reportElements && reportElements.length) {
-        for(let element of reportElements) {
-          let display = element?.extension?.find((ext) => {
-            return ext.url === "display"
-          })?.valueString
-          if(display) {
-            keys.App.reports[display] = display
+      for(let link of reportLinks) {
+        let reportElements = link?.extension?.filter((ext) => {
+          return ext.url === "http://ihris.org/fhir/StructureDefinition/iHRISReportElement"
+        })
+        if(reportElements && reportElements.length) {
+          for(let element of reportElements) {
+            let display = element?.extension?.find((ext) => {
+              return ext.url === "display"
+            })?.valueString
+            if(display) {
+              keys.App.reports[display] = display
+            }
           }
         }
       }
