@@ -12,6 +12,7 @@
         max-height="500px"
         >
         <template v-slot:activator="{ on }">
+          {{ value }}
           <v-text-field
             v-model="displayValue"
             :label="$t(`App.fhir-resources-texts.${display}`)"
@@ -22,7 +23,9 @@
             :rules="rules"
             :error-messages="errors"
             :loading="loading"
-            dense>
+            dense
+            clearable
+            @click:clear="cleared">
             <template #label>{{$t(`App.fhir-resources-texts.${display}`)}} <span v-if="required" class="red--text font-weight-bold">*</span></template>
           </v-text-field>
         </template>
@@ -236,6 +239,11 @@ export default {
     }
   },
   methods: {
+    cleared() {
+      this.value = {
+        reference: ""
+      }
+    },
     reportRowSelected(row) {
       this.loadingReportVal = true
       let id
