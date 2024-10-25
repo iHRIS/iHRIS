@@ -32,11 +32,40 @@
           "extension": [
             {
               "url": "field",
+              "valueString": "Basic.id"
+            },
+            {
+              "url": "url",
+              "valueUrl": "/questionnaire/ihris-task/task/FIELD"
+            },
+            {
+              "url": "text",
+              "valueString": "Edit"
+            },
+            {
+              "url": "button",
+              "valueBoolean": true
+            },
+            {
+              "url": "icon",
+              "valueString": "mdi-pencil"
+            },
+            {
+              "url": "class",
+              "valueString": "secondary"
+            }
+          ],
+          "url": "link"
+        },
+        {
+          "extension": [
+            {
+              "url": "field",
               "valueString": ""
             },
             {
               "url": "url",
-              "valueUrl": "/resource/view/basic"
+              "valueUrl": "/resource/search/task"
             },
             {
               "url": "text",

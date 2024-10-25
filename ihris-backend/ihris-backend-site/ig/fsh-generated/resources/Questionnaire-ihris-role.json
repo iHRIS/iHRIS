@@ -15,39 +15,50 @@
   "purpose": "Workflow page for recording a user role information.",
   "item": [
     {
-      "linkId": "Role",
+      "linkId": "Basic",
       "text": "Add Role",
       "type": "group",
+      "definition": "http://ihris.org/fhir/StructureDefinition/ihris-role",
       "item": [
         {
-          "linkId": "rolename",
-          "text": "Role Name",
-          "type": "string",
-          "required": false,
-          "repeats": false
-        },
-        {
-          "linkId": "tasks",
-          "definition": "http://ihris.org/fhir/StructureDefinition/ihris-role#Basic.extension:task.value[x]:valueReference",
-          "text": "Tasks",
-          "type": "reference",
-          "required": false,
-          "repeats": true
-        },
-        {
-          "linkId": "roles",
-          "definition": "http://ihris.org/fhir/StructureDefinition/ihris-role#Basic.extension:role.value[x]:valueReference",
-          "text": "Roles",
-          "type": "reference",
-          "required": false,
-          "repeats": true
-        },
-        {
-          "linkId": "primary",
-          "text": "Is Role Primary",
-          "type": "boolean",
-          "required": true,
-          "repeats": false
+          "linkId": "Basic.id",
+          "text": "Role Details",
+          "type": "group",
+          "definition": "http://ihris.org/fhir/StructureDefinition/ihris-role#Basic.id",
+          "item": [
+            {
+              "linkId": "Basic.extension[0]",
+              "definition": "http://ihris.org/fhir/StructureDefinition/ihris-role#Basic.extension:name.value[x]:valueString",
+              "text": "Role Name",
+              "type": "string",
+              "required": false,
+              "repeats": false
+            },
+            {
+              "linkId": "Basic.extension[1]#preload",
+              "definition": "http://ihris.org/fhir/StructureDefinition/ihris-role#Basic.extension:task.value[x]:valueReference",
+              "text": "Tasks",
+              "type": "reference",
+              "required": false,
+              "repeats": true
+            },
+            {
+              "linkId": "Basic.extension[2]#preload",
+              "definition": "http://ihris.org/fhir/StructureDefinition/ihris-role#Basic.extension:role.value[x]:valueReference",
+              "text": "Roles",
+              "type": "reference",
+              "required": false,
+              "repeats": true
+            },
+            {
+              "linkId": "Basic.extension[3]",
+              "definition": "http://ihris.org/fhir/StructureDefinition/ihris-role#Basic.extension:primary.value[x]:valueBoolean",
+              "text": "Is Role Primary",
+              "type": "boolean",
+              "required": true,
+              "repeats": false
+            }
+          ]
         }
       ]
     }

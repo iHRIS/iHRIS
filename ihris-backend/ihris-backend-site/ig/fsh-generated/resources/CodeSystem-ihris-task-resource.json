@@ -5,7 +5,7 @@
   "name": "IhrisTaskResourceCodeSystem",
   "id": "ihris-task-resource",
   "title": "Code system for task permissions.",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "url": "http://ihris.org/fhir/CodeSystem/ihris-task-resource",
   "concept": [
     {
@@ -61,6 +61,10 @@
       "display": "Person"
     },
     {
+      "code": "AuditEvent",
+      "display": "AuditEvent"
+    },
+    {
       "code": "navigation",
       "display": "Page Navigation"
     },
@@ -73,6 +77,6 @@
       "display": "Special"
     }
   ],
-  "date": "2021-03-26T09:25:04.362Z",
-  "count": 16
+  "date": "2024-03-26T09:25:04.362Z",
+  "count": 17
 }
