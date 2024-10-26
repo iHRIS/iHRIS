@@ -116,6 +116,7 @@ Description:    "Lists fields of a resource to be displayed/cached"
 * extension contains
       fhirpath 0..1 MS and
       function 0..1 MS and
+      script 0..1 MS and
       name 1..1 MS and
       type 0..1 MS and
       display 0..1 MS and
@@ -129,6 +130,9 @@ Description:    "Lists fields of a resource to be displayed/cached"
 * extension[function].value[x] only string
 * extension[function].valueString 1..1
 * extension[function].valueString ^label = "External function to be called to calculate value"
+* extension[script].value[x] only string
+* extension[script].valueString 1..1
+* extension[script].valueString ^label = "Elasticsearch script to calculate field value"
 * extension[name].value[x] only string
 * extension[name].valueString 1..1
 * extension[name].valueString ^label = "Name of the field unique to the relationship"

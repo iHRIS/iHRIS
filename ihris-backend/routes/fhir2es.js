@@ -332,6 +332,18 @@ router.post('/:index/:operation?', (req, res) => {
       }
     }
   }
+  if(body.scripts && body.scripts.length) {
+    body._source = true
+    body.script_fields = {}
+    for(let script of body.scripts) {
+      body.script_fields[script.field] = {
+        script: {
+          source: `${script.script}`
+        }
+      }
+    }
+  }
+  delete body.scripts
   let url = URI(nconf.get('elasticsearch:base')).segment(indexName)
   if(operation) {
     url = url.segment(operation)
@@ -461,6 +473,17 @@ function csvExport(req, res) {
       }
     }
   }
+  if(req.body.scripts && req.body.scripts.length) {
+    searchQry._source = true
+    searchQry.script_fields = {}
+    for(let script of req.body.scripts) {
+      searchQry.script_fields[script.field] = {
+        script: {
+          source: `${script.script}`
+        }
+      }
+    }
+  }
   if (isSelected && isSelected.length > 0) {
     let rows = "";
     for (let header of headers) {
@@ -523,20 +546,18 @@ function csvExport(req, res) {
             let row;
             for (let header of headers) {
               if (row === undefined) {
-                if (
-                    doc._source[header.value] === null ||
-                    doc._source[header.value] === undefined
-                ) {
+                if ((doc._source[header.value] === null || doc._source[header.value] === undefined) && (doc.fields[header.value] === null || doc.fields[header.value] === undefined)) {
                   row = " ";
+                } else if(doc.fields && doc.fields[header.value]) {
+                  row = '"' + doc.fields[header.value][0] + '"';
                 } else {
                   row = '"' + doc._source[header.value] + '"';
                 }
               } else {
-                if (
-                    doc._source[header.value] === null ||
-                    doc._source[header.value] === undefined
-                ) {
+                if ((doc._source[header.value] === null || doc._source[header.value] === undefined) && (doc.fields[header.value] === null || doc.fields[header.value] === undefined)) {
                   row += ",";
+                } else if(doc.fields && doc.fields[header.value]) {
+                  row += "," + '"' + doc.fields[header.value][0] + '"';
                 } else {
                   row += "," + '"' + doc._source[header.value] + '"';
                 }
@@ -587,6 +608,17 @@ function excelExport(req, res) {
       }
     }
   }
+  if(req.body.scripts && req.body.scripts.length) {
+    searchQry._source = true
+    searchQry.script_fields = {}
+    for(let script of req.body.scripts) {
+      searchQry.script_fields[script.field] = {
+        script: {
+          source: `${script.script}`
+        }
+      }
+    }
+  }
 
   const workbook = new ExcelJS.Workbook();
   const report = workbook.addWorksheet(label, {
@@ -609,10 +641,13 @@ function excelExport(req, res) {
       for (let doc of documents) {
         let row = {};
         for (let header of headers) {
-          if(!doc._source[header.value]) {
-            doc._source[header.value] = ""
+          let value = ""
+          if(doc.fields && doc.fields[header.value]) {
+            value = doc.fields[header.value][0]
+          } else if(doc._source[header.value]) {
+            value = doc._source[header.value]
           }
-          row[header.value] = doc._source[header.value]
+          row[header.value] = value
         }
         report.addRow(row);
       }

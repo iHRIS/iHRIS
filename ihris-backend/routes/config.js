@@ -1735,6 +1735,9 @@ router.get('/report/es/:report', (req, res) => {
                 if (!display) {
                     continue;
                 }
+                let script = element.extension.find((ext) => {
+                    return ext.url === 'script'
+                })?.valueString
                 let filter = element.extension.find((ext) => {
                     return ext.url === 'filter' && ext.valueBoolean === true
                 })
@@ -1767,7 +1770,7 @@ router.get('/report/es/:report', (req, res) => {
                 if(order) {
                     fieldOrder = order.valueInteger
                 }
-                reportData.fieldsDetails.push([displayName, esField, fieldOrder])
+                reportData.fieldsDetails.push([displayName, esField, fieldOrder, script])
             }
         }
         // populate data type of filters

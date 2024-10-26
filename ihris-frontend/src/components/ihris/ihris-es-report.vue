@@ -598,6 +598,16 @@ export default {
         }
         sorting.push(sort);
       }
+      let scripts = []
+      for(let field of this.reportData.fieldsDetails) {
+        if(field[3]) {
+          scripts.push({
+            field: field[1],
+            script: field[3]
+          })
+        }
+      }
+      body.scripts = scripts
       body.sort = sorting;
 
       fetch(url, {
@@ -618,6 +628,9 @@ export default {
                   let result = {};
                   for (let field in hit["_source"]) {
                     result[field] = hit["_source"][field];
+                  }
+                  for (let field in hit["fields"]) {
+                    result[field] = hit["fields"][field][0];
                   }
                   result.id = hit["_id"];
                   this.results.push(result);
@@ -655,6 +668,16 @@ export default {
           locationBasedConstraint: this.reportData.locationBasedConstraint,
         }
       };
+      let scripts = []
+      for(let field of this.reportData.fieldsDetails) {
+        if(field[3]) {
+          scripts.push({
+            field: field[1],
+            script: field[3]
+          })
+        }
+      }
+      body.scripts = scripts
       axios({
         url: url,
         method: "POST",

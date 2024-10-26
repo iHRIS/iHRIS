@@ -12,7 +12,6 @@
         max-height="500px"
         >
         <template v-slot:activator="{ on }">
-          {{ value }}
           <v-text-field
             v-model="displayValue"
             :label="$t(`App.fhir-resources-texts.${display}`)"
