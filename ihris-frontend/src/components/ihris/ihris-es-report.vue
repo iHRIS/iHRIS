@@ -263,6 +263,8 @@ export default {
         }
       });
     }
+    this.headers.push({ text: "SN", value: "sn" });
+    this.allHeaders.push({ text: "SN", value: "sn" });
     for (let field of this.reportData.fieldsDetails) {
       this.headers.push({ text: this.$t(`App.reports.${field[0]}`), value: field[1] });
       this.allHeaders.push({ text: this.$t(`App.reports.${field[0]}`), value: field[1] });
@@ -624,6 +626,7 @@ export default {
               this.results = [];
               if (data.hits.total.value > 0) {
                 this.link = data.link;
+                let counter = from+1
                 for (let hit of data.hits.hits) {
                   let result = {};
                   for (let field in hit["_source"]) {
@@ -633,6 +636,7 @@ export default {
                     result[field] = hit["fields"][field][0];
                   }
                   result.id = hit["_id"];
+                  result.sn = counter++
                   this.results.push(result);
                 }
               }
