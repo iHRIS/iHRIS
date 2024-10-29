@@ -1,0 +1,2658 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Technical documentation for iHRIS V5">
+      
+      
+        <meta name="author" content="IntraHealth International">
+      
+      
+        <link rel="canonical" href="https://github.com/iHRIS/iHRIS/user/database/">
+      
+      
+        <link rel="prev" href="../mhero/">
+      
+      
+        <link rel="next" href="../dashboard/">
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.5.42">
+    
+    
+      
+        <title>Database - iHRIS V5 Technical Documentation</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.0253249f.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="blue">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#database" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="iHRIS V5 Technical Documentation" class="md-header__button md-logo" aria-label="iHRIS V5 Technical Documentation" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            iHRIS V5 Technical Documentation
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Database
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+    
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/iHRIS" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81"/></svg>
+  </div>
+  <div class="md-source__repository">
+    iHRIS
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../.." class="md-tabs__link">
+          
+  
+  Home
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../dev/roadmap/" class="md-tabs__link">
+          
+  
+  Developer
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../admin/ansible_installation/" class="md-tabs__link">
+          
+  
+  Sysadmin
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../approach/" class="md-tabs__link">
+          
+  
+  User
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../faq/faq/" class="md-tabs__link">
+          
+  
+  FAQs
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../video/video/" class="md-tabs__link">
+          
+  
+  Video Tutorials
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="iHRIS V5 Technical Documentation" class="md-nav__button md-logo" aria-label="iHRIS V5 Technical Documentation" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    iHRIS V5 Technical Documentation
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/iHRIS" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81"/></svg>
+  </div>
+  <div class="md-source__repository">
+    iHRIS
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_1" id="__nav_1_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Home
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_1">
+            <span class="md-nav__icon md-icon"></span>
+            Home
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    iHRIS Documentation
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Developer
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            Developer
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../dev/roadmap/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    iHRIS Product Roadmap
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../dev/customization/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    iHRIS Customization
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../dev/fhir_http/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    API Documentation
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../dev/roles_and_tasks/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Permissions
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../dev/short_name/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Short-name Endpoint
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../dev/task_resolution/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Task Resolution
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../dev/todo/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    ToDo
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Sysadmin
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            Sysadmin
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../admin/ansible_installation/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    IHRIS Installation Using Ansible
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../admin/docker/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Running iHRIS with Docker
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../admin/manual_install/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Installing iHRIS Manually
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../admin/config/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Configuration options
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+      
+        
+        
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    User
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            User
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../approach/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    User Interface Guide: Navigating and Interacting with iHRIS
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../introduction/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Introduction
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../people/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    People
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../positions/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Positions
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../mhero/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    mHero
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    Database
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  <span class="md-ellipsis">
+    Database
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#cadres" class="md-nav__link">
+    <span class="md-ellipsis">
+      Cadres
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Cadres">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#add-cadre" class="md-nav__link">
+    <span class="md-ellipsis">
+      Add cadre
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#search-cadre" class="md-nav__link">
+    <span class="md-ellipsis">
+      Search cadre
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#classification" class="md-nav__link">
+    <span class="md-ellipsis">
+      Classification
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Classification">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#add-classification" class="md-nav__link">
+    <span class="md-ellipsis">
+      Add classification
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#search-classification" class="md-nav__link">
+    <span class="md-ellipsis">
+      Search classification
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#degree-course" class="md-nav__link">
+    <span class="md-ellipsis">
+      Degree/ Course
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Degree/ Course">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#add-degree" class="md-nav__link">
+    <span class="md-ellipsis">
+      Add degree
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#search-degree" class="md-nav__link">
+    <span class="md-ellipsis">
+      Search degree
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#disciplinary-action-type" class="md-nav__link">
+    <span class="md-ellipsis">
+      Disciplinary Action Type
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Disciplinary Action Type">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#add-disciplinary-action-type" class="md-nav__link">
+    <span class="md-ellipsis">
+      Add disciplinary action type
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#search-disciplinary-action-type" class="md-nav__link">
+    <span class="md-ellipsis">
+      Search disciplinary action type
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#education-institution" class="md-nav__link">
+    <span class="md-ellipsis">
+      Education Institution
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Education Institution">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#add-education-institution" class="md-nav__link">
+    <span class="md-ellipsis">
+      Add Education Institution
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#search-education-institution" class="md-nav__link">
+    <span class="md-ellipsis">
+      Search Education Institution
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#education-level" class="md-nav__link">
+    <span class="md-ellipsis">
+      Education Level
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Education Level">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#add-education-level" class="md-nav__link">
+    <span class="md-ellipsis">
+      Add Education Level
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#search-education-level" class="md-nav__link">
+    <span class="md-ellipsis">
+      Search Education Level
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#education-major" class="md-nav__link">
+    <span class="md-ellipsis">
+      Education Major
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Education Major">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#add-education-major" class="md-nav__link">
+    <span class="md-ellipsis">
+      Add Education Major
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#search-education-major" class="md-nav__link">
+    <span class="md-ellipsis">
+      Search Education Major
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#employment-status" class="md-nav__link">
+    <span class="md-ellipsis">
+      Employment Status
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Employment Status">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#add-employment-status" class="md-nav__link">
+    <span class="md-ellipsis">
+      Add Employment Status
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#search-employment-status" class="md-nav__link">
+    <span class="md-ellipsis">
+      Search Employment Status
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#funds-source" class="md-nav__link">
+    <span class="md-ellipsis">
+      Funds Source
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Funds Source">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#add-funds-source" class="md-nav__link">
+    <span class="md-ellipsis">
+      Add Funds Source
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#search-funds-source" class="md-nav__link">
+    <span class="md-ellipsis">
+      Search Funds Source
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#identifier-types" class="md-nav__link">
+    <span class="md-ellipsis">
+      Identifier Types
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Identifier Types">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#add-identifier-types" class="md-nav__link">
+    <span class="md-ellipsis">
+      Add Identifier Types
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#search-identifier-types" class="md-nav__link">
+    <span class="md-ellipsis">
+      Search Identifier Types
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#in-service-training" class="md-nav__link">
+    <span class="md-ellipsis">
+      In-Service Training
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="In-Service Training">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#add-in-service-training" class="md-nav__link">
+    <span class="md-ellipsis">
+      Add In Service Training
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#search-in-service-training" class="md-nav__link">
+    <span class="md-ellipsis">
+      Search In Service Training
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#job-titles" class="md-nav__link">
+    <span class="md-ellipsis">
+      Job Titles
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Job Titles">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#add-job-title" class="md-nav__link">
+    <span class="md-ellipsis">
+      Add Job Title
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#search-job-title" class="md-nav__link">
+    <span class="md-ellipsis">
+      Search Job Title
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#job-types" class="md-nav__link">
+    <span class="md-ellipsis">
+      Job Types
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Job Types">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#add-job-type" class="md-nav__link">
+    <span class="md-ellipsis">
+      Add Job Type
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#search-job-type" class="md-nav__link">
+    <span class="md-ellipsis">
+      Search Job Type
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#leave-types" class="md-nav__link">
+    <span class="md-ellipsis">
+      Leave Types
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Leave Types">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#add-leave-type" class="md-nav__link">
+    <span class="md-ellipsis">
+      Add Leave Type
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#search-leave-type" class="md-nav__link">
+    <span class="md-ellipsis">
+      Search Leave Type
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#pay-frequency" class="md-nav__link">
+    <span class="md-ellipsis">
+      Pay Frequency
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Pay Frequency">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#add-pay-frequency" class="md-nav__link">
+    <span class="md-ellipsis">
+      Add Pay Frequency
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#search-pay-frequency" class="md-nav__link">
+    <span class="md-ellipsis">
+      Search Pay Frequency
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#reasons-for-changedeparture" class="md-nav__link">
+    <span class="md-ellipsis">
+      Reasons for Change/Departure
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Reasons for Change/Departure">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#add-reason-for-changedeparture" class="md-nav__link">
+    <span class="md-ellipsis">
+      Add Reason for Change/Departure
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#search-reason-for-changedeparture" class="md-nav__link">
+    <span class="md-ellipsis">
+      Search Reason for Change/Departure
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#salary-grades" class="md-nav__link">
+    <span class="md-ellipsis">
+      Salary Grades
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Salary Grades">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#add-salary-grade" class="md-nav__link">
+    <span class="md-ellipsis">
+      Add Salary Grade
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#search-salary-grade" class="md-nav__link">
+    <span class="md-ellipsis">
+      Search Salary Grade
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../dashboard/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Dashboard
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../locations/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Locations
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../audit_logs/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Audit Logs
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../reports/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Reports
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../system_users/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    System Users
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ihris_apps/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    iHRIS Apps
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    FAQs
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            FAQs
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../faq/faq/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Frequently Asked Questions
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Video Tutorials
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            Video Tutorials
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../video/video/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Video Tutorials
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#cadres" class="md-nav__link">
+    <span class="md-ellipsis">
+      Cadres
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Cadres">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#add-cadre" class="md-nav__link">
+    <span class="md-ellipsis">
+      Add cadre
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#search-cadre" class="md-nav__link">
+    <span class="md-ellipsis">
+      Search cadre
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#classification" class="md-nav__link">
+    <span class="md-ellipsis">
+      Classification
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Classification">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#add-classification" class="md-nav__link">
+    <span class="md-ellipsis">
+      Add classification
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#search-classification" class="md-nav__link">
+    <span class="md-ellipsis">
+      Search classification
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#degree-course" class="md-nav__link">
+    <span class="md-ellipsis">
+      Degree/ Course
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Degree/ Course">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#add-degree" class="md-nav__link">
+    <span class="md-ellipsis">
+      Add degree
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#search-degree" class="md-nav__link">
+    <span class="md-ellipsis">
+      Search degree
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#disciplinary-action-type" class="md-nav__link">
+    <span class="md-ellipsis">
+      Disciplinary Action Type
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Disciplinary Action Type">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#add-disciplinary-action-type" class="md-nav__link">
+    <span class="md-ellipsis">
+      Add disciplinary action type
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#search-disciplinary-action-type" class="md-nav__link">
+    <span class="md-ellipsis">
+      Search disciplinary action type
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#education-institution" class="md-nav__link">
+    <span class="md-ellipsis">
+      Education Institution
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Education Institution">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#add-education-institution" class="md-nav__link">
+    <span class="md-ellipsis">
+      Add Education Institution
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#search-education-institution" class="md-nav__link">
+    <span class="md-ellipsis">
+      Search Education Institution
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#education-level" class="md-nav__link">
+    <span class="md-ellipsis">
+      Education Level
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Education Level">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#add-education-level" class="md-nav__link">
+    <span class="md-ellipsis">
+      Add Education Level
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#search-education-level" class="md-nav__link">
+    <span class="md-ellipsis">
+      Search Education Level
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#education-major" class="md-nav__link">
+    <span class="md-ellipsis">
+      Education Major
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Education Major">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#add-education-major" class="md-nav__link">
+    <span class="md-ellipsis">
+      Add Education Major
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#search-education-major" class="md-nav__link">
+    <span class="md-ellipsis">
+      Search Education Major
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#employment-status" class="md-nav__link">
+    <span class="md-ellipsis">
+      Employment Status
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Employment Status">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#add-employment-status" class="md-nav__link">
+    <span class="md-ellipsis">
+      Add Employment Status
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#search-employment-status" class="md-nav__link">
+    <span class="md-ellipsis">
+      Search Employment Status
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#funds-source" class="md-nav__link">
+    <span class="md-ellipsis">
+      Funds Source
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Funds Source">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#add-funds-source" class="md-nav__link">
+    <span class="md-ellipsis">
+      Add Funds Source
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#search-funds-source" class="md-nav__link">
+    <span class="md-ellipsis">
+      Search Funds Source
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#identifier-types" class="md-nav__link">
+    <span class="md-ellipsis">
+      Identifier Types
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Identifier Types">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#add-identifier-types" class="md-nav__link">
+    <span class="md-ellipsis">
+      Add Identifier Types
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#search-identifier-types" class="md-nav__link">
+    <span class="md-ellipsis">
+      Search Identifier Types
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#in-service-training" class="md-nav__link">
+    <span class="md-ellipsis">
+      In-Service Training
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="In-Service Training">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#add-in-service-training" class="md-nav__link">
+    <span class="md-ellipsis">
+      Add In Service Training
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#search-in-service-training" class="md-nav__link">
+    <span class="md-ellipsis">
+      Search In Service Training
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#job-titles" class="md-nav__link">
+    <span class="md-ellipsis">
+      Job Titles
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Job Titles">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#add-job-title" class="md-nav__link">
+    <span class="md-ellipsis">
+      Add Job Title
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#search-job-title" class="md-nav__link">
+    <span class="md-ellipsis">
+      Search Job Title
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#job-types" class="md-nav__link">
+    <span class="md-ellipsis">
+      Job Types
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Job Types">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#add-job-type" class="md-nav__link">
+    <span class="md-ellipsis">
+      Add Job Type
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#search-job-type" class="md-nav__link">
+    <span class="md-ellipsis">
+      Search Job Type
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#leave-types" class="md-nav__link">
+    <span class="md-ellipsis">
+      Leave Types
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Leave Types">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#add-leave-type" class="md-nav__link">
+    <span class="md-ellipsis">
+      Add Leave Type
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#search-leave-type" class="md-nav__link">
+    <span class="md-ellipsis">
+      Search Leave Type
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#pay-frequency" class="md-nav__link">
+    <span class="md-ellipsis">
+      Pay Frequency
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Pay Frequency">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#add-pay-frequency" class="md-nav__link">
+    <span class="md-ellipsis">
+      Add Pay Frequency
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#search-pay-frequency" class="md-nav__link">
+    <span class="md-ellipsis">
+      Search Pay Frequency
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#reasons-for-changedeparture" class="md-nav__link">
+    <span class="md-ellipsis">
+      Reasons for Change/Departure
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Reasons for Change/Departure">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#add-reason-for-changedeparture" class="md-nav__link">
+    <span class="md-ellipsis">
+      Add Reason for Change/Departure
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#search-reason-for-changedeparture" class="md-nav__link">
+    <span class="md-ellipsis">
+      Search Reason for Change/Departure
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#salary-grades" class="md-nav__link">
+    <span class="md-ellipsis">
+      Salary Grades
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Salary Grades">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#add-salary-grade" class="md-nav__link">
+    <span class="md-ellipsis">
+      Add Salary Grade
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#search-salary-grade" class="md-nav__link">
+    <span class="md-ellipsis">
+      Search Salary Grade
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+  
+  
+
+
+<div><h1 id="database">Database</h1>
+<p>The database is the data setup for iHRIS v5.</p>
+<p>It allows iHRIS users to generate various data settings which will be used globally in the system. </p>
+<h2 id="cadres">Cadres</h2>
+<p>A cadre refers to individuals who are typically organized and equipped to perform specific tasks or roles within the healthcare system. Examples of Cadres include: Community Health Staff, Pharmacists, Lab Technicians etc.</p>
+<h3 id="add-cadre">Add cadre</h3>
+<p>To add a cadre, click the blue button **Add Cadre **</p>
+<p>Capture the name of the cadre to be displayed, assign a specific code and give a definition to the cadre, then save the details captured.</p>
+<p><img alt="Alt text" src="../../img/add_cadre.PNG" title="Add Cadre"></p>
+<p><img alt="Alt text" src="../../img/add_cadre.mp4" title="Add Cadre"></p>
+<h3 id="search-cadre">Search cadre</h3>
+<p>You can search the various cadres captured in the system under this feature.</p>
+<p>You can search by <strong>code</strong> or by <strong>display</strong></p>
+<p><img alt="Alt text" src="../../img/cadre.PNG" title="Search Cadre"></p>
+<p>Your results shall be displayed as above</p>
+<h2 id="classification">Classification</h2>
+<p>A classification refers to a category of the practitioners  with similar characteristics captured in the system. Classification can include categories such as support staff, technical staff etc. </p>
+<h3 id="add-classification">Add classification</h3>
+<p>To add a classification, click the blue button **Add Classification **</p>
+<p>Capture the name of the classification to be displayed, assign a specific code and give a definition to the classification.</p>
+<p><img alt="Alt text" src="../../img/add_classification.PNG" title="Add Classification"></p>
+<h3 id="search-classification">Search classification</h3>
+<p>You can search the various classifications captured in the system under this feature.</p>
+<p>You can search by <strong>code</strong> or by <strong>display</strong></p>
+<p><img alt="Alt text" src="../../img/classification.PNG" title="Search Classification"></p>
+<p>Your resu
+\lts shall be displayed as above</p>
+<h2 id="degree-course">Degree/ Course</h2>
+<p>In iHRIS a degree is an academic award conferred by an educational institution, such as a university or college, upon the completion of a program of study. It signifies the attainment of a certain level of knowledge, skills, and expertise in a specific field. Examples of academic degrees include Bachelor's, Master's, and Doctorate degrees.</p>
+<h3 id="add-degree">Add degree</h3>
+<p>To add a degree, click the blue button **Add Degree **</p>
+<p>Capture the name of the degree to be displayed, assign a specific code and give a definition to the degree, then save the details captured.</p>
+<p><img alt="Alt text" src="../../img/add_degree.PNG" title="Add Degree"></p>
+<h3 id="search-degree">Search degree</h3>
+<p>You can search the various degrees captured in the system under this feature.</p>
+<p>You can search by <strong>code</strong> or by <strong>display</strong></p>
+<p><img alt="Alt text" src="../../img/education_level.PNG" title="Search Degree"></p>
+<p>Your results shall be displayed as above</p>
+<h2 id="disciplinary-action-type">Disciplinary Action Type</h2>
+<p>A disciplinary action type refers to various categories of actions an employee can face in the disciplinary process</p>
+<h3 id="add-disciplinary-action-type">Add disciplinary action type</h3>
+<p>To add a disciplinary action type, click the blue button <strong>Add Disciplinary Action Type</strong></p>
+<p>Capture the name of the disciplinary action type to be displayed, assign a specific code and give a definition to the disciplinary action type, then save the details captured.</p>
+<p><img alt="Alt text" src="../../img/disciplinary.PNG" title="Add Disciplinary action type"></p>
+<p><img alt="Alt text" src="../../img/add_discipline.PNG" title="Add Disciplinary action type"></p>
+<h3 id="search-disciplinary-action-type">Search disciplinary action type</h3>
+<p>You can search the various disciplinary action types captured in the system under this feature.</p>
+<p>You can search by <strong>code</strong> or by <strong>display</strong></p>
+<p><img alt="Alt text" src="../../img/disciplinary_action.PNG" title="Search Disciplinary action type"></p>
+<p>Your results shall be displayed as above</p>
+<h2 id="education-institution">Education Institution</h2>
+<p>A Education Institution refers to an organization or establishment that provides education and training related to healthcare, medical sciences, and health-related fields. These institutions play a crucial role in preparing individuals to pursue careers in healthcare, acquire medical knowledge, and develop skills necessary for providing quality patient care. These invstitutions are specifically referred to in regards to providing in service training to health workers in iHRIS v5.</p>
+<h3 id="add-education-institution">Add Education Institution</h3>
+<p>To add a Education Institution, click the blue button **Add Institution **</p>
+<p>Capture the name of the Education Institution to be displayed, assign a specific code and give a definition to the Education Institution, then save the details captured.</p>
+<p><img alt="Alt text" src="../../img/add_institution.PNG" title="Add Education Institution"></p>
+<h3 id="search-education-institution">Search Education Institution</h3>
+<p>You can search the various Education Institutions captured in the system under this feature.</p>
+<p>You can search by <strong>code</strong> or by <strong>display</strong></p>
+<p><img alt="Alt text" src="../../img/institution.PNG" title="Search Education Institution"></p>
+<p>Your results shall be displayed as above</p>
+<h2 id="education-level">Education Level</h2>
+<p>A Education Level refers to the various categories of education qualifications. Examples are : Certificate, Diploma etc</p>
+<h3 id="add-education-level">Add Education Level</h3>
+<p>To add a Education Level, click the blue button **Add Education Level **</p>
+<p>Capture the name of the Education Level to be displayed, assign a specific code and give a definition to the Education Level, then save the details captured.</p>
+<p><img alt="Alt text" src="../../img/add_level.PNG" title="Add Education Level"></p>
+<h3 id="search-education-level">Search Education Level</h3>
+<p>You can search the various Education Levels captured in the system under this feature.</p>
+<p>You can search by <strong>code</strong> or by <strong>display</strong></p>
+<p><img alt="Alt text" src="../../img/education_level.PNG" title="Search Education Level"></p>
+<p>Your results shall be displayed as above</p>
+<h2 id="education-major">Education Major</h2>
+<p>A Education Major refers to various specialization undertaken by health workers in their specific career paths. </p>
+<h3 id="add-education-major">Add Education Major</h3>
+<p>To add a Education Major, click the blue button **Add Education Major **</p>
+<p>Capture the name of the Education Major to be displayed, assign a specific code and give a definition to the Education Major, then save the details captured.</p>
+<p><img alt="Alt text" src="../../img/add_major.PNG" title="Add Education Major"></p>
+<h3 id="search-education-major">Search Education Major</h3>
+<p>You can search the various Education Majors captured in the system under this feature.</p>
+<p>You can search by <strong>code</strong> or by <strong>display</strong></p>
+<p><img alt="Alt text" src="../../img/education_major.PNG" title="Search Education Major"></p>
+<p>Your results shall be displayed as above</p>
+<h2 id="employment-status">Employment Status</h2>
+<p>Employment Status refers to an employee's current emploeyment terms in relation to their work or job in the facility/ organizatione.g. full time, contract</p>
+<h3 id="add-employment-status">Add Employment Status</h3>
+<p>To add a Employment Status, click the blue button **Add Employment Status **</p>
+<p>Capture the name of the Employment Status to be displayed, assign a specific code and give a definition to the Employment Status, then save the details captured.</p>
+<p><img alt="Alt text" src="../../img/add_employment_status.PNG" title="Add Employment Status"></p>
+<h3 id="search-employment-status">Search Employment Status</h3>
+<p>You can search the various Employment Statuss captured in the system under this feature.</p>
+<p>You can search by <strong>code</strong> or by <strong>display</strong></p>
+<p><img alt="Alt text" src="../../img/employment_status.PNG" title="Search Employment Status"></p>
+<p>Your results shall be displayed as above</p>
+<h2 id="funds-source">Funds Source</h2>
+<p>A Funds Source refers to the source of funds which are used to pay an employee in a facility or organization.</p>
+<h3 id="add-funds-source">Add Funds Source</h3>
+<p>To add a Funds Source, click the blue button **Add Funds Source **</p>
+<p>Capture the name of the Funds Source to be displayed, assign a specific code and give a definition to the Funds Source, then save the details captured.</p>
+<p><img alt="Alt text" src="../../img/add_source.PNG" title="Add Funds Source"></p>
+<h3 id="search-funds-source">Search Funds Source</h3>
+<p>You can search the various Funds Sources captured in the system under this feature.</p>
+<p>You can search by <strong>code</strong> or by <strong>display</strong></p>
+<p><img alt="Alt text" src="../../img/salary_source.PNG" title="Search Funds Source"></p>
+<p>Your results shall be displayed as above</p>
+<h2 id="identifier-types">Identifier Types</h2>
+<p>Identifier Types refer to various unique identifiers which can be used to uniquely identify an employee. Examples include: Driving lisence number, employee number, ID number, passport number etc.</p>
+<h3 id="add-identifier-types">Add Identifier Types</h3>
+<p>To add Identifier Types, click the blue button **Add Identifier Types **</p>
+<p>Capture the name of the Identifier Types to be displayed, assign a specific code and give a definition to the Identifier Types, then save the details captured.</p>
+<p><img alt="Alt text" src="../../img/add_identifier.PNG" title="Add Identifier Types"></p>
+<h3 id="search-identifier-types">Search Identifier Types</h3>
+<p>You can search the various Identifier Typess captured in the system under this feature.</p>
+<p>You can search by <strong>code</strong> or by <strong>display</strong></p>
+<p><img alt="Alt text" src="../../img/identifiers.PNG" title="Search Identifier Types"></p>
+<p>Your results shall be displayed as above</p>
+<h2 id="in-service-training">In-Service Training</h2>
+<p>In Service Training refers to training undertaken by employees during their employment. These may range from short term courses to full certifications which may be undertaken at any time during an employee's engagement period.</p>
+<h3 id="add-in-service-training">Add In Service Training</h3>
+<p>To add In Service Training, click the blue button <strong>Add In Service Training</strong></p>
+<p>Capture the name of the In Service Training to be displayed, assign a specific code and give a definition to the In Service Training, then save the details captured.</p>
+<p><img alt="Alt text" src="../../img/add_training.PNG" title="Add In Service Training"></p>
+<h3 id="search-in-service-training">Search In Service Training</h3>
+<p>You can search the various In Service Trainings captured in the system under this feature.</p>
+<p>You can search by <strong>code</strong> or by <strong>display</strong></p>
+<p><img alt="Alt text" src="../../img/training.PNG" title="Search In Service Training"></p>
+<p>Your results shall be displayed as above</p>
+<h2 id="job-titles">Job Titles</h2>
+<p>A Job Title refers to  a specific name or label given to a particular position or role within an organization that describes the nature of the work, responsibilities, and level of authority associated with that role. e.g. Registered Nurse I</p>
+<h3 id="add-job-title">Add Job Title</h3>
+<p>To add a Job Title, click the blue button <strong>Add Job Title</strong></p>
+<p>Capture the name of the Job Title to be displayed, assign a specific code and give a definition to the Job Title, then save the details captured.</p>
+<p><img alt="Alt text" src="../../img/add_job_title.PNG" title="Add Job Title"></p>
+<h3 id="search-job-title">Search Job Title</h3>
+<p>You can search the various Job Titles captured in the system under this feature.</p>
+<p>You can search by <strong>code</strong> or by <strong>display</strong></p>
+<p><img alt="Alt text" src="../../img/job_titles.PNG" title="Search Job Title"></p>
+<p>Your results shall be displayed as above</p>
+<h2 id="job-types">Job Types</h2>
+<p>A Job Type refers to the different categories or classifications that describe the nature of changes or transitions that occur within an employee's role or position in an organization. These categories help categorize and communicate the reasons for changes in an employee's job status.</p>
+<h3 id="add-job-type">Add Job Type</h3>
+<p>To add a Job Type, click the blue button <strong>Add Job Type</strong></p>
+<p>Capture the name of the Job Type to be displayed, assign a specific code and give a definition to the Job Type, then save the details captured.</p>
+<p><img alt="Alt text" src="../../img/add_job_type.PNG" title="Add Job Type"></p>
+<h3 id="search-job-type">Search Job Type</h3>
+<p>You can search the various Job Types captured in the system under this feature.</p>
+<p>You can search by <strong>code</strong> or by <strong>display</strong></p>
+<p><img alt="Alt text" src="../../img/job_code.PNG" title="Search Job Type"></p>
+<p>Your results shall be displayed as above</p>
+<h2 id="leave-types">Leave Types</h2>
+<p>Leave types refer to the various categories of authorized time off that employees can take from work for specific reasons. Each type of leave is associated with different circumstances and policies, allowing employees to manage their work-life balance, attend to personal needs, and address health-related issues. Here are some examples of leave types: annual leave, sick leave, maternity leave</p>
+<h3 id="add-leave-type">Add Leave Type</h3>
+<p>To add a Leave Type, click the blue button <strong>Add Leave Type</strong></p>
+<p>Capture the name of the Leave Type to be displayed, assign a specific code and give a definition to the Leave Type, then save the details captured.</p>
+<p><img alt="Alt text" src="../../img/add_leave_type.PNG" title="Add Leave Type"></p>
+<h3 id="search-leave-type">Search Leave Type</h3>
+<p>You can search the various Leave Types captured in the system under this feature.</p>
+<p>You can search by <strong>code</strong> or by <strong>display</strong></p>
+<p><img alt="Alt text" src="../../img/leave_types.PNG" title="Search Leave Type"></p>
+<p>Your results shall be displayed as above</p>
+<h2 id="pay-frequency">Pay Frequency</h2>
+<p>Pay frequency, also known as pay period or payroll frequency, refers to the regular interval at which employees receive their compensation or salary from their employer. This interval is determined by the organization's payroll policies and can vary based on industry standards, company practices, and legal requirements.</p>
+<h3 id="add-pay-frequency">Add Pay Frequency</h3>
+<p>To add a Pay Frequency, click the blue button **Add Pay Frequency **</p>
+<p>Capture the name of the Pay Frequency to be displayed, assign a specific code and give a definition to the Pay Frequency, then save the details captured.</p>
+<p><img alt="Alt text" src="../../img/add_pay_frequency.PNG" title="Add Pay Frequency"></p>
+<h3 id="search-pay-frequency">Search Pay Frequency</h3>
+<p>You can search the various Pay Frequencies captured in the system under this feature.</p>
+<p>You can search by <strong>code</strong> or by <strong>display</strong></p>
+<p><img alt="Alt text" src="../../img/pay_frequency.PNG" title="Search Pay Frequency"></p>
+<p>Your results shall be displayed as above</p>
+<h2 id="reasons-for-changedeparture">Reasons for Change/Departure</h2>
+<p>A Reason for Change/Departure refers to the reason why the employee's record is ammended or changed.
+Examples of Reasons for Change/Departure  include: Transfer, Retirement.</p>
+<h3 id="add-reason-for-changedeparture">Add Reason for Change/Departure</h3>
+<p>To add a Reason for Change/Departure, click the blue button **Add Reason for Change/Departure **</p>
+<p>Capture the name of the Reason for Change/Departure to be displayed, assign a specific code and give a definition to the Reason for Change/Departure, then save the details captured.</p>
+<p><img alt="Alt text" src="../../img/add_departure_reason.PNG" title="Add Reason for Change/Departure"></p>
+<h3 id="search-reason-for-changedeparture">Search Reason for Change/Departure</h3>
+<p>You can search the various Reason for Change/Departures captured in the system under this feature.</p>
+<p>You can search by <strong>code</strong> or by <strong>display</strong></p>
+<p><img alt="Alt text" src="../../img/change_departure_reason.PNG" title="Search Reason for Change/Departure"></p>
+<p>Your results shall be displayed as above</p>
+<h2 id="salary-grades">Salary Grades</h2>
+<p>A salary grade, also known as a pay grade, is a system used by organizations to categorize and establish compensation levels for different jobs or positions within the company. Salary grades help streamline the process of determining salaries, making compensation structures more consistent and transparent.</p>
+<h3 id="add-salary-grade">Add Salary Grade</h3>
+<p>To add a Salary Grade, click the blue button **Add Salary Grade **</p>
+<p>Capture the name of the Salary Grade to be displayed, assign a specific code and give a definition to the Salary Grade, then save the details captured.</p>
+<p><img alt="Alt text" src="../../img/add_salary_grade.PNG" title="Add Salary Grade"></p>
+<h3 id="search-salary-grade">Search Salary Grade</h3>
+<p>You can search the various Salary Grades captured in the system under this feature.</p>
+<p>You can search by <strong>code</strong> or by <strong>display</strong></p>
+<p><img alt="Alt text" src="../../img/salary_grade.PNG" title="Search Salary Grade"></p>
+<p>Your results shall be displayed as above</p></div>
+
+
+
+
+
+
+
+  
+    
+  
+  
+
+
+  <aside class="md-source-file">
+    
+      
+  <span class="md-source-file__fact">
+    <span class="md-icon" title="Last update">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
+    </span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date">October 29, 2024</span>
+  </span>
+
+    
+    
+    
+    
+  </aside>
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Copyright &copy; 2020 IntraHealth International
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+        <div class="md-social">
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://github.com/iHRIS/iHRIS" target="_blank" rel="noopener" title="github.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8M97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.tabs"], "search": "../../assets/javascripts/workers/search.6ce7567c.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.83f73b43.min.js"></script>
+      
+    
+  </body>
+</html>
