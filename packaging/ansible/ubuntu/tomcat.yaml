@@ -1,5 +1,5 @@
 ---
-- name: Installing Apache tomcat{{tomcat_v_num}}
+- name: Installing Apache tomcat {{tomcat_v_num}}
   hosts: all
   tasks:
     - name: Add the OS specific variables

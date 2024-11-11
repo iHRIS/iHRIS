@@ -2,6 +2,9 @@
 - name: Install Elasticsearch
   hosts: localhost
   become: yes
+  vars_files:
+    - ./vars/index.yaml
+
   tasks:
     - name: Ensure wget is installed
       apt:
@@ -34,6 +37,30 @@
         name: elasticsearch
         state: present
 
+    - name: Install Kibana
+      apt:
+        name: kibana
+        state: present
+
+    - name: Getting hostname
+      command: hostname
+      register: hostname
+      ignore_errors: yes
+
+    - name: Install configuration file for elasticsearch
+      template:
+        src: elasticsearch.yml.j2
+        dest: /etc/elasticsearch/elasticsearch.yml
+        mode: 0755
+        force: yes
+
+    - name: Install configuration file for kibana
+      template:
+        src: kibana.yml.j2
+        dest: /etc/kibana/kibana.yml
+        mode: 0755
+        force: yes
+
     - name: Reload systemd manager configuration
       ansible.builtin.systemd:
         daemon_reload: yes
@@ -47,3 +74,27 @@
       ansible.builtin.systemd:
         name: elasticsearch
         state: started
+
+    - name: Enable Kibana service
+      ansible.builtin.systemd:
+        name: kibana
+        enabled: yes
+
+    - name: Start Kibana service
+      ansible.builtin.systemd:
+        name: kibana
+        state: started
+
+    - name: Setting Elasticsearch password using elasticsearch-reset-password script
+      shell: |
+        echo "{{ es_password }}\n{{ es_password }}\n" | /usr/share/elasticsearch/bin/elasticsearch-reset-password -u {{ es_user }} -b -i -f -s
+      register: reset_result
+      failed_when: "'ERROR' in reset_result.stderr"
+      ignore_errors: no
+
+    - name: Setting Kibana password using elasticsearch-reset-password script
+      shell: |
+        echo "{{ kb_password }}\n{{ kb_password }}\n" | /usr/share/elasticsearch/bin/elasticsearch-reset-password -u {{ kb_user }} -b -i -f -s
+      register: reset_result
+      failed_when: "'ERROR' in reset_result.stderr"
+      ignore_errors: no

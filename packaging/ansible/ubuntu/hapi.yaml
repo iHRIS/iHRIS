@@ -32,7 +32,7 @@
 
     - name: install application.yaml template for hapi jpa Server
       template:
-        src: ../application.yaml
+        src: application.yaml.j2
         dest: /tmp/hapi-fhir-jpaserver-starter-v{{hapi_ver}}/src/main/resources/application.yaml
         owner: "tomcat"
         group: "tomcat"
