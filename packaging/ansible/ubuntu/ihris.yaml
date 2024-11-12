@@ -91,6 +91,10 @@
       ansible.builtin.set_fact:
         fhirbaseindex: "{{ configfile.parameter | ansible.utils.index_of('eq', 'fhir:base', 'name')}}"
 
+    - name: Setting elasticsearch user index
+      ansible.builtin.set_fact:
+        esuserindex: "{{ configfile.parameter | ansible.utils.index_of('eq', 'elasticsearch:password', 'name')}}"
+
     - name: Updating configuration file
       ansible.utils.update_fact:
         updates:
@@ -98,8 +102,10 @@
           value: /var/lib/iHRIS/ihris-backend/{{site}}
         - path: configfile.parameter[{{fhirbaseindex}}].valueString
           value: http://localhost:8080/fhir
+        - path: configfile.parameter[{{esuserindex}}].valueString
+          value: {{ihriselastic}}
       register: updated
-    
+
     - name: Saving configuration file
       copy: content="{{ updated.configfile | to_nice_json }}" dest="/var/lib/iHRIS/ihris-backend/{{site}}/config/baseConfig.json"
 

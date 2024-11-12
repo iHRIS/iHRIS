@@ -16,3 +16,9 @@ maven_v_num: 3
 
 #hapi
 hapi_ver: 6.10.1
+
+#ELK
+es_user: elastic
+es_password: ihriselastic
+kb_user: kibana_system
+kb_password: ihriskibana

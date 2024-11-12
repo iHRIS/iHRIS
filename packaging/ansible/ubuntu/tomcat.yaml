@@ -1,5 +1,5 @@
 ---
-- name: Installing Apache tomcat{{tomcat_v_num}}
+- name: Installing Apache tomcat {{tomcat_v_num}}
   hosts: all
   tasks:
     - name: Add the OS specific variables
@@ -8,7 +8,7 @@
 
     - name: Download JDK 17
       get_url:
-        url: "https://download.oracle.com/java/{{java_ver}}/latest/jdk-{{java_ver}}_linux-x64_bin.deb"
+        url: "https://download.oracle.com/java/{{java_ver}}/archive/jdk-{{java_ver}}_linux-x64_bin.deb"
         dest: "/tmp/jdk-{{java_ver}}.deb"
 
     - name: Installing JDK {{java_ver}}
