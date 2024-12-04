@@ -198,7 +198,7 @@ export default {
               for (let field of this.fields) {
                 let fieldDisplay = this.$fhirpath.evaluate( entry.resource, field[1] );
                  let data = await this.$fhirutils.lookup( fieldDisplay[0], field[2] )
-                 const regex = /^\d{4}-\d{2}-\d{2}$/;
+                 const regex = /^\d{4}-\d{2}-\d{2}(T\d{2}:\d{2}:\d{2}\.\d{3}Z)?$/; // Allows for both YYYY-MM-DD and YYYY-MM-DDTHH:MM:SS.sssZ formats
                  if (this.dateFormat&&regex.test(fieldDisplay[0])) {
                    result[field[1]] = this.$moment(fieldDisplay[0]).format(this.dateFormat)
                  }else {

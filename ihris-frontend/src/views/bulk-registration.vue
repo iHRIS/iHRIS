@@ -22,19 +22,26 @@
           </div>
         </v-card-text>
         <v-card-text v-if="!hasError&&loading" :disabled="loading" align="center">
-          <v-progress-circular
-              v-if="loading"
-              :rotate="360"
-              :size="100"
-              :value="progress"
-              :width="15"
-              class="mb-8"
-              color="green"
-          >
-            {{ progress }}
-          </v-progress-circular>
-          <h1 v-if="progress===100">{{ $t(`App.hardcoded-texts.Done Uploading Health Workers' Information`) }}</h1>
-          <h1 v-else>{{ $t('App.hardcoded-texts.Uploading') }}...</h1>
+<!--          <v-progress-circular-->
+<!--              v-if="loading"-->
+<!--              :rotate="360"-->
+<!--              :size="100"-->
+<!--              :value="progress"-->
+<!--              :width="15"-->
+<!--              class="mb-8"-->
+<!--              color="green"-->
+<!--          >-->
+<!--            {{ progress }}-->
+<!--          </v-progress-circular>-->
+          <v-col cols="6" class="my-12">
+            <v-progress-linear
+                color="primary"
+                indeterminate
+                rounded
+                height="6"
+            ></v-progress-linear>
+          </v-col>
+          <h1>{{ $t(`App.hardcoded-texts.Uploading`) }}....</h1>
         </v-card-text>
         <v-card-text v-if="hasError" :disabled="loading">
           <v-col style="text-align-last: center">
@@ -78,11 +85,9 @@
     </v-dialog>
   </v-row>
 </template>
-
 <script>
 import XLSX from "xlsx";
 import axios from 'axios'
-
 export default {
   props: {
     beforeUpload: Function, // eslint-disable-line
@@ -143,7 +148,6 @@ export default {
         );
         return false;
       }
-
       this.upload(rawFile);
     },
     upload(rawFile) {
@@ -164,7 +168,6 @@ export default {
         reader.onload = (e) => {
           const data = e.target.result;
           this.progress = Math.round((e.loaded / e.total) * 100)
-          console.log("loading progress" + this.progress)
           const workbook = XLSX.read(data, {type: "array", cellDates: true, dateNF: 'yyyy/mm/dd;@'});
           const finalData = Object.keys(workbook.Sheets).map((name) => ({data: XLSX.utils.sheet_to_json(workbook.Sheets[name])}))
           axios.post(`/upload/bulkRegistration`, finalData[0].data).then((response) => {
@@ -175,20 +178,10 @@ export default {
                 this.$router.push('/resource/search/practitioner')
               }, 2000);
             }else if(!response.data.isValid){
-              console.log(response.data.message)
-              if(response.data.rows.length > 5){
-                this.error = null
-                this.hasError = true
-                this.snackbar = true
-                let indexes = response.data.rows.map(i=>i+2)
-                this.message = `The uploaded document contains some incorrect data, Please check you're data at row ${indexes.join()}. `
-              }else{
-                this.error = response.data.message
-                this.hasError = true
-                this.message = `The uploaded document contains some incorrect data, please check you're data at `
-                this.snackbar = true
-              }
-
+              this.error = response.data.message.slice(0,100)
+              this.hasError = true
+              this.message = `The uploaded document contains ${response.data.message.length} incorrect data, Please check you're data at those rows`
+              this.snackbar = true
             }
             else {
               this.hasError = true
@@ -199,7 +192,6 @@ export default {
           resolve();
         };
         reader.readAsArrayBuffer(rawFile);
-
       });
     },
     isExcel(file) {
@@ -212,18 +204,15 @@ export default {
   },
 };
 </script>
-
 <style scoped>
 .excel-upload-input {
   display: none;
   z-index: -9999;
 }
-
 .icon {
   font-size: 64px;
   color: red;
 }
-
 .drop {
   border: 2px dashed #bbb;
   width: 600px;
