@@ -209,7 +209,19 @@ module.exports = {
         }).catch((err) => {
           errorOccured = true;
           console.error(err);
-          return callback(null);
+          const idp = nconf.get('app:idp');
+          if (idp === 'keycloak') {
+            const kcadmin = require('./modules/keycloakAdminClient');
+            setTimeout(() => {
+              kcadmin.loadTasksToKeycloak().then(() => callback(null)).catch((err) => {
+                errorOccured = true;
+                console.error(err);
+                return callback(null);
+              });
+            }, 1000);
+          } else {
+            return callback(null);
+          }
         });
       },
     ], () => {

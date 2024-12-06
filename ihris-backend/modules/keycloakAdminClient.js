@@ -6,6 +6,7 @@ const KcAdminClient = require('@keycloak/keycloak-admin-client').default;
 const nconf = require('../modules/config');
 const logger = require('../winston');
 const mixin = require('../mixin/generalMixin');
+const site_path = nconf.get("app:site:path");
 
 const TASK_EXTENSION = `${nconf.get('profileBaseUrl')}/StructureDefinition/ihris-task`;
 const ROLE_EXTENSION = `${nconf.get('profileBaseUrl')}/StructureDefinition/ihris-role`;
@@ -38,7 +39,7 @@ setInterval(() => {
 
 const loadTasksToKeycloak = () => new Promise(async (resolve, reject) => {
   const installed = nconf.get('app:installed');
-  if (installed) {
+  if (installed == "true") {
     return resolve();
   }
   const fshDir = nconf.get('builtFSHFIles');
@@ -51,7 +52,7 @@ const loadTasksToKeycloak = () => new Promise(async (resolve, reject) => {
   if (!client) {
     return reject();
   }
-  mixin.getFilesFromDir(`${__dirname}/${fshDir}`).then((files) => {
+  mixin.getFilesFromDir(`${site_path}/${fshDir}`).then((files) => {
     const filesPromises = [];
     files.forEach((file) => {
       filesPromises.push(new Promise((fresolve, freject) => {
@@ -200,7 +201,7 @@ const loadRolesToKeycloak = () => new Promise(async (resolve, reject) => {
   if (!client) {
     return reject();
   }
-  mixin.getFilesFromDir(`${__dirname}/${fshDir}`).then((files) => {
+  mixin.getFilesFromDir(`${site_path}/${fshDir}`).then((files) => {
     const filesPromises = [];
     files.forEach((file) => {
       filesPromises.push(new Promise((fresolve, freject) => {
