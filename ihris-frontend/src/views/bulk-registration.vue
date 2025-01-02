@@ -58,6 +58,10 @@
           </ul>
         </v-card-text>
         <v-card-actions class="pr-8 pt-6 mr-6">
+          <v-btn class="primary" dark @click="getCsvTemplate">
+            <v-icon light>mdi-download</v-icon>
+            <span>{{ $t("App.hardcoded-texts.getCSVTemplate") }}</span>
+          </v-btn>
           <v-spacer></v-spacer>
           <v-btn
               v-if="!loading || hasError"
@@ -149,6 +153,21 @@ export default {
         return false;
       }
       this.upload(rawFile);
+    },
+    getCsvTemplate() {
+      axios({
+        url: "/config/csvTemplate",
+        method: "GET",
+        responseType: "blob",
+      }).then((response) => {
+        let blob = new Blob([response.data], {
+          type: "application/vnd.ms-excel",
+        });
+        let link = document.createElement("a");
+        link.href = window.URL.createObjectURL(blob);
+        link.download = "User_bulk_registration_template.xlsx";
+        link.click();
+      });
     },
     upload(rawFile) {
       this.$refs["excel-upload-input"].value = null; // fix can't select the same excel

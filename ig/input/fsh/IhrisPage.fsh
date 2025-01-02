@@ -70,7 +70,8 @@ Description:    "iHRIS Page Display details."
 
 * extension[link].extension contains
       field 0..1 MS and
-      text 0..1 MS and
+      text 1..1 MS and
+      displayIn 1..1 MS and
       button 0..1 MS and
       icon 0..1 MS and
       url 1..1 MS and
@@ -83,6 +84,9 @@ Description:    "iHRIS Page Display details."
 * extension[link].extension[text].value[x] only string
 * extension[link].extension[text].valueString MS
 * extension[link].extension[text].valueString ^label = "Text for link"
+* extension[link].extension[displayIn].value[x] only string
+* extension[link].extension[displayIn].valueString MS
+* extension[link].extension[displayIn].valueString ^label = "Whether the link to be displayed on the questionnaire(questionnaire) or display page(view)"
 * extension[link].extension[button].value[x] only boolean
 * extension[link].extension[button].valueBoolean MS
 * extension[link].extension[button].valueBoolean ^label = "Display as button"

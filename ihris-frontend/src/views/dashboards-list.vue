@@ -2,7 +2,7 @@
   <v-container grid-list-xs>
     <v-card elevation="1">
       <v-card-title class="primary darken-1 white--text font-weight-bold justify-center">
-        Dashboards
+        {{ $t('App.hardcoded-texts.Dashboards') }}
         <v-spacer></v-spacer>
         <v-btn
           class="ma-2"
@@ -10,7 +10,7 @@
           color="white"
           @click="$router.push('/build-dashboard')"
         >
-          Build Dashboards
+          {{ $t('App.hardcoded-texts.Build Dashboards') }}
         </v-btn>
       </v-card-title>
       <v-card-text>
