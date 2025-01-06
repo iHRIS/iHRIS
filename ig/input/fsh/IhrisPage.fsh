@@ -86,7 +86,7 @@ Description:    "iHRIS Page Display details."
 * extension[link].extension[text].valueString ^label = "Text for link"
 * extension[link].extension[displayIn].value[x] only string
 * extension[link].extension[displayIn].valueString MS
-* extension[link].extension[displayIn].valueString ^label = "Whether the link to be displayed on the questionnaire(questionnaire) or display page(view)"
+* extension[link].extension[displayIn].valueString ^label = "Whether the link to be displayed on the questionnaire(questionnaire) or display page(view). Values are either questionnaire or view"
 * extension[link].extension[button].value[x] only boolean
 * extension[link].extension[button].valueBoolean MS
 * extension[link].extension[button].valueBoolean ^label = "Display as button"

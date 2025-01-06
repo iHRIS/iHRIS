@@ -266,6 +266,10 @@ router.get('/page/:page/:type?', function (req, res) {
                 let linkExts = pageDisplay.extension.filter(ext => ext.url === "link")
                 for (let linkExt of linkExts) {
                     let field, text, button, icon, linkclass
+                    let displayIn = linkExt.extension.find(ext => ext.url === "displayIn")?.valueString
+                    if(displayIn && displayIn == "questionnaire") {
+                        continue
+                    }
                     let roles = linkExt.extension.filter(ext => ext.url === "role")
                     let tasks = linkExt.extension.filter(ext => ext.url === "task")
                     if(roles.length > 0 || tasks.length > 0) {
