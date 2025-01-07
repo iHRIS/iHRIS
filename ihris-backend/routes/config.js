@@ -516,7 +516,7 @@ router.get('/page/:page/:type?', function (req, res) {
                     resourceElement = "ihris-codesystem"
                 }
 
-                vueOutput = '<' + resourceElement + ' :fhir-id="fhirId" :edit="isEdit" v-on:set-edit="setEdit($event)" profile="' + resource.url + '" :key="$route.params.page+($route.params.id || \'\')" page="' + req.params.page + '" field="' + fhir + '" title="' + sections[fhir].title + '" :constraints="constraints"'
+                vueOutput = '<' + resourceElement + ' :fhir-id="fhirId" :fhir-version="fhirVersion" :edit="isEdit" v-on:set-edit="setEdit($event)" profile="' + resource.url + '" :key="$route.params.page+($route.params.id || \'\')" page="' + req.params.page + '" field="' + fhir + '" title="' + sections[fhir].title + '" :constraints="constraints"'
                 if (sectionKeys.length > 1) {
                     sectionMenu = sectionKeys.map(name => {
                         return {

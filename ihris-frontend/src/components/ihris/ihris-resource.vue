@@ -158,7 +158,7 @@
 
 export default {
   name: "ihris-resource",
-  props: ["title", "field", "fhir-id", "page", "profile", "section-menu", "edit", "links", "mounts", "constraints"],
+  props: ["title", "field", "fhir-id", "fhir-version", "page", "profile", "section-menu", "edit", "links", "mounts", "constraints"],
   data: function () {
     return {
       fhir: {},
@@ -188,7 +188,12 @@ export default {
     if (this.fhirId) {
       this.loading = true
       //console.log("getting",this.field,this.fhirId)
-      fetch("/fhir/" + this.field + "/" + this.fhirId).then(response => {
+      let url = "/fhir/" + this.field + "/" + this.fhirId
+      if(this.fhirVersion) {
+        url = "/fhir/vRead/" + this.field + "/" + this.fhirId + "/" + this.fhirVersion
+        this.version = this.fhirVersion
+      }
+      fetch(url).then(response => {
         response.json().then(async(data) => {
           if(this.$store.state.user && this.$store.state.user.obj && this.$store.state.user.obj.resource && this.$store.state.user.obj.resource.extension) {
             let location = this.$store.state.user.obj.resource.extension.find((ext) => {
