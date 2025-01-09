@@ -8,23 +8,23 @@
   },
   "extension": [
     {
-      "url": "http://ihris.org/fhir/StructureDefinition/ihris-password",
-      "extension": [
-        {
-          "url": "password",
-          "valueString": "9e27891d5f37c795a446dc994683256e5a14c606293fab1a838da40c585201c9ee5f6ba31c958433cf7b4b194605ac488b500c39ffc9fdf159b1e12f7e1a4e3c"
-        },
-        {
-          "url": "salt",
-          "valueString": "181856559337e1c956200f7b2452b213"
-        }
-      ]
-    },
-    {
       "url": "http://ihris.org/fhir/StructureDefinition/ihris-assign-role",
       "valueReference": {
         "reference": "Basic/ihris-role-admin"
       }
+    },
+    {
+      "url": "http://ihris.org/fhir/StructureDefinition/ihris-password",
+      "extension": [
+        {
+          "url": "password",
+          "valueString": "f9849a9bedc65b95c2007b3f1a2583b642388710f0135225737ae0ec7d2e367f5cf650b7f6816f22e9386cdcaaa076b84be888bb0697e01afbdbd506144cb778"
+        },
+        {
+          "url": "salt",
+          "valueString": "eab9fd6ccd69d5ff11106c711b61cf80"
+        }
+      ]
     }
   ],
   "name": [
