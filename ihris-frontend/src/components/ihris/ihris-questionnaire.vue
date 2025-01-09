@@ -43,7 +43,7 @@
               <span>{{ $t("App.hardcoded-texts.Save") }}</span>
             </v-btn>
           </v-list-item>
-          <v-list-item
+          <!-- <v-list-item
               v-if="
               $router.history.current.path ===
                 '/questionnaire/ihris-practitioner/practitioner'
@@ -57,18 +57,15 @@
               <v-icon light>mdi-attachment</v-icon>
               <span>{{ $t("App.hardcoded-texts.uploadCSV") }}</span>
             </v-btn>
-          </v-list-item>
-          <v-list-item
-              v-if="
-              $router.history.current.path ===
-                '/questionnaire/ihris-practitioner/practitioner'
-            "
-          >
-            <v-btn class="primary" dark @click="getCsvTemplate">
-              <v-icon light>mdi-download</v-icon>
-              <span>{{ $t("App.hardcoded-texts.getCSVTemplate") }}</span>
-            </v-btn>
-          </v-list-item>
+          </v-list-item> -->
+          <template v-if="links && links.length && linksready">
+            <v-list-item v-for="(link,idx) in links" :key="link.url">
+              <v-btn :key="link.url" :text="!link.button" :to="getLinkUrl(link)" :class="link.linkclass">
+                <v-icon v-if="link.icon" light>{{ link.icon }}</v-icon>
+                {{ $t(`App.fhir-resources-texts.${linktext[idx]}`) }}
+              </v-btn>
+            </v-list-item>
+          </template>
           <v-divider color="white"></v-divider>
           <v-subheader v-if="sectionMenu" class="white--text"
           ><h2>{{ $t("App.hardcoded-texts.Sections") }}</h2></v-subheader
@@ -98,7 +95,6 @@
 </template>
 
 <script>
-import axios from "axios";
 
 const querystring = require("querystring");
 export default {
@@ -116,6 +112,7 @@ export default {
     "field",
     "profile",
     "fhir-id",
+    "links"
   ],
   data: function () {
     return {
@@ -124,6 +121,8 @@ export default {
       overlay: false,
       isEdit: false,
       valid: true,
+      linktext: [],
+      linksready: false,
       advancedValid: true,
       position: "",
       source: {path: "", data: {}},
@@ -146,7 +145,6 @@ export default {
           //this.$store.commit('setCurrentResource', data)
           this.orig = data
           this.source = {data: data, path: this.field}
-          this.setLinkText()
           this.loading = false
         }).catch(err => {
           console.log(this.field, this.fhirId, err)
@@ -155,6 +153,8 @@ export default {
         console.log(this.field, this.fhirId, err)
       })
     }
+    this.setLinkText()
+    this.linksready = true
   },
   methods: {
     getLinkField: function (field) {
@@ -200,7 +200,7 @@ export default {
       fetch("/auth/logout").then(() => {
         this.loading = false
         this.$store.commit('logout')
-        this.$store.commit('setMessage', {type: 'success', text: 'You change your password success fully.'})
+        this.$store.commit('setMessage', {type: 'success', text: 'Password changed successfully.'})
         this.$router.push({path: "/"})
       })
     },
@@ -214,21 +214,6 @@ export default {
         if (pageYOffset >= sectionTop) {
           this.path = `#section-${data.id}`;
         }
-      });
-    },
-    getCsvTemplate() {
-      axios({
-        url: "/config/csvTemplate",
-        method: "GET",
-        responseType: "blob",
-      }).then((response) => {
-        let blob = new Blob([response.data], {
-          type: "application/vnd.ms-excel",
-        });
-        let link = document.createElement("a");
-        link.href = window.URL.createObjectURL(blob);
-        link.download = "User_bulk_registration_template.xlsx";
-        link.click();
       });
     },
     processFHIR: async function () {

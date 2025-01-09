@@ -266,6 +266,10 @@ router.get('/page/:page/:type?', function (req, res) {
                 let linkExts = pageDisplay.extension.filter(ext => ext.url === "link")
                 for (let linkExt of linkExts) {
                     let field, text, button, icon, linkclass
+                    let displayIn = linkExt.extension.find(ext => ext.url === "displayIn")?.valueString
+                    if(displayIn && displayIn == "questionnaire") {
+                        continue
+                    }
                     let roles = linkExt.extension.filter(ext => ext.url === "role")
                     let tasks = linkExt.extension.filter(ext => ext.url === "task")
                     if(roles.length > 0 || tasks.length > 0) {
@@ -512,7 +516,7 @@ router.get('/page/:page/:type?', function (req, res) {
                     resourceElement = "ihris-codesystem"
                 }
 
-                vueOutput = '<' + resourceElement + ' :fhir-id="fhirId" :edit="isEdit" v-on:set-edit="setEdit($event)" profile="' + resource.url + '" :key="$route.params.page+($route.params.id || \'\')" page="' + req.params.page + '" field="' + fhir + '" title="' + sections[fhir].title + '" :constraints="constraints"'
+                vueOutput = '<' + resourceElement + ' :fhir-id="fhirId" :fhir-version="fhirVersion" :edit="isEdit" v-on:set-edit="setEdit($event)" profile="' + resource.url + '" :key="$route.params.page+($route.params.id || \'\')" page="' + req.params.page + '" field="' + fhir + '" title="' + sections[fhir].title + '" :constraints="constraints"'
                 if (sectionKeys.length > 1) {
                     sectionMenu = sectionKeys.map(name => {
                         return {
@@ -1000,6 +1004,7 @@ router.get('/questionnaire/:questionnaire/:page', async function (req, res) {
         }
         return displayCondition
     }
+    let links = []
     await fhirAxios.read("Basic", page).then(async(resource) => {
         let pageDisplay = resource.extension.find(ext => ext.url === "http://ihris.org/fhir/StructureDefinition/ihris-page-display")
 
@@ -1104,12 +1109,77 @@ router.get('/questionnaire/:questionnaire/:page', async function (req, res) {
                 searchfieldtarget: searchfieldtarget
             }
         }
+        try {
+            let linkExts = pageDisplay.extension.filter(ext => ext.url === "link")
+            for (let linkExt of linkExts) {
+                let field, text, button, icon, linkclass
+                let displayIn = linkExt.extension.find(ext => ext.url === "displayIn")?.valueString
+                if(!displayIn || displayIn !== "questionnaire") {
+                    continue
+                }
+                let roles = linkExt.extension.filter(ext => ext.url === "role")
+                let tasks = linkExt.extension.filter(ext => ext.url === "task")
+                if(roles.length > 0 || tasks.length > 0) {
+                    let hasRole = roles.find((role) => {
+                        return req.user.roles.includes(role.valueId)
+                    })
+                    let hasTask
+                    for(let task of tasks) {
+                        await fhirAxios.read("Basic", task.valueId).then((taskResource) => {
+                            let taskAttributes = taskResource?.extension?.find((ext) => {
+                                return ext.url === 'http://ihris.org/fhir/StructureDefinition/task-attributes'
+                            })
+                            let taskName = taskAttributes?.extension?.find((ext) => {
+                                return ext.url === 'instance'
+                            })?.valueId
+                            if(req.user?.permissions?.special?.special?.id[taskName] || req.user?.permissions?.special?.section?.id[taskName] || (req.user?.permissions["*"] && req.user?.permissions["*"]["*"])) {
+                                hasTask = true
+                            }
+                        })
+                    }
+                    if(!hasRole && !hasTask) {
+                        continue
+                    }
+                }
+                let url = linkExt.extension.find(ext => ext.url === "url").valueUrl
+
+                try {
+                    field = linkExt.extension.find(ext => ext.url === "field").valueString
+                } catch (err) {
+                }
+                try {
+                    text = linkExt.extension.find(ext => ext.url === "text").valueString
+                } catch (err) {
+                }
+                try {
+                    button = linkExt.extension.find(ext => ext.url === "button").valueBoolean
+                } catch (err) {
+                }
+                try {
+                    icon = linkExt.extension.find(ext => ext.url === "icon").valueString
+                } catch (err) {
+                }
+                try {
+                    linkclass = linkExt.extension.find(ext => ext.url === "class").valueString
+                } catch (err) {
+                }
+
+                links.push({url: url, field: field, text: text, button: button, icon: icon, linkclass: linkclass})
+
+            }
+
+        } catch (err) {
+        }
     })
     fhirAxios.read("Questionnaire", req.params.questionnaire).then(async (resource) => {
         let vueOutput = '<ihris-questionnaire :fhir-id="fhirId" field="' + primaryResourceType + '" profile="' + primaryResourceProfile + '" :edit=\"isEdit\" :view-page="viewPage" :constraints="constraints" url="' + resource.url + '" id="' + resource.id
             + '" title="' + resource.title
-            + '" description="' + resource.description + '" purpose="' + resource.purpose
-            + '"__SECTIONMENU__>' + "\n<template #default=\"slotProps\">\n"
+            + '" description="' + resource.description + '" purpose="' + resource.purpose + '"'
+            if (links.length > 0) {
+                vueOutput += ' :links="links"'
+            }
+            vueOutput += '"__SECTIONMENU__>' + "\n<template #default=\"slotProps\">\n"
+            console.log(vueOutput);
 
 
         let sectionMenu = []
@@ -1670,7 +1740,11 @@ router.get('/questionnaire/:questionnaire/:page', async function (req, res) {
         }
         vueOutput += "</template></ihris-questionnaire>\n"
         logger.debug(vueOutput)
-        return res.status(200).json({template: vueOutput, data: templateData})
+        templateData.links = links
+        return res.status(200).json({
+            template: vueOutput,
+            data: templateData
+        })
 
     }).catch((err) => {
         logger.error(err.message)

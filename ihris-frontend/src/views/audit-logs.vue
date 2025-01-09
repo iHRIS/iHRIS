@@ -160,38 +160,17 @@
       >
         <v-card>
           <v-card-title class="text-h5 grey lighten-2 justify-center">
-            {{ $t(`App.hardcoded-texts.Changed Fields`) }}
+            {{ $t(`App.hardcoded-texts.Compare Changes`) }}
           </v-card-title>
           <v-card-text>
-            <template>
-            </template>
-            <v-row class="ma-4" no-gutters>
-              <v-col>
-                <v-card
-                    class="pa-2"
-                    outlined
-                    tile
-                >
-                  <v-card-title class="justify-center">{{ $t(`App.hardcoded-texts.Changes`) }}</v-card-title>
-                  <v-card-text>
-                    <v-simple-table>
-                      <thead>
-                      <tr>
-                        <th class="text-left">{{ $t(`App.hardcoded-texts.Field`) }}</th>
-                        <th class="text-left">{{ $t(`App.hardcoded-texts.Old Value`) }}</th>
-                        <th class="text-left">{{ $t(`App.hardcoded-texts.New Value`) }}</th>
-                      </tr>
-                      </thead>
-                      <tbody>
-                      <tr v-for="(item, index) in differnce" :key="index">
-                        <td>{{ item.path }}</td>
-                        <td>{{ formatValue(item.old) }}</td>
-                        <td>{{ formatValue(item.new) }}</td>
-                      </tr>
-                      </tbody>
-                    </v-simple-table>
-                  </v-card-text>
-                </v-card>
+            <v-row>
+              <v-col cols="6">
+                <b>Before Updates</b>
+                <fhir-page-view v-if="compareDialog" :id="resourceId" :version="version-1" :page="pageId" @templates-loaded="displaySecond = true" />
+              </v-col>
+              <v-col v-if="displaySecond" cols="6">
+                <b>After Updates</b>
+                <fhir-page-view :id="resourceId" :version="version" :page="pageId" />
               </v-col>
             </v-row>
           </v-card-text>
@@ -213,14 +192,18 @@
 </template>
 <script>
 export default {
-  name: 'Audit Logs',
+  name: 'audit-log',
   created() {
     this.setUp()
     this.getData(true);
     this.fetchAuditEventSubType()
   },
+  components: {
+    "fhir-page-view": () => import("@/views/fhir-page-view")
+  },
   data: function () {
     return {
+      displaySecond: false,
       auditData: [],
       id: null,
       userEmail: null,
@@ -241,7 +224,10 @@ export default {
       profile: 'http://ihris.org/fhir/StructureDefinition/ihris-auditevent',
       compareDialog: false,
       resourcePage: {},
-      differnce: undefined
+      differnce: undefined,
+      version: 0,
+      resourceId: 0,
+      pageId: ""
     }
   },
   methods: {
@@ -378,7 +364,7 @@ export default {
     fetchAuditEventSubType() {
       fetch("/fhir/ValueSet/audit-event-sub-type/$expand").then(response => {
         response.json().then((data) => {
-          if(data.expansion.contains) {
+          if(data.expansion && data.expansion.contains) {
             this.auditEventSubType = data.expansion.contains
           }
         })
@@ -410,94 +396,18 @@ export default {
       }
     },
     viewDifference(item) {
-      let input = item.resource;
-      let basePath = input.split('/_history/')[0];
-      let version = parseInt(input.split('/_history/')[1]);
-      if (version === 1) {
-        this.$toast.error("No previous version to compare with");
-        return;
-      }
-      let newUrl = `/fhir/vRead/${basePath}/${version}`;
-      let oldUrl = `/fhir/vRead/${basePath}/${version - 1}`;
-
-      let oldData = {}
-      let newData = {}
-      this.compareDialog = true
-      fetch(newUrl).then(response => {
+      this.displaySecond = false
+      let input = item.resource.split("/");
+      this.version = input[3]
+      this.resourceId = input[1]
+      let url = `/fhir/${input[0]}/${input[1]}`
+      fetch(url).then(response => {
         response.json().then((data) => {
-          newData = data
-          fetch(oldUrl).then(response => {
-            response.json().then(async (data) => {
-              oldData = data
-              if (oldData && newData) {
-                this.differnce = await this.compareJSON(oldData, newData)
-              }
-            })
-          })
+          let profile = data.meta.profile[0].split("http://ihris.org/fhir/").pop()
+          this.pageId = this.resourcePage[profile]
+          this.compareDialog = true
         })
       })
-    },
-    compareObjects(obj1, obj2, path = '') {
-      const differences = [];
-
-      for (const key in obj1) {
-        const currentPath = path ? `${path}.${key}` : key;
-        if (!(key in obj2)) {
-          differences.push({
-            path: currentPath,
-            old: obj1[key],
-            new: null
-          });
-        } else if (typeof obj1[key] !== typeof obj2[key]) {
-          differences.push({
-            path: currentPath,
-            old: obj1[key],
-            new: obj2[key]
-          });
-        } else if (typeof obj1[key] === 'object' && obj1[key] !== null) {
-          differences.push(...this.compareObjects(obj1[key], obj2[key], currentPath));
-        } else if (obj1[key] !== obj2[key]) {
-          differences.push({
-            path: currentPath,
-            old: obj1[key],
-            new: obj2[key]
-          });
-        }
-      }
-      for (const key in obj2) {
-        const currentPath = path ? `${path}.${key}` : key;
-        if (!(key in obj1)) {
-          differences.push({
-            path: currentPath,
-            old: null,
-            new: obj2[key]
-          });
-        }
-      }
-      return differences;
-    },
-    async compareJSON(json1, json2) {
-      const obj1 = typeof json1 === 'string' ? JSON.parse(json1) : json1;
-      const obj2 = typeof json2 === 'string' ? JSON.parse(json2) : json2;
-      let structuralDefinition = json1?.meta?.profile?.find(x => x.includes("StructureDefinition")).split("/").pop();
-      let url = `/fhir/StructureDefinition/${structuralDefinition}`
-      const response = await fetch(url);
-      const data = await response.json();
-      structuralDefinition = data;
-      let difference = this.compareObjects(obj1, obj2);
-      difference.map(entity => {
-        let path = entity.path.split('.');
-        let label = structuralDefinition.differential.element.find(e => e.id === `${json1.resourceType}.${path[0]}`)?.label;
-        if (label) {
-          entity.path = label;
-        }
-      });
-      return difference;
-    },
-    formatValue(value) {
-      if (value === null) return "_";
-      if (Array.isArray(value)) return JSON.stringify(value, null, 2);
-      return value;
     }
   },
   computed: {

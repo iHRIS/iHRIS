@@ -40,7 +40,7 @@ router.post("/QuestionnaireResponse", (req, res, next) => {
             let edit = editingResources.find((editingResource) => {
                 return entry.resource.meta.profile.includes(editingResource.profile)
             })
-            if(edit) {
+            if(edit && !entry.resource.id) {
                 entry.resource.id = edit.id
                 entry.request = {
                     method: "PUT",

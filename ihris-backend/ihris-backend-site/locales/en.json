@@ -77,6 +77,7 @@
     "ihris-questionnaire-group": {},
     "ihris-resource": {},
     "fhir-resources-texts": {
+      "Upload CSV/Excel": "Upload CSV/Excel",
       "Appointment Details": "Appointment Details",
       "Job Title/Position Rank": "Job Title/Position Rank",
       "Cadre": "Cadre",

@@ -19,6 +19,12 @@ Usage:          #example
 * extension[display].extension[link][0].extension[button].valueBoolean = true
 * extension[display].extension[link][0].extension[icon].valueString = "mdi-pencil"
 * extension[display].extension[link][0].extension[class].valueString = "secondary"
+* extension[display].extension[link][1].extension[url].valueUrl = "/bulk-registration"
+* extension[display].extension[link][1].extension[text].valueString = "Upload CSV/Excel"
+* extension[display].extension[link][1].extension[displayIn].valueString = "questionnaire"
+* extension[display].extension[link][1].extension[button].valueBoolean = true
+* extension[display].extension[link][1].extension[icon].valueString = "mdi-attachment"
+* extension[display].extension[link][1].extension[class].valueString = "primary"
 * extension[section][0].extension[title].valueString = "Health Worker"
 * extension[section][0].extension[description].valueString = "Primary demographic details"
 * extension[section][0].extension[name].valueString = "Practitioner"

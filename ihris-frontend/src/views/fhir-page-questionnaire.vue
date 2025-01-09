@@ -56,6 +56,7 @@ export default {
                   viewPage: page,
                   isEdit: true,
                   fhirId: pageId,
+                  links: data.data.links,
                   sectionMenu: data.data.sectionMenu,
                   hidden: data.data.hidden,
                   initials: data.data.initials,
