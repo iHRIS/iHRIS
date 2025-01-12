@@ -42,6 +42,7 @@
         permanent
         right
         style="z-index: 3;"
+        v-if="showDrawer"
       >
         <v-list class="white--text">
           <v-list-item v-if="edit">
@@ -158,7 +159,7 @@
 
 export default {
   name: "ihris-resource",
-  props: ["title", "field", "fhir-id", "fhir-version", "page", "profile", "section-menu", "edit", "links", "mounts", "constraints"],
+  props: ["title", "field", "fhir-id", "fhir-version", "page", "profile", "section-menu", "edit", "links", "mounts", "constraints", "show-drawer"],
   data: function () {
     return {
       fhir: {},

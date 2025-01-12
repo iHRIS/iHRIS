@@ -10,12 +10,13 @@
 var pageId
 var pageVersion
 var page
+var showDrawer = false
 var isEdit
 import Vue from 'vue'
 
 export default {
   name: "fhir-page-view",
-  props: ["id", "version", "page"],
+  props: ["id", "version", "page", "show-drawer"],
   data: function() {
     return {
     }
@@ -29,6 +30,11 @@ export default {
     }
     if(!page && this.page) {
       page = this.page
+    }
+    if(showDrawer == undefined && this.showDrawer != undefined) {
+      showDrawer = this.showDrawer
+    } else {
+      showDrawer = true
     }
     this.getTemplate()
   },
@@ -59,6 +65,7 @@ export default {
                 return {
                   fhirId: pageId,
                   fhirVersion: pageVersion,
+                  showDrawer: showDrawer,
                   isEdit: isEdit,
                   sectionMenu: data.data.sectionMenu,
                   subFields: data.data.subFields,
@@ -126,7 +133,8 @@ export default {
   },
   beforeCreate: function() {
     pageId = this.$route.params.id
-    pageVersion = this.$route.params.version
+    pageVersion = this.$route.query.version
+    showDrawer = this.$route.query.showDrawer
     page = this.$route.params.page
     isEdit = this.$route.query.edit
     Vue.component('ihris-template', { template: '<div>Loading...</div>' } )

@@ -177,6 +177,11 @@ router.get("/vRead/:resource/:id/:version", (req, res, next) => {
   }
 } )
 
+router.post("/", (req, res) => {
+  if ( !req.user ) {
+    return res.status(401).json( outcomes.NOTLOGGEDIN )
+  }
+})
 
 router.post("/:resource", (req, res) => {
   if ( !req.user ) {
