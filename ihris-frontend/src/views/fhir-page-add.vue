@@ -43,6 +43,8 @@ export default {
                 return {
                   isEdit: true,
                   fhirId: undefined,
+                  fhirVersion: undefined,
+                  showDrawer: undefined,
                   sectionMenu: data.data.sectionMenu,
                   subFields: data.data.subFields,
                   columns: data.data.columns,

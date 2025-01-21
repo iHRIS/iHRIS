@@ -73,7 +73,7 @@ Description:    "iHRIS profile of Practitioner."
 * address.country ^label = "Country"
 * gender 1..1 MS
 * gender ^label = "Gender"
-* birthDate MS
+* birthDate 1..1 MS
 * birthDate ^label = "Birth Date"
 * birthDate obeys ihris-age-18
 * birthDate ^minValueQuantity.system = "http://unitsofmeasure.org/"
