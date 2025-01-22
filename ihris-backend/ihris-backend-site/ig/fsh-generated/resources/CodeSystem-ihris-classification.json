@@ -6,7 +6,6 @@
   "id": "ihris-classification",
   "title": "iHRIS Classification",
   "description": "Sample iHRIS CodeSystem for: IhrisClassification",
-  "version": "0.1.0",
   "url": "http://ihris.org/fhir/CodeSystem/ihris-classification",
   "concept": [
     {

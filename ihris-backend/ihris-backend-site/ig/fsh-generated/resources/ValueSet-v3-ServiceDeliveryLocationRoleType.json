@@ -5,7 +5,6 @@
   "id": "v3-ServiceDeliveryLocationRoleType",
   "title": "V3 Value SetServiceDeliveryLocationRoleType",
   "description": " A role of a place that further classifies the setting (e.g., accident site, road side, work site, community location) in which services are delivered.",
-  "version": "2014-03-26",
   "url": "http://terminology.hl7.org/ValueSet/v3-ServiceDeliveryLocationRoleType",
   "meta": {
     "versionId": "1",
@@ -35,6 +34,7 @@
       "value": "urn:oid:2.16.840.1.113883.1.11.17660"
     }
   ],
+  "version": "2014-03-26",
   "experimental": false,
   "publisher": "HL7 v3",
   "contact": [

@@ -3,10 +3,9 @@
   "status": "active",
   "content": "complete",
   "name": "IdentifierType",
-  "id": "v2-0203",
+  "id": "2103",
   "title": "identifierType",
   "description": "HL7-defined code system of concepts specifying type of identifier. Used in HL7 Version 2.x messaging data types CX, PLN, PPN, XCN and XON.",
-  "version": "2.9.0",
   "url": "http://terminology.hl7.org/CodeSystem/v2-0203",
   "concept": [
     {
@@ -2540,6 +2539,7 @@
       "value": "urn:oid:2.16.840.1.113883.18.108"
     }
   ],
+  "version": "2.9.0",
   "experimental": false,
   "date": "2019-12-01",
   "publisher": "HL7, Inc",

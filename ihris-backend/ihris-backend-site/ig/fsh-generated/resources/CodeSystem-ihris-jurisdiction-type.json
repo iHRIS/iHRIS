@@ -5,7 +5,6 @@
   "name": "IhrisJurisdictionType",
   "id": "ihris-jurisdiction-type",
   "title": "Jurisdiction Type",
-  "version": "0.5.0",
   "url": "http://ihris.org/fhir/CodeSystem/ihris-jurisdiction-type",
   "concept": [
     {
@@ -45,5 +44,6 @@
     }
   ],
   "date": "2023-06-12T08:41:04.362Z",
+  "version": "0.5.0",
   "count": 7
 }

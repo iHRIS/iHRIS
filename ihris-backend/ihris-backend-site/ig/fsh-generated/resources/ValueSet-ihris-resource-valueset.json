@@ -4,7 +4,6 @@
   "name": "IhrisResourceValueSet",
   "id": "ihris-resource-valueset",
   "title": "Value Set for iHRIS Basic Resources.",
-  "version": "0.1.0",
   "url": "http://ihris.org/fhir/ValueSet/ihris-resource-valueset",
   "compose": {
     "include": [

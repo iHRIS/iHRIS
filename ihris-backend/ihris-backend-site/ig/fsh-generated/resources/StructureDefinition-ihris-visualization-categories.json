@@ -2,7 +2,6 @@
   "resourceType": "StructureDefinition",
   "id": "ihris-visualization-categories",
   "url": "http://ihris.org/fhir/StructureDefinition/ihris-visualization-categories",
-  "version": "0.1.0",
   "name": "IhrisVisualizationCategories",
   "title": "iHRIS Visualization Categories",
   "status": "active",
@@ -30,16 +29,6 @@
     "element": [
       {
         "id": "Extension",
-        "extension": [
-          {
-            "url": "http://hl7.org/fhir/StructureDefinition/structuredefinition-standards-status",
-            "valueCode": "normative"
-          },
-          {
-            "url": "http://hl7.org/fhir/StructureDefinition/structuredefinition-normative-version",
-            "valueCode": "4.0.0"
-          }
-        ],
         "path": "Extension",
         "short": "iHRIS Visualization Categories",
         "definition": "iHRIS visualization categories",
@@ -361,53 +350,6 @@
       {
         "id": "Extension.extension:name.value[x]",
         "path": "Extension.extension.value[x]",
-        "slicing": {
-          "discriminator": [
-            {
-              "type": "type",
-              "path": "$this"
-            }
-          ],
-          "ordered": false,
-          "rules": "open"
-        },
-        "short": "Value of extension",
-        "definition": "Value of extension - must be one of a constrained set of the data types (see [Extensibility](extensibility.html) for a list).",
-        "min": 1,
-        "max": "1",
-        "base": {
-          "path": "Extension.value[x]",
-          "min": 0,
-          "max": "1"
-        },
-        "type": [
-          {
-            "code": "string"
-          }
-        ],
-        "constraint": [
-          {
-            "key": "ele-1",
-            "severity": "error",
-            "human": "All FHIR elements must have a @value or children",
-            "expression": "hasValue() or (children().count() > id.count())",
-            "xpath": "@value|f:*|h:div",
-            "source": "http://hl7.org/fhir/StructureDefinition/Element"
-          }
-        ],
-        "isModifier": false,
-        "isSummary": false,
-        "mapping": [
-          {
-            "identity": "rim",
-            "map": "N/A"
-          }
-        ]
-      },
-      {
-        "id": "Extension.extension:name.value[x]:valueString",
-        "path": "Extension.extension.value[x]",
-        "sliceName": "valueString",
         "label": "Category Name",
         "short": "Value of extension",
         "definition": "Value of extension - must be one of a constrained set of the data types (see [Extensibility](extensibility.html) for a list).",
@@ -628,53 +570,6 @@
       {
         "id": "Extension.extension:selectedValues.value[x]",
         "path": "Extension.extension.value[x]",
-        "slicing": {
-          "discriminator": [
-            {
-              "type": "type",
-              "path": "$this"
-            }
-          ],
-          "ordered": false,
-          "rules": "open"
-        },
-        "short": "Value of extension",
-        "definition": "Value of extension - must be one of a constrained set of the data types (see [Extensibility](extensibility.html) for a list).",
-        "min": 1,
-        "max": "1",
-        "base": {
-          "path": "Extension.value[x]",
-          "min": 0,
-          "max": "1"
-        },
-        "type": [
-          {
-            "code": "base64Binary"
-          }
-        ],
-        "constraint": [
-          {
-            "key": "ele-1",
-            "severity": "error",
-            "human": "All FHIR elements must have a @value or children",
-            "expression": "hasValue() or (children().count() > id.count())",
-            "xpath": "@value|f:*|h:div",
-            "source": "http://hl7.org/fhir/StructureDefinition/Element"
-          }
-        ],
-        "isModifier": false,
-        "isSummary": false,
-        "mapping": [
-          {
-            "identity": "rim",
-            "map": "N/A"
-          }
-        ]
-      },
-      {
-        "id": "Extension.extension:selectedValues.value[x]:valueBase64Binary",
-        "path": "Extension.extension.value[x]",
-        "sliceName": "valueBase64Binary",
         "label": "Filter Categories by Selected Values",
         "short": "Value of extension",
         "definition": "Value of extension - must be one of a constrained set of the data types (see [Extensibility](extensibility.html) for a list).",
@@ -895,53 +790,6 @@
       {
         "id": "Extension.extension:defaultFilter.value[x]",
         "path": "Extension.extension.value[x]",
-        "slicing": {
-          "discriminator": [
-            {
-              "type": "type",
-              "path": "$this"
-            }
-          ],
-          "ordered": false,
-          "rules": "open"
-        },
-        "short": "Value of extension",
-        "definition": "Value of extension - must be one of a constrained set of the data types (see [Extensibility](extensibility.html) for a list).",
-        "min": 1,
-        "max": "1",
-        "base": {
-          "path": "Extension.value[x]",
-          "min": 0,
-          "max": "1"
-        },
-        "type": [
-          {
-            "code": "string"
-          }
-        ],
-        "constraint": [
-          {
-            "key": "ele-1",
-            "severity": "error",
-            "human": "All FHIR elements must have a @value or children",
-            "expression": "hasValue() or (children().count() > id.count())",
-            "xpath": "@value|f:*|h:div",
-            "source": "http://hl7.org/fhir/StructureDefinition/Element"
-          }
-        ],
-        "isModifier": false,
-        "isSummary": false,
-        "mapping": [
-          {
-            "identity": "rim",
-            "map": "N/A"
-          }
-        ]
-      },
-      {
-        "id": "Extension.extension:defaultFilter.value[x]:valueString",
-        "path": "Extension.extension.value[x]",
-        "sliceName": "valueString",
         "label": "Categories Default Filter",
         "short": "Value of extension",
         "definition": "Value of extension - must be one of a constrained set of the data types (see [Extensibility](extensibility.html) for a list).",
@@ -1162,53 +1010,6 @@
       {
         "id": "Extension.extension:filterCondition.value[x]",
         "path": "Extension.extension.value[x]",
-        "slicing": {
-          "discriminator": [
-            {
-              "type": "type",
-              "path": "$this"
-            }
-          ],
-          "ordered": false,
-          "rules": "open"
-        },
-        "short": "Value of extension",
-        "definition": "Value of extension - must be one of a constrained set of the data types (see [Extensibility](extensibility.html) for a list).",
-        "min": 1,
-        "max": "1",
-        "base": {
-          "path": "Extension.value[x]",
-          "min": 0,
-          "max": "1"
-        },
-        "type": [
-          {
-            "code": "string"
-          }
-        ],
-        "constraint": [
-          {
-            "key": "ele-1",
-            "severity": "error",
-            "human": "All FHIR elements must have a @value or children",
-            "expression": "hasValue() or (children().count() > id.count())",
-            "xpath": "@value|f:*|h:div",
-            "source": "http://hl7.org/fhir/StructureDefinition/Element"
-          }
-        ],
-        "isModifier": false,
-        "isSummary": false,
-        "mapping": [
-          {
-            "identity": "rim",
-            "map": "N/A"
-          }
-        ]
-      },
-      {
-        "id": "Extension.extension:filterCondition.value[x]:valueString",
-        "path": "Extension.extension.value[x]",
-        "sliceName": "valueString",
         "label": "Categories Filter Condition",
         "short": "Value of extension",
         "definition": "Value of extension - must be one of a constrained set of the data types (see [Extensibility](extensibility.html) for a list).",
@@ -1500,29 +1301,13 @@
       {
         "id": "Extension.extension:name.value[x]",
         "path": "Extension.extension.value[x]",
-        "slicing": {
-          "discriminator": [
-            {
-              "type": "type",
-              "path": "$this"
-            }
-          ],
-          "ordered": false,
-          "rules": "open"
-        },
+        "label": "Category Name",
         "min": 1,
         "type": [
           {
             "code": "string"
           }
-        ]
-      },
-      {
-        "id": "Extension.extension:name.valueString",
-        "path": "Extension.extension.valueString",
-        "label": "Category Name",
-        "min": 1,
-        "max": "1",
+        ],
         "mustSupport": true
       },
       {
@@ -1546,29 +1331,13 @@
       {
         "id": "Extension.extension:selectedValues.value[x]",
         "path": "Extension.extension.value[x]",
-        "slicing": {
-          "discriminator": [
-            {
-              "type": "type",
-              "path": "$this"
-            }
-          ],
-          "ordered": false,
-          "rules": "open"
-        },
+        "label": "Filter Categories by Selected Values",
         "min": 1,
         "type": [
           {
             "code": "base64Binary"
           }
-        ]
-      },
-      {
-        "id": "Extension.extension:selectedValues.valueBase64Binary",
-        "path": "Extension.extension.valueBase64Binary",
-        "label": "Filter Categories by Selected Values",
-        "min": 1,
-        "max": "1",
+        ],
         "mustSupport": true
       },
       {
@@ -1592,29 +1361,13 @@
       {
         "id": "Extension.extension:defaultFilter.value[x]",
         "path": "Extension.extension.value[x]",
-        "slicing": {
-          "discriminator": [
-            {
-              "type": "type",
-              "path": "$this"
-            }
-          ],
-          "ordered": false,
-          "rules": "open"
-        },
+        "label": "Categories Default Filter",
         "min": 1,
         "type": [
           {
             "code": "string"
           }
-        ]
-      },
-      {
-        "id": "Extension.extension:defaultFilter.valueString",
-        "path": "Extension.extension.valueString",
-        "label": "Categories Default Filter",
-        "min": 1,
-        "max": "1",
+        ],
         "mustSupport": true
       },
       {
@@ -1638,29 +1391,13 @@
       {
         "id": "Extension.extension:filterCondition.value[x]",
         "path": "Extension.extension.value[x]",
-        "slicing": {
-          "discriminator": [
-            {
-              "type": "type",
-              "path": "$this"
-            }
-          ],
-          "ordered": false,
-          "rules": "open"
-        },
+        "label": "Categories Filter Condition",
         "min": 1,
         "type": [
           {
             "code": "string"
           }
-        ]
-      },
-      {
-        "id": "Extension.extension:filterCondition.valueString",
-        "path": "Extension.extension.valueString",
-        "label": "Categories Filter Condition",
-        "min": 1,
-        "max": "1",
+        ],
         "mustSupport": true
       },
       {

@@ -35,12 +35,15 @@
               "valueString": "PractitionerRole.practitioner.reference"
             },
             {
-              "url": "url",
-              "valueUrl": "/resource/view/practitioner/FIELD"
-            },
-            {
               "url": "text",
               "valueString": "View Practitioner"
+            },
+            {
+              "url": "displayIn"
+            },
+            {
+              "url": "url",
+              "valueUrl": "/resource/view/practitioner/FIELD"
             },
             {
               "url": "button",

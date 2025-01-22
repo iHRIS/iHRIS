@@ -2,7 +2,6 @@
   "resourceType": "StructureDefinition",
   "id": "ihris-salary",
   "url": "http://ihris.org/fhir/StructureDefinition/ihris-salary",
-  "version": "0.1.0",
   "name": "IhrisSalary",
   "title": "Salary details",
   "status": "active",
@@ -29,16 +28,6 @@
     "element": [
       {
         "id": "Extension",
-        "extension": [
-          {
-            "url": "http://hl7.org/fhir/StructureDefinition/structuredefinition-standards-status",
-            "valueCode": "normative"
-          },
-          {
-            "url": "http://hl7.org/fhir/StructureDefinition/structuredefinition-normative-version",
-            "valueCode": "4.0.0"
-          }
-        ],
         "path": "Extension",
         "short": "Salary details",
         "definition": "Optional Extension Element - found in all resources.",
@@ -725,53 +714,6 @@
       {
         "id": "Extension.extension:salaryScale.value[x]",
         "path": "Extension.extension.value[x]",
-        "slicing": {
-          "discriminator": [
-            {
-              "type": "type",
-              "path": "$this"
-            }
-          ],
-          "ordered": false,
-          "rules": "open"
-        },
-        "short": "Value of extension",
-        "definition": "Value of extension - must be one of a constrained set of the data types (see [Extensibility](extensibility.html) for a list).",
-        "min": 0,
-        "max": "1",
-        "base": {
-          "path": "Extension.value[x]",
-          "min": 0,
-          "max": "1"
-        },
-        "type": [
-          {
-            "code": "Coding"
-          }
-        ],
-        "constraint": [
-          {
-            "key": "ele-1",
-            "severity": "error",
-            "human": "All FHIR elements must have a @value or children",
-            "expression": "hasValue() or (children().count() > id.count())",
-            "xpath": "@value|f:*|h:div",
-            "source": "http://hl7.org/fhir/StructureDefinition/Element"
-          }
-        ],
-        "isModifier": false,
-        "isSummary": false,
-        "mapping": [
-          {
-            "identity": "rim",
-            "map": "N/A"
-          }
-        ]
-      },
-      {
-        "id": "Extension.extension:salaryScale.value[x]:valueCoding",
-        "path": "Extension.extension.value[x]",
-        "sliceName": "valueCoding",
         "label": "Pay Grade",
         "short": "Value of extension",
         "definition": "Value of extension - must be one of a constrained set of the data types (see [Extensibility](extensibility.html) for a list).",
@@ -996,53 +938,6 @@
       {
         "id": "Extension.extension:bsalary.value[x]",
         "path": "Extension.extension.value[x]",
-        "slicing": {
-          "discriminator": [
-            {
-              "type": "type",
-              "path": "$this"
-            }
-          ],
-          "ordered": false,
-          "rules": "open"
-        },
-        "short": "Value of extension",
-        "definition": "Value of extension - must be one of a constrained set of the data types (see [Extensibility](extensibility.html) for a list).",
-        "min": 0,
-        "max": "1",
-        "base": {
-          "path": "Extension.value[x]",
-          "min": 0,
-          "max": "1"
-        },
-        "type": [
-          {
-            "code": "string"
-          }
-        ],
-        "constraint": [
-          {
-            "key": "ele-1",
-            "severity": "error",
-            "human": "All FHIR elements must have a @value or children",
-            "expression": "hasValue() or (children().count() > id.count())",
-            "xpath": "@value|f:*|h:div",
-            "source": "http://hl7.org/fhir/StructureDefinition/Element"
-          }
-        ],
-        "isModifier": false,
-        "isSummary": false,
-        "mapping": [
-          {
-            "identity": "rim",
-            "map": "N/A"
-          }
-        ]
-      },
-      {
-        "id": "Extension.extension:bsalary.value[x]:valueString",
-        "path": "Extension.extension.value[x]",
-        "sliceName": "valueString",
         "label": "Basic Salary",
         "short": "Value of extension",
         "definition": "Value of extension - must be one of a constrained set of the data types (see [Extensibility](extensibility.html) for a list).",
@@ -1263,53 +1158,6 @@
       {
         "id": "Extension.extension:allowance.value[x]",
         "path": "Extension.extension.value[x]",
-        "slicing": {
-          "discriminator": [
-            {
-              "type": "type",
-              "path": "$this"
-            }
-          ],
-          "ordered": false,
-          "rules": "open"
-        },
-        "short": "Value of extension",
-        "definition": "Value of extension - must be one of a constrained set of the data types (see [Extensibility](extensibility.html) for a list).",
-        "min": 0,
-        "max": "1",
-        "base": {
-          "path": "Extension.value[x]",
-          "min": 0,
-          "max": "1"
-        },
-        "type": [
-          {
-            "code": "string"
-          }
-        ],
-        "constraint": [
-          {
-            "key": "ele-1",
-            "severity": "error",
-            "human": "All FHIR elements must have a @value or children",
-            "expression": "hasValue() or (children().count() > id.count())",
-            "xpath": "@value|f:*|h:div",
-            "source": "http://hl7.org/fhir/StructureDefinition/Element"
-          }
-        ],
-        "isModifier": false,
-        "isSummary": false,
-        "mapping": [
-          {
-            "identity": "rim",
-            "map": "N/A"
-          }
-        ]
-      },
-      {
-        "id": "Extension.extension:allowance.value[x]:valueString",
-        "path": "Extension.extension.value[x]",
-        "sliceName": "valueString",
         "label": "Allowance",
         "short": "Value of extension",
         "definition": "Value of extension - must be one of a constrained set of the data types (see [Extensibility](extensibility.html) for a list).",
@@ -1530,53 +1378,6 @@
       {
         "id": "Extension.extension:benefits.value[x]",
         "path": "Extension.extension.value[x]",
-        "slicing": {
-          "discriminator": [
-            {
-              "type": "type",
-              "path": "$this"
-            }
-          ],
-          "ordered": false,
-          "rules": "open"
-        },
-        "short": "Value of extension",
-        "definition": "Value of extension - must be one of a constrained set of the data types (see [Extensibility](extensibility.html) for a list).",
-        "min": 0,
-        "max": "1",
-        "base": {
-          "path": "Extension.value[x]",
-          "min": 0,
-          "max": "1"
-        },
-        "type": [
-          {
-            "code": "string"
-          }
-        ],
-        "constraint": [
-          {
-            "key": "ele-1",
-            "severity": "error",
-            "human": "All FHIR elements must have a @value or children",
-            "expression": "hasValue() or (children().count() > id.count())",
-            "xpath": "@value|f:*|h:div",
-            "source": "http://hl7.org/fhir/StructureDefinition/Element"
-          }
-        ],
-        "isModifier": false,
-        "isSummary": false,
-        "mapping": [
-          {
-            "identity": "rim",
-            "map": "N/A"
-          }
-        ]
-      },
-      {
-        "id": "Extension.extension:benefits.value[x]:valueString",
-        "path": "Extension.extension.value[x]",
-        "sliceName": "valueString",
         "label": "Benefits",
         "short": "Value of extension",
         "definition": "Value of extension - must be one of a constrained set of the data types (see [Extensibility](extensibility.html) for a list).",
@@ -1797,53 +1598,6 @@
       {
         "id": "Extension.extension:period.value[x]",
         "path": "Extension.extension.value[x]",
-        "slicing": {
-          "discriminator": [
-            {
-              "type": "type",
-              "path": "$this"
-            }
-          ],
-          "ordered": false,
-          "rules": "open"
-        },
-        "short": "Value of extension",
-        "definition": "Value of extension - must be one of a constrained set of the data types (see [Extensibility](extensibility.html) for a list).",
-        "min": 0,
-        "max": "1",
-        "base": {
-          "path": "Extension.value[x]",
-          "min": 0,
-          "max": "1"
-        },
-        "type": [
-          {
-            "code": "Period"
-          }
-        ],
-        "constraint": [
-          {
-            "key": "ele-1",
-            "severity": "error",
-            "human": "All FHIR elements must have a @value or children",
-            "expression": "hasValue() or (children().count() > id.count())",
-            "xpath": "@value|f:*|h:div",
-            "source": "http://hl7.org/fhir/StructureDefinition/Element"
-          }
-        ],
-        "isModifier": false,
-        "isSummary": false,
-        "mapping": [
-          {
-            "identity": "rim",
-            "map": "N/A"
-          }
-        ]
-      },
-      {
-        "id": "Extension.extension:period.value[x]:valuePeriod",
-        "path": "Extension.extension.value[x]",
-        "sliceName": "valuePeriod",
         "label": "Effective Period",
         "short": "Value of extension",
         "definition": "Value of extension - must be one of a constrained set of the data types (see [Extensibility](extensibility.html) for a list).",
@@ -1879,7 +1633,7 @@
         ]
       },
       {
-        "id": "Extension.extension:period.value[x]:valuePeriod.id",
+        "id": "Extension.extension:period.value[x].id",
         "path": "Extension.extension.value[x].id",
         "representation": [
           "xmlAttr"
@@ -1914,7 +1668,7 @@
         ]
       },
       {
-        "id": "Extension.extension:period.value[x]:valuePeriod.extension",
+        "id": "Extension.extension:period.value[x].extension",
         "path": "Extension.extension.value[x].extension",
         "slicing": {
           "discriminator": [
@@ -1973,7 +1727,7 @@
         ]
       },
       {
-        "id": "Extension.extension:period.value[x]:valuePeriod.start",
+        "id": "Extension.extension:period.value[x].start",
         "path": "Extension.extension.value[x].start",
         "label": "Effective Start Date",
         "short": "Starting time with inclusive boundary",
@@ -2019,7 +1773,7 @@
         ]
       },
       {
-        "id": "Extension.extension:period.value[x]:valuePeriod.end",
+        "id": "Extension.extension:period.value[x].end",
         "path": "Extension.extension.value[x].end",
         "label": "End Date",
         "short": "End time with inclusive boundary, if not ongoing",
@@ -2250,53 +2004,6 @@
       {
         "id": "Extension.extension:remark.value[x]",
         "path": "Extension.extension.value[x]",
-        "slicing": {
-          "discriminator": [
-            {
-              "type": "type",
-              "path": "$this"
-            }
-          ],
-          "ordered": false,
-          "rules": "open"
-        },
-        "short": "Value of extension",
-        "definition": "Value of extension - must be one of a constrained set of the data types (see [Extensibility](extensibility.html) for a list).",
-        "min": 0,
-        "max": "1",
-        "base": {
-          "path": "Extension.value[x]",
-          "min": 0,
-          "max": "1"
-        },
-        "type": [
-          {
-            "code": "string"
-          }
-        ],
-        "constraint": [
-          {
-            "key": "ele-1",
-            "severity": "error",
-            "human": "All FHIR elements must have a @value or children",
-            "expression": "hasValue() or (children().count() > id.count())",
-            "xpath": "@value|f:*|h:div",
-            "source": "http://hl7.org/fhir/StructureDefinition/Element"
-          }
-        ],
-        "isModifier": false,
-        "isSummary": false,
-        "mapping": [
-          {
-            "identity": "rim",
-            "map": "N/A"
-          }
-        ]
-      },
-      {
-        "id": "Extension.extension:remark.value[x]:valueString",
-        "path": "Extension.extension.value[x]",
-        "sliceName": "valueString",
         "label": "Remark",
         "short": "Value of extension",
         "definition": "Value of extension - must be one of a constrained set of the data types (see [Extensibility](extensibility.html) for a list).",
@@ -2517,53 +2224,6 @@
       {
         "id": "Extension.extension:salarySource.value[x]",
         "path": "Extension.extension.value[x]",
-        "slicing": {
-          "discriminator": [
-            {
-              "type": "type",
-              "path": "$this"
-            }
-          ],
-          "ordered": false,
-          "rules": "open"
-        },
-        "short": "Value of extension",
-        "definition": "Value of extension - must be one of a constrained set of the data types (see [Extensibility](extensibility.html) for a list).",
-        "min": 0,
-        "max": "1",
-        "base": {
-          "path": "Extension.value[x]",
-          "min": 0,
-          "max": "1"
-        },
-        "type": [
-          {
-            "code": "Coding"
-          }
-        ],
-        "constraint": [
-          {
-            "key": "ele-1",
-            "severity": "error",
-            "human": "All FHIR elements must have a @value or children",
-            "expression": "hasValue() or (children().count() > id.count())",
-            "xpath": "@value|f:*|h:div",
-            "source": "http://hl7.org/fhir/StructureDefinition/Element"
-          }
-        ],
-        "isModifier": false,
-        "isSummary": false,
-        "mapping": [
-          {
-            "identity": "rim",
-            "map": "N/A"
-          }
-        ]
-      },
-      {
-        "id": "Extension.extension:salarySource.value[x]:valueCoding",
-        "path": "Extension.extension.value[x]",
-        "sliceName": "valueCoding",
         "label": "Salary Source",
         "short": "Value of extension",
         "definition": "Value of extension - must be one of a constrained set of the data types (see [Extensibility](extensibility.html) for a list).",
@@ -2788,53 +2448,6 @@
       {
         "id": "Extension.extension:frequency.value[x]",
         "path": "Extension.extension.value[x]",
-        "slicing": {
-          "discriminator": [
-            {
-              "type": "type",
-              "path": "$this"
-            }
-          ],
-          "ordered": false,
-          "rules": "open"
-        },
-        "short": "Value of extension",
-        "definition": "Value of extension - must be one of a constrained set of the data types (see [Extensibility](extensibility.html) for a list).",
-        "min": 0,
-        "max": "1",
-        "base": {
-          "path": "Extension.value[x]",
-          "min": 0,
-          "max": "1"
-        },
-        "type": [
-          {
-            "code": "Coding"
-          }
-        ],
-        "constraint": [
-          {
-            "key": "ele-1",
-            "severity": "error",
-            "human": "All FHIR elements must have a @value or children",
-            "expression": "hasValue() or (children().count() > id.count())",
-            "xpath": "@value|f:*|h:div",
-            "source": "http://hl7.org/fhir/StructureDefinition/Element"
-          }
-        ],
-        "isModifier": false,
-        "isSummary": false,
-        "mapping": [
-          {
-            "identity": "rim",
-            "map": "N/A"
-          }
-        ]
-      },
-      {
-        "id": "Extension.extension:frequency.value[x]:valueCoding",
-        "path": "Extension.extension.value[x]",
-        "sliceName": "valueCoding",
         "label": "Pay Frequency",
         "short": "Value of extension",
         "definition": "Value of extension - must be one of a constrained set of the data types (see [Extensibility](extensibility.html) for a list).",
@@ -3059,53 +2672,6 @@
       {
         "id": "Extension.extension:current.value[x]",
         "path": "Extension.extension.value[x]",
-        "slicing": {
-          "discriminator": [
-            {
-              "type": "type",
-              "path": "$this"
-            }
-          ],
-          "ordered": false,
-          "rules": "open"
-        },
-        "short": "Value of extension",
-        "definition": "Value of extension - must be one of a constrained set of the data types (see [Extensibility](extensibility.html) for a list).",
-        "min": 0,
-        "max": "1",
-        "base": {
-          "path": "Extension.value[x]",
-          "min": 0,
-          "max": "1"
-        },
-        "type": [
-          {
-            "code": "boolean"
-          }
-        ],
-        "constraint": [
-          {
-            "key": "ele-1",
-            "severity": "error",
-            "human": "All FHIR elements must have a @value or children",
-            "expression": "hasValue() or (children().count() > id.count())",
-            "xpath": "@value|f:*|h:div",
-            "source": "http://hl7.org/fhir/StructureDefinition/Element"
-          }
-        ],
-        "isModifier": false,
-        "isSummary": false,
-        "mapping": [
-          {
-            "identity": "rim",
-            "map": "N/A"
-          }
-        ]
-      },
-      {
-        "id": "Extension.extension:current.value[x]:valueBoolean",
-        "path": "Extension.extension.value[x]",
-        "sliceName": "valueBoolean",
         "label": "Is Current",
         "short": "Value of extension",
         "definition": "Value of extension - must be one of a constrained set of the data types (see [Extensibility](extensibility.html) for a list).",
@@ -3409,28 +2975,12 @@
       {
         "id": "Extension.extension:salaryScale.value[x]",
         "path": "Extension.extension.value[x]",
-        "slicing": {
-          "discriminator": [
-            {
-              "type": "type",
-              "path": "$this"
-            }
-          ],
-          "ordered": false,
-          "rules": "open"
-        },
+        "label": "Pay Grade",
         "type": [
           {
             "code": "Coding"
           }
-        ]
-      },
-      {
-        "id": "Extension.extension:salaryScale.valueCoding",
-        "path": "Extension.extension.valueCoding",
-        "label": "Pay Grade",
-        "min": 0,
-        "max": "1",
+        ],
         "mustSupport": true,
         "binding": {
           "strength": "required",
@@ -3458,28 +3008,12 @@
       {
         "id": "Extension.extension:bsalary.value[x]",
         "path": "Extension.extension.value[x]",
-        "slicing": {
-          "discriminator": [
-            {
-              "type": "type",
-              "path": "$this"
-            }
-          ],
-          "ordered": false,
-          "rules": "open"
-        },
+        "label": "Basic Salary",
         "type": [
           {
             "code": "string"
           }
-        ]
-      },
-      {
-        "id": "Extension.extension:bsalary.valueString",
-        "path": "Extension.extension.valueString",
-        "label": "Basic Salary",
-        "min": 0,
-        "max": "1",
+        ],
         "mustSupport": true
       },
       {
@@ -3503,28 +3037,12 @@
       {
         "id": "Extension.extension:allowance.value[x]",
         "path": "Extension.extension.value[x]",
-        "slicing": {
-          "discriminator": [
-            {
-              "type": "type",
-              "path": "$this"
-            }
-          ],
-          "ordered": false,
-          "rules": "open"
-        },
+        "label": "Allowance",
         "type": [
           {
             "code": "string"
           }
-        ]
-      },
-      {
-        "id": "Extension.extension:allowance.valueString",
-        "path": "Extension.extension.valueString",
-        "label": "Allowance",
-        "min": 0,
-        "max": "1",
+        ],
         "mustSupport": true
       },
       {
@@ -3548,28 +3066,12 @@
       {
         "id": "Extension.extension:benefits.value[x]",
         "path": "Extension.extension.value[x]",
-        "slicing": {
-          "discriminator": [
-            {
-              "type": "type",
-              "path": "$this"
-            }
-          ],
-          "ordered": false,
-          "rules": "open"
-        },
+        "label": "Benefits",
         "type": [
           {
             "code": "string"
           }
-        ]
-      },
-      {
-        "id": "Extension.extension:benefits.valueString",
-        "path": "Extension.extension.valueString",
-        "label": "Benefits",
-        "min": 0,
-        "max": "1",
+        ],
         "mustSupport": true
       },
       {
@@ -3593,28 +3095,12 @@
       {
         "id": "Extension.extension:period.value[x]",
         "path": "Extension.extension.value[x]",
-        "slicing": {
-          "discriminator": [
-            {
-              "type": "type",
-              "path": "$this"
-            }
-          ],
-          "ordered": false,
-          "rules": "open"
-        },
+        "label": "Effective Period",
         "type": [
           {
             "code": "Period"
           }
-        ]
-      },
-      {
-        "id": "Extension.extension:period.valuePeriod",
-        "path": "Extension.extension.valuePeriod",
-        "label": "Effective Period",
-        "min": 0,
-        "max": "1",
+        ],
         "constraint": [
           {
             "key": "ihris-period-start-end",
@@ -3627,15 +3113,15 @@
         ]
       },
       {
-        "id": "Extension.extension:period.valuePeriod.start",
-        "path": "Extension.extension.valuePeriod.start",
+        "id": "Extension.extension:period.value[x].start",
+        "path": "Extension.extension.value[x].start",
         "label": "Effective Start Date",
         "min": 1,
         "mustSupport": true
       },
       {
-        "id": "Extension.extension:period.valuePeriod.end",
-        "path": "Extension.extension.valuePeriod.end",
+        "id": "Extension.extension:period.value[x].end",
+        "path": "Extension.extension.value[x].end",
         "label": "End Date",
         "mustSupport": true
       },
@@ -3660,28 +3146,12 @@
       {
         "id": "Extension.extension:remark.value[x]",
         "path": "Extension.extension.value[x]",
-        "slicing": {
-          "discriminator": [
-            {
-              "type": "type",
-              "path": "$this"
-            }
-          ],
-          "ordered": false,
-          "rules": "open"
-        },
+        "label": "Remark",
         "type": [
           {
             "code": "string"
           }
-        ]
-      },
-      {
-        "id": "Extension.extension:remark.valueString",
-        "path": "Extension.extension.valueString",
-        "label": "Remark",
-        "min": 0,
-        "max": "1",
+        ],
         "mustSupport": true
       },
       {
@@ -3705,28 +3175,12 @@
       {
         "id": "Extension.extension:salarySource.value[x]",
         "path": "Extension.extension.value[x]",
-        "slicing": {
-          "discriminator": [
-            {
-              "type": "type",
-              "path": "$this"
-            }
-          ],
-          "ordered": false,
-          "rules": "open"
-        },
+        "label": "Salary Source",
         "type": [
           {
             "code": "Coding"
           }
-        ]
-      },
-      {
-        "id": "Extension.extension:salarySource.valueCoding",
-        "path": "Extension.extension.valueCoding",
-        "label": "Salary Source",
-        "min": 0,
-        "max": "1",
+        ],
         "mustSupport": true,
         "binding": {
           "strength": "required",
@@ -3754,28 +3208,12 @@
       {
         "id": "Extension.extension:frequency.value[x]",
         "path": "Extension.extension.value[x]",
-        "slicing": {
-          "discriminator": [
-            {
-              "type": "type",
-              "path": "$this"
-            }
-          ],
-          "ordered": false,
-          "rules": "open"
-        },
+        "label": "Pay Frequency",
         "type": [
           {
             "code": "Coding"
           }
-        ]
-      },
-      {
-        "id": "Extension.extension:frequency.valueCoding",
-        "path": "Extension.extension.valueCoding",
-        "label": "Pay Frequency",
-        "min": 0,
-        "max": "1",
+        ],
         "mustSupport": true,
         "binding": {
           "strength": "required",
@@ -3803,28 +3241,12 @@
       {
         "id": "Extension.extension:current.value[x]",
         "path": "Extension.extension.value[x]",
-        "slicing": {
-          "discriminator": [
-            {
-              "type": "type",
-              "path": "$this"
-            }
-          ],
-          "ordered": false,
-          "rules": "open"
-        },
+        "label": "Is Current",
         "type": [
           {
             "code": "boolean"
           }
-        ]
-      },
-      {
-        "id": "Extension.extension:current.valueBoolean",
-        "path": "Extension.extension.valueBoolean",
-        "label": "Is Current",
-        "min": 0,
-        "max": "1",
+        ],
         "mustSupport": true
       },
       {

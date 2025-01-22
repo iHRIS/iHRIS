@@ -6,7 +6,6 @@
   "id": "service-type",
   "title": "Service type",
   "description": "This value set defines an example set of codes of service-types.",
-  "version": "4.0.1",
   "url": "http://terminology.hl7.org/CodeSystem/service-type",
   "concept": [
     {
@@ -3018,6 +3017,7 @@
       "value": "urn:oid:2.16.840.1.113883.4.642.4.1145"
     }
   ],
+  "version": "4.0.1",
   "experimental": false,
   "publisher": "FHIR Project team",
   "contact": [

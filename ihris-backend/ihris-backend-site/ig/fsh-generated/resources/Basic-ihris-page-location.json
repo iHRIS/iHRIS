@@ -59,12 +59,15 @@
               "valueUrl": "/resource/view/location/FIELD?edit=true"
             },
             {
-              "url": "field",
-              "valueString": "Location.id"
-            },
-            {
               "url": "text",
               "valueString": "Edit"
+            },
+            {
+              "url": "displayIn"
+            },
+            {
+              "url": "field",
+              "valueString": "Location.id"
             },
             {
               "url": "button",

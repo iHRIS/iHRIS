@@ -2,7 +2,6 @@
   "resourceType": "StructureDefinition",
   "id": "ihris-role-primary",
   "url": "http://ihris.org/fhir/StructureDefinition/ihris-role-primary",
-  "version": "0.1.0",
   "name": "IhrisRolePrimary",
   "title": "iHRIS Role Primary",
   "status": "active",
@@ -18,10 +17,7 @@
   "kind": "complex-type",
   "abstract": false,
   "context": [
-    {
-      "type": "element",
-      "expression": "Element"
-    },
+    null,
     {
       "type": "element",
       "expression": "IhrisRole"
@@ -34,16 +30,6 @@
     "element": [
       {
         "id": "Extension",
-        "extension": [
-          {
-            "url": "http://hl7.org/fhir/StructureDefinition/structuredefinition-standards-status",
-            "valueCode": "normative"
-          },
-          {
-            "url": "http://hl7.org/fhir/StructureDefinition/structuredefinition-normative-version",
-            "valueCode": "4.0.0"
-          }
-        ],
         "path": "Extension",
         "short": "iHRIS Role Primary",
         "definition": "iHRIS flag for roles to indicate a primary role for assignment to users.",
@@ -220,53 +206,6 @@
       {
         "id": "Extension.value[x]",
         "path": "Extension.value[x]",
-        "slicing": {
-          "discriminator": [
-            {
-              "type": "type",
-              "path": "$this"
-            }
-          ],
-          "ordered": false,
-          "rules": "open"
-        },
-        "short": "Value of extension",
-        "definition": "Value of extension - must be one of a constrained set of the data types (see [Extensibility](extensibility.html) for a list).",
-        "min": 1,
-        "max": "1",
-        "base": {
-          "path": "Extension.value[x]",
-          "min": 0,
-          "max": "1"
-        },
-        "type": [
-          {
-            "code": "boolean"
-          }
-        ],
-        "constraint": [
-          {
-            "key": "ele-1",
-            "severity": "error",
-            "human": "All FHIR elements must have a @value or children",
-            "expression": "hasValue() or (children().count() > id.count())",
-            "xpath": "@value|f:*|h:div",
-            "source": "http://hl7.org/fhir/StructureDefinition/Element"
-          }
-        ],
-        "isModifier": false,
-        "isSummary": false,
-        "mapping": [
-          {
-            "identity": "rim",
-            "map": "N/A"
-          }
-        ]
-      },
-      {
-        "id": "Extension.value[x]:valueBoolean",
-        "path": "Extension.value[x]",
-        "sliceName": "valueBoolean",
         "short": "Value of extension",
         "definition": "Value of extension - must be one of a constrained set of the data types (see [Extensibility](extensibility.html) for a list).",
         "min": 1,
@@ -323,28 +262,12 @@
       {
         "id": "Extension.value[x]",
         "path": "Extension.value[x]",
-        "slicing": {
-          "discriminator": [
-            {
-              "type": "type",
-              "path": "$this"
-            }
-          ],
-          "ordered": false,
-          "rules": "open"
-        },
         "min": 1,
         "type": [
           {
             "code": "boolean"
           }
         ]
-      },
-      {
-        "id": "Extension.valueBoolean",
-        "path": "Extension.valueBoolean",
-        "min": 1,
-        "max": "1"
       }
     ]
   }

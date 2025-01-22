@@ -5,7 +5,6 @@
   "name": "IhrisFacilityType",
   "id": "ihris-facility-type",
   "title": "Facility Type",
-  "version": "0.9.0",
   "url": "http://ihris.org/fhir/CodeSystem/ihris-facility-type",
   "concept": [
     {
@@ -66,5 +65,6 @@
     }
   ],
   "date": "2022-02-25T08:41:04.362Z",
+  "version": "0.9.0",
   "count": 14
 }

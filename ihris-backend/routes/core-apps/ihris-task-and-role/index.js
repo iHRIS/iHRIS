@@ -16,6 +16,7 @@ router.post("/saveTask", async(req, res) => {
       return res.status(201).json(results);
     })
     .catch((err) => {
+      console.error(JSON.stringify(err.response.data,null,2))
       return res.status(500).json(err);
     });
   }

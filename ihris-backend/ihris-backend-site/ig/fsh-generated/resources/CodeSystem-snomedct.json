@@ -6,7 +6,6 @@
   "id": "snomedct",
   "title": "SNOMED CT (all versions)",
   "description": "SNOMED CT is the most comprehensive and precise clinical health terminology product in the world, owned and distributed around the world by The International Health Terminology Standards Development Organisation (IHTSDO).",
-  "version": "0.1.0",
   "url": "http://snomed.info/sct",
   "meta": {
     "versionId": "1",

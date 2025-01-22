@@ -6,7 +6,6 @@
   "id": "contactentity-type",
   "title": "Contact entity type",
   "description": "This example value set defines a set of codes that can be used to indicate the purpose for which you would contact a contact party.",
-  "version": "4.0.1",
   "url": "http://terminology.hl7.org/CodeSystem/contactentity-type",
   "concept": [
     {
@@ -68,6 +67,7 @@
       "value": "urn:oid:2.16.840.1.113883.4.642.4.1129"
     }
   ],
+  "version": "4.0.1",
   "experimental": false,
   "publisher": "FHIR Project team",
   "contact": [

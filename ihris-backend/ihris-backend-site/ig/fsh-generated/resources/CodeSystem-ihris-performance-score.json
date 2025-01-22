@@ -5,7 +5,6 @@
   "name": "IhrisPerformanceScore",
   "id": "ihris-performance-score",
   "title": "Performance Score",
-  "version": "0.2.0",
   "url": "http://ihris.org/fhir/CodeSystem/ihris-performance-score",
   "concept": [
     {
@@ -34,5 +33,6 @@
       "definition": "Far Exceeds Expectations"
     }
   ],
+  "version": "0.2.0",
   "count": 5
 }

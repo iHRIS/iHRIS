@@ -156,9 +156,9 @@ Usage: #example
 * meta.profile = "http://ihris.org/fhir/StructureDefinition/ihris-person-user"
 * extension[0].url = "http://ihris.org/fhir/StructureDefinition/ihris-password"
 * extension[=].extension[0].url = "password"
-* extension[=].extension[=].valueString = "0da67ef3726a1e0adfbd3c3880c00f33167daeab1f8c728e10b547d382c2b91a96402958209d6af3c947ae9ab53d879dddb79ad046454ade2b12257fe792f8fa"
+* extension[=].extension[=].valueString = "068b5a8874d7b169b6c4b1e015a2ca7d882ba64883a8aad036f6baa76c535775d8f8089d95f55ec123be19c1f59a5a56b40f6799d6132412d1da5aa3eb6a9f36"
 * extension[=].extension[+].url = "salt"
-* extension[=].extension[=].valueString = "239cfeb1222bfb394549125b234e668e"
+* extension[=].extension[=].valueString = "628c35714132437be4b687a0b84623ab"
 * extension[+].url = "http://ihris.org/fhir/StructureDefinition/ihris-assign-role"
 * extension[=].valueReference = Reference(Basic/ihris-role-admin)
 * name.use = #official

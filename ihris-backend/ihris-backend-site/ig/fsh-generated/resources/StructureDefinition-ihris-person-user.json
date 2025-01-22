@@ -1,18 +1,7 @@
 {
   "resourceType": "StructureDefinition",
   "id": "ihris-person-user",
-  "extension": [
-    {
-      "url": "http://hl7.org/fhir/StructureDefinition/structuredefinition-category",
-      "valueString": "Base.Individuals"
-    },
-    {
-      "url": "http://hl7.org/fhir/StructureDefinition/structuredefinition-security-category",
-      "valueCode": "patient"
-    }
-  ],
   "url": "http://ihris.org/fhir/StructureDefinition/ihris-person-user",
-  "version": "0.1.0",
   "name": "IhrisPersonUser",
   "title": "System User",
   "status": "active",
@@ -582,53 +571,6 @@
       {
         "id": "Person.extension:role.value[x]",
         "path": "Person.extension.value[x]",
-        "slicing": {
-          "discriminator": [
-            {
-              "type": "type",
-              "path": "$this"
-            }
-          ],
-          "ordered": false,
-          "rules": "open"
-        },
-        "short": "Value of extension",
-        "definition": "Value of extension - must be one of a constrained set of the data types (see [Extensibility](extensibility.html) for a list).",
-        "min": 1,
-        "max": "1",
-        "base": {
-          "path": "Extension.value[x]",
-          "min": 0,
-          "max": "1"
-        },
-        "type": [
-          {
-            "code": "Reference"
-          }
-        ],
-        "constraint": [
-          {
-            "key": "ele-1",
-            "severity": "error",
-            "human": "All FHIR elements must have a @value or children",
-            "expression": "hasValue() or (children().count() > id.count())",
-            "xpath": "@value|f:*|h:div",
-            "source": "http://hl7.org/fhir/StructureDefinition/Element"
-          }
-        ],
-        "isModifier": false,
-        "isSummary": false,
-        "mapping": [
-          {
-            "identity": "rim",
-            "map": "N/A"
-          }
-        ]
-      },
-      {
-        "id": "Person.extension:role.value[x]:valueReference",
-        "path": "Person.extension.value[x]",
-        "sliceName": "valueReference",
         "label": "Role",
         "short": "Value of extension",
         "definition": "Value of extension - must be one of a constrained set of the data types (see [Extensibility](extensibility.html) for a list).",
@@ -668,7 +610,7 @@
         ]
       },
       {
-        "id": "Person.extension:role.value[x]:valueReference.id",
+        "id": "Person.extension:role.value[x].id",
         "path": "Person.extension.value[x].id",
         "representation": [
           "xmlAttr"
@@ -703,7 +645,7 @@
         ]
       },
       {
-        "id": "Person.extension:role.value[x]:valueReference.extension",
+        "id": "Person.extension:role.value[x].extension",
         "path": "Person.extension.value[x].extension",
         "slicing": {
           "discriminator": [
@@ -762,7 +704,7 @@
         ]
       },
       {
-        "id": "Person.extension:role.value[x]:valueReference.reference",
+        "id": "Person.extension:role.value[x].reference",
         "path": "Person.extension.value[x].reference",
         "label": "Role",
         "short": "Literal reference, Relative, internal or absolute URL",
@@ -804,7 +746,7 @@
         ]
       },
       {
-        "id": "Person.extension:role.value[x]:valueReference.type",
+        "id": "Person.extension:role.value[x].type",
         "path": "Person.extension.value[x].type",
         "short": "Type the reference refers to (e.g. \"Patient\")",
         "definition": "The expected type of the target of the reference. If both Reference.type and Reference.reference are populated and Reference.reference is a FHIR URL, both SHALL be consistent.\n\nThe type is the Canonical URL of Resource Definition that is the type this reference refers to. References are URLs that are relative to http://hl7.org/fhir/StructureDefinition/ e.g. \"Patient\" is a reference to http://hl7.org/fhir/StructureDefinition/Patient. Absolute URLs are only allowed for logical models (and can only be used in references in logical models, not resources).",
@@ -852,7 +794,7 @@
         ]
       },
       {
-        "id": "Person.extension:role.value[x]:valueReference.identifier",
+        "id": "Person.extension:role.value[x].identifier",
         "path": "Person.extension.value[x].identifier",
         "short": "Logical reference, when literal reference is not known",
         "definition": "An identifier for the target resource. This is used when there is no way to reference the other resource directly, either because the entity it represents is not available through a FHIR server, or because there is no way for the author of the resource to convert a known identifier to an actual location. There is no requirement that a Reference.identifier point to something that is actually exposed as a FHIR instance, but it SHALL point to a business concept that would be expected to be exposed as a FHIR instance, and that instance would need to be of a FHIR resource type allowed by the reference.",
@@ -889,7 +831,7 @@
         ]
       },
       {
-        "id": "Person.extension:role.value[x]:valueReference.display",
+        "id": "Person.extension:role.value[x].display",
         "extension": [
           {
             "url": "http://hl7.org/fhir/StructureDefinition/elementdefinition-translatable",
@@ -1174,53 +1116,6 @@
       {
         "id": "Person.extension:initial-password.value[x]",
         "path": "Person.extension.value[x]",
-        "slicing": {
-          "discriminator": [
-            {
-              "type": "type",
-              "path": "$this"
-            }
-          ],
-          "ordered": false,
-          "rules": "open"
-        },
-        "short": "Value of extension",
-        "definition": "Value of extension - must be one of a constrained set of the data types (see [Extensibility](extensibility.html) for a list).",
-        "min": 1,
-        "max": "1",
-        "base": {
-          "path": "Extension.value[x]",
-          "min": 0,
-          "max": "1"
-        },
-        "type": [
-          {
-            "code": "string"
-          }
-        ],
-        "constraint": [
-          {
-            "key": "ele-1",
-            "severity": "error",
-            "human": "All FHIR elements must have a @value or children",
-            "expression": "hasValue() or (children().count() > id.count())",
-            "xpath": "@value|f:*|h:div",
-            "source": "http://hl7.org/fhir/StructureDefinition/Element"
-          }
-        ],
-        "isModifier": false,
-        "isSummary": false,
-        "mapping": [
-          {
-            "identity": "rim",
-            "map": "N/A"
-          }
-        ]
-      },
-      {
-        "id": "Person.extension:initial-password.value[x]:valueString",
-        "path": "Person.extension.value[x]",
-        "sliceName": "valueString",
         "short": "Value of extension",
         "definition": "Value of extension - must be one of a constrained set of the data types (see [Extensibility](extensibility.html) for a list).",
         "min": 1,
@@ -1444,53 +1339,6 @@
       {
         "id": "Person.extension:old-password.value[x]",
         "path": "Person.extension.value[x]",
-        "slicing": {
-          "discriminator": [
-            {
-              "type": "type",
-              "path": "$this"
-            }
-          ],
-          "ordered": false,
-          "rules": "open"
-        },
-        "short": "Value of extension",
-        "definition": "Value of extension - must be one of a constrained set of the data types (see [Extensibility](extensibility.html) for a list).",
-        "min": 1,
-        "max": "1",
-        "base": {
-          "path": "Extension.value[x]",
-          "min": 0,
-          "max": "1"
-        },
-        "type": [
-          {
-            "code": "string"
-          }
-        ],
-        "constraint": [
-          {
-            "key": "ele-1",
-            "severity": "error",
-            "human": "All FHIR elements must have a @value or children",
-            "expression": "hasValue() or (children().count() > id.count())",
-            "xpath": "@value|f:*|h:div",
-            "source": "http://hl7.org/fhir/StructureDefinition/Element"
-          }
-        ],
-        "isModifier": false,
-        "isSummary": false,
-        "mapping": [
-          {
-            "identity": "rim",
-            "map": "N/A"
-          }
-        ]
-      },
-      {
-        "id": "Person.extension:old-password.value[x]:valueString",
-        "path": "Person.extension.value[x]",
-        "sliceName": "valueString",
         "short": "Value of extension",
         "definition": "Value of extension - must be one of a constrained set of the data types (see [Extensibility](extensibility.html) for a list).",
         "min": 1,
@@ -1714,53 +1562,6 @@
       {
         "id": "Person.extension:confirm-initial-password.value[x]",
         "path": "Person.extension.value[x]",
-        "slicing": {
-          "discriminator": [
-            {
-              "type": "type",
-              "path": "$this"
-            }
-          ],
-          "ordered": false,
-          "rules": "open"
-        },
-        "short": "Value of extension",
-        "definition": "Value of extension - must be one of a constrained set of the data types (see [Extensibility](extensibility.html) for a list).",
-        "min": 1,
-        "max": "1",
-        "base": {
-          "path": "Extension.value[x]",
-          "min": 0,
-          "max": "1"
-        },
-        "type": [
-          {
-            "code": "string"
-          }
-        ],
-        "constraint": [
-          {
-            "key": "ele-1",
-            "severity": "error",
-            "human": "All FHIR elements must have a @value or children",
-            "expression": "hasValue() or (children().count() > id.count())",
-            "xpath": "@value|f:*|h:div",
-            "source": "http://hl7.org/fhir/StructureDefinition/Element"
-          }
-        ],
-        "isModifier": false,
-        "isSummary": false,
-        "mapping": [
-          {
-            "identity": "rim",
-            "map": "N/A"
-          }
-        ]
-      },
-      {
-        "id": "Person.extension:confirm-initial-password.value[x]:valueString",
-        "path": "Person.extension.value[x]",
-        "sliceName": "valueString",
         "short": "Value of extension",
         "definition": "Value of extension - must be one of a constrained set of the data types (see [Extensibility](extensibility.html) for a list).",
         "min": 1,
@@ -1984,57 +1785,6 @@
       {
         "id": "Person.extension:location.value[x]",
         "path": "Person.extension.value[x]",
-        "slicing": {
-          "discriminator": [
-            {
-              "type": "type",
-              "path": "$this"
-            }
-          ],
-          "ordered": false,
-          "rules": "open"
-        },
-        "short": "Value of extension",
-        "definition": "Value of extension - must be one of a constrained set of the data types (see [Extensibility](extensibility.html) for a list).",
-        "min": 1,
-        "max": "1",
-        "base": {
-          "path": "Extension.value[x]",
-          "min": 0,
-          "max": "1"
-        },
-        "type": [
-          {
-            "code": "Reference",
-            "targetProfile": [
-              "http://ihris.org/fhir/StructureDefinition/ihris-jurisdiction",
-              "http://ihris.org/fhir/StructureDefinition/ihris-facility"
-            ]
-          }
-        ],
-        "constraint": [
-          {
-            "key": "ele-1",
-            "severity": "error",
-            "human": "All FHIR elements must have a @value or children",
-            "expression": "hasValue() or (children().count() > id.count())",
-            "xpath": "@value|f:*|h:div",
-            "source": "http://hl7.org/fhir/StructureDefinition/Element"
-          }
-        ],
-        "isModifier": false,
-        "isSummary": false,
-        "mapping": [
-          {
-            "identity": "rim",
-            "map": "N/A"
-          }
-        ]
-      },
-      {
-        "id": "Person.extension:location.value[x]:valueReference",
-        "path": "Person.extension.value[x]",
-        "sliceName": "valueReference",
         "label": "Location",
         "short": "Value of extension",
         "definition": "Value of extension - must be one of a constrained set of the data types (see [Extensibility](extensibility.html) for a list).",
@@ -2075,7 +1825,7 @@
         ]
       },
       {
-        "id": "Person.extension:location.value[x]:valueReference.id",
+        "id": "Person.extension:location.value[x].id",
         "path": "Person.extension.value[x].id",
         "representation": [
           "xmlAttr"
@@ -2110,7 +1860,7 @@
         ]
       },
       {
-        "id": "Person.extension:location.value[x]:valueReference.extension",
+        "id": "Person.extension:location.value[x].extension",
         "path": "Person.extension.value[x].extension",
         "slicing": {
           "discriminator": [
@@ -2169,7 +1919,7 @@
         ]
       },
       {
-        "id": "Person.extension:location.value[x]:valueReference.reference",
+        "id": "Person.extension:location.value[x].reference",
         "path": "Person.extension.value[x].reference",
         "label": "Location",
         "short": "Literal reference, Relative, internal or absolute URL",
@@ -2211,7 +1961,7 @@
         ]
       },
       {
-        "id": "Person.extension:location.value[x]:valueReference.type",
+        "id": "Person.extension:location.value[x].type",
         "path": "Person.extension.value[x].type",
         "short": "Type the reference refers to (e.g. \"Patient\")",
         "definition": "The expected type of the target of the reference. If both Reference.type and Reference.reference are populated and Reference.reference is a FHIR URL, both SHALL be consistent.\n\nThe type is the Canonical URL of Resource Definition that is the type this reference refers to. References are URLs that are relative to http://hl7.org/fhir/StructureDefinition/ e.g. \"Patient\" is a reference to http://hl7.org/fhir/StructureDefinition/Patient. Absolute URLs are only allowed for logical models (and can only be used in references in logical models, not resources).",
@@ -2259,7 +2009,7 @@
         ]
       },
       {
-        "id": "Person.extension:location.value[x]:valueReference.identifier",
+        "id": "Person.extension:location.value[x].identifier",
         "path": "Person.extension.value[x].identifier",
         "short": "Logical reference, when literal reference is not known",
         "definition": "An identifier for the target resource. This is used when there is no way to reference the other resource directly, either because the entity it represents is not available through a FHIR server, or because there is no way for the author of the resource to convert a known identifier to an actual location. There is no requirement that a Reference.identifier point to something that is actually exposed as a FHIR instance, but it SHALL point to a business concept that would be expected to be exposed as a FHIR instance, and that instance would need to be of a FHIR resource type allowed by the reference.",
@@ -2296,7 +2046,7 @@
         ]
       },
       {
-        "id": "Person.extension:location.value[x]:valueReference.display",
+        "id": "Person.extension:location.value[x].display",
         "extension": [
           {
             "url": "http://hl7.org/fhir/StructureDefinition/elementdefinition-translatable",
@@ -2527,53 +2277,6 @@
       {
         "id": "Person.extension:practitioner.value[x]",
         "path": "Person.extension.value[x]",
-        "slicing": {
-          "discriminator": [
-            {
-              "type": "type",
-              "path": "$this"
-            }
-          ],
-          "ordered": false,
-          "rules": "open"
-        },
-        "short": "Value of extension",
-        "definition": "Value of extension - must be one of a constrained set of the data types (see [Extensibility](extensibility.html) for a list).",
-        "min": 0,
-        "max": "1",
-        "base": {
-          "path": "Extension.value[x]",
-          "min": 0,
-          "max": "1"
-        },
-        "type": [
-          {
-            "code": "Reference"
-          }
-        ],
-        "constraint": [
-          {
-            "key": "ele-1",
-            "severity": "error",
-            "human": "All FHIR elements must have a @value or children",
-            "expression": "hasValue() or (children().count() > id.count())",
-            "xpath": "@value|f:*|h:div",
-            "source": "http://hl7.org/fhir/StructureDefinition/Element"
-          }
-        ],
-        "isModifier": false,
-        "isSummary": false,
-        "mapping": [
-          {
-            "identity": "rim",
-            "map": "N/A"
-          }
-        ]
-      },
-      {
-        "id": "Person.extension:practitioner.value[x]:valueReference",
-        "path": "Person.extension.value[x]",
-        "sliceName": "valueReference",
         "label": "Practitioner",
         "short": "Value of extension",
         "definition": "Value of extension - must be one of a constrained set of the data types (see [Extensibility](extensibility.html) for a list).",
@@ -4255,12 +3958,8 @@
         "mustSupport": true
       },
       {
-        "id": "Person.extension:role.valueReference",
-        "path": "Person.extension.valueReference"
-      },
-      {
-        "id": "Person.extension:role.valueReference.reference",
-        "path": "Person.extension.valueReference.reference",
+        "id": "Person.extension:role.value[x].reference",
+        "path": "Person.extension.value[x].reference",
         "mustSupport": true
       },
       {
@@ -4297,8 +3996,8 @@
         "mustSupport": true
       },
       {
-        "id": "Person.extension:initial-password.valueString",
-        "path": "Person.extension.valueString",
+        "id": "Person.extension:initial-password.value[x]",
+        "path": "Person.extension.value[x]",
         "mustSupport": true
       },
       {
@@ -4319,8 +4018,8 @@
         "mustSupport": true
       },
       {
-        "id": "Person.extension:old-password.valueString",
-        "path": "Person.extension.valueString",
+        "id": "Person.extension:old-password.value[x]",
+        "path": "Person.extension.value[x]",
         "mustSupport": true
       },
       {
@@ -4341,8 +4040,8 @@
         "mustSupport": true
       },
       {
-        "id": "Person.extension:confirm-initial-password.valueString",
-        "path": "Person.extension.valueString",
+        "id": "Person.extension:confirm-initial-password.value[x]",
+        "path": "Person.extension.value[x]",
         "mustSupport": true
       },
       {
@@ -4380,8 +4079,8 @@
         "mustSupport": true
       },
       {
-        "id": "Person.extension:practitioner.valueReference",
-        "path": "Person.extension.valueReference",
+        "id": "Person.extension:practitioner.value[x]",
+        "path": "Person.extension.value[x]",
         "mustSupport": true
       },
       {
