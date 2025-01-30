@@ -30,7 +30,7 @@
         },
         {
           "linkId": "PractitionerRole.extension[0]",
-          "definition": "http://ihris.org/fhir/StructureDefinition/ihris-practitioner-role#PractitionerRole.extension:reasonForDepature.value[x]:valueCoding",
+          "definition": "http://ihris.org/fhir/StructureDefinition/ihris-practitioner-role#PractitionerRole.extension:reasonForDepature.value[x]",
           "text": "Reason For Departure",
           "type": "choice",
           "answerValueSet": "http://ihris.org/fhir/ValueSet/ihris-reason-departure-valueset",

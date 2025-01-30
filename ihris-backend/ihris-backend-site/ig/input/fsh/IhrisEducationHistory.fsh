@@ -231,14 +231,14 @@ Usage:          #definition
 * item[0].type = #group
 
 * item[0].item[0].linkId = "Basic.extension[0].extension[0]"
-* item[0].item[0].definition = "http://ihris.org/fhir/StructureDefinition/ihris-basic-education-history#Basic.extension:educationHistory.extension:institution.value[x]:valueString"
+* item[0].item[0].definition = "http://ihris.org/fhir/StructureDefinition/ihris-basic-education-history#Basic.extension:educationHistory.extension:institution.value[x]"
 * item[0].item[0].text = "Education Institution"
 * item[0].item[0].type = #string
 * item[0].item[0].required = true
 * item[0].item[0].repeats = false
 
 * item[0].item[1].linkId = "Basic.extension[0].extension[1]"
-* item[0].item[1].definition = "http://ihris.org/fhir/StructureDefinition/ihris-basic-education-history#Basic.extension:educationHistory.extension:level.value[x]:valueCoding"
+* item[0].item[1].definition = "http://ihris.org/fhir/StructureDefinition/ihris-basic-education-history#Basic.extension:educationHistory.extension:level.value[x]"
 * item[0].item[1].text = "Education Level"
 * item[0].item[1].type = #choice
 * item[0].item[1].answerValueSet = "http://ihris.org/fhir/ValueSet/ihris-education-level-valueset"
@@ -246,7 +246,7 @@ Usage:          #definition
 * item[0].item[1].repeats = false
 
 * item[0].item[2].linkId = "Basic.extension[0].extension[2]"
-* item[0].item[2].definition = "http://ihris.org/fhir/StructureDefinition/ihris-basic-education-history#Basic.extension:educationHistory.extension:degree.value[x]:valueCoding"
+* item[0].item[2].definition = "http://ihris.org/fhir/StructureDefinition/ihris-basic-education-history#Basic.extension:educationHistory.extension:degree.value[x]"
 * item[0].item[2].text = "Degree"
 * item[0].item[2].type = #choice
 * item[0].item[2].answerValueSet = "http://ihris.org/fhir/ValueSet/ihris-degree-valueset"
@@ -254,7 +254,7 @@ Usage:          #definition
 * item[0].item[2].repeats = false
 
 * item[0].item[3].linkId = "Basic.extension[0].extension[3]"
-* item[0].item[3].definition = "http://ihris.org/fhir/StructureDefinition/ihris-basic-education-history#Basic.extension:educationHistory.extension:educationalMajor.value[x]:valueCoding"
+* item[0].item[3].definition = "http://ihris.org/fhir/StructureDefinition/ihris-basic-education-history#Basic.extension:educationHistory.extension:educationalMajor.value[x]"
 * item[0].item[3].text = "Education Major"
 * item[0].item[3].type = #choice
 * item[0].item[3].answerValueSet = "http://ihris.org/fhir/ValueSet/ihris-educational-major-valueset"
@@ -262,21 +262,21 @@ Usage:          #definition
 * item[0].item[3].repeats = false
 
 * item[0].item[4].linkId = "Basic.extension[0].extension[4]#year"
-* item[0].item[4].definition = "http://ihris.org/fhir/StructureDefinition/ihris-basic-education-history#Basic.extension:educationHistory.extension:year.value[x]:valueDate"
+* item[0].item[4].definition = "http://ihris.org/fhir/StructureDefinition/ihris-basic-education-history#Basic.extension:educationHistory.extension:year.value[x]"
 * item[0].item[4].text = "Year Of Graduation"
 * item[0].item[4].type = #date
 * item[0].item[4].required = false
 * item[0].item[4].repeats = false
 
 * item[0].item[5].linkId = "Basic.extension[0].extension[5]"
-* item[0].item[5].definition = "http://ihris.org/fhir/StructureDefinition/ihris-basic-education-history#Basic.extension:educationHistory.extension:current.value[x]:valueBoolean"
+* item[0].item[5].definition = "http://ihris.org/fhir/StructureDefinition/ihris-basic-education-history#Basic.extension:educationHistory.extension:current.value[x]"
 * item[0].item[5].text = "Is Current?"
 * item[0].item[5].type = #boolean
 * item[0].item[5].required = false
 * item[0].item[5].repeats = false
 
 * item[0].item[6].linkId = "Basic.extension[0].extension[6]"
-* item[0].item[6].definition = "http://ihris.org/fhir/StructureDefinition/ihris-basic-education-history#Basic.extension:educationHistory.extension:attachment.value[x]:valueAttachment"
+* item[0].item[6].definition = "http://ihris.org/fhir/StructureDefinition/ihris-basic-education-history#Basic.extension:educationHistory.extension:attachment.value[x]"
 * item[0].item[6].text = "Attachement"
 * item[0].item[6].type = #attachment
 * item[0].item[6].required = false

@@ -91,7 +91,7 @@
         },
         {
           "linkId": "Practitioner.extension[0]",
-          "definition": "http://ihris.org/fhir/StructureDefinition/ihris-practitioner#Practitioner.extension:residence.value[x]:valueReference",
+          "definition": "http://ihris.org/fhir/StructureDefinition/ihris-practitioner#Practitioner.extension:residence.value[x]",
           "text": "Residence",
           "type": "reference",
           "required": false,

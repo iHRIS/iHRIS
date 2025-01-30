@@ -420,7 +420,7 @@ Usage:          #definition
 * item[0].item[0].repeats = false
 
 * item[0].item[1].linkId = "PractitionerRole.extension[0]"
-* item[0].item[1].definition = "http://ihris.org/fhir/StructureDefinition/ihris-practitioner-role#PractitionerRole.extension:reasonForDepature.value[x]:valueCoding"
+* item[0].item[1].definition = "http://ihris.org/fhir/StructureDefinition/ihris-practitioner-role#PractitionerRole.extension:reasonForDepature.value[x]"
 * item[0].item[1].text = "Reason For Departure"
 * item[0].item[1].type = #choice
 * item[0].item[1].answerValueSet = "http://ihris.org/fhir/ValueSet/ihris-reason-departure-valueset"
@@ -464,7 +464,7 @@ Usage:          #definition
 * item[0].item[0].item[0].repeats = false
 
 * item[0].item[0].item[1].linkId = "reasonfordepature"
-* item[0].item[0].item[1].definition = "http://ihris.org/fhir/StructureDefinition/ihris-job-description#PractitionerRole.extension:reasonForDepature.value[x]:valueCoding"
+* item[0].item[0].item[1].definition = "http://ihris.org/fhir/StructureDefinition/ihris-job-description#PractitionerRole.extension:reasonForDepature.value[x]"
 * item[0].item[0].item[1].text = "Reason For Change"
 * item[0].item[0].item[1].type = #choice
 * item[0].item[0].item[1].answerValueSet = "http://ihris.org/fhir/ValueSet/ihris-reason-departure-valueset"
@@ -472,7 +472,7 @@ Usage:          #definition
 * item[0].item[0].item[1].repeats = false
 
 * item[0].item[0].item[2].linkId = "oldPositionStatus"
-* item[0].item[0].item[2].definition = "http://ihris.org/fhir/StructureDefinition/ihris-job-description#PractitionerRole.extension:positionStatus.value[x]:valueCoding"
+* item[0].item[0].item[2].definition = "http://ihris.org/fhir/StructureDefinition/ihris-job-description#PractitionerRole.extension:positionStatus.value[x]"
 * item[0].item[0].item[2].text = "Position Status"
 * item[0].item[0].item[2].type = #choice
 * item[0].item[0].item[2].answerValueSet = "http://ihris.org/fhir/ValueSet/ihris-position-status"
@@ -495,7 +495,7 @@ Usage:          #definition
 * item[0].item[1].item[0].repeats = false
 
 * item[0].item[1].item[1].linkId = "salaryScale"
-* item[0].item[1].item[1].definition = "http://ihris.org/fhir/StructureDefinition/ihris-practitioner-role#PractitionerRole.extension:salaryScale.value[x]:valueCoding"
+* item[0].item[1].item[1].definition = "http://ihris.org/fhir/StructureDefinition/ihris-practitioner-role#PractitionerRole.extension:salaryScale.value[x]"
 * item[0].item[1].item[1].text = "New Salary Scale"
 * item[0].item[1].item[1].type = #choice
 * item[0].item[1].item[1].answerValueSet = "http://ihris.org/fhir/ValueSet/ihris-salary-grade"
@@ -503,7 +503,7 @@ Usage:          #definition
 * item[0].item[1].item[1].repeats = false
 
 * item[0].item[1].item[2].linkId = "salary"
-* item[0].item[1].item[2].definition = "http://ihris.org/fhir/StructureDefinition/ihris-practitioner-role#PractitionerRole.extension:salary.value[x]:valueMoney"
+* item[0].item[1].item[2].definition = "http://ihris.org/fhir/StructureDefinition/ihris-practitioner-role#PractitionerRole.extension:salary.value[x]"
 * item[0].item[1].item[2].text = "New Salary"
 * item[0].item[1].item[2].type = #string
 * item[0].item[1].item[2].required = true
@@ -517,7 +517,7 @@ Usage:          #definition
 * item[0].item[1].item[3].repeats = false
 
 /* item[0].item[1].item[4].linkId = "PractitionerRole.extension[1]"
-* item[0].item[1].item[4].definition = "http://ihris.org/fhir/StructureDefinition/ihris-job-description#PractitionerRole.extension:shift.value[x]:valueCoding"
+* item[0].item[1].item[4].definition = "http://ihris.org/fhir/StructureDefinition/ihris-job-description#PractitionerRole.extension:shift.value[x]"
 * item[0].item[1].item[4].text = "Shift"
 * item[0].item[1].item[4].type = #choice
 * item[0].item[1].item[4].answerValueSet = "http://ihris.org/fhir/ValueSet/ihris-shift-valueset"
@@ -525,7 +525,7 @@ Usage:          #definition
 * item[0].item[1].item[4].repeats = false*/
 
 * item[0].item[1].item[4].linkId = "employmentStatus"
-* item[0].item[1].item[4].definition = "http://ihris.org/fhir/StructureDefinition/ihris-job-description#PractitionerRole.extension:employmentStatus.value[x]:valueCoding"
+* item[0].item[1].item[4].definition = "http://ihris.org/fhir/StructureDefinition/ihris-job-description#PractitionerRole.extension:employmentStatus.value[x]"
 * item[0].item[1].item[4].text = "Employment Status"
 * item[0].item[1].item[4].type = #choice
 * item[0].item[1].item[4].answerValueSet = "http://ihris.org/fhir/ValueSet/ihris-employment-status-valueset"
@@ -533,7 +533,7 @@ Usage:          #definition
 * item[0].item[1].item[4].repeats = false
 
 /* item[0].item[1].item[5].linkId = "jobType"
-* item[0].item[1].item[5].definition = "http://ihris.org/fhir/StructureDefinition/ihris-job-description#PractitionerRole.extension:jobType.value[x]:valueCoding"
+* item[0].item[1].item[5].definition = "http://ihris.org/fhir/StructureDefinition/ihris-job-description#PractitionerRole.extension:jobType.value[x]"
 * item[0].item[1].item[5].text = "Job Type"
 * item[0].item[1].item[5].type = #choice
 * item[0].item[1].item[5].answerValueSet = "http://ihris.org/fhir/ValueSet/ihris-job-type-valueset"
@@ -541,7 +541,7 @@ Usage:          #definition
 * item[0].item[1].item[5].repeats = false*/
 
 * item[0].item[1].item[5].linkId = "newPositionStatus"
-* item[0].item[1].item[5].definition = "http://ihris.org/fhir/StructureDefinition/ihris-job-description#PractitionerRole.extension:positionStatus.value[x]:valueCoding"
+* item[0].item[1].item[5].definition = "http://ihris.org/fhir/StructureDefinition/ihris-job-description#PractitionerRole.extension:positionStatus.value[x]"
 * item[0].item[1].item[5].text = "Position Status"
 * item[0].item[1].item[5].type = #choice
 * item[0].item[1].item[5].required = true

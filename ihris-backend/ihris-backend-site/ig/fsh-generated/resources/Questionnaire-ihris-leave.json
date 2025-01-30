@@ -22,7 +22,7 @@
       "item": [
         {
           "linkId": "Basic.extension[0].extension[0]",
-          "definition": "http://ihris.org/fhir/StructureDefinition/ihris-basic-leave#Basic.extension:leave.extension:leave-type.value[x]:valueCoding",
+          "definition": "http://ihris.org/fhir/StructureDefinition/ihris-basic-leave#Basic.extension:leave.extension:leave-type.value[x]",
           "text": "Leave Type",
           "type": "choice",
           "answerValueSet": "http://ihris.org/fhir/ValueSet/ihris-leave-type-valueset",
@@ -31,7 +31,7 @@
         },
         {
           "linkId": "Basic.extension[0].extension[1]",
-          "definition": "http://ihris.org/fhir/StructureDefinition/ihris-basic-leave#Basic.extension:leave.extension:period.value[x]:valuePeriod.start",
+          "definition": "http://ihris.org/fhir/StructureDefinition/ihris-basic-leave#Basic.extension:leave.extension:period.value[x]",
           "text": "Start Date",
           "type": "dateTime",
           "required": true,
@@ -39,7 +39,7 @@
         },
         {
           "linkId": "Basic.extension[0].extension[2]",
-          "definition": "http://ihris.org/fhir/StructureDefinition/ihris-basic-leave#Basic.extension:leave.extension:period.value[x]:valuePeriod.end",
+          "definition": "http://ihris.org/fhir/StructureDefinition/ihris-basic-leave#Basic.extension:leave.extension:period.value[x]",
           "text": "End Date",
           "type": "dateTime",
           "required": true,
@@ -47,7 +47,7 @@
         },
         {
           "linkId": "Basic.extension[0].extension[3]",
-          "definition": "http://ihris.org/fhir/StructureDefinition/ihris-basic-leave#Basic.extension:leave.extension:dateRequested.value[x]:valueDate",
+          "definition": "http://ihris.org/fhir/StructureDefinition/ihris-basic-leave#Basic.extension:leave.extension:dateRequested.value[x]",
           "text": "Date Requested",
           "type": "date",
           "required": true,

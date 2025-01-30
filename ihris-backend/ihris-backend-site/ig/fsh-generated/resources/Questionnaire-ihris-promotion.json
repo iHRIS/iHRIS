@@ -36,7 +36,7 @@
             },
             {
               "linkId": "reasonfordepature",
-              "definition": "http://ihris.org/fhir/StructureDefinition/ihris-job-description#PractitionerRole.extension:reasonForDepature.value[x]:valueCoding",
+              "definition": "http://ihris.org/fhir/StructureDefinition/ihris-job-description#PractitionerRole.extension:reasonForDepature.value[x]",
               "text": "Reason For Change",
               "type": "choice",
               "answerValueSet": "http://ihris.org/fhir/ValueSet/ihris-reason-departure-valueset",
@@ -45,7 +45,7 @@
             },
             {
               "linkId": "oldPositionStatus",
-              "definition": "http://ihris.org/fhir/StructureDefinition/ihris-job-description#PractitionerRole.extension:positionStatus.value[x]:valueCoding",
+              "definition": "http://ihris.org/fhir/StructureDefinition/ihris-job-description#PractitionerRole.extension:positionStatus.value[x]",
               "text": "Position Status",
               "type": "choice",
               "answerValueSet": "http://ihris.org/fhir/ValueSet/ihris-position-status",
@@ -80,7 +80,7 @@
             },
             {
               "linkId": "salaryScale",
-              "definition": "http://ihris.org/fhir/StructureDefinition/ihris-practitioner-role#PractitionerRole.extension:salaryScale.value[x]:valueCoding",
+              "definition": "http://ihris.org/fhir/StructureDefinition/ihris-practitioner-role#PractitionerRole.extension:salaryScale.value[x]",
               "text": "New Salary Scale",
               "type": "choice",
               "answerValueSet": "http://ihris.org/fhir/ValueSet/ihris-salary-grade",
@@ -89,7 +89,7 @@
             },
             {
               "linkId": "salary",
-              "definition": "http://ihris.org/fhir/StructureDefinition/ihris-practitioner-role#PractitionerRole.extension:salary.value[x]:valueMoney",
+              "definition": "http://ihris.org/fhir/StructureDefinition/ihris-practitioner-role#PractitionerRole.extension:salary.value[x]",
               "text": "New Salary",
               "type": "string",
               "required": true,
@@ -105,7 +105,7 @@
             },
             {
               "linkId": "employmentStatus",
-              "definition": "http://ihris.org/fhir/StructureDefinition/ihris-job-description#PractitionerRole.extension:employmentStatus.value[x]:valueCoding",
+              "definition": "http://ihris.org/fhir/StructureDefinition/ihris-job-description#PractitionerRole.extension:employmentStatus.value[x]",
               "text": "Employment Status",
               "type": "choice",
               "answerValueSet": "http://ihris.org/fhir/ValueSet/ihris-employment-status-valueset",
@@ -114,7 +114,7 @@
             },
             {
               "linkId": "newPositionStatus",
-              "definition": "http://ihris.org/fhir/StructureDefinition/ihris-job-description#PractitionerRole.extension:positionStatus.value[x]:valueCoding",
+              "definition": "http://ihris.org/fhir/StructureDefinition/ihris-job-description#PractitionerRole.extension:positionStatus.value[x]",
               "text": "Position Status",
               "type": "choice",
               "required": true,

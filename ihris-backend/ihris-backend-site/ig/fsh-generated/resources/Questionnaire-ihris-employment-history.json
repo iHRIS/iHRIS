@@ -35,7 +35,7 @@
       "item": [
         {
           "linkId": "Basic.extension[0].extension[0]",
-          "definition": "http://ihris.org/fhir/StructureDefinition/ihris-basic-employment-history#Basic.extension:employmentHistory.extension:organization.value[x]:valueString",
+          "definition": "http://ihris.org/fhir/StructureDefinition/ihris-basic-employment-history#Basic.extension:employmentHistory.extension:organization.value[x]",
           "text": "Organization Name",
           "type": "string",
           "required": true,
@@ -43,7 +43,7 @@
         },
         {
           "linkId": "Basic.extension[0].extension[1]",
-          "definition": "http://ihris.org/fhir/StructureDefinition/ihris-basic-employment-history#Basic.extension:employmentHistory.extension:address.value[x]:valueString",
+          "definition": "http://ihris.org/fhir/StructureDefinition/ihris-basic-employment-history#Basic.extension:employmentHistory.extension:address.value[x]",
           "text": "Organization Address",
           "type": "text",
           "required": false,
@@ -51,7 +51,7 @@
         },
         {
           "linkId": "Basic.extension[0].extension[2]",
-          "definition": "http://ihris.org/fhir/StructureDefinition/ihris-basic-employment-history#Basic.extension:employmentHistory.extension:telephone.value[x]:valueString",
+          "definition": "http://ihris.org/fhir/StructureDefinition/ihris-basic-employment-history#Basic.extension:employmentHistory.extension:telephone.value[x]",
           "text": "Organization Telephone",
           "type": "string",
           "required": false,
@@ -59,7 +59,7 @@
         },
         {
           "linkId": "Basic.extension[0].extension[3]",
-          "definition": "http://ihris.org/fhir/StructureDefinition/ihris-basic-employment-history#Basic.extension:employmentHistory.extension:startingPosition.value[x]:valueString",
+          "definition": "http://ihris.org/fhir/StructureDefinition/ihris-basic-employment-history#Basic.extension:employmentHistory.extension:startingPosition.value[x]",
           "text": "Position",
           "type": "string",
           "required": true,
@@ -67,7 +67,7 @@
         },
         {
           "linkId": "Basic.extension[0].extension[4]",
-          "definition": "http://ihris.org/fhir/StructureDefinition/ihris-basic-employment-history#Basic.extension:employmentHistory.extension:startingSalary.value[x]:valueMoney",
+          "definition": "http://ihris.org/fhir/StructureDefinition/ihris-basic-employment-history#Basic.extension:employmentHistory.extension:startingSalary.value[x]",
           "text": "Salary",
           "type": "string",
           "required": false,
@@ -98,7 +98,7 @@
             }
           ],
           "linkId": "Basic.extension[0].extension[5]",
-          "definition": "http://ihris.org/fhir/StructureDefinition/ihris-basic-employment-history#Basic.extension:employmentHistory.extension:period.value[x]:valuePeriod.start",
+          "definition": "http://ihris.org/fhir/StructureDefinition/ihris-basic-employment-history#Basic.extension:employmentHistory.extension:period.value[x]",
           "text": "Date Started",
           "type": "dateTime",
           "required": true,
