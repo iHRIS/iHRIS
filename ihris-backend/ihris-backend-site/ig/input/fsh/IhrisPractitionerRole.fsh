@@ -229,7 +229,7 @@ Usage:          #example
 * extension[display].extension[link].extension[button].valueBoolean = true
 * extension[display].extension[link].extension[icon].valueString = "mdi-account-arrow-right"
 * extension[display].extension[link].extension[url].valueUrl = "/resource/view/practitioner/FIELD"
-* extension[display].extension[search][0].valueString = "Job|PractitionerRole.code[0].coding[0]"
+* extension[display].extension[search][0].valueString = "Job|PractitionerRole.code.coding[0]"
 * extension[display].extension[search][1].valueString = "Start Date|PractitionerRole.period.start"
 * extension[display].extension[search][2].valueString = "Practitioner|PractitionerRole.practitioner"
 * extension[display].extension[search][3].valueString = "Facility|PractitionerRole.location"
