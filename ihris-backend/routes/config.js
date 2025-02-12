@@ -64,6 +64,7 @@ router.get("/site", async function (req, res) {
     }
     site.version = package.version
     site.auth.signup = {...nconf.get("auth:signup")}
+    site.pages = {...nconf.get("site:pages")}
     site.fhirFlattener = nconf.get("fhir:flattener")
     if (nconf.getBool("security:disabled")) {
         site.security = {disabled: true};

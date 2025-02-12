@@ -167,6 +167,9 @@ export default {
                 this.$router.push("/")
               }
             }
+            if(this.$store.state.user.loggedin && data.pages && data.pages.home && data.pages.home.url) {
+              this.$router.push(data.pages.home.url)
+            }
           })
         })
       })
