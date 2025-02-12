@@ -2,7 +2,6 @@
   "resourceType": "StructureDefinition",
   "id": "ihris-performance",
   "url": "http://ihris.org/fhir/StructureDefinition/ihris-performance",
-  "version": "0.1.0",
   "name": "IhrisPerformance",
   "title": "Performance details",
   "status": "active",
@@ -29,16 +28,6 @@
     "element": [
       {
         "id": "Extension",
-        "extension": [
-          {
-            "url": "http://hl7.org/fhir/StructureDefinition/structuredefinition-standards-status",
-            "valueCode": "normative"
-          },
-          {
-            "url": "http://hl7.org/fhir/StructureDefinition/structuredefinition-normative-version",
-            "valueCode": "4.0.0"
-          }
-        ],
         "path": "Extension",
         "short": "Performance details",
         "definition": "Optional Extension Element - found in all resources.",
@@ -360,53 +349,6 @@
       {
         "id": "Extension.extension:evaluator.value[x]",
         "path": "Extension.extension.value[x]",
-        "slicing": {
-          "discriminator": [
-            {
-              "type": "type",
-              "path": "$this"
-            }
-          ],
-          "ordered": false,
-          "rules": "open"
-        },
-        "short": "Value of extension",
-        "definition": "Value of extension - must be one of a constrained set of the data types (see [Extensibility](extensibility.html) for a list).",
-        "min": 0,
-        "max": "1",
-        "base": {
-          "path": "Extension.value[x]",
-          "min": 0,
-          "max": "1"
-        },
-        "type": [
-          {
-            "code": "string"
-          }
-        ],
-        "constraint": [
-          {
-            "key": "ele-1",
-            "severity": "error",
-            "human": "All FHIR elements must have a @value or children",
-            "expression": "hasValue() or (children().count() > id.count())",
-            "xpath": "@value|f:*|h:div",
-            "source": "http://hl7.org/fhir/StructureDefinition/Element"
-          }
-        ],
-        "isModifier": false,
-        "isSummary": false,
-        "mapping": [
-          {
-            "identity": "rim",
-            "map": "N/A"
-          }
-        ]
-      },
-      {
-        "id": "Extension.extension:evaluator.value[x]:valueString",
-        "path": "Extension.extension.value[x]",
-        "sliceName": "valueString",
         "label": "Evaluator's Name",
         "short": "Value of extension",
         "definition": "Value of extension - must be one of a constrained set of the data types (see [Extensibility](extensibility.html) for a list).",
@@ -626,53 +568,6 @@
       {
         "id": "Extension.extension:period.value[x]",
         "path": "Extension.extension.value[x]",
-        "slicing": {
-          "discriminator": [
-            {
-              "type": "type",
-              "path": "$this"
-            }
-          ],
-          "ordered": false,
-          "rules": "open"
-        },
-        "short": "Value of extension",
-        "definition": "Value of extension - must be one of a constrained set of the data types (see [Extensibility](extensibility.html) for a list).",
-        "min": 0,
-        "max": "1",
-        "base": {
-          "path": "Extension.value[x]",
-          "min": 0,
-          "max": "1"
-        },
-        "type": [
-          {
-            "code": "Period"
-          }
-        ],
-        "constraint": [
-          {
-            "key": "ele-1",
-            "severity": "error",
-            "human": "All FHIR elements must have a @value or children",
-            "expression": "hasValue() or (children().count() > id.count())",
-            "xpath": "@value|f:*|h:div",
-            "source": "http://hl7.org/fhir/StructureDefinition/Element"
-          }
-        ],
-        "isModifier": false,
-        "isSummary": false,
-        "mapping": [
-          {
-            "identity": "rim",
-            "map": "N/A"
-          }
-        ]
-      },
-      {
-        "id": "Extension.extension:period.value[x]:valuePeriod",
-        "path": "Extension.extension.value[x]",
-        "sliceName": "valuePeriod",
         "label": "Evaluation Period",
         "short": "Value of extension",
         "definition": "Value of extension - must be one of a constrained set of the data types (see [Extensibility](extensibility.html) for a list).",
@@ -708,7 +603,7 @@
         ]
       },
       {
-        "id": "Extension.extension:period.value[x]:valuePeriod.id",
+        "id": "Extension.extension:period.value[x].id",
         "path": "Extension.extension.value[x].id",
         "representation": [
           "xmlAttr"
@@ -743,7 +638,7 @@
         ]
       },
       {
-        "id": "Extension.extension:period.value[x]:valuePeriod.extension",
+        "id": "Extension.extension:period.value[x].extension",
         "path": "Extension.extension.value[x].extension",
         "slicing": {
           "discriminator": [
@@ -802,7 +697,7 @@
         ]
       },
       {
-        "id": "Extension.extension:period.value[x]:valuePeriod.start",
+        "id": "Extension.extension:period.value[x].start",
         "path": "Extension.extension.value[x].start",
         "label": "Evaluation Period Start Date",
         "short": "Starting time with inclusive boundary",
@@ -848,7 +743,7 @@
         ]
       },
       {
-        "id": "Extension.extension:period.value[x]:valuePeriod.end",
+        "id": "Extension.extension:period.value[x].end",
         "path": "Extension.extension.value[x].end",
         "label": "Evaluation Period End Date",
         "short": "End time with inclusive boundary, if not ongoing",
@@ -1079,53 +974,6 @@
       {
         "id": "Extension.extension:score.value[x]",
         "path": "Extension.extension.value[x]",
-        "slicing": {
-          "discriminator": [
-            {
-              "type": "type",
-              "path": "$this"
-            }
-          ],
-          "ordered": false,
-          "rules": "open"
-        },
-        "short": "Value of extension",
-        "definition": "Value of extension - must be one of a constrained set of the data types (see [Extensibility](extensibility.html) for a list).",
-        "min": 0,
-        "max": "1",
-        "base": {
-          "path": "Extension.value[x]",
-          "min": 0,
-          "max": "1"
-        },
-        "type": [
-          {
-            "code": "Coding"
-          }
-        ],
-        "constraint": [
-          {
-            "key": "ele-1",
-            "severity": "error",
-            "human": "All FHIR elements must have a @value or children",
-            "expression": "hasValue() or (children().count() > id.count())",
-            "xpath": "@value|f:*|h:div",
-            "source": "http://hl7.org/fhir/StructureDefinition/Element"
-          }
-        ],
-        "isModifier": false,
-        "isSummary": false,
-        "mapping": [
-          {
-            "identity": "rim",
-            "map": "N/A"
-          }
-        ]
-      },
-      {
-        "id": "Extension.extension:score.value[x]:valueCoding",
-        "path": "Extension.extension.value[x]",
-        "sliceName": "valueCoding",
         "label": "Score Attained",
         "short": "Value of extension",
         "definition": "Value of extension - must be one of a constrained set of the data types (see [Extensibility](extensibility.html) for a list).",
@@ -1419,28 +1267,12 @@
       {
         "id": "Extension.extension:evaluator.value[x]",
         "path": "Extension.extension.value[x]",
-        "slicing": {
-          "discriminator": [
-            {
-              "type": "type",
-              "path": "$this"
-            }
-          ],
-          "ordered": false,
-          "rules": "open"
-        },
+        "label": "Evaluator's Name",
         "type": [
           {
             "code": "string"
           }
         ]
-      },
-      {
-        "id": "Extension.extension:evaluator.valueString",
-        "path": "Extension.extension.valueString",
-        "label": "Evaluator's Name",
-        "min": 0,
-        "max": "1"
       },
       {
         "id": "Extension.extension:period",
@@ -1463,16 +1295,7 @@
       {
         "id": "Extension.extension:period.value[x]",
         "path": "Extension.extension.value[x]",
-        "slicing": {
-          "discriminator": [
-            {
-              "type": "type",
-              "path": "$this"
-            }
-          ],
-          "ordered": false,
-          "rules": "open"
-        },
+        "label": "Evaluation Period",
         "type": [
           {
             "code": "Period"
@@ -1480,22 +1303,15 @@
         ]
       },
       {
-        "id": "Extension.extension:period.valuePeriod",
-        "path": "Extension.extension.valuePeriod",
-        "label": "Evaluation Period",
-        "min": 0,
-        "max": "1"
-      },
-      {
-        "id": "Extension.extension:period.valuePeriod.start",
-        "path": "Extension.extension.valuePeriod.start",
+        "id": "Extension.extension:period.value[x].start",
+        "path": "Extension.extension.value[x].start",
         "label": "Evaluation Period Start Date",
         "min": 1,
         "mustSupport": true
       },
       {
-        "id": "Extension.extension:period.valuePeriod.end",
-        "path": "Extension.extension.valuePeriod.end",
+        "id": "Extension.extension:period.value[x].end",
+        "path": "Extension.extension.value[x].end",
         "label": "Evaluation Period End Date",
         "min": 1,
         "mustSupport": true
@@ -1521,28 +1337,12 @@
       {
         "id": "Extension.extension:score.value[x]",
         "path": "Extension.extension.value[x]",
-        "slicing": {
-          "discriminator": [
-            {
-              "type": "type",
-              "path": "$this"
-            }
-          ],
-          "ordered": false,
-          "rules": "open"
-        },
+        "label": "Score Attained",
         "type": [
           {
             "code": "Coding"
           }
-        ]
-      },
-      {
-        "id": "Extension.extension:score.valueCoding",
-        "path": "Extension.extension.valueCoding",
-        "label": "Score Attained",
-        "min": 0,
-        "max": "1",
+        ],
         "binding": {
           "strength": "required",
           "valueSet": "http://ihris.org/fhir/ValueSet/ihris-performance-score-valueset"

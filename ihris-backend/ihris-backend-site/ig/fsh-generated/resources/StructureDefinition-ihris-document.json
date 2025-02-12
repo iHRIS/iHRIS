@@ -1,18 +1,7 @@
 {
   "resourceType": "StructureDefinition",
   "id": "ihris-document",
-  "extension": [
-    {
-      "url": "http://hl7.org/fhir/StructureDefinition/structuredefinition-category",
-      "valueString": "Foundation.Documents"
-    },
-    {
-      "url": "http://hl7.org/fhir/StructureDefinition/structuredefinition-security-category",
-      "valueCode": "not-classified"
-    }
-  ],
   "url": "http://ihris.org/fhir/StructureDefinition/ihris-document",
-  "version": "0.1.0",
   "name": "IhrisDocument",
   "title": "iHRIS Document",
   "status": "active",

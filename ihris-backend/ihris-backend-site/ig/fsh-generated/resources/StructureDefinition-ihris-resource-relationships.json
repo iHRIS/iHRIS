@@ -2,7 +2,6 @@
   "resourceType": "StructureDefinition",
   "id": "ihris-resource-relationships",
   "url": "http://ihris.org/fhir/StructureDefinition/ihris-resource-relationships",
-  "version": "0.1.0",
   "name": "IhrisResourceRelationships",
   "title": "iHRIS Resource Relationships",
   "status": "active",
@@ -30,16 +29,6 @@
     "element": [
       {
         "id": "Extension",
-        "extension": [
-          {
-            "url": "http://hl7.org/fhir/StructureDefinition/structuredefinition-standards-status",
-            "valueCode": "normative"
-          },
-          {
-            "url": "http://hl7.org/fhir/StructureDefinition/structuredefinition-normative-version",
-            "valueCode": "4.0.0"
-          }
-        ],
         "path": "Extension",
         "short": "iHRIS Resource Relationships",
         "definition": "iHRIS Resource Relationships",
@@ -361,53 +350,6 @@
       {
         "id": "Extension.extension:name.value[x]",
         "path": "Extension.extension.value[x]",
-        "slicing": {
-          "discriminator": [
-            {
-              "type": "type",
-              "path": "$this"
-            }
-          ],
-          "ordered": false,
-          "rules": "open"
-        },
-        "short": "Value of extension",
-        "definition": "Value of extension - must be one of a constrained set of the data types (see [Extensibility](extensibility.html) for a list).",
-        "min": 1,
-        "max": "1",
-        "base": {
-          "path": "Extension.value[x]",
-          "min": 0,
-          "max": "1"
-        },
-        "type": [
-          {
-            "code": "Reference"
-          }
-        ],
-        "constraint": [
-          {
-            "key": "ele-1",
-            "severity": "error",
-            "human": "All FHIR elements must have a @value or children",
-            "expression": "hasValue() or (children().count() > id.count())",
-            "xpath": "@value|f:*|h:div",
-            "source": "http://hl7.org/fhir/StructureDefinition/Element"
-          }
-        ],
-        "isModifier": false,
-        "isSummary": false,
-        "mapping": [
-          {
-            "identity": "rim",
-            "map": "N/A"
-          }
-        ]
-      },
-      {
-        "id": "Extension.extension:name.value[x]:valueReference",
-        "path": "Extension.extension.value[x]",
-        "sliceName": "valueReference",
         "label": "Resource Name",
         "short": "Value of extension",
         "definition": "Value of extension - must be one of a constrained set of the data types (see [Extensibility](extensibility.html) for a list).",
@@ -631,53 +573,6 @@
       {
         "id": "Extension.extension:field.value[x]",
         "path": "Extension.extension.value[x]",
-        "slicing": {
-          "discriminator": [
-            {
-              "type": "type",
-              "path": "$this"
-            }
-          ],
-          "ordered": false,
-          "rules": "open"
-        },
-        "short": "Value of extension",
-        "definition": "Value of extension - must be one of a constrained set of the data types (see [Extensibility](extensibility.html) for a list).",
-        "min": 1,
-        "max": "1",
-        "base": {
-          "path": "Extension.value[x]",
-          "min": 0,
-          "max": "1"
-        },
-        "type": [
-          {
-            "code": "string"
-          }
-        ],
-        "constraint": [
-          {
-            "key": "ele-1",
-            "severity": "error",
-            "human": "All FHIR elements must have a @value or children",
-            "expression": "hasValue() or (children().count() > id.count())",
-            "xpath": "@value|f:*|h:div",
-            "source": "http://hl7.org/fhir/StructureDefinition/Element"
-          }
-        ],
-        "isModifier": false,
-        "isSummary": false,
-        "mapping": [
-          {
-            "identity": "rim",
-            "map": "N/A"
-          }
-        ]
-      },
-      {
-        "id": "Extension.extension:field.value[x]:valueString",
-        "path": "Extension.extension.value[x]",
-        "sliceName": "valueString",
         "label": "Report Fields",
         "short": "Value of extension",
         "definition": "Value of extension - must be one of a constrained set of the data types (see [Extensibility](extensibility.html) for a list).",
@@ -898,53 +793,6 @@
       {
         "id": "Extension.extension:filter.value[x]",
         "path": "Extension.extension.value[x]",
-        "slicing": {
-          "discriminator": [
-            {
-              "type": "type",
-              "path": "$this"
-            }
-          ],
-          "ordered": false,
-          "rules": "open"
-        },
-        "short": "Value of extension",
-        "definition": "Value of extension - must be one of a constrained set of the data types (see [Extensibility](extensibility.html) for a list).",
-        "min": 1,
-        "max": "1",
-        "base": {
-          "path": "Extension.value[x]",
-          "min": 0,
-          "max": "1"
-        },
-        "type": [
-          {
-            "code": "string"
-          }
-        ],
-        "constraint": [
-          {
-            "key": "ele-1",
-            "severity": "error",
-            "human": "All FHIR elements must have a @value or children",
-            "expression": "hasValue() or (children().count() > id.count())",
-            "xpath": "@value|f:*|h:div",
-            "source": "http://hl7.org/fhir/StructureDefinition/Element"
-          }
-        ],
-        "isModifier": false,
-        "isSummary": false,
-        "mapping": [
-          {
-            "identity": "rim",
-            "map": "N/A"
-          }
-        ]
-      },
-      {
-        "id": "Extension.extension:filter.value[x]:valueString",
-        "path": "Extension.extension.value[x]",
-        "sliceName": "valueString",
         "label": "Data filters",
         "short": "Value of extension",
         "definition": "Value of extension - must be one of a constrained set of the data types (see [Extensibility](extensibility.html) for a list).",
@@ -1165,53 +1013,6 @@
       {
         "id": "Extension.extension:query.value[x]",
         "path": "Extension.extension.value[x]",
-        "slicing": {
-          "discriminator": [
-            {
-              "type": "type",
-              "path": "$this"
-            }
-          ],
-          "ordered": false,
-          "rules": "open"
-        },
-        "short": "Value of extension",
-        "definition": "Value of extension - must be one of a constrained set of the data types (see [Extensibility](extensibility.html) for a list).",
-        "min": 1,
-        "max": "1",
-        "base": {
-          "path": "Extension.value[x]",
-          "min": 0,
-          "max": "1"
-        },
-        "type": [
-          {
-            "code": "string"
-          }
-        ],
-        "constraint": [
-          {
-            "key": "ele-1",
-            "severity": "error",
-            "human": "All FHIR elements must have a @value or children",
-            "expression": "hasValue() or (children().count() > id.count())",
-            "xpath": "@value|f:*|h:div",
-            "source": "http://hl7.org/fhir/StructureDefinition/Element"
-          }
-        ],
-        "isModifier": false,
-        "isSummary": false,
-        "mapping": [
-          {
-            "identity": "rim",
-            "map": "N/A"
-          }
-        ]
-      },
-      {
-        "id": "Extension.extension:query.value[x]:valueString",
-        "path": "Extension.extension.value[x]",
-        "sliceName": "valueString",
         "label": "Query to Include Resource",
         "short": "Value of extension",
         "definition": "Value of extension - must be one of a constrained set of the data types (see [Extensibility](extensibility.html) for a list).",
@@ -1503,29 +1304,8 @@
       {
         "id": "Extension.extension:name.value[x]",
         "path": "Extension.extension.value[x]",
-        "slicing": {
-          "discriminator": [
-            {
-              "type": "type",
-              "path": "$this"
-            }
-          ],
-          "ordered": false,
-          "rules": "open"
-        },
-        "min": 1,
-        "type": [
-          {
-            "code": "Reference"
-          }
-        ]
-      },
-      {
-        "id": "Extension.extension:name.valueReference",
-        "path": "Extension.extension.valueReference",
         "label": "Resource Name",
         "min": 1,
-        "max": "1",
         "type": [
           {
             "code": "Reference",
@@ -1557,29 +1337,13 @@
       {
         "id": "Extension.extension:field.value[x]",
         "path": "Extension.extension.value[x]",
-        "slicing": {
-          "discriminator": [
-            {
-              "type": "type",
-              "path": "$this"
-            }
-          ],
-          "ordered": false,
-          "rules": "open"
-        },
+        "label": "Report Fields",
         "min": 1,
         "type": [
           {
             "code": "string"
           }
-        ]
-      },
-      {
-        "id": "Extension.extension:field.valueString",
-        "path": "Extension.extension.valueString",
-        "label": "Report Fields",
-        "min": 1,
-        "max": "1",
+        ],
         "mustSupport": true
       },
       {
@@ -1603,29 +1367,13 @@
       {
         "id": "Extension.extension:filter.value[x]",
         "path": "Extension.extension.value[x]",
-        "slicing": {
-          "discriminator": [
-            {
-              "type": "type",
-              "path": "$this"
-            }
-          ],
-          "ordered": false,
-          "rules": "open"
-        },
+        "label": "Data filters",
         "min": 1,
         "type": [
           {
             "code": "string"
           }
-        ]
-      },
-      {
-        "id": "Extension.extension:filter.valueString",
-        "path": "Extension.extension.valueString",
-        "label": "Data filters",
-        "min": 1,
-        "max": "1",
+        ],
         "mustSupport": true
       },
       {
@@ -1649,29 +1397,13 @@
       {
         "id": "Extension.extension:query.value[x]",
         "path": "Extension.extension.value[x]",
-        "slicing": {
-          "discriminator": [
-            {
-              "type": "type",
-              "path": "$this"
-            }
-          ],
-          "ordered": false,
-          "rules": "open"
-        },
+        "label": "Query to Include Resource",
         "min": 1,
         "type": [
           {
             "code": "string"
           }
-        ]
-      },
-      {
-        "id": "Extension.extension:query.valueString",
-        "path": "Extension.extension.valueString",
-        "label": "Query to Include Resource",
-        "min": 1,
-        "max": "1",
+        ],
         "mustSupport": true
       },
       {

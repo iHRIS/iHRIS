@@ -5,7 +5,6 @@
   "id": "identifier-type",
   "title": "IdentifierType",
   "description": "A coded type for an identifier that can be used to determine which identifier to use for a specific purpose.",
-  "version": "4.0.1",
   "url": "http://ihris.org/fhir/ValueSet/identifier-type",
   "meta": {
     "versionId": "1",
@@ -43,6 +42,7 @@
       "value": "urn:oid:2.16.840.1.113883.4.642.3.45"
     }
   ],
+  "version": "4.0.1",
   "experimental": false,
   "date": "2019-11-01T09:29:23+11:00",
   "publisher": "HL7 (FHIR Project)",

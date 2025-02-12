@@ -35,12 +35,15 @@
               "valueString": "Basic.extension.where(url='http://ihris.org/fhir/StructureDefinition/ihris-practitioner-reference').valueReference.reference"
             },
             {
-              "url": "url",
-              "valueUrl": "/resource/view/practitioner/FIELD"
-            },
-            {
               "url": "text",
               "valueString": "View Health Worker"
+            },
+            {
+              "url": "displayIn"
+            },
+            {
+              "url": "url",
+              "valueUrl": "/resource/view/practitioner/FIELD"
             },
             {
               "url": "button",

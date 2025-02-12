@@ -5,7 +5,6 @@
   "name": "IhrisReasonDepartureCodeSystem",
   "id": "ihris-reason-departure-codesystem",
   "title": "Reason For Change/Departure",
-  "version": "0.3.0",
   "url": "http://ihris.org/fhir/CodeSystem/ihris-reason-departure-codesystem",
   "concept": [
     {
@@ -50,5 +49,6 @@
     }
   ],
   "date": "2020-11-14T08:41:04.362Z",
+  "version": "0.3.0",
   "count": 8
 }

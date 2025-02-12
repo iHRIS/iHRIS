@@ -1,0 +1,2530 @@
+[
+  {
+    "outputFile": "Basic-ihris-es-report-mhero-send-message.json",
+    "fshName": "ihris-es-report-mhero-send-message",
+    "fshType": "Instance",
+    "fshFile": "core/IhrisRelationship.fsh",
+    "startLine": 156,
+    "endLine": 211
+  },
+  {
+    "outputFile": "Basic-ihris-es-report-staff-directorate.json",
+    "fshName": "ihris-es-report-staff-directorate",
+    "fshType": "Instance",
+    "fshFile": "core/ihris-staff-directorate-report.fsh",
+    "startLine": 3,
+    "endLine": 84
+  },
+  {
+    "outputFile": "Basic-ihris-es-report-staff.json",
+    "fshName": "ihris-es-report-staff",
+    "fshType": "Instance",
+    "fshFile": "IhrisRelationshipStaff.fsh",
+    "startLine": 1,
+    "endLine": 134
+  },
+  {
+    "outputFile": "Basic-ihris-page-auditevent.json",
+    "fshName": "ihris-page-auditevent",
+    "fshType": "Instance",
+    "fshFile": "core/ihrisAudit.fsh",
+    "startLine": 43,
+    "endLine": 70
+  },
+  {
+    "outputFile": "Basic-ihris-page-basic-education-history.json",
+    "fshName": "ihris-page-basic-education-history",
+    "fshType": "Instance",
+    "fshFile": "IhrisEducationHistory.fsh",
+    "startLine": 285,
+    "endLine": 319
+  },
+  {
+    "outputFile": "Basic-ihris-page-cadre.json",
+    "fshName": "ihris-page-cadre",
+    "fshType": "Instance",
+    "fshFile": "IhrisPractitionerRole.fsh",
+    "startLine": 298,
+    "endLine": 311
+  },
+  {
+    "outputFile": "Basic-ihris-page-classification.json",
+    "fshName": "ihris-page-classification",
+    "fshType": "Instance",
+    "fshFile": "IhrisPractitionerRole.fsh",
+    "startLine": 283,
+    "endLine": 296
+  },
+  {
+    "outputFile": "Basic-ihris-page-degree.json",
+    "fshName": "ihris-page-degree",
+    "fshType": "Instance",
+    "fshFile": "IhrisEducationHistory.fsh",
+    "startLine": 358,
+    "endLine": 373
+  },
+  {
+    "outputFile": "Basic-ihris-page-discipline-action-type.json",
+    "fshName": "ihris-page-discipline-action-type",
+    "fshType": "Instance",
+    "fshFile": "IhrisDisciplinaryAction.fsh",
+    "startLine": 193,
+    "endLine": 208
+  },
+  {
+    "outputFile": "Basic-ihris-page-discipline.json",
+    "fshName": "ihris-page-discipline",
+    "fshType": "Instance",
+    "fshFile": "IhrisDisciplinaryAction.fsh",
+    "startLine": 162,
+    "endLine": 191
+  },
+  {
+    "outputFile": "Basic-ihris-page-education-level.json",
+    "fshName": "ihris-page-education-level",
+    "fshType": "Instance",
+    "fshFile": "IhrisEducationHistory.fsh",
+    "startLine": 375,
+    "endLine": 390
+  },
+  {
+    "outputFile": "Basic-ihris-page-educational-major.json",
+    "fshName": "ihris-page-educational-major",
+    "fshType": "Instance",
+    "fshFile": "IhrisEducationHistory.fsh",
+    "startLine": 341,
+    "endLine": 356
+  },
+  {
+    "outputFile": "Basic-ihris-page-emergency.json",
+    "fshName": "ihris-page-emergency",
+    "fshType": "Instance",
+    "fshFile": "IhrisEmergencyContact.fsh",
+    "startLine": 181,
+    "endLine": 209
+  },
+  {
+    "outputFile": "Basic-ihris-page-employment-history.json",
+    "fshName": "ihris-page-employment-history",
+    "fshType": "Instance",
+    "fshFile": "IhrisEmploymentHistory.fsh",
+    "startLine": 168,
+    "endLine": 199
+  },
+  {
+    "outputFile": "Basic-ihris-page-employment-status.json",
+    "fshName": "ihris-page-employment-status",
+    "fshType": "Instance",
+    "fshFile": "IhrisPractitionerRole.fsh",
+    "startLine": 313,
+    "endLine": 328
+  },
+  {
+    "outputFile": "Basic-ihris-page-facility.json",
+    "fshName": "ihris-page-facility",
+    "fshType": "Instance",
+    "fshFile": "IhrisLocation.fsh",
+    "startLine": 224,
+    "endLine": 254
+  },
+  {
+    "outputFile": "Basic-ihris-page-frequency.json",
+    "fshName": "ihris-page-frequency",
+    "fshType": "Instance",
+    "fshFile": "IhrisSalary.fsh",
+    "startLine": 290,
+    "endLine": 305
+  },
+  {
+    "outputFile": "Basic-ihris-page-inservice-training.json",
+    "fshName": "ihris-page-inservice-training",
+    "fshType": "Instance",
+    "fshFile": "IhrisInserviceTraining.fsh",
+    "startLine": 61,
+    "endLine": 88
+  },
+  {
+    "outputFile": "Basic-ihris-page-institution-type.json",
+    "fshName": "ihris-page-institution-type",
+    "fshType": "Instance",
+    "fshFile": "IhrisEducationHistory.fsh",
+    "startLine": 392,
+    "endLine": 407
+  },
+  {
+    "outputFile": "Basic-ihris-page-institution.json",
+    "fshName": "ihris-page-institution",
+    "fshType": "Instance",
+    "fshFile": "IhrisEducationHistory.fsh",
+    "startLine": 322,
+    "endLine": 339
+  },
+  {
+    "outputFile": "Basic-ihris-page-job-type.json",
+    "fshName": "ihris-page-job-type",
+    "fshType": "Instance",
+    "fshFile": "IhrisPractitionerRole.fsh",
+    "startLine": 330,
+    "endLine": 345
+  },
+  {
+    "outputFile": "Basic-ihris-page-job.json",
+    "fshName": "ihris-page-job",
+    "fshType": "Instance",
+    "fshFile": "IhrisPractitionerRole.fsh",
+    "startLine": 248,
+    "endLine": 266
+  },
+  {
+    "outputFile": "Basic-ihris-page-leave-type.json",
+    "fshName": "ihris-page-leave-type",
+    "fshType": "Instance",
+    "fshFile": "IhrisLeave.fsh",
+    "startLine": 151,
+    "endLine": 164
+  },
+  {
+    "outputFile": "Basic-ihris-page-leave.json",
+    "fshName": "ihris-page-leave",
+    "fshType": "Instance",
+    "fshFile": "IhrisLeave.fsh",
+    "startLine": 124,
+    "endLine": 149
+  },
+  {
+    "outputFile": "Basic-ihris-page-location.json",
+    "fshName": "ihris-page-location",
+    "fshType": "Instance",
+    "fshFile": "IhrisLocation.fsh",
+    "startLine": 269,
+    "endLine": 297
+  },
+  {
+    "outputFile": "Basic-ihris-page-performance.json",
+    "fshName": "ihris-page-performance",
+    "fshType": "Instance",
+    "fshFile": "IhrisPerformance.fsh",
+    "startLine": 104,
+    "endLine": 123
+  },
+  {
+    "outputFile": "Basic-ihris-page-practitioner.json",
+    "fshName": "ihris-page-practitioner",
+    "fshType": "Instance",
+    "fshFile": "IhrisPagePractitioner.fsh",
+    "startLine": 1,
+    "endLine": 299
+  },
+  {
+    "outputFile": "Basic-ihris-page-practitionerrole.json",
+    "fshName": "ihris-page-practitionerrole",
+    "fshType": "Instance",
+    "fshFile": "IhrisPractitionerRole.fsh",
+    "startLine": 221,
+    "endLine": 246
+  },
+  {
+    "outputFile": "Basic-ihris-page-reason-departure.json",
+    "fshName": "ihris-page-reason-departure",
+    "fshType": "Instance",
+    "fshFile": "IhrisPractitionerRole.fsh",
+    "startLine": 364,
+    "endLine": 379
+  },
+  {
+    "outputFile": "Basic-ihris-page-relation.json",
+    "fshName": "ihris-page-relation",
+    "fshType": "Instance",
+    "fshFile": "IhrisPractitioner.fsh",
+    "startLine": 218,
+    "endLine": 233
+  },
+  {
+    "outputFile": "Basic-ihris-page-role.json",
+    "fshName": "ihris-page-role",
+    "fshType": "Instance",
+    "fshFile": "core/IhrisRole.fsh",
+    "startLine": 611,
+    "endLine": 641
+  },
+  {
+    "outputFile": "Basic-ihris-page-salary-grade.json",
+    "fshName": "ihris-page-salary-grade",
+    "fshType": "Instance",
+    "fshFile": "IhrisPractitionerRole.fsh",
+    "startLine": 268,
+    "endLine": 281
+  },
+  {
+    "outputFile": "Basic-ihris-page-salary-ladder.json",
+    "fshName": "ihris-page-salary-ladder",
+    "fshType": "Instance",
+    "fshFile": "IhrisSalary.fsh",
+    "startLine": 239,
+    "endLine": 254
+  },
+  {
+    "outputFile": "Basic-ihris-page-salary-scale.json",
+    "fshName": "ihris-page-salary-scale",
+    "fshType": "Instance",
+    "fshFile": "IhrisPractitionerRole.fsh",
+    "startLine": 347,
+    "endLine": 362
+  },
+  {
+    "outputFile": "Basic-ihris-page-salary-source.json",
+    "fshName": "ihris-page-salary-source",
+    "fshType": "Instance",
+    "fshFile": "IhrisSalary.fsh",
+    "startLine": 273,
+    "endLine": 288
+  },
+  {
+    "outputFile": "Basic-ihris-page-salary-step.json",
+    "fshName": "ihris-page-salary-step",
+    "fshType": "Instance",
+    "fshFile": "IhrisSalary.fsh",
+    "startLine": 256,
+    "endLine": 271
+  },
+  {
+    "outputFile": "Basic-ihris-page-salary.json",
+    "fshName": "ihris-page-salary",
+    "fshType": "Instance",
+    "fshFile": "IhrisSalary.fsh",
+    "startLine": 207,
+    "endLine": 237
+  },
+  {
+    "outputFile": "Basic-ihris-page-shift.json",
+    "fshName": "ihris-page-shift",
+    "fshType": "Instance",
+    "fshFile": "IhrisPractitionerRole.fsh",
+    "startLine": 381,
+    "endLine": 396
+  },
+  {
+    "outputFile": "Basic-ihris-page-task.json",
+    "fshName": "ihris-page-task",
+    "fshType": "Instance",
+    "fshFile": "core/IhrisRole.fsh",
+    "startLine": 694,
+    "endLine": 722
+  },
+  {
+    "outputFile": "Basic-ihris-page-test-codesystem.json",
+    "fshName": "ihris-page-test-codesystem",
+    "fshType": "Instance",
+    "fshFile": "core/IhrisTest.fsh",
+    "startLine": 165,
+    "endLine": 180
+  },
+  {
+    "outputFile": "Basic-ihris-page-test-practitioner.json",
+    "fshName": "ihris-page-test-practitioner",
+    "fshType": "Instance",
+    "fshFile": "core/IhrisTest.fsh",
+    "startLine": 125,
+    "endLine": 163
+  },
+  {
+    "outputFile": "Basic-ihris-page-training.json",
+    "fshName": "ihris-page-training",
+    "fshType": "Instance",
+    "fshFile": "IhrisInserviceTraining.fsh",
+    "startLine": 90,
+    "endLine": 103
+  },
+  {
+    "outputFile": "Basic-ihris-page-user.json",
+    "fshName": "ihris-page-user",
+    "fshType": "Instance",
+    "fshFile": "IhrisUser.fsh",
+    "startLine": 197,
+    "endLine": 230
+  },
+  {
+    "outputFile": "Basic-ihris-role-admin.json",
+    "fshName": "ihris-role-admin",
+    "fshType": "Instance",
+    "fshFile": "core/IhrisRole.fsh",
+    "startLine": 187,
+    "endLine": 195
+  },
+  {
+    "outputFile": "Basic-ihris-role-open.json",
+    "fshName": "ihris-role-open",
+    "fshType": "Instance",
+    "fshFile": "core/IhrisRole.fsh",
+    "startLine": 175,
+    "endLine": 185
+  },
+  {
+    "outputFile": "Basic-ihris-role-self.json",
+    "fshName": "ihris-role-self",
+    "fshType": "Instance",
+    "fshFile": "core/IhrisRole.fsh",
+    "startLine": 296,
+    "endLine": 324
+  },
+  {
+    "outputFile": "Basic-ihris-task-all-permissions-to-everything.json",
+    "fshName": "ihris-task-all-permissions-to-everything",
+    "fshType": "Instance",
+    "fshFile": "core/IhrisRole.fsh",
+    "startLine": 343,
+    "endLine": 350
+  },
+  {
+    "outputFile": "Basic-ihris-task-navigation-evaluation.json",
+    "fshName": "ihris-task-navigation-evaluation",
+    "fshType": "Instance",
+    "fshFile": "core/IhrisRole.fsh",
+    "startLine": 276,
+    "endLine": 284
+  },
+  {
+    "outputFile": "Basic-ihris-task-navigation-leave.json",
+    "fshName": "ihris-task-navigation-leave",
+    "fshType": "Instance",
+    "fshFile": "core/IhrisRole.fsh",
+    "startLine": 266,
+    "endLine": 274
+  },
+  {
+    "outputFile": "Basic-ihris-task-navigation-password.json",
+    "fshName": "ihris-task-navigation-password",
+    "fshType": "Instance",
+    "fshFile": "core/IhrisRole.fsh",
+    "startLine": 286,
+    "endLine": 294
+  },
+  {
+    "outputFile": "Basic-ihris-task-navigation-profile.json",
+    "fshName": "ihris-task-navigation-profile",
+    "fshType": "Instance",
+    "fshFile": "core/IhrisRole.fsh",
+    "startLine": 198,
+    "endLine": 206
+  },
+  {
+    "outputFile": "Basic-ihris-task-read-auditevent-resource.json",
+    "fshName": "ihris-task-read-auditevent-resource",
+    "fshType": "Instance",
+    "fshFile": "core/IhrisRole.fsh",
+    "startLine": 592,
+    "endLine": 599
+  },
+  {
+    "outputFile": "Basic-ihris-task-read-basic-resource.json",
+    "fshName": "ihris-task-read-basic-resource",
+    "fshType": "Instance",
+    "fshFile": "core/IhrisRole.fsh",
+    "startLine": 361,
+    "endLine": 368
+  },
+  {
+    "outputFile": "Basic-ihris-task-read-code-system.json",
+    "fshName": "ihris-task-read-code-system",
+    "fshType": "Instance",
+    "fshFile": "core/IhrisRole.fsh",
+    "startLine": 433,
+    "endLine": 440
+  },
+  {
+    "outputFile": "Basic-ihris-task-read-document-reference.json",
+    "fshName": "ihris-task-read-document-reference",
+    "fshType": "Instance",
+    "fshFile": "core/IhrisRole.fsh",
+    "startLine": 451,
+    "endLine": 459
+  },
+  {
+    "outputFile": "Basic-ihris-task-read-ihris-page-practitioner-role.json",
+    "fshName": "ihris-task-read-ihris-page-practitioner-role",
+    "fshType": "Instance",
+    "fshFile": "core/IhrisRole.fsh",
+    "startLine": 221,
+    "endLine": 232
+  },
+  {
+    "outputFile": "Basic-ihris-task-read-ihris-page-practitioner.json",
+    "fshName": "ihris-task-read-ihris-page-practitioner",
+    "fshType": "Instance",
+    "fshFile": "core/IhrisRole.fsh",
+    "startLine": 208,
+    "endLine": 219
+  },
+  {
+    "outputFile": "Basic-ihris-task-read-location-resource.json",
+    "fshName": "ihris-task-read-location-resource",
+    "fshType": "Instance",
+    "fshFile": "core/IhrisRole.fsh",
+    "startLine": 397,
+    "endLine": 404
+  },
+  {
+    "outputFile": "Basic-ihris-task-read-organization-resource.json",
+    "fshName": "ihris-task-read-organization-resource",
+    "fshType": "Instance",
+    "fshFile": "core/IhrisRole.fsh",
+    "startLine": 406,
+    "endLine": 413
+  },
+  {
+    "outputFile": "Basic-ihris-task-read-person-resource.json",
+    "fshName": "ihris-task-read-person-resource",
+    "fshType": "Instance",
+    "fshFile": "core/IhrisRole.fsh",
+    "startLine": 370,
+    "endLine": 377
+  },
+  {
+    "outputFile": "Basic-ihris-task-read-practitioner-resource.json",
+    "fshName": "ihris-task-read-practitioner-resource",
+    "fshType": "Instance",
+    "fshFile": "core/IhrisRole.fsh",
+    "startLine": 379,
+    "endLine": 386
+  },
+  {
+    "outputFile": "Basic-ihris-task-read-practitioner-role-resource.json",
+    "fshName": "ihris-task-read-practitioner-role-resource",
+    "fshType": "Instance",
+    "fshFile": "core/IhrisRole.fsh",
+    "startLine": 388,
+    "endLine": 395
+  },
+  {
+    "outputFile": "Basic-ihris-task-read-questionnaire-leave.json",
+    "fshName": "ihris-task-read-questionnaire-leave",
+    "fshType": "Instance",
+    "fshFile": "core/IhrisRole.fsh",
+    "startLine": 234,
+    "endLine": 243
+  },
+  {
+    "outputFile": "Basic-ihris-task-read-questionnaire-resource.json",
+    "fshName": "ihris-task-read-questionnaire-resource",
+    "fshType": "Instance",
+    "fshFile": "core/IhrisRole.fsh",
+    "startLine": 415,
+    "endLine": 422
+  },
+  {
+    "outputFile": "Basic-ihris-task-read-questionnaire-response-resource.json",
+    "fshName": "ihris-task-read-questionnaire-response-resource",
+    "fshType": "Instance",
+    "fshFile": "core/IhrisRole.fsh",
+    "startLine": 424,
+    "endLine": 431
+  },
+  {
+    "outputFile": "Basic-ihris-task-read-structure-definition.json",
+    "fshName": "ihris-task-read-structure-definition",
+    "fshType": "Instance",
+    "fshFile": "core/IhrisRole.fsh",
+    "startLine": 352,
+    "endLine": 359
+  },
+  {
+    "outputFile": "Basic-ihris-task-read-value-set.json",
+    "fshName": "ihris-task-read-value-set",
+    "fshType": "Instance",
+    "fshFile": "core/IhrisRole.fsh",
+    "startLine": 442,
+    "endLine": 449
+  },
+  {
+    "outputFile": "Basic-ihris-task-write-auditevent-resource.json",
+    "fshName": "ihris-task-write-auditevent-resource",
+    "fshType": "Instance",
+    "fshFile": "core/IhrisRole.fsh",
+    "startLine": 582,
+    "endLine": 590
+  },
+  {
+    "outputFile": "Basic-ihris-task-write-basic-resource.json",
+    "fshName": "ihris-task-write-basic-resource",
+    "fshType": "Instance",
+    "fshFile": "core/IhrisRole.fsh",
+    "startLine": 471,
+    "endLine": 479
+  },
+  {
+    "outputFile": "Basic-ihris-task-write-code-system.json",
+    "fshName": "ihris-task-write-code-system",
+    "fshType": "Instance",
+    "fshFile": "core/IhrisRole.fsh",
+    "startLine": 551,
+    "endLine": 559
+  },
+  {
+    "outputFile": "Basic-ihris-task-write-document-reference.json",
+    "fshName": "ihris-task-write-document-reference",
+    "fshType": "Instance",
+    "fshFile": "core/IhrisRole.fsh",
+    "startLine": 571,
+    "endLine": 580
+  },
+  {
+    "outputFile": "Basic-ihris-task-write-location-resource.json",
+    "fshName": "ihris-task-write-location-resource",
+    "fshType": "Instance",
+    "fshFile": "core/IhrisRole.fsh",
+    "startLine": 511,
+    "endLine": 519
+  },
+  {
+    "outputFile": "Basic-ihris-task-write-organization-resource.json",
+    "fshName": "ihris-task-write-organization-resource",
+    "fshType": "Instance",
+    "fshFile": "core/IhrisRole.fsh",
+    "startLine": 521,
+    "endLine": 529
+  },
+  {
+    "outputFile": "Basic-ihris-task-write-person-resource.json",
+    "fshName": "ihris-task-write-person-resource",
+    "fshType": "Instance",
+    "fshFile": "core/IhrisRole.fsh",
+    "startLine": 481,
+    "endLine": 489
+  },
+  {
+    "outputFile": "Basic-ihris-task-write-practitioner-resource.json",
+    "fshName": "ihris-task-write-practitioner-resource",
+    "fshType": "Instance",
+    "fshFile": "core/IhrisRole.fsh",
+    "startLine": 491,
+    "endLine": 499
+  },
+  {
+    "outputFile": "Basic-ihris-task-write-practitioner-role-resource.json",
+    "fshName": "ihris-task-write-practitioner-role-resource",
+    "fshType": "Instance",
+    "fshFile": "core/IhrisRole.fsh",
+    "startLine": 501,
+    "endLine": 509
+  },
+  {
+    "outputFile": "Basic-ihris-task-write-questionnaire-change-password.json",
+    "fshName": "ihris-task-write-questionnaire-change-password",
+    "fshType": "Instance",
+    "fshFile": "core/IhrisRole.fsh",
+    "startLine": 256,
+    "endLine": 264
+  },
+  {
+    "outputFile": "Basic-ihris-task-write-questionnaire-leave.json",
+    "fshName": "ihris-task-write-questionnaire-leave",
+    "fshType": "Instance",
+    "fshFile": "core/IhrisRole.fsh",
+    "startLine": 245,
+    "endLine": 254
+  },
+  {
+    "outputFile": "Basic-ihris-task-write-questionnaire-resource.json",
+    "fshName": "ihris-task-write-questionnaire-resource",
+    "fshType": "Instance",
+    "fshFile": "core/IhrisRole.fsh",
+    "startLine": 531,
+    "endLine": 539
+  },
+  {
+    "outputFile": "Basic-ihris-task-write-questionnaire-response-resource.json",
+    "fshName": "ihris-task-write-questionnaire-response-resource",
+    "fshType": "Instance",
+    "fshFile": "core/IhrisRole.fsh",
+    "startLine": 541,
+    "endLine": 549
+  },
+  {
+    "outputFile": "Basic-ihris-task-write-structure-definition.json",
+    "fshName": "ihris-task-write-structure-definition",
+    "fshType": "Instance",
+    "fshFile": "core/IhrisRole.fsh",
+    "startLine": 461,
+    "endLine": 469
+  },
+  {
+    "outputFile": "Basic-ihris-task-write-value-set.json",
+    "fshName": "ihris-task-write-value-set",
+    "fshType": "Instance",
+    "fshFile": "core/IhrisRole.fsh",
+    "startLine": 561,
+    "endLine": 569
+  },
+  {
+    "outputFile": "Basic-ihris-task-write-valueset-resource.json",
+    "fshName": "ihris-task-write-valueset-resource",
+    "fshType": "Instance",
+    "fshFile": "core/IhrisRole.fsh",
+    "startLine": 601,
+    "endLine": 609
+  },
+  {
+    "outputFile": "Bundle-Country.json",
+    "fshName": "Country",
+    "fshType": "Instance",
+    "fshFile": "core/demoDataCountry.fsh",
+    "startLine": 1,
+    "endLine": 745
+  },
+  {
+    "outputFile": "CodeSystem-2103.json",
+    "fshName": "IdentifierType",
+    "fshType": "CodeSystem",
+    "fshFile": "core/Terminologies.fsh",
+    "startLine": 662,
+    "endLine": 1660
+  },
+  {
+    "outputFile": "CodeSystem-3654.json",
+    "fshName": "DegreeLicenseCertificate",
+    "fshType": "CodeSystem",
+    "fshFile": "core/Terminologies.fsh",
+    "startLine": 5198,
+    "endLine": 5475
+  },
+  {
+    "outputFile": "CodeSystem-ISO3166Part1.json",
+    "fshName": "ISO3166Part1",
+    "fshType": "CodeSystem",
+    "fshFile": "core/Terminologies.fsh",
+    "startLine": 6504,
+    "endLine": 6770
+  },
+  {
+    "outputFile": "CodeSystem-Ihris-facility-ownership-type.json",
+    "fshName": "IhrisFacilityOwnershipTypeCodeSystem",
+    "fshType": "CodeSystem",
+    "fshFile": "IhrisLocation.fsh",
+    "startLine": 156,
+    "endLine": 163
+  },
+  {
+    "outputFile": "CodeSystem-address-type.json",
+    "fshName": "AddressType",
+    "fshType": "CodeSystem",
+    "fshFile": "core/Terminologies.fsh",
+    "startLine": 349,
+    "endLine": 381
+  },
+  {
+    "outputFile": "CodeSystem-address-use.json",
+    "fshName": "AddressUse",
+    "fshType": "CodeSystem",
+    "fshFile": "core/Terminologies.fsh",
+    "startLine": 283,
+    "endLine": 317
+  },
+  {
+    "outputFile": "CodeSystem-administrative-gender.json",
+    "fshName": "AdministrativeGender",
+    "fshType": "CodeSystem",
+    "fshFile": "core/Terminologies.fsh",
+    "startLine": 5143,
+    "endLine": 5168
+  },
+  {
+    "outputFile": "CodeSystem-contact-point-system.json",
+    "fshName": "ContactPointSystem",
+    "fshType": "CodeSystem",
+    "fshFile": "core/Terminologies.fsh",
+    "startLine": 149,
+    "endLine": 185
+  },
+  {
+    "outputFile": "CodeSystem-contact-point-use.json",
+    "fshName": "ContactPointUse",
+    "fshType": "CodeSystem",
+    "fshFile": "core/Terminologies.fsh",
+    "startLine": 217,
+    "endLine": 251
+  },
+  {
+    "outputFile": "CodeSystem-contactentity-type.json",
+    "fshName": "ContactEntityType",
+    "fshType": "CodeSystem",
+    "fshFile": "core/Terminologies.fsh",
+    "startLine": 1753,
+    "endLine": 1784
+  },
+  {
+    "outputFile": "CodeSystem-currencies.json",
+    "fshName": "Currencies",
+    "fshType": "CodeSystem",
+    "fshFile": "core/Terminologies.fsh",
+    "startLine": 5703,
+    "endLine": 5892
+  },
+  {
+    "outputFile": "CodeSystem-days-of-week.json",
+    "fshName": "DaysOfWeek",
+    "fshType": "CodeSystem",
+    "fshFile": "core/Terminologies.fsh",
+    "startLine": 480,
+    "endLine": 516
+  },
+  {
+    "outputFile": "CodeSystem-identifier-use.json",
+    "fshName": "IdentifierUse",
+    "fshType": "CodeSystem",
+    "fshFile": "core/Terminologies.fsh",
+    "startLine": 548,
+    "endLine": 582
+  },
+  {
+    "outputFile": "CodeSystem-ihris-Facility-identifier.json",
+    "fshName": "IhrisFacilityIdentifierCodeSystem",
+    "fshType": "CodeSystem",
+    "fshFile": "IhrisLocation.fsh",
+    "startLine": 121,
+    "endLine": 127
+  },
+  {
+    "outputFile": "CodeSystem-ihris-cadre.json",
+    "fshName": "IhrisCadre",
+    "fshType": "CodeSystem",
+    "fshFile": "core/Terminologies.fsh",
+    "startLine": 5909,
+    "endLine": 5923
+  },
+  {
+    "outputFile": "CodeSystem-ihris-classification.json",
+    "fshName": "IhrisClassification",
+    "fshType": "CodeSystem",
+    "fshFile": "core/Terminologies.fsh",
+    "startLine": 5940,
+    "endLine": 5955
+  },
+  {
+    "outputFile": "CodeSystem-ihris-degree.json",
+    "fshName": "IhrisDegree",
+    "fshType": "CodeSystem",
+    "fshFile": "IhrisEducationHistory.fsh",
+    "startLine": 101,
+    "endLine": 105
+  },
+  {
+    "outputFile": "CodeSystem-ihris-discipline-action-type-codesystem.json",
+    "fshName": "IhrisDisciplinaryActionType",
+    "fshType": "CodeSystem",
+    "fshFile": "IhrisDisciplinaryAction.fsh",
+    "startLine": 68,
+    "endLine": 75
+  },
+  {
+    "outputFile": "CodeSystem-ihris-document-category.json",
+    "fshName": "IhrisDocumentCategoryCodeSystem",
+    "fshType": "CodeSystem",
+    "fshFile": "core/IhrisDocumentReference.fsh",
+    "startLine": 18,
+    "endLine": 22
+  },
+  {
+    "outputFile": "CodeSystem-ihris-education-level.json",
+    "fshName": "IhrisEducationLevel",
+    "fshType": "CodeSystem",
+    "fshFile": "IhrisEducationHistory.fsh",
+    "startLine": 114,
+    "endLine": 125
+  },
+  {
+    "outputFile": "CodeSystem-ihris-educational-major-codesystem.json",
+    "fshName": "IhrisEducationalMajorCodeSystem",
+    "fshType": "CodeSystem",
+    "fshFile": "IhrisEducationHistory.fsh",
+    "startLine": 64,
+    "endLine": 92
+  },
+  {
+    "outputFile": "CodeSystem-ihris-employment-status-codesystem.json",
+    "fshName": "IhrisEmploymentStatusCodeSystem",
+    "fshType": "CodeSystem",
+    "fshFile": "IhrisPractitionerRole.fsh",
+    "startLine": 116,
+    "endLine": 122
+  },
+  {
+    "outputFile": "CodeSystem-ihris-facility-type.json",
+    "fshName": "IhrisFacilityType",
+    "fshType": "CodeSystem",
+    "fshFile": "IhrisLocation.fsh",
+    "startLine": 192,
+    "endLine": 210
+  },
+  {
+    "outputFile": "CodeSystem-ihris-frequency-codesystem.json",
+    "fshName": "IhrisFrequency",
+    "fshType": "CodeSystem",
+    "fshFile": "IhrisSalary.fsh",
+    "startLine": 95,
+    "endLine": 104
+  },
+  {
+    "outputFile": "CodeSystem-ihris-institution.json",
+    "fshName": "IhrisInstitution",
+    "fshType": "CodeSystem",
+    "fshFile": "IhrisEducationHistory.fsh",
+    "startLine": 134,
+    "endLine": 138
+  },
+  {
+    "outputFile": "CodeSystem-ihris-job-type-codesystem.json",
+    "fshName": "IhrisJobTypeCodeSystem",
+    "fshType": "CodeSystem",
+    "fshFile": "IhrisPractitionerRole.fsh",
+    "startLine": 199,
+    "endLine": 204
+  },
+  {
+    "outputFile": "CodeSystem-ihris-job.json",
+    "fshName": "IhrisJob",
+    "fshType": "CodeSystem",
+    "fshFile": "core/Terminologies.fsh",
+    "startLine": 5973,
+    "endLine": 6456
+  },
+  {
+    "outputFile": "CodeSystem-ihris-jurisdiction-type.json",
+    "fshName": "IhrisJurisdictionType",
+    "fshType": "CodeSystem",
+    "fshFile": "IhrisLocation.fsh",
+    "startLine": 172,
+    "endLine": 183
+  },
+  {
+    "outputFile": "CodeSystem-ihris-leave-type-codesystem.json",
+    "fshName": "IhrisLeaveTypeCodeSystem",
+    "fshType": "CodeSystem",
+    "fshFile": "IhrisLeave.fsh",
+    "startLine": 57,
+    "endLine": 70
+  },
+  {
+    "outputFile": "CodeSystem-ihris-performance-score.json",
+    "fshName": "IhrisPerformanceScore",
+    "fshType": "CodeSystem",
+    "fshFile": "IhrisPerformance.fsh",
+    "startLine": 42,
+    "endLine": 50
+  },
+  {
+    "outputFile": "CodeSystem-ihris-position-status.json",
+    "fshName": "IhrisPositionStatusCodeSystem",
+    "fshType": "CodeSystem",
+    "fshFile": "IhrisPractitionerRole.fsh",
+    "startLine": 140,
+    "endLine": 147
+  },
+  {
+    "outputFile": "CodeSystem-ihris-reason-departure-codesystem.json",
+    "fshName": "IhrisReasonDepartureCodeSystem",
+    "fshType": "CodeSystem",
+    "fshFile": "IhrisPractitionerRole.fsh",
+    "startLine": 167,
+    "endLine": 179
+  },
+  {
+    "outputFile": "CodeSystem-ihris-relation-codesystem.json",
+    "fshName": "IhrisRelationCodesystem",
+    "fshType": "CodeSystem",
+    "fshFile": "IhrisPractitioner.fsh",
+    "startLine": 199,
+    "endLine": 209
+  },
+  {
+    "outputFile": "CodeSystem-ihris-resource-codesystem.json",
+    "fshName": "IhrisResourceCodeSystem",
+    "fshType": "CodeSystem",
+    "fshFile": "core/IhrisResourceCodeSystem.fsh",
+    "startLine": 1,
+    "endLine": 12
+  },
+  {
+    "outputFile": "CodeSystem-ihris-salary-grade.json",
+    "fshName": "IhrisSalaryGrade",
+    "fshType": "CodeSystem",
+    "fshFile": "core/Terminologies.fsh",
+    "startLine": 6473,
+    "endLine": 6502
+  },
+  {
+    "outputFile": "CodeSystem-ihris-salary-scale-codesystem.json",
+    "fshName": "IhrisSalaryScaleCodeSystem",
+    "fshType": "CodeSystem",
+    "fshFile": "IhrisPractitionerRole.fsh",
+    "startLine": 82,
+    "endLine": 86
+  },
+  {
+    "outputFile": "CodeSystem-ihris-salary-source-codesystem.json",
+    "fshName": "IhrisSalarySource",
+    "fshType": "CodeSystem",
+    "fshFile": "IhrisSalary.fsh",
+    "startLine": 83,
+    "endLine": 86
+  },
+  {
+    "outputFile": "CodeSystem-ihris-task-permission.json",
+    "fshName": "IhrisTaskPermissionCodeSystem",
+    "fshType": "CodeSystem",
+    "fshFile": "core/IhrisRole.fsh",
+    "startLine": 126,
+    "endLine": 136
+  },
+  {
+    "outputFile": "CodeSystem-ihris-task-resource.json",
+    "fshName": "IhrisTaskResourceCodeSystem",
+    "fshType": "CodeSystem",
+    "fshFile": "core/IhrisRole.fsh",
+    "startLine": 145,
+    "endLine": 166
+  },
+  {
+    "outputFile": "CodeSystem-ihris-test-codesystem.json",
+    "fshName": "IhrisTestCodeSystem",
+    "fshType": "CodeSystem",
+    "fshFile": "core/IhrisTest.fsh",
+    "startLine": 112,
+    "endLine": 123
+  },
+  {
+    "outputFile": "CodeSystem-ihris-training-codesystem.json",
+    "fshName": "IhrisTrainingCodeSystem",
+    "fshType": "CodeSystem",
+    "fshFile": "IhrisInserviceTraining.fsh",
+    "startLine": 105,
+    "endLine": 108
+  },
+  {
+    "outputFile": "CodeSystem-location-mode.json",
+    "fshName": "LocationMode",
+    "fshType": "CodeSystem",
+    "fshFile": "core/Terminologies.fsh",
+    "startLine": 61,
+    "endLine": 90
+  },
+  {
+    "outputFile": "CodeSystem-location-physical-type.json",
+    "fshName": "LocationType",
+    "fshType": "CodeSystem",
+    "fshFile": "core/Terminologies.fsh",
+    "startLine": 413,
+    "endLine": 452
+  },
+  {
+    "outputFile": "CodeSystem-location-status.json",
+    "fshName": "LocationStatus",
+    "fshType": "CodeSystem",
+    "fshFile": "core/Terminologies.fsh",
+    "startLine": 1,
+    "endLine": 31
+  },
+  {
+    "outputFile": "CodeSystem-name-use.json",
+    "fshName": "NameUse",
+    "fshType": "CodeSystem",
+    "fshFile": "core/Terminologies.fsh",
+    "startLine": 5080,
+    "endLine": 5113
+  },
+  {
+    "outputFile": "CodeSystem-organization-type.json",
+    "fshName": "OrganizationType",
+    "fshType": "CodeSystem",
+    "fshFile": "core/Terminologies.fsh",
+    "startLine": 1662,
+    "endLine": 1699
+  },
+  {
+    "outputFile": "CodeSystem-service-category.json",
+    "fshName": "ServiceCategory",
+    "fshType": "CodeSystem",
+    "fshFile": "core/Terminologies.fsh",
+    "startLine": 1786,
+    "endLine": 1849
+  },
+  {
+    "outputFile": "CodeSystem-service-provision-conditions.json",
+    "fshName": "ServiceProvisionConditions",
+    "fshType": "CodeSystem",
+    "fshFile": "core/Terminologies.fsh",
+    "startLine": 2964,
+    "endLine": 2994
+  },
+  {
+    "outputFile": "CodeSystem-service-type.json",
+    "fshName": "ServiceType",
+    "fshType": "CodeSystem",
+    "fshFile": "core/Terminologies.fsh",
+    "startLine": 1877,
+    "endLine": 2498
+  },
+  {
+    "outputFile": "CodeSystem-snomedct.json",
+    "fshName": "SNOMED_CT",
+    "fshType": "CodeSystem",
+    "fshFile": "core/Terminologies.fsh",
+    "startLine": 2526,
+    "endLine": 2820
+  },
+  {
+    "outputFile": "CodeSystem-v3-RoleCode.json",
+    "fshName": "V3_RoleCode",
+    "fshType": "CodeSystem",
+    "fshFile": "core/Terminologies.fsh",
+    "startLine": 4116,
+    "endLine": 4760
+  },
+  {
+    "outputFile": "DocumentReference-page-about.json",
+    "fshName": "page-about",
+    "fshType": "Instance",
+    "fshFile": "core/IhrisDocumentReference.fsh",
+    "startLine": 29,
+    "endLine": 39
+  },
+  {
+    "outputFile": "DocumentReference-page-home.json",
+    "fshName": "page-home",
+    "fshType": "Instance",
+    "fshFile": "core/IhrisDocumentReference.fsh",
+    "startLine": 41,
+    "endLine": 51
+  },
+  {
+    "outputFile": "Library-ihris-module-example.json",
+    "fshName": "ihris-module-example",
+    "fshType": "Instance",
+    "fshFile": "core/IhrisModule.fsh",
+    "startLine": 28,
+    "endLine": 41
+  },
+  {
+    "outputFile": "Parameters-ihris-config.json",
+    "fshName": "ihris-config",
+    "fshType": "Instance",
+    "fshFile": "IhrisParameters.fsh",
+    "startLine": 1,
+    "endLine": 537
+  },
+  {
+    "outputFile": "Parameters-ihris-dashboard.json",
+    "fshName": "ihris-dashboard",
+    "fshType": "Instance",
+    "fshFile": "core/IhrisParametersDashboard.fsh",
+    "startLine": 1,
+    "endLine": 20
+  },
+  {
+    "outputFile": "Person-ihris-user-admin.json",
+    "fshName": "ihris-user-admin",
+    "fshType": "Instance",
+    "fshFile": "IhrisUser.fsh",
+    "startLine": 153,
+    "endLine": 168
+  },
+  {
+    "outputFile": "Person-ihris-user-demo.json",
+    "fshName": "ihris-user-demo",
+    "fshType": "Instance",
+    "fshFile": "IhrisUser.fsh",
+    "startLine": 181,
+    "endLine": 195
+  },
+  {
+    "outputFile": "Person-ihris-user-loggedout.json",
+    "fshName": "ihris-user-loggedout",
+    "fshType": "Instance",
+    "fshFile": "IhrisUser.fsh",
+    "startLine": 170,
+    "endLine": 179
+  },
+  {
+    "outputFile": "Questionnaire-ihris-change-password.json",
+    "fshName": "IhrisChangePassword",
+    "fshType": "Instance",
+    "fshFile": "IhrisUser.fsh",
+    "startLine": 352,
+    "endLine": 400
+  },
+  {
+    "outputFile": "Questionnaire-ihris-discipline.json",
+    "fshName": "IhrisPractitionerWorkflowDiscipline",
+    "fshType": "Instance",
+    "fshFile": "IhrisDisciplinaryAction.fsh",
+    "startLine": 84,
+    "endLine": 160
+  },
+  {
+    "outputFile": "Questionnaire-ihris-education-history.json",
+    "fshName": "IhrisPractitionerWorkflowEducationHistory",
+    "fshType": "Instance",
+    "fshFile": "IhrisEducationHistory.fsh",
+    "startLine": 216,
+    "endLine": 283
+  },
+  {
+    "outputFile": "Questionnaire-ihris-emergency.json",
+    "fshName": "IhrisPractitionerWorkflowEmergency",
+    "fshType": "Instance",
+    "fshFile": "IhrisEmergencyContact.fsh",
+    "startLine": 81,
+    "endLine": 179
+  },
+  {
+    "outputFile": "Questionnaire-ihris-employment-history.json",
+    "fshName": "IhrisPractitionerWorkflowEmploymentHistory",
+    "fshType": "Instance",
+    "fshFile": "IhrisEmploymentHistory.fsh",
+    "startLine": 76,
+    "endLine": 166
+  },
+  {
+    "outputFile": "Questionnaire-ihris-endrole.json",
+    "fshName": "IhrisPractitionerWorkflowEndRole",
+    "fshType": "Instance",
+    "fshFile": "IhrisPractitionerRole.fsh",
+    "startLine": 398,
+    "endLine": 435
+  },
+  {
+    "outputFile": "Questionnaire-ihris-inservice-training.json",
+    "fshName": "IhrisPractitionerWorkflowInServiceTraining",
+    "fshType": "Instance",
+    "fshFile": "IhrisInserviceTraining.fsh",
+    "startLine": 116,
+    "endLine": 174
+  },
+  {
+    "outputFile": "Questionnaire-ihris-leave.json",
+    "fshName": "IhrisPractitionerWorkflowLeave",
+    "fshType": "Instance",
+    "fshFile": "IhrisLeave.fsh",
+    "startLine": 78,
+    "endLine": 122
+  },
+  {
+    "outputFile": "Questionnaire-ihris-performance.json",
+    "fshName": "IhrisPractitionerWorkflowPerformance",
+    "fshType": "Instance",
+    "fshFile": "IhrisPerformance.fsh",
+    "startLine": 58,
+    "endLine": 102
+  },
+  {
+    "outputFile": "Questionnaire-ihris-practitioner.json",
+    "fshName": "IhrisPractitionerQuestionnaire",
+    "fshType": "Instance",
+    "fshFile": "IhrisPractitionerQuestionnaire.fsh",
+    "startLine": 1,
+    "endLine": 324
+  },
+  {
+    "outputFile": "Questionnaire-ihris-promotion.json",
+    "fshName": "IhrisPractitionerWorkflowPromotion",
+    "fshType": "Instance",
+    "fshFile": "IhrisPractitionerRole.fsh",
+    "startLine": 437,
+    "endLine": 551
+  },
+  {
+    "outputFile": "Questionnaire-ihris-role.json",
+    "fshName": "IhrisRole",
+    "fshType": "Instance",
+    "fshFile": "core/IhrisRole.fsh",
+    "startLine": 644,
+    "endLine": 692
+  },
+  {
+    "outputFile": "Questionnaire-ihris-salary.json",
+    "fshName": "IhrisPractitionerWorkflowSalary",
+    "fshType": "Instance",
+    "fshFile": "IhrisSalary.fsh",
+    "startLine": 113,
+    "endLine": 205
+  },
+  {
+    "outputFile": "Questionnaire-ihris-task.json",
+    "fshName": "IhrisTask",
+    "fshType": "Instance",
+    "fshFile": "core/IhrisRole.fsh",
+    "startLine": 725,
+    "endLine": 794
+  },
+  {
+    "outputFile": "Questionnaire-ihris-test.json",
+    "fshName": "IhrisTestQuestionnaire",
+    "fshType": "Instance",
+    "fshFile": "core/IhrisTestQuestionnaire.fsh",
+    "startLine": 1,
+    "endLine": 173
+  },
+  {
+    "outputFile": "Questionnaire-ihris-user.json",
+    "fshName": "IhrisUser",
+    "fshType": "Instance",
+    "fshFile": "IhrisUser.fsh",
+    "startLine": 232,
+    "endLine": 350
+  },
+  {
+    "outputFile": "SearchParameter-active-user.json",
+    "fshName": "active-user",
+    "fshType": "Instance",
+    "fshFile": "core/IhrisSearchParameters.fsh",
+    "startLine": 300,
+    "endLine": 312
+  },
+  {
+    "outputFile": "SearchParameter-basic-location-constraint.json",
+    "fshName": "basic-location-constraint",
+    "fshType": "Instance",
+    "fshFile": "core/IhrisSearchParameters.fsh",
+    "startLine": 1,
+    "endLine": 12
+  },
+  {
+    "outputFile": "SearchParameter-basic-name.json",
+    "fshName": "basic-name",
+    "fshType": "Instance",
+    "fshFile": "core/IhrisSearchParameters.fsh",
+    "startLine": 14,
+    "endLine": 26
+  },
+  {
+    "outputFile": "SearchParameter-basic-practitioner.json",
+    "fshName": "basic-practitioner",
+    "fshType": "Instance",
+    "fshFile": "core/IhrisSearchParameters.fsh",
+    "startLine": 28,
+    "endLine": 41
+  },
+  {
+    "outputFile": "SearchParameter-basic-related-location.json",
+    "fshName": "basic-related-location",
+    "fshType": "Instance",
+    "fshFile": "core/IhrisSearchParameters.fsh",
+    "startLine": 43,
+    "endLine": 54
+  },
+  {
+    "outputFile": "SearchParameter-basic-related-practitioner.json",
+    "fshName": "basic-related-practitioner",
+    "fshType": "Instance",
+    "fshFile": "core/IhrisSearchParameters.fsh",
+    "startLine": 56,
+    "endLine": 67
+  },
+  {
+    "outputFile": "SearchParameter-employment-status-search.json",
+    "fshName": "employment-status-search",
+    "fshType": "Instance",
+    "fshFile": "core/IhrisSearchParameters.fsh",
+    "startLine": 206,
+    "endLine": 218
+  },
+  {
+    "outputFile": "SearchParameter-gofr-search-isbroadcast.json",
+    "fshName": "gofr-search-isbroadcast",
+    "fshType": "Instance",
+    "fshFile": "core/IhrisSearchParameters.fsh",
+    "startLine": 69,
+    "endLine": 81
+  },
+  {
+    "outputFile": "SearchParameter-gofr-search-isflowstart.json",
+    "fshName": "gofr-search-isflowstart",
+    "fshType": "Instance",
+    "fshFile": "core/IhrisSearchParameters.fsh",
+    "startLine": 83,
+    "endLine": 95
+  },
+  {
+    "outputFile": "SearchParameter-job-search.json",
+    "fshName": "job-search",
+    "fshType": "Instance",
+    "fshFile": "core/IhrisSearchParameters.fsh",
+    "startLine": 220,
+    "endLine": 232
+  },
+  {
+    "outputFile": "SearchParameter-leaveperiod-search.json",
+    "fshName": "leaveperiod-search",
+    "fshType": "Instance",
+    "fshFile": "core/IhrisSearchParameters.fsh",
+    "startLine": 97,
+    "endLine": 109
+  },
+  {
+    "outputFile": "SearchParameter-leavetype-search.json",
+    "fshName": "leavetype-search",
+    "fshType": "Instance",
+    "fshFile": "core/IhrisSearchParameters.fsh",
+    "startLine": 111,
+    "endLine": 123
+  },
+  {
+    "outputFile": "SearchParameter-location-related-location.json",
+    "fshName": "location-related-location",
+    "fshType": "Instance",
+    "fshFile": "core/IhrisSearchParameters.fsh",
+    "startLine": 125,
+    "endLine": 136
+  },
+  {
+    "outputFile": "SearchParameter-performanceperiod-search.json",
+    "fshName": "performanceperiod-search",
+    "fshType": "Instance",
+    "fshFile": "core/IhrisSearchParameters.fsh",
+    "startLine": 138,
+    "endLine": 150
+  },
+  {
+    "outputFile": "SearchParameter-position-status-search.json",
+    "fshName": "position-status-search",
+    "fshType": "Instance",
+    "fshFile": "core/IhrisSearchParameters.fsh",
+    "startLine": 234,
+    "endLine": 246
+  },
+  {
+    "outputFile": "SearchParameter-practitioner-birthdate.json",
+    "fshName": "practitioner-birthdate",
+    "fshType": "Instance",
+    "fshFile": "core/IhrisSearchParameters.fsh",
+    "startLine": 274,
+    "endLine": 285
+  },
+  {
+    "outputFile": "SearchParameter-practitioner-employeeNumber.json",
+    "fshName": "practitioner-employeeNumber",
+    "fshType": "Instance",
+    "fshFile": "core/IhrisSearchParameters.fsh",
+    "startLine": 287,
+    "endLine": 298
+  },
+  {
+    "outputFile": "SearchParameter-practitioner-phone.json",
+    "fshName": "practitioner-phone",
+    "fshType": "Instance",
+    "fshFile": "core/IhrisSearchParameters.fsh",
+    "startLine": 165,
+    "endLine": 178
+  },
+  {
+    "outputFile": "SearchParameter-practitioner-related-location.json",
+    "fshName": "practitioner-related-location",
+    "fshType": "Instance",
+    "fshFile": "core/IhrisSearchParameters.fsh",
+    "startLine": 180,
+    "endLine": 191
+  },
+  {
+    "outputFile": "SearchParameter-practitioner-related-practitioner.json",
+    "fshName": "practitioner-related-practitioner",
+    "fshType": "Instance",
+    "fshFile": "core/IhrisSearchParameters.fsh",
+    "startLine": 193,
+    "endLine": 204
+  },
+  {
+    "outputFile": "SearchParameter-practitioner-renewrole.json",
+    "fshName": "practitioner-renewrole",
+    "fshType": "Instance",
+    "fshFile": "core/IhrisSearchParameters.fsh",
+    "startLine": 152,
+    "endLine": 163
+  },
+  {
+    "outputFile": "SearchParameter-practitionerrole-related-location.json",
+    "fshName": "practitionerrole-related-location",
+    "fshType": "Instance",
+    "fshFile": "core/IhrisSearchParameters.fsh",
+    "startLine": 248,
+    "endLine": 259
+  },
+  {
+    "outputFile": "SearchParameter-practitionerrole-related-practitioner.json",
+    "fshName": "practitionerrole-related-practitioner",
+    "fshType": "Instance",
+    "fshFile": "core/IhrisSearchParameters.fsh",
+    "startLine": 261,
+    "endLine": 272
+  },
+  {
+    "outputFile": "StructureDefinition-ContactPoint.json",
+    "fshName": "ContactPoint",
+    "fshType": "Instance",
+    "fshFile": "core/Terminologies.fsh",
+    "startLine": 4762,
+    "endLine": 5078
+  },
+  {
+    "outputFile": "StructureDefinition-composite-task.json",
+    "fshName": "CompositeTask",
+    "fshType": "Extension",
+    "fshFile": "core/IhrisRole.fsh",
+    "startLine": 93,
+    "endLine": 103
+  },
+  {
+    "outputFile": "StructureDefinition-confirm-initial-password.json",
+    "fshName": "ConfirmInitialPassword",
+    "fshType": "Extension",
+    "fshFile": "IhrisUser.fsh",
+    "startLine": 118,
+    "endLine": 125
+  },
+  {
+    "outputFile": "StructureDefinition-iHRISRelationship.json",
+    "fshName": "IhrisRelationship",
+    "fshType": "Profile",
+    "fshFile": "core/IhrisRelationship.fsh",
+    "startLine": 1,
+    "endLine": 9
+  },
+  {
+    "outputFile": "StructureDefinition-iHRISReportDetails.json",
+    "fshName": "IhrisReportDetails",
+    "fshType": "Extension",
+    "fshFile": "core/IhrisRelationship.fsh",
+    "startLine": 11,
+    "endLine": 61
+  },
+  {
+    "outputFile": "StructureDefinition-iHRISReportElement.json",
+    "fshName": "IhrisReportElement",
+    "fshType": "Extension",
+    "fshFile": "core/IhrisRelationship.fsh",
+    "startLine": 112,
+    "endLine": 153
+  },
+  {
+    "outputFile": "StructureDefinition-iHRISReportLink.json",
+    "fshName": "IhrisReportLink",
+    "fshType": "Extension",
+    "fshFile": "core/IhrisRelationship.fsh",
+    "startLine": 75,
+    "endLine": 109
+  },
+  {
+    "outputFile": "StructureDefinition-iHRISReportParameters.json",
+    "fshName": "IhrisReportParameters",
+    "fshType": "Extension",
+    "fshFile": "core/IhrisRelationship.fsh",
+    "startLine": 63,
+    "endLine": 73
+  },
+  {
+    "outputFile": "StructureDefinition-ihris-assign-role.json",
+    "fshName": "IhrisAssignRole",
+    "fshType": "Extension",
+    "fshFile": "core/IhrisRole.fsh",
+    "startLine": 67,
+    "endLine": 79
+  },
+  {
+    "outputFile": "StructureDefinition-ihris-assign-task.json",
+    "fshName": "IhrisAssignTask",
+    "fshType": "Extension",
+    "fshFile": "core/IhrisRole.fsh",
+    "startLine": 81,
+    "endLine": 91
+  },
+  {
+    "outputFile": "StructureDefinition-ihris-auditevent.json",
+    "fshName": "IhrisAuditEvent",
+    "fshType": "Profile",
+    "fshFile": "core/ihrisAudit.fsh",
+    "startLine": 1,
+    "endLine": 41
+  },
+  {
+    "outputFile": "StructureDefinition-ihris-basic-discipline.json",
+    "fshName": "IhrisBasicDiscipline",
+    "fshType": "Profile",
+    "fshFile": "IhrisDisciplinaryAction.fsh",
+    "startLine": 1,
+    "endLine": 26
+  },
+  {
+    "outputFile": "StructureDefinition-ihris-basic-education-history.json",
+    "fshName": "IhrisBasicEducationHistory",
+    "fshType": "Profile",
+    "fshFile": "IhrisEducationHistory.fsh",
+    "startLine": 1,
+    "endLine": 30
+  },
+  {
+    "outputFile": "StructureDefinition-ihris-basic-emergency.json",
+    "fshName": "IhrisBasicEmergency",
+    "fshType": "Profile",
+    "fshFile": "IhrisEmergencyContact.fsh",
+    "startLine": 1,
+    "endLine": 30
+  },
+  {
+    "outputFile": "StructureDefinition-ihris-basic-employment-history.json",
+    "fshName": "IhrisBasicEmploymentHistory",
+    "fshType": "Profile",
+    "fshFile": "IhrisEmploymentHistory.fsh",
+    "startLine": 1,
+    "endLine": 29
+  },
+  {
+    "outputFile": "StructureDefinition-ihris-basic-inservice-training.json",
+    "fshName": "IhrisBasicInServiceTraining",
+    "fshType": "Profile",
+    "fshFile": "IhrisInserviceTraining.fsh",
+    "startLine": 1,
+    "endLine": 27
+  },
+  {
+    "outputFile": "StructureDefinition-ihris-basic-leave.json",
+    "fshName": "IhrisBasicLeave",
+    "fshType": "Profile",
+    "fshFile": "IhrisLeave.fsh",
+    "startLine": 1,
+    "endLine": 25
+  },
+  {
+    "outputFile": "StructureDefinition-ihris-basic-name.json",
+    "fshName": "IhrisBasicName",
+    "fshType": "Extension",
+    "fshFile": "core/IhrisBasicName.fsh",
+    "startLine": 1,
+    "endLine": 9
+  },
+  {
+    "outputFile": "StructureDefinition-ihris-basic-performance.json",
+    "fshName": "IhrisBasicPerformance",
+    "fshType": "Profile",
+    "fshFile": "IhrisPerformance.fsh",
+    "startLine": 1,
+    "endLine": 21
+  },
+  {
+    "outputFile": "StructureDefinition-ihris-basic-salary.json",
+    "fshName": "IhrisBasicSalary",
+    "fshType": "Profile",
+    "fshFile": "IhrisSalary.fsh",
+    "startLine": 1,
+    "endLine": 30
+  },
+  {
+    "outputFile": "StructureDefinition-ihris-dashboard-visualization.json",
+    "fshName": "IhrisDashboardVisualization",
+    "fshType": "Extension",
+    "fshFile": "core/IhrisDashboard.fsh",
+    "startLine": 11,
+    "endLine": 56
+  },
+  {
+    "outputFile": "StructureDefinition-ihris-dashboard.json",
+    "fshName": "IhrisDashboard",
+    "fshType": "Profile",
+    "fshFile": "core/IhrisDashboard.fsh",
+    "startLine": 1,
+    "endLine": 9
+  },
+  {
+    "outputFile": "StructureDefinition-ihris-data-visualization.json",
+    "fshName": "IhrisDataVisualization",
+    "fshType": "Profile",
+    "fshFile": "core/IhrisDataVisualization.fsh",
+    "startLine": 1,
+    "endLine": 14
+  },
+  {
+    "outputFile": "StructureDefinition-ihris-discipline.json",
+    "fshName": "IhrisDiscipline",
+    "fshType": "Extension",
+    "fshFile": "IhrisDisciplinaryAction.fsh",
+    "startLine": 28,
+    "endLine": 66
+  },
+  {
+    "outputFile": "StructureDefinition-ihris-document.json",
+    "fshName": "IhrisDocument",
+    "fshType": "Profile",
+    "fshFile": "core/IhrisDocumentReference.fsh",
+    "startLine": 1,
+    "endLine": 16
+  },
+  {
+    "outputFile": "StructureDefinition-ihris-education-history.json",
+    "fshName": "IhrisEducationHistory",
+    "fshType": "Extension",
+    "fshFile": "IhrisEducationHistory.fsh",
+    "startLine": 32,
+    "endLine": 62
+  },
+  {
+    "outputFile": "StructureDefinition-ihris-emergency.json",
+    "fshName": "IhrisEmergency",
+    "fshType": "Extension",
+    "fshFile": "IhrisEmergencyContact.fsh",
+    "startLine": 32,
+    "endLine": 79
+  },
+  {
+    "outputFile": "StructureDefinition-ihris-employment-history.json",
+    "fshName": "IhrisEmploymentHistory",
+    "fshType": "Extension",
+    "fshFile": "IhrisEmploymentHistory.fsh",
+    "startLine": 31,
+    "endLine": 74
+  },
+  {
+    "outputFile": "StructureDefinition-ihris-facility-ownership-prefix.json",
+    "fshName": "IhrisFacilityOwnership",
+    "fshType": "Extension",
+    "fshFile": "IhrisLocation.fsh",
+    "startLine": 212,
+    "endLine": 221
+  },
+  {
+    "outputFile": "StructureDefinition-ihris-facility.json",
+    "fshName": "IhrisFacility",
+    "fshType": "Profile",
+    "fshFile": "IhrisLocation.fsh",
+    "startLine": 64,
+    "endLine": 112
+  },
+  {
+    "outputFile": "StructureDefinition-ihris-first-time-login.json",
+    "fshName": "IhrisFirstTimeLogin",
+    "fshType": "Extension",
+    "fshFile": "IhrisUser.fsh",
+    "startLine": 63,
+    "endLine": 70
+  },
+  {
+    "outputFile": "StructureDefinition-ihris-inservice-training.json",
+    "fshName": "IhrisInServiceTraining",
+    "fshType": "Extension",
+    "fshFile": "IhrisInserviceTraining.fsh",
+    "startLine": 30,
+    "endLine": 58
+  },
+  {
+    "outputFile": "StructureDefinition-ihris-jurisdiction.json",
+    "fshName": "IhrisJurisdiction",
+    "fshType": "Profile",
+    "fshFile": "IhrisLocation.fsh",
+    "startLine": 1,
+    "endLine": 32
+  },
+  {
+    "outputFile": "StructureDefinition-ihris-leave.json",
+    "fshName": "IhrisLeave",
+    "fshType": "Extension",
+    "fshFile": "IhrisLeave.fsh",
+    "startLine": 27,
+    "endLine": 55
+  },
+  {
+    "outputFile": "StructureDefinition-ihris-module.json",
+    "fshName": "IhrisModule",
+    "fshType": "Profile",
+    "fshFile": "core/IhrisModule.fsh",
+    "startLine": 1,
+    "endLine": 26
+  },
+  {
+    "outputFile": "StructureDefinition-ihris-page-display.json",
+    "fshName": "IhrisPageDisplay",
+    "fshType": "Extension",
+    "fshFile": "core/IhrisPage.fsh",
+    "startLine": 11,
+    "endLine": 122
+  },
+  {
+    "outputFile": "StructureDefinition-ihris-page-section.json",
+    "fshName": "IhrisPageSection",
+    "fshType": "Extension",
+    "fshFile": "core/IhrisPage.fsh",
+    "startLine": 125,
+    "endLine": 214
+  },
+  {
+    "outputFile": "StructureDefinition-ihris-page.json",
+    "fshName": "IhrisPage",
+    "fshType": "Profile",
+    "fshFile": "core/IhrisPage.fsh",
+    "startLine": 1,
+    "endLine": 9
+  },
+  {
+    "outputFile": "StructureDefinition-ihris-parameters-local-config.json",
+    "fshName": "IhrisParametersLocalConfig",
+    "fshType": "Profile",
+    "fshFile": "core/IhrisParametersLocalConfig.fsh",
+    "startLine": 1,
+    "endLine": 71
+  },
+  {
+    "outputFile": "StructureDefinition-ihris-parameters-remote-config.json",
+    "fshName": "IhrisParametersRemoteConfig",
+    "fshType": "Profile",
+    "fshFile": "core/IhrisParametersRemoteConfig.fsh",
+    "startLine": 1,
+    "endLine": 35
+  },
+  {
+    "outputFile": "StructureDefinition-ihris-password.json",
+    "fshName": "IhrisPassword",
+    "fshType": "Extension",
+    "fshFile": "IhrisUser.fsh",
+    "startLine": 72,
+    "endLine": 98
+  },
+  {
+    "outputFile": "StructureDefinition-ihris-performance.json",
+    "fshName": "IhrisPerformance",
+    "fshType": "Extension",
+    "fshFile": "IhrisPerformance.fsh",
+    "startLine": 23,
+    "endLine": 40
+  },
+  {
+    "outputFile": "StructureDefinition-ihris-person-user.json",
+    "fshName": "IhrisPersonUser",
+    "fshType": "Profile",
+    "fshFile": "IhrisUser.fsh",
+    "startLine": 1,
+    "endLine": 45
+  },
+  {
+    "outputFile": "StructureDefinition-ihris-practitioner-basic.json",
+    "fshName": "IhrisPractitionerBasic",
+    "fshType": "Profile",
+    "fshFile": "IhrisPractitionerBasic.fsh",
+    "startLine": 1,
+    "endLine": 8
+  },
+  {
+    "outputFile": "StructureDefinition-ihris-practitioner-dependent-detail.json",
+    "fshName": "IhrisPractitionerDependentDetail",
+    "fshType": "Extension",
+    "fshFile": "IhrisPractitioner.fsh",
+    "startLine": 152,
+    "endLine": 165
+  },
+  {
+    "outputFile": "StructureDefinition-ihris-practitioner-dependents.json",
+    "fshName": "IhrisPractitionerDependents",
+    "fshType": "Extension",
+    "fshFile": "IhrisPractitioner.fsh",
+    "startLine": 189,
+    "endLine": 197
+  },
+  {
+    "outputFile": "StructureDefinition-ihris-practitioner-language-proficiency.json",
+    "fshName": "IhrisPractitionerLanguageProficiency",
+    "fshType": "Extension",
+    "fshFile": "IhrisPractitioner.fsh",
+    "startLine": 113,
+    "endLine": 130
+  },
+  {
+    "outputFile": "StructureDefinition-ihris-practitioner-marital-status.json",
+    "fshName": "IhrisPractitionerMaritalStatus",
+    "fshType": "Extension",
+    "fshFile": "IhrisPractitioner.fsh",
+    "startLine": 178,
+    "endLine": 187
+  },
+  {
+    "outputFile": "StructureDefinition-ihris-practitioner-nationality.json",
+    "fshName": "IhrisPractitionerNationality",
+    "fshType": "Extension",
+    "fshFile": "IhrisPractitioner.fsh",
+    "startLine": 167,
+    "endLine": 176
+  },
+  {
+    "outputFile": "StructureDefinition-ihris-practitioner-reference.json",
+    "fshName": "IhrisPractitionerReference",
+    "fshType": "Extension",
+    "fshFile": "IhrisPractitionerBasic.fsh",
+    "startLine": 10,
+    "endLine": 18
+  },
+  {
+    "outputFile": "StructureDefinition-ihris-practitioner-residence.json",
+    "fshName": "IhrisPractitionerResidence",
+    "fshType": "Extension",
+    "fshFile": "IhrisPractitioner.fsh",
+    "startLine": 132,
+    "endLine": 150
+  },
+  {
+    "outputFile": "StructureDefinition-ihris-practitioner-role.json",
+    "fshName": "IhrisPractitionerRole",
+    "fshType": "Profile",
+    "fshFile": "IhrisPractitionerRole.fsh",
+    "startLine": 1,
+    "endLine": 69
+  },
+  {
+    "outputFile": "StructureDefinition-ihris-practitioner.json",
+    "fshName": "IhrisPractitioner",
+    "fshType": "Profile",
+    "fshFile": "IhrisPractitioner.fsh",
+    "startLine": 7,
+    "endLine": 111
+  },
+  {
+    "outputFile": "StructureDefinition-ihris-practitionerrole-employment-status.json",
+    "fshName": "IhrisPractitionerRoleEmploymentStatus",
+    "fshType": "Extension",
+    "fshFile": "IhrisPractitionerRole.fsh",
+    "startLine": 105,
+    "endLine": 114
+  },
+  {
+    "outputFile": "StructureDefinition-ihris-practitionerrole-first-employment-date.json",
+    "fshName": "IhrisPractitionerRoleFirstEmploymentDate",
+    "fshType": "Extension",
+    "fshFile": "IhrisPractitionerRole.fsh",
+    "startLine": 211,
+    "endLine": 219
+  },
+  {
+    "outputFile": "StructureDefinition-ihris-practitionerrole-job-type.json",
+    "fshName": "IhrisPractitionerRoleJobType",
+    "fshType": "Extension",
+    "fshFile": "IhrisPractitionerRole.fsh",
+    "startLine": 188,
+    "endLine": 197
+  },
+  {
+    "outputFile": "StructureDefinition-ihris-practitionerrole-position-status.json",
+    "fshName": "IhrisPractitionerRolePositionStatus",
+    "fshType": "Extension",
+    "fshFile": "IhrisPractitionerRole.fsh",
+    "startLine": 129,
+    "endLine": 138
+  },
+  {
+    "outputFile": "StructureDefinition-ihris-practitionerrole-reason-departure.json",
+    "fshName": "IhrisPractitionerRoleReasonDeparture",
+    "fshType": "Extension",
+    "fshFile": "IhrisPractitionerRole.fsh",
+    "startLine": 156,
+    "endLine": 165
+  },
+  {
+    "outputFile": "StructureDefinition-ihris-practitionerrole-salary-scale.json",
+    "fshName": "IhrisPractitionerRoleSalaryScale",
+    "fshType": "Extension",
+    "fshFile": "IhrisPractitionerRole.fsh",
+    "startLine": 71,
+    "endLine": 80
+  },
+  {
+    "outputFile": "StructureDefinition-ihris-practitionerrole-salary.json",
+    "fshName": "IhrisPractitionerRoleSalary",
+    "fshType": "Extension",
+    "fshFile": "IhrisPractitionerRole.fsh",
+    "startLine": 95,
+    "endLine": 103
+  },
+  {
+    "outputFile": "StructureDefinition-ihris-questionnaire.json",
+    "fshName": "IhrisQuestionnaire",
+    "fshType": "Profile",
+    "fshFile": "core/IhrisQuestionnaire.fsh",
+    "startLine": 2,
+    "endLine": 16
+  },
+  {
+    "outputFile": "StructureDefinition-ihris-report.json",
+    "fshName": "IhrisReport",
+    "fshType": "Profile",
+    "fshFile": "core/IhrisReport.fsh",
+    "startLine": 1,
+    "endLine": 7
+  },
+  {
+    "outputFile": "StructureDefinition-ihris-resource-relationships.json",
+    "fshName": "IhrisResourceRelationships",
+    "fshType": "Extension",
+    "fshFile": "core/IhrisReport.fsh",
+    "startLine": 10,
+    "endLine": 36
+  },
+  {
+    "outputFile": "StructureDefinition-ihris-role-primary.json",
+    "fshName": "IhrisRolePrimary",
+    "fshType": "Extension",
+    "fshFile": "core/IhrisRole.fsh",
+    "startLine": 58,
+    "endLine": 65
+  },
+  {
+    "outputFile": "StructureDefinition-ihris-role.json",
+    "fshName": "IhrisRole",
+    "fshType": "Profile",
+    "fshFile": "core/IhrisRole.fsh",
+    "startLine": 1,
+    "endLine": 20
+  },
+  {
+    "outputFile": "StructureDefinition-ihris-salary.json",
+    "fshName": "IhrisSalary",
+    "fshType": "Extension",
+    "fshFile": "IhrisSalary.fsh",
+    "startLine": 32,
+    "endLine": 81
+  },
+  {
+    "outputFile": "StructureDefinition-ihris-task.json",
+    "fshName": "IhrisTask",
+    "fshType": "Profile",
+    "fshFile": "core/IhrisRole.fsh",
+    "startLine": 22,
+    "endLine": 50
+  },
+  {
+    "outputFile": "StructureDefinition-ihris-test-dependent.json",
+    "fshName": "IhrisTestDependent",
+    "fshType": "Extension",
+    "fshFile": "core/IhrisTest.fsh",
+    "startLine": 57,
+    "endLine": 75
+  },
+  {
+    "outputFile": "StructureDefinition-ihris-test-practitioner-role.json",
+    "fshName": "IhrisTestPractitionerRole",
+    "fshType": "Profile",
+    "fshFile": "core/IhrisTest.fsh",
+    "startLine": 77,
+    "endLine": 110
+  },
+  {
+    "outputFile": "StructureDefinition-ihris-test-practitioner.json",
+    "fshName": "IhrisTestPractitioner",
+    "fshType": "Profile",
+    "fshFile": "core/IhrisTest.fsh",
+    "startLine": 1,
+    "endLine": 39
+  },
+  {
+    "outputFile": "StructureDefinition-ihris-test-residence.json",
+    "fshName": "IhrisTestResidence",
+    "fshType": "Extension",
+    "fshFile": "core/IhrisTest.fsh",
+    "startLine": 41,
+    "endLine": 55
+  },
+  {
+    "outputFile": "StructureDefinition-ihris-user-location.json",
+    "fshName": "IhrisUserLocation",
+    "fshType": "Extension",
+    "fshFile": "IhrisUser.fsh",
+    "startLine": 127,
+    "endLine": 137
+  },
+  {
+    "outputFile": "StructureDefinition-ihris-user-otp.json",
+    "fshName": "IhrisUserOtp",
+    "fshType": "Extension",
+    "fshFile": "IhrisUser.fsh",
+    "startLine": 47,
+    "endLine": 61
+  },
+  {
+    "outputFile": "StructureDefinition-ihris-visualization-categories.json",
+    "fshName": "IhrisVisualizationCategories",
+    "fshType": "Extension",
+    "fshFile": "core/IhrisDataVisualization.fsh",
+    "startLine": 33,
+    "endLine": 59
+  },
+  {
+    "outputFile": "StructureDefinition-ihris-visualization-dataset.json",
+    "fshName": "IhrisVisualizationDataset",
+    "fshType": "Extension",
+    "fshFile": "core/IhrisDataVisualization.fsh",
+    "startLine": 16,
+    "endLine": 31
+  },
+  {
+    "outputFile": "StructureDefinition-ihris-visualization-filters.json",
+    "fshName": "IhrisVisualizationFilters",
+    "fshType": "Extension",
+    "fshFile": "core/IhrisDataVisualization.fsh",
+    "startLine": 94,
+    "endLine": 102
+  },
+  {
+    "outputFile": "StructureDefinition-ihris-visualization-permissions.json",
+    "fshName": "IhrisVisualizationPermissions",
+    "fshType": "Extension",
+    "fshFile": "core/IhrisDataVisualization.fsh",
+    "startLine": 114,
+    "endLine": 125
+  },
+  {
+    "outputFile": "StructureDefinition-ihris-visualization-series.json",
+    "fshName": "IhrisVisualizationSeries",
+    "fshType": "Extension",
+    "fshFile": "core/IhrisDataVisualization.fsh",
+    "startLine": 61,
+    "endLine": 92
+  },
+  {
+    "outputFile": "StructureDefinition-ihris-visualization-settings.json",
+    "fshName": "IhrisVisualizationSettings",
+    "fshType": "Extension",
+    "fshFile": "core/IhrisDataVisualization.fsh",
+    "startLine": 104,
+    "endLine": 112
+  },
+  {
+    "outputFile": "StructureDefinition-initial-password.json",
+    "fshName": "InitialPassword",
+    "fshType": "Extension",
+    "fshFile": "IhrisUser.fsh",
+    "startLine": 109,
+    "endLine": 116
+  },
+  {
+    "outputFile": "StructureDefinition-location-boundary-geojson.json",
+    "fshName": "LocBoundaryGeojson",
+    "fshType": "Extension",
+    "fshFile": "IhrisLocation.fsh",
+    "startLine": 36,
+    "endLine": 62
+  },
+  {
+    "outputFile": "StructureDefinition-old-password.json",
+    "fshName": "OldPassword",
+    "fshType": "Extension",
+    "fshFile": "IhrisUser.fsh",
+    "startLine": 100,
+    "endLine": 107
+  },
+  {
+    "outputFile": "StructureDefinition-task-attributes.json",
+    "fshName": "TaskAttributes",
+    "fshType": "Extension",
+    "fshFile": "core/IhrisRole.fsh",
+    "startLine": 105,
+    "endLine": 124
+  },
+  {
+    "outputFile": "ValueSet-Ihris-facility-ownership.json",
+    "fshName": "IhrisFacilityOwnershipValueSet",
+    "fshType": "ValueSet",
+    "fshFile": "IhrisLocation.fsh",
+    "startLine": 149,
+    "endLine": 154
+  },
+  {
+    "outputFile": "ValueSet-address-type.json",
+    "fshName": "AddressType",
+    "fshType": "ValueSet",
+    "fshFile": "core/Terminologies.fsh",
+    "startLine": 383,
+    "endLine": 411
+  },
+  {
+    "outputFile": "ValueSet-address-use.json",
+    "fshName": "AddressUse",
+    "fshType": "ValueSet",
+    "fshFile": "core/Terminologies.fsh",
+    "startLine": 319,
+    "endLine": 347
+  },
+  {
+    "outputFile": "ValueSet-administrative-gender.json",
+    "fshName": "AdministrativeGender",
+    "fshType": "ValueSet",
+    "fshFile": "core/Terminologies.fsh",
+    "startLine": 5170,
+    "endLine": 5196
+  },
+  {
+    "outputFile": "ValueSet-c80-practice-codes.json",
+    "fshName": "PracticeSettingCodeValueSet",
+    "fshType": "ValueSet",
+    "fshFile": "core/Terminologies.fsh",
+    "startLine": 2822,
+    "endLine": 2962
+  },
+  {
+    "outputFile": "ValueSet-contact-point-system.json",
+    "fshName": "ContactPointSystem",
+    "fshType": "ValueSet",
+    "fshFile": "core/Terminologies.fsh",
+    "startLine": 187,
+    "endLine": 215
+  },
+  {
+    "outputFile": "ValueSet-contact-point-use.json",
+    "fshName": "ContactPointUse",
+    "fshType": "ValueSet",
+    "fshFile": "core/Terminologies.fsh",
+    "startLine": 253,
+    "endLine": 281
+  },
+  {
+    "outputFile": "ValueSet-contactentity-type.json",
+    "fshName": "ContactEntityType",
+    "fshType": "ValueSet",
+    "fshFile": "core/Terminologies.fsh",
+    "startLine": 1727,
+    "endLine": 1751
+  },
+  {
+    "outputFile": "ValueSet-currencies.json",
+    "fshName": "Currencies",
+    "fshType": "ValueSet",
+    "fshFile": "core/Terminologies.fsh",
+    "startLine": 5494,
+    "endLine": 5701
+  },
+  {
+    "outputFile": "ValueSet-days-of-week.json",
+    "fshName": "DaysOfWeek",
+    "fshType": "ValueSet",
+    "fshFile": "core/Terminologies.fsh",
+    "startLine": 518,
+    "endLine": 546
+  },
+  {
+    "outputFile": "ValueSet-identifier-type.json",
+    "fshName": "IdentifierType",
+    "fshType": "ValueSet",
+    "fshFile": "core/Terminologies.fsh",
+    "startLine": 616,
+    "endLine": 660
+  },
+  {
+    "outputFile": "ValueSet-identifier-use.json",
+    "fshName": "IdentifierUse",
+    "fshType": "ValueSet",
+    "fshFile": "core/Terminologies.fsh",
+    "startLine": 584,
+    "endLine": 612
+  },
+  {
+    "outputFile": "ValueSet-ihris-Facility-identifier-valueset.json",
+    "fshName": "IhrisFacilityIdentifierValueSet",
+    "fshType": "ValueSet",
+    "fshFile": "IhrisLocation.fsh",
+    "startLine": 114,
+    "endLine": 119
+  },
+  {
+    "outputFile": "ValueSet-ihris-cadre.json",
+    "fshName": "IhrisCadre",
+    "fshType": "ValueSet",
+    "fshFile": "core/Terminologies.fsh",
+    "startLine": 5896,
+    "endLine": 5907
+  },
+  {
+    "outputFile": "ValueSet-ihris-classification.json",
+    "fshName": "IhrisClassification",
+    "fshType": "ValueSet",
+    "fshFile": "core/Terminologies.fsh",
+    "startLine": 5927,
+    "endLine": 5938
+  },
+  {
+    "outputFile": "ValueSet-ihris-degree-valueset.json",
+    "fshName": "IhrisDegreeValueSet",
+    "fshType": "ValueSet",
+    "fshFile": "IhrisEducationHistory.fsh",
+    "startLine": 107,
+    "endLine": 112
+  },
+  {
+    "outputFile": "ValueSet-ihris-discipline-action-type-valueset.json",
+    "fshName": "IhrisEthiopiaDisciplinaryActionTypeValueSet",
+    "fshType": "ValueSet",
+    "fshFile": "IhrisDisciplinaryAction.fsh",
+    "startLine": 77,
+    "endLine": 82
+  },
+  {
+    "outputFile": "ValueSet-ihris-document-category.json",
+    "fshName": "IhrisDocumentCategoryValueSet",
+    "fshType": "ValueSet",
+    "fshFile": "core/IhrisDocumentReference.fsh",
+    "startLine": 24,
+    "endLine": 27
+  },
+  {
+    "outputFile": "ValueSet-ihris-education-level-valueset.json",
+    "fshName": "IhrisEducationLevelValueSet",
+    "fshType": "ValueSet",
+    "fshFile": "IhrisEducationHistory.fsh",
+    "startLine": 127,
+    "endLine": 132
+  },
+  {
+    "outputFile": "ValueSet-ihris-educational-major-valueset.json",
+    "fshName": "IhrisEducationalMajorValueSet",
+    "fshType": "ValueSet",
+    "fshFile": "IhrisEducationHistory.fsh",
+    "startLine": 94,
+    "endLine": 99
+  },
+  {
+    "outputFile": "ValueSet-ihris-employment-status-valueset.json",
+    "fshName": "IhrisEmploymentStatusValueSet",
+    "fshType": "ValueSet",
+    "fshFile": "IhrisPractitionerRole.fsh",
+    "startLine": 124,
+    "endLine": 127
+  },
+  {
+    "outputFile": "ValueSet-ihris-facility-type.json",
+    "fshName": "IhrisFacilityTypeValueSet",
+    "fshType": "ValueSet",
+    "fshFile": "IhrisLocation.fsh",
+    "startLine": 185,
+    "endLine": 190
+  },
+  {
+    "outputFile": "ValueSet-ihris-frequency-valueset.json",
+    "fshName": "IhrisFrequencyValueSet",
+    "fshType": "ValueSet",
+    "fshFile": "IhrisSalary.fsh",
+    "startLine": 106,
+    "endLine": 111
+  },
+  {
+    "outputFile": "ValueSet-ihris-institution-valueset.json",
+    "fshName": "IhrisInstitutionValueSet",
+    "fshType": "ValueSet",
+    "fshFile": "IhrisEducationHistory.fsh",
+    "startLine": 140,
+    "endLine": 145
+  },
+  {
+    "outputFile": "ValueSet-ihris-job-type-valueset.json",
+    "fshName": "IhrisJobTypeValueSet",
+    "fshType": "ValueSet",
+    "fshFile": "IhrisPractitionerRole.fsh",
+    "startLine": 206,
+    "endLine": 209
+  },
+  {
+    "outputFile": "ValueSet-ihris-job.json",
+    "fshName": "IhrisJob",
+    "fshType": "ValueSet",
+    "fshFile": "core/Terminologies.fsh",
+    "startLine": 5959,
+    "endLine": 5971
+  },
+  {
+    "outputFile": "ValueSet-ihris-jurisdiction-type.json",
+    "fshName": "IhrisJurisdictionType",
+    "fshType": "ValueSet",
+    "fshFile": "IhrisLocation.fsh",
+    "startLine": 165,
+    "endLine": 170
+  },
+  {
+    "outputFile": "ValueSet-ihris-leave-type-valueset.json",
+    "fshName": "IhrisLeaveTypeValueSet",
+    "fshType": "ValueSet",
+    "fshFile": "IhrisLeave.fsh",
+    "startLine": 72,
+    "endLine": 76
+  },
+  {
+    "outputFile": "ValueSet-ihris-performance-score-valueset.json",
+    "fshName": "IhrisPerformanceScoreValueSet",
+    "fshType": "ValueSet",
+    "fshFile": "IhrisPerformance.fsh",
+    "startLine": 52,
+    "endLine": 56
+  },
+  {
+    "outputFile": "ValueSet-ihris-position-status.json",
+    "fshName": "IhrisPositionStatusValueSet",
+    "fshType": "ValueSet",
+    "fshFile": "IhrisPractitionerRole.fsh",
+    "startLine": 149,
+    "endLine": 154
+  },
+  {
+    "outputFile": "ValueSet-ihris-reason-departure-valueset.json",
+    "fshName": "IhrisReasonDepartureValueSet",
+    "fshType": "ValueSet",
+    "fshFile": "IhrisPractitionerRole.fsh",
+    "startLine": 181,
+    "endLine": 186
+  },
+  {
+    "outputFile": "ValueSet-ihris-relation-valueset.json",
+    "fshName": "IhrisRelationValueSet",
+    "fshType": "ValueSet",
+    "fshFile": "IhrisPractitioner.fsh",
+    "startLine": 211,
+    "endLine": 216
+  },
+  {
+    "outputFile": "ValueSet-ihris-resource-valueset.json",
+    "fshName": "IhrisResourceValueSet",
+    "fshType": "ValueSet",
+    "fshFile": "core/IhrisResourceCodeSystem.fsh",
+    "startLine": 14,
+    "endLine": 17
+  },
+  {
+    "outputFile": "ValueSet-ihris-salary-grade.json",
+    "fshName": "IhrisSalaryGrade",
+    "fshType": "ValueSet",
+    "fshFile": "core/Terminologies.fsh",
+    "startLine": 6460,
+    "endLine": 6471
+  },
+  {
+    "outputFile": "ValueSet-ihris-salary-scale-valueset.json",
+    "fshName": "IhrisSalaryScaleValueSet",
+    "fshType": "ValueSet",
+    "fshFile": "IhrisPractitionerRole.fsh",
+    "startLine": 88,
+    "endLine": 93
+  },
+  {
+    "outputFile": "ValueSet-ihris-salary-source-valueset.json",
+    "fshName": "IhrisSalarySourceValueSet",
+    "fshType": "ValueSet",
+    "fshFile": "IhrisSalary.fsh",
+    "startLine": 88,
+    "endLine": 93
+  },
+  {
+    "outputFile": "ValueSet-ihris-task-permission.json",
+    "fshName": "IhrisTaskPermissionValueSet",
+    "fshType": "ValueSet",
+    "fshFile": "core/IhrisRole.fsh",
+    "startLine": 138,
+    "endLine": 143
+  },
+  {
+    "outputFile": "ValueSet-ihris-task-resource.json",
+    "fshName": "IhrisTaskResourceValueSet",
+    "fshType": "ValueSet",
+    "fshFile": "core/IhrisRole.fsh",
+    "startLine": 168,
+    "endLine": 173
+  },
+  {
+    "outputFile": "ValueSet-ihris-training-valueset.json",
+    "fshName": "IhrisTrainingValueSet",
+    "fshType": "ValueSet",
+    "fshFile": "IhrisInserviceTraining.fsh",
+    "startLine": 110,
+    "endLine": 114
+  },
+  {
+    "outputFile": "ValueSet-iso3166-1-2.json",
+    "fshName": "Iso3166-1-2",
+    "fshType": "ValueSet",
+    "fshFile": "core/Terminologies.fsh",
+    "startLine": 6772,
+    "endLine": 7033
+  },
+  {
+    "outputFile": "ValueSet-languages.json",
+    "fshName": "languages",
+    "fshType": "Instance",
+    "fshFile": "core/Terminologies.fsh",
+    "startLine": 3026,
+    "endLine": 4114
+  },
+  {
+    "outputFile": "ValueSet-location-mode.json",
+    "fshName": "LocationMode",
+    "fshType": "ValueSet",
+    "fshFile": "core/Terminologies.fsh",
+    "startLine": 92,
+    "endLine": 118
+  },
+  {
+    "outputFile": "ValueSet-location-physical-type.json",
+    "fshName": "LocationType",
+    "fshType": "ValueSet",
+    "fshFile": "core/Terminologies.fsh",
+    "startLine": 454,
+    "endLine": 478
+  },
+  {
+    "outputFile": "ValueSet-location-status.json",
+    "fshName": "LocationStatus",
+    "fshType": "ValueSet",
+    "fshFile": "core/Terminologies.fsh",
+    "startLine": 33,
+    "endLine": 59
+  },
+  {
+    "outputFile": "ValueSet-name-use.json",
+    "fshName": "NameUse",
+    "fshType": "ValueSet",
+    "fshFile": "core/Terminologies.fsh",
+    "startLine": 5115,
+    "endLine": 5141
+  },
+  {
+    "outputFile": "ValueSet-organization-type.json",
+    "fshName": "OrganizationType",
+    "fshType": "ValueSet",
+    "fshFile": "core/Terminologies.fsh",
+    "startLine": 1701,
+    "endLine": 1725
+  },
+  {
+    "outputFile": "ValueSet-service-category.json",
+    "fshName": "ServiceCategory",
+    "fshType": "ValueSet",
+    "fshFile": "core/Terminologies.fsh",
+    "startLine": 1851,
+    "endLine": 1875
+  },
+  {
+    "outputFile": "ValueSet-service-provision-conditions.json",
+    "fshName": "ServiceProvisionConditions",
+    "fshType": "ValueSet",
+    "fshFile": "core/Terminologies.fsh",
+    "startLine": 2996,
+    "endLine": 3022
+  },
+  {
+    "outputFile": "ValueSet-service-type.json",
+    "fshName": "ServiceType",
+    "fshType": "ValueSet",
+    "fshFile": "core/Terminologies.fsh",
+    "startLine": 2500,
+    "endLine": 2524
+  },
+  {
+    "outputFile": "ValueSet-v2-0360.json",
+    "fshName": "Hl7VSDegreeLicenseCertificate",
+    "fshType": "ValueSet",
+    "fshFile": "core/Terminologies.fsh",
+    "startLine": 5477,
+    "endLine": 5492
+  },
+  {
+    "outputFile": "ValueSet-v3-ServiceDeliveryLocationRoleType.json",
+    "fshName": "V3_ServiceDeliveryLocationRoleType",
+    "fshType": "ValueSet",
+    "fshFile": "core/Terminologies.fsh",
+    "startLine": 122,
+    "endLine": 147
+  }
+]

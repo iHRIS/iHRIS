@@ -72,12 +72,15 @@
               "valueUrl": "/resource/view/practitioner/FIELD?edit=true"
             },
             {
-              "url": "field",
-              "valueString": "Practitioner.id"
-            },
-            {
               "url": "text",
               "valueString": "Edit"
+            },
+            {
+              "url": "displayIn"
+            },
+            {
+              "url": "field",
+              "valueString": "Practitioner.id"
             },
             {
               "url": "button",
@@ -90,6 +93,35 @@
             {
               "url": "class",
               "valueString": "secondary"
+            }
+          ],
+          "url": "link"
+        },
+        {
+          "extension": [
+            {
+              "url": "url",
+              "valueUrl": "/bulk-registration"
+            },
+            {
+              "url": "text",
+              "valueString": "Upload CSV/Excel"
+            },
+            {
+              "url": "displayIn",
+              "valueString": "questionnaire"
+            },
+            {
+              "url": "button",
+              "valueBoolean": true
+            },
+            {
+              "url": "icon",
+              "valueString": "mdi-attachment"
+            },
+            {
+              "url": "class",
+              "valueString": "primary"
             }
           ],
           "url": "link"

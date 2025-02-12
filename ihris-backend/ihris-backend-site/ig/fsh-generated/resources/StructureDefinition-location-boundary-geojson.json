@@ -73,16 +73,6 @@
     "element": [
       {
         "id": "Extension",
-        "extension": [
-          {
-            "url": "http://hl7.org/fhir/StructureDefinition/structuredefinition-standards-status",
-            "valueCode": "normative"
-          },
-          {
-            "url": "http://hl7.org/fhir/StructureDefinition/structuredefinition-normative-version",
-            "valueCode": "4.0.0"
-          }
-        ],
         "path": "Extension",
         "short": "A boundary shape that represents the outside edge of the location (in GeoJSON format)",
         "definition": "A boundary shape that represents the outside edge of the location (in GeoJSON format) This shape may have holes, and disconnected shapes.",

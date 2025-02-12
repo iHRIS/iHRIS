@@ -17,7 +17,7 @@
       "item": [
         {
           "linkId": "Basic.extension[0].extension[0]",
-          "definition": "http://ihris.org/fhir/StructureDefinition/ihris-basic-education-history#Basic.extension:educationHistory.extension:institution.value[x]:valueString",
+          "definition": "http://ihris.org/fhir/StructureDefinition/ihris-basic-education-history#Basic.extension:educationHistory.extension:institution.value[x]",
           "text": "Education Institution",
           "type": "string",
           "required": true,
@@ -25,7 +25,7 @@
         },
         {
           "linkId": "Basic.extension[0].extension[1]",
-          "definition": "http://ihris.org/fhir/StructureDefinition/ihris-basic-education-history#Basic.extension:educationHistory.extension:level.value[x]:valueCoding",
+          "definition": "http://ihris.org/fhir/StructureDefinition/ihris-basic-education-history#Basic.extension:educationHistory.extension:level.value[x]",
           "text": "Education Level",
           "type": "choice",
           "answerValueSet": "http://ihris.org/fhir/ValueSet/ihris-education-level-valueset",
@@ -34,7 +34,7 @@
         },
         {
           "linkId": "Basic.extension[0].extension[2]",
-          "definition": "http://ihris.org/fhir/StructureDefinition/ihris-basic-education-history#Basic.extension:educationHistory.extension:degree.value[x]:valueCoding",
+          "definition": "http://ihris.org/fhir/StructureDefinition/ihris-basic-education-history#Basic.extension:educationHistory.extension:degree.value[x]",
           "text": "Degree",
           "type": "choice",
           "answerValueSet": "http://ihris.org/fhir/ValueSet/ihris-degree-valueset",
@@ -43,7 +43,7 @@
         },
         {
           "linkId": "Basic.extension[0].extension[3]",
-          "definition": "http://ihris.org/fhir/StructureDefinition/ihris-basic-education-history#Basic.extension:educationHistory.extension:educationalMajor.value[x]:valueCoding",
+          "definition": "http://ihris.org/fhir/StructureDefinition/ihris-basic-education-history#Basic.extension:educationHistory.extension:educationalMajor.value[x]",
           "text": "Education Major",
           "type": "choice",
           "answerValueSet": "http://ihris.org/fhir/ValueSet/ihris-educational-major-valueset",
@@ -52,7 +52,7 @@
         },
         {
           "linkId": "Basic.extension[0].extension[4]#year",
-          "definition": "http://ihris.org/fhir/StructureDefinition/ihris-basic-education-history#Basic.extension:educationHistory.extension:year.value[x]:valueDate",
+          "definition": "http://ihris.org/fhir/StructureDefinition/ihris-basic-education-history#Basic.extension:educationHistory.extension:year.value[x]",
           "text": "Year Of Graduation",
           "type": "date",
           "required": false,
@@ -60,7 +60,7 @@
         },
         {
           "linkId": "Basic.extension[0].extension[5]",
-          "definition": "http://ihris.org/fhir/StructureDefinition/ihris-basic-education-history#Basic.extension:educationHistory.extension:current.value[x]:valueBoolean",
+          "definition": "http://ihris.org/fhir/StructureDefinition/ihris-basic-education-history#Basic.extension:educationHistory.extension:current.value[x]",
           "text": "Is Current?",
           "type": "boolean",
           "required": false,
@@ -68,7 +68,7 @@
         },
         {
           "linkId": "Basic.extension[0].extension[6]",
-          "definition": "http://ihris.org/fhir/StructureDefinition/ihris-basic-education-history#Basic.extension:educationHistory.extension:attachment.value[x]:valueAttachment",
+          "definition": "http://ihris.org/fhir/StructureDefinition/ihris-basic-education-history#Basic.extension:educationHistory.extension:attachment.value[x]",
           "text": "Attachement",
           "type": "attachment",
           "required": false,

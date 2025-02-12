@@ -5,7 +5,6 @@
   "name": "Currencies",
   "id": "currencies",
   "title": "Code System for Currencies.",
-  "version": "4.0.1",
   "url": "urn:iso:std:iso:4217",
   "concept": [
     {
@@ -738,5 +737,6 @@
     }
   ],
   "date": "2020-09-25T20:48:33.646Z",
+  "version": "4.0.1",
   "count": 182
 }

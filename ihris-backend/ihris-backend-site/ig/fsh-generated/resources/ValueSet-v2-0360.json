@@ -5,7 +5,6 @@
   "id": "v2-0360",
   "title": "hl7VS-degreeLicenseCertificate",
   "description": "Concepts specifying an educational degree (e.g., MD).  Used in the CNN datatype (names and identifiers of clinicians) in Version 2 messaging.  Used in Version 2 messaging; note that in releases of HL7 prior to 2.3.1, was also used in person names (XPN), but this use was deprecated, then withdrawn in 2.7.",
-  "version": "2.0.0",
   "url": "http://terminology.hl7.org/ValueSet/v2-0360",
   "identifier": [
     {
@@ -13,6 +12,7 @@
       "value": "urn:oid:2.16.840.1.113883.21.236"
     }
   ],
+  "version": "2.0.0",
   "experimental": false,
   "date": "2019-12-01",
   "publisher": "HL7, Inc",

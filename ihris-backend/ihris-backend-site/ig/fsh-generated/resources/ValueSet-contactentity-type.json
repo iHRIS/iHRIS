@@ -5,7 +5,6 @@
   "id": "contactentity-type",
   "title": "Contact entity type",
   "description": "This example value set defines a set of codes that can be used to indicate the purpose for which you would contact a contact party.",
-  "version": "4.0.1",
   "url": "http://ihris.org/fhir/ValueSet/contactentity-type",
   "meta": {
     "versionId": "1",
@@ -35,6 +34,7 @@
       "value": "urn:oid:2.16.840.1.113883.4.642.3.416"
     }
   ],
+  "version": "4.0.1",
   "experimental": false,
   "date": "2019-11-01T09:29:23+11:00",
   "publisher": "FHIR Project team",

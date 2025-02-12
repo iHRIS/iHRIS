@@ -39,7 +39,7 @@
       "item": [
         {
           "linkId": "Basic.extension[0].extension[0]",
-          "definition": "http://ihris.org/fhir/StructureDefinition/ihris-basic-discipline#Basic.extension:discipline.extension:actionType.value[x]:valueCoding",
+          "definition": "http://ihris.org/fhir/StructureDefinition/ihris-basic-discipline#Basic.extension:discipline.extension:actionType.value[x]",
           "text": "Discipline Action Type",
           "type": "choice",
           "answerValueSet": "http://ihris.org/fhir/ValueSet/ihris-discipline-action-type-valueset",
@@ -48,7 +48,7 @@
         },
         {
           "linkId": "Basic.extension[0].extension[1]",
-          "definition": "http://ihris.org/fhir/StructureDefinition/ihris-basic-discipline#Basic.extension:discipline.extension:givenDate.value[x]:valueDate",
+          "definition": "http://ihris.org/fhir/StructureDefinition/ihris-basic-discipline#Basic.extension:discipline.extension:givenDate.value[x]",
           "text": "Given Date",
           "type": "date",
           "required": true,
@@ -56,7 +56,7 @@
         },
         {
           "linkId": "Basic.extension[0].extension[2]",
-          "definition": "http://ihris.org/fhir/StructureDefinition/ihris-basic-discipline#Basic.extension:discipline.extension:givenBy.value[x]:valueString",
+          "definition": "http://ihris.org/fhir/StructureDefinition/ihris-basic-discipline#Basic.extension:discipline.extension:givenBy.value[x]",
           "text": "Given By",
           "type": "string",
           "required": false,
@@ -64,7 +64,7 @@
         },
         {
           "linkId": "Basic.extension[0].extension[3]",
-          "definition": "http://ihris.org/fhir/StructureDefinition/ihris-basic-discipline#Basic.extension:discipline.extension:actionTaken.value[x]:valueString",
+          "definition": "http://ihris.org/fhir/StructureDefinition/ihris-basic-discipline#Basic.extension:discipline.extension:actionTaken.value[x]",
           "text": "Action Taken",
           "type": "string",
           "required": false,
@@ -72,7 +72,7 @@
         },
         {
           "linkId": "Basic.extension[0].extension4]",
-          "definition": "http://ihris.org/fhir/StructureDefinition/ihris-basic-discipline#Basic.extension:discipline.extension:period.value[x]:valuePeriod.start",
+          "definition": "http://ihris.org/fhir/StructureDefinition/ihris-basic-discipline#Basic.extension:discipline.extension:period.value[x]",
           "text": "Effective Start date",
           "type": "dateTime",
           "required": true,
@@ -80,7 +80,7 @@
         },
         {
           "linkId": "Basic.extension[0].extension[5]",
-          "definition": "http://ihris.org/fhir/StructureDefinition/ihris-basic-discipline#Basic.extension:discipline.extension:period.value[x]:valuePeriod.end",
+          "definition": "http://ihris.org/fhir/StructureDefinition/ihris-basic-discipline#Basic.extension:discipline.extension:period.value[x]",
           "text": "Effective End Date",
           "type": "dateTime",
           "required": true,
@@ -88,7 +88,7 @@
         },
         {
           "linkId": "Basic.extension[0].extension[6]",
-          "definition": "http://ihris.org/fhir/StructureDefinition/ihris-basic-discipline#Basic.extension:discipline.extension:reason.value[x]:valueString",
+          "definition": "http://ihris.org/fhir/StructureDefinition/ihris-basic-discipline#Basic.extension:discipline.extension:reason.value[x]",
           "text": "Reason",
           "type": "text",
           "required": true,
@@ -96,7 +96,7 @@
         },
         {
           "linkId": "Basic.extension[0].extension[7]",
-          "definition": "http://ihris.org/fhir/StructureDefinition/ihris-basic-discipline#Basic.extension:discipline.extension:remark.value[x]:valueString",
+          "definition": "http://ihris.org/fhir/StructureDefinition/ihris-basic-discipline#Basic.extension:discipline.extension:remark.value[x]",
           "text": "Remark",
           "type": "text",
           "required": false,

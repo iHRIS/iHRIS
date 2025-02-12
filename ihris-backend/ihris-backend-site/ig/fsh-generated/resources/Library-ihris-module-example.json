@@ -15,14 +15,14 @@
   },
   "content": [
     {
+      "contentType": "text/x-sig",
       "title": "module-signature",
-      "data": "TEST",
-      "contentType": "text/x-sig"
+      "data": "TEST"
     },
     {
+      "contentType": "application/javascript",
       "title": "module-code",
-      "data": "TEST",
-      "contentType": "application/javascript"
+      "data": "TEST"
     }
   ],
   "status": "active",

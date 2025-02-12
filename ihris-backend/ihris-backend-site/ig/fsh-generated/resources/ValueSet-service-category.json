@@ -5,7 +5,6 @@
   "id": "service-category",
   "title": "Service category",
   "description": "This value set defines an example set of codes that can be used to classify groupings of service-types/specialties.",
-  "version": "4.0.1",
   "url": "http://ihris.org/fhir/ValueSet/service-category",
   "meta": {
     "versionId": "1",
@@ -35,6 +34,7 @@
       "value": "urn:oid:2.16.840.1.113883.4.642.3.516"
     }
   ],
+  "version": "4.0.1",
   "experimental": false,
   "date": "2019-11-01T09:29:23+11:00",
   "publisher": "FHIR Project team",

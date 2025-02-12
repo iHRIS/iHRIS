@@ -17,7 +17,7 @@
       "item": [
         {
           "linkId": "Basic.extension[0].extension[0]",
-          "definition": "http://ihris.org/fhir/StructureDefinition/ihris-basic-performance#Basic.extension:performance.extension:evaluator.value[x]:valueString",
+          "definition": "http://ihris.org/fhir/StructureDefinition/ihris-basic-performance#Basic.extension:performance.extension:evaluator.value[x]",
           "text": "Evaluator's Name",
           "type": "string",
           "required": true,
@@ -25,7 +25,7 @@
         },
         {
           "linkId": "Basic.extension[0].extension[1]",
-          "definition": "http://ihris.org/fhir/StructureDefinition/ihris-basic-performance#Basic.extension:performance.extension:period.value[x]:valuePeriod.start",
+          "definition": "http://ihris.org/fhir/StructureDefinition/ihris-basic-performance#Basic.extension:performance.extension:period.value[x]",
           "text": "Evaluation Period Start Date",
           "type": "date",
           "required": true,
@@ -33,7 +33,7 @@
         },
         {
           "linkId": "Basic.extension[0].extension[2]",
-          "definition": "http://ihris.org/fhir/StructureDefinition/ihris-basic-performance#Basic.extension:performance.extension:period.value[x]:valuePeriod.end",
+          "definition": "http://ihris.org/fhir/StructureDefinition/ihris-basic-performance#Basic.extension:performance.extension:period.value[x]",
           "text": "Evaluation Period End Date",
           "type": "date",
           "required": true,
@@ -41,7 +41,7 @@
         },
         {
           "linkId": "Basic.extension[0].extension[3]",
-          "definition": "http://ihris.org/fhir/StructureDefinition/ihris-basic-performance#Basic.extension:performance.extension:score.value[x]:valueCoding",
+          "definition": "http://ihris.org/fhir/StructureDefinition/ihris-basic-performance#Basic.extension:performance.extension:score.value[x]",
           "text": "Score Attained",
           "type": "choice",
           "answerValueSet": "http://ihris.org/fhir/ValueSet/ihris-performance-score-valueset",

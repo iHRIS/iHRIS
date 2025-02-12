@@ -1,14 +1,7 @@
 {
   "resourceType": "StructureDefinition",
   "id": "ihris-parameters-remote-config",
-  "extension": [
-    {
-      "url": "http://hl7.org/fhir/StructureDefinition/structuredefinition-category",
-      "valueString": "Foundation.Other"
-    }
-  ],
   "url": "http://ihris.org/fhir/StructureDefinition/ihris-parameters-remote-config",
-  "version": "0.1.0",
   "name": "IhrisParametersRemoteConfig",
   "title": "iHRIS Parameters Remote Config",
   "status": "active",
@@ -854,13 +847,6 @@
         "id": "Parameters.parameter:Signature.value[x]",
         "path": "Parameters.parameter.value[x]",
         "slicing": {
-          "discriminator": [
-            {
-              "type": "type",
-              "path": "$this"
-            }
-          ],
-          "ordered": false,
           "rules": "closed"
         },
         "short": "If parameter is a data type",
@@ -894,41 +880,7 @@
         "isSummary": true
       },
       {
-        "id": "Parameters.parameter:Signature.value[x]:valueSignature",
-        "path": "Parameters.parameter.value[x]",
-        "sliceName": "valueSignature",
-        "short": "If parameter is a data type",
-        "definition": "If the parameter is a data type.",
-        "min": 1,
-        "max": "1",
-        "base": {
-          "path": "Parameters.parameter.value[x]",
-          "min": 0,
-          "max": "1"
-        },
-        "type": [
-          {
-            "code": "Signature"
-          }
-        ],
-        "condition": [
-          "inv-1"
-        ],
-        "constraint": [
-          {
-            "key": "ele-1",
-            "severity": "error",
-            "human": "All FHIR elements must have a @value or children",
-            "expression": "hasValue() or (children().count() > id.count())",
-            "xpath": "@value|f:*|h:div",
-            "source": "http://hl7.org/fhir/StructureDefinition/Element"
-          }
-        ],
-        "isModifier": false,
-        "isSummary": true
-      },
-      {
-        "id": "Parameters.parameter:Signature.value[x]:valueSignature.id",
+        "id": "Parameters.parameter:Signature.value[x].id",
         "path": "Parameters.parameter.value[x].id",
         "representation": [
           "xmlAttr"
@@ -963,7 +915,7 @@
         ]
       },
       {
-        "id": "Parameters.parameter:Signature.value[x]:valueSignature.extension",
+        "id": "Parameters.parameter:Signature.value[x].extension",
         "path": "Parameters.parameter.value[x].extension",
         "slicing": {
           "discriminator": [
@@ -1022,7 +974,7 @@
         ]
       },
       {
-        "id": "Parameters.parameter:Signature.value[x]:valueSignature.type",
+        "id": "Parameters.parameter:Signature.value[x].type",
         "path": "Parameters.parameter.value[x].type",
         "short": "Indication of the reason the entity signed the object(s)",
         "definition": "An indication of the reason that the entity signed this document. This may be explicitly included as part of the signature information and can be used when determining accountability for various actions concerning the document.",
@@ -1068,7 +1020,7 @@
         }
       },
       {
-        "id": "Parameters.parameter:Signature.value[x]:valueSignature.when",
+        "id": "Parameters.parameter:Signature.value[x].when",
         "path": "Parameters.parameter.value[x].when",
         "short": "When the signature was created",
         "definition": "When the digital signature was signed.",
@@ -1099,7 +1051,7 @@
         "isSummary": true
       },
       {
-        "id": "Parameters.parameter:Signature.value[x]:valueSignature.who",
+        "id": "Parameters.parameter:Signature.value[x].who",
         "path": "Parameters.parameter.value[x].who",
         "short": "Who signed",
         "definition": "A reference to an application-usable description of the identity that signed  (e.g. the signature used their private key).",
@@ -1138,7 +1090,7 @@
         "isSummary": true
       },
       {
-        "id": "Parameters.parameter:Signature.value[x]:valueSignature.onBehalfOf",
+        "id": "Parameters.parameter:Signature.value[x].onBehalfOf",
         "path": "Parameters.parameter.value[x].onBehalfOf",
         "short": "The party represented",
         "definition": "A reference to an application-usable description of the identity that is represented by the signature.",
@@ -1178,7 +1130,7 @@
         "isSummary": true
       },
       {
-        "id": "Parameters.parameter:Signature.value[x]:valueSignature.targetFormat",
+        "id": "Parameters.parameter:Signature.value[x].targetFormat",
         "path": "Parameters.parameter.value[x].targetFormat",
         "short": "The technical format of the signed resources",
         "definition": "A mime type that indicates the technical format of the target resources signed by the signature.",
@@ -1224,7 +1176,7 @@
         }
       },
       {
-        "id": "Parameters.parameter:Signature.value[x]:valueSignature.sigFormat",
+        "id": "Parameters.parameter:Signature.value[x].sigFormat",
         "path": "Parameters.parameter.value[x].sigFormat",
         "short": "The technical format of the signature",
         "definition": "A mime type that indicates the technical format of the signature. Important mime types are application/signature+xml for X ML DigSig, application/jose for JWS, and image/* for a graphical image of a signature, etc.",
@@ -1269,7 +1221,7 @@
         }
       },
       {
-        "id": "Parameters.parameter:Signature.value[x]:valueSignature.data",
+        "id": "Parameters.parameter:Signature.value[x].data",
         "path": "Parameters.parameter.value[x].data",
         "short": "The actual signature content (XML DigSig. JWS, picture, etc.)",
         "definition": "The base64 encoding of the Signature content. When signature is not recorded electronically this element would be empty.",
@@ -1997,49 +1949,8 @@
         "id": "Parameters.parameter:Config.part:ConfigId.value[x]",
         "path": "Parameters.parameter.part.value[x]",
         "slicing": {
-          "discriminator": [
-            {
-              "type": "type",
-              "path": "$this"
-            }
-          ],
-          "ordered": false,
           "rules": "closed"
         },
-        "short": "If parameter is a data type",
-        "definition": "If the parameter is a data type.",
-        "min": 1,
-        "max": "1",
-        "base": {
-          "path": "Parameters.parameter.value[x]",
-          "min": 0,
-          "max": "1"
-        },
-        "type": [
-          {
-            "code": "string"
-          }
-        ],
-        "condition": [
-          "inv-1"
-        ],
-        "constraint": [
-          {
-            "key": "ele-1",
-            "severity": "error",
-            "human": "All FHIR elements must have a @value or children",
-            "expression": "hasValue() or (children().count() > id.count())",
-            "xpath": "@value|f:*|h:div",
-            "source": "http://hl7.org/fhir/StructureDefinition/Element"
-          }
-        ],
-        "isModifier": false,
-        "isSummary": true
-      },
-      {
-        "id": "Parameters.parameter:Config.part:ConfigId.value[x]:valueString",
-        "path": "Parameters.parameter.part.value[x]",
-        "sliceName": "valueString",
         "short": "If parameter is a data type",
         "definition": "If the parameter is a data type.",
         "min": 1,
@@ -2156,13 +2067,6 @@
         "id": "Parameters.parameter:Signature.value[x]",
         "path": "Parameters.parameter.value[x]",
         "slicing": {
-          "discriminator": [
-            {
-              "type": "type",
-              "path": "$this"
-            }
-          ],
-          "ordered": false,
           "rules": "closed"
         },
         "min": 1,
@@ -2173,14 +2077,8 @@
         ]
       },
       {
-        "id": "Parameters.parameter:Signature.valueSignature",
-        "path": "Parameters.parameter.valueSignature",
-        "min": 1,
-        "max": "1"
-      },
-      {
-        "id": "Parameters.parameter:Signature.valueSignature.type",
-        "path": "Parameters.parameter.valueSignature.type",
+        "id": "Parameters.parameter:Signature.value[x].type",
+        "path": "Parameters.parameter.value[x].type",
         "max": "1",
         "patternCoding": {
           "code": "1.2.840.10065.1.12.1.14",
@@ -2188,8 +2086,8 @@
         }
       },
       {
-        "id": "Parameters.parameter:Signature.valueSignature.data",
-        "path": "Parameters.parameter.valueSignature.data",
+        "id": "Parameters.parameter:Signature.value[x].data",
+        "path": "Parameters.parameter.value[x].data",
         "min": 1
       },
       {
@@ -2254,13 +2152,6 @@
         "id": "Parameters.parameter:Config.part:ConfigId.value[x]",
         "path": "Parameters.parameter.part.value[x]",
         "slicing": {
-          "discriminator": [
-            {
-              "type": "type",
-              "path": "$this"
-            }
-          ],
-          "ordered": false,
           "rules": "closed"
         },
         "min": 1,
@@ -2269,12 +2160,6 @@
             "code": "string"
           }
         ]
-      },
-      {
-        "id": "Parameters.parameter:Config.part:ConfigId.valueString",
-        "path": "Parameters.parameter.part.valueString",
-        "min": 1,
-        "max": "1"
       },
       {
         "id": "Parameters.parameter:Config.part:ConfigId.resource",

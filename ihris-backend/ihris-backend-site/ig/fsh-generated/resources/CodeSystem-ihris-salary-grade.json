@@ -6,7 +6,6 @@
   "id": "ihris-salary-grade",
   "title": "iHRIS Salary Grade",
   "description": "Sample iHRIS CodeSystem for: iHRISSalaryGrade",
-  "version": "0.1.0",
   "url": "http://ihris.org/fhir/CodeSystem/ihris-salary-grade",
   "concept": [
     {

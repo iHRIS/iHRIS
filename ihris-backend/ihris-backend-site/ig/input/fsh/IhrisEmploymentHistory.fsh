@@ -95,42 +95,42 @@ Usage:          #definition
 * item[0].extension[constraint].extension[human].valueString = "The end date must be after the start date."
 
 * item[0].item[0].linkId = "Basic.extension[0].extension[0]"
-* item[0].item[0].definition = "http://ihris.org/fhir/StructureDefinition/ihris-basic-employment-history#Basic.extension:employmentHistory.extension:organization.value[x]:valueString"
+* item[0].item[0].definition = "http://ihris.org/fhir/StructureDefinition/ihris-basic-employment-history#Basic.extension:employmentHistory.extension:organization.value[x]"
 * item[0].item[0].text = "Organization Name"
 * item[0].item[0].type = #string
 * item[0].item[0].required = true
 * item[0].item[0].repeats = false
 
 * item[0].item[1].linkId = "Basic.extension[0].extension[1]"
-* item[0].item[1].definition = "http://ihris.org/fhir/StructureDefinition/ihris-basic-employment-history#Basic.extension:employmentHistory.extension:address.value[x]:valueString"
+* item[0].item[1].definition = "http://ihris.org/fhir/StructureDefinition/ihris-basic-employment-history#Basic.extension:employmentHistory.extension:address.value[x]"
 * item[0].item[1].text = "Organization Address"
 * item[0].item[1].type = #text
 * item[0].item[1].required = false
 * item[0].item[1].repeats = false
 
 * item[0].item[2].linkId = "Basic.extension[0].extension[2]"
-* item[0].item[2].definition = "http://ihris.org/fhir/StructureDefinition/ihris-basic-employment-history#Basic.extension:employmentHistory.extension:telephone.value[x]:valueString"
+* item[0].item[2].definition = "http://ihris.org/fhir/StructureDefinition/ihris-basic-employment-history#Basic.extension:employmentHistory.extension:telephone.value[x]"
 * item[0].item[2].text = "Organization Telephone"
 * item[0].item[2].type = #string
 * item[0].item[2].required = false
 * item[0].item[2].repeats = false
 
 * item[0].item[3].linkId = "Basic.extension[0].extension[3]"
-* item[0].item[3].definition = "http://ihris.org/fhir/StructureDefinition/ihris-basic-employment-history#Basic.extension:employmentHistory.extension:startingPosition.value[x]:valueString"
+* item[0].item[3].definition = "http://ihris.org/fhir/StructureDefinition/ihris-basic-employment-history#Basic.extension:employmentHistory.extension:startingPosition.value[x]"
 * item[0].item[3].text = "Position"
 * item[0].item[3].type = #string
 * item[0].item[3].required = true
 * item[0].item[3].repeats = false
 
 * item[0].item[4].linkId = "Basic.extension[0].extension[4]"
-* item[0].item[4].definition = "http://ihris.org/fhir/StructureDefinition/ihris-basic-employment-history#Basic.extension:employmentHistory.extension:startingSalary.value[x]:valueMoney"
+* item[0].item[4].definition = "http://ihris.org/fhir/StructureDefinition/ihris-basic-employment-history#Basic.extension:employmentHistory.extension:startingSalary.value[x]"
 * item[0].item[4].text = "Salary"
 * item[0].item[4].type = #string
 * item[0].item[4].required = false
 * item[0].item[4].repeats = false
 
 * item[0].item[5].linkId = "Basic.extension[0].extension[5]"
-* item[0].item[5].definition = "http://ihris.org/fhir/StructureDefinition/ihris-basic-employment-history#Basic.extension:employmentHistory.extension:period.value[x]:valuePeriod.start"
+* item[0].item[5].definition = "http://ihris.org/fhir/StructureDefinition/ihris-basic-employment-history#Basic.extension:employmentHistory.extension:period.value[x]"
 * item[0].item[5].text = "Date Started"
 * item[0].item[5].type = #dateTime
 * item[0].item[5].required = true

@@ -6,7 +6,6 @@
   "id": "address-use",
   "title": "AddressUse",
   "description": "The use of an address.",
-  "version": "4.0.1",
   "url": "http://hl7.org/fhir/address-use",
   "concept": [
     {
@@ -64,6 +63,7 @@
       "value": "urn:oid:2.16.840.1.113883.4.642.4.68"
     }
   ],
+  "version": "4.0.1",
   "experimental": false,
   "date": "2019-11-01T09:29:23+11:00",
   "publisher": "HL7 (FHIR Project)",

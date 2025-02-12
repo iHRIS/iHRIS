@@ -115,28 +115,28 @@ Usage:          #definition
 * item[0].item[1].repeats = false
 
 * item[0].item[2].linkId = "Basic.extension[0].extension[2]"
-* item[0].item[2].definition = "http://ihris.org/fhir/StructureDefinition/ihris-basic-emergency#Basic.extension:emergency.extension:phone.value[x]:valueString"
+* item[0].item[2].definition = "http://ihris.org/fhir/StructureDefinition/ihris-basic-emergency#Basic.extension:emergency.extension:phone.value[x]"
 * item[0].item[2].text = "Home Phone"
 * item[0].item[2].type = #string
 * item[0].item[2].required = false
 * item[0].item[2].repeats = false
 
 * item[0].item[3].linkId = "Basic.extension[0].extension[3]"
-* item[0].item[3].definition = "http://ihris.org/fhir/StructureDefinition/ihris-basic-emergency#Basic.extension:emergency.extension:mobile.value[x]:valueString"
+* item[0].item[3].definition = "http://ihris.org/fhir/StructureDefinition/ihris-basic-emergency#Basic.extension:emergency.extension:mobile.value[x]"
 * item[0].item[3].text = "Mobile Phone"
 * item[0].item[3].type = #string
 * item[0].item[3].required = false
 * item[0].item[3].repeats = false
 
 * item[0].item[4].linkId = "Basic.extension[0].extension[4]"
-* item[0].item[4].definition = "http://ihris.org/fhir/StructureDefinition/ihris-basic-emergency#Basic.extension:emergency.extension:workPhone.value[x]:valueString"
+* item[0].item[4].definition = "http://ihris.org/fhir/StructureDefinition/ihris-basic-emergency#Basic.extension:emergency.extension:workPhone.value[x]"
 * item[0].item[4].text = "Work Phone"
 * item[0].item[4].type = #string
 * item[0].item[4].required = false
 * item[0].item[4].repeats = false
 
 * item[0].item[5].linkId = "Basic.extension[0].extension[5]"
-* item[0].item[5].definition = "http://ihris.org/fhir/StructureDefinition/ihris-basic-emergency#Basic.extension:emergency.extension:workEmail.value[x]:valueString"
+* item[0].item[5].definition = "http://ihris.org/fhir/StructureDefinition/ihris-basic-emergency#Basic.extension:emergency.extension:workEmail.value[x]"
 * item[0].item[5].text = "Work Email"
 * item[0].item[5].type = #string
 * item[0].item[5].required = false

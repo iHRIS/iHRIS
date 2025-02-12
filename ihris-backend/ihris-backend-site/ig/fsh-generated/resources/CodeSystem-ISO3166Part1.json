@@ -6,7 +6,6 @@
   "id": "ISO3166Part1",
   "title": "ISO 3166-1 Codes for the representation of names of countries and their subdivisions — Part 1: Country code",
   "description": "ISO 3166-1 establishes codes that represent the current names of countries, dependencies, and other areas of particular geopolitical interest, on the basis of country names obtained from the United Nations.",
-  "version": "1.0.0",
   "url": "urn:iso:std:iso:3166",
   "concept": [
     {
@@ -1012,6 +1011,7 @@
       "value": "urn:oid:1.0.3166.1"
     }
   ],
+  "version": "1.0.0",
   "experimental": false,
   "date": "2022-08-23T00:00:00-00:00",
   "publisher": "International Organization for Standardization (ISO)",

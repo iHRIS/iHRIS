@@ -6,7 +6,6 @@
   "id": "v3-RoleCode",
   "title": "v3 Code System RoleCode",
   "description": " A set of codes further specifying the kind of Role; specific classification codes for further qualifying RoleClass codes.",
-  "version": "2018-08-12",
   "url": "http://ihris.org/fhir/CodeSystem/v3-RoleCode",
   "concept": [
     {
@@ -2784,6 +2783,7 @@
       "value": "urn:oid:2.16.840.1.113883.5.111"
     }
   ],
+  "version": "2018-08-12",
   "experimental": false,
   "date": "2018-08-12T00:00:00+10:00",
   "publisher": "HL7, Inc",

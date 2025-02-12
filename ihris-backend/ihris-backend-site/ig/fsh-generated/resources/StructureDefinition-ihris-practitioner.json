@@ -1,18 +1,7 @@
 {
   "resourceType": "StructureDefinition",
   "id": "ihris-practitioner",
-  "extension": [
-    {
-      "url": "http://hl7.org/fhir/StructureDefinition/structuredefinition-category",
-      "valueString": "Base.Individuals"
-    },
-    {
-      "url": "http://hl7.org/fhir/StructureDefinition/structuredefinition-security-category",
-      "valueCode": "individual"
-    }
-  ],
   "url": "http://ihris.org/fhir/StructureDefinition/ihris-practitioner",
-  "version": "0.1.0",
   "name": "IhrisPractitioner",
   "title": "iHRIS Practitioner",
   "status": "active",
@@ -594,53 +583,6 @@
       {
         "id": "Practitioner.extension:residence.value[x]",
         "path": "Practitioner.extension.value[x]",
-        "slicing": {
-          "discriminator": [
-            {
-              "type": "type",
-              "path": "$this"
-            }
-          ],
-          "ordered": false,
-          "rules": "open"
-        },
-        "short": "Value of extension",
-        "definition": "Value of extension - must be one of a constrained set of the data types (see [Extensibility](extensibility.html) for a list).",
-        "min": 1,
-        "max": "1",
-        "base": {
-          "path": "Extension.value[x]",
-          "min": 0,
-          "max": "1"
-        },
-        "type": [
-          {
-            "code": "Reference"
-          }
-        ],
-        "constraint": [
-          {
-            "key": "ele-1",
-            "severity": "error",
-            "human": "All FHIR elements must have a @value or children",
-            "expression": "hasValue() or (children().count() > id.count())",
-            "xpath": "@value|f:*|h:div",
-            "source": "http://hl7.org/fhir/StructureDefinition/Element"
-          }
-        ],
-        "isModifier": false,
-        "isSummary": false,
-        "mapping": [
-          {
-            "identity": "rim",
-            "map": "N/A"
-          }
-        ]
-      },
-      {
-        "id": "Practitioner.extension:residence.value[x]:valueReference",
-        "path": "Practitioner.extension.value[x]",
-        "sliceName": "valueReference",
         "label": "Residence",
         "short": "Value of extension",
         "definition": "Value of extension - must be one of a constrained set of the data types (see [Extensibility](extensibility.html) for a list).",
@@ -680,7 +622,7 @@
         ]
       },
       {
-        "id": "Practitioner.extension:residence.value[x]:valueReference.id",
+        "id": "Practitioner.extension:residence.value[x].id",
         "path": "Practitioner.extension.value[x].id",
         "representation": [
           "xmlAttr"
@@ -715,7 +657,7 @@
         ]
       },
       {
-        "id": "Practitioner.extension:residence.value[x]:valueReference.extension",
+        "id": "Practitioner.extension:residence.value[x].extension",
         "path": "Practitioner.extension.value[x].extension",
         "slicing": {
           "discriminator": [
@@ -774,7 +716,7 @@
         ]
       },
       {
-        "id": "Practitioner.extension:residence.value[x]:valueReference.reference",
+        "id": "Practitioner.extension:residence.value[x].reference",
         "path": "Practitioner.extension.value[x].reference",
         "label": "Location",
         "short": "Literal reference, Relative, internal or absolute URL",
@@ -816,7 +758,7 @@
         ]
       },
       {
-        "id": "Practitioner.extension:residence.value[x]:valueReference.type",
+        "id": "Practitioner.extension:residence.value[x].type",
         "path": "Practitioner.extension.value[x].type",
         "short": "Type the reference refers to (e.g. \"Patient\")",
         "definition": "The expected type of the target of the reference. If both Reference.type and Reference.reference are populated and Reference.reference is a FHIR URL, both SHALL be consistent.\n\nThe type is the Canonical URL of Resource Definition that is the type this reference refers to. References are URLs that are relative to http://hl7.org/fhir/StructureDefinition/ e.g. \"Patient\" is a reference to http://hl7.org/fhir/StructureDefinition/Patient. Absolute URLs are only allowed for logical models (and can only be used in references in logical models, not resources).",
@@ -864,7 +806,7 @@
         ]
       },
       {
-        "id": "Practitioner.extension:residence.value[x]:valueReference.identifier",
+        "id": "Practitioner.extension:residence.value[x].identifier",
         "path": "Practitioner.extension.value[x].identifier",
         "short": "Logical reference, when literal reference is not known",
         "definition": "An identifier for the target resource. This is used when there is no way to reference the other resource directly, either because the entity it represents is not available through a FHIR server, or because there is no way for the author of the resource to convert a known identifier to an actual location. There is no requirement that a Reference.identifier point to something that is actually exposed as a FHIR instance, but it SHALL point to a business concept that would be expected to be exposed as a FHIR instance, and that instance would need to be of a FHIR resource type allowed by the reference.",
@@ -901,7 +843,7 @@
         ]
       },
       {
-        "id": "Practitioner.extension:residence.value[x]:valueReference.display",
+        "id": "Practitioner.extension:residence.value[x].display",
         "extension": [
           {
             "url": "http://hl7.org/fhir/StructureDefinition/elementdefinition-translatable",
@@ -1131,53 +1073,6 @@
       {
         "id": "Practitioner.extension:nationality.value[x]",
         "path": "Practitioner.extension.value[x]",
-        "slicing": {
-          "discriminator": [
-            {
-              "type": "type",
-              "path": "$this"
-            }
-          ],
-          "ordered": false,
-          "rules": "open"
-        },
-        "short": "Value of extension",
-        "definition": "Value of extension - must be one of a constrained set of the data types (see [Extensibility](extensibility.html) for a list).",
-        "min": 1,
-        "max": "1",
-        "base": {
-          "path": "Extension.value[x]",
-          "min": 0,
-          "max": "1"
-        },
-        "type": [
-          {
-            "code": "Coding"
-          }
-        ],
-        "constraint": [
-          {
-            "key": "ele-1",
-            "severity": "error",
-            "human": "All FHIR elements must have a @value or children",
-            "expression": "hasValue() or (children().count() > id.count())",
-            "xpath": "@value|f:*|h:div",
-            "source": "http://hl7.org/fhir/StructureDefinition/Element"
-          }
-        ],
-        "isModifier": false,
-        "isSummary": false,
-        "mapping": [
-          {
-            "identity": "rim",
-            "map": "N/A"
-          }
-        ]
-      },
-      {
-        "id": "Practitioner.extension:nationality.value[x]:valueCoding",
-        "path": "Practitioner.extension.value[x]",
-        "sliceName": "valueCoding",
         "label": "Nationality",
         "short": "Value of extension",
         "definition": "Value of extension - must be one of a constrained set of the data types (see [Extensibility](extensibility.html) for a list).",
@@ -1405,53 +1300,6 @@
       {
         "id": "Practitioner.extension:maritalStatus.value[x]",
         "path": "Practitioner.extension.value[x]",
-        "slicing": {
-          "discriminator": [
-            {
-              "type": "type",
-              "path": "$this"
-            }
-          ],
-          "ordered": false,
-          "rules": "open"
-        },
-        "short": "Value of extension",
-        "definition": "Value of extension - must be one of a constrained set of the data types (see [Extensibility](extensibility.html) for a list).",
-        "min": 1,
-        "max": "1",
-        "base": {
-          "path": "Extension.value[x]",
-          "min": 0,
-          "max": "1"
-        },
-        "type": [
-          {
-            "code": "Coding"
-          }
-        ],
-        "constraint": [
-          {
-            "key": "ele-1",
-            "severity": "error",
-            "human": "All FHIR elements must have a @value or children",
-            "expression": "hasValue() or (children().count() > id.count())",
-            "xpath": "@value|f:*|h:div",
-            "source": "http://hl7.org/fhir/StructureDefinition/Element"
-          }
-        ],
-        "isModifier": false,
-        "isSummary": false,
-        "mapping": [
-          {
-            "identity": "rim",
-            "map": "N/A"
-          }
-        ]
-      },
-      {
-        "id": "Practitioner.extension:maritalStatus.value[x]:valueCoding",
-        "path": "Practitioner.extension.value[x]",
-        "sliceName": "valueCoding",
         "label": "Marital Status",
         "short": "Value of extension",
         "definition": "Value of extension - must be one of a constrained set of the data types (see [Extensibility](extensibility.html) for a list).",
@@ -1679,53 +1527,6 @@
       {
         "id": "Practitioner.extension:dependents.value[x]",
         "path": "Practitioner.extension.value[x]",
-        "slicing": {
-          "discriminator": [
-            {
-              "type": "type",
-              "path": "$this"
-            }
-          ],
-          "ordered": false,
-          "rules": "open"
-        },
-        "short": "Value of extension",
-        "definition": "Value of extension - must be one of a constrained set of the data types (see [Extensibility](extensibility.html) for a list).",
-        "min": 1,
-        "max": "1",
-        "base": {
-          "path": "Extension.value[x]",
-          "min": 0,
-          "max": "1"
-        },
-        "type": [
-          {
-            "code": "positiveInt"
-          }
-        ],
-        "constraint": [
-          {
-            "key": "ele-1",
-            "severity": "error",
-            "human": "All FHIR elements must have a @value or children",
-            "expression": "hasValue() or (children().count() > id.count())",
-            "xpath": "@value|f:*|h:div",
-            "source": "http://hl7.org/fhir/StructureDefinition/Element"
-          }
-        ],
-        "isModifier": false,
-        "isSummary": false,
-        "mapping": [
-          {
-            "identity": "rim",
-            "map": "N/A"
-          }
-        ]
-      },
-      {
-        "id": "Practitioner.extension:dependents.value[x]:valuePositiveInt",
-        "path": "Practitioner.extension.value[x]",
-        "sliceName": "valuePositiveInt",
         "label": "Number of Dependents",
         "short": "Value of extension",
         "definition": "Value of extension - must be one of a constrained set of the data types (see [Extensibility](extensibility.html) for a list).",
@@ -4165,7 +3966,7 @@
         "short": "The date  on which the practitioner was born",
         "definition": "The date of birth for the practitioner.",
         "requirements": "Needed for identification.",
-        "min": 0,
+        "min": 1,
         "max": "1",
         "base": {
           "path": "Practitioner.birthDate",
@@ -5108,53 +4909,6 @@
       {
         "id": "Practitioner.communication.extension:proficiency.extension:level.value[x]",
         "path": "Practitioner.communication.extension.extension.value[x]",
-        "slicing": {
-          "discriminator": [
-            {
-              "type": "type",
-              "path": "$this"
-            }
-          ],
-          "ordered": false,
-          "rules": "open"
-        },
-        "short": "Value of extension",
-        "definition": "Value of extension - must be one of a constrained set of the data types (see [Extensibility](extensibility.html) for a list).",
-        "min": 0,
-        "max": "1",
-        "base": {
-          "path": "Extension.value[x]",
-          "min": 0,
-          "max": "1"
-        },
-        "type": [
-          {
-            "code": "Coding"
-          }
-        ],
-        "constraint": [
-          {
-            "key": "ele-1",
-            "severity": "error",
-            "human": "All FHIR elements must have a @value or children",
-            "expression": "hasValue() or (children().count() > id.count())",
-            "xpath": "@value|f:*|h:div",
-            "source": "http://hl7.org/fhir/StructureDefinition/Element"
-          }
-        ],
-        "isModifier": false,
-        "isSummary": false,
-        "mapping": [
-          {
-            "identity": "rim",
-            "map": "N/A"
-          }
-        ]
-      },
-      {
-        "id": "Practitioner.communication.extension:proficiency.extension:level.value[x]:valueCoding",
-        "path": "Practitioner.communication.extension.extension.value[x]",
-        "sliceName": "valueCoding",
         "label": "Proficiency Level",
         "short": "Value of extension",
         "definition": "Value of extension - must be one of a constrained set of the data types (see [Extensibility](extensibility.html) for a list).",
@@ -5380,53 +5134,6 @@
       {
         "id": "Practitioner.communication.extension:proficiency.extension:type.value[x]",
         "path": "Practitioner.communication.extension.extension.value[x]",
-        "slicing": {
-          "discriminator": [
-            {
-              "type": "type",
-              "path": "$this"
-            }
-          ],
-          "ordered": false,
-          "rules": "open"
-        },
-        "short": "Value of extension",
-        "definition": "Value of extension - must be one of a constrained set of the data types (see [Extensibility](extensibility.html) for a list).",
-        "min": 0,
-        "max": "1",
-        "base": {
-          "path": "Extension.value[x]",
-          "min": 0,
-          "max": "1"
-        },
-        "type": [
-          {
-            "code": "Coding"
-          }
-        ],
-        "constraint": [
-          {
-            "key": "ele-1",
-            "severity": "error",
-            "human": "All FHIR elements must have a @value or children",
-            "expression": "hasValue() or (children().count() > id.count())",
-            "xpath": "@value|f:*|h:div",
-            "source": "http://hl7.org/fhir/StructureDefinition/Element"
-          }
-        ],
-        "isModifier": false,
-        "isSummary": false,
-        "mapping": [
-          {
-            "identity": "rim",
-            "map": "N/A"
-          }
-        ]
-      },
-      {
-        "id": "Practitioner.communication.extension:proficiency.extension:type.value[x]:valueCoding",
-        "path": "Practitioner.communication.extension.extension.value[x]",
-        "sliceName": "valueCoding",
         "label": "Proficiency Type",
         "short": "Value of extension",
         "definition": "Value of extension - must be one of a constrained set of the data types (see [Extensibility](extensibility.html) for a list).",
@@ -6074,6 +5781,7 @@
         "id": "Practitioner.birthDate",
         "path": "Practitioner.birthDate",
         "label": "Birth Date",
+        "min": 1,
         "minValueQuantity": {
           "system": "http://unitsofmeasure.org/",
           "code": "a",

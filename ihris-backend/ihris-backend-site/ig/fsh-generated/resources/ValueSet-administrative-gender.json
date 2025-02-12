@@ -5,7 +5,6 @@
   "id": "administrative-gender",
   "title": "AdministrativeGender",
   "description": "The gender of a person used for administrative purposes.",
-  "version": "4.6.0",
   "url": "http://hl7.org/fhir/ValueSet/administrative-gender",
   "meta": {
     "lastUpdated": "2022-06-14T13:46:01.394+00:00",
@@ -37,6 +36,7 @@
       "value": "urn:oid:2.16.840.1.113883.4.642.3.1"
     }
   ],
+  "version": "4.6.0",
   "experimental": false,
   "publisher": "HL7 (FHIR Project)",
   "contact": [

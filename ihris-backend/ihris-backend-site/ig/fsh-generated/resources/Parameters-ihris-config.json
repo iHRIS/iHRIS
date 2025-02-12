@@ -16,11 +16,11 @@
             "code": "1.2.840.10065.1.12.1.14"
           }
         ],
-        "when": "2024-11-12T11:44:21.090Z",
+        "when": "2025-01-30T11:07:01.207Z",
         "who": {
           "reference": "http://ihris.org/fhir/Organization/ihris"
         },
-        "data": "QK+29A9W9Jfn0j5pBxjSwccB8Pu+xJWghVDw0yLvoAWZ6jVV2VxIfat2NWm5/UD9EmnrcqliUkIR6axiQTmL67qJgklmigojOotxc+jtQ8gJGWSqhUl02EjgEREp+45zy5faCKri7PMDcGe9TnnRHWLJEI3bkg+t4jEKqrMcTdU="
+        "data": "jJlGCxig8xhO1qof/LXwomWQA9ho0JSdtsL56r8Pmo1AGHTG8xpCGbzQIKwEe2EmzPlZURQY0LM0hMP2SiHdO6oyxAo3incNh+bhA0i9194JGybSdjSW9poobcCeLB+sCTeMHJfFdYJhViOBVyTzl88dURMI68hi/Cpb6m4pqVI="
       }
     },
     {
@@ -144,7 +144,7 @@
         },
         {
           "name": "site:nav:menu:dashboard:url",
-          "valueString": "/ihrisapp/ihris-dashboard/index.html#/dashBuilder"
+          "valueString": "/dashboard/b0a0b8e0-1ab4-11ea-88d8-a3fd9096faa3"
         },
         {
           "name": "site:nav:menu:dashboard:external",
@@ -167,19 +167,19 @@
           "valueString": "mdi-account-multiple"
         },
         {
-          "name": "site:nav:menu:person:menu:person_search:text",
+          "name": "site:nav:menu:person:menu:personSearch:text",
           "valueString": "Search People"
         },
         {
-          "name": "site:nav:menu:person:menu:person_search:url",
+          "name": "site:nav:menu:person:menu:personSearch:url",
           "valueString": "/resource/search/practitioner"
         },
         {
-          "name": "site:nav:menu:person:menu:person_add:text",
+          "name": "site:nav:menu:person:menu:personAdd:text",
           "valueString": "Add Person"
         },
         {
-          "name": "site:nav:menu:person:menu:person_add:url",
+          "name": "site:nav:menu:person:menu:personAdd:url",
           "valueString": "/questionnaire/ihris-practitioner/practitioner"
         },
         {
@@ -195,19 +195,19 @@
           "valueString": "mdi-account-multiple"
         },
         {
-          "name": "site:nav:menu:position:menu:position_search:text",
+          "name": "site:nav:menu:position:menu:positionSearch:text",
           "valueString": "Search Positions"
         },
         {
-          "name": "site:nav:menu:position:menu:position_search:url",
+          "name": "site:nav:menu:position:menu:positionSearch:url",
           "valueString": "/resource/search/practitionerrole"
         },
         {
-          "name": "site:nav:menu:position:menu:position_add:text",
+          "name": "site:nav:menu:position:menu:positionAdd:text",
           "valueString": "Add Position"
         },
         {
-          "name": "site:nav:menu:position:menu:position_add:url",
+          "name": "site:nav:menu:position:menu:positionAdd:url",
           "valueString": "/resource/add/practitionerrole"
         },
         {
@@ -223,19 +223,19 @@
           "valueString": "mdi-map-marker-multiple"
         },
         {
-          "name": "site:nav:menu:location:menu:location_search:text",
+          "name": "site:nav:menu:location:menu:locationSearch:text",
           "valueString": "Locations"
         },
         {
-          "name": "site:nav:menu:location:menu:location_search:url",
+          "name": "site:nav:menu:location:menu:locationSearch:url",
           "valueString": "/resource/search/location"
         },
         {
-          "name": "site:nav:menu:location:menu:facility_search:text",
+          "name": "site:nav:menu:location:menu:facilitySearch:text",
           "valueString": "Facilities"
         },
         {
-          "name": "site:nav:menu:location:menu:facility_search:url",
+          "name": "site:nav:menu:location:menu:facilitySearch:url",
           "valueString": "/resource/search/facility"
         },
         {
@@ -639,19 +639,19 @@
           "valueString": "mdi-account-box-outline"
         },
         {
-          "name": "site:nav:menu:users:menu:users_search:text",
+          "name": "site:nav:menu:users:menu:usersSearch:text",
           "valueString": "Search Users"
         },
         {
-          "name": "site:nav:menu:users:menu:users_search:url",
+          "name": "site:nav:menu:users:menu:usersSearch:url",
           "valueString": "/resource/search/user"
         },
         {
-          "name": "site:nav:menu:users:menu:role_tasks:text",
+          "name": "site:nav:menu:users:menu:roleTasks:text",
           "valueString": "User Role Tasks"
         },
         {
-          "name": "site:nav:menu:users:menu:role_tasks:url",
+          "name": "site:nav:menu:users:menu:roleTasks:url",
           "valueString": "/resource/search/task"
         },
         {

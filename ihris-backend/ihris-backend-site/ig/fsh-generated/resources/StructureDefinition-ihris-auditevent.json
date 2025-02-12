@@ -1,18 +1,7 @@
 {
   "resourceType": "StructureDefinition",
   "id": "ihris-auditevent",
-  "extension": [
-    {
-      "url": "http://hl7.org/fhir/StructureDefinition/structuredefinition-category",
-      "valueString": "Foundation.Security"
-    },
-    {
-      "url": "http://hl7.org/fhir/StructureDefinition/structuredefinition-security-category",
-      "valueCode": "not-classified"
-    }
-  ],
   "url": "http://ihris.org/fhir/StructureDefinition/ihris-auditevent",
-  "version": "0.1.0",
   "name": "IhrisAuditEvent",
   "title": "iHRIS Audit Event",
   "status": "active",

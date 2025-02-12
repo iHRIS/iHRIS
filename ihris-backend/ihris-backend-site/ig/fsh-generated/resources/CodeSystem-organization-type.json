@@ -6,7 +6,6 @@
   "id": "organization-type",
   "title": "Organization type",
   "description": "This example value set defines a set of codes that can be used to indicate a type of organization.",
-  "version": "4.0.1",
   "url": "http://terminology.hl7.org/CodeSystem/organization-type",
   "concept": [
     {
@@ -98,6 +97,7 @@
       "value": "urn:oid:2.16.840.1.113883.4.642.4.1128"
     }
   ],
+  "version": "4.0.1",
   "experimental": false,
   "publisher": "FHIR Project team",
   "contact": [

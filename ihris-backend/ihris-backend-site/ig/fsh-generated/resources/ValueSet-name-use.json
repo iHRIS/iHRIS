@@ -5,7 +5,6 @@
   "id": "name-use",
   "title": "NameUse",
   "description": "The use of a human name.",
-  "version": "4.6.0",
   "url": "http://hl7.org/fhir/ValueSet/name-use",
   "meta": {
     "lastUpdated": "2022-06-14T13:46:01.394+00:00",
@@ -37,6 +36,7 @@
       "value": "urn:oid:2.16.840.1.113883.4.642.3.65"
     }
   ],
+  "version": "4.6.0",
   "experimental": false,
   "publisher": "HL7 (FHIR Project)",
   "contact": [

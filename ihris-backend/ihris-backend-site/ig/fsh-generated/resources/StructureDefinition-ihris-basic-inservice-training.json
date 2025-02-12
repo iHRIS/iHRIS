@@ -1,18 +1,7 @@
 {
   "resourceType": "StructureDefinition",
   "id": "ihris-basic-inservice-training",
-  "extension": [
-    {
-      "url": "http://hl7.org/fhir/StructureDefinition/structuredefinition-category",
-      "valueString": "Foundation.Other"
-    },
-    {
-      "url": "http://hl7.org/fhir/StructureDefinition/structuredefinition-security-category",
-      "valueCode": "not-classified"
-    }
-  ],
   "url": "http://ihris.org/fhir/StructureDefinition/ihris-basic-inservice-training",
-  "version": "0.1.0",
   "name": "IhrisBasicInServiceTraining",
   "title": "iHRIS In-Service Training",
   "status": "active",
@@ -580,53 +569,6 @@
       {
         "id": "Basic.extension:practitioner.value[x]",
         "path": "Basic.extension.value[x]",
-        "slicing": {
-          "discriminator": [
-            {
-              "type": "type",
-              "path": "$this"
-            }
-          ],
-          "ordered": false,
-          "rules": "open"
-        },
-        "short": "Value of extension",
-        "definition": "Value of extension - must be one of a constrained set of the data types (see [Extensibility](extensibility.html) for a list).",
-        "min": 1,
-        "max": "1",
-        "base": {
-          "path": "Extension.value[x]",
-          "min": 0,
-          "max": "1"
-        },
-        "type": [
-          {
-            "code": "Reference"
-          }
-        ],
-        "constraint": [
-          {
-            "key": "ele-1",
-            "severity": "error",
-            "human": "All FHIR elements must have a @value or children",
-            "expression": "hasValue() or (children().count() > id.count())",
-            "xpath": "@value|f:*|h:div",
-            "source": "http://hl7.org/fhir/StructureDefinition/Element"
-          }
-        ],
-        "isModifier": false,
-        "isSummary": false,
-        "mapping": [
-          {
-            "identity": "rim",
-            "map": "N/A"
-          }
-        ]
-      },
-      {
-        "id": "Basic.extension:practitioner.value[x]:valueReference",
-        "path": "Basic.extension.value[x]",
-        "sliceName": "valueReference",
         "label": "Health Worker",
         "short": "Value of extension",
         "definition": "Value of extension - must be one of a constrained set of the data types (see [Extensibility](extensibility.html) for a list).",
@@ -999,53 +941,6 @@
       {
         "id": "Basic.extension:inservicetraining.extension:provider.value[x]",
         "path": "Basic.extension.extension.value[x]",
-        "slicing": {
-          "discriminator": [
-            {
-              "type": "type",
-              "path": "$this"
-            }
-          ],
-          "ordered": false,
-          "rules": "open"
-        },
-        "short": "Value of extension",
-        "definition": "Value of extension - must be one of a constrained set of the data types (see [Extensibility](extensibility.html) for a list).",
-        "min": 0,
-        "max": "1",
-        "base": {
-          "path": "Extension.value[x]",
-          "min": 0,
-          "max": "1"
-        },
-        "type": [
-          {
-            "code": "string"
-          }
-        ],
-        "constraint": [
-          {
-            "key": "ele-1",
-            "severity": "error",
-            "human": "All FHIR elements must have a @value or children",
-            "expression": "hasValue() or (children().count() > id.count())",
-            "xpath": "@value|f:*|h:div",
-            "source": "http://hl7.org/fhir/StructureDefinition/Element"
-          }
-        ],
-        "isModifier": false,
-        "isSummary": false,
-        "mapping": [
-          {
-            "identity": "rim",
-            "map": "N/A"
-          }
-        ]
-      },
-      {
-        "id": "Basic.extension:inservicetraining.extension:provider.value[x]:valueString",
-        "path": "Basic.extension.extension.value[x]",
-        "sliceName": "valueString",
         "label": "Provider",
         "short": "Value of extension",
         "definition": "Value of extension - must be one of a constrained set of the data types (see [Extensibility](extensibility.html) for a list).",
@@ -1267,53 +1162,6 @@
       {
         "id": "Basic.extension:inservicetraining.extension:training.value[x]",
         "path": "Basic.extension.extension.value[x]",
-        "slicing": {
-          "discriminator": [
-            {
-              "type": "type",
-              "path": "$this"
-            }
-          ],
-          "ordered": false,
-          "rules": "open"
-        },
-        "short": "Value of extension",
-        "definition": "Value of extension - must be one of a constrained set of the data types (see [Extensibility](extensibility.html) for a list).",
-        "min": 0,
-        "max": "1",
-        "base": {
-          "path": "Extension.value[x]",
-          "min": 0,
-          "max": "1"
-        },
-        "type": [
-          {
-            "code": "Coding"
-          }
-        ],
-        "constraint": [
-          {
-            "key": "ele-1",
-            "severity": "error",
-            "human": "All FHIR elements must have a @value or children",
-            "expression": "hasValue() or (children().count() > id.count())",
-            "xpath": "@value|f:*|h:div",
-            "source": "http://hl7.org/fhir/StructureDefinition/Element"
-          }
-        ],
-        "isModifier": false,
-        "isSummary": false,
-        "mapping": [
-          {
-            "identity": "rim",
-            "map": "N/A"
-          }
-        ]
-      },
-      {
-        "id": "Basic.extension:inservicetraining.extension:training.value[x]:valueCoding",
-        "path": "Basic.extension.extension.value[x]",
-        "sliceName": "valueCoding",
         "label": "In-Service Training Type/Category",
         "short": "Value of extension",
         "definition": "Value of extension - must be one of a constrained set of the data types (see [Extensibility](extensibility.html) for a list).",
@@ -1539,53 +1387,6 @@
       {
         "id": "Basic.extension:inservicetraining.extension:courseName.value[x]",
         "path": "Basic.extension.extension.value[x]",
-        "slicing": {
-          "discriminator": [
-            {
-              "type": "type",
-              "path": "$this"
-            }
-          ],
-          "ordered": false,
-          "rules": "open"
-        },
-        "short": "Value of extension",
-        "definition": "Value of extension - must be one of a constrained set of the data types (see [Extensibility](extensibility.html) for a list).",
-        "min": 1,
-        "max": "1",
-        "base": {
-          "path": "Extension.value[x]",
-          "min": 0,
-          "max": "1"
-        },
-        "type": [
-          {
-            "code": "string"
-          }
-        ],
-        "constraint": [
-          {
-            "key": "ele-1",
-            "severity": "error",
-            "human": "All FHIR elements must have a @value or children",
-            "expression": "hasValue() or (children().count() > id.count())",
-            "xpath": "@value|f:*|h:div",
-            "source": "http://hl7.org/fhir/StructureDefinition/Element"
-          }
-        ],
-        "isModifier": false,
-        "isSummary": false,
-        "mapping": [
-          {
-            "identity": "rim",
-            "map": "N/A"
-          }
-        ]
-      },
-      {
-        "id": "Basic.extension:inservicetraining.extension:courseName.value[x]:valueString",
-        "path": "Basic.extension.extension.value[x]",
-        "sliceName": "valueString",
         "label": "In-Service Training Course Name",
         "short": "Value of extension",
         "definition": "Value of extension - must be one of a constrained set of the data types (see [Extensibility](extensibility.html) for a list).",
@@ -1807,53 +1608,6 @@
       {
         "id": "Basic.extension:inservicetraining.extension:credits.value[x]",
         "path": "Basic.extension.extension.value[x]",
-        "slicing": {
-          "discriminator": [
-            {
-              "type": "type",
-              "path": "$this"
-            }
-          ],
-          "ordered": false,
-          "rules": "open"
-        },
-        "short": "Value of extension",
-        "definition": "Value of extension - must be one of a constrained set of the data types (see [Extensibility](extensibility.html) for a list).",
-        "min": 0,
-        "max": "1",
-        "base": {
-          "path": "Extension.value[x]",
-          "min": 0,
-          "max": "1"
-        },
-        "type": [
-          {
-            "code": "integer"
-          }
-        ],
-        "constraint": [
-          {
-            "key": "ele-1",
-            "severity": "error",
-            "human": "All FHIR elements must have a @value or children",
-            "expression": "hasValue() or (children().count() > id.count())",
-            "xpath": "@value|f:*|h:div",
-            "source": "http://hl7.org/fhir/StructureDefinition/Element"
-          }
-        ],
-        "isModifier": false,
-        "isSummary": false,
-        "mapping": [
-          {
-            "identity": "rim",
-            "map": "N/A"
-          }
-        ]
-      },
-      {
-        "id": "Basic.extension:inservicetraining.extension:credits.value[x]:valueInteger",
-        "path": "Basic.extension.extension.value[x]",
-        "sliceName": "valueInteger",
         "label": "Credits",
         "short": "Value of extension",
         "definition": "Value of extension - must be one of a constrained set of the data types (see [Extensibility](extensibility.html) for a list).",
@@ -2075,53 +1829,6 @@
       {
         "id": "Basic.extension:inservicetraining.extension:startDate.value[x]",
         "path": "Basic.extension.extension.value[x]",
-        "slicing": {
-          "discriminator": [
-            {
-              "type": "type",
-              "path": "$this"
-            }
-          ],
-          "ordered": false,
-          "rules": "open"
-        },
-        "short": "Value of extension",
-        "definition": "Value of extension - must be one of a constrained set of the data types (see [Extensibility](extensibility.html) for a list).",
-        "min": 1,
-        "max": "1",
-        "base": {
-          "path": "Extension.value[x]",
-          "min": 0,
-          "max": "1"
-        },
-        "type": [
-          {
-            "code": "date"
-          }
-        ],
-        "constraint": [
-          {
-            "key": "ele-1",
-            "severity": "error",
-            "human": "All FHIR elements must have a @value or children",
-            "expression": "hasValue() or (children().count() > id.count())",
-            "xpath": "@value|f:*|h:div",
-            "source": "http://hl7.org/fhir/StructureDefinition/Element"
-          }
-        ],
-        "isModifier": false,
-        "isSummary": false,
-        "mapping": [
-          {
-            "identity": "rim",
-            "map": "N/A"
-          }
-        ]
-      },
-      {
-        "id": "Basic.extension:inservicetraining.extension:startDate.value[x]:valueDate",
-        "path": "Basic.extension.extension.value[x]",
-        "sliceName": "valueDate",
         "label": "Start Date",
         "short": "Value of extension",
         "definition": "Value of extension - must be one of a constrained set of the data types (see [Extensibility](extensibility.html) for a list).",
@@ -2343,53 +2050,6 @@
       {
         "id": "Basic.extension:inservicetraining.extension:endDate.value[x]",
         "path": "Basic.extension.extension.value[x]",
-        "slicing": {
-          "discriminator": [
-            {
-              "type": "type",
-              "path": "$this"
-            }
-          ],
-          "ordered": false,
-          "rules": "open"
-        },
-        "short": "Value of extension",
-        "definition": "Value of extension - must be one of a constrained set of the data types (see [Extensibility](extensibility.html) for a list).",
-        "min": 0,
-        "max": "1",
-        "base": {
-          "path": "Extension.value[x]",
-          "min": 0,
-          "max": "1"
-        },
-        "type": [
-          {
-            "code": "date"
-          }
-        ],
-        "constraint": [
-          {
-            "key": "ele-1",
-            "severity": "error",
-            "human": "All FHIR elements must have a @value or children",
-            "expression": "hasValue() or (children().count() > id.count())",
-            "xpath": "@value|f:*|h:div",
-            "source": "http://hl7.org/fhir/StructureDefinition/Element"
-          }
-        ],
-        "isModifier": false,
-        "isSummary": false,
-        "mapping": [
-          {
-            "identity": "rim",
-            "map": "N/A"
-          }
-        ]
-      },
-      {
-        "id": "Basic.extension:inservicetraining.extension:endDate.value[x]:valueDate",
-        "path": "Basic.extension.extension.value[x]",
-        "sliceName": "valueDate",
         "label": "End Date",
         "short": "Value of extension",
         "definition": "Value of extension - must be one of a constrained set of the data types (see [Extensibility](extensibility.html) for a list).",
@@ -2948,11 +2608,6 @@
       {
         "id": "Basic.extension:practitioner.value[x]",
         "path": "Basic.extension.value[x]",
-        "min": 1
-      },
-      {
-        "id": "Basic.extension:practitioner.valueReference",
-        "path": "Basic.extension.valueReference",
         "label": "Health Worker",
         "min": 1,
         "mustSupport": true
@@ -2997,11 +2652,6 @@
         "min": 1
       },
       {
-        "id": "Basic.extension:inservicetraining.extension:courseName.valueString",
-        "path": "Basic.extension.extension.valueString",
-        "min": 1
-      },
-      {
         "id": "Basic.extension:inservicetraining.extension:credits",
         "path": "Basic.extension.extension",
         "sliceName": "credits",
@@ -3016,11 +2666,6 @@
       {
         "id": "Basic.extension:inservicetraining.extension:startDate.value[x]",
         "path": "Basic.extension.extension.value[x]",
-        "min": 1
-      },
-      {
-        "id": "Basic.extension:inservicetraining.extension:startDate.valueDate",
-        "path": "Basic.extension.extension.valueDate",
         "min": 1
       },
       {

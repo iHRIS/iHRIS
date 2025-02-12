@@ -26,7 +26,7 @@
         },
         {
           "url": "search",
-          "valueString": "Job|PractitionerRole.code[0].coding[0]"
+          "valueString": "Job|PractitionerRole.code.coding[0]"
         },
         {
           "extension": [
@@ -35,12 +35,15 @@
               "valueString": "PractitionerRole.practitioner.reference"
             },
             {
-              "url": "url",
-              "valueUrl": "/resource/view/practitioner/FIELD"
-            },
-            {
               "url": "text",
               "valueString": "View Practitioner"
+            },
+            {
+              "url": "displayIn"
+            },
+            {
+              "url": "url",
+              "valueUrl": "/resource/view/practitioner/FIELD"
             },
             {
               "url": "button",

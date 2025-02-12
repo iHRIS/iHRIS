@@ -2,7 +2,6 @@
   "resourceType": "StructureDefinition",
   "id": "iHRISReportLink",
   "url": "http://ihris.org/fhir/StructureDefinition/iHRISReportLink",
-  "version": "0.1.0",
   "name": "IhrisReportLink",
   "title": "Links to the primary resource",
   "status": "active",
@@ -30,16 +29,6 @@
     "element": [
       {
         "id": "Extension",
-        "extension": [
-          {
-            "url": "http://hl7.org/fhir/StructureDefinition/structuredefinition-standards-status",
-            "valueCode": "normative"
-          },
-          {
-            "url": "http://hl7.org/fhir/StructureDefinition/structuredefinition-normative-version",
-            "valueCode": "4.0.0"
-          }
-        ],
         "path": "Extension",
         "short": "Links to the primary resource",
         "definition": "Links to the primary resource",
@@ -361,53 +350,6 @@
       {
         "id": "Extension.extension:name.value[x]",
         "path": "Extension.extension.value[x]",
-        "slicing": {
-          "discriminator": [
-            {
-              "type": "type",
-              "path": "$this"
-            }
-          ],
-          "ordered": false,
-          "rules": "open"
-        },
-        "short": "Value of extension",
-        "definition": "Value of extension - must be one of a constrained set of the data types (see [Extensibility](extensibility.html) for a list).",
-        "min": 1,
-        "max": "1",
-        "base": {
-          "path": "Extension.value[x]",
-          "min": 0,
-          "max": "1"
-        },
-        "type": [
-          {
-            "code": "string"
-          }
-        ],
-        "constraint": [
-          {
-            "key": "ele-1",
-            "severity": "error",
-            "human": "All FHIR elements must have a @value or children",
-            "expression": "hasValue() or (children().count() > id.count())",
-            "xpath": "@value|f:*|h:div",
-            "source": "http://hl7.org/fhir/StructureDefinition/Element"
-          }
-        ],
-        "isModifier": false,
-        "isSummary": false,
-        "mapping": [
-          {
-            "identity": "rim",
-            "map": "N/A"
-          }
-        ]
-      },
-      {
-        "id": "Extension.extension:name.value[x]:valueString",
-        "path": "Extension.extension.value[x]",
-        "sliceName": "valueString",
         "label": "Unique name of the link",
         "short": "Value of extension",
         "definition": "Value of extension - must be one of a constrained set of the data types (see [Extensibility](extensibility.html) for a list).",
@@ -627,53 +569,6 @@
       {
         "id": "Extension.extension:resource.value[x]",
         "path": "Extension.extension.value[x]",
-        "slicing": {
-          "discriminator": [
-            {
-              "type": "type",
-              "path": "$this"
-            }
-          ],
-          "ordered": false,
-          "rules": "open"
-        },
-        "short": "Value of extension",
-        "definition": "Value of extension - must be one of a constrained set of the data types (see [Extensibility](extensibility.html) for a list).",
-        "min": 1,
-        "max": "1",
-        "base": {
-          "path": "Extension.value[x]",
-          "min": 0,
-          "max": "1"
-        },
-        "type": [
-          {
-            "code": "string"
-          }
-        ],
-        "constraint": [
-          {
-            "key": "ele-1",
-            "severity": "error",
-            "human": "All FHIR elements must have a @value or children",
-            "expression": "hasValue() or (children().count() > id.count())",
-            "xpath": "@value|f:*|h:div",
-            "source": "http://hl7.org/fhir/StructureDefinition/Element"
-          }
-        ],
-        "isModifier": false,
-        "isSummary": false,
-        "mapping": [
-          {
-            "identity": "rim",
-            "map": "N/A"
-          }
-        ]
-      },
-      {
-        "id": "Extension.extension:resource.value[x]:valueString",
-        "path": "Extension.extension.value[x]",
-        "sliceName": "valueString",
         "label": "FHIR resource type being linked",
         "short": "Value of extension",
         "definition": "Value of extension - must be one of a constrained set of the data types (see [Extensibility](extensibility.html) for a list).",
@@ -893,53 +788,6 @@
       {
         "id": "Extension.extension:query.value[x]",
         "path": "Extension.extension.value[x]",
-        "slicing": {
-          "discriminator": [
-            {
-              "type": "type",
-              "path": "$this"
-            }
-          ],
-          "ordered": false,
-          "rules": "open"
-        },
-        "short": "Value of extension",
-        "definition": "Value of extension - must be one of a constrained set of the data types (see [Extensibility](extensibility.html) for a list).",
-        "min": 1,
-        "max": "1",
-        "base": {
-          "path": "Extension.value[x]",
-          "min": 0,
-          "max": "1"
-        },
-        "type": [
-          {
-            "code": "string"
-          }
-        ],
-        "constraint": [
-          {
-            "key": "ele-1",
-            "severity": "error",
-            "human": "All FHIR elements must have a @value or children",
-            "expression": "hasValue() or (children().count() > id.count())",
-            "xpath": "@value|f:*|h:div",
-            "source": "http://hl7.org/fhir/StructureDefinition/Element"
-          }
-        ],
-        "isModifier": false,
-        "isSummary": false,
-        "mapping": [
-          {
-            "identity": "rim",
-            "map": "N/A"
-          }
-        ]
-      },
-      {
-        "id": "Extension.extension:query.value[x]:valueString",
-        "path": "Extension.extension.value[x]",
-        "sliceName": "valueString",
         "label": "FHIR path to limit instances of this resource",
         "short": "Value of extension",
         "definition": "Value of extension - must be one of a constrained set of the data types (see [Extensibility](extensibility.html) for a list).",
@@ -1159,53 +1007,6 @@
       {
         "id": "Extension.extension:initialFilter.value[x]",
         "path": "Extension.extension.value[x]",
-        "slicing": {
-          "discriminator": [
-            {
-              "type": "type",
-              "path": "$this"
-            }
-          ],
-          "ordered": false,
-          "rules": "open"
-        },
-        "short": "Value of extension",
-        "definition": "Value of extension - must be one of a constrained set of the data types (see [Extensibility](extensibility.html) for a list).",
-        "min": 1,
-        "max": "1",
-        "base": {
-          "path": "Extension.value[x]",
-          "min": 0,
-          "max": "1"
-        },
-        "type": [
-          {
-            "code": "string"
-          }
-        ],
-        "constraint": [
-          {
-            "key": "ele-1",
-            "severity": "error",
-            "human": "All FHIR elements must have a @value or children",
-            "expression": "hasValue() or (children().count() > id.count())",
-            "xpath": "@value|f:*|h:div",
-            "source": "http://hl7.org/fhir/StructureDefinition/Element"
-          }
-        ],
-        "isModifier": false,
-        "isSummary": false,
-        "mapping": [
-          {
-            "identity": "rim",
-            "map": "N/A"
-          }
-        ]
-      },
-      {
-        "id": "Extension.extension:initialFilter.value[x]:valueString",
-        "path": "Extension.extension.value[x]",
-        "sliceName": "valueString",
         "label": "Initial Profile filter to limit instances of this resource",
         "short": "Value of extension",
         "definition": "Value of extension - must be one of a constrained set of the data types (see [Extensibility](extensibility.html) for a list).",
@@ -1425,53 +1226,6 @@
       {
         "id": "Extension.extension:linkElement.value[x]",
         "path": "Extension.extension.value[x]",
-        "slicing": {
-          "discriminator": [
-            {
-              "type": "type",
-              "path": "$this"
-            }
-          ],
-          "ordered": false,
-          "rules": "open"
-        },
-        "short": "Value of extension",
-        "definition": "Value of extension - must be one of a constrained set of the data types (see [Extensibility](extensibility.html) for a list).",
-        "min": 1,
-        "max": "1",
-        "base": {
-          "path": "Extension.value[x]",
-          "min": 0,
-          "max": "1"
-        },
-        "type": [
-          {
-            "code": "string"
-          }
-        ],
-        "constraint": [
-          {
-            "key": "ele-1",
-            "severity": "error",
-            "human": "All FHIR elements must have a @value or children",
-            "expression": "hasValue() or (children().count() > id.count())",
-            "xpath": "@value|f:*|h:div",
-            "source": "http://hl7.org/fhir/StructureDefinition/Element"
-          }
-        ],
-        "isModifier": false,
-        "isSummary": false,
-        "mapping": [
-          {
-            "identity": "rim",
-            "map": "N/A"
-          }
-        ]
-      },
-      {
-        "id": "Extension.extension:linkElement.value[x]:valueString",
-        "path": "Extension.extension.value[x]",
-        "sliceName": "valueString",
         "label": "FHIR path of the field this resource used to link to the relationship",
         "short": "Value of extension",
         "definition": "Value of extension - must be one of a constrained set of the data types (see [Extensibility](extensibility.html) for a list).",
@@ -1691,53 +1445,6 @@
       {
         "id": "Extension.extension:linkTo.value[x]",
         "path": "Extension.extension.value[x]",
-        "slicing": {
-          "discriminator": [
-            {
-              "type": "type",
-              "path": "$this"
-            }
-          ],
-          "ordered": false,
-          "rules": "open"
-        },
-        "short": "Value of extension",
-        "definition": "Value of extension - must be one of a constrained set of the data types (see [Extensibility](extensibility.html) for a list).",
-        "min": 1,
-        "max": "1",
-        "base": {
-          "path": "Extension.value[x]",
-          "min": 0,
-          "max": "1"
-        },
-        "type": [
-          {
-            "code": "string"
-          }
-        ],
-        "constraint": [
-          {
-            "key": "ele-1",
-            "severity": "error",
-            "human": "All FHIR elements must have a @value or children",
-            "expression": "hasValue() or (children().count() > id.count())",
-            "xpath": "@value|f:*|h:div",
-            "source": "http://hl7.org/fhir/StructureDefinition/Element"
-          }
-        ],
-        "isModifier": false,
-        "isSummary": false,
-        "mapping": [
-          {
-            "identity": "rim",
-            "map": "N/A"
-          }
-        ]
-      },
-      {
-        "id": "Extension.extension:linkTo.value[x]:valueString",
-        "path": "Extension.extension.value[x]",
-        "sliceName": "valueString",
         "label": "FHIR path to the field of the resource that this resource linked to",
         "short": "Value of extension",
         "definition": "Value of extension - must be one of a constrained set of the data types (see [Extensibility](extensibility.html) for a list).",
@@ -1957,53 +1664,6 @@
       {
         "id": "Extension.extension:linkElementSearchParameter.value[x]",
         "path": "Extension.extension.value[x]",
-        "slicing": {
-          "discriminator": [
-            {
-              "type": "type",
-              "path": "$this"
-            }
-          ],
-          "ordered": false,
-          "rules": "open"
-        },
-        "short": "Value of extension",
-        "definition": "Value of extension - must be one of a constrained set of the data types (see [Extensibility](extensibility.html) for a list).",
-        "min": 1,
-        "max": "1",
-        "base": {
-          "path": "Extension.value[x]",
-          "min": 0,
-          "max": "1"
-        },
-        "type": [
-          {
-            "code": "string"
-          }
-        ],
-        "constraint": [
-          {
-            "key": "ele-1",
-            "severity": "error",
-            "human": "All FHIR elements must have a @value or children",
-            "expression": "hasValue() or (children().count() > id.count())",
-            "xpath": "@value|f:*|h:div",
-            "source": "http://hl7.org/fhir/StructureDefinition/Element"
-          }
-        ],
-        "isModifier": false,
-        "isSummary": false,
-        "mapping": [
-          {
-            "identity": "rim",
-            "map": "N/A"
-          }
-        ]
-      },
-      {
-        "id": "Extension.extension:linkElementSearchParameter.value[x]:valueString",
-        "path": "Extension.extension.value[x]",
-        "sliceName": "valueString",
         "label": "Search parameter to the resource this resource links to, only for reverse links",
         "short": "Value of extension",
         "definition": "Value of extension - must be one of a constrained set of the data types (see [Extensibility](extensibility.html) for a list).",
@@ -2713,29 +2373,13 @@
       {
         "id": "Extension.extension:name.value[x]",
         "path": "Extension.extension.value[x]",
-        "slicing": {
-          "discriminator": [
-            {
-              "type": "type",
-              "path": "$this"
-            }
-          ],
-          "ordered": false,
-          "rules": "open"
-        },
+        "label": "Unique name of the link",
         "min": 1,
         "type": [
           {
             "code": "string"
           }
         ]
-      },
-      {
-        "id": "Extension.extension:name.valueString",
-        "path": "Extension.extension.valueString",
-        "label": "Unique name of the link",
-        "min": 1,
-        "max": "1"
       },
       {
         "id": "Extension.extension:resource",
@@ -2758,29 +2402,13 @@
       {
         "id": "Extension.extension:resource.value[x]",
         "path": "Extension.extension.value[x]",
-        "slicing": {
-          "discriminator": [
-            {
-              "type": "type",
-              "path": "$this"
-            }
-          ],
-          "ordered": false,
-          "rules": "open"
-        },
+        "label": "FHIR resource type being linked",
         "min": 1,
         "type": [
           {
             "code": "string"
           }
         ]
-      },
-      {
-        "id": "Extension.extension:resource.valueString",
-        "path": "Extension.extension.valueString",
-        "label": "FHIR resource type being linked",
-        "min": 1,
-        "max": "1"
       },
       {
         "id": "Extension.extension:query",
@@ -2803,29 +2431,13 @@
       {
         "id": "Extension.extension:query.value[x]",
         "path": "Extension.extension.value[x]",
-        "slicing": {
-          "discriminator": [
-            {
-              "type": "type",
-              "path": "$this"
-            }
-          ],
-          "ordered": false,
-          "rules": "open"
-        },
+        "label": "FHIR path to limit instances of this resource",
         "min": 1,
         "type": [
           {
             "code": "string"
           }
         ]
-      },
-      {
-        "id": "Extension.extension:query.valueString",
-        "path": "Extension.extension.valueString",
-        "label": "FHIR path to limit instances of this resource",
-        "min": 1,
-        "max": "1"
       },
       {
         "id": "Extension.extension:initialFilter",
@@ -2848,29 +2460,13 @@
       {
         "id": "Extension.extension:initialFilter.value[x]",
         "path": "Extension.extension.value[x]",
-        "slicing": {
-          "discriminator": [
-            {
-              "type": "type",
-              "path": "$this"
-            }
-          ],
-          "ordered": false,
-          "rules": "open"
-        },
+        "label": "Initial Profile filter to limit instances of this resource",
         "min": 1,
         "type": [
           {
             "code": "string"
           }
         ]
-      },
-      {
-        "id": "Extension.extension:initialFilter.valueString",
-        "path": "Extension.extension.valueString",
-        "label": "Initial Profile filter to limit instances of this resource",
-        "min": 1,
-        "max": "1"
       },
       {
         "id": "Extension.extension:linkElement",
@@ -2893,29 +2489,13 @@
       {
         "id": "Extension.extension:linkElement.value[x]",
         "path": "Extension.extension.value[x]",
-        "slicing": {
-          "discriminator": [
-            {
-              "type": "type",
-              "path": "$this"
-            }
-          ],
-          "ordered": false,
-          "rules": "open"
-        },
+        "label": "FHIR path of the field this resource used to link to the relationship",
         "min": 1,
         "type": [
           {
             "code": "string"
           }
         ]
-      },
-      {
-        "id": "Extension.extension:linkElement.valueString",
-        "path": "Extension.extension.valueString",
-        "label": "FHIR path of the field this resource used to link to the relationship",
-        "min": 1,
-        "max": "1"
       },
       {
         "id": "Extension.extension:linkTo",
@@ -2938,29 +2518,13 @@
       {
         "id": "Extension.extension:linkTo.value[x]",
         "path": "Extension.extension.value[x]",
-        "slicing": {
-          "discriminator": [
-            {
-              "type": "type",
-              "path": "$this"
-            }
-          ],
-          "ordered": false,
-          "rules": "open"
-        },
+        "label": "FHIR path to the field of the resource that this resource linked to",
         "min": 1,
         "type": [
           {
             "code": "string"
           }
         ]
-      },
-      {
-        "id": "Extension.extension:linkTo.valueString",
-        "path": "Extension.extension.valueString",
-        "label": "FHIR path to the field of the resource that this resource linked to",
-        "min": 1,
-        "max": "1"
       },
       {
         "id": "Extension.extension:linkElementSearchParameter",
@@ -2983,29 +2547,13 @@
       {
         "id": "Extension.extension:linkElementSearchParameter.value[x]",
         "path": "Extension.extension.value[x]",
-        "slicing": {
-          "discriminator": [
-            {
-              "type": "type",
-              "path": "$this"
-            }
-          ],
-          "ordered": false,
-          "rules": "open"
-        },
+        "label": "Search parameter to the resource this resource links to, only for reverse links",
         "min": 1,
         "type": [
           {
             "code": "string"
           }
         ]
-      },
-      {
-        "id": "Extension.extension:linkElementSearchParameter.valueString",
-        "path": "Extension.extension.valueString",
-        "label": "Search parameter to the resource this resource links to, only for reverse links",
-        "min": 1,
-        "max": "1"
       },
       {
         "id": "Extension.extension:multiple",

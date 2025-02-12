@@ -1,18 +1,7 @@
 {
   "resourceType": "StructureDefinition",
   "id": "ihris-practitioner-basic",
-  "extension": [
-    {
-      "url": "http://hl7.org/fhir/StructureDefinition/structuredefinition-category",
-      "valueString": "Foundation.Other"
-    },
-    {
-      "url": "http://hl7.org/fhir/StructureDefinition/structuredefinition-security-category",
-      "valueCode": "not-classified"
-    }
-  ],
   "url": "http://ihris.org/fhir/StructureDefinition/ihris-practitioner-basic",
-  "version": "0.1.0",
   "name": "IhrisPractitionerBasic",
   "title": "iHRIS Practitioner Basic",
   "status": "active",
