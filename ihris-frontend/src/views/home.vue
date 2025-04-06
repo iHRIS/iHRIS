@@ -206,17 +206,21 @@
                 </v-card>
               </v-col>
             </v-row>
+            <v-card flat v-if="$store.state.login.links.length && !$store.state.user.loggedin">
+              <v-card-text>
+                <v-col v-for="(link) in $store.state.login.links" :key="link.url">
+                  <v-row>
+                    <v-btn text :key="link.url" :to="link.url" :color="link.color">
+                      <v-icon v-if="link.icon" light left>{{ link.icon }}</v-icon>
+                      {{ link.text }}
+                    </v-btn>
+                  </v-row>
+                </v-col>
+              </v-card-text>
+            </v-card>
+            <br>
           </v-card-text>
-          <template v-if="$store.state.login.links.length && !$store.state.user.loggedin">
-            <v-col v-for="(link) in $store.state.login.links" :key="link.url">
-              <v-row>
-                <v-btn text :key="link.url" :to="link.url" :color="link.color">
-                  <v-icon v-if="link.icon" light left>{{ link.icon }}</v-icon>
-                  {{ link.text }}
-                </v-btn>
-              </v-row>
-            </v-col>
-          </template>
+          
         </v-container>
   </div>
 </template>

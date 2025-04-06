@@ -103,7 +103,7 @@
         - path: configfile.parameter[{{fhirbaseindex}}].valueString
           value: http://localhost:8080/fhir
         - path: configfile.parameter[{{esuserindex}}].valueString
-          value: {{ihriselastic}}
+          value: ihriselastic
       register: updated
 
     - name: Saving configuration file

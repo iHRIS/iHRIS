@@ -161,7 +161,6 @@ export default {
                 this.nav.home = data.nav.home
               }
             }
-
             if (!this.$store.state.user.obj.resource || this.$store.state.user.obj.resource.id === 'ihris-user-loggedout') {
               if (this.$route.path !== '/') {
                 this.$router.push("/")

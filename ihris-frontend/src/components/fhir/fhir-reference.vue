@@ -64,6 +64,8 @@
         :disabled="(disabled) || (preset && $route.name === 'resource_add')"
         :error-messages="errors"
         @change="errors = []"
+        clearable
+        @click:clear="cleared"
       >
         <template #label>{{$t(`App.fhir-resources-texts.${display}`)}} <span v-if="required" class="red--text font-weight-bold">*</span></template>
       </v-autocomplete>
