@@ -18,7 +18,7 @@
 import { dataDisplay } from "@/mixins/dataDisplay"
 export default {
   name: "ihris-questionnaire-group",
-  props: ["id", "profile", "sliceName", "field", "label", "slotProps", "path", "constraints", "limit", "displayCondition", "enableBehavior"],
+  props: ["id", "profile", "sliceName", "fieldType", "field", "label", "slotProps", "path", "constraints", "limit", "displayCondition", "enableBehavior"],
   mixins: [dataDisplay],
   data: function() {
     return {
