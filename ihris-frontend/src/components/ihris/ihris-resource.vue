@@ -565,7 +565,7 @@ export default {
                 type: "success",
                 text: "Update successful.",
               });
-              setTimeout(() => this.$router.go(0), 1000);
+              setTimeout(() => this.$router.push({name: "resource_view", params: {page: this.page, id: data.id}}), 1000);
             } else {
               this.$router.push({name: "resource_view", params: {page: this.page, id: data.id}})
             }

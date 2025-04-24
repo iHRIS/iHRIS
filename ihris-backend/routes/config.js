@@ -65,6 +65,7 @@ router.get("/site", async function (req, res) {
     site.version = package.version
     site.auth.signup = {...nconf.get("auth:signup")}
     site.pages = {...nconf.get("site:pages")}
+    site.config = {...nconf.get("site:config")}
     site.fhirFlattener = nconf.get("fhir:flattener")
     if (nconf.getBool("security:disabled")) {
         site.security = {disabled: true};
@@ -133,7 +134,12 @@ router.get('/reload', function (req, res) {
 })
 
 router.get('/getParameters', (req, res) => {
-    res.json(nconf.get(req.query.key))
+    let keyRes = {}
+    if(nconf.get(req.query.key)) {
+        keyRes = nconf.get(req.query.key)
+    }
+    console.log(JSON.stringify(keyRes,0,2))
+    res.json(keyRes)
 })
 
 const getDefinition = (resource) => {
