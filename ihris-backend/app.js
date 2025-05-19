@@ -98,7 +98,7 @@ async function startUp() {
       }
     } else if (nconf.get('app:idp') === 'ihris') {
       const unauthenticatedRoutes = ['/', 'favicon.ico', '/flag_en.svg', '/config/app', '/auth', '/fhir/DocumentReference/page-home/$html', '/config/site', '/translator/getTranslatedLanguages'];
-      if (unauthenticatedRoutes.includes(req.path) || req.path.startsWith('/css') || req.path.startsWith('/js') || req.path.startsWith('/translator/getLocale/')) {
+      if (unauthenticatedRoutes.includes(req.path) || req.path.startsWith('/css') || req.path.startsWith('/js') || req.path.startsWith('/images') || req.path.startsWith('/translator/getLocale/')) {
         return next();
       }
       if (!req.user && req.headers.authorization && req.headers.authorization.split(' ').length === 2) {

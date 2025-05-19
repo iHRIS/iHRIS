@@ -138,7 +138,6 @@ router.get('/getParameters', (req, res) => {
     if(nconf.get(req.query.key)) {
         keyRes = nconf.get(req.query.key)
     }
-    console.log(JSON.stringify(keyRes,0,2))
     res.json(keyRes)
 })
 
