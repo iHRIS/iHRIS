@@ -142,6 +142,11 @@ export default {
                   try {
                     let content = this.$fhirpath.evaluate( entry.resource, header.value )
                     row[header.value] = await this.processContent( content )
+                    if(!this.$t(`App.hardcoded-texts.${row[header.value].toString()}`).startsWith('App.hardcoded-texts')) {
+                      row[header.value] = this.$t(`App.hardcoded-texts.${row[header.value].toString()}`)
+                    } else if(!this.$t(`App.fhir-resources-texts.${row[header.value].toString()}`).startsWith('App.fhir-resources-texts')) {
+                      row[header.value] = this.$t(`App.fhir-resources-texts.${row[header.value].toString()}`)
+                    }
                   } catch ( err ) {
                     console.log(err)
                   }
