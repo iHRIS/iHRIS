@@ -8,15 +8,25 @@
 // @ is an alias to /src
 
 var page
+var showDrawer = false
 import Vue from 'vue'
 
 export default {
   name: "fhir-page-add",
+  props: ["show-drawer"],
   data: function() {
     return {
     }
   },
   created: function() {
+    if(!page && this.page) {
+      page = this.page
+    }
+    if(showDrawer == undefined && this.showDrawer != undefined) {
+      showDrawer = this.showDrawer
+    } else {
+      showDrawer = true
+    }
     this.getTemplate()
   },
   methods: {
@@ -44,7 +54,7 @@ export default {
                   isEdit: true,
                   fhirId: undefined,
                   fhirVersion: undefined,
-                  showDrawer: undefined,
+                  showDrawer: showDrawer,
                   sectionMenu: data.data.sectionMenu,
                   subFields: data.data.subFields,
                   columns: data.data.columns,
@@ -103,6 +113,7 @@ export default {
   },
   beforeCreate: function() {
     page = this.$route.params.page
+    showDrawer = this.$route.query.showDrawer
     Vue.component('ihris-template', { template: '<div>Loading...</div>' } )
   }
 }
