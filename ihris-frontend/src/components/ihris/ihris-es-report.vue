@@ -778,6 +778,12 @@ export default {
             return true
           })
         }
+      } else {
+        body.query.bool.must.push({
+          term: {
+            [c]: date[c],
+          },
+        })
       }
       body.query.bool.filter = filterDate
     }
