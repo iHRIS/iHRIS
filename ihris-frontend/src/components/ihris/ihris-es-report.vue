@@ -496,42 +496,6 @@ export default {
         }
       }
 
-      if (sTermDet && sTermDet.field) {
-        if (sTermDet.field == "startDate" || sTermDet.field == "endDate") {
-          let defEndDate = new Date().toISOString().slice(0, 10);
-          let defStartDate;
-          if (sTermDet.field == "startDate") {
-            defStartDate = this.terms.startDate;
-          }
-          if (sTermDet.field == "endDate") {
-            defEndDate = this.terms.endDate;
-          }
-
-          body = {
-            query: {
-              bool: {
-                filter: [
-                  {
-                    range: {
-                      startDate: {
-                        gte: defStartDate,
-                      },
-                    },
-                  },
-                  {
-                    range: {
-                      endDate: {
-                        lte: defEndDate,
-                      },
-                    },
-                  },
-                ],
-              },
-            },
-          };
-        }
-      }
-
       if (sTermDet && (sTermDet?.dataType === "date" || sTermDet?.dataType === "long") && sTermDet.field) {
         this.formatDateFilter(sTermDet, filter, body);
       }
