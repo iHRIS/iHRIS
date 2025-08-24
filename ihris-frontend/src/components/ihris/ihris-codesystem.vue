@@ -173,8 +173,10 @@ export default {
           "Content-Type": "application/fhir+json"
         },
         redirect: 'manual',
-      } 
-      url += "/" + this.fhir.code
+      }
+      if(this.fhirId) {
+        url += "/" + this.fhir.code 
+      }
       const keep = [ "code", "display", "definition", "property" ]
       for( let key of Object.keys( this.fhir ) ) {
         if ( !keep.includes( key ) ) {
@@ -192,7 +194,14 @@ export default {
           } else {
             this.$router.push({ name:"resource_view", params: {page: this.page, id: this.fhir.code } })
           }
-        } 
+        } else if(response.status === 409) {
+          this.overlay = false
+          this.loading = false
+          this.$store.commit("setMessage", {
+            type: "error",
+            text: "Code " + this.fhir.code + " already exists.",
+          });
+        }
       } ).catch(err => {
         console.log("FAILED TO SAVE",url,err)
       } )

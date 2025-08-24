@@ -15,14 +15,12 @@ Description:    "iHRIS Profile of the Basic resource for Work Experience."
 * extension[employmentHistory].extension[telephone] ^label = "Organization Telephone"
 * extension[employmentHistory].extension[startingPosition].valueString 1..1  MS
 * extension[employmentHistory].extension[startingPosition] ^label = "Starting Position"
-* extension[employmentHistory].extension[startingSalary].valueMoney MS
+* extension[employmentHistory].extension[startingSalary].valueDecimal MS
 * extension[employmentHistory].extension[startingSalary] ^label = "Starting Salary"
-* extension[employmentHistory].extension[period] ^label = "Period"
-* extension[employmentHistory].extension[period].valuePeriod MS
-* extension[employmentHistory].extension[period].valuePeriod.start 1..1 MS
-* extension[employmentHistory].extension[period].valuePeriod.start ^label = "Date Started"
-* extension[employmentHistory].extension[period].valuePeriod.end 1..1 MS
-* extension[employmentHistory].extension[period].valuePeriod.end ^label = "Date Ended"
+* extension[employmentHistory].extension[startDate].valueDate MS
+* extension[employmentHistory].extension[startDate] ^label = "Start Date"
+* extension[employmentHistory].extension[endDate].valueDate MS
+* extension[employmentHistory].extension[endDate] ^label = "End Date"
 * extension[employmentHistory].extension[responsibilities].valueString MS
 * extension[employmentHistory].extension[responsibilities] ^label = "Job Description"
 * extension[employmentHistory].extension[reasonLeaving].valueString MS
@@ -37,7 +35,8 @@ Title:          "Work Experience details"
       telephone 0..* MS and
       startingPosition 0..1 MS and
       startingSalary 0..1 MS and
-      period 0..1 MS and
+      startDate 0..1 MS and
+      endDate 0..1 MS and
       responsibilities 0..1 MS and
       reasonLeaving 0..1 MS
 * extension[organization].value[x] only string
@@ -48,26 +47,12 @@ Title:          "Work Experience details"
 * extension[telephone].valueString ^label = "Organization Telephone"
 * extension[startingPosition].value[x] only string
 * extension[startingPosition].valueString ^label = "Position"
-* extension[startingSalary].value[x] only Money
-* extension[startingSalary].valueMoney ^label = "Salary"
-* extension[period].value[x] only Period
-* extension[period].valuePeriod ^constraint[0].key = "ihris-period-start-end"
-* extension[period].valuePeriod ^constraint[0].severity = #error
-* extension[period].valuePeriod ^constraint[0].human = "The end date must be after the start date"
-* extension[period].valuePeriod ^constraint[0].expression = "end.empty() or end = '' or end >= start"
-* extension[period].valuePeriod ^label = "Period"
-* extension[period].valuePeriod.start 1..1 MS
-* extension[period].valuePeriod.start ^label = "Date Started"
-* extension[period].valuePeriod.start ^constraint[0].key = "ihris-period-start-date-check"
-* extension[period].valuePeriod.start ^constraint[0].severity = #error
-* extension[period].valuePeriod.start ^constraint[0].human = "The Start date must be less than now."
-* extension[period].valuePeriod.start ^constraint[0].expression = "$this < today() + 1 day"
-* extension[period].valuePeriod.end 1..1 MS
-* extension[period].valuePeriod.end ^label = "Date Ended"
-* extension[period].valuePeriod.end ^constraint[0].key = "ihris-period-start-date-check"
-* extension[period].valuePeriod.end ^constraint[0].severity = #error
-* extension[period].valuePeriod.end ^constraint[0].human = "The end date must be less than now."
-* extension[period].valuePeriod.end ^constraint[0].expression = "$this < today() + 1 day"
+* extension[startingSalary].value[x] only decimal
+* extension[startingSalary].valueDecimal ^label = "Salary"
+* extension[startDate].value[x] only date
+* extension[startDate].valueDate ^label = "Date Started"
+* extension[endDate].value[x] only date
+* extension[endDate].valueDate ^label = "Date Ended"
 * extension[responsibilities].value[x] only string
 * extension[responsibilities].valueString ^label = "Job Description"
 * extension[reasonLeaving].value[x] only string
@@ -86,7 +71,7 @@ Usage:          #definition
 * purpose = "Workflow page for recording a Work Experience information."
 
 * item[0].linkId = "Basic"
-* item[0].definition = "http://ihris.org/fhir/StructureDefinition/ihris-basic-employment-history#Basic.id"
+* item[0].definition = "http://ihris.org/fhir/StructureDefinition/ihris-basic-employment-history"
 * item[0].text = "Work Experience"
 * item[0].type = #group
 * item[0].extension[constraint].extension[key].valueId = "ihris-start-end-date"
@@ -94,76 +79,73 @@ Usage:          #definition
 * item[0].extension[constraint].extension[expression].valueString = "where(linkId='Basic.extension[0].extension[6]').answer.first().valueDateTime.empty() or where(linkId='Basic.extension[0].extension[6]').answer.first().valueDateTime >= where(linkId='Basic.extension[0].extension[5]').answer.first().valueDateTime"
 * item[0].extension[constraint].extension[human].valueString = "The end date must be after the start date."
 
-* item[0].item[0].linkId = "Basic.extension[0].extension[0]"
-* item[0].item[0].definition = "http://ihris.org/fhir/StructureDefinition/ihris-basic-employment-history#Basic.extension:employmentHistory.extension:organization.value[x]"
-* item[0].item[0].text = "Organization Name"
-* item[0].item[0].type = #string
-* item[0].item[0].required = true
-* item[0].item[0].repeats = false
+* item[0].item[0].linkId = "Basic.extension[0]"
+* item[0].item[0].definition = "http://ihris.org/fhir/StructureDefinition/ihris-basic-employment-history#Basic.extension:employmentHistory"
+* item[0].item[0].text = "Details"
+* item[0].item[0].type = #group
 
-* item[0].item[1].linkId = "Basic.extension[0].extension[1]"
-* item[0].item[1].definition = "http://ihris.org/fhir/StructureDefinition/ihris-basic-employment-history#Basic.extension:employmentHistory.extension:address.value[x]"
-* item[0].item[1].text = "Organization Address"
-* item[0].item[1].type = #text
-* item[0].item[1].required = false
-* item[0].item[1].repeats = false
+* item[0].item[0].item[0].linkId = "Basic.extension[0].extension[0]"
+* item[0].item[0].item[0].definition = "http://ihris.org/fhir/StructureDefinition/ihris-basic-employment-history#Basic.extension:employmentHistory.extension:organization.value[x]:valueString"
+* item[0].item[0].item[0].text = "Organization Name"
+* item[0].item[0].item[0].type = #string
+* item[0].item[0].item[0].required = true
+* item[0].item[0].item[0].repeats = false
 
-* item[0].item[2].linkId = "Basic.extension[0].extension[2]"
-* item[0].item[2].definition = "http://ihris.org/fhir/StructureDefinition/ihris-basic-employment-history#Basic.extension:employmentHistory.extension:telephone.value[x]"
-* item[0].item[2].text = "Organization Telephone"
-* item[0].item[2].type = #string
-* item[0].item[2].required = false
-* item[0].item[2].repeats = false
+* item[0].item[0].item[1].linkId = "Basic.extension[0].extension[1]"
+* item[0].item[0].item[1].definition = "http://ihris.org/fhir/StructureDefinition/ihris-basic-employment-history#Basic.extension:employmentHistory.extension:address.value[x]:valueString"
+* item[0].item[0].item[1].text = "Organization Address"
+* item[0].item[0].item[1].type = #text
+* item[0].item[0].item[1].required = false
+* item[0].item[0].item[1].repeats = false
 
-* item[0].item[3].linkId = "Basic.extension[0].extension[3]"
-* item[0].item[3].definition = "http://ihris.org/fhir/StructureDefinition/ihris-basic-employment-history#Basic.extension:employmentHistory.extension:startingPosition.value[x]"
-* item[0].item[3].text = "Position"
-* item[0].item[3].type = #string
-* item[0].item[3].required = true
-* item[0].item[3].repeats = false
+* item[0].item[0].item[2].linkId = "Basic.extension[0].extension[2]"
+* item[0].item[0].item[2].definition = "http://ihris.org/fhir/StructureDefinition/ihris-basic-employment-history#Basic.extension:employmentHistory.extension:telephone.value[x]:valueString"
+* item[0].item[0].item[2].text = "Organization Telephone"
+* item[0].item[0].item[2].type = #string
+* item[0].item[0].item[2].required = false
+* item[0].item[0].item[2].repeats = false
 
-* item[0].item[4].linkId = "Basic.extension[0].extension[4]"
-* item[0].item[4].definition = "http://ihris.org/fhir/StructureDefinition/ihris-basic-employment-history#Basic.extension:employmentHistory.extension:startingSalary.value[x]"
-* item[0].item[4].text = "Salary"
-* item[0].item[4].type = #string
-* item[0].item[4].required = false
-* item[0].item[4].repeats = false
+* item[0].item[0].item[3].linkId = "Basic.extension[0].extension[3]"
+* item[0].item[0].item[3].definition = "http://ihris.org/fhir/StructureDefinition/ihris-basic-employment-history#Basic.extension:employmentHistory.extension:startingPosition.value[x]:valueString"
+* item[0].item[0].item[3].text = "Position"
+* item[0].item[0].item[3].type = #string
+* item[0].item[0].item[3].required = true
+* item[0].item[0].item[3].repeats = false
 
-* item[0].item[5].linkId = "Basic.extension[0].extension[5]"
-* item[0].item[5].definition = "http://ihris.org/fhir/StructureDefinition/ihris-basic-employment-history#Basic.extension:employmentHistory.extension:period.value[x]"
-* item[0].item[5].text = "Date Started"
-* item[0].item[5].type = #dateTime
-* item[0].item[5].required = true
-* item[0].item[5].repeats = false
-* item[0].item[5].extension[constraint].extension[key].valueId = "ihris-date-lessthantoday-check"
-* item[0].item[5].extension[constraint].extension[severity].valueCode = #error
-* item[0].item[5].extension[constraint].extension[expression].valueString = "$this < today() + 1 day"
-* item[0].item[5].extension[constraint].extension[human].valueString = "Start Date must not be in the future."
+* item[0].item[0].item[4].linkId = "Basic.extension[0].extension[4]"
+* item[0].item[0].item[4].definition = "http://ihris.org/fhir/StructureDefinition/ihris-basic-employment-history#Basic.extension:employmentHistory.extension:startingSalary.value[x]:valueDecimal"
+* item[0].item[0].item[4].text = "Salary"
+* item[0].item[0].item[4].type = #decimal
+* item[0].item[0].item[4].required = false
+* item[0].item[0].item[4].repeats = false
 
-* item[0].item[6].linkId = "Basic.extension[0].extension[6]"
-* item[0].item[6].definition = "http://ihris.org/fhir/StructureDefinition/ihris-basic-employment-history#Basic.extension:employmentHistory.extension:period.value[x]:valuePeriod.end"
-* item[0].item[6].text = "Date Ended"
-* item[0].item[6].type = #dateTime
-* item[0].item[6].required = true
-* item[0].item[6].repeats = false
-* item[0].item[6].extension[constraint].extension[key].valueId = "ihris-date-lessthantoday-check"
-* item[0].item[6].extension[constraint].extension[severity].valueCode = #error
-* item[0].item[6].extension[constraint].extension[expression].valueString = "$this < today() + 1 day"
-* item[0].item[6].extension[constraint].extension[human].valueString = "ENd Date must not be in the future."
+* item[0].item[0].item[5].linkId = "Basic.extension[0].extension[5]"
+* item[0].item[0].item[5].definition = "http://ihris.org/fhir/StructureDefinition/ihris-basic-employment-history#Basic.extension:employmentHistory.extension:startDate.value[x]:valueDate"
+* item[0].item[0].item[5].text = "Date Started"
+* item[0].item[0].item[5].type = #date
+* item[0].item[0].item[5].required = true
+* item[0].item[0].item[5].repeats = false
 
-* item[0].item[7].linkId = "Basic.extension[0].extension[7]"
-* item[0].item[7].definition = "http://ihris.org/fhir/StructureDefinition/ihris-basic-employment-history#Basic.extension:employmentHistory.extension:responsibilities.value[x]:valueString"
-* item[0].item[7].text = "Job Description"
-* item[0].item[7].type = #text
-* item[0].item[7].required = false
-* item[0].item[7].repeats = false
+* item[0].item[0].item[6].linkId = "Basic.extension[0].extension[6]"
+* item[0].item[0].item[6].definition = "http://ihris.org/fhir/StructureDefinition/ihris-basic-employment-history#Basic.extension:employmentHistory.extension:endDate.value[x]:valueDate"
+* item[0].item[0].item[6].text = "Date Ended"
+* item[0].item[0].item[6].type = #date
+* item[0].item[0].item[6].required = true
+* item[0].item[0].item[6].repeats = false
 
-* item[0].item[8].linkId = "Basic.extension[0].extension[8]"
-* item[0].item[8].definition = "http://ihris.org/fhir/StructureDefinition/ihris-basic-employment-history#Basic.extension:employmentHistory.extension:reasonLeaving.value[x]:valueString"
-* item[0].item[8].text = "Reason For Leaving"
-* item[0].item[8].type = #string
-* item[0].item[8].required = false
-* item[0].item[8].repeats = false
+* item[0].item[0].item[7].linkId = "Basic.extension[0].extension[7]"
+* item[0].item[0].item[7].definition = "http://ihris.org/fhir/StructureDefinition/ihris-basic-employment-history#Basic.extension:employmentHistory.extension:responsibilities.value[x]:valueString"
+* item[0].item[0].item[7].text = "Job Description"
+* item[0].item[0].item[7].type = #text
+* item[0].item[0].item[7].required = false
+* item[0].item[0].item[7].repeats = false
+
+* item[0].item[0].item[8].linkId = "Basic.extension[0].extension[8]"
+* item[0].item[0].item[8].definition = "http://ihris.org/fhir/StructureDefinition/ihris-basic-employment-history#Basic.extension:employmentHistory.extension:reasonLeaving.value[x]:valueString"
+* item[0].item[0].item[8].text = "Reason For Leaving"
+* item[0].item[0].item[8].type = #string
+* item[0].item[0].item[8].required = false
+* item[0].item[0].item[8].repeats = false
 
 Instance:       ihris-page-employment-history
 InstanceOf:     IhrisPage
@@ -193,7 +175,8 @@ Usage:          #example
 * extension[section][0].extension[field][2].valueString = "Basic.extension:employmentHistory.extension:address.value[x]:valueString"
 * extension[section][0].extension[field][3].valueString = "Basic.extension:employmentHistory.extension:telephone.value[x]:valueString"
 * extension[section][0].extension[field][4].valueString = "Basic.extension:employmentHistory.extension:startingPosition.value[x]:valueString"
-* extension[section][0].extension[field][5].valueString = "Basic.extension:employmentHistory.extension:startingSalary.value[x]:valueMoney"
-* extension[section][0].extension[field][6].valueString = "Basic.extension:employmentHistory.extension:period.value[x]:valuePeriod"
-* extension[section][0].extension[field][7].valueString = "Basic.extension:employmentHistory.extension:responsibilities.value[x]:valueString"
-* extension[section][0].extension[field][8].valueString = "Basic.extension:employmentHistory.extension:reasonLeaving.value[x]:valueString"
+* extension[section][0].extension[field][5].valueString = "Basic.extension:employmentHistory.extension:startingSalary.value[x]:valueDecimal"
+* extension[section][0].extension[field][6].valueString = "Basic.extension:employmentHistory.extension:startDate"
+* extension[section][0].extension[field][7].valueString = "Basic.extension:employmentHistory.extension:endDate"
+* extension[section][0].extension[field][8].valueString = "Basic.extension:employmentHistory.extension:responsibilities.value[x]:valueString"
+* extension[section][0].extension[field][9].valueString = "Basic.extension:employmentHistory.extension:reasonLeaving.value[x]:valueString"

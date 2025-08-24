@@ -228,7 +228,7 @@ router.post("/:resource", (req, res) => {
   } )
 } )
 
-router.patch("/CodeSystem/:id/:code", (req, res) => {
+router.patch("/CodeSystem/:id/:code?", (req, res) => {
   if ( !req.user ) {
     return res.status(401).json( outcomes.NOTLOGGEDIN )
   }
@@ -274,6 +274,22 @@ router.patch("/CodeSystem/:id/:code", (req, res) => {
   let update = req.body
   fhirAxios.read( "CodeSystem", req.params.id ).then( (resource) => {
     if ( resource.concept ) {
+      //if its a new code submitted, ensure uniqueness
+      if(!req.params.code) {
+        let values = resource.concept.filter( concept => concept.code === update.code )
+        if ( values.length > 0 ) {
+          return res.status(409).json( {
+            resourceType: "OperationOutcome",
+            issue: [
+              {
+                severity: "duplicate",
+                code: "duplicate",
+                diagnostics: "Code already exists"
+              }
+            ]
+          } )
+        }
+      }
       let codeIdx = resource.concept.findIndex( concept => concept.code === update.code )
       if ( codeIdx === -1 ) {
         resource.concept.push( update )
@@ -286,7 +302,7 @@ router.patch("/CodeSystem/:id/:code", (req, res) => {
     resource.date = new Date().toISOString()
     fhirAxios.update( resource ).then( (response) => {
       fhirAudit.patch( req.user, req.ip, "CodeSystem/" + resource.id
-        + (response.meta.versionId ? "/_history/"+response.meta.versionId : ""), true, { code: req.params.code } )
+        + (response.meta.versionId ? "/_history/"+response.meta.versionId : ""), true, { code: req.body.code } )
       incrementValueSetVersion( resource.url )
       fhirReports.delayedRun()
       return res.status(200).json({ok:true})
@@ -295,7 +311,7 @@ router.patch("/CodeSystem/:id/:code", (req, res) => {
       //return res.status( err.response.status ).json( err.response.data )
       /* for custom responses */
       //console.log(err)
-      fhirAudit.patch( req.user, req.ip, "CodeSystem/" + resource.id, false, { resource: resource, err: err, code: req.params.code } )
+      fhirAudit.patch( req.user, req.ip, "CodeSystem/" + resource.id, false, { resource: resource, err: err, code: req.body.code } )
       let outcome = { ...outcomes.ERROR }
       outcome.issue[0].diagnostics = err.message
       return res.status(500).json( outcome )
@@ -305,7 +321,7 @@ router.patch("/CodeSystem/:id/:code", (req, res) => {
     //return res.status( err.response.status ).json( err.response.data )
     /* for custom responses */
       //console.log(err)
-      fhirAudit.patch( req.user, req.ip, "CodeSystem/" + req.params.id, false, { resource: update, err: err, code: req.params.code } )
+      fhirAudit.patch( req.user, req.ip, "CodeSystem/" + req.params.id, false, { resource: update, err: err, code: req.body.code } )
       let outcome = { ...outcomes.ERROR }
       outcome.issue[0].diagnostics = err.message
       return res.status(500).json( outcome )

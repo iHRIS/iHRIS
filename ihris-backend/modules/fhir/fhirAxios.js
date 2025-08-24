@@ -196,7 +196,6 @@ const fhirAxios = {
               count = total
             }
             let offset = response.data.expansion.offset || 0
-
             if ( total > offset + count ) {
               offset += count
               let paging = { count: count, offset: offset }

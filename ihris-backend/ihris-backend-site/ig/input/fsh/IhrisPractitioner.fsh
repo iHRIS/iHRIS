@@ -30,13 +30,13 @@ Description:    "iHRIS profile of Practitioner."
 * name.use MS
 * name.use ^label = "Use"
 * name.family 1..1 MS
-* name.family ^label = "Family"
+* name.family ^label = "Surname"
 * name.family ^constraint[0].key = "ihris-name-check"
 * name.family ^constraint[0].severity = #error
 * name.family ^constraint[0].expression = "matches('^[A-Za-z ]*$')"
 * name.family ^constraint[0].human = "Name must be only text."
 * name.given 1..* MS
-* name.given ^label = "Given Name"
+* name.given ^label = "First Name"
 * name.prefix MS
 * name.prefix ^label = "Prefix"
 * name.suffix MS
@@ -72,7 +72,7 @@ Description:    "iHRIS profile of Practitioner."
 * address.country MS
 * address.country ^label = "Country"
 * gender 1..1 MS
-* gender ^label = "Gender"
+* gender ^label = "Sex"
 * birthDate 1..1 MS
 * birthDate ^label = "Birth Date"
 * birthDate obeys ihris-age-18
@@ -96,17 +96,18 @@ Description:    "iHRIS profile of Practitioner."
 * communication.extension[proficiency].extension[type].valueCoding MS
 * extension contains
     IhrisPractitionerResidence named residence 0..1 MS and
-    IhrisPractitionerNationality named nationality 0..1 and
-    IhrisPractitionerMaritalStatus named maritalStatus 0..1 and
-    IhrisPractitionerDependents named dependents 0..1
+    IhrisPractitionerNationality named nationality 0..1 MS and
+    IhrisPractitionerMaritalStatus named maritalStatus 0..1 MS and
+    IhrisPractitionerDependents named dependents 0..1 MS
 * extension[residence] ^label = "Residence"
 * extension[residence].valueReference.reference MS
 * extension[nationality]  ^label = "Nationality"
 * extension[nationality].valueCoding MS
 * extension[maritalStatus]  ^label = "Marital Status"
 * extension[maritalStatus].valueCoding MS
-* extension[dependents]  ^label = "Number of Dependents"
-* extension[dependents].valuePositiveInt MS
+* extension[dependents] ^label = "Dependents"
+* extension[dependents].extension[childDependents] MS
+* extension[dependents].extension[otherDependents] MS
 * active 1..1 MS
 * active ^label = "Active"
 
@@ -135,19 +136,9 @@ Title:          "iHRIS Practitioner Residence"
 Description:    "iHRIS extension for Practitioner residence."
 * ^context.type = #element
 * ^context.expression = "Practitioner"
-* value[x] only Reference
+* value[x] only Reference(IhrisCountry or IhrisRegion or IhrisDistrict)
 * valueReference 1..1 MS
 * valueReference ^label = "Residence"
-* valueReference ^constraint[0].key = "ihris-location-residence"
-* valueReference ^constraint[0].severity = #warning
-* valueReference ^constraint[0].expression = "reference.matches('^Location/')"
-* valueReference ^constraint[0].human = "Must be a location"
-* valueReference only Reference(IhrisJurisdiction)
-* valueReference.reference 1..1 MS
-* valueReference.reference ^label = "Location"
-* valueReference.type 0..0
-* valueReference.identifier 0..0
-* valueReference.display 0..0
 
 Extension:      IhrisPractitionerDependentDetail
 Id:             ihris-practitioner-dependent-detail
@@ -184,17 +175,40 @@ Description:    "iHRIS extension for Practitioner marital status."
 * value[x] only Coding
 * valueCoding 1..1 MS
 * valueCoding ^label = "Marital Status"
-* valueCoding from http://hl7.org/fhir/ValueSet/marital-status (required)
+* valueCoding from http://ihris.org/fhir/ValueSet/ihris-marital-valueset (required)
+
+CodeSystem:      IhrisMaritalCodesystem
+Id:              ihris-marital-codesystem
+Title:           "Marital Status"
+* ^date = "2020-10-29T08:41:04.362Z"
+* ^version = "0.2.0"
+* #divorced "Divorced"
+* #married "Married"
+* #single "Single"
+* #widowed "Widowed"
+
+ValueSet:         IhrisMaritalValueSet
+Id:               ihris-marital-valueset
+Title:            "iHRIS Relationship ValueSet"
+* ^date = "2020-10-29T08:41:04.362Z"
+* ^version = "0.2.0"
+* codes from system IhrisMaritalCodesystem
 
 Extension:      IhrisPractitionerDependents
 Id:             ihris-practitioner-dependents
 Title:          "iHRIS Practitioner Dependents"
-Description:    "iHRIS extension for Practitioner number of dependents."
+Description:    "iHRIS extension for Practitioner dependents information."
 * ^context.type = #element
 * ^context.expression = "Practitioner"
-* value[x] only positiveInt
-* valuePositiveInt 1..1 MS
-* valuePositiveInt ^label = "Number of Dependents"
+* extension contains
+    childDependents 1..1 MS and
+    otherDependents 1..1 MS
+* extension[childDependents].value[x] only positiveInt
+* extension[childDependents].valuePositiveInt MS
+* extension[childDependents].valuePositiveInt ^label = "Number of Child Dependents"
+* extension[otherDependents].value[x] only positiveInt
+* extension[otherDependents].valuePositiveInt MS
+* extension[otherDependents].valuePositiveInt ^label = "Number of Other Dependents"
 
 CodeSystem:      IhrisRelationCodesystem
 Id:              ihris-relation-codesystem

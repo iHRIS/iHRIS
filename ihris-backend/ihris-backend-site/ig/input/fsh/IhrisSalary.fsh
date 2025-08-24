@@ -16,10 +16,10 @@ Description:    "iHRIS Profile of the Basic resource for Salary."
 * extension[salary].extension[allowance].valueString MS
 * extension[salary].extension[benefits] ^label = "Benefits"
 * extension[salary].extension[benefits].valueString MS
-* extension[salary].extension[period] ^label = "Effective Period"
-* extension[salary].extension[period].valuePeriod MS
-* extension[salary].extension[period].valuePeriod.start MS
-* extension[salary].extension[period].valuePeriod.end MS
+* extension[salary].extension[startDate] ^label = "Effective Start Date"
+* extension[salary].extension[startDate].valueDate MS
+* extension[salary].extension[endDate] ^label = "End Date"
+* extension[salary].extension[endDate].valueDate MS
 * extension[salary].extension[remark] ^label = "Remark"
 * extension[salary].extension[remark].valueString MS
 * extension[salary].extension[salarySource] ^label = "Salary Source"
@@ -37,7 +37,8 @@ Title:          "Salary details"
     bsalary 0..1 MS and
     allowance 0..1 MS and
     benefits 0..1 MS and
-    period 1..1 MS and
+    startDate 1..1 MS and
+    endDate 0..1 MS and
     remark 0..1 MS and
     salarySource 0..1 MS and
     frequency 0..1 MS and
@@ -55,16 +56,12 @@ Title:          "Salary details"
 * extension[benefits].value[x] only string
 * extension[benefits].valueString MS
 * extension[benefits].valueString ^label = "Benefits"
-* extension[period].value[x] only Period
-* extension[period].valuePeriod ^constraint[0].key = "ihris-period-start-end"
-* extension[period].valuePeriod ^constraint[0].severity = #error
-* extension[period].valuePeriod ^constraint[0].human = "The end date must be after the start date"
-* extension[period].valuePeriod ^constraint[0].expression = "end.empty() or end = '' or end >= start"
-* extension[period].valuePeriod ^label = "Effective Period"
-* extension[period].valuePeriod.start 1..1 MS
-* extension[period].valuePeriod.start ^label = "Effective Start Date"
-* extension[period].valuePeriod.end MS
-* extension[period].valuePeriod.end ^label = "End Date"
+* extension[startDate].value[x] only date
+* extension[startDate].valueDate ^label = "Effective Start Date"
+* extension[startDate].valueDate 1..1 MS
+* extension[endDate].value[x] only date
+* extension[endDate].valueDate MS
+* extension[endDate].valueDate ^label = "End Date"
 * extension[remark].value[x] only string
 * extension[remark].valueString MS
 * extension[remark].valueString ^label = "Remark"
@@ -83,13 +80,16 @@ Title:          "Salary details"
 CodeSystem:      IhrisSalarySource
 Id:              ihris-salary-source-codesystem
 Title:           "Salary Source"
-* ^date = "2020-10-20T08:41:04.362Z"
+* ^date = "2020-11-20T08:41:04.362Z"
+* ^version = "0.3.0"
+
+
 
 ValueSet:         IhrisSalarySourceValueSet
 Id:               ihris-salary-source-valueset
 Title:            "iHRIS Salary Source ValueSet"
-* ^date = "2020-10-20T08:41:04.362Z"
-* ^version = "0.2.0"
+* ^date = "2020-11-20T08:41:04.362Z"
+* ^version = "0.3.0"
 * codes from system IhrisSalarySource
 
 CodeSystem:      IhrisFrequency
@@ -124,65 +124,61 @@ Usage:          #definition
 
 * item[0].linkId = "Basic"
 * item[0].text = "Salary Information"
-* item[0].definition = "http://ihris.org/fhir/StructureDefinition/ihris-basic-salary#Basic.id"
+* item[0].definition = "http://ihris.org/fhir/StructureDefinition/ihris-basic-salary"
 * item[0].type = #group
-* item[0].extension[constraint].extension[key].valueId = "ihris-start-end-date"
-* item[0].extension[constraint].extension[severity].valueCode = #error
-* item[0].extension[constraint].extension[expression].valueString = "where(linkId='Basic.extension[0].extension[7]').answer.first().valueDate.empty() or where(linkId='Basic.extension[0].extension[7]').answer.first().valueDate >= where(linkId='Basic.extension[0].extension[6]').answer.first().valueDate"
-* item[0].extension[constraint].extension[human].valueString = "The end date must be after the start date."
 
 * item[0].item[0].linkId = "Basic.extension[0].extension[0]"
-* item[0].item[0].definition = "http://ihris.org/fhir/StructureDefinition/ihris-basic-salary#Basic.extension:salary.extension:salaryScale.value[x]"
+* item[0].item[0].definition = "http://ihris.org/fhir/StructureDefinition/ihris-basic-salary#Basic.extension:salary.extension:salaryScale.value[x]:valueCoding"
 * item[0].item[0].text = "Pay Grade"
 * item[0].item[0].type = #choice
-* item[0].item[0].answerValueSet = "http://ihris.org/fhir/ValueSet/ihris-salary-scale-valueset"
+* item[0].item[0].answerValueSet = "http://ihris.org/fhir/ValueSet/ihris-salary-grade"
 * item[0].item[0].required = false
 * item[0].item[0].repeats = false
 
 * item[0].item[1].linkId = "Basic.extension[0].extension[1]"
-* item[0].item[1].definition = "http://ihris.org/fhir/StructureDefinition/ihris-basic-salary#Basic.extension:salary.extension:bsalary.value[x]"
+* item[0].item[1].definition = "http://ihris.org/fhir/StructureDefinition/ihris-basic-salary#Basic.extension:salary.extension:bsalary.value[x]:valueString"
 * item[0].item[1].text = "Basic Salary"
 * item[0].item[1].type = #string
 * item[0].item[1].required = false
 * item[0].item[1].repeats = false
 
 * item[0].item[2].linkId = "Basic.extension[0].extension[2]"
-* item[0].item[2].definition = "http://ihris.org/fhir/StructureDefinition/ihris-basic-salary#Basic.extension:salary.extension:allowance.value[x]"
+* item[0].item[2].definition = "http://ihris.org/fhir/StructureDefinition/ihris-basic-salary#Basic.extension:salary.extension:allowance.value[x]:valueString"
 * item[0].item[2].text = "Allowance"
 * item[0].item[2].type = #string
 * item[0].item[2].required = false
 * item[0].item[2].repeats = false
 
 * item[0].item[3].linkId = "Basic.extension[0].extension[3]"
-* item[0].item[3].definition = "http://ihris.org/fhir/StructureDefinition/ihris-basic-salary#Basic.extension:salary.extension:benefits.value[x]"
+* item[0].item[3].definition = "http://ihris.org/fhir/StructureDefinition/ihris-basic-salary#Basic.extension:salary.extension:benefits.value[x]:valueString"
 * item[0].item[3].text = "Benefits"
 * item[0].item[3].type = #string
 * item[0].item[3].required = false
 * item[0].item[3].repeats = false
 
 * item[0].item[4].linkId = "Basic.extension[0].extension[4]"
-* item[0].item[4].definition = "http://ihris.org/fhir/StructureDefinition/ihris-basic-salary#Basic.extension:salary.extension:period.value[x]"
+* item[0].item[4].definition = "http://ihris.org/fhir/StructureDefinition/ihris-basic-salary#Basic.extension:salary.extension:startDate.value[x]:valueDate"
 * item[0].item[4].text = "Effective Start date"
 * item[0].item[4].type = #date
 * item[0].item[4].required = true
 * item[0].item[4].repeats = false
 
 * item[0].item[5].linkId = "Basic.extension[0].extension[5]"
-* item[0].item[5].definition = "http://ihris.org/fhir/StructureDefinition/ihris-basic-salary#Basic.extension:salary.extension:period.value[x]"
+* item[0].item[5].definition = "http://ihris.org/fhir/StructureDefinition/ihris-basic-salary#Basic.extension:salary.extension:endDate.value[x]:valueDate"
 * item[0].item[5].text = "End Date"
 * item[0].item[5].type = #date
 * item[0].item[5].required = false
 * item[0].item[5].repeats = false
 
 * item[0].item[6].linkId = "Basic.extension[0].extension[6]"
-* item[0].item[6].definition = "http://ihris.org/fhir/StructureDefinition/ihris-basic-salary#Basic.extension:salary.extension:remark.value[x]"
+* item[0].item[6].definition = "http://ihris.org/fhir/StructureDefinition/ihris-basic-salary#Basic.extension:salary.extension:remark.value[x]:valueString"
 * item[0].item[6].text = "Remark"
 * item[0].item[6].type = #text
 * item[0].item[6].required = false
 * item[0].item[6].repeats = false
 
 * item[0].item[7].linkId = "Basic.extension[0].extension[7]"
-* item[0].item[7].definition = "http://ihris.org/fhir/StructureDefinition/ihris-basic-salary#Basic.extension:salary.extension:salarySource.value[x]"
+* item[0].item[7].definition = "http://ihris.org/fhir/StructureDefinition/ihris-basic-salary#Basic.extension:salary.extension:salarySource.value[x]:valueCoding"
 * item[0].item[7].text = "Salary Source"
 * item[0].item[7].type = #choice
 * item[0].item[7].answerValueSet = "http://ihris.org/fhir/ValueSet/ihris-salary-source-valueset"
@@ -190,7 +186,7 @@ Usage:          #definition
 * item[0].item[7].repeats = false
 
 * item[0].item[8].linkId = "Basic.extension[0].extension[8]"
-* item[0].item[8].definition = "http://ihris.org/fhir/StructureDefinition/ihris-basic-salary#Basic.extension:salary.extension:frequency.value[x]"
+* item[0].item[8].definition = "http://ihris.org/fhir/StructureDefinition/ihris-basic-salary#Basic.extension:salary.extension:frequency.value[x]:valueCoding"
 * item[0].item[8].text = "Pay Frequency"
 * item[0].item[8].type = #choice
 * item[0].item[8].answerValueSet = "http://ihris.org/fhir/ValueSet/ihris-frequency-valueset"
@@ -198,7 +194,7 @@ Usage:          #definition
 * item[0].item[8].repeats = false
 
 * item[0].item[9].linkId = "Basic.extension[0].extension[9]"
-* item[0].item[9].definition = "http://ihris.org/fhir/StructureDefinition/ihris-basic-salary#Basic.extension:salary.extension:current.value[x]"
+* item[0].item[9].definition = "http://ihris.org/fhir/StructureDefinition/ihris-basic-salary#Basic.extension:salary.extension:current.value[x]:valueBoolean"
 * item[0].item[9].text = "Is Current"
 * item[0].item[9].type = #boolean
 * item[0].item[9].required = false
