@@ -3,97 +3,148 @@
 /**
  * Module dependencies.
  */
- const configParser = require('../configParser');
+const configParser = require('../configParser');
+const https = require('https');
+const fs = require('fs');
+const path = require('path');
 
- let siteConfig = configParser(`${__dirname}/../config/baseConfig.json`)
- global["appsitepath" + process.pid] = process.env.IHRIS_APP__SITE__PATH || siteConfig.app.site.path
- global["appcorepath" + process.pid] = process.env.IHRIS_APP__CORE__PATH || siteConfig.app.core.path
- const ihrissmartrequire = require('ihrissmartrequire')
- 
- var app = ihrissmartrequire('app');
- var debug = require('debug')('ihris-backend:server');
- var http = require('http');
- 
- const fhirAudit = ihrissmartrequire('fhirAudit.js');
- /**
-  * Get port from environment and store in Express.
-  */
- 
- var port = normalizePort(process.env.PORT || '3000');
- app.set('port', port);
- 
- /**
-  * Create HTTP server.
-  */
- 
- var server = http.createServer(app);
- 
- /**
-  * Listen on provided port, on all network interfaces.
-  */
- 
- app.whenReady().then( () => {
-   server.listen(port);
-   server.on('error', onError);
-   server.on('listening', onListening);
- } )
- 
- /**
-  * Normalize a port into a number, string, or false.
-  */
- 
- function normalizePort(val) {
-   var port = parseInt(val, 10);
- 
-   if (isNaN(port)) {
-     // named pipe
-     return val;
-   }
- 
-   if (port >= 0) {
-     // port number
-     return port;
-   }
- 
-   return false;
- }
- 
- /**
-  * Event listener for HTTP server "error" event.
-  */
- 
- function onError(error) {
-   if (error.syscall !== 'listen') {
-     throw error;
-   }
- 
-   var bind = typeof port === 'string'
-     ? 'Pipe ' + port
-     : 'Port ' + port;
- 
-   // handle specific listen errors with friendly messages
-   switch (error.code) {
-     case 'EACCES':
-       console.error(bind + ' requires elevated privileges');
-       process.exit(1);
-     case 'EADDRINUSE':
-       console.error(bind + ' is already in use');
-       process.exit(1);
-     default:
-       throw error;
-   }
- }
- 
- /**
-  * Event listener for HTTP server "listening" event.
-  */
- 
- function onListening() {
-   fhirAudit.startup()
-   var addr = server.address();
-   var bind = typeof addr === 'string'
-     ? 'pipe ' + addr
-     : 'port ' + addr.port;
-   debug('Listening on ' + bind);
- }
- 
+let siteConfig = configParser(`${__dirname}/../config/baseConfig.json`)
+global["appsitepath" + process.pid] = process.env.IHRIS_APP__SITE__PATH || siteConfig.app.site.path
+global["appcorepath" + process.pid] = process.env.IHRIS_APP__CORE__PATH || siteConfig.app.core.path
+const ihrissmartrequire = require('ihrissmartrequire')
+
+var app = ihrissmartrequire('app');
+var debug = require('debug')('ihris-backend:server');
+var http = require('http');
+
+const fhirAudit = ihrissmartrequire('fhirAudit.js');
+
+/**
+ * Get port from environment and store in Express.
+ */
+var port = normalizePort(siteConfig.app.port || '3000');
+app.set('port', port);
+
+/**
+ * SSL Configuration
+ */
+const sslConfig = {
+  key: siteConfig.app.ssl_key_path || path.join(__dirname, '../ssl/key.pem'),
+  cert: siteConfig.app.ssl_cert_path || path.join(__dirname, '../ssl/cert.pem'),
+  ca: process.env.SSL_CA_PATH
+};
+
+/**
+ * Create HTTP and/or HTTPS servers.
+ */
+function createServers(app) {
+  const servers = {};
+  // Create HTTPS server if enabled
+  if (siteConfig.app.protocal && siteConfig.app.protocal.toLowerCase() === 'https') {
+    try {
+      const httpsOptions = {
+        key: fs.readFileSync(sslConfig.key),
+        cert: fs.readFileSync(sslConfig.cert)
+      };
+      
+      if (sslConfig.ca && fs.existsSync(sslConfig.ca)) {
+        httpsOptions.ca = fs.readFileSync(sslConfig.ca);
+      }
+      
+      servers.httpsServer = https.createServer(httpsOptions, app);
+    } catch (error) {
+      console.log(error)
+      console.error('Failed to create HTTPS server:', error.message);
+    }
+  } else {
+    servers.httpServer = http.createServer(app);
+  }
+  
+  return servers;
+}
+
+const servers = createServers(app);
+
+/**
+ * Start servers
+ */
+app.whenReady().then(() => {
+  // Start HTTPS server if enabled and created successfully
+  if (servers.httpsServer) {
+    servers.httpsServer.listen(port, () => {
+      console.log(`HTTPS Server running on https://localhost:${port}`);
+      onListening(servers.httpsServer);
+    });
+  } else if(servers.httpServer) {
+    servers.httpServer.listen(port, () => {
+      console.log(`HTTP Server running on http://localhost:${port}`);
+      onListening(servers.httpServer);
+    });
+  }
+  
+  if (servers.httpsServer) {
+    servers.httpsServer.on('error', onError);
+  } else if(servers.httpServer) {
+    servers.httpServer.on('error', onError);
+  }
+});
+
+/**
+ * Normalize a port into a number, string, or false.
+ */
+function normalizePort(val) {
+  var port = parseInt(val, 10);
+
+  if (isNaN(port)) {
+    // named pipe
+    return val;
+  }
+
+  if (port >= 0) {
+    // port number
+    return port;
+  }
+
+  return false;
+}
+
+/**
+ * Event listener for HTTP server "error" event.
+ */
+function onError(error) {
+  if (error.syscall !== 'listen') {
+    throw error;
+  }
+
+  const port = error.port || this.address().port;
+  var bind = typeof port === 'string'
+    ? 'Pipe ' + port
+    : 'Port ' + port;
+
+  // handle specific listen errors with friendly messages
+  switch (error.code) {
+    case 'EACCES':
+      console.error(bind + ' requires elevated privileges');
+      process.exit(1);
+    case 'EADDRINUSE':
+      console.error(bind + ' is already in use');
+      process.exit(1);
+    default:
+      throw error;
+  }
+}
+
+/**
+ * Event listener for HTTP server "listening" event.
+ */
+function onListening(server) {
+  fhirAudit.startup();
+  var addr = server.address();
+  var bind = typeof addr === 'string'
+    ? 'pipe ' + addr
+    : 'port ' + addr.port;
+  debug('Listening on ' + bind);
+}
+
+// Export servers for testing or other modules
+module.exports = { servers, sslConfig };

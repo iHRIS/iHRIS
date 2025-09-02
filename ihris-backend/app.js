@@ -27,6 +27,15 @@ const appsitepath =  global["appsitepath" + process.pid]
 //const appcorepath =  global["appcorepath" + process.pid]
 
 const app = express();
+
+// Add security headers for HTTPS
+app.use((req, res, next) => {
+  if (req.secure) {
+    res.setHeader('Strict-Transport-Security', 'max-age=31536000; includeSubDomains');
+  }
+  next();
+});
+
 app.use(fileUpload({
   createParentPath: true,
 }));
@@ -78,8 +87,10 @@ async function startUp() {
         return keycloak.protect()(req, res, next);
       }
       if (req.headers.authorization) {
+        // Update protocol for auth endpoint based on current request
+        const protocol = req.secure ? 'https' : 'http';
         axios({
-          url: `http://localhost:${nconf.get('server:port')}/auth`,
+          url: `${protocol}://localhost:${nconf.get('app:port')}/auth`,
           method: 'POST',
           headers: {
             Authorization: req.headers.authorization,
@@ -162,6 +173,12 @@ async function startUp() {
     secret: nconf.get('session:secret') || crypto.randomBytes(64).toString('hex'),
     resave: false,
     saveUninitialized: false,
+    // Add secure flag for HTTPS
+    cookie: {
+      secure: nconf.get('app:protocal') && nconf.get('app:protocal').toLowerCase() === 'https',
+      httpOnly: true,
+      sameSite: 'lax'
+    }
   }));
 
   // app.use(express.static(path.join(__dirname, 'public')))
@@ -203,6 +220,8 @@ async function startUp() {
   app.get('/test', (req, res) => {
     res.status(200).json({
       user: req.user,
+      secure: req.secure,
+      protocol: req.protocol
     });
   });
 
@@ -254,30 +273,8 @@ async function startUp() {
       }
     }
   }
-  /*
-  testMod = fhirModules.require()
-  if ( testMod ) app.use( '/mod', testMod )
-  */
-
-  /*
-  let testStr = `
-var express = require('express')
-var router = express.Router()
-
-router.get('/', (req, res, next) => {
-  res.status(200).json({"string": true, "user":req.user})
-} )
-
-module.exports = router
-`
-
-  const testModule = requireFromString(testStr, "ihris-module-test")
-  app.use( '/mod', testModule )
-  */
 
   // Fallback for the vue router using history mode
-  // If this causes issues, would need to either
-  // server the ui from a subdirectory or change to hash mode
   app.use('/ihrisapp', express.static(path.join(__dirname, 'apps')));
 
   app.use(express.static(path.join(appsitepath, 'public')));
@@ -293,8 +290,6 @@ defaultSetups.initialize().then(() => {
   logger.warn('iHRIS may have issues running because of above error(s)');
   startUp();
 });
-
-// startUp()
 
 app.whenReady = () => new Promise((resolve) => {
   const idx = setInterval(() => {

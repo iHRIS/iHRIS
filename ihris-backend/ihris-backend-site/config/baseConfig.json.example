@@ -8,6 +8,14 @@
   },
   "parameter": [
     {
+      "name": "app:port",
+      "valueString": "3000"
+    },
+    {
+      "name": "app:protocal",
+      "valueString": "http"
+    },
+    {
       "name": "app:idp",
       "valueString": "ihris"
     },

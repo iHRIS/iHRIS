@@ -358,7 +358,7 @@ Usage:          #example
 * extension[section][13].extension[title].valueString = "Dependent Information"
 * extension[section][13].extension[description].valueString = "Dependent Information"
 * extension[section][13].extension[name].valueString = "dependentinformation"
-* extension[section][13].extension[resource].extension[resource].valueReference = Reference(StructureDefinition/mw-dependent-information-profile)
+* extension[section][13].extension[resource].extension[resource].valueReference = Reference(StructureDefinition/dependent-information-profile)
 * extension[section][13].extension[resource].extension[searchfield].valueString = "practitioner"
 * extension[section][13].extension[resource].extension[searchfieldtarget].valueString = "Practitioner"
 * extension[section][13].extension[resource].extension[linkfield].valueString = "Basic.extension.where(url='http://ihris.org/fhir/StructureDefinition/ihris-practitioner-reference').valueReference.reference"
@@ -372,16 +372,16 @@ Usage:          #example
 * extension[section][13].extension[resource].extension[column][2].extension[field].valueString = "extension.where(url='http://ihris.org/fhir/StructureDefinition/dependent-status').valueCoding"
 * extension[section][13].extension[resource].extension[column][3].extension[header].valueString = "Actions"
 * extension[section][13].extension[resource].extension[column][3].extension[field].valueString = "_action"
-* extension[section][13].extension[resource].extension[action][0].extension[link].valueString = "/questionnaire/mw-dependent-information/mw-dependent-information?practitioner=FHIRID"
+* extension[section][13].extension[resource].extension[action][0].extension[link].valueString = "/questionnaire/dependent-information/dependent-information?practitioner=FHIRID"
 * extension[section][13].extension[resource].extension[action][0].extension[text].valueString = "Add Dependent"
 * extension[section][13].extension[resource].extension[action][0].extension[row].valueBoolean = false
 * extension[section][13].extension[resource].extension[action][0].extension[emptyDisplay].valueBoolean = true
 * extension[section][13].extension[resource].extension[action][0].extension[class].valueString = "primary"
-* extension[section][13].extension[resource].extension[action][1].extension[link].valueString = "/resource/view/mw-dependent-information/ITEMID"
+* extension[section][13].extension[resource].extension[action][1].extension[link].valueString = "/resource/view/dependent-information/ITEMID"
 * extension[section][13].extension[resource].extension[action][1].extension[text].valueString = "View"
 * extension[section][13].extension[resource].extension[action][1].extension[row].valueBoolean = true
 * extension[section][13].extension[resource].extension[action][1].extension[class].valueString = "primary"
-* extension[section][13].extension[resource].extension[action][2].extension[link].valueString = "/questionnaire/mw-dependent-information/mw-dependent-information/ITEMID?practitioner=FHIRID"
+* extension[section][13].extension[resource].extension[action][2].extension[link].valueString = "/questionnaire/dependent-information/dependent-information/ITEMID?practitioner=FHIRID"
 * extension[section][13].extension[resource].extension[action][2].extension[text].valueString = "Edit"
 * extension[section][13].extension[resource].extension[action][2].extension[row].valueBoolean = true
 * extension[section][13].extension[resource].extension[action][2].extension[class].valueString = "primary"
