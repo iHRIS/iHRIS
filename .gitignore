@@ -48,3 +48,6 @@ typings/
 *.swp
 
 rsa_1024_priv.pem
+
+# Claude Code session state and worktrees
+.claude/
