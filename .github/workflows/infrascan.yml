@@ -17,13 +17,11 @@ jobs:
           chmod 777 infrascan-reports
 
       - name: Run InfraScan
-        run: |
-          docker run --rm \
-            -v ${{ github.workspace }}:/scan \
-            soldevelo/infrascan:latest \
-            --scanner comprehensive \
-            --format html \
-            --out /scan/infrascan-reports/report.html
+        uses: soldevelo/infrascan@v1.0.6
+        with:
+          scanner: comprehensive
+          format: html
+          out: infrascan-reports/report.html
             
       - name: Upload InfraScan Report
         uses: actions/upload-artifact@v4
