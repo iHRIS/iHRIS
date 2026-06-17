@@ -35,7 +35,7 @@ for ( let file of nconf.get('_') ) {
           console.log( dest+": "+ res.status )
           console.log( JSON.stringify( res.data, null, 2 ) )
         } ).catch( (err) => {
-          console.log("ERROR ", err.response)
+          console.log("ERROR ", JSON.stringify( err.response.data, null, 2 ) )
           //console.error(err.message)
         } )
       } else {
@@ -46,7 +46,6 @@ for ( let file of nconf.get('_') ) {
           console.log( res.headers['content-location'] )
         } ).catch( (err) => {
           console.error(err)
-          console.error(JSON.stringify(err.response.data,null,2))
         } )
       }
 

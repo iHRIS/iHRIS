@@ -350,6 +350,12 @@ export default {
           this.source.data = this.slotProps.source.data
         } else {
           let expression = this.$fhirutils.pathFieldExpression( this.field )
+          // For extension values the field is the choice element "value[x]", which is not a
+          // valid FHIRPath expression. Use the concrete value field (e.g. "valueReference") so
+          // the reference is extracted from the extension object.
+          if ( this.field && this.field.startsWith("value[x]") ) {
+            expression = this.qField
+          }
           let results = this.$fhirpath.evaluate( this.slotProps.source.data, expression )
           this.source.data = results[0]
         }

@@ -875,6 +875,31 @@ router.get('/page/:page/:type?', function (req, res) {
             }
             searchTemplate += '>' + "\n"
             for (let filter of filters) {
+                // Reference filter:
+                //   "Label|searchparam|reference:<ResourceType>"                 -> flat name autocomplete
+                //   "Label|searchparam|reference-tree:<ResourceType>[:<rootType>]"-> hierarchical partOf tree picker
+                //     rootType (optional) is the Location.type code to start the tree at, e.g. "district".
+                if (filter[2] && (filter[2].startsWith("reference:") || filter[2].startsWith("reference-tree:"))) {
+                    let isTree = filter[2].startsWith("reference-tree:")
+                    let rest = filter[2].substring((isTree ? "reference-tree:" : "reference:").length)
+                    let target = rest
+                    let rootType = ""
+                    if (isTree && rest.indexOf(":") > -1) {
+                        target = rest.substring(0, rest.indexOf(":"))
+                        rootType = rest.substring(rest.indexOf(":") + 1)
+                    }
+                    searchTemplate += '<ihris-search-term-reference v-on:termChange="searchData"'
+                    searchTemplate += ' label="' + filter[0] + '" expression="' + (filter[1] || filter[0]) + '"'
+                    searchTemplate += ' target="' + target + '"'
+                    if (isTree) {
+                        searchTemplate += ' displayType="tree"'
+                        if (rootType) {
+                            searchTemplate += ' rootType="' + rootType + '"'
+                        }
+                    }
+                    searchTemplate += "></ihris-search-term-reference>\n"
+                    continue
+                }
                 searchTemplate += '<ihris-search-term v-on:termChange="searchData"'
                 if (filter[1]) {
                     searchTemplate += ' label="' + filter[0] + '" expression="' + filter[1] + '"'
@@ -2044,6 +2069,9 @@ router.get('/app', (req, res) => {
             baseURL: nconf.get('keycloak:baseURL'),
             realm: nconf.get('keycloak:realm'),
             UIClientId: nconf.get('keycloak:UIClientId'),
+        },
+        fhir: {
+            base: nconf.get('fhir:base'),
         },
     };
     res.status(200).json(otherConfig);
