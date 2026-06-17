@@ -6,10 +6,12 @@
  * For every active CHW PractitionerRole it recomputes Facility/Cadre/District/
  * Sub-County/Parish/Village (Parish/Village from the role; District/Sub-County from
  * the Facility's partOf chain) and writes the summary extension onto the linked
- * Practitioner (replacing any existing one). Safe to re-run.
+ * Practitioner. Safe to re-run: Practitioners that already carry the summary are
+ * left untouched (resumable) unless --force is given. Resources that are gone
+ * (HTTP 410) are skipped and the run continues.
  *
  * Usage:
- *   node backfillChwPositionSummary.js --server http://localhost:8083/fhir
+ *   node backfillChwPositionSummary.js --server http://localhost:8083/fhir [--force]
  */
 const axios = require('axios')
 
@@ -20,8 +22,26 @@ function getArg(name, fallback) {
   const idx = process.argv.indexOf('--' + name)
   return idx > -1 ? process.argv[idx + 1] : fallback
 }
+function hasFlag(name) {
+  return process.argv.indexOf('--' + name) > -1
+}
 
 const server = (getArg('server', 'http://localhost:8083/fhir')).replace(/\/$/, '')
+const force = hasFlag('force')
+
+function statusOf(err) {
+  return err && err.response && err.response.status
+}
+// GET that treats a gone resource (HTTP 410) as "not found" -> returns null so the
+// caller skips it and the run continues. Other errors still propagate.
+async function safeGet(url) {
+  try {
+    return (await axios.get(url)).data
+  } catch (err) {
+    if (statusOf(err) === 410) return null
+    throw err
+  }
+}
 
 async function buildSummary(role) {
   const summary = []
@@ -47,10 +67,10 @@ async function buildSummary(role) {
     const facilityId = facilityRef.split('/').pop()
     summary.push({ url: 'facility', valueReference: { reference: facilityRef } })
     try {
-      const chain = await axios.get(
+      const chain = await safeGet(
         `${server}/Location?_id=${facilityId}&_include:iterate=Location:partof&_count=50`
       )
-      for (const entry of (chain.data.entry || [])) {
+      for (const entry of ((chain && chain.entry) || [])) {
         const l = entry.resource
         if (!l || l.resourceType !== 'Location') continue
         ancestors.push({ url: 'ancestor', valueReference: { reference: `Location/${l.id}` } })
@@ -86,23 +106,51 @@ async function materialize(role, counters) {
     return
   }
   const practitionerId = practitionerRef.split('/').pop()
+
+  // Read the linked Practitioner. A gone (410) resource is skipped.
+  const practitioner = await safeGet(`${server}/Practitioner/${practitionerId}`)
+  if (!practitioner) {
+    counters.gone++
+    console.log('  gone (410), skipping Practitioner/' + practitionerId)
+    return
+  }
+
+  // Resumable: leave Practitioners that already have the summary unless --force.
+  const alreadyDone = (practitioner.extension || []).some((e) => e.url === SUMMARY_URL)
+  if (alreadyDone && !force) {
+    counters.alreadyDone++
+    return
+  }
+
   const summary = await buildSummary(role)
-  const practitioner = (await axios.get(`${server}/Practitioner/${practitionerId}`)).data
   practitioner.extension = (practitioner.extension || []).filter((e) => e.url !== SUMMARY_URL)
   if (summary) practitioner.extension.push(summary)
-  await axios.put(`${server}/Practitioner/${practitionerId}`, practitioner, {
-    headers: { 'Content-Type': 'application/fhir+json' },
-  })
+  try {
+    await axios.put(`${server}/Practitioner/${practitionerId}`, practitioner, {
+      headers: { 'Content-Type': 'application/fhir+json' },
+    })
+  } catch (err) {
+    if (statusOf(err) === 410) {
+      counters.gone++
+      console.log('  gone (410) on write, skipping Practitioner/' + practitionerId)
+      return
+    }
+    throw err
+  }
   counters.updated++
 }
 
 async function main() {
-  console.log('Backfilling CHW position summary against', server)
+  console.log('Backfilling CHW position summary against', server, force ? '(force)' : '')
   let url = `${server}/PractitionerRole?_profile=${encodeURIComponent(ROLE_PROFILE)}&active=true&_count=100`
-  const counters = { updated: 0, skipped: 0 }
+  const counters = { updated: 0, alreadyDone: 0, gone: 0, skipped: 0, failed: 0 }
   let page = 0
   while (url) {
-    const bundle = (await axios.get(url)).data
+    const bundle = await safeGet(url)
+    if (!bundle) {
+      console.log('  page gone (410), stopping pagination')
+      break
+    }
     page++
     console.log(`Page ${page}: ${bundle.entry ? bundle.entry.length : 0} roles`)
     for (const entry of (bundle.entry || [])) {
@@ -110,14 +158,23 @@ async function main() {
         try {
           await materialize(entry.resource, counters)
         } catch (err) {
-          console.error('  failed role', entry.resource.id, '-', err.message)
+          if (statusOf(err) === 410) {
+            counters.gone++
+            console.log('  gone (410), skipping role', entry.resource.id)
+          } else {
+            counters.failed++
+            console.error('  failed role', entry.resource.id, '-', err.message)
+          }
         }
       }
     }
     const next = bundle.link && bundle.link.find((l) => l.relation === 'next')
     url = next ? next.url : null
   }
-  console.log(`Done. Updated ${counters.updated}, skipped ${counters.skipped}.`)
+  console.log(
+    `Done. Updated ${counters.updated}, already done ${counters.alreadyDone}, ` +
+      `gone(410) ${counters.gone}, skipped ${counters.skipped}, failed ${counters.failed}.`
+  )
 }
 
 main().catch((err) => {
