@@ -13,7 +13,7 @@ const mixin = require('../mixin/generalMixin')
 const crypto = require('crypto')
 const logger = require('../winston')
 const winston = require("winston");
-const package = require("../package.json")
+const pkg = require("../package.json")
 
 const getUKey = () => {
     return Math.random().toString(36).replace(/^[^a-z]+/, '') + Math.random().toString(36).substring(2, 15)
@@ -62,7 +62,7 @@ router.get("/site", async function (req, res) {
     if(!site.auth) {
         site.auth = {}
     }
-    site.version = package.version
+    site.version = pkg.version
     site.auth.signup = {...nconf.get("auth:signup")}
     site.pages = {...nconf.get("site:pages")}
     site.config = {...nconf.get("site:config")}
@@ -193,13 +193,24 @@ const getProperties = (resource) => {
 }
 const setupOrder = (fields, sectionOrder) => {
     for (let ord of fields) {
-        let lastDot = ord.lastIndexOf('.')
-        let ordId = ord.substring(0, lastDot)
-        let ordField = ord.substring(lastDot + 1)
-        if (!sectionOrder.hasOwnProperty(ordId)) {
-            sectionOrder[ordId] = []
+        // Register every ancestor segment under its parent path - not just the
+        // segment after the last dot. A section field declared as a nested path
+        // (e.g. "Practitioner.name.given" or "Practitioner.identifier.value")
+        // is rendered at the top level as its parent element ("name"/"identifier"),
+        // so the parent must be ordered at the position of its first declared
+        // child. Previously only the leaf was recorded (under "Practitioner.name"),
+        // leaving the parent element unordered and pushed to the end of the section.
+        let parts = ord.split('.')
+        for (let i = 1; i < parts.length; i++) {
+            let parentId = parts.slice(0, i).join('.')
+            let segment = parts[i]
+            if (!sectionOrder.hasOwnProperty(parentId)) {
+                sectionOrder[parentId] = []
+            }
+            if (!sectionOrder[parentId].includes(segment)) {
+                sectionOrder[parentId].push(segment)
+            }
         }
-        sectionOrder[ordId].push(ordField)
     }
 }
 
@@ -247,6 +258,20 @@ router.get('/page/:page/:type?', function (req, res) {
         }
 
         let pageSections = resource.extension.filter(ext => ext.url === "http://ihris.org/fhir/StructureDefinition/ihris-page-section")
+
+        // Build a global field order across ALL sections, independent of the
+        // per-section permission check below. Fields whose named section is
+        // skipped (e.g. a non-admin role that isn't granted that section) fall
+        // through to the auto-created default section; without this they would
+        // render in raw StructureDefinition order instead of the declared order.
+        let globalOrder = {}
+        for (let section of pageSections) {
+            try {
+                let secFields = section.extension.filter(ext => ext.url === "field").map(ext => ext.valueString)
+                setupOrder(secFields, globalOrder)
+            } catch (err) {
+            }
+        }
 
         const createTemplate = async (resource, structure) => {
             logger.silly(JSON.stringify(structure, null, 2))
@@ -333,6 +358,29 @@ router.get('/page/:page/:type?', function (req, res) {
 
             let sections = {}
             let sectionMap = {}
+            // Pre-create the primary/default section for each resource in the
+            // structure so it keeps its declared (first) position in the section
+            // ordering. The named section matching the resource type overwrites
+            // this below at the same key (position preserved). Without this, when
+            // a non-admin's primary section is denied by permissions it would be
+            // created lazily later and render AFTER all the secondary sections.
+            for (let fhir of Object.keys(structure)) {
+                sections[fhir] = {
+                    title: fhir,
+                    description: "",
+                    emptyDisplay: false,
+                    fields: [],
+                    hide: [],
+                    order: globalOrder,
+                    resource: undefined,
+                    linkfield: undefined,
+                    searchfield: undefined,
+                    searchfieldtarget: undefined,
+                    columns: [],
+                    actions: [],
+                    elements: {}
+                }
+            }
             for (let section of pageSections) {
                 let title, description, name, sectionEmptyDisplay, resourceExt, resource, linkfield, searchfield, searchfieldtarget
                 let fields = []
@@ -505,7 +553,7 @@ router.get('/page/:page/:type?', function (req, res) {
                         emptyDisplay: false,
                         fields: [],
                         hide: [],
-                        order: {},
+                        order: globalOrder,
                         resource: undefined,
                         linkfield: undefined,
                         searchfield: undefined,
