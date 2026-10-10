@@ -59,8 +59,8 @@ Extension:      IhrisRolePrimary
 Id:             ihris-role-primary
 Title:          "iHRIS Role Primary"
 Description:    "iHRIS flag for roles to indicate a primary role for assignment to users."
-* ^context[1].type = #element
-* ^context[1].expression = "IhrisRole"
+* ^context[0].type = #element
+* ^context[0].expression = "IhrisRole"
 * value[x] only boolean
 * valueBoolean 1..1
 
@@ -642,7 +642,7 @@ Usage:            #example
 * extension[section][0].extension[field][3].valueString = "Basic.extension:primary.value[x]:valueBoolean"
 
 
-Instance:         IhrisRole
+Instance:         IhrisRoleQuestionnaire
 InstanceOf:       IhrisQuestionnaire
 Usage:          #definition
 * title = "iHRIS AddRole Workflow"
@@ -723,7 +723,7 @@ Usage:            #example
 * extension[section][0].extension[field][2].valueString = "Basic.extension:compositeTask"
 
 
-Instance:         IhrisTask
+Instance:         IhrisTaskQuestionnaire
 InstanceOf:       IhrisQuestionnaire
 Usage:          #definition
 * title = "iHRIS Add Task Workflow"

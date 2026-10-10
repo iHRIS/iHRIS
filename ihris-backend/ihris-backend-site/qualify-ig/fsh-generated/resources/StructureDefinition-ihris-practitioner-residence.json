@@ -277,7 +277,9 @@
           {
             "code": "Reference",
             "targetProfile": [
-              "http://ihris.org/fhir/StructureDefinition/ihris-jurisdiction"
+              "http://ihris.org/fhir/StructureDefinition/ihris-country",
+              "http://ihris.org/fhir/StructureDefinition/ihris-region",
+              "http://ihris.org/fhir/StructureDefinition/ihris-district"
             ]
           }
         ],
@@ -615,7 +617,9 @@
           {
             "code": "Reference",
             "targetProfile": [
-              "http://ihris.org/fhir/StructureDefinition/ihris-jurisdiction"
+              "http://ihris.org/fhir/StructureDefinition/ihris-country",
+              "http://ihris.org/fhir/StructureDefinition/ihris-region",
+              "http://ihris.org/fhir/StructureDefinition/ihris-district"
             ]
           }
         ],

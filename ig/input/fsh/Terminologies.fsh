@@ -1,7 +1,8 @@
-CodeSystem: LocationStatus
+CodeSystem: LocationStatusCS
 Id: location-status
 Title: "LocationStatus"
 Description: "Indicates whether the location is still in use."
+* ^name = "LocationStatus"
 * ^meta.versionId = "1"
 * ^meta.lastUpdated = "2022-02-15T08:14:24.960+03:00"
 * ^meta.source = "#ofZ1t0pi6T7bA09X"
@@ -56,12 +57,13 @@ Description: "Indicates whether the location is still in use."
 * ^contact.telecom[+].system = #email
 * ^contact.telecom[=].value = "fhir@lists.hl7.org"
 * ^immutable = true
-* include codes from system LocationStatus
+* include codes from system LocationStatusCS
 
-CodeSystem: LocationMode
+CodeSystem: LocationModeCS
 Id: location-mode
 Title: "LocationMode"
 Description: "Indicates whether a resource instance represents a specific location or a class of locations."
+* ^name = "LocationMode"
 * ^meta.versionId = "1"
 * ^meta.lastUpdated = "2022-02-15T08:14:58.239+03:00"
 * ^meta.source = "#ihvEM8PHESUikG5b"
@@ -115,7 +117,7 @@ Description: "Indicates whether a resource instance represents a specific locati
 * ^contact.telecom[+].system = #email
 * ^contact.telecom[=].value = "fhir@lists.hl7.org"
 * ^immutable = true
-* include codes from system LocationMode
+* include codes from system LocationModeCS
 
 Alias: $v3-RoleCode = http://terminology.hl7.org/CodeSystem/v3-RoleCode
 
@@ -146,10 +148,11 @@ Description: " A role of a place that further classifies the setting (e.g., acci
 * include codes from system $v3-RoleCode where concept is-a #_ServiceDeliveryLocationRoleType
 * exclude $v3-RoleCode#_ServiceDeliveryLocationRoleType
 
-CodeSystem: ContactPointSystem
+CodeSystem: ContactPointSystemCS
 Id: contact-point-system
 Title: "ContactPointSystem"
 Description: "Telecommunications form for contact point."
+* ^name = "ContactPointSystem"
 * ^meta.versionId = "1"
 * ^meta.lastUpdated = "2022-02-15T08:14:31.763+03:00"
 * ^meta.source = "#OYYfgAEe5Uwd9zzw"
@@ -212,12 +215,13 @@ Description: "Telecommunications form for contact point."
 * ^contact.telecom[+].system = #email
 * ^contact.telecom[=].value = "fhir@lists.hl7.org"
 * ^immutable = true
-* include codes from system ContactPointSystem
+* include codes from system ContactPointSystemCS
 
-CodeSystem: ContactPointUse
+CodeSystem: ContactPointUseCS
 Id: contact-point-use
 Title: "ContactPointUse"
 Description: "Use of contact point."
+* ^name = "ContactPointUse"
 * ^meta.versionId = "1"
 * ^meta.lastUpdated = "2022-02-15T08:15:11.176+03:00"
 * ^meta.source = "#jXMHyNVcUayicVHs"
@@ -278,12 +282,13 @@ Description: "Use of contact point."
 * ^contact.telecom[+].system = #email
 * ^contact.telecom[=].value = "fhir@lists.hl7.org"
 * ^immutable = true
-* include codes from system ContactPointUse
+* include codes from system ContactPointUseCS
 
-CodeSystem: AddressUse
+CodeSystem: AddressUseCS
 Id: address-use
 Title: "AddressUse"
 Description: "The use of an address."
+* ^name = "AddressUse"
 * ^meta.versionId = "1"
 * ^meta.lastUpdated = "2022-02-15T08:14:19.131+03:00"
 * ^meta.source = "#p6zFoi9Jny2q0yPE"
@@ -344,12 +349,13 @@ Description: "The use of an address."
 * ^contact.telecom[+].system = #email
 * ^contact.telecom[=].value = "fhir@lists.hl7.org"
 * ^immutable = true
-* include codes from system AddressUse
+* include codes from system AddressUseCS
 
-CodeSystem: AddressType
+CodeSystem: AddressTypeCS
 Id: address-type
 Title: "AddressType"
 Description: "The type of an address (physical / postal)."
+* ^name = "AddressType"
 * ^meta.versionId = "1"
 * ^meta.lastUpdated = "2022-02-15T08:14:38.526+03:00"
 * ^meta.source = "#wbAXcC4IHcxqM3qA"
@@ -408,12 +414,13 @@ Description: "The type of an address (physical / postal)."
 * ^contact.telecom[+].system = #email
 * ^contact.telecom[=].value = "fhir@lists.hl7.org"
 * ^immutable = true
-* include codes from system AddressType
+* include codes from system AddressTypeCS
 
-CodeSystem: LocationType
+CodeSystem: LocationTypeCS
 Id: location-physical-type
 Title: "Location type"
 Description: "This example value set defines a set of codes that can be used to indicate the physical form of the Location."
+* ^name = "LocationType"
 * ^meta.versionId = "1"
 * ^meta.lastUpdated = "2022-02-15T08:14:20.522+03:00"
 * ^meta.source = "#gVSzyaw7vrYD2zWC"
@@ -475,12 +482,13 @@ Description: "This example value set defines a set of codes that can be used to 
 * ^contact.telecom.system = #url
 * ^contact.telecom.value = "http://hl7.org/fhir"
 * ^immutable = true
-* include codes from system LocationType
+* include codes from system LocationTypeCS
 
-CodeSystem: DaysOfWeek
+CodeSystem: DaysOfWeekCS
 Id: days-of-week
 Title: "DaysOfWeek"
 Description: "The days of the week."
+* ^name = "DaysOfWeek"
 * ^meta.versionId = "1"
 * ^meta.lastUpdated = "2022-02-15T08:15:04.757+03:00"
 * ^meta.source = "#05cbULabyly6Sdiw"
@@ -543,12 +551,13 @@ Description: "The days of the week."
 * ^contact.telecom[+].system = #email
 * ^contact.telecom[=].value = "fhir@lists.hl7.org"
 * ^immutable = true
-* include codes from system DaysOfWeek
+* include codes from system DaysOfWeekCS
 
-CodeSystem: IdentifierUse
+CodeSystem: IdentifierUseCS
 Id: identifier-use
 Title: "IdentifierUse"
 Description: "Identifies the purpose for this identifier, if known ."
+* ^name = "IdentifierUse"
 * ^meta.versionId = "1"
 * ^meta.lastUpdated = "2022-02-15T08:14:40.194+03:00"
 * ^meta.source = "#MwLVKPjy1CijmhDQ"
@@ -609,7 +618,7 @@ Description: "Identifies the purpose for this identifier, if known ."
 * ^contact.telecom[+].system = #email
 * ^contact.telecom[=].value = "fhir@lists.hl7.org"
 * ^immutable = true
-* include codes from system IdentifierUse
+* include codes from system IdentifierUseCS
 
 Alias: $v2-0203 = http://terminology.hl7.org/CodeSystem/v2-0203
 
@@ -659,10 +668,11 @@ Description: "A coded type for an identifier that can be used to determine which
 * $v2-0203#FILL
 * $v2-0203#JHN
 
-CodeSystem: IdentifierType
+CodeSystem: IdentifierTypeCS
 Id: v2-0203
 Title: "identifierType"
 Description: "HL7-defined code system of concepts specifying type of identifier. Used in HL7 Version 2.x messaging data types CX, PLN, PPN, XCN and XON."
+* ^name = "IdentifierType"
 * ^extension.url = "http://hl7.org/fhir/StructureDefinition/structuredefinition-wg"
 * ^extension.valueCode = #inm
 * ^url = "http://terminology.hl7.org/CodeSystem/v2-0203"
@@ -1659,10 +1669,11 @@ Description: "HL7-defined code system of concepts specifying type of identifier.
 * #XX ^property[0].code = #status
 * #XX ^property[=].valueCode = #A
 
-CodeSystem: OrganizationType
+CodeSystem: OrganizationTypeCS
 Id: organization-type
 Title: "Organization type"
 Description: "This example value set defines a set of codes that can be used to indicate a type of organization."
+* ^name = "OrganizationType"
 * ^meta.versionId = "1"
 * ^meta.lastUpdated = "2022-02-15T08:14:57.505+03:00"
 * ^meta.source = "#p4w49vQd1ZBWk4fI"
@@ -1722,7 +1733,7 @@ Description: "This example value set defines a set of codes that can be used to 
 * ^contact.telecom.system = #url
 * ^contact.telecom.value = "http://hl7.org/fhir"
 * ^immutable = true
-* include codes from system OrganizationType
+* include codes from system OrganizationTypeCS
 
 ValueSet: ContactEntityType
 Id: contactentity-type
@@ -1748,12 +1759,13 @@ Description: "This example value set defines a set of codes that can be used to 
 * ^contact.telecom.system = #url
 * ^contact.telecom.value = "http://hl7.org/fhir"
 * ^immutable = true
-* include codes from system ContactEntityType
+* include codes from system ContactEntityTypeCS
 
-CodeSystem: ContactEntityType
+CodeSystem: ContactEntityTypeCS
 Id: contactentity-type
 Title: "Contact entity type"
 Description: "This example value set defines a set of codes that can be used to indicate the purpose for which you would contact a contact party."
+* ^name = "ContactEntityType"
 * ^meta.versionId = "1"
 * ^meta.lastUpdated = "2022-02-15T08:15:12.032+03:00"
 * ^meta.source = "#1TzaqZMbfamefRi3"
@@ -1783,10 +1795,11 @@ Description: "This example value set defines a set of codes that can be used to 
 * #PATINF "Patient" "Generic information contact for patients."
 * #PRESS "Press" "Dedicated contact point for matters relating to press enquiries."
 
-CodeSystem: ServiceCategory
+CodeSystem: ServiceCategoryCS
 Id: service-category
 Title: "Service category"
 Description: "This value set defines an example set of codes that can be used to classify groupings of service-types/specialties."
+* ^name = "ServiceCategory"
 * ^meta.versionId = "1"
 * ^meta.lastUpdated = "2022-02-15T08:14:09.156+03:00"
 * ^meta.source = "#59YPjXFV70pbLKzb"
@@ -1872,12 +1885,13 @@ Description: "This value set defines an example set of codes that can be used to
 * ^contact.telecom.system = #url
 * ^contact.telecom.value = "http://hl7.org/fhir"
 * ^immutable = true
-* include codes from system ServiceCategory
+* include codes from system ServiceCategoryCS
 
-CodeSystem: ServiceType
+CodeSystem: ServiceTypeCS
 Id: service-type
 Title: "Service type"
 Description: "This value set defines an example set of codes of service-types."
+* ^name = "ServiceType"
 * ^meta.versionId = "1"
 * ^meta.lastUpdated = "2022-02-15T08:14:01.881+03:00"
 * ^meta.source = "#Uf5s6bOIvW2qRaSD"
@@ -2521,7 +2535,7 @@ Description: "This value set defines an example set of codes of service-types."
 * ^contact.telecom.system = #url
 * ^contact.telecom.value = "http://hl7.org/fhir"
 * ^immutable = true
-* include codes from system ServiceType
+* include codes from system ServiceTypeCS
 
 CodeSystem: SNOMED_CT
 Id: snomedct
@@ -2961,10 +2975,11 @@ Description: "This is the code representing the clinical specialty of the clinic
 * SNOMED_CT#394733009 "Medical specialty--OTHER--NOT LISTED"
 * SNOMED_CT#394732004 "Surgical specialty--OTHER-NOT LISTED"
 
-CodeSystem: ServiceProvisionConditions
+CodeSystem: ServiceProvisionConditionsCS
 Id: service-provision-conditions
 Title: "ServiceProvisionConditions"
 Description: "The code(s) that detail the conditions under which the healthcare service is available/offered."
+* ^name = "ServiceProvisionConditions"
 * ^meta.versionId = "1"
 * ^meta.lastUpdated = "2022-02-15T08:15:13.131+03:00"
 * ^meta.source = "#GRPiOoNOzlP2WMgQ"
@@ -3019,7 +3034,7 @@ Description: "The code(s) that detail the conditions under which the healthcare 
 * ^contact.telecom[+].system = #email
 * ^contact.telecom[=].value = "fhir@lists.hl7.org"
 * ^immutable = true
-* include codes from system ServiceProvisionConditions
+* include codes from system ServiceProvisionConditionsCS
 
 Alias: $shareablevalueset = http://hl7.org/fhir/StructureDefinition/shareablevalueset
 
@@ -5077,10 +5092,11 @@ Usage: #definition
 * differential.element[=].mapping[+].identity = "servd"
 * differential.element[=].mapping[=].map = "./StartDate and ./EndDate"
 
-CodeSystem: NameUse
+CodeSystem: NameUseCS
 Id: name-use
 Title: "NameUse"
 Description: "The use of a human name."
+* ^name = "NameUse"
 * ^meta.lastUpdated = "2022-06-14T13:46:01.394+00:00"
 * ^extension[0].url = "http://hl7.org/fhir/StructureDefinition/structuredefinition-wg"
 * ^extension[=].valueCode = #fhir
@@ -5138,12 +5154,13 @@ Description: "The use of a human name."
 * ^contact.telecom[+].system = #email
 * ^contact.telecom[=].value = "fhir@lists.hl7.org"
 * ^immutable = true
-* include codes from system NameUse
+* include codes from system NameUseCS
 
-CodeSystem: AdministrativeGender
+CodeSystem: AdministrativeGenderCS
 Id: administrative-gender
 Title: "AdministrativeGender"
 Description: "The gender of a person used for administrative purposes."
+* ^name = "AdministrativeGender"
 * ^meta.lastUpdated = "2022-06-14T13:46:01.394+00:00"
 * ^extension[0].url = "http://hl7.org/fhir/StructureDefinition/structuredefinition-wg"
 * ^extension[=].valueCode = #pa
@@ -5193,7 +5210,7 @@ Description: "The gender of a person used for administrative purposes."
 * ^contact.telecom[+].system = #email
 * ^contact.telecom[=].value = "fhir@lists.hl7.org"
 * ^immutable = true
-* include codes from system AdministrativeGender
+* include codes from system AdministrativeGenderCS
 
 CodeSystem: DegreeLicenseCertificate
 Id: v2-0360
@@ -5700,9 +5717,10 @@ Description: "Currency codes from ISO 4217 (see https://www.iso.org/iso-4217-cur
 * urn:iso:std:iso:4217#ZMW "Zambian kwacha"
 * urn:iso:std:iso:4217#ZWL "Zimbabwean dollar "
 
-CodeSystem: Currencies
+CodeSystem: CurrenciesCS
 Id: currencies
 Title: "Code System for Currencies."
+* ^name = "Currencies"
 * ^status = #active
 * ^content = #complete
 * ^date = "2020-09-25T20:48:33.646Z"
@@ -5906,10 +5924,11 @@ Description: "Sample iHRIS ValueSet for: IhrisCadre"
 * ^contact.telecom.value = "http://ihris.org"
 * include codes from system $ihris-cadre
 
-CodeSystem: IhrisCadre
+CodeSystem: IhrisCadreCS
 Id: ihris-cadre
 Title: "iHRIS Cadre"
 Description: "Sample iHRIS CodeSystem for: IhrisCadre"
+* ^name = "IhrisCadre"
 * ^url = "http://ihris.org/fhir/CodeSystem/ihris-cadre"
 * ^version = "5"
 * ^date = "2020-09-25T20:48:33.646Z"
@@ -5937,10 +5956,11 @@ Description: "Sample iHRIS ValueSet for: IhrisClassification"
 * ^contact.telecom.value = "http://ihris.org"
 * include codes from system $ihris-classification
 
-CodeSystem: IhrisClassification
+CodeSystem: IhrisClassificationCS
 Id: ihris-classification
 Title: "iHRIS Classification"
 Description: "Sample iHRIS CodeSystem for: IhrisClassification"
+* ^name = "IhrisClassification"
 * ^url = "http://ihris.org/fhir/CodeSystem/ihris-classification"
 * ^date = "2020-09-25T20:48:33.646Z"
 * ^publisher = "iHRIS Foundation"
@@ -5970,10 +5990,11 @@ Description: "Sample iHRIS ValueSet for: IhrisJob"
 * ^contact.telecom.value = "http://ihris.org"
 * include codes from system $ihris-job
 
-CodeSystem: IhrisJob
+CodeSystem: IhrisJobCS
 Id: ihris-job
 Title: "iHRIS Job"
 Description: "Sample iHRIS CodeSystem for: IhrisJob"
+* ^name = "IhrisJob"
 * ^url = "http://ihris.org/fhir/CodeSystem/ihris-job"
 * ^date = "2020-09-25T20:48:33.646Z"
 * ^publisher = "iHRIS Foundation"
@@ -6470,10 +6491,11 @@ Description: "Sample iHRIS ValueSet for: iHRISSalaryGrade"
 * ^contact.telecom.value = "http://ihris.org"
 * include codes from system $ihris-salary-grade
 
-CodeSystem: IhrisSalaryGrade
+CodeSystem: IhrisSalaryGradeCS
 Id: ihris-salary-grade
 Title: "iHRIS Salary Grade"
 Description: "Sample iHRIS CodeSystem for: iHRISSalaryGrade"
+* ^name = "IhrisSalaryGrade"
 * ^url = "http://ihris.org/fhir/CodeSystem/ihris-salary-grade"
 * ^date = "2020-09-25T20:48:33.646Z"
 * ^publisher = "iHRIS Foundation"
@@ -6769,7 +6791,7 @@ Description: "ISO 3166-1 establishes codes that represent the current names of c
 * #ZM "Zambia"
 * #ZW "Zimbabwe"
 
-ValueSet: Iso3166-1-2
+ValueSet: Iso3166Part1Alpha2
 Id: iso3166-1-2
 Title: "Iso 3166 Part 1: 2 Letter Codes"
 Description: "This value set defines the ISO 3166 Part 1 2-letter codes"
