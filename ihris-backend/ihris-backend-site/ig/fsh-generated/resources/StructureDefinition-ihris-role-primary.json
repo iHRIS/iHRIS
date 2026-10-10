@@ -17,7 +17,6 @@
   "kind": "complex-type",
   "abstract": false,
   "context": [
-    null,
     {
       "type": "element",
       "expression": "IhrisRole"

@@ -19,7 +19,7 @@
     }
   ],
   "description": "Conformance resources that define the base installation of iHRIS Manage 5",
-  "packageId": "ihris",
+  "packageId": "ihris.manage",
   "license": "CC0-1.0",
   "fhirVersion": [
     "4.0.1"

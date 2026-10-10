@@ -11,6 +11,7 @@
 # │  http://build.fhir.org/ig/HL7/fhir-shorthand/branches/beta/sushi.html#ig-development           │
 # ╰────────────────────────────────────────────────────────────────────────────────────────────────╯
 id: ihris
+packageId: ihris.qualify
 canonical: http://ihris.org/fhir
 version: 0.1.0
 name: iHRISQualifyImplementationGuide

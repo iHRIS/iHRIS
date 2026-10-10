@@ -177,11 +177,12 @@ Id:               ihris-jurisdiction-type
 Title:            "iHRIS Jurisdiction Type ValueSet"
 * ^date = "2023-06-12T08:41:04.362Z"
 * ^version = "0.5.0"
-* codes from system IhrisJurisdictionType
+* codes from system IhrisJurisdictionTypeCS
 
-CodeSystem:      IhrisJurisdictionType
+CodeSystem:      IhrisJurisdictionTypeCS
 Id:              ihris-jurisdiction-type
 Title:           "Jurisdiction Type"
+* ^name = "IhrisJurisdictionType"
 * ^date = "2023-06-12T08:41:04.362Z"
 * ^version = "0.6.0"
 * #country "Country" "Country"

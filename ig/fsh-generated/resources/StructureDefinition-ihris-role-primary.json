@@ -20,10 +20,6 @@
   "context": [
     {
       "type": "element",
-      "expression": "Element"
-    },
-    {
-      "type": "element",
       "expression": "IhrisRole"
     }
   ],
