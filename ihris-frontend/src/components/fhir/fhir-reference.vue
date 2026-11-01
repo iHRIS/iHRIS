@@ -140,7 +140,6 @@ import IhrisElement from "../ihris/ihris-element.vue"
 
 const querystring = require('querystring')
 const fhirurl = "http://hl7.org/fhir/StructureDefinition/"
-import { eventBus } from "@/main";
 import { dataDisplay } from "@/mixins/dataDisplay"
 
 export default {
@@ -226,7 +225,7 @@ export default {
     select: function(val) {
       this.value.reference = val
       this.getDisplay()
-      eventBus.$emit(this.path, val)
+      this.emitValue(val)
     },
     active: function() {
       if ( this.active.length ) {

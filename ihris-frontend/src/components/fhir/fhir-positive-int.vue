@@ -27,7 +27,6 @@
 
 <script>
 import IhrisElement from "../ihris/ihris-element.vue"
-import { eventBus } from "@/main";
 import { dataDisplay } from "@/mixins/dataDisplay"
 
 export default {
@@ -68,7 +67,7 @@ export default {
       deep: true
     },
     value(val) {
-      eventBus.$emit(this.path, val)
+      this.emitValue(val)
     }
   },
   methods: {

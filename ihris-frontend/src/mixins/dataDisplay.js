@@ -1,14 +1,50 @@
 import {
   eventBus
 } from '@/main'
+
+// Fields announce their value on the event bus under their linkId, and fields with a
+// display condition listen for the linkId they depend on. Every row of a repeating
+// questionnaire group has the same linkIds, so each row gets a scope: a condition
+// on a field of the same row listens to that row only.
+let scopeCount = 0
+export function newDisplayScope(prefix, parent) {
+  scopeCount += 1
+  return { prefix, parent, id: scopeCount }
+}
+
 export const dataDisplay = {
+  inject: {
+    displayScope: { default: null }
+  },
   data() {
     return {
       hide: false,
       pathes: {}
     }
   },
+  beforeDestroy() {
+    for (const [event, fn] of this.displayListeners || []) {
+      eventBus.$off(event, fn)
+    }
+  },
   methods: {
+    displayEventName(path) {
+      for (let scope = this.displayScope; scope; scope = scope.parent) {
+        if (path && path.startsWith(scope.prefix + '.')) {
+          return path + '@' + scope.id
+        }
+      }
+      return path
+    },
+    // Announce on the row's scoped name and, as before, on the plain linkId,
+    // which conditions outside the group and site components listen to.
+    emitValue(value) {
+      const scoped = this.displayEventName(this.path)
+      if (scoped !== this.path) {
+        eventBus.$emit(scoped, value)
+      }
+      eventBus.$emit(this.path, value)
+    },
     hideShowField(displayCondition, enableBehavior) {
       if(displayCondition) {
         this.hide = true
@@ -27,7 +63,7 @@ export const dataDisplay = {
             expectedVal: condValue,
             operator
           })
-          eventBus.$on(path, (value) => {
+          const listener = (value) => {
             this.pathes[path].selectedVal = value
             this.hide = false
             let hide = {}
@@ -66,7 +102,13 @@ export const dataDisplay = {
                 this.hide = true
               }
             }
-          })
+          }
+          const event = this.displayEventName(path)
+          eventBus.$on(event, listener)
+          if(!this.displayListeners) {
+            this.displayListeners = []
+          }
+          this.displayListeners.push([event, listener])
         }
       } else {
         this.hide = false

@@ -184,7 +184,6 @@ import IhrisElement from "../ihris/ihris-element.vue"
 import VEthiopianDatePicker from "vuetify-ethiopian-calendar"
 import ethiopic from "ethiopic-calendar"
 import VHijriDatePicker from 'vuetify-umalqura'
-import { eventBus } from "@/main";
 import { dataDisplay } from "@/mixins/dataDisplay"
 import i18n from "@/i18n";
 
@@ -341,7 +340,7 @@ export default {
        } else {
         this.etValue = this.convertGE( val )
       }
-      eventBus.$emit(this.path, val)
+      this.emitValue(val)
     },
     etValue (val) {
       if ( !val ) {

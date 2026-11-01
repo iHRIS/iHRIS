@@ -15,11 +15,19 @@
 </template>
 
 <script>
-import { dataDisplay } from "@/mixins/dataDisplay"
+import { dataDisplay, newDisplayScope } from "@/mixins/dataDisplay"
 export default {
   name: "ihris-questionnaire-group",
   props: ["id", "profile", "sliceName", "fieldType", "field", "label", "slotProps", "path", "constraints", "limit", "displayCondition", "enableBehavior"],
   mixins: [dataDisplay],
+  provide: function() {
+    // a row of a repeating group (ihris-array passes each row as slotProps.input, new
+    // rows included): conditions between its fields stay within the row
+    let isRow = !!(this.slotProps && this.slotProps.input)
+    return {
+      displayScope: isRow ? newDisplayScope(this.path, this.displayScope) : this.displayScope
+    }
+  },
   data: function() {
     return {
       isQuestionnaireGroup: true,

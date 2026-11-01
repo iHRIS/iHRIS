@@ -30,7 +30,6 @@
 
 <script>
 import IhrisElement from "../ihris/ihris-element.vue"
-import { eventBus } from "@/main";
 import { dataDisplay } from "@/mixins/dataDisplay"
 
 /*
@@ -88,7 +87,7 @@ export default {
           this.valueDisplay = display
         } )
       }
-      eventBus.$emit(this.path, this.value.system + "#" + this.value.code)
+      this.emitValue(this.value.system + "#" + this.value.code)
     }
   },
   methods: {

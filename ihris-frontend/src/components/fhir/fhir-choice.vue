@@ -26,7 +26,6 @@ const itemSort = (a,b) => {
   return (a.display === b.display ? (a.code === b.code ? 0 : (a.code < b.code ? -1: 1)) : (a.display < b.display ? -1 : 1) )
 }
 */
-import { eventBus } from "@/main";
 import { dataDisplay } from "@/mixins/dataDisplay"
 export default {
   name: "fhir-coding",
@@ -78,10 +77,10 @@ export default {
         this.value = this.items.find( item => item.code === this.valueCode )
       }
       if(!this.value) {
-        eventBus.$emit(this.path, "")
+        this.emitValue("")
         return
       }
-      eventBus.$emit(this.path, this.value.system + "#" + this.value.code)
+      this.emitValue(this.value.system + "#" + this.value.code)
     }
   },
   methods: {
