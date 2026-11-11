@@ -14,6 +14,8 @@ Usage: #example
 * parameter[=].part[=].valueString = "Demo"
 * parameter[=].part[+].name = "site:logo"
 * parameter[=].part[=].valueString = "iHRIS5Logo.png"
+* parameter[=].part[+].name = "site:logoHeight"
+* parameter[=].part[=].valueString = "36"
 * parameter[=].part[+].name = "site:auth:local:method"
 * parameter[=].part[=].valueString = "post"
 * parameter[=].part[+].name = "site:auth:local:link"
