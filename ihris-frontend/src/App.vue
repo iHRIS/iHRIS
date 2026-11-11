@@ -83,6 +83,7 @@ export default {
       title: false,
       site: null,
       logo: "iHRIS5Logo.png",
+      logoHeight: null,
       auths: [],
     },
     footer: {
@@ -133,6 +134,7 @@ export default {
             if (data.hasOwnProperty("title")) this.header.title = data.title
             if (data.hasOwnProperty("site")) this.header.site = data.site
             if (data.hasOwnProperty("logo")) this.header.logo = data.logo
+            if (data.hasOwnProperty("logoHeight")) this.header.logoHeight = data.logoHeight
             if (data.hasOwnProperty("auth")) {
               this.header.auths = []
               this.nav.auths = []

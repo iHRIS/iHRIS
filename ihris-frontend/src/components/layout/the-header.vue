@@ -1,7 +1,7 @@
 <template>
   <div>
   <v-app-bar color="white" app clipped-left clipped-right>
-    <router-link to="/"><v-img :src="'/images/' + header.logo" contain max-height="36" max-width="106" /></router-link>
+    <router-link to="/"><v-img :src="'/images/' + header.logo" contain v-bind="logoSize" /></router-link>
     <v-toolbar-title class="headline ml-2" bottom="true">
       <span v-if="header.title" class="primary--text">
         {{ $t('App.title') }}
@@ -58,11 +58,33 @@ export default {
     return {
       loading: false,
       idle_countdown: false,
-      idle_logout: 30
+      idle_logout: 30,
+      logoRatio: null
     }
   },
   components: {
     LanguageSwitcher,
+  },
+  computed: {
+    logoSize() {
+      // site:logoHeight is opt-in; without it the original 36x106 limits apply
+      let height = parseInt(this.header.logoHeight)
+      if ( !height || !this.logoRatio ) return { "max-height": 36, "max-width": 106 }
+      return { height: height, width: Math.round(height * this.logoRatio) }
+    }
+  },
+  watch: {
+    "header.logo": {
+      immediate: true,
+      handler(logo) {
+        this.logoRatio = null
+        let img = new Image()
+        img.onload = () => {
+          if ( img.naturalHeight ) this.logoRatio = img.naturalWidth / img.naturalHeight
+        }
+        img.src = "/images/" + logo
+      }
+    }
   },
   onIdle() {
       //if ( this.$store.state.user.loggedin ) this.logout(null, true)
