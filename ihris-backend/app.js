@@ -277,6 +277,8 @@ async function startUp() {
   // Fallback for the vue router using history mode
   app.use('/ihrisapp', express.static(path.join(__dirname, 'apps')));
 
+  // site-owned assets (custom flags, logos, favicon) take precedence over the copied frontend build in public/
+  app.use(express.static(path.join(appsitepath, 'site-assets')));
   app.use(express.static(path.join(appsitepath, 'public')));
   app.use((req, res) => {
     res.sendFile(path.join(appsitepath, 'public/index.html'));
